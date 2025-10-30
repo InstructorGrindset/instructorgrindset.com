@@ -1,24 +1,27 @@
-<!-- ===== Instructor Grindset — Paste into WordPress HTML/Code view ===== -->
-<section style="--max:88rem; --pad:1rem; --radius:.75rem; --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff;
+<!-- ===== Instructor Grindset — Popular Tab Featured (No Shorts) ===== -->
+<section class="ig" style="--max:88rem; --pad:1rem; --radius:.75rem; --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:var(--bg); margin:0; padding:0;">
   <style>
-    /* Layout & type (all centered) */
-    .wrap{max-width:var(--max);margin:0 auto;padding:2rem var(--pad);text-align:center}
-    .hero{min-height:75vh;display:flex;align-items:center;justify-content:center;padding:4rem var(--pad) 2rem;border-bottom:1px solid var(--line)}
-    .hero h1{font-size:clamp(2.25rem,4.5vw + .25rem,3.25rem);line-height:1.1;margin:.25rem 0}
-    .hero p{color:var(--muted);margin:.75rem auto 0;max-width:70ch;font-size:clamp(1.05rem,1.25vw,1.25rem)}
-    .section{padding:3rem var(--pad)}
+    /* WordPress spacing neutralizer (scoped to .ig) */
+    .ig, .ig * { box-sizing: border-box; }
+    .ig :where(h1,h2,h3,h4,h5,h6,p){ margin:0; }
+    .ig :where(.wp-block, .wp-block-group, .wp-block-group__inner-container){ margin:0 !important; padding:0 !important; }
+    .ig :where(.is-layout-flow, .is-layout-constrained, .entry-content){ gap:0 !important; }
+
+    /* Layout & type (centered) */
+    .wrap{max-width:var(--max);margin:0 auto;padding:1.5rem var(--pad);text-align:center}
+    .hero{padding:1.5rem var(--pad) 1rem}
+    .hero h1{font-size:clamp(2.25rem,4.5vw + .25rem,3.25rem);line-height:1.1;margin:.1rem 0 .35rem}
+    .hero .lead{color:var(--muted);margin:.25rem auto 0;max-width:70ch;font-size:clamp(1.05rem,1.25vw,1.25rem)}
+    .section{padding:1.5rem var(--pad)}
     .section h2{font-size:1.75rem;line-height:1.2;margin:0 0 1rem}
-    .lead{max-width:70ch;margin:.25rem auto 0;color:var(--muted)}
-    /* Cards (subtle on dark) */
     .card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem}
-    /* Grid utilities */
     .grid{display:grid;gap:1rem}
     .two{grid-template-columns:repeat(2,minmax(0,1fr))}
     .three{grid-template-columns:repeat(3,minmax(0,1fr))}
     @media (max-width:980px){.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media (max-width:640px){.two,.three{grid-template-columns:1fr}}
-    /* Video embeds: roomy 16:9 tiles, larger than search thumbs */
+    /* Videos */
     .vid{position:relative;width:100%;padding-bottom:56.25%;border-radius:.75rem;overflow:hidden;border:1px solid var(--line);background:#000}
     .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
     .videos{max-width:78rem;margin:0 auto}
@@ -40,55 +43,55 @@
   <header class="hero wrap" aria-labelledby="page-title">
     <div>
       <h1 id="page-title">Instructor Grindset</h1>
-      <p class="lead">Helping ski instructors become stronger athletes and irresistible coaches—on-snow skills, off-snow prep, and real-world teaching tactics.</p>
+      <p class="lead">Become an irresistible snowsports instructor with a season plan.</p>
     </div>
   </header>
 
-  <!-- Mission & Vision -->
+  <!-- NEW: CTA section above About -->
+  <section class="section wrap" aria-labelledby="cta-title">
+    <h2 id="cta-title">Become a ski instructor with a season plan</h2>
+    <div class="card" style="max-width:70ch;margin:0 auto">
+      <p class="muted" style="margin:0">
+        Do you want to become a snowsports instructor with a more fulfilling purpose? Contact me and we will develop a plan to transform into an irresistible athlete instructor capable of teaching to the guests' broadest definition of success.
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT (above videos) -->
+  <section class="section wrap" aria-labelledby="about-title">
+    <h2 id="about-title">About My Work</h2>
+    <div class="card" style="max-width:70ch;margin:0 auto">
+      <p class="muted" style="margin:0">
+        For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
+      </p>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
   <section class="section wrap" aria-labelledby="mv-title">
     <h2 id="mv-title">Mission &amp; Vision</h2>
     <div class="grid two" style="margin-top:1rem">
-      <article class="card">
-        <h3 style="margin:.25rem 0 .5rem">Mission</h3>
+      <article class="card" aria-labelledby="mission-title">
+        <h3 id="mission-title" style="margin:.25rem 0 .5rem">Mission</h3>
         <p class="muted" style="margin:0 auto;max-width:60ch">
-          Equip instructors with clear, actionable training and coaching frameworks that raise guest stoke and professional standards.
+          <!-- Paste your exact YouTube channel description below, replacing this line. -->
+          Helping ski instructors become athletes & irresistible coaches.
         </p>
       </article>
-      <article class="card">
-        <h3 style="margin:.25rem 0 .5rem">Vision</h3>
+      <article class="card" aria-labelledby="vision-title">
+        <h3 id="vision-title" style="margin:.25rem 0 .5rem">Vision</h3>
         <p class="muted" style="margin:0 auto;max-width:60ch">
-          A global community of instructors who move like athletes, teach like pros, and grow the sport with empathy and skill.
+          A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.
         </p>
       </article>
     </div>
   </section>
 
-  <!-- Featured Videos (3×3 grid) -->
-  <section class="section wrap" aria-labelledby="featured-title">
-    <h2 id="featured-title">Featured Videos</h2>
-    <p class="muted">Replace VIDEO_ID_# with nine picks from your channel (the part after <code>v=</code> in a YouTube URL).</p>
-    <div class="videos grid three" style="margin-top:1rem">
-      <!-- Row 1 -->
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Featured video 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Featured video 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Featured video 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <!-- Row 2 -->
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_4" title="Featured video 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_5" title="Featured video 5" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_6" title="Featured video 6" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <!-- Row 3 -->
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_7" title="Featured video 7" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_8" title="Featured video 8" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-      <div class="vid"><iframe src="https://www.youtube.com/embed/VIDEO_ID_9" title="Featured video 9" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-    </div>
-  </section>
-
-  <!-- Latest Uploads (auto-updating playlist) -->
+  <!-- LATEST UPLOADS (above Featured; auto-updating playlist) -->
   <section class="section wrap" aria-labelledby="latest-title">
     <h2 id="latest-title">Latest Uploads</h2>
-    <p class="muted" style="margin:0 0 1rem">This playlist auto-pulls your newest videos.</p>
+    <p class="muted" style="margin:0 0 1rem">This playlist auto-pulls your newest uploads.</p>
     <div class="vid" style="max-width:78rem;margin:0 auto">
-      <!-- Uploads playlist for channel UCIa3wQYBROQwsR0bMJInDfw → UUIa3wQYBROQwsR0bMJInDfw -->
       <iframe
         src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw"
         title="Instructor Grindset — Latest uploads"
@@ -99,18 +102,27 @@
     </div>
   </section>
 
-  <!-- About My Work -->
-  <section class="section wrap" aria-labelledby="work-title">
-    <h2 id="work-title">About My Work</h2>
-    <div class="card" style="max-width:70ch;margin:0 auto">
-      <p class="muted" style="margin:0">
-        Private and group coaching, staff training, and curriculum design. I blend technical progressions with athlete-centric habits:
-        season prep, movement patterns, and guest-first communication.
-      </p>
+  <!-- FEATURED VIDEOS (Popular tab, long-form only; NO SHORTS) -->
+  <section class="section wrap" aria-labelledby="featured-title">
+    <h2 id="featured-title">Featured Videos</h2>
+    <p class="muted">Long-form picks from your Popular tab (no Shorts).</p>
+    <div class="videos grid three" style="margin-top:1rem">
+      <!-- Row 1 -->
+      <div class="vid"><iframe src="https://www.youtube.com/embed/9iWTMLf_ZPI" title="Why Ski Instructors Hate Skiing Moguls" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="vid"><iframe src="https://www.youtube.com/embed/NodRbwLkWhg" title="4 Ways to Get More Tips as a Ski Instructor" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="vid"><iframe src="https://www.youtube.com/embed/II7MGOk65wg" title="How To become a certified snowsports instructor" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <!-- Row 2 -->
+      <div class="vid"><iframe src="https://www.youtube.com/embed/AWPgnHsV8Uo" title="How to Become a Ski or Snowboard Instructor - 2025 Guide" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="vid"><iframe src="https://www.youtube.com/embed/ko7X7aSP-JI" title="Kick Off the Season with Purpose" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="vid"><iframe src="https://www.youtube.com/embed/QU5d_rCBXeM" title="Ski Instructor Certification Exam Prep!" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <!-- Row 3 -->
+      <div class="vid"><iframe src="https://www.youtube.com/embed/fto7VPHVSfU" title="How To ski even more as an instructor!!!" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="vid"><iframe src="https://www.youtube.com/embed/nIF8quNAW0I" title="I Built an App to Turn Me Into A Ski Instructor Super Genius" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="vid"><iframe src="https://www.youtube.com/embed/DZZ8k-Qw8vU" title="I Play An Old Skiing Video Game And Ramble..." loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- CONTACT -->
   <section class="section wrap" aria-labelledby="contact-title">
     <h2 id="contact-title">Contact</h2>
     <p class="muted" style="margin:0 0 1rem">Email directly or use the form.</p>
@@ -118,7 +130,7 @@
       <a class="btn" href="mailto:you@example.com?subject=Instructor%20Grindset%20Inquiry">Email me</a>
     </p>
     <form class="card stack" aria-describedby="contact-help" method="post" action="#" style="max-width:42rem;margin:0 auto">
-      <p id="contact-help" class="muted" style="margin:0">Static HTML form. Swap for your WP form plugin shortcode (e.g., Contact Form 7 / WPForms) when ready.</p>
+      <p id="contact-help" class="muted" style="margin:0">Static HTML form. Replace with your WP form plugin shortcode (e.g., Contact Form 7 / WPForms) when ready.</p>
       <div class="field">
         <label for="name">Name</label>
         <input id="name" name="name" autocomplete="name" required />
@@ -133,9 +145,7 @@
       </div>
       <button class="btn" type="submit">Send Message</button>
     </form>
-    <!-- If using a WP plugin, replace the form above with its shortcode, e.g.:
-         [contact-form-7 id="123" title="Contact"]
-    -->
   </section>
 </section>
 <!-- ===== End ===== -->
+
