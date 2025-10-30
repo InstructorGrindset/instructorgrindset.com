@@ -1,5 +1,5 @@
-<!-- ===== Instructor Grindset — Final Paste-Ready Page ===== -->
-<section class="ig" style="--max:88rem; --pad:1rem; --radius:.75rem; --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff;
+<!-- ===== Instructor Grindset — No Subtitle + Yellow Glow Animations ===== -->
+<section class="ig" style="--max:88rem; --pad:1rem; --radius:.75rem; --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff; --glow:#facc15;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:var(--bg); margin:0; padding:0;">
   <style>
     /* WordPress spacing neutralizer (scoped to .ig) */
@@ -12,9 +12,10 @@
     .wrap{max-width:var(--max);margin:0 auto;padding:1.5rem var(--pad);text-align:center}
     .hero{padding:1.5rem var(--pad) 1rem}
     .hero h1{font-size:clamp(2.25rem,4.5vw + .25rem,3.25rem);line-height:1.1;margin:.1rem 0 .35rem}
-    .hero .lead{color:var(--muted);margin:.25rem auto 0;max-width:70ch;font-size:clamp(1.05rem,1.25vw,1.25rem)}
     .section{padding:1.5rem var(--pad)}
     .section h2{font-size:1.75rem;line-height:1.2;margin:0 0 1rem}
+
+    /* Boxes */
     .card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem}
     .grid{display:grid;gap:1rem}
     .two{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -40,13 +41,26 @@
     .field input,.field textarea{width:100%;padding:.7rem .85rem;border:1px solid var(--line);border-radius:.6rem;background:rgba(255,255,255,.04);color:var(--ink)}
     .field input:focus,.field textarea:focus{outline:3px solid #6ea8ff;border-color:#6ea8ff}
     .muted{color:var(--muted)}
+
+    /* === Animated yellow glow on boxes (.card and .vid) === */
+    @keyframes glowPulse {
+      0%   { box-shadow: 0 0 0 rgba(250,204,21,0.0), 0 0 0 rgba(250,204,21,0.0); }
+      50%  { box-shadow: 0 0 18px rgba(250,204,21,0.25), 0 0 48px rgba(250,204,21,0.12); }
+      100% { box-shadow: 0 0 0 rgba(250,204,21,0.0), 0 0 0 rgba(250,204,21,0.0); }
+    }
+    .card, .vid { animation: glowPulse 3.5s ease-in-out infinite; }
+    .card:hover, .vid:hover { box-shadow: 0 0 22px rgba(250,204,21,0.35), 0 0 64px rgba(250,204,21,0.18); }
+
+    /* Respect user motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .card, .vid { animation: none; }
+    }
   </style>
 
-  <!-- HERO -->
+  <!-- HERO (subtitle removed) -->
   <header class="hero wrap" aria-labelledby="page-title">
     <div>
       <h1 id="page-title">Instructor Grindset</h1>
-      <p class="lead"></p>
     </div>
   </header>
 
@@ -77,7 +91,6 @@
       <article class="card" aria-labelledby="mission-title">
         <h3 id="mission-title" style="margin:.25rem 0 .5rem">Mission</h3>
         <p class="muted" style="margin:0 auto;max-width:60ch">
-          <!-- Paste your exact YouTube channel description here, replacing this line. -->
           Helping ski instructors become athletes & irresistible coaches.
         </p>
       </article>
@@ -105,18 +118,15 @@
     </div>
   </section>
 
-  <!-- FEATURED (playlist-driven 3×N grid; auto-updates when you edit playlist) -->
+  <!-- FEATURED (playlist-driven 3×N grid) -->
   <section class="section wrap" aria-labelledby="featured-title">
     <h2 id="featured-title">Featured Videos</h2>
     <p class="muted">Curated long-form playlist (no Shorts). Reorder on YouTube to update here automatically.</p>
-
-    <!-- Grid container -->
     <div
       id="featured-grid"
       class="videos grid three"
       data-playlist-id="PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv"
       data-youtube-api-key="AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY">
-      <!-- Tiles will be injected here -->
     </div>
   </section>
 
@@ -128,7 +138,7 @@
       <a class="btn" href="mailto:you@example.com?subject=Instructor%20Grindset%20Inquiry">Email me</a>
     </p>
     <form class="card stack" aria-describedby="contact-help" method="post" action="#" style="max-width:42rem;margin:0 auto">
-      <p id="contact-help" class="muted" style="margin:0">Static HTML form. Replace with your WP form plugin shortcode (e.g., Contact Form 7 / WPForms) to make it send.</p>
+      <p id="contact-help" class="muted" style="margin:0">Static HTML form. Replace with your WP form plugin shortcode to make it send.</p>
       <div class="field">
         <label for="name">Name</label>
         <input id="name" name="name" autocomplete="name" required />
@@ -146,7 +156,7 @@
   </section>
 </section>
 
-<!-- Playlist → Grid script (vanilla JS; keep once per page) -->
+<!-- Playlist → Grid script (kept at end) -->
 <script>
 (function(){
   const grid = document.getElementById('featured-grid');
@@ -214,5 +224,4 @@
 })();
 </script>
 <!-- ===== End ===== -->
-
 
