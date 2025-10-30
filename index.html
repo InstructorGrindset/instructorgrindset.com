@@ -1,227 +1,261 @@
-<!-- ===== Instructor Grindset — No Subtitle + Yellow Glow Animations ===== -->
-<section class="ig" style="--max:88rem; --pad:1rem; --radius:.75rem; --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff; --glow:#facc15;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:var(--bg); margin:0; padding:0;">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset</title>
+  <meta name="description" content="Become an irresistible snowsports instructor with a season plan." />
   <style>
-    /* WordPress spacing neutralizer (scoped to .ig) */
-    .ig, .ig * { box-sizing: border-box; }
-    .ig :where(h1,h2,h3,h4,h5,h6,p){ margin:0; }
-    .ig :where(.wp-block, .wp-block-group, .wp-block-group__inner-container){ margin:0 !important; padding:0 !important; }
-    .ig :where(.is-layout-flow, .is-layout-constrained, .entry-content){ gap:0 !important; }
-
-    /* Layout & type (centered) */
-    .wrap{max-width:var(--max);margin:0 auto;padding:1.5rem var(--pad);text-align:center}
-    .hero{padding:1.5rem var(--pad) 1rem}
-    .hero h1{font-size:clamp(2.25rem,4.5vw + .25rem,3.25rem);line-height:1.1;margin:.1rem 0 .35rem}
-    .section{padding:1.5rem var(--pad)}
-    .section h2{font-size:1.75rem;line-height:1.2;margin:0 0 1rem}
-
-    /* Boxes */
-    .card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem}
-    .grid{display:grid;gap:1rem}
-    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:980px){.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:640px){.two,.three{grid-template-columns:1fr}}
-
-    /* Video tiles & containers */
-    .vid{position:relative;width:100%;padding-bottom:56.25%;border-radius:.75rem;overflow:hidden;border:1px solid var(--line);background:#000}
-    .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .videos{max-width:78rem;margin:0 auto}
-
-    /* Links & buttons */
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .btn{display:inline-block;padding:.7rem 1.1rem;border-radius:.6rem;background:#0f172a;color:#fff;text-decoration:none;font-weight:600;border:1px solid #0b1220}
-    .btn:hover{filter:brightness(1.08)}
-
-    /* Form */
-    .stack{display:grid;gap:.85rem;justify-items:center}
-    .field{width:min(36rem,100%);text-align:left}
-    .field label{display:block;font-weight:600;margin:0 0 .35rem}
-    .field input,.field textarea{width:100%;padding:.7rem .85rem;border:1px solid var(--line);border-radius:.6rem;background:rgba(255,255,255,.04);color:var(--ink)}
-    .field input:focus,.field textarea:focus{outline:3px solid #6ea8ff;border-color:#6ea8ff}
-    .muted{color:var(--muted)}
-
-    /* === Animated yellow glow on boxes (.card and .vid) === */
-    @keyframes glowPulse {
-      0%   { box-shadow: 0 0 0 rgba(250,204,21,0.0), 0 0 0 rgba(250,204,21,0.0); }
-      50%  { box-shadow: 0 0 18px rgba(250,204,21,0.25), 0 0 48px rgba(250,204,21,0.12); }
-      100% { box-shadow: 0 0 0 rgba(250,204,21,0.0), 0 0 0 rgba(250,204,21,0.0); }
+    :root{
+      --max:88rem; --pad:1rem; --radius:.75rem;
+      --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff;
+      --glow: 250,204,21; /* soft yellow glow */
     }
-    .card, .vid { animation: glowPulse 3.5s ease-in-out infinite; }
-    .card:hover, .vid:hover { box-shadow: 0 0 22px rgba(250,204,21,0.35), 0 0 64px rgba(250,204,21,0.18); }
 
-    /* Respect user motion preferences */
-    @media (prefers-reduced-motion: reduce) {
-      .card, .vid { animation: none; }
+    /* Base */
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.5;
     }
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
+
+    /* Layout */
+    .wrap{ max-width:var(--max); margin:0 auto; padding:1.5rem var(--pad); text-align:center }
+    .hero{ padding:1.5rem var(--pad) 1rem }
+    .hero h1{ font-size:clamp(2.25rem,4.5vw + .25rem,3.25rem); line-height:1.1; margin:.1rem 0 .35rem }
+    .section{ padding:1.5rem var(--pad) }
+    .section h2{ font-size:1.75rem; line-height:1.2; margin:0 0 1rem }
+
+    /* Cards, grid, videos */
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:1.25rem;
+      box-shadow: 0 0 18px rgba(var(--glow), 0.25), 0 0 48px rgba(var(--glow), 0.12);
+    }
+    .card:hover{
+      box-shadow: 0 0 22px rgba(var(--glow), 0.35), 0 0 64px rgba(var(--glow), 0.18);
+    }
+    .grid{ display:grid; gap:1rem }
+    .two{ grid-template-columns:repeat(2,minmax(0,1fr)) }
+    .three{ grid-template-columns:repeat(3,minmax(0,1fr)) }
+    @media (max-width:980px){ .three{ grid-template-columns:repeat(2,minmax(0,1fr)) } }
+    @media (max-width:640px){ .two,.three{ grid-template-columns:1fr } }
+
+    .videos{ max-width:78rem; margin:0 auto }
+    .vid{
+      position:relative; width:100%; padding-bottom:56.25%;
+      border-radius:.75rem; overflow:hidden; border:1px solid var(--line); background:#000;
+      box-shadow: 0 0 18px rgba(var(--glow), 0.25), 0 0 48px rgba(var(--glow), 0.12);
+    }
+    .vid:hover{
+      box-shadow: 0 0 22px rgba(var(--glow), 0.35), 0 0 64px rgba(var(--glow), 0.18);
+    }
+    .vid iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
+
+    /* Buttons & form */
+    .btn{
+      display:inline-block; padding:.7rem 1.1rem; border-radius:.6rem;
+      background:#0f172a; color:#fff; border:1px solid #0b1220; font-weight:600;
+    }
+    .btn:hover{ filter:brightness(1.08) }
+
+    .stack{ display:grid; gap:.85rem; justify-items:center }
+    .field{ width:min(36rem,100%); text-align:left }
+    .field label{ display:block; font-weight:600; margin:0 0 .35rem }
+    .field input,.field textarea{
+      width:100%; padding:.7rem .85rem; border:1px solid var(--line); border-radius:.6rem;
+      background:rgba(255,255,255,.04); color:var(--ink)
+    }
+    .field input:focus,.field textarea:focus{ outline:3px solid #6ea8ff; border-color:#6ea8ff }
+    .muted{ color:var(--muted) }
   </style>
+</head>
+<body>
+  <section class="ig">
+    <!-- HERO (no subtitle) -->
+    <header class="hero wrap" aria-labelledby="page-title">
+      <div><h1 id="page-title">Instructor Grindset</h1></div>
+    </header>
 
-  <!-- HERO (subtitle removed) -->
-  <header class="hero wrap" aria-labelledby="page-title">
-    <div>
-      <h1 id="page-title">Instructor Grindset</h1>
-    </div>
-  </header>
-
-  <!-- CTA -->
-  <section class="section wrap" aria-labelledby="cta-title">
-    <h2 id="cta-title">Become a ski instructor with a season plan</h2>
-    <div class="card" style="max-width:70ch;margin:0 auto">
-      <p class="muted" style="margin:0">
-        Do you want to become a snowsports instructor with a more fulfilling purpose? Contact me and we will develop a plan to transform into an irresistible athlete instructor capable of teaching to the guests' broadest definition of success.
-      </p>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="section wrap" aria-labelledby="about-title">
-    <h2 id="about-title">About My Work</h2>
-    <div class="card" style="max-width:70ch;margin:0 auto">
-      <p class="muted" style="margin:0">
-        For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
-      </p>
-    </div>
-  </section>
-
-  <!-- MISSION & VISION -->
-  <section class="section wrap" aria-labelledby="mv-title">
-    <h2 id="mv-title">Mission &amp; Vision</h2>
-    <div class="grid two" style="margin-top:1rem">
-      <article class="card" aria-labelledby="mission-title">
-        <h3 id="mission-title" style="margin:.25rem 0 .5rem">Mission</h3>
-        <p class="muted" style="margin:0 auto;max-width:60ch">
-          Helping ski instructors become athletes & irresistible coaches.
+    <!-- CTA -->
+    <section class="section wrap" aria-labelledby="cta-title">
+      <h2 id="cta-title">Become a ski instructor with a season plan</h2>
+      <div class="card" style="max-width:70ch;margin:0 auto">
+        <p class="muted" style="margin:0">
+          Do you want to become a snowsports instructor with a more fulfilling purpose? Contact me and we will develop a plan to transform into an irresistible athlete instructor capable of teaching to the guests' broadest definition of success.
         </p>
-      </article>
-      <article class="card" aria-labelledby="vision-title">
-        <h3 id="vision-title" style="margin:.25rem 0 .5rem">Vision</h3>
-        <p class="muted" style="margin:0 auto;max-width:60ch">
-          A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section wrap" aria-labelledby="about-title">
+      <h2 id="about-title">About My Work</h2>
+      <div class="card" style="max-width:70ch;margin:0 auto">
+        <p class="muted" style="margin:0">
+          For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
         </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- LATEST UPLOADS (auto-updating) -->
-  <section class="section wrap" aria-labelledby="latest-title">
-    <h2 id="latest-title">Latest Uploads</h2>
-    <p class="muted" style="margin:0 0 1rem">Auto-updating uploads playlist.</p>
-    <div class="vid" style="max-width:78rem;margin:0 auto">
-      <iframe
-        src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
-        title="Instructor Grindset — Latest uploads"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </section>
-
-  <!-- FEATURED (playlist-driven 3×N grid) -->
-  <section class="section wrap" aria-labelledby="featured-title">
-    <h2 id="featured-title">Featured Videos</h2>
-    <p class="muted">Curated long-form playlist (no Shorts). Reorder on YouTube to update here automatically.</p>
-    <div
-      id="featured-grid"
-      class="videos grid three"
-      data-playlist-id="PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv"
-      data-youtube-api-key="AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY">
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section wrap" aria-labelledby="contact-title">
-    <h2 id="contact-title">Contact</h2>
-    <p class="muted" style="margin:0 0 1rem">Email directly or use the form.</p>
-    <p style="margin:.25rem 0 1.25rem">
-      <a class="btn" href="mailto:you@example.com?subject=Instructor%20Grindset%20Inquiry">Email me</a>
-    </p>
-    <form class="card stack" aria-describedby="contact-help" method="post" action="#" style="max-width:42rem;margin:0 auto">
-      <p id="contact-help" class="muted" style="margin:0">Static HTML form. Replace with your WP form plugin shortcode to make it send.</p>
-      <div class="field">
-        <label for="name">Name</label>
-        <input id="name" name="name" autocomplete="name" required />
       </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" autocomplete="email" required />
+    </section>
+
+    <!-- MISSION & VISION -->
+    <section class="section wrap" aria-labelledby="mv-title">
+      <h2 id="mv-title">Mission &amp; Vision</h2>
+      <div class="grid two" style="margin-top:1rem">
+        <article class="card" aria-labelledby="mission-title">
+          <h3 id="mission-title" style="margin:.25rem 0 .5rem">Mission</h3>
+          <p class="muted" style="margin:0 auto;max-width:60ch">
+            Helping ski instructors become athletes &amp; irresistible coaches.
+          </p>
+        </article>
+        <article class="card" aria-labelledby="vision-title">
+          <h3 id="vision-title" style="margin:.25rem 0 .5rem">Vision</h3>
+          <p class="muted" style="margin:0 auto;max-width:60ch">
+            A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.
+          </p>
+        </article>
       </div>
-      <div class="field">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
-      </div>
-      <button class="btn" type="submit">Send Message</button>
-    </form>
-  </section>
-</section>
+    </section>
 
-<!-- Playlist → Grid script (kept at end) -->
-<script>
-(function(){
-  const grid = document.getElementById('featured-grid');
-  if(!grid) return;
-
-  const playlistId = grid.dataset.playlistId;
-  const apiKey     = grid.dataset.youtubeApiKey;
-
-  function showError(msg){
-    grid.innerHTML = '<p class="muted" style="margin:1rem auto;max-width:60ch">'+ msg +'</p>';
-  }
-
-  if(!playlistId){ showError('Missing playlist ID.'); return; }
-  if(!apiKey){ showError('Missing YouTube API key.'); return; }
-
-  async function fetchAllPlaylistItems() {
-    const items = [];
-    let pageToken = '';
-    try {
-      do {
-        const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
-        url.search = new URLSearchParams({
-          part: 'snippet,contentDetails',
-          maxResults: '50',
-          playlistId,
-          pageToken,
-          key: apiKey
-        }).toString();
-
-        const res = await fetch(url.toString());
-        if(!res.ok) throw new Error('YouTube API responded ' + res.status);
-        const data = await res.json();
-
-        for (const it of (data.items || [])) {
-          const vid = (it.contentDetails && it.contentDetails.videoId) ||
-                      (it.snippet && it.snippet.resourceId && it.snippet.resourceId.videoId);
-          const title = (it.snippet && it.snippet.title) || 'YouTube Video';
-          if (vid) items.push({ id: vid, title });
-        }
-        pageToken = data.nextPageToken || '';
-      } catch (e) {
-        showError('Could not load the playlist. Check your API key restrictions and playlist visibility.');
-        return [];
-      }
-    return items;
-  }
-
-  function escapeAttr(s){ return String(s).replace(/"/g, '&quot;'); }
-
-  function render(items){
-    if(!items.length){ showError('This playlist is empty or unavailable.'); return; }
-    grid.innerHTML = items.map(v => `
-      <div class="vid" title="${escapeAttr(v.title)}">
+    <!-- LATEST UPLOADS (auto-updating) -->
+    <section class="section wrap" aria-labelledby="latest-title">
+      <h2 id="latest-title">Latest Uploads</h2>
+      <p class="muted" style="margin:0 0 1rem">Auto-updating uploads playlist.</p>
+      <div class="vid" style="max-width:78rem;margin:0 auto">
         <iframe
-          src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&playsinline=1"
-          title="${escapeAttr(v.title)}"
+          src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
+          title="Instructor Grindset — Latest uploads"
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
       </div>
-    `).join('');
-  }
+    </section>
 
-  fetchAllPlaylistItems().then(render);
-})();
-</script>
-<!-- ===== End ===== -->
+    <!-- FEATURED (playlist-driven 3×N grid) -->
+    <section class="section wrap" aria-labelledby="featured-title">
+      <h2 id="featured-title">Featured Videos</h2>
+      <p class="muted">Curated long-form playlist (no Shorts). Reorder on YouTube to update here automatically.</p>
+      <div
+        id="featured-grid"
+        class="videos grid three"
+        data-playlist-id="PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv"
+        data-youtube-api-key="AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY">
+        <p class="muted" style="margin:1rem auto;max-width:60ch">Loading playlist…</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section wrap" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p class="muted" style="margin:0 0 1rem">Email directly or use the form.</p>
+      <p style="margin:.25rem 0 1.25rem">
+        <a class="btn" href="mailto:you@example.com?subject=Instructor%20Grindset%20Inquiry">Email me</a>
+      </p>
+      <form class="card stack" aria-describedby="contact-help" method="post" action="#" style="max-width:42rem;margin:0 auto">
+        <p id="contact-help" class="muted" style="margin:0">Static HTML form. Wire it up to your form tool if you want submissions.</p>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+        <button class="btn" type="submit">Send Message</button>
+      </form>
+    </section>
+  </section>
+
+  <!-- Playlist → Grid script (robust; logs to console if issues) -->
+  <script>
+  (function(){
+    const grid = document.getElementById('featured-grid');
+    if (!grid) return;
+
+    const playlistId = grid.dataset.playlistId;
+    const apiKey     = grid.dataset.youtubeApiKey;
+
+    function showError(msg){
+      grid.innerHTML = '<p class="muted" style="margin:1rem auto;max-width:60ch">'+ msg +'</p>';
+    }
+
+    if (!playlistId) { showError('Missing playlist ID.'); return; }
+    if (!apiKey) { showError('Missing YouTube API key.'); return; }
+
+    async function fetchAllPlaylistItems() {
+      const items = [];
+      let pageToken = '';
+      try {
+        do {
+          const params = new URLSearchParams({
+            part: 'snippet,contentDetails',
+            maxResults: '50',
+            playlistId,
+            key: apiKey
+          });
+          if (pageToken) params.set('pageToken', pageToken);
+
+          const url = 'https://www.googleapis.com/youtube/v3/playlistItems?' + params.toString();
+          console.log('[Featured] Fetch:', url);
+          const res = await fetch(url, { headers: { 'Accept':'application/json' } });
+
+          if (!res.ok) {
+            const text = await res.text();
+            console.error('[Featured] API HTTP error:', res.status, text);
+            throw new Error('YouTube API ' + res.status);
+          }
+
+          const data = await res.json();
+          if (data.error) {
+            console.error('[Featured] API logical error:', data.error);
+            throw new Error(data.error.message || 'API error');
+          }
+
+          const list = Array.isArray(data.items) ? data.items : [];
+          for (const it of list) {
+            const vid   = it?.contentDetails?.videoId || it?.snippet?.resourceId?.videoId;
+            const title = it?.snippet?.title || 'YouTube Video';
+            if (vid) items.push({ id: vid, title });
+          }
+          pageToken = data.nextPageToken || '';
+        } while (pageToken);
+
+        return items;
+      } catch (e) {
+        showError('Could not load the playlist. Check API key restrictions, playlist visibility (Public/Unlisted), and clear any caches.');
+        console.error('[Featured] Failed:', e);
+        return [];
+      }
+    }
+
+    function esc(s){ return String(s).replace(/"/g, '&quot;'); }
+
+    function render(items){
+      if (!items.length) { showError('This playlist appears empty or unavailable.'); return; }
+      grid.innerHTML = items.map(v => `
+        <div class="vid" title="${esc(v.title)}">
+          <iframe
+            src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&playsinline=1"
+            title="${esc(v.title)}"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      `).join('');
+    }
+
+    fetchAllPlaylistItems().then(render);
+  })();
+  </script>
+</body>
+</html>
 
