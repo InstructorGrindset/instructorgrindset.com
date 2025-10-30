@@ -1,4 +1,4 @@
-<!-- ===== Instructor Grindset — Popular Tab Featured (No Shorts) ===== -->
+<!-- ===== Instructor Grindset — Final Paste-Ready Page ===== -->
 <section class="ig" style="--max:88rem; --pad:1rem; --radius:.75rem; --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:var(--bg); margin:0; padding:0;">
   <style>
@@ -21,15 +21,18 @@
     .three{grid-template-columns:repeat(3,minmax(0,1fr))}
     @media (max-width:980px){.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media (max-width:640px){.two,.three{grid-template-columns:1fr}}
-    /* Videos */
+
+    /* Video tiles & containers */
     .vid{position:relative;width:100%;padding-bottom:56.25%;border-radius:.75rem;overflow:hidden;border:1px solid var(--line);background:#000}
     .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
     .videos{max-width:78rem;margin:0 auto}
+
     /* Links & buttons */
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
     .btn{display:inline-block;padding:.7rem 1.1rem;border-radius:.6rem;background:#0f172a;color:#fff;text-decoration:none;font-weight:600;border:1px solid #0b1220}
     .btn:hover{filter:brightness(1.08)}
+
     /* Form */
     .stack{display:grid;gap:.85rem;justify-items:center}
     .field{width:min(36rem,100%);text-align:left}
@@ -47,7 +50,7 @@
     </div>
   </header>
 
-  <!-- NEW: CTA section above About -->
+  <!-- CTA -->
   <section class="section wrap" aria-labelledby="cta-title">
     <h2 id="cta-title">Become a ski instructor with a season plan</h2>
     <div class="card" style="max-width:70ch;margin:0 auto">
@@ -57,7 +60,7 @@
     </div>
   </section>
 
-  <!-- ABOUT (above videos) -->
+  <!-- ABOUT -->
   <section class="section wrap" aria-labelledby="about-title">
     <h2 id="about-title">About My Work</h2>
     <div class="card" style="max-width:70ch;margin:0 auto">
@@ -74,8 +77,8 @@
       <article class="card" aria-labelledby="mission-title">
         <h3 id="mission-title" style="margin:.25rem 0 .5rem">Mission</h3>
         <p class="muted" style="margin:0 auto;max-width:60ch">
-          <!-- Paste your exact YouTube channel description below, replacing this line. -->
-          Helping ski instructors become athletes & irresistible coaches.
+          <!-- Paste your exact YouTube channel description here, replacing this line. -->
+          (Replace this line with your full channel description.)
         </p>
       </article>
       <article class="card" aria-labelledby="vision-title">
@@ -87,13 +90,13 @@
     </div>
   </section>
 
-  <!-- LATEST UPLOADS (above Featured; auto-updating playlist) -->
+  <!-- LATEST UPLOADS (auto-updating) -->
   <section class="section wrap" aria-labelledby="latest-title">
     <h2 id="latest-title">Latest Uploads</h2>
-    <p class="muted" style="margin:0 0 1rem">This playlist auto-pulls your newest uploads.</p>
+    <p class="muted" style="margin:0 0 1rem">Auto-updating uploads playlist.</p>
     <div class="vid" style="max-width:78rem;margin:0 auto">
       <iframe
-        src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw"
+        src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
         title="Instructor Grindset — Latest uploads"
         loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -102,22 +105,20 @@
     </div>
   </section>
 
-  <!-- FEATURED VIDEOS (Playlist-driven, long-form only; NO SHORTS) -->
-<section class="section wrap" aria-labelledby="featured-title">
-  <h2 id="featured-title">Featured Videos</h2>
-  <p class="muted">Curated long-form playlist (no Shorts). Reorder on YouTube to update here automatically.</p>
+  <!-- FEATURED (playlist-driven 3×N grid; auto-updates when you edit playlist) -->
+  <section class="section wrap" aria-labelledby="featured-title">
+    <h2 id="featured-title">Featured Videos</h2>
+    <p class="muted">Curated long-form playlist (no Shorts). Reorder on YouTube to update here automatically.</p>
 
-  <div class="vid">
-    <iframe
-      src="https://www.youtube.com/embed/videoseries?list=PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv&rel=0&modestbranding=1&playsinline=1"
-      title="Featured Videos"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>
-
+    <!-- Grid container -->
+    <div
+      id="featured-grid"
+      class="videos grid three"
+      data-playlist-id="PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv"
+      data-youtube-api-key="AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY">
+      <!-- Tiles will be injected here -->
+    </div>
+  </section>
 
   <!-- CONTACT -->
   <section class="section wrap" aria-labelledby="contact-title">
@@ -127,7 +128,7 @@
       <a class="btn" href="mailto:you@example.com?subject=Instructor%20Grindset%20Inquiry">Email me</a>
     </p>
     <form class="card stack" aria-describedby="contact-help" method="post" action="#" style="max-width:42rem;margin:0 auto">
-      <p id="contact-help" class="muted" style="margin:0">Static HTML form. Replace with your WP form plugin shortcode (e.g., Contact Form 7 / WPForms) when ready.</p>
+      <p id="contact-help" class="muted" style="margin:0">Static HTML form. Replace with your WP form plugin shortcode (e.g., Contact Form 7 / WPForms) to make it send.</p>
       <div class="field">
         <label for="name">Name</label>
         <input id="name" name="name" autocomplete="name" required />
@@ -144,7 +145,72 @@
     </form>
   </section>
 </section>
+
+<!-- Playlist → Grid script (vanilla JS; keep once per page) -->
+<script>
+(function(){
+  const grid = document.getElementById('featured-grid');
+  if(!grid) return;
+
+  const playlistId = grid.dataset.playlistId;
+  const apiKey     = grid.dataset.youtubeApiKey;
+
+  function showError(msg){
+    grid.innerHTML = '<p class="muted" style="margin:1rem auto;max-width:60ch">'+ msg +'</p>';
+  }
+
+  if(!playlistId){ showError('Missing playlist ID.'); return; }
+  if(!apiKey){ showError('Missing YouTube API key.'); return; }
+
+  async function fetchAllPlaylistItems() {
+    const items = [];
+    let pageToken = '';
+    try {
+      do {
+        const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+        url.search = new URLSearchParams({
+          part: 'snippet,contentDetails',
+          maxResults: '50',
+          playlistId,
+          pageToken,
+          key: apiKey
+        }).toString();
+
+        const res = await fetch(url.toString());
+        if(!res.ok) throw new Error('YouTube API responded ' + res.status);
+        const data = await res.json();
+
+        for (const it of (data.items || [])) {
+          const vid = (it.contentDetails && it.contentDetails.videoId) ||
+                      (it.snippet && it.snippet.resourceId && it.snippet.resourceId.videoId);
+          const title = (it.snippet && it.snippet.title) || 'YouTube Video';
+          if (vid) items.push({ id: vid, title });
+        }
+        pageToken = data.nextPageToken || '';
+      } catch (e) {
+        showError('Could not load the playlist. Check your API key restrictions and playlist visibility.');
+        return [];
+      }
+    return items;
+  }
+
+  function escapeAttr(s){ return String(s).replace(/"/g, '&quot;'); }
+
+  function render(items){
+    if(!items.length){ showError('This playlist is empty or unavailable.'); return; }
+    grid.innerHTML = items.map(v => `
+      <div class="vid" title="${escapeAttr(v.title)}">
+        <iframe
+          src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&playsinline=1"
+          title="${escapeAttr(v.title)}"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    `).join('');
+  }
+
+  fetchAllPlaylistItems().then(render);
+})();
+</script>
 <!-- ===== End ===== -->
-
-
-
