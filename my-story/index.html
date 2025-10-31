@@ -17,7 +17,7 @@
       --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --footer-h:52px;
 
       /* Timeline system */
-      --rail:6px;                /* width of vertical line + box borders + connectors */
+      --rail:3px;                /* width of vertical line + box borders + connectors */
       --rail-color:#c4892a;      /* bronze/orange */
       --box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
       --gap:22px;                /* vertical gap between rows */
@@ -76,13 +76,6 @@
     .timeline-wrap::before{
       content:""; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
       width:var(--rail); background:var(--rail-color); border-radius:999px;
-    }
-
-    /* Early + Future connectors (top/bottom caps) */
-    .cap{
-      width:var(--rail); height:12px; background:var(--rail-color); border-radius:999px;
-      margin:0 auto;
-    }
 
     /* Early Life (centered above timeline, connected) */
     .early-center{ max-width:900px; margin:0 auto 10px; position:relative; }
@@ -99,13 +92,6 @@
     .row{
       display:grid; grid-template-columns: 1fr 1fr; column-gap: calc(var(--col-gap) + var(--rail));
       align-items:center; position:relative; margin: var(--gap) 0;
-    }
-
-    /* Horizontal connectors from rail to boxes (pointing OUT from the rail) */
-    .row .left::before,
-    .row .right::before{
-      content:""; position:absolute; top:50%; transform:translateY(-50%);
-      height:var(--rail); width:var(--col-gap); background:var(--rail-color); border-radius:999px;
     }
     .row .left::before{ left: calc(50% - var(--rail)/2 - var(--col-gap)) } /* from rail to left box */
     .row .right::before{ left: calc(50% + var(--rail)/2) }                /* from rail to right box */
