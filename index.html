@@ -24,14 +24,14 @@
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height:1.55;
     }
-    /* Optional: subtle dark overlay so text stays readable on bright photos */
+    /* Optional overlay to keep text readable on bright photos */
     body::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
       background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
-      z-index:-1; /* behind all content */
+      z-index:-1;
     }
 
     /* Rooftop headings (falls back if files not provided) */
@@ -98,20 +98,33 @@
       -webkit-background-clip:text;background-clip:text;color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
-    .lead{ color:var(--muted); max-width:70ch }
+
+    /* Move the whole hero (video + story) left 14px and down 14px */
+    .hero{
+      margin-left:-14px; /* shift left */
+      margin-top:14px;   /* shift down */
+    }
+
+    /* Bigger, airier story text + slight nudge down */
+    .lead{
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: clamp(1.05rem, 1.1vw + 0.2rem, 1.25rem);
+      line-height: 1.7;
+      margin-top: 8px;
+    }
 
     /* Video (glow only; responsive 16:9, wide but not edge-to-edge) */
-    .hero{ }
     .vid{
       aspect-ratio:16 / 9;
-      width: min(770px, calc(100vw - var(--sidebar) - 3rem));
+      width: min(950px, calc(100vw - var(--sidebar) - 3rem));
       max-width:1120px;
       border-radius:.75rem; overflow:hidden; background:#000; border:0;
       box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
-      margin:0;
+      margin:0 0 8px 0; /* small gap below video */
     }
     .vid iframe{ width:100%; height:100%; border:0; display:block }
-    @media (max-width:770px){ .vid{ width:100% } }
+    @media (max-width:960px){ .vid{ width:100% } }
 
     /* Button */
     .cta{
@@ -168,7 +181,7 @@
         <!-- Hero video (no title) -->
         <div class="vid">
           <iframe
-            src="https://www.youtube.com/embed/4IX2CwKIGo4?rel=0&modestbranding=1&playsinline=1"
+            src="https://www.youtube.com/embed/KOxRtOJsnkg?rel=0&modestbranding=1&playsinline=1"
             title="Featured Video"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -178,7 +191,7 @@
         <!-- My Story -->
         <h1>My Story</h1>
         <p class="lead">
-          For the last 16 ski seasons, I have live and worked and 10 different ski resorts in hopes of understanding how ski schools and instructors are designed to enchant children and turn them into happiness zealots through skiing.
+          For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
         </p>
         <p><a class="cta" href="https://instructorgrindset.com/my-story">Full Story →</a></p>
       </section>
@@ -190,6 +203,3 @@
   </div>
 </body>
 </html>
-
-
-
