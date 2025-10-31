@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* Rooftop headings (drop your licensed files in /fonts/, or they fall back) */
+    /* Rooftop headings (optional; falls back if not present) */
     @font-face{
       font-family:"Rooftop";
       src:url("/fonts/Rooftop-Bold.woff2") format("woff2");
@@ -24,7 +24,7 @@
 
     :root{
       --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#c4892a; /* bronze-orange if you add buttons later */
+      --accent:#a6c8ff; --cta:#c4892a; /* bronze-orange */
       --glow:250,204,21;
       --sidebar:300px;
     }
@@ -48,16 +48,17 @@
     .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem }
     .brand .logo-wrap{
       width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
-      /* Mask to crop out any red surround on the uploaded circle logo */
+      /* Mask to crop the image to a clean circle (hides any outer rim) */
       -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
               mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
       background:#0000;
     }
-    /* 👉 Replace src below with your actual file path (e.g., /images/ig-logo.png). */
+    /* ✅ Replace the src below with your real file path (e.g., /images/ig-logo.png) */
     .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
+
     .brand .name{
       font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px;
-      font-size:1.7rem; /* bigger */
+      font-size:1.7rem;
     }
 
     .nav h4{
@@ -75,31 +76,37 @@
     /* Headings */
     h1,h2{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
-      font-weight:800; font-size:clamp(2.4rem,5.6vw,3.6rem); line-height:1.05; margin:.5rem 0 .6rem;
+      font-weight:800; font-size:clamp(2.4rem,5.6vw,3.6rem); line-height:1.05; margin:.75rem 0 .6rem;
       background:linear-gradient(92deg,#ffffff,#eaeefc);
       -webkit-background-clip:text;background-clip:text;color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
     .lead{ color:var(--muted); max-width:70ch }
 
-    /* Video: small (~25vw), glow only, no border/box */
-    .hero{
-      /* keeps content aligned left, leaving empty background to the right */
-      max-width:60vw;
-    }
+    /* Video: exact YouTube thumbnail ratio (16:9) and size up to 1280×720.
+       It will use EXACTLY 1280×720 when there is space. On smaller screens it scales down proportionally. */
+    .hero{ max-width:min(1280px, calc(100vw - var(--sidebar) - 2rem)); }
     .vid{
-      width:clamp(260px, 25vw, 520px);
-      position:relative; padding-bottom:56.25%;
-      border-radius:.75rem; overflow:hidden; border:0; background:#000;
+      aspect-ratio:16 / 9;
+      width:min(1280px, calc(100vw - var(--sidebar) - 2rem));
+      max-width:1280px;
+      border-radius:.75rem; overflow:hidden; background:#000; border:0;
       box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
       margin:0;
     }
-    .vid iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
+    .vid iframe{ width:100%; height:100%; border:0; display:block }
 
     @media (max-width:960px){
       .hero{ max-width:100% }
-      .vid{ width:100%; }
+      .vid{ width:100% }
     }
+
+    /* Button */
+    .cta{
+      display:inline-block; margin-top:.9rem; padding:.85rem 1.05rem; border-radius:0;
+      background:var(--cta); color:#e6e7eb; font-weight:800; border:0;
+    }
+    .cta:hover{ filter:brightness(1.03) }
 
     .footer{ color:var(--muted); text-align:center; padding:1.25rem 0; border-top:1px solid var(--line); margin-top:2rem }
   </style>
@@ -110,7 +117,7 @@
     <aside class="side">
       <div class="brand">
         <div class="logo-wrap">
-          <!-- REPLACE THIS SRC with your logo file path -->
+          <!-- Put your logo file in your repo and reference it here -->
           <img src="/images/ig-logo.png" alt="Instructor Grindset logo" />
         </div>
         <div class="name">INSTRUCTOR<br/>GRINDSET</div>
@@ -146,7 +153,7 @@
     <!-- MAIN -->
     <main class="main">
       <section class="hero" aria-label="Intro">
-        <!-- Small hero video (no title) -->
+        <!-- Hero video (no title text) -->
         <div class="vid">
           <iframe
             src="https://www.youtube.com/embed/KOxRtOJsnkg?rel=0&modestbranding=1&playsinline=1"
@@ -156,11 +163,12 @@
             allowfullscreen></iframe>
         </div>
 
-        <!-- My Story (under video, no box) -->
+        <!-- My Story (under video) -->
         <h1>My Story</h1>
         <p class="lead">
           For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
         </p>
+        <p><a class="cta" href="https://instructorgrindset.com/mystory">Full Story →</a></p>
       </section>
 
       <footer class="footer">
