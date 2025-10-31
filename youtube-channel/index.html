@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset • YouTube Channel</title>
+  <meta name="description" content="Latest videos and curated playlists from Instructor Grindset." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --panel-bg:rgba(255,255,255,.03);
+      --footer-h:52px;
+
+      /* Layout knobs */
+      --content-shift:40px;          /* nudge content toward sidebar */
+      --grid-gap: 14px;
+      --thumb-radius: .75rem;
+    }
+
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.55;
+      background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
+    }
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
+
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+
+    /* Layout shell */
+    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
+    @media (max-width:960px){.page{grid-template-columns:1fr}}
+    .side{padding:1.25rem;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
+    .brand{display:flex;align-items:center;gap:.75rem;margin:.25rem 0 1.25rem}
+    .brand .logo-wrap{width:64px;height:64px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
+      -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%)}
+    .brand .logo-wrap img{width:120%;height:120%;object-fit:cover}
+    .brand .name{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;line-height:1.02;letter-spacing:.7px;font-size:1.7rem}
+    .nav h4{margin:1rem 0 .5rem;color:var(--muted);font-weight:800;letter-spacing:.6px;font-family:"Rooftop",Inter,Arial,sans-serif}
+    .nav ul{list-style:none;margin:0 0 1rem;padding:0} .nav li{margin:.35rem 0}
+    .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent} .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
+
+    .main{padding:1.25rem}
+    .content{
+      width:min(1100px, calc(100vw - var(--sidebar) - 40px));
+      margin-left:max(14px, calc((100vw - var(--sidebar) - min(1100px, calc(100vw - var(--sidebar) - 40px)))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:2.2rem;
+    }
+    @media (max-width:960px){ .content{ width:min(94vw, 1100px); margin:0 auto; padding-top:1.25rem } }
+
+    h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+    h1{
+      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:0 0 .9rem;
+      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 0 22px rgba(var(--glow),.12);
+    }
+    .muted{color:var(--muted)}
+
+    /* Video chrome (glow, no boxes) */
+    .vid{
+      position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--thumb-radius); overflow:hidden; background:#000;
+      box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
+    }
+    iframe{width:100%;height:100%;border:0;display:block}
+
+    /* Grids */
+    .grid{display:grid; gap:var(--grid-gap)}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:980px){ .three{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:640px){ .three{grid-template-columns:1fr} }
+
+    /* Subscribe button */
+    .cta{
+      display:inline-block; padding:.8rem 1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0;
+      text-align:center; white-space:nowrap;
+    }
+    .stack{display:grid; gap:.6rem}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin:.6rem 0 1rem}
+    .row .cta{margin-left:auto}
+    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
+      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
+    .footer{color:var(--muted);text-align:center;margin:0}
+    @media (max-width:960px){ .footer-wrap{position:static;height:auto;padding:.75rem 0} }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Sidebar -->
+    <aside class="side">
+      <a class="brand" href="https://instructorgrindset.com/" aria-label="Go to homepage">
+        <div class="logo-wrap"><img src="/images/ig-logo.png" alt="Instructor Grindset logo" /></div>
+        <div class="name">INSTRUCTOR<br/>GRINDSET</div>
+      </a>
+
+      <nav class="nav" aria-label="About">
+        <h4>About</h4>
+        <ul>
+          <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
+          <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
+        </ul>
+      </nav>
+
+      <nav class="nav" aria-label="How To">
+        <h4>How To</h4>
+        <ul>
+          <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
+          <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
+          <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="nav" aria-label="My Content">
+        <h4>My Content</h4>
+        <ul>
+          <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
+          <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
+          <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="content">
+        <header class="row">
+          <h1 style="margin:0">YouTube Channel</h1>
+          <!-- Simple subscribe CTA (opens YouTube with confirm) -->
+          <a class="cta" href="https://www.youtube.com/@InstructorGrindset?sub_confirmation=1" target="_blank" rel="noopener">Subscribe on YouTube</a>
+        </header>
+
+        <!-- Latest Upload -->
+        <section class="stack" aria-labelledby="latest-title">
+          <h2 id="latest-title">Latest Upload</h2>
+          <div id="latest" class="vid" aria-live="polite">
+            <!-- JS will inject the latest video iframe here -->
+          </div>
+        </section>
+
+        <!-- Playlist grid -->
+        <section class="stack" style="margin-top:1.25rem" aria-labelledby="pl-title">
+          <h2 id="pl-title">Playlist</h2>
+          <div id="grid" class="grid three">
+            <!-- JS will inject 9 playlist video iframes here -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
+
+  <script>
+    /* ====== CONFIG — PASTE YOUR RESTRICTED API KEY ON THE NEXT LINE ====== */
+    const API_KEY = 'AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY';
+    /* Domain restriction: allow only https://instructorgrindset.com (and www if needed)
+       API restriction: YouTube Data API v3
+    */
+
+    /* ====== CHANNEL + PLAYLIST SETTINGS ====== */
+    const CHANNEL_QUERY = 'InstructorGrindset'; // used to resolve the channelId
+    const PLAYLIST_ID   = 'PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv'; // your 3×3 playlist
+
+    /* ====== HELPERS ====== */
+    const YT = 'https://www.googleapis.com/youtube/v3';
+
+    async function yt(endpoint, params){
+      const url = new URL(YT + endpoint);
+      Object.entries({...params, key: API_KEY}).forEach(([k,v]) => url.searchParams.set(k,v));
+      const res = await fetch(url.toString());
+      if(!res.ok) throw new Error('YouTube API error: ' + res.status);
+      return res.json();
+    }
+
+    async function resolveChannelId(query){
+      // Search for the channel by name/handle text
+      const data = await yt('/search', {
+        part: 'snippet',
+        type: 'channel',
+        q: query,
+        maxResults: 1
+      });
+      const item = data.items?.[0];
+      if(!item) throw new Error('Channel not found');
+      return item.id.channelId;
+    }
+
+    async function fetchLatestVideoId(channelId){
+      const data = await yt('/search', {
+        part: 'id',
+        channelId,
+        order: 'date',
+        maxResults: 1,
+        type: 'video'
+      });
+      const item = data.items?.[0];
+      if(!item) throw new Error('No uploads found');
+      return item.id.videoId;
+    }
+
+    async function fetchPlaylistVideoIds(playlistId, limit = 9){
+      const data = await yt('/playlistItems', {
+        part: 'contentDetails',
+        playlistId,
+        maxResults: limit
+      });
+      return (data.items || []).map(it => it.contentDetails.videoId).filter(Boolean);
+    }
+
+    function iframeHTML(videoId, title = 'YouTube video'){
+      const src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1`;
+      return `<iframe src="${src}" title="${title}" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>`;
+    }
+
+    /* ====== RENDER ====== */
+    async function render(){
+      try{
+        const channelId = await resolveChannelId(CHANNEL_QUERY);
+
+        // Latest upload
+        const latestId = await fetchLatestVideoId(channelId);
+        document.getElementById('latest').innerHTML = iframeHTML(latestId, 'Latest Upload');
+
+        // 3×3 grid from playlist
+        const ids = await fetchPlaylistVideoIds(PLAYLIST_ID, 9);
+        const grid = document.getElementById('grid');
+        grid.innerHTML = ids.map(id => `<div class="vid">${iframeHTML(id)}</div>`).join('');
+
+      }catch(err){
+        console.error(err);
+        const latest = document.getElementById('latest');
+        if(latest) latest.innerHTML = `<div style="padding:1rem;color:#fca5a5">Couldn’t load videos. Check API key restrictions and quota.</div>`;
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>
