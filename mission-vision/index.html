@@ -21,7 +21,7 @@
       margin:0; color:#e7e9ee;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height:1.55;
-      overflow:hidden; /* keep to 1 screen (no scroll) for this page */
+      overflow:hidden; /* no-scroll page */
     }
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none;
@@ -29,7 +29,7 @@
       z-index:-1;
     }
 
-    /* Rooftop headings (fallbacks if not present) */
+    /* Rooftop (optional, falls back if not present) */
     @font-face{
       font-family:"Rooftop";
       src:url("/fonts/Rooftop-Bold.woff2") format("woff2");
@@ -46,6 +46,11 @@
       --accent:#a6c8ff; --cta:#c4892a; --glow:250,204,21; --sidebar:300px;
       --panel-bg: rgba(255,255,255,.03);
       --footer-h: 52px;
+
+      /* === YOU CAN TUNE THESE === */
+      --box-w: 600px;         /* width of each glow box (mission/vision) */
+      --gap: 26px;            /* gap between boxes: old ~16px + 10px = 26px */
+      --content-w: calc(var(--box-w) * 2 + var(--gap)); /* total width of the two-box row */
     }
 
     *{ box-sizing:border-box }
@@ -59,7 +64,7 @@
       display:grid;
       grid-template-columns: var(--sidebar) 1fr;
       min-height:100vh;
-      padding-bottom: var(--footer-h); /* room so fixed footer doesn't overlap */
+      padding-bottom: var(--footer-h);
     }
     @media (max-width:960px){
       .page{ grid-template-columns:1fr }
@@ -74,7 +79,9 @@
               mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
     }
     .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
-    .brand .name{ font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px; font-size:1.7rem }
+    .brand .name{
+      font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px; font-size:1.7rem;
+    }
 
     .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px; font-family:"Rooftop", Inter, Arial, sans-serif }
     .nav ul{ list-style:none; padding:0; margin:0 0 1rem }
@@ -85,11 +92,21 @@
     /* Main column */
     .main{ padding:1.25rem; position:relative; }
 
-    /* Headings + copy */
+    /* Intro label (make it ~3 lines by constraining width; +~3px font) */
+    .intro{
+      text-align:center;
+      margin: 2vh auto 3vh;
+      font-weight:600;
+      color:var(--ink);
+      font-size: clamp(1.2rem, 1.3vw + .3rem, 1.55rem); /* slightly bigger than before */
+      max-width: 36ch; /* roughly 3 lines for typical sentence */
+    }
+
+    /* Page title */
     h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
       font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08;
-      margin:0 0 .6rem;
+      margin:0 0 .9rem;
       background:linear-gradient(92deg,#ffffff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
       text-align:center;
@@ -100,51 +117,58 @@
       line-height:1.7;
     }
 
-    /* Content container centered, wider than before */
+    /* Content container:
+       - Explicit width to the two boxes
+       - Center across the remaining viewport (viewport - sidebar)
+       - Ensure at least 14px space from the sidebar edge
+    */
     .content{
-      max-width: min(1100px, 100%);
-      margin: 0 auto;
-      /* we leave some breathing room at top for intro label */
-      padding-top: 4vh;
+      width: var(--content-w);
+      margin-left: max(14px, calc((100vw - var(--sidebar) - var(--content-w)) / 2));
+      margin-right: auto;
+      padding-top: 4vh; /* a little breathing room above intro */
+    }
+    @media (max-width: calc(2 * 600px + 26px + 40px)){ /* rough breakpoint for stacking */
+      .content{
+        width: auto;
+        margin: 0 14px;
+      }
     }
 
-    /* Intro label (centered, no box/glow) */
-    .intro{
-      text-align:center;
-      margin: 2vh 0 3vh;
-      font-weight:600;
-      color:var(--ink);
-    }
-
-    /* Panels with glow (wider, centered text) */
+    /* Glow panels (wider, centered text) */
     .panel{
       background:var(--panel-bg);
       border:1px solid var(--line);
       border-radius:.75rem;
       padding:1.15rem 1.25rem;
       box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
-      text-align:center; /* center title + text */
+      text-align:center;
     }
     .panel:hover{ box-shadow:0 0 22px rgba(var(--glow),.35), 0 0 64px rgba(var(--glow),.18) }
 
-    /* Side-by-side layout, wider columns */
-    .grid{ display:grid; gap:1rem }
-    .two{ grid-template-columns:1fr 1fr }
-    @media (max-width:980px){ .two{ grid-template-columns:1fr } }
+    /* Side-by-side layout with your custom gap */
+    .grid{ display:grid; gap: var(--gap) }
+    .two{
+      grid-template-columns: var(--box-w) var(--box-w);
+      justify-content:center; /* keep the pair centered within .content width */
+    }
+    @media (max-width:980px){
+      .two{ grid-template-columns: 1fr; }
+    }
 
-    /* Buttons (equal width based on longer label + pushed down by ~20% viewport) */
+    /* Buttons: 50% bigger (+ ≥15px spacing), pushed down ~20% viewport */
     .btn-row{
-      display:flex; gap:.75rem; justify-content:center; align-items:center;
-      margin-top: 20vh; /* move buttons down to give the page breathing room */
+      display:flex; gap: 15px; justify-content:center; align-items:center;
+      margin-top: 20vh;
       flex-wrap:wrap;
     }
     .cta{
-      display:inline-block; padding:.85rem 1.05rem; border-radius:0;
-      background:#c4892a; color:#e6e7eb; font-weight:800; border:0; text-align:center;
-      white-space:nowrap; /* avoid wrapping causing uneven heights */
+      display:inline-block; border-radius:0; background:#c4892a; color:#e6e7eb;
+      font-weight:800; border:0; text-align:center; white-space:nowrap;
+      padding: calc(.85rem * 1.5) calc(1.05rem * 1.5);  /* 50% bigger */
     }
 
-    /* Footer fixed to bottom (no scroll feel) */
+    /* Footer fixed bottom (no scroll) */
     .footer-wrap{
       position:fixed; left:var(--sidebar); right:0; bottom:0;
       height:var(--footer-h);
@@ -200,13 +224,12 @@
     <!-- MAIN -->
     <main class="main">
       <div class="content">
-        <!-- Centered intro label (edit this text in HTML) -->
-        <p class="intro">Do you ever teach an awe inspiring lesson only for the next day's lesson to leave you feeling like you underperformed? The instructor grindset helps snowsports instructors solve their most painful problem by themselves.</p>
+        <!-- Edit this intro text directly -->
+        <p class="intro">Building irresistible athlete-instructors with clear season plans and lesson logs that actually drive real progress.</p>
 
-        <!-- Page title -->
         <h1>Mission &amp; Vision</h1>
 
-        <!-- Side-by-side glowing boxes (wider + centered text) -->
+        <!-- Wider, centered glow boxes -->
         <section class="grid two" aria-label="Mission and Vision">
           <article class="panel" aria-labelledby="mission-title">
             <h2 id="mission-title">Mission</h2>
@@ -223,7 +246,7 @@
           </article>
         </section>
 
-        <!-- Buttons pushed down ~20% viewport; equalized width to the longer label -->
+        <!-- Buttons (equalize to longer label width via tiny script) -->
         <div class="btn-row" id="btnRow">
           <a class="cta" id="btnSeason" href="https://instructorgrindset.com/season-plan">Season Plan</a>
           <a class="cta" id="btnLesson" href="https://instructorgrindset.com/lesson-log">Lesson Log</a>
@@ -232,24 +255,21 @@
     </main>
   </div>
 
-  <!-- Fixed footer (no scroll) -->
+  <!-- Fixed footer -->
   <div class="footer-wrap">
     <p class="footer">© Instructor Grindset</p>
   </div>
 
-  <!-- Tiny script to match both button widths to the longer one -->
+  <!-- Match both buttons to the longer one's width -->
   <script>
     (function(){
       const a = document.getElementById('btnSeason');
       const b = document.getElementById('btnLesson');
       if(!a || !b) return;
-      // Temporarily measure natural widths
-      a.style.width = 'auto';
-      b.style.width = 'auto';
+      a.style.width = 'auto'; b.style.width = 'auto';
       const max = Math.max(a.offsetWidth, b.offsetWidth);
       a.style.width = b.style.width = max + 'px';
     })();
   </script>
 </body>
 </html>
-
