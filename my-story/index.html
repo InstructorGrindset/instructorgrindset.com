@@ -17,7 +17,7 @@
       --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --footer-h:52px;
 
       /* Timeline system */
-      --rail:3px;                /* width of vertical line + box borders + connectors */
+      --rail:6px;                /* width of vertical line + box borders + connectors */
       --rail-color:#c4892a;      /* bronze/orange */
       --box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
       --gap:22px;                /* vertical gap between rows */
@@ -76,6 +76,13 @@
     .timeline-wrap::before{
       content:""; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
       width:var(--rail); background:var(--rail-color); border-radius:999px;
+    }
+
+    /* Early + Future end caps */
+    .cap{
+      width:var(--rail); height:12px; background:var(--rail-color); border-radius:999px;
+      margin:0 auto;
+    }
 
     /* Early Life (centered above timeline, connected) */
     .early-center{ max-width:900px; margin:0 auto 10px; position:relative; }
@@ -84,25 +91,29 @@
       border-radius:.8rem; padding:1rem 1.1rem; box-shadow:0 0 22px rgba(196,137,42,.35);
     }
     .early h2{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.15rem; color:var(--cta) }
-
     .connector-down{ width:var(--rail); height:24px; background:var(--rail-color); margin:8px auto 0; border-radius:999px }
 
-    /* Rows: each year line is one row that can have left (career) and/or right (cert) */
+    /* Rows: each year is one row with L/R columns */
     .rows{ margin-top:10px }
     .row{
       display:grid; grid-template-columns: 1fr 1fr; column-gap: calc(var(--col-gap) + var(--rail));
       align-items:center; position:relative; margin: var(--gap) 0;
     }
-    .row .left::before{ left: calc(50% - var(--rail)/2 - var(--col-gap)) } /* from rail to left box */
-    .row .right::before{ left: calc(50% + var(--rail)/2) }                /* from rail to right box */
+
+    /* Horizontal connectors (from rail OUT to boxes) */
+    .row .left::before,
+    .row .right::before{
+      content:""; position:absolute; top:50%; transform:translateY(-50%);
+      height:var(--rail); width:var(--col-gap); background:var(--rail-color); border-radius:999px;
+    }
+    .row .left::before{ left: calc(50% - var(--rail)/2 - var(--col-gap)) } /* rail → left box */
+    .row .right::before{ left: calc(50% + var(--rail)/2) }                /* rail → right box */
 
     .left, .right{ position:relative }
-    .entry{
-      transition: transform .15s ease, box-shadow .2s ease; will-change: transform, box-shadow;
-    }
+    .entry{ transition: transform .15s ease, box-shadow .2s ease; will-change: transform, box-shadow }
     .entry:hover{ transform:scale(1.02); box-shadow: var(--box-shadow) }
 
-    /* White box w/ bronze border same width as rail + glow */
+    /* Box (white, bronze border = rail width, glow) */
     .box{
       background:#fff; color:#0f1217;
       border: var(--rail) solid var(--rail-color);
@@ -167,7 +178,7 @@
         </div>
 
         <section class="timeline-wrap" aria-label="Timeline">
-          <!-- Rows: left = Career; right = Certifications (by year where applicable) -->
+          <!-- Rows: left = Career; right = Certifications (matched by year where applicable) -->
           <div class="rows">
 
             <!-- 2015/16 (career only) -->
@@ -289,13 +300,13 @@
               <div class="left entry">
                 <div class="box">
                   <h3>2024/25</h3>
-                  <p>I went back to the familiar ground of Kirkwood to finish healing and enjoy the 24/25 season.</p>
+                  <p>I went back to familiar Kirkwood to finish healing and enjoy the 24/25 season.</p>
                 </div>
               </div>
               <div class="right entry">
                 <div class="box">
-                  <h3>Freestyle 2</h3>
-                  <p>In 2024, I attained Freestyle 2.</p>
+                  <h3></h3>
+                  <p>I attained the Freestyle 2 cert.</p>
                 </div>
               </div>
             </div>
@@ -310,8 +321,8 @@
               </div>
               <div class="right entry">
                 <div class="box">
-                  <h3>PSU Snowsports Leadership • Alpine 2 • Freestyle 3</h3>
-                  <p>In 2025, I enrolled in the Penn State Snowsports Leadership program and attained Alpine 2 and Freestyle 3.</p>
+                  <h3></h3>
+                  <p>enrolled in the Penn State Snowsports Leadership program and attained Alpine 2 and Freestyle 3.</p>
                 </div>
               </div>
             </div>
