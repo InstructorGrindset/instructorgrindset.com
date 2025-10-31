@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset • Contact</title>
+  <meta name="description" content="Contact me — I'm here to answer any snowsports industry question you might have." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --panel-bg:rgba(255,255,255,.03);
+      --footer-h:52px;
+
+      /* Layout knobs */
+      --content-shift:40px;
+      --maxw: min(800px, calc(100vw - var(--sidebar) - 40px));
+    }
+
+    *{ box-sizing:border-box } html,body{ height:100% }
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.55;
+      background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
+      z-index:-1;
+    }
+
+    /* Rooftop headings (fallbacks if files absent) */
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
+
+    a{ color:var(--accent); text-decoration:none } a:hover{ text-decoration:underline }
+
+    /* Shell */
+    .page{ display:grid; grid-template-columns:var(--sidebar) 1fr; min-height:100vh; padding-bottom:var(--footer-h) }
+    @media (max-width:960px){ .page{ grid-template-columns:1fr } }
+    .side{ padding:1.25rem; border-right:1px solid var(--line); background:rgba(255,255,255,.02) }
+
+    /* Brand (clickable home) */
+    .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem; color:inherit; text-decoration:none }
+    .brand:hover{ filter:brightness(1.04) }
+    .brand .logo-wrap{
+      width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
+      -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
+              mask-image:radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
+    }
+    .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover }
+    .brand .name{ font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px; font-size:1.7rem }
+
+    .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px; font-family:"Rooftop", Inter, Arial, sans-serif }
+    .nav ul{ list-style:none; padding:0; margin:0 0 1rem } .nav li{ margin:.35rem 0 }
+    .nav a{ display:block; padding:.45rem .5rem; border:1px solid transparent }
+    .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
+
+    .main{ padding:1.25rem }
+    .content{
+      width:var(--maxw);
+      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--maxw))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:2rem;
+    }
+    @media (max-width:960px){ .content{ width:min(94vw, 48rem); margin:0 auto; padding-top:1.75rem } }
+
+    /* Headings */
+    h1,h2{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
+    h1{
+      font-weight:800; font-size:clamp(2.2rem,5vw,3rem); line-height:1.08; margin:0 0 .35rem;
+      background:linear-gradient(92deg,#fff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 22px rgba(var(--glow),.12);
+    }
+    .subtitle{ color:var(--muted); margin:0 0 1.25rem; font-size:clamp(1.05rem, 1.2vw + .2rem, 1.25rem) }
+
+    /* Card with soft yellow glow (no hard box look) */
+    .card{
+      background:var(--panel-bg);
+      border:1px solid var(--line);
+      border-radius:.8rem;
+      padding:1.25rem;
+      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+    }
+
+    /* Form fields */
+    .stack{ display:grid; gap:1rem }
+    .field{ display:grid; gap:.4rem }
+    label{ font-weight:600 }
+    input, textarea{
+      width:100%; border:1px solid var(--line); background:rgba(0,0,0,.35); color:var(--ink);
+      border-radius:.5rem; padding:.8rem .9rem; font:inherit;
+    }
+    textarea{ resize:vertical; min-height:160px }
+
+    /* Button */
+    .btn{ display:inline-block; padding:.9rem 1.1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0; cursor:pointer }
+    .btn[disabled]{ opacity:.6; cursor:progress }
+
+    /* Status messages */
+    .status{ margin-top:.5rem; min-height:1.5rem; font-weight:600 }
+    .ok{ color:#b7f3c8 }  .err{ color:#fca5a5 }
+
+    /* Footer */
+    .footer-wrap{ position:fixed; left:var(--sidebar); right:0; bottom:0; height:var(--footer-h);
+      display:grid; place-items:center; background:rgba(0,0,0,.25); border-top:1px solid var(--line); backdrop-filter:blur(2px) }
+    .footer{ color:var(--muted); text-align:center; margin:0 }
+    @media (max-width:960px){ .footer-wrap{ position:static; height:auto; padding:.75rem 0 } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Sidebar -->
+    <aside class="side">
+      <a class="brand" href="https://instructorgrindset.com/" aria-label="Go to homepage">
+        <div class="logo-wrap"><img src="/images/ig-logo.png" alt="Instructor Grindset logo" /></div>
+        <div class="name">INSTRUCTOR<br/>GRINDSET</div>
+      </a>
+
+      <nav class="nav" aria-label="About">
+        <h4>About</h4>
+        <ul>
+          <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
+          <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
+        </ul>
+      </nav>
+
+      <nav class="nav" aria-label="How To">
+        <h4>How To</h4>
+        <ul>
+          <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
+          <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
+          <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="nav" aria-label="My Content">
+        <h4>My Content</h4>
+        <ul>
+          <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
+          <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
+          <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="content">
+        <header style="margin-bottom:1rem">
+          <h1>Contact me</h1>
+          <p class="subtitle">I'm here to answer any snowsports industry question you might have.</p>
+        </header>
+
+        <!-- Contact form (Formspree) -->
+        <form id="contactForm" class="card stack" action="https://formspree.io/f/xyzbdqgq" method="POST" novalidate>
+          <!-- Name -->
+          <div class="field">
+            <label for="name">Name *</label>
+            <input id="name" name="name" autocomplete="name" required />
+          </div>
+
+          <!-- Workplace (optional) -->
+          <div class="field">
+            <label for="workplace">Workplace (optional)</label>
+            <input id="workplace" name="workplace" autocomplete="organization" />
+          </div>
+
+          <!-- Email (Reply-To) -->
+          <div class="field">
+            <label for="email">Email *</label>
+            <input id="email" type="email" name="email" autocomplete="email" required />
+          </div>
+
+          <!-- Message -->
+          <div class="field">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <!-- Optional subject line for your inbox -->
+          <input type="hidden" name="_subject" value="Instructor Grindset — Website Inquiry" />
+
+          <!-- Submit -->
+          <button class="btn" type="submit" id="submitBtn">send message</button>
+
+          <!-- Inline status area -->
+          <div id="formStatus" class="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
+
+  <!-- Inline success behavior (no redirect) -->
+  <script>
+    (function(){
+      const form = document.getElementById('contactForm');
+      const statusEl = document.getElementById('formStatus');
+      const btn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        statusEl.textContent = '';
+        btn.disabled = true;
+
+        const data = new FormData(form);
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            form.reset();
+            statusEl.textContent = 'Thanks, message sent.';
+            statusEl.className = 'status ok';
+          } else {
+            const json = await res.json().catch(()=> ({}));
+            const msg = json.errors?.map(e => e.message).join(', ') || 'Something went wrong. Please try again.';
+            statusEl.textContent = msg;
+            statusEl.className = 'status err';
+          }
+        } catch (err) {
+          statusEl.textContent = 'Network error. Please check your connection and try again.';
+          statusEl.className = 'status err';
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
