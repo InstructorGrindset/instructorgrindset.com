@@ -79,6 +79,12 @@
     .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent}
     .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
 
+    /* Make the sidebar brand look like a heading, not a blue link */
+.side .brand,
+.side .brand:visited { color: var(--ink); text-decoration: none; }
+.side .brand:hover { text-decoration: none; filter: brightness(1.04); }
+.side .brand .name { color: inherit; } /* ensure the text inherits the ink color */
+
     .main{padding:1.25rem;position:relative}
 
     /* Content centering that accounts for the sidebar (desktop) */
