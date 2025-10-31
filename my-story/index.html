@@ -1,1 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset • My Story</title>
+  <meta name="description" content="My Story — early life, career, certifications, and future plans." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Shared sidebar styles (so brand link isn’t blue, spacing consistent) -->
+  <link rel="stylesheet" href="/assets/sidebar.css?v=1">
+
+  <style>
+    :root{
+      /* Site palette & layout */
+      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --footer-h:52px;
+
+      /* Timeline system */
+      --rail:6px;                /* width of the vertical timeline & connector bars & box borders */
+      --rail-color:#c4892a;      /* bronze/orange */
+      --box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      --gap:18px;                /* vertical gap between entries */
+      --col-gap:28px;            /* space from timeline to boxes */
+      --content-shift:40px;      /* nudge whole content toward sidebar */
+      --content-max: min(1200px, calc(100vw - var(--sidebar) - 40px));
+    }
+
+    /* Base */
+    *{ box-sizing:border-box } html,body{ height:100% }
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.55;
+      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
+      z-index:-1;
+    }
+
+    /* Rooftop headings (fallbacks if files absent) */
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
+
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
+
+    /* Layout shell */
+    .page{ display:grid; grid-template-columns:var(--sidebar) 1fr; min-height:100vh; padding-bottom:var(--footer-h) }
+    @media (max-width:960px){ .page{ grid-template-columns:1fr } }
+    .main{ padding:1.25rem }
+
+    /* Content centering that accounts for sidebar */
+    .content{
+      width:var(--content-max);
+      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--content-max))/2 - var(--content-shift)));
+      margin-right:auto;
+      padding-top:2rem;
+    }
+    @media (max-width:960px){
+      body{ background-attachment:scroll }
+      .content{ width:min(94vw, 1200px); margin:0 auto; padding-top:1.25rem }
+    }
+
+    /* Page title */
+    h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
+    h1{
+      font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08; margin:0 0 1rem; text-align:center;
+      background:linear-gradient(92deg,#fff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 22px rgba(var(--glow),.12);
+    }
+
+    /* Timeline grid: left column (career), center rail, right column (certs) */
+    .timeline{
+      display:grid;
+      grid-template-columns: 1fr var(--rail) 1fr;
+      column-gap: var(--col-gap);
+      position:relative;
+    }
+
+    /* Vertical rail */
+    .rail{
+      grid-column:2; position:relative;
+      width:var(--rail); margin:0 auto; background:var(--rail-color); border-radius:999px;
+    }
+
+    /* Let the rail span from the Early cap to the Future cap dynamically */
+    .rail::before, .rail::after{
+      content:""; position:absolute; left:50%; transform:translateX(-50%);
+      width:var(--rail); height:12px; background:var(--rail-color);
+      border-radius:999px;
+    }
+    .rail::before{ top:-12px }               /* top cap (connects Early panel) */
+    .rail::after{ bottom:-12px }             /* bottom cap (connects Future panel) */
+
+    /* Entries common */
+    .entry{
+      position:relative; margin: var(--gap) 0; transition: transform .15s ease, box-shadow .2s ease;
+      will-change: transform, box-shadow;
+    }
+    .entry:hover{ transform:scale(1.02); box-shadow: var(--box-shadow) }
+
+    /* White box with bronze border same width as rail, with glow */
+    .box{
+      background:#fff; color:#0f1217;
+      border: var(--rail) solid var(--rail-color);
+      border-radius:.8rem; padding:1rem 1.1rem;
+      box-shadow: var(--box-shadow);
+    }
+    .box h3{ margin:.1rem 0 .4rem; font-weight:800; font-size:1.1rem; font-family:"Rooftop", Inter, Arial, sans-serif; color:#0f1217 }
+    .box p{ margin:0; color:#111; line-height:1.6 }
+
+    /* Connectors from boxes to the rail */
+    .entry.left::after,
+    .entry.right::before{
+      content:""; position:absolute; top:50%; transform:translateY(-50%);
+      height:var(--rail); width:var(--col-gap);
+      background:linear-gradient(to right, var(--rail-color), var(--rail-color));
+    }
+    .entry.left{ grid-column:1 }
+    .entry.left::after{ right:- calc(var(--col-gap) + var(--rail)/2); border-radius:999px }
+    .entry.right{ grid-column:3 }
+    .entry.right::before{ left:- calc(var(--col-gap) + var(--rail)/2); border-radius:999px }
+
+    /* EARLY LIFE panel (light grey with side glow) */
+    .early-wrap{
+      display:grid; grid-template-columns: 1fr var(--rail) 1fr; align-items:start; margin-bottom:calc(var(--gap) + 8px);
+    }
+    .early{
+      grid-column:1; position:relative; margin-top:4px; /* a touch below top cap */
+      background:#e5e7eb; color:#111; border-left: var(--rail) solid var(--rail-color);
+      border-radius:.8rem; padding:1rem 1.1rem 1rem 1.1rem;
+      box-shadow:0 0 22px rgba(196,137,42,.35); /* orange side glow */
+    }
+    .early h2{
+      margin:.1rem 0 .5rem; font-weight:800; font-size:1.15rem;
+      color:var(--cta); font-family:"Rooftop", Inter, Arial, sans-serif;
+    }
+    /* Connector from Early panel to rail top */
+    .early::after{
+      content:""; position:absolute; right:- calc(var(--col-gap) + var(--rail)/2); top:18px;
+      width:var(--col-gap); height:var(--rail); background:var(--rail-color); border-radius:999px;
+    }
+
+    /* FUTURE box (bottom, centered under rail with direct connection) */
+    .future-wrap{
+      display:grid; grid-template-columns: 1fr var(--rail) 1fr; align-items:start; margin-top:calc(var(--gap) + 8px);
+    }
+    .future{
+      grid-column:3; position:relative; /* put it on the right for balance; still connected to rail bottom */
+    }
+    .future .box{ background:#fff }
+    .future .cta{
+      display:inline-block; margin-top:.75rem; padding:.85rem 1.05rem; border-radius:0;
+      background:var(--cta); color:#e6e7eb; font-weight:800; border:0; text-decoration:none;
+    }
+    /* Connector from rail bottom to Future box */
+    .future::before{
+      content:""; position:absolute; left:- calc(var(--col-gap) + var(--rail)/2); top:22px;
+      width:var(--col-gap); height:var(--rail); background:var(--rail-color); border-radius:999px;
+    }
+
+    /* Headroom around sections */
+    .intro{ text-align:center; color:var(--muted); max-width:70ch; margin:0 auto 1.25rem }
+
+    /* Responsive tweaks */
+    @media (max-width:1000px){
+      :root{ --col-gap:22px }
+    }
+    @media (max-width:860px){
+      /* Stack: rail stays in middle, entries full width alternating under it for readability */
+      .timeline{ grid-template-columns: 1fr }
+      .rail{ display:none }
+      .early-wrap, .future-wrap{ grid-template-columns: 1fr }
+      .early::after, .future::before{ display:none }
+      .entry.left, .entry.right{ grid-column:auto }
+      .entry.left::after, .entry.right::before{ display:none }
+      .box{ border-width: var(--rail); } /* keep bold border */
+    }
+
+    /* Footer */
+    .footer-wrap{
+      position:fixed; left:var(--sidebar); right:0; bottom:0; height:var(--footer-h);
+      display:grid; place-items:center; background:rgba(0,0,0,.25); border-top:1px solid var(--line); backdrop-filter:blur(2px)
+    }
+    @media (max-width:960px){ .footer-wrap{ position:static; height:auto; padding:.75rem 0 } }
+    .footer{ color:var(--muted); text-align:center; margin:0 }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Shared sidebar (loads from /partials/sidebar.html) -->
+    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <script>
+      (function(){
+        const target = document.getElementById('sidebar-placeholder');
+        fetch('/partials/sidebar.html?v=1')
+          .then(r => r.text())
+          .then(html => { const tmp = document.createElement('div'); tmp.innerHTML = html.trim(); target.replaceWith(tmp.firstElementChild); })
+          .catch(()=>{ target.removeAttribute('aria-busy'); target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'; });
+      })();
+    </script>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="content">
+        <h1>My Story</h1>
+        <p class="intro">Early life, career milestones, certifications, and where I’m headed next.</p>
+
+        <!-- EARLY LIFE (connected to top of rail) -->
+        <section class="early-wrap" aria-labelledby="early-title">
+          <div class="early">
+            <h2 id="early-title">Early Life</h2>
+            <p>I was born in France and moved to the Pacific northwest at age 7. I skied in the Crystal Mountain weekend program and it quickly became the only thing I looked forward to during the grey, depressing Seattle winters. I always hated school and loathed the idea of blurring the lines between work and play in the form of homework. At age 15 I was eager to put some money in my pocket and start living, I got a job bussing for a local restaurant and another one as an assistant ski instructor at SnowSports NorthWest.</p>
+          </div>
+          <div class="rail" aria-hidden="true"></div>
+        </section>
+
+        <!-- TIMELINE (career left, certifications right) -->
+        <section class="timeline" aria-label="Timeline">
+          <!-- Left: CAREER (dated; date becomes the title) -->
+          <article class="entry left">
+            <div class="box">
+              <h3>2015/16 winter</h3>
+              <p>At SSNW, I was treated like an adult from day 1. After 4 weekends of training, I was given my first lessons and quickly figured out what it meant to be responsible for the world’s most precious cargo, children!</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2016/17</h3>
+              <p>The next winter, I instructed again and coached in the Hyak weekend program. From then, I was hooked.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2017/18</h3>
+              <p>I decided to go study Ski and Snowboard Business at the Colorado Mountain College campus in Steamboat Springs, Colorado. I skied my face off for 2 years!</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2019</h3>
+              <p>I took a gap course at Mt. Hutt, New Zealand and started my freeride and park progression journey.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2019/20</h3>
+              <p>Upon arriving in Vail, I was told instructors could only stay in employee housing their first season working there.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2020/21</h3>
+              <p>I was granted employee housing my second year there when COVID changed the rules—but my mind was set. I was going to be a first-year instructor for as many seasons as I could.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2021/22</h3>
+              <p>I moved to Mt. Hood to work as a bartender in the legendary Ramshead bar and pursue my new passion for park skiing.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2022/23</h3>
+              <p>In November 2022, I moved to Kirkwood to work for Timber Creek Ski School—it was the place to be that year. I won “Certified Rookie of the Year” and “Biggest Send of the Year.” I ended my season where my love of reading re-ignited; I broke my entire lumbar and my right elbow.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2023/24</h3>
+              <p>I spent the winter coaching racing at Palisades and off-snow extreme sports progression at Woodward Tahoe until I broke 3 bones in my left foot exactly one year after my back injury. I spent my summer in and out of the gym, library, and surgery room.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2024/25</h3>
+              <p>I went back to the familiar ground of Kirkwood to finish healing and enjoy the 24/25 season.</p>
+            </div>
+          </article>
+
+          <article class="entry left">
+            <div class="box">
+              <h3>2025</h3>
+              <p>I spent the summer teaching at Perisher in Australia and skied my face off in the park. Upon coming home, I built the Instructor Grindset website to help instructors who want to get busy.</p>
+            </div>
+          </article>
+
+          <!-- Center rail (spans this section automatically) -->
+          <div class="rail" aria-hidden="true"></div>
+
+          <!-- Right: CERTIFICATIONS (no date title, plain headings) -->
+          <article class="entry right">
+            <div class="box">
+              <h3>NZSIA Alpine 1</h3>
+              <p>In 2019, I attained the NZSIA Alpine 1 cert and failed Alpine Level 2 by less than a point.</p>
+            </div>
+          </article>
+
+          <article class="entry right">
+            <div class="box">
+              <h3>PSIA Alpine 1 • Freestyle Track</h3>
+              <p>In 2021, I attained the PSIA Alpine 1 cert, and failed a Freestyle Level 1 cert despite weekly clinics for 2 years. I promised myself I’d pass all 3 levels of Freestyle with perfect scores and moved to Mt. Hood to train myself.</p>
+            </div>
+          </article>
+
+          <article class="entry right">
+            <div class="box">
+              <h3>CS1 • Alpine 2 (Tech) • Freestyle 1</h3>
+              <p>In 2023, I attained PSIA Children’s Specialist 1—it changed my life. I also passed Alpine 2 technical and Freestyle 1.</p>
+            </div>
+          </article>
+
+          <article class="entry right">
+            <div class="box">
+              <h3>Freestyle 2</h3>
+              <p>In 2024, I attained Freestyle 2.</p>
+            </div>
+          </article>
+
+          <article class="entry right">
+            <div class="box">
+              <h3>PSU Snowsports Leadership • Alpine 2 • Freestyle 3</h3>
+              <p>In 2025, I enrolled in the Penn State Snowsports Leadership program and attained Alpine 2 and Freestyle 3.</p>
+            </div>
+          </article>
+        </section>
+
+        <!-- FUTURE (connected to bottom of rail) -->
+        <section class="future-wrap" aria-labelledby="future-title">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="future">
+            <div class="box">
+              <h3 id="future-title">Future</h3>
+              <p>I hope to share my knowledge and experience with other North American snowsports instructors and show them that there is so much more to demand of yourself than what is included in the certifications. That a personalized, nonlinear approach to the certification process can give you a tailwind for the rest of your life.</p>
+              <a class="cta" href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer (fixed on desktop, inline on mobile) -->
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
+</body>
+</html>
 
