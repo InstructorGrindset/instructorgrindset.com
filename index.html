@@ -4,33 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • Become an Irresistible Snowsports Instructor</title>
-  <meta name="description" content="A season plan to become an irresistible athlete-instructor who teaches to your guests’ broadest definition of success." />
+  <meta name="description" content="Helping ski instructors become athletes & irresistible coaches." />
 
   <!-- Body font (readability) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    /* ====== Font faces ======
-       To use Rooftop for headings, upload your licensed files and point to them here. */
+    /* ===== Rooftop headings (drop your licensed files in /fonts/) ===== */
     @font-face{
-      font-family: "Rooftop";
-      src:
-        url("/fonts/Rooftop-Bold.woff2") format("woff2");
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
+      font-family:"Rooftop";
+      src:url("/fonts/Rooftop-Bold.woff2") format("woff2");
+      font-weight:700; font-style:normal; font-display:swap;
     }
     @font-face{
-      font-family: "Rooftop";
-      src:
-        url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");
-      font-weight: 800;
-      font-style: normal;
-      font-display: swap;
+      font-family:"Rooftop";
+      src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");
+      font-weight:800; font-style:normal; font-display:swap;
     }
 
     :root{
       --bg:#0f1217; --panel:#1b2029; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#facc15; --glow:250,204,21;
+      --accent:#a6c8ff; --cta:#c4892a; /* bronze orange */
+      --glow:250,204,21;
       --max:1200px; --pad:1rem; --radius:.75rem; --sidebar:300px;
     }
 
@@ -38,91 +33,101 @@
     html,body{ height:100% }
     body{
       margin:0; background:var(--bg); color:var(--ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height:1.55;
     }
     a{ color:var(--accent); text-decoration:none }
     a:hover{ text-decoration:underline }
 
-    /* Layout */
+    /* Grid layout */
     .page{ display:grid; grid-template-columns: var(--sidebar) 1fr; min-height:100vh }
     @media (max-width:960px){ .page{ grid-template-columns:1fr } }
 
-    /* Sidebar (left menu) */
-    .side{
-      padding:1.25rem; border-right:1px solid var(--line); background:rgba(255,255,255,.02);
+    /* Sidebar */
+    .side{ padding:1.25rem; border-right:1px solid var(--line); background:rgba(255,255,255,.02) }
+    .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem }
+    .brand .logo-wrap{
+      width:56px; height:56px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
+      /* Mask to crop out the red surround on your uploaded logo */
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 64%, transparent 66%);
+              mask-image: radial-gradient(circle at 50% 50%, #000 64%, transparent 66%);
+      background:#0000;
+      box-shadow: 0 0 18px rgba(var(--glow), .25), 0 0 48px rgba(var(--glow), .12);
     }
-    .brand{ display:flex; align-items:center; gap:.6rem; margin:.25rem 0 1rem }
-    .brand .logo{ width:42px; height:42px; border:2px solid var(--ink); border-radius:.5rem; display:grid; place-items:center; font-weight:800 }
-    .brand .name{ font-weight:800; letter-spacing:.8px; font-family:"Rooftop", Montserrat, Inter, Arial, sans-serif }
-    .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px }
+    .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
+    .brand .name{
+      font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.05; letter-spacing:.6px;
+      font-size:1.2rem;
+    }
+
+    .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px; font-family:"Rooftop", Inter, Arial, sans-serif }
     .nav ul{ list-style:none; padding:0; margin:0 0 1rem }
     .nav li{ margin:.35rem 0 }
-    .nav a{
-      display:block; padding:.45rem .5rem; border-radius:.5rem; border:1px solid transparent;
-    }
+    .nav a{ display:block; padding:.45rem .5rem; border:1px solid transparent }
     .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
 
-    /* Main content */
-    .main{ padding:1.25rem; }
-    .hero{
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:1rem; align-items:start;
-    }
+    /* Main */
+    .main{ padding:1.25rem }
+    .hero{ display:grid; grid-template-columns: 1.2fr .8fr; gap:1rem; align-items:start }
     @media (max-width:1100px){ .hero{ grid-template-columns:1fr } }
 
+    /* Headings */
+    h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
-      font-family:"Rooftop", Montserrat, Inter, Arial, sans-serif;
-      font-weight:800; font-size:clamp(2rem,4.8vw,3.2rem); line-height:1.08; margin:0 0 .6rem;
-      letter-spacing:.2px;
+      font-weight:800; font-size:clamp(2.6rem,6vw,3.8rem); line-height:1.05; margin:0 0 .6rem;
       background:linear-gradient(92deg,#ffffff,#eaeefc);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
-    h2{
-      font-family:"Rooftop", Montserrat, Inter, Arial, sans-serif;
-      font-weight:800; font-size:1.8rem; margin:0 0 .6rem; letter-spacing:.2px;
-    }
+    h2{ font-weight:800; font-size:1.9rem; margin:0 0 .6rem }
+    h3{ font-weight:800; font-size:1.2rem; margin:.25rem 0 .5rem }
+
     .lead{ color:var(--muted); max-width:70ch }
 
+    /* Panels & media */
     .panel{
       background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-      padding:1rem; box-shadow: 0 0 18px rgba(var(--glow),.22), 0 0 48px rgba(var(--glow),.12);
+      padding:1rem; box-shadow:0 0 18px rgba(var(--glow),.22), 0 0 48px rgba(var(--glow),.12);
     }
-    .panel:hover{ box-shadow: 0 0 22px rgba(var(--glow),.32), 0 0 64px rgba(var(--glow),.16) }
+    .panel:hover{ box-shadow:0 0 22px rgba(var(--glow),.32), 0 0 64px rgba(var(--glow),.16) }
 
     .vid{ position:relative; width:100%; padding-bottom:56.25%; border-radius:.75rem; overflow:hidden; border:1px solid var(--line); background:#000;
-      box-shadow: 0 0 18px rgba(var(--glow),.22),0 0 48px rgba(var(--glow),.12); }
+      box-shadow:0 0 18px rgba(var(--glow),.22),0 0 48px rgba(var(--glow),.12) }
     .vid iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
 
+    /* Rows */
+    .row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem }
+    @media (max-width:1100px){ .row{ grid-template-columns:1fr } }
+
+    /* Buttons (straight corners, bronze) */
     .cta{
-      display:inline-block; padding:.85rem 1.05rem; border-radius:.65rem;
-      background:var(--cta); color:#121212; font-weight:800; border:0;
+      display:inline-block; padding:.85rem 1.05rem; border-radius:0;
+      background:var(--cta); color:#1a1207; font-weight:800; border:0;
     }
     .cta:hover{ filter:brightness(1.03) }
 
     /* Contact form */
     .stack{ display:grid; gap:.85rem }
     .field input,.field textarea{
-      width:100%; padding:.7rem .85rem; border-radius:.6rem; border:1px solid var(--line);
+      width:100%; padding:.7rem .85rem; border-radius:.25rem; border:1px solid var(--line);
       background:rgba(255,255,255,.04); color:var(--ink); font:inherit;
     }
     .field label{ display:block; font-weight:600; margin:0 0 .35rem }
     .field input:focus,.field textarea:focus{ outline:3px solid #6ea8ff; border-color:#6ea8ff }
 
-    /* Content rows */
-    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:1rem }
-    @media (max-width:1100px){ .row{ grid-template-columns:1fr } }
-
     /* Footer */
     .footer{ color:var(--muted); text-align:center; padding:1.25rem 0; border-top:1px solid var(--line); margin-top:2rem }
   </style>
 </head>
-<body data-youtube-api-key="YOUR_RESTRICTED_API_KEY_HERE" data-uploads-playlist="UUIa3wQYBROQwsR0bMJInDfw">
+<body data-youtube-api-key="AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY" data-uploads-playlist="UUIa3wQYBROQwsR0bMJInDfw">
   <div class="page">
-    <!-- LEFT SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="side">
       <div class="brand">
-        <div class="logo">IG</div>
+        <div class="logo-wrap">
+          <!-- Replace src with your logo file path; mask removes the red surround -->
+          <img src="images/ig-logo.png" alt="Instructor Grindset logo" />
+        </div>
         <div class="name">INSTRUCTOR<br/>GRINDSET</div>
       </div>
 
@@ -148,7 +153,7 @@
       <nav class="nav" aria-label="My Content">
         <h4>My Content</h4>
         <ul>
-          <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
+          <li><a href="https://www.instagram.com/ohgoody/reels/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://instructorgrindset.com/youtube">YouTube Channels</a></li>
           <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
         </ul>
@@ -157,19 +162,20 @@
 
     <!-- MAIN -->
     <main class="main">
-      <!-- HERO: intro video + bio block -->
+      <!-- HERO -->
       <section class="hero">
         <div class="panel">
+          <h2 style="margin:.2rem 0 .6rem">Lesson Logging And Analytics Tutorial</h2>
           <div class="vid">
-            <!-- Fallback: uploads playlist. JS below will swap to the single latest video -->
+            <!-- Fallback: uploads playlist; JS below swaps to single latest video when API key is present -->
             <iframe id="intro-video" src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
               title="Latest Upload" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
         <div class="panel">
-          <h1>Who is Instructor Grindset?</h1>
+          <h1 style="margin-bottom:.35rem">Instructor Grindset</h1>
           <p class="lead">
-            Helping ski instructors become athletes &amp; irresistible coaches. Over 16 seasons and 10 resorts, I’ve chased what makes a ski school truly enchanting for kids—and how pros can teach to the guest’s broadest definition of fun and success.
+            For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
           </p>
           <p style="margin:.9rem 0 0">
             <a class="cta" href="https://instructorgrindset.com/full-story">Full Story →</a>
@@ -177,17 +183,29 @@
         </div>
       </section>
 
-      <!-- VALUE ROW -->
-      <section class="row" aria-label="value">
+      <!-- MISSION & VISION (replacing Season Plan / Book Coaching) -->
+      <section class="row" aria-label="mission-vision">
         <div class="panel">
-          <h2>Season Plan</h2>
-          <p class="lead">A practical framework to move like an athlete, coach like a pro, and level up guest outcomes—without burning out mid-season.</p>
-          <p style="margin:.6rem 0 0"><a class="cta" href="https://instructorgrindset.com/season-plan">Get the Plan</a></p>
+          <h2>Mission</h2>
+          <p class="lead">Helping ski instructors become athletes &amp; irresistible coaches.</p>
         </div>
         <div class="panel">
-          <h2>Book Coaching</h2>
-          <p class="lead">Private sessions, staff training, and curriculum design. Build irresistible lessons that kids love—and parents notice.</p>
-          <p style="margin:.6rem 0 0"><a class="cta" href="https://instructorgrindset.com/private-coaching">Coaching Details</a></p>
+          <h2>Vision</h2>
+          <p class="lead">A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.</p>
+        </div>
+      </section>
+
+      <!-- INSTAGRAM: headline + button + 3 embeds (no autoplay) -->
+      <section class="row" aria-labelledby="ig-title">
+        <div class="panel">
+          <h2 id="ig-title">Follow on Instagram</h2>
+          <p style="margin:.6rem 0 0"><a class="cta" href="https://www.instagram.com/ohgoody/reels/" target="_blank" rel="noopener">Open Instagram</a></p>
+        </div>
+        <div class="panel">
+          <!-- Instagram embeds (official) -->
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DOh4MJlE_8Z/" data-instgrm-version="14" style="background:#000; border:0; margin:0 auto; max-width:540px; width:100%;"></blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DI8ByNUuJeH/" data-instgrm-version="14" style="background:#000; border:0; margin:1rem auto 0; max-width:540px; width:100%;"></blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CpQt-XVsGFi/" data-instgrm-version="14" style="background:#000; border:0; margin:1rem auto 0; max-width:540px; width:100%;"></blockquote>
         </div>
       </section>
 
@@ -214,9 +232,11 @@
           </form>
         </div>
         <div class="panel">
-          <h2>Follow on Instagram</h2>
-          <p class="lead">On-snow drills, kids’ progressions, and daily instructor notes.</p>
-          <p style="margin:.6rem 0 0"><a class="cta" href="https://instructorgrindset.com/instagram">Open Instagram</a></p>
+          <h2>Latest Uploads</h2>
+          <div class="vid">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
+              title="Uploads Playlist" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
         </div>
       </section>
 
@@ -226,26 +246,26 @@
     </main>
   </div>
 
-  <!-- Latest upload fetch: swaps the hero iframe to the single most recent video -->
+  <!-- Instagram embed script (required for the blockquotes to render) -->
+  <script async src="https://www.instagram.com/embed.js"></script>
+
+  <!-- Latest upload fetch: swaps hero iframe to single most recent video -->
   <script>
   (function(){
-    const apiKey = document.body.dataset.youtubeApiKey;
-    const uploads = document.body.dataset.uploadsPlaylist; // your auto-generated uploads playlist ID
-    const iframe = document.getElementById('intro-video');
-    if(!apiKey || !uploads || !iframe) return; // graceful fallback to playlist embed
+    const apiKey   = document.body.dataset.youtubeApiKey;
+    const uploads  = document.body.dataset.uploadsPlaylist;
+    const iframe   = document.getElementById('intro-video');
+    if(!apiKey || !uploads || !iframe) return; // leave playlist fallback
 
-    // Grab just one item (most recent) from uploads playlist
     const url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=1&playlistId='
                 + encodeURIComponent(uploads) + '&key=' + encodeURIComponent(apiKey);
     fetch(url).then(r=>r.ok?r.json():Promise.reject(r.status))
-      .then(data=>{
-        const id = data?.items?.[0]?.contentDetails?.videoId;
-        if(!id) return;
-        iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1&playsinline=1';
+      .then(d=>{
+        const id = d?.items?.[0]?.contentDetails?.videoId;
+        if(id) iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1&playsinline=1';
       })
-      .catch(()=>{/* leave playlist fallback */});
+      .catch(()=>{ /* keep playlist */ });
   })();
   </script>
 </body>
 </html>
-
