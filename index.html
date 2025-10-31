@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* Rooftop headings (optional; falls back if not present) */
+    /* Rooftop headings (falls back if files not provided) */
     @font-face{
       font-family:"Rooftop";
       src:url("/fonts/Rooftop-Bold.woff2") format("woff2");
@@ -24,7 +24,7 @@
 
     :root{
       --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#c4892a; /* bronze-orange */
+      --accent:#a6c8ff; --cta:#c4892a; /* bronze */
       --glow:250,204,21;
       --sidebar:300px;
     }
@@ -39,7 +39,7 @@
     a{ color:var(--accent); text-decoration:none }
     a:hover{ text-decoration:underline }
 
-    /* Grid layout: sidebar + main */
+    /* Layout */
     .page{ display:grid; grid-template-columns: var(--sidebar) 1fr; min-height:100vh }
     @media (max-width:960px){ .page{ grid-template-columns:1fr } }
 
@@ -48,14 +48,12 @@
     .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem }
     .brand .logo-wrap{
       width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
-      /* Mask to crop the image to a clean circle (hides any outer rim) */
+      /* circular mask to hide any outer rim */
       -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
               mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
-      background:#0000;
     }
-    /* ✅ Replace the src below with your real file path (e.g., /images/ig-logo.png) */
+    /* 👉 Replace src with your actual logo path (e.g., /images/ig-logo.png) */
     .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
-
     .brand .name{
       font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px;
       font-size:1.7rem;
@@ -70,26 +68,26 @@
     .nav a{ display:block; padding:.45rem .5rem; border:1px solid transparent }
     .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
 
-    /* Main content */
+    /* Main */
     .main{ padding:1.25rem }
 
     /* Headings */
     h1,h2{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
-      font-weight:800; font-size:clamp(2.4rem,5.6vw,3.6rem); line-height:1.05; margin:.75rem 0 .6rem;
+      font-weight:800; font-size:clamp(2.4rem,5.6vw,3.6rem); line-height:1.05; margin:.9rem 0 .6rem;
       background:linear-gradient(92deg,#ffffff,#eaeefc);
       -webkit-background-clip:text;background-clip:text;color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
     .lead{ color:var(--muted); max-width:70ch }
 
-    /* Video: exact YouTube thumbnail ratio (16:9) and size up to 1280×720.
-       It will use EXACTLY 1280×720 when there is space. On smaller screens it scales down proportionally. */
-    .hero{ max-width:min(1280px, calc(100vw - var(--sidebar) - 2rem)); }
+    /* VIDEO — Brunson-style hero sizing (wide 16:9 within main column) */
+    .hero{ /* centers stack; leaves right-side background visible on huge screens */ }
     .vid{
       aspect-ratio:16 / 9;
-      width:min(1280px, calc(100vw - var(--sidebar) - 2rem));
-      max-width:1280px;
+      /* wide like the screenshot: nearly the full main column, but not edge-to-edge */
+      width: min(1120px, calc(100vw - var(--sidebar) - 3rem));
+      max-width: 1120px;
       border-radius:.75rem; overflow:hidden; background:#000; border:0;
       box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
       margin:0;
@@ -97,7 +95,6 @@
     .vid iframe{ width:100%; height:100%; border:0; display:block }
 
     @media (max-width:960px){
-      .hero{ max-width:100% }
       .vid{ width:100% }
     }
 
@@ -126,7 +123,7 @@
       <nav class="nav" aria-label="About">
         <h4>About</h4>
         <ul>
-          <li><a href="https://instructorgrindset.com/mystory">My Story</a></li>
+          <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
           <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
         </ul>
       </nav>
@@ -143,8 +140,8 @@
       <nav class="nav" aria-label="My Content">
         <h4>My Content</h4>
         <ul>
-          <li><a href="https://www.instagram.com/ohgoody/reels/" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://instructorgrindset.com/youtube">YouTube Channel</a></li>
+          <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
+          <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
           <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
         </ul>
       </nav>
@@ -153,7 +150,7 @@
     <!-- MAIN -->
     <main class="main">
       <section class="hero" aria-label="Intro">
-        <!-- Hero video (no title text) -->
+        <!-- Hero video (no title) -->
         <div class="vid">
           <iframe
             src="https://www.youtube.com/embed/KOxRtOJsnkg?rel=0&modestbranding=1&playsinline=1"
@@ -163,12 +160,12 @@
             allowfullscreen></iframe>
         </div>
 
-        <!-- My Story (under video) -->
+        <!-- My Story -->
         <h1>My Story</h1>
         <p class="lead">
           For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
         </p>
-        <p><a class="cta" href="https://instructorgrindset.com/mystory">Full Story →</a></p>
+        <p><a class="cta" href="https://instructorgrindset.com/my-story">Full Story →</a></p>
       </section>
 
       <footer class="footer">
