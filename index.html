@@ -5,146 +5,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • My Story</title>
   <meta name="description" content="Helping ski instructors become athletes & irresistible coaches." />
-
-  <!-- Body font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
   <style>
-    /* === Site background (no later overrides) === */
-    body{
-      background-color:#0f1217;
-      background-image:url("/images/web-background.png"); /* ensure this exact path exists */
-      background-position:center;
-      background-size:cover;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-
-      margin:0;
-      color:#e7e9ee;
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height:1.55;
-    }
-    /* Optional overlay to keep text readable on bright photos */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
-      z-index:-1;
-    }
-
-    /* Rooftop headings (falls back if files not provided) */
-    @font-face{
-      font-family:"Rooftop";
-      src:url("/fonts/Rooftop-Bold.woff2") format("woff2");
-      font-weight:700; font-style:normal; font-display:swap;
-    }
-    @font-face{
-      font-family:"Rooftop";
-      src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");
-      font-weight:800; font-style:normal; font-display:swap;
-    }
-
     :root{
-      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#c4892a; --glow:250,204,21;
-      --sidebar:300px;
+      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --panel-bg:rgba(255,255,255,.03);
+      --footer-h:52px;
+
+      /* Desktop layout knobs */
+      --content-shift:40px;          /* nudge whole content left toward sidebar */
+      --hero-w: min(900px, calc((100vw - var(--sidebar)) * 0.6)); /* video width (keeps right-side background visible) */
+      --hero-offset-top:12px;        /* drop the video a bit */
+      --story-offset-top:16px;       /* space between video and text */
+      --button-offset-top:10px;      /* space between text and button */
     }
 
-    *{ box-sizing:border-box }
-    html,body{ height:100% }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.55;
+      background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
+      overflow:hidden; /* desktop: one-screen feel */
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
+    }
 
-    a{ color:var(--accent); text-decoration:none }
-    a:hover{ text-decoration:underline }
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
+
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
 
     /* Layout */
-    .page{ display:grid; grid-template-columns: var(--sidebar) 1fr; min-height:100vh }
-    @media (max-width:960px){ .page{ grid-template-columns:1fr } }
+    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
+    @media (max-width:960px){.page{grid-template-columns:1fr}}
+    .side{padding:1.25rem;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
+    .brand{display:flex;align-items:center;gap:.75rem;margin:.25rem 0 1.25rem}
+    .brand .logo-wrap{width:64px;height:64px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
+      -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%)}
+    .brand .logo-wrap img{width:120%;height:120%;object-fit:cover}
+    .brand .name{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;line-height:1.02;letter-spacing:.7px;font-size:1.7rem}
+    .nav h4{margin:1rem 0 .5rem;color:var(--muted);font-weight:800;letter-spacing:.6px;font-family:"Rooftop",Inter,Arial,sans-serif}
+    .nav ul{list-style:none;margin:0 0 1rem;padding:0} .nav li{margin:.35rem 0}
+    .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent} .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
+    .main{padding:1.25rem;position:relative}
 
-    /* Sidebar */
-    .side{ padding:1.25rem; border-right:1px solid var(--line); background:rgba(255,255,255,.02) }
-    .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem }
-    .brand .logo-wrap{
-      width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
-      /* circular mask to hide any outer rim */
-      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
-              mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
+    /* Content centering that accounts for the sidebar (desktop) */
+    .content{
+      width: clamp(520px, var(--hero-w), 1120px);
+      margin-left:max(14px, calc((100vw - var(--sidebar) - clamp(520px, var(--hero-w), 1120px))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:4vh;
     }
-    /* Replace src with your actual logo path (e.g., /images/ig-logo.png) */
-    .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
-    .brand .name{
-      font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px;
-      font-size:1.7rem;
-    }
 
-    .nav h4{
-      margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px;
-      font-family:"Rooftop", Inter, Arial, sans-serif
-    }
-    .nav ul{ list-style:none; padding:0; margin:0 0 1rem }
-    .nav li{ margin:.35rem 0 }
-    .nav a{ display:block; padding:.45rem .5rem; border:1px solid transparent }
-    .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
-
-    /* Main */
-    .main{ padding:1.25rem }
-
-    /* Headings */
-    h1,h2{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
+    /* Typography */
+    h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
     h1{
-      font-weight:800; font-size:clamp(2.4rem,5.6vw,3.6rem); line-height:1.05; margin:.9rem 0 .6rem;
-      background:linear-gradient(92deg,#ffffff,#eaeefc);
-      -webkit-background-clip:text;background-clip:text;color:transparent;
+      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:var(--story-offset-top) 0 .6rem;text-align:left;
+      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
+    .lead{color:var(--muted);font-size:clamp(1.05rem,1.1vw + .2rem,1.25rem);line-height:1.7;max-width:70ch}
 
-    /* Move the whole hero (video + story) left 14px and down 14px */
-    .hero{
-      margin-left:-14px; /* shift left */
-      margin-top:14px;   /* shift down */
-    }
-
-    /* Bigger, airier story text + slight nudge down */
-    .lead{
-      color: var(--muted);
-      max-width: 70ch;
-      font-size: clamp(1.05rem, 1.1vw + 0.2rem, 1.25rem);
-      line-height: 1.7;
-      margin-top: 8px;
-    }
-
-    /* Video (glow only; responsive 16:9, wide but not edge-to-edge) */
+    /* Hero video (glow only around video) */
     .vid{
-      aspect-ratio:16 / 9;
-      width: min(950px, calc(100vw - var(--sidebar) - 3rem));
-      max-width:1120px;
+      margin-top:var(--hero-offset-top);
+      width:100%; aspect-ratio:16/9;
       border-radius:.75rem; overflow:hidden; background:#000; border:0;
       box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
-      margin:0 0 8px 0; /* small gap below video */
     }
-    .vid iframe{ width:100%; height:100%; border:0; display:block }
-    @media (max-width:960px){ .vid{ width:100% } }
+    .vid iframe{width:100%;height:100%;border:0;display:block}
 
-    /* Button */
-    .cta{
-      display:inline-block; margin-top:.9rem; padding:.85rem 1.05rem; border-radius:0;
-      background:#c4892a; color:#e6e7eb; font-weight:800; border:0;
+    /* CTA Button */
+    .cta{display:inline-block;margin-top:var(--button-offset-top);padding:.85rem 1.05rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0}
+
+    /* Footer */
+    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
+      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
+    .footer{color:var(--muted);text-align:center;margin:0}
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width:1280px){
+      :root{ --content-shift:28px; }
     }
-    .cta:hover{ filter:brightness(1.03) }
-
-    .footer{ color:var(--muted); text-align:center; padding:1.25rem 0; border-top:1px solid var(--line); margin-top:2rem }
+    @media (max-width:960px){
+      .page{grid-template-columns:1fr}
+      .footer-wrap{position:static;height:auto;padding:.75rem 0}
+      body{overflow:auto}
+      .content{width:min(92vw, 48rem); margin: 0 auto; padding-top:2rem;}
+      :root{
+        --hero-offset-top:8px;
+        --story-offset-top:14px;
+        --button-offset-top:10px;
+      }
+      h1{text-align:center}
+      .lead{max-width:60ch;margin:0 auto;text-align:center}
+      .cta{display:block;margin:14px auto 0;max-width:420px;text-align:center}
+    }
+    @media (max-width:640px){
+      .content{width:min(94vw, 40rem)}
+      .cta{width:100%;max-width:480px;padding:1rem 1.25rem}
+    }
+    @media (max-width:380px){
+      .content{width:92vw}
+      .brand .name{font-size:1.2rem}
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- SIDEBAR -->
+    <!-- Sidebar -->
     <aside class="side">
       <div class="brand">
-        <div class="logo-wrap">
-          <!-- Put your logo file in your repo and reference it here -->
-          <img src="/images/ig-logo.png" alt="Instructor Grindset logo" />
-        </div>
+        <div class="logo-wrap"><img src="/images/ig-logo.png" alt="Instructor Grindset logo" /></div>
         <div class="name">INSTRUCTOR<br/>GRINDSET</div>
       </div>
 
@@ -175,35 +148,31 @@
       </nav>
     </aside>
 
-    <!-- MAIN -->
+    <!-- Main -->
     <main class="main">
-      <section class="hero" aria-label="Intro">
+      <div class="content">
         <!-- Hero video (no title) -->
         <div class="vid">
           <iframe
-            src="https://www.youtube.com/embed/4IX2CwKIGo4?rel=0&modestbranding=1&playsinline=1"
-            title="Featured Video"
+            src="https://www.youtube.com/embed/KOxRtOJsnkg?rel=0&modestbranding=1&playsinline=1"
+            title="Lesson Log Video"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
 
         <!-- My Story -->
-        <h1>What Is The Instructor Grindset?</h1>
+        <h1>My Story</h1>
         <p class="lead">
-         The Instructor Grindset is a year-round approach to maximising your potential as a snowsports instructor. It involves the intent of training for the full mental and physical demands of the job and sport. By adopting the instructor grindset, you conduct at a higher standard than any certification can encapsulate.
-        <p><a class="cta" href="https://instructorgrindset.com/my-story">Full Story →</a></p>
-      </section>
-
-      <footer class="footer">
-        © Instructor Grindset
-      </footer>
+          For the last 16 ski seasons, I have live and worked and 10 different ski resorts in hopes of understanding how ski schools and instructors are designed to enchant children and turn them into happiness zealots through skiing.
+        </p>
+        <a class="cta" href="https://instructorgrindset.com/my-story">Full Story →</a>
+      </div>
     </main>
   </div>
+
+  <!-- Footer: fixed on desktop, inline on mobile -->
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
 </body>
 </html>
-
-
-
-
 
