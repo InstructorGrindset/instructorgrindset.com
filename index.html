@@ -3,249 +3,255 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Instructor Grindset • Become an Irresistible Snowsports Instructor</title>
-  <meta name="description" content="A season plan to become an irresistible athlete-instructor who teaches to your guests’ broadest definition of success." />
+  <title>Instructor Grindset</title>
+  <meta name="description" content="Become an irresistible snowsports instructor with a season plan." />
 
-  <!-- Body font (readability) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Body font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    /* ====== Font faces ======
-       To use Rooftop for headings, upload your licensed files and point to them here. */
+    /* Rooftop headings: replace src URLs with your licensed files */
     @font-face{
-      font-family: "Rooftop";
-      src:
-        url("/fonts/Rooftop-Bold.woff2") format("woff2");
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
+      font-family:"Rooftop";
+      src:url("/fonts/Rooftop-Bold.woff2") format("woff2");
+      font-weight:700; font-style:normal; font-display:swap;
     }
     @font-face{
-      font-family: "Rooftop";
-      src:
-        url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");
-      font-weight: 800;
-      font-style: normal;
-      font-display: swap;
+      font-family:"Rooftop";
+      src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");
+      font-weight:800; font-style:normal; font-display:swap;
     }
 
     :root{
-      --bg:#0f1217; --panel:#1b2029; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#facc15; --glow:250,204,21;
-      --max:1200px; --pad:1rem; --radius:.75rem; --sidebar:300px;
+      --max:88rem; --pad:1rem; --radius:.75rem;
+      --bg:#262a32; --ink:#e6e7eb; --muted:#cbd5e1; --line:#3a3f48; --accent:#a6c8ff;
+      --glow:250,204,21; /* soft yellow */
     }
 
-    *{ box-sizing:border-box }
-    html,body{ height:100% }
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0; background:var(--bg); color:var(--ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height:1.55;
     }
-    a{ color:var(--accent); text-decoration:none }
-    a:hover{ text-decoration:underline }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
 
     /* Layout */
-    .page{ display:grid; grid-template-columns: var(--sidebar) 1fr; min-height:100vh }
-    @media (max-width:960px){ .page{ grid-template-columns:1fr } }
-
-    /* Sidebar (left menu) */
-    .side{
-      padding:1.25rem; border-right:1px solid var(--line); background:rgba(255,255,255,.02);
-    }
-    .brand{ display:flex; align-items:center; gap:.6rem; margin:.25rem 0 1rem }
-    .brand .logo{ width:42px; height:42px; border:2px solid var(--ink); border-radius:.5rem; display:grid; place-items:center; font-weight:800 }
-    .brand .name{ font-weight:800; letter-spacing:.8px; font-family:"Rooftop", Montserrat, Inter, Arial, sans-serif }
-    .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px }
-    .nav ul{ list-style:none; padding:0; margin:0 0 1rem }
-    .nav li{ margin:.35rem 0 }
-    .nav a{
-      display:block; padding:.45rem .5rem; border-radius:.5rem; border:1px solid transparent;
-    }
-    .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
-
-    /* Main content */
-    .main{ padding:1.25rem; }
-    .hero{
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:1rem; align-items:start;
-    }
-    @media (max-width:1100px){ .hero{ grid-template-columns:1fr } }
-
+    .wrap{max-width:var(--max);margin:0 auto;padding:1.5rem var(--pad);text-align:center}
+    .hero{padding:1.5rem var(--pad) 1rem}
     h1{
-      font-family:"Rooftop", Montserrat, Inter, Arial, sans-serif;
-      font-weight:800; font-size:clamp(2rem,4.8vw,3.2rem); line-height:1.08; margin:0 0 .6rem;
-      letter-spacing:.2px;
+      font-family:"Rooftop", Inter, Arial, sans-serif;
+      font-weight:800;
+      font-size:clamp(2.5rem,4.8vw + .25rem,3.5rem);
+      line-height:1.08; margin:.1rem 0 .35rem; letter-spacing:.2px;
       background:linear-gradient(92deg,#ffffff,#eaeefc);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
-    h2{
-      font-family:"Rooftop", Montserrat, Inter, Arial, sans-serif;
-      font-weight:800; font-size:1.8rem; margin:0 0 .6rem; letter-spacing:.2px;
+    .section{padding:1.5rem var(--pad)}
+    .section h2{
+      font-family:"Rooftop", Inter, Arial, sans-serif;
+      font-weight:800; font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:.2px;
     }
-    .lead{ color:var(--muted); max-width:70ch }
 
-    .panel{
-      background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-      padding:1rem; box-shadow: 0 0 18px rgba(var(--glow),.22), 0 0 48px rgba(var(--glow),.12);
+    /* Cards, grid, videos */
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:1.25rem;
+      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
     }
-    .panel:hover{ box-shadow: 0 0 22px rgba(var(--glow),.32), 0 0 64px rgba(var(--glow),.16) }
+    .card:hover{box-shadow:0 0 22px rgba(var(--glow),.35),0 0 64px rgba(var(--glow),.18)}
+    .grid{display:grid;gap:1rem}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:980px){.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:640px){.two,.three{grid-template-columns:1fr}}
 
-    .vid{ position:relative; width:100%; padding-bottom:56.25%; border-radius:.75rem; overflow:hidden; border:1px solid var(--line); background:#000;
-      box-shadow: 0 0 18px rgba(var(--glow),.22),0 0 48px rgba(var(--glow),.12); }
-    .vid iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
-
-    .cta{
-      display:inline-block; padding:.85rem 1.05rem; border-radius:.65rem;
-      background:var(--cta); color:#121212; font-weight:800; border:0;
+    .videos{max-width:78rem;margin:0 auto}
+    .vid{
+      position:relative;width:100%;padding-bottom:56.25%;
+      border-radius:.75rem;overflow:hidden;border:1px solid var(--line);background:#000;
+      box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12);
     }
-    .cta:hover{ filter:brightness(1.03) }
+    .vid:hover{box-shadow:0 0 22px rgba(var(--glow),.35),0 0 64px rgba(var(--glow),.18)}
+    .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
-    /* Contact form */
-    .stack{ display:grid; gap:.85rem }
+    /* Buttons & form */
+    .btn{display:inline-block;padding:.7rem 1.1rem;border-radius:.6rem;background:#0f172a;color:#fff;border:1px solid #0b1220;font-weight:600}
+    .btn:hover{filter:brightness(1.08)}
+    .stack{display:grid;gap:.9rem;justify-items:center}
+    .field{width:min(36rem,100%);text-align:left}
+    .field label{display:block;font-weight:600;margin:0 0 .35rem}
     .field input,.field textarea{
-      width:100%; padding:.7rem .85rem; border-radius:.6rem; border:1px solid var(--line);
-      background:rgba(255,255,255,.04); color:var(--ink); font:inherit;
+      width:100%;padding:.7rem .85rem;border:1px solid var(--line);border-radius:.6rem;
+      background:rgba(255,255,255,.04);color:var(--ink)
     }
-    .field label{ display:block; font-weight:600; margin:0 0 .35rem }
-    .field input:focus,.field textarea:focus{ outline:3px solid #6ea8ff; border-color:#6ea8ff }
-
-    /* Content rows */
-    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:1rem }
-    @media (max-width:1100px){ .row{ grid-template-columns:1fr } }
-
-    /* Footer */
-    .footer{ color:var(--muted); text-align:center; padding:1.25rem 0; border-top:1px solid var(--line); margin-top:2rem }
+    .field input:focus,.field textarea:focus{outline:3px solid #6ea8ff;border-color:#6ea8ff}
+    .muted{color:var(--muted)}
   </style>
 </head>
-<body data-youtube-api-key="YOUR_RESTRICTED_API_KEY_HERE" data-uploads-playlist="UUIa3wQYBROQwsR0bMJInDfw">
-  <div class="page">
-    <!-- LEFT SIDEBAR -->
-    <aside class="side">
-      <div class="brand">
-        <div class="logo">IG</div>
-        <div class="name">INSTRUCTOR<br/>GRINDSET</div>
+<body data-youtube-api-key="AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY">
+  <section class="ig">
+    <!-- HERO (no subtitle) -->
+    <header class="hero wrap" aria-labelledby="page-title">
+      <div><h1 id="page-title">Instructor Grindset</h1></div>
+    </header>
+
+    <!-- CTA -->
+    <section class="section wrap" aria-labelledby="cta-title">
+      <h2 id="cta-title">Become a ski instructor with a season plan</h2>
+      <div class="card" style="max-width:70ch;margin:0 auto">
+        <p class="muted" style="margin:0">
+          Do you want to become a snowsports instructor with a more fulfilling purpose? Contact me and we will develop a plan to transform into an irresistible athlete instructor capable of teaching to the guests' broadest definition of success.
+        </p>
       </div>
+    </section>
 
-      <nav class="nav" aria-label="About Instructor Grindset">
-        <h4>About Instructor Grindset</h4>
-        <ul>
-          <li><a href="https://instructorgrindset.com/mystory">My Story</a></li>
-          <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
-          <li><a href="https://instructorgrindset.com/resources">Resources</a></li>
-          <li><a href="https://instructorgrindset.com/press">Press &amp; Media</a></li>
-        </ul>
-      </nav>
+    <!-- ABOUT -->
+    <section class="section wrap" aria-labelledby="about-title">
+      <h2 id="about-title">About My Work</h2>
+      <div class="card" style="max-width:70ch;margin:0 auto">
+        <p class="muted" style="margin:0">
+          For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
+        </p>
+      </div>
+    </section>
 
-      <nav class="nav" aria-label="Coaching & Offers">
-        <h4>Coaching</h4>
-        <ul>
-          <li><a href="https://instructorgrindset.com/private-coaching">Private Coaching</a></li>
-          <li><a href="https://instructorgrindset.com/team-training">Team Training</a></li>
-          <li><a href="https://instructorgrindset.com/curriculum-design">Curriculum Design</a></li>
-        </ul>
-      </nav>
-
-      <nav class="nav" aria-label="My Content">
-        <h4>My Content</h4>
-        <ul>
-          <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
-          <li><a href="https://instructorgrindset.com/youtube">YouTube Channels</a></li>
-          <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-      <!-- HERO: intro video + bio block -->
-      <section class="hero">
-        <div class="panel">
-          <div class="vid">
-            <!-- Fallback: uploads playlist. JS below will swap to the single latest video -->
-            <iframe id="intro-video" src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
-              title="Latest Upload" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="panel">
-          <h1>Who is Instructor Grindset?</h1>
-          <p class="lead">
-            Helping ski instructors become athletes &amp; irresistible coaches. Over 16 seasons and 10 resorts, I’ve chased what makes a ski school truly enchanting for kids—and how pros can teach to the guest’s broadest definition of fun and success.
+    <!-- MISSION & VISION -->
+    <section class="section wrap" aria-labelledby="mv-title">
+      <h2 id="mv-title">Mission &amp; Vision</h2>
+      <div class="grid two" style="margin-top:1rem">
+        <article class="card" aria-labelledby="mission-title">
+          <h3 id="mission-title" style="margin:.25rem 0 .5rem; font-family:'Rooftop',Inter,Arial,sans-serif; font-weight:800;">Mission</h3>
+          <p class="muted" style="margin:0 auto;max-width:60ch">
+            Helping ski instructors become athletes &amp; irresistible coaches.
           </p>
-          <p style="margin:.9rem 0 0">
-            <a class="cta" href="https://instructorgrindset.com/full-story">Full Story →</a>
+        </article>
+        <article class="card" aria-labelledby="vision-title">
+          <h3 id="vision-title" style="margin:.25rem 0 .5rem; font-family:'Rooftop',Inter,Arial,sans-serif; font-weight:800;">Vision</h3>
+          <p class="muted" style="margin:0 auto;max-width:60ch">
+            A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.
           </p>
-        </div>
-      </section>
+        </article>
+      </div>
+    </section>
 
-      <!-- VALUE ROW -->
-      <section class="row" aria-label="value">
-        <div class="panel">
-          <h2>Season Plan</h2>
-          <p class="lead">A practical framework to move like an athlete, coach like a pro, and level up guest outcomes—without burning out mid-season.</p>
-          <p style="margin:.6rem 0 0"><a class="cta" href="https://instructorgrindset.com/season-plan">Get the Plan</a></p>
-        </div>
-        <div class="panel">
-          <h2>Book Coaching</h2>
-          <p class="lead">Private sessions, staff training, and curriculum design. Build irresistible lessons that kids love—and parents notice.</p>
-          <p style="margin:.6rem 0 0"><a class="cta" href="https://instructorgrindset.com/private-coaching">Coaching Details</a></p>
-        </div>
-      </section>
+    <!-- LATEST UPLOADS (auto-updating) -->
+    <section class="section wrap" aria-labelledby="latest-title">
+      <h2 id="latest-title">Latest Uploads</h2>
+      <div class="vid" style="max-width:78rem;margin:0 auto">
+        <iframe
+          src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
+          title="Instructor Grindset — Latest uploads"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </section>
 
-      <!-- CONTACT -->
-      <section class="row" aria-labelledby="contact-title">
-        <div class="panel">
-          <h2 id="contact-title">Contact</h2>
-          <form class="stack" method="POST" action="https://formspree.io/f/xyzbdqgq">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" autocomplete="name" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" name="email" autocomplete="email" required />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="6" required></textarea>
-            </div>
-            <input type="hidden" name="_subject" value="Instructor Grindset — Website Inquiry" />
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" />
-            <button class="cta" type="submit">Send Message</button>
-          </form>
-        </div>
-        <div class="panel">
-          <h2>Follow on Instagram</h2>
-          <p class="lead">On-snow drills, kids’ progressions, and daily instructor notes.</p>
-          <p style="margin:.6rem 0 0"><a class="cta" href="https://instructorgrindset.com/instagram">Open Instagram</a></p>
-        </div>
-      </section>
+    <!-- FEATURED (playlist-driven 3×N grid) -->
+    <section class="section wrap" aria-labelledby="featured-title">
+      <h2 id="featured-title">Featured Videos</h2>
+      <p class="muted">Curated long-form playlist (no Shorts). Reorder on YouTube to update here automatically.</p>
+      <div
+        id="featured-grid"
+        class="videos grid three"
+        data-playlist-id="PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv">
+        <p class="muted" style="margin:1rem auto;max-width:60ch">Loading playlist…</p>
+      </div>
+    </section>
 
-      <footer class="footer">
-        © Instructor Grindset
-      </footer>
-    </main>
-  </div>
+    <!-- CONTACT (Formspree) -->
+    <section class="section wrap" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <form class="card stack" method="POST" action="https://formspree.io/f/xyzbdqgq" style="max-width:42rem;margin:0 auto">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="Instructor Grindset — Website Inquiry" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" />
+        <button class="btn" type="submit">Send Message</button>
+      </form>
+    </section>
+  </section>
 
-  <!-- Latest upload fetch: swaps the hero iframe to the single most recent video -->
+  <!-- Featured Playlist → Grid script (kept simple & robust) -->
   <script>
   (function(){
-    const apiKey = document.body.dataset.youtubeApiKey;
-    const uploads = document.body.dataset.uploadsPlaylist; // your auto-generated uploads playlist ID
-    const iframe = document.getElementById('intro-video');
-    if(!apiKey || !uploads || !iframe) return; // graceful fallback to playlist embed
+    const grid = document.getElementById('featured-grid');
+    const apiKey = document.body.dataset.youtubeApiKey; // put your restricted key in data-youtube-api-key on <body>
+    const playlistId = grid?.dataset.playlistId;
+    if(!grid || !playlistId){ return; }
 
-    // Grab just one item (most recent) from uploads playlist
-    const url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=1&playlistId='
-                + encodeURIComponent(uploads) + '&key=' + encodeURIComponent(apiKey);
-    fetch(url).then(r=>r.ok?r.json():Promise.reject(r.status))
-      .then(data=>{
-        const id = data?.items?.[0]?.contentDetails?.videoId;
-        if(!id) return;
-        iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1&playsinline=1';
-      })
-      .catch(()=>{/* leave playlist fallback */});
+    // If no API key present, fall back to a single playlist player
+    if(!apiKey || apiKey === 'YOUR_RESTRICTED_API_KEY_HERE'){
+      grid.innerHTML = `
+        <div class="vid" style="grid-column:1/-1;max-width:78rem;margin:0 auto">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(playlistId)}&rel=0&modestbranding=1&playsinline=1"
+            title="Featured Playlist" loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>`;
+      return;
+    }
+
+    function showError(msg){
+      grid.innerHTML = '<p class="muted" style="margin:1rem auto;max-width:60ch">'+ msg +'</p>';
+    }
+
+    async function fetchAll(){
+      const items=[]; let pageToken='';
+      try{
+        do{
+          const params=new URLSearchParams({
+            part:'snippet,contentDetails', maxResults:'50', playlistId, key:apiKey
+          });
+          if(pageToken) params.set('pageToken',pageToken);
+          const res=await fetch('https://www.googleapis.com/youtube/v3/playlistItems?'+params.toString());
+          if(!res.ok) throw new Error('YouTube API '+res.status);
+          const data=await res.json();
+          const list=Array.isArray(data.items)?data.items:[];
+          for(const it of list){
+            const id=it?.contentDetails?.videoId || it?.snippet?.resourceId?.videoId;
+            const title=it?.snippet?.title || 'YouTube Video';
+            if(id) items.push({id,title});
+          }
+          pageToken=data.nextPageToken||'';
+        }while(pageToken);
+      }catch(e){
+        showError('Could not load the playlist. Check API key restrictions (HTTP referrers + YouTube Data API v3) and playlist visibility.');
+      }
+      return items;
+    }
+
+    function esc(s){return String(s).replace(/"/g,'&quot;');}
+    fetchAll().then(items=>{
+      if(!items || !items.length){ showError('This playlist appears empty or unavailable.'); return; }
+      grid.innerHTML = items.map(v=>`
+        <div class="vid" title="${esc(v.title)}">
+          <iframe
+            src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&playsinline=1"
+            title="${esc(v.title)}" loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      `).join('');
+    });
   })();
   </script>
 </body>
 </html>
-
