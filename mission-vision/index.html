@@ -47,10 +47,10 @@
       --panel-bg: rgba(255,255,255,.03);
       --footer-h: 52px;
 
-      /* === YOU CAN TUNE THESE === */
-      --box-w: 600px;         /* width of each glow box (mission/vision) */
-      --gap: 26px;            /* gap between boxes: old ~16px + 10px = 26px */
-      --content-w: calc(var(--box-w) * 2 + var(--gap)); /* total width of the two-box row */
+      /* Tunables */
+      --box-w: 600px;      /* width of each glow box */
+      --gap: 26px;         /* space between boxes */
+      --content-w: calc(var(--box-w) * 2 + var(--gap));
     }
 
     *{ box-sizing:border-box }
@@ -92,17 +92,7 @@
     /* Main column */
     .main{ padding:1.25rem; position:relative; }
 
-    /* Intro label (make it ~3 lines by constraining width; +~3px font) */
-    .intro{
-      text-align:center;
-      margin: 2vh auto 3vh;
-      font-weight:600;
-      color:var(--ink);
-      font-size: clamp(1.2rem, 1.3vw + .3rem, 1.55rem); /* slightly bigger than before */
-      max-width: 36ch; /* roughly 3 lines for typical sentence */
-    }
-
-    /* Page title */
+    /* Title */
     h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
       font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08;
@@ -117,25 +107,31 @@
       line-height:1.7;
     }
 
-    /* Content container:
-       - Explicit width to the two boxes
-       - Center across the remaining viewport (viewport - sidebar)
-       - Ensure at least 14px space from the sidebar edge
-    */
+    /* Content container (centered relative to viewport minus sidebar, ≥14px from sidebar) */
     .content{
       width: var(--content-w);
       margin-left: max(14px, calc((100vw - var(--sidebar) - var(--content-w)) / 2));
       margin-right: auto;
-      padding-top: 4vh; /* a little breathing room above intro */
+      padding-top: 4vh;
     }
-    @media (max-width: calc(2 * 600px + 26px + 40px)){ /* rough breakpoint for stacking */
+    @media (max-width: calc(2 * 600px + 26px + 40px)){
       .content{
         width: auto;
         margin: 0 14px;
       }
     }
 
-    /* Glow panels (wider, centered text) */
+    /* Intro text (bigger, ~3 lines) */
+    .intro{
+      text-align:center;
+      margin: 1vh auto 3vh;
+      font-weight:600;
+      color:var(--ink);
+      font-size: clamp(1.2rem, 1.3vw + .3rem, 1.55rem);
+      max-width: 36ch; /* encourages ~3 lines */
+    }
+
+    /* Panels with glow (wider, centered text) */
     .panel{
       background:var(--panel-bg);
       border:1px solid var(--line);
@@ -146,26 +142,26 @@
     }
     .panel:hover{ box-shadow:0 0 22px rgba(var(--glow),.35), 0 0 64px rgba(var(--glow),.18) }
 
-    /* Side-by-side layout with your custom gap */
+    /* Side-by-side layout with custom gap */
     .grid{ display:grid; gap: var(--gap) }
     .two{
       grid-template-columns: var(--box-w) var(--box-w);
-      justify-content:center; /* keep the pair centered within .content width */
+      justify-content:center;
     }
     @media (max-width:980px){
       .two{ grid-template-columns: 1fr; }
     }
 
-    /* Buttons: 50% bigger (+ ≥15px spacing), pushed down ~20% viewport */
+    /* Buttons (50% bigger, ≥15px gap, moved 30px closer to boxes) */
     .btn-row{
       display:flex; gap: 15px; justify-content:center; align-items:center;
-      margin-top: 20vh;
+      margin-top: calc(20vh - 30px); /* was 20vh */
       flex-wrap:wrap;
     }
     .cta{
       display:inline-block; border-radius:0; background:#c4892a; color:#e6e7eb;
       font-weight:800; border:0; text-align:center; white-space:nowrap;
-      padding: calc(.85rem * 1.5) calc(1.05rem * 1.5);  /* 50% bigger */
+      padding: calc(.85rem * 1.5) calc(1.05rem * 1.5);
     }
 
     /* Footer fixed bottom (no scroll) */
@@ -224,10 +220,14 @@
     <!-- MAIN -->
     <main class="main">
       <div class="content">
-        <!-- Edit this intro text directly -->
-        <p class="intro">Building irresistible athlete-instructors with clear season plans and lesson logs that actually drive real progress.</p>
-
+        <!-- Page title -->
         <h1>Mission &amp; Vision</h1>
+
+        <!-- Updated intro text -->
+        <p class="intro">
+          Do you ever teach an awe inspiring lesson only for the next day’s lesson to leave you feeling like you underperformed?
+          The Instructor Grindset helps snowsports instructors solve their most painful problem by themselves.
+        </p>
 
         <!-- Wider, centered glow boxes -->
         <section class="grid two" aria-label="Mission and Vision">
