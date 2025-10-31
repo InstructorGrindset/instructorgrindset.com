@@ -23,10 +23,10 @@
     }
 
     :root{
-      --bg:#0f1217; --panel:#1b2029; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#c4892a; /* bronze-orange */
+      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
+      --accent:#a6c8ff; --cta:#c4892a; /* bronze-orange if you add buttons later */
       --glow:250,204,21;
-      --max:1200px; --pad:1rem; --sidebar:300px;
+      --sidebar:300px;
     }
 
     *{ box-sizing:border-box }
@@ -39,7 +39,7 @@
     a{ color:var(--accent); text-decoration:none }
     a:hover{ text-decoration:underline }
 
-    /* Grid layout */
+    /* Grid layout: sidebar + main */
     .page{ display:grid; grid-template-columns: var(--sidebar) 1fr; min-height:100vh }
     @media (max-width:960px){ .page{ grid-template-columns:1fr } }
 
@@ -48,17 +48,16 @@
     .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem }
     .brand .logo-wrap{
       width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
-      /* Mask to crop out the red surround on your uploaded logo */
+      /* Mask to crop out any red surround on the uploaded circle logo */
       -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
               mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
       background:#0000;
     }
-    /* TIP: Replace the src below with your logo path (e.g., /images/ig-logo.png).
-       Make sure the file exists in your repo/site. The mask above hides the red rim. */
+    /* 👉 Replace src below with your actual file path (e.g., /images/ig-logo.png). */
     .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
     .brand .name{
       font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px;
-      font-size:1.7rem; /* bigger top-left label */
+      font-size:1.7rem; /* bigger */
     }
 
     .nav h4{
@@ -74,58 +73,44 @@
     .main{ padding:1.25rem }
 
     /* Headings */
-    h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
+    h1,h2{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
-      font-weight:800; font-size:clamp(2.4rem,5.6vw,3.6rem); line-height:1.05; margin:0 0 .6rem;
+      font-weight:800; font-size:clamp(2.4rem,5.6vw,3.6rem); line-height:1.05; margin:.5rem 0 .6rem;
       background:linear-gradient(92deg,#ffffff,#eaeefc);
       -webkit-background-clip:text;background-clip:text;color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
-    h2{ font-weight:800; font-size:1.9rem; margin:0 0 .6rem }
-    h3{ font-weight:800; font-size:1.25rem; margin:.25rem 0 .5rem }
-
     .lead{ color:var(--muted); max-width:70ch }
 
-    /* Video (glow only; no border/box) */
+    /* Video: small (~25vw), glow only, no border/box */
+    .hero{
+      /* keeps content aligned left, leaving empty background to the right */
+      max-width:60vw;
+    }
     .vid{
-      position:relative; width:100%; padding-bottom:56.25%;
+      width:clamp(260px, 25vw, 520px);
+      position:relative; padding-bottom:56.25%;
       border-radius:.75rem; overflow:hidden; border:0; background:#000;
       box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
-      margin:0 0 .75rem;
+      margin:0;
     }
     .vid iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
 
-    /* Sections */
-    .row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.25rem }
-    @media (max-width:1100px){ .row{ grid-template-columns:1fr } }
-
-    /* Buttons (straight corners, bronze, very light gray text) */
-    .cta{
-      display:inline-block; padding:.85rem 1.05rem; border-radius:0;
-      background:var(--cta); color:#e6e7eb; font-weight:800; border:0;
+    @media (max-width:960px){
+      .hero{ max-width:100% }
+      .vid{ width:100%; }
     }
-    .cta:hover{ filter:brightness(1.03) }
 
-    /* Form */
-    .stack{ display:grid; gap:.85rem }
-    .field input,.field textarea{
-      width:100%; padding:.7rem .85rem; border-radius:.25rem; border:1px solid var(--line);
-      background:rgba(255,255,255,.04); color:var(--ink); font:inherit;
-    }
-    .field label{ display:block; font-weight:600; margin:0 0 .35rem }
-    .field input:focus,.field textarea:focus{ outline:3px solid #6ea8ff; border-color:#6ea8ff }
-
-    .muted{ color:var(--muted) }
     .footer{ color:var(--muted); text-align:center; padding:1.25rem 0; border-top:1px solid var(--line); margin-top:2rem }
   </style>
 </head>
-<body data-youtube-api-key="YOUR_RESTRICTED_API_KEY_HERE" data-uploads-playlist="UUIa3wQYBROQwsR0bMJInDfw">
+<body>
   <div class="page">
     <!-- SIDEBAR -->
     <aside class="side">
       <div class="brand">
         <div class="logo-wrap">
-          <!-- REPLACE THIS SRC: put your logo at /images/ig-logo.png (or any path you choose) -->
+          <!-- REPLACE THIS SRC with your logo file path -->
           <img src="/images/ig-logo.png" alt="Instructor Grindset logo" />
         </div>
         <div class="name">INSTRUCTOR<br/>GRINDSET</div>
@@ -144,6 +129,7 @@
         <ul>
           <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
           <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
+          <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
         </ul>
       </nav>
 
@@ -159,75 +145,22 @@
 
     <!-- MAIN -->
     <main class="main">
-      <!-- HERO: title + video (glow only) + My Story text under video (no box) -->
-      <section aria-labelledby="hero-title">
-        <h2 id="hero-title">Lesson Logging And Analytics Tutorial</h2>
+      <section class="hero" aria-label="Intro">
+        <!-- Small hero video (no title) -->
         <div class="vid">
-          <!-- Fallback: uploads playlist; JS below can swap to single latest video -->
-          <iframe id="intro-video" src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
-            title="Latest Upload" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe
+            src="https://www.youtube.com/embed/KOxRtOJsnkg?rel=0&modestbranding=1&playsinline=1"
+            title="Lesson Log Video"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
         </div>
 
+        <!-- My Story (under video, no box) -->
         <h1>My Story</h1>
         <p class="lead">
           For the last 16 ski seasons, I have traveled and worked in 10 different ski resorts in hopes of understanding how some ski schools are designed to enchant children in the mountains. I am willing to talk to anyone who might want to know more about my experience. If you have any questions, contact me at the bottom of this page or interact with me via YouTube comments.
         </p>
-      </section>
-
-      <!-- MISSION & VISION (simple content, no boxes) -->
-      <section class="row" aria-labelledby="mv-title">
-        <div>
-          <h2 id="mv-title">Mission</h2>
-          <p class="lead">Helping ski instructors become athletes &amp; irresistible coaches.</p>
-        </div>
-        <div>
-          <h2>Vision</h2>
-          <p class="lead">A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.</p>
-        </div>
-      </section>
-
-      <!-- INSTAGRAM: button + 3 embeds (no autoplay) -->
-      <section class="row" aria-labelledby="ig-title">
-        <div>
-          <h2 id="ig-title">Follow on Instagram</h2>
-          <p style="margin:.6rem 0 0"><a class="cta" href="https://www.instagram.com/ohgoody/reels/" target="_blank" rel="noopener">Open Instagram</a></p>
-        </div>
-        <div>
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DOh4MJlE_8Z/" data-instgrm-version="14" style="background:#000;border:0;margin:0 auto;max-width:540px;width:100%;"></blockquote>
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DI8ByNUuJeH/" data-instgrm-version="14" style="background:#000;border:0;margin:1rem auto 0;max-width:540px;width:100%;"></blockquote>
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CpQt-XVsGFi/" data-instgrm-version="14" style="background:#000;border:0;margin:1rem auto 0;max-width:540px;width:100%;"></blockquote>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section class="row" aria-labelledby="contact-title">
-        <div>
-          <h2 id="contact-title">Contact</h2>
-          <form class="stack" method="POST" action="https://formspree.io/f/xyzbdqgq">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" autocomplete="name" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" name="email" autocomplete="email" required />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="6" required></textarea>
-            </div>
-            <input type="hidden" name="_subject" value="Instructor Grindset — Website Inquiry" />
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" />
-            <button class="cta" type="submit">Send Message</button>
-          </form>
-        </div>
-        <div>
-          <h2>Latest Uploads</h2>
-          <div class="vid">
-            <iframe src="https://www.youtube.com/embed/videoseries?list=UUIa3wQYBROQwsR0bMJInDfw&rel=0&modestbranding=1&playsinline=1"
-              title="Uploads Playlist" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-        </div>
       </section>
 
       <footer class="footer">
@@ -235,27 +168,6 @@
       </footer>
     </main>
   </div>
-
-  <!-- Instagram embed script -->
-  <script async src="https://www.instagram.com/embed.js"></script>
-
-  <!-- Latest upload fetch: swap hero iframe to single most recent video if API key present -->
-  <script>
-  (function(){
-    const apiKey   = document.body.dataset.youtubeApiKey;
-    const uploads  = document.body.dataset.uploadsPlaylist;
-    const iframe   = document.getElementById('intro-video');
-    if(!apiKey || !uploads || !iframe) return;
-
-    const url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=1&playlistId='
-                + encodeURIComponent(uploads) + '&key=' + encodeURIComponent(apiKey);
-    fetch(url).then(r=>r.ok?r.json():Promise.reject(r.status))
-      .then(d=>{
-        const id = d?.items?.[0]?.contentDetails?.videoId;
-        if(id) iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1&playsinline=1';
-      })
-      .catch(()=>{ /* keep playlist */ });
-  })();
-  </script>
 </body>
 </html>
+
