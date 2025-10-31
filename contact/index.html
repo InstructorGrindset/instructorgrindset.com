@@ -116,18 +116,17 @@
 <body>
   <div class="page">
     <!-- Sidebar -->
-    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <!-- placeholder gets replaced at runtime -->
+<aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
 <script>
   (function(){
     const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=1')   // absolute path so it works in subfolders
+    fetch('/partials/sidebar.html?v=1')  // bump ?v= number when you edit the partial to bust cache
       .then(r => r.text())
       .then(html => {
-        // swap the placeholder with the real sidebar
         const tmp = document.createElement('div');
         tmp.innerHTML = html.trim();
-        const sidebar = tmp.firstElementChild;
-        target.replaceWith(sidebar);
+        target.replaceWith(tmp.firstElementChild);
       })
       .catch(() => {
         target.removeAttribute('aria-busy');
@@ -135,6 +134,7 @@
       });
   })();
 </script>
+
 
     <!-- Main -->
     <main class="main">
