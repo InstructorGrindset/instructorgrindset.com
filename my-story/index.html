@@ -17,13 +17,13 @@
       --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --footer-h:52px;
 
       /* Timeline system */
-      --rail:6px;                /* width of vertical line + box borders + connectors */
+      --rail:3px;                /* width of vertical line + box borders + connectors */
       --rail-color:#c4892a;      /* bronze/orange */
       --box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
       --gap:22px;                /* vertical gap between rows */
       --col-gap:28px;            /* horizontal space between center rail and boxes */
       --content-shift:40px;      /* nudge content toward sidebar */
-      --content-max: min(1200px, calc(100vw - var(--sidebar) - 40px));
+      --content-max: min(1200px, calc(100vw - var(--sidebar) - 100px));
     }
 
     *{ box-sizing:border-box } html,body{ height:100% }
@@ -76,6 +76,12 @@
     .timeline-wrap::before{
       content:""; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
       width:var(--rail); background:var(--rail-color); border-radius:999px;
+      /* Shorten the vertical rail by adding top/bottom crop */
+.timeline-wrap::before {
+  top: 40px !important;    /* increase to crop more from the top */
+  bottom: 80px !important; /* increase to crop more from the bottom */
+}
+
     }
 
     /* Early + Future end caps */
