@@ -148,40 +148,24 @@
 
   <div class="page">
     <!-- Sidebar -->
-    <aside class="side">
-      <div class="brand">
-        <div class="logo-wrap">
-          <img src="/images/ig-logo.png" alt="Instructor Grindset logo" loading="lazy" decoding="async" />
-        </div>
-        <div class="name">INSTRUCTOR<br/>GRINDSET</div>
-      </div>
-
-      <nav class="nav" aria-label="About">
-        <h4>About</h4>
-        <ul>
-          <li><a href="https://instructorgrindset.com/my-story" aria-current="page">My Story</a></li>
-          <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
-        </ul>
-      </nav>
-
-      <nav class="nav" aria-label="How To">
-        <h4>How To</h4>
-        <ul>
-          <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
-          <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
-          <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <nav class="nav" aria-label="My Content">
-        <h4>My Content</h4>
-        <ul>
-          <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
-          <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
-          <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
-        </ul>
-      </nav>
-    </aside>
+    <!-- placeholder gets replaced at runtime -->
+<aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+<script>
+  (function(){
+    const target = document.getElementById('sidebar-placeholder');
+    fetch('/partials/sidebar.html?v=1')  // bump ?v= number when you edit the partial to bust cache
+      .then(r => r.text())
+      .then(html => {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html.trim();
+        target.replaceWith(tmp.firstElementChild);
+      })
+      .catch(() => {
+        target.removeAttribute('aria-busy');
+        target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>';
+      });
+  })();
+</script>
 
     <!-- Main -->
     <main class="main" id="main">
@@ -208,6 +192,7 @@
   <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
 </body>
 </html>
+
 
 
 
