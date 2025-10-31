@@ -51,6 +51,9 @@
       --box-w: 600px;      /* width of each glow box */
       --gap: 26px;         /* space between boxes */
       --content-w: calc(var(--box-w) * 2 + var(--gap));
+
+      /* NEW: how far to nudge the whole content block LEFT (toward sidebar) */
+      --content-shift: 40px; /* increase for more left; decrease for less */
     }
 
     *{ box-sizing:border-box }
@@ -107,10 +110,15 @@
       line-height:1.7;
     }
 
-    /* Content container (centered relative to viewport minus sidebar, ≥14px from sidebar) */
+    /* Content container (centered relative to viewport minus sidebar, ≥14px from sidebar)
+       Shifted LEFT by --content-shift without ever crossing inside 14px safety.
+    */
     .content{
       width: var(--content-w);
-      margin-left: max(14px, calc((100vw - var(--sidebar) - var(--content-w)) / 2));
+      margin-left: max(
+        14px,
+        calc((100vw - var(--sidebar) - var(--content-w)) / 2 - var(--content-shift))
+      );
       margin-right: auto;
       padding-top: 4vh;
     }
@@ -121,14 +129,14 @@
       }
     }
 
-    /* Intro text (bigger, ~3 lines) */
+    /* Intro text (~4 lines) */
     .intro{
       text-align:center;
       margin: 1vh auto 3vh;
       font-weight:600;
       color:var(--ink);
       font-size: clamp(1.2rem, 1.3vw + .3rem, 1.55rem);
-      max-width: 56ch; /* encourages ~3 lines */
+      max-width: 56ch;
     }
 
     /* Panels with glow (wider, centered text) */
@@ -155,7 +163,7 @@
     /* Buttons (50% bigger, ≥15px gap, moved 30px closer to boxes) */
     .btn-row{
       display:flex; gap: 15px; justify-content:center; align-items:center;
-      margin-top: calc(20vh - 30px); /* was 20vh */
+      margin-top: calc(20vh - 30px);
       flex-wrap:wrap;
     }
     .cta{
@@ -223,7 +231,7 @@
         <!-- Page title -->
         <h1>Mission &amp; Vision</h1>
 
-        <!-- Updated intro text -->
+        <!-- Intro -->
         <p class="intro">
           Do you ever teach an awe inspiring lesson only to feel off on the next one? The instructor grindset helps snowsports instructors solve this painful problem in their own way, no matter where they are.
         </p>
