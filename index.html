@@ -10,6 +10,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
+    /* === Site background === */
+/* Loads your PNG, covers the viewport, and stays put while scrolling */
+body{
+  background:
+    #0f1217
+    url("/images/web%20background.png")
+    center / cover
+    no-repeat fixed;
+}
+
+/* Optional: a subtle dark overlay so text stays readable on bright photos */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  /* vignette center + slight darkening */
+  background:
+    radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,0.15), rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.55));
+  z-index:-1; /* behind everything */
+}
     /* Rooftop headings (falls back if files not provided) */
     @font-face{
       font-family:"Rooftop";
@@ -175,6 +196,7 @@
   </div>
 </body>
 </html>
+
 
 
 
