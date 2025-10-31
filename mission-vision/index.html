@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • Mission & Vision</title>
   <meta name="description" content="Mission & Vision — Instructor Grindset" />
+
+  <!-- Body font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     /* Background */
     body{
@@ -18,12 +21,14 @@
       margin:0; color:#e7e9ee;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height:1.55;
+      overflow:hidden; /* keep to 1 screen (no scroll) for this page */
     }
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none;
       background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
       z-index:-1;
     }
+
     /* Rooftop headings (fallbacks if not present) */
     @font-face{
       font-family:"Rooftop";
@@ -40,18 +45,28 @@
       --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
       --accent:#a6c8ff; --cta:#c4892a; --glow:250,204,21; --sidebar:300px;
       --panel-bg: rgba(255,255,255,.03);
+      --footer-h: 52px;
     }
 
-    *{ box-sizing:border-box } html,body{ height:100% }
-    a{ color:var(--accent); text-decoration:none } a:hover{ text-decoration:underline }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
 
-    /* Layout */
-    .page{ display:grid; grid-template-columns: var(--sidebar) 1fr; min-height:100vh }
-    @media (max-width:960px){ .page{ grid-template-columns:1fr } }
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
+
+    /* Layout: sidebar + main */
+    .page{
+      display:grid;
+      grid-template-columns: var(--sidebar) 1fr;
+      min-height:100vh;
+      padding-bottom: var(--footer-h); /* room so fixed footer doesn't overlap */
+    }
+    @media (max-width:960px){
+      .page{ grid-template-columns:1fr }
+    }
+
+    /* Sidebar */
     .side{ padding:1.25rem; border-right:1px solid var(--line); background:rgba(255,255,255,.02) }
-    .main{ padding:1.25rem }
-
-    /* Brand */
     .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem }
     .brand .logo-wrap{
       width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
@@ -59,53 +74,89 @@
               mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
     }
     .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
-    .brand .name{ font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px; font-size:1.7rem; }
+    .brand .name{ font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px; font-size:1.7rem }
 
-    /* Nav */
     .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px; font-family:"Rooftop", Inter, Arial, sans-serif }
-    .nav ul{ list-style:none; padding:0; margin:0 0 1rem } .nav li{ margin:.35rem 0 }
+    .nav ul{ list-style:none; padding:0; margin:0 0 1rem }
+    .nav li{ margin:.35rem 0 }
     .nav a{ display:block; padding:.45rem .5rem; border:1px solid transparent }
     .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
+
+    /* Main column */
+    .main{ padding:1.25rem; position:relative; }
 
     /* Headings + copy */
     h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
-      font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08; margin:.2rem 0 .9rem;
+      font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08;
+      margin:0 0 .6rem;
       background:linear-gradient(92deg,#ffffff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
-      text-align:left;
+      text-align:center;
     }
     .lead{
-      color:var(--muted); max-width:70ch;
+      color:var(--muted);
       font-size:clamp(1.05rem,1.1vw + .2rem,1.25rem);
       line-height:1.7;
     }
 
-    /* Content container (keeps home offset vibe) */
-    .content{ max-width:min(950px,100%); margin-left:-14px; margin-top:14px; }
+    /* Content container centered, wider than before */
+    .content{
+      max-width: min(1100px, 100%);
+      margin: 0 auto;
+      /* we leave some breathing room at top for intro label */
+      padding-top: 4vh;
+    }
 
-    /* Panels with glow (the “old boxes”) */
+    /* Intro label (centered, no box/glow) */
+    .intro{
+      text-align:center;
+      margin: 2vh 0 3vh;
+      font-weight:600;
+      color:var(--ink);
+    }
+
+    /* Panels with glow (wider, centered text) */
     .panel{
       background:var(--panel-bg);
       border:1px solid var(--line);
       border-radius:.75rem;
-      padding:1rem 1.1rem;
+      padding:1.15rem 1.25rem;
       box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      text-align:center; /* center title + text */
     }
     .panel:hover{ box-shadow:0 0 22px rgba(var(--glow),.35), 0 0 64px rgba(var(--glow),.18) }
 
-    /* Grid for side-by-side layout */
+    /* Side-by-side layout, wider columns */
     .grid{ display:grid; gap:1rem }
     .two{ grid-template-columns:1fr 1fr }
     @media (max-width:980px){ .two{ grid-template-columns:1fr } }
 
-    /* Buttons */
-    .cta{ display:inline-block; padding:.85rem 1.05rem; border-radius:0; background:#c4892a; color:#e6e7eb; font-weight:800; border:0; }
-    .cta:hover{ filter:brightness(1.03) }
-    .btn-row{ display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem; }
-    .btn-row .cta{ flex:1 1 220px; text-align:center; }
+    /* Buttons (equal width based on longer label + pushed down by ~20% viewport) */
+    .btn-row{
+      display:flex; gap:.75rem; justify-content:center; align-items:center;
+      margin-top: 20vh; /* move buttons down to give the page breathing room */
+      flex-wrap:wrap;
+    }
+    .cta{
+      display:inline-block; padding:.85rem 1.05rem; border-radius:0;
+      background:#c4892a; color:#e6e7eb; font-weight:800; border:0; text-align:center;
+      white-space:nowrap; /* avoid wrapping causing uneven heights */
+    }
 
-    .footer{ color:var(--muted); text-align:center; padding:1.25rem 0; border-top:1px solid var(--line); margin-top:2rem }
+    /* Footer fixed to bottom (no scroll feel) */
+    .footer-wrap{
+      position:fixed; left:var(--sidebar); right:0; bottom:0;
+      height:var(--footer-h);
+      display:grid; place-items:center;
+      background:rgba(0,0,0,.25);
+      border-top:1px solid var(--line);
+      backdrop-filter: blur(2px);
+    }
+    @media (max-width:960px){
+      .footer-wrap{ left:0 }
+    }
+    .footer{ color:var(--muted); text-align:center; margin:0 }
   </style>
 </head>
 <body>
@@ -149,38 +200,56 @@
     <!-- MAIN -->
     <main class="main">
       <div class="content">
-        <header style="margin-bottom:1rem">
-          <h1>Mission &amp; Vision</h1>
-        </header>
+        <!-- Centered intro label (edit this text in HTML) -->
+        <p class="intro">Do you ever teach an awe inspiring lesson only for the next day's lesson to leave you feeling like you underperformed? The instructor grindset helps snowsports instructors solve their most painful problem by themselves.</p>
 
-        <!-- Side-by-side glowing boxes -->
+        <!-- Page title -->
+        <h1>Mission &amp; Vision</h1>
+
+        <!-- Side-by-side glowing boxes (wider + centered text) -->
         <section class="grid two" aria-label="Mission and Vision">
           <article class="panel" aria-labelledby="mission-title">
             <h2 id="mission-title">Mission</h2>
-            <p class="lead" style="margin:.5rem 0 0">
-              Help ski instructors become athletes &amp; irresistible coaches with a season plan and lesson log.
+            <p class="lead" style="margin:.6rem 0 0">
+              Helping ski instructors become athletes &amp; irresistible coaches with a season plan and lesson log.
             </p>
           </article>
 
           <article class="panel" aria-labelledby="vision-title">
             <h2 id="vision-title">Vision</h2>
-            <p class="lead" style="margin:.5rem 0 0">
-              A community of American snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.
+            <p class="lead" style="margin:.6rem 0 0">
+              A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.
             </p>
           </article>
         </section>
 
-        <!-- Side-by-side buttons under the panels -->
-        <div class="btn-row">
-          <a class="cta" href="https://instructorgrindset.com/season-plan">Season Plan</a>
-          <a class="cta" href="https://instructorgrindset.com/lesson-log">Lesson Log</a>
+        <!-- Buttons pushed down ~20% viewport; equalized width to the longer label -->
+        <div class="btn-row" id="btnRow">
+          <a class="cta" id="btnSeason" href="https://instructorgrindset.com/season-plan">Season Plan</a>
+          <a class="cta" id="btnLesson" href="https://instructorgrindset.com/lesson-log">Lesson Log</a>
         </div>
-
-        <p style="margin-top:1rem"><a class="cta" href="https://instructorgrindset.com">← Back to Home</a></p>
-
-        <footer class="footer">© Instructor Grindset</footer>
       </div>
     </main>
   </div>
+
+  <!-- Fixed footer (no scroll) -->
+  <div class="footer-wrap">
+    <p class="footer">© Instructor Grindset</p>
+  </div>
+
+  <!-- Tiny script to match both button widths to the longer one -->
+  <script>
+    (function(){
+      const a = document.getElementById('btnSeason');
+      const b = document.getElementById('btnLesson');
+      if(!a || !b) return;
+      // Temporarily measure natural widths
+      a.style.width = 'auto';
+      b.style.width = 'auto';
+      const max = Math.max(a.offsetWidth, b.offsetWidth);
+      a.style.width = b.style.width = max + 'px';
+    })();
+  </script>
 </body>
 </html>
+
