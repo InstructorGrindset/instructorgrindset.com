@@ -151,6 +151,11 @@
     }
     @media (max-width:960px){ .footer-wrap{ position:static; height:auto; padding:.75rem 0 } }
     .footer{ color:var(--muted); text-align:center; margin:0 }
+    /* Hide horizontal connectors from the rail to the boxes */
+.row .left::before,
+.row .right::before {
+  display: none !important;
+}
   </style>
 </head>
 <body>
