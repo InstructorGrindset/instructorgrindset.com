@@ -5,196 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • Mission & Vision</title>
   <meta name="description" content="Mission & Vision — Instructor Grindset" />
-
-  <!-- Body font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
   <style>
-    /* Background */
+    /* ===== Base / Background ===== */
+    :root{
+      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --panel-bg:rgba(255,255,255,.03);
+      --footer-h:52px;
+      /* layout tunables */
+      --box-w:600px; --gap:26px; --content-w:calc(var(--box-w)*2 + var(--gap));
+      --content-shift:40px;          /* nudge whole content left toward sidebar */
+      --intro-offset:50px;           /* +50px below its normal spot */
+      --panel-offset:70px;           /* +70px below intro/title */
+      --buttons-offset:50px;         /* +50px below panels */
+    }
+    *{box-sizing:border-box} html,body{height:100%} a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
     body{
-      background-color:#0f1217;
-      background-image:url("/images/web-background.png");
-      background-position:center;
-      background-size:cover;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-      margin:0; color:#e7e9ee;
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height:1.55;
-      overflow:hidden; /* no-scroll page */
+      margin:0; color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.55;
+      background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed; overflow:hidden;
     }
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
-      z-index:-1;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
     }
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
 
-    /* Rooftop (optional, falls back if not present) */
-    @font-face{
-      font-family:"Rooftop";
-      src:url("/fonts/Rooftop-Bold.woff2") format("woff2");
-      font-weight:700; font-style:normal; font-display:swap;
-    }
-    @font-face{
-      font-family:"Rooftop";
-      src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");
-      font-weight:800; font-style:normal; font-display:swap;
-    }
+    /* ===== Layout ===== */
+    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
+    @media (max-width:960px){.page{grid-template-columns:1fr}}
+    .side{padding:1.25rem;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
+    .brand{display:flex;align-items:center;gap:.75rem;margin:.25rem 0 1.25rem}
+    .brand .logo-wrap{width:64px;height:64px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
+      -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%)}
+    .brand .logo-wrap img{width:120%;height:120%;object-fit:cover;object-position:center}
+    .brand .name{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;line-height:1.02;letter-spacing:.7px;font-size:1.7rem}
+    .nav h4{margin:1rem 0 .5rem;color:var(--muted);font-weight:800;letter-spacing:.6px;font-family:"Rooftop",Inter,Arial,sans-serif}
+    .nav ul{list-style:none;margin:0 0 1rem;padding:0}
+    .nav li{margin:.35rem 0}
+    .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent}
+    .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
+    .main{padding:1.25rem;position:relative}
 
-    :root{
-      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#c4892a; --glow:250,204,21; --sidebar:300px;
-      --panel-bg: rgba(255,255,255,.03);
-      --footer-h: 52px;
-
-      /* Tunables */
-      --box-w: 600px;      /* width of each glow box */
-      --gap: 26px;         /* space between boxes */
-      --content-w: calc(var(--box-w) * 2 + var(--gap));
-
-      /* NEW: how far to nudge the whole content block LEFT (toward sidebar) */
-      --content-shift: 120px; /* increase for more left; decrease for less */
-    }
-
-    *{ box-sizing:border-box }
-    html,body{ height:100% }
-
-    a{ color:var(--accent); text-decoration:none }
-    a:hover{ text-decoration:underline }
-
-    /* Layout: sidebar + main */
-    .page{
-      display:grid;
-      grid-template-columns: var(--sidebar) 1fr;
-      min-height:100vh;
-      padding-bottom: var(--footer-h);
-    }
-    @media (max-width:960px){
-      .page{ grid-template-columns:1fr }
-    }
-
-    /* Sidebar */
-    .side{ padding:1.25rem; border-right:1px solid var(--line); background:rgba(255,255,255,.02) }
-    .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem }
-    .brand .logo-wrap{
-      width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
-      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
-              mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
-    }
-    .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
-    .brand .name{
-      font-family:"Rooftop", Inter, Arial, sans-serif; font-weight:800; line-height:1.02; letter-spacing:.7px; font-size:1.7rem;
-    }
-
-    .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px; font-family:"Rooftop", Inter, Arial, sans-serif }
-    .nav ul{ list-style:none; padding:0; margin:0 0 1rem }
-    .nav li{ margin:.35rem 0 }
-    .nav a{ display:block; padding:.45rem .5rem; border:1px solid transparent }
-    .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
-
-    /* Main column */
-    .main{ padding:1.25rem; position:relative; }
-
-    /* Title */
-    h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
-    h1{
-      font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08;
-      margin:0 0 .9rem;
-      background:linear-gradient(92deg,#ffffff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 0 22px rgba(var(--glow),.12);
-      text-align:center;
-    }
-    .lead{
-      color:var(--muted);
-      font-size:clamp(1.05rem,1.1vw + .2rem,1.25rem);
-      line-height:1.7;
-    }
-
-    /* Content container (centered relative to viewport minus sidebar, ≥14px from sidebar)
-       Shifted LEFT by --content-shift without ever crossing inside 14px safety.
-    */
+    /* ===== Content Centering (accounts for sidebar) ===== */
     .content{
-      width: var(--content-w);
-      margin-left: max(
-        14px,
-        calc((100vw - var(--sidebar) - var(--content-w)) / 2 - var(--content-shift))
-      );
-      margin-right: auto;
-      padding-top: 4vh;
+      width:var(--content-w);
+      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--content-w))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:4vh;
     }
-    @media (max-width: calc(2 * 600px + 26px + 40px)){
-      .content{
-        width: auto;
-        margin: 0 14px;
-      }
-    }
+    @media (max-width: calc(2*600px + 26px + 40px)){ .content{width:auto;margin:0 14px} }
 
-    /* Intro text (~4 lines) */
+    /* ===== Typography ===== */
+    h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+    h1{
+      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:0 0 .9rem;text-align:center;
+      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 0 22px rgba(var(--glow),.12);
+    }
+    .lead{color:var(--muted);font-size:clamp(1.05rem,1.1vw + .2rem,1.25rem);line-height:1.7}
+
+    /* ===== Intro / Panels / Buttons with Offsets ===== */
     .intro{
-      text-align:center;
-      margin: 1vh auto 3vh;
-      font-weight:600;
-      color:var(--ink);
-      font-size: clamp(1.2rem, 1.3vw + .3rem, 1.55rem);
-      max-width: 56ch;
+      text-align:center;margin:calc(1vh + var(--intro-offset)) auto 3vh;font-weight:600;color:var(--ink);
+      font-size:clamp(1.2rem,1.3vw + .3rem,1.55rem);max-width:56ch;
     }
-
-    /* Panels with glow (wider, centered text) */
+    .grid{display:grid;gap:var(--gap); margin-top:var(--panel-offset)}
+    .two{grid-template-columns:var(--box-w) var(--box-w);justify-content:center}
+    @media (max-width:980px){.two{grid-template-columns:1fr}}
     .panel{
-      background:var(--panel-bg);
-      border:1px solid var(--line);
-      border-radius:.75rem;
-      padding:1.15rem 1.25rem;
-      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
-      text-align:center;
+      background:var(--panel-bg);border:1px solid var(--line);border-radius:.75rem;padding:1.15rem 1.25rem;text-align:center;
+      box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)
     }
-    .panel:hover{ box-shadow:0 0 22px rgba(var(--glow),.35), 0 0 64px rgba(var(--glow),.18) }
-
-    /* Side-by-side layout with custom gap */
-    .grid{ display:grid; gap: var(--gap) }
-    .two{
-      grid-template-columns: var(--box-w) var(--box-w);
-      justify-content:center;
-    }
-    @media (max-width:980px){
-      .two{ grid-template-columns: 1fr; }
-    }
-
-    /* Buttons (50% bigger, ≥15px gap, moved 30px closer to boxes) */
+    .panel:hover{box-shadow:0 0 22px rgba(var(--glow),.35),0 0 64px rgba(var(--glow),.18)}
     .btn-row{
-      display:flex; gap: 15px; justify-content:center; align-items:center;
-      margin-top: calc(20vh - 30px);
-      flex-wrap:wrap;
+      display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;
+      margin-top:calc(20vh - 30px + var(--buttons-offset));
     }
-    .cta{
-      display:inline-block; border-radius:0; background:#c4892a; color:#e6e7eb;
-      font-weight:800; border:0; text-align:center; white-space:nowrap;
-      padding: calc(.85rem * 1.5) calc(1.05rem * 1.5);
-    }
+    .cta{display:inline-block;padding:calc(.85rem*1.5) calc(1.05rem*1.5);border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;white-space:nowrap}
 
-    /* Footer fixed bottom (no scroll) */
+    /* ===== Footer ===== */
     .footer-wrap{
-      position:fixed; left:var(--sidebar); right:0; bottom:0;
-      height:var(--footer-h);
-      display:grid; place-items:center;
-      background:rgba(0,0,0,.25);
-      border-top:1px solid var(--line);
-      backdrop-filter: blur(2px);
+      position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
+      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)
     }
-    @media (max-width:960px){
-      .footer-wrap{ left:0 }
-    }
-    .footer{ color:var(--muted); text-align:center; margin:0 }
+    @media (max-width:960px){.footer-wrap{left:0}}
+    .footer{color:var(--muted);text-align:center;margin:0}
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- SIDEBAR -->
+    <!-- ===== SIDEBAR ===== -->
     <aside class="side">
       <div class="brand">
-        <div class="logo-wrap">
-          <img src="/images/ig-logo.png" alt="Instructor Grindset logo" />
-        </div>
+        <div class="logo-wrap"><img src="/images/ig-logo.png" alt="Instructor Grindset logo" /></div>
         <div class="name">INSTRUCTOR<br/>GRINDSET</div>
       </div>
 
@@ -225,35 +129,30 @@
       </nav>
     </aside>
 
-    <!-- MAIN -->
+    <!-- ===== MAIN ===== -->
     <main class="main">
       <div class="content">
-        <!-- Page title -->
         <h1>Mission &amp; Vision</h1>
 
         <!-- Intro -->
         <p class="intro">
-          Do you ever teach an awe inspiring lesson only to feel off on the next one? The instructor grindset helps snowsports instructors solve this painful problem in their own way, no matter where they are.
+          Do you ever teach an awe inspiring lesson only to feel off on the next one?
+          The instructor grindset helps snowsports instructors solve this painful problem in their own way, no matter where they are.
         </p>
 
-        <!-- Wider, centered glow boxes -->
+        <!-- Panels -->
         <section class="grid two" aria-label="Mission and Vision">
           <article class="panel" aria-labelledby="mission-title">
             <h2 id="mission-title">Mission</h2>
-            <p class="lead" style="margin:.6rem 0 0">
-              Helping ski instructors become athletes &amp; irresistible coaches with a season plan and lesson log.
-            </p>
+            <p class="lead" style="margin:.6rem 0 0">Helping ski instructors become athletes &amp; irresistible coaches with a season plan and lesson log.</p>
           </article>
-
           <article class="panel" aria-labelledby="vision-title">
             <h2 id="vision-title">Vision</h2>
-            <p class="lead" style="margin:.6rem 0 0">
-              A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.
-            </p>
+            <p class="lead" style="margin:.6rem 0 0">A community of snowsports instructors who move like athletes, and grow the sport by teaching to the guests' broadest definitions of fun.</p>
           </article>
         </section>
 
-        <!-- Buttons (equalize to longer label width via tiny script) -->
+        <!-- Buttons -->
         <div class="btn-row" id="btnRow">
           <a class="cta" id="btnSeason" href="https://instructorgrindset.com/season-plan">Season Plan</a>
           <a class="cta" id="btnLesson" href="https://instructorgrindset.com/lesson-log">Lesson Log</a>
@@ -262,20 +161,15 @@
     </main>
   </div>
 
-  <!-- Fixed footer -->
-  <div class="footer-wrap">
-    <p class="footer">© Instructor Grindset</p>
-  </div>
+  <!-- ===== FOOTER ===== -->
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
 
-  <!-- Match both buttons to the longer one's width -->
+  <!-- Equalize button widths to the longer label -->
   <script>
     (function(){
-      const a = document.getElementById('btnSeason');
-      const b = document.getElementById('btnLesson');
-      if(!a || !b) return;
-      a.style.width = 'auto'; b.style.width = 'auto';
-      const max = Math.max(a.offsetWidth, b.offsetWidth);
-      a.style.width = b.style.width = max + 'px';
+      const a = document.getElementById('btnSeason'), b = document.getElementById('btnLesson');
+      if(!a || !b) return; a.style.width='auto'; b.style.width='auto';
+      const max = Math.max(a.offsetWidth, b.offsetWidth); a.style.width = b.style.width = max + 'px';
     })();
   </script>
 </body>
