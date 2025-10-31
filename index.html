@@ -5,28 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • My Story</title>
   <meta name="description" content="Helping ski instructors become athletes & irresistible coaches." />
+  <link rel="canonical" href="https://instructorgrindset.com/my-story" />
+
+  <!-- Perf: speed up fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Social cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instructor Grindset — My Story">
+  <meta property="og:description" content="Helping ski instructors become athletes & irresistible coaches.">
+  <meta property="og:url" content="https://instructorgrindset.com/my-story">
+  <meta property="og:image" content="https://instructorgrindset.com/images/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <style>
     :root{
       --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
       --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --panel-bg:rgba(255,255,255,.03);
       --footer-h:52px;
 
-      /* Desktop layout knobs */
-      --content-shift:40px;          /* nudge whole content left toward sidebar */
-      --hero-w: min(900px, calc((100vw - var(--sidebar)) * 0.6)); /* video width (keeps right-side background visible) */
-      --hero-offset-top:12px;        /* drop the video a bit */
-      --story-offset-top:16px;       /* space between video and text */
-      --button-offset-top:10px;      /* space between text and button */
+      --content-shift:40px;
+      --hero-w: min(900px, calc((100vw - var(--sidebar)) * 0.6));
+      --hero-offset-top:12px;
+      --story-offset-top:16px;
+      --button-offset-top:10px;
     }
 
-    *{box-sizing:border-box} html,body{height:100%}
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0; color:var(--ink);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.55;
       background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
-      overflow:hidden; /* desktop: one-screen feel */
+      overflow:hidden;
     }
+    /* Reduce motion where possible */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto}
+    }
+    /* Avoid fixed background jank on mobile */
+    @media (max-width:960px){
+      body{background-attachment: scroll; overflow:auto}
+    }
+
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none;
       background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
@@ -35,30 +58,40 @@
     @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
     @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
 
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus-visible,.cta:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 
-    /* Layout */
+    /* Skip link */
+    .skip-link{
+      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{left:1rem; top:1rem; width:auto; height:auto; padding:.5rem .75rem; background:#000}
+
     .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
     @media (max-width:960px){.page{grid-template-columns:1fr}}
     .side{padding:1.25rem;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
     .brand{display:flex;align-items:center;gap:.75rem;margin:.25rem 0 1.25rem}
     .brand .logo-wrap{width:64px;height:64px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
       -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%)}
-    .brand .logo-wrap img{width:120%;height:120%;object-fit:cover}
+    .brand .logo-wrap img{
+      width:120%;height:120%;object-fit:cover;
+      /* Reserve space to reduce CLS */
+      aspect-ratio:1/1;
+    }
     .brand .name{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;line-height:1.02;letter-spacing:.7px;font-size:1.7rem}
     .nav h4{margin:1rem 0 .5rem;color:var(--muted);font-weight:800;letter-spacing:.6px;font-family:"Rooftop",Inter,Arial,sans-serif}
     .nav ul{list-style:none;margin:0 0 1rem;padding:0} .nav li{margin:.35rem 0}
-    .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent} .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
+    .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent}
+    .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
     .main{padding:1.25rem;position:relative}
 
-    /* Content centering that accounts for the sidebar (desktop) */
     .content{
       width: clamp(520px, var(--hero-w), 1120px);
       margin-left:max(14px, calc((100vw - var(--sidebar) - clamp(520px, var(--hero-w), 1120px))/2 - var(--content-shift)));
       margin-right:auto; padding-top:4vh;
     }
 
-    /* Typography */
     h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
     h1{
       font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:var(--story-offset-top) 0 .6rem;text-align:left;
@@ -67,7 +100,6 @@
     }
     .lead{color:var(--muted);font-size:clamp(1.05rem,1.1vw + .2rem,1.25rem);line-height:1.7;max-width:70ch}
 
-    /* Hero video (glow only around video) */
     .vid{
       margin-top:var(--hero-offset-top);
       width:100%; aspect-ratio:16/9;
@@ -76,22 +108,18 @@
     }
     .vid iframe{width:100%;height:100%;border:0;display:block}
 
-    /* CTA Button */
     .cta{display:inline-block;margin-top:var(--button-offset-top);padding:.85rem 1.05rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0}
 
-    /* Footer */
     .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
       display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
     .footer{color:var(--muted);text-align:center;margin:0}
 
-    /* ====== RESPONSIVE ====== */
     @media (max-width:1280px){
       :root{ --content-shift:28px; }
     }
     @media (max-width:960px){
       .page{grid-template-columns:1fr}
       .footer-wrap{position:static;height:auto;padding:.75rem 0}
-      body{overflow:auto}
       .content{width:min(92vw, 48rem); margin: 0 auto; padding-top:2rem;}
       :root{
         --hero-offset-top:8px;
@@ -113,18 +141,23 @@
   </style>
 </head>
 <body>
+  <!-- Skip to content for keyboard users -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
   <div class="page">
     <!-- Sidebar -->
     <aside class="side">
       <div class="brand">
-        <div class="logo-wrap"><img src="/images/ig-logo.png" alt="Instructor Grindset logo" /></div>
+        <div class="logo-wrap">
+          <img src="/images/ig-logo.png" alt="Instructor Grindset logo" loading="lazy" decoding="async" />
+        </div>
         <div class="name">INSTRUCTOR<br/>GRINDSET</div>
       </div>
 
       <nav class="nav" aria-label="About">
         <h4>About</h4>
         <ul>
-          <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
+          <li><a href="https://instructorgrindset.com/my-story" aria-current="page">My Story</a></li>
           <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
         </ul>
       </nav>
@@ -149,29 +182,27 @@
     </aside>
 
     <!-- Main -->
-    <main class="main">
+    <main class="main" id="main">
       <div class="content">
-        <!-- Hero video (no title) -->
         <div class="vid">
           <iframe
             src="https://www.youtube.com/embed/KOxRtOJsnkg?rel=0&modestbranding=1&playsinline=1"
             title="Lesson Log Video"
             loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
 
-        <!-- My Story -->
         <h1>My Story</h1>
         <p class="lead">
-          For the last 16 ski seasons, I have live and worked and 10 different ski resorts in hopes of understanding how ski schools and instructors are designed to enchant children and turn them into happiness zealots through skiing.
+          For the last 16 ski seasons, I have <strong>lived</strong> and worked <strong>at</strong> 10 different ski resorts in hopes of understanding how ski schools and instructors are designed to enchant children and turn them into happiness zealots through skiing.
         </p>
         <a class="cta" href="https://instructorgrindset.com/my-story">Full Story →</a>
       </div>
     </main>
   </div>
 
-  <!-- Footer: fixed on desktop, inline on mobile -->
   <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
 </body>
 </html>
