@@ -1,33 +1,95 @@
-<!-- /partials/sidebar.html -->
-<aside class="side">
-  <a class="brand" href="https://instructorgrindset.com/" aria-label="Go to homepage">
-    <div class="logo-wrap"><img src="/images/ig-logo.png" alt="Instructor Grindset logo" /></div>
-    <div class="name">INSTRUCTOR<br/>GRINDSET</div>
-  </a>
+<aside class="side" data-collapsible>
+  <div class="brand">
+    <a class="logo-wrap" href="/" aria-label="Home">
+      <img src="/images/ig-logo.png" alt="Instructor Grindset logo">
+    </a>
+    <a class="name" href="/">INSTRUCTOR<br>GRINDSET</a>
 
-  <nav class="nav" aria-label="About">
-    <h4>About</h4>
-    <ul>
-      <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
-      <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
-    </ul>
-  </nav>
+    <!-- Circular toggle button (arrow shows NEXT direction) -->
+    <button class="side-toggle" type="button" aria-expanded="true" aria-controls="side-body" title="Collapse sidebar">
+      <!-- Up chevron; rotates 180° when collapsed to indicate 'down' -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6.7 14.3a1 1 0 0 0 1.4 0L12 10.4l3.9 3.9a1 1 0 0 0 1.4-1.4l-4.6-4.6a1 1 0 0 0-1.4 0l-4.6 4.6a1 1 0 0 0 0 1.4z"/>
+      </svg>
+    </button>
+  </div>
 
-  <nav class="nav" aria-label="How To">
-    <h4>How To</h4>
-    <ul>
-      <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
-      <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
-      <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- Collapsible content -->
+  <div id="side-body" class="side-body">
+    <nav class="nav" aria-label="About">
+      <h4>About</h4>
+      <ul>
+        <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
+        <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
+      </ul>
+    </nav>
 
-  <nav class="nav" aria-label="My Content">
-    <h4>My Content</h4>
-    <ul>
-      <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
-      <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
-      <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
-    </ul>
-  </nav>
+    <nav class="nav" aria-label="How To">
+      <h4>How To</h4>
+      <ul>
+        <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
+        <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
+        <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <nav class="nav" aria-label="My Content">
+      <h4>My Content</h4>
+      <ul>
+        <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
+        <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
+        <li><a href="https://instructorgrindset.com/articles">Articles</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Minimal inline logic for collapse/expand -->
+  <script>
+    (function(){
+      const aside = document.currentScript.closest('aside');
+      const body  = aside.querySelector('#side-body');
+      const btn   = aside.querySelector('.side-toggle');
+
+      // Initialize expanded
+      function setExpanded(expanded){
+        btn.setAttribute('aria-expanded', expanded);
+        btn.title = expanded ? 'Collapse sidebar' : 'Expand sidebar';
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          body.style.display = expanded ? '' : 'none';
+          body.style.maxHeight = '';
+          return;
+        }
+
+        if (expanded) {
+          body.style.display = '';
+          // prepare to expand: set explicit height to enable transition
+          body.style.maxHeight = body.scrollHeight + 'px';
+          // after transition, remove fixed height so it adapts
+          body.addEventListener('transitionend', function tidy(e){
+            if (e.propertyName === 'max-height') {
+              body.style.maxHeight = '';
+              body.removeEventListener('transitionend', tidy);
+            }
+          });
+        } else {
+          // collapse: set current height then animate to 0
+          body.style.maxHeight = body.scrollHeight + 'px';
+          // force reflow
+          void body.offsetHeight;
+          body.style.maxHeight = '0px';
+        }
+      }
+
+      // Set initial height so the first collapse animates smoothly
+      body.style.maxHeight = body.scrollHeight + 'px';
+      // Remove fixed height after load so layout is fluid
+      requestAnimationFrame(()=>{ body.style.maxHeight = ''; });
+
+      btn.addEventListener('click', ()=>{
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        setExpanded(!expanded);
+      });
+    })();
+  </script>
 </aside>
