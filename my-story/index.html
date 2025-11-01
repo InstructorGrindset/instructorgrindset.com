@@ -17,13 +17,17 @@
       --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --footer-h:52px;
 
       /* Timeline system */
-      --rail:3px;                /* width of vertical line + box borders + connectors */
+      --rail:3px;                /* width of vertical line + box borders */
       --rail-color:#c4892a;      /* bronze/orange */
       --box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
       --gap:22px;                /* vertical gap between rows */
       --col-gap:28px;            /* horizontal space between center rail and boxes */
       --content-shift:40px;      /* nudge content toward sidebar */
       --content-max: min(1200px, calc(100vw - var(--sidebar) - 100px));
+
+      /* Where the rail starts/stops (so ends hide behind Early/Future) */
+      --rail-top: 36px;          /* tweak to sit just under Early Life */
+      --rail-bottom: 36px;       /* tweak to sit just above Future */
     }
 
     *{ box-sizing:border-box } html,body{ height:100% }
@@ -72,32 +76,20 @@
     /* ===== Timeline layout ===== */
     .timeline-wrap{ position:relative; margin-top:18px }
 
-    /* Single continuous vertical rail */
+    /* Single continuous vertical rail (cropped so ends hide) */
     .timeline-wrap::before{
-      content:""; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
+      content:""; position:absolute; left:50%; transform:translateX(-50%);
+      top:var(--rail-top); bottom:var(--rail-bottom);
       width:var(--rail); background:var(--rail-color); border-radius:999px;
-      /* Shorten the vertical rail by adding top/bottom crop */
-.timeline-wrap::before {
-  top: 40px !important;    /* increase to crop more from the top */
-  bottom: 80px !important; /* increase to crop more from the bottom */
-}
-
     }
 
-    /* Early + Future end caps */
-    .cap{
-      width:var(--rail); height:12px; background:var(--rail-color); border-radius:999px;
-      margin:0 auto;
-    }
-
-    /* Early Life (centered above timeline, connected) */
+    /* Early Life (centered above timeline, no visible rail end) */
     .early-center{ max-width:900px; margin:0 auto 10px; position:relative; }
     .early{
       background:#e5e7eb; color:#111; border-left: var(--rail) solid var(--rail-color);
       border-radius:.8rem; padding:1rem 1.1rem; box-shadow:0 0 22px rgba(196,137,42,.35);
     }
     .early h2{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.15rem; color:var(--cta) }
-    .connector-down{ width:var(--rail); height:24px; background:var(--rail-color); margin:8px auto 0; border-radius:999px }
 
     /* Rows: each year is one row with L/R columns */
     .rows{ margin-top:10px }
@@ -105,15 +97,6 @@
       display:grid; grid-template-columns: 1fr 1fr; column-gap: calc(var(--col-gap) + var(--rail));
       align-items:center; position:relative; margin: var(--gap) 0;
     }
-
-    /* Horizontal connectors (from rail OUT to boxes) */
-    .row .left::before,
-    .row .right::before{
-      content:""; position:absolute; top:50%; transform:translateY(-50%);
-      height:var(--rail); width:var(--col-gap); background:var(--rail-color); border-radius:999px;
-    }
-    .row .left::before{ left: calc(50% - var(--rail)/2 - var(--col-gap)) } /* rail → left box */
-    .row .right::before{ left: calc(50% + var(--rail)/2) }                /* rail → right box */
 
     .left, .right{ position:relative }
     .entry{ transition: transform .15s ease, box-shadow .2s ease; will-change: transform, box-shadow }
@@ -129,8 +112,11 @@
     .box h3{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.1rem; color:#0f1217 }
     .box p{ margin:0; color:#111; line-height:1.6 }
 
-    /* Future (centered below timeline, connected) */
-    .connector-up{ width:var(--rail); height:24px; background:var(--rail-color); margin:0 auto 10px; border-radius:999px }
+    /* No horizontal connectors (clean look) */
+    .row .left::before,
+    .row .right::before{ display:none }
+
+    /* Future (centered below timeline, no visible rail end) */
     .future-center{ max-width:900px; margin:0 auto }
     .future .cta{
       display:inline-block; margin-top:.75rem; padding:.85rem 1.05rem; border-radius:0;
@@ -141,7 +127,6 @@
     @media (max-width:1100px){ :root{ --col-gap:22px } }
     @media (max-width:860px){
       .row{ grid-template-columns:1fr; column-gap:0 }
-      .row .left::before, .row .right::before{ display:none } /* hide horizontal bars on mobile */
     }
 
     /* Footer */
@@ -151,11 +136,6 @@
     }
     @media (max-width:960px){ .footer-wrap{ position:static; height:auto; padding:.75rem 0 } }
     .footer{ color:var(--muted); text-align:center; margin:0 }
-    /* Hide horizontal connectors from the rail to the boxes */
-.row .left::before,
-.row .right::before {
-  display: none !important;
-}
   </style>
 </head>
 <body>
@@ -178,14 +158,12 @@
         <h1>My Story</h1>
         <p class="intro">Early life, career milestones, certifications, and where I’m headed next.</p>
 
-        <!-- Early Life (centered, connected to top of timeline) -->
+        <!-- Early Life (centered, rail hidden behind) -->
         <div class="early-center">
-          <div class="cap" aria-hidden="true"></div>
           <div class="early">
             <h2>Early Life</h2>
             <p>I was born in France and moved to the Pacific northwest at age 7. I skied in the Crystal Mountain weekend program and it quickly became the only thing I looked forward to during the grey, depressing Seattle winters. I always hated school and loathed the idea of blurring the lines between work and play in the form of homework. At age 15 I was eager to put some money in my pocket and start living, I got a job bussing for a local restaurant and another one as an assistant ski instructor at SnowSports NorthWest.</p>
           </div>
-          <div class="connector-down" aria-hidden="true"></div>
         </div>
 
         <section class="timeline-wrap" aria-label="Timeline">
@@ -236,7 +214,7 @@
               <div class="right entry">
                 <div class="box">
                   <h3></h3>
-                  <p>Attained the NZSIA Alpine 1 cert and failed Alpine Level 2 by less than a point.</p>
+                  <p>Attained the NZSIA alpine 1 cert and failed alpine level 2 by less than a point.</p>
                 </div>
               </div>
             </div>
@@ -252,7 +230,7 @@
               <div class="right"></div>
             </div>
 
-            <!-- 2020/21 (career + 2021 certs) -->
+            <!-- 2020/21 (career + 2020/2021 certs) -->
             <div class="row">
               <div class="left entry">
                 <div class="box">
@@ -263,7 +241,7 @@
               <div class="right entry">
                 <div class="box">
                   <h3></h3>
-                  <p>Attained the PSIA Alpine 1 cert, and failed a Freestyle Level 1 cert despite weekly clinics for 2 years. I promised myself I’d pass all 3 levels of Freestyle with perfect scores and moved to Mt. Hood to train myself.</p>
+                  <p>Attained the PSIA alpine 1 cert, and failed a freestyle level 1 cert despite attending clinics weekly for 2 years and being told I was more than ready. I promised myself I’d pass all 3 levels of Freestyle certs and moved to Mt.Hood to train myself.</p>
                 </div>
               </div>
             </div>
@@ -279,7 +257,7 @@
               <div class="right"></div>
             </div>
 
-            <!-- 2022/23 (career only) -->
+            <!-- 2022/23 (career + 2022/2023 certs) -->
             <div class="row">
               <div class="left entry">
                 <div class="box">
@@ -287,10 +265,15 @@
                   <p>In November 2022, I moved to Kirkwood to work for Timber Creek Ski School—it was the place to be that year. I won “Certified Rookie of the Year” and “Biggest Send of the Year.” I ended my season where my love of reading re-ignited; I broke my entire lumbar and my right elbow.</p>
                 </div>
               </div>
-              <div class="right"></div>
+              <div class="right entry">
+                <div class="box">
+                  <h3></h3>
+                  <p>Attained the PSIA children’s specialist 1 cert and it changed my life. I also passed the alpine 2 technical and the freestyle 1 cert.</p>
+                </div>
+              </div>
             </div>
 
-            <!-- 2023/24 (career + 2023 certs) -->
+            <!-- 2023/24 (career + 2023/2024 certs) -->
             <div class="row">
               <div class="left entry">
                 <div class="box">
@@ -301,12 +284,12 @@
               <div class="right entry">
                 <div class="box">
                   <h3></h3>
-                  <p>Attained PSIA Children’s Specialist 1—it changed my life. I also passed Alpine 2 technical and Freestyle 1.</p>
+                  <p>Attained the freestyle 2 cert.</p>
                 </div>
               </div>
             </div>
 
-            <!-- 2024/25 (career + 2024 certs) -->
+            <!-- 2024/25 (career only) -->
             <div class="row">
               <div class="left entry">
                 <div class="box">
@@ -314,12 +297,7 @@
                   <p>I went back to familiar Kirkwood to finish healing and enjoy the 24/25 season.</p>
                 </div>
               </div>
-              <div class="right entry">
-                <div class="box">
-                  <h3></h3>
-                  <p>Attained the Freestyle 2 cert.</p>
-                </div>
-              </div>
+              <div class="right"></div>
             </div>
 
             <!-- 2025 (career + 2025 certs) -->
@@ -333,15 +311,14 @@
               <div class="right entry">
                 <div class="box">
                   <h3></h3>
-                  <p>enrolled in the Penn State Snowsports Leadership program and attained Alpine 2 and Freestyle 3.</p>
+                  <p>Enrolled in the Penn State Snowsports leadership program and attained the alpine 2 cert and freestyle 3 cert.</p>
                 </div>
               </div>
             </div>
 
           </div>
 
-          <!-- Future (centered and connected to bottom of timeline) -->
-          <div class="connector-up" aria-hidden="true"></div>
+          <!-- Future (centered and rail ends hidden behind) -->
           <div class="future-center">
             <div class="future entry">
               <div class="box">
@@ -350,7 +327,6 @@
                 <a class="cta" href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision →</a>
               </div>
             </div>
-            <div class="cap" aria-hidden="true" style="margin-top:10px"></div>
           </div>
         </section>
       </div>
