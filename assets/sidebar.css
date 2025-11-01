@@ -19,3 +19,31 @@
 .nav li{ margin:.35rem 0 }
 .nav a{ display:block; padding:.45rem .5rem; border:1px solid transparent }
 .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line) }
+/* Force sidebar link colors (normal + visited) */
+.side a,
+.side .nav a,
+.side .nav a:link,
+.side .nav a:visited {
+  color: #e7e9ee;          /* very light gray to match your theme */
+  text-decoration: none;
+}
+
+/* Hover/active styles */
+.side .nav a:hover {
+  background: rgba(255,255,255,.04);
+  border-color: #2a3140;   /* matches --line */
+}
+
+.side .nav a:active,
+.side .nav a:focus-visible {
+  outline: 2px solid #2a3140;
+  outline-offset: 2px;
+}
+
+/* If your brand title is a link, keep it light too */
+.brand .name,
+.brand .name a,
+.brand .name a:visited {
+  color: #e7e9ee;
+  text-decoration: none;
+}
