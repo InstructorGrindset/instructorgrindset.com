@@ -1,87 +1,86 @@
-/* ===== Shared sidebar styles (v3) ===== */
+/* ===== Shared sidebar styles (reverted, no animation) ===== */
 
 :root{
-  --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --cta:#c4892a;
+  --ink:#e7e9ee;        /* light text */
+  --muted:#cbd5e1;      /* muted text */
+  --line:#2a3140;       /* borders */
 }
 
+/* Sidebar container */
 .side{
   padding:1.25rem;
   border-right:1px solid var(--line);
   background:rgba(255,255,255,.02);
   color:var(--ink);
-  position:relative;
 }
 
+/* Brand row */
 .brand{
-  display:flex; align-items:center; gap:.75rem;
-  margin:.25rem 0 1rem;
-  position:relative;
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  margin:.25rem 0 1.25rem;
 }
 
-/* Logo mask */
+/* Circular logo mask */
 .brand .logo-wrap{
-  width:64px; height:64px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
+  width:64px; height:64px;
+  border-radius:50%;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  /* mask to hide any outer rim */
   -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
           mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
 }
-.brand .logo-wrap img{ width:120%; height:120%; object-fit:cover; object-position:center }
+.brand .logo-wrap img{
+  width:120%; height:120%;
+  object-fit:cover; object-position:center;
+}
 
-/* Brand title (linkable) */
+/* Brand title (clickable) */
 .brand .name,
 .brand .name a,
 .brand .name a:visited{
   font-family:"Rooftop", Inter, Arial, sans-serif;
-  font-weight:800; line-height:1.02; letter-spacing:.7px;
-  font-size:1.7rem; color:var(--ink); text-decoration:none;
-}
-
-/* ===== Collapsible control ===== */
-.side-toggle{
-  position:absolute; top:6px; right:6px;
-  width:36px; height:36px; border-radius:50%;
-  display:grid; place-items:center;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:.7px;
+  font-size:1.7rem;
   color:var(--ink);
-  cursor:pointer;
-  box-shadow:0 0 10px rgba(250,204,21,.15), 0 0 24px rgba(250,204,21,.08);
-}
-.side-toggle:hover{ filter:brightness(1.05) }
-.side-toggle:focus-visible{
-  outline:2px solid var(--line); outline-offset:2px;
-}
-.side-toggle svg{ width:18px; height:18px; transition:transform .2s ease }
-
-/* Arrow logic: up when expanded (next move = collapse up); down when collapsed (next move = expand down) */
-.side-toggle[aria-expanded="false"] svg{ transform: rotate(180deg) }
-
-/* ===== Collapsible body ===== */
-.side-body{
-  overflow: hidden;           /* hides content during animation */
-  transition: max-height .28s ease;
+  text-decoration:none;
 }
 
-/* Reduce motion users: no animation, instant show/hide */
-@media (prefers-reduced-motion: reduce){
-  .side-body{ transition: none }
-}
-
-/* Nav sections */
+/* Section headings */
 .nav h4{
-  margin:1rem 0 .5rem; color:var(--muted);
-  font-weight:800; letter-spacing:.6px;
+  margin:1rem 0 .5rem;
+  color:var(--muted);
+  font-weight:800;
+  letter-spacing:.6px;
   font-family:"Rooftop", Inter, Arial, sans-serif;
 }
-.nav ul{ list-style:none; padding:0; margin:0 0 1rem }
-.nav li{ margin:.35rem 0 }
+
+/* Lists */
+.nav ul{ list-style:none; padding:0; margin:0 0 1rem; }
+.nav li{ margin:.35rem 0; }
+
+/* Links (force normal + visited to light gray to avoid purple) */
 .nav a,
 .nav a:link,
 .nav a:visited{
-  display:block; padding:.45rem .5rem;
+  display:block;
+  padding:.45rem .5rem;
   border:1px solid transparent;
-  color:var(--ink); text-decoration:none;
+  color:var(--ink);
+  text-decoration:none;
 }
 .nav a:hover{
   background:rgba(255,255,255,.04);
   border-color:var(--line);
+}
+
+/* Optional focus ring for keyboard users */
+.nav a:focus-visible{
+  outline:2px solid var(--line);
+  outline-offset:2px;
 }
