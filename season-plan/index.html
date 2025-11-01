@@ -72,6 +72,32 @@
     .check h3{ margin:0 0 .25rem; font-size:1.05rem }
 
     .muted{ color:var(--muted) }
+    /* Bottom call-to-action */
+.btn-row {
+  display: grid;
+  place-items: center;
+  margin-top: 1.75rem;     /* space above the button */
+  margin-bottom: 2.25rem;  /* space before footer */
+}
+.cta.big {
+  display: inline-block;
+  padding: 1.05rem 1.4rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--cta);        /* bronze */
+  color: #e6e7eb;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: .2px;
+  box-shadow: 0 0 18px rgba(var(--glow), .25), 0 0 48px rgba(var(--glow), .12);
+  transform: translateZ(0);
+}
+.cta.big:hover {
+  filter: brightness(1.06);
+}
+.cta.big:active {
+  transform: scale(0.99);
+}
   </style>
 </head>
 <body>
@@ -152,6 +178,10 @@
 
         <p class="muted" style="text-align:center;margin:1.5rem 0 0">© Instructor Grindset</p>
       </div>
+      <!-- Bottom CTA -->
+<div class="btn-row">
+  <a class="cta big" href="https://instructorgrindset.com/lesson-log">become irresistable</a>
+</div>
     </main>
   </div>
 </body>
