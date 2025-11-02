@@ -1,10 +1,259 @@
-<script>
-  (function(){
-    const t = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=4')
-      .then(r => r.text())
-      .then(h => { const d=document.createElement('div'); d.innerHTML=h.trim(); t.replaceWith(d.firstElementChild); })
-      .catch(()=>{ t.innerHTML='<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'; });
-  })();
-</script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset • Lesson Log</title>
+  <meta name="description" content="Lesson Logging & Analytics — video walkthrough and written guide to build a Google Sheets + Google Forms client index and lesson log." />
+  <link rel="canonical" href="https://instructorgrindset.com/lesson-log" />
 
+  <!-- Fonts + shared sidebar styles (kept at v=4 per your working setup) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=4">
+
+  <style>
+    :root{
+      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --footer-h:52px;
+      --content-shift:40px; --wrap-max: min(1100px, calc(100vw - var(--sidebar) - 40px));
+      --panel-bg: rgba(255,255,255,.03);
+      --panel-shadow: 0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      --thumb-radius:.75rem;
+      --grid-gap:14px;
+    }
+
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
+      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
+    }
+
+    /* Rooftop headings (fallback if absent) */
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a.cta:hover{text-decoration:none}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
+
+    /* Layout */
+    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
+    @media (max-width:960px){.page{grid-template-columns:1fr}}
+    .main{padding:1.25rem}
+    .content{
+      width:var(--wrap-max);
+      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:1.25rem; padding-bottom:2.5rem;
+    }
+    @media (max-width:960px){ .content{width:min(94vw, 1100px); margin:0 auto} }
+
+    h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+    h1{
+      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
+      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 0 22px rgba(var(--glow),.12);
+    }
+    .lede{ text-align:center; color:var(--muted); max-width:70ch; margin:.25rem auto 1.1rem }
+
+    /* Video */
+    .vid{
+      position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--thumb-radius); overflow:hidden; background:#000;
+      box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
+    }
+    iframe{width:100%;height:100%;border:0;display:block}
+
+    /* Panels (glow boxes) */
+    .panel{
+      background:var(--panel-bg); border:1px solid var(--line); border-radius:.8rem;
+      padding:1.05rem 1.15rem; box-shadow:var(--panel-shadow);
+    }
+    .panel + .panel{ margin-top:.9rem }
+    .ts{display:inline-block; font-weight:800; color:#e6e7eb; background:rgba(0,0,0,.35); border:1px solid var(--line);
+        padding:.22rem .5rem; border-radius:.4rem; letter-spacing:.2px; margin-bottom:.45rem}
+
+    /* Field table */
+    .field-table{
+      width:100%; border-collapse:collapse; margin:.5rem 0 0;
+    }
+    .field-table th, .field-table td{
+      border:1px solid var(--line); padding:.5rem .6rem; vertical-align:top; background:rgba(255,255,255,.02);
+    }
+    .field-table th{ text-align:left; font-weight:800; background:rgba(255,255,255,.05) }
+
+    /* Bottom CTA row */
+    .btn-row{ display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; margin-top:1.25rem }
+    .cta{
+      display:inline-block; padding:.9rem 1.1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0; text-decoration:none;
+      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+    }
+    .cta.alt{
+      background:rgba(255,255,255,.06); border:1px solid var(--line); color:var(--ink);
+    }
+    .cta:active{ transform:scale(.99) }
+
+    /* Footer */
+    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
+      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
+    @media (max-width:960px){ .footer-wrap{ position:static; height:auto; padding:.75rem 0 } }
+    .footer{ color:var(--muted); text-align:center; margin:0 }
+  </style>
+</head>
+<body>
+  <!-- Skip to content -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="page">
+    <!-- Sidebar -->
+    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <script>
+      /* WORKING SCRIPT (unchanged): sidebar loader using ?v=4 */
+      (function(){
+        const t = document.getElementById('sidebar-placeholder');
+        fetch('/partials/sidebar.html?v=4')
+          .then(r => r.text())
+          .then(h => { const d=document.createElement('div'); d.innerHTML=h.trim(); t.replaceWith(d.firstElementChild); })
+          .catch(()=>{ t.innerHTML='<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'; });
+      })();
+    </script>
+
+    <!-- Main -->
+    <main class="main" id="main">
+      <div class="content">
+        <header>
+          <h1>Lesson Logging &amp; Analytics</h1>
+          <p class="lede">Build a Google Sheets + Google Forms workflow to track lessons, clients, and trends.</p>
+        </header>
+
+        <!-- Video -->
+        <div class="vid" style="margin-bottom:1rem">
+          <iframe
+            src="https://www.youtube.com/embed/nIF8quNAW0I?rel=0&modestbranding=1&playsinline=1"
+            title="Lesson Logging &amp; Analytics — Video Walkthrough"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- Written Guide -->
+        <section aria-labelledby="guide-title">
+          <h2 id="guide-title" style="text-align:center;margin:.25rem 0 1rem">Written Guide</h2>
+
+          <!-- 00:00 -->
+          <article class="panel">
+            <span class="ts">00:00 — Introduction to Tutorial</span>
+            <p>
+              In this guide, you’ll learn how to create your own client index using Google Sheets and Google Forms. You’ll build a searchable client index and a simple lesson log so you can record sessions quickly on the go. This system will help you remember what you did with specific clients and identify VIPs.
+            </p>
+          </article>
+
+          <!-- 01:07 -->
+          <article class="panel">
+            <span class="ts">01:07 — Creating Google Sheets</span>
+            <p>
+              Start by opening a new Google Sheet and naming it <em>lesson log</em>. Inside that file, create two tabs: one called <strong>lesson log</strong> and one called <strong>client index</strong>. Once those are ready, you’ll build a Google Form that automatically feeds lesson entries into the sheet.
+            </p>
+          </article>
+
+          <!-- 01:48 -->
+          <article class="panel">
+            <span class="ts">01:48 — Form Field Setup</span>
+            <p>When you set up the Google Form, enter your fields in this order:</p>
+            <table class="field-table" aria-label="Recommended Google Form fields">
+              <thead>
+                <tr><th>Field Name</th><th>Field Type</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Date</td><td>Date</td></tr>
+                <tr><td>Instructor</td><td>Dropdown</td></tr>
+                <tr><td>Student</td><td>Short answer</td></tr>
+                <tr><td>Age</td><td>Number</td></tr>
+                <tr><td>Group Size</td><td>Number</td></tr>
+                <tr><td>Discipline</td><td>Dropdown</td></tr>
+                <tr><td>Level</td><td>Dropdown</td></tr>
+                <tr><td>Lesson Type</td><td>Dropdown</td></tr>
+                <tr><td>Technical Focus</td><td>Dropdown</td></tr>
+                <tr><td>Behavior Focus</td><td>Dropdown</td></tr>
+                <tr><td>Terrain/Areas</td><td>Dropdown</td></tr>
+                <tr><td>Conditions</td><td>Short answer</td></tr>
+                <tr><td>Key Outcomes</td><td>Paragraph</td></tr>
+                <tr><td>Next Steps</td><td>Paragraph</td></tr>
+                <tr><td>Private?</td><td>Multiple choice</td></tr>
+                <tr><td>Parent Email</td><td>Short answer</td></tr>
+                <tr><td>Notes</td><td>Paragraph</td></tr>
+                <tr><td>Lesson Length</td><td>Number</td></tr>
+              </tbody>
+            </table>
+            <p style="margin-top:.6rem">
+              You can customize questions like age or group size, but make sure number-based fields—like lesson length—require whole numbers for accurate tracking. Use drop-down menus for cleaner data, and keep <em>required</em> off for flexibility.
+            </p>
+          </article>
+
+          <!-- 08:20 -->
+          <article class="panel">
+            <span class="ts">08:20 — Linking Form to Sheet</span>
+            <p>
+              After building your form, link it to the spreadsheet. Go to the Form’s <strong>Responses</strong> tab and select <strong>Link to a spreadsheet</strong>. Choose the existing <em>lesson log</em> file. Google Forms will automatically create a new tab for responses inside that file. Rename it <strong>“lesson log”</strong> and check that your spelling, column order, and names match exactly. If you now have two <em>lesson log</em> tabs, delete the one that isn’t linked to Forms.
+            </p>
+          </article>
+
+          <!-- 10:13 -->
+          <article class="panel">
+            <span class="ts">10:13 — Client Index Setup</span>
+            <p>
+              Move to the <strong>client index</strong> tab and paste your student data from the linked ChatGPT into row one, making sure everything lines up from column <strong>A</strong> through <strong>I</strong>. Then, copy in the summary formulas I’ve provided (or your own) to generate automatic updates. You don’t need to understand the code—just make sure everything lands in the right cell.
+            </p>
+          </article>
+
+          <!-- 11:49 -->
+          <article class="panel">
+            <span class="ts">11:49 — Testing and Troubleshooting</span>
+            <p>
+              Test your setup. Submit a sample lesson through your form and make sure it appears correctly in both the log and the client index. If the data doesn’t line up, check column names, formulas, and linked fields. You may have to re-paste formulas for broken columns. Enter multiple lessons for the same student to confirm that the system updates accurately.
+            </p>
+          </article>
+
+          <!-- 19:27 -->
+          <article class="panel">
+            <span class="ts">19:27 — Analytics Overview</span>
+            <p>
+              Once it’s working, you can use the form data to track your teaching trends. Review responses and generate simple analytics right inside Google Forms or Google Sheets. After a few years of tracking, you’ll want to use Tableau to visualize data from specific timeframes—the free version should do. You’ll be able to identify common lesson types, skill levels, and recurring teaching themes. Categorize your questions carefully so your analytics reflect what matters most to you.
+            </p>
+          </article>
+
+          <!-- 20:37 -->
+          <article class="panel">
+            <span class="ts">20:37 — Final Thoughts</span>
+            <p>
+              By combining Google Sheets and Forms, you’ll have a professional, mobile-friendly system for managing your teaching data. Once you’ve built this tool, you’ll be able to make returning guests feel important by remembering exactly what you did that day. That’s how you become irresistible.
+            </p>
+            <p style="margin:.5rem 0 0">
+              Contact me with questions. I can even provide hands-on tech support if you send me temporary access to your build.
+            </p>
+          </article>
+
+          <!-- Bottom CTAs -->
+          <div class="btn-row">
+            <a class="cta" href="https://instructorgrindset.com/contact">Contact Me</a>
+            <a class="cta alt" href="https://chatgpt.com/share/6902ce49-a27c-800b-acf0-05c1e3d3a1bd" target="_blank" rel="noopener">chatGPT guide</a>
+            <a class="cta" href="https://instructorgrindset.com/season-plan">Become Consistent</a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
+</body>
+</html>
