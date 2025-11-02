@@ -3,23 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Instructor Grindset • YouTube Channel</title>
   <meta name="description" content="Latest videos and curated playlists from Instructor Grindset." />
+  <link rel="canonical" href="https://instructorgrindset.com/youtube-channel" />
+
+  <!-- Social -->
+  <meta property="og:title" content="Instructor Grindset — YouTube Channel">
+  <meta property="og:description" content="Latest videos and curated playlists from Instructor Grindset.">
+  <meta property="og:url" content="https://instructorgrindset.com/youtube-channel">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://instructorgrindset.com/images/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=1">
+
+  <!-- Shared sidebar styles (cache-busted) -->
+  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
   <style>
     :root{
       --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
       --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --panel-bg:rgba(255,255,255,.03);
       --footer-h:52px;
-
-      /* Layout knobs */
-      --content-shift:40px;          /* nudge content toward sidebar */
-      --grid-gap: 14px;
-      --thumb-radius: .75rem;
+      --content-shift:40px; --grid-gap:14px; --thumb-radius:.75rem;
     }
-
     *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0; color:var(--ink);
@@ -32,28 +43,15 @@
     }
     @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
     @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
-
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
 
     /* Layout shell */
     .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
     @media (max-width:960px){.page{grid-template-columns:1fr}}
-    .side{padding:1.25rem;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
-    .brand{display:flex;align-items:center;gap:.75rem;margin:.25rem 0 1.25rem}
-    .brand .logo-wrap{width:64px;height:64px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
-      -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%)}
-    .brand .logo-wrap img{width:120%;height:120%;object-fit:cover}
-    .brand .name{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;line-height:1.02;letter-spacing:.7px;font-size:1.7rem}
-    .nav h4{margin:1rem 0 .5rem;color:var(--muted);font-weight:800;letter-spacing:.6px;font-family:"Rooftop",Inter,Arial,sans-serif}
-    .nav ul{list-style:none;margin:0 0 1rem;padding:0} .nav li{margin:.35rem 0}
-    .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent} .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
-
-    /* Make the sidebar brand look like a heading, not a blue link */
-.side .brand,
-.side .brand:visited { color: var(--ink); text-decoration: none; }
-.side .brand:hover { text-decoration: none; filter: brightness(1.04); }
-.side .brand .name { color: inherit; } /* ensure the text inherits the ink color */
-
     .main{padding:1.25rem}
     .content{
       width:min(1100px, calc(100vw - var(--sidebar) - 40px));
@@ -83,14 +81,15 @@
     @media (max-width:980px){ .three{grid-template-columns:repeat(2,minmax(0,1fr))} }
     @media (max-width:640px){ .three{grid-template-columns:1fr} }
 
-    /* Subscribe button */
+    /* CTA */
     .cta{
       display:inline-block; padding:.8rem 1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0;
       text-align:center; white-space:nowrap;
     }
-    .stack{display:grid; gap:.6rem}
     .row{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin:.6rem 0 1rem}
     .row .cta{margin-left:auto}
+
+    /* Footer */
     .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
       display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
     .footer{color:var(--muted);text-align:center;margin:0}
@@ -98,34 +97,34 @@
   </style>
 </head>
 <body>
-  <div class="page">
-    <!-- Sidebar -->
-   <!-- placeholder gets replaced at runtime -->
-<aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-<script>
-  (function(){
-    const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=4')  // bump ?v= number when you edit the partial to bust cache
-      .then(r => r.text())
-      .then(html => {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = html.trim();
-        target.replaceWith(tmp.firstElementChild);
-      })
-      .catch(() => {
-        target.removeAttribute('aria-busy');
-        target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>';
-      });
-  })();
-</script>
+  <!-- Skip to content -->
+  <a class="skip-link" href="#main">Skip to main content</a>
 
+  <div class="page">
+    <!-- Sidebar (cache-busted fetch) -->
+    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <script>
+      (function(){
+        const target = document.getElementById('sidebar-placeholder');
+        fetch('/partials/sidebar.html?v=5')
+          .then(r => r.text())
+          .then(html => {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html.trim();
+            target.replaceWith(tmp.firstElementChild);
+          })
+          .catch(() => {
+            target.removeAttribute('aria-busy');
+            target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>';
+          });
+      })();
+    </script>
 
     <!-- Main -->
-    <main class="main">
+    <main class="main" id="main">
       <div class="content">
         <header class="row">
           <h1 style="margin:0">YouTube Channel</h1>
-          <!-- Simple subscribe CTA (opens YouTube with confirm) -->
           <a class="cta" href="https://www.youtube.com/@InstructorGrindset?sub_confirmation=1" target="_blank" rel="noopener">Subscribe on YouTube</a>
         </header>
 
@@ -150,18 +149,17 @@
 
   <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
 
+  <!-- YouTube loader (hardcoded channelId; one fewer API call) -->
   <script>
-    /* ====== CONFIG — PASTE YOUR RESTRICTED API KEY ON THE NEXT LINE ====== */
+   /* ====== REQUIRED: replace with your real channel ID (UC… format) ====== */
+const CHANNEL_ID = 'UCIa3wQYBROQwsR0bMJInDfw';
+
+    /* ====== API KEY (restrict by HTTP referrer + YouTube Data API v3) ====== */
     const API_KEY = 'AIzaSyCTvr8-TNJoj9yzKKFoECvorSkc_5E8BlY';
-    /* Domain restriction: allow only https://instructorgrindset.com (and www if needed)
-       API restriction: YouTube Data API v3
-    */
 
-    /* ====== CHANNEL + PLAYLIST SETTINGS ====== */
-    const CHANNEL_QUERY = 'InstructorGrindset'; // used to resolve the channelId
-    const PLAYLIST_ID   = 'PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv'; // your 3×3 playlist
+    /* ====== PLAYLIST (for the 3×3 grid) ====== */
+    const PLAYLIST_ID = 'PLMW_Kay-5LUXG2s1an3tiN5Lcc8KFXcKv';
 
-    /* ====== HELPERS ====== */
     const YT = 'https://www.googleapis.com/youtube/v3';
 
     async function yt(endpoint, params){
@@ -170,19 +168,6 @@
       const res = await fetch(url.toString());
       if(!res.ok) throw new Error('YouTube API error: ' + res.status);
       return res.json();
-    }
-
-    async function resolveChannelId(query){
-      // Search for the channel by name/handle text
-      const data = await yt('/search', {
-        part: 'snippet',
-        type: 'channel',
-        q: query,
-        maxResults: 1
-      });
-      const item = data.items?.[0];
-      if(!item) throw new Error('Channel not found');
-      return item.id.channelId;
     }
 
     async function fetchLatestVideoId(channelId){
@@ -209,29 +194,24 @@
 
     function iframeHTML(videoId, title = 'YouTube video'){
       const src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1`;
-      return `<iframe src="${src}" title="${title}" loading="lazy"
+      return `<iframe src="${src}" title="${title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe>`;
     }
 
-    /* ====== RENDER ====== */
     async function render(){
       try{
-        const channelId = await resolveChannelId(CHANNEL_QUERY);
-
         // Latest upload
-        const latestId = await fetchLatestVideoId(channelId);
+        const latestId = await fetchLatestVideoId(CHANNEL_ID);
         document.getElementById('latest').innerHTML = iframeHTML(latestId, 'Latest Upload');
 
         // 3×3 grid from playlist
         const ids = await fetchPlaylistVideoIds(PLAYLIST_ID, 9);
-        const grid = document.getElementById('grid');
-        grid.innerHTML = ids.map(id => `<div class="vid">${iframeHTML(id)}</div>`).join('');
-
+        document.getElementById('grid').innerHTML = ids.map(id => `<div class="vid">${iframeHTML(id)}</div>`).join('');
       }catch(err){
         console.error(err);
         const latest = document.getElementById('latest');
-        if(latest) latest.innerHTML = `<div style="padding:1rem;color:#fca5a5">Couldn’t load videos. Check API key restrictions and quota.</div>`;
+        if(latest) latest.innerHTML = `<div style="padding:1rem;color:#fca5a5">Couldn’t load videos. Check API key, channelId, and quota.</div>`;
       }
     }
 
