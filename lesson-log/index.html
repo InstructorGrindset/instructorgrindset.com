@@ -80,7 +80,7 @@
     .ts{display:inline-block; font-weight:800; color:#e6e7eb; background:rgba(0,0,0,.35); border:1px solid var(--line);
         padding:.22rem .5rem; border-radius:.4rem; letter-spacing:.2px; margin-bottom:.45rem}
 
-    /* Copy blocks (TSV) */
+    /* Copy blocks (TSV / formulas) */
     .copywrap{ margin-top:.6rem }
     .copyhint{ margin:.25rem 0 .35rem; color:var(--muted); font-size:.95rem }
     .copyarea{
@@ -97,6 +97,10 @@
       border:1px solid var(--line); padding:.5rem .6rem; vertical-align:top; background:rgba(255,255,255,.02);
     }
     .field-table th{ text-align:left; font-weight:800; background:rgba(255,255,255,.05) }
+
+    /* Grid for formulas */
+    .formulas{ display:grid; gap:.7rem; grid-template-columns:1fr }
+    @media (min-width:800px){ .formulas{ grid-template-columns:1fr 1fr } }
 
     /* Bottom CTA row */
     .btn-row{ display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; margin-top:1.25rem }
@@ -235,19 +239,80 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
               Then, copy in the summary formulas I’ve provided (or your own) to generate automatic updates. You don’t need to understand the code—just make sure everything lands in the right cell.
             </p>
 
-            <!-- CHART 2: B2:I2 formulas, tab-separated -->
+            <!-- CHART 2: One formula per cell (clean copy blocks) -->
             <div class="copywrap">
-              <div class="copyhint">Chart 2 — Formulas row (paste into <strong>B2</strong> so it fills B2:I2). Leave <strong>A2</strong> for Student name.</div>
-              <textarea class="copyarea" onclick="this.select()" readonly>
+              <div class="copyhint">Chart 2 — Formulas (paste each into the indicated cell, then fill down)</div>
+              <div class="formulas">
+
+                <!-- B2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- B2 (Age Latest)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!E2:E, 'Lesson Log'!D2:D = A2),
     MATCH(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)),
           FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2), 0)
-  ), ""))	=IF(A2="", "", COUNTIF('Lesson Log'!D:D, A2))	=IF(A2="", "", SUMIF('Lesson Log'!D:D, A2, 'Lesson Log'!S:S))	=IF(A2="", "", IFERROR(MIN(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))	=IF(A2="", "", IFERROR(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))	=IF(A2="", "", IFERROR(
+  ), ""))
+</textarea>
+                </div>
+
+                <!-- C2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- C2 (Total Lessons)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
+=IF(A2="", "", COUNTIF('Lesson Log'!D:D, A2))
+</textarea>
+                </div>
+
+                <!-- D2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- D2 (Total Hours)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
+=IF(A2="", "", SUMIF('Lesson Log'!D:D, A2, 'Lesson Log'!S:S))
+</textarea>
+                </div>
+
+                <!-- E2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- E2 (First Lesson)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
+=IF(A2="", "", IFERROR(MIN(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
+</textarea>
+                </div>
+
+                <!-- F2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- F2 (Last Lesson)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
+=IF(A2="", "", IFERROR(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
+</textarea>
+                </div>
+
+                <!-- G2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- G2 (Recent Instructor)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
+=IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!C2:C, 'Lesson Log'!D2:D = A2),
     MATCH(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)),
           FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2), 0)
-  ), ""))	=IF(A2="", "", IFERROR(TEXTJOIN(", ", TRUE, UNIQUE(FILTER('Lesson Log'!G2:G, 'Lesson Log'!D2:D = A2))), ""))	=IF(A2="", "", IFERROR(
+  ), ""))
+</textarea>
+                </div>
+
+                <!-- H2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- H2 (Disciplines)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
+=IF(A2="", "", IFERROR(TEXTJOIN(", ", TRUE, UNIQUE(FILTER('Lesson Log'!G2:G, 'Lesson Log'!D2:D = A2))), ""))
+</textarea>
+                </div>
+
+                <!-- I2 -->
+                <div>
+                  <div class="copyhint"><strong>NAME- I2 (Notes Summary)</strong></div>
+                  <textarea class="copyarea" onclick="this.select()" readonly>
+=IF(A2="", "", IFERROR(
   TEXTJOIN(CHAR(10), TRUE,
     FILTER(
       TEXT('Lesson Log'!B2:B, "yyyy-mm-dd") & ": " & 'Lesson Log'!R2:R,
@@ -255,8 +320,11 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
     )
   ), ""))
 </textarea>
-              <div class="copyhint" style="margin-top:.3rem">
-                Columns (in order): <strong>B</strong> Age Latest · <strong>C</strong> Total Lessons · <strong>D</strong> Total Hours · <strong>E</strong> First Lesson · <strong>F</strong> Last Lesson · <strong>G</strong> Recent Instructor · <strong>H</strong> Disciplines · <strong>I</strong> Notes Summary
+                </div>
+
+              </div>
+              <div class="copyhint" style="margin-top:.35rem">
+                Paste each into the exact cell (e.g., <strong>B2</strong>, <strong>C2</strong>, … <strong>I2</strong>), then drag-fill down the column for all students.
               </div>
             </div>
 
