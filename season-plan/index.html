@@ -8,7 +8,7 @@
 
   <!-- Fonts + shared sidebar styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=1">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=4">
 
   <style>
     :root{
@@ -60,10 +60,27 @@
     }
     .panel h2{ margin:.1rem 0 .6rem }
 
-    /* Simple list grid for the fitness criteria */
-    .grid{ display:grid; gap:.6rem }
-    .two{ grid-template-columns:1fr 1fr }
-    @media (max-width:900px){ .two{ grid-template-columns:1fr } }
+    .muted{ color:var(--muted) }
+
+    /* Prompt grid inside Goal Setting */
+    .prompts{
+      display:grid; gap:1rem; grid-template-columns:1fr 1fr;
+    }
+    @media (max-width:900px){ .prompts{ grid-template-columns:1fr } }
+
+    .prompt{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-left:6px solid var(--cta);   /* bronze edge */
+      border-radius:.8rem;
+      padding:1rem 1.1rem;
+      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+    }
+    .prompt p{ margin:0 }
+
+    /* Fitness checklist cards used later on page */
+    .grid-two{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem }
+    @media (max-width:900px){ .grid-two{ grid-template-columns:1fr } }
 
     .check{
       background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:.6rem; padding:.75rem .9rem;
@@ -71,33 +88,23 @@
     }
     .check h3{ margin:0 0 .25rem; font-size:1.05rem }
 
-    .muted{ color:var(--muted) }
-    /* Bottom call-to-action */
-.btn-row {
-  display: grid;
-  place-items: center;
-  margin-top: 1.75rem;     /* space above the button */
-  margin-bottom: 2.25rem;  /* space before footer */
-}
-.cta.big {
-  display: inline-block;
-  padding: 1.05rem 1.4rem;
-  border: 0;
-  border-radius: 0;
-  background: var(--cta);        /* bronze */
-  color: #e6e7eb;
-  font-weight: 800;
-  text-decoration: none;
-  letter-spacing: .2px;
-  box-shadow: 0 0 18px rgba(var(--glow), .25), 0 0 48px rgba(var(--glow), .12);
-  transform: translateZ(0);
-}
-.cta.big:hover {
-  filter: brightness(1.06);
-}
-.cta.big:active {
-  transform: scale(0.99);
-}
+    /* Bottom CTA */
+    .btn-row {
+      display: grid;
+      place-items: center;
+      margin-top: 1.75rem;
+      margin-bottom: 2.25rem;
+    }
+    .cta{
+      display:inline-block; padding:.9rem 1.1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0; text-decoration:none;
+    }
+    .cta.big{
+      padding:1.05rem 1.4rem;
+      box-shadow: 0 0 18px rgba(var(--glow), .25), 0 0 48px rgba(var(--glow), .12);
+      letter-spacing:.2px;
+    }
+    .cta:hover{ filter:brightness(1.06) }
+    .cta.big:active{ transform: scale(0.99) }
   </style>
 </head>
 <body>
@@ -107,7 +114,7 @@
     <script>
       (function(){
         const t = document.getElementById('sidebar-placeholder');
-        fetch('/partials/sidebar.html?v=1')
+        fetch('/partials/sidebar.html?v=4')
           .then(r => r.text())
           .then(h => { const d=document.createElement('div'); d.innerHTML=h.trim(); t.replaceWith(d.firstElementChild); })
           .catch(()=>{ t.innerHTML='<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'; });
@@ -119,70 +126,95 @@
       <div class="content">
         <header>
           <h1>Season Plan</h1>
-          <p class="lede">Consistently deliver magic with a lesson plan.</p>
+          <p class="lede">A transformation-first approach to your ski school season.</p>
         </header>
 
-        <!-- Intro (exact text) -->
+        <!-- Intro (original script) -->
         <section class="panel" id="intro">
           <h2>Intro</h2>
           <p>When we set goals, we think of things we want to do. There is a better approach to planning your ski school season. Start by asking yourself; what do you want to become by the end of the season? Once you know what you really want, you begin to think of your ski school season as a 4 and a half month  event with a purpose of transforming you. You might even start thinking about how you can use the other 7 and a half months to your advantage.</p>
         </section>
 
-        <!-- Section 1 (exact text) -->
+        <!-- Section 1 — Goal Setting (UPDATED with four boxes) -->
         <section class="panel" id="goal-setting">
           <h2>“Goal” Setting</h2>
-          <p>Here is a simple exercise you can do to reframe your season into a transformation. <br/>Ask yourself who you want to be as a snowsports instructor. What role you want, who you want to teach, how much money you want to make. All these kinds of things. <br/>Your goal should be to become that person, as quickly and genuinely as possible.</p>
-          <p>When I did this for the first time, I figured out I wanted to become a ski instructor extraordinaire who could teach a kind of group lesson that helped guests connect to their movements and peers on a deeper, almost magical level. <br/>How much more exciting does that sound?!</p>
+          <p>Here is a simple exercise you can do to reframe your season into a transformation.</p>
+
+          <div class="prompts" style="margin-top:.6rem">
+            <div class="prompt">
+              <p><strong>what exact role(s) do you want within the school?</strong> Could be fully booked private lesson instructor, trainer, examiner, recruiter</p>
+            </div>
+            <div class="prompt">
+              <p><strong>How much money do you want to make?</strong> Would making that amount of money require year round work? do you want to make enough money during the season to not have to work in the summer?</p>
+            </div>
+            <div class="prompt">
+              <p><strong>Who do you want to teach?</strong> Would you prefer to coach, do consulting?</p>
+            </div>
+            <div class="prompt">
+              <p><strong>What level of education or education do I actually need to achieve this?</strong></p>
+            </div>
+          </div>
+
+          <p style="margin-top:1rem">Ask yourself who you want to be as a snowsports instructor. Your goal should be to become that person, as quickly and genuinely as possible.</p>
+          <p>When I did this for the first time, I figured out I wanted to become a ski instructor extraordinaire who could teach a kind of group lesson that helped guests connect to their movements and peers on a deeper, almost magical level. How much more exciting does that sound?!</p>
           <p>Now, if I feel that passing the alpine level 2 exam is still necessary for my development, I can aim to pass it with a reciprocal style teach which is optional to pass, but necessary for me to move towards my goal. In this real example, I was doing the same level2 exam as everyone else, but the impact it had on me was profound.</p>
         </section>
 
-        <!-- Section 2 (exact text) -->
+        <!-- Section 2 — Creative Willpower (original script) -->
         <section class="panel" id="creative-willpower">
           <h2>Creative Willpower</h2>
           <p>Truly magical lessons rely on a special kind of energy; creative willpower. True creativity is the urge to create, the feeling of emptiness you get from not creating. You teach your best lessons when you are at your most convergent thinking levels. Creative willpower can be trained year round. This is a system to train your creative reserve bank.</p>
-          <p>In the offseason, read skiing content and books about the general way people solve problems. My favorite are non-PSIA snowsports reading materials, especially the older ones to look for lost or forgotten knowledge and Malcom Gladwell books. But explore your own interests.<br/>Then every time you have a reading session, immediately write a reflection relating it to your desired snowsports context. </p>
+          <p>In the offseason, read skiing content and books about the general way people solve problems. My favorite are non-PSIA snowsports reading materials, especially the older ones to look for lost or forgotten knowledge and Malcom Gladwell books. But explore your own interests.
+          Then every time you have a reading session, immediately write a reflection relating it to your desired snowsports context. </p>
           <p>Don’t set a goal for a number of pages, reflections, books, etc. It's a system that's meant to encourage organic creative thinking, not feel like homework.</p>
           <p>Contact me for specific book recommendations.</p>
         </section>
 
-        <!-- Section 3 (exact text) -->
+        <!-- Section 3 — Fitness (original script) -->
         <section class="panel" id="fitness">
           <h2>Fitness</h2>
           <p>Fitness is a means to an end, it’s a means to living longer, feeling fresher during the snow season, having the energy to continue becoming who you want to be. Fitness for the sake of fitness results in lack of motivation.</p>
           <p>If you are new to exercising, I recommend taking a few months to try lots of different exercises. Since doing exercises you actually like can help motivate you. The longer you spend establishing a personal library of favorite exercises, the quicker you will be able to make changes when you progress or get bored. A “less effective” exercise that you like enough to do consistently, is always better than the optimal one you will only do twice.</p>
           <p>Only you know the demands of your role on the mountain. Here is a simple criteria for you to hit in every week no matter your current plan or volume:</p>
-          <div class="grid two">
+          <div class="grid-two">
             <div class="check"><h3>Something fun</h3><p>Whatever fun physical activity you like.<br/> Working out with music or a podcast doesn't count.</p></div>
             <div class="check"><h3>Something fast</h3><p>Sprints, jumps, plyos</p></div>
             <div class="check"><h3>Something heavy</h3><p>Resistance training, weightlifting.</p></div>
             <div class="check"><h3>Something that sucks</h3><p>Doesn’t have to be something you hate doing, just something hard. For most people, cardio falls in this category.</p></div>
           </div>
-          <p>There may be overlap in many exercises in your routine, that's fine. Just make sure you genuinely hit these marks.<br/>I recommend SIMPLE programming. No matter how athletic you are.<br/>Contact me for further details.<br/>In-season training with the same intensity but reduced volume may help you recover.</p>
+          <p>There may be overlap in many exercises in your routine, that's fine. Just make sure you genuinely hit these marks.
+          I recommend SIMPLE programming. No matter how athletic you are.
+          Contact me for further details.
+          In-season training with the same intensity but reduced volume may help you recover.</p>
           <p>Example: If I want to become someone who is capable of showing up to 28 consecutive days of full day lessons. I can start researching specific fitness habits to boost my recovery. Skiing goals give really good clarity to fitness because they give you a clear function to adapt to.</p>
         </section>
 
-        <!-- Education Goals (exact text) -->
+        <!-- Education Goals (original script) -->
         <section class="panel" id="education-goals">
           <h2>Education Goals</h2>
-          <p>Education goals are not limited to PSIA certs. There may be community colleges and universities that can help you. There may be topics you can study by yourself. Once you know who you want to be by the end of the season, you can adjust your trajectory as necessary and consider all sorts of options.<br/>Whichever certification you need to become who you want to be, carefully read the assessment criteria. Your study time will be so much more focused if you know their definition of success. In college courses, these are written as learning outcomes and objectives.</p>
-          <p>Cashing in your bonus knowledge takes some planning. When you go to on-snow certification training, you will be in the late stage of cert prep. You can set up a time for mock exam teaches, MA, etc. <br/>Imagine showing up to an exam after already having done every task, with feedback several times at or above standard. How good would you feel? How much of your capacity would be freed to focus on meeting your peers and asking important questions?</p>
+          <p>Education goals are not limited to PSIA certs. There may be community colleges and universities that can help you. There may be topics you can study by yourself. Once you know who you want to be by the end of the season, you can adjust your trajectory as necessary and consider all sorts of options.
+          Whichever certification you need to become who you want to be, carefully read the assessment criteria. Your study time will be so much more focused if you know their definition of success. In college courses, these are written as learning outcomes and objectives.</p>
+          <p>Cashing in your bonus knowledge takes some planning. When you go to on-snow certification training, you will be in the late stage of cert prep. You can set up a time for mock exam teaches, MA, etc. 
+          Imagine showing up to an exam after already having done every task, with feedback several times at or above standard. How good would you feel? How much of your capacity would be freed to focus on meeting your peers and asking important questions?</p>
           <p>No matter what certification you are going for, start studying right away, memorize the 5 fundamentals, read the manuals, sign up to webinars and participate in E-learning. You can do a lot of it by yourself. And remember, anything you do in the off season is a bonus.</p>
         </section>
 
-        <!-- Skiing enjoyment systems (exact text) -->
+        <!-- Skiing enjoyment systems (original script) -->
         <section class="panel" id="enjoyment">
           <h2>Skiing enjoyment systems</h2>
-          <p>Most people set skiing ability goals or don’t set them at all.<br/>Set a skiing enjoyability goal. Phrase the goal like all the other ones, with the intention of transforming. What does your skiing have to become to maintain your love for it? Do you even have to ski to maintain your love for it? What would make you enjoy it even more?</p>
+          <p>Most people set skiing ability goals or don’t set them at all.
+          Set a skiing enjoyability goal. Phrase the goal like all the other ones, with the intention of transforming. What does your skiing have to become to maintain your love for it? Do you even have to ski to maintain your love for it? What would make you enjoy it even more?</p>
           <p>While coaching racing and extreme sports progression in the North Lake Tahoe area, I set my mind on experiencing the full range of emotion skiing had to offer. Suffer with the sport for a whole season. I had my scariest day, my brightest triumph, I felt the most exhausted I had ever been, and the inverse. My system was so open ended but it worked; pick an emotion and go find it.</p>
         </section>
-</div>
-      <!-- Bottom CTA -->
-<div class="btn-row">
-  <a class="cta big" href="https://instructorgrindset.com/lesson-log">Become Irresistable</a>
-</div>
-        <p class="muted" style="text-align:center;margin:1.5rem 0 0">© Instructor Grindset</p>
+
+        <!-- Bottom CTA to Lesson Log -->
+        <div class="btn-row">
+          <a class="cta big" href="https://instructorgrindset.com/lesson-log">become irresistable</a>
+        </div>
+
+        <p class="muted" style="text-align:center;margin:0">© Instructor Grindset</p>
+      </div>
     </main>
   </div>
 </body>
 </html>
-
