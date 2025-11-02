@@ -105,6 +105,18 @@
     }
     .cta:hover{ filter:brightness(1.06) }
     .cta.big:active{ transform: scale(0.99) }
+    /* Small, centered video inside a panel */
+.vid-mini{
+  width:100%;
+  max-width:560px;
+  aspect-ratio:16/9;
+  border-radius:.75rem;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
+  margin:.75rem auto 0; /* centers under text */
+}
+.vid-mini iframe{width:100%;height:100%;border:0;display:block}
   </style>
 </head>
 <body>
@@ -162,15 +174,25 @@
 
         <!-- Section 2 — Creative Willpower (original script) -->
         <section class="panel" id="creative-willpower">
-          <h2>Creative Willpower</h2>
-          <p>Truly magical lessons rely on a special kind of energy; creative willpower. It can be trained year round. Here is a system to train your creative willpower by building a creative reserve bank.</p>
-          <p>Read books on snowsports and any other subject you are interested in. My favorite are non-PSIA snowsports reading materials, especially the older ones to look for lost knowledge. Explore your own interests.
-          Then every time you have a reading session, immediately write a reflection relating it to your desired snowsports context. </p>
-          <p>Immediately after every reading session, write a reflection relating it to your desired snowsports context. The goal is not to build a library of polished essays and plans, but to keep the door open to magic when the mountain grinds you down.</p>
-          <p>Don’t set a goal for a number of pages, reflections, books, etc. It's a system that's meant to encourage organic creative thinking, not feel like homework.</p>
-          <p>Contact me for specific book recommendations.</p>
-        </section>
+         <h2>Creative Willpower</h2>
+<p>Truly magical lessons rely on a special kind of energy; creative willpower. It can be trained year round. Here is a system to train your creative willpower by building a creative reserve bank.</p>
+<p>Read books on snowsports and any other subject you are interested in. My favorite are non-PSIA snowsports reading materials, especially the older ones to look for lost knowledge. Explore your own interests.
+Then every time you have a reading session, immediately write a reflection relating it to your desired snowsports context. </p>
+<p>Immediately after every reading session, write a reflection relating it to your desired snowsports context. The goal is not to build a library of polished essays and plans, but to keep the door open to magic when the mountain grinds you down.</p>
+<p>Don’t set a goal for a number of pages, reflections, books, etc. It's a system that's meant to encourage organic creative thinking, not feel like homework.</p>
+<p>Contact me for specific book recommendations.</p>
 
+<!-- centered, small iframe (still inside the panel) -->
+<div class="vid-mini" aria-label="Creative Willpower video">
+  <iframe
+    src="https://www.youtube.com/embed/QU5d_rCBXeM?start=1292&rel=0&modestbranding=1&playsinline=1"
+    title="Creative Willpower — Clip"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+</div>
         <!-- Section 3 — Fitness (original script) -->
         <section class="panel" id="fitness">
           <h2>Fitness</h2>
