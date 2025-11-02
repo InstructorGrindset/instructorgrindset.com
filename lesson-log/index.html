@@ -1,1 +1,10 @@
+<script>
+  (function(){
+    const t = document.getElementById('sidebar-placeholder');
+    fetch('/partials/sidebar.html?v=4')
+      .then(r => r.text())
+      .then(h => { const d=document.createElement('div'); d.innerHTML=h.trim(); t.replaceWith(d.firstElementChild); })
+      .catch(()=>{ t.innerHTML='<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'; });
+  })();
+</script>
 
