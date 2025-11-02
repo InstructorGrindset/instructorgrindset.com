@@ -229,7 +229,7 @@
 
             <!-- CHART 1: Column headers (TSV for direct paste) -->
             <div class="copywrap">
-              <div class="copyhint">Chart 1 — Column headers (paste into A1:I1). Click, then copy.</div>
+              <div class="copyhint">Column headers (paste into A1:I1). Click, then copy.</div>
               <textarea class="copyarea" onclick="this.select()" readonly>
 Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent Instructor	Disciplines	Notes Summary
 </textarea>
@@ -241,12 +241,12 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
             <!-- CHART 2: One formula per cell (clean copy blocks) -->
             <div class="copywrap">
-              <div class="copyhint">Chart 2 — Formulas (paste each into the indicated cell, then fill down)</div>
+              <div class="copyhint">Formulas (paste each into the indicated cell)</div>
               <div class="formulas">
 
                 <!-- B2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- B2 (Age Latest)</strong></div>
+                  <div class="copyhint"><strong>B2 (Age Latest)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!E2:E, 'Lesson Log'!D2:D = A2),
@@ -258,7 +258,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- C2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- C2 (Total Lessons)</strong></div>
+                  <div class="copyhint"><strong>C2 (Total Lessons)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", COUNTIF('Lesson Log'!D:D, A2))
 </textarea>
@@ -266,7 +266,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- D2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- D2 (Total Hours)</strong></div>
+                  <div class="copyhint"><strong>D2 (Total Hours)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", SUMIF('Lesson Log'!D:D, A2, 'Lesson Log'!S:S))
 </textarea>
@@ -274,7 +274,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- E2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- E2 (First Lesson)</strong></div>
+                  <div class="copyhint"><strong>E2 (First Lesson)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(MIN(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
 </textarea>
@@ -282,7 +282,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- F2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- F2 (Last Lesson)</strong></div>
+                  <div class="copyhint"><strong>F2 (Last Lesson)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
 </textarea>
@@ -290,7 +290,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- G2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- G2 (Recent Instructor)</strong></div>
+                  <div class="copyhint"><strong>G2 (Recent Instructor)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!C2:C, 'Lesson Log'!D2:D = A2),
@@ -302,7 +302,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- H2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- H2 (Disciplines)</strong></div>
+                  <div class="copyhint"><strong>H2 (Disciplines)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(TEXTJOIN(", ", TRUE, UNIQUE(FILTER('Lesson Log'!G2:G, 'Lesson Log'!D2:D = A2))), ""))
 </textarea>
@@ -310,7 +310,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- I2 -->
                 <div>
-                  <div class="copyhint"><strong>NAME- I2 (Notes Summary)</strong></div>
+                  <div class="copyhint"><strong>I2 (Notes Summary)</strong></div>
                   <textarea class="copyarea" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   TEXTJOIN(CHAR(10), TRUE,
