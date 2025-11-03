@@ -68,13 +68,13 @@
     }
     @media (max-width:900px){ .prompts{ grid-template-columns:1fr } }
 
+    /* Sub-boxes now match panel style */
     .prompt{
-      background:rgba(255,255,255,.03);
+      background:var(--panel-bg);
       border:1px solid var(--line);
-      border-left:6px solid var(--cta);   /* bronze edge */
       border-radius:.8rem;
       padding:1rem 1.1rem;
-      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      box-shadow:var(--panel-shadow);
     }
     .prompt p{ margin:0 }
 
@@ -105,18 +105,19 @@
     }
     .cta:hover{ filter:brightness(1.06) }
     .cta.big:active{ transform: scale(0.99) }
+
     /* Small, centered video inside a panel */
-.vid-mini{
-  width:100%;
-  max-width:560px;
-  aspect-ratio:16/9;
-  border-radius:.75rem;
-  overflow:hidden;
-  background:#000;
-  box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
-  margin:.75rem auto 0; /* centers under text */
-}
-.vid-mini iframe{width:100%;height:100%;border:0;display:block}
+    .vid-mini{
+      width:100%;
+      max-width:560px;
+      aspect-ratio:16/9;
+      border-radius:.75rem;
+      overflow:hidden;
+      background:#000;
+      box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
+      margin:.75rem auto 0;
+    }
+    .vid-mini iframe{width:100%;height:100%;border:0;display:block}
   </style>
 </head>
 <body>
@@ -141,13 +142,13 @@
           <p class="lede">A transformation-first approach to your ski school season.</p>
         </header>
 
-        <!-- Intro (original script) -->
+        <!-- Intro -->
         <section class="panel" id="intro">
           <h2>Intro</h2>
           <p>When we set goals, we think of things we want to do. There is a better approach to planning your ski school season. Start by asking yourself; what do you want to become by the end of the season? Once you know what you really want, you begin to think of your ski school season as a 4 and a half month  event with a purpose of transforming you. You might even start thinking about how you can use the other 7 and a half months to your advantage.</p>
         </section>
 
-        <!-- Section 1 — Goal Setting (UPDATED with four boxes) -->
+        <!-- Section 1 — Goal Setting -->
         <section class="panel" id="goal-setting">
           <h2>“Goal” Setting</h2>
           <p>A simple exercise you can do to reframe your season into a transformation:</p>
@@ -172,28 +173,29 @@
           <p>If you still feel you need to go for the next certification level, I'm sure you can think of a deeper takeaway to aim for through it all.</p>
         </section>
 
-        <!-- Section 2 — Creative Willpower (original script) -->
+        <!-- Section 2 — Creative Willpower -->
         <section class="panel" id="creative-willpower">
-         <h2>Creative Willpower</h2>
-<p>Truly magical lessons rely on a special kind of energy; creative willpower. It can be trained year round. Here is a system to train your creative willpower by building a creative reserve bank.</p>
-<p>Read books on snowsports and any other subject you are interested in. My favorite are non-PSIA snowsports reading materials, especially the older ones to look for lost knowledge. Explore your own interests.
-Then every time you have a reading session, immediately write a reflection relating it to your desired snowsports context. </p>
-<p>Immediately after every reading session, write a reflection relating it to your desired snowsports context. The goal is not to build a library of polished essays and plans, but to keep the door open to magic when the mountain grinds you down.</p>
-<p>Don’t set a goal for a number of pages, reflections, books, etc. It's a system that's meant to encourage organic creative thinking, not feel like homework.</p>
-<p>Contact me for specific book recommendations.</p>
+          <h2>Creative Willpower</h2>
+          <p>Truly magical lessons rely on a special kind of energy; creative willpower. It can be trained year round. Here is a system to train your creative willpower by building a creative reserve bank.</p>
+          <p>Read books on snowsports and any other subject you are interested in. My favorite are non-PSIA snowsports reading materials, especially the older ones to look for lost knowledge. Explore your own interests.
+          Then every time you have a reading session, immediately write a reflection relating it to your desired snowsports context. </p>
+          <p>Immediately after every reading session, write a reflection relating it to your desired snowsports context. The goal is not to build a library of polished essays and plans, but to keep the door open to magic when the mountain grinds you down.</p>
+          <p>Don’t set a goal for a number of pages, reflections, books, etc. It's a system that's meant to encourage organic creative thinking, not feel like homework.</p>
+          <p>Contact me for specific book recommendations.</p>
 
-<!-- centered, small iframe (still inside the panel) -->
-<div class="vid-mini" aria-label="Creative Willpower video">
-  <iframe
-    src="https://www.youtube.com/embed/QU5d_rCBXeM?start=1&rel=0&modestbranding=1&playsinline=1"
-    title="Creative Willpower — Clip"
-    loading="lazy"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen>
-  </iframe>
-</div>
-        <!-- Section 3 — Fitness (original script) -->
+          <!-- centered, small iframe (still inside the panel) -->
+          <div class="vid-mini" aria-label="Creative Willpower video">
+            <iframe
+              src="https://www.youtube.com/embed/QU5d_rCBXeM?start=1292&rel=0&modestbranding=1&playsinline=1"
+              title="Creative Willpower — Clip"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <!-- Section 3 — Fitness -->
         <section class="panel" id="fitness">
           <h2>Fitness</h2>
           <p>Fitness is a means to an end, it’s a means to living longer, feeling fresher during the snow season, having the energy to continue becoming who you want to be. Fitness for the sake of fitness results in lack of motivation.</p>
@@ -212,7 +214,7 @@ Then every time you have a reading session, immediately write a reflection relat
           <p>Example: If I want to become someone who is capable of showing up to 28 consecutive days of full day lessons. I can start researching specific fitness habits to boost my recovery. Skiing goals give really good clarity to fitness because they give you a clear function to adapt to.</p>
         </section>
 
-        <!-- Education Goals (original script) -->
+        <!-- Education Goals -->
         <section class="panel" id="education-goals">
           <h2>Education Goals</h2>
           <p>Education goals are not limited to PSIA certs. There may be community colleges and universities that can help you. There may be topics you can study by yourself. Once you know who you want to be by the end of the season, you can adjust your trajectory as necessary and consider all sorts of options.
@@ -222,9 +224,9 @@ Then every time you have a reading session, immediately write a reflection relat
           <p>No matter what certification you are going for, start studying right away, memorize the 5 fundamentals, read the manuals, sign up to webinars and participate in E-learning. You can do a lot of it by yourself. And remember, anything you do in the off season is a bonus.</p>
         </section>
 
-        <!-- Skiing enjoyment systems (original script) -->
+        <!-- Skiing Enjoyment Systems -->
         <section class="panel" id="enjoyment">
-          <h2>Skiing enjoyment systems</h2>
+          <h2>Skiing Enjoyment Systems</h2>
           <p>Most people set skiing ability goals or don’t set them at all.
           Set a skiing enjoyability goal. Phrase the goal like all the other ones, with the intention of transforming. What does your skiing have to become to maintain your love for it? Do you even have to ski to maintain your love for it? What would make you enjoy it even more?</p>
           <p>While coaching racing and extreme sports progression in the North Lake Tahoe area, I set my mind on experiencing the full range of emotion skiing had to offer. Suffer with the sport for a whole season. I had my scariest day, my brightest triumph, I felt the most exhausted I had ever been, and the inverse. My system was so open ended but it worked; pick an emotion and go find it.</p>
