@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PREVIEW — My Story</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:300px; --footer-h:52px;
+      --rail:3px; --rail-color:#c4892a;
+      --box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      --gap:22px; --col-gap:28px; --content-shift:40px;
+      --content-max: min(1200px, calc(100vw - var(--sidebar) - 100px));
+      --rail-top: 36px; --rail-bottom: 36px;
+    }
+
+    *{ box-sizing:border-box } html,body{ height:100% }
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.55;
+      background:var(--bg);
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
+    }
+
+    a{ color:var(--accent); text-decoration:none } a:hover{ text-decoration:underline }
+
+    /* Shell */
+    .page{ display:grid; grid-template-columns:var(--sidebar) 1fr; min-height:100vh; padding-bottom:var(--footer-h) }
+    .main{ padding:1.25rem }
+
+    /* Sidebar */
+    .side{
+      padding:1.25rem; border-right:1px solid var(--line);
+      background:rgba(255,255,255,.02); color:var(--ink);
+    }
+    .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem; }
+    .brand .logo-wrap{
+      width:64px; height:64px; border-radius:50%; overflow:hidden;
+      display:grid; place-items:center;
+      background:#2a3140;
+    }
+    .brand .name, .brand .name a, .brand .name a:visited{
+      font-weight:800; line-height:1.02; letter-spacing:.7px;
+      font-size:1.7rem; color:var(--ink); text-decoration:none;
+    }
+    .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px; }
+    .nav ul{ list-style:none; padding:0; margin:0 0 1rem; }
+    .nav li{ margin:.35rem 0; }
+    .nav a, .nav a:link, .nav a:visited{
+      display:block; padding:.45rem .5rem; border:1px solid transparent; color:var(--ink); text-decoration:none;
+    }
+    .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line); }
+
+    /* Content */
+    .content{
+      width:var(--content-max);
+      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--content-max))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:2rem;
+    }
+
+    h1,h2,h3{ letter-spacing:.2px }
+    h1{
+      font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08; margin:0 0 1rem; text-align:center;
+      background:linear-gradient(92deg,#fff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .intro{ text-align:center; color:var(--muted); max-width:70ch; margin:0 auto 1.25rem }
+
+    /* Timeline */
+    .timeline-wrap{ position:relative; margin-top:18px }
+    .timeline-wrap::before{
+      content:""; position:absolute; left:50%; transform:translateX(-50%);
+      top:var(--rail-top); bottom:var(--rail-bottom);
+      width:var(--rail); background:var(--rail-color); border-radius:999px;
+    }
+
+    .early-center{ max-width:900px; margin:0 auto 10px; position:relative; }
+    .early{
+      background:#e5e7eb; color:#111; border-left: var(--rail) solid var(--rail-color);
+      border-radius:.8rem; padding:1rem 1.1rem; box-shadow:0 0 22px rgba(196,137,42,.35);
+    }
+    .early h2{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.15rem; color:var(--cta) }
+
+    .rows{ margin-top:10px }
+    .row{
+      display:grid; grid-template-columns: 1fr 1fr; column-gap: calc(var(--col-gap) + var(--rail));
+      align-items:center; position:relative; margin: var(--gap) 0;
+    }
+    .left, .right{ position:relative }
+    .entry{ transition: transform .15s ease, box-shadow .2s ease; will-change: transform, box-shadow }
+    .entry:hover{ transform:scale(1.02); box-shadow: var(--box-shadow) }
+    .box{
+      background:#fff; color:#0f1217;
+      border: var(--rail) solid var(--rail-color);
+      border-radius:.8rem; padding:1rem 1.1rem;
+      box-shadow: var(--box-shadow);
+    }
+    .box h3{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.1rem; color:#0f1217 }
+    .box p{ margin:0; color:#111; line-height:1.6 }
+    .row .left::before, .row .right::before{ display:none }
+
+    .future-center{ max-width:900px; margin:0 auto }
+    .future .cta{
+      display:inline-block; margin-top:.75rem; padding:.85rem 1.05rem; border-radius:0;
+      background:var(--cta); color:#e6e7eb; font-weight:800; border:0; text-decoration:none;
+    }
+
+    /* Footer */
+    .footer-wrap{
+      position:fixed; left:var(--sidebar); right:0; bottom:0; height:var(--footer-h);
+      display:grid; place-items:center; background:rgba(0,0,0,.25); border-top:1px solid var(--line); backdrop-filter:blur(2px)
+    }
+    .footer{ color:var(--muted); text-align:center; margin:0 }
+
+    /* Preview banner */
+    .preview-banner{
+      position:fixed; top:0; left:50%; transform:translateX(-50%);
+      background:#c4892a; color:#000; font-weight:800; font-size:.75rem;
+      padding:.25rem .75rem; border-radius:0 0 .5rem .5rem; z-index:9999;
+      letter-spacing:.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-banner">PREVIEW MODE</div>
+  <div class="page">
+    <!-- Sidebar -->
+    <aside class="side">
+      <div class="brand">
+        <div class="logo-wrap">
+          <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#c4892a"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-weight="800" fill="#0f1217">IG</text></svg>
+        </div>
+        <span class="name">INSTRUCTOR<br>GRINDSET</span>
+      </div>
+      <nav class="nav" aria-label="About">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#" style="color:var(--accent)">My Story</a></li>
+          <li><a href="#">Mission &amp; Vision</a></li>
+        </ul>
+      </nav>
+      <nav class="nav" aria-label="How To">
+        <h4>How To</h4>
+        <ul>
+          <li><a href="#">Season Plan</a></li>
+          <li><a href="#">Lesson Log</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="nav" aria-label="My Content">
+        <h4>My Content</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube Channel</a></li>
+          <li><a href="#">My Collection</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="content">
+        <h1>My Story</h1>
+        <p class="intro">How I became a ski instructor extraordinare.</p>
+
+        <div class="early-center">
+          <div class="early">
+            <h2>Early Life</h2>
+            <p>I was born in France and moved to the Pacific northwest at age 7. I skied in the Crystal Mountain weekend program and it quickly became the only thing I looked forward to during the grey, depressing Seattle winters. I always hated school and loathed the idea of blurring the lines between work and play in the form of homework. At age 15 I was eager to put some money in my pocket and start living, I got a job bussing for a local restaurant and another one as an assistant ski instructor at SnowSports NorthWest.</p>
+          </div>
+        </div>
+
+        <section class="timeline-wrap" aria-label="Timeline">
+          <div class="rows">
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2015/16</h3><p>At SSNW, I was treated like an adult from day 1. After 4 weekends of training, I was given my first lessons and quickly figured out what it meant to be responsible for the world's most precious cargo, children!</p></div></div>
+              <div class="right"></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2016/17</h3><p>The next winter, I instructed again and coached in the Hyak weekend program. From then, I was hooked.</p></div></div>
+              <div class="right"></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2017/18</h3><p>I decided to go study Ski and Snowboard Business at the Colorado Mountain College campus in Steamboat Springs, Colorado. I skied my face off for 2 years!</p></div></div>
+              <div class="right"></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2019</h3><p>I took a gap course at Mt. Hutt, New Zealand and started my freeride and park progression journey.</p></div></div>
+              <div class="right entry"><div class="box"><h3></h3><p>Attained the NZSIA alpine 1 cert and failed alpine level 2 by less than a point.</p></div></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2019/20</h3><p>Upon arriving in Vail, I was told instructors could only stay in employee housing their first season working there.</p></div></div>
+              <div class="right"></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2020/21</h3><p>I was granted employee housing my second year there when COVID changed the rules—but my mind was set. I was going to be a first-year instructor for as many seasons as I could.</p></div></div>
+              <div class="right entry"><div class="box"><h3></h3><p>Attained the PSIA alpine 1 cert, and failed a freestyle level 1 cert despite attending clinics weekly for 2 years and being told I was more than ready. I promised myself I'd pass all 3 levels of Freestyle certs and moved to Mt.Hood to train myself.</p></div></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2021/22</h3><p>I moved to Mt. Hood to work as a bartender in the legendary Ramshead bar and pursue my new passion for park skiing.</p></div></div>
+              <div class="right"></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2022/23</h3><p>In November 2022, I moved to Kirkwood to work for Timber Creek Ski School—it was the place to be that year. I won "Certified Rookie of the Year" and "Biggest Send of the Year." I ended my season where my love of reading re-ignited; I broke my entire lumbar and my right elbow.</p></div></div>
+              <div class="right entry"><div class="box"><h3></h3><p>Attained the PSIA children's specialist 1 cert and it changed my life. I also passed the alpine 2 technical and the freestyle 1 cert.</p></div></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2023/24</h3><p>I spent the winter coaching racing at Palisades and off-snow extreme sports progression at Woodward Tahoe until I broke 3 bones in my left foot exactly one year after my back injury. I spent my summer in and out of the gym, library, and surgery room.</p></div></div>
+              <div class="right entry"><div class="box"><h3></h3><p>Attained the freestyle 2 cert.</p></div></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2024/25</h3><p>I went back to familiar Kirkwood to finish healing and enjoy the 24/25 season.</p></div></div>
+              <div class="right"></div>
+            </div>
+
+            <div class="row">
+              <div class="left entry"><div class="box"><h3>2025</h3><p>I spent the summer teaching at Perisher in Australia and skied my face off in the park. Upon coming home, I built the Instructor Grindset website to help instructors who want to get busy.</p></div></div>
+              <div class="right entry"><div class="box"><h3></h3><p>Enrolled in the Penn State Snowsports leadership program and attained the alpine 2 cert and freestyle 3 cert.</p></div></div>
+            </div>
+
+          </div>
+
+          <div class="future-center">
+            <div class="future entry">
+              <div class="box">
+                <h3>Future</h3>
+                <p>I hope to share my knowledge and experience with other North American snowsports instructors and show you the tools to uplift your creative willpower and teach consistently magic lessons.</p>
+                <a class="cta" href="#">Mission &amp; Vision →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
+</body>
+</html>
