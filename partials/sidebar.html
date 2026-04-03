@@ -1,34 +1,55 @@
-<aside class="side">
-  <div class="brand">
-    <a class="logo-wrap" href="/" aria-label="Home">
-      <img src="/images/ig-logo.png" alt="Instructor Grindset logo">
-    </a>
-    <a class="name" href="/">INSTRUCTOR<br>GRINDSET</a>
-  </div>
+<div class="nav-root">
 
-  <nav class="nav" aria-label="About">
-    <h4>About</h4>
-    <ul>
-      <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
-      <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
-    </ul>
-  </nav>
+  <!-- Hamburger button (always visible, fixed) -->
+  <button class="hamburger" aria-label="Open navigation" aria-expanded="false"
+    onclick="document.querySelector('.nav-root').classList.add('is-open');this.setAttribute('aria-expanded','true')">
+    <span></span><span></span><span></span>
+  </button>
 
-  <nav class="nav" aria-label="How To">
-    <h4>How To</h4>
-    <ul>
-      <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
-      <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
-      <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- Backdrop — click to close -->
+  <div class="nav-backdrop"
+    onclick="document.querySelector('.nav-root').classList.remove('is-open');document.querySelector('.hamburger').setAttribute('aria-expanded','false')"></div>
 
-  <nav class="nav" aria-label="My Content">
-    <h4>My Content</h4>
-    <ul>
-      <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
-      <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
-      <li><a href="https://instructorgrindset.com/catalog">My Collection</a></li>
-    </ul>
-  </nav>
-</aside>
+  <!-- Drawer -->
+  <aside class="side">
+
+    <div class="nav-header">
+      <div class="brand">
+        <a class="logo-wrap" href="/" aria-label="Home">
+          <img src="/images/ig-logo.png" alt="Instructor Grindset logo">
+        </a>
+        <a class="name" href="/">INSTRUCTOR<br>GRINDSET</a>
+      </div>
+      <!-- Close button -->
+      <button class="nav-close" aria-label="Close navigation"
+        onclick="document.querySelector('.nav-root').classList.remove('is-open');document.querySelector('.hamburger').setAttribute('aria-expanded','false')">✕</button>
+    </div>
+
+    <nav class="nav" aria-label="About">
+      <h4>About</h4>
+      <ul>
+        <li><a href="https://instructorgrindset.com/my-story">My Story</a></li>
+        <li><a href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision</a></li>
+      </ul>
+    </nav>
+
+    <nav class="nav" aria-label="How To">
+      <h4>How To</h4>
+      <ul>
+        <li><a href="https://instructorgrindset.com/season-plan">Season Plan</a></li>
+        <li><a href="https://instructorgrindset.com/lesson-log">Lesson Log</a></li>
+        <li><a href="https://instructorgrindset.com/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <nav class="nav" aria-label="My Content">
+      <h4>My Content</h4>
+      <ul>
+        <li><a href="https://instructorgrindset.com/instagram">Instagram</a></li>
+        <li><a href="https://instructorgrindset.com/youtube-channel">YouTube Channel</a></li>
+        <li><a href="https://instructorgrindset.com/catalog">My Collection</a></li>
+      </ul>
+    </nav>
+
+  </aside>
+</div>
