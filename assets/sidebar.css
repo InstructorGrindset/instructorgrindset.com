@@ -1,86 +1,152 @@
-/* ===== Shared sidebar styles (reverted, no animation) ===== */
+/* ===== Hamburger nav drawer ===== */
 
-:root{
-  --ink:#e7e9ee;        /* light text */
-  --muted:#cbd5e1;      /* muted text */
-  --line:#2a3140;       /* borders */
+:root {
+  --ink:   #e7e9ee;
+  --muted: #cbd5e1;
+  --line:  #2a3140;
+  --sidebar: 0;   /* collapses any per-page sidebar column */
 }
 
-/* Sidebar container */
-.side{
-  padding:1.25rem;
-  border-right:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-  color:var(--ink);
+/* Remove sidebar column from all page layouts */
+.page        { grid-template-columns: 1fr !important; }
+.footer-wrap { left: 0 !important; }
+
+/* ── Nav root (out of grid flow) ── */
+.nav-root {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  z-index: 900;
 }
 
-/* Brand row */
-.brand{
-  display:flex;
-  align-items:center;
-  gap:.75rem;
-  margin:.25rem 0 1.25rem;
+/* ── Hamburger button ── */
+.hamburger {
+  position: fixed;
+  top: 1rem; left: 1rem;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2rem; height: 1.375rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 100%; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
 }
 
-/* Circular logo mask */
-.brand .logo-wrap{
-  width:64px; height:64px;
-  border-radius:50%;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-  /* mask to hide any outer rim */
+/* ── Backdrop ── */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+/* ── Drawer ── */
+.side {
+  position: fixed;
+  top: 0; left: 0;
+  width: 280px;
+  height: 100vh;
+  padding: 1.25rem;
+  background: #0f1217;
+  border-right: 1px solid var(--line);
+  color: var(--ink);
+  z-index: 1001;
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  overflow-y: auto;
+}
+
+/* ── Open state ── */
+.nav-root.is-open .side         { transform: translateX(0); }
+.nav-root.is-open .nav-backdrop { opacity: 1; pointer-events: auto; }
+
+/* ── Nav header (brand + close btn) ── */
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Close button ── */
+.nav-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: .25rem .5rem;
+}
+.nav-close:hover { color: #fff; }
+
+/* ── Brand ── */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.brand .logo-wrap {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
   -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
           mask-image: radial-gradient(circle at 50% 50%, #000 68%, transparent 70%);
 }
-.brand .logo-wrap img{
-  width:120%; height:120%;
-  object-fit:cover; object-position:center;
+.brand .logo-wrap img {
+  width: 120%; height: 120%;
+  object-fit: cover;
 }
-
-/* Brand title (clickable) */
 .brand .name,
 .brand .name a,
-.brand .name a:visited{
-  font-family:"Rooftop", Inter, Arial, sans-serif;
-  font-weight:800;
-  line-height:1.02;
-  letter-spacing:.7px;
-  font-size:1.7rem;
-  color:var(--ink);
-  text-decoration:none;
+.brand .name a:visited {
+  font-family: "Rooftop", Inter, Arial, sans-serif;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: .7px;
+  font-size: 1.3rem;
+  color: var(--ink);
+  text-decoration: none;
 }
 
-/* Section headings */
-.nav h4{
-  margin:1rem 0 .5rem;
-  color:var(--muted);
-  font-weight:800;
-  letter-spacing:.6px;
-  font-family:"Rooftop", Inter, Arial, sans-serif;
+/* ── Nav sections ── */
+.nav h4 {
+  margin: 1rem 0 .5rem;
+  color: var(--muted);
+  font-weight: 800;
+  letter-spacing: .6px;
+  font-family: "Rooftop", Inter, Arial, sans-serif;
 }
+.nav ul { list-style: none; padding: 0; margin: 0 0 1rem; }
+.nav li { margin: .35rem 0; }
 
-/* Lists */
-.nav ul{ list-style:none; padding:0; margin:0 0 1rem; }
-.nav li{ margin:.35rem 0; }
-
-/* Links (force normal + visited to light gray to avoid purple) */
 .nav a,
 .nav a:link,
-.nav a:visited{
-  display:block;
-  padding:.45rem .5rem;
-  border:1px solid transparent;
-  color:var(--ink);
-  text-decoration:none;
+.nav a:visited {
+  display: block;
+  padding: .45rem .5rem;
+  border: 1px solid transparent;
+  color: var(--ink);
+  text-decoration: none;
 }
-.nav a:hover{
-  background:rgba(255,255,255,.04);
-  border-color:var(--line);
+.nav a:hover {
+  background: rgba(255, 255, 255, .04);
+  border-color: var(--line);
 }
-
-/* Optional focus ring for keyboard users */
-.nav a:focus-visible{
-  outline:2px solid var(--line);
-  outline-offset:2px;
+.nav a:focus-visible {
+  outline: 2px solid var(--line);
+  outline-offset: 2px;
 }
