@@ -70,6 +70,7 @@
 /* ── Open state ── */
 .nav-root.is-open .side         { transform: translateX(0); }
 .nav-root.is-open .nav-backdrop { opacity: 1; pointer-events: auto; }
+.nav-root.is-open .hamburger    { display: none; }
 
 /* ── Nav header (brand + close btn) ── */
 .nav-header {
