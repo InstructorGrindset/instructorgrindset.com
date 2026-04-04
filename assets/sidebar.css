@@ -151,3 +151,17 @@
   outline: 2px solid var(--line);
   outline-offset: 2px;
 }
+
+.nav-desc {
+  display: block;
+  padding: 0 .5rem .15rem;
+  font-size: .78rem;
+  line-height: 1.35;
+  color: #8891a0;
+  pointer-events: none;
+}
+.nav-standalone {
+  border-top: 1px solid var(--line);
+  padding-top: .75rem;
+  margin-top: .5rem;
+}

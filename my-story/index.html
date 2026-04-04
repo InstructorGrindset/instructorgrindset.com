@@ -145,7 +145,7 @@
     <script>
       (function(){
         const target = document.getElementById('sidebar-placeholder');
-        fetch('/partials/sidebar.html?v=1')
+        fetch('/partials/sidebar.html?v=2')
           .then(r => r.text())
           .then(html => { const tmp = document.createElement('div'); tmp.innerHTML = html.trim(); target.replaceWith(tmp.firstElementChild); })
           .catch(()=>{ target.removeAttribute('aria-busy'); target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'; });
