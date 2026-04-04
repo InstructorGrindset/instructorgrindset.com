@@ -24,10 +24,10 @@
   <style>
     :root{
       --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar: 0; --panel-bg:rgba(255,255,255,.03);
+      --cta:#c4892a; --glow:250,204,21; --sidebar: 0px; --panel-bg:rgba(255,255,255,.03);
       --footer-h:52px;
 
-      --content-shift:0;
+      --content-shift:0px;
       --hero-w: min(900px, calc((100vw - var(--sidebar)) * 0.6));
       --hero-offset-top:12px;
       --story-offset-top:16px;
@@ -116,7 +116,7 @@
     .footer{color:var(--muted);text-align:center;margin:0}
 
     @media (max-width:1280px){
-      :root{ --content-shift:0; }
+      :root{ --content-shift:0px; }
     }
     @media (max-width:960px){
       .page{grid-template-columns:1fr}

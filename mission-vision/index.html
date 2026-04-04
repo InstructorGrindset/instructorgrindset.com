@@ -24,14 +24,14 @@
   <style>
     :root{
       --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar: 0; --panel-bg:rgba(255,255,255,.03);
+      --cta:#c4892a; --glow:250,204,21; --sidebar: 0px; --panel-bg:rgba(255,255,255,.03);
       --footer-h:52px;
 
       /* Desktop layout knobs */
       --box-w:600px;                /* target width per panel (desktop) */
       --gap:26px;                   /* space between panels */
       --content-w:calc(var(--box-w)*2 + var(--gap));
-      --content-shift:0;         /* center bias toward sidebar */
+      --content-shift:0px;         /* center bias toward sidebar */
       --intro-offset:50px;          /* intro down */
       --panel-offset:70px;          /* panels down */
       --buttons-offset:50px;        /* buttons down */
@@ -132,7 +132,7 @@
 
     /* Large tablet */
     @media (max-width:1280px){
-      :root{ --box-w:520px; --content-w:calc(var(--box-w)*2 + var(--gap)); --content-shift:0; }
+      :root{ --box-w:520px; --content-w:calc(var(--box-w)*2 + var(--gap)); --content-shift:0px; }
     }
 
     /* Narrow laptop / tablet portrait: stack panels, allow scrolling, footer not fixed */
