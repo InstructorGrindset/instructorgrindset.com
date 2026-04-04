@@ -4,7 +4,7 @@
   --ink:   #e7e9ee;
   --muted: #cbd5e1;
   --line:  #2a3140;
-  --sidebar: 0;   /* collapses any per-page sidebar column */
+  --sidebar: 0px;   /* collapses any per-page sidebar column */
 }
 
 /* Remove sidebar column from all page layouts */
