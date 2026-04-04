@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset — Home</title>
-  <meta name="description" content="Helping ski instructors become athletes & irresistible coaches." />
+  <meta name="description" content="Tools, systems, and hard-won knowledge for snowsports instructors who want to take the career seriously." />
   <link rel="canonical" href="https://instructorgrindset.com/" />
-  <link rel="stylesheet" href="/assets/sidebar.css?v=1">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=2">
 
 
   <!-- Perf: speed up fonts -->
@@ -40,7 +40,7 @@
       margin:0; color:var(--ink);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.55;
       background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
-      overflow:hidden;
+      overflow-x:hidden;
     }
     /* Reduce motion where possible */
     @media (prefers-reduced-motion: reduce){
@@ -48,7 +48,7 @@
     }
     /* Avoid fixed background jank on mobile */
     @media (max-width:960px){
-      body{background-attachment: scroll; overflow:auto}
+      body{background-attachment: scroll;}
     }
 
     body::before{
@@ -77,7 +77,6 @@
       -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%)}
     .brand .logo-wrap img{
       width:120%;height:120%;object-fit:cover;
-      /* Reserve space to reduce CLS */
       aspect-ratio:1/1;
     }
     .brand .name{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;line-height:1.02;letter-spacing:.7px;font-size:1.7rem}
@@ -109,7 +108,63 @@
     }
     .vid iframe{width:100%;height:100%;border:0;display:block}
 
+    /* CTAs */
     .cta{display:inline-block;margin-top:var(--button-offset-top);padding:.85rem 1.05rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0}
+    .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:var(--button-offset-top)}
+    .cta-row .cta{margin-top:0}
+    .cta-outline{background:transparent;border:2px solid var(--cta);color:var(--cta)}
+    .cta-outline:hover{background:rgba(196,137,42,.08);text-decoration:none}
+
+    /* Blog section */
+    .blog-latest{
+      margin-top:4rem;
+      padding-top:2rem;
+      border-top:1px solid var(--line);
+    }
+    .blog-latest h2{
+      font-size:clamp(1.5rem,3vw,2rem);
+      margin:0 0 1.5rem;
+      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .blog-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+      gap:1rem;
+    }
+    .blog-card{
+      display:block;
+      padding:1.1rem 1.2rem;
+      background:var(--panel-bg);
+      border:1px solid var(--line);
+      border-radius:.5rem;
+      color:var(--ink);
+      text-decoration:none;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    .blog-card:hover{
+      border-color:rgba(var(--glow),.4);
+      box-shadow:0 0 14px rgba(var(--glow),.1);
+      text-decoration:none;
+    }
+    .blog-card .card-date{
+      font-size:.78rem;
+      color:#8891a0;
+      margin:0 0 .35rem;
+    }
+    .blog-card .card-title{
+      font-family:"Rooftop",Inter,Arial,sans-serif;
+      font-weight:800;
+      font-size:1rem;
+      line-height:1.3;
+      margin:0 0 .5rem;
+      color:#fff;
+    }
+    .blog-card .card-excerpt{
+      font-size:.88rem;
+      color:var(--muted);
+      line-height:1.55;
+      margin:0;
+    }
 
     .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
       display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
@@ -129,11 +184,12 @@
       }
       h1{text-align:center}
       .lead{max-width:60ch;margin:0 auto;text-align:center}
-      .cta{display:block;margin:14px auto 0;max-width:420px;text-align:center}
+      .cta-row{justify-content:center}
     }
     @media (max-width:640px){
       .content{width:min(94vw, 40rem)}
-      .cta{width:100%;max-width:480px;padding:1rem 1.25rem}
+      .cta-row{flex-direction:column;align-items:stretch}
+      .cta-row .cta{text-align:center;width:100%;max-width:480px;padding:1rem 1.25rem}
     }
     @media (max-width:380px){
       .content{width:92vw}
@@ -152,7 +208,7 @@
 <script>
   (function(){
     const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=1')  // bump ?v= number when you edit the partial to bust cache
+    fetch('/partials/sidebar.html?v=2')  // bump ?v= number when you edit the partial to bust cache
       .then(r => r.text())
       .then(html => {
         const tmp = document.createElement('div');
@@ -181,11 +237,43 @@
 
         </div>
 
-        <h1>What is The Instructor Grindset?</h1>
+        <h1>For snowsports instructors who want to take the career seriously.</h1>
         <p class="lead">
-          A focused year round approach to developing your skills, body and career as a snowsports instructor. With the intent of consistently serving magic ski lessons on a silver platter.
+          Tools, systems, and hard-won knowledge to help you develop your skills, body, and career year round — so you can consistently deliver magic on the mountain.
         </p>
-        <a class="cta" href="https://instructorgrindset.com/my-story">Full Story →</a>
+
+        <div class="cta-row">
+          <a class="cta" href="/my-story">Start Here →</a>
+          <a class="cta cta-outline" href="/season-plan">Browse Tools →</a>
+        </div>
+
+        <!-- Latest Blog Posts -->
+        <section class="blog-latest" aria-label="Latest from the Blog">
+          <h2>Latest from the Blog</h2>
+          <div class="blog-grid">
+            <a class="blog-card" href="/blog/backline-like-a-pro/">
+              <p class="card-date">March 2025</p>
+              <p class="card-title">Backline Like a Pro</p>
+              <p class="card-excerpt">What separates the instructors who always get re-booked from the ones who don't — and it starts behind the scenes.</p>
+            </a>
+            <a class="blog-card" href="/blog/so-you-want-to-be-a-ski-instructor/">
+              <p class="card-date">January 2025</p>
+              <p class="card-title">So You Want to Be a Ski Instructor</p>
+              <p class="card-excerpt">The honest, unfiltered breakdown of what this career actually looks like before you hand in your application.</p>
+            </a>
+            <a class="blog-card" href="/blog/settle-down-non-believers/">
+              <p class="card-date">December 2024</p>
+              <p class="card-title">Settle Down, Non-Believers</p>
+              <p class="card-excerpt">A response to everyone who thinks treating ski instruction like a real career is misguided or delusional.</p>
+            </a>
+            <a class="blog-card" href="/blog/psia-youtube-binge/">
+              <p class="card-date">November 2024</p>
+              <p class="card-title">Takeaways From a PSIA YouTube Binge</p>
+              <p class="card-excerpt">I went deep on PSIA's video library so you don't have to. Here's what's actually worth your time.</p>
+            </a>
+          </div>
+        </section>
+
       </div>
     </main>
   </div>
@@ -193,10 +281,3 @@
   <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
 </body>
 </html>
-
-
-
-
-
-
-
