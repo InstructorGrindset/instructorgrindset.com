@@ -114,6 +114,7 @@
     .cta-row .cta{margin-top:0}
     .cta-outline{background:transparent;border:2px solid var(--cta);color:var(--cta)}
     .cta-outline:hover{background:rgba(196,137,42,.08);text-decoration:none}
+    .lead-cta{margin-top:.25rem;margin-bottom:1.5rem}
 
     /* Blog section */
     .blog-latest{
@@ -184,6 +185,7 @@
       }
       h1{text-align:center}
       .lead{max-width:60ch;margin:0 auto;text-align:center}
+      .lead-cta{text-align:center}
       .cta-row{justify-content:center}
     }
     @media (max-width:640px){
@@ -208,7 +210,7 @@
 <script>
   (function(){
     const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=2')  // bump ?v= number when you edit the partial to bust cache
+    fetch('/partials/sidebar.html?v=6')  // bump ?v= number when you edit the partial to bust cache
       .then(r => r.text())
       .then(html => {
         const tmp = document.createElement('div');
@@ -237,14 +239,24 @@
 
         </div>
 
-        <h1>For snowsports instructors who want to take the career seriously.</h1>
+        <h1>The Instructor Grindset is a focused, year round approach to developing your skills, body and career as a snowsports instructor.</h1>
         <p class="lead">
-          Tools, systems, and hard-won knowledge to help you develop your skills, body, and career year round — so you can consistently deliver magic on the mountain.
+          Once you adopt this mindset, you will find ways to apply your talents and unleash your creative willpower to share your passion for snowsports more effectively than you ever thought you could.
         </p>
-
-        <div class="cta-row">
-          <a class="cta" href="/my-story">Start Here →</a>
-          <a class="cta cta-outline" href="/season-plan">Browse Tools →</a>
+        <p class="lead">
+          By having a clear understanding of where you want to be, and measuring where you are in your career, you give yourself the opportunity to finely direct your studies and development.
+        </p>
+        <p class="lead">
+          Start here with this snowsports specific method for determining your goals.
+        </p>
+        <div class="lead-cta">
+          <a class="cta" href="/my-career">Start Here →</a>
+        </div>
+        <p class="lead">
+          Since teaching snowsports is a largely unsupervised job, you need a way to evaluate your own performance. Build a client index and lesson log with built in analytics to quantify your performance.
+        </p>
+        <div class="lead-cta">
+          <a class="cta" href="/lesson-log">Lesson Log</a>
         </div>
 
         <!-- Latest Blog Posts -->
