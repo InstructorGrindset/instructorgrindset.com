@@ -106,6 +106,21 @@
     .cta:hover{ filter:brightness(1.06) }
     .cta.big:active{ transform: scale(0.99) }
 
+    /* Section nav */
+    .section-nav{
+      display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;
+      margin:0 auto 1.5rem;max-width:600px;
+    }
+    .section-nav a{
+      padding:.3rem .7rem;border:1px solid var(--line);border-radius:2rem;
+      color:var(--muted);font-size:.82rem;text-decoration:none;
+    }
+    .section-nav a:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* Numbered steps */
+    .steps{padding-left:1.3rem;margin:.75rem 0 1rem}
+    .steps li{margin:.6rem 0;line-height:1.6}
+
     /* Small, centered video inside a panel */
     .vid-mini{
       width:100%;
@@ -140,6 +155,13 @@
         <header>
           <h1>Plan Your Career One Season at a Time</h1>
           <p class="lede">A transformation-first approach to your ski school season.</p>
+          <nav class="section-nav" aria-label="Page sections">
+            <a href="#goal-setting">Goal Setting</a>
+            <a href="#creative-willpower">Creative Willpower</a>
+            <a href="#fitness">Fitness</a>
+            <a href="#education-goals">Education</a>
+            <a href="#enjoyment">Skiing</a>
+          </nav>
         </header>
 
         <!-- Intro -->
@@ -176,12 +198,13 @@
         <!-- Section 2 — Creative Willpower -->
         <section class="panel" id="creative-willpower">
           <h2>Creative Willpower</h2>
-          <p>Creativity is your tendency to have the urge to create, regardless of whether you have the talents, means or mediums to do so. Creative willpower is your ability to create when you don't feel like it. It can be trained year round. Here is a system to train your creative willpower by building a creative reserve bank.</p>
-          <p>Read books on snowsports and any other subject you are interested in. My favorite are non-PSIA snowsports reading materials, especially the older ones to look for lost knowledge. Explore your own interests.
-          Then every time you have a reading session, immediately write a reflection relating it to your desired snowsports context. </p>
-          <p>Immediately after every reading session, write a reflection relating it to your desired snowsports context. The goal is not to build a library of polished essays and plans, but to keep the door open to magic when the mountain grinds you down.</p>
-          <p>Don’t set a goal for a number of pages, reflections, books, etc. It's a system that's meant to encourage organic creative thinking, not feel like homework.</p>
-          <p>Contact me for specific book recommendations.</p>
+          <p>Creativity is your tendency to have the urge to create, regardless of whether you have the talents, means or mediums to do so. Creative willpower is your ability to create when you don’t feel like it. It can be trained year round. Here is a system to train your creative willpower by building a creative reserve bank.</p>
+          <ol class="steps">
+            <li><strong>Read broadly.</strong> Non-PSIA snowsports materials, older texts, and anything else that genuinely interests you.</li>
+            <li><strong>Reflect immediately.</strong> After each reading session, write a short note connecting it to your snowsports context. It doesn’t need to be polished — a few sentences is enough.</li>
+            <li><strong>Don’t set quotas.</strong> No page counts, no reflection targets. The goal is to keep the door open to creative thinking, not to create homework.</li>
+          </ol>
+          <p><a href="/contact">Contact me</a> for specific book recommendations.</p>
 
           <!-- centered, small iframe (still inside the panel) -->
           <div class="vid-mini" aria-label="Creative Willpower video">
@@ -222,6 +245,12 @@
           <p>Cashing in your bonus knowledge takes some planning. When you go to on-snow certification training, you will be in the late stage of cert prep. You can set up a time for mock exam teaches, MA, etc. 
           Imagine showing up to an exam after already having done every task, with feedback several times at or above standard. How good would you feel? How much of your capacity would be freed to focus on meeting your peers and asking important questions?</p>
           <p>No matter what certification you are going for, start studying right away, memorize the 5 fundamentals, read the manuals, sign up to webinars and participate in E-learning. You can do a lot of it by yourself. And remember, anything you do in the off season is a bonus.</p>
+          <ol class="steps">
+            <li>Know your certification's assessment criteria — read them like learning outcomes, not bullet points.</li>
+            <li>Start studying immediately, even in the off-season: memorise the 5 fundamentals, read the manuals, sign up for webinars and e-learning.</li>
+            <li>Before on-snow training, arrange mock exam teaches with feedback at or above standard.</li>
+            <li>Show up to the exam having already done every task. Free up your mental capacity to connect with your peers and ask the important questions.</li>
+          </ol>
         </section>
 
         <!-- Skiing Enjoyment Systems -->
