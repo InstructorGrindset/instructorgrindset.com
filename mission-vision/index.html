@@ -176,7 +176,7 @@
 <script>
   (function(){
     const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=2')  // bump ?v= number when you edit the partial to bust cache
+    fetch('/partials/sidebar.html?v=6')  // bump ?v= number when you edit the partial to bust cache
       .then(r => r.text())
       .then(html => {
         const tmp = document.createElement('div');
@@ -196,15 +196,14 @@
         <h1>Mission &amp; Vision</h1>
 
         <p class="intro">
-          Do you ever teach an awe-inspiring lesson only to feel off on the next one?
-          Do you feel like you rely on fleeting motivation to achieve your goals? There's a way to achieve consistency in a seasonal career.
+          Do you know where you are going? Could you live, ski and work the same job for the same pay for the rest of your life? Is your passion for snowsports properly monetized?
         </p>
 
         <section class="grid two" aria-label="Mission and Vision">
           <article class="panel" aria-labelledby="mission-title">
             <h2 id="mission-title">Mission</h2>
             <p class="lead" style="margin:.6rem 0 0">
-              Provide tools to help snowsports instructors become consistent and irresistable.
+              Provide tools to help snowsports instructors turn their passion into a career.
             </p>
           </article>
 
@@ -217,8 +216,8 @@
         </section>
 
         <div class="btn-row" id="btnRow">
-          <a class="cta" id="btnSeason" href="https://instructorgrindset.com/season-plan">Become Consistent</a>
-          <a class="cta" id="btnLesson" href="https://instructorgrindset.com/lesson-log">Become Irresistable</a>
+          <a class="cta" id="btnSeason" href="/career-plan">Plan Your Career</a>
+          <a class="cta" id="btnLesson" href="/lesson-log">Lesson Log</a>
         </div>
       </div>
     </main>
