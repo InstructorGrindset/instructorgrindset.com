@@ -55,10 +55,11 @@
 .side {
   position: fixed;
   top: 0; left: 0;
-  width: 280px;
+  width: 300px;
   height: 100vh;
   padding: 1.25rem;
   background: #0f1217;
+  background-image: none;
   border-right: 1px solid var(--line);
   color: var(--ink);
   z-index: 1001;
@@ -97,9 +98,12 @@
   display: flex;
   align-items: center;
   gap: .75rem;
+  min-width: 0;
+  flex-shrink: 1;
 }
 .brand .logo-wrap {
   width: 48px; height: 48px;
+  flex-shrink: 0;
   border-radius: 50%;
   overflow: hidden;
   display: grid;
@@ -110,6 +114,7 @@
 .brand .logo-wrap img {
   width: 120%; height: 120%;
   object-fit: cover;
+  object-position: center center;
 }
 .brand .name,
 .brand .name a,
@@ -118,7 +123,7 @@
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: .7px;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: var(--ink);
   text-decoration: none;
 }
