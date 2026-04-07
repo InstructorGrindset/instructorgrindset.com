@@ -17,7 +17,6 @@
       --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
       --panel-bg:rgba(255,255,255,.03);
       --panel-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
-      --thumb-radius:.75rem;
     }
 
     *{box-sizing:border-box} html,body{height:100%}
@@ -36,7 +35,6 @@
 
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
-    a.cta:hover{text-decoration:none}
 
     .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
     .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
@@ -59,160 +57,80 @@
     }
     .lede{text-align:center;color:var(--muted);max-width:70ch;margin:.25rem auto 1.1rem}
 
-    /* ── Widget ── */
-    .priority-predictor-wrapper{
-      max-width:560px;
-      margin:0 auto;
-      padding:0 1rem;
-    }
+    .priority-predictor-wrapper{max-width:560px;margin:0 auto;padding:0 1rem}
 
     .pp-form{
       background:var(--panel-bg);
       border:1px solid var(--line);
       border-radius:.8rem;
-      padding:1.5rem 1.5rem 1.25rem;
+      padding:1.5rem;
       box-shadow:var(--panel-shadow);
     }
 
     .pp-field{margin-bottom:1.25rem}
-    .pp-label{
-      display:block;
-      font-weight:600;
-      font-size:.95rem;
-      color:var(--ink);
-      margin-bottom:.45rem;
-    }
+    .pp-field:last-child{margin-bottom:0}
+    .pp-label{display:block;font-weight:600;font-size:.95rem;color:var(--ink);margin-bottom:.45rem}
 
-    /* Radio group */
-    .pp-radio-group{display:flex;gap:.6rem;flex-wrap:wrap}
+    .pp-radio-group{display:flex;gap:.6rem}
     .pp-radio-group label{
-      flex:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:.45rem;
-      padding:.65rem .9rem;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      border-radius:.5rem;
-      cursor:pointer;
-      font-size:.92rem;
-      color:var(--muted);
-      transition:border-color .15s, color .15s, background .15s;
-      user-select:none;
+      flex:1;display:flex;align-items:center;justify-content:center;gap:.45rem;
+      padding:.65rem .9rem;background:rgba(255,255,255,.04);border:1px solid var(--line);
+      border-radius:.5rem;cursor:pointer;font-size:.92rem;color:var(--muted);
+      transition:border-color .15s,color .15s,background .15s;user-select:none;
     }
     .pp-radio-group input[type="radio"]{accent-color:var(--cta);width:1rem;height:1rem;cursor:pointer}
-    .pp-radio-group label:has(input:checked){
-      border-color:var(--cta);
-      color:var(--ink);
-      background:rgba(196,137,42,.1);
-    }
+    .pp-radio-group label:has(input:checked){border-color:var(--cta);color:var(--ink);background:rgba(196,137,42,.12)}
 
-    /* Select */
     .pp-select{
-      width:100%;
-      padding:.65rem .8rem;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      border-radius:.5rem;
-      color:var(--ink);
-      font-size:.95rem;
-      font-family:inherit;
-      appearance:none;
+      width:100%;padding:.65rem .8rem;background:rgba(255,255,255,.04);border:1px solid var(--line);
+      border-radius:.5rem;color:var(--ink);font-size:.95rem;font-family:inherit;appearance:none;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23cbd5e1' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;
-      background-position:right .75rem center;
-      cursor:pointer;
+      background-repeat:no-repeat;background-position:right .75rem center;cursor:pointer;
     }
     .pp-select:focus{outline:none;border-color:var(--cta)}
 
-    /* Range slider */
     .pp-slider-row{display:flex;align-items:center;gap:.75rem}
-    .pp-slider{
-      flex:1;
-      accent-color:var(--cta);
-      cursor:pointer;
-    }
-    .pp-slider-val{
-      min-width:3.5rem;
-      text-align:right;
-      font-weight:600;
-      color:var(--ink);
-      font-size:.95rem;
-    }
-
-    /* Calculate button */
-    .pp-btn{
-      display:block;
-      width:100%;
-      padding:.9rem 1rem;
-      background:var(--cta);
-      color:#e6e7eb;
-      font-weight:800;
-      font-size:1rem;
-      font-family:inherit;
-      border:0;
-      border-radius:0;
-      cursor:pointer;
-      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
-      margin-top:.25rem;
-      letter-spacing:.3px;
-    }
-    .pp-btn:active{transform:scale(.99)}
+    .pp-slider{flex:1;accent-color:var(--cta);cursor:pointer}
+    .pp-slider-val{min-width:3rem;text-align:right;font-weight:600;color:var(--ink);font-size:.95rem}
 
     /* Results */
     .pp-results{
-      display:none;
-      margin-top:1rem;
-    }
-    .pp-results.visible{display:block}
-
-    .pp-cards{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:.75rem;
-      margin-bottom:1rem;
-    }
-    @media(max-width:360px){
-      .pp-cards{grid-template-columns:repeat(2, minmax(0, 1fr))}
-      .pp-card:last-child{grid-column:span 2}
+      margin-top:1rem;background:var(--panel-bg);border:1px solid var(--line);
+      border-radius:.8rem;padding:1.5rem;box-shadow:var(--panel-shadow);
     }
 
-    .pp-card{
-      background:var(--panel-bg);
-      border:1px solid var(--line);
-      border-radius:.8rem;
-      padding:1rem .75rem;
-      text-align:center;
-      box-shadow:var(--panel-shadow);
+    .pp-result-header{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap;margin-bottom:.6rem}
+    .pp-percentile-big{
+      font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
+      font-size:clamp(2.4rem,7vw,3.2rem);color:var(--cta);line-height:1;
     }
-    .pp-card-value{
-      font-family:"Rooftop",Inter,Arial,sans-serif;
-      font-weight:800;
-      font-size:clamp(1.3rem,3vw,1.75rem);
-      color:var(--ink);
-      line-height:1.1;
-      margin-bottom:.3rem;
-    }
-    .pp-card-label{
-      font-size:.78rem;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.5px;
-      line-height:1.3;
-    }
+    .pp-percentile-label{font-size:1rem;color:var(--muted)}
 
-    /* Disclaimer */
-    .pp-disclaimer{
-      font-size:.82rem;
-      color:var(--muted);
-      text-align:center;
-      max-width:560px;
-      margin:1.5rem auto 0;
-      line-height:1.6;
+    .pp-tier-badge{
+      display:inline-block;padding:.25rem .75rem;border-radius:999px;
+      font-size:.8rem;font-weight:600;letter-spacing:.3px;border:1px solid;margin-bottom:.85rem;
     }
+    .pp-tier-badge.tier-top  {color:#fcd34d;border-color:#fcd34d;background:rgba(252,211,77,.08)}
+    .pp-tier-badge.tier-high {color:#86efac;border-color:#86efac;background:rgba(134,239,172,.08)}
+    .pp-tier-badge.tier-above{color:#93c5fd;border-color:#93c5fd;background:rgba(147,197,253,.08)}
+    .pp-tier-badge.tier-avg  {color:#cbd5e1;border-color:#cbd5e1;background:rgba(203,213,225,.06)}
+    .pp-tier-badge.tier-low  {color:#fca5a5;border-color:#fca5a5;background:rgba(252,165,165,.08)}
 
-    /* Footer */
+    .pp-blurb{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+
+    .pp-breakdown-title{
+      font-size:.78rem;text-transform:uppercase;letter-spacing:.7px;
+      color:var(--muted);margin-bottom:.75rem;font-weight:600;
+    }
+    .pp-bar-row{margin-bottom:.9rem}
+    .pp-bar-meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
+    .pp-bar-name{font-size:.88rem;color:var(--ink)}
+    .pp-bar-score{font-size:.82rem;color:var(--muted);font-weight:600}
+    .pp-bar-track{height:6px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+    .pp-bar-fill{height:100%;border-radius:999px;background:var(--cta);width:0%;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+    .pp-disclaimer{font-size:.82rem;color:var(--muted);text-align:center;max-width:560px;margin:1.5rem auto 0;line-height:1.6}
+
     .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
       display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
     @media(max-width:960px){.footer-wrap{position:static;height:auto;padding:.75rem 0}}
@@ -242,27 +160,26 @@
         </header>
 
         <div class="priority-predictor-wrapper">
+
           <form class="pp-form" id="pp-form" onsubmit="return false">
 
-            <!-- Employment status -->
             <div class="pp-field">
               <span class="pp-label">Employment status</span>
               <div class="pp-radio-group">
                 <label>
-                  <input type="radio" name="employment" value="1" checked>
+                  <input type="radio" name="employment" value="1" checked onchange="ppCalculate()">
                   Full-time
                 </label>
                 <label>
-                  <input type="radio" name="employment" value="0">
+                  <input type="radio" name="employment" value="0" onchange="ppCalculate()">
                   Part-time
                 </label>
               </div>
             </div>
 
-            <!-- Certification level -->
             <div class="pp-field">
               <label class="pp-label" for="pp-cert">Certification level</label>
-              <select class="pp-select" id="pp-cert">
+              <select class="pp-select" id="pp-cert" onchange="ppCalculate()">
                 <option value="0">No certification</option>
                 <option value="1">Alpine I</option>
                 <option value="2">Alpine II</option>
@@ -270,47 +187,74 @@
               </select>
             </div>
 
-            <!-- Years of experience -->
             <div class="pp-field">
               <label class="pp-label" for="pp-exp">Years of experience</label>
               <div class="pp-slider-row">
                 <input class="pp-slider" type="range" id="pp-exp" min="0" max="30" value="0"
-                  oninput="document.getElementById('pp-exp-val').textContent = this.value == 30 ? '30+' : this.value">
+                  oninput="document.getElementById('pp-exp-val').textContent = this.value == 30 ? '30+' : this.value; ppCalculate()">
                 <span class="pp-slider-val" id="pp-exp-val">0</span>
               </div>
             </div>
 
-            <!-- Additional credentials -->
             <div class="pp-field">
               <label class="pp-label" for="pp-cred">Additional credentials</label>
-              <select class="pp-select" id="pp-cred">
+              <select class="pp-select" id="pp-cred" onchange="ppCalculate()">
                 <option value="0">None</option>
-                <option value="1">Level I (e.g. FS I or CS I)</option>
-                <option value="2">Level II</option>
-                <option value="3">Level III or higher</option>
+                <option value="1">1 additional (e.g. FS I or CS I)</option>
+                <option value="2">2 additional</option>
+                <option value="3">3 or more additional</option>
               </select>
             </div>
 
-            <button class="pp-btn" type="button" onclick="ppCalculate()">Calculate</button>
           </form>
 
-          <!-- Results -->
           <div class="pp-results" id="pp-results">
-            <div class="pp-cards">
-              <div class="pp-card">
-                <div class="pp-card-value" id="pp-percentile">—</div>
-                <div class="pp-card-label">Priority<br>Percentile</div>
-              </div>
-              <div class="pp-card">
-                <div class="pp-card-value" id="pp-tier">—</div>
-                <div class="pp-card-label">Priority<br>Tier</div>
-              </div>
-              <div class="pp-card">
-                <div class="pp-card-value" id="pp-advantage">—</div>
-                <div class="pp-card-label">Key<br>Advantage</div>
-              </div>
+
+            <div class="pp-result-header">
+              <span class="pp-percentile-big" id="pp-percentile-big">—</span>
+              <span class="pp-percentile-label">overall percentile</span>
             </div>
+
+            <div class="pp-tier-badge" id="pp-tier-badge">—</div>
+
+            <p class="pp-blurb" id="pp-blurb"></p>
+
+            <div class="pp-breakdown-title">Score breakdown</div>
+
+            <div class="pp-bar-row">
+              <div class="pp-bar-meta">
+                <span class="pp-bar-name">Employment status (45%)</span>
+                <span class="pp-bar-score" id="pp-score-ft">— / 100</span>
+              </div>
+              <div class="pp-bar-track"><div class="pp-bar-fill" id="pp-bar-ft"></div></div>
+            </div>
+
+            <div class="pp-bar-row">
+              <div class="pp-bar-meta">
+                <span class="pp-bar-name">Certification (30%)</span>
+                <span class="pp-bar-score" id="pp-score-cert">— / 100</span>
+              </div>
+              <div class="pp-bar-track"><div class="pp-bar-fill" id="pp-bar-cert"></div></div>
+            </div>
+
+            <div class="pp-bar-row">
+              <div class="pp-bar-meta">
+                <span class="pp-bar-name">Years of experience (15%)</span>
+                <span class="pp-bar-score" id="pp-score-exp">— / 100</span>
+              </div>
+              <div class="pp-bar-track"><div class="pp-bar-fill" id="pp-bar-exp"></div></div>
+            </div>
+
+            <div class="pp-bar-row">
+              <div class="pp-bar-meta">
+                <span class="pp-bar-name">Additional credentials (10%)</span>
+                <span class="pp-bar-score" id="pp-score-cred">— / 100</span>
+              </div>
+              <div class="pp-bar-track"><div class="pp-bar-fill" id="pp-bar-cred"></div></div>
+            </div>
+
           </div>
+
         </div>
 
         <p class="pp-disclaimer">Priority list culture varies significantly between resorts. This tool is a model based on industry patterns and PSIA-AASI demographic data — not an official PSIA tool. Employment status and certification distribution data sourced from the PSIA-AASI 2021-22 Annual Report.</p>
@@ -323,61 +267,62 @@
 
   <script>
     function ppCalculate() {
-      // Read inputs
-      var ftVal      = parseInt(document.querySelector('input[name="employment"]:checked').value, 10);
-      var certLevel  = parseInt(document.getElementById('pp-cert').value, 10);
-      var yearsExp   = parseInt(document.getElementById('pp-exp').value, 10);
-      var addCred    = parseInt(document.getElementById('pp-cred').value, 10);
+      var ftVal     = parseInt(document.querySelector('input[name="employment"]:checked').value, 10);
+      var certLevel = parseInt(document.getElementById('pp-cert').value, 10);
+      var yearsExp  = parseInt(document.getElementById('pp-exp').value, 10);
+      var addCred   = parseInt(document.getElementById('pp-cred').value, 10);
 
-      // Scoring — sourced from 2022 PSIA-AASI annual report data. Do not change.
-      // Employment weighting — 45% of overall score
-      var ftScore = ftVal === 1 ? 95 : 30;
-
-      // Certification score map — based on 2022 PSIA distribution
-      // Alpine I = 37%, II = 26%, III = 24% of certified members
-      var certMap = {0:10, 1:45, 2:68, 3:85};
+      // Scoring — 2022 PSIA-AASI data. Do not change.
+      var ftScore   = ftVal === 1 ? 95 : 30;
+      var certMap   = {0:10, 1:45, 2:68, 3:85};
       var certScore = certMap[certLevel];
+      var expScore  = Math.min(100, yearsExp * (100 / 30));
+      var expRound  = Math.round(expScore);
+      var addMap    = {0:0, 1:25, 2:60, 3:100};
+      var addScore  = addMap[addCred];
 
-      // Experience — 15% weight (cap at 100 at 30+ years)
-      var expScore = Math.min(100, yearsExp * (100 / 30));
-
-      // Additional credentials — 10% weight (level-based)
-      var addMap = {0:0, 1:25, 2:60, 3:100};
-      var addScore = addMap[addCred];
-
-      // Overall weighting: Employment 45%, Certification 30%, Experience 15%, Additional certs 10%
       var total = ftScore * 0.45 + certScore * 0.30 + expScore * 0.15 + addScore * 0.10;
 
-      // Percentile — continuous, one decimal
-      var percentile = (100 - total).toFixed(1);
-      var percentileDisplay = 'Top ' + percentile + '%';
+      var percentile = 'Top ' + (100 - total).toFixed(1) + '%';
 
-      // Priority tier
-      var tier;
-      if (total >= 85)      tier = 'Top priority';
-      else if (total >= 70) tier = 'High priority';
-      else if (total >= 55) tier = 'Above average';
-      else if (total >= 35) tier = 'Average';
-      else                  tier = 'Low priority';
+      var tier, tierClass, blurb;
+      if (total >= 85) {
+        tier = 'Top priority'; tierClass = 'tier-top';
+        blurb = 'You are among the highest-priority instructors at most ski schools. You will typically receive first pick of the lesson board.';
+      } else if (total >= 70) {
+        tier = 'High priority'; tierClass = 'tier-high';
+        blurb = 'You are well-positioned on most priority lists and will regularly receive desirable lesson assignments.';
+      } else if (total >= 55) {
+        tier = 'Above average'; tierClass = 'tier-above';
+        blurb = 'You are getting lessons but competing for better assignments. A higher certification or full-time commitment would move you up significantly.';
+      } else if (total >= 35) {
+        tier = 'Average'; tierClass = 'tier-avg';
+        blurb = 'You are getting lessons but competing for the better assignments. If you are part-time, committing to full-time is the single biggest move you can make.';
+      } else {
+        tier = 'Low priority'; tierClass = 'tier-low';
+        blurb = 'You are near the bottom of most priority lists. Employment status and certification are the two fastest ways to improve your position.';
+      }
 
-      // Key advantage — highest weighted sub-score contribution
-      var weighted = [
-        { label: 'Employment',   score: ftScore   * 0.45 },
-        { label: 'Certification', score: certScore * 0.30 },
-        { label: 'Experience',   score: expScore  * 0.15 },
-        { label: 'Credentials',  score: addScore  * 0.10 }
-      ];
-      weighted.sort(function(a, b){ return b.score - a.score });
-      var advantage = weighted[0].label;
+      document.getElementById('pp-percentile-big').textContent = percentile;
 
-      // Render results
-      document.getElementById('pp-percentile').textContent = percentileDisplay;
-      document.getElementById('pp-tier').textContent       = tier;
-      document.getElementById('pp-advantage').textContent  = advantage;
+      var badge = document.getElementById('pp-tier-badge');
+      badge.textContent = tier;
+      badge.className = 'pp-tier-badge ' + tierClass;
 
-      // Show results panel
-      document.getElementById('pp-results').classList.add('visible');
+      document.getElementById('pp-blurb').textContent = blurb;
+
+      document.getElementById('pp-score-ft').textContent   = ftScore + ' / 100';
+      document.getElementById('pp-score-cert').textContent = certScore + ' / 100';
+      document.getElementById('pp-score-exp').textContent  = expRound + ' / 100';
+      document.getElementById('pp-score-cred').textContent = addScore + ' / 100';
+
+      document.getElementById('pp-bar-ft').style.width   = ftScore + '%';
+      document.getElementById('pp-bar-cert').style.width = certScore + '%';
+      document.getElementById('pp-bar-exp').style.width  = expRound + '%';
+      document.getElementById('pp-bar-cred').style.width = addScore + '%';
     }
+
+    ppCalculate();
   </script>
 </body>
 </html>
