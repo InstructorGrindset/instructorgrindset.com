@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset • The Reading List</title>
+  <meta name="description" content="25 books on skiing technique, instruction, history, and fitness — with a Book Finder to find the right read for you." />
+  <link rel="canonical" href="https://instructorgrindset.com/reading-list" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <style>
+    :root{
+      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:0px; --footer-h:52px;
+      --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
+      --panel-bg:rgba(255,255,255,.03);
+      --panel-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
+      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
+    }
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
+    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
+    @media(max-width:960px){.page{grid-template-columns:1fr}}
+    .main{padding:1.25rem}
+    .content{
+      width:var(--wrap-max);
+      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:1.25rem; padding-bottom:2.5rem;
+    }
+    @media(max-width:960px){.content{width:min(94vw,1100px);margin:0 auto}}
+    h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+    h1{
+      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
+      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .lede{text-align:center;color:var(--muted);max-width:70ch;margin:.25rem auto 1.5rem}
+
+    /* ---- Search row ---- */
+    .rl-search-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem}
+    .rl-search{
+      flex:1;padding:.65rem .85rem;background:rgba(255,255,255,.04);
+      border:1px solid var(--line);border-radius:.5rem;color:var(--ink);
+      font-size:.95rem;font-family:inherit;
+    }
+    .rl-search::placeholder{color:var(--muted)}
+    .rl-search:focus{outline:none;border-color:var(--cta)}
+    .rl-count{white-space:nowrap;color:var(--muted);font-size:.88rem}
+
+    /* ---- Filter pills ---- */
+    .rl-filters{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.65rem}
+    .rl-pill{
+      padding:.28rem .75rem;border-radius:999px;border:1px solid var(--line);
+      background:transparent;color:var(--muted);font-size:.82rem;font-family:inherit;
+      cursor:pointer;transition:all .15s;
+    }
+    .rl-pill:hover{border-color:var(--muted);color:var(--ink)}
+    .rl-pill.active{background:var(--cta);border-color:var(--cta);color:#e6e7eb}
+    .rl-filter-label{font-size:.75rem;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;align-self:center;margin-right:.25rem}
+
+    /* ---- Book grid ---- */
+    .rl-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+      gap:1rem;
+      margin-top:1rem;
+    }
+    .rl-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem 0}
+
+    /* ---- Book card ---- */
+    .book-card{
+      display:flex;flex-direction:column;
+      background:var(--panel-bg);border:1px solid var(--line);border-radius:.8rem;
+      padding:1rem 1rem .85rem;
+    }
+    .book-card-body{flex:1;margin-bottom:.75rem}
+    .book-title{font-size:.92rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.2rem}
+    .book-author{font-size:.8rem;color:var(--muted);margin-bottom:.5rem}
+    .book-desc{font-size:.82rem;color:var(--muted);line-height:1.5}
+    .book-reflection{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:.5rem;line-height:1.5}
+    .book-youtube{font-size:.8rem;color:#5eead4;display:inline-block;margin-top:.4rem}
+    .book-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+
+    /* ---- Tags ---- */
+    .tag{display:inline-block;padding:.18rem .55rem;border-radius:999px;font-size:.72rem;font-weight:500}
+    .tag-pedagogy   {background:#E6F1FB;color:#0C447C}
+    .tag-alpine     {background:#E1F5EE;color:#085041}
+    .tag-moguls     {background:#FAEEDA;color:#633806}
+    .tag-freestyle  {background:#EEEDFE;color:#3C3489}
+    .tag-racing     {background:#FCEBEB;color:#791F1F}
+    .tag-backcountry{background:#FAECE7;color:#712B13}
+    .tag-fitness    {background:#EAF3DE;color:#27500A}
+    .tag-history    {background:#FBEAF0;color:#72243E}
+    .tag-science    {background:#EEEDFE;color:#26215C}
+    .tag-travel     {background:#F1EFE8;color:#444441}
+    .tag-children   {background:#E6F1FB;color:#185FA5}
+    .tag-magazine   {background:#F1EFE8;color:#5F5E5A}
+    .tag-level      {background:rgba(255,255,255,.06);color:var(--muted)}
+
+    /* ---- Divider ---- */
+    .rl-divider{border:none;border-top:1px solid var(--line);margin:2.5rem 0}
+
+    /* ---- Finder ---- */
+    .finder-label{
+      font-size:.75rem;text-transform:uppercase;letter-spacing:1px;
+      color:var(--muted);font-weight:600;margin-bottom:1.25rem;
+    }
+    .finder-q{margin-bottom:1.25rem}
+    .finder-q-text{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.5rem}
+    .finder-options{display:flex;flex-wrap:wrap;gap:.4rem}
+    .finder-opt{
+      padding:.3rem .8rem;border-radius:999px;border:1px solid var(--line);
+      background:transparent;color:var(--muted);font-size:.85rem;font-family:inherit;cursor:pointer;transition:all .15s;
+    }
+    .finder-opt:hover{border-color:var(--muted);color:var(--ink)}
+    .finder-opt.selected{background:rgba(196,137,42,.15);border-color:var(--cta);color:var(--ink)}
+
+    .finder-btn{
+      display:block;width:100%;padding:.85rem 1rem;background:var(--cta);color:#e6e7eb;
+      font-weight:800;font-size:1rem;font-family:inherit;border:0;border-radius:.5rem;
+      cursor:pointer;margin-top:.5rem;letter-spacing:.3px;
+    }
+    .finder-btn:active{transform:scale(.99)}
+
+    .finder-error{font-size:.88rem;color:#fca5a5;margin-top:.75rem;min-height:1.4rem}
+    .finder-results{margin-top:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+    .finder-card{
+      background:var(--panel-bg);border:1px solid var(--line);border-radius:.8rem;
+      padding:1rem 1rem .85rem;
+    }
+    .finder-card-title{font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
+    .finder-card-author{font-size:.8rem;color:var(--muted);margin-bottom:.4rem}
+    .finder-card-reason{font-size:.84rem;color:var(--muted);font-style:italic}
+
+    /* ---- Footer ---- */
+    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
+      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
+    @media(max-width:960px){.footer-wrap{position:static;height:auto;padding:.75rem 0}}
+    .footer{color:var(--muted);text-align:center;margin:0}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="page">
+    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <script>
+      (function(){
+        var t = document.getElementById("sidebar-placeholder");
+        fetch("/partials/sidebar.html?v=9")
+          .then(function(r){return r.text()})
+          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
+          .catch(function(){t.innerHTML="<div style=\"padding:1rem;color:#fca5a5\">Navigation failed to load.</div>"});
+      })();
+    </script>
+    <main class="main" id="main">
+      <div class="content">
+        <header>
+          <h1>The Reading List</h1>
+          <p class="lede">Ski technique, instruction, history, fitness, and travel &#8212; 25 books worth reading. Use the filters below to browse, or jump to the Book Finder to get a personalised recommendation.</p>
+        </header>
+
+        <!-- ===== CATALOGUE ===== -->
+        <div class="rl-search-row">
+          <input class="rl-search" type="text" id="rl-search" placeholder="Search by title or author&hellip;" oninput="rlRender()">
+          <span class="rl-count" id="rl-count">25 books</span>
+        </div>
+
+        <div class="rl-filters" id="rl-cat-filters" role="group" aria-label="Category filter">
+          <span class="rl-filter-label">Category</span>
+          <button class="rl-pill active" data-cat="all" onclick="rlSetCat(this,'all')">All</button>
+          <button class="rl-pill" data-cat="pedagogy"    onclick="rlSetCat(this,'pedagogy')">Pedagogy</button>
+          <button class="rl-pill" data-cat="alpine"      onclick="rlSetCat(this,'alpine')">Alpine</button>
+          <button class="rl-pill" data-cat="moguls"      onclick="rlSetCat(this,'moguls')">Moguls</button>
+          <button class="rl-pill" data-cat="freestyle"   onclick="rlSetCat(this,'freestyle')">Freestyle</button>
+          <button class="rl-pill" data-cat="racing"      onclick="rlSetCat(this,'racing')">Racing</button>
+          <button class="rl-pill" data-cat="backcountry" onclick="rlSetCat(this,'backcountry')">Backcountry</button>
+          <button class="rl-pill" data-cat="fitness"     onclick="rlSetCat(this,'fitness')">Fitness</button>
+          <button class="rl-pill" data-cat="history"     onclick="rlSetCat(this,'history')">History</button>
+          <button class="rl-pill" data-cat="science"     onclick="rlSetCat(this,'science')">Science</button>
+          <button class="rl-pill" data-cat="travel"      onclick="rlSetCat(this,'travel')">Travel</button>
+        </div>
+
+        <div class="rl-filters" id="rl-lvl-filters" role="group" aria-label="Level filter">
+          <span class="rl-filter-label">Level</span>
+          <button class="rl-pill active" data-lvl="all"          onclick="rlSetLvl(this,'all')">All</button>
+          <button class="rl-pill" data-lvl="Beginner"            onclick="rlSetLvl(this,'Beginner')">Beginner</button>
+          <button class="rl-pill" data-lvl="Intermediate"        onclick="rlSetLvl(this,'Intermediate')">Intermediate</button>
+          <button class="rl-pill" data-lvl="Expert"              onclick="rlSetLvl(this,'Expert')">Expert</button>
+          <button class="rl-pill" data-lvl="All levels"          onclick="rlSetLvl(this,'All levels')">All levels</button>
+        </div>
+
+        <div class="rl-grid" id="rl-grid"></div>
+
+        <!-- ===== BOOK FINDER ===== -->
+        <hr class="rl-divider">
+        <div class="finder-label">Book Finder</div>
+
+        <div class="finder-q">
+          <div class="finder-q-text">What kind of skiing are you focused on?</div>
+          <div class="finder-options" id="fq1">
+            <button class="finder-opt" data-q="discipline" data-v="alpine"      onclick="fSelect(this)">All-mountain / alpine</button>
+            <button class="finder-opt" data-q="discipline" data-v="moguls"      onclick="fSelect(this)">Moguls</button>
+            <button class="finder-opt" data-q="discipline" data-v="freestyle"   onclick="fSelect(this)">Freestyle / park</button>
+            <button class="finder-opt" data-q="discipline" data-v="racing"      onclick="fSelect(this)">Racing</button>
+            <button class="finder-opt" data-q="discipline" data-v="backcountry" onclick="fSelect(this)">Backcountry</button>
+          </div>
+        </div>
+
+        <div class="finder-q">
+          <div class="finder-q-text">Are you looking to teach or to ski better?</div>
+          <div class="finder-options" id="fq2">
+            <button class="finder-opt" data-q="goal" data-v="teach" onclick="fSelect(this)">Teach better</button>
+            <button class="finder-opt" data-q="goal" data-v="ski"   onclick="fSelect(this)">Ski better</button>
+            <button class="finder-opt" data-q="goal" data-v="both"  onclick="fSelect(this)">Both</button>
+          </div>
+        </div>
+
+        <div class="finder-q">
+          <div class="finder-q-text">What is your current level?</div>
+          <div class="finder-options" id="fq3">
+            <button class="finder-opt" data-q="level" data-v="Beginner"     onclick="fSelect(this)">Beginner</button>
+            <button class="finder-opt" data-q="level" data-v="Intermediate" onclick="fSelect(this)">Intermediate</button>
+            <button class="finder-opt" data-q="level" data-v="Expert"       onclick="fSelect(this)">Expert</button>
+          </div>
+        </div>
+
+        <div class="finder-q">
+          <div class="finder-q-text">What is your primary goal right now?</div>
+          <div class="finder-options" id="fq4">
+            <button class="finder-opt" data-q="challenge" data-v="certs"       onclick="fSelect(this)">Certification prep</button>
+            <button class="finder-opt" data-q="challenge" data-v="kids"        onclick="fSelect(this)">Teaching children</button>
+            <button class="finder-opt" data-q="challenge" data-v="technique"   onclick="fSelect(this)">Technical refinement</button>
+            <button class="finder-opt" data-q="challenge" data-v="fitness"     onclick="fSelect(this)">Fitness and conditioning</button>
+            <button class="finder-opt" data-q="challenge" data-v="history"     onclick="fSelect(this)">Understanding the sport's history</button>
+            <button class="finder-opt" data-q="challenge" data-v="alternative" onclick="fSelect(this)">Finding alternative teaching methods</button>
+          </div>
+        </div>
+
+        <div class="finder-q">
+          <div class="finder-q-text">Do you prefer technical manuals or readable books?</div>
+          <div class="finder-options" id="fq5">
+            <button class="finder-opt" data-q="style" data-v="manual"   onclick="fSelect(this)">Technical manual &#8212; give me the details</button>
+            <button class="finder-opt" data-q="style" data-v="readable" onclick="fSelect(this)">Readable &#8212; I want to enjoy it</button>
+            <button class="finder-opt" data-q="style" data-v="either"   onclick="fSelect(this)">Either</button>
+          </div>
+        </div>
+
+        <button class="finder-btn" onclick="fFind()">Find my books</button>
+        <div class="finder-error" id="finder-error"></div>
+        <div class="finder-results" id="finder-results"></div>
+
+      </div><!-- .content -->
+    </main>
+  </div><!-- .page -->
+  <div class="footer-wrap"><p class="footer">&copy; Instructor Grindset</p></div>
+  <script>
+  var books = [
+    {title:"PSIA Alpine Technical Manual",author:"Official publication",tags:["pedagogy","alpine"],levels:["Intermediate","Expert"],desc:"The definitive technical framework for alpine skiing instruction in America. The fundamentals, movement analysis and progressions all in one place.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["teach","both"],challenge:["certs","technique"],style:["manual"]}},
+    {title:"Teaching Snowsports Manual",author:"Official publication",tags:["pedagogy"],levels:["Intermediate","Expert"],desc:"The foundational teaching philosophy every PSIA-AASI certification exam is built around.",reflection:"",youtube:"",finder:{discipline:["alpine","moguls","freestyle","racing","backcountry"],goal:["teach","both"],challenge:["certs"],style:["manual"]}},
+    {title:"Teaching Children's Snowsports",author:"Official publication",tags:["pedagogy","children"],levels:["All levels"],desc:"Child specific learning theory and progressions that make the CS exams make sense.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["teach","both"],challenge:["certs","kids"],style:["manual"]}},
+    {title:"Freestyle Technical Manual",author:"Official publication",tags:["pedagogy","freestyle"],levels:["Intermediate","Expert"],desc:"The technical and teaching framework and progressions for the park and pipe disciplines.",reflection:"",youtube:"",finder:{discipline:["freestyle"],goal:["teach","ski","both"],challenge:["certs","technique"],style:["manual"]}},
+    {title:"Children's Alpine Teaching Handbook",author:"Official publication",tags:["pedagogy","children"],levels:["All levels"],desc:"Games and progressions for group lessons.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["teach","both"],challenge:["kids"],style:["manual","readable"]}},
+    {title:"Ultimate Skiing",author:"Ron LeMaster",tags:["alpine"],levels:["Expert"],desc:"A detailed look at the physiques and technique of dynamic skiing.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["ski","both"],challenge:["technique"],style:["manual"]}},
+    {title:"Ski Faster",author:"Lisa Densmore Ballard",tags:["racing","alpine"],levels:["Expert"],desc:"Guide to racing and high performance skiing.",reflection:"",youtube:"",finder:{discipline:["racing","alpine"],goal:["ski","both"],challenge:["technique"],style:["manual","readable"]}},
+    {title:"The Invincible Mogul Skier",author:"Michael Mead, PE",tags:["moguls"],levels:["Expert"],desc:"A highly detailed technical manual for the advancement of competitive mogul skiers.",reflection:"",youtube:"",finder:{discipline:["moguls"],goal:["ski","both"],challenge:["technique"],style:["manual"]}},
+    {title:"Everything The Instructors Never Told You About Mogul Skiing",author:"Dan DiPiro",tags:["moguls"],levels:["Intermediate","Expert"],desc:"Adaptation of competitive mogul skiing technique in natural moguls.",reflection:"",youtube:"",finder:{discipline:["moguls"],goal:["ski","teach","both"],challenge:["technique","alternative"],style:["readable","either"]}},
+    {title:"Soft Skiing",author:"Lito Tejada-Flores",tags:["alpine"],levels:["Intermediate"],desc:"Low impact skiing for everyone.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["ski","both"],challenge:["technique"],style:["readable"]}},
+    {title:"Anyone Can Be An Expert Skier 1",author:"Harald Harb",tags:["alpine"],levels:["Intermediate"],desc:"A deep but simple technical manual for all mountain skiing.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["ski","teach","both"],challenge:["technique","alternative"],style:["manual","readable"]}},
+    {title:"Anyone Can Be An Expert Skier 2",author:"Harald Harb",tags:["alpine"],levels:["Intermediate","Expert"],desc:"A deep but delightfully simple technical manual for dynamic skiing \u2014 powder, bumps and carving.",reflection:"",youtube:"",finder:{discipline:["alpine","moguls"],goal:["ski","both"],challenge:["technique","alternative"],style:["manual","readable"]}},
+    {title:"Four Words For Great Skiing",author:"John Clendenin",tags:["alpine"],levels:["Intermediate","Expert"],desc:"Learn the secrets of speed management and unlock the door to skiing anywhere on the mountain.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["ski","teach","both"],challenge:["technique","certs"],style:["readable","either"]}},
+    {title:"Total Skiing",author:"Chris Fellows",tags:["alpine","fitness"],levels:["Intermediate","Expert"],desc:"The proven pyramid approach for improving functional movement, fitness, technique and tactics.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["ski","both"],challenge:["technique","fitness"],style:["manual","either"]}},
+    {title:"Fit Skiing",author:"Andrew Hooge, CSCS",tags:["fitness"],levels:["All levels"],desc:"A complete guide to ski fitness programming.",reflection:"",youtube:"",finder:{discipline:["alpine","moguls","freestyle","racing","backcountry"],goal:["ski","both"],challenge:["fitness"],style:["manual"]}},
+    {title:"Instant Skiing",author:"Cliff Taylor",tags:["alpine"],levels:["Beginner"],desc:"A radical alternative teaching system for beginners.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["teach","both"],challenge:["alternative","technique"],style:["readable"]}},
+    {title:"GLM",author:"Cliff Taylor",tags:["alpine"],levels:["Beginner"],desc:"A radical alternative teaching system for beginners.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["teach","both"],challenge:["alternative","technique"],style:["manual","readable"]}},
+    {title:"Learn To Ski In A Weekend",author:"Konrad Bartelski",tags:["alpine"],levels:["Beginner"],desc:"An antique but still valid, colorful beginner handbook.",reflection:"",youtube:"",finder:{discipline:["alpine"],goal:["teach","ski","both"],challenge:["technique"],style:["readable"]}},
+    {title:"Fifty Places To Ski And Snowboard Before You Die",author:"Chris Santella",tags:["travel"],levels:["All levels"],desc:"Downhill experts share the world's greatest destinations.",reflection:"",youtube:"",finder:{discipline:["alpine","moguls","freestyle","racing","backcountry"],goal:["ski","both"],challenge:["history"],style:["readable"]}},
+    {title:"Wilderness Skiing",author:"Lito Tejada-Flores",tags:["backcountry"],levels:["Intermediate","Expert"],desc:"An antique and entertaining look at backcountry skiing in the 70s.",reflection:"",youtube:"",finder:{discipline:["backcountry"],goal:["ski","both"],challenge:["technique","history"],style:["readable"]}},
+    {title:"Two Planks And A Passion",author:"Roland Huntford",tags:["history"],levels:["All levels"],desc:"The complete and dramatic history of skiing, starting in 8000 B.C.",reflection:"",youtube:"",finder:{discipline:["alpine","moguls","freestyle","racing","backcountry"],goal:["teach","ski","both"],challenge:["history"],style:["readable"]}},
+    {title:"Snow Structure And Ski Fields",author:"G. Seligman",tags:["science"],levels:["Expert"],desc:"A snow science time capsule to 1936.",reflection:"",youtube:"",finder:{discipline:["backcountry","alpine"],goal:["ski","both"],challenge:["technique","history"],style:["manual"]}},
+    {title:"Written In The Snows",author:"Lowell Skoog",tags:["history"],levels:["All levels"],desc:"The history of skiing in the Pacific Northwest.",reflection:"",youtube:"",finder:{discipline:["alpine","backcountry"],goal:["ski","both"],challenge:["history"],style:["readable"]}},
+    {title:"Cross-Country Downhill",author:"Steve Barnett",tags:["backcountry"],levels:["Expert"],desc:"A nordic steep skiing technical manual.",reflection:"",youtube:"",finder:{discipline:["backcountry"],goal:["ski","both"],challenge:["technique"],style:["manual"]}},
+    {title:"32 Degrees Magazine",author:"Official publication",tags:["magazine","pedagogy"],levels:["All levels"],desc:"PSIA-AASI's official magazine publication.",reflection:"",youtube:"",finder:{discipline:["alpine","moguls","freestyle","racing","backcountry"],goal:["teach","both"],challenge:["certs"],style:["readable","either"]}}
+  ];
+
+  // ---- State ----
+  var activeCat = 'all';
+  var activeLvl = 'all';
+  var finderAnswers = {discipline:null, goal:null, level:null, challenge:null, style:null};
+
+  // ---- Catalogue ----
+  function rlSetCat(btn, val) {
+    activeCat = val;
+    document.querySelectorAll('#rl-cat-filters .rl-pill').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    rlRender();
+  }
+  function rlSetLvl(btn, val) {
+    activeLvl = val;
+    document.querySelectorAll('#rl-lvl-filters .rl-pill').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    rlRender();
+  }
+  function rlRender() {
+    var q   = document.getElementById('rl-search').value.toLowerCase();
+    var cat = activeCat;
+    var lvl = activeLvl;
+    var filtered = books.filter(function(b) {
+      var ms = !q || b.title.toLowerCase().indexOf(q) >= 0 || b.author.toLowerCase().indexOf(q) >= 0;
+      var mc = cat === 'all' || b.tags.indexOf(cat) >= 0;
+      var ml = lvl === 'all' || b.levels.indexOf(lvl) >= 0;
+      return ms && mc && ml;
+    });
+    var grid = document.getElementById('rl-grid');
+    document.getElementById('rl-count').textContent = filtered.length + ' book' + (filtered.length !== 1 ? 's' : '');
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="rl-empty">No books match your filters.</div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(function(b) {
+      var tagHtml = b.tags.map(function(t){ return '<span class="tag tag-' + t + '">' + t + '</span>'; }).join('');
+      tagHtml += b.levels.map(function(l){ return '<span class="tag tag-level">' + l + '</span>'; }).join('');
+      var reflection = b.reflection ? '<p class="book-reflection">' + b.reflection + '</p>' : '';
+      var yt = b.youtube ? '<a class="book-youtube" href="' + b.youtube + '" target="_blank" rel="noopener">Watch the review →</a>' : '';
+      return '<article class="book-card"><div class="book-card-body"><div class="book-title">' + b.title + '</div><div class="book-author">' + b.author + '</div><div class="book-desc">' + b.desc + '</div>' + reflection + yt + '</div><div class="book-tags">' + tagHtml + '</div></article>';
+    }).join('');
+  }
+
+  // ---- Finder ----
+  function fSelect(btn) {
+    var q = btn.getAttribute('data-q');
+    var v = btn.getAttribute('data-v');
+    var group = btn.parentElement;
+    group.querySelectorAll('.finder-opt').forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    finderAnswers[q] = v;
+  }
+  function fFind() {
+    var answered = Object.values(finderAnswers).filter(function(v){ return v !== null; }).length;
+    var errEl = document.getElementById('finder-error');
+    var resEl = document.getElementById('finder-results');
+    if (answered < 3) {
+      errEl.textContent = 'Answer at least 3 questions to get a recommendation.';
+      resEl.innerHTML = '';
+      return;
+    }
+    errEl.textContent = '';
+    var reasonMap = {
+      certs:       'is core certification preparation reading',
+      kids:        'focuses specifically on teaching children',
+      technique:   'directly develops your technical understanding',
+      fitness:     'builds the physical foundation for skiing performance',
+      history:     'grounds you in where the sport came from',
+      alternative: 'offers a teaching system outside the standard PSIA framework'
+    };
+    var scored = books.map(function(b) {
+      var score = 0;
+      var a = finderAnswers;
+      if (a.discipline && b.finder.discipline.indexOf(a.discipline) >= 0) score += 4;
+      if (a.goal && (b.finder.goal.indexOf(a.goal) >= 0 || a.goal === 'both' || b.finder.goal.indexOf('both') >= 0)) score += 2;
+      if (a.level) {
+        if (b.levels.indexOf(a.level) >= 0) score += 3;
+        else if (b.levels.indexOf('All levels') >= 0) score += 1;
+      }
+      if (a.challenge && b.finder.challenge.indexOf(a.challenge) >= 0) score += 4;
+      if (a.style && (b.finder.style.indexOf(a.style) >= 0 || a.style === 'either' || b.finder.style.indexOf('either') >= 0)) score += 1;
+      return {book: b, score: score};
+    }).filter(function(x){ return x.score > 0; })
+      .sort(function(a,b){ return b.score - a.score; })
+      .slice(0, 3);
+    if (!scored.length) {
+      resEl.innerHTML = '<div style="color:var(--muted);font-size:.88rem">No matches found. Try adjusting your answers.</div>';
+      return;
+    }
+    var reason = finderAnswers.challenge ? reasonMap[finderAnswers.challenge] : ('matches your focus on ' + (finderAnswers.discipline || 'skiing'));
+    resEl.innerHTML = scored.map(function(x){
+      return '<div class="finder-card"><div class="finder-card-title">' + x.book.title + '</div><div class="finder-card-author">' + x.book.author + '</div><div class="finder-card-reason">Recommended because it ' + reason + '.</div></div>';
+    }).join('');
+  }
+
+  // ---- Init ----
+  rlRender();
+  </script>
+</body>
+</html>
