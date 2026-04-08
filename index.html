@@ -220,7 +220,7 @@
 <script>
   (function(){
     const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=8')  // bump ?v= number when you edit the partial to bust cache
+    fetch('/partials/sidebar.html?v=9')  // bump ?v= number when you edit the partial to bust cache
       .then(r => r.text())
       .then(html => {
         const tmp = document.createElement('div');
