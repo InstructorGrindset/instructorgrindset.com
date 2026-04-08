@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset • Offseason Plan Builder</title>
+  <meta name="description" content="Build and schedule your May through November training plan. Configure volume, set goals, drag and drop activities across 26 weeks, and export to Google Sheets." />
+  <link rel="canonical" href="https://instructorgrindset.com/offseason-plan" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <style>
+    :root{
+      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
+      --cta:#c4892a; --glow:250,204,21; --sidebar:0px; --footer-h:52px;
+      --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
+      --panel-bg:rgba(255,255,255,.03);
+      --fit-color:#1D9E75; --fit-bg:#E1F5EE; --fit-text:#085041;
+      --study-color:#378ADD; --study-bg:#E6F1FB; --study-text:#0C447C;
+      --cross-color:#BA7517; --cross-bg:#FAEEDA; --cross-text:#633806;
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
+      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 35%,rgba(0,0,0,.15),rgba(0,0,0,.35) 60%,rgba(0,0,0,.55)); z-index:-1;
+    }
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
+    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:calc(var(--footer-h) + 60px)}
+    @media(max-width:960px){.page{grid-template-columns:1fr}}
+    .main{padding:1.25rem}
+    .content{
+      width:var(--wrap-max);
+      margin-left:max(14px,calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
+      margin-right:auto; padding-top:1.25rem; padding-bottom:2rem;
+    }
+    @media(max-width:960px){.content{width:min(94vw,1100px);margin:0 auto}}
+    h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+    h1{font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
+      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lede{text-align:center;color:var(--muted);max-width:70ch;margin:.25rem auto 1.5rem}
+
+    /* --- Section labels --- */
+    .section-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin:1.5rem 0 .6rem}
+
+    /* --- Sliders --- */
+    .ob-slider-group{margin-bottom:1.25rem}
+    .ob-slider-label{font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:.35rem;display:block}
+    .ob-slider{width:100%;accent-color:var(--cta);cursor:pointer}
+    .goals-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem 1.25rem;margin-bottom:1.25rem}
+    @media(max-width:500px){.goals-grid{grid-template-columns:1fr}}
+
+    /* --- Exemptions --- */
+    .exemption-grid{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.75rem}
+    .ex-btn{
+      padding:.3rem .75rem;border-radius:999px;border:1px solid var(--line);
+      background:transparent;color:var(--muted);font-size:.82rem;font-family:inherit;cursor:pointer;transition:all .15s;
+    }
+    .ex-btn:hover{border-color:var(--muted);color:var(--ink)}
+    .ex-btn.active{background:#FCEBEB;border-color:#A32D2D;color:#791F1F}
+    .ex-disclaimer{font-size:.82rem;color:#fca5a5;border:1px solid rgba(252,165,165,.3);border-radius:.5rem;
+      padding:.6rem .85rem;margin-bottom:.75rem;display:none}
+    .ex-disclaimer.show{display:block}
+
+    /* --- Collapsible instructions --- */
+    details.ob-instructions{border:1px solid var(--line);border-radius:.5rem;margin-bottom:1.5rem}
+    details.ob-instructions summary{
+      padding:.6rem .85rem;font-size:.88rem;font-weight:600;color:var(--muted);cursor:pointer;list-style:none;
+    }
+    details.ob-instructions summary::after{content:" ▾";font-size:.7rem}
+    details.ob-instructions[open] summary::after{content:" ▴"}
+    details.ob-instructions ol{margin:.25rem .85rem .85rem 2rem;font-size:.84rem;color:var(--muted);line-height:1.8}
+
+    /* --- Matrix --- */
+    .matrix-wrap{overflow-x:auto;margin-bottom:1rem}
+    .matrix-table{width:100%;border-collapse:collapse;font-size:.8rem}
+    .matrix-table th,.matrix-table td{border:1px solid var(--line);padding:.35rem .5rem;text-align:center;white-space:nowrap}
+    .matrix-table th.row-header{text-align:left;min-width:130px;font-weight:500;color:var(--muted)}
+    .matrix-table th.month-header{font-weight:600;font-size:.75rem;letter-spacing:.4px;color:var(--muted)}
+    .matrix-table th.month-p2{color:var(--study-color)}
+    .pillar-row td,.pillar-row th{font-weight:700;font-size:.72rem;letter-spacing:.5px;text-transform:uppercase;padding:.3rem .5rem}
+    .pillar-row.fit{background:var(--fit-bg);color:var(--fit-text)}
+    .pillar-row.study{background:var(--study-bg);color:var(--study-text)}
+    .pillar-row.cross{background:var(--cross-bg);color:var(--cross-text)}
+    .matrix-cell{cursor:pointer;transition:background .1s}
+    .matrix-cell:hover{background:rgba(255,255,255,.07)}
+    .matrix-cell.cell-fit{color:var(--fit-color)}
+    .matrix-cell.cell-study{color:var(--study-color)}
+    .matrix-cell.cell-cross{color:var(--cross-color)}
+    .row-exempted td,.row-exempted th{text-decoration:line-through;opacity:.45;border-style:dashed}
+    .detail-panel{
+      border:1px solid var(--line);border-radius:.6rem;padding:.85rem 1rem;margin-bottom:1.25rem;
+      background:var(--panel-bg);display:none;
+    }
+    .detail-panel.show{display:block}
+    .detail-title{font-weight:700;font-size:.95rem;color:var(--ink);margin-bottom:.35rem}
+    .detail-desc{font-size:.85rem;color:var(--muted);margin-bottom:.3rem;line-height:1.55}
+    .detail-timing{font-size:.82rem;color:var(--muted);font-style:italic}
+
+    /* --- Calendar --- */
+    .cal-section{margin-top:1.5rem}
+    .month-strip{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.65rem}
+    .month-btn{
+      padding:.28rem .7rem;border-radius:999px;border:1px solid var(--line);
+      background:transparent;color:var(--muted);font-size:.82rem;font-family:inherit;cursor:pointer;transition:all .15s;
+    }
+    .month-btn:hover{border-color:var(--muted);color:var(--ink)}
+    .month-btn.active-p1{background:var(--fit-color);border-color:var(--fit-color);color:#fff}
+    .month-btn.active-p2{background:var(--study-color);border-color:var(--study-color);color:#fff}
+    .week-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.85rem}
+    .week-nav-btn{
+      background:transparent;border:1px solid var(--line);border-radius:.4rem;color:var(--muted);
+      padding:.3rem .8rem;font-family:inherit;font-size:.88rem;cursor:pointer;
+    }
+    .week-nav-btn:hover{color:var(--ink);border-color:var(--muted)}
+    .week-title{font-size:.88rem;font-weight:600;color:var(--ink);text-align:center;flex:1}
+    .week-subtitle{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:.75rem}
+    .day-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;margin-bottom:.75rem}
+    @media(max-width:600px){.day-grid{grid-template-columns:repeat(3,1fr)}}
+    .day-col{border:1px solid var(--line);border-radius:.6rem;padding:.5rem;min-height:80px;
+      background:rgba(255,255,255,.02);transition:background .1s,border-color .1s}
+    .day-col.drag-over{background:rgba(255,255,255,.07);border-color:var(--cta)}
+    .day-col.tap-target{border-color:var(--fit-color)}
+    .day-name{font-size:.72rem;font-weight:600;letter-spacing:.4px;text-transform:uppercase;
+      color:var(--muted);margin-bottom:.4rem;text-align:center}
+    .pool-area{
+      border:1px solid var(--line);border-radius:.6rem;padding:.65rem .75rem;
+      background:rgba(255,255,255,.02);min-height:44px;transition:background .1s,border-color .1s;
+      display:flex;flex-wrap:wrap;gap:.4rem;align-items:flex-start;
+    }
+    .pool-area.drag-over{background:rgba(255,255,255,.07);border-color:var(--cta)}
+    .pool-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);
+      font-weight:600;margin-bottom:.4rem}
+    .overlap-note{font-size:.82rem;color:var(--muted);font-style:italic;margin-top:.5rem;display:none}
+    .overlap-note.show{display:block}
+
+    /* --- Activity tags --- */
+    .act-tag{
+      display:inline-flex;align-items:center;gap:.3rem;padding:.22rem .6rem;border-radius:999px;
+      font-size:.78rem;font-weight:500;cursor:grab;user-select:none;position:relative;
+    }
+    .act-tag.selected{outline:2px solid var(--ink);outline-offset:2px}
+    .act-tag.exempted-placed{opacity:.5;cursor:default}
+    .act-tag[draggable=true]:active{cursor:grabbing}
+    .act-tag.fit{background:var(--fit-bg);color:var(--fit-text)}
+    .act-tag.study{background:var(--study-bg);color:var(--study-text)}
+    .act-tag.cross{background:var(--cross-bg);color:var(--cross-text)}
+    .tag-edit{
+      background:transparent;border:none;color:inherit;font-size:inherit;font-family:inherit;
+      padding:0;outline:none;cursor:text;min-width:30px;
+    }
+
+    /* --- Sticky export bar --- */
+    .export-bar{
+      position:fixed;left:var(--sidebar);right:0;bottom:0;
+      background:rgba(15,18,23,.95);border-top:1px solid var(--line);
+      backdrop-filter:blur(6px);padding:.75rem 1.25rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;z-index:100;
+    }
+    @media(max-width:960px){.export-bar{left:0}}
+    .export-btn{
+      padding:.7rem 1.25rem;background:var(--cta);color:#e6e7eb;font-weight:700;
+      font-size:.9rem;font-family:inherit;border:0;border-radius:.4rem;cursor:pointer;
+    }
+    .start-over-btn{
+      padding:.7rem 1.25rem;background:transparent;color:var(--muted);font-weight:600;
+      font-size:.9rem;font-family:inherit;border:1px solid var(--line);border-radius:.4rem;cursor:pointer;
+    }
+    .start-over-btn:hover{color:var(--ink);border-color:var(--muted)}
+    .toast{
+      position:fixed;bottom:70px;left:50%;transform:translateX(-50%);
+      background:#1a2030;border:1px solid var(--line);border-radius:.5rem;
+      padding:.65rem 1.1rem;font-size:.88rem;color:var(--ink);z-index:200;
+      opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;
+    }
+    .toast.show{opacity:1}
+
+    .footer-wrap{display:none}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="page">
+    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <script>
+      (function(){
+        var t=document.getElementById("sidebar-placeholder");
+        fetch("/partials/sidebar.html?v=10")
+          .then(function(r){return r.text()})
+          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
+          .catch(function(){t.innerHTML="<div style=\"padding:1rem;color:#fca5a5\">Navigation failed to load.</div>"});
+      })();
+    </script>
+    <main class="main" id="main">
+      <div class="content">
+        <header>
+          <h1>Offseason Plan Builder</h1>
+          <p class="lede">Configure your training volume and goals. Drag activities into your 26-week calendar. Export to Google Sheets.</p>
+        </header>
+
+        <!-- ===== PHASE 1: CONFIGURE ===== -->
+        <div class="section-label">Configure</div>
+
+        <div class="ob-slider-group">
+          <label class="ob-slider-label" for="vol-slider">Sessions per week &mdash; <span id="vol-display">4</span></label>
+          <input class="ob-slider" type="range" id="vol-slider" min="1" max="8" value="4" oninput="onVolume(this.value)">
+        </div>
+
+        <div class="section-label">Goals</div>
+        <div class="goals-grid">
+          <div class="ob-slider-group">
+            <label class="ob-slider-label" for="g-ski">Better skiing &mdash; <span id="g-ski-d">3</span></label>
+            <input class="ob-slider" type="range" id="g-ski" min="0" max="5" value="3" oninput="onGoal('skiing',this.value)">
+          </div>
+          <div class="ob-slider-group">
+            <label class="ob-slider-label" for="g-teach">Better teaching &mdash; <span id="g-teach-d">3</span></label>
+            <input class="ob-slider" type="range" id="g-teach" min="0" max="5" value="3" oninput="onGoal('teaching',this.value)">
+          </div>
+          <div class="ob-slider-group">
+            <label class="ob-slider-label" for="g-cert">Certification progress &mdash; <span id="g-cert-d">3</span></label>
+            <input class="ob-slider" type="range" id="g-cert" min="0" max="5" value="3" oninput="onGoal('cert',this.value)">
+          </div>
+          <div class="ob-slider-group">
+            <label class="ob-slider-label" for="g-phys">Physical readiness &mdash; <span id="g-phys-d">3</span></label>
+            <input class="ob-slider" type="range" id="g-phys" min="0" max="5" value="3" oninput="onGoal('physical',this.value)">
+          </div>
+        </div>
+
+        <div class="section-label">Exemptions <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.78rem;margin-left:.35rem">(max 3)</span></div>
+        <div class="exemption-grid" id="ex-grid">
+          <button class="ex-btn" data-key="heavy"   onclick="toggleEx(this)">Something heavy</button>
+          <button class="ex-btn" data-key="fast"    onclick="toggleEx(this)">Something fast</button>
+          <button class="ex-btn" data-key="sucks"   onclick="toggleEx(this)">Something that sucks</button>
+          <button class="ex-btn" data-key="fun"     onclick="toggleEx(this)">Something fun</button>
+          <button class="ex-btn" data-key="read"    onclick="toggleEx(this)">Read something</button>
+          <button class="ex-btn" data-key="reflect" onclick="toggleEx(this)">Reflect</button>
+          <button class="ex-btn" data-key="ask"     onclick="toggleEx(this)">Ask an expert</button>
+          <button class="ex-btn" data-key="cardio"  onclick="toggleEx(this)">Cardio</button>
+          <button class="ex-btn" data-key="control" onclick="toggleEx(this)">Full body control</button>
+          <button class="ex-btn" data-key="lateral" onclick="toggleEx(this)">Lateral movement</button>
+        </div>
+        <div class="ex-disclaimer" id="ex-disclaimer">
+          A complete snowsports instructor trains all three pillars. Volume is personal &mdash; completeness is not. Exemptions should be temporary.
+        </div>
+
+        <details class="ob-instructions">
+          <summary>How to use your exported plan</summary>
+          <ol>
+            <li>Open a blank Google Sheet and paste with Cmd+V or Ctrl+V.</li>
+            <li>The calendar fills automatically &mdash; weeks as rows, days as columns.</li>
+            <li>Each cell contains the activity tags you scheduled in the builder.</li>
+            <li>Replace placeholder text with your specific exercise, book, or activity choice.</li>
+          </ol>
+        </details>
+
+        <!-- ===== PHASE 2: MATRIX ===== -->
+        <div class="section-label">Training Matrix</div>
+        <div class="matrix-wrap">
+          <table class="matrix-table" id="matrix-table">
+            <thead>
+              <tr>
+                <th class="row-header"></th>
+                <th class="month-header">May</th>
+                <th class="month-header">Jun</th>
+                <th class="month-header">Jul</th>
+                <th class="month-header">Aug</th>
+                <th class="month-header month-p2">Sep</th>
+                <th class="month-header month-p2">Oct</th>
+                <th class="month-header month-p2">Nov</th>
+              </tr>
+            </thead>
+            <tbody id="matrix-body"></tbody>
+          </table>
+        </div>
+        <div class="detail-panel" id="detail-panel">
+          <div class="detail-title" id="dp-title"></div>
+          <div class="detail-desc" id="dp-desc"></div>
+          <div class="detail-timing" id="dp-timing"></div>
+        </div>
+
+        <!-- ===== PHASE 3: CALENDAR ===== -->
+        <div class="cal-section">
+          <div class="section-label">Schedule</div>
+
+          <div class="month-strip" id="month-strip">
+            <button class="month-btn" data-m="0" onclick="jumpMonth(0)">May</button>
+            <button class="month-btn" data-m="1" onclick="jumpMonth(1)">Jun</button>
+            <button class="month-btn" data-m="2" onclick="jumpMonth(2)">Jul</button>
+            <button class="month-btn" data-m="3" onclick="jumpMonth(3)">Aug</button>
+            <button class="month-btn" data-m="4" onclick="jumpMonth(4)">Sep</button>
+            <button class="month-btn" data-m="5" onclick="jumpMonth(5)">Oct</button>
+            <button class="month-btn" data-m="6" onclick="jumpMonth(6)">Nov</button>
+          </div>
+
+          <div class="week-nav">
+            <button class="week-nav-btn" onclick="stepWeek(-1)">&larr;</button>
+            <div>
+              <div class="week-title" id="week-title">Week 1 of 26</div>
+            </div>
+            <button class="week-nav-btn" onclick="stepWeek(1)">&rarr;</button>
+          </div>
+          <div class="week-subtitle" id="week-subtitle"></div>
+
+          <div class="day-grid" id="day-grid">
+            <div class="day-col" id="dc-mon"   data-day="mon"     ondragover="dOver(event)" ondrop="dDrop(event,'mon')"    onclick="tapPlace('mon')">
+              <div class="day-name">Mon</div>
+            </div>
+            <div class="day-col" id="dc-tue"   data-day="tue"     ondragover="dOver(event)" ondrop="dDrop(event,'tue')"    onclick="tapPlace('tue')">
+              <div class="day-name">Tue</div>
+            </div>
+            <div class="day-col" id="dc-wed"   data-day="wed"     ondragover="dOver(event)" ondrop="dDrop(event,'wed')"    onclick="tapPlace('wed')">
+              <div class="day-name">Wed</div>
+            </div>
+            <div class="day-col" id="dc-thu"   data-day="thu"     ondragover="dOver(event)" ondrop="dDrop(event,'thu')"    onclick="tapPlace('thu')">
+              <div class="day-name">Thu</div>
+            </div>
+            <div class="day-col" id="dc-fri"   data-day="fri"     ondragover="dOver(event)" ondrop="dDrop(event,'fri')"    onclick="tapPlace('fri')">
+              <div class="day-name">Fri</div>
+            </div>
+            <div class="day-col" id="dc-wknd"  data-day="weekend" ondragover="dOver(event)" ondrop="dDrop(event,'weekend')" onclick="tapPlace('weekend')">
+              <div class="day-name">Sat/Sun</div>
+            </div>
+          </div>
+
+          <div class="pool-label">Unscheduled this week</div>
+          <div class="pool-area" id="pool-area" ondragover="dOver(event)" ondrop="dDrop(event,'pool')" onclick="tapPlace('pool')"></div>
+          <div class="overlap-note" id="overlap-note">
+            A long run, bike, or swim counts for both Something that sucks and Cardio. You do not need to do both separately if they overlap naturally.
+          </div>
+        </div>
+
+      </div><!-- .content -->
+    </main>
+  </div><!-- .page -->
+
+  <div class="export-bar">
+    <button class="export-btn" onclick="copyPlan()">Copy plan to clipboard</button>
+    <button class="start-over-btn" onclick="startOver()">Start over</button>
+  </div>
+  <div class="toast" id="toast">Copied. Open a blank Google Sheet and paste with Cmd+V or Ctrl+V.</div>
+
+  <script>
+  /* ---- Constants ---- */
+  var MONTHS = ['May','Jun','Jul','Aug','Sep','Oct','Nov'];
+  var MONTH_WEEKS = {May:[0,1,2,3],Jun:[4,5,6,7],Jul:[8,9,10,11],Aug:[12,13,14,15],Sep:[16,17,18,19],Oct:[20,21,22,23],Nov:[24,25]};
+  var SUBPILLARS = ['heavy','fast','sucks','fun','read','reflect','ask','cardio','control','lateral'];
+  var PILLAR_OF = {heavy:'fit',fast:'fit',sucks:'fit',fun:'fit',read:'study',reflect:'study',ask:'study',cardio:'cross',control:'cross',lateral:'cross'};
+  var LABEL_OF = {heavy:'Something heavy',fast:'Something fast',sucks:'Something that sucks',fun:'Something fun',
+                  read:'Read something',reflect:'Reflect',ask:'Ask an expert',
+                  cardio:'Cardio',control:'Full body control',lateral:'Lateral movement'};
+  var placeholders = {heavy:'Back squat / deadlift / bench',fast:'Sprints / box jumps / plyos',
+    sucks:'Zone 2 run / bike / row',fun:'Hike / skate / pick-up sport',read:'30 min reading session',
+    reflect:'Journal — connect to skiing',ask:'Reach out to a mentor',
+    cardio:'Run / cycle / swim / row',control:'Yoga / swim / Olympic lifting',lateral:'Soccer / pickleball / inline'};
+  var monthFocus = [
+    'May — Decompress and assess. Build the habit before the load.',
+    'June — Foundation. Compound lifts and cardio become your weekly anchors.',
+    'July — Volume. Peak general training load. Add intensity, not complexity.',
+    'August — Refinement. Quality over quantity. Start shifting reading toward next season.',
+    'September — Sharpening. Functional movement increases. Study gets specific.',
+    'October — Readiness. Final physical prep. Study is loaded and targeted.',
+    'November — Final approach. Reduce volume, sharpen intensity.'
+  ];
+  var subDetails = {
+    heavy:{desc:'Compound lifts — squat, deadlift, bench, row. Phase 1: general strength. Phase 2: add single-leg and rotational variations alongside compound work.',timing:'Needs its own dedicated session. 45–75 minutes. The most important fitness session to protect when volume is limited.'},
+    fast:{desc:'Sprints, broad jumps, box jumps, plyometric work. Short and explosive.',timing:'Early in session after warmup. 20 minutes is enough. Do not combine with heavy on the same day.'},
+    sucks:{desc:'Zone 2 cardio — run, bike, row, swim at conversational pace. 30–60 minutes. Constant throughout all seven months without exception.',timing:'Any day. A long run counts for both this and cross-training cardio simultaneously. The overlap is intentional.'},
+    fun:{desc:'Whatever you actually enjoy doing physically. Hiking, skating, pick-up sport. If you hate it you will not do it.',timing:'Unscheduled by design. Do it when the opportunity presents. Do not skip it to make room for more heavy sessions.'},
+    read:{desc:'Phase 1 (May–Aug): intellectually light, non-PSIA — Gladwell, mountain history, memoir. Phase 2 (Sep–Nov): specific to next season — technical manuals, cert prep, movement analysis.',timing:'20–30 minutes daily works better than one long session. Before bed or with morning coffee.'},
+    reflect:{desc:'After a reading session write one paragraph connecting what you read to your teaching or skiing. No pressure for polish.',timing:'Immediately after reading while fresh. 10 minutes maximum.'},
+    ask:{desc:'Identify one person you respect. Ask one specific question — or ask them to refer you to someone better positioned to answer.',timing:'Once a month is enough. Follow up with what you did with the answer.'},
+    cardio:{desc:'Running, cycling, swimming, or rowing as standalone cross-training. Builds the aerobic base you ski on top of. Overlaps naturally with something that sucks.',timing:'Get outside where possible. The mental reset is part of the benefit.'},
+    control:{desc:'Swimming, Olympic lifting, yoga, gymnastics, martial arts — coordinated full-body movement. Transfers directly to skiing body awareness.',timing:'45–60 minutes minimum. Once a week is enough.'},
+    lateral:{desc:'Soccer, basketball, pickleball, tennis, skateboarding, inline skating — direction changes, reactive footwork, spatial awareness.',timing:'Once a week. Team sports are fine. The social element keeps you coming back.'}
+  };
+
+  /* ---- Week date labels (Mon May 5, 2025 = week 0) ---- */
+  var START_MS = new Date(2025,4,5).getTime(); // May 5 2025
+  function weekLabel(w){
+    var ms=START_MS+w*7*24*3600*1000;
+    var s=new Date(ms),e=new Date(ms+6*24*3600*1000);
+    var mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return mo[s.getMonth()]+' '+s.getDate()+'–'+(s.getMonth()!==e.getMonth()?mo[e.getMonth()]+' ':'')+e.getDate();
+  }
+  function getMonthIndex(w){
+    for(var m=0;m<MONTHS.length;m++){if(MONTH_WEEKS[MONTHS[m]].indexOf(w)>=0)return m;}
+    return 6;
+  }
+
+  /* ---- State ---- */
+  var state = {
+    sessions:4,
+    goals:{skiing:3,teaching:3,cert:3,physical:3},
+    exemptions:new Set(),
+    currentWeek:0,
+    weeks:Array.from({length:26},function(){return {scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],weekend:[]},unscheduled:[]};}),
+    tagText:Object.assign({},placeholders),
+    selectedTagId:null
+  };
+
+  /* ---- freq() — do not alter ---- */
+  function freq(key,monthIndex,sessions,goals){
+    if(state.exemptions.has(key))return 0;
+    var phase=monthIndex<4?1:2;
+    var gSki=goals.skiing,gTeach=goals.teaching,gCert=goals.cert,gPhys=goals.physical;
+    switch(key){
+      case 'heavy':   return Math.min(4,Math.max(1,Math.round(sessions*0.3)+Math.round(gPhys/4)));
+      case 'fast':    return sessions>=5?2:sessions>=3?1:0;
+      case 'sucks':   return Math.min(4,Math.max(1,Math.round(sessions*0.4)));
+      case 'fun':     return sessions>=4?2:1;
+      case 'read':    return phase===1?Math.min(3,Math.round((gSki+gTeach)/4)+1):Math.min(4,Math.round((gTeach+gCert)/3)+1);
+      case 'reflect': return phase===1?1:Math.min(3,Math.round(gCert/2)+1);
+      case 'ask':     return monthIndex%2===0?0:1;
+      case 'cardio':  return Math.min(3,sessions>=5?3:sessions>=3?2:1);
+      case 'control': return sessions>=4?2:1;
+      case 'lateral': return Math.min(3,Math.round(gSki/2)+1);
+    }
+    return 0;
+  }
+
+  /* ---- Tag generation ---- */
+  var tagCounter = 0;
+  function generateWeekPool(wIdx){
+    var mIdx=getMonthIndex(wIdx),tags=[];
+    SUBPILLARS.forEach(function(key){
+      if(state.exemptions.has(key))return;
+      var n=freq(key,mIdx,state.sessions,state.goals);
+      for(var i=0;i<n;i++){tags.push({id:'t'+(tagCounter++),key:key,pillar:PILLAR_OF[key]});}
+    });
+    return tags;
+  }
+  function regenerateFutureWeeks(){
+    for(var w=state.currentWeek;w<26;w++){state.weeks[w].unscheduled=generateWeekPool(w);}
+  }
+  function removeExFromPools(key){
+    for(var w=0;w<26;w++){
+      state.weeks[w].unscheduled=state.weeks[w].unscheduled.filter(function(t){return t.key!==key;});
+    }
+  }
+
+  /* ---- Matrix render ---- */
+  var PILLAR_ROWS=[
+    {type:'pillar',cls:'fit',label:'Fitness'},
+    {type:'sub',key:'heavy'},{type:'sub',key:'fast'},{type:'sub',key:'sucks'},{type:'sub',key:'fun'},
+    {type:'pillar',cls:'study',label:'Study'},
+    {type:'sub',key:'read'},{type:'sub',key:'reflect'},{type:'sub',key:'ask'},
+    {type:'pillar',cls:'cross',label:'Cross-training'},
+    {type:'sub',key:'cardio'},{type:'sub',key:'control'},{type:'sub',key:'lateral'}
+  ];
+  function dotsFor(n){if(n<=0)return '<span style="opacity:.35">○</span>';var s='';for(var i=0;i<Math.min(n,4);i++)s+='●';return s;}
+  function renderMatrix(){
+    var body=document.getElementById('matrix-body');
+    if(!body)return;
+    var rows='';
+    PILLAR_ROWS.forEach(function(row){
+      if(row.type==='pillar'){
+        rows+='<tr class="pillar-row '+row.cls+'"><td colspan="8">'+row.label+'</td></tr>';
+        return;
+      }
+      var key=row.key,pillar=PILLAR_OF[key],ex=state.exemptions.has(key);
+      rows+='<tr'+(ex?' class="row-exempted"':'')+'>';
+      rows+='<th class="row-header">'+LABEL_OF[key]+'</th>';
+      for(var m=0;m<7;m++){
+        var f=freq(key,m,state.sessions,state.goals);
+        rows+='<td class="matrix-cell cell-'+pillar+'" data-key="'+key+'" data-m="'+m+'" onclick="showDetail(''+key+'','+m+')">';
+        rows+=ex?'—':dotsFor(f);
+        rows+='</td>';
+      }
+      rows+='</tr>';
+    });
+    body.innerHTML=rows;
+  }
+  function showDetail(key,m){
+    var p=document.getElementById('detail-panel');
+    var f=freq(key,m,state.sessions,state.goals);
+    document.getElementById('dp-title').textContent=LABEL_OF[key]+' — '+(MONTHS[m]||'')+' ('+f+'x/week)';
+    document.getElementById('dp-desc').textContent=subDetails[key].desc;
+    document.getElementById('dp-timing').textContent=subDetails[key].timing;
+    p.classList.add('show');
+  }
+
+  /* ---- Calendar render ---- */
+  function tagHTML(t,loc){
+    var ex=state.exemptions.has(t.key)?'exempted-placed':'';
+    var drag=ex?'draggable="false"':'draggable="true" ondragstart="dStart(event,''+t.id+'')"';
+    return '<span class="act-tag '+t.pillar+' '+ex+'" data-id="'+t.id+'" data-key="'+t.key+'" data-loc="'+loc+'" '+drag+' onclick="tapTag(event,this)">'
+      +(ex?'⚠️ ':'')
+      +'<input class="tag-edit" type="text" value="'+escHtml(state.tagText[t.key])+'" '
+      +'onfocus="event.stopPropagation()" onchange="editTag(''+t.key+'',this.value)" '
+      +'title="Click to edit activity" style="width:'+(state.tagText[t.key].length*7+8)+'px;max-width:180px">'
+      +'</span>';
+  }
+  function escHtml(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
+  function renderCal(){
+    var w=state.currentWeek,wk=state.weeks[w];
+    // week title
+    document.getElementById('week-title').textContent='Week '+(w+1)+' of 26';
+    var mIdx=getMonthIndex(w);
+    document.getElementById('week-subtitle').textContent=weekLabel(w)+' · '+monthFocus[mIdx];
+    // month strip highlight
+    document.querySelectorAll('.month-btn').forEach(function(b){
+      b.classList.remove('active-p1','active-p2');
+      if(parseInt(b.getAttribute('data-m'))===mIdx){
+        b.classList.add(mIdx<4?'active-p1':'active-p2');
+      }
+    });
+    // day columns
+    var days=['mon','tue','wed','thu','fri','weekend'];
+    days.forEach(function(d){
+      var col=document.getElementById('dc-'+d);
+      if(!col)return;
+      // keep the day-name div, rebuild the rest
+      var nameDiv=col.querySelector('.day-name');
+      col.innerHTML='';col.appendChild(nameDiv);
+      (wk.scheduled[d]||[]).forEach(function(t){col.innerHTML+=tagHTML(t,d);});
+    });
+    // pool
+    var pool=document.getElementById('pool-area');
+    pool.innerHTML='';
+    (wk.unscheduled||[]).forEach(function(t){pool.innerHTML+=tagHTML(t,'pool');});
+    // overlap note
+    var showOverlap=!state.exemptions.has('sucks')&&!state.exemptions.has('cardio');
+    document.getElementById('overlap-note').classList.toggle('show',showOverlap);
+  }
+
+  /* ---- Drag and drop ---- */
+  var dragId=null,dragSrc=null;
+  function dStart(e,id){
+    dragId=id;
+    var el=e.target.closest('[data-id]');
+    dragSrc=el?el.getAttribute('data-loc'):null;
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',id);
+  }
+  function dOver(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
+  function dLeave(e){e.currentTarget.classList.remove('drag-over');}
+  function dDrop(e,dest){
+    e.preventDefault();e.currentTarget.classList.remove('drag-over');
+    var id=e.dataTransfer.getData('text/plain')||dragId;
+    if(!id)return;
+    moveTag(id,dest);
+    dragId=null;dragSrc=null;
+  }
+  function moveTag(id,dest){
+    var w=state.currentWeek,wk=state.weeks[w];
+    var tag=null;
+    // find and remove from source
+    var days=['mon','tue','wed','thu','fri','weekend'];
+    days.forEach(function(d){
+      var idx=wk.scheduled[d].findIndex(function(t){return t.id===id;});
+      if(idx>=0){tag=wk.scheduled[d].splice(idx,1)[0];}
+    });
+    if(!tag){
+      var idx=wk.unscheduled.findIndex(function(t){return t.id===id;});
+      if(idx>=0)tag=wk.unscheduled.splice(idx,1)[0];
+    }
+    if(!tag)return;
+    if(dest==='pool')wk.unscheduled.push(tag);
+    else wk.scheduled[dest].push(tag);
+    renderCal();
+  }
+
+  /* ---- Mobile tap fallback ---- */
+  function tapTag(e,el){
+    e.stopPropagation();
+    var id=el.getAttribute('data-id');
+    if(state.selectedTagId===id){state.selectedTagId=null;renderCal();return;}
+    state.selectedTagId=id;
+    renderCal();
+    el.classList.add('selected');
+  }
+  function tapPlace(dest){
+    if(!state.selectedTagId)return;
+    moveTag(state.selectedTagId,dest);
+    state.selectedTagId=null;
+  }
+
+  /* ---- Drag-over delegation for day-col children ---- */
+  document.addEventListener('dragover',function(e){
+    var col=e.target.closest('.day-col,.pool-area');
+    if(col){e.preventDefault();col.classList.add('drag-over');}
+  });
+  document.addEventListener('dragleave',function(e){
+    var col=e.target.closest('.day-col,.pool-area');
+    if(col&&!col.contains(e.relatedTarget))col.classList.remove('drag-over');
+  });
+
+  /* ---- Configure handlers ---- */
+  function onVolume(v){
+    state.sessions=parseInt(v);
+    document.getElementById('vol-display').textContent=v;
+    regenerateFutureWeeks();
+    renderMatrix();renderCal();
+  }
+  function onGoal(key,v){
+    state.goals[key]=parseInt(v);
+    var ids={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
+    document.getElementById(ids[key]).textContent=v;
+    regenerateFutureWeeks();
+    renderMatrix();renderCal();
+  }
+  function toggleEx(btn){
+    var key=btn.getAttribute('data-key');
+    if(btn.classList.contains('active')){
+      btn.classList.remove('active');
+      state.exemptions.delete(key);
+    } else {
+      if(state.exemptions.size>=3)return; // silently block 4th
+      btn.classList.add('active');
+      state.exemptions.add(key);
+      removeExFromPools(key);
+    }
+    document.getElementById('ex-disclaimer').classList.toggle('show',state.exemptions.size>0);
+    renderMatrix();renderCal();
+  }
+  function editTag(key,val){
+    state.tagText[key]=val;
+    // update all inputs for same key in current week's rendered tags
+    document.querySelectorAll('.act-tag[data-key="'+key+'"] .tag-edit').forEach(function(inp){inp.value=val;inp.style.width=(val.length*7+8)+'px';});
+  }
+
+  /* ---- Week navigation ---- */
+  function stepWeek(d){
+    state.currentWeek=Math.max(0,Math.min(25,state.currentWeek+d));
+    renderCal();
+  }
+  function jumpMonth(mIdx){
+    state.currentWeek=MONTH_WEEKS[MONTHS[mIdx]][0];
+    renderCal();
+  }
+
+  /* ---- Export TSV ---- */
+  function buildTSV(){
+    var g=state.goals;
+    var lines=[
+      'Instructor Grindset — Offseason Plan Builder',
+      'Volume: '+state.sessions+' sessions/wk | Skiing: '+g.skiing+' Teaching: '+g.teaching+' Cert: '+g.cert+' Physical: '+g.physical,
+      '',
+      ['Week','Month','Phase','Mon','Tue','Wed','Thu','Fri','Sat/Sun','Unscheduled'].join('	')
+    ];
+    for(var w=0;w<26;w++){
+      var mIdx=getMonthIndex(w),wk=state.weeks[w];
+      var phase=mIdx<4?'Build':'Sharpen';
+      function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('
+').replace(/"/g,'""')+'"';}
+      lines.push([
+        w+1,MONTHS[mIdx],phase,
+        cell(wk.scheduled.mon),cell(wk.scheduled.tue),cell(wk.scheduled.wed),
+        cell(wk.scheduled.thu),cell(wk.scheduled.fri),cell(wk.scheduled.weekend),
+        cell(wk.unscheduled)
+      ].join('	'));
+    }
+    return lines.join('
+');
+  }
+  function copyPlan(){
+    var tsv=buildTSV();
+    navigator.clipboard.writeText(tsv).then(function(){showToast();}).catch(function(){
+      // fallback
+      var ta=document.createElement('textarea');ta.value=tsv;
+      document.body.appendChild(ta);ta.select();document.execCommand('copy');
+      document.body.removeChild(ta);showToast();
+    });
+  }
+  function showToast(){
+    var t=document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function(){t.classList.remove('show');},4000);
+  }
+  function startOver(){
+    if(!confirm('This will clear your entire plan. Are you sure?'))return;
+    state.sessions=4;
+    state.goals={skiing:3,teaching:3,cert:3,physical:3};
+    state.exemptions=new Set();
+    state.currentWeek=0;
+    state.tagText=Object.assign({},placeholders);
+    state.selectedTagId=null;
+    state.weeks=Array.from({length:26},function(){return{scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],weekend:[]},unscheduled:[]};});
+    // reset controls
+    document.getElementById('vol-slider').value=4;
+    document.getElementById('vol-display').textContent=4;
+    ['g-ski','g-teach','g-cert','g-phys'].forEach(function(id){document.getElementById(id).value=3;});
+    ['g-ski-d','g-teach-d','g-cert-d','g-phys-d'].forEach(function(id){document.getElementById(id).textContent=3;});
+    document.querySelectorAll('.ex-btn').forEach(function(b){b.classList.remove('active');});
+    document.getElementById('ex-disclaimer').classList.remove('show');
+    document.getElementById('detail-panel').classList.remove('show');
+    regenerateFutureWeeks();
+    renderMatrix();renderCal();
+  }
+
+  /* ---- Init ---- */
+  regenerateFutureWeeks();
+  renderMatrix();
+  renderCal();
+  </script>
+</body>
+</html>
