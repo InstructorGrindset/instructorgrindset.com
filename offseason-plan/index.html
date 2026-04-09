@@ -122,7 +122,7 @@
     .week-nav-btn:hover{color:var(--ink);border-color:var(--muted)}
     .week-title{font-size:.88rem;font-weight:600;color:var(--ink);text-align:center;flex:1}
     .week-subtitle{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:.75rem}
-    .day-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;margin-bottom:.75rem}
+    .day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.5rem;margin-bottom:.75rem}
     @media(max-width:600px){.day-grid{grid-template-columns:repeat(3,1fr)}}
     .day-col{border:1px solid var(--line);border-radius:.6rem;padding:.5rem;min-height:80px;
       background:rgba(255,255,255,.02);transition:background .1s,border-color .1s}
@@ -324,12 +324,15 @@
             <div class="day-col" id="dc-fri"   data-day="fri"     ondragover="dOver(event)" ondrop="dDrop(event,'fri')"    onclick="tapPlace('fri')">
               <div class="day-name">Fri</div>
             </div>
-            <div class="day-col" id="dc-wknd"  data-day="weekend" ondragover="dOver(event)" ondrop="dDrop(event,'weekend')" onclick="tapPlace('weekend')">
-              <div class="day-name">Sat/Sun</div>
+            <div class="day-col" id="dc-sat"   data-day="sat"     ondragover="dOver(event)" ondrop="dDrop(event,'sat')"     onclick="tapPlace('sat')">
+              <div class="day-name">Sat</div>
+            </div>
+            <div class="day-col" id="dc-sun"   data-day="sun"     ondragover="dOver(event)" ondrop="dDrop(event,'sun')"     onclick="tapPlace('sun')">
+              <div class="day-name">Sun</div>
             </div>
           </div>
 
-          <div class="pool-label">Unscheduled this week</div>
+          <div class="pool-label">Unscheduled this month</div>
           <div class="pool-area" id="pool-area" ondragover="dOver(event)" ondrop="dDrop(event,'pool')" onclick="tapPlace('pool')"></div>
           <div class="overlap-note" id="overlap-note">
             A long run, bike, or swim counts for both Something that sucks and Cardio. You do not need to do both separately if they overlap naturally.
@@ -355,10 +358,10 @@
   var LABEL_OF = {heavy:'Something heavy',fast:'Something fast',sucks:'Something that sucks',fun:'Something fun',
                   read:'Read something',reflect:'Reflect',ask:'Ask an expert',
                   cardio:'Cardio',control:'Full body control',lateral:'Lateral movement'};
-  var placeholders = {heavy:'Back squat / deadlift / bench',fast:'Sprints / box jumps / plyos',
-    sucks:'Zone 2 run / bike / row',fun:'Hike / skate / pick-up sport',read:'30 min reading session',
-    reflect:'Journal — connect to skiing',ask:'Reach out to a mentor',
-    cardio:'Run / cycle / swim / row',control:'Yoga / swim / Olympic lifting',lateral:'Soccer / pickleball / inline'};
+  var placeholders = {heavy:'Something heavy',fast:'Something fast',
+    sucks:'Something that sucks',fun:'Something fun',read:'Read something',
+    reflect:'Reflect',ask:'Ask an expert',
+    cardio:'Cardio',control:'Full body control',lateral:'Lateral movement'};
   var monthFocus = [
     'May — Decompress and assess. Build the habit before the load.',
     'June — Foundation. Compound lifts and cardio become your weekly anchors.',
@@ -400,7 +403,8 @@
     goals:{skiing:3,teaching:3,cert:3,physical:3},
     exemptions:new Set(),
     currentWeek:0,
-    weeks:Array.from({length:26},function(){return {scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],weekend:[]},unscheduled:[]};}),
+    weeks:Array.from({length:26},function(){return {scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]}};}),
+    months:Array.from({length:7},function(){return {unscheduled:[]};}),
     tagText:Object.assign({},placeholders),
     selectedTagId:null
   };
@@ -427,8 +431,8 @@
 
   /* ---- Tag generation ---- */
   var tagCounter = 0;
-  function generateWeekPool(wIdx){
-    var mIdx=getMonthIndex(wIdx),tags=[];
+  function generateMonthPool(mIdx){
+    var tags=[];
     SUBPILLARS.forEach(function(key){
       if(state.exemptions.has(key))return;
       var n=freq(key,mIdx,state.sessions,state.goals);
@@ -436,12 +440,12 @@
     });
     return tags;
   }
-  function regenerateFutureWeeks(){
-    for(var w=state.currentWeek;w<26;w++){state.weeks[w].unscheduled=generateWeekPool(w);}
+  function regenerateFutureMonths(){
+    for(var m=0;m<7;m++){state.months[m].unscheduled=generateMonthPool(m);}
   }
   function removeExFromPools(key){
-    for(var w=0;w<26;w++){
-      state.weeks[w].unscheduled=state.weeks[w].unscheduled.filter(function(t){return t.key!==key;});
+    for(var m=0;m<7;m++){
+      state.months[m].unscheduled=state.months[m].unscheduled.filter(function(t){return t.key!==key;});
     }
   }
 
@@ -512,7 +516,7 @@
       }
     });
     // day columns
-    var days=['mon','tue','wed','thu','fri','weekend'];
+    var days=['mon','tue','wed','thu','fri','sat','sun'];
     days.forEach(function(d){
       var col=document.getElementById('dc-'+d);
       if(!col)return;
@@ -524,7 +528,7 @@
     // pool
     var pool=document.getElementById('pool-area');
     pool.innerHTML='';
-    (wk.unscheduled||[]).forEach(function(t){pool.innerHTML+=tagHTML(t,'pool');});
+    (state.months[mIdx].unscheduled||[]).forEach(function(t){pool.innerHTML+=tagHTML(t,'pool');});
     // overlap note
     var showOverlap=!state.exemptions.has('sucks')&&!state.exemptions.has('cardio');
     document.getElementById('overlap-note').classList.toggle('show',showOverlap);
@@ -550,19 +554,21 @@
   }
   function moveTag(id,dest){
     var w=state.currentWeek,wk=state.weeks[w];
+    var mIdx=getMonthIndex(w);
     var tag=null;
     // find and remove from source
-    var days=['mon','tue','wed','thu','fri','weekend'];
+    var days=['mon','tue','wed','thu','fri','sat','sun'];
     days.forEach(function(d){
       var idx=wk.scheduled[d].findIndex(function(t){return t.id===id;});
       if(idx>=0){tag=wk.scheduled[d].splice(idx,1)[0];}
     });
     if(!tag){
-      var idx=wk.unscheduled.findIndex(function(t){return t.id===id;});
-      if(idx>=0)tag=wk.unscheduled.splice(idx,1)[0];
+      var mp=state.months[mIdx].unscheduled;
+      var idx=mp.findIndex(function(t){return t.id===id;});
+      if(idx>=0)tag=mp.splice(idx,1)[0];
     }
     if(!tag)return;
-    if(dest==='pool')wk.unscheduled.push(tag);
+    if(dest==='pool')state.months[mIdx].unscheduled.push(tag);
     else wk.scheduled[dest].push(tag);
     renderCal();
   }
@@ -596,14 +602,14 @@
   function onVolume(v){
     state.sessions=parseInt(v);
     document.getElementById('vol-display').textContent=v;
-    regenerateFutureWeeks();
+    regenerateFutureMonths();
     renderMatrix();renderCal();
   }
   function onGoal(key,v){
     state.goals[key]=parseInt(v);
     var ids={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
     document.getElementById(ids[key]).textContent=v;
-    regenerateFutureWeeks();
+    regenerateFutureMonths();
     renderMatrix();renderCal();
   }
   function toggleEx(btn){
@@ -643,7 +649,7 @@
       'Instructor Grindset — Offseason Plan Builder',
       'Volume: '+state.sessions+' sessions/wk | Skiing: '+g.skiing+' Teaching: '+g.teaching+' Cert: '+g.cert+' Physical: '+g.physical,
       '',
-      ['Week','Month','Phase','Mon','Tue','Wed','Thu','Fri','Sat/Sun','Unscheduled'].join('	')
+      ['Week','Month','Phase','Mon','Tue','Wed','Thu','Fri','Sat','Sun','Unscheduled'].join('	')
     ];
     for(var w=0;w<26;w++){
       var mIdx=getMonthIndex(w),wk=state.weeks[w];
@@ -652,8 +658,8 @@
       lines.push([
         w+1,MONTHS[mIdx],phase,
         cell(wk.scheduled.mon),cell(wk.scheduled.tue),cell(wk.scheduled.wed),
-        cell(wk.scheduled.thu),cell(wk.scheduled.fri),cell(wk.scheduled.weekend),
-        cell(wk.unscheduled)
+        cell(wk.scheduled.thu),cell(wk.scheduled.fri),cell(wk.scheduled.sat),
+        cell(wk.scheduled.sun),cell(state.months[mIdx].unscheduled)
       ].join('	'));
     }
     return lines.join('\n');
@@ -680,7 +686,8 @@
     state.currentWeek=0;
     state.tagText=Object.assign({},placeholders);
     state.selectedTagId=null;
-    state.weeks=Array.from({length:26},function(){return{scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],weekend:[]},unscheduled:[]};});
+    state.weeks=Array.from({length:26},function(){return{scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]}};});
+    state.months=Array.from({length:7},function(){return{unscheduled:[]};});
     // reset controls
     document.getElementById('vol-slider').value=4;
     document.getElementById('vol-display').textContent=4;
@@ -689,12 +696,12 @@
     document.querySelectorAll('.ex-btn').forEach(function(b){b.classList.remove('active');});
     document.getElementById('ex-disclaimer').classList.remove('show');
     document.getElementById('detail-panel').classList.remove('show');
-    regenerateFutureWeeks();
+    regenerateFutureMonths();
     renderMatrix();renderCal();
   }
 
   /* ---- Init ---- */
-  regenerateFutureWeeks();
+  regenerateFutureMonths();
   renderMatrix();
   renderCal();
   </script>
