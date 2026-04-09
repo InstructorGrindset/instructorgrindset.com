@@ -648,8 +648,7 @@
     for(var w=0;w<26;w++){
       var mIdx=getMonthIndex(w),wk=state.weeks[w];
       var phase=mIdx<4?'Build':'Sharpen';
-      function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('
-').replace(/"/g,'""')+'"';}
+      function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('\n').replace(/"/g,'""')+'"';}
       lines.push([
         w+1,MONTHS[mIdx],phase,
         cell(wk.scheduled.mon),cell(wk.scheduled.tue),cell(wk.scheduled.wed),
