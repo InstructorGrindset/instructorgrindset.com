@@ -469,7 +469,7 @@
       rows+='<th class="row-header">'+LABEL_OF[key]+'</th>';
       for(var m=0;m<7;m++){
         var f=freq(key,m,state.sessions,state.goals);
-        rows+='<td class="matrix-cell cell-'+pillar+'" data-key="'+key+'" data-m="'+m+'" onclick="showDetail(''+key+'','+m+')">';
+        rows+='<td class="matrix-cell cell-'+pillar+'" data-key="'+key+'" data-m="'+m+'" onclick="showDetail(\''+key+'\','+m+')">';
         rows+=ex?'—':dotsFor(f);
         rows+='</td>';
       }
@@ -489,11 +489,11 @@
   /* ---- Calendar render ---- */
   function tagHTML(t,loc){
     var ex=state.exemptions.has(t.key)?'exempted-placed':'';
-    var drag=ex?'draggable="false"':'draggable="true" ondragstart="dStart(event,''+t.id+'')"';
+    var drag=ex?'draggable="false"':'draggable="true" ondragstart="dStart(event,\''+t.id+'\')"';
     return '<span class="act-tag '+t.pillar+' '+ex+'" data-id="'+t.id+'" data-key="'+t.key+'" data-loc="'+loc+'" '+drag+' onclick="tapTag(event,this)">'
       +(ex?'⚠️ ':'')
       +'<input class="tag-edit" type="text" value="'+escHtml(state.tagText[t.key])+'" '
-      +'onfocus="event.stopPropagation()" onchange="editTag(''+t.key+'',this.value)" '
+      +'onfocus="event.stopPropagation()" onchange="editTag(\''+t.key+'\',this.value)" '
       +'title="Click to edit activity" style="width:'+(state.tagText[t.key].length*7+8)+'px;max-width:180px">'
       +'</span>';
   }
@@ -648,8 +648,7 @@
     for(var w=0;w<26;w++){
       var mIdx=getMonthIndex(w),wk=state.weeks[w];
       var phase=mIdx<4?'Build':'Sharpen';
-      function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('
-').replace(/"/g,'""')+'"';}
+      function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('\n').replace(/"/g,'""')+'"';}
       lines.push([
         w+1,MONTHS[mIdx],phase,
         cell(wk.scheduled.mon),cell(wk.scheduled.tue),cell(wk.scheduled.wed),
@@ -657,8 +656,7 @@
         cell(wk.unscheduled)
       ].join('	'));
     }
-    return lines.join('
-');
+    return lines.join('\n');
   }
   function copyPlan(){
     var tsv=buildTSV();
