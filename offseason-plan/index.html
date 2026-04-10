@@ -182,6 +182,20 @@
     }
     .toast.show{opacity:1}
 
+    .budget-bars{margin-bottom:1.5rem}
+    .budget-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.55rem}
+    .budget-lbl{font-size:.78rem;font-weight:600;width:110px;flex-shrink:0}
+    .budget-lbl.fit{color:var(--fit-color)}
+    .budget-lbl.study{color:var(--study-color)}
+    .budget-lbl.cross{color:var(--cross-color)}
+    .budget-track{flex:1;height:7px;background:var(--line);border-radius:999px;overflow:hidden}
+    .budget-fill{height:100%;border-radius:999px;transition:width .4s}
+    .budget-fill.fit{background:var(--fit-color)}
+    .budget-fill.study{background:var(--study-color)}
+    .budget-fill.cross{background:var(--cross-color)}
+    .budget-ct{font-size:.78rem;font-weight:600;color:var(--muted);min-width:52px;text-align:right;white-space:nowrap}
+    .prefill-note{font-size:.82rem;color:var(--cta);border:1px solid rgba(196,137,42,.3);border-radius:.4rem;padding:.5rem .8rem;margin-bottom:1rem}
+
     .footer-wrap{display:none}
   </style>
 </head>
@@ -207,6 +221,8 @@
 
         <!-- ===== PHASE 1: CONFIGURE ===== -->
         <div class="section-label">Configure</div>
+
+        <div class="prefill-note" id="prefill-note" style="display:none">Goals pre-filled from your Priority Predictor score. Adjust as needed.</div>
 
         <div class="ob-slider-group">
           <label class="ob-slider-label" for="vol-slider">Sessions per week &mdash; <span id="vol-display">4</span></label>
@@ -259,6 +275,25 @@
             <li>Replace placeholder text with your specific exercise, book, or activity choice.</li>
           </ol>
         </details>
+
+        <div class="section-label">Session budget</div>
+        <div class="budget-bars" id="budget-bars">
+          <div class="budget-row">
+            <span class="budget-lbl fit">Fitness</span>
+            <div class="budget-track"><div class="budget-fill fit" id="bf-fit" style="width:0%"></div></div>
+            <span class="budget-ct" id="bc-fit">0</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-lbl study">Study</span>
+            <div class="budget-track"><div class="budget-fill study" id="bf-study" style="width:0%"></div></div>
+            <span class="budget-ct" id="bc-study">0</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-lbl cross">Cross-training</span>
+            <div class="budget-track"><div class="budget-fill cross" id="bf-cross" style="width:0%"></div></div>
+            <span class="budget-ct" id="bc-cross">0</span>
+          </div>
+        </div>
 
         <!-- ===== PHASE 2: MATRIX ===== -->
         <div class="section-label">Training Matrix</div>
@@ -429,13 +464,29 @@
     return 0;
   }
 
+  /* ---- allocate() — distributes sessions budget proportionally across activities ---- */
+  function allocate(mIdx,sessions,goals){
+    var raw={},total=0;
+    SUBPILLARS.forEach(function(key){var f=freq(key,mIdx,sessions,goals);raw[key]=f;total+=f;});
+    if(total<=sessions||total===0)return raw;
+    var base={},rems=[],baseTotal=0;
+    SUBPILLARS.forEach(function(key){
+      var exact=raw[key]*sessions/total;
+      base[key]=Math.floor(exact);baseTotal+=base[key];
+      rems.push({key:key,rem:exact-Math.floor(exact)});
+    });
+    rems.sort(function(a,b){return b.rem-a.rem;});
+    for(var i=0;i<sessions-baseTotal;i++)base[rems[i].key]++;
+    return base;
+  }
+
   /* ---- Tag generation ---- */
   var tagCounter = 0;
   function generateMonthPool(mIdx){
-    var tags=[];
+    var tags=[],alloc=allocate(mIdx,state.sessions,state.goals);
     SUBPILLARS.forEach(function(key){
       if(state.exemptions.has(key))return;
-      var n=freq(key,mIdx,state.sessions,state.goals);
+      var n=alloc[key];
       for(var i=0;i<n;i++){tags.push({id:'t'+(tagCounter++),key:key,pillar:PILLAR_OF[key]});}
     });
     return tags;
@@ -462,6 +513,9 @@
   function renderMatrix(){
     var body=document.getElementById('matrix-body');
     if(!body)return;
+    // pre-compute capped allocations for all 7 months
+    var monthAllocs=[];
+    for(var m=0;m<7;m++)monthAllocs.push(allocate(m,state.sessions,state.goals));
     var rows='';
     PILLAR_ROWS.forEach(function(row){
       if(row.type==='pillar'){
@@ -472,7 +526,7 @@
       rows+='<tr'+(ex?' class="row-exempted"':'')+'>';
       rows+='<th class="row-header">'+LABEL_OF[key]+'</th>';
       for(var m=0;m<7;m++){
-        var f=freq(key,m,state.sessions,state.goals);
+        var f=monthAllocs[m][key];
         rows+='<td class="matrix-cell cell-'+pillar+'" data-key="'+key+'" data-m="'+m+'" onclick="showDetail(\''+key+'\','+m+')">';
         rows+=ex?'—':dotsFor(f);
         rows+='</td>';
@@ -483,7 +537,7 @@
   }
   function showDetail(key,m){
     var p=document.getElementById('detail-panel');
-    var f=freq(key,m,state.sessions,state.goals);
+    var f=allocate(m,state.sessions,state.goals)[key];
     document.getElementById('dp-title').textContent=LABEL_OF[key]+' — '+(MONTHS[m]||'')+' ('+f+'x/week)';
     document.getElementById('dp-desc').textContent=subDetails[key].desc;
     document.getElementById('dp-timing').textContent=subDetails[key].timing;
@@ -598,19 +652,31 @@
     if(col&&!col.contains(e.relatedTarget))col.classList.remove('drag-over');
   });
 
+  /* ---- Budget bars ---- */
+  function renderBudgetBars(){
+    var alloc=allocate(1,state.sessions,state.goals);
+    var totals={fit:0,study:0,cross:0};
+    SUBPILLARS.forEach(function(key){totals[PILLAR_OF[key]]+=alloc[key];});
+    ['fit','study','cross'].forEach(function(p){
+      var pct=state.sessions>0?Math.round(totals[p]/state.sessions*100):0;
+      document.getElementById('bf-'+p).style.width=pct+'%';
+      document.getElementById('bc-'+p).textContent=totals[p]+' of '+state.sessions;
+    });
+  }
+
   /* ---- Configure handlers ---- */
   function onVolume(v){
     state.sessions=parseInt(v);
     document.getElementById('vol-display').textContent=v;
     regenerateFutureMonths();
-    renderMatrix();renderCal();
+    renderMatrix();renderCal();renderBudgetBars();
   }
   function onGoal(key,v){
     state.goals[key]=parseInt(v);
     var ids={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
     document.getElementById(ids[key]).textContent=v;
     regenerateFutureMonths();
-    renderMatrix();renderCal();
+    renderMatrix();renderCal();renderBudgetBars();
   }
   function toggleEx(btn){
     var key=btn.getAttribute('data-key');
@@ -624,7 +690,7 @@
       removeExFromPools(key);
     }
     document.getElementById('ex-disclaimer').classList.toggle('show',state.exemptions.size>0);
-    renderMatrix();renderCal();
+    renderMatrix();renderCal();renderBudgetBars();
   }
   function editTag(key,val){
     state.tagText[key]=val;
@@ -697,13 +763,34 @@
     document.getElementById('ex-disclaimer').classList.remove('show');
     document.getElementById('detail-panel').classList.remove('show');
     regenerateFutureMonths();
-    renderMatrix();renderCal();
+    renderMatrix();renderCal();renderBudgetBars();
   }
 
   /* ---- Init ---- */
+  (function(){
+    var p=new URLSearchParams(window.location.search);
+    if(p.has('cert')||p.has('ft')||p.has('exp')){
+      var cert=Math.min(3,Math.max(0,parseInt(p.get('cert')||'1')));
+      var ft=parseInt(p.get('ft')||'0')===1;
+      var exp=Math.min(30,Math.max(0,parseInt(p.get('exp')||'0')));
+      var certGoal=Math.max(0,5-cert);
+      var physGoal=ft?4:3;
+      var skiGoal=exp>15?4:exp>7?3:2;
+      var teachGoal=exp<3?4:exp<8?3:2;
+      state.goals={skiing:skiGoal,teaching:teachGoal,cert:certGoal,physical:physGoal};
+      var ids={skiing:'g-ski',teaching:'g-teach',cert:'g-cert',physical:'g-phys'};
+      var dids={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
+      Object.keys(state.goals).forEach(function(k){
+        document.getElementById(ids[k]).value=state.goals[k];
+        document.getElementById(dids[k]).textContent=state.goals[k];
+      });
+      document.getElementById('prefill-note').style.display='block';
+    }
+  })();
   regenerateFutureMonths();
   renderMatrix();
   renderCal();
+  renderBudgetBars();
   </script>
 </body>
 </html>
