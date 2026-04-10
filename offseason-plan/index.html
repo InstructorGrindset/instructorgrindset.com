@@ -266,16 +266,6 @@
           A complete snowsports instructor trains all three pillars. Volume is personal &mdash; completeness is not. Exemptions should be temporary.
         </div>
 
-        <details class="ob-instructions">
-          <summary>How to use your exported plan</summary>
-          <ol>
-            <li>Open a blank Google Sheet and paste with Cmd+V or Ctrl+V.</li>
-            <li>The calendar fills automatically &mdash; weeks as rows, days as columns.</li>
-            <li>Each cell contains the activity tags you scheduled in the builder.</li>
-            <li>Replace placeholder text with your specific exercise, book, or activity choice.</li>
-          </ol>
-        </details>
-
         <div class="section-label">Session budget</div>
         <div class="budget-bars" id="budget-bars">
           <div class="budget-row">
@@ -373,6 +363,16 @@
             A long run, bike, or swim counts for both Something that sucks and Cardio. You do not need to do both separately if they overlap naturally.
           </div>
         </div>
+
+        <details class="ob-instructions" style="margin-top:1.5rem">
+          <summary>How to use your exported plan</summary>
+          <ol>
+            <li>Open a blank Google Sheet and paste with Cmd+V or Ctrl+V.</li>
+            <li>The calendar fills automatically &mdash; weeks as rows, days as columns.</li>
+            <li>Each cell contains the activity tags you scheduled in the builder.</li>
+            <li>Replace placeholder text with your specific exercise, book, or activity choice.</li>
+          </ol>
+        </details>
 
       </div><!-- .content -->
     </main>
@@ -483,10 +483,10 @@
   /* ---- Tag generation ---- */
   var tagCounter = 0;
   function generateMonthPool(mIdx){
-    var tags=[],alloc=allocate(mIdx,state.sessions,state.goals);
+    var tags=[];
     SUBPILLARS.forEach(function(key){
       if(state.exemptions.has(key))return;
-      var n=alloc[key];
+      var n=freq(key,mIdx,state.sessions,state.goals);
       for(var i=0;i<n;i++){tags.push({id:'t'+(tagCounter++),key:key,pillar:PILLAR_OF[key]});}
     });
     return tags;
@@ -513,9 +513,6 @@
   function renderMatrix(){
     var body=document.getElementById('matrix-body');
     if(!body)return;
-    // pre-compute capped allocations for all 7 months
-    var monthAllocs=[];
-    for(var m=0;m<7;m++)monthAllocs.push(allocate(m,state.sessions,state.goals));
     var rows='';
     PILLAR_ROWS.forEach(function(row){
       if(row.type==='pillar'){
@@ -526,7 +523,7 @@
       rows+='<tr'+(ex?' class="row-exempted"':'')+'>';
       rows+='<th class="row-header">'+LABEL_OF[key]+'</th>';
       for(var m=0;m<7;m++){
-        var f=monthAllocs[m][key];
+        var f=freq(key,m,state.sessions,state.goals);
         rows+='<td class="matrix-cell cell-'+pillar+'" data-key="'+key+'" data-m="'+m+'" onclick="showDetail(\''+key+'\','+m+')">';
         rows+=ex?'—':dotsFor(f);
         rows+='</td>';
@@ -537,7 +534,7 @@
   }
   function showDetail(key,m){
     var p=document.getElementById('detail-panel');
-    var f=allocate(m,state.sessions,state.goals)[key];
+    var f=freq(key,m,state.sessions,state.goals);
     document.getElementById('dp-title').textContent=LABEL_OF[key]+' — '+(MONTHS[m]||'')+' ('+f+'x/week)';
     document.getElementById('dp-desc').textContent=subDetails[key].desc;
     document.getElementById('dp-timing').textContent=subDetails[key].timing;
