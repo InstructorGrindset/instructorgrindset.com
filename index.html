@@ -220,7 +220,7 @@
 <script>
   (function(){
     const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=10')  // bump ?v= number when you edit the partial to bust cache
+    fetch('/partials/sidebar.html?v=11')  // bump ?v= number when you edit the partial to bust cache
       .then(r => r.text())
       .then(html => {
         const tmp = document.createElement('div');
@@ -260,7 +260,7 @@
           Instead of simply setting a snowsports certification goal and forgetting about it until next March, try my holistic protocol for career planning.
         </p>
         <div class="lead-cta">
-          <a class="cta" href="/career-plan">Start Here</a>
+          <a class="cta" href="/start-here">Start Here</a>
         </div>
         <p class="lead" style="margin-top:1rem;font-size:.95rem">
           Once you have your plan, track your teaching with the <a href="/lesson-log">Lesson Log</a>.
