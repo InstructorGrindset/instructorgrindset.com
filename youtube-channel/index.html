@@ -89,6 +89,9 @@
     .row{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin:.6rem 0 1rem}
     .row .cta{margin-left:auto}
 
+    .btn-row{display:grid;place-items:center;margin-top:2rem;margin-bottom:1rem}
+    .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
+
     /* Footer */
     .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
       display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
@@ -143,6 +146,9 @@
             <!-- JS will inject 9 playlist video iframes here -->
           </div>
         </section>
+        <div class="btn-row">
+          <a class="cta big" href="/blog">Read the Blog &rarr;</a>
+        </div>
       </div>
     </main>
   </div>
