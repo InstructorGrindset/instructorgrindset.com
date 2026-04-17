@@ -157,6 +157,11 @@
       padding:0;outline:none;cursor:text;min-width:30px;
     }
 
+    .btn-row{display:grid;place-items:center}
+    .cta{display:inline-block;padding:.9rem 1.1rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;text-decoration:none}
+    .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
+    .cta:hover{filter:brightness(1.06)}
+
     /* --- Sticky export bar --- */
     .export-bar{
       position:fixed;left:var(--sidebar);right:0;bottom:0;
@@ -374,6 +379,9 @@
           </ol>
         </details>
 
+        <div class="btn-row" style="margin-top:2rem;margin-bottom:1rem">
+          <a class="cta big" href="/lesson-log">Set Up Your Lesson Log &rarr;</a>
+        </div>
       </div><!-- .content -->
     </main>
   </div><!-- .page -->

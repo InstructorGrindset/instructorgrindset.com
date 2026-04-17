@@ -79,6 +79,11 @@
     }
     .post-excerpt{font-size:.93rem;color:var(--muted);line-height:1.6;margin:0}
 
+    .btn-row{display:grid;place-items:center;margin-top:2rem;margin-bottom:1rem}
+    .cta{display:inline-block;padding:.9rem 1.1rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;text-decoration:none}
+    .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
+    .cta:hover{filter:brightness(1.06)}
+
     .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
       display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
     .footer{color:var(--muted);text-align:center;margin:0}
@@ -136,6 +141,9 @@
             <p class="post-title">Reading Beyond the PSIA Manuals</p>
             <p class="post-excerpt">The PSIA Manuals are essential — but just as much can be learned from a good story. Here's where to start.</p>
           </a>
+        </div>
+        <div class="btn-row">
+          <a class="cta big" href="/contact">Get in Touch &rarr;</a>
         </div>
       </div>
     </main>
