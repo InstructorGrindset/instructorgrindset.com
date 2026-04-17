@@ -208,7 +208,7 @@
 
       <div class="app-header">
         <h1>Season Income Calculator</h1>
-        <p>W-2 income &amp; expense model &mdash; results update as you move the sliders</p>
+        <p>Move the sliders &mdash; your numbers update instantly</p>
       </div>
 
       <div class="app-layout">
@@ -217,10 +217,10 @@
         <div class="inputs-col">
 
           <div class="input-section">
-            <div class="input-section-head"><span class="dot dot-setup"></span>Setup</div>
+            <div class="input-section-head"><span class="dot dot-setup"></span>Your Season</div>
             <div class="input-body">
               <div class="field">
-                <div class="field-row"><span class="field-name">State</span></div>
+                <div class="field-row"><span class="field-name">Where you work</span></div>
                 <select id="state-select" onchange="calc()">
                   <option value="0" data-name="Washington">Washington — 0%</option>
                   <option value="0" data-name="Wyoming">Wyoming — 0%</option>
@@ -238,63 +238,63 @@
                 </select>
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Season length</span><span class="field-val" id="v-weeks">18 wks</span></div>
+                <div class="field-row"><span class="field-name">How long is your season</span><span class="field-val" id="v-weeks">18 wks</span></div>
                 <input type="range" id="s-weeks" min="10" max="26" step="1" value="18" oninput="sv('v-weeks',this.value,'wks');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Days worked per week</span><span class="field-val" id="v-dpw">5 days</span></div>
+                <div class="field-row"><span class="field-name">Work days per week</span><span class="field-val" id="v-dpw">5 days</span></div>
                 <input type="range" id="s-dpw" min="1" max="7" step="1" value="5" oninput="sv('v-dpw',this.value,'days');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Hours per working day</span><span class="field-val" id="v-hpd">7 hrs</span></div>
+                <div class="field-row"><span class="field-name">Teaching hours per day</span><span class="field-val" id="v-hpd">7 hrs</span></div>
                 <input type="range" id="s-hpd" min="4" max="10" step="1" value="7" oninput="sv('v-hpd',this.value,'hrs');calc()">
               </div>
             </div>
           </div>
 
           <div class="input-section">
-            <div class="input-section-head"><span class="dot dot-pay"></span>Pay Rates</div>
+            <div class="input-section-head"><span class="dot dot-pay"></span>How You Get Paid</div>
             <div class="input-body">
               <div class="field">
-                <div class="field-row"><span class="field-name">Group lesson rate</span><span class="field-val" id="v-grate">$22/hr</span></div>
+                <div class="field-row"><span class="field-name">Group lesson pay</span><span class="field-val" id="v-grate">$22/hr</span></div>
                 <input type="range" id="s-grate" min="12" max="55" step="1" value="22" oninput="sv('v-grate',this.value,'$/hr');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Private lesson rate</span><span class="field-val" id="v-prate">$38/hr</span></div>
+                <div class="field-row"><span class="field-name">Private lesson pay</span><span class="field-val" id="v-prate">$38/hr</span></div>
                 <input type="range" id="s-prate" min="18" max="90" step="1" value="38" oninput="sv('v-prate',this.value,'$/hr');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Privates as % of days</span><span class="field-val" id="v-ppct">30%</span></div>
+                <div class="field-row"><span class="field-name">What % of your days are privates</span><span class="field-val" id="v-ppct">30%</span></div>
                 <input type="range" id="s-ppct" min="0" max="100" step="5" value="30" oninput="sv('v-ppct',this.value,'%');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Private lesson length</span><span class="field-val" id="v-plen">2 hrs</span></div>
+                <div class="field-row"><span class="field-name">How long is each private</span><span class="field-val" id="v-plen">2 hrs</span></div>
                 <input type="range" id="s-plen" min="1" max="8" step="1" value="2" oninput="sv('v-plen',this.value,'hrs');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Tips per lesson day</span><span class="field-val" id="v-tips">$25</span></div>
+                <div class="field-row"><span class="field-name">Average tips per day</span><span class="field-val" id="v-tips">$25</span></div>
                 <input type="range" id="s-tips" min="0" max="1000" step="5" value="25" oninput="sv('v-tips',this.value,'$');calc()">
               </div>
             </div>
           </div>
 
           <div class="input-section">
-            <div class="input-section-head"><span class="dot dot-exp"></span>Expenses</div>
+            <div class="input-section-head"><span class="dot dot-exp"></span>What You Spend</div>
             <div class="input-body">
               <div class="field">
-                <div class="field-row"><span class="field-name">Housing per month</span><span class="field-val" id="v-hous">$150/mo</span></div>
+                <div class="field-row"><span class="field-name">Rent per month</span><span class="field-val" id="v-hous">$150/mo</span></div>
                 <input type="range" id="s-hous" min="0" max="4000" step="50" value="150" oninput="sv('v-hous',this.value,'$/mo');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Life expenses per month</span><span class="field-val" id="v-life">$800/mo</span></div>
+                <div class="field-row"><span class="field-name">Food, going out, everything else</span><span class="field-val" id="v-life">$800/mo</span></div>
                 <input type="range" id="s-life" min="200" max="4000" step="50" value="800" oninput="sv('v-life',this.value,'$/mo');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Transportation (season)</span><span class="field-val" id="v-trans">$400</span></div>
+                <div class="field-row"><span class="field-name">Getting there &amp; back</span><span class="field-val" id="v-trans">$400</span></div>
                 <input type="range" id="s-trans" min="0" max="3000" step="50" value="400" oninput="sv('v-trans',this.value,'$');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><span class="field-name">Gear amortization (season)</span><span class="field-val" id="v-gear">$300</span></div>
+                <div class="field-row"><span class="field-name">Gear &amp; equipment</span><span class="field-val" id="v-gear">$300</span></div>
                 <input type="range" id="s-gear" min="0" max="2000" step="50" value="300" oninput="sv('v-gear',this.value,'$');calc()">
               </div>
             </div>
@@ -307,7 +307,7 @@
 
           <!-- Net hero -->
           <div class="net-hero">
-            <div class="net-hero-label">Net to carry forward</div>
+            <div class="net-hero-label">Money in your pocket at the end</div>
             <div class="net-hero-val" id="m-net">—</div>
             <div class="net-hero-sub" id="m-weekly-sub">—</div>
           </div>
@@ -315,20 +315,20 @@
           <!-- Key metrics -->
           <div class="metrics">
             <div class="metric">
-              <div class="metric-label">Gross income</div>
+              <div class="metric-label">Total you earn</div>
               <div class="metric-val c-pos" id="m-gross">—</div>
             </div>
             <div class="metric">
-              <div class="metric-label">Total taxes</div>
+              <div class="metric-label">Taken out for taxes</div>
               <div class="metric-val c-tax" id="m-tax">—</div>
               <div class="metric-sub" id="m-taxrate">—</div>
             </div>
             <div class="metric">
-              <div class="metric-label">After-tax income</div>
+              <div class="metric-label">After taxes</div>
               <div class="metric-val c-neu" id="m-aftertax">—</div>
             </div>
             <div class="metric">
-              <div class="metric-label">Total expenses</div>
+              <div class="metric-label">Total you spend</div>
               <div class="metric-val c-neg" id="m-exp">—</div>
             </div>
           </div>
@@ -341,7 +341,7 @@
 
           <!-- Bar chart -->
           <div class="result-panel">
-            <div class="result-panel-head">Where your money goes</div>
+            <div class="result-panel-head">Where it all goes</div>
             <div class="result-panel-body">
               <ul class="bar-list" id="bar-chart"></ul>
             </div>
@@ -349,7 +349,7 @@
 
           <!-- Income breakdown -->
           <div class="result-panel">
-            <div class="result-panel-head">Income &amp; tax breakdown</div>
+            <div class="result-panel-head">How your pay adds up</div>
             <div class="result-panel-body">
               <ul class="breakdown" id="income-breakdown"></ul>
             </div>
@@ -357,7 +357,7 @@
 
           <!-- Expense breakdown -->
           <div class="result-panel">
-            <div class="result-panel-head">Expense breakdown</div>
+            <div class="result-panel-head">What you spend it on</div>
             <div class="result-panel-body">
               <ul class="breakdown" id="expense-breakdown"></ul>
             </div>
@@ -367,7 +367,7 @@
           <div class="state-note" id="state-note"></div>
 
           <!-- Disclaimer -->
-          <div class="disclaimer">Tax estimates are approximations for a single W-2 filer with no additional deductions. Tips are modeled as untaxed for simplicity — actual tip reporting obligations vary. Consult a tax professional for accurate filing.</div>
+          <div class="disclaimer">These are estimates, not guarantees. Numbers assume you&rsquo;re a regular employee (W-2) with no extra deductions. Tips might actually be taxable depending on how you report them &mdash; talk to a tax person if you&rsquo;re unsure.</div>
 
         </div><!-- .results-col -->
       </div><!-- .app-layout -->
@@ -437,7 +437,7 @@
       var netEl = $('m-net');
       netEl.textContent = fmt(net);
       netEl.className = 'net-hero-val ' + (net >= 0 ? 'c-pos' : 'c-neg');
-      $('m-weekly-sub').textContent = fmt(weeklyNet) + '/week &nbsp;·&nbsp; ' + weeks + '-week season';
+      $('m-weekly-sub').textContent = fmt(weeklyNet) + ' per week \u00b7 ' + weeks + '-week season';
 
       // Metrics
       $('m-gross').textContent    = fmt(gross);
@@ -499,15 +499,15 @@
           +'<span class="ba '+ac+'">'+amt+'</span>';
         ib.appendChild(li);
       }
-      iRow('Group income ('+groupHrs+' hrs @ $'+gRate+'/hr)', fmt(groupInc), 'c-pos');
-      iRow('Private income ('+privHrs+' hrs @ $'+pRate+'/hr)', fmt(privInc), 'c-pos');
-      iRow('Taxable subtotal', fmt(taxable), 'c-neu', 'divider', true);
-      iRow('Federal tax', '&minus;'+fmt(fedTax), 'c-tax');
-      iRow('State tax — '+stateName+' ('+(stateRate*100).toFixed(2).replace(/\.?0+$/,'')+'%)', '&minus;'+fmt(stateTax), 'c-tax');
-      iRow('FICA (7.65%)', '&minus;'+fmt(fica), 'c-tax');
-      iRow('After-tax lesson income', fmt(taxable-totalTax), 'c-neu', 'divider');
-      iRow('Tips ('+totalDays+' days &times; $'+tips+') — untaxed', fmt(tipInc), 'c-pos');
-      iRow('Total after-tax income', fmt(afterTax), 'c-pos', 'total-row');
+      iRow('Group lessons ('+groupHrs+' hrs @ $'+gRate+'/hr)', fmt(groupInc), 'c-pos');
+      iRow('Private lessons ('+privHrs+' hrs @ $'+pRate+'/hr)', fmt(privInc), 'c-pos');
+      iRow('Government taxes this amount', fmt(taxable), 'c-neu', 'divider', true);
+      iRow('Federal income tax', '&minus;'+fmt(fedTax), 'c-tax');
+      iRow(''+stateName+' state tax ('+(stateRate*100).toFixed(2).replace(/\.?0+$/,'')+'%)', '&minus;'+fmt(stateTax), 'c-tax');
+      iRow('Social Security &amp; Medicare (7.65%)', '&minus;'+fmt(fica), 'c-tax');
+      iRow('What you keep after tax', fmt(taxable-totalTax), 'c-neu', 'divider');
+      iRow('Tips ('+totalDays+' days &times; $'+tips+') &mdash; cash, not taxed here', fmt(tipInc), 'c-pos');
+      iRow('Total take-home', fmt(afterTax), 'c-pos', 'total-row');
 
       // Expense breakdown
       var eb = $('expense-breakdown'); eb.innerHTML = '';
@@ -518,11 +518,11 @@
           +'<span class="ba c-neg">&minus;'+Math.round(amt).toLocaleString()+'</span>';
         eb.appendChild(li);
       }
-      eRow('Housing ($'+housing.toLocaleString()+'/mo &times; '+months.toFixed(1)+'mo)', housingCost);
-      eRow('Life expenses ($'+life.toLocaleString()+'/mo)', lifeCost);
-      eRow('Transportation', trans);
-      eRow('Gear', gear);
-      eRow('Total expenses', totalExp, 'total-row');
+      eRow('Rent ($'+housing.toLocaleString()+'/mo &times; '+months.toFixed(1)+' months)', housingCost);
+      eRow('Food, going out &amp; everything else ($'+life.toLocaleString()+'/mo)', lifeCost);
+      eRow('Getting there &amp; back', trans);
+      eRow('Gear &amp; equipment', gear);
+      eRow('Total spent', totalExp, 'total-row');
 
       // State note
       var sn = $('state-note');
