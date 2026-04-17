@@ -70,7 +70,7 @@
     <script>
       (function(){
         var t=document.getElementById("sidebar-placeholder");
-        fetch("/partials/sidebar.html?v=11")
+        fetch("/partials/sidebar.html?v=12")
           .then(function(r){return r.text()})
           .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
           .catch(function(){t.innerHTML="<div style=\"padding:1rem;color:#fca5a5\">Navigation failed to load.</div>"});
@@ -158,6 +158,9 @@
             </div>
           </div>
 
+        </div>
+        <div style="text-align:center;margin-top:2rem;margin-bottom:1rem">
+          <a class="btn-primary" href="/career-plan">Plan Your Career &rarr;</a>
         </div>
       </div>
     </main>
