@@ -72,8 +72,8 @@
     /* Early Life (centered above timeline, no visible rail end) */
     .early-center{ max-width:900px; margin:0 auto 10px; position:relative; }
     .early{
-      background:#e5e7eb; color:#111; border-left: var(--rail) solid var(--rail-color);
-      border-radius:.8rem; padding:1rem 1.1rem; box-shadow:0 0 22px rgba(196,137,42,.35);
+      background:rgba(255,255,255,.07); color:var(--ink); border-left: var(--rail) solid var(--rail-color);
+      border-radius:.8rem; padding:1rem 1.1rem; box-shadow:0 0 20px rgba(196,137,42,.15);
     }
     .early h2{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.15rem; color:var(--cta) }
 
@@ -88,15 +88,15 @@
     .entry{ transition: transform .15s ease, box-shadow .2s ease; will-change: transform, box-shadow }
     .entry:hover{ transform:scale(1.02); box-shadow: var(--box-shadow) }
 
-    /* Box (white, bronze border = rail width, glow) */
+    /* Box (dark bg, bronze border = rail width, amber glow) */
     .box{
-      background:#fff; color:#0f1217;
+      background:rgba(255,255,255,.07); color:var(--ink);
       border: var(--rail) solid var(--rail-color);
       border-radius:.8rem; padding:1rem 1.1rem;
-      box-shadow: var(--box-shadow);
+      box-shadow: 0 0 20px rgba(196,137,42,.15);
     }
-    .box h3{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.1rem; color:#0f1217 }
-    .box p{ margin:0; color:#111; line-height:1.6 }
+    .box h3{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.1rem; color:var(--ink) }
+    .box p{ margin:0; color:var(--muted); line-height:1.6 }
 
     /* No horizontal connectors (clean look) */
     .row .left::before,

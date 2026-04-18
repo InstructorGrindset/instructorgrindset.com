@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -49,13 +48,13 @@
     }
     .subtitle{ color:var(--muted); margin:0 0 1.25rem; font-size:clamp(1.05rem, 1.2vw + .2rem, 1.25rem) }
 
-    /* Card with soft yellow glow (no hard box look) */
+    /* Card */
     .card{
-      background:var(--panel-bg);
+      background:rgba(255,255,255,.05);
       border:1px solid var(--line);
-      border-radius:.8rem;
-      padding:1.25rem;
-      box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      border-radius:.875rem;
+      padding:1.5rem;
+      box-shadow:0 0 32px rgba(var(--glow),.06);
     }
 
     /* Form fields */
@@ -63,13 +62,19 @@
     .field{ display:grid; gap:.4rem }
     label{ font-weight:600 }
     input, textarea{
-      width:100%; border:1px solid var(--line); background:rgba(0,0,0,.35); color:var(--ink);
+      width:100%; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--ink);
       border-radius:.5rem; padding:.8rem .9rem; font:inherit;
+      transition:border-color .18s ease, background .18s ease;
+    }
+    input:focus, textarea:focus{
+      border-color:var(--cta); background:rgba(255,255,255,.08);
+      outline:2px solid var(--cta); outline-offset:2px;
     }
     textarea{ resize:vertical; min-height:160px }
 
     /* Button */
-    .btn{ display:inline-block; padding:.9rem 1.1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0; cursor:pointer }
+    .btn{ display:flex; align-items:center; justify-content:center; width:100%; min-height:52px; padding:.85rem 1.75rem; border-radius:.625rem; background:var(--cta); color:#e6e7eb; font-weight:800; font-size:1.125rem; border:0; cursor:pointer; transition:filter .18s ease; }
+    .btn:hover{ filter:brightness(1.08) }
     .btn[disabled]{ opacity:.6; cursor:progress }
 
     /* Status messages */

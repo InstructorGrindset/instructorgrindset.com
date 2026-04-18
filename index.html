@@ -41,12 +41,7 @@
       --story-offset-top:16px;
       --button-offset-top:10px;
     }
-    body{
-      margin:0; color:var(--ink);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.55;
-      background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
-      overflow-x:hidden;
-    }
+
     /* Reduce motion where possible */
     @media (prefers-reduced-motion: reduce){
       *{scroll-behavior:auto}
@@ -65,7 +60,7 @@
     .content{
       width: clamp(520px, var(--hero-w), 1120px);
       margin-left:max(14px, calc((100vw - var(--sidebar) - clamp(520px, var(--hero-w), 1120px))/2 - var(--content-shift)));
-      margin-right:auto; padding-top:4vh;
+      margin-right:auto; padding-top:6vh;
     }
 
     h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
@@ -86,11 +81,10 @@
 
     /* CTAs */
     .cta{display:inline-block;margin-top:var(--button-offset-top);padding:.85rem 1.05rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0}
-    .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:var(--button-offset-top)}
+    .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;margin:var(--sp-4) 0 var(--sp-6)}
     .cta-row .cta{margin-top:0}
     .cta-outline{background:transparent;border:2px solid var(--cta);color:var(--cta)}
     .cta-outline:hover{background:rgba(196,137,42,.08);text-decoration:none}
-    .lead-cta{margin-top:.25rem;margin-bottom:1.5rem;text-align:center}
     .blog-lede{color:var(--muted);font-size:.95rem;margin:0 0 1.25rem}
     .blog-all{margin-top:1rem;font-size:.9rem}
 
@@ -100,11 +94,6 @@
       padding-top:2rem;
       border-top:1px solid var(--line);
     }
-    .blog-latest h2{
-      font-size:clamp(1.5rem,3vw,2rem);
-      margin:0 0 1.5rem;
-      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
-    }
     .blog-grid{
       display:grid;
       grid-template-columns:repeat(auto-fill, minmax(min(100%, 260px), 1fr));
@@ -113,17 +102,19 @@
     .blog-card{
       display:block;
       padding:1.1rem 1.2rem;
-      background:var(--panel-bg);
+      background:var(--surface-1);
       border:1px solid var(--line);
-      border-radius:.5rem;
+      border-radius:var(--r-lg);
       color:var(--ink);
       text-decoration:none;
-      transition:border-color .2s, box-shadow .2s;
+      min-height: 160px;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
     }
     .blog-card:hover{
       border-color:rgba(var(--glow),.4);
       box-shadow:0 0 14px rgba(var(--glow),.1);
       text-decoration:none;
+      transform: translateY(-2px);
     }
     .blog-card .card-date{
       font-size:.78rem;
@@ -152,7 +143,7 @@
     @media (max-width:640px){
       .content{width:min(94vw, 40rem)}
       .cta-row{flex-direction:column;align-items:stretch}
-      .cta-row .cta{text-align:center;width:100%;max-width:480px;padding:1rem 1.25rem}
+      .cta-row .cta,.cta-row .cta-outline{text-align:center;width:100%;max-width:480px;padding:1rem 1.25rem}
     }
     @media (max-width:380px){
       .content{width:92vw}
@@ -187,7 +178,16 @@
     <!-- Main -->
     <main class="main" id="main">
       <div class="content">
-        <div class="vid">
+        <h1>The Instructor Grindset is a focused, year-round approach to developing your skills, body and career as a snowsports instructor.</h1>
+        <p class="lead">
+          The PSIA certification pathways are designed to be navigable with part time training. This presents an opportunity for anyone who wants to turn their passion for skiing into a career. By training and studying year-round, you earn the title of elite professional snowsports instructor twice as fast. People might even consider you that, just because you train year-round.
+        </p>
+        <div class="cta-row">
+          <a class="cta" href="/start-here">Start Here &rarr;</a>
+          <a class="cta-outline" href="#intro-video">Watch the video &darr;</a>
+        </div>
+
+        <div class="vid" id="intro-video">
           <iframe
   src="https://www.youtube.com/embed/4IX2CwKIGo4?rel=0&modestbranding=1&playsinline=1"
   title="YouTube video"
@@ -199,19 +199,12 @@
 
         </div>
 
-        <h1>The Instructor Grindset is a focused, year-round approach to developing your skills, body and career as a snowsports instructor.</h1>
-        <p class="lead">
-          The PSIA certification pathways are designed to be navigable with part time training. This presents an opportunity for anyone who wants to turn their passion for skiing into a career. By training and studying year-round, you earn the title of elite professional snowsports instructor twice as fast. People might even consider you that, just because you train year-round.
-        </p>
         <p class="lead">
           So what's the catch? Why is this completely free? The Instructor Grindset is offered here for free because you will be doing the work.
         </p>
         <p class="lead">
           Instead of simply setting a snowsports certification goal and forgetting about it until next March, try my holistic protocol for career planning.
         </p>
-        <div class="lead-cta">
-          <a class="cta" href="/start-here">Start Here</a>
-        </div>
         <p class="lead" style="margin-top:1rem;font-size:.95rem">
           Once you have your plan, track your teaching with the <a href="/lesson-log">Lesson Log</a>.
         </p>
