@@ -9,6 +9,7 @@
 
   <!-- Fonts + shared sidebar styles (kept at v=4 per your working setup) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
   <style>
@@ -78,14 +79,16 @@
     }
     .panel + .panel{ margin-top:.9rem }
     .ts{display:inline-block; font-weight:800; color:#e6e7eb; background:rgba(0,0,0,.35); border:1px solid var(--line);
-        padding:.22rem .5rem; border-radius:.4rem; letter-spacing:.2px; margin-bottom:.45rem}
+        padding:.35rem .75rem; border-radius:.4rem; letter-spacing:.2px; margin-bottom:.45rem; font-size:var(--text-sm)}
 
     /* Copy blocks (TSV / formulas) */
     .copywrap{ margin-top:.6rem }
     .copyhint{ margin:.25rem 0 .35rem; color:var(--muted); font-size:.95rem }
     .copyarea{
       width:100%; min-height:3.2rem; background:rgba(0,0,0,.35); color:var(--ink);
-      border:1px solid var(--line); border-radius:.5rem; padding:.65rem .75rem; font: 500 14px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      border:1px solid var(--line); border-left:3px solid var(--accent);
+      border-radius:0 var(--r-md) var(--r-md) 0; padding:.75rem 1rem;
+      font: 500 var(--text-sm)/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
       white-space:pre; overflow:auto;
     }
 
@@ -94,7 +97,7 @@
       width:100%; border-collapse:collapse; margin:.5rem 0 0;
     }
     .field-table th, .field-table td{
-      border:1px solid var(--line); padding:.5rem .6rem; vertical-align:top; background:rgba(255,255,255,.02);
+      border:1px solid var(--line); padding:var(--sp-2) var(--sp-3); vertical-align:top; background:rgba(255,255,255,.02); font-size:var(--text-sm);
     }
     .field-table th{ text-align:left; font-weight:800; background:rgba(255,255,255,.05) }
 
@@ -160,7 +163,7 @@
 
         <!-- Written Guide -->
         <section aria-labelledby="guide-title">
-          <h2 id="guide-title" style="text-align:center;margin:.25rem 0 1rem">Written Guide</h2>
+          <h2 id="guide-title" style="text-align:center;margin:.5rem 0 1.25rem">Written Guide</h2>
 
           <!-- 00:00 -->
           <article class="panel">

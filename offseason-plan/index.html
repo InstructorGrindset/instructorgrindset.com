@@ -7,6 +7,7 @@
   <meta name="description" content="Build and schedule your May through November training plan. Configure volume, set goals, drag and drop activities across 26 weeks, and export to Google Sheets." />
   <link rel="canonical" href="https://instructorgrindset.com/offseason-plan" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
   <style>
     :root{
@@ -48,7 +49,7 @@
     .lede{text-align:center;color:var(--muted);max-width:70ch;margin:.25rem auto 1.5rem}
 
     /* --- Section labels --- */
-    .section-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin:1.5rem 0 .6rem}
+    .section-label{font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin:1.5rem 0 .6rem}
 
     /* --- Sliders --- */
     .ob-slider-group{margin-bottom:1.25rem}
@@ -80,7 +81,7 @@
 
     /* --- Matrix --- */
     .matrix-wrap{overflow-x:auto;margin-bottom:1rem}
-    .matrix-table{width:100%;border-collapse:collapse;font-size:.8rem}
+    .matrix-table{width:100%;border-collapse:collapse;font-size:var(--text-sm)}
     .matrix-table th,.matrix-table td{border:1px solid var(--line);padding:.35rem .5rem;text-align:center;white-space:nowrap}
     .matrix-table th.row-header{text-align:left;min-width:130px;font-weight:500;color:var(--muted)}
     .matrix-table th.month-header{font-weight:600;font-size:.75rem;letter-spacing:.4px;color:var(--muted)}
@@ -96,7 +97,7 @@
     .matrix-cell.cell-cross{color:var(--cross-color)}
     .row-exempted td,.row-exempted th{text-decoration:line-through;opacity:.45;border-style:dashed}
     .detail-panel{
-      border:1px solid var(--line);border-radius:.6rem;padding:.85rem 1rem;margin-bottom:1.25rem;
+      border:1px solid var(--line);border-left:3px solid var(--cta);border-radius:.6rem;padding:.85rem 1rem .85rem 1.25rem;margin-bottom:1.25rem;
       background:var(--panel-bg);display:none;
     }
     .detail-panel.show{display:block}
@@ -224,8 +225,14 @@
           <p class="lede">Configure your training volume and goals. Drag activities into your 26-week calendar. Export to Google Sheets.</p>
         </header>
 
+        <nav class="phase-nav" aria-label="Plan sections">
+          <a href="#configure" class="phase-tab">1 Configure</a>
+          <a href="#matrix" class="phase-tab">2 Matrix</a>
+          <a href="#schedule" class="phase-tab">3 Schedule</a>
+        </nav>
+
         <!-- ===== PHASE 1: CONFIGURE ===== -->
-        <div class="section-label">Configure</div>
+        <div class="section-label" id="configure">Configure</div>
 
         <div class="prefill-note" id="prefill-note" style="display:none">Goals pre-filled from your Priority Predictor score. Adjust as needed.</div>
 
@@ -254,23 +261,6 @@
           </div>
         </div>
 
-        <div class="section-label">Exemptions <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.78rem;margin-left:.35rem">(max 3)</span></div>
-        <div class="exemption-grid" id="ex-grid">
-          <button class="ex-btn" data-key="heavy"   onclick="toggleEx(this)">Something heavy</button>
-          <button class="ex-btn" data-key="fast"    onclick="toggleEx(this)">Something fast</button>
-          <button class="ex-btn" data-key="sucks"   onclick="toggleEx(this)">Something that sucks</button>
-          <button class="ex-btn" data-key="fun"     onclick="toggleEx(this)">Something fun</button>
-          <button class="ex-btn" data-key="read"    onclick="toggleEx(this)">Read something</button>
-          <button class="ex-btn" data-key="reflect" onclick="toggleEx(this)">Reflect</button>
-          <button class="ex-btn" data-key="ask"     onclick="toggleEx(this)">Ask an expert</button>
-          <button class="ex-btn" data-key="cardio"  onclick="toggleEx(this)">Cardio</button>
-          <button class="ex-btn" data-key="control" onclick="toggleEx(this)">Full body control</button>
-          <button class="ex-btn" data-key="lateral" onclick="toggleEx(this)">Lateral movement</button>
-        </div>
-        <div class="ex-disclaimer" id="ex-disclaimer">
-          A complete snowsports instructor trains all three pillars. Volume is personal &mdash; completeness is not. Exemptions should be temporary.
-        </div>
-
         <div class="section-label">Session budget</div>
         <div class="budget-bars" id="budget-bars">
           <div class="budget-row">
@@ -290,8 +280,25 @@
           </div>
         </div>
 
+        <div class="section-label">Exemptions <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.78rem;margin-left:.35rem">(max 3)</span></div>
+        <div class="exemption-grid" id="ex-grid">
+          <button class="ex-btn" data-key="heavy"   onclick="toggleEx(this)">Something heavy</button>
+          <button class="ex-btn" data-key="fast"    onclick="toggleEx(this)">Something fast</button>
+          <button class="ex-btn" data-key="sucks"   onclick="toggleEx(this)">Something that sucks</button>
+          <button class="ex-btn" data-key="fun"     onclick="toggleEx(this)">Something fun</button>
+          <button class="ex-btn" data-key="read"    onclick="toggleEx(this)">Read something</button>
+          <button class="ex-btn" data-key="reflect" onclick="toggleEx(this)">Reflect</button>
+          <button class="ex-btn" data-key="ask"     onclick="toggleEx(this)">Ask an expert</button>
+          <button class="ex-btn" data-key="cardio"  onclick="toggleEx(this)">Cardio</button>
+          <button class="ex-btn" data-key="control" onclick="toggleEx(this)">Full body control</button>
+          <button class="ex-btn" data-key="lateral" onclick="toggleEx(this)">Lateral movement</button>
+        </div>
+        <div class="ex-disclaimer" id="ex-disclaimer">
+          A complete snowsports instructor trains all three pillars. Volume is personal &mdash; completeness is not. Exemptions should be temporary.
+        </div>
+
         <!-- ===== PHASE 2: MATRIX ===== -->
-        <div class="section-label">Training Matrix</div>
+        <div class="section-label" id="matrix">Training Matrix</div>
         <div class="matrix-wrap">
           <table class="matrix-table" id="matrix-table">
             <thead>
@@ -316,7 +323,7 @@
         </div>
 
         <!-- ===== PHASE 3: CALENDAR ===== -->
-        <div class="cal-section">
+        <div class="cal-section" id="schedule">
           <div class="section-label">Schedule</div>
 
           <div class="month-strip" id="month-strip">

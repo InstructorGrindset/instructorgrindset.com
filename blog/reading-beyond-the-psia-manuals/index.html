@@ -6,6 +6,7 @@
   <title>Reading Beyond the PSIA Manuals — Instructor Grindset</title>
   <meta name="description" content="The PSIA Manuals are the best source of technical understanding for ski instructors, but just as much can be learned from a good story." />
   <link rel="canonical" href="https://instructorgrindset.com/blog/reading-beyond-the-psia-manuals/" />
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -48,8 +49,8 @@
     }
     @media (max-width:960px){.content{width:min(94vw,48rem);margin:0 auto;padding-top:1.75rem}}
 
-    .back-link{display:inline-block;margin-bottom:1.5rem;font-size:.9rem;color:var(--muted)}
-    .back-link:hover{color:var(--ink)}
+    .back-link{display:inline-flex;align-items:center;gap:.35rem;margin-bottom:1.5rem;font-size:.875rem;color:var(--muted);border:1px solid var(--line);border-radius:.5rem;padding:.35rem .75rem;transition:color .15s,border-color .15s}
+    .back-link:hover{color:var(--ink);border-color:var(--muted);text-decoration:none}
 
     .post-meta{color:#8891a0;font-size:.85rem;margin:0 0 .75rem}
 
@@ -65,6 +66,7 @@
     .prose h2{
       font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:1.35rem;
       margin:2rem 0 .75rem;color:#fff;
+      border-left:3px solid var(--cta);padding-left:1rem;margin-left:-1rem;
     }
     .prose ul,.prose ol{margin:0 0 1.25rem;padding-left:1.5rem}
     .prose li{margin:.35rem 0}

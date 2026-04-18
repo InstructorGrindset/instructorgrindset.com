@@ -21,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <!-- Shared sidebar styles (cache-busted) -->
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
@@ -31,27 +32,6 @@
       --footer-h:52px;
       --content-shift:0px; --grid-gap:14px; --thumb-radius:.75rem;
     }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{
-      margin:0; color:var(--ink);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.55;
-      background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
-    }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
-    }
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-
-    /* Skip link */
-    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
-
-    /* Layout shell */
-    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
-    @media (max-width:960px){.page{grid-template-columns:1fr}}
     .main{padding:1.25rem}
     .content{
       width:min(1100px, calc(100vw - var(--sidebar) - 40px));
@@ -59,44 +39,27 @@
       margin-right:auto; padding-top:2.2rem;
     }
     @media (max-width:960px){ .content{ width:min(94vw, 1100px); margin:0 auto; padding-top:1.25rem } }
-
-    h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
-    h1{
-      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:0 0 .9rem;
-      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
-      text-shadow:0 0 22px rgba(var(--glow),.12);
-    }
     .muted{color:var(--muted)}
 
-    /* Video chrome (glow, no boxes) */
+    /* Video chrome */
     .vid{
       position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--thumb-radius); overflow:hidden; background:#000;
       box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
     }
+    .vid.featured{max-width:800px; margin:0 auto}
     iframe{width:100%;height:100%;border:0;display:block}
 
     /* Grids */
     .grid{display:grid; gap:var(--grid-gap)}
-    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:980px){ .three{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    .three{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (min-width:1200px){ .three{grid-template-columns:repeat(3,minmax(0,1fr))} }
     @media (max-width:640px){ .three{grid-template-columns:1fr} }
 
-    /* CTA */
-    .cta{
-      display:inline-block; padding:.8rem 1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0;
-      text-align:center; white-space:nowrap;
-    }
-    .row{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin:.6rem 0 1rem}
-    .row .cta{margin-left:auto}
+    /* Page header — centered vertical stack */
+    .yt-header{text-align:center; margin-bottom:1.5rem}
+    .yt-header h1{margin-bottom:.75rem}
 
-    .btn-row{display:grid;place-items:center;margin-top:2rem;margin-bottom:1rem}
-    .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
-
-    /* Footer */
-    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
-      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
-    .footer{color:var(--muted);text-align:center;margin:0}
-    @media (max-width:960px){ .footer-wrap{position:static;height:auto;padding:.75rem 0} }
+    .section-eyebrow{font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin-bottom:.35rem;text-align:center}
   </style>
 </head>
 <body>
@@ -126,28 +89,28 @@
     <!-- Main -->
     <main class="main" id="main">
       <div class="content">
-        <header class="row">
-          <h1 style="margin:0">YouTube Channel</h1>
-          <a class="cta" href="https://www.youtube.com/@InstructorGrindset?sub_confirmation=1" target="_blank" rel="noopener">Subscribe on YouTube</a>
+        <header class="yt-header">
+          <h1>YouTube Channel</h1>
+          <a class="btn btn-lg" href="https://www.youtube.com/@InstructorGrindset?sub_confirmation=1" target="_blank" rel="noopener">Subscribe on YouTube</a>
         </header>
 
         <!-- Latest Upload -->
-        <section class="stack" aria-labelledby="latest-title">
-          <h2 id="latest-title">Latest Upload</h2>
-          <div id="latest" class="vid" aria-live="polite">
+        <section aria-labelledby="latest-title" style="margin-bottom:1.75rem">
+          <h2 id="latest-title" style="text-align:center;margin-bottom:.75rem">Latest Upload</h2>
+          <div id="latest" class="vid featured" aria-live="polite">
             <!-- JS will inject the latest video iframe here -->
           </div>
         </section>
 
         <!-- Playlist grid -->
-        <section class="stack" style="margin-top:1.25rem" aria-labelledby="pl-title">
-          <h2 id="pl-title">Top Videos</h2>
+        <section style="margin-top:1.25rem" aria-labelledby="pl-title">
+          <h2 id="pl-title" style="text-align:center;margin-bottom:.75rem">Top Videos</h2>
           <div id="grid" class="grid three">
             <!-- JS will inject 9 playlist video iframes here -->
           </div>
         </section>
-        <div class="btn-row">
-          <a class="cta big" href="/blog">Read the Blog &rarr;</a>
+        <div class="btn-row" style="display:grid;place-items:center;margin-top:2rem;margin-bottom:1rem">
+          <a class="btn btn-lg" href="/blog">Read the Blog &rarr;</a>
         </div>
       </div>
     </main>

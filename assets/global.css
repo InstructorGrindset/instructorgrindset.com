@@ -1,0 +1,248 @@
+/* ===== Instructor Grindset — Global Design System ===== */
+
+:root {
+  /* Color tokens */
+  --bg: #0f1217;
+  --ink: #e7e9ee;
+  --muted: #cbd5e1;
+  --line: #2a3140;
+  --accent: #a6c8ff;
+  --cta: #c4892a;
+  --glow: 250,204,21;
+  --panel-bg: rgba(255,255,255,.03);
+  --sidebar: 0px;
+  --footer-h: 52px;
+
+  /* Surface layers */
+  --surface-1: rgba(255,255,255,.05);
+  --surface-2: rgba(255,255,255,.08);
+  --surface-3: rgba(255,255,255,.12);
+
+  /* Shadow tokens */
+  --shadow-glow: 0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
+  --shadow-card: 0 0 20px rgba(var(--glow),.08);
+
+  /* Spacing scale (4px base grid) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+
+  /* Typography scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.375rem;
+  --text-2xl:  clamp(1.5rem, 2.5vw, 2rem);
+  --text-3xl:  clamp(2.4rem, 5vw, 3.5rem);
+
+  /* Border radii */
+  --r-sm: 0.375rem;
+  --r-md: 0.625rem;
+  --r-lg: 0.875rem;
+  --r-xl: 1.25rem;
+
+  /* Transitions */
+  --ease: 0.18s ease;
+  --ease-slow: 0.35s ease;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+
+/* ── Base body ── */
+body {
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+  background: var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+@media (max-width: 960px) { body { background-attachment: scroll; } }
+
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background: radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
+  z-index: -1;
+}
+
+/* ── Custom fonts ── */
+@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+
+/* ── Links ── */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Focus system — visible amber ring on all interactive elements ── */
+*:focus-visible {
+  outline: 2px solid var(--cta);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ── Skip link ── */
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 1rem; top: 1rem; width: auto; height: auto; padding: .5rem .75rem; background: #000; z-index: 999; color: #fff; }
+
+/* ── Page shell ── */
+.page { display: grid; grid-template-columns: var(--sidebar) 1fr; min-height: 100vh; padding-bottom: var(--footer-h); }
+@media (max-width: 960px) { .page { grid-template-columns: 1fr; } }
+.main { padding: 1.25rem; }
+
+/* ── Footer ── */
+.footer-wrap {
+  position: fixed; left: var(--sidebar); right: 0; bottom: 0;
+  height: var(--footer-h); display: grid; place-items: center;
+  background: rgba(0,0,0,.25); border-top: 1px solid var(--line); backdrop-filter: blur(2px);
+}
+.footer { color: var(--muted); text-align: center; margin: 0; }
+@media (max-width: 960px) { .footer-wrap { position: static; height: auto; padding: .75rem 0; } }
+
+/* ── Headings ── */
+h1, h2, h3, h4 { font-family: "Rooftop", Inter, Arial, sans-serif; }
+h1 {
+  font-weight: 800; font-size: var(--text-3xl); line-height: 1.06;
+  margin: .25rem 0 .6rem; text-align: center;
+  background: linear-gradient(92deg, #fff, #eaeefc);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+h2 {
+  font-weight: 800; font-size: var(--text-2xl); line-height: 1.12;
+  background: linear-gradient(92deg, #fff, #eaeefc);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin-top: var(--sp-6); margin-bottom: var(--sp-4);
+}
+h3 { font-weight: 700; font-size: var(--text-xl); color: var(--ink); margin-top: var(--sp-4); margin-bottom: var(--sp-2); }
+h4 { font-weight: 600; font-size: var(--text-lg); color: var(--muted); margin-top: var(--sp-3); margin-bottom: var(--sp-2); }
+
+/* ── Unified button system ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px;
+  padding: 0.65rem 1.25rem;
+  background: var(--cta); color: #e6e7eb;
+  font-weight: 700; font-size: var(--text-base);
+  font-family: inherit;
+  border: none; border-radius: var(--r-md);
+  cursor: pointer; text-decoration: none;
+  transition: filter var(--ease), transform var(--ease);
+}
+.btn:hover { filter: brightness(1.08); text-decoration: none; }
+.btn:active { transform: scale(.98); }
+
+.btn-lg {
+  min-height: 52px; padding: 0.85rem 1.75rem; font-size: var(--text-lg);
+  box-shadow: var(--shadow-glow);
+}
+.btn-sm { min-height: 36px; padding: 0.4rem 0.9rem; font-size: var(--text-sm); }
+.btn-ghost {
+  background: transparent; border: 1.5px solid var(--cta); color: var(--cta);
+}
+.btn-ghost:hover { background: rgba(196,137,42,.1); filter: none; }
+.btn-block { display: flex; width: 100%; }
+
+/* ── Unified card system ── */
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--sp-6);
+  transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+.card:hover { border-color: rgba(var(--glow),.3); box-shadow: var(--shadow-card); }
+.card-lift:hover { transform: translateY(-2px); }
+.card-featured {
+  background: linear-gradient(135deg, rgba(196,137,42,.1), rgba(255,255,255,.04));
+  border-color: rgba(196,137,42,.4);
+  border-radius: var(--r-xl);
+  padding: var(--sp-8);
+}
+
+/* ── Section eyebrow label ── */
+.eyebrow {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--sp-2);
+}
+
+/* ── Section group label ── */
+.section-group-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: var(--sp-8) 0 var(--sp-4);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── Finder callout (reading list signpost) ── */
+.finder-callout {
+  display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3);
+  justify-content: space-between;
+  font-size: var(--text-sm); color: var(--muted);
+  background: rgba(196,137,42,.07);
+  border: 1px solid rgba(196,137,42,.3);
+  border-radius: var(--r-lg);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+.finder-callout strong { color: var(--ink); }
+.finder-callout a { color: var(--cta); font-weight: 600; white-space: nowrap; }
+.finder-callout a:hover { text-decoration: underline; }
+
+/* ── Phase/step navigation ── */
+.phase-nav {
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(15,18,23,.96);
+  backdrop-filter: blur(8px);
+  margin: 0 -1.25rem var(--sp-6);
+  padding: 0 1.25rem;
+}
+.phase-tab {
+  display: inline-block;
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--text-sm); font-weight: 600;
+  color: var(--muted); text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color var(--ease), border-color var(--ease);
+}
+.phase-tab:hover { color: var(--ink); text-decoration: none; }
+.phase-tab.active { color: var(--ink); border-bottom-color: var(--cta); }
+
+/* ── Step badge ── */
+.step-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.75rem; height: 1.75rem;
+  background: rgba(196,137,42,.18); border: 1px solid rgba(196,137,42,.4);
+  color: var(--cta);
+  font-size: var(--text-xs); font-weight: 800; font-family: "Rooftop", Inter, Arial, sans-serif;
+  border-radius: 50%;
+}
+
+/* ── Lede / subtitle ── */
+.lede {
+  text-align: center; color: var(--muted);
+  font-size: var(--text-base); line-height: 1.7;
+  max-width: 64ch; margin: var(--sp-2) auto var(--sp-8);
+}
+
+/* ── Btn row ── */
+.btn-row { display: grid; place-items: center; margin-top: var(--sp-8); margin-bottom: var(--sp-4); }
+
+/* ── Utility ── */
+@media (max-width: 400px) { .main { padding: .75rem .75rem 2.5rem; } }

@@ -6,6 +6,7 @@
   <title>Instructor Grindset • The Reading List</title>
   <meta name="description" content="25 books on skiing technique, instruction, history, and fitness — with a Book Finder to find the right read for you." />
   <link rel="canonical" href="https://instructorgrindset.com/reading-list" />
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
   <style>
@@ -15,6 +16,9 @@
       --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
       --panel-bg:rgba(255,255,255,.03);
       --panel-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      --surface-1:rgba(255,255,255,.05); --r-lg:0.875rem; --r-sm:0.375rem;
+      --text-sm:0.875rem; --text-base:1rem; --text-lg:1.125rem;
+      --sp-2:0.5rem; --sp-3:0.75rem; --sp-4:1rem; --sp-6:1.5rem; --sp-8:2rem;
     }
     *{box-sizing:border-box} html,body{height:100%}
     body{
@@ -55,19 +59,19 @@
       font-size:.95rem;font-family:inherit;
     }
     .rl-search::placeholder{color:var(--muted)}
-    .rl-search:focus{outline:none;border-color:var(--cta)}
+    .rl-search:focus{outline:2px solid var(--cta);outline-offset:2px;border-color:var(--cta)}
     .rl-count{white-space:nowrap;color:var(--muted);font-size:.88rem}
 
     /* ---- Filter pills ---- */
     .rl-filters{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.65rem}
     .rl-pill{
       padding:.28rem .75rem;border-radius:999px;border:1px solid var(--line);
-      background:transparent;color:var(--muted);font-size:.82rem;font-family:inherit;
+      background:transparent;color:var(--muted);font-size:var(--text-sm);font-family:inherit;
       cursor:pointer;transition:all .15s;
     }
     .rl-pill:hover{border-color:var(--muted);color:var(--ink)}
     .rl-pill.active{background:var(--cta);border-color:var(--cta);color:#e6e7eb}
-    .rl-filter-label{font-size:.75rem;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;align-self:center;margin-right:.25rem}
+    .rl-filter-label{font-size:var(--text-sm);color:var(--muted);letter-spacing:.4px;text-transform:uppercase;align-self:center;margin-right:.25rem}
 
     /* ---- Book grid ---- */
     .rl-grid{
@@ -81,19 +85,21 @@
     /* ---- Book card ---- */
     .book-card{
       display:flex;flex-direction:column;
-      background:var(--panel-bg);border:1px solid var(--line);border-radius:.8rem;
-      padding:1rem 1rem .85rem;
+      background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-lg);
+      padding:var(--sp-6);
+      transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
     }
+    .book-card:hover{border-color:rgba(250,204,21,.3);box-shadow:0 0 20px rgba(250,204,21,.08);transform:translateY(-2px)}
     .book-card-body{flex:1;margin-bottom:.75rem}
-    .book-title{font-size:.92rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.2rem}
-    .book-author{font-size:.8rem;color:var(--muted);margin-bottom:.5rem}
-    .book-desc{font-size:.82rem;color:var(--muted);line-height:1.5}
-    .book-reflection{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:.5rem;line-height:1.5}
+    .book-title{font-size:var(--text-base);font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.2rem}
+    .book-author{font-size:var(--text-sm);color:var(--muted);margin-bottom:.5rem}
+    .book-desc{font-size:var(--text-sm);color:var(--muted);line-height:1.5}
+    .book-reflection{font-size:var(--text-sm);color:var(--muted);font-style:italic;margin-top:.5rem;line-height:1.5}
     .book-youtube{font-size:.8rem;color:#5eead4;display:inline-block;margin-top:.4rem}
     .book-tags{display:flex;flex-wrap:wrap;gap:.35rem}
 
     /* ---- Tags ---- */
-    .tag{display:inline-block;padding:.18rem .55rem;border-radius:999px;font-size:.72rem;font-weight:500}
+    .tag{display:inline-block;padding:.25rem .6rem;border-radius:999px;font-size:.72rem;font-weight:500}
     .tag-pedagogy   {background:#E6F1FB;color:#0C447C}
     .tag-alpine     {background:#E1F5EE;color:#085041}
     .tag-moguls     {background:#FAEEDA;color:#633806}
@@ -136,9 +142,11 @@
     .finder-error{font-size:.88rem;color:#fca5a5;margin-top:.75rem;min-height:1.4rem}
     .finder-results{margin-top:1.25rem;display:flex;flex-direction:column;gap:.75rem}
     .finder-card{
-      background:var(--panel-bg);border:1px solid var(--line);border-radius:.8rem;
+      background:var(--surface-1);border:1px solid var(--line);border-radius:.8rem;
       padding:1rem 1rem .85rem;
+      transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
     }
+    .finder-card:hover{border-color:rgba(250,204,21,.3);box-shadow:0 0 20px rgba(250,204,21,.08);}
     .finder-card-title{font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
     .finder-card-author{font-size:.8rem;color:var(--muted);margin-bottom:.4rem}
     .finder-card-reason{font-size:.84rem;color:var(--muted);font-style:italic}
@@ -175,6 +183,11 @@
           <p class="lede">Ski technique, instruction, history, fitness, and travel &#8212; 25 books worth reading. Use the filters below to browse, or jump to the Book Finder to get a personalised recommendation.</p>
         </header>
 
+        <div class="finder-callout">
+          <span><strong>Not sure where to start?</strong> Answer 5 questions and get a personalised recommendation.</span>
+          <a href="#book-finder">Try the Book Finder &rarr;</a>
+        </div>
+
         <!-- ===== CATALOGUE ===== -->
         <div class="rl-search-row">
           <input class="rl-search" type="text" id="rl-search" placeholder="Search by title or author&hellip;" oninput="rlRender()">
@@ -208,8 +221,9 @@
         <div class="rl-grid" id="rl-grid"></div>
 
         <!-- ===== BOOK FINDER ===== -->
-        <hr class="rl-divider">
-        <div class="finder-label">Book Finder</div>
+        <hr class="rl-divider" id="book-finder">
+        <h2>Book Finder</h2>
+        <div class="finder-label">Answer a few questions to find your next read</div>
 
         <div class="finder-q">
           <div class="finder-q-text">What kind of skiing are you focused on?</div>

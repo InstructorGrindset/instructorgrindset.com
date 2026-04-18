@@ -7,6 +7,7 @@
   <meta name="description" content="Estimate your position on a typical ski school priority list based on employment status, certification level, credentials, and experience." />
   <link rel="canonical" href="https://instructorgrindset.com/priority-predictor" />
 
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
@@ -17,30 +18,12 @@
       --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
       --panel-bg:rgba(255,255,255,.03);
       --panel-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
+      --surface-1: rgba(255,255,255,.05);
+      --r-lg: 0.875rem; --r-xl: 1.25rem; --r-md: 0.625rem;
+      --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+      --sp-4: 1rem; --sp-6: 1.5rem; --sp-8: 2rem;
     }
 
-    *{box-sizing:border-box} html,body{height:100%}
-    body{
-      margin:0; color:var(--ink);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
-      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
-    }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
-    }
-
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
-
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
-
-    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
-    @media(max-width:960px){.page{grid-template-columns:1fr}}
     .main{padding:1.25rem}
     .content{
       width:var(--wrap-max);
@@ -49,18 +32,13 @@
     }
     @media(max-width:960px){.content{width:min(94vw,1100px);margin:0 auto}}
 
-    h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
-    h1{
-      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
-      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
-      text-shadow:0 0 22px rgba(var(--glow),.12);
-    }
     .lede{text-align:center;color:var(--muted);max-width:70ch;margin:.25rem auto 1.1rem}
 
-    .priority-predictor-wrapper{max-width:560px;margin:0 auto;padding:0 1rem}
+    .pp-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;max-width:900px;margin:0 auto}
+    @media(max-width:800px){.pp-layout{grid-template-columns:1fr}}
 
     .pp-form{
-      background:var(--panel-bg);
+      background:var(--surface-1);
       border:1px solid var(--line);
       border-radius:.8rem;
       padding:1.5rem;
@@ -87,7 +65,7 @@
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23cbd5e1' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
       background-repeat:no-repeat;background-position:right .75rem center;cursor:pointer;
     }
-    .pp-select:focus{outline:none;border-color:var(--cta)}
+    .pp-select:focus{outline:2px solid var(--cta);outline-offset:2px;border-color:var(--cta)}
 
     .pp-slider-row{display:flex;align-items:center;gap:.75rem}
     .pp-slider{flex:1;accent-color:var(--cta);cursor:pointer}
@@ -95,7 +73,7 @@
 
     /* Results */
     .pp-results{
-      margin-top:1rem;background:var(--panel-bg);border:1px solid var(--line);
+      margin-top:0;background:var(--surface-1);border:1px solid var(--line);
       border-radius:.8rem;padding:1.5rem;box-shadow:var(--panel-shadow);
     }
 
@@ -107,8 +85,8 @@
     .pp-percentile-label{font-size:1rem;color:var(--muted)}
 
     .pp-tier-badge{
-      display:inline-block;padding:.25rem .75rem;border-radius:999px;
-      font-size:.8rem;font-weight:600;letter-spacing:.3px;border:1px solid;margin-bottom:.85rem;
+      display:inline-block;padding:.4rem 1rem;border-radius:999px;
+      font-size:var(--text-sm);font-weight:600;letter-spacing:.3px;border:1px solid;margin-bottom:.85rem;
     }
     .pp-tier-badge.tier-top  {color:#fcd34d;border-color:#fcd34d;background:rgba(252,211,77,.08)}
     .pp-tier-badge.tier-high {color:#86efac;border-color:#86efac;background:rgba(134,239,172,.08)}
@@ -126,17 +104,12 @@
     .pp-bar-meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
     .pp-bar-name{font-size:.88rem;color:var(--ink)}
     .pp-bar-score{font-size:.82rem;color:var(--muted);font-weight:600}
-    .pp-bar-track{height:6px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+    .pp-bar-track{height:8px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}
     .pp-bar-fill{height:100%;border-radius:999px;background:var(--cta);width:0%;transition:width .5s cubic-bezier(.4,0,.2,1)}
 
     .pp-disclaimer{font-size:.82rem;color:var(--muted);text-align:center;max-width:560px;margin:1.5rem auto 0;line-height:1.6}
-    .pp-plan-cta{display:block;width:100%;text-align:center;margin-top:1.25rem;padding:.75rem 1.25rem;background:var(--cta);color:#1a1208;font-weight:700;font-size:.9rem;border-radius:.4rem;text-decoration:none;transition:opacity .15s}
+    .pp-plan-cta{display:block;width:100%;text-align:center;margin-top:1.25rem;padding:.75rem 1.25rem;background:var(--cta);color:#e6e7eb;font-weight:700;font-size:.9rem;border-radius:.4rem;text-decoration:none;transition:opacity .15s}
     .pp-plan-cta:hover{opacity:.85;text-decoration:none}
-
-    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
-      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
-    @media(max-width:960px){.footer-wrap{position:static;height:auto;padding:.75rem 0}}
-    .footer{color:var(--muted);text-align:center;margin:0}
   </style>
 </head>
 <body>
@@ -161,7 +134,7 @@
           <p class="lede">Most ski schools assign lessons based on a priority list. Your position on that list determines whether you get the advanced private lesson or get sent home. This tool estimates where you would land based on the factors that actually drive priority: employment status, certification level, additional credentials, and years of experience. It uses 2022 PSIA-AASI national membership data for certification scoring.</p>
         </header>
 
-        <div class="priority-predictor-wrapper">
+        <div class="pp-layout">
 
           <form class="pp-form" id="pp-form" onsubmit="return false">
 
