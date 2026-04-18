@@ -7,35 +7,25 @@
   <meta name="description" content="Model your earning and spending expectations before the season starts. Includes estimated taxes by state for W-2 snowsports instructors." />
   <link rel="canonical" href="https://instructorgrindset.com/income-calculator" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=12">
 
   <style>
-    :root{
-      --bg:#0f1217; --ink:#e7e9ee; --muted:#9aa3b0; --line:#2a3140;
-      --accent:#a6c8ff; --cta:#c4892a; --sidebar:0px;
+:root{
       --pos:#1D9E75; --neg:#A32D2D; --tax:#BA7517;
       --surface:#161c26; --surface2:#1c2333;
     }
-    *{box-sizing:border-box} html,body{height:100%;margin:0}
     body{
       color:var(--ink);
       font-family:Inter,system-ui,-apple-system,sans-serif;
       background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
       line-height:1.5; font-size:14px;
     }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%,rgba(0,0,0,.15),rgba(0,0,0,.4) 60%,rgba(0,0,0,.6)); z-index:-1;
-    }
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
 
     a{color:var(--accent);text-decoration:none}
-    .skip-link{position:absolute;left:-9999px} .skip-link:focus{left:1rem;top:1rem;padding:.5rem .75rem;background:#000;z-index:999;color:#fff}
 
     /* ── Page shell ── */
-    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh}
-    @media(max-width:960px){.page{grid-template-columns:1fr}}
+
     .main{padding:1.25rem 1.25rem 3rem;min-width:0}
 
     /* ── App header ── */

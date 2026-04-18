@@ -9,46 +9,26 @@
 
   <!-- Fonts + shared sidebar styles (kept at v=4 per your working setup) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
   <style>
-    :root{
-      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar: 0px; --footer-h:52px;
+:root{
       --content-shift:0px; --wrap-max: min(1100px, calc(100vw - var(--sidebar) - 40px));
-      --panel-bg: rgba(255,255,255,.03);
       --panel-shadow: 0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
       --thumb-radius:.75rem;
       --grid-gap:14px;
     }
-
-    *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0; color:var(--ink);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
       background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
     }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
-    }
 
     /* Rooftop headings (fallback if absent) */
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
-
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
     a.cta:hover{text-decoration:none}
 
-    /* Skip link */
-    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
-
     /* Layout */
-    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:var(--footer-h)}
-    @media (max-width:960px){.page{grid-template-columns:1fr}}
-    .main{padding:1.25rem}
     .content{
       width:var(--wrap-max);
       margin-left:max(14px, calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
@@ -116,7 +96,7 @@
     /* Footer */
     .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
       display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
-    @media (max-width:960px){ .footer-wrap{ position:static; height:auto; padding:.75rem 0 } }
+
     .footer{ color:var(--muted); text-align:center; margin:0 }
   </style>
 </head>

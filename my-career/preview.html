@@ -6,56 +6,27 @@
   <title>PREVIEW — My Story</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar: 0px; --footer-h:52px;
+:root{
       --rail:3px; --rail-color:#c4892a;
       --box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
       --gap:22px; --col-gap:28px; --content-shift:0px;
       --content-max: min(1200px, calc(100vw - var(--sidebar) - 100px));
       --rail-top: 36px; --rail-bottom: 36px;
     }
-
-    *{ box-sizing:border-box } html,body{ height:100% }
     body{
       margin:0; color:var(--ink);
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height:1.55;
       background:var(--bg);
     }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55)); z-index:-1;
-    }
-
-    a{ color:var(--accent); text-decoration:none } a:hover{ text-decoration:underline }
 
     /* Shell */
-    .page{ display:grid; grid-template-columns:var(--sidebar) 1fr; min-height:100vh; padding-bottom:var(--footer-h) }
-    .main{ padding:1.25rem }
 
     /* Sidebar */
-    .side{
-      padding:1.25rem; border-right:1px solid var(--line);
-      background:rgba(255,255,255,.02); color:var(--ink);
-    }
-    .brand{ display:flex; align-items:center; gap:.75rem; margin:.25rem 0 1.25rem; }
-    .brand .logo-wrap{
-      width:64px; height:64px; border-radius:50%; overflow:hidden;
-      display:grid; place-items:center;
-      background:#2a3140;
-    }
     .brand .name, .brand .name a, .brand .name a:visited{
       font-weight:800; line-height:1.02; letter-spacing:.7px;
       font-size:1.7rem; color:var(--ink); text-decoration:none;
     }
-    .nav h4{ margin:1rem 0 .5rem; color:var(--muted); font-weight:800; letter-spacing:.6px; }
-    .nav ul{ list-style:none; padding:0; margin:0 0 1rem; }
-    .nav li{ margin:.35rem 0; }
-    .nav a, .nav a:link, .nav a:visited{
-      display:block; padding:.45rem .5rem; border:1px solid transparent; color:var(--ink); text-decoration:none;
-    }
-    .nav a:hover{ background:rgba(255,255,255,.04); border-color:var(--line); }
 
     /* Content */
     .content{
@@ -111,11 +82,6 @@
     }
 
     /* Footer */
-    .footer-wrap{
-      position:fixed; left:var(--sidebar); right:0; bottom:0; height:var(--footer-h);
-      display:grid; place-items:center; background:rgba(0,0,0,.25); border-top:1px solid var(--line); backdrop-filter:blur(2px)
-    }
-    .footer{ color:var(--muted); text-align:center; margin:0 }
 
     /* Preview banner */
     .preview-banner{

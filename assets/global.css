@@ -1,0 +1,112 @@
+/* ── Shared foundation ── loaded by every page before sidebar.css ── */
+
+:root {
+  --bg:       #0f1217;
+  --ink:      #e7e9ee;
+  --muted:    #cbd5e1;
+  --line:     #2a3140;
+  --accent:   #a6c8ff;
+  --cta:      #c4892a;
+  --glow:     250,204,21;
+  --panel-bg: rgba(255,255,255,.03);
+  --sidebar:  0px;
+  --footer-h: 52px;
+  --shadow-glow: 0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
+}
+
+/* ── Rooftop custom font ── */
+@font-face {
+  font-family: "Rooftop";
+  src: url("/fonts/Rooftop-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rooftop";
+  src: url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box }
+html, body { height: 100%; margin: 0 }
+
+body {
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  background: var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
+}
+@media (max-width: 960px) { body { background-attachment: scroll } }
+
+/* Overlay darkens the bg image */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
+  z-index: -1;
+}
+
+/* ── Links ── */
+a { color: var(--accent); text-decoration: none }
+a:hover { text-decoration: underline }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px }
+
+/* ── Skip link (a11y) ── */
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden }
+.skip-link:focus {
+  left: 1rem; top: 1rem; width: auto; height: auto;
+  padding: .5rem .75rem; background: #000; z-index: 999; color: #fff;
+}
+
+/* ── Page shell ── */
+.page {
+  display: grid;
+  grid-template-columns: var(--sidebar) 1fr;
+  min-height: 100vh;
+  padding-bottom: var(--footer-h);
+}
+@media (max-width: 960px) { .page { grid-template-columns: 1fr } }
+
+.main { padding: 1.25rem }
+
+/* ── Fixed footer ── */
+.footer-wrap {
+  position: fixed;
+  left: var(--sidebar);
+  right: 0;
+  bottom: 0;
+  height: var(--footer-h);
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.25);
+  border-top: 1px solid var(--line);
+  backdrop-filter: blur(2px);
+}
+.footer { color: var(--muted); text-align: center; margin: 0 }
+@media (max-width: 960px) { .footer-wrap { position: static; height: auto; padding: .75rem 0 } }
+
+/* ── Shared button row ── */
+.btn-row { display: grid; place-items: center; margin-top: 2rem; margin-bottom: 1rem }
+
+/* ── CTA buttons ── */
+.cta {
+  display: inline-block;
+  padding: .9rem 1.1rem;
+  background: var(--cta);
+  color: #e6e7eb;
+  font-weight: 800;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter .15s;
+}
+.cta:hover { filter: brightness(1.06); text-decoration: none }
+.cta:active { transform: scale(.99) }
+.cta.big {
+  padding: 1.05rem 1.4rem;
+  box-shadow: var(--shadow-glow);
+}
