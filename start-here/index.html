@@ -16,9 +16,7 @@
   <meta property="og:url" content="https://instructorgrindset.com/start-here">
   <meta property="og:type" content="website">
   <style>
-    :root{
-      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --sidebar:0px; --footer-h:52px; --panel-bg:rgba(255,255,255,.03);
+:root{
       --wrap-max:min(760px,calc(100vw - 40px));
       --r-xl: 1.25rem;
       --r-lg: 0.875rem;
@@ -76,7 +74,7 @@
     <script>
       (function(){
         var t=document.getElementById("sidebar-placeholder");
-        fetch("/partials/sidebar.html?v=11")
+        fetch("/partials/sidebar.html?v=12")
           .then(function(r){return r.text()})
           .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
           .catch(function(){t.innerHTML="<div style=\"padding:1rem;color:#fca5a5\">Navigation failed to load.</div>"});

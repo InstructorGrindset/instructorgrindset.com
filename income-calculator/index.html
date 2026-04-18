@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Grindset &bull; Season Income Calculator</title>
+  <meta name="description" content="Model your earning and spending expectations before the season starts. Includes estimated taxes by state for W-2 snowsports instructors." />
+  <link rel="canonical" href="https://instructorgrindset.com/income-calculator" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/global.css?v=1">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=12">
+
+  <style>
+:root{
+      --pos:#1D9E75; --neg:#A32D2D; --tax:#BA7517;
+      --surface:#161c26; --surface2:#1c2333;
+    }
+    body{
+      color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,sans-serif;
+      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
+      line-height:1.5; font-size:14px;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+
+    /* ── Page shell ── */
+
+    .main{padding:1.25rem 1.25rem 3rem;min-width:0}
+
+    /* ── App header ── */
+    .app-header{
+      text-align:center;padding:.75rem 0 1.25rem;
+      border-bottom:1px solid var(--line);margin-bottom:1.25rem;
+    }
+    .app-header h1{
+      font-family:"Rooftop",Inter,sans-serif;font-weight:800;
+      font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.1;margin:0 0 .25rem;
+      background:linear-gradient(92deg,#fff,#c8d8f8);-webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .app-header p{margin:0;font-size:.82rem;color:var(--muted)}
+
+    /* ── Two-column app layout ── */
+    .app-layout{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:1.25rem;
+      align-items:start;
+      max-width:1160px;
+      margin:0 auto;
+    }
+    @media(max-width:860px){.app-layout{grid-template-columns:1fr}}
+
+    /* ── Inputs column ── */
+    .inputs-col{}
+    .input-section{
+      background:var(--surface);border:1px solid var(--line);border-radius:.6rem;
+      margin-bottom:.75rem;overflow:hidden;
+    }
+    .input-section-head{
+      display:flex;align-items:center;gap:.5rem;
+      padding:.6rem .9rem;border-bottom:1px solid var(--line);
+      font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);
+    }
+    .input-section-head .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+    .dot-setup{background:#378ADD}
+    .dot-pay{background:#1D9E75}
+    .dot-exp{background:#A32D2D}
+    .input-body{padding:.75rem .9rem}
+
+    .field{margin-bottom:.75rem}
+    .field:last-child{margin-bottom:0}
+    .field-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
+    .field-name{font-size:.8rem;font-weight:600;color:var(--ink)}
+    .field-val{
+      font-size:.8rem;font-weight:700;color:var(--cta);
+      background:rgba(196,137,42,.12);border-radius:.25rem;
+      padding:.1rem .4rem;min-width:3.5rem;text-align:right;
+    }
+
+    input[type=range]{
+      width:100%;height:3px;appearance:none;-webkit-appearance:none;
+      background:var(--line);border-radius:999px;cursor:pointer;display:block;
+    }
+    input[type=range]::-webkit-slider-thumb{
+      -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+      background:var(--cta);border:2px solid var(--surface);cursor:pointer;
+    }
+    input[type=range]::-moz-range-thumb{
+      width:14px;height:14px;border-radius:50%;
+      background:var(--cta);border:2px solid var(--surface);cursor:pointer;border:none;
+    }
+    select{
+      width:100%;padding:.45rem .65rem;background:var(--surface2);border:1px solid var(--line);
+      border-radius:.35rem;color:var(--ink);font-size:.82rem;font-family:inherit;cursor:pointer;
+    }
+    select:focus{outline:none;border-color:var(--cta)}
+
+    /* ── Results column ── */
+    .results-col{
+      position:sticky;top:1rem;
+      max-height:calc(100vh - 2rem);
+      overflow-y:auto;
+      scrollbar-width:thin;
+      scrollbar-color:var(--line) transparent;
+    }
+    .results-col::-webkit-scrollbar{width:4px}
+    .results-col::-webkit-scrollbar-track{background:transparent}
+    .results-col::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px}
+    @media(max-width:860px){
+      .results-col{position:static;max-height:none;overflow-y:visible}
+    }
+
+    /* ── Mobile jump-to-results pill ── */
+    .jump-results{
+      display:none;width:100%;margin:.75rem 0;padding:.65rem 1rem;
+      background:var(--surface);border:1px solid var(--line);border-radius:.4rem;
+      color:var(--muted);font-size:.85rem;font-weight:600;font-family:inherit;
+      cursor:pointer;text-align:center;transition:border-color .15s;
+    }
+    .jump-results:hover{border-color:var(--cta);color:var(--ink)}
+    @media(max-width:860px){.jump-results{display:block}}
+
+    /* ── Net hero ── */
+    .net-hero{
+      background:var(--surface);border:1px solid var(--line);border-radius:.6rem;
+      padding:1rem 1.1rem;margin-bottom:.75rem;
+    }
+    .net-hero-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:.2rem}
+    .net-hero-val{font-size:2.4rem;font-weight:800;line-height:1;font-family:"Rooftop",Inter,sans-serif}
+    .net-hero-sub{font-size:.78rem;color:var(--muted);margin-top:.35rem}
+    .c-pos{color:var(--pos)} .c-neg{color:var(--neg)} .c-tax{color:var(--tax)} .c-neu{color:var(--ink)}
+
+    /* ── Metrics grid ── */
+    .metrics{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem}
+    .metric{background:var(--surface);border:1px solid var(--line);border-radius:.5rem;padding:.7rem .8rem}
+    .metric-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:.2rem}
+    .metric-val{font-size:1.15rem;font-weight:800;line-height:1.1}
+    .metric-sub{font-size:.68rem;color:var(--muted);margin-top:.15rem}
+
+    /* ── Result panels ── */
+    .result-panel{
+      background:var(--surface);border:1px solid var(--line);border-radius:.6rem;
+      margin-bottom:.75rem;overflow:hidden;
+    }
+    .result-panel-head{
+      padding:.55rem .9rem;border-bottom:1px solid var(--line);
+      font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);
+    }
+    .result-panel-body{padding:.75rem .9rem}
+
+    /* ── Breakdown ── */
+    .breakdown{margin:0;padding:0;list-style:none}
+    .breakdown li{
+      display:flex;justify-content:space-between;align-items:baseline;
+      padding:.28rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.8rem;
+    }
+    .breakdown li:last-child{border-bottom:none}
+    .bl{color:var(--muted);flex:1;padding-right:.5rem}
+    .bl.bold{font-weight:700;color:var(--ink)}
+    .bl.italic{font-style:italic;color:var(--muted)}
+    .ba{font-weight:700;white-space:nowrap}
+    .breakdown .divider{border-top:1px solid var(--line);padding-top:.4rem;margin-top:.15rem}
+    .breakdown .total-row{border-top:1px solid rgba(255,255,255,.15);padding-top:.4rem;margin-top:.15rem}
+
+    /* ── Bar chart ── */
+    .bar-list{list-style:none;margin:0;padding:0}
+    .bar-item{margin-bottom:.6rem}
+    .bar-item:last-child{margin-bottom:0}
+    .bar-meta{display:flex;justify-content:space-between;margin-bottom:.2rem}
+    .bar-lbl{font-size:.75rem;font-weight:600;color:var(--muted)}
+    .bar-pct{font-size:.72rem;color:var(--muted)}
+    .bar-track{height:6px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden}
+    .bar-fill{height:100%;border-radius:999px;transition:width .25s}
+
+    /* ── Verdict ── */
+    .verdict{border-radius:.5rem;padding:.8rem 1rem;font-size:.82rem;line-height:1.6;margin-bottom:.75rem}
+    .verdict-strong{background:#0d2e22;border:1px solid #1D9E75;color:#5ecba1}
+    .verdict-workable,.verdict-tight{background:#2a1e08;border:1px solid #BA7517;color:#e0a840}
+    .verdict-negative{background:#2a0d0d;border:1px solid #A32D2D;color:#e07070}
+    .verdict-label{font-weight:700;margin-bottom:.2rem;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px}
+
+    /* ── State note ── */
+    .state-note{
+      background:#2a1e08;border:1px solid rgba(186,117,23,.4);border-radius:.5rem;
+      padding:.65rem .85rem;font-size:.78rem;line-height:1.55;color:#c9952e;margin-bottom:.75rem;
+    }
+
+    /* ── Disclaimer ── */
+    .disclaimer{font-size:.7rem;color:var(--muted);line-height:1.5;padding:.6rem .9rem;opacity:.7}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="page">
+    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <script>
+      (function(){
+        var t=document.getElementById("sidebar-placeholder");
+        fetch("/partials/sidebar.html?v=12")
+          .then(function(r){return r.text()})
+          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
+          .catch(function(){t.innerHTML="<div style='padding:1rem;color:#fca5a5'>Navigation failed to load.</div>"});
+      })();
+    </script>
+
+    <main class="main" id="main">
+
+      <div class="app-header">
+        <h1>Season Income Calculator</h1>
+        <p>Move the sliders &mdash; your numbers update instantly</p>
+      </div>
+
+      <div class="app-layout">
+
+        <!-- ══ INPUTS ══ -->
+        <div class="inputs-col">
+
+          <div class="input-section">
+            <div class="input-section-head"><span class="dot dot-setup"></span>Your Season</div>
+            <div class="input-body">
+              <div class="field">
+                <div class="field-row"><span class="field-name">Where you work</span></div>
+                <select id="state-select" onchange="calc()">
+                  <option value="0" data-name="Washington">Washington — 0%</option>
+                  <option value="0" data-name="Wyoming">Wyoming — 0%</option>
+                  <option value="0" data-name="Nevada">Nevada — 0%</option>
+                  <option value="0" data-name="Alaska">Alaska — 0%</option>
+                  <option value="0" data-name="New Hampshire">New Hampshire — 0%</option>
+                  <option value="0.044" data-name="Colorado" selected>Colorado — 4.4%</option>
+                  <option value="0.0465" data-name="Utah">Utah — 4.65%</option>
+                  <option value="0.058" data-name="Idaho">Idaho — 5.8%</option>
+                  <option value="0.066" data-name="Vermont">Vermont — 6.6%</option>
+                  <option value="0.0675" data-name="Montana">Montana — 6.75%</option>
+                  <option value="0.0685" data-name="New York">New York — 6.85%</option>
+                  <option value="0.0875" data-name="Oregon">Oregon — 8.75%</option>
+                  <option value="0.093" data-name="California">California — 9.3%</option>
+                </select>
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">How long is your season</span><span class="field-val" id="v-weeks">18 wks</span></div>
+                <input type="range" id="s-weeks" min="10" max="26" step="1" value="18" oninput="sv('v-weeks',this.value,'wks');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">Work days per week</span><span class="field-val" id="v-dpw">5 days</span></div>
+                <input type="range" id="s-dpw" min="1" max="7" step="1" value="5" oninput="sv('v-dpw',this.value,'days');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">Teaching hours per day</span><span class="field-val" id="v-hpd">7 hrs</span></div>
+                <input type="range" id="s-hpd" min="4" max="10" step="1" value="7" oninput="sv('v-hpd',this.value,'hrs');calc()">
+              </div>
+            </div>
+          </div>
+
+          <div class="input-section">
+            <div class="input-section-head"><span class="dot dot-pay"></span>How You Get Paid</div>
+            <div class="input-body">
+              <div class="field">
+                <div class="field-row"><span class="field-name">Group lesson pay</span><span class="field-val" id="v-grate">$22/hr</span></div>
+                <input type="range" id="s-grate" min="12" max="55" step="1" value="22" oninput="sv('v-grate',this.value,'$/hr');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">Private lesson pay</span><span class="field-val" id="v-prate">$38/hr</span></div>
+                <input type="range" id="s-prate" min="18" max="90" step="1" value="38" oninput="sv('v-prate',this.value,'$/hr');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">What % of your days are privates</span><span class="field-val" id="v-ppct">30%</span></div>
+                <input type="range" id="s-ppct" min="0" max="100" step="5" value="30" oninput="sv('v-ppct',this.value,'%');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">How long is each private</span><span class="field-val" id="v-plen">2 hrs</span></div>
+                <input type="range" id="s-plen" min="1" max="8" step="1" value="2" oninput="sv('v-plen',this.value,'hrs');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">Average tips per day</span><span class="field-val" id="v-tips">$25</span></div>
+                <input type="range" id="s-tips" min="0" max="1000" step="5" value="25" oninput="sv('v-tips',this.value,'$');calc()">
+              </div>
+            </div>
+          </div>
+
+          <div class="input-section">
+            <div class="input-section-head"><span class="dot dot-exp"></span>What You Spend</div>
+            <div class="input-body">
+              <div class="field">
+                <div class="field-row"><span class="field-name">Rent per month</span><span class="field-val" id="v-hous">$150/mo</span></div>
+                <input type="range" id="s-hous" min="0" max="4000" step="50" value="150" oninput="sv('v-hous',this.value,'$/mo');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">Food, going out, everything else</span><span class="field-val" id="v-life">$800/mo</span></div>
+                <input type="range" id="s-life" min="200" max="4000" step="50" value="800" oninput="sv('v-life',this.value,'$/mo');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">Getting there &amp; back</span><span class="field-val" id="v-trans">$400</span></div>
+                <input type="range" id="s-trans" min="0" max="3000" step="50" value="400" oninput="sv('v-trans',this.value,'$');calc()">
+              </div>
+              <div class="field">
+                <div class="field-row"><span class="field-name">Gear &amp; equipment</span><span class="field-val" id="v-gear">$300</span></div>
+                <input type="range" id="s-gear" min="0" max="2000" step="50" value="300" oninput="sv('v-gear',this.value,'$');calc()">
+              </div>
+            </div>
+          </div>
+
+        </div><!-- .inputs-col -->
+
+        <button class="jump-results" onclick="document.getElementById('results-top').scrollIntoView({behavior:'smooth'})">See your numbers ↓</button>
+
+        <!-- ══ RESULTS ══ -->
+        <div class="results-col" id="results-top">
+
+          <!-- Net hero -->
+          <div class="net-hero">
+            <div class="net-hero-label">Money in your pocket at the end</div>
+            <div class="net-hero-val" id="m-net">—</div>
+            <div class="net-hero-sub" id="m-weekly-sub">—</div>
+          </div>
+
+          <!-- Key metrics -->
+          <div class="metrics">
+            <div class="metric">
+              <div class="metric-label">Total you earn</div>
+              <div class="metric-val c-pos" id="m-gross">—</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Taken out for taxes</div>
+              <div class="metric-val c-tax" id="m-tax">—</div>
+              <div class="metric-sub" id="m-taxrate">—</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">After taxes</div>
+              <div class="metric-val c-neu" id="m-aftertax">—</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Total you spend</div>
+              <div class="metric-val c-neg" id="m-exp">—</div>
+            </div>
+          </div>
+
+          <!-- Verdict -->
+          <div class="verdict" id="verdict">
+            <div class="verdict-label" id="verdict-label"></div>
+            <div id="verdict-body"></div>
+          </div>
+
+          <!-- Bar chart -->
+          <div class="result-panel">
+            <div class="result-panel-head">Where it all goes</div>
+            <div class="result-panel-body">
+              <ul class="bar-list" id="bar-chart"></ul>
+            </div>
+          </div>
+
+          <!-- Income breakdown -->
+          <div class="result-panel">
+            <div class="result-panel-head">How your pay adds up</div>
+            <div class="result-panel-body">
+              <ul class="breakdown" id="income-breakdown"></ul>
+            </div>
+          </div>
+
+          <!-- Expense breakdown -->
+          <div class="result-panel">
+            <div class="result-panel-head">What you spend it on</div>
+            <div class="result-panel-body">
+              <ul class="breakdown" id="expense-breakdown"></ul>
+            </div>
+          </div>
+
+          <!-- State note -->
+          <div class="state-note" id="state-note"></div>
+
+          <!-- Disclaimer -->
+          <div class="disclaimer">These are estimates, not guarantees. Numbers assume you&rsquo;re a regular employee (W-2) with no extra deductions. Tips might actually be taxable depending on how you report them &mdash; talk to a tax person if you&rsquo;re unsure.</div>
+
+        </div><!-- .results-col -->
+      </div><!-- .app-layout -->
+    </main>
+  </div>
+
+  <script>
+    function $(id){ return document.getElementById(id) }
+    function fmt(n){ return '$' + Math.round(n).toLocaleString() }
+    function fmtPct(n){ return (n*100).toFixed(1)+'%' }
+
+    function sv(id, val, unit) {
+      var n = parseFloat(val), el = $(id);
+      if (unit==='$')      el.textContent = '$'+Math.round(n).toLocaleString();
+      else if (unit==='$/hr') el.textContent = '$'+n+'/hr';
+      else if (unit==='$/mo') el.textContent = '$'+Math.round(n).toLocaleString()+'/mo';
+      else if (unit==='%')    el.textContent = n+'%';
+      else                    el.textContent = n+' '+unit;
+    }
+
+    function federalTax(g) {
+      if (g<=11600)  return g*.10;
+      if (g<=47150)  return 1160+(g-11600)*.12;
+      if (g<=100525) return 5426+(g-47150)*.22;
+      if (g<=191950) return 17168+(g-100525)*.24;
+      return 39110+(g-191950)*.32;
+    }
+
+    function calc() {
+      var sel = $('state-select'), opt = sel.options[sel.selectedIndex];
+      var stateRate = parseFloat(opt.value), stateName = opt.getAttribute('data-name');
+
+      var weeks = +$('s-weeks').value, dpw = +$('s-dpw').value, hpd = +$('s-hpd').value;
+      var gRate = +$('s-grate').value, pRate = +$('s-prate').value;
+      var pPct = +$('s-ppct').value, pLen = +$('s-plen').value, tips = +$('s-tips').value;
+      var housing = +$('s-hous').value, life = +$('s-life').value;
+      var trans = +$('s-trans').value, gear = +$('s-gear').value;
+
+      var totalDays = weeks * dpw;
+      var privDays  = Math.round(totalDays * pPct / 100);
+      var groupDays = totalDays - privDays;
+      var privHrs   = privDays * pLen;
+      var groupHrs  = groupDays * hpd;
+
+      var groupInc  = groupHrs * gRate;
+      var privInc   = privHrs * pRate;
+      var tipInc    = totalDays * tips;
+      var taxable   = groupInc + privInc;
+      var gross     = taxable + tipInc;
+
+      var fedTax    = federalTax(taxable);
+      var stateTax  = taxable * stateRate;
+      var fica      = taxable * 0.0765;
+      var totalTax  = fedTax + stateTax + fica;
+      var effRate   = taxable > 0 ? totalTax / taxable : 0;
+      var afterTax  = gross - totalTax;
+
+      var months    = weeks / 4.33;
+      var housingCost = housing * months;
+      var lifeCost  = life * months;
+      var totalExp  = housingCost + lifeCost + trans + gear;
+
+      var net       = afterTax - totalExp;
+      var weeklyNet = net / weeks;
+
+      // Net hero
+      var netEl = $('m-net');
+      netEl.textContent = fmt(net);
+      netEl.className = 'net-hero-val ' + (net >= 0 ? 'c-pos' : 'c-neg');
+      $('m-weekly-sub').textContent = fmt(weeklyNet) + ' per week \u00b7 ' + weeks + '-week season';
+
+      // Metrics
+      $('m-gross').textContent    = fmt(gross);
+      $('m-tax').textContent      = fmt(totalTax);
+      $('m-taxrate').textContent  = fmtPct(effRate) + ' effective rate';
+      $('m-aftertax').textContent = fmt(afterTax);
+      $('m-exp').textContent      = fmt(totalExp);
+
+      // Verdict
+      var ratio = gross > 0 ? net / gross : 0;
+      var vEl = $('verdict');
+      var vLabel = $('verdict-label'), vBody = $('verdict-body');
+      vEl.className = 'verdict';
+      if (ratio > 0.35) {
+        vEl.classList.add('verdict-strong');
+        vLabel.textContent = 'Strong season';
+        vBody.textContent = 'You are keeping more than 35% of gross after taxes and expenses. Housing cost control is the primary driver of results like this.';
+      } else if (ratio > 0.1) {
+        vEl.classList.add('verdict-workable');
+        vLabel.textContent = 'Workable season';
+        vBody.textContent = 'You are covering costs and carrying something forward, but the margin is thin. Private lesson volume and housing are the two levers with the most impact.';
+      } else if (ratio > 0) {
+        vEl.classList.add('verdict-tight');
+        vLabel.textContent = 'Tight season';
+        vBody.textContent = 'Taxes and expenses are consuming almost everything you earn. One more private day per week or lower housing changes this picture significantly.';
+      } else {
+        vEl.classList.add('verdict-negative');
+        vLabel.textContent = 'Losing money';
+        vBody.textContent = 'This setup loses money after taxes and expenses. More days, higher rates, more privates, or lower housing \u2014 something needs to change before the season starts.';
+      }
+
+      // Bar chart
+      var bars = [
+        {label:'Federal tax',   amt:fedTax,          color:'#BA7517'},
+        {label:'State & FICA',  amt:stateTax+fica,   color:'#EF9F27'},
+        {label:'Housing',       amt:housingCost,     color:'#A32D2D'},
+        {label:'Life expenses', amt:lifeCost,        color:'#378ADD'},
+        {label:'Transport',     amt:trans,           color:'#6B7280'},
+        {label:'Gear',          amt:gear,            color:'#4B5563'},
+      ];
+      var maxAmt = Math.max.apply(null, bars.map(function(b){return b.amt}));
+      var bc = $('bar-chart'); bc.innerHTML = '';
+      bars.forEach(function(b) {
+        var pct = gross > 0 ? b.amt/gross*100 : 0;
+        var w   = maxAmt > 0 ? b.amt/maxAmt*100 : 0;
+        var li  = document.createElement('li');
+        li.className = 'bar-item';
+        li.innerHTML = '<div class="bar-meta"><span class="bar-lbl">'+b.label+'</span><span class="bar-pct">'+pct.toFixed(1)+'%</span></div>'
+          + '<div class="bar-track"><div class="bar-fill" style="width:'+w.toFixed(1)+'%;background:'+b.color+'"></div></div>';
+        bc.appendChild(li);
+      });
+
+      // Income breakdown
+      var ib = $('income-breakdown'); ib.innerHTML = '';
+      function iRow(lbl, amt, ac, mod, italic) {
+        var li = document.createElement('li');
+        if(mod) li.className = mod;
+        li.innerHTML = '<span class="bl'+(mod?(' bold'):( italic?' italic':''))+'">'+lbl+'</span>'
+          +'<span class="ba '+ac+'">'+amt+'</span>';
+        ib.appendChild(li);
+      }
+      iRow('Group lessons ('+groupHrs+' hrs @ $'+gRate+'/hr)', fmt(groupInc), 'c-pos');
+      iRow('Private lessons ('+privHrs+' hrs @ $'+pRate+'/hr)', fmt(privInc), 'c-pos');
+      iRow('Government taxes this amount', fmt(taxable), 'c-neu', 'divider', true);
+      iRow('Federal income tax', '&minus;'+fmt(fedTax), 'c-tax');
+      iRow(''+stateName+' state tax ('+(stateRate*100).toFixed(2).replace(/\.?0+$/,'')+'%)', '&minus;'+fmt(stateTax), 'c-tax');
+      iRow('Social Security &amp; Medicare (7.65%)', '&minus;'+fmt(fica), 'c-tax');
+      iRow('What you keep after tax', fmt(taxable-totalTax), 'c-neu', 'divider');
+      iRow('Tips ('+totalDays+' days &times; $'+tips+') &mdash; cash, not taxed here', fmt(tipInc), 'c-pos');
+      iRow('Total take-home', fmt(afterTax), 'c-pos', 'total-row');
+
+      // Expense breakdown
+      var eb = $('expense-breakdown'); eb.innerHTML = '';
+      function eRow(lbl, amt, mod) {
+        var li = document.createElement('li');
+        if(mod) li.className = mod;
+        li.innerHTML = '<span class="bl'+(mod?' bold':'')+'">'+lbl+'</span>'
+          +'<span class="ba c-neg">&minus;'+Math.round(amt).toLocaleString()+'</span>';
+        eb.appendChild(li);
+      }
+      eRow('Rent ($'+housing.toLocaleString()+'/mo &times; '+months.toFixed(1)+' months)', housingCost);
+      eRow('Food, going out &amp; everything else ($'+life.toLocaleString()+'/mo)', lifeCost);
+      eRow('Getting there &amp; back', trans);
+      eRow('Gear &amp; equipment', gear);
+      eRow('Total spent', totalExp, 'total-row');
+
+      // State note
+      var sn = $('state-note');
+      if (stateRate === 0) {
+        sn.textContent = stateName+' has no state income tax. At this income level that saves approximately '+fmt(taxable*0.093)+' compared to California.';
+      } else if (stateName === 'California') {
+        sn.textContent = 'California has the highest rate among ski states. Working in Colorado instead would save approximately '+fmt(Math.max(0, stateTax - taxable*0.044))+' in state taxes.';
+      } else {
+        sn.textContent = 'Your effective total tax rate is '+fmtPct(effRate)+'. Tips are modeled as untaxed in this calculator.';
+      }
+    }
+
+    calc();
+  </script>
+</body>
+</html>

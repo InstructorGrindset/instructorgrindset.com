@@ -9,14 +9,12 @@
 
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
 
   <style>
-    :root{
-      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar:0px; --footer-h:52px;
+:root{
       --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
-      --panel-bg:rgba(255,255,255,.03);
       --panel-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
       --surface-1: rgba(255,255,255,.05);
       --r-lg: 0.875rem; --r-xl: 1.25rem; --r-md: 0.625rem;
@@ -120,7 +118,7 @@
     <script>
       (function(){
         var t = document.getElementById('sidebar-placeholder');
-        fetch('/partials/sidebar.html?v=11')
+        fetch('/partials/sidebar.html?v=12')
           .then(function(r){return r.text()})
           .then(function(h){var d=document.createElement('div');d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
           .catch(function(){t.innerHTML='<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'});

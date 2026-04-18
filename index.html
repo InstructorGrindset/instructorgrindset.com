@@ -33,10 +33,7 @@
   </script>
 
   <style>
-    :root{
-      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar: 0px; --panel-bg:rgba(255,255,255,.03);
-      --footer-h:52px;
+:root{
 
       --content-shift:0px;
       --hero-w: min(900px, calc((100vw - var(--sidebar)) * 0.6));
@@ -53,20 +50,11 @@
     @media (max-width:960px){
       body{background-attachment: scroll;}
     }
-
-    .side{padding:1.25rem;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
-    .brand{display:flex;align-items:center;gap:.75rem;margin:.25rem 0 1.25rem}
-    .brand .logo-wrap{width:64px;height:64px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
-      -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 70%)}
+    a:focus-visible,.cta:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
     .brand .logo-wrap img{
       width:120%;height:120%;object-fit:cover;
       aspect-ratio:1/1;
     }
-    .brand .name{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;line-height:1.02;letter-spacing:.7px;font-size:1.7rem}
-    .nav h4{margin:1rem 0 .5rem;color:var(--muted);font-weight:800;letter-spacing:.6px;font-family:"Rooftop",Inter,Arial,sans-serif}
-    .nav ul{list-style:none;margin:0 0 1rem;padding:0} .nav li{margin:.35rem 0}
-    .nav a{display:block;padding:.45rem .5rem;border:1px solid transparent}
-    .nav a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
     .main{padding:1.25rem;position:relative}
 
     .content{
@@ -148,25 +136,10 @@
       margin:0;
     }
 
-    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
-      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
-    .footer{color:var(--muted);text-align:center;margin:0}
-
     @media (max-width:1280px){
       :root{ --content-shift:0px; }
     }
-    @media (max-width:960px){
-      .page{grid-template-columns:1fr}
-      .footer-wrap{position:static;height:auto;padding:.75rem 0}
-      .content{width:min(92vw, 48rem); margin: 0 auto; padding-top:2rem;}
-      :root{
-        --hero-offset-top:8px;
-        --story-offset-top:14px;
-        --button-offset-top:10px;
-      }
-      .lead{max-width:60ch}
-      .cta-row{justify-content:center}
-    }
+
     @media (max-width:640px){
       .content{width:min(94vw, 40rem)}
       .cta-row{flex-direction:column;align-items:stretch}
@@ -174,7 +147,6 @@
     }
     @media (max-width:380px){
       .content{width:92vw}
-      .brand .name{font-size:1.2rem}
     }
   </style>
 </head>
@@ -189,7 +161,7 @@
 <script>
   (function(){
     const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=11')  // bump ?v= number when you edit the partial to bust cache
+    fetch('/partials/sidebar.html?v=12')  // bump ?v= number when you edit the partial to bust cache
       .then(r => r.text())
       .then(html => {
         const tmp = document.createElement('div');

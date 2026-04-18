@@ -10,33 +10,17 @@
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
   <style>
-    :root{
-      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar:0px; --footer-h:52px;
+:root{
       --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
-      --panel-bg:rgba(255,255,255,.03);
       --fit-color:#1D9E75; --fit-bg:#E1F5EE; --fit-text:#085041;
       --study-color:#378ADD; --study-bg:#E6F1FB; --study-text:#0C447C;
       --cross-color:#BA7517; --cross-bg:#FAEEDA; --cross-text:#633806;
     }
-    *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0; color:var(--ink);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
       background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
     }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%,rgba(0,0,0,.15),rgba(0,0,0,.35) 60%,rgba(0,0,0,.55)); z-index:-1;
-    }
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
-    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;padding-bottom:calc(var(--footer-h) + 60px)}
-    @media(max-width:960px){.page{grid-template-columns:1fr}}
-    .main{padding:1.25rem}
     .content{
       width:var(--wrap-max);
       margin-left:max(14px,calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
@@ -157,8 +141,6 @@
       background:transparent;border:none;color:inherit;font-size:inherit;font-family:inherit;
       padding:0;outline:none;cursor:text;min-width:30px;
     }
-
-    .btn-row{display:grid;place-items:center}
     .cta{display:inline-block;padding:.9rem 1.1rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;text-decoration:none}
     .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
     .cta:hover{filter:brightness(1.06)}
@@ -202,7 +184,6 @@
     .budget-ct{font-size:.78rem;font-weight:600;color:var(--muted);min-width:52px;text-align:right;white-space:nowrap}
     .prefill-note{font-size:.82rem;color:var(--cta);border:1px solid rgba(196,137,42,.3);border-radius:.4rem;padding:.5rem .8rem;margin-bottom:1rem}
 
-    .footer-wrap{display:none}
   </style>
 </head>
 <body>
@@ -212,7 +193,7 @@
     <script>
       (function(){
         var t=document.getElementById("sidebar-placeholder");
-        fetch("/partials/sidebar.html?v=11")
+        fetch("/partials/sidebar.html?v=12")
           .then(function(r){return r.text()})
           .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
           .catch(function(){t.innerHTML="<div style=\"padding:1rem;color:#fca5a5\">Navigation failed to load.</div>"});
@@ -637,6 +618,30 @@
     if(dest==='pool')state.months[mIdx].unscheduled.push(tag);
     else wk.scheduled[dest].push(tag);
     renderCal();
+    saveState();
+  }
+
+  /* ---- localStorage persistence ---- */
+  function saveState(){
+    try{
+      var s=Object.assign({},state,{exemptions:[...state.exemptions]});
+      localStorage.setItem('ig-offseason-v1',JSON.stringify(s));
+    }catch(e){}
+  }
+  function loadState(){
+    try{
+      var raw=localStorage.getItem('ig-offseason-v1');
+      if(!raw)return false;
+      var s=JSON.parse(raw);
+      state.sessions=s.sessions||4;
+      state.goals=Object.assign({skiing:3,teaching:3,cert:3,physical:3},s.goals);
+      state.exemptions=new Set(s.exemptions||[]);
+      state.currentWeek=s.currentWeek||0;
+      state.tagText=Object.assign({},placeholders,s.tagText);
+      if(s.weeks)state.weeks=s.weeks;
+      if(s.months)state.months=s.months;
+      return true;
+    }catch(e){return false;}
   }
 
   /* ---- Mobile tap fallback ---- */
@@ -682,6 +687,7 @@
     document.getElementById('vol-display').textContent=v;
     regenerateFutureMonths();
     renderMatrix();renderCal();renderBudgetBars();
+    saveState();
   }
   function onGoal(key,v){
     state.goals[key]=parseInt(v);
@@ -689,6 +695,7 @@
     document.getElementById(ids[key]).textContent=v;
     regenerateFutureMonths();
     renderMatrix();renderCal();renderBudgetBars();
+    saveState();
   }
   function toggleEx(btn){
     var key=btn.getAttribute('data-key');
@@ -703,11 +710,12 @@
     }
     document.getElementById('ex-disclaimer').classList.toggle('show',state.exemptions.size>0);
     renderMatrix();renderCal();renderBudgetBars();
+    saveState();
   }
   function editTag(key,val){
     state.tagText[key]=val;
-    // update all inputs for same key in current week's rendered tags
     document.querySelectorAll('.act-tag[data-key="'+key+'"] .tag-edit').forEach(function(inp){inp.value=val;inp.style.width=(val.length*7+8)+'px';});
+    saveState();
   }
 
   /* ---- Week navigation ---- */
@@ -758,6 +766,7 @@
   }
   function startOver(){
     if(!confirm('This will clear your entire plan. Are you sure?'))return;
+    localStorage.removeItem('ig-offseason-v1');
     state.sessions=4;
     state.goals={skiing:3,teaching:3,cert:3,physical:3};
     state.exemptions=new Set();
@@ -780,6 +789,24 @@
 
   /* ---- Init ---- */
   (function(){
+    // Restore from localStorage if available (URL params override saved state)
+    var restored=loadState();
+    if(restored){
+      document.getElementById('vol-slider').value=state.sessions;
+      document.getElementById('vol-display').textContent=state.sessions;
+      var gIds={skiing:'g-ski',teaching:'g-teach',cert:'g-cert',physical:'g-phys'};
+      var gDIds={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
+      Object.keys(state.goals).forEach(function(k){
+        document.getElementById(gIds[k]).value=state.goals[k];
+        document.getElementById(gDIds[k]).textContent=state.goals[k];
+      });
+      state.exemptions.forEach(function(key){
+        var btn=document.querySelector('.ex-btn[data-key="'+key+'"]');
+        if(btn)btn.classList.add('active');
+      });
+      if(state.exemptions.size>0)document.getElementById('ex-disclaimer').classList.add('show');
+    }
+
     var p=new URLSearchParams(window.location.search);
     if(p.has('cert')||p.has('ft')||p.has('exp')){
       var cert=Math.min(3,Math.max(0,parseInt(p.get('cert')||'1')));

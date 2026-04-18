@@ -52,6 +52,10 @@
   --ease-slow: 0.35s ease;
 }
 
+/* ── Custom fonts ── */
+@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
@@ -71,10 +75,6 @@ body::before {
   background: radial-gradient(70% 60% at 50% 35%, rgba(0,0,0,.15), rgba(0,0,0,.35) 60%, rgba(0,0,0,.55));
   z-index: -1;
 }
-
-/* ── Custom fonts ── */
-@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
 
 /* ── Links ── */
 a { color: var(--accent); text-decoration: none; }
@@ -147,6 +147,25 @@ h4 { font-weight: 600; font-size: var(--text-lg); color: var(--muted); margin-to
 }
 .btn-ghost:hover { background: rgba(196,137,42,.1); filter: none; }
 .btn-block { display: flex; width: 100%; }
+
+/* ── Legacy CTA buttons (backward compat) ── */
+.cta {
+  display: inline-block;
+  padding: .9rem 1.1rem;
+  background: var(--cta);
+  color: #e6e7eb;
+  font-weight: 800;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter .15s;
+}
+.cta:hover { filter: brightness(1.06); text-decoration: none; }
+.cta:active { transform: scale(.99); }
+.cta.big {
+  padding: 1.05rem 1.4rem;
+  box-shadow: var(--shadow-glow);
+}
 
 /* ── Unified card system ── */
 .card {

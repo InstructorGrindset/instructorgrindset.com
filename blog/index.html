@@ -12,10 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --glow:250,204,21; --sidebar:0px; --panel-bg:rgba(255,255,255,.03);
-      --footer-h:52px;
+:root{
       --content-shift:40px;
       --maxw: min(900px, calc(100vw - var(--sidebar) - 40px));
       --surface-1: rgba(255,255,255,.05);
@@ -67,7 +64,7 @@
     <script>
       (function(){
         const target = document.getElementById('sidebar-placeholder');
-        fetch('/partials/sidebar.html?v=11')
+        fetch('/partials/sidebar.html?v=12')
           .then(r => r.text())
           .then(html => {
             const tmp = document.createElement('div');
