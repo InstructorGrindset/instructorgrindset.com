@@ -613,6 +613,30 @@
     if(dest==='pool')state.months[mIdx].unscheduled.push(tag);
     else wk.scheduled[dest].push(tag);
     renderCal();
+    saveState();
+  }
+
+  /* ---- localStorage persistence ---- */
+  function saveState(){
+    try{
+      var s=Object.assign({},state,{exemptions:[...state.exemptions]});
+      localStorage.setItem('ig-offseason-v1',JSON.stringify(s));
+    }catch(e){}
+  }
+  function loadState(){
+    try{
+      var raw=localStorage.getItem('ig-offseason-v1');
+      if(!raw)return false;
+      var s=JSON.parse(raw);
+      state.sessions=s.sessions||4;
+      state.goals=Object.assign({skiing:3,teaching:3,cert:3,physical:3},s.goals);
+      state.exemptions=new Set(s.exemptions||[]);
+      state.currentWeek=s.currentWeek||0;
+      state.tagText=Object.assign({},placeholders,s.tagText);
+      if(s.weeks)state.weeks=s.weeks;
+      if(s.months)state.months=s.months;
+      return true;
+    }catch(e){return false;}
   }
 
   /* ---- Mobile tap fallback ---- */
@@ -658,6 +682,7 @@
     document.getElementById('vol-display').textContent=v;
     regenerateFutureMonths();
     renderMatrix();renderCal();renderBudgetBars();
+    saveState();
   }
   function onGoal(key,v){
     state.goals[key]=parseInt(v);
@@ -665,6 +690,7 @@
     document.getElementById(ids[key]).textContent=v;
     regenerateFutureMonths();
     renderMatrix();renderCal();renderBudgetBars();
+    saveState();
   }
   function toggleEx(btn){
     var key=btn.getAttribute('data-key');
@@ -679,11 +705,12 @@
     }
     document.getElementById('ex-disclaimer').classList.toggle('show',state.exemptions.size>0);
     renderMatrix();renderCal();renderBudgetBars();
+    saveState();
   }
   function editTag(key,val){
     state.tagText[key]=val;
-    // update all inputs for same key in current week's rendered tags
     document.querySelectorAll('.act-tag[data-key="'+key+'"] .tag-edit').forEach(function(inp){inp.value=val;inp.style.width=(val.length*7+8)+'px';});
+    saveState();
   }
 
   /* ---- Week navigation ---- */
@@ -734,6 +761,7 @@
   }
   function startOver(){
     if(!confirm('This will clear your entire plan. Are you sure?'))return;
+    localStorage.removeItem('ig-offseason-v1');
     state.sessions=4;
     state.goals={skiing:3,teaching:3,cert:3,physical:3};
     state.exemptions=new Set();
@@ -756,6 +784,24 @@
 
   /* ---- Init ---- */
   (function(){
+    // Restore from localStorage if available (URL params override saved state)
+    var restored=loadState();
+    if(restored){
+      document.getElementById('vol-slider').value=state.sessions;
+      document.getElementById('vol-display').textContent=state.sessions;
+      var gIds={skiing:'g-ski',teaching:'g-teach',cert:'g-cert',physical:'g-phys'};
+      var gDIds={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
+      Object.keys(state.goals).forEach(function(k){
+        document.getElementById(gIds[k]).value=state.goals[k];
+        document.getElementById(gDIds[k]).textContent=state.goals[k];
+      });
+      state.exemptions.forEach(function(key){
+        var btn=document.querySelector('.ex-btn[data-key="'+key+'"]');
+        if(btn)btn.classList.add('active');
+      });
+      if(state.exemptions.size>0)document.getElementById('ex-disclaimer').classList.add('show');
+    }
+
     var p=new URLSearchParams(window.location.search);
     if(p.has('cert')||p.has('ft')||p.has('exp')){
       var cert=Math.min(3,Math.max(0,parseInt(p.get('cert')||'1')));
