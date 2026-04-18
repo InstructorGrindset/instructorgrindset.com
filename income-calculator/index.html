@@ -121,6 +121,16 @@
       .results-col{position:static;max-height:none;overflow-y:visible}
     }
 
+    /* ── Mobile jump-to-results pill ── */
+    .jump-results{
+      display:none;width:100%;margin:.75rem 0;padding:.65rem 1rem;
+      background:var(--surface);border:1px solid var(--line);border-radius:.4rem;
+      color:var(--muted);font-size:.85rem;font-weight:600;font-family:inherit;
+      cursor:pointer;text-align:center;transition:border-color .15s;
+    }
+    .jump-results:hover{border-color:var(--cta);color:var(--ink)}
+    @media(max-width:860px){.jump-results{display:block}}
+
     /* ── Net hero ── */
     .net-hero{
       background:var(--surface);border:1px solid var(--line);border-radius:.6rem;
@@ -302,8 +312,10 @@
 
         </div><!-- .inputs-col -->
 
+        <button class="jump-results" onclick="document.getElementById('results-top').scrollIntoView({behavior:'smooth'})">See your numbers ↓</button>
+
         <!-- ══ RESULTS ══ -->
-        <div class="results-col">
+        <div class="results-col" id="results-top">
 
           <!-- Net hero -->
           <div class="net-hero">
