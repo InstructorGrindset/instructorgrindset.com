@@ -6,6 +6,7 @@
   <title>Instructor Grindset • Start Here</title>
   <meta name="description" content="The goal of the Instructor Grindset service is to educate and assist snowsports instructors looking to develop their skills, body and career at a higher intensity than the traditional certification pathways mandate." />
   <link rel="canonical" href="https://instructorgrindset.com/start-here" />
+  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=11">
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,27 +16,15 @@
   <meta property="og:url" content="https://instructorgrindset.com/start-here">
   <meta property="og:type" content="website">
   <style>
-    :root{
-      --bg:#0f1217; --ink:#e7e9ee; --muted:#cbd5e1; --line:#2a3140; --accent:#a6c8ff;
-      --cta:#c4892a; --sidebar:0px; --footer-h:52px; --panel-bg:rgba(255,255,255,.03);
+:root{
       --wrap-max:min(760px,calc(100vw - 40px));
     }
-    *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0; color:var(--ink);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.65;
       background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
     }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:radial-gradient(70% 60% at 50% 35%,rgba(0,0,0,.15),rgba(0,0,0,.35) 60%,rgba(0,0,0,.55)); z-index:-1;
-    }
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-    @font-face{font-family:"Rooftop";src:url("/fonts/Rooftop-ExtraBold.woff2") format("woff2");font-weight:800;font-display:swap}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    .skip-link{position:absolute;left:-9999px} .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#000;z-index:999}
-    .page{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh}
-    @media(max-width:960px){.page{grid-template-columns:1fr}}
+
     .main{padding:1.25rem 1.25rem 4rem}
     .content{width:var(--wrap-max);margin:1.25rem auto 0}
     h1{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
