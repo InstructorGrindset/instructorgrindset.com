@@ -103,59 +103,56 @@
     .detail-desc{font-size:.85rem;color:var(--muted);margin-bottom:.3rem;line-height:1.55}
     .detail-timing{font-size:.82rem;color:var(--muted);font-style:italic}
 
-    /* --- Calendar --- */
-    .cal-section{margin-top:1.5rem}
-    .month-strip{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.65rem}
-    .month-btn{
-      padding:.28rem .7rem;border-radius:999px;border:1px solid var(--line);
-      background:transparent;color:var(--muted);font-size:.82rem;font-family:inherit;cursor:pointer;transition:all .15s;
-    }
-    .month-btn:hover{border-color:var(--muted);color:var(--ink)}
-    .month-btn.active-p1{background:var(--phase1-color);border-color:var(--phase1-color);color:#fff}
-    .month-btn.active-p2{background:var(--phase2-color);border-color:var(--phase2-color);color:#fff}
-    .month-btn.active-p3{background:var(--phase3-color);border-color:var(--phase3-color);color:#fff}
-    .week-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.85rem}
-    .week-nav-btn{
-      background:transparent;border:1px solid var(--line);border-radius:.4rem;color:var(--muted);
-      padding:.3rem .8rem;font-family:inherit;font-size:.88rem;cursor:pointer;
-    }
-    .week-nav-btn:hover{color:var(--ink);border-color:var(--muted)}
-    .week-title{font-size:.88rem;font-weight:600;color:var(--ink);text-align:center;flex:1}
-    .week-subtitle{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:.75rem}
-    .day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.5rem;margin-bottom:.75rem}
-    @media(max-width:600px){.day-grid{grid-template-columns:repeat(3,1fr)}}
-    .day-col{border:1px solid var(--line);border-radius:.6rem;padding:.5rem;min-height:80px;
-      background:rgba(255,255,255,.02);transition:background .1s,border-color .1s}
-    .day-col.drag-over{background:rgba(255,255,255,.07);border-color:var(--cta)}
-    .day-col.tap-target{border-color:var(--fit-color)}
-    .day-name{font-size:.72rem;font-weight:600;letter-spacing:.4px;text-transform:uppercase;
-      color:var(--muted);margin-bottom:.4rem;text-align:center}
-    .pool-area{
-      border:1px solid var(--line);border-radius:.6rem;padding:.65rem .75rem;
-      background:rgba(255,255,255,.02);min-height:44px;transition:background .1s,border-color .1s;
-      display:flex;flex-wrap:wrap;gap:.4rem;align-items:flex-start;
-    }
-    .pool-area.drag-over{background:rgba(255,255,255,.07);border-color:var(--cta)}
-    .pool-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);
-      font-weight:600;margin-bottom:.4rem}
-    .overlap-note{font-size:.82rem;color:var(--muted);font-style:italic;margin-top:.5rem;display:none}
-    .overlap-note.show{display:block}
-
-    /* --- Activity tags --- */
-    .act-tag{
-      display:inline-flex;align-items:center;gap:.3rem;padding:.22rem .6rem;border-radius:999px;
-      font-size:.78rem;font-weight:500;cursor:grab;user-select:none;position:relative;
-    }
-    .act-tag.selected{outline:2px solid var(--ink);outline-offset:2px}
-    .act-tag.exempted-placed{opacity:.5;cursor:default}
-    .act-tag[draggable=true]:active{cursor:grabbing}
-    .act-tag.fit{background:var(--fit-bg);color:var(--fit-text)}
-    .act-tag.study{background:var(--study-bg);color:var(--study-text)}
-    .act-tag.cross{background:var(--cross-bg);color:var(--cross-text)}
-    .tag-edit{
-      background:transparent;border:none;color:inherit;font-size:inherit;font-family:inherit;
-      padding:0;outline:none;cursor:text;min-width:30px;
-    }
+    /* --- Phase template scheduler --- */
+    .phase-sched{margin-top:1.5rem}
+    .phase-sched-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
+    .psched-tab{flex:1;min-width:140px;display:flex;flex-direction:column;align-items:center;gap:.2rem;
+      padding:.65rem .75rem;background:transparent;border:1px solid var(--line);border-radius:.6rem;
+      cursor:pointer;transition:all .2s;font-family:inherit;font-size:.85rem;color:var(--muted)}
+    .psched-tab:hover{border-color:var(--muted);color:var(--ink)}
+    .psched-tab.active-p1{border-color:var(--phase1-color);background:rgba(138,116,224,.1);color:var(--ink)}
+    .psched-tab.active-p2{border-color:var(--phase2-color);background:rgba(38,176,122,.1);color:var(--ink)}
+    .psched-tab.active-p3{border-color:var(--phase3-color);background:rgba(224,96,32,.1);color:var(--ink)}
+    .psched-phase-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .psched-phase-dot.p1{background:var(--phase1-color)}
+    .psched-phase-dot.p2{background:var(--phase2-color)}
+    .psched-phase-dot.p3{background:var(--phase3-color)}
+    .psched-weeks{font-size:.72rem;color:var(--muted);font-weight:400}
+    .psched-panel{background:var(--panel-bg);border:1px solid var(--line);border-radius:.8rem;padding:1.25rem}
+    .asgn-row{display:flex;align-items:center;gap:.75rem;padding:.5rem .25rem;
+      border-bottom:1px solid var(--line);flex-wrap:wrap}
+    .asgn-row:last-of-type{border-bottom:none}
+    .asgn-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .asgn-dot.fit{background:var(--fit-color)} .asgn-dot.study{background:var(--study-color)} .asgn-dot.cross{background:var(--cross-color)}
+    .asgn-name{flex:1;font-size:.88rem;min-width:120px}
+    .asgn-freq{font-size:.75rem;color:var(--muted);min-width:24px;flex-shrink:0}
+    .asgn-days{display:flex;gap:.2rem;flex-shrink:0}
+    .day-pill{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);
+      background:transparent;color:var(--muted);font-size:.68rem;font-weight:600;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;
+      transition:background .15s,border-color .15s,color .15s}
+    .day-pill:hover{border-color:var(--muted);color:var(--ink)}
+    .day-pill.assigned.fit{background:var(--fit-color);border-color:var(--fit-color);color:#fff}
+    .day-pill.assigned.study{background:var(--study-color);border-color:var(--study-color);color:#fff}
+    .day-pill.assigned.cross{background:var(--cross-color);border-color:var(--cross-color);color:#fff}
+    .asgn-status{font-size:.75rem;color:var(--muted);min-width:80px;flex-shrink:0}
+    .asgn-occasional{font-size:.72rem;font-style:italic;color:var(--muted);width:100%;padding-left:1.5rem;margin-top:-.2rem}
+    .week-preview{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line)}
+    .wkp-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-bottom:.5rem}
+    .wkp-row{display:flex;gap:.75rem;padding:.2rem 0;font-size:.82rem}
+    .wkp-day{font-weight:600;color:var(--ink);min-width:32px}
+    .wkp-acts{color:var(--muted)}
+    .act-chip{display:inline-block;margin-right:.3rem;font-size:.78rem}
+    .act-chip.fit{color:var(--fit-color)} .act-chip.study{color:var(--study-color)} .act-chip.cross{color:var(--cross-color)}
+    .psched-apply-row{display:flex;align-items:center;justify-content:space-between;
+      margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line);flex-wrap:wrap;gap:.75rem}
+    .psched-progress{font-size:.82rem;color:var(--muted)}
+    .psched-apply-btn{padding:.65rem 1.25rem;background:var(--cta);color:#e6e7eb;font-weight:700;
+      font-size:.9rem;font-family:inherit;border:0;border-radius:.4rem;cursor:pointer;transition:opacity .2s}
+    .psched-apply-btn:disabled{opacity:.4;cursor:not-allowed}
+    .psched-apply-btn.applied{background:#2a3140;border:1px solid var(--line);color:var(--muted);cursor:default}
+    .tab-status{font-size:.68rem;margin-top:.1rem}
+    .tab-status.applied{color:var(--phase2-color)}
     .cta{display:inline-block;padding:.9rem 1.1rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;text-decoration:none}
     .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
     .cta:hover{filter:brightness(1.06)}
@@ -218,7 +215,7 @@
       <div class="content">
         <header>
           <h1>Offseason Plan Builder</h1>
-          <p class="lede">Configure your training volume and goals. Drag activities into your 26-week calendar. Export to Google Sheets.</p>
+          <p class="lede">Configure your training volume and goals. Assign activities to days for each phase. Export your 26-week plan to Google Sheets.</p>
         </header>
 
         <nav class="phase-nav" aria-label="Plan sections">
@@ -324,63 +321,27 @@
           <div class="detail-timing" id="dp-timing"></div>
         </div>
 
-        <!-- ===== PHASE 3: CALENDAR ===== -->
-        <div class="cal-section" id="schedule">
+        <!-- ===== PHASE 3: SCHEDULE ===== -->
+        <div class="phase-sched" id="schedule">
           <div class="section-label">Schedule</div>
-
-          <div class="month-strip" id="month-strip">
-            <button class="month-btn" data-m="0" onclick="jumpMonth(0)">May</button>
-            <button class="month-btn" data-m="1" onclick="jumpMonth(1)">Jun</button>
-            <button class="month-btn" data-m="2" onclick="jumpMonth(2)">Jul</button>
-            <button class="month-btn" data-m="3" onclick="jumpMonth(3)">Aug</button>
-            <button class="month-btn" data-m="4" onclick="jumpMonth(4)">Sep</button>
-            <button class="month-btn" data-m="5" onclick="jumpMonth(5)">Oct</button>
-            <button class="month-btn" data-m="6" onclick="jumpMonth(6)">Nov</button>
+          <div class="phase-sched-tabs">
+            <button class="psched-tab psched-tab-p1" data-phase="0" onclick="switchPhase(0)">
+              <span class="psched-phase-dot p1"></span>
+              Phase 1: Orient
+              <span class="psched-weeks">8 weeks · May–Jun</span>
+            </button>
+            <button class="psched-tab psched-tab-p2" data-phase="1" onclick="switchPhase(1)">
+              <span class="psched-phase-dot p2"></span>
+              Phase 2: Build
+              <span class="psched-weeks">12 weeks · Jul–Sep</span>
+            </button>
+            <button class="psched-tab psched-tab-p3" data-phase="2" onclick="switchPhase(2)">
+              <span class="psched-phase-dot p3"></span>
+              Phase 3: Sharpen
+              <span class="psched-weeks">6 weeks · Oct–Nov</span>
+            </button>
           </div>
-          <div class="phase-legend">
-            <span class="phase-pip p1"></span><span>Phase 1: Orient (May–Jun)</span>
-            <span class="phase-pip p2"></span><span>Phase 2: Build (Jul–Sep)</span>
-            <span class="phase-pip p3"></span><span>Phase 3: Sharpen (Oct–Nov)</span>
-          </div>
-
-          <div class="week-nav">
-            <button class="week-nav-btn" onclick="stepWeek(-1)">&larr;</button>
-            <div>
-              <div class="week-title" id="week-title">Week 1 of 26</div>
-            </div>
-            <button class="week-nav-btn" onclick="stepWeek(1)">&rarr;</button>
-          </div>
-          <div class="week-subtitle" id="week-subtitle"></div>
-
-          <div class="day-grid" id="day-grid">
-            <div class="day-col" id="dc-mon"   data-day="mon"     ondragover="dOver(event)" ondrop="dDrop(event,'mon')"    onclick="tapPlace('mon')">
-              <div class="day-name">Mon</div>
-            </div>
-            <div class="day-col" id="dc-tue"   data-day="tue"     ondragover="dOver(event)" ondrop="dDrop(event,'tue')"    onclick="tapPlace('tue')">
-              <div class="day-name">Tue</div>
-            </div>
-            <div class="day-col" id="dc-wed"   data-day="wed"     ondragover="dOver(event)" ondrop="dDrop(event,'wed')"    onclick="tapPlace('wed')">
-              <div class="day-name">Wed</div>
-            </div>
-            <div class="day-col" id="dc-thu"   data-day="thu"     ondragover="dOver(event)" ondrop="dDrop(event,'thu')"    onclick="tapPlace('thu')">
-              <div class="day-name">Thu</div>
-            </div>
-            <div class="day-col" id="dc-fri"   data-day="fri"     ondragover="dOver(event)" ondrop="dDrop(event,'fri')"    onclick="tapPlace('fri')">
-              <div class="day-name">Fri</div>
-            </div>
-            <div class="day-col" id="dc-sat"   data-day="sat"     ondragover="dOver(event)" ondrop="dDrop(event,'sat')"     onclick="tapPlace('sat')">
-              <div class="day-name">Sat</div>
-            </div>
-            <div class="day-col" id="dc-sun"   data-day="sun"     ondragover="dOver(event)" ondrop="dDrop(event,'sun')"     onclick="tapPlace('sun')">
-              <div class="day-name">Sun</div>
-            </div>
-          </div>
-
-          <div class="pool-label">Unscheduled this month</div>
-          <div class="pool-area" id="pool-area" ondragover="dOver(event)" ondrop="dDrop(event,'pool')" onclick="tapPlace('pool')"></div>
-          <div class="overlap-note" id="overlap-note">
-            A long run, bike, or swim counts for both Something that sucks and Cardio. You do not need to do both separately if they overlap naturally.
-          </div>
+          <div class="psched-panel" id="psched-panel"></div>
         </div>
 
         <details class="ob-instructions" style="margin-top:1.5rem">
@@ -453,17 +414,26 @@
     for(var m=0;m<MONTHS.length;m++){if(MONTH_WEEKS[MONTHS[m]].indexOf(w)>=0)return m;}
     return 6;
   }
+  function getPhaseIndex(mIdx){return mIdx<=1?0:mIdx<=4?1:2;}
+  function getPhaseWeekRange(p){return [{start:0,end:7},{start:8,end:19},{start:20,end:25}][p];}
+  function getRepresentativeMonthIdx(p){return [1,3,5][p];} // Jun/Aug/Oct — odd so "ask" shows
+  function getPhaseMonthIndices(p){return [[0,1],[2,3,4],[5,6]][p];}
 
   /* ---- State ---- */
+  var currentPhase = 0;
+  var tagCounter = 0;
   var state = {
     sessions:4,
     goals:{skiing:3,teaching:3,cert:3,physical:3},
     exemptions:new Set(),
-    currentWeek:0,
     weeks:Array.from({length:26},function(){return {scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]}};}),
-    months:Array.from({length:7},function(){return {unscheduled:[]};}),
     tagText:Object.assign({},placeholders),
-    selectedTagId:null
+    phaseTemplates:[
+      {mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]},
+      {mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]},
+      {mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]}
+    ],
+    phaseApplied:[false,false,false]
   };
 
   /* ---- freq() — do not alter ---- */
@@ -502,23 +472,207 @@
     return base;
   }
 
-  /* ---- Tag generation ---- */
-  var tagCounter = 0;
-  function generateMonthPool(mIdx){
-    var tags=[];
+  /* ---- Phase template editor ---- */
+  function getPhaseActivities(phaseIdx){
+    var repMonth=getRepresentativeMonthIdx(phaseIdx);
+    var phaseMonths=getPhaseMonthIndices(phaseIdx);
+    var slots=[];
     SUBPILLARS.forEach(function(key){
       if(state.exemptions.has(key))return;
-      var n=freq(key,mIdx,state.sessions,state.goals);
-      for(var i=0;i<n;i++){tags.push({id:'t'+(tagCounter++),key:key,pillar:PILLAR_OF[key]});}
+      var repFreq=freq(key,repMonth,state.sessions,state.goals);
+      var maxFreq=0;
+      phaseMonths.forEach(function(m){var f=freq(key,m,state.sessions,state.goals);if(f>maxFreq)maxFreq=f;});
+      if(maxFreq===0)return;
+      var isOccasional=false;
+      phaseMonths.forEach(function(m){if(freq(key,m,state.sessions,state.goals)===0)isOccasional=true;});
+      var slotCount=repFreq>0?repFreq:maxFreq;
+      for(var i=0;i<slotCount;i++){
+        slots.push({key:key,pillar:PILLAR_OF[key],slotIdx:i,totalSlots:slotCount,occasional:isOccasional});
+      }
     });
-    return tags;
+    return slots;
   }
-  function regenerateFutureMonths(){
-    for(var m=0;m<7;m++){state.months[m].unscheduled=generateMonthPool(m);}
+
+  function getSlotDay(phaseIdx,key,slotIdx){
+    var tmpl=state.phaseTemplates[phaseIdx];
+    var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+    var found=null;
+    DAYS.forEach(function(d){
+      (tmpl[d]||[]).forEach(function(s){if(s.key===key&&s.slotIdx===slotIdx)found=d;});
+    });
+    return found;
   }
-  function removeExFromPools(key){
-    for(var m=0;m<7;m++){
-      state.months[m].unscheduled=state.months[m].unscheduled.filter(function(t){return t.key!==key;});
+
+  function toggleDayPill(phaseIdx,key,slotIdx,day){
+    var tmpl=state.phaseTemplates[phaseIdx];
+    var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+    var currentDay=getSlotDay(phaseIdx,key,slotIdx);
+    if(currentDay===day){
+      tmpl[day]=tmpl[day].filter(function(s){return !(s.key===key&&s.slotIdx===slotIdx);});
+    } else {
+      if(currentDay)tmpl[currentDay]=tmpl[currentDay].filter(function(s){return !(s.key===key&&s.slotIdx===slotIdx);});
+      tmpl[day].push({key:key,pillar:PILLAR_OF[key],slotIdx:slotIdx});
+    }
+    state.phaseApplied[phaseIdx]=false;
+    renderPhaseEditor(phaseIdx);
+    saveState();
+  }
+
+  function getTemplateProgress(phaseIdx){
+    var slots=getPhaseActivities(phaseIdx);
+    var total=slots.length,assigned=0;
+    slots.forEach(function(slot){if(getSlotDay(phaseIdx,slot.key,slot.slotIdx)!==null)assigned++;});
+    return {assigned:assigned,total:total};
+  }
+
+  function applyTemplate(phaseIdx){
+    var range=getPhaseWeekRange(phaseIdx);
+    var tmpl=state.phaseTemplates[phaseIdx];
+    var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+    var progress=getTemplateProgress(phaseIdx);
+    if(progress.assigned<progress.total)return;
+    for(var w=range.start;w<=range.end;w++){
+      state.weeks[w]={scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]}};
+      var mIdx=getMonthIndex(w);
+      DAYS.forEach(function(day){
+        (tmpl[day]||[]).forEach(function(slot){
+          if(freq(slot.key,mIdx,state.sessions,state.goals)===0)return;
+          state.weeks[w].scheduled[day].push({id:'t'+(tagCounter++),key:slot.key,pillar:slot.pillar});
+        });
+      });
+    }
+    state.phaseApplied[phaseIdx]=true;
+    renderPhaseEditor(phaseIdx);
+    updateTabStatus(phaseIdx);
+    saveState();
+  }
+
+  function renderWeekPreview(phaseIdx){
+    var tmpl=state.phaseTemplates[phaseIdx];
+    var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+    var DAY_LABELS={mon:'Mon',tue:'Tue',wed:'Wed',thu:'Thu',fri:'Fri',sat:'Sat',sun:'Sun'};
+    var html='<div class="week-preview"><div class="wkp-label">Template preview — repeats each week:</div>';
+    DAYS.forEach(function(day){
+      var acts=(tmpl[day]||[]);
+      var actHtml=acts.length===0
+        ?'<span style="opacity:.35">—</span>'
+        :acts.map(function(s){return '<span class="act-chip '+s.pillar+'">'+LABEL_OF[s.key]+'</span>';}).join('');
+      html+='<div class="wkp-row"><span class="wkp-day">'+DAY_LABELS[day]+'</span><span class="wkp-acts">'+actHtml+'</span></div>';
+    });
+    html+='</div>';
+    return html;
+  }
+
+  function renderPhaseEditor(phaseIdx){
+    var panel=document.getElementById('psched-panel');
+    if(!panel)return;
+    var slots=getPhaseActivities(phaseIdx);
+    var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+    var DAY_LETTERS={mon:'M',tue:'T',wed:'W',thu:'T',fri:'F',sat:'S',sun:'S'};
+    var phaseNames=['Orient','Build','Sharpen'];
+    var phaseLengths=[8,12,6];
+    var progress=getTemplateProgress(phaseIdx);
+    var allAssigned=progress.total>0&&progress.assigned>=progress.total;
+    var html='';
+
+    if(slots.length===0){
+      html+='<div style="color:var(--muted);font-size:.88rem;padding:.75rem 0">No activities for this phase with current configuration.</div>';
+    } else {
+      slots.forEach(function(slot){
+        var assignedDay=getSlotDay(phaseIdx,slot.key,slot.slotIdx);
+        var statusText=assignedDay?'✓ '+assignedDay.charAt(0).toUpperCase()+assignedDay.slice(1):'Unassigned';
+        html+='<div class="asgn-row">';
+        html+='<span class="asgn-dot '+slot.pillar+'"></span>';
+        html+='<span class="asgn-name">'+LABEL_OF[slot.key];
+        if(slot.totalSlots>1)html+=' <span style="font-size:.72rem;color:var(--muted)">#'+(slot.slotIdx+1)+'</span>';
+        html+='</span>';
+        html+='<span class="asgn-freq">'+(slot.slotIdx===0?'&times;'+slot.totalSlots:'')+'</span>';
+        html+='<div class="asgn-days">';
+        DAYS.forEach(function(day){
+          var isAssigned=assignedDay===day;
+          var pillCls=isAssigned?'day-pill assigned '+slot.pillar:'day-pill';
+          html+='<button class="'+pillCls+'" aria-pressed="'+isAssigned+'" aria-label="'+(isAssigned?'Remove from':'Assign to')+' '+day+'"'
+            +' onclick="toggleDayPill('+phaseIdx+',\''+slot.key+'\','+slot.slotIdx+',\''+day+'\')">'
+            +DAY_LETTERS[day]+'</button>';
+        });
+        html+='</div>';
+        html+='<span class="asgn-status">'+statusText+'</span>';
+        html+='</div>';
+        if(slot.occasional&&slot.slotIdx===0){
+          html+='<div class="asgn-occasional">alternates monthly — skipped on off-months when applied</div>';
+        }
+      });
+    }
+
+    html+=renderWeekPreview(phaseIdx);
+
+    var phaseName=phaseNames[phaseIdx];
+    var weekCount=phaseLengths[phaseIdx];
+    var isApplied=state.phaseApplied[phaseIdx];
+    html+='<div class="psched-apply-row">';
+    html+='<span class="psched-progress">'+progress.assigned+' of '+progress.total+' slots assigned</span>';
+    if(isApplied&&allAssigned){
+      html+='<button class="psched-apply-btn applied" disabled>&check; Applied to '+weekCount+' '+phaseName+' weeks</button>';
+    } else {
+      html+='<button class="psched-apply-btn"'+(allAssigned?'':' disabled')+' onclick="applyTemplate('+phaseIdx+')">'
+        +'Apply to all '+weekCount+' '+phaseName+' weeks &rarr;</button>';
+    }
+    html+='</div>';
+    panel.innerHTML=html;
+  }
+
+  function switchPhase(phaseIdx){
+    currentPhase=phaseIdx;
+    document.querySelectorAll('.psched-tab').forEach(function(tab){
+      tab.classList.remove('active-p1','active-p2','active-p3');
+    });
+    var tab=document.querySelector('.psched-tab[data-phase="'+phaseIdx+'"]');
+    if(tab)tab.classList.add(['active-p1','active-p2','active-p3'][phaseIdx]);
+    renderPhaseEditor(phaseIdx);
+  }
+
+  function updateTabStatus(phaseIdx){
+    var tab=document.querySelector('.psched-tab[data-phase="'+phaseIdx+'"]');
+    if(!tab)return;
+    var existing=tab.querySelector('.tab-status');
+    if(existing)existing.remove();
+    if(state.phaseApplied[phaseIdx]){
+      var span=document.createElement('span');
+      span.className='tab-status applied';
+      span.textContent='✓ Applied';
+      tab.appendChild(span);
+    }
+  }
+
+  function removeKeyFromTemplates(key){
+    var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+    for(var p=0;p<3;p++){
+      var tmpl=state.phaseTemplates[p];
+      DAYS.forEach(function(day){
+        var before=tmpl[day].length;
+        tmpl[day]=tmpl[day].filter(function(s){return s.key!==key;});
+        if(tmpl[day].length!==before)state.phaseApplied[p]=false;
+      });
+    }
+  }
+
+  function invalidatePhasesOnConfigChange(){
+    var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+    for(var p=0;p<3;p++){
+      var validSlots=getPhaseActivities(p);
+      var validSet={};
+      validSlots.forEach(function(slot){
+        if(!(slot.key in validSet))validSet[slot.key]=0;
+        validSet[slot.key]=Math.max(validSet[slot.key],slot.slotIdx);
+      });
+      var tmpl=state.phaseTemplates[p];
+      DAYS.forEach(function(day){
+        var before=tmpl[day].length;
+        tmpl[day]=tmpl[day].filter(function(s){
+          return (s.key in validSet)&&s.slotIdx<=validSet[s.key];
+        });
+        if(tmpl[day].length!==before)state.phaseApplied[p]=false;
+      });
     }
   }
 
@@ -563,137 +717,29 @@
     p.classList.add('show');
   }
 
-  /* ---- Calendar render ---- */
-  function tagHTML(t,loc){
-    var ex=state.exemptions.has(t.key)?'exempted-placed':'';
-    var drag=ex?'draggable="false"':'draggable="true" ondragstart="dStart(event,\''+t.id+'\')"';
-    return '<span class="act-tag '+t.pillar+' '+ex+'" data-id="'+t.id+'" data-key="'+t.key+'" data-loc="'+loc+'" '+drag+' onclick="tapTag(event,this)">'
-      +(ex?'⚠️ ':'')
-      +'<input class="tag-edit" type="text" value="'+escHtml(state.tagText[t.key])+'" '
-      +'onfocus="event.stopPropagation()" onchange="editTag(\''+t.key+'\',this.value)" '
-      +'title="Click to edit activity" style="width:'+(state.tagText[t.key].length*7+8)+'px;max-width:180px">'
-      +'</span>';
-  }
-  function escHtml(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
-  function renderCal(){
-    var w=state.currentWeek,wk=state.weeks[w];
-    // week title
-    document.getElementById('week-title').textContent='Week '+(w+1)+' of 26';
-    var mIdx=getMonthIndex(w);
-    document.getElementById('week-subtitle').textContent=weekLabel(w)+' · '+monthFocus[mIdx];
-    // month strip highlight
-    document.querySelectorAll('.month-btn').forEach(function(b){
-      b.classList.remove('active-p1','active-p2','active-p3');
-      if(parseInt(b.getAttribute('data-m'))===mIdx){
-        b.classList.add(mIdx<2?'active-p1':mIdx<5?'active-p2':'active-p3');
-      }
-    });
-    // day columns
-    var days=['mon','tue','wed','thu','fri','sat','sun'];
-    days.forEach(function(d){
-      var col=document.getElementById('dc-'+d);
-      if(!col)return;
-      // keep the day-name div, rebuild the rest
-      var nameDiv=col.querySelector('.day-name');
-      col.innerHTML='';col.appendChild(nameDiv);
-      (wk.scheduled[d]||[]).forEach(function(t){col.innerHTML+=tagHTML(t,d);});
-    });
-    // pool
-    var pool=document.getElementById('pool-area');
-    pool.innerHTML='';
-    (state.months[mIdx].unscheduled||[]).forEach(function(t){pool.innerHTML+=tagHTML(t,'pool');});
-    // overlap note
-    var showOverlap=!state.exemptions.has('sucks')&&!state.exemptions.has('cardio');
-    document.getElementById('overlap-note').classList.toggle('show',showOverlap);
-  }
-
-  /* ---- Drag and drop ---- */
-  var dragId=null,dragSrc=null;
-  function dStart(e,id){
-    dragId=id;
-    var el=e.target.closest('[data-id]');
-    dragSrc=el?el.getAttribute('data-loc'):null;
-    e.dataTransfer.effectAllowed='move';
-    e.dataTransfer.setData('text/plain',id);
-  }
-  function dOver(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
-  function dLeave(e){e.currentTarget.classList.remove('drag-over');}
-  function dDrop(e,dest){
-    e.preventDefault();e.currentTarget.classList.remove('drag-over');
-    var id=e.dataTransfer.getData('text/plain')||dragId;
-    if(!id)return;
-    moveTag(id,dest);
-    dragId=null;dragSrc=null;
-  }
-  function moveTag(id,dest){
-    var w=state.currentWeek,wk=state.weeks[w];
-    var mIdx=getMonthIndex(w);
-    var tag=null;
-    // find and remove from source
-    var days=['mon','tue','wed','thu','fri','sat','sun'];
-    days.forEach(function(d){
-      var idx=wk.scheduled[d].findIndex(function(t){return t.id===id;});
-      if(idx>=0){tag=wk.scheduled[d].splice(idx,1)[0];}
-    });
-    if(!tag){
-      var mp=state.months[mIdx].unscheduled;
-      var idx=mp.findIndex(function(t){return t.id===id;});
-      if(idx>=0)tag=mp.splice(idx,1)[0];
-    }
-    if(!tag)return;
-    if(dest==='pool')state.months[mIdx].unscheduled.push(tag);
-    else wk.scheduled[dest].push(tag);
-    renderCal();
-    saveState();
-  }
 
   /* ---- localStorage persistence ---- */
   function saveState(){
     try{
       var s=Object.assign({},state,{exemptions:[...state.exemptions]});
-      localStorage.setItem('ig-offseason-v1',JSON.stringify(s));
+      localStorage.setItem('ig-offseason-v2',JSON.stringify(s));
     }catch(e){}
   }
   function loadState(){
     try{
-      var raw=localStorage.getItem('ig-offseason-v1');
+      var raw=localStorage.getItem('ig-offseason-v2')||localStorage.getItem('ig-offseason-v1');
       if(!raw)return false;
       var s=JSON.parse(raw);
       state.sessions=s.sessions||4;
       state.goals=Object.assign({skiing:3,teaching:3,cert:3,physical:3},s.goals);
       state.exemptions=new Set(s.exemptions||[]);
-      state.currentWeek=s.currentWeek||0;
       state.tagText=Object.assign({},placeholders,s.tagText);
       if(s.weeks)state.weeks=s.weeks;
-      if(s.months)state.months=s.months;
+      if(s.phaseTemplates)state.phaseTemplates=s.phaseTemplates;
+      if(s.phaseApplied)state.phaseApplied=s.phaseApplied;
       return true;
     }catch(e){return false;}
   }
-
-  /* ---- Mobile tap fallback ---- */
-  function tapTag(e,el){
-    e.stopPropagation();
-    var id=el.getAttribute('data-id');
-    if(state.selectedTagId===id){state.selectedTagId=null;renderCal();return;}
-    state.selectedTagId=id;
-    renderCal();
-    el.classList.add('selected');
-  }
-  function tapPlace(dest){
-    if(!state.selectedTagId)return;
-    moveTag(state.selectedTagId,dest);
-    state.selectedTagId=null;
-  }
-
-  /* ---- Drag-over delegation for day-col children ---- */
-  document.addEventListener('dragover',function(e){
-    var col=e.target.closest('.day-col,.pool-area');
-    if(col){e.preventDefault();col.classList.add('drag-over');}
-  });
-  document.addEventListener('dragleave',function(e){
-    var col=e.target.closest('.day-col,.pool-area');
-    if(col&&!col.contains(e.relatedTarget))col.classList.remove('drag-over');
-  });
 
   /* ---- Budget bars ---- */
   function renderBudgetBars(){
@@ -711,16 +757,16 @@
   function onVolume(v){
     state.sessions=parseInt(v);
     document.getElementById('vol-display').textContent=v;
-    regenerateFutureMonths();
-    renderMatrix();renderCal();renderBudgetBars();
+    invalidatePhasesOnConfigChange();
+    renderMatrix();renderBudgetBars();renderPhaseEditor(currentPhase);
     saveState();
   }
   function onGoal(key,v){
     state.goals[key]=parseInt(v);
     var ids={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
     document.getElementById(ids[key]).textContent=v;
-    regenerateFutureMonths();
-    renderMatrix();renderCal();renderBudgetBars();
+    invalidatePhasesOnConfigChange();
+    renderMatrix();renderBudgetBars();renderPhaseEditor(currentPhase);
     saveState();
   }
   function toggleEx(btn){
@@ -729,50 +775,36 @@
       btn.classList.remove('active');
       state.exemptions.delete(key);
     } else {
-      if(state.exemptions.size>=3)return; // silently block 4th
+      if(state.exemptions.size>=3)return;
       btn.classList.add('active');
       state.exemptions.add(key);
-      removeExFromPools(key);
+      removeKeyFromTemplates(key);
     }
     document.getElementById('ex-disclaimer').classList.toggle('show',state.exemptions.size>0);
-    renderMatrix();renderCal();renderBudgetBars();
+    invalidatePhasesOnConfigChange();
+    renderMatrix();renderBudgetBars();renderPhaseEditor(currentPhase);
     saveState();
-  }
-  function editTag(key,val){
-    state.tagText[key]=val;
-    document.querySelectorAll('.act-tag[data-key="'+key+'"] .tag-edit').forEach(function(inp){inp.value=val;inp.style.width=(val.length*7+8)+'px';});
-    saveState();
-  }
-
-  /* ---- Week navigation ---- */
-  function stepWeek(d){
-    state.currentWeek=Math.max(0,Math.min(25,state.currentWeek+d));
-    renderCal();
-  }
-  function jumpMonth(mIdx){
-    state.currentWeek=MONTH_WEEKS[MONTHS[mIdx]][0];
-    renderCal();
   }
 
   /* ---- Export TSV ---- */
+  function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('\n').replace(/"/g,'""')+'"';}
   function buildTSV(){
     var g=state.goals;
     var lines=[
       'Instructor Grindset — Offseason Plan Builder',
       'Volume: '+state.sessions+' sessions/wk | Skiing: '+g.skiing+' Teaching: '+g.teaching+' Cert: '+g.cert+' Physical: '+g.physical,
       '',
-      ['Week','Month','Phase','Mon','Tue','Wed','Thu','Fri','Sat','Sun','Unscheduled'].join('	')
+      ['Week','Month','Phase','Mon','Tue','Wed','Thu','Fri','Sat','Sun'].join('\t')
     ];
     for(var w=0;w<26;w++){
       var mIdx=getMonthIndex(w),wk=state.weeks[w];
       var phase=mIdx<2?'Orient':mIdx<5?'Build':'Sharpen';
-      function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('\n').replace(/"/g,'""')+'"';}
       lines.push([
         w+1,MONTHS[mIdx],phase,
         cell(wk.scheduled.mon),cell(wk.scheduled.tue),cell(wk.scheduled.wed),
         cell(wk.scheduled.thu),cell(wk.scheduled.fri),cell(wk.scheduled.sat),
-        cell(wk.scheduled.sun),cell(state.months[mIdx].unscheduled)
-      ].join('	'));
+        cell(wk.scheduled.sun)
+      ].join('\t'));
     }
     return lines.join('\n');
   }
@@ -792,16 +824,19 @@
   }
   function startOver(){
     if(!confirm('This will clear your entire plan. Are you sure?'))return;
+    localStorage.removeItem('ig-offseason-v2');
     localStorage.removeItem('ig-offseason-v1');
     state.sessions=4;
     state.goals={skiing:3,teaching:3,cert:3,physical:3};
     state.exemptions=new Set();
-    state.currentWeek=0;
     state.tagText=Object.assign({},placeholders);
-    state.selectedTagId=null;
     state.weeks=Array.from({length:26},function(){return{scheduled:{mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]}};});
-    state.months=Array.from({length:7},function(){return{unscheduled:[]};});
-    // reset controls
+    state.phaseTemplates=[
+      {mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]},
+      {mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]},
+      {mon:[],tue:[],wed:[],thu:[],fri:[],sat:[],sun:[]}
+    ];
+    state.phaseApplied=[false,false,false];
     document.getElementById('vol-slider').value=4;
     document.getElementById('vol-display').textContent=4;
     ['g-ski','g-teach','g-cert','g-phys'].forEach(function(id){document.getElementById(id).value=3;});
@@ -809,13 +844,11 @@
     document.querySelectorAll('.ex-btn').forEach(function(b){b.classList.remove('active');});
     document.getElementById('ex-disclaimer').classList.remove('show');
     document.getElementById('detail-panel').classList.remove('show');
-    regenerateFutureMonths();
-    renderMatrix();renderCal();renderBudgetBars();
+    renderMatrix();renderBudgetBars();switchPhase(0);
   }
 
   /* ---- Init ---- */
   (function(){
-    // Restore from localStorage if available (URL params override saved state)
     var restored=loadState();
     if(restored){
       document.getElementById('vol-slider').value=state.sessions;
@@ -831,6 +864,7 @@
         if(btn)btn.classList.add('active');
       });
       if(state.exemptions.size>0)document.getElementById('ex-disclaimer').classList.add('show');
+      [0,1,2].forEach(updateTabStatus);
     }
 
     var p=new URLSearchParams(window.location.search);
@@ -852,10 +886,9 @@
       document.getElementById('prefill-note').style.display='block';
     }
   })();
-  regenerateFutureMonths();
   renderMatrix();
-  renderCal();
   renderBudgetBars();
+  switchPhase(0);
   </script>
 </body>
 </html>
