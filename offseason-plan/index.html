@@ -15,6 +15,10 @@
       --fit-color:#1D9E75; --fit-bg:#E1F5EE; --fit-text:#085041;
       --study-color:#378ADD; --study-bg:#E6F1FB; --study-text:#0C447C;
       --cross-color:#BA7517; --cross-bg:#FAEEDA; --cross-text:#633806;
+      /* Training phases */
+      --phase1-color:#8A74E0;  /* Orient — violet */
+      --phase2-color:#26B07A;  /* Build  — teal-green */
+      --phase3-color:#E06020;  /* Sharpen — warm orange */
     }
     body{
       margin:0; color:var(--ink);
@@ -69,7 +73,17 @@
     .matrix-table th,.matrix-table td{border:1px solid var(--line);padding:.35rem .5rem;text-align:center;white-space:nowrap}
     .matrix-table th.row-header{text-align:left;min-width:130px;font-weight:500;color:var(--muted)}
     .matrix-table th.month-header{font-weight:600;font-size:.75rem;letter-spacing:.4px;color:var(--muted)}
-    .matrix-table th.month-p2{color:var(--study-color)}
+    .matrix-table th.month-p1{color:var(--phase1-color)}
+    .matrix-table th.month-p2{color:var(--phase2-color)}
+    .matrix-table th.month-p3{color:var(--phase3-color)}
+    .phase-header-p1{background:rgba(138,116,224,.1);color:var(--phase1-color);font-size:.72rem;letter-spacing:.5px;text-transform:uppercase}
+    .phase-header-p2{background:rgba(38,176,122,.1);color:var(--phase2-color);font-size:.72rem;letter-spacing:.5px;text-transform:uppercase}
+    .phase-header-p3{background:rgba(224,96,32,.1);color:var(--phase3-color);font-size:.72rem;letter-spacing:.5px;text-transform:uppercase}
+    .phase-legend{display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;font-size:.78rem;color:var(--muted);margin-bottom:.7rem;align-items:center}
+    .phase-pip{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.3rem;flex-shrink:0;vertical-align:middle}
+    .phase-pip.p1{background:var(--phase1-color)}
+    .phase-pip.p2{background:var(--phase2-color)}
+    .phase-pip.p3{background:var(--phase3-color)}
     .pillar-row td,.pillar-row th{font-weight:700;font-size:.72rem;letter-spacing:.5px;text-transform:uppercase;padding:.3rem .5rem}
     .pillar-row.fit{background:var(--fit-bg);color:var(--fit-text)}
     .pillar-row.study{background:var(--study-bg);color:var(--study-text)}
@@ -97,8 +111,9 @@
       background:transparent;color:var(--muted);font-size:.82rem;font-family:inherit;cursor:pointer;transition:all .15s;
     }
     .month-btn:hover{border-color:var(--muted);color:var(--ink)}
-    .month-btn.active-p1{background:var(--fit-color);border-color:var(--fit-color);color:#fff}
-    .month-btn.active-p2{background:var(--study-color);border-color:var(--study-color);color:#fff}
+    .month-btn.active-p1{background:var(--phase1-color);border-color:var(--phase1-color);color:#fff}
+    .month-btn.active-p2{background:var(--phase2-color);border-color:var(--phase2-color);color:#fff}
+    .month-btn.active-p3{background:var(--phase3-color);border-color:var(--phase3-color);color:#fff}
     .week-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.85rem}
     .week-nav-btn{
       background:transparent;border:1px solid var(--line);border-radius:.4rem;color:var(--muted);
@@ -285,13 +300,19 @@
             <thead>
               <tr>
                 <th class="row-header"></th>
-                <th class="month-header">May</th>
-                <th class="month-header">Jun</th>
-                <th class="month-header">Jul</th>
-                <th class="month-header">Aug</th>
+                <th class="phase-header-p1" colspan="2">Phase 1: Orient</th>
+                <th class="phase-header-p2" colspan="3">Phase 2: Build</th>
+                <th class="phase-header-p3" colspan="2">Phase 3: Sharpen</th>
+              </tr>
+              <tr>
+                <th class="row-header"></th>
+                <th class="month-header month-p1">May</th>
+                <th class="month-header month-p1">Jun</th>
+                <th class="month-header month-p2">Jul</th>
+                <th class="month-header month-p2">Aug</th>
                 <th class="month-header month-p2">Sep</th>
-                <th class="month-header month-p2">Oct</th>
-                <th class="month-header month-p2">Nov</th>
+                <th class="month-header month-p3">Oct</th>
+                <th class="month-header month-p3">Nov</th>
               </tr>
             </thead>
             <tbody id="matrix-body"></tbody>
@@ -315,6 +336,11 @@
             <button class="month-btn" data-m="4" onclick="jumpMonth(4)">Sep</button>
             <button class="month-btn" data-m="5" onclick="jumpMonth(5)">Oct</button>
             <button class="month-btn" data-m="6" onclick="jumpMonth(6)">Nov</button>
+          </div>
+          <div class="phase-legend">
+            <span class="phase-pip p1"></span><span>Phase 1: Orient (May–Jun)</span>
+            <span class="phase-pip p2"></span><span>Phase 2: Build (Jul–Sep)</span>
+            <span class="phase-pip p3"></span><span>Phase 3: Sharpen (Oct–Nov)</span>
           </div>
 
           <div class="week-nav">
@@ -394,20 +420,20 @@
     reflect:'Reflect',ask:'Ask an expert',
     cardio:'Cardio',control:'Full body control',lateral:'Lateral movement'};
   var monthFocus = [
-    'May — Decompress and assess. Build the habit before the load.',
-    'June — Foundation. Compound lifts and cardio become your weekly anchors.',
-    'July — Volume. Peak general training load. Add intensity, not complexity.',
-    'August — Refinement. Quality over quantity. Start shifting reading toward next season.',
-    'September — Sharpening. Functional movement increases. Study gets specific.',
-    'October — Readiness. Final physical prep. Study is loaded and targeted.',
-    'November — Final approach. Reduce volume, sharpen intensity.'
+    'May · Phase 1: Orient — Decompress and assess. Build the habit before the load.',
+    'June · Phase 1: Orient — Foundation. Compound lifts and cardio become your weekly anchors.',
+    'July · Phase 2: Build — Volume. Peak general training load. Add intensity, not complexity.',
+    'August · Phase 2: Build — Refinement. Quality over quantity. Reading shifts toward next season.',
+    'September · Phase 2: Build — Functional movement increases. Study gets specific.',
+    'October · Phase 3: Sharpen — Final physical prep. Study is loaded and targeted.',
+    'November · Phase 3: Sharpen — Reduce volume, sharpen intensity. Final approach.'
   ];
   var subDetails = {
     heavy:{desc:'Compound lifts — squat, deadlift, bench, row. Phase 1: general strength. Phase 2: add single-leg and rotational variations alongside compound work.',timing:'Needs its own dedicated session. 45–75 minutes. The most important fitness session to protect when volume is limited.'},
     fast:{desc:'Sprints, broad jumps, box jumps, plyometric work. Short and explosive.',timing:'Early in session after warmup. 20 minutes is enough. Do not combine with heavy on the same day.'},
     sucks:{desc:'Zone 2 cardio — run, bike, row, swim at conversational pace. 30–60 minutes. Constant throughout all seven months without exception.',timing:'Any day. A long run counts for both this and cross-training cardio simultaneously. The overlap is intentional.'},
     fun:{desc:'Whatever you actually enjoy doing physically. Hiking, skating, pick-up sport. If you hate it you will not do it.',timing:'Unscheduled by design. Do it when the opportunity presents. Do not skip it to make room for more heavy sessions.'},
-    read:{desc:'Phase 1 (May–Aug): intellectually light, non-PSIA — Gladwell, mountain history, memoir. Phase 2 (Sep–Nov): specific to next season — technical manuals, cert prep, movement analysis.',timing:'20–30 minutes daily works better than one long session. Before bed or with morning coffee.'},
+    read:{desc:'Orient (May–Jun): intellectually light, non-PSIA — Gladwell, mountain history, memoir. Build & Sharpen (Jul–Nov): specific to next season — technical manuals, cert prep, movement analysis.',timing:'20–30 minutes daily works better than one long session. Before bed or with morning coffee.'},
     reflect:{desc:'After a reading session write one paragraph connecting what you read to your teaching or skiing. No pressure for polish.',timing:'Immediately after reading while fresh. 10 minutes maximum.'},
     ask:{desc:'Identify one person you respect. Ask one specific question — or ask them to refer you to someone better positioned to answer.',timing:'Once a month is enough. Follow up with what you did with the answer.'},
     cardio:{desc:'Running, cycling, swimming, or rowing as standalone cross-training. Builds the aerobic base you ski on top of. Overlaps naturally with something that sucks.',timing:'Get outside where possible. The mental reset is part of the benefit.'},
@@ -443,7 +469,7 @@
   /* ---- freq() — do not alter ---- */
   function freq(key,monthIndex,sessions,goals){
     if(state.exemptions.has(key))return 0;
-    var phase=monthIndex<4?1:2;
+    var phase=monthIndex<2?1:2;
     var gSki=goals.skiing,gTeach=goals.teaching,gCert=goals.cert,gPhys=goals.physical;
     switch(key){
       case 'heavy':   return Math.min(4,Math.max(1,Math.round(sessions*0.3)+Math.round(gPhys/4)));
@@ -557,9 +583,9 @@
     document.getElementById('week-subtitle').textContent=weekLabel(w)+' · '+monthFocus[mIdx];
     // month strip highlight
     document.querySelectorAll('.month-btn').forEach(function(b){
-      b.classList.remove('active-p1','active-p2');
+      b.classList.remove('active-p1','active-p2','active-p3');
       if(parseInt(b.getAttribute('data-m'))===mIdx){
-        b.classList.add(mIdx<4?'active-p1':'active-p2');
+        b.classList.add(mIdx<2?'active-p1':mIdx<5?'active-p2':'active-p3');
       }
     });
     // day columns
@@ -739,7 +765,7 @@
     ];
     for(var w=0;w<26;w++){
       var mIdx=getMonthIndex(w),wk=state.weeks[w];
-      var phase=mIdx<4?'Build':'Sharpen';
+      var phase=mIdx<2?'Orient':mIdx<5?'Build':'Sharpen';
       function cell(arr){return '"'+arr.map(function(t){return state.tagText[t.key];}).join('\n').replace(/"/g,'""')+'"';}
       lines.push([
         w+1,MONTHS[mIdx],phase,
