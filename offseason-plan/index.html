@@ -476,16 +476,14 @@
   function getPhaseActivities(phaseIdx){
     var repMonth=getRepresentativeMonthIdx(phaseIdx);
     var phaseMonths=getPhaseMonthIndices(phaseIdx);
+    var repAlloc=allocate(repMonth,state.sessions,state.goals);
     var slots=[];
     SUBPILLARS.forEach(function(key){
       if(state.exemptions.has(key))return;
-      var repFreq=freq(key,repMonth,state.sessions,state.goals);
-      var maxFreq=0;
-      phaseMonths.forEach(function(m){var f=freq(key,m,state.sessions,state.goals);if(f>maxFreq)maxFreq=f;});
-      if(maxFreq===0)return;
+      var slotCount=repAlloc[key]||0;
+      if(slotCount===0)return;
       var isOccasional=false;
       phaseMonths.forEach(function(m){if(freq(key,m,state.sessions,state.goals)===0)isOccasional=true;});
-      var slotCount=repFreq>0?repFreq:maxFreq;
       for(var i=0;i<slotCount;i++){
         slots.push({key:key,pillar:PILLAR_OF[key],slotIdx:i,totalSlots:slotCount,occasional:isOccasional});
       }
