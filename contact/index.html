@@ -7,195 +7,231 @@
   <meta name="description" content="Contact me — I'm here to answer any snowsports industry question you might have." />
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
   <style>
-:root{
+:root{--content-shift:0px;--maxw:min(1000px,calc(100vw - var(--sidebar) - 40px))}
+body{margin:0;color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;
+  background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed}
 
-      /* Layout knobs */
-      --content-shift:0px;
-      --maxw: min(800px, calc(100vw - var(--sidebar) - 40px));
-    }
-    body{
-      margin:0; color:var(--ink);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height:1.55;
-      background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed;
-    }
+.content{width:var(--maxw);margin-left:max(14px,calc((100vw - var(--sidebar) - var(--maxw))/2 - var(--content-shift)));
+  margin-right:auto;padding:2rem 0 4rem}
+@media(max-width:960px){.content{width:min(94vw,1000px);margin:0 auto;padding:1.5rem 0 4rem}}
 
-    /* Rooftop headings (fallbacks if files absent) */
+h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 .25rem;
+  background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center}
+.page-sub{color:var(--muted);text-align:center;margin:0 0 2rem;font-size:.95rem}
 
-    /* Shell */
+/* ── Two-column layout ── */
+.contact-layout{display:grid;grid-template-columns:1fr 56px 1fr;align-items:center;gap:0}
+@media(max-width:760px){.contact-layout{grid-template-columns:1fr;gap:1.5rem}}
 
-    /* Brand (clickable home) */
-    .brand:hover{ filter:brightness(1.04) }
-    .brand .logo-wrap img{ width:120%; height:120%; object-fit:cover }
-    .content{
-      width:var(--maxw);
-      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--maxw))/2 - var(--content-shift)));
-      margin-right:auto; padding-top:2rem;
-    }
-    @media (max-width:960px){ .content{ width:min(94vw, 48rem); margin:0 auto; padding-top:1.75rem } }
+/* ── OR divider ── */
+.or-col{display:flex;align-items:center;justify-content:center;align-self:stretch}
+.or-badge{width:42px;height:42px;border-radius:50%;background:var(--cta);color:#fff;
+  font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;box-shadow:0 0 0 4px #0f1217}
+@media(max-width:760px){.or-col{flex-direction:row;align-self:auto}.or-badge{width:52px}}
 
-    /* Headings */
-    h1,h2{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
-    h1{
-      font-weight:800; font-size:clamp(2.2rem,5vw,3rem); line-height:1.08; margin:0 0 .35rem;
-      background:linear-gradient(92deg,#fff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 0 22px rgba(var(--glow),.12);
-    }
-    .subtitle{ color:var(--muted); margin:0 0 1.25rem; font-size:clamp(1.05rem, 1.2vw + .2rem, 1.25rem) }
+/* ── Left card (light) ── */
+.form-card{background:#fff;border-radius:1.1rem;padding:2rem;color:#111}
+.form-card h2{font-size:1.55rem;font-weight:800;color:#111;margin:0 0 .35rem;font-family:"Rooftop",Inter,sans-serif}
+.form-card .card-sub{color:#555;font-size:.88rem;margin:0 0 1.4rem}
+.name-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:480px){.name-row{grid-template-columns:1fr}}
+.form-card input,.form-card textarea{
+  width:100%;border:1.5px solid #e2e4e8;background:#fff;color:#111;
+  border-radius:.55rem;padding:.7rem .9rem;font:inherit;font-size:.9rem;
+  transition:border-color .18s;box-sizing:border-box}
+.form-card input:focus,.form-card textarea:focus{border-color:#c4892a;outline:none}
+.form-card input::placeholder,.form-card textarea::placeholder{color:#aaa}
+.form-card textarea{resize:vertical;min-height:130px}
+.form-stack{display:flex;flex-direction:column;gap:.75rem}
+.submit-btn{width:100%;padding:.85rem;background:var(--cta);color:#fff;font-weight:800;
+  font-size:.95rem;letter-spacing:.8px;text-transform:uppercase;border:0;border-radius:2rem;
+  cursor:pointer;transition:filter .15s;margin-top:.25rem;font-family:inherit}
+.submit-btn:hover{filter:brightness(1.08)}
+.submit-btn:disabled{opacity:.6;cursor:progress}
+.status{margin-top:.5rem;min-height:1.4rem;font-weight:600;font-size:.88rem}
+.ok{color:#1a7a45} .err{color:#c0392b}
 
-    /* Card */
-    .card{
-      background:rgba(255,255,255,.05);
-      border:1px solid var(--line);
-      border-radius:.875rem;
-      padding:1.5rem;
-      box-shadow:0 0 32px rgba(var(--glow),.06);
-    }
-
-    /* Form fields */
-    .stack{ display:grid; gap:1rem }
-    .field{ display:grid; gap:.4rem }
-    label{ font-weight:600 }
-    input, textarea{
-      width:100%; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--ink);
-      border-radius:.5rem; padding:.8rem .9rem; font:inherit;
-      transition:border-color .18s ease, background .18s ease;
-    }
-    input:focus, textarea:focus{
-      border-color:var(--cta); background:rgba(255,255,255,.08);
-      outline:2px solid var(--cta); outline-offset:2px;
-    }
-    textarea{ resize:vertical; min-height:160px }
-
-    /* Button */
-    .btn{ display:flex; align-items:center; justify-content:center; width:100%; min-height:52px; padding:.85rem 1.75rem; border-radius:.625rem; background:var(--cta); color:#e6e7eb; font-weight:800; font-size:1.125rem; border:0; cursor:pointer; transition:filter .18s ease; }
-    .btn:hover{ filter:brightness(1.08) }
-    .btn[disabled]{ opacity:.6; cursor:progress }
-
-    /* Status messages */
-    .status{ margin-top:.5rem; min-height:1.5rem; font-weight:600 }
-    .ok{ color:#b7f3c8 }  .err{ color:#fca5a5 }
-
-    /* Footer */
+/* ── Right card (dark calendar) ── */
+.cal-card{background:#1a1f2b;border:1px solid var(--line);border-radius:1.1rem;overflow:hidden}
+.cal-header{padding:1.5rem 1.5rem 1rem}
+.cal-card h2{font-size:1.4rem;font-weight:800;color:#fff;margin:0 0 .25rem;font-family:"Rooftop",Inter,sans-serif}
+.cal-card .card-sub{color:var(--muted);font-size:.85rem;margin:0 0 1.25rem}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.cal-month{font-size:1rem;font-weight:700;color:#fff}
+.cal-arrow{width:32px;height:32px;border-radius:50%;border:1px solid #333;background:transparent;
+  color:var(--muted);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:inherit}
+.cal-arrow:hover{border-color:var(--cta);color:var(--cta)}
+.cal-arrow.next{background:var(--cta);border-color:var(--cta);color:#fff}
+.cal-arrow.next:hover{filter:brightness(1.1)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:0 1rem 1rem}
+.cal-dow{font-size:.65rem;font-weight:700;letter-spacing:.5px;color:#555;text-align:center;padding:.4rem 0}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:600;border-radius:50%;cursor:pointer;transition:all .15s;color:var(--muted)}
+.cal-day.available{color:var(--cta);cursor:pointer}
+.cal-day.available:hover{background:rgba(196,137,42,.18)}
+.cal-day.selected{background:var(--cta);color:#fff}
+.cal-day.today{background:rgba(196,137,42,.25);color:var(--cta)}
+.cal-day.faded{color:#333;cursor:default}
+.cal-day.empty{cursor:default}
+.cal-info{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #252b38}
+.cal-info-cell{padding:1rem 1.25rem}
+.cal-info-cell:first-child{border-right:1px solid #252b38}
+.cal-info-lbl{font-size:.72rem;color:#555;margin-bottom:.3rem}
+.cal-info-val{font-size:.9rem;font-weight:700;color:#fff}
   </style>
 </head>
 <body>
-  <div class="page">
-    <!-- Sidebar -->
-    <!-- placeholder gets replaced at runtime -->
-<aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-<script>
+<div class="page">
+  <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+  <script>
   (function(){
-    const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=12')  // bump ?v= number when you edit the partial to bust cache
-      .then(r => r.text())
-      .then(html => {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = html.trim();
-        target.replaceWith(tmp.firstElementChild);
-      })
-      .catch(() => {
-        target.removeAttribute('aria-busy');
-        target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>';
-      });
+    const t=document.getElementById('sidebar-placeholder');
+    fetch('/partials/sidebar.html?v=12').then(r=>r.text()).then(html=>{
+      const d=document.createElement('div');d.innerHTML=html.trim();t.replaceWith(d.firstElementChild);
+    }).catch(()=>{t.removeAttribute('aria-busy');});
   })();
+  </script>
+
+  <main class="main">
+    <div class="content">
+      <h1>Contact Me</h1>
+      <p class="page-sub">I'm here to answer any snowsports industry question you might have.</p>
+
+      <div class="contact-layout">
+
+        <!-- LEFT: Contact form -->
+        <div class="form-card">
+          <h2>Let's Collaborate</h2>
+          <p class="card-sub">Send me a message — I typically respond within a few hours.</p>
+          <form id="contactForm" action="https://formspree.io/f/xyzbdqgq" method="POST" novalidate>
+            <div class="form-stack">
+              <div class="name-row">
+                <input id="fname" name="fname" placeholder="First name" autocomplete="given-name" required />
+                <input id="lname" name="lname" placeholder="Last name" autocomplete="family-name" />
+              </div>
+              <input id="email" type="email" name="email" placeholder="Your email" autocomplete="email" required />
+              <input id="workplace" name="workplace" placeholder="Your school or workplace (optional)" autocomplete="organization" />
+              <textarea id="message" name="message" placeholder="Your message or question" required></textarea>
+              <input type="hidden" name="_subject" value="Instructor Grindset — Website Inquiry" />
+              <button class="submit-btn" type="submit" id="submitBtn">Submit</button>
+              <div id="formStatus" class="status" aria-live="polite"></div>
+            </div>
+          </form>
+        </div>
+
+        <!-- OR -->
+        <div class="or-col"><div class="or-badge">OR</div></div>
+
+        <!-- RIGHT: Calendar -->
+        <div class="cal-card">
+          <div class="cal-header">
+            <h2>Book a Meeting</h2>
+            <p class="card-sub">Schedule a discovery call at your convenience.</p>
+            <div class="cal-nav">
+              <div class="cal-month" id="cal-month-label"></div>
+              <div style="display:flex;gap:.4rem">
+                <button class="cal-arrow prev" onclick="calPrev()" aria-label="Previous month">&#8249;</button>
+                <button class="cal-arrow next" onclick="calNext()" aria-label="Next month">&#8250;</button>
+              </div>
+            </div>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-info">
+            <div class="cal-info-cell">
+              <div class="cal-info-lbl">Email us at</div>
+              <div class="cal-info-val">via contact form</div>
+            </div>
+            <div class="cal-info-cell">
+              <div class="cal-info-lbl">Or message on</div>
+              <div class="cal-info-val">Instagram</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.contact-layout -->
+    </div>
+  </main>
+</div>
+
+<div class="footer-wrap"><p class="footer">&copy; Instructor Grindset</p></div>
+
+<!-- Form submission -->
+<script>
+(function(){
+  const form=document.getElementById('contactForm');
+  const statusEl=document.getElementById('formStatus');
+  const btn=document.getElementById('submitBtn');
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();statusEl.textContent='';btn.disabled=true;
+    try{
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+      if(res.ok){form.reset();statusEl.textContent='Thanks, message sent.';statusEl.className='status ok';}
+      else{const j=await res.json().catch(()=>({}));statusEl.textContent=j.errors?.map(function(e){return e.message;}).join(', ')||'Something went wrong.';statusEl.className='status err';}
+    }catch(err){statusEl.textContent='Network error. Please try again.';statusEl.className='status err';}
+    finally{btn.disabled=false;}
+  });
+})();
 </script>
 
+<!-- Calendar -->
+<script>
+(function(){
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DAYS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  var now=new Date();
+  var viewYear=now.getFullYear();
+  var viewMonth=now.getMonth();
+  var selectedDate=null;
 
-    <!-- Main -->
-    <main class="main">
-      <div class="content">
-        <header style="margin-bottom:1rem">
-          <h1>Contact Me</h1>
-          <p class="subtitle">I'm here to answer any snowsports industry question you might have.</p>
-        </header>
+  function render(){
+    document.getElementById('cal-month-label').textContent=MONTHS[viewMonth]+' '+viewYear;
+    var grid=document.getElementById('cal-grid');
+    var html='';
+    DAYS.forEach(function(d){html+='<div class="cal-dow">'+d+'</div>';});
+    var first=new Date(viewYear,viewMonth,1).getDay();
+    var daysInMonth=new Date(viewYear,viewMonth+1,0).getDate();
+    for(var i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
+    for(var d=1;d<=daysInMonth;d++){
+      var date=new Date(viewYear,viewMonth,d);
+      var dow=date.getDay();
+      var isWeekend=dow===0||dow===6;
+      var isPast=date<new Date(now.getFullYear(),now.getMonth(),now.getDate());
+      var isToday=date.getFullYear()===now.getFullYear()&&date.getMonth()===now.getMonth()&&date.getDate()===now.getDate();
+      var isSel=selectedDate&&date.getTime()===selectedDate.getTime();
+      var cls='cal-day';
+      if(isPast||isWeekend) cls+=' faded';
+      else if(isSel) cls+=' selected';
+      else if(isToday) cls+=' today';
+      else cls+=' available';
+      var onclick=(!isPast&&!isWeekend)?'pickDate('+viewYear+','+(viewMonth)+','+d+')':'';
+      html+='<div class="'+cls+'" '+(onclick?'onclick="'+onclick+'"':'')+'>'+d+'</div>';
+    }
+    grid.innerHTML=html;
+  }
 
-        <!-- Contact form (Formspree) -->
-        <form id="contactForm" class="card stack" action="https://formspree.io/f/xyzbdqgq" method="POST" novalidate>
-          <!-- Name -->
-          <div class="field">
-            <label for="name">Name *</label>
-            <input id="name" name="name" autocomplete="name" required />
-          </div>
+  window.calPrev=function(){
+    viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}render();
+  };
+  window.calNext=function(){
+    viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}render();
+  };
+  window.pickDate=function(y,m,d){
+    selectedDate=new Date(y,m,d);
+    var msg=document.getElementById('message');
+    if(msg){
+      var dateStr=MONTHS[m]+' '+d+', '+y;
+      if(!msg.value||msg.value.startsWith('I\'d like to book')) msg.value='I\'d like to book a call on '+dateStr+'. ';
+    }
+    render();
+  };
 
-          <!-- Workplace (optional) -->
-          <div class="field">
-            <label for="workplace">Workplace (optional)</label>
-            <input id="workplace" name="workplace" autocomplete="organization" />
-          </div>
-
-          <!-- Email (Reply-To) -->
-          <div class="field">
-            <label for="email">Email *</label>
-            <input id="email" type="email" name="email" autocomplete="email" required />
-          </div>
-
-          <!-- Message -->
-          <div class="field">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-
-          <!-- Optional subject line for your inbox -->
-          <input type="hidden" name="_subject" value="Instructor Grindset — Website Inquiry" />
-
-          <!-- Submit -->
-          <button class="btn" type="submit" id="submitBtn">send message</button>
-
-          <!-- Inline status area -->
-          <div id="formStatus" class="status" aria-live="polite"></div>
-        </form>
-      </div>
-    </main>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
-
-  <!-- Inline success behavior (no redirect) -->
-  <script>
-    (function(){
-      const form = document.getElementById('contactForm');
-      const statusEl = document.getElementById('formStatus');
-      const btn = document.getElementById('submitBtn');
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        statusEl.textContent = '';
-        btn.disabled = true;
-
-        const data = new FormData(form);
-
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-
-          if (res.ok) {
-            form.reset();
-            statusEl.textContent = 'Thanks, message sent.';
-            statusEl.className = 'status ok';
-          } else {
-            const json = await res.json().catch(()=> ({}));
-            const msg = json.errors?.map(e => e.message).join(', ') || 'Something went wrong. Please try again.';
-            statusEl.textContent = msg;
-            statusEl.className = 'status err';
-          }
-        } catch (err) {
-          statusEl.textContent = 'Network error. Please check your connection and try again.';
-          statusEl.className = 'status err';
-        } finally {
-          btn.disabled = false;
-        }
-      });
-    })();
-  </script>
+  render();
+})();
+</script>
 </body>
 </html>
