@@ -27,8 +27,8 @@ h1{
   background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .page-sub{
-  text-align:center;color:var(--muted);font-size:.8rem;font-weight:700;
-  letter-spacing:.09em;text-transform:uppercase;margin:0 0 2.5rem;
+  text-align:center;color:var(--muted);font-size:.95rem;
+  line-height:1.6;max-width:52ch;margin:0 auto 2.5rem;
 }
 
 /* ── Roadmap ── */
@@ -40,7 +40,6 @@ h1{
   display:grid;grid-template-columns:48px 1fr;gap:0 1.25rem;
   position:relative;
 }
-/* Connector line between circles */
 .rm-row:not(.rm-row--last) .rm-num::after{
   content:"";position:absolute;left:50%;top:44px;
   transform:translateX(-50%);
@@ -55,14 +54,9 @@ h1{
   font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:1rem;
   color:var(--cta);background:transparent;
   flex-shrink:0;margin-top:.1rem;
-  transition:background .2s,color .2s;
 }
-.rm-num--filled{
-  background:var(--cta);color:#1a1208;
-}
-.rm-body{
-  padding-bottom:2rem;
-}
+.rm-num--filled{background:var(--cta);color:#1a1208}
+.rm-body{padding-bottom:2rem}
 .rm-row--last .rm-body{padding-bottom:0}
 
 .rm-title{
@@ -72,11 +66,11 @@ h1{
 }
 .rm-text{color:var(--muted);line-height:1.7;margin:0;font-size:.97rem}
 
-/* Sub-block (step 2 training pillars) */
+/* Sub-card (step 3 — full content of that step) */
 .rm-sub{
-  margin-top:.9rem;
   background:rgba(255,255,255,.04);border:1px solid var(--line);
   border-radius:.6rem;padding:1rem 1.1rem;
+  margin-top:.12rem;
 }
 .rm-sub-label{
   color:var(--muted);font-size:.88rem;line-height:1.6;margin:0 0 .75rem;
@@ -133,14 +127,14 @@ h1{
       <div class="content">
 
         <h1>The Grindset Blueprint</h1>
-        <p class="page-sub">A step-by-step look at your discovery call</p>
+        <p class="page-sub">The Instructor Grindset is a lifestyle supplement for young snowsports instructors who want to build a work hard, play hard career.</p>
 
         <div class="roadmap">
 
           <div class="rm-row">
             <div class="rm-num">1</div>
             <div class="rm-body">
-              <p class="rm-text">The Instructor Grindset is a lifestyle supplement for young snowsports instructors who want to build a work hard, play hard career. We will work with you to build a year-round career development strategy so you can turn seasonal ski school work into a relatively lucrative and worthwhile career.</p>
+              <p class="rm-text">We will build a year-round career development strategy so you can turn seasonal ski school work into a relatively lucrative and worthwhile career.</p>
             </div>
           </div>
 
@@ -149,6 +143,12 @@ h1{
             <div class="rm-body">
               <p class="rm-title">Understand your environment</p>
               <p class="rm-text">By understanding the state of the industry and identifying your needs and interests, we get to focus on the things that really matter to you.</p>
+            </div>
+          </div>
+
+          <div class="rm-row">
+            <div class="rm-num">3</div>
+            <div class="rm-body">
               <div class="rm-sub">
                 <p class="rm-sub-label">When building your plan, we will consider your priorities and goals. Your plan will most likely include training for:</p>
                 <div class="pillar-tags">
@@ -162,7 +162,7 @@ h1{
           </div>
 
           <div class="rm-row">
-            <div class="rm-num">3</div>
+            <div class="rm-num">4</div>
             <div class="rm-body">
               <p class="rm-title">Tracking your progress</p>
               <p class="rm-text">We will cover how to assess your progress across all training modalities.</p>
@@ -170,7 +170,7 @@ h1{
           </div>
 
           <div class="rm-row rm-row--last">
-            <div class="rm-num rm-num--filled">4</div>
+            <div class="rm-num rm-num--filled">5</div>
             <div class="rm-body">
               <p class="rm-title">Year-round planning and support</p>
               <p class="rm-text">The Instructor Grindset provides off and in-season programming.</p>
