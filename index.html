@@ -113,7 +113,7 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
     <script>
     (function(){
       var t=document.getElementById('sidebar-placeholder');
-      fetch('/partials/sidebar.html?v=12').then(function(r){return r.text();}).then(function(html){
+      fetch('/partials/sidebar.html?v=13').then(function(r){return r.text();}).then(function(html){
         var d=document.createElement('div');d.innerHTML=html.trim();t.replaceWith(d.firstElementChild);
       }).catch(function(){t.removeAttribute('aria-busy');});
     })();

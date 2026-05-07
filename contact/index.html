@@ -91,7 +91,7 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
   <script>
   (function(){
     const t=document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=12').then(r=>r.text()).then(html=>{
+    fetch('/partials/sidebar.html?v=13').then(r=>r.text()).then(html=>{
       const d=document.createElement('div');d.innerHTML=html.trim();t.replaceWith(d.firstElementChild);
     }).catch(()=>{t.removeAttribute('aria-busy');});
   })();
