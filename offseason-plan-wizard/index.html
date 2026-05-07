@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Offseason Plan Wizard — Instructor Grindset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/global.css?v=1">
+<link rel="stylesheet" href="/assets/sidebar.css?v=11">
+<style>
+:root{--bg:#0f1217;--ink:#e7e9ee;--muted:#9aa3b0;--line:#2a3140;--cta:#c4892a;--fit:#c4892a;--study:#378ADD;--cross:#1D9E75;--radius:10px;--radius-sm:6px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.5}
+a{color:var(--cta);text-decoration:none}
+.page{display:flex;min-height:100vh}
+.side{width:260px;flex-shrink:0}
+.main{flex:1;min-width:0;padding:2rem 2.5rem 4rem}
+@media(max-width:768px){.page{flex-direction:column}.side{width:100%}.main{padding:1.25rem 1rem 3rem}}
+
+/* Wizard shell */
+.wizard-wrap{max-width:740px;margin:0 auto}
+.wizard-header{margin-bottom:2rem}
+.wizard-header h1{font-size:1.6rem;font-weight:700;margin-bottom:.25rem}
+.wizard-header p{color:var(--muted);font-size:.95rem}
+
+/* Step indicator */
+.step-indicator{display:flex;align-items:center;gap:0;margin-bottom:2.5rem;overflow-x:auto;padding-bottom:.25rem}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:.35rem;flex-shrink:0}
+.step-dot .dot{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);background:transparent;color:var(--muted);font-size:.8rem;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.step-dot .dot-label{font-size:.65rem;color:var(--muted);text-align:center;max-width:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.step-dot.active .dot{border-color:var(--cta);background:var(--cta);color:#fff}
+.step-dot.active .dot-label{color:var(--cta)}
+.step-dot.done .dot{border-color:var(--cta);background:transparent;color:var(--cta)}
+.step-dot.done .dot-label{color:var(--cta)}
+.step-connector{flex:1;height:2px;background:var(--line);min-width:12px;margin-bottom:1.25rem;transition:background .2s}
+.step-connector.done{background:var(--cta)}
+
+/* Step panels */
+.step-panel{display:none}
+.step-panel.active{display:block}
+.step-title{font-size:1.25rem;font-weight:700;margin-bottom:1.25rem}
+
+/* Error */
+.step-error{color:#e05c5c;font-size:.85rem;margin-top:.75rem;min-height:1.2em;display:none}
+.step-error.visible{display:block}
+
+/* Goal cards */
+.goal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-bottom:.5rem}
+.goal-card{border:2px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;transition:border-color .15s,background .15s;user-select:none;background:rgba(255,255,255,.02)}
+.goal-card:hover{border-color:var(--cta);background:rgba(196,137,42,.05)}
+.goal-card.selected{border-color:var(--cta);background:rgba(196,137,42,.1)}
+.goal-card .goal-icon{font-size:1.6rem;margin-bottom:.4rem}
+.goal-card .goal-title{font-size:.9rem;font-weight:600;margin-bottom:.2rem}
+.goal-card .goal-desc{font-size:.78rem;color:var(--muted);line-height:1.4}
+
+/* Schedule */
+.field-group{margin-bottom:1.25rem}
+.field-label{font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:.5rem;display:block;text-transform:uppercase;letter-spacing:.04em}
+.num-input-wrap{display:flex;align-items:center;gap:.5rem}
+.num-btn{width:36px;height:36px;border-radius:var(--radius-sm);border:1px solid var(--line);background:transparent;color:var(--ink);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s}
+.num-btn:hover{border-color:var(--cta);color:var(--cta)}
+.num-display{width:52px;text-align:center;font-size:1.1rem;font-weight:600;border:1px solid var(--line);border-radius:var(--radius-sm);background:transparent;color:var(--ink);padding:.35rem}
+select.wiz-select{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--ink);border-radius:var(--radius-sm);padding:.45rem .75rem;font-size:.95rem;font-family:inherit;cursor:pointer;outline:none}
+select.wiz-select:focus{border-color:var(--cta)}
+select.wiz-select option{background:#1a2030}
+.phase-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem}
+.phase-table th{text-align:left;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;padding:.4rem .6rem;border-bottom:1px solid var(--line)}
+.phase-table td{padding:.5rem .6rem;border-bottom:1px solid var(--line)}
+.phase-badge{display:inline-block;padding:.15rem .55rem;border-radius:999px;font-size:.75rem;font-weight:600}
+.phase-orient{background:rgba(55,138,221,.15);color:#378ADD}
+.phase-build{background:rgba(196,137,42,.15);color:#c4892a}
+.phase-sharpen{background:rgba(29,158,117,.15);color:#1D9E75}
+
+/* Budget sliders */
+.slider-group{margin-bottom:1rem}
+.slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.slider-name{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:.4rem}
+.slider-pct{font-size:.9rem;font-weight:700;min-width:40px;text-align:right}
+.slider-desc{font-size:.75rem;color:var(--muted);margin-bottom:.4rem}
+input[type=range].wiz-range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;outline:none;cursor:pointer;background:var(--line)}
+input[type=range].wiz-range.fit{accent-color:var(--fit)}
+input[type=range].wiz-range.study{accent-color:var(--study)}
+input[type=range].wiz-range.cross{accent-color:var(--cross)}
+input[type=range].wiz-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;cursor:pointer}
+input[type=range].wiz-range.fit::-webkit-slider-thumb{background:var(--fit)}
+input[type=range].wiz-range.study::-webkit-slider-thumb{background:var(--study)}
+input[type=range].wiz-range.cross::-webkit-slider-thumb{background:var(--cross)}
+.budget-bar{height:16px;border-radius:8px;overflow:hidden;display:flex;margin-top:1.25rem}
+.budget-bar-seg{height:100%;transition:width .2s}
+
+/* Activities */
+.activity-pillar{margin-bottom:1.25rem}
+.activity-pillar-label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem;padding:.2rem .6rem;border-radius:var(--radius-sm);display:inline-block}
+.activity-pillar-label.fit{background:rgba(196,137,42,.15);color:var(--fit)}
+.activity-pillar-label.study{background:rgba(55,138,221,.15);color:var(--study)}
+.activity-pillar-label.cross{background:rgba(29,158,117,.15);color:var(--cross)}
+.activity-list{display:flex;flex-wrap:wrap;gap:.5rem}
+.act-btn{padding:.45rem .9rem;border-radius:999px;border:1.5px solid;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .15s;user-select:none;font-family:inherit}
+.act-btn.fit-act{border-color:var(--fit);color:var(--fit);background:transparent}
+.act-btn.fit-act.exempted{border-color:var(--line);color:var(--muted);background:transparent;text-decoration:line-through;opacity:.55}
+.act-btn.fit-act:not(.exempted){background:rgba(196,137,42,.1)}
+.act-btn.study-act{border-color:var(--study);color:var(--study);background:transparent}
+.act-btn.study-act.exempted{border-color:var(--line);color:var(--muted);background:transparent;text-decoration:line-through;opacity:.55}
+.act-btn.study-act:not(.exempted){background:rgba(55,138,221,.1)}
+.act-btn.cross-act{border-color:var(--cross);color:var(--cross);background:transparent}
+.act-btn.cross-act.exempted{border-color:var(--line);color:var(--muted);background:transparent;text-decoration:line-through;opacity:.55}
+.act-btn.cross-act:not(.exempted){background:rgba(29,158,117,.1)}
+
+/* Days */
+.day-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem}
+.day-pill{width:56px;height:56px;border-radius:50%;border:2px solid var(--line);background:transparent;color:var(--muted);font-size:.8rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;user-select:none;font-family:inherit}
+.day-pill.selected{border-color:var(--cta);background:var(--cta);color:#fff}
+.day-counter{font-size:.85rem;color:var(--muted)}
+.day-counter strong{color:var(--ink)}
+
+/* Plan output */
+.plan-summary-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
+.plan-tag{padding:.2rem .65rem;border-radius:999px;background:rgba(196,137,42,.12);border:1px solid var(--cta);color:var(--cta);font-size:.78rem;font-weight:600}
+.plan-meta{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
+.plan-meta strong{color:var(--ink)}
+.phase-block{margin-bottom:1.75rem}
+.phase-block-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.phase-block-header h3{font-size:1rem;font-weight:700}
+.phase-block-header .phase-dates{font-size:.8rem;color:var(--muted)}
+.phase-note{font-size:.78rem;color:var(--muted);margin-top:.4rem;font-style:italic}
+.plan-week-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.plan-week-table th{border:1px solid var(--line);padding:.35rem .5rem;text-align:center;color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;background:rgba(255,255,255,.02)}
+.plan-week-table td{border:1px solid var(--line);padding:.35rem .5rem;vertical-align:top;min-width:70px}
+.plan-week-table td .day-acts{display:flex;flex-direction:column;gap:.2rem}
+.act-tag{font-size:.7rem;padding:.1rem .4rem;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.act-tag.fit-tag{background:rgba(196,137,42,.18);color:var(--fit)}
+.act-tag.study-tag{background:rgba(55,138,221,.18);color:var(--study)}
+.act-tag.cross-tag{background:rgba(29,158,117,.18);color:var(--cross)}
+.act-tag.rest-tag{color:var(--line);font-style:italic}
+
+/* Buttons */
+.btn{padding:.55rem 1.25rem;border-radius:var(--radius-sm);border:1.5px solid transparent;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-primary{background:var(--cta);color:#fff;border-color:var(--cta)}
+.btn-primary:hover{background:#b37a22;border-color:#b37a22}
+.btn-ghost{background:transparent;color:var(--muted);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--muted);color:var(--ink)}
+.btn-export{background:rgba(55,138,221,.12);color:#378ADD;border-color:#378ADD;margin-top:1rem}
+.btn-export:hover{background:rgba(55,138,221,.22)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="page">
+  <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+  <main class="main">
+    <div class="wizard-wrap">
+      <div class="wizard-header">
+        <h1>Offseason Plan Wizard</h1>
+        <p>Build a personalized 16-week offseason training plan in 6 steps.</p>
+      </div>
+      <div class="step-indicator" id="stepIndicator" role="list" aria-label="Wizard steps"></div>
+
+      <!-- Step 1: Goals -->
+      <div class="step-panel active" id="panel-1" role="region" aria-label="Step 1: Goals">
+        <div class="step-title">What are your goals this offseason?</div>
+        <div class="goal-grid" id="goalGrid">
+          <div class="goal-card" data-goal="cert" role="checkbox" aria-checked="false" tabindex="0">
+            <div class="goal-icon">🎓</div>
+            <div class="goal-title">Certification Prep</div>
+            <div class="goal-desc">Preparing for PSIA/CSIA exams or module completions</div>
+          </div>
+          <div class="goal-card" data-goal="technical" role="checkbox" aria-checked="false" tabindex="0">
+            <div class="goal-icon">⛷️</div>
+            <div class="goal-title">Technical Skiing</div>
+            <div class="goal-desc">Improving your personal skiing performance and expression</div>
+          </div>
+          <div class="goal-card" data-goal="teaching" role="checkbox" aria-checked="false" tabindex="0">
+            <div class="goal-icon">🎤</div>
+            <div class="goal-title">Teaching Excellence</div>
+            <div class="goal-desc">Leveling up your instruction, communication, and lesson delivery</div>
+          </div>
+          <div class="goal-card" data-goal="fitness" role="checkbox" aria-checked="false" tabindex="0">
+            <div class="goal-icon">💪</div>
+            <div class="goal-title">Physical Fitness</div>
+            <div class="goal-desc">Building the strength, mobility, and endurance your skiing demands</div>
+          </div>
+          <div class="goal-card" data-goal="career" role="checkbox" aria-checked="false" tabindex="0">
+            <div class="goal-icon">📈</div>
+            <div class="goal-title">Career Growth</div>
+            <div class="goal-desc">Building leverage, reputation, and long-term opportunities in the industry</div>
+          </div>
+        </div>
+        <div class="step-error" id="err-1">Please select at least one goal.</div>
+        <div class="nav-row">
+          <span></span>
+          <button class="btn btn-primary" onclick="tryNext(1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Schedule -->
+      <div class="step-panel" id="panel-2" role="region" aria-label="Step 2: Schedule">
+        <div class="step-title">How does your offseason look?</div>
+        <div class="field-group">
+          <label class="field-label" for="sessionsDisplay">Training sessions per week</label>
+          <div class="num-input-wrap">
+            <button class="num-btn" id="sessionsDown" aria-label="Decrease sessions">−</button>
+            <input class="num-display" id="sessionsDisplay" type="text" readonly value="4" aria-live="polite">
+            <button class="num-btn" id="sessionsUp" aria-label="Increase sessions">+</button>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="startMonthSelect">Offseason start month</label>
+          <select class="wiz-select" id="startMonthSelect"></select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Phase breakdown (auto-calculated)</label>
+          <table class="phase-table" aria-label="Phase breakdown">
+            <thead><tr><th>Phase</th><th>Duration</th><th>Focus</th><th>Dates</th></tr></thead>
+            <tbody id="phaseTableBody"></tbody>
+          </table>
+        </div>
+        <div class="step-error" id="err-2"></div>
+        <div class="nav-row">
+          <button class="btn btn-ghost" onclick="goBack(2)">← Back</button>
+          <button class="btn btn-primary" onclick="tryNext(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Budget -->
+      <div class="step-panel" id="panel-3" role="region" aria-label="Step 3: Training Budget">
+        <div class="step-title">How do you want to split your training time?</div>
+        <div class="slider-group">
+          <div class="slider-header">
+            <span class="slider-name">💪 Fitness</span>
+            <span class="slider-pct" id="pct-fit">40%</span>
+          </div>
+          <div class="slider-desc">Strength, cardio, mobility, dryland</div>
+          <input type="range" class="wiz-range fit" id="slider-fit" min="10" max="80" value="40" aria-label="Fitness percentage">
+        </div>
+        <div class="slider-group">
+          <div class="slider-header">
+            <span class="slider-name">📚 Study</span>
+            <span class="slider-pct" id="pct-study">35%</span>
+          </div>
+          <div class="slider-desc">Video analysis, clinics, reading, self-assessment</div>
+          <input type="range" class="wiz-range study" id="slider-study" min="10" max="80" value="35" aria-label="Study percentage">
+        </div>
+        <div class="slider-group">
+          <div class="slider-header">
+            <span class="slider-name">🏂 Cross-Training</span>
+            <span class="slider-pct" id="pct-cross">25%</span>
+          </div>
+          <div class="slider-desc">Dance, board sports, athletic movement</div>
+          <input type="range" class="wiz-range cross" id="slider-cross" min="10" max="80" value="25" aria-label="Cross-training percentage">
+        </div>
+        <div class="budget-bar" aria-hidden="true">
+          <div class="budget-bar-seg" id="bar-fit" style="background:var(--fit);width:40%"></div>
+          <div class="budget-bar-seg" id="bar-study" style="background:var(--study);width:35%"></div>
+          <div class="budget-bar-seg" id="bar-cross" style="background:var(--cross);width:25%"></div>
+        </div>
+        <div class="step-error" id="err-3"></div>
+        <div class="nav-row">
+          <button class="btn btn-ghost" onclick="goBack(3)">← Back</button>
+          <button class="btn btn-primary" onclick="tryNext(3)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Activities -->
+      <div class="step-panel" id="panel-4" role="region" aria-label="Step 4: Activities">
+        <div class="step-title">Customize your activity mix</div>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.25rem">Click an activity to exempt it from your plan. At least one activity per pillar must remain active.</p>
+        <div class="activity-pillar">
+          <span class="activity-pillar-label fit">💪 Fitness</span>
+          <div class="activity-list" id="acts-fit"></div>
+        </div>
+        <div class="activity-pillar">
+          <span class="activity-pillar-label study">📚 Study</span>
+          <div class="activity-list" id="acts-study"></div>
+        </div>
+        <div class="activity-pillar">
+          <span class="activity-pillar-label cross">🏂 Cross-Training</span>
+          <div class="activity-list" id="acts-cross"></div>
+        </div>
+        <div class="step-error" id="err-4">Each pillar must have at least one active activity.</div>
+        <div class="nav-row">
+          <button class="btn btn-ghost" onclick="goBack(4)">← Back</button>
+          <button class="btn btn-primary" onclick="tryNext(4)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Days -->
+      <div class="step-panel" id="panel-5" role="region" aria-label="Step 5: Training Days">
+        <div class="step-title">Which days will you train?</div>
+        <div class="day-pills" id="dayPills" role="group" aria-label="Select training days"></div>
+        <div class="day-counter" id="dayCounter" aria-live="polite"></div>
+        <div class="step-error" id="err-5"></div>
+        <div class="nav-row">
+          <button class="btn btn-ghost" onclick="goBack(5)">← Back</button>
+          <button class="btn btn-primary" onclick="tryNext(5)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 6: Plan -->
+      <div class="step-panel" id="panel-6" role="region" aria-label="Step 6: Your Plan">
+        <div class="step-title">Your Offseason Plan</div>
+        <div id="planOutput"></div>
+        <button class="btn btn-export" onclick="exportTSV()">⬇ Export as TSV</button>
+        <div class="nav-row">
+          <button class="btn btn-ghost" onclick="startOver()">↺ Start Over</button>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+'use strict';
+
+// --- Constants ---
+var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var DAYS_SHORT = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+var DAYS_FULL = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+var STEP_LABELS = ['Goals','Schedule','Budget','Activities','Days','Plan'];
+
+var ACTIVITIES = {
+  fit: ['Strength Training','Cardio','Mobility & Yoga','Dryland Ski Training'],
+  study: ['Video Analysis','Clinics & Courses','Reading & Research','Self-Assessment'],
+  cross: ['Dance & Movement Arts','Board Sports','Athletic Movement','Active Recovery']
+};
+var PILLAR_CSS = {fit:'fit-act',study:'study-act',cross:'cross-act'};
+var PILLAR_TAG_CSS = {fit:'fit-tag',study:'study-tag',cross:'cross-tag'};
+
+// --- State ---
+var NOW_MONTH = new Date().getMonth(); // 0-indexed
+var state = {
+  goals: new Set(),
+  sessions: 4,
+  startMonth: NOW_MONTH,
+  budget: {fit:40, study:35, cross:25},
+  exemptions: new Set(),
+  days: new Set()
+};
+var currentStep = 1;
+
+// --- Sidebar ---
+fetch('/partials/sidebar.html?v=12')
+  .then(function(r){return r.text();})
+  .then(function(html){
+    var el = document.getElementById('sidebar-placeholder');
+    el.innerHTML = html;
+    el.removeAttribute('aria-busy');
+  })
+  .catch(function(){
+    document.getElementById('sidebar-placeholder').removeAttribute('aria-busy');
+  });
+
+// --- Step Indicator ---
+function buildIndicator(){
+  var wrap = document.getElementById('stepIndicator');
+  wrap.innerHTML = '';
+  for(var i=1;i<=6;i++){
+    var dot = document.createElement('div');
+    dot.className = 'step-dot' + (i===currentStep?' active':i<currentStep?' done':'');
+    dot.setAttribute('role','listitem');
+    dot.setAttribute('aria-label','Step '+i+': '+STEP_LABELS[i-1]+(i===currentStep?' (current)':i<currentStep?' (completed)':''));
+    dot.innerHTML = '<div class="dot">'+(i<currentStep?'✓':i)+'</div><div class="dot-label">'+STEP_LABELS[i-1]+'</div>';
+    wrap.appendChild(dot);
+    if(i<6){
+      var conn = document.createElement('div');
+      conn.className = 'step-connector'+(i<currentStep?' done':'');
+      wrap.appendChild(conn);
+    }
+  }
+}
+
+// --- Navigation ---
+function showStep(n){
+  document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('panel-'+n).classList.add('active');
+  currentStep = n;
+  buildIndicator();
+  window.scrollTo(0,0);
+  if(n===2) refreshSchedule();
+  if(n===4) renderActivities();
+  if(n===5) renderDays();
+  if(n===6) renderPlan();
+}
+
+function tryNext(step){
+  clearError(step);
+  if(!validate(step)) return;
+  if(step<6) showStep(step+1);
+}
+
+function goBack(step){
+  if(step>1) showStep(step-1);
+}
+
+function startOver(){
+  state.goals = new Set();
+  state.sessions = 4;
+  state.startMonth = NOW_MONTH;
+  state.budget = {fit:40,study:35,cross:25};
+  state.exemptions = new Set();
+  state.days = new Set();
+  // reset UI
+  document.querySelectorAll('.goal-card').forEach(function(c){
+    c.classList.remove('selected');
+    c.setAttribute('aria-checked','false');
+  });
+  document.getElementById('sessionsDisplay').value = 4;
+  document.getElementById('startMonthSelect').value = NOW_MONTH;
+  document.getElementById('slider-fit').value = 40;
+  document.getElementById('slider-study').value = 35;
+  document.getElementById('slider-cross').value = 25;
+  updateBudgetDisplay();
+  showStep(1);
+}
+
+// --- Validation ---
+function showError(step,msg){
+  var el = document.getElementById('err-'+step);
+  if(!el) return;
+  el.textContent = msg||el.textContent;
+  el.classList.add('visible');
+}
+function clearError(step){
+  var el = document.getElementById('err-'+step);
+  if(el) el.classList.remove('visible');
+}
+function validate(step){
+  if(step===1){
+    if(state.goals.size===0){showError(1,'Please select at least one goal.');return false;}
+  }
+  if(step===2){
+    if(state.sessions<1||state.sessions>7){showError(2,'Sessions must be between 1 and 7.');return false;}
+  }
+  if(step===3){
+    var total = state.budget.fit+state.budget.study+state.budget.cross;
+    if(Math.round(total)!==100){showError(3,'Percentages must sum to 100%.');return false;}
+  }
+  if(step===4){
+    var ok = ['fit','study','cross'].every(function(p){
+      return ACTIVITIES[p].some(function(a){return !state.exemptions.has(a);});
+    });
+    if(!ok){showError(4,'Each pillar must have at least one active activity.');return false;}
+  }
+  if(step===5){
+    if(state.days.size===0){showError(5,'Please select at least one training day.');return false;}
+    if(state.days.size!==state.sessions){
+      showError(5,'Select exactly '+state.sessions+' day(s) to match your sessions-per-week setting.');
+      return false;
+    }
+  }
+  return true;
+}
+
+// --- Step 1: Goals ---
+document.querySelectorAll('.goal-card').forEach(function(card){
+  function toggle(){
+    var g = card.dataset.goal;
+    if(state.goals.has(g)){state.goals.delete(g);card.classList.remove('selected');card.setAttribute('aria-checked','false');}
+    else{state.goals.add(g);card.classList.add('selected');card.setAttribute('aria-checked','true');}
+  }
+  card.addEventListener('click',toggle);
+  card.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle();}});
+});
+
+// --- Step 2: Schedule ---
+(function(){
+  var sel = document.getElementById('startMonthSelect');
+  MONTHS.forEach(function(m,i){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = m;
+    if(i===NOW_MONTH) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change',function(){
+    state.startMonth = parseInt(this.value);
+    refreshSchedule();
+  });
+  document.getElementById('sessionsDown').addEventListener('click',function(){
+    if(state.sessions>1){state.sessions--;document.getElementById('sessionsDisplay').value=state.sessions;syncDaysToSessions();}
+  });
+  document.getElementById('sessionsUp').addEventListener('click',function(){
+    if(state.sessions<7){state.sessions++;document.getElementById('sessionsDisplay').value=state.sessions;syncDaysToSessions();}
+  });
+})();
+
+function getPhases(startMonth){
+  // Orient: 4 weeks, Build: 8 weeks, Sharpen: 4 weeks
+  var year = new Date().getFullYear();
+  var sm = startMonth;
+  var orientStart = new Date(year, sm, 1);
+  // approximate: 1 month ≈ 4 weeks
+  var orientEnd = addWeeks(orientStart, 4);
+  var buildStart = orientEnd;
+  var buildEnd = addWeeks(buildStart, 8);
+  var sharpenStart = buildEnd;
+  var sharpenEnd = addWeeks(sharpenStart, 4);
+  return [
+    {name:'Orient', weeks:4, focus:'Explore baseline, light structure', start:orientStart, end:orientEnd},
+    {name:'Build', weeks:8, focus:'Progressive loading, main block', start:buildStart, end:buildEnd},
+    {name:'Sharpen', weeks:4, focus:'Peak specificity, season prep', start:sharpenStart, end:sharpenEnd}
+  ];
+}
+function addWeeks(date, n){
+  var d = new Date(date);
+  d.setDate(d.getDate() + n*7);
+  return d;
+}
+function fmtMonth(date){
+  return MONTHS[date.getMonth()]+' '+date.getFullYear();
+}
+
+function refreshSchedule(){
+  var phases = getPhases(state.startMonth);
+  var tbody = document.getElementById('phaseTableBody');
+  tbody.innerHTML = '';
+  var cls = ['phase-orient','phase-build','phase-sharpen'];
+  phases.forEach(function(ph,i){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td><span class="phase-badge '+cls[i]+'">'+ph.name+'</span></td>'
+      +'<td>'+ph.weeks+' weeks</td>'
+      +'<td style="color:var(--muted);font-size:.82rem">'+ph.focus+'</td>'
+      +'<td style="font-size:.82rem;white-space:nowrap">'+fmtMonth(ph.start)+' – '+fmtMonth(ph.end)+'</td>';
+    tbody.appendChild(tr);
+  });
+}
+refreshSchedule();
+
+// --- Step 3: Budget Sliders ---
+var SLIDER_KEYS = ['fit','study','cross'];
+var _adjusting = false;
+
+function updateBudgetDisplay(){
+  ['fit','study','cross'].forEach(function(k){
+    document.getElementById('pct-'+k).textContent = Math.round(state.budget[k])+'%';
+    document.getElementById('bar-'+k).style.width = state.budget[k]+'%';
+    document.getElementById('slider-'+k).value = Math.round(state.budget[k]);
+  });
+}
+
+SLIDER_KEYS.forEach(function(key){
+  document.getElementById('slider-'+key).addEventListener('input',function(){
+    if(_adjusting) return;
+    _adjusting = true;
+    var newVal = parseInt(this.value);
+    var oldVal = state.budget[key];
+    var diff = newVal - oldVal;
+    // get others
+    var others = SLIDER_KEYS.filter(function(k){return k!==key;});
+    var totalOthers = others.reduce(function(s,k){return s+state.budget[k];},0);
+    if(totalOthers<=0){_adjusting=false;return;}
+    others.forEach(function(k){
+      var share = state.budget[k]/totalOthers;
+      var adjusted = state.budget[k] - diff*share;
+      state.budget[k] = Math.max(5, Math.min(85, adjusted));
+    });
+    state.budget[key] = newVal;
+    // Normalize to exactly 100
+    var sum = state.budget.fit+state.budget.study+state.budget.cross;
+    var remainder = 100 - sum;
+    // Give remainder to first non-key pillar
+    state.budget[others[0]] += remainder;
+    updateBudgetDisplay();
+    _adjusting = false;
+  });
+});
+
+// --- Step 4: Activities ---
+function renderActivities(){
+  ['fit','study','cross'].forEach(function(pillar){
+    var container = document.getElementById('acts-'+pillar);
+    container.innerHTML = '';
+    ACTIVITIES[pillar].forEach(function(act){
+      var btn = document.createElement('button');
+      btn.className = 'act-btn '+PILLAR_CSS[pillar]+(state.exemptions.has(act)?' exempted':'');
+      btn.textContent = act;
+      btn.setAttribute('aria-pressed', state.exemptions.has(act)?'false':'true');
+      btn.setAttribute('title', state.exemptions.has(act)?'Click to include':'Click to exempt');
+      btn.addEventListener('click',function(){
+        if(state.exemptions.has(act)){
+          state.exemptions.delete(act);
+          btn.classList.remove('exempted');
+          btn.setAttribute('aria-pressed','true');
+          btn.setAttribute('title','Click to exempt');
+        } else {
+          state.exemptions.add(act);
+          btn.classList.add('exempted');
+          btn.setAttribute('aria-pressed','false');
+          btn.setAttribute('title','Click to include');
+        }
+      });
+      container.appendChild(btn);
+    });
+  });
+}
+
+// --- Step 5: Days ---
+var dayOrder = []; // tracks selection order
+
+function renderDays(){
+  var wrap = document.getElementById('dayPills');
+  wrap.innerHTML = '';
+  // Pre-select first N days if no days selected yet
+  if(state.days.size===0){
+    dayOrder = [];
+    for(var i=0;i<Math.min(state.sessions,7);i++){
+      state.days.add(i);
+      dayOrder.push(i);
+    }
+  }
+  DAYS_SHORT.forEach(function(d,i){
+    var btn = document.createElement('button');
+    btn.className = 'day-pill'+(state.days.has(i)?' selected':'');
+    btn.textContent = d;
+    btn.setAttribute('aria-label', DAYS_FULL[i]+(state.days.has(i)?' (selected)':''));
+    btn.setAttribute('aria-pressed', state.days.has(i)?'true':'false');
+    btn.addEventListener('click',function(){
+      if(state.days.has(i)){
+        state.days.delete(i);
+        dayOrder = dayOrder.filter(function(x){return x!==i;});
+        btn.classList.remove('selected');
+        btn.setAttribute('aria-pressed','false');
+        btn.setAttribute('aria-label',DAYS_FULL[i]);
+      } else {
+        // if already at max, remove oldest
+        if(state.days.size>=state.sessions){
+          var oldest = dayOrder.shift();
+          state.days.delete(oldest);
+          var oldBtn = wrap.querySelector('[data-day="'+oldest+'"]');
+          if(oldBtn){oldBtn.classList.remove('selected');oldBtn.setAttribute('aria-pressed','false');oldBtn.setAttribute('aria-label',DAYS_FULL[oldest]);}
+        }
+        state.days.add(i);
+        dayOrder.push(i);
+        btn.classList.add('selected');
+        btn.setAttribute('aria-pressed','true');
+        btn.setAttribute('aria-label',DAYS_FULL[i]+' (selected)');
+      }
+      updateDayCounter();
+    });
+    btn.dataset.day = i;
+    wrap.appendChild(btn);
+  });
+  updateDayCounter();
+}
+
+function updateDayCounter(){
+  var el = document.getElementById('dayCounter');
+  el.innerHTML = '<strong>'+state.days.size+'</strong> of <strong>'+state.sessions+'</strong> days selected';
+}
+
+function syncDaysToSessions(){
+  // If days count > new sessions, trim oldest
+  while(dayOrder.length>state.sessions){
+    var oldest = dayOrder.shift();
+    state.days.delete(oldest);
+  }
+  // If on step 5, re-render
+  if(currentStep===5) renderDays();
+}
+
+// --- Allocation Math ---
+function largestRemainder(total, weights){
+  var items = weights.map(function(w){
+    return {key:w.key, exact:total*w.pct/100, floor:0, remainder:0, count:0};
+  });
+  var sum = 0;
+  items.forEach(function(it){it.floor=Math.floor(it.exact);it.remainder=it.exact-it.floor;sum+=it.floor;});
+  var rem = total - sum;
+  items.sort(function(a,b){return b.remainder-a.remainder;});
+  for(var i=0;i<rem;i++) items[i].count = items[i].floor+1;
+  for(var i=rem;i<items.length;i++) items[i].count = items[i].floor;
+  var result = {};
+  items.forEach(function(it){result[it.key]=it.count;});
+  return result;
+}
+
+function getActiveActivities(pillar){
+  return ACTIVITIES[pillar].filter(function(a){return !state.exemptions.has(a);});
+}
+
+function buildWeekTemplate(sessions, phaseType){
+  // sessions = number of sessions this week
+  var budget = state.budget;
+  // Distribute sessions to pillars
+  var pillarWeights = [
+    {key:'fit', pct:budget.fit},
+    {key:'study', pct:budget.study},
+    {key:'cross', pct:budget.cross}
+  ];
+  var pillarCounts = largestRemainder(sessions, pillarWeights);
+
+  // Distribute each pillar count to its active activities
+  var slots = []; // array of {activity, pillar}
+  ['fit','study','cross'].forEach(function(p){
+    var active = getActiveActivities(p);
+    if(active.length===0||pillarCounts[p]===0) return;
+    var actWeights = active.map(function(a){return {key:a, pct:100/active.length};});
+    var actCounts = largestRemainder(pillarCounts[p], actWeights);
+    active.forEach(function(a){
+      for(var i=0;i<actCounts[a];i++) slots.push({activity:a,pillar:p});
+    });
+  });
+
+  // Assign slots to training days (sorted)
+  var sortedDays = Array.from(state.days).sort(function(a,b){return a-b;});
+  var dayMap = {}; // dayIndex -> array of activities
+  sortedDays.forEach(function(d){dayMap[d]=[];});
+  for(var i=0;i<slots.length;i++){
+    var day = sortedDays[i % sortedDays.length];
+    dayMap[day].push(slots[i]);
+  }
+  return {dayMap:dayMap, sortedDays:sortedDays};
+}
+
+// --- Step 6: Plan ---
+function renderPlan(){
+  var out = document.getElementById('planOutput');
+  out.innerHTML = '';
+
+  // Goals tags
+  var tagsDiv = document.createElement('div');
+  tagsDiv.className = 'plan-summary-tags';
+  var goalLabels = {cert:'Certification Prep',technical:'Technical Skiing',teaching:'Teaching Excellence',fitness:'Physical Fitness',career:'Career Growth'};
+  state.goals.forEach(function(g){
+    var tag = document.createElement('span');
+    tag.className = 'plan-tag';
+    tag.textContent = goalLabels[g]||g;
+    tagsDiv.appendChild(tag);
+  });
+  out.appendChild(tagsDiv);
+
+  // Meta
+  var sortedDays = Array.from(state.days).sort(function(a,b){return a-b;});
+  var dayNames = sortedDays.map(function(d){return DAYS_SHORT[d];}).join(', ');
+  var meta = document.createElement('p');
+  meta.className = 'plan-meta';
+  meta.innerHTML = '<strong>'+state.sessions+'</strong> sessions/week on <strong>'+dayNames+'</strong> &nbsp;·&nbsp; <strong>16 weeks</strong> total';
+  out.appendChild(meta);
+
+  var phases = getPhases(state.startMonth);
+  var phaseConfigs = [
+    {phase:phases[0], type:'orient', sessions:Math.max(1,Math.round(state.sessions*0.75)), label:'Orient', badgeClass:'phase-orient', note:'Lighter load: ~75% of normal sessions. Focus on baseline and habit formation.'},
+    {phase:phases[1], type:'build', sessions:state.sessions, label:'Build', badgeClass:'phase-build', note:'Full training load. Progressive overload and skill accumulation.'},
+    {phase:phases[2], type:'sharpen', sessions:state.sessions, label:'Sharpen', badgeClass:'phase-sharpen', note:'Full sessions with higher specificity. Prioritize quality over volume.'}
+  ];
+
+  phaseConfigs.forEach(function(cfg){
+    var block = document.createElement('div');
+    block.className = 'phase-block';
+    var header = document.createElement('div');
+    header.className = 'phase-block-header';
+    header.innerHTML = '<h3><span class="phase-badge '+cfg.badgeClass+'">'+cfg.label+'</span></h3>'
+      +'<span class="phase-dates">'+fmtMonth(cfg.phase.start)+' – '+fmtMonth(cfg.phase.end)+' &nbsp;('+cfg.phase.weeks+' weeks, '+cfg.sessions+' sessions/week)</span>';
+    block.appendChild(header);
+
+    var tpl = buildWeekTemplate(cfg.sessions, cfg.type);
+    // Build table: cols = training days
+    var tbl = document.createElement('table');
+    tbl.className = 'plan-week-table';
+    var thead = document.createElement('thead');
+    var hrow = document.createElement('tr');
+    hrow.innerHTML = '<th style="text-align:left;color:var(--muted)">Week</th>';
+    tpl.sortedDays.forEach(function(d){
+      hrow.innerHTML += '<th>'+DAYS_SHORT[d]+'</th>';
+    });
+    thead.appendChild(hrow);
+    tbl.appendChild(thead);
+
+    var tbody = document.createElement('tbody');
+    for(var w=1;w<=cfg.phase.weeks;w++){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td style="color:var(--muted);font-size:.75rem;white-space:nowrap">Wk '+w+'</td>';
+      tpl.sortedDays.forEach(function(d){
+        var td = document.createElement('td');
+        var acts = tpl.dayMap[d]||[];
+        if(acts.length===0){
+          td.innerHTML = '<span class="act-tag rest-tag">rest</span>';
+        } else {
+          var inner = '<div class="day-acts">';
+          acts.slice(0,3).forEach(function(slot){
+            inner += '<span class="act-tag '+PILLAR_TAG_CSS[slot.pillar]+'">'+slot.activity+'</span>';
+          });
+          inner += '</div>';
+          td.innerHTML = inner;
+        }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+    tbl.appendChild(tbody);
+    block.appendChild(tbl);
+
+    var note = document.createElement('p');
+    note.className = 'phase-note';
+    note.textContent = cfg.note;
+    block.appendChild(note);
+    out.appendChild(block);
+  });
+}
+
+// --- Export TSV ---
+function exportTSV(){
+  var phases = getPhases(state.startMonth);
+  var phaseConfigs = [
+    {sessions:Math.max(1,Math.round(state.sessions*0.75)), weeks:4},
+    {sessions:state.sessions, weeks:8},
+    {sessions:state.sessions, weeks:4}
+  ];
+  var allDays = [0,1,2,3,4,5,6]; // Mon-Sun indices
+  var rows = [['Week','Phase'].concat(DAYS_SHORT.map(function(d){return d;}))];
+
+  var weekNum = 0;
+  ['Orient','Build','Sharpen'].forEach(function(phaseName,pi){
+    var cfg = phaseConfigs[pi];
+    var tpl = buildWeekTemplate(cfg.sessions, phaseName.toLowerCase());
+    for(var w=1;w<=cfg.weeks;w++){
+      weekNum++;
+      var row = ['Week '+weekNum, phaseName];
+      allDays.forEach(function(d){
+        if(tpl.sortedDays.indexOf(d)===-1){
+          row.push('');
+        } else {
+          var acts = tpl.dayMap[d]||[];
+          row.push(acts.map(function(s){return s.activity;}).join(' + '));
+        }
+      });
+      rows.push(row);
+    }
+  });
+
+  var tsv = rows.map(function(r){return r.join('\t');}).join('\n');
+  var blob = new Blob([tsv],{type:'text/tab-separated-values'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'offseason-plan.tsv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// --- Init ---
+buildIndicator();
+updateBudgetDisplay();
+
+})();
+</script>
+</body>
+</html>
