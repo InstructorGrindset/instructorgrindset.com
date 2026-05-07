@@ -3,83 +3,66 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Instructor Grindset • Start Here</title>
-  <meta name="description" content="The goal of the Instructor Grindset service is to educate and assist snowsports instructors looking to develop their skills, body and career at a higher intensity than the traditional certification pathways mandate." />
+  <title>Instructor Grindset • The Grindset Blueprint</title>
+  <meta name="description" content="A year-round career development strategy for snowsports instructors who want to build a work hard, play hard career." />
   <link rel="canonical" href="https://instructorgrindset.com/start-here" />
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=11">
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <meta property="og:title" content="Instructor Grindset — Start Here">
-  <meta property="og:description" content="The goal of the Instructor Grindset service is to educate and assist snowsports instructors looking to develop their skills, body and career at a higher intensity than the traditional certification pathways mandate.">
+  <meta property="og:title" content="Instructor Grindset — The Grindset Blueprint">
+  <meta property="og:description" content="A year-round career development strategy for snowsports instructors who want to build a work hard, play hard career.">
   <meta property="og:url" content="https://instructorgrindset.com/start-here">
   <meta property="og:type" content="website">
   <style>
 :root{
-  --wrap-max:min(720px,calc(100vw - 40px));
-  --r-xl:1.25rem; --r-lg:0.875rem;
-  --sp-3:0.75rem; --sp-6:1.5rem; --sp-8:2rem;
-  --text-sm:0.875rem; --text-base:1rem; --text-xl:1.375rem;
-  --surface-1:rgba(255,255,255,.05);
+  --wrap-max:min(680px,calc(100vw - 40px));
 }
 .main{padding:1.25rem 1.25rem 4rem}
 .content{width:var(--wrap-max);margin:1.25rem auto 0}
-h1{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);
-  line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
-  background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lede{text-align:center;color:var(--muted);max-width:60ch;margin:.25rem auto 2.5rem;font-size:1.05rem;line-height:1.7}
 
-/* Step cards */
-.steps{display:flex;flex-direction:column;gap:1rem;margin-bottom:3rem}
-.step-card{
-  display:flex;gap:1.25rem;align-items:flex-start;
-  background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:var(--sp-6);
-  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
-}
-.step-card:hover{border-color:rgba(250,204,21,.3);box-shadow:0 0 20px rgba(250,204,21,.08);transform:translateY(-2px)}
-.step-num{
+h1{
   font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
-  font-size:2.2rem;line-height:1;color:var(--cta);opacity:.9;
-  min-width:2.2rem;flex-shrink:0;margin-top:-.1rem;
+  font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;
+  margin:.25rem 0 1.5rem;text-align:center;
+  background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.step-body{flex:1}
-.step-card .card-title{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:700;font-size:1.15rem;margin:0 0 .45rem;color:var(--ink)}
-.step-card .card-body{color:var(--muted);font-size:var(--text-base);line-height:1.65;margin:0 0 .9rem}
-.card-actions{display:flex;flex-wrap:wrap;gap:var(--sp-3)}
-
-/* Go Deeper */
-.section-label{font-size:var(--text-sm);font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 var(--sp-3);padding-bottom:var(--sp-3);border-bottom:1px solid var(--line);display:block}
-.deeper-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:1rem;margin-bottom:2.5rem}
-.card{
-  background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:var(--sp-6);
-  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+.intro{
+  text-align:center;color:var(--muted);max-width:60ch;margin:0 auto 2.5rem;
+  font-size:1.05rem;line-height:1.75;
 }
-.card:hover{border-color:rgba(250,204,21,.3);box-shadow:0 0 20px rgba(250,204,21,.08);transform:translateY(-2px)}
-.card .card-title{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:700;font-size:1.05rem;margin:0 0 .45rem;color:var(--ink)}
-.card .card-body{color:var(--muted);font-size:var(--text-base);line-height:1.65;margin:0 0 .9rem}
 
-/* Buttons */
-.btn-primary{display:inline-block;padding:.6rem 1.1rem;background:var(--cta);color:#1a1208;
-  font-weight:700;font-size:.88rem;border-radius:.4rem;text-decoration:none;transition:opacity .15s}
-.btn-primary:hover{opacity:.85;text-decoration:none}
-.btn-secondary{display:inline-block;padding:.6rem 1.1rem;background:transparent;
-  border:1px solid var(--cta);color:var(--cta);
-  font-weight:600;font-size:.88rem;border-radius:.4rem;text-decoration:none;transition:opacity .15s}
-.btn-secondary:hover{opacity:.75;text-decoration:none}
-.btn{display:inline-block;padding:.6rem 1.1rem;background:var(--cta);color:#1a1208;font-weight:700;font-size:.88rem;border-radius:.4rem;text-decoration:none;transition:opacity .15s}
-.btn:hover{opacity:.85;text-decoration:none}
-.btn-lg{padding:.85rem 1.5rem;font-size:1rem}
-
-/* Support strip */
-.support-strip{
-  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
-  padding-top:2rem;border-top:1px solid var(--line);
+.features{display:flex;flex-direction:column;gap:1.75rem;margin-bottom:3rem}
+.feature{border-left:3px solid var(--cta);padding:.4rem 0 .4rem 1.25rem}
+.feature-title{
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:700;
+  font-size:1.1rem;color:var(--ink);margin:0 0 .5rem;
 }
-@media(max-width:480px){.support-strip{grid-template-columns:1fr}.step-card{flex-direction:column;gap:.75rem}.step-num{font-size:1.6rem}}
+.feature-body{color:var(--muted);line-height:1.7;margin:0;font-size:1rem}
+.pillar-list{
+  margin:.75rem 0 0;padding-left:1.1rem;color:var(--muted);
+  line-height:1.9;font-size:1rem;
+}
+.pillar-list li::marker{color:var(--cta)}
+
+.cta-panel{
+  margin-top:3rem;padding:2rem 2.25rem;
+  background:rgba(196,137,42,.07);border:1px solid rgba(196,137,42,.28);
+  border-radius:.875rem;text-align:center;
+}
+.cta-panel h2{
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
+  font-size:clamp(1.3rem,2vw,1.6rem);color:var(--ink);margin:0 0 .6rem;
+}
+.cta-panel p{color:var(--muted);font-size:.97rem;line-height:1.7;margin:0 0 1.4rem}
+.cta-btn{
+  display:inline-block;padding:.75rem 1.4rem;background:var(--cta);color:#1a1208;
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:.95rem;
+  border-radius:.4rem;text-decoration:none;transition:opacity .15s;
+}
+.cta-btn:hover{opacity:.85;text-decoration:none}
+
 .footer-wrap{display:none}
   </style>
 </head>
@@ -99,107 +82,40 @@ h1{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:clamp(
 
     <main class="main" id="main">
       <div class="content">
-        <header>
-          <h1>Start Here</h1>
-          <p class="lede">The goal of the Instructor Grindset is to educate and assist snowsports instructors looking to develop their skills, body and career at a higher intensity than the traditional certification pathways mandate.</p>
-        </header>
 
-        <!-- 4-Step Funnel -->
-        <div class="steps">
+        <h1>The Grindset Blueprint</h1>
 
-          <div class="step-card">
-            <div class="step-num">01</div>
-            <div class="step-body">
-              <h2 class="card-title">Career Plan</h2>
-              <p class="card-body">This guide shows you how to develop the 4 aspects of snowsports education career excellence; Creative willpower, fitness, education, skiing enjoyment.</p>
-              <div class="card-actions">
-                <a class="btn-primary" href="/career-plan">Plan Your Career &rarr;</a>
-              </div>
-            </div>
+        <p class="intro">The Instructor Grindset is a lifestyle supplement for young snowsports instructors who want to build a work hard, play hard career. We will work with you to build a year-round career development strategy so you can turn seasonal ski school work into a relatively lucrative and worthwhile career.</p>
+
+        <div class="features">
+
+          <div class="feature">
+            <p class="feature-title">Understand your environment</p>
+            <p class="feature-body">By understanding the state of the industry and identifying your needs and interests, we get to focus on the things that really matter to you. When building your plan, we will consider your priorities and goals. Your plan will most likely include training for:</p>
+            <ul class="pillar-list">
+              <li>Education</li>
+              <li>Fitness</li>
+              <li>Creative willpower</li>
+              <li>On-snow enjoyment and progression</li>
+            </ul>
           </div>
 
-          <div class="step-card">
-            <div class="step-num">02</div>
-            <div class="step-body">
-              <h2 class="card-title">Lesson Log &amp; Analytics</h2>
-              <p class="card-body">Create a lesson log and client index with integrated analytics.</p>
-              <div class="card-actions">
-                <a class="btn-primary" href="/lesson-log">Set Up Your Lesson Log &rarr;</a>
-              </div>
-            </div>
+          <div class="feature">
+            <p class="feature-title">Tracking your progress</p>
+            <p class="feature-body">We will cover how to assess your progress across all training modalities.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-num">03</div>
-            <div class="step-body">
-              <h2 class="card-title">Offseason Plan Builder</h2>
-              <p class="card-body">Build a personalized career development plan.</p>
-              <div class="card-actions">
-                <a class="btn-primary" href="/offseason-plan">Build Your Offseason Plan &rarr;</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="step-card">
-            <div class="step-num">04</div>
-            <div class="step-body">
-              <h2 class="card-title">Priority Predictor</h2>
-              <p class="card-body">The priority list predictor is the only tool in the snowsports industry that can be used to visualize your leverage at work.</p>
-              <div class="card-actions">
-                <a class="btn-primary" href="/priority-predictor">Use the Priority Predictor &rarr;</a>
-                <a class="btn-secondary" href="/blog/backline-like-a-pro">Backline like a pro</a>
-              </div>
-            </div>
+          <div class="feature">
+            <p class="feature-title">Year-round planning and support</p>
+            <p class="feature-body">The Instructor Grindset provides off and in-season programming.</p>
           </div>
 
         </div>
 
-        <!-- Go Deeper -->
-        <span class="section-label">Go Deeper</span>
-        <div class="deeper-grid">
-
-          <div class="card">
-            <h2 class="card-title">The Reading List</h2>
-            <p class="card-body">A starting point for broadening your knowledge of snowsports via recommendations on science, history, alternative pedagogy, and traditional American content.</p>
-            <div class="card-actions">
-              <a class="btn-primary" href="/reading-list">Browse the Reading List &rarr;</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h2 class="card-title">YouTube</h2>
-            <p class="card-body">Check out the proof of concept of the Instructor Grindset!</p>
-            <div class="card-actions">
-              <a class="btn-primary" href="/youtube-channel">Watch on YouTube &rarr;</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h2 class="card-title">Blog</h2>
-            <p class="card-body">A collection of memoirs and experiences I had thanks to my Instructor Grindset. The root content of my philosophies and ideas that were good enough to make public.</p>
-            <div class="card-actions">
-              <a class="btn-primary" href="/blog">Read the Blog &rarr;</a>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Support -->
-        <div class="support-strip">
-          <div class="card">
-            <h2 class="card-title">Contact</h2>
-            <p class="card-body">Ask me anything about the snowsports industry. Free, no strings attached.</p>
-            <div class="card-actions">
-              <a class="btn-primary" href="/contact">Get in Touch &rarr;</a>
-            </div>
-          </div>
-          <div class="card">
-            <h2 class="card-title">Schedule a Discovery Call</h2>
-            <p class="card-body">Free 30-minute call. I'll help you build a plan specific to your goals, school, and situation.</p>
-            <div class="card-actions">
-              <a class="btn-primary" href="/contact">Book a Call &rarr;</a>
-            </div>
-          </div>
+        <div class="cta-panel">
+          <h2>Book a Free 30-Minute Call</h2>
+          <p>I'll help you build a plan specific to your goals, school, and situation.</p>
+          <a class="cta-btn" href="/contact">Book Your Free Call</a>
         </div>
 
       </div>
