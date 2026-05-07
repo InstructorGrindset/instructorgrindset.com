@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • The Grindset Blueprint</title>
-  <meta name="description" content="A year-round career development strategy for snowsports instructors who want to build a work hard, play hard career." />
+  <meta name="description" content="A step-by-step look at your discovery call — how we build your year-round snowsports instructor career development strategy." />
   <link rel="canonical" href="https://instructorgrindset.com/start-here" />
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=11">
@@ -12,42 +12,85 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <meta property="og:title" content="Instructor Grindset — The Grindset Blueprint">
-  <meta property="og:description" content="A year-round career development strategy for snowsports instructors who want to build a work hard, play hard career.">
+  <meta property="og:description" content="A step-by-step look at your discovery call.">
   <meta property="og:url" content="https://instructorgrindset.com/start-here">
   <meta property="og:type" content="website">
   <style>
-:root{
-  --wrap-max:min(680px,calc(100vw - 40px));
-}
+:root{--wrap-max:min(640px,calc(100vw - 40px))}
 .main{padding:1.25rem 1.25rem 4rem}
 .content{width:var(--wrap-max);margin:1.25rem auto 0}
 
 h1{
   font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
-  font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;
-  margin:.25rem 0 1.5rem;text-align:center;
+  font-size:clamp(2rem,5vw,3rem);line-height:1.08;
+  margin:.25rem 0 .5rem;text-align:center;
   background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.intro{
-  text-align:center;color:var(--muted);max-width:60ch;margin:0 auto 2.5rem;
-  font-size:1.05rem;line-height:1.75;
+.page-sub{
+  text-align:center;color:var(--muted);font-size:.8rem;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;margin:0 0 2.5rem;
 }
 
-.features{display:flex;flex-direction:column;gap:1.75rem;margin-bottom:3rem}
-.feature{border-left:3px solid var(--cta);padding:.4rem 0 .4rem 1.25rem}
-.feature-title{
+/* ── Roadmap ── */
+.roadmap{
+  position:relative;display:flex;flex-direction:column;gap:0;
+  margin-bottom:3rem;
+}
+.rm-row{
+  display:grid;grid-template-columns:48px 1fr;gap:0 1.25rem;
+  position:relative;
+}
+/* Connector line between circles */
+.rm-row:not(.rm-row--last) .rm-num::after{
+  content:"";position:absolute;left:50%;top:44px;
+  transform:translateX(-50%);
+  width:2px;height:calc(100% - 44px + 2rem);
+  background:linear-gradient(to bottom,rgba(196,137,42,.5),rgba(196,137,42,.15));
+}
+.rm-num{
+  position:relative;
+  width:44px;height:44px;border-radius:50%;
+  border:2px solid var(--cta);
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:1rem;
+  color:var(--cta);background:transparent;
+  flex-shrink:0;margin-top:.1rem;
+  transition:background .2s,color .2s;
+}
+.rm-num--filled{
+  background:var(--cta);color:#1a1208;
+}
+.rm-body{
+  padding-bottom:2rem;
+}
+.rm-row--last .rm-body{padding-bottom:0}
+
+.rm-title{
   font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:700;
-  font-size:1.1rem;color:var(--ink);margin:0 0 .5rem;
+  font-size:1.08rem;color:var(--ink);margin:0 0 .45rem;
+  padding-top:.12rem;
 }
-.feature-body{color:var(--muted);line-height:1.7;margin:0;font-size:1rem}
-.pillar-list{
-  margin:.75rem 0 0;padding-left:1.1rem;color:var(--muted);
-  line-height:1.9;font-size:1rem;
-}
-.pillar-list li::marker{color:var(--cta)}
+.rm-text{color:var(--muted);line-height:1.7;margin:0;font-size:.97rem}
 
+/* Sub-block (step 2 training pillars) */
+.rm-sub{
+  margin-top:.9rem;
+  background:rgba(255,255,255,.04);border:1px solid var(--line);
+  border-radius:.6rem;padding:1rem 1.1rem;
+}
+.rm-sub-label{
+  color:var(--muted);font-size:.88rem;line-height:1.6;margin:0 0 .75rem;
+}
+.pillar-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.pillar-tags span{
+  background:rgba(196,137,42,.12);border:1px solid rgba(196,137,42,.3);
+  border-radius:2rem;padding:.2rem .7rem;
+  font-size:.8rem;font-weight:600;color:var(--cta);white-space:nowrap;
+}
+
+/* ── CTA panel ── */
 .cta-panel{
-  margin-top:3rem;padding:2rem 2.25rem;
+  padding:2rem 2.25rem;
   background:rgba(196,137,42,.07);border:1px solid rgba(196,137,42,.28);
   border-radius:.875rem;text-align:center;
 }
@@ -63,6 +106,12 @@ h1{
 }
 .cta-btn:hover{opacity:.85;text-decoration:none}
 
+@media(max-width:480px){
+  .rm-row{grid-template-columns:36px 1fr;gap:0 1rem}
+  .rm-num{width:36px;height:36px;font-size:.85rem}
+  .rm-row:not(.rm-row--last) .rm-num::after{top:36px;height:calc(100% - 36px + 2rem)}
+  .pillar-tags span{font-size:.75rem}
+}
 .footer-wrap{display:none}
   </style>
 </head>
@@ -84,30 +133,48 @@ h1{
       <div class="content">
 
         <h1>The Grindset Blueprint</h1>
+        <p class="page-sub">A step-by-step look at your discovery call</p>
 
-        <p class="intro">The Instructor Grindset is a lifestyle supplement for young snowsports instructors who want to build a work hard, play hard career. We will work with you to build a year-round career development strategy so you can turn seasonal ski school work into a relatively lucrative and worthwhile career.</p>
+        <div class="roadmap">
 
-        <div class="features">
-
-          <div class="feature">
-            <p class="feature-title">Understand your environment</p>
-            <p class="feature-body">By understanding the state of the industry and identifying your needs and interests, we get to focus on the things that really matter to you. When building your plan, we will consider your priorities and goals. Your plan will most likely include training for:</p>
-            <ul class="pillar-list">
-              <li>Education</li>
-              <li>Fitness</li>
-              <li>Creative willpower</li>
-              <li>On-snow enjoyment and progression</li>
-            </ul>
+          <div class="rm-row">
+            <div class="rm-num">1</div>
+            <div class="rm-body">
+              <p class="rm-text">The Instructor Grindset is a lifestyle supplement for young snowsports instructors who want to build a work hard, play hard career. We will work with you to build a year-round career development strategy so you can turn seasonal ski school work into a relatively lucrative and worthwhile career.</p>
+            </div>
           </div>
 
-          <div class="feature">
-            <p class="feature-title">Tracking your progress</p>
-            <p class="feature-body">We will cover how to assess your progress across all training modalities.</p>
+          <div class="rm-row">
+            <div class="rm-num">2</div>
+            <div class="rm-body">
+              <p class="rm-title">Understand your environment</p>
+              <p class="rm-text">By understanding the state of the industry and identifying your needs and interests, we get to focus on the things that really matter to you.</p>
+              <div class="rm-sub">
+                <p class="rm-sub-label">When building your plan, we will consider your priorities and goals. Your plan will most likely include training for:</p>
+                <div class="pillar-tags">
+                  <span>Education</span>
+                  <span>Fitness</span>
+                  <span>Creative willpower</span>
+                  <span>On-snow enjoyment and progression</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="feature">
-            <p class="feature-title">Year-round planning and support</p>
-            <p class="feature-body">The Instructor Grindset provides off and in-season programming.</p>
+          <div class="rm-row">
+            <div class="rm-num">3</div>
+            <div class="rm-body">
+              <p class="rm-title">Tracking your progress</p>
+              <p class="rm-text">We will cover how to assess your progress across all training modalities.</p>
+            </div>
+          </div>
+
+          <div class="rm-row rm-row--last">
+            <div class="rm-num rm-num--filled">4</div>
+            <div class="rm-body">
+              <p class="rm-title">Year-round planning and support</p>
+              <p class="rm-text">The Instructor Grindset provides off and in-season programming.</p>
+            </div>
           </div>
 
         </div>
