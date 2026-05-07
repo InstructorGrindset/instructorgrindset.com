@@ -204,11 +204,11 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
       var isToday=date.getFullYear()===now.getFullYear()&&date.getMonth()===now.getMonth()&&date.getDate()===now.getDate();
       var isSel=selectedDate&&date.getTime()===selectedDate.getTime();
       var cls='cal-day';
-      if(isPast||isWeekend) cls+=' faded';
+      if(isPast) cls+=' faded';
       else if(isSel) cls+=' selected';
       else if(isToday) cls+=' today';
       else cls+=' available';
-      var onclick=(!isPast&&!isWeekend)?'pickDate('+viewYear+','+(viewMonth)+','+d+')':'';
+      var onclick=(!isPast)?'pickDate('+viewYear+','+(viewMonth)+','+d+')':'';
       html+='<div class="'+cls+'" '+(onclick?'onclick="'+onclick+'"':'')+'>'+d+'</div>';
     }
     grid.innerHTML=html;
