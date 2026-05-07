@@ -4,210 +4,152 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset | Career Development for Snowsports Instructors</title>
-  <meta name="description" content="A focused, year-round approach to developing your skills, body and career as a snowsports instructor. Tools and systems to help you turn your passion into a career." />
+  <meta name="description" content="A year-round approach to developing your career as a snowsports instructor. Tools and systems to help you keep the skier and the teacher alive at once." />
   <link rel="canonical" href="https://instructorgrindset.com/" />
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=5">
-
-
-  <!-- Perf: speed up fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <!-- Social cards -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Instructor Grindset | Career Development for Snowsports Instructors">
-  <meta property="og:description" content="A focused, year-round approach to developing your skills, body and career as a snowsports instructor.">
+  <meta property="og:description" content="A year-round approach to developing your career as a snowsports instructor.">
   <meta property="og:url" content="https://instructorgrindset.com/">
   <meta property="og:image" content="https://instructorgrindset.com/images/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Instructor Grindset",
-    "url": "https://instructorgrindset.com",
-    "description": "Career development tools and systems for snowsports instructors."
-  }
+  {"@context":"https://schema.org","@type":"WebSite","name":"Instructor Grindset","url":"https://instructorgrindset.com","description":"Career development tools and systems for snowsports instructors."}
   </script>
-
   <style>
 :root{
+  --content-shift:0px;
+  --hero-w:min(860px,calc((100vw - var(--sidebar)) * .7));
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+@media(max-width:960px){body{background-attachment:scroll}}
+a:focus-visible,.cta:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.main{padding:1.25rem;position:relative}
+.content{
+  width:clamp(520px,var(--hero-w),1120px);
+  margin-left:max(14px,calc((100vw - var(--sidebar) - clamp(520px,var(--hero-w),1120px))/2 - var(--content-shift)));
+  margin-right:auto;padding-top:6vh;
+}
 
-      --content-shift:0px;
-      --hero-w: min(900px, calc((100vw - var(--sidebar)) * 0.6));
-      --hero-offset-top:12px;
-      --story-offset-top:16px;
-      --button-offset-top:10px;
-    }
+/* Hero */
+h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+.hero-hook{
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
+  font-size:clamp(2rem,4.5vw,3.1rem);line-height:1.1;
+  background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 22px rgba(var(--glow),.12);
+  text-align:center;margin:0 0 1.75rem;
+}
+.hero-body{
+  color:var(--muted);font-size:clamp(1rem,1.1vw + .15rem,1.18rem);line-height:1.78;
+  max-width:66ch;text-align:center;margin:0 auto .9rem;
+}
+.hero-tagline{
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:700;
+  font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--ink);
+  text-align:center;margin:1.5rem auto 0;max-width:50ch;line-height:1.45;
+}
 
-    /* Reduce motion where possible */
-    @media (prefers-reduced-motion: reduce){
-      *{scroll-behavior:auto}
-    }
-    /* Avoid fixed background jank on mobile */
-    @media (max-width:960px){
-      body{background-attachment: scroll;}
-    }
-    a:focus-visible,.cta:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-    .brand .logo-wrap img{
-      width:120%;height:120%;object-fit:cover;
-      aspect-ratio:1/1;
-    }
-    .main{padding:1.25rem;position:relative}
+/* CTAs */
+.cta{display:inline-block;padding:.85rem 1.05rem;background:var(--cta);color:#e6e7eb;font-weight:800;border:0}
+.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;margin:2rem 0 0}
+.cta-row .cta{margin-top:0}
+.cta-outline{background:transparent;border:2px solid var(--cta);color:var(--cta)}
+.cta-outline:hover{background:rgba(196,137,42,.08);text-decoration:none}
 
-    .content{
-      width: clamp(520px, var(--hero-w), 1120px);
-      margin-left:max(14px, calc((100vw - var(--sidebar) - clamp(520px, var(--hero-w), 1120px))/2 - var(--content-shift)));
-      margin-right:auto; padding-top:6vh;
-    }
+/* Video */
+.vid{
+  margin-top:2.5rem;width:100%;aspect-ratio:16/9;
+  border-radius:.75rem;overflow:hidden;background:#000;border:0;
+  box-shadow:0 0 18px rgba(var(--glow),.24),0 0 48px rgba(var(--glow),.12);
+}
+.vid iframe{width:100%;height:100%;border:0;display:block}
 
-    h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
-    h1{
-      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:var(--story-offset-top) 0 .6rem;text-align:center;
-      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
-      text-shadow:0 0 22px rgba(var(--glow),.12);
-    }
-    .lead{color:var(--muted);font-size:clamp(1.05rem,1.1vw + .2rem,1.25rem);line-height:1.7;max-width:70ch;text-align:center;margin:10vh auto}
+/* Discovery call */
+.discovery-section{
+  margin-top:4rem;padding:2rem 2.25rem;
+  background:rgba(196,137,42,.07);border:1px solid rgba(196,137,42,.28);
+  border-radius:.875rem;text-align:center;
+}
+.discovery-section h2{
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
+  font-size:clamp(1.3rem,2vw,1.7rem);color:var(--ink);margin:0 0 .6rem;
+}
+.discovery-section p{color:var(--muted);font-size:.97rem;line-height:1.7;margin:0 0 1.4rem;max-width:58ch;margin-left:auto;margin-right:auto}
+.discovery-section .cta{border-radius:.4rem}
 
-    .vid{
-      margin-top:var(--hero-offset-top);
-      width:100%; aspect-ratio:16/9;
-      border-radius:.75rem; overflow:hidden; background:#000; border:0;
-      box-shadow:0 0 18px rgba(var(--glow),.24), 0 0 48px rgba(var(--glow),.12);
-    }
-    .vid iframe{width:100%;height:100%;border:0;display:block}
+/* Blog */
+.blog-latest{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--line)}
+.blog-lede{color:var(--muted);font-size:.95rem;margin:0 0 1.25rem}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1rem}
+.blog-card{
+  display:block;padding:1.1rem 1.2rem;background:var(--surface-1);
+  border:1px solid var(--line);border-radius:var(--r-lg);color:var(--ink);text-decoration:none;min-height:160px;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.blog-card:hover{border-color:rgba(var(--glow),.4);box-shadow:0 0 14px rgba(var(--glow),.1);text-decoration:none;transform:translateY(-2px)}
+.blog-card .card-date{font-size:.78rem;color:#8891a0;margin:0 0 .35rem}
+.blog-card .card-title{font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;font-size:1rem;line-height:1.3;margin:0 0 .5rem;color:#fff}
+.blog-card .card-excerpt{font-size:.88rem;color:var(--muted);line-height:1.55;margin:0}
+.blog-all{margin-top:1rem;font-size:.9rem}
 
-    /* CTAs */
-    .cta{display:inline-block;margin-top:var(--button-offset-top);padding:.85rem 1.05rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0}
-    .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;margin:var(--sp-4) 0 var(--sp-6)}
-    .cta-row .cta{margin-top:0}
-    .cta-outline{background:transparent;border:2px solid var(--cta);color:var(--cta)}
-    .cta-outline:hover{background:rgba(196,137,42,.08);text-decoration:none}
-    .blog-lede{color:var(--muted);font-size:.95rem;margin:0 0 1.25rem}
-    .blog-all{margin-top:1rem;font-size:.9rem}
-
-    /* Blog section */
-    .blog-latest{
-      margin-top:4rem;
-      padding-top:2rem;
-      border-top:1px solid var(--line);
-    }
-    .blog-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-      gap:1rem;
-    }
-    .blog-card{
-      display:block;
-      padding:1.1rem 1.2rem;
-      background:var(--surface-1);
-      border:1px solid var(--line);
-      border-radius:var(--r-lg);
-      color:var(--ink);
-      text-decoration:none;
-      min-height: 160px;
-      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
-    }
-    .blog-card:hover{
-      border-color:rgba(var(--glow),.4);
-      box-shadow:0 0 14px rgba(var(--glow),.1);
-      text-decoration:none;
-      transform: translateY(-2px);
-    }
-    .blog-card .card-date{
-      font-size:.78rem;
-      color:#8891a0;
-      margin:0 0 .35rem;
-    }
-    .blog-card .card-title{
-      font-family:"Rooftop",Inter,Arial,sans-serif;
-      font-weight:800;
-      font-size:1rem;
-      line-height:1.3;
-      margin:0 0 .5rem;
-      color:#fff;
-    }
-    .blog-card .card-excerpt{
-      font-size:.88rem;
-      color:var(--muted);
-      line-height:1.55;
-      margin:0;
-    }
-
-    @media (max-width:1280px){
-      :root{ --content-shift:0px; }
-    }
-
-    @media (max-width:640px){
-      .content{width:min(94vw, 40rem)}
-      .cta-row{flex-direction:column;align-items:stretch}
-      .cta-row .cta,.cta-row .cta-outline{text-align:center;width:100%;max-width:480px;padding:1rem 1.25rem}
-    }
-    @media (max-width:380px){
-      .content{width:92vw}
-    }
+@media(max-width:640px){
+  .content{width:min(94vw,40rem)}
+  .cta-row{flex-direction:column;align-items:stretch}
+  .cta-row .cta,.cta-row .cta-outline{text-align:center;width:100%;max-width:480px;padding:1rem 1.25rem}
+  .discovery-section{padding:1.5rem 1.25rem}
+}
+@media(max-width:380px){.content{width:92vw}}
   </style>
 </head>
 <body>
-  <!-- Skip to content for keyboard users -->
   <a class="skip-link" href="#main">Skip to main content</a>
-
   <div class="page">
-    <!-- Sidebar -->
-    <!-- placeholder gets replaced at runtime -->
-<aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-<script>
-  (function(){
-    const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=12')  // bump ?v= number when you edit the partial to bust cache
-      .then(r => r.text())
-      .then(html => {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = html.trim();
-        target.replaceWith(tmp.firstElementChild);
-      })
-      .catch(() => {
-        target.removeAttribute('aria-busy');
-        target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>';
-      });
-  })();
-</script>
+    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
+    <script>
+    (function(){
+      var t=document.getElementById('sidebar-placeholder');
+      fetch('/partials/sidebar.html?v=12').then(function(r){return r.text();}).then(function(html){
+        var d=document.createElement('div');d.innerHTML=html.trim();t.replaceWith(d.firstElementChild);
+      }).catch(function(){t.removeAttribute('aria-busy');});
+    })();
+    </script>
 
-    <!-- Main -->
     <main class="main" id="main">
       <div class="content">
-        <h1>The Instructor Grindset is a year-round approach to developing your career as a snowsports instructor.</h1>
-        <p class="lead">
-          The PSIA certification pathways are designed to be navigable with part time training. This presents an opportunity for anyone who wants to turn their passion for skiing into a career. By training and studying year-round, you earn the title of elite professional snowsports instructor twice as fast. People might even consider you that, just because you train year-round.
-        </p>
+
+        <!-- Hero -->
+        <p class="hero-hook">There's a version of skiing that lives inside every instructor.</p>
+        <p class="hero-body">The one that existed before the job and the certifications. At some point you traded expressive, care-free skiing for proper demonstration skiing. You look good, but you ski like a robot.</p>
+        <p class="hero-body">Proper technique and your skiing style are not mutually exclusive. The Instructor Grindset is a system for keeping both alive at once.</p>
+        <p class="hero-tagline">The skier and the teacher. Not one at the expense of the other.</p>
+
         <div class="cta-row">
           <a class="cta" href="/start-here">Start Here &rarr;</a>
-          <a class="cta-outline" href="#intro-video">Watch the video &darr;</a>
+          <a class="cta cta-outline" href="#intro-video">Watch the video &darr;</a>
         </div>
 
         <div class="vid" id="intro-video">
           <iframe
-  src="https://www.youtube.com/embed/4IX2CwKIGo4?rel=0&modestbranding=1&playsinline=1"
-  title="YouTube video"
-  loading="lazy"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
-
+            src="https://www.youtube.com/embed/4IX2CwKIGo4?rel=0&modestbranding=1&playsinline=1"
+            title="Instructor Grindset intro video"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
         </div>
 
-        <p class="lead">
-          So what's the catch? Why is this completely free? The Instructor Grindset is offered here for free because you will be doing the work.
-        </p>
-        <p class="lead">
-          Instead of simply setting a snowsports certification goal and forgetting about it until next March, try my holistic protocol for career planning.
-        </p>
-        <p class="lead" style="margin-top:1rem;font-size:.95rem">
-          Once you have your plan, track your teaching with the <a href="/lesson-log">Lesson Log</a>.
-        </p>
+        <!-- Discovery Call -->
+        <section class="discovery-section" aria-label="Book a free discovery call">
+          <h2>Free 30-Minute Discovery Call</h2>
+          <p>Get a personalized career plan in one conversation. I'll help you figure out where to ski, what to study, and how to structure your offseason — based on your specific goals and situation.</p>
+          <a class="cta" href="/contact">Book Your Free Call &rarr;</a>
+        </section>
 
         <!-- Latest Blog Posts -->
         <section class="blog-latest" aria-label="Latest from the Blog">
