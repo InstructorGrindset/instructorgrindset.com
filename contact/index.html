@@ -159,6 +159,26 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
 
 <div class="footer-wrap"><p class="footer">&copy; Instructor Grindset</p></div>
 
+<!-- Pre-fill from assessment -->
+<script>
+(function(){
+  var p=new URLSearchParams(window.location.search);
+  var labels=['Priority list position','Plan for skiing outside certification','Train year-round',
+    'Certifications that improve influence','Keep lesson records','Ski for self weekly (no demo/eval)',
+    'Mentor relationship with certified instructor','Active off-season plan'];
+  var names=['q1','q2','q3','q4','q5','q6','q7','q8'];
+  var lines=[];
+  for(var i=0;i<names.length;i++){
+    var v=p.get(names[i]);
+    if(v) lines.push((i+1)+'. '+labels[i]+': '+v);
+  }
+  if(lines.length){
+    var msg=document.getElementById('message');
+    if(msg) msg.value='Self-assessment:\n'+lines.join('\n')+'\n\nI\'d like to book a discovery call.';
+  }
+})();
+</script>
+
 <!-- Form submission -->
 <script>
 (function(){
@@ -224,7 +244,11 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
     var msg=document.getElementById('message');
     if(msg){
       var dateStr=MONTHS[m]+' '+d+', '+y;
-      if(!msg.value||msg.value.startsWith('I\'d like to book')) msg.value='I\'d like to book a call on '+dateStr+'. ';
+      if(!msg.value||msg.value.startsWith('I\'d like to book')){
+        msg.value='I\'d like to book a call on '+dateStr+'. ';
+      } else {
+        msg.value=msg.value.replace(/\nPreferred date: [^\n]*/,'').trimEnd()+'\nPreferred date: '+dateStr;
+      }
     }
     render();
   };
