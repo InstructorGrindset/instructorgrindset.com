@@ -136,6 +136,57 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
   .rm-row:not(.rm-row--last) .rm-num::after{top:36px;height:calc(100% - 36px + 2rem)}
 }
 @media(max-width:380px){.content{width:92vw}}
+
+/* Assessment */
+.assessment-section{
+  margin-top:2rem;padding:2rem 2.25rem;
+  background:rgba(196,137,42,.05);border:1px solid rgba(196,137,42,.22);
+  border-radius:.875rem;
+}
+.assess-heading{
+  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
+  font-size:clamp(1.3rem,2vw,1.7rem);color:var(--ink);
+  margin:0 0 1.5rem;text-align:center;line-height:1.2;
+}
+.assess-questions{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem}
+.assess-row{
+  display:grid;grid-template-columns:2.2rem 1fr auto;
+  align-items:center;gap:.75rem;
+  padding:.85rem 1rem;
+  background:rgba(255,255,255,.03);border:1px solid var(--line);
+  border-radius:.5rem;
+}
+.assess-num{font-size:.75rem;font-weight:700;color:var(--cta);font-family:"Rooftop",Inter,sans-serif}
+.assess-q{font-size:.92rem;color:var(--ink);line-height:1.4}
+.assess-yn{display:flex;gap:.4rem;flex-shrink:0}
+.yn-opt{position:relative}
+.yn-opt input{position:absolute;opacity:0;pointer-events:none}
+.yn-opt span{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:2.5rem;height:1.9rem;border-radius:.35rem;
+  border:1.5px solid #3a4155;background:transparent;
+  font-size:.75rem;font-weight:700;color:var(--muted);cursor:pointer;
+  transition:all .15s;
+}
+.yn-opt input:checked + span{border-color:var(--cta);background:rgba(196,137,42,.18);color:var(--cta)}
+.assess-footer{display:flex;flex-direction:column;gap:.75rem;align-items:center}
+.assess-footer input[type=email]{
+  width:100%;max-width:380px;
+  border:1.5px solid #3a4155;background:rgba(255,255,255,.04);color:var(--ink);
+  border-radius:.5rem;padding:.7rem 1rem;font:inherit;font-size:.9rem;
+  transition:border-color .18s;box-sizing:border-box;
+}
+.assess-footer input[type=email]:focus{border-color:var(--cta);outline:none}
+.assess-footer input[type=email]::placeholder{color:#555}
+.assess-submit{min-width:200px;cursor:pointer}
+.assess-submit:disabled{opacity:.6;cursor:progress}
+.assess-status{font-size:.88rem;font-weight:600;min-height:1.2rem;text-align:center}
+.assess-status.ok{color:#1a7a45}.assess-status.err{color:#c0392b}
+@media(max-width:580px){
+  .assess-row{grid-template-columns:1.8rem 1fr;grid-template-rows:auto auto;gap:.4rem .6rem}
+  .assess-yn{grid-column:2}
+  .assessment-section{padding:1.5rem 1rem}
+}
   </style>
 </head>
 <body>
@@ -202,6 +253,84 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
           <a class="cta" href="/contact">Book Your Free Call</a>
         </section>
 
+        <!-- Self-Assessment -->
+        <section class="assessment-section" aria-label="Career self-assessment">
+          <h2 class="assess-heading">Are You Building a Career<br>or Just Showing Up?</h2>
+          <form id="assessForm" novalidate>
+            <div class="assess-questions">
+              <div class="assess-row">
+                <span class="assess-num">01</span>
+                <span class="assess-q">Do you know your position on your school's priority list?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q1" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q1" value="No"><span>NO</span></label>
+                </div>
+              </div>
+              <div class="assess-row">
+                <span class="assess-num">02</span>
+                <span class="assess-q">Do you have a plan for your skiing outside of the realm of certification?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q2" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q2" value="No"><span>NO</span></label>
+                </div>
+              </div>
+              <div class="assess-row">
+                <span class="assess-num">03</span>
+                <span class="assess-q">Do you train year-round?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q3" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q3" value="No"><span>NO</span></label>
+                </div>
+              </div>
+              <div class="assess-row">
+                <span class="assess-num">04</span>
+                <span class="assess-q">Do you know which certifications would improve your influence?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q4" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q4" value="No"><span>NO</span></label>
+                </div>
+              </div>
+              <div class="assess-row">
+                <span class="assess-num">05</span>
+                <span class="assess-q">Do you keep record of your lessons?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q5" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q5" value="No"><span>NO</span></label>
+                </div>
+              </div>
+              <div class="assess-row">
+                <span class="assess-num">06</span>
+                <span class="assess-q">Do you ski for yourself at least once a week without demo or evaluation?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q6" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q6" value="No"><span>NO</span></label>
+                </div>
+              </div>
+              <div class="assess-row">
+                <span class="assess-num">07</span>
+                <span class="assess-q">Do you have a mentor relationship with a fully certified instructor?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q7" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q7" value="No"><span>NO</span></label>
+                </div>
+              </div>
+              <div class="assess-row">
+                <span class="assess-num">08</span>
+                <span class="assess-q">Do you have an off-season plan more active than "wait for snow"?</span>
+                <div class="assess-yn">
+                  <label class="yn-opt"><input type="radio" name="q8" value="Yes" required><span>YES</span></label>
+                  <label class="yn-opt"><input type="radio" name="q8" value="No"><span>NO</span></label>
+                </div>
+              </div>
+            </div>
+            <div class="assess-footer">
+              <input type="email" id="assess-email" name="email" placeholder="Your email address" required autocomplete="email" />
+              <button type="submit" class="cta assess-submit" id="assessBtn">Submit Assessment</button>
+              <div id="assess-status" class="assess-status" aria-live="polite"></div>
+            </div>
+          </form>
+        </section>
+
         <div class="vid" id="intro-video">
           <iframe
             src="https://www.youtube.com/embed/4IX2CwKIGo4?rel=0&modestbranding=1&playsinline=1"
@@ -247,5 +376,60 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
   </div>
 
   <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
+
+<script>
+(function(){
+  var form=document.getElementById('assessForm');
+  var btn=document.getElementById('assessBtn');
+  var status=document.getElementById('assess-status');
+  var names=['q1','q2','q3','q4','q5','q6','q7','q8'];
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    status.textContent='';
+    var email=document.getElementById('assess-email').value.trim();
+    if(!email){status.textContent='Please enter your email.';status.className='assess-status err';return;}
+    var answers={};
+    for(var i=0;i<names.length;i++){
+      var sel=form.querySelector('input[name="'+names[i]+'"]:checked');
+      if(!sel){status.textContent='Please answer all 8 questions.';status.className='assess-status err';return;}
+      answers[names[i]]=sel.value;
+    }
+    btn.disabled=true;
+    var fd=new FormData();
+    fd.append('email',email);
+    fd.append('_replyto',email);
+    fd.append('_subject','Self-Assessment — Instructor Grindset');
+    fd.append('_source','homepage-assessment');
+    var qs=['Do you know your position on your school\'s priority list?',
+      'Do you have a plan for your skiing outside of the realm of certification?',
+      'Do you train year-round?',
+      'Do you know which certifications would improve your influence?',
+      'Do you keep record of your lessons?',
+      'Do you ski for yourself at least once a week without demo or evaluation?',
+      'Do you have a mentor relationship with a fully certified instructor?',
+      'Do you have an off-season plan more active than "wait for snow"?'];
+    for(var j=0;j<names.length;j++){
+      fd.append(qs[j],answers[names[j]]);
+    }
+    try{
+      var res=await fetch('https://formspree.io/f/xyzbdqgq',{method:'POST',body:fd,headers:{'Accept':'application/json'}});
+      if(res.ok){
+        status.textContent='Submitted — check your inbox.';
+        status.className='assess-status ok';
+        btn.textContent='Submitted';
+      } else {
+        var j2=await res.json().catch(function(){return {};});
+        status.textContent=(j2.errors&&j2.errors.map(function(x){return x.message;}).join(', '))||'Something went wrong.';
+        status.className='assess-status err';
+        btn.disabled=false;
+      }
+    } catch(err){
+      status.textContent='Network error. Please try again.';
+      status.className='assess-status err';
+      btn.disabled=false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
