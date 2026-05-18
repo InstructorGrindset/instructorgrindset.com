@@ -183,7 +183,7 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
       <div class="content">
 
         <!-- Hero -->
-        <p class="hero-hook">Career development for snowsports instructors</p>
+        <p class="hero-hook">Career Development For Snowsports Instructors</p>
 
         <!-- Discovery Call -->
         <section class="discovery-section" aria-label="Book a free discovery call">
@@ -254,30 +254,6 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
             </div>
             <div class="assess-row">
               <span class="assess-num">04</span>
-              <span class="assess-q">Do you know which certifications would improve your influence?</span>
-              <div class="assess-yn">
-                <label class="yn-opt"><input type="radio" name="q4" value="Yes"><span>YES</span></label>
-                <label class="yn-opt"><input type="radio" name="q4" value="No"><span>NO</span></label>
-              </div>
-            </div>
-            <div class="assess-row">
-              <span class="assess-num">05</span>
-              <span class="assess-q">Do you keep record of your lessons?</span>
-              <div class="assess-yn">
-                <label class="yn-opt"><input type="radio" name="q5" value="Yes"><span>YES</span></label>
-                <label class="yn-opt"><input type="radio" name="q5" value="No"><span>NO</span></label>
-              </div>
-            </div>
-            <div class="assess-row">
-              <span class="assess-num">06</span>
-              <span class="assess-q">Do you ski for yourself at least once a week without demo or evaluation?</span>
-              <div class="assess-yn">
-                <label class="yn-opt"><input type="radio" name="q6" value="Yes"><span>YES</span></label>
-                <label class="yn-opt"><input type="radio" name="q6" value="No"><span>NO</span></label>
-              </div>
-            </div>
-            <div class="assess-row">
-              <span class="assess-num">07</span>
               <span class="assess-q">Do you have a mentor relationship with a fully certified instructor?</span>
               <div class="assess-yn">
                 <label class="yn-opt"><input type="radio" name="q7" value="Yes"><span>YES</span></label>
@@ -285,7 +261,7 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
               </div>
             </div>
             <div class="assess-row">
-              <span class="assess-num">08</span>
+              <span class="assess-num">05</span>
               <span class="assess-q">Do you have an off-season plan more active than "wait for snow"?</span>
               <div class="assess-yn">
                 <label class="yn-opt"><input type="radio" name="q8" value="Yes"><span>YES</span></label>
@@ -347,16 +323,16 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
 (function(){
   var btn=document.getElementById('scheduleBtn');
   var errEl=document.getElementById('assess-err');
-  var names=['q1','q2','q3','q4','q5','q6','q7','q8'];
+  var names=['q1','q2','q3','q7','q8'];
   btn.addEventListener('click',function(){
     errEl.textContent='';
     var params=new URLSearchParams();
     for(var i=0;i<names.length;i++){
       var sel=document.querySelector('input[name="'+names[i]+'"]:checked');
-      if(!sel){errEl.textContent='Please answer all 8 questions first.';return;}
-      params.set(names[i],sel.value);
+      if(sel) params.set(names[i],sel.value);
     }
-    window.location.href='/contact?'+params.toString();
+    var qs=params.toString();
+    window.location.href='/contact'+(qs?'?'+qs:'');
   });
 })();
 </script>
