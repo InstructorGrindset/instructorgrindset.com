@@ -196,7 +196,7 @@
 
             <div class="pp-bar-row">
               <div class="pp-bar-meta">
-                <span class="pp-bar-name">Employment status (45%)</span>
+                <span class="pp-bar-name">Employment status (40%)</span>
                 <span class="pp-bar-score" id="pp-score-ft">— / 100</span>
               </div>
               <div class="pp-bar-track"><div class="pp-bar-fill" id="pp-bar-ft"></div></div>
@@ -204,7 +204,7 @@
 
             <div class="pp-bar-row">
               <div class="pp-bar-meta">
-                <span class="pp-bar-name">Certification (30%)</span>
+                <span class="pp-bar-name">Certification (35%)</span>
                 <span class="pp-bar-score" id="pp-score-cert">— / 100</span>
               </div>
               <div class="pp-bar-track"><div class="pp-bar-fill" id="pp-bar-cert"></div></div>
@@ -256,7 +256,7 @@
       var addMap    = {0:0, 1:25, 2:60, 3:100};
       var addScore  = addMap[addCred];
 
-      var total = ftScore * 0.45 + certScore * 0.30 + expScore * 0.15 + addScore * 0.10;
+      var total = ftScore * 0.40 + certScore * 0.35 + expScore * 0.15 + addScore * 0.10;
 
       var percentile = 'Top ' + (100 - total).toFixed(1) + '%';
 
