@@ -29,6 +29,7 @@ CRITERION_LABEL = {
     "heritage": "Heritage",
     "operator_compensation": "Operator compensation",
     "year_round_training": "Year round training",
+    "owner_selection": "Owner selection",
 }
 FACILITY_LABEL = {"ski_area": "ski area", "indoor": "indoor", "training_center": "training center"}
 # Fields reviewed for completeness, in display order.

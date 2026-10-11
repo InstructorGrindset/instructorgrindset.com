@@ -20,6 +20,7 @@ export const CRITERION_LABEL = {
   heritage: 'Heritage',
   operator_compensation: 'Operator compensation',
   year_round_training: 'Year round training',
+  owner_selection: 'Owner selection',
 };
 
 export function criterionLabel(key) { return CRITERION_LABEL[key] || humanize(key); }

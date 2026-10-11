@@ -21,7 +21,7 @@ from .common import (
 import datetime as dt
 
 Criterion = Literal[
-    "diehard", "luxury", "athlete_development", "heritage", "operator_compensation", "year_round_training",
+    "diehard", "luxury", "athlete_development", "heritage", "operator_compensation", "year_round_training", "owner_selection",
 ]
 FacilityType = Literal["ski_area", "indoor", "training_center"]
 Tier = Literal["A", "B"]

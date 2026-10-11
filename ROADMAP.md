@@ -44,6 +44,7 @@ A resort qualifies for Tier A when it meets **at least one** of these:
 * **Athlete development:** a ski and snowboard academy, club program feeding national teams, or regular national team training presence
 * **Heritage:** historic significance to American skiing or snowboarding
 * **Operator compensation:** every US resort owned or operated by Vail Resorts or Alterra Mountain Company. Vail compensation packages are top of the industry and standardized across locations. Alterra compensation is strong though not always standardized; all Alterra resorts qualify by owner decision
+* **Owner selection:** a resort the owner adds to Tier A directly. The record cites the decisions log and carries any other sourced criteria
 * **Year round training:** indoor snow slopes and year round training facilities (summer glacier camps, water ramps, airbag and trampoline centers, national team centers). These appear on the map with their own facility type: `ski_area`, `indoor`, or `training_center`
 
 ### Seed list
@@ -225,3 +226,4 @@ Each phase ends with acceptance criteria. Work one phase per Claude Code session
 | Crowdsourced data | Highest confidence per field; reports shown only as aggregates of 3+ |
 | Season Income Calculator | Shared infrastructure later (Phase 9); not visualized in the map |
 | Owner additions (2026-10-11) | Big Sky, Taos, Snowmass, Buttermilk, Sun Valley, Dollar Mountain (its own record), Yellowstone Club and Deer Valley are approved Tier A. Indoor skiing and year round training facilities are included through the year round training criterion. Every Vail and Alterra US resort is approved Tier A through the operator compensation criterion |
+| Owner review of candidates (2026-10-11) | Grand Targhee and Mt Hood Meadows are approved Tier A (owner selection). Mt Rose, Loon, Bretton Woods and Smugglers' Notch stay Tier B |

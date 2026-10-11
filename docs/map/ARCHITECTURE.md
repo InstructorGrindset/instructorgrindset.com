@@ -44,7 +44,7 @@ All files carry a top level `{ "version": <int>, "generated_at": <ISO datetime>,
 Resort {
   id, name, tier: "A" | "B",
   facility_type: "ski_area" | "indoor" | "training_center",   // Tier B is always ski_area; indoor and training records may have no size data
-  tier_a_criteria: [{ criterion: diehard|luxury|athlete_development|heritage|operator_compensation|year_round_training,
+  tier_a_criteria: [{ criterion: diehard|luxury|athlete_development|heritage|operator_compensation|year_round_training|owner_selection,
                       rationale, source_id }],
   tier_a_status: "draft" | "approved" | null,      // null for Tier B
   approval: { by: string, date: "YYYY-MM-DD", note: string | null } | null,   // set only when tier_a_status is approved

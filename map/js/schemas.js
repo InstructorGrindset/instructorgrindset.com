@@ -21,7 +21,7 @@ export const FACILITY_TYPES = ['ski_area', 'indoor', 'training_center'];
 /** Missing until the build emits it; treated as a ski area. */
 const FacilityType = z.enum(FACILITY_TYPES).nullish().transform((v) => v ?? 'ski_area');
 
-export const CRITERIA = ['diehard', 'luxury', 'athlete_development', 'heritage', 'operator_compensation', 'year_round_training'];
+export const CRITERIA = ['diehard', 'luxury', 'athlete_development', 'heritage', 'operator_compensation', 'year_round_training', 'owner_selection'];
 
 export const TierACriterion = z.object({
   // A criterion added to the contract later still renders (humanized) instead of dropping the resort.

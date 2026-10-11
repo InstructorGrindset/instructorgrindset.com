@@ -80,7 +80,7 @@ A facility record (no OpenSkiMap match and no size data is fine):
 | `tier_a_status` | no | `draft` or `approved`; overrides the batch `status` |
 | `approval` | when approved | `{by, date, note}`; `note` may be `null` |
 | `openskimap_names` | no | OpenSkiMap area names this record covers when it spans several mapped areas |
-| `tier_a_criteria` | yes, 1 or more | `criterion` is one of `diehard`, `luxury`, `athlete_development`, `heritage`, `operator_compensation`, `year_round_training` |
+| `tier_a_criteria` | yes, 1 or more | `criterion` is one of `diehard`, `luxury`, `athlete_development`, `heritage`, `operator_compensation`, `year_round_training`, `owner_selection` (owner decision; cite `owner-decisions-2026-10-11`) |
 | `size` | no | `acres`, `vertical_ft`, `lifts`, `ski_school_staff_est`; each Sourced number or `null` |
 | `elevation` | no | `base_ft`, `summit_ft`; each Sourced number or `null`. When null, the build fills them from OpenSkiMap (confidence `estimated`) |
 | `season` | no | `open_typical`, `close_typical`, `training_start` as Sourced `"MM-DD"` strings; `length_days` Sourced number |

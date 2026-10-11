@@ -193,7 +193,8 @@ def test_elevation_and_source_note():
 
 def test_new_criteria_and_facility_type():
     crit = [{"criterion": "operator_compensation", "rationale": "r", "source_id": "src-a"},
-            {"criterion": "year_round_training", "rationale": "r", "source_id": "src-a"}]
+            {"criterion": "year_round_training", "rationale": "r", "source_id": "src-a"},
+            {"criterion": "owner_selection", "rationale": "r", "source_id": "src-a"}]
     r = Resort.model_validate(resort(tier_a_criteria=crit, facility_type="indoor"), context=CTX)
     assert r.facility_type == "indoor"
     assert Resort.model_validate(resort(), context=CTX).facility_type == "ski_area"
