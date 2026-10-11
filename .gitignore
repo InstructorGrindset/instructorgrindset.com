@@ -1,0 +1,7 @@
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+data/raw/climate/
+data/raw/openskimap/*.full.geojson
