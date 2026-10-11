@@ -415,29 +415,45 @@ def fetch_locations(
             batch = [l for l in locs[i : i + size] if l.resort_id not in errors]
             if not batch:
                 continue
-            weight = request_weight(len(batch), n_days, len(DAILY_VARIABLES))
-            if budget is not None:
-                budget.acquire(weight)
-            log(f"  open meteo {start}..{end} for {', '.join(l.resort_id for l in batch)} (weight {weight:.0f})")
-            try:
-                payloads = fetch_window(batch, start, end)
-            except (http.NetworkBlocked, BudgetExhausted, http.RateLimited):
-                raise
-            except Exception as e:  # one bad batch should not stop the rest
-                for l in batch:
-                    errors[l.resort_id] = f"open meteo {start}..{end}: {e}"
-                continue
-            fetched_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
-            for loc, payload in zip(batch, payloads):
-                try:
-                    parse_location(payload)
-                except Exception as e:
-                    errors[loc.resort_id] = f"open meteo {start}..{end}: unreadable response: {e}"
-                    continue
-                data = _read_cache(cache_dir, loc)
-                data["chunks"][f"{start}_{end}"] = {"fetched_at": fetched_at, "response": payload}
-                _write_cache(cache_dir, data)
+            _fetch_batch(batch, start, end, n_days, cache_dir, budget, errors, log)
     return errors
+
+
+def _fetch_batch(
+    batch: list[Location],
+    start: date,
+    end: date,
+    n_days: int,
+    cache_dir: Path,
+    budget: Optional[WeightBudget],
+    errors: dict[str, str],
+    log: Callable[[str], None],
+) -> None:
+    weight = request_weight(len(batch), n_days, len(DAILY_VARIABLES))
+    if budget is not None:
+        budget.acquire(weight)
+    log(f"  open meteo {start}..{end} for {', '.join(l.resort_id for l in batch)} (weight {weight:.0f})")
+    try:
+        payloads = fetch_window(batch, start, end)
+    except (http.NetworkBlocked, BudgetExhausted, http.RateLimited):
+        raise
+    except Exception as e:  # one bad location should not stop the rest
+        if len(batch) > 1:
+            for loc in batch:  # retry alone to find the location the API rejects
+                _fetch_batch([loc], start, end, n_days, cache_dir, budget, errors, log)
+        else:
+            errors[batch[0].resort_id] = f"open meteo {start}..{end}: {e}"
+        return
+    fetched_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for loc, payload in zip(batch, payloads):
+        try:
+            parse_location(payload)
+        except Exception as e:
+            errors[loc.resort_id] = f"open meteo {start}..{end}: unreadable response: {e}"
+            continue
+        data = _read_cache(cache_dir, loc)
+        data["chunks"][f"{start}_{end}"] = {"fetched_at": fetched_at, "response": payload}
+        _write_cache(cache_dir, data)
 
 
 def preflight() -> None:

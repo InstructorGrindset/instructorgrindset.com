@@ -199,3 +199,45 @@ def test_get_json_daily_rate_limit(monkeypatch):
     with pytest.raises(http.RateLimited) as e:
         http.get_json("https://example.org/x")
     assert e.value.daily
+
+
+def test_get_json_minutely_429_backs_off_then_succeeds(monkeypatch):
+    import io
+    import urllib.error
+    import urllib.request
+
+    waits = []
+    monkeypatch.setattr(http, "_sleep", waits.append)
+    attempts = []
+
+    class Resp(io.BytesIO):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    def limited_once(req, timeout=None):
+        attempts.append(1)
+        if len(attempts) == 1:
+            body = b'{"error":true,"reason":"Minutely API request limit exceeded. Please try again in one minute."}'
+            raise urllib.error.HTTPError(req.full_url, 429, "Too Many", {}, io.BytesIO(body))
+        return Resp(b"[]")
+
+    monkeypatch.setattr(urllib.request, "urlopen", limited_once)
+    assert http.get_json("https://example.org/x") == []
+    assert waits == [65.0]
+
+
+def test_get_json_persistent_429_raises_rate_limited(monkeypatch):
+    import io
+    import urllib.error
+    import urllib.request
+
+    def limited(req, timeout=None):
+        raise urllib.error.HTTPError(req.full_url, 429, "Too Many", {"Retry-After": "7"}, io.BytesIO(b'{"reason":"Hourly API request limit exceeded"}'))
+
+    monkeypatch.setattr(urllib.request, "urlopen", limited)
+    with pytest.raises(http.RateLimited, match="Hourly") as e:
+        http.get_json("https://example.org/x", retries=2)
+    assert not e.value.daily

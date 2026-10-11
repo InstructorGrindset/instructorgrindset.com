@@ -24,7 +24,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import asdict
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Optional
@@ -348,6 +347,13 @@ def main(argv: Optional[list[str]] = None, *, today: Optional[date] = None, log:
             if need_snotel:
                 hosts.append("wcc.sc.egov.usda.gov")
                 snotel.preflight()
+        except http.RateLimited as e:
+            log(
+                f"climate: {hosts[-1]} is rate limiting this IP ({e}). Nothing was written. "
+                f"Wait for the limit to reset, then run:\n"
+                f"  {REAL_RUN_COMMAND}"
+            )
+            return 3
         except http.NetworkBlocked as e:
             log(
                 f"climate: network blocked ({e}). Nothing was written.\n"
