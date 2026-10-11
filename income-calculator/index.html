@@ -295,8 +295,8 @@
                 <input type="range" id="s-life" min="200" max="4000" step="50" value="800" oninput="sv('v-life',this.value,'$/mo');calc()">
               </div>
               <div class="field">
-                <div class="field-row"><label class="field-name" for="s-trans">Getting there &amp; back</label><span class="field-val" id="v-trans">$400</span></div>
-                <input type="range" id="s-trans" min="0" max="3000" step="50" value="400" oninput="sv('v-trans',this.value,'$');calc()">
+                <div class="field-row"><label class="field-name" for="s-trans">Transportation per month</label><span class="field-val" id="v-trans">$150/mo</span></div>
+                <input type="range" id="s-trans" min="0" max="1500" step="25" value="150" oninput="sv('v-trans',this.value,'$/mo');calc()">
               </div>
               <div class="field">
                 <div class="field-row"><label class="field-name" for="s-gear">Gear &amp; equipment</label><span class="field-val" id="v-gear">$300</span></div>
@@ -439,7 +439,8 @@
       var months    = weeks / 4.33;
       var housingCost = housing * months;
       var lifeCost  = life * months;
-      var totalExp  = housingCost + lifeCost + trans + gear;
+      var transCost = trans * months;
+      var totalExp  = housingCost + lifeCost + transCost + gear;
 
       var net       = afterTax - totalExp;
       var weeklyNet = net / weeks;
@@ -486,7 +487,7 @@
         {label:'State & FICA',  amt:stateTax+fica,   color:'#EF9F27'},
         {label:'Housing',       amt:housingCost,     color:'#A32D2D'},
         {label:'Life expenses', amt:lifeCost,        color:'#378ADD'},
-        {label:'Transport',     amt:trans,           color:'#6B7280'},
+        {label:'Transport',     amt:transCost,       color:'#6B7280'},
         {label:'Gear',          amt:gear,            color:'#4B5563'},
       ];
       var maxAmt = Math.max.apply(null, bars.map(function(b){return b.amt}));
@@ -531,7 +532,7 @@
       }
       eRow('Rent ($'+housing.toLocaleString()+'/mo &times; '+months.toFixed(1)+' months)', housingCost);
       eRow('Food, going out &amp; everything else ($'+life.toLocaleString()+'/mo)', lifeCost);
-      eRow('Getting there &amp; back', trans);
+      eRow('Transportation', transCost);
       eRow('Gear &amp; equipment', gear);
       eRow('Total spent', totalExp, 'total-row');
 
