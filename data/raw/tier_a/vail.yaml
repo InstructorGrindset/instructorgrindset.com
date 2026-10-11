@@ -1,0 +1,165 @@
+batch: vail
+researched_date: 2026-10-11
+status: draft            # Alexandre approves later
+sources:
+  - id: vail-10k-fy2026
+    url: https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm
+    title: Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)
+    accessed_date: 2026-10-11
+  - {id: wikipedia-vail-ski-resort, url: https://en.wikipedia.org/wiki/Vail_Ski_Resort, title: Vail Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-beaver-creek-resort, url: https://en.wikipedia.org/wiki/Beaver_Creek_Resort, title: Beaver Creek Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-breckenridge-ski-resort, url: https://en.wikipedia.org/wiki/Breckenridge_Ski_Resort, title: Breckenridge Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-crested-butte-mountain-resort, url: https://en.wikipedia.org/wiki/Crested_Butte_Mountain_Resort, title: Crested Butte Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-crested-butte-colorado, url: "https://en.wikipedia.org/wiki/Crested_Butte,_Colorado", title: "Crested Butte, Colorado (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-park-city-mountain-resort, url: https://en.wikipedia.org/wiki/Park_City_Mountain_Resort, title: Park City Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-northstar-california, url: https://en.wikipedia.org/wiki/Northstar_California, title: Northstar California (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-kirkwood-mountain-resort, url: https://en.wikipedia.org/wiki/Kirkwood_Mountain_Resort, title: Kirkwood Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-stowe-mountain-resort, url: https://en.wikipedia.org/wiki/Stowe_Mountain_Resort, title: Stowe Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mount-snow, url: https://en.wikipedia.org/wiki/Mount_Snow, title: Mount Snow (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-wildcat-mountain-ski-area, url: https://en.wikipedia.org/wiki/Wildcat_Mountain_Ski_Area, title: Wildcat Mountain Ski Area (Wikipedia), accessed_date: 2026-10-11}
+resorts:
+  - id: vail
+    name: Vail
+    state: CO
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published}
+    lat: 39.639
+    lon: -106.374
+    location_source_id: wikipedia-vail-ski-resort
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Vail hosted the 1989 Alpine World Ski Championships and cohosted the 1999 edition, and several of its founders served in the 10th Mountain Division that trained nearby.", source_id: wikipedia-vail-ski-resort}
+      - {criterion: luxury, rationale: "Vail Resorts is turning every private lesson at Vail into its Epic Ascent product, with concierge support and white glove gear rental, starting in the 2026/2027 season.", source_id: vail-10k-fy2026}
+    size:
+      acres: {value: 5317, source_id: wikipedia-vail-ski-resort, as_of: 2026-10-11, confidence: published, note: "10-K gives approximately 5,300 skiable acres"}
+      vertical_ft: {value: 3450, source_id: wikipedia-vail-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: null   # infobox total 31 conflicts with its itemized list, which sums to 32
+  - id: beaver-creek
+    name: Beaver Creek
+    state: CO
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published}
+    lat: 39.6314
+    lon: -106.5217
+    location_source_id: wikipedia-beaver-creek-resort
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Beaver Creek hosted the World Ski Championships in 1989, 1999 and 2015 and is a regular early season host of the Birds of Prey World Cup races.", source_id: wikipedia-beaver-creek-resort}
+      - {criterion: luxury, rationale: "The 10-K describes a European style resort with a first class children's ski school, and every private lesson there becomes the concierge level Epic Ascent product in the 2026/2027 season.", source_id: vail-10k-fy2026}
+    size:
+      acres: {value: 2082, source_id: wikipedia-beaver-creek-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3340, source_id: wikipedia-beaver-creek-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 24, source_id: wikipedia-beaver-creek-resort, as_of: 2026-10-11, confidence: published, note: "includes 6 magic carpets"}
+  - id: breckenridge
+    name: Breckenridge
+    state: CO
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published}
+    lat: 39.48
+    lon: -106.067
+    location_source_id: wikipedia-breckenridge-ski-resort
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Breckenridge installed the world's first high speed detachable quad chairlift in 1981 and hosted the first Winter Dew Tour in 2008.", source_id: wikipedia-breckenridge-ski-resort}
+    size:
+      acres: {value: 2908, source_id: wikipedia-breckenridge-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3398, source_id: wikipedia-breckenridge-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 35, source_id: wikipedia-breckenridge-ski-resort, as_of: 2026-10-11, confidence: published, note: "20 chairlifts and gondola plus 15 surface lifts"}
+  - id: crested-butte
+    name: Crested Butte
+    state: CO
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published}
+    lat: 38.8997
+    lon: -106.965
+    location_source_id: wikipedia-crested-butte-mountain-resort
+    cluster_hint: southwest-colorado
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "The town changed from a mining town to a tourist retreat catering to the affluent as the ski resort took over the local economy.", source_id: wikipedia-crested-butte-colorado}
+    size:
+      acres: {value: 1547, source_id: wikipedia-crested-butte-mountain-resort, as_of: 2026-10-11, confidence: published, note: "10-K gives over 1,500 skiable acres"}
+      vertical_ft: {value: 3055, source_id: wikipedia-crested-butte-mountain-resort, as_of: 2026-10-11, confidence: published, note: "10-K gives over 3,000 feet"}
+      lifts: {value: 15, source_id: wikipedia-crested-butte-mountain-resort, as_of: 2026-10-11, confidence: published, note: "includes 3 magic carpets"}
+  - id: park-city
+    name: Park City
+    state: UT
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published, note: "mountain terrain leased per 10-K Item 2"}
+    lat: 40.6508
+    lon: -111.5075
+    location_source_id: wikipedia-park-city-mountain-resort
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Park City has several U.S. Ski Team training courses, and its local clubs merged into the Park City Ski and Snowboard Club in 2017.", source_id: wikipedia-park-city-mountain-resort}
+      - {criterion: heritage, rationale: "Park City hosted the giant slalom and the snowboarding halfpipe and parallel giant slalom events of the 2002 Winter Olympics.", source_id: wikipedia-park-city-mountain-resort}
+    size:
+      acres: {value: 7300, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published, note: "Wikipedia infobox gives 6700; company figure preferred"}
+      vertical_ft: {value: 3200, source_id: wikipedia-park-city-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 41, source_id: wikipedia-park-city-mountain-resort, as_of: 2026-10-11, confidence: published}
+  - id: northstar
+    name: Northstar California
+    state: CA
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published, note: "operated under lease per 10-K Item 2; Wikipedia names EPR Properties as property owner"}
+    lat: 39.264
+    lon: -120.125
+    location_source_id: wikipedia-northstar-california
+    cluster_hint: lake-tahoe
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "The 10-K calls Northstar the premier luxury mountain resort near Lake Tahoe, with premium lodging and a village of high end shops and restaurants.", source_id: vail-10k-fy2026}
+    size:
+      acres: {value: 3170, source_id: wikipedia-northstar-california, as_of: 2026-10-11, confidence: published, note: "10-K gives over 3,000 skiable acres"}
+      vertical_ft: {value: 2280, source_id: wikipedia-northstar-california, as_of: 2026-10-11, confidence: published}
+      lifts: null   # infobox says 20 lifts, article body says 19
+  - id: kirkwood
+    name: Kirkwood
+    state: CA
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published}
+    lat: 38.684
+    lon: -120.068
+    location_source_id: wikipedia-kirkwood-mountain-resort
+    cluster_hint: lake-tahoe
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Kirkwood is known for heavy snowfall and advanced off piste terrain, with only 12 percent beginner terrain, and hosted legs of the North American Freeskiing Championships in 2009 and 2010.", source_id: wikipedia-kirkwood-mountain-resort}
+    size:
+      acres: {value: 2300, source_id: wikipedia-kirkwood-mountain-resort, as_of: 2026-10-11, confidence: published, note: "10-K gives over 2,300 skiable acres"}
+      vertical_ft: {value: 2000, source_id: wikipedia-kirkwood-mountain-resort, as_of: 2026-10-11, confidence: published, note: "10-K also gives 2,000 feet"}
+      lifts: null   # infobox total 15 conflicts with its itemized list, which sums to 13
+  - id: stowe
+    name: Stowe
+    state: VT
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published, note: "Mount Mansfield terrain leased per 10-K Item 2"}
+    lat: 44.5319
+    lon: -72.7875
+    location_source_id: wikipedia-stowe-mountain-resort
+    cluster_hint: northern-vermont
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "The first trails on Mount Mansfield were cut in 1933, and the Mount Mansfield Ski Patrol, founded in 1934, is the oldest in the nation and the model for the National Ski Patrol.", source_id: wikipedia-stowe-mountain-resort}
+      - {criterion: luxury, rationale: "The 10-K calls Stowe the premier high end regional ski area in the Northeast, with an exceptional base area experience.", source_id: vail-10k-fy2026}
+    size:
+      acres: {value: 485, source_id: wikipedia-stowe-mountain-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2360, source_id: wikipedia-stowe-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 12, source_id: wikipedia-stowe-mountain-resort, as_of: 2026-10-11, confidence: published}
+  - id: mount-snow
+    name: Mount Snow
+    state: VT
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published}
+    lat: 42.959
+    lon: -72.922
+    location_source_id: wikipedia-mount-snow
+    cluster_hint: southern-vermont
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Mount Snow Academy graduates include Kelly Clark, 2002 Olympic halfpipe gold medalist, and Devin Logan, 2014 Olympic slopestyle silver medalist.", source_id: wikipedia-mount-snow}
+      - {criterion: heritage, rationale: "Mount Snow cohosted the first Extreme Games in 1995, hosted the X Games in 2000 and 2001, and opened the first snowboard park in the East in 1992.", source_id: wikipedia-mount-snow}
+    size:
+      acres: {value: 601, source_id: wikipedia-mount-snow, as_of: 2026-10-11, confidence: published}
+      vertical_ft: null   # infobox has no vertical field
+      lifts: {value: 19, source_id: wikipedia-mount-snow, as_of: 2026-10-11, confidence: published}
+  - id: wildcat
+    name: Wildcat Mountain
+    state: NH
+    owner: {value: Vail Resorts, source_id: vail-10k-fy2026, as_of: 2026-10-11, confidence: published}
+    lat: 44.2631
+    lon: -71.2383
+    location_source_id: wikipedia-wildcat-mountain-ski-area
+    cluster_hint: white-mountains
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Wildcat opened the first gondola lift in North America in 1958 and is home to one of the oldest ski racing trails in the United States.", source_id: wikipedia-wildcat-mountain-ski-area}
+    size:
+      acres: {value: 225, source_id: wikipedia-wildcat-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2112, source_id: wikipedia-wildcat-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 5, source_id: wikipedia-wildcat-mountain-ski-area, as_of: 2026-10-11, confidence: published}
