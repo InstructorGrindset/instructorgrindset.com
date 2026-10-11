@@ -126,3 +126,19 @@ def test_hand_drawn_polygon_wins(cfg):
     ms = members()
     infos = build_clusters(ms, assign_clusters(ms, cfg.clusters, STATE_NAMES), cfg.clusters, STATE_NAMES)
     assert next(c for c in infos if c.id == "i70-corridor").polygon["coordinates"] == [ring]
+
+
+def test_tier_a_fallback_hint(cfg):
+    ms = [Member("midwest", "MI", 42.5, -83.5, "A", "other-mi"), Member("near", "MI", 42.6, -83.4, "B")]
+    a = assign_clusters(ms, cfg.clusters, STATE_NAMES)
+    assert a == {"midwest": "other-mi", "near": "other-mi"}
+    infos = build_clusters(ms, a, cfg.clusters, STATE_NAMES)
+    assert [(c.id, c.name, c.resort_ids) for c in infos] == [("other-mi", "Other Michigan", ["midwest", "near"])]
+    with pytest.raises(ClusterAssignmentError, match="use 'other-mi'"):
+        assign_clusters([Member("x", "MI", 42.5, -83.5, "A", "other-wi")], cfg.clusters, STATE_NAMES)
+
+
+def test_fallback_tier_a_is_not_an_anchor(cfg):
+    cfg.clusters.membership.require_state_match = False
+    ms = [Member("a", "MI", 42.5, -83.5, "A", "other-mi"), Member("b", "OH", 42.0, -83.5, "B")]
+    assert assign_clusters(ms, cfg.clusters, STATE_NAMES)["b"] == "other-oh"

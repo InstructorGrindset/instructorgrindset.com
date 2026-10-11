@@ -8,6 +8,7 @@ import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
 import { h } from './ui.js';
+import { FILTERS } from './labels.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -21,6 +22,7 @@ const els = {
   status: $('panel-status'),
   list: $('list-view'),
   listToggle: $('list-toggle'),
+  filter: $('facility-filter'),
   devBadge: $('dev-badge'),
 };
 
@@ -141,6 +143,19 @@ async function main() {
     e.preventDefault();
     router.goHref(a.getAttribute('href'));
   });
+
+  // Facility filter: applies to the map and the list view.
+  const filterButtons = FILTERS.map((f) => h('button', {
+    type: 'button', class: 'filter-btn', 'aria-pressed': String(f.key === 'all'), dataset: { filter: f.key },
+    onclick: () => {
+      for (const b of filterButtons) b.setAttribute('aria-pressed', String(b === filterButtons[FILTERS.indexOf(f)]));
+      if (mapCtl) mapCtl.setFilter(f.key);
+      list.setFilter(f.key);
+      announce(`Showing ${f.key === 'all' ? 'every facility type' : f.label.toLowerCase()}.`);
+    },
+  }, f.label));
+  els.filter.append(...filterButtons);
+  els.filter.hidden = false;
 
   els.listToggle.addEventListener('click', () => setListView(els.list.hidden));
   els.listToggle.hidden = false;

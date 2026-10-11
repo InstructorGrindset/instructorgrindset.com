@@ -1,12 +1,16 @@
 // List view: the full state, cluster and resort hierarchy without the map.
-import { clusterResorts, clusterOrder } from './data.js';
+import { clusterResorts, clusterOrder, matchesFilter } from './data.js';
 import { hrefFor } from './router.js';
 import { h, clear, plural } from './ui.js';
+import { FACILITY_LABEL } from './labels.js';
 
 export function createListView(root, index) {
   function link(view, label, cls) {
     return h('a', { href: hrefFor(view), 'data-nav': '', class: cls, dataset: { key: keyOf(view) } }, label);
   }
+
+  let filter = 'all';
+  let current = null;
 
   function build() {
     clear(root);
@@ -24,16 +28,26 @@ export function createListView(root, index) {
           link({ level: 'cluster', stateCode: s.code, clusterId: c.id }, c.name, 'tree-cluster'),
           h('ul', null, clusterResorts(index, c)
             .filter((r) => r.state === s.code || !c.states.includes(r.state))
+            .filter((r) => matchesFilter(r, filter))
             .map((r) => h('li', null,
               link({ level: 'resort', stateCode: s.code, clusterId: c.id, resortId: r.id }, r.name, 'tree-resort'),
-              r.tier === 'A' ? h('span', { class: 'tier tier-a' }, 'Tier A') : null))))))))));
+              r.tier === 'A' ? h('span', { class: 'tier tier-a' }, 'Tier A') : null,
+              r.facility_type !== 'ski_area' ? h('span', { class: `tier tier-facility fac-${r.facility_type}` }, FACILITY_LABEL[r.facility_type]) : null))))))))));
+    if (filter !== 'all') {
+      // Drop clusters and states left empty by the filter.
+      for (const ul of root.querySelectorAll('.tree ul ul')) if (!ul.children.length) ul.parentElement.remove();
+      for (const li of root.querySelectorAll('.tree > li')) if (!li.querySelector('.tree-resort')) li.remove();
+      if (!root.querySelector('.tree-resort')) root.append(h('p', { class: 'empty' }, 'Nothing matches this filter yet.'));
+    }
   }
 
   function keyOf(v) { return [v.stateCode || '', v.clusterId || '', v.resortId || ''].join('/'); }
 
   build();
   return {
+    setFilter(next) { filter = next; build(); if (current) this.highlight(current); },
     highlight(view) {
+      current = view;
       for (const a of root.querySelectorAll('[aria-current]')) a.removeAttribute('aria-current');
       const k = keyOf({ stateCode: view.stateCode, clusterId: view.clusterId, resortId: view.resortId });
       const el = root.querySelector(`a[data-key="${CSS.escape(k)}"]`);

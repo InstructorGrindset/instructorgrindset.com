@@ -54,7 +54,23 @@ RESORTS = [
     ("juliet-summit", "Juliet Summit", "fixture-lake-crest", "NV", "B", None, 39.32, -119.88, 1650, 1800, 7, True, "estimated"),
     ("kilo-notch", "Kilo Notch", "fixture-green-ridge", "VT", "A", "approved", 44.53, -72.78, 485, 2360, 13, True, "estimated"),
     ("lima-hollow", "Lima Hollow", "fixture-green-ridge", "VT", "B", None, 44.40, -72.95, 300, 1200, 5, False, None),
+    ("mike-dome", "Mike Snow Dome", "fixture-front-range", "CO", "A", "approved", 39.74, -105.62, None, 300, 3, False, None),
+    ("november-ramps", "November Ramps", "fixture-wasatch-like", "UT", "A", "draft", 40.66, -111.50, None, None, None, False, None),
 ]
+
+# facility_type per resort; lima-hollow deliberately omits the key to test tolerance.
+FACILITY = {"mike-dome": "indoor", "november-ramps": "training_center"}
+CRITERIA = {
+    "alpha-peak": ["operator_compensation", "luxury"],
+    "foxtrot-basin": ["diehard", "heritage"],
+    "kilo-notch": ["diehard", "heritage"],
+    "mike-dome": ["year_round_training"],
+    "november-ramps": ["year_round_training", "athlete_development"],
+}
+APPROVALS = {
+    "alpha-peak": {"by": "Fixture Reviewer", "date": "2026-10-05", "note": "Synthetic approval"},
+    "mike-dome": {"by": "Fixture Reviewer", "date": "2026-10-06", "note": None},
+}
 
 CLUSTERS = {
     "fixture-front-range": ("Fixture Front Range", ["CO"]),
@@ -86,14 +102,16 @@ def size_rank(acres):
 def resort_record(row):
     rid, name, cluster, state, tier, status, lat, lon, acres, vert, lifts, climate, _ = row
     sparse = rid in ("delta-ridge",)
+    facility = FACILITY.get(rid, "ski_area")
     staff = sourced(round((acres or 0) / 4) or None, "fixture-model", "estimated", "synthetic estimate") if acres else None
     record = {
         "id": rid, "name": name, "tier": tier,
         "tier_a_criteria": [
-            {"criterion": c, "rationale": "Synthetic fixture rationale.", "source_id": "fixture-resort-site"}
-            for c in (["diehard", "heritage"] if rid in ("foxtrot-basin", "kilo-notch") else ["luxury"])
+            {"criterion": c, "rationale": f"Synthetic rationale for {c.replace('_', ' ')}.", "source_id": "fixture-resort-site"}
+            for c in CRITERIA.get(rid, ["luxury"])
         ] if tier == "A" else [],
         "tier_a_status": status,
+        "approval": APPROVALS.get(rid) if status == "approved" else None,
         "owner": sourced("Fixture Mountain Co", "fixture-ownership") if tier == "A" else None,
         "lat": lat, "lon": lon, "location_source_id": "fixture-location",
         "cluster_id": cluster, "state": state,
@@ -126,6 +144,8 @@ def resort_record(row):
         "career": None, "editorial": None,
         "climate_available": climate,
     }
+    if rid != "lima-hollow":
+        record["facility_type"] = facility
     ids = {"fixture-location"}
     for group in ("size", "elevation", "season", "terrain"):
         for v in record[group].values():
@@ -228,7 +248,7 @@ def main():
     write("resorts.geojson", {"type": "FeatureCollection", "version": 1, "generated_at": GENERATED_AT, "features": [
         {"type": "Feature", "geometry": {"type": "Point", "coordinates": [r["lon"], r["lat"]]},
          "properties": {"id": r["id"], "name": r["name"], "tier": r["tier"], "cluster_id": r["cluster_id"],
-                        "state": r["state"],
+                        "state": r["state"], "facility_type": r.get("facility_type"),
                         "acres": r["size"]["acres"]["value"] if r["size"]["acres"] else None,
                         "vertical_ft": r["size"]["vertical_ft"]["value"] if r["size"]["vertical_ft"] else None,
                         "lifts": r["size"]["lifts"]["value"] if r["size"]["lifts"] else None,

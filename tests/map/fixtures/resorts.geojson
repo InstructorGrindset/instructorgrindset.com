@@ -18,6 +18,7 @@
     "tier": "A",
     "cluster_id": "fixture-front-range",
     "state": "CO",
+    "facility_type": "ski_area",
     "acres": 5300,
     "vertical_ft": 3450,
     "lifts": 31,
@@ -39,6 +40,7 @@
     "tier": "A",
     "cluster_id": "fixture-front-range",
     "state": "CO",
+    "facility_type": "ski_area",
     "acres": 2900,
     "vertical_ft": 2600,
     "lifts": 20,
@@ -60,6 +62,7 @@
     "tier": "B",
     "cluster_id": "fixture-front-range",
     "state": "CO",
+    "facility_type": "ski_area",
     "acres": 700,
     "vertical_ft": 1500,
     "lifts": 7,
@@ -81,6 +84,7 @@
     "tier": "B",
     "cluster_id": "fixture-front-range",
     "state": "CO",
+    "facility_type": "ski_area",
     "acres": null,
     "vertical_ft": null,
     "lifts": null,
@@ -102,6 +106,7 @@
     "tier": "B",
     "cluster_id": "fixture-high-desert",
     "state": "CO",
+    "facility_type": "ski_area",
     "acres": 1200,
     "vertical_ft": 2000,
     "lifts": 10,
@@ -123,6 +128,7 @@
     "tier": "A",
     "cluster_id": "fixture-wasatch-like",
     "state": "UT",
+    "facility_type": "ski_area",
     "acres": 2600,
     "vertical_ft": 2900,
     "lifts": 12,
@@ -144,6 +150,7 @@
     "tier": "B",
     "cluster_id": "fixture-wasatch-like",
     "state": "UT",
+    "facility_type": "ski_area",
     "acres": 1000,
     "vertical_ft": 1700,
     "lifts": 6,
@@ -165,6 +172,7 @@
     "tier": "A",
     "cluster_id": "fixture-lake-crest",
     "state": "CA",
+    "facility_type": "ski_area",
     "acres": 6000,
     "vertical_ft": 2850,
     "lifts": 34,
@@ -186,6 +194,7 @@
     "tier": "B",
     "cluster_id": "fixture-lake-crest",
     "state": "CA",
+    "facility_type": "ski_area",
     "acres": 1500,
     "vertical_ft": 1800,
     "lifts": 11,
@@ -207,6 +216,7 @@
     "tier": "B",
     "cluster_id": "fixture-lake-crest",
     "state": "NV",
+    "facility_type": "ski_area",
     "acres": 1650,
     "vertical_ft": 1800,
     "lifts": 7,
@@ -228,6 +238,7 @@
     "tier": "A",
     "cluster_id": "fixture-green-ridge",
     "state": "VT",
+    "facility_type": "ski_area",
     "acres": 485,
     "vertical_ft": 2360,
     "lifts": 13,
@@ -249,9 +260,54 @@
     "tier": "B",
     "cluster_id": "fixture-green-ridge",
     "state": "VT",
+    "facility_type": null,
     "acres": 300,
     "vertical_ft": 1200,
     "lifts": 5,
+    "size_rank": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -105.62,
+     39.74
+    ]
+   },
+   "properties": {
+    "id": "mike-dome",
+    "name": "Mike Snow Dome",
+    "tier": "A",
+    "cluster_id": "fixture-front-range",
+    "state": "CO",
+    "facility_type": "indoor",
+    "acres": null,
+    "vertical_ft": 300,
+    "lifts": 3,
+    "size_rank": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -111.5,
+     40.66
+    ]
+   },
+   "properties": {
+    "id": "november-ramps",
+    "name": "November Ramps",
+    "tier": "A",
+    "cluster_id": "fixture-wasatch-like",
+    "state": "UT",
+    "facility_type": "training_center",
+    "acres": null,
+    "vertical_ft": null,
+    "lifts": null,
     "size_rank": 1
    }
   }

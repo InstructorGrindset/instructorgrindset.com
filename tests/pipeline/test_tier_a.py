@@ -16,8 +16,10 @@ def _edit(path, fn):
 def test_load_raw_fixtures(raw_dir):
     reg = SourceRegistry()
     inputs = load_raw(raw_dir, reg)
-    assert [r.id for _, r in inputs.records] == ["fixture-peak", "fixture-basin"]
+    assert [r.id for _, r in inputs.records] == ["fixture-peak", "fixture-basin", "fixture-peak-training-center",
+                                                 "fixture-indoor"]
     assert "fixture-owner-list" in reg  # declared in the ownership file, cited by a Tier A owner
+    assert "fixture-shared-decisions" in reg  # data/raw/sources/, cited without being redefined
     assert inputs.ownership[0].file.operator == "Vail Resorts"
 
 
@@ -67,13 +69,28 @@ def test_ownership_cross_check(raw_dir):
     inputs = load_raw(raw_dir, SourceRegistry())
     errors, warnings = ownership_cross_check(inputs)
     assert errors == []
-    assert any("Fixture Ridge" in w for w in warnings)
-    assert not any("Fixture Feeder" in w for w in warnings)
+    # the reverse check: every ownership entry needs a Tier A record (resort_id links Fixture Peak)
+    assert sorted(w.split(": ")[1].split(" (")[0] for w in warnings) == ["Fixture Feeder", "Fixture Ridge"]
+    errors, warnings = ownership_cross_check(inputs, missing_record="fail")
+    assert len(errors) == 2 and warnings == []
+
+
+def test_shared_source_conflict(raw_dir):
+    (raw_dir / "sources" / "more.yaml").write_text(
+        "sources:\n  - {id: fixture-source-a, url: https://example.org/not-a, title: t, accessed_date: 2026-10-01}\n")
+    with pytest.raises(BuildError, match="fixture-source-a"):
+        load_raw(raw_dir, SourceRegistry())
+
+
+def test_shared_source_file_validated(raw_dir):
+    (raw_dir / "sources" / "bad.yaml").write_text("sources: []\n")
+    with pytest.raises(BuildError, match="sources"):
+        load_raw(raw_dir, SourceRegistry())
 
 
 def test_ownership_cross_check_fails_when_missing(raw_dir):
     def drop(d):
-        d["resorts"] = [r for r in d["resorts"] if r["name"] != "Fixture Peak"]
+        d["resorts"] = [r for r in d["resorts"] if r.get("resort_id") != "fixture-peak"]
     _edit(raw_dir / "ownership" / "vail.yaml", drop)
     errors, _ = ownership_cross_check(load_raw(raw_dir, SourceRegistry()))
     assert len(errors) == 1 and "fixture-peak" in errors[0] and "missing from the Vail Resorts" in errors[0]
@@ -84,7 +101,7 @@ def test_ownership_cross_check_fails_without_file(raw_dir):
         d["resorts"][0]["owner"]["value"] = "Alterra Mountain Company"
     _edit(raw_dir / "tier_a" / "fixture.yaml", alterra)
     errors, _ = ownership_cross_check(load_raw(raw_dir, SourceRegistry()))
-    assert len(errors) == 1 and "no ownership file for Alterra" in errors[0]
+    assert [e for e in errors if "no ownership file for Alterra" in e] and len(errors) == 1
 
 
 def test_match_openskimap(raw_dir, cfg):
@@ -93,6 +110,7 @@ def test_match_openskimap(raw_dir, cfg):
     m = match_openskimap([r for _, r in inputs.records], ext.areas, cfg.definitions.matching)
     assert [a.osm_id for a in m.by_tier_a["fixture-peak"]] == ["osm-peak"]
     assert [a.osm_id for a in m.by_tier_a["fixture-basin"]] == ["osm-basin"]
+    assert "fixture-peak-training-center" not in m.by_tier_a  # only ski_area records match
     assert sorted(a.osm_id for a in m.unmatched) == ["osm-faraway", "osm-lake", "osm-legacy", "osm-other-near",
                                                      "osm-valley", "osm-valley-ut"]
 
@@ -110,8 +128,47 @@ def test_match_distance_and_strong_name(raw_dir, cfg):
     far_partial = area("Basin Fixture Lodge", -111.60, 40.70)     # ~11 km, weaker name
     too_far = area("Fixture Basin", -111.60, 40.80)               # ~22 km
     m = match_openskimap([rec], [near_similar, far_exact, far_partial, too_far], rule)
-    assert m.by_tier_a["fixture-basin"] == [near_similar, far_exact]
-    assert m.unmatched == [far_partial, too_far]
+    # single best match only; the other passing area is reported as a runner up and stays Tier B
+    assert m.by_tier_a["fixture-basin"] == [near_similar]
+    assert m.runners_up["fixture-basin"] == [far_exact]
+    assert m.unmatched == [far_exact, far_partial, too_far]
+
+
+def _area(name, lon, lat, state="UT"):
+    return openskimap.SkiArea(name.lower(), name, state, lon, lat, {"type": "Point", "coordinates": [lon, lat]})
+
+
+def test_openskimap_names_absorb_several(raw_dir, cfg):
+    inputs = load_raw(raw_dir, SourceRegistry())
+    rec = next(r for _, r in inputs.records if r.id == "fixture-basin")
+    one, two = _area("Fixture Basin Upper", -111.60, 40.62), _area("Fixture Basin Lower", -111.62, 40.58)
+    other = _area("Fixture Basin Annex", -111.61, 40.61)
+    m = match_openskimap([rec.model_copy(update={"openskimap_names": ["Fixture Basin Upper", "fixture basin lower",
+                                                                       "Fixture Basin Gone"]})],
+                         [one, two, other], cfg.definitions.matching)
+    assert m.by_tier_a["fixture-basin"] == [one, two]
+    assert m.unmatched == [other]
+    assert m.missing_names == {"fixture-basin": ["Fixture Basin Gone"]}
+
+
+def test_sibling_records_each_take_their_own_area(raw_dir, cfg):
+    """Two Tier A records side by side (Bald Mountain and Dollar Mountain style)."""
+    inputs = load_raw(raw_dir, SourceRegistry())
+    base = next(r for _, r in inputs.records if r.id == "fixture-basin")
+    upper = base.model_copy(update={"id": "upper", "name": "Fixture Upper Mountain", "lat": 40.60, "lon": -111.60})
+    lower = base.model_copy(update={"id": "lower", "name": "Fixture Lower Mountain", "lat": 40.62, "lon": -111.63})
+    a_up = _area("Fixture - Upper Mountain", -111.601, 40.601)
+    a_low = _area("Fixture - Lower Mountain", -111.631, 40.621)
+    m = match_openskimap([upper, lower], [a_up, a_low], cfg.definitions.matching)
+    assert m.by_tier_a == {"upper": [a_up], "lower": [a_low]} and m.unmatched == []
+
+
+def test_training_center_never_takes_resort_area(raw_dir, cfg):
+    inputs = load_raw(raw_dir, SourceRegistry())
+    ext = openskimap.load_us_extract(raw_dir / "openskimap" / openskimap.US_NAME)
+    training = next(r for _, r in inputs.records if r.id == "fixture-peak-training-center")
+    m = match_openskimap([training], ext.areas, cfg.definitions.matching)
+    assert m.by_tier_a == {} and len(m.unmatched) == len(ext.areas)
 
 
 def test_names():

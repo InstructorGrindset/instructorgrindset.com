@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:56:39Z",
+  "generated_at": "2026-10-11T19:58:16Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -25255,50 +25255,72 @@
     },
     {
       "id": "palisades-tahoe-alpine-meadows",
-      "name": "Palisades Tahoe Alpine Meadows",
-      "tier": "B",
+      "name": "Palisades Tahoe (Alpine Meadows)",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 39.15422,
-      "lon": -120.23848,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Alterra Mountain Company resort; all Alterra resorts qualify as Tier A by owner decision, though compensation is not always standardized across locations.",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Alterra US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-alpine-meadows-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Merged into Alterra in 2018; operates with Palisades Tahoe on one pass, linked by the base to base gondola."
+      },
+      "lat": 39.164,
+      "lon": -120.239,
+      "location_source_id": "wikipedia-alpine-meadows-ski-resort",
       "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2270,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2400,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 1802,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 17,
-          "source_id": "openskimap-ski-areas",
+          "value": 13,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Article text says 13 lifts (and snowmaking on 11 of 13 lifts); the infobox lift system line says 12."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6223,
-          "source_id": "openskimap-ski-areas",
+          "value": 6835,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 8493,
-          "source_id": "openskimap-ski-areas",
+          "value": 8637,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -25326,7 +25348,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "wikipedia-alpine-meadows-ski-resort"
       ]
     },
     {

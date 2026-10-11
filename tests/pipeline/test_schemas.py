@@ -147,11 +147,14 @@ def test_tier_a_batch_rules():
         TierABatch.model_validate({**batch, "status": "reviewed"}, context=CTX)
 
 
-def test_ownership_exclusion_reason_required():
+def test_ownership_entry_history_fields_optional():
     f = {"operator": "Op", "verified_date": "2026-10-01",
          "sources": [{"id": "src-a", "url": "https://x.org", "title": "t", "accessed_date": "2026-10-01"}],
-         "resorts": [{"name": "Hill", "state": "PA", "source_id": "src-a", "tier_a_candidate": False}]}
-    with pytest.raises(ValidationError, match="exclusion_reason"):
+         "resorts": [{"name": "Hill", "state": "PA", "source_id": "src-a"},
+                     {"name": "Peak", "state": "CO", "source_id": "src-a", "resort_id": "peak", "tier_a_candidate": False}]}
+    OwnershipFile.model_validate(f, context=CTX)
+    f["resorts"][0]["source_id"] = "nowhere"
+    with pytest.raises(ValidationError, match="not defined"):
         OwnershipFile.model_validate(f, context=CTX)
 
 
@@ -186,3 +189,47 @@ def test_elevation_and_source_note():
         Resort.model_validate(resort(elevation={"base_ft": dict(SV, source_id="src-c")}), context={"source_ids": {"src-a", "src-b", "src-c"}})
     s = Source.model_validate({"id": "a", "url": "https://x.org", "title": "t", "accessed_date": "2026-10-01", "note": "caveat"})
     assert s.note == "caveat"
+
+
+def test_new_criteria_and_facility_type():
+    crit = [{"criterion": "operator_compensation", "rationale": "r", "source_id": "src-a"},
+            {"criterion": "year_round_training", "rationale": "r", "source_id": "src-a"}]
+    r = Resort.model_validate(resort(tier_a_criteria=crit, facility_type="indoor"), context=CTX)
+    assert r.facility_type == "indoor"
+    assert Resort.model_validate(resort(), context=CTX).facility_type == "ski_area"
+    with pytest.raises(ValidationError):
+        Resort.model_validate(resort(facility_type="water_ramp"), context=CTX)
+    with pytest.raises(ValidationError, match="ski_area"):
+        Resort.model_validate(resort(tier="B", tier_a_criteria=[], tier_a_status=None, facility_type="indoor"), context=CTX)
+    with pytest.raises(ValidationError):
+        Resort.model_validate(resort(tier_a_criteria=[{"criterion": "vibes", "rationale": "r", "source_id": "src-a"}]),
+                              context=CTX)
+
+
+def test_approval_rules():
+    ok = {"by": "Alexandre", "date": "2026-10-11", "note": None}
+    r = Resort.model_validate(resort(tier_a_status="approved", approval=ok), context=CTX)
+    assert r.approval.by == "Alexandre" and str(r.approval.date) == "2026-10-11"
+    with pytest.raises(ValidationError, match="needs an approval block"):
+        Resort.model_validate(resort(tier_a_status="approved"), context=CTX)
+    with pytest.raises(ValidationError, match="approval is set"):
+        Resort.model_validate(resort(approval=ok), context=CTX)
+    with pytest.raises(ValidationError):
+        Resort.model_validate(resort(tier_a_status="approved", approval={"by": "", "date": "2026-10-11"}), context=CTX)
+    with pytest.raises(ValidationError, match="Tier B"):
+        Resort.model_validate(resort(tier="B", tier_a_criteria=[], tier_a_status=None, approval=ok), context=CTX)
+
+
+def test_batch_record_status_override():
+    rec = {k: v for k, v in RESORT.items() if k not in ("tier", "tier_a_status", "cluster_id", "sources")}
+    rec["cluster_hint"] = "i70-corridor"
+    ok = {"by": "Alexandre", "date": "2026-10-11"}
+    batch = {"batch": "b", "researched_date": "2026-10-01", "status": "draft", "resorts": [rec]}
+    b = TierABatch.model_validate({**batch, "resorts": [{**rec, "tier_a_status": "approved", "approval": ok}]}, context=CTX)
+    assert b.status_of(b.resorts[0]) == "approved"
+    with pytest.raises(ValidationError, match="resort 'fixture-peak': an approved Tier A record needs an approval"):
+        TierABatch.model_validate({**batch, "resorts": [{**rec, "tier_a_status": "approved"}]}, context=CTX)
+    with pytest.raises(ValidationError, match="needs an approval"):
+        TierABatch.model_validate({**batch, "status": "approved"}, context=CTX)
+    b = TierABatch.model_validate({**batch, "status": "approved", "resorts": [{**rec, "tier_a_status": "draft"}]}, context=CTX)
+    assert b.status_of(b.resorts[0]) == "draft"

@@ -140,6 +140,18 @@ async function desktop(browser, base) {
   check(await page.locator('.nav-list a', { hasText: 'Colorado' }).count() === 1, 'national lists states as links');
   check(await page.evaluate(() => typeof window.Chart === 'undefined'), 'Chart.js not loaded on national view');
   check(await page.locator('#dev-badge').isVisible(), 'fixture badge visible');
+  const fac = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    return { layer: !!m.getLayer('resorts-facility'), n: m.queryRenderedFeatures({ layers: ['resorts-facility'] }).length,
+      images: ['fac-indoor-A', 'fac-training_center-A'].every((id) => m.hasImage(id)) };
+  });
+  check(fac.layer && fac.images && fac.n === 2, `indoor and training markers render as symbols (${fac.n})`);
+  check(await page.locator('.legend', { hasText: 'Year round training center' }).count() === 1, 'legend lists facility markers');
+  await page.getByRole('button', { name: 'Indoor and training' }).click();
+  check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('resorts', 'visibility')) === 'none', 'filter hides ski area markers');
+  await page.waitForTimeout(300);
+  await shot(page, 'desktop-01b-national-facility-filter.png');
+  await page.getByRole('button', { name: 'All', exact: true }).click();
   await shot(page, 'desktop-01-national.png');
 
   // Click a state on the map.
@@ -150,6 +162,7 @@ async function desktop(browser, base) {
   check(await page.evaluate(() => document.activeElement && document.activeElement.id === 'panel-heading'), 'focus moves to panel heading');
   check((await page.locator('#panel-status').innerText()).includes('Colorado'), 'aria-live status announces state');
   check(await page.locator('.nav-list a', { hasText: 'Fixture Front Range' }).count() === 1, 'state lists clusters');
+  check((await page.locator('.intro').innerText()).includes('5 ski areas and 1 indoor facility'), 'state intro counts ski areas and facilities');
   await shot(page, 'desktop-02-state.png');
 
   // Click a cluster on the map, away from its resort.
@@ -166,7 +179,9 @@ async function desktop(browser, base) {
   await mapIdle(page);
   check(await heading(page) === 'Fixture Front Range', 'cluster heading');
   const stats = await page.locator('.stats').first().innerText();
-  check(/Colorado/.test(stats) && /4/.test(stats) && /2/.test(stats), 'cluster summary shows states, resort count, Tier A count');
+  check(/Colorado/.test(stats) && /Ski areas\s*4/i.test(stats) && /Indoor and training\s*1/i.test(stats) && /Tier A\s*3/i.test(stats),
+    `cluster summary shows states, ski area and facility counts, Tier A count (${stats.replace(/\s+/g, ' ')})`);
+  check(await page.locator('.resort-list .tier-facility', { hasText: 'Indoor ski facility' }).count() === 1, 'cluster list tags the indoor facility');
   check(await page.locator('.resort-list .tier-draft').count() === 1, 'Draft profile tag on draft Tier A resort');
   await shot(page, 'desktop-03-cluster.png');
 
@@ -183,6 +198,13 @@ async function desktop(browser, base) {
   check(await page.locator('.badge-estimated').count() >= 1, 'estimated badge renders');
   check(await page.locator('.fact-meta', { hasText: 'Last verified Oct 1, 2026' }).count() > 3, 'last verified dates render');
   check(await page.locator('a.src-link', { hasText: 'Synthetic fixture: resort facts' }).count() > 0, 'source links resolve via sources.json');
+  check(await page.locator('.tier-row .tier-approved', { hasText: 'Approved' }).count() === 1, 'approved Tier A shows Approved');
+  check(await page.locator('.tier-row .tier-draft').count() === 0, 'approved Tier A has no Draft profile tag');
+  check(await page.locator('.tier-row .tier-facility', { hasText: 'Ski area' }).count() === 1, 'resort shows facility type');
+  check(await page.locator('.criteria .criterion', { hasText: 'Operator compensation' }).count() === 1, 'criterion label Operator compensation');
+  check(await page.locator('.criteria .criterion-why', { hasText: 'Synthetic rationale for operator compensation.' }).count() === 1, 'criterion rationale renders');
+  check(await page.locator('.criteria a.src-link').count() === 2, 'each criterion links its source');
+  check(await page.locator('.panel-section .fact-meta', { hasText: 'Approved by Fixture Reviewer on Oct 5, 2026.' }).count() === 1, 'approval by and date render');
   check(await page.locator('.fact', { hasText: 'Summit elevation' }).locator('.badge-published').count() === 1, 'summit elevation renders with badge');
   check(await page.locator('.src-note', { hasText: 'synthetic source note' }).count() >= 1, 'source note renders');
   check(await page.locator('.src-tag', { hasText: 'SNOTEL' }).count() === 1, 'density chart labelled SNOTEL');
@@ -212,6 +234,14 @@ async function desktop(browser, base) {
   check(await page.locator('.tier-row .tier-draft', { hasText: 'Draft profile' }).count() === 1, 'resort shows Draft profile tag');
   check(await page.locator('.badge-reported').count() >= 1, 'reported badge renders');
   check(await page.locator('.src-tag', { hasText: 'Estimated' }).count() === 1, 'density chart labelled Estimated');
+
+  // Indoor facility record.
+  await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
+  await page.locator('.resort-list a', { hasText: 'Mike Snow Dome' }).click();
+  await page.waitForURL(/mike-dome/);
+  check(await page.locator('.tier-row .tier-facility', { hasText: 'Indoor ski facility' }).count() === 1, 'indoor facility label');
+  check(await page.locator('.criteria .criterion', { hasText: 'Year round training' }).count() === 1, 'criterion label Year round training');
+  await shot(page, 'desktop-06b-indoor.png');
 
   // Sparse resort: nulls and no climate.
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
@@ -261,7 +291,14 @@ async function desktop(browser, base) {
   await page.getByRole('button', { name: 'List view' }).click();
   check(await page.locator('#list-view').isVisible(), 'list view visible');
   check(await page.locator('#map').isHidden(), 'map hidden in list view');
-  check(await page.locator('#list-view a.tree-resort').count() === 12, 'list view lists every resort');
+  check(await page.locator('#list-view a.tree-resort').count() === 14, 'list view lists every resort and facility');
+  await page.getByRole('button', { name: 'Indoor and training' }).click();
+  check(await page.locator('#list-view a.tree-resort').count() === 2, 'facility filter applies to the list view');
+  check(await page.locator('#list-view .tree-state').count() === 2, 'filter drops states with no match');
+  await shot(page, 'desktop-08b-list-filtered.png');
+  await page.getByRole('button', { name: 'Ski areas' }).click();
+  check(await page.locator('#list-view a.tree-resort').count() === 12, 'ski area filter');
+  await page.getByRole('button', { name: 'All', exact: true }).click();
   await shot(page, 'desktop-08-list-view.png');
   await page.locator('#list-view a.tree-resort', { hasText: 'Kilo Notch' }).click();
   await page.waitForURL(/\/map\/vt\/fixture-green-ridge\/kilo-notch\//);

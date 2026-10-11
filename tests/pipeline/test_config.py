@@ -7,8 +7,9 @@ from pipeline.config import Definitions, load_clusters, load_definitions
 EXPECTED_CLUSTERS = [
     "i70-corridor", "roaring-fork", "northern-colorado", "southwest-colorado", "wasatch", "lake-tahoe",
     "eastern-sierra", "southern-california", "tetons", "wood-river", "southwest-montana",
-    "northern-new-mexico", "cascades", "inland-northwest", "northern-vermont", "southern-vermont",
-    "white-mountains", "western-maine", "appalachia", "alaska",
+    "northern-new-mexico", "cascades", "mount-hood", "central-oregon", "inland-northwest", "northern-vermont",
+    "central-vermont", "southern-vermont", "white-mountains", "western-maine", "adirondacks", "catskills",
+    "new-york-metro", "poconos", "laurel-highlands", "appalachia", "alaska",
 ]
 
 
@@ -54,8 +55,11 @@ def test_invalid_definitions_rejected(tmp_path, repo_root):
 def test_clusters_config(cfg):
     assert [c.id for c in cfg.clusters.clusters] == EXPECTED_CLUSTERS
     assert cfg.clusters.membership.tier_b_radius_km == 80
-    tahoe = cfg.clusters.by_id()["lake-tahoe"]
-    assert tahoe.states == ["CA", "NV"]
+    by = cfg.clusters.by_id()
+    assert by["lake-tahoe"].states == ["CA", "NV"]
+    assert by["new-york-metro"].states == ["NJ", "NY", "CT"]
+    assert by["mount-hood"].states == ["OR"] and by["laurel-highlands"].states == ["PA"]
+    assert cfg.definitions.ownership.missing_tier_a_record == "warn"
     for c in cfg.clusters.clusters:
         assert "-" not in c.name, "cluster display names follow the no hyphen style rule"
 

@@ -8,12 +8,22 @@
    "tier": "A",
    "tier_a_criteria": [
     {
+     "criterion": "operator_compensation",
+     "rationale": "Synthetic rationale for operator compensation.",
+     "source_id": "fixture-resort-site"
+    },
+    {
      "criterion": "luxury",
-     "rationale": "Synthetic fixture rationale.",
+     "rationale": "Synthetic rationale for luxury.",
      "source_id": "fixture-resort-site"
     }
    ],
    "tier_a_status": "approved",
+   "approval": {
+    "by": "Fixture Reviewer",
+    "date": "2026-10-05",
+    "note": "Synthetic approval"
+   },
    "owner": {
     "value": "Fixture Mountain Co",
     "source_id": "fixture-ownership",
@@ -141,6 +151,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -155,11 +166,12 @@
    "tier_a_criteria": [
     {
      "criterion": "luxury",
-     "rationale": "Synthetic fixture rationale.",
+     "rationale": "Synthetic rationale for luxury.",
      "source_id": "fixture-resort-site"
     }
    ],
    "tier_a_status": "draft",
+   "approval": null,
    "owner": {
     "value": "Fixture Mountain Co",
     "source_id": "fixture-ownership",
@@ -287,6 +299,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -301,6 +314,7 @@
    "tier": "B",
    "tier_a_criteria": [],
    "tier_a_status": null,
+   "approval": null,
    "owner": null,
    "lat": 39.68,
    "lon": -105.9,
@@ -411,6 +425,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -423,6 +438,7 @@
    "tier": "B",
    "tier_a_criteria": [],
    "tier_a_status": null,
+   "approval": null,
    "owner": null,
    "lat": 39.58,
    "lon": -105.8,
@@ -463,6 +479,7 @@
    "career": null,
    "editorial": null,
    "climate_available": false,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location"
    ]
@@ -473,6 +490,7 @@
    "tier": "B",
    "tier_a_criteria": [],
    "tier_a_status": null,
+   "approval": null,
    "owner": null,
    "lat": 37.47,
    "lon": -107.81,
@@ -583,6 +601,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -596,16 +615,17 @@
    "tier_a_criteria": [
     {
      "criterion": "diehard",
-     "rationale": "Synthetic fixture rationale.",
+     "rationale": "Synthetic rationale for diehard.",
      "source_id": "fixture-resort-site"
     },
     {
      "criterion": "heritage",
-     "rationale": "Synthetic fixture rationale.",
+     "rationale": "Synthetic rationale for heritage.",
      "source_id": "fixture-resort-site"
     }
    ],
    "tier_a_status": "approved",
+   "approval": null,
    "owner": {
     "value": "Fixture Mountain Co",
     "source_id": "fixture-ownership",
@@ -733,6 +753,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -746,6 +767,7 @@
    "tier": "B",
    "tier_a_criteria": [],
    "tier_a_status": null,
+   "approval": null,
    "owner": null,
    "lat": 40.62,
    "lon": -111.59,
@@ -856,6 +878,7 @@
    "career": null,
    "editorial": null,
    "climate_available": false,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -869,11 +892,12 @@
    "tier_a_criteria": [
     {
      "criterion": "luxury",
-     "rationale": "Synthetic fixture rationale.",
+     "rationale": "Synthetic rationale for luxury.",
      "source_id": "fixture-resort-site"
     }
    ],
    "tier_a_status": "draft",
+   "approval": null,
    "owner": {
     "value": "Fixture Mountain Co",
     "source_id": "fixture-ownership",
@@ -1001,6 +1025,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1014,6 +1039,7 @@
    "tier": "B",
    "tier_a_criteria": [],
    "tier_a_status": null,
+   "approval": null,
    "owner": null,
    "lat": 39.1,
    "lon": -120.15,
@@ -1124,6 +1150,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1136,6 +1163,7 @@
    "tier": "B",
    "tier_a_criteria": [],
    "tier_a_status": null,
+   "approval": null,
    "owner": null,
    "lat": 39.32,
    "lon": -119.88,
@@ -1246,6 +1274,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1259,16 +1288,17 @@
    "tier_a_criteria": [
     {
      "criterion": "diehard",
-     "rationale": "Synthetic fixture rationale.",
+     "rationale": "Synthetic rationale for diehard.",
      "source_id": "fixture-resort-site"
     },
     {
      "criterion": "heritage",
-     "rationale": "Synthetic fixture rationale.",
+     "rationale": "Synthetic rationale for heritage.",
      "source_id": "fixture-resort-site"
     }
    ],
    "tier_a_status": "approved",
+   "approval": null,
    "owner": {
     "value": "Fixture Mountain Co",
     "source_id": "fixture-ownership",
@@ -1396,6 +1426,7 @@
    "career": null,
    "editorial": null,
    "climate_available": true,
+   "facility_type": "ski_area",
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1409,6 +1440,7 @@
    "tier": "B",
    "tier_a_criteria": [],
    "tier_a_status": null,
+   "approval": null,
    "owner": null,
    "lat": 44.4,
    "lon": -72.95,
@@ -1522,6 +1554,269 @@
    "sources": [
     "fixture-location",
     "fixture-model",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "mike-dome",
+   "name": "Mike Snow Dome",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "year_round_training",
+     "rationale": "Synthetic rationale for year round training.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "approved",
+   "approval": {
+    "by": "Fixture Reviewer",
+    "date": "2026-10-06",
+    "note": null
+   },
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 39.74,
+   "lon": -105.62,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-front-range",
+   "state": "CO",
+   "size": {
+    "acres": null,
+    "vertical_ft": {
+     "value": 300,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 3,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": null
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 8400,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 144,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": false,
+   "facility_type": "indoor",
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-ownership",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "november-ramps",
+   "name": "November Ramps",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "year_round_training",
+     "rationale": "Synthetic rationale for year round training.",
+     "source_id": "fixture-resort-site"
+    },
+    {
+     "criterion": "athlete_development",
+     "rationale": "Synthetic rationale for athlete development.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "draft",
+   "approval": null,
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 40.66,
+   "lon": -111.5,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-wasatch-like",
+   "state": "UT",
+   "size": {
+    "acres": null,
+    "vertical_ft": null,
+    "lifts": null,
+    "ski_school_staff_est": null
+   },
+   "elevation": {
+    "base_ft": null,
+    "summit_ft": null
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 144,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": false,
+   "facility_type": "training_center",
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-ownership",
     "fixture-resort-site"
    ]
   }

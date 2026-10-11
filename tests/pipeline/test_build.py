@@ -34,8 +34,9 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     assert resorts["version"] == 1 and resorts["generated_at"] == "2026-09-21T14:13:20Z"
     ids = [r["id"] for r in resorts["resorts"]]
     assert ids == sorted(ids)
-    assert ids == ["faraway-hill", "fixture-basin", "fixture-lake-area", "fixture-peak", "fixture-valley",
-                   "fixture-valley-ut", "legacy-location-hill", "unrelated-bowl"]
+    assert ids == ["faraway-hill", "fixture-basin", "fixture-indoor", "fixture-lake-area", "fixture-peak",
+                   "fixture-peak-training-center", "fixture-valley", "fixture-valley-ut", "legacy-location-hill",
+                   "unrelated-bowl"]
     by = {r["id"]: r for r in resorts["resorts"]}
     sources = {s["id"] for s in _load(out, "sources.json")["sources"]}
     for r in resorts["resorts"]:
@@ -44,6 +45,15 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
 
     peak = by["fixture-peak"]
     assert peak["tier"] == "A" and peak["tier_a_status"] == "draft" and peak["cluster_id"] == "i70-corridor"
+    assert peak["facility_type"] == "ski_area" and peak["approval"] is None
+    indoor = by["fixture-indoor"]
+    assert indoor["facility_type"] == "indoor" and indoor["tier_a_status"] == "approved"
+    assert indoor["approval"] == {"by": "Fixture Owner", "date": "2026-10-02", "note": None}
+    assert indoor["cluster_id"] == "other-mi" and indoor["size"]["lifts"] is None
+    assert indoor["sources"] == ["fixture-shared-decisions", "fixture-source-a"]
+    training = by["fixture-peak-training-center"]
+    assert training["facility_type"] == "training_center" and training["size"]["lifts"] is None
+    assert "openskimap_names" not in peak
     assert peak["climate_available"] is True and by["fixture-basin"]["climate_available"] is False
     assert peak["size"]["acres"]["value"] == 4000
     assert peak["size"]["lifts"] == {"value": 11, "source_id": "openskimap-ski-areas", "as_of": "2026-10-01",
@@ -58,11 +68,13 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     assert peak["size"]["vertical_ft"]["confidence"] == "estimated"
     assert peak["size"]["vertical_ft"]["source_id"] == "openskimap-ski-areas"
     assert peak["career"] is None and peak["editorial"] is None
-    assert peak["sources"] == ["fixture-owner-list", "fixture-source-a", "fixture-source-b", "openskimap-ski-areas"]
+    assert peak["sources"] == ["fixture-owner-list", "fixture-shared-decisions", "fixture-source-a", "fixture-source-b",
+                               "openskimap-ski-areas"]
     assert "cluster_hint" not in peak
 
     valley = by["fixture-valley"]
     assert valley["tier"] == "B" and valley["tier_a_status"] is None and valley["owner"] is None
+    assert valley["facility_type"] == "ski_area" and valley["approval"] is None
     assert valley["cluster_id"] == "i70-corridor" and valley["size"]["lifts"]["value"] == 3
     assert valley["location_source_id"] == "openskimap-ski-areas"
     assert by["faraway-hill"]["cluster_id"] == "other-co"
@@ -75,9 +87,10 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     clusters = _load(out, "clusters.geojson")
     assert clusters["type"] == "FeatureCollection" and clusters["version"] == 1
     props = {f["properties"]["id"]: f["properties"] for f in clusters["features"]}
-    assert sorted(props) == ["i70-corridor", "other-ca", "other-co", "other-mt", "other-ut", "wasatch"]
-    assert props["i70-corridor"]["resort_ids"] == ["fixture-peak", "fixture-valley", "unrelated-bowl"]
-    assert props["i70-corridor"]["tier_a_count"] == 1 and props["other-co"]["name"] == "Other Colorado"
+    assert sorted(props) == ["i70-corridor", "other-ca", "other-co", "other-mi", "other-mt", "other-ut", "wasatch"]
+    assert props["i70-corridor"]["resort_ids"] == ["fixture-peak", "fixture-peak-training-center", "fixture-valley",
+                                                   "unrelated-bowl"]
+    assert props["i70-corridor"]["tier_a_count"] == 2 and props["other-co"]["name"] == "Other Colorado"
     assert set(props["wasatch"]) == {"id", "name", "states", "resort_ids", "tier_a_count", "overview_md", "sources"}
     member_ids = sorted(rid for p in props.values() for rid in p["resort_ids"])
     assert member_ids == ids  # every resort in exactly one cluster
@@ -87,7 +100,7 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     pts = _load(out, "resorts.geojson")
     peak_pt = next(f for f in pts["features"] if f["properties"]["id"] == "fixture-peak")
     assert peak_pt["geometry"] == {"type": "Point", "coordinates": [-106.3, 39.6]}
-    assert peak_pt["properties"] == {"id": "fixture-peak", "name": "Fixture Peak", "tier": "A",
+    assert peak_pt["properties"] == {"id": "fixture-peak", "name": "Fixture Peak", "tier": "A", "facility_type": "ski_area",
                                      "cluster_id": "i70-corridor", "state": "CO", "acres": 4000,
                                      "vertical_ft": round((3500.0 - 2400.12346) * 3.280839895), "lifts": 11,
                                      "size_rank": 4}
@@ -96,17 +109,25 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     states = _load(out, "states.json")["states"]
     assert states == [
         {"code": "CA", "name": "California", "cluster_ids": ["other-ca"], "resort_count": 1},
-        {"code": "CO", "name": "Colorado", "cluster_ids": ["i70-corridor", "other-co"], "resort_count": 4},
+        {"code": "CO", "name": "Colorado", "cluster_ids": ["i70-corridor", "other-co"], "resort_count": 5},
+        {"code": "MI", "name": "Michigan", "cluster_ids": ["other-mi"], "resort_count": 1},
         {"code": "MT", "name": "Montana", "cluster_ids": ["other-mt"], "resort_count": 1},
         {"code": "UT", "name": "Utah", "cluster_ids": ["other-ut", "wasatch"], "resort_count": 2},
     ]
-    assert sources == {"fixture-owner-list", "fixture-source-a", "fixture-source-b", "openskimap-ski-areas"}
-    assert result.tier_a_count == 2 and len(result.clusters) == 6
+    assert sources == {"fixture-owner-list", "fixture-shared-decisions", "fixture-source-a", "fixture-source-b",
+                       "openskimap-ski-areas"}
+    assert result.tier_a_count == 4 and len(result.clusters) == 7
 
     report = (tmp_path / "tier-a-draft.md").read_text()
-    assert "| Fixture Peak (`fixture-peak`) | CO | Vail Resorts" in report
+    assert "| Fixture Peak (`fixture-peak`) | ski area | CO | Vail Resorts" in report
     assert "**Luxury**: Fixture rationale. ([Fixture source A](https://example.org/a))" in report
-    assert "Fixture Ridge (CO) is marked tier_a_candidate" in report
+    assert "**Operator compensation**" in report and "**Year round training**" in report
+    assert "| Fixture Indoor Snow (`fixture-indoor`) | indoor | MI |" in report
+    assert "approved by Fixture Owner on 2026-10-02" in report
+    rows = [l for l in report.splitlines() if l.startswith("| Fixture") and "`)" in l]
+    assert rows[0].startswith("| Fixture Indoor Snow")  # approved rows first
+    assert "Fixture Ridge (CO) is in the ownership file but has no Tier A record" in report
+    assert "| Fixture Ridge | CO | **missing** |" in report and "| Fixture Peak Resort | CO | yes |" in report
     assert "vertical_ft" not in report.split("fixture-peak")[1].split("\n")[0]  # filled from OpenSkiMap
     assert "ski_school_staff_est" in report
 
@@ -122,17 +143,39 @@ def test_build_is_deterministic(repo_root, raw_dir, tmp_path, monkeypatch):
 
 def test_approved_batch(repo_root, raw_dir, out, tmp_path):
     p = raw_dir / "tier_a" / "fixture.yaml"
-    p.write_text(p.read_text().replace("status: draft", "status: approved"))
+    data = yaml.safe_load(p.read_text())
+    data["status"] = "approved"
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
+    with pytest.raises(BuildError, match="resort 'fixture-peak': an approved Tier A record needs an approval block"):
+        _run(repo_root, raw_dir, out, tmp_path)
+    for r in data["resorts"]:
+        r.setdefault("approval", {"by": "Fixture Owner", "date": "2026-10-03", "note": "batch"})
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
     _run(repo_root, raw_dir, out, tmp_path)
     tier_a = [r for r in _load(out, "resorts.json")["resorts"] if r["tier"] == "A"]
     assert {r["tier_a_status"] for r in tier_a} == {"approved"}
+    assert {r["approval"]["note"] for r in tier_a} == {"batch", None}  # fixture-indoor keeps its own
+
+
+def test_approval_on_draft_record_fails(repo_root, raw_dir, out, tmp_path):
+    p = raw_dir / "tier_a" / "fixture.yaml"
+    data = yaml.safe_load(p.read_text())
+    data["resorts"][1]["approval"] = {"by": "Fixture Owner", "date": "2026-10-03"}
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
+    with pytest.raises(BuildError, match="fixture-basin': approval is set but tier_a_status is draft"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_runner_up_warning(repo_root, raw_dir, out, tmp_path):
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert not any("took its best OpenSkiMap area only" in w for w in result.warnings)
 
 
 def test_tier_a_only_without_openskimap(repo_root, raw_dir, out, tmp_path):
     for f in (raw_dir / "openskimap").iterdir():
         f.unlink()
     result = _run(repo_root, raw_dir, out, tmp_path)
-    assert [r.id for r in result.resorts] == ["fixture-basin", "fixture-peak"]
+    assert [r.id for r in result.resorts] == ["fixture-basin", "fixture-indoor", "fixture-peak", "fixture-peak-training-center"]
     assert any("no OpenSkiMap extract" in w for w in result.warnings)
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
     assert peak["size"]["lifts"] is None
@@ -165,7 +208,7 @@ def test_unknown_cluster_hint_fails(repo_root, raw_dir, out, tmp_path):
 def test_ownership_failure_blocks_build(repo_root, raw_dir, out, tmp_path):
     p = raw_dir / "ownership" / "vail.yaml"
     data = yaml.safe_load(p.read_text())
-    data["resorts"] = [r for r in data["resorts"] if r["name"] != "Fixture Peak"]
+    data["resorts"] = [r for r in data["resorts"] if r.get("resort_id") != "fixture-peak"]
     p.write_text(yaml.safe_dump(data))
     with pytest.raises(BuildError, match="missing from the Vail Resorts ownership file"):
         _run(repo_root, raw_dir, out, tmp_path)
@@ -186,7 +229,7 @@ def test_fetch_failure_falls_back(repo_root, raw_dir, out, tmp_path, monkeypatch
     monkeypatch.setattr(openskimap, "fetch", boom)
     result = _run(repo_root, raw_dir, out, tmp_path, fetch=True)
     assert any("download failed" in w for w in result.warnings)
-    assert len(result.resorts) == 8  # cached full download is still filtered
+    assert len(result.resorts) == 10  # cached full download is still filtered
 
 
 @pytest.mark.parametrize("cmd", [["pipeline/build.py"], ["-m", "pipeline.build"]])
