@@ -1,0 +1,35 @@
+# SYNTHETIC TEST FIXTURE. Fictional resorts, sources and numbers. Never copy to data/.
+batch: fixture
+researched_date: 2026-10-01
+status: draft
+sources:
+  - {id: fixture-source-a, url: https://example.org/a, title: Fixture source A, accessed_date: 2026-10-01}
+  - {id: fixture-source-b, url: https://example.org/b, title: Fixture source B, accessed_date: 2026-10-01}
+resorts:
+  - id: fixture-peak
+    name: Fixture Peak
+    state: CO
+    owner: {value: Vail Resorts, source_id: fixture-owner-list, as_of: 2026-10-01, confidence: published}
+    lat: 39.60
+    lon: -106.30
+    location_source_id: fixture-source-a
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "Fixture rationale.", source_id: fixture-source-a}
+      - {criterion: heritage, rationale: "Fixture rationale two.", source_id: fixture-source-b}
+    size:
+      acres: {value: 4000, source_id: fixture-source-a, as_of: 2026-10-01, confidence: published}
+      vertical_ft: null
+      lifts: null
+    season:
+      open_typical: {value: "11-20", source_id: fixture-source-b, as_of: 2026-10-01, confidence: published}
+  - id: fixture-basin
+    name: Fixture Basin
+    state: UT
+    owner: {value: Fixture Basin Company, source_id: fixture-source-b, as_of: 2026-10-01, confidence: published}
+    lat: 40.60
+    lon: -111.60
+    location_source_id: fixture-source-b
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Fixture rationale.", source_id: fixture-source-b}
