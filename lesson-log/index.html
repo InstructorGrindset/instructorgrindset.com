@@ -6,8 +6,12 @@
   <title>Instructor Grindset • Lesson Log</title>
   <meta name="description" content="Lesson Logging & Analytics — video walkthrough and written guide to build a Google Sheets + Google Forms client index and lesson log." />
   <link rel="canonical" href="https://instructorgrindset.com/lesson-log" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instructor Grindset • Lesson Log">
+  <meta property="og:description" content="Lesson Logging &amp; Analytics — video walkthrough and written guide to build a Google Sheets + Google Forms client index and lesson log.">
+  <meta property="og:url" content="https://instructorgrindset.com/lesson-log">
 
-  <!-- Fonts + shared sidebar styles (kept at v=4 per your working setup) -->
+  <!-- Fonts + shared sidebar styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/global.css?v=2">
   <link rel="stylesheet" href="/assets/sidebar.css?v=14">
@@ -29,12 +33,7 @@
     a.cta:hover{text-decoration:none}
 
     /* Layout */
-    .content{
-      width:var(--wrap-max);
-      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
-      margin-right:auto; padding-top:1.25rem; padding-bottom:2.5rem;
-    }
-    @media (max-width:960px){ .content{width:min(94vw, 1100px); margin:0 auto} }
+    .content{width:100%;max-width:1100px;margin:0 auto;padding-top:1.25rem;padding-bottom:2.5rem}
 
     h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
     h1{
@@ -87,7 +86,6 @@
     /* Bottom CTA row */
     .btn-row{ display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; margin-top:1.25rem }
     .cta{
-      display:inline-block; padding:.9rem 1.1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0; text-decoration:none;
       box-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
     }
     .cta.alt{
@@ -95,11 +93,6 @@
     }
     .cta:active{ transform:scale(.99) }
 
-    /* Footer */
-    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
-      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
-
-    .footer{ color:var(--muted); text-align:center; margin:0 }
   </style>
 </head>
 <body>
@@ -202,8 +195,8 @@
 
             <!-- CHART 1: Column headers (TSV for direct paste) -->
             <div class="copywrap">
-              <div class="copyhint">Column headers (paste into A1:I1). Click, then copy.</div>
-              <textarea class="copyarea" onclick="this.select()" readonly>
+              <div class="copyhint" id="hint-headers">Column headers (paste into A1:I1). Click, then copy.</div>
+              <textarea class="copyarea" aria-labelledby="hint-headers" onclick="this.select()" readonly>
 Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent Instructor	Disciplines	Notes Summary
 </textarea>
             </div>
@@ -219,8 +212,8 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- B2 -->
                 <div>
-                  <div class="copyhint"><strong>B2 (Age Latest)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-b2"><strong>B2 (Age Latest)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-b2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!E2:E, 'Lesson Log'!D2:D = A2),
     MATCH(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)),
@@ -231,40 +224,40 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- C2 -->
                 <div>
-                  <div class="copyhint"><strong>C2 (Total Lessons)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-c2"><strong>C2 (Total Lessons)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-c2" onclick="this.select()" readonly>
 =IF(A2="", "", COUNTIF('Lesson Log'!D:D, A2))
 </textarea>
                 </div>
 
                 <!-- D2 -->
                 <div>
-                  <div class="copyhint"><strong>D2 (Total Hours)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-d2"><strong>D2 (Total Hours)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-d2" onclick="this.select()" readonly>
 =IF(A2="", "", SUMIF('Lesson Log'!D:D, A2, 'Lesson Log'!S:S))
 </textarea>
                 </div>
 
                 <!-- E2 -->
                 <div>
-                  <div class="copyhint"><strong>E2 (First Lesson)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-e2"><strong>E2 (First Lesson)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-e2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(MIN(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
 </textarea>
                 </div>
 
                 <!-- F2 -->
                 <div>
-                  <div class="copyhint"><strong>F2 (Last Lesson)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-f2"><strong>F2 (Last Lesson)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-f2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
 </textarea>
                 </div>
 
                 <!-- G2 -->
                 <div>
-                  <div class="copyhint"><strong>G2 (Recent Instructor)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-g2"><strong>G2 (Recent Instructor)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-g2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!C2:C, 'Lesson Log'!D2:D = A2),
     MATCH(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)),
@@ -275,16 +268,16 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
                 <!-- H2 -->
                 <div>
-                  <div class="copyhint"><strong>H2 (Disciplines)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-h2"><strong>H2 (Disciplines)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-h2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(TEXTJOIN(", ", TRUE, UNIQUE(FILTER('Lesson Log'!G2:G, 'Lesson Log'!D2:D = A2))), ""))
 </textarea>
                 </div>
 
                 <!-- I2 -->
                 <div>
-                  <div class="copyhint"><strong>I2 (Notes Summary)</strong></div>
-                  <textarea class="copyarea" onclick="this.select()" readonly>
+                  <div class="copyhint" id="hint-i2"><strong>I2 (Notes Summary)</strong></div>
+                  <textarea class="copyarea" aria-labelledby="hint-i2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   TEXTJOIN(CHAR(10), TRUE,
     FILTER(
@@ -335,7 +328,7 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
 
           <!-- Bottom CTAs -->
           <div class="btn-row">
-            <a class="cta" href="https://instructorgrindset.com/contact">Contact Me</a>
+            <a class="cta" href="/contact/">Contact Me</a>
             <a class="cta alt" href="https://chatgpt.com/share/6902ce49-a27c-800b-acf0-05c1e3d3a1bd" target="_blank" rel="noopener">ChatGPT Guide</a>
             <a class="cta" href="/reading-list">Browse the Reading List &rarr;</a>
           </div>
