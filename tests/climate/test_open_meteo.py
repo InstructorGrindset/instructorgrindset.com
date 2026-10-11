@@ -54,9 +54,11 @@ def test_parse_location_imperial_units_pass_through():
 
 def test_request_weight():
     assert request_weight(1, 7, 6) == 1.0  # short requests count as one call
-    assert request_weight(1, 28, 6) == 2.0
-    assert request_weight(3, 14, 20) == 6.0
-    assert resort_weight(2001, 2026) == pytest.approx(9131 / 14, rel=1e-6)  # about 652 per resort
+    assert request_weight(1, 28, 6) == pytest.approx(1.2)
+    assert request_weight(3, 14, 20) == pytest.approx(6.0)
+    assert request_weight(1, 1, 30) == pytest.approx(3.0)  # many variables weigh even for one day
+    assert request_weight(2, 140, 5, n_models=2) == pytest.approx(20.0)
+    assert resort_weight(2001, 2026) == pytest.approx(9131 / 14 * 0.6, rel=1e-6)  # about 391 per resort
 
 
 def test_fetch_batches_locations_and_resumes_from_cache(tmp_path, fake_api):

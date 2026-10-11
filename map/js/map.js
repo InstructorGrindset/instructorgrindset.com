@@ -238,6 +238,9 @@ export function createMap(container, index, { onPick, getPadding }) {
 
   map.on('load', () => {
     loaded = true;
+    // Start the compact attribution collapsed; the (i) button opens it.
+    const attrib = container.querySelector('.maplibregl-ctrl-attrib');
+    if (attrib) attrib.classList.remove('maplibregl-compact-show');
     if (pending) { const v = pending; pending = null; applyView(v.view); fitView(v.view, false); }
   });
 

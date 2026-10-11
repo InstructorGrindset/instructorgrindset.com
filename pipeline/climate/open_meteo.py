@@ -3,20 +3,32 @@
 API: https://open-meteo.com/en/docs/historical-weather-api
 Endpoint: https://archive-api.open-meteo.com/v1/archive
 
-* Several locations go in one request as comma separated ``latitude`` and
-  ``longitude`` lists; the response is then a JSON list in request order.
-* ``models=era5`` pins the ERA5 reanalysis (about 0.25 degree grid).
-* ``elevation`` is not sent. The resort contract has no base elevation, so
-  Open Meteo uses its 90 m digital elevation model at the coordinate for
-  statistical downscaling. The response ``elevation`` (meters) is recorded in
-  the provenance file.
+Verified against the docs source, open-meteo/open-meteo-website at commit
+1755598c7ac9cf56db13d540f43b73ba97207219 (fetched 2026-10-11):
+
+* src/lib/components/docs/api-parameters.svelte: "Multiple coordinates can be
+  comma separated ... the JSON output changes to a list of structures", and
+  elevation "Per default, a 90 meter digital elevation model is used" for
+  statistical downscaling.
+* src/routes/en/docs/historical-weather-api/options.ts: model value ``era5``
+  ("ERA5, 25 km, Global").
+* src/routes/en/docs/historical-weather-api/+page.svelte: snowfall is "in
+  centimeters ... E.g. 7 cm snow = 10 mm precipitation water equivalent".
+* src/lib/components/response/results-preview.svelte: call weight, see
+  :func:`request_weight`.
+
+Choices:
+
+* ``models=era5`` pins the ERA5 reanalysis.
+* ``elevation`` is not sent, so Open Meteo downscales to its 90 m DEM at the
+  resort coordinate (the base area). The response ``elevation`` (meters) is
+  recorded in the provenance file.
 * Units are pinned to metric (cm snowfall, deg C, km/h, seconds) and converted
   to imperial here, so the conversion is tested in one place.
 
 Free tier (non commercial) limits: under 10,000 API calls per day, 5,000 per
-hour and 600 per minute. Open Meteo weights a call as
-``locations x max(1, days / 14) x max(1, variables / 10)``, so 25 seasons of
-6 daily variables for one location weigh about 652 calls. :class:`WeightBudget`
+hour and 600 per minute (https://open-meteo.com/en/terms). 25 seasons of 6
+daily variables weigh about 391 calls per location. :class:`WeightBudget`
 tracks that weight in a ledger next to the cache so separate runs on the same
 day share one budget, and stops before the daily cap. Cached seasons are never
 fetched twice, so the next run resumes where the last one stopped.
@@ -67,10 +79,11 @@ SOURCE = {
     "title": "Open Meteo Historical Weather API, ERA5 reanalysis daily history (models=era5)",
     "note": (
         "Weather data by Open-Meteo.com (CC BY 4.0), from Copernicus ERA5 (Hersbach et al. 2020). "
-        "ERA5 snowfall is water equivalent; Open Meteo converts it to snow depth with a fixed "
-        "ratio (7 cm of snow per 10 mm of water), so snowfall_in, powder_days, banner_days and "
+        "ERA5 snowfall is water equivalent; Open Meteo reports it as snow depth with a fixed "
+        "ratio (docs: 7 cm snow = 10 mm precipitation water equivalent, about 14 percent "
+        "density), so snowfall_in, powder_days, banner_days and "
         "avg_storm_depth_in carry that assumption and miss real variation in snow density. "
-        "ERA5 is a 0.25 degree grid that smooths mountain terrain, so totals usually run below "
+        "ERA5 is a 25 km grid that smooths mountain terrain, so totals usually run below "
         "resort reported upper mountain snowfall. Values are downscaled to the Open Meteo 90 m "
         "elevation model at the resort coordinate (base area). wind_mph is the mean daily maximum "
         "10 m wind. sun_pct is sunshine_duration over daylight_duration."
@@ -89,9 +102,17 @@ class Location:
     lon: float
 
 
-def request_weight(n_locations: int, n_days: int, n_variables: int) -> float:
-    """Open Meteo weighted call count for one request."""
-    return n_locations * max(1.0, n_days / 14.0) * max(1.0, n_variables / 10.0)
+def request_weight(n_locations: int, n_days: int, n_variables: int, n_models: int = 1) -> float:
+    """Open Meteo weighted call count for one request.
+
+    Same formula as the docs' "This API call is equivalent to N calls" note
+    (open-meteo-website, src/lib/components/response/results-preview.svelte):
+    variables_weight = variables x models / 10, time_weight = days / 14,
+    weight = locations x max(1, max(variables_weight, time_weight x variables_weight)).
+    """
+    variables_weight = n_variables * max(n_models, 1) / 10.0
+    time_weight = n_days / 14.0
+    return n_locations * max(1.0, max(variables_weight, time_weight * variables_weight))
 
 
 def resort_weight(start_year: int, end_year: int, n_variables: int = len(DAILY_VARIABLES)) -> float:

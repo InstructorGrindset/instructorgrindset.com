@@ -1,0 +1,81 @@
+operator: Alterra Mountain Company
+verified_date: 2026-10-11
+# Verification gap: alterramtnco.com redirects to alterramtn.co, which the research
+# environment could not reach on 2026-10-11 (proxy denied; ikonpass.com served only a
+# JavaScript shell). The portfolio below comes from the Wikipedia "List of resorts" table,
+# cross checked against each resort's own Wikipedia infobox (Owner field). Re verify against
+# Alterra's own destinations page before Alexandre approves the list (CLAUDE.md rule).
+# Canadian destinations (Blue Mountain ON, Tremblant QC) and heli operations in BC are excluded.
+sources:
+  - id: wikipedia-alterra-mountain-company
+    url: https://en.wikipedia.org/wiki/Alterra_Mountain_Company
+    title: Alterra Mountain Company (Wikipedia), List of resorts table
+    accessed_date: 2026-10-11
+    note: Secondary source used because the Alterra site was unreachable. Lists 15 US entries (Palisades Tahoe and Alpine Meadows share one row).
+  - id: wikipedia-arapahoe-basin
+    url: https://en.wikipedia.org/wiki/Arapahoe_Basin
+    title: Arapahoe Basin (Wikipedia)
+    accessed_date: 2026-10-11
+    note: States the Alterra purchase agreement (February 2024) closed on November 19, 2024.
+  - id: wikipedia-winter-park-resort
+    url: https://en.wikipedia.org/wiki/Winter_Park_Resort
+    title: Winter Park Resort (Wikipedia)
+    accessed_date: 2026-10-11
+    note: Infobox owner is the City and County of Denver; the article says Alterra operates the resort through the Intrawest partnership.
+resorts:
+  # Colorado
+  - {name: Steamboat, state: CO, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Winter Park Resort, state: CO, source_id: wikipedia-winter-park-resort, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Arapahoe Basin, state: CO, source_id: wikipedia-arapahoe-basin, tier_a_candidate: true, exclusion_reason: null}
+  # California
+  # One entry covers Palisades Tahoe and Alpine Meadows (merged resort, one row in the source table).
+  - {name: Palisades Tahoe, state: CA, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Mammoth Mountain, state: CA, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
+  - name: June Mountain
+    state: CA
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Smaller sister area to Mammoth. No fetched source supports a Tier A criterion. Flagged for Alexandre to review.
+  - name: Bear Mountain
+    state: CA
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Southern California regional hill (Big Bear Mountain Resort). Wikipedia claims it built the first freestyle terrain park in North America (Outlaw, 1992), but the claim is uncited, so heritage is not established. Flagged for Alexandre to review.
+  - name: Snow Summit
+    state: CA
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Southern California regional hill serving the Los Angeles day market (Big Bear Mountain Resort). No fetched source supports a Tier A criterion.
+  - name: Snow Valley Mountain Resort
+    state: CA
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Southern California regional hill acquired in 2023 and run with Big Bear Mountain Resort. No fetched source supports a Tier A criterion.
+  # Utah
+  - {name: Deer Valley Resort, state: UT, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
+  - name: Solitude Mountain Resort
+    state: UT
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Destination resort, but the fetched Wikipedia article supports no Tier A criterion (it notes only 2019 World Championships ski cross and snowboard cross events). Flagged for Alexandre to review.
+  # Washington
+  - {name: Crystal Mountain, state: WA, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
+  # Idaho
+  - name: Schweitzer Mountain
+    state: ID
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Destination resort, but no fetched source supports a Tier A criterion. Flagged for Alexandre to review.
+  # Vermont
+  - {name: Stratton Mountain Resort, state: VT, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
+  - name: Sugarbush Resort
+    state: VT
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Destination resort, but no fetched source supports a Tier A criterion. Flagged for Alexandre to review.
+  # West Virginia
+  - name: Snowshoe Mountain
+    state: WV
+    source_id: wikipedia-alterra-mountain-company
+    tier_a_candidate: false
+    exclusion_reason: Destination resort for the Mid Atlantic, but no fetched source supports a Tier A criterion. Flagged for Alexandre to review.

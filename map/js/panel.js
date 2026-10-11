@@ -54,8 +54,8 @@ export function createPanel(root, index, { onCompare }) {
   function sourcedValue(src, format) {
     if (!src) return h('span', { class: 'not-verified' }, 'Not yet verified');
     return h('span', { class: 'sourced' },
-      h('span', { class: 'sourced-main' }, h('span', { class: 'fact-value' }, format(src.value)),
-        src.note ? h('span', { class: 'fact-note' }, src.note) : null, badge(src.confidence)),
+      h('span', { class: 'sourced-main' }, h('span', { class: 'fact-value' }, format(src.value)), badge(src.confidence)),
+      src.note ? h('span', { class: 'fact-note' }, src.note) : null,
       h('span', { class: 'fact-meta' }, `Last verified ${formatIsoDate(src.as_of)} · `, sourceLink(src.source_id)));
   }
 

@@ -204,12 +204,13 @@ export async function renderResortCharts(root, climate) {
 }
 
 function climateTable(climate) {
+  const empty = () => h('td', { class: 'muted' }, h('span', { 'aria-hidden': 'true' }, '\u00b7'), h('span', { class: 'visually-hidden' }, 'No data'));
   const months = seasonMonths(climate);
   const cell = (m, k, digits = 1) => {
     const val = m ? m[k] : null;
-    return val == null ? h('td', { class: 'muted' }, '–') : h('td', null, digits ? fmt1(val) : fmtInt(val));
+    return val == null ? empty() : h('td', null, digits ? fmt1(val) : fmtInt(val));
   };
-  const mixCell = (m, k) => (m && m.density_mix ? h('td', null, `${Math.round(m.density_mix[k] * 100)}%`) : h('td', { class: 'muted' }, '–'));
+  const mixCell = (m, k) => (m && m.density_mix ? h('td', null, `${Math.round(m.density_mix[k] * 100)}%`) : empty());
   const rows = [
     ['Snowfall (in)', (m) => cell(m, 'snowfall_in')],
     ['Powder days', (m) => cell(m, 'powder_days')],
