@@ -154,6 +154,23 @@ async function desktop(browser, base) {
   await page.getByRole('button', { name: 'All', exact: true }).click();
   await shot(page, 'desktop-01-national.png');
 
+  // Recolor modes.
+  const modes = page.locator('.recolor-modes .filter-btn');
+  check(JSON.stringify(await modes.allInnerTexts()) === JSON.stringify(['Default', 'Lucrativeness', 'Professionalism', 'Season length', 'Snowfall']), 'recolor control lists five modes');
+  check(await page.locator('.recolor-modes [aria-disabled="true"]').count() === 0, 'every mode enabled with fixture data');
+  await page.locator('.recolor-modes .filter-btn[data-mode="season"]').click();
+  await page.waitForTimeout(300);
+  const leg = page.locator('#recolor-legend');
+  check(await leg.isVisible() && (await leg.innerText()).includes('Typical season length in days'), 'season legend visible with title');
+  check(await leg.locator('.ramp li').count() === 6 && (await leg.innerText()).includes('112 days to'), 'legend shows value range classes and No data');
+  check(await page.evaluate(() => JSON.stringify(window.__careerMap.mapCtl.map.getPaintProperty('resorts', 'circle-color')).includes('season_length_days')), 'circles recolored by season length');
+  check(await page.evaluate(() => JSON.stringify(window.__careerMap.mapCtl.map.getPaintProperty('resorts', 'circle-stroke-color')).includes('#e0a03a')), 'Tier A keeps an amber outline in recolor modes');
+  await shot(page, 'desktop-01c-recolor-season.png');
+  await page.locator('.recolor-modes .filter-btn[data-mode="lucrativeness"]').click();
+  check((await leg.innerText()).includes('$6.1K'), 'lucrativeness legend in dollars');
+  await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
+  check(await leg.isHidden(), 'Default hides the recolor legend');
+
   // Click a state on the map.
   await clickMapAt(page, [-105.0, 38.4]);
   await page.waitForURL(/\/map\/co\/\?data=/);
@@ -218,6 +235,44 @@ async function desktop(browser, base) {
   check(w.requests.some((u) => u.includes('/climate/alpha-peak.json')), 'climate lazy loaded for resort');
   check(await page.locator('.panel-footer a[href="/contact"]').count() === 1, 'Free Consultation link in footer');
   await shot(page, 'desktop-04-resort.png');
+
+  // Career section.
+  const payRows = page.locator('.pay-table tbody tr');
+  check(await payRows.count() === 6, 'pay table has a row per cert level');
+  check(JSON.stringify(await page.locator('.pay-table tbody th').allInnerTexts()) ===
+    JSON.stringify(['No certification', 'Level 1', 'Level 2', 'Level 3', 'Trainer', 'Examiner']), 'pay table cert labels in order');
+  const l1 = page.locator('.pay-table tr[data-level="level_1"]');
+  check(await l1.locator('.tier-stale', { hasText: 'Needs update' }).count() === 1, 'stale pay row shows Needs update');
+  check(/2024\/25 season/.test(await l1.innerText()) && await l1.locator('.badge-published').count() === 1, 'pay row shows season and badge');
+  check(await page.locator('.pay-table tr[data-level="level_2"] .tier-stale').count() === 0, 'fresh pay row has no Needs update tag');
+  check(await page.locator('.pay-table tr[data-level="none"] a.src-link').count() === 1, 'pay row links its source');
+  const rate = page.locator('.career-facts .fact', { hasText: 'Private lesson rate' });
+  check((await rate.innerText()).includes('$150 to $220 per hour') && await rate.locator('.badge-published').count() === 1, 'private lesson rate with badge');
+  const split = page.locator('.career-facts .fact', { hasText: 'Instructor split' });
+  check((await split.innerText()).includes('45% to the instructor') && await split.locator('.badge-reported').count() === 1
+    && await split.locator('.tier-stale').count() === 1, 'instructor split with badge and Needs update');
+  const trigger = page.locator('.score-trigger');
+  const tip = page.locator('.breakdown');
+  check(await tip.isHidden(), 'breakdown hidden until hover or focus');
+  await page.locator('#panel-scroll').evaluate((el) => {
+    const t = el.querySelector('.score-trigger'); el.scrollTop = t.offsetTop - 120;
+  });
+  await trigger.hover();
+  check(await tip.isVisible(), 'breakdown shows on hover');
+  check(await tip.locator('tbody tr').count() === 6 && JSON.stringify(await tip.locator('thead th').allInnerTexts()) ===
+    JSON.stringify(['Component', 'Weight', 'Value', 'Points']), 'breakdown lists component, weight, value, points');
+  await shot(page, 'desktop-04b-professionalism-hover.png');
+  await page.mouse.move(5, 400);
+  check(await tip.isHidden(), 'breakdown hides on mouse leave');
+  await trigger.focus();
+  check(await tip.isVisible() && await trigger.getAttribute('aria-expanded') === 'true', 'breakdown shows on keyboard focus');
+  await page.keyboard.press('Escape');
+  check(await tip.isHidden(), 'Escape closes the breakdown');
+  check((await trigger.innerText()).includes('72'), 'professionalism score 0 to 100 renders');
+  check((await page.locator('.score-block', { hasText: 'Lucrativeness' }).innerText()).includes('$3,200 to $8,900'), 'lucrativeness range renders');
+  check(await page.locator('.assumptions li').count() === 4, 'lucrativeness assumptions listed beneath');
+  check(await page.locator('.tag', { hasText: 'Destination families' }).count() === 1, 'client profile chips use readable labels');
+  check(await page.locator('.sub', { hasText: 'Best suited for skiers and riders' }).count() === 1, 'best suited tags render');
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 900; });
   await page.waitForTimeout(200);
   await shot(page, 'desktop-05-resort-charts.png');
@@ -234,6 +289,12 @@ async function desktop(browser, base) {
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length >= 5);
   check(await page.locator('.tier-row .tier-draft', { hasText: 'Draft profile' }).count() === 1, 'resort shows Draft profile tag');
   check(await page.locator('.badge-reported').count() >= 1, 'reported badge renders');
+  check(await page.locator('.score-block .not-verified', { hasText: 'Scoring model is being finalized' }).count() === 2, 'weights_unset and assumptions_unset render being finalized');
+  check(await page.locator('.assumptions .not-verified', { hasText: 'Not set yet' }).count() === 1, 'unset assumption marked');
+  await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
+  await page.locator('.resort-list a', { hasText: 'Charlie Hill' }).click();
+  await page.waitForURL(/charlie-hill/);
+  check(await page.locator('.score-block .not-verified', { hasText: 'Not enough verified data yet' }).count() === 2, 'insufficient_data renders not enough data');
   check(await page.locator('.src-tag', { hasText: 'Estimated' }).count() === 1, 'density chart labelled Estimated');
 
   // Indoor facility record.
@@ -250,6 +311,7 @@ async function desktop(browser, base) {
   await page.waitForURL(/delta-ridge/);
   check(await page.locator('.not-verified', { hasText: 'Not yet verified' }).count() >= 8, 'null values render Not yet verified');
   check(await page.locator('.climate', { hasText: 'Climate data is being compiled' }).count() === 1, 'missing climate message');
+  check(await page.locator('.panel-section', { hasText: 'Career data is being collected.' }).count() === 1, 'career null renders being collected');
   check(!w.requests.some((u) => u.includes('/climate/delta-ridge.json')), 'no climate fetch when climate_available is false');
   await shot(page, 'desktop-06-resort-sparse.png');
 
@@ -455,6 +517,23 @@ async function realData(browser, base) {
     const tIdle = Date.now() - t0;
     check(await heading(page) === 'United States', `real data ${vp.name}: national view renders (${n} resorts); ready ${tReady} ms, map idle ${tIdle} ms`);
     check(await page.locator('#dev-badge').isHidden(), `real data ${vp.name}: no fixture badge`);
+    if (vp.name === 'desktop') {
+      const geo = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'resorts.geojson'), 'utf8')).features;
+      const props = { lucrativeness: 'lucrativeness_mid', professionalism: 'professionalism_score', season: 'season_length_days', snowfall: 'snowfall_annual_in' };
+      for (const [mode, prop] of Object.entries(props)) {
+        const has = geo.some((f) => f.properties[prop] != null);
+        const btn = page.locator(`.recolor-modes .filter-btn[data-mode="${mode}"]`);
+        const disabled = (await btn.getAttribute('aria-disabled')) === 'true';
+        check(disabled === !has, `real data: ${mode} recolor ${has ? 'enabled' : 'disabled'} (${geo.filter((f) => f.properties[prop] != null).length} resorts with data)`);
+        if (!has) {
+          check(/^No resort has .+ data yet\.$/.test(await btn.getAttribute('title')), `real data: disabled ${mode} explains why in a tooltip`);
+          await btn.click();
+          check((await btn.getAttribute('aria-pressed')) === 'false', `real data: disabled ${mode} cannot be selected`);
+        }
+      }
+      await page.locator('.recolor-modes .filter-btn[data-mode="lucrativeness"]').hover();
+      await shot(page, 'real-desktop-recolor-disabled.png');
+    }
     await shot(page, `real-${vp.name}-national.png`);
     if (vp.name === 'desktop' && n) {
       // Drill down through the first state, cluster and resort in the real data.

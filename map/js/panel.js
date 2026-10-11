@@ -1,7 +1,10 @@
 // Side panel (desktop) / bottom sheet (phone) content for each level.
 import { config } from './config.js';
 import { clusterResorts, clusterOrder, loadClimate, facilityCounts } from './data.js';
-import { FACILITY_LABEL, criterionLabel, facilityPhrase } from './labels.js';
+import {
+  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, COMPONENT_LABEL, RATE_UNIT, tagLabel,
+} from './labels.js';
+import { CERT_LEVELS } from './schemas.js';
 import { hrefFor } from './router.js';
 import {
   h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd,
@@ -25,6 +28,15 @@ export const fmt = {
   date: (v) => formatMonthDay(v),
   text: (v) => String(v),
 };
+
+const usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+const usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+export function money(v, digits = 0) { return (digits ? usd2 : usd0).format(v); }
+export function moneyRange(low, high, digits = 0) {
+  if (low == null && high == null) return 'Not yet verified';
+  if (low == null || high == null || low === high) return money(low ?? high, digits);
+  return `${money(low, digits)} to ${money(high, digits)}`;
+}
 
 export function badge(confidence) {
   return h('span', { class: `badge badge-${confidence}`, title: CONFIDENCE_HELP[confidence] }, CONFIDENCE_LABEL[confidence] || confidence);
@@ -56,8 +68,14 @@ export function createPanel(root, index, { onCompare }) {
       h('span', { class: 'fact-meta' }, `Last verified ${formatIsoDate(src.as_of)} · `, sourceLink(src.source_id)));
   }
 
-  function fact(label, src, format) {
-    return h('div', { class: 'fact' }, h('dt', null, label), h('dd', null, sourcedValue(src, format)));
+  function fact(label, src, format, { stale = false } = {}) {
+    const dd = h('dd', null, sourcedValue(src, format));
+    if (src && stale) dd.querySelector('.sourced-main').append(staleTag());
+    return h('div', { class: 'fact' }, h('dt', null, label), dd);
+  }
+
+  function staleTag() {
+    return h('span', { class: 'tier tier-stale', title: 'Last verified more than the staleness limit ago' }, 'Needs update');
   }
 
   function section(title, ...body) {
@@ -65,7 +83,7 @@ export function createPanel(root, index, { onCompare }) {
   }
 
   function tags(list) {
-    return h('ul', { class: 'tag-list' }, list.map((t) => h('li', { class: 'tag' }, humanize(t))));
+    return h('ul', { class: 'tag-list' }, list.map((t) => h('li', { class: 'tag' }, tagLabel(t))));
   }
 
   function breadcrumb(view) {
@@ -259,6 +277,7 @@ export function createPanel(root, index, { onCompare }) {
         k.rationale ? h('span', { class: 'criterion-why' }, k.rationale) : null,
         h('span', { class: 'fact-meta' }, sourceLink(k.source_id))))), approval));
     }
+    out.push(careerSection(r));
     out.push(section('Operation size', h('dl', { class: 'facts' },
       fact('Skiable acres', r.size.acres, fmt.int),
       fact('Vertical drop', r.size.vertical_ft, fmt.ft),
@@ -278,12 +297,12 @@ export function createPanel(root, index, { onCompare }) {
       fact('Expert', r.terrain.expert_pct, fmt.pct)),
       r.terrain.character_tags.length ? tags(r.terrain.character_tags) : null));
     const fitBits = [
-      ['Suits these skiers and riders', r.fit.enthusiast_types],
-      ['Suits these professionals', r.fit.professional_types],
-      ['Typical clients', r.clients.profile_tags],
+      ['Client profile', r.clients.profile_tags],
+      ['Best suited for skiers and riders', r.fit.enthusiast_types],
+      ['Best suited for professionals', r.fit.professional_types],
     ].filter(([, l]) => l.length);
     if (fitBits.length) {
-      out.push(section('Fit and clients', fitBits.map(([label, l]) => [h('p', { class: 'sub' }, label), tags(l)])));
+      out.push(section('Clients and fit', fitBits.map(([label, l]) => [h('p', { class: 'sub' }, label), tags(l)])));
     }
     out.push(section('Snow and climate', climateRoot));
     out.push(h('p', { class: 'fact-meta location' }, `Base area ${r.lat.toFixed(3)}, ${r.lon.toFixed(3)}`,
@@ -307,6 +326,107 @@ export function createPanel(root, index, { onCompare }) {
       });
     }
     return out;
+  }
+
+  // ── Career (Phase 4) ──
+
+  function careerSection(r) {
+    const c = r.career;
+    if (!c) return section('Career', h('p', { class: 'not-verified' }, 'Career data is being collected.'));
+    const stale = new Set(c.stale_fields);
+    return section('Career',
+      h('p', { class: 'sub' }, 'Hourly pay by certification'),
+      payTable(c.pay),
+      h('dl', { class: 'facts career-facts' },
+        fact('Private lesson rate', c.private_rate, fmtRate, { stale: stale.has('private_rate') }),
+        fact('Instructor split', c.private_split, (v) => `${fmt1(v)}% to the instructor`, { stale: stale.has('private_split') })),
+      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Professionalism'), professionalism(c.professionalism)),
+      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Lucrativeness, estimated savings per season'), lucrativeness(c.lucrativeness)));
+  }
+
+  function fmtRate(v) {
+    const unit = RATE_UNIT[v.unit] || '';
+    return `${moneyRange(v.low, v.high)} ${unit}`.trim();
+  }
+
+  function payTable(rows) {
+    if (!rows.length) return h('p', { class: 'not-verified' }, 'Not yet verified');
+    const order = (x) => CERT_LEVELS.indexOf(x.cert_level);
+    return h('table', { class: 'pay-table' },
+      h('caption', { class: 'visually-hidden' }, 'Hourly pay by certification level'),
+      h('thead', null, h('tr', null, h('th', { scope: 'col' }, 'Certification'), h('th', { scope: 'col' }, 'Hourly pay'))),
+      h('tbody', null, [...rows].sort((a, b) => order(a) - order(b)).map((row) => h('tr', { dataset: { level: row.cert_level } },
+        h('th', { scope: 'row' }, CERT_LABEL[row.cert_level] || row.cert_level),
+        h('td', null,
+          h('span', { class: 'sourced-main' },
+            h('span', { class: 'fact-value' }, moneyRange(row.hourly_low, row.hourly_high, 2)), badge(row.confidence), row.stale ? staleTag() : null),
+          h('span', { class: 'fact-meta' },
+            row.season ? `${String(row.season).replace('-', '/')} season \u00b7 ` : '',
+            `Last verified ${formatIsoDate(row.as_of)} \u00b7 `, sourceLink(row.source_id)))))));
+  }
+
+  function statusText(status, unsetKey) {
+    if (status === 'insufficient_data') return 'Not enough verified data yet';
+    if (status === unsetKey) return 'Scoring model is being finalized';
+    return 'Scoring model is being finalized';
+  }
+
+  let tipSeq = 0;
+  function professionalism(p) {
+    if (!p) return h('p', { class: 'not-verified' }, 'Not enough verified data yet');
+    if (p.status !== 'computed' || p.score == null) return h('p', { class: 'not-verified' }, statusText(p.status, 'weights_unset'));
+    tipSeq += 1;
+    const id = `breakdown-${tipSeq}`;
+    const fmtW = (v) => (v == null ? 'No data' : fmt1(Math.round(v * 100) / 100));
+    const tip = h('div', { class: 'breakdown', role: 'tooltip', id, hidden: true },
+      h('table', null,
+        h('caption', null, 'How the score is built'),
+        h('thead', null, h('tr', null, ['Component', 'Weight', 'Value', 'Points'].map((t) => h('th', { scope: 'col' }, t)))),
+        h('tbody', null, p.breakdown.map((b) => h('tr', null,
+          h('th', { scope: 'row' }, COMPONENT_LABEL[b.component] || humanize(b.component)),
+          h('td', null, fmtW(b.weight)), h('td', null, fmtW(b.value)),
+          h('td', null, b.points == null ? 'No data' : fmt1(b.points)))))));
+    const trigger = h('button', {
+      type: 'button', class: 'score-trigger', 'aria-describedby': id, 'aria-expanded': 'false',
+      'aria-label': `Professionalism score ${fmtInt(p.score)} out of 100. Focus or hover to see the breakdown.`,
+    }, h('span', { class: 'fact-value score-value' }, fmtInt(p.score)), h('span', { class: 'score-max' }, ' / 100'));
+    const wrap = h('div', { class: 'score-wrap' }, trigger, tip);
+    const show = (on) => { tip.hidden = !on; trigger.setAttribute('aria-expanded', String(on)); };
+    wrap.addEventListener('mouseenter', () => show(true));
+    wrap.addEventListener('mouseleave', () => { if (document.activeElement !== trigger) show(false); });
+    trigger.addEventListener('focus', () => show(true));
+    trigger.addEventListener('blur', () => show(false));
+    trigger.addEventListener('click', () => show(tip.hidden));
+    trigger.addEventListener('keydown', (e) => { if (e.key === 'Escape') show(false); });
+    const srcIds = [...new Set(p.breakdown.map((b) => b.source_id).filter(Boolean))];
+    return h('div', null,
+      h('div', { class: 'sourced-main' }, wrap, badge('estimated')),
+      h('span', { class: 'fact-meta' }, 'Model score from weighted components in config.',
+        srcIds.length ? [' Sources: ', srcIds.map((sid, i) => [i ? ', ' : '', sourceLink(sid)])] : null));
+  }
+
+  function lucrativeness(l) {
+    if (!l) return h('p', { class: 'not-verified' }, 'Not enough verified data yet');
+    const body = [];
+    if (l.status !== 'computed' || l.mid == null) body.push(h('p', { class: 'not-verified' }, statusText(l.status, 'assumptions_unset')));
+    else {
+      body.push(h('div', { class: 'sourced-main' },
+        h('span', { class: 'fact-value' }, moneyRange(l.low, l.high)), badge('estimated')));
+      body.push(h('span', { class: 'fact-meta' }, `Mid case ${money(l.mid)}. Low and high cases bracket the mid case.`));
+    }
+    if (l.assumptions.length) {
+      body.push(h('p', { class: 'sub' }, 'Assumptions'),
+        h('ul', { class: 'assumptions' }, l.assumptions.map((a) => h('li', null,
+          h('span', null, a.label), ' ',
+          a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet') : h('span', { class: 'assumption-value' }, fmtAssumption(a.value))))));
+    }
+    return h('div', null, body);
+  }
+
+  function fmtAssumption(v) {
+    if (typeof v === 'number') return Math.abs(v) >= 100 ? fmtInt(v) : fmt1(v);
+    if (typeof v === 'boolean') return v ? 'Yes' : 'No';
+    return String(v);
   }
 
   function climateHeader(climate) {

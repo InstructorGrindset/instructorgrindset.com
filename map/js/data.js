@@ -185,6 +185,10 @@ export async function loadAll() {
         id: r.id, name: r.name, tier: r.tier, cluster_id: r.cluster_id, state: r.state,
         acres: r.size.acres ? r.size.acres.value : null,
         size_rank: sizeRankFallback(r.size.acres ? r.size.acres.value : null),
+        season_length_days: r.season.length_days ? r.season.length_days.value : null,
+        snowfall_annual_in: null,
+        professionalism_score: r.career && r.career.professionalism ? r.career.professionalism.score : null,
+        lucrativeness_mid: r.career && r.career.lucrativeness ? r.career.lucrativeness.mid : null,
       },
     }));
   }

@@ -9,6 +9,7 @@ import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
 import { h } from './ui.js';
 import { FILTERS } from './labels.js';
+import { createRecolor } from './recolor.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -23,6 +24,7 @@ const els = {
   list: $('list-view'),
   listToggle: $('list-toggle'),
   filter: $('facility-filter'),
+  recolor: $('recolor'),
   devBadge: $('dev-badge'),
 };
 
@@ -156,6 +158,8 @@ async function main() {
   }, f.label));
   els.filter.append(...filterButtons);
   els.filter.hidden = false;
+
+  if (mapCtl) createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce });
 
   els.listToggle.addEventListener('click', () => setListView(els.list.hidden));
   els.listToggle.hidden = false;

@@ -81,6 +81,69 @@ CLUSTERS = {
 }
 
 
+SEASON_LENGTH = {"alpha-peak": 150, "bravo-bowl": 138, "charlie-hill": 120, "echo-mesa": 112, "foxtrot-basin": 168,
+                 "golf-canyon": 131, "hotel-lake": 160, "india-crest": 142, "juliet-summit": 134, "kilo-notch": 151,
+                 "lima-hollow": 118}
+
+LEVELS = ["none", "level_1", "level_2", "level_3", "trainer", "examiner"]
+COMPONENTS = ["cert_pay_differential", "paid_training_hours", "examiner_trainer_presence",
+              "private_lesson_share", "year_round_staff", "clinic_access"]
+ASSUMPTIONS = [("hours_per_week", "Full time hours per week", 32), ("cert_level", "Cert level used", "Level 2"),
+               ("rent_monthly", "Cheapest employee housing rent per month", 650), ("food_monthly", "Food per month", 450)]
+
+
+def pay_rows(base, levels, stale_level=None, confidence="published"):
+    rows = []
+    for i, lvl in enumerate(levels):
+        lo = round(base + 2.5 * LEVELS.index(lvl), 2)
+        rows.append({"cert_level": lvl, "hourly_low": lo, "hourly_high": round(lo + 3, 2), "confidence": confidence,
+                     "source_id": "fixture-survey" if confidence == "reported" else "fixture-resort-site",
+                     "as_of": "2024-11-01" if lvl == stale_level else AS_OF, "season": "2024-25" if lvl == stale_level else "2025-26",
+                     "stale": lvl == stale_level})
+    return rows
+
+
+def prof(score, status="computed", n=6):
+    if status != "computed":
+        return {"score": None, "status": status, "breakdown": []}
+    weights = [0.25, 0.2, 0.15, 0.15, 0.15, 0.1]
+    vals = [min(1, max(0, score / 100 + d)) for d in (0.1, -0.05, 0.05, -0.1, 0.0, 0.0)]
+    return {"score": score, "status": status, "breakdown": [
+        {"component": c, "weight": w, "value": round(v, 2), "points": round(100 * w * v, 1), "source_id": "fixture-model"}
+        for c, w, v in list(zip(COMPONENTS, weights, vals))[:n]]}
+
+
+def lucr(low, mid, high, status="computed"):
+    vals = [(k, l, None if status == "assumptions_unset" and k == "rent_monthly" else v) for k, l, v in ASSUMPTIONS]
+    return {"low": low if status == "computed" else None, "mid": mid if status == "computed" else None,
+            "high": high if status == "computed" else None, "status": status,
+            "assumptions": [{"key": k, "label": l, "value": v} for k, l, v in vals]}
+
+
+def career_data():
+    """Synthetic career records covering every status, built lazily so sourced() is defined."""
+    return {
+        "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1"),
+                       "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
+                       "private_split": sourced(45, "fixture-survey", "reported"),
+                       "professionalism": prof(72), "lucrativeness": lucr(3200, 6100, 8900),
+                       "stale_fields": ["pay.level_1", "private_split"]},
+        "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
+                       "professionalism": prof(None, "weights_unset"), "lucrativeness": lucr(None, None, None, "assumptions_unset"),
+                       "stale_fields": []},
+        "charlie-hill": {"pay": pay_rows(17, ["level_2"], confidence="estimated"), "private_rate": None, "private_split": None,
+                         "professionalism": prof(None, "insufficient_data"),
+                         "lucrativeness": lucr(None, None, None, "insufficient_data"), "stale_fields": []},
+        "foxtrot-basin": {"pay": pay_rows(22, ["level_1", "level_2", "level_3"]),
+                          "private_rate": sourced({"low": 700, "high": 950, "unit": "full_day"}),
+                          "private_split": sourced(40, "fixture-model", "estimated"),
+                          "professionalism": prof(85), "lucrativeness": lucr(4800, 7900, 10600), "stale_fields": []},
+        "hotel-lake": {"pay": pay_rows(23, ["level_1", "level_2"]), "private_rate": None, "private_split": None,
+                       "professionalism": prof(61), "lucrativeness": lucr(None, None, None, "insufficient_data"),
+                       "stale_fields": []},
+    }
+
+
 def sourced(value, source_id="fixture-resort-site", confidence="published", note=None):
     if value is None:
         return None
@@ -127,7 +190,7 @@ def resort_record(row):
         "season": {
             "open_typical": None if sparse else sourced("11-20"),
             "close_typical": None if sparse else sourced("04-12"),
-            "length_days": None if sparse else sourced(144, "fixture-model", "estimated"),
+            "length_days": sourced(SEASON_LENGTH[rid], "fixture-model", "estimated") if rid in SEASON_LENGTH and not sparse else None,
             "training_start": sourced("11-08") if tier == "A" else None,
         },
         "terrain": {
@@ -141,7 +204,7 @@ def resort_record(row):
                 "professional_types": ["career_instructor"] if tier == "A" else []},
         "clients": {"profile_tags": ["destination_families", "private_lessons"] if tier == "A" else [],
                     "notes_md": None},
-        "career": None, "editorial": None,
+        "career": career_data().get(rid), "editorial": None,
         "climate_available": climate,
     }
     if rid != "lima-hollow":
@@ -155,6 +218,14 @@ def resort_record(row):
         ids.add(record["owner"]["source_id"])
     for c in record["tier_a_criteria"]:
         ids.add(c["source_id"])
+    career = record["career"] or {}
+    for row in career.get("pay", []):
+        ids.add(row["source_id"])
+    for k in ("private_rate", "private_split"):
+        if career.get(k):
+            ids.add(career[k]["source_id"])
+    for b in (career.get("professionalism") or {}).get("breakdown", []):
+        ids.add(b["source_id"])
     record["sources"] = sorted(ids)
     return record
 
@@ -225,6 +296,18 @@ def climate_record(row):
             "period": {"start_year": 1996, "end_year": 2025}, "months": months}
 
 
+def recolor_props(r):
+    climate = next((row for row in RESORTS if row[0] == r["id"] and row[11]), None)
+    snow = round(sum(m["snowfall_in"] or 0 for m in climate_record(climate)["months"]), 1) if climate else None
+    c = r["career"] or {}
+    return {
+        "season_length_days": r["season"]["length_days"]["value"] if r["season"]["length_days"] else None,
+        "snowfall_annual_in": snow,
+        "professionalism_score": (c.get("professionalism") or {}).get("score"),
+        "lucrativeness_mid": (c.get("lucrativeness") or {}).get("mid"),
+    }
+
+
 def write(name, data):
     path = OUT / name
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -252,7 +335,8 @@ def main():
                         "acres": r["size"]["acres"]["value"] if r["size"]["acres"] else None,
                         "vertical_ft": r["size"]["vertical_ft"]["value"] if r["size"]["vertical_ft"] else None,
                         "lifts": r["size"]["lifts"]["value"] if r["size"]["lifts"] else None,
-                        "size_rank": size_rank(r["size"]["acres"]["value"] if r["size"]["acres"] else None)}}
+                        "size_rank": size_rank(r["size"]["acres"]["value"] if r["size"]["acres"] else None),
+                        **recolor_props(r)}}
         for r in resorts]})
 
     cfeats = []

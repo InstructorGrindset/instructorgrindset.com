@@ -26,27 +26,62 @@ const TIER_STYLE = {
   B: { fill: C.tierB, stroke: C.background },
 };
 
+// Sequential ramp for recolor modes (one hue, dark to light reads low to high on the dark map),
+// validated as an ordinal ramp against the state fill. Grey marks resorts without data.
+export const RAMP = ['#1c5cab', '#2a78d6', '#5598e7', '#86b6ef', '#cde2fb'];
+export const NO_DATA = '#4a5568';
+const RECOLOR_STROKE = { A: '#e0a03a', B: C.background };
+
+function svgImage(id, shape, fill, stroke, width) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="${fill}" stroke="${stroke}" stroke-width="${width}" stroke-linejoin="round">${shape}</g></svg>`;
+  return new Promise((resolve) => {
+    const img = new Image(40, 40);
+    img.onload = () => resolve({ id, img });
+    img.onerror = () => resolve(null);
+    img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  });
+}
+
+/** Default images (tier colors) plus one per recolor class (c0..c4, cnull) with a tier stroke. */
 function facilityImages() {
   const out = [];
   for (const [type, shape] of Object.entries(SHAPES)) {
     for (const [tier, st] of Object.entries(TIER_STYLE)) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="${st.fill}" stroke="${st.stroke}" stroke-width="3" stroke-linejoin="round">${shape}</g></svg>`;
-      out.push(new Promise((resolve) => {
-        const img = new Image(40, 40);
-        img.onload = () => resolve({ id: `fac-${type}-${tier}`, img });
-        img.onerror = () => resolve(null);
-        img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-      }));
+      out.push(svgImage(`fac-${type}-${tier}`, shape, st.fill, st.stroke, 3));
+      RAMP.forEach((color, k) => out.push(svgImage(`fac-${type}-${tier}-c${k}`, shape, color, RECOLOR_STROKE[tier], tier === 'A' ? 4 : 3)));
+      out.push(svgImage(`fac-${type}-${tier}-cnull`, shape, NO_DATA, RECOLOR_STROKE[tier], tier === 'A' ? 4 : 3));
     }
   }
   return Promise.all(out).then((list) => list.filter(Boolean));
 }
 
+/** Equal interval class breaks (up to 4 inner stops) over the non null values of a property. */
+export function classBreaks(values, roundTo = 1) {
+  const v = values.filter((x) => typeof x === 'number' && Number.isFinite(x));
+  if (!v.length) return null;
+  const min = Math.min(...v); const max = Math.max(...v);
+  const stops = [];
+  if (max > min) {
+    for (let i = 1; i < RAMP.length; i++) {
+      const t = Math.round((min + (i * (max - min)) / RAMP.length) / roundTo) * roundTo;
+      if (t > min && t <= max && (!stops.length || t > stops[stops.length - 1])) stops.push(t);
+    }
+  }
+  return { min, max, stops, count: v.length };
+}
+
+const DEFAULT_PAINT = {
+  'circle-color': ['case', ['==', ['get', 'tier'], 'A'], C.tierA, C.tierB],
+  'circle-stroke-color': ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], '#fff4dc', C.background],
+  'circle-stroke-width': ['case', fs('hover'), 2.5, ['==', ['get', 'tier'], 'A'], 1.5, 1],
+};
+const DEFAULT_ICON = ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', 'tier']];
+
 const FACILITY_LAYER = {
   id: 'resorts-facility', type: 'symbol', source: 'resorts',
   filter: ['!', IS_SKI_AREA],
   layout: {
-    'icon-image': ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', 'tier']],
+    'icon-image': DEFAULT_ICON,
     'icon-size': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 7, 0.8, 11, 1.05],
     'icon-allow-overlap': true,
     'icon-ignore-placement': true,
@@ -122,9 +157,7 @@ function buildStyle(index) {
         layout: { 'circle-sort-key': ['get', 'tier_a'] },
         paint: {
           'circle-radius': radius(),
-          'circle-color': ['case', ['==', ['get', 'tier'], 'A'], C.tierA, C.tierB],
-          'circle-stroke-color': ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], '#fff4dc', C.background],
-          'circle-stroke-width': ['case', fs('hover'), 2.5, ['==', ['get', 'tier'], 'A'], 1.5, 1],
+          ...DEFAULT_PAINT,
           'circle-opacity': ['case', fs('dim'), 0.3, ['==', ['get', 'tier'], 'A'], 1, 0.85],
           'circle-stroke-opacity': ['case', fs('dim'), 0.3, 1],
         },
@@ -294,6 +327,30 @@ export function createMap(container, index, { onPick, getPadding }) {
   });
 
   let filter = 'all';
+  let recolor = null; // { prop, stops } or null for default
+
+  function applyRecolor() {
+    if (!map.getLayer('resorts')) return;
+    if (!recolor) {
+      for (const [k, v] of Object.entries(DEFAULT_PAINT)) map.setPaintProperty('resorts', k, v);
+      if (map.getLayer('resorts-facility')) map.setLayoutProperty('resorts-facility', 'icon-image', DEFAULT_ICON);
+      return;
+    }
+    const val = ['get', recolor.prop];
+    const isNull = ['==', val, null];
+    const colorStep = ['step', ['to-number', val], RAMP[0]];
+    const classStep = ['step', ['to-number', val], 'c0'];
+    recolor.stops.forEach((t, i) => { colorStep.push(t, RAMP[i + 1]); classStep.push(t, `c${i + 1}`); });
+    const color = recolor.stops.length ? colorStep : RAMP[2];
+    const cls = recolor.stops.length ? classStep : 'c2';
+    map.setPaintProperty('resorts', 'circle-color', ['case', isNull, NO_DATA, color]);
+    map.setPaintProperty('resorts', 'circle-stroke-color', ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], RECOLOR_STROKE.A, RECOLOR_STROKE.B]);
+    map.setPaintProperty('resorts', 'circle-stroke-width', ['case', fs('hover'), 2.5, ['==', ['get', 'tier'], 'A'], 2.2, 1]);
+    if (map.getLayer('resorts-facility')) {
+      map.setLayoutProperty('resorts-facility', 'icon-image',
+        ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', 'tier'], '-', ['case', isNull, 'cnull', cls]]);
+    }
+  }
   function resortLayers() { return ['resorts', 'resorts-facility'].filter((id) => map.getLayer(id)); }
   function applyFilter() {
     if (map.getLayer('resorts')) map.setLayoutProperty('resorts', 'visibility', filter === 'facility' ? 'none' : 'visible');
@@ -304,6 +361,7 @@ export function createMap(container, index, { onPick, getPadding }) {
     for (const { id, img } of await facilityImages()) if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 });
     map.addLayer(FACILITY_LAYER);
     applyFilter();
+    applyRecolor();
     loaded = true;
     // Start the compact attribution collapsed; the (i) button opens it.
     const attrib = container.querySelector('.maplibregl-ctrl-attrib');
@@ -320,6 +378,8 @@ export function createMap(container, index, { onPick, getPadding }) {
       fitView(view, animate);
     },
     refit() { if (loaded && current) fitView(current, false); },
+    /** null for default colors, or { prop, stops } from classBreaks. */
+    setRecolor(next) { recolor = next; if (loaded) applyRecolor(); },
     /** 'all' | 'ski_area' | 'facility' */
     setFilter(next) { filter = next; if (loaded) applyFilter(); },
     resize() { map.resize(); },

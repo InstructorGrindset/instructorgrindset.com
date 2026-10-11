@@ -90,7 +90,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 150,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -148,7 +148,166 @@
     ],
     "notes_md": null
    },
-   "career": null,
+   "career": {
+    "pay": [
+     {
+      "cert_level": "none",
+      "hourly_low": 21.0,
+      "hourly_high": 24.0,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_1",
+      "hourly_low": 23.5,
+      "hourly_high": 26.5,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2024-11-01",
+      "season": "2024-25",
+      "stale": true
+     },
+     {
+      "cert_level": "level_2",
+      "hourly_low": 26.0,
+      "hourly_high": 29.0,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_3",
+      "hourly_low": 28.5,
+      "hourly_high": 31.5,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "trainer",
+      "hourly_low": 31.0,
+      "hourly_high": 34.0,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "examiner",
+      "hourly_low": 33.5,
+      "hourly_high": 36.5,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": {
+     "value": {
+      "low": 150,
+      "high": 220,
+      "unit": "hour"
+     },
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "private_split": {
+     "value": 45,
+     "source_id": "fixture-survey",
+     "as_of": "2026-10-01",
+     "confidence": "reported"
+    },
+    "professionalism": {
+     "score": 72,
+     "status": "computed",
+     "breakdown": [
+      {
+       "component": "cert_pay_differential",
+       "weight": 0.25,
+       "value": 0.82,
+       "points": 20.5,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "paid_training_hours",
+       "weight": 0.2,
+       "value": 0.67,
+       "points": 13.4,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "examiner_trainer_presence",
+       "weight": 0.15,
+       "value": 0.77,
+       "points": 11.6,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "private_lesson_share",
+       "weight": 0.15,
+       "value": 0.62,
+       "points": 9.3,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "year_round_staff",
+       "weight": 0.15,
+       "value": 0.72,
+       "points": 10.8,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "clinic_access",
+       "weight": 0.1,
+       "value": 0.72,
+       "points": 7.2,
+       "source_id": "fixture-model"
+      }
+     ]
+    },
+    "lucrativeness": {
+     "low": 3200,
+     "mid": 6100,
+     "high": 8900,
+     "status": "computed",
+     "assumptions": [
+      {
+       "key": "hours_per_week",
+       "label": "Full time hours per week",
+       "value": 32
+      },
+      {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "Level 2"
+      },
+      {
+       "key": "rent_monthly",
+       "label": "Cheapest employee housing rent per month",
+       "value": 650
+      },
+      {
+       "key": "food_monthly",
+       "label": "Food per month",
+       "value": 450
+      }
+     ]
+    },
+    "stale_fields": [
+     "pay.level_1",
+     "private_split"
+    ]
+   },
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
@@ -156,7 +315,8 @@
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
-    "fixture-resort-site"
+    "fixture-resort-site",
+    "fixture-survey"
    ]
   },
   {
@@ -238,7 +398,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 138,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -296,7 +456,66 @@
     ],
     "notes_md": null
    },
-   "career": null,
+   "career": {
+    "pay": [
+     {
+      "cert_level": "none",
+      "hourly_low": 19.0,
+      "hourly_high": 22.0,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_1",
+      "hourly_low": 21.5,
+      "hourly_high": 24.5,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": null,
+    "private_split": null,
+    "professionalism": {
+     "score": null,
+     "status": "weights_unset",
+     "breakdown": []
+    },
+    "lucrativeness": {
+     "low": null,
+     "mid": null,
+     "high": null,
+     "status": "assumptions_unset",
+     "assumptions": [
+      {
+       "key": "hours_per_week",
+       "label": "Full time hours per week",
+       "value": 32
+      },
+      {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "Level 2"
+      },
+      {
+       "key": "rent_monthly",
+       "label": "Cheapest employee housing rent per month",
+       "value": null
+      },
+      {
+       "key": "food_monthly",
+       "label": "Food per month",
+       "value": 450
+      }
+     ]
+    },
+    "stale_fields": []
+   },
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
@@ -376,7 +595,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 120,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -422,7 +641,56 @@
     "profile_tags": [],
     "notes_md": null
    },
-   "career": null,
+   "career": {
+    "pay": [
+     {
+      "cert_level": "level_2",
+      "hourly_low": 22.0,
+      "hourly_high": 25.0,
+      "confidence": "estimated",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": null,
+    "private_split": null,
+    "professionalism": {
+     "score": null,
+     "status": "insufficient_data",
+     "breakdown": []
+    },
+    "lucrativeness": {
+     "low": null,
+     "mid": null,
+     "high": null,
+     "status": "insufficient_data",
+     "assumptions": [
+      {
+       "key": "hours_per_week",
+       "label": "Full time hours per week",
+       "value": 32
+      },
+      {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "Level 2"
+      },
+      {
+       "key": "rent_monthly",
+       "label": "Cheapest employee housing rent per month",
+       "value": 650
+      },
+      {
+       "key": "food_monthly",
+       "label": "Food per month",
+       "value": 450
+      }
+     ]
+    },
+    "stale_fields": []
+   },
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
@@ -552,7 +820,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 112,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -692,7 +960,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 168,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -750,7 +1018,133 @@
     ],
     "notes_md": null
    },
-   "career": null,
+   "career": {
+    "pay": [
+     {
+      "cert_level": "level_1",
+      "hourly_low": 24.5,
+      "hourly_high": 27.5,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_2",
+      "hourly_low": 27.0,
+      "hourly_high": 30.0,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_3",
+      "hourly_low": 29.5,
+      "hourly_high": 32.5,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": {
+     "value": {
+      "low": 700,
+      "high": 950,
+      "unit": "full_day"
+     },
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "private_split": {
+     "value": 40,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "professionalism": {
+     "score": 85,
+     "status": "computed",
+     "breakdown": [
+      {
+       "component": "cert_pay_differential",
+       "weight": 0.25,
+       "value": 0.95,
+       "points": 23.8,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "paid_training_hours",
+       "weight": 0.2,
+       "value": 0.8,
+       "points": 16.0,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "examiner_trainer_presence",
+       "weight": 0.15,
+       "value": 0.9,
+       "points": 13.5,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "private_lesson_share",
+       "weight": 0.15,
+       "value": 0.75,
+       "points": 11.2,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "year_round_staff",
+       "weight": 0.15,
+       "value": 0.85,
+       "points": 12.8,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "clinic_access",
+       "weight": 0.1,
+       "value": 0.85,
+       "points": 8.5,
+       "source_id": "fixture-model"
+      }
+     ]
+    },
+    "lucrativeness": {
+     "low": 4800,
+     "mid": 7900,
+     "high": 10600,
+     "status": "computed",
+     "assumptions": [
+      {
+       "key": "hours_per_week",
+       "label": "Full time hours per week",
+       "value": 32
+      },
+      {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "Level 2"
+      },
+      {
+       "key": "rent_monthly",
+       "label": "Cheapest employee housing rent per month",
+       "value": 650
+      },
+      {
+       "key": "food_monthly",
+       "label": "Food per month",
+       "value": 450
+      }
+     ]
+    },
+    "stale_fields": []
+   },
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
@@ -829,7 +1223,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 131,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -964,7 +1358,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 160,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -1022,7 +1416,109 @@
     ],
     "notes_md": null
    },
-   "career": null,
+   "career": {
+    "pay": [
+     {
+      "cert_level": "level_1",
+      "hourly_low": 25.5,
+      "hourly_high": 28.5,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_2",
+      "hourly_low": 28.0,
+      "hourly_high": 31.0,
+      "confidence": "published",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": null,
+    "private_split": null,
+    "professionalism": {
+     "score": 61,
+     "status": "computed",
+     "breakdown": [
+      {
+       "component": "cert_pay_differential",
+       "weight": 0.25,
+       "value": 0.71,
+       "points": 17.8,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "paid_training_hours",
+       "weight": 0.2,
+       "value": 0.56,
+       "points": 11.2,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "examiner_trainer_presence",
+       "weight": 0.15,
+       "value": 0.66,
+       "points": 9.9,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "private_lesson_share",
+       "weight": 0.15,
+       "value": 0.51,
+       "points": 7.7,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "year_round_staff",
+       "weight": 0.15,
+       "value": 0.61,
+       "points": 9.2,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "clinic_access",
+       "weight": 0.1,
+       "value": 0.61,
+       "points": 6.1,
+       "source_id": "fixture-model"
+      }
+     ]
+    },
+    "lucrativeness": {
+     "low": null,
+     "mid": null,
+     "high": null,
+     "status": "insufficient_data",
+     "assumptions": [
+      {
+       "key": "hours_per_week",
+       "label": "Full time hours per week",
+       "value": 32
+      },
+      {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "Level 2"
+      },
+      {
+       "key": "rent_monthly",
+       "label": "Cheapest employee housing rent per month",
+       "value": 650
+      },
+      {
+       "key": "food_monthly",
+       "label": "Food per month",
+       "value": 450
+      }
+     ]
+    },
+    "stale_fields": []
+   },
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
@@ -1101,7 +1597,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 142,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -1225,7 +1721,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 134,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -1365,7 +1861,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 151,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -1502,7 +1998,7 @@
      "confidence": "published"
     },
     "length_days": {
-     "value": 144,
+     "value": 118,
      "source_id": "fixture-model",
      "as_of": "2026-10-01",
      "confidence": "estimated"
@@ -1628,12 +2124,7 @@
      "as_of": "2026-10-01",
      "confidence": "published"
     },
-    "length_days": {
-     "value": 144,
-     "source_id": "fixture-model",
-     "as_of": "2026-10-01",
-     "confidence": "estimated"
-    },
+    "length_days": null,
     "training_start": {
      "value": "11-08",
      "source_id": "fixture-resort-site",
@@ -1693,7 +2184,6 @@
    "facility_type": "indoor",
    "sources": [
     "fixture-location",
-    "fixture-model",
     "fixture-ownership",
     "fixture-resort-site"
    ]
@@ -1750,12 +2240,7 @@
      "as_of": "2026-10-01",
      "confidence": "published"
     },
-    "length_days": {
-     "value": 144,
-     "source_id": "fixture-model",
-     "as_of": "2026-10-01",
-     "confidence": "estimated"
-    },
+    "length_days": null,
     "training_start": {
      "value": "11-08",
      "source_id": "fixture-resort-site",
@@ -1815,7 +2300,6 @@
    "facility_type": "training_center",
    "sources": [
     "fixture-location",
-    "fixture-model",
     "fixture-ownership",
     "fixture-resort-site"
    ]

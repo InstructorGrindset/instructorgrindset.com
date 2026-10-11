@@ -38,3 +38,44 @@ export const FILTERS = [
   { key: 'ski_area', label: 'Ski areas' },
   { key: 'facility', label: 'Indoor and training' },
 ];
+
+export const CERT_LABEL = {
+  none: 'No certification',
+  level_1: 'Level 1',
+  level_2: 'Level 2',
+  level_3: 'Level 3',
+  trainer: 'Trainer',
+  examiner: 'Examiner',
+};
+
+export const COMPONENT_LABEL = {
+  cert_pay_differential: 'Cert pay differential',
+  paid_training_hours: 'Paid training hours',
+  examiner_trainer_presence: 'Examiner and trainer presence',
+  private_lesson_share: 'Private lesson share',
+  year_round_staff: 'Year round staff',
+  clinic_access: 'Clinic access',
+};
+
+export const RATE_UNIT = { hour: 'per hour', half_day: 'per half day', full_day: 'per full day' };
+
+/** Client profile vocabulary (config/definitions.yaml career.vocab). Unknown tags are humanized. */
+const TAG_LABEL = {
+  destination_families: 'Destination families',
+  local_kids_programs: 'Local kids programs',
+  adaptive: 'Adaptive',
+  race: 'Race',
+  freestyle: 'Freestyle',
+  international: 'International guests',
+  uhnw_privates: 'Ultra high net worth privates',
+};
+
+export function tagLabel(tag) { return TAG_LABEL[tag] || humanize(tag); }
+
+export const RECOLOR_MODES = [
+  { key: 'default', label: 'Default' },
+  { key: 'lucrativeness', label: 'Lucrativeness', prop: 'lucrativeness_mid', title: 'Estimated season savings, mid case', noun: 'lucrativeness' },
+  { key: 'professionalism', label: 'Professionalism', prop: 'professionalism_score', title: 'Professionalism score, 0 to 100', noun: 'professionalism' },
+  { key: 'season', label: 'Season length', prop: 'season_length_days', title: 'Typical season length in days', noun: 'season length' },
+  { key: 'snowfall', label: 'Snowfall', prop: 'snowfall_annual_in', title: 'Average snowfall per season in inches', noun: 'snowfall' },
+];

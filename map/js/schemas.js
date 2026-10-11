@@ -31,6 +31,51 @@ export const TierACriterion = z.object({
 });
 
 const strList = z.array(z.string()).nullish().transform((v) => v ?? []);
+const numOrNull = z.number().nullish().transform((v) => v ?? null);
+
+// ── Career (Phase 4 contract) ──
+export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner'];
+
+export const PayRow = z.object({
+  cert_level: z.enum(CERT_LEVELS),
+  hourly_low: numOrNull,
+  hourly_high: numOrNull,
+  confidence: Confidence,
+  source_id: Slug,
+  as_of: IsoDate,
+  season: z.string().nullish(),
+  stale: z.boolean().nullish().transform((v) => Boolean(v)),
+});
+
+export const Career = z.object({
+  pay: z.array(PayRow).nullish().transform((v) => v ?? []),
+  private_rate: sourced(z.object({ low: numOrNull, high: numOrNull, unit: z.enum(['hour', 'half_day', 'full_day']) })),
+  private_split: sourced(z.number().min(0).max(100)),
+  // Status stays a string so a status added later renders as "being finalized" instead of dropping the resort.
+  professionalism: z.object({
+    score: z.number().min(0).max(100).nullish().transform((v) => v ?? null),
+    status: z.string(),
+    breakdown: z.array(z.object({
+      component: z.string(),
+      weight: numOrNull,
+      value: numOrNull,
+      points: numOrNull,
+      source_id: z.string().nullish(),
+    })).nullish().transform((v) => v ?? []),
+  }).nullish().transform((v) => v ?? null),
+  lucrativeness: z.object({
+    low: numOrNull,
+    mid: numOrNull,
+    high: numOrNull,
+    status: z.string(),
+    assumptions: z.array(z.object({
+      key: z.string(),
+      value: z.union([z.number(), z.string(), z.boolean()]).nullish(),
+      label: z.string(),
+    })).nullish().transform((v) => v ?? []),
+  }).nullish().transform((v) => v ?? null),
+  stale_fields: strList,
+});
 
 export const Resort = z.object({
   id: Slug,
@@ -74,7 +119,7 @@ export const Resort = z.object({
     .nullish().transform((v) => v ?? { enthusiast_types: [], professional_types: [] }),
   clients: z.object({ profile_tags: strList, notes_md: z.string().nullish() })
     .nullish().transform((v) => v ?? { profile_tags: [], notes_md: null }),
-  career: z.unknown().nullish(),
+  career: Career.nullish().transform((v) => v ?? null),
   editorial: z.unknown().nullish(),
   climate_available: z.boolean(),
   sources: z.array(z.string()),
@@ -122,6 +167,11 @@ export const ResortFeature = z.object({
     vertical_ft: z.number().nullish(),
     lifts: z.number().nullish(),
     size_rank: z.number().int().min(1).max(5).nullish().transform((v) => v ?? 1),
+    // Recolor values (Phase 4); absent until the build emits them.
+    season_length_days: numOrNull,
+    snowfall_annual_in: numOrNull,
+    professionalism_score: numOrNull,
+    lucrativeness_mid: numOrNull,
   }),
 });
 
