@@ -1,0 +1,129 @@
+batch: facilities
+researched_date: 2026-10-11
+status: draft            # Alexandre approves later
+# Indoor snow and year round training facilities (ROADMAP Section 3, year_round_training criterion).
+# The egress policy of the research session allowed only en.wikipedia.org, so every fact here comes
+# from Wikipedia (or the repository's OpenSkiMap extract for coordinates). Operator sites were blocked
+# (bigsnowamericandream.com, timberlinelodge.com, utaholympiclegacy.org, usskiandsnowboard.org,
+# woodwardparkcity.com, coppercolorado.com, orda.org) and should be checked before approval.
+sources:
+  - {id: wikipedia-big-snow-american-dream, url: https://en.wikipedia.org/wiki/Big_Snow_American_Dream, title: Big Snow American Dream (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-indoor-skiing, url: https://en.wikipedia.org/wiki/Indoor_skiing, title: Indoor skiing (Wikipedia), accessed_date: 2026-10-11, note: "United States section lists Big SNOW American Dream as the only US indoor slope"}
+  - {id: wikipedia-timberline-lodge-ski-area, url: https://en.wikipedia.org/wiki/Timberline_Lodge_ski_area, title: Timberline Lodge ski area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-palmer-glacier, url: https://en.wikipedia.org/wiki/Palmer_Glacier, title: Palmer Glacier (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-utah-olympic-park, url: https://en.wikipedia.org/wiki/Utah_Olympic_Park, title: Utah Olympic Park (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-aerials-water-ramps, url: https://en.wikipedia.org/wiki/Aerials_water_ramps, title: Aerials water ramps (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-lake-placid-olympic-ski-jumping-complex, url: https://en.wikipedia.org/wiki/Lake_Placid_Olympic_Ski_Jumping_Complex, title: Lake Placid Olympic Ski Jumping Complex (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-us-olympic-paralympic-training-centers, url: https://en.wikipedia.org/wiki/United_States_Olympic_Training_Center, title: United States Olympic & Paralympic Training Centers (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-us-ski-and-snowboard, url: https://en.wikipedia.org/wiki/U.S._Ski_%26_Snowboard, title: U.S. Ski & Snowboard (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-united-states-ski-team, url: https://en.wikipedia.org/wiki/United_States_Ski_Team, title: United States Ski Team (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-powdr, url: https://en.wikipedia.org/wiki/Powdr, title: Powdr (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-copper-mountain-colorado, url: "https://en.wikipedia.org/wiki/Copper_Mountain_(Colorado)", title: "Copper Mountain (Colorado) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-boreal-mountain-resort, url: https://en.wikipedia.org/wiki/Boreal_Mountain_Resort, title: Boreal Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: openskimap-ski-areas, url: "https://openskimap.org/", title: "OpenSkiMap ski areas (derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-11, note: "repository extract data/raw/openskimap/us_ski_areas.geojson"}
+resorts:
+  - id: big-snow-american-dream
+    name: Big SNOW American Dream
+    facility_type: indoor
+    state: NJ
+    owner: {value: Snow Operating, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-11, confidence: published, note: "operator, which also runs Mountain Creek; the slope is owned by Triple Five Group"}
+    lat: 40.8111
+    lon: -74.07
+    location_source_id: wikipedia-big-snow-american-dream
+    cluster_hint: new-york-metro
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "The first indoor ski park in North America, open year round on 4 acres of real snow held at 28 F, with ski and snowboard lessons and a terrain park.", source_id: wikipedia-big-snow-american-dream}
+    size:
+      acres: {value: 4, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 160, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-11, confidence: published, note: "slopes are 1,000 ft long with a 26% maximum pitch"}
+      lifts: {value: 4, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-11, confidence: published, note: "1 quad chair, 1 platter, 2 carpets"}
+  - id: timberline-palmer-summer
+    name: Timberline Palmer Snowfield summer camps
+    facility_type: training_center
+    state: OR
+    owner: null     # Wikipedia names no current ski area operator (operator line marked citation needed)
+    lat: 45.3525
+    lon: -121.7075
+    location_source_id: wikipedia-palmer-glacier
+    cluster_hint: mount-hood
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "The Palmer lift gives Timberline lift served skiing in every month of the year; ski and snowboard camps draw thousands of people in June, July and August.", source_id: wikipedia-timberline-lodge-ski-area}
+      - {criterion: athlete_development, rationale: "During the summer season most Palmer Snowfield lanes are allocated to ski and snowboard camps, ski coaches and other organizations.", source_id: wikipedia-palmer-glacier}
+      - {criterion: heritage, rationale: "Summer skiing and summer race camps began at Timberline in 1956.", source_id: wikipedia-timberline-lodge-ski-area}
+    size:
+      vertical_ft: {value: 2500, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published, note: "early summer (April to July); 1,530 ft in late summer (July to October)"}
+    elevation:
+      summit_ft: {value: 8500, source_id: wikipedia-palmer-glacier, as_of: 2026-10-11, confidence: published, note: "top of the Palmer chairlift"}
+  - id: utah-olympic-park
+    name: Utah Olympic Park
+    facility_type: training_center
+    state: UT
+    owner: {value: Utah Athletic Foundation, source_id: wikipedia-utah-olympic-park, as_of: 2026-10-11, confidence: published}
+    lat: 40.71207
+    lon: -111.56193
+    location_source_id: wikipedia-utah-olympic-park
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "Summer training facilities, including a summer aerial training splash pool, have operated at the park since 1993.", source_id: wikipedia-utah-olympic-park}
+      - {criterion: athlete_development, rationale: "The water ramp hosts the U.S., Australian and other national teams for aerials and moguls, plus snowboard and freeski athletes.", source_id: wikipedia-aerials-water-ramps}
+      - {criterion: heritage, rationale: "Built for the 2002 Winter Olympics and scheduled to host freestyle and snowboard events again at the 2034 Winter Olympics.", source_id: wikipedia-utah-olympic-park}
+  - id: usss-center-of-excellence
+    name: U.S. Ski & Snowboard Center of Excellence
+    facility_type: training_center
+    state: UT
+    owner: {value: U.S. Ski & Snowboard, source_id: wikipedia-us-ski-and-snowboard, as_of: 2026-10-11, confidence: published}
+    # Approximate: Park City town coordinates from Wikipedia. The facility is at 1 Victory Lane, Park City;
+    # no reachable source gave its own coordinates. Replace before approval.
+    lat: 40.6461
+    lon: -111.498
+    location_source_id: wikipedia-park-city-utah
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "The national training and education facility opened in 2009 with strength training areas, a gymnasium, ski and snowboard ramps, trampolines and rehabilitation facilities.", source_id: wikipedia-united-states-ski-team}
+      - {criterion: athlete_development, rationale: "U.S. Ski & Snowboard moved into the Center of Excellence in May 2009; it serves as a training base for elite athletes and an education center.", source_id: wikipedia-us-ski-and-snowboard}
+  - id: woodward-park-city
+    name: Woodward Park City
+    facility_type: training_center
+    state: UT
+    owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published}
+    lat: 40.75237
+    lon: -111.58347
+    location_source_id: openskimap-ski-areas
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "Powdr opened Woodward Park City in December 2019, billed in its opening release as the nation's first year round action sports and ski resort.", source_id: wikipedia-powdr}
+  - id: woodward-copper
+    name: Woodward Copper
+    facility_type: training_center
+    state: CO
+    owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Powdr owns Copper Mountain and lists Copper Mountain among Woodward camp locations"}
+    lat: 39.5017
+    lon: -106.1564
+    location_source_id: wikipedia-copper-mountain-colorado
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "Woodward opened a 20,000 sq ft indoor ski and snowboard training facility at Copper in February 2009, dedicated to terrain park and half pipe training.", source_id: wikipedia-copper-mountain-colorado}
+  - id: woodward-tahoe
+    name: Woodward Tahoe
+    facility_type: training_center
+    state: CA
+    owner: {value: POWDR, source_id: wikipedia-boreal-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Boreal Mountain, home of Woodward Tahoe, is owned by Powdr"}
+    lat: 39.3317
+    lon: -120.3511
+    location_source_id: wikipedia-boreal-mountain-resort
+    cluster_hint: lake-tahoe
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "Boreal Mountain is home to Woodward Tahoe, a 33,000 sq ft action sports hub open year round.", source_id: wikipedia-boreal-mountain-resort}
+  - id: lake-placid-olympic-jumping-complex
+    name: Lake Placid Olympic Jumping Complex and Freestyle Aerial Training Center
+    facility_type: training_center
+    state: NY
+    owner: {value: Olympic Regional Development Authority, source_id: wikipedia-lake-placid-olympic-ski-jumping-complex, as_of: 2026-10-11, confidence: published, note: operator}
+    lat: 44.2561
+    lon: -73.964
+    location_source_id: wikipedia-lake-placid-olympic-ski-jumping-complex
+    cluster_hint: adirondacks
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "Ski jumping runs year round on a plastic mat out run, and aerialists train in summer at the Freestyle Aerial Training Center by jumping into a 750,000 gallon pool.", source_id: wikipedia-lake-placid-olympic-ski-jumping-complex}
+      - {criterion: athlete_development, rationale: "Freestyle ski is one of four resident sports at the Lake Placid Olympic and Paralympic Training Center.", source_id: wikipedia-us-olympic-paralympic-training-centers}
+      - {criterion: heritage, rationale: "Jumps on this site served the 1932 and 1980 Winter Olympics and the 1950 Nordic World Ski Championships.", source_id: wikipedia-lake-placid-olympic-ski-jumping-complex}

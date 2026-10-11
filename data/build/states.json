@@ -1,11 +1,12 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T20:14:31Z",
+  "generated_at": "2026-10-11T20:15:25Z",
   "states": [
     {
       "code": "AK",
       "name": "Alaska",
       "cluster_ids": [
+        "alaska",
         "other-ak"
       ],
       "resort_count": 12
@@ -146,7 +147,8 @@
       "name": "Montana",
       "cluster_ids": [
         "inland-northwest",
-        "other-mt"
+        "other-mt",
+        "southwest-montana"
       ],
       "resort_count": 17
     },
@@ -221,6 +223,8 @@
       "code": "OR",
       "name": "Oregon",
       "cluster_ids": [
+        "central-oregon",
+        "mount-hood",
         "other-or"
       ],
       "resort_count": 12
