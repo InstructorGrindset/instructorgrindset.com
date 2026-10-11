@@ -43,8 +43,11 @@ All files carry a top level `{ "version": <int>, "generated_at": <ISO datetime>,
 { version, generated_at, resorts: Resort[] }
 Resort {
   id, name, tier: "A" | "B",
-  tier_a_criteria: [{ criterion: diehard|luxury|athlete_development|heritage, rationale, source_id }],
+  facility_type: "ski_area" | "indoor" | "training_center",   // Tier B is always ski_area; indoor and training records may have no size data
+  tier_a_criteria: [{ criterion: diehard|luxury|athlete_development|heritage|operator_compensation|year_round_training,
+                      rationale, source_id }],
   tier_a_status: "draft" | "approved" | null,      // null for Tier B
+  approval: { by: string, date: "YYYY-MM-DD", note: string | null } | null,   // set only when tier_a_status is approved
   owner: Sourced<string> | null,                   // "Vail Resorts" | "Alterra Mountain Company" | operator name
   lat, lon,                                        // base area, decimal degrees
   location_source_id,
@@ -70,7 +73,7 @@ GeoJSON FeatureCollection, one Polygon or MultiPolygon per cluster. `properties`
 Polygons are convex hulls of member resorts buffered by about 15 km, or hand drawn polygons from `config/clusters.yaml` when supplied.
 
 ### `resorts.geojson`
-Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, cluster_id, state, acres, vertical_ft, lifts, size_rank }` where `size_rank` is 1 to 5 from acres (null acres gives 1).
+Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank }` where `size_rank` is 1 to 5 from acres (null acres gives 1).
 
 ### `states.json`
 ```
@@ -113,7 +116,8 @@ Monthly values are climatological means over `period`; `powder_days` and `banner
 ## Raw inputs (`/data/raw`)
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
-* `data/raw/ownership/*.yaml`: verified Vail and Alterra US portfolios with sources.
+* `data/raw/ownership/*.yaml`: verified Vail and Alterra US portfolios with sources. Every listed resort needs a Tier A record (operator compensation).
+* `data/raw/sources/*.yaml`: pipeline owned shared sources (`{ sources: Source[] }`, e.g. `owner-decisions-2026-10-11`) that any research file may cite. Source ids are unique across all of `/data/raw`; the same id may repeat only with an identical url.
 * `data/raw/openskimap/`: downloaded OpenSkiMap ski areas (gitignored when large; the filtered US extract is committed).
 * `data/raw/climate/`: cached Open Meteo and SNOTEL responses (gitignored).
 
