@@ -7,14 +7,14 @@
   <meta name="description" content="Build and schedule your May through November training plan. Configure volume, set goals, drag and drop activities across 26 weeks, and export to Google Sheets." />
   <link rel="canonical" href="https://instructorgrindset.com/offseason-plan" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/global.css?v=1">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <style>
 :root{
       --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
-      --fit-color:#1D9E75; --fit-bg:#E1F5EE; --fit-text:#085041;
-      --study-color:#378ADD; --study-bg:#E6F1FB; --study-text:#0C447C;
-      --cross-color:#BA7517; --cross-bg:#FAEEDA; --cross-text:#633806;
+      --fit-color:#1D9E75; --fit-bg:rgba(29,158,117,.16); --fit-text:#5DCAA5;
+      --study-color:#378ADD; --study-bg:rgba(55,138,221,.16); --study-text:#85B7EB;
+      --cross-color:#BA7517; --cross-bg:rgba(186,117,23,.18); --cross-text:#EF9F27;
       /* Training phases */
       --phase1-color:#8A74E0;  /* Orient — violet */
       --phase2-color:#26B07A;  /* Build  — teal-green */
@@ -25,12 +25,8 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
       background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
     }
-    .content{
-      width:var(--wrap-max);
-      margin-left:max(14px,calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
-      margin-right:auto; padding-top:1.25rem; padding-bottom:2rem;
-    }
-    @media(max-width:960px){.content{width:min(94vw,1100px);margin:0 auto}}
+    .content{width:100%;max-width:1100px;margin:0 auto;padding-top:1.25rem;padding-bottom:2rem}
+    .main{min-width:0}
     h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
     h1{font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
       background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -49,11 +45,11 @@
     /* --- Exemptions --- */
     .exemption-grid{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.75rem}
     .ex-btn{
-      padding:.3rem .75rem;border-radius:999px;border:1px solid var(--line);
+      padding:.3rem .75rem;border-radius:999px;border:1px solid var(--line);min-height:40px;
       background:transparent;color:var(--muted);font-size:.82rem;font-family:inherit;cursor:pointer;transition:all .15s;
     }
     .ex-btn:hover{border-color:var(--muted);color:var(--ink)}
-    .ex-btn.active{background:#FCEBEB;border-color:#A32D2D;color:#791F1F}
+    .ex-btn.active{background:rgba(163,45,45,.18);border-color:#A32D2D;color:#fca5a5}
     .ex-disclaimer{font-size:.82rem;color:#fca5a5;border:1px solid rgba(252,165,165,.3);border-radius:.5rem;
       padding:.6rem .85rem;margin-bottom:.75rem;display:none}
     .ex-disclaimer.show{display:block}
@@ -90,6 +86,7 @@
     .pillar-row.cross{background:var(--cross-bg);color:var(--cross-text)}
     .matrix-cell{cursor:pointer;transition:background .1s}
     .matrix-cell:hover{background:rgba(255,255,255,.07)}
+    .matrix-btn{display:block;width:100%;padding:0;margin:0;border:0;background:none;color:inherit;font:inherit;line-height:inherit;cursor:pointer}
     .matrix-cell.cell-fit{color:var(--fit-color)}
     .matrix-cell.cell-study{color:var(--study-color)}
     .matrix-cell.cell-cross{color:var(--cross-color)}
@@ -132,6 +129,7 @@
       cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;
       transition:background .15s,border-color .15s,color .15s}
     .day-pill:hover{border-color:var(--muted);color:var(--ink)}
+    @media(pointer:coarse){.day-pill{width:40px;height:40px}}
     .day-pill.assigned.fit{background:var(--fit-color);border-color:var(--fit-color);color:#fff}
     .day-pill.assigned.study{background:var(--study-color);border-color:var(--study-color);color:#fff}
     .day-pill.assigned.cross{background:var(--cross-color);border-color:var(--cross-color);color:#fff}
@@ -147,13 +145,12 @@
     .psched-apply-row{display:flex;align-items:center;justify-content:space-between;
       margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line);flex-wrap:wrap;gap:.75rem}
     .psched-progress{font-size:.82rem;color:var(--muted)}
-    .psched-apply-btn{padding:.65rem 1.25rem;background:var(--cta);color:#e6e7eb;font-weight:700;
+    .psched-apply-btn{padding:.65rem 1.25rem;background:var(--cta);color:var(--cta-ink);font-weight:800;
       font-size:.9rem;font-family:inherit;border:0;border-radius:.4rem;cursor:pointer;transition:opacity .2s}
     .psched-apply-btn:disabled{opacity:.4;cursor:not-allowed}
     .psched-apply-btn.applied{background:#2a3140;border:1px solid var(--line);color:var(--muted);cursor:default}
     .tab-status{font-size:.68rem;margin-top:.1rem}
     .tab-status.applied{color:var(--phase2-color)}
-    .cta{display:inline-block;padding:.9rem 1.1rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;text-decoration:none}
     .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
     .cta:hover{filter:brightness(1.06)}
 
@@ -166,7 +163,7 @@
     }
     @media(max-width:960px){.export-bar{left:0}}
     .export-btn{
-      padding:.7rem 1.25rem;background:var(--cta);color:#e6e7eb;font-weight:700;
+      padding:.7rem 1.25rem;background:var(--cta);color:var(--cta-ink);font-weight:800;
       font-size:.9rem;font-family:inherit;border:0;border-radius:.4rem;cursor:pointer;
     }
     .start-over-btn{
@@ -178,7 +175,8 @@
       position:fixed;bottom:70px;left:50%;transform:translateX(-50%);
       background:#1a2030;border:1px solid var(--line);border-radius:.5rem;
       padding:.65rem 1.1rem;font-size:.88rem;color:var(--ink);z-index:200;
-      opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;
+      opacity:0;transition:opacity .2s;pointer-events:none;white-space:normal;
+      max-width:calc(100vw - 2rem);text-align:center;
     }
     .toast.show{opacity:1}
 
@@ -194,6 +192,10 @@
     .budget-fill.study{background:var(--study-color)}
     .budget-fill.cross{background:var(--cross-color)}
     .budget-ct{font-size:.78rem;font-weight:600;color:var(--muted);min-width:52px;text-align:right;white-space:nowrap}
+    /* Keep the sticky section tabs clear of the fixed hamburger button (top-left, 44x44) */
+    @media(max-width:1240px){.phase-nav{padding-left:4.25rem}}
+    @media(max-width:480px){.phase-tab{padding-left:.5rem;padding-right:.5rem}}
+    @media(max-width:400px){.phase-nav{margin-left:-.75rem;margin-right:-.75rem}}
     .prefill-note{font-size:.82rem;color:var(--cta);border:1px solid rgba(196,137,42,.3);border-radius:.4rem;padding:.5rem .8rem;margin-bottom:1rem}
 
   </style>
@@ -202,15 +204,7 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   <div class="page">
     <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-    <script>
-      (function(){
-        var t=document.getElementById("sidebar-placeholder");
-        fetch("/partials/sidebar.html?v=13")
-          .then(function(r){return r.text()})
-          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
-          .catch(function(){t.innerHTML="<div style=\"padding:1rem;color:#fca5a5\">Navigation failed to load.</div>"});
-      })();
-    </script>
+    <script src="/assets/nav.js?v=14"></script>
     <main class="main" id="main">
       <div class="content">
         <header>
@@ -275,16 +269,16 @@
 
         <div class="section-label">Exemptions <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.78rem;margin-left:.35rem">(max 3)</span></div>
         <div class="exemption-grid" id="ex-grid">
-          <button class="ex-btn" data-key="heavy"   onclick="toggleEx(this)">Something heavy</button>
-          <button class="ex-btn" data-key="fast"    onclick="toggleEx(this)">Something fast</button>
-          <button class="ex-btn" data-key="sucks"   onclick="toggleEx(this)">Something that sucks</button>
-          <button class="ex-btn" data-key="fun"     onclick="toggleEx(this)">Something fun</button>
-          <button class="ex-btn" data-key="read"    onclick="toggleEx(this)">Read something</button>
-          <button class="ex-btn" data-key="reflect" onclick="toggleEx(this)">Reflect</button>
-          <button class="ex-btn" data-key="ask"     onclick="toggleEx(this)">Ask an expert</button>
-          <button class="ex-btn" data-key="cardio"  onclick="toggleEx(this)">Cardio</button>
-          <button class="ex-btn" data-key="control" onclick="toggleEx(this)">Full body control</button>
-          <button class="ex-btn" data-key="lateral" onclick="toggleEx(this)">Lateral movement</button>
+          <button class="ex-btn" data-key="heavy"   aria-pressed="false" onclick="toggleEx(this)">Something heavy</button>
+          <button class="ex-btn" data-key="fast"    aria-pressed="false" onclick="toggleEx(this)">Something fast</button>
+          <button class="ex-btn" data-key="sucks"   aria-pressed="false" onclick="toggleEx(this)">Something that sucks</button>
+          <button class="ex-btn" data-key="fun"     aria-pressed="false" onclick="toggleEx(this)">Something fun</button>
+          <button class="ex-btn" data-key="read"    aria-pressed="false" onclick="toggleEx(this)">Read something</button>
+          <button class="ex-btn" data-key="reflect" aria-pressed="false" onclick="toggleEx(this)">Reflect</button>
+          <button class="ex-btn" data-key="ask"     aria-pressed="false" onclick="toggleEx(this)">Ask an expert</button>
+          <button class="ex-btn" data-key="cardio"  aria-pressed="false" onclick="toggleEx(this)">Cardio</button>
+          <button class="ex-btn" data-key="control" aria-pressed="false" onclick="toggleEx(this)">Full body control</button>
+          <button class="ex-btn" data-key="lateral" aria-pressed="false" onclick="toggleEx(this)">Lateral movement</button>
         </div>
         <div class="ex-disclaimer" id="ex-disclaimer">
           A complete snowsports instructor trains all three pillars. Volume is personal &mdash; completeness is not. Exemptions should be temporary.
@@ -315,7 +309,7 @@
             <tbody id="matrix-body"></tbody>
           </table>
         </div>
-        <div class="detail-panel" id="detail-panel">
+        <div class="detail-panel" id="detail-panel" aria-live="polite">
           <div class="detail-title" id="dp-title"></div>
           <div class="detail-desc" id="dp-desc"></div>
           <div class="detail-timing" id="dp-timing"></div>
@@ -365,7 +359,7 @@
     <button class="export-btn" onclick="copyPlan()">Copy plan to clipboard</button>
     <button class="start-over-btn" onclick="startOver()">Start over</button>
   </div>
-  <div class="toast" id="toast">Copied. Open a blank Google Sheet and paste with Cmd+V or Ctrl+V.</div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied. Open a blank Google Sheet and paste with Cmd+V or Ctrl+V.</div>
 
   <script>
   /* ---- Constants ---- */
@@ -402,14 +396,7 @@
     lateral:{desc:'Soccer, basketball, pickleball, tennis, skateboarding, inline skating — direction changes, reactive footwork, spatial awareness.',timing:'Once a week. Team sports are fine. The social element keeps you coming back.'}
   };
 
-  /* ---- Week date labels (Mon May 5, 2025 = week 0) ---- */
-  var START_MS = new Date(2025,4,5).getTime(); // May 5 2025
-  function weekLabel(w){
-    var ms=START_MS+w*7*24*3600*1000;
-    var s=new Date(ms),e=new Date(ms+6*24*3600*1000);
-    var mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return mo[s.getMonth()]+' '+s.getDate()+'–'+(s.getMonth()!==e.getMonth()?mo[e.getMonth()]+' ':'')+e.getDate();
-  }
+  /* ---- Week / phase helpers ---- */
   function getMonthIndex(w){
     for(var m=0;m<MONTHS.length;m++){if(MONTH_WEEKS[MONTHS[m]].indexOf(w)>=0)return m;}
     return 6;
@@ -567,6 +554,7 @@
     var slots=getPhaseActivities(phaseIdx);
     var DAYS=['mon','tue','wed','thu','fri','sat','sun'];
     var DAY_LETTERS={mon:'M',tue:'T',wed:'W',thu:'T',fri:'F',sat:'S',sun:'S'};
+    var DAY_NAMES={mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',fri:'Friday',sat:'Saturday',sun:'Sunday'};
     var phaseNames=['Orient','Build','Sharpen'];
     var phaseLengths=[8,12,6];
     var progress=getTemplateProgress(phaseIdx);
@@ -589,7 +577,7 @@
         DAYS.forEach(function(day){
           var isAssigned=assignedDay===day;
           var pillCls=isAssigned?'day-pill assigned '+slot.pillar:'day-pill';
-          html+='<button class="'+pillCls+'" aria-pressed="'+isAssigned+'" aria-label="'+(isAssigned?'Remove from':'Assign to')+' '+day+'"'
+          html+='<button class="'+pillCls+'" aria-pressed="'+isAssigned+'" aria-label="'+(isAssigned?'Remove from':'Assign to')+' '+DAY_NAMES[day]+'"'
             +' onclick="toggleDayPill('+phaseIdx+',\''+slot.key+'\','+slot.slotIdx+',\''+day+'\')">'
             +DAY_LETTERS[day]+'</button>';
         });
@@ -652,6 +640,13 @@
         if(tmpl[day].length!==before)state.phaseApplied[p]=false;
       });
     }
+    // Also strip the exempted activity from weeks already applied, so the export matches.
+    state.weeks.forEach(function(wk){
+      if(!wk||!wk.scheduled)return;
+      DAYS.forEach(function(day){
+        if(Array.isArray(wk.scheduled[day]))wk.scheduled[day]=wk.scheduled[day].filter(function(t){return t.key!==key;});
+      });
+    });
   }
 
   function invalidatePhasesOnConfigChange(){
@@ -699,8 +694,9 @@
       for(var m=0;m<7;m++){
         var f=freq(key,m,state.sessions,state.goals);
         rows+='<td class="matrix-cell cell-'+pillar+'" data-key="'+key+'" data-m="'+m+'" onclick="showDetail(\''+key+'\','+m+')">';
+        rows+='<button type="button" class="matrix-btn" aria-label="'+LABEL_OF[key]+' — '+MONTHS[m]+' ('+f+'x/week)">';
         rows+=ex?'—':dotsFor(f);
-        rows+='</td>';
+        rows+='</button></td>';
       }
       rows+='</tr>';
     });
@@ -756,6 +752,7 @@
     state.sessions=parseInt(v);
     document.getElementById('vol-display').textContent=v;
     invalidatePhasesOnConfigChange();
+    [0,1,2].forEach(updateTabStatus);
     renderMatrix();renderBudgetBars();renderPhaseEditor(currentPhase);
     saveState();
   }
@@ -764,6 +761,7 @@
     var ids={skiing:'g-ski-d',teaching:'g-teach-d',cert:'g-cert-d',physical:'g-phys-d'};
     document.getElementById(ids[key]).textContent=v;
     invalidatePhasesOnConfigChange();
+    [0,1,2].forEach(updateTabStatus);
     renderMatrix();renderBudgetBars();renderPhaseEditor(currentPhase);
     saveState();
   }
@@ -771,15 +769,18 @@
     var key=btn.getAttribute('data-key');
     if(btn.classList.contains('active')){
       btn.classList.remove('active');
+      btn.setAttribute('aria-pressed','false');
       state.exemptions.delete(key);
     } else {
       if(state.exemptions.size>=3)return;
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed','true');
       state.exemptions.add(key);
       removeKeyFromTemplates(key);
     }
     document.getElementById('ex-disclaimer').classList.toggle('show',state.exemptions.size>0);
     invalidatePhasesOnConfigChange();
+    [0,1,2].forEach(updateTabStatus);
     renderMatrix();renderBudgetBars();renderPhaseEditor(currentPhase);
     saveState();
   }
@@ -808,22 +809,33 @@
   }
   function copyPlan(){
     var tsv=buildTSV();
-    navigator.clipboard.writeText(tsv).then(function(){showToast();}).catch(function(){
-      // fallback
+    function fallback(){
       var ta=document.createElement('textarea');ta.value=tsv;
-      document.body.appendChild(ta);ta.select();document.execCommand('copy');
+      ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');}catch(e){}
       document.body.removeChild(ta);showToast();
-    });
+    }
+    if(!navigator.clipboard||!navigator.clipboard.writeText){fallback();return;}
+    navigator.clipboard.writeText(tsv).then(function(){showToast();}).catch(fallback);
   }
+  var toastTimer=null;
   function showToast(){
     var t=document.getElementById('toast');
-    t.classList.add('show');
-    setTimeout(function(){t.classList.remove('show');},4000);
+    // Re-insert the same message so the live region announces it on each copy.
+    var msg=t.getAttribute('data-msg')||t.textContent;
+    t.setAttribute('data-msg',msg);
+    t.textContent='';
+    setTimeout(function(){t.textContent=msg;t.classList.add('show');},50);
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){t.classList.remove('show');},4000);
   }
   function startOver(){
     if(!confirm('This will clear your entire plan. Are you sure?'))return;
-    localStorage.removeItem('ig-offseason-v2');
-    localStorage.removeItem('ig-offseason-v1');
+    try{
+      localStorage.removeItem('ig-offseason-v2');
+      localStorage.removeItem('ig-offseason-v1');
+    }catch(e){}
     state.sessions=4;
     state.goals={skiing:3,teaching:3,cert:3,physical:3};
     state.exemptions=new Set();
@@ -839,9 +851,11 @@
     document.getElementById('vol-display').textContent=4;
     ['g-ski','g-teach','g-cert','g-phys'].forEach(function(id){document.getElementById(id).value=3;});
     ['g-ski-d','g-teach-d','g-cert-d','g-phys-d'].forEach(function(id){document.getElementById(id).textContent=3;});
-    document.querySelectorAll('.ex-btn').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.ex-btn').forEach(function(b){b.classList.remove('active');b.setAttribute('aria-pressed','false');});
     document.getElementById('ex-disclaimer').classList.remove('show');
     document.getElementById('detail-panel').classList.remove('show');
+    document.getElementById('prefill-note').style.display='none';
+    [0,1,2].forEach(updateTabStatus);
     renderMatrix();renderBudgetBars();switchPhase(0);
   }
 
@@ -859,7 +873,7 @@
       });
       state.exemptions.forEach(function(key){
         var btn=document.querySelector('.ex-btn[data-key="'+key+'"]');
-        if(btn)btn.classList.add('active');
+        if(btn){btn.classList.add('active');btn.setAttribute('aria-pressed','true');}
       });
       if(state.exemptions.size>0)document.getElementById('ex-disclaimer').classList.add('show');
       [0,1,2].forEach(updateTabStatus);
@@ -867,9 +881,10 @@
 
     var p=new URLSearchParams(window.location.search);
     if(p.has('cert')||p.has('ft')||p.has('exp')){
-      var cert=Math.min(3,Math.max(0,parseInt(p.get('cert')||'1')));
-      var ft=parseInt(p.get('ft')||'0')===1;
-      var exp=Math.min(30,Math.max(0,parseInt(p.get('exp')||'0')));
+      var num=function(name,def){var n=parseInt(p.get(name),10);return isNaN(n)?def:n;};
+      var cert=Math.min(3,Math.max(0,num('cert',1)));
+      var ft=num('ft',0)===1;
+      var exp=Math.min(30,Math.max(0,num('exp',0)));
       var certGoal=Math.max(0,5-cert);
       var physGoal=ft?4:3;
       var skiGoal=exp>15?4:exp>7?3:2;
@@ -882,6 +897,10 @@
         document.getElementById(dids[k]).textContent=state.goals[k];
       });
       document.getElementById('prefill-note').style.display='block';
+      invalidatePhasesOnConfigChange();
+      [0,1,2].forEach(updateTabStatus);
+      saveState();
+      try{history.replaceState(null,'',location.pathname);}catch(e){}
     }
   })();
   renderMatrix();

@@ -5,50 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • Contact</title>
   <meta name="description" content="Contact me — I'm here to answer any snowsports industry question you might have." />
-  <link rel="stylesheet" href="/assets/global.css?v=1">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <link rel="canonical" href="https://instructorgrindset.com/contact/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instructor Grindset • Contact">
+  <meta property="og:description" content="Contact me — I'm here to answer any snowsports industry question you might have.">
+  <meta property="og:url" content="https://instructorgrindset.com/contact/">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=14">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-:root{--content-shift:0px;--maxw:min(1000px,calc(100vw - var(--sidebar) - 40px))}
-body{margin:0;color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;
-  background:#0f1217 url("/images/web-background.png") center/cover no-repeat fixed}
-
+:root{--content-shift:0px;--maxw:min(1000px,calc(100vw - var(--sidebar) - 80px))}
 .content{width:var(--maxw);margin-left:max(14px,calc((100vw - var(--sidebar) - var(--maxw))/2 - var(--content-shift)));
   margin-right:auto;padding:2rem 0 4rem}
-@media(max-width:960px){.content{width:min(94vw,1000px);margin:0 auto;padding:1.5rem 0 4rem}}
+@media(max-width:960px){.content{width:100%;margin:0 auto;padding:1.5rem 0 4rem}}
 
-h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+h1,h2{letter-spacing:.2px}
 h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 .25rem;
   background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center}
 .page-sub{color:var(--muted);text-align:center;margin:0 0 2rem;font-size:.95rem}
 
 /* ── Two-column layout ── */
-.contact-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:1.5rem}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:1.5rem}
 @media(max-width:760px){.contact-layout{grid-template-columns:1fr;gap:1.5rem}}
-
-/* ── OR divider ── */
-.or-col{display:flex;align-items:center;justify-content:center;align-self:stretch}
-.or-badge{width:42px;height:42px;border-radius:50%;background:var(--cta);color:#fff;
-  font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;box-shadow:0 0 0 4px #0f1217}
-@media(max-width:760px){.or-col{flex-direction:row;align-self:auto}.or-badge{width:52px}}
 
 /* ── Left card (light) ── */
 .form-card{background:#fff;border-radius:1.1rem;padding:2rem;color:#111}
 .form-card h2{font-size:1.55rem;font-weight:800;color:#111;margin:0 0 .35rem;font-family:"Rooftop",Inter,sans-serif}
-.form-card .card-sub{color:#555;font-size:.88rem;margin:0 0 1.4rem}
 .name-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 @media(max-width:480px){.name-row{grid-template-columns:1fr}}
 .form-card input,.form-card textarea{
   width:100%;border:1.5px solid #e2e4e8;background:#fff;color:#111;
   border-radius:.55rem;padding:.7rem .9rem;font:inherit;font-size:.9rem;
   transition:border-color .18s;box-sizing:border-box}
-.form-card input:focus,.form-card textarea:focus{border-color:#c4892a;outline:none}
-.form-card input::placeholder,.form-card textarea::placeholder{color:#aaa}
+.form-card input:focus,.form-card textarea:focus{border-color:#c4892a;outline:none;box-shadow:0 0 0 3px rgba(196,137,42,.35)}
+.form-card input::placeholder,.form-card textarea::placeholder{color:#6b7280}
 .form-card textarea{resize:vertical;min-height:130px}
 .form-stack{display:flex;flex-direction:column;gap:.75rem}
-.submit-btn{width:100%;padding:.85rem;background:var(--cta);color:#fff;font-weight:800;
-  font-size:.95rem;letter-spacing:.8px;text-transform:uppercase;border:0;border-radius:2rem;
+.submit-btn{width:100%;padding:.85rem;background:var(--cta);color:var(--cta-ink);font-weight:800;
+  font-size:.95rem;letter-spacing:normal;text-transform:none;border:0;border-radius:.4rem;
   cursor:pointer;transition:filter .15s;margin-top:.25rem;font-family:inherit}
 .submit-btn:hover{filter:brightness(1.08)}
 .submit-btn:disabled{opacity:.6;cursor:progress}
@@ -62,15 +58,14 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
 .cal-card .card-sub{color:var(--muted);font-size:.85rem;margin:0 0 1.25rem}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
 .cal-month{font-size:1rem;font-weight:700;color:#fff}
-.cal-arrow{width:32px;height:32px;border-radius:50%;border:1px solid #333;background:transparent;
-  color:var(--muted);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;
-  transition:all .15s;font-family:inherit}
-.cal-arrow:hover{border-color:var(--cta);color:var(--cta)}
-.cal-arrow.next{background:var(--cta);border-color:var(--cta);color:#fff}
-.cal-arrow.next:hover{filter:brightness(1.1)}
+.cal-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;
+  color:var(--muted);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:inherit;padding:0}
+.cal-arrow:hover:not(:disabled){border-color:var(--cta);color:var(--cta)}
+.cal-arrow:disabled{opacity:.35;cursor:default}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:0 1rem 1rem}
-.cal-dow{font-size:.65rem;font-weight:700;letter-spacing:.5px;color:#555;text-align:center;padding:.4rem 0}
-.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+.cal-dow{font-size:.65rem;font-weight:700;letter-spacing:.5px;color:#8891a0;text-align:center;padding:.4rem 0}
+.cal-day{border:0;background:transparent;font:inherit;padding:0;width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;
   font-size:.85rem;font-weight:600;border-radius:50%;cursor:pointer;transition:all .15s;color:var(--muted)}
 .cal-day.available{color:var(--cta);cursor:pointer}
 .cal-day.available:hover{background:rgba(196,137,42,.18)}
@@ -81,23 +76,19 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
 .cal-info{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #252b38}
 .cal-info-cell{padding:1rem 1.25rem}
 .cal-info-cell:first-child{border-right:1px solid #252b38}
-.cal-info-lbl{font-size:.72rem;color:#555;margin-bottom:.3rem}
-.cal-info-val{font-size:.9rem;font-weight:700;color:#fff}
+.cal-info-lbl{font-size:.72rem;color:#8891a0;margin-bottom:.3rem}
+.cal-info-val{font-size:.9rem;font-weight:700;color:#fff;overflow-wrap:anywhere}
+.cal-info-val a{color:inherit}
+@media(max-width:480px){.cal-info{grid-template-columns:1fr}.cal-info-cell:first-child{border-right:0;border-bottom:1px solid #252b38}}
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <div class="page">
   <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-  <script>
-  (function(){
-    const t=document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=13').then(r=>r.text()).then(html=>{
-      const d=document.createElement('div');d.innerHTML=html.trim();t.replaceWith(d.firstElementChild);
-    }).catch(()=>{t.removeAttribute('aria-busy');});
-  })();
-  </script>
+  <script src="/assets/nav.js?v=14"></script>
 
-  <main class="main">
+  <main class="main" id="main">
     <div class="content">
       <h1>Contact Me</h1>
       <p class="page-sub">I'm here to answer any snowsports industry question you might have.</p>
@@ -110,12 +101,12 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
           <form id="contactForm" action="https://formspree.io/f/xyzbdqgq" method="POST" novalidate>
             <div class="form-stack">
               <div class="name-row">
-                <input id="fname" name="fname" placeholder="First name" autocomplete="given-name" required />
-                <input id="lname" name="lname" placeholder="Last name" autocomplete="family-name" />
+                <input id="fname" name="fname" placeholder="First name" aria-label="First name" autocomplete="given-name" required />
+                <input id="lname" name="lname" placeholder="Last name" aria-label="Last name" autocomplete="family-name" />
               </div>
-              <input id="email" type="email" name="email" placeholder="Your email" autocomplete="email" required />
-              <input id="workplace" name="workplace" placeholder="Your school or workplace (optional)" autocomplete="organization" />
-              <textarea id="message" name="message" placeholder="Your message or question" required></textarea>
+              <input id="email" type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" required />
+              <input id="workplace" name="workplace" placeholder="Your school or workplace (optional)" aria-label="Your school or workplace (optional)" autocomplete="organization" />
+              <textarea id="message" name="message" placeholder="Your message or question" aria-label="Your message or question" required></textarea>
               <input type="hidden" name="_subject" value="Instructor Grindset — Website Inquiry" />
               <button class="submit-btn" type="submit" id="submitBtn">Submit</button>
               <div id="formStatus" class="status" aria-live="polite"></div>
@@ -131,8 +122,8 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
             <div class="cal-nav">
               <div class="cal-month" id="cal-month-label"></div>
               <div style="display:flex;gap:.4rem">
-                <button class="cal-arrow prev" onclick="calPrev()" aria-label="Previous month">&#8249;</button>
-                <button class="cal-arrow next" onclick="calNext()" aria-label="Next month">&#8250;</button>
+                <button type="button" class="cal-arrow prev" id="calPrevBtn" onclick="calPrev()" aria-label="Previous month">&#8249;</button>
+                <button type="button" class="cal-arrow next" onclick="calNext()" aria-label="Next month">&#8250;</button>
               </div>
             </div>
           </div>
@@ -140,11 +131,11 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
           <div class="cal-info">
             <div class="cal-info-cell">
               <div class="cal-info-lbl">Email us at</div>
-              <div class="cal-info-val">instructorgrindset@gmail.com</div>
+              <div class="cal-info-val"><a href="mailto:instructorgrindset@gmail.com">instructorgrindset@gmail.com</a></div>
             </div>
             <div class="cal-info-cell">
               <div class="cal-info-lbl">Or message on</div>
-              <div class="cal-info-val">Instagram @ohgoody</div>
+              <div class="cal-info-val"><a href="https://www.instagram.com/ohgoody/" target="_blank" rel="noopener">Instagram @ohgoody</a></div>
             </div>
           </div>
         </div>
@@ -161,13 +152,12 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
 (function(){
   var p=new URLSearchParams(window.location.search);
   var labels=['Priority list position','Plan for skiing outside certification','Train year-round',
-    'Certifications that improve influence','Keep lesson records','Ski for self weekly (no demo/eval)',
     'Mentor relationship with certified instructor','Active off-season plan'];
-  var names=['q1','q2','q3','q4','q5','q6','q7','q8'];
+  var names=['q1','q2','q3','q7','q8'];
   var lines=[];
   for(var i=0;i<names.length;i++){
     var v=p.get(names[i]);
-    if(v) lines.push((i+1)+'. '+labels[i]+': '+v);
+    if(v) lines.push((lines.length+1)+'. '+labels[i]+': '+v);
   }
   if(lines.length){
     var msg=document.getElementById('message');
@@ -183,7 +173,9 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
   const statusEl=document.getElementById('formStatus');
   const btn=document.getElementById('submitBtn');
   form.addEventListener('submit',async function(e){
-    e.preventDefault();statusEl.textContent='';btn.disabled=true;
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    statusEl.textContent='';btn.disabled=true;
     try{
       const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
       if(res.ok){form.reset();statusEl.textContent='Thanks, message sent.';statusEl.className='status ok';}
@@ -214,8 +206,6 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
     for(var i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
     for(var d=1;d<=daysInMonth;d++){
       var date=new Date(viewYear,viewMonth,d);
-      var dow=date.getDay();
-      var isWeekend=dow===0||dow===6;
       var isPast=date<new Date(now.getFullYear(),now.getMonth(),now.getDate());
       var isToday=date.getFullYear()===now.getFullYear()&&date.getMonth()===now.getMonth()&&date.getDate()===now.getDate();
       var isSel=selectedDate&&date.getTime()===selectedDate.getTime();
@@ -224,13 +214,18 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
       else if(isSel) cls+=' selected';
       else if(isToday) cls+=' today';
       else cls+=' available';
-      var onclick=(!isPast)?'pickDate('+viewYear+','+(viewMonth)+','+d+')':'';
-      html+='<div class="'+cls+'" '+(onclick?'onclick="'+onclick+'"':'')+'>'+d+'</div>';
+      if(isPast){
+        html+='<div class="'+cls+'" aria-hidden="true">'+d+'</div>';
+      } else {
+        html+='<button type="button" class="'+cls+'" aria-label="'+MONTHS[viewMonth]+' '+d+', '+viewYear+'" aria-pressed="'+(isSel?'true':'false')+'" data-day="'+d+'" onclick="pickDate('+viewYear+','+viewMonth+','+d+')">'+d+'</button>';
+      }
     }
     grid.innerHTML=html;
+    document.getElementById('calPrevBtn').disabled=(viewYear<now.getFullYear()||(viewYear===now.getFullYear()&&viewMonth<=now.getMonth()));
   }
 
   window.calPrev=function(){
+    if(viewYear<now.getFullYear()||(viewYear===now.getFullYear()&&viewMonth<=now.getMonth())) return;
     viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}render();
   };
   window.calNext=function(){
@@ -248,6 +243,8 @@ h1{font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.08;margin:0 0 
       }
     }
     render();
+    var selBtn=document.querySelector('#cal-grid [data-day="'+d+'"]');
+    if(selBtn) selBtn.focus();
   };
 
   render();

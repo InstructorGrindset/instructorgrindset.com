@@ -1,96 +1,67 @@
 <div class="nav-root">
 
   <!-- Hamburger button (always visible, fixed) -->
-  <button class="hamburger" aria-label="Open navigation" aria-expanded="false"
-    onclick="document.querySelector('.nav-root').classList.add('is-open');this.setAttribute('aria-expanded','true')">
+  <button class="hamburger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-drawer">
     <span></span><span></span><span></span>
   </button>
 
   <!-- Backdrop — click to close -->
-  <div class="nav-backdrop"
-    onclick="document.querySelector('.nav-root').classList.remove('is-open');document.querySelector('.hamburger').setAttribute('aria-expanded','false')"></div>
+  <div class="nav-backdrop"></div>
 
   <!-- Drawer -->
-  <aside class="side">
+  <aside class="side" id="site-drawer">
 
     <div class="nav-header">
       <div class="brand">
         <a class="logo-wrap" href="/" aria-label="Home">
-          <img src="/images/ig-logo.png" alt="Instructor Grindset logo">
+          <img src="/images/ig-logo.png" alt="" width="48" height="48">
         </a>
-        <a class="name" href="/">INSTRUCTOR<br>GRINDSET</a>
+        <a class="name" href="/" tabindex="-1" aria-hidden="true">INSTRUCTOR<br>GRINDSET</a>
       </div>
       <!-- Close button -->
-      <button class="nav-close" aria-label="Close navigation"
-        onclick="document.querySelector('.nav-root').classList.remove('is-open');document.querySelector('.hamburger').setAttribute('aria-expanded','false')">✕</button>
+      <button class="nav-close" type="button" aria-label="Close navigation">✕</button>
     </div>
 
-    <nav class="nav nav-standalone" aria-label="Home">
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-      </ul>
-    </nav>
+    <nav aria-label="Main">
 
-    <nav class="nav nav-standalone" aria-label="Start Here">
-      <ul>
-        <li>
-          <a href="/start-here">Start Here</a>
-        </li>
-      </ul>
-    </nav>
+      <div class="nav nav-standalone">
+        <ul>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </div>
 
-    <nav class="nav" aria-label="Content">
-      <h4>Content</h4>
-      <ul>
-        <li>
-          <a href="/reading-list">The Reading List</a>
-        </li>
-        <li>
-          <a href="/youtube-channel">YouTube</a>
-        </li>
-        <li>
-          <a href="/blog">Blog</a>
-        </li>
-      </ul>
-    </nav>
+      <div class="nav">
+        <h4>Content</h4>
+        <ul>
+          <li><a href="/reading-list/">The Reading List</a></li>
+          <li><a href="/youtube-channel/">YouTube</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
 
-    <nav class="nav" aria-label="Tools">
-      <h4>Tools</h4>
-      <ul>
-        <li>
-          <a href="/career-plan">Plan Your Career</a>
-        </li>
-        <li>
-          <a href="/priority-predictor">Priority Predictor</a>
-        </li>
-        <li>
-          <a href="/offseason-plan">Offseason Plan Builder</a>
-        </li>
-        <li>
-          <a href="/lesson-log">Lesson Log</a>
-        </li>
-        <li>
-          <a href="/income-calculator">Season Income Calculator</a>
-        </li>
-      </ul>
-    </nav>
+      <div class="nav">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/career-plan/">Plan Your Career</a></li>
+          <li><a href="/priority-predictor/">Priority Predictor</a></li>
+          <li><a href="/offseason-plan/">Offseason Plan Builder</a></li>
+          <li><a href="/lesson-log/">Lesson Log</a></li>
+          <li><a href="/income-calculator/">Season Income Calculator</a></li>
+        </ul>
+      </div>
 
-    <nav class="nav nav-standalone" aria-label="Contact">
-      <ul>
-        <li>
-          <a href="/contact">Contact</a>
-        </li>
-      </ul>
-    </nav>
+      <div class="nav nav-standalone">
+        <ul>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
 
-    <nav class="nav nav-standalone" aria-label="About">
-      <ul>
-        <li>
-          <a href="/my-career">About Me</a>
-        </li>
-      </ul>
+      <div class="nav nav-standalone">
+        <ul>
+          <li><a href="/my-career/">About Me</a></li>
+        </ul>
+      </div>
+
     </nav>
 
   </aside>

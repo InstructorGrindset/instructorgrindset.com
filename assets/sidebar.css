@@ -1,9 +1,6 @@
 /* ===== Hamburger nav drawer ===== */
 
 :root {
-  --ink:   #e7e9ee;
-  --muted: #cbd5e1;
-  --line:  #2a3140;
   --sidebar: 0px;   /* collapses any per-page sidebar column */
 }
 
@@ -27,10 +24,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 2rem; height: 1.375rem;
-  padding: 0;
-  background: none;
+  width: 44px; height: 44px;
+  padding: 12px 9px;
+  box-sizing: border-box;
+  background: rgba(15, 18, 23, .75);
   border: none;
+  border-radius: .5rem;
   cursor: pointer;
 }
 .hamburger span {
@@ -57,6 +56,7 @@
   top: 0; left: 0;
   width: 300px;
   height: 100vh;
+  height: 100dvh;
   padding: 1.25rem;
   background: #0f1217;
   background-image: none;
@@ -64,12 +64,13 @@
   color: var(--ink);
   z-index: 1001;
   transform: translateX(-100%);
-  transition: transform .25s ease;
+  visibility: hidden; /* keeps closed-drawer links out of the tab order */
+  transition: transform .25s ease, visibility 0s linear .25s;
   overflow-y: auto;
 }
 
 /* ── Open state ── */
-.nav-root.is-open .side         { transform: translateX(0); }
+.nav-root.is-open .side         { transform: translateX(0); visibility: visible; transition: transform .25s ease; }
 .nav-root.is-open .nav-backdrop { opacity: 1; pointer-events: auto; }
 .nav-root.is-open .hamburger    { display: none; }
 
@@ -89,6 +90,7 @@
   color: var(--ink);
   font-size: 1.4rem;
   line-height: 1;
+  min-width: 44px; min-height: 44px;
   padding: .25rem .5rem;
 }
 .nav-close:hover { color: #fff; }
@@ -150,28 +152,24 @@
   font-size: 1rem;
   text-decoration: none;
 }
+.nav a[aria-current="page"] {
+  border-color: var(--line);
+  background: rgba(196, 137, 42, .1);
+}
 .nav a:hover {
   background: rgba(255, 255, 255, .05);
   border-color: var(--line);
 }
 .nav a:focus-visible {
-  outline: 2px solid #c4892a;
+  outline: 2px solid var(--cta);
   outline-offset: 2px;
 }
 .nav-close:focus-visible {
-  outline: 2px solid #c4892a;
+  outline: 2px solid var(--cta);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-.nav-desc {
-  display: block;
-  padding: 0 .5rem .15rem;
-  font-size: .78rem;
-  line-height: 1.35;
-  color: #8891a0;
-  pointer-events: none;
-}
 .nav-standalone {
   border-top: 1px solid var(--line);
   padding-top: .75rem;
