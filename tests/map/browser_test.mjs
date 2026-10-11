@@ -181,6 +181,8 @@ async function desktop(browser, base) {
   check(await page.locator('.badge-estimated').count() >= 1, 'estimated badge renders');
   check(await page.locator('.fact-meta', { hasText: 'Last verified Oct 1, 2026' }).count() > 3, 'last verified dates render');
   check(await page.locator('a.src-link', { hasText: 'Synthetic fixture: resort facts' }).count() > 0, 'source links resolve via sources.json');
+  check(await page.locator('.fact', { hasText: 'Summit elevation' }).locator('.badge-published').count() === 1, 'summit elevation renders with badge');
+  check(await page.locator('.src-note', { hasText: 'synthetic source note' }).count() >= 1, 'source note renders');
   check(await page.locator('.src-tag', { hasText: 'SNOTEL' }).count() === 1, 'density chart labelled SNOTEL');
   check(await page.locator('.climate canvas').count() === 5, 'five climate charts');
   check(w.requests.some((u) => u.includes('/climate/alpha-peak.json')), 'climate lazy loaded for resort');
@@ -400,12 +402,52 @@ async function realData(browser, base) {
   for (const vp of [{ width: 1280, height: 800, name: 'desktop' }, { width: 390, height: 844, name: 'phone' }]) {
     const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
     const w = watch(page, `real data ${vp.name}`);
+    const t0 = Date.now();
     await page.goto(`${base}/map/`);
     await ready(page);
+    const tReady = Date.now() - t0;
     await mapIdle(page);
-    check(await heading(page) === 'United States', `real data ${vp.name}: national view renders (${n} resorts)`);
+    const tIdle = Date.now() - t0;
+    check(await heading(page) === 'United States', `real data ${vp.name}: national view renders (${n} resorts); ready ${tReady} ms, map idle ${tIdle} ms`);
     check(await page.locator('#dev-badge').isHidden(), `real data ${vp.name}: no fixture badge`);
     await shot(page, `real-${vp.name}-national.png`);
+    if (vp.name === 'desktop' && n) {
+      // Drill down through the first state, cluster and resort in the real data.
+      await page.locator('.nav-list a').first().click();
+      await mapIdle(page);
+      check(await page.locator('#panel-heading').count() === 1, `real data: state view renders (${await heading(page)})`);
+      await page.locator('.nav-list a').first().click();
+      await mapIdle(page);
+      check(await page.locator('.resort-list a').count() > 0, `real data: cluster view lists resorts (${await heading(page)})`);
+      await shot(page, 'real-desktop-cluster.png');
+      await page.locator('.resort-list a').first().click();
+      await mapIdle(page);
+      check(await page.locator('.facts').count() >= 3, `real data: resort view renders (${await heading(page)})`);
+      await shot(page, 'real-desktop-resort.png');
+      const summary = await page.evaluate(() => {
+        const ix = window.__careerMap.index;
+        return { resorts: ix.resorts.size, clusters: ix.clusters.size, states: ix.states.size };
+      });
+      log(`  real data index: ${JSON.stringify(summary)}`);
+    }
+    if (vp.name === 'desktop' && n) {
+      // Deep links served by the stubs routes.py generated from the real build.
+      const manifestPath = path.join(REPO, 'map', '.routes-manifest.json');
+      const pages = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')).pages : [];
+      const pick = (depth) => pages.find((p) => p.split('/').filter(Boolean).length === depth && p.startsWith('co/'))
+        || pages.find((p) => p.split('/').filter(Boolean).length === depth);
+      for (const rel of [pick(1), pick(2), pick(3)].filter(Boolean)) {
+        const t0 = Date.now();
+        await page.goto(`${base}/map/${rel}`);
+        await ready(page);
+        const tReady = Date.now() - t0;
+        await mapIdle(page);
+        const tIdle = Date.now() - t0;
+        const p = new URL(page.url()).pathname;
+        check(p === `/map/${rel}`, `real deep link /map/${rel} resolves to its own view (${await heading(page)}); ready ${tReady} ms, map idle ${tIdle} ms`);
+      }
+      if (pages.length) await shot(page, 'real-desktop-deep-link.png');
+    }
     w.assertClean();
     await page.close();
   }

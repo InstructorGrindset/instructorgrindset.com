@@ -37,7 +37,9 @@ def test_end_to_end_writes_contract_files(tmp_path, fake_api):
     assert code == 0, out
     climate_dir = tmp_path / "build" / "climate"
     files = sorted(p.name for p in climate_dir.iterdir())
-    assert files == ["lonely-hill.json", "provenance.json", "sample-ridge.json", "sources.json", "test-peak.json"]
+    assert files == [
+        "banded-bowl.json", "lonely-hill.json", "provenance.json", "sample-ridge.json", "sources.json", "test-peak.json"
+    ]
 
     peak = ClimateFile.model_validate(read(climate_dir / "test-peak.json"))
     assert peak.period.start_year == 2022 and peak.period.end_year == 2024
@@ -73,7 +75,9 @@ def test_end_to_end_writes_contract_files(tmp_path, fake_api):
 
     sources = read(climate_dir / "sources.json")
     ids = {s["id"] for s in sources["sources"]}
-    assert ids == {"open-meteo-era5-archive", "nrcs-snotel-9005-co", "anderson-1976-snow17-new-snow-density"}
+    assert ids == {
+        "open-meteo-era5-archive", "nrcs-snotel-9005-co", "nrcs-snotel-9001-co", "anderson-1976-snow17-new-snow-density"
+    }
     for s in sources["sources"]:
         assert s["url"].startswith("https://") and s["title"] and s["accessed_date"] == "2026-10-11"
     om = next(s for s in sources["sources"] if s["id"] == "open-meteo-era5-archive")
@@ -85,6 +89,13 @@ def test_end_to_end_writes_contract_files(tmp_path, fake_api):
     assert prov["test-peak"]["open_meteo"]["elevation_m"] == 2500.0
     assert "DEM" in prov["test-peak"]["open_meteo"]["elevation_source"]
     assert prov["lonely-hill"]["snotel"]["result"].startswith("no SNOTEL station")
+    # Sourced base and summit: elevation band excludes the low station, so the 10300 ft one is used.
+    bowl = prov["banded-bowl"]["snotel"]
+    assert bowl["selection_mode"] == "distance_and_elevation"
+    assert (bowl["resort_base_ft"], bowl["resort_summit_ft"]) == (8100.0, 11500.0)
+    assert bowl["station"] == "9001:CO:SNTL"
+    bowl_file = ClimateFile.model_validate(read(climate_dir / "banded-bowl.json"))
+    assert "nrcs-snotel-9001-co" in bowl_file.source_ids
     assert prov["sample-ridge"]["snotel"]["result"] == "not attempted for this tier"
 
     # Raw responses are cached for the resume path.
@@ -140,7 +151,7 @@ def test_filters_and_plan(tmp_path, fake_api):
     code, _ = run(tmp_path, "--tier", "A")
     assert code == 0
     names = sorted(p.name for p in (tmp_path / "build" / "climate").glob("*-*.json"))
-    assert names == ["lonely-hill.json", "test-peak.json"]
+    assert names == ["banded-bowl.json", "lonely-hill.json", "test-peak.json"]
     code, _ = run(tmp_path, "--only", "nope")
     assert code == 2
 
@@ -173,3 +184,14 @@ def test_rate_limited_at_preflight_writes_nothing(tmp_path, monkeypatch):
     assert code == 3
     assert "rate limiting" in out and "Nothing was written" in out
     assert not (tmp_path / "build").exists() and not (tmp_path / "cache").exists()
+
+
+def test_resort_elevation_ft_reads_sourced_base_and_summit():
+    from pipeline.climate.run import resort_elevation_ft
+
+    src = lambda v: {"value": v, "source_id": "s", "as_of": "2026-10-11", "confidence": "published"}
+    assert resort_elevation_ft({"elevation": {"base_ft": src(8120), "summit_ft": src(11570)}}) == (8120.0, 11570.0)
+    assert resort_elevation_ft({"elevation": {"base_ft": src(8120), "summit_ft": None}}) == (8120.0, None)
+    assert resort_elevation_ft({"elevation": {"base_ft": None, "summit_ft": src(11570)}}) == (None, 11570.0)
+    assert resort_elevation_ft({"elevation": None}) == (None, None)
+    assert resort_elevation_ft({}) == (None, None)

@@ -85,7 +85,7 @@ export function createMap(container, index, { onPick, getPadding }) {
     style: buildStyle(index),
     bounds: config.nationalBounds,
     fitBoundsOptions: { padding: 20 },
-    attributionControl: { compact: true, customAttribution: config.basemap.attribution },
+    attributionControl: false,
     dragRotate: false,
     pitchWithRotate: false,
     touchPitch: false,
@@ -97,6 +97,8 @@ export function createMap(container, index, { onPick, getPadding }) {
   map.touchZoomRotate.disableRotation();
   map.keyboard.disableRotation();
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-left');
+  // Top right keeps attribution clear of the side panel (offset in CSS) and the phone sheet.
+  map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: config.basemap.attribution }), 'top-right');
   map.on('error', (e) => console.warn('[map]', e && e.error ? e.error.message : e));
 
   const tip = h('div', { class: 'map-tip', role: 'presentation', hidden: true });

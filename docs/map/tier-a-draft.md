@@ -6,6 +6,77 @@ A resort qualifies when it meets at least one criterion: diehard following, luxu
 
 **How to approve:** set `status: approved` at the top of a research batch file in `data/raw/tier_a/`. Every resort in that batch then builds with `tier_a_status: approved`.
 
-## Status
+## Summary
 
-No Tier A records have been researched yet. Research batches go in `data/raw/tier_a/` (format in `data/raw/tier_a/README.md`) and verified Vail and Alterra portfolios go in `data/raw/ownership/`. The list appears here after the next build.
+* 10 Tier A resorts in 1 research batches
+* 0 approved, 10 draft
+
+## Batches
+
+| Batch | Researched | Status | Resorts |
+|---|---|---|---|
+| vail | 2026-10-11 | draft | 10 |
+
+## Resorts
+
+| Resort | State | Owner | Cluster | Status | Criteria | Missing fields |
+|---|---|---|---|---|---|---|
+| Kirkwood (`kirkwood`) | CA | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | Lake Tahoe (`lake-tahoe`) | draft | **Diehard following**: Kirkwood is known for heavy snowfall and advanced off piste terrain, with only 12 percent beginner terrain, and hosted legs of the North American Freeskiing Championships in 2009 and 2010. ([Kirkwood Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Kirkwood_Mountain_Resort)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Northstar California (`northstar`) | CA | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | Lake Tahoe (`lake-tahoe`) | draft | **Luxury**: The 10-K calls Northstar the premier luxury mountain resort near Lake Tahoe, with premium lodging and a village of high end shops and restaurants. ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Beaver Creek (`beaver-creek`) | CO | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | I 70 Corridor (`i70-corridor`) | draft | **Heritage**: Beaver Creek hosted the World Ski Championships in 1989, 1999 and 2015 and is a regular early season host of the Birds of Prey World Cup races. ([Beaver Creek Resort (Wikipedia)](https://en.wikipedia.org/wiki/Beaver_Creek_Resort))<br>**Luxury**: The 10-K describes a European style resort with a first class children's ski school, and every private lesson there becomes the concierge level Epic Ascent product in the 2026/2027 season. ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Breckenridge (`breckenridge`) | CO | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | I 70 Corridor (`i70-corridor`) | draft | **Heritage**: Breckenridge installed the world's first high speed detachable quad chairlift in 1981 and hosted the first Winter Dew Tour in 2008. ([Breckenridge Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Breckenridge_Ski_Resort)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Crested Butte (`crested-butte`) | CO | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | Southwest Colorado (`southwest-colorado`) | draft | **Luxury**: The town changed from a mining town to a tourist retreat catering to the affluent as the ski resort took over the local economy. ([Crested Butte, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Crested_Butte,_Colorado)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Vail (`vail`) | CO | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | I 70 Corridor (`i70-corridor`) | draft | **Heritage**: Vail hosted the 1989 Alpine World Ski Championships and cohosted the 1999 edition, and several of its founders served in the 10th Mountain Division that trained nearby. ([Vail Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Vail_Ski_Resort))<br>**Luxury**: Vail Resorts is turning every private lesson at Vail into its Epic Ascent product, with concierge support and white glove gear rental, starting in the 2026/2027 season. ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Wildcat Mountain (`wildcat`) | NH | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | White Mountains (`white-mountains`) | draft | **Heritage**: Wildcat opened the first gondola lift in North America in 1958 and is home to one of the oldest ski racing trails in the United States. ([Wildcat Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Wildcat_Mountain_Ski_Area)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Park City (`park-city`) | UT | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | Wasatch (`wasatch`) | draft | **Athlete development**: Park City has several U.S. Ski Team training courses, and its local clubs merged into the Park City Ski and Snowboard Club in 2017. ([Park City Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Park_City_Mountain_Resort))<br>**Heritage**: Park City hosted the giant slalom and the snowboarding halfpipe and parallel giant slalom events of the 2002 Winter Olympics. ([Park City Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Park_City_Mountain_Resort)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Mount Snow (`mount-snow`) | VT | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | Southern Vermont (`southern-vermont`) | draft | **Athlete development**: Mount Snow Academy graduates include Kelly Clark, 2002 Olympic halfpipe gold medalist, and Devin Logan, 2014 Olympic slopestyle silver medalist. ([Mount Snow (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Snow))<br>**Heritage**: Mount Snow cohosted the first Extreme Games in 1995, hosted the X Games in 2000 and 2001, and opened the first snowboard park in the East in 1992. ([Mount Snow (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Snow)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+| Stowe (`stowe`) | VT | Vail Resorts ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | Northern Vermont (`northern-vermont`) | draft | **Heritage**: The first trails on Mount Mansfield were cut in 1933, and the Mount Mansfield Ski Patrol, founded in 1934, is the oldest in the nation and the model for the National Ski Patrol. ([Stowe Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Stowe_Mountain_Resort))<br>**Luxury**: The 10-K calls Stowe the premier high end regional ski area in the Northeast, with an exceptional base area experience. ([Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)) | ski_school_staff_est, open_typical, close_typical, length_days, training_start |
+
+## Ownership portfolios
+
+### Vail Resorts
+
+Verified 2026-10-11. Sources: [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm), [Vail Resorts, Inc. home page, Our Resorts list](https://www.vailresorts.com/).
+
+| Resort | State | Tier A candidate | Exclusion reason |
+|---|---|---|---|
+| Heavenly Mountain Resort | CA | no | Destination resort (straddles CA and NV), but no fetched source supports a Tier A criterion. The 10-K highlights lake views, nightlife and casinos. Flagged for Alexandre to review. |
+| Kirkwood Mountain Resort | CA | yes |  |
+| Northstar California Resort | CA | yes |  |
+| Beaver Creek Resort | CO | yes |  |
+| Breckenridge Ski Resort | CO | yes |  |
+| Crested Butte Mountain Resort | CO | yes |  |
+| Keystone Resort | CO | no | Destination resort, but no fetched source supports a Tier A criterion. The 10-K describes it as a family and night skiing destination. Flagged for Alexandre to review. |
+| Vail Mountain | CO | yes |  |
+| Paoli Peaks | IN | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Mount Brighton | MI | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Afton Alps | MN | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Hidden Valley Resort | MO | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Snow Creek | MO | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Attitash Mountain | NH | no | Regional New Hampshire ski area per the 10-K. No fetched source supports a Tier A criterion. |
+| Crotched Mountain | NH | no | Regional New Hampshire day area that meets no Tier A criterion. |
+| Mount Sunapee Resort | NH | no | Regional New Hampshire day area that meets no Tier A criterion. |
+| Wildcat Mountain | NH | yes |  |
+| Hunter Mountain | NY | yes |  |
+| Alpine Valley Resort | OH | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Boston Mills | OH | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Brandywine | OH | no | Midwest regional feeder hill that meets no Tier A criterion. |
+| Mad River Mountain | OH | no | Midwest regional feeder hill that meets no Tier A criterion. Leased per 10-K Item 2. |
+| Big Boulder Mountain | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Hidden Valley Resort | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Jack Frost Ski Resort | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Laurel Mountain | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Liberty Mountain Resort | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Roundtop Mountain Resort | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Seven Springs Resort | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Whitetail Resort | PA | no | Mid-Atlantic regional feeder hill that meets no Tier A criterion. |
+| Park City Mountain | UT | yes |  |
+| Mount Snow | VT | yes |  |
+| Okemo Mountain Resort | VT | no | Regional ski area per the 10-K. No fetched source supports a Tier A criterion. |
+| Stowe Mountain Resort | VT | yes |  |
+| Stevens Pass | WA | no | Regional ski area per the 10-K; Wikipedia calls it a day resort drawing from Seattle. No fetched source supports a Tier A criterion. |
+| Wilmot Mountain | WI | no | Midwest regional feeder hill that meets no Tier A criterion. |
+
+## Open items
+
+* Vail Resorts: Hunter Mountain (NY) is marked tier_a_candidate but has no Tier A record

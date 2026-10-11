@@ -43,6 +43,10 @@ export const Resort = z.object({
     lifts: sourced(z.number()),
     ski_school_staff_est: sourced(z.number()),
   }),
+  elevation: z.object({
+    base_ft: sourced(z.number()),
+    summit_ft: sourced(z.number()),
+  }).nullish().transform((v) => v ?? { base_ft: null, summit_ft: null }),
   season: z.object({
     open_typical: sourced(MonthDay),
     close_typical: sourced(MonthDay),
@@ -133,6 +137,7 @@ export const SourcesFile = z.object({
     url: z.string(),
     title: z.string(),
     accessed_date: z.string().nullish(),
+    note: z.string().nullish(),
   })),
 });
 

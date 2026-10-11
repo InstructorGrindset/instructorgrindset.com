@@ -33,6 +33,10 @@ export function createSheet(panel, handle, stage, { onChange } = {}) {
     handle.setAttribute('aria-expanded', String(state !== 'peek'));
     if (isPhone()) place(heights()[state], animate);
     else panel.style.removeProperty('--sheet-offset');
+    if (state === 'peek') {
+      const scroller = panel.querySelector('.panel-scroll');
+      if (scroller) scroller.scrollTop = 0; // peek always shows the heading
+    }
     if (!silent && onChange) onChange(state);
   }
 

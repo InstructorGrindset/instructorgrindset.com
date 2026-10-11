@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:33:10Z",
+  "generated_at": "2026-10-11T19:38:24Z",
   "states": [
     {
       "code": "AK",
@@ -30,6 +30,7 @@
       "code": "CA",
       "name": "California",
       "cluster_ids": [
+        "lake-tahoe",
         "other-ca"
       ],
       "resort_count": 30
@@ -38,7 +39,9 @@
       "code": "CO",
       "name": "Colorado",
       "cluster_ids": [
-        "other-co"
+        "i70-corridor",
+        "other-co",
+        "southwest-colorado"
       ],
       "resort_count": 40
     },
@@ -158,7 +161,8 @@
       "code": "NH",
       "name": "New Hampshire",
       "cluster_ids": [
-        "other-nh"
+        "other-nh",
+        "white-mountains"
       ],
       "resort_count": 29
     },
@@ -182,6 +186,7 @@
       "code": "NV",
       "name": "Nevada",
       "cluster_ids": [
+        "lake-tahoe",
         "other-nv"
       ],
       "resort_count": 5
@@ -246,7 +251,8 @@
       "code": "UT",
       "name": "Utah",
       "cluster_ids": [
-        "other-ut"
+        "other-ut",
+        "wasatch"
       ],
       "resort_count": 19
     },
@@ -262,7 +268,9 @@
       "code": "VT",
       "name": "Vermont",
       "cluster_ids": [
-        "other-vt"
+        "northern-vermont",
+        "other-vt",
+        "southern-vermont"
       ],
       "resort_count": 33
     },

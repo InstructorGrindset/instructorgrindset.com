@@ -45,8 +45,9 @@ export function createPanel(root, index, { onCompare }) {
     const s = index.sources.get(id);
     if (!s) return h('span', { class: 'muted' }, 'Source record pending');
     const url = safeUrl(s.url);
-    return url ? h('a', { href: url, target: '_blank', rel: 'noopener noreferrer', class: 'src-link' }, s.title || id)
+    const link = url ? h('a', { href: url, target: '_blank', rel: 'noopener noreferrer', class: 'src-link' }, s.title || id)
       : h('span', null, s.title || id);
+    return s.note ? h('span', null, link, h('span', { class: 'src-note' }, ` (${s.note})`)) : link;
   }
 
   /** Value + confidence badge + last verified + source, or "Not yet verified". */
@@ -236,6 +237,8 @@ export function createPanel(root, index, { onCompare }) {
     out.push(section('Operation size', h('dl', { class: 'facts' },
       fact('Skiable acres', r.size.acres, fmt.int),
       fact('Vertical drop', r.size.vertical_ft, fmt.ft),
+      fact('Base elevation', r.elevation.base_ft, fmt.ft),
+      fact('Summit elevation', r.elevation.summit_ft, fmt.ft),
       fact('Lifts', r.size.lifts, fmt.int),
       fact('Ski school staff', r.size.ski_school_staff_est, fmt.int))));
     out.push(section('Season', h('dl', { class: 'facts' },

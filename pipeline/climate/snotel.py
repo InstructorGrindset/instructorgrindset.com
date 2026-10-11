@@ -12,10 +12,12 @@ Base: https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1
   depth) are in inches.
 
 Station choice: SNOTEL stations within ``radius_km`` of the resort base,
-nearest first. When the resort elevation is known, a station must also sit
-between ``elevation_band_below_ft`` below and ``elevation_band_above_ft``
-above it. The resort contract has no elevation today, so selection is usually
-by distance only, and the provenance file records which mode was used.
+nearest first. When the resort base elevation (``elevation.base_ft``) is
+known, a station must also sit no more than ``elevation_band_below_ft`` below
+the base and no higher than the summit (``elevation.summit_ft``), or no more
+than ``elevation_band_above_ft`` above the base when the summit is unknown.
+With no base elevation, selection is by distance only, and the provenance file
+records which mode was used.
 
 Storms: a storm day has a daily snow depth gain of at least
 ``storm_min_daily_depth_gain_in``. Consecutive storm days form a storm. Its
@@ -155,9 +157,20 @@ def select_candidates(
     stations: list[Station],
     settings: SnotelSettings,
     period: Optional[tuple[date, date]] = None,
+    summit_ft: Optional[float] = None,
 ) -> list[Candidate]:
-    """Stations to try for a resort, nearest first."""
+    """Stations to try for a resort, nearest first.
+
+    ``elevation_ft`` is the resort base. The band runs from
+    ``elevation_band_below_ft`` under the base to the summit when ``summit_ft``
+    is known (any station on the mountain counts, none above it), else to
+    ``elevation_band_above_ft`` over the base. ``elevation_diff_ft`` is
+    station minus base.
+    """
     mode = "distance_only" if elevation_ft is None else "distance_and_elevation"
+    upper = None
+    if elevation_ft is not None:
+        upper = summit_ft if summit_ft is not None and summit_ft > elevation_ft else elevation_ft + settings.elevation_band_above_ft
     out = []
     for st in stations:
         if period is not None:
@@ -174,7 +187,7 @@ def select_candidates(
             if st.elevation_ft is None:
                 continue
             diff = st.elevation_ft - elevation_ft
-            if diff < -settings.elevation_band_below_ft or diff > settings.elevation_band_above_ft:
+            if diff < -settings.elevation_band_below_ft or st.elevation_ft > upper:
                 continue
         out.append(Candidate(st, d, diff, mode))
     out.sort(key=lambda c: (round(c.distance_km, 3), abs(c.elevation_diff_ft or 0.0)))

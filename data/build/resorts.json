@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:34:05Z",
+  "generated_at": "2026-10-11T19:38:24Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -86,7 +86,7 @@
       "lat": 43.60441,
       "lon": -71.22644,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -678,7 +678,7 @@
       "lat": 40.58146,
       "lon": -111.62299,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -1196,7 +1196,7 @@
       "lat": 39.6287,
       "lon": -105.87581,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -1492,7 +1492,7 @@
       "lat": 43.46247,
       "lon": -72.46388,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -1566,7 +1566,7 @@
       "lat": 39.15136,
       "lon": -106.86619,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -1640,7 +1640,7 @@
       "lat": 39.16622,
       "lon": -106.82014,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -1714,7 +1714,7 @@
       "lat": 39.1862,
       "lon": -106.94829,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -1788,7 +1788,7 @@
       "lat": 44.07485,
       "lon": -71.23735,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -2528,7 +2528,7 @@
       "lat": 38.48488,
       "lon": -120.04887,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -2743,30 +2743,53 @@
     {
       "id": "beaver-creek",
       "name": "Beaver Creek",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.59784,
-      "lon": -106.53042,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Beaver Creek hosted the World Ski Championships in 1989, 1999 and 2015 and is a regular early season host of the Birds of Prey World Cup races.",
+          "source_id": "wikipedia-beaver-creek-resort"
+        },
+        {
+          "criterion": "luxury",
+          "rationale": "The 10-K describes a European style resort with a first class children's ski school, and every private lesson there becomes the concierge level Epic Ascent product in the 2026/2027 season.",
+          "source_id": "vail-10k-fy2026"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.6314,
+      "lon": -106.5217,
+      "location_source_id": "wikipedia-beaver-creek-resort",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 4046,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2082,
+          "source_id": "wikipedia-beaver-creek-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3340,
+          "source_id": "wikipedia-beaver-creek-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 24,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-beaver-creek-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "includes 6 magic carpets"
         },
         "ski_school_staff_est": null
       },
@@ -2811,7 +2834,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-beaver-creek-resort"
       ]
     },
     {
@@ -3046,7 +3071,7 @@
       "lat": 43.12836,
       "lon": -72.45457,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -4008,7 +4033,7 @@
       "lat": 44.1726,
       "lon": -71.16527,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -4082,7 +4107,7 @@
       "lat": 39.53567,
       "lon": -105.38931,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -4890,7 +4915,7 @@
       "lat": 44.4184,
       "lon": -72.85072,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -4964,7 +4989,7 @@
       "lat": 39.33145,
       "lon": -120.34812,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -5630,7 +5655,7 @@
       "lat": 42.84642,
       "lon": -72.58579,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -5697,30 +5722,48 @@
     {
       "id": "breckenridge",
       "name": "Breckenridge",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.47494,
-      "lon": -106.07991,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Breckenridge installed the world's first high speed detachable quad chairlift in 1981 and hosted the first Winter Dew Tour in 2008.",
+          "source_id": "wikipedia-breckenridge-ski-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.48,
+      "lon": -106.067,
+      "location_source_id": "wikipedia-breckenridge-ski-resort",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3289,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2908,
+          "source_id": "wikipedia-breckenridge-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3398,
+          "source_id": "wikipedia-breckenridge-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 35,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-breckenridge-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "20 chairlifts and gondola plus 15 surface lifts"
         },
         "ski_school_staff_est": null
       },
@@ -5765,7 +5808,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-breckenridge-ski-resort"
       ]
     },
     {
@@ -5778,7 +5823,7 @@
       "lat": 44.25067,
       "lon": -71.46665,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -6000,7 +6045,7 @@
       "lat": 40.59272,
       "lon": -111.57788,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -6148,7 +6193,7 @@
       "lat": 43.22072,
       "lon": -72.93753,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -6740,7 +6785,7 @@
       "lat": 44.58023,
       "lon": -71.89926,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -6814,7 +6859,7 @@
       "lat": 39.19065,
       "lon": -106.87023,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -7258,7 +7303,7 @@
       "lat": 44.47648,
       "lon": -72.9448,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -7406,7 +7451,7 @@
       "lat": 43.86631,
       "lon": -71.60984,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -7554,7 +7599,7 @@
       "lat": 44.16953,
       "lon": -71.70188,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -8880,7 +8925,7 @@
       "lat": 44.39279,
       "lon": -72.98173,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -9102,7 +9147,7 @@
       "lat": 39.93792,
       "lon": -105.818,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -9250,7 +9295,7 @@
       "lat": 39.47859,
       "lon": -106.16511,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -9472,7 +9517,7 @@
       "lat": 44.25448,
       "lon": -72.75198,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -9694,7 +9739,7 @@
       "lat": 44.05877,
       "lon": -71.09921,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -9768,7 +9813,7 @@
       "lat": 38.58495,
       "lon": -106.89598,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -9907,32 +9952,50 @@
       ]
     },
     {
-      "id": "crested-butte-mountain-resort",
-      "name": "Crested Butte Mountain Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 38.89652,
-      "lon": -106.94293,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "id": "crested-butte",
+      "name": "Crested Butte",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "luxury",
+          "rationale": "The town changed from a mining town to a tourist retreat catering to the affluent as the ski resort took over the local economy.",
+          "source_id": "wikipedia-crested-butte-colorado"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 38.8997,
+      "lon": -106.965,
+      "location_source_id": "wikipedia-crested-butte-mountain-resort",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2750,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 1547,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "10-K gives over 1,500 skiable acres"
+        },
+        "vertical_ft": {
+          "value": 3055,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "10-K gives over 3,000 feet"
         },
         "lifts": {
           "value": 15,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-crested-butte-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "includes 3 magic carpets"
         },
         "ski_school_staff_est": null
       },
@@ -9977,7 +10040,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-crested-butte-colorado",
+        "wikipedia-crested-butte-mountain-resort"
       ]
     },
     {
@@ -10508,7 +10574,7 @@
       "lat": 40.61147,
       "lon": -111.47461,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -10730,7 +10796,7 @@
       "lat": 39.25359,
       "lon": -119.91605,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nv",
+      "cluster_id": "lake-tahoe",
       "state": "NV",
       "size": {
         "acres": null,
@@ -10952,7 +11018,7 @@
       "lat": 38.18992,
       "lon": -119.93933,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -11026,7 +11092,7 @@
       "lat": 39.32132,
       "lon": -120.33698,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -11248,7 +11314,7 @@
       "lat": 39.23777,
       "lon": -106.30378,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -11692,7 +11758,7 @@
       "lat": 39.68549,
       "lon": -105.52071,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -11840,7 +11906,7 @@
       "lat": 39.9406,
       "lon": -105.59586,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -12654,7 +12720,7 @@
       "lat": 40.03057,
       "lon": -105.90286,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -12950,7 +13016,7 @@
       "lat": 39.15436,
       "lon": -120.15378,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -13462,7 +13528,7 @@
       "lat": 44.81586,
       "lon": -73.06709,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -13758,7 +13824,7 @@
       "lat": 38.93386,
       "lon": -119.90748,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -14868,7 +14934,7 @@
       "lat": 39.07794,
       "lon": -120.17299,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -15682,7 +15748,7 @@
       "lat": 44.9364,
       "lon": -72.51369,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -15904,7 +15970,7 @@
       "lat": 44.05381,
       "lon": -71.66288,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -16348,7 +16414,7 @@
       "lat": 39.56778,
       "lon": -105.9351,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -16422,7 +16488,7 @@
       "lat": 43.61032,
       "lon": -72.79578,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -16496,7 +16562,7 @@
       "lat": 43.8669,
       "lon": -71.08709,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -16561,25 +16627,43 @@
       ]
     },
     {
-      "id": "kirkwood-mountain-resort",
-      "name": "Kirkwood Mountain Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 38.67586,
-      "lon": -120.06496,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "id": "kirkwood",
+      "name": "Kirkwood",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Kirkwood is known for heavy snowfall and advanced off piste terrain, with only 12 percent beginner terrain, and hosted legs of the North American Freeskiing Championships in 2009 and 2010.",
+          "source_id": "wikipedia-kirkwood-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 38.684,
+      "lon": -120.068,
+      "location_source_id": "wikipedia-kirkwood-mountain-resort",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1657,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2300,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "10-K gives over 2,300 skiable acres"
+        },
+        "vertical_ft": {
+          "value": 2000,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "10-K also gives 2,000 feet"
         },
         "lifts": {
           "value": 13,
@@ -16631,7 +16715,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-kirkwood-mountain-resort"
       ]
     },
     {
@@ -17680,7 +17766,7 @@
       "lat": 44.04456,
       "lon": -71.635,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -17976,7 +18062,7 @@
       "lat": 39.67847,
       "lon": -105.91046,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -18050,7 +18136,7 @@
       "lat": 39.68231,
       "lon": -105.87937,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -18198,7 +18284,7 @@
       "lat": 44.53207,
       "lon": -71.98355,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -18272,7 +18358,7 @@
       "lat": 44.19869,
       "lon": -72.92576,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -18494,7 +18580,7 @@
       "lat": 43.19623,
       "lon": -72.76535,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -19234,7 +19320,7 @@
       "lat": 43.93265,
       "lon": -72.95558,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -19530,7 +19616,7 @@
       "lat": 38.51373,
       "lon": -106.34162,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -20856,7 +20942,7 @@
       "lat": 44.45592,
       "lon": -71.57392,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -20930,7 +21016,7 @@
       "lat": 39.31844,
       "lon": -119.88258,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nv",
+      "cluster_id": "lake-tahoe",
       "state": "NV",
       "size": {
         "acres": null,
@@ -21071,17 +21157,40 @@
     {
       "id": "mount-snow",
       "name": "Mount Snow",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 42.9614,
-      "lon": -72.90767,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Mount Snow Academy graduates include Kelly Clark, 2002 Olympic halfpipe gold medalist, and Devin Logan, 2014 Olympic slopestyle silver medalist.",
+          "source_id": "wikipedia-mount-snow"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Mount Snow cohosted the first Extreme Games in 1995, hosted the X Games in 2000 and 2001, and opened the first snowboard park in the East in 1992.",
+          "source_id": "wikipedia-mount-snow"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 42.959,
+      "lon": -72.922,
+      "location_source_id": "wikipedia-mount-snow",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 601,
+          "source_id": "wikipedia-mount-snow",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
         "vertical_ft": {
           "value": 1684,
           "source_id": "openskimap-ski-areas",
@@ -21090,11 +21199,11 @@
           "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
         },
         "lifts": {
-          "value": 20,
-          "source_id": "openskimap-ski-areas",
+          "value": 19,
+          "source_id": "wikipedia-mount-snow",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
@@ -21139,7 +21248,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-mount-snow"
       ]
     },
     {
@@ -21516,7 +21627,7 @@
       "lat": 41.165,
       "lon": -111.72842,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -21960,7 +22071,7 @@
       "lat": 44.29715,
       "lon": -71.77577,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -23070,7 +23181,7 @@
       "lat": 41.3006,
       "lon": -111.86722,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -23218,7 +23329,7 @@
       "lat": 44.07113,
       "lon": -72.25277,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -23283,25 +23394,43 @@
       ]
     },
     {
-      "id": "northstar-at-tahoe-resort",
-      "name": "Northstar at Tahoe Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.25648,
-      "lon": -120.13921,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "id": "northstar",
+      "name": "Northstar California",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "luxury",
+          "rationale": "The 10-K calls Northstar the premier luxury mountain resort near Lake Tahoe, with premium lodging and a village of high end shops and restaurants.",
+          "source_id": "vail-10k-fy2026"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "operated under lease per 10-K Item 2; Wikipedia names EPR Properties as property owner"
+      },
+      "lat": 39.264,
+      "lon": -120.125,
+      "location_source_id": "wikipedia-northstar-california",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2311,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 3170,
+          "source_id": "wikipedia-northstar-california",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "10-K gives over 3,000 skiable acres"
+        },
+        "vertical_ft": {
+          "value": 2280,
+          "source_id": "wikipedia-northstar-california",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 20,
@@ -23353,7 +23482,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-northstar-california"
       ]
     },
     {
@@ -23810,7 +23941,7 @@
       "lat": 43.40859,
       "lon": -72.73278,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -24106,7 +24237,7 @@
       "lat": 39.15422,
       "lon": -120.23848,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -24180,7 +24311,7 @@
       "lat": 39.19191,
       "lon": -120.25513,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -24319,32 +24450,55 @@
       ]
     },
     {
-      "id": "park-city-mountain-resort",
-      "name": "Park City Mountain Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 40.65339,
-      "lon": -111.55393,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "id": "park-city",
+      "name": "Park City",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Park City has several U.S. Ski Team training courses, and its local clubs merged into the Park City Ski and Snowboard Club in 2017.",
+          "source_id": "wikipedia-park-city-mountain-resort"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Park City hosted the giant slalom and the snowboarding halfpipe and parallel giant slalom events of the 2002 Winter Olympics.",
+          "source_id": "wikipedia-park-city-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "mountain terrain leased per 10-K Item 2"
+      },
+      "lat": 40.6508,
+      "lon": -111.5075,
+      "location_source_id": "wikipedia-park-city-mountain-resort",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3265,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 7300,
+          "source_id": "vail-10k-fy2026",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Wikipedia infobox gives 6700; company figure preferred"
+        },
+        "vertical_ft": {
+          "value": 3200,
+          "source_id": "wikipedia-park-city-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 43,
-          "source_id": "openskimap-ski-areas",
+          "value": 41,
+          "source_id": "wikipedia-park-city-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
@@ -24389,7 +24543,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-park-city-mountain-resort"
       ]
     },
     {
@@ -24846,7 +25002,7 @@
       "lat": 43.6517,
       "lon": -72.84051,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -25438,7 +25594,7 @@
       "lat": 43.53081,
       "lon": -72.75055,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -26616,7 +26772,7 @@
       "lat": 43.74875,
       "lon": -71.41771,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -28312,7 +28468,7 @@
       "lat": 38.7963,
       "lon": -120.0746,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -29274,7 +29430,7 @@
       "lat": 39.35534,
       "lon": -106.2865,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -29940,7 +30096,7 @@
       "lat": 39.33687,
       "lon": -119.87273,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nv",
+      "cluster_id": "lake-tahoe",
       "state": "NV",
       "size": {
         "acres": null,
@@ -30236,7 +30392,7 @@
       "lat": 44.57114,
       "lon": -72.76987,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -30976,7 +31132,7 @@
       "lat": 41.19932,
       "lon": -111.86262,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -31050,7 +31206,7 @@
       "lat": 40.56633,
       "lon": -111.65269,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -31420,7 +31576,7 @@
       "lat": 39.31916,
       "lon": -120.38422,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -31568,7 +31724,7 @@
       "lat": 40.61262,
       "lon": -111.60414,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -32293,32 +32449,55 @@
       ]
     },
     {
-      "id": "stowe-mountain-resort",
-      "name": "Stowe Mountain Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 44.52963,
-      "lon": -72.79086,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "id": "stowe",
+      "name": "Stowe",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "The first trails on Mount Mansfield were cut in 1933, and the Mount Mansfield Ski Patrol, founded in 1934, is the oldest in the nation and the model for the National Ski Patrol.",
+          "source_id": "wikipedia-stowe-mountain-resort"
+        },
+        {
+          "criterion": "luxury",
+          "rationale": "The 10-K calls Stowe the premier high end regional ski area in the Northeast, with an exceptional base area experience.",
+          "source_id": "vail-10k-fy2026"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Mount Mansfield terrain leased per 10-K Item 2"
+      },
+      "lat": 44.5319,
+      "lon": -72.7875,
+      "location_source_id": "wikipedia-stowe-mountain-resort",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2403,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 485,
+          "source_id": "wikipedia-stowe-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2360,
+          "source_id": "wikipedia-stowe-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 12,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-stowe-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
@@ -32363,7 +32542,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-stowe-mountain-resort"
       ]
     },
     {
@@ -32376,7 +32557,7 @@
       "lat": 43.1005,
       "lon": -72.90385,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -32450,7 +32631,7 @@
       "lat": 39.29929,
       "lon": -120.33245,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -32598,7 +32779,7 @@
       "lat": 44.1497,
       "lon": -72.91136,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -32888,7 +33069,7 @@
       "lat": 38.18711,
       "lon": -119.94763,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -33252,7 +33433,7 @@
       "lat": 40.37927,
       "lon": -111.58658,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -33474,7 +33655,7 @@
       "lat": 39.39232,
       "lon": -107.33889,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -33770,7 +33951,7 @@
       "lat": 39.35111,
       "lon": -120.26354,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
         "acres": null,
@@ -34066,7 +34247,7 @@
       "lat": 43.74458,
       "lon": -71.77053,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -34288,7 +34469,7 @@
       "lat": 42.92378,
       "lon": -72.90139,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -34658,7 +34839,7 @@
       "lat": 43.93663,
       "lon": -72.61119,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -35022,7 +35203,7 @@
       "lat": 43.19191,
       "lon": -72.73685,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -36046,7 +36227,7 @@
       "lat": 40.70803,
       "lon": -111.56533,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -36113,23 +36294,46 @@
     {
       "id": "vail",
       "name": "Vail",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.60174,
-      "lon": -106.349,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Vail hosted the 1989 Alpine World Ski Championships and cohosted the 1999 edition, and several of its founders served in the 10th Mountain Division that trained nearby.",
+          "source_id": "wikipedia-vail-ski-resort"
+        },
+        {
+          "criterion": "luxury",
+          "rationale": "Vail Resorts is turning every private lesson at Vail into its Epic Ascent product, with concierge support and white glove gear rental, starting in the 2026/2027 season.",
+          "source_id": "vail-10k-fy2026"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.639,
+      "lon": -106.374,
+      "location_source_id": "wikipedia-vail-ski-resort",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3532,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 5317,
+          "source_id": "wikipedia-vail-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "10-K gives approximately 5,300 skiable acres"
+        },
+        "vertical_ft": {
+          "value": 3450,
+          "source_id": "wikipedia-vail-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 32,
@@ -36181,7 +36385,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-vail-ski-resort"
       ]
     },
     {
@@ -36712,7 +36918,7 @@
       "lat": 41.09662,
       "lon": -111.83233,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,
@@ -36786,7 +36992,7 @@
       "lat": 43.96008,
       "lon": -71.53482,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -37591,32 +37797,50 @@
       ]
     },
     {
-      "id": "wildcat-mountain",
+      "id": "wildcat",
       "name": "Wildcat Mountain",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 44.25798,
-      "lon": -71.23153,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Wildcat opened the first gondola lift in North America in 1958 and is home to one of the oldest ski racing trails in the United States.",
+          "source_id": "wikipedia-wildcat-mountain-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 44.2631,
+      "lon": -71.2383,
+      "location_source_id": "wikipedia-wildcat-mountain-ski-area",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2044,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 225,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2112,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 4,
-          "source_id": "openskimap-ski-areas",
+          "value": 5,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
@@ -37661,7 +37885,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "vail-10k-fy2026",
+        "wikipedia-wildcat-mountain-ski-area"
       ]
     },
     {
@@ -37970,7 +38196,7 @@
       "lat": 39.87293,
       "lon": -105.786,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
         "acres": null,
@@ -38488,7 +38714,7 @@
       "lat": 40.75237,
       "lon": -111.58347,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ut",
+      "cluster_id": "wasatch",
       "state": "UT",
       "size": {
         "acres": null,

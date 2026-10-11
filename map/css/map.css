@@ -69,6 +69,8 @@
 .maplibregl-ctrl-attrib { background: rgba(10,14,20,.75) !important; color: var(--map-faint); }
 .maplibregl-ctrl-attrib a { color: var(--map-faint); }
 .maplibregl-ctrl-attrib-button { filter: invert(1); }
+.map-stage .maplibregl-ctrl-top-right { right: var(--panel-w); }
+.map-stage.is-wide .maplibregl-ctrl-top-right { right: min(var(--panel-w-wide), 62%); }
 
 /* ── Panel (desktop side panel) ── */
 .panel {
@@ -176,6 +178,7 @@
 .fact-meta { color: var(--map-faint); font-size: .72rem; overflow-wrap: anywhere; }
 .fact-meta .badge { margin-right: .2rem; }
 .src-link { color: var(--accent); }
+.src-note { color: var(--map-faint); }
 .not-verified, .muted { color: var(--map-faint); font-style: italic; }
 .tag-list { list-style: none; padding: 0; margin: .6rem 0 0; display: flex; flex-wrap: wrap; gap: .35rem; }
 .tag { font-size: var(--text-xs); color: var(--ink); background: var(--surface-1); border: 1px solid var(--line); border-radius: 999px; padding: .1rem .55rem; }
@@ -262,6 +265,7 @@
   .list-view { padding: 1rem 1rem 160px; }
   .map-stage.is-wide .list-view { padding-right: 1rem; }
   .maplibregl-ctrl-top-left { top: 0; }
+  .map-stage .maplibregl-ctrl-top-right, .map-stage.is-wide .maplibregl-ctrl-top-right { right: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

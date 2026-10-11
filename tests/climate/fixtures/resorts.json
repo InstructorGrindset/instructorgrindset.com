@@ -2,8 +2,57 @@
   "version": 1,
   "generated_at": "2026-10-11T00:00:00Z",
   "resorts": [
-    {"id": "test-peak", "name": "Test Peak", "tier": "A", "lat": 39.6000, "lon": -106.3500, "state": "CO"},
-    {"id": "sample-ridge", "name": "Sample Ridge", "tier": "B", "lat": 40.5000, "lon": -111.6000, "state": "UT"},
-    {"id": "lonely-hill", "name": "Lonely Hill", "tier": "A", "lat": 44.0000, "lon": -100.0000, "state": "SD"}
+    {
+      "id": "test-peak",
+      "name": "Test Peak",
+      "tier": "A",
+      "lat": 39.6,
+      "lon": -106.35,
+      "state": "CO",
+      "elevation": {
+        "base_ft": null,
+        "summit_ft": null
+      }
+    },
+    {
+      "id": "sample-ridge",
+      "name": "Sample Ridge",
+      "tier": "B",
+      "lat": 40.5,
+      "lon": -111.6,
+      "state": "UT",
+      "elevation": null
+    },
+    {
+      "id": "lonely-hill",
+      "name": "Lonely Hill",
+      "tier": "A",
+      "lat": 44.0,
+      "lon": -100.0,
+      "state": "SD",
+      "elevation": null
+    },
+    {
+      "id": "banded-bowl",
+      "name": "Banded Bowl",
+      "tier": "A",
+      "lat": 39.602,
+      "lon": -106.352,
+      "state": "CO",
+      "elevation": {
+        "base_ft": {
+          "value": 8100,
+          "source_id": "synthetic-test-source",
+          "as_of": "2026-10-11",
+          "confidence": "published"
+        },
+        "summit_ft": {
+          "value": 11500,
+          "source_id": "synthetic-test-source",
+          "as_of": "2026-10-11",
+          "confidence": "published"
+        }
+      }
+    }
   ]
 }

@@ -57,14 +57,12 @@ def _number(value: Any) -> Optional[float]:
     return float(value)
 
 
-def resort_elevation_ft(resort: dict[str, Any]) -> Optional[float]:
-    """Sourced base elevation in feet when the resort record carries one."""
-    for container in (resort, resort.get("size") or {}):
-        for key in ("base_elevation_ft", "elevation_ft"):
-            v = _number(container.get(key))
-            if v is not None:
-                return v
-    return None
+def resort_elevation_ft(resort: dict[str, Any]) -> tuple[Optional[float], Optional[float]]:
+    """(base_ft, summit_ft) from ``resort.elevation``, each a Sourced number or null."""
+    elevation = resort.get("elevation") or {}
+    if not isinstance(elevation, dict):
+        return None, None
+    return _number(elevation.get("base_ft")), _number(elevation.get("summit_ft"))
 
 
 def load_resorts(path: Path) -> list[dict[str, Any]]:
@@ -96,16 +94,19 @@ def choose_snotel(
     end: date,
     offline: bool,
 ) -> tuple[Optional[snotel.StationEvaluation], dict[str, Any]]:
-    elev = resort_elevation_ft(resort)
-    cands = snotel.select_candidates(resort["lat"], resort["lon"], elev, stations, settings.snotel, (start, end))
+    elev, summit = resort_elevation_ft(resort)
+    cands = snotel.select_candidates(
+        resort["lat"], resort["lon"], elev, stations, settings.snotel, (start, end), summit_ft=summit
+    )
     info: dict[str, Any] = {
         "selection_mode": "distance_only" if elev is None else "distance_and_elevation",
-        "resort_elevation_ft": elev,
+        "resort_base_ft": elev,
+        "resort_summit_ft": summit,
         "radius_km": settings.snotel.radius_km,
         "tried": [],
     }
     if elev is None:
-        info["note"] = "resort elevation unknown, station chosen by distance only"
+        info["note"] = "resort base elevation unknown, station chosen by distance only"
     for cand in cands:
         tried = {
             "triplet": cand.station.triplet,
@@ -323,7 +324,8 @@ def main(argv: Optional[list[str]] = None, *, today: Optional[date] = None, log:
             for r in resorts
             if r["id"] in snotel_ids
             for c in snotel.select_candidates(
-                r["lat"], r["lon"], resort_elevation_ft(r), stations, settings.snotel, (start, end)
+                r["lat"], r["lon"], resort_elevation_ft(r)[0], stations, settings.snotel, (start, end),
+                summit_ft=resort_elevation_ft(r)[1],
             )[:1]
         )
     )

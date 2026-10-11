@@ -131,3 +131,15 @@ def test_source_entry(stations):
     assert e["id"] == "nrcs-snotel-9001-co"
     assert e["url"].endswith("sitenum=9001")
     assert e["accessed_date"] == "2026-10-11"
+
+
+def test_summit_caps_band_top(stations, settings):
+    period = (date(2001, 10, 1), date(2026, 9, 30))
+    # Summit below the 10300 ft station excludes it even though base + 3500 would allow it.
+    assert select_candidates(39.60, -106.35, 8100.0, stations, settings.snotel, period, summit_ft=10000.0) == []
+    # Big vertical: summit above base + 3500 widens the band to the summit.
+    cands = select_candidates(39.60, -106.35, 6500.0, stations, settings.snotel, period, summit_ft=10500.0)
+    assert [c.station.triplet for c in cands] == ["9005:CO:SNTL", "9001:CO:SNTL"]
+    assert cands[1].elevation_diff_ft == pytest.approx(3800.0)
+    # Summit unknown: base + elevation_band_above_ft.
+    assert [c.station.triplet for c in select_candidates(39.60, -106.35, 6500.0, stations, settings.snotel, period)] == ["9005:CO:SNTL"]

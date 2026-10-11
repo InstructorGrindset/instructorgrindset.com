@@ -29,7 +29,7 @@ SOURCES = [
     {"id": "fixture-survey", "url": "https://example.com/fixture/survey",
      "title": "Synthetic fixture: aggregated reports", "accessed_date": AS_OF},
     {"id": "fixture-model", "url": "https://example.com/fixture/model",
-     "title": "Synthetic fixture: estimate", "accessed_date": AS_OF},
+     "title": "Synthetic fixture: estimate", "accessed_date": AS_OF, "note": "synthetic source note"},
     {"id": "fixture-location", "url": "https://example.com/fixture/location",
      "title": "Synthetic fixture: base area location", "accessed_date": AS_OF},
     {"id": "fixture-climate", "url": "https://example.com/fixture/climate",
@@ -102,6 +102,10 @@ def resort_record(row):
             "lifts": sourced(lifts, "fixture-survey", "reported") if rid == "bravo-bowl" else sourced(lifts),
             "ski_school_staff_est": staff,
         },
+        "elevation": {
+            "base_ft": None if sparse else sourced(8100 if vert else None),
+            "summit_ft": None if sparse else sourced(8100 + vert if vert else None),
+        },
         "season": {
             "open_typical": None if sparse else sourced("11-20"),
             "close_typical": None if sparse else sourced("04-12"),
@@ -123,7 +127,7 @@ def resort_record(row):
         "climate_available": climate,
     }
     ids = {"fixture-location"}
-    for group in ("size", "season", "terrain"):
+    for group in ("size", "elevation", "season", "terrain"):
         for v in record[group].values():
             if isinstance(v, dict):
                 ids.add(v["source_id"])

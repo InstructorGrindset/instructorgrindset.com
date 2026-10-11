@@ -32,7 +32,7 @@ export const config = Object.freeze({
   basemap: {
     // Protomaps PMTiles basemap plugs in here once tiles are hosted (R2).
     pmtiles_url: null,
-    attribution: 'State outlines: US Census Bureau via us-atlas',
+    attribution: 'Ski areas: <a href="https://openskimap.org/" target="_blank" rel="noopener">OpenSkiMap</a>, \u00a9 <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> (ODbL). State outlines: US Census Bureau via us-atlas',
     colors: {
       background: '#0a0e14',
       stateFill: '#121821',
