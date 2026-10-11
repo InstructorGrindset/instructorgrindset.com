@@ -60,7 +60,15 @@ def generated_at() -> str:
 
 
 def _write_json(path: Path, data: Any, compact: bool = False) -> None:
+    """Write ``data``; leave the file untouched when only ``generated_at`` would change."""
     path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() and isinstance(data, dict):
+        try:
+            old = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            old = None
+        if isinstance(old, dict) and {**old, "generated_at": None} == {**data, "generated_at": None}:
+            return
     text = json.dumps(data, ensure_ascii=False, separators=(",", ":")) if compact else json.dumps(
         data, ensure_ascii=False, indent=2)
     path.write_text(text + "\n", encoding="utf-8")

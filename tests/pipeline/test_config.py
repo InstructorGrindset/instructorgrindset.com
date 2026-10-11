@@ -14,7 +14,7 @@ EXPECTED_CLUSTERS = [
 
 def test_definitions_section_6_values(cfg):
     d = cfg.definitions
-    assert d.snow.powder_day_min_in == 6 and d.snow.banner_day_min_in == 12 and d.snow.window_hours == 24
+    assert d.snow.powder_day_in == 6 and d.snow.banner_day_in == 12 and d.snow.window_hours == 24
     assert (d.density.dry_max_pct, d.density.moist_min_pct) == (7, 12)
     assert d.season.lookback_seasons == 10
     assert d.display.priority == ["published", "reported", "estimated"]
@@ -40,7 +40,7 @@ def test_size_rank(cfg):
 
 def test_invalid_definitions_rejected(tmp_path, repo_root):
     data = yaml.safe_load((repo_root / "config/definitions.yaml").read_text())
-    data["snow"]["banner_day_min_in"] = 4
+    data["snow"]["banner_day_in"] = 4
     with pytest.raises(ValidationError, match="banner"):
         Definitions.model_validate(data)
     data = yaml.safe_load((repo_root / "config/definitions.yaml").read_text())

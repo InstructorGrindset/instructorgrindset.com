@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 import yaml
 from pydantic import Field, model_validator
@@ -15,14 +15,14 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # ---------------------------------------------------------------- definitions
 class SnowDefs(StrictModel):
-    powder_day_min_in: float = Field(gt=0)
-    banner_day_min_in: float = Field(gt=0)
+    powder_day_in: float = Field(gt=0)
+    banner_day_in: float = Field(gt=0)
     window_hours: int = Field(gt=0)
 
     @model_validator(mode="after")
     def _order(self) -> "SnowDefs":
-        if self.banner_day_min_in <= self.powder_day_min_in:
-            raise ValueError("banner_day_min_in must exceed powder_day_min_in")
+        if self.banner_day_in <= self.powder_day_in:
+            raise ValueError("banner_day_in must exceed powder_day_in")
         return self
 
 
@@ -133,6 +133,8 @@ class Definitions(StrictModel):
     matching: MatchingDefs
     professionalism: ProfessionalismDefs
     lucrativeness: LucrativenessDefs
+    # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
+    climate: Optional[dict[str, Any]] = None
 
 
 # ------------------------------------------------------------------- clusters

@@ -29,8 +29,8 @@ if (config.isDevData && els.devBadge) {
   els.devBadge.textContent = 'Test fixture data';
 }
 
-const sheet = createSheet(els.panel, els.handle, els.stage, { onChange: () => mapCtl && mapCtl.refit() });
 let mapCtl = null;
+const sheet = createSheet(els.panel, els.handle, els.stage, { onChange: () => mapCtl && mapCtl.refit() });
 
 function announce(text) {
   els.status.textContent = '';
@@ -113,6 +113,7 @@ async function main() {
 
   router = createRouter(index, (view, { initial, fellBack }) => {
     els.panel.classList.toggle('is-wide', view.level === 'compare');
+    els.stage.classList.toggle('is-wide', view.level === 'compare');
     const headingEl = panel.render(view);
     els.scroll.scrollTop = 0;
     applyMeta(index, view);
