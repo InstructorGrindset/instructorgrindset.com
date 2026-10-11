@@ -45,6 +45,7 @@ export const PayRow = z.object({
   as_of: IsoDate,
   season: z.string().nullish(),
   stale: z.boolean().nullish().transform((v) => Boolean(v)),
+  aggregate_count: z.number().int().nullish().transform((v) => v ?? null),   // reported rows only
 });
 
 export const Career = z.object({

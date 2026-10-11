@@ -155,6 +155,7 @@
       "hourly_low": 21.0,
       "hourly_high": 24.0,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -165,6 +166,7 @@
       "hourly_low": 23.5,
       "hourly_high": 26.5,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2024-11-01",
       "season": "2024-25",
@@ -175,6 +177,7 @@
       "hourly_low": 26.0,
       "hourly_high": 29.0,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -184,8 +187,9 @@
       "cert_level": "level_3",
       "hourly_low": 28.5,
       "hourly_high": 31.5,
-      "confidence": "published",
-      "source_id": "fixture-resort-site",
+      "confidence": "reported",
+      "aggregate_count": 4,
+      "source_id": "fixture-survey",
       "as_of": "2026-10-01",
       "season": "2025-26",
       "stale": false
@@ -195,6 +199,7 @@
       "hourly_low": 31.0,
       "hourly_high": 34.0,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -205,6 +210,7 @@
       "hourly_low": 33.5,
       "hourly_high": 36.5,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -282,30 +288,76 @@
      "status": "computed",
      "assumptions": [
       {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "level_2"
+      },
+      {
        "key": "hours_per_week",
-       "label": "Full time hours per week",
+       "label": "Hours per week",
        "value": 32
       },
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "Level 2"
+       "key": "season_months",
+       "label": "Season months",
+       "value": 5
       },
       {
-       "key": "rent_monthly",
-       "label": "Cheapest employee housing rent per month",
-       "value": 650
+       "key": "housing_choice",
+       "label": "Housing used",
+       "value": "cheapest_employee_housing"
       },
       {
-       "key": "food_monthly",
-       "label": "Food per month",
+       "key": "food_monthly_usd",
+       "label": "Food per month (USD)",
        "value": 450
+      },
+      {
+       "key": "transport_monthly_usd",
+       "label": "Transport per month (USD)",
+       "value": 120
+      },
+      {
+       "key": "pass_offset_usd",
+       "label": "Pass offset (USD)",
+       "value": 0
+      },
+      {
+       "key": "gear_offset_usd",
+       "label": "Gear offset (USD)",
+       "value": 400
+      },
+      {
+       "key": "range_spread_low",
+       "label": "Range below mid, share of earnings",
+       "value": 0.15
+      },
+      {
+       "key": "range_spread_high",
+       "label": "Range above mid, share of earnings",
+       "value": 0.12
+      },
+      {
+       "key": "pay_hourly_mid_usd",
+       "label": "Hourly pay used, midpoint (USD)",
+       "value": 27.5
+      },
+      {
+       "key": "season_length_days",
+       "label": "Season length used (days)",
+       "value": 150
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Rent used per month (USD)",
+       "value": 650
       }
      ]
     },
     "stale_fields": [
      "pay.level_1",
-     "private_split"
+     "private_split",
+     "professionalism.clinic_access"
     ]
    },
    "editorial": null,
@@ -463,6 +515,7 @@
       "hourly_low": 19.0,
       "hourly_high": 22.0,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -473,6 +526,7 @@
       "hourly_low": 21.5,
       "hourly_high": 24.5,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -484,7 +538,50 @@
     "professionalism": {
      "score": null,
      "status": "weights_unset",
-     "breakdown": []
+     "breakdown": [
+      {
+       "component": "cert_pay_differential",
+       "weight": null,
+       "value": 0.6,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "paid_training_hours",
+       "weight": null,
+       "value": 0.45,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "examiner_trainer_presence",
+       "weight": null,
+       "value": 0.55,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "private_lesson_share",
+       "weight": null,
+       "value": 0.4,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "year_round_staff",
+       "weight": null,
+       "value": 0.5,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "clinic_access",
+       "weight": null,
+       "value": 0.5,
+       "points": null,
+       "source_id": "fixture-model"
+      }
+     ]
     },
     "lucrativeness": {
      "low": null,
@@ -493,24 +590,69 @@
      "status": "assumptions_unset",
      "assumptions": [
       {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "level_2"
+      },
+      {
        "key": "hours_per_week",
-       "label": "Full time hours per week",
+       "label": "Hours per week",
        "value": 32
       },
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "Level 2"
+       "key": "season_months",
+       "label": "Season months",
+       "value": 5
       },
       {
-       "key": "rent_monthly",
-       "label": "Cheapest employee housing rent per month",
+       "key": "housing_choice",
+       "label": "Housing used",
+       "value": "cheapest_employee_housing"
+      },
+      {
+       "key": "food_monthly_usd",
+       "label": "Food per month (USD)",
        "value": null
       },
       {
-       "key": "food_monthly",
-       "label": "Food per month",
-       "value": 450
+       "key": "transport_monthly_usd",
+       "label": "Transport per month (USD)",
+       "value": 120
+      },
+      {
+       "key": "pass_offset_usd",
+       "label": "Pass offset (USD)",
+       "value": 0
+      },
+      {
+       "key": "gear_offset_usd",
+       "label": "Gear offset (USD)",
+       "value": 400
+      },
+      {
+       "key": "range_spread_low",
+       "label": "Range below mid, share of earnings",
+       "value": 0.15
+      },
+      {
+       "key": "range_spread_high",
+       "label": "Range above mid, share of earnings",
+       "value": 0.12
+      },
+      {
+       "key": "pay_hourly_mid_usd",
+       "label": "Hourly pay used, midpoint (USD)",
+       "value": 27.5
+      },
+      {
+       "key": "season_length_days",
+       "label": "Season length used (days)",
+       "value": 150
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Rent used per month (USD)",
+       "value": 650
       }
      ]
     },
@@ -648,6 +790,7 @@
       "hourly_low": 22.0,
       "hourly_high": 25.0,
       "confidence": "estimated",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -659,7 +802,50 @@
     "professionalism": {
      "score": null,
      "status": "insufficient_data",
-     "breakdown": []
+     "breakdown": [
+      {
+       "component": "cert_pay_differential",
+       "weight": 0.25,
+       "value": 0.6,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "paid_training_hours",
+       "weight": 0.2,
+       "value": 0.45,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "examiner_trainer_presence",
+       "weight": 0.15,
+       "value": null,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "private_lesson_share",
+       "weight": 0.15,
+       "value": null,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "year_round_staff",
+       "weight": 0.15,
+       "value": null,
+       "points": null,
+       "source_id": "fixture-model"
+      },
+      {
+       "component": "clinic_access",
+       "weight": 0.1,
+       "value": null,
+       "points": null,
+       "source_id": "fixture-model"
+      }
+     ]
     },
     "lucrativeness": {
      "low": null,
@@ -668,24 +854,69 @@
      "status": "insufficient_data",
      "assumptions": [
       {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "level_2"
+      },
+      {
        "key": "hours_per_week",
-       "label": "Full time hours per week",
+       "label": "Hours per week",
        "value": 32
       },
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "Level 2"
+       "key": "season_months",
+       "label": "Season months",
+       "value": 5
       },
       {
-       "key": "rent_monthly",
-       "label": "Cheapest employee housing rent per month",
-       "value": 650
+       "key": "housing_choice",
+       "label": "Housing used",
+       "value": "cheapest_employee_housing"
       },
       {
-       "key": "food_monthly",
-       "label": "Food per month",
+       "key": "food_monthly_usd",
+       "label": "Food per month (USD)",
        "value": 450
+      },
+      {
+       "key": "transport_monthly_usd",
+       "label": "Transport per month (USD)",
+       "value": 120
+      },
+      {
+       "key": "pass_offset_usd",
+       "label": "Pass offset (USD)",
+       "value": 0
+      },
+      {
+       "key": "gear_offset_usd",
+       "label": "Gear offset (USD)",
+       "value": 400
+      },
+      {
+       "key": "range_spread_low",
+       "label": "Range below mid, share of earnings",
+       "value": 0.15
+      },
+      {
+       "key": "range_spread_high",
+       "label": "Range above mid, share of earnings",
+       "value": 0.12
+      },
+      {
+       "key": "pay_hourly_mid_usd",
+       "label": "Hourly pay used, midpoint (USD)",
+       "value": 27.5
+      },
+      {
+       "key": "season_length_days",
+       "label": "Season length used (days)",
+       "value": 150
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Rent used per month (USD)",
+       "value": 650
       }
      ]
     },
@@ -1025,6 +1256,7 @@
       "hourly_low": 24.5,
       "hourly_high": 27.5,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -1035,6 +1267,7 @@
       "hourly_low": 27.0,
       "hourly_high": 30.0,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -1045,6 +1278,7 @@
       "hourly_low": 29.5,
       "hourly_high": 32.5,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -1122,24 +1356,69 @@
      "status": "computed",
      "assumptions": [
       {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "level_2"
+      },
+      {
        "key": "hours_per_week",
-       "label": "Full time hours per week",
+       "label": "Hours per week",
        "value": 32
       },
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "Level 2"
+       "key": "season_months",
+       "label": "Season months",
+       "value": 5
       },
       {
-       "key": "rent_monthly",
-       "label": "Cheapest employee housing rent per month",
-       "value": 650
+       "key": "housing_choice",
+       "label": "Housing used",
+       "value": "cheapest_employee_housing"
       },
       {
-       "key": "food_monthly",
-       "label": "Food per month",
+       "key": "food_monthly_usd",
+       "label": "Food per month (USD)",
        "value": 450
+      },
+      {
+       "key": "transport_monthly_usd",
+       "label": "Transport per month (USD)",
+       "value": 120
+      },
+      {
+       "key": "pass_offset_usd",
+       "label": "Pass offset (USD)",
+       "value": 0
+      },
+      {
+       "key": "gear_offset_usd",
+       "label": "Gear offset (USD)",
+       "value": 400
+      },
+      {
+       "key": "range_spread_low",
+       "label": "Range below mid, share of earnings",
+       "value": 0.15
+      },
+      {
+       "key": "range_spread_high",
+       "label": "Range above mid, share of earnings",
+       "value": 0.12
+      },
+      {
+       "key": "pay_hourly_mid_usd",
+       "label": "Hourly pay used, midpoint (USD)",
+       "value": 27.5
+      },
+      {
+       "key": "season_length_days",
+       "label": "Season length used (days)",
+       "value": 150
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Rent used per month (USD)",
+       "value": 650
       }
      ]
     },
@@ -1423,6 +1702,7 @@
       "hourly_low": 25.5,
       "hourly_high": 28.5,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -1433,6 +1713,7 @@
       "hourly_low": 28.0,
       "hourly_high": 31.0,
       "confidence": "published",
+      "aggregate_count": null,
       "source_id": "fixture-resort-site",
       "as_of": "2026-10-01",
       "season": "2025-26",
@@ -1496,24 +1777,69 @@
      "status": "insufficient_data",
      "assumptions": [
       {
+       "key": "cert_level",
+       "label": "Cert level used",
+       "value": "level_2"
+      },
+      {
        "key": "hours_per_week",
-       "label": "Full time hours per week",
+       "label": "Hours per week",
        "value": 32
       },
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "Level 2"
+       "key": "season_months",
+       "label": "Season months",
+       "value": 5
       },
       {
-       "key": "rent_monthly",
-       "label": "Cheapest employee housing rent per month",
-       "value": 650
+       "key": "housing_choice",
+       "label": "Housing used",
+       "value": "cheapest_employee_housing"
       },
       {
-       "key": "food_monthly",
-       "label": "Food per month",
+       "key": "food_monthly_usd",
+       "label": "Food per month (USD)",
        "value": 450
+      },
+      {
+       "key": "transport_monthly_usd",
+       "label": "Transport per month (USD)",
+       "value": 120
+      },
+      {
+       "key": "pass_offset_usd",
+       "label": "Pass offset (USD)",
+       "value": 0
+      },
+      {
+       "key": "gear_offset_usd",
+       "label": "Gear offset (USD)",
+       "value": 400
+      },
+      {
+       "key": "range_spread_low",
+       "label": "Range below mid, share of earnings",
+       "value": 0.15
+      },
+      {
+       "key": "range_spread_high",
+       "label": "Range above mid, share of earnings",
+       "value": 0.12
+      },
+      {
+       "key": "pay_hourly_mid_usd",
+       "label": "Hourly pay used, midpoint (USD)",
+       "value": 27.5
+      },
+      {
+       "key": "season_length_days",
+       "label": "Season length used (days)",
+       "value": 150
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Rent used per month (USD)",
+       "value": 650
       }
      ]
     },

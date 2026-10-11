@@ -29,9 +29,11 @@ export const fmt = {
   text: (v) => String(v),
 };
 
+const nf2 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
 const usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-const usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
-export function money(v, digits = 0) { return (digits ? usd2 : usd0).format(v); }
+const usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+/** Whole dollars, or cents when digits is set and the value has a fraction. */
+export function money(v, digits = 0) { return (digits && !Number.isInteger(v) ? usd2 : usd0).format(v); }
 export function moneyRange(low, high, digits = 0) {
   if (low == null && high == null) return 'Not yet verified';
   if (low == null || high == null || low === high) return money(low ?? high, digits);
@@ -336,11 +338,11 @@ export function createPanel(root, index, { onCompare }) {
     const stale = new Set(c.stale_fields);
     return section('Career',
       h('p', { class: 'sub' }, 'Hourly pay by certification'),
-      payTable(c.pay),
+      payTable(c.pay, stale),
       h('dl', { class: 'facts career-facts' },
         fact('Private lesson rate', c.private_rate, fmtRate, { stale: stale.has('private_rate') }),
         fact('Instructor split', c.private_split, (v) => `${fmt1(v)}% to the instructor`, { stale: stale.has('private_split') })),
-      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Professionalism'), professionalism(c.professionalism)),
+      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Professionalism'), professionalism(c.professionalism, stale)),
       h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Lucrativeness, estimated savings per season'), lucrativeness(c.lucrativeness)));
   }
 
@@ -349,7 +351,7 @@ export function createPanel(root, index, { onCompare }) {
     return `${moneyRange(v.low, v.high)} ${unit}`.trim();
   }
 
-  function payTable(rows) {
+  function payTable(rows, stale = new Set()) {
     if (!rows.length) return h('p', { class: 'not-verified' }, 'Not yet verified');
     const order = (x) => CERT_LEVELS.indexOf(x.cert_level);
     return h('table', { class: 'pay-table' },
@@ -359,7 +361,10 @@ export function createPanel(root, index, { onCompare }) {
         h('th', { scope: 'row' }, CERT_LABEL[row.cert_level] || row.cert_level),
         h('td', null,
           h('span', { class: 'sourced-main' },
-            h('span', { class: 'fact-value' }, moneyRange(row.hourly_low, row.hourly_high, 2)), badge(row.confidence), row.stale ? staleTag() : null),
+            h('span', { class: 'fact-value' }, moneyRange(row.hourly_low, row.hourly_high, 2)), badge(row.confidence),
+            row.stale || stale.has(`pay.${row.cert_level}`) ? staleTag() : null),
+          row.confidence === 'reported' && row.aggregate_count
+            ? h('span', { class: 'fact-note' }, `Range from ${fmtInt(row.aggregate_count)} reports`) : null,
           h('span', { class: 'fact-meta' },
             row.season ? `${String(row.season).replace('-', '/')} season \u00b7 ` : '',
             `Last verified ${formatIsoDate(row.as_of)} \u00b7 `, sourceLink(row.source_id)))))));
@@ -372,18 +377,19 @@ export function createPanel(root, index, { onCompare }) {
   }
 
   let tipSeq = 0;
-  function professionalism(p) {
+  function professionalism(p, stale = new Set()) {
     if (!p) return h('p', { class: 'not-verified' }, 'Not enough verified data yet');
     if (p.status !== 'computed' || p.score == null) return h('p', { class: 'not-verified' }, statusText(p.status, 'weights_unset'));
     tipSeq += 1;
     const id = `breakdown-${tipSeq}`;
-    const fmtW = (v) => (v == null ? 'No data' : fmt1(Math.round(v * 100) / 100));
+    const fmtW = (v) => (v == null ? 'No data' : nf2.format(v));
     const tip = h('div', { class: 'breakdown', role: 'tooltip', id, hidden: true },
       h('table', null,
         h('caption', null, 'How the score is built'),
         h('thead', null, h('tr', null, ['Component', 'Weight', 'Value', 'Points'].map((t) => h('th', { scope: 'col' }, t)))),
         h('tbody', null, p.breakdown.map((b) => h('tr', null,
-          h('th', { scope: 'row' }, COMPONENT_LABEL[b.component] || humanize(b.component)),
+          h('th', { scope: 'row' }, COMPONENT_LABEL[b.component] || humanize(b.component),
+            stale.has(`professionalism.${b.component}`) ? h('span', { class: 'stale-mark' }, ' (needs update)') : null),
           h('td', null, fmtW(b.weight)), h('td', null, fmtW(b.value)),
           h('td', null, b.points == null ? 'No data' : fmt1(b.points)))))));
     const trigger = h('button', {
@@ -399,8 +405,9 @@ export function createPanel(root, index, { onCompare }) {
     trigger.addEventListener('click', () => show(tip.hidden));
     trigger.addEventListener('keydown', (e) => { if (e.key === 'Escape') show(false); });
     const srcIds = [...new Set(p.breakdown.map((b) => b.source_id).filter(Boolean))];
+    const staleParts = p.breakdown.filter((b) => stale.has(`professionalism.${b.component}`));
     return h('div', null,
-      h('div', { class: 'sourced-main' }, wrap, badge('estimated')),
+      h('div', { class: 'sourced-main' }, wrap, badge('estimated'), staleParts.length ? staleTag() : null),
       h('span', { class: 'fact-meta' }, 'Model score from weighted components in config.',
         srcIds.length ? [' Sources: ', srcIds.map((sid, i) => [i ? ', ' : '', sourceLink(sid)])] : null));
   }
@@ -418,12 +425,17 @@ export function createPanel(root, index, { onCompare }) {
       body.push(h('p', { class: 'sub' }, 'Assumptions'),
         h('ul', { class: 'assumptions' }, l.assumptions.map((a) => h('li', null,
           h('span', null, a.label), ' ',
-          a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet') : h('span', { class: 'assumption-value' }, fmtAssumption(a.value))))));
+          a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet') : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))))));
     }
     return h('div', null, body);
   }
 
-  function fmtAssumption(v) {
+  function fmtAssumption(key, v) {
+    if (key === 'cert_level' && CERT_LABEL[v]) return CERT_LABEL[v];
+    if (typeof v === 'number' && key.endsWith('_usd')) return money(v, Number.isInteger(v) ? 0 : 2);
+    if (typeof v === 'number' && key.startsWith('range_spread')) return `${fmt1(v * 100)}% of earnings`;
+    if (typeof v === 'number' && key.endsWith('_days')) return `${fmtInt(v)} days`;
+    if (typeof v === 'string') return humanize(v);
     if (typeof v === 'number') return Math.abs(v) >= 100 ? fmtInt(v) : fmt1(v);
     if (typeof v === 'boolean') return v ? 'Yes' : 'No';
     return String(v);

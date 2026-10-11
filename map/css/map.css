@@ -309,6 +309,7 @@ body.list-mode .facility-filter { left: 1.5rem; }
 .pay-table thead th { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--map-faint); font-weight: 700; }
 .pay-table tbody th { color: var(--muted); font-weight: 600; font-size: var(--text-xs); width: 7rem; }
 .pay-table td { display: flex; flex-direction: column; gap: .1rem; }
+.stale-mark { color: #f0b45c; font-weight: 400; }
 .tier-stale { color: #f0b45c; background: rgba(250,178,25,.1); border: 1px dashed rgba(250,178,25,.55); text-transform: none; letter-spacing: 0; }
 .career-facts { margin-bottom: .75rem; }
 .score-block { margin-top: .75rem; }
@@ -346,7 +347,7 @@ body.list-mode .recolor { display: none; }
 .recolor-modes .filter-btn { border-left: 0; border-right: 1px solid var(--line); }
 .recolor-modes .filter-btn:last-child { border-right: 0; }
 .filter-btn[aria-disabled="true"] { color: #5d6778; cursor: not-allowed; text-decoration: line-through; text-decoration-color: rgba(93,103,120,.6); }
-.recolor-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--map-faint); padding: .35rem .6rem; border-right: 1px solid var(--line); display: inline-flex; align-items: center; }
+.recolor-label { white-space: nowrap; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--map-faint); padding: .35rem .6rem; border-right: 1px solid var(--line); display: inline-flex; align-items: center; }
 .recolor-legend { background: rgba(16,21,30,.95); border: 1px solid var(--line); border-radius: var(--r-md); padding: .45rem .6rem; font-size: .72rem; color: var(--muted); }
 .recolor-legend[hidden] { display: none; }
 .recolor-legend .legend-title { color: var(--ink); font-weight: 700; margin: 0 0 .3rem; }

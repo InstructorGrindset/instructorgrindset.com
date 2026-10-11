@@ -259,6 +259,7 @@ async function desktop(browser, base) {
   });
   await trigger.hover();
   check(await tip.isVisible(), 'breakdown shows on hover');
+  check((await tip.innerText()).includes('Clinic access (needs update)'), 'stale professionalism component marked in breakdown');
   check(await tip.locator('tbody tr').count() === 6 && JSON.stringify(await tip.locator('thead th').allInnerTexts()) ===
     JSON.stringify(['Component', 'Weight', 'Value', 'Points']), 'breakdown lists component, weight, value, points');
   await shot(page, 'desktop-04b-professionalism-hover.png');
@@ -270,7 +271,12 @@ async function desktop(browser, base) {
   check(await tip.isHidden(), 'Escape closes the breakdown');
   check((await trigger.innerText()).includes('72'), 'professionalism score 0 to 100 renders');
   check((await page.locator('.score-block', { hasText: 'Lucrativeness' }).innerText()).includes('$3,200 to $8,900'), 'lucrativeness range renders');
-  check(await page.locator('.assumptions li').count() === 4, 'lucrativeness assumptions listed beneath');
+  check(await page.locator('.assumptions li').count() === 13, 'lucrativeness assumptions listed beneath (8 config, 2 spreads, 3 resort inputs)');
+  const assumptions = await page.locator('.assumptions').innerText();
+  check(assumptions.includes('Level 2') && assumptions.includes('$650') && assumptions.includes('15% of earnings') && assumptions.includes('$27.50'),
+    'assumption values formatted (cert label, dollars, spreads)');
+  check((await page.locator('.pay-table tr[data-level="level_3"]').innerText()).includes('Range from 4 reports')
+    && await page.locator('.pay-table tr[data-level="level_3"] .badge-reported').count() === 1, 'reported pay row shows its aggregate count');
   check(await page.locator('.tag', { hasText: 'Destination families' }).count() === 1, 'client profile chips use readable labels');
   check(await page.locator('.sub', { hasText: 'Best suited for skiers and riders' }).count() === 1, 'best suited tags render');
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 900; });
@@ -291,11 +297,11 @@ async function desktop(browser, base) {
   check(await page.locator('.badge-reported').count() >= 1, 'reported badge renders');
   check(await page.locator('.score-block .not-verified', { hasText: 'Scoring model is being finalized' }).count() === 2, 'weights_unset and assumptions_unset render being finalized');
   check(await page.locator('.assumptions .not-verified', { hasText: 'Not set yet' }).count() === 1, 'unset assumption marked');
+  check(await page.locator('.src-tag', { hasText: 'Estimated' }).count() === 1, 'density chart labelled Estimated');
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
   await page.locator('.resort-list a', { hasText: 'Charlie Hill' }).click();
   await page.waitForURL(/charlie-hill/);
   check(await page.locator('.score-block .not-verified', { hasText: 'Not enough verified data yet' }).count() === 2, 'insufficient_data renders not enough data');
-  check(await page.locator('.src-tag', { hasText: 'Estimated' }).count() === 1, 'density chart labelled Estimated');
 
   // Indoor facility record.
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
@@ -527,7 +533,7 @@ async function realData(browser, base) {
         check(disabled === !has, `real data: ${mode} recolor ${has ? 'enabled' : 'disabled'} (${geo.filter((f) => f.properties[prop] != null).length} resorts with data)`);
         if (!has) {
           check(/^No resort has .+ data yet\.$/.test(await btn.getAttribute('title')), `real data: disabled ${mode} explains why in a tooltip`);
-          await btn.click();
+          await btn.click({ force: true }); // aria-disabled stays focusable and clickable; the click only announces why
           check((await btn.getAttribute('aria-pressed')) === 'false', `real data: disabled ${mode} cannot be selected`);
         }
       }

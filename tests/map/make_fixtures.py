@@ -88,33 +88,48 @@ SEASON_LENGTH = {"alpha-peak": 150, "bravo-bowl": 138, "charlie-hill": 120, "ech
 LEVELS = ["none", "level_1", "level_2", "level_3", "trainer", "examiner"]
 COMPONENTS = ["cert_pay_differential", "paid_training_hours", "examiner_trainer_presence",
               "private_lesson_share", "year_round_staff", "clinic_access"]
-ASSUMPTIONS = [("hours_per_week", "Full time hours per week", 32), ("cert_level", "Cert level used", "Level 2"),
-               ("rent_monthly", "Cheapest employee housing rent per month", 650), ("food_monthly", "Food per month", 450)]
+ASSUMPTIONS = [  # keys and labels per pipeline/career.py; values synthetic
+    ("cert_level", "Cert level used", "level_2"), ("hours_per_week", "Hours per week", 32),
+    ("season_months", "Season months", 5), ("housing_choice", "Housing used", "cheapest_employee_housing"),
+    ("food_monthly_usd", "Food per month (USD)", 450), ("transport_monthly_usd", "Transport per month (USD)", 120),
+    ("pass_offset_usd", "Pass offset (USD)", 0), ("gear_offset_usd", "Gear offset (USD)", 400),
+    ("range_spread_low", "Range below mid, share of earnings", 0.15),
+    ("range_spread_high", "Range above mid, share of earnings", 0.12),
+    ("pay_hourly_mid_usd", "Hourly pay used, midpoint (USD)", 27.5),
+    ("season_length_days", "Season length used (days)", 150), ("rent_monthly_usd", "Rent used per month (USD)", 650),
+]
 
 
-def pay_rows(base, levels, stale_level=None, confidence="published"):
+def pay_rows(base, levels, stale_level=None, confidence="published", reported_level=None):
     rows = []
     for i, lvl in enumerate(levels):
         lo = round(base + 2.5 * LEVELS.index(lvl), 2)
-        rows.append({"cert_level": lvl, "hourly_low": lo, "hourly_high": round(lo + 3, 2), "confidence": confidence,
-                     "source_id": "fixture-survey" if confidence == "reported" else "fixture-resort-site",
+        conf = "reported" if lvl == reported_level else confidence
+        rows.append({"cert_level": lvl, "hourly_low": lo, "hourly_high": round(lo + 3, 2), "confidence": conf,
+                     "aggregate_count": 4 if conf == "reported" else None,
+                     "source_id": "fixture-survey" if conf == "reported" else "fixture-resort-site",
                      "as_of": "2024-11-01" if lvl == stale_level else AS_OF, "season": "2024-25" if lvl == stale_level else "2025-26",
                      "stale": lvl == stale_level})
     return rows
 
 
-def prof(score, status="computed", n=6):
-    if status != "computed":
-        return {"score": None, "status": status, "breakdown": []}
+def prof(score, status="computed"):
+    """All six components, always (contract). Non computed statuses carry null weights or values."""
     weights = [0.25, 0.2, 0.15, 0.15, 0.15, 0.1]
-    vals = [min(1, max(0, score / 100 + d)) for d in (0.1, -0.05, 0.05, -0.1, 0.0, 0.0)]
-    return {"score": score, "status": status, "breakdown": [
-        {"component": c, "weight": w, "value": round(v, 2), "points": round(100 * w * v, 1), "source_id": "fixture-model"}
-        for c, w, v in list(zip(COMPONENTS, weights, vals))[:n]]}
+    base = (score if score is not None else 50) / 100
+    vals = [round(min(1, max(0, base + d)), 2) for d in (0.1, -0.05, 0.05, -0.1, 0.0, 0.0)]
+    if status == "insufficient_data":
+        vals = [vals[0], vals[1]] + [None] * 4
+    rows = []
+    for c, w, v in zip(COMPONENTS, weights, vals):
+        w = None if status == "weights_unset" else w
+        pts = round(100 * w * v, 1) if status == "computed" and v is not None else None
+        rows.append({"component": c, "weight": w, "value": v, "points": pts, "source_id": "fixture-model"})
+    return {"score": score if status == "computed" else None, "status": status, "breakdown": rows}
 
 
 def lucr(low, mid, high, status="computed"):
-    vals = [(k, l, None if status == "assumptions_unset" and k == "rent_monthly" else v) for k, l, v in ASSUMPTIONS]
+    vals = [(k, l, None if status == "assumptions_unset" and k == "food_monthly_usd" else v) for k, l, v in ASSUMPTIONS]
     return {"low": low if status == "computed" else None, "mid": mid if status == "computed" else None,
             "high": high if status == "computed" else None, "status": status,
             "assumptions": [{"key": k, "label": l, "value": v} for k, l, v in vals]}
@@ -123,11 +138,11 @@ def lucr(low, mid, high, status="computed"):
 def career_data():
     """Synthetic career records covering every status, built lazily so sourced() is defined."""
     return {
-        "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1"),
+        "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
                        "professionalism": prof(72), "lucrativeness": lucr(3200, 6100, 8900),
-                       "stale_fields": ["pay.level_1", "private_split"]},
+                       "stale_fields": ["pay.level_1", "private_split", "professionalism.clinic_access"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(None, "weights_unset"), "lucrativeness": lucr(None, None, None, "assumptions_unset"),
                        "stale_fields": []},
