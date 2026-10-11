@@ -70,13 +70,13 @@ def test_end_to_end_writes_contract_files(tmp_path, fake_api):
     assert rm[1].density_source == "estimated"
     assert rm[1].density_pct_median == pytest.approx(7.5)  # Anderson 1976 at -9 C
     assert rm[4].density_mix.moist == 1.0  # April storms at -3 C are over 12 percent
-    assert "anderson-1976-snow17-new-snow-density" in ridge.source_ids
+    assert "anderson-1976-new-snow-density" in ridge.source_ids
     assert not any(s.startswith("nrcs-snotel") for s in ridge.source_ids)
 
     sources = read(climate_dir / "sources.json")
     ids = {s["id"] for s in sources["sources"]}
     assert ids == {
-        "open-meteo-era5-archive", "nrcs-snotel-9005-co", "nrcs-snotel-9001-co", "anderson-1976-snow17-new-snow-density"
+        "open-meteo-era5-archive", "nrcs-snotel-9005-co", "nrcs-snotel-9001-co", "anderson-1976-new-snow-density"
     }
     for s in sources["sources"]:
         assert s["url"].startswith("https://") and s["title"] and s["accessed_date"] == "2026-10-11"

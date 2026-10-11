@@ -20,7 +20,7 @@ resorts:
   - id: steamboat
     name: Steamboat
     state: CO
-    owner: {value: Alterra Mountain Company, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published, note: Infobox owner; the article says the resort is operated by the Steamboat Ski & Resort Corporation.}
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner; the article says the resort is operated by the Steamboat Ski & Resort Corporation."}
     lat: 40.459
     lon: -106.803
     location_source_id: wikipedia-steamboat-ski-resort
@@ -56,7 +56,7 @@ resorts:
   - id: arapahoe-basin
     name: Arapahoe Basin
     state: CO
-    owner: {value: Alterra Mountain Company, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: Purchase agreed February 2024 and closed November 19, 2024.}
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: "Purchase agreed February 2024 and closed November 19, 2024."}
     lat: 39.64167
     lon: -105.87167
     location_source_id: wikipedia-arapahoe-basin
@@ -66,7 +66,7 @@ resorts:
     size:
       acres: {value: 1428, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
       vertical_ft: {value: 2270, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: "Lift served vertical from the article body. The infobox says 2,530 ft, which does not match its own top (13,050) and base (10,780) elevations."}
-      lifts: {value: 9, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: Six chairlifts and three surface lifts.}
+      lifts: {value: 9, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: "Six chairlifts and three surface lifts."}
     elevation:
       base_ft: {value: 10780, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 13050, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
@@ -83,12 +83,12 @@ resorts:
       - {criterion: heritage, rationale: "Founded in 1949 as Squaw Valley, it hosted the 1960 Winter Olympics and is California Historical Landmark 724, marked as a Pioneer Ski Area of America.", source_id: wikipedia-palisades-tahoe}
       - {criterion: diehard, rationale: "The resort is the largest ski complex in the Lake Tahoe region and is known for its challenging terrain.", source_id: wikipedia-palisades-tahoe}
     size:
-      acres: {value: 3600, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: Palisades side only; with Alpine Meadows the combined resort offers about 6,000 acres per the same article.}
+      acres: {value: 3600, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: "Palisades side only; with Alpine Meadows the combined resort offers about 6,000 acres per the same article."}
       vertical_ft: {value: 2850, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
-      lifts: {value: 30, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: Palisades side only (23 chairlifts, 4 carpets, tram, base to base gondola, funitel).}
+      lifts: {value: 30, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: "Palisades side only (23 chairlifts, 4 carpets, tram, base to base gondola, funitel)."}
     elevation:
       base_ft: {value: 6200, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
-      summit_ft: {value: 9050, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: Infobox value; the article body gives 9,010 ft at Granite Chief.}
+      summit_ft: {value: 9050, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: "Infobox value; the article body gives 9,010 ft at Granite Chief."}
 
   - id: mammoth-mountain
     name: Mammoth Mountain
@@ -105,8 +105,8 @@ resorts:
       vertical_ft: {value: 3100, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
       lifts: {value: 25, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
     elevation:
-      base_ft: {value: 7953, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: At Eagle Lodge.}
-      summit_ft: {value: 11053, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: Infobox value; the article body says 11,059 ft.}
+      base_ft: {value: 7953, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: "At Eagle Lodge."}
+      summit_ft: {value: 11053, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value; the article body says 11,059 ft."}
 
   - id: deer-valley
     name: Deer Valley Resort
@@ -122,7 +122,7 @@ resorts:
     size:
       acres: {value: 4300, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
       vertical_ft: {value: 3040, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
-      lifts: {value: 36, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published, note: Includes 5 magic carpets.}
+      lifts: {value: 36, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published, note: "Includes 5 magic carpets."}
     elevation:
       base_ft: {value: 6530, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 9570, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
@@ -138,9 +138,9 @@ resorts:
     tier_a_criteria:
       - {criterion: heritage, rationale: "Crystal hosted the US Alpine Ski Championships in 1965 and 1968 and World Cup downhills in 1972, and its racing school was featured in Sports Illustrated in the early 1960s.", source_id: wikipedia-crystal-mountain-washington}
     size:
-      acres: {value: 2600, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: 2,300 lift serviced plus 300 inbounds backcountry.}
-      vertical_ft: {value: 3100, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: Lift served vertical is 2,592 ft per the same infobox.}
-      lifts: {value: 11, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: Sum of the infobox list (1 gondola, 9 chairs, 1 magic carpet).}
+      acres: {value: 2600, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: "2,300 lift serviced plus 300 inbounds backcountry."}
+      vertical_ft: {value: 3100, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: "Lift served vertical is 2,592 ft per the same infobox."}
+      lifts: {value: 11, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: "Sum of the infobox list (1 gondola, 9 chairs, 1 magic carpet)."}
     elevation:
       base_ft: {value: 3912, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 7012, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
