@@ -1,0 +1,80 @@
+# Career Map definitions (ROADMAP Section 6).
+# Every threshold, weight and assumption the pipeline or the UI uses lives here.
+# Loaded and validated by pipeline/config.py; unknown keys are an error.
+version: 1
+
+snow:
+  # A powder day is 6 in or more of new snow in 24 hours.
+  powder_day_min_in: 6
+  # A banner day is 12 in or more of new snow in 24 hours.
+  banner_day_min_in: 12
+  window_hours: 24
+
+density:
+  # Water content of new snow, percent (change in SWE / change in snow depth per storm).
+  # dry: below dry_max_pct; average: dry_max_pct to moist_min_pct; moist: above moist_min_pct.
+  dry_max_pct: 7
+  moist_min_pct: 12
+
+season:
+  # Season length is the median of the last N seasons' open to close, where data exists.
+  length_rule: median_open_to_close
+  lookback_seasons: 10
+
+display:
+  # Highest confidence wins, per field.
+  priority: [published, reported, estimated]
+  # resorts.geojson size_rank (1 to 5) from skiable acres: rank = 1 + number of breaks <= acres.
+  # Null acres gives rank 1. Display bucketing only, not a resort fact.
+  size_rank_acres_breaks: [500, 1500, 3000, 5000]
+
+reports:
+  # A field gains a Reported value only with this many approved reports; shown as a range only.
+  aggregation_min: 3
+
+staleness:
+  # Flag any record whose verified date is older than this.
+  max_age_months: 18
+
+matching:
+  # Tier A to OpenSkiMap de duplication: an OpenSkiMap area within radius_km of a Tier A
+  # base point (or containing it) whose name similarity (0 to 1) is at least
+  # name_similarity_min is the same resort.
+  radius_km: 5
+  name_similarity_min: 0.6
+  # Names this similar are the same resort even a little further away
+  # (large resorts whose OpenSkiMap centroid sits away from the base area).
+  strong_name_similarity_min: 0.9
+  strong_name_radius_km: 15
+
+professionalism:
+  # Score from 0 to 100, weighted from the components below.
+  # Alexandre sets these weights in Phase 4. Do not fill them in before then.
+  scale_min: 0
+  scale_max: 100
+  weights:
+    cert_pay_differential: null
+    paid_training_hours: null
+    examiner_trainer_presence: null
+    private_lesson_share: null
+    year_round_staff: null
+    clinic_access: null
+
+lucrativeness:
+  # Estimated season savings = season earnings minus (rent x months, food, transport,
+  # pass and gear offsets). Output as low, mid, high.
+  # Standard assumptions per the roadmap: mid cert level, standard full time hours,
+  # cheapest available employee housing.
+  # Alexandre sets these values in Phase 4. Do not fill them in before then.
+  assumptions:
+    cert_level: null
+    hours_per_week: null
+    season_months: null
+    housing_choice: null
+    food_monthly_usd: null
+    transport_monthly_usd: null
+    pass_offset_usd: null
+    gear_offset_usd: null
+  range_spread:
+    low: null
+    high: null

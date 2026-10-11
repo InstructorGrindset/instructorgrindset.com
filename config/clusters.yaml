@@ -1,0 +1,44 @@
+# Career Map clusters: the labor markets instructors choose between.
+# Loaded by pipeline/config.py and applied by pipeline/clusters.py.
+version: 1
+
+membership:
+  # Tier A resorts join the cluster named by their cluster_hint (unknown ids fail the build,
+  # and the resort's state must be listed in that cluster's states).
+  # Tier B resorts (OpenSkiMap) join the cluster of the nearest Tier A member within
+  # tier_b_radius_km whose cluster lists the resort's state.
+  # Anything else joins the per state fallback cluster: id "other-<state>", name "Other <State name>".
+  tier_b_radius_km: 80
+  require_state_match: true
+  fallback_id_prefix: other
+  fallback_name_prefix: Other
+
+polygon:
+  # Convex hull of member resort points buffered by buffer_km with rounded corners.
+  # A cluster may instead supply a hand drawn GeoJSON Polygon or MultiPolygon under `polygon`.
+  buffer_km: 15
+  arc_segments: 32
+  coordinate_decimals: 5
+
+# The first state listed is the canonical URL state.
+clusters:
+  - {id: i70-corridor, name: I 70 Corridor, states: [CO]}
+  - {id: roaring-fork, name: Roaring Fork Valley, states: [CO]}
+  - {id: northern-colorado, name: Northern Colorado, states: [CO]}
+  - {id: southwest-colorado, name: Southwest Colorado, states: [CO]}
+  - {id: wasatch, name: Wasatch, states: [UT]}
+  - {id: lake-tahoe, name: Lake Tahoe, states: [CA, NV]}
+  - {id: eastern-sierra, name: Eastern Sierra, states: [CA]}
+  - {id: southern-california, name: Southern California, states: [CA]}
+  - {id: tetons, name: Tetons, states: [WY, ID]}
+  - {id: wood-river, name: Wood River Valley, states: [ID]}
+  - {id: southwest-montana, name: Southwest Montana, states: [MT]}
+  - {id: northern-new-mexico, name: Northern New Mexico, states: [NM]}
+  - {id: cascades, name: Cascades, states: [WA, OR]}
+  - {id: inland-northwest, name: Inland Northwest, states: [ID, WA, MT]}
+  - {id: northern-vermont, name: Northern Vermont, states: [VT]}
+  - {id: southern-vermont, name: Southern Vermont, states: [VT]}
+  - {id: white-mountains, name: White Mountains, states: [NH]}
+  - {id: western-maine, name: Western Maine, states: [ME]}
+  - {id: appalachia, name: Appalachia, states: [WV, VA, NC, TN, MD]}
+  - {id: alaska, name: Alaska, states: [AK]}

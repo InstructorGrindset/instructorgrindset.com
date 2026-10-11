@@ -58,6 +58,11 @@ cp "$P/dist/chart.umd.min.js" "$VENDOR/chart.js/chart.umd.min.js" 2>/dev/null \
   || cp "$P/dist/chart.umd.js" "$VENDOR/chart.js/chart.umd.min.js"
 copy_license "$P" "$VENDOR/chart.js/LICENSE.md"
 
+# Source maps are not vendored; drop the references so browsers skip the fetch.
+for f in "$VENDOR/maplibre-gl/maplibre-gl.js" "$VENDOR/chart.js/chart.umd.min.js"; do
+  sed -i.bak -e 's#//\# sourceMappingURL=[^[:space:]]*##' "$f" && rm -f "$f.bak"
+done
+
 cat > "$VENDOR/VERSIONS.json" <<EOF
 {
   "maplibre-gl": "$MAPLIBRE_VERSION",
