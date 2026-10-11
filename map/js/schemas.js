@@ -168,13 +168,14 @@ export const ClimateFile = z.object({
   months: z.array(ClimateMonth).min(1).max(12),
 });
 
-/**
- * definitions.json: only the keys the UI reads are checked; everything else passes through.
- * Density cutoffs are read from snow.density (or snow) by name, see charts.js.
- */
+/** definitions.json: the keys the UI reads are checked; the rest passes through. */
 export const DefinitionsFile = z.object({
   snow: z.object({
     powder_day_in: z.number().positive().nullish(),
     banner_day_in: z.number().positive().nullish(),
+  }).passthrough().nullish(),
+  density: z.object({
+    dry_max_pct: z.number().positive().nullish(),
+    moist_min_pct: z.number().positive().nullish(),
   }).passthrough().nullish(),
 }).passthrough();

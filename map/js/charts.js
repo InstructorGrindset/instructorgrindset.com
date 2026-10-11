@@ -16,20 +16,16 @@ const INK = '#e7e9ee';
 const MUTED = '#9aa6b8';
 const GRID = 'rgba(255,255,255,0.07)';
 
-/** Thresholds from definitions.json, or nulls when it is absent. */
+/** Thresholds from definitions.json (contract: snow.{powder,banner}_day_in, density.{dry_max,moist_min}_pct), or nulls. */
 export function thresholds(defs) {
+  const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
   const snow = (defs && defs.snow) || {};
-  const pick = (obj, re) => {
-    if (!obj || typeof obj !== 'object') return null;
-    const k = Object.keys(obj).find((key) => re.test(key) && typeof obj[key] === 'number');
-    return k ? obj[k] : null;
-  };
-  const dens = typeof snow.density === 'object' && snow.density ? snow.density : snow;
+  const dens = (defs && defs.density) || {};
   return {
-    powder: typeof snow.powder_day_in === 'number' ? snow.powder_day_in : null,
-    banner: typeof snow.banner_day_in === 'number' ? snow.banner_day_in : null,
-    dryBelow: pick(dens, /dry/i),
-    moistAbove: pick(dens, /moist/i),
+    powder: num(snow.powder_day_in),
+    banner: num(snow.banner_day_in),
+    dryBelow: num(dens.dry_max_pct),
+    moistAbove: num(dens.moist_min_pct),
   };
 }
 

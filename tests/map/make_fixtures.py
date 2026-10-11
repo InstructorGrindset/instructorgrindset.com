@@ -253,9 +253,11 @@ def main():
                        "resort_count": sum(r["state"] == code for r in resorts)})
     write("states.json", {"version": 1, "generated_at": GENERATED_AT, "states": states})
     write("sources.json", {"version": 1, "generated_at": GENERATED_AT, "sources": SOURCES})
-    write("definitions.json", {"version": 1, "generated_at": GENERATED_AT, "snow": {
-        "powder_day_in": 6, "banner_day_in": 12,
-        "density": {"dry_max_pct": 7, "moist_min_pct": 12}}})
+    write("definitions.json", {"version": 1, "generated_at": GENERATED_AT,
+                               "snow": {"powder_day_in": 6, "banner_day_in": 12},
+                               "density": {"dry_max_pct": 7, "moist_min_pct": 12},
+                               "display": {"priority": ["published", "reported", "estimated"]},
+                               "reports": {"aggregation_min": 3}, "staleness": {"max_age_months": 18}})
     for row in RESORTS:
         if row[11]:
             write(f"climate/{row[0]}.json", climate_record(row))
