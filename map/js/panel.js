@@ -128,10 +128,10 @@ export function createPanel(root, index, { onCompare }) {
     out.push(stats([
       ['States', fmtInt(index.stateList.length)],
       ['Clusters', fmtInt(index.clusters.size)],
-      ['Ski areas', fmtInt(facilityCounts(index.resortList).ski_area)],
-      ['Indoor and training', fmtInt(index.resortList.length - facilityCounts(index.resortList).ski_area)],
+      ['Resorts', fmtInt(index.resortList.length)],
       ['Tier A', fmtInt(tierA)],
     ]));
+    out.push(h('p', { class: 'stats-note' }, `Includes ${facilityPhrase(facilityCounts(index.resortList))}.`));
     out.push(legend());
     out.push(section('States', h('ul', { class: 'nav-list' }, index.stateList.map((s) => h('li', null,
       navLink({ level: 'state', stateCode: s.code }, { class: 'nav-item' },
@@ -231,8 +231,8 @@ export function createPanel(root, index, { onCompare }) {
     return [
       breadcrumb(view),
       ...heading('Cluster', c.name),
-      stats([['States', joinAnd(stateNames)], ['Ski areas', fmtInt(counts.ski_area)],
-        ['Indoor and training', fmtInt(counts.indoor + counts.training_center)], ['Tier A', fmtInt(c.tier_a_count)]]),
+      stats([['States', joinAnd(stateNames)], ['Resorts', fmtInt(resorts.length)], ['Tier A', fmtInt(c.tier_a_count)]]),
+      h('p', { class: 'stats-note' }, `Includes ${facilityPhrase(counts)}.`),
       c.sources.length ? h('p', { class: 'fact-meta' }, 'Cluster sources: ', c.sources.map((id, i) => [i ? ', ' : '', sourceLink(id)])) : null,
       h('section', { class: 'panel-section' },
         h('div', { class: 'section-head' }, h('h3', null, 'Resorts'), resorts.length >= config.compare.min ? toggle : null),

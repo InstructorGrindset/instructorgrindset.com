@@ -47,7 +47,7 @@ const FACILITY_LAYER = {
   filter: ['!', IS_SKI_AREA],
   layout: {
     'icon-image': ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', 'tier']],
-    'icon-size': ['interpolate', ['linear'], ['zoom'], 3, 0.42, 7, 0.6, 11, 0.85],
+    'icon-size': ['interpolate', ['linear'], ['zoom'], 3, 0.6, 7, 0.8, 11, 1.05],
     'icon-allow-overlap': true,
     'icon-ignore-placement': true,
     'symbol-sort-key': ['get', 'tier_a'],

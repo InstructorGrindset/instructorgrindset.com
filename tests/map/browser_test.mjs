@@ -179,8 +179,9 @@ async function desktop(browser, base) {
   await mapIdle(page);
   check(await heading(page) === 'Fixture Front Range', 'cluster heading');
   const stats = await page.locator('.stats').first().innerText();
-  check(/Colorado/.test(stats) && /Ski areas\s*4/i.test(stats) && /Indoor and training\s*1/i.test(stats) && /Tier A\s*3/i.test(stats),
-    `cluster summary shows states, ski area and facility counts, Tier A count (${stats.replace(/\s+/g, ' ')})`);
+  const note = await page.locator('.stats-note').innerText();
+  check(/Colorado/.test(stats) && /Resorts\s*5/i.test(stats) && /Tier A\s*3/i.test(stats) && note === 'Includes 4 ski areas and 1 indoor facility.',
+    `cluster summary shows states, resort count with facilities, Tier A count (${stats.replace(/\s+/g, ' ')} | ${note})`);
   check(await page.locator('.resort-list .tier-facility', { hasText: 'Indoor ski facility' }).count() === 1, 'cluster list tags the indoor facility');
   check(await page.locator('.resort-list .tier-draft').count() === 1, 'Draft profile tag on draft Tier A resort');
   await shot(page, 'desktop-03-cluster.png');
