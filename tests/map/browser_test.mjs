@@ -493,6 +493,17 @@ async function realData(browser, base) {
         check(p === `/map/${rel}`, `real deep link /map/${rel} resolves to its own view (${await heading(page)}); ready ${tReady} ms, map idle ${tIdle} ms`);
       }
       if (pages.length) await shot(page, 'real-desktop-deep-link.png');
+      // An approved Tier A record, when the build has one.
+      const all = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'resorts.json'), 'utf8')).resorts;
+      const appr = all.find((r) => r.tier_a_status === 'approved' && pages.includes(`${r.state.toLowerCase()}/${r.cluster_id}/${r.id}/`));
+      if (appr) {
+        await page.goto(`${base}/map/${appr.state.toLowerCase()}/${appr.cluster_id}/${appr.id}/`);
+        await ready(page);
+        await mapIdle(page);
+        check(await page.locator('.tier-row .tier-approved').count() === 1, `real data: approved Tier A shows Approved (${appr.name})`);
+        check(await page.locator('.criteria .criterion').count() === appr.tier_a_criteria.length, 'real data: every criterion renders with a label');
+        await shot(page, 'real-desktop-approved.png');
+      } else log('  skip no approved Tier A stub in the real build yet');
     }
     w.assertClean();
     await page.close();
