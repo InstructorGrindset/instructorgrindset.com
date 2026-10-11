@@ -10,10 +10,10 @@ from pydantic import ValidationError
 
 from .config import MatchingDefs
 from .geo import distance_to_geometry_km
-from .names import name_similarity
+from .names import name_similarity, name_tokens
 from .openskimap import SkiArea
 from .schemas.common import Source
-from .schemas.raw import OwnershipFile, TierABatch, TierARecord
+from .schemas.raw import OwnershipFile, SourcesFile, TierABatch, TierARecord
 from .sources import SourceConflictError, SourceRegistry
 
 # Owner substrings that require a matching ownership file (ROADMAP Section 3).
@@ -104,6 +104,7 @@ def load_raw(raw_dir: Path, registry: SourceRegistry, repo_root: Path | None = N
     problem found.
     """
     errors: list[str] = []
+    shared_files = _yaml_files(raw_dir / "sources")
     tier_files = _yaml_files(raw_dir / "tier_a")
     own_files = _yaml_files(raw_dir / "ownership")
     base = repo_root or raw_dir.parent.parent
@@ -113,6 +114,21 @@ def load_raw(raw_dir: Path, registry: SourceRegistry, repo_root: Path | None = N
             return str(p.relative_to(base))
         except ValueError:
             return str(p)
+
+    for p in shared_files:
+        try:
+            shared = SourcesFile.model_validate(_read_yaml(p))
+        except yaml.YAMLError as e:
+            errors.append(f"{rel(p)}: YAML parse error: {e}")
+            continue
+        except ValidationError as e:
+            errors.extend(f"{rel(p)}: {'.'.join(map(str, m['loc']))}: {m['msg']}" for m in e.errors())
+            continue
+        for src in shared.sources:
+            try:
+                registry.add(src, rel(p))
+            except SourceConflictError as e:
+                errors.append(f"{rel(p)}: {e}")
 
     raws: dict[Path, Any] = {}
     for p in tier_files + own_files:
@@ -162,10 +178,21 @@ def verified_operator(owner_value: str | None) -> str | None:
     return None
 
 
-def ownership_cross_check(inputs: RawInputs) -> tuple[list[str], list[str]]:
-    """(errors, warnings). A Tier A resort owned by Vail or Alterra must be listed
-    in that operator's ownership file; a listed Tier A candidate without a Tier A
-    record is a warning."""
+def _entry_matches(entry, rec: TierARecord) -> bool:
+    if entry.resort_id:
+        return entry.resort_id == rec.id
+    return entry.state == rec.state and name_similarity(entry.name, rec.name) >= OWNERSHIP_NAME_MIN
+
+
+def ownership_cross_check(inputs: RawInputs, missing_record: str = "warn") -> tuple[list[str], list[str]]:
+    """(errors, warnings).
+
+    * A Tier A resort whose owner names Vail or Alterra must be listed in that
+      operator's ownership file (error).
+    * Every resort listed in an ownership file needs a Tier A record (ROADMAP
+      Section 3, operator compensation). ``missing_record`` is "warn" while
+      research is in progress, "fail" once it is complete.
+    """
     errors: list[str] = []
     warnings: list[str] = []
     files_by_op: dict[str, list[LoadedOwnership]] = {}
@@ -174,8 +201,8 @@ def ownership_cross_check(inputs: RawInputs) -> tuple[list[str], list[str]]:
         if key:
             files_by_op.setdefault(key, []).append(lo)
 
-    matched_entries: set[tuple[str, str, str]] = set()
-    for batch, rec in inputs.records:
+    records = [r for _, r in inputs.records]
+    for rec in records:
         key = verified_operator(rec.owner.value if rec.owner else None)
         if key is None:
             continue
@@ -186,29 +213,18 @@ def ownership_cross_check(inputs: RawInputs) -> tuple[list[str], list[str]]:
                 f"for {VERIFIED_OPERATORS[key]} exists in data/raw/ownership/"
             )
             continue
-        hit = None
-        for lo in files:
-            for entry in lo.file.resorts:
-                if entry.state == rec.state and name_similarity(entry.name, rec.name) >= OWNERSHIP_NAME_MIN:
-                    hit = (lo.file.operator, entry.name, entry.state)
-                    break
-            if hit:
-                break
-        if hit is None:
+        if not any(_entry_matches(e, rec) for lo in files for e in lo.file.resorts):
             errors.append(
                 f"Tier A resort '{rec.id}' ({rec.name}, {rec.state}) is owned by {rec.owner.value} "
                 f"but is missing from the {VERIFIED_OPERATORS[key]} ownership file"
             )
-        else:
-            matched_entries.add(hit)
 
     for lo in inputs.ownership:
         for entry in lo.file.resorts:
-            if entry.tier_a_candidate and (lo.file.operator, entry.name, entry.state) not in matched_entries:
-                warnings.append(
-                    f"{lo.file.operator}: {entry.name} ({entry.state}) is marked tier_a_candidate "
-                    f"but has no Tier A record"
-                )
+            if not any(_entry_matches(entry, rec) for rec in records):
+                msg = (f"{lo.file.operator}: {entry.name} ({entry.state}) is in the ownership file "
+                       f"but has no Tier A record")
+                (errors if missing_record == "fail" else warnings).append(msg)
     return errors, warnings
 
 
@@ -216,23 +232,58 @@ def ownership_cross_check(inputs: RawInputs) -> tuple[list[str], list[str]]:
 class MatchResult:
     by_tier_a: dict[str, list[SkiArea]]
     unmatched: list[SkiArea]
+    # Tier A id -> OpenSkiMap names listed in openskimap_names that were not found.
+    missing_names: dict[str, list[str]] = field(default_factory=dict)
+    # Tier A id -> other areas that passed the rule but were left as Tier B (single best match).
+    runners_up: dict[str, list[SkiArea]] = field(default_factory=dict)
+
+
+def _norm(name: str) -> str:
+    return " ".join(name_tokens(name))
 
 
 def match_openskimap(records: Iterable[TierARecord], areas: Iterable[SkiArea], rule: MatchingDefs) -> MatchResult:
     """Pair OpenSkiMap areas with Tier A records so Tier A is never duplicated.
 
-    An area matches a Tier A record when it lies within ``radius_km`` (0 when the
-    Tier A point is inside the area polygon) and names are at least
-    ``name_similarity_min`` alike, or within ``strong_name_radius_km`` with
-    names at least ``strong_name_similarity_min`` alike. Each area goes to its
-    best scoring record; a record can absorb several areas.
+    Only ``facility_type: ski_area`` records take part, so a training center
+    inside a resort never takes the resort's area.
+
+    * A record with ``openskimap_names`` absorbs exactly the areas with those
+      names that lie within ``strong_name_radius_km``.
+    * Any other record absorbs only its single best area: within ``radius_km``
+      (0 when the Tier A point is inside the area polygon) with names at least
+      ``name_similarity_min`` alike, or within ``strong_name_radius_km`` with
+      names at least ``strong_name_similarity_min`` alike. Each area goes to
+      the record it suits best; highest name similarity wins, then distance.
     """
-    records = list(records)
+    records = [r for r in records if r.facility_type == "ski_area"]
+    areas = list(areas)
     by: dict[str, list[SkiArea]] = {r.id: [] for r in records}
-    unmatched: list[SkiArea] = []
-    for area in areas:
+    taken: set[int] = set()
+    missing: dict[str, list[str]] = {}
+
+    for r in records:
+        if not r.openskimap_names:
+            continue
+        for wanted in r.openskimap_names:
+            hits = [
+                i for i, a in enumerate(areas)
+                if i not in taken and _norm(a.name) == _norm(wanted)
+                and distance_to_geometry_km(r.lat, r.lon, a.geometry, (a.lon, a.lat)) <= rule.strong_name_radius_km
+            ]
+            if not hits:
+                missing.setdefault(r.id, []).append(wanted)
+            for i in hits:
+                taken.add(i)
+                by[r.id].append(areas[i])
+
+    auto = [r for r in records if not r.openskimap_names]
+    candidates: dict[str, list[tuple[float, float, int]]] = {r.id: [] for r in auto}
+    for i, area in enumerate(areas):
+        if i in taken:
+            continue
         best: tuple[float, float, str] | None = None
-        for r in records:
+        for r in auto:
             d = distance_to_geometry_km(r.lat, r.lon, area.geometry, (area.lon, area.lat))
             if d > max(rule.radius_km, rule.strong_name_radius_km):
                 continue
@@ -240,12 +291,19 @@ def match_openskimap(records: Iterable[TierARecord], areas: Iterable[SkiArea], r
             ok = (d <= rule.radius_km and sim >= rule.name_similarity_min) or (
                 d <= rule.strong_name_radius_km and sim >= rule.strong_name_similarity_min
             )
-            if ok:
-                cand = (-sim, d, r.id)
-                if best is None or cand < best:
-                    best = cand
-        if best is None:
-            unmatched.append(area)
-        else:
-            by[best[2]].append(area)
-    return MatchResult(by_tier_a=by, unmatched=unmatched)
+            if ok and (best is None or (-sim, d, r.id) < best):
+                best = (-sim, d, r.id)
+        if best is not None:
+            candidates[best[2]].append((best[0], best[1], i))
+
+    runners_up: dict[str, list[SkiArea]] = {}
+    for r in auto:
+        ranked = sorted(candidates[r.id])
+        if ranked:
+            taken.add(ranked[0][2])
+            by[r.id].append(areas[ranked[0][2]])
+        if len(ranked) > 1:
+            runners_up[r.id] = [areas[i] for _, _, i in ranked[1:]]
+
+    unmatched = [a for i, a in enumerate(areas) if i not in taken]
+    return MatchResult(by_tier_a=by, unmatched=unmatched, missing_names=missing, runners_up=runners_up)

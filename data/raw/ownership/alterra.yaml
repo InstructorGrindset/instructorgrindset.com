@@ -6,6 +6,8 @@ verified_date: 2026-10-11
 # cross checked against each resort's own Wikipedia infobox (Owner field). Re verify against
 # Alterra's own destinations page before Alexandre approves the list (CLAUDE.md rule).
 # Canadian destinations (Blue Mountain ON, Tremblant QC) and heli operations in BC are excluded.
+# Owner decision 2026-10-11: every Alterra US resort is Tier A (operator_compensation), so all
+# entries are tier_a_candidate: true.
 sources:
   - id: wikipedia-alterra-mountain-company
     url: https://en.wikipedia.org/wiki/Alterra_Mountain_Company
@@ -34,48 +36,48 @@ resorts:
   - name: June Mountain
     state: CA
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Smaller sister area to Mammoth. No fetched source supports a Tier A criterion. Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null
   - name: Bear Mountain
     state: CA
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Southern California regional hill (Big Bear Mountain Resort). Wikipedia claims it built the first freestyle terrain park in North America (Outlaw, 1992), but the claim is uncited, so heritage is not established. Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null
   - name: Snow Summit
     state: CA
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Southern California regional hill serving the Los Angeles day market (Big Bear Mountain Resort). No fetched source supports a Tier A criterion.
+    tier_a_candidate: true
+    exclusion_reason: null
   - name: Snow Valley Mountain Resort
     state: CA
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Southern California regional hill acquired in 2023 and run with Big Bear Mountain Resort. No fetched source supports a Tier A criterion.
+    tier_a_candidate: true
+    exclusion_reason: null
   # Utah
   - {name: Deer Valley Resort, state: UT, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
   - name: Solitude Mountain Resort
     state: UT
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Destination resort, but the fetched Wikipedia article supports no Tier A criterion (it notes only 2019 World Championships ski cross and snowboard cross events). Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null
   # Washington
   - {name: Crystal Mountain, state: WA, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
   # Idaho
   - name: Schweitzer Mountain
     state: ID
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Destination resort, but no fetched source supports a Tier A criterion. Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null
   # Vermont
   - {name: Stratton Mountain Resort, state: VT, source_id: wikipedia-alterra-mountain-company, tier_a_candidate: true, exclusion_reason: null}
   - name: Sugarbush Resort
     state: VT
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Destination resort, but no fetched source supports a Tier A criterion. Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null
   # West Virginia
   - name: Snowshoe Mountain
     state: WV
     source_id: wikipedia-alterra-mountain-company
-    tier_a_candidate: false
-    exclusion_reason: Destination resort for the Mid Atlantic, but no fetched source supports a Tier A criterion. Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null

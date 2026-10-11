@@ -10,12 +10,19 @@ from typing import Literal, Optional
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 
 from .common import Latitude, Longitude, Slug, Source, SourcedString, StateCode, StrictModel, check_source_ref
-from .resort import Clients, Elevation, Fit, Season, Size, Terrain, TierACriterion
+from .resort import (
+    Approval, Clients, Elevation, FacilityType, Fit, Season, Size, Terrain, TierACriterion, TierAStatus,
+    check_approval,
+)
 
 
 class TierARecord(StrictModel):
     id: Slug
     name: str = Field(min_length=1)
+    facility_type: FacilityType = "ski_area"
+    # Overrides the batch status for this record. Approved records need `approval`.
+    tier_a_status: Optional[TierAStatus] = None
+    approval: Optional[Approval] = None
     state: StateCode
     owner: Optional[SourcedString] = None
     lat: Latitude
@@ -29,6 +36,9 @@ class TierARecord(StrictModel):
     terrain: Terrain = Field(default_factory=Terrain)
     fit: Fit = Field(default_factory=Fit)
     clients: Clients = Field(default_factory=Clients)
+    # OpenSkiMap area names this record stands for when it covers several mapped areas
+    # (Palisades Tahoe: Olympic Valley and Alpine Meadows). Empty: the single best match.
+    openskimap_names: list[str] = Field(default_factory=list)
 
     @field_validator("location_source_id")
     @classmethod
@@ -47,26 +57,35 @@ class TierABatch(StrictModel):
     def _unique_ids(self) -> "TierABatch":
         _require_unique([s.id for s in self.sources], "source id")
         _require_unique([r.id for r in self.resorts], "resort id")
+        problems = []
+        for r in self.resorts:
+            try:
+                check_approval(self.status_of(r), r.approval, f"resort '{r.id}'")
+            except ValueError as e:
+                problems.append(str(e))
+        if problems:
+            raise ValueError("; ".join(problems))
         return self
+
+    def status_of(self, record: TierARecord) -> str:
+        """Effective status: the record's own tier_a_status, else the batch status."""
+        return record.tier_a_status or self.status
 
 
 class OwnershipEntry(StrictModel):
     name: str = Field(min_length=1)
     state: StateCode
     source_id: Slug
-    tier_a_candidate: bool
+    # Optional exact link to the Tier A record; otherwise matched by state and name.
+    resort_id: Optional[Slug] = None
+    # Kept for history; every Vail and Alterra US resort is Tier A (operator compensation).
+    tier_a_candidate: Optional[bool] = None
     exclusion_reason: Optional[str] = None
 
     @field_validator("source_id")
     @classmethod
     def _source_defined(cls, v: str, info: ValidationInfo) -> str:
         return check_source_ref(v, info)
-
-    @model_validator(mode="after")
-    def _reason(self) -> "OwnershipEntry":
-        if not self.tier_a_candidate and not (self.exclusion_reason or "").strip():
-            raise ValueError(f"{self.name}: exclusion_reason is required when tier_a_candidate is false")
-        return self
 
 
 class OwnershipFile(StrictModel):
@@ -87,3 +106,14 @@ def _require_unique(items: list[str], what: str) -> None:
     dupes = sorted({i for i in items if i in seen or seen.add(i)})
     if dupes:
         raise ValueError(f"duplicate {what}: {dupes}")
+
+
+class SourcesFile(StrictModel):
+    """data/raw/sources/*.yaml: shared sources any research file may cite."""
+
+    sources: list[Source] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def _unique(self) -> "SourcesFile":
+        _require_unique([s.id for s in self.sources], "source id")
+        return self

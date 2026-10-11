@@ -10,9 +10,10 @@ from .common import (
     check_source_ref,
 )
 from .geo import Cluster, Geometry, State
-from .raw import OwnershipEntry, OwnershipFile, TierABatch, TierARecord
+from .raw import OwnershipEntry, OwnershipFile, SourcesFile, TierABatch, TierARecord
 from .records import Commute, HousingSite, PayRecord, Report
 from .resort import (
+    Approval,
     Career,
     Clients,
     Editorial,
@@ -33,7 +34,7 @@ except ImportError:  # pragma: no cover - depends on the climate module existing
     ClimateMonth = None  # type: ignore[assignment]
 
 __all__ = [
-    "Career", "Clients", "Elevation", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
+    "Approval", "Career", "Clients", "Elevation", "SourcesFile", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
     "Fit", "Geometry", "HousingSite", "Lucrativeness", "OwnershipEntry", "OwnershipFile",
     "PayRecord", "Report", "Resort", "Season", "Size", "Source", "Sourced", "SourcedMonthDay",
     "SourcedNumber", "SourcedString", "State", "StrictModel", "Terrain", "TierABatch",

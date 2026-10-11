@@ -188,9 +188,14 @@ export async function loadAll() {
       },
     }));
   }
+  // facility_type: resorts.json is authoritative (resorts.geojson may lag behind).
   resortPoints = resortPoints.map((f) => ({
     ...f,
-    properties: { ...f.properties, tier_a: f.properties.tier === 'A' ? 1 : 0 },
+    properties: {
+      ...f.properties,
+      tier_a: f.properties.tier === 'A' ? 1 : 0,
+      facility_type: resorts.get(f.properties.id).facility_type || f.properties.facility_type || 'ski_area',
+    },
   }));
 
   const sources = new Map();
@@ -246,6 +251,20 @@ export function loadClimate(resortId) {
     climateCache.set(resortId, p);
   }
   return climateCache.get(resortId);
+}
+
+/** Counts by facility type for a list of resorts. */
+export function facilityCounts(list) {
+  const out = { ski_area: 0, indoor: 0, training_center: 0, total: list.length };
+  for (const r of list) out[r.facility_type] = (out[r.facility_type] || 0) + 1;
+  return out;
+}
+
+/** Filter key used by the facility filter: all | ski_area | facility (indoor and training). */
+export function matchesFilter(resort, filter) {
+  if (!filter || filter === 'all') return true;
+  if (filter === 'ski_area') return resort.facility_type === 'ski_area';
+  return resort.facility_type === 'indoor' || resort.facility_type === 'training_center';
 }
 
 /** Resorts of a cluster: Tier A first, then by size, then by name. */

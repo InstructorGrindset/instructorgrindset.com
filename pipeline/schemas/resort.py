@@ -18,7 +18,12 @@ from .common import (
     check_source_ref,
 )
 
-Criterion = Literal["diehard", "luxury", "athlete_development", "heritage"]
+import datetime as dt
+
+Criterion = Literal[
+    "diehard", "luxury", "athlete_development", "heritage", "operator_compensation", "year_round_training",
+]
+FacilityType = Literal["ski_area", "indoor", "training_center"]
 Tier = Literal["A", "B"]
 TierAStatus = Literal["draft", "approved"]
 EditorialStatus = Literal["draft", "reviewed"]
@@ -33,6 +38,14 @@ class TierACriterion(StrictModel):
     @classmethod
     def _source_defined(cls, v: str, info: ValidationInfo) -> str:
         return check_source_ref(v, info)
+
+
+class Approval(StrictModel):
+    """Who approved a Tier A record, and when (ROADMAP Section 3 gate)."""
+
+    by: str = Field(min_length=1)
+    date: dt.date
+    note: Optional[str] = None
 
 
 class Size(StrictModel):
@@ -122,8 +135,10 @@ class Resort(StrictModel):
     id: Slug
     name: str = Field(min_length=1)
     tier: Tier
+    facility_type: FacilityType = "ski_area"
     tier_a_criteria: list[TierACriterion] = Field(default_factory=list)
     tier_a_status: Optional[TierAStatus] = None
+    approval: Optional[Approval] = None
     owner: Optional[SourcedString] = None
     lat: Latitude
     lon: Longitude
@@ -160,15 +175,28 @@ class Resort(StrictModel):
                 raise ValueError("a Tier A resort needs at least one sourced tier_a_criteria entry")
             if self.tier_a_status is None:
                 raise ValueError("a Tier A resort needs tier_a_status (draft or approved)")
+            check_approval(self.tier_a_status, self.approval)
         else:
             if self.tier_a_status is not None:
                 raise ValueError("tier_a_status must be null for Tier B")
+            if self.approval is not None:
+                raise ValueError("approval must be null for Tier B")
+            if self.facility_type != "ski_area":
+                raise ValueError("Tier B records are ski_area facilities")
         if self.editorial is not None and self.editorial.status != "reviewed":
             raise ValueError("only reviewed editorial may be emitted")
         missing = sorted(referenced_source_ids(self) - set(self.sources))
         if missing:
             raise ValueError(f"sources is missing referenced ids: {missing}")
         return self
+
+
+def check_approval(status: str, approval: Optional[Approval], label: str = "") -> None:
+    prefix = f"{label}: " if label else ""
+    if status == "approved" and approval is None:
+        raise ValueError(f"{prefix}an approved Tier A record needs an approval block {{by, date, note}}")
+    if status != "approved" and approval is not None:
+        raise ValueError(f"{prefix}approval is set but tier_a_status is {status}; set tier_a_status: approved or remove approval")
 
 
 def referenced_source_ids(resort: Resort) -> set[str]:

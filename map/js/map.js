@@ -13,6 +13,48 @@ function radius(extra = 0) {
 
 const fs = (key) => ['boolean', ['feature-state', key], false];
 
+const IS_SKI_AREA = ['==', ['coalesce', ['get', 'facility_type'], 'ski_area'], 'ski_area'];
+
+// Indoor facilities draw as rounded squares, training centers as diamonds.
+// Inline SVG rasterized into map images, so no glyph or sprite server is needed.
+const SHAPES = {
+  indoor: '<rect x="7" y="7" width="26" height="26" rx="6"/>',
+  training_center: '<path d="M20 3 L37 20 L20 37 L3 20 Z"/>',
+};
+const TIER_STYLE = {
+  A: { fill: C.tierA, stroke: '#fff4dc' },
+  B: { fill: C.tierB, stroke: C.background },
+};
+
+function facilityImages() {
+  const out = [];
+  for (const [type, shape] of Object.entries(SHAPES)) {
+    for (const [tier, st] of Object.entries(TIER_STYLE)) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="${st.fill}" stroke="${st.stroke}" stroke-width="3" stroke-linejoin="round">${shape}</g></svg>`;
+      out.push(new Promise((resolve) => {
+        const img = new Image(40, 40);
+        img.onload = () => resolve({ id: `fac-${type}-${tier}`, img });
+        img.onerror = () => resolve(null);
+        img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      }));
+    }
+  }
+  return Promise.all(out).then((list) => list.filter(Boolean));
+}
+
+const FACILITY_LAYER = {
+  id: 'resorts-facility', type: 'symbol', source: 'resorts',
+  filter: ['!', IS_SKI_AREA],
+  layout: {
+    'icon-image': ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', 'tier']],
+    'icon-size': ['interpolate', ['linear'], ['zoom'], 3, 0.42, 7, 0.6, 11, 0.85],
+    'icon-allow-overlap': true,
+    'icon-ignore-placement': true,
+    'symbol-sort-key': ['get', 'tier_a'],
+  },
+  paint: { 'icon-opacity': ['case', fs('dim'), 0.3, 1] },
+};
+
 function buildStyle(index) {
   return {
     version: 8,
@@ -76,7 +118,7 @@ function buildStyle(index) {
         },
       },
       {
-        id: 'resorts', type: 'circle', source: 'resorts',
+        id: 'resorts', type: 'circle', source: 'resorts', filter: IS_SKI_AREA,
         layout: { 'circle-sort-key': ['get', 'tier_a'] },
         paint: {
           'circle-radius': radius(),
@@ -197,7 +239,7 @@ export function createMap(container, index, { onPick, getPadding }) {
   function pick(point) {
     const pad = 6;
     const box = [[point.x - pad, point.y - pad], [point.x + pad, point.y + pad]];
-    const r = map.queryRenderedFeatures(box, { layers: ['resorts'] });
+    const r = map.queryRenderedFeatures(box, { layers: resortLayers() });
     if (r.length) {
       // Prefer the nearest Tier A, then any.
       const f = r.find((x) => x.properties.tier === 'A') || r[0];
@@ -251,7 +293,17 @@ export function createMap(container, index, { onPick, getPadding }) {
     if (t) onPick(t, current);
   });
 
-  map.on('load', () => {
+  let filter = 'all';
+  function resortLayers() { return ['resorts', 'resorts-facility'].filter((id) => map.getLayer(id)); }
+  function applyFilter() {
+    if (map.getLayer('resorts')) map.setLayoutProperty('resorts', 'visibility', filter === 'facility' ? 'none' : 'visible');
+    if (map.getLayer('resorts-facility')) map.setLayoutProperty('resorts-facility', 'visibility', filter === 'ski_area' ? 'none' : 'visible');
+  }
+
+  map.on('load', async () => {
+    for (const { id, img } of await facilityImages()) if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 });
+    map.addLayer(FACILITY_LAYER);
+    applyFilter();
     loaded = true;
     // Start the compact attribution collapsed; the (i) button opens it.
     const attrib = container.querySelector('.maplibregl-ctrl-attrib');
@@ -268,6 +320,8 @@ export function createMap(container, index, { onPick, getPadding }) {
       fitView(view, animate);
     },
     refit() { if (loaded && current) fitView(current, false); },
+    /** 'all' | 'ski_area' | 'facility' */
+    setFilter(next) { filter = next; if (loaded) applyFilter(); },
     resize() { map.resize(); },
   };
 }

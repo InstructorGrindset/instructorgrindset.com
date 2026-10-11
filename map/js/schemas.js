@@ -17,8 +17,15 @@ export const sourced = (value) => z.object({
 
 const Envelope = { version: z.number().int(), generated_at: z.string() };
 
+export const FACILITY_TYPES = ['ski_area', 'indoor', 'training_center'];
+/** Missing until the build emits it; treated as a ski area. */
+const FacilityType = z.enum(FACILITY_TYPES).nullish().transform((v) => v ?? 'ski_area');
+
+export const CRITERIA = ['diehard', 'luxury', 'athlete_development', 'heritage', 'operator_compensation', 'year_round_training'];
+
 export const TierACriterion = z.object({
-  criterion: z.enum(['diehard', 'luxury', 'athlete_development', 'heritage']),
+  // A criterion added to the contract later still renders (humanized) instead of dropping the resort.
+  criterion: z.string().min(1),
   rationale: z.string().nullish(),
   source_id: Slug,
 });
@@ -31,6 +38,9 @@ export const Resort = z.object({
   tier: z.enum(['A', 'B']),
   tier_a_criteria: z.array(TierACriterion).nullish().transform((v) => v ?? []),
   tier_a_status: z.enum(['draft', 'approved']).nullish().transform((v) => v ?? null),
+  approval: z.object({ by: z.string().nullish(), date: z.string().nullish(), note: z.string().nullish() })
+    .nullish().transform((v) => v ?? null),
+  facility_type: FacilityType,
   owner: sourced(z.string()),
   lat: z.number().min(-90).max(90),
   lon: z.number().min(-180).max(180),
@@ -105,6 +115,7 @@ export const ResortFeature = z.object({
     id: Slug,
     name: z.string(),
     tier: z.enum(['A', 'B']),
+    facility_type: z.enum(FACILITY_TYPES).nullish(),
     cluster_id: z.string(),
     state: z.string(),
     acres: z.number().nullish(),
