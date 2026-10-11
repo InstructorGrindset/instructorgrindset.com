@@ -93,6 +93,51 @@
     }
     .cta:active{ transform:scale(.99) }
 
+    /* ── Quick setup ── */
+    .content h2{text-align:center}
+    .ls{margin:1.5rem 0 2rem}
+    .ls-intro{text-align:center;color:var(--muted);max-width:60ch;margin:0 auto 1rem}
+    .ls-progress-row{display:flex;align-items:center;gap:.75rem;max-width:720px;margin:0 auto 1.25rem;font-size:.9rem;color:var(--muted)}
+    .ls-progress{flex:1;height:8px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}
+    .ls-progress-fill{height:100%;width:0;background:var(--cta);border-radius:999px;transition:width .3s ease}
+    .ls-steps{list-style:none;padding:0;margin:0 auto;max-width:860px;display:flex;flex-direction:column;gap:.9rem}
+    .ls-step{display:grid;grid-template-columns:44px 1fr;gap:1rem;background:var(--panel-bg);border:1px solid var(--line);border-radius:.8rem;padding:1rem 1.15rem}
+    .ls-step.is-done{border-color:rgba(196,137,42,.45)}
+    .ls-num{width:40px;height:40px;border-radius:50%;border:2px solid var(--cta);color:var(--cta);display:grid;place-items:center;font-weight:800}
+    .ls-step.is-done .ls-num{background:var(--cta);color:var(--cta-ink)}
+    .ls-body{min-width:0}
+    .ls-body p{margin:.35rem 0 .6rem;color:var(--muted)}
+    .ls-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+    .ls-title{margin:.45rem 0 0;font-size:1.1rem}
+    .ls-done{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--muted);cursor:pointer;min-height:40px}
+    .ls-done input{width:18px;height:18px;accent-color:var(--cta)}
+    .ll-field{display:flex;flex-direction:column;gap:.3rem}
+    .ll-field label{font-weight:600;font-size:.9rem;color:var(--ink)}
+    .ll-count{font-weight:400;color:var(--muted);font-size:.8rem;margin-left:.25rem}
+    .ll-field input,.ll-field textarea{width:100%;background:rgba(0,0,0,.3);color:var(--ink);border:1px solid var(--line);border-radius:.5rem;padding:.55rem .7rem;font:inherit;font-size:.9rem;resize:vertical}
+    .ll-field input:focus,.ll-field textarea:focus{outline:2px solid var(--cta);outline-offset:1px;border-color:var(--cta)}
+    .ll-field--name{max-width:320px;margin-bottom:.9rem}
+    .ll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:.8rem}
+    .ll-link{background:none;border:0;padding:.5rem 0;color:var(--accent);font:inherit;font-size:.85rem;cursor:pointer;text-decoration:underline;min-height:40px}
+    .ll-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin:.4rem 0}
+    .ll-status{min-height:1.2rem;font-size:.88rem;color:var(--cta);margin:.3rem 0}
+    .ll-preview summary,.ll-manual summary{cursor:pointer;color:var(--accent);font-size:.9rem;padding:.4rem 0}
+    .ll-preview textarea{margin-top:.5rem;min-height:14rem}
+    .ll-phone{margin:.2rem 0 .6rem;padding-left:1.2rem;color:var(--muted)}
+    .ll-phone li{margin:.25rem 0}
+    .ll-get{margin:2rem 0}
+    .ll-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.8rem;max-width:960px;margin:0 auto}
+    .ll-card{background:var(--panel-bg);border:1px solid var(--line);border-radius:.8rem;padding:1rem 1.1rem}
+    .ll-card h3{margin:0 0 .35rem;font-size:1.05rem}
+    .ll-card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .ll-video{margin-top:2rem}
+    .ll-manual{margin-top:1rem}
+    .ll-manual summary{font-size:1rem;font-weight:600}
+    @media(max-width:960px){ .content > header{padding-top:2.75rem} }
+    @media(max-width:480px){
+      .ls-step{grid-template-columns:1fr;gap:.4rem;padding:.9rem}
+      .ls-num{width:34px;height:34px}
+    }
   </style>
 </head>
 <body>
@@ -112,172 +157,343 @@
           <p class="lede">Perfect lesson recollection even for clients from the distant past is now possible with digital lesson logging. Impress guests with perfect lesson recollection and analyze your season. All organized in a searchable client index made free with google sheets and forms.</p>
         </header>
 
-        <!-- Video -->
-        <div class="vid" style="margin-bottom:1rem">
-          <iframe
-            src="https://www.youtube.com/embed/nIF8quNAW0I?rel=0&modestbranding=1&playsinline=1"
-            title="Lesson Logging &amp; Analytics — Video Walkthrough"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        </div>
+        <!-- Quick setup -->
+        <section class="ls" aria-labelledby="setup-title">
+          <h2 id="setup-title">Quick setup</h2>
+          <p class="ls-intro">Build your own lesson log in about five minutes. The script runs in your Google account and creates the files there. Nothing is sent to me.</p>
 
-        <!-- Written Guide -->
-        <section aria-labelledby="guide-title">
-          <h2 id="guide-title" style="text-align:center;margin:.5rem 0 1.25rem">Written Guide</h2>
+          <div class="ls-progress-row">
+            <span id="ls-progress-text">0 of 8 steps done</span>
+            <div class="ls-progress" id="ls-progress" role="progressbar" aria-label="Setup progress" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><div class="ls-progress-fill" id="ls-progress-fill"></div></div>
+            <button type="button" class="ll-link" id="ls-reset">Reset</button>
+          </div>
 
-          <!-- 00:00 -->
-          <article class="panel">
-            <span class="ts">00:00 — Introduction to Tutorial</span>
-            <p>
-              In this guide, you’ll learn how to create your own client index using Google Sheets and Google Forms. You’ll build a searchable client index and a simple lesson log so you can record sessions quickly on the go. This system will help you remember what you did with specific clients and identify VIPs.
-            </p>
-          </article>
+          <ol class="ls-steps">
+            <li class="ls-step" data-step="1">
+              <div class="ls-num" aria-hidden="true">1</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Customize your lists</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>These become the dropdowns in your lesson form. One option per line. Leave a list empty to make that question a short answer instead.</p>
+                <div class="ll-field ll-field--name">
+                  <label for="ll-name">Name of your log</label>
+                  <input id="ll-name" type="text" autocomplete="off">
+                </div>
+                <div class="ll-grid">
+                  <div class="ll-field">
+                    <label for="ll-instructors">Instructors <span class="ll-count" id="ll-instructors-count"></span></label>
+                    <textarea id="ll-instructors" rows="5" spellcheck="false"></textarea>
+                  </div>
+                  <div class="ll-field">
+                    <label for="ll-disciplines">Disciplines <span class="ll-count" id="ll-disciplines-count"></span></label>
+                    <textarea id="ll-disciplines" rows="5" spellcheck="false"></textarea>
+                  </div>
+                  <div class="ll-field">
+                    <label for="ll-levels">Levels <span class="ll-count" id="ll-levels-count"></span></label>
+                    <textarea id="ll-levels" rows="5" spellcheck="false"></textarea>
+                  </div>
+                  <div class="ll-field">
+                    <label for="ll-lessonTypes">Lesson types <span class="ll-count" id="ll-lessonTypes-count"></span></label>
+                    <textarea id="ll-lessonTypes" rows="5" spellcheck="false"></textarea>
+                  </div>
+                  <div class="ll-field">
+                    <label for="ll-technicalFocus">Technical focus <span class="ll-count" id="ll-technicalFocus-count"></span></label>
+                    <textarea id="ll-technicalFocus" rows="5" spellcheck="false"></textarea>
+                  </div>
+                  <div class="ll-field">
+                    <label for="ll-behaviorFocus">Behavior focus <span class="ll-count" id="ll-behaviorFocus-count"></span></label>
+                    <textarea id="ll-behaviorFocus" rows="5" spellcheck="false"></textarea>
+                  </div>
+                  <div class="ll-field">
+                    <label for="ll-terrain">Terrain / areas <span class="ll-count" id="ll-terrain-count"></span></label>
+                    <textarea id="ll-terrain" rows="5" spellcheck="false"></textarea>
+                  </div>
+                </div>
+                <button type="button" class="ll-link" id="ll-reset-lists">Reset lists to defaults</button>
 
-          <!-- 01:07 -->
-          <article class="panel">
-            <span class="ts">01:07 — Creating Google Sheets</span>
-            <p>
-              Start by opening a new Google Sheet and naming it <em>lesson log</em>. Inside that file, create two tabs: one called <strong>lesson log</strong> and one called <strong>client index</strong>. Once those are ready, you’ll build a Google Form that automatically feeds lesson entries into the sheet.
-            </p>
-          </article>
+              </div>
+            </li>
+            <li class="ls-step" data-step="2">
+              <div class="ls-num" aria-hidden="true">2</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Copy the setup script</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>The script has your lists built in.</p>
+                <div class="ll-actions">
+                  <button type="button" class="cta" id="ll-copy">Copy setup script</button>
+                  <button type="button" class="cta alt" id="ll-download">Download .gs file</button>
+                </div>
+                <p class="ll-status" id="ll-copy-status" role="status" aria-live="polite"></p>
+                <details class="ll-preview">
+                  <summary>Preview the script</summary>
+                  <textarea class="copyarea" id="ll-preview" readonly aria-label="Setup script preview" rows="14"></textarea>
+                </details>
 
-          <!-- 01:48 -->
-          <article class="panel">
-            <span class="ts">01:48 — Form Field Setup</span>
-            <p>When you set up the Google Form, enter your fields in this order:</p>
-            <table class="field-table" aria-label="Recommended Google Form fields">
-              <thead>
-                <tr><th>Field Name</th><th>Field Type</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Date</td><td>Date</td></tr>
-                <tr><td>Instructor</td><td>Dropdown</td></tr>
-                <tr><td>Student</td><td>Short answer</td></tr>
-                <tr><td>Age</td><td>Number</td></tr>
-                <tr><td>Group Size</td><td>Number</td></tr>
-                <tr><td>Discipline</td><td>Dropdown</td></tr>
-                <tr><td>Level</td><td>Dropdown</td></tr>
-                <tr><td>Lesson Type</td><td>Dropdown</td></tr>
-                <tr><td>Technical Focus</td><td>Dropdown</td></tr>
-                <tr><td>Behavior Focus</td><td>Dropdown</td></tr>
-                <tr><td>Terrain/Areas</td><td>Dropdown</td></tr>
-                <tr><td>Conditions</td><td>Short answer</td></tr>
-                <tr><td>Key Outcomes</td><td>Paragraph</td></tr>
-                <tr><td>Next Steps</td><td>Paragraph</td></tr>
-                <tr><td>Private?</td><td>Multiple choice</td></tr>
-                <tr><td>Parent Email</td><td>Short answer</td></tr>
-                <tr><td>Notes</td><td>Paragraph</td></tr>
-                <tr><td>Lesson Length</td><td>Number</td></tr>
-              </tbody>
-            </table>
-            <p style="margin-top:.6rem">
-              You can customize questions like age or group size, but make sure number-based fields—like lesson length—require whole numbers for accurate tracking. Use drop-down menus for cleaner data, and keep <em>required</em> off for flexibility.
-            </p>
-          </article>
+              </div>
+            </li>
+            <li class="ls-step" data-step="3">
+              <div class="ls-num" aria-hidden="true">3</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Open Apps Script</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>Sign in with the Google account you want the log in. Delete the placeholder code, paste the script, then click the Save icon.</p>
+                <div class="ll-actions">
+                  <a class="cta" id="ll-open-script" href="https://script.new" target="_blank" rel="noopener">Open Apps Script</a>
+                </div>
 
-          <!-- 08:20 -->
-          <article class="panel">
-            <span class="ts">08:20 — Linking Form to Sheet</span>
-            <p>
-              After building your form, link it to the spreadsheet. Go to the Form’s <strong>Responses</strong> tab and select <strong>Link to a spreadsheet</strong>. Choose the existing <em>lesson log</em> file. Google Forms will automatically create a new tab for responses inside that file. Rename it <strong>“lesson log”</strong> and check that your spelling, column order, and names match exactly. If you now have two <em>lesson log</em> tabs, delete the one that isn’t linked to Forms.
-            </p>
-          </article>
+              </div>
+            </li>
+            <li class="ls-step" data-step="4">
+              <div class="ls-num" aria-hidden="true">4</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Run setup</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>Check that <strong>setup</strong> is selected in the toolbar, then click <strong>Run</strong>. It takes about 30 seconds.</p>
 
-          <!-- 10:13 -->
-          <article class="panel">
-            <span class="ts">10:13 — Client Index Setup</span>
-            <p>
-              Move to the <strong>client index</strong> tab and paste your student data from the linked ChatGPT into row one, making sure everything lines up from column <strong>A</strong> through <strong>I</strong>.
-            </p>
+              </div>
+            </li>
+            <li class="ls-step" data-step="5">
+              <div class="ls-num" aria-hidden="true">5</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Allow access</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>Google asks for permission because the script creates a form and a spreadsheet for you. Choose your account. If you see <em>Google hasn’t verified this app</em>, click <strong>Advanced</strong>, then <strong>Go to Untitled project (unsafe)</strong>, then <strong>Allow</strong>. The warning appears because the script is yours, not a published app.</p>
 
-            <!-- CHART 1: Column headers (TSV for direct paste) -->
-            <div class="copywrap">
-              <div class="copyhint" id="hint-headers">Column headers (paste into A1:I1). Click, then copy.</div>
-              <textarea class="copyarea" aria-labelledby="hint-headers" onclick="this.select()" readonly>
+              </div>
+            </li>
+            <li class="ls-step" data-step="6">
+              <div class="ls-num" aria-hidden="true">6</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Open your log</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>When the Execution log says <strong>All set</strong>, it lists two links: your lesson form and your spreadsheet. Open both and bookmark the spreadsheet. Both are also in your Google Drive.</p>
+
+              </div>
+            </li>
+            <li class="ls-step" data-step="7">
+              <div class="ls-num" aria-hidden="true">7</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Log a test lesson</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>Fill out the form once with a made-up student. Within a few seconds the student shows up in <strong>Client Index</strong> and the lesson counts on the <strong>Dashboard</strong>. Delete the test row from <strong>Lesson Log</strong> when you’re done.</p>
+
+              </div>
+            </li>
+            <li class="ls-step" data-step="8">
+              <div class="ls-num" aria-hidden="true">8</div>
+              <div class="ls-body">
+                <div class="ls-head">
+                  <h3 class="ls-title">Put the form on your phone</h3>
+                  <label class="ls-done"><input type="checkbox"> Done</label>
+                </div>
+                <p>Open the form link on your phone.</p>
+                <ul class="ll-phone">
+                  <li><strong>iPhone (Safari):</strong> Share → Add to Home Screen</li>
+                  <li><strong>Android (Chrome):</strong> ⋮ menu → Add to Home screen</li>
+                </ul>
+                <p>Logging a lesson is now one tap from the chairlift.</p>
+
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <!-- What you get -->
+        <section class="ll-get" aria-labelledby="get-title">
+          <h2 id="get-title">What you get</h2>
+          <div class="ll-cards">
+            <div class="ll-card"><h3>Lesson form</h3><p>18 questions with your dropdowns. Works on any phone.</p></div>
+            <div class="ll-card"><h3>Client Index</h3><p>Every student with lesson count, hours, first and last lesson, recent instructor, last next steps and notes. Fills itself in.</p></div>
+            <div class="ll-card"><h3>Client Lookup</h3><p>Pick a name and see their full lesson history before a repeat lesson.</p></div>
+            <div class="ll-card"><h3>Dashboard</h3><p>Lessons, hours, returning clients and private share for any date range, plus breakdowns by month, lesson type, level and discipline.</p></div>
+          </div>
+        </section>
+
+        <!-- Video walkthrough -->
+        <section class="ll-video" aria-labelledby="video-title">
+          <h2 id="video-title">Video walkthrough</h2>
+          <!-- Video -->
+          <div class="vid" style="margin-bottom:1rem">
+            <iframe
+              src="https://www.youtube.com/embed/nIF8quNAW0I?rel=0&modestbranding=1&playsinline=1"
+              title="Lesson Logging &amp; Analytics — Video Walkthrough"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <details class="ll-manual">
+            <summary>Build it by hand: written guide from the video</summary>
+            <!-- Written Guide -->
+            <section aria-labelledby="guide-title">
+              <h2 id="guide-title" style="text-align:center;margin:.5rem 0 1.25rem">Written Guide</h2>
+
+              <!-- 00:00 -->
+              <article class="panel">
+                <span class="ts">00:00 — Introduction to Tutorial</span>
+                <p>
+                  In this guide, you’ll learn how to create your own client index using Google Sheets and Google Forms. You’ll build a searchable client index and a simple lesson log so you can record sessions quickly on the go. This system will help you remember what you did with specific clients and identify VIPs.
+                </p>
+              </article>
+
+              <!-- 01:07 -->
+              <article class="panel">
+                <span class="ts">01:07 — Creating Google Sheets</span>
+                <p>
+                  Start by opening a new Google Sheet and naming it <em>lesson log</em>. Inside that file, create two tabs: one called <strong>lesson log</strong> and one called <strong>client index</strong>. Once those are ready, you’ll build a Google Form that automatically feeds lesson entries into the sheet.
+                </p>
+              </article>
+
+              <!-- 01:48 -->
+              <article class="panel">
+                <span class="ts">01:48 — Form Field Setup</span>
+                <p>When you set up the Google Form, enter your fields in this order:</p>
+                <table class="field-table" aria-label="Recommended Google Form fields">
+                  <thead>
+                    <tr><th>Field Name</th><th>Field Type</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Date</td><td>Date</td></tr>
+                    <tr><td>Instructor</td><td>Dropdown</td></tr>
+                    <tr><td>Student</td><td>Short answer</td></tr>
+                    <tr><td>Age</td><td>Number</td></tr>
+                    <tr><td>Group Size</td><td>Number</td></tr>
+                    <tr><td>Discipline</td><td>Dropdown</td></tr>
+                    <tr><td>Level</td><td>Dropdown</td></tr>
+                    <tr><td>Lesson Type</td><td>Dropdown</td></tr>
+                    <tr><td>Technical Focus</td><td>Dropdown</td></tr>
+                    <tr><td>Behavior Focus</td><td>Dropdown</td></tr>
+                    <tr><td>Terrain/Areas</td><td>Dropdown</td></tr>
+                    <tr><td>Conditions</td><td>Short answer</td></tr>
+                    <tr><td>Key Outcomes</td><td>Paragraph</td></tr>
+                    <tr><td>Next Steps</td><td>Paragraph</td></tr>
+                    <tr><td>Private?</td><td>Multiple choice</td></tr>
+                    <tr><td>Parent Email</td><td>Short answer</td></tr>
+                    <tr><td>Notes</td><td>Paragraph</td></tr>
+                    <tr><td>Lesson Length</td><td>Number</td></tr>
+                  </tbody>
+                </table>
+                <p style="margin-top:.6rem">
+                  You can customize questions like age or group size, but make sure number-based fields—like lesson length—require whole numbers for accurate tracking. Use drop-down menus for cleaner data, and keep <em>required</em> off for flexibility.
+                </p>
+              </article>
+
+              <!-- 08:20 -->
+              <article class="panel">
+                <span class="ts">08:20 — Linking Form to Sheet</span>
+                <p>
+                  After building your form, link it to the spreadsheet. Go to the Form’s <strong>Responses</strong> tab and select <strong>Link to a spreadsheet</strong>. Choose the existing <em>lesson log</em> file. Google Forms will automatically create a new tab for responses inside that file. Rename it <strong>“lesson log”</strong> and check that your spelling, column order, and names match exactly. If you now have two <em>lesson log</em> tabs, delete the one that isn’t linked to Forms.
+                </p>
+              </article>
+
+              <!-- 10:13 -->
+              <article class="panel">
+                <span class="ts">10:13 — Client Index Setup</span>
+                <p>
+                  Move to the <strong>client index</strong> tab and paste your student data from the linked ChatGPT into row one, making sure everything lines up from column <strong>A</strong> through <strong>I</strong>.
+                </p>
+
+                <!-- CHART 1: Column headers (TSV for direct paste) -->
+                <div class="copywrap">
+                  <div class="copyhint" id="hint-headers">Column headers (paste into A1:I1). Click, then copy.</div>
+                  <textarea class="copyarea" aria-labelledby="hint-headers" onclick="this.select()" readonly>
 Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent Instructor	Disciplines	Notes Summary
 </textarea>
-            </div>
+                </div>
 
-            <p style="margin-top:.6rem">
-              Then, copy in the summary formulas I’ve provided (or your own) to generate automatic updates. You don’t need to understand the code—just make sure everything lands in the right cell.
-            </p>
+                <p style="margin-top:.6rem">
+                  Then, copy in the summary formulas I’ve provided (or your own) to generate automatic updates. You don’t need to understand the code—just make sure everything lands in the right cell.
+                </p>
 
-            <!-- CHART 2: One formula per cell (clean copy blocks) -->
-            <div class="copywrap">
-              <div class="copyhint">Formulas (paste each into the indicated cell)</div>
-              <div class="formulas">
+                <!-- CHART 2: One formula per cell (clean copy blocks) -->
+                <div class="copywrap">
+                  <div class="copyhint">Formulas (paste each into the indicated cell)</div>
+                  <div class="formulas">
 
-                <!-- B2 -->
-                <div>
-                  <div class="copyhint" id="hint-b2"><strong>B2 (Age Latest)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-b2" onclick="this.select()" readonly>
+                    <!-- B2 -->
+                    <div>
+                      <div class="copyhint" id="hint-b2"><strong>B2 (Age Latest)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-b2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!E2:E, 'Lesson Log'!D2:D = A2),
     MATCH(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)),
           FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2), 0)
   ), ""))
 </textarea>
-                </div>
+                    </div>
 
-                <!-- C2 -->
-                <div>
-                  <div class="copyhint" id="hint-c2"><strong>C2 (Total Lessons)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-c2" onclick="this.select()" readonly>
+                    <!-- C2 -->
+                    <div>
+                      <div class="copyhint" id="hint-c2"><strong>C2 (Total Lessons)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-c2" onclick="this.select()" readonly>
 =IF(A2="", "", COUNTIF('Lesson Log'!D:D, A2))
 </textarea>
-                </div>
+                    </div>
 
-                <!-- D2 -->
-                <div>
-                  <div class="copyhint" id="hint-d2"><strong>D2 (Total Hours)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-d2" onclick="this.select()" readonly>
+                    <!-- D2 -->
+                    <div>
+                      <div class="copyhint" id="hint-d2"><strong>D2 (Total Hours)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-d2" onclick="this.select()" readonly>
 =IF(A2="", "", SUMIF('Lesson Log'!D:D, A2, 'Lesson Log'!S:S))
 </textarea>
-                </div>
+                    </div>
 
-                <!-- E2 -->
-                <div>
-                  <div class="copyhint" id="hint-e2"><strong>E2 (First Lesson)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-e2" onclick="this.select()" readonly>
+                    <!-- E2 -->
+                    <div>
+                      <div class="copyhint" id="hint-e2"><strong>E2 (First Lesson)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-e2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(MIN(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
 </textarea>
-                </div>
+                    </div>
 
-                <!-- F2 -->
-                <div>
-                  <div class="copyhint" id="hint-f2"><strong>F2 (Last Lesson)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-f2" onclick="this.select()" readonly>
+                    <!-- F2 -->
+                    <div>
+                      <div class="copyhint" id="hint-f2"><strong>F2 (Last Lesson)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-f2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)), ""))
 </textarea>
-                </div>
+                    </div>
 
-                <!-- G2 -->
-                <div>
-                  <div class="copyhint" id="hint-g2"><strong>G2 (Recent Instructor)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-g2" onclick="this.select()" readonly>
+                    <!-- G2 -->
+                    <div>
+                      <div class="copyhint" id="hint-g2"><strong>G2 (Recent Instructor)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-g2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   INDEX(FILTER('Lesson Log'!C2:C, 'Lesson Log'!D2:D = A2),
     MATCH(MAX(FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2)),
           FILTER('Lesson Log'!B2:B, 'Lesson Log'!D2:D = A2), 0)
   ), ""))
 </textarea>
-                </div>
+                    </div>
 
-                <!-- H2 -->
-                <div>
-                  <div class="copyhint" id="hint-h2"><strong>H2 (Disciplines)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-h2" onclick="this.select()" readonly>
+                    <!-- H2 -->
+                    <div>
+                      <div class="copyhint" id="hint-h2"><strong>H2 (Disciplines)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-h2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(TEXTJOIN(", ", TRUE, UNIQUE(FILTER('Lesson Log'!G2:G, 'Lesson Log'!D2:D = A2))), ""))
 </textarea>
-                </div>
+                    </div>
 
-                <!-- I2 -->
-                <div>
-                  <div class="copyhint" id="hint-i2"><strong>I2 (Notes Summary)</strong></div>
-                  <textarea class="copyarea" aria-labelledby="hint-i2" onclick="this.select()" readonly>
+                    <!-- I2 -->
+                    <div>
+                      <div class="copyhint" id="hint-i2"><strong>I2 (Notes Summary)</strong></div>
+                      <textarea class="copyarea" aria-labelledby="hint-i2" onclick="this.select()" readonly>
 =IF(A2="", "", IFERROR(
   TEXTJOIN(CHAR(10), TRUE,
     FILTER(
@@ -286,56 +502,60 @@ Student	Age (Latest)	Total Lessons	Total Hours	First Lesson	Last Lesson	Recent I
     )
   ), ""))
 </textarea>
+                    </div>
+
+                  </div>
+                  <div class="copyhint" style="margin-top:.35rem">
+                    Paste each into the exact cell (e.g., <strong>B2</strong>, <strong>C2</strong>, … <strong>I2</strong>), then drag-fill down the column for all students.
+                  </div>
                 </div>
 
-              </div>
-              <div class="copyhint" style="margin-top:.35rem">
-                Paste each into the exact cell (e.g., <strong>B2</strong>, <strong>C2</strong>, … <strong>I2</strong>), then drag-fill down the column for all students.
-              </div>
-            </div>
+                <p style="margin-top:.6rem">
+                  You don’t need to understand the code—just keep the tab names/columns consistent so these references stay valid.
+                </p>
+              </article>
 
-            <p style="margin-top:.6rem">
-              You don’t need to understand the code—just keep the tab names/columns consistent so these references stay valid.
-            </p>
-          </article>
+              <!-- 11:49 -->
+              <article class="panel">
+                <span class="ts">11:49 — Testing and Troubleshooting</span>
+                <p>
+                  Test your setup. Submit a sample lesson through your form and make sure it appears correctly in both the log and the client index. If the data doesn’t line up, check column names, formulas, and linked fields. You may have to re-paste formulas for broken columns. Enter multiple lessons for the same student to confirm that the system updates accurately.
+                </p>
+              </article>
 
-          <!-- 11:49 -->
-          <article class="panel">
-            <span class="ts">11:49 — Testing and Troubleshooting</span>
-            <p>
-              Test your setup. Submit a sample lesson through your form and make sure it appears correctly in both the log and the client index. If the data doesn’t line up, check column names, formulas, and linked fields. You may have to re-paste formulas for broken columns. Enter multiple lessons for the same student to confirm that the system updates accurately.
-            </p>
-          </article>
+              <!-- 19:27 -->
+              <article class="panel">
+                <span class="ts">19:27 — Analytics Overview</span>
+                <p>
+                  Once it’s working, you can use the form data to track your teaching trends. Review responses and generate simple analytics right inside Google Forms or Google Sheets. After a few years of tracking, you’ll want to use Tableau to visualize data from specific timeframes—the free version should do. You’ll be able to identify common lesson types, skill levels, and recurring teaching themes. Categorize your questions carefully so your analytics reflect what matters most to you.
+                </p>
+              </article>
 
-          <!-- 19:27 -->
-          <article class="panel">
-            <span class="ts">19:27 — Analytics Overview</span>
-            <p>
-              Once it’s working, you can use the form data to track your teaching trends. Review responses and generate simple analytics right inside Google Forms or Google Sheets. After a few years of tracking, you’ll want to use Tableau to visualize data from specific timeframes—the free version should do. You’ll be able to identify common lesson types, skill levels, and recurring teaching themes. Categorize your questions carefully so your analytics reflect what matters most to you.
-            </p>
-          </article>
+              <!-- 20:37 -->
+              <article class="panel">
+                <span class="ts">20:37 — Final Thoughts</span>
+                <p>
+                  By combining Google Sheets and Forms, you’ll have a professional, mobile-friendly system for managing your teaching data. Once you’ve built this tool, you’ll be able to make returning guests feel important by remembering exactly what you did that day. That’s how you become irresistible.
+                </p>
+                <p style="margin:.5rem 0 0">
+                  Contact me if you need help. I can even provide hands-on tech support if you send me temporary access to your build.
+                </p>
+              </article>
 
-          <!-- 20:37 -->
-          <article class="panel">
-            <span class="ts">20:37 — Final Thoughts</span>
-            <p>
-              By combining Google Sheets and Forms, you’ll have a professional, mobile-friendly system for managing your teaching data. Once you’ve built this tool, you’ll be able to make returning guests feel important by remembering exactly what you did that day. That’s how you become irresistible.
-            </p>
-            <p style="margin:.5rem 0 0">
-              Contact me if you need help. I can even provide hands-on tech support if you send me temporary access to your build.
-            </p>
-          </article>
-
-          <!-- Bottom CTAs -->
-          <div class="btn-row">
-            <a class="cta" href="/contact/">Contact Me</a>
-            <a class="cta alt" href="https://chatgpt.com/share/6902ce49-a27c-800b-acf0-05c1e3d3a1bd" target="_blank" rel="noopener">ChatGPT Guide</a>
-            <a class="cta" href="/reading-list">Browse the Reading List &rarr;</a>
-          </div>
+            </section>
+          </details>
         </section>
+
+        <div class="btn-row">
+          <a class="cta" href="/contact/">Contact Me</a>
+          <a class="cta alt" href="https://chatgpt.com/share/6902ce49-a27c-800b-acf0-05c1e3d3a1bd" target="_blank" rel="noopener">ChatGPT Guide</a>
+          <a class="cta" href="/reading-list">Browse the Reading List &rarr;</a>
+        </div>
       </div>
     </main>
   </div>
+
+  <script src="/lesson-log/builder.js?v=1"></script>
 
   <!-- Footer -->
   <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
