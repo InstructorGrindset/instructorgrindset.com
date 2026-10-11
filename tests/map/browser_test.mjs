@@ -89,6 +89,8 @@ function watch(page, label) {
   page.on('pageerror', (e) => problems.push(`pageerror: ${e.message}`));
   page.on('request', (r) => requests.push(r.url()));
   page.on('response', (r) => {
+    // Allowed: the site wide Rooftop font (missing repo wide) and definitions.json, which is optional.
+    if (r.status() === 404 && /\/definitions\.json$/.test(r.url())) { log(`    note definitions.json absent at ${r.url()}`); return; }
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
   });
   page.on('requestfailed', (r) => /\/fonts\/Rooftop/.test(r.url()) || problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`));
@@ -184,6 +186,11 @@ async function desktop(browser, base) {
   check(await page.locator('.fact', { hasText: 'Summit elevation' }).locator('.badge-published').count() === 1, 'summit elevation renders with badge');
   check(await page.locator('.src-note', { hasText: 'synthetic source note' }).count() >= 1, 'source note renders');
   check(await page.locator('.src-tag', { hasText: 'SNOTEL' }).count() === 1, 'density chart labelled SNOTEL');
+  check(await page.locator('.chart-caption', { hasText: 'A powder day brings 6 in or more' }).count() === 1, 'powder threshold read from definitions.json');
+  check(await page.evaluate(() => {
+    const c = window.Chart && Object.values(window.Chart.instances).find((x) => x.data.datasets.length === 3);
+    return c ? c.data.datasets[0].label : '';
+  }) === 'Dry, under 7%', 'density legend uses definitions.json cutoffs');
   check(await page.locator('.climate canvas').count() === 5, 'five climate charts');
   check(w.requests.some((u) => u.includes('/climate/alpha-peak.json')), 'climate lazy loaded for resort');
   check(await page.locator('.panel-footer a[href="/contact"]').count() === 1, 'Free Consultation link in footer');
@@ -420,6 +427,7 @@ async function realData(browser, base) {
       await mapIdle(page);
       check(await page.locator('.resort-list a').count() > 0, `real data: cluster view lists resorts (${await heading(page)})`);
       await shot(page, 'real-desktop-cluster.png');
+      check(await page.evaluate(() => window.__careerMap.mapCtl.map.getZoom()) <= 9.01, 'real data: cluster zoom capped at 9');
       await page.locator('.resort-list a').first().click();
       await mapIdle(page);
       check(await page.locator('.facts').count() >= 3, `real data: resort view renders (${await heading(page)})`);

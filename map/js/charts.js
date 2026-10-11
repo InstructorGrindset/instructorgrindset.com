@@ -185,8 +185,7 @@ export async function renderResortCharts(root, climate, defs = null) {
   const f2 = figure('Powder days and banner days', dayCaption(t), `${describe('Powder days', powder, '')} ${describe('Banner days', banner, '')}`);
   const f3 = figure('Average storm depth', 'Inches of snow per storm', describe('Average storm depth', storm, ' in'));
   const dl = densityLabel(climate);
-  const f4 = figure('Snow density mix',
-    t.dryBelow != null && t.moistAbove != null ? 'Share of new snow by water content, the share of water in fresh snow' : 'Share of new snow by water content',
+  const f4 = figure('Snow density mix', 'Share of new snow by water content',
     `Snow density mix by month, dry, average and moist. ${dl ? `Source ${dl}.` : ''}`,
     { tall: true, extra: dl ? h('span', { class: `src-tag ${dl === 'SNOTEL' ? 'src-snotel' : 'src-est'}` }, dl) : null });
   const f5 = figure('Temperatures', 'Average daily high and low, °F', `${describe('High', hi, ' F')} ${describe('Low', lo, ' F')}`);
