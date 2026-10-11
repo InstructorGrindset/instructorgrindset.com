@@ -6,24 +6,26 @@
   <title>Blog — Instructor Grindset</title>
   <meta name="description" content="Reflections, lessons learned, and ideas for the working instructor." />
   <link rel="canonical" href="https://instructorgrindset.com/blog/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog — Instructor Grindset" />
+  <meta property="og:description" content="Reflections, lessons learned, and ideas for the working instructor." />
+  <meta property="og:url" content="https://instructorgrindset.com/blog/" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "Blog", "name": "Blog — Instructor Grindset", "description": "Reflections, lessons learned, and ideas for the working instructor.", "url": "https://instructorgrindset.com/blog/", "publisher": {"@type": "Organization", "name": "Instructor Grindset"}, "blogPost": [{"@type": "BlogPosting", "headline": "Backline Like a Pro", "url": "https://instructorgrindset.com/blog/backline-like-a-pro/", "datePublished": "2025-03"}, {"@type": "BlogPosting", "headline": "So You Want to Be a Ski Instructor", "url": "https://instructorgrindset.com/blog/so-you-want-to-be-a-ski-instructor/", "datePublished": "2025-01"}, {"@type": "BlogPosting", "headline": "Settle Down, Non-Believers", "url": "https://instructorgrindset.com/blog/settle-down-non-believers/", "datePublished": "2024-12"}, {"@type": "BlogPosting", "headline": "Takeaways From a PSIA YouTube Binge", "url": "https://instructorgrindset.com/blog/psia-youtube-binge/", "datePublished": "2024-11"}, {"@type": "BlogPosting", "headline": "Reading Beyond the PSIA Manuals", "url": "https://instructorgrindset.com/blog/reading-beyond-the-psia-manuals/", "datePublished": "2024-10"}]}
+  </script>
   <link rel="stylesheet" href="/assets/global.css?v=2">
   <link rel="stylesheet" href="/assets/sidebar.css?v=14">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-:root{
-      --content-shift:40px;
-      --maxw: min(900px, calc(100vw - var(--sidebar) - 40px));
-      --surface-1: rgba(255,255,255,.05);
-      --r-lg: 0.875rem;
-      --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
-      --sp-2: 0.5rem; --sp-4: 1rem; --sp-6: 1.5rem;
-    }
+    .content{width:100%;max-width:1100px;margin:1.5rem auto 0;padding-bottom:3rem}
+    @media(max-width:960px){.content{margin:0 auto;padding-top:1.5rem}}
 
-    .main{padding:1.25rem}
-    .content{width:min(1100px,calc(100vw - 40px));margin:1.5rem auto 0;padding-bottom:3rem}
-    @media(max-width:960px){.content{width:min(94vw,1100px);margin:0 auto;padding-top:1.5rem}}
+    h1{text-align:left}
 
     .subtitle{color:var(--muted);margin:0 0 2rem;font-size:clamp(1.05rem,1.2vw + .2rem,1.25rem)}
 
@@ -39,8 +41,8 @@
       transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
     }
     .post-item:hover{
-      border-color:rgba(250,204,21,.3);
-      box-shadow:0 0 20px rgba(250,204,21,.08);
+      border-color:rgba(var(--glow),.3);
+      box-shadow:0 0 20px rgba(var(--glow),.08);
       transform:translateY(-2px);
       text-decoration:none;
     }
@@ -48,22 +50,18 @@
     .post-title{
       font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
       font-size:var(--text-lg);line-height:1.3;margin:0 0 .5rem;color:#fff;
+      background:none;-webkit-background-clip:initial;background-clip:initial;
     }
     .post-excerpt{font-size:var(--text-base);color:var(--muted);line-height:1.6;margin:0}
-
-    .btn-row{display:grid;place-items:center;margin-top:2rem;margin-bottom:1rem}
-    .cta{display:inline-block;padding:.9rem 1.1rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;text-decoration:none}
-    .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
-    .cta:hover{filter:brightness(1.06)}
-
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="page">
     <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
     <script src="/assets/nav.js?v=14"></script>
 
-    <main class="main">
+    <main class="main" id="main">
       <div class="content">
         <p class="eyebrow">All Posts</p>
         <h1>Blog</h1>
@@ -71,28 +69,28 @@
 
         <div class="post-list">
           <a class="post-item" href="/blog/backline-like-a-pro/">
-            <p class="post-meta">March 2025</p>
-            <p class="post-title">Backline Like a Pro</p>
+            <p class="post-meta"><time datetime="2025-03">March 2025</time></p>
+            <h2 class="post-title">Backline Like a Pro</h2>
             <p class="post-excerpt">What separates the instructors who always get re-booked from the ones who don't — and it starts behind the scenes.</p>
           </a>
           <a class="post-item" href="/blog/so-you-want-to-be-a-ski-instructor/">
-            <p class="post-meta">January 2025</p>
-            <p class="post-title">So You Want to Be a Ski Instructor</p>
+            <p class="post-meta"><time datetime="2025-01">January 2025</time></p>
+            <h2 class="post-title">So You Want to Be a Ski Instructor</h2>
             <p class="post-excerpt">The honest, unfiltered breakdown of what this career actually looks like before you hand in your application.</p>
           </a>
           <a class="post-item" href="/blog/settle-down-non-believers/">
-            <p class="post-meta">December 2024</p>
-            <p class="post-title">Settle Down, Non-Believers</p>
+            <p class="post-meta"><time datetime="2024-12">December 2024</time></p>
+            <h2 class="post-title">Settle Down, Non-Believers</h2>
             <p class="post-excerpt">A response to everyone who thinks treating ski instruction like a real career is misguided or delusional.</p>
           </a>
           <a class="post-item" href="/blog/psia-youtube-binge/">
-            <p class="post-meta">November 2024</p>
-            <p class="post-title">Takeaways From a PSIA YouTube Binge</p>
+            <p class="post-meta"><time datetime="2024-11">November 2024</time></p>
+            <h2 class="post-title">Takeaways From a PSIA YouTube Binge</h2>
             <p class="post-excerpt">I went deep on PSIA's video library so you don't have to. Here's what's actually worth your time.</p>
           </a>
           <a class="post-item" href="/blog/reading-beyond-the-psia-manuals/">
-            <p class="post-meta">October 2024</p>
-            <p class="post-title">Reading Beyond the PSIA Manuals</p>
+            <p class="post-meta"><time datetime="2024-10">October 2024</time></p>
+            <h2 class="post-title">Reading Beyond the PSIA Manuals</h2>
             <p class="post-excerpt">The PSIA Manuals are essential — but just as much can be learned from a good story. Here's where to start.</p>
           </a>
         </div>

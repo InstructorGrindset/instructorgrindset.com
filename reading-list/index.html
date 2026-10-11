@@ -5,41 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • The Reading List</title>
   <meta name="description" content="25 books on skiing technique, instruction, history, and fitness — with a Book Finder to find the right read for you." />
-  <link rel="canonical" href="https://instructorgrindset.com/reading-list" />
+  <link rel="canonical" href="https://instructorgrindset.com/reading-list/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Instructor Grindset • The Reading List" />
+  <meta property="og:description" content="25 books on skiing technique, instruction, history, and fitness — with a Book Finder to find the right read for you." />
+  <meta property="og:url" content="https://instructorgrindset.com/reading-list/" />
+  <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/global.css?v=2">
   <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <style>
-:root{
-      --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
-      --panel-shadow:0 0 18px rgba(var(--glow),.25), 0 0 48px rgba(var(--glow),.12);
-      --surface-1:rgba(255,255,255,.05); --r-lg:0.875rem; --r-sm:0.375rem;
-      --text-sm:0.875rem; --text-base:1rem; --text-lg:1.125rem;
-      --sp-2:0.5rem; --sp-3:0.75rem; --sp-4:1rem; --sp-6:1.5rem; --sp-8:2rem;
-    }
-    body{
-      margin:0; color:var(--ink);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;
-      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
-    }
-    .content{
-      width:var(--wrap-max);
-      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
-      margin-right:auto; padding-top:1.25rem; padding-bottom:2.5rem;
-    }
-    @media(max-width:960px){.content{width:min(94vw,1100px);margin:0 auto}}
-    h1,h2,h3{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
-    h1{
-      font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08;margin:.25rem 0 .6rem;text-align:center;
-      background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;
-    }
+    body{line-height:1.6}
+    .content{width:100%;max-width:1100px;margin:0 auto;padding-top:1.25rem;padding-bottom:2.5rem}
+    h1,h2,h3{letter-spacing:.2px}
+    h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.08}
     .lede{text-align:center;color:var(--muted);max-width:70ch;margin:.25rem auto 1.5rem}
 
     /* ---- Search row ---- */
     .rl-search-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem}
     .rl-search{
-      flex:1;padding:.65rem .85rem;background:rgba(255,255,255,.04);
+      flex:1;min-width:0;padding:.65rem .85rem;background:rgba(255,255,255,.04);
       border:1px solid var(--line);border-radius:.5rem;color:var(--ink);
       font-size:.95rem;font-family:inherit;
     }
@@ -55,13 +42,13 @@
       cursor:pointer;transition:all .15s;
     }
     .rl-pill:hover{border-color:var(--muted);color:var(--ink)}
-    .rl-pill.active{background:var(--cta);border-color:var(--cta);color:#e6e7eb}
+    .rl-pill.active{background:var(--cta);border-color:var(--cta);color:var(--cta-ink)}
     .rl-filter-label{font-size:var(--text-sm);color:var(--muted);letter-spacing:.4px;text-transform:uppercase;align-self:center;margin-right:.25rem}
 
     /* ---- Book grid ---- */
     .rl-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+      grid-template-columns:repeat(auto-fill, minmax(min(100%,260px),1fr));
       gap:1rem;
       margin-top:1rem;
     }
@@ -72,11 +59,11 @@
       display:flex;flex-direction:column;
       background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-lg);
       padding:var(--sp-6);
-      transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+      transition:border-color .18s ease,box-shadow .18s ease;
     }
-    .book-card:hover{border-color:rgba(250,204,21,.3);box-shadow:0 0 20px rgba(250,204,21,.08);transform:translateY(-2px)}
+    .book-card:hover{border-color:rgba(var(--glow),.3);box-shadow:0 0 20px rgba(var(--glow),.08)}
     .book-card-body{flex:1;margin-bottom:.75rem}
-    .book-title{font-size:var(--text-base);font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.2rem}
+    .book-title{font-family:inherit;font-size:var(--text-base);font-weight:600;color:var(--ink);line-height:1.3;letter-spacing:normal;margin:0 0 .2rem}
     .book-author{font-size:var(--text-sm);color:var(--muted);margin-bottom:.5rem}
     .book-desc{font-size:var(--text-sm);color:var(--muted);line-height:1.5}
     .book-reflection{font-size:var(--text-sm);color:var(--muted);font-style:italic;margin-top:.5rem;line-height:1.5}
@@ -118,7 +105,7 @@
     .finder-opt.selected{background:rgba(196,137,42,.15);border-color:var(--cta);color:var(--ink)}
 
     .finder-btn{
-      display:block;width:100%;padding:.85rem 1rem;background:var(--cta);color:#e6e7eb;
+      display:block;width:100%;padding:.85rem 1rem;background:var(--cta);color:var(--cta-ink);
       font-weight:800;font-size:1rem;font-family:inherit;border:0;border-radius:.5rem;
       cursor:pointer;margin-top:.5rem;letter-spacing:.3px;
     }
@@ -129,21 +116,12 @@
     .finder-card{
       background:var(--surface-1);border:1px solid var(--line);border-radius:.8rem;
       padding:1rem 1rem .85rem;
-      transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+      transition:border-color .18s ease,box-shadow .18s ease;
     }
-    .finder-card:hover{border-color:rgba(250,204,21,.3);box-shadow:0 0 20px rgba(250,204,21,.08);}
+    .finder-card:hover{border-color:rgba(var(--glow),.3);box-shadow:0 0 20px rgba(var(--glow),.08)}
     .finder-card-title{font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
     .finder-card-author{font-size:.8rem;color:var(--muted);margin-bottom:.4rem}
     .finder-card-reason{font-size:.84rem;color:var(--muted);font-style:italic}
-    .cta{display:inline-block;padding:.9rem 1.1rem;border-radius:0;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;text-decoration:none}
-    .cta.big{padding:1.05rem 1.4rem;box-shadow:0 0 18px rgba(var(--glow),.25),0 0 48px rgba(var(--glow),.12)}
-    .cta:hover{filter:brightness(1.06)}
-
-    /* ---- Footer ---- */
-    .footer-wrap{position:fixed;left:var(--sidebar);right:0;bottom:0;height:var(--footer-h);
-      display:grid;place-items:center;background:rgba(0,0,0,.25);border-top:1px solid var(--line);backdrop-filter:blur(2px)}
-
-    .footer{color:var(--muted);text-align:center;margin:0}
   </style>
 </head>
 <body>
@@ -165,94 +143,94 @@
 
         <!-- ===== CATALOGUE ===== -->
         <div class="rl-search-row">
-          <input class="rl-search" type="text" id="rl-search" placeholder="Search by title or author&hellip;" oninput="rlRender()">
-          <span class="rl-count" id="rl-count">25 books</span>
+          <input class="rl-search" type="text" id="rl-search" placeholder="Search by title or author&hellip;" aria-label="Search books by title or author" oninput="rlRender()">
+          <span class="rl-count" id="rl-count" role="status" aria-live="polite">25 books</span>
         </div>
 
         <div class="rl-filters" id="rl-cat-filters" role="group" aria-label="Category filter">
           <span class="rl-filter-label">Category</span>
-          <button class="rl-pill active" data-cat="all" onclick="rlSetCat(this,'all')">All</button>
-          <button class="rl-pill" data-cat="pedagogy"    onclick="rlSetCat(this,'pedagogy')">Pedagogy</button>
-          <button class="rl-pill" data-cat="alpine"      onclick="rlSetCat(this,'alpine')">Alpine</button>
-          <button class="rl-pill" data-cat="moguls"      onclick="rlSetCat(this,'moguls')">Moguls</button>
-          <button class="rl-pill" data-cat="freestyle"   onclick="rlSetCat(this,'freestyle')">Freestyle</button>
-          <button class="rl-pill" data-cat="racing"      onclick="rlSetCat(this,'racing')">Racing</button>
-          <button class="rl-pill" data-cat="backcountry" onclick="rlSetCat(this,'backcountry')">Backcountry</button>
-          <button class="rl-pill" data-cat="fitness"     onclick="rlSetCat(this,'fitness')">Fitness</button>
-          <button class="rl-pill" data-cat="history"     onclick="rlSetCat(this,'history')">History</button>
-          <button class="rl-pill" data-cat="science"     onclick="rlSetCat(this,'science')">Science</button>
-          <button class="rl-pill" data-cat="travel"      onclick="rlSetCat(this,'travel')">Travel</button>
+          <button class="rl-pill active" aria-pressed="true" data-cat="all" onclick="rlSetCat(this,'all')">All</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="pedagogy"    onclick="rlSetCat(this,'pedagogy')">Pedagogy</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="alpine"      onclick="rlSetCat(this,'alpine')">Alpine</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="moguls"      onclick="rlSetCat(this,'moguls')">Moguls</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="freestyle"   onclick="rlSetCat(this,'freestyle')">Freestyle</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="racing"      onclick="rlSetCat(this,'racing')">Racing</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="backcountry" onclick="rlSetCat(this,'backcountry')">Backcountry</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="fitness"     onclick="rlSetCat(this,'fitness')">Fitness</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="history"     onclick="rlSetCat(this,'history')">History</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="science"     onclick="rlSetCat(this,'science')">Science</button>
+          <button class="rl-pill" aria-pressed="false" data-cat="travel"      onclick="rlSetCat(this,'travel')">Travel</button>
         </div>
 
         <div class="rl-filters" id="rl-lvl-filters" role="group" aria-label="Level filter">
           <span class="rl-filter-label">Level</span>
-          <button class="rl-pill active" data-lvl="all"          onclick="rlSetLvl(this,'all')">All</button>
-          <button class="rl-pill" data-lvl="Beginner"            onclick="rlSetLvl(this,'Beginner')">Beginner</button>
-          <button class="rl-pill" data-lvl="Intermediate"        onclick="rlSetLvl(this,'Intermediate')">Intermediate</button>
-          <button class="rl-pill" data-lvl="Expert"              onclick="rlSetLvl(this,'Expert')">Expert</button>
-          <button class="rl-pill" data-lvl="All levels"          onclick="rlSetLvl(this,'All levels')">All levels</button>
+          <button class="rl-pill active" aria-pressed="true" data-lvl="all"          onclick="rlSetLvl(this,'all')">All</button>
+          <button class="rl-pill" aria-pressed="false" data-lvl="Beginner"            onclick="rlSetLvl(this,'Beginner')">Beginner</button>
+          <button class="rl-pill" aria-pressed="false" data-lvl="Intermediate"        onclick="rlSetLvl(this,'Intermediate')">Intermediate</button>
+          <button class="rl-pill" aria-pressed="false" data-lvl="Expert"              onclick="rlSetLvl(this,'Expert')">Expert</button>
+          <button class="rl-pill" aria-pressed="false" data-lvl="All levels"          onclick="rlSetLvl(this,'All levels')">All levels</button>
         </div>
 
         <div class="rl-grid" id="rl-grid"></div>
 
         <!-- ===== BOOK FINDER ===== -->
-        <hr class="rl-divider" id="book-finder">
-        <h2>Book Finder</h2>
+        <hr class="rl-divider">
+        <h2 id="book-finder">Book Finder</h2>
         <div class="finder-label">Answer a few questions to find your next read</div>
 
-        <div class="finder-q">
-          <div class="finder-q-text">What kind of skiing are you focused on?</div>
+        <div class="finder-q" role="group" aria-labelledby="fq1-label">
+          <div class="finder-q-text" id="fq1-label">What kind of skiing are you focused on?</div>
           <div class="finder-options" id="fq1">
-            <button class="finder-opt" data-q="discipline" data-v="alpine"      onclick="fSelect(this)">All-mountain / alpine</button>
-            <button class="finder-opt" data-q="discipline" data-v="moguls"      onclick="fSelect(this)">Moguls</button>
-            <button class="finder-opt" data-q="discipline" data-v="freestyle"   onclick="fSelect(this)">Freestyle / park</button>
-            <button class="finder-opt" data-q="discipline" data-v="racing"      onclick="fSelect(this)">Racing</button>
-            <button class="finder-opt" data-q="discipline" data-v="backcountry" onclick="fSelect(this)">Backcountry</button>
+            <button class="finder-opt" aria-pressed="false" data-q="discipline" data-v="alpine"      onclick="fSelect(this)">All-mountain / alpine</button>
+            <button class="finder-opt" aria-pressed="false" data-q="discipline" data-v="moguls"      onclick="fSelect(this)">Moguls</button>
+            <button class="finder-opt" aria-pressed="false" data-q="discipline" data-v="freestyle"   onclick="fSelect(this)">Freestyle / park</button>
+            <button class="finder-opt" aria-pressed="false" data-q="discipline" data-v="racing"      onclick="fSelect(this)">Racing</button>
+            <button class="finder-opt" aria-pressed="false" data-q="discipline" data-v="backcountry" onclick="fSelect(this)">Backcountry</button>
           </div>
         </div>
 
-        <div class="finder-q">
-          <div class="finder-q-text">Are you looking to teach or to ski better?</div>
+        <div class="finder-q" role="group" aria-labelledby="fq2-label">
+          <div class="finder-q-text" id="fq2-label">Are you looking to teach or to ski better?</div>
           <div class="finder-options" id="fq2">
-            <button class="finder-opt" data-q="goal" data-v="teach" onclick="fSelect(this)">Teach better</button>
-            <button class="finder-opt" data-q="goal" data-v="ski"   onclick="fSelect(this)">Ski better</button>
-            <button class="finder-opt" data-q="goal" data-v="both"  onclick="fSelect(this)">Both</button>
+            <button class="finder-opt" aria-pressed="false" data-q="goal" data-v="teach" onclick="fSelect(this)">Teach better</button>
+            <button class="finder-opt" aria-pressed="false" data-q="goal" data-v="ski"   onclick="fSelect(this)">Ski better</button>
+            <button class="finder-opt" aria-pressed="false" data-q="goal" data-v="both"  onclick="fSelect(this)">Both</button>
           </div>
         </div>
 
-        <div class="finder-q">
-          <div class="finder-q-text">What is your current level?</div>
+        <div class="finder-q" role="group" aria-labelledby="fq3-label">
+          <div class="finder-q-text" id="fq3-label">What is your current level?</div>
           <div class="finder-options" id="fq3">
-            <button class="finder-opt" data-q="level" data-v="Beginner"     onclick="fSelect(this)">Beginner</button>
-            <button class="finder-opt" data-q="level" data-v="Intermediate" onclick="fSelect(this)">Intermediate</button>
-            <button class="finder-opt" data-q="level" data-v="Expert"       onclick="fSelect(this)">Expert</button>
+            <button class="finder-opt" aria-pressed="false" data-q="level" data-v="Beginner"     onclick="fSelect(this)">Beginner</button>
+            <button class="finder-opt" aria-pressed="false" data-q="level" data-v="Intermediate" onclick="fSelect(this)">Intermediate</button>
+            <button class="finder-opt" aria-pressed="false" data-q="level" data-v="Expert"       onclick="fSelect(this)">Expert</button>
           </div>
         </div>
 
-        <div class="finder-q">
-          <div class="finder-q-text">What is your primary goal right now?</div>
+        <div class="finder-q" role="group" aria-labelledby="fq4-label">
+          <div class="finder-q-text" id="fq4-label">What is your primary goal right now?</div>
           <div class="finder-options" id="fq4">
-            <button class="finder-opt" data-q="challenge" data-v="certs"       onclick="fSelect(this)">Certification prep</button>
-            <button class="finder-opt" data-q="challenge" data-v="kids"        onclick="fSelect(this)">Teaching children</button>
-            <button class="finder-opt" data-q="challenge" data-v="technique"   onclick="fSelect(this)">Technical refinement</button>
-            <button class="finder-opt" data-q="challenge" data-v="fitness"     onclick="fSelect(this)">Fitness and conditioning</button>
-            <button class="finder-opt" data-q="challenge" data-v="history"     onclick="fSelect(this)">Understanding the sport's history</button>
-            <button class="finder-opt" data-q="challenge" data-v="alternative" onclick="fSelect(this)">Finding alternative teaching methods</button>
+            <button class="finder-opt" aria-pressed="false" data-q="challenge" data-v="certs"       onclick="fSelect(this)">Certification prep</button>
+            <button class="finder-opt" aria-pressed="false" data-q="challenge" data-v="kids"        onclick="fSelect(this)">Teaching children</button>
+            <button class="finder-opt" aria-pressed="false" data-q="challenge" data-v="technique"   onclick="fSelect(this)">Technical refinement</button>
+            <button class="finder-opt" aria-pressed="false" data-q="challenge" data-v="fitness"     onclick="fSelect(this)">Fitness and conditioning</button>
+            <button class="finder-opt" aria-pressed="false" data-q="challenge" data-v="history"     onclick="fSelect(this)">Understanding the sport's history</button>
+            <button class="finder-opt" aria-pressed="false" data-q="challenge" data-v="alternative" onclick="fSelect(this)">Finding alternative teaching methods</button>
           </div>
         </div>
 
-        <div class="finder-q">
-          <div class="finder-q-text">Do you prefer technical manuals or readable books?</div>
+        <div class="finder-q" role="group" aria-labelledby="fq5-label">
+          <div class="finder-q-text" id="fq5-label">Do you prefer technical manuals or readable books?</div>
           <div class="finder-options" id="fq5">
-            <button class="finder-opt" data-q="style" data-v="manual"   onclick="fSelect(this)">Technical manual &#8212; give me the details</button>
-            <button class="finder-opt" data-q="style" data-v="readable" onclick="fSelect(this)">Readable &#8212; I want to enjoy it</button>
-            <button class="finder-opt" data-q="style" data-v="either"   onclick="fSelect(this)">Either</button>
+            <button class="finder-opt" aria-pressed="false" data-q="style" data-v="manual"   onclick="fSelect(this)">Technical manual &#8212; give me the details</button>
+            <button class="finder-opt" aria-pressed="false" data-q="style" data-v="readable" onclick="fSelect(this)">Readable &#8212; I want to enjoy it</button>
+            <button class="finder-opt" aria-pressed="false" data-q="style" data-v="either"   onclick="fSelect(this)">Either</button>
           </div>
         </div>
 
         <button class="finder-btn" onclick="fFind()">Find my books</button>
-        <div class="finder-error" id="finder-error"></div>
-        <div class="finder-results" id="finder-results"></div>
+        <div class="finder-error" id="finder-error" role="alert"></div>
+        <div class="finder-results" id="finder-results" aria-live="polite"></div>
 
         <div class="btn-row">
           <a class="cta big" href="/youtube-channel">Watch on YouTube &rarr;</a>
@@ -298,14 +276,16 @@
   // ---- Catalogue ----
   function rlSetCat(btn, val) {
     activeCat = val;
-    document.querySelectorAll('#rl-cat-filters .rl-pill').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('#rl-cat-filters .rl-pill').forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
     btn.classList.add('active');
+    btn.setAttribute('aria-pressed','true');
     rlRender();
   }
   function rlSetLvl(btn, val) {
     activeLvl = val;
-    document.querySelectorAll('#rl-lvl-filters .rl-pill').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('#rl-lvl-filters .rl-pill').forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
     btn.classList.add('active');
+    btn.setAttribute('aria-pressed','true');
     rlRender();
   }
   function rlRender() {
@@ -329,7 +309,7 @@
       tagHtml += b.levels.map(function(l){ return '<span class="tag tag-level">' + l + '</span>'; }).join('');
       var reflection = b.reflection ? '<p class="book-reflection">' + b.reflection + '</p>' : '';
       var yt = b.youtube ? '<a class="book-youtube" href="' + b.youtube + '" target="_blank" rel="noopener">Watch the review →</a>' : '';
-      return '<article class="book-card"><div class="book-card-body"><div class="book-title">' + b.title + '</div><div class="book-author">' + b.author + '</div><div class="book-desc">' + b.desc + '</div>' + reflection + yt + '</div><div class="book-tags">' + tagHtml + '</div></article>';
+      return '<article class="book-card"><div class="book-card-body"><h3 class="book-title">' + b.title + '</h3><div class="book-author">' + b.author + '</div><div class="book-desc">' + b.desc + '</div>' + reflection + yt + '</div><div class="book-tags">' + tagHtml + '</div></article>';
     }).join('');
   }
 
@@ -338,8 +318,9 @@
     var q = btn.getAttribute('data-q');
     var v = btn.getAttribute('data-v');
     var group = btn.parentElement;
-    group.querySelectorAll('.finder-opt').forEach(function(b){ b.classList.remove('selected'); });
+    group.querySelectorAll('.finder-opt').forEach(function(b){ b.classList.remove('selected'); b.setAttribute('aria-pressed','false'); });
     btn.classList.add('selected');
+    btn.setAttribute('aria-pressed','true');
     finderAnswers[q] = v;
   }
   function fFind() {
