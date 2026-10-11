@@ -167,3 +167,14 @@ export const ClimateFile = z.object({
   period: z.object({ start_year: z.number().int(), end_year: z.number().int() }),
   months: z.array(ClimateMonth).min(1).max(12),
 });
+
+/**
+ * definitions.json: only the keys the UI reads are checked; everything else passes through.
+ * Density cutoffs are read from snow.density (or snow) by name, see charts.js.
+ */
+export const DefinitionsFile = z.object({
+  snow: z.object({
+    powder_day_in: z.number().positive().nullish(),
+    banner_day_in: z.number().positive().nullish(),
+  }).passthrough().nullish(),
+}).passthrough();

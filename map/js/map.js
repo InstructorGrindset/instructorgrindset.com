@@ -39,11 +39,25 @@ function buildStyle(index) {
         id: 'clusters-fill', type: 'fill', source: 'clusters',
         paint: {
           'fill-color': C.cluster,
-          'fill-opacity': ['case', fs('selected'), 0.1, fs('hover'), 0.16, fs('focus'), 0.12, fs('dim'), 0.03, 0.08],
+          // Fallback clusters (other-xx) carry no fill so named clusters read clearly.
+          'fill-opacity': ['case', ['boolean', ['get', 'fallback'], false],
+            ['case', fs('selected'), 0.05, fs('hover'), 0.05, 0],
+            ['case', fs('selected'), 0.1, fs('hover'), 0.16, fs('focus'), 0.12, fs('dim'), 0.03, 0.08]],
+        },
+      },
+      {
+        id: 'clusters-line-fallback', type: 'line', source: 'clusters', minzoom: 5,
+        filter: ['==', ['get', 'fallback'], true],
+        paint: {
+          'line-color': C.cluster,
+          'line-opacity': ['case', fs('selected'), 0.7, fs('hover'), 0.5, fs('focus'), 0.3, fs('dim'), 0.08, 0.15],
+          'line-width': ['case', fs('selected'), 1.6, 1],
+          'line-dasharray': [2, 3],
         },
       },
       {
         id: 'clusters-line', type: 'line', source: 'clusters',
+        filter: ['!=', ['get', 'fallback'], true],
         paint: {
           'line-color': C.cluster,
           'line-opacity': ['case', fs('selected'), 1, fs('hover'), 0.9, fs('focus'), 0.8, fs('dim'), 0.2, 0.5],
@@ -161,9 +175,9 @@ export function createMap(container, index, { onPick, getPadding }) {
       const r = index.resorts.get(view.resortId);
       // Frame the resort with its neighbours around it.
       const d = 0.22;
-      return { b: [[r.lon - d * 1.3, r.lat - d], [r.lon + d * 1.3, r.lat + d]], maxZoom: 10 };
+      return { b: [[r.lon - d * 1.3, r.lat - d], [r.lon + d * 1.3, r.lat + d]], maxZoom: 11 };
     }
-    if (view.clusterId) return { b: index.clusters.get(view.clusterId).bbox, maxZoom: 10 };
+    if (view.clusterId) return { b: minSpan(index.clusters.get(view.clusterId).bbox, 1.2, 0.8), maxZoom: 9 };
     if (view.stateCode) return { b: index.states.get(view.stateCode).bbox, maxZoom: 7.5 };
     return { b: config.nationalBounds, maxZoom: 5 };
   }
@@ -193,7 +207,8 @@ export function createMap(container, index, { onPick, getPadding }) {
     if (c.length) {
       // Smallest cluster wins where polygons overlap.
       const best = c.map((f) => index.clusters.get(f.properties.id)).filter(Boolean)
-        .sort((a, b) => area(a.bbox) - area(b.bbox))[0];
+        .filter((cl) => !cl.fallback || (current && current.stateCode && cl.states.includes(current.stateCode)))
+        .sort((a, b) => (a.fallback - b.fallback) || (area(a.bbox) - area(b.bbox)))[0];
       if (best) return { kind: 'cluster', id: best.id, name: best.name };
     }
     const s = map.queryRenderedFeatures(point, { layers: ['states-fill'] });
@@ -259,6 +274,15 @@ export function createMap(container, index, { onPick, getPadding }) {
 
 function hoverKey(t) {
   return { source: t.kind === 'resort' ? 'resorts' : t.kind === 'cluster' ? 'clusters' : 'states', id: t.id };
+}
+
+/** Grow a bbox around its center to at least spanX by spanY degrees. */
+function minSpan(b, spanX, spanY) {
+  if (!b) return b;
+  const cx = (b[0][0] + b[1][0]) / 2; const cy = (b[0][1] + b[1][1]) / 2;
+  const hx = Math.max((b[1][0] - b[0][0]) / 2, spanX / 2);
+  const hy = Math.max((b[1][1] - b[0][1]) / 2, spanY / 2);
+  return [[cx - hx, cy - hy], [cx + hx, cy + hy]];
 }
 
 function area(b) { return b ? (b[1][0] - b[0][0]) * (b[1][1] - b[0][1]) : Infinity; }

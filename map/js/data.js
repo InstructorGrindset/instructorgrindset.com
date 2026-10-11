@@ -2,7 +2,7 @@
 import { config } from './config.js';
 import {
   ResortsFile, Resort, FeatureCollectionShell, ClusterFeature, ResortFeature, StateFeature,
-  StatesFile, SourcesFile, ClimateFile,
+  StatesFile, SourcesFile, ClimateFile, DefinitionsFile,
 } from './schemas.js';
 
 export class DataError extends Error {}
@@ -95,14 +95,21 @@ function sizeRankFallback(acres) {
 
 const byName = (a, b) => a.name.localeCompare(b.name);
 
+/** Per state catch all clusters from the pipeline (`other-co`). */
+export function isFallbackCluster(id) { return id.startsWith('other-'); }
+
+/** Named clusters first, then fallback clusters, each by name. */
+export const clusterOrder = (a, b) => (a.fallback - b.fallback) || a.name.localeCompare(b.name);
+
 export async function loadAll() {
-  const [resortsRaw, clustersRaw, statesRaw, sourcesRaw, resortsGeoRaw, usStatesRaw] = await Promise.all([
+  const [resortsRaw, clustersRaw, statesRaw, sourcesRaw, resortsGeoRaw, usStatesRaw, definitions] = await Promise.all([
     fetchJson('resorts.json'),
     fetchJson('clusters.geojson'),
     fetchJson('states.json'),
     fetchJson('sources.json', { optional: true }),
     fetchJson('resorts.geojson', { optional: true }),
     fetchJson('us-states.geojson', { optional: true }),
+    loadDefinitions(),
   ]);
 
   const resortsFile = parseOrThrow(ResortsFile, resortsRaw, 'resorts.json');
@@ -123,6 +130,7 @@ export async function loadAll() {
     clusters.set(p.id, {
       ...p,
       resort_ids: ids,
+      fallback: isFallbackCluster(p.id),
       geometry: f.geometry,
       bbox: unionBbox(bboxOf(f.geometry), pointBbox(ids.map((id) => [resorts.get(id).lon, resorts.get(id).lat]))),
     });
@@ -189,6 +197,7 @@ export async function loadAll() {
   if (sourcesFile && sourcesFile.success) for (const s of sourcesFile.data.sources) sources.set(s.id, s);
 
   return {
+    definitions,
     generatedAt: resortsFile.generated_at,
     resorts,
     resortList: [...resortList].sort(byName),
@@ -198,10 +207,23 @@ export async function loadAll() {
     sources,
     geo: {
       usStates: usStatesFC,
-      clusters: { type: 'FeatureCollection', features: clusterFeatures.map((f) => ({ type: 'Feature', geometry: f.geometry, properties: { id: f.properties.id, name: f.properties.name } })) },
+      clusters: { type: 'FeatureCollection', features: clusterFeatures.map((f) => ({ type: 'Feature', geometry: f.geometry, properties: { id: f.properties.id, name: f.properties.name, fallback: isFallbackCluster(f.properties.id) } })) },
       resorts: { type: 'FeatureCollection', features: resortPoints },
     },
   };
+}
+
+/**
+ * definitions.json (thresholds from config/definitions.yaml). Optional: when it is
+ * missing or malformed the UI keeps generic labels and states no thresholds.
+ */
+async function loadDefinitions() {
+  let raw = null;
+  try { raw = await fetchJson('definitions.json', { optional: true }); } catch { raw = null; }
+  if (!raw) return null;
+  const r = DefinitionsFile.safeParse(raw);
+  if (!r.success) { console.warn('[map] definitions.json failed validation', r.error.issues.slice(0, 3)); return null; }
+  return r.data;
 }
 
 const climateCache = new Map();

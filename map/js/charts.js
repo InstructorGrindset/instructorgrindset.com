@@ -16,6 +16,39 @@ const INK = '#e7e9ee';
 const MUTED = '#9aa6b8';
 const GRID = 'rgba(255,255,255,0.07)';
 
+/** Thresholds from definitions.json, or nulls when it is absent. */
+export function thresholds(defs) {
+  const snow = (defs && defs.snow) || {};
+  const pick = (obj, re) => {
+    if (!obj || typeof obj !== 'object') return null;
+    const k = Object.keys(obj).find((key) => re.test(key) && typeof obj[key] === 'number');
+    return k ? obj[k] : null;
+  };
+  const dens = typeof snow.density === 'object' && snow.density ? snow.density : snow;
+  return {
+    powder: typeof snow.powder_day_in === 'number' ? snow.powder_day_in : null,
+    banner: typeof snow.banner_day_in === 'number' ? snow.banner_day_in : null,
+    dryBelow: pick(dens, /dry/i),
+    moistAbove: pick(dens, /moist/i),
+  };
+}
+
+function dayCaption(t) {
+  if (t.powder != null && t.banner != null) {
+    return `Average days per month. A powder day brings ${fmt1(t.powder)} in or more of new snow in 24 hours, a banner day ${fmt1(t.banner)} in or more.`;
+  }
+  return 'Average days per month';
+}
+
+function densityLabels(t) {
+  if (t.dryBelow == null || t.moistAbove == null) return { dry: 'Dry', average: 'Average', moist: 'Moist' };
+  return {
+    dry: `Dry, under ${fmt1(t.dryBelow)}%`,
+    average: `Average, ${fmt1(t.dryBelow)} to ${fmt1(t.moistAbove)}%`,
+    moist: `Moist, over ${fmt1(t.moistAbove)}%`,
+  };
+}
+
 let chartLib = null;
 const live = new Set();
 
@@ -133,8 +166,10 @@ function mount(Chart, canvas, cfg) {
 }
 
 /** Render resort climate charts into root. */
-export async function renderResortCharts(root, climate) {
+export async function renderResortCharts(root, climate, defs = null) {
   const Chart = await loadChartJs();
+  const t = thresholds(defs);
+  const dlabels = densityLabels(t);
   const months = seasonMonths(climate);
   const v = (k) => months.map((m) => (m ? m[k] : null));
   const snow = v('snowfall_in');
@@ -147,10 +182,11 @@ export async function renderResortCharts(root, climate) {
   const pct = (k) => mix.map((x) => (x ? Math.round(x[k] * 1000) / 10 : null));
 
   const f1 = figure('Snowfall by month', 'Average inches of new snow', describe('Snowfall', snow, ' in'));
-  const f2 = figure('Powder days and banner days', 'Average days per month', `${describe('Powder days', powder, '')} ${describe('Banner days', banner, '')}`);
+  const f2 = figure('Powder days and banner days', dayCaption(t), `${describe('Powder days', powder, '')} ${describe('Banner days', banner, '')}`);
   const f3 = figure('Average storm depth', 'Inches of snow per storm', describe('Average storm depth', storm, ' in'));
   const dl = densityLabel(climate);
-  const f4 = figure('Snow density mix', 'Share of new snow by water content',
+  const f4 = figure('Snow density mix',
+    t.dryBelow != null && t.moistAbove != null ? 'Share of new snow by water content, the share of water in fresh snow' : 'Share of new snow by water content',
     `Snow density mix by month, dry, average and moist. ${dl ? `Source ${dl}.` : ''}`,
     { tall: true, extra: dl ? h('span', { class: `src-tag ${dl === 'SNOTEL' ? 'src-snotel' : 'src-est'}` }, dl) : null });
   const f5 = figure('Temperatures', 'Average daily high and low, °F', `${describe('High', hi, ' F')} ${describe('Low', lo, ' F')}`);
@@ -178,7 +214,7 @@ export async function renderResortCharts(root, climate) {
     mount(Chart, f4.canvas, {
       data: {
         labels: labels(),
-        datasets: [seg('Dry', 'dry', DENSITY.dry), seg('Average', 'average', DENSITY.average), seg('Moist', 'moist', DENSITY.moist, true)],
+        datasets: [seg(dlabels.dry, 'dry', DENSITY.dry), seg(dlabels.average, 'average', DENSITY.average), seg(dlabels.moist, 'moist', DENSITY.moist, true)],
       },
       options: {
         scales: axes({ unit: '%', stacked: true, max: 100 }),
@@ -233,7 +269,7 @@ function climateTable(climate) {
 }
 
 /** entries: [{ resort, climate }] where climate may be null. */
-export async function renderCompareCharts(root, entries) {
+export async function renderCompareCharts(root, entries, defs = null) {
   const withData = entries.filter((e) => e.climate);
   if (!withData.length) return;
   const Chart = await loadChartJs();
@@ -243,7 +279,9 @@ export async function renderCompareCharts(root, entries) {
   });
   const names = withData.map((e) => e.resort.name).join(', ');
   const f1 = figure('Snowfall by month', 'Average inches of new snow', `Snowfall by month for ${names}.`);
-  const f2 = figure('Powder days by month', 'Average days per month', `Powder days by month for ${names}.`);
+  const t = thresholds(defs);
+  const f2 = figure('Powder days by month', t.powder != null
+    ? `Average days per month with ${fmt1(t.powder)} in or more of new snow in 24 hours` : 'Average days per month', `Powder days by month for ${names}.`);
   root.append(f1.node, f2.node);
   mount(Chart, f1.canvas, {
     data: { labels: labels(), datasets: ds('snowfall_in') },

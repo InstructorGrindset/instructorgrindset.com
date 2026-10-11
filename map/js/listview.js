@@ -1,5 +1,5 @@
 // List view: the full state, cluster and resort hierarchy without the map.
-import { clusterResorts } from './data.js';
+import { clusterResorts, clusterOrder } from './data.js';
 import { hrefFor } from './router.js';
 import { h, clear, plural } from './ui.js';
 
@@ -19,7 +19,7 @@ export function createListView(root, index) {
       link({ level: 'state', stateCode: s.code }, s.name, 'tree-state'),
       h('span', { class: 'tree-meta' }, ` ${plural(s.resort_count, 'resort', 'resorts')}`),
       h('ul', null, s.cluster_ids.map((cid) => index.clusters.get(cid))
-        .sort((a, b) => a.name.localeCompare(b.name))
+        .sort(clusterOrder)
         .map((c) => h('li', null,
           link({ level: 'cluster', stateCode: s.code, clusterId: c.id }, c.name, 'tree-cluster'),
           h('ul', null, clusterResorts(index, c)

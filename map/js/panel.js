@@ -1,6 +1,6 @@
 // Side panel (desktop) / bottom sheet (phone) content for each level.
 import { config } from './config.js';
-import { clusterResorts, loadClimate } from './data.js';
+import { clusterResorts, clusterOrder, loadClimate } from './data.js';
 import { hrefFor } from './router.js';
 import {
   h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd,
@@ -134,7 +134,7 @@ export function createPanel(root, index, { onCompare }) {
 
   function state(view) {
     const s = index.states.get(view.stateCode);
-    const clusters = s.cluster_ids.map((id) => index.clusters.get(id)).sort((a, b) => a.name.localeCompare(b.name));
+    const clusters = s.cluster_ids.map((id) => index.clusters.get(id)).sort(clusterOrder);
     return [
       breadcrumb(view),
       ...heading('State', s.name),
@@ -274,7 +274,7 @@ export function createPanel(root, index, { onCompare }) {
         if (!climate) { climateRoot.append(h('p', { class: 'not-verified' }, 'Climate data is being compiled.')); return; }
         climateRoot.append(climateHeader(climate));
         try {
-          await renderResortCharts(climateRoot, climate);
+          await renderResortCharts(climateRoot, climate, index.definitions);
         } catch (err) {
           console.warn('[map] charts', err.message);
           climateRoot.append(h('p', { class: 'not-verified' }, 'Charts could not load. Try reloading the page.'));
@@ -330,7 +330,7 @@ export function createPanel(root, index, { onCompare }) {
       if (missing.length) noteRoot.append(h('p', { class: 'not-verified' }, `Climate data is being compiled for ${joinAnd(missing)}.`));
       clear(chartsRoot);
       try {
-        await renderCompareCharts(chartsRoot, entries);
+        await renderCompareCharts(chartsRoot, entries, index.definitions);
       } catch (err) {
         console.warn('[map] charts', err.message);
         chartsRoot.append(h('p', { class: 'not-verified' }, 'Charts could not load. Try reloading the page.'));
