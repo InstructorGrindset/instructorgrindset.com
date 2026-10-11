@@ -1,0 +1,333 @@
+batch: candidates-west
+researched_date: 2026-10-11
+status: draft            # for Alexandre's approval
+# Western US independents and non Vail, non Alterra operators. All values come from Wikipedia
+# pages fetched on 2026-10-11 through the Wikipedia API. Resort and operator websites were
+# blocked by the research environment's egress policy (HTTP 403), so ownership is NOT yet
+# confirmed on each resort's own site; owners taken from Wikipedia carry a note.
+# lat/lon are the Wikipedia infobox coordinates, used as the base area point.
+#
+# Researched and left out (no fetched source supports a Tier A criterion as written):
+#   loveland (CO): opened 1936, Pete Seibert was GM in 1955; local favourite near Denver. State level history only.
+#   monarch (CO): opened 1939, "Bloody Ridge" legend; article flagged promotional. No criterion.
+#   mt-hood-meadows (OR): size and lift history only (30% double black terrain is not a culture source).
+#   grand-targhee (WY): snowfall and ownership history only.
+#   snow-king (WY): first ski area in Wyoming (1939), Jackson Hole Ski Club 1937. State level history only.
+#   brundage (ID): Corey Engen laid out trails; no criterion.
+#   mt-rose (NV): hosted the inaugural NCAA Skiing Championships (1954) and was the 1960 Olympic alternate
+#                 downhill site. Borderline heritage; flagged for Alexandre.
+#   arizona-snowbowl (AZ): article covers the sacred peaks litigation and reclaimed water snowmaking only.
+#   ski-santa-fe (NM): first rope tow in New Mexico (1936), Ernie Blake managed it in 1950. State level history only.
+#   angel-fire (NM): ownership and finance history only.
+#   wolf-creek (CO): most snowfall in Colorado; snowfall alone is not a criterion.
+#   sundance (UT), purgatory (CO), beaver-mountain (UT), mt-hood-skibowl (OR): no criterion in their articles.
+sources:
+  - {id: wikipedia-copper-mountain-colorado, url: "https://en.wikipedia.org/wiki/Copper_Mountain_(Colorado)", title: "Copper Mountain (Colorado) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-powdr, url: https://en.wikipedia.org/wiki/Powdr, title: Powdr (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-ski-cooper, url: https://en.wikipedia.org/wiki/Ski_Cooper, title: Ski Cooper (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-silverton-mountain, url: https://en.wikipedia.org/wiki/Silverton_Mountain, title: Silverton Mountain (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-howelsen-hill-ski-area, url: https://en.wikipedia.org/wiki/Howelsen_Hill_Ski_Area, title: Howelsen Hill Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-steamboat-springs-winter-sports-club, url: https://en.wikipedia.org/wiki/Steamboat_Springs_Winter_Sports_Club, title: Steamboat Springs Winter Sports Club (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-brighton-ski-resort, url: https://en.wikipedia.org/wiki/Brighton_Ski_Resort, title: Brighton Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-boyne-resorts, url: https://en.wikipedia.org/wiki/Boyne_Resorts, title: Boyne Resorts (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-snowbasin, url: https://en.wikipedia.org/wiki/Snowbasin, title: Snowbasin (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-powder-mountain, url: https://en.wikipedia.org/wiki/Powder_Mountain, title: Powder Mountain (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mount-bachelor-ski-area, url: https://en.wikipedia.org/wiki/Mount_Bachelor_ski_area, title: Mount Bachelor ski area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-timberline-lodge-ski-area, url: https://en.wikipedia.org/wiki/Timberline_Lodge_ski_area, title: Timberline Lodge ski area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-magic-mile, url: https://en.wikipedia.org/wiki/Magic_Mile, title: Magic Mile (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mt-baker-ski-area, url: https://en.wikipedia.org/wiki/Mt._Baker_Ski_Area, title: Mt. Baker Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mt-baker-legendary-banked-slalom, url: https://en.wikipedia.org/wiki/Mt._Baker_Legendary_Banked_Slalom, title: Mt. Baker Legendary Banked Slalom (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-bridger-bowl-ski-area, url: https://en.wikipedia.org/wiki/Bridger_Bowl_Ski_Area, title: Bridger Bowl Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-whitefish-mountain-resort, url: https://en.wikipedia.org/wiki/Whitefish_Mountain_Resort, title: Whitefish Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-alyeska-resort, url: https://en.wikipedia.org/wiki/Alyeska_Resort, title: Alyeska Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-bogus-basin, url: https://en.wikipedia.org/wiki/Bogus_Basin, title: Bogus Basin (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-montana-snowbowl, url: https://en.wikipedia.org/wiki/Montana_Snowbowl, title: Montana Snowbowl (Wikipedia), accessed_date: 2026-10-11}
+resorts:
+  - id: copper-mountain
+    name: Copper Mountain
+    facility_type: ski_area
+    state: CO
+    owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Bought from Intrawest in December 2009; the Copper Mountain article says the resort is operated by POWDR."}
+    lat: 39.50167
+    lon: -106.15639
+    location_source_id: wikipedia-copper-mountain-colorado
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Copper Mountain has been an official U.S. Ski Team downhill training venue since the 2011 to 2012 season.", source_id: wikipedia-copper-mountain-colorado}
+      - {criterion: year_round_training, rationale: "Woodward opened a 20,000 square foot indoor ski and snowboard training facility at Copper in February 2009, dedicated to terrain park and halfpipe training.", source_id: wikipedia-copper-mountain-colorado}
+    size:
+      acres: {value: 2465, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2601, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-11, confidence: published}
+      lifts: null   # infobox total 23 conflicts with its itemized list, which sums to 25 including a tubing lift
+    elevation:
+      base_ft: {value: 9712, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 12313, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-11, confidence: published}
+
+  - id: ski-cooper
+    name: Ski Cooper
+    facility_type: ski_area
+    state: CO
+    owner: {value: Lake County, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published, note: "Managed by Cooper Hill Ski Area, a 501(c)4 nonprofit with a volunteer board."}
+    lat: 39.36
+    lon: -106.302
+    location_source_id: wikipedia-ski-cooper
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Opened as Cooper Hill in 1942, the area served as the training site for the 10th Mountain Division based at nearby Camp Hale during World War II.", source_id: wikipedia-ski-cooper}
+    size:
+      acres: {value: 470, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published, note: "Lift served; plus 2,400 acres snowcat served."}
+      vertical_ft: {value: 1200, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 5, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published, note: "1 triple, 1 double, 3 surface lifts."}
+    elevation:
+      base_ft: {value: 10500, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 11700, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published}
+
+  - id: silverton-mountain
+    name: Silverton Mountain
+    facility_type: ski_area
+    state: CO
+    owner: null   # article says founded by Aaron and Jen Brill in 2002 but does not state the current owner
+    lat: 37.8847
+    lon: -107.66529
+    location_source_id: wikipedia-silverton-mountain
+    cluster_hint: southwest-colorado
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Silverton Mountain serves only advanced and expert terrain from a single chairlift, with no groomed runs, required avalanche gear and a claim to being the most expert ski area in North America.", source_id: wikipedia-silverton-mountain}
+    size:
+      acres: {value: 1819, source_id: wikipedia-silverton-mountain, as_of: 2026-10-11, confidence: published, note: "Lift accessed; over 22,000 acres more by hike and helicopter."}
+      vertical_ft: null
+      lifts: {value: 1, source_id: wikipedia-silverton-mountain, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 10400, source_id: wikipedia-silverton-mountain, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 13487, source_id: wikipedia-silverton-mountain, as_of: 2026-10-11, confidence: published, note: "Includes hike to terrain."}
+
+  - id: howelsen-hill
+    name: Howelsen Hill Ski Area
+    facility_type: ski_area
+    state: CO
+    owner: {value: City of Steamboat Springs, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published, note: "Owned and operated by the Parks, Open Space and Recreation Department."}
+    lat: 40.483
+    lon: -106.839
+    location_source_id: wikipedia-howelsen-hill-ski-area
+    cluster_hint: northern-colorado
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Howelsen Hill is the home area of the Steamboat Springs Winter Sports Club, which has produced 88 Winter Olympians and was named U.S. Ski Team Club of the Year in 1999, 2004 and 2007.", source_id: wikipedia-steamboat-springs-winter-sports-club}
+      - {criterion: heritage, rationale: "Opened in 1914, Howelsen Hill is the oldest continuously operating ski area in North America and has the largest natural ski jumping complex on the continent.", source_id: wikipedia-howelsen-hill-ski-area}
+    size:
+      acres: {value: 50, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 440, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 4, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published, note: "Triple chair, Poma surface lift and two carpets (one for tubing)."}
+    elevation:
+      base_ft: {value: 6696, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 7136, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published}
+
+  - id: brighton
+    name: Brighton Ski Resort
+    facility_type: ski_area
+    state: UT
+    owner: {value: Boyne Resorts, source_id: wikipedia-boyne-resorts, as_of: 2026-10-11, confidence: published, note: "Boyne bought Brighton in 1986, sold it in 2007 while leasing it back, and repurchased it in 2018."}
+    lat: 40.6
+    lon: -111.58333
+    location_source_id: wikipedia-brighton-ski-resort
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Brighton was the first ski resort in Utah, started in 1936 when Alpine Ski Club members built a rope tow, and many top professional snowboarders called it home from the early 1990s through the 2000s.", source_id: wikipedia-brighton-ski-resort}
+    size:
+      acres: {value: 1050, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1750, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 6, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-11, confidence: published, note: "1 high speed six pack, 3 high speed quads, 1 fixed grip quad, 1 triple."}
+    elevation:
+      base_ft: {value: 8755, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 10750, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-11, confidence: published}
+
+  - id: snowbasin
+    name: Snowbasin
+    facility_type: ski_area
+    state: UT
+    owner: {value: Earl Holding family, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: estimated, note: "The article says Earl Holding, owner of Sun Valley, bought the area in October 1984 and reports no later sale; current ownership not confirmed on the resort site."}
+    lat: 41.216
+    lon: -111.857
+    location_source_id: wikipedia-snowbasin
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Snowbasin hosted the 2002 Winter Olympic downhill, combined and super G races, and its longtime ski school director M. Earl Miller helped draft the PSIA American Ski Technique in 1961.", source_id: wikipedia-snowbasin}
+    size:
+      acres: {value: 3000, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2959, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 13, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: published, note: "Includes a tram, 2 gondolas and 3 surface lifts."}
+    elevation:
+      base_ft: {value: 6391, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 9350, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: published}
+
+  - id: powder-mountain
+    name: Powder Mountain
+    facility_type: ski_area
+    state: UT
+    owner: {value: Reed Hastings, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "Acquired in 2023; Hastings serves as CEO and chairman."}
+    lat: 41.38
+    lon: -111.78028
+    location_source_id: wikipedia-powder-mountain
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "Under Netflix cofounder Reed Hastings the resort adopted a blended public and private model in 2023, and its summit holds Powder Haven, a 600 family private ski community.", source_id: wikipedia-powder-mountain}
+    size:
+      acres: {value: 4200, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "Lift served; 8,000 skiable acres in total including snowcat terrain."}
+      vertical_ft: {value: 2205, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "Lift served; 2,522 ft with hiking."}
+      lifts: {value: 9, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "6 chairs and 3 surface lifts; three chairs are homeowner lifts."}
+    elevation:
+      base_ft: {value: 6900, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8900, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "Lift served; 9,422 ft by hiking."}
+
+  - id: mt-bachelor
+    name: Mt. Bachelor
+    facility_type: ski_area
+    state: OR
+    owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Owned since 2001. POWDR announced a sale in August 2024 and later said it would keep Mt. Bachelor."}
+    lat: 44.003
+    lon: -121.677
+    location_source_id: wikipedia-mount-bachelor-ski-area
+    cluster_hint: central-oregon
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Mount Bachelor is the official home training resort of many professional and Winter Olympic athletes and hosts several U.S. Ski and Snowboard Association competitions each year.", source_id: wikipedia-mount-bachelor-ski-area}
+    size:
+      acres: {value: 4323, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3365, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-11, confidence: published, note: "Lift served."}
+      lifts: null   # infobox "12 total (9 high speed quads, 3 triples, 3 surface)" does not add up; text lists 12 chairlifts with 7 express quads
+    elevation:
+      base_ft: {value: 5700, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-11, confidence: published, note: "Northwest Express base; the Pine Marten Express base is 6,350 ft."}
+      summit_ft: {value: 9065, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-11, confidence: published, note: "Top of Summit Express."}
+
+  - id: timberline-lodge
+    name: Timberline Lodge ski area
+    facility_type: ski_area
+    state: OR
+    owner: {value: Kohnstamm family (operator), source_id: wikipedia-magic-mile, as_of: 2026-10-11, confidence: published, note: "The lodge is publicly owned by the U.S. Forest Service; Richard Kohnstamm took over operation in 1955 and his family still manages the resort. The summer Palmer program is a separate record (timberline-palmer-summer)."}
+    lat: 45.33
+    lon: -121.71
+    location_source_id: wikipedia-timberline-lodge-ski-area
+    cluster_hint: mount-hood
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Timberline's Magic Mile opened in 1939 as the longest chairlift in existence and the first with metal towers, and its Golden Rose Ski Classic, begun in 1936, is the oldest known organized ski race in America.", source_id: wikipedia-magic-mile}
+    size:
+      acres: {value: 1685, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 4540, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published, note: "Winter, using chairlifts, the Palmer snowcat and the resort shuttle; 2,166 ft by chairlift only."}
+      lifts: {value: 9, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published, note: "7 chairlifts, 1 rope tow, 1 magic carpet."}
+    elevation:
+      base_ft: {value: 4000, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8540, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published}
+
+  - id: mt-baker
+    name: Mt. Baker Ski Area
+    facility_type: ski_area
+    state: WA
+    owner: null   # not stated in the article
+    lat: 48.862
+    lon: -121.654
+    location_source_id: wikipedia-mt-baker-ski-area
+    cluster_hint: cascades
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Mt. Baker is known for numerous challenging in bounds routes and lift accessed backcountry, and holds the world record for snowfall in one season, 1,140 inches in 1998 to 1999.", source_id: wikipedia-mt-baker-ski-area}
+      - {criterion: heritage, rationale: "The Legendary Banked Slalom, held at Mt. Baker every year since 1985, is regarded as the predecessor of boardercross and began there because Mt. Baker was one of the few ski areas that welcomed snowboarders at the time.", source_id: wikipedia-mt-baker-legendary-banked-slalom}
+    size:
+      acres: {value: 1000, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1589, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 10, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-11, confidence: published, note: "8 chairs, 2 rope tows."}
+    elevation:
+      base_ft: {value: 3500, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-11, confidence: published, note: "White Salmon base; Heather Meadows base is about 4,300 ft."}
+      summit_ft: {value: 5089, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-11, confidence: published}
+
+  - id: bridger-bowl
+    name: Bridger Bowl
+    facility_type: ski_area
+    state: MT
+    owner: {value: Bridger Bowl (locally owned nonprofit), source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
+    lat: 45.818
+    lon: -110.897
+    location_source_id: wikipedia-bridger-bowl-ski-area
+    cluster_hint: southwest-montana
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Bridger Bowl is a locally owned nonprofit that serves Bozeman skiers, who are alerted to new snow by a blue beacon atop the Baxter Hotel downtown, and its Schlasman's lift serves expert only terrain that requires an avalanche transceiver.", source_id: wikipedia-bridger-bowl-ski-area}
+    size:
+      acres: {value: 2000, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2600, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 8, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published, note: "Chairlifts: 1 quad, 6 triples, 1 double."}
+    elevation:
+      base_ft: {value: 6100, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8700, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
+
+  - id: whitefish-mountain
+    name: Whitefish Mountain Resort
+    facility_type: ski_area
+    state: MT
+    owner: {value: "Winter Sports, Inc.", source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says billionaire Bill Foley became majority shareholder in 2007 and reports no later change; not confirmed on the resort site."}
+    lat: 48.5
+    lon: -114.34
+    location_source_id: wikipedia-whitefish-mountain-resort
+    cluster_hint: inland-northwest
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "The mountain hosted the U.S. Alpine Championships in 1949 and 2001, and 1994 Olympic downhill champion Tommy Moe learned to ski and race there.", source_id: wikipedia-whitefish-mountain-resort}
+    size:
+      acres: {value: 3020, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2353, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: null   # infobox lists 12 chairs plus 3 surface tows; text says 14 operating lifts
+    elevation:
+      base_ft: {value: 4464, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 6817, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: published}
+
+  - id: alyeska
+    name: Alyeska Resort
+    facility_type: ski_area
+    state: AK
+    owner: {value: Pomeroy Lodging, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: estimated, note: "The article reports an October 2018 contract to sell substantially all resort assets to Pomeroy Lodging; closing and current ownership not confirmed."}
+    lat: 60.9705
+    lon: -149.0982
+    location_source_id: wikipedia-alyeska-resort
+    cluster_hint: alaska
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Alyeska hosted World Cup giant slalom races in 1973 and the U.S. Alpine Championships in 1963, 1981, 2004, 2007 and 2009, and its 1960 Roundhouse is on the National Register of Historic Places.", source_id: wikipedia-alyeska-resort}
+      - {criterion: diehard, rationale: "Mount Alyeska has a much higher share of advanced and expert runs than most North American mountains, with only a small novice section.", source_id: wikipedia-alyeska-resort}
+    size:
+      acres: {value: 1400, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2500, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: published, note: "Lift served; 3,200 ft total."}
+      lifts: {value: 8, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: published, note: "1 tram, 5 chairlifts, 2 magic carpets."}
+    elevation:
+      base_ft: {value: 250, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 2750, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: published, note: "Lift served; the summit is 3,939 ft."}
+
+  - id: bogus-basin
+    name: Bogus Basin
+    facility_type: ski_area
+    state: ID
+    owner: {value: Bogus Basin Recreation Association (nonprofit), source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: estimated, note: "Operator per the article; that sentence is marked citation needed."}
+    lat: 43.764
+    lon: -116.104
+    location_source_id: wikipedia-bogus-basin
+    cluster_hint: other-id
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Bogus Basin cut its adult season pass from $500 to $199 in 1998, sold nearly nine times as many passes, and resorts from coast to coast then lowered their pass prices.", source_id: wikipedia-bogus-basin}
+    size:
+      acres: {value: 2600, source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1790, source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 11, source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: published, note: "7 chairlifts and 4 magic carpets."}
+    elevation:
+      base_ft: {value: 5790, source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: published, note: "Pine Creek (Chair 6); the main base area is 6,150 ft."}
+      summit_ft: {value: 7582, source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: published}
+
+  - id: montana-snowbowl
+    name: Montana Snowbowl
+    facility_type: ski_area
+    state: MT
+    owner: null   # not stated in the article
+    lat: 47.02
+    lon: -114.0
+    location_source_id: wikipedia-montana-snowbowl
+    cluster_hint: other-mt
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Montana Snowbowl is known for long, steep expert runs such as West Bowl and for throwback operations with vintage Riblet chairs and no significant base development.", source_id: wikipedia-montana-snowbowl}
+    size:
+      acres: {value: 950, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2600, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published}
+      lifts: null   # infobox lists 3 doubles, a T-bar and a rope tow; text lists four chairlifts including a Skytrac triple
+    elevation:
+      base_ft: {value: 5000, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published, note: "Rounded in the infobox."}
+      summit_ft: {value: 7600, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published, note: "Top of LaValle Creek chair, rounded."}
