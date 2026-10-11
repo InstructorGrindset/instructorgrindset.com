@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T20:18:32Z",
+  "generated_at": "2026-10-11T20:20:06Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -3430,51 +3430,69 @@
       ]
     },
     {
-      "id": "berkshire-east-ski-resort",
-      "name": "Berkshire East Ski Resort",
-      "tier": "B",
+      "id": "berkshire-east",
+      "name": "Berkshire East Mountain Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Berkshire East is known for strong racing programs that have trained racers up to United States Ski Team members, and it frequently hosts USSA slalom and giant slalom championship races.",
+          "source_id": "wikipedia-berkshire-east-ski-resort"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 42.61492,
-      "lon": -72.87219,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Jon Shaefer",
+        "source_id": "wikipedia-berkshire-east-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Shaefer is CEO of Bear Den Partners, which bought Burke in May 2025 and a majority of Smugglers' Notch in February 2026."
+      },
+      "lat": 42.6208,
+      "lon": -72.8769,
+      "location_source_id": "wikipedia-berkshire-east-ski-resort",
       "cluster_id": "other-ma",
       "state": "MA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 950,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 180,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 1180,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 6,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-berkshire-east-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox: 4 chairs (3 quads, 1 double) and 2 surface lifts."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 587,
-          "source_id": "openskimap-ski-areas",
+          "value": 520,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1537,
-          "source_id": "openskimap-ski-areas",
+          "value": 1840,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -3502,7 +3520,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-berkshire-east-ski-resort"
       ]
     },
     {
@@ -4531,44 +4549,56 @@
       ]
     },
     {
-      "id": "black-mountain-of-maine",
+      "id": "black-mountain-maine",
       "name": "Black Mountain of Maine",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Rumford's Chisholm Ski Club, which opened Black Mountain in 1962, hosted the cross country events of the 1950 FIS Nordic World Ski Championships at its earlier area, and Black Mountain's trails have held US cross country national championships in 1993, 1999, 2003 and 2004.",
+          "source_id": "wikipedia-black-mountain-of-maine"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.57973,
-      "lon": -70.6215,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Maine Winter Sports Center",
+        "source_id": "wikipedia-black-mountain-of-maine",
+        "as_of": "2026-10-11",
+        "confidence": "estimated",
+        "note": "Purchased in 2003 per the history section; the article describes no later change."
+      },
+      "lat": 44.58,
+      "lon": -70.6175,
+      "location_source_id": "wikipedia-black-mountain-of-maine",
       "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 1227,
-          "source_id": "openskimap-ski-areas",
+          "value": 1380,
+          "source_id": "wikipedia-black-mountain-of-maine",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox; the history section gives 1,150 ft after the 2005 summit chair."
         },
         "lifts": {
           "value": 3,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-black-mountain-of-maine",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "2 chairs and 1 T bar."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 971,
-          "source_id": "openskimap-ski-areas",
+          "value": 1000,
+          "source_id": "wikipedia-black-mountain-of-maine",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
           "value": 2199,
@@ -4603,7 +4633,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-black-mountain-of-maine"
       ]
     },
     {
@@ -5784,127 +5815,69 @@
       ]
     },
     {
-      "id": "boyne-highlands-resort",
-      "name": "Boyne Highlands Resort",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 45.47666,
-      "lon": -84.94344,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-mi",
-      "state": "MI",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 529,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 7,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 785,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 1314,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
       "id": "boyne-mountain",
-      "name": "Boyne Mountain",
-      "tier": "B",
+      "name": "Boyne Mountain Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Boyne Mountain still uses parts of the world's first chairlift, built in 1936 for Sun Valley, and with Boyne Highlands it introduced the world's first triple (1963) and quad (1965) chairlifts.",
+          "source_id": "wikipedia-boyne-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 45.16749,
-      "lon": -84.94407,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Boyne Resorts",
+        "source_id": "wikipedia-boyne-mountain-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 45.1639,
+      "lon": -84.9328,
+      "location_source_id": "wikipedia-boyne-mountain-resort",
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 441,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 175,
+          "source_id": "wikipedia-boyne-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 433,
+          "source_id": "wikipedia-boyne-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 10,
-          "source_id": "openskimap-ski-areas",
+          "value": 11,
+          "source_id": "wikipedia-boyne-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Ten chairlifts and a carpet lift."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 713,
-          "source_id": "openskimap-ski-areas",
+          "value": 719,
+          "source_id": "wikipedia-boyne-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1155,
-          "source_id": "openskimap-ski-areas",
+          "value": 1152,
+          "source_id": "wikipedia-boyne-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -5932,7 +5905,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-boyne-mountain-resort"
       ]
     },
     {
@@ -7011,15 +6984,27 @@
     {
       "id": "buck-hill",
       "name": "Buck Hill",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "World Cup racers Lindsey Vonn and Kristina Koznick learned to race at Buck Hill under Erich Sailer, its racing coach since 1969 and a 2006 National Ski Hall of Fame inductee.",
+          "source_id": "wikipedia-buck-hill"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.72348,
-      "lon": -93.28546,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "David and Corrine Solner",
+        "source_id": "wikipedia-buck-hill",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 44.724,
+      "lon": -93.283,
+      "location_source_id": "wikipedia-buck-hill",
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
@@ -7032,28 +7017,28 @@
           "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
         },
         "lifts": {
-          "value": 12,
-          "source_id": "openskimap-ski-areas",
+          "value": 8,
+          "source_id": "wikipedia-buck-hill",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "2 quads, 1 triple, 3 rope tows, 2 magic carpets; excludes the snow tubing tow."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 952,
-          "source_id": "openskimap-ski-areas",
+          "value": 949,
+          "source_id": "wikipedia-buck-hill",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1210,
-          "source_id": "openskimap-ski-areas",
+          "value": 1211,
+          "source_id": "wikipedia-buck-hill",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -7081,7 +7066,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-buck-hill"
       ]
     },
     {
@@ -8168,51 +8154,69 @@
       ]
     },
     {
-      "id": "cannon-mountain",
+      "id": "cannon",
       "name": "Cannon Mountain",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Cannon was the site of North America's first passenger aerial tramway, dedicated in 1938, and its Richard Taft Race Course was developed in 1931 and 1932.",
+          "source_id": "wikipedia-cannon-mountain-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.16953,
-      "lon": -71.70188,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "State of New Hampshire",
+        "source_id": "wikipedia-cannon-mountain-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "State owned ski area inside Franconia Notch State Park."
+      },
+      "lat": 44.1578,
+      "lon": -71.6989,
+      "location_source_id": "wikipedia-cannon-mountain-ski-area",
       "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2201,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 265,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Plus the 86 acre Mittersill backcountry area."
+        },
+        "vertical_ft": {
+          "value": 2230,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Infobox, Cannon summit to Mittersill base; the lead gives 2,180 ft."
         },
         "lifts": {
-          "value": 9,
-          "source_id": "openskimap-ski-areas",
+          "value": 10,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1840,
-          "source_id": "openskimap-ski-areas",
+          "value": 1850,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Mittersill base."
         },
         "summit_ft": {
-          "value": 4041,
-          "source_id": "openskimap-ski-areas",
+          "value": 4080,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -8240,7 +8244,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-cannon-mountain-ski-area"
       ]
     },
     {
@@ -9541,7 +9545,7 @@
       "lat": 44.39279,
       "lon": -72.98173,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "northern-vermont",
+      "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -10391,34 +10395,52 @@
       ]
     },
     {
-      "id": "cranmore-mountain-resort",
+      "id": "cranmore",
       "name": "Cranmore Mountain Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Austrian ski pioneer Hannes Schneider moved to Cranmore in 1939 and spurred its expansion, and in the early 1940s Cranmore was one of the first ski areas to develop trail grooming technology.",
+          "source_id": "wikipedia-cranmore-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.05877,
-      "lon": -71.09921,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Brian Fairbank, Tyler Fairbank and Joseph O'Donnell",
+        "source_id": "wikipedia-cranmore-mountain-resort",
+        "as_of": "2026-10-11",
+        "confidence": "estimated",
+        "note": "Buyers in June 2010 per the history section; the lead says only that a group of New England businessmen owns it. Current owner not confirmed on the resort site."
+      },
+      "lat": 44.0564,
+      "lon": -71.11,
+      "location_source_id": "wikipedia-cranmore-mountain-resort",
       "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1130,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 170,
+          "source_id": "wikipedia-cranmore-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Article says over 170 acres."
+        },
+        "vertical_ft": {
+          "value": 1200,
+          "source_id": "wikipedia-cranmore-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 8,
-          "source_id": "openskimap-ski-areas",
+          "value": 7,
+          "source_id": "wikipedia-cranmore-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "5 chairs and 2 surface lifts."
         },
         "ski_school_staff_est": null
       },
@@ -10463,7 +10485,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-cranmore-mountain-resort"
       ]
     },
     {
@@ -14295,51 +14318,63 @@
       ]
     },
     {
-      "id": "gunstock-recreation-area",
-      "name": "Gunstock Recreation Area",
-      "tier": "B",
+      "id": "gunstock",
+      "name": "Gunstock Mountain Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Built by the Works Progress Administration and completed in 1937, Gunstock had the first chairlift in the eastern United States and is listed on the New Hampshire State Register of Historic Places.",
+          "source_id": "wikipedia-gunstock-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 43.53567,
-      "lon": -71.36643,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "white-mountains",
+      "owner": {
+        "value": "Belknap County",
+        "source_id": "wikipedia-gunstock-mountain-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 43.5414,
+      "lon": -71.3675,
+      "location_source_id": "wikipedia-gunstock-mountain-resort",
+      "cluster_id": "other-nh",
       "state": "NH",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 1305,
-          "source_id": "openskimap-ski-areas",
+          "value": 1340,
+          "source_id": "wikipedia-gunstock-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox; its base and summit elevations differ by 1,400 ft."
         },
         "lifts": {
-          "value": 6,
-          "source_id": "openskimap-ski-areas",
+          "value": 7,
+          "source_id": "wikipedia-gunstock-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "1 high speed quad, 2 quads, 2 triples, 2 surface lifts."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 940,
-          "source_id": "openskimap-ski-areas",
+          "value": 867,
+          "source_id": "wikipedia-gunstock-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 2245,
-          "source_id": "openskimap-ski-areas",
+          "value": 2267,
+          "source_id": "wikipedia-gunstock-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -14367,7 +14402,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-gunstock-mountain-resort"
       ]
     },
     {
@@ -14848,6 +14883,95 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas"
+      ]
+    },
+    {
+      "id": "hermitage-club",
+      "name": "Hermitage Club at Haystack Mountain",
+      "tier": "A",
+      "facility_type": "ski_area",
+      "tier_a_criteria": [
+        {
+          "criterion": "luxury",
+          "rationale": "The Hermitage Club is a private, member owned ski club on Haystack Mountain whose members use an 80,000 square foot clubhouse with a spa, gym, restaurant and ski lockers.",
+          "source_id": "wikipedia-haystack-mountain-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": {
+        "value": "Hermitage Members Group",
+        "source_id": "wikipedia-haystack-mountain-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Non profit entity formed by 181 former members who bought the club at auction in March 2020; over 400 members as of December 2025."
+      },
+      "lat": 42.9226,
+      "lon": -72.8946,
+      "location_source_id": "wikipedia-haystack-mountain-ski-area",
+      "cluster_id": "southern-vermont",
+      "state": "VT",
+      "size": {
+        "acres": null,
+        "vertical_ft": {
+          "value": 1400,
+          "source_id": "wikipedia-haystack-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Infobox gives 1,400 with no unit; feet assumed from context."
+        },
+        "lifts": {
+          "value": 4,
+          "source_id": "wikipedia-haystack-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "1 heated bubble six pack, 2 quads, 1 triple."
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 1800,
+          "source_id": "openskimap-ski-areas",
+          "as_of": "2026-10-11",
+          "confidence": "estimated",
+          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+        },
+        "summit_ft": {
+          "value": 3206,
+          "source_id": "openskimap-ski-areas",
+          "as_of": "2026-10-11",
+          "confidence": "estimated",
+          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "openskimap-ski-areas",
+        "wikipedia-haystack-mountain-ski-area"
       ]
     },
     {
@@ -16473,51 +16597,63 @@
       ]
     },
     {
-      "id": "hyland-hills-ski-area",
+      "id": "hyland-hills",
       "name": "Hyland Hills Ski Area",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Hyland hosts Three Rivers Racing, a youth alpine club whose racers have gone on to national, World Cup and Olympic level races, along with USSA freestyle and racing teams and the G Team snowboard club.",
+          "source_id": "wikipedia-hyland-hills-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.84362,
-      "lon": -93.36485,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Three Rivers Park District",
+        "source_id": "wikipedia-hyland-hills-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 44.844,
+      "lon": -93.364,
+      "location_source_id": "wikipedia-hyland-hills-ski-area",
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 174,
-          "source_id": "openskimap-ski-areas",
+          "value": 175,
+          "source_id": "wikipedia-hyland-hills-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 7,
-          "source_id": "openskimap-ski-areas",
+          "value": 8,
+          "source_id": "wikipedia-hyland-hills-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "3 quads, 3 rope tows, 2 magic carpets."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 845,
-          "source_id": "openskimap-ski-areas",
+          "value": 900,
+          "source_id": "wikipedia-hyland-hills-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1019,
-          "source_id": "openskimap-ski-areas",
+          "value": 1075,
+          "source_id": "wikipedia-hyland-hills-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -16545,7 +16681,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-hyland-hills-ski-area"
       ]
     },
     {
@@ -16818,51 +16954,69 @@
       ]
     },
     {
-      "id": "jay-peak-resort",
+      "id": "jay-peak",
       "name": "Jay Peak Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Jay Peak receives the most snowfall of any ski area in the Northeastern U.S., is known for its gladed skiing, and is home to the Face Chutes, arguably the steepest marked terrain in the East.",
+          "source_id": "wikipedia-jay-peak-resort"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.9364,
-      "lon": -72.51369,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Pacific Group Resorts",
+        "source_id": "wikipedia-jay-peak-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Bought at a court supervised auction in September 2022 and closed in November 2022, after six years of federal receivership."
+      },
+      "lat": 44.9294,
+      "lon": -72.5322,
+      "location_source_id": "wikipedia-jay-peak-resort",
       "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1990,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 385,
+          "source_id": "wikipedia-jay-peak-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2153,
+          "source_id": "wikipedia-jay-peak-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 9,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-jay-peak-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "1 aerial tram, 6 chairlifts, 2 surface lifts."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1838,
-          "source_id": "openskimap-ski-areas",
+          "value": 1815,
+          "source_id": "wikipedia-jay-peak-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3828,
-          "source_id": "openskimap-ski-areas",
+          "value": 3862,
+          "source_id": "wikipedia-jay-peak-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -16890,7 +17044,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-jay-peak-resort"
       ]
     },
     {
@@ -17625,51 +17779,74 @@
       ]
     },
     {
-      "id": "killington-resort",
+      "id": "killington",
       "name": "Killington Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Since 2016 Killington has hosted women's World Cup giant slalom and slalom races on Superstar each Thanksgiving weekend, the first World Cup races in the eastern U.S. since 1991.",
+          "source_id": "wikipedia-killington-ski-resort"
+        },
+        {
+          "criterion": "diehard",
+          "rationale": "Nicknamed the Beast of the East, Killington was bought from Powdr in September 2024 by the Killington Independence Group, formed by local passholders and community members.",
+          "source_id": "wikipedia-killington-ski-resort"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 43.61032,
-      "lon": -72.79578,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Killington Independence Group",
+        "source_id": "wikipedia-killington-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Local passholders and community members bought Killington and Pico from Powdr on 2024-09-27."
+      },
+      "lat": 43.626,
+      "lon": -72.798,
+      "location_source_id": "wikipedia-killington-ski-resort",
       "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3031,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 1509,
+          "source_id": "wikipedia-killington-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Killington only; about 1,977 acres combined with Pico."
+        },
+        "vertical_ft": {
+          "value": 3050,
+          "source_id": "wikipedia-killington-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Lead and statistics section; the infobox gives 3,076 ft."
         },
         "lifts": {
-          "value": 22,
-          "source_id": "openskimap-ski-areas",
+          "value": 21,
+          "source_id": "wikipedia-killington-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1162,
-          "source_id": "openskimap-ski-areas",
+          "value": 1165,
+          "source_id": "wikipedia-killington-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Skyeship base."
         },
         "summit_ft": {
-          "value": 4193,
-          "source_id": "openskimap-ski-areas",
+          "value": 4241,
+          "source_id": "wikipedia-killington-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox value; the statistics section gives Killington Peak as 4,229 ft."
         }
       },
       "season": {
@@ -17697,7 +17874,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-killington-ski-resort"
       ]
     },
     {
@@ -19234,7 +19411,7 @@
       "lat": 44.13996,
       "lon": -70.28414,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -19681,49 +19858,66 @@
     {
       "id": "mad-river-glen",
       "name": "Mad River Glen",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Founded for dedicated skiers with few commercial amenities, Mad River Glen is owned by a skier cooperative, bans snowboarding, and has terrain Ski magazine ranked the most challenging on the East Coast.",
+          "source_id": "wikipedia-mad-river-glen"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Mad River Glen, founded in 1947, was listed on the National Register of Historic Places as a historic district in 2012 and still runs its 1948 Single Chair, one of two single chairlifts left in the country.",
+          "source_id": "wikipedia-mad-river-glen"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.19869,
-      "lon": -72.92576,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Mad River Glen Cooperative",
+        "source_id": "wikipedia-mad-river-glen",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Skier owned cooperative formed in 1995."
+      },
+      "lat": 44.2008,
+      "lon": -72.9244,
+      "location_source_id": "wikipedia-mad-river-glen",
       "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 1998,
-          "source_id": "openskimap-ski-areas",
+          "value": 2037,
+          "source_id": "wikipedia-mad-river-glen",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 5,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-mad-river-glen",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox: 4 chairlifts (3 doubles, 1 single) and 1 surface lift; the lift table lists only the four chairs."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1643,
-          "source_id": "openskimap-ski-areas",
+          "value": 1600,
+          "source_id": "wikipedia-mad-river-glen",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3642,
-          "source_id": "openskimap-ski-areas",
+          "value": 3637,
+          "source_id": "wikipedia-mad-river-glen",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -19751,7 +19945,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-mad-river-glen"
       ]
     },
     {
@@ -19856,6 +20050,94 @@
       ]
     },
     {
+      "id": "magic-mountain",
+      "name": "Magic Mountain",
+      "tier": "A",
+      "facility_type": "ski_area",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "After reopening in 1997 Magic regained a small but passionate following among ski enthusiasts for its classic, challenging terrain, and a group led by a local Magic skier bought the area in 2016.",
+          "source_id": "wikipedia-magic-mountain-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": {
+        "value": "SKI MAGIC LLC",
+        "source_id": "wikipedia-magic-mountain-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Group led by Geoff Hatheway; purchase closed November 2016."
+      },
+      "lat": 43.1928,
+      "lon": -72.76,
+      "location_source_id": "wikipedia-magic-mountain-ski-area",
+      "cluster_id": "southern-vermont",
+      "state": "VT",
+      "size": {
+        "acres": null,
+        "vertical_ft": {
+          "value": 1500,
+          "source_id": "wikipedia-magic-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "lifts": {
+          "value": 6,
+          "source_id": "wikipedia-magic-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "1 fixed grip quad, 2 fixed grip doubles, 1 carpet, 2 handle tows."
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 1350,
+          "source_id": "wikipedia-magic-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 2850,
+          "source_id": "wikipedia-magic-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-magic-mountain-ski-area"
+      ]
+    },
+    {
       "id": "magic-mountain-resort",
       "name": "Magic Mountain Resort",
       "tier": "B",
@@ -19897,82 +20179,6 @@
         },
         "summit_ft": {
           "value": 7361,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
-      "id": "magic-mountain-ski-area",
-      "name": "Magic Mountain Ski Area",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 43.19623,
-      "lon": -72.76535,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southern-vermont",
-      "state": "VT",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1480,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 6,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 1376,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 2856,
           "source_id": "openskimap-ski-areas",
           "as_of": "2026-10-11",
           "confidence": "estimated",
@@ -20720,51 +20926,69 @@
       ]
     },
     {
-      "id": "middlebury-college-snow-bowl",
+      "id": "middlebury-snow-bowl",
       "name": "Middlebury College Snow Bowl",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Owned by Middlebury College since its first trails were cut in 1934, the Snow Bowl has hosted intercollegiate competitions since the 1930s, and its 1938 log cabin lodge is the oldest standing base lodge in the nation.",
+          "source_id": "wikipedia-middlebury-college-snow-bowl"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 43.93265,
-      "lon": -72.95558,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Middlebury College",
+        "source_id": "wikipedia-middlebury-college-snow-bowl",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 43.94,
+      "lon": -72.96,
+      "location_source_id": "wikipedia-middlebury-college-snow-bowl",
       "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 956,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 600,
+          "source_id": "wikipedia-middlebury-college-snow-bowl",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox; about 100 acres of trails and 500 acres of skiable woods. The lead says more than 700 acres of terrain."
+        },
+        "vertical_ft": {
+          "value": 1000,
+          "source_id": "wikipedia-middlebury-college-snow-bowl",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 4,
-          "source_id": "openskimap-ski-areas",
+          "value": 3,
+          "source_id": "wikipedia-middlebury-college-snow-bowl",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1707,
-          "source_id": "openskimap-ski-areas",
+          "value": 1720,
+          "source_id": "wikipedia-middlebury-college-snow-bowl",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 2663,
-          "source_id": "openskimap-ski-areas",
+          "value": 2720,
+          "source_id": "wikipedia-middlebury-college-snow-bowl",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -20792,7 +21016,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-middlebury-college-snow-bowl"
       ]
     },
     {
@@ -21641,32 +21865,44 @@
     {
       "id": "mount-bohemia",
       "name": "Mount Bohemia",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Mount Bohemia makes no snow and grooms no runs, relies on 250 to 300 inches of lake effect snow a year, and offers only black diamond runs plus three intermediate runs, with no beginner trails.",
+          "source_id": "wikipedia-mount-bohemia"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
       "owner": null,
-      "lat": 47.39011,
-      "lon": -88.0101,
-      "location_source_id": "openskimap-ski-areas",
+      "lat": 47.3917,
+      "lon": -88.0136,
+      "location_source_id": "wikipedia-mount-bohemia",
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 820,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 550,
+          "source_id": "wikipedia-mount-bohemia",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 804,
+          "source_id": "wikipedia-mount-bohemia",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 2,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-mount-bohemia",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "1 triple and 1 double chair."
         },
         "ski_school_staff_est": null
       },
@@ -21711,7 +21947,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-mount-bohemia"
       ]
     },
     {
@@ -26781,51 +27018,69 @@
       ]
     },
     {
-      "id": "pico-mountain-resort",
-      "name": "Pico Mountain Resort",
-      "tier": "B",
+      "id": "pico",
+      "name": "Pico Mountain",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Pico opened in 1937 as one of the first commercial ski resorts in Vermont, ran the first T bar lift in the US from 1940, and was founded by the family of double Olympic gold medalist Andrea Mead Lawrence.",
+          "source_id": "wikipedia-pico-mountain"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 43.6517,
-      "lon": -72.84051,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Killington Independence Group",
+        "source_id": "wikipedia-killington-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Bought together with Killington from Powdr in September 2024; the Pico article itself names no current owner."
+      },
+      "lat": 43.6617,
+      "lon": -72.8425,
+      "location_source_id": "wikipedia-pico-mountain",
       "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1947,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 468,
+          "source_id": "wikipedia-pico-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 1967,
+          "source_id": "wikipedia-pico-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 7,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-pico-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 2001,
-          "source_id": "openskimap-ski-areas",
+          "value": 2000,
+          "source_id": "wikipedia-pico-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3948,
-          "source_id": "openskimap-ski-areas",
+          "value": 3967,
+          "source_id": "wikipedia-pico-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -26853,7 +27108,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-killington-ski-resort",
+        "wikipedia-pico-mountain"
       ]
     },
     {
@@ -27248,7 +27504,7 @@
       "lat": 44.05202,
       "lon": -70.81691,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -29626,49 +29882,67 @@
     {
       "id": "saskadena-six",
       "name": "Saskadena Six",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Saskadena Six, formerly Suicide Six, traces to the first rope tow in the United States, installed in January 1934, and hosted the first National Snow Surfing Championships in 1982.",
+          "source_id": "wikipedia-saskadena-six"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 43.66289,
-      "lon": -72.54703,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Woodstock Inn",
+        "source_id": "wikipedia-saskadena-six",
+        "as_of": "2026-10-11",
+        "confidence": "estimated",
+        "note": "The article says the area continued to operate as the ski area of the Woodstock Inn as of late 2011 and describes no later change."
+      },
+      "lat": 43.6639,
+      "lon": -72.5444,
+      "location_source_id": "wikipedia-saskadena-six",
       "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 620,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 100,
+          "source_id": "wikipedia-saskadena-six",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 650,
+          "source_id": "wikipedia-saskadena-six",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 3,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-saskadena-six",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "1 quad, 1 double, 1 surface carpet."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 732,
-          "source_id": "openskimap-ski-areas",
+          "value": 550,
+          "source_id": "wikipedia-saskadena-six",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1352,
-          "source_id": "openskimap-ski-areas",
+          "value": 1200,
+          "source_id": "wikipedia-saskadena-six",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -29696,7 +29970,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-saskadena-six"
       ]
     },
     {
@@ -30038,7 +30312,7 @@
       "lat": 43.85287,
       "lon": -70.45452,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -35977,25 +36251,43 @@
     {
       "id": "sunday-river",
       "name": "Sunday River",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Gould Academy athletes in alpine, freestyle and snowboard spend their winter mornings training at Sunday River, and the school sent three alumni to the 2026 Olympics.",
+          "source_id": "wikipedia-gould-academy"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.46687,
-      "lon": -70.87441,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Boyne Resorts",
+        "source_id": "wikipedia-sunday-river-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Operated by Boyne since 2007; Boyne bought its leased New England areas from CNL Lifestyle in 2018."
+      },
+      "lat": 44.4734,
+      "lon": -70.8569,
+      "location_source_id": "wikipedia-sunday-river-ski-resort",
       "cluster_id": "western-maine",
       "state": "ME",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2326,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 870,
+          "source_id": "wikipedia-sunday-river-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2340,
+          "source_id": "wikipedia-sunday-river-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 20,
@@ -36008,18 +36300,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 812,
-          "source_id": "openskimap-ski-areas",
+          "value": 800,
+          "source_id": "wikipedia-sunday-river-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3138,
-          "source_id": "openskimap-ski-areas",
+          "value": 3140,
+          "source_id": "wikipedia-sunday-river-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -36047,7 +36339,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-gould-academy",
+        "wikipedia-sunday-river-ski-resort"
       ]
     },
     {
@@ -36981,82 +37275,6 @@
       ]
     },
     {
-      "id": "the-hermitage-club-at-haystack-mountain",
-      "name": "The Hermitage Club at Haystack Mountain",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 42.92378,
-      "lon": -72.90139,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southern-vermont",
-      "state": "VT",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1406,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 5,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 1800,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 3206,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
       "id": "the-hideout",
       "name": "The Hideout",
       "tier": "B",
@@ -37130,6 +37348,101 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas"
+      ]
+    },
+    {
+      "id": "the-highlands",
+      "name": "The Highlands at Harbor Springs",
+      "tier": "A",
+      "facility_type": "ski_area",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Boyne Highlands opened in 1963 with two three person chairlifts, the first triple chairlifts in the world.",
+          "source_id": "wikipedia-the-highlands-at-harbor-springs"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": {
+        "value": "Boyne Resorts",
+        "source_id": "wikipedia-the-highlands-at-harbor-springs",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Known as Boyne Highlands until December 2021."
+      },
+      "lat": 45.4708,
+      "lon": -84.9347,
+      "location_source_id": "wikipedia-the-highlands-at-harbor-springs",
+      "cluster_id": "other-mi",
+      "state": "MI",
+      "size": {
+        "acres": {
+          "value": 385,
+          "source_id": "wikipedia-the-highlands-at-harbor-springs",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 525,
+          "source_id": "wikipedia-the-highlands-at-harbor-springs",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "lifts": {
+          "value": 7,
+          "source_id": "openskimap-ski-areas",
+          "as_of": "2026-10-11",
+          "confidence": "estimated",
+          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 787,
+          "source_id": "wikipedia-the-highlands-at-harbor-springs",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 1316,
+          "source_id": "wikipedia-the-highlands-at-harbor-springs",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "openskimap-ski-areas",
+        "wikipedia-the-highlands-at-harbor-springs"
       ]
     },
     {
@@ -40332,27 +40645,45 @@
       ]
     },
     {
-      "id": "whiteface-mountain-ski-center",
-      "name": "Whiteface Mountain Ski Center",
-      "tier": "B",
+      "id": "whiteface",
+      "name": "Whiteface Mountain",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Whiteface hosted all six alpine skiing events of the 1980 Winter Olympics and the alpine events of the 2023 Winter World University Games.",
+          "source_id": "wikipedia-whiteface-mountain"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 44.36676,
-      "lon": -73.88315,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Olympic Regional Development Authority",
+        "source_id": "wikipedia-whiteface-mountain",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "New York State public benefit corporation; the article says ORDA runs the ski area."
+      },
+      "lat": 44.3658,
+      "lon": -73.9028,
+      "location_source_id": "wikipedia-whiteface-mountain",
       "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3158,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 299,
+          "source_id": "wikipedia-whiteface-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "The Slides add 35 acres of hike to terrain."
+        },
+        "vertical_ft": {
+          "value": 3166,
+          "source_id": "wikipedia-whiteface-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Lift served; 3,430 ft including the hike to Slides."
         },
         "lifts": {
           "value": 11,
@@ -40366,17 +40697,17 @@
       "elevation": {
         "base_ft": {
           "value": 1220,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-whiteface-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 4379,
-          "source_id": "openskimap-ski-areas",
+          "value": 4386,
+          "source_id": "wikipedia-whiteface-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Lift served; hike to terrain tops out at 4,650 ft."
         }
       },
       "season": {
@@ -40404,7 +40735,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-whiteface-mountain"
       ]
     },
     {
