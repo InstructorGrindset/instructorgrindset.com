@@ -47,6 +47,15 @@ matching:
   strong_name_similarity_min: 0.9
   strong_name_radius_km: 15
 
+openskimap:
+  # Tier B extract rules (pipeline/openskimap.py filter_us).
+  # Drop areas with no mapped lift and no mapped downhill run (mostly skimap.org stubs
+  # that duplicate a mapped area or describe a closed hill).
+  require_mapped_lifts_or_runs: true
+  # Merge areas this close together whose names are this alike (0 to 1); the better mapped one is kept.
+  dedupe_radius_km: 2
+  dedupe_name_similarity_min: 0.8
+
 professionalism:
   # Score from 0 to 100, weighted from the components below.
   # Alexandre sets these weights in Phase 4. Do not fill them in before then.

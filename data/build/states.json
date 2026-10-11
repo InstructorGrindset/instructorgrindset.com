@@ -1,5 +1,302 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:24:17Z",
-  "states": []
+  "generated_at": "2026-10-11T19:33:10Z",
+  "states": [
+    {
+      "code": "AK",
+      "name": "Alaska",
+      "cluster_ids": [
+        "other-ak"
+      ],
+      "resort_count": 12
+    },
+    {
+      "code": "AL",
+      "name": "Alabama",
+      "cluster_ids": [
+        "other-al"
+      ],
+      "resort_count": 1
+    },
+    {
+      "code": "AZ",
+      "name": "Arizona",
+      "cluster_ids": [
+        "other-az"
+      ],
+      "resort_count": 3
+    },
+    {
+      "code": "CA",
+      "name": "California",
+      "cluster_ids": [
+        "other-ca"
+      ],
+      "resort_count": 30
+    },
+    {
+      "code": "CO",
+      "name": "Colorado",
+      "cluster_ids": [
+        "other-co"
+      ],
+      "resort_count": 40
+    },
+    {
+      "code": "CT",
+      "name": "Connecticut",
+      "cluster_ids": [
+        "other-ct"
+      ],
+      "resort_count": 5
+    },
+    {
+      "code": "IA",
+      "name": "Iowa",
+      "cluster_ids": [
+        "other-ia"
+      ],
+      "resort_count": 4
+    },
+    {
+      "code": "ID",
+      "name": "Idaho",
+      "cluster_ids": [
+        "other-id"
+      ],
+      "resort_count": 19
+    },
+    {
+      "code": "IL",
+      "name": "Illinois",
+      "cluster_ids": [
+        "other-il"
+      ],
+      "resort_count": 6
+    },
+    {
+      "code": "IN",
+      "name": "Indiana",
+      "cluster_ids": [
+        "other-in"
+      ],
+      "resort_count": 2
+    },
+    {
+      "code": "MA",
+      "name": "Massachusetts",
+      "cluster_ids": [
+        "other-ma"
+      ],
+      "resort_count": 12
+    },
+    {
+      "code": "MD",
+      "name": "Maryland",
+      "cluster_ids": [
+        "other-md"
+      ],
+      "resort_count": 1
+    },
+    {
+      "code": "ME",
+      "name": "Maine",
+      "cluster_ids": [
+        "other-me"
+      ],
+      "resort_count": 22
+    },
+    {
+      "code": "MI",
+      "name": "Michigan",
+      "cluster_ids": [
+        "other-mi"
+      ],
+      "resort_count": 43
+    },
+    {
+      "code": "MN",
+      "name": "Minnesota",
+      "cluster_ids": [
+        "other-mn"
+      ],
+      "resort_count": 18
+    },
+    {
+      "code": "MO",
+      "name": "Missouri",
+      "cluster_ids": [
+        "other-mo"
+      ],
+      "resort_count": 2
+    },
+    {
+      "code": "MT",
+      "name": "Montana",
+      "cluster_ids": [
+        "other-mt"
+      ],
+      "resort_count": 17
+    },
+    {
+      "code": "NC",
+      "name": "North Carolina",
+      "cluster_ids": [
+        "other-nc"
+      ],
+      "resort_count": 7
+    },
+    {
+      "code": "ND",
+      "name": "North Dakota",
+      "cluster_ids": [
+        "other-nd"
+      ],
+      "resort_count": 4
+    },
+    {
+      "code": "NH",
+      "name": "New Hampshire",
+      "cluster_ids": [
+        "other-nh"
+      ],
+      "resort_count": 29
+    },
+    {
+      "code": "NJ",
+      "name": "New Jersey",
+      "cluster_ids": [
+        "other-nj"
+      ],
+      "resort_count": 4
+    },
+    {
+      "code": "NM",
+      "name": "New Mexico",
+      "cluster_ids": [
+        "other-nm"
+      ],
+      "resort_count": 9
+    },
+    {
+      "code": "NV",
+      "name": "Nevada",
+      "cluster_ids": [
+        "other-nv"
+      ],
+      "resort_count": 5
+    },
+    {
+      "code": "NY",
+      "name": "New York",
+      "cluster_ids": [
+        "other-ny"
+      ],
+      "resort_count": 52
+    },
+    {
+      "code": "OH",
+      "name": "Ohio",
+      "cluster_ids": [
+        "other-oh"
+      ],
+      "resort_count": 6
+    },
+    {
+      "code": "OR",
+      "name": "Oregon",
+      "cluster_ids": [
+        "other-or"
+      ],
+      "resort_count": 12
+    },
+    {
+      "code": "PA",
+      "name": "Pennsylvania",
+      "cluster_ids": [
+        "other-pa"
+      ],
+      "resort_count": 29
+    },
+    {
+      "code": "RI",
+      "name": "Rhode Island",
+      "cluster_ids": [
+        "other-ri"
+      ],
+      "resort_count": 1
+    },
+    {
+      "code": "SD",
+      "name": "South Dakota",
+      "cluster_ids": [
+        "other-sd"
+      ],
+      "resort_count": 3
+    },
+    {
+      "code": "TN",
+      "name": "Tennessee",
+      "cluster_ids": [
+        "other-tn"
+      ],
+      "resort_count": 1
+    },
+    {
+      "code": "UT",
+      "name": "Utah",
+      "cluster_ids": [
+        "other-ut"
+      ],
+      "resort_count": 19
+    },
+    {
+      "code": "VA",
+      "name": "Virginia",
+      "cluster_ids": [
+        "other-va"
+      ],
+      "resort_count": 5
+    },
+    {
+      "code": "VT",
+      "name": "Vermont",
+      "cluster_ids": [
+        "other-vt"
+      ],
+      "resort_count": 33
+    },
+    {
+      "code": "WA",
+      "name": "Washington",
+      "cluster_ids": [
+        "other-wa"
+      ],
+      "resort_count": 19
+    },
+    {
+      "code": "WI",
+      "name": "Wisconsin",
+      "cluster_ids": [
+        "other-wi"
+      ],
+      "resort_count": 33
+    },
+    {
+      "code": "WV",
+      "name": "West Virginia",
+      "cluster_ids": [
+        "other-wv"
+      ],
+      "resort_count": 5
+    },
+    {
+      "code": "WY",
+      "name": "Wyoming",
+      "cluster_ids": [
+        "other-wy"
+      ],
+      "resort_count": 12
+    }
+  ]
 }

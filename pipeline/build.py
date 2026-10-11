@@ -123,21 +123,28 @@ def _unique_id(base: str, state: str, taken: set[str]) -> str:
     return f"{base}-{state.lower()}-{i}"
 
 
-def _load_openskimap(raw_dir: Path, fetch: bool, warnings: list[str], rel=str) -> Optional[openskimap.Extract]:
+def _load_openskimap(raw_dir: Path, fetch: bool, warnings: list[str], rel=str, *,
+                     filter_kw: Optional[dict] = None, state_shapes_path: Optional[Path] = None,
+                     ) -> Optional[openskimap.Extract]:
+    """Refresh the committed US extract from the cached full download when present
+    (so filter rule changes apply), then load it."""
     osm_dir = raw_dir / "openskimap"
     full = osm_dir / openskimap.FULL_NAME
     extract_path = osm_dir / openskimap.US_NAME
+    kw = dict(filter_kw or {})
+    if state_shapes_path is not None and state_shapes_path.exists():
+        kw["state_shapes"] = openskimap.load_state_shapes(state_shapes_path)
+    fetched_today = False
     if fetch:
         try:
             print(f"fetching {openskimap.URL} ...")
             openskimap.fetch(full)
-            n = openskimap.write_us_extract(full, extract_path, dt.date.today())
-            print(f"wrote {n} US operating downhill areas to {extract_path}")
+            fetched_today = True
         except Exception as e:  # network failures must not stop a Tier A build
-            warnings.append(f"OpenSkiMap download failed ({type(e).__name__}: {e}); using the existing extract if any")
-    elif full.exists() and (not extract_path.exists() or full.stat().st_mtime > extract_path.stat().st_mtime):
-        n = openskimap.write_us_extract(full, extract_path)
-        print(f"refreshed {extract_path} from {full.name}: {n} areas")
+            warnings.append(f"OpenSkiMap download failed ({type(e).__name__}: {e}); using the cached data if any")
+    if full.exists():
+        n = openskimap.write_us_extract(full, extract_path, dt.date.today() if fetched_today else None, **kw)
+        print(f"filtered {rel(full)} -> {rel(extract_path)}: {n} US operating downhill areas")
     if not extract_path.exists():
         warnings.append(
             f"no OpenSkiMap extract at {rel(extract_path)}; building Tier A only (no Tier B resorts). "
@@ -180,7 +187,11 @@ def build(
     errors += own_errors
     warnings += own_warnings
 
-    extract = _load_openskimap(raw_dir, fetch, warnings, rel)
+    us_states_path = out_dir / "us-states.geojson"
+    if states_geojson and not us_states_path.exists() and not build_us_states_geojson(repo_root, us_states_path):
+        warnings.append("us-states.geojson is missing and node or node_modules is unavailable; run `npm install && npm run build:states`")
+    extract = _load_openskimap(raw_dir, fetch, warnings, rel, filter_kw=cfg.definitions.openskimap.filter_kwargs(),
+                               state_shapes_path=us_states_path if us_states_path.exists() else repo_root / "data" / "build" / "us-states.geojson")
     areas = extract.areas if extract else []
     if extract:
         registry.add(extract.source, "data/raw/openskimap")
@@ -289,10 +300,6 @@ def build(
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
 
-    us_states = out_dir / "us-states.geojson"
-    if states_geojson and not us_states.exists():
-        if not build_us_states_geojson(repo_root, us_states):
-            warnings.append("us-states.geojson is missing and node or node_modules is unavailable; run `npm install && npm run build:states`")
 
     result = BuildResult(out_dir, resorts, clusters, states, len(registry), warnings, inputs)
     if write_report:

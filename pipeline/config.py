@@ -82,6 +82,19 @@ class MatchingDefs(StrictModel):
     strong_name_radius_km: float = Field(gt=0)
 
 
+class OpenSkiMapDefs(StrictModel):
+    require_mapped_lifts_or_runs: bool
+    dedupe_radius_km: Optional[float] = Field(default=None, gt=0)
+    dedupe_name_similarity_min: float = Field(ge=0, le=1)
+
+    def filter_kwargs(self) -> dict:
+        return {
+            "require_infrastructure": self.require_mapped_lifts_or_runs,
+            "dedupe_radius_km": self.dedupe_radius_km,
+            "dedupe_similarity_min": self.dedupe_name_similarity_min,
+        }
+
+
 class ProfessionalismWeights(StrictModel):
     cert_pay_differential: Optional[float] = None
     paid_training_hours: Optional[float] = None
@@ -131,6 +144,7 @@ class Definitions(StrictModel):
     reports: ReportDefs
     staleness: StalenessDefs
     matching: MatchingDefs
+    openskimap: OpenSkiMapDefs
     professionalism: ProfessionalismDefs
     lucrativeness: LucrativenessDefs
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
