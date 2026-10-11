@@ -25,6 +25,7 @@ if __package__ in (None, ""):  # executed as a script: python pipeline/build.py
 from pydantic import ValidationError  # noqa: E402
 
 from pipeline import openskimap  # noqa: E402
+from pipeline.career import CareerData, build_career, cheapest_employee_rent, load_career_data  # noqa: E402
 from pipeline.clusters import ClusterAssignmentError, ClusterInfo, Member, assign_clusters, build_clusters  # noqa: E402
 from pipeline.config import Config, load_config  # noqa: E402
 from pipeline.names import slugify  # noqa: E402
@@ -266,15 +267,31 @@ def build(
         errors += str(e).splitlines()
         assignment = {}
 
+    vocab = cfg.definitions.career.vocab.model_dump()
+    career_data, career_errors = load_career_data(raw_dir, registry, vocab, rel)
+    errors += career_errors
+    known_ids = {d["id"] for d in drafts}
+    for rid in sorted((set(career_data.pay) | set(career_data.inputs)) - known_ids):
+        errors.append(f"data/raw/pay or data/raw/career: resort_id '{rid}' matches no resort in this build")
+    for d in drafts:
+        for key, block, vk in (("profile_tags", "clients", "client_profiles"),
+                               ("enthusiast_types", "fit", "enthusiast_types"),
+                               ("professional_types", "fit", "professional_types")):
+            unknown = [t for t in (d.get(block) or {}).get(key) or [] if t not in vocab[vk]]
+            if unknown:
+                errors.append(f"resort '{d['id']}': {block}.{key} tags {unknown} are not in config career.vocab.{vk}")
+
     if errors:
         raise BuildError(errors)
 
     climate_dir = out_dir / "climate"
     ctx = registry.context()
+    today = build_date()
     resorts: list[Resort] = []
     for d in drafts:
         d["cluster_id"] = assignment[d["id"]]
         d["climate_available"] = (climate_dir / f"{d['id']}.json").is_file()
+        _attach_career(d, career_data, cfg, today, warnings)
         d["sources"] = sorted(_refs(d))
         try:
             resorts.append(Resort.model_validate(d, context=ctx))
@@ -325,6 +342,11 @@ def build(
                 "cluster_id": r["cluster_id"],
                 "state": r["state"], "acres": num(r["size"]["acres"]), "vertical_ft": num(r["size"]["vertical_ft"]),
                 "lifts": num(r["size"]["lifts"]), "size_rank": display.size_rank(num(r["size"]["acres"])),
+                # map recolor modes (number | null)
+                "season_length_days": num(r["season"]["length_days"]),
+                "snowfall_annual_in": annual_snowfall_in(climate_dir / f"{r['id']}.json") if r["climate_available"] else None,
+                "professionalism_score": (r["career"] or {}).get("professionalism", {}).get("score"),
+                "lucrativeness_mid": (r["career"] or {}).get("lucrativeness", {}).get("mid"),
             },
         } for r in resort_dicts],
     }, compact=True)
@@ -363,14 +385,50 @@ def display_definitions(cfg: Config) -> dict:
     }
 
 
+def build_date() -> dt.date:
+    """The reference date for staleness: SOURCE_DATE_EPOCH when set, else today (UTC)."""
+    epoch = os.environ.get("SOURCE_DATE_EPOCH")
+    now = dt.datetime.fromtimestamp(int(epoch), dt.timezone.utc) if epoch else dt.datetime.now(dt.timezone.utc)
+    return now.date()
+
+
+def annual_snowfall_in(path: Path) -> Optional[float]:
+    """Sum of monthly snowfall_in in a climate file; null when no month has a value."""
+    try:
+        months = json.loads(path.read_text(encoding="utf-8")).get("months") or []
+    except (OSError, ValueError, AttributeError):
+        return None
+    vals = [m.get("snowfall_in") for m in months if isinstance(m, dict) and isinstance(m.get("snowfall_in"), (int, float))]
+    return round(sum(vals), 1) if vals else None
+
+
+def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warnings: list[str]) -> None:
+    """Set d["career"] and merge career tags into clients and fit."""
+    inputs = data.inputs.get(d["id"])
+    if inputs is not None:
+        clients = d.setdefault("clients", {})
+        fit = d.setdefault("fit", {})
+        for block, key, tags in ((clients, "profile_tags", inputs.client_profile_tags),
+                                 (fit, "enthusiast_types", inputs.enthusiast_types),
+                                 (fit, "professional_types", inputs.professional_types)):
+            merged = list(block.get(key) or [])
+            merged += [t for t in tags if t not in merged]
+            block[key] = merged
+    season_len = ((d.get("season") or {}).get("length_days") or {}).get("value")
+    # Rent: cheapest employee housing (Phase 5) or the HUD / ACS baseline; neither exists yet.
+    rent = cheapest_employee_rent([], d["id"])
+    career, w = build_career(data.pay.get(d["id"], []), inputs, season_len, rent, cfg.definitions, today)
+    warnings.extend(w)
+    d["career"] = career
+
+
 def _refs(d: dict) -> set[str]:
-    """source_ids referenced by a resort draft dict (mirrors schemas.referenced_source_ids)."""
+    """Every source_id referenced by a resort draft dict (mirrors schemas.referenced_source_ids)."""
     found = {d["location_source_id"]}
-    found.update(c["source_id"] for c in d.get("tier_a_criteria") or [])
 
     def walk(o: Any) -> None:
         if isinstance(o, dict):
-            if "source_id" in o and "value" in o:
+            if isinstance(o.get("source_id"), str):
                 found.add(o["source_id"])
             for v in o.values():
                 walk(v)
@@ -378,7 +436,7 @@ def _refs(d: dict) -> set[str]:
             for v in o:
                 walk(v)
 
-    for key in ("owner", "size", "elevation", "season", "terrain", "career"):
+    for key in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career"):
         walk(d.get(key))
     return found
 

@@ -5,6 +5,7 @@ from typing import Literal, Optional
 
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 
+from .career import Career
 from .common import (
     Latitude,
     Longitude,
@@ -99,29 +100,6 @@ class Clients(StrictModel):
     notes_md: Optional[str] = None
 
 
-class Lucrativeness(StrictModel):
-    low: SourcedNumber
-    mid: SourcedNumber
-    high: SourcedNumber
-    assumptions: list[str] = Field(min_length=1)
-
-    @model_validator(mode="after")
-    def _ordered(self) -> "Lucrativeness":
-        if not (self.low.value <= self.mid.value <= self.high.value):
-            raise ValueError("lucrativeness must satisfy low <= mid <= high")
-        return self
-
-
-class Career(StrictModel):
-    """Phase 4. Emitted as null until then."""
-
-    pay_display: Optional[Sourced] = None
-    private_rate: Optional[SourcedNumber] = None
-    private_split: Optional[SourcedNumber] = None
-    professionalism: Optional[SourcedNumber] = None
-    lucrativeness: Optional[Lucrativeness] = None
-
-
 class Editorial(StrictModel):
     """Phase 6. Only reviewed editorial reaches the build output."""
 
@@ -202,18 +180,18 @@ def check_approval(status: str, approval: Optional[Approval], label: str = "") -
 def referenced_source_ids(resort: Resort) -> set[str]:
     """Every source_id referenced anywhere inside ``resort``."""
     found: set[str] = {resort.location_source_id}
-    found.update(c.source_id for c in resort.tier_a_criteria)
 
     def walk(obj: object) -> None:
-        if isinstance(obj, Sourced):
-            found.add(obj.source_id)
-        elif isinstance(obj, StrictModel):
+        if isinstance(obj, StrictModel):
+            sid = getattr(obj, "source_id", None)
+            if isinstance(sid, str):
+                found.add(sid)
             for name in type(obj).model_fields:
                 walk(getattr(obj, name))
         elif isinstance(obj, list):
             for item in obj:
                 walk(item)
 
-    for name in ("owner", "size", "elevation", "season", "terrain", "career"):
+    for name in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career"):
         walk(getattr(resort, name))
     return found

@@ -73,10 +73,20 @@ professionalism:
     private_lesson_share: null
     year_round_staff: null
     clinic_access: null
+  # score = 100 x sum(weight x value) / sum(weight) over components that have a value
+  # (each value is normalised 0 to 1 in data/raw/career). A resort with fewer components
+  # than min_components shows insufficient_data. Null until Alexandre sets it (weights_unset).
+  min_components: null
 
 lucrativeness:
-  # Estimated season savings = season earnings minus (rent x months, food, transport,
-  # pass and gear offsets). Output as low, mid, high.
+  # Estimated season savings (USD), output as low, mid, high:
+  #   earnings = mid cert hourly pay x hours_per_week x (season length days / 7)
+  #   costs    = (rent + food_monthly_usd + transport_monthly_usd) x season_months
+  #              + pass_offset_usd + gear_offset_usd
+  #   mid = earnings - costs; low = mid - range_spread.low x earnings; high = mid + range_spread.high x earnings
+  # "Mid cert pay" is the midpoint of the displayed pay row for assumptions.cert_level
+  # (none, level_1, level_2, level_3, trainer, examiner). Rent is the cheapest employee
+  # housing (Phase 5), else the HUD or ACS baseline. housing_choice names that rule for the UI.
   # Standard assumptions per the roadmap: mid cert level, standard full time hours,
   # cheapest available employee housing.
   # Alexandre sets these values in Phase 4. Do not fill them in before then.
@@ -90,8 +100,25 @@ lucrativeness:
     pass_offset_usd: null
     gear_offset_usd: null
   range_spread:
+    # fractions of season earnings, e.g. 0.1 widens the range by 10 percent of earnings
     low: null
     high: null
+
+career:
+  # Tag vocabularies for data/raw/career and data/raw/tier_a. Unknown tags fail the build.
+  vocab:
+    # client profiles (ROADMAP Section 1)
+    client_profiles:
+      - destination_families
+      - local_kids_programs
+      - adaptive
+      - race
+      - freestyle
+      - international
+      - uhnw_privates
+    # Alexandre fills these lists.
+    enthusiast_types: []
+    professional_types: []
 
 # Phase 3 climate ETL settings. Read and validated by pipeline/climate/definitions.py
 # (owned by the climate ETL); pipeline/config.py passes this block through unchanged.

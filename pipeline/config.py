@@ -112,6 +112,16 @@ class ProfessionalismDefs(StrictModel):
     scale_min: float
     scale_max: float
     weights: ProfessionalismWeights
+    min_components: Optional[int] = Field(default=None, ge=1, le=6)
+
+    @model_validator(mode="after")
+    def _weights(self) -> "ProfessionalismDefs":
+        vals = [v for v in self.weights.model_dump().values() if v is not None]
+        if any(v < 0 for v in vals):
+            raise ValueError("professionalism weights must not be negative")
+        if self.weights_set and sum(vals) <= 0:
+            raise ValueError("professionalism weights must not all be zero")
+        return self
 
     @property
     def weights_set(self) -> bool:
@@ -119,24 +129,34 @@ class ProfessionalismDefs(StrictModel):
 
 
 class LucrativenessAssumptions(StrictModel):
-    cert_level: Optional[str] = None
-    hours_per_week: Optional[float] = None
-    season_months: Optional[float] = None
+    cert_level: Optional[Literal["none", "level_1", "level_2", "level_3", "trainer", "examiner"]] = None
+    hours_per_week: Optional[float] = Field(default=None, gt=0)
+    season_months: Optional[float] = Field(default=None, gt=0)
     housing_choice: Optional[str] = None
-    food_monthly_usd: Optional[float] = None
-    transport_monthly_usd: Optional[float] = None
-    pass_offset_usd: Optional[float] = None
-    gear_offset_usd: Optional[float] = None
+    food_monthly_usd: Optional[float] = Field(default=None, ge=0)
+    transport_monthly_usd: Optional[float] = Field(default=None, ge=0)
+    pass_offset_usd: Optional[float] = Field(default=None, ge=0)
+    gear_offset_usd: Optional[float] = Field(default=None, ge=0)
 
 
 class RangeSpread(StrictModel):
-    low: Optional[float] = None
-    high: Optional[float] = None
+    low: Optional[float] = Field(default=None, ge=0)
+    high: Optional[float] = Field(default=None, ge=0)
 
 
 class LucrativenessDefs(StrictModel):
     assumptions: LucrativenessAssumptions
     range_spread: RangeSpread
+
+
+class CareerVocab(StrictModel):
+    client_profiles: list[str]
+    enthusiast_types: list[str] = Field(default_factory=list)
+    professional_types: list[str] = Field(default_factory=list)
+
+
+class CareerDefs(StrictModel):
+    vocab: CareerVocab
 
 
 class Definitions(StrictModel):
@@ -152,6 +172,7 @@ class Definitions(StrictModel):
     ownership: OwnershipDefs = Field(default_factory=OwnershipDefs)
     professionalism: ProfessionalismDefs
     lucrativeness: LucrativenessDefs
+    career: CareerDefs
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 

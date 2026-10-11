@@ -58,7 +58,7 @@ Resort {
   terrain: { beginner_pct, intermediate_pct, advanced_pct, expert_pct, character_tags },  // pcts Sourced<number 0 to 100> | null; tags string[]
   fit: { enthusiast_types: string[], professional_types: string[] },
   clients: { profile_tags: string[], notes_md: string | null },
-  career: null,       // Phase 4
+  career: Career | null,   // Phase 4, see "Phase 4 career" below; null when a resort has no pay records and no career inputs
   editorial: null,    // Phase 6; only reviewed editorial is emitted
   climate_available: boolean,                      // true when climate/<id>.json exists
   sources: string[]                                // every source_id referenced by this resort
@@ -73,7 +73,7 @@ GeoJSON FeatureCollection, one Polygon or MultiPolygon per cluster. `properties`
 Polygons are convex hulls of member resorts buffered by about 15 km, or hand drawn polygons from `config/clusters.yaml` when supplied.
 
 ### `resorts.geojson`
-Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank }` where `size_rank` is 1 to 5 from acres (null acres gives 1).
+Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank, season_length_days, snowfall_annual_in, professionalism_score, lucrativeness_mid }` where `size_rank` is 1 to 5 from acres (null acres gives 1). The last four are for map recolor modes, each number | null: `season_length_days` is `season.length_days.value`, `snowfall_annual_in` is the sum of the climate file's monthly `snowfall_in` (null without a climate file or without any monthly value), `professionalism_score` is `career.professionalism.score`, `lucrativeness_mid` is `career.lucrativeness.mid`.
 
 ### `states.json`
 ```
@@ -113,10 +113,62 @@ ClimateMonth { resort_id, month (1..12), snowfall_in, powder_days, banner_days, 
 ```
 Monthly values are climatological means over `period`; `powder_days` and `banner_days` are mean days per month. Climate values are modeled (ERA5 reanalysis and SNOTEL derived), so the UI treats them as confidence `estimated`, with `as_of` equal to the climate file's `generated_at` and sources from `source_ids`.
 
+## Phase 4 career
+
+### Raw inputs (research fills these later; every value sourced)
+* `data/raw/pay/*.yaml`: `{ batch, researched_date, sources: [...], records: [PayRecord] }` (see `data/raw/pay/README.md`)
+  ```
+  PayRecord { resort_id, season ("2025-26"), cert_level: none|level_1|level_2|level_3|trainer|examiner,
+              hourly_low, hourly_high, confidence: published|reported|estimated, source_id, verified_date, note?,
+              aggregate_count? }   // reported rows only: number of approved reports aggregated (Phase 7)
+  ```
+* `data/raw/career/*.yaml`: `{ batch, researched_date, sources: [...], resorts: [CareerInputs] }` (see `data/raw/career/README.md`)
+  ```
+  CareerInputs { resort_id,
+    private_rate: Sourced<{ low, high, unit: hour|half_day|full_day }> | null,   // guest price
+    private_split: Sourced<number 0..100> | null,                               // instructor share, percent
+    professionalism_inputs: { cert_pay_differential, paid_training_hours, examiner_trainer_presence,
+                              private_lesson_share, year_round_staff, clinic_access },  // each Sourced<number 0..1 normalized> | null
+    client_profile_tags: string[], enthusiast_types: string[], professional_types: string[] }  // from config vocab
+  ```
+  Tag vocab lives in `config/definitions.yaml` `career.vocab` (client profiles from ROADMAP Section 1:
+  `destination_families`, `local_kids_programs`, `adaptive`, `race`, `freestyle`, `international`, `uhnw_privates`;
+  enthusiast and professional vocab lists stay empty until Alexandre fills them; unknown tags fail). Career tags are
+  merged into `resort.clients.profile_tags` and `resort.fit`.
+
+### Build output: `Resort.career`
+```
+career: {
+  pay: [ { cert_level, hourly_low, hourly_high, confidence, source_id, as_of, season, stale } ],
+        // one row per cert_level (ordered none, level_1, level_2, level_3, trainer, examiner): the most recent
+        // season, then highest confidence (published > reported > estimated), then latest verified_date, then source_id.
+        // `reported` rows only come from aggregates of reports.aggregation_min (3)+ approved reports and are never single reports
+  private_rate: Sourced | null, private_split: Sourced | null,
+  professionalism: { score: number|null (0..100), status: computed|weights_unset|insufficient_data,
+                     breakdown: [{ component, weight, value, points, source_id }] },   // all six components, always
+  lucrativeness: { low, mid, high (USD season savings) | null, status: computed|assumptions_unset|insufficient_data,
+                   assumptions: [{ key, value, label }] },
+  stale_fields: string[]   // "pay.<cert_level>", "private_rate", "private_split", "professionalism.<component>"
+}
+```
+* **Staleness:** a value is stale when its `as_of` / `verified_date` plus `staleness.max_age_months` (18) calendar months is
+  before the build date. A value exactly 18 months old is still current.
+* **Professionalism:** score = 100 × Σ(weight × value) / Σ(weight) over components with a value. `points` = that component's
+  share of the score. Status `weights_unset` while any weight or `professionalism.min_components` in config is null;
+  `insufficient_data` when fewer than `min_components` components have values; otherwise `computed`.
+* **Lucrativeness:** earnings = mid cert pay (midpoint of the displayed row for `assumptions.cert_level`) × `hours_per_week`
+  × season length days / 7. costs = (rent + `food_monthly_usd` + `transport_monthly_usd`) × `season_months` +
+  `pass_offset_usd` + `gear_offset_usd`. mid = earnings − costs; low = mid − `range_spread.low` × earnings;
+  high = mid + `range_spread.high` × earnings; whole dollars. Rent is the cheapest employee housing (Phase 5) or the
+  HUD / ACS baseline. Status `assumptions_unset` while any assumption or spread is null; `insufficient_data` when pay,
+  rent or season length is missing. `assumptions` echoes every config assumption, both spreads, and the resort inputs
+  used (`pay_hourly_mid_usd`, `season_length_days`, `rent_monthly_usd`), each with a display label.
+
 ## Raw inputs (`/data/raw`)
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
 * `data/raw/ownership/*.yaml`: verified Vail and Alterra US portfolios with sources. Every listed resort needs a Tier A record (operator compensation).
+* `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
 * `data/raw/sources/*.yaml`: pipeline owned shared sources (`{ sources: Source[] }`, e.g. `owner-decisions-2026-10-11`) that any research file may cite. Source ids are unique across all of `/data/raw`; the same id may repeat only with an identical url.
 * `data/raw/openskimap/`: downloaded OpenSkiMap ski areas (gitignored when large; the filtered US extract is committed).
 * `data/raw/climate/`: cached Open Meteo and SNOTEL responses (gitignored).
@@ -133,6 +185,7 @@ pipeline/
   clusters.py         # cluster assignment and polygon generation
   states.py           # us-atlas to us-states.geojson
   routes.py           # deep link stubs under /map/
+  career.py           # Phase 4 pay display, staleness, professionalism, lucrativeness
   climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation)
 config/
   definitions.yaml    # thresholds, weights, assumptions (ROADMAP Section 6)

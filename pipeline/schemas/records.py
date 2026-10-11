@@ -1,4 +1,4 @@
-"""HousingSite, Commute, PayRecord, Report (Phases 4, 5 and 7)."""
+"""HousingSite, Commute, Report (Phases 5 and 7). PayRecord lives in career.py."""
 from __future__ import annotations
 
 import datetime as dt
@@ -50,26 +50,7 @@ class Commute(StrictModel):
     geometry: Optional[dict[str, Any]] = None
 
 
-class PayRecord(StrictModel):
-    resort_id: Slug
-    season: str = Field(pattern=r"^\d{4}-\d{2}$")  # e.g. "2026-27"
-    cert_level: str = Field(min_length=1)
-    hourly_low: float = Field(ge=0)
-    hourly_high: float = Field(ge=0)
-    confidence: Confidence
-    source: Slug
-    verified_date: dt.date
-
-    @field_validator("source")
-    @classmethod
-    def _source_defined(cls, v: str, info: ValidationInfo) -> str:
-        return check_source_ref(v, info)
-
-    @model_validator(mode="after")
-    def _order(self) -> "PayRecord":
-        if self.hourly_low > self.hourly_high:
-            raise ValueError("hourly_low must not exceed hourly_high")
-        return self
+from .career import PayRecord  # noqa: E402,F401  (defined with the Phase 4 schemas)
 
 
 class Report(StrictModel):

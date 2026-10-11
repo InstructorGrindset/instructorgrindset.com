@@ -172,9 +172,9 @@ def test_other_entities():
                                     "sources": ["nowhere"]}, context=CTX)
     Commute.model_validate({"housing_id": "h", "resort_id": "r", "mode": "bus", "minutes": 20, "distance_mi": 8})
     with pytest.raises(ValidationError, match="hourly_low"):
-        PayRecord.model_validate({"resort_id": "r", "season": "2026-27", "cert_level": "L2", "hourly_low": 30,
-                                  "hourly_high": 20, "confidence": "published", "source": "src-a", "verified_date": "2026-10-01"},
-                                 context=CTX)
+        PayRecord.model_validate({"resort_id": "r", "season": "2026-27", "cert_level": "level_2", "hourly_low": 30,
+                                  "hourly_high": 20, "confidence": "published", "source_id": "src-a",
+                                  "verified_date": "2026-10-01"}, context=CTX)
     with pytest.raises(ValidationError):
         Report.model_validate({"id": "1", "resort_id": "r", "kind": "tips", "season": "2026-27", "values": {}})
 

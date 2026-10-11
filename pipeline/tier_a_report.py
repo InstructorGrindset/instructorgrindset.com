@@ -45,6 +45,13 @@ CHECKED_FIELDS = [
     ("close_typical", lambda r: r.season.close_typical),
     ("length_days", lambda r: r.season.length_days),
     ("training_start", lambda r: r.season.training_start),
+    # Phase 4 career layer
+    ("pay", lambda r: (r.career.pay or None) if r.career else None),
+    ("private_rate", lambda r: r.career.private_rate if r.career else None),
+    ("private_split", lambda r: r.career.private_split if r.career else None),
+    ("professionalism_inputs", lambda r: (
+        any(b.value is not None for b in r.career.professionalism.breakdown) or None) if r.career else None),
+    ("client_profile_tags", lambda r: r.clients.profile_tags or None),
 ]
 
 

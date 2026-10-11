@@ -9,9 +9,13 @@ from .common import (
     StrictModel,
     check_source_ref,
 )
+from .career import (
+    CERT_LEVELS, PROFESSIONALISM_COMPONENTS, Assumption, BreakdownItem, CareerBatch, CareerInputs,
+    LucrativenessOut, PayBatch, PayRecord, PayRow, Professionalism, ProfessionalismInputs,
+)
 from .geo import Cluster, Geometry, State
 from .raw import OwnershipEntry, OwnershipFile, SourcesFile, TierABatch, TierARecord
-from .records import Commute, HousingSite, PayRecord, Report
+from .records import Commute, HousingSite, Report
 from .resort import (
     Approval,
     Career,
@@ -19,7 +23,6 @@ from .resort import (
     Editorial,
     Elevation,
     Fit,
-    Lucrativeness,
     Resort,
     Season,
     Size,
@@ -35,7 +38,9 @@ except ImportError:  # pragma: no cover - depends on the climate module existing
 
 __all__ = [
     "Approval", "Career", "Clients", "Elevation", "SourcesFile", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
-    "Fit", "Geometry", "HousingSite", "Lucrativeness", "OwnershipEntry", "OwnershipFile",
+    "Fit", "Geometry", "HousingSite", "LucrativenessOut", "CareerInputs", "CareerBatch", "PayBatch",
+    "PayRow", "Professionalism", "ProfessionalismInputs", "BreakdownItem", "Assumption", "CERT_LEVELS",
+    "PROFESSIONALISM_COMPONENTS", "OwnershipEntry", "OwnershipFile",
     "PayRecord", "Report", "Resort", "Season", "Size", "Source", "Sourced", "SourcedMonthDay",
     "SourcedNumber", "SourcedString", "State", "StrictModel", "Terrain", "TierABatch",
     "TierACriterion", "TierARecord", "check_source_ref", "referenced_source_ids",

@@ -118,7 +118,8 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     assert peak_pt["properties"] == {"id": "fixture-peak", "name": "Fixture Peak", "tier": "A", "facility_type": "ski_area",
                                      "cluster_id": "i70-corridor", "state": "CO", "acres": 4000,
                                      "vertical_ft": round((3500.0 - 2400.12346) * 3.280839895), "lifts": 11,
-                                     "size_rank": 4}
+                                     "size_rank": 4, "season_length_days": None, "snowfall_annual_in": None,
+                                     "professionalism_score": None, "lucrativeness_mid": None}
     assert next(f for f in pts["features"] if f["properties"]["id"] == "faraway-hill")["properties"]["size_rank"] == 1
 
     states = _load(out, "states.json")["states"]
@@ -305,3 +306,87 @@ def test_definitions_json(repo_root, tmp_path, out):
         "reports": {"aggregation_min": 3},
         "staleness": {"max_age_months": 18},
     }
+
+
+PAY_YAML = """
+batch: fixture-pay
+researched_date: 2026-10-01
+sources:
+  - {id: fixture-pay-sheet, url: https://example.org/pay, title: Fixture pay sheet, accessed_date: 2026-10-01}
+records:
+  - {resort_id: fixture-peak, season: 2025-26, cert_level: level_2, hourly_low: 20, hourly_high: 24,
+     confidence: published, source_id: fixture-pay-sheet, verified_date: 2026-01-15}
+  - {resort_id: fixture-peak, season: 2025-26, cert_level: level_1, hourly_low: 18, hourly_high: 19,
+     confidence: reported, aggregate_count: 2, source_id: fixture-pay-sheet, verified_date: 2026-01-15}
+"""
+CAREER_YAML = """
+batch: fixture-career
+researched_date: 2026-10-01
+resorts:
+  - resort_id: fixture-basin
+    private_split: {value: 40, source_id: fixture-source-b, as_of: 2026-10-01, confidence: published}
+    professionalism_inputs:
+      clinic_access: {value: 0.5, source_id: fixture-source-b, as_of: 2026-10-01, confidence: estimated}
+    client_profile_tags: [race, adaptive]
+"""
+
+
+def test_career_layer_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1790000000")  # 2026-09-21
+    (raw_dir / "pay").mkdir()
+    (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
+    (raw_dir / "career").mkdir()
+    (raw_dir / "career" / "fixture.yaml").write_text(CAREER_YAML)
+    (out / "climate").mkdir(parents=True)
+    months = [{"month": m, "snowfall_in": v} for m, v in zip(range(1, 13), [50, 40, 30, 10, None, 0, 0, 0, 0, 5, 20, 45.5])]
+    (out / "climate" / "fixture-peak.json").write_text(json.dumps({"months": months}))
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert any("aggregates 2 reports, fewer than 3" in w for w in result.warnings)
+
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    peak = by["fixture-peak"]["career"]
+    assert [p["cert_level"] for p in peak["pay"]] == ["level_2"]  # the 2 report aggregate is not displayed
+    assert peak["pay"][0]["source_id"] == "fixture-pay-sheet" and peak["pay"][0]["stale"] is False
+    assert peak["professionalism"]["status"] == "weights_unset"
+    assert peak["lucrativeness"]["status"] == "assumptions_unset" and peak["lucrativeness"]["mid"] is None
+    assert "fixture-pay-sheet" in by["fixture-peak"]["sources"]
+    basin = by["fixture-basin"]
+    assert basin["career"]["private_split"]["value"] == 40 and basin["career"]["pay"] == []
+    assert basin["clients"]["profile_tags"] == ["race", "adaptive"]
+    assert by["fixture-valley"]["career"] is None
+
+    props = {f["properties"]["id"]: f["properties"] for f in _load(out, "resorts.geojson")["features"]}
+    assert props["fixture-peak"]["snowfall_annual_in"] == 200.5
+    assert props["fixture-peak"]["professionalism_score"] is None and props["fixture-peak"]["lucrativeness_mid"] is None
+    assert props["fixture-basin"]["snowfall_annual_in"] is None and props["fixture-basin"]["season_length_days"] is None
+
+    report = (tmp_path / "tier-a-draft.md").read_text()
+    peak_row = next(l for l in report.splitlines() if l.startswith("| Fixture Peak (`fixture-peak`)"))
+    assert "private_rate" in peak_row and "client_profile_tags" in peak_row and ", pay," not in peak_row
+    basin_row = next(l for l in report.splitlines() if l.startswith("| Fixture Basin (`fixture-basin`)"))
+    assert "pay" in basin_row and "private_split" not in basin_row and "professionalism_inputs" not in basin_row
+
+
+def test_career_validation_failures(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "career").mkdir()
+    (raw_dir / "career" / "a.yaml").write_text(CAREER_YAML.replace("fixture-basin", "ghost-resort"))
+    with pytest.raises(BuildError, match="resort_id 'ghost-resort' matches no resort"):
+        _run(repo_root, raw_dir, out, tmp_path)
+    (raw_dir / "career" / "a.yaml").write_text(CAREER_YAML.replace("[race, adaptive]", "[race, jet_set]"))
+    with pytest.raises(BuildError, match="unknown client_profiles tags"):
+        _run(repo_root, raw_dir, out, tmp_path)
+    (raw_dir / "career" / "a.yaml").unlink()
+    p = raw_dir / "tier_a" / "fixture.yaml"
+    data = yaml.safe_load(p.read_text())
+    data["resorts"][0]["fit"] = {"enthusiast_types": ["powder_hound"]}
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
+    with pytest.raises(BuildError, match="fit.enthusiast_types tags \\['powder_hound'\\]"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_no_career_data_means_null_career(repo_root, raw_dir, out, tmp_path):
+    _run(repo_root, raw_dir, out, tmp_path)
+    assert all(r["career"] is None for r in _load(out, "resorts.json")["resorts"])
+    for f in _load(out, "resorts.geojson")["features"]:
+        p = f["properties"]
+        assert p["professionalism_score"] is None and p["lucrativeness_mid"] is None
