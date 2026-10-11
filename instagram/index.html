@@ -6,8 +6,8 @@
   <title>Instructor Grindset • Instagram</title>
   <meta name="description" content="Follow @ohgoody on Instagram for reels and coaching ideas." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/global.css?v=1">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=14">
 
   <style>
 :root{
@@ -63,22 +63,7 @@
     <!-- Sidebar -->
     <!-- placeholder gets replaced at runtime -->
 <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-<script>
-  (function(){
-    const target = document.getElementById('sidebar-placeholder');
-    fetch('/partials/sidebar.html?v=13')  // bump ?v= number when you edit the partial to bust cache
-      .then(r => r.text())
-      .then(html => {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = html.trim();
-        target.replaceWith(tmp.firstElementChild);
-      })
-      .catch(() => {
-        target.removeAttribute('aria-busy');
-        target.innerHTML = '<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>';
-      });
-  })();
-</script>
+<script src="/assets/nav.js?v=14"></script>
 
 
     <!-- Main -->

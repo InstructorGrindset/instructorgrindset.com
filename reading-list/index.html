@@ -6,10 +6,10 @@
   <title>Instructor Grindset • The Reading List</title>
   <meta name="description" content="25 books on skiing technique, instruction, history, and fitness — with a Book Finder to find the right read for you." />
   <link rel="canonical" href="https://instructorgrindset.com/reading-list" />
-  <link rel="stylesheet" href="/assets/global.css?v=1">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/global.css?v=1">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <style>
 :root{
       --content-shift:0px; --wrap-max:min(1100px, calc(100vw - var(--sidebar) - 40px));
@@ -150,15 +150,7 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   <div class="page">
     <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-    <script>
-      (function(){
-        var t = document.getElementById("sidebar-placeholder");
-        fetch("/partials/sidebar.html?v=13")
-          .then(function(r){return r.text()})
-          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
-          .catch(function(){t.innerHTML="<div style=\"padding:1rem;color:#fca5a5\">Navigation failed to load.</div>"});
-      })();
-    </script>
+    <script src="/assets/nav.js?v=14"></script>
     <main class="main" id="main">
       <div class="content">
         <header>

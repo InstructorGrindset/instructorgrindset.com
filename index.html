@@ -6,8 +6,8 @@
   <title>Instructor Grindset | Career Development for Snowsports Instructors</title>
   <meta name="description" content="A year-round approach to developing your career as a snowsports instructor. Tools and systems to help you keep the skier and the teacher alive at once." />
   <link rel="canonical" href="https://instructorgrindset.com/" />
-  <link rel="stylesheet" href="/assets/global.css?v=1">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -170,14 +170,7 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
   <a class="skip-link" href="#main">Skip to main content</a>
   <div class="page">
     <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-    <script>
-    (function(){
-      var t=document.getElementById('sidebar-placeholder');
-      fetch('/partials/sidebar.html?v=13').then(function(r){return r.text();}).then(function(html){
-        var d=document.createElement('div');d.innerHTML=html.trim();t.replaceWith(d.firstElementChild);
-      }).catch(function(){t.removeAttribute('aria-busy');});
-    })();
-    </script>
+    <script src="/assets/nav.js?v=14"></script>
 
     <main class="main" id="main">
       <div class="content">
