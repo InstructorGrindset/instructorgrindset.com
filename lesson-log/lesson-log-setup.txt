@@ -1,0 +1,226 @@
+/**
+ * Instructor Grindset — Lesson Log setup
+ * https://instructorgrindset.com/lesson-log/
+ *
+ * 1. Paste this whole file into a new Apps Script project (script.new) and click Save.
+ * 2. Make sure "setup" is selected in the toolbar, then click Run.
+ * 3. Allow access when Google asks. Your form and sheet links appear in the Execution log.
+ *
+ * Running it again creates a second, separate copy — it never touches existing files.
+ */
+
+var CONFIG = __CONFIG__;
+
+var LOG = "'Lesson Log'!";
+// Lesson date: the Date answer, or the day the form was submitted if Date was left blank.
+var DATES = `ARRAYFORMULA(IF(${LOG}D2:D="","",IF(${LOG}B2:B="",TO_DATE(INT(${LOG}A2:A)),${LOG}B2:B)))`;
+// Student names are matched ignoring extra spaces and capitalization.
+var KEYS = `ARRAYFORMULA(PROPER(TRIM(${LOG}D2:D)))`;
+
+function setup() {
+  var name = (CONFIG.name || 'Lesson Log').trim();
+
+  var form = FormApp.create(name);
+  form.setConfirmationMessage('Lesson logged.');
+  form.setShowLinkToRespondAgain(true);
+  form.setProgressBar(false);
+  addQuestions_(form);
+
+  var ss = SpreadsheetApp.create(name);
+  var firstTab = ss.getSheets()[0];
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+
+  var found = findResponseTab_(ss.getId());
+  ss = found.ss;
+  var log = found.sheet;
+  log.setName('Lesson Log');
+  log.setFrozenRows(1);
+  log.getRange('B2:B').setNumberFormat('yyyy-mm-dd');
+
+  var dashboard = ss.getSheetByName(firstTab.getName());
+  dashboard.setName('Dashboard');
+  var lookup = ss.insertSheet('Client Lookup');
+  var index = ss.insertSheet('Client Index');
+
+  buildClientIndex_(index);
+  buildClientLookup_(lookup, index);
+  buildDashboard_(dashboard, form);
+
+  order_(ss, ['Dashboard', 'Client Lookup', 'Client Index', 'Lesson Log']);
+  ss.setActiveSheet(dashboard);
+
+  var formUrl = form.getPublishedUrl();
+  try { formUrl = form.shortenFormUrl(formUrl); } catch (e) {}
+
+  Logger.log('All set.');
+  Logger.log('Lesson form (open this on your phone): ' + formUrl);
+  Logger.log('Spreadsheet: ' + ss.getUrl());
+}
+
+function addQuestions_(form) {
+  var whole = FormApp.createTextValidation().requireWholeNumber().setHelpText('Enter a whole number.').build();
+  var hours = FormApp.createTextValidation().requireNumberGreaterThan(0).setHelpText('Enter a number of hours, e.g. 2 or 1.5.').build();
+  var email = FormApp.createTextValidation().requireTextIsEmail().setHelpText('Enter an email address.').build();
+
+  form.addDateItem().setTitle('Date');
+  choice_(form, 'Instructor', CONFIG.instructors);
+  form.addTextItem().setTitle('Student');
+  form.addTextItem().setTitle('Age').setValidation(whole);
+  form.addTextItem().setTitle('Group Size').setValidation(whole);
+  choice_(form, 'Discipline', CONFIG.disciplines);
+  choice_(form, 'Level', CONFIG.levels);
+  choice_(form, 'Lesson Type', CONFIG.lessonTypes);
+  choice_(form, 'Technical Focus', CONFIG.technicalFocus);
+  choice_(form, 'Behavior Focus', CONFIG.behaviorFocus);
+  choice_(form, 'Terrain/Areas', CONFIG.terrain);
+  form.addTextItem().setTitle('Conditions');
+  form.addParagraphTextItem().setTitle('Key Outcomes');
+  form.addParagraphTextItem().setTitle('Next Steps');
+  form.addMultipleChoiceItem().setTitle('Private?').setChoiceValues(['Yes', 'No']);
+  form.addTextItem().setTitle('Parent Email').setValidation(email);
+  form.addParagraphTextItem().setTitle('Notes');
+  form.addTextItem().setTitle('Lesson Length').setHelpText('Hours').setValidation(hours);
+}
+
+// Dropdown when there are options to pick from, otherwise a short answer.
+function choice_(form, title, values) {
+  var clean = (values || []).map(function (v) { return String(v).trim(); })
+    .filter(function (v, i, all) { return v && all.indexOf(v) === i; });
+  if (clean.length) form.addListItem().setTitle(title).setChoiceValues(clean);
+  else form.addTextItem().setTitle(title);
+}
+
+function findResponseTab_(id) {
+  for (var tries = 0; tries < 20; tries++) {
+    SpreadsheetApp.flush();
+    var ss = SpreadsheetApp.openById(id);
+    var sheets = ss.getSheets();
+    for (var i = 0; i < sheets.length; i++) {
+      if (sheets[i].getFormUrl()) return { ss: ss, sheet: sheets[i] };
+    }
+    Utilities.sleep(1000);
+  }
+  throw new Error('The form responses tab did not appear. Open the new spreadsheet and check for a "Form Responses 1" tab, then run setup again.');
+}
+
+// One formula per column that fills itself in for every student.
+function perStudent_(expr) {
+  return `=IFERROR(MAP(FILTER(A2:A,A2:A<>""),LAMBDA(s,IFERROR(LET(d,${DATES},k,${KEYS},${expr}),""))),"")`;
+}
+
+function buildClientIndex_(sh) {
+  var headers = ['Student', 'Age (Latest)', 'Total Lessons', 'Total Hours', 'First Lesson', 'Last Lesson',
+    'Recent Instructor', 'Disciplines', 'Last Next Steps', 'Notes Summary'];
+  header_(sh.getRange(1, 1, 1, headers.length), [headers]);
+  sh.getRange('A2').setFormula(`=IFERROR(SORT(UNIQUE(FILTER(${KEYS},TRIM(${LOG}D2:D)<>""))),"")`);
+  sh.getRange('B2').setFormula(perStudent_(`INDEX(SORT(FILTER({d,${LOG}E2:E},k=s,${LOG}E2:E<>""),1,FALSE),1,2)`));
+  sh.getRange('C2').setFormula(perStudent_(`SUMPRODUCT(--(k=s))`));
+  sh.getRange('D2').setFormula(perStudent_(`SUM(ARRAYFORMULA(IFERROR(FILTER(${LOG}S2:S,k=s)*1,0)))`));
+  sh.getRange('E2').setFormula(perStudent_(`MIN(FILTER(d,k=s))`));
+  sh.getRange('F2').setFormula(perStudent_(`MAX(FILTER(d,k=s))`));
+  sh.getRange('G2').setFormula(perStudent_(`INDEX(SORT(FILTER({d,${LOG}C2:C},k=s,${LOG}C2:C<>""),1,FALSE),1,2)`));
+  sh.getRange('H2').setFormula(perStudent_(`TEXTJOIN(", ",TRUE,UNIQUE(FILTER(${LOG}G2:G,k=s,${LOG}G2:G<>"")))`));
+  sh.getRange('I2').setFormula(perStudent_(`INDEX(SORT(FILTER({d,${LOG}O2:O},k=s,${LOG}O2:O<>""),1,FALSE),1,2)`));
+  sh.getRange('J2').setFormula(perStudent_(`TEXTJOIN(CHAR(10),TRUE,SORT(FILTER(TEXT(d,"yyyy-mm-dd")&": "&${LOG}R2:R,k=s,${LOG}R2:R<>""),1,FALSE))`));
+  sh.setFrozenRows(1);
+  sh.setFrozenColumns(1);
+  sh.getRange('E2:F').setNumberFormat('yyyy-mm-dd');
+  sh.getRange('I2:J').setWrap(true).setVerticalAlignment('top');
+  sh.setColumnWidth(1, 160);
+  sh.setColumnWidths(2, 7, 110);
+  sh.setColumnWidth(9, 260);
+  sh.setColumnWidth(10, 360);
+}
+
+function buildClientLookup_(sh, index) {
+  sh.getRange('A1').setValue('Client').setFontWeight('bold');
+  sh.getRange('B1').setDataValidation(SpreadsheetApp.newDataValidation()
+    .requireValueInRange(index.getRange('A2:A'), true).setAllowInvalid(false).build())
+    .setBackground('#fff4dd');
+  sh.getRange('C1').setValue('← pick a client').setFontColor('#888888');
+
+  var facts = [
+    ['Lessons', 'C'], ['Hours', 'D'], ['First lesson', 'E'], ['Last lesson', 'F'],
+    ['Age (latest)', 'B'], ['Recent instructor', 'G']
+  ];
+  facts.forEach(function (f, i) {
+    sh.getRange(3 + i, 1).setValue(f[0]).setFontWeight('bold');
+    sh.getRange(3 + i, 2).setFormula(`=IF($B$1="","",XLOOKUP($B$1,'Client Index'!A2:A,'Client Index'!${f[1]}2:${f[1]},""))`);
+  });
+  sh.getRange('B5:B6').setNumberFormat('yyyy-mm-dd');
+
+  var headers = ['Date', 'Lesson Type', 'Level', 'Technical Focus', 'Behavior Focus', 'Terrain/Areas', 'Key Outcomes', 'Next Steps', 'Notes'];
+  header_(sh.getRange(10, 1, 1, headers.length), [headers]);
+  sh.getRange('A11').setFormula(`=IF($B$1="","",IFERROR(LET(d,${DATES},k,${KEYS},SORT(FILTER({d,${LOG}I2:I,${LOG}H2:H,${LOG}J2:J,${LOG}K2:K,${LOG}L2:L,${LOG}N2:N,${LOG}O2:O,${LOG}R2:R},k=PROPER(TRIM($B$1))),1,FALSE)),"No lessons logged yet."))`);
+  sh.getRange('A11:A').setNumberFormat('yyyy-mm-dd');
+  sh.getRange('G11:I').setWrap(true).setVerticalAlignment('top');
+  sh.setFrozenRows(1);
+  sh.setColumnWidth(1, 130);
+  sh.setColumnWidths(2, 5, 120);
+  sh.setColumnWidths(7, 3, 260);
+}
+
+function buildDashboard_(sh, form) {
+  var url = form.getPublishedUrl();
+  sh.getRange('A1').setFormula(`=HYPERLINK("${url}","Log a lesson →")`).setFontWeight('bold').setFontSize(12);
+
+  sh.getRange('A3:A4').setValues([['From'], ['To']]).setFontWeight('bold');
+  // Season runs July 1 – June 30. Type over either date to change the range.
+  sh.getRange('B3').setFormula('=DATE(IF(MONTH(TODAY())>=7,YEAR(TODAY()),YEAR(TODAY())-1),7,1)');
+  sh.getRange('B4').setFormula('=TODAY()');
+  sh.getRange('B3:B4').setNumberFormat('yyyy-mm-dd').setBackground('#fff4dd');
+
+  var inRange = `(d>=$B$3)*(d<=$B$4)*(k<>"")`;
+  var tiles = [
+    ['Lessons', `SUM(r)`, '0'],
+    ['Hours', `SUM(r*IFERROR(${LOG}S2:S*1,0))`, '0.#'],
+    ['Clients', `IFERROR(COUNTUNIQUE(FILTER(k,r)),0)`, '0'],
+    ['Returning clients', `IFERROR(LET(c,FILTER(k,r),u,UNIQUE(c),SUM(MAP(u,LAMBDA(x,--(SUMPRODUCT(--(c=x))>1))))),0)`, '0'],
+    ['Private lessons', `IFERROR(SUM(r*(${LOG}P2:P="Yes"))/SUM(r),0)`, '0%']
+  ];
+  tiles.forEach(function (t, i) {
+    var row = 6 + i;
+    sh.getRange(row, 1).setValue(t[0]).setFontWeight('bold');
+    sh.getRange(row, 2).setFormula(`=ARRAYFORMULA(LET(d,${DATES},k,${KEYS},r,${inRange},${t[1]}))`).setNumberFormat(t[2]);
+  });
+
+  var where = `"where Col1 >= date '"&TEXT($B$3,"yyyy-mm-dd")&"' and Col1 <= date '"&TEXT($B$4,"yyyy-mm-dd")&"' and Col5 <> '' "`;
+  // Only real lesson rows go into QUERY so the date column is read as dates.
+  var data = `FILTER({d,${LOG}G2:G,${LOG}H2:H,${LOG}I2:I,k,IFERROR(${LOG}S2:S*1,0),IF(k="","",TEXT(d,"yyyy-mm"))},k<>"")`;
+  function table(col, title, select) {
+    sh.getRange(col + '2').setValue(title).setFontWeight('bold');
+    sh.getRange(col + '3').setFormula(`=IFERROR(ARRAYFORMULA(LET(d,${DATES},k,${KEYS},QUERY(${data},${select},0))),"No lessons in this range yet.")`);
+  }
+  table('D', 'By month', `"select Col7, count(Col5), sum(Col6) "&${where}&"group by Col7 order by Col7 label Col7 'Month', count(Col5) 'Lessons', sum(Col6) 'Hours'"`);
+  table('H', 'By lesson type', `"select Col4, count(Col5), sum(Col6) "&${where}&"and Col4 <> '' group by Col4 order by count(Col5) desc label Col4 'Lesson Type', count(Col5) 'Lessons', sum(Col6) 'Hours'"`);
+  table('L', 'By level', `"select Col3, count(Col5), sum(Col6) "&${where}&"and Col3 <> '' group by Col3 order by Col3 label Col3 'Level', count(Col5) 'Lessons', sum(Col6) 'Hours'"`);
+  table('P', 'By discipline', `"select Col2, count(Col5), sum(Col6) "&${where}&"and Col2 <> '' group by Col2 order by count(Col5) desc label Col2 'Discipline', count(Col5) 'Lessons', sum(Col6) 'Hours'"`);
+  table('T', 'Top clients', `"select Col5, count(Col5), sum(Col6) "&${where}&"group by Col5 order by count(Col5) desc limit 10 label Col5 'Client', count(Col5) 'Lessons', sum(Col6) 'Hours'"`);
+
+  sh.setColumnWidth(1, 150);
+  sh.setColumnWidth(2, 110);
+  [3, 7, 11, 15, 19].forEach(function (c) { sh.setColumnWidth(c, 24); });
+
+  var chart = sh.newChart()
+    .setChartType(Charts.ChartType.COLUMN)
+    .addRange(sh.getRange('D3:E40'))
+    .setNumHeaders(1)
+    .setPosition(18, 1, 0, 0)
+    .setOption('title', 'Lessons by month')
+    .setOption('legend', { position: 'none' })
+    .build();
+  sh.insertChart(chart);
+}
+
+function header_(range, values) {
+  range.setValues(values).setFontWeight('bold').setBackground('#1f2633').setFontColor('#ffffff');
+}
+
+function order_(ss, names) {
+  names.forEach(function (n, i) {
+    var sh = ss.getSheetByName(n);
+    if (!sh) return;
+    ss.setActiveSheet(sh);
+    ss.moveActiveSheet(i + 1);
+  });
+}
