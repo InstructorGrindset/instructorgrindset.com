@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T20:02:46Z",
+  "generated_at": "2026-10-11T20:14:31Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -233,49 +233,71 @@
     {
       "id": "afton-alps",
       "name": "Afton Alps",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 44.85388,
-      "lon": -92.78559,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 44.8556,
+      "lon": -92.7892,
+      "location_source_id": "wikipedia-afton-alps",
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 321,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 300,
+          "source_id": "wikipedia-afton-alps",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 350,
+          "source_id": "wikipedia-afton-alps",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 20,
-          "source_id": "openskimap-ski-areas",
+          "value": 21,
+          "source_id": "wikipedia-afton-alps",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "17 chairlifts and 4 surface lifts"
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 698,
-          "source_id": "openskimap-ski-areas",
+          "value": 350,
+          "source_id": "wikipedia-afton-alps",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1018,
-          "source_id": "openskimap-ski-areas",
+          "value": 700,
+          "source_id": "wikipedia-afton-alps",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -303,7 +325,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-afton-alps"
       ]
     },
     {
@@ -383,51 +407,73 @@
       ]
     },
     {
-      "id": "alpine-valley",
-      "name": "Alpine Valley",
-      "tier": "B",
+      "id": "alpine-valley-oh",
+      "name": "Alpine Valley Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 41.52839,
-      "lon": -81.26112,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 41.5303,
+      "lon": -81.2662,
+      "location_source_id": "wikipedia-alpine-valley-ski-area-ohio",
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 236,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 72,
+          "source_id": "wikipedia-alpine-valley-ski-area-ohio",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 252,
+          "source_id": "wikipedia-alpine-valley-ski-area-ohio",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 5,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-alpine-valley-ski-area-ohio",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1113,
-          "source_id": "openskimap-ski-areas",
+          "value": 1260,
+          "source_id": "wikipedia-alpine-valley-ski-area-ohio",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1348,
-          "source_id": "openskimap-ski-areas",
+          "value": 1500,
+          "source_id": "wikipedia-alpine-valley-ski-area-ohio",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -455,7 +501,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-alpine-valley-ski-area-ohio"
       ]
     },
     {
@@ -1580,7 +1628,7 @@
       "lat": 43.46247,
       "lon": -72.46388,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southern-vermont",
+      "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -1915,34 +1963,50 @@
       ]
     },
     {
-      "id": "attitash-mountain-resort",
-      "name": "Attitash Mountain Resort",
-      "tier": "B",
+      "id": "attitash",
+      "name": "Attitash Mountain",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 44.07485,
-      "lon": -71.23735,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 44.0822,
+      "lon": -71.2297,
+      "location_source_id": "wikipedia-attitash-mountain-resort",
       "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 1662,
-          "source_id": "openskimap-ski-areas",
+          "value": 1750,
+          "source_id": "wikipedia-attitash-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 8,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-attitash-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
@@ -1987,7 +2051,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-attitash-mountain-resort"
       ]
     },
     {
@@ -2078,7 +2145,7 @@
       "lat": 47.61128,
       "lon": -120.12962,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -2458,7 +2525,7 @@
       "lat": 40.47495,
       "lon": -75.62977,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -2940,10 +3007,19 @@
           "criterion": "luxury",
           "rationale": "The 10-K describes a European style resort with a first class children's ski school, and every private lesson there becomes the concierge level Epic Ascent product in the 2026/2027 season.",
           "source_id": "vail-10k-fy2026"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -2982,18 +3058,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 7383,
-          "source_id": "openskimap-ski-areas",
+          "value": 8100,
+          "source_id": "wikipedia-beaver-creek-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 11429,
-          "source_id": "openskimap-ski-areas",
+          "value": 11440,
+          "source_id": "wikipedia-beaver-creek-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -3021,7 +3097,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-beaver-creek-resort"
       ]
@@ -3190,7 +3266,7 @@
       "lat": 42.12894,
       "lon": -74.50248,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -3418,7 +3494,7 @@
       "lat": 41.52561,
       "lon": -75.02108,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -3483,51 +3559,72 @@
       ]
     },
     {
-      "id": "big-boulder-ski-resort-area",
-      "name": "Big Boulder Ski Resort Area",
-      "tier": "B",
+      "id": "big-boulder",
+      "name": "Big Boulder Mountain",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 41.04832,
-      "lon": -75.60144,
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Big Boulder opened in 1947, and employee John Guresh is credited with developing the first usable snowmaking equipment there in the 1950s.",
+          "source_id": "wikipedia-jack-frost-big-boulder"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 41.0483,
+      "lon": -75.6014,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 379,
-          "source_id": "openskimap-ski-areas",
+          "value": 475,
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 7,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1799,
-          "source_id": "openskimap-ski-areas",
+          "value": 1700,
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 2177,
-          "source_id": "openskimap-ski-areas",
+          "value": 2175,
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -3555,7 +3652,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-jack-frost-big-boulder"
       ]
     },
     {
@@ -4856,7 +4956,7 @@
       "lat": 40.29294,
       "lon": -78.55919,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "laurel-highlands",
       "state": "PA",
       "size": {
         "acres": null,
@@ -4932,7 +5032,7 @@
       "lat": 40.81538,
       "lon": -75.51159,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -5301,17 +5401,33 @@
       ]
     },
     {
-      "id": "boston-mills-ski-resort",
-      "name": "Boston Mills Ski Resort",
-      "tier": "B",
+      "id": "boston-mills",
+      "name": "Boston Mills",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 41.26443,
-      "lon": -81.56544,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "owned per 10-K Item 2; Wikipedia infobox names EPR Properties"
+      },
+      "lat": 41.2648,
+      "lon": -81.5644,
+      "location_source_id": "wikipedia-boston-mills-brandywine",
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
@@ -5373,7 +5489,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-boston-mills-brandywine"
       ]
     },
     {
@@ -5540,7 +5659,7 @@
       "lat": 40.45981,
       "lon": -79.74863,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "laurel-highlands",
       "state": "PA",
       "size": {
         "acres": null,
@@ -5757,17 +5876,33 @@
       ]
     },
     {
-      "id": "brandywine-ski-resort",
-      "name": "Brandywine Ski Resort",
-      "tier": "B",
+      "id": "brandywine",
+      "name": "Brandywine",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 41.28385,
-      "lon": -81.55531,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "owned per 10-K Item 2; Wikipedia infobox names EPR Properties"
+      },
+      "lat": 41.2849,
+      "lon": -81.5517,
+      "location_source_id": "wikipedia-boston-mills-brandywine",
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
@@ -5829,7 +5964,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-boston-mills-brandywine"
       ]
     },
     {
@@ -5994,10 +6132,19 @@
           "criterion": "heritage",
           "rationale": "Breckenridge installed the world's first high speed detachable quad chairlift in 1981 and hosted the first Winter Dew Tour in 2008.",
           "source_id": "wikipedia-breckenridge-ski-resort"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -6036,18 +6183,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 9550,
-          "source_id": "openskimap-ski-areas",
+          "value": 9600,
+          "source_id": "wikipedia-breckenridge-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 12839,
-          "source_id": "openskimap-ski-areas",
+          "value": 12998,
+          "source_id": "wikipedia-breckenridge-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -6075,7 +6222,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-breckenridge-ski-resort"
       ]
@@ -7403,7 +7550,7 @@
       "lat": 41.0486,
       "lon": -75.35092,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -8239,7 +8386,7 @@
       "lat": 42.16581,
       "lon": -73.47862,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -9829,7 +9976,7 @@
       "lat": 42.18442,
       "lon": -74.11978,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -10359,10 +10506,19 @@
           "criterion": "luxury",
           "rationale": "The town changed from a mining town to a tourist retreat catering to the affluent as the ski resort took over the local economy.",
           "source_id": "wikipedia-crested-butte-colorado"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -10401,18 +10557,113 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 9129,
-          "source_id": "openskimap-ski-areas",
+          "value": 9375,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 11879,
+          "value": 12162,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-crested-butte-colorado",
+        "wikipedia-crested-butte-mountain-resort"
+      ]
+    },
+    {
+      "id": "crotched-mountain",
+      "name": "Crotched Mountain",
+      "tier": "A",
+      "facility_type": "ski_area",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 43.0023,
+      "lon": -71.8786,
+      "location_source_id": "wikipedia-crotched-mountain-ski-and-ride",
+      "cluster_id": "other-nh",
+      "state": "NH",
+      "size": {
+        "acres": null,
+        "vertical_ft": {
+          "value": 883,
           "source_id": "openskimap-ski-areas",
           "as_of": "2026-10-11",
           "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+        },
+        "lifts": {
+          "value": 5,
+          "source_id": "wikipedia-crotched-mountain-ski-and-ride",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 1050,
+          "source_id": "wikipedia-crotched-mountain-ski-and-ride",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 2066,
+          "source_id": "wikipedia-crotched-mountain-ski-and-ride",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -10441,85 +10692,9 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
-        "wikipedia-crested-butte-colorado",
-        "wikipedia-crested-butte-mountain-resort"
-      ]
-    },
-    {
-      "id": "crotched-mountain-ski-and-ride",
-      "name": "Crotched Mountain Ski & Ride",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 43.00768,
-      "lon": -71.87829,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
-      "state": "NH",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 883,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 5,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 1036,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 1919,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-crotched-mountain-ski-and-ride"
       ]
     },
     {
@@ -12039,7 +12214,7 @@
       "lat": 40.9266,
       "lon": -76.10681,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -12343,7 +12518,7 @@
       "lat": 47.9372,
       "lon": -120.05839,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -12495,7 +12670,7 @@
       "lat": 41.71967,
       "lon": -75.55791,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -14378,51 +14553,73 @@
       ]
     },
     {
-      "id": "heavenly-mountain-resort",
-      "name": "Heavenly Mountain Resort",
-      "tier": "B",
+      "id": "heavenly",
+      "name": "Heavenly",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 38.93386,
-      "lon": -119.90748,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 38.9353,
+      "lon": -119.94,
+      "location_source_id": "wikipedia-heavenly-mountain-resort",
       "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3729,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 4800,
+          "source_id": "wikipedia-heavenly-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "10-K gives over 4,800 skiable acres"
+        },
+        "vertical_ft": {
+          "value": 3812,
+          "source_id": "wikipedia-heavenly-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 26,
-          "source_id": "openskimap-ski-areas",
+          "value": 25,
+          "source_id": "wikipedia-heavenly-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6283,
-          "source_id": "openskimap-ski-areas",
+          "value": 6255,
+          "source_id": "wikipedia-heavenly-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 10012,
-          "source_id": "openskimap-ski-areas",
+          "value": 10067,
+          "source_id": "wikipedia-heavenly-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -14450,7 +14647,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-heavenly-mountain-resort"
       ]
     },
     {
@@ -14834,34 +15033,56 @@
       ]
     },
     {
-      "id": "hidden-valley",
-      "name": "Hidden Valley",
-      "tier": "B",
+      "id": "hidden-valley-mo",
+      "name": "Hidden Valley Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 38.53656,
-      "lon": -90.6535,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 38.5356,
+      "lon": -90.6529,
+      "location_source_id": "wikipedia-hidden-valley-ski-area-missouri",
       "cluster_id": "other-mo",
       "state": "MO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 303,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 65,
+          "source_id": "wikipedia-hidden-valley-ski-area-missouri",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 320,
+          "source_id": "wikipedia-hidden-valley-ski-area-missouri",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 8,
-          "source_id": "openskimap-ski-areas",
+          "value": 9,
+          "source_id": "wikipedia-hidden-valley-ski-area-missouri",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "5 chairlifts and 4 surface lifts"
         },
         "ski_school_staff_est": null
       },
@@ -14874,11 +15095,11 @@
           "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
         },
         "summit_ft": {
-          "value": 864,
-          "source_id": "openskimap-ski-areas",
+          "value": 860,
+          "source_id": "wikipedia-hidden-valley-ski-area-missouri",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -14906,55 +15127,80 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-hidden-valley-ski-area-missouri"
       ]
     },
     {
-      "id": "hidden-valley-resort",
+      "id": "hidden-valley-pa",
       "name": "Hidden Valley Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 40.05892,
-      "lon": -79.25252,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 40.058,
+      "lon": -79.2583,
+      "location_source_id": "wikipedia-hidden-valley-resort-pennsylvania",
+      "cluster_id": "laurel-highlands",
       "state": "PA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 490,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 110,
+          "source_id": "wikipedia-hidden-valley-resort-pennsylvania",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 470,
+          "source_id": "wikipedia-hidden-valley-resort-pennsylvania",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 7,
-          "source_id": "openskimap-ski-areas",
+          "value": 4,
+          "source_id": "wikipedia-hidden-valley-resort-pennsylvania",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "chairlifts only"
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
           "value": 2405,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-hidden-valley-resort-pennsylvania",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 2895,
-          "source_id": "openskimap-ski-areas",
+          "value": 2875,
+          "source_id": "wikipedia-hidden-valley-resort-pennsylvania",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -14982,7 +15228,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-hidden-valley-resort-pennsylvania"
       ]
     },
     {
@@ -15301,7 +15549,7 @@
       "lat": 41.62767,
       "lon": -74.61073,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -15900,49 +16148,76 @@
     {
       "id": "hunter-mountain",
       "name": "Hunter Mountain",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 42.2035,
-      "lon": -74.2276,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Hunter Mountain was the first area in the world with summit to base snowmaking and, in 1980, the first ski area in the world with snowmaking on 100 percent of its trails.",
+          "source_id": "wikipedia-hunter-mountain-ski-area"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 42.2003,
+      "lon": -74.2303,
+      "location_source_id": "wikipedia-hunter-mountain-ski-area",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1532,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 320,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 1600,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 10,
-          "source_id": "openskimap-ski-areas",
+          "value": 15,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1647,
-          "source_id": "openskimap-ski-areas",
+          "value": 1600,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3179,
-          "source_id": "openskimap-ski-areas",
+          "value": 3200,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -15970,7 +16245,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-hunter-mountain-ski-area"
       ]
     },
     {
@@ -16126,51 +16403,67 @@
       ]
     },
     {
-      "id": "jack-frost-mountain-resort",
-      "name": "Jack Frost Mountain Resort",
-      "tier": "B",
+      "id": "jack-frost",
+      "name": "Jack Frost Ski Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 41.11026,
-      "lon": -75.65176,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 41.111,
+      "lon": -75.652,
+      "location_source_id": "wikipedia-jack-frost-big-boulder",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 526,
-          "source_id": "openskimap-ski-areas",
+          "value": 600,
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 7,
-          "source_id": "openskimap-ski-areas",
+          "value": 9,
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1457,
-          "source_id": "openskimap-ski-areas",
+          "value": 1400,
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1983,
-          "source_id": "openskimap-ski-areas",
+          "value": 2000,
+          "source_id": "wikipedia-jack-frost-big-boulder",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -16198,7 +16491,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-jack-frost-big-boulder"
       ]
     },
     {
@@ -17086,49 +17381,71 @@
     {
       "id": "keystone",
       "name": "Keystone",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 39.56778,
-      "lon": -105.9351,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.605,
+      "lon": -105.9542,
+      "location_source_id": "wikipedia-keystone-resort",
       "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3196,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 3148,
+          "source_id": "wikipedia-keystone-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3128,
+          "source_id": "wikipedia-keystone-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 20,
-          "source_id": "openskimap-ski-areas",
+          "value": 21,
+          "source_id": "wikipedia-keystone-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 9281,
-          "source_id": "openskimap-ski-areas",
+          "value": 9280,
+          "source_id": "wikipedia-keystone-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 12477,
-          "source_id": "openskimap-ski-areas",
+          "value": 12408,
+          "source_id": "wikipedia-keystone-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -17156,7 +17473,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-keystone-resort"
       ]
     },
     {
@@ -17171,7 +17490,7 @@
       "lat": 43.61032,
       "lon": -72.79578,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southern-vermont",
+      "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -17321,10 +17640,19 @@
           "criterion": "diehard",
           "rationale": "Kirkwood is known for heavy snowfall and advanced off piste terrain, with only 12 percent beginner terrain, and hosted legs of the North American Freeskiing Championships in 2009 and 2010.",
           "source_id": "wikipedia-kirkwood-mountain-resort"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -17363,18 +17691,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 7813,
-          "source_id": "openskimap-ski-areas",
+          "value": 7800,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 9470,
-          "source_id": "openskimap-ski-areas",
+          "value": 9800,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -17403,6 +17731,7 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-kirkwood-mountain-resort"
       ]
@@ -17712,51 +18041,73 @@
       ]
     },
     {
-      "id": "laurel-mountain-ski-resort",
-      "name": "Laurel Mountain Ski Resort",
-      "tier": "B",
+      "id": "laurel-mountain",
+      "name": "Laurel Mountain",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 40.16712,
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "leased per 10-K Item 2; Wikipedia names the Commonwealth of Pennsylvania as owner"
+      },
+      "lat": 40.1671,
       "lon": -79.1692,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "laurel-highlands",
       "state": "PA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 760,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 70,
+          "source_id": "wikipedia-laurel-mountain-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 761,
+          "source_id": "wikipedia-laurel-mountain-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 2,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-laurel-mountain-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 2006,
-          "source_id": "openskimap-ski-areas",
+          "value": 2005,
+          "source_id": "wikipedia-laurel-mountain-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 2765,
-          "source_id": "openskimap-ski-areas",
+          "value": 2766,
+          "source_id": "wikipedia-laurel-mountain-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -17784,7 +18135,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-laurel-mountain-ski-resort"
       ]
     },
     {
@@ -17799,7 +18153,7 @@
       "lat": 47.6142,
       "lon": -120.66948,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -18016,51 +18370,73 @@
       ]
     },
     {
-      "id": "liberty-mountain-resort",
+      "id": "liberty-mountain",
       "name": "Liberty Mountain Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 39.75909,
-      "lon": -77.36847,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.7635,
+      "lon": -77.375,
+      "location_source_id": "wikipedia-liberty-mountain-resort",
       "cluster_id": "other-pa",
       "state": "PA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 581,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 100,
+          "source_id": "wikipedia-liberty-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 620,
+          "source_id": "wikipedia-liberty-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 8,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-liberty-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 583,
-          "source_id": "openskimap-ski-areas",
+          "value": 570,
+          "source_id": "wikipedia-liberty-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1164,
-          "source_id": "openskimap-ski-areas",
+          "value": 1190,
+          "source_id": "wikipedia-liberty-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -18088,7 +18464,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-liberty-mountain-resort"
       ]
     },
     {
@@ -18255,7 +18633,7 @@
       "lat": 41.14247,
       "lon": -75.55993,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -19158,19 +19536,41 @@
     {
       "id": "mad-river-mountain",
       "name": "Mad River Mountain",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 40.31607,
-      "lon": -83.67553,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "leased per 10-K Item 2"
+      },
+      "lat": 40.3163,
+      "lon": -83.6806,
+      "location_source_id": "wikipedia-mad-river-mountain",
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 144,
+          "source_id": "wikipedia-mad-river-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
         "vertical_ft": {
           "value": 292,
           "source_id": "openskimap-ski-areas",
@@ -19179,28 +19579,28 @@
           "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
         },
         "lifts": {
-          "value": 11,
-          "source_id": "openskimap-ski-areas",
+          "value": 9,
+          "source_id": "wikipedia-mad-river-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1164,
-          "source_id": "openskimap-ski-areas",
+          "value": 1160,
+          "source_id": "wikipedia-mad-river-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1456,
-          "source_id": "openskimap-ski-areas",
+          "value": 1460,
+          "source_id": "wikipedia-mad-river-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -19228,7 +19628,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-mad-river-mountain"
       ]
     },
     {
@@ -19499,7 +19902,7 @@
       "lat": 42.81596,
       "lon": -74.03372,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -20259,7 +20662,7 @@
       "lat": 47.28242,
       "lon": -120.40926,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -20639,7 +21042,7 @@
       "lat": 41.35269,
       "lon": -75.65887,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -21075,6 +21478,106 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas"
+      ]
+    },
+    {
+      "id": "mount-brighton",
+      "name": "Mount Brighton",
+      "tier": "A",
+      "facility_type": "ski_area",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 42.5381,
+      "lon": -83.8069,
+      "location_source_id": "wikipedia-mount-brighton",
+      "cluster_id": "other-mi",
+      "state": "MI",
+      "size": {
+        "acres": {
+          "value": 130,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 230,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "lifts": {
+          "value": 12,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "5 chairlifts and 7 surface lifts"
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 1100,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 1330,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-mount-brighton"
       ]
     },
     {
@@ -22004,10 +22507,19 @@
           "criterion": "heritage",
           "rationale": "Mount Snow cohosted the first Extreme Games in 1995, hosted the X Games in 2000 and 2001, and opened the first snowboard park in the East in 1992.",
           "source_id": "wikipedia-mount-snow"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -22046,18 +22558,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 1903,
-          "source_id": "openskimap-ski-areas",
+          "value": 1900,
+          "source_id": "wikipedia-mount-snow",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3586,
-          "source_id": "openskimap-ski-areas",
+          "value": 3600,
+          "source_id": "wikipedia-mount-snow",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -22086,6 +22598,7 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-mount-snow"
       ]
@@ -22168,50 +22681,72 @@
     },
     {
       "id": "mount-sunapee",
-      "name": "Mount Sunapee",
-      "tier": "B",
+      "name": "Mount Sunapee Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 43.32436,
-      "lon": -72.07539,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "owned and leased per 10-K Item 2"
+      },
+      "lat": 43.3306,
+      "lon": -72.08,
+      "location_source_id": "wikipedia-mount-sunapee-resort",
       "cluster_id": "other-nh",
       "state": "NH",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1469,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 230,
+          "source_id": "wikipedia-mount-sunapee-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 1513,
+          "source_id": "wikipedia-mount-sunapee-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 10,
-          "source_id": "openskimap-ski-areas",
+          "value": 11,
+          "source_id": "wikipedia-mount-sunapee-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1253,
-          "source_id": "openskimap-ski-areas",
+          "value": 1230,
+          "source_id": "wikipedia-mount-sunapee-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 2722,
-          "source_id": "openskimap-ski-areas",
+          "value": 2743,
+          "source_id": "wikipedia-mount-sunapee-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -22239,7 +22774,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-mount-sunapee-resort"
       ]
     },
     {
@@ -22810,82 +23347,6 @@
         },
         "summit_ft": {
           "value": 8565,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
-      "id": "mt-brighton",
-      "name": "Mt Brighton",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 42.53964,
-      "lon": -83.80899,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-mi",
-      "state": "MI",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 179,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 12,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 936,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 1115,
           "source_id": "openskimap-ski-areas",
           "as_of": "2026-10-11",
           "confidence": "estimated",
@@ -23692,7 +24153,7 @@
       "lat": 39.81421,
       "lon": -79.54905,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "laurel-highlands",
       "state": "PA",
       "size": {
         "acres": null,
@@ -24298,10 +24759,19 @@
           "criterion": "luxury",
           "rationale": "The 10-K calls Northstar the premier luxury mountain resort near Lake Tahoe, with premium lodging and a village of high end shops and restaurants.",
           "source_id": "vail-10k-fy2026"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -24340,18 +24810,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 6302,
-          "source_id": "openskimap-ski-areas",
+          "value": 6330,
+          "source_id": "wikipedia-northstar-california",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 8613,
-          "source_id": "openskimap-ski-areas",
+          "value": 8610,
+          "source_id": "wikipedia-northstar-california",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -24380,6 +24850,7 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-northstar-california"
       ]
@@ -24841,51 +25312,73 @@
       ]
     },
     {
-      "id": "okemo-mountain",
-      "name": "Okemo Mountain",
-      "tier": "B",
+      "id": "okemo",
+      "name": "Okemo",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 43.40859,
-      "lon": -72.73278,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southern-vermont",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "mountain terrain leased per 10-K Item 2"
+      },
+      "lat": 43.4014,
+      "lon": -72.7167,
+      "location_source_id": "wikipedia-okemo-mountain",
+      "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2166,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 667,
+          "source_id": "wikipedia-okemo-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2200,
+          "source_id": "wikipedia-okemo-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 21,
-          "source_id": "openskimap-ski-areas",
+          "value": 20,
+          "source_id": "wikipedia-okemo-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "13 chairlifts and 7 surface lifts"
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1156,
-          "source_id": "openskimap-ski-areas",
+          "value": 1134,
+          "source_id": "wikipedia-okemo-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3323,
-          "source_id": "openskimap-ski-areas",
+          "value": 3344,
+          "source_id": "wikipedia-okemo-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -24913,7 +25406,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-okemo-mountain"
       ]
     },
     {
@@ -25355,32 +25850,48 @@
     {
       "id": "paoli-peaks",
       "name": "Paoli Peaks",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 38.55778,
-      "lon": -86.51028,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "owned and leased per 10-K Item 2"
+      },
+      "lat": 38.5578,
+      "lon": -86.5103,
+      "location_source_id": "wikipedia-paoli-peaks",
       "cluster_id": "other-in",
       "state": "IN",
       "size": {
         "acres": null,
         "vertical_ft": {
-          "value": 282,
-          "source_id": "openskimap-ski-areas",
+          "value": 300,
+          "source_id": "wikipedia-paoli-peaks",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 6,
-          "source_id": "openskimap-ski-areas",
+          "value": 8,
+          "source_id": "wikipedia-paoli-peaks",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
@@ -25425,7 +25936,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-paoli-peaks"
       ]
     },
     {
@@ -25443,10 +25957,19 @@
           "criterion": "heritage",
           "rationale": "Park City hosted the giant slalom and the snowboarding halfpipe and parallel giant slalom events of the 2002 Winter Olympics.",
           "source_id": "wikipedia-park-city-mountain-resort"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -25485,18 +26008,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 6728,
-          "source_id": "openskimap-ski-areas",
+          "value": 6900,
+          "source_id": "wikipedia-park-city-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 9994,
-          "source_id": "openskimap-ski-areas",
+          "value": 10026,
+          "source_id": "wikipedia-park-city-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -25524,7 +26047,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-park-city-mountain-resort"
       ]
@@ -26377,7 +26900,7 @@
       "lat": 42.28738,
       "lon": -74.65691,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -26605,7 +27128,7 @@
       "lat": 43.53081,
       "lon": -72.75055,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southern-vermont",
+      "cluster_id": "central-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -26681,7 +27204,7 @@
       "lat": 41.16339,
       "lon": -74.961,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -28119,7 +28642,7 @@
       "lat": 41.69112,
       "lon": -74.01654,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -28260,27 +28783,49 @@
       ]
     },
     {
-      "id": "roundtop-mountain-resort",
+      "id": "roundtop-mountain",
       "name": "Roundtop Mountain Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 40.10824,
-      "lon": -76.92883,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 40.108,
+      "lon": -76.926,
+      "location_source_id": "wikipedia-roundtop-mountain-resort",
       "cluster_id": "other-pa",
       "state": "PA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 580,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 103,
+          "source_id": "wikipedia-roundtop-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 600,
+          "source_id": "wikipedia-roundtop-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 9,
@@ -28293,18 +28838,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 767,
-          "source_id": "openskimap-ski-areas",
+          "value": 740,
+          "source_id": "wikipedia-roundtop-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1347,
-          "source_id": "openskimap-ski-areas",
+          "value": 1340,
+          "source_id": "wikipedia-roundtop-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -28332,7 +28877,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-roundtop-mountain-resort"
       ]
     },
     {
@@ -28949,7 +29497,7 @@
       "lat": 41.12679,
       "lon": -75.0503,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -29341,51 +29889,73 @@
       ]
     },
     {
-      "id": "seven-springs-mountain-resort",
-      "name": "Seven Springs Mountain Resort",
-      "tier": "B",
+      "id": "seven-springs",
+      "name": "Seven Springs Resort",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 40.02282,
-      "lon": -79.30138,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 40.0231,
+      "lon": -79.2928,
+      "location_source_id": "wikipedia-seven-springs-mountain-resort",
+      "cluster_id": "laurel-highlands",
       "state": "PA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 741,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 285,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 750,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 16,
-          "source_id": "openskimap-ski-areas",
+          "value": 14,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 2257,
-          "source_id": "openskimap-ski-areas",
+          "value": 2240,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 2998,
-          "source_id": "openskimap-ski-areas",
+          "value": 2994,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -29413,7 +29983,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-seven-springs-mountain-resort"
       ]
     },
     {
@@ -29428,7 +30000,7 @@
       "lat": 41.03589,
       "lon": -75.07908,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -31328,7 +31900,7 @@
       "lat": 41.23997,
       "lon": -75.23516,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -31699,32 +32271,54 @@
     {
       "id": "snow-creek",
       "name": "Snow Creek",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 39.46547,
-      "lon": -94.96901,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.4687,
+      "lon": -94.972,
+      "location_source_id": "wikipedia-snow-creek-ski-resort",
       "cluster_id": "other-mo",
       "state": "MO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 263,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 25,
+          "source_id": "wikipedia-snow-creek-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 300,
+          "source_id": "wikipedia-snow-creek-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 6,
-          "source_id": "openskimap-ski-areas",
+          "value": 5,
+          "source_id": "wikipedia-snow-creek-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
@@ -31769,7 +32363,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-snow-creek-ski-resort"
       ]
     },
     {
@@ -33656,49 +34253,71 @@
     {
       "id": "stevens-pass",
       "name": "Stevens Pass",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 47.7355,
-      "lon": -121.08754,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 47.7447,
+      "lon": -121.0889,
+      "location_source_id": "wikipedia-stevens-pass-ski-area",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1842,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 1125,
+          "source_id": "wikipedia-stevens-pass-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "10-K gives more than 1,100 acres"
+        },
+        "vertical_ft": {
+          "value": 1800,
+          "source_id": "wikipedia-stevens-pass-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 14,
-          "source_id": "openskimap-ski-areas",
+          "value": 10,
+          "source_id": "wikipedia-stevens-pass-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "chairlifts only"
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 3824,
-          "source_id": "openskimap-ski-areas",
+          "value": 4061,
+          "source_id": "wikipedia-stevens-pass-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "main base area; Mill Valley base is 3821 ft"
         },
         "summit_ft": {
-          "value": 5666,
-          "source_id": "openskimap-ski-areas",
+          "value": 5845,
+          "source_id": "wikipedia-stevens-pass-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -33726,7 +34345,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-stevens-pass-ski-area"
       ]
     },
     {
@@ -33820,10 +34441,19 @@
           "criterion": "luxury",
           "rationale": "The 10-K calls Stowe the premier high end regional ski area in the Northeast, with an exceptional base area experience.",
           "source_id": "vail-10k-fy2026"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -33862,18 +34492,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 1257,
-          "source_id": "openskimap-ski-areas",
+          "value": 1559,
+          "source_id": "wikipedia-stowe-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3660,
-          "source_id": "openskimap-ski-areas",
+          "value": 3719,
+          "source_id": "wikipedia-stowe-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -33901,7 +34531,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-stowe-mountain-resort"
       ]
@@ -36099,7 +36729,7 @@
       "lat": 41.43098,
       "lon": -75.35792,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-pa",
+      "cluster_id": "poconos",
       "state": "PA",
       "size": {
         "acres": null,
@@ -37908,10 +38538,19 @@
           "criterion": "luxury",
           "rationale": "Vail Resorts is turning every private lesson at Vail into its Epic Ascent product, with concierge support and white glove gear rental, starting in the 2026/2027 season.",
           "source_id": "vail-10k-fy2026"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -37950,18 +38589,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 8034,
-          "source_id": "openskimap-ski-areas",
+          "value": 8120,
+          "source_id": "wikipedia-vail-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 11567,
-          "source_id": "openskimap-ski-areas",
+          "value": 11570,
+          "source_id": "wikipedia-vail-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -37990,6 +38629,7 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-vail-ski-resort"
       ]
@@ -38310,7 +38950,7 @@
       "lat": 41.76337,
       "lon": -74.97101,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,
@@ -39310,27 +39950,49 @@
       ]
     },
     {
-      "id": "whitetail-resort",
+      "id": "whitetail",
       "name": "Whitetail Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 39.74369,
-      "lon": -77.93768,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.7417,
+      "lon": -77.9328,
+      "location_source_id": "wikipedia-whitetail-ski-resort",
       "cluster_id": "other-pa",
       "state": "PA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 974,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 120,
+          "source_id": "wikipedia-whitetail-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 935,
+          "source_id": "wikipedia-whitetail-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 8,
@@ -39343,18 +40005,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 814,
-          "source_id": "openskimap-ski-areas",
+          "value": 865,
+          "source_id": "wikipedia-whitetail-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 1788,
-          "source_id": "openskimap-ski-areas",
+          "value": 1800,
+          "source_id": "wikipedia-whitetail-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -39382,7 +40044,10 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-whitetail-ski-resort"
       ]
     },
     {
@@ -39471,10 +40136,19 @@
           "criterion": "heritage",
           "rationale": "Wildcat opened the first gondola lift in North America in 1958 and is home to one of the oldest ski racing trails in the United States.",
           "source_id": "wikipedia-wildcat-mountain-ski-area"
+        },
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
       "owner": {
         "value": "Vail Resorts",
         "source_id": "vail-10k-fy2026",
@@ -39513,18 +40187,18 @@
       },
       "elevation": {
         "base_ft": {
-          "value": 1931,
-          "source_id": "openskimap-ski-areas",
+          "value": 1950,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3974,
-          "source_id": "openskimap-ski-areas",
+          "value": 4062,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -39552,7 +40226,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas",
+        "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-wildcat-mountain-ski-area"
       ]
@@ -39712,49 +40386,71 @@
     {
       "id": "wilmot-mountain",
       "name": "Wilmot Mountain",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 42.49858,
-      "lon": -88.1913,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "operator_compensation",
+          "rationale": "Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).",
+          "source_id": "owner-decisions-2026-10-11"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "All Vail Resorts US resorts approved as Tier A"
+      },
+      "owner": {
+        "value": "Vail Resorts",
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 42.5,
+      "lon": -88.1889,
+      "location_source_id": "wikipedia-wilmot-mountain",
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 196,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 120,
+          "source_id": "wikipedia-wilmot-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 190,
+          "source_id": "wikipedia-wilmot-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 13,
-          "source_id": "openskimap-ski-areas",
+          "value": 11,
+          "source_id": "wikipedia-wilmot-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "chairlifts only"
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 759,
-          "source_id": "openskimap-ski-areas",
+          "value": 770,
+          "source_id": "wikipedia-wilmot-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 955,
-          "source_id": "openskimap-ski-areas",
+          "value": 960,
+          "source_id": "wikipedia-wilmot-mountain",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -39782,7 +40478,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "owner-decisions-2026-10-11",
+        "vail-10k-fy2026",
+        "wikipedia-wilmot-mountain"
       ]
     },
     {
@@ -39797,7 +40495,7 @@
       "lat": 42.2931,
       "lon": -74.25757,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "catskills",
       "state": "NY",
       "size": {
         "acres": null,

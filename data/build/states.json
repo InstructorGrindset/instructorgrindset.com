@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:56:39Z",
+  "generated_at": "2026-10-11T20:14:31Z",
   "states": [
     {
       "code": "AK",
@@ -204,6 +204,7 @@
       "code": "NY",
       "name": "New York",
       "cluster_ids": [
+        "catskills",
         "other-ny"
       ],
       "resort_count": 52
@@ -228,7 +229,9 @@
       "code": "PA",
       "name": "Pennsylvania",
       "cluster_ids": [
-        "other-pa"
+        "laurel-highlands",
+        "other-pa",
+        "poconos"
       ],
       "resort_count": 29
     },

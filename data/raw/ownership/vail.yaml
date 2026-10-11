@@ -11,6 +11,7 @@ sources:
     title: Vail Resorts, Inc. home page, Our Resorts list
     accessed_date: 2026-10-11
     note: Cross check of the resort list; matches the 10-K.
+# Owner decision 2026-10-11 (ROADMAP Section 3, operator compensation): every Vail Resorts US resort is Tier A.
 resorts:
   # Destination mountain resorts (10-K Item 1)
   - {name: Vail Mountain, state: CO, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
@@ -19,57 +20,57 @@ resorts:
   - name: Keystone Resort
     state: CO
     source_id: vail-10k-fy2026
-    tier_a_candidate: false
-    exclusion_reason: Destination resort, but no fetched source supports a Tier A criterion. The 10-K describes it as a family and night skiing destination. Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null
   - {name: Crested Butte Mountain Resort, state: CO, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   - {name: Park City Mountain, state: UT, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   - name: Heavenly Mountain Resort
     state: CA
     source_id: vail-10k-fy2026
-    tier_a_candidate: false
-    exclusion_reason: Destination resort (straddles CA and NV), but no fetched source supports a Tier A criterion. The 10-K highlights lake views, nightlife and casinos. Flagged for Alexandre to review.
+    tier_a_candidate: true
+    exclusion_reason: null
   - {name: Northstar California Resort, state: CA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   - {name: Kirkwood Mountain Resort, state: CA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   # Regional ski areas: Pacific Northwest (US)
   - name: Stevens Pass
     state: WA
     source_id: vail-10k-fy2026
-    tier_a_candidate: false
-    exclusion_reason: Regional ski area per the 10-K; Wikipedia calls it a day resort drawing from Seattle. No fetched source supports a Tier A criterion.
+    tier_a_candidate: true
+    exclusion_reason: null
   # Regional ski areas: Northeast
   - {name: Stowe Mountain Resort, state: VT, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   - name: Okemo Mountain Resort
     state: VT
     source_id: vail-10k-fy2026
-    tier_a_candidate: false
-    exclusion_reason: Regional ski area per the 10-K. No fetched source supports a Tier A criterion.
+    tier_a_candidate: true
+    exclusion_reason: null
   - {name: Mount Snow, state: VT, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   - {name: Hunter Mountain, state: NY, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   - name: Attitash Mountain
     state: NH
     source_id: vail-10k-fy2026
-    tier_a_candidate: false
-    exclusion_reason: Regional New Hampshire ski area per the 10-K. No fetched source supports a Tier A criterion.
+    tier_a_candidate: true
+    exclusion_reason: null
   - {name: Wildcat Mountain, state: NH, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
-  - {name: Mount Sunapee Resort, state: NH, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Regional New Hampshire day area that meets no Tier A criterion.}
-  - {name: Crotched Mountain, state: NH, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Regional New Hampshire day area that meets no Tier A criterion.}
+  - {name: Mount Sunapee Resort, state: NH, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Crotched Mountain, state: NH, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   # Regional ski areas: Mid-Atlantic (Pennsylvania)
-  - {name: Seven Springs Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
-  - {name: Hidden Valley Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
-  - {name: Laurel Mountain, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
-  - {name: Liberty Mountain Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
-  - {name: Roundtop Mountain Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
-  - {name: Whitetail Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
-  - {name: Jack Frost Ski Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
-  - {name: Big Boulder Mountain, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Mid-Atlantic regional feeder hill that meets no Tier A criterion.}
+  - {name: Seven Springs Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Hidden Valley Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Laurel Mountain, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Liberty Mountain Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Roundtop Mountain Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Whitetail Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Jack Frost Ski Resort, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Big Boulder Mountain, state: PA, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
   # Regional ski areas: Midwest
-  - {name: Afton Alps, state: MN, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Alpine Valley Resort, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Boston Mills, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Brandywine, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Mad River Mountain, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion. Leased per 10-K Item 2.}
-  - {name: Hidden Valley Resort, state: MO, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Snow Creek, state: MO, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Paoli Peaks, state: IN, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Mount Brighton, state: MI, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
-  - {name: Wilmot Mountain, state: WI, source_id: vail-10k-fy2026, tier_a_candidate: false, exclusion_reason: Midwest regional feeder hill that meets no Tier A criterion.}
+  - {name: Afton Alps, state: MN, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Alpine Valley Resort, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Boston Mills, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Brandywine, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Mad River Mountain, state: OH, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Hidden Valley Resort, state: MO, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Snow Creek, state: MO, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Paoli Peaks, state: IN, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Mount Brighton, state: MI, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Wilmot Mountain, state: WI, source_id: vail-10k-fy2026, tier_a_candidate: true, exclusion_reason: null}
