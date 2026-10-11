@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__composio__COMPOSIO_MULTI_EXECUTE_TOOL",
+      "mcp__composio__COMPOSIO_SEARCH_TOOLS",
+      "WebFetch",
+      "WebSearch",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(curl *)",
+      "Bash(node *)",
+      "Bash(npm *)",
+      "Bash(git *)",
+      "Bash(pytest *)"
+    ]
+  }
+}
