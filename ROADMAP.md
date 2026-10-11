@@ -43,10 +43,12 @@ A resort qualifies for Tier A when it meets **at least one** of these:
 * **Luxury:** a destination clientele with high private lesson demand and premium pricing
 * **Athlete development:** a ski and snowboard academy, club program feeding national teams, or regular national team training presence
 * **Heritage:** historic significance to American skiing or snowboarding
+* **Operator compensation:** every US resort owned or operated by Vail Resorts or Alterra Mountain Company. Vail compensation packages are top of the industry and standardized across locations. Alterra compensation is strong though not always standardized; all Alterra resorts qualify by owner decision
+* **Year round training:** indoor snow slopes and year round training facilities (summer glacier camps, water ramps, airbag and trampoline centers, national team centers). These appear on the map with their own facility type: `ski_area`, `indoor`, or `training_center`
 
 ### Seed list
-1. **Vail Resorts destination resorts.** Exclude regional feeder hills (for example Midwest and Mid Atlantic urban hills) unless they independently meet a criterion. Those go to Tier B.
-2. **Alterra Mountain Company destination resorts.**
+1. **All Vail Resorts US resorts**, regional hills included (operator compensation criterion).
+2. **All Alterra Mountain Company US resorts** (operator compensation criterion).
 3. **Independents and other operators meeting the criteria.** Starting candidates: Jackson Hole, Aspen Snowmass, Telluride, Taos, Sun Valley, Big Sky, Alta, Snowbird, Sugarloaf, Sugar Bowl, Burke, Waterville Valley.
 
 ### Rules
@@ -217,8 +219,9 @@ Each phase ends with acceptance criteria. Work one phase per Claude Code session
 
 | Question | Decision |
 |---|---|
-| Tier A membership | Criteria based (Section 3); Vail and Alterra destination resorts plus qualifying independents as seed |
+| Tier A membership | Criteria based (Section 3); every Vail and Alterra US resort plus qualifying independents and facilities |
 | Placement | Subfolder `/map/` on instructorgrindset.com |
 | Powder and density thresholds | Research based defaults: powder 6 in, banner 12 in, density cutoffs 7% and 12% |
 | Crowdsourced data | Highest confidence per field; reports shown only as aggregates of 3+ |
 | Season Income Calculator | Shared infrastructure later (Phase 9); not visualized in the map |
+| Owner additions (2026-10-11) | Big Sky, Taos, Snowmass, Buttermilk, Sun Valley, Dollar Mountain (its own record), Yellowstone Club and Deer Valley are approved Tier A. Indoor skiing and year round training facilities are included through the year round training criterion. Every Vail and Alterra US resort is approved Tier A through the operator compensation criterion |
