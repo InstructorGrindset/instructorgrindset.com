@@ -1,0 +1,20 @@
+[
+  {"latitude": 39.6, "longitude": -106.35, "generationtime_ms": 1.2, "utc_offset_seconds": -25200, "timezone": "America/Denver", "timezone_abbreviation": "MST", "elevation": 2475.0,
+   "daily_units": {"time": "iso8601", "snowfall_sum": "cm", "temperature_2m_max": "°C", "temperature_2m_min": "°C", "wind_speed_10m_max": "km/h", "sunshine_duration": "s", "daylight_duration": "s"},
+   "daily": {"time": ["2024-01-01", "2024-01-02", "2024-01-03"],
+             "snowfall_sum": [15.24, 30.48, null],
+             "temperature_2m_max": [0.0, -10.0, 5.0],
+             "temperature_2m_min": [-10.0, -40.0, -5.0],
+             "wind_speed_10m_max": [16.09344, 0.0, 32.18688],
+             "sunshine_duration": [18000.0, 0.0, 36000.0],
+             "daylight_duration": [36000.0, 36000.0, 36000.0]}},
+  {"latitude": 40.5, "longitude": -111.6, "generationtime_ms": 1.1, "utc_offset_seconds": -25200, "timezone": "America/Denver", "timezone_abbreviation": "MST", "elevation": 2600.0,
+   "daily_units": {"time": "iso8601", "snowfall_sum": "cm", "temperature_2m_max": "°C", "temperature_2m_min": "°C", "wind_speed_10m_max": "km/h", "sunshine_duration": "s", "daylight_duration": "s"},
+   "daily": {"time": ["2024-01-01", "2024-01-02", "2024-01-03"],
+             "snowfall_sum": [2.54, 0.0, 0.0],
+             "temperature_2m_max": [1.0, 2.0, 3.0],
+             "temperature_2m_min": [-1.0, -2.0, -3.0],
+             "wind_speed_10m_max": [10.0, 10.0, 10.0],
+             "sunshine_duration": [1000.0, 2000.0, 3000.0],
+             "daylight_duration": [36000.0, 36000.0, 36000.0]}}
+]

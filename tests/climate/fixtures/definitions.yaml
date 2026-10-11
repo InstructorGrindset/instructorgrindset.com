@@ -1,0 +1,27 @@
+# Synthetic test definitions. Same shape as the block suggested for config/definitions.yaml,
+# with small storm counts so two season fixtures produce density values.
+snow:
+  powder_day_in: 6
+  banner_day_in: 12
+density_classes_pct:
+  dry_below: 7
+  moist_above: 12
+climate:
+  period_seasons: 25
+  era5_lag_days: 7
+  storm_min_daily_in: 1.0
+  min_month_coverage: 0.9
+  min_storms_per_month: 2
+  density_estimate_method: anderson_1976
+  snotel:
+    radius_km: 25
+    elevation_band_below_ft: 1500
+    elevation_band_above_ft: 3500
+    max_candidates: 3
+    storm_min_daily_depth_gain_in: 1
+    min_storm_depth_gain_in: 3
+    density_min_pct: 2
+    density_max_pct: 40
+    swe_noise_tolerance_in: 0.1
+    max_daily_depth_gain_in: 40
+    min_valid_storms: 5
