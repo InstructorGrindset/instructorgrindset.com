@@ -115,6 +115,13 @@ def test_pay_selection_latest_season_then_confidence():
                   "source_id": "src-c", "as_of": "2026-01-15", "season": "2025-26", "stale": False}
 
 
+def test_unspecified_level_is_its_own_row_and_sorts_last():
+    rows, _ = select_pay([pay(cert_level="unspecified", hourly_low=19, hourly_high=35), pay(cert_level="level_1")],
+                         PRIORITY, 3, TODAY, 18)
+    assert [r["cert_level"] for r in rows] == ["level_1", "unspecified"]
+    assert rows[1]["hourly_low"] == 19 and rows[1]["hourly_high"] == 35
+
+
 def test_pay_selection_ties():
     # same season and confidence: latest verified_date wins
     rows, _ = select_pay([pay(verified_date="2026-01-01", hourly_low=10, hourly_high=10),

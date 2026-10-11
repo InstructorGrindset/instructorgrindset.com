@@ -15,8 +15,8 @@ from pydantic import Field, ValidationInfo, field_validator, model_validator
 
 from .common import Confidence, Slug, Source, Sourced, SourcedNumber, StrictModel, check_source_ref
 
-CertLevel = Literal["none", "level_1", "level_2", "level_3", "trainer", "examiner"]
-CERT_LEVELS: tuple[str, ...] = ("none", "level_1", "level_2", "level_3", "trainer", "examiner")
+CertLevel = Literal["none", "level_1", "level_2", "level_3", "trainer", "examiner", "unspecified"]
+CERT_LEVELS: tuple[str, ...] = ("none", "level_1", "level_2", "level_3", "trainer", "examiner", "unspecified")
 PROFESSIONALISM_COMPONENTS: tuple[str, ...] = (
     "cert_pay_differential", "paid_training_hours", "examiner_trainer_presence",
     "private_lesson_share", "year_round_staff", "clinic_access",

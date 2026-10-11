@@ -46,6 +46,7 @@ export const CERT_LABEL = {
   level_3: 'Level 3',
   trainer: 'Trainer',
   examiner: 'Examiner',
+  unspecified: 'All levels (posted range)',
 };
 
 export const COMPONENT_LABEL = {

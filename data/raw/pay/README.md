@@ -7,7 +7,7 @@ Hourly instructor pay, one YAML file per research batch (for example `pay_transp
 * Every row has a source. Pay transparency job postings and published resort pay sheets come first. Never scrape Glassdoor or Indeed.
 * A value you cannot source is left out. Never estimate pay from memory.
 * `resort_id` must be a resort id in the build (Tier A or Tier B).
-* `season` is written `2025-26`. `cert_level` is one of `none`, `level_1`, `level_2`, `level_3`, `trainer`, `examiner`.
+* `season` is written `2025-26`. `cert_level` is one of `none`, `level_1`, `level_2`, `level_3`, `trainer`, `examiner`, `unspecified`. Use `unspecified` for a single posted range that covers every level ("depending on certification and experience").
 * `hourly_low` must not exceed `hourly_high`. A single published rate uses the same number twice.
 * `confidence: reported` rows come only from the Phase 7 aggregation job and carry `aggregate_count` (approved reports combined). A reported row with fewer than `reports.aggregation_min` (3) reports is never displayed. Individual reports never go in this folder.
 * Sources may be declared here or cited from any other file in `data/raw` (ids are global).

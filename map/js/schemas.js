@@ -34,7 +34,7 @@ const strList = z.array(z.string()).nullish().transform((v) => v ?? []);
 const numOrNull = z.number().nullish().transform((v) => v ?? null);
 
 // ── Career (Phase 4 contract) ──
-export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner'];
+export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner', 'unspecified'];
 
 export const PayRow = z.object({
   cert_level: z.enum(CERT_LEVELS),

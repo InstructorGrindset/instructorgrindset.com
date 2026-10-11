@@ -118,7 +118,7 @@ Monthly values are climatological means over `period`; `powder_days` and `banner
 ### Raw inputs (research fills these later; every value sourced)
 * `data/raw/pay/*.yaml`: `{ batch, researched_date, sources: [...], records: [PayRecord] }` (see `data/raw/pay/README.md`)
   ```
-  PayRecord { resort_id, season ("2025-26"), cert_level: none|level_1|level_2|level_3|trainer|examiner,
+  PayRecord { resort_id, season ("2025-26"), cert_level: none|level_1|level_2|level_3|trainer|examiner|unspecified,
               hourly_low, hourly_high, confidence: published|reported|estimated, source_id, verified_date, note?,
               aggregate_count? }   // reported rows only: number of approved reports aggregated (Phase 7)
   ```
@@ -140,7 +140,7 @@ Monthly values are climatological means over `period`; `powder_days` and `banner
 ```
 career: {
   pay: [ { cert_level, hourly_low, hourly_high, confidence, source_id, as_of, season, stale } ],
-        // one row per cert_level (ordered none, level_1, level_2, level_3, trainer, examiner): the most recent
+        // one row per cert_level (ordered none, level_1, level_2, level_3, trainer, examiner, unspecified): the most recent
         // season, then highest confidence (published > reported > estimated), then latest verified_date, then source_id.
         // `reported` rows only come from aggregates of reports.aggregation_min (3)+ approved reports and are never single reports
   private_rate: Sourced | null, private_split: Sourced | null,
