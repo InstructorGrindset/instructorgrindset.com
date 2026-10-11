@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T20:15:25Z",
+  "generated_at": "2026-10-11T20:18:32Z",
   "states": [
     {
       "code": "AK",
@@ -36,7 +36,7 @@
         "other-ca",
         "southern-california"
       ],
-      "resort_count": 30
+      "resort_count": 31
     },
     {
       "code": "CO",
@@ -48,7 +48,7 @@
         "roaring-fork",
         "southwest-colorado"
       ],
-      "resort_count": 40
+      "resort_count": 41
     },
     {
       "code": "CT",
@@ -181,7 +181,7 @@
       "code": "NJ",
       "name": "New Jersey",
       "cluster_ids": [
-        "other-nj"
+        "new-york-metro"
       ],
       "resort_count": 4
     },
@@ -206,10 +206,12 @@
       "code": "NY",
       "name": "New York",
       "cluster_ids": [
+        "adirondacks",
         "catskills",
+        "new-york-metro",
         "other-ny"
       ],
-      "resort_count": 52
+      "resort_count": 53
     },
     {
       "code": "OH",
@@ -227,7 +229,7 @@
         "mount-hood",
         "other-or"
       ],
-      "resort_count": 12
+      "resort_count": 13
     },
     {
       "code": "PA",
@@ -270,7 +272,7 @@
         "other-ut",
         "wasatch"
       ],
-      "resort_count": 19
+      "resort_count": 20
     },
     {
       "code": "VA",

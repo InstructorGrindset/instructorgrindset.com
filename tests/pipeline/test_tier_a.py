@@ -171,6 +171,17 @@ def test_training_center_never_takes_resort_area(raw_dir, cfg):
     assert m.by_tier_a == {} and len(m.unmatched) == len(ext.areas)
 
 
+def test_facility_takes_only_its_named_area(raw_dir, cfg):
+    """An indoor or training record absorbs its own OpenSkiMap area by explicit name only."""
+    inputs = load_raw(raw_dir, SourceRegistry())
+    training = next(r for _, r in inputs.records if r.id == "fixture-peak-training-center")
+    own = _area("Fixture Training Hill", training.lon, training.lat)
+    resort_area = _area(training.name, training.lon + 0.001, training.lat)
+    named = training.model_copy(update={"openskimap_names": ["Fixture Training Hill"]})
+    m = match_openskimap([named], [own, resort_area], cfg.definitions.matching)
+    assert m.by_tier_a == {training.id: [own]} and m.unmatched == [resort_area]
+
+
 def test_names():
     assert slugify("Mt. Bachelor & Co's Peak") == "mt-bachelor-and-cos-peak"
     assert slugify("Arapahoe Basin Ski Área") == "arapahoe-basin-ski-area"

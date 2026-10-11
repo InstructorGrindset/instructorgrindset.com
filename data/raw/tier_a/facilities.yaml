@@ -20,9 +20,11 @@ sources:
   - {id: wikipedia-powdr, url: https://en.wikipedia.org/wiki/Powdr, title: Powdr (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-copper-mountain-colorado, url: "https://en.wikipedia.org/wiki/Copper_Mountain_(Colorado)", title: "Copper Mountain (Colorado) (Wikipedia)", accessed_date: 2026-10-11}
   - {id: wikipedia-boreal-mountain-resort, url: https://en.wikipedia.org/wiki/Boreal_Mountain_Resort, title: Boreal Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-park-city-utah, url: "https://en.wikipedia.org/wiki/Park_City,_Utah", title: "Park City, Utah (Wikipedia)", accessed_date: 2026-10-11, note: "town coordinates only"}
   - {id: openskimap-ski-areas, url: "https://openskimap.org/", title: "OpenSkiMap ski areas (derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-11, note: "repository extract data/raw/openskimap/us_ski_areas.geojson"}
 resorts:
   - id: big-snow-american-dream
+    openskimap_names: ["Big Snow American Dream"]
     name: Big SNOW American Dream
     facility_type: indoor
     state: NJ
@@ -55,6 +57,7 @@ resorts:
     elevation:
       summit_ft: {value: 8500, source_id: wikipedia-palmer-glacier, as_of: 2026-10-11, confidence: published, note: "top of the Palmer chairlift"}
   - id: utah-olympic-park
+    openskimap_names: ["Utah Olympic Park"]
     name: Utah Olympic Park
     facility_type: training_center
     state: UT
@@ -74,14 +77,15 @@ resorts:
     owner: {value: U.S. Ski & Snowboard, source_id: wikipedia-us-ski-and-snowboard, as_of: 2026-10-11, confidence: published}
     # Approximate: Park City town coordinates from Wikipedia. The facility is at 1 Victory Lane, Park City;
     # no reachable source gave its own coordinates. Replace before approval.
-    lat: 40.6461
-    lon: -111.498
+    lat: 40.6503
+    lon: -111.5014
     location_source_id: wikipedia-park-city-utah
     cluster_hint: wasatch
     tier_a_criteria:
       - {criterion: year_round_training, rationale: "The national training and education facility opened in 2009 with strength training areas, a gymnasium, ski and snowboard ramps, trampolines and rehabilitation facilities.", source_id: wikipedia-united-states-ski-team}
       - {criterion: athlete_development, rationale: "U.S. Ski & Snowboard moved into the Center of Excellence in May 2009; it serves as a training base for elite athletes and an education center.", source_id: wikipedia-us-ski-and-snowboard}
   - id: woodward-park-city
+    openskimap_names: ["Woodward"]
     name: Woodward Park City
     facility_type: training_center
     state: UT

@@ -245,8 +245,9 @@ def _norm(name: str) -> str:
 def match_openskimap(records: Iterable[TierARecord], areas: Iterable[SkiArea], rule: MatchingDefs) -> MatchResult:
     """Pair OpenSkiMap areas with Tier A records so Tier A is never duplicated.
 
-    Only ``facility_type: ski_area`` records take part, so a training center
-    inside a resort never takes the resort's area.
+    Indoor and training center records take part only through an explicit
+    ``openskimap_names`` list, so a training center inside a resort never
+    takes the resort's area by proximity.
 
     * A record with ``openskimap_names`` absorbs exactly the areas with those
       names that lie within ``strong_name_radius_km``.
@@ -256,7 +257,7 @@ def match_openskimap(records: Iterable[TierARecord], areas: Iterable[SkiArea], r
       names at least ``strong_name_similarity_min`` alike. Each area goes to
       the record it suits best; highest name similarity wins, then distance.
     """
-    records = [r for r in records if r.facility_type == "ski_area"]
+    records = [r for r in records if r.facility_type == "ski_area" or r.openskimap_names]
     areas = list(areas)
     by: dict[str, list[SkiArea]] = {r.id: [] for r in records}
     taken: set[int] = set()

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T20:15:25Z",
+  "generated_at": "2026-10-11T20:18:32Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -2951,7 +2951,7 @@
       "lat": 44.76407,
       "lon": -73.5837,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -4063,33 +4063,51 @@
     },
     {
       "id": "big-snow-american-dream",
-      "name": "Big Snow American Dream",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "name": "Big SNOW American Dream",
+      "tier": "A",
+      "facility_type": "indoor",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "The first indoor ski park in North America, open year round on 4 acres of real snow held at 28 F, with ski and snowboard lessons and a terrain park.",
+          "source_id": "wikipedia-big-snow-american-dream"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 40.81029,
-      "lon": -74.07035,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nj",
+      "owner": {
+        "value": "Snow Operating",
+        "source_id": "wikipedia-big-snow-american-dream",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "operator, which also runs Mountain Creek; the slope is owned by Triple Five Group"
+      },
+      "lat": 40.8111,
+      "lon": -74.07,
+      "location_source_id": "wikipedia-big-snow-american-dream",
+      "cluster_id": "new-york-metro",
       "state": "NJ",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 4,
+          "source_id": "wikipedia-big-snow-american-dream",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 160,
+          "source_id": "wikipedia-big-snow-american-dream",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "slopes are 1,000 ft long with a 26% maximum pitch"
         },
         "lifts": {
           "value": 4,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-big-snow-american-dream",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "1 quad chair, 1 platter, 2 carpets"
         },
         "ski_school_staff_est": null
       },
@@ -4134,7 +4152,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-big-snow-american-dream"
       ]
     },
     {
@@ -7932,7 +7951,7 @@
       "lat": 41.05938,
       "lon": -74.1971,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nj",
+      "cluster_id": "new-york-metro",
       "state": "NJ",
       "size": {
         "acres": null,
@@ -12165,7 +12184,7 @@
       "lat": 43.65908,
       "lon": -73.79694,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -13457,7 +13476,7 @@
       "lat": 43.68027,
       "lon": -74.01809,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -18092,6 +18111,81 @@
       ]
     },
     {
+      "id": "lake-placid-olympic-jumping-complex",
+      "name": "Lake Placid Olympic Jumping Complex and Freestyle Aerial Training Center",
+      "tier": "A",
+      "facility_type": "training_center",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "Ski jumping runs year round on a plastic mat out run, and aerialists train in summer at the Freestyle Aerial Training Center by jumping into a 750,000 gallon pool.",
+          "source_id": "wikipedia-lake-placid-olympic-ski-jumping-complex"
+        },
+        {
+          "criterion": "athlete_development",
+          "rationale": "Freestyle ski is one of four resident sports at the Lake Placid Olympic and Paralympic Training Center.",
+          "source_id": "wikipedia-us-olympic-paralympic-training-centers"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Jumps on this site served the 1932 and 1980 Winter Olympics and the 1950 Nordic World Ski Championships.",
+          "source_id": "wikipedia-lake-placid-olympic-ski-jumping-complex"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": {
+        "value": "Olympic Regional Development Authority",
+        "source_id": "wikipedia-lake-placid-olympic-ski-jumping-complex",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "operator"
+      },
+      "lat": 44.2561,
+      "lon": -73.964,
+      "location_source_id": "wikipedia-lake-placid-olympic-ski-jumping-complex",
+      "cluster_id": "adirondacks",
+      "state": "NY",
+      "size": {
+        "acres": null,
+        "vertical_ft": null,
+        "lifts": null,
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": null,
+        "summit_ft": null
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-lake-placid-olympic-ski-jumping-complex",
+        "wikipedia-us-olympic-paralympic-training-centers"
+      ]
+    },
+    {
       "id": "lakeridge",
       "name": "Lakeridge",
       "tier": "B",
@@ -22188,7 +22282,7 @@
       "lat": 41.24675,
       "lon": -74.29347,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "new-york-metro",
       "state": "NY",
       "size": {
         "acres": null,
@@ -22264,7 +22358,7 @@
       "lat": 44.34402,
       "lon": -74.12664,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -23077,7 +23171,7 @@
       "lat": 41.17811,
       "lon": -74.51618,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nj",
+      "cluster_id": "new-york-metro",
       "state": "NJ",
       "size": {
         "acres": null,
@@ -24483,7 +24577,7 @@
       "lat": 41.18404,
       "lon": -74.47997,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nj",
+      "cluster_id": "new-york-metro",
       "state": "NJ",
       "size": {
         "acres": null,
@@ -24559,7 +24653,7 @@
       "lat": 43.96002,
       "lon": -74.17569,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -28762,7 +28856,7 @@
       "lat": 43.63267,
       "lon": -73.74002,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -37958,6 +38052,87 @@
       ]
     },
     {
+      "id": "timberline-palmer-summer",
+      "name": "Timberline Palmer Snowfield summer camps",
+      "tier": "A",
+      "facility_type": "training_center",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "The Palmer lift gives Timberline lift served skiing in every month of the year; ski and snowboard camps draw thousands of people in June, July and August.",
+          "source_id": "wikipedia-timberline-lodge-ski-area"
+        },
+        {
+          "criterion": "athlete_development",
+          "rationale": "During the summer season most Palmer Snowfield lanes are allocated to ski and snowboard camps, ski coaches and other organizations.",
+          "source_id": "wikipedia-palmer-glacier"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Summer skiing and summer race camps began at Timberline in 1956.",
+          "source_id": "wikipedia-timberline-lodge-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": null,
+      "lat": 45.3525,
+      "lon": -121.7075,
+      "location_source_id": "wikipedia-palmer-glacier",
+      "cluster_id": "mount-hood",
+      "state": "OR",
+      "size": {
+        "acres": null,
+        "vertical_ft": {
+          "value": 2500,
+          "source_id": "wikipedia-timberline-lodge-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "early summer (April to July); 1,530 ft in late summer (July to October)"
+        },
+        "lifts": null,
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": null,
+        "summit_ft": {
+          "value": 8500,
+          "source_id": "wikipedia-palmer-glacier",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "top of the Palmer chairlift"
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-palmer-glacier",
+        "wikipedia-timberline-lodge-ski-area"
+      ]
+    },
+    {
       "id": "titcomb-mountain",
       "name": "Titcomb Mountain",
       "tier": "B",
@@ -38045,7 +38220,7 @@
       "lat": 44.75498,
       "lon": -74.23936,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -38712,17 +38887,110 @@
       ]
     },
     {
+      "id": "usss-center-of-excellence",
+      "name": "U.S. Ski & Snowboard Center of Excellence",
+      "tier": "A",
+      "facility_type": "training_center",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "The national training and education facility opened in 2009 with strength training areas, a gymnasium, ski and snowboard ramps, trampolines and rehabilitation facilities.",
+          "source_id": "wikipedia-united-states-ski-team"
+        },
+        {
+          "criterion": "athlete_development",
+          "rationale": "U.S. Ski & Snowboard moved into the Center of Excellence in May 2009; it serves as a training base for elite athletes and an education center.",
+          "source_id": "wikipedia-us-ski-and-snowboard"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": {
+        "value": "U.S. Ski & Snowboard",
+        "source_id": "wikipedia-us-ski-and-snowboard",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 40.6503,
+      "lon": -111.5014,
+      "location_source_id": "wikipedia-park-city-utah",
+      "cluster_id": "wasatch",
+      "state": "UT",
+      "size": {
+        "acres": null,
+        "vertical_ft": null,
+        "lifts": null,
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": null,
+        "summit_ft": null
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-park-city-utah",
+        "wikipedia-united-states-ski-team",
+        "wikipedia-us-ski-and-snowboard"
+      ]
+    },
+    {
       "id": "utah-olympic-park",
       "name": "Utah Olympic Park",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "tier": "A",
+      "facility_type": "training_center",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "Summer training facilities, including a summer aerial training splash pool, have operated at the park since 1993.",
+          "source_id": "wikipedia-utah-olympic-park"
+        },
+        {
+          "criterion": "athlete_development",
+          "rationale": "The water ramp hosts the U.S., Australian and other national teams for aerials and moguls, plus snowboard and freeski athletes.",
+          "source_id": "wikipedia-aerials-water-ramps"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Built for the 2002 Winter Olympics and scheduled to host freestyle and snowboard events again at the 2034 Winter Olympics.",
+          "source_id": "wikipedia-utah-olympic-park"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
-      "lat": 40.70803,
-      "lon": -111.56533,
-      "location_source_id": "openskimap-ski-areas",
+      "owner": {
+        "value": "Utah Athletic Foundation",
+        "source_id": "wikipedia-utah-olympic-park",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 40.71207,
+      "lon": -111.56193,
+      "location_source_id": "wikipedia-utah-olympic-park",
       "cluster_id": "wasatch",
       "state": "UT",
       "size": {
@@ -38784,7 +39052,9 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-aerials-water-ramps",
+        "wikipedia-utah-olympic-park"
       ]
     },
     {
@@ -39062,7 +39332,7 @@
       "lat": 41.39288,
       "lon": -73.98207,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "new-york-metro",
       "state": "NY",
       "size": {
         "acres": null,
@@ -40073,7 +40343,7 @@
       "lat": 44.36676,
       "lon": -73.88315,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ny",
+      "cluster_id": "adirondacks",
       "state": "NY",
       "size": {
         "acres": null,
@@ -41403,14 +41673,91 @@
       ]
     },
     {
-      "id": "woodward",
-      "name": "Woodward",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
+      "id": "woodward-copper",
+      "name": "Woodward Copper",
+      "tier": "A",
+      "facility_type": "training_center",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "Woodward opened a 20,000 sq ft indoor ski and snowboard training facility at Copper in February 2009, dedicated to terrain park and half pipe training.",
+          "source_id": "wikipedia-copper-mountain-colorado"
+        }
+      ],
+      "tier_a_status": "draft",
       "approval": null,
-      "owner": null,
+      "owner": {
+        "value": "POWDR",
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Powdr owns Copper Mountain and lists Copper Mountain among Woodward camp locations"
+      },
+      "lat": 39.5017,
+      "lon": -106.1564,
+      "location_source_id": "wikipedia-copper-mountain-colorado",
+      "cluster_id": "i70-corridor",
+      "state": "CO",
+      "size": {
+        "acres": null,
+        "vertical_ft": null,
+        "lifts": null,
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": null,
+        "summit_ft": null
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-copper-mountain-colorado",
+        "wikipedia-powdr"
+      ]
+    },
+    {
+      "id": "woodward-park-city",
+      "name": "Woodward Park City",
+      "tier": "A",
+      "facility_type": "training_center",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "Powdr opened Woodward Park City in December 2019, billed in its opening release as the nation's first year round action sports and ski resort.",
+          "source_id": "wikipedia-powdr"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": {
+        "value": "POWDR",
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
       "lat": 40.75237,
       "lon": -111.58347,
       "location_source_id": "openskimap-ski-areas",
@@ -41475,7 +41822,72 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-powdr"
+      ]
+    },
+    {
+      "id": "woodward-tahoe",
+      "name": "Woodward Tahoe",
+      "tier": "A",
+      "facility_type": "training_center",
+      "tier_a_criteria": [
+        {
+          "criterion": "year_round_training",
+          "rationale": "Boreal Mountain is home to Woodward Tahoe, a 33,000 sq ft action sports hub open year round.",
+          "source_id": "wikipedia-boreal-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "approval": null,
+      "owner": {
+        "value": "POWDR",
+        "source_id": "wikipedia-boreal-mountain-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Boreal Mountain, home of Woodward Tahoe, is owned by Powdr"
+      },
+      "lat": 39.3317,
+      "lon": -120.3511,
+      "location_source_id": "wikipedia-boreal-mountain-resort",
+      "cluster_id": "lake-tahoe",
+      "state": "CA",
+      "size": {
+        "acres": null,
+        "vertical_ft": null,
+        "lifts": null,
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": null,
+        "summit_ft": null
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-boreal-mountain-resort"
       ]
     },
     {
