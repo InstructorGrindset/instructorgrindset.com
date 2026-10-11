@@ -56,6 +56,11 @@ openskimap:
   dedupe_radius_km: 2
   dedupe_name_similarity_min: 0.8
 
+ownership:
+  # Every resort in data/raw/ownership/*.yaml needs a Tier A record (operator compensation).
+  # warn while research is in progress; fail once the Vail and Alterra lists are complete.
+  missing_tier_a_record: warn
+
 professionalism:
   # Score from 0 to 100, weighted from the components below.
   # Alexandre sets these weights in Phase 4. Do not fill them in before then.

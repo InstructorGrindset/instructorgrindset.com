@@ -4,6 +4,6 @@ verified_date: 2026-10-01
 sources:
   - {id: fixture-owner-list, url: https://example.org/owner, title: Fixture owner list, accessed_date: 2026-10-01}
 resorts:
-  - {name: Fixture Peak, state: CO, source_id: fixture-owner-list, tier_a_candidate: true, exclusion_reason: null}
-  - {name: Fixture Ridge, state: CO, source_id: fixture-owner-list, tier_a_candidate: true, exclusion_reason: null}
+  - {name: Fixture Peak Resort, state: CO, source_id: fixture-owner-list, resort_id: fixture-peak, tier_a_candidate: true}
+  - {name: Fixture Ridge, state: CO, source_id: fixture-owner-list}
   - {name: Fixture Feeder, state: PA, source_id: fixture-owner-list, tier_a_candidate: false, exclusion_reason: Regional feeder hill.}

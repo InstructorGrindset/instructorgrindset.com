@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:42:58Z",
+  "generated_at": "2026-10-11T19:56:39Z",
   "states": [
     {
       "code": "AK",
@@ -32,9 +32,10 @@
       "cluster_ids": [
         "eastern-sierra",
         "lake-tahoe",
-        "other-ca"
+        "other-ca",
+        "southern-california"
       ],
-      "resort_count": 29
+      "resort_count": 30
     },
     {
       "code": "CO",
@@ -68,6 +69,7 @@
       "code": "ID",
       "name": "Idaho",
       "cluster_ids": [
+        "inland-northwest",
         "other-id",
         "tetons",
         "wood-river"
@@ -113,7 +115,7 @@
         "other-me",
         "western-maine"
       ],
-      "resort_count": 21
+      "resort_count": 22
     },
     {
       "code": "MI",
@@ -143,6 +145,7 @@
       "code": "MT",
       "name": "Montana",
       "cluster_ids": [
+        "inland-northwest",
         "other-mt"
       ],
       "resort_count": 17
@@ -266,6 +269,7 @@
       "code": "VA",
       "name": "Virginia",
       "cluster_ids": [
+        "appalachia",
         "other-va"
       ],
       "resort_count": 5
@@ -274,8 +278,8 @@
       "code": "VT",
       "name": "Vermont",
       "cluster_ids": [
+        "central-vermont",
         "northern-vermont",
-        "other-vt",
         "southern-vermont"
       ],
       "resort_count": 33
@@ -285,6 +289,7 @@
       "name": "Washington",
       "cluster_ids": [
         "cascades",
+        "inland-northwest",
         "other-wa"
       ],
       "resort_count": 19
@@ -301,6 +306,7 @@
       "code": "WV",
       "name": "West Virginia",
       "cluster_ids": [
+        "appalachia",
         "other-wv"
       ],
       "resort_count": 5

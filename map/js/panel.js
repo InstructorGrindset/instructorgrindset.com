@@ -1,6 +1,7 @@
 // Side panel (desktop) / bottom sheet (phone) content for each level.
 import { config } from './config.js';
-import { clusterResorts, clusterOrder, loadClimate } from './data.js';
+import { clusterResorts, clusterOrder, loadClimate, facilityCounts } from './data.js';
+import { FACILITY_LABEL, criterionLabel, facilityPhrase } from './labels.js';
 import { hrefFor } from './router.js';
 import {
   h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd,
@@ -14,10 +15,6 @@ const CONFIDENCE_HELP = {
   published: 'Published by the resort or another primary source',
   reported: 'Aggregated from three or more approved reports',
   estimated: 'Estimated from a stated model',
-};
-const CRITERIA = {
-  diehard: 'Diehard following', luxury: 'Luxury clientele',
-  athlete_development: 'Athlete development', heritage: 'Heritage',
 };
 
 export const fmt = {
@@ -91,12 +88,30 @@ export function createPanel(root, index, { onCompare }) {
     return h('dl', { class: 'stats' }, items.map(([label, value]) => h('div', { class: 'stat' }, h('dt', null, label), h('dd', null, value))));
   }
 
+  /** Compact tags for lists: tier, facility type (when not a ski area), draft status. */
   function tierTags(r) {
     return [
       r.tier === 'A' ? h('span', { class: 'tier tier-a' }, 'Tier A') : h('span', { class: 'tier tier-b' }, 'Tier B'),
+      r.facility_type !== 'ski_area' ? h('span', { class: `tier tier-facility fac-${r.facility_type}` }, FACILITY_LABEL[r.facility_type]) : null,
       r.tier === 'A' && r.tier_a_status === 'draft' ? h('span', { class: 'tier tier-draft', title: 'Tier A list awaiting approval' }, 'Draft profile') : null,
     ];
   }
+
+  /** Full tags for the resort panel: adds the facility type for ski areas and the Approved state. */
+  function resortTags(r) {
+    const approved = r.tier === 'A' && r.tier_a_status === 'approved';
+    const by = r.approval && r.approval.by ? ` by ${r.approval.by}` : '';
+    const on = r.approval && r.approval.date ? ` on ${formatIsoDate(r.approval.date)}` : '';
+    return [
+      r.tier === 'A' ? h('span', { class: 'tier tier-a' }, 'Tier A') : h('span', { class: 'tier tier-b' }, 'Tier B'),
+      h('span', { class: `tier tier-facility fac-${r.facility_type}` }, FACILITY_LABEL[r.facility_type]),
+      approved ? h('span', { class: 'tier tier-approved', title: `Tier A profile approved${by}${on}` }, 'Approved') : null,
+      r.tier === 'A' && r.tier_a_status === 'draft' ? h('span', { class: 'tier tier-draft', title: 'Tier A list awaiting approval' }, 'Draft profile') : null,
+    ];
+  }
+
+  function membersOf(ids) { return ids.map((id) => index.resorts.get(id)).filter(Boolean); }
+  function stateMembers(code) { return index.resortList.filter((r) => r.state === code); }
 
   // ── Levels ──
 
@@ -113,14 +128,15 @@ export function createPanel(root, index, { onCompare }) {
     out.push(stats([
       ['States', fmtInt(index.stateList.length)],
       ['Clusters', fmtInt(index.clusters.size)],
-      ['Resorts', fmtInt(index.resorts.size)],
+      ['Ski areas', fmtInt(facilityCounts(index.resortList).ski_area)],
+      ['Indoor and training', fmtInt(index.resortList.length - facilityCounts(index.resortList).ski_area)],
       ['Tier A', fmtInt(tierA)],
     ]));
     out.push(legend());
     out.push(section('States', h('ul', { class: 'nav-list' }, index.stateList.map((s) => h('li', null,
       navLink({ level: 'state', stateCode: s.code }, { class: 'nav-item' },
         h('span', { class: 'nav-name' }, s.name),
-        h('span', { class: 'nav-meta' }, `${plural(s.cluster_ids.length, 'cluster', 'clusters')} · ${plural(s.resort_count, 'resort', 'resorts')}`)))))));
+        h('span', { class: 'nav-meta' }, `${plural(s.cluster_ids.length, 'cluster', 'clusters')} · ${facilityPhrase(facilityCounts(stateMembers(s.code)))}`)))))));
     return out;
   }
 
@@ -128,8 +144,10 @@ export function createPanel(root, index, { onCompare }) {
     return h('ul', { class: 'legend', 'aria-label': 'Map legend' },
       h('li', null, h('span', { class: 'swatch swatch-a', 'aria-hidden': 'true' }), 'Tier A deep profile'),
       h('li', null, h('span', { class: 'swatch swatch-b', 'aria-hidden': 'true' }), 'Tier B open data profile'),
+      h('li', null, h('span', { class: 'swatch swatch-indoor', 'aria-hidden': 'true' }), 'Indoor ski facility'),
+      h('li', null, h('span', { class: 'swatch swatch-training', 'aria-hidden': 'true' }), 'Year round training center'),
       h('li', null, h('span', { class: 'swatch swatch-cluster', 'aria-hidden': 'true' }), 'Cluster'),
-      h('li', { class: 'legend-note' }, 'Larger circles mean more skiable acres.'));
+      h('li', { class: 'legend-note' }, 'Amber marks Tier A and blue marks Tier B. Larger circles mean more skiable acres.'));
   }
 
   function state(view) {
@@ -138,12 +156,12 @@ export function createPanel(root, index, { onCompare }) {
     return [
       breadcrumb(view),
       ...heading('State', s.name),
-      h('p', { class: 'intro' }, `${plural(clusters.length, 'cluster', 'clusters')} and ${plural(s.resort_count, 'resort', 'resorts')}. Clusters are the labor markets instructors choose between, so some cross state lines.`),
+      h('p', { class: 'intro' }, `${plural(clusters.length, 'cluster', 'clusters')} with ${facilityPhrase(facilityCounts(stateMembers(s.code)))}. Clusters are the labor markets instructors choose between, so some cross state lines.`),
       section('Clusters', h('ul', { class: 'nav-list' }, clusters.map((c) => {
         const others = c.states.filter((x) => x !== s.code).map((x) => (index.states.get(x) || { name: x }).name);
         return h('li', null, navLink({ level: 'cluster', stateCode: s.code, clusterId: c.id }, { class: 'nav-item' },
           h('span', { class: 'nav-name' }, c.name),
-          h('span', { class: 'nav-meta' }, `${plural(c.resort_ids.length, 'resort', 'resorts')} · ${fmtInt(c.tier_a_count)} Tier A`),
+          h('span', { class: 'nav-meta' }, `${facilityPhrase(facilityCounts(membersOf(c.resort_ids)))} · ${fmtInt(c.tier_a_count)} Tier A`),
           others.length ? h('span', { class: 'nav-meta' }, `Shared with ${joinAnd(others)}`) : null));
       }))),
     ];
@@ -209,10 +227,12 @@ export function createPanel(root, index, { onCompare }) {
     draw();
 
     const stateNames = c.states.map((x) => (index.states.get(x) || { name: x }).name);
+    const counts = facilityCounts(resorts);
     return [
       breadcrumb(view),
       ...heading('Cluster', c.name),
-      stats([['States', joinAnd(stateNames)], ['Resorts', fmtInt(resorts.length)], ['Tier A', fmtInt(c.tier_a_count)]]),
+      stats([['States', joinAnd(stateNames)], ['Ski areas', fmtInt(counts.ski_area)],
+        ['Indoor and training', fmtInt(counts.indoor + counts.training_center)], ['Tier A', fmtInt(c.tier_a_count)]]),
       c.sources.length ? h('p', { class: 'fact-meta' }, 'Cluster sources: ', c.sources.map((id, i) => [i ? ', ' : '', sourceLink(id)])) : null,
       h('section', { class: 'panel-section' },
         h('div', { class: 'section-head' }, h('h3', null, 'Resorts'), resorts.length >= config.compare.min ? toggle : null),
@@ -227,12 +247,17 @@ export function createPanel(root, index, { onCompare }) {
     const out = [
       breadcrumb(view),
       ...heading(`Resort in ${c.name}, ${r.state}`, r.name),
-      h('div', { class: 'tier-row' }, tierTags(r)),
+      h('div', { class: 'tier-row' }, resortTags(r)),
       h('dl', { class: 'facts' }, fact('Owner', r.owner, fmt.text)),
     ];
     if (r.tier === 'A' && r.tier_a_criteria.length) {
+      const approval = r.tier_a_status === 'approved' && r.approval
+        ? h('p', { class: 'fact-meta' }, `Approved${r.approval.by ? ` by ${r.approval.by}` : ''}${r.approval.date ? ` on ${formatIsoDate(r.approval.date)}` : ''}.`)
+        : null;
       out.push(section('Why Tier A', h('ul', { class: 'criteria' }, r.tier_a_criteria.map((k) => h('li', null,
-        h('span', { class: 'criterion' }, CRITERIA[k.criterion] || humanize(k.criterion)), ' ', h('span', { class: 'fact-meta' }, sourceLink(k.source_id)))))));
+        h('span', { class: 'criterion' }, criterionLabel(k.criterion)),
+        k.rationale ? h('span', { class: 'criterion-why' }, k.rationale) : null,
+        h('span', { class: 'fact-meta' }, sourceLink(k.source_id))))), approval));
     }
     out.push(section('Operation size', h('dl', { class: 'facts' },
       fact('Skiable acres', r.size.acres, fmt.int),

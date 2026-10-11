@@ -102,16 +102,19 @@ def _tier_a_draft(batch: TierABatch, rec: TierARecord, matches: list[openskimap.
                   osm_as_of: Optional[dt.date]) -> dict:
     d = rec.model_dump(mode="json")
     d.pop("cluster_hint")
+    d.pop("openskimap_names")
     if len(matches) == 1 and osm_as_of is not None:
         _osm_fill(d, matches[0], osm_as_of)
-    d.update(tier="A", tier_a_status="approved" if batch.status == "approved" else "draft",
+    status = batch.status_of(rec)
+    d.update(tier="A", tier_a_status=status, approval=d["approval"] if status == "approved" else None,
              career=None, editorial=None)
     return d
 
 
 def _tier_b_draft(area: openskimap.SkiArea, rid: str, as_of: dt.date) -> dict:
     d: dict[str, Any] = {
-        "id": rid, "name": area.name, "tier": "B", "tier_a_criteria": [], "tier_a_status": None,
+        "id": rid, "name": area.name, "tier": "B", "facility_type": "ski_area", "tier_a_criteria": [],
+        "tier_a_status": None, "approval": None,
         "owner": None, "lat": round(area.lat, 5), "lon": round(area.lon, 5),
         "location_source_id": openskimap.SOURCE_ID, "state": area.state,
         "size": {"acres": None, "vertical_ft": None, "lifts": None, "ski_school_staff_est": None},
@@ -210,7 +213,7 @@ def build(
     if not inputs.ownership:
         warnings.append(f"no ownership files in {rel(raw_dir / 'ownership')}")
 
-    own_errors, own_warnings = ownership_cross_check(inputs)
+    own_errors, own_warnings = ownership_cross_check(inputs, cfg.definitions.ownership.missing_tier_a_record)
     errors += own_errors
     warnings += own_warnings
 
@@ -229,6 +232,13 @@ def build(
 
     records = inputs.records
     match = match_openskimap([r for _, r in records], areas, cfg.definitions.matching)
+    for rid, names in sorted(match.missing_names.items()):
+        warnings.append(f"Tier A resort '{rid}': openskimap_names not found nearby: {', '.join(names)}")
+    for rid, extra in sorted(match.runners_up.items()):
+        warnings.append(
+            f"Tier A resort '{rid}' took its best OpenSkiMap area only; also close: "
+            f"{', '.join(a.name for a in extra)}. List them in openskimap_names if the record covers them."
+        )
 
     drafts: list[dict] = []
     members: list[Member] = []
@@ -311,7 +321,8 @@ def build(
             "type": "Feature",
             "geometry": {"type": "Point", "coordinates": [r["lon"], r["lat"]]},
             "properties": {
-                "id": r["id"], "name": r["name"], "tier": r["tier"], "cluster_id": r["cluster_id"],
+                "id": r["id"], "name": r["name"], "tier": r["tier"], "facility_type": r["facility_type"],
+                "cluster_id": r["cluster_id"],
                 "state": r["state"], "acres": num(r["size"]["acres"]), "vertical_ft": num(r["size"]["vertical_ft"]),
                 "lifts": num(r["size"]["lifts"]), "size_rank": display.size_rank(num(r["size"]["acres"])),
             },

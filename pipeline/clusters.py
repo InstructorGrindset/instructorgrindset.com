@@ -137,7 +137,8 @@ def fallback_cluster_id(cfg: ClustersConfig, state: str) -> str:
 def assign_clusters(members: Sequence[Member], cfg: ClustersConfig, state_names: dict[str, str]) -> dict[str, str]:
     """Map every resort id to exactly one cluster id.
 
-    * Tier A: ``cluster_hint`` must be a configured cluster that lists the resort's state.
+    * Tier A: ``cluster_hint`` must be a configured cluster that lists the resort's state,
+      or the resort's own fallback cluster ``other-<state>``.
     * Tier B: cluster of the nearest Tier A member within ``tier_b_radius_km``
       (whose cluster lists the resort's state when ``require_state_match``),
       else the per state fallback cluster.
@@ -151,6 +152,15 @@ def assign_clusters(members: Sequence[Member], cfg: ClustersConfig, state_names:
         if m.tier != "A":
             continue
         cid = m.cluster_hint
+        if cid == fallback_cluster_id(cfg, m.state):
+            out[m.id] = cid  # Tier A outside every named cluster; not an anchor for Tier B
+            continue
+        if cid and cid.startswith(rule.fallback_id_prefix + "-"):
+            errors.append(
+                f"resort '{m.id}': cluster_hint '{cid}' does not match its state {m.state} "
+                f"(use '{fallback_cluster_id(cfg, m.state)}')"
+            )
+            continue
         if cid not in defs:
             errors.append(f"resort '{m.id}': unknown cluster_hint '{cid}' (see config/clusters.yaml)")
             continue

@@ -95,6 +95,10 @@ class OpenSkiMapDefs(StrictModel):
         }
 
 
+class OwnershipDefs(StrictModel):
+    missing_tier_a_record: Literal["warn", "fail"] = "warn"
+
+
 class ProfessionalismWeights(StrictModel):
     cert_pay_differential: Optional[float] = None
     paid_training_hours: Optional[float] = None
@@ -145,6 +149,7 @@ class Definitions(StrictModel):
     staleness: StalenessDefs
     matching: MatchingDefs
     openskimap: OpenSkiMapDefs
+    ownership: OwnershipDefs = Field(default_factory=OwnershipDefs)
     professionalism: ProfessionalismDefs
     lucrativeness: LucrativenessDefs
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.

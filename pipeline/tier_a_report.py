@@ -27,7 +27,10 @@ CRITERION_LABEL = {
     "luxury": "Luxury",
     "athlete_development": "Athlete development",
     "heritage": "Heritage",
+    "operator_compensation": "Operator compensation",
+    "year_round_training": "Year round training",
 }
+FACILITY_LABEL = {"ski_area": "ski area", "indoor": "indoor", "training_center": "training center"}
 # Fields reviewed for completeness, in display order.
 CHECKED_FIELDS = [
     ("owner", lambda r: r.owner),
@@ -55,6 +58,15 @@ def _link(registry: SourceRegistry, source_id: str) -> str:
     return f"`{source_id}` (undefined)"
 
 
+def _owned_by(entry, resort: "Resort") -> bool:
+    from pipeline.names import name_similarity
+    from pipeline.tier_a import OWNERSHIP_NAME_MIN
+
+    if entry.resort_id:
+        return entry.resort_id == resort.id
+    return entry.state == resort.state and name_similarity(entry.name, resort.name) >= OWNERSHIP_NAME_MIN
+
+
 def missing_fields(resort: "Resort") -> list[str]:
     return [name for name, get in CHECKED_FIELDS if get(resort) is None]
 
@@ -70,10 +82,12 @@ def render(result: "BuildResult", registry: SourceRegistry, cfg: Config) -> str:
         "Hand edits to this file are overwritten.",
         "",
         "A resort qualifies when it meets at least one criterion: diehard following, luxury, athlete "
-        "development, or heritage. Each criterion below carries its source.",
+        "development, heritage, operator compensation (every Vail Resorts and Alterra US resort), or year "
+        "round training (indoor slopes and training facilities). Each criterion below carries its source.",
         "",
-        "**How to approve:** set `status: approved` at the top of a research batch file in "
-        "`data/raw/tier_a/`. Every resort in that batch then builds with `tier_a_status: approved`.",
+        "**How to approve:** add `tier_a_status: approved` and `approval: {by, date, note}` to a record in "
+        "`data/raw/tier_a/`, or set `status: approved` on a whole batch (each record then still needs its "
+        "`approval` block). Approved rows are listed first.",
         "",
     ]
     batches = result.inputs.batches if result.inputs else []
@@ -105,10 +119,11 @@ def render(result: "BuildResult", registry: SourceRegistry, cfg: Config) -> str:
             "",
             "## Resorts",
             "",
-            "| Resort | State | Owner | Cluster | Status | Criteria | Missing fields |",
-            "|---|---|---|---|---|---|---|",
+            "| Resort | Facility | State | Owner | Cluster | Approval | Criteria | Missing fields |",
+            "|---|---|---|---|---|---|---|---|",
         ]
-        for r in sorted(tier_a, key=lambda r: (r.state, r.name.lower())):
+        order = {"approved": 0, "draft": 1}
+        for r in sorted(tier_a, key=lambda r: (order.get(r.tier_a_status, 2), r.state, r.name.lower())):
             owner = f"{_cell(r.owner.value)} ({_link(registry, r.owner.source_id)})" if r.owner else "unknown"
             crit = "<br>".join(
                 f"**{CRITERION_LABEL[c.criterion]}**: {_cell(c.rationale)} ({_link(registry, c.source_id)})"
@@ -116,8 +131,15 @@ def render(result: "BuildResult", registry: SourceRegistry, cfg: Config) -> str:
             )
             missing = ", ".join(missing_fields(r)) or "none"
             cluster = f"{cluster_names.get(r.cluster_id, r.cluster_id)} (`{r.cluster_id}`)"
+            if r.approval:
+                approval = f"approved by {_cell(r.approval.by)} on {r.approval.date}"
+                if r.approval.note:
+                    approval += f": {_cell(r.approval.note)}"
+            else:
+                approval = "draft"
             lines.append(
-                f"| {_cell(r.name)} (`{r.id}`) | {r.state} | {owner} | {cluster} | {r.tier_a_status} | {crit} | {missing} |"
+                f"| {_cell(r.name)} (`{r.id}`) | {FACILITY_LABEL[r.facility_type]} | {r.state} | {owner} | {cluster} "
+                f"| {approval} | {crit} | {missing} |"
             )
         lines.append("")
 
@@ -132,15 +154,15 @@ def render(result: "BuildResult", registry: SourceRegistry, cfg: Config) -> str:
                 "",
                 f"Verified {f.verified_date}. Sources: {cites}.",
                 "",
-                "| Resort | State | Tier A candidate | Exclusion reason |",
-                "|---|---|---|---|",
+                "| Resort | State | Tier A record |",
+                "|---|---|---|",
             ]
             for e in sorted(f.resorts, key=lambda e: (e.state, e.name.lower())):
-                reason = _cell(e.exclusion_reason or "")
-                lines.append(f"| {_cell(e.name)} | {e.state} | {'yes' if e.tier_a_candidate else 'no'} | {reason} |")
+                has = any(_owned_by(e, r) for r in tier_a)
+                lines.append(f"| {_cell(e.name)} | {e.state} | {'yes' if has else '**missing**'} |")
             lines.append("")
 
-    notes = [w for w in result.warnings if "tier_a_candidate" in w]
+    notes = [w for w in result.warnings if "has no Tier A record" in w or "OpenSkiMap" in w and "Tier A resort" in w]
     if notes:
         lines += ["## Open items", ""] + [f"* {_cell(w)}" for w in notes] + [""]
     return "\n".join(lines).rstrip() + "\n"

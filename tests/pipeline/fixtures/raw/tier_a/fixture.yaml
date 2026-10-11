@@ -17,6 +17,7 @@ resorts:
     tier_a_criteria:
       - {criterion: luxury, rationale: "Fixture rationale.", source_id: fixture-source-a}
       - {criterion: heritage, rationale: "Fixture rationale two.", source_id: fixture-source-b}
+      - {criterion: operator_compensation, rationale: "Owned by a verified operator.", source_id: fixture-shared-decisions}
     size:
       acres: {value: 4000, source_id: fixture-source-a, as_of: 2026-10-01, confidence: published}
       vertical_ft: null
@@ -33,3 +34,27 @@ resorts:
     cluster_hint: wasatch
     tier_a_criteria:
       - {criterion: diehard, rationale: "Fixture rationale.", source_id: fixture-source-b}
+  # training center inside the Fixture Peak OpenSkiMap polygon: must not take that area
+  - id: fixture-peak-training-center
+    name: Fixture Peak Training Center
+    facility_type: training_center
+    state: CO
+    lat: 39.601
+    lon: -106.301
+    location_source_id: fixture-source-a
+    cluster_hint: i70-corridor
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "Fixture rationale.", source_id: fixture-source-a}
+  # indoor slope outside every named cluster, approved on its own
+  - id: fixture-indoor
+    name: Fixture Indoor Snow
+    facility_type: indoor
+    tier_a_status: approved
+    approval: {by: Fixture Owner, date: 2026-10-02, note: null}
+    state: MI
+    lat: 42.5
+    lon: -83.5
+    location_source_id: fixture-source-a
+    cluster_hint: other-mi
+    tier_a_criteria:
+      - {criterion: year_round_training, rationale: "Fixture rationale.", source_id: fixture-shared-decisions}
