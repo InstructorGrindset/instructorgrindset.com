@@ -39,7 +39,7 @@ function buildStyle(index) {
         id: 'clusters-fill', type: 'fill', source: 'clusters',
         paint: {
           'fill-color': C.cluster,
-          'fill-opacity': ['case', fs('selected'), 0.26, fs('hover'), 0.24, fs('focus'), 0.18, fs('dim'), 0.04, 0.11],
+          'fill-opacity': ['case', fs('selected'), 0.1, fs('hover'), 0.16, fs('focus'), 0.12, fs('dim'), 0.03, 0.08],
         },
       },
       {
@@ -157,9 +157,9 @@ export function createMap(container, index, { onPick, getPadding }) {
   function boundsFor(view) {
     if (view.level === 'resort') {
       const r = index.resorts.get(view.resortId);
-      // Frame the resort with a little of its cluster around it.
-      const d = 0.09;
-      return { b: [[r.lon - d * 1.4, r.lat - d], [r.lon + d * 1.4, r.lat + d]], maxZoom: 11.5 };
+      // Frame the resort with its neighbours around it.
+      const d = 0.22;
+      return { b: [[r.lon - d * 1.3, r.lat - d], [r.lon + d * 1.3, r.lat + d]], maxZoom: 10 };
     }
     if (view.clusterId) return { b: index.clusters.get(view.clusterId).bbox, maxZoom: 10 };
     if (view.stateCode) return { b: index.states.get(view.stateCode).bbox, maxZoom: 7.5 };

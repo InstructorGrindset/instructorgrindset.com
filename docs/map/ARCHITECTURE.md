@@ -50,6 +50,7 @@ Resort {
   location_source_id,
   cluster_id, state,
   size: { acres, vertical_ft, lifts, ski_school_staff_est },          // each Sourced<number> | null
+  elevation: { base_ft, summit_ft },                                  // each Sourced<number> | null; Tier A research first, else OpenSkiMap (estimated)
   season: { open_typical, close_typical, length_days, training_start }, // each Sourced | null; dates as "MM-DD"
   terrain: { beginner_pct, intermediate_pct, advanced_pct, expert_pct, character_tags },  // pcts Sourced | null; tags string[]
   fit: { enthusiast_types: string[], professional_types: string[] },
@@ -79,8 +80,9 @@ Only states with at least one resort.
 
 ### `sources.json`
 ```
-{ version, generated_at, sources: [{ id, url, title, accessed_date }] }
+{ version, generated_at, sources: [{ id, url, title, accessed_date, note }] }   // note: string | null (optional qualifier)
 ```
+Includes every source declared in `/data/raw` plus the climate ETL's `data/build/climate/sources.json`, merged by id.
 
 ### `us-states.geojson`
 State outlines (simplified) with `properties: { code, name }`.

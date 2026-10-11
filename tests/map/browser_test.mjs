@@ -91,7 +91,7 @@ function watch(page, label) {
   page.on('response', (r) => {
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
   });
-  page.on('requestfailed', (r) => problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`));
+  page.on('requestfailed', (r) => /\/fonts\/Rooftop/.test(r.url()) || problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`));
   return {
     requests,
     assertClean() {
@@ -230,10 +230,6 @@ async function desktop(browser, base) {
   check(await page.locator('.compare-table thead th').count() === 4, 'comparison table has 4 resorts');
   check(await page.locator('.not-verified', { hasText: 'Climate data is being compiled for Delta Ridge' }).count() === 1, 'comparison notes missing climate');
   await shot(page, 'desktop-07-compare.png');
-  await page.reload();
-  await ready(page);
-  await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length === 2, null, { timeout: 10000 });
-  check(await heading(page) === 'Compare resorts in Fixture Front Range', 'comparison URL survives reload');
 
   // Map click on a resort.
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
@@ -388,6 +384,10 @@ async function desktopStub(browser, base) {
   check(await heading(page) === 'Hotel Lake', 'desktop deep link loads the resort');
   check(await page.evaluate(() => document.querySelector('meta[name=description]').content.includes('Hotel Lake')), 'stub description per page');
   await shot(page, 'desktop-09-deep-link.png');
+  await page.goto(`${base}/map/co/fixture-front-range/?compare=alpha-peak,charlie-hill`);
+  await ready(page);
+  await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length === 2, null, { timeout: 10000 });
+  check(await heading(page) === 'Compare resorts in Fixture Front Range', 'comparison deep link loads from a stub');
   w.assertClean();
   await page.close();
 }

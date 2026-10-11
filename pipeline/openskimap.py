@@ -300,6 +300,8 @@ class SkiArea:
     lift_count: Optional[int] = None
     downhill_run_count: Optional[int] = None
     vertical_ft: Optional[int] = None
+    base_ft: Optional[int] = None
+    summit_ft: Optional[int] = None
     websites: list[str] = field(default_factory=list)
 
 
@@ -329,6 +331,8 @@ def load_us_extract(path: Path) -> Extract:
             osm_id=str(p["id"]), name=p["name"], state=p["state"], lon=rep[0], lat=rep[1],
             geometry=feat["geometry"], lift_count=p.get("lift_count"),
             downhill_run_count=p.get("downhill_run_count"), vertical_ft=vertical,
+            base_ft=round(lo * M_TO_FT) if lo is not None else None,
+            summit_ft=round(hi * M_TO_FT) if hi is not None else None,
             websites=list(p.get("websites") or []),
         ))
     return Extract(fetched_date=fetched, areas=areas)

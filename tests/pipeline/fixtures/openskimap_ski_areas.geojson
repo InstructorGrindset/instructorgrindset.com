@@ -2,66 +2,96 @@
  "type": "FeatureCollection",
  "features": [
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-peak",
     "name": "Fixture Peak Ski Resort",
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-peak"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-peak"
+     }
+    ],
     "websites": [
      "https://example.org/osm-peak"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
-      }
-     }
-    },
+    "activities": [
+     "downhill"
+    ],
     "statistics": {
-     "lifts": {
-      "byType": {
-       "chair_lift": {
-        "count": 8,
-        "lengthInKm": 1.0
-       },
-       "gondola": {
-        "count": 1,
-        "lengthInKm": 1.0
-       },
-       "magic_carpet": {
-        "count": 2,
-        "lengthInKm": 1.0
-       }
-      }
-     },
      "runs": {
       "byActivity": {
        "downhill": {
         "byDifficulty": {
          "easy": {
-          "count": 3
+          "count": 3,
+          "lengthInKm": 1.0,
+          "minElevation": 2405.0,
+          "maxElevation": 3300.0
          },
          "advanced": {
-          "count": 4
+          "count": 4,
+          "lengthInKm": 1.0,
+          "minElevation": 2500.0,
+          "maxElevation": 3480.0
          }
         }
        }
+      },
+      "minElevation": 2000.0,
+      "maxElevation": 3500.0
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 8,
+        "lengthInKm": 1.0,
+        "minElevation": 2400.123456,
+        "maxElevation": 3500.0,
+        "combinedElevationChange": 1099.8765440000002
+       },
+       "gondola": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 2450.0,
+        "maxElevation": 3400.0,
+        "combinedElevationChange": 950.0
+       },
+       "magic_carpet": {
+        "count": 2,
+        "lengthInKm": 1.0,
+        "minElevation": 2410.0,
+        "maxElevation": 2420.0,
+        "combinedElevationChange": 10.0
+       }
       }
      },
-     "minElevation": 2400.123456,
+     "minElevation": 2000.0,
      "maxElevation": 3500.0
-    }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -91,56 +121,72 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-valley",
     "name": "Fixture Valley",
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-valley"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-valley"
+     }
+    ],
     "websites": [
      "https://example.org/osm-valley"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
-      }
-     }
-    },
+    "activities": [
+     "downhill"
+    ],
     "statistics": {
-     "lifts": {
-      "byType": {
-       "chair_lift": {
-        "count": 3,
-        "lengthInKm": 1.0
-       }
-      }
-     },
      "runs": {
       "byActivity": {
        "downhill": {
         "byDifficulty": {
          "easy": {
-          "count": 3
-         },
-         "advanced": {
-          "count": 4
+          "count": 5,
+          "lengthInKm": 1.0,
+          "minElevation": 2800.0,
+          "maxElevation": 3100.0
          }
         }
        }
       }
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 3,
+        "lengthInKm": 1.0,
+        "minElevation": 2800.0,
+        "maxElevation": 3100.0,
+        "combinedElevationChange": 300.0
+       }
+      }
      }
-    }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -150,33 +196,176 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
+    "id": "osm-valley-dup",
+    "name": "Fixture Valley Ski Area",
     "type": "skiArea",
-    "id": "osm-faraway",
-    "name": "Faraway Hill",
+    "status": "operating",
+    "sources": [
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-valley-dup"
+     }
+    ],
+    "websites": [
+     "https://example.org/osm-valley-dup"
+    ],
     "activities": [
      "downhill"
     ],
-    "generated": false,
-    "status": "operating",
-    "websites": [
-     "https://example.org/osm-faraway"
-    ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "rope_tow": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 2800.0,
+        "maxElevation": 2850.0,
+        "combinedElevationChange": 50.0
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.105,
+     39.755
+    ]
+   }
+  },
+  {
+   "properties": {
+    "id": "osm-stub",
+    "name": "Fixture Stub Hill",
+    "type": "skiArea",
+    "status": "operating",
+    "sources": [
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-stub"
+     }
+    ],
+    "websites": [
+     "https://example.org/osm-stub"
+    ],
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {}
+     }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
+   },
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.5,
+     39.9
+    ]
+   }
+  },
+  {
+   "properties": {
+    "id": "osm-faraway",
+    "name": "Faraway Hill",
+    "type": "skiArea",
+    "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-faraway"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-faraway"
+     }
+    ],
+    "websites": [
+     "https://example.org/osm-faraway"
+    ],
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {
+       "downhill": {
+        "byDifficulty": {
+         "easy": {
+          "count": 2,
+          "lengthInKm": 1.0,
+          "minElevation": 2600.0,
+          "maxElevation": 2700.0
+         }
+        }
+       }
+      }
+     },
+     "lifts": {
+      "byType": {}
+     }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
+   },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -186,33 +375,61 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-basin",
     "name": "Fixture Basin",
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-basin"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-basin"
+     }
+    ],
     "websites": [
      "https://example.org/osm-basin"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-UT",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 4,
+        "lengthInKm": 1.0,
+        "minElevation": 2600.0,
+        "maxElevation": 3200.0,
+        "combinedElevationChange": 600.0
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-UT",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -222,33 +439,61 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-valley-ut",
     "name": "Fixture Valley",
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-valley-ut"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-valley-ut"
+     }
+    ],
     "websites": [
      "https://example.org/osm-valley-ut"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-UT",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "t-bar": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 2000.0,
+        "maxElevation": 2200.0,
+        "combinedElevationChange": 200.0
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-UT",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -258,33 +503,61 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-other-near",
     "name": "Unrelated Bowl",
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-other-near"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-other-near"
+     }
+    ],
     "websites": [
      "https://example.org/osm-other-near"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 2,
+        "lengthInKm": 1.0,
+        "minElevation": 2500.0,
+        "maxElevation": 2900.0,
+        "combinedElevationChange": 400.0
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -294,33 +567,201 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
+    "id": "osm-lake",
+    "name": "Fixture Lake Area",
     "type": "skiArea",
-    "id": "osm-nordic",
-    "name": "Nordic Only Center",
-    "activities": [
-     "nordic"
-    ],
-    "generated": false,
     "status": "operating",
-    "websites": [
-     "https://example.org/osm-nordic"
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-lake"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-lake"
+     }
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "websites": [
+     "https://example.org/osm-lake"
+    ],
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 5,
+        "lengthInKm": 1.0,
+        "minElevation": 1900.0,
+        "maxElevation": 2900.0,
+        "combinedElevationChange": 1000.0
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-NV",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     },
+     {
+      "iso3166_2": "US-CA",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     },
+     {
+      "iso3166_2": "US-NV",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -120.05,
+     39.0
+    ]
+   }
+  },
+  {
+   "properties": {
+    "id": "osm-legacy",
+    "name": "Legacy Location Hill",
+    "type": "skiArea",
+    "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-legacy"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-legacy"
+     }
+    ],
+    "websites": [
+     "https://example.org/osm-legacy"
+    ],
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "rope_tow": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 1500.0,
+        "maxElevation": 1550.0,
+        "combinedElevationChange": 50.0
+       }
+      }
+     }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "location": {
+     "iso3166_2": "US-MT",
+     "localized": {
+      "en": {
+       "region": "Fixture",
+       "country": "Fixtureland",
+       "locality": "Fixtureville"
+      }
+     },
+     "iso3166_1Alpha2": "US"
+    }
+   },
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -111.0,
+     44.0
+    ]
+   }
+  },
+  {
+   "properties": {
+    "id": "osm-nordic",
+    "name": "Nordic Only Center",
+    "type": "skiArea",
+    "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-nordic"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-nordic"
+     }
+    ],
+    "websites": [
+     "https://example.org/osm-nordic"
+    ],
+    "activities": [
+     "nordic"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {}
+     }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
+   },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -330,33 +771,61 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-closed",
     "name": "Closed Hill",
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "abandoned",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-closed"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-closed"
+     }
+    ],
     "websites": [
      "https://example.org/osm-closed"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 1,
+        "maxElevation": 2,
+        "combinedElevationChange": 1
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -366,33 +835,61 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-canada",
     "name": "Canada Hill",
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-canada"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-canada"
+     }
+    ],
     "websites": [
      "https://example.org/osm-canada"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "CA",
-     "iso3166_2": "CA-BC",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 1,
+        "maxElevation": 2,
+        "combinedElevationChange": 1
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "CA-BC",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "CA"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -402,33 +899,61 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-noname",
     "name": null,
-    "activities": [
-     "downhill"
-    ],
-    "generated": false,
+    "type": "skiArea",
     "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-noname"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-noname"
+     }
+    ],
     "websites": [
      "https://example.org/osm-noname"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 1,
+        "maxElevation": 2,
+        "combinedElevationChange": 1
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -438,23 +963,49 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
+    "id": "osm-noplace",
+    "name": "No Place Hill",
     "type": "skiArea",
-    "id": "osm-noloc",
-    "name": "No Location Hill",
+    "status": "operating",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-noplace"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-noplace"
+     }
+    ],
+    "websites": [
+     "https://example.org/osm-noplace"
+    ],
     "activities": [
      "downhill"
     ],
-    "generated": false,
-    "status": "operating",
-    "websites": [
-     "https://example.org/osm-noloc"
-    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 1,
+        "maxElevation": 2,
+        "combinedElevationChange": 1
+       }
+      }
+     }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
     "runConvention": "north_america",
-    "location": null,
-    "statistics": {}
+    "places": []
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -464,33 +1015,61 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "skiArea",
     "id": "osm-planned",
     "name": "Planned Hill",
-    "activities": [
-     "downhill"
+    "type": "skiArea",
+    "status": "proposed",
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-planned"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-planned"
+     }
     ],
-    "generated": false,
-    "status": "planned",
     "websites": [
      "https://example.org/osm-planned"
     ],
-    "runConvention": "north_america",
-    "location": {
-     "iso3166_1Alpha2": "US",
-     "iso3166_2": "US-CO",
-     "localized": {
-      "en": {
-       "country": "Fixtureland",
-       "region": "Fixture",
-       "locality": "Fixtureville"
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 1,
+        "maxElevation": 2,
+        "combinedElevationChange": 1
+       }
       }
      }
     },
-    "statistics": {}
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
@@ -500,17 +1079,66 @@
    }
   },
   {
-   "type": "Feature",
    "properties": {
-    "type": "lift",
-    "id": "lift-1",
-    "name": "A Lift"
+    "id": "osm-nullstatus",
+    "name": "Null Status Hill",
+    "type": "skiArea",
+    "status": null,
+    "sources": [
+     {
+      "type": "openstreetmap",
+      "id": "openstreetmap-osm-nullstatus"
+     },
+     {
+      "type": "skimap.org",
+      "id": "skimap.org-osm-nullstatus"
+     }
+    ],
+    "websites": [
+     "https://example.org/osm-nullstatus"
+    ],
+    "activities": [
+     "downhill"
+    ],
+    "statistics": {
+     "runs": {
+      "byActivity": {}
+     },
+     "lifts": {
+      "byType": {
+       "chair_lift": {
+        "count": 1,
+        "lengthInKm": 1.0,
+        "minElevation": 1,
+        "maxElevation": 2,
+        "combinedElevationChange": 1
+       }
+      }
+     }
+    },
+    "wikidataID": null,
+    "viewportHint": null,
+    "runConvention": "north_america",
+    "places": [
+     {
+      "iso3166_2": "US-CO",
+      "localized": {
+       "en": {
+        "region": "Fixture",
+        "country": "Fixtureland",
+        "locality": "Fixtureville"
+       }
+      },
+      "iso3166_1Alpha2": "US"
+     }
+    ]
    },
+   "type": "Feature",
    "geometry": {
     "type": "Point",
     "coordinates": [
-     -106.3,
-     39.6
+     -106.0,
+     39.0
     ]
    }
   }

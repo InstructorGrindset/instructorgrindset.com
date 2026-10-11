@@ -93,7 +93,8 @@ def test_match_openskimap(raw_dir, cfg):
     m = match_openskimap([r for _, r in inputs.records], ext.areas, cfg.definitions.matching)
     assert [a.osm_id for a in m.by_tier_a["fixture-peak"]] == ["osm-peak"]
     assert [a.osm_id for a in m.by_tier_a["fixture-basin"]] == ["osm-basin"]
-    assert sorted(a.osm_id for a in m.unmatched) == ["osm-faraway", "osm-other-near", "osm-valley", "osm-valley-ut"]
+    assert sorted(a.osm_id for a in m.unmatched) == ["osm-faraway", "osm-lake", "osm-legacy", "osm-other-near",
+                                                     "osm-valley", "osm-valley-ut"]
 
 
 def test_match_distance_and_strong_name(raw_dir, cfg):

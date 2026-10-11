@@ -51,6 +51,7 @@ class Source(StrictModel):
     url: str = Field(min_length=1)
     title: str = Field(min_length=1)
     accessed_date: dt.date
+    note: Optional[str] = None
 
     @field_validator("url")
     @classmethod

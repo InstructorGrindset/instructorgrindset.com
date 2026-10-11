@@ -25,6 +25,7 @@ sources:
     url: https://en.wikipedia.org/wiki/Vail_Ski_Resort
     title: Vail Ski Resort (Wikipedia)
     accessed_date: 2026-10-11
+    note: optional qualifier       # optional
 resorts:
   - id: vail                     # kebab case, unique across all batches; used in URLs
     name: Vail
@@ -56,6 +57,7 @@ resorts:
 | `cluster_hint` | yes | id from `config/clusters.yaml` |
 | `tier_a_criteria` | yes, 1 or more | `criterion` is one of `diehard`, `luxury`, `athlete_development`, `heritage` |
 | `size` | no | `acres`, `vertical_ft`, `lifts`, `ski_school_staff_est`; each Sourced number or `null` |
+| `elevation` | no | `base_ft`, `summit_ft`; each Sourced number or `null`. When null, the build fills them from OpenSkiMap (confidence `estimated`) |
 | `season` | no | `open_typical`, `close_typical`, `training_start` as Sourced `"MM-DD"` strings; `length_days` Sourced number |
 | `terrain` | no | `beginner_pct`, `intermediate_pct`, `advanced_pct`, `expert_pct` Sourced numbers (0 to 100); `character_tags: []` |
 | `fit` | no | `enthusiast_types: []`, `professional_types: []` |

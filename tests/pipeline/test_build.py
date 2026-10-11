@@ -34,7 +34,8 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     assert resorts["version"] == 1 and resorts["generated_at"] == "2026-09-21T14:13:20Z"
     ids = [r["id"] for r in resorts["resorts"]]
     assert ids == sorted(ids)
-    assert ids == ["faraway-hill", "fixture-basin", "fixture-peak", "fixture-valley", "fixture-valley-ut", "unrelated-bowl"]
+    assert ids == ["faraway-hill", "fixture-basin", "fixture-lake-area", "fixture-peak", "fixture-valley",
+                   "fixture-valley-ut", "legacy-location-hill", "unrelated-bowl"]
     by = {r["id"]: r for r in resorts["resorts"]}
     sources = {s["id"] for s in _load(out, "sources.json")["sources"]}
     for r in resorts["resorts"]:
@@ -48,6 +49,14 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     assert peak["size"]["lifts"] == {"value": 11, "source_id": "openskimap-ski-areas", "as_of": "2026-10-01",
                                      "confidence": "estimated", "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"}
     assert peak["season"]["open_typical"]["value"] == "11-20"
+    assert peak["elevation"] == {
+        "base_ft": {"value": round(2400.123456 * 3.280839895), "source_id": "openskimap-ski-areas", "as_of": "2026-10-01",
+                    "confidence": "estimated", "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"},
+        "summit_ft": {"value": round(3500 * 3.280839895), "source_id": "openskimap-ski-areas", "as_of": "2026-10-01",
+                      "confidence": "estimated", "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"},
+    }
+    assert peak["size"]["vertical_ft"]["confidence"] == "estimated"
+    assert peak["size"]["vertical_ft"]["source_id"] == "openskimap-ski-areas"
     assert peak["career"] is None and peak["editorial"] is None
     assert peak["sources"] == ["fixture-owner-list", "fixture-source-a", "fixture-source-b", "openskimap-ski-areas"]
     assert "cluster_hint" not in peak
@@ -59,11 +68,14 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     assert by["faraway-hill"]["cluster_id"] == "other-co"
     assert by["fixture-valley-ut"]["cluster_id"] == "other-ut"
     assert by["unrelated-bowl"]["cluster_id"] == "i70-corridor"
+    assert by["fixture-lake-area"]["state"] == "CA" and by["fixture-lake-area"]["cluster_id"] == "other-ca"
+    assert by["faraway-hill"]["elevation"]["base_ft"]["value"] == round(2600 * 3.280839895)
+    assert by["faraway-hill"]["size"]["lifts"] is None  # no mapped lifts is not "0 lifts"
 
     clusters = _load(out, "clusters.geojson")
     assert clusters["type"] == "FeatureCollection" and clusters["version"] == 1
     props = {f["properties"]["id"]: f["properties"] for f in clusters["features"]}
-    assert sorted(props) == ["i70-corridor", "other-co", "other-ut", "wasatch"]
+    assert sorted(props) == ["i70-corridor", "other-ca", "other-co", "other-mt", "other-ut", "wasatch"]
     assert props["i70-corridor"]["resort_ids"] == ["fixture-peak", "fixture-valley", "unrelated-bowl"]
     assert props["i70-corridor"]["tier_a_count"] == 1 and props["other-co"]["name"] == "Other Colorado"
     assert set(props["wasatch"]) == {"id", "name", "states", "resort_ids", "tier_a_count", "overview_md", "sources"}
@@ -83,11 +95,13 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
 
     states = _load(out, "states.json")["states"]
     assert states == [
+        {"code": "CA", "name": "California", "cluster_ids": ["other-ca"], "resort_count": 1},
         {"code": "CO", "name": "Colorado", "cluster_ids": ["i70-corridor", "other-co"], "resort_count": 4},
+        {"code": "MT", "name": "Montana", "cluster_ids": ["other-mt"], "resort_count": 1},
         {"code": "UT", "name": "Utah", "cluster_ids": ["other-ut", "wasatch"], "resort_count": 2},
     ]
     assert sources == {"fixture-owner-list", "fixture-source-a", "fixture-source-b", "openskimap-ski-areas"}
-    assert result.tier_a_count == 2 and len(result.clusters) == 4
+    assert result.tier_a_count == 2 and len(result.clusters) == 6
 
     report = (tmp_path / "tier-a-draft.md").read_text()
     assert "| Fixture Peak (`fixture-peak`) | CO | Vail Resorts" in report
@@ -115,7 +129,8 @@ def test_approved_batch(repo_root, raw_dir, out, tmp_path):
 
 
 def test_tier_a_only_without_openskimap(repo_root, raw_dir, out, tmp_path):
-    (raw_dir / "openskimap" / "us_ski_areas.geojson").unlink()
+    for f in (raw_dir / "openskimap").iterdir():
+        f.unlink()
     result = _run(repo_root, raw_dir, out, tmp_path)
     assert [r.id for r in result.resorts] == ["fixture-basin", "fixture-peak"]
     assert any("no OpenSkiMap extract" in w for w in result.warnings)
@@ -171,7 +186,7 @@ def test_fetch_failure_falls_back(repo_root, raw_dir, out, tmp_path, monkeypatch
     monkeypatch.setattr(openskimap, "fetch", boom)
     result = _run(repo_root, raw_dir, out, tmp_path, fetch=True)
     assert any("download failed" in w for w in result.warnings)
-    assert len(result.resorts) == 6
+    assert len(result.resorts) == 8  # cached full download is still filtered
 
 
 @pytest.mark.parametrize("cmd", [["pipeline/build.py"], ["-m", "pipeline.build"]])
@@ -179,3 +194,36 @@ def test_entry_points(repo_root, cmd):
     r = subprocess.run([sys.executable, *cmd, "--help"], cwd=repo_root, capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
     assert "--fetch" in r.stdout
+
+
+def test_climate_sources_are_merged(repo_root, raw_dir, out, tmp_path):
+    (out / "climate").mkdir(parents=True)
+    note = "Storm density is SWE gain over depth gain."
+    (out / "climate" / "sources.json").write_text(json.dumps({"version": 1, "generated_at": "2026-10-01T00:00:00Z", "sources": [
+        {"id": "nrcs-snotel-0001-co", "url": "https://example.org/snotel", "title": "Fixture SNOTEL", "accessed_date": "2026-10-01",
+         "note": note}]}))
+    (out / "climate" / "provenance.json").write_text("not json, and ignored")
+    _run(repo_root, raw_dir, out, tmp_path)
+    by = {s["id"]: s for s in _load(out, "sources.json")["sources"]}
+    assert by["nrcs-snotel-0001-co"]["note"] == note
+    assert by["fixture-source-a"]["note"] is None
+
+
+def test_climate_source_conflict_fails(repo_root, raw_dir, out, tmp_path):
+    (out / "climate").mkdir(parents=True)
+    (out / "climate" / "sources.json").write_text(json.dumps({"sources": [
+        {"id": "fixture-source-a", "url": "https://example.org/elsewhere", "title": "t", "accessed_date": "2026-10-01"}]}))
+    with pytest.raises(BuildError, match="fixture-source-a"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_tier_a_elevation_wins_over_openskimap(repo_root, raw_dir, out, tmp_path):
+    p = raw_dir / "tier_a" / "fixture.yaml"
+    data = yaml.safe_load(p.read_text())
+    data["resorts"][0]["elevation"] = {"base_ft": {"value": 8000, "source_id": "fixture-source-a", "as_of": "2026-10-01",
+                                                   "confidence": "published"}}
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
+    _run(repo_root, raw_dir, out, tmp_path)
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    assert peak["elevation"]["base_ft"]["value"] == 8000 and peak["elevation"]["base_ft"]["confidence"] == "published"
+    assert peak["elevation"]["summit_ft"]["source_id"] == "openskimap-ski-areas"

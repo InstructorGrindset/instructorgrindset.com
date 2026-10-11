@@ -28,7 +28,7 @@ from pipeline import openskimap  # noqa: E402
 from pipeline.clusters import ClusterAssignmentError, ClusterInfo, Member, assign_clusters, build_clusters  # noqa: E402
 from pipeline.config import Config, load_config  # noqa: E402
 from pipeline.names import slugify  # noqa: E402
-from pipeline.schemas import Cluster, Resort, State  # noqa: E402
+from pipeline.schemas import Cluster, Resort, Source, State  # noqa: E402
 from pipeline.schemas.raw import TierABatch, TierARecord  # noqa: E402
 from pipeline.sources import SourceRegistry  # noqa: E402
 from pipeline.states import STATE_NAMES, build_states, build_us_states_geojson  # noqa: E402
@@ -79,37 +79,64 @@ def _sourced(value: Any, source_id: str, as_of: dt.date, note: str) -> dict:
 
 
 LIFTS_NOTE = "lifts mapped in OpenStreetMap (OpenSkiMap)"
-VERTICAL_NOTE = "highest minus lowest mapped lift or run elevation (OpenSkiMap)"
+VERTICAL_NOTE = "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+BASE_NOTE = "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+SUMMIT_NOTE = "highest mapped lift or downhill run elevation (OpenSkiMap)"
+
+
+def _osm_fill(d: dict, area: openskimap.SkiArea, as_of: dt.date) -> None:
+    """Fill null size and elevation fields from one OpenSkiMap area (confidence estimated)."""
+    size, elev = d.setdefault("size", {}), d.setdefault("elevation", {})
+    for block, key, value, note in (
+        (size, "lifts", area.lift_count, LIFTS_NOTE),
+        (size, "vertical_ft", area.vertical_ft, VERTICAL_NOTE),
+        (elev, "base_ft", area.base_ft, BASE_NOTE),
+        (elev, "summit_ft", area.summit_ft, SUMMIT_NOTE),
+    ):
+        # zero mapped lifts or zero vertical says nothing; an elevation of 0 ft is still a value
+        if block.get(key) is None and value is not None and (value or block is elev):
+            block[key] = _sourced(value, openskimap.SOURCE_ID, as_of, note)
 
 
 def _tier_a_draft(batch: TierABatch, rec: TierARecord, matches: list[openskimap.SkiArea],
                   osm_as_of: Optional[dt.date]) -> dict:
     d = rec.model_dump(mode="json")
     d.pop("cluster_hint")
-    size = d["size"]
     if len(matches) == 1 and osm_as_of is not None:
-        area = matches[0]
-        if size.get("lifts") is None and area.lift_count:
-            size["lifts"] = _sourced(area.lift_count, openskimap.SOURCE_ID, osm_as_of, LIFTS_NOTE)
-        if size.get("vertical_ft") is None and area.vertical_ft:
-            size["vertical_ft"] = _sourced(area.vertical_ft, openskimap.SOURCE_ID, osm_as_of, VERTICAL_NOTE)
+        _osm_fill(d, matches[0], osm_as_of)
     d.update(tier="A", tier_a_status="approved" if batch.status == "approved" else "draft",
              career=None, editorial=None)
     return d
 
 
 def _tier_b_draft(area: openskimap.SkiArea, rid: str, as_of: dt.date) -> dict:
-    size: dict[str, Any] = {"acres": None, "vertical_ft": None, "lifts": None, "ski_school_staff_est": None}
-    if area.lift_count:
-        size["lifts"] = _sourced(area.lift_count, openskimap.SOURCE_ID, as_of, LIFTS_NOTE)
-    if area.vertical_ft:
-        size["vertical_ft"] = _sourced(area.vertical_ft, openskimap.SOURCE_ID, as_of, VERTICAL_NOTE)
-    return {
+    d: dict[str, Any] = {
         "id": rid, "name": area.name, "tier": "B", "tier_a_criteria": [], "tier_a_status": None,
         "owner": None, "lat": round(area.lat, 5), "lon": round(area.lon, 5),
-        "location_source_id": openskimap.SOURCE_ID, "state": area.state, "size": size,
+        "location_source_id": openskimap.SOURCE_ID, "state": area.state,
+        "size": {"acres": None, "vertical_ft": None, "lifts": None, "ski_school_staff_est": None},
+        "elevation": {"base_ft": None, "summit_ft": None},
         "career": None, "editorial": None,
     }
+    _osm_fill(d, area, as_of)
+    return d
+
+
+def _merge_climate_sources(path: Path, registry: SourceRegistry, errors: list[str], rel=str) -> None:
+    """Add the climate ETL's sources (data/build/climate/sources.json) to the registry."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        errors.append(f"{rel(path)}: unreadable ({e})")
+        return
+    for i, raw in enumerate(data.get("sources") or []):
+        try:
+            registry.add(Source.model_validate(raw), rel(path))
+        except ValidationError as e:
+            for m in e.errors():
+                errors.append(f"{rel(path)}: sources[{i}].{'.'.join(map(str, m['loc']))}: {m['msg']}")
+        except ValueError as e:
+            errors.append(f"{rel(path)}: {e}")
 
 
 def _unique_id(base: str, state: str, taken: set[str]) -> str:
@@ -195,6 +222,10 @@ def build(
     areas = extract.areas if extract else []
     if extract:
         registry.add(extract.source, "data/raw/openskimap")
+
+    climate_sources = out_dir / "climate" / "sources.json"
+    if climate_sources.exists():
+        _merge_climate_sources(climate_sources, registry, errors, rel)
 
     records = inputs.records
     match = match_openskimap([r for _, r in records], areas, cfg.definitions.matching)
@@ -323,7 +354,7 @@ def _refs(d: dict) -> set[str]:
             for v in o:
                 walk(v)
 
-    for key in ("owner", "size", "season", "terrain", "career"):
+    for key in ("owner", "size", "elevation", "season", "terrain", "career"):
         walk(d.get(key))
     return found
 

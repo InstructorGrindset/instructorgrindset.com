@@ -42,6 +42,17 @@ class Size(StrictModel):
     ski_school_staff_est: Optional[SourcedNumber] = None
 
 
+class Elevation(StrictModel):
+    base_ft: Optional[SourcedNumber] = None
+    summit_ft: Optional[SourcedNumber] = None
+
+    @model_validator(mode="after")
+    def _order(self) -> "Elevation":
+        if self.base_ft is not None and self.summit_ft is not None and self.base_ft.value > self.summit_ft.value:
+            raise ValueError("elevation base_ft must not exceed summit_ft")
+        return self
+
+
 class Season(StrictModel):
     open_typical: Optional[SourcedMonthDay] = None
     close_typical: Optional[SourcedMonthDay] = None
@@ -120,6 +131,7 @@ class Resort(StrictModel):
     cluster_id: Slug
     state: StateCode
     size: Size = Field(default_factory=Size)
+    elevation: Elevation = Field(default_factory=Elevation)
     season: Season = Field(default_factory=Season)
     terrain: Terrain = Field(default_factory=Terrain)
     fit: Fit = Field(default_factory=Fit)
@@ -174,6 +186,6 @@ def referenced_source_ids(resort: Resort) -> set[str]:
             for item in obj:
                 walk(item)
 
-    for name in ("owner", "size", "season", "terrain", "career"):
+    for name in ("owner", "size", "elevation", "season", "terrain", "career"):
         walk(getattr(resort, name))
     return found

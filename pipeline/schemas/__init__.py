@@ -16,6 +16,7 @@ from .resort import (
     Career,
     Clients,
     Editorial,
+    Elevation,
     Fit,
     Lucrativeness,
     Resort,
@@ -32,7 +33,7 @@ except ImportError:  # pragma: no cover - depends on the climate module existing
     ClimateMonth = None  # type: ignore[assignment]
 
 __all__ = [
-    "Career", "Clients", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
+    "Career", "Clients", "Elevation", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
     "Fit", "Geometry", "HousingSite", "Lucrativeness", "OwnershipEntry", "OwnershipFile",
     "PayRecord", "Report", "Resort", "Season", "Size", "Source", "Sourced", "SourcedMonthDay",
     "SourcedNumber", "SourcedString", "State", "StrictModel", "Terrain", "TierABatch",

@@ -35,6 +35,8 @@ CHECKED_FIELDS = [
     ("vertical_ft", lambda r: r.size.vertical_ft),
     ("lifts", lambda r: r.size.lifts),
     ("ski_school_staff_est", lambda r: r.size.ski_school_staff_est),
+    ("base_ft", lambda r: r.elevation.base_ft),
+    ("summit_ft", lambda r: r.elevation.summit_ft),
     ("open_typical", lambda r: r.season.open_typical),
     ("close_typical", lambda r: r.season.close_typical),
     ("length_days", lambda r: r.season.length_days),

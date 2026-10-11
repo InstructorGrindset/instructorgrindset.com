@@ -174,3 +174,15 @@ def test_other_entities():
                                  context=CTX)
     with pytest.raises(ValidationError):
         Report.model_validate({"id": "1", "resort_id": "r", "kind": "tips", "season": "2026-27", "values": {}})
+
+
+def test_elevation_and_source_note():
+    r = Resort.model_validate(resort(elevation={"base_ft": dict(SV, value=8000), "summit_ft": dict(SV, value=11000)}), context=CTX)
+    assert r.elevation.base_ft.value == 8000
+    assert Resort.model_validate(resort(), context=CTX).elevation.summit_ft is None
+    with pytest.raises(ValidationError, match="base_ft must not exceed"):
+        Resort.model_validate(resort(elevation={"base_ft": dict(SV, value=9000), "summit_ft": dict(SV, value=8000)}), context=CTX)
+    with pytest.raises(ValidationError, match="missing referenced"):
+        Resort.model_validate(resort(elevation={"base_ft": dict(SV, source_id="src-c")}), context={"source_ids": {"src-a", "src-b", "src-c"}})
+    s = Source.model_validate({"id": "a", "url": "https://x.org", "title": "t", "accessed_date": "2026-10-01", "note": "caveat"})
+    assert s.note == "caveat"
