@@ -24,6 +24,7 @@ sources:
   - {id: wikipedia-bear-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Bear_Mountain_(ski_area)", title: "Bear Mountain (ski area) (Wikipedia)", accessed_date: 2026-10-11}
   - {id: wikipedia-snow-summit, url: "https://en.wikipedia.org/wiki/Snow_Summit", title: "Snow Summit (Wikipedia)", accessed_date: 2026-10-11}
   - {id: wikipedia-snow-valley-mountain-resort, url: "https://en.wikipedia.org/wiki/Snow_Valley_Mountain_Resort", title: "Snow Valley Mountain Resort (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-alpine-meadows-ski-resort, url: "https://en.wikipedia.org/wiki/Alpine_Meadows_(ski_resort)", title: "Alpine Meadows (ski resort) (Wikipedia)", accessed_date: 2026-10-11}
 resorts:
   - id: steamboat
     name: Steamboat
@@ -96,6 +97,7 @@ resorts:
     lon: -120.235
     location_source_id: wikipedia-palisades-tahoe
     cluster_hint: lake-tahoe
+    openskimap_names: ["Palisades Tahoe Olympic Valley"]
     tier_a_status: approved
     approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
     tier_a_criteria:
@@ -355,3 +357,24 @@ resorts:
     elevation:
       base_ft: {value: 6800, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 7841, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
+
+  - id: palisades-tahoe-alpine-meadows
+    name: Palisades Tahoe (Alpine Meadows)
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published, note: "Merged into Alterra in 2018; operates with Palisades Tahoe on one pass, linked by the base to base gondola."}
+    lat: 39.164
+    lon: -120.239
+    location_source_id: wikipedia-alpine-meadows-ski-resort
+    cluster_hint: lake-tahoe
+    openskimap_names: ["Palisades Tahoe Alpine Meadows"]
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; all Alterra resorts qualify as Tier A by owner decision, though compensation is not always standardized across locations.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 2400, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1802, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 13, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published, note: "Article text says 13 lifts (and snowmaking on 11 of 13 lifts); the infobox lift system line says 12."}
+    elevation:
+      base_ft: {value: 6835, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8637, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
