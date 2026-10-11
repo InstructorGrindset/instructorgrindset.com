@@ -147,7 +147,7 @@ async function main() {
 
   router.start();
   els.panel.setAttribute('aria-busy', 'false');
-  window.__careerMap = { index, router, ready: true };
+  window.__careerMap = { index, router, mapCtl, ready: true };
 }
 
 main();
