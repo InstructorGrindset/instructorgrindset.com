@@ -20,7 +20,7 @@ Astro remains an option for Phase 8 if per resort static pages outgrow the stub 
 * `cluster.id`: kebab case slug, unique (`i70-corridor`, `lake-tahoe`, `wasatch`).
 * `resort.id`: kebab case slug, unique (`vail`, `palisades-tahoe`, `jackson-hole`).
 * `source.id`: kebab case slug, unique (`vail-10k-fy2026`, `wikipedia-vail-ski-resort`).
-* Resort URL: `/map/{state lower}/{cluster id}/{resort id}/`. Cluster URL: `/map/{state lower}/{cluster id}/`. State URL: `/map/{state lower}/`. A cluster spanning states uses the state of the URL the user came from; the canonical cluster URL uses the first state in `cluster.states`.
+* Resort URL: `/map/{state lower}/{cluster id}/{resort id}/`. Cluster URL: `/map/{state lower}/{cluster id}/`. State URL: `/map/{state lower}/`. A cluster spanning states uses the state of the URL the user came from; the canonical cluster URL uses the first state in `cluster.states`. A resort in a multi state cluster gets a route stub under every state in that cluster (`/map/ca/lake-tahoe/heavenly/` and `/map/nv/lake-tahoe/heavenly/`); its canonical URL uses the resort's own `state`.
 
 ## The Sourced wrapper
 
@@ -52,7 +52,7 @@ Resort {
   size: { acres, vertical_ft, lifts, ski_school_staff_est },          // each Sourced<number> | null
   elevation: { base_ft, summit_ft },                                  // each Sourced<number> | null; Tier A research first, else OpenSkiMap (estimated)
   season: { open_typical, close_typical, length_days, training_start }, // each Sourced | null; dates as "MM-DD"
-  terrain: { beginner_pct, intermediate_pct, advanced_pct, expert_pct, character_tags },  // pcts Sourced | null; tags string[]
+  terrain: { beginner_pct, intermediate_pct, advanced_pct, expert_pct, character_tags },  // pcts Sourced<number 0 to 100> | null; tags string[]
   fit: { enthusiast_types: string[], professional_types: string[] },
   clients: { profile_tags: string[], notes_md: string | null },
   career: null,       // Phase 4
@@ -84,6 +84,17 @@ Only states with at least one resort.
 ```
 Includes every source declared in `/data/raw` plus the climate ETL's `data/build/climate/sources.json`, merged by id.
 
+### `definitions.json`
+Display relevant subset of `config/definitions.yaml`, so the UI never hardcodes thresholds:
+```
+{ version, generated_at,
+  snow: { powder_day_in, banner_day_in },            // new snow in 24 hours
+  density: { dry_max_pct, moist_min_pct },           // dry < dry_max_pct, average between, moist > moist_min_pct
+  display: { priority: ["published", "reported", "estimated"] },
+  reports: { aggregation_min },                      // approved reports needed before a Reported range shows
+  staleness: { max_age_months } }                    // records older than this are flagged
+```
+
 ### `us-states.geojson`
 State outlines (simplified) with `properties: { code, name }`.
 
@@ -97,7 +108,7 @@ ClimateMonth { resort_id, month (1..12), snowfall_in, powder_days, banner_days, 
                density_source: "snotel" | "estimated" | null,
                temp_high_f, temp_low_f, wind_mph, sun_pct }
 ```
-Monthly values are climatological means over `period`; `powder_days` and `banner_days` are mean days per month.
+Monthly values are climatological means over `period`; `powder_days` and `banner_days` are mean days per month. Climate values are modeled (ERA5 reanalysis and SNOTEL derived), so the UI treats them as confidence `estimated`, with `as_of` equal to the climate file's `generated_at` and sources from `source_ids`.
 
 ## Raw inputs (`/data/raw`)
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:38:24Z",
+  "generated_at": "2026-10-11T19:42:58Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -308,7 +308,7 @@
       "lat": 47.43991,
       "lon": -121.43473,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -595,6 +595,98 @@
       ]
     },
     {
+      "id": "alta",
+      "name": "Alta Ski Area",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Alta is one of the oldest ski resorts in the country, opening its first lift on January 15, 1939.",
+          "source_id": "wikipedia-alta-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Private shareholders (Laughlin family 51%, Quinney family 25%, Bass family 11%)",
+        "source_id": "wikipedia-alta-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 40.58083,
+      "lon": -111.63722,
+      "location_source_id": "wikipedia-alta-ski-area",
+      "cluster_id": "wasatch",
+      "state": "UT",
+      "size": {
+        "acres": {
+          "value": 2614,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2538,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "lifts": {
+          "value": 12,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Sum of the infobox list (7 chairlifts, 5 surface tows)."
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 8530,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 11068,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-alta-ski-area"
+      ]
+    },
+    {
       "id": "alta-sierra-ski-resort",
       "name": "Alta Sierra Ski Resort",
       "tier": "B",
@@ -634,80 +726,6 @@
         },
         "summit_ft": {
           "value": 7065,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
-      "id": "alta-ski-area",
-      "name": "Alta Ski Area",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 40.58146,
-      "lon": -111.62299,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "wasatch",
-      "state": "UT",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2402,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 11,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 8514,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 10915,
           "source_id": "openskimap-ski-areas",
           "as_of": "2026-10-11",
           "confidence": "estimated",
@@ -1189,47 +1207,65 @@
     {
       "id": "arapahoe-basin",
       "name": "Arapahoe Basin",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.6287,
-      "lon": -105.87581,
-      "location_source_id": "openskimap-ski-areas",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Arapahoe Basin is known for its extended season and extreme terrain, and is mostly known for advanced and expert skiing such as the hike to East Wall.",
+          "source_id": "wikipedia-arapahoe-basin"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-arapahoe-basin",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Purchase agreed February 2024 and closed November 19, 2024."
+      },
+      "lat": 39.64167,
+      "lon": -105.87167,
+      "location_source_id": "wikipedia-arapahoe-basin",
       "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2038,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 1428,
+          "source_id": "wikipedia-arapahoe-basin",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2270,
+          "source_id": "wikipedia-arapahoe-basin",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Lift served vertical from the article body. The infobox says 2,530 ft, which does not match its own top (13,050) and base (10,780) elevations."
         },
         "lifts": {
           "value": 9,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-arapahoe-basin",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Six chairlifts and three surface lifts."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 10479,
-          "source_id": "openskimap-ski-areas",
+          "value": 10780,
+          "source_id": "wikipedia-arapahoe-basin",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 12516,
-          "source_id": "openskimap-ski-areas",
+          "value": 13050,
+          "source_id": "wikipedia-arapahoe-basin",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -1257,7 +1293,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-arapahoe-basin"
       ]
     },
     {
@@ -1559,47 +1595,65 @@
     {
       "id": "aspen-highlands",
       "name": "Aspen Highlands",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.15136,
-      "lon": -106.86619,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southwest-colorado",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Aspen Highlands is famous for Highland Bowl and other experts only terrain, with 65 percent of its runs rated expert.",
+          "source_id": "wikipedia-aspen-highlands"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Aspen Skiing Company",
+        "source_id": "wikipedia-aspen-highlands",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Aspen Skiing Company assumed ownership and operation in 1993 per its own article."
+      },
+      "lat": 39.18111,
+      "lon": -106.85639,
+      "location_source_id": "wikipedia-aspen-highlands",
+      "cluster_id": "roaring-fork",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3547,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 1010,
+          "source_id": "wikipedia-aspen-highlands",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3638,
+          "source_id": "wikipedia-aspen-highlands",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Infobox value. Its top (12,392) and base (8,040) elevations imply 4,352 ft; the top likely includes hike to Highland Bowl."
         },
         "lifts": {
-          "value": 6,
-          "source_id": "openskimap-ski-areas",
+          "value": 5,
+          "source_id": "wikipedia-aspen-highlands",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 8071,
-          "source_id": "openskimap-ski-areas",
+          "value": 8040,
+          "source_id": "wikipedia-aspen-highlands",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 11618,
-          "source_id": "openskimap-ski-areas",
+          "value": 12392,
+          "source_id": "wikipedia-aspen-highlands",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -1627,53 +1681,76 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-aspen-highlands"
       ]
     },
     {
       "id": "aspen-mountain",
       "name": "Aspen Mountain",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.16622,
-      "lon": -106.82014,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southwest-colorado",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Founded in 1946, Aspen opened Lift 1, then the world's longest chairlift, and in 1950 hosted the FIS World Alpine Championships, the first international ski competition in the United States.",
+          "source_id": "wikipedia-aspen-skiing-company"
+        },
+        {
+          "criterion": "diehard",
+          "rationale": "Aspen Mountain has no beginner runs and keeps a homespun, throwback local culture dating from its 1940s founding, visible in homemade memorials in its trees.",
+          "source_id": "wikipedia-aspen-mountain-ski-area"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Aspen Skiing Company",
+        "source_id": "wikipedia-aspen-mountain-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "The Aspen Skiing Company article says the company is owned by the Crown family of Illinois."
+      },
+      "lat": 39.18639,
+      "lon": -106.81861,
+      "location_source_id": "wikipedia-aspen-mountain-ski-area",
+      "cluster_id": "roaring-fork",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3301,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 673,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3267,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 5,
-          "source_id": "openskimap-ski-areas",
+          "value": 9,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 7957,
-          "source_id": "openskimap-ski-areas",
+          "value": 7945,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 11258,
-          "source_id": "openskimap-ski-areas",
+          "value": 11212,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -1701,7 +1778,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-aspen-mountain-ski-area",
+        "wikipedia-aspen-skiing-company"
       ]
     },
     {
@@ -1714,7 +1792,7 @@
       "lat": 39.1862,
       "lon": -106.94829,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southwest-colorado",
+      "cluster_id": "roaring-fork",
       "state": "CO",
       "size": {
         "acres": null,
@@ -2010,7 +2088,7 @@
       "lat": 37.65917,
       "lon": -119.66232,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "eastern-sierra",
       "state": "CA",
       "size": {
         "acres": null,
@@ -2084,7 +2162,7 @@
       "lat": 45.08693,
       "lon": -69.90946,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -3441,7 +3519,7 @@
       "lat": 45.49915,
       "lon": -69.70622,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -4175,7 +4253,7 @@
       "lat": 44.57973,
       "lon": -70.6215,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -4471,7 +4549,7 @@
       "lat": 43.50629,
       "lon": -113.56355,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-id",
+      "cluster_id": "wood-river",
       "state": "ID",
       "size": {
         "acres": null,
@@ -6776,49 +6854,67 @@
       ]
     },
     {
-      "id": "burke-mountain-resort",
-      "name": "Burke Mountain Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 44.58023,
-      "lon": -71.89926,
-      "location_source_id": "openskimap-ski-areas",
+      "id": "burke",
+      "name": "Burke Mountain Ski Area",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Burke Mountain Academy, founded in 1970 as the first ski academy in North America, trains alpine ski racers on the slopes of Burke Mountain Ski Area.",
+          "source_id": "wikipedia-burke-mountain-academy"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Bear Den Partners",
+        "source_id": "wikipedia-burke-mountain-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Purchased in April 2025 for a reported 11.5 million dollars after a period of federal receivership tied to the Jay Peak EB 5 case."
+      },
+      "lat": 44.57,
+      "lon": -71.895,
+      "location_source_id": "wikipedia-burke-mountain-ski-area",
       "cluster_id": "northern-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1991,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 260,
+          "source_id": "wikipedia-burke-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2057,
+          "source_id": "wikipedia-burke-mountain-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 5,
-          "source_id": "openskimap-ski-areas",
+          "value": 4,
+          "source_id": "wikipedia-burke-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Sum of the infobox list (2 high speed quads, 1 J bar, 1 T bar)."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1216,
-          "source_id": "openskimap-ski-areas",
+          "value": 1210,
+          "source_id": "wikipedia-burke-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3207,
-          "source_id": "openskimap-ski-areas",
+          "value": 3267,
+          "source_id": "wikipedia-burke-mountain-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -6846,7 +6942,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-burke-mountain-academy",
+        "wikipedia-burke-mountain-ski-area"
       ]
     },
     {
@@ -6859,7 +6956,7 @@
       "lat": 39.19065,
       "lon": -106.87023,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southwest-colorado",
+      "cluster_id": "roaring-fork",
       "state": "CO",
       "size": {
         "acres": null,
@@ -8117,7 +8214,7 @@
       "lat": 37.28219,
       "lon": -107.86813,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -8487,7 +8584,7 @@
       "lat": 37.22644,
       "lon": -119.15805,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "eastern-sierra",
       "state": "CA",
       "size": {
         "acres": null,
@@ -8783,7 +8880,7 @@
       "lat": 38.29778,
       "lon": -107.61898,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -10123,6 +10220,98 @@
     {
       "id": "crystal-mountain",
       "name": "Crystal Mountain",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Crystal hosted the US Alpine Ski Championships in 1965 and 1968 and World Cup downhills in 1972, and its racing school was featured in Sports Illustrated in the early 1960s.",
+          "source_id": "wikipedia-crystal-mountain-washington"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-crystal-mountain-washington",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 46.93,
+      "lon": -121.48,
+      "location_source_id": "wikipedia-crystal-mountain-washington",
+      "cluster_id": "cascades",
+      "state": "WA",
+      "size": {
+        "acres": {
+          "value": 2600,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "2,300 lift serviced plus 300 inbounds backcountry."
+        },
+        "vertical_ft": {
+          "value": 3100,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Lift served vertical is 2,592 ft per the same infobox."
+        },
+        "lifts": {
+          "value": 11,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Sum of the infobox list (1 gondola, 9 chairs, 1 magic carpet)."
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 3912,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 7012,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-crystal-mountain-washington"
+      ]
+    },
+    {
+      "id": "crystal-mountain-mi",
+      "name": "Crystal Mountain",
       "tier": "B",
       "tier_a_criteria": [],
       "tier_a_status": null,
@@ -10160,80 +10349,6 @@
         },
         "summit_ft": {
           "value": 1132,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
-      "id": "crystal-mountain-wa",
-      "name": "Crystal Mountain",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 46.93368,
-      "lon": -121.49114,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
-      "state": "WA",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2584,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 11,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 4389,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 6973,
           "source_id": "openskimap-ski-areas",
           "as_of": "2026-10-11",
           "confidence": "estimated",
@@ -10500,7 +10615,7 @@
       "lat": 43.78745,
       "lon": -72.09384,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -10565,49 +10680,72 @@
       ]
     },
     {
-      "id": "deer-valley-resort",
+      "id": "deer-valley",
       "name": "Deer Valley Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 40.61147,
-      "lon": -111.47461,
-      "location_source_id": "openskimap-ski-areas",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "luxury",
+          "rationale": "Deer Valley is a ski only resort that emphasizes upscale accommodations and amenities.",
+          "source_id": "wikipedia-deer-valley"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Deer Valley hosted freestyle moguls, aerials and alpine slalom at the 2002 Winter Olympics and is scheduled to host moguls and aerials at the 2034 Winter Olympics.",
+          "source_id": "wikipedia-deer-valley"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-deer-valley",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 40.62278,
+      "lon": -111.48944,
+      "location_source_id": "wikipedia-deer-valley",
       "cluster_id": "wasatch",
       "state": "UT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3110,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 4300,
+          "source_id": "wikipedia-deer-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3040,
+          "source_id": "wikipedia-deer-valley",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 36,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-deer-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Includes 5 magic carpets."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6443,
-          "source_id": "openskimap-ski-areas",
+          "value": 6530,
+          "source_id": "wikipedia-deer-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 9553,
-          "source_id": "openskimap-ski-areas",
+          "value": 9570,
+          "source_id": "wikipedia-deer-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -10635,7 +10773,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-deer-valley"
       ]
     },
     {
@@ -12794,7 +12932,7 @@
       "lat": 43.78253,
       "lon": -110.94526,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wy",
+      "cluster_id": "tetons",
       "state": "WY",
       "size": {
         "acres": null,
@@ -13454,7 +13592,7 @@
       "lat": 43.53567,
       "lon": -71.36643,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -14046,7 +14184,7 @@
       "lat": 37.29696,
       "lon": -108.05697,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -15082,7 +15220,7 @@
       "lat": 40.48159,
       "lon": -106.83964,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "northern-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -15665,49 +15803,72 @@
       ]
     },
     {
-      "id": "jackson-hole-mountain-resort",
+      "id": "jackson-hole",
       "name": "Jackson Hole Mountain Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 43.59596,
-      "lon": -110.84706,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wy",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Jackson Hole is known for its steep, challenging terrain including Corbet's Couloir and a 4,139 ft continuous vertical, with half its terrain rated expert.",
+          "source_id": "wikipedia-jackson-hole-mountain-resort"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Jackson Hole hosted World Cup races in the tour's inaugural 1967 season and again in 1970 and 1975, and held the first national Powder 8 Championship in 1970.",
+          "source_id": "wikipedia-jackson-hole-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "John Kemmerer III",
+        "source_id": "wikipedia-jackson-hole-mountain-resort",
+        "as_of": "2026-10-11",
+        "confidence": "estimated",
+        "note": "The article says Paul McCollister sold his interests to John Kemmerer III in 1992 and reports no later sale; current ownership not confirmed on the resort site."
+      },
+      "lat": 43.59,
+      "lon": -110.89,
+      "location_source_id": "wikipedia-jackson-hole-mountain-resort",
+      "cluster_id": "tetons",
       "state": "WY",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 4099,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2500,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Inbounds; the infobox adds 3,000 acres of gated backcountry."
+        },
+        "vertical_ft": {
+          "value": 4139,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 17,
-          "source_id": "openskimap-ski-areas",
+          "value": 16,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Sum of the infobox list (1 tram, 2 gondolas, 10 chairlifts, 2 magic carpets, 1 rope tow)."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6318,
-          "source_id": "openskimap-ski-areas",
+          "value": 6311,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 10417,
-          "source_id": "openskimap-ski-areas",
+          "value": 10450,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -15735,7 +15896,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-jackson-hole-mountain-resort"
       ]
     },
     {
@@ -15896,7 +16057,7 @@
       "lat": 37.75366,
       "lon": -119.07566,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "cluster_id": "eastern-sierra",
       "state": "CA",
       "size": {
         "acres": null,
@@ -16044,7 +16205,7 @@
       "lat": 43.63947,
       "lon": -111.62327,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-id",
+      "cluster_id": "tetons",
       "state": "ID",
       "size": {
         "acres": null,
@@ -16118,7 +16279,7 @@
       "lat": 37.81153,
       "lon": -107.65553,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -16878,7 +17039,7 @@
       "lat": 38.01026,
       "lon": -107.31379,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -17248,7 +17409,7 @@
       "lat": 38.0189,
       "lon": -107.66893,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -18647,47 +18808,65 @@
     {
       "id": "mammoth-mountain",
       "name": "Mammoth Mountain",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 37.63954,
-      "lon": -119.02602,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-ca",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Mammoth hosts US Grand Prix freestyle and snowboard Olympic qualifiers and FIS World Cup halfpipe and slopestyle events, and serves as a training site for elite snowboarders including Olympic champion Chloe Kim.",
+          "source_id": "wikipedia-mammoth-mountain-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-mammoth-mountain-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 37.63056,
+      "lon": -119.0325,
+      "location_source_id": "wikipedia-mammoth-mountain-resort",
+      "cluster_id": "eastern-sierra",
       "state": "CA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2970,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 3500,
+          "source_id": "wikipedia-mammoth-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3100,
+          "source_id": "wikipedia-mammoth-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 28,
-          "source_id": "openskimap-ski-areas",
+          "value": 25,
+          "source_id": "wikipedia-mammoth-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 8057,
-          "source_id": "openskimap-ski-areas",
+          "value": 7953,
+          "source_id": "wikipedia-mammoth-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "At Eagle Lodge."
         },
         "summit_ft": {
-          "value": 11027,
-          "source_id": "openskimap-ski-areas",
+          "value": 11053,
+          "source_id": "wikipedia-mammoth-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox value; the article body says 11,059 ft."
         }
       },
       "season": {
@@ -18715,7 +18894,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-mammoth-mountain-resort"
       ]
     },
     {
@@ -19246,7 +19425,7 @@
       "lat": 47.2786,
       "lon": -121.31958,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -20054,7 +20233,7 @@
       "lat": 44.37629,
       "lon": -70.71115,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -24228,49 +24407,72 @@
       ]
     },
     {
-      "id": "palisades-tahoe-alpine-meadows",
-      "name": "Palisades Tahoe Alpine Meadows",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.15422,
-      "lon": -120.23848,
-      "location_source_id": "openskimap-ski-areas",
+      "id": "palisades-tahoe",
+      "name": "Palisades Tahoe",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Founded in 1949 as Squaw Valley, it hosted the 1960 Winter Olympics and is California Historical Landmark 724, marked as a Pioneer Ski Area of America.",
+          "source_id": "wikipedia-palisades-tahoe"
+        },
+        {
+          "criterion": "diehard",
+          "rationale": "The resort is the largest ski complex in the Lake Tahoe region and is known for its challenging terrain.",
+          "source_id": "wikipedia-palisades-tahoe"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-palisades-tahoe",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.196,
+      "lon": -120.235,
+      "location_source_id": "wikipedia-palisades-tahoe",
       "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2270,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 3600,
+          "source_id": "wikipedia-palisades-tahoe",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Palisades side only; with Alpine Meadows the combined resort offers about 6,000 acres per the same article."
+        },
+        "vertical_ft": {
+          "value": 2850,
+          "source_id": "wikipedia-palisades-tahoe",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 17,
-          "source_id": "openskimap-ski-areas",
+          "value": 30,
+          "source_id": "wikipedia-palisades-tahoe",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Palisades side only (23 chairlifts, 4 carpets, tram, base to base gondola, funitel)."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6223,
-          "source_id": "openskimap-ski-areas",
+          "value": 6200,
+          "source_id": "wikipedia-palisades-tahoe",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 8493,
-          "source_id": "openskimap-ski-areas",
+          "value": 9050,
+          "source_id": "wikipedia-palisades-tahoe",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox value; the article body gives 9,010 ft at Granite Chief."
         }
       },
       "season": {
@@ -24298,81 +24500,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
-      "id": "palisades-tahoe-olympic-valley",
-      "name": "Palisades Tahoe Olympic Valley",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.19191,
-      "lon": -120.25513,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "lake-tahoe",
-      "state": "CA",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2551,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 27,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 6198,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 8748,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-palisades-tahoe"
       ]
     },
     {
@@ -25298,7 +25426,7 @@
       "lat": 44.79577,
       "lon": -69.38867,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -26402,7 +26530,7 @@
       "lat": 43.43085,
       "lon": -71.83045,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -26476,7 +26604,7 @@
       "lat": 37.62572,
       "lon": -107.83783,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -26550,7 +26678,7 @@
       "lat": 44.5836,
       "lon": -69.65694,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -26698,7 +26826,7 @@
       "lat": 43.47869,
       "lon": -71.84403,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -27142,7 +27270,7 @@
       "lat": 43.49481,
       "lon": -114.36542,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-id",
+      "cluster_id": "wood-river",
       "state": "ID",
       "size": {
         "acres": null,
@@ -27364,7 +27492,7 @@
       "lat": 44.9429,
       "lon": -70.5247,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -27438,7 +27566,7 @@
       "lat": 47.43164,
       "lon": -121.41593,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -27728,7 +27856,7 @@
       "lat": 43.66289,
       "lon": -72.54703,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -28690,7 +28818,7 @@
       "lat": 37.87306,
       "lon": -107.65685,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -29652,7 +29780,7 @@
       "lat": 43.65978,
       "lon": -72.4455,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -30614,7 +30742,7 @@
       "lat": 43.46515,
       "lon": -110.75817,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wy",
+      "cluster_id": "tetons",
       "state": "WY",
       "size": {
         "acres": null,
@@ -31199,47 +31327,65 @@
     {
       "id": "snowbird",
       "name": "Snowbird",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 40.56633,
-      "lon": -111.65269,
-      "location_source_id": "openskimap-ski-areas",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Snowbird is mainly known for powder skiing and for particularly challenging terrain, with most runs rated intermediate or harder.",
+          "source_id": "wikipedia-snowbird-utah"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Ian Cumming (majority owner)",
+        "source_id": "wikipedia-snowbird-utah",
+        "as_of": "2026-10-11",
+        "confidence": "estimated",
+        "note": "The article reports a May 2014 change making Cumming majority owner in partnership with Dick Bass, who died in 2015; no later change is described. Current ownership not confirmed on the resort site."
+      },
+      "lat": 40.58111,
+      "lon": -111.65639,
+      "location_source_id": "wikipedia-snowbird-utah",
       "cluster_id": "wasatch",
       "state": "UT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3310,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2500,
+          "source_id": "wikipedia-snowbird-utah",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3240,
+          "source_id": "wikipedia-snowbird-utah",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 14,
-          "source_id": "openskimap-ski-areas",
+          "value": 13,
+          "source_id": "wikipedia-snowbird-utah",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 7736,
-          "source_id": "openskimap-ski-areas",
+          "value": 8100,
+          "source_id": "wikipedia-snowbird-utah",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Main base area; the lowest chairlift starts at 7,760 ft."
         },
         "summit_ft": {
-          "value": 11046,
-          "source_id": "openskimap-ski-areas",
+          "value": 11000,
+          "source_id": "wikipedia-snowbird-utah",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -31267,7 +31413,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-snowbird-utah"
       ]
     },
     {
@@ -31650,7 +31796,7 @@
       "lat": 43.4895,
       "lon": -114.84016,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-id",
+      "cluster_id": "wood-river",
       "state": "ID",
       "size": {
         "acres": null,
@@ -32020,7 +32166,7 @@
       "lat": 44.47733,
       "lon": -70.20528,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -32153,49 +32299,67 @@
       ]
     },
     {
-      "id": "steamboat-ski-resort",
-      "name": "Steamboat Ski Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 40.45649,
-      "lon": -106.7628,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "id": "steamboat",
+      "name": "Steamboat",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "The Steamboat Springs Winter Sports Club has produced 88 Winter Olympians, trains its alpine, freestyle and snowboard athletes on Mt. Werner at the Steamboat ski area, and was the US Ski Team Club of the Year in 1999, 2004 and 2007.",
+          "source_id": "wikipedia-steamboat-springs-winter-sports-club"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-steamboat-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Infobox owner; the article says the resort is operated by the Steamboat Ski & Resort Corporation."
+      },
+      "lat": 40.459,
+      "lon": -106.803,
+      "location_source_id": "wikipedia-steamboat-ski-resort",
+      "cluster_id": "northern-colorado",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3753,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 3741,
+          "source_id": "wikipedia-steamboat-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Infobox value. The article body still says 2,965 acres and separately describes a 650 acre Mahogany Ridge and Fish Creek Canyon expansion that opened in 2024."
+        },
+        "vertical_ft": {
+          "value": 3668,
+          "source_id": "wikipedia-steamboat-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 20,
-          "source_id": "openskimap-ski-areas",
+          "value": 24,
+          "source_id": "wikipedia-steamboat-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6809,
-          "source_id": "openskimap-ski-areas",
+          "value": 6900,
+          "source_id": "wikipedia-steamboat-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 10562,
-          "source_id": "openskimap-ski-areas",
+          "value": 10568,
+          "source_id": "wikipedia-steamboat-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -32223,7 +32387,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-steamboat-ski-resort",
+        "wikipedia-steamboat-springs-winter-sports-club"
       ]
     },
     {
@@ -32384,7 +32549,7 @@
       "lat": 43.63357,
       "lon": -72.25219,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -32548,49 +32713,72 @@
       ]
     },
     {
-      "id": "stratton-mountain-resort",
+      "id": "stratton",
       "name": "Stratton Mountain Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 43.1005,
-      "lon": -72.90385,
-      "location_source_id": "openskimap-ski-areas",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "In the 1980s Stratton became the first ski area to allow snowboarding, home to the first snowboard school, and host of the US Open snowboard races from 1985.",
+          "source_id": "wikipedia-stratton-mountain-resort"
+        },
+        {
+          "criterion": "athlete_development",
+          "rationale": "Stratton Mountain School, a ski and snowboard prep school at Stratton Mountain founded in 1972, has produced 46 Olympic athletes who won six medals.",
+          "source_id": "wikipedia-stratton-mountain-school"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-stratton-mountain-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 43.11417,
+      "lon": -72.90667,
+      "location_source_id": "wikipedia-stratton-mountain-resort",
       "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1899,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 625,
+          "source_id": "wikipedia-stratton-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2003,
+          "source_id": "wikipedia-stratton-mountain-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 17,
-          "source_id": "openskimap-ski-areas",
+          "value": 13,
+          "source_id": "wikipedia-stratton-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1986,
-          "source_id": "openskimap-ski-areas",
+          "value": 1872,
+          "source_id": "wikipedia-stratton-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3885,
-          "source_id": "openskimap-ski-areas",
+          "value": 3875,
+          "source_id": "wikipedia-stratton-mountain-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -32618,23 +32806,47 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-stratton-mountain-resort",
+        "wikipedia-stratton-mountain-school"
       ]
     },
     {
-      "id": "sugar-bowl-resort",
-      "name": "Sugar Bowl Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.29929,
-      "lon": -120.33245,
-      "location_source_id": "openskimap-ski-areas",
+      "id": "sugar-bowl",
+      "name": "Sugar Bowl Ski Resort",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Founded by Austrian champion Hannes Schroll with Walt Disney as an early shareholder, Sugar Bowl was the first ski area in California to install a chairlift and the first on the West Coast to install a gondola.",
+          "source_id": "wikipedia-sugar-bowl-ski-resort"
+        },
+        {
+          "criterion": "athlete_development",
+          "rationale": "Sugar Bowl Academy, a college preparatory high school for competitive skiers, was founded at the resort in 1999 and co founded by former US Ski Team member Tricia Hellman Gibbs.",
+          "source_id": "wikipedia-sugar-bowl-ski-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Privately owned (independent)",
+        "source_id": "wikipedia-sugar-bowl-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "The article calls it one of the few remaining privately owned resorts in the Lake Tahoe area but does not name the owner."
+      },
+      "lat": 39.30444,
+      "lon": -120.33583,
+      "location_source_id": "wikipedia-sugar-bowl-ski-resort",
       "cluster_id": "lake-tahoe",
       "state": "CA",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1650,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
         "vertical_ft": {
           "value": 1494,
           "source_id": "openskimap-ski-areas",
@@ -32643,28 +32855,28 @@
           "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
         },
         "lifts": {
-          "value": 12,
-          "source_id": "openskimap-ski-areas",
+          "value": 13,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6874,
-          "source_id": "openskimap-ski-areas",
+          "value": 6883,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 8368,
-          "source_id": "openskimap-ski-areas",
+          "value": 8383,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -32692,7 +32904,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-sugar-bowl-ski-resort"
       ]
     },
     {
@@ -32846,47 +33059,65 @@
     {
       "id": "sugarloaf",
       "name": "Sugarloaf",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 45.04947,
-      "lon": -70.31567,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Carrabassett Valley Academy, a ski and snowboard academy at the base of Sugarloaf since 1982, counts 12 Olympians and 39 US national team members among its alumni.",
+          "source_id": "wikipedia-carrabassett-valley-academy"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Boyne Resorts",
+        "source_id": "wikipedia-sugarloaf-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Infobox owner. The article body says American Skiing Company sold Sugarloaf to CNL Lifestyle Properties in 2007, to be managed by Boyne, and does not describe a later transfer to Boyne."
+      },
+      "lat": 45.03139,
+      "lon": -70.31306,
+      "location_source_id": "wikipedia-sugarloaf-ski-resort",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2769,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 1360,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2820,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 15,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-sugarloaf-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1394,
-          "source_id": "openskimap-ski-areas",
+          "value": 1417,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 4164,
-          "source_id": "openskimap-ski-areas",
+          "value": 4237,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -32914,75 +33145,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
-      ]
-    },
-    {
-      "id": "sugarloaf-outdoor-center",
-      "name": "Sugarloaf Outdoor Center",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 45.06845,
-      "lon": -70.28724,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
-      "state": "ME",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 381,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": null,
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 1383,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 1764,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-carrabassett-valley-academy",
+        "wikipedia-sugarloaf-ski-resort"
       ]
     },
     {
@@ -33137,7 +33301,7 @@
       "lat": 47.42084,
       "lon": -121.42132,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -33202,49 +33366,72 @@
       ]
     },
     {
-      "id": "sun-valley-bald-mountain",
-      "name": "Sun Valley - Bald Mountain",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 43.65961,
-      "lon": -114.39198,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-id",
+      "id": "sun-valley",
+      "name": "Sun Valley",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Sun Valley, opened in 1936 by Union Pacific chairman W. Averell Harriman, was the first destination winter resort in the US, and the world's first chairlifts were installed on its Proctor and Dollar mountains that fall; the original Proctor lift is on the National Register of Historic Places.",
+          "source_id": "wikipedia-sun-valley-idaho"
+        },
+        {
+          "criterion": "luxury",
+          "rationale": "The region has been a seasonal home to the rich and famous since Ernest Hemingway brought it to public attention in the late 1930s.",
+          "source_id": "wikipedia-sun-valley-idaho"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "R. Earl Holding family (Grand America Hotels & Resorts)",
+        "source_id": "wikipedia-sun-valley-idaho",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 43.655,
+      "lon": -114.40917,
+      "location_source_id": "wikipedia-sun-valley-idaho",
+      "cluster_id": "wood-river",
       "state": "ID",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3363,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2829,
+          "source_id": "wikipedia-sun-valley-idaho",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Bald Mountain and Dollar Mountain combined. The Bald Mountain article gives 2,054 acres and 15 lifts for Baldy alone."
+        },
+        "vertical_ft": {
+          "value": 3400,
+          "source_id": "wikipedia-sun-valley-idaho",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Bald Mountain."
         },
         "lifts": {
-          "value": 12,
-          "source_id": "openskimap-ski-areas",
+          "value": 17,
+          "source_id": "wikipedia-sun-valley-idaho",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Bald Mountain and Dollar Mountain combined."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 5759,
-          "source_id": "openskimap-ski-areas",
+          "value": 5750,
+          "source_id": "wikipedia-sun-valley-idaho",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "River Run base of Bald Mountain."
         },
         "summit_ft": {
-          "value": 9122,
-          "source_id": "openskimap-ski-areas",
+          "value": 9150,
+          "source_id": "wikipedia-sun-valley-idaho",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -33272,7 +33459,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-sun-valley-idaho"
       ]
     },
     {
@@ -33285,7 +33472,7 @@
       "lat": 43.68219,
       "lon": -114.34338,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-id",
+      "cluster_id": "wood-river",
       "state": "ID",
       "size": {
         "acres": null,
@@ -33507,7 +33694,7 @@
       "lat": 44.46687,
       "lon": -70.87441,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -33655,7 +33842,7 @@
       "lat": 39.39232,
       "lon": -107.33889,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "southwest-colorado",
+      "cluster_id": "roaring-fork",
       "state": "CO",
       "size": {
         "acres": null,
@@ -34164,49 +34351,67 @@
       ]
     },
     {
-      "id": "telluride-ski-area",
-      "name": "Telluride Ski Area",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 37.91572,
-      "lon": -107.83895,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "id": "telluride",
+      "name": "Telluride Ski Resort",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Telluride is known for its advanced terrain, with 41 percent of runs rated advanced or expert.",
+          "source_id": "wikipedia-telluride-ski-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Chuck Horning",
+        "source_id": "wikipedia-telluride-ski-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Through Telluride Ski & Golf. The article says ownership passed to Horning in February 2004 and that he remains the current owner; that sentence is marked citation needed."
+      },
+      "lat": 37.93639,
+      "lon": -107.82028,
+      "location_source_id": "wikipedia-telluride-ski-resort",
+      "cluster_id": "southwest-colorado",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3803,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 2000,
+          "source_id": "wikipedia-telluride-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3845,
+          "source_id": "wikipedia-telluride-ski-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Lift served; 4,425 ft including hike to terrain."
         },
         "lifts": {
-          "value": 20,
-          "source_id": "openskimap-ski-areas",
+          "value": 18,
+          "source_id": "wikipedia-telluride-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Sum of the infobox list (2 gondolas, 12 chairlifts, 2 surface lifts, 2 magic carpets)."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 8732,
-          "source_id": "openskimap-ski-areas",
+          "value": 8725,
+          "source_id": "wikipedia-telluride-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 12535,
-          "source_id": "openskimap-ski-areas",
+          "value": 13150,
+          "source_id": "wikipedia-telluride-ski-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Includes hike to terrain."
         }
       },
       "season": {
@@ -34234,7 +34439,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-telluride-ski-resort"
       ]
     },
     {
@@ -34913,7 +35118,7 @@
       "lat": 40.99183,
       "lon": -107.05988,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-co",
+      "cluster_id": "northern-colorado",
       "state": "CO",
       "size": {
         "acres": null,
@@ -34981,7 +35186,7 @@
       "lat": 47.40242,
       "lon": -121.41486,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -35493,7 +35698,7 @@
       "lat": 44.64825,
       "lon": -70.17141,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-me",
+      "cluster_id": "western-maine",
       "state": "ME",
       "size": {
         "acres": null,
@@ -36085,7 +36290,7 @@
       "lat": 43.72323,
       "lon": -72.58483,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-vt",
+      "cluster_id": "southern-vermont",
       "state": "VT",
       "size": {
         "acres": null,
@@ -36474,7 +36679,7 @@
       "lat": 43.44298,
       "lon": -71.69112,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -36983,49 +37188,72 @@
       ]
     },
     {
-      "id": "waterville-valley-resort",
+      "id": "waterville-valley",
       "name": "Waterville Valley Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 43.96008,
-      "lon": -71.53482,
-      "location_source_id": "openskimap-ski-areas",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "athlete_development",
+          "rationale": "Waterville hosts the Black and Blue Trail Smashers, one of the oldest ski clubs in the US (1934) and USSA Club of the Year in 2006, and Waterville Valley Academy trains skiers and snowboarders there.",
+          "source_id": "wikipedia-waterville-valley-resort"
+        },
+        {
+          "criterion": "heritage",
+          "rationale": "Waterville first hosted World Cup alpine races in 1969, was a regular tour stop through most of the 1980s, and in 2024 held the first dual moguls World Cup on American soil.",
+          "source_id": "wikipedia-waterville-valley-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Sununu family and area investors",
+        "source_id": "wikipedia-waterville-valley-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Purchased October 2010; the article says it remains independent."
+      },
+      "lat": 43.96528,
+      "lon": -71.52778,
+      "location_source_id": "wikipedia-waterville-valley-resort",
       "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 1996,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 265,
+          "source_id": "wikipedia-waterville-valley-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2020,
+          "source_id": "wikipedia-waterville-valley-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 10,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-waterville-valley-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Sum of the infobox list (1 six pack, 2 triples, 2 doubles, 1 platter, 2 T bars, 2 conveyors); the article also says a new Exhibition T bar replaced the Exhibition and World Cup surface lifts for 2025 to 2026, so the current count may be 9."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 1823,
-          "source_id": "openskimap-ski-areas",
+          "value": 1820,
+          "source_id": "wikipedia-waterville-valley-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 3819,
-          "source_id": "openskimap-ski-areas",
+          "value": 3840,
+          "source_id": "wikipedia-waterville-valley-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Lift served; true summit 3,997 ft."
         }
       },
       "season": {
@@ -37053,7 +37281,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-waterville-valley-resort"
       ]
     },
     {
@@ -37214,7 +37442,7 @@
       "lat": 43.59802,
       "lon": -72.18295,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nh",
+      "cluster_id": "white-mountains",
       "state": "NH",
       "size": {
         "acres": null,
@@ -37288,7 +37516,7 @@
       "lat": 46.62208,
       "lon": -121.39679,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-wa",
+      "cluster_id": "cascades",
       "state": "WA",
       "size": {
         "acres": null,
@@ -38187,49 +38415,67 @@
       ]
     },
     {
-      "id": "winter-park-resort",
+      "id": "winter-park",
       "name": "Winter Park Resort",
-      "tier": "B",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "owner": null,
-      "lat": 39.87293,
-      "lon": -105.786,
-      "location_source_id": "openskimap-ski-areas",
+      "tier": "A",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Winter Park opened for the 1939 to 1940 season, was owned and run by Denver for decades with a Ski Train serving it for nearly 70 years, and is home to the National Sports Center for the Disabled, one of the world's largest and oldest disabled skiing programs.",
+          "source_id": "wikipedia-winter-park-resort"
+        }
+      ],
+      "tier_a_status": "draft",
+      "owner": {
+        "value": "Alterra Mountain Company",
+        "source_id": "wikipedia-winter-park-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Operator. The infobox owner is the City and County of Denver; Alterra operates the resort after acquiring Intrawest, Denver's partner since 2002."
+      },
+      "lat": 39.88694,
+      "lon": -105.7625,
+      "location_source_id": "wikipedia-winter-park-resort",
       "cluster_id": "i70-corridor",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2898,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 3081,
+          "source_id": "wikipedia-winter-park-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3060,
+          "source_id": "wikipedia-winter-park-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 25,
-          "source_id": "openskimap-ski-areas",
+          "value": 23,
+          "source_id": "wikipedia-winter-park-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 9091,
-          "source_id": "openskimap-ski-areas",
+          "value": 9000,
+          "source_id": "wikipedia-winter-park-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 11989,
-          "source_id": "openskimap-ski-areas",
+          "value": 12060,
+          "source_id": "wikipedia-winter-park-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -38257,7 +38503,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-winter-park-resort"
       ]
     },
     {

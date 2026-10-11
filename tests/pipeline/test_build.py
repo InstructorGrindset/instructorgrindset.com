@@ -116,7 +116,7 @@ def test_build_is_deterministic(repo_root, raw_dir, tmp_path, monkeypatch):
     a, b = tmp_path / "a", tmp_path / "b"
     _run(repo_root, raw_dir, a, tmp_path)
     _run(repo_root, raw_dir, b, tmp_path)
-    for name in ("resorts.json", "resorts.geojson", "clusters.geojson", "states.json", "sources.json"):
+    for name in ("resorts.json", "resorts.geojson", "clusters.geojson", "states.json", "sources.json", "definitions.json"):
         assert (a / name).read_bytes() == (b / name).read_bytes()
 
 
@@ -227,3 +227,18 @@ def test_tier_a_elevation_wins_over_openskimap(repo_root, raw_dir, out, tmp_path
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
     assert peak["elevation"]["base_ft"]["value"] == 8000 and peak["elevation"]["base_ft"]["confidence"] == "published"
     assert peak["elevation"]["summit_ft"]["source_id"] == "openskimap-ski-areas"
+
+
+def test_definitions_json(repo_root, tmp_path, out):
+    raw = tmp_path / "empty-raw"
+    raw.mkdir()
+    _run(repo_root, raw, out, tmp_path)
+    d = _load(out, "definitions.json")
+    assert d["version"] == 1 and "generated_at" in d
+    assert {k: v for k, v in d.items() if k not in ("version", "generated_at")} == {
+        "snow": {"powder_day_in": 6, "banner_day_in": 12},
+        "density": {"dry_max_pct": 7, "moist_min_pct": 12},
+        "display": {"priority": ["published", "reported", "estimated"]},
+        "reports": {"aggregation_min": 3},
+        "staleness": {"max_age_months": 18},
+    }

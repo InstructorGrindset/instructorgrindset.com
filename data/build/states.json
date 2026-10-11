@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T19:38:24Z",
+  "generated_at": "2026-10-11T19:42:58Z",
   "states": [
     {
       "code": "AK",
@@ -30,17 +30,20 @@
       "code": "CA",
       "name": "California",
       "cluster_ids": [
+        "eastern-sierra",
         "lake-tahoe",
         "other-ca"
       ],
-      "resort_count": 30
+      "resort_count": 29
     },
     {
       "code": "CO",
       "name": "Colorado",
       "cluster_ids": [
         "i70-corridor",
+        "northern-colorado",
         "other-co",
+        "roaring-fork",
         "southwest-colorado"
       ],
       "resort_count": 40
@@ -65,7 +68,9 @@
       "code": "ID",
       "name": "Idaho",
       "cluster_ids": [
-        "other-id"
+        "other-id",
+        "tetons",
+        "wood-river"
       ],
       "resort_count": 19
     },
@@ -105,9 +110,10 @@
       "code": "ME",
       "name": "Maine",
       "cluster_ids": [
-        "other-me"
+        "other-me",
+        "western-maine"
       ],
-      "resort_count": 22
+      "resort_count": 21
     },
     {
       "code": "MI",
@@ -278,6 +284,7 @@
       "code": "WA",
       "name": "Washington",
       "cluster_ids": [
+        "cascades",
         "other-wa"
       ],
       "resort_count": 19
@@ -302,7 +309,8 @@
       "code": "WY",
       "name": "Wyoming",
       "cluster_ids": [
-        "other-wy"
+        "other-wy",
+        "tetons"
       ],
       "resort_count": 12
     }

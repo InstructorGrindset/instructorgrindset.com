@@ -3,7 +3,7 @@
     python pipeline/build.py [--fetch] [--no-report] [--no-routes]
     python -m pipeline.build ...
 
-Outputs: resorts.json, resorts.geojson, clusters.geojson, states.json,
+Outputs: resorts.json, resorts.geojson, clusters.geojson, states.json, definitions.json,
 sources.json, us-states.geojson (when missing, via scripts/build-states.mjs),
 and the Tier A review document docs/map/tier-a-draft.md.
 """
@@ -328,6 +328,7 @@ def build(
             },
         } for c in clusters],
     }, compact=True)
+    _write_json(out_dir / "definitions.json", {**header, **display_definitions(cfg)})
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
 
@@ -337,6 +338,18 @@ def build(
         from pipeline.tier_a_report import write_report as _write_report
         _write_report(report_path, result, registry, cfg)
     return result
+
+
+def display_definitions(cfg: Config) -> dict:
+    """The subset of config/definitions.yaml the UI needs (definitions.json)."""
+    d = cfg.definitions
+    return {
+        "snow": {"powder_day_in": d.snow.powder_day_in, "banner_day_in": d.snow.banner_day_in},
+        "density": {"dry_max_pct": d.density.dry_max_pct, "moist_min_pct": d.density.moist_min_pct},
+        "display": {"priority": list(d.display.priority)},
+        "reports": {"aggregation_min": d.reports.aggregation_min},
+        "staleness": {"max_age_months": d.staleness.max_age_months},
+    }
 
 
 def _refs(d: dict) -> set[str]:
