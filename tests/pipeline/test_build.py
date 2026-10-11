@@ -1,4 +1,5 @@
 import json
+import shutil
 import subprocess
 import sys
 
@@ -15,7 +16,21 @@ def out(tmp_path):
     return tmp_path / "build"
 
 
+def _config_dir(repo_root, tmp_path, missing_record="warn"):
+    """A copy of the real config with the ownership reverse check pinned, so fixture
+    ownership entries without a Tier A record exercise the warning path."""
+    cfg_dir = tmp_path / f"config-{missing_record}"
+    if not cfg_dir.exists():
+        shutil.copytree(repo_root / "config", cfg_dir)
+        p = cfg_dir / "definitions.yaml"
+        data = yaml.safe_load(p.read_text())
+        data["ownership"]["missing_tier_a_record"] = missing_record
+        p.write_text(yaml.safe_dump(data, sort_keys=False))
+    return cfg_dir
+
+
 def _run(repo_root, raw_dir, out, tmp_path, **kw):
+    kw.setdefault("config_dir", _config_dir(repo_root, tmp_path))
     return build(repo_root, raw_dir=raw_dir, out_dir=out, report_path=tmp_path / "tier-a-draft.md",
                  states_geojson=False, **kw)
 
@@ -212,6 +227,11 @@ def test_ownership_failure_blocks_build(repo_root, raw_dir, out, tmp_path):
     p.write_text(yaml.safe_dump(data))
     with pytest.raises(BuildError, match="missing from the Vail Resorts ownership file"):
         _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_strict_ownership_check_blocks_build(repo_root, raw_dir, out, tmp_path):
+    with pytest.raises(BuildError, match="Fixture Ridge \\(CO\\) is in the ownership file but has no Tier A record"):
+        _run(repo_root, raw_dir, out, tmp_path, config_dir=_config_dir(repo_root, tmp_path, "fail"))
 
 
 def test_undefined_source_blocks_build(repo_root, raw_dir, out, tmp_path):

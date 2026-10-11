@@ -59,7 +59,7 @@ openskimap:
 ownership:
   # Every resort in data/raw/ownership/*.yaml needs a Tier A record (operator compensation).
   # warn while research is in progress; fail once the Vail and Alterra lists are complete.
-  missing_tier_a_record: warn
+  missing_tier_a_record: fail
 
 professionalism:
   # Score from 0 to 100, weighted from the components below.

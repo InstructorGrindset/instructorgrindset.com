@@ -5,18 +5,11 @@ status: draft
 # the research environment, so ownership is not yet confirmed on each resort's own site.
 # lat/lon are the Wikipedia infobox coordinates, used as the base area point.
 #
-# Candidates researched but left out because no fetched source supports a Tier A criterion
-# (the build requires at least one criterion per record). Flagged for Alexandre:
-#   buttermilk  (Aspen Skiing Company, CO, roaring-fork): article notes X Games hosting and
-#               a beginner focus only. 39.205, -106.86056; 435 acres; 2,030 ft; 8 lifts.
-#   snowmass    (Aspen Skiing Company, CO, roaring-fork): article gives no criterion evidence.
-#               39.1956, -106.9513; 3,362 acres; 4,406 ft; 16 lifts.
-#   taos        (Louis Bacon / Taos Ski Valley, Inc. since Dec 2013, NM, northern-new-mexico):
-#               article says founded 1955 by Ernie and Rhoda Blake, home of a highly rated ski
-#               school, banned snowboarding until 2008; none of that meets a criterion as stated.
-#               36.59, -105.43694; 1,294 acres; 3,281 ft; 14 lifts.
-#   big-sky     (Boyne Resorts, MT, southwest-montana): article gives size and lift history only.
-#               45.275, -111.4319; 5,850 acres; 4,350 ft; 40 lifts.
+# Big Sky, Taos, Snowmass, Buttermilk, Sun Valley (Bald Mountain) and Dollar Mountain were
+# approved as Tier A by the site owner on 2026-10-11 (ROADMAP decisions log). Those records
+# carry tier_a_status: approved; every other record here stays draft with the batch.
+# Resort, Boyne, POWDR and Aspen Snowmass sites were blocked by the research network on
+# 2026-10-11 (proxy policy), so every value below comes from Wikipedia.
 sources:
   - {id: wikipedia-jackson-hole-mountain-resort, url: https://en.wikipedia.org/wiki/Jackson_Hole_Mountain_Resort, title: Jackson Hole Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-aspen-skiing-company, url: https://en.wikipedia.org/wiki/Aspen_Skiing_Company, title: Aspen Skiing Company (Wikipedia), accessed_date: 2026-10-11}
@@ -32,11 +25,22 @@ sources:
   - {id: wikipedia-burke-mountain-ski-area, url: https://en.wikipedia.org/wiki/Burke_Mountain_Ski_Area, title: Burke Mountain Ski Area (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-burke-mountain-academy, url: https://en.wikipedia.org/wiki/Burke_Mountain_Academy, title: Burke Mountain Academy (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-waterville-valley-resort, url: https://en.wikipedia.org/wiki/Waterville_Valley_Resort, title: Waterville Valley Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-bald-mountain-idaho, url: "https://en.wikipedia.org/wiki/Bald_Mountain_(Idaho)", title: "Bald Mountain (Idaho) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-dollar-mountain, url: https://en.wikipedia.org/wiki/Dollar_Mountain, title: Dollar Mountain (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-big-sky-resort, url: https://en.wikipedia.org/wiki/Big_Sky_Resort, title: Big Sky Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-taos-ski-valley, url: "https://en.wikipedia.org/wiki/Taos_Ski_Valley,_New_Mexico", title: "Taos Ski Valley, New Mexico (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-ernie-blake, url: https://en.wikipedia.org/wiki/Ernie_Blake, title: Ernie Blake (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-snowmass-ski-area, url: "https://en.wikipedia.org/wiki/Snowmass_(ski_area)", title: "Snowmass (ski area) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-snowmass-village-colorado, url: "https://en.wikipedia.org/wiki/Snowmass_Village,_Colorado", title: "Snowmass Village, Colorado (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-buttermilk-ski-area, url: "https://en.wikipedia.org/wiki/Buttermilk_(ski_area)", title: "Buttermilk (ski area) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-x-games, url: https://en.wikipedia.org/wiki/X_Games, title: X Games (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-jay-kemmerer, url: https://en.wikipedia.org/wiki/Jay_Kemmerer, title: Jay Kemmerer (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-powdr, url: https://en.wikipedia.org/wiki/Powdr, title: Powdr (Wikipedia), accessed_date: 2026-10-11}
 resorts:
   - id: jackson-hole
     name: Jackson Hole Mountain Resort
     state: WY
-    owner: {value: John Kemmerer III, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says Paul McCollister sold his interests to John Kemmerer III in 1992 and reports no later sale; current ownership not confirmed on the resort site."}
+    owner: {value: "Eric Macy and Mike Corbat", source_id: wikipedia-jay-kemmerer, as_of: 2026-10-11, confidence: published, note: "Jay Kemmerer, who bought the resort for his family in 1992, sold it on February 1, 2024 to board members Eric Macy and Mike Corbat; the Kemmerer family remains an equity owner. Not confirmed on the resort site."}
     lat: 43.59
     lon: -110.89
     location_source_id: wikipedia-jackson-hole-mountain-resort
@@ -108,23 +112,48 @@ resorts:
       summit_ft: {value: 13150, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published, note: "Includes hike to terrain."}
 
   - id: sun-valley
-    name: Sun Valley
+    name: Sun Valley (Bald Mountain)
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
     state: ID
-    owner: {value: R. Earl Holding family (Grand America Hotels & Resorts), source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published}
+    owner: {value: R. Earl Holding family (Grand America Hotels & Resorts), source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Infobox owner. Earl Holding died in 2013 and Carol Holding in December 2024; their children continue to run the resort."}
     lat: 43.655
     lon: -114.40917
-    location_source_id: wikipedia-sun-valley-idaho
+    location_source_id: wikipedia-bald-mountain-idaho
     cluster_hint: wood-river
+    openskimap_names: ["Sun Valley - Bald Mountain"]
     tier_a_criteria:
-      - {criterion: heritage, rationale: "Sun Valley, opened in 1936 by Union Pacific chairman W. Averell Harriman, was the first destination winter resort in the US, and the world's first chairlifts were installed on its Proctor and Dollar mountains that fall; the original Proctor lift is on the National Register of Historic Places.", source_id: wikipedia-sun-valley-idaho}
+      - {criterion: heritage, rationale: "Sun Valley, opened in 1936 by Union Pacific chairman W. Averell Harriman, was the first destination winter resort in the US. Bald Mountain opened for lift served skiing in 1939 to 1940, and from 1940 its Warm Springs side hosted the Harriman Cup, part of the first major international ski competitions in North America.", source_id: wikipedia-sun-valley-idaho}
       - {criterion: luxury, rationale: "The region has been a seasonal home to the rich and famous since Ernest Hemingway brought it to public attention in the late 1930s.", source_id: wikipedia-sun-valley-idaho}
+      - {criterion: athlete_development, rationale: "Sun Valley was a training site for many nations' alpine and Nordic teams during the 2002 Winter Olympics and hosted the U.S. Alpine Championships on Warm Springs in 2016 and 2018; its Olympic medalists include Gretchen Fraser, Christin Cooper, Picabo Street and Kaitlyn Farrington.", source_id: wikipedia-sun-valley-idaho}
     size:
-      acres: {value: 2829, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Bald Mountain and Dollar Mountain combined. The Bald Mountain article gives 2,054 acres and 15 lifts for Baldy alone."}
-      vertical_ft: {value: 3400, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Bald Mountain."}
-      lifts: {value: 17, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Bald Mountain and Dollar Mountain combined."}
+      acres: {value: 2054, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3400, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 15, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published, note: "Infobox list (1 gondola, 2 six packs, 6 high speed quads, 2 triples, 1 surface lift sums to 12); the infobox total is 15 and the article body says fourteen."}
     elevation:
-      base_ft: {value: 5750, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "River Run base of Bald Mountain."}
-      summit_ft: {value: 9150, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published}
+      base_ft: {value: 5750, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published, note: "River Run base."}
+      summit_ft: {value: 9150, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published}
+
+  - id: dollar-mountain
+    name: Dollar Mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: ID
+    owner: {value: R. Earl Holding family (Grand America Hotels & Resorts), source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Part of the Sun Valley ski resort; the Sun Valley article infobox gives the owner."}
+    lat: 43.68306
+    lon: -114.34694
+    location_source_id: wikipedia-dollar-mountain
+    cluster_hint: wood-river
+    openskimap_names: ["Sun Valley - Dollar Mountain"]
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "The world's first chairlifts were installed on Sun Valley's Proctor and Dollar mountains in the fall of 1936. Dollar Mountain Lodge, opened in November 2004, is the headquarters of the Sun Valley Ski School.", source_id: wikipedia-sun-valley-idaho}
+    size:
+      acres: null
+      vertical_ft: {value: 628, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 4, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published, note: "Chairlifts (2 detachable quads, 1 triple, 1 double); the article also mentions a magic carpet for first time skiers."}
+    elevation:
+      base_ft: {value: 6010, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 6638, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
 
   - id: alta
     name: Alta Ski Area
@@ -147,7 +176,7 @@ resorts:
   - id: snowbird
     name: Snowbird
     state: UT
-    owner: {value: Ian Cumming (majority owner), source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: estimated, note: "The article reports a May 2014 change making Cumming majority owner in partnership with Dick Bass, who died in 2015; no later change is described. Current ownership not confirmed on the resort site."}
+    owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "The POWDR article lists Snowbird among its ski resorts, citing the NSAA 2023 ownership list; POWDR was founded by John Cumming, son of Ian Cumming, who became Snowbird majority owner in 2014. Not confirmed on snowbird.com."}
     lat: 40.58111
     lon: -111.65639
     location_source_id: wikipedia-snowbird-utah
@@ -235,3 +264,88 @@ resorts:
     elevation:
       base_ft: {value: 1820, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3840, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published, note: "Lift served; true summit 3,997 ft."}
+
+  - id: big-sky
+    name: Big Sky Resort
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: MT
+    owner: {value: Boyne Resorts, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner; the article says Boyne Resorts purchased the resort in 1976."}
+    lat: 45.275
+    lon: -111.4319
+    location_source_id: wikipedia-big-sky-resort
+    cluster_hint: southwest-montana
+    openskimap_names: ["Big Sky Resort"]
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Half of Big Sky's 320 plus runs are rated advanced (31 percent) or expert and extreme (19 percent), and the Lone Peak Tram reaches its most difficult terrain from the 11,166 ft summit of Lone Mountain.", source_id: wikipedia-big-sky-resort}
+    size:
+      acres: {value: 5850, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "Includes Moonlight Basin terrain merged in October 2013."}
+      vertical_ft: {value: 4350, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 40, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "1 aerial tram, 2 gondolas, 8 high speed detachable chairlifts, 16 fixed grip chairlifts, 13 surface lifts."}
+    elevation:
+      base_ft: {value: 6800, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "Lone Moose base; Mountain Village base is 7,500 ft."}
+      summit_ft: {value: 11166, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published}
+
+  - id: taos
+    name: Taos Ski Valley
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: NM
+    owner: {value: "Louis Bacon (Taos Ski Valley, Inc.)", source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "The Blake family sold Taos Ski Valley, Inc. to Louis Bacon in December 2013."}
+    lat: 36.59
+    lon: -105.43694
+    location_source_id: wikipedia-taos-ski-valley
+    cluster_hint: northern-new-mexico
+    openskimap_names: ["Taos Ski Valley"]
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Ernie Blake founded Taos Ski Valley with his wife Rhoda and was inducted into the US Ski Hall of Fame in 1987.", source_id: wikipedia-ernie-blake}
+      - {criterion: diehard, rationale: "Founded in 1955, Taos rates 51 percent of its 110 trails advanced or expert, prohibited snowboarding until March 2008, and was home to the Ernie Blake Snowsports School, one of the highest rated ski schools in North America.", source_id: wikipedia-taos-ski-valley}
+    size:
+      acres: {value: 1294, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3281, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 14, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "1 gondola, 4 quads, 4 triples, 1 double, 4 surface lifts."}
+    elevation:
+      base_ft: {value: 9200, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 12481, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "Top of the Kachina lift."}
+
+  - id: snowmass
+    name: Snowmass
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: CO
+    owner: {value: Aspen Skiing Company, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published, note: "Owned and operated by Aspen Skiing Company, which its own article says is owned by the Crown family of Illinois."}
+    lat: 39.1956
+    lon: -106.9513
+    location_source_id: wikipedia-snowmass-ski-area
+    cluster_hint: roaring-fork
+    openskimap_names: ["Aspen Snowmass"]
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "Snowmass Village has seen a building boom of luxury homes, mountainside mansions and new hotels, with a rising influx of wealthy tourists and skiers. The ski area opened in 1967 with Olympic medalist Stein Eriksen directing its ski school.", source_id: wikipedia-snowmass-village-colorado}
+    size:
+      acres: {value: 3362, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 4406, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 16, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published, note: "3 gondolas, 7 high speed quads, 2 high speed sixes, 2 quads, 1 double, 2 tows."}
+    elevation:
+      base_ft: {value: 8104, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 12510, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+
+  - id: buttermilk
+    name: Buttermilk
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: CO
+    owner: {value: Aspen Skiing Company, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+    lat: 39.205
+    lon: -106.86056
+    location_source_id: wikipedia-buttermilk-ski-area
+    cluster_hint: roaring-fork
+    openskimap_names: ["Buttermilk"]
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Buttermilk first hosted ESPN's Winter X Games in 2002, the first X Games held in Aspen, and the X Games has been held in Aspen every winter since.", source_id: wikipedia-x-games}
+    size:
+      acres: {value: 435, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2030, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 8, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published, note: "3 high speed quads, 1 double, 4 surface or ski school lifts."}
+    elevation:
+      base_ft: {value: 7870, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 9900, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}

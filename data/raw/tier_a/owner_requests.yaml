@@ -1,0 +1,31 @@
+batch: owner-requests
+researched_date: 2026-10-11
+status: draft
+# Resorts the site owner asked to add as Tier A (ROADMAP decisions log, 2026-10-11).
+# Each record carries its own tier_a_status and approval; the batch itself stays draft.
+# The Yellowstone Club site was blocked by the research network on 2026-10-11, so values
+# come from Wikipedia. lat/lon are the Wikipedia coordinates for Pioneer Mountain, where
+# the article says most of the club's ski runs are.
+sources:
+  - {id: wikipedia-yellowstone-club, url: https://en.wikipedia.org/wiki/Yellowstone_Club, title: Yellowstone Club (Wikipedia), accessed_date: 2026-10-11}
+resorts:
+  - id: yellowstone-club
+    name: Yellowstone Club
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: MT
+    owner: {value: CrossHarbor Capital Partners, source_id: wikipedia-yellowstone-club, as_of: 2026-10-11, confidence: published, note: "Bought for 115 million dollars in June 2009 out of Chapter 11 by CrossHarbor, a firm led by club member Sam Byrne; the article names CrossHarbor as the owner."}
+    lat: 45.23138
+    lon: -111.45126
+    location_source_id: wikipedia-yellowstone-club
+    cluster_hint: southwest-montana
+    openskimap_names: ["Yellowstone Club"]
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "A private residential ski and golf club west of Big Sky, rated among the top 10 lifestyle estates in the world, with more than 500 member households and members including Bill Gates and Mark Zuckerberg.", source_id: wikipedia-yellowstone-club}
+    size:
+      acres: {value: 2200, source_id: wikipedia-yellowstone-club, as_of: 2026-10-11, confidence: published}
+      vertical_ft: null
+      lifts: null
+    elevation:
+      base_ft: null
+      summit_ft: {value: 9859, source_id: wikipedia-yellowstone-club, as_of: 2026-10-11, confidence: published, note: "Summit of Pioneer Mountain, where most of the ski runs are."}

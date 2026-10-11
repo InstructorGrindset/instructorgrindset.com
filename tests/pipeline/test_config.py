@@ -59,7 +59,7 @@ def test_clusters_config(cfg):
     assert by["lake-tahoe"].states == ["CA", "NV"]
     assert by["new-york-metro"].states == ["NJ", "NY", "CT"]
     assert by["mount-hood"].states == ["OR"] and by["laurel-highlands"].states == ["PA"]
-    assert cfg.definitions.ownership.missing_tier_a_record == "warn"
+    assert cfg.definitions.ownership.missing_tier_a_record == "fail"
     for c in cfg.clusters.clusters:
         assert "-" not in c.name, "cluster display names follow the no hyphen style rule"
 

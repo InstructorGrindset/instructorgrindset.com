@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T20:20:06Z",
+  "generated_at": "2026-10-11T20:26:22Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -1015,7 +1015,7 @@
       "lat": 36.37989,
       "lon": -105.24362,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nm",
+      "cluster_id": "northern-new-mexico",
       "state": "NM",
       "size": {
         "acres": null,
@@ -1907,82 +1907,6 @@
       "sources": [
         "wikipedia-aspen-mountain-ski-area",
         "wikipedia-aspen-skiing-company"
-      ]
-    },
-    {
-      "id": "aspen-snowmass",
-      "name": "Aspen Snowmass",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 39.1862,
-      "lon": -106.94829,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "roaring-fork",
-      "state": "CO",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 4416,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 19,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 8114,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 12530,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
       ]
     },
     {
@@ -4004,51 +3928,73 @@
       ]
     },
     {
-      "id": "big-sky-resort",
+      "id": "big-sky",
       "name": "Big Sky Resort",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 45.28175,
-      "lon": -111.41594,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "diehard",
+          "rationale": "Half of Big Sky's 320 plus runs are rated advanced (31 percent) or expert and extreme (19 percent), and the Lone Peak Tram reaches its most difficult terrain from the 11,166 ft summit of Lone Mountain.",
+          "source_id": "wikipedia-big-sky-resort"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "Approved in Career Map planning session"
+      },
+      "owner": {
+        "value": "Boyne Resorts",
+        "source_id": "wikipedia-big-sky-resort",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Infobox owner; the article says Boyne Resorts purchased the resort in 1976."
+      },
+      "lat": 45.275,
+      "lon": -111.4319,
+      "location_source_id": "wikipedia-big-sky-resort",
       "cluster_id": "southwest-montana",
       "state": "MT",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 4347,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 5850,
+          "source_id": "wikipedia-big-sky-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Includes Moonlight Basin terrain merged in October 2013."
+        },
+        "vertical_ft": {
+          "value": 4350,
+          "source_id": "wikipedia-big-sky-resort",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
-          "value": 45,
-          "source_id": "openskimap-ski-areas",
+          "value": 40,
+          "source_id": "wikipedia-big-sky-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "1 aerial tram, 2 gondolas, 8 high speed detachable chairlifts, 16 fixed grip chairlifts, 13 surface lifts."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 6815,
-          "source_id": "openskimap-ski-areas",
+          "value": 6800,
+          "source_id": "wikipedia-big-sky-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Lone Moose base; Mountain Village base is 7,500 ft."
         },
         "summit_ft": {
-          "value": 11162,
-          "source_id": "openskimap-ski-areas",
+          "value": 11166,
+          "source_id": "wikipedia-big-sky-resort",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -4076,7 +4022,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-big-sky-resort"
       ]
     },
     {
@@ -7396,49 +7342,71 @@
     {
       "id": "buttermilk",
       "name": "Buttermilk",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 39.19065,
-      "lon": -106.87023,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Buttermilk first hosted ESPN's Winter X Games in 2002, the first X Games held in Aspen, and the X Games has been held in Aspen every winter since.",
+          "source_id": "wikipedia-x-games"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "Approved in Career Map planning session"
+      },
+      "owner": {
+        "value": "Aspen Skiing Company",
+        "source_id": "wikipedia-buttermilk-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": null
+      },
+      "lat": 39.205,
+      "lon": -106.86056,
+      "location_source_id": "wikipedia-buttermilk-ski-area",
       "cluster_id": "roaring-fork",
       "state": "CO",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 2018,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 435,
+          "source_id": "wikipedia-buttermilk-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 2030,
+          "source_id": "wikipedia-buttermilk-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 8,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-buttermilk-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "3 high speed quads, 1 double, 4 surface or ski school lifts."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
           "value": 7870,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-buttermilk-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 9888,
-          "source_id": "openskimap-ski-areas",
+          "value": 9900,
+          "source_id": "wikipedia-buttermilk-ski-area",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         }
       },
       "season": {
@@ -7466,7 +7434,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-buttermilk-ski-area",
+        "wikipedia-x-games"
       ]
     },
     {
@@ -11889,6 +11858,99 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas"
+      ]
+    },
+    {
+      "id": "dollar-mountain",
+      "name": "Dollar Mountain",
+      "tier": "A",
+      "facility_type": "ski_area",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "The world's first chairlifts were installed on Sun Valley's Proctor and Dollar mountains in the fall of 1936. Dollar Mountain Lodge, opened in November 2004, is the headquarters of the Sun Valley Ski School.",
+          "source_id": "wikipedia-sun-valley-idaho"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "Approved in Career Map planning session"
+      },
+      "owner": {
+        "value": "R. Earl Holding family (Grand America Hotels & Resorts)",
+        "source_id": "wikipedia-sun-valley-idaho",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Part of the Sun Valley ski resort; the Sun Valley article infobox gives the owner."
+      },
+      "lat": 43.68306,
+      "lon": -114.34694,
+      "location_source_id": "wikipedia-dollar-mountain",
+      "cluster_id": "wood-river",
+      "state": "ID",
+      "size": {
+        "acres": null,
+        "vertical_ft": {
+          "value": 628,
+          "source_id": "wikipedia-dollar-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "lifts": {
+          "value": 4,
+          "source_id": "wikipedia-dollar-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "Chairlifts (2 detachable quads, 1 triple, 1 double); the article also mentions a magic carpet for first time skiers."
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 6010,
+          "source_id": "wikipedia-dollar-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 6638,
+          "source_id": "wikipedia-dollar-mountain",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-dollar-mountain",
+        "wikipedia-sun-valley-idaho"
       ]
     },
     {
@@ -16874,11 +16936,11 @@
       "tier_a_status": "draft",
       "approval": null,
       "owner": {
-        "value": "John Kemmerer III",
-        "source_id": "wikipedia-jackson-hole-mountain-resort",
+        "value": "Eric Macy and Mike Corbat",
+        "source_id": "wikipedia-jay-kemmerer",
         "as_of": "2026-10-11",
-        "confidence": "estimated",
-        "note": "The article says Paul McCollister sold his interests to John Kemmerer III in 1992 and reports no later sale; current ownership not confirmed on the resort site."
+        "confidence": "published",
+        "note": "Jay Kemmerer, who bought the resort for his family in 1992, sold it on February 1, 2024 to board members Eric Macy and Mike Corbat; the Kemmerer family remains an equity owner. Not confirmed on the resort site."
       },
       "lat": 43.59,
       "lon": -110.89,
@@ -16950,7 +17012,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "wikipedia-jackson-hole-mountain-resort"
+        "wikipedia-jackson-hole-mountain-resort",
+        "wikipedia-jay-kemmerer"
       ]
     },
     {
@@ -29036,7 +29099,7 @@
       "lat": 36.70077,
       "lon": -105.40867,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nm",
+      "cluster_id": "northern-new-mexico",
       "state": "NM",
       "size": {
         "acres": null,
@@ -31033,7 +31096,7 @@
       "lat": 36.1498,
       "lon": -105.55305,
       "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nm",
+      "cluster_id": "northern-new-mexico",
       "state": "NM",
       "size": {
         "acres": null,
@@ -33651,11 +33714,11 @@
       "tier_a_status": "draft",
       "approval": null,
       "owner": {
-        "value": "Ian Cumming (majority owner)",
-        "source_id": "wikipedia-snowbird-utah",
+        "value": "POWDR",
+        "source_id": "wikipedia-powdr",
         "as_of": "2026-10-11",
-        "confidence": "estimated",
-        "note": "The article reports a May 2014 change making Cumming majority owner in partnership with Dick Bass, who died in 2015; no later change is described. Current ownership not confirmed on the resort site."
+        "confidence": "published",
+        "note": "The POWDR article lists Snowbird among its ski resorts, citing the NSAA 2023 ownership list; POWDR was founded by John Cumming, son of Ian Cumming, who became Snowbird majority owner in 2014. Not confirmed on snowbird.com."
       },
       "lat": 40.58111,
       "lon": -111.65639,
@@ -33727,6 +33790,7 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
+        "wikipedia-powdr",
         "wikipedia-snowbird-utah"
       ]
     },
@@ -33880,6 +33944,105 @@
       "climate_available": false,
       "sources": [
         "openskimap-ski-areas"
+      ]
+    },
+    {
+      "id": "snowmass",
+      "name": "Snowmass",
+      "tier": "A",
+      "facility_type": "ski_area",
+      "tier_a_criteria": [
+        {
+          "criterion": "luxury",
+          "rationale": "Snowmass Village has seen a building boom of luxury homes, mountainside mansions and new hotels, with a rising influx of wealthy tourists and skiers. The ski area opened in 1967 with Olympic medalist Stein Eriksen directing its ski school.",
+          "source_id": "wikipedia-snowmass-village-colorado"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "Approved in Career Map planning session"
+      },
+      "owner": {
+        "value": "Aspen Skiing Company",
+        "source_id": "wikipedia-snowmass-ski-area",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Owned and operated by Aspen Skiing Company, which its own article says is owned by the Crown family of Illinois."
+      },
+      "lat": 39.1956,
+      "lon": -106.9513,
+      "location_source_id": "wikipedia-snowmass-ski-area",
+      "cluster_id": "roaring-fork",
+      "state": "CO",
+      "size": {
+        "acres": {
+          "value": 3362,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 4406,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "lifts": {
+          "value": 16,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": "3 gondolas, 7 high speed quads, 2 high speed sixes, 2 quads, 1 double, 2 tows."
+        },
+        "ski_school_staff_est": null
+      },
+      "elevation": {
+        "base_ft": {
+          "value": 8104,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
+        "summit_ft": {
+          "value": 12510,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        }
+      },
+      "season": {
+        "open_typical": null,
+        "close_typical": null,
+        "length_days": null,
+        "training_start": null
+      },
+      "terrain": {
+        "beginner_pct": null,
+        "intermediate_pct": null,
+        "advanced_pct": null,
+        "expert_pct": null,
+        "character_tags": []
+      },
+      "fit": {
+        "enthusiast_types": [],
+        "professional_types": []
+      },
+      "clients": {
+        "profile_tags": [],
+        "notes_md": null
+      },
+      "career": null,
+      "editorial": null,
+      "climate_available": false,
+      "sources": [
+        "wikipedia-snowmass-ski-area",
+        "wikipedia-snowmass-village-colorado"
       ]
     },
     {
@@ -35923,70 +36086,79 @@
     },
     {
       "id": "sun-valley",
-      "name": "Sun Valley",
+      "name": "Sun Valley (Bald Mountain)",
       "tier": "A",
       "facility_type": "ski_area",
       "tier_a_criteria": [
         {
           "criterion": "heritage",
-          "rationale": "Sun Valley, opened in 1936 by Union Pacific chairman W. Averell Harriman, was the first destination winter resort in the US, and the world's first chairlifts were installed on its Proctor and Dollar mountains that fall; the original Proctor lift is on the National Register of Historic Places.",
+          "rationale": "Sun Valley, opened in 1936 by Union Pacific chairman W. Averell Harriman, was the first destination winter resort in the US. Bald Mountain opened for lift served skiing in 1939 to 1940, and from 1940 its Warm Springs side hosted the Harriman Cup, part of the first major international ski competitions in North America.",
           "source_id": "wikipedia-sun-valley-idaho"
         },
         {
           "criterion": "luxury",
           "rationale": "The region has been a seasonal home to the rich and famous since Ernest Hemingway brought it to public attention in the late 1930s.",
           "source_id": "wikipedia-sun-valley-idaho"
+        },
+        {
+          "criterion": "athlete_development",
+          "rationale": "Sun Valley was a training site for many nations' alpine and Nordic teams during the 2002 Winter Olympics and hosted the U.S. Alpine Championships on Warm Springs in 2016 and 2018; its Olympic medalists include Gretchen Fraser, Christin Cooper, Picabo Street and Kaitlyn Farrington.",
+          "source_id": "wikipedia-sun-valley-idaho"
         }
       ],
-      "tier_a_status": "draft",
-      "approval": null,
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "Approved in Career Map planning session"
+      },
       "owner": {
         "value": "R. Earl Holding family (Grand America Hotels & Resorts)",
         "source_id": "wikipedia-sun-valley-idaho",
         "as_of": "2026-10-11",
         "confidence": "published",
-        "note": null
+        "note": "Infobox owner. Earl Holding died in 2013 and Carol Holding in December 2024; their children continue to run the resort."
       },
       "lat": 43.655,
       "lon": -114.40917,
-      "location_source_id": "wikipedia-sun-valley-idaho",
+      "location_source_id": "wikipedia-bald-mountain-idaho",
       "cluster_id": "wood-river",
       "state": "ID",
       "size": {
         "acres": {
-          "value": 2829,
-          "source_id": "wikipedia-sun-valley-idaho",
+          "value": 2054,
+          "source_id": "wikipedia-bald-mountain-idaho",
           "as_of": "2026-10-11",
           "confidence": "published",
-          "note": "Bald Mountain and Dollar Mountain combined. The Bald Mountain article gives 2,054 acres and 15 lifts for Baldy alone."
+          "note": null
         },
         "vertical_ft": {
           "value": 3400,
-          "source_id": "wikipedia-sun-valley-idaho",
+          "source_id": "wikipedia-bald-mountain-idaho",
           "as_of": "2026-10-11",
           "confidence": "published",
-          "note": "Bald Mountain."
+          "note": null
         },
         "lifts": {
-          "value": 17,
-          "source_id": "wikipedia-sun-valley-idaho",
+          "value": 15,
+          "source_id": "wikipedia-bald-mountain-idaho",
           "as_of": "2026-10-11",
           "confidence": "published",
-          "note": "Bald Mountain and Dollar Mountain combined."
+          "note": "Infobox list (1 gondola, 2 six packs, 6 high speed quads, 2 triples, 1 surface lift sums to 12); the infobox total is 15 and the article body says fourteen."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
           "value": 5750,
-          "source_id": "wikipedia-sun-valley-idaho",
+          "source_id": "wikipedia-bald-mountain-idaho",
           "as_of": "2026-10-11",
           "confidence": "published",
-          "note": "River Run base of Bald Mountain."
+          "note": "River Run base."
         },
         "summit_ft": {
           "value": 9150,
-          "source_id": "wikipedia-sun-valley-idaho",
+          "source_id": "wikipedia-bald-mountain-idaho",
           "as_of": "2026-10-11",
           "confidence": "published",
           "note": null
@@ -36017,83 +36189,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
+        "wikipedia-bald-mountain-idaho",
         "wikipedia-sun-valley-idaho"
-      ]
-    },
-    {
-      "id": "sun-valley-dollar-mountain",
-      "name": "Sun Valley - Dollar Mountain",
-      "tier": "B",
-      "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 43.68219,
-      "lon": -114.34338,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "wood-river",
-      "state": "ID",
-      "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 622,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "lifts": {
-          "value": 5,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
-        },
-        "ski_school_staff_est": null
-      },
-      "elevation": {
-        "base_ft": {
-          "value": 5947,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
-        },
-        "summit_ft": {
-          "value": 6569,
-          "source_id": "openskimap-ski-areas",
-          "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
-        }
-      },
-      "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
-        "training_start": null
-      },
-      "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
-        "character_tags": []
-      },
-      "fit": {
-        "enthusiast_types": [],
-        "professional_types": []
-      },
-      "clients": {
-        "profile_tags": [],
-        "notes_md": null
-      },
-      "career": null,
-      "editorial": null,
-      "climate_available": false,
-      "sources": [
-        "openskimap-ski-areas"
       ]
     },
     {
@@ -36877,51 +36974,78 @@
       ]
     },
     {
-      "id": "taos-ski-valley",
+      "id": "taos",
       "name": "Taos Ski Valley",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 36.58053,
-      "lon": -105.45101,
-      "location_source_id": "openskimap-ski-areas",
-      "cluster_id": "other-nm",
+      "tier_a_criteria": [
+        {
+          "criterion": "heritage",
+          "rationale": "Ernie Blake founded Taos Ski Valley with his wife Rhoda and was inducted into the US Ski Hall of Fame in 1987.",
+          "source_id": "wikipedia-ernie-blake"
+        },
+        {
+          "criterion": "diehard",
+          "rationale": "Founded in 1955, Taos rates 51 percent of its 110 trails advanced or expert, prohibited snowboarding until March 2008, and was home to the Ernie Blake Snowsports School, one of the highest rated ski schools in North America.",
+          "source_id": "wikipedia-taos-ski-valley"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "Approved in Career Map planning session"
+      },
+      "owner": {
+        "value": "Louis Bacon (Taos Ski Valley, Inc.)",
+        "source_id": "wikipedia-taos-ski-valley",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "The Blake family sold Taos Ski Valley, Inc. to Louis Bacon in December 2013."
+      },
+      "lat": 36.59,
+      "lon": -105.43694,
+      "location_source_id": "wikipedia-taos-ski-valley",
+      "cluster_id": "northern-new-mexico",
       "state": "NM",
       "size": {
-        "acres": null,
-        "vertical_ft": {
-          "value": 3097,
-          "source_id": "openskimap-ski-areas",
+        "acres": {
+          "value": 1294,
+          "source_id": "wikipedia-taos-ski-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
+        },
+        "vertical_ft": {
+          "value": 3281,
+          "source_id": "wikipedia-taos-ski-valley",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
         },
         "lifts": {
           "value": 14,
-          "source_id": "openskimap-ski-areas",
+          "source_id": "wikipedia-taos-ski-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lifts mapped in OpenStreetMap (OpenSkiMap)"
+          "confidence": "published",
+          "note": "1 gondola, 4 quads, 4 triples, 1 double, 4 surface lifts."
         },
         "ski_school_staff_est": null
       },
       "elevation": {
         "base_ft": {
-          "value": 9351,
-          "source_id": "openskimap-ski-areas",
+          "value": 9200,
+          "source_id": "wikipedia-taos-ski-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": null
         },
         "summit_ft": {
-          "value": 12448,
-          "source_id": "openskimap-ski-areas",
+          "value": 12481,
+          "source_id": "wikipedia-taos-ski-valley",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Top of the Kachina lift."
         }
       },
       "season": {
@@ -36949,7 +37073,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "wikipedia-ernie-blake",
+        "wikipedia-taos-ski-valley"
       ]
     },
     {
@@ -42371,19 +42496,41 @@
     {
       "id": "yellowstone-club",
       "name": "Yellowstone Club",
-      "tier": "B",
+      "tier": "A",
       "facility_type": "ski_area",
-      "tier_a_criteria": [],
-      "tier_a_status": null,
-      "approval": null,
-      "owner": null,
-      "lat": 45.23966,
-      "lon": -111.43264,
-      "location_source_id": "openskimap-ski-areas",
+      "tier_a_criteria": [
+        {
+          "criterion": "luxury",
+          "rationale": "A private residential ski and golf club west of Big Sky, rated among the top 10 lifestyle estates in the world, with more than 500 member households and members including Bill Gates and Mark Zuckerberg.",
+          "source_id": "wikipedia-yellowstone-club"
+        }
+      ],
+      "tier_a_status": "approved",
+      "approval": {
+        "by": "site owner",
+        "date": "2026-10-11",
+        "note": "Approved in Career Map planning session"
+      },
+      "owner": {
+        "value": "CrossHarbor Capital Partners",
+        "source_id": "wikipedia-yellowstone-club",
+        "as_of": "2026-10-11",
+        "confidence": "published",
+        "note": "Bought for 115 million dollars in June 2009 out of Chapter 11 by CrossHarbor, a firm led by club member Sam Byrne; the article names CrossHarbor as the owner."
+      },
+      "lat": 45.23138,
+      "lon": -111.45126,
+      "location_source_id": "wikipedia-yellowstone-club",
       "cluster_id": "southwest-montana",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 2200,
+          "source_id": "wikipedia-yellowstone-club",
+          "as_of": "2026-10-11",
+          "confidence": "published",
+          "note": null
+        },
         "vertical_ft": {
           "value": 2670,
           "source_id": "openskimap-ski-areas",
@@ -42409,11 +42556,11 @@
           "note": "lowest mapped lift or downhill run elevation (OpenSkiMap)"
         },
         "summit_ft": {
-          "value": 9851,
-          "source_id": "openskimap-ski-areas",
+          "value": 9859,
+          "source_id": "wikipedia-yellowstone-club",
           "as_of": "2026-10-11",
-          "confidence": "estimated",
-          "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
+          "confidence": "published",
+          "note": "Summit of Pioneer Mountain, where most of the ski runs are."
         }
       },
       "season": {
@@ -42441,7 +42588,8 @@
       "editorial": null,
       "climate_available": false,
       "sources": [
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "wikipedia-yellowstone-club"
       ]
     }
   ]
