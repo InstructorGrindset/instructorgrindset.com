@@ -38,6 +38,8 @@ sources:
   - {id: wikipedia-powdr, url: https://en.wikipedia.org/wiki/Powdr, title: Powdr (Wikipedia), accessed_date: 2026-10-11}
 resorts:
   - id: jackson-hole
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Jackson Hole Mountain Resort
     state: WY
     owner: {value: "Eric Macy and Mike Corbat", source_id: wikipedia-jay-kemmerer, as_of: 2026-10-11, confidence: published, note: "Jay Kemmerer, who bought the resort for his family in 1992, sold it on February 1, 2024 to board members Eric Macy and Mike Corbat; the Kemmerer family remains an equity owner. Not confirmed on the resort site."}
@@ -57,6 +59,8 @@ resorts:
       summit_ft: {value: 10450, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published}
 
   - id: aspen-mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Aspen Mountain
     state: CO
     owner: {value: Aspen Skiing Company, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "The Aspen Skiing Company article says the company is owned by the Crown family of Illinois."}
@@ -76,6 +80,8 @@ resorts:
       summit_ft: {value: 11212, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
 
   - id: aspen-highlands
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Aspen Highlands
     state: CO
     owner: {value: Aspen Skiing Company, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published, note: "Aspen Skiing Company assumed ownership and operation in 1993 per its own article."}
@@ -94,6 +100,8 @@ resorts:
       summit_ft: {value: 12392, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published}
 
   - id: telluride
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Telluride Ski Resort
     state: CO
     owner: {value: Chuck Horning, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published, note: "Through Telluride Ski & Golf. The article says ownership passed to Horning in February 2004 and that he remains the current owner; that sentence is marked citation needed."}
@@ -156,6 +164,8 @@ resorts:
       summit_ft: {value: 6638, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
 
   - id: alta
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Alta Ski Area
     state: UT
     owner: {value: "Private shareholders (Laughlin family 51%, Quinney family 25%, Bass family 11%)", source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
@@ -174,6 +184,8 @@ resorts:
       summit_ft: {value: 11068, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
 
   - id: snowbird
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Snowbird
     state: UT
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "The POWDR article lists Snowbird among its ski resorts, citing the NSAA 2023 ownership list; POWDR was founded by John Cumming, son of Ian Cumming, who became Snowbird majority owner in 2014. Not confirmed on snowbird.com."}
@@ -192,6 +204,8 @@ resorts:
       summit_ft: {value: 11000, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published}
 
   - id: sugarloaf
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Sugarloaf
     state: ME
     owner: {value: Boyne Resorts, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner. The article body says American Skiing Company sold Sugarloaf to CNL Lifestyle Properties in 2007, to be managed by Boyne, and does not describe a later transfer to Boyne."}
@@ -210,6 +224,8 @@ resorts:
       summit_ft: {value: 4237, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
 
   - id: sugar-bowl
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Sugar Bowl Ski Resort
     state: CA
     owner: {value: Privately owned (independent), source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published, note: "The article calls it one of the few remaining privately owned resorts in the Lake Tahoe area but does not name the owner."}
@@ -229,6 +245,8 @@ resorts:
       summit_ft: {value: 8383, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published}
 
   - id: burke
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Burke Mountain Ski Area
     state: VT
     owner: {value: Bear Den Partners, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Purchased in April 2025 for a reported 11.5 million dollars after a period of federal receivership tied to the Jay Peak EB 5 case."}
@@ -247,6 +265,8 @@ resorts:
       summit_ft: {value: 3267, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published}
 
   - id: waterville-valley
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Waterville Valley Resort
     state: NH
     owner: {value: Sununu family and area investors, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published, note: "Purchased October 2010; the article says it remains independent."}

@@ -227,3 +227,4 @@ Each phase ends with acceptance criteria. Work one phase per Claude Code session
 | Season Income Calculator | Shared infrastructure later (Phase 9); not visualized in the map |
 | Owner additions (2026-10-11) | Big Sky, Taos, Snowmass, Buttermilk, Sun Valley, Dollar Mountain (its own record), Yellowstone Club and Deer Valley are approved Tier A. Indoor skiing and year round training facilities are included through the year round training criterion. Every Vail and Alterra US resort is approved Tier A through the operator compensation criterion |
 | Owner review of candidates (2026-10-11) | Grand Targhee and Mt Hood Meadows are approved Tier A (owner selection). Mt Rose, Loon, Bretton Woods and Smugglers' Notch stay Tier B |
+| Tier A approval (2026-10-11) | Owner approved every drafted Tier A record (independents, facilities, western and eastern candidates). The Section 3 approval gate is cleared; Phase 4 data collection can begin |

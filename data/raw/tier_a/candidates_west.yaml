@@ -10,12 +10,10 @@ status: draft            # for Alexandre's approval
 # Researched and left out (no fetched source supports a Tier A criterion as written):
 #   loveland (CO): opened 1936, Pete Seibert was GM in 1955; local favourite near Denver. State level history only.
 #   monarch (CO): opened 1939, "Bloody Ridge" legend; article flagged promotional. No criterion.
-#   mt-hood-meadows (OR): size and lift history only (30% double black terrain is not a culture source).
-#   grand-targhee (WY): snowfall and ownership history only.
 #   snow-king (WY): first ski area in Wyoming (1939), Jackson Hole Ski Club 1937. State level history only.
 #   brundage (ID): Corey Engen laid out trails; no criterion.
 #   mt-rose (NV): hosted the inaugural NCAA Skiing Championships (1954) and was the 1960 Olympic alternate
-#                 downhill site. Borderline heritage; flagged for Alexandre.
+#                 downhill site. Borderline heritage; the owner declined it.
 #   arizona-snowbowl (AZ): article covers the sacred peaks litigation and reclaimed water snowmaking only.
 #   ski-santa-fe (NM): first rope tow in New Mexico (1936), Ernie Blake managed it in 1950. State level history only.
 #   angel-fire (NM): ownership and finance history only.
@@ -42,10 +40,14 @@ sources:
   - {id: wikipedia-alyeska-resort, url: https://en.wikipedia.org/wiki/Alyeska_Resort, title: Alyeska Resort (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-bogus-basin, url: https://en.wikipedia.org/wiki/Bogus_Basin, title: Bogus Basin (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-montana-snowbowl, url: https://en.wikipedia.org/wiki/Montana_Snowbowl, title: Montana Snowbowl (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-grand-targhee-resort, url: https://en.wikipedia.org/wiki/Grand_Targhee_Resort, title: Grand Targhee Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mount-hood-meadows, url: https://en.wikipedia.org/wiki/Mount_Hood_Meadows, title: Mount Hood Meadows (Wikipedia), accessed_date: 2026-10-11}
 resorts:
   - id: copper-mountain
     name: Copper Mountain
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Bought from Intrawest in December 2009; the Copper Mountain article says the resort is operated by POWDR."}
     lat: 39.50167
@@ -66,6 +68,8 @@ resorts:
   - id: ski-cooper
     name: Ski Cooper
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: {value: Lake County, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published, note: "Managed by Cooper Hill Ski Area, a 501(c)4 nonprofit with a volunteer board."}
     lat: 39.36
@@ -85,6 +89,8 @@ resorts:
   - id: silverton-mountain
     name: Silverton Mountain
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: null   # article says founded by Aaron and Jen Brill in 2002 but does not state the current owner
     lat: 37.8847
@@ -104,6 +110,8 @@ resorts:
   - id: howelsen-hill
     name: Howelsen Hill Ski Area
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: {value: City of Steamboat Springs, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published, note: "Owned and operated by the Parks, Open Space and Recreation Department."}
     lat: 40.483
@@ -124,6 +132,8 @@ resorts:
   - id: brighton
     name: Brighton Ski Resort
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: UT
     owner: {value: Boyne Resorts, source_id: wikipedia-boyne-resorts, as_of: 2026-10-11, confidence: published, note: "Boyne bought Brighton in 1986, sold it in 2007 while leasing it back, and repurchased it in 2018."}
     lat: 40.6
@@ -143,6 +153,8 @@ resorts:
   - id: snowbasin
     name: Snowbasin
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: UT
     owner: {value: Earl Holding family, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: estimated, note: "The article says Earl Holding, owner of Sun Valley, bought the area in October 1984 and reports no later sale; current ownership not confirmed on the resort site."}
     lat: 41.216
@@ -162,6 +174,8 @@ resorts:
   - id: powder-mountain
     name: Powder Mountain
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: UT
     owner: {value: Reed Hastings, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "Acquired in 2023; Hastings serves as CEO and chairman."}
     lat: 41.38
@@ -181,6 +195,8 @@ resorts:
   - id: mt-bachelor
     name: Mt. Bachelor
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: OR
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Owned since 2001. POWDR announced a sale in August 2024 and later said it would keep Mt. Bachelor."}
     lat: 44.003
@@ -200,6 +216,8 @@ resorts:
   - id: timberline-lodge
     name: Timberline Lodge ski area
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: OR
     owner: {value: Kohnstamm family (operator), source_id: wikipedia-magic-mile, as_of: 2026-10-11, confidence: published, note: "The lodge is publicly owned by the U.S. Forest Service; Richard Kohnstamm took over operation in 1955 and his family still manages the resort. The summer Palmer program is a separate record (timberline-palmer-summer)."}
     lat: 45.33
@@ -219,6 +237,8 @@ resorts:
   - id: mt-baker
     name: Mt. Baker Ski Area
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: WA
     owner: null   # not stated in the article
     lat: 48.862
@@ -239,6 +259,8 @@ resorts:
   - id: bridger-bowl
     name: Bridger Bowl
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: MT
     owner: {value: Bridger Bowl (locally owned nonprofit), source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
     lat: 45.818
@@ -258,6 +280,8 @@ resorts:
   - id: whitefish-mountain
     name: Whitefish Mountain Resort
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: MT
     owner: {value: "Winter Sports, Inc.", source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says billionaire Bill Foley became majority shareholder in 2007 and reports no later change; not confirmed on the resort site."}
     lat: 48.5
@@ -277,6 +301,8 @@ resorts:
   - id: alyeska
     name: Alyeska Resort
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: AK
     owner: {value: Pomeroy Lodging, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: estimated, note: "The article reports an October 2018 contract to sell substantially all resort assets to Pomeroy Lodging; closing and current ownership not confirmed."}
     lat: 60.9705
@@ -297,6 +323,8 @@ resorts:
   - id: bogus-basin
     name: Bogus Basin
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: ID
     owner: {value: Bogus Basin Recreation Association (nonprofit), source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: estimated, note: "Operator per the article; that sentence is marked citation needed."}
     lat: 43.764
@@ -316,6 +344,8 @@ resorts:
   - id: montana-snowbowl
     name: Montana Snowbowl
     facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: MT
     owner: null   # not stated in the article
     lat: 47.02
@@ -331,3 +361,50 @@ resorts:
     elevation:
       base_ft: {value: 5000, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published, note: "Rounded in the infobox."}
       summit_ft: {value: 7600, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published, note: "Top of LaValle Creek chair, rounded."}
+
+  # Owner approved additions (coordinator message, 2026-10-11). Owner selection is the only criterion:
+  # neither article supports diehard, luxury, athlete_development, heritage or year_round_training
+  # (Grand Targhee's 500 inch snowfall is a snow fact, not a culture source).
+  - id: grand-targhee
+    name: Grand Targhee Resort
+    facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
+    state: WY
+    owner: {value: Gillett family, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says George and Rose Gillett and their four sons bought the resort from Booth Creek in June 2000 and reports no later sale; not confirmed on the resort site."}
+    lat: 43.789
+    lon: -110.957
+    location_source_id: wikipedia-grand-targhee-resort
+    cluster_hint: tetons
+    openskimap_names: ["Grand Targhee Resort"]
+    tier_a_criteria:
+      - {criterion: owner_selection, rationale: "Added to Tier A by owner decision.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: null         # infobox 3,000 acres (1,000 reserved for cat skiing) conflicts with the text's 2,602 acres
+      vertical_ft: null   # infobox 2,454 ft conflicts with the text's 2,270 ft
+      lifts: {value: 6, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-11, confidence: published, note: "1 high speed six pack, 2 high speed quads, 2 fixed grip quads, 1 magic carpet."}
+    elevation:
+      base_ft: null       # infobox 7,408 ft conflicts with the text's 7,851 ft
+      summit_ft: {value: 9862, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-11, confidence: published}
+
+  - id: mt-hood-meadows
+    name: Mt. Hood Meadows
+    facility_type: ski_area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
+    state: OR
+    owner: null   # not stated in the article
+    lat: 45.32889
+    lon: -121.6625
+    location_source_id: wikipedia-mount-hood-meadows
+    cluster_hint: mount-hood
+    openskimap_names: ["Mt. Hood Meadows Ski Resort"]
+    tier_a_criteria:
+      - {criterion: owner_selection, rationale: "Added to Tier A by owner decision.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 2150, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2777, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 11, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-11, confidence: published, note: "Chairlifts; the article's lift table lists 11."}
+    elevation:
+      base_ft: {value: 4523, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-11, confidence: published, note: "Hood River Meadows base, the lowest point; the main lodge is 5,366 ft."}
+      summit_ft: {value: 7300, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-11, confidence: published, note: "Infobox value; the text gives 7,305 ft at the top of Cascade Express."}

@@ -49,6 +49,8 @@ sources:
 resorts:
   # ---------------------------------------------------------------- New York
   - id: whiteface
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Whiteface Mountain
     facility_type: ski_area
     state: NY
@@ -69,6 +71,8 @@ resorts:
 
   # ---------------------------------------------------------------- Vermont
   - id: killington
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Killington Resort
     facility_type: ski_area
     state: VT
@@ -89,6 +93,8 @@ resorts:
       summit_ft: {value: 4241, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value; the statistics section gives Killington Peak as 4,229 ft."}
 
   - id: pico
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Pico Mountain
     facility_type: ski_area
     state: VT
@@ -108,6 +114,8 @@ resorts:
       summit_ft: {value: 3967, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
 
   - id: mad-river-glen
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Mad River Glen
     facility_type: ski_area
     state: VT
@@ -128,6 +136,8 @@ resorts:
       summit_ft: {value: 3637, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published}
 
   - id: jay-peak
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Jay Peak Resort
     facility_type: ski_area
     state: VT
@@ -147,6 +157,8 @@ resorts:
       summit_ft: {value: 3862, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published}
 
   - id: magic-mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Magic Mountain
     facility_type: ski_area
     state: VT
@@ -166,6 +178,8 @@ resorts:
       summit_ft: {value: 2850, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published}
 
   - id: hermitage-club
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Hermitage Club at Haystack Mountain
     facility_type: ski_area
     state: VT
@@ -182,6 +196,8 @@ resorts:
       lifts: {value: 4, source_id: wikipedia-haystack-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "1 heated bubble six pack, 2 quads, 1 triple."}
 
   - id: saskadena-six
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Saskadena Six
     facility_type: ski_area
     state: VT
@@ -201,6 +217,8 @@ resorts:
       summit_ft: {value: 1200, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published}
 
   - id: middlebury-snow-bowl
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Middlebury College Snow Bowl
     facility_type: ski_area
     state: VT
@@ -221,6 +239,8 @@ resorts:
 
   # ---------------------------------------------------------------- New Hampshire
   - id: cannon
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Cannon Mountain
     facility_type: ski_area
     state: NH
@@ -240,6 +260,8 @@ resorts:
       summit_ft: {value: 4080, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published}
 
   - id: cranmore
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Cranmore Mountain Resort
     facility_type: ski_area
     state: NH
@@ -256,6 +278,8 @@ resorts:
       lifts: {value: 7, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: published, note: "5 chairs and 2 surface lifts."}
 
   - id: gunstock
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Gunstock Mountain Resort
     facility_type: ski_area
     state: NH
@@ -276,6 +300,8 @@ resorts:
 
   # ---------------------------------------------------------------- Maine
   - id: sunday-river
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Sunday River
     facility_type: ski_area
     state: ME
@@ -295,6 +321,8 @@ resorts:
       summit_ft: {value: 3140, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published}
 
   - id: black-mountain-maine
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Black Mountain of Maine
     facility_type: ski_area
     state: ME
@@ -315,6 +343,8 @@ resorts:
 
   # ---------------------------------------------------------------- Massachusetts
   - id: berkshire-east
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Berkshire East Mountain Resort
     facility_type: ski_area
     state: MA
@@ -335,6 +365,8 @@ resorts:
 
   # ---------------------------------------------------------------- Michigan
   - id: boyne-mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Boyne Mountain Resort
     facility_type: ski_area
     state: MI
@@ -354,6 +386,8 @@ resorts:
       summit_ft: {value: 1152, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published}
 
   - id: the-highlands
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: The Highlands at Harbor Springs
     facility_type: ski_area
     state: MI
@@ -374,6 +408,8 @@ resorts:
       summit_ft: {value: 1316, source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-11, confidence: published}
 
   - id: mount-bohemia
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Mount Bohemia
     facility_type: ski_area
     state: MI
@@ -391,6 +427,8 @@ resorts:
 
   # ---------------------------------------------------------------- Minnesota
   - id: buck-hill
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Buck Hill
     facility_type: ski_area
     state: MN
@@ -410,6 +448,8 @@ resorts:
       summit_ft: {value: 1211, source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published}
 
   - id: hyland-hills
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Hyland Hills Ski Area
     facility_type: ski_area
     state: MN

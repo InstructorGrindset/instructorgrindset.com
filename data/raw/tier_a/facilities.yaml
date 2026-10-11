@@ -24,6 +24,8 @@ sources:
   - {id: openskimap-ski-areas, url: "https://openskimap.org/", title: "OpenSkiMap ski areas (derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-11, note: "repository extract data/raw/openskimap/us_ski_areas.geojson"}
 resorts:
   - id: big-snow-american-dream
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     openskimap_names: ["Big Snow American Dream"]
     name: Big SNOW American Dream
     facility_type: indoor
@@ -40,6 +42,8 @@ resorts:
       vertical_ft: {value: 160, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-11, confidence: published, note: "slopes are 1,000 ft long with a 26% maximum pitch"}
       lifts: {value: 4, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-11, confidence: published, note: "1 quad chair, 1 platter, 2 carpets"}
   - id: timberline-palmer-summer
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Timberline Palmer Snowfield summer camps
     facility_type: training_center
     state: OR
@@ -57,6 +61,8 @@ resorts:
     elevation:
       summit_ft: {value: 8500, source_id: wikipedia-palmer-glacier, as_of: 2026-10-11, confidence: published, note: "top of the Palmer chairlift"}
   - id: utah-olympic-park
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     openskimap_names: ["Utah Olympic Park"]
     name: Utah Olympic Park
     facility_type: training_center
@@ -71,6 +77,8 @@ resorts:
       - {criterion: athlete_development, rationale: "The water ramp hosts the U.S., Australian and other national teams for aerials and moguls, plus snowboard and freeski athletes.", source_id: wikipedia-aerials-water-ramps}
       - {criterion: heritage, rationale: "Built for the 2002 Winter Olympics and scheduled to host freestyle and snowboard events again at the 2034 Winter Olympics.", source_id: wikipedia-utah-olympic-park}
   - id: usss-center-of-excellence
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: U.S. Ski & Snowboard Center of Excellence
     facility_type: training_center
     state: UT
@@ -85,6 +93,8 @@ resorts:
       - {criterion: year_round_training, rationale: "The national training and education facility opened in 2009 with strength training areas, a gymnasium, ski and snowboard ramps, trampolines and rehabilitation facilities.", source_id: wikipedia-united-states-ski-team}
       - {criterion: athlete_development, rationale: "U.S. Ski & Snowboard moved into the Center of Excellence in May 2009; it serves as a training base for elite athletes and an education center.", source_id: wikipedia-us-ski-and-snowboard}
   - id: woodward-park-city
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     openskimap_names: ["Woodward"]
     name: Woodward Park City
     facility_type: training_center
@@ -97,6 +107,8 @@ resorts:
     tier_a_criteria:
       - {criterion: year_round_training, rationale: "Powdr opened Woodward Park City in December 2019, billed in its opening release as the nation's first year round action sports and ski resort.", source_id: wikipedia-powdr}
   - id: woodward-copper
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Woodward Copper
     facility_type: training_center
     state: CO
@@ -108,6 +120,8 @@ resorts:
     tier_a_criteria:
       - {criterion: year_round_training, rationale: "Woodward opened a 20,000 sq ft indoor ski and snowboard training facility at Copper in February 2009, dedicated to terrain park and half pipe training.", source_id: wikipedia-copper-mountain-colorado}
   - id: woodward-tahoe
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Woodward Tahoe
     facility_type: training_center
     state: CA
@@ -119,6 +133,8 @@ resorts:
     tier_a_criteria:
       - {criterion: year_round_training, rationale: "Boreal Mountain is home to Woodward Tahoe, a 33,000 sq ft action sports hub open year round.", source_id: wikipedia-boreal-mountain-resort}
   - id: lake-placid-olympic-jumping-complex
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
     name: Lake Placid Olympic Jumping Complex and Freestyle Aerial Training Center
     facility_type: training_center
     state: NY
