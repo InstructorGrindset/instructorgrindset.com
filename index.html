@@ -25,10 +25,7 @@
   --content-shift:0px;
   --hero-w:min(860px,calc((100vw - var(--sidebar)) * .7));
 }
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
-@media(max-width:960px){body{background-attachment:scroll}}
-a:focus-visible,.cta:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.main{padding:1.25rem;position:relative}
+.main{position:relative}
 .content{
   width:clamp(520px,var(--hero-w),1120px);
   margin-left:max(14px,calc((100vw - var(--sidebar) - clamp(520px,var(--hero-w),1120px))/2 - var(--content-shift)));
@@ -36,7 +33,7 @@ a:focus-visible,.cta:focus-visible{outline:2px solid var(--accent);outline-offse
 }
 
 /* Hero */
-h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
+h1,h2{letter-spacing:.2px}
 .hero-hook{
   font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;
   font-size:clamp(2rem,4.5vw,3.1rem);line-height:1.1;
@@ -44,22 +41,10 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
   text-shadow:0 0 22px rgba(var(--glow),.12);
   text-align:center;margin:0 0 1.75rem;
 }
-.hero-body{
-  color:var(--muted);font-size:clamp(1rem,1.1vw + .15rem,1.18rem);line-height:1.78;
-  max-width:66ch;text-align:center;margin:0 auto .9rem;
-}
-.hero-tagline{
-  font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:700;
-  font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--ink);
-  text-align:center;margin:1.5rem auto 0;max-width:50ch;line-height:1.45;
-}
 
 /* CTAs */
-.cta{display:inline-block;padding:.85rem 1.05rem;background:var(--cta);color:#e6e7eb;font-weight:800;border:0;border-radius:.4rem}
 .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;margin:2rem 0 0}
 .cta-row .cta{margin-top:0}
-.cta-outline{background:transparent;border:2px solid var(--cta);color:var(--cta)}
-.cta-outline:hover{background:rgba(196,137,42,.08);text-decoration:none}
 
 /* Video */
 .vid{
@@ -80,7 +65,7 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
   font-size:clamp(1.3rem,2vw,1.7rem);color:var(--ink);margin:0 0 .6rem;
 }
 .discovery-section p{color:var(--muted);font-size:.97rem;line-height:1.7;margin:0 0 1.4rem;max-width:72ch;margin-left:auto;margin-right:auto}
-.discovery-section .cta{border-radius:.4rem;min-width:160px}
+.discovery-section .cta{min-width:160px}
 
 /* Blog */
 .blog-latest{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--line)}
@@ -125,17 +110,17 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
 .discovery-section .rm-title{max-width:none;margin-left:0;margin-right:0}
 
 @media(max-width:640px){
-  .content{width:min(94vw,40rem)}
+  .content{width:auto;margin-left:0;margin-right:0}
   .cta-row{flex-direction:column;align-items:stretch}
-  .cta-row .cta,.cta-row .cta-outline{text-align:center;width:100%;max-width:480px;padding:1rem 1.25rem}
+  .cta-row .cta{text-align:center;width:100%;max-width:480px;padding:1rem 1.25rem}
   .discovery-section{padding:1.5rem 1.25rem}
 }
 @media(max-width:480px){
   .rm-row{grid-template-columns:36px 1fr;gap:0 1rem}
   .rm-num{width:36px;height:36px;font-size:.85rem}
   .rm-row:not(.rm-row--last) .rm-num::after{top:36px;height:calc(100% - 36px + 2rem)}
+  .pillar-tags span{white-space:normal}
 }
-@media(max-width:380px){.content{width:92vw}}
 
 /* Assessment checklist */
 .assess-questions{display:flex;flex-direction:column;gap:.6rem;margin:1.5rem 0 1.25rem;text-align:left}
@@ -153,13 +138,13 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
 .yn-opt input{position:absolute;opacity:0;pointer-events:none}
 .yn-opt span{
   display:inline-flex;align-items:center;justify-content:center;
-  width:2.5rem;height:1.9rem;border-radius:.35rem;
+  width:2.75rem;height:2.75rem;border-radius:.35rem;
   border:1.5px solid #3a4155;background:transparent;
   font-size:.75rem;font-weight:700;color:var(--muted);cursor:pointer;
   transition:all .15s;
 }
 .yn-opt input:checked + span{border-color:var(--cta);background:rgba(196,137,42,.18);color:var(--cta)}
-.assess-err{font-size:.82rem;color:#c0392b;margin:.5rem 0 0;text-align:center;min-height:1.1rem}
+.yn-opt input:focus-visible + span{outline:2px solid var(--cta);outline-offset:2px}
 @media(max-width:580px){
   .assess-row{grid-template-columns:1.8rem 1fr;grid-template-rows:auto auto;gap:.4rem .6rem}
   .assess-yn{grid-column:2}
@@ -176,9 +161,9 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
       <div class="content">
 
         <!-- Hero -->
-        <p class="hero-hook">Career Development For Snowsports Instructors</p>
+        <h1 class="hero-hook">Career Development For Snowsports Instructors</h1>
         <div class="cta-row">
-          <a class="cta" href="/contact">Free Consultation</a>
+          <a class="cta" href="/contact/">Free Consultation</a>
         </div>
 
         <!-- Discovery Call -->
@@ -226,47 +211,46 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
           <div class="assess-questions" id="assessChecklist">
             <div class="assess-row">
               <span class="assess-num">01</span>
-              <span class="assess-q">Do you know your position on your school's priority list?</span>
-              <div class="assess-yn">
+              <span class="assess-q" id="aq1">Do you know your position on your school's priority list?</span>
+              <div class="assess-yn" role="radiogroup" aria-labelledby="aq1">
                 <label class="yn-opt"><input type="radio" name="q1" value="Yes"><span>YES</span></label>
                 <label class="yn-opt"><input type="radio" name="q1" value="No"><span>NO</span></label>
               </div>
             </div>
             <div class="assess-row">
               <span class="assess-num">02</span>
-              <span class="assess-q">Do you have a plan for your skiing outside of the realm of certification?</span>
-              <div class="assess-yn">
+              <span class="assess-q" id="aq2">Do you have a plan for your skiing outside of the realm of certification?</span>
+              <div class="assess-yn" role="radiogroup" aria-labelledby="aq2">
                 <label class="yn-opt"><input type="radio" name="q2" value="Yes"><span>YES</span></label>
                 <label class="yn-opt"><input type="radio" name="q2" value="No"><span>NO</span></label>
               </div>
             </div>
             <div class="assess-row">
               <span class="assess-num">03</span>
-              <span class="assess-q">Do you train year-round?</span>
-              <div class="assess-yn">
+              <span class="assess-q" id="aq3">Do you train year-round?</span>
+              <div class="assess-yn" role="radiogroup" aria-labelledby="aq3">
                 <label class="yn-opt"><input type="radio" name="q3" value="Yes"><span>YES</span></label>
                 <label class="yn-opt"><input type="radio" name="q3" value="No"><span>NO</span></label>
               </div>
             </div>
             <div class="assess-row">
               <span class="assess-num">04</span>
-              <span class="assess-q">Do you have a mentor relationship with a fully certified instructor?</span>
-              <div class="assess-yn">
+              <span class="assess-q" id="aq4">Do you have a mentor relationship with a fully certified instructor?</span>
+              <div class="assess-yn" role="radiogroup" aria-labelledby="aq4">
                 <label class="yn-opt"><input type="radio" name="q7" value="Yes"><span>YES</span></label>
                 <label class="yn-opt"><input type="radio" name="q7" value="No"><span>NO</span></label>
               </div>
             </div>
             <div class="assess-row">
               <span class="assess-num">05</span>
-              <span class="assess-q">Do you have an off-season plan more active than "wait for snow"?</span>
-              <div class="assess-yn">
+              <span class="assess-q" id="aq5">Do you have an off-season plan more active than "wait for snow"?</span>
+              <div class="assess-yn" role="radiogroup" aria-labelledby="aq5">
                 <label class="yn-opt"><input type="radio" name="q8" value="Yes"><span>YES</span></label>
                 <label class="yn-opt"><input type="radio" name="q8" value="No"><span>NO</span></label>
               </div>
             </div>
           </div>
-          <p class="assess-err" id="assess-err" aria-live="polite"></p>
-          <button class="cta" id="scheduleBtn">Schedule Your Free Call</button>
+          <button type="button" class="cta" id="scheduleBtn">Schedule Your Free Call</button>
         </section>
 
         <div class="vid" id="intro-video">
@@ -318,17 +302,15 @@ h1,h2{font-family:"Rooftop",Inter,Arial,sans-serif;letter-spacing:.2px}
 <script>
 (function(){
   var btn=document.getElementById('scheduleBtn');
-  var errEl=document.getElementById('assess-err');
   var names=['q1','q2','q3','q7','q8'];
   btn.addEventListener('click',function(){
-    errEl.textContent='';
     var params=new URLSearchParams();
     for(var i=0;i<names.length;i++){
       var sel=document.querySelector('input[name="'+names[i]+'"]:checked');
       if(sel) params.set(names[i],sel.value);
     }
     var qs=params.toString();
-    window.location.href='/contact'+(qs?'?'+qs:'');
+    window.location.href='/contact/'+(qs?'?'+qs:'');
   });
 })();
 </script>

@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • My Story</title>
   <meta name="description" content="My Story — early life, career milestones, certifications, and future plans." />
+  <link rel="canonical" href="https://instructorgrindset.com/my-career/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instructor Grindset • My Story">
+  <meta property="og:description" content="My Story — early life, career milestones, certifications, and future plans.">
+  <meta property="og:url" content="https://instructorgrindset.com/my-career/">
 
   <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <!-- Shared sidebar styles -->
   <link rel="stylesheet" href="/assets/global.css?v=2">
@@ -28,16 +35,6 @@
       --rail-top: 36px;          /* tweak to sit just under Early Life */
       --rail-bottom: 36px;       /* tweak to sit just above Future */
     }
-    body{
-      margin:0; color:var(--ink);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height:1.55;
-      background:var(--bg) url("/images/web-background.png") center/cover no-repeat fixed;
-    }
-
-    /* Rooftop headings (fallbacks if files absent) */
-
-    /* Shell */
 
     /* Content centering w.r.t. sidebar */
     .content{
@@ -46,18 +43,16 @@
       margin-right:auto; padding-top:2rem;
     }
     @media (max-width:960px){
-      body{ background-attachment:scroll }
-      .content{ width:min(94vw, 1200px); margin:0 auto; padding-top:1.25rem }
+      .content{ width:100%; margin:0 auto; padding-top:1.25rem }
     }
 
     /* Title */
-    h1,h2,h3{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
+    h1,h2,h3{ letter-spacing:.2px }
     h1{
       font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem); line-height:1.08; margin:0 0 1rem; text-align:center;
       background:linear-gradient(92deg,#fff,#eaeefc); -webkit-background-clip:text; background-clip:text; color:transparent;
       text-shadow:0 0 22px rgba(var(--glow),.12);
     }
-    .intro{ text-align:center; color:var(--muted); max-width:70ch; margin:0 auto 1.25rem }
 
     /* ===== Timeline layout ===== */
     .timeline-wrap{ position:relative; margin-top:18px }
@@ -75,7 +70,6 @@
       background:rgba(255,255,255,.07); color:var(--ink); border-left: var(--rail) solid var(--rail-color);
       border-radius:.8rem; padding:1rem 1.1rem; box-shadow:0 0 20px rgba(196,137,42,.15);
     }
-    .early h2{ margin:.1rem 0 .5rem; font-weight:800; font-size:1.15rem; color:var(--cta) }
 
     /* Rows: each year is one row with L/R columns */
     .rows{ margin-top:10px }
@@ -104,34 +98,25 @@
 
     /* Future (centered below timeline, no visible rail end) */
     .future-center{ max-width:900px; margin:0 auto }
-    .future .cta{
-      display:inline-block; margin-top:.75rem; padding:.85rem 1.05rem; border-radius:0;
-      background:var(--cta); color:#e6e7eb; font-weight:800; border:0; text-decoration:none;
-    }
+    .future .cta{ margin-top:.75rem }
 
     /* Responsive */
     @media (max-width:1100px){ :root{ --col-gap:22px } }
     @media (max-width:860px){
       .row{ grid-template-columns:1fr; column-gap:0 }
+      .timeline-wrap::before{ display:none }
     }
-
-    /* Footer */
-    .footer-wrap{
-      position:fixed; left:var(--sidebar); right:0; bottom:0; height:var(--footer-h);
-      display:grid; place-items:center; background:rgba(0,0,0,.25); border-top:1px solid var(--line); backdrop-filter:blur(2px)
-    }
-
-    .footer{ color:var(--muted); text-align:center; margin:0 }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="page">
     <!-- Shared sidebar (loads from /partials/sidebar.html) -->
     <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
     <script src="/assets/nav.js?v=14"></script>
 
     <!-- MAIN -->
-    <main class="main">
+    <main class="main" id="main">
       <div class="content">
         <h1>My Story</h1>
         <!-- Story opening -->
@@ -191,7 +176,6 @@
               </div>
               <div class="right entry">
                 <div class="box">
-                  <h3></h3>
                   <p>Attained NZSIA Alpine I certification.</p>
                 </div>
               </div>
@@ -240,7 +224,6 @@
               </div>
               <div class="right entry">
                 <div class="box">
-                  <h3></h3>
                   <p>Passed PSIA Children’s Specialist I, Alpine Technical II and Freestyle Specialist I certifications.</p>
                 </div>
               </div>
@@ -256,7 +239,6 @@
               </div>
               <div class="right entry">
                 <div class="box">
-                  <h3></h3>
                   <p>Passed Freestyle Specialist II certification.</p>
                 </div>
               </div>
@@ -283,7 +265,6 @@
               </div>
               <div class="right entry">
                 <div class="box">
-                  <h3></h3>
                   <p>Enrolled in the Penn State University Snowsports Leadership Development non-degree Major. Attained Alpine II, Freestyle Specialist III certifications.</p>
                 </div>
               </div>
@@ -299,7 +280,6 @@
               </div>
               <div class="right entry">
                 <div class="box">
-                  <h3></h3>
                   <p>Attained Penn State University Snowsports Leadership Development Level I.</p>
                 </div>
               </div>
@@ -313,7 +293,7 @@
               <div class="box">
                 <h3>Future</h3>
                 <p>Share my knowledge and experience with other North American snowsports instructors and show you the tools to uplift your creative willpower and teach consistently magic lessons.</p>
-                <a class="cta" href="https://instructorgrindset.com/mission-vision">Mission &amp; Vision →</a>
+                <a class="cta" href="/mission-vision/">Mission &amp; Vision →</a>
               </div>
             </div>
           </div>
