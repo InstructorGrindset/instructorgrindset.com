@@ -435,3 +435,12 @@ body.list-mode .detail-layers { display: none; }
 .form-error:empty { display: none; }
 .form-status { margin: 0; color: var(--ink); font-size: var(--text-xs); }
 .report-form .btn { justify-self: start; }
+
+/* ── Performance (Phase 8) ──
+   The site background image sits behind the full height map and panel, so the map page skips it (saves about 480 KB).
+   Headings fall back to Inter here: /fonts/Rooftop-*.woff2 is referenced by global.css but absent from the
+   repository, and requesting it only produces a 404. */
+body.map-page { background: var(--bg); }
+.map-page h1, .map-page h2, .map-page h3, .map-page h4, .map-page .brand .name, .map-page .brand .name a, .map-page .nav h4 {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}

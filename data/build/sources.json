@@ -1,7 +1,1428 @@
 {
   "version": 1,
-  "generated_at": "2026-10-12T00:39:19Z",
+  "generated_at": "2026-10-12T02:36:52Z",
   "sources": [
+    {
+      "id": "ed-clusters-wikipedia-alta-utah",
+      "url": "https://en.wikipedia.org/wiki/Alta,_Utah",
+      "title": "Alta, Utah (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-alyeska-resort",
+      "url": "https://en.wikipedia.org/wiki/Alyeska_Resort",
+      "title": "Alyeska Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-anchorage-alaska",
+      "url": "https://en.wikipedia.org/wiki/Anchorage,_Alaska",
+      "title": "Anchorage, Alaska (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-angel-fire-new-mexico",
+      "url": "https://en.wikipedia.org/wiki/Angel_Fire,_New_Mexico",
+      "title": "Angel Fire, New Mexico (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-angel-fire-resort",
+      "url": "https://en.wikipedia.org/wiki/Angel_Fire_Resort",
+      "title": "Angel Fire Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-arctic-valley-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Arctic_Valley_Ski_Area",
+      "title": "Arctic Valley Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-aspen-colorado",
+      "url": "https://en.wikipedia.org/wiki/Aspen,_Colorado",
+      "title": "Aspen, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-aspen-skiing-company",
+      "url": "https://en.wikipedia.org/wiki/Aspen_Skiing_Company",
+      "title": "Aspen Skiing Company (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-badger-pass-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Badger_Pass_Ski_Area",
+      "title": "Badger Pass Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bald-mountain-idaho",
+      "url": "https://en.wikipedia.org/wiki/Bald_Mountain_(Idaho)",
+      "title": "Bald Mountain (Idaho) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-basalt-colorado",
+      "url": "https://en.wikipedia.org/wiki/Basalt,_Colorado",
+      "title": "Basalt, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bath-county-virginia",
+      "url": "https://en.wikipedia.org/wiki/Bath_County,_Virginia",
+      "title": "Bath County, Virginia (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-belleayre-mountain",
+      "url": "https://en.wikipedia.org/wiki/Belleayre_Mountain",
+      "title": "Belleayre Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bend-oregon",
+      "url": "https://en.wikipedia.org/wiki/Bend,_Oregon",
+      "title": "Bend, Oregon (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bennington-county-vermont",
+      "url": "https://en.wikipedia.org/wiki/Bennington_County,_Vermont",
+      "title": "Bennington County, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bethel-maine",
+      "url": "https://en.wikipedia.org/wiki/Bethel,_Maine",
+      "title": "Bethel, Maine (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-big-bear-lake-california",
+      "url": "https://en.wikipedia.org/wiki/Big_Bear_Lake,_California",
+      "title": "Big Bear Lake, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-big-cottonwood-canyon",
+      "url": "https://en.wikipedia.org/wiki/Big_Cottonwood_Canyon",
+      "title": "Big Cottonwood Canyon (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-big-sky-montana",
+      "url": "https://en.wikipedia.org/wiki/Big_Sky,_Montana",
+      "title": "Big Sky, Montana (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-big-sky-resort",
+      "url": "https://en.wikipedia.org/wiki/Big_Sky_Resort",
+      "title": "Big Sky Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-big-snow-american-dream",
+      "url": "https://en.wikipedia.org/wiki/Big_Snow_American_Dream",
+      "title": "Big Snow American Dream (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-blaine-county-idaho",
+      "url": "https://en.wikipedia.org/wiki/Blaine_County,_Idaho",
+      "title": "Blaine County, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-blue-knob-state-park",
+      "url": "https://en.wikipedia.org/wiki/Blue_Knob_State_Park",
+      "title": "Blue Knob State Park (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-blue-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Blue_Mountain_Resort",
+      "title": "Blue Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bolton-valley",
+      "url": "https://en.wikipedia.org/wiki/Bolton_Valley",
+      "title": "Bolton Valley (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-boyce-park",
+      "url": "https://en.wikipedia.org/wiki/Boyce_Park",
+      "title": "Boyce Park (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bozeman-montana",
+      "url": "https://en.wikipedia.org/wiki/Bozeman,_Montana",
+      "title": "Bozeman, Montana (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-breckenridge-colorado",
+      "url": "https://en.wikipedia.org/wiki/Breckenridge,_Colorado",
+      "title": "Breckenridge, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bretton-woods-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Bretton_Woods_Mountain_Resort",
+      "title": "Bretton Woods Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bridger-bowl-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Bridger_Bowl_Ski_Area",
+      "title": "Bridger Bowl Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-bromley-mountain",
+      "url": "https://en.wikipedia.org/wiki/Bromley_Mountain",
+      "title": "Bromley Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-burke-mountain-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Burke_Mountain_Ski_Area",
+      "title": "Burke Mountain Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-burlington-vermont",
+      "url": "https://en.wikipedia.org/wiki/Burlington,_Vermont",
+      "title": "Burlington, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-camelback-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Camelback_Mountain_Resort",
+      "title": "Camelback Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-campgaw-mountain",
+      "url": "https://en.wikipedia.org/wiki/Campgaw_Mountain",
+      "title": "Campgaw Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-cannon-mountain-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Cannon_Mountain_Ski_Area",
+      "title": "Cannon Mountain Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-carbondale-colorado",
+      "url": "https://en.wikipedia.org/wiki/Carbondale,_Colorado",
+      "title": "Carbondale, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-carrabassett-valley-maine",
+      "url": "https://en.wikipedia.org/wiki/Carrabassett_Valley,_Maine",
+      "title": "Carrabassett Valley, Maine (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-carroll-county-new-hampshire",
+      "url": "https://en.wikipedia.org/wiki/Carroll_County,_New_Hampshire",
+      "title": "Carroll County, New Hampshire (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-catskill-mountains",
+      "url": "https://en.wikipedia.org/wiki/Catskill_Mountains",
+      "title": "Catskill Mountains (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-china-peak",
+      "url": "https://en.wikipedia.org/wiki/China_Peak",
+      "title": "China Peak (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-conway-new-hampshire",
+      "url": "https://en.wikipedia.org/wiki/Conway,_New_Hampshire",
+      "title": "Conway, New Hampshire (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-crested-butte-colorado",
+      "url": "https://en.wikipedia.org/wiki/Crested_Butte,_Colorado",
+      "title": "Crested Butte, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-crystal-mountain-washington",
+      "url": "https://en.wikipedia.org/wiki/Crystal_Mountain_(Washington)",
+      "title": "Crystal Mountain (Washington) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-deschutes-county-oregon",
+      "url": "https://en.wikipedia.org/wiki/Deschutes_County,_Oregon",
+      "title": "Deschutes County, Oregon (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-dover-vermont",
+      "url": "https://en.wikipedia.org/wiki/Dover,_Vermont",
+      "title": "Dover, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-driggs-idaho",
+      "url": "https://en.wikipedia.org/wiki/Driggs,_Idaho",
+      "title": "Driggs, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-durango-colorado",
+      "url": "https://en.wikipedia.org/wiki/Durango,_Colorado",
+      "title": "Durango, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-eagle-county-colorado",
+      "url": "https://en.wikipedia.org/wiki/Eagle_County,_Colorado",
+      "title": "Eagle County, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-eldora-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Eldora_Mountain_Resort",
+      "title": "Eldora Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-elk-mountain-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area",
+      "title": "Elk Mountain Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-flathead-county-montana",
+      "url": "https://en.wikipedia.org/wiki/Flathead_County,_Montana",
+      "title": "Flathead County, Montana (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-franklin-county-maine",
+      "url": "https://en.wikipedia.org/wiki/Franklin_County,_Maine",
+      "title": "Franklin County, Maine (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-gallatin-county-montana",
+      "url": "https://en.wikipedia.org/wiki/Gallatin_County,_Montana",
+      "title": "Gallatin County, Montana (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-girdwood-anchorage-alaska",
+      "url": "https://en.wikipedia.org/wiki/Girdwood,_Anchorage,_Alaska",
+      "title": "Girdwood, Anchorage, Alaska (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-glenwood-springs-colorado",
+      "url": "https://en.wikipedia.org/wiki/Glenwood_Springs,_Colorado",
+      "title": "Glenwood Springs, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-gore-mountain-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Gore_Mountain_(ski_resort)",
+      "title": "Gore Mountain (ski resort) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-government-camp-oregon",
+      "url": "https://en.wikipedia.org/wiki/Government_Camp,_Oregon",
+      "title": "Government Camp, Oregon (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-grand-targhee-resort",
+      "url": "https://en.wikipedia.org/wiki/Grand_Targhee_Resort",
+      "title": "Grand Targhee Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-greene-county-new-york",
+      "url": "https://en.wikipedia.org/wiki/Greene_County,_New_York",
+      "title": "Greene County, New York (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-gunnison-county-colorado",
+      "url": "https://en.wikipedia.org/wiki/Gunnison_County,_Colorado",
+      "title": "Gunnison County, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-hailey-idaho",
+      "url": "https://en.wikipedia.org/wiki/Hailey,_Idaho",
+      "title": "Hailey, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-haystack-mountain-vermont",
+      "url": "https://en.wikipedia.org/wiki/Haystack_Mountain_(Vermont)",
+      "title": "Haystack Mountain (Vermont) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-hidden-valley-resort-pennsylvania",
+      "url": "https://en.wikipedia.org/wiki/Hidden_Valley_Resort_(Pennsylvania)",
+      "title": "Hidden Valley Resort (Pennsylvania) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-hood-river-oregon",
+      "url": "https://en.wikipedia.org/wiki/Hood_River,_Oregon",
+      "title": "Hood River, Oregon (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-hoodoo-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Hoodoo_(ski_area)",
+      "title": "Hoodoo (ski area) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-howelsen-hill-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Howelsen_Hill_Ski_Area",
+      "title": "Howelsen Hill Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-hunter-mountain-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Hunter_Mountain_(ski_area)",
+      "title": "Hunter Mountain (ski area) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-hunter-new-york",
+      "url": "https://en.wikipedia.org/wiki/Hunter,_New_York",
+      "title": "Hunter, New York (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-incline-village-nevada",
+      "url": "https://en.wikipedia.org/wiki/Incline_Village,_Nevada",
+      "title": "Incline Village, Nevada (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-inland-northwest",
+      "url": "https://en.wikipedia.org/wiki/Inland_Northwest",
+      "title": "Inland Northwest (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-interstate-70-in-colorado",
+      "url": "https://en.wikipedia.org/wiki/Interstate_70_in_Colorado",
+      "title": "Interstate 70 in Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-jackson-wyoming",
+      "url": "https://en.wikipedia.org/wiki/Jackson,_Wyoming",
+      "title": "Jackson, Wyoming (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-jay-peak-resort",
+      "url": "https://en.wikipedia.org/wiki/Jay_Peak_Resort",
+      "title": "Jay Peak Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-june-lake-california",
+      "url": "https://en.wikipedia.org/wiki/June_Lake,_California",
+      "title": "June Lake, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-ketchum-idaho",
+      "url": "https://en.wikipedia.org/wiki/Ketchum,_Idaho",
+      "title": "Ketchum, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-killington-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Killington_Ski_Resort",
+      "title": "Killington Ski Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-killington-vermont",
+      "url": "https://en.wikipedia.org/wiki/Killington,_Vermont",
+      "title": "Killington, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-lake-placid-new-york",
+      "url": "https://en.wikipedia.org/wiki/Lake_Placid,_New_York",
+      "title": "Lake Placid, New York (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-lake-tahoe",
+      "url": "https://en.wikipedia.org/wiki/Lake_Tahoe",
+      "title": "Lake Tahoe (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-lamoille-county-vermont",
+      "url": "https://en.wikipedia.org/wiki/Lamoille_County,_Vermont",
+      "title": "Lamoille County, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-laurel-highlands",
+      "url": "https://en.wikipedia.org/wiki/Laurel_Highlands",
+      "title": "Laurel Highlands (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-laurel-mountain-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Laurel_Mountain_Ski_Resort",
+      "title": "Laurel Mountain Ski Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-leavenworth-washington",
+      "url": "https://en.wikipedia.org/wiki/Leavenworth,_Washington",
+      "title": "Leavenworth, Washington (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-lincoln-new-hampshire",
+      "url": "https://en.wikipedia.org/wiki/Lincoln,_New_Hampshire",
+      "title": "Lincoln, New Hampshire (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-little-cottonwood-canyon",
+      "url": "https://en.wikipedia.org/wiki/Little_Cottonwood_Canyon",
+      "title": "Little Cottonwood Canyon (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-loon-mountain",
+      "url": "https://en.wikipedia.org/wiki/Loon_Mountain",
+      "title": "Loon Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-loveland-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Loveland_Ski_Area",
+      "title": "Loveland Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-ludlow-town-vermont",
+      "url": "https://en.wikipedia.org/wiki/Ludlow_(town),_Vermont",
+      "title": "Ludlow (town), Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mad-river-glen",
+      "url": "https://en.wikipedia.org/wiki/Mad_River_Glen",
+      "title": "Mad River Glen (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-magic-mountain-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Magic_Mountain_Ski_Area",
+      "title": "Magic Mountain Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mammoth-lakes-california",
+      "url": "https://en.wikipedia.org/wiki/Mammoth_Lakes,_California",
+      "title": "Mammoth Lakes, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mammoth-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Mammoth_Mountain_Resort",
+      "title": "Mammoth Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-manchester-vermont",
+      "url": "https://en.wikipedia.org/wiki/Manchester,_Vermont",
+      "title": "Manchester, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mission-ridge-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Mission_Ridge_Ski_Area",
+      "title": "Mission Ridge Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-monarch-mountain-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Monarch_Mountain_(ski_area)",
+      "title": "Monarch Mountain (ski area) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mono-county-california",
+      "url": "https://en.wikipedia.org/wiki/Mono_County,_California",
+      "title": "Mono County, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-monroe-county-pennsylvania",
+      "url": "https://en.wikipedia.org/wiki/Monroe_County,_Pennsylvania",
+      "title": "Monroe County, Pennsylvania (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-montage-mountain-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Montage_Mountain_Ski_Resort",
+      "title": "Montage Mountain Ski Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mount-bachelor-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Mount_Bachelor_ski_area",
+      "title": "Mount Bachelor ski area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mount-baldy-ski-lifts",
+      "url": "https://en.wikipedia.org/wiki/Mount_Baldy_Ski_Lifts",
+      "title": "Mount Baldy Ski Lifts (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mount-hood",
+      "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+      "title": "Mount Hood (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mount-hood-meadows",
+      "url": "https://en.wikipedia.org/wiki/Mount_Hood_Meadows",
+      "title": "Mount Hood Meadows (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mount-peter-new-york",
+      "url": "https://en.wikipedia.org/wiki/Mount_Peter_(New_York)",
+      "title": "Mount Peter (New York) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mount-snow",
+      "url": "https://en.wikipedia.org/wiki/Mount_Snow",
+      "title": "Mount Snow (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mount-spokane-ski-and-snowboard-park",
+      "url": "https://en.wikipedia.org/wiki/Mount_Spokane_Ski_and_Snowboard_Park",
+      "title": "Mount Spokane Ski and Snowboard Park (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mountain-creek",
+      "url": "https://en.wikipedia.org/wiki/Mountain_Creek",
+      "title": "Mountain Creek (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mountain-high",
+      "url": "https://en.wikipedia.org/wiki/Mountain_High",
+      "title": "Mountain High (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mountain-village-colorado",
+      "url": "https://en.wikipedia.org/wiki/Mountain_Village,_Colorado",
+      "title": "Mountain Village, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-mt-baker-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Mt._Baker_Ski_Area",
+      "title": "Mt. Baker Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-new-york-metropolitan-area",
+      "url": "https://en.wikipedia.org/wiki/New_York_metropolitan_area",
+      "title": "New York metropolitan area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-newry-maine",
+      "url": "https://en.wikipedia.org/wiki/Newry,_Maine",
+      "title": "Newry, Maine (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-north-conway-new-hampshire",
+      "url": "https://en.wikipedia.org/wiki/North_Conway,_New_Hampshire",
+      "title": "North Conway, New Hampshire (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-north-creek-new-york",
+      "url": "https://en.wikipedia.org/wiki/North_Creek,_New_York",
+      "title": "North Creek, New York (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-ogden-utah",
+      "url": "https://en.wikipedia.org/wiki/Ogden,_Utah",
+      "title": "Ogden, Utah (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-okemo-mountain",
+      "url": "https://en.wikipedia.org/wiki/Okemo_Mountain",
+      "title": "Okemo Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-olympic-valley-california",
+      "url": "https://en.wikipedia.org/wiki/Olympic_Valley,_California",
+      "title": "Olympic Valley, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-oxford-county-maine",
+      "url": "https://en.wikipedia.org/wiki/Oxford_County,_Maine",
+      "title": "Oxford County, Maine (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-palisades-tahoe",
+      "url": "https://en.wikipedia.org/wiki/Palisades_Tahoe",
+      "title": "Palisades Tahoe (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-park-city-utah",
+      "url": "https://en.wikipedia.org/wiki/Park_City,_Utah",
+      "title": "Park City, Utah (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-pico-mountain",
+      "url": "https://en.wikipedia.org/wiki/Pico_Mountain",
+      "title": "Pico Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-plattekill-mountain",
+      "url": "https://en.wikipedia.org/wiki/Plattekill_Mountain",
+      "title": "Plattekill Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-pocahontas-county-west-virginia",
+      "url": "https://en.wikipedia.org/wiki/Pocahontas_County,_West_Virginia",
+      "title": "Pocahontas County, West Virginia (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-pocono-mountains",
+      "url": "https://en.wikipedia.org/wiki/Pocono_Mountains",
+      "title": "Pocono Mountains (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-purgatory-resort",
+      "url": "https://en.wikipedia.org/wiki/Purgatory_Resort",
+      "title": "Purgatory Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-rangeley-maine",
+      "url": "https://en.wikipedia.org/wiki/Rangeley,_Maine",
+      "title": "Rangeley, Maine (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-red-river-new-mexico",
+      "url": "https://en.wikipedia.org/wiki/Red_River,_New_Mexico",
+      "title": "Red River, New Mexico (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-reno-nevada",
+      "url": "https://en.wikipedia.org/wiki/Reno,_Nevada",
+      "title": "Reno, Nevada (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-roaring-fork-valley",
+      "url": "https://en.wikipedia.org/wiki/Roaring_Fork_Valley",
+      "title": "Roaring Fork Valley (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-routt-county-colorado",
+      "url": "https://en.wikipedia.org/wiki/Routt_County,_Colorado",
+      "title": "Routt County, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-rutland-city-vermont",
+      "url": "https://en.wikipedia.org/wiki/Rutland_(city),_Vermont",
+      "title": "Rutland (city), Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-saddleback-maine",
+      "url": "https://en.wikipedia.org/wiki/Saddleback_Maine",
+      "title": "Saddleback Maine (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-salt-lake-city",
+      "url": "https://en.wikipedia.org/wiki/Salt_Lake_City",
+      "title": "Salt Lake City (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-san-bernardino-mountains",
+      "url": "https://en.wikipedia.org/wiki/San_Bernardino_Mountains",
+      "title": "San Bernardino Mountains (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sandpoint-idaho",
+      "url": "https://en.wikipedia.org/wiki/Sandpoint,_Idaho",
+      "title": "Sandpoint, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-schweitzer-mountain",
+      "url": "https://en.wikipedia.org/wiki/Schweitzer_Mountain",
+      "title": "Schweitzer Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-seven-springs-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Seven_Springs_Mountain_Resort",
+      "title": "Seven Springs Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-seven-springs-pennsylvania",
+      "url": "https://en.wikipedia.org/wiki/Seven_Springs,_Pennsylvania",
+      "title": "Seven Springs, Pennsylvania (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-shawnee-mountain-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Shawnee_Mountain_Ski_Area",
+      "title": "Shawnee Mountain Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sierra-at-tahoe",
+      "url": "https://en.wikipedia.org/wiki/Sierra-at-Tahoe",
+      "title": "Sierra-at-Tahoe (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-silverthorne-colorado",
+      "url": "https://en.wikipedia.org/wiki/Silverthorne,_Colorado",
+      "title": "Silverthorne, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-silverton-colorado",
+      "url": "https://en.wikipedia.org/wiki/Silverton,_Colorado",
+      "title": "Silverton, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-silverton-mountain",
+      "url": "https://en.wikipedia.org/wiki/Silverton_Mountain",
+      "title": "Silverton Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-smugglers-notch-resort",
+      "url": "https://en.wikipedia.org/wiki/Smugglers'_Notch_Resort",
+      "title": "Smugglers' Notch Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-snoqualmie-pass-washington",
+      "url": "https://en.wikipedia.org/wiki/Snoqualmie_Pass,_Washington",
+      "title": "Snoqualmie Pass, Washington (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-snow-king-mountain",
+      "url": "https://en.wikipedia.org/wiki/Snow_King_Mountain",
+      "title": "Snow King Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-snow-summit",
+      "url": "https://en.wikipedia.org/wiki/Snow_Summit",
+      "title": "Snow Summit (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-snow-valley-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Snow_Valley_Mountain_Resort",
+      "title": "Snow Valley Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-snowmass-village-colorado",
+      "url": "https://en.wikipedia.org/wiki/Snowmass_Village,_Colorado",
+      "title": "Snowmass Village, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-snowshoe-mountain",
+      "url": "https://en.wikipedia.org/wiki/Snowshoe_Mountain",
+      "title": "Snowshoe Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-snowshoe-west-virginia",
+      "url": "https://en.wikipedia.org/wiki/Snowshoe,_West_Virginia",
+      "title": "Snowshoe, West Virginia (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-somerset-county-pennsylvania",
+      "url": "https://en.wikipedia.org/wiki/Somerset_County,_Pennsylvania",
+      "title": "Somerset County, Pennsylvania (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-south-lake-tahoe-california",
+      "url": "https://en.wikipedia.org/wiki/South_Lake_Tahoe,_California",
+      "title": "South Lake Tahoe, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-spokane-washington",
+      "url": "https://en.wikipedia.org/wiki/Spokane,_Washington",
+      "title": "Spokane, Washington (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-steamboat-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Steamboat_Ski_Resort",
+      "title": "Steamboat Ski Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-steamboat-springs-colorado",
+      "url": "https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado",
+      "title": "Steamboat Springs, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-stevens-pass",
+      "url": "https://en.wikipedia.org/wiki/Stevens_Pass",
+      "title": "Stevens Pass (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-stowe-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Stowe_Mountain_Resort",
+      "title": "Stowe Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-stowe-vermont",
+      "url": "https://en.wikipedia.org/wiki/Stowe,_Vermont",
+      "title": "Stowe, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-stratton-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Stratton_Mountain_Resort",
+      "title": "Stratton Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-stratton-vermont",
+      "url": "https://en.wikipedia.org/wiki/Stratton,_Vermont",
+      "title": "Stratton, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sugar-bowl-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Sugar_Bowl_Ski_Resort",
+      "title": "Sugar Bowl Ski Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sugarbush-resort",
+      "url": "https://en.wikipedia.org/wiki/Sugarbush_Resort",
+      "title": "Sugarbush Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sugarloaf-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Sugarloaf_(ski_resort)",
+      "title": "Sugarloaf (ski resort) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-summit-county-colorado",
+      "url": "https://en.wikipedia.org/wiki/Summit_County,_Colorado",
+      "title": "Summit County, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sun-valley-idaho",
+      "url": "https://en.wikipedia.org/wiki/Sun_Valley,_Idaho",
+      "title": "Sun Valley, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sunday-river-ski-resort",
+      "url": "https://en.wikipedia.org/wiki/Sunday_River_(ski_resort)",
+      "title": "Sunday River (ski resort) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-sunlight-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Sunlight_Ski_Area",
+      "title": "Sunlight Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-taos-county-new-mexico",
+      "url": "https://en.wikipedia.org/wiki/Taos_County,_New_Mexico",
+      "title": "Taos County, New Mexico (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-taos-new-mexico",
+      "url": "https://en.wikipedia.org/wiki/Taos,_New_Mexico",
+      "title": "Taos, New Mexico (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-taos-ski-valley-new-mexico",
+      "url": "https://en.wikipedia.org/wiki/Taos_Ski_Valley,_New_Mexico",
+      "title": "Taos Ski Valley, New Mexico (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-telluride-colorado",
+      "url": "https://en.wikipedia.org/wiki/Telluride,_Colorado",
+      "title": "Telluride, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-teton-county-wyoming",
+      "url": "https://en.wikipedia.org/wiki/Teton_County,_Wyoming",
+      "title": "Teton County, Wyoming (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-teton-valley-idaho",
+      "url": "https://en.wikipedia.org/wiki/Teton_Valley,_Idaho",
+      "title": "Teton Valley, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-teton-village-wyoming",
+      "url": "https://en.wikipedia.org/wiki/Teton_Village,_Wyoming",
+      "title": "Teton Village, Wyoming (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-the-omni-homestead-resort",
+      "url": "https://en.wikipedia.org/wiki/The_Omni_Homestead_Resort",
+      "title": "The Omni Homestead Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-the-summit-at-snoqualmie",
+      "url": "https://en.wikipedia.org/wiki/The_Summit_at_Snoqualmie",
+      "title": "The Summit at Snoqualmie (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-timberline-lodge",
+      "url": "https://en.wikipedia.org/wiki/Timberline_Lodge",
+      "title": "Timberline Lodge (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-timberline-lodge-ski-area",
+      "url": "https://en.wikipedia.org/wiki/Timberline_Lodge_ski_area",
+      "title": "Timberline Lodge ski area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-titus-mountain",
+      "url": "https://en.wikipedia.org/wiki/Titus_Mountain",
+      "title": "Titus Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-truckee-california",
+      "url": "https://en.wikipedia.org/wiki/Truckee,_California",
+      "title": "Truckee, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-vail-colorado",
+      "url": "https://en.wikipedia.org/wiki/Vail,_Colorado",
+      "title": "Vail, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-vernon-township-new-jersey",
+      "url": "https://en.wikipedia.org/wiki/Vernon_Township,_New_Jersey",
+      "title": "Vernon Township, New Jersey (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-victor-idaho",
+      "url": "https://en.wikipedia.org/wiki/Victor,_Idaho",
+      "title": "Victor, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-waitsfield-vermont",
+      "url": "https://en.wikipedia.org/wiki/Waitsfield,_Vermont",
+      "title": "Waitsfield, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-warren-vermont",
+      "url": "https://en.wikipedia.org/wiki/Warren,_Vermont",
+      "title": "Warren, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-wasatch-range",
+      "url": "https://en.wikipedia.org/wiki/Wasatch_Range",
+      "title": "Wasatch Range (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-waterville-valley-resort",
+      "url": "https://en.wikipedia.org/wiki/Waterville_Valley_Resort",
+      "title": "Waterville Valley Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-wenatchee-washington",
+      "url": "https://en.wikipedia.org/wiki/Wenatchee,_Washington",
+      "title": "Wenatchee, Washington (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-white-mountains-new-england",
+      "url": "https://en.wikipedia.org/wiki/White_Mountains_(New_England)",
+      "title": "White Mountains (New England) (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-white-pass-ski-area",
+      "url": "https://en.wikipedia.org/wiki/White_Pass_Ski_Area",
+      "title": "White Pass Ski Area (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-whiteface-mountain",
+      "url": "https://en.wikipedia.org/wiki/Whiteface_Mountain",
+      "title": "Whiteface Mountain (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-whitefish-montana",
+      "url": "https://en.wikipedia.org/wiki/Whitefish,_Montana",
+      "title": "Whitefish, Montana (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-whitefish-mountain-resort",
+      "url": "https://en.wikipedia.org/wiki/Whitefish_Mountain_Resort",
+      "title": "Whitefish Mountain Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-willamette-pass-resort",
+      "url": "https://en.wikipedia.org/wiki/Willamette_Pass_Resort",
+      "title": "Willamette Pass Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-windham-county-vermont",
+      "url": "https://en.wikipedia.org/wiki/Windham_County,_Vermont",
+      "title": "Windham County, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-windham-mountain-club",
+      "url": "https://en.wikipedia.org/wiki/Windham_Mountain_Club",
+      "title": "Windham Mountain Club (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-windham-town-new-york",
+      "url": "https://en.wikipedia.org/wiki/Windham_(town),_New_York",
+      "title": "Windham (town), New York (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-winter-park-colorado",
+      "url": "https://en.wikipedia.org/wiki/Winter_Park,_Colorado",
+      "title": "Winter Park, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-winter-park-resort",
+      "url": "https://en.wikipedia.org/wiki/Winter_Park_Resort",
+      "title": "Winter Park Resort (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-wood-river-valley",
+      "url": "https://en.wikipedia.org/wiki/Wood_River_Valley",
+      "title": "Wood River Valley (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-wrightwood-california",
+      "url": "https://en.wikipedia.org/wiki/Wrightwood,_California",
+      "title": "Wrightwood, California (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
+    {
+      "id": "ed-clusters-wikipedia-yellowstone-club",
+      "url": "https://en.wikipedia.org/wiki/Yellowstone_Club",
+      "title": "Yellowstone Club (Wikipedia)",
+      "accessed_date": "2026-10-12",
+      "note": null
+    },
     {
       "id": "openskimap-lifts",
       "url": "https://openskimap.org/",

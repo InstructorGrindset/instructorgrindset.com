@@ -102,13 +102,13 @@ export function isFallbackCluster(id) { return id.startsWith('other-'); }
 export const clusterOrder = (a, b) => (a.fallback - b.fallback) || a.name.localeCompare(b.name);
 
 export async function loadAll() {
-  const [resortsRaw, clustersRaw, statesRaw, sourcesRaw, resortsGeoRaw, usStatesRaw, definitions] = await Promise.all([
+  // us-states.geojson (about 90 KB gzipped) is left out of the critical path: see loadStateOutlines.
+  const [resortsRaw, clustersRaw, statesRaw, sourcesRaw, resortsGeoRaw, definitions] = await Promise.all([
     fetchJson('resorts.json'),
     fetchJson('clusters.geojson'),
     fetchJson('states.json'),
     fetchJson('sources.json', { optional: true }),
     fetchJson('resorts.geojson', { optional: true }),
-    fetchJson('us-states.geojson', { optional: true }),
     loadDefinitions(),
   ]);
 
@@ -140,36 +140,17 @@ export async function loadAll() {
     if (!clusters.has(r.cluster_id)) console.warn(`[map] resort ${r.id} references unknown cluster ${r.cluster_id}`);
   }
 
-  // State outlines (optional file). Features are cloned with a has_resorts flag for styling.
-  let usStatesFC = { type: 'FeatureCollection', features: [] };
-  const stateGeom = new Map();
-  if (usStatesRaw) {
-    const shell = FeatureCollectionShell.safeParse(usStatesRaw);
-    if (shell.success) {
-      const feats = parseEach(StateFeature, shell.data.features, 'us-states.geojson features', (f) => f && f.properties && f.properties.code);
-      for (const f of feats) stateGeom.set(f.properties.code.toUpperCase(), f.geometry);
-      usStatesFC = { type: 'FeatureCollection', features: feats };
-    } else console.warn('[map] us-states.geojson failed validation');
-  }
-
+  // State frames start from clusters and resorts; loadStateOutlines widens them to the outlines later.
+  const usStatesFC = { type: 'FeatureCollection', features: [] };
   const states = new Map();
   for (const s of statesFile.states) {
     const clusterIds = s.cluster_ids.filter((id) => clusters.has(id));
     const stateResorts = resortList.filter((r) => r.state === s.code);
     let bbox = null;
-    const geom = stateGeom.get(s.code);
-    if (geom) bbox = bboxOf(geom);
-    // Antimeridian (Alaska) or missing outline: fall back to where the resorts are.
-    if (!bbox || bbox[1][0] - bbox[0][0] > 60) bbox = null;
     for (const cid of clusterIds) bbox = unionBbox(bbox, clusters.get(cid).bbox);
     bbox = unionBbox(bbox, pointBbox(stateResorts.map((r) => [r.lon, r.lat])));
-    states.set(s.code, { ...s, cluster_ids: clusterIds, bbox });
+    states.set(s.code, { ...s, cluster_ids: clusterIds, bbox, baseBbox: bbox });
   }
-  const activeCodes = new Set(states.keys());
-  usStatesFC.features = usStatesFC.features.map((f) => ({
-    ...f,
-    properties: { ...f.properties, code: f.properties.code.toUpperCase(), has_resorts: activeCodes.has(f.properties.code.toUpperCase()) },
-  }));
 
   // Resort points: prefer resorts.geojson, derive from resorts.json when absent.
   let resortPoints;
@@ -255,6 +236,35 @@ export function loadClimate(resortId) {
     climateCache.set(resortId, p);
   }
   return climateCache.get(resortId);
+}
+
+/**
+ * State outlines (optional file), loaded after the map is interactive. Clones features with a has_resorts flag
+ * for styling and widens each state's frame to its outline. Resolves to the FeatureCollection, or null.
+ */
+export async function loadStateOutlines(index) {
+  const raw = await fetchJson('us-states.geojson', { optional: true }).catch(() => null);
+  if (!raw) return null;
+  const shell = FeatureCollectionShell.safeParse(raw);
+  if (!shell.success) { console.warn('[map] us-states.geojson failed validation'); return null; }
+  const feats = parseEach(StateFeature, shell.data.features, 'us-states.geojson features', (f) => f && f.properties && f.properties.code);
+  for (const f of feats) {
+    const code = f.properties.code.toUpperCase();
+    const st = index.states.get(code);
+    if (!st) continue;
+    const b = bboxOf(f.geometry);
+    // Antimeridian (Alaska): keep the frame around the resorts.
+    if (b && b[1][0] - b[0][0] <= 60) st.bbox = unionBbox(st.baseBbox, b);
+  }
+  const fc = {
+    type: 'FeatureCollection',
+    features: feats.map((f) => ({
+      ...f,
+      properties: { ...f.properties, code: f.properties.code.toUpperCase(), has_resorts: index.states.has(f.properties.code.toUpperCase()) },
+    })),
+  };
+  index.geo.usStates = fc;
+  return fc;
 }
 
 const detailCache = new Map();

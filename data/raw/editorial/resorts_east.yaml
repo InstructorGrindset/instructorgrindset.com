@@ -1,0 +1,489 @@
+# Phase 6 editorial drafts for eastern and Midwest Tier A resorts.
+# Drafted only from the cited Wikipedia articles and the Vail Resorts FY2026 10-K, fetched 2026-10-12.
+# Every entry is a draft for Alexandre's review; alexandre_take_md stays null.
+batch: editorial-east
+researched_date: 2026-10-12
+sources:
+  - {id: ed-east-wikipedia-stowe-mountain-resort, url: "https://en.wikipedia.org/wiki/Stowe_Mountain_Resort", title: "Stowe Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-stowe-vermont, url: "https://en.wikipedia.org/wiki/Stowe,_Vermont", title: "Stowe, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-killington-ski-resort, url: "https://en.wikipedia.org/wiki/Killington_Ski_Resort", title: "Killington Ski Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-killington-vermont, url: "https://en.wikipedia.org/wiki/Killington,_Vermont", title: "Killington, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-pico-mountain, url: "https://en.wikipedia.org/wiki/Pico_Mountain", title: "Pico Mountain (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-sugarbush-resort, url: "https://en.wikipedia.org/wiki/Sugarbush_Resort", title: "Sugarbush Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-mad-river-glen, url: "https://en.wikipedia.org/wiki/Mad_River_Glen", title: "Mad River Glen (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-warren-vermont, url: "https://en.wikipedia.org/wiki/Warren,_Vermont", title: "Warren, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-waitsfield-vermont, url: "https://en.wikipedia.org/wiki/Waitsfield,_Vermont", title: "Waitsfield, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-fayston-vermont, url: "https://en.wikipedia.org/wiki/Fayston,_Vermont", title: "Fayston, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-jay-peak-resort, url: "https://en.wikipedia.org/wiki/Jay_Peak_Resort", title: "Jay Peak Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-jay-vermont, url: "https://en.wikipedia.org/wiki/Jay,_Vermont", title: "Jay, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-burke-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Burke_Mountain_Ski_Area", title: "Burke Mountain Ski Area (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-burke-mountain-academy, url: "https://en.wikipedia.org/wiki/Burke_Mountain_Academy", title: "Burke Mountain Academy (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-burke-vermont, url: "https://en.wikipedia.org/wiki/Burke,_Vermont", title: "Burke, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-okemo-mountain, url: "https://en.wikipedia.org/wiki/Okemo_Mountain", title: "Okemo Mountain (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-ludlow-town-vermont, url: "https://en.wikipedia.org/wiki/Ludlow_(town),_Vermont", title: "Ludlow (town), Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-stratton-mountain-resort, url: "https://en.wikipedia.org/wiki/Stratton_Mountain_Resort", title: "Stratton Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-stratton-mountain-school, url: "https://en.wikipedia.org/wiki/Stratton_Mountain_School", title: "Stratton Mountain School (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-stratton-vermont, url: "https://en.wikipedia.org/wiki/Stratton,_Vermont", title: "Stratton, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-winhall-vermont, url: "https://en.wikipedia.org/wiki/Winhall,_Vermont", title: "Winhall, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-mount-snow, url: "https://en.wikipedia.org/wiki/Mount_Snow", title: "Mount Snow (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-dover-vermont, url: "https://en.wikipedia.org/wiki/Dover,_Vermont", title: "Dover, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-west-dover-vermont, url: "https://en.wikipedia.org/wiki/West_Dover,_Vermont", title: "West Dover, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-magic-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Magic_Mountain_Ski_Area", title: "Magic Mountain Ski Area (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-londonderry-vermont, url: "https://en.wikipedia.org/wiki/Londonderry,_Vermont", title: "Londonderry, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-haystack-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Haystack_Mountain_Ski_Area", title: "Hermitage Club at Haystack Mountain (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-wilmington-vermont, url: "https://en.wikipedia.org/wiki/Wilmington,_Vermont", title: "Wilmington, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-middlebury-college-snow-bowl, url: "https://en.wikipedia.org/wiki/Middlebury_College_Snow_Bowl", title: "Middlebury College Snow Bowl (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hancock-vermont, url: "https://en.wikipedia.org/wiki/Hancock,_Vermont", title: "Hancock, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-saskadena-six, url: "https://en.wikipedia.org/wiki/Saskadena_Six", title: "Saskadena Six (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-woodstock-vermont, url: "https://en.wikipedia.org/wiki/Woodstock,_Vermont", title: "Woodstock, Vermont (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-whiteface-mountain, url: "https://en.wikipedia.org/wiki/Whiteface_Mountain", title: "Whiteface Mountain (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-wilmington-new-york, url: "https://en.wikipedia.org/wiki/Wilmington,_New_York", title: "Wilmington, New York (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-lake-placid-new-york, url: "https://en.wikipedia.org/wiki/Lake_Placid,_New_York", title: "Lake Placid, New York (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-lake-placid-olympic-ski-jumping-complex, url: "https://en.wikipedia.org/wiki/Lake_Placid_Olympic_Ski_Jumping_Complex", title: "Lake Placid Olympic Ski Jumping Complex (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hunter-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Hunter_Mountain_(ski_area)", title: "Hunter Mountain (ski area) (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hunter-new-york, url: "https://en.wikipedia.org/wiki/Hunter,_New_York", title: "Hunter, New York (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hunter-village-new-york, url: "https://en.wikipedia.org/wiki/Hunter_(village),_New_York", title: "Hunter (village), New York (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-sugarloaf-ski-resort, url: "https://en.wikipedia.org/wiki/Sugarloaf_(ski_resort)", title: "Sugarloaf (ski resort) (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-carrabassett-valley-academy, url: "https://en.wikipedia.org/wiki/Carrabassett_Valley_Academy", title: "Carrabassett Valley Academy (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-carrabassett-valley-maine, url: "https://en.wikipedia.org/wiki/Carrabassett_Valley,_Maine", title: "Carrabassett Valley, Maine (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-kingfield-maine, url: "https://en.wikipedia.org/wiki/Kingfield,_Maine", title: "Kingfield, Maine (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-sunday-river-ski-resort, url: "https://en.wikipedia.org/wiki/Sunday_River_(ski_resort)", title: "Sunday River (ski resort) (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-gould-academy, url: "https://en.wikipedia.org/wiki/Gould_Academy", title: "Gould Academy (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-newry-maine, url: "https://en.wikipedia.org/wiki/Newry,_Maine", title: "Newry, Maine (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-bethel-maine, url: "https://en.wikipedia.org/wiki/Bethel,_Maine", title: "Bethel, Maine (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-black-mountain-of-maine, url: "https://en.wikipedia.org/wiki/Black_Mountain_of_Maine", title: "Black Mountain of Maine (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-rumford-maine, url: "https://en.wikipedia.org/wiki/Rumford,_Maine", title: "Rumford, Maine (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-cannon-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Cannon_Mountain_Ski_Area", title: "Cannon Mountain Ski Area (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-franconia-new-hampshire, url: "https://en.wikipedia.org/wiki/Franconia,_New_Hampshire", title: "Franconia, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-cranmore-mountain-resort, url: "https://en.wikipedia.org/wiki/Cranmore_Mountain_Resort", title: "Cranmore Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-north-conway-new-hampshire, url: "https://en.wikipedia.org/wiki/North_Conway,_New_Hampshire", title: "North Conway, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-conway-new-hampshire, url: "https://en.wikipedia.org/wiki/Conway,_New_Hampshire", title: "Conway, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-attitash-mountain-resort, url: "https://en.wikipedia.org/wiki/Attitash_Mountain_Resort", title: "Attitash Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-bartlett-new-hampshire, url: "https://en.wikipedia.org/wiki/Bartlett,_New_Hampshire", title: "Bartlett, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-wildcat-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Wildcat_Mountain_Ski_Area", title: "Wildcat Mountain Ski Area (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-jackson-new-hampshire, url: "https://en.wikipedia.org/wiki/Jackson,_New_Hampshire", title: "Jackson, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-waterville-valley-resort, url: "https://en.wikipedia.org/wiki/Waterville_Valley_Resort", title: "Waterville Valley Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-waterville-valley-new-hampshire, url: "https://en.wikipedia.org/wiki/Waterville_Valley,_New_Hampshire", title: "Waterville Valley, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-gunstock-mountain-resort, url: "https://en.wikipedia.org/wiki/Gunstock_Mountain_Resort", title: "Gunstock Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-gilford-new-hampshire, url: "https://en.wikipedia.org/wiki/Gilford,_New_Hampshire", title: "Gilford, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-mount-sunapee-resort, url: "https://en.wikipedia.org/wiki/Mount_Sunapee_Resort", title: "Mount Sunapee Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-newbury-new-hampshire, url: "https://en.wikipedia.org/wiki/Newbury,_New_Hampshire", title: "Newbury, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-crotched-mountain-ski-and-ride, url: "https://en.wikipedia.org/wiki/Crotched_Mountain_Ski_%26_Ride", title: "Crotched Mountain Ski & Ride (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-bennington-new-hampshire, url: "https://en.wikipedia.org/wiki/Bennington,_New_Hampshire", title: "Bennington, New Hampshire (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-berkshire-east-ski-resort, url: "https://en.wikipedia.org/wiki/Berkshire_East_Ski_Resort", title: "Berkshire East Ski Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-charlemont-massachusetts, url: "https://en.wikipedia.org/wiki/Charlemont,_Massachusetts", title: "Charlemont, Massachusetts (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-snowshoe-mountain, url: "https://en.wikipedia.org/wiki/Snowshoe_Mountain", title: "Snowshoe Mountain (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-snowshoe-west-virginia, url: "https://en.wikipedia.org/wiki/Snowshoe,_West_Virginia", title: "Snowshoe, West Virginia (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-pocahontas-county-west-virginia, url: "https://en.wikipedia.org/wiki/Pocahontas_County,_West_Virginia", title: "Pocahontas County, West Virginia (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-seven-springs-mountain-resort, url: "https://en.wikipedia.org/wiki/Seven_Springs_Mountain_Resort", title: "Seven Springs Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-seven-springs-pennsylvania, url: "https://en.wikipedia.org/wiki/Seven_Springs,_Pennsylvania", title: "Seven Springs, Pennsylvania (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hidden-valley-resort-pennsylvania, url: "https://en.wikipedia.org/wiki/Hidden_Valley_Resort_(Pennsylvania)", title: "Hidden Valley Resort (Pennsylvania) (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hidden-valley-pennsylvania, url: "https://en.wikipedia.org/wiki/Hidden_Valley,_Pennsylvania", title: "Hidden Valley, Pennsylvania (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-laurel-mountain-ski-resort, url: "https://en.wikipedia.org/wiki/Laurel_Mountain_Ski_Resort", title: "Laurel Mountain Ski Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-liberty-mountain-resort, url: "https://en.wikipedia.org/wiki/Liberty_Mountain_Resort", title: "Liberty Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-roundtop-mountain-resort, url: "https://en.wikipedia.org/wiki/Roundtop_Mountain_Resort", title: "Roundtop Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-whitetail-ski-resort, url: "https://en.wikipedia.org/wiki/Whitetail_Ski_Resort", title: "Whitetail Ski Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-mercersburg-pennsylvania, url: "https://en.wikipedia.org/wiki/Mercersburg,_Pennsylvania", title: "Mercersburg, Pennsylvania (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-jack-frost-big-boulder, url: "https://en.wikipedia.org/wiki/Jack_Frost%E2%80%93Big_Boulder_Ski_Resort", title: "Jack Frost and Big Boulder Ski Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-kidder-township-pennsylvania, url: "https://en.wikipedia.org/wiki/Kidder_Township,_Pennsylvania", title: "Kidder Township, Pennsylvania (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-big-snow-american-dream, url: "https://en.wikipedia.org/wiki/Big_Snow_American_Dream", title: "Big Snow American Dream (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-american-dream-mall, url: "https://en.wikipedia.org/wiki/American_Dream_(shopping_mall)", title: "American Dream (shopping mall) (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-boyne-mountain-resort, url: "https://en.wikipedia.org/wiki/Boyne_Mountain_Resort", title: "Boyne Mountain Resort (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-boyne-falls-michigan, url: "https://en.wikipedia.org/wiki/Boyne_Falls,_Michigan", title: "Boyne Falls, Michigan (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-the-highlands-at-harbor-springs, url: "https://en.wikipedia.org/wiki/The_Highlands_at_Harbor_Springs", title: "The Highlands at Harbor Springs (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-harbor-springs-michigan, url: "https://en.wikipedia.org/wiki/Harbor_Springs,_Michigan", title: "Harbor Springs, Michigan (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-mount-bohemia, url: "https://en.wikipedia.org/wiki/Mount_Bohemia", title: "Mount Bohemia (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-lac-la-belle-michigan, url: "https://en.wikipedia.org/wiki/Lac_La_Belle,_Michigan", title: "Lac La Belle, Michigan (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-keweenaw-county-michigan, url: "https://en.wikipedia.org/wiki/Keweenaw_County,_Michigan", title: "Keweenaw County, Michigan (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-mount-brighton, url: "https://en.wikipedia.org/wiki/Mount_Brighton", title: "Mount Brighton (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-wilmot-mountain, url: "https://en.wikipedia.org/wiki/Wilmot_Mountain", title: "Wilmot Mountain (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-afton-alps, url: "https://en.wikipedia.org/wiki/Afton_Alps", title: "Afton Alps (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-afton-minnesota, url: "https://en.wikipedia.org/wiki/Afton,_Minnesota", title: "Afton, Minnesota (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-buck-hill, url: "https://en.wikipedia.org/wiki/Buck_Hill", title: "Buck Hill (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hyland-hills-ski-area, url: "https://en.wikipedia.org/wiki/Hyland_Hills_Ski_Area", title: "Hyland Hills Ski Area (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-boston-mills-brandywine, url: "https://en.wikipedia.org/wiki/Boston_Mills/Brandywine_Ski_Resorts", title: "Boston Mills/Brandywine Ski Resorts (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-alpine-valley-ski-area-ohio, url: "https://en.wikipedia.org/wiki/Alpine_Valley_Ski_Area", title: "Alpine Valley Ski Area (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-mad-river-mountain, url: "https://en.wikipedia.org/wiki/Mad_River_Mountain", title: "Mad River Mountain (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-paoli-peaks, url: "https://en.wikipedia.org/wiki/Paoli_Peaks", title: "Paoli Peaks (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-hidden-valley-ski-area-missouri, url: "https://en.wikipedia.org/wiki/Hidden_Valley_Ski_Area", title: "Hidden Valley Ski Area (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-wikipedia-snow-creek-ski-resort, url: "https://en.wikipedia.org/wiki/Snow_Creek_(ski_resort)", title: "Snow Creek (ski resort) (Wikipedia)", accessed_date: 2026-10-12}
+  - {id: ed-east-vail-10k-fy2026, url: "https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm", title: "Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)", accessed_date: 2026-10-12}
+entries:
+  - target: resort
+    id: stowe
+    overview_md: "Stowe Mountain Resort covers two mountains, Mount Mansfield and Spruce Peak, near the town of Stowe in northern Vermont. Mount Mansfield is the highest peak in the state. The Civilian Conservation Corps cut the first trails there in 1933, and the Mount Mansfield Ski Patrol, founded in 1934, is the oldest in the nation and the model for the National Ski Patrol. AIG sold the ski operations to Vail Resorts in 2017. Vail's annual report calls Stowe its premier high end regional ski area in the Northeast. Stowe sits in the Northern Vermont cluster with Jay Peak and Burke."
+    culture_md: "Stowe is a town of 5,223 people (2020 census) nicknamed the Ski Capital of the East. It was a known summer resort by the middle of the nineteenth century and held its first Winter Carnival in 1921. The Vermont Ski Museum moved to Stowe in 2000, and the Mount Mansfield Winter Academy in town focuses on snow sport athletes. Vail says its Northeast ski areas serve guests within driving distance of New York, Boston and greater New England."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-stowe-mountain-resort, ed-east-wikipedia-stowe-vermont, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: killington
+    overview_md: "Killington is the largest ski area in the eastern U.S. and has the largest vertical drop in New England. It spreads across six interconnected peaks near the town of Killington in Rutland County, and its nickname is the Beast of the East. Snowmaking on Superstar and other trails often gives it the longest season in eastern North America, and since 2016 it has hosted women's World Cup races each Thanksgiving weekend. In September 2024 the Killington Independence Group, formed by local passholders and community members, bought Killington and Pico from Powdr."
+    culture_md: "Killington is a town of 1,407 people (2020 census) built around the ski resort and its many vacation lodges. It was named Sherburne until 1999. The resort's mountains separate the town from the city of Rutland. Bear Mountain holds the Bear Mountain Mogul Challenge on Outer Limits and hosts large racing and freestyle events. Most Killington passes also work at Pico, its sister mountain a few miles away."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-killington-ski-resort, ed-east-wikipedia-killington-vermont, ed-east-wikipedia-pico-mountain]
+  - target: resort
+    id: pico
+    overview_md: "Pico Mountain sits on Pico Peak along U.S. Route 4 in Killington, several miles from the main Killington resort. It opened on Thanksgiving Day 1937 as one of the first commercial ski resorts in Vermont, and in 1940 it ran the first T bar lift in the US. The Mead family founded it; their daughter Andrea Mead Lawrence won two Olympic gold medals in 1952. Killington bought Pico out of receivership in the 1990s, and the Killington Independence Group bought both from Powdr in 2024."
+    culture_md: "Pico shares the town of Killington, population 1,407 at the 2020 census, with its larger neighbor. Trails off the Golden Express cater mainly to families and beginner and intermediate riders, while the summit runs are mostly steep black diamonds for experts. Hotels, condos and restaurants sit at the base, and the base lodge holds a Vermont Ski and Snowboard Museum exhibit."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-pico-mountain, ed-east-wikipedia-killington-ski-resort, ed-east-wikipedia-killington-vermont]
+  - target: resort
+    id: sugarbush
+    overview_md: "Sugarbush Resort sits in the Mad River Valley in Warren, Vermont, and is one of the largest ski resorts in New England. It has two mountain areas, Lincoln Peak and Mount Ellen, joined by the Slide Brook Express chairlift over the expert Slide Brook Basin. Its 2,600 foot vertical drop is the second largest in Vermont after Killington. Damon and Sara Gadd and Jack Murphy opened it on Christmas Day 1958. Alterra Mountain Company bought Sugarbush in November 2019. It shares the valley with Mad River Glen in the Central Vermont cluster."
+    culture_md: "The Mad River Valley towns of Warren (1,977 people in 2020), Waitsfield (1,844) and Fayston (1,364) surround the resort. Waitsfield's economy is largely supported by Sugarbush and Mad River Glen, along with its restaurants and lodging. Green Mountain Valley School trains racers on the Inverness slopes at Mount Ellen. Lincoln Peak Village, finished in 2010, added the Claybrook luxury condominiums and a Schoolhouse for children's programs."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-sugarbush-resort, ed-east-wikipedia-warren-vermont, ed-east-wikipedia-waitsfield-vermont, ed-east-wikipedia-fayston-vermont]
+  - target: resort
+    id: mad-river-glen
+    overview_md: "Mad River Glen is a ski area in Fayston, Vermont, in the Mad River Valley. Roland Palmedo founded it in 1947 for dedicated skiers, with a minimum of commercial amenities. A skier cooperative formed in 1995 owns it, and shareholders vote at regular Town Hall meetings. It runs the 1948 Single Chair, one of two single chairlifts left in the country, bans snowboarding, and keeps narrow trails with little grooming. Ski magazine ranked its terrain the most challenging on the East Coast, and it joined the National Register of Historic Places in 2012."
+    culture_md: "Mad River Glen keeps a traditional form of New England skiing built on natural snow and trails cut decades ago, often by the skiers themselves. Telemark skiers make up a large share of its skiers. Over 75 percent of cooperative members voted to keep the snowboard ban. Waitsfield, a valley town of 1,844 people (2020 census), has an economy largely supported by Mad River Glen and Sugarbush."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-mad-river-glen, ed-east-wikipedia-waitsfield-vermont, ed-east-wikipedia-fayston-vermont]
+  - target: resort
+    id: jay-peak
+    overview_md: "Jay Peak Resort sits in the northern Green Mountains between Jay and Montgomery Center, Vermont, about 4 miles south of the Quebec border. It receives the most snowfall of any ski area in the Northeastern U.S. and is known for its gladed skiing and the steep Face Chutes. EB 5 financed development added hotels, an ice arena and a water park before federal officials seized the resort in 2016 in a securities fraud case. Pacific Group Resorts of Park City, Utah, bought it at a court supervised auction for $76 million in 2022."
+    culture_md: "Jay is a border town of 551 people (2020 census) in Orleans County. The resort is a major local employer: it was the second biggest employer in the area in 2008, and as of 2022 it employed more than 1,200 people in winter and about half that number year round. It reported a record 320,000 skiers in the 2007 to 2008 winter."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-jay-peak-resort, ed-east-wikipedia-jay-vermont]
+  - target: resort
+    id: burke
+    overview_md: "Burke Mountain Ski Area is a mid size resort in Vermont's Northeast Kingdom, in the town of Burke near the village of East Burke. It is home to Burke Mountain Academy, founded in 1970 as the first ski academy in North America, whose alumni include Mikaela Shiffrin. The owners of Jay Peak bought Burke in 2012, and it entered federal receivership in 2016 in the EB 5 fraud case. Bear Den Partners bought it in April 2025 for a reported $11.5 million and announced plans to invest up to $20 million in snowmaking, lifts and terrain."
+    culture_md: "Burke is a town of 1,651 people (2020 census) that includes the villages of East Burke, West Burke and Burke Hollow. East Burke is home to the Kingdom Trails system, where hundreds of mountain bikers ride at a time in summer and autumn. The resort hotel is a popular place for weddings and events. Burke Mountain Academy, a full year school, trains alpine racers on the mountain."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-burke-mountain-ski-area, ed-east-wikipedia-burke-mountain-academy, ed-east-wikipedia-burke-vermont]
+  - target: resort
+    id: okemo
+    overview_md: "Okemo Mountain Resort is in the town of Ludlow in southern Vermont. Its 2,200 foot vertical drop is the largest in southern Vermont, and snowmaking covers 98 percent of its trail area. Local businessmen founded it in 1955. Tim and Dianne Mueller bought it in 1982 and expanded it for decades, and Vail Resorts acquired it in 2018. Parents Magazine rated it the top US family snow resort. Vail describes Okemo as a regional destination for guests from the New York metropolitan area and throughout New England."
+    culture_md: "Ludlow is a town of 2,172 people (2020 census). It was a mill town and home to a General Electric plant until 1977 before it became a ski destination. The town was among the places hit hardest by the July 2023 Vermont floods. Visitor's Choice on the Snow rated Okemo's beginner terrain number one in Vermont, and SKI Magazine readers ranked its grooming sixth in the nation."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-okemo-mountain, ed-east-wikipedia-ludlow-town-vermont, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: stratton
+    overview_md: "Stratton Mountain Resort is on Stratton Mountain in Stratton, Vermont, east of Manchester. It opened in December 1961. In the 1980s it became the first ski area to allow snowboarding and home to the first snowboard school, and it hosted the Burton U.S. Open Snowboarding Championships from 1985 to 2012. Stratton Mountain School, founded at the mountain in 1972, has produced 46 Olympic athletes. Alterra Mountain Company has owned Stratton since 2017, when it was formed through the purchase of Intrawest."
+    culture_md: "In the 1960s a group of Austrian ski instructors, the Stratton Mountain Boys, started European style après ski at Stratton and became part of its marketing. Intrawest later built premium real estate at the base, including the Village Common and ski in, ski out homes. The resort community of Stratton Mountain spans the towns of Stratton (440 people in 2020) and Winhall (1,182). Stratton Mountain School tuition for 2023 to 2024 was $65,500 for boarders."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-stratton-mountain-resort, ed-east-wikipedia-stratton-mountain-school, ed-east-wikipedia-stratton-vermont, ed-east-wikipedia-winhall-vermont]
+  - target: resort
+    id: mount-snow
+    overview_md: "Mount Snow is Vermont's southernmost big mountain and the closest to many Northeast metropolitan areas. It sits in the town of Dover, with the village of West Dover as its main service point. Walt Schoenknecht opened it in 1954. Mount Snow opened the first snowboard park in the East in 1992, cohosted the first Extreme Games in 1995 and hosted the X Games in 2000 and 2001. Carinthia Parks holds ten terrain parks. Vail Resorts bought it with Peak Resorts in 2019."
+    culture_md: "Dover is a town of 1,798 people (2020 census) known as the home of Mount Snow, and West Dover is a major service point for the ski area. Mount Snow Academy graduates include 2002 Olympic halfpipe gold medalist Kelly Clark and 2014 Olympic slopestyle silver medalist Devin Logan. Vail describes Mount Snow as a regional destination for guests from the New York metropolitan area and throughout New England."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-mount-snow, ed-east-wikipedia-dover-vermont, ed-east-wikipedia-west-dover-vermont, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: magic-mountain
+    overview_md: "Magic Mountain is a ski area on Glebe Mountain in Londonderry, Vermont, with a 1,500 foot vertical drop. Ski instructor and filmmaker Hans Thorner founded it in 1960 because its terrain reminded him of his native Swiss Alps. It was part of Vermont's original Golden Triangle with Stratton and Bromley. After a closure through much of the 1990s it reopened in 1997. SKI MAGIC LLC, a group led by local Magic skier Geoff Hatheway, bought it in 2016. It has the most extensive glade network in southern Vermont."
+    culture_md: "After reopening, Magic regained a small but passionate following among ski enthusiasts for its classic, challenging terrain. Pitches reach 45 degrees at the top of Master Magician. Londonderry is a town of 1,919 people (2020 census) with the villages of Londonderry and South Londonderry. The new owners invested over $2 million in snowmaking, lifts, the bar and the lodge after the 2016 purchase."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-magic-mountain-ski-area, ed-east-wikipedia-londonderry-vermont]
+  - target: resort
+    id: hermitage-club
+    overview_md: "The Hermitage Club is a private, member owned ski club on Haystack Mountain in Wilmington, Vermont. Haystack opened to the public in 1964 and ran as a public ski area until 2005. Jim Barnes opened the club for the 2012 to 2013 season and built an 80,000 square foot clubhouse, and the club went into bankruptcy in 2018. In March 2020, 181 former members bought it at auction for $8.06 million and formed the nonprofit Hermitage Members Group, which runs it with a volunteer board."
+    culture_md: "Members use a clubhouse with a bar, restaurant, bowling alley, movie theatre, spa, gym and ski lockers. The owner group describes the club as a private, four season, family friendly ski resort. Wilmington is a town of 2,255 people (2020 census). In 1968 Haystack was among the first ski areas to teach blind skiers, and its instructors skied the mountain blindfolded to prepare."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-haystack-mountain-ski-area, ed-east-wikipedia-wilmington-vermont]
+  - target: resort
+    id: middlebury-snow-bowl
+    overview_md: "The Middlebury College Snow Bowl is a ski area in Hancock, Vermont, 13 miles east of Middlebury near Middlebury Gap. Middlebury College has owned and run it since its first trails were cut in 1934. It has hosted intercollegiate competitions since the 1930s, and its 1938 log cabin lodge is the oldest standing base lodge in the nation. In 2006 it became the first carbon neutral ski area in the United States. It averages 200 inches of natural snow a year."
+    culture_md: "Hancock is a town of 359 people (2020 census) on the White River and Vermont Route 100, and it contains Middlebury Gap. The college runs the Snow Bowl as part of its sustainability commitment, with efficient snow guns, an electric compressor and plans for electric snowmobiles and cars. The eastern face, called the backside, relies mainly on natural snow."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-middlebury-college-snow-bowl, ed-east-wikipedia-hancock-vermont]
+  - target: resort
+    id: saskadena-six
+    overview_md: "Saskadena Six, called Suicide Six until 2022, is a ski area in South Pomfret, Vermont, near Woodstock. It traces to the first rope tow in the United States, installed on a farm in January 1934. Laurance Rockefeller bought it in 1961 and developed it with his nearby Woodstock Inn, and as of 2011 it operated as the inn's ski area. It hosted the first National Snow Surfing Championships in 1982, a forerunner of the U.S. Open Snowboarding Championships. The new name means standing mountain in the Abenaki language."
+    culture_md: "The Boston Globe described the area in 2004 as a low key place for a taste of rural skiing. It hosts the Fisk Trophy Race, first held in 1937 and the longest running ski race in North America, a rite of passage for serious eastern racers. Woodstock, the Windsor County seat with 3,005 people in 2020, draws visitors to the Billings Farm and Museum and its historic village."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-saskadena-six, ed-east-wikipedia-woodstock-vermont]
+  - target: resort
+    id: whiteface
+    overview_md: "Whiteface ski area sits on the east slope of Whiteface Mountain in the town of Wilmington, New York, among the Adirondack High Peaks. It opened in 1960 and is run by the Olympic Regional Development Authority. Whiteface hosted all six alpine events of the 1980 Winter Olympics and alpine skiing at the 2023 Winter World University Games. Its hike to terrain, The Slides, gives it the greatest continuous vertical drop in eastern North America at 3,430 feet. Lake Placid, the Olympic village, is nearby."
+    culture_md: "Wilmington is a town of 1,139 people (2020) inside the Adirondack Park, and its hamlet is a resort and skiing center. Tourism grew there early in the twentieth century, and Santa's Workshop, one of the first American theme parks for children, sits on the Whiteface highway. Lake Placid, a village of 2,205 people (2020 census), became internationally known for the 1932 and 1980 Winter Olympics."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-whiteface-mountain, ed-east-wikipedia-wilmington-new-york, ed-east-wikipedia-lake-placid-new-york]
+  - target: resort
+    id: lake-placid-olympic-jumping-complex
+    overview_md: "The Lake Placid Olympic Ski Jumping Complex, also called the MacKenzie Intervale complex, has HS100 and HS128 jump towers built for the 1980 Winter Olympics. Modernized and lengthened in 2021, they are the only jumps in North America homologated for winter and summer competition. The Olympic Regional Development Authority operates the site. Jumpers train year round on a plastic mat out run, and aerialists at the Freestyle Aerial Training Center train in summer by jumping into a 750,000 gallon pool. In 2023 it hosted the first men's super team World Cup."
+    culture_md: "Lake Placid is a village of 2,205 people (2020 census) in the Adirondacks that became internationally known for the 1932 and 1980 Winter Olympics, and it also hosted the 1972 and 2023 Winter World University Games. Winter sport there grew from the Lake Placid Club, which stayed open through the winter of 1905. The club built the first jump on this site in 1920."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-lake-placid-olympic-ski-jumping-complex, ed-east-wikipedia-lake-placid-new-york]
+  - target: resort
+    id: hunter-mountain
+    overview_md: "Hunter Mountain is a ski resort in the town of Hunter, Greene County, about three hours northwest of New York City in the Catskills. Local businessmen opened it in 1960 to revive an economy hurt by the decline of Catskills tourism. Hunter was the first area in the world with summit to base snowmaking and, in 1980, the first with snowmaking on 100 percent of its trails. Peak Resorts bought it from the founding Slutzky family in 2015, and Vail Resorts acquired Peak in 2019. Vail calls it a day trip ski area primarily serving the New York metropolitan area."
+    culture_md: "Hunter is a town of 3,035 people (2020 census) with two villages, Hunter and Tannersville. The ski resort is the largest employer in the village of Hunter, and the seasonal nature of the mountain regulates the town's economic activity. The area was a popular tourism destination in the late nineteenth and early twentieth centuries. The first Hunter summer festival, a ten day German Alps Festival, ran in July 1975."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-hunter-mountain-ski-area, ed-east-wikipedia-hunter-new-york, ed-east-wikipedia-hunter-village-new-york, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: sugarloaf
+    overview_md: "Sugarloaf is a ski resort on Sugarloaf Mountain in Carrabassett Valley, western Maine. It is the second largest ski resort east of the Mississippi by skiable area, has the highest peak elevation of any New England ski resort, and offers the only lift served skiing above treeline in the Northeast. The Sugarloaf Mountain Ski Club cut the first trail in 1950. Boyne Resorts has managed Sugarloaf since 2007 and bought the resort in March 2018. Carrabassett Valley Academy, at the base, counts 12 Olympians among its alumni."
+    culture_md: "Carrabassett Valley is a town of 673 people (2020 census) that incorporated in 1971 and played a large role in Sugarloaf's development. Kingfield, population 960, is the principal gateway to the resort and home of the Ski Museum of Maine. Most trails carry logging terms as a tribute to Maine's logging history. Carrabassett Valley Academy draws students from Japan, Korea, Europe, Australia, New Zealand and South Africa."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-sugarloaf-ski-resort, ed-east-wikipedia-carrabassett-valley-academy, ed-east-wikipedia-carrabassett-valley-maine, ed-east-wikipedia-kingfield-maine]
+  - target: resort
+    id: sunday-river
+    overview_md: "Sunday River is a ski resort in Newry, Maine, and one of the state's largest and most visited. It has 139 trails across eight interconnected peaks, and its 2,340 foot vertical drop is the second largest in Maine after Sugarloaf. Boyne Resorts has operated it since American Skiing Company sold it with Sugarloaf in 2007, and Boyne bought its leased New England areas in 2018. Gould Academy athletes from nearby Bethel spend winter mornings training at Sunday River. It hosted the NCAA skiing championships in 1976, 1999 and 2009."
+    culture_md: "Newry is a resort town of 411 year round residents (2020 census) with a proportionately large winter population. Bethel, population 2,504, was a fashionable summer resort between the Civil War and World War I and is home to Gould Academy. Local traditions include Santa Sunday, a charity ski in Santa suits held since 2000, and the Bust 'N' Burn mogul contest, revived in 2024."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-sunday-river-ski-resort, ed-east-wikipedia-gould-academy, ed-east-wikipedia-newry-maine, ed-east-wikipedia-bethel-maine]
+  - target: resort
+    id: black-mountain-maine
+    overview_md: "Black Mountain of Maine is a ski area in Rumford best known for its Nordic skiing. Rumford's Chisholm Ski Club opened it in 1962, and its cross country trails, designed by Rumford native and two time Olympian Chummy Broomhall, have hosted US cross country national championships in 1993, 1999, 2003 and 2004. The Maine Winter Sports Center bought it in 2003 and added two chairlifts, raising the vertical drop to 1,150 feet. It joined the Indy Pass in 2022."
+    culture_md: "Rumford is a mill town of 5,858 people (2020 census) that has made paper since 1893 and is home to ND Paper's Rumford Mill. Skiing has a long history in town: residents housed the competitors when Rumford held the cross country events of the 1950 FIS Nordic World Ski Championships, and two Rumford skiers made the 1952 Olympic team. Longtime local skiers called the 2005 opening of the summit chair one of the most exciting days of their lives."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-black-mountain-of-maine, ed-east-wikipedia-rumford-maine]
+  - target: resort
+    id: cannon
+    overview_md: "Cannon Mountain is a state owned ski area in Franconia Notch State Park in New Hampshire's White Mountains. It has the largest vertical drop in New Hampshire at 2,180 feet and the only aerial tram in the state. Cannon was the site of North America's first passenger aerial tramway in 1938, and its Richard Taft Race Course dates to 1931 and 1932. Olympic skier Bode Miller grew up skiing here. In 2013 SKI Magazine named it number one in New Hampshire for value, challenge and overall satisfaction."
+    culture_md: "Franconia is a town of 1,083 people (2020 census) in the White Mountains and home to the northern half of Franconia Notch State Park and the New England Ski Museum. The state tramway helped prove skiing as an industry in New Hampshire and drew private investment into the state's ski business. Cannon runs a PSIA ski and snowboard school and youth programs at its Brookside Learning Center."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-cannon-mountain-ski-area, ed-east-wikipedia-franconia-new-hampshire]
+  - target: resort
+    id: cranmore
+    overview_md: "Cranmore Mountain Resort is a ski area in North Conway, New Hampshire, that opened for the 1937 to 1938 season. Austrian ski pioneer Hannes Schneider moved there in 1939 and drove its expansion, and its early ski school run by European skiers set it apart. It was one of the first ski areas to develop trail grooming technology. Brian Fairbank, Tyler Fairbank and Joseph O'Donnell, operators of Jiminy Peak, bought it in 2010. All its terrain has snowmaking, and a Mountain Adventure Park runs in summer."
+    culture_md: "North Conway, a village of 2,116 people (2020 census) in the town of Conway, is known as the birthplace of American skiing, and snow trains began bringing skiers there in 1932. In winter the village is the nighttime destination for skiers from Cranmore, Attitash, Black Mountain and Wildcat. Tourism is Conway's biggest economic engine, and North Conway is a major outlet shopping destination."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-cranmore-mountain-resort, ed-east-wikipedia-north-conway-new-hampshire, ed-east-wikipedia-conway-new-hampshire]
+  - target: resort
+    id: attitash
+    overview_md: "Attitash Mountain Resort is on U.S. Route 302 in Bartlett, New Hampshire, near North Conway. It has two peaks with 68 runs: Attitash keeps narrow, old New England style trails, and Bear Peak has wider trails and more glades. It operates under a special use permit with the White Mountain National Forest. Vail Resorts bought it from Peak Resorts in 2019, and tickets work at its sister resort Wildcat. Vail says its four New Hampshire ski areas serve guests throughout New England."
+    culture_md: "Bartlett is a town of 3,200 people (2020 census) surrounded by the White Mountain National Forest, where tourism has long been a principal business. It is also home to the Story Land theme park and the Bear Notch Ski Touring center. Neighboring Conway is the commercial hub of Carroll County, with tourism as its largest economic engine and Memorial Hospital as its largest employer as of 2002."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-attitash-mountain-resort, ed-east-wikipedia-bartlett-new-hampshire, ed-east-wikipedia-conway-new-hampshire, ed-east-wikipedia-wildcat-mountain-ski-area, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: wildcat
+    overview_md: "Wildcat Mountain is a ski area in Pinkham Notch near Jackson, New Hampshire, across from Mount Washington. Its 2,112 foot vertical drop is the second largest in New Hampshire, and its Polecat trail is the longest in the state. Wildcat opened the first gondola in North America in 1958, and the Civilian Conservation Corps cut its original racing trail in 1933. More than 200 inches of snow a year usually keep it open from mid November to early May. Vail Resorts bought it with Attitash in 2019."
+    culture_md: "Jackson is a town of 1,028 people (2020 census) and a resort area in the White Mountains, where painters arrived from 1847 and grand hotels followed the railroad. It is known for Jackson Falls and its 100 kilometer cross country ski trail system. The ungroomed Wildcat Valley Trail runs from Wildcat's summit down to the village. In winter, skiers from the valley resorts spend their evenings in North Conway."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-wildcat-mountain-ski-area, ed-east-wikipedia-jackson-new-hampshire, ed-east-wikipedia-north-conway-new-hampshire]
+  - target: resort
+    id: waterville-valley
+    overview_md: "Waterville Valley Resort is on Mount Tecumseh inside the planned resort community of Waterville Valley, New Hampshire, about 130 miles north of Boston off Interstate 93. A group led by Tom Corcoran opened it in 1966. It hosted World Cup alpine races from 1969 through most of the 1980s, and in 2024 it held the first dual moguls World Cup on American soil. Members of the Sununu family and area investors bought it in 2010, and it remains independent. Snowmaking covers about 100 percent of its terrain."
+    culture_md: "Waterville Valley is a resort town of 508 people (2020 census) that draws winter visitors for alpine and cross country skiing. The Black and Blue Trail Smashers, founded in 1934, is one of the oldest ski clubs in the country and the home club of 2010 Olympic moguls champion Hannah Kearney. Waterville Valley Academy, founded in 1972, has around 160 students. The resort built New Hampshire's first terrain park."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-waterville-valley-resort, ed-east-wikipedia-waterville-valley-new-hampshire]
+  - target: resort
+    id: gunstock
+    overview_md: "Gunstock Mountain Resort is a recreation area owned by Belknap County on Gunstock Mountain in Gilford, New Hampshire. Works Progress Administration crews built it, and it was completed in 1937 with the first chairlift in the eastern United States. Most trails carry gun names such as Pistol and Musket. A county commission oversees the resort; in July 2022 the management team resigned over the commission's role, and the resort closed for 13 days until they returned. It offers night skiing on its lower slopes."
+    culture_md: "Gilford is a town of 7,699 people (2020 census) on Lake Winnipesaukee. It was the destination of the first snow train from Boston in the 1930s and had New Hampshire's first motorized ski lift, a rope tow built in 1934. Building the resort during the Depression transformed the region's economy. Gunstock holds an annual glowstick themed night terrain park contest called Glow and Throw."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-gunstock-mountain-resort, ed-east-wikipedia-gilford-new-hampshire]
+  - target: resort
+    id: mount-sunapee
+    overview_md: "Mount Sunapee Resort is a ski area inside Mount Sunapee State Park in Newbury, New Hampshire. The state built its first chairlift after World War II and ran the area until 1998, when the Mueller family of Okemo began leasing it. Vail Resorts acquired it with Okemo and Crested Butte in 2018 and leases its land from the State of New Hampshire. Snowmaking covers 97 percent of its 230 acres. Vail says its four New Hampshire ski areas serve guests throughout New England."
+    culture_md: "Newbury is a town of 2,172 people (2020 census) at the south end of Lake Sunapee. The resort holds the Slush Cup each spring, where skiers and riders try to cross a man made pond, and every August it hosts the League of New Hampshire Craftsmen's Fair, held since 1934. The state park beach on Lake Sunapee sits at the park entrance."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-mount-sunapee-resort, ed-east-wikipedia-newbury-new-hampshire, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: crotched-mountain
+    overview_md: "Crotched Mountain is a medium sized ski area in Bennington and Francestown, New Hampshire, about 77 miles northwest of Boston and 26 miles west of Manchester. The original area closed in 1989 under condominium debt. Peak Resorts bought it in 2002 and reopened it in 2003 after a 13 year closure, and Vail Resorts bought Peak Resorts in 2019. Crotched is a popular destination for night skiing, with sessions until midnight on several nights each winter."
+    culture_md: "Bennington is a town of 1,501 people (2020 census) and home to Monadnock Paper Mills. Crotched sits 30 miles east of Keene. The original Crotched Mountain area opened in 1964 on the northeast face, and the town of Francestown now owns most of that land. Vail says its four New Hampshire ski areas serve guests throughout New England."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-crotched-mountain-ski-and-ride, ed-east-wikipedia-bennington-new-hampshire, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: berkshire-east
+    overview_md: "Berkshire East Mountain Resort is a medium sized ski area on Mount Institute in Charlemont and Hawley, Massachusetts, in the Berkshires. It began as Thunder Mountain in the early 1960s. It is known for racing programs that have trained skiers up to the US Ski Team, and it often hosts USSA and MIAA slalom and giant slalom championships. In 2011 a wind turbine made it the first ski area in the world fully powered by onsite renewable energy. Owner Jon Shaefer is CEO of Bear Den Partners, which bought Burke in 2025."
+    culture_md: "Charlemont is a town of 1,185 people (2020 census) on the Mohawk Trail and the Deerfield River, where whitewater rafting is popular. Berkshire East is the only public alpine ski area in Franklin County. In summer the resort runs zip lines, the Thunderbolt mountain coaster and a downhill bike park. Its season passes include skiing at Burke Mountain in Vermont."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-berkshire-east-ski-resort, ed-east-wikipedia-charlemont-massachusetts]
+  - target: resort
+    id: snowshoe
+    overview_md: "Snowshoe Mountain is a ski resort on Cheat Mountain in Pocahontas County, West Virginia, in the Allegheny Mountains. Its village sits near the summit. It includes the Snowshoe and Silver Creek areas, and Cupp Run and Shay's Revenge drop 1,500 vertical feet, the most in the Southeast and Mid Atlantic. Thomas Brigham, a dentist from North Carolina, opened it in 1974. Intrawest bought it in 1995, and Alterra Mountain Company acquired Intrawest in 2017. Its bike park is a regular UCI Mountain Bike World Cup stop."
+    culture_md: "About 480,000 skiers visit each year, mostly from larger Mid Atlantic and Southeast cities and from across West Virginia. Pocahontas County has 7,869 people (2020 census), and tourism is one of its largest industries; about 30,000 people from outside the county owned property there as of 2008. Most of the resort's 1,400 condo and lodge units are privately owned and managed by the resort. Trail names recall the area's logging history."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-snowshoe-mountain, ed-east-wikipedia-snowshoe-west-virginia, ed-east-wikipedia-pocahontas-county-west-virginia]
+  - target: resort
+    id: seven-springs
+    overview_md: "Seven Springs Mountain Resort is a four season resort in the borough of Seven Springs, Pennsylvania, at 2,994 feet, a high elevation for a Pennsylvania ski area. Bavarian immigrants Adolph and Helen Dupre founded Seven Springs farm in 1932 and installed a rope tow for local skiers. Vail Resorts bought Seven Springs, Hidden Valley and Laurel Mountain in December 2021 for about $118 million. Vail says the three sit near Pittsburgh and draw drive to business from Washington DC, Baltimore and Cleveland."
+    culture_md: "The borough had 26 residents in 2020 and spans Somerset and Fayette counties; the Fayette portion belongs to the Pittsburgh metropolitan area, and the resort's mailing address is the village of Champion. The resort hosts events through the year, including Brewski Fest, Autumnfest, a Wine Festival and a Pond Skim. Transworld Snowboarding named its halfpipe the East Coast's best in 2009 and 2010."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-seven-springs-mountain-resort, ed-east-wikipedia-seven-springs-pennsylvania, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: hidden-valley-pa
+    overview_md: "Hidden Valley Resort is a ski area in the Laurel Highlands near the village of Hidden Valley, Somerset County, Pennsylvania, a few miles from the Pennsylvania Turnpike. Before 2020 the resort and the surrounding homeowner community were run together by Hidden Valley Resorts, a subsidiary of Kettler Brothers of Maryland. Vail Resorts bought the resort in 2021 with Seven Springs and Laurel Mountain. Vail describes the three as regional ski areas near Pittsburgh that also draw guests from Washington DC, Baltimore and Cleveland."
+    culture_md: "Hidden Valley is an unincorporated community whose homeowner association, the Hidden Valley Foundation, covers 1,185 homes and has governed itself since January 2020. The foundation provides private roads, security, pools, trails and social and recreational programs. The ski resort sits within the community along Pennsylvania Route 31 and stands apart from the association."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-hidden-valley-resort-pennsylvania, ed-east-wikipedia-hidden-valley-pennsylvania, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: laurel-mountain
+    overview_md: "Laurel Mountain is a ski area in Laurel Mountain State Park, Westmoreland County, Pennsylvania. The Commonwealth of Pennsylvania owns it, and Vail Resorts has operated it under lease since December 2021. Austrian ski pioneer Hannes Schneider designed the slopes, and it opened in 1940 as an exclusive club before it was gifted to the state in 1964. It closed in 2005 and reopened for the 2016 to 2017 season after a $6.5 million renovation. It has 20 trails and a 761 foot vertical drop."
+    culture_md: "Laurel Mountain began as a club for prominent Pennsylvanians. The Pittsburgh Ski Club used its 1940 Midway Cabin as its mountain headquarters until about 1954, when regional skiing shifted toward Seven Springs and Hidden Valley. The cabin still stands halfway down the Broadway slope, and the modern lodge displays historic Pennsylvania ski memorabilia."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-laurel-mountain-ski-resort]
+  - target: resort
+    id: liberty-mountain
+    overview_md: "Liberty Mountain Resort is a ski area in southern Pennsylvania. It began in the mid 1960s as Charnita, the centerpiece of a real estate development. Irv Naylor's Snow Time, Inc. bought it in 1974 and renamed it Ski Liberty. Peak Resorts bought it in 2018 with Whitetail and Roundtop, and Vail Resorts bought Peak in 2019. It has night skiing on all terrain seven nights a week, full snowmaking, a 116 room hotel and the Carroll Valley golf course."
+    culture_md: "Vail says its eight Mid Atlantic ski areas serve guests from Philadelphia, Pittsburgh, central and southern New Jersey, Baltimore and Washington, D.C., offering local options and easy overnight weekend and holiday trips. Liberty's hotel and lodge stay open year round for weddings and meetings. Liberty sits closer to Baltimore than its sister resort Whitetail, which is 92 miles from the city."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-liberty-mountain-resort, ed-east-wikipedia-whitetail-ski-resort, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: roundtop-mountain
+    overview_md: "Roundtop Mountain Resort is a ski area in York County, Pennsylvania. Irvin Naylor developed it as Ski Roundtop in 1964 and formed Snow Time, Inc. to run it; Snow Time later also ran Liberty and Whitetail. Peak Resorts bought the three in 2018, and Vail Resorts acquired them in 2019. Roundtop has 22 trails on a 600 foot vertical drop, full snowmaking, and night skiing on 95 percent of its terrain seven nights a week. Summer brings camps and paintball."
+    culture_md: "Vail groups Roundtop with its eight Mid Atlantic ski areas, which serve guests from Philadelphia, Pittsburgh, central and southern New Jersey, Baltimore and Washington, D.C. Vail says these areas offer local options and easy overnight weekend and holiday trips within driving distance of those markets. Roundtop sits closer to Baltimore than its sister resort Whitetail, which is 92 miles from the city."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-roundtop-mountain-resort, ed-east-wikipedia-whitetail-ski-resort, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: whitetail
+    overview_md: "Whitetail Resort is on Two Top Mountain in the Bear Pond Mountains of Pennsylvania, between Mercersburg and Clear Spring, Maryland. It opened in 1991, joined Snow Time, Inc. a few years later, passed to Peak Resorts in 2018 and to Vail Resorts in 2019. Its trails are laid out so each ability level has its own area and lift, a design that won Snow Country Magazine's 1992 Best Overall Resort Design Award. Seasons usually run 80 to 100 days."
+    culture_md: "Whitetail serves the Baltimore Washington metropolitan area, 89 miles from Washington, D.C., and 92 miles from Baltimore. It gets crowded on weekends and holidays and is quieter on weekdays. Mercersburg, a borough 7 miles north of the resort, had 1,561 people in 2010. Vail says its Mid Atlantic ski areas offer local options and easy overnight weekend trips."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-whitetail-ski-resort, ed-east-wikipedia-mercersburg-pennsylvania, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: jack-frost
+    overview_md: "Jack Frost is one of two ski areas in the Jack Frost and Big Boulder resort in Kidder Township, in Pennsylvania's Pocono Mountains. Big Boulder's owners built Jack Frost for longer runs and a higher vertical drop, with trails that descend to the level of the Lehigh River. Peak Resorts owned and operated the resort until Vail Resorts bought it in 2019. Vail says its Mid Atlantic ski areas serve guests from Philadelphia, central and southern New Jersey and other nearby markets."
+    culture_md: "Jack Frost is a major tourist attraction in the region and has drawn new home buyers, who cite the ski resort, golf courses and the distance from New York City and Philadelphia. Kidder Township had 1,935 people at the 2010 census, up from 1,185 in 2000."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-jack-frost-big-boulder, ed-east-wikipedia-kidder-township-pennsylvania, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: big-boulder
+    overview_md: "Big Boulder Mountain is the older of the two ski areas at Jack Frost and Big Boulder in Kidder Township, in the Pocono Mountains. It opened in 1947, and employee John Guresh is credited with developing the first usable snowmaking equipment there in the 1950s. Its three main terrain parks include LOVE Park, named for the Philadelphia skate spot. In the 2020 to 2021 season Vail Resorts cut back the parks and marketed Big Boulder as a learning hill."
+    culture_md: "Big Boulder shares its township and owner with Jack Frost. Kidder Township had 1,935 people at the 2010 census. Vail says its Mid Atlantic ski areas serve guests from Philadelphia, Pittsburgh, central and southern New Jersey, Baltimore and Washington, D.C. The lower lodge at Big Boulder Park has an outdoor grill, a bar and a pro shop."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-jack-frost-big-boulder, ed-east-wikipedia-kidder-township-pennsylvania, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: big-snow-american-dream
+    overview_md: "Big SNOW American Dream is an indoor ski and snowboard park inside the American Dream complex at the Meadowlands Sports Complex in East Rutherford, New Jersey. It opened on December 5, 2019, as the first indoor ski park in North America. Triple Five Group owns it, and Snow Operating, which also runs Mountain Creek, operates it. The 4 acre slope holds real snow at 28 F year round, with three trails, a terrain park, a quad chairlift and lessons. Guests book time slots in advance."
+    culture_md: "American Dream is the second largest mall in the United States, with about 450 retail tenants as of 2024, a Nickelodeon Universe theme park and a water park. Big Snow hired 300 workers ahead of its opening. Opening day skiers and riders included Lindsey Vonn, Donna Weinbrecht and Red Gerard."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-big-snow-american-dream, ed-east-wikipedia-american-dream-mall]
+  - target: resort
+    id: boyne-mountain
+    overview_md: "Boyne Mountain Resort is a ski resort near Boyne Falls and Boyne City in northern Michigan, operated by Boyne Resorts. Everett Kircher, Jim Christianson and John Norton bought the site for $1 in 1948 and opened it in 1949. It still uses parts of the world's first chairlift, built for Sun Valley in 1936. With Boyne Highlands it introduced the world's first triple (1963) and quad (1965) chairlifts. Its centerpiece is the Mountain Grand Lodge and Spa, and Avalanche Bay is Michigan's largest indoor water park."
+    culture_md: "Boyne Falls is a village of 358 people (2020 census) in Charlevoix County, and the resort sits just southeast of it. Beyond skiing, the resort runs two golf courses, a zip line tour, the Avalanche Bay water park and SkyBridge Michigan, a timber towered suspension bridge that opened in 2022. Boyne Mountain has ten chairlifts, 60 runs and four terrain parks."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-boyne-mountain-resort, ed-east-wikipedia-boyne-falls-michigan]
+  - target: resort
+    id: the-highlands
+    overview_md: "The Highlands at Harbor Springs is a ski resort near Harbor Springs in northern Michigan, owned and operated by Boyne Resorts. It opened as Harbor Highlands in 1955, closed, and reopened under Boyne in 1963 as Boyne Highlands with the world's first triple chairlifts. It expanded into the North Peak area in 1995 and took its current name in December 2021. A high speed six passenger chairlift replaced three triple chairs in 2023. It is the sister resort of Boyne Mountain."
+    culture_md: "Harbor Springs is a city and resort community of 1,274 people (2020 census) in Emmet County, known for historic summer resorts such as Wequetonsing. The Little Traverse Bay Bands of Odawa Indians have their tribal offices in the city. The golf series The Big Break X: Michigan was filmed at the resort."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-the-highlands-at-harbor-springs, ed-east-wikipedia-harbor-springs-michigan, ed-east-wikipedia-boyne-mountain-resort]
+  - target: resort
+    id: mount-bohemia
+    overview_md: "Mount Bohemia is a ski area at the northern end of Michigan's Keweenaw Peninsula, in Mohawk, that opened in 2000. It has the highest vertical drop in the Midwest and relies on 250 to 300 inches of lake effect snow a year, the most of any Midwest resort, with no snowmaking or grooming. Its runs are rated black diamond and harder, plus three intermediate runs. It also offers the only cat skiing in the Midwest, at Voodoo Mountain."
+    culture_md: "Keweenaw County is Michigan's northernmost and least populous county, with 2,046 people at the 2020 census. Nearby Lac La Belle has an active summer tourist trade with cottages and resorts, and in winter Mount Bohemia draws skiers and snowboarders there. Its ungroomed, expert terrain is aimed at advanced skiers and riders."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-mount-bohemia, ed-east-wikipedia-lac-la-belle-michigan, ed-east-wikipedia-keweenaw-county-michigan]
+  - target: resort
+    id: mount-brighton
+    overview_md: "Mount Brighton is a ski and snowboard area in Brighton, Michigan, that opened in 1961 on man made slopes with 230 feet of vertical. Almost all its snow is made from water stored in an onsite reservoir. It has 25 runs, five chairlifts, seven surface lifts and a terrain park. The Bruhn family owned it until Vail Resorts bought it in December 2012. It appeared in the 1993 film Aspen Extreme."
+    culture_md: "Ski and snowboard clubs are a popular activity for suburban and metro Detroit elementary and high school students, and Mount Brighton teaches many of these groups. XLR8 Alpine Racing trains young racers here, and NASTAR and Epic Race events run on weekends. Vail lists Detroit among the metro markets its Midwest ski areas draw from."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-mount-brighton, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: wilmot-mountain
+    overview_md: "Wilmot Mountain is a ski area in Kenosha County, Wisconsin, just north of the Illinois border, 55 miles north of Chicago and 40 miles from Milwaukee. Walter Stopa founded it in 1938, and his family ran it until Vail Resorts bought it in 2016 and spent about $13 million on renovations that year. It calls itself the Matterhorn of the Midwest and has about 200 feet of vertical, wide open slopes and night skiing on the whole hill."
+    culture_md: "Wilmot's ski and snowboard school has over 300 certified instructors and a full children's program. The Chicago Metropolitan Ski Council holds slalom and giant slalom races here eight days each season, and the resort runs weekly evening race training. Its longest run, State Line, parallels the Illinois and Wisconsin border. Vail lists Chicago among the metro markets its Midwest ski areas draw from."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-wilmot-mountain, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: afton-alps
+    overview_md: "Afton Alps is a ski area on the St. Croix River in Denmark Township, Washington County, south of Afton, Minnesota. Brothers Paul and Bob Augustine and fellow farmer Paul Furlong opened it in 1962, and by 1976 it claimed over 200,000 visitors a year. Vail Resorts bought it for $20 million in 2012, aiming to build season pass loyalty that would bring skiers to its western resorts. It has nearly 300 skiable acres, 350 feet of vertical and 36 trails."
+    culture_md: "Afton is a city of 2,955 people (2020 census) known for Afton Alps, the largest ski and snowboard area in the Twin Cities metropolitan area. Afton State Park and the town's small town feel draw day trip tourism. Olympic cross country gold medalist Jessie Diggins is from Afton. Vail lists Minneapolis among the metro markets its Midwest ski areas draw from."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-afton-alps, ed-east-wikipedia-afton-minnesota, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: buck-hill
+    overview_md: "Buck Hill is a ski hill in Burnsville, Minnesota, about 15 miles south of downtown Minneapolis beside Interstate 35. Chuck Stone opened it in 1954, and David and Corrine Solner own it. Its east face has 310 feet of vertical and night skiing. Erich Sailer, its racing coach since 1969 and a 2006 National Ski Hall of Fame inductee, coached World Cup racers Lindsey Vonn and Kristina Koznick, who learned to race here. Paula Moltzan also began racing at Buck Hill."
+    culture_md: "Buck Hill is one of three alpine ski areas in the Twin Cities metropolitan area, with Afton Alps and Hyland. Homes cover the other sides of the hill, and a municipal water tower shares the summit. It hosted pro ski tour races during the 1973 Saint Paul Winter Carnival, and Minneapolis band The Replacements named a song after it."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-buck-hill]
+  - target: resort
+    id: hyland-hills
+    overview_md: "Hyland Hills Ski Area is in Bloomington, Minnesota, just south of Minneapolis, owned and operated by Three Rivers Park District. It was known as Normandale Ski Hill by 1945, and the Hennepin County Park Reserve District later bought and renamed it. It receives about 160,000 visitors a year and opened a 36,000 square foot chalet after a $13.3 million renovation in 2016. Three Rivers Racing, its youth alpine club, has trained racers who reached national, World Cup and Olympic level races."
+    culture_md: "Hyland sits near the Mall of America and is one of three alpine ski areas in the Twin Cities metropolitan area. It hosts USSA freestyle and racing teams, the G Team snowboard club, and Nordic ski jumping training run by the Minneapolis Ski Club. In summer the park hosts auto shows, outdoor movies, live music and disc golf."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-hyland-hills-ski-area, ed-east-wikipedia-buck-hill]
+  - target: resort
+    id: boston-mills
+    overview_md: "Boston Mills is one of two sister ski areas, with Brandywine, in Peninsula, Ohio, inside Cuyahoga Valley National Park. Both opened independently in 1963, and Boston Mills' owners bought Brandywine in 1990. Peak Resorts bought the pair in 2002, and Vail Resorts has operated them since acquiring Peak in 2019. Boston Mills has the Tiger run, the steepest slope in Ohio, and holds an annual Winter Carnival with a Slosh Pit and a costume contest."
+    culture_md: "In 2022 a staff shortage, tied to COVID 19 and a starting wage of $11.25 an hour, left only Boston Mills open at the start of a delayed season, and local skiers complained of long lines. Vail then raised starting pay to $20 an hour. Vail lists Cleveland among the metro markets its Midwest ski areas draw from."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-boston-mills-brandywine, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: brandywine
+    overview_md: "Brandywine is the sister ski area of Boston Mills in Peninsula, Ohio, about two miles away inside Cuyahoga Valley National Park. It opened in 1963 as a competitor and came under the same owner in 1990. Peak Resorts bought both in 2002, and Vail Resorts has operated them since acquiring Peak in 2019. Brandywine has Polar Blast, the largest tubing park in Northeast Ohio, and added the Ram Quad chairlift for the 2022 to 2023 season."
+    culture_md: "The two resorts share 18 trails and 11 chairlifts and sit five minutes apart by car. In 2022 a staff shortage at the pair, tied to COVID 19 and an $11.25 starting wage, kept Brandywine closed at the start of the season; Vail then raised starting pay to $20 an hour. Vail lists Cleveland among the metro markets its Midwest ski areas draw from."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-boston-mills-brandywine, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: alpine-valley-oh
+    overview_md: "Alpine Valley Ski Area is in Munson Township, Geauga County, Ohio, east of Chesterland. Thomas D. Apthorp built it in 1965 and ran it until 2007. It sits in Ohio's snow belt and gets about 120 inches of natural snow a year, the most of any Ohio ski resort, with an average season of 93 days. Vail Resorts announced its acquisition in July 2019. It has nine trails on 72 acres, Ohio's largest half pipe and night skiing."
+    culture_md: "Alpine Valley's ski school has over 70 instructors and is registered with the Professional Ski Instructors of America. Vail lists Cleveland among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-alpine-valley-ski-area-ohio, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: mad-river-mountain
+    overview_md: "Mad River Mountain is a ski and snowboard resort in Valley Hi, Ohio, off U.S. Route 33 east of Bellefontaine. It opened in 1962 as Valley Hi Ski Area. It has a 300 foot vertical drop, 144 acres, 16 trails, three terrain parks, a tubing park and snowmaking on all terrain. Vail Resorts added it in 2019 with Peak Resorts and leases it, and EPR Properties lists it in its portfolio. A fire destroyed the lodge in 2015, and a $6.5 million lodge opened in 2016."
+    culture_md: "The resort lies 6 miles southeast of Campbell Hill, Ohio's highest point, near the source of the Mad River. Vail lists Columbus among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-mad-river-mountain, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: paoli-peaks
+    overview_md: "Paoli Peaks is a ski resort in Paoli Township, Orange County, Indiana, just north of Hoosier National Forest. It is built on a natural hill with 300 feet of vertical and 17 runs, and more than 110 snowmaking towers and machines make up for about 25 inches of natural snow a year. Vail Resorts owns and operates it. Its 45,000 square foot day lodge sits on top of the hill, and visitors stay in hotels nearby."
+    culture_md: "Paoli Peaks has extensive night skiing, with Midnight Madness sessions until 3 a.m. on most weekends, and a Spring Carnival with a cardboard sled race and a slosh pit. Its ski patrol has about 85 members, mostly volunteers who hold full time jobs elsewhere. Vail lists Indianapolis and Louisville among the metro markets its Midwest ski areas draw from."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-paoli-peaks, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: hidden-valley-mo
+    overview_md: "Hidden Valley Ski Area is a ski resort in Wildwood, a St. Louis suburb in Missouri. Glenn Boyd Sr. and Tim Boyd bought the Wildwood Golf Course in 1977 and turned its hills into a ski area in 1982, the first resort of what became Peak Resorts. It has 15 trails on 65 acres across two peaks, a 320 foot vertical drop and snowmaking on every trail. A zip line tour opened in 2019, the same year Vail Resorts acquired Peak."
+    culture_md: "The ski area sits in a conservation easement, agreed in exchange for permission to build 80 homes on the former golf property. Vail lists St. Louis among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-hidden-valley-ski-area-missouri, ed-east-vail-10k-fy2026]
+  - target: resort
+    id: snow-creek
+    overview_md: "Snow Creek is a ski resort on the bluffs above the Missouri River in Platte County, northwest of Kansas City, with a Weston, Missouri, mailing address. It opened in 1986 as the second resort in the Peak Resorts chain, and Vail Resorts bought it with Peak in 2019. It has 25 acres, 11 trails, three chairlifts and a 300 foot vertical drop. The resort plays on its Midwest heritage with a tornado alley tubing trail."
+    culture_md: "Snow Creek overlooks Kansas across the river. Vail lists Kansas City among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families. A tornado touched down at the resort in April 2003 without injuries."
+    alexandre_take_md: null
+    status: draft
+    source_ids: [ed-east-wikipedia-snow-creek-ski-resort, ed-east-vail-10k-fy2026]

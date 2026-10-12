@@ -406,6 +406,11 @@ export function createMap(container, index, { onPick, getPadding }) {
       fitView(view, animate);
     },
     refit() { if (loaded && current) fitView(current, false); },
+    /** State outlines arrive after first render. */
+    setStates(fc) {
+      const apply = () => { const src = map.getSource('states'); if (src) src.setData(fc); if (current && current.stateCode) applyView(current); };
+      if (loaded) apply(); else map.once('load', apply);
+    },
     /** Resort detail mode. Pass null to leave it. Returns the layer groups that have data. */
     setDetail(next) {
       detail = next;

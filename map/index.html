@@ -18,6 +18,12 @@
   <link rel="stylesheet" href="/assets/sidebar.css?v=12">
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css">
   <link rel="stylesheet" href="/map/css/map.css?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="/data/build/resorts.json" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="/data/build/resorts.geojson" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="/data/build/clusters.geojson" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="/data/build/states.json" as="fetch" crossorigin="anonymous">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
   <link rel="modulepreload" href="/map/js/data.js">
@@ -38,7 +44,7 @@
         var t=document.getElementById("sidebar-placeholder");
         fetch("/partials/sidebar.html?v=13")
           .then(function(r){return r.text()})
-          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim();t.replaceWith(d.firstElementChild)})
+          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim().replace(/<img /g,'<img loading="lazy" decoding="async" ');t.replaceWith(d.firstElementChild)})
           .catch(function(){t.innerHTML="<div style='padding:1rem;color:#fca5a5'>Navigation failed to load.</div>"});
       })();
     </script>

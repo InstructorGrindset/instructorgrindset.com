@@ -1,6 +1,6 @@
 // Career Map entry point.
 import { config, isPhone } from './config.js';
-import { loadAll } from './data.js';
+import { loadAll, loadStateOutlines } from './data.js';
 import { createRouter } from './router.js';
 import { createMap } from './map.js';
 import { createPanel } from './panel.js';
@@ -186,6 +186,15 @@ async function main() {
 
   router.start();
   els.panel.setAttribute('aria-busy', 'false');
+  // Off the critical path: state outlines draw once the map is up.
+  if (mapCtl) {
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
+    const go = () => idle(() => loadStateOutlines(index).then((fc) => {
+      if (fc) mapCtl.setStates(fc);
+      window.__careerMap.statesReady = true;
+    }));
+    if (mapCtl.map.loaded()) go(); else mapCtl.map.once('load', go);
+  }
   window.__careerMap = { index, router, mapCtl, ready: true };
 }
 

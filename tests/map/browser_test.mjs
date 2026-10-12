@@ -112,6 +112,8 @@ async function ready(page) {
 }
 
 async function mapIdle(page) {
+  // State outlines load after the map is interactive (Phase 8 performance); wait for them too.
+  await page.waitForFunction(() => !window.__careerMap || !window.__careerMap.mapCtl || window.__careerMap.statesReady, null, { timeout: 15000 });
   await page.waitForFunction(() => {
     const m = window.__careerMap && window.__careerMap.mapCtl && window.__careerMap.mapCtl.map;
     return !m || (m.loaded() && !m.isMoving());
