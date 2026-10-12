@@ -12,6 +12,340 @@ Named clusters with at least one Tier A resort. The per state fallback clusters 
 
 Still needed: Adirondacks (`adirondacks`), Alaska (`alaska`), Appalachia (`appalachia`), Cascades (`cascades`), Catskills (`catskills`), Central Oregon (`central-oregon`), Central Vermont (`central-vermont`), Eastern Sierra (`eastern-sierra`), I 70 Corridor (`i70-corridor`), Inland Northwest (`inland-northwest`), Lake Tahoe (`lake-tahoe`), Laurel Highlands (`laurel-highlands`), Mount Hood (`mount-hood`), New York Metro (`new-york-metro`), Northern Colorado (`northern-colorado`), Northern New Mexico (`northern-new-mexico`), Northern Vermont (`northern-vermont`), Poconos (`poconos`), Roaring Fork Valley (`roaring-fork`), Southern California (`southern-california`), Southern Vermont (`southern-vermont`), Southwest Colorado (`southwest-colorado`), Southwest Montana (`southwest-montana`), Tetons (`tetons`), Wasatch (`wasatch`), Western Maine (`western-maine`), White Mountains (`white-mountains`), Wood River Valley (`wood-river`).
 
-## Drafts (0; 0 reviewed)
+## Drafts (28; 0 reviewed)
 
-No drafts are waiting.
+### Cluster: Adirondacks (`adirondacks`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> The Adirondack cluster spreads across the Adirondack Mountains of northern New York. Lake Placid, a village of 2,205 people at the 2020 census, became known internationally as host of the 1932 and 1980 Winter Olympics and hosted the 2023 Winter World University Games. In 2020, 40.7% of its 2,064 housing units were vacant. Whiteface Mountain sits in nearby Wilmington, about 13 miles from Lake Placid, and hosted every alpine event of the 1980 Games. Gore Mountain is in the hamlet of North Creek, population 562 in 2020, about one hour from the Albany metro area, and it draws skiers from across the East. New York State owns both mountains, and the Olympic Regional Development Authority, a state agency, runs them. Growth at Gore brought new private businesses, a community center, an art gallery and a theater company to North Creek. Titus Mountain sits south of Malone in Franklin County.
+
+**Sources:** [Lake Placid, New York (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Placid,_New_York), [Whiteface Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Whiteface_Mountain), [Gore Mountain (ski resort) (Wikipedia)](https://en.wikipedia.org/wiki/Gore_Mountain_(ski_resort)), [North Creek, New York (Wikipedia)](https://en.wikipedia.org/wiki/North_Creek,_New_York), [Titus Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Titus_Mountain)
+
+Approve: `python -m pipeline.editorial approve cluster adirondacks --by Alexandre`
+
+### Cluster: Alaska (`alaska`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster centers on Anchorage, the most populous city in Alaska with 291,247 people at the 2020 census. Girdwood, a resort town inside the Municipality of Anchorage, had an estimated 1,742 residents in 2019. Alyeska Resort, the largest ski area in the state, sits there about 30 miles from downtown. Skiing and snowboarding at Alyeska bring visitors and their money into the valley. Seasonal vacation homes long dominated the town, and the Alyeska Prince Hotel, opened in the 1990s, shifted Girdwood toward a year round economy. Housing affordability for resort workers is a recurring local debate, and many workers have camped illegally on public lands. Summer brings hiking, fishing, rafting and the July Girdwood Forest Fair. Inside Anchorage, Arctic Valley is a nonprofit area run by the Anchorage Ski Club and open mainly on weekends, and Hilltop Ski Area serves the city too. Anchorage's economy rests on transportation, the military, government, tourism, corporate headquarters and resource extraction.
+
+**Sources:** [Anchorage, Alaska (Wikipedia)](https://en.wikipedia.org/wiki/Anchorage,_Alaska), [Girdwood, Anchorage, Alaska (Wikipedia)](https://en.wikipedia.org/wiki/Girdwood,_Anchorage,_Alaska), [Alyeska Resort (Wikipedia)](https://en.wikipedia.org/wiki/Alyeska_Resort), [Arctic Valley Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Arctic_Valley_Ski_Area)
+
+Approve: `python -m pipeline.editorial approve cluster alaska --by Alexandre`
+
+### Cluster: Appalachia (`appalachia`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster pairs two resort communities in the Allegheny Mountains. Snowshoe Mountain sits in Snowshoe, an unincorporated community in Pocahontas County, West Virginia, built around the resort. Its village sits near the summit. About 480,000 skiers visit each year, mainly from West Virginia and the larger cities of the Mid Atlantic and Southeast. Tourism is one of the county's largest industries, and Snowshoe is its main attraction in summer and winter. The county had 7,869 residents in 2020, and 49.1% of its 6,795 housing units were vacant. About 30,000 people from outside the county owned property there as of 2008. The Homestead ski area in Hot Springs, Virginia, opened in 1959 and is the oldest ski resort in the state. It belongs to The Omni Homestead, a historic resort and the major employer of Bath County, whose economy focuses on tourism and recreation. Bath County had 4,209 residents in 2020.
+
+**Sources:** [Snowshoe Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Snowshoe_Mountain), [Snowshoe, West Virginia (Wikipedia)](https://en.wikipedia.org/wiki/Snowshoe,_West_Virginia), [Pocahontas County, West Virginia (Wikipedia)](https://en.wikipedia.org/wiki/Pocahontas_County,_West_Virginia), [The Omni Homestead Resort (Wikipedia)](https://en.wikipedia.org/wiki/The_Omni_Homestead_Resort), [Bath County, Virginia (Wikipedia)](https://en.wikipedia.org/wiki/Bath_County,_Virginia)
+
+Approve: `python -m pipeline.editorial approve cluster appalachia --by Alexandre`
+
+### Cluster: Cascades (`cascades`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster follows the Cascade Range across Washington, and most of its mountains serve the Seattle metro area. The Summit at Snoqualmie sits on Interstate 90 about an hour from Seattle. It is the closest ski area to the city and is often crowded on weekends. Snoqualmie Pass had 372 residents in 2020. Its chalets and condominiums are mainly occupied seasonally by Seattle area residents, and about 300 people live there year round. Crystal Mountain, the largest ski resort in Washington, is primarily a day use area reached from Seattle and Tacoma by State Route 410. US Route 2 serves both Stevens Pass and Leavenworth, a Bavarian themed town of 2,263 people whose largest industry is tourism. Leavenworth drew 3.4 million visitors in 2024, 59 percent of them from the Seattle metro area. East of the crest, Mission Ridge sits 30 minutes from Wenatchee, a city of 35,508. Mt. Baker in Whatcom County holds the world record for snowfall in one season, set in the 1998 to 1999 season. White Pass lies 53 miles west of Yakima.
+
+**Sources:** [The Summit at Snoqualmie (Wikipedia)](https://en.wikipedia.org/wiki/The_Summit_at_Snoqualmie), [Snoqualmie Pass, Washington (Wikipedia)](https://en.wikipedia.org/wiki/Snoqualmie_Pass,_Washington), [Crystal Mountain (Washington) (Wikipedia)](https://en.wikipedia.org/wiki/Crystal_Mountain_(Washington)), [Stevens Pass (Wikipedia)](https://en.wikipedia.org/wiki/Stevens_Pass), [Leavenworth, Washington (Wikipedia)](https://en.wikipedia.org/wiki/Leavenworth,_Washington), [Wenatchee, Washington (Wikipedia)](https://en.wikipedia.org/wiki/Wenatchee,_Washington), [Mission Ridge Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Mission_Ridge_Ski_Area), [Mt. Baker Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Mt._Baker_Ski_Area), [White Pass Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/White_Pass_Ski_Area)
+
+Approve: `python -m pipeline.editorial approve cluster cascades --by Alexandre`
+
+### Cluster: Catskills (`catskills`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> The Catskills rise in southeastern New York, largely inside Catskill Park, a forest preserve protected from many forms of development under state law. The region was a favored destination for New York City vacationers in the mid 20th century, when about 500 Borscht Belt summer resorts operated there. It has been a haven for artists, musicians and writers since the late 19th century, especially around Woodstock and Phoenicia. Hunter and Windham sit in Greene County, which had 47,931 residents in 2020. Hunter Mountain, about three hours from New York City, sits in the town of Hunter, population 3,035, and the ski resort is the largest employer in the village of Hunter. It was the first ski area in New York to install snowmaking. Windham Mountain Club, about 2.5 hours north of the city, sits in the town of Windham, population 1,708, nicknamed the Gem of the Catskills. Belleayre in Highmount is owned by the Olympic Regional Development Authority and recorded 237,825 visits in the 2022 to 2023 season. Plattekill in Roxbury is privately owned, and Holiday Mountain sits in Monticello.
+
+**Sources:** [Catskill Mountains (Wikipedia)](https://en.wikipedia.org/wiki/Catskill_Mountains), [Greene County, New York (Wikipedia)](https://en.wikipedia.org/wiki/Greene_County,_New_York), [Hunter Mountain (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Hunter_Mountain_(ski_area)), [Hunter, New York (Wikipedia)](https://en.wikipedia.org/wiki/Hunter,_New_York), [Windham Mountain Club (Wikipedia)](https://en.wikipedia.org/wiki/Windham_Mountain_Club), [Windham (town), New York (Wikipedia)](https://en.wikipedia.org/wiki/Windham_(town),_New_York), [Belleayre Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Belleayre_Mountain), [Plattekill Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Plattekill_Mountain)
+
+Approve: `python -m pipeline.editorial approve cluster catskills --by Alexandre`
+
+### Cluster: Central Oregon (`central-oregon`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Bend anchors this cluster. It is the most populous city in Central Oregon, with 99,178 residents at the 2020 census, and the seat of Deschutes County, which had 198,253. Bend began as a logging town and grew into a center of tourism and recreation. Tourism is one of its largest sectors, and Mt. Bachelor, west of town on Century Drive, brings in visitors from across Oregon, Washington and California. In 2011, tourism employed 16% of the city's workforce. Destination resorts such as Sunriver and Eagle Crest are major employers in the county. Bend is also a retirement destination and a commuter town for some tech workers from the San Francisco Bay Area and Seattle, drawn by the outdoors and a cost of living below those metros. The city has a growing art scene, breweries and the BendFilm Festival, launched in 2004. Mt. Bachelor runs one of the longest seasons in the nation, from mid November through May. Hoodoo sits near Santiam Pass on US Route 20, and Willamette Pass sits on Highway 58 between Oakridge and La Pine.
+
+**Sources:** [Bend, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Bend,_Oregon), [Deschutes County, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Deschutes_County,_Oregon), [Mount Bachelor ski area (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Bachelor_ski_area), [Hoodoo (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Hoodoo_(ski_area)), [Willamette Pass Resort (Wikipedia)](https://en.wikipedia.org/wiki/Willamette_Pass_Resort)
+
+Approve: `python -m pipeline.editorial approve cluster central-oregon --by Alexandre`
+
+### Cluster: Central Vermont (`central-vermont`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Central Vermont holds two resort hubs. Killington, the largest ski area in the eastern US and nicknamed the Beast of the East, sits in the Rutland County town of Killington, home to 1,407 people at the 2020 census and numerous vacation lodges. The resort's mountains separate the town from Rutland, the county seat and third largest city in Vermont with 15,807 residents. Rutland's major employers include Rutland Regional Medical Center and GE Aircraft Engines. Pico, one of the first commercial ski resorts in the state, sits on US Route 4 and shares lift tickets with Killington. Okemo sits in Ludlow, a former mill town of 2,172 that became a ski destination. In the Mad River Valley, Sugarbush in Warren, a town of 1,977, is one of the largest resorts in New England. Mad River Glen in Fayston is a skier owned cooperative that keeps narrow, lightly groomed trails and a single chairlift, and it bans snowboarding. The economy of neighboring Waitsfield, population 1,844, is largely supported by these two resorts.
+
+**Sources:** [Killington Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Killington_Ski_Resort), [Killington, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Killington,_Vermont), [Rutland (city), Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Rutland_(city),_Vermont), [Pico Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Pico_Mountain), [Okemo Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Okemo_Mountain), [Ludlow (town), Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Ludlow_(town),_Vermont), [Sugarbush Resort (Wikipedia)](https://en.wikipedia.org/wiki/Sugarbush_Resort), [Warren, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Warren,_Vermont), [Mad River Glen (Wikipedia)](https://en.wikipedia.org/wiki/Mad_River_Glen), [Waitsfield, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Waitsfield,_Vermont)
+
+Approve: `python -m pipeline.editorial approve cluster central-vermont --by Alexandre`
+
+### Cluster: Eastern Sierra (`eastern-sierra`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Mammoth Lakes is the main town in this cluster. It is the only incorporated town in Mono County and had 7,191 residents at the 2020 census, down 12.7% from 2010. Its economy is primarily tourism based, and the lodging industry generates around two thirds of the town's gross revenue. In 2020, 68.6% of its 9,330 housing units were vacant, and renters occupied 52.4% of the occupied homes. The median listing price was $752,000 in August 2022. Mammoth Mountain sits at the edge of town. Most of its skiers come from the Los Angeles area, since Bay Area drivers must cross four mountain passes to reach it. Summer camping, hiking and fishing bring a second season. June Mountain sits above June Lake, a community of 611 people where tourism is the chief industry and over half of private homes are second homes. Most of the June Mountain winter workforce lives in employee housing in Mammoth and rides a daily bus. China Peak sits on Huntington Lake northeast of Fresno, and Badger Pass is a small area inside Yosemite National Park.
+
+**Sources:** [Mammoth Lakes, California (Wikipedia)](https://en.wikipedia.org/wiki/Mammoth_Lakes,_California), [Mono County, California (Wikipedia)](https://en.wikipedia.org/wiki/Mono_County,_California), [Mammoth Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Mammoth_Mountain_Resort), [June Lake, California (Wikipedia)](https://en.wikipedia.org/wiki/June_Lake,_California), [China Peak (Wikipedia)](https://en.wikipedia.org/wiki/China_Peak), [Badger Pass Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Badger_Pass_Ski_Area)
+
+Approve: `python -m pipeline.editorial approve cluster eastern-sierra --by Alexandre`
+
+### Cluster: I 70 Corridor (`i70-corridor`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster covers the resorts along Interstate 70 west of Denver, plus Eldora and Winter Park just off the corridor. Summit County holds Breckenridge, Keystone, Copper Mountain and Arapahoe Basin. It had 31,055 residents in 2020, and 58.7% of its 31,342 housing units were vacant. Breckenridge, the county seat, had 5,078 residents and many part time residents with vacation homes. In Silverthorne, Zillow put the average home price at $846,979 in October 2025. Eagle County, home to Vail and Beaver Creek, had 55,731 residents in 2020. Vail's economy relies heavily on tourism. Its median house price is over $1 million, and the town faces a worker shortage tied to a lack of housing. In 2022 a Vail Resorts spokesperson put the county's workforce shortfall at about 6,000 beds. Loveland, one of the closest areas to the Denver metro area, is popular with locals. Eldora caters mostly to day skiers and is reached by an RTD bus from Boulder. Winter Park sits about ninety minutes from Denver and is served by the Winter Park Express ski train.
+
+**Sources:** [Summit County, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Summit_County,_Colorado), [Breckenridge, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Breckenridge,_Colorado), [Silverthorne, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Silverthorne,_Colorado), [Eagle County, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Eagle_County,_Colorado), [Vail, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Vail,_Colorado), [Loveland Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Loveland_Ski_Area), [Eldora Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Eldora_Mountain_Resort), [Winter Park, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Winter_Park,_Colorado), [Winter Park Resort (Wikipedia)](https://en.wikipedia.org/wiki/Winter_Park_Resort), [Interstate 70 in Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Interstate_70_in_Colorado)
+
+Approve: `python -m pipeline.editorial approve cluster i70-corridor --by Alexandre`
+
+### Cluster: Inland Northwest (`inland-northwest`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster spans eastern Washington, northern Idaho and northwest Montana. Spokane is the economic and cultural center of the Inland Northwest, with 228,989 residents at the 2020 census and about 605,000 in its metro area. Mt. Spokane sits in a state park northeast of the city on State Route 206. Sandpoint, the seat of Bonner County, had 8,639 residents in 2020. Its economy rests on forest products, light manufacturing, tourism, recreation and government services. Schweitzer, the largest ski resort in Idaho, sits northwest of town. Its 1963 opening turned the area into a year round tourism destination, and it was popular with regional skiers from the start. A Spokane skier who wanted a closer alternative to Whitefish started the effort to build it. Whitefish, Montana, had 7,751 residents in 2020 and is known for its environmentalism and its protected trails and forests. Whitefish Mountain Resort sits on Big Mountain four miles from town, west of Glacier National Park and 21 miles north of Kalispell. Flathead County, which holds Whitefish and its seat Kalispell, had 104,357 residents in 2020.
+
+**Sources:** [Inland Northwest (Wikipedia)](https://en.wikipedia.org/wiki/Inland_Northwest), [Spokane, Washington (Wikipedia)](https://en.wikipedia.org/wiki/Spokane,_Washington), [Mount Spokane Ski and Snowboard Park (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Spokane_Ski_and_Snowboard_Park), [Sandpoint, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Sandpoint,_Idaho), [Schweitzer Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Schweitzer_Mountain), [Whitefish, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Whitefish,_Montana), [Whitefish Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Whitefish_Mountain_Resort), [Flathead County, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Flathead_County,_Montana)
+
+Approve: `python -m pipeline.editorial approve cluster inland-northwest --by Alexandre`
+
+### Cluster: Lake Tahoe (`lake-tahoe`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Lake Tahoe straddles the California and Nevada border, and much of the area around it is devoted to tourism, with restaurants, ski slopes, golf courses and casinos. Most of the region's resorts sit at the north end near Truckee and Reno. Truckee had 16,729 residents in 2020, and 50.6% of its 13,374 housing units were vacant. Olympic Valley, home of Palisades Tahoe and the 1960 Winter Olympics, has about 924 year round residents and can swell to about 6,573 people overnight. Palisades Tahoe draws about 600,000 skiers a year. Incline Village, on the north shore, had 9,462 residents in 2020 and has some of the most expensive real estate in the country. Sugar Bowl, on Interstate 80 at Donner Pass, is one of the closest ski areas to the San Francisco Bay Area. South Lake Tahoe had 21,330 residents in 2020, and renters occupied 60.9% of its occupied homes. Its east end centers on tourism, Heavenly and the casinos of Stateline, Nevada. Reno, a city of 264,165, draws most of its California tourists from the Bay Area and Sacramento.
+
+**Sources:** [Lake Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Tahoe), [Truckee, California (Wikipedia)](https://en.wikipedia.org/wiki/Truckee,_California), [Olympic Valley, California (Wikipedia)](https://en.wikipedia.org/wiki/Olympic_Valley,_California), [Palisades Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Palisades_Tahoe), [Incline Village, Nevada (Wikipedia)](https://en.wikipedia.org/wiki/Incline_Village,_Nevada), [Sugar Bowl Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Sugar_Bowl_Ski_Resort), [South Lake Tahoe, California (Wikipedia)](https://en.wikipedia.org/wiki/South_Lake_Tahoe,_California), [Reno, Nevada (Wikipedia)](https://en.wikipedia.org/wiki/Reno,_Nevada), [Sierra-at-Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Sierra-at-Tahoe)
+
+Approve: `python -m pipeline.editorial approve cluster lake-tahoe --by Alexandre`
+
+### Cluster: Laurel Highlands (`laurel-highlands`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> The Laurel Highlands are a region of southwestern Pennsylvania about 55 miles southeast of Pittsburgh, home to about 600,000 people across Fayette, Somerset and Westmoreland counties and parts of Cambria and Bedford counties. Its mountains are the highest in Pennsylvania, so the weather is cooler and wetter than in most of the state. The region is popular for camping, hiking, whitewater kayaking, trout fishing, golf and downhill and cross country skiing. Seven Springs, an all season resort, sits in a borough of 26 residents in 2020 that straddles the Pittsburgh and Johnstown metro areas. In summer the area is a retreat for other Pennsylvanians, with highs about 10 degrees cooler than Pittsburgh. Hidden Valley sits nearby. Laurel Mountain lies inside a state park in Westmoreland County, and the Pittsburgh Ski Club used a cabin there as its mountain headquarters from 1954. Somerset County had 74,129 residents in 2020. Blue Knob in Bedford County is the highest elevation ski slope in Pennsylvania. Boyce Park, east of downtown Pittsburgh, is the only Allegheny County park with downhill skiing.
+
+**Sources:** [Laurel Highlands (Wikipedia)](https://en.wikipedia.org/wiki/Laurel_Highlands), [Seven Springs, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Seven_Springs,_Pennsylvania), [Seven Springs Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Seven_Springs_Mountain_Resort), [Hidden Valley Resort (Pennsylvania) (Wikipedia)](https://en.wikipedia.org/wiki/Hidden_Valley_Resort_(Pennsylvania)), [Laurel Mountain Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Laurel_Mountain_Ski_Resort), [Somerset County, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Somerset_County,_Pennsylvania), [Blue Knob State Park (Wikipedia)](https://en.wikipedia.org/wiki/Blue_Knob_State_Park), [Boyce Park (Wikipedia)](https://en.wikipedia.org/wiki/Boyce_Park)
+
+Approve: `python -m pipeline.editorial approve cluster laurel-highlands --by Alexandre`
+
+### Cluster: Mount Hood (`mount-hood`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Mount Hood rises east of Portland on the line between Clackamas and Hood River counties. Government Camp, on US Route 26 at the base of the mountain, is the only town nearby and serves as the de facto ski town. It had 179 residents at the 2020 census and is the gateway to Timberline and Mt. Hood Skibowl. Timberline Lodge, a National Historic Landmark built by the Works Progress Administration from 1936 to 1938, draws two million visitors a year. Its ski area sits about 60 miles east of Portland and is open all 12 months, with a two week maintenance closure each September. Summer weekdays are busy with ski and snowboard camps on the Palmer Glacier. Mt. Hood Meadows, the largest area on the mountain, sits about 67 miles east of Portland and 35 miles from Hood River on Oregon Route 35. Hood River, a city of 8,313 in 2020, built its economy on agriculture, tourism and sports recreation. Since the late 1990s, high tech firms such as aerospace companies have become some of its largest employers.
+
+**Sources:** [Mount Hood (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Hood), [Government Camp, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Government_Camp,_Oregon), [Timberline Lodge (Wikipedia)](https://en.wikipedia.org/wiki/Timberline_Lodge), [Timberline Lodge ski area (Wikipedia)](https://en.wikipedia.org/wiki/Timberline_Lodge_ski_area), [Mount Hood Meadows (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Hood_Meadows), [Hood River, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Hood_River,_Oregon)
+
+Approve: `python -m pipeline.editorial approve cluster mount-hood --by Alexandre`
+
+### Cluster: New York Metro (`new-york-metro`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster holds the ski areas closest to New York City, inside the largest metropolitan area in the US. The metro had 20.1 million residents in 2020 and has the highest cost of living in the country. Mountain Creek sits in Vernon Township, Sussex County, New Jersey, about a one hour drive from New York City. Vernon had 22,358 residents in 2020. Mountain Creek has 46 trails, 45 of them lit for night skiing, plus a summer water park. Great Gorge Village, first built as slopeside vacation housing with 1,356 units, is the township's largest housing complex. The former Hidden Valley ski area in Vernon has reopened as the National Winter Activity Center. Big Snow American Dream, inside the American Dream mall in East Rutherford, opened in December 2019 as the first indoor ski park in North America and runs year round. Campgaw Mountain in Bergen County has 12 trails on the only ski slope in the Watchung Mountains. Mount Peter in Warwick, New York, opened in 1936 and is the oldest operating ski area in the state.
+
+**Sources:** [New York metropolitan area (Wikipedia)](https://en.wikipedia.org/wiki/New_York_metropolitan_area), [Vernon Township, New Jersey (Wikipedia)](https://en.wikipedia.org/wiki/Vernon_Township,_New_Jersey), [Mountain Creek (Wikipedia)](https://en.wikipedia.org/wiki/Mountain_Creek), [Big Snow American Dream (Wikipedia)](https://en.wikipedia.org/wiki/Big_Snow_American_Dream), [Campgaw Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Campgaw_Mountain), [Mount Peter (New York) (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Peter_(New_York))
+
+Approve: `python -m pipeline.editorial approve cluster new-york-metro --by Alexandre`
+
+### Cluster: Northern Colorado (`northern-colorado`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Steamboat Springs is the hub of this cluster. It is the seat of Routt County and the largest city in northwestern Colorado, with 13,224 residents at the 2020 census. It sits in the upper Yampa River valley on US Highway 40, about 150 miles northwest of Denver. The regional economy began with ranching and mining, which still have a large presence in the county. Today the city is a winter ski destination built around Steamboat Resort on Mount Werner, just east of town, and the much smaller Howelsen Hill, a ski jumping venue in town. Steamboat Springs has produced more Winter Olympians than any other town in North America. The city has a severe housing shortage. The median single family home price reached $829,000 in 2022, up from $529,000 in 2019, and a one bedroom apartment rents for around $2,100. In 2024, residents voted down a plan for nearly 2,300 affordable units meant for priced out workers. Routt County had 24,829 residents in 2020, and 37.1% of its housing units were vacant.
+
+**Sources:** [Steamboat Springs, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado), [Routt County, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Routt_County,_Colorado), [Steamboat Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Steamboat_Ski_Resort), [Howelsen Hill Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Howelsen_Hill_Ski_Area)
+
+Approve: `python -m pipeline.editorial approve cluster northern-colorado --by Alexandre`
+
+### Cluster: Northern New Mexico (`northern-new-mexico`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster sits in the Sangre de Cristo Mountains of north central New Mexico. Taos, the seat of Taos County, had an estimated 6,567 residents in 2021. It sits beside Taos Pueblo, a UNESCO World Heritage Site lived in for roughly a millennium. Taos has three art museums, with work from the Taos art colony, and more than 80 galleries. In winter many people come to ski at the four nearby areas: Taos Ski Valley, Red River, Sipapu and Angel Fire. Taos Ski Valley, a village of 77 people in 2020, sits 30 minutes up the canyon, and the town of Taos provides its year round services. Tourism is the village's main industry, and the ski company employed about 700 people in winter as of the 2011 to 2012 season. Red River, a resort town of 542, runs mainly on tourism and offers a free town bus. Angel Fire, a village of 1,192 in Colfax County, is home to Angel Fire Resort, open since 1966. Taos County had 34,489 residents in 2020, and 50.5% of them were Hispanic or Latino.
+
+**Sources:** [Taos, New Mexico (Wikipedia)](https://en.wikipedia.org/wiki/Taos,_New_Mexico), [Taos County, New Mexico (Wikipedia)](https://en.wikipedia.org/wiki/Taos_County,_New_Mexico), [Taos Ski Valley, New Mexico (Wikipedia)](https://en.wikipedia.org/wiki/Taos_Ski_Valley,_New_Mexico), [Red River, New Mexico (Wikipedia)](https://en.wikipedia.org/wiki/Red_River,_New_Mexico), [Angel Fire, New Mexico (Wikipedia)](https://en.wikipedia.org/wiki/Angel_Fire,_New_Mexico), [Angel Fire Resort (Wikipedia)](https://en.wikipedia.org/wiki/Angel_Fire_Resort)
+
+Approve: `python -m pipeline.editorial approve cluster northern-new-mexico --by Alexandre`
+
+### Cluster: Northern Vermont (`northern-vermont`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster runs along the northern Green Mountains. Stowe, a Lamoille County town of 5,223 at the 2020 census, is nicknamed the Ski Capital of the East. It was a summer resort by the mid nineteenth century, and Civilian Conservation Corps trail work on Mount Mansfield in the 1930s made it an early center of American downhill skiing. The Vermont Ski Museum is in town. Stowe Mountain Resort spans Mount Mansfield, the highest peak in Vermont, and Spruce Peak. Smugglers' Notch sits in Cambridge near Jeffersonville and draws skiers in winter and vacationers in summer. Jay Peak sits 4 miles from the Quebec border and gets the most snowfall of any ski area in the Northeastern US. As of 2022 it employed more than 1,200 people in winter and about half that number year round. Burke Mountain, in the Northeast Kingdom, is home to Burke Mountain Academy. Bolton Valley sits close to Burlington, the largest city in Vermont with 44,743 residents in 2020 and home to the University of Vermont and Champlain College.
+
+**Sources:** [Stowe, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Stowe,_Vermont), [Stowe Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Stowe_Mountain_Resort), [Smugglers' Notch Resort (Wikipedia)](https://en.wikipedia.org/wiki/Smugglers'_Notch_Resort), [Jay Peak Resort (Wikipedia)](https://en.wikipedia.org/wiki/Jay_Peak_Resort), [Burke Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Burke_Mountain_Ski_Area), [Bolton Valley (Wikipedia)](https://en.wikipedia.org/wiki/Bolton_Valley), [Burlington, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Burlington,_Vermont), [Lamoille County, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Lamoille_County,_Vermont)
+
+Approve: `python -m pipeline.editorial approve cluster northern-vermont --by Alexandre`
+
+### Cluster: Poconos (`poconos`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> The Poconos sit in Northeastern Pennsylvania, and much of the region lies inside the greater New York combined statistical area. Millions of metro residents live within a two hour drive, and the region draws especially from New York City and Philadelphia. Monroe County, home to Camelback, the largest ski resort in the Poconos, and to Shawnee Mountain near East Stroudsburg, had 168,327 residents in 2020. It was one of the fastest growing counties in Pennsylvania in the late 20th and early 21st centuries, driven by Pocono tourism and by New York area residents seeking a lower cost of living within commuting range of the city. Its median home value was $210,972 at the end of 2021. Snowmaking built the local ski business. A Big Boulder employee invented a snowmaking machine in the winter of 1956 to 1957, and by 1987 skiing was a $230 million a year industry and one quarter of the region's tourist business. Blue Mountain sits in Palmerton in the Lehigh Valley, and Montage Mountain and Elk Mountain sit near Scranton.
+
+**Sources:** [Pocono Mountains (Wikipedia)](https://en.wikipedia.org/wiki/Pocono_Mountains), [Monroe County, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Monroe_County,_Pennsylvania), [Camelback Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Camelback_Mountain_Resort), [Shawnee Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Shawnee_Mountain_Ski_Area), [Blue Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Blue_Mountain_Resort), [Montage Mountain Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Montage_Mountain_Ski_Resort), [Elk Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area)
+
+Approve: `python -m pipeline.editorial approve cluster poconos --by Alexandre`
+
+### Cluster: Roaring Fork Valley (`roaring-fork`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> The Roaring Fork Valley runs from Aspen down to Glenwood Springs and is one of the most affluent regions in Colorado. Its main economic engine is the Aspen Snowmass ski complex, four areas run by the Aspen Skiing Company. Skiing drives the valley's tourism, hospitality, retail, construction, real estate and property maintenance work. Aspen, a former silver mining camp, had 7,004 residents in 2020. It grew into an international ski resort and cultural center after 1946 and is home to the Aspen Music Festival and School. Its median single family home sold for $9.5 million in 2021, and nearby Snowmass Village, a relatively cheaper option, had a median of $5.2 million. Housing affordability is a severe challenge for workers. The Aspen Pitkin County Housing Authority runs deed restricted Employee Housing for people who live and work in the valley, yet even those homes can cost close to $1 million. Down valley sit Basalt, with 3,984 residents, Carbondale, with 6,434, and Glenwood Springs, with 9,963 and its hot springs. Sunlight Mountain sits south of Glenwood Springs.
+
+**Sources:** [Roaring Fork Valley (Wikipedia)](https://en.wikipedia.org/wiki/Roaring_Fork_Valley), [Aspen Skiing Company (Wikipedia)](https://en.wikipedia.org/wiki/Aspen_Skiing_Company), [Aspen, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Aspen,_Colorado), [Snowmass Village, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Snowmass_Village,_Colorado), [Basalt, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Basalt,_Colorado), [Carbondale, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Carbondale,_Colorado), [Glenwood Springs, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Glenwood_Springs,_Colorado), [Sunlight Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Sunlight_Ski_Area)
+
+Approve: `python -m pipeline.editorial approve cluster roaring-fork --by Alexandre`
+
+### Cluster: Southern California (`southern-california`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster covers the ski areas of the San Bernardino and San Gabriel Mountains in Southern California. Big Bear Lake, a city on the south shore of its namesake lake, had about 5,046 residents at the 2020 census. The number of people staying in or visiting the Big Bear Valley surges past 100,000 on many weekends. In winter the town becomes a skiing and snowboarding destination for Southern California, with Snow Summit and Bear Mountain, which share management and lift tickets. Snow Summit is one of the most popular ski destinations for skiers from the Los Angeles area. Snow Valley in Running Springs is the longest continually operating ski resort in Southern California. Cities in the San Bernardino Mountains total about 44,000 people, a number that can rise tenfold in peak tourist season. In the San Gabriel Mountains, Mountain High sits on State Route 2 west of Wrightwood, a community of 4,720 in 2020, and is one of the most visited resorts in Southern California. Mt. Baldy sits on Mount San Antonio east northeast of Los Angeles.
+
+**Sources:** [Big Bear Lake, California (Wikipedia)](https://en.wikipedia.org/wiki/Big_Bear_Lake,_California), [Snow Summit (Wikipedia)](https://en.wikipedia.org/wiki/Snow_Summit), [Snow Valley Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Snow_Valley_Mountain_Resort), [San Bernardino Mountains (Wikipedia)](https://en.wikipedia.org/wiki/San_Bernardino_Mountains), [Mountain High (Wikipedia)](https://en.wikipedia.org/wiki/Mountain_High), [Wrightwood, California (Wikipedia)](https://en.wikipedia.org/wiki/Wrightwood,_California), [Mount Baldy Ski Lifts (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Baldy_Ski_Lifts)
+
+Approve: `python -m pipeline.editorial approve cluster southern-california --by Alexandre`
+
+### Cluster: Southern Vermont (`southern-vermont`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster sits in the southern Green Mountains. Mount Snow, in the Windham County town of Dover, is the southernmost big mountain in Vermont and so the closest to many Northeast metropolitan areas. Dover had 1,798 residents at the 2020 census and is best known as the home of the ski area. Haystack Mountain shares a ridgeline with Mount Snow in neighboring Wilmington. Stratton Mountain Resort sits east of Manchester in Stratton, a town of 440 people in 2020 whose industry is tourism. Stratton was the first ski area to allow snowboarding, opened the first snowboard school and began hosting the US Open snowboard races in 1985. Bromley, in Peru east of Manchester, is called the Sun Mountain for its southern exposure. Magic Mountain in Londonderry formed Vermont's original Golden Triangle of ski areas with Stratton and Bromley. Manchester, one of the two shire towns of Bennington County, had 4,484 residents in 2020. Windham County had 45,905 residents in 2020, and 31.8% of its housing units were vacant. Bennington County had 37,347, with 24.6% of homes vacant.
+
+**Sources:** [Mount Snow (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Snow), [Dover, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Dover,_Vermont), [Windham County, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Windham_County,_Vermont), [Haystack Mountain (Vermont) (Wikipedia)](https://en.wikipedia.org/wiki/Haystack_Mountain_(Vermont)), [Stratton Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Stratton_Mountain_Resort), [Stratton, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Stratton,_Vermont), [Bromley Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Bromley_Mountain), [Magic Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Magic_Mountain_Ski_Area), [Manchester, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Manchester,_Vermont), [Bennington County, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Bennington_County,_Vermont)
+
+Approve: `python -m pipeline.editorial approve cluster southern-vermont --by Alexandre`
+
+### Cluster: Southwest Colorado (`southwest-colorado`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster spans the San Juan Mountains and the Gunnison country of southwestern Colorado. Telluride, a former silver camp in a box canyon, had 2,607 residents at the 2020 census. Mining was its only industry until the first ski lift opened in 1972. A free gondola links it to Mountain Village, a town of 1,264 at the base of the ski area, where 61.8% of housing units were vacant in 2020. Summer in Telluride centers on festivals, including the Telluride Bluegrass Festival and the Telluride Film Festival, both held since 1974. Crested Butte, a former coal mining town of 1,639, now draws skiers and mountain bikers and hosts festivals throughout the year. Gunnison County had 16,918 residents in 2020, and 41.2% of its housing units were vacant. Purgatory sits 25 miles north of Durango, a city of 19,071 and home of Fort Lewis College. Silverton Mountain, near the historic mining town of Silverton, offers expert terrain from one chairlift plus helicopter skiing. Monarch sits on Monarch Pass west of Salida.
+
+**Sources:** [Telluride, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Telluride,_Colorado), [Mountain Village, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Mountain_Village,_Colorado), [Crested Butte, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Crested_Butte,_Colorado), [Gunnison County, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Gunnison_County,_Colorado), [Purgatory Resort (Wikipedia)](https://en.wikipedia.org/wiki/Purgatory_Resort), [Durango, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Durango,_Colorado), [Silverton, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Silverton,_Colorado), [Silverton Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Silverton_Mountain), [Monarch Mountain (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Monarch_Mountain_(ski_area))
+
+Approve: `python -m pipeline.editorial approve cluster southwest-colorado --by Alexandre`
+
+### Cluster: Southwest Montana (`southwest-montana`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Bozeman anchors this cluster. It is the seat of Gallatin County and the fourth largest city in Montana, with 53,293 residents at the 2020 census, and the county had 118,960. Top employers include Bozeman Health, Montana State University, Simms Fishing Products and many high tech, biotech and software firms. The area is noted for outdoor recreation, particularly skiing. Bridger Bowl, north of town, is a locally owned nonprofit area that serves Gallatin County residents and Montana State students. A blue beacon atop the Baxter Hotel downtown flashes when it gets fresh snow. Big Sky, southwest of Bozeman, is a community of 3,591 people in 2020, up from 2,308 in 2010. Tourism is its primary industry, and 57.3% of its 3,504 housing units were vacant in 2020. Big Sky Resort, about 50 miles from Bozeman, sits midway between Bozeman and West Yellowstone, the park entrance that handles around half of all Yellowstone visitors. The Yellowstone Club, a private residential club and ski resort with more than 500 member households as of 2014, borders Big Sky Resort and ties into its lifts.
+
+**Sources:** [Bozeman, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Bozeman,_Montana), [Gallatin County, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Gallatin_County,_Montana), [Bridger Bowl Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Bridger_Bowl_Ski_Area), [Big Sky, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Big_Sky,_Montana), [Big Sky Resort (Wikipedia)](https://en.wikipedia.org/wiki/Big_Sky_Resort), [Yellowstone Club (Wikipedia)](https://en.wikipedia.org/wiki/Yellowstone_Club)
+
+Approve: `python -m pipeline.editorial approve cluster southwest-montana --by Alexandre`
+
+### Cluster: Tetons (`tetons`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> Jackson, the seat of Teton County, Wyoming, is the hub of this cluster. It had 10,760 residents at the 2020 census and is the largest incorporated town in Wyoming. Jackson is a popular tourist destination for its three ski areas, Jackson Hole Mountain Resort, Snow King and Grand Targhee, and a gateway to Grand Teton and Yellowstone National Parks. In 2010, arts, recreation, lodging and food services provided 32.2% of local jobs. Teton County is one of the highest income counties in the country. Its median home price was $1,060,093 in late 2021, and Zillow put Jackson's average home at $1,914,123 in September 2025. Snow King, the town hill on the edge of Jackson, opened in 1936 as the first ski area in Wyoming. Teton Village, population 517, surrounds the base of Jackson Hole Mountain Resort. West over Teton Pass, Teton Valley, Idaho, holds Victor, with 2,157 residents, and Driggs, with 1,984. Its economy is based in agriculture and ranching, with a shift toward recreational tourism. Grand Targhee is reached only from the west, through Driggs.
+
+**Sources:** [Jackson, Wyoming (Wikipedia)](https://en.wikipedia.org/wiki/Jackson,_Wyoming), [Teton County, Wyoming (Wikipedia)](https://en.wikipedia.org/wiki/Teton_County,_Wyoming), [Snow King Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Snow_King_Mountain), [Teton Village, Wyoming (Wikipedia)](https://en.wikipedia.org/wiki/Teton_Village,_Wyoming), [Victor, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Victor,_Idaho), [Driggs, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Driggs,_Idaho), [Teton Valley, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Teton_Valley,_Idaho), [Grand Targhee Resort (Wikipedia)](https://en.wikipedia.org/wiki/Grand_Targhee_Resort)
+
+Approve: `python -m pipeline.editorial approve cluster tetons --by Alexandre`
+
+### Cluster: Wasatch (`wasatch`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster follows the Wasatch Range, and 85% of Utah's population lives near it, mainly along the Wasatch Front, home to just under 3 million people. Salt Lake City had 199,723 residents at the 2020 census and about 1.3 million in its metro area, and eight ski resorts lie close to the city. Alta and Snowbird sit in Little Cottonwood Canyon, and Brighton and Solitude sit in Big Cottonwood Canyon. Alta, a town of 228 people, is centered on a ski area with 500,000 annual visitors. Park City, on the Wasatch Back in Summit County, had 8,396 residents in 2020, and its tourist population on average greatly exceeds its permanent one. The former mining town rebounded through tourism in the 1980s and 1990s. By 2021 data it brought an average of $529.8 million a year to the Utah economy, $80 million of that from the Sundance Film Festival. Ogden, a city of 87,321 and home of Weber State University, has Snowbasin, Powder Mountain and Nordic Valley in the mountains to its east.
+
+**Sources:** [Wasatch Range (Wikipedia)](https://en.wikipedia.org/wiki/Wasatch_Range), [Salt Lake City (Wikipedia)](https://en.wikipedia.org/wiki/Salt_Lake_City), [Little Cottonwood Canyon (Wikipedia)](https://en.wikipedia.org/wiki/Little_Cottonwood_Canyon), [Big Cottonwood Canyon (Wikipedia)](https://en.wikipedia.org/wiki/Big_Cottonwood_Canyon), [Alta, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Alta,_Utah), [Park City, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Park_City,_Utah), [Ogden, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Ogden,_Utah)
+
+Approve: `python -m pipeline.editorial approve cluster wasatch --by Alexandre`
+
+### Cluster: Western Maine (`western-maine`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> This cluster spreads across the western Maine mountains in Oxford and Franklin counties. Sunday River, one of the largest and most visited ski resorts in Maine, sits in Newry, a resort town of 411 year round residents in 2020 with a proportionately large winter population. Bethel, a town of 2,504 nearby, is home to Gould Academy. Sugarloaf sits in Carrabassett Valley, a town of 673 that is also home to Carrabassett Valley Academy, a ski and snowboard academy. Sugarloaf has the highest peak elevation of any ski resort in New England and the only lift served skiing above treeline in the Northeast. It recorded 352,000 skier visits in the 2005 to 2006 season. Saddleback sits near Rangeley, a town of 1,222 at the center of the Rangeley Lakes resort region. It reopened in December 2020 after five years closed, and its upgrades since then include on mountain employee housing. Oxford County had 57,777 residents in 2020, and 31.6% of its housing units were vacant. Franklin County had 29,456 residents, and 38.4% of its housing units were vacant.
+
+**Sources:** [Sunday River (ski resort) (Wikipedia)](https://en.wikipedia.org/wiki/Sunday_River_(ski_resort)), [Newry, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Newry,_Maine), [Bethel, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Bethel,_Maine), [Carrabassett Valley, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Carrabassett_Valley,_Maine), [Sugarloaf (ski resort) (Wikipedia)](https://en.wikipedia.org/wiki/Sugarloaf_(ski_resort)), [Saddleback Maine (Wikipedia)](https://en.wikipedia.org/wiki/Saddleback_Maine), [Rangeley, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Rangeley,_Maine), [Oxford County, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Oxford_County,_Maine), [Franklin County, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Franklin_County,_Maine)
+
+Approve: `python -m pipeline.editorial approve cluster western-maine --by Alexandre`
+
+### Cluster: White Mountains (`white-mountains`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> The White Mountains cover about a quarter of New Hampshire and are heavily visited because they sit within reach of Boston, New York City and Montreal. In the east, Conway, the most populous town in Carroll County with 9,822 residents in 2020, is the county's main economic and commercial hub. Tourism is its biggest economic engine, and technology is its second largest source of jobs. Its village of North Conway, population 2,116, is known for outlet shopping and is the nighttime destination for skiers visiting Cranmore, Attitash, Black Mountain and Wildcat. Carroll County had 50,107 residents in 2020, and 42.9% of its housing units were vacant. To the west along Interstate 93, Lincoln, a town of 1,631, is the home of Loon Mountain and its recreation centered development. Cannon, owned by the state, sits in Franconia Notch State Park and has the largest vertical drop in New Hampshire. Waterville Valley, about 130 miles north of Boston, operates inside a planned resort community. Bretton Woods sits across from the Mount Washington Hotel, which owns it.
+
+**Sources:** [White Mountains (New England) (Wikipedia)](https://en.wikipedia.org/wiki/White_Mountains_(New_England)), [Conway, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Conway,_New_Hampshire), [North Conway, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/North_Conway,_New_Hampshire), [Carroll County, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Carroll_County,_New_Hampshire), [Lincoln, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Lincoln,_New_Hampshire), [Loon Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Loon_Mountain), [Cannon Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Cannon_Mountain_Ski_Area), [Waterville Valley Resort (Wikipedia)](https://en.wikipedia.org/wiki/Waterville_Valley_Resort), [Bretton Woods Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Bretton_Woods_Mountain_Resort)
+
+Approve: `python -m pipeline.editorial approve cluster white-mountains --by Alexandre`
+
+### Cluster: Wood River Valley (`wood-river`)
+
+File: `clusters.yaml`
+
+**Overview**
+
+> The Wood River Valley in Blaine County, Idaho, ties its economy to tourism more than the farming of the wider Magic Valley. It has four cities: Ketchum, Sun Valley, Hailey and Bellevue. Sun Valley Resort sits at the north end, with Bald Mountain rising beside Ketchum and the gentler Dollar Mountain beside Sun Valley. Ketchum had 3,551 residents at the 2020 census, and 48.1% of its housing units were vacant. Sun Valley, a resort town of 1,783, had 66.6% of its housing units vacant. The Union Pacific Railroad developed the resort in 1936, and the area has been a seasonal home to the rich and famous since Ernest Hemingway drew attention to it. Hailey, the county seat, had 9,161 residents and only 7.6% vacant units, and its Friedman Memorial Airport serves the resort area. Blaine County had 24,272 residents in 2020. Its cost of living is higher than surrounding areas, with a median owner occupied home value more than double the state average, and an estimated 2,540 people commute in from outside the county to work.
+
+**Sources:** [Wood River Valley (Wikipedia)](https://en.wikipedia.org/wiki/Wood_River_Valley), [Bald Mountain (Idaho) (Wikipedia)](https://en.wikipedia.org/wiki/Bald_Mountain_(Idaho)), [Ketchum, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Ketchum,_Idaho), [Sun Valley, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Sun_Valley,_Idaho), [Hailey, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Hailey,_Idaho), [Blaine County, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Blaine_County,_Idaho)
+
+Approve: `python -m pipeline.editorial approve cluster wood-river --by Alexandre`
