@@ -420,23 +420,30 @@ def fetch_locations(
     """
     cache_dir = Path(cache_dir)
     locations = list(locations)
-    by_window: dict[tuple[date, date], list[Location]] = {}
-    for loc in locations:
-        for window in missing_windows(cache_dir, loc, start_year, end_year, seasons_per_chunk):
-            by_window.setdefault(window, []).append(loc)
+    missing = {
+        loc.resort_id: set(missing_windows(cache_dir, loc, start_year, end_year, seasons_per_chunk))
+        for loc in locations
+    }
 
+    # Resort major order: finish every window for one group of locations before
+    # starting the next group, so a run that stops at the daily budget leaves
+    # whole resorts complete instead of every resort partly fetched.
     errors: dict[str, str] = {}
-    for (start, end), locs in sorted(by_window.items()):
-        n_days = (end - start).days + 1
-        per_loc = request_weight(1, n_days, len(DAILY_VARIABLES))
-        size = locations_per_request
-        if budget is not None:
-            size = max(1, min(size, int(budget.per_minute // per_loc)))
-        for i in range(0, len(locs), size):
-            batch = [l for l in locs[i : i + size] if l.resort_id not in errors]
-            if not batch:
+    for g in range(0, len(locations), locations_per_request):
+        group = locations[g : g + locations_per_request]
+        for start, end in sorted(set().union(*(missing[l.resort_id] for l in group))):
+            locs = [l for l in group if (start, end) in missing[l.resort_id] and l.resort_id not in errors]
+            if not locs:
                 continue
-            _fetch_batch(batch, start, end, n_days, cache_dir, budget, errors, log)
+            n_days = (end - start).days + 1
+            per_loc = request_weight(1, n_days, len(DAILY_VARIABLES))
+            size = len(locs)
+            if budget is not None:
+                size = max(1, min(size, int(budget.per_minute // per_loc)))
+            for i in range(0, len(locs), size):
+                batch = [l for l in locs[i : i + size] if l.resort_id not in errors]
+                if batch:
+                    _fetch_batch(batch, start, end, n_days, cache_dir, budget, errors, log)
     return errors
 
 

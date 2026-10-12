@@ -82,6 +82,17 @@ def test_fetch_batches_locations_and_resumes_from_cache(tmp_path, fake_api):
     assert fake_api.count(open_meteo.ARCHIVE_URL) == 4
 
 
+def test_fetch_finishes_each_group_before_the_next(tmp_path, fake_api):
+    """Resort major order: a run stopped by the daily budget leaves whole resorts complete."""
+    locs = [Location("a", 39.6, -106.35), Location("b", 40.5, -111.6), Location("c", 41.0, -111.0)]
+    fetch_locations(locs, 2020, 2023, tmp_path, None, seasons_per_chunk=1, locations_per_request=2, log=lambda s: None)
+    calls = [p for u, p in fake_api.calls if u == open_meteo.ARCHIVE_URL]
+    groups = [p["latitude"].count(",") + 1 for p in calls]
+    starts = [p["start_date"] for p in calls]
+    assert groups == [2, 2, 2, 1, 1, 1]  # all three windows for a and b, then all three for c
+    assert starts[:3] == sorted(starts[:3]) and starts[3:] == sorted(starts[3:])
+
+
 def test_partial_cache_fetches_only_missing_windows(tmp_path, fake_api):
     loc = Location("a", 39.6, -106.35)
     fetch_locations([loc], 2020, 2022, tmp_path, None, seasons_per_chunk=1, log=lambda s: None)
