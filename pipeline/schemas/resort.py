@@ -143,6 +143,7 @@ class Resort(StrictModel):
     editorial: Optional[Editorial] = None
     climate_available: bool = False
     detail_available: bool = False
+    trailmap_available: bool = False
     housing_summary: Optional[HousingSummary] = None
     sources: list[Slug] = Field(default_factory=list)
 

@@ -62,6 +62,7 @@ Resort {
   editorial: Editorial | null,   // Phase 6; only reviewed entries, see "Phase 6 editorial"; null otherwise
   climate_available: boolean,                      // true when climate/<id>.json exists
   detail_available: boolean,                       // true when detail/<id>.json exists (Phase 5)
+  trailmap_available: boolean,                     // true when trailmap/<id>.json exists (Trail map)
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
 }
@@ -258,6 +259,49 @@ Build outputs:
 * **Lifts:** extract features carry `{ id, name, ref, lift_type, ski_area_ids }`; only `status: operating` lifts. Detail lifts carry exactly `{ name, lift_type, source_id }`. `name` may be null in OpenStreetMap.
 * **Detail files** are written compact; files for resorts that no longer qualify are removed. `housing_summary.cheapest_rent_monthly_low` uses published or reported site rents (never the baseline); `has_transit` is true when the detail file has transit.
 
+## Trail map (OpenSkiMap runs)
+
+### Raw input
+* `https://tiles.openskimap.org/geojson/runs.geojson` (about 835 MB, one feature per line) downloads to
+  `data/raw/openskimap/runs.full.geojson` (gitignored) with `python pipeline/build.py --fetch`. `pipeline/runs.py` streams
+  it line by line, keeps runs whose `uses` include `downhill` or `snow_park`, whose `status` is not abandoned, disused,
+  proposed, planned or construction, and whose `skiAreas[].properties.id` include an OpenSkiMap area matched to a Tier A
+  resort (the same area ids the lifts use). Elevations are dropped, geometry is simplified with Douglas Peucker at
+  `trailmap.simplify_tolerance_m` (6 m) and rounded to 5 decimals.
+* Committed extract `data/raw/openskimap/us_runs_tier_a.geojson`, properties
+  `{ id, name, difficulty, difficulty_convention, uses, grooming, lit, ski_area_ids }`. A newer committed extract is never
+  overwritten by an older download.
+
+### Build output: `data/build/trailmap/<resort_id>.json` (lazy loaded by the trail map popup)
+```
+{ version, generated_at, resort_id, source_id: "openskimap-runs",
+  runs: FeatureCollection<LineString | MultiLineString | Polygon | MultiPolygon>,
+        properties { name: string | null,
+                     difficulty: novice | easy | intermediate | advanced | expert | freeride | extreme | null,
+                     difficulty_us: green | blue | black | double_black | terrain_park | null,
+                     grooming?: string, lit?: boolean },        // omitted when null (treat missing as null)
+  lifts: FeatureCollection<LineString> props { name, lift_type, source_id: "openskimap-lifts" },   // same as detail files
+  bounds: [west, south, east, north] }                           // over runs and lifts
+```
+* Written for every Tier A resort with at least one run; `resorts.json` Resort gains `trailmap_available: boolean`.
+* Polygon runs are area runs (open bowls, glades, beginner areas); draw them as filled outlines.
+* `difficulty` is OpenSkiMap's value as given. `difficulty_us` maps it to North American trail signs for the
+  `north_america` difficulty convention, following the OSM `piste:difficulty` key that OpenSkiMap passes through
+  (https://wiki.openstreetmap.org/wiki/Key:piste:difficulty, https://github.com/russellporter/openskidata-format):
+
+  | OpenSkiMap `difficulty` | `difficulty_us` |
+  |---|---|
+  | novice, easy | green |
+  | intermediate | blue |
+  | advanced | black |
+  | expert, extreme | double_black |
+  | freeride | null (off piste, no sign colour) |
+  | null | null |
+  | any run whose `uses` include `snow_park` | terrain_park |
+
+  Runs under another convention (europe, japan) get `difficulty_us: null`.
+* Source `openskimap-runs`: OpenSkiMap runs, data © OpenStreetMap contributors (ODbL). The popup shows that attribution.
+
 ## Phase 6 editorial
 
 ### Raw input: `data/raw/editorial/<batch>.yaml`
@@ -420,6 +464,7 @@ pipeline/
   routes.py           # deep link stubs under /map/, data/build/map-index.json
   career.py           # Phase 4 pay display, staleness, professionalism, lucrativeness
   lifts.py            # Phase 5 OpenSkiMap lifts for Tier A resorts
+  runs.py             # Trail map: OpenSkiMap runs for Tier A resorts
   housing.py          # Phase 5 housing sites, rent display, detail file assembly
   rent.py             # Phase 5 HUD FMR and ACS baselines, county lookup
   transit.py          # Phase 5 GTFS extraction and bus commute model

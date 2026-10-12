@@ -14,6 +14,7 @@ from .career import (
     LucrativenessOut, PayBatch, PayRecord, PayRow, Professionalism, ProfessionalismInputs,
 )
 from .geo import Cluster, Geometry, State
+from .trailmap import TrailmapFile
 from .housing import (
     DetailFile, HousingBatch, HousingOut, HousingSummary, Isochrone, RentBaseline, SourcedRent, TransitExtract,
 )
@@ -44,7 +45,7 @@ __all__ = [
     "Fit", "Geometry", "HousingSite", "LucrativenessOut", "CareerInputs", "CareerBatch", "PayBatch",
     "PayRow", "Professionalism", "ProfessionalismInputs", "BreakdownItem", "Assumption", "CERT_LEVELS",
     "PROFESSIONALISM_COMPONENTS", "DetailFile", "HousingBatch", "HousingOut", "HousingSummary", "Isochrone",
-    "RentBaseline", "SourcedRent", "TransitExtract", "OwnershipEntry", "OwnershipFile",
+    "RentBaseline", "SourcedRent", "TransitExtract", "TrailmapFile", "OwnershipEntry", "OwnershipFile",
     "PayRecord", "Report", "Resort", "Season", "Size", "Source", "Sourced", "SourcedMonthDay",
     "SourcedNumber", "SourcedString", "State", "StrictModel", "Terrain", "TierABatch",
     "TierACriterion", "TierARecord", "check_source_ref", "referenced_source_ids",

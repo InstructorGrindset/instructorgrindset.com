@@ -129,6 +129,11 @@ transit:
   walk_speed_kmh: null
   max_walk_km: null
 
+trailmap:
+  # Douglas Peucker tolerance for OpenSkiMap run geometry in the trail map popup (metres).
+  # 6 m (about 1.5 px at zoom 15) keeps run shapes readable and big resorts near 150 KB.
+  simplify_tolerance_m: 6
+
 routing:
   # Drive time, distance and route geometry (housing to base area) and drive isochrones around the base.
   # provider: valhalla | osrm | ors. OSRM has no isochrones. api_key_env names the environment variable

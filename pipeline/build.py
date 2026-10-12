@@ -27,6 +27,7 @@ from pydantic import ValidationError  # noqa: E402
 from pipeline import openskimap  # noqa: E402
 from pipeline import lifts as lifts_mod  # noqa: E402
 from pipeline import rent as rent_mod  # noqa: E402
+from pipeline import runs as runs_mod  # noqa: E402
 from pipeline.career import CareerData, build_career, load_career_data  # noqa: E402
 from pipeline.editorial import load_editorial, render_review, resort_editorial  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
@@ -37,7 +38,7 @@ from pipeline.transit import load_extracts as load_transit  # noqa: E402
 from pipeline.clusters import ClusterAssignmentError, ClusterInfo, Member, assign_clusters, build_clusters  # noqa: E402
 from pipeline.config import Config, load_config  # noqa: E402
 from pipeline.names import slugify  # noqa: E402
-from pipeline.schemas import Cluster, DetailFile, Resort, Source, State  # noqa: E402
+from pipeline.schemas import Cluster, DetailFile, Resort, Source, State, TrailmapFile  # noqa: E402
 from pipeline.schemas.raw import TierABatch, TierARecord  # noqa: E402
 from pipeline.sources import SourceConflictError, SourceRegistry  # noqa: E402
 from pipeline.states import STATE_NAMES, build_states, build_us_states_geojson  # noqa: E402
@@ -315,6 +316,7 @@ def build(
     today = build_date()
     header = {"version": OUTPUT_VERSION, "generated_at": generated_at()}
     details: dict[str, dict] = {}
+    trailmaps: dict[str, dict] = {}
     resorts: list[Resort] = []
     for d in drafts:
         d["cluster_id"] = assignment[d["id"]]
@@ -328,9 +330,13 @@ def build(
                           site_reported, area_reported)
         d["editorial"] = resort_editorial(editorial.reviewed("resort").get(d["id"]))
         _attach_career(d, career_data, cfg, today, warnings, rent)
-        d["detail_available"], d["housing_summary"] = False, None
+        d["detail_available"], d["housing_summary"], d["trailmap_available"] = False, None, False
         if d["tier"] == "A":
             lift_fc = lifts_mod.lifts_for(p5.lift_features, p5.area_ids.get(d["id"], []))
+            tm = runs_mod.trailmap(d["id"], p5.run_features, p5.area_ids.get(d["id"], []), lift_fc, header)
+            if tm is not None:
+                trailmaps[d["id"]] = tm
+                d["trailmap_available"] = True
             if lift_fc["features"] or sites:
                 details[d["id"]] = assemble_detail(d, sites, lift_fc, baseline, p5.transit, p5.router,
                                                    cfg.definitions, header, site_reported, area_reported)
@@ -378,6 +384,12 @@ def build(
         except ValidationError as e:
             for m in e.errors():
                 errors.append(f"detail '{rid}': {'.'.join(map(str, m['loc']))}: {m['msg']}")
+    for rid, tm in trailmaps.items():
+        try:
+            TrailmapFile.model_validate(tm, context=detail_ctx)
+        except ValidationError as e:
+            for m in e.errors()[:5]:
+                errors.append(f"trailmap '{rid}': {'.'.join(map(str, m['loc']))}: {m['msg']}")
     if errors:
         raise BuildError(errors)
 
@@ -420,13 +432,14 @@ def build(
         } for c in clusters],
     }, compact=True)
     _write_json(out_dir / "definitions.json", {**header, **display_definitions(cfg)})
-    detail_dir = out_dir / "detail"
-    for rid, dd in details.items():
-        _write_json(detail_dir / f"{rid}.json", dd, compact=True)
-    if detail_dir.is_dir():
-        for old_file in detail_dir.glob("*.json"):
-            if old_file.stem not in details:
-                old_file.unlink()
+    for sub, files in (("detail", details), ("trailmap", trailmaps)):
+        sub_dir = out_dir / sub
+        for rid, dd in files.items():
+            _write_json(sub_dir / f"{rid}.json", dd, compact=True)
+        if sub_dir.is_dir():
+            for old_file in sub_dir.glob("*.json"):
+                if old_file.stem not in files:
+                    old_file.unlink()
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
 
@@ -560,6 +573,7 @@ def _add_source(registry: SourceRegistry, src: Any, origin: str, errors: list[st
 @dataclass
 class Phase5:
     lift_features: list = field(default_factory=list)
+    run_features: list = field(default_factory=list)
     area_ids: dict = field(default_factory=dict)
     baselines: dict = field(default_factory=dict)
     transit: list = field(default_factory=list)
@@ -588,6 +602,23 @@ def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match,
         _add_source(registry, lifts_mod.source(fetched), rel(extract), errors)
     elif not extract.exists():
         warnings.append(f"no lifts extract at {rel(extract)}; run `python pipeline/build.py --fetch` to add lifts")
+
+    full, extract = osm_dir / runs_mod.FULL_NAME, osm_dir / runs_mod.EXTRACT_NAME
+    if fetch:
+        try:
+            print(f"fetching {runs_mod.URL} ...")
+            runs_mod.fetch(full)
+        except Exception as e:  # noqa: BLE001 - keep building with what is cached
+            warnings.append(f"OpenSkiMap runs download failed ({type(e).__name__}: {e})")
+    n = runs_mod.refresh_extract(full, extract, [i for ids in p5.area_ids.values() for i in ids],
+                                 cfg.definitions.trailmap.simplify_tolerance_m)
+    if n is not None:
+        print(f"filtered {rel(full)} -> {rel(extract)}: {n} runs at Tier A resorts")
+    fetched, p5.run_features = runs_mod.load_extract(extract)
+    if fetched and p5.run_features:
+        _add_source(registry, runs_mod.source(fetched), rel(extract), errors)
+    elif not extract.exists():
+        warnings.append(f"no runs extract at {rel(extract)}; run `python pipeline/build.py --fetch` to add trail maps")
 
     rent_dir = raw_dir / "rent"
     if rent_dir.is_dir() and any(p.suffix in (".json", ".csv") for p in rent_dir.rglob("*") if p.is_file()):

@@ -170,6 +170,10 @@ class TransitDefs(StrictModel):
     max_walk_km: Optional[float] = Field(default=None, gt=0)
 
 
+class TrailmapDefs(StrictModel):
+    simplify_tolerance_m: float = Field(gt=0, le=50)
+
+
 class RoutingDefs(StrictModel):
     provider: Literal["valhalla", "osrm", "ors"]
     base_url: str = Field(pattern=r"^https?://")
@@ -206,6 +210,7 @@ class Definitions(StrictModel):
     rent: RentDefs
     transit: TransitDefs
     routing: RoutingDefs
+    trailmap: TrailmapDefs
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 

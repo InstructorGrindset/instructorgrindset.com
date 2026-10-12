@@ -786,3 +786,27 @@ def test_staleness_report_written(repo_root, raw_dir, out, tmp_path, monkeypatch
     monkeypatch.setenv("SOURCE_DATE_EPOCH", "1790000000")
     _run(repo_root, raw_dir, out, tmp_path)
     assert "0 stale values" in (tmp_path / "staleness.md").read_text()
+
+
+def test_trailmap_end_to_end(repo_root, raw_dir, out, tmp_path, lifts_full):
+    from pipeline import runs as runs_mod
+    line = [[-106.30, 39.60, 2500.0], [-106.29, 39.61, 2400.0]]
+    feats = [{"type": "Feature", "geometry": {"type": "LineString", "coordinates": line},
+              "properties": {"id": f"r{i}", "name": n, "type": "run", "uses": ["downhill"], "difficulty": d,
+                             "difficultyConvention": "north_america", "status": "operating", "grooming": None,
+                             "lit": None, "skiAreas": [{"properties": {"id": a}}]}}
+             for i, (n, d, a) in enumerate([("Peak Blue", "intermediate", "osm-peak"), ("Peak Green", "easy", "osm-peak"),
+                                            ("Basin Black", "advanced", "osm-basin")])]
+    full = raw_dir / "openskimap" / runs_mod.FULL_NAME
+    full.write_text('{"type": "FeatureCollection", "features":[\n' +
+                    ",\n".join(json.dumps(f, separators=(",", ":")) for f in feats) + "\n]}\n")
+    (raw_dir / "openskimap" / "lifts.full.geojson").write_text(json.dumps(lifts_full))
+    _run(repo_root, raw_dir, out, tmp_path)
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    assert by["fixture-peak"]["trailmap_available"] and by["fixture-basin"]["trailmap_available"]
+    assert not by["fixture-indoor"]["trailmap_available"] and not by["fixture-valley"]["trailmap_available"]
+    tm = _load(out / "trailmap", "fixture-peak.json")
+    assert [f["properties"]["difficulty_us"] for f in tm["runs"]["features"]] == ["blue", "green"]
+    assert len(tm["lifts"]["features"]) == 2 and tm["resort_id"] == "fixture-peak"
+    assert "openskimap-runs" in {s["id"] for s in _load(out, "sources.json")["sources"]}
+    assert (raw_dir / "openskimap" / runs_mod.EXTRACT_NAME).exists()
