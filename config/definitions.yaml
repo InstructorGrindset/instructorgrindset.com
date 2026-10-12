@@ -32,6 +32,11 @@ reports:
   # A field gains a Reported value only with this many approved reports; shown as a range only.
   aggregation_min: 3
 
+submissions:
+  # URL the map report form posts to (pay, rent, housing reports). The backend is the owner's choice;
+  # the form stays hidden while this is null.
+  endpoint: null
+
 staleness:
   # Flag any record whose verified date is older than this.
   max_age_months: 18
@@ -108,8 +113,9 @@ rent:
   # Order of baseline values used for a housing site with no published rent (shown as
   # confidence estimated with the baseline source): fmr_studio, fmr_one_br, fmr_two_br, acs_median.
   baseline_preference: [fmr_studio, acs_median]
-  # Rent input for lucrativeness: cheapest employee housing (resort_owned or master_lease), else the baseline.
-  lucrativeness_rent: [employee_housing, baseline]
+  # Rent input for lucrativeness, first available wins: cheapest employee housing (resort_owned or
+  # master_lease, published or reported rent), then the area rent from 3+ approved reports, then the baseline.
+  lucrativeness_rent: [employee_housing, reported_area, baseline]
   # Data vintages fetched by `python -m pipeline.rent fetch`. hud_fmr_year null means HUD's latest.
   hud_fmr_year: null
   acs_year: 2024

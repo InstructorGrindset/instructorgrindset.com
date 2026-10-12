@@ -71,6 +71,10 @@ class ReportDefs(StrictModel):
     aggregation_min: int = Field(ge=1)
 
 
+class SubmissionsDefs(StrictModel):
+    endpoint: Optional[str] = Field(default=None, pattern=r"^https://")
+
+
 class StalenessDefs(StrictModel):
     max_age_months: int = Field(gt=0)
 
@@ -154,7 +158,7 @@ BaselineKey = Literal["fmr_studio", "fmr_one_br", "fmr_two_br", "acs_median"]
 
 class RentDefs(StrictModel):
     baseline_preference: list[BaselineKey] = Field(min_length=1)
-    lucrativeness_rent: list[Literal["employee_housing", "baseline"]] = Field(min_length=1)
+    lucrativeness_rent: list[Literal["employee_housing", "reported_area", "baseline"]] = Field(min_length=1)
     hud_fmr_year: Optional[int] = None
     acs_year: int
     acs_dataset: str = "acs/acs5"
@@ -192,6 +196,7 @@ class Definitions(StrictModel):
     display: DisplayDefs
     reports: ReportDefs
     staleness: StalenessDefs
+    submissions: SubmissionsDefs = Field(default_factory=SubmissionsDefs)
     matching: MatchingDefs
     openskimap: OpenSkiMapDefs
     ownership: OwnershipDefs = Field(default_factory=OwnershipDefs)

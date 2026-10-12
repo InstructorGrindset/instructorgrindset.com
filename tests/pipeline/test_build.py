@@ -106,7 +106,8 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
     assert props["i70-corridor"]["resort_ids"] == ["fixture-peak", "fixture-peak-training-center", "fixture-valley",
                                                    "unrelated-bowl"]
     assert props["i70-corridor"]["tier_a_count"] == 2 and props["other-co"]["name"] == "Other Colorado"
-    assert set(props["wasatch"]) == {"id", "name", "states", "resort_ids", "tier_a_count", "overview_md", "sources"}
+    assert set(props["wasatch"]) == {"id", "name", "states", "resort_ids", "tier_a_count", "overview_md",
+                                     "alexandre_take_md", "sources"}
     member_ids = sorted(rid for p in props.values() for rid in p["resort_ids"])
     assert member_ids == ids  # every resort in exactly one cluster
     for f in clusters["features"]:
@@ -305,6 +306,7 @@ def test_definitions_json(repo_root, tmp_path, out):
         "display": {"priority": ["published", "reported", "estimated"]},
         "reports": {"aggregation_min": 3},
         "staleness": {"max_age_months": 18},
+        "submissions": {"endpoint": None},
     }
 
 
@@ -542,3 +544,134 @@ def test_stale_detail_files_removed(repo_root, raw_dir, out, tmp_path):
     (out / "detail" / "gone-resort.json").write_text("{}")
     _run(repo_root, raw_dir, out, tmp_path)
     assert not (out / "detail" / "gone-resort.json").exists()
+
+
+EDITORIAL_FIXTURE = """
+batch: editorial-fixture
+researched_date: 2026-10-12
+sources:
+  - {id: ed-fixture-a, url: https://example.org/ed-a, title: Fixture editorial source A, accessed_date: 2026-10-12}
+entries:
+  - {target: cluster, id: i70-corridor, overview_md: "Reviewed cluster text.", alexandre_take_md: "My take.",
+     status: reviewed, source_ids: [ed-fixture-a]}
+  - {target: cluster, id: wasatch, overview_md: "Draft cluster text.", status: draft, source_ids: [ed-fixture-a]}
+  - {target: resort, id: fixture-peak, overview_md: "Reviewed resort text.", culture_md: "Culture text.",
+     status: reviewed, reviewed_by: Alexandre, reviewed_date: 2026-10-12, source_ids: [ed-fixture-a]}
+  - {target: resort, id: fixture-basin, overview_md: "Draft resort text, full-time.", status: draft, source_ids: [ed-fixture-a]}
+"""
+
+
+def test_editorial_end_to_end(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "editorial").mkdir()
+    (raw_dir / "editorial" / "fixture.yaml").write_text(EDITORIAL_FIXTURE)
+    _run(repo_root, raw_dir, out, tmp_path)
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    assert by["fixture-peak"]["editorial"] == {"overview_md": "Reviewed resort text.", "culture_md": "Culture text.",
+                                               "alexandre_take_md": None, "status": "reviewed",
+                                               "source_ids": ["ed-fixture-a"], "reviewed_date": "2026-10-12"}
+    assert "ed-fixture-a" in by["fixture-peak"]["sources"]
+    assert by["fixture-basin"]["editorial"] is None  # draft never reaches data/build
+    props = {f["properties"]["id"]: f["properties"] for f in _load(out, "clusters.geojson")["features"]}
+    assert props["i70-corridor"]["overview_md"] == "Reviewed cluster text."
+    assert props["i70-corridor"]["alexandre_take_md"] == "My take." and "ed-fixture-a" in props["i70-corridor"]["sources"]
+    assert props["wasatch"]["overview_md"] is None
+    build_text = "".join(p.read_text() for p in out.rglob("*.json")) + "".join(p.read_text() for p in out.rglob("*.geojson"))
+    assert "Draft resort text" not in build_text and "Draft cluster text" not in build_text
+    review = (tmp_path / "editorial-review.md").read_text()
+    assert "Draft resort text, full-time." in review and "Draft cluster text." in review
+    assert "Reviewed resort text" not in review and "hyphenated word 'full-time'" in review
+    assert "1 of 2 Tier A clusters have a reviewed overview." in review  # i70-corridor, wasatch; other-mi excluded
+    assert "Other Michigan" not in review.split("## Drafts")[0]
+
+
+def test_editorial_em_dash_fails_build(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "editorial").mkdir()
+    (raw_dir / "editorial" / "fixture.yaml").write_text(EDITORIAL_FIXTURE.replace("Draft cluster text.", "Draft — text."))
+    with pytest.raises(BuildError, match="cluster 'wasatch': .*em or en dash"):
+        _run(repo_root, raw_dir, out, tmp_path)
+    (raw_dir / "editorial" / "fixture.yaml").write_text(EDITORIAL_FIXTURE.replace("id: wasatch", "id: atlantis"))
+    with pytest.raises(BuildError, match="cluster 'atlantis': no such cluster"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def _reports(raw_dir, rows):
+    from pipeline.reports import ReportStore
+    from pipeline.schemas import Report
+
+    store = ReportStore(raw_dir / "reports")
+    for i, r in enumerate(rows):
+        base = {"id": f"r-{i}", "resort_id": "fixture-peak", "season": "2025-26", "submitted_at": "2026-10-01T10:00:00Z",
+                "status": "approved", "moderated_at": f"2026-10-0{1 + i % 9}T12:00:00Z"}
+        store.write(Report.model_validate({**base, **r}))
+
+
+def test_reports_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, counties_geojson, gtfs_writer,
+                            gtfs_tables, polyline_encoder):
+    _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
+    pay = lambda v, lvl="level_3": {"kind": "pay", "cert_level": lvl, "values": {"hourly_usd": v}}
+    housing = lambda v, site: {"kind": "housing", "housing_site_id": site, "values": {"monthly_usd": v}}
+    rent = lambda v: {"kind": "rent", "values": {"monthly_usd": v}}
+    _reports(raw_dir, [pay(26), pay(28), pay(27),                       # 3 approved: a reported range
+                       pay(30, "trainer"), pay(31, "trainer"),          # 2 approved: nothing
+                       {**pay(99, "trainer"), "status": "rejected", "moderation_note": "no proof"},
+                       housing(800, "peak-town-flats"), housing(950, "peak-town-flats"), housing(870, "peak-town-flats"),
+                       rent(1000), rent(1200), rent(1100)])
+    from pipeline.reports import ReportStore
+    from pipeline.schemas import Report
+    ReportStore(raw_dir / "reports").write(Report.model_validate(
+        {"id": "r-pending", "resort_id": "fixture-peak", "kind": "pay", "season": "2025-26", "cert_level": "trainer",
+         "values": {"hourly_usd": 32}, "submitted_at": "2026-10-01T10:00:00Z"}))
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert any("1 reports wait for moderation" in w for w in result.warnings)
+
+    agg = json.loads((raw_dir / "reports" / "aggregates.json").read_text())
+    assert [(p["cert_level"], p["aggregate_count"]) for p in agg["pay"]] == [("level_3", 3)]
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    rows = {p["cert_level"]: p for p in peak["career"]["pay"]}
+    assert rows["level_3"] == {"cert_level": "level_3", "hourly_low": 26, "hourly_high": 28, "confidence": "reported",
+                               "source_id": "instructorgrindset-reports", "as_of": "2026-10-03", "season": "2025-26",
+                               "stale": False}
+    assert "trainer" not in rows  # 2 approved + 1 rejected + 1 pending: nothing new
+    d = _load(out / "detail", "fixture-peak.json")
+    flats = next(h for h in d["housing"] if h["id"] == "peak-town-flats")
+    assert flats["rent_monthly"]["confidence"] == "reported" and flats["rent_monthly"]["value"] == {"low": 800, "high": 950}
+    lodge = next(h for h in d["housing"] if h["id"] == "peak-staff-lodge")
+    assert lodge["rent_monthly"]["confidence"] == "published"  # Published beats Reported
+    assert d["rent_reported"]["value"] == {"low": 1000, "high": 1200} and "3 approved reports" in d["rent_reported"]["note"]
+    assert peak["housing_summary"]["cheapest_rent_monthly_low"] == 650
+    build_text = "".join(p.read_text() for p in out.rglob("*.json"))
+    assert "r-0" not in build_text and "r-pending" not in build_text and "no proof" not in build_text
+    assert '"hourly_usd"' not in build_text and "99" not in json.dumps(peak["career"])
+
+
+def test_reports_area_rent_feeds_lucrativeness(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "pay").mkdir()
+    (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
+    _reports(raw_dir, [{"kind": "rent", "values": {"monthly_usd": v}} for v in (1000, 1200, 1100)])
+    _run(repo_root, raw_dir, out, tmp_path)
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    echo = {a["key"]: a["value"] for a in peak["career"]["lucrativeness"]["assumptions"]}
+    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == \
+        (1000.0, "reported_area", "instructorgrindset-reports")
+
+
+def test_committed_aggregates_used_without_raw_reports(repo_root, raw_dir, out, tmp_path):
+    _reports(raw_dir, [{"kind": "pay", "cert_level": "level_3", "values": {"hourly_usd": v}} for v in (26, 27, 28)])
+    _run(repo_root, raw_dir, out, tmp_path)
+    import shutil
+    shutil.rmtree(raw_dir / "reports" / "moderated")  # a fresh clone has only the committed aggregates
+    _run(repo_root, raw_dir, out, tmp_path)
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    assert peak["career"]["pay"][0]["confidence"] == "reported"
+
+
+def test_invalid_moderated_report_fails_build(repo_root, raw_dir, out, tmp_path):
+    _reports(raw_dir, [{"kind": "pay", "cert_level": "level_3", "values": {"hourly_usd": 26}, "resort_id": "ghost"}])
+    with pytest.raises(BuildError, match="resort_id 'ghost' matches no resort"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_staleness_report_written(repo_root, raw_dir, out, tmp_path, monkeypatch):
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1790000000")
+    _run(repo_root, raw_dir, out, tmp_path)
+    assert "0 stale values" in (tmp_path / "staleness.md").read_text()

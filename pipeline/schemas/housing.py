@@ -259,6 +259,7 @@ class DetailFile(StrictModel):
     lifts: LiftCollection
     housing: list[HousingOut]
     rent_baseline: Optional[RentBaseline] = None
+    rent_reported: Optional[SourcedRent] = None   # Phase 7: area rent from 3+ approved reports
     transit: Optional[TransitOut] = None
     isochrones: list[Isochrone] = Field(default_factory=list)
 

@@ -65,10 +65,14 @@ def load_housing(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], r
     return out, errors
 
 
-def display_rent(site: HousingSite, baseline: Optional[dict], preference: Sequence[str]) -> Optional[dict]:
-    """The site's own rent; else the baseline as an estimated range with the baseline source; else None."""
+def display_rent(site: HousingSite, baseline: Optional[dict], preference: Sequence[str],
+                 reported: Optional[dict] = None) -> Optional[dict]:
+    """Published > Reported > Estimated: the site's own rent, else its aggregate of 3+ approved
+    reports, else the county baseline as an estimated range; else None."""
     if site.rent_monthly is not None:
         return site.rent_monthly.model_dump(mode="json")
+    if reported is not None:
+        return reported
     pick = baseline_value(baseline, preference)
     if pick is None:
         return None
@@ -78,23 +82,37 @@ def display_rent(site: HousingSite, baseline: Optional[dict], preference: Sequen
             "note": f"county baseline ({BASELINE_LABEL[key]}, {baseline['county_name']}); this site has no published rent"}
 
 
-def cheapest_employee_site(sites: Sequence[HousingSite]) -> Optional[HousingSite]:
-    """Employee housing (resort owned or master lease) with the lowest published rent low."""
-    cands = [s for s in sites if s.type in EMPLOYEE_HOUSING and s.rent_monthly is not None]
-    return min(cands, key=lambda s: (s.rent_monthly.value.low, s.id)) if cands else None
+def _site_rent(site: HousingSite, site_reported: dict) -> Optional[dict]:
+    """Published or reported rent of a site as a Sourced dict (never the baseline)."""
+    if site.rent_monthly is not None:
+        return site.rent_monthly.model_dump(mode="json")
+    return site_reported.get(site.id)
+
+
+def cheapest_employee_site(sites: Sequence[HousingSite], site_reported: Optional[dict] = None
+                           ) -> Optional[tuple[HousingSite, dict]]:
+    """Employee housing (resort owned or master lease) with the lowest published or reported rent low."""
+    site_reported = site_reported or {}
+    cands = [(s, r) for s in sites if s.type in EMPLOYEE_HOUSING and (r := _site_rent(s, site_reported))]
+    return min(cands, key=lambda sr: (sr[1]["value"]["low"], sr[0].id)) if cands else None
 
 
 def rent_input(sites: Sequence[HousingSite], baseline: Optional[dict], order: Sequence[str],
-               preference: Sequence[str]) -> tuple[Optional[float], Optional[str], Optional[str]]:
+               preference: Sequence[str], site_reported: Optional[dict] = None, area_reported: Optional[dict] = None
+               ) -> tuple[Optional[float], Optional[str], Optional[str]]:
     """Lucrativeness rent: (monthly USD, basis, source_id) following config ``rent.lucrativeness_rent``.
 
-    basis is "employee_housing:<site id>" or the baseline key (fmr_studio, acs_median, ...).
+    basis is "employee_housing:<site id>", "reported_area" or the baseline key (fmr_studio, acs_median, ...).
+    The low end of a range is used.
     """
     for step in order:
         if step == "employee_housing":
-            site = cheapest_employee_site(sites)
-            if site is not None:
-                return site.rent_monthly.value.low, f"employee_housing:{site.id}", site.rent_monthly.source_id
+            hit = cheapest_employee_site(sites, site_reported)
+            if hit is not None:
+                return float(hit[1]["value"]["low"]), f"employee_housing:{hit[0].id}", hit[1]["source_id"]
+        elif step == "reported_area":
+            if area_reported is not None:
+                return float(area_reported["value"]["low"]), "reported_area", area_reported["source_id"]
         else:
             pick = baseline_value(baseline, preference)
             if pick is not None:
@@ -102,18 +120,21 @@ def rent_input(sites: Sequence[HousingSite], baseline: Optional[dict], order: Se
     return None, None, None
 
 
-def housing_summary(sites: Sequence[HousingSite], has_transit: bool) -> Optional[dict]:
+def housing_summary(sites: Sequence[HousingSite], has_transit: bool, site_reported: Optional[dict] = None) -> Optional[dict]:
+    """Counts and the cheapest published or reported site rent (never the baseline)."""
     if not sites:
         return None
-    priced = [s for s in sites if s.rent_monthly is not None]
-    cheapest = min(priced, key=lambda s: (s.rent_monthly.value.low, s.id)) if priced else None
+    site_reported = site_reported or {}
+    priced = [(s, r) for s in sites if (r := _site_rent(s, site_reported))]
+    cheapest = min(priced, key=lambda sr: (sr[1]["value"]["low"], sr[0].id)) if priced else None
     return {"site_count": len(sites),
-            "cheapest_rent_monthly_low": cheapest.rent_monthly.value.low if cheapest else None,
-            "cheapest_site_id": cheapest.id if cheapest else None, "has_transit": has_transit}
+            "cheapest_rent_monthly_low": cheapest[1]["value"]["low"] if cheapest else None,
+            "cheapest_site_id": cheapest[0].id if cheapest else None, "has_transit": has_transit}
 
 
 def assemble_detail(resort: dict, sites: Sequence[HousingSite], lifts_fc: dict, baseline: Optional[dict],
-                    transit_extracts: Sequence[dict], router: Any, defs: Any, header: dict) -> dict:
+                    transit_extracts: Sequence[dict], router: Any, defs: Any, header: dict,
+                    site_reported: Optional[dict] = None, area_reported: Optional[dict] = None) -> dict:
     """data/build/detail/<resort_id>.json for one Tier A resort (unvalidated dict)."""
     base = (resort["lat"], resort["lon"])
     tdefs = defs.transit
@@ -141,7 +162,8 @@ def assemble_detail(resort: dict, sites: Sequence[HousingSite], lifts_fc: dict, 
         if bus:
             commutes.append(min(bus, key=lambda c: c["minutes"]))
         housing.append({**s.model_dump(mode="json"),
-                        "rent_monthly": display_rent(s, baseline, defs.rent.baseline_preference),
+                        "rent_monthly": display_rent(s, baseline, defs.rent.baseline_preference,
+                                                     (site_reported or {}).get(s.id)),
                         "commutes": commutes})
 
     isochrones = []
@@ -150,5 +172,6 @@ def assemble_detail(resort: dict, sites: Sequence[HousingSite], lifts_fc: dict, 
                       for i in router.isochrones(base)]
     return {**header, "resort_id": resort["id"],
             "base_area": {"lat": resort["lat"], "lon": resort["lon"], "source_id": resort["location_source_id"]},
-            "lifts": lifts_fc, "housing": housing, "rent_baseline": baseline, "transit": transit,
+            "lifts": lifts_fc, "housing": housing, "rent_baseline": baseline, "rent_reported": area_reported,
+            "transit": transit,
             "isochrones": isochrones}

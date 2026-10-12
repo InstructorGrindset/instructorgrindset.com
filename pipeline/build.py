@@ -28,7 +28,10 @@ from pipeline import openskimap  # noqa: E402
 from pipeline import lifts as lifts_mod  # noqa: E402
 from pipeline import rent as rent_mod  # noqa: E402
 from pipeline.career import CareerData, build_career, load_career_data  # noqa: E402
+from pipeline.editorial import load_editorial, render_review, resort_editorial  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
+from pipeline import reports as reports_mod  # noqa: E402
+from pipeline import staleness as staleness_mod  # noqa: E402
 from pipeline.routing import RoutingClient  # noqa: E402
 from pipeline.transit import load_extracts as load_transit  # noqa: E402
 from pipeline.clusters import ClusterAssignmentError, ClusterInfo, Member, assign_clusters, build_clusters  # noqa: E402
@@ -288,6 +291,15 @@ def build(
 
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
+    cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
+    editorial, editorial_errors = load_editorial(raw_dir, registry, known_ids, cluster_ids, rel)
+    errors += editorial_errors
+    agg = _report_aggregates(raw_dir, cfg, known_ids, registry, errors, warnings, rel)
+    for rid, rows in agg.pay.items():
+        career_data.pay.setdefault(rid, []).extend(rows)
+    site_ids = {s.id for ss in housing.values() for s in ss}
+    for sid in sorted(set(agg.housing) - site_ids):
+        warnings.append(f"housing report aggregate for unknown housing site '{sid}' is not shown")
 
     if errors:
         raise BuildError(errors)
@@ -305,16 +317,20 @@ def build(
         d["climate_available"] = (climate_dir / f"{d['id']}.json").is_file()
         sites = housing.get(d["id"], [])
         baseline = p5.baselines.get(d["id"])
-        rent = rent_input(sites, baseline, cfg.definitions.rent.lucrativeness_rent, cfg.definitions.rent.baseline_preference)
+        site_reported = {s.id: reports_mod.reported_rent(agg.housing[s.id]) for s in sites if s.id in agg.housing}
+        area_reported = reports_mod.reported_rent(agg.rent.get(d["id"]))
+        rent = rent_input(sites, baseline, cfg.definitions.rent.lucrativeness_rent, cfg.definitions.rent.baseline_preference,
+                          site_reported, area_reported)
+        d["editorial"] = resort_editorial(editorial.reviewed("resort").get(d["id"]))
         _attach_career(d, career_data, cfg, today, warnings, rent)
         d["detail_available"], d["housing_summary"] = False, None
         if d["tier"] == "A":
             lift_fc = lifts_mod.lifts_for(p5.lift_features, p5.area_ids.get(d["id"], []))
             if lift_fc["features"] or sites:
                 details[d["id"]] = assemble_detail(d, sites, lift_fc, baseline, p5.transit, p5.router,
-                                                   cfg.definitions, header)
+                                                   cfg.definitions, header, site_reported, area_reported)
                 d["detail_available"] = True
-                d["housing_summary"] = housing_summary(sites, details[d["id"]]["transit"] is not None)
+                d["housing_summary"] = housing_summary(sites, details[d["id"]]["transit"] is not None, site_reported)
         d["sources"] = sorted(_refs(d))
         try:
             resorts.append(Resort.model_validate(d, context=ctx))
@@ -326,13 +342,17 @@ def build(
     infos: list[ClusterInfo] = build_clusters(members, assignment, cfg.clusters, STATE_NAMES) if members else []
     tier_by_id = {r.id: r.tier for r in resorts}
     clusters: list[Cluster] = []
+    reviewed_clusters = editorial.reviewed("cluster")
     for info in infos:
+        ced = reviewed_clusters.get(info.id)
         try:
             clusters.append(Cluster.model_validate({
                 "id": info.id, "name": info.name, "states": info.states, "polygon": info.polygon,
                 "resort_ids": info.resort_ids,
                 "tier_a_count": sum(1 for rid in info.resort_ids if tier_by_id.get(rid) == "A"),
-                "overview_md": None, "sources": info.sources,
+                "overview_md": ced.overview_md if ced else None,
+                "alexandre_take_md": ced.alexandre_take_md if ced else None,
+                "sources": sorted(set(info.sources) | set(ced.source_ids if ced else [])),
             }, context=ctx))
         except ValidationError as e:
             for m in e.errors():
@@ -389,7 +409,8 @@ def build(
             "geometry": c.polygon.model_dump(),
             "properties": {
                 "id": c.id, "name": c.name, "states": c.states, "resort_ids": c.resort_ids,
-                "tier_a_count": c.tier_a_count, "overview_md": c.overview_md, "sources": c.sources,
+                "tier_a_count": c.tier_a_count, "overview_md": c.overview_md,
+                "alexandre_take_md": c.alexandre_take_md, "sources": c.sources,
             },
         } for c in clusters],
     }, compact=True)
@@ -409,6 +430,15 @@ def build(
     if write_report:
         from pipeline.tier_a_report import write_report as _write_report
         _write_report(report_path, result, registry, cfg)
+        # Phase 6 gate: named clusters only; other-<state> fallbacks are state buckets without overviews
+        fallback = cfg.clusters.membership.fallback_id_prefix + "-"
+        tier_a_clusters = {c.id: c.name for c in clusters if c.tier_a_count and not c.id.startswith(fallback)}
+        names = {("resort", r.id): r.name for r in resorts} | {("cluster", c.id): c.name for c in clusters}
+        names |= {("cluster", c.id): c.name for c in cfg.clusters.clusters if ("cluster", c.id) not in names}
+        (report_path.parent / "editorial-review.md").write_text(
+            render_review(editorial, registry, tier_a_clusters, names), encoding="utf-8")
+        staleness_mod.write_report(out_dir, report_path.parent / "staleness.md", cfg.definitions.staleness.max_age_months,
+                                   today)
     return result
 
 
@@ -421,6 +451,7 @@ def display_definitions(cfg: Config) -> dict:
         "display": {"priority": list(d.display.priority)},
         "reports": {"aggregation_min": d.reports.aggregation_min},
         "staleness": {"max_age_months": d.staleness.max_age_months},
+        "submissions": {"endpoint": d.submissions.endpoint},
     }
 
 
@@ -460,6 +491,33 @@ def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warni
                              rent[1], rent[2])
     warnings.extend(w)
     d["career"] = career
+
+
+def _report_aggregates(raw_dir: Path, cfg: Config, known_ids: set[str], registry: SourceRegistry,
+                       errors: list[str], warnings: list[str], rel=str) -> "reports_mod.Aggregates":
+    """Aggregates of approved reports: recomputed from data/raw/reports/moderated when present (and written to
+    aggregates.json), else read from the committed aggregates.json."""
+    store = reports_mod.ReportStore(raw_dir / "reports")
+    agg_path = store.root / "aggregates.json"
+    pending, queue_errors = store.pending()
+    warnings.extend(f"report queue: {e}" for e in queue_errors)
+    if pending:
+        warnings.append(f"{len(pending)} reports wait for moderation: python -m pipeline.reports list")
+    data = None
+    if store.moderated.is_dir():
+        decided, mod_errors = store.decided()
+        errors.extend(f"{rel(store.moderated)}: {e}" for e in mod_errors)
+        for r in decided:
+            if r.resort_id not in known_ids:
+                errors.append(f"{rel(store.moderated)}/{r.id}.yaml: resort_id '{r.resort_id}' matches no resort in this build")
+        data = reports_mod.aggregate(decided, cfg.definitions.reports.aggregation_min, generated_at())
+        reports_mod.write_aggregates(agg_path, data)
+    elif agg_path.exists():
+        data = json.loads(agg_path.read_text(encoding="utf-8"))
+    agg = reports_mod.load_aggregates(data)
+    if agg.source is not None:
+        registry.add(agg.source, rel(agg_path))
+    return agg
 
 
 @dataclass
@@ -528,13 +586,15 @@ def _refs(d: dict) -> set[str]:
         if isinstance(o, dict):
             if isinstance(o.get("source_id"), str):
                 found.add(o["source_id"])
+            if isinstance(o.get("source_ids"), list):
+                found.update(x for x in o["source_ids"] if isinstance(x, str))
             for v in o.values():
                 walk(v)
         elif isinstance(o, list):
             for v in o:
                 walk(v)
 
-    for key in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career"):
+    for key in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career", "editorial"):
         walk(d.get(key))
     return found
 

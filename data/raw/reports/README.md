@@ -1,0 +1,45 @@
+# Crowdsourced reports (Phase 7)
+
+Pay, rent and housing reports from instructors. Individual reports are private: they live only in `queue/` and `moderated/`, which are gitignored, and never reach `data/build`. Only aggregates of 3 or more approved reports (`reports.aggregation_min`) are published, through the committed `aggregates.json`.
+
+## Folders
+
+| Path | Content |
+|---|---|
+| `queue/<id>.yaml` | pending reports, one per file (gitignored) |
+| `moderated/<id>.yaml` | approved or rejected reports (gitignored) |
+| `aggregates.json` | aggregates only, written by `python -m pipeline.reports aggregate` and by every build when `moderated/` exists (committed) |
+
+## Commands
+
+```bash
+python -m pipeline.reports import export.csv      # or export.json, from the form backend
+python -m pipeline.reports list
+python -m pipeline.reports approve r-1a2b3c4d5e6f --note "pay stub checked"
+python -m pipeline.reports reject r-1a2b3c4d5e6f --note "season does not match"
+python -m pipeline.reports aggregate
+python pipeline/build.py
+```
+
+## Import columns
+
+A CSV with these headers, or a JSON list of objects with the same keys (also accepted: `{"reports": [...]}`):
+
+| Column | Required | Notes |
+|---|---|---|
+| `id` | no | generated from the content when missing (`r-` plus 12 hex characters) |
+| `resort_id` | yes | a resort id from `data/build/resorts.json` |
+| `kind` | yes | `pay`, `rent` or `housing` |
+| `season` | yes | `2025-26` |
+| `cert_level` | pay | `none`, `level_1`, `level_2`, `level_3`, `trainer`, `examiner` |
+| `housing_site_id` | housing | a site id from `data/raw/housing` |
+| `hourly_usd` | pay | number |
+| `monthly_usd` | rent, housing | number |
+| `proof_url` | no | `https://` link to proof the moderator can check |
+| `submitted_at` | no | ISO datetime; defaults to the import time |
+
+A JSON object may carry `values: {hourly_usd | monthly_usd}` instead of the two value columns. Any `status` in the export is ignored: every import starts as pending. Rows that fail validation or name an unknown resort are reported and skipped; re importing the same export adds nothing.
+
+## Aggregation
+
+Approved reports are grouped by resort, season and kind (plus cert level for pay, housing site for housing). A group with 3 or more reports gives a range from its lowest to highest value with the report count; 2 or fewer give nothing; pending and rejected reports never count. Pay aggregates become `reported` pay rows; housing aggregates become a site's reported rent when the site has no published rent; rent aggregates become the resort's `rent_reported` in its detail file.

@@ -70,7 +70,7 @@ def test_rent_input_selection():
              site(id="c", type="resort_owned", rent_monthly={"value": {"low": 650, "high": 950}, **SV, "source_id": "src-b"}),
              site(id="d", type="resort_owned", rent_monthly=None)]
     assert rent_input(sites, BASELINE, order, pref) == (650, "employee_housing:c", "src-b")  # market rent is ignored
-    assert cheapest_employee_site(sites).id == "c"
+    assert cheapest_employee_site(sites)[0].id == "c"
     assert rent_input(sites[:1], BASELINE, order, pref) == (1478.0, "fmr_studio", "hud-fmr-fy2026")
     assert rent_input(sites, BASELINE, ["baseline", "employee_housing"], ["acs_median"]) == \
         (1950.0, "acs_median", "census-acs5-2024-b25064")

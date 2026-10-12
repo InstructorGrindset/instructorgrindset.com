@@ -47,6 +47,7 @@ class Cluster(StrictModel):
     resort_ids: list[Slug] = Field(min_length=1)
     tier_a_count: int = Field(ge=0)
     overview_md: Optional[str] = None
+    alexandre_take_md: Optional[str] = None
     sources: list[Slug] = Field(default_factory=list)
 
     @field_validator("sources")

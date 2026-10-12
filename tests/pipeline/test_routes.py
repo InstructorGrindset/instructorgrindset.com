@@ -20,9 +20,13 @@ TEMPLATE = """<!doctype html>
   <title>Instructor Grindset &bull; Snowsports Career Map</title>
   <meta name="description" content="National description." />
   <link rel="canonical" href="https://instructorgrindset.com/map/" />
+  <meta property="og:title" content="Snowsports Career Map" />
+  <meta property="og:description" content="National description." />
+  <meta property="og:url" content="https://instructorgrindset.com/map/" />
   <link rel="stylesheet" href="/map/css/map.css">
 </head>
-<body><a href="#main">Skip</a><script type="module" src="/map/js/app.js"></script></body>
+<body><a href="#main">Skip</a><div id="panel-content"><!-- prerender:start --><p>Loading</p><!-- prerender:end --></div>
+<script type="module" src="/map/js/app.js"></script></body>
 </html>
 """
 
@@ -34,6 +38,8 @@ def _env(n: int = 1) -> dict:
 def write_build(root: Path, resorts: list[dict], clusters: list[dict], states: list[dict]) -> None:
     build = root / "data" / "build"
     build.mkdir(parents=True, exist_ok=True)
+    (build / "sources.json").write_text(json.dumps({**_env(), "sources": [
+        {"id": "test-src", "url": "https://example.com/src", "title": "Test Source", "accessed_date": "2026-10-01"}]}))
     (build / "resorts.json").write_text(json.dumps({**_env(), "resorts": resorts}))
     (build / "clusters.geojson").write_text(json.dumps({"type": "FeatureCollection", **_env(), "features": [
         {"type": "Feature", "geometry": None, "properties": c} for c in clusters]}))
@@ -41,11 +47,19 @@ def write_build(root: Path, resorts: list[dict], clusters: list[dict], states: l
 
 
 def default_data():
+    def r(id_, name, cluster, state, tier="B", **extra):
+        return {"id": id_, "name": name, "cluster_id": cluster, "state": state, "tier": tier, "lat": 39.5, "lon": -106.0,
+                "tier_a_criteria": [], "tier_a_status": None, "owner": None, "size": {}, "season": {}, "career": None, **extra}
+    src = {"value": 5300, "source_id": "test-src", "as_of": "2026-10-01", "confidence": "published"}
     resorts = [
-        {"id": "alpha-peak", "name": "Alpha Peak", "cluster_id": "front", "state": "CO"},
-        {"id": "bravo-bowl", "name": "Bravo & Sons <Bowl>", "cluster_id": "front", "state": "CO"},
-        {"id": "lake-west", "name": "Lake West", "cluster_id": "lake", "state": "CA"},
-        {"id": "lake-east", "name": "Lake East", "cluster_id": "lake", "state": "NV"},
+        r("alpha-peak", "Alpha Peak", "front", "CO", "A", tier_a_status="approved",
+          tier_a_criteria=[{"criterion": "operator_compensation", "rationale": "x", "source_id": "test-src"}],
+          owner={**src, "value": "Test Owner"}, size={"acres": src},
+          career={"pay": [{"cert_level": "level_1", "hourly_low": 21.5, "hourly_high": 24, "confidence": "published",
+                           "source_id": "test-src", "as_of": "2026-10-01", "season": "2025-26", "stale": False}]}),
+        r("bravo-bowl", "Bravo & Sons <Bowl>", "front", "CO"),
+        r("lake-west", "Lake West", "lake", "CA"),
+        r("lake-east", "Lake East", "lake", "NV"),
     ]
     clusters = [
         {"id": "front", "name": "Test Front", "states": ["CO"], "resort_ids": ["alpha-peak", "bravo-bowl"]},
@@ -81,15 +95,17 @@ def test_writes_state_cluster_and_resort_stubs(site: Path):
     # 3 states + front(1) + lake(2 states) clusters + 2 front resorts + 2 lake resorts x 2 states
     assert n == 3 + 3 + 2 + 4
     co = read(site, "co")
-    assert "<title>Colorado Resorts and Clusters • Snowsports Career Map</title>" in co
+    assert "<title>Colorado Resorts and Clusters for Snowsports Instructors • Instructor Grindset</title>" in co
     assert 'href="https://instructorgrindset.com/map/co/"' in co
     assert "2 resorts, with a source on every number." in co
     assert MARKER in co
     cluster = read(site, "co/front")
-    assert "<title>Test Front Cluster • Snowsports Career Map</title>" in cluster
+    assert "<title>Instructor pay, housing, and snow in Test Front • Instructor Grindset</title>" in cluster
     assert 'href="https://instructorgrindset.com/map/co/front/"' in cluster
     resort = read(site, "co/front/alpha-peak")
-    assert "<title>Alpha Peak: Season, Snow and Size • Snowsports Career Map</title>" in resort
+    assert "<title>Instructor pay, housing, and snow at Alpha Peak • Instructor Grindset</title>" in resort
+    assert '<meta property="og:title" content="Instructor pay, housing, and snow at Alpha Peak" />' in resort
+    assert '<meta property="og:url" content="https://instructorgrindset.com/map/co/front/alpha-peak/" />' in resort
     assert "Plan a season at Alpha Peak in the Test Front cluster, Colorado." in resort
     assert 'href="https://instructorgrindset.com/map/co/front/alpha-peak/"' in resort
     # Asset paths stay absolute, the body is the shell unchanged.
@@ -111,8 +127,10 @@ def test_multi_state_cluster_canonicals(site: Path):
 def test_escapes_html_in_names(site: Path):
     generate_routes(site)
     page = read(site, "co/front/bravo-bowl")
-    assert "<title>Bravo &amp; Sons &lt;Bowl&gt;: Season" in page
+    assert "<title>Instructor pay, housing, and snow at Bravo &amp; Sons &lt;Bowl&gt;" in page
     assert "<Bowl>" not in page
+    ld = page.split('<script type="application/ld+json">')[1].split("</script>")[0]
+    assert json.loads(ld)["@graph"][0]["name"] == "Bravo & Sons <Bowl>"
 
 
 def test_manifest_and_stale_removal(site: Path):
@@ -233,3 +251,109 @@ def test_cli_missing_build(tmp_path: Path):
 def test_real_shell_is_a_valid_template():
     from pipeline.routes import check_template
     check_template((REPO / "map" / "index.html").read_text())
+
+
+def _jsonld(page: str) -> dict:
+    return json.loads(page.split('<script type="application/ld+json">')[1].split("</script>")[0])
+
+
+def _prerender(page: str) -> str:
+    return page.split("<!-- prerender:start -->")[1].split("<!-- prerender:end -->")[0]
+
+
+def test_resort_page_has_jsonld_and_prerendered_summary(site: Path):
+    generate_routes(site)
+    page = read(site, "co/front/alpha-peak")
+    graph = _jsonld(page)["@graph"]
+    resort = next(x for x in graph if x["@type"] == "SkiResort")
+    assert resort["geo"] == {"@type": "GeoCoordinates", "latitude": 39.5, "longitude": -106.0}
+    assert resort["url"] == "https://instructorgrindset.com/map/co/front/alpha-peak/"
+    crumbs = next(x for x in graph if x["@type"] == "BreadcrumbList")["itemListElement"]
+    assert [c["name"] for c in crumbs] == ["Snowsports Career Map", "Colorado", "Test Front", "Alpha Peak"]
+    body = _prerender(page)
+    assert '<h2 id="panel-heading" tabindex="-1">Alpha Peak</h2>' in body
+    assert "Resort in Test Front, CO" in body
+    assert "Test Owner" in body and "Operator compensation" in body and "Approved" in body
+    assert "5,300" in body and "Last verified Oct 1, 2026" in body and 'href="https://example.com/src"' in body
+    assert "Level 1" in body and "$21.50 to $24" in body
+    assert 'href="/contact"' in body
+    for href in ("/blog", "/reading-list", "/income-calculator", "/career-plan", "/priority-predictor"):
+        assert f'href="{href}"' in body
+    assert "Loading" not in body
+    assert "—" not in body  # copy rules: no em dashes
+
+
+def test_unverified_values_and_missing_career(site: Path):
+    generate_routes(site)
+    body = _prerender(read(site, "co/front/bravo-bowl"))
+    assert "Not yet verified" in body
+    assert "Career data is being collected." in body
+
+
+def test_cluster_and_state_pages_list_children(site: Path):
+    generate_routes(site)
+    cluster = read(site, "co/front")
+    body = _prerender(cluster)
+    assert 'href="/map/co/front/alpha-peak/"' in body and 'href="/map/co/front/bravo-bowl/"' in body
+    items = _jsonld(cluster)["@graph"][0]["mainEntity"]["itemListElement"]
+    assert items[0]["url"].endswith("/map/co/front/alpha-peak/")
+    assert 'href="/contact"' in body
+    assert 'href="/map/co/front/"' in _prerender(read(site, "co"))
+
+
+def test_reviewed_editorial_renders_with_sources(site: Path):
+    resorts, clusters, states = default_data()
+    resorts[0]["editorial"] = {"status": "reviewed", "overview_md": "A **steep** mountain. [More](https://example.com/x)",
+                               "culture_md": None, "alexandre_take_md": "Go early.", "source_ids": ["test-src"]}
+    resorts[1]["editorial"] = {"status": "draft", "overview_md": "Draft text"}
+    clusters[0]["overview_md"] = "Cluster overview."
+    write_build(site, resorts, clusters, states)
+    generate_routes(site)
+    body = _prerender(read(site, "co/front/alpha-peak"))
+    assert "<strong>steep</strong>" in body and 'href="https://example.com/x"' in body
+    assert "Alexandre&#x27;s take" in body
+    assert "Sources: " in body and "Test Source" in body
+    assert "Draft text" not in read(site, "co/front/bravo-bowl")
+    assert "Cluster overview." in _prerender(read(site, "co/front"))
+
+
+def test_sitemap_keeps_site_entries_and_lists_canonical_map_pages(site: Path):
+    original = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://instructorgrindset.com/</loc>
+    <lastmod>2026-04-05</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://instructorgrindset.com/map/old-page/</loc>
+  </url>
+</urlset>
+"""
+    (site / "sitemap.xml").write_text(original)
+    generate_routes(site)
+    first = (site / "sitemap.xml").read_text()
+    generate_routes(site)
+    assert (site / "sitemap.xml").read_text() == first  # idempotent
+    assert """  <url>
+    <loc>https://instructorgrindset.com/</loc>
+    <lastmod>2026-04-05</lastmod>
+    <priority>1.0</priority>
+  </url>""" in first
+    assert "/map/old-page/" not in first
+    locs = [x.split("</loc>")[0] for x in first.split("<loc>")[1:]]
+    assert "https://instructorgrindset.com/map/" in locs
+    assert "https://instructorgrindset.com/map/ca/lake/" in locs
+    assert "https://instructorgrindset.com/map/nv/lake/" not in locs  # non canonical duplicate
+    assert "https://instructorgrindset.com/map/nv/lake/lake-east/" in locs
+    assert "https://instructorgrindset.com/map/ca/lake/lake-east/" not in locs
+    assert len(locs) == len(set(locs))
+    import xml.dom.minidom
+    xml.dom.minidom.parseString(first)
+
+
+def test_no_sitemap_flag(site: Path):
+    out = subprocess.run([sys.executable, str(REPO / "pipeline" / "routes.py"), "--root", str(site), "--no-sitemap"],
+                         capture_output=True, text=True, check=True)
+    assert "wrote 12 stub pages" in out.stdout
+    assert not (site / "sitemap.xml").exists()

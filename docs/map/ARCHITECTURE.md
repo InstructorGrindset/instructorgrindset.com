@@ -59,7 +59,7 @@ Resort {
   fit: { enthusiast_types: string[], professional_types: string[] },
   clients: { profile_tags: string[], notes_md: string | null },
   career: Career | null,   // Phase 4, see "Phase 4 career" below; null when a resort has no pay records and no career inputs
-  editorial: null,    // Phase 6; only reviewed editorial is emitted
+  editorial: Editorial | null,   // Phase 6; only reviewed entries, see "Phase 6 editorial"; null otherwise
   climate_available: boolean,                      // true when climate/<id>.json exists
   detail_available: boolean,                       // true when detail/<id>.json exists (Phase 5)
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
@@ -70,7 +70,7 @@ Resort {
 ### `clusters.geojson`
 GeoJSON FeatureCollection, one Polygon or MultiPolygon per cluster. `properties`:
 ```
-{ id, name, states: string[], resort_ids: string[], tier_a_count, overview_md: null, sources: string[] }
+{ id, name, states: string[], resort_ids: string[], tier_a_count, overview_md: string | null, alexandre_take_md: string | null, sources: string[] }
 ```
 Polygons are convex hulls of member resorts buffered by about 15 km, or hand drawn polygons from `config/clusters.yaml` when supplied.
 
@@ -97,6 +97,7 @@ Display relevant subset of `config/definitions.yaml`, so the UI never hardcodes 
   density: { dry_max_pct, moist_min_pct },           // dry < dry_max_pct, average between, moist > moist_min_pct
   display: { priority: ["published", "reported", "estimated"] },
   reports: { aggregation_min },                      // approved reports needed before a Reported range shows
+  submissions: { endpoint: string | null },          // report form target; the form is hidden while null
   staleness: { max_age_months } }                    // records older than this are flagged
 ```
 
@@ -221,12 +222,83 @@ Build outputs:
 * **Transit extract** (`data/raw/transit/<agency>.json`): `{ version, agency, source, search_radius_km, routes, stops, patterns }`; ids are prefixed `<agency>:`; `patterns: [{ route_id, stop_ids, offsets_min, trip_count }]` hold median scheduled minutes from the first kept stop. Bus commute = walk to a stop within `transit.max_walk_km` + scheduled ride + walk from a stop within `max_walk_km` of the base, at `transit.walk_speed_kmh`, no waiting time; null until Alexandre sets both.
 * **Routing:** source id `routing-<provider>`; the build reads only the cache `data/raw/routing/<provider>/<sha1>.json` written by `python -m pipeline.routing run`. Drive commute `source_id` is `routing-<provider>`; bus commute `source_id` is `gtfs-<agency>`.
 * **Lifts:** extract features carry `{ id, name, ref, lift_type, ski_area_ids }`; only `status: operating` lifts. Detail lifts carry exactly `{ name, lift_type, source_id }`. `name` may be null in OpenStreetMap.
-* **Detail files** are written compact; files for resorts that no longer qualify are removed. `housing_summary.cheapest_rent_monthly_low` uses published site rents only (never the baseline); `has_transit` is true when the detail file has transit.
+* **Detail files** are written compact; files for resorts that no longer qualify are removed. `housing_summary.cheapest_rent_monthly_low` uses published or reported site rents (never the baseline); `has_transit` is true when the detail file has transit.
+
+## Phase 6 editorial
+
+### Raw input: `data/raw/editorial/<batch>.yaml`
+```
+{ batch, researched_date, sources: [Source], entries: [EditorialEntry] }
+EditorialEntry { target: "cluster" | "resort", id,            // an existing cluster id or resort id
+                 overview_md, culture_md (resort only, else null), alexandre_take_md (written by Alexandre only),
+                 status: "draft" | "reviewed", source_ids: string[] (1 or more, all defined),
+                 reviewed_by?: string, reviewed_date?: ISO date }   // set by the approve command
+```
+* One entry per (target, id) across all files. A `reviewed_by` or `reviewed_date` on a draft is an error.
+* Style lint on every text field (Alexandre's rules): an em dash or en dash fails the build; a hyphen inside a word
+  ("full-time") and negative definitions ("is not", "isn't", "are not", "aren't") are warnings listed in
+  `docs/map/editorial-review.md`. URLs and Markdown link targets are ignored by the lint.
+
+### Build output
+* Only `reviewed` entries reach `/data/build`. Drafts never do.
+* `Resort.editorial`: `{ overview_md, culture_md, alexandre_take_md, status: "reviewed", source_ids, reviewed_date }`
+  or `null`. Its `source_ids` are also in `resort.sources`.
+* `clusters.geojson` properties `overview_md` and `alexandre_take_md` come from the reviewed cluster entry (else null);
+  its `source_ids` are added to the cluster `sources`.
+* `docs/map/editorial-review.md` (generated each build) lists every draft with its text, source links and lint warnings,
+  plus the Phase 6 gate: Tier A clusters with and without a reviewed overview.
+* Mark an entry reviewed by setting `status: reviewed` in the YAML, or
+  `python -m pipeline.editorial approve <cluster|resort> <id> [--by NAME]`, which flips the status in place and records
+  `reviewed_by` and `reviewed_date`.
+
+## Phase 7 crowdsourcing and freshness
+
+### Reports (raw, never published)
+`data/raw/reports/queue/<id>.yaml` (pending) and `data/raw/reports/moderated/<id>.yaml` (approved or rejected), one
+report per file. Both folders are gitignored: individual reports never reach git or `/data/build`.
+```
+Report { id, resort_id, kind: pay | rent | housing, season ("2025-26"),
+         cert_level (pay only, same values as PayRecord), housing_site_id (housing only),
+         values: { hourly_usd } (pay) | { monthly_usd } (rent, housing),
+         proof_url?: string, submitted_at: ISO datetime,
+         status: pending | approved | rejected, moderation_note?: string, moderated_at?: ISO datetime }
+```
+* `rent` is a rent the reporter paid near the resort; `housing` is a rent at a listed housing site.
+* Moderation: `python -m pipeline.reports list`, `approve <id> [--note TEXT]`, `reject <id> --note TEXT`,
+  `import <file.json|file.csv>` (see `data/raw/reports/README.md` for the columns), `aggregate`.
+
+### Aggregation (`python -m pipeline.reports aggregate`, also run by every build when reports exist)
+* Group approved reports by (resort_id, season, kind, cert_level for pay, housing_site_id for housing).
+  A group with `reports.aggregation_min` (3) or more reports gives a range `{low: min, high: max, count}`.
+  Groups with 2 or fewer give nothing. Pending and rejected reports never count.
+* Output `data/raw/reports/aggregates.json` (committed; aggregates only, no individual values):
+  `{ version, generated_at, source: Source, pay: [PayRecord], rent: [RentAggregate], housing: [RentAggregate] }`
+  where pay rows are `confidence: reported` with `aggregate_count`, and
+  `RentAggregate { resort_id, season, housing_site_id (housing only), low, high, count, verified_date }`.
+  Source id `instructorgrindset-reports`.
+* Pay: aggregates join the Phase 4 pay selection (latest season, then Published > Reported > Estimated).
+* Rent, per field with Published > Reported > Estimated:
+  housing site `rent_monthly` = the site's published rent, else its latest season `housing` aggregate
+  (confidence `reported`, `note` gives the report count), else the county baseline (`estimated`).
+  Detail files gain `rent_reported: Sourced<{low, high}> | null` (latest season `rent` aggregate for the resort,
+  `note` gives the count). Lucrativeness rent order (`rent.lucrativeness_rent`): `employee_housing` (published or
+  reported site rent), `reported_area` (`rent_reported`), `baseline`.
+
+### Staleness (`python -m pipeline.staleness`)
+Writes `docs/map/staleness.md`: every sourced value in `resorts.json` and `detail/*.json` whose `as_of` or
+`verified_date` is older than `staleness.max_age_months`, grouped by resort and field. Phase 4 already flags
+`career.stale_fields` and `pay[].stale` in the build output.
+
+### Submissions endpoint
+`config/definitions.yaml` `submissions: { endpoint: null }` is exposed in `definitions.json` as
+`submissions: { endpoint }`. The UI shows the report form only when `endpoint` is a URL.
 
 ## Raw inputs (`/data/raw`)
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
 * `data/raw/ownership/*.yaml`: verified Vail and Alterra US portfolios with sources. Every listed resort needs a Tier A record (operator compensation).
+* `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
+* `data/raw/reports/`: Phase 7 queue and moderated reports (gitignored) and `aggregates.json` (committed).
 * `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
 * `data/raw/sources/*.yaml`: pipeline owned shared sources (`{ sources: Source[] }`, e.g. `owner-decisions-2026-10-11`) that any research file may cite. Source ids are unique across all of `/data/raw`; the same id may repeat only with an identical url.
 * `data/raw/openskimap/`: downloaded OpenSkiMap ski areas (gitignored when large; the filtered US extract is committed).
@@ -250,6 +322,9 @@ pipeline/
   rent.py             # Phase 5 HUD FMR and ACS baselines, county lookup
   transit.py          # Phase 5 GTFS extraction and bus commute model
   routing.py          # Phase 5 Valhalla / OSRM / ORS client with cache
+  editorial.py        # Phase 6 editorial loader, approve command, review document
+  reports.py          # Phase 7 report import, moderation, aggregation
+  staleness.py        # Phase 7 stale value report
   climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation)
 config/
   definitions.yaml    # thresholds, weights, assumptions (ROADMAP Section 6)

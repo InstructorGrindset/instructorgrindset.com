@@ -108,6 +108,15 @@ class Editorial(StrictModel):
     culture_md: Optional[str] = None
     alexandre_take_md: Optional[str] = None
     status: EditorialStatus = "draft"
+    source_ids: list[Slug] = Field(default_factory=list)
+    reviewed_date: Optional[dt.date] = None
+
+    @field_validator("source_ids")
+    @classmethod
+    def _sources(cls, v: list[str], info: ValidationInfo) -> list[str]:
+        for sid in v:
+            check_source_ref(sid, info)
+        return v
 
 
 class Resort(StrictModel):
@@ -189,12 +198,15 @@ def referenced_source_ids(resort: Resort) -> set[str]:
             sid = getattr(obj, "source_id", None)
             if isinstance(sid, str):
                 found.add(sid)
+            sids = getattr(obj, "source_ids", None)
+            if isinstance(sids, list):
+                found.update(s for s in sids if isinstance(s, str))
             for name in type(obj).model_fields:
                 walk(getattr(obj, name))
         elif isinstance(obj, list):
             for item in obj:
                 walk(item)
 
-    for name in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career"):
+    for name in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career", "editorial"):
         walk(getattr(resort, name))
     return found
