@@ -31,7 +31,7 @@ const TIER_STYLE = {
 };
 
 // Color modes draw a heat surface (heat.js) under small resort dots. Grey marks resorts without data.
-export const NO_DATA = '#4a5568';
+export const NO_DATA = '#8891a0';
 const HEAT_DOT = { fill: C.background, strokeA: C.tierA, strokeB: '#e7e9ee' };
 
 function svgImage(id, shape, fill, stroke, width) {

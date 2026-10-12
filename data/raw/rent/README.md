@@ -19,6 +19,7 @@ Without `HUD_API_TOKEN` only ACS is fetched. ACS works without a key at low volu
 |---|---|
 | `hud_fmr/<county fips>.json` | `{fetched_date, url, response}` from `GET https://www.huduser.gov/hudapi/public/fmr/data/<fips>99999`; `response.data.basicdata` gives `Efficiency`, `One-Bedroom`, `Two-Bedroom` (a list with one row per ZIP in Small Area FMR areas, plus an `MSA level` row) |
 | `hud_fmr_<year>.csv` | optional HUD county FMR download with columns `fips`, `countyname`, `fmr_0`, `fmr_1`, `fmr_2`; used when no API cache exists for a county |
+| `hud_fmr_<year>.csv.json` | optional `{"fetched_date": "YYYY-MM-DD"}` for the CSV; without it the values are dated October 1 of the year before the fiscal year (when FY FMRs take effect) |
 | `acs/<year>_county_<fips>.json` | `{fetched_date, url, response}` from `GET https://api.census.gov/data/<year>/acs/acs5?get=NAME,B25064_001E&for=county:<ccc>&in=state:<ss>` |
 | `acs/<year>_zcta_<zip>.json` | same for `for=zip%20code%20tabulation%20area:<zip>` (parsed; a ZIP lookup needs ZCTA outlines, not yet wired) |
 

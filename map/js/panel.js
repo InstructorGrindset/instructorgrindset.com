@@ -283,6 +283,8 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
       const hadFocus = document.activeElement && document.activeElement.id === 'panel-heading';
       const notice = root.querySelector(':scope > .notice');
       const el = api.render(view, { keepToken: true });
+      root.removeAttribute('aria-busy');
+      performance.mark('careermap:panel-full');
       if (notice) root.prepend(notice);
       if (hadFocus && el) el.focus({ preventScroll: true });
     });
@@ -844,11 +846,24 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     for (const el of root.querySelectorAll('.src-pending')) el.replaceWith(sourceLink(el.dataset.src));
   }
 
+  let rendered = false;
   const api = {
     /** Render a view. Returns the heading element. */
     render(view, { keepToken = false } = {}) {
       if (!keepToken) token += 1;
       const my = token;
+      const first = !rendered;
+      rendered = true;
+      root.removeAttribute('aria-busy');
+      // A route stub carries a prerendered summary of its resort. Keep it on screen while the full record loads.
+      if (first && !index.detailsReady && (view.level === 'resort' || view.level === 'compare')) {
+        const pre = root.querySelector('#panel-heading');
+        if (pre && pre.textContent.trim() === (view.level === 'resort' ? index.resorts.get(view.resortId).name : pre.textContent.trim())) {
+          root.setAttribute('aria-busy', 'true');
+          waitForDetails(view, my, '', '');
+          return pre;
+        }
+      }
       destroyCharts();
       clear(root);
       let body;

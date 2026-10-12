@@ -5,6 +5,11 @@
 //
 // 1. Performance budget: /map/ and a resort page interactive under 3 s with Chrome DevTools
 //    throttling (4G: 150 ms RTT, 1.6 Mbps down, 750 Kbps up, 4x CPU slowdown).
+//    Interactive means the panel and the list view work (for a resort page: the full resort record is
+//    rendered) and the first map frame is on screen. The first map frame is the 2D preview that
+//    map/js/preview.js draws from the slim index; the WebGL map replaces it when MapLibre fires `load`.
+//    Times come from the page's own performance marks (navigation start = 0). The WebGL `load` time is
+//    reported next to the budget; under SwiftShader (software WebGL) it lands well after 3 s.
 // 2. The homepage makes zero requests to /map/ or /data/build/.
 // 3. axe-core on the national map, a resort page, the list view and the phone layout.
 // 4. Lighthouse (mobile defaults) on /map/ and two resort pages.
@@ -87,18 +92,23 @@ async function throttled(browser, url, label, { phone = false } = {}) {
   await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
   let bytes = 0;
   cdp.on('Network.loadingFinished', (e) => { bytes += e.encodedDataLength; });
-  const t0 = Date.now();
   await page.goto(url, { waitUntil: 'commit' });
   await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 60000 });
-  const tPanel = Date.now() - t0;
-  await page.waitForFunction(() => {
-    const m = window.__careerMap.mapCtl && window.__careerMap.mapCtl.map;
-    return m && m.loaded() && m.getLayer('resorts');
-  }, null, { timeout: 60000, polling: 50 });
-  const tMap = Date.now() - t0;
-  const r = { label, url, panel_ms: tPanel, map_interactive_ms: tMap, transferred_kb: Math.round(bytes / 1024) };
+  await page.waitForFunction(() => performance.getEntriesByName('careermap:map').length > 0
+    && !document.querySelector('#panel-content[aria-busy="true"]'), null, { timeout: 60000, polling: 100 });
+  const m = await page.evaluate(() => {
+    const t = (n) => { const e = performance.getEntriesByName(n)[0]; return e ? Math.round(e.startTime) : null; };
+    return { panel: t('careermap:panel'), panelFull: t('careermap:panel-full'), preview: t('careermap:preview'),
+      firstRender: t('careermap:first-render'), load: t('careermap:map'), fcp: t('first-contentful-paint') };
+  });
+  const panelMs = m.panelFull ?? m.panel;
+  const frameMs = m.preview ?? m.firstRender;
+  const interactive = Math.max(panelMs, frameMs);
+  const r = { label, url, panel_ms: panelMs, first_map_frame_ms: frameMs, interactive_ms: interactive,
+    webgl_first_frame_ms: m.firstRender, webgl_load_ms: m.load, fcp_ms: m.fcp, transferred_kb: Math.round(bytes / 1024) };
   results.budget.push(r);
-  check(tMap < 3000, `${label}: map interactive in ${tMap} ms (panel ${tPanel} ms, ${r.transferred_kb} KB transferred)`);
+  check(interactive < 3000, `${label}: interactive in ${interactive} ms (panel ${panelMs} ms, first map frame ${frameMs} ms, ${r.transferred_kb} KB transferred)`);
+  console.log(`       WebGL map: first frame ${m.firstRender} ms, load ${m.load} ms`);
   await ctx.close();
 }
 

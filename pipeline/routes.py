@@ -9,6 +9,9 @@ a copy of /map/index.html with:
 * prerendered summary HTML from data/build between the `prerender` markers, so
   crawlers and visitors without JavaScript see the content. The map JavaScript
   replaces it with the interactive panel.
+* on resort pages, the resort's full resorts.json record and the sources it cites, as
+  `<script type="application/json" id="resort-record">`, so the panel can show the
+  resort without waiting for the full resorts.json.
 
     /map/{state}/index.html
     /map/{state}/{cluster}/index.html
@@ -362,6 +365,7 @@ class Page:
     canonical: str
     body: str = ""
     jsonld: dict = field(default_factory=dict)
+    record: Optional[dict] = None
 
 
 def _load(build: Path, name: str, optional: bool = False):
@@ -443,9 +447,10 @@ def plan_pages(build: Path) -> dict[str, Page]:
         title, desc = resort_meta(r, c, state_names, duplicate_names)
         canonical = resort_canonical(r, c)
         jsonld = resort_jsonld(r, c, canonical, ctx)
+        record = resort_record(ctx, r, sources_file)
         for st_code in c["states"]:
             st = st_code.lower()
-            pages[f"{st}/{c['id']}/{r['id']}/"] = Page(title, desc, canonical, render_resort(ctx, r, c, st), jsonld)
+            pages[f"{st}/{c['id']}/{r['id']}/"] = Page(title, desc, canonical, render_resort(ctx, r, c, st), jsonld, record)
     return pages
 
 
@@ -532,6 +537,13 @@ def write_map_index(build: Path) -> Path:
     return path
 
 
+def resort_record(ctx: Ctx, r: dict, sources_file: dict) -> dict:
+    """The resort's resorts.json record plus the sources it cites, embedded in its page."""
+    cited = set(r.get("sources") or [])
+    return {"version": 1, "generated_at": sources_file.get("generated_at"), "resort": r,
+            "sources": [ctx.sources[i] for i in sorted(cited) if i in ctx.sources]}
+
+
 # ── Rendering ──
 
 def check_template(template: str) -> None:
@@ -566,6 +578,9 @@ def render_stub(template: str, page: Page) -> str:
         out = PRERENDER_RE.sub(lambda m: f"{m.group(1)}\n{page.body}\n{m.group(2)}", out, count=1)
     if page.jsonld:
         out = out.replace("</head>", f"  {_jsonld_script(page.jsonld)}\n</head>", 1)
+    if page.record:
+        raw = json.dumps(page.record, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
+        out = out.replace("</head>", f'  <script type="application/json" id="resort-record">{raw}</script>\n</head>', 1)
     return out.replace("<head>", f"<head>\n  {MARKER}", 1)
 
 

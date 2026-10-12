@@ -363,7 +363,7 @@ body.list-mode .recolor { display: none; }
 .heat-keys li { display: flex; align-items: center; gap: .3rem; }
 .key-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; background: #0a0e14; border: 1px solid #e7e9ee; flex-shrink: 0; }
 .key-dot.key-a { border: 2px solid #e0a03a; }
-.key-dot.key-none { background: #4a5568; border-color: #0a0e14; }
+.key-dot.key-none { background: #8891a0; border-color: #0a0e14; }
 @media (max-width: 759.98px) {
   .recolor { top: 46px; left: 46px; max-width: calc(100% - 56px); }
   .recolor-modes { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; }

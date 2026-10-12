@@ -160,22 +160,89 @@ async function desktop(browser, base) {
   await page.getByRole('button', { name: 'All', exact: true }).click();
   await shot(page, 'desktop-01-national.png');
 
-  // Recolor modes.
+  // Color modes: value heat maps (map/js/heat.js) with the resorts on top.
   const modes = page.locator('.recolor-modes .filter-btn');
+  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 10000 });
   check(JSON.stringify(await modes.allInnerTexts()) === JSON.stringify(['Default', 'Lucrativeness', 'Professionalism', 'Season length', 'Snowfall']), 'recolor control lists five modes');
   check(await page.locator('.recolor-modes [aria-disabled="true"]').count() === 0, 'every mode enabled with fixture data');
-  await page.locator('.recolor-modes .filter-btn[data-mode="season"]').click();
-  await page.waitForTimeout(300);
   const leg = page.locator('#recolor-legend');
-  check(await leg.isVisible() && (await leg.innerText()).includes('Typical season length in days'), 'season legend visible with title');
-  check(await leg.locator('.ramp li').count() === 6 && (await leg.innerText()).includes('112 days to'), 'legend shows value range classes and No data');
-  check(await page.evaluate(() => JSON.stringify(window.__careerMap.mapCtl.map.getPaintProperty('resorts', 'circle-color')).includes('season_length_days')), 'circles recolored by season length');
-  check(await page.evaluate(() => JSON.stringify(window.__careerMap.mapCtl.map.getPaintProperty('resorts', 'circle-stroke-color')).includes('#e0a03a')), 'Tier A keeps an amber outline in recolor modes');
-  await shot(page, 'desktop-01c-recolor-season.png');
-  await page.locator('.recolor-modes .filter-btn[data-mode="lucrativeness"]').click();
-  check((await leg.innerText()).includes('$6.1K'), 'lucrativeness legend in dollars');
+  const heatState = () => page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const layers = m.getStyle().layers;
+    const heat = layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-'));
+    const at = (id) => layers.findIndex((l) => l.id === id);
+    return {
+      ids: heat.map((l) => l.id),
+      belowResorts: heat.every((l) => at(l.id) < at('resorts') && at(l.id) < at('states-line')),
+      color: JSON.stringify(m.getPaintProperty('resorts', 'circle-color')),
+      stroke: JSON.stringify(m.getPaintProperty('resorts', 'circle-stroke-color')),
+      resortsVisible: m.getLayoutProperty('resorts', 'visibility') !== 'none',
+    };
+  });
+  const heatModes = [
+    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', min: 'Min $6,100', max: 'Max $7,900', n: 2 },
+    { mode: 'professionalism', prop: 'professionalism_score', unit: 'Score out of 100', min: 'Min 61', max: 'Max 85', n: 3 },
+    { mode: 'season', prop: 'season_length_days', unit: 'Days', min: 'Min 112', max: 'Max 168', n: 11 },
+    { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', min: 'Min 256', max: 'Max 460', n: 9 },
+  ];
+  for (const hm of heatModes) {
+    await page.locator(`.recolor-modes .filter-btn[data-mode="${hm.mode}"]`).click();
+    await page.waitForFunction((k) => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith(`heat-${k}-`)), hm.mode, { timeout: 10000 });
+    await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 10000 });
+    await page.waitForTimeout(300);
+    const st = await heatState();
+    const text = await leg.innerText();
+    check(st.ids.length >= 1 && st.ids.every((id) => id.startsWith(`heat-${hm.mode}-`)), `${hm.mode}: drawn as a heat surface (${st.ids.join(', ')})`);
+    check(st.belowResorts && st.resortsVisible, `${hm.mode}: heat sits under the state lines and the resort points`);
+    check(st.color.includes(hm.prop) && st.stroke.includes('#e0a03a'), `${hm.mode}: points stay on top, Tier A outlined, no data points grey`);
+    check(await leg.isVisible() && text.includes(hm.unit) && text.includes(hm.min) && text.includes(hm.max), `${hm.mode}: continuous legend with min, max and units (${hm.min}, ${hm.max}, ${hm.unit})`);
+    check(text.includes(`${hm.n} resort`) && await leg.locator('.heat-bar').count() === 1, `${hm.mode}: legend counts ${hm.n} resorts with data and shows the ramp`);
+    await shot(page, `desktop-01c-heat-${hm.mode}.png`);
+  }
+  // Zoomed into the Front Range: the surface stays smooth around each resort.
+  await page.evaluate(() => window.__careerMap.mapCtl.map.jumpTo({ center: [-106.1, 39.6], zoom: 7 }));
+  await page.waitForTimeout(600);
+  await shot(page, 'desktop-01d-heat-snowfall-zoomed.png');
+  await page.evaluate(() => window.__careerMap.mapCtl.refit());
   await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
-  check(await leg.isHidden(), 'Default hides the recolor legend');
+  await page.waitForTimeout(200);
+  check(await leg.isHidden() && (await heatState()).ids.length === 0, 'Default removes the heat surface and hides its legend');
+  check((await heatState()).color.includes('#e0a03a') && !(await heatState()).color.includes('season_length_days'), 'Default restores tier colors');
+
+  // The surface shows value, not density: many low value resorts read as low, far areas stay empty,
+  // and the color at a resort matches its own value when it stands alone.
+  const physics = await page.evaluate(async () => {
+    const { buildHeat, rampColor } = await import('/map/js/heat.js');
+    const sample = async (images, lon, lat) => {
+      for (const im of images) {
+        const [[w, n], , [e, s]] = im.coordinates;
+        if (lon < w || lon > e || lat < s || lat > n) continue;
+        const img = new Image(); img.src = im.url; await img.decode();
+        const c = document.createElement('canvas'); c.width = im.width; c.height = im.height;
+        const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+        const my = (la) => Math.log(Math.tan(Math.PI / 4 + (la * Math.PI) / 360));
+        const x = Math.floor(((lon - w) / (e - w)) * im.width);
+        const y = Math.floor(((my(n) - my(lat)) / (my(n) - my(s))) * im.height);
+        return [...ctx.getImageData(x, y, 1, 1).data];
+      }
+      return [0, 0, 0, 0];
+    };
+    const dense = Array.from({ length: 12 }, (_, i) => ({ lon: -106 + (i % 4) * 0.05, lat: 39.5 + Math.floor(i / 4) * 0.05, value: 10 }));
+    const lone = { lon: -100, lat: 39.5, value: 10 };
+    const high = { lon: -94, lat: 39.5, value: 90 };
+    const domain = { min: 10, max: 90 };
+    const imgs = buildHeat([...dense, lone, high], domain, null);
+    const denseAt = await sample(imgs, -105.92, 39.55);
+    const loneAt = await sample(imgs, lone.lon, lone.lat);
+    const highAt = await sample(imgs, high.lon, high.lat);
+    const far = await sample(imgs, -97, 45.5);
+    return { denseAt, loneAt, highAt, far, low: rampColor(0), top: rampColor(1) };
+  });
+  const near = (a, b, tol = 6) => a.slice(0, 3).every((v, i) => Math.abs(v - b[i]) <= tol);
+  check(near(physics.denseAt, physics.low) && near(physics.loneAt, physics.low), `twelve low resorts read as low as one low resort (${physics.denseAt} vs ${physics.loneAt})`);
+  check(Math.abs(physics.denseAt[3] - physics.loneAt[3]) <= 3, `density does not raise opacity (${physics.denseAt[3]} vs ${physics.loneAt[3]})`);
+  check(near(physics.highAt, physics.top), `a lone high resort shows the top of the ramp (${physics.highAt})`);
+  check(physics.far[3] === 0, 'areas beyond the influence radius stay empty');
 
   // Click a state on the map.
   await clickMapAt(page, [-105.0, 38.4]);

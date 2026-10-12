@@ -415,3 +415,31 @@ def test_map_index_idempotent(site: Path):
     mtime = path.stat().st_mtime_ns
     generate_routes(site)
     assert path.read_text() == first and path.stat().st_mtime_ns == mtime
+
+
+def test_resort_page_embeds_its_record_and_cited_sources(site: Path):
+    generate_routes(site)
+    import re as _re
+    page = read(site, "co/front/alpha-peak")
+    m = _re.search(r'<script type="application/json" id="resort-record">(.*?)</script>', page, _re.S)
+    assert m, "resort page carries its record"
+    data = json.loads(m.group(1))
+    assert data["resort"]["id"] == "alpha-peak" and data["resort"]["owner"]["value"] == "Test Owner"
+    # Only the sources the record cites (alpha-peak cites none in its sources list here).
+    assert data["sources"] == []
+    # Names with markup never break out of the script element.
+    bravo = read(site, "co/front/bravo-bowl")
+    raw = _re.search(r'id="resort-record">(.*?)</script>', bravo, _re.S).group(1)
+    assert "<" not in raw and json.loads(raw)["resort"]["name"] == "Bravo & Sons <Bowl>"
+    # State and cluster pages carry no record.
+    assert 'id="resort-record"' not in read(site, "co") and 'id="resort-record"' not in read(site, "co/front")
+
+
+def test_embedded_sources_follow_the_record(site: Path):
+    resorts, clusters, states = default_data()
+    resorts[0]["sources"] = ["test-src", "missing-src"]
+    write_build(site, resorts, clusters, states)
+    generate_routes(site)
+    import re as _re
+    raw = _re.search(r'id="resort-record">(.*?)</script>', read(site, "co/front/alpha-peak"), _re.S).group(1)
+    assert [s["id"] for s in json.loads(raw)["sources"]] == ["test-src"]
