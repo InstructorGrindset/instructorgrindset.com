@@ -623,9 +623,7 @@ def test_reports_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, 
          "values": {"hourly_usd": 32}, "submitted_at": "2026-10-01T10:00:00Z"}))
     result = _run(repo_root, raw_dir, out, tmp_path)
     assert any("1 reports wait for moderation" in w for w in result.warnings)
-
-    agg = json.loads((raw_dir / "reports" / "aggregates.json").read_text())
-    assert [(p["cert_level"], p["aggregate_count"]) for p in agg["pay"]] == [("level_3", 3)]
+    assert not (raw_dir / "reports" / "aggregates.json").exists()  # only `reports aggregate` writes it
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
     rows = {p["cert_level"]: p for p in peak["career"]["pay"]}
     assert rows["level_3"] == {"cert_level": "level_3", "hourly_low": 26, "hourly_high": 28, "confidence": "reported",
@@ -655,14 +653,127 @@ def test_reports_area_rent_feeds_lucrativeness(repo_root, raw_dir, out, tmp_path
         (1000.0, "reported_area", "instructorgrindset-reports")
 
 
-def test_committed_aggregates_used_without_raw_reports(repo_root, raw_dir, out, tmp_path):
+def _aggregate_cli(raw_dir, monkeypatch, *args):
+    import pipeline.reports as rep
+    monkeypatch.setattr(rep.ReportStore, "__init__", lambda self, root=raw_dir / "reports": setattr(self, "root", root))
+    return rep.main(["aggregate", *args])
+
+
+def test_committed_aggregates_used_without_raw_reports(repo_root, raw_dir, out, tmp_path, monkeypatch):
     _reports(raw_dir, [{"kind": "pay", "cert_level": "level_3", "values": {"hourly_usd": v}} for v in (26, 27, 28)])
-    _run(repo_root, raw_dir, out, tmp_path)
+    assert _aggregate_cli(raw_dir, monkeypatch) == 0
     import shutil
     shutil.rmtree(raw_dir / "reports" / "moderated")  # a fresh clone has only the committed aggregates
     _run(repo_root, raw_dir, out, tmp_path)
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
     assert peak["career"]["pay"][0]["confidence"] == "reported"
+
+
+def test_fresh_clone_with_one_report_keeps_committed_aggregates(repo_root, raw_dir, out, tmp_path, monkeypatch):
+    """Regression: a local subset of moderated reports must never wipe committed aggregates."""
+    _reports(raw_dir, [{"kind": "pay", "cert_level": "level_3", "values": {"hourly_usd": v}} for v in (26, 27, 28, 29, 30)])
+    assert _aggregate_cli(raw_dir, monkeypatch) == 0
+    committed = (raw_dir / "reports" / "aggregates.json").read_text()
+    import shutil
+    shutil.rmtree(raw_dir / "reports" / "moderated")
+    # a fresh clone: one new approved report in the same group, plus a new group of 3
+    _reports(raw_dir, [{"kind": "pay", "cert_level": "level_3", "values": {"hourly_usd": 31}}] +
+             [{"kind": "rent", "values": {"monthly_usd": v}} for v in (1000, 1100, 1200)])
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert (raw_dir / "reports" / "aggregates.json").read_text() == committed  # the build never writes it
+    assert any("run `python -m pipeline.reports aggregate`" in w for w in result.warnings)
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    l3 = next(p for p in peak["career"]["pay"] if p["cert_level"] == "level_3")
+    assert (l3["hourly_low"], l3["hourly_high"]) == (26, 30)  # committed group of 5 kept, not the local 1
+    assert _aggregate_cli(raw_dir, monkeypatch) == 0           # merge keeps both groups
+    data = json.loads((raw_dir / "reports" / "aggregates.json").read_text())
+    assert [p["aggregate_count"] for p in data["pay"]] == [5] and len(data["rent"]) == 1
+    assert _aggregate_cli(raw_dir, monkeypatch, "--replace") == 0   # explicit full rebuild from this checkout
+    data = json.loads((raw_dir / "reports" / "aggregates.json").read_text())
+    assert data["pay"] == [] and len(data["rent"]) == 1
+
+
+def test_aggregate_cli_skips_write_on_moderation_errors(raw_dir, monkeypatch):
+    _reports(raw_dir, [{"kind": "pay", "cert_level": "level_3", "values": {"hourly_usd": v}} for v in (26, 27, 28)])
+    (raw_dir / "reports" / "moderated" / "broken.yaml").write_text("id: broken\nkind: pay\n")
+    assert _aggregate_cli(raw_dir, monkeypatch) == 1
+    assert not (raw_dir / "reports" / "aggregates.json").exists()
+
+
+def test_rejected_report_for_unknown_resort_does_not_fail(repo_root, raw_dir, out, tmp_path):
+    _reports(raw_dir, [{"kind": "pay", "cert_level": "level_3", "values": {"hourly_usd": 26}, "resort_id": "ghost",
+                        "status": "rejected", "moderation_note": "unknown resort"}])
+    _run(repo_root, raw_dir, out, tmp_path)  # only approved reports are checked against the build
+
+
+def test_housing_report_for_another_resorts_site_fails(repo_root, raw_dir, out, tmp_path, cfg, lifts_full,
+                                                       counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder):
+    _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
+    _reports(raw_dir, [{"kind": "housing", "housing_site_id": "peak-town-flats", "resort_id": "fixture-basin",
+                        "values": {"monthly_usd": v}} for v in (800, 900, 1000)])
+    with pytest.raises(BuildError, match="'peak-town-flats' is not a housing site of 'fixture-basin'"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_housing_aggregate_attaches_by_resort_and_site(repo_root, raw_dir, out, tmp_path, cfg, lifts_full,
+                                                       counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder):
+    _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
+    agg = {"version": 1, "generated_at": "x",
+           "source": {"id": "instructorgrindset-reports", "url": "https://instructorgrindset.com/map/", "title": "t",
+                      "accessed_date": "2026-10-03"},
+           "housing": [{"resort_id": "fixture-basin", "season": "2025-26", "housing_site_id": "peak-town-flats",
+                        "low": 1, "high": 2, "count": 3, "verified_date": "2026-10-03"}]}
+    (raw_dir / "reports").mkdir()
+    (raw_dir / "reports" / "aggregates.json").write_text(json.dumps(agg))
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert any("matches no housing site of that resort" in w for w in result.warnings)
+    flats = next(h for h in _load(out / "detail", "fixture-peak.json")["housing"] if h["id"] == "peak-town-flats")
+    assert flats["rent_monthly"]["confidence"] == "estimated"  # the other resort's aggregate is not attached
+
+
+def test_small_aggregates_are_dropped_on_load(repo_root, raw_dir, out, tmp_path):
+    agg = {"version": 1, "generated_at": "x",
+           "source": {"id": "instructorgrindset-reports", "url": "https://instructorgrindset.com/map/", "title": "t",
+                      "accessed_date": "2026-10-03"},
+           "rent": [{"resort_id": "fixture-peak", "season": "2025-26", "low": 900, "high": 900, "count": 1,
+                     "verified_date": "2026-10-03"}],
+           "pay": [{"resort_id": "fixture-peak", "season": "2025-26", "cert_level": "level_3", "hourly_low": 25,
+                    "hourly_high": 26, "confidence": "reported", "source_id": "instructorgrindset-reports",
+                    "verified_date": "2026-10-03", "aggregate_count": 2}]}
+    (raw_dir / "reports").mkdir()
+    (raw_dir / "reports" / "aggregates.json").write_text(json.dumps(agg))
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert any("2 report aggregates have fewer than 3 reports" in w for w in result.warnings)
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    assert peak["career"] is None
+
+
+def test_source_conflict_is_a_build_error(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "transit").mkdir()
+    (raw_dir / "transit" / "x.json").write_text(json.dumps({"version": 1, "agency": "x", "search_radius_km": 1,
+        "source": {"id": "fixture-source-a", "url": "https://example.org/other", "title": "t", "accessed_date": "2026-10-01"},
+        "routes": [], "stops": [], "patterns": []}))
+    with pytest.raises(BuildError, match="source id 'fixture-source-a' has url"):
+        _run(repo_root, raw_dir, out, tmp_path)
+    (raw_dir / "transit" / "x.json").write_text(json.dumps({"agency": "x", "source": {"id": "Bad Id"}}))
+    with pytest.raises(BuildError, match="invalid source"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_older_full_download_does_not_overwrite_newer_extract(repo_root, raw_dir, out, tmp_path):
+    import os
+    extract = raw_dir / "openskimap" / "us_ski_areas.geojson"
+    data = json.loads(extract.read_text())
+    data["metadata"]["fetched_date"] = "2026-10-05"   # committed extract is newer than the local download
+    data["features"] = data["features"][:1]
+    extract.write_text(json.dumps(data))
+    _run(repo_root, raw_dir, out, tmp_path)
+    assert json.loads(extract.read_text())["metadata"]["fetched_date"] == "2026-10-05"
+    full = raw_dir / "openskimap" / "ski_areas.full.geojson"
+    ts = __import__("datetime").datetime(2026, 10, 9, 12).timestamp()
+    os.utime(full, (ts, ts))                           # a newer download is re filtered
+    _run(repo_root, raw_dir, out, tmp_path)
+    assert json.loads(extract.read_text())["metadata"]["fetched_date"] == "2026-10-09"
 
 
 def test_invalid_moderated_report_fails_build(repo_root, raw_dir, out, tmp_path):

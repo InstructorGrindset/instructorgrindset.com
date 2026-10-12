@@ -274,10 +274,17 @@ Report { id, resort_id, kind: pay | rent | housing, season ("2025-26"),
 * Moderation: `python -m pipeline.reports list`, `approve <id> [--note TEXT]`, `reject <id> --note TEXT`,
   `import <file.json|file.csv>` (see `data/raw/reports/README.md` for the columns), `aggregate`.
 
-### Aggregation (`python -m pipeline.reports aggregate`, also run by every build when reports exist)
+### Aggregation (`python -m pipeline.reports aggregate [--replace]`)
 * Group approved reports by (resort_id, season, kind, cert_level for pay, housing_site_id for housing).
   A group with `reports.aggregation_min` (3) or more reports gives a range `{low: min, high: max, count}`.
   Groups with 2 or fewer give nothing. Pending and rejected reports never count.
+* Only the `aggregate` command writes `data/raw/reports/aggregates.json`, and it refuses while any moderated report is
+  invalid. It merges with the committed file, keeping the group with more reports, because a checkout may hold only some
+  of the (gitignored) moderated reports; `--replace` rebuilds the file from this checkout alone. The build reads the
+  committed file merged in memory with this checkout's approved reports and never writes it.
+* Loading drops any aggregate with fewer than `reports.aggregation_min` reports (so raising the minimum hides older
+  small groups). Housing aggregates attach by (resort_id, housing_site_id); an approved housing report whose site is not
+  a site of its resort fails the build. Only approved reports are checked against the build's resort ids.
 * Output `data/raw/reports/aggregates.json` (committed; aggregates only, no individual values):
   `{ version, generated_at, source: Source, pay: [PayRecord], rent: [RentAggregate], housing: [RentAggregate] }`
   where pay rows are `confidence: reported` with `aggregate_count`, and
@@ -285,8 +292,9 @@ Report { id, resort_id, kind: pay | rent | housing, season ("2025-26"),
   Source id `instructorgrindset-reports`.
 * Pay: aggregates join the Phase 4 pay selection (latest season, then Published > Reported > Estimated).
 * Rent, per field with Published > Reported > Estimated:
-  housing site `rent_monthly` = the site's published rent, else its latest season `housing` aggregate
-  (confidence `reported`, `note` gives the report count), else the county baseline (`estimated`).
+  housing site `rent_monthly` = the best of the site's own rent and its latest season `housing` aggregate by
+  confidence (a published site rent beats the aggregate; the aggregate, `reported` with the count in `note`, beats an
+  estimated site rent), else the county baseline (`estimated`). A raw housing file may not declare a `reported` rent.
   Detail files gain `rent_reported: Sourced<{low, high}> | null` (latest season `rent` aggregate for the resort,
   `note` gives the count). Lucrativeness rent order (`rent.lucrativeness_rent`): `employee_housing` (published or
   reported site rent), `reported_area` (`rent_reported`), `baseline`.

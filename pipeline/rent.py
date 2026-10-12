@@ -10,6 +10,7 @@ the cache, so it never needs the network.
 Cache layout (data/raw/rent/):
     hud_fmr/<county fips>.json      {fetched_date, url, response}   HUD FMR API, data/{fips}99999
     hud_fmr_<year>.csv              optional HUD county FMR file (columns fips, countyname, fmr_0, fmr_1, fmr_2)
+    hud_fmr_<year>.csv.json         optional sidecar {fetched_date}; without it as_of is Oct 1 of <year> - 1
     acs/<year>_county_<fips>.json   {fetched_date, url, response}   Census API B25064_001E
     acs/<year>_zcta_<zip>.json      same, ZIP code tabulation area (parsed; ZIP lookup needs ZCTA outlines)
 """
@@ -167,6 +168,17 @@ def _read(path: Path) -> Optional[dict]:
         return None
 
 
+def hud_csv_date(csv_path: Path, year: int) -> dt.date:
+    """as_of for a HUD FMR CSV: ``fetched_date`` from the sidecar ``<file>.json`` when present, else the date
+    the FY<year> FMRs take effect (October 1 of the previous calendar year). Never the file mtime, which
+    every checkout resets."""
+    sidecar = csv_path.with_name(csv_path.name + ".json")
+    meta = _read(sidecar)
+    if meta and meta.get("fetched_date"):
+        return dt.date.fromisoformat(meta["fetched_date"])
+    return dt.date(year - 1, 10, 1)
+
+
 def baseline_for(county: County, rent_dir: Path, acs_year: int, acs_dataset: str = "acs/acs5"
                  ) -> tuple[Optional[dict], list[Source]]:
     """RentBaseline dict for a county from the cache, plus the sources it cites; (None, []) when no data."""
@@ -184,7 +196,7 @@ def baseline_for(county: County, rent_dir: Path, acs_year: int, acs_dataset: str
             rows = parse_hud_fmr_csv(csv_path)
             if county.fips in rows:
                 year = int(csv_path.stem.split("_")[-1])
-                hud = (rows[county.fips], year, dt.date.fromtimestamp(csv_path.stat().st_mtime))
+                hud = (rows[county.fips], year, hud_csv_date(csv_path, year))
                 break
     if hud is not None:
         parsed, year, fetched = hud

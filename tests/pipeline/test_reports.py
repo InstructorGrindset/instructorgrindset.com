@@ -170,3 +170,29 @@ def test_cli(tmp_path, monkeypatch, capsys):
     assert rep.main(["aggregate"]) == 0
     data = json.loads((tmp_path / "reports" / "aggregates.json").read_text())
     assert data["pay"][0]["hourly_low"] == 20 and data["pay"][0]["aggregate_count"] == 3
+
+
+def test_load_aggregates_drops_rows_below_minimum():
+    data = aggregate(approved(3, kind="rent", values=[900, 1000, 1100]) + approved(3, values=[20, 21, 22]), 3, "x")
+    assert load_aggregates(data, 3).rent and load_aggregates(data, 3).pay and load_aggregates(data, 3).dropped == 0
+    raised = load_aggregates(data, 4)   # aggregation_min raised after the file was written
+    assert raised.rent == {} and raised.pay == {} and raised.dropped == 2
+
+
+def test_merge_aggregates_never_drops_committed_groups():
+    from pipeline.reports import merge_aggregates
+    committed = aggregate(approved(5, values=[20, 21, 22, 23, 24]), 3, "old")
+    local = aggregate(approved(3, kind="rent", values=[900, 1000, 1100]), 3, "new")
+    merged = merge_aggregates(committed, local)
+    assert merged["pay"] == committed["pay"] and merged["rent"] == local["rent"] and merged["generated_at"] == "new"
+    bigger = aggregate(approved(6, values=[19, 20, 21, 22, 23, 24]), 3, "newer")
+    assert merge_aggregates(committed, bigger)["pay"][0]["aggregate_count"] == 6
+    assert merge_aggregates(None, local) == local and merge_aggregates(committed, None) == committed
+
+
+def test_housing_aggregates_keyed_by_resort_and_site():
+    rows = approved(3, kind="housing", values=[600, 650, 700], housing_site_id="lodge") + \
+        approved(3, kind="housing", values=[800, 850, 900], housing_site_id="lodge", resort_id="other-resort")
+    agg = load_aggregates(aggregate(rows, 3, "x"), 3)
+    assert set(agg.housing) == {("fixture-peak", "lodge"), ("other-resort", "lodge")}
+    assert agg.housing[("other-resort", "lodge")]["low"] == 800

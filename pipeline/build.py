@@ -39,7 +39,7 @@ from pipeline.config import Config, load_config  # noqa: E402
 from pipeline.names import slugify  # noqa: E402
 from pipeline.schemas import Cluster, DetailFile, Resort, Source, State  # noqa: E402
 from pipeline.schemas.raw import TierABatch, TierARecord  # noqa: E402
-from pipeline.sources import SourceRegistry  # noqa: E402
+from pipeline.sources import SourceConflictError, SourceRegistry  # noqa: E402
 from pipeline.states import STATE_NAMES, build_states, build_us_states_geojson  # noqa: E402
 from pipeline.tier_a import BuildError, RawInputs, load_raw, match_openskimap, ownership_cross_check  # noqa: E402
 
@@ -165,8 +165,8 @@ def _unique_id(base: str, state: str, taken: set[str]) -> str:
 def _load_openskimap(raw_dir: Path, fetch: bool, warnings: list[str], rel=str, *,
                      filter_kw: Optional[dict] = None, state_shapes_path: Optional[Path] = None,
                      ) -> Optional[openskimap.Extract]:
-    """Refresh the committed US extract from the cached full download when present
-    (so filter rule changes apply), then load it."""
+    """Refresh the committed US extract from the cached full download when the download is newer
+    (or the same download with changed filter rules), then load it."""
     osm_dir = raw_dir / "openskimap"
     full = osm_dir / openskimap.FULL_NAME
     extract_path = osm_dir / openskimap.US_NAME
@@ -181,9 +181,11 @@ def _load_openskimap(raw_dir: Path, fetch: bool, warnings: list[str], rel=str, *
             fetched_today = True
         except Exception as e:  # network failures must not stop a Tier A build
             warnings.append(f"OpenSkiMap download failed ({type(e).__name__}: {e}); using the cached data if any")
-    if full.exists():
+    if fetched_today or openskimap.extract_needs_refresh(full, extract_path, **kw):
         n = openskimap.write_us_extract(full, extract_path, dt.date.today() if fetched_today else None, **kw)
         print(f"filtered {rel(full)} -> {rel(extract_path)}: {n} US operating downhill areas")
+    elif full.exists():
+        print(f"kept {rel(extract_path)}: it is as new as or newer than {rel(full)}")
     if not extract_path.exists():
         warnings.append(
             f"no OpenSkiMap extract at {rel(extract_path)}; building Tier A only (no Tier B resorts). "
@@ -233,7 +235,7 @@ def build(
                                state_shapes_path=us_states_path if us_states_path.exists() else repo_root / "data" / "build" / "us-states.geojson")
     areas = extract.areas if extract else []
     if extract:
-        registry.add(extract.source, "data/raw/openskimap")
+        _add_source(registry, extract.source, "data/raw/openskimap", errors)
 
     climate_sources = out_dir / "climate" / "sources.json"
     if climate_sources.exists():
@@ -294,17 +296,19 @@ def build(
     cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
     editorial, editorial_errors = load_editorial(raw_dir, registry, known_ids, cluster_ids, rel)
     errors += editorial_errors
-    agg = _report_aggregates(raw_dir, cfg, known_ids, registry, errors, warnings, rel)
+    agg = _report_aggregates(raw_dir, cfg, known_ids, housing, registry, errors, warnings, rel)
     for rid, rows in agg.pay.items():
         career_data.pay.setdefault(rid, []).extend(rows)
-    site_ids = {s.id for ss in housing.values() for s in ss}
-    for sid in sorted(set(agg.housing) - site_ids):
-        warnings.append(f"housing report aggregate for unknown housing site '{sid}' is not shown")
+    site_keys = {(rid, s.id) for rid, ss in housing.items() for s in ss}
+    for rid, sid in sorted(set(agg.housing) - site_keys):
+        warnings.append(f"housing report aggregate for '{sid}' at '{rid}' matches no housing site of that resort; not shown")
 
     if errors:
         raise BuildError(errors)
 
-    p5 = _prepare_phase5(raw_dir, cfg, registry, match, records, warnings, rel, fetch=fetch)
+    p5 = _prepare_phase5(raw_dir, cfg, registry, match, records, warnings, rel, fetch=fetch, errors=errors)
+    if errors:
+        raise BuildError(errors)
 
     climate_dir = out_dir / "climate"
     ctx = registry.context()
@@ -317,7 +321,8 @@ def build(
         d["climate_available"] = (climate_dir / f"{d['id']}.json").is_file()
         sites = housing.get(d["id"], [])
         baseline = p5.baselines.get(d["id"])
-        site_reported = {s.id: reports_mod.reported_rent(agg.housing[s.id]) for s in sites if s.id in agg.housing}
+        site_reported = {s.id: reports_mod.reported_rent(agg.housing[(d["id"], s.id)])
+                         for s in sites if (d["id"], s.id) in agg.housing}
         area_reported = reports_mod.reported_rent(agg.rent.get(d["id"]))
         rent = rent_input(sites, baseline, cfg.definitions.rent.lucrativeness_rent, cfg.definitions.rent.baseline_preference,
                           site_reported, area_reported)
@@ -363,7 +368,7 @@ def build(
 
     states = [State.model_validate(s) for s in build_states((r.id, r.state, r.cluster_id) for r in resorts)]
     if p5.router is not None and p5.router.source() is not None:
-        registry.add(p5.router.source(), "data/raw/routing")
+        _add_source(registry, p5.router.source(), "data/raw/routing", errors)
     elif details and any(dd["housing"] for dd in details.values()):
         warnings.append("no routing cache: drive commutes and isochrones are empty; run `python -m pipeline.routing run`")
     detail_ctx = registry.context()
@@ -493,31 +498,63 @@ def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warni
     d["career"] = career
 
 
-def _report_aggregates(raw_dir: Path, cfg: Config, known_ids: set[str], registry: SourceRegistry,
+def _report_aggregates(raw_dir: Path, cfg: Config, known_ids: set[str], housing: dict, registry: SourceRegistry,
                        errors: list[str], warnings: list[str], rel=str) -> "reports_mod.Aggregates":
-    """Aggregates of approved reports: recomputed from data/raw/reports/moderated when present (and written to
-    aggregates.json), else read from the committed aggregates.json."""
+    """Committed aggregates.json merged with aggregates of this checkout's moderated reports.
+
+    The build never writes aggregates.json (``python -m pipeline.reports aggregate`` does), and a local
+    subset of moderated reports never removes a committed group.
+    """
     store = reports_mod.ReportStore(raw_dir / "reports")
     agg_path = store.root / "aggregates.json"
     pending, queue_errors = store.pending()
     warnings.extend(f"report queue: {e}" for e in queue_errors)
     if pending:
         warnings.append(f"{len(pending)} reports wait for moderation: python -m pipeline.reports list")
-    data = None
+    committed = None
+    if agg_path.exists():
+        try:
+            committed = json.loads(agg_path.read_text(encoding="utf-8"))
+        except ValueError as e:
+            errors.append(f"{rel(agg_path)}: not valid JSON ({e})")
+    local = None
     if store.moderated.is_dir():
         decided, mod_errors = store.decided()
         errors.extend(f"{rel(store.moderated)}: {e}" for e in mod_errors)
-        for r in decided:
+        approved = [r for r in decided if r.status == "approved"]
+        for r in approved:
+            where = f"{rel(store.moderated)}/{r.id}.yaml"
             if r.resort_id not in known_ids:
-                errors.append(f"{rel(store.moderated)}/{r.id}.yaml: resort_id '{r.resort_id}' matches no resort in this build")
-        data = reports_mod.aggregate(decided, cfg.definitions.reports.aggregation_min, generated_at())
-        reports_mod.write_aggregates(agg_path, data)
-    elif agg_path.exists():
-        data = json.loads(agg_path.read_text(encoding="utf-8"))
-    agg = reports_mod.load_aggregates(data)
+                errors.append(f"{where}: resort_id '{r.resort_id}' matches no resort in this build")
+            elif r.kind == "housing" and r.housing_site_id not in {s.id for s in housing.get(r.resort_id, [])}:
+                errors.append(f"{where}: housing site '{r.housing_site_id}' is not a housing site of '{r.resort_id}'")
+        if not mod_errors:
+            local = reports_mod.aggregate(approved, cfg.definitions.reports.aggregation_min, generated_at())
+            if committed and reports_mod.merge_aggregates(committed, local) != committed:
+                warnings.append("moderated reports change the aggregates; run `python -m pipeline.reports aggregate` "
+                                "to update the committed aggregates.json")
+    try:
+        agg = reports_mod.load_aggregates(reports_mod.merge_aggregates(committed, local),
+                                          cfg.definitions.reports.aggregation_min)
+    except ValidationError as e:
+        errors.append(f"{rel(agg_path)}: {e.errors()[0]['msg']}")
+        return reports_mod.Aggregates()
+    if agg.dropped:
+        warnings.append(f"{agg.dropped} report aggregates have fewer than {cfg.definitions.reports.aggregation_min} "
+                        "reports and are not shown")
     if agg.source is not None:
-        registry.add(agg.source, rel(agg_path))
+        _add_source(registry, agg.source, rel(agg_path), errors)
     return agg
+
+
+def _add_source(registry: SourceRegistry, src: Any, origin: str, errors: list[str]) -> None:
+    """Register a Source (or raw dict), turning conflicts and invalid sources into build errors."""
+    try:
+        registry.add(src if isinstance(src, Source) else Source.model_validate(src), origin)
+    except ValidationError as e:
+        errors.append(f"{origin}: invalid source: {'; '.join(m['msg'] for m in e.errors())}")
+    except SourceConflictError as e:
+        errors.append(f"{origin}: {e}")
 
 
 @dataclass
@@ -530,8 +567,9 @@ class Phase5:
 
 
 def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match, records, warnings: list[str],
-                    rel=str, fetch: bool = False) -> Phase5:
+                    rel=str, fetch: bool = False, errors: Optional[list[str]] = None) -> Phase5:
     """Lifts, rent baselines, transit extracts and the cached router. Each skips cleanly without input."""
+    errors = errors if errors is not None else []
     p5 = Phase5()
     p5.area_ids = {rid: sorted(a.osm_id for a in areas) for rid, areas in match.by_tier_a.items() if areas}
     osm_dir = raw_dir / "openskimap"
@@ -547,7 +585,7 @@ def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match,
         print(f"filtered {rel(full)} -> {rel(extract)}: {n} lifts at Tier A resorts")
     fetched, p5.lift_features = lifts_mod.load_extract(extract)
     if fetched and p5.lift_features:
-        registry.add(lifts_mod.source(fetched), rel(extract))
+        _add_source(registry, lifts_mod.source(fetched), rel(extract), errors)
     elif not extract.exists():
         warnings.append(f"no lifts extract at {rel(extract)}; run `python pipeline/build.py --fetch` to add lifts")
 
@@ -562,14 +600,14 @@ def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match,
             baseline, sources = rent_mod.baseline_for(county, rent_dir, rd.acs_year, rd.acs_dataset)
             if baseline:
                 for src in sources:
-                    registry.add(src, rel(rent_dir))
+                    _add_source(registry, src, rel(rent_dir), errors)
                 p5.baselines[rec.id] = baseline
     else:
         warnings.append(f"no rent baseline cache in {rel(rent_dir)}; run `python -m pipeline.rent fetch` (HUD needs HUD_API_TOKEN)")
 
     p5.transit = load_transit(raw_dir / "transit")
     for ex in p5.transit:
-        registry.add(Source.model_validate(ex["source"]), rel(raw_dir / "transit"))
+        _add_source(registry, ex.get("source") or {}, rel(raw_dir / "transit"), errors)
     if not p5.transit:
         warnings.append(f"no transit extracts in {rel(raw_dir / 'transit')}; see data/raw/transit/README.md")
 

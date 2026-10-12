@@ -8,7 +8,7 @@ Pay, rent and housing reports from instructors. Individual reports are private: 
 |---|---|
 | `queue/<id>.yaml` | pending reports, one per file (gitignored) |
 | `moderated/<id>.yaml` | approved or rejected reports (gitignored) |
-| `aggregates.json` | aggregates only, written by `python -m pipeline.reports aggregate` and by every build when `moderated/` exists (committed) |
+| `aggregates.json` | aggregates only, written only by `python -m pipeline.reports aggregate` (committed) |
 
 ## Commands
 
@@ -17,7 +17,8 @@ python -m pipeline.reports import export.csv      # or export.json, from the for
 python -m pipeline.reports list
 python -m pipeline.reports approve r-1a2b3c4d5e6f --note "pay stub checked"
 python -m pipeline.reports reject r-1a2b3c4d5e6f --note "season does not match"
-python -m pipeline.reports aggregate
+python -m pipeline.reports aggregate               # merges into the committed aggregates.json
+python -m pipeline.reports aggregate --replace     # rebuild it from this checkout's moderated reports only
 python pipeline/build.py
 ```
 
@@ -43,3 +44,5 @@ A JSON object may carry `values: {hourly_usd | monthly_usd}` instead of the two 
 ## Aggregation
 
 Approved reports are grouped by resort, season and kind (plus cert level for pay, housing site for housing). A group with 3 or more reports gives a range from its lowest to highest value with the report count; 2 or fewer give nothing; pending and rejected reports never count. Pay aggregates become `reported` pay rows; housing aggregates become a site's reported rent when the site has no published rent; rent aggregates become the resort's `rent_reported` in its detail file.
+
+`aggregate` merges with the committed file (the group with more reports wins), because moderated reports are gitignored and a checkout may hold only some of them. It refuses to write while any moderated report is invalid. The build never writes the file; it warns when local moderated reports would change it. Aggregates below `reports.aggregation_min` are ignored when loading.

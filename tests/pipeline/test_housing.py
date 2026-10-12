@@ -155,3 +155,26 @@ def test_detail_file_validation():
                           "source_id": "nowhere"}]
     with pytest.raises(ValidationError, match="not defined"):
         DetailFile.model_validate(bad, context=CTX)
+
+
+REPORTED = {"value": {"low": 700, "high": 800}, "source_id": "src-b", "as_of": "2026-10-03", "confidence": "reported",
+            "note": "range of 3 approved reports, season 2025-26"}
+
+
+def test_reported_aggregate_beats_estimated_site_rent():
+    """Regression: an estimated site rent must not hide a reported aggregate (Published > Reported > Estimated)."""
+    est = site(id="e", rent_monthly={"value": {"low": 500, "high": 600}, **SV, "confidence": "estimated"})
+    assert display_rent(est, BASELINE, ["fmr_studio"], REPORTED)["confidence"] == "reported"
+    assert display_rent(est, BASELINE, ["fmr_studio"])["confidence"] == "estimated"   # no aggregate: site estimate
+    pub = site(id="p", rent_monthly={"value": {"low": 900, "high": 950}, **SV})
+    assert display_rent(pub, BASELINE, ["fmr_studio"], REPORTED)["confidence"] == "published"
+    # the same rule feeds lucrativeness and the housing summary
+    assert rent_input([est], None, ["employee_housing"], [], {"e": REPORTED}) == (700.0, "employee_housing:e", "src-b")
+    assert housing_summary([est], False, {"e": REPORTED})["cheapest_rent_monthly_low"] == 700
+
+
+def test_raw_housing_rejects_reported_rent():
+    raw = site().model_dump(mode="json")
+    raw["rent_monthly"]["confidence"] = "reported"
+    with pytest.raises(ValidationError, match="cannot be confidence reported in a housing file"):
+        HousingBatch.model_validate({"batch": "b", "researched_date": "2026-10-01", "sites": [raw]}, context=CTX)

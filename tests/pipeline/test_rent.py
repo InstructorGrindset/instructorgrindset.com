@@ -91,6 +91,7 @@ def test_baseline_acs_only_and_csv_fallback(tmp_path, counties_geojson):
     (tmp_path / "rent" / "hud_fmr_2025.csv").write_text("fips,countyname,fmr_0,fmr_1,fmr_2\n08998,Fixture,1400,1500,1900\n")
     baseline, sources = rent.baseline_for(county, tmp_path / "rent", 2024)
     assert sources[0].id == "hud-fmr-fy2025" and baseline["fmr"]["studio"]["value"] == 1400
+    assert baseline["fmr"]["studio"]["as_of"] == "2024-10-01"  # FY2025 effective date, never the file mtime
     assert rent.baseline_for(county, tmp_path / "empty", 2024) == (None, [])
 
 
@@ -123,3 +124,14 @@ def test_fetch_counties_mocked(tmp_path, monkeypatch):
     assert hud[0][0].endswith("/fmr/data/0899899999?year=2026") and hud[0][1] == {"Authorization": "Bearer t0ken"}
     assert any("ACS 08999: OSError" in m for m in msgs)
     assert json.loads((tmp_path / "hud_fmr" / "08998.json").read_text())["response"] == HUD_COUNTY
+
+
+def test_hud_csv_date(tmp_path):
+    """Regression: the as_of of a HUD CSV survives a fresh checkout (no mtime)."""
+    import os
+    csv_path = tmp_path / "hud_fmr_2026.csv"
+    csv_path.write_text("fips,countyname,fmr_0,fmr_1,fmr_2\n")
+    os.utime(csv_path, (0, 0))
+    assert rent.hud_csv_date(csv_path, 2026) == dt.date(2025, 10, 1)
+    (tmp_path / "hud_fmr_2026.csv.json").write_text(json.dumps({"fetched_date": "2026-09-30"}))
+    assert rent.hud_csv_date(csv_path, 2026) == dt.date(2026, 9, 30)

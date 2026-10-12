@@ -4,12 +4,14 @@
     python -m pipeline.reports approve <id> [--note TEXT]
     python -m pipeline.reports reject <id> --note TEXT
     python -m pipeline.reports import <export.json|export.csv>
-    python -m pipeline.reports aggregate
+    python -m pipeline.reports aggregate [--replace]
 
 One report per file: data/raw/reports/queue/<id>.yaml while pending, moved to
 data/raw/reports/moderated/<id>.yaml when approved or rejected. Both folders are
 gitignored. Only aggregates of ``reports.aggregation_min`` or more approved
-reports leave them, through data/raw/reports/aggregates.json.
+reports leave them, through data/raw/reports/aggregates.json, which only the
+``aggregate`` command writes. It merges with the committed file (a checkout may hold
+only some moderated reports); ``--replace`` rebuilds it from this checkout alone.
 """
 from __future__ import annotations
 
@@ -214,31 +216,75 @@ def write_aggregates(path: Path, data: dict) -> bool:
     return True
 
 
+def _agg_key(kind: str, row: dict) -> tuple:
+    if kind == "pay":
+        return (row["resort_id"], row["season"], row["cert_level"])
+    return (row["resort_id"], row["season"], row.get("housing_site_id"))
+
+
+def _agg_count(kind: str, row: dict) -> int:
+    return int(row["aggregate_count"] if kind == "pay" else row["count"])
+
+
+def merge_aggregates(committed: Optional[dict], local: Optional[dict]) -> Optional[dict]:
+    """Union of committed and locally recomputed aggregates, never dropping a committed group.
+
+    A local checkout may hold only part of the moderated reports (they are gitignored), so for a
+    group present in both the row with more reports wins (local on a tie, as it is newer).
+    """
+    if not committed:
+        return local
+    if not local:
+        return committed
+    out: dict[str, Any] = {"version": 1, "generated_at": local["generated_at"], "source": None}
+    for kind in ("pay", "rent", "housing"):
+        rows = {_agg_key(kind, r): r for r in committed.get(kind) or []}
+        for r in local.get(kind) or []:
+            k = _agg_key(kind, r)
+            if k not in rows or _agg_count(kind, r) >= _agg_count(kind, rows[k]):
+                rows[k] = r
+        out[kind] = [rows[k] for k in sorted(rows, key=lambda t: tuple(str(x) for x in t))]
+    sources = [x for x in (committed.get("source"), local.get("source")) if x]
+    if sources:
+        out["source"] = max(sources, key=lambda x: x["accessed_date"])
+    AggregatesFile.model_validate(out, context={"source_ids": {SOURCE_ID}})
+    return out
+
+
 @dataclass
 class Aggregates:
     source: Optional[Source] = None
     pay: dict[str, list[PayRecord]] = field(default_factory=dict)
-    rent: dict[str, dict] = field(default_factory=dict)       # resort_id -> latest season aggregate
-    housing: dict[str, dict] = field(default_factory=dict)    # housing_site_id -> latest season aggregate
+    rent: dict[str, dict] = field(default_factory=dict)                  # resort_id -> latest season aggregate
+    housing: dict[tuple[str, str], dict] = field(default_factory=dict)   # (resort_id, site_id) -> latest season aggregate
+    dropped: int = 0                                                      # rows below aggregation_min
 
 
-def load_aggregates(data: Optional[dict]) -> Aggregates:
+def load_aggregates(data: Optional[dict], aggregation_min: int = 1) -> Aggregates:
+    """Aggregates for the build. Rows with fewer than ``aggregation_min`` reports are dropped, so raising
+    the minimum in config hides older small aggregates."""
     if not data:
         return Aggregates()
     f = AggregatesFile.model_validate(data, context={"source_ids": {SOURCE_ID}})
     agg = Aggregates(source=f.source)
     for p in f.pay:
+        if (p.aggregate_count or 0) < aggregation_min:
+            agg.dropped += 1
+            continue
         agg.pay.setdefault(p.resort_id, []).append(p)
 
     def latest(rows: list, key) -> dict:
-        best: dict[str, Any] = {}
+        best: dict[Any, Any] = {}
         for r in rows:
+            if r.count < aggregation_min:
+                agg.dropped += 1
+                continue
             k = key(r)
             if k not in best or season_start_year(r.season) > season_start_year(best[k].season):
                 best[k] = r
         return {k: v.model_dump(mode="json") for k, v in best.items()}
     agg.rent = latest(f.rent, lambda r: r.resort_id)
-    agg.housing = latest(f.housing, lambda r: r.housing_site_id)
+    agg.housing = latest(f.housing, lambda r: (r.resort_id, r.housing_site_id))
     return agg
 
 
@@ -263,7 +309,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         p.add_argument("--note", required=name == "reject")
     p = sub.add_parser("import", help="queue submissions from a JSON or CSV export")
     p.add_argument("file", type=Path)
-    sub.add_parser("aggregate", help="write data/raw/reports/aggregates.json")
+    p = sub.add_parser("aggregate", help="merge aggregates of moderated reports into data/raw/reports/aggregates.json")
+    p.add_argument("--replace", action="store_true",
+                   help="rebuild the file from this checkout's moderated reports only (drops committed groups)")
     args = ap.parse_args(argv)
     store = ReportStore()
 
@@ -296,12 +344,18 @@ def main(argv: Optional[list[str]] = None) -> int:
         print(f"{added} reports added to {store.queue}")
         return 0 if not problems else 1
     decided, errors = store.decided()
-    for e in errors:
-        print(f"invalid: {e}", file=sys.stderr)
+    if errors:
+        for e in errors:
+            print(f"invalid: {e}", file=sys.stderr)
+        print("aggregates.json left unchanged: fix the moderated reports above first", file=sys.stderr)
+        return 1
+    path = store.root / "aggregates.json"
     data = aggregate(decided, load_config().definitions.reports.aggregation_min, _now().isoformat().replace("+00:00", "Z"))
-    write_aggregates(store.root / "aggregates.json", data)
-    print(f"{len(data['pay'])} pay, {len(data['rent'])} rent, {len(data['housing'])} housing aggregates")
-    return 1 if errors else 0
+    if not args.replace and path.exists():
+        data = merge_aggregates(json.loads(path.read_text(encoding="utf-8")), data)
+    write_aggregates(path, data)
+    print(f"{len(data['pay'])} pay, {len(data['rent'])} rent, {len(data['housing'])} housing aggregates in {path}")
+    return 0
 
 
 if __name__ == "__main__":

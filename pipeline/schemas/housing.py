@@ -127,6 +127,10 @@ class HousingBatch(StrictModel):
         dupes = sorted({i for i in ids if ids.count(i) > 1})
         if dupes:
             raise ValueError(f"duplicate housing site id: {dupes}")
+        reported = [s.id for s in self.sites if s.rent_monthly is not None and s.rent_monthly.confidence == "reported"]
+        if reported:
+            raise ValueError(f"sites {reported}: rent_monthly cannot be confidence reported in a housing file; reported "
+                             "rents come only from aggregates of 3 or more approved reports (data/raw/reports)")
         return self
 
 

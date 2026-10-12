@@ -65,14 +65,26 @@ def load_housing(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], r
     return out, errors
 
 
+CONFIDENCE_RANK = {"published": 0, "reported": 1, "estimated": 2}
+
+
+def _site_rent(site: HousingSite, site_reported: dict) -> Optional[dict]:
+    """Best of the site's own rent and its report aggregate, Published > Reported > Estimated (never the baseline)."""
+    cands = []
+    if site.rent_monthly is not None:
+        cands.append(site.rent_monthly.model_dump(mode="json"))
+    if site_reported.get(site.id) is not None:
+        cands.append(site_reported[site.id])
+    return min(cands, key=lambda r: CONFIDENCE_RANK[r["confidence"]]) if cands else None
+
+
 def display_rent(site: HousingSite, baseline: Optional[dict], preference: Sequence[str],
                  reported: Optional[dict] = None) -> Optional[dict]:
-    """Published > Reported > Estimated: the site's own rent, else its aggregate of 3+ approved
-    reports, else the county baseline as an estimated range; else None."""
-    if site.rent_monthly is not None:
-        return site.rent_monthly.model_dump(mode="json")
-    if reported is not None:
-        return reported
+    """Published > Reported > Estimated: a published site rent, else the site's aggregate of 3+ approved
+    reports, else an estimated site rent, else the county baseline as an estimated range; else None."""
+    best = _site_rent(site, {site.id: reported} if reported else {})
+    if best is not None:
+        return best
     pick = baseline_value(baseline, preference)
     if pick is None:
         return None
@@ -80,13 +92,6 @@ def display_rent(site: HousingSite, baseline: Optional[dict], preference: Sequen
     return {"value": {"low": s["value"], "high": s["value"]}, "source_id": s["source_id"], "as_of": s["as_of"],
             "confidence": "estimated",
             "note": f"county baseline ({BASELINE_LABEL[key]}, {baseline['county_name']}); this site has no published rent"}
-
-
-def _site_rent(site: HousingSite, site_reported: dict) -> Optional[dict]:
-    """Published or reported rent of a site as a Sourced dict (never the baseline)."""
-    if site.rent_monthly is not None:
-        return site.rent_monthly.model_dump(mode="json")
-    return site_reported.get(site.id)
 
 
 def cheapest_employee_site(sites: Sequence[HousingSite], site_reported: Optional[dict] = None

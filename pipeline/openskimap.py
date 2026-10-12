@@ -201,6 +201,38 @@ def merge_duplicates(features: list[dict], radius_km: float, similarity_min: flo
     return kept
 
 
+def filter_description(require_infrastructure: bool = False, dedupe_radius_km: Optional[float] = None,
+                       dedupe_similarity_min: float = 0.8, **_: Any) -> str:
+    """Human readable filter rules, stored in the extract metadata."""
+    return ("type == skiArea, downhill in activities, status == operating, a US place, named"
+            + (", at least one mapped lift or downhill run" if require_infrastructure else "")
+            + (f", duplicates within {dedupe_radius_km} km with name similarity >= {dedupe_similarity_min} merged"
+               if dedupe_radius_km else ""))
+
+
+def extract_needs_refresh(full: Path, extract: Path, **filter_kw: Any) -> bool:
+    """True when the cached full download should be re-filtered into the extract.
+
+    Never when the extract was fetched after the download (a newer committed extract wins over an
+    older local download); on the same date only when the filter rules changed.
+    """
+    if not full.exists():
+        return False
+    if not extract.exists():
+        return True
+    try:
+        meta = json.loads(extract.read_text(encoding="utf-8")).get("metadata") or {}
+        extract_date = dt.date.fromisoformat(meta["fetched_date"])
+    except (ValueError, KeyError, TypeError):
+        return True
+    full_date = dt.date.fromtimestamp(full.stat().st_mtime)
+    if extract_date > full_date:
+        return False
+    if extract_date == full_date:
+        return meta.get("filter") != filter_description(**filter_kw)
+    return True
+
+
 def filter_us(
     collection: dict,
     fetched_date: dt.date,
@@ -266,10 +298,7 @@ def filter_us(
         "metadata": {
             "source_url": URL,
             "fetched_date": fetched_date.isoformat(),
-            "filter": "type == skiArea, downhill in activities, status == operating, a US place, named"
-                      + (", at least one mapped lift or downhill run" if require_infrastructure else "")
-                      + (f", duplicates within {dedupe_radius_km} km with name similarity >= {dedupe_similarity_min} merged"
-                         if dedupe_radius_km else ""),
+            "filter": filter_description(require_infrastructure, dedupe_radius_km, dedupe_similarity_min),
             "counts": {**counts, "kept": len(out)},
         },
         "features": out,
