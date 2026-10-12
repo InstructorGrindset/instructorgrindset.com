@@ -92,8 +92,22 @@ function whenMapLibre() {
     const done = () => (window.maplibregl ? resolve(window.maplibregl) : reject(new Error('MapLibre failed to load')));
     s.onload = done;
     s.onerror = done;
-    requestAnimationFrame(() => setTimeout(() => document.head.append(s), 0));
+    afterFirstPaint(() => document.head.append(s));
   });
+}
+
+/** Run fn once the browser has painted content (first-contentful-paint), or after 1.5 s at the latest. */
+function afterFirstPaint(fn) {
+  let fired = false;
+  const go = () => { if (!fired) { fired = true; setTimeout(fn, 0); } };
+  try {
+    if (performance.getEntriesByName('first-contentful-paint').length) { go(); return; }
+    const po = new PerformanceObserver((list) => {
+      if (list.getEntries().some((e) => e.name === 'first-contentful-paint')) { po.disconnect(); go(); }
+    });
+    po.observe({ type: 'paint', buffered: true });
+  } catch { /* no paint timing: fall back to the timer */ }
+  setTimeout(go, 1500);
 }
 
 const idle = (fn) => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));

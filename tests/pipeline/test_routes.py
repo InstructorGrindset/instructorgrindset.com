@@ -345,11 +345,42 @@ def test_sitemap_keeps_site_entries_and_lists_canonical_map_pages(site: Path):
     assert "https://instructorgrindset.com/map/" in locs
     assert "https://instructorgrindset.com/map/ca/lake/" in locs
     assert "https://instructorgrindset.com/map/nv/lake/" not in locs  # non canonical duplicate
-    assert "https://instructorgrindset.com/map/nv/lake/lake-east/" in locs
-    assert "https://instructorgrindset.com/map/ca/lake/lake-east/" not in locs
+    # Tier B resorts stay out of the sitemap (their pages still exist); Tier A resorts are listed.
+    assert "https://instructorgrindset.com/map/co/front/alpha-peak/" in locs
+    assert "https://instructorgrindset.com/map/nv/lake/lake-east/" not in locs
+    assert "https://instructorgrindset.com/map/co/front/bravo-bowl/" not in locs
+    assert (site / "map" / "co" / "front" / "bravo-bowl" / "index.html").exists()
+    assert "noindex" not in read(site, "co/front/bravo-bowl")
+    assert sorted(locs) == sorted([
+        "https://instructorgrindset.com/", "https://instructorgrindset.com/map/",
+        "https://instructorgrindset.com/map/co/", "https://instructorgrindset.com/map/ca/", "https://instructorgrindset.com/map/nv/",
+        "https://instructorgrindset.com/map/co/front/", "https://instructorgrindset.com/map/ca/lake/",
+        "https://instructorgrindset.com/map/co/front/alpha-peak/"])
     assert len(locs) == len(set(locs))
     import xml.dom.minidom
     xml.dom.minidom.parseString(first)
+
+
+def test_sitemap_lists_tier_a_resort_canonical_only(site: Path):
+    resorts, clusters, states = default_data()
+    resorts[3]["tier"] = "A"  # lake-east, in a CA and NV cluster, home state NV
+    write_build(site, resorts, clusters, states)
+    generate_routes(site)
+    text = (site / "sitemap.xml").read_text()
+    assert "<loc>https://instructorgrindset.com/map/nv/lake/lake-east/</loc>" in text
+    assert "/map/ca/lake/lake-east/" not in text  # non canonical duplicate
+    assert "/map/ca/lake/lake-west/" not in text  # Tier B
+
+
+def test_real_sitemap_keeps_site_entries_and_only_tier_a_resorts():
+    text = (REPO / "sitemap.xml").read_text()
+    locs = [x.split("</loc>")[0] for x in text.split("<loc>")[1:]]
+    site_locs = [u for u in locs if not u.startswith("https://instructorgrindset.com/map/")]
+    assert len(site_locs) == 13
+    resorts = json.loads((REPO / "data" / "build" / "resorts.json").read_text())["resorts"]
+    tier = {r["id"]: r["tier"] for r in resorts}
+    resort_locs = [u for u in locs if u.count("/") == 7 and "/map/" in u]
+    assert resort_locs and all(tier[u.rstrip("/").rsplit("/", 1)[1]] == "A" for u in resort_locs)
 
 
 def test_no_sitemap_flag(site: Path):

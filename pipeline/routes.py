@@ -20,7 +20,9 @@ a copy of /map/index.html with:
 A cluster that spans states gets a page under every one of its states; the
 canonical URL uses the first state in cluster.states. A resort's canonical URL
 uses the resort's own state when that state is one of the cluster's states.
-Only canonical URLs go into the sitemap.
+Only canonical URLs go into the sitemap: /map/, every state and cluster page, and
+Tier A resort pages. Tier B resort pages are generated and crawlable but left out of
+the sitemap.
 
 Generated pages are listed in /map/.routes-manifest.json and carry a marker
 comment. Stale pages are removed on the next run. /map/index.html, /map/js,
@@ -366,6 +368,7 @@ class Page:
     body: str = ""
     jsonld: dict = field(default_factory=dict)
     record: Optional[dict] = None
+    in_sitemap: bool = True
 
 
 def _load(build: Path, name: str, optional: bool = False):
@@ -450,7 +453,9 @@ def plan_pages(build: Path) -> dict[str, Page]:
         record = resort_record(ctx, r, sources_file)
         for st_code in c["states"]:
             st = st_code.lower()
-            pages[f"{st}/{c['id']}/{r['id']}/"] = Page(title, desc, canonical, render_resort(ctx, r, c, st), jsonld, record)
+            # The sitemap lists Tier A resorts only; Tier B pages exist and stay crawlable.
+            pages[f"{st}/{c['id']}/{r['id']}/"] = Page(title, desc, canonical, render_resort(ctx, r, c, st), jsonld, record,
+                                                      in_sitemap=r.get("tier") == "A")
     return pages
 
 
@@ -710,7 +715,7 @@ def generate_routes(repo_root: Path, sitemap: bool = True) -> int:
     if sitemap:
         meta = _load(build, "resorts.json")
         lastmod = str(meta.get("generated_at", ""))[:10] or None
-        update_sitemap(repo_root / "sitemap.xml", [p.canonical for p in pages.values()], lastmod)
+        update_sitemap(repo_root / "sitemap.xml", [p.canonical for p in pages.values() if p.in_sitemap], lastmod)
     return len(pages)
 
 
