@@ -34,11 +34,13 @@
   <link rel="modulepreload" href="/map/js/listview.js">
   <link rel="modulepreload" href="/map/js/sheet.js">
   <link rel="modulepreload" href="/map/js/meta.js">
+  <link rel="modulepreload" href="/map/js/preview.js">
+  <link rel="modulepreload" href="/map/js/camera.js">
   <link rel="modulepreload" href="/map/js/map.js">
   <link rel="modulepreload" href="/map/js/detailmap.js">
-  <!-- The web font loads without blocking the first paint; text shows in the fallback font until then. -->
+  <!-- The web font loads after the page (and MapLibre) so it never competes with the map; text uses the fallback font until then. -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
+  <script>addEventListener("load",function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},{once:true})</script>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SkiResort","name":"Stevens Pass","url":"https://instructorgrindset.com/map/wa/cascades/stevens-pass/","geo":{"@type":"GeoCoordinates","latitude":47.7447,"longitude":-121.0889},"address":{"@type":"PostalAddress","addressRegion":"WA","addressCountry":"US"},"containedInPlace":{"@type":"Place","name":"Cascades"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Snowsports Career Map","item":"https://instructorgrindset.com/map/"},{"@type":"ListItem","position":2,"name":"Washington","item":"https://instructorgrindset.com/map/wa/"},{"@type":"ListItem","position":3,"name":"Cascades","item":"https://instructorgrindset.com/map/wa/cascades/"},{"@type":"ListItem","position":4,"name":"Stevens Pass","item":"https://instructorgrindset.com/map/wa/cascades/stevens-pass/"}]}]}</script>
 </head>

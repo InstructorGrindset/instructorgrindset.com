@@ -1,6 +1,7 @@
 // MapLibre map: state outlines, cluster polygons, resort circles.
 import { config, prefersReducedMotion } from './config.js';
 import { h } from './ui.js';
+import { viewFrame, clampPadding as clampTo } from './camera.js';
 import {
   addDetailLayers, setDetailData, showSiteCommutes, setGroupVisible, detailBounds, groupsWithData,
 } from './detailmap.js';
@@ -163,6 +164,9 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     minZoom: 1.5,
     maxZoom: 14,
   });
+  performance.mark('careermap:map-created');
+  map.once('styledata', () => performance.mark('careermap:style'));
+  map.once('render', () => performance.mark('careermap:first-render'));
   map.touchZoomRotate.disableRotation();
   map.keyboard.disableRotation();
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-left');
@@ -213,32 +217,14 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     map.setFilter('resorts-halo', ['==', ['get', 'id'], view.resortId || '']);
   }
 
-  function clampPadding(p) {
-    const w = container.clientWidth; const hgt = container.clientHeight;
-    const out = { ...p };
-    const fix = (a, b, total) => {
-      const over = out[a] + out[b] - (total - 60);
-      if (over > 0) { const s = (total - 60) / (out[a] + out[b]); out[a] = Math.max(0, Math.floor(out[a] * s)); out[b] = Math.max(0, Math.floor(out[b] * s)); }
-    };
-    fix('left', 'right', w);
-    fix('top', 'bottom', hgt);
-    return out;
-  }
+  function clampPadding(p) { return clampTo(p, container.clientWidth, container.clientHeight); }
 
   function boundsFor(view) {
     if (view.level === 'resort' && detail && detail.resort_id === view.resortId) {
       const db = detailBounds(detail);
       if (db) return { b: db, maxZoom: 13 };
     }
-    if (view.level === 'resort') {
-      const r = index.resorts.get(view.resortId);
-      // Frame the resort with its neighbours around it.
-      const d = 0.22;
-      return { b: [[r.lon - d * 1.3, r.lat - d], [r.lon + d * 1.3, r.lat + d]], maxZoom: 11 };
-    }
-    if (view.clusterId) return { b: minSpan(index.clusters.get(view.clusterId).bbox, 1.2, 0.8), maxZoom: 9 };
-    if (view.stateCode) return { b: index.states.get(view.stateCode).bbox, maxZoom: 7.5 };
-    return { b: config.nationalBounds, maxZoom: 5 };
+    return viewFrame(index, view);
   }
 
   function fitView(view, animate) {
@@ -441,15 +427,6 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
 function hoverKey(t) {
   const source = { resort: 'resorts', cluster: 'clusters', state: 'states', housing: 'detail-housing', lift: 'detail-lifts', base: 'detail-base', stop: 'detail-transit-stops' }[t.kind];
   return { source, id: t.id };
-}
-
-/** Grow a bbox around its center to at least spanX by spanY degrees. */
-function minSpan(b, spanX, spanY) {
-  if (!b) return b;
-  const cx = (b[0][0] + b[1][0]) / 2; const cy = (b[0][1] + b[1][1]) / 2;
-  const hx = Math.max((b[1][0] - b[0][0]) / 2, spanX / 2);
-  const hy = Math.max((b[1][1] - b[0][1]) / 2, spanY / 2);
-  return [[cx - hx, cy - hy], [cx + hx, cy + hy]];
 }
 
 function area(b) { return b ? (b[1][0] - b[0][0]) * (b[1][1] - b[0][1]) : Infinity; }

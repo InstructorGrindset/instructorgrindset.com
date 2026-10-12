@@ -39,6 +39,9 @@ export const FILTERS = [
   { key: 'facility', label: 'Indoor and training' },
 ];
 
+/** Certification levels in display order (the Phase 4 contract). */
+export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner', 'unspecified'];
+
 export const CERT_LABEL = {
   none: 'No certification',
   level_1: 'Level 1',

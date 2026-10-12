@@ -53,6 +53,7 @@
 .map-stage { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 .map { position: absolute; inset: 0; background: #0a0e14; }
 .map[hidden] { display: none; }
+.map-preview { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
 .map-fallback { color: var(--muted); padding: 2rem; max-width: 40ch; }
 
 .map-tip {
@@ -354,7 +355,15 @@ body.list-mode .recolor { display: none; }
 .ramp { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 .ramp li { display: grid; gap: .15rem; justify-items: start; min-width: 54px; }
 .ramp .chip { width: 100%; height: 10px; border-radius: 3px; }
-.ramp-note { margin: .3rem 0 0; color: var(--map-faint); }
+.ramp-note { margin: .3rem 0 0; color: var(--map-faint); max-width: 34ch; }
+.recolor-legend .legend-unit { display: block; font-weight: 400; color: var(--muted); }
+.heat-bar { height: 10px; border-radius: 3px; min-width: 180px; }
+.heat-scale { display: flex; justify-content: space-between; gap: 1rem; margin: .2rem 0 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+.heat-keys { list-style: none; display: flex; flex-wrap: wrap; gap: .2rem .8rem; margin: .35rem 0 0; padding: 0; }
+.heat-keys li { display: flex; align-items: center; gap: .3rem; }
+.key-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; background: #0a0e14; border: 1px solid #e7e9ee; flex-shrink: 0; }
+.key-dot.key-a { border: 2px solid #e0a03a; }
+.key-dot.key-none { background: #4a5568; border-color: #0a0e14; }
 @media (max-width: 759.98px) {
   .recolor { top: 46px; left: 46px; max-width: calc(100% - 56px); }
   .recolor-modes { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; }

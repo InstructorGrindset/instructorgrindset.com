@@ -1,5 +1,6 @@
 // Zod mirrors of docs/map/ARCHITECTURE.md. Change the contract there first.
 import { z } from '/map/vendor/zod/zod.mjs';
+import { CERT_LEVELS } from './labels.js';
 
 export const Confidence = z.enum(['published', 'reported', 'estimated']);
 const IsoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}/, 'ISO date');
@@ -34,7 +35,8 @@ const strList = z.array(z.string()).nullish().transform((v) => v ?? []);
 const numOrNull = z.number().nullish().transform((v) => v ?? null);
 
 // ── Career (Phase 4 contract) ──
-export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner', 'unspecified'];
+// Defined in labels.js so the panel can use the order without loading Zod.
+export { CERT_LEVELS };
 
 export const PayRow = z.object({
   cert_level: z.enum(CERT_LEVELS),

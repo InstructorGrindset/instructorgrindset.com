@@ -2,9 +2,8 @@
 import { config } from './config.js';
 import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts } from './data.js';
 import {
-  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, COMPONENT_LABEL, RATE_UNIT, tagLabel,
+  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, COMPONENT_LABEL, RATE_UNIT, tagLabel,
 } from './labels.js';
-import { CERT_LEVELS } from './schemas.js';
 import { hrefFor } from './router.js';
 import {
   h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd, markdown,

@@ -34,11 +34,13 @@
   <link rel="modulepreload" href="/map/js/listview.js">
   <link rel="modulepreload" href="/map/js/sheet.js">
   <link rel="modulepreload" href="/map/js/meta.js">
+  <link rel="modulepreload" href="/map/js/preview.js">
+  <link rel="modulepreload" href="/map/js/camera.js">
   <link rel="modulepreload" href="/map/js/map.js">
   <link rel="modulepreload" href="/map/js/detailmap.js">
-  <!-- The web font loads without blocking the first paint; text shows in the fallback font until then. -->
+  <!-- The web font loads after the page (and MapLibre) so it never competes with the map; text uses the fallback font until then. -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
+  <script>addEventListener("load",function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},{once:true})</script>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SkiResort","name":"Elk Mountain Ski Resort","url":"https://instructorgrindset.com/map/pa/poconos/elk-mountain-ski-resort/","geo":{"@type":"GeoCoordinates","latitude":41.71967,"longitude":-75.55791},"address":{"@type":"PostalAddress","addressRegion":"PA","addressCountry":"US"},"containedInPlace":{"@type":"Place","name":"Poconos"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Snowsports Career Map","item":"https://instructorgrindset.com/map/"},{"@type":"ListItem","position":2,"name":"Pennsylvania","item":"https://instructorgrindset.com/map/pa/"},{"@type":"ListItem","position":3,"name":"Poconos","item":"https://instructorgrindset.com/map/pa/poconos/"},{"@type":"ListItem","position":4,"name":"Elk Mountain Ski Resort","item":"https://instructorgrindset.com/map/pa/poconos/elk-mountain-ski-resort/"}]}]}</script>
 </head>

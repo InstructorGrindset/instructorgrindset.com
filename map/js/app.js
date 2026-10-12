@@ -14,6 +14,7 @@ import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
 import { h } from './ui.js';
 import { FILTERS } from './labels.js';
+import { drawPreview } from './preview.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -207,6 +208,12 @@ async function main() {
   router.start();
   performance.mark('careermap:panel');
   els.panel.setAttribute('aria-busy', 'false');
+  // First map frame while MapLibre downloads (a picture; removed when the WebGL map loads).
+  let preview = null;
+  if (!els.map.hidden && router.current) {
+    try { preview = drawPreview(els.map, index, router.current, padding(router.current)); } catch (err) { console.warn('[map] preview', err.message); }
+  }
+  const dropPreview = () => { if (preview) { preview.remove(); preview = null; } };
   const state = { index, router, mapCtl: null, panelReady: true, ready: false };
   window.__careerMap = state;
 
@@ -216,7 +223,12 @@ async function main() {
   });
 
   try {
-    const [maplibregl, { createMap }] = await Promise.all([whenMapLibre(), mapModule]);
+    const [maplibregl, { createMap }] = await Promise.all([whenMapLibre().then((m) => {
+      performance.mark('careermap:maplibre');
+      // Start the worker threads before the map constructor occupies the main thread.
+      if (typeof m.prewarm === 'function') m.prewarm();
+      return m;
+    }), mapModule]);
     mapCtl = createMap(els.map, index, maplibregl, {
       getPadding: padding,
       onPick(target, current) {
@@ -242,6 +254,7 @@ async function main() {
   } catch (err) {
     console.warn('[map] map unavailable, showing list view:', err.message);
     els.map.append(h('p', { class: 'map-fallback' }, 'The interactive map needs WebGL. The list view shows every resort.'));
+    dropPreview();
     setListView(true);
     state.ready = true;
     loadDetails();
@@ -256,6 +269,7 @@ async function main() {
 
   mapCtl.map.once('load', () => {
     performance.mark('careermap:map');
+    dropPreview();
     // Off the critical path: full data, the recolor control, then state outlines.
     loadDetails();
     if (els.recolor) {
