@@ -1,7 +1,7 @@
 // Phase 8 audits for the Career Map. Rerun with:
 //
 //   (cd tests/map && npm install)      # axe-core and lighthouse, test only
-//   node tests/map/audit.mjs [report_dir] [--no-lighthouse]
+//   node tests/map/audit.mjs [report_dir] [--no-lighthouse | --lighthouse-only]
 //
 // 1. Performance budget: /map/ and a resort page interactive under 3 s with Chrome DevTools
 //    throttling (4G: 150 ms RTT, 1.6 Mbps down, 750 Kbps up, 4x CPU slowdown).
@@ -21,7 +21,7 @@ import zlib from 'node:zlib';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
@@ -30,6 +30,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '..', '..');
 const OUT = path.resolve(process.argv.find((a, i) => i > 1 && !a.startsWith('--')) || path.join(os.tmpdir(), 'career-map-audit'));
 const RUN_LH = !process.argv.includes('--no-lighthouse');
+const ONLY_LH = process.argv.includes('--lighthouse-only');
 fs.mkdirSync(OUT, { recursive: true });
 
 function loadPlaywright() {
@@ -150,16 +151,27 @@ async function axe(browser, base) {
   }
 }
 
-function lighthouse(base) {
+// Async on purpose: the static server runs in this process, so a blocking spawn would starve it.
+function run(bin, args, env, timeoutMs) {
+  return new Promise((resolve) => {
+    const p = spawn(bin, args, { env });
+    let stderr = '';
+    p.stderr.on('data', (d) => { stderr += d; });
+    const timer = setTimeout(() => p.kill('SIGKILL'), timeoutMs);
+    p.on('close', (status) => { clearTimeout(timer); resolve({ status, stderr }); });
+  });
+}
+
+async function lighthouse(base) {
   const bin = path.join(HERE, 'node_modules', '.bin', 'lighthouse');
   if (!fs.existsSync(bin)) { console.log('  skip lighthouse not installed (cd tests/map && npm install)'); return; }
   const pages = ['/map/', '/map/co/i70-corridor/vail/', '/map/wy/tetons/jackson-hole/'];
   for (const p of pages) {
     const out = path.join(OUT, `lighthouse${p.replace(/\//g, '_')}.json`);
-    const run = spawnSync(bin, [base + p, '--quiet', '--output=json', `--output-path=${out}`,
+    const res = await run(bin, [base + p, '--quiet', '--output=json', `--output-path=${out}`,
       '--only-categories=performance,accessibility,best-practices,seo',
-      `--chrome-flags=--headless=new --no-sandbox ${ARGS.join(' ')}`], { env: { ...process.env, CHROME_PATH: CHROME }, encoding: 'utf8', timeout: 240000 });
-    if (run.status !== 0 || !fs.existsSync(out)) { failures.push(`lighthouse ${p} failed: ${run.stderr.slice(-400)}`); console.log(`  FAIL lighthouse ${p}`); continue; }
+      `--chrome-flags=--headless=new --no-sandbox ${ARGS.join(' ')}`], { ...process.env, CHROME_PATH: CHROME }, 240000);
+    if (res.status !== 0 || !fs.existsSync(out)) { failures.push(`lighthouse ${p} failed: ${res.stderr.slice(-400)}`); console.log(`  FAIL lighthouse ${p}`); continue; }
     const lhr = JSON.parse(fs.readFileSync(out, 'utf8'));
     const score = (k) => Math.round(lhr.categories[k].score * 100);
     const s = { page: p, performance: score('performance'), accessibility: score('accessibility'), best_practices: score('best-practices'), seo: score('seo'),
@@ -176,7 +188,8 @@ function lighthouse(base) {
 const server = await serve(REPO, 8821);
 const base = 'http://127.0.0.1:8821';
 try {
-  const browser = await chromium.launch({ executablePath: CHROME, args: ARGS });
+  const browser = ONLY_LH ? null : await chromium.launch({ executablePath: CHROME, args: ARGS });
+  if (browser) {
   console.log('Performance budget (4G, 4x CPU, gzip)');
   await throttled(browser, `${base}/map/`, 'national map, desktop');
   await throttled(browser, `${base}/map/`, 'national map, phone', { phone: true });
@@ -187,7 +200,8 @@ try {
   console.log('\nAccessibility (axe-core)');
   await axe(browser, base);
   await browser.close();
-  if (RUN_LH) { console.log('\nLighthouse'); lighthouse(base); }
+  }
+  if (RUN_LH) { console.log('\nLighthouse'); await lighthouse(base); }
 } catch (err) {
   failures.push(`crashed: ${err.stack || err}`);
   console.log(err);

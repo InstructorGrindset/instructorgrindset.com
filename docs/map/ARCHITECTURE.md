@@ -104,6 +104,28 @@ Display relevant subset of `config/definitions.yaml`, so the UI never hardcodes 
 ### `us-states.geojson`
 State outlines (simplified) with `properties: { code, name }`.
 
+### `map-index.json` (Phase 8, written by `pipeline/routes.py`)
+Slim national index the map loads first. Compact JSON, one row per resort as an array in `fields` order:
+```
+{ version, generated_at,                 // copied from resorts.json
+  fields: ["id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
+           "acres", "size_rank", "climate_available", "detail_available",
+           "season_length_days", "snowfall_annual_in", "professionalism_score", "lucrativeness_mid"],
+  resorts: [[...], ...] }
+```
+Every value is copied from `resorts.json` (`acres` is `size.acres.value`) and `resorts.geojson` (`size_rank` and the four
+recolor values); without `resorts.geojson`, `size_rank` uses `display.size_rank_acres_breaks` and the recolor values
+come from `resorts.json` as in the `resorts.geojson` rules, with `snowfall_annual_in` null. Resorts with an unsafe id or
+no coordinates are left out. About 16 KB gzipped against 87 KB for `resorts.json` plus 21 KB for `resorts.geojson`.
+The frontend builds its resort points from this file and falls back to `resorts.json` and `resorts.geojson` when it
+is absent.
+
+### Resort route stubs embed their record
+Each resort page under `/map/` carries `<script type="application/json" id="resort-record">` with
+`{ version, generated_at, resort: <its resorts.json record>, sources: [<the sources listed in resort.sources>] }`
+(every `<` escaped as `<`; an editorial block that is not `reviewed` is dropped). The panel validates it with the
+same Zod schema as `resorts.json` and renders the resort without waiting for the full file.
+
 ### `climate/{resort_id}.json` (Phase 3, lazy loaded per resort)
 ```
 { version, generated_at, resort_id,
@@ -308,6 +330,58 @@ Writes `docs/map/staleness.md`: every sourced value in `resorts.json` and `detai
 `config/definitions.yaml` `submissions: { endpoint: null }` is exposed in `definitions.json` as
 `submissions: { endpoint }`. The UI shows the report form only when `endpoint` is a URL.
 
+## Frontend (`/map`)
+
+### Load order (Phase 8 performance)
+1. The page head starts `maplibre-gl.js` (271 KB gzipped, the largest file) as an `async` script with
+   `fetchpriority="high"`, and preloads `map-index.json`, `clusters.geojson` and `states.json`. The modules on this path
+   (`app`, `config`, `data`, `router`, `panel`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`) carry no
+   Zod and no charts. The first paint files are checked by hand in `data.js`, mirroring `schemas.js`.
+2. The panel and the list view render from the slim index. `preview.js` draws the first map frame on a 2D canvas
+   (clusters and resort dots with the WebGL map's framing and colors). It is a picture only, removed when MapLibre
+   fires `load`.
+3. When MapLibre arrives, `map.js` builds the WebGL map (workers prewarmed first).
+4. After the map's `load`: `resorts.json`, `sources.json` and `definitions.json` (`index.loadDetails()`), the color
+   mode control (`recolor.js`, `heat.js`), then `us-states.geojson`. Source links rendered earlier show a placeholder
+   that fills in when `sources.json` lands.
+* Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
+  A resort page validates the record its stub embeds, so it needs Zod and `definitions.json` but no `resorts.json`.
+  While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
+* Lazy modules: `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only), `detailcontrols.js` (resort
+  detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event.
+* **Budget method** (`tests/map/audit.mjs`): Playwright with Chromium under SwiftShader, CDP network throttling
+  (150 ms RTT, 1.6 Mbps down, 750 Kbps up), 4x CPU slowdown, cache off, files gzipped. Times are the page's own
+  performance marks from navigation start. *Interactive* is the later of two marks: the panel usable
+  (`careermap:panel`, or `careermap:panel-full` when a resort record had to load) and the first map frame
+  (`careermap:preview`). The WebGL map's first frame (`careermap:first-render`) and `load` (`careermap:map`) are
+  reported next to it. Measured 2026-10-12: interactive 1.6 to 1.9 s on `/map/` and the Vail page (desktop and
+  phone); WebGL load 4.5 to 5.4 s, down from 7 to 8 s before this change. The WebGL gap is SwiftShader and
+  4x CPU: downloading MapLibre takes about 2 s, evaluating it about 0.5 s, the map constructor about 0.4 s, and
+  shader compiling plus the first worker tiles another 1.5 to 2 s.
+
+### Color modes: value heat maps
+Lucrativeness, Professionalism, Season length and Snowfall draw a heat surface of the value
+(`lucrativeness_mid`, `professionalism_score`, `season_length_days`, `snowfall_annual_in` from the slim index).
+A stock MapLibre heatmap layer sums weights, so many small hills would look hotter than one big value. The map uses
+an interpolated grid instead (`map/js/heat.js`):
+* Each pixel is the inverse distance weighted mean of the resorts with a value within `radiusKm` (120 km):
+  weight = taper(d) / max(d, `minDistanceKm`)^`power` with taper(d) = (1 − (d / R)²)², so weights fall smoothly to
+  zero at R. Twelve resorts of the same value give the same color as one.
+* Opacity depends only on the distance to the nearest resort with data: `maxAlpha` up to `fadeStart` × R, then
+  fading to zero at R. Areas beyond R from any resort with data stay empty. Density never raises opacity.
+* Resorts with a null value contribute nothing. Grey dots mark them on top of the surface.
+* The grid is computed in the browser per mode (cached), about 7 km per pixel, rows evenly spaced in Web Mercator,
+  one image per region (Alaska and the lower 48 apart), clipped to the state outlines, and drawn as MapLibre image
+  sources with linear resampling under the state lines, cluster outlines and resort dots. Cluster tints are off in
+  these modes so they do not shift the colors.
+* Ramp: one hue, sequential blue steps 600 to 100 (`#184f95` to `#cde2fb`), dark for low and light for high on the
+  dark map; the darkest step keeps about 2:1 against the background. The legend is a continuous bar with min, max,
+  units (USD per season, score out of 100, days, inches per season), the resort count and the method in one line.
+  Resort dots stay small: dark fill with a light ring, an amber ring for Tier A.
+* A mode with no values is disabled and says why ("No resort has snowfall data yet."). Nothing animates, so
+  `prefers-reduced-motion` needs no special case.
+* The settings live in `config.heat` in `map/js/config.js`. They are display settings and change no resort number.
+
 ## Raw inputs (`/data/raw`)
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
@@ -330,7 +404,7 @@ pipeline/
   tier_a.py           # load data/raw/tier_a + ownership, merge with OpenSkiMap
   clusters.py         # cluster assignment and polygon generation
   states.py           # us-atlas to us-states.geojson
-  routes.py           # deep link stubs under /map/
+  routes.py           # deep link stubs under /map/, data/build/map-index.json
   career.py           # Phase 4 pay display, staleness, professionalism, lucrativeness
   lifts.py            # Phase 5 OpenSkiMap lifts for Tier A resorts
   housing.py          # Phase 5 housing sites, rent display, detail file assembly

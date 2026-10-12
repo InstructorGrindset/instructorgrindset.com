@@ -2,7 +2,7 @@
 //
 // Load order (Phase 8 performance, see docs/map/ARCHITECTURE.md "Frontend"):
 // 1. map-index.json, clusters.geojson and states.json, then the panel and the list view render.
-// 2. MapLibre (an async script in the page head) arrives; the map module builds the WebGL map.
+// 2. MapLibre (preloaded by the page head, run after the first paint) builds the WebGL map.
 // 3. After the first map frame: resorts.json, sources.json and definitions.json, the recolor control,
 //    then the state outlines. A resort or comparison view asks for step 3 data straight away.
 import { config, isPhone } from './config.js';
@@ -80,25 +80,19 @@ function summary(index, view) {
   }
 }
 
-/** Resolves with window.maplibregl once the async script in the page head has run. */
+/**
+ * Runs MapLibre (preloaded by the page head) once the panel has painted, so its parse and the WebGL setup
+ * never delay the first paint. Resolves with window.maplibregl.
+ */
 function whenMapLibre() {
   if (window.maplibregl) return Promise.resolve(window.maplibregl);
-  const tag = document.querySelector('script[data-maplibre]');
   return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = '/map/vendor/maplibre-gl/maplibre-gl.js';
     const done = () => (window.maplibregl ? resolve(window.maplibregl) : reject(new Error('MapLibre failed to load')));
-    if (!tag) {
-      // A route stub built from an older shell: load it here.
-      const s = document.createElement('script');
-      s.src = '/map/vendor/maplibre-gl/maplibre-gl.js';
-      s.onload = done;
-      s.onerror = done;
-      document.head.append(s);
-      return;
-    }
-    tag.addEventListener('load', done, { once: true });
-    tag.addEventListener('error', done, { once: true });
-    // The script may have finished between the check above and the listeners.
-    if (window.maplibregl) done();
+    s.onload = done;
+    s.onerror = done;
+    requestAnimationFrame(() => setTimeout(() => document.head.append(s), 0));
   });
 }
 

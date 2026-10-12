@@ -14,15 +14,17 @@
   <meta property="og:url" content="https://instructorgrindset.com/map/ri/other-ri/" />
   <meta property="og:image" content="https://instructorgrindset.com/images/ig-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <!-- MapLibre is the largest file: fetched first, run async so the panel never waits for it. -->
-  <script src="/map/vendor/maplibre-gl/maplibre-gl.js" async fetchpriority="high" data-maplibre></script>
+  <!-- MapLibre is the largest file. It downloads from the start; app.js runs it after the panel's first paint. -->
+  <link rel="preload" href="/map/vendor/maplibre-gl/maplibre-gl.js" as="script" fetchpriority="low">
   <link rel="preload" href="/data/build/map-index.json" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/clusters.geojson" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/states.json" as="fetch" crossorigin="anonymous">
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=12">
-  <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css">
-  <link rel="stylesheet" href="/map/css/map.css?v=2">
+  <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
+  <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"></noscript>
+  <link rel="stylesheet" href="/map/css/map.css?v=3">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%23e0a03a'/%3E%3C/svg%3E">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
