@@ -350,7 +350,9 @@ async function desktop(browser, base) {
   check(await ed.locator('strong', { hasText: 'bold' }).count() === 1 && await ed.locator('a[href="https://example.com/fixture/editorial"]').count() === 1, 'editorial Markdown renders bold and links');
   check(await ed.locator('.editorial-text p').count() === 4, 'editorial paragraphs split');
   check((await ed.innerText()).includes('Sources: Synthetic fixture: resort facts') && (await ed.innerText()).includes('Reviewed Oct 10, 2026.'), 'editorial cites sources and review date');
-  check((await page.locator('.housing .fact', { hasText: 'Reported rent near the resort' }).innerText()).includes('$700 to $1,000 per month'), 'reported area rent renders with badge');
+  const rrFact = page.locator('.housing .fact', { hasText: 'Reported rent near the resort' });
+  check((await rrFact.innerText()).includes('$700 to $1,000 per month') && (await rrFact.innerText()).includes('Range from 4 reports')
+    && await rrFact.locator('.badge-reported').count() === 1, 'reported area rent shows a Reported badge and its report count');
 
   // Phase 7: report form (endpoint intercepted; nothing leaves the test).
   const posted = [];

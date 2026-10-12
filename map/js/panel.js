@@ -642,7 +642,11 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
       body.append(h('ul', { class: 'site-list' }, sites.map((site) => h('li', null, siteCard(site, detail)))));
     }
     if (detail && detail.rent_reported) {
-      body.append(h('dl', { class: 'facts' }, fact('Reported rent near the resort', detail.rent_reported, (v) => `${moneyRange(v.low, v.high)} per month`)));
+      // The note carries the report count; show it the same way as reported pay rows.
+      const rr = detail.rent_reported;
+      const n = rr.note && /(\d+)/.exec(rr.note);
+      const shown = n ? { ...rr, note: `Range from ${fmtInt(Number(n[1]))} reports` } : rr;
+      body.append(h('dl', { class: 'facts' }, fact('Reported rent near the resort', shown, (v) => `${moneyRange(v.low, v.high)} per month`)));
     }
     const b = detail && detail.rent_baseline;
     if (b && [b.fmr.studio, b.fmr.one_br, b.fmr.two_br, b.acs_median_gross_rent].some(Boolean)) {
