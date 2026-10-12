@@ -57,6 +57,11 @@ resorts:
     elevation:
       base_ft: {value: 6311, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 10450, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 10, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 50, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Infobox labels this black diamond share most difficult; the article says half of the terrain is rated expert. Source combines advanced and expert."}
+      expert_pct: null
 
   - id: aspen-mountain
     tier_a_status: approved
@@ -78,6 +83,11 @@ resorts:
     elevation:
       base_ft: {value: 7945, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 11212, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 0, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Infobox lists the shares without a percent sign (0, 48, 26, 26 of 76 trails); they sum to 100. The article says there are no beginner runs and about 26% of the terrain is expert."}
+      intermediate_pct: {value: 48, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 26, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 26, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
 
   - id: aspen-highlands
     tier_a_status: approved
@@ -98,6 +108,11 @@ resorts:
     elevation:
       base_ft: {value: 8040, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 12392, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 0, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published, note: "Infobox lists the shares without a percent sign (0, 23, 12, 65 of 118 trails); they sum to 100, so they read as percentages."}
+      intermediate_pct: {value: 23, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 12, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 65, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
 
   - id: telluride
     tier_a_status: approved
@@ -118,6 +133,11 @@ resorts:
     elevation:
       base_ft: {value: 8725, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 13150, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published, note: "Includes hike to terrain."}
+    terrain:
+      beginner_pct: {value: 23, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 36, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 41, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
+      expert_pct: null
 
   - id: sun-valley
     name: Sun Valley (Bald Mountain)
@@ -141,6 +161,11 @@ resorts:
     elevation:
       base_ft: {value: 5750, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published, note: "River Run base."}
       summit_ft: {value: 9150, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 36, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published, note: "Bald Mountain. The article notes the ratings are relative; much of the easiest terrain would rate intermediate elsewhere."}
+      intermediate_pct: {value: 42, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 22, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: dollar-mountain
     name: Dollar Mountain
@@ -182,6 +207,11 @@ resorts:
     elevation:
       base_ft: {value: 8530, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 11068, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 30, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 55, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: snowbird
     tier_a_status: approved
@@ -202,6 +232,11 @@ resorts:
     elevation:
       base_ft: {value: 8100, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published, note: "Main base area; the lowest chairlift starts at 7,760 ft."}
       summit_ft: {value: 11000, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 27, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 38, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: sugarloaf
     tier_a_status: approved
@@ -222,6 +257,11 @@ resorts:
     elevation:
       base_ft: {value: 1417, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 4237, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 23, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published, note: "Article text: 40 green, 54 blue, 44 black diamond and 36 double black diamond trails."}
+      intermediate_pct: {value: 31, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 25, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 21, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
 
   - id: sugar-bowl
     tier_a_status: approved
@@ -243,6 +283,11 @@ resorts:
     elevation:
       base_ft: {value: 6883, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 8383, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 17, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 45, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 38, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: burke
     tier_a_status: approved
@@ -284,6 +329,11 @@ resorts:
     elevation:
       base_ft: {value: 1820, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3840, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published, note: "Lift served; true summit 3,997 ft."}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 59, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 26, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published, note: "Infobox labels the black diamond share Expert; the article lead says 26% advanced/expert. Source combines advanced and expert."}
+      expert_pct: null
 
   - id: big-sky
     name: Big Sky Resort
@@ -305,6 +355,11 @@ resorts:
     elevation:
       base_ft: {value: 6800, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "Lone Moose base; Mountain Village base is 7,500 ft."}
       summit_ft: {value: 11166, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 21, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 29, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 31, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 19, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share expert and extreme."}
 
   - id: taos
     name: Taos Ski Valley
@@ -327,6 +382,11 @@ resorts:
     elevation:
       base_ft: {value: 9200, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 12481, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "Top of the Kachina lift."}
+    terrain:
+      beginner_pct: {value: 24, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 25, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 51, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
+      expert_pct: null
 
   - id: snowmass
     name: Snowmass
@@ -348,6 +408,11 @@ resorts:
     elevation:
       base_ft: {value: 8104, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 12510, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 6, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published, note: "Infobox lists the shares without a percent sign (6, 47, 17, 30 of 94 trails); they sum to 100, so they read as percentages."}
+      intermediate_pct: {value: 47, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 17, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 30, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published}
 
   - id: buttermilk
     name: Buttermilk
@@ -369,3 +434,8 @@ resorts:
     elevation:
       base_ft: {value: 7870, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 9900, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 35, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 39, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 26, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 0, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}

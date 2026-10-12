@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-12T00:39:19Z",
+  "generated_at": "2026-10-12T16:07:29Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -313,9 +313,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 25,
+          "source_id": "wikipedia-afton-alps",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 50,
+          "source_id": "wikipedia-afton-alps",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 25,
+          "source_id": "wikipedia-afton-alps",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -1069,9 +1087,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 30,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 55,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -1252,9 +1288,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 11,
+          "source_id": "wikipedia-alyeska-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 52,
+          "source_id": "wikipedia-alyeska-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 37,
+          "source_id": "wikipedia-alyeska-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -1895,10 +1949,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 7,
+          "source_id": "wikipedia-arapahoe-basin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 20,
+          "source_id": "wikipedia-arapahoe-basin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 49,
+          "source_id": "wikipedia-arapahoe-basin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 24,
+          "source_id": "wikipedia-arapahoe-basin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source labels this double black diamond share Extreme."
+        },
         "character_tags": []
       },
       "fit": {
@@ -2498,10 +2576,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 0,
+          "source_id": "wikipedia-aspen-highlands",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox lists the shares without a percent sign (0, 23, 12, 65 of 118 trails); they sum to 100, so they read as percentages."
+        },
+        "intermediate_pct": {
+          "value": 23,
+          "source_id": "wikipedia-aspen-highlands",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 12,
+          "source_id": "wikipedia-aspen-highlands",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 65,
+          "source_id": "wikipedia-aspen-highlands",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -2751,10 +2853,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 0,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox lists the shares without a percent sign (0, 48, 26, 26 of 76 trails); they sum to 100. The article says there are no beginner runs and about 26% of the terrain is expert."
+        },
+        "intermediate_pct": {
+          "value": 48,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 26,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 26,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -2994,9 +3120,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 29,
+          "source_id": "wikipedia-attitash-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 44,
+          "source_id": "wikipedia-attitash-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 27,
+          "source_id": "wikipedia-attitash-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -3802,9 +3946,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-bear-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-bear-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source lists a separate 15% low intermediate share (blue square) that is not included here. Recorded shares sum to 85."
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-bear-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -4225,9 +4387,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 28,
+          "source_id": "wikipedia-beaver-creek-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 38,
+          "source_id": "wikipedia-beaver-creek-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 34,
+          "source_id": "wikipedia-beaver-creek-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -4798,10 +4978,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 30,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article text (Terrain and Lifts)."
+        },
+        "intermediate_pct": {
+          "value": 35,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 5,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -5549,10 +5753,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 21,
+          "source_id": "wikipedia-big-sky-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 29,
+          "source_id": "wikipedia-big-sky-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 31,
+          "source_id": "wikipedia-big-sky-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 19,
+          "source_id": "wikipedia-big-sky-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source labels this double black diamond share expert and extreme."
+        },
         "character_tags": []
       },
       "fit": {
@@ -7000,9 +7228,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 22,
+          "source_id": "wikipedia-bogus-basin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 45,
+          "source_id": "wikipedia-bogus-basin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 33,
+          "source_id": "wikipedia-bogus-basin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -8241,10 +8487,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 14,
+          "source_id": "wikipedia-breckenridge-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 31,
+          "source_id": "wikipedia-breckenridge-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 19,
+          "source_id": "wikipedia-breckenridge-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 36,
+          "source_id": "wikipedia-breckenridge-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -8886,9 +9156,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 21,
+          "source_id": "wikipedia-brighton-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-brighton-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 39,
+          "source_id": "wikipedia-brighton-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -9955,10 +10243,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 35,
+          "source_id": "wikipedia-buttermilk-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 39,
+          "source_id": "wikipedia-buttermilk-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 26,
+          "source_id": "wikipedia-buttermilk-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 0,
+          "source_id": "wikipedia-buttermilk-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -10906,9 +11218,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 21,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 47,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 32,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox labels the black diamond share Expert; the article section is titled Expert and advanced (32%). Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -12721,10 +13051,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 21,
+          "source_id": "wikipedia-copper-mountain-colorado",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox, 140+ trails. The trails section gives 150 trails at 25% beginner, 24% intermediate, 34% advanced and 17% expert."
+        },
+        "intermediate_pct": {
+          "value": 25,
+          "source_id": "wikipedia-copper-mountain-colorado",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 36,
+          "source_id": "wikipedia-copper-mountain-colorado",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 18,
+          "source_id": "wikipedia-copper-mountain-colorado",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -13361,9 +13715,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 28,
+          "source_id": "wikipedia-cranmore-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 44,
+          "source_id": "wikipedia-cranmore-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox. The article text says 28% easy, 46% intermediate and 26% expert."
+        },
+        "advanced_pct": {
+          "value": 28,
+          "source_id": "wikipedia-cranmore-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox. The article text gives 26% expert for the top tier."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -13623,9 +13995,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 23,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 57,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 20,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -13879,9 +14269,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 32,
+          "source_id": "wikipedia-crotched-mountain-ski-and-ride",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 36,
+          "source_id": "wikipedia-crotched-mountain-ski-and-ride",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 32,
+          "source_id": "wikipedia-crotched-mountain-ski-and-ride",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -14146,9 +14554,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 11,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 54,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 35,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -14795,9 +15221,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 35,
+          "source_id": "wikipedia-deer-valley",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox. The article text, citing the 2024/25 press kit, says 30% beginner and 44% intermediate."
+        },
+        "intermediate_pct": {
+          "value": 44,
+          "source_id": "wikipedia-deer-valley",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 21,
+          "source_id": "wikipedia-deer-valley",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -17428,10 +17872,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 10,
+          "source_id": "wikipedia-grand-targhee-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article text; shares of the 2,602 acres of terrain."
+        },
+        "intermediate_pct": {
+          "value": 70,
+          "source_id": "wikipedia-grand-targhee-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 15,
+          "source_id": "wikipedia-grand-targhee-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 5,
+          "source_id": "wikipedia-grand-targhee-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -18142,10 +18610,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-gunstock-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 52,
+          "source_id": "wikipedia-gunstock-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 31,
+          "source_id": "wikipedia-gunstock-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 2,
+          "source_id": "wikipedia-gunstock-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -18554,9 +19046,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 20,
+          "source_id": "wikipedia-heavenly-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 45,
+          "source_id": "wikipedia-heavenly-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 35,
+          "source_id": "wikipedia-heavenly-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -19437,9 +19947,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 25,
+          "source_id": "wikipedia-hidden-valley-ski-area-missouri",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 33,
+          "source_id": "wikipedia-hidden-valley-ski-area-missouri",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 19,
+          "source_id": "wikipedia-hidden-valley-ski-area-missouri",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source also lists 13% terrain parks. Recorded shares sum to 77, or 90 with the terrain park share."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -20907,10 +21435,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 25,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 30,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 15,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -21678,9 +22230,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 10,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 50,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox labels this black diamond share most difficult; the article says half of the terrain is rated expert. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -22252,9 +22822,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-june-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-june-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 45,
+          "source_id": "wikipedia-june-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -23000,9 +23588,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 19,
+          "source_id": "wikipedia-keystone-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 32,
+          "source_id": "wikipedia-keystone-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 49,
+          "source_id": "wikipedia-keystone-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox, 135 trails, labels this share advanced; the trails section gives 130 trails at 12% beginner, 39% intermediate and 49% advanced/expert. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -23266,9 +23872,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 28,
+          "source_id": "wikipedia-killington-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 33,
+          "source_id": "wikipedia-killington-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 39,
+          "source_id": "wikipedia-killington-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -23449,9 +24073,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 12,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 30,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 58,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -24430,10 +25072,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 27,
+          "source_id": "wikipedia-liberty-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 41,
+          "source_id": "wikipedia-liberty-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 14,
+          "source_id": "wikipedia-liberty-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 18,
+          "source_id": "wikipedia-liberty-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -25951,9 +26617,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 46,
+          "source_id": "wikipedia-mad-river-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article text, citing the resort mountain info page."
+        },
+        "intermediate_pct": {
+          "value": 38,
+          "source_id": "wikipedia-mad-river-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 16,
+          "source_id": "wikipedia-mad-river-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -26378,9 +27062,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-mammoth-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 48,
+          "source_id": "wikipedia-mammoth-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 37,
+          "source_id": "wikipedia-mammoth-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -28494,9 +29196,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 30,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-mount-brighton",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article stats section. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -29542,10 +30262,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 16,
+          "source_id": "wikipedia-mount-snow",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article trails section; labeled Novice, More Difficult, Most Difficult and Expert."
+        },
+        "intermediate_pct": {
+          "value": 66,
+          "source_id": "wikipedia-mount-snow",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 17,
+          "source_id": "wikipedia-mount-snow",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 1,
+          "source_id": "wikipedia-mount-snow",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -29882,9 +30626,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 26,
+          "source_id": "wikipedia-mount-sunapee-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 48,
+          "source_id": "wikipedia-mount-sunapee-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 26,
+          "source_id": "wikipedia-mount-sunapee-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert. The article text says 26% easy, 49% intermediate and 25% advanced."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -30527,10 +31289,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-mount-bachelor-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 35,
+          "source_id": "wikipedia-mount-bachelor-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-mount-bachelor-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 20,
+          "source_id": "wikipedia-mount-bachelor-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -30776,9 +31562,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 24,
+          "source_id": "wikipedia-mt-baker-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 45,
+          "source_id": "wikipedia-mt-baker-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 31,
+          "source_id": "wikipedia-mt-baker-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -31331,10 +32135,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-mount-hood-meadows",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article trails section."
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-mount-hood-meadows",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 15,
+          "source_id": "wikipedia-mount-hood-meadows",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 30,
+          "source_id": "wikipedia-mount-hood-meadows",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -32529,9 +33357,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 13,
+          "source_id": "wikipedia-northstar-california",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 60,
+          "source_id": "wikipedia-northstar-california",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 27,
+          "source_id": "wikipedia-northstar-california",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -34024,9 +34870,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 25,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 35,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -34119,9 +34983,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 25,
+          "source_id": "wikipedia-paoli-peaks",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 55,
+          "source_id": "wikipedia-paoli-peaks",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 20,
+          "source_id": "wikipedia-paoli-peaks",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox. The article text gives 10% advanced and 10% freestyle terrain park."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -34380,9 +35262,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 7,
+          "source_id": "wikipedia-park-city-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox, 324 trails. The trails section gives 348 trails at 15% beginner, 54% intermediate and 31% expert."
+        },
+        "intermediate_pct": {
+          "value": 49,
+          "source_id": "wikipedia-park-city-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 44,
+          "source_id": "wikipedia-park-city-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -36140,9 +37040,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 25,
+          "source_id": "wikipedia-powder-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-powder-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 35,
+          "source_id": "wikipedia-powder-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -37488,10 +38406,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 29,
+          "source_id": "wikipedia-roundtop-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 30,
+          "source_id": "wikipedia-roundtop-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 31,
+          "source_id": "wikipedia-roundtop-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 10,
+          "source_id": "wikipedia-roundtop-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source labels this double black diamond share Extremely Difficult."
+        },
         "character_tags": []
       },
       "fit": {
@@ -38387,10 +39329,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 20,
+          "source_id": "wikipedia-schweitzer-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox. The statistics section gives 10% beginner, 40% intermediate, 35% advanced and 15% expert."
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-schweitzer-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 35,
+          "source_id": "wikipedia-schweitzer-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 5,
+          "source_id": "wikipedia-schweitzer-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox. The statistics section gives 15% expert."
+        },
         "character_tags": []
       },
       "fit": {
@@ -38803,10 +39769,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 35,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 15,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 10,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -40251,9 +41241,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 31,
+          "source_id": "wikipedia-ski-cooper",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 35,
+          "source_id": "wikipedia-ski-cooper",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 34,
+          "source_id": "wikipedia-ski-cooper",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -41858,9 +42866,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 10,
+          "source_id": "wikipedia-snow-summit",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-snow-summit",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source lists a separate 25% low intermediate share (blue square) that is not included here. Recorded shares sum to 75."
+        },
+        "advanced_pct": {
+          "value": 25,
+          "source_id": "wikipedia-snow-summit",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -42037,10 +43063,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 14,
+          "source_id": "wikipedia-snow-valley-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 45,
+          "source_id": "wikipedia-snow-valley-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 31,
+          "source_id": "wikipedia-snow-valley-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 10,
+          "source_id": "wikipedia-snow-valley-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source labels this double black diamond share Experts only."
+        },
         "character_tags": []
       },
       "fit": {
@@ -42286,9 +43336,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 20,
+          "source_id": "wikipedia-snowbasin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 50,
+          "source_id": "wikipedia-snowbasin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-snowbasin",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -42386,9 +43454,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 27,
+          "source_id": "wikipedia-snowbird-utah",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 38,
+          "source_id": "wikipedia-snowbird-utah",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 35,
+          "source_id": "wikipedia-snowbird-utah",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -42781,10 +43867,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 6,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox lists the shares without a percent sign (6, 47, 17, 30 of 94 trails); they sum to 100, so they read as percentages."
+        },
+        "intermediate_pct": {
+          "value": 47,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 17,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 30,
+          "source_id": "wikipedia-snowmass-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -43513,9 +44623,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 10,
+          "source_id": "wikipedia-solitude-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 40,
+          "source_id": "wikipedia-solitude-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 50,
+          "source_id": "wikipedia-solitude-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Facts and figures section. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -44003,9 +45131,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 14,
+          "source_id": "wikipedia-steamboat-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox, 170 trails. The statistics section gives 182 trails at about 12% beginner, 40% intermediate and 48% advanced."
+        },
+        "intermediate_pct": {
+          "value": 42,
+          "source_id": "wikipedia-steamboat-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 44,
+          "source_id": "wikipedia-steamboat-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -44331,9 +45477,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 11,
+          "source_id": "wikipedia-stevens-pass-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 54,
+          "source_id": "wikipedia-stevens-pass-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 35,
+          "source_id": "wikipedia-stevens-pass-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -44669,9 +45833,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 16,
+          "source_id": "wikipedia-stowe-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 55,
+          "source_id": "wikipedia-stowe-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-stowe-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert. Shares sum to 101 as stated."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -44940,9 +46122,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 40,
+          "source_id": "wikipedia-stratton-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article text, citing the resort mountain stats page; labeled easy."
+        },
+        "intermediate_pct": {
+          "value": 35,
+          "source_id": "wikipedia-stratton-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 25,
+          "source_id": "wikipedia-stratton-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -45195,9 +46395,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 17,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 45,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 38,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -45782,10 +47000,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 23,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article text: 40 green, 54 blue, 44 black diamond and 36 double black diamond trails."
+        },
+        "intermediate_pct": {
+          "value": 31,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 25,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 21,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -46341,9 +47583,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 36,
+          "source_id": "wikipedia-bald-mountain-idaho",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Bald Mountain. The article notes the ratings are relative; much of the easiest terrain would rate intermediate elsewhere."
+        },
+        "intermediate_pct": {
+          "value": 42,
+          "source_id": "wikipedia-bald-mountain-idaho",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 22,
+          "source_id": "wikipedia-bald-mountain-idaho",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -46748,10 +48008,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 33,
+          "source_id": "wikipedia-sunday-river-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 36,
+          "source_id": "wikipedia-sunday-river-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 19,
+          "source_id": "wikipedia-sunday-river-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 12,
+          "source_id": "wikipedia-sunday-river-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -47551,9 +48835,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 24,
+          "source_id": "wikipedia-taos-ski-valley",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 25,
+          "source_id": "wikipedia-taos-ski-valley",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 51,
+          "source_id": "wikipedia-taos-ski-valley",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -47652,9 +48954,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 23,
+          "source_id": "wikipedia-telluride-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 36,
+          "source_id": "wikipedia-telluride-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 41,
+          "source_id": "wikipedia-telluride-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -49081,9 +50401,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 20,
+          "source_id": "wikipedia-timberline-lodge-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Article text: how Timberline categorizes its terrain with the full mountain open. A Forest Service environmental impact statement in the article gives a finer breakdown."
+        },
+        "intermediate_pct": {
+          "value": 50,
+          "source_id": "wikipedia-timberline-lodge-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-timberline-lodge-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -50462,9 +51800,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 18,
+          "source_id": "wikipedia-vail-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 29,
+          "source_id": "wikipedia-vail-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 53,
+          "source_id": "wikipedia-vail-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox labels this share advanced; the trails section gives 53% advanced/expert. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -51194,9 +52550,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-waterville-valley-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 59,
+          "source_id": "wikipedia-waterville-valley-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 26,
+          "source_id": "wikipedia-waterville-valley-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Infobox labels the black diamond share Expert; the article lead says 26% advanced/expert. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -51762,9 +53136,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 24,
+          "source_id": "wikipedia-whiteface-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 46,
+          "source_id": "wikipedia-whiteface-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-whiteface-mountain",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -52032,10 +53424,34 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
-        "expert_pct": null,
+        "beginner_pct": {
+          "value": 15,
+          "source_id": "wikipedia-whitefish-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 35,
+          "source_id": "wikipedia-whitefish-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 40,
+          "source_id": "wikipedia-whitefish-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "expert_pct": {
+          "value": 10,
+          "source_id": "wikipedia-whitefish-mountain-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "character_tags": []
       },
       "fit": {
@@ -52133,9 +53549,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 27,
+          "source_id": "wikipedia-whitetail-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 50,
+          "source_id": "wikipedia-whitetail-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 18,
+          "source_id": "wikipedia-whitetail-ski-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source also lists 5% terrain park. Recorded shares sum to 95."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -52478,9 +53912,27 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
-        "advanced_pct": null,
+        "beginner_pct": {
+          "value": 25,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 45,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "advanced_pct": {
+          "value": 30,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert."
+        },
         "expert_pct": null,
         "character_tags": []
       },
@@ -53239,10 +54691,28 @@
         "training_start": null
       },
       "terrain": {
-        "beginner_pct": null,
-        "intermediate_pct": null,
+        "beginner_pct": {
+          "value": 8,
+          "source_id": "wikipedia-winter-park-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
+        "intermediate_pct": {
+          "value": 18,
+          "source_id": "wikipedia-winter-park-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": null
+        },
         "advanced_pct": null,
-        "expert_pct": null,
+        "expert_pct": {
+          "value": 3,
+          "source_id": "wikipedia-winter-park-resort",
+          "as_of": "2026-10-12",
+          "confidence": "published",
+          "note": "Source lists five shares: 8% beginner, 18% intermediate, 19% advanced (square diamond), 52% most difficult (black diamond), 3% expert (double black diamond). The 19% and 52% tiers sit between intermediate and expert, so advanced is left empty. Recorded shares sum to 29."
+        },
         "character_tags": []
       },
       "fit": {

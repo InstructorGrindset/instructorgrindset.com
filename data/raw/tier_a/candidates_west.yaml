@@ -64,6 +64,11 @@ resorts:
     elevation:
       base_ft: {value: 9712, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 12313, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 21, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-12, confidence: published, note: "Infobox, 140+ trails. The trails section gives 150 trails at 25% beginner, 24% intermediate, 34% advanced and 17% expert."}
+      intermediate_pct: {value: 25, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 36, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 18, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-12, confidence: published}
 
   - id: ski-cooper
     name: Ski Cooper
@@ -85,6 +90,11 @@ resorts:
     elevation:
       base_ft: {value: 10500, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 11700, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 31, source_id: wikipedia-ski-cooper, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 35, source_id: wikipedia-ski-cooper, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 34, source_id: wikipedia-ski-cooper, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
+      expert_pct: null
 
   - id: silverton-mountain
     name: Silverton Mountain
@@ -149,6 +159,11 @@ resorts:
     elevation:
       base_ft: {value: 8755, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 10750, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 21, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 39, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
+      expert_pct: null
 
   - id: snowbasin
     name: Snowbasin
@@ -170,6 +185,11 @@ resorts:
     elevation:
       base_ft: {value: 6391, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 9350, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 20, source_id: wikipedia-snowbasin, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 50, source_id: wikipedia-snowbasin, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 30, source_id: wikipedia-snowbasin, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: powder-mountain
     name: Powder Mountain
@@ -191,6 +211,11 @@ resorts:
     elevation:
       base_ft: {value: 6900, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 8900, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "Lift served; 9,422 ft by hiking."}
+    terrain:
+      beginner_pct: {value: 25, source_id: wikipedia-powder-mountain, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-powder-mountain, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-powder-mountain, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: mt-bachelor
     name: Mt. Bachelor
@@ -212,6 +237,11 @@ resorts:
     elevation:
       base_ft: {value: 5700, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-11, confidence: published, note: "Northwest Express base; the Pine Marten Express base is 6,350 ft."}
       summit_ft: {value: 9065, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-11, confidence: published, note: "Top of Summit Express."}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 35, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 30, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 20, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-12, confidence: published}
 
   - id: timberline-lodge
     name: Timberline Lodge ski area
@@ -233,6 +263,11 @@ resorts:
     elevation:
       base_ft: {value: 4000, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 8540, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 20, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-12, confidence: published, note: "Article text: how Timberline categorizes its terrain with the full mountain open. A Forest Service environmental impact statement in the article gives a finer breakdown."}
+      intermediate_pct: {value: 50, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 30, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: mt-baker
     name: Mt. Baker Ski Area
@@ -255,6 +290,11 @@ resorts:
     elevation:
       base_ft: {value: 3500, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-11, confidence: published, note: "White Salmon base; Heather Meadows base is about 4,300 ft."}
       summit_ft: {value: 5089, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 24, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 45, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 31, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: bridger-bowl
     name: Bridger Bowl
@@ -297,6 +337,11 @@ resorts:
     elevation:
       base_ft: {value: 4464, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 6817, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 35, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 40, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 10, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-12, confidence: published}
 
   - id: alyeska
     name: Alyeska Resort
@@ -319,6 +364,11 @@ resorts:
     elevation:
       base_ft: {value: 250, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 2750, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: published, note: "Lift served; the summit is 3,939 ft."}
+    terrain:
+      beginner_pct: {value: 11, source_id: wikipedia-alyeska-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 52, source_id: wikipedia-alyeska-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 37, source_id: wikipedia-alyeska-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: bogus-basin
     name: Bogus Basin
@@ -340,6 +390,11 @@ resorts:
     elevation:
       base_ft: {value: 5790, source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: published, note: "Pine Creek (Chair 6); the main base area is 6,150 ft."}
       summit_ft: {value: 7582, source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 22, source_id: wikipedia-bogus-basin, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 45, source_id: wikipedia-bogus-basin, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 33, source_id: wikipedia-bogus-basin, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: montana-snowbowl
     name: Montana Snowbowl
@@ -386,6 +441,11 @@ resorts:
     elevation:
       base_ft: null       # infobox 7,408 ft conflicts with the text's 7,851 ft
       summit_ft: {value: 9862, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 10, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-12, confidence: published, note: "Article text; shares of the 2,602 acres of terrain."}
+      intermediate_pct: {value: 70, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 15, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 5, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-12, confidence: published}
 
   - id: mt-hood-meadows
     name: Mt. Hood Meadows
@@ -408,3 +468,8 @@ resorts:
     elevation:
       base_ft: {value: 4523, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-11, confidence: published, note: "Hood River Meadows base, the lowest point; the main lodge is 5,366 ft."}
       summit_ft: {value: 7300, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-11, confidence: published, note: "Infobox value; the text gives 7,305 ft at the top of Cascade Express."}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-12, confidence: published, note: "Article trails section."}
+      intermediate_pct: {value: 40, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 15, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 30, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-12, confidence: published}

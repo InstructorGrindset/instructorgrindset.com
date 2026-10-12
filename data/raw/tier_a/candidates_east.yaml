@@ -68,6 +68,11 @@ resorts:
     elevation:
       base_ft: {value: 1220, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 4386, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published, note: "Lift served; hike to terrain tops out at 4,650 ft."}
+    terrain:
+      beginner_pct: {value: 24, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 46, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 30, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   # ---------------------------------------------------------------- Vermont
   - id: killington
@@ -91,6 +96,11 @@ resorts:
     elevation:
       base_ft: {value: 1165, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Skyeship base."}
       summit_ft: {value: 4241, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value; the statistics section gives Killington Peak as 4,229 ft."}
+    terrain:
+      beginner_pct: {value: 28, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 33, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 39, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: pico
     tier_a_status: approved
@@ -258,6 +268,11 @@ resorts:
     elevation:
       base_ft: {value: 1850, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Mittersill base."}
       summit_ft: {value: 4080, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 21, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 47, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 32, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Infobox labels the black diamond share Expert; the article section is titled Expert and advanced (32%). Source combines advanced and expert."}
+      expert_pct: null
 
   - id: cranmore
     tier_a_status: approved
@@ -276,6 +291,11 @@ resorts:
       acres: {value: 170, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Article says over 170 acres."}
       vertical_ft: {value: 1200, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: published}
       lifts: {value: 7, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: published, note: "5 chairs and 2 surface lifts."}
+    terrain:
+      beginner_pct: {value: 28, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 44, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Infobox. The article text says 28% easy, 46% intermediate and 26% expert."}
+      advanced_pct: {value: 28, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Infobox. The article text gives 26% expert for the top tier."}
+      expert_pct: null
 
   - id: gunstock
     tier_a_status: approved
@@ -297,6 +317,11 @@ resorts:
     elevation:
       base_ft: {value: 867, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 2267, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 52, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 31, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 2, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
 
   # ---------------------------------------------------------------- Maine
   - id: sunday-river
@@ -319,6 +344,11 @@ resorts:
     elevation:
       base_ft: {value: 800, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3140, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 33, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 36, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 19, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 12, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
 
   - id: black-mountain-maine
     tier_a_status: approved
@@ -362,6 +392,11 @@ resorts:
     elevation:
       base_ft: {value: 520, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 1840, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 30, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published, note: "Article text (Terrain and Lifts)."}
+      intermediate_pct: {value: 35, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 30, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 5, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
 
   # ---------------------------------------------------------------- Michigan
   - id: boyne-mountain

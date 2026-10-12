@@ -207,6 +207,24 @@ resorts:
       source_id: wikipedia-vail-ski-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 18
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 29
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 53
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox labels this share advanced; the trails section gives 53% advanced/expert. Source combines advanced and expert."
+    expert_pct: null
 - id: beaver-creek
   name: Beaver Creek
   state: CO
@@ -260,6 +278,24 @@ resorts:
       source_id: wikipedia-beaver-creek-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 28
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 38
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 34
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert."
+    expert_pct: null
 - id: breckenridge
   name: Breckenridge
   state: CO
@@ -309,6 +345,27 @@ resorts:
       value: 12998
       source_id: wikipedia-breckenridge-ski-resort
       as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 14
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 31
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 19
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 36
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
       confidence: published
 - id: crested-butte
   name: Crested Butte
@@ -362,6 +419,24 @@ resorts:
       source_id: wikipedia-crested-butte-mountain-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 23
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 57
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 20
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert."
+    expert_pct: null
 - id: park-city
   name: Park City
   state: UT
@@ -416,6 +491,24 @@ resorts:
       source_id: wikipedia-park-city-mountain-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 7
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox, 324 trails. The trails section gives 348 trails at 15% beginner, 54% intermediate and 31% expert."
+    intermediate_pct:
+      value: 49
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 44
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
 - id: northstar
   name: Northstar California
   state: CA
@@ -463,6 +556,23 @@ resorts:
       source_id: wikipedia-northstar-california
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 13
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 60
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 27
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
 - id: kirkwood
   name: Kirkwood
   state: CA
@@ -510,6 +620,24 @@ resorts:
       source_id: wikipedia-kirkwood-mountain-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 12
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 30
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 58
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert."
+    expert_pct: null
 - id: stowe
   name: Stowe
   state: VT
@@ -563,6 +691,24 @@ resorts:
       source_id: wikipedia-stowe-mountain-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 16
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 55
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert. Shares sum to 101 as stated."
+    expert_pct: null
 - id: mount-snow
   name: Mount Snow
   state: VT
@@ -610,6 +756,28 @@ resorts:
       value: 3600
       source_id: wikipedia-mount-snow
       as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 16
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
+      confidence: published
+      note: "Article trails section; labeled Novice, More Difficult, Most Difficult and Expert."
+    intermediate_pct:
+      value: 66
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 17
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 1
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
       confidence: published
 - id: wildcat
   name: Wildcat Mountain
@@ -660,6 +828,24 @@ resorts:
       source_id: wikipedia-wildcat-mountain-ski-area
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 45
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert."
+    expert_pct: null
 - id: keystone
   name: Keystone
   state: CO
@@ -706,6 +892,24 @@ resorts:
       source_id: wikipedia-keystone-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 19
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 32
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 49
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox, 135 trails, labels this share advanced; the trails section gives 130 trails at 12% beginner, 39% intermediate and 49% advanced/expert. Source combines advanced and expert."
+    expert_pct: null
 - id: heavenly
   name: Heavenly
   state: CA
@@ -753,6 +957,23 @@ resorts:
       source_id: wikipedia-heavenly-mountain-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 20
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 45
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 35
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
 - id: stevens-pass
   name: Stevens Pass
   state: WA
@@ -802,6 +1023,23 @@ resorts:
       source_id: wikipedia-stevens-pass-ski-area
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 11
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 54
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 35
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
 - id: okemo
   name: Okemo
   state: VT
@@ -884,6 +1122,23 @@ resorts:
   elevation:
     base_ft: null
     summit_ft: null
+  terrain:
+    beginner_pct:
+      value: 29
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 44
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 27
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
 - id: hunter-mountain
   name: Hunter Mountain
   state: NY
@@ -933,6 +1188,27 @@ resorts:
       source_id: wikipedia-hunter-mountain-ski-area
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 30
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 15
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
 - id: mount-sunapee
   name: Mount Sunapee Resort
   state: NH
@@ -980,6 +1256,24 @@ resorts:
       source_id: wikipedia-mount-sunapee-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 26
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 48
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 26
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert. The article text says 26% easy, 49% intermediate and 25% advanced."
+    expert_pct: null
 - id: crotched-mountain
   name: Crotched Mountain
   state: NH
@@ -1018,6 +1312,24 @@ resorts:
       source_id: wikipedia-crotched-mountain-ski-and-ride
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 32
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 36
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 32
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert."
+    expert_pct: null
 - id: seven-springs
   name: Seven Springs Resort
   state: PA
@@ -1063,6 +1375,27 @@ resorts:
       value: 2994
       source_id: wikipedia-seven-springs-mountain-resort
       as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 35
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 40
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 15
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 10
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
       confidence: published
 - id: hidden-valley-pa
   name: Hidden Valley Resort
@@ -1204,6 +1537,27 @@ resorts:
       source_id: wikipedia-liberty-mountain-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 27
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 41
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 14
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 18
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
 - id: roundtop-mountain
   name: Roundtop Mountain Resort
   state: PA
@@ -1246,6 +1600,28 @@ resorts:
       source_id: wikipedia-roundtop-mountain-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 29
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 30
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 31
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 10
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source labels this double black diamond share Extremely Difficult."
 - id: whitetail
   name: Whitetail Resort
   state: PA
@@ -1288,6 +1664,24 @@ resorts:
       source_id: wikipedia-whitetail-ski-resort
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 27
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 50
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 18
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source also lists 5% terrain park. Recorded shares sum to 95."
+    expert_pct: null
 - id: jack-frost
   name: Jack Frost Ski Resort
   state: PA
@@ -1422,6 +1816,23 @@ resorts:
       source_id: wikipedia-afton-alps
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-afton-alps
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 50
+      source_id: wikipedia-afton-alps
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 25
+      source_id: wikipedia-afton-alps
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
 - id: alpine-valley-oh
   name: Alpine Valley Resort
   state: OH
@@ -1565,6 +1976,24 @@ resorts:
       source_id: wikipedia-mad-river-mountain
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 46
+      source_id: wikipedia-mad-river-mountain
+      as_of: 2026-10-12
+      confidence: published
+      note: "Article text, citing the resort mountain info page."
+    intermediate_pct:
+      value: 38
+      source_id: wikipedia-mad-river-mountain
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 16
+      source_id: wikipedia-mad-river-mountain
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
 - id: hidden-valley-mo
   name: Hidden Valley Resort
   state: MO
@@ -1608,6 +2037,24 @@ resorts:
       source_id: wikipedia-hidden-valley-ski-area-missouri
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 33
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 19
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source also lists 13% terrain parks. Recorded shares sum to 77, or 90 with the terrain park share."
+    expert_pct: null
 - id: snow-creek
   name: Snow Creek
   state: MO
@@ -1681,6 +2128,24 @@ resorts:
   elevation:
     base_ft: null
     summit_ft: null
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 55
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 20
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox. The article text gives 10% advanced and 10% freestyle terrain park."
+    expert_pct: null
 - id: mount-brighton
   name: Mount Brighton
   state: MI
@@ -1728,6 +2193,24 @@ resorts:
       source_id: wikipedia-mount-brighton
       as_of: '2026-10-11'
       confidence: published
+  terrain:
+    beginner_pct:
+      value: 30
+      source_id: wikipedia-mount-brighton
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 40
+      source_id: wikipedia-mount-brighton
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-mount-brighton
+      as_of: 2026-10-12
+      confidence: published
+      note: "Article stats section. Source combines advanced and expert."
+    expert_pct: null
 - id: wilmot-mountain
   name: Wilmot Mountain
   state: WI

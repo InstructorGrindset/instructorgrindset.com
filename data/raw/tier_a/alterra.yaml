@@ -46,6 +46,11 @@ resorts:
     elevation:
       base_ft: {value: 6900, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 10568, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 14, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published, note: "Infobox, 170 trails. The statistics section gives 182 trails at about 12% beginner, 40% intermediate and 48% advanced."}
+      intermediate_pct: {value: 42, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 44, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: winter-park
     name: Winter Park Resort
@@ -67,6 +72,11 @@ resorts:
     elevation:
       base_ft: {value: 9000, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 12060, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 8, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 18, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: null
+      expert_pct: {value: 3, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published, note: "Source lists five shares: 8% beginner, 18% intermediate, 19% advanced (square diamond), 52% most difficult (black diamond), 3% expert (double black diamond). The 19% and 52% tiers sit between intermediate and expert, so advanced is left empty. Recorded shares sum to 29."}
 
   - id: arapahoe-basin
     name: Arapahoe Basin
@@ -88,6 +98,11 @@ resorts:
     elevation:
       base_ft: {value: 10780, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 13050, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 7, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 20, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 49, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 24, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share Extreme."}
 
   - id: palisades-tahoe
     name: Palisades Tahoe
@@ -132,6 +147,11 @@ resorts:
     elevation:
       base_ft: {value: 7953, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: "At Eagle Lodge."}
       summit_ft: {value: 11053, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value; the article body says 11,059 ft."}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 48, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 37, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: deer-valley
     name: Deer Valley Resort
@@ -154,6 +174,11 @@ resorts:
     elevation:
       base_ft: {value: 6530, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 9570, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 35, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published, note: "Infobox. The article text, citing the 2024/25 press kit, says 30% beginner and 44% intermediate."}
+      intermediate_pct: {value: 44, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 21, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: crystal-mountain
     name: Crystal Mountain
@@ -175,6 +200,11 @@ resorts:
     elevation:
       base_ft: {value: 3912, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 7012, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 11, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 54, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: stratton
     name: Stratton Mountain Resort
@@ -197,6 +227,11 @@ resorts:
     elevation:
       base_ft: {value: 1872, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3875, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 40, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Article text, citing the resort mountain stats page; labeled easy."}
+      intermediate_pct: {value: 35, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 25, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: solitude
     name: Solitude Mountain Resort
@@ -217,6 +252,11 @@ resorts:
     elevation:
       base_ft: {value: 7988, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 10488, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 10, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 50, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Facts and figures section. Source combines advanced and expert."}
+      expert_pct: null
 
   - id: schweitzer
     name: Schweitzer Mountain
@@ -237,6 +277,11 @@ resorts:
     elevation:
       base_ft: {value: 3960, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published, note: "Lowest chair (Stella); the main village sits at 4,700 ft."}
       summit_ft: {value: 6400, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 20, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published, note: "Infobox. The statistics section gives 10% beginner, 40% intermediate, 35% advanced and 15% expert."}
+      intermediate_pct: {value: 40, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 5, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published, note: "Infobox. The statistics section gives 15% expert."}
 
   - id: sugarbush
     name: Sugarbush Resort
@@ -297,6 +342,11 @@ resorts:
     elevation:
       base_ft: {value: 7545, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 10090, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 45, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: bear-mountain
     name: Bear Mountain
@@ -317,6 +367,11 @@ resorts:
     elevation:
       base_ft: {value: 7140, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 8805, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Source lists a separate 15% low intermediate share (blue square) that is not included here. Recorded shares sum to 85."}
+      advanced_pct: {value: 30, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: snow-summit
     name: Snow Summit
@@ -337,6 +392,11 @@ resorts:
     elevation:
       base_ft: {value: 6965, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 8174, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 10, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published, note: "Source lists a separate 25% low intermediate share (blue square) that is not included here. Recorded shares sum to 75."}
+      advanced_pct: {value: 25, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
 
   - id: snow-valley
     name: Snow Valley Mountain Resort
@@ -357,6 +417,11 @@ resorts:
     elevation:
       base_ft: {value: 6800, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 7841, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 14, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 45, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 31, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 10, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share Experts only."}
 
   - id: palisades-tahoe-alpine-meadows
     name: Palisades Tahoe (Alpine Meadows)
@@ -378,3 +443,8 @@ resorts:
     elevation:
       base_ft: {value: 6835, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 8637, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 25, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
