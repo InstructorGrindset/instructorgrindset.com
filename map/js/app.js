@@ -75,8 +75,10 @@ function summary(index, view) {
 
 async function main() {
   let index;
+  performance.mark('careermap:start');
   try {
     index = await loadAll();
+    performance.mark('careermap:data');
   } catch (err) {
     console.warn('[map] data load failed:', err.message);
     const panel = createPanel(els.content, null, { onCompare: () => {} });
@@ -185,6 +187,8 @@ async function main() {
   els.listToggle.hidden = false;
 
   router.start();
+  performance.mark('careermap:panel');
+  if (mapCtl) mapCtl.map.once('load', () => performance.mark('careermap:map'));
   els.panel.setAttribute('aria-busy', 'false');
   // Off the critical path: state outlines draw once the map is up.
   if (mapCtl) {

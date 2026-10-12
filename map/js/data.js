@@ -112,6 +112,7 @@ export async function loadAll() {
     loadDefinitions(),
   ]);
 
+  performance.mark('careermap:fetched');
   const resortsFile = parseOrThrow(ResortsFile, resortsRaw, 'resorts.json');
   const resortList = parseEach(Resort, resortsFile.resorts, 'resorts.json resorts', (r) => r && r.id);
   const clusterFeatures = parseEach(ClusterFeature,

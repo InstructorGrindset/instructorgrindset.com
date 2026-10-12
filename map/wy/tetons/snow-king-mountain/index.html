@@ -46,7 +46,13 @@
         var t=document.getElementById("sidebar-placeholder");
         fetch("/partials/sidebar.html?v=13")
           .then(function(r){return r.text()})
-          .then(function(h){var d=document.createElement("div");d.innerHTML=h.trim().replace(/<img /g,'<img loading="lazy" decoding="async" ');t.replaceWith(d.firstElementChild)})
+          .then(function(h){
+            /* Map page only: the drawer logo (about 500 KB) loads when the drawer first opens, not with the map. */
+            var d=document.createElement("div");d.innerHTML=h.trim().replace(/<img ([^>]*?)src="/g,'<img $1data-src="');
+            var el=d.firstElementChild;t.replaceWith(el);
+            var show=function(){el.querySelectorAll("img[data-src]").forEach(function(i){i.src=i.getAttribute("data-src");i.removeAttribute("data-src")})};
+            var hb=el.querySelector(".hamburger");if(hb){hb.addEventListener("click",show,{once:true})}else{show()}
+          })
           .catch(function(){t.innerHTML="<div style='padding:1rem;color:#fca5a5'>Navigation failed to load.</div>"});
       })();
     </script>

@@ -12,7 +12,7 @@ Named clusters with at least one Tier A resort. The per state fallback clusters 
 
 Still needed: Adirondacks (`adirondacks`), Alaska (`alaska`), Appalachia (`appalachia`), Cascades (`cascades`), Catskills (`catskills`), Central Oregon (`central-oregon`), Central Vermont (`central-vermont`), Eastern Sierra (`eastern-sierra`), I 70 Corridor (`i70-corridor`), Inland Northwest (`inland-northwest`), Lake Tahoe (`lake-tahoe`), Laurel Highlands (`laurel-highlands`), Mount Hood (`mount-hood`), New York Metro (`new-york-metro`), Northern Colorado (`northern-colorado`), Northern New Mexico (`northern-new-mexico`), Northern Vermont (`northern-vermont`), Poconos (`poconos`), Roaring Fork Valley (`roaring-fork`), Southern California (`southern-california`), Southern Vermont (`southern-vermont`), Southwest Colorado (`southwest-colorado`), Southwest Montana (`southwest-montana`), Tetons (`tetons`), Wasatch (`wasatch`), Western Maine (`western-maine`), White Mountains (`white-mountains`), Wood River Valley (`wood-river`).
 
-## Drafts (28; 0 reviewed)
+## Drafts (143; 0 reviewed)
 
 ### Cluster: Adirondacks (`adirondacks`)
 
@@ -349,3 +349,1815 @@ File: `clusters.yaml`
 **Sources:** [Wood River Valley (Wikipedia)](https://en.wikipedia.org/wiki/Wood_River_Valley), [Bald Mountain (Idaho) (Wikipedia)](https://en.wikipedia.org/wiki/Bald_Mountain_(Idaho)), [Ketchum, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Ketchum,_Idaho), [Sun Valley, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Sun_Valley,_Idaho), [Hailey, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Hailey,_Idaho), [Blaine County, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Blaine_County,_Idaho)
 
 Approve: `python -m pipeline.editorial approve cluster wood-river --by Alexandre`
+
+### Resort: Afton Alps (`afton-alps`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Afton Alps is a ski area on the St. Croix River in Denmark Township, Washington County, south of Afton, Minnesota. Brothers Paul and Bob Augustine and fellow farmer Paul Furlong opened it in 1962, and by 1976 it claimed over 200,000 visitors a year. Vail Resorts bought it for $20 million in 2012, aiming to build season pass loyalty that would bring skiers to its western resorts. It has nearly 300 skiable acres, 350 feet of vertical and 36 trails.
+
+**Culture**
+
+> Afton is a city of 2,955 people (2020 census) known for Afton Alps, the largest ski and snowboard area in the Twin Cities metropolitan area. Afton State Park and the town's small town feel draw day trip tourism. Olympic cross country gold medalist Jessie Diggins is from Afton. Vail lists Minneapolis among the metro markets its Midwest ski areas draw from.
+
+**Sources:** [Afton Alps (Wikipedia)](https://en.wikipedia.org/wiki/Afton_Alps), [Afton, Minnesota (Wikipedia)](https://en.wikipedia.org/wiki/Afton,_Minnesota), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort afton-alps --by Alexandre`
+
+### Resort: Alpine Valley Resort (`alpine-valley-oh`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Alpine Valley Ski Area is in Munson Township, Geauga County, Ohio, east of Chesterland. Thomas D. Apthorp built it in 1965 and ran it until 2007. It sits in Ohio's snow belt and gets about 120 inches of natural snow a year, the most of any Ohio ski resort, with an average season of 93 days. Vail Resorts announced its acquisition in July 2019. It has nine trails on 72 acres, Ohio's largest half pipe and night skiing.
+
+**Culture**
+
+> Alpine Valley's ski school has over 70 instructors and is registered with the Professional Ski Instructors of America. Vail lists Cleveland among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families.
+
+**Sources:** [Alpine Valley Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Alpine_Valley_Ski_Area), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort alpine-valley-oh --by Alexandre`
+
+### Resort: Alta Ski Area (`alta`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Alta Ski Area sits in the town of Alta at the head of Little Cottonwood Canyon, Utah. It opened its first lift on January 15, 1939, making it one of the oldest ski areas in the U.S. It averages 543 inches of snow a year and is known for long, steep fall line pitches such as High Rustler and the Baldy Chutes. Alta is one of three U.S. ski areas that prohibit snowboarding. Private shareholders own it, led by the Laughlin family with 51 percent.
+
+**Culture**
+
+> Alta views itself as a locals and family oriented ski area, even with a reputation as one of the most challenging in bounds areas in the world. The town of Alta had 228 residents in 2020, and the ski area draws about 500,000 visitors a year. The base hotels are independently owned. In 1937 Salt Lake City lawyer Joe Quinney and local businessmen formed the Utah Winter Sports Association to develop skiing at Alta. A lift in Snowbird's Mineral Basin links the two areas.
+
+**Sources:** [Alta Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Alta_Ski_Area), [Alta, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Alta,_Utah)
+
+Approve: `python -m pipeline.editorial approve resort alta --by Alexandre`
+
+### Resort: Alyeska Resort (`alyeska`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Alyeska Resort sits in Girdwood, about 30 miles from downtown Anchorage, on Mount Alyeska in the Chugach Mountains. It is the largest ski area in Alaska. The first chairlift opened in 1959, and the 1960 Roundhouse at the top is on the National Register of Historic Places. The mountain has a much higher share of advanced and expert runs than most North American mountains, and snowfall can top 650 inches at the top of the Glacier Bowl Express. In October 2018 the resort announced a contract to sell substantially all its assets to Pomeroy Lodging.
+
+**Culture**
+
+> Girdwood began as a supply town for 1890s gold miners and moved up the valley after the 1964 earthquake. The resort became an international destination and long shaped the town around seasonal vacation homes. The Alyeska Prince Hotel, opened in the 1990s, shifted Girdwood toward a year round economy. Housing for resort workers is a recurring debate, and many workers over the years have camped illegally on public lands. The valley had an estimated 1,742 residents in 2019.
+
+**Sources:** [Alyeska Resort (Wikipedia)](https://en.wikipedia.org/wiki/Alyeska_Resort), [Girdwood, Anchorage, Alaska (Wikipedia)](https://en.wikipedia.org/wiki/Girdwood,_Anchorage,_Alaska)
+
+Approve: `python -m pipeline.editorial approve resort alyeska --by Alexandre`
+
+### Resort: Arapahoe Basin (`arapahoe-basin`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Arapahoe Basin, often called A Basin or The Basin, sits south of Loveland Pass on U.S. Highway 6 in Summit County, Colorado, about 68 miles west of Denver. It is known for its extended season and extreme terrain, and it mostly draws advanced and expert skiers. Lifts often run from mid October into June, and the 2018 to 2019 season lasted 258 days. Larry and Marnie Jump, Max Dercum and Sandy Shaufler started it, and it opened in 1946. Alterra Mountain Company bought it in November 2024.
+
+**Culture**
+
+> Arapahoe Basin left Vail Resorts' Epic Pass after the 2018 to 2019 season and joined the Ikon Pass. Its Il Rifugio, at 12,456 feet, is the highest elevation restaurant in North America. Summit County had 31,055 residents in 2020, and 58.7 percent of its housing units were vacant. In nearby Frisco, housing costs by 2025 had forced many workers, ski instructors among them, into homelessness while they kept their jobs.
+
+**Sources:** [Arapahoe Basin (Wikipedia)](https://en.wikipedia.org/wiki/Arapahoe_Basin), [Summit County, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Summit_County,_Colorado), [Frisco, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Frisco,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort arapahoe-basin --by Alexandre`
+
+### Resort: Aspen Highlands (`aspen-highlands`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Aspen Highlands sits in Aspen, Colorado, and is famous for Highland Bowl and its other experts only terrain. Aspen resident Whip Jones founded it in 1958. The Aspen Skiing Company took over ownership and operation in 1993, and Highlands is now one of the four Aspen Snowmass areas. Most Highland Bowl terrain is reached by hiking from the top of Loge Peak, and the hike brings the skiable vertical to 4,342 feet. Since December 2017 its trail map has shown intermediate and expert terrain only.
+
+**Culture**
+
+> Highlands draws expert skiers to the hike into Highland Bowl, which fully opened in 2002. A memorial near the top of the Loge Peak lift honors three ski patrollers killed in a 1984 avalanche. Aspen workers face severe housing costs. Rising property values and second homes push many workers into commutes from Snowmass, Basalt, Carbondale and Glenwood Springs, and even deed restricted employee homes can cost close to $1 million.
+
+**Sources:** [Aspen Highlands (Wikipedia)](https://en.wikipedia.org/wiki/Aspen_Highlands), [Aspen Skiing Company (Wikipedia)](https://en.wikipedia.org/wiki/Aspen_Skiing_Company), [Aspen, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Aspen,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort aspen-highlands --by Alexandre`
+
+### Resort: Aspen Mountain (`aspen-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Aspen Mountain, called Ajax by many locals, rises directly above the city of Aspen in Pitkin County, Colorado. Walter Paepcke founded it in 1946 as the first ski area of the Aspen Skiing Company, and its first chairlift was then the longest in the world. Skiers ride up from the town center and ski the Little Nell run back into town. At 673 acres it is much smaller than nearby Snowmass. It is one of the four Aspen Snowmass areas the Aspen Skiing Company operates.
+
+**Culture**
+
+> The mountain keeps a homespun culture rooted in Paepcke's 1940s vision for Aspen. Homemade memorials to figures such as John Denver and Hunter S. Thompson dot its trees. Aspen grew from a silver mining camp into a ski town and cultural center, home to the Aspen Music Festival and School and the Aspen Institute. Since the 1970s it has drawn celebrities and the wealthy. Many people from the U.S. and abroad vacation there, especially in winter.
+
+**Sources:** [Aspen Mountain (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Aspen_Mountain_(ski_area)), [Aspen, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Aspen,_Colorado), [Aspen Skiing Company (Wikipedia)](https://en.wikipedia.org/wiki/Aspen_Skiing_Company)
+
+Approve: `python -m pipeline.editorial approve resort aspen-mountain --by Alexandre`
+
+### Resort: Attitash Mountain (`attitash`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Attitash Mountain Resort is on U.S. Route 302 in Bartlett, New Hampshire, near North Conway. It has two peaks with 68 runs: Attitash keeps narrow, old New England style trails, and Bear Peak has wider trails and more glades. It operates under a special use permit with the White Mountain National Forest. Vail Resorts bought it from Peak Resorts in 2019, and tickets work at its sister resort Wildcat. Vail says its four New Hampshire ski areas serve guests throughout New England.
+
+**Culture**
+
+> Bartlett is a town of 3,200 people (2020 census) surrounded by the White Mountain National Forest, where tourism has long been a principal business. It is also home to the Story Land theme park and the Bear Notch Ski Touring center. Neighboring Conway is the commercial hub of Carroll County, with tourism as its largest economic engine and Memorial Hospital as its largest employer as of 2002.
+
+**Sources:** [Attitash Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Attitash_Mountain_Resort), [Bartlett, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Bartlett,_New_Hampshire), [Conway, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Conway,_New_Hampshire), [Wildcat Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Wildcat_Mountain_Ski_Area), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort attitash --by Alexandre`
+
+### Resort: Bear Mountain (`bear-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Bear Mountain sits in the city of Big Bear Lake in the San Bernardino National Forest of Southern California, about 2.4 miles east of Snow Summit. It was established in 1941 and has carried the names Moonridge, Goldmine and Big Bear Mountain. It is known for progressive terrain: it opened the first freestyle terrain park in North America, Outlaw, in 1992, and it holds the only halfpipes and the highest lift served peak in Southern California. It is part of Big Bear Mountain Resort within Alterra Mountain Company.
+
+**Culture**
+
+> Bear Mountain is known for a youthful atmosphere and has the largest learning areas in Southern California. Big Bear Lake had 5,046 residents in 2020, yet visitors in the greater Big Bear Valley often top 100,000 on weekends. 75.2 percent of the city's housing units were vacant in 2020. Free Mountain Transit buses run several routes in the valley.
+
+**Sources:** [Bear Mountain (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Bear_Mountain_(ski_area)), [Big Bear Lake, California (Wikipedia)](https://en.wikipedia.org/wiki/Big_Bear_Lake,_California)
+
+Approve: `python -m pipeline.editorial approve resort bear-mountain --by Alexandre`
+
+### Resort: Beaver Creek (`beaver-creek`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Beaver Creek Resort sits about two miles south of Avon in Eagle County, Colorado. It links three villages: Beaver Creek Village, Bachelor Gulch and Arrowhead. Vail Resorts owns and operates it. Beaver Creek hosted the World Ski Championships in 1989, 1999 and 2015, and it holds the Birds of Prey World Cup downhill early each season. Vail Resorts ranks it the thirteenth most visited mountain resort in the U.S. for the 2025/2026 season.
+
+**Culture**
+
+> Vail Resorts describes Beaver Creek as a European style resort with several villages and a children's ski school with its own children's gondola. From 2026/2027 every private lesson there becomes the Epic Ascent product, with concierge support. Avon, the gateway town, had 6,072 residents in 2020. Its largest employers in 2020 were the Westin Riverfront Resort and Spa, Walmart and City Market. Eagle County Airport is 27 miles west of Avon and Denver International Airport is 130 miles east.
+
+**Sources:** [Beaver Creek Resort (Wikipedia)](https://en.wikipedia.org/wiki/Beaver_Creek_Resort), [Avon, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Avon,_Colorado), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort beaver-creek --by Alexandre`
+
+### Resort: Berkshire East Mountain Resort (`berkshire-east`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Berkshire East Mountain Resort is a medium sized ski area on Mount Institute in Charlemont and Hawley, Massachusetts, in the Berkshires. It began as Thunder Mountain in the early 1960s. It is known for racing programs that have trained skiers up to the US Ski Team, and it often hosts USSA and MIAA slalom and giant slalom championships. In 2011 a wind turbine made it the first ski area in the world fully powered by onsite renewable energy. Owner Jon Shaefer is CEO of Bear Den Partners, which bought Burke in 2025.
+
+**Culture**
+
+> Charlemont is a town of 1,185 people (2020 census) on the Mohawk Trail and the Deerfield River, where whitewater rafting is popular. Berkshire East is the only public alpine ski area in Franklin County. In summer the resort runs zip lines, the Thunderbolt mountain coaster and a downhill bike park. Its season passes include skiing at Burke Mountain in Vermont.
+
+**Sources:** [Berkshire East Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Berkshire_East_Ski_Resort), [Charlemont, Massachusetts (Wikipedia)](https://en.wikipedia.org/wiki/Charlemont,_Massachusetts)
+
+Approve: `python -m pipeline.editorial approve resort berkshire-east --by Alexandre`
+
+### Resort: Big Boulder Mountain (`big-boulder`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Big Boulder Mountain is the older of the two ski areas at Jack Frost and Big Boulder in Kidder Township, in the Pocono Mountains. It opened in 1947, and employee John Guresh is credited with developing the first usable snowmaking equipment there in the 1950s. Its three main terrain parks include LOVE Park, inspired by the Philadelphia skateboarding spot. In the 2020 to 2021 season Vail Resorts cut back the parks and marketed Big Boulder as a learning hill.
+
+**Culture**
+
+> Big Boulder shares its township and owner with Jack Frost. Kidder Township had 1,935 people at the 2010 census. Vail says its Mid Atlantic ski areas serve guests from Philadelphia, Pittsburgh, central and southern New Jersey, Baltimore and Washington, D.C. The lower lodge at Big Boulder Park has an outdoor grill, a bar and a pro shop.
+
+**Sources:** [Jack Frost and Big Boulder Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Jack_Frost%E2%80%93Big_Boulder_Ski_Resort), [Kidder Township, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Kidder_Township,_Pennsylvania), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort big-boulder --by Alexandre`
+
+### Resort: Big Sky Resort (`big-sky`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Big Sky Resort sits on Lone Mountain in Big Sky, Montana, reached from Bozeman through Gallatin Canyon. It has 5,850 acres and 4,350 feet of vertical, and its Lone Peak Tram reaches expert terrain from the 11,166 foot summit. Former NBC anchor Chet Huntley founded the resort, which opened in December 1973. Boyne Resorts bought it in 1976 and owns it today. In 2013 Big Sky added the terrain of neighboring Moonlight Basin. It has one of the largest chairlift fleets in North America.
+
+**Culture**
+
+> Tourism is the main industry of Big Sky, an unincorporated community of 3,591 people in 2020, up from 2,308 in 2010. In 2020, 57.3 percent of its housing units were vacant. Bozeman, the fourth largest city in Montana, lies about 45 miles away. The Skyline bus links Bozeman and Big Sky, and Bozeman Yellowstone International Airport serves both. Big Sky shares a five mile border with the private Yellowstone Club, and the two lift systems connect.
+
+**Sources:** [Big Sky Resort (Wikipedia)](https://en.wikipedia.org/wiki/Big_Sky_Resort), [Big Sky, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Big_Sky,_Montana), [Bozeman, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Bozeman,_Montana), [Yellowstone Club (Wikipedia)](https://en.wikipedia.org/wiki/Yellowstone_Club)
+
+Approve: `python -m pipeline.editorial approve resort big-sky --by Alexandre`
+
+### Resort: Big SNOW American Dream (`big-snow-american-dream`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Big SNOW American Dream is an indoor ski and snowboard park inside the American Dream complex at the Meadowlands Sports Complex in East Rutherford, New Jersey. It opened on December 5, 2019, as the first indoor ski park in North America. Triple Five Group owns it, and Snow Operating, which also runs Mountain Creek, operates it. The 4 acre slope holds real snow at 28 F year round, with three trails, a terrain park, a quad chairlift and lessons. Guests book time slots in advance.
+
+**Culture**
+
+> American Dream is the second largest mall in the United States, with about 450 retail tenants as of 2024, a Nickelodeon Universe theme park and a water park. Big Snow hired 300 workers ahead of its opening. Opening day skiers and riders included Lindsey Vonn, Donna Weinbrecht and Red Gerard.
+
+**Sources:** [Big Snow American Dream (Wikipedia)](https://en.wikipedia.org/wiki/Big_Snow_American_Dream), [American Dream (shopping mall) (Wikipedia)](https://en.wikipedia.org/wiki/American_Dream_(shopping_mall))
+
+Approve: `python -m pipeline.editorial approve resort big-snow-american-dream --by Alexandre`
+
+### Resort: Black Mountain of Maine (`black-mountain-maine`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Black Mountain of Maine is a ski area in Rumford best known for its Nordic skiing. Rumford's Chisholm Ski Club opened it in 1962, and its cross country trails, designed by Rumford native and two time Olympian Chummy Broomhall, have hosted US cross country national championships in 1993, 1999, 2003 and 2004. The Maine Winter Sports Center bought it in 2003 and added two chairlifts, raising the vertical drop to 1,150 feet. It joined the Indy Pass in 2022.
+
+**Culture**
+
+> Rumford is a mill town of 5,858 people (2020 census) that has made paper since 1893 and is home to ND Paper's Rumford Mill. Skiing has a long history in town: residents housed the competitors when Rumford held the cross country events of the 1950 FIS Nordic World Ski Championships, and two Rumford skiers made the 1952 Olympic team. Longtime local skiers called the 2005 opening of the summit chair one of the most exciting days of their lives.
+
+**Sources:** [Black Mountain of Maine (Wikipedia)](https://en.wikipedia.org/wiki/Black_Mountain_of_Maine), [Rumford, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Rumford,_Maine)
+
+Approve: `python -m pipeline.editorial approve resort black-mountain-maine --by Alexandre`
+
+### Resort: Bogus Basin (`bogus-basin`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Bogus Basin sits in Boise County, Idaho, 16 road miles north of Boise, on the Boise Ridge above the Treasure Valley. Alf Engen chose the site in 1939, and it opened in December 1942. The Bogus Basin Recreation Association, a nonprofit, operates it on private and leased national forest land. It has 2,600 acres, 7 chairlifts, night skiing on 165 acres and 23 miles of Nordic trails. In 1998 it cut its adult season pass from $500 to $199, and resorts from coast to coast then lowered their pass prices.
+
+**Culture**
+
+> Bogus Basin overlooks Boise and the Treasure Valley, and its 1998 pass cut lifted skier visits from under 192,000 to over 303,000. Boise's metro area had about 476,000 people in 2024 and has been one of the fastest growing in the U.S. Major employers include Micron Technology, the state government and St. Luke's. Agribusiness magnate J. R. Simplot helped save the area when it struggled with debts in 1953, and the main lodge carries his name.
+
+**Sources:** [Bogus Basin (Wikipedia)](https://en.wikipedia.org/wiki/Bogus_Basin), [Boise, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Boise,_Idaho)
+
+Approve: `python -m pipeline.editorial approve resort bogus-basin --by Alexandre`
+
+### Resort: Boston Mills (`boston-mills`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Boston Mills is one of two sister ski areas, with Brandywine, in Peninsula, Ohio, inside Cuyahoga Valley National Park. Both opened independently in 1963, and Boston Mills' owners bought Brandywine in 1990. Peak Resorts bought the pair in 2002, and Vail Resorts has operated them since acquiring Peak in 2019. Boston Mills has the Tiger run, the steepest slope in Ohio, and holds an annual Winter Carnival with a Slosh Pit and a costume contest.
+
+**Culture**
+
+> In 2022 a staff shortage, tied to COVID 19 and a starting wage of $11.25 an hour, left only Boston Mills open at the start of a delayed season, and local skiers complained of long lines. Vail then raised starting pay to $20 an hour. Vail lists Cleveland among the metro markets its Midwest ski areas draw from.
+
+**Sources:** [Boston Mills/Brandywine Ski Resorts (Wikipedia)](https://en.wikipedia.org/wiki/Boston_Mills/Brandywine_Ski_Resorts), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort boston-mills --by Alexandre`
+
+### Resort: Boyne Mountain Resort (`boyne-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Boyne Mountain Resort is a ski resort near Boyne Falls and Boyne City in northern Michigan, operated by Boyne Resorts. Everett Kircher, Jim Christianson and John Norton bought the site for $1 in 1948 and opened it in 1949. It still uses parts of the world's first chairlift, built for Sun Valley in 1936. With Boyne Highlands it introduced the world's first triple (1963) and quad (1965) chairlifts. Its centerpiece is the Mountain Grand Lodge and Spa, and Avalanche Bay is Michigan's largest indoor water park.
+
+**Culture**
+
+> Boyne Falls is a village of 358 people (2020 census) in Charlevoix County, and the resort sits just southeast of it. Beyond skiing, the resort runs two golf courses, a zip line tour, the Avalanche Bay water park and SkyBridge Michigan, a timber towered suspension bridge that opened in 2022. Boyne Mountain has ten chairlifts, 60 runs and four terrain parks.
+
+**Sources:** [Boyne Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Boyne_Mountain_Resort), [Boyne Falls, Michigan (Wikipedia)](https://en.wikipedia.org/wiki/Boyne_Falls,_Michigan)
+
+Approve: `python -m pipeline.editorial approve resort boyne-mountain --by Alexandre`
+
+### Resort: Brandywine (`brandywine`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Brandywine is the sister ski area of Boston Mills in Peninsula, Ohio, about two miles away inside Cuyahoga Valley National Park. It opened in 1963 as a competitor and came under the same owner in 1990. Peak Resorts bought both in 2002, and Vail Resorts has operated them since acquiring Peak in 2019. Brandywine has Polar Blast, the largest tubing park in Northeast Ohio, and added the Ram Quad chairlift for the 2022 to 2023 season.
+
+**Culture**
+
+> The two resorts share 18 trails and 11 chairlifts and sit five minutes apart by car. In 2022 a staff shortage at the pair, tied to COVID 19 and an $11.25 starting wage, kept Brandywine closed at the start of the season; Vail then raised starting pay to $20 an hour. Vail lists Cleveland among the metro markets its Midwest ski areas draw from.
+
+**Sources:** [Boston Mills/Brandywine Ski Resorts (Wikipedia)](https://en.wikipedia.org/wiki/Boston_Mills/Brandywine_Ski_Resorts), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort brandywine --by Alexandre`
+
+### Resort: Breckenridge (`breckenridge`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Breckenridge Ski Resort spreads across five peaks of the Tenmile Range above the town of Breckenridge, the county seat of Summit County, Colorado. Its base sits at 9,600 feet, just west of the Continental Divide. Skiing began on Peak 8 in December 1961. The resort installed the world's first high speed detachable quad in 1981. Vail Resorts owns and operates it and ranks it the third most visited mountain resort in the U.S. for the 2025/2026 season.
+
+**Culture**
+
+> Breckenridge was founded in 1859 to serve gold miners, and historic clapboard and log buildings line Main Street. The town had 5,078 residents in 2020 and many part time residents with vacation homes; 69.1 percent of its housing units were vacant. Breckenridge holds Ullr Fest each December, honoring the Norse god Ullr, and the Breckenridge Festival of Film each September. Vail Resorts owns half of Breckenridge Terrace, an employee housing complex.
+
+**Sources:** [Breckenridge Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Breckenridge_Ski_Resort), [Breckenridge, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Breckenridge,_Colorado), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort breckenridge --by Alexandre`
+
+### Resort: Bridger Bowl (`bridger-bowl`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Bridger Bowl is a locally owned nonprofit ski area in the Bridger Range, 16 miles north of Bozeman, Montana. It opened to the public in 1955 as Bozeman's first ski area. It is known for The Ridge, expert hike terrain that requires an avalanche beacon and shovel. The Schlasman's lift, opened for 2008 to 2009, added 311 acres of expert only terrain. Visitation reached a record 377,663 skiers in the 2022 to 2023 season.
+
+**Culture**
+
+> Bridger Bowl serves the local population of Gallatin County, including Montana State University, and it aims to give locals affordable skiing. Since 1988 a blue beacon atop the Baxter Hotel in downtown Bozeman flashes when the area gets two inches of new snow. Montana State has hosted the NCAA Skiing Championships eight times, all at Bridger Bowl. Bozeman had 53,293 residents in 2020, and its top employers include Bozeman Health and Montana State University.
+
+**Sources:** [Bridger Bowl Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Bridger_Bowl_Ski_Area), [Bozeman, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Bozeman,_Montana)
+
+Approve: `python -m pipeline.editorial approve resort bridger-bowl --by Alexandre`
+
+### Resort: Brighton Ski Resort (`brighton`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Brighton Ski Resort sits in Big Cottonwood Canyon in Brighton, Utah, about 30 miles from downtown Salt Lake City. It was the first ski resort in Utah, started in 1936 when Alpine Ski Club members built a rope tow from wire and an old elevator motor. Boyne Resorts owns and operates it. Boyne bought Brighton in 1986, sold it in 2007 while leasing it back, and bought it again in May 2018. The whole resort sits on national forest land.
+
+**Culture**
+
+> From the early 1990s through the 2000s, many top professional and amateur snowboarders called Brighton home. The Disney Channel movies Johnny Tsunami and Cloud 9 were filmed here. Brighton and neighboring Solitude share the Solbright Pass. The town of Brighton had 432 residents in 2020 and is part of the Salt Lake City metro area.
+
+**Sources:** [Brighton Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Brighton_Ski_Resort), [Brighton, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Brighton,_Utah)
+
+Approve: `python -m pipeline.editorial approve resort brighton --by Alexandre`
+
+### Resort: Buck Hill (`buck-hill`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Buck Hill is a ski hill in Burnsville, Minnesota, about 15 miles south of downtown Minneapolis beside Interstate 35. Chuck Stone opened it in 1954, and David and Corrine Solner own it. Its east face has 310 feet of vertical and night skiing. Erich Sailer, its racing coach since 1969 and a 2006 National Ski Hall of Fame inductee, coached World Cup racers Lindsey Vonn and Kristina Koznick, who learned to race here. Paula Moltzan also began racing at Buck Hill.
+
+**Culture**
+
+> Buck Hill is one of three alpine ski areas in the Twin Cities metropolitan area, with Afton Alps and Hyland. Homes cover the other sides of the hill, and a municipal water tower shares the summit. It hosted pro ski tour races during the 1973 Saint Paul Winter Carnival, and Minneapolis band The Replacements named a song after it.
+
+**Sources:** [Buck Hill (Wikipedia)](https://en.wikipedia.org/wiki/Buck_Hill)
+
+Approve: `python -m pipeline.editorial approve resort buck-hill --by Alexandre`
+
+### Resort: Burke Mountain Ski Area (`burke`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Burke Mountain Ski Area is a mid size resort in Vermont's Northeast Kingdom, in the town of Burke near the village of East Burke. It is home to Burke Mountain Academy, founded in 1970 as the first ski academy in North America, whose alumni include Mikaela Shiffrin. The owners of Jay Peak bought Burke in 2012, and it entered federal receivership in 2016 in the EB 5 fraud case. Bear Den Partners bought it in April 2025 for a reported $11.5 million and announced plans to invest up to $20 million in snowmaking, lifts and terrain.
+
+**Culture**
+
+> Burke is a town of 1,651 people (2020 census) that includes the villages of East Burke, West Burke and Burke Hollow. East Burke is home to the Kingdom Trails system, where hundreds of mountain bikers ride at a time in summer and autumn. The resort hotel is a popular place for weddings and events. Burke Mountain Academy, a full year school, trains alpine racers on the mountain.
+
+**Sources:** [Burke Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Burke_Mountain_Ski_Area), [Burke Mountain Academy (Wikipedia)](https://en.wikipedia.org/wiki/Burke_Mountain_Academy), [Burke, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Burke,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort burke --by Alexandre`
+
+### Resort: Buttermilk (`buttermilk`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Buttermilk sits about halfway between Aspen and Snowmass Village in Pitkin County, Colorado. Art Pfister developed it in 1958. It is often considered the easiest mountain in the Aspen area and has three sections: Tiehack, Main Buttermilk and West Buttermilk. Its base holds The Hideout, a play and learning area for ski school children ages 2 and a half to 6. The Aspen Skiing Company operates it. Buttermilk first hosted ESPN's Winter X Games in 2002, and the X Games has been held in Aspen every winter since.
+
+**Sources:** [Buttermilk (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Buttermilk_(ski_area)), [Aspen Skiing Company (Wikipedia)](https://en.wikipedia.org/wiki/Aspen_Skiing_Company), [X Games (Wikipedia)](https://en.wikipedia.org/wiki/X_Games)
+
+Approve: `python -m pipeline.editorial approve resort buttermilk --by Alexandre`
+
+### Resort: Cannon Mountain (`cannon`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Cannon Mountain is a state owned ski area in Franconia Notch State Park in New Hampshire's White Mountains. It has the largest vertical drop in New Hampshire at 2,180 feet and the only aerial tram in the state. Cannon was the site of North America's first passenger aerial tramway in 1938, and its Richard Taft Race Course dates to 1931 and 1932. Olympic skier Bode Miller grew up skiing here. In 2013 SKI Magazine named it number one in New Hampshire for value, challenge and overall satisfaction.
+
+**Culture**
+
+> Franconia is a town of 1,083 people (2020 census) in the White Mountains and home to the northern half of Franconia Notch State Park and the New England Ski Museum. The state tramway helped prove skiing as an industry in New Hampshire and drew private investment into the state's ski business. Cannon runs a PSIA ski and snowboard school and youth programs at its Brookside Learning Center.
+
+**Sources:** [Cannon Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Cannon_Mountain_Ski_Area), [Franconia, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Franconia,_New_Hampshire)
+
+Approve: `python -m pipeline.editorial approve resort cannon --by Alexandre`
+
+### Resort: Copper Mountain (`copper-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Copper Mountain sits in Summit County, Colorado, about 75 miles west of Denver on I 70. It opened in November 1972 and has 2,465 acres under Forest Service lease. POWDR has operated it since buying it from Intrawest in December 2009. The Forest Service has called its layout the most organized of any ski resort: beginner runs lie to the west and difficulty rises to the east, with Tucker Mountain holding expert terrain. Copper has been an official U.S. Ski Team downhill training venue since 2011 to 2012.
+
+**Culture**
+
+> Copper's lodging and dining sit in three villages: East Village, Center Village and West Village. Frisco, a town of 2,913 in 2020, sits near Copper, Breckenridge, Keystone and Arapahoe Basin and draws skiers from around the world. By 2025 housing costs there had forced many workers, from ski instructors to emergency room nurses, into homelessness while they kept their jobs. Homeless resort employees may sleep in their cars in local lots if they can prove employment. Bustang buses link Frisco to Denver.
+
+**Sources:** [Copper Mountain (Colorado) (Wikipedia)](https://en.wikipedia.org/wiki/Copper_Mountain_(Colorado)), [Frisco, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Frisco,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort copper-mountain --by Alexandre`
+
+### Resort: Cranmore Mountain Resort (`cranmore`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Cranmore Mountain Resort is a ski area in North Conway, New Hampshire, that opened for the 1937 to 1938 season. Austrian ski pioneer Hannes Schneider moved there in 1939 and drove its expansion, and its early ski school run by European skiers set it apart. It was one of the first ski areas to develop trail grooming technology. Brian Fairbank, Tyler Fairbank and Joseph O'Donnell, operators of Jiminy Peak, bought it in 2010. All its terrain has snowmaking, and a Mountain Adventure Park runs in summer.
+
+**Culture**
+
+> North Conway, a village of 2,116 people (2020 census) in the town of Conway, is known as the birthplace of American skiing, and snow trains began bringing skiers there in 1932. In winter the village is the nighttime destination for skiers from Cranmore, Attitash, Black Mountain and Wildcat. Tourism is Conway's biggest economic engine, and North Conway is a major outlet shopping destination.
+
+**Sources:** [Cranmore Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Cranmore_Mountain_Resort), [North Conway, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/North_Conway,_New_Hampshire), [Conway, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Conway,_New_Hampshire)
+
+Approve: `python -m pipeline.editorial approve resort cranmore --by Alexandre`
+
+### Resort: Crested Butte (`crested-butte`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Crested Butte Mountain Resort sits in the town of Mount Crested Butte in Gunnison County, Colorado, next to the historic town of Crested Butte. Fred Rice and Dick Eflin bought a ranch on the mountain in 1960 to start it. Vail Resorts announced its purchase in June 2018 and owns it today. The company lists over 1,500 skiable acres and over 3,000 feet of vertical. Crested Butte hosted the Winter X Games in 1998 and 1999.
+
+**Culture**
+
+> Crested Butte is a former coal mining town in the Slate River Valley. When the mines closed the town shrank, and the ski resort revived its economy around tourism. The town has since become a retreat for the affluent, and the resulting housing crisis has pushed the average home value over $900,000. The town had 1,639 residents in 2020. Festivals include Flauschink in spring and Vinotok in fall. Buses link Crested Butte to Gunnison, a college town of 6,560 and home to Western Colorado University.
+
+**Sources:** [Crested Butte Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Crested_Butte_Mountain_Resort), [Crested Butte, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Crested_Butte,_Colorado), [Gunnison, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Gunnison,_Colorado), [X Games (Wikipedia)](https://en.wikipedia.org/wiki/X_Games), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort crested-butte --by Alexandre`
+
+### Resort: Crotched Mountain (`crotched-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Crotched Mountain is a medium sized ski area in Bennington and Francestown, New Hampshire, about 77 miles northwest of Boston and 26 miles west of Manchester. The original area closed in 1989 under condominium debt. Peak Resorts bought it in 2002 and reopened it in 2003 after a 13 year closure, and Vail Resorts bought Peak Resorts in 2019. Crotched is a popular destination for night skiing, with sessions until midnight on several nights each winter.
+
+**Culture**
+
+> Bennington is a town of 1,501 people (2020 census) and home to Monadnock Paper Mills. Crotched sits 30 miles east of Keene. The original Crotched Mountain area opened in 1964 on the northeast face, and the town of Francestown now owns most of that land. Vail says its four New Hampshire ski areas serve guests throughout New England.
+
+**Sources:** [Crotched Mountain Ski & Ride (Wikipedia)](https://en.wikipedia.org/wiki/Crotched_Mountain_Ski_%26_Ride), [Bennington, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Bennington,_New_Hampshire), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort crotched-mountain --by Alexandre`
+
+### Resort: Crystal Mountain (`crystal-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Crystal Mountain sits in eastern Pierce County, Washington, southeast of Seattle in the Mount Baker Snoqualmie National Forest. It is the largest ski resort in Washington, reached from the Seattle and Tacoma metro area by State Route 410. Its Mt. Rainier Gondola, opened in 2010, is the state's only high speed gondola and runs year round to the summit. Crystal hosted the U.S. Alpine Championships in 1965 and 1968 and World Cup downhills in 1972. Alterra Mountain Company acquired it in 2018.
+
+**Culture**
+
+> Crystal is primarily a day use area for skiers from the Seattle and Tacoma metro area, with nine chairlifts and several hotels. Local racer Judy Nagel won two national titles here at sixteen. Its master development plan, the largest in Washington's history, includes employee housing.
+
+**Sources:** [Crystal Mountain (Washington) (Wikipedia)](https://en.wikipedia.org/wiki/Crystal_Mountain_(Washington))
+
+Approve: `python -m pipeline.editorial approve resort crystal-mountain --by Alexandre`
+
+### Resort: Deer Valley Resort (`deer-valley`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Deer Valley Resort sits in Park City, Utah, 36 miles east of Salt Lake City. It is a ski only resort that emphasizes upscale lodging and amenities, and it is one of three U.S. resorts that prohibit snowboarding. Edgar Stern developed it, and it opened on December 26, 1981. Deer Valley hosted 2002 Olympic moguls, aerials and slalom. Its expansion into the former Mayflower area brought the resort to 4,300 acres by 2026. Alterra Mountain Company owns it.
+
+**Culture**
+
+> Deer Valley shares Park City with Park City Mountain, and the town draws an average of 600,000 tourists a year against about 8,000 residents. Park City is one of the most affluent resort towns in the U.S. Deer Valley regularly hosts FIS moguls and aerials competitions and is scheduled to host both events at the 2034 Winter Olympics.
+
+**Sources:** [Deer Valley (Wikipedia)](https://en.wikipedia.org/wiki/Deer_Valley), [Park City, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Park_City,_Utah)
+
+Approve: `python -m pipeline.editorial approve resort deer-valley --by Alexandre`
+
+### Resort: Dollar Mountain (`dollar-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Dollar Mountain is the treeless beginner and lower intermediate hill of the Sun Valley ski resort in Idaho. It has a 628 foot vertical drop, four chairlifts, a magic carpet and a terrain park on the Half Dollar lift. The world's first chairlifts were installed on Sun Valley's Proctor and Dollar mountains in the fall of 1936. Dollar Mountain Lodge opened in November 2004 and serves as headquarters of the Sun Valley Ski School. The Holding family owns the resort.
+
+**Sources:** [Dollar Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Dollar_Mountain), [Sun Valley, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Sun_Valley,_Idaho)
+
+Approve: `python -m pipeline.editorial approve resort dollar-mountain --by Alexandre`
+
+### Resort: Grand Targhee Resort (`grand-targhee`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Grand Targhee Resort sits on the west side of the Teton Range in Wyoming, near the small community of Alta. It lies 42 miles northwest of Jackson and is reached only from the west, through Driggs, Idaho. The resort averages over 500 inches of snow per season, and most of its slopes face west. It opened on December 26, 1969. George and Rose Gillett and their four sons bought it in June 2000.
+
+**Culture**
+
+> Teton Valley locals helped found Grand Targhee. East Idahoans formed Grand Targhee, Inc. in 1966, and its 900 plus members aimed to benefit the community and the regional economy. Driggs, the seat of Teton County, Idaho, had 1,984 residents in 2020, and Alta had 429. Valley events include the Teton Valley Hot Air Balloon Festival and the Plein Air Arts Festival. In summer the resort hosts music festivals, including a bluegrass festival.
+
+**Sources:** [Grand Targhee Resort (Wikipedia)](https://en.wikipedia.org/wiki/Grand_Targhee_Resort), [Driggs, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Driggs,_Idaho), [Alta, Wyoming (Wikipedia)](https://en.wikipedia.org/wiki/Alta,_Wyoming)
+
+Approve: `python -m pipeline.editorial approve resort grand-targhee --by Alexandre`
+
+### Resort: Gunstock Mountain Resort (`gunstock`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Gunstock Mountain Resort is a recreation area owned by Belknap County on Gunstock Mountain in Gilford, New Hampshire. Works Progress Administration crews built it, and it was completed in 1937 with the first chairlift in the eastern United States. Most trails carry gun names such as Pistol and Musket. A county commission oversees the resort; in July 2022 the management team resigned over the commission's role, and the resort closed for 13 days until they returned. It offers night skiing on its lower slopes.
+
+**Culture**
+
+> Gilford is a town of 7,699 people (2020 census) on Lake Winnipesaukee. It was the destination of the first snow train from Boston in the 1930s and had New Hampshire's first motorized ski lift, a rope tow built in 1934. Building the resort during the Depression transformed the region's economy. Gunstock holds an annual glowstick themed night terrain park contest called Glow and Throw.
+
+**Sources:** [Gunstock Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Gunstock_Mountain_Resort), [Gilford, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Gilford,_New_Hampshire)
+
+Approve: `python -m pipeline.editorial approve resort gunstock --by Alexandre`
+
+### Resort: Heavenly (`heavenly`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Heavenly Mountain Resort straddles the California and Nevada border above the south shore of Lake Tahoe. It opened as Heavenly Valley on December 15, 1955, and now has 97 runs and 30 lifts across four base areas in both states. Its 10,067 foot top is the highest of the Lake Tahoe resorts, and it averages 360 inches of snow a year. Vail Resorts has owned it since 2002 and ranks it the twelfth most visited mountain resort in the U.S. for the 2025/2026 season.
+
+**Culture**
+
+> Heavenly sits beside South Lake Tahoe, a city of 21,330 in 2020, and Stateline, Nevada, home to the casinos. The east end of South Lake Tahoe centers on tourism, restaurants, hotels and the resort, and 41.9 percent of the city's housing units were vacant in 2020. Stateline's population swells in the busy winter and summer seasons. Vail Resorts points to Heavenly's nightlife and nearby casinos. Each ski season, skiers from Reno, Las Vegas, Los Angeles, San Diego, San Francisco and Sacramento come to the Tahoe slopes.
+
+**Sources:** [Heavenly Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Heavenly_Mountain_Resort), [South Lake Tahoe, California (Wikipedia)](https://en.wikipedia.org/wiki/South_Lake_Tahoe,_California), [Stateline, Nevada (Wikipedia)](https://en.wikipedia.org/wiki/Stateline,_Nevada), [Lake Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Tahoe), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort heavenly --by Alexandre`
+
+### Resort: Hermitage Club at Haystack Mountain (`hermitage-club`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> The Hermitage Club is a private, member owned ski club on Haystack Mountain in Wilmington, Vermont. Haystack opened to the public in 1964 and ran as a public ski area until 2005. Jim Barnes opened the club for the 2012 to 2013 season and built an 80,000 square foot clubhouse, and the club went into bankruptcy in 2018. In March 2020, 181 former members bought it at auction for $8.06 million and formed the nonprofit Hermitage Members Group, which runs it with a volunteer board.
+
+**Culture**
+
+> Members use a clubhouse with a bar, restaurant, bowling alley, movie theatre, spa, gym and ski lockers. The owner group describes the club as a private, four season, family friendly ski resort. Wilmington is a town of 2,255 people (2020 census). In 1968 Haystack was among the first ski areas to teach blind skiers, and its instructors skied the mountain blindfolded to prepare.
+
+**Sources:** [Hermitage Club at Haystack Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Haystack_Mountain_Ski_Area), [Wilmington, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Wilmington,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort hermitage-club --by Alexandre`
+
+### Resort: Hidden Valley Resort (`hidden-valley-mo`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Hidden Valley Ski Area is a ski resort in Wildwood, a St. Louis suburb in Missouri. Glenn Boyd Sr. and Tim Boyd bought the Wildwood Golf Course in 1977 and turned its hills into a ski area in 1982, the first resort of what became Peak Resorts. It has 15 trails on 65 acres across two peaks, a 320 foot vertical drop and snowmaking on every trail. A zip line tour opened in 2019, the same year Vail Resorts acquired Peak.
+
+**Culture**
+
+> The ski area sits in a conservation easement, agreed in exchange for permission to build 80 homes on the former golf property. Vail lists St. Louis among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families.
+
+**Sources:** [Hidden Valley Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Hidden_Valley_Ski_Area), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort hidden-valley-mo --by Alexandre`
+
+### Resort: Hidden Valley Resort (`hidden-valley-pa`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Hidden Valley Resort is a ski area in the Laurel Highlands near the village of Hidden Valley, Somerset County, Pennsylvania, a few miles from the Pennsylvania Turnpike. Before 2020 the resort and the surrounding homeowner community were run together by Hidden Valley Resorts, a subsidiary of Kettler Brothers of Maryland. Vail Resorts bought the resort in 2021 with Seven Springs and Laurel Mountain. Vail describes the three as regional ski areas near Pittsburgh that also draw guests from Washington DC, Baltimore and Cleveland.
+
+**Culture**
+
+> Hidden Valley is an unincorporated community whose homeowner association, the Hidden Valley Foundation, covers 1,185 homes and has governed itself since January 2020. The foundation provides private roads, security, pools, trails and social and recreational programs. The ski resort sits within the community along Pennsylvania Route 31 and stands apart from the association.
+
+**Sources:** [Hidden Valley Resort (Pennsylvania) (Wikipedia)](https://en.wikipedia.org/wiki/Hidden_Valley_Resort_(Pennsylvania)), [Hidden Valley, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Hidden_Valley,_Pennsylvania), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort hidden-valley-pa --by Alexandre`
+
+### Resort: Howelsen Hill Ski Area (`howelsen-hill`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Howelsen Hill Ski Area sits in the town of Steamboat Springs, Colorado. It opened officially in 1914 and is the oldest continuously operating ski area in North America. Norwegian immigrant Carl Howelsen brought ski jumping to Steamboat in 1913, and the hill now bears his name. It holds the largest natural ski jumping complex in North America, with the largest jump at HS127. The City of Steamboat Springs owns and operates it through its Parks, Open Space and Recreation Department.
+
+**Culture**
+
+> Howelsen Hill is the home area of the Steamboat Springs Winter Sports Club, which has produced 88 Winter Olympians. The club's alpine branch alone has about 400 children. The hill has sent more skiers to international competition than any other area in North America. Carl Howelsen also founded Steamboat's annual Winter Carnival, and the hill has lights for night skiing.
+
+**Sources:** [Howelsen Hill Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Howelsen_Hill_Ski_Area), [Steamboat Springs, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado), [Steamboat Springs Winter Sports Club (Wikipedia)](https://en.wikipedia.org/wiki/Steamboat_Springs_Winter_Sports_Club)
+
+Approve: `python -m pipeline.editorial approve resort howelsen-hill --by Alexandre`
+
+### Resort: Hunter Mountain (`hunter-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Hunter Mountain is a ski resort in the town of Hunter, Greene County, about three hours northwest of New York City in the Catskills. Local businessmen opened it in 1960 to revive an economy hurt by the decline of Catskills tourism. Hunter was the first area in the world with summit to base snowmaking and, in 1980, the first with snowmaking on 100 percent of its trails. Peak Resorts bought it from the founding Slutzky family in 2015, and Vail Resorts acquired Peak in 2019. Vail calls it a day trip ski area primarily serving the New York metropolitan area.
+
+**Culture**
+
+> Hunter is a town of 3,035 people (2020 census) with two villages, Hunter and Tannersville. The ski resort is the largest employer in the village of Hunter, and the seasonal nature of the mountain regulates the town's economic activity. The area was a popular tourism destination in the late nineteenth and early twentieth centuries. The first Hunter summer festival, a ten day German Alps Festival, ran in July 1975.
+
+**Sources:** [Hunter Mountain (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Hunter_Mountain_(ski_area)), [Hunter, New York (Wikipedia)](https://en.wikipedia.org/wiki/Hunter,_New_York), [Hunter (village), New York (Wikipedia)](https://en.wikipedia.org/wiki/Hunter_(village),_New_York), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort hunter-mountain --by Alexandre`
+
+### Resort: Hyland Hills Ski Area (`hyland-hills`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Hyland Hills Ski Area is in Bloomington, Minnesota, just south of Minneapolis, owned and operated by Three Rivers Park District. It was known as Normandale Ski Hill by 1945, and the Hennepin County Park Reserve District later bought and renamed it. It receives about 160,000 visitors a year and opened a 36,000 square foot chalet after a $13.3 million renovation in 2016. Three Rivers Racing, its youth alpine club, has trained racers who reached national, World Cup and Olympic level races.
+
+**Culture**
+
+> Hyland sits near the Mall of America and is one of three alpine ski areas in the Twin Cities metropolitan area. It hosts USSA freestyle and racing teams, the G Team snowboard club, and Nordic ski jumping training run by the Minneapolis Ski Club. In summer the park hosts auto shows, outdoor movies, live music and disc golf.
+
+**Sources:** [Hyland Hills Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Hyland_Hills_Ski_Area), [Buck Hill (Wikipedia)](https://en.wikipedia.org/wiki/Buck_Hill)
+
+Approve: `python -m pipeline.editorial approve resort hyland-hills --by Alexandre`
+
+### Resort: Jack Frost Ski Resort (`jack-frost`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Jack Frost is one of two ski areas in the Jack Frost and Big Boulder resort in Kidder Township, in Pennsylvania's Pocono Mountains. Big Boulder's owners built Jack Frost for longer runs and a higher vertical drop, with trails that descend to the level of the Lehigh River. Peak Resorts owned and operated the resort until Vail Resorts bought it in 2019. Vail says its Mid Atlantic ski areas serve guests from Philadelphia, central and southern New Jersey and other nearby markets.
+
+**Culture**
+
+> Jack Frost is a major tourist attraction in the region and has drawn new home buyers, who cite the ski resort, golf courses and the distance from New York City and Philadelphia. Kidder Township had 1,935 people at the 2010 census, up from 1,185 in 2000.
+
+**Sources:** [Jack Frost and Big Boulder Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Jack_Frost%E2%80%93Big_Boulder_Ski_Resort), [Kidder Township, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Kidder_Township,_Pennsylvania), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort jack-frost --by Alexandre`
+
+### Resort: Jackson Hole Mountain Resort (`jackson-hole`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Jackson Hole Mountain Resort sits in Teton Village, Wyoming, 12 miles northwest of the town of Jackson and due south of Grand Teton National Park. It is known for steep terrain, including Corbet's Couloir, and a continuous vertical drop of 4,139 feet served by its aerial tram. Apres Vous mountain opened in the 1965 to 1966 winter. Jay Kemmerer sold the resort in February 2024 to board members Eric Macy and Mike Corbat. The media often lists it among North America's most expensive ski resorts.
+
+**Culture**
+
+> Jackson, the largest incorporated town in Wyoming, had 10,760 residents in 2020. Tourism drives a strong local economy, with art galleries, custom jewelers and designer clothing stores around the town square. In 2010, arts, recreation, lodging and food services provided 32.2 percent of local jobs. A 2019 Bloomberg report found Teton County had the highest per capita income of any U.S. county, at $252,000. Jackson Hole Airport, 11 miles from Teton Village, has seasonal flights to 20 U.S. cities.
+
+**Sources:** [Jackson Hole Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Jackson_Hole_Mountain_Resort), [Jackson, Wyoming (Wikipedia)](https://en.wikipedia.org/wiki/Jackson,_Wyoming), [Teton County, Wyoming (Wikipedia)](https://en.wikipedia.org/wiki/Teton_County,_Wyoming), [Jay Kemmerer (Wikipedia)](https://en.wikipedia.org/wiki/Jay_Kemmerer)
+
+Approve: `python -m pipeline.editorial approve resort jackson-hole --by Alexandre`
+
+### Resort: Jay Peak Resort (`jay-peak`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Jay Peak Resort sits in the northern Green Mountains between Jay and Montgomery Center, Vermont, about 4 miles south of the Quebec border. It receives the most snowfall of any ski area in the Northeastern U.S. and is known for its gladed skiing and the steep Face Chutes. EB 5 financed development added hotels, an ice arena and a water park before federal officials seized the resort in 2016 in a securities fraud case. Pacific Group Resorts of Park City, Utah, bought it at a court supervised auction for $76 million in 2022.
+
+**Culture**
+
+> Jay is a border town of 551 people (2020 census) in Orleans County. The resort is a major local employer: it was the second biggest employer in the area in 2008, and as of 2022 it employed more than 1,200 people in winter and about half that number year round. It reported a record 320,000 skiers in the 2007 to 2008 winter.
+
+**Sources:** [Jay Peak Resort (Wikipedia)](https://en.wikipedia.org/wiki/Jay_Peak_Resort), [Jay, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Jay,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort jay-peak --by Alexandre`
+
+### Resort: June Mountain (`june-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> June Mountain sits near June Lake in the eastern Sierra Nevada, southeast of Yosemite National Park. It covers 1,500 acres across Rainbow Mountain and June Mountain, with 7 lifts and about 250 inches of snow a year. Mammoth Mountain operates it under a Forest Service permit, and it became part of Alterra Mountain Company with Mammoth in 2017. June closed for the 2012 to 2013 season, and after a citizen campaign it reopened in 2013 to 2014 with new snowmaking and a new chairlift.
+
+**Culture**
+
+> June Mountain is a favorite of locals for its small crowds and easy access to powder after storms. Tourism is June Lake's chief industry, and over half of its homes are second homes, mostly used in summer. The community had 611 residents in 2020. Most of the June Mountain winter workforce lives in employee housing in Mammoth and rides a daily employer bus.
+
+**Sources:** [June Mountain ski area (Wikipedia)](https://en.wikipedia.org/wiki/June_Mountain_ski_area), [June Lake, California (Wikipedia)](https://en.wikipedia.org/wiki/June_Lake,_California)
+
+Approve: `python -m pipeline.editorial approve resort june-mountain --by Alexandre`
+
+### Resort: Keystone (`keystone`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Keystone Resort sits in the town of Keystone in Summit County, Colorado. It spans three mountains, Dercum Mountain, North Peak and the Outback, reached from the River Run and Mountain House bases. Vail Resorts has owned and operated it since 1997. The company ranks Keystone the seventh most visited mountain resort in the U.S. for the 2025/2026 season and calls it the largest night skiing area in Colorado. Its Kidtopia program offers activities for kids on and off the mountain.
+
+**Culture**
+
+> Keystone incorporated as a town in April 2023. The former Keystone census area had 1,369 residents in 2020, and 82.1 percent of its housing units were vacant. The Keystone Conference Center is the largest conference facility in the Colorado Rocky Mountain region. In February 2025 the Keystone ski patrol union reached an agreement with Vail Resorts that added wage increases and housing assistance.
+
+**Sources:** [Keystone Resort (Wikipedia)](https://en.wikipedia.org/wiki/Keystone_Resort), [Keystone, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Keystone,_Colorado), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort keystone --by Alexandre`
+
+### Resort: Killington Resort (`killington`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Killington is the largest ski area in the eastern U.S. and has the largest vertical drop in New England. It spreads across six interconnected peaks near the town of Killington in Rutland County, and its nickname is the Beast of the East. Snowmaking on Superstar and other trails often gives it the longest season in eastern North America, and since 2016 it has hosted women's World Cup races each Thanksgiving weekend. In September 2024 the Killington Independence Group, formed by local passholders and community members, bought Killington and Pico from Powdr.
+
+**Culture**
+
+> Killington is a town of 1,407 people (2020 census) built around the ski resort and its many vacation lodges. It was named Sherburne until 1999. The resort's mountains separate the town from the city of Rutland. Bear Mountain holds the Bear Mountain Mogul Challenge on Outer Limits and hosts large racing and freestyle events. Most Killington passes also work at Pico, its sister mountain a few miles away.
+
+**Sources:** [Killington Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Killington_Ski_Resort), [Killington, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Killington,_Vermont), [Pico Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Pico_Mountain)
+
+Approve: `python -m pipeline.editorial approve resort killington --by Alexandre`
+
+### Resort: Kirkwood (`kirkwood`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Kirkwood Mountain Resort sits in the Eldorado National Forest about 33 miles south of South Lake Tahoe, reached by State Route 88. It opened in 1972 after Caltrans began plowing Highway 88 year round in 1971, and for most of its history it ran off the grid on diesel generators. It has 2,300 acres, five peaks, ample off piste terrain and only 12 percent beginner runs. It averages 354 inches of snow, second in the Sierra Nevada to Sugar Bowl. Vail Resorts owns it.
+
+**Culture**
+
+> Kirkwood hosted legs of the North American Freeskiing Championships in 2009 and 2010. The community of Kirkwood had 190 residents in 2020, and only 12.3 percent of its 659 housing units were occupied; 26.8 percent of residents lived in group quarters. In 2026 the resort won the National Ski Areas Association's Golden Eagle Award for sustainability innovation for its on site wood mill.
+
+**Sources:** [Kirkwood Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Kirkwood_Mountain_Resort), [Kirkwood, California (Wikipedia)](https://en.wikipedia.org/wiki/Kirkwood,_California), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort kirkwood --by Alexandre`
+
+### Resort: Lake Placid Olympic Jumping Complex and Freestyle Aerial Training Center (`lake-placid-olympic-jumping-complex`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> The Lake Placid Olympic Ski Jumping Complex, also called the MacKenzie Intervale complex, has HS100 and HS128 jump towers built for the 1980 Winter Olympics. Modernized and lengthened in 2021, they are the only jumps in North America homologated for winter and summer competition. The Olympic Regional Development Authority operates the site. Jumpers train year round on a plastic mat out run, and aerialists at the Freestyle Aerial Training Center train in summer by jumping into a 750,000 gallon pool. In 2023 it hosted the first men's super team World Cup.
+
+**Culture**
+
+> Lake Placid is a village of 2,205 people (2020 census) in the Adirondacks that became internationally known for the 1932 and 1980 Winter Olympics, and it also hosted the 1972 and 2023 Winter World University Games. Winter sport there grew from the Lake Placid Club, which stayed open through the winter of 1905. The club built the first jump on this site in 1920.
+
+**Sources:** [Lake Placid Olympic Ski Jumping Complex (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Placid_Olympic_Ski_Jumping_Complex), [Lake Placid, New York (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Placid,_New_York)
+
+Approve: `python -m pipeline.editorial approve resort lake-placid-olympic-jumping-complex --by Alexandre`
+
+### Resort: Laurel Mountain (`laurel-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Laurel Mountain is a ski area in Laurel Mountain State Park, Westmoreland County, Pennsylvania. The Commonwealth of Pennsylvania owns it, and Vail Resorts has operated it under lease since December 2021. Austrian ski pioneer Hannes Schneider designed the slopes, and it opened in 1940 as an exclusive club before it was gifted to the state in 1964. It closed in 2005 and reopened for the 2016 to 2017 season after a $6.5 million renovation. It has 20 trails and a 761 foot vertical drop.
+
+**Culture**
+
+> Laurel Mountain began as a club for prominent Pennsylvanians. The Pittsburgh Ski Club used its 1940 Midway Cabin as its mountain headquarters until about 1954, when regional skiing shifted toward Seven Springs and Hidden Valley. The cabin still stands halfway down the Broadway slope, and the modern lodge displays historic Pennsylvania ski memorabilia.
+
+**Sources:** [Laurel Mountain Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Laurel_Mountain_Ski_Resort)
+
+Approve: `python -m pipeline.editorial approve resort laurel-mountain --by Alexandre`
+
+### Resort: Liberty Mountain Resort (`liberty-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Liberty Mountain Resort is a ski area in southern Pennsylvania. It began in the mid 1960s as Charnita, the centerpiece of a real estate development. Irv Naylor's Snow Time, Inc. bought it in 1974 and renamed it Ski Liberty. Peak Resorts bought it in 2018 with Whitetail and Roundtop, and Vail Resorts bought Peak in 2019. It has night skiing on all terrain seven nights a week, full snowmaking, a 116 room hotel and the Carroll Valley golf course.
+
+**Culture**
+
+> Vail says its eight Mid Atlantic ski areas serve guests from Philadelphia, Pittsburgh, central and southern New Jersey, Baltimore and Washington, D.C., offering local options and easy overnight weekend and holiday trips. Liberty's hotel and lodge stay open year round for weddings and meetings. Liberty sits closer to Baltimore than its sister resort Whitetail, which is 92 miles from the city.
+
+**Sources:** [Liberty Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Liberty_Mountain_Resort), [Whitetail Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Whitetail_Ski_Resort), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort liberty-mountain --by Alexandre`
+
+### Resort: Mad River Glen (`mad-river-glen`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Mad River Glen is a ski area in Fayston, Vermont, in the Mad River Valley. Roland Palmedo founded it in 1947 for dedicated skiers, with a minimum of commercial amenities. A skier cooperative formed in 1995 owns it, and shareholders vote at regular Town Hall meetings. It runs the 1948 Single Chair, one of two single chairlifts left in the country, bans snowboarding, and keeps narrow trails with little grooming. Ski magazine ranked its terrain the most challenging on the East Coast, and it joined the National Register of Historic Places in 2012.
+
+**Culture**
+
+> Mad River Glen keeps a traditional form of New England skiing built on natural snow and trails cut decades ago, often by the skiers themselves. Telemark skiers make up a large share of its skiers. Over 75 percent of cooperative members voted to keep the snowboard ban. Waitsfield, a valley town of 1,844 people (2020 census), has an economy largely supported by Mad River Glen and Sugarbush.
+
+**Sources:** [Mad River Glen (Wikipedia)](https://en.wikipedia.org/wiki/Mad_River_Glen), [Waitsfield, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Waitsfield,_Vermont), [Fayston, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Fayston,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort mad-river-glen --by Alexandre`
+
+### Resort: Mad River Mountain (`mad-river-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Mad River Mountain is a ski and snowboard resort in Valley Hi, Ohio, off U.S. Route 33 east of Bellefontaine. It opened in 1962 as Valley Hi Ski Area. It has a 300 foot vertical drop, 144 acres, 16 trails, three terrain parks, a tubing park and snowmaking on all terrain. Vail Resorts added it in 2019 with Peak Resorts and leases it, and EPR Properties lists it in its portfolio. A fire destroyed the lodge in 2015, and a $6.5 million lodge opened in 2016.
+
+**Culture**
+
+> The resort lies 6 miles southeast of Campbell Hill, Ohio's highest point, near the source of the Mad River. Vail lists Columbus among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families.
+
+**Sources:** [Mad River Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Mad_River_Mountain), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort mad-river-mountain --by Alexandre`
+
+### Resort: Magic Mountain (`magic-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Magic Mountain is a ski area on Glebe Mountain in Londonderry, Vermont, with a 1,500 foot vertical drop. Ski instructor and filmmaker Hans Thorner founded it in 1960 because its terrain reminded him of his native Swiss Alps. It was part of Vermont's original Golden Triangle with Stratton and Bromley. After a closure through much of the 1990s it reopened in 1997. SKI MAGIC LLC, a group led by local Magic skier Geoff Hatheway, bought it in 2016. It has the most extensive glade network in southern Vermont.
+
+**Culture**
+
+> After reopening, Magic regained a small but passionate following among ski enthusiasts for its classic, challenging terrain. Pitches reach 45 degrees at the top of Master Magician. Londonderry is a town of 1,919 people (2020 census) with the villages of Londonderry and South Londonderry. The new owners invested over $2 million in snowmaking, lifts, the bar and the lodge after the 2016 purchase.
+
+**Sources:** [Magic Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Magic_Mountain_Ski_Area), [Londonderry, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Londonderry,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort magic-mountain --by Alexandre`
+
+### Resort: Mammoth Mountain (`mammoth-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Mammoth Mountain sits on the east side of the Sierra Nevada in the Inyo National Forest, in the town of Mammoth Lakes, California. It has 3,500 acres, 3,100 feet of vertical and an 11,059 foot summit, and it averages 400 inches of snow, with seasons that often run from November into May. Dave McCoy founded it, building the first lift in 1955. Starwood sold it in 2017 to the partnership that became Alterra Mountain Company. It hosts U.S. Grand Prix freestyle and snowboard events, and Chloe Kim trains here.
+
+**Culture**
+
+> Most Mammoth skiers come from the Los Angeles area, since Bay Area residents must cross four mountain passes to reach it. Mammoth Lakes, the only incorporated town in Mono County, had 7,191 residents in 2020, and 68.6 percent of its housing units were vacant. The town economy is primarily tourism, with summer camping, hiking and fishing. The tourist market has driven property values sharply higher. Eastern Sierra Regional Airport in Bishop has seasonal flights to Los Angeles, San Francisco and Denver.
+
+**Sources:** [Mammoth Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Mammoth_Mountain_Resort), [Mammoth Lakes, California (Wikipedia)](https://en.wikipedia.org/wiki/Mammoth_Lakes,_California)
+
+Approve: `python -m pipeline.editorial approve resort mammoth-mountain --by Alexandre`
+
+### Resort: Middlebury College Snow Bowl (`middlebury-snow-bowl`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> The Middlebury College Snow Bowl is a ski area in Hancock, Vermont, 13 miles east of Middlebury near Middlebury Gap. Middlebury College has owned and run it since its first trails were cut in 1934. It has hosted intercollegiate competitions since the 1930s, and its 1938 log cabin lodge is the oldest standing base lodge in the nation. In 2006 it became the first carbon neutral ski area in the United States. It averages 200 inches of natural snow a year.
+
+**Culture**
+
+> Hancock is a town of 359 people (2020 census) on the White River and Vermont Route 100, and it contains Middlebury Gap. The college runs the Snow Bowl as part of its sustainability commitment, with efficient snow guns, an electric compressor and plans for electric snowmobiles and cars. The eastern face, called the backside, relies mainly on natural snow.
+
+**Sources:** [Middlebury College Snow Bowl (Wikipedia)](https://en.wikipedia.org/wiki/Middlebury_College_Snow_Bowl), [Hancock, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Hancock,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort middlebury-snow-bowl --by Alexandre`
+
+### Resort: Montana Snowbowl (`montana-snowbowl`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Montana Snowbowl sits in the Lolo National Forest 12 miles northwest of Missoula, Montana. It is known for long, steep expert runs such as West Bowl, a 2,600 foot vertical rise and throwback operations. Its lifts include three vintage Riblet double chairs, a Skytrac triple and a vintage Doppelmayr T bar. Base development is minimal, and the access road, improved in 2011, is still unpaved. Snowbowl opened in December 1962, promoted as having the most vertical in the Pacific Northwest.
+
+**Culture**
+
+> Snowbowl serves Missoula, the second most populous city in Montana with 73,489 residents in 2020. Missoula is home to the University of Montana, and its largest employers are the university, the public schools and two hospitals. The city also holds a U.S. Forest Service regional headquarters and the smokejumpers' headquarters. In summer Snowbowl runs one lift on weekends for hikers and mountain bikers.
+
+**Sources:** [Montana Snowbowl (Wikipedia)](https://en.wikipedia.org/wiki/Montana_Snowbowl), [Missoula, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Missoula,_Montana)
+
+Approve: `python -m pipeline.editorial approve resort montana-snowbowl --by Alexandre`
+
+### Resort: Mount Bohemia (`mount-bohemia`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Mount Bohemia is a ski area at the northern end of Michigan's Keweenaw Peninsula, in Mohawk, that opened in 2000. It has the highest vertical drop in the Midwest and relies on 250 to 300 inches of lake effect snow a year, the most of any Midwest resort, with no snowmaking or grooming. Its runs are rated black diamond and harder, plus three intermediate runs. It also offers the only cat skiing in the Midwest, at Voodoo Mountain.
+
+**Culture**
+
+> Keweenaw County is Michigan's northernmost and least populous county, with 2,046 people at the 2020 census. Nearby Lac La Belle has an active summer tourist trade with cottages and resorts, and in winter Mount Bohemia draws skiers and snowboarders there. Its ungroomed, expert terrain is aimed at advanced skiers and riders.
+
+**Sources:** [Mount Bohemia (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Bohemia), [Lac La Belle, Michigan (Wikipedia)](https://en.wikipedia.org/wiki/Lac_La_Belle,_Michigan), [Keweenaw County, Michigan (Wikipedia)](https://en.wikipedia.org/wiki/Keweenaw_County,_Michigan)
+
+Approve: `python -m pipeline.editorial approve resort mount-bohemia --by Alexandre`
+
+### Resort: Mount Brighton (`mount-brighton`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Mount Brighton is a ski and snowboard area in Brighton, Michigan, that opened in 1961 on man made slopes with 230 feet of vertical. Almost all its snow is made from water stored in an onsite reservoir. It has 25 runs, five chairlifts, seven surface lifts and a terrain park. The Bruhn family owned it until Vail Resorts bought it in December 2012. It appeared in the 1993 film Aspen Extreme.
+
+**Culture**
+
+> Ski and snowboard clubs are a popular activity for suburban and metro Detroit elementary and high school students, and Mount Brighton teaches many of these groups. XLR8 Alpine Racing trains young racers here, and NASTAR and Epic Race events run on weekends. Vail lists Detroit among the metro markets its Midwest ski areas draw from.
+
+**Sources:** [Mount Brighton (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Brighton), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort mount-brighton --by Alexandre`
+
+### Resort: Mount Snow (`mount-snow`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Mount Snow is Vermont's southernmost big mountain and the closest to many Northeast metropolitan areas. It sits in the town of Dover, with the village of West Dover as a major service point. Walt Schoenknecht opened it in 1954. Mount Snow opened the first snowboard park in the East in 1992, cohosted the first Extreme Games in 1995 and hosted the X Games in 2000 and 2001. Carinthia Parks holds ten terrain parks. Vail Resorts bought it with Peak Resorts in 2019.
+
+**Culture**
+
+> Dover is a town of 1,798 people (2020 census) known as the home of Mount Snow, and West Dover is a major service point for the ski area. Mount Snow Academy graduates include 2002 Olympic halfpipe gold medalist Kelly Clark and 2014 Olympic slopestyle silver medalist Devin Logan. Vail describes Mount Snow as a regional destination for guests from the New York metropolitan area and throughout New England.
+
+**Sources:** [Mount Snow (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Snow), [Dover, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Dover,_Vermont), [West Dover, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/West_Dover,_Vermont), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort mount-snow --by Alexandre`
+
+### Resort: Mount Sunapee Resort (`mount-sunapee`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Mount Sunapee Resort is a ski area inside Mount Sunapee State Park in Newbury, New Hampshire. The state built its first chairlift after World War II and ran the area until 1998, when the Mueller family of Okemo began leasing it. Vail Resorts acquired it with Okemo and Crested Butte in 2018 and leases its land from the State of New Hampshire. Snowmaking covers 97 percent of its 230 acres. Vail says its four New Hampshire ski areas serve guests throughout New England.
+
+**Culture**
+
+> Newbury is a town of 2,172 people (2020 census) at the south end of Lake Sunapee. The resort holds the Slush Cup each spring, where skiers and riders try to cross a man made pond, and every August it hosts the League of New Hampshire Craftsmen's Fair, held since 1934. The state park beach on Lake Sunapee sits at the park entrance.
+
+**Sources:** [Mount Sunapee Resort (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Sunapee_Resort), [Newbury, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Newbury,_New_Hampshire), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort mount-sunapee --by Alexandre`
+
+### Resort: Mt. Bachelor (`mt-bachelor`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Mt. Bachelor sits on the north side of a Cascade Range stratovolcano in Central Oregon, about 22 miles west of Bend. Former 10th Mountain Division ski trooper Bill Healy founded it on December 19, 1958, with money raised from local investors. It is the largest ski resort in Oregon and the second largest single mountain ski resort in the U.S., behind Vail. Its season usually runs from mid November to the end of May, with over 462 inches of snow a year. POWDR has owned it since 2001.
+
+**Culture**
+
+> Tourism is one of Bend's largest sectors, and Mt. Bachelor brings in tourists from across Oregon, Washington and California. Bend had 99,178 residents in 2020 and is Central Oregon's largest city. In 2011 tourism employed 16 percent of the city's workforce, and families made up the largest group of visitors. Bend is known for its brewing culture, led by Deschutes Brewery. Some Bay Area and Seattle tech workers live in Bend for its outdoors and lower cost of living.
+
+**Sources:** [Mount Bachelor ski area (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Bachelor_ski_area), [Bend, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Bend,_Oregon), [Powdr (Wikipedia)](https://en.wikipedia.org/wiki/Powdr)
+
+Approve: `python -m pipeline.editorial approve resort mt-bachelor --by Alexandre`
+
+### Resort: Mt. Baker Ski Area (`mt-baker`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Mt. Baker Ski Area sits at the end of State Route 542 in Whatcom County, Washington, about 10 miles south of the Canadian border and closer to Mount Shuksan than Mount Baker. It holds the world record for snowfall in one season, 1,140 inches in 1998 to 1999, and averages 641 inches a year. It is known for challenging in bounds routes and lift accessed backcountry. Its first chairlift, Pan Dome, was built in 1953. The season usually runs from late November to late April.
+
+**Culture**
+
+> Mt. Baker has hosted the Legendary Banked Slalom every year since 1985, a snowboard race through a natural halfpipe that draws professionals from around the world and amateurs of all ages. Ski and snowboard films often feature the area. Glacier, the closest community, had 300 residents in 2020 and sits a 20 mile drive from the ski area.
+
+**Sources:** [Mt. Baker Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Mt._Baker_Ski_Area), [Glacier, Washington (Wikipedia)](https://en.wikipedia.org/wiki/Glacier,_Washington)
+
+Approve: `python -m pipeline.editorial approve resort mt-baker --by Alexandre`
+
+### Resort: Mt. Hood Meadows (`mt-hood-meadows`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Mount Hood Meadows sits on the southeast face of Mount Hood in northern Oregon and is the largest of the mountain's ski resorts, with 2,150 skiable acres. It lies about 67 miles east of Portland and 35 miles from Hood River on Oregon Route 35. Skiers first used the resort in December 1967. It has alpine and Nordic areas and night skiing. Overnight guests stay at Timberline Lodge, Cooper Spur or condos in Government Camp.
+
+**Culture**
+
+> Many buses serve Meadows, including Columbia Area Transit from the Hood River side. Hood River, a city of 8,313 in 2020, built its economy on agriculture, tourism and sports recreation, and tourism boomed after windsurfers and kiteboarders discovered the Columbia Gorge winds. Since the late 1990s aerospace firms have become some of its largest employers. On the west side, Government Camp is the only town within 5 miles of Mount Hood and serves as its ski town; it had 179 residents in 2020.
+
+**Sources:** [Mount Hood Meadows (Wikipedia)](https://en.wikipedia.org/wiki/Mount_Hood_Meadows), [Hood River, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Hood_River,_Oregon), [Government Camp, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Government_Camp,_Oregon)
+
+Approve: `python -m pipeline.editorial approve resort mt-hood-meadows --by Alexandre`
+
+### Resort: Northstar California (`northstar`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Northstar California sits in Placer County near the northwest shore of Lake Tahoe, about 200 miles from the San Francisco Bay Area. The 3,170 acre resort has 2,280 feet of vertical, 19 lifts, a village with lodging and a cross country center. Vail Resorts has operated it since 2010 under a lease from affiliates of EPR Properties, extended in fiscal 2026 through January 2037. Vail Resorts calls Northstar a luxury resort, with premium lodging and a village of high end shops and restaurants.
+
+**Culture**
+
+> Each ski season thousands of skiers from across Nevada and California, including San Francisco and Sacramento, come to the Tahoe slopes. Its village holds a conference center and a 9,000 square foot skating rink, and summer brings golf and a lift served bike park. Nearby Truckee, a town of 16,729 in 2020 with 50.6 percent of housing units vacant, counts ski racers Daron Rahlves and Travis Ganong among its notable people.
+
+**Sources:** [Northstar California (Wikipedia)](https://en.wikipedia.org/wiki/Northstar_California), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm), [Lake Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Tahoe), [Truckee, California (Wikipedia)](https://en.wikipedia.org/wiki/Truckee,_California)
+
+Approve: `python -m pipeline.editorial approve resort northstar --by Alexandre`
+
+### Resort: Okemo (`okemo`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Okemo Mountain Resort is in the town of Ludlow in southern Vermont. Its 2,200 foot vertical drop is the largest in southern Vermont, and snowmaking covers 98 percent of its trail area. Local businessmen founded it in 1955. Tim and Dianne Mueller bought it in 1982 and expanded it for decades, and Vail Resorts acquired it in 2018. Parents Magazine rated it the top US family snow resort. Vail describes Okemo as a regional destination for guests from the New York metropolitan area and throughout New England.
+
+**Culture**
+
+> Ludlow is a town of 2,172 people (2020 census). It was a mill town and home to a General Electric plant until 1977 before it became a ski destination. The town was among the places hit hardest by the July 2023 Vermont floods. Visitor's Choice on the Snow rated Okemo's beginner terrain number one in Vermont, and SKI Magazine readers ranked its grooming sixth in the nation.
+
+**Sources:** [Okemo Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Okemo_Mountain), [Ludlow (town), Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Ludlow_(town),_Vermont), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort okemo --by Alexandre`
+
+### Resort: Palisades Tahoe (`palisades-tahoe`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Palisades Tahoe sits in Olympic Valley, California, northwest of Tahoe City. Founded in 1949 as Squaw Valley, it hosted the 1960 Winter Olympics and took its current name in 2021. It is the largest ski complex in the Lake Tahoe region and is known for challenging terrain, with 3,600 acres across six peaks, a tram and the only funitel in the U.S. It averages 400 inches of snow and draws about 600,000 skiers a year. Alterra Mountain Company owns it, joined by gondola to Alpine Meadows.
+
+**Culture**
+
+> Skiing and racing culture shaped Olympic Valley long before the 1960 Games. The valley has about 924 year round residents and can swell to about 6,573 overnight with visitors. An appointed council of residents advises the Placer County supervisors, and in 2015 the county formation commission said it would vote against incorporation. Base village development plans have drawn opposition from conservation groups such as Sierra Watch. The resort works with the Washoe tribe on a cultural tour. Olympic Valley has hosted the Wanderlust music and yoga festival since 2009.
+
+**Sources:** [Palisades Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Palisades_Tahoe), [Olympic Valley, California (Wikipedia)](https://en.wikipedia.org/wiki/Olympic_Valley,_California)
+
+Approve: `python -m pipeline.editorial approve resort palisades-tahoe --by Alexandre`
+
+### Resort: Palisades Tahoe (Alpine Meadows) (`palisades-tahoe-alpine-meadows`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Alpine Meadows sits near the northwest shore of Lake Tahoe, with 2,400 acres, 13 lifts and 1,802 feet of vertical. It merged with Squaw Valley in 2012 and became part of Alterra Mountain Company in 2018. Today it operates with Palisades Tahoe as one resort on one season pass, and a gondola connects the two base areas. Together the two areas offer 6,000 skiable acres and over 270 trails.
+
+**Culture**
+
+> In a 1982 avalanche at Alpine Meadows, employee Anna Conrad was rescued after five days trapped in a collapsed resort building. The area shares Palisades Tahoe's market of Tahoe skiers from across California and Nevada, including San Francisco and Sacramento.
+
+**Sources:** [Alpine Meadows (ski resort) (Wikipedia)](https://en.wikipedia.org/wiki/Alpine_Meadows_(ski_resort)), [Palisades Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Palisades_Tahoe), [Lake Tahoe (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Tahoe)
+
+Approve: `python -m pipeline.editorial approve resort palisades-tahoe-alpine-meadows --by Alexandre`
+
+### Resort: Paoli Peaks (`paoli-peaks`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Paoli Peaks is a ski resort in Paoli Township, Orange County, Indiana, just north of Hoosier National Forest. It is built on a natural hill with 300 feet of vertical and 17 runs, and more than 110 snowmaking towers and machines make up for about 25 inches of natural snow a year. Vail Resorts owns and operates it. Its 45,000 square foot day lodge sits on top of the hill, and visitors stay in hotels nearby.
+
+**Culture**
+
+> Paoli Peaks has extensive night skiing, with Midnight Madness sessions until 3 a.m. on most weekends, and a Spring Carnival with a cardboard sled race and a slosh pit. Its ski patrol has about 85 members, mostly volunteers who hold full time jobs elsewhere. Vail lists Indianapolis and Louisville among the metro markets its Midwest ski areas draw from.
+
+**Sources:** [Paoli Peaks (Wikipedia)](https://en.wikipedia.org/wiki/Paoli_Peaks), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort paoli-peaks --by Alexandre`
+
+### Resort: Park City (`park-city`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Park City Mountain Resort sits in Park City, Utah, 32 miles east of Salt Lake City. It opened on December 21, 1963, as Treasure Mountain, funded partly by a federal program to revive the depressed mining town. Vail Resorts bought it in 2014 and linked it to neighboring Canyons by gondola, creating the largest lift served ski resort in the U.S. at 7,300 skiable acres. It holds several U.S. Ski Team training courses and hosted 2002 Olympic giant slalom and snowboarding events.
+
+**Culture**
+
+> Park City had 8,396 residents in 2020, and tourists far outnumber them. In 2021 data the city brought an average of $529.8 million a year to the Utah economy, and the town is now one of the most affluent resort towns in the U.S. The resort is a main employer for many residents. In December 2024, 200 ski patrollers struck for higher wages. The town is home to the U.S. Ski Team, Main Street shopping and dining, and the Kimball Arts Festival.
+
+**Sources:** [Park City Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Park_City_Mountain_Resort), [Park City, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Park_City,_Utah), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort park-city --by Alexandre`
+
+### Resort: Pico Mountain (`pico`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Pico Mountain sits on Pico Peak along U.S. Route 4 in Killington, several miles from the main Killington resort. It opened on Thanksgiving Day 1937 as one of the first commercial ski resorts in Vermont, and in 1940 it ran the first T bar lift in the US. The Mead family founded it; their daughter Andrea Mead Lawrence won two Olympic gold medals in 1952. Killington bought Pico out of receivership in the 1990s, and the Killington Independence Group bought both from Powdr in 2024.
+
+**Culture**
+
+> Pico shares the town of Killington, population 1,407 at the 2020 census, with its larger neighbor. Trails off the Golden Express cater mainly to families and beginner and intermediate riders, while the summit runs are mostly steep black diamonds for experts. Hotels, condos and restaurants sit at the base, and the base lodge holds a Vermont Ski and Snowboard Museum exhibit.
+
+**Sources:** [Pico Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Pico_Mountain), [Killington Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Killington_Ski_Resort), [Killington, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Killington,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort pico --by Alexandre`
+
+### Resort: Powder Mountain (`powder-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Powder Mountain sits east of Eden, Utah, spanning Weber and Cache counties, 55 miles northeast of Salt Lake City International Airport. Its 12,000 acres make it one of the largest ski resorts in the U.S. It opened on February 19, 1972. Netflix cofounder Reed Hastings, a Powder homeowner, bought it in 2023 and serves as CEO and chairman. He introduced a blended public and private model. The resort has five public chairlifts and three lifts for homeowners, plus cat skiing.
+
+**Culture**
+
+> The summit holds Powder Haven, a 600 family private ski community. Men's Journal named Powder the best ski resort to avoid the crowds in 2024, and SKI Magazine ranked it first in its 2023 Top 30 Resorts in the West. Eden, in Ogden Valley, had 690 residents in 2020 and is part of the Ogden metro area.
+
+**Sources:** [Powder Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Powder_Mountain), [Eden, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Eden,_Utah)
+
+Approve: `python -m pipeline.editorial approve resort powder-mountain --by Alexandre`
+
+### Resort: Roundtop Mountain Resort (`roundtop-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Roundtop Mountain Resort is a ski area in York County, Pennsylvania. Irvin Naylor developed it as Ski Roundtop in 1964 and formed Snow Time, Inc. to run it; Snow Time later also ran Liberty and Whitetail. Peak Resorts bought the three in 2018, and Vail Resorts acquired them in 2019. Roundtop has 22 trails on a 600 foot vertical drop, full snowmaking, and night skiing on 95 percent of its terrain seven nights a week. Summer brings camps and paintball.
+
+**Culture**
+
+> Vail groups Roundtop with its eight Mid Atlantic ski areas, which serve guests from Philadelphia, Pittsburgh, central and southern New Jersey, Baltimore and Washington, D.C. Vail says these areas offer local options and easy overnight weekend and holiday trips within driving distance of those markets. Roundtop sits closer to Baltimore than its sister resort Whitetail, which is 92 miles from the city.
+
+**Sources:** [Roundtop Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Roundtop_Mountain_Resort), [Whitetail Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Whitetail_Ski_Resort), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort roundtop-mountain --by Alexandre`
+
+### Resort: Saskadena Six (`saskadena-six`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Saskadena Six, called Suicide Six until 2022, is a ski area in South Pomfret, Vermont, near Woodstock. It traces to the first rope tow in the United States, installed on a farm in January 1934. Laurance Rockefeller bought it in 1961 and developed it with his nearby Woodstock Inn, and as of 2011 it operated as the inn's ski area. It hosted the first National Snow Surfing Championships in 1982, a forerunner of the U.S. Open Snowboarding Championships. The new name means standing mountain in the Abenaki language.
+
+**Culture**
+
+> The Boston Globe described the area in 2004 as a low key place for a taste of rural skiing. It hosts the Fisk Trophy Race, first held in 1937 and the longest running ski race in North America, a rite of passage for serious eastern racers. Woodstock, the Windsor County seat with 3,005 people in 2020, draws visitors to the Billings Farm and Museum and its historic village.
+
+**Sources:** [Saskadena Six (Wikipedia)](https://en.wikipedia.org/wiki/Saskadena_Six), [Woodstock, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Woodstock,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort saskadena-six --by Alexandre`
+
+### Resort: Schweitzer Mountain (`schweitzer`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Schweitzer sits in the Selkirk Mountains of north Idaho, 11 miles northwest of Sandpoint, overlooking Lake Pend Oreille. It opened as Schweitzer Basin in the fall of 1963 and is Idaho's largest ski resort, with 2,900 acres, 92 named runs, 10 lifts and over 300 inches of average snowfall. Alterra Mountain Company agreed to buy it in June 2023, after it joined the Ikon Pass. The purchase drew a mixed local reaction, with some passholders pleased and others worried about crowding.
+
+**Culture**
+
+> Schweitzer turned Sandpoint into a year round tourism destination. Sandpoint had 8,639 residents in 2020, and its economy rests on forest products, light manufacturing, tourism, recreation and government. The town holds a Winter Carnival each February and the Festival at Sandpoint in August, and it has a strong arts community. To meet a critical workforce housing shortage, the resort broke ground in July 2021 on a $22 million, 84 unit apartment complex in Ponderay. Amtrak's Empire Builder stops in Sandpoint.
+
+**Sources:** [Schweitzer Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Schweitzer_Mountain), [Sandpoint, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Sandpoint,_Idaho)
+
+Approve: `python -m pipeline.editorial approve resort schweitzer --by Alexandre`
+
+### Resort: Seven Springs Resort (`seven-springs`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Seven Springs Mountain Resort is a four season resort in the borough of Seven Springs, Pennsylvania, at 2,994 feet, a high elevation for a Pennsylvania ski area. Bavarian immigrants Adolph and Helen Dupre founded Seven Springs farm in 1932 and installed a rope tow for local skiers. Vail Resorts bought Seven Springs, Hidden Valley and Laurel Mountain in December 2021 for about $118 million. Vail says the three sit near Pittsburgh and draw drive to business from Washington DC, Baltimore and Cleveland.
+
+**Culture**
+
+> The borough had 26 residents in 2020 and spans Somerset and Fayette counties; the Fayette portion belongs to the Pittsburgh metropolitan area, and the resort's mailing address is the village of Champion. The resort hosts events through the year, including Brewski Fest, Autumnfest, a Wine Festival and a Pond Skim. Transworld Snowboarding named its halfpipe the East Coast's best in 2009 and 2010.
+
+**Sources:** [Seven Springs Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Seven_Springs_Mountain_Resort), [Seven Springs, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Seven_Springs,_Pennsylvania), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort seven-springs --by Alexandre`
+
+### Resort: Silverton Mountain (`silverton-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Silverton Mountain sits near the town of Silverton in the San Juan Mountains of southwest Colorado. Aaron and Jen Brill founded it, and it opened on January 19, 2002, with one double chair bought from Mammoth. The single lift serves 1,819 acres of advanced and expert terrain that is ungroomed and unpatrolled, so avalanche gear is required at all times. Silverton is also the base for over 22,000 acres of heli skiing, sold by the drop, and it opens Thursday through Sunday from December through April.
+
+**Culture**
+
+> The ski area is known for adventure, powder and steep terrain, and it runs avalanche courses. Silverton is a former mining town in a National Historic Landmark district, and its last mine closed in 1992. The town now depends mainly on tourism and on government remediation and preservation work. It had 622 residents in 2020. Silverton Mountain's opening in 2002 began year round tourism, and winter events such as skijoring now draw crowds that rival summer.
+
+**Sources:** [Silverton Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Silverton_Mountain), [Silverton, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Silverton,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort silverton-mountain --by Alexandre`
+
+### Resort: Ski Cooper (`ski-cooper`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Ski Cooper sits at Tennessee Pass near Leadville, Colorado, between the San Isabel and White River national forests. It opened as Cooper Hill Ski Area in 1942 and served as the training site for the 10th Mountain Division, based at nearby Camp Hale during World War II. Lake County owns it, and Cooper Hill Ski Area, a nonprofit with a volunteer board, manages it. It is among the most affordable ski areas in Colorado, second only to Howelsen Hill.
+
+**Culture**
+
+> Ski Cooper markets itself as a family resort because of its affordability and accessibility. Leadville, at 10,119 feet, is the highest incorporated city in the U.S. and had 2,633 residents in 2020. It is a former silver mining town with a historic district, and after the Climax Mine market collapsed in 1981 the town turned to tourism and outdoor recreation. Each March, Leadville holds a skijoring event on Harrison Avenue, run since 1949.
+
+**Sources:** [Ski Cooper (Wikipedia)](https://en.wikipedia.org/wiki/Ski_Cooper), [Leadville, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Leadville,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort ski-cooper --by Alexandre`
+
+### Resort: Snow Creek (`snow-creek`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Snow Creek is a ski resort on the bluffs above the Missouri River in Platte County, northwest of Kansas City, with a Weston, Missouri, mailing address. It opened in 1986 as the second resort in the Peak Resorts chain, and Vail Resorts bought it with Peak in 2019. It has 25 acres, 11 trails, three chairlifts and a 300 foot vertical drop. The resort plays on its Midwest heritage with a tornado alley tubing trail.
+
+**Culture**
+
+> Snow Creek overlooks Kansas across the river. Vail lists Kansas City among the metro markets its Midwest ski areas draw from and says these areas give beginners easy access to beginner programs and offer night skiing for young adults and families. A tornado touched down at the resort in April 2003 without injuries.
+
+**Sources:** [Snow Creek (ski resort) (Wikipedia)](https://en.wikipedia.org/wiki/Snow_Creek_(ski_resort)), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort snow-creek --by Alexandre`
+
+### Resort: Snow Summit (`snow-summit`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Snow Summit sits by Big Bear Lake in the San Bernardino Mountains of Southern California and was established in 1952. It is a mid sized resort with 240 skiable acres and 1,209 feet of vertical, and its snowmaking draws water from Big Bear Lake to cover all marked terrain. Mammoth Resorts bought it with Bear Mountain in 2014 for $38 million, and it became part of Alterra Mountain Company in 2017. It operates with Bear Mountain and Snow Valley as Big Bear Mountain Resort. Snow Summit hosted the first Winter X Games in 1997.
+
+**Culture**
+
+> Snow Summit is one of the most popular ski and snowboard destinations for people from the Los Angeles area. Big Bear Lake is a year round resort town of 5,046 residents in 2020, and the Big Bear Valley often hosts over 100,000 people on weekends. Big Bear Lake is Southern California's largest recreational lake.
+
+**Sources:** [Snow Summit (Wikipedia)](https://en.wikipedia.org/wiki/Snow_Summit), [Big Bear Lake, California (Wikipedia)](https://en.wikipedia.org/wiki/Big_Bear_Lake,_California), [X Games (Wikipedia)](https://en.wikipedia.org/wiki/X_Games)
+
+Approve: `python -m pipeline.editorial approve resort snow-summit --by Alexandre`
+
+### Resort: Snow Valley Mountain Resort (`snow-valley`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Snow Valley Mountain Resort sits in Running Springs, California, 17 miles west of Big Bear Lake, in the San Bernardino National Forest. It is the longest continually operating ski resort in Southern California and the first in the San Bernardino Mountains. Norwegian American ski jumper Johnny Elvrum bought and expanded it in 1940. Alterra Mountain Company bought it in January 2023, and it now runs with Bear Mountain and Snow Summit as part of Big Bear Mountain Resort. It has 12 lifts, including one high speed six pack.
+
+**Culture**
+
+> Running Springs had 5,268 residents in 2020. Its service businesses cater to tourists visiting the San Bernardino National Forest, a year round destination. With nearby communities it also forms a bedroom community for commuters who work in San Bernardino. The Rim, as locals call it, runs about 30 miles from Crestline to Big Bear.
+
+**Sources:** [Snow Valley Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Snow_Valley_Mountain_Resort), [Running Springs, California (Wikipedia)](https://en.wikipedia.org/wiki/Running_Springs,_California), [Snow Summit (Wikipedia)](https://en.wikipedia.org/wiki/Snow_Summit)
+
+Approve: `python -m pipeline.editorial approve resort snow-valley --by Alexandre`
+
+### Resort: Snowbasin (`snowbasin`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Snowbasin sits on Mount Ogden in Weber County, Utah, 33 miles northeast of Salt Lake City on the east side of the Wasatch Range. It opened in 1939 as part of an Ogden effort to restore the Wheeler Creek watershed, and it is one of the oldest continuously operating ski areas in the U.S. Earl Holding, owner of Sun Valley, bought it in October 1984. After his investment in lifts and snowmaking, it hosted the 2002 Olympic downhill, combined and super G.
+
+**Culture**
+
+> M. Earl Miller ran the Snowbasin ski school from the mid 1950s until 1987 and helped draft the PSIA American Ski Technique in 1961. SKI Magazine, Outside and USA Today ranked Snowbasin the top ski resort in the U.S. in 2025. The resort sits above Ogden Valley, where the town of Huntsville had 573 residents in 2020. Huntsville is home to the Shooting Star Saloon, the oldest continuously operating bar west of the Mississippi.
+
+**Sources:** [Snowbasin (Wikipedia)](https://en.wikipedia.org/wiki/Snowbasin), [Huntsville, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Huntsville,_Utah)
+
+Approve: `python -m pipeline.editorial approve resort snowbasin --by Alexandre`
+
+### Resort: Snowbird (`snowbird`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Snowbird sits in Little Cottonwood Canyon in Utah, 24 miles from downtown Salt Lake City and 29 miles from the airport. It opened in December 1971 and runs almost entirely on private land. The resort has 2,500 acres and 3,240 feet of vertical from Hidden Peak, which tops 11,000 feet. Snowbird is mainly known for powder and challenging terrain, and it receives more than 500 inches of snow a year. POWDR lists Snowbird among its resorts.
+
+**Culture**
+
+> Snowbird operates year round, with hiking, mountain biking and fishing in summer. It sits on the eastern border of the Salt Lake City suburb of Sandy. Industry magazines often praise its snowfall, terrain and easy access from Salt Lake City International Airport. Snowbird owns Mineral Basin, a large bowl behind Hidden Peak, where a lift gives access to Alta. The Tram Club, a hot spot for locals since 1994, reopened in December 2022.
+
+**Sources:** [Snowbird, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Snowbird,_Utah), [Powdr (Wikipedia)](https://en.wikipedia.org/wiki/Powdr)
+
+Approve: `python -m pipeline.editorial approve resort snowbird --by Alexandre`
+
+### Resort: Snowmass (`snowmass`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Snowmass is the largest of the four Aspen Snowmass ski areas and sits in the Town of Snowmass Village near Aspen, Colorado. It opened in December 1967 and hired Olympic medalist Stein Eriksen to direct its ski school. The Aspen Skiing Company owns and operates it. The company, owned by the Crown family of Illinois, also runs the Ski and Snowboard Schools of Aspen Snowmass and a Limelight hotel in Snowmass.
+
+**Culture**
+
+> Snowmass Village had 3,096 residents in 2020, and 46.6 percent of its housing units were vacant. The village has seen a building boom of condominiums, luxury homes, mountainside mansions and the new Base Village, plus new Westin and Viceroy hotels. It is also seeing a rising influx of wealthy tourists and skiers. The median single family home price there was $5.2 million in 2021.
+
+**Sources:** [Snowmass (ski area) (Wikipedia)](https://en.wikipedia.org/wiki/Snowmass_(ski_area)), [Snowmass Village, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Snowmass_Village,_Colorado), [Aspen Skiing Company (Wikipedia)](https://en.wikipedia.org/wiki/Aspen_Skiing_Company), [Aspen, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Aspen,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort snowmass --by Alexandre`
+
+### Resort: Snowshoe Mountain (`snowshoe`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Snowshoe Mountain is a ski resort on Cheat Mountain in Pocahontas County, West Virginia, in the Allegheny Mountains. Its village sits near the summit. It includes the Snowshoe and Silver Creek areas, and Cupp Run and Shay's Revenge drop 1,500 vertical feet, the most in the Southeast and Mid Atlantic. Thomas Brigham, a dentist from North Carolina, opened it in 1974. Intrawest bought it in 1995, and Alterra Mountain Company acquired Intrawest in 2017. Its bike park is a regular UCI Mountain Bike World Cup stop.
+
+**Culture**
+
+> About 480,000 skiers visit each year, mostly from larger Mid Atlantic and Southeast cities and from across West Virginia. Pocahontas County has 7,869 people (2020 census), and tourism is one of its largest industries; about 30,000 people from outside the county owned property there as of 2008. Most of the resort's 1,400 condo and lodge units are privately owned and managed by the resort. Trail names recall the area's logging history.
+
+**Sources:** [Snowshoe Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Snowshoe_Mountain), [Snowshoe, West Virginia (Wikipedia)](https://en.wikipedia.org/wiki/Snowshoe,_West_Virginia), [Pocahontas County, West Virginia (Wikipedia)](https://en.wikipedia.org/wiki/Pocahontas_County,_West_Virginia)
+
+Approve: `python -m pipeline.editorial approve resort snowshoe --by Alexandre`
+
+### Resort: Solitude Mountain Resort (`solitude`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Solitude Mountain Resort sits in Big Cottonwood Canyon, thirty miles southeast of Salt Lake City. With 1,200 acres and 2,047 feet of vertical, it is one of the smaller resorts near Salt Lake City, along with its neighbor Brighton. Half of its slopes are rated beginner or intermediate, the highest share in the Salt Lake area. Robert Barrett began building it in 1956. Deer Valley bought it in 2015, and Alterra Mountain Company agreed to buy it in 2018.
+
+**Culture**
+
+> Solitude is a family oriented mountain. It shares the Solbright Pass with Brighton, which covers both resorts for a small surcharge. Solitude was the first Utah resort to charge for parking, up to $20 a day starting in November 2019. It hosted snowboard cross and ski cross at the 2019 FIS Freestyle and Snowboarding World Championships, and it runs a Nordic center.
+
+**Sources:** [Solitude Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Solitude_Mountain_Resort)
+
+Approve: `python -m pipeline.editorial approve resort solitude --by Alexandre`
+
+### Resort: Steamboat (`steamboat`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Steamboat Resort sits on Mount Werner in the Park Range, just east of Steamboat Springs in northwest Colorado. It opened on January 12, 1963, as Storm Mountain, largely built by locals Jim Temple and rancher John Fetcher. It has 297 named trails over 2,965 acres, with 44 percent rated advanced, and the Mavericks Superpipe. Alterra Mountain Company bought it from Intrawest in 2017, and the Steamboat Ski & Resort Corporation operates it. Steamboat Springs lies about 150 miles northwest of Denver.
+
+**Culture**
+
+> Steamboat Springs had 13,224 residents in 2020 and is the largest city in northwest Colorado. Ranching and mining built the regional economy and still have a large presence in the county. The town has produced more Winter Olympians than any other town in North America, and its Winter Sports Club trains on Mount Werner and Howelsen Hill. Housing is short: the median single family home price rose from $529,000 in 2019 to $829,000 in 2022. In 2024 voters blocked a plan for nearly 2,300 affordable worker homes.
+
+**Sources:** [Steamboat Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Steamboat_Ski_Resort), [Steamboat Springs, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado), [Steamboat Springs Winter Sports Club (Wikipedia)](https://en.wikipedia.org/wiki/Steamboat_Springs_Winter_Sports_Club)
+
+Approve: `python -m pipeline.editorial approve resort steamboat --by Alexandre`
+
+### Resort: Stevens Pass (`stevens-pass`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Stevens Pass sits at the crest of Stevens Pass in the Washington Cascades, on U.S. Route 2, less than 85 miles from Seattle. It opened in 1937 and has 37 major runs on 1,125 acres, plus the Mill Valley backside and night skiing. Vail Resorts completed its purchase in August 2018 and added it to the Epic Pass. Vail Resorts notes its bowls, glades and faces and its lighted night terrain.
+
+**Culture**
+
+> Stevens is a day resort that draws heavily from the Seattle and Everett metro area by U.S. Route 2. In the 2021 to 2022 season, staffing shortages left only five lifts running. A petition gathered nearly 40,000 signatures in two weeks. A new general manager opened the 2022 to 2023 season fully staffed, with more employee housing and pay raises. Vail Resorts owns employee housing at the pass.
+
+**Sources:** [Stevens Pass Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Stevens_Pass_Ski_Area), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort stevens-pass --by Alexandre`
+
+### Resort: Stowe (`stowe`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Stowe Mountain Resort covers two mountains, Mount Mansfield and Spruce Peak, near the town of Stowe in northern Vermont. Mount Mansfield is the highest peak in the state. The Civilian Conservation Corps cut the first trails there in 1933, and the Mount Mansfield Ski Patrol, founded in 1934, is the oldest in the nation and the model for the National Ski Patrol. AIG sold the ski operations to Vail Resorts in 2017. Vail's annual report calls Stowe its premier high end regional ski area in the Northeast. Stowe sits in the Northern Vermont cluster with Jay Peak and Burke.
+
+**Culture**
+
+> Stowe is a town of 5,223 people (2020 census) nicknamed the Ski Capital of the East. It was a known summer resort by the middle of the nineteenth century and held its first Winter Carnival in 1921. The Vermont Ski Museum moved to Stowe in 2000, and the Mount Mansfield Winter Academy in town focuses on snow sport athletes. Vail says its Northeast ski areas serve guests within driving distance of New York, Boston and greater New England.
+
+**Sources:** [Stowe Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Stowe_Mountain_Resort), [Stowe, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Stowe,_Vermont), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort stowe --by Alexandre`
+
+### Resort: Stratton Mountain Resort (`stratton`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Stratton Mountain Resort is on Stratton Mountain in Stratton, Vermont, east of Manchester. It opened in December 1961. In the 1980s it became the first ski area to allow snowboarding and home to the first snowboard school, and it hosted the Burton U.S. Open Snowboarding Championships from 1985 to 2012. Stratton Mountain School, founded at the mountain in 1972, has produced 46 Olympic athletes. Alterra Mountain Company has owned Stratton since 2017, when it was formed through the purchase of Intrawest.
+
+**Culture**
+
+> In the 1960s a group of Austrian ski instructors, the Stratton Mountain Boys, started European style après ski at Stratton and became part of its marketing. Intrawest later built premium real estate at the base, including the Village Common and ski in, ski out homes. The resort community of Stratton Mountain spans the towns of Stratton (440 people in 2020) and Winhall (1,182). Stratton Mountain School tuition for 2023 to 2024 was $65,500 for boarders.
+
+**Sources:** [Stratton Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Stratton_Mountain_Resort), [Stratton Mountain School (Wikipedia)](https://en.wikipedia.org/wiki/Stratton_Mountain_School), [Stratton, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Stratton,_Vermont), [Winhall, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Winhall,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort stratton --by Alexandre`
+
+### Resort: Sugar Bowl Ski Resort (`sugar-bowl`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Sugar Bowl sits on Donner Pass near Norden, California, about 46 miles west of Reno on I 80. It opened on December 15, 1939. Austrian champion Hannes Schroll founded it with individual investors, and Walt Disney became a shareholder. It was the first ski area in California with a chairlift and the first on the West Coast with a gondola. Sugar Bowl is known for its history, advanced terrain and heavy snowfall, and it is one of the few privately owned resorts left in the Lake Tahoe area.
+
+**Culture**
+
+> Sugar Bowl is one of the closest ski areas to the San Francisco Bay Area, and many trails carry San Francisco names such as Nob Hill and Market Street. In its early years Hollywood guests came, and wearing suit jackets to dinner was the norm. Skiers from Sacramento and San Francisco skied the area before the resort opened, at the Klein ski school founded in 1936.
+
+**Sources:** [Sugar Bowl Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Sugar_Bowl_Ski_Resort)
+
+Approve: `python -m pipeline.editorial approve resort sugar-bowl --by Alexandre`
+
+### Resort: Sugarbush Resort (`sugarbush`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Sugarbush Resort sits in the Mad River Valley in Warren, Vermont, and is one of the largest ski resorts in New England. It has two mountain areas, Lincoln Peak and Mount Ellen, joined by the Slide Brook Express chairlift over the expert Slide Brook Basin. Its 2,600 foot vertical drop is the second largest in Vermont after Killington. Damon and Sara Gadd and Jack Murphy opened it on Christmas Day 1958. Alterra Mountain Company bought Sugarbush in November 2019. It shares the valley with Mad River Glen in the Central Vermont cluster.
+
+**Culture**
+
+> The Mad River Valley towns of Warren (1,977 people in 2020), Waitsfield (1,844) and Fayston (1,364) surround the resort. Waitsfield's economy is largely supported by Sugarbush and Mad River Glen, along with its restaurants and lodging. Green Mountain Valley School trains racers on the Inverness slopes at Mount Ellen. Lincoln Peak Village, finished in 2010, added the Claybrook luxury condominiums and a Schoolhouse for children's programs.
+
+**Sources:** [Sugarbush Resort (Wikipedia)](https://en.wikipedia.org/wiki/Sugarbush_Resort), [Warren, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Warren,_Vermont), [Waitsfield, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Waitsfield,_Vermont), [Fayston, Vermont (Wikipedia)](https://en.wikipedia.org/wiki/Fayston,_Vermont)
+
+Approve: `python -m pipeline.editorial approve resort sugarbush --by Alexandre`
+
+### Resort: Sugarloaf (`sugarloaf`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Sugarloaf is a ski resort on Sugarloaf Mountain in Carrabassett Valley, western Maine. It is the second largest ski resort east of the Mississippi by skiable area, has the highest peak elevation of any New England ski resort, and offers the only lift served skiing above treeline in the Northeast. The Sugarloaf Mountain Ski Club cut the first trail in 1950. Boyne Resorts has managed Sugarloaf since 2007 and bought the resort in March 2018. Carrabassett Valley Academy, at the base, counts 12 Olympians among its alumni.
+
+**Culture**
+
+> Carrabassett Valley is a town of 673 people (2020 census) that incorporated in 1971 and played a large role in Sugarloaf's development. Kingfield, population 960, is the principal gateway to the resort and home of the Ski Museum of Maine. Most trails carry logging terms as a tribute to Maine's logging history. Carrabassett Valley Academy draws students from Japan, Korea, Europe, Australia, New Zealand and South Africa.
+
+**Sources:** [Sugarloaf (ski resort) (Wikipedia)](https://en.wikipedia.org/wiki/Sugarloaf_(ski_resort)), [Carrabassett Valley Academy (Wikipedia)](https://en.wikipedia.org/wiki/Carrabassett_Valley_Academy), [Carrabassett Valley, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Carrabassett_Valley,_Maine), [Kingfield, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Kingfield,_Maine)
+
+Approve: `python -m pipeline.editorial approve resort sugarloaf --by Alexandre`
+
+### Resort: Sun Valley (Bald Mountain) (`sun-valley`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Sun Valley is the ski resort on Bald Mountain, or Baldy, next to Ketchum in Idaho's Wood River Valley. Union Pacific chairman W. Averell Harriman opened it in 1936 as the first destination winter resort in the U.S., and Baldy opened for lift served skiing in 1939 to 1940. The mountain has a 9,150 foot summit and 3,400 feet of vertical, with long runs at a steady pitch. The Holding family owns the resort, which Earl Holding bought in 1977.
+
+**Culture**
+
+> Sun Valley has been a seasonal home to the rich and famous since Ernest Hemingway brought it to public attention in the late 1930s. Harriman invited Hollywood celebrities to promote the resort, and Hemingway later moved to Ketchum. Ketchum had 3,555 residents in 2020, and Sun Valley had 1,783, with 66.6 percent of its housing units vacant. The area hosts the Sun Valley Music Festival, the Sun Valley Film Festival and Ketchum's Wagon Days each Labor Day weekend.
+
+**Sources:** [Sun Valley, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Sun_Valley,_Idaho), [Bald Mountain (Idaho) (Wikipedia)](https://en.wikipedia.org/wiki/Bald_Mountain_(Idaho)), [Ketchum, Idaho (Wikipedia)](https://en.wikipedia.org/wiki/Ketchum,_Idaho)
+
+Approve: `python -m pipeline.editorial approve resort sun-valley --by Alexandre`
+
+### Resort: Sunday River (`sunday-river`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Sunday River is a ski resort in Newry, Maine, and one of the state's largest and most visited. It has 139 trails across eight interconnected peaks, and its 2,340 foot vertical drop is the second largest in Maine after Sugarloaf. Boyne Resorts has operated it since American Skiing Company sold it with Sugarloaf in 2007, and Boyne bought its leased New England areas in 2018. Gould Academy athletes from nearby Bethel spend winter mornings training at Sunday River. It hosted the NCAA skiing championships in 1976, 1999 and 2009.
+
+**Culture**
+
+> Newry is a resort town of 411 year round residents (2020 census) with a proportionately large winter population. Bethel, population 2,504, was a fashionable summer resort between the Civil War and World War I and is home to Gould Academy. Local traditions include Santa Sunday, a charity ski in Santa suits held since 2000, and the Bust 'N' Burn mogul contest, revived in 2024.
+
+**Sources:** [Sunday River (ski resort) (Wikipedia)](https://en.wikipedia.org/wiki/Sunday_River_(ski_resort)), [Gould Academy (Wikipedia)](https://en.wikipedia.org/wiki/Gould_Academy), [Newry, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Newry,_Maine), [Bethel, Maine (Wikipedia)](https://en.wikipedia.org/wiki/Bethel,_Maine)
+
+Approve: `python -m pipeline.editorial approve resort sunday-river --by Alexandre`
+
+### Resort: Taos Ski Valley (`taos`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Taos Ski Valley is a village and ski resort in Taos County, New Mexico. Ernie and Rhoda Blake founded it in 1955, and they lived in an eleven foot camper before any lodge was finished. In 2006, 51 percent of its 110 trails were rated advanced or expert. Taos banned snowboarding until March 2008. Its Kachina lift reaches 12,481 feet. The Blake family sold Taos Ski Valley, Inc. to conservationist Louis Bacon in December 2013.
+
+**Culture**
+
+> Tourism is the village's main industry. In the 2011 to 2012 season the ski company employed about 700 people in winter, and about $47 million is spent in the village economy in an average year. The village had 77 residents in 2020. The town of Taos has a long reputation as an artist colony and counterculture haven next to Taos Pueblo, a UNESCO World Heritage Site. A fare free bus runs seasonally from Taos to the ski valley.
+
+**Sources:** [Taos Ski Valley, New Mexico (Wikipedia)](https://en.wikipedia.org/wiki/Taos_Ski_Valley,_New_Mexico), [Taos, New Mexico (Wikipedia)](https://en.wikipedia.org/wiki/Taos,_New_Mexico)
+
+Approve: `python -m pipeline.editorial approve resort taos --by Alexandre`
+
+### Resort: Telluride Ski Resort (`telluride`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Telluride Ski Resort spans the historic town of Telluride and the newer alpine community of Mountain Village in the San Juan Mountains of southwest Colorado. It has over 2,000 skiable acres. Telluride is known for its advanced terrain, and over half its runs are beginner or intermediate. Joe Zoline founded the ski area, which started in the 1970 to 1971 season. A free gondola links Telluride and Mountain Village. Chuck Horning, a Newport Beach real estate investor, took over ownership in February 2004.
+
+**Culture**
+
+> Telluride is a former silver mining camp in a box canyon, and its historic district is a National Historic Landmark. When the Pandora mine closed in 1978, skiing and tourism became the town's income. Young newcomers the locals called hippies replaced many mining families. Telluride has hosted the Bluegrass Festival and the Film Festival since 1974 and Mountainfilm since 1979. In the 1980s wealthy skiers flocked to the mountain all winter. Telluride had 2,607 residents in 2020 and Mountain Village had 1,264.
+
+**Sources:** [Telluride Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Telluride_Ski_Resort), [Telluride, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Telluride,_Colorado), [Mountain Village, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Mountain_Village,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort telluride --by Alexandre`
+
+### Resort: The Highlands at Harbor Springs (`the-highlands`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> The Highlands at Harbor Springs is a ski resort near Harbor Springs in northern Michigan, owned and operated by Boyne Resorts. It opened as Harbor Highlands in 1955, closed, and reopened under Boyne in 1963 as Boyne Highlands with the world's first triple chairlifts. It expanded into the North Peak area in 1995 and took its current name in December 2021. A high speed six passenger chairlift replaced three triple chairs in 2023. It is the sister resort of Boyne Mountain.
+
+**Culture**
+
+> Harbor Springs is a city and resort community of 1,274 people (2020 census) in Emmet County, known for historic summer resorts such as Wequetonsing. The Little Traverse Bay Bands of Odawa Indians have their tribal offices in the city. The golf series The Big Break X: Michigan was filmed at the resort.
+
+**Sources:** [The Highlands at Harbor Springs (Wikipedia)](https://en.wikipedia.org/wiki/The_Highlands_at_Harbor_Springs), [Harbor Springs, Michigan (Wikipedia)](https://en.wikipedia.org/wiki/Harbor_Springs,_Michigan), [Boyne Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Boyne_Mountain_Resort)
+
+Approve: `python -m pipeline.editorial approve resort the-highlands --by Alexandre`
+
+### Resort: Timberline Lodge ski area (`timberline-lodge`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Timberline Lodge ski area sits on the south face of Mount Hood, about 60 miles east of Portland, below the Works Progress Administration lodge that President Roosevelt dedicated in 1937. Most of its terrain lies below the lodge. It opened as Oregon's first destination ski resort with a portable rope tow, and its Magic Mile chairlift, built in 1938, was then the longest chairlift in existence. The lodge is publicly owned and privately operated; Richard Kohnstamm took over in 1955, and his family still manages the resort.
+
+**Culture**
+
+> Timberline Lodge is a National Historic Landmark that draws two million visitors a year, and local artisans built and furnished it during the Great Depression. It served as the exterior of the Overlook Hotel in The Shining. Government Camp, the de facto ski town of Mount Hood, had 179 residents in 2020. The Golden Rose Ski Classic, run here since 1936 as part of the Portland Rose Festival, is the oldest known organized ski race in America.
+
+**Sources:** [Timberline Lodge ski area (Wikipedia)](https://en.wikipedia.org/wiki/Timberline_Lodge_ski_area), [Timberline Lodge (Wikipedia)](https://en.wikipedia.org/wiki/Timberline_Lodge), [Magic Mile (Wikipedia)](https://en.wikipedia.org/wiki/Magic_Mile), [Government Camp, Oregon (Wikipedia)](https://en.wikipedia.org/wiki/Government_Camp,_Oregon)
+
+Approve: `python -m pipeline.editorial approve resort timberline-lodge --by Alexandre`
+
+### Resort: Timberline Palmer Snowfield summer camps (`timberline-palmer-summer`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> The Palmer Snowfield on Mount Hood's south slope gives Timberline lift served skiing through the summer. The Palmer chairlift, built in 1983, climbs to 8,500 feet and runs from spring to early fall when conditions allow. Summer skiing and race camps began at Timberline in 1956. Dozens of summer camps enroll thousands of athletes, and a busy midweek day can see 1,500 riders. Ski racing camps are the most popular, followed by snowboard and freeski camps. The season usually ends in August or September.
+
+**Culture**
+
+> Summer at Timberline centers on week long camps, with snow sessions in the morning and rafting, biking, hiking or trampoline in the afternoon. Lifts are busiest Monday through Friday in summer because of the camps. Mount Hood Summer Ski Camps have hosted campers since the 1970s. The snowfield is shrinking each year, and salting to extend the season adds pollution to the Salmon River.
+
+**Sources:** [Palmer Glacier (Wikipedia)](https://en.wikipedia.org/wiki/Palmer_Glacier), [Timberline Lodge ski area (Wikipedia)](https://en.wikipedia.org/wiki/Timberline_Lodge_ski_area)
+
+Approve: `python -m pipeline.editorial approve resort timberline-palmer-summer --by Alexandre`
+
+### Resort: U.S. Ski & Snowboard Center of Excellence (`usss-center-of-excellence`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> The Center of Excellence is the national training and education facility of U.S. Ski & Snowboard, at 1 Victory Lane in Park City, Utah. The organization broke ground in July 2007 and moved in during May 2009. The center holds strength training areas, a gymnasium, a climbing wall, ski and snowboard ramps, trampolines, a nutrition center and rehabilitation facilities. It serves as a training base for elite athletes and an education center for athletes, coaches and clubs.
+
+**Sources:** [U.S. Ski & Snowboard (Wikipedia)](https://en.wikipedia.org/wiki/U.S._Ski_%26_Snowboard), [United States Ski Team (Wikipedia)](https://en.wikipedia.org/wiki/United_States_Ski_Team)
+
+Approve: `python -m pipeline.editorial approve resort usss-center-of-excellence --by Alexandre`
+
+### Resort: Utah Olympic Park (`utah-olympic-park`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Utah Olympic Park is a winter sports complex northwest of Park City, Utah, 28 miles east of Salt Lake City, built for the 2002 Winter Olympics. Its ski jumps and sliding track hosted bobsleigh, skeleton, luge, ski jumping and Nordic combined. Since the Games it has run as a training center for athletes, with a summer aerial training splash pool on site. The Utah Athletic Foundation operates it. It is scheduled to host sliding, ski jumping, Nordic combined, snowboard cross and parallel, and ski cross events at the 2034 Winter Olympics.
+
+**Sources:** [Utah Olympic Park (Wikipedia)](https://en.wikipedia.org/wiki/Utah_Olympic_Park), [Park City, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Park_City,_Utah)
+
+Approve: `python -m pipeline.editorial approve resort utah-olympic-park --by Alexandre`
+
+### Resort: Vail (`vail`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Vail Ski Resort sits above the town of Vail in Eagle County, Colorado, 97 miles west of Denver on I 70. At 5,289 acres it is the third largest single mountain ski resort in the U.S., with the Front Side, the Back Bowls and Blue Sky Basin. Vail opened in late 1962, founded by Pete Seibert and local rancher Earl Eaton. Vail Resorts owns and operates it along with nearby Beaver Creek, Breckenridge and Keystone. The company ranks Vail the second most visited mountain resort in the U.S. for the 2025/2026 season.
+
+**Culture**
+
+> Vail Village follows Bavarian village styles with pedestrian streets, and it was built when the resort opened. The town economy relies heavily on tourism. Vail had 4,835 residents in 2020, and 67.3 percent of its 7,300 housing units were vacant. The median house price is over $1 million, and the town faces a worker shortage because housing is insufficient. Starting in 2026/2027, every private lesson at Vail becomes Vail Resorts' Epic Ascent product, with concierge support and gear rental.
+
+**Sources:** [Vail Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Vail_Ski_Resort), [Vail, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Vail,_Colorado), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort vail --by Alexandre`
+
+### Resort: Waterville Valley Resort (`waterville-valley`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Waterville Valley Resort is on Mount Tecumseh inside the planned resort community of Waterville Valley, New Hampshire, about 130 miles north of Boston off Interstate 93. A group led by Tom Corcoran opened it in 1966. It hosted World Cup alpine races from 1969 through most of the 1980s, and in 2024 it held the first dual moguls World Cup on American soil. Members of the Sununu family and area investors bought it in 2010, and it remains independent. Snowmaking covers about 100 percent of its terrain.
+
+**Culture**
+
+> Waterville Valley is a resort town of 508 people (2020 census) that draws winter visitors for alpine and cross country skiing. The Black and Blue Trail Smashers, founded in 1934, is one of the oldest ski clubs in the country and the home club of 2010 Olympic moguls champion Hannah Kearney. Waterville Valley Academy, founded in 1972, has around 160 students. The resort built New Hampshire's first terrain park.
+
+**Sources:** [Waterville Valley Resort (Wikipedia)](https://en.wikipedia.org/wiki/Waterville_Valley_Resort), [Waterville Valley, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Waterville_Valley,_New_Hampshire)
+
+Approve: `python -m pipeline.editorial approve resort waterville-valley --by Alexandre`
+
+### Resort: Whiteface Mountain (`whiteface`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Whiteface ski area sits on the east slope of Whiteface Mountain in the town of Wilmington, New York, among the Adirondack High Peaks. It opened in 1960 and is run by the Olympic Regional Development Authority. Whiteface hosted all six alpine events of the 1980 Winter Olympics and alpine skiing at the 2023 Winter World University Games. Its hike to terrain, The Slides, gives it the greatest continuous vertical drop in eastern North America at 3,430 feet. Lake Placid, host of the 1932 and 1980 Winter Olympics, lies nearby.
+
+**Culture**
+
+> Wilmington is a town of 1,139 people (2020) inside the Adirondack Park, and its hamlet is a resort and skiing center. Tourism grew there early in the twentieth century, and Santa's Workshop, one of the first American theme parks for children, sits on the Whiteface highway. Lake Placid, a village of 2,205 people (2020 census), became internationally known for the 1932 and 1980 Winter Olympics.
+
+**Sources:** [Whiteface Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Whiteface_Mountain), [Wilmington, New York (Wikipedia)](https://en.wikipedia.org/wiki/Wilmington,_New_York), [Lake Placid, New York (Wikipedia)](https://en.wikipedia.org/wiki/Lake_Placid,_New_York)
+
+Approve: `python -m pipeline.editorial approve resort whiteface --by Alexandre`
+
+### Resort: Whitefish Mountain Resort (`whitefish-mountain`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Whitefish Mountain Resort sits on Big Mountain in northwest Montana, west of Glacier National Park, 4 miles from the town of Whitefish and 21 miles north of Kalispell. Winter Sports, Inc. formed in 1947 as a public company of community shareholders to open Big Mountain. The resort hosted the U.S. Alpine Championships in 1949, and Olympic champion Tommy Moe learned to ski and race here. Big Mountain took its current name after billionaire Bill Foley became majority shareholder of Winter Sports, Inc. It has 14 lifts.
+
+**Culture**
+
+> Local people donated labor to build the resort, clearing slopes and helping push through the mountain road. Whitefish had 7,751 residents in 2020 and is known for environmentalism and protected trails. Its events include the Whitefish Winter Carnival, with a parade and a plunge into Whitefish Lake, and the Under the Big Sky Music Festival. Amtrak's Empire Builder stops in Whitefish on its Chicago to Seattle and Portland route.
+
+**Sources:** [Whitefish Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Whitefish_Mountain_Resort), [Whitefish, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Whitefish,_Montana)
+
+Approve: `python -m pipeline.editorial approve resort whitefish-mountain --by Alexandre`
+
+### Resort: Whitetail Resort (`whitetail`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Whitetail Resort is on Two Top Mountain in the Bear Pond Mountains of Pennsylvania, between Mercersburg and Clear Spring, Maryland. It opened in 1991, joined Snow Time, Inc. a few years later, passed to Peak Resorts in 2018 and to Vail Resorts in 2019. Its trails are laid out so each ability level has its own area and lift, a design that won Snow Country Magazine's 1992 Best Overall Resort Design Award. Seasons usually run 80 to 100 days.
+
+**Culture**
+
+> Whitetail serves the Baltimore Washington metropolitan area, 89 miles from Washington, D.C., and 92 miles from Baltimore. It gets crowded on weekends and holidays and is quieter on weekdays. Mercersburg, a borough 7 miles north of the resort, had 1,561 people in 2010. Vail says its Mid Atlantic ski areas offer local options and easy overnight weekend trips.
+
+**Sources:** [Whitetail Ski Resort (Wikipedia)](https://en.wikipedia.org/wiki/Whitetail_Ski_Resort), [Mercersburg, Pennsylvania (Wikipedia)](https://en.wikipedia.org/wiki/Mercersburg,_Pennsylvania), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort whitetail --by Alexandre`
+
+### Resort: Wildcat Mountain (`wildcat`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Wildcat Mountain is a ski area in Pinkham Notch near Jackson, New Hampshire, with a view of Mount Washington. Its 2,112 foot vertical drop is the second largest in New Hampshire, and its Polecat trail is the longest in the state. Wildcat opened the first gondola in North America in 1958, and the Civilian Conservation Corps cut its original racing trail in 1933. More than 200 inches of snow a year usually keep it open from mid November to early May. Vail Resorts bought it with Attitash in 2019.
+
+**Culture**
+
+> Jackson is a town of 1,028 people (2020 census) and a resort area in the White Mountains, where painters arrived from 1847 and grand hotels followed the railroad. It is known for Jackson Falls and its 100 kilometer cross country ski trail system. The ungroomed Wildcat Valley Trail runs from Wildcat's summit down to the village. In winter, skiers from the valley resorts spend their evenings in North Conway.
+
+**Sources:** [Wildcat Mountain Ski Area (Wikipedia)](https://en.wikipedia.org/wiki/Wildcat_Mountain_Ski_Area), [Jackson, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/Jackson,_New_Hampshire), [North Conway, New Hampshire (Wikipedia)](https://en.wikipedia.org/wiki/North_Conway,_New_Hampshire)
+
+Approve: `python -m pipeline.editorial approve resort wildcat --by Alexandre`
+
+### Resort: Wilmot Mountain (`wilmot-mountain`)
+
+File: `resorts_east.yaml`
+
+**Overview**
+
+> Wilmot Mountain is a ski area in Kenosha County, Wisconsin, just north of the Illinois border, 55 miles north of Chicago and 40 miles from Milwaukee. Walter Stopa founded it in 1938, and his family ran it until Vail Resorts bought it in 2016 and spent about $13 million on renovations that year. It calls itself the Matterhorn of the Midwest and has about 200 feet of vertical, wide open slopes and night skiing on the whole hill.
+
+**Culture**
+
+> Wilmot's ski and snowboard school has over 300 certified instructors and a full children's program. The Chicago Metropolitan Ski Council holds slalom and giant slalom races here eight days each season, and the resort runs weekly evening race training. Its longest run, State Line, parallels the Illinois and Wisconsin border. Vail lists Chicago among the metro markets its Midwest ski areas draw from.
+
+**Sources:** [Wilmot Mountain (Wikipedia)](https://en.wikipedia.org/wiki/Wilmot_Mountain), [Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Regional Ski Areas; Item 2 Properties)](https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm)
+
+Approve: `python -m pipeline.editorial approve resort wilmot-mountain --by Alexandre`
+
+### Resort: Winter Park Resort (`winter-park`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Winter Park Resort sits in Grand County, Colorado, just off U.S. Highway 40, about a ninety minute drive from Denver. It opened for the 1939 to 1940 season. The City and County of Denver owned and ran it until 2002 and still owns it, and Alterra Mountain Company manages it. Its Mary Jane area, opened in 1975, has a separate base and is known for moguls, trees and harder terrain. The resort has 23 lifts and is home to the National Sports Center for the Disabled, one of the world's largest and oldest disabled skiing programs.
+
+**Culture**
+
+> For nearly 70 years many Denver residents rode the Ski Train to the base through the Moffat Tunnel, and Amtrak's Winter Park Express now runs seasonal ski trains. The town of Winter Park had 1,033 permanent residents in 2020, and 81.3 percent of its housing units were vacant, so the seasonal population is much higher. Nearby Fraser, a town of 1,400, has grown with new condominiums. The Lift bus serves the town, and Bustang links it to Denver.
+
+**Sources:** [Winter Park Resort (Wikipedia)](https://en.wikipedia.org/wiki/Winter_Park_Resort), [Winter Park, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Winter_Park,_Colorado), [Fraser, Colorado (Wikipedia)](https://en.wikipedia.org/wiki/Fraser,_Colorado)
+
+Approve: `python -m pipeline.editorial approve resort winter-park --by Alexandre`
+
+### Resort: Woodward Copper (`woodward-copper`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Woodward Copper is the Woodward training center at Copper Mountain in Summit County, Colorado. In February 2009 Woodward opened a 20,000 square foot indoor ski and snowboard facility there, dedicated to terrain park and halfpipe training. The Woodward Express lift, renamed in 2019, serves the terrain park outside. POWDR owns Copper Mountain and the Woodward network, which it built after buying a majority share of Camp Woodward in 2011.
+
+**Sources:** [Copper Mountain (Colorado) (Wikipedia)](https://en.wikipedia.org/wiki/Copper_Mountain_(Colorado)), [Powdr (Wikipedia)](https://en.wikipedia.org/wiki/Powdr)
+
+Approve: `python -m pipeline.editorial approve resort woodward-copper --by Alexandre`
+
+### Resort: Woodward Park City (`woodward-park-city`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Woodward Park City is an action sports training and recreation center in Park City, Utah. POWDR opened it in December 2019 as a youth sports complex. It belongs to the Woodward network that POWDR built after buying a majority share of Camp Woodward in 2011, alongside Woodward Copper, Woodward Tahoe and Woodward Mt. Bachelor. Park City also holds Park City Mountain, Deer Valley and Utah Olympic Park.
+
+**Sources:** [Powdr (Wikipedia)](https://en.wikipedia.org/wiki/Powdr), [Park City, Utah (Wikipedia)](https://en.wikipedia.org/wiki/Park_City,_Utah)
+
+Approve: `python -m pipeline.editorial approve resort woodward-park-city --by Alexandre`
+
+### Resort: Woodward Tahoe (`woodward-tahoe`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> Woodward Tahoe is a 33,000 square foot action sports hub at Boreal Mountain in Soda Springs, California, on I 80 west of Truckee. It is open year round. In summer Boreal and Woodward offer lift served downhill bike trails and an 11 acre network of skateparks, parkour zones and dirt jump lines. Boreal's terrain park includes the Woodward Peace Park, and Boreal offers the only night skiing in Tahoe. POWDR owns Boreal and the Woodward network.
+
+**Sources:** [Boreal Mountain Resort (Wikipedia)](https://en.wikipedia.org/wiki/Boreal_Mountain_Resort), [Powdr (Wikipedia)](https://en.wikipedia.org/wiki/Powdr)
+
+Approve: `python -m pipeline.editorial approve resort woodward-tahoe --by Alexandre`
+
+### Resort: Yellowstone Club (`yellowstone-club`)
+
+File: `resorts_west.yaml`
+
+**Overview**
+
+> The Yellowstone Club is a private residential club, ski resort and golf resort in Madison County, Montana, just west of Big Sky. Most of its runs are on Pioneer Mountain, with a 9,859 foot summit, and its lifts tie into Big Sky Resort along a five mile shared border. Developer Tim Blixseth assembled the land. Out of bankruptcy in June 2009, CrossHarbor Capital Partners, led by club member Sam Byrne, bought the club for $115 million.
+
+**Culture**
+
+> The club is rated among the top 10 lifestyle estates in the world. By late 2014 it had more than 500 member households, and members have included Bill Gates and Mark Zuckerberg. Almost 650 people work at the club in peak season. Big Sky lies 45 miles by road from Bozeman.
+
+**Sources:** [Yellowstone Club (Wikipedia)](https://en.wikipedia.org/wiki/Yellowstone_Club), [Big Sky, Montana (Wikipedia)](https://en.wikipedia.org/wiki/Big_Sky,_Montana)
+
+Approve: `python -m pipeline.editorial approve resort yellowstone-club --by Alexandre`
