@@ -23,6 +23,7 @@ from .schemas.career import (
     CERT_LEVELS, PROFESSIONALISM_COMPONENTS, CareerBatch, CareerInputs, PayBatch, PayRecord,
     season_start_year,
 )
+from .season_income import lucrativeness_inputs, round_half_up, season_income
 from .sources import SourceRegistry
 
 ASSUMPTION_LABELS: dict[str, str] = {
@@ -149,6 +150,9 @@ def lucrativeness(
     earnings = mid hourly pay (assumptions.cert_level row) x hours_per_week x season_length_days / 7
     costs    = (rent + food + transport) x season_months + pass_offset + gear_offset
     mid = earnings - costs, low = mid - spread_low x earnings, high = mid + spread_high x earnings
+
+    Computed with pipeline.season_income (the calculator's shared model): earnings is its ``gross`` and
+    mid its ``net_before_tax``. Whole dollars use round_half_up (JS Math.round).
     """
     a = defs.assumptions
     spread = defs.range_spread
@@ -170,12 +174,18 @@ def lucrativeness(
         return {**empty, "status": "assumptions_unset", "assumptions": echo}
     if pay_mid is None or rent_monthly is None or season_length_days is None:
         return {**empty, "status": "insufficient_data", "assumptions": echo}
-    earnings = pay_mid * a.hours_per_week * season_length_days / 7
-    costs = (rent_monthly + a.food_monthly_usd + a.transport_monthly_usd) * a.season_months \
-        + a.pass_offset_usd + a.gear_offset_usd
-    mid = earnings - costs
+    # The Season Income Calculator's shared model (Phase 9), so the map and the calculator agree.
+    r = season_income(lucrativeness_inputs(
+        pay_hourly_mid_usd=pay_mid, hours_per_week=a.hours_per_week, season_length_days=season_length_days,
+        rent_monthly_usd=rent_monthly, food_monthly_usd=a.food_monthly_usd,
+        transport_monthly_usd=a.transport_monthly_usd, season_months=a.season_months,
+        pass_offset_usd=a.pass_offset_usd, gear_offset_usd=a.gear_offset_usd))
+    earnings, mid = r.gross, r.net_before_tax   # savings before tax (ROADMAP Section 6)
+
+    def dollars(x: float) -> int:
+        return int(round_half_up(x))  # JS Math.round, like the calculator
     return {
-        "low": round(mid - spread.low * earnings), "mid": round(mid), "high": round(mid + spread.high * earnings),
+        "low": dollars(mid - spread.low * earnings), "mid": dollars(mid), "high": dollars(mid + spread.high * earnings),
         "status": "computed", "assumptions": echo,
     }
 

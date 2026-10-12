@@ -166,6 +166,13 @@ career: {
   HUD / ACS baseline. Status `assumptions_unset` while any assumption or spread is null; `insufficient_data` when pay,
   rent or season length is missing. `assumptions` echoes every config assumption, both spreads, and the resort inputs
   used (`pay_hourly_mid_usd`, `season_length_days`, `rent_monthly_usd`), each with a display label.
+* **Shared calculator model (Phase 9):** lucrativeness is computed by `pipeline/season_income.py`, the Python mirror of
+  `assets/js/season-income.mjs` used by the Season Income Calculator: earnings = its `gross`, mid = its
+  `net_before_tax` (via `lucrativeness_inputs`), so the map and the calculator agree for the same inputs. Whole dollars
+  use `round_half_up` (JS `Math.round`, ties toward positive infinity). The calculator's headline net is after tax;
+  the map's lucrativeness is savings before tax (ROADMAP Section 6) and applies no tax assumption, which stays the
+  owner's call. The calculator has state income tax rates for only 13 states (WA, WY, NV, AK, NH, CO, UT, ID, VT, MT,
+  NY, OR, CA).
 
 ## Phase 5 housing and commute
 

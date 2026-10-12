@@ -303,3 +303,43 @@ def test_career_output_status_rules():
            "as_of": "2026-01-01", "season": "2025-26", "stale": False}
     with pytest.raises(ValidationError, match="one row per cert_level"):
         Career.model_validate({**base, "pay": [row, row]})
+
+
+# --------------------------------------------- Phase 9: shared calculator model
+PARITY_CASES = [
+    # (pay row low, high, season days, rent, assumptions overrides, spread low, high)
+    (20, 24, 140, 800, {}, 0.1, 0.05),
+    (17.25, 19.80, 123, 1135.5, {"hours_per_week": 37.5, "season_months": 4.25, "food_monthly_usd": 512.3}, 0.15, 0.2),
+    (30, 30, 98, 0, {"pass_offset_usd": 1299, "gear_offset_usd": 0, "transport_monthly_usd": 0}, 0, 0),
+    (14, 15, 151, 2100, {"hours_per_week": 32, "season_months": 5.5}, 0.25, 0.1),  # negative savings
+]
+
+
+@pytest.mark.parametrize("low,high,days,rent,over,s_low,s_high", PARITY_CASES)
+def test_lucrativeness_matches_shared_calculator_model(low, high, days, rent, over, s_low, s_high):
+    from pipeline.season_income import lucrativeness_inputs, round_half_up, season_income
+
+    a = dict(ASSUMPTIONS, **over)
+    out = lucrativeness([{"cert_level": "level_2", "hourly_low": low, "hourly_high": high}], days, rent,
+                        luc_defs(a, low=s_low, high=s_high))
+    r = season_income(lucrativeness_inputs(
+        pay_hourly_mid_usd=(low + high) / 2, hours_per_week=a["hours_per_week"], season_length_days=days,
+        rent_monthly_usd=rent, food_monthly_usd=a["food_monthly_usd"], transport_monthly_usd=a["transport_monthly_usd"],
+        season_months=a["season_months"], pass_offset_usd=a["pass_offset_usd"], gear_offset_usd=a["gear_offset_usd"]))
+    assert out["status"] == "computed"
+    assert out["mid"] == round_half_up(r.net_before_tax)
+    assert out["low"] == round_half_up(r.net_before_tax - s_low * r.gross)
+    assert out["high"] == round_half_up(r.net_before_tax + s_high * r.gross)
+    # the shared model's gross is lucrativeness earnings: pay x hours x days / 7
+    assert r.gross == pytest.approx((low + high) / 2 * a["hours_per_week"] * days / 7)
+
+
+def test_lucrativeness_rounds_half_up_like_the_calculator():
+    zero = dict(ASSUMPTIONS, hours_per_week=1, season_months=1, food_monthly_usd=0, transport_monthly_usd=0,
+                pass_offset_usd=0, gear_offset_usd=0)
+    row = [{"cert_level": "level_2", "hourly_low": 10, "hourly_high": 11}]   # mid pay 10.5, one week: gross 10.5
+    out = lucrativeness(row, 7, 0, luc_defs(zero, low=0, high=0))
+    assert out["mid"] == 11 and round(10.5) == 10      # Math.round ties up; Python round ties to even
+    out = lucrativeness(row, 7, 22, luc_defs(zero, low=0, high=0))          # 10.5 - 22 = -11.5
+    assert out["mid"] == -11 and round(-11.5) == -12
+    assert isinstance(out["mid"], int)
