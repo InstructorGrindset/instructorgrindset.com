@@ -222,7 +222,13 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
       customAttribution: 'Runs and lifts: <a href="https://openskimap.org/" target="_blank" rel="noopener">OpenSkiMap</a>, © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> (ODbL)',
     }), 'bottom-right');
     map.on('error', (e) => console.warn('[map] trail map', e && e.error ? e.error.message : e));
-    map.once('load', () => { status.hidden = true; map.getCanvas().setAttribute('aria-label', `Trail map of ${resort.name}`); });
+    map.once('load', () => {
+      status.hidden = true;
+      map.getCanvas().setAttribute('aria-label', `Trail map of ${resort.name}`);
+      // Start the compact attribution collapsed, as on the main map; the (i) button opens it.
+      const attrib = mapEl.querySelector('.maplibregl-ctrl-attrib');
+      if (attrib) attrib.classList.remove('maplibregl-compact-show');
+    });
     wire(map);
     current.map = map;
     current.bounds = data.bounds;

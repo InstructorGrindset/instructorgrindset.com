@@ -439,6 +439,20 @@ an interpolated grid instead (`map/js/heat.js`):
   `prefers-reduced-motion` needs no special case.
 * The settings live in `config.heat` in `map/js/config.js`. They are display settings and change no resort number.
 
+### Trail map dialog (`map/js/trailmap.js`)
+* Opened from "Open the trail map" in the resort panel and from a map control (mountain icon under the zoom buttons)
+  on resort views whose record has `trailmap_available`. The module, `trailmap/<id>.json` (validated with
+  `TrailMapFile` and per feature `RunFeature` and `LiftFeature` in `schemas.js`) and MapLibre load on first open.
+* A native modal `<dialog>`: the page behind is inert, Tab cycles inside, Escape, the Close button and a backdrop click
+  close it, focus returns to the button that opened it. Reopening the same resort keeps its map and last view;
+  another resort replaces it. Phones get a full screen sheet with the legend below the map.
+* Its own MapLibre map on a light surface: runs colored by `difficulty_us` (green `#12804a`, blue `#1b5fc1`,
+  black `#14171c`, double black the same ink, wider and dashed, terrain park `#d4610a`, unrated grey dotted), area runs
+  as filled outlines, lifts in red with a white casing on top, the base area (the resort's `lat`, `lon`) as a dark dot.
+  Fitted to `bounds`. No glyph server: names show in a hover label (a tap on phones) and in a run list grouped by
+  sign. Legend with the four signs plus terrain park, lift and base area; attribution to OpenSkiMap and
+  OpenStreetMap contributors (ODbL), plus the `openskimap-runs` source link.
+
 ## Raw inputs (`/data/raw`)
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).

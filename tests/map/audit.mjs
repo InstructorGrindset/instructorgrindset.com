@@ -131,6 +131,8 @@ async function axe(browser, base) {
     { label: 'resort page (Vail)', url: '/map/co/i70-corridor/vail/' },
     { label: 'list view', url: '/map/', list: true },
     { label: 'resort page, phone', url: '/map/co/i70-corridor/vail/', phone: true },
+    { label: 'trail map dialog (Vail)', url: '/map/co/i70-corridor/vail/', trail: true },
+    { label: 'trail map dialog, phone', url: '/map/co/i70-corridor/vail/', trail: true, phone: true },
   ];
   for (const c of cases) {
     const ctx = await browser.newContext(c.phone ? { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: 1280, height: 800 } });
@@ -139,6 +141,12 @@ async function axe(browser, base) {
     await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 30000 });
     await page.waitForTimeout(1500);
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
+    if (c.trail) {
+      await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
+      await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded(); }, null, { timeout: 30000 });
+      await page.locator('.trailmap-runs summary').click();
+      await page.waitForTimeout(300);
+    }
     await page.addScriptTag({ content: axeSrc });
     const res = await page.evaluate(async () => {
       // The WebGL canvas is exposed as one labelled region; its pixels have no DOM to audit.

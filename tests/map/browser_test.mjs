@@ -140,6 +140,66 @@ async function clickMapAt(page, lngLat) {
   await page.mouse.click(pt.x, pt.y);
 }
 
+// Trail map dialog (map/js/trailmap.js): open, legend, a run hover, focus trap, Escape, reopen with its last view.
+async function trailMapChecks(page, label, file, { shotName, via = 'panel', phone = false, fresh = true, base: home = null } = {}) {
+  const tm = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const opener = via === 'control' ? page.locator('.trailmap-ctrl') : page.locator('#panel-content button', { hasText: 'Open the trail map' });
+  await opener.waitFor({ timeout: 10000 });
+  check(await opener.count() === 1, `${label}: trail map ${via === 'control' ? 'map control' : 'button'} present`);
+  await opener.click();
+  const dlg = page.locator('dialog.trailmap-dialog');
+  await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded() && t.map.getLayer('tm-run'); }, null, { timeout: 20000 });
+  await page.waitForTimeout(300);
+  check(await dlg.evaluate((d) => d.open && d.matches(':modal')), `${label}: trail map opens as a modal dialog`);
+  check(await page.evaluate(() => document.querySelector('dialog.trailmap-dialog').contains(document.activeElement)), `${label}: focus moves into the dialog`);
+  const legend = await dlg.locator('.trailmap-legend li').allInnerTexts();
+  const signs = ['Green circle', 'Blue square', 'Black diamond', 'Double black diamond', 'Terrain park'];
+  check(signs.every((s2) => legend.some((t) => t.startsWith(s2))) && legend.some((t) => t.startsWith('Lift')) && legend.some((t) => t.startsWith('Base area')),
+    `${label}: legend lists the trail signs, lifts and the base area`);
+  const attrib = await dlg.locator('.maplibregl-ctrl-attrib-inner').innerHTML();
+  check(/OpenSkiMap/.test(attrib) && /OpenStreetMap contributors/.test(attrib) && /ODbL/.test(attrib), `${label}: attribution to OpenSkiMap and OpenStreetMap contributors (ODbL)`);
+  const fit = await page.evaluate((b) => { const m = window.__careerMap.trail.map; const v = m.getBounds(); return v.getWest() <= b[0] + 1e-4 && v.getEast() >= b[2] - 1e-4 && v.getSouth() <= b[1] + 1e-4 && v.getNorth() >= b[3] - 1e-4; }, tm.bounds);
+  if (fresh) check(fit, `${label}: trail map fits the resort bounds`);
+  // Hover (or tap) the middle of a named line run.
+  // The named, rated run whose middle lies farthest from the base area marker.
+  const mid = (f) => f.geometry.coordinates[Math.floor(f.geometry.coordinates.length / 2)];
+  const away = (f) => (home ? Math.hypot(mid(f)[0] - home[0], mid(f)[1] - home[1]) : 0);
+  const cands = tm.runs.features.filter((f) => f.geometry.type === 'LineString' && f.properties.name && f.properties.difficulty_us && f.geometry.coordinates.length >= 3);
+  const run = cands.sort((a, b2) => away(b2) - away(a))[0];
+  const pick = mid(run);
+  const pt = await page.evaluate((ll) => { const m = window.__careerMap.trail.map; const p2 = m.project(ll); const r = m.getContainer().getBoundingClientRect(); return { x: r.left + p2.x, y: r.top + p2.y }; }, pick);
+  if (phone) await page.mouse.click(pt.x, pt.y); else await page.mouse.move(pt.x, pt.y);
+  await page.waitForTimeout(250);
+  const tip = await dlg.locator('.trailmap-label').innerText().catch(() => '');
+  check(/\. (Green circle|Blue square|Black diamond|Double black diamond|Terrain park|No rating in OpenStreetMap)$/.test(tip), `${label}: ${phone ? 'tapping' : 'hovering'} a run names it and its sign (${tip})`);
+  if (shotName) await page.screenshot({ path: path.join(SHOTS, shotName) });
+  // Tab stays inside the dialog.
+  let inside = true;
+  for (let i = 0; i < 25; i++) {
+    await page.keyboard.press('Tab');
+    inside = inside && await page.evaluate(() => document.querySelector('dialog.trailmap-dialog').contains(document.activeElement));
+  }
+  check(inside, `${label}: Tab stays inside the dialog`);
+  // Change the view, close with Escape, reopen: same view, focus returns to the opener.
+  const z0 = await page.evaluate(() => { const m = window.__careerMap.trail.map; m.jumpTo({ zoom: m.getZoom() + 1 }); return m.getZoom(); });
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(150);
+  check(!(await dlg.evaluate((d) => d.open)), `${label}: Escape closes the trail map`);
+  check(await opener.evaluate((el) => el === document.activeElement), `${label}: focus returns to the ${via === 'control' ? 'map control' : 'button'}`);
+  await opener.click();
+  await page.waitForTimeout(250);
+  const z1 = await page.evaluate(() => window.__careerMap.trail.map.getZoom());
+  check(await dlg.evaluate((d) => d.open) && Math.abs(z1 - z0) < 1e-6, `${label}: reopening keeps the last view`);
+  if (phone) {
+    const box = await dlg.boundingBox();
+    const vp = page.viewportSize();
+    check(Math.abs(box.width - vp.width) <= 1 && Math.abs(box.height - vp.height) <= 1, `${label}: full screen sheet on the phone`);
+  }
+  await dlg.locator('.trailmap-close').click();
+  await page.waitForTimeout(150);
+  check(!(await dlg.evaluate((d) => d.open)) && await opener.evaluate((el) => el === document.activeElement), `${label}: the close button closes it and focus returns`);
+}
+
 async function desktop(browser, base) {
   log('\nDesktop 1280x800, fixtures via ?data=');
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
@@ -417,6 +477,10 @@ async function desktop(browser, base) {
   check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('detail-iso-fill', 'visibility')) === 'none', 'drive time toggle hides isochrones');
   await page.locator('#layer-isochrones').check();
   await shot(page, 'desktop-11-detail-pin-selected.png');
+  const tmFixture = path.join(REPO, 'tests', 'map', 'fixtures', 'trailmap', 'alpha-peak.json');
+  await trailMapChecks(page, 'trail map', tmFixture, { shotName: 'desktop-14-trail-map.png', base: [-106.37, 39.64] });
+  await trailMapChecks(page, 'trail map from the map control', tmFixture, { via: 'control', fresh: false, base: [-106.37, 39.64] });
+  check(await page.locator('.trailmap-runs .run-group').count() >= 5, 'trail map lists runs by trail sign');
 
   // Phase 6: reviewed editorial with sources.
   const ed = page.locator('.editorial', { hasText: 'About Alpha Peak' });
@@ -683,6 +747,8 @@ async function phone(browser, base) {
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = el.querySelector('.housing').offsetTop - 40; });
   await page.waitForTimeout(200);
   await shot(page, 'phone-10-housing.png');
+  await trailMapChecks(page, 'phone trail map', path.join(REPO, 'tests', 'map', 'fixtures', 'trailmap', 'alpha-peak.json'),
+    { shotName: 'phone-11-trail-map.png', phone: true, base: [-106.37, 39.64] });
 
   // Multi state cluster stub under the second state.
   await page.goto(`${base}/map/nv/fixture-lake-crest/`);
@@ -870,6 +936,14 @@ async function realData(browser, base) {
         if (unnamed >= 0) log(`  real data: ${file.lifts.features.filter((f) => !f.properties.name).length} unnamed lifts render as "Unnamed lift"`);
         await shot(page, 'real-desktop-detail-lifts.png');
       } else log('  skip no Tier A resort with detail_available in the real build yet');
+      for (const id of ['vail', 'big-sky']) {
+        const r = all.find((x) => x.id === id && x.trailmap_available && pages.includes(`${x.state.toLowerCase()}/${x.cluster_id}/${x.id}/`));
+        if (!r) { log(`  skip no trail map for ${id} in the real build`); continue; }
+        await page.goto(`${base}/map/${r.state.toLowerCase()}/${r.cluster_id}/${r.id}/`);
+        await ready(page);
+        await mapIdle(page);
+        await trailMapChecks(page, `real data ${r.name}`, path.join(REPO, 'data', 'build', 'trailmap', `${id}.json`), { shotName: `real-desktop-trail-map-${id}.png`, base: [r.lon, r.lat] });
+      }
     }
     w.assertClean();
     await page.close();
