@@ -287,7 +287,7 @@ def fetch_station_daily(cache_dir: Path, triplet: str, start: date, end: date) -
 
 
 def preflight() -> None:
-    http.get_json(STATIONS_URL, {"stationTriplets": "1050:CO:SNTL"}, retries=1, backoff=2.0)
+    http.get_json(STATIONS_URL, {"stationTriplets": "1050:CO:SNTL"}, retries=5, backoff=5.0)
 
 
 # ---------------------------------------------------------------- parsing and storms

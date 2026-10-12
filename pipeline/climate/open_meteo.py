@@ -490,8 +490,8 @@ def preflight() -> None:
     http.get_json(
         ARCHIVE_URL,
         {"latitude": "39.64", "longitude": "-106.37", "start_date": day, "end_date": day, "daily": "snowfall_sum", "models": MODEL},
-        retries=1,
-        backoff=2.0,
+        retries=5,
+        backoff=5.0,
     )
 
 
