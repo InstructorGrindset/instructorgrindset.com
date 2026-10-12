@@ -6,8 +6,10 @@ tests can monkeypatch one function and run the whole ETL offline.
 
 from __future__ import annotations
 
+import http.client
 import json
 import socket
+import ssl
 import time
 import urllib.error
 import urllib.parse
@@ -55,6 +57,10 @@ def build_url(url: str, params: Optional[Mapping[str, Any]] = None) -> str:
     return f"{url}?{urllib.parse.urlencode(clean, safe=',:*')}"
 
 
+# Errors that mean the connection dropped, not that the host is unreachable.
+_TRANSIENT = (socket.timeout, TimeoutError, ConnectionError, ssl.SSLError, http.client.IncompleteRead)
+
+
 def _sleep_seconds(attempt: int, backoff: float, retry_after: Optional[str]) -> float:
     if retry_after:
         try:
@@ -100,13 +106,14 @@ def get_json(
             else:
                 raise HttpStatusError(full, e.code, body) from e
         except urllib.error.URLError as e:
-            if isinstance(e.reason, (socket.timeout, TimeoutError)):
+            if isinstance(e.reason, _TRANSIENT):
                 last_error = e
                 wait = _sleep_seconds(attempt, backoff, None)
             else:
                 # DNS failure, refused tunnel, no route: the network does not allow this host.
                 raise NetworkBlocked(f"cannot reach {urllib.parse.urlsplit(full).netloc}: {e.reason}") from e
-        except (socket.timeout, TimeoutError, ConnectionResetError) as e:
+        except _TRANSIENT as e:
+            # timeouts and transfers cut off mid response (proxy or upstream drops) are retried
             last_error = e
             wait = _sleep_seconds(attempt, backoff, None)
         if attempt < retries:
