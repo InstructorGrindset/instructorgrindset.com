@@ -1,0 +1,93 @@
+batch: pay-east
+researched_date: 2026-10-11
+sources:
+  - {id: pay-east-whiteface-employment, url: "https://whiteface.com/employment/", title: "Whiteface Mountain employment page, 2026/27 winter positions (ORDA)", accessed_date: 2026-10-11}
+  - {id: pay-east-sunday-river-instructor-24529, url: "https://careers-boyneresorts.icims.com/jobs/24529/job?in_iframe=1", title: "Boyne Resorts iCIMS posting 2026-24529, Sunday River SnowSports School Ski or Snowboard Instructor", accessed_date: 2026-10-11}
+  - {id: pay-east-sugarloaf-instructor-24652, url: "https://careers-boyneresorts.icims.com/jobs/24652/job?in_iframe=1", title: "Boyne Resorts iCIMS posting 2026-24652, Sugarloaf Ski and Snowboard Instructors", accessed_date: 2026-10-11}
+  - {id: pay-east-jay-peak-new-instructor, url: "https://thesnowpros.org/job/jay-peak-resort-jay-vermont-full-time-part-time-winter-seasonal-new-ski-snowboard-instructor/", title: "Jay Peak Resort New Ski and Snowboard Instructor posting on the PSIA-AASI job board", accessed_date: 2026-10-11}
+  - {id: pay-east-middlebury-snow-school-s01439, url: "https://apply.workable.com/j/E81985C099", title: "Middlebury College Workable posting S01439, Snow School Instructor (26-27 season), Middlebury Snow Bowl", accessed_date: 2026-10-11}
+  - {id: pay-east-hermitage-instructor, url: "https://thesnowpros.org/job/the-hermitage-club-wilmington-vt-full-time-snowsports-instructor/", title: "The Hermitage Club Snowsports Instructor posting on the PSIA-AASI job board", accessed_date: 2026-10-11}
+  - {id: pay-east-buck-hill-ski-instructor, url: "https://recruiting.paylocity.com/Recruiting/Jobs/Details/4503488", title: "Buck Hill Paylocity posting, 2026-2027 Snowsports Center Ski Instructor", accessed_date: 2026-10-11}
+  - {id: pay-east-woodward-tahoe-instructor-jr6759, url: "https://powdr.wd12.myworkdayjobs.com/en-US/POWDR_Careers/job/Snowsports-Instructor---Part-Time---Holiday---On-Call_JR6759", title: "POWDR Workday posting JR6759, Woodward Tahoe Ski and Snowboard Instructor (Flexible Scheduling)", accessed_date: 2026-10-11}
+records:
+  - resort_id: whiteface
+    season: 2026-27
+    cert_level: none
+    hourly_low: 16.32
+    hourly_high: 16.32
+    confidence: published
+    source_id: pay-east-whiteface-employment
+    verified_date: 2026-10-11
+    note: Entry rate for uncertified ski and snowboard instructors, 2026/27 winter list. Actual pay per lesson varies with group size, age and private assignments.
+  - resort_id: whiteface
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 17.56
+    hourly_high: 21.97
+    confidence: published
+    source_id: pay-east-whiteface-employment
+    verified_date: 2026-10-11
+    note: Starting pay for certified instructors, one range for all PSIA/AASI levels.
+  - resort_id: sunday-river
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 16.50
+    hourly_high: 25.00
+    confidence: published
+    source_id: pay-east-sunday-river-instructor-24529
+    verified_date: 2026-10-11
+    note: Ski or snowboard instructor range depending on experience. Posted 7/1/2026, target start 12/1/2026.
+  - resort_id: sugarloaf
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 17.00
+    hourly_high: 17.00
+    confidence: published
+    source_id: pay-east-sugarloaf-instructor-24652
+    verified_date: 2026-10-11
+    note: Starting wage only. Increases follow performance and completed PSIA trainings. Posted 7/23/2026, target start 11/21/2026.
+  - resort_id: jay-peak
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 17.25
+    hourly_high: 23.00
+    confidence: published
+    source_id: pay-east-jay-peak-new-instructor
+    verified_date: 2026-10-11
+    note: Employer posting on the PSIA-AASI job board dated 8/31/2026 for winter seasonal ski and snowboard instructors. Season taken as 2026-27 from the posting date.
+  - resort_id: middlebury-snow-bowl
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 17.50
+    hourly_high: 17.50
+    confidence: published
+    source_id: pay-east-middlebury-snow-school-s01439
+    verified_date: 2026-10-11
+    note: Single hourly wage for part time Snow School instructors, 26-27 season. Junior instructors under 16 earn 16.50.
+  - resort_id: hermitage-club
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 18.00
+    hourly_high: 60.00
+    confidence: published
+    source_id: pay-east-hermitage-instructor
+    verified_date: 2026-10-11
+    note: Posted as 18 to 60+ per hour for ski and ride instructors at a private member club. Posting dated 7/8/2026, so season taken as 2026-27.
+  - resort_id: buck-hill
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 13.00
+    hourly_high: 13.00
+    confidence: published
+    source_id: pay-east-buck-hill-ski-instructor
+    verified_date: 2026-10-11
+    note: Salary description of the 2026-2027 ski instructor posting. The matching snowboard instructor posting lists no rate.
+  - resort_id: woodward-tahoe
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 21.00
+    hourly_high: 21.00
+    confidence: published
+    source_id: pay-east-woodward-tahoe-instructor-jr6759
+    verified_date: 2026-10-11
+    note: Starting pay for snowsports instructors (instruction role, ski and snowboard lessons) at Woodward Tahoe, Boreal and Soda Springs. Posted 8/22/2026, season taken as 2026-27.
