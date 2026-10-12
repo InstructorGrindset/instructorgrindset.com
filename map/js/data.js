@@ -515,6 +515,33 @@ export function loadDetail(resortId) {
   return detailCache.get(resortId);
 }
 
+const trailCache = new Map();
+
+/** Lazy load trailmap/{id}.json (the trail map dialog). Resolves to null when unavailable or invalid. */
+export function loadTrailMap(resortId) {
+  if (!trailCache.has(resortId)) {
+    const p = Promise.all([fetchJson(`trailmap/${encodeURIComponent(resortId)}.json`, { optional: true }), schemas()]).then(([raw, sch]) => {
+      if (!raw) return null;
+      const r = sch.TrailMapFile.safeParse(raw);
+      if (!r.success) {
+        console.warn(`[map] trailmap/${resortId}.json failed validation`, r.error.issues.slice(0, 5));
+        return null;
+      }
+      return {
+        ...r.data,
+        runs: { type: 'FeatureCollection', features: parseEach(sch.RunFeature, r.data.runs.features, `trailmap/${resortId} runs`) },
+        lifts: { type: 'FeatureCollection', features: parseEach(sch.LiftFeature, r.data.lifts.features, `trailmap/${resortId} lifts`) },
+      };
+    }).catch((err) => {
+      console.warn(`[map] trailmap/${resortId}.json`, err.message);
+      trailCache.delete(resortId);
+      return null;
+    });
+    trailCache.set(resortId, p);
+  }
+  return trailCache.get(resortId);
+}
+
 /** Counts by facility type for a list of resorts. */
 export function facilityCounts(list) {
   const out = { ski_area: 0, indoor: 0, training_center: 0, total: list.length };

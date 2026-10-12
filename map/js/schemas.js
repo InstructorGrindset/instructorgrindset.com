@@ -134,6 +134,7 @@ export const Resort = z.object({
   }).nullish().transform((v) => (v && v.status === 'reviewed' ? v : null)),
   climate_available: z.boolean(),
   detail_available: z.boolean().nullish().transform((v) => Boolean(v)),
+  trailmap_available: z.boolean().nullish().transform((v) => Boolean(v)),
   housing_summary: z.object({
     site_count: z.number().int().nonnegative().nullish(),
     cheapest_rent_monthly_low: numOrNull,
@@ -331,4 +332,32 @@ export const DetailFile = z.object({
   isochrones: z.array(z.object({
     minutes: z.number(), mode: z.string().nullish(), geometry: AreaGeom, source_id: z.string().nullish(),
   })).nullish().transform((v) => v ?? []),
+});
+
+// ── Trail map (data/build/trailmap/<resort_id>.json, contract in docs/map/ARCHITECTURE.md) ──
+export const DIFFICULTY_US = ['green', 'blue', 'black', 'double_black', 'terrain_park'];
+const RunGeom = z.union([AnyLine, PolygonGeom, MultiPolygonGeom]);
+export const RunFeature = z.object({
+  type: z.literal('Feature'),
+  geometry: RunGeom,
+  properties: z.object({
+    name: z.string().nullish().transform((v) => v ?? null),
+    difficulty: z.string().nullish().transform((v) => v ?? null),
+    // An unknown sign value draws as unrated rather than dropping the run.
+    difficulty_us: z.string().nullish().transform((v) => (DIFFICULTY_US.includes(v) ? v : null)),
+    grooming: z.string().nullish().transform((v) => v ?? null),
+    lit: z.boolean().nullish().transform((v) => v ?? null),
+  }).passthrough(),
+});
+export const TrailMapFile = z.object({
+  version: z.number().int(),
+  generated_at: z.string(),
+  resort_id: z.string(),
+  source_id: z.string(),
+  // Features are validated one by one in data.js so one odd run cannot hide the rest.
+  runs: z.object({ type: z.literal('FeatureCollection'), features: z.array(z.unknown()) }).passthrough(),
+  lifts: z.object({ type: z.literal('FeatureCollection'), features: z.array(z.unknown()) }).passthrough()
+    .nullish().transform((v) => v ?? { type: 'FeatureCollection', features: [] }),
+  bounds: z.tuple([z.number(), z.number(), z.number(), z.number()])
+    .refine(([w, s, e, n]) => w <= e && s <= n && w >= -180 && e <= 180 && s >= -90 && n <= 90, 'bounds [west, south, east, north]'),
 });

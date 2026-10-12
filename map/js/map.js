@@ -30,6 +30,9 @@ const TIER_STYLE = {
   B: { fill: C.tierB, stroke: C.background },
 };
 
+// Trail map control icon: a peak with a run down it (static markup).
+const TRAIL_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 17 L9 4 L13 10 L15 7 L19 17 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 6 C8 9, 11 11, 9 16" fill="none" stroke="#e0a03a" stroke-width="1.6" stroke-linecap="round"/></svg>';
+
 // Color modes draw a heat surface (heat.js) under small resort dots. Grey marks resorts without data.
 export const NO_DATA = '#8891a0';
 const HEAT_DOT = { fill: C.background, strokeA: C.tierA, strokeB: '#e7e9ee' };
@@ -316,6 +319,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
   let filter = 'all';
   let detail = null;
   let selectedSite = null;
+  let trailCtl = null;
   let recolor = null; // { key, prop, images, format } or null for default
   let heatIds = [];
 
@@ -416,6 +420,24 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       showSiteCommutes(map, id);
     },
     setLayerGroup(group, on) { if (loaded) setGroupVisible(map, group, on); },
+    /** Trail map button on the map (resort views with a trail map). Pass null to remove it. */
+    setTrailControl(onOpen) {
+      if (trailCtl) { map.removeControl(trailCtl); trailCtl = null; }
+      if (!onOpen) return;
+      trailCtl = {
+        onAdd() {
+          const btn = h('button', {
+            type: 'button', class: 'trailmap-ctrl', 'aria-haspopup': 'dialog', title: 'Open the trail map', 'aria-label': 'Open the trail map',
+            onclick: () => onOpen(btn),
+          });
+          btn.innerHTML = TRAIL_ICON;
+          this.el = h('div', { class: 'maplibregl-ctrl maplibregl-ctrl-group' }, btn);
+          return this.el;
+        },
+        onRemove() { this.el.remove(); },
+      };
+      map.addControl(trailCtl, 'top-left');
+    },
     /** null for default colors, or { key, prop, images, format } from recolor.js. */
     setRecolor(next) { recolor = next; if (loaded) applyRecolor(); },
     /** 'all' | 'ski_area' | 'facility' */

@@ -84,9 +84,11 @@ function summary(index, view) {
  * Runs MapLibre (preloaded by the page head) once the panel has painted, so its parse and the WebGL setup
  * never delay the first paint. Resolves with window.maplibregl.
  */
+let mapLibrePromise = null;
 function whenMapLibre() {
   if (window.maplibregl) return Promise.resolve(window.maplibregl);
-  return new Promise((resolve, reject) => {
+  if (mapLibrePromise) return mapLibrePromise;
+  mapLibrePromise = new Promise((resolve, reject) => {
     const s = document.createElement('script');
     s.src = '/map/vendor/maplibre-gl/maplibre-gl.js';
     const done = () => (window.maplibregl ? resolve(window.maplibregl) : reject(new Error('MapLibre failed to load')));
@@ -94,6 +96,8 @@ function whenMapLibre() {
     s.onerror = done;
     afterFirstPaint(() => document.head.append(s));
   });
+  mapLibrePromise.catch(() => { mapLibrePromise = null; });
+  return mapLibrePromise;
 }
 
 /** Run fn once the browser has painted content (first-contentful-paint), or after 1.5 s at the latest. */
@@ -147,7 +151,28 @@ async function main() {
     if (detailFor || detailControls) showDetailControls(groups);
   }
 
+  // Trail map dialog: module and data load on first open.
+  let trail = null;
+  let trailFor = null; // resort record whose map control is up (or waiting for the map)
+  async function openTrail(r, from) {
+    try {
+      const [{ createTrailMap }] = await Promise.all([import('./trailmap.js'), index.loadDetails().catch(() => null)]);
+      if (!trail) trail = createTrailMap({ getMapLibre: whenMapLibre, sourceTitle: (id) => index.sources.get(id) });
+      trail.open(r, from);
+      window.__careerMap.trail = trail;
+    } catch (err) {
+      console.warn('[map] trail map', err.message);
+      announce('The trail map could not open. Try reloading the page.');
+    }
+  }
+  function setTrailControl(r) {
+    trailFor = r && r.trailmap_available ? r : null;
+    if (mapCtl) mapCtl.setTrailControl(trailFor ? (btn) => openTrail(trailFor, btn) : null);
+  }
+
   const panel = createPanel(els.content, index, {
+    onTrailMap: (r, btn) => openTrail(r, btn),
+    onResort: (r) => setTrailControl(r),
     onCompare: (view) => router.go(view),
     onDetail: (resortId, detail) => {
       detailFor = detail ? resortId : null;
@@ -159,6 +184,8 @@ async function main() {
   const list = createListView(els.list, index);
 
   router = createRouter(index, (view, { initial, fellBack }) => {
+    if (trailFor && (view.level !== 'resort' || view.resortId !== trailFor.id)) setTrailControl(null);
+    if (trail) trail.close();
     if (detailFor && (view.level !== 'resort' || view.resortId !== detailFor)) {
       detailFor = null;
       detailData = null;
@@ -272,6 +299,7 @@ async function main() {
   state.mapCtl = mapCtl;
   if (filterKey !== 'all') mapCtl.setFilter(filterKey);
   if (detailFor) applyDetail();
+  if (trailFor) setTrailControl(trailFor);
   if (router.current) mapCtl.show(router.current, { animate: false });
   state.ready = true;
 

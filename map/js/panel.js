@@ -59,7 +59,9 @@ function navLink(view, attrs, ...children) {
   return h('a', { href: hrefFor(view), 'data-nav': '', ...attrs }, ...children);
 }
 
-export function createPanel(root, index, { onCompare, onDetail = () => {}, onSiteSelect = () => {} }) {
+export function createPanel(root, index, {
+  onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {},
+}) {
   let token = 0;
   let siteButtons = new Map();
   let currentDetail = null;
@@ -304,11 +306,18 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     if (!index.fullReady(view.resortId)) return waitForDetails(view, my, eyebrow, slim.name);
     const r = index.full(view.resortId);
     if (!r) return unavailable(view, eyebrow, slim.name);
+    onResort(r);
     const climateRoot = h('div', { class: 'climate' });
     const out = [
       breadcrumb(view),
       ...heading(eyebrow, r.name),
       h('div', { class: 'tier-row' }, resortTags(r)),
+      r.trailmap_available && onTrailMap
+        ? h('p', { class: 'trailmap-open' }, h('button', {
+          type: 'button', class: 'btn btn-sm btn-ghost', 'aria-haspopup': 'dialog',
+          onclick: (e) => onTrailMap(r, e.currentTarget),
+        }, 'Open the trail map'))
+        : null,
       h('dl', { class: 'facts' }, fact('Owner', r.owner, fmt.text)),
     ];
     if (r.tier === 'A' && r.tier_a_criteria.length) {

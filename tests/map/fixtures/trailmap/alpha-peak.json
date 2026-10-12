@@ -1,0 +1,287 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-11T12:00:00Z",
+ "resort_id": "alpha-peak",
+ "source_id": "openskimap-runs",
+ "runs": {
+  "type": "FeatureCollection",
+  "features": [
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.358,
+       39.662
+      ],
+      [
+       -106.3648,
+       39.654
+      ],
+      [
+       -106.3676,
+       39.647
+      ],
+      [
+       -106.382,
+       39.642
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Meadow",
+     "difficulty": "easy",
+     "difficulty_us": "green",
+     "grooming": null,
+     "lit": null
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.358,
+       39.662
+      ],
+      [
+       -106.3576,
+       39.654
+      ],
+      [
+       -106.3612,
+       39.647
+      ],
+      [
+       -106.374,
+       39.642
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Cruiser",
+     "difficulty": "intermediate",
+     "difficulty_us": "blue",
+     "grooming": null,
+     "lit": null
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.358,
+       39.662
+      ],
+      [
+       -106.359,
+       39.654
+      ],
+      [
+       -106.358,
+       39.647
+      ],
+      [
+       -106.37,
+       39.642
+      ]
+     ]
+    },
+    "properties": {
+     "name": null,
+     "difficulty": "intermediate",
+     "difficulty_us": "blue",
+     "grooming": null,
+     "lit": null
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.358,
+       39.662
+      ],
+      [
+       -106.3526,
+       39.654
+      ],
+      [
+       -106.3532,
+       39.647
+      ],
+      [
+       -106.364,
+       39.642
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Chute",
+     "difficulty": "advanced",
+     "difficulty_us": "black",
+     "grooming": null,
+     "lit": null
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.358,
+       39.662
+      ],
+      [
+       -106.3492,
+       39.654
+      ],
+      [
+       -106.3484,
+       39.647
+      ],
+      [
+       -106.358,
+       39.642
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Couloir",
+     "difficulty": "expert",
+     "difficulty_us": "double_black",
+     "grooming": null,
+     "lit": null
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.358,
+       39.662
+      ],
+      [
+       -106.3538,
+       39.654
+      ],
+      [
+       -106.3436,
+       39.647
+      ],
+      [
+       -106.352,
+       39.642
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Traverse",
+     "difficulty": "freeride",
+     "difficulty_us": null,
+     "grooming": null,
+     "lit": null
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        -106.376,
+        39.646
+       ],
+       [
+        -106.372,
+        39.646
+       ],
+       [
+        -106.372,
+        39.649
+       ],
+       [
+        -106.376,
+        39.649
+       ],
+       [
+        -106.376,
+        39.646
+       ]
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Park",
+     "difficulty": null,
+     "difficulty_us": "terrain_park",
+     "grooming": null,
+     "lit": null
+    }
+   }
+  ]
+ },
+ "lifts": {
+  "type": "FeatureCollection",
+  "features": [
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.37,
+       39.64
+      ],
+      [
+       -106.35468,
+       39.64964
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Express",
+     "lift_type": "chair_lift",
+     "source_id": "fixture-location"
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -106.37,
+       39.64
+      ],
+      [
+       -106.36482,
+       39.65449
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Gondola",
+     "lift_type": "chair_lift",
+     "source_id": "fixture-location"
+    }
+   }
+  ]
+ },
+ "bounds": [
+  -106.382,
+  39.64,
+  -106.3436,
+  39.662
+ ]
+}

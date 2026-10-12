@@ -39,6 +39,9 @@ SOURCES = [
      "title": "Synthetic fixture: station density", "accessed_date": AS_OF},
     {"id": "fixture-ownership", "url": "https://example.com/fixture/ownership",
      "title": "Synthetic fixture: ownership", "accessed_date": AS_OF},
+    # Trail map files always cite this id (contract); the fixture points it at example.com.
+    {"id": "openskimap-runs", "url": "https://example.com/fixture/runs",
+     "title": "Synthetic fixture: runs", "accessed_date": AS_OF},
 ]
 
 # (id, name, cluster, state, tier, tier_a_status, lat, lon, acres, vertical, lifts, climate, density_source)
@@ -232,6 +235,7 @@ def resort_record(row):
     if rid != "lima-hollow":
         record["facility_type"] = facility
     record["detail_available"] = rid in DETAIL_IDS
+    record["trailmap_available"] = rid in TRAILMAP_IDS
     record["housing_summary"] = ({"site_count": 3, "cheapest_rent_monthly_low": 550, "cheapest_site_id": "alpha-staff-village",
                                   "has_transit": True} if rid == "alpha-peak" else None)
     ids = {"fixture-location"}
@@ -334,6 +338,7 @@ def recolor_props(r):
 
 
 DETAIL_IDS = {"alpha-peak", "foxtrot-basin"}
+TRAILMAP_IDS = {"alpha-peak"}
 
 
 def circle(lon, lat, km, n=24):
@@ -407,6 +412,37 @@ def detail_record(r):
                            for m, km in ((45, 40), (30, 26), (15, 12))]}
 
 
+def trailmap_record(r):
+    """Synthetic trail map: one run per North American sign, an unnamed run, an unrated run, a park area."""
+    lon, lat = r["lon"], r["lat"]
+    top = (lon + 0.012, lat + 0.022)
+
+    def run(name, sign, difficulty, dx, bend):
+        pts = [top, (top[0] + dx * 0.4 + bend, top[1] - 0.008), (top[0] + dx * 0.8, top[1] - 0.015), (lon + dx, lat + 0.002)]
+        return {"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[round(x, 5), round(y, 5)] for x, y in pts]},
+                "properties": {"name": name, "difficulty": difficulty, "difficulty_us": sign, "grooming": None, "lit": None}}
+
+    runs = [
+        run("Fixture Meadow", "green", "easy", -0.012, -0.002),
+        run("Fixture Cruiser", "blue", "intermediate", -0.004, 0.002),
+        run(None, "blue", "intermediate", 0.000, -0.001),
+        run("Fixture Chute", "black", "advanced", 0.006, 0.003),
+        run("Fixture Couloir", "double_black", "expert", 0.012, 0.004),
+        run("Fixture Traverse", None, "freeride", 0.018, -0.003),
+    ]
+    px, py = lon - 0.006, lat + 0.006
+    ring = [[px, py], [px + 0.004, py], [px + 0.004, py + 0.003], [px, py + 0.003], [px, py]]
+    runs.append({"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[round(x, 5), round(y, 5)] for x, y in ring]]},
+                 "properties": {"name": "Fixture Park", "difficulty": None, "difficulty_us": "terrain_park", "grooming": None, "lit": None}})
+    lifts = lifts_for(lon, lat, ["Fixture Express", "Fixture Gondola"])
+    pts = [c for f in runs + lifts["features"] for c in (f["geometry"]["coordinates"][0] if f["geometry"]["type"] == "Polygon" else f["geometry"]["coordinates"])]
+    xs = [p[0] for p in pts] + [lon]
+    ys = [p[1] for p in pts] + [lat]
+    return {"version": 1, "generated_at": GENERATED_AT, "resort_id": r["id"], "source_id": "openskimap-runs",
+            "runs": {"type": "FeatureCollection", "features": runs}, "lifts": lifts,
+            "bounds": [round(min(xs), 5), round(min(ys), 5), round(max(xs), 5), round(max(ys), 5)]}
+
+
 def write(name, data):
     path = OUT / name
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -468,6 +504,9 @@ def main():
     for r in resorts:
         if r["detail_available"]:
             write(f"detail/{r['id']}.json", detail_record(r))
+    for r in resorts:
+        if r["trailmap_available"]:
+            write(f"trailmap/{r['id']}.json", trailmap_record(r))
     for row in RESORTS:
         if row[11]:
             write(f"climate/{row[0]}.json", climate_record(row))
