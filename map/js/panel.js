@@ -67,7 +67,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
 
   function sourceLink(id) {
     // Sources arrive with the full data after the first paint; fillSources() swaps these placeholders.
-    if (!index.detailsReady) return h('span', { class: 'muted src-pending', dataset: { src: id } }, 'Loading source');
+    if (!index.detailsReady && !index.sources.has(id)) return h('span', { class: 'muted src-pending', dataset: { src: id } }, 'Loading source');
     const s = index.sources.get(id);
     if (!s) return h('span', { class: 'muted' }, 'Source record pending');
     const url = safeUrl(s.url);
@@ -278,7 +278,8 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
 
   /** Breadcrumb and heading from the slim index while the full record loads, then the full view. */
   function waitForDetails(view, my, eyebrow, title) {
-    index.loadDetails().catch(() => null).then(() => {
+    const load = view.level === 'resort' ? index.loadResort(view.resortId) : index.loadDetails();
+    load.catch(() => null).then(() => {
       if (my !== token) return;
       const hadFocus = document.activeElement && document.activeElement.id === 'panel-heading';
       const notice = root.querySelector(':scope > .notice');
@@ -300,7 +301,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     const slim = index.resorts.get(view.resortId);
     const c = index.clusters.get(view.clusterId);
     const eyebrow = `Resort in ${c.name}, ${slim.state}`;
-    if (!index.detailsReady) return waitForDetails(view, my, eyebrow, slim.name);
+    if (!index.fullReady(view.resortId)) return waitForDetails(view, my, eyebrow, slim.name);
     const r = index.full(view.resortId);
     if (!r) return unavailable(view, eyebrow, slim.name);
     const climateRoot = h('div', { class: 'climate' });
@@ -856,7 +857,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
       rendered = true;
       root.removeAttribute('aria-busy');
       // A route stub carries a prerendered summary of its resort. Keep it on screen while the full record loads.
-      if (first && !index.detailsReady && (view.level === 'resort' || view.level === 'compare')) {
+      if (first && (view.level === 'resort' ? !index.fullReady(view.resortId) : (view.level === 'compare' && !index.detailsReady))) {
         const pre = root.querySelector('#panel-heading');
         if (pre && pre.textContent.trim() === (view.level === 'resort' ? index.resorts.get(view.resortId).name : pre.textContent.trim())) {
           root.setAttribute('aria-busy', 'true');

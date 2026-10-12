@@ -71,6 +71,10 @@ function makeStubSite() {
   fs.copyFileSync(path.join(REPO, 'map', 'index.html'), path.join(t, 'map', 'index.html'));
   fs.mkdirSync(path.join(t, 'data'));
   fs.cpSync(path.join(REPO, 'tests', 'map', 'fixtures'), path.join(t, 'data', 'build'), { recursive: true });
+  // A copy of the fixtures without the slim index, for the fallback path.
+  fs.cpSync(path.join(REPO, 'tests', 'map', 'fixtures'), path.join(t, 'legacy-build'), { recursive: true });
+  fs.rmSync(path.join(t, 'legacy-build', 'map-index.json'));
+  fs.rmSync(path.join(t, 'data', 'build', 'map-index.json'), { force: true });
   const out = execFileSync('python3', [path.join(REPO, 'pipeline', 'routes.py'), '--root', t], { encoding: 'utf8' });
   log(`  ${out.trim()}`);
   // A stub left behind for a cluster that no longer exists.
@@ -95,6 +99,8 @@ function watch(page, label) {
   page.on('response', (r) => {
     // Allowed: the site wide Rooftop font (missing repo wide) and definitions.json, which is optional.
     if (r.status() === 404 && /\/definitions\.json$/.test(r.url())) { log(`    note definitions.json absent at ${r.url()}`); return; }
+    // The fallback test build has no slim index on purpose.
+    if (r.status() === 404 && /\/legacy-build\/map-index\.json$/.test(r.url())) return;
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
   });
   page.on('requestfailed', (r) => /\/fonts\/Rooftop/.test(r.url()) || problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`));
@@ -710,7 +716,33 @@ async function desktopStub(browser, base) {
   await mapIdle(page);
   check(await heading(page) === 'Hotel Lake', 'desktop deep link loads the resort');
   check(await page.evaluate(() => document.querySelector('meta[name=description]').content.includes('Hotel Lake')), 'stub description per page');
+  // Phase 8 load order: the stub embeds its record, the slim index feeds the first paint, and the
+  // 2D first frame gives way to the WebGL map.
+  const order = await page.evaluate(() => {
+    const t = (n) => { const e = performance.getEntriesByName(n)[0]; return e ? e.startTime : null; };
+    const res = (f) => performance.getEntriesByType('resource').filter((e) => e.name.includes(`/data/build/${f}`));
+    return {
+      record: JSON.parse(document.getElementById('resort-record').textContent).resort.id,
+      index: res('map-index.json').length, geo: res('resorts.geojson').length,
+      preview: t('careermap:preview'), load: t('careermap:map'), previewLeft: document.querySelectorAll('.map-preview').length,
+      pending: document.querySelectorAll('.src-pending').length, links: document.querySelectorAll('#panel-content .src-link').length,
+    };
+  });
+  check(order.record === 'hotel-lake', 'resort stub embeds its own record');
+  check(order.index === 1 && order.geo === 0, 'first paint reads map-index.json and never resorts.geojson');
+  check(order.preview != null && order.preview < order.load && order.previewLeft === 0, 'first map frame drawn before WebGL loads, then removed');
+  check(order.pending === 0 && order.links > 0, `every source placeholder is filled (${order.links} source links)`);
   await shot(page, 'desktop-09-deep-link.png');
+
+  // Older builds without map-index.json still work (resorts.json validated up front).
+  await page.goto(`${base}/map/co/fixture-front-range/alpha-peak/?data=/legacy-build/`);
+  await ready(page);
+  await mapIdle(page);
+  await page.waitForFunction(() => document.querySelectorAll('#panel-content .facts').length >= 3, null, { timeout: 10000 });
+  check(await heading(page) === 'Alpha Peak' && await page.evaluate(() => window.__careerMap.index.resorts.size) === 14,
+    'a build without map-index.json falls back to resorts.json');
+  await page.goto(`${base}/map/`);
+  await ready(page);
   await page.goto(`${base}/map/co/fixture-front-range/?compare=alpha-peak,charlie-hill`);
   await ready(page);
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length === 2, null, { timeout: 10000 });

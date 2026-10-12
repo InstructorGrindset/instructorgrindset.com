@@ -540,6 +540,9 @@ def write_map_index(build: Path) -> Path:
 def resort_record(ctx: Ctx, r: dict, sources_file: dict) -> dict:
     """The resort's resorts.json record plus the sources it cites, embedded in its page."""
     cited = set(r.get("sources") or [])
+    e = r.get("editorial")
+    if e and (not isinstance(e, dict) or e.get("status") != "reviewed"):
+        r = {**r, "editorial": None}  # drafts never reach a page, even inside data
     return {"version": 1, "generated_at": sources_file.get("generated_at"), "resort": r,
             "sources": [ctx.sources[i] for i in sorted(cited) if i in ctx.sources]}
 
@@ -580,7 +583,9 @@ def render_stub(template: str, page: Page) -> str:
         out = out.replace("</head>", f"  {_jsonld_script(page.jsonld)}\n</head>", 1)
     if page.record:
         raw = json.dumps(page.record, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
-        out = out.replace("</head>", f'  <script type="application/json" id="resort-record">{raw}</script>\n</head>', 1)
+        out = out.replace("</head>", f'  <script type="application/json" id="resort-record">{raw}</script>\n'
+                          '  <link rel="modulepreload" href="/map/js/schemas.js">\n'
+                          '  <link rel="modulepreload" href="/map/vendor/zod/zod.mjs">\n</head>', 1)
     return out.replace("<head>", f"<head>\n  {MARKER}", 1)
 
 

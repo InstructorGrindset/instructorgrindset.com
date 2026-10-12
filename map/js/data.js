@@ -321,17 +321,38 @@ async function loadLegacy() {
  * Full records, sources and definitions. index.loadDetails() starts the background load (once) and resolves
  * when it is done; index.full(id) returns the validated full record, or null when it is missing or invalid.
  */
+/** The record a resort page embeds (pipeline/routes.py), or null. */
+function embeddedRecord() {
+  const el = document.getElementById('resort-record');
+  if (!el) return null;
+  try {
+    const d = JSON.parse(el.textContent);
+    return d && d.resort && typeof d.resort.id === 'string' ? { resort: d.resort, sources: Array.isArray(d.sources) ? d.sources : [] } : null;
+  } catch {
+    console.warn('[map] the embedded resort record is not valid JSON');
+    return null;
+  }
+}
+
 function attachDetails(index, legacy) {
   const raw = new Map();
   const parsed = legacy ? legacy.full : new Map();
   const failed = new Set();
+  const embedded = embeddedRecord();
   let schemaMod = null;
   let pending = null;
+  let pendingOne = null;
+
+  const rawOf = (id) => raw.get(id) || (embedded && embedded.resort.id === id ? embedded.resort : null);
+
+  /** True when full(id) can answer now (the record is here and Zod is loaded). */
+  index.fullReady = (id) => parsed.has(id) || failed.has(id) || index.detailsReady || Boolean(schemaMod && rawOf(id));
 
   index.full = (id) => {
     if (parsed.has(id)) return parsed.get(id);
-    if (!schemaMod || failed.has(id) || !raw.has(id)) return null;
-    const r = schemaMod.Resort.safeParse(raw.get(id));
+    const item = rawOf(id);
+    if (!schemaMod || failed.has(id) || !item) return null;
+    const r = schemaMod.Resort.safeParse(item);
     if (!r.success) {
       failed.add(id);
       console.warn(`[map] resorts.json resorts[${id}] skipped:`, r.error.issues.slice(0, 3).map((x) => `${x.path.join('.')}: ${x.message}`).join('; '));
@@ -373,13 +394,36 @@ function attachDetails(index, legacy) {
     }
     return pending;
   };
+
+  /** One resort: from the record its page embeds when there is one (no resorts.json wait), else loadDetails. */
+  index.loadResort = (id) => {
+    if (!embedded || embedded.resort.id !== id || index.detailsReady) return index.loadDetails();
+    if (!pendingOne) {
+      pendingOne = Promise.all([schemas(), loadDefinitions()]).then(([sch, definitions]) => {
+        schemaMod = schemaMod || sch;
+        if (!index.detailsReady) {
+          const sf = sch.SourcesFile.safeParse({ version: 1, generated_at: '', sources: embedded.sources });
+          if (sf.success) for (const x of sf.data.sources) if (!index.sources.has(x.id)) index.sources.set(x.id, x);
+          if (index.definitions == null) index.definitions = definitions;
+        }
+        return index;
+      });
+    }
+    return pendingOne;
+  };
 }
 
 /**
  * definitions.json (thresholds from config/definitions.yaml). Optional: when it is
  * missing or malformed the UI keeps generic labels and states no thresholds.
  */
-async function loadDefinitions() {
+let definitionsPromise = null;
+function loadDefinitions() {
+  if (!definitionsPromise) definitionsPromise = readDefinitions();
+  return definitionsPromise;
+}
+
+async function readDefinitions() {
   let raw = null;
   try { raw = await fetchJson('definitions.json', { optional: true }); } catch { raw = null; }
   if (!raw) return null;
