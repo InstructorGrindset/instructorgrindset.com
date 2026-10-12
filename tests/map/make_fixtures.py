@@ -221,7 +221,11 @@ def resort_record(row):
                 "professional_types": ["career_instructor"] if tier == "A" else []},
         "clients": {"profile_tags": ["destination_families", "private_lessons"] if tier == "A" else [],
                     "notes_md": None},
-        "career": career_data().get(rid), "editorial": None,
+        "career": career_data().get(rid),
+        "editorial": ({"overview_md": "Synthetic overview with **bold** text and a [linked source](https://example.com/fixture/editorial).",
+                       "culture_md": "Synthetic culture paragraph one.\n\nSynthetic culture paragraph two.",
+                       "alexandre_take_md": "Synthetic take from a reviewer.", "status": "reviewed",
+                       "source_ids": ["fixture-resort-site"], "reviewed_date": "2026-10-10"} if rid == "alpha-peak" else None),
         "climate_available": climate,
     }
     if rid != "lima-hollow":
@@ -392,6 +396,7 @@ def detail_record(r):
     return {"version": 1, "generated_at": GENERATED_AT, "resort_id": r["id"], "base_area": base,
             "lifts": lifts_for(lon, lat, ["Fixture Express", "Fixture Summit Chair", "Fixture Bowl Lift", None]),
             "housing": housing,
+            "rent_reported": sourced({"low": 700, "high": 1000}, "fixture-survey", "reported", "Range from 4 approved reports"),
             "rent_baseline": {"county_fips": "00000", "county_name": "Fixture County",
                               "fmr": {"studio": sourced(1100, "fixture-model", "estimated"), "one_br": sourced(1300, "fixture-model", "estimated"),
                                       "two_br": sourced(1650, "fixture-model", "estimated")},
@@ -440,7 +445,9 @@ def main():
                        "properties": {"id": cid, "name": name, "states": states,
                                       "resort_ids": [r["id"] for r in members],
                                       "tier_a_count": sum(r["tier"] == "A" for r in members),
-                                      "overview_md": None, "sources": ["fixture-location"]}})
+                                      "overview_md": "Synthetic cluster overview." if cid == "fixture-front-range" else None,
+                                      "alexandre_take_md": "Synthetic cluster take." if cid == "fixture-front-range" else None,
+                                      "sources": ["fixture-location"]}})
     write("clusters.geojson", {"type": "FeatureCollection", "version": 1, "generated_at": GENERATED_AT, "features": cfeats})
 
     states = []
@@ -454,7 +461,9 @@ def main():
                                "snow": {"powder_day_in": 6, "banner_day_in": 12},
                                "density": {"dry_max_pct": 7, "moist_min_pct": 12},
                                "display": {"priority": ["published", "reported", "estimated"]},
-                               "reports": {"aggregation_min": 3}, "staleness": {"max_age_months": 18}})
+                               "reports": {"aggregation_min": 3}, "staleness": {"max_age_months": 18},
+                               # Synthetic endpoint; the browser test intercepts it. Production keeps null until it exists.
+                               "submissions": {"endpoint": "https://reports.example.test/submit"}})
     for r in resorts:
         if r["detail_available"]:
             write(f"detail/{r['id']}.json", detail_record(r))

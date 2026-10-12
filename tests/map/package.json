@@ -1,0 +1,14 @@
+{
+  "name": "career-map-browser-tests",
+  "private": true,
+  "description": "Test only tooling for the Career Map (accessibility and Lighthouse audits). Never loaded by the site.",
+  "type": "module",
+  "scripts": {
+    "test": "node browser_test.mjs",
+    "audit": "node audit.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "lighthouse": "12.8.2"
+  }
+}

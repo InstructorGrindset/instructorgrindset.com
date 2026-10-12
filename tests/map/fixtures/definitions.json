@@ -21,5 +21,8 @@
  },
  "staleness": {
   "max_age_months": 18
+ },
+ "submissions": {
+  "endpoint": "https://reports.example.test/submit"
  }
 }

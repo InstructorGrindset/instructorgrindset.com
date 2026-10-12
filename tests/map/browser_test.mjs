@@ -204,6 +204,8 @@ async function desktop(browser, base) {
   check(/Colorado/.test(stats) && /Resorts\s*5/i.test(stats) && /Tier A\s*3/i.test(stats) && note === 'Includes 4 ski areas and 1 indoor facility.',
     `cluster summary shows states, resort count with facilities, Tier A count (${stats.replace(/\s+/g, ' ')} | ${note})`);
   check(await page.locator('.resort-list .tier-facility', { hasText: 'Indoor ski facility' }).count() === 1, 'cluster list tags the indoor facility');
+  check((await page.locator('.editorial', { hasText: 'About this cluster' }).innerText()).includes('Synthetic cluster take.'), 'cluster overview and take render');
+  check(await page.locator('.panel-footer .related a').count() === 5, 'panel footer links related tools and reading');
   check(await page.locator('.resort-list .tier-draft').count() === 1, 'Draft profile tag on draft Tier A resort');
   await shot(page, 'desktop-03-cluster.png');
 
@@ -214,7 +216,7 @@ async function desktop(browser, base) {
   await mapIdle(page);
   await page.waitForTimeout(500);
   check(await heading(page) === 'Alpha Peak', 'resort heading');
-  check((await page.title()).startsWith('Alpha Peak: Season, Snow and Size'), 'resort title');
+  check((await page.title()).startsWith('Instructor pay, housing, and snow at Alpha Peak'), 'resort title');
   check(await page.locator('link[rel=canonical]').getAttribute('href') === 'https://instructorgrindset.com/map/co/fixture-front-range/alpha-peak/', 'resort canonical');
   check(await page.locator('.badge-published').count() > 5, 'published badges render');
   check(await page.locator('.badge-estimated').count() >= 1, 'estimated badge renders');
@@ -340,6 +342,50 @@ async function desktop(browser, base) {
   check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('detail-iso-fill', 'visibility')) === 'none', 'drive time toggle hides isochrones');
   await page.locator('#layer-isochrones').check();
   await shot(page, 'desktop-11-detail-pin-selected.png');
+
+  // Phase 6: reviewed editorial with sources.
+  const ed = page.locator('.editorial', { hasText: 'About Alpha Peak' });
+  check(await ed.count() === 1, 'reviewed resort editorial renders');
+  check(JSON.stringify(await ed.locator('.sub').allInnerTexts()) === JSON.stringify(['Overview', 'Culture', "Alexandre's take"]), 'editorial shows overview, culture and Alexandre\'s take');
+  check(await ed.locator('strong', { hasText: 'bold' }).count() === 1 && await ed.locator('a[href="https://example.com/fixture/editorial"]').count() === 1, 'editorial Markdown renders bold and links');
+  check(await ed.locator('.editorial-text p').count() === 4, 'editorial paragraphs split');
+  check((await ed.innerText()).includes('Sources: Synthetic fixture: resort facts') && (await ed.innerText()).includes('Reviewed Oct 10, 2026.'), 'editorial cites sources and review date');
+  check((await page.locator('.housing .fact', { hasText: 'Reported rent near the resort' }).innerText()).includes('$700 to $1,000 per month'), 'reported area rent renders with badge');
+
+  // Phase 7: report form (endpoint intercepted; nothing leaves the test).
+  const posted = [];
+  await page.route('https://reports.example.test/submit', async (route) => {
+    posted.push(JSON.parse(route.request().postData()));
+    await route.fulfill({ status: 202, contentType: 'application/json', body: '{"ok":true}' });
+  });
+  const form = page.locator('.report-form');
+  check(await form.count() === 1, 'report form shows when an endpoint is configured');
+  check(JSON.stringify(await form.locator('select[name=kind] option').allInnerTexts()) === JSON.stringify(['Hourly pay', 'Rent I paid near the resort', 'Rent at a listed housing site']), 'report kinds include listed housing once detail loads');
+  await form.locator('input[name=amount]').fill('2');
+  await form.locator('input[name=proof_url]').fill('ftp://nope');
+  await form.locator('button[type=submit]').click();
+  check(await form.locator('.form-error', { hasText: 'Choose your certification level.' }).count() === 1, 'pay report needs a cert level');
+  check(await form.locator('.form-error', { hasText: 'between $5 and $300' }).count() === 1, 'hourly value range validated');
+  check(await form.locator('.form-error', { hasText: 'starts with https://' }).count() === 1, 'proof link validated');
+  check(await form.locator('[aria-invalid="true"]').count() === 3 && posted.length === 0, 'invalid fields flagged and nothing sent');
+  await shot(page, 'desktop-12-report-form-errors.png');
+  await form.locator('select[name=cert_level]').selectOption('level_2');
+  await form.locator('input[name=amount]').fill('24.5');
+  await form.locator('input[name=proof_url]').fill('https://example.com/stub.pdf');
+  await form.locator('button[type=submit]').click();
+  await page.waitForFunction(() => /moderation queue/.test(document.querySelector('.form-status').textContent), null, { timeout: 5000 });
+  check(posted.length === 1 && posted[0].resort_id === 'alpha-peak' && posted[0].kind === 'pay' && posted[0].cert_level === 'level_2'
+    && posted[0].values.hourly_usd === 24.5 && /^\d{4}-\d{2}$/.test(posted[0].season) && posted[0].proof_url === 'https://example.com/stub.pdf',
+    `pay report posts the contract fields (${JSON.stringify(posted[0])})`);
+  await form.locator('select[name=kind]').selectOption('housing');
+  check(await form.locator('[data-field=cert_level]').isHidden() && await form.locator('[data-field=housing_site_id]').isVisible()
+    && (await form.locator('[data-field=amount] label').innerText()) === 'Monthly rent in USD', 'housing report asks for a site and a monthly rent');
+  await form.locator('select[name=housing_site_id]').selectOption('alpha-town-lease');
+  await form.locator('input[name=amount]').fill('875');
+  await form.locator('button[type=submit]').click();
+  await page.waitForFunction(() => document.querySelector('.form-status').textContent.includes('moderation'), null, { timeout: 5000 });
+  check(posted.length === 2 && posted[1].housing_site_id === 'alpha-town-lease' && posted[1].values.monthly_usd === 875 && !('cert_level' in posted[1]), 'housing report posts site and monthly value');
+  check(await page.locator('#panel-content').evaluate((el) => !el.innerText.includes('875')), 'submitted values are never displayed');
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 900; });
   await page.waitForTimeout(200);
   await shot(page, 'desktop-05-resort-charts.png');
@@ -392,6 +438,7 @@ async function desktop(browser, base) {
   check(await page.locator('.not-verified', { hasText: 'Not yet verified' }).count() >= 8, 'null values render Not yet verified');
   check(await page.locator('.climate', { hasText: 'Climate data is being compiled' }).count() === 1, 'missing climate message');
   check(await page.locator('.panel-section', { hasText: 'Career data is being collected.' }).count() === 1, 'career null renders being collected');
+  check(await page.locator('.editorial').count() === 0, 'no editorial section when the build has none');
   check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'resort without detail shows housing empty state');
   check(!w.requests.some((u) => u.includes('/detail/delta-ridge.json')), 'no detail fetch when detail_available is false');
   check(!w.requests.some((u) => u.includes('/climate/delta-ridge.json')), 'no climate fetch when climate_available is false');
@@ -497,7 +544,7 @@ async function phone(browser, base) {
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length >= 5, null, { timeout: 10000 });
   await mapIdle(page);
   check(await heading(page) === 'Alpha Peak', 'deep link stub loads the resort');
-  check((await page.title()).startsWith('Alpha Peak'), 'stub title matches');
+  check((await page.title()).startsWith('Instructor pay, housing, and snow at Alpha Peak'), 'stub title matches');
   await shot(page, 'phone-02-resort-half.png');
 
   const handle = page.locator('#sheet-handle');
@@ -597,6 +644,20 @@ async function desktopStub(browser, base) {
   await ready(page);
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length === 2, null, { timeout: 10000 });
   check(await heading(page) === 'Compare resorts in Fixture Front Range', 'comparison deep link loads from a stub');
+
+  // Without JavaScript the stub still carries the resort summary (Phase 8 prerender).
+  const nojs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 800 } });
+  const np = await nojs.newPage();
+  await np.goto(`${base}/map/co/fixture-front-range/alpha-peak/`);
+  const text = await np.locator('#panel-content').innerText();
+  check((await np.locator('#panel-heading').innerText()) === 'Alpha Peak' && text.includes('Operator compensation') && text.includes('5,300')
+    && text.includes('Level 1'), 'no JS visitors see the prerendered resort summary');
+  check(await np.locator('#panel-content a[href="/contact"]').count() === 1 && await np.locator('#panel-content .related a').count() === 5, 'prerendered page links the consultation and related tools');
+  const ld = JSON.parse(await np.locator('script[type="application/ld+json"]').textContent());
+  check(ld['@graph'][0]['@type'] === 'SkiResort' && ld['@graph'][0].geo.latitude === 39.64, 'JSON-LD SkiResort with geo');
+  check((await np.locator('meta[property="og:title"]').getAttribute('content')) === 'Instructor pay, housing, and snow at Alpha Peak', 'Open Graph title');
+  await np.screenshot({ path: path.join(SHOTS, 'desktop-13-no-js.png') });
+  await nojs.close();
   w.assertClean();
   await page.close();
 }
@@ -700,6 +761,8 @@ async function realData(browser, base) {
         log(`  real detail/${withDetail.id}.json: ${fs.statSync(path.join(REPO, 'data', 'build', 'detail', `${withDetail.id}.json`)).size} bytes on disk, fetch ${timing ? `${timing.ms} ms` : 'n/a'}`);
         check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'real data: only layers with data get a toggle');
         check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'real data: housing empty state');
+        check(await page.locator('.panel-section', { hasText: 'Pay and rent reports open soon.' }).count() === 1 && await page.locator('.report-form').count() === 0,
+          'real data: report form hidden while the endpoint is null');
         const unnamed = file.lifts.features.findIndex((f) => !f.properties.name);
         if (unnamed >= 0) log(`  real data: ${file.lifts.features.filter((f) => !f.properties.name).length} unnamed lifts render as "Unnamed lift"`);
         await shot(page, 'real-desktop-detail-lifts.png');

@@ -121,7 +121,15 @@ export const Resort = z.object({
   clients: z.object({ profile_tags: strList, notes_md: z.string().nullish() })
     .nullish().transform((v) => v ?? { profile_tags: [], notes_md: null }),
   career: Career.nullish().transform((v) => v ?? null),
-  editorial: z.unknown().nullish(),
+  // Phase 6: only reviewed editorial reaches the build; anything else is ignored.
+  editorial: z.object({
+    overview_md: z.string().nullish(),
+    culture_md: z.string().nullish(),
+    alexandre_take_md: z.string().nullish(),
+    status: z.string(),
+    source_ids: strList,
+    reviewed_date: z.string().nullish(),
+  }).nullish().transform((v) => (v && v.status === 'reviewed' ? v : null)),
   climate_available: z.boolean(),
   detail_available: z.boolean().nullish().transform((v) => Boolean(v)),
   housing_summary: z.object({
@@ -157,6 +165,7 @@ export const ClusterFeature = z.object({
     resort_ids: z.array(z.string()),
     tier_a_count: z.number().int().nonnegative(),
     overview_md: z.string().nullish(),
+    alexandre_take_md: z.string().nullish(),
     sources: z.array(z.string()).nullish().transform((v) => v ?? []),
   }),
 });
@@ -247,6 +256,8 @@ export const DefinitionsFile = z.object({
     dry_max_pct: z.number().positive().nullish(),
     moist_min_pct: z.number().positive().nullish(),
   }).passthrough().nullish(),
+  reports: z.object({ aggregation_min: z.number().int().positive().nullish() }).passthrough().nullish(),
+  submissions: z.object({ endpoint: z.string().nullish() }).passthrough().nullish(),
 }).passthrough();
 
 // ── Resort detail (Phase 5): data/build/detail/<id>.json ──
@@ -298,6 +309,7 @@ export const DetailFile = z.object({
   lifts: z.object({ type: z.literal('FeatureCollection'), features: z.array(z.unknown()) }).passthrough()
     .nullish().transform((v) => v ?? { type: 'FeatureCollection', features: [] }),
   housing: z.array(z.unknown()).nullish().transform((v) => v ?? []),
+  rent_reported: sourced(z.object({ low: numOrNull, high: numOrNull })),   // Phase 7 area aggregate
   rent_baseline: z.object({
     county_fips: z.string().nullish(),
     county_name: z.string().nullish(),

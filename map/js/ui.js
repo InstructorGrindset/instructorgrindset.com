@@ -71,3 +71,25 @@ export function joinAnd(items) {
 }
 
 export function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+
+/**
+ * Small Markdown subset for reviewed editorial: paragraphs, **bold**, *italic*, [text](https://...).
+ * Builds DOM nodes; never parses HTML.
+ */
+export function markdown(md) {
+  const TOKEN = /(\*\*[^*]+\*\*|\*[^*\s][^*]*\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g;
+  return String(md || '').trim().split(/\n\s*\n/).filter(Boolean).map((para) => {
+    const p = document.createElement('p');
+    for (const part of para.replace(/\n/g, ' ').split(TOKEN)) {
+      if (!part) continue;
+      let m;
+      if ((m = /^\*\*([^*]+)\*\*$/.exec(part))) p.append(h('strong', null, m[1]));
+      else if ((m = /^\*([^*]+)\*$/.exec(part))) p.append(h('em', null, m[1]));
+      else if ((m = /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/.exec(part))) {
+        const url = safeUrl(m[2]);
+        p.append(url ? h('a', { href: url, target: '_blank', rel: 'noopener noreferrer' }, m[1]) : m[1]);
+      } else p.append(part);
+    }
+    return p;
+  });
+}

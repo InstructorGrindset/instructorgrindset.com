@@ -7,11 +7,17 @@ import {
 import { CERT_LEVELS } from './schemas.js';
 import { hrefFor } from './router.js';
 import {
-  h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd,
+  h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd, markdown,
 } from './ui.js';
 import {
   destroyCharts, renderResortCharts, renderCompareCharts, seasonTotal, SERIES,
 } from './charts.js';
+
+// Same links as the static pages written by pipeline/routes.py.
+const RELATED = [
+  ['/blog', 'Blog'], ['/reading-list', 'The Reading List'], ['/income-calculator', 'Season Income Calculator'],
+  ['/career-plan', 'Plan Your Career'], ['/priority-predictor', 'Priority Predictor'],
+];
 
 const CONFIDENCE_LABEL = { published: 'Published', reported: 'Reported', estimated: 'Estimated' };
 const CONFIDENCE_HELP = {
@@ -255,7 +261,9 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
       ...heading('Cluster', c.name),
       stats([['States', joinAnd(stateNames)], ['Resorts', fmtInt(resorts.length)], ['Tier A', fmtInt(c.tier_a_count)]]),
       h('p', { class: 'stats-note' }, `Includes ${facilityPhrase(counts)}.`),
-      c.sources.length ? h('p', { class: 'fact-meta' }, 'Cluster sources: ', c.sources.map((id, i) => [i ? ', ' : '', sourceLink(id)])) : null,
+      c.overview_md || c.alexandre_take_md
+        ? editorialSection('About this cluster', [['Overview', c.overview_md], ["Alexandre's take", c.alexandre_take_md]], c.sources, null)
+        : (c.sources.length ? h('p', { class: 'fact-meta' }, 'Cluster sources: ', c.sources.map((id, i) => [i ? ', ' : '', sourceLink(id)])) : null),
       h('section', { class: 'panel-section' },
         h('div', { class: 'section-head' }, h('h3', null, 'Resorts'), resorts.length >= config.compare.min ? toggle : null),
         bar, list),
@@ -281,6 +289,9 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
         k.rationale ? h('span', { class: 'criterion-why' }, k.rationale) : null,
         h('span', { class: 'fact-meta' }, sourceLink(k.source_id))))), approval));
     }
+    if (r.editorial) out.push(editorialSection(`About ${r.name}`, [
+      ['Overview', r.editorial.overview_md], ['Culture', r.editorial.culture_md], ["Alexandre's take", r.editorial.alexandre_take_md],
+    ], r.editorial.source_ids, r.editorial.reviewed_date));
     out.push(careerSection(r));
     out.push(section('Operation size', h('dl', { class: 'facts' },
       fact('Skiable acres', r.size.acres, fmt.int),
@@ -309,6 +320,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
       out.push(section('Clients and fit', fitBits.map(([label, l]) => [h('p', { class: 'sub' }, label), tags(l)])));
     }
     out.push(housingSection(r, my));
+    out.push(reportSection(r));
     out.push(section('Snow and climate', climateRoot));
     out.push(h('p', { class: 'fact-meta location' }, `Base area ${r.lat.toFixed(3)}, ${r.lon.toFixed(3)}`,
       r.location_source_id ? [' · ', sourceLink(r.location_source_id)] : null));
@@ -443,7 +455,145 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     return h('div', null, body);
   }
 
+  // ── Editorial (Phase 6): rendered only when the build carries reviewed text ──
+  function editorialSection(title, blocks, sourceIds, reviewedDate) {
+    const parts = blocks.filter(([, text]) => text && String(text).trim());
+    if (!parts.length) return null;
+    return h('section', { class: 'panel-section editorial' },
+      h('h3', null, title),
+      parts.map(([label, text]) => [h('p', { class: 'sub' }, label), h('div', { class: 'editorial-text' }, markdown(text))]),
+      sourceIds && sourceIds.length ? h('p', { class: 'fact-meta' }, 'Sources: ', sourceIds.map((id, i) => [i ? ', ' : '', sourceLink(id)])) : null,
+      reviewedDate ? h('p', { class: 'fact-meta' }, `Reviewed ${formatIsoDate(reviewedDate)}.`) : null);
+  }
+
+  // ── Pay and rent reports (Phase 7): the form posts to the configured endpoint; reports are never displayed ──
+  function reportSection(r) {
+    const endpoint = index.definitions && index.definitions.submissions && index.definitions.submissions.endpoint;
+    const url = endpoint && /^https:\/\//.test(endpoint) ? safeUrl(endpoint) : null;
+    if (!url) return section('Share your pay or rent', h('p', { class: 'fact-meta' }, 'Pay and rent reports open soon.'));
+    return section('Share your pay or rent', h('div', { class: 'report-slot', dataset: { resort: r.id } }, reportForm(r, url)));
+  }
+
+  /** Housing sites arrive with the detail file; rebuild the form so it can offer them. */
+  function refreshReportForm(r) {
+    const slot = root.querySelector('.report-slot');
+    if (!slot || slot.dataset.resort !== r.id) return;
+    const url = safeUrl(index.definitions.submissions.endpoint);
+    clear(slot);
+    slot.append(reportForm(r, url));
+  }
+
+  function seasonOptions(now = new Date()) {
+    const y = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;   // seasons turn over in July
+    return [0, 1, 2].map((k) => {
+      const a = y - k;
+      return { value: `${a}-${String((a + 1) % 100).padStart(2, '0')}`, label: `${a}/${String((a + 1) % 100).padStart(2, '0')} season` };
+    });
+  }
+
+  let formSeq = 0;
+  function reportForm(r, url) {
+    formSeq += 1;
+    const id = (k) => `report-${formSeq}-${k}`;
+    const min = (index.definitions.reports && index.definitions.reports.aggregation_min) || null;
+    const field = (key, label, control, hint) => h('div', { class: 'form-field', dataset: { field: key } },
+      h('label', { for: id(key) }, label), control,
+      hint ? h('p', { class: 'form-hint', id: id(`${key}-hint`) }, hint) : null,
+      h('p', { class: 'form-error', id: id(`${key}-error`), 'aria-live': 'polite' }));
+    const select = (key, options, attrs = {}) => h('select', { id: id(key), name: key, ...attrs },
+      options.map((o) => h('option', { value: o.value }, o.label)));
+    const sites = (currentDetail && currentDetail.resort_id === r.id ? currentDetail.housing : []);
+    const kinds = [{ value: 'pay', label: 'Hourly pay' }, { value: 'rent', label: 'Rent I paid near the resort' }]
+      .concat(sites.length ? [{ value: 'housing', label: 'Rent at a listed housing site' }] : []);
+    const kind = select('kind', kinds);
+    const season = select('season', seasonOptions());
+    const cert = select('cert_level', [{ value: '', label: 'Choose a level' }].concat(CERT_LEVELS.map((v) => ({ value: v, label: CERT_LABEL[v] }))));
+    const site = select('housing_site_id', [{ value: '', label: 'Choose a site' }].concat(sites.map((x) => ({ value: x.id, label: x.name }))));
+    const amount = h('input', { id: id('amount'), name: 'amount', type: 'number', inputmode: 'decimal', step: '0.01', min: '0', 'aria-describedby': id('amount-hint') });
+    const proof = h('input', { id: id('proof_url'), name: 'proof_url', type: 'url', placeholder: 'https://', 'aria-describedby': id('proof_url-hint') });
+    const status = h('p', { class: 'form-status', role: 'status', 'aria-live': 'polite' });
+    const submit = h('button', { type: 'submit', class: 'btn btn-sm' }, 'Send report');
+    const fields = {
+      kind: field('kind', 'What are you reporting', kind),
+      season: field('season', 'Season', season),
+      cert_level: field('cert_level', 'Certification level', cert),
+      housing_site_id: field('housing_site_id', 'Housing site', site),
+      amount: field('amount', 'Hourly pay in USD', amount, 'Your base hourly rate before tips.'),
+      proof_url: field('proof_url', 'Proof link (optional)', proof, 'A pay stub, offer letter or listing helps moderation. Links stay private.'),
+    };
+    const form = h('form', { class: 'report-form', novalidate: true },
+      h('p', { class: 'fact-meta' }, `Reports stay private. A value appears on the map only as a range once ${min ? fmtInt(min) : 'several'} or more approved reports cover the same season.`),
+      Object.values(fields), submit, status);
+
+    function sync() {
+      const k = kind.value;
+      fields.cert_level.hidden = k !== 'pay';
+      fields.housing_site_id.hidden = k !== 'housing';
+      fields.amount.querySelector('label').textContent = k === 'pay' ? 'Hourly pay in USD' : 'Monthly rent in USD';
+      fields.amount.querySelector('.form-hint').textContent = k === 'pay' ? 'Your base hourly rate before tips.' : 'Your share of the monthly rent.';
+    }
+    kind.addEventListener('change', sync);
+    sync();
+
+    function setError(key, msg) {
+      const f = fields[key];
+      const ctl = f.querySelector('input, select');
+      f.querySelector('.form-error').textContent = msg || '';
+      if (msg) { ctl.setAttribute('aria-invalid', 'true'); ctl.setAttribute('aria-describedby', id(`${key}-error`)); } else {
+        ctl.removeAttribute('aria-invalid');
+        if (f.querySelector('.form-hint')) ctl.setAttribute('aria-describedby', id(`${key}-hint`)); else ctl.removeAttribute('aria-describedby');
+      }
+      return !msg;
+    }
+
+    function validate() {
+      const k = kind.value;
+      const v = Number(amount.value);
+      const errors = {
+        season: season.value ? '' : 'Choose a season.',
+        cert_level: k === 'pay' && !cert.value ? 'Choose your certification level.' : '',
+        housing_site_id: k === 'housing' && !site.value ? 'Choose the housing site.' : '',
+        amount: amount.value === '' || !Number.isFinite(v) ? 'Enter an amount in dollars.'
+          : k === 'pay' ? (v < 5 || v > 300 ? 'Enter an hourly rate between $5 and $300.' : '')
+            : (v < 100 || v > 10000 ? 'Enter a monthly rent between $100 and $10,000.' : ''),
+        proof_url: proof.value && !/^https:\/\/[^\s]+\.[^\s]+$/.test(proof.value.trim()) ? 'Use a full link that starts with https://' : '',
+      };
+      let first = null;
+      for (const [key, msg] of Object.entries(errors)) if (!setError(key, msg) && !first) first = fields[key].querySelector('input, select');
+      return first;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      const bad = validate();
+      if (bad) { bad.focus(); status.textContent = 'Please fix the highlighted fields.'; return; }
+      const k = kind.value;
+      const payload = {
+        resort_id: r.id, kind: k, season: season.value,
+        ...(k === 'pay' ? { cert_level: cert.value, values: { hourly_usd: Number(amount.value) } } : { values: { monthly_usd: Number(amount.value) } }),
+        ...(k === 'housing' ? { housing_site_id: site.value } : {}),
+        ...(proof.value.trim() ? { proof_url: proof.value.trim() } : {}),
+        submitted_at: new Date().toISOString(),
+      };
+      submit.disabled = true;
+      try {
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), credentials: 'omit' });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        sync();
+        status.textContent = 'Thank you. Your report is in the moderation queue.';
+      } catch {
+        status.textContent = 'The report could not be sent. Please try again later.';
+      } finally {
+        submit.disabled = false;
+      }
+    });
+    return form;
+  }
+
   function rentUsedText(value, detail) {
+    if (value === 'reported_area') return 'Rent used: the range of approved rent reports near the resort.';
     if (value === 'fmr_studio') return 'Rent used: HUD Fair Market Rent for a studio in the county.';
     if (value === 'fmr_one_br') return 'Rent used: HUD Fair Market Rent for one bedroom in the county.';
     if (value === 'acs_median') return 'Rent used: Census ACS median gross rent in the county.';
@@ -476,6 +626,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
         clear(body);
         renderHousing(body, detail);
         for (const el of root.querySelectorAll('.rent-used')) el.textContent = rentUsedText(el.dataset.source, detail);
+        if (detail && detail.housing.length) refreshReportForm(r);
         onDetail(r.id, detail);
       });
     }
@@ -489,6 +640,9 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     else {
       body.append(h('p', { class: 'fact-meta' }, 'Select a site to see it on the map with its commute.'));
       body.append(h('ul', { class: 'site-list' }, sites.map((site) => h('li', null, siteCard(site, detail)))));
+    }
+    if (detail && detail.rent_reported) {
+      body.append(h('dl', { class: 'facts' }, fact('Reported rent near the resort', detail.rent_reported, (v) => `${moneyRange(v.low, v.high)} per month`)));
     }
     const b = detail && detail.rent_baseline;
     if (b && [b.fmr.studio, b.fmr.one_br, b.fmr.two_br, b.acs_median_gross_rent].some(Boolean)) {
@@ -638,6 +792,9 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     return h('footer', { class: 'panel-footer' },
       h('p', null, 'Choosing your next mountain? Talk it through with Alexandre.'),
       h('a', { class: 'btn btn-sm', href: config.consultUrl }, 'Book a Free Consultation'),
+      h('nav', { class: 'related', 'aria-label': 'Related tools and reading' },
+        h('p', { class: 'sub' }, 'Keep planning'),
+        h('ul', null, RELATED.map(([href, label]) => h('li', null, h('a', { href }, label))))),
       h('p', { class: 'fact-meta' }, index && index.generatedAt ? `Map data compiled ${formatIsoDate(index.generatedAt)}.` : '',
         config.isDevData ? ' Test fixture data loaded.' : ''));
   }

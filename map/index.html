@@ -6,6 +6,13 @@
   <title>Instructor Grindset &bull; Snowsports Career Map</title>
   <meta name="description" content="An interactive US map for working and aspiring snowsports instructors. See where to work next season and what that season will look like, with a source on every number." />
   <link rel="canonical" href="https://instructorgrindset.com/map/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Instructor Grindset" />
+  <meta property="og:title" content="Snowsports Career Map" />
+  <meta property="og:description" content="An interactive US map for working and aspiring snowsports instructors. See where to work next season and what that season will look like, with a source on every number." />
+  <meta property="og:url" content="https://instructorgrindset.com/map/" />
+  <meta property="og:image" content="https://instructorgrindset.com/images/ig-logo.png" />
+  <meta name="twitter:card" content="summary" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/global.css?v=1">
   <link rel="stylesheet" href="/assets/sidebar.css?v=12">
@@ -54,7 +61,9 @@
           <button id="sheet-handle" class="sheet-handle" type="button" aria-controls="panel-scroll" aria-label="Resize panel"><span aria-hidden="true"></span></button>
           <div id="panel-scroll" class="panel-scroll">
             <div id="panel-content" class="panel-content">
+              <!-- prerender:start -->
               <p class="loading">Loading the map data</p>
+              <!-- prerender:end -->
             </div>
           </div>
         </aside>

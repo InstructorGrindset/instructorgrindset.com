@@ -370,7 +370,16 @@
      "professionalism.clinic_access"
     ]
    },
-   "editorial": null,
+   "editorial": {
+    "overview_md": "Synthetic overview with **bold** text and a [linked source](https://example.com/fixture/editorial).",
+    "culture_md": "Synthetic culture paragraph one.\n\nSynthetic culture paragraph two.",
+    "alexandre_take_md": "Synthetic take from a reviewer.",
+    "status": "reviewed",
+    "source_ids": [
+     "fixture-resort-site"
+    ],
+    "reviewed_date": "2026-10-10"
+   },
    "climate_available": true,
    "facility_type": "ski_area",
    "detail_available": true,

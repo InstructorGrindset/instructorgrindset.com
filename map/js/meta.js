@@ -5,10 +5,18 @@ import { config } from './config.js';
 import { joinAnd, plural } from './ui.js';
 
 const SUFFIX = 'Snowsports Career Map';
+const BRAND = 'Instructor Grindset';
 
 function stateName(index, code) {
   const s = index.states.get(code);
   return s ? s.name : code;
+}
+
+/** Resort names shared by two records get the state appended, as in pipeline/routes.py. */
+function titleName(index, resort) {
+  let n = 0;
+  for (const r of index.resortList) if (r.name === resort.name) n += 1;
+  return n > 1 ? `${resort.name}, ${resort.state}` : resort.name;
 }
 
 export function canonicalPath(index, view) {
@@ -29,7 +37,7 @@ export function metaFor(index, view) {
     case 'state': {
       const s = index.states.get(view.stateCode);
       return {
-        title: `${s.name} Resorts and Clusters • ${SUFFIX}`,
+        title: `${s.name} Resorts and Clusters for Snowsports Instructors • ${BRAND}`,
         description: `Explore the snowsports resort clusters in ${s.name}. See season dates, snowfall, and operation size for ${plural(s.resort_count, 'resort', 'resorts')}, with a source on every number.`,
       };
     }
@@ -38,15 +46,15 @@ export function metaFor(index, view) {
       const names = joinAnd(cluster.states.map((c) => stateName(index, c)));
       return {
         title: view.level === 'compare'
-          ? `Compare Resorts in ${cluster.name} • ${SUFFIX}`
-          : `${cluster.name} Cluster • ${SUFFIX}`,
+          ? `Compare Resorts in ${cluster.name} • ${BRAND}`
+          : `Instructor pay, housing, and snow in ${cluster.name} • ${BRAND}`,
         description: `Explore the ${plural(cluster.resort_ids.length, 'resort', 'resorts')} of the ${cluster.name} cluster in ${names}. Compare season length, snowfall, powder days, and operation size, with a source on every number.`,
       };
     }
     case 'resort':
       return {
-        title: `${resort.name}: Season, Snow and Size • ${SUFFIX}`,
-        description: `Plan a season at ${resort.name} in the ${cluster.name} cluster, ${stateName(index, resort.state)}. See season dates, snowfall by month, powder days, terrain, and operation size, with a source on every number.`,
+        title: `Instructor pay, housing, and snow at ${titleName(index, resort)} • ${BRAND}`,
+        description: `Plan a season at ${resort.name} in the ${cluster.name} cluster, ${stateName(index, resort.state)}. See instructor pay, housing, season dates, snowfall, terrain, and operation size, with a source on every number.`,
       };
     default:
       return {
