@@ -357,3 +357,61 @@ def test_no_sitemap_flag(site: Path):
                          capture_output=True, text=True, check=True)
     assert "wrote 12 stub pages" in out.stdout
     assert not (site / "sitemap.xml").exists()
+
+
+# ── Slim national index (data/build/map-index.json) ──
+
+def _index_rows(site: Path) -> dict:
+    data = json.loads((site / "data" / "build" / "map-index.json").read_text())
+    return {row[0]: dict(zip(data["fields"], row)) for row in data["resorts"]}, data
+
+
+def test_map_index_written_with_slim_rows(site: Path):
+    generate_routes(site)
+    rows, data = _index_rows(site)
+    assert data["version"] == 1 and data["generated_at"] == "2026-10-11T00:00:00Z"
+    assert data["fields"][:3] == ["id", "name", "tier"]
+    assert set(rows) == {"alpha-peak", "bravo-bowl", "lake-west", "lake-east"}
+    a = rows["alpha-peak"]
+    assert (a["tier"], a["tier_a_status"], a["state"], a["cluster_id"], a["lat"], a["lon"]) == ("A", "approved", "CO", "front", 39.5, -106.0)
+    assert a["acres"] == 5300 and a["facility_type"] == "ski_area"
+    assert a["climate_available"] is False and a["detail_available"] is False
+    # Without resorts.geojson, size_rank uses the config breaks (5300 acres is the top rank).
+    assert a["size_rank"] == 5 and rows["bravo-bowl"]["size_rank"] == 1
+    # Unknown values stay null; nothing is invented.
+    b = rows["bravo-bowl"]
+    assert b["acres"] is None and b["season_length_days"] is None and b["snowfall_annual_in"] is None
+    assert b["professionalism_score"] is None and b["lucrativeness_mid"] is None
+
+
+def test_map_index_takes_recolor_values_from_resorts_geojson(site: Path):
+    build = site / "data" / "build"
+    (build / "resorts.geojson").write_text(json.dumps({"type": "FeatureCollection", **_env(), "features": [
+        {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-106.0, 39.5]},
+         "properties": {"id": "alpha-peak", "size_rank": 3, "season_length_days": 150, "snowfall_annual_in": 310.5,
+                        "professionalism_score": 72, "lucrativeness_mid": 6100}}]}))
+    generate_routes(site)
+    rows, _ = _index_rows(site)
+    a = rows["alpha-peak"]
+    assert (a["size_rank"], a["season_length_days"], a["snowfall_annual_in"], a["professionalism_score"], a["lucrativeness_mid"]) \
+        == (3, 150, 310.5, 72, 6100)
+    assert rows["lake-west"]["snowfall_annual_in"] is None
+
+
+def test_map_index_skips_unsafe_ids_and_missing_coordinates(site: Path):
+    resorts, clusters, states = default_data()
+    resorts.append({**resorts[1], "id": "../evil", "name": "Evil"})
+    resorts.append({**resorts[1], "id": "no-coords", "name": "No Coords", "lat": None})
+    write_build(site, resorts, clusters, states)
+    generate_routes(site)
+    rows, _ = _index_rows(site)
+    assert "../evil" not in rows and "no-coords" not in rows
+
+
+def test_map_index_idempotent(site: Path):
+    generate_routes(site)
+    path = site / "data" / "build" / "map-index.json"
+    first = path.read_text()
+    mtime = path.stat().st_mtime_ns
+    generate_routes(site)
+    assert path.read_text() == first and path.stat().st_mtime_ns == mtime

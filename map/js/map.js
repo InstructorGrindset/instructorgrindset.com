@@ -29,11 +29,9 @@ const TIER_STYLE = {
   B: { fill: C.tierB, stroke: C.background },
 };
 
-// Sequential ramp for recolor modes (one hue, dark to light reads low to high on the dark map),
-// validated as an ordinal ramp against the state fill. Grey marks resorts without data.
-export const RAMP = ['#1c5cab', '#2a78d6', '#5598e7', '#86b6ef', '#cde2fb'];
+// Color modes draw a heat surface (heat.js) under small resort dots. Grey marks resorts without data.
 export const NO_DATA = '#4a5568';
-const RECOLOR_STROKE = { A: '#e0a03a', B: C.background };
+const HEAT_DOT = { fill: C.background, strokeA: C.tierA, strokeB: '#e7e9ee' };
 
 function svgImage(id, shape, fill, stroke, width) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="${fill}" stroke="${stroke}" stroke-width="${width}" stroke-linejoin="round">${shape}</g></svg>`;
@@ -45,33 +43,19 @@ function svgImage(id, shape, fill, stroke, width) {
   });
 }
 
-/** Default images (tier colors) plus one per recolor class (c0..c4, cnull) with a tier stroke. */
+/** Tier colored images for indoor and training markers. */
 function facilityImages() {
   const out = [];
   for (const [type, shape] of Object.entries(SHAPES)) {
-    for (const [tier, st] of Object.entries(TIER_STYLE)) {
-      out.push(svgImage(`fac-${type}-${tier}`, shape, st.fill, st.stroke, 3));
-      RAMP.forEach((color, k) => out.push(svgImage(`fac-${type}-${tier}-c${k}`, shape, color, RECOLOR_STROKE[tier], tier === 'A' ? 4 : 3)));
-      out.push(svgImage(`fac-${type}-${tier}-cnull`, shape, NO_DATA, RECOLOR_STROKE[tier], tier === 'A' ? 4 : 3));
-    }
+    for (const [tier, st] of Object.entries(TIER_STYLE)) out.push(svgImage(`fac-${type}-${tier}`, shape, st.fill, st.stroke, 3));
   }
   return Promise.all(out).then((list) => list.filter(Boolean));
 }
 
-/** Equal interval class breaks (up to 4 inner stops) over the non null values of a property. */
-export function classBreaks(values, roundTo = 1) {
-  const v = values.filter((x) => typeof x === 'number' && Number.isFinite(x));
-  if (!v.length) return null;
-  const min = Math.min(...v); const max = Math.max(...v);
-  const stops = [];
-  if (max > min) {
-    for (let i = 1; i < RAMP.length; i++) {
-      const t = Math.round((min + (i * (max - min)) / RAMP.length) / roundTo) * roundTo;
-      if (t > min && t <= max && (!stops.length || t > stops[stops.length - 1])) stops.push(t);
-    }
-  }
-  return { min, max, stops, count: v.length };
-}
+// Fallback clusters (other-xx) carry no fill so named clusters read clearly.
+const CLUSTER_FILL_OPACITY = ['case', ['boolean', ['get', 'fallback'], false],
+  ['case', fs('selected'), 0.05, fs('hover'), 0.05, 0],
+  ['case', fs('selected'), 0.1, fs('hover'), 0.16, fs('focus'), 0.12, fs('dim'), 0.03, 0.08]];
 
 const DEFAULT_PAINT = {
   'circle-color': ['case', ['==', ['get', 'tier'], 'A'], C.tierA, C.tierB],
@@ -117,13 +101,7 @@ function buildStyle(index) {
       },
       {
         id: 'clusters-fill', type: 'fill', source: 'clusters',
-        paint: {
-          'fill-color': C.cluster,
-          // Fallback clusters (other-xx) carry no fill so named clusters read clearly.
-          'fill-opacity': ['case', ['boolean', ['get', 'fallback'], false],
-            ['case', fs('selected'), 0.05, fs('hover'), 0.05, 0],
-            ['case', fs('selected'), 0.1, fs('hover'), 0.16, fs('focus'), 0.12, fs('dim'), 0.03, 0.08]],
-        },
+        paint: { 'fill-color': C.cluster, 'fill-opacity': CLUSTER_FILL_OPACITY },
       },
       {
         id: 'clusters-line-fallback', type: 'line', source: 'clusters', minzoom: 5,
@@ -169,9 +147,8 @@ function buildStyle(index) {
   };
 }
 
-export function createMap(container, index, { onPick, getPadding }) {
-  if (!window.maplibregl) throw new Error('MapLibre failed to load');
-  const maplibregl = window.maplibregl;
+export function createMap(container, index, maplibregl, { onPick, getPadding }) {
+  if (!maplibregl) throw new Error('MapLibre failed to load');
   const map = new maplibregl.Map({
     container,
     style: buildStyle(index),
@@ -337,7 +314,7 @@ export function createMap(container, index, { onPick, getPadding }) {
     map.getCanvas().style.cursor = t && !t.passive ? 'pointer' : '';
     if (t) {
       tip.hidden = false;
-      tip.textContent = t.kind === 'resort' ? t.name
+      tip.textContent = t.kind === 'resort' ? resortTip(t)
         : t.kind === 'cluster' ? `${t.name} cluster` : t.name;
       const x = Math.min(e.point.x + 14, container.clientWidth - tip.offsetWidth - 8);
       tip.style.transform = `translate(${Math.max(4, x)}px, ${Math.max(4, e.point.y - 34)}px)`;
@@ -353,29 +330,53 @@ export function createMap(container, index, { onPick, getPadding }) {
   let filter = 'all';
   let detail = null;
   let selectedSite = null;
-  let recolor = null; // { prop, stops } or null for default
+  let recolor = null; // { key, prop, images, format } or null for default
+  let heatIds = [];
+
+  function resortTip(t) {
+    if (!recolor) return t.name;
+    const r = index.resorts.get(t.id);
+    const v = r ? r[recolor.prop] : null;
+    return v == null ? `${t.name}: no data` : `${t.name}: ${recolor.format(v)}`;
+  }
+
+  function clearHeat() {
+    for (const id of heatIds) {
+      if (map.getLayer(id)) map.removeLayer(id);
+      if (map.getSource(id)) map.removeSource(id);
+    }
+    heatIds = [];
+  }
 
   function applyRecolor() {
     if (!map.getLayer('resorts')) return;
+    clearHeat();
     if (!recolor) {
       for (const [k, v] of Object.entries(DEFAULT_PAINT)) map.setPaintProperty('resorts', k, v);
-      if (map.getLayer('resorts-facility')) map.setLayoutProperty('resorts-facility', 'icon-image', DEFAULT_ICON);
+      map.setPaintProperty('resorts', 'circle-radius', radius());
+      map.setPaintProperty('clusters-fill', 'fill-opacity', CLUSTER_FILL_OPACITY);
+      if (map.getLayer('resorts-facility')) map.setPaintProperty('resorts-facility', 'icon-opacity', ['case', fs('dim'), 0.3, 1]);
       return;
     }
-    const val = ['get', recolor.prop];
-    const isNull = ['==', val, null];
-    const colorStep = ['step', ['to-number', val], RAMP[0]];
-    const classStep = ['step', ['to-number', val], 'c0'];
-    recolor.stops.forEach((t, i) => { colorStep.push(t, RAMP[i + 1]); classStep.push(t, `c${i + 1}`); });
-    const color = recolor.stops.length ? colorStep : RAMP[2];
-    const cls = recolor.stops.length ? classStep : 'c2';
-    map.setPaintProperty('resorts', 'circle-color', ['case', isNull, NO_DATA, color]);
-    map.setPaintProperty('resorts', 'circle-stroke-color', ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], RECOLOR_STROKE.A, RECOLOR_STROKE.B]);
-    map.setPaintProperty('resorts', 'circle-stroke-width', ['case', fs('hover'), 2.5, ['==', ['get', 'tier'], 'A'], 2.2, 1]);
-    if (map.getLayer('resorts-facility')) {
-      map.setLayoutProperty('resorts-facility', 'icon-image',
-        ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', 'tier'], '-', ['case', isNull, 'cnull', cls]]);
-    }
+    // Heat surface under the state lines, cluster outlines and resorts; one image per region.
+    const before = map.getLayer('states-line') ? 'states-line' : undefined;
+    recolor.images.forEach((img, i) => {
+      const id = `heat-${recolor.key}-${i}`;
+      map.addSource(id, { type: 'image', url: img.url, coordinates: img.coordinates });
+      map.addLayer({
+        id, type: 'raster', source: id,
+        paint: { 'raster-opacity': 1, 'raster-resampling': 'linear', 'raster-fade-duration': 0 },
+      }, before);
+      heatIds.push(id);
+    });
+    // Cluster tints would shift the heat colors; outlines stay.
+    map.setPaintProperty('clusters-fill', 'fill-opacity', 0);
+    const isNull = ['==', ['get', recolor.prop], null];
+    map.setPaintProperty('resorts', 'circle-radius', ['interpolate', ['linear'], ['zoom'], 3, 2.2, 7, 3.4, 11, 5]);
+    map.setPaintProperty('resorts', 'circle-color', ['case', isNull, NO_DATA, HEAT_DOT.fill]);
+    map.setPaintProperty('resorts', 'circle-stroke-color', ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], HEAT_DOT.strokeA, isNull, C.background, HEAT_DOT.strokeB]);
+    map.setPaintProperty('resorts', 'circle-stroke-width', ['case', fs('hover'), 2.5, ['==', ['get', 'tier'], 'A'], 1.8, 1]);
+    if (map.getLayer('resorts-facility')) map.setPaintProperty('resorts-facility', 'icon-opacity', ['case', fs('dim'), 0.3, isNull, 0.6, 1]);
   }
   function resortLayers() { return ['resorts', 'resorts-facility'].filter((id) => map.getLayer(id)); }
   function applyFilter() {
@@ -429,7 +430,7 @@ export function createMap(container, index, { onPick, getPadding }) {
       showSiteCommutes(map, id);
     },
     setLayerGroup(group, on) { if (loaded) setGroupVisible(map, group, on); },
-    /** null for default colors, or { prop, stops } from classBreaks. */
+    /** null for default colors, or { key, prop, images, format } from recolor.js. */
     setRecolor(next) { recolor = next; if (loaded) applyRecolor(); },
     /** 'all' | 'ski_area' | 'facility' */
     setFilter(next) { filter = next; if (loaded) applyFilter(); },

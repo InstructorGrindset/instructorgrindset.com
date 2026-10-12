@@ -75,8 +75,8 @@ export function tagLabel(tag) { return TAG_LABEL[tag] || humanize(tag); }
 
 export const RECOLOR_MODES = [
   { key: 'default', label: 'Default' },
-  { key: 'lucrativeness', label: 'Lucrativeness', prop: 'lucrativeness_mid', title: 'Estimated season savings, mid case', noun: 'lucrativeness' },
-  { key: 'professionalism', label: 'Professionalism', prop: 'professionalism_score', title: 'Professionalism score, 0 to 100', noun: 'professionalism' },
-  { key: 'season', label: 'Season length', prop: 'season_length_days', title: 'Typical season length in days', noun: 'season length' },
-  { key: 'snowfall', label: 'Snowfall', prop: 'snowfall_annual_in', title: 'Average snowfall per season in inches', noun: 'snowfall' },
+  { key: 'lucrativeness', label: 'Lucrativeness', prop: 'lucrativeness_mid', title: 'Estimated season savings, mid case', unit: 'USD per season', noun: 'lucrativeness' },
+  { key: 'professionalism', label: 'Professionalism', prop: 'professionalism_score', title: 'Professionalism score', unit: 'Score out of 100', noun: 'professionalism' },
+  { key: 'season', label: 'Season length', prop: 'season_length_days', title: 'Typical season length', unit: 'Days', noun: 'season length' },
+  { key: 'snowfall', label: 'Snowfall', prop: 'snowfall_annual_in', title: 'Average snowfall per season', unit: 'Inches per season', noun: 'snowfall' },
 ];

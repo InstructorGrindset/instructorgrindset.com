@@ -1,73 +1,112 @@
-// Map recolor control (Default, Lucrativeness, Professionalism, Season length, Snowfall) and its legend.
+// Map color modes (Default, Lucrativeness, Professionalism, Season length, Snowfall) and their legend.
+// Every mode except Default draws a value heat surface (heat.js) with the resorts on top.
 import { RECOLOR_MODES } from './labels.js';
-import { RAMP, NO_DATA, classBreaks } from './map.js';
+import { buildHeat, rampCss } from './heat.js';
+import { loadStateOutlines } from './data.js';
+import { config } from './config.js';
 import { h, clear, fmtInt } from './ui.js';
 
-const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 });
+const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 const FORMAT = {
   lucrativeness: (v) => usd.format(v),
   professionalism: (v) => fmtInt(v),
-  season: (v) => `${fmtInt(v)} days`,
-  snowfall: (v) => `${fmtInt(v)} in`,
+  season: (v) => fmtInt(v),
+  snowfall: (v) => fmtInt(v),
 };
-const ROUND = { lucrativeness: 100, professionalism: 1, season: 1, snowfall: 1 };
+/** Value with its unit, for announcements and the resort tooltip. */
+const SPOKEN = {
+  lucrativeness: (v) => `${usd.format(v)} per season`,
+  professionalism: (v) => `${fmtInt(v)} out of 100`,
+  season: (v) => `${fmtInt(v)} days`,
+  snowfall: (v) => `${fmtInt(v)} in per season`,
+};
+
+/** Min, max and count over the finite values of a property; null when no resort has one. */
+export function valueDomain(values) {
+  const v = values.filter((x) => typeof x === 'number' && Number.isFinite(x));
+  if (!v.length) return null;
+  return { min: Math.min(...v), max: Math.max(...v), count: v.length };
+}
 
 export function createRecolor(root, index, { onChange, announce }) {
   const features = index.geo.resorts.features;
   const info = {};
   for (const m of RECOLOR_MODES) {
     if (!m.prop) continue;
-    info[m.key] = classBreaks(features.map((f) => f.properties[m.prop]), ROUND[m.key]);
+    info[m.key] = valueDomain(features.map((f) => f.properties[m.prop]));
+  }
+  const cache = new Map();
+  let seq = 0;
+
+  async function heatFor(m) {
+    if (!cache.has(m.key)) {
+      cache.set(m.key, loadStateOutlines(index).catch(() => null).then((outlines) => {
+        const pts = features.filter((f) => typeof f.properties[m.prop] === 'number' && Number.isFinite(f.properties[m.prop]))
+          .map((f) => ({ lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], value: f.properties[m.prop] }));
+        return buildHeat(pts, info[m.key], outlines);
+      }));
+    }
+    return cache.get(m.key);
   }
 
-  const legend = h('div', { class: 'recolor-legend', id: 'recolor-legend', hidden: true, 'aria-live': 'polite' });
+  const legend = h('div', { class: 'recolor-legend', id: 'recolor-legend', hidden: true });
   const buttons = RECOLOR_MODES.map((m) => {
     const available = !m.prop || Boolean(info[m.key]);
     const reason = available ? null : `No resort has ${m.noun} data yet.`;
     const descId = `recolor-why-${m.key}`;
-    const btn = h('button', {
+    return h('button', {
       type: 'button', class: 'filter-btn', dataset: { mode: m.key },
       'aria-pressed': String(m.key === 'default'),
       'aria-disabled': available ? null : 'true',
       'aria-describedby': available ? null : descId,
-      title: reason || m.title || 'Tier colors',
+      title: reason || (m.title ? `${m.title}, shown as a heat map` : 'Tier colors'),
       onclick: () => {
         if (!available) { announce(reason); return; }
         select(m.key);
       },
     }, m.label, reason ? h('span', { class: 'visually-hidden', id: descId }, reason) : null);
-    return btn;
   });
 
-  function select(key) {
+  async function select(key) {
+    const my = ++seq;
     for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.mode === key));
     const m = RECOLOR_MODES.find((x) => x.key === key);
     if (!m.prop) {
       legend.hidden = true;
+      root.removeAttribute('aria-busy');
       onChange(null);
       announce('Map colors show Tier A and Tier B.');
       return;
     }
-    const br = info[key];
-    onChange({ prop: m.prop, stops: br.stops });
-    drawLegend(m, br);
-    announce(`Map colored by ${m.label.toLowerCase()}, from ${FORMAT[key](br.min)} to ${FORMAT[key](br.max)}.`);
+    const d = info[key];
+    root.setAttribute('aria-busy', 'true');
+    const images = await heatFor(m);
+    if (my !== seq) return;
+    root.removeAttribute('aria-busy');
+    onChange({ key, prop: m.prop, images, format: SPOKEN[key] });
+    drawLegend(m, d);
+    announce(d.min === d.max
+      ? `Heat map of ${m.label.toLowerCase()}. Every resort with data shows ${SPOKEN[key](d.min)}.`
+      : `Heat map of ${m.label.toLowerCase()}, from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.`);
   }
 
-  function drawLegend(m, br) {
+  function drawLegend(m, d) {
     clear(legend);
     const f = FORMAT[m.key];
-    const edges = [br.min, ...br.stops, br.max];
-    const items = br.stops.length
-      ? edges.slice(0, -1).map((lo, i) => ({ color: RAMP[i], label: `${f(lo)} to ${f(edges[i + 1])}` }))
-      : [{ color: RAMP[2], label: f(br.min) }];
+    const km = fmtInt(config.heat.radiusKm);
     legend.append(
-      h('p', { class: 'legend-title' }, m.title),
-      h('ul', { class: 'ramp', 'aria-label': `${m.label} legend` },
-        items.map((it) => h('li', null, h('span', { class: 'chip', style: `background:${it.color}`, 'aria-hidden': 'true' }), it.label)),
-        h('li', null, h('span', { class: 'chip', style: `background:${NO_DATA}`, 'aria-hidden': 'true' }), 'No data')),
-      h('p', { class: 'ramp-note' }, `${fmtInt(br.count)} resorts with data. Amber outline marks Tier A.`));
+      h('p', { class: 'legend-title' }, m.title, h('span', { class: 'legend-unit' }, m.unit)),
+      h('div', { class: 'heat-bar', style: `background:${rampCss()}`, 'aria-hidden': 'true' }),
+      d.min === d.max
+        ? h('p', { class: 'heat-scale' }, h('span', null, `Every resort with data: ${f(d.min)}`))
+        : h('p', { class: 'heat-scale' }, h('span', null, `Min ${f(d.min)}`), h('span', null, `Max ${f(d.max)}`)),
+      h('p', { class: 'ramp-note' }, `Each color blends the values of resorts within ${km} km, weighted by distance. Areas farther than ${km} km from a resort with data stay empty.`),
+      h('ul', { class: 'heat-keys' },
+        h('li', null, h('span', { class: 'key-dot key-a', 'aria-hidden': 'true' }), 'Tier A'),
+        h('li', null, h('span', { class: 'key-dot key-b', 'aria-hidden': 'true' }), 'Tier B'),
+        h('li', null, h('span', { class: 'key-dot key-none', 'aria-hidden': 'true' }), 'No data')),
+      h('p', { class: 'ramp-note' }, `${fmtInt(d.count)} ${d.count === 1 ? 'resort has' : 'resorts have'} data.`));
     legend.hidden = false;
   }
 

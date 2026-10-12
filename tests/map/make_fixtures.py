@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import math
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -470,6 +471,10 @@ def main():
     for row in RESORTS:
         if row[11]:
             write(f"climate/{row[0]}.json", climate_record(row))
+    # The slim national index the map loads first, built the same way as the real one.
+    sys.path.insert(0, str(REPO))
+    from pipeline.routes import write_map_index  # noqa: PLC0415
+    write_map_index(OUT)
     print(f"wrote fixtures to {OUT}")
 
 

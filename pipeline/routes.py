@@ -26,6 +26,11 @@ comment. Stale pages are removed on the next run. /map/index.html, /map/js,
 
 Keep the title and description wording in step with map/js/meta.js.
 
+It also writes data/build/map-index.json, the slim national index the map loads
+first (one compact row per resort, enough for the national, state and cluster
+views, the list view and the map markers). The full resorts.json loads after the
+first paint. See docs/map/ARCHITECTURE.md, "Frontend".
+
     python pipeline/routes.py            # uses this repository
     python pipeline/routes.py --root DIR # any directory with data/build and map/index.html
 """
@@ -444,6 +449,89 @@ def plan_pages(build: Path) -> dict[str, Page]:
     return pages
 
 
+# ── Slim national index (map first paint) ──
+
+INDEX_NAME = "map-index.json"
+INDEX_FIELDS = ("id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
+                "acres", "size_rank", "climate_available", "detail_available",
+                "season_length_days", "snowfall_annual_in", "professionalism_score", "lucrativeness_mid")
+RECOLOR_PROPS = ("season_length_days", "snowfall_annual_in", "professionalism_score", "lucrativeness_mid")
+
+
+def _size_breaks() -> Optional[list[float]]:
+    """display.size_rank_acres_breaks from config/definitions.yaml (the same breaks build.py uses)."""
+    try:
+        import yaml  # noqa: PLC0415 (only needed when resorts.geojson lacks size_rank)
+        cfg = yaml.safe_load((Path(__file__).resolve().parents[1] / "config" / "definitions.yaml").read_text(encoding="utf-8"))
+        breaks = cfg["display"]["size_rank_acres_breaks"]
+        return [float(b) for b in breaks]
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def size_rank(acres: Optional[float], breaks: Optional[list[float]]) -> int:
+    """1 to 5 from skiable acres: 1 + number of breaks at or below acres. Null acres or no breaks gives 1."""
+    if acres is None or not breaks:
+        return 1
+    return 1 + sum(1 for b in breaks if acres >= b)
+
+
+def _value(src: Any) -> Any:
+    return src.get("value") if isinstance(src, dict) else None
+
+
+def build_map_index(build: Path) -> dict:
+    """Slim rows from resorts.json plus the recolor values from resorts.geojson (when present).
+
+    Every value is copied from the build output. size_rank comes from resorts.geojson; without it, from the
+    config breaks build.py uses.
+    """
+    meta = _load(build, "resorts.json")
+    geo = _load(build, "resorts.geojson", optional=True) or {"features": []}
+    props = {f["properties"]["id"]: f["properties"] for f in geo.get("features", [])
+             if isinstance(f, dict) and isinstance(f.get("properties"), dict) and f["properties"].get("id")}
+    rows = []
+    breaks: Any = False  # loaded on first need
+    for r in meta.get("resorts", []):
+        if not SLUG_RE.match(str(r.get("id", ""))) or r.get("lat") is None or r.get("lon") is None:
+            continue
+        p = props.get(r["id"], {})
+        size, season, career = r.get("size") or {}, r.get("season") or {}, r.get("career") or {}
+        acres = _value(size.get("acres"))
+        derived = {
+            "season_length_days": _value(season.get("length_days")),
+            "snowfall_annual_in": None,
+            "professionalism_score": (career.get("professionalism") or {}).get("score"),
+            "lucrativeness_mid": (career.get("lucrativeness") or {}).get("mid"),
+        }
+        rank = p.get("size_rank")
+        if not isinstance(rank, int):
+            if breaks is False:
+                breaks = _size_breaks()
+            rank = size_rank(acres, breaks)
+        row = {
+            "id": r["id"], "name": r["name"], "tier": r["tier"], "tier_a_status": r.get("tier_a_status"),
+            "facility_type": r.get("facility_type") or "ski_area", "state": r["state"], "cluster_id": r["cluster_id"],
+            "lat": r["lat"], "lon": r["lon"], "acres": acres,
+            "size_rank": rank,
+            "climate_available": bool(r.get("climate_available")), "detail_available": bool(r.get("detail_available")),
+        }
+        for k in RECOLOR_PROPS:
+            row[k] = p[k] if k in p else derived[k]
+        rows.append({k: row[k] for k in INDEX_FIELDS})
+    return {"version": meta.get("version", 1), "generated_at": meta.get("generated_at"), "fields": list(INDEX_FIELDS),
+            "resorts": [[row[k] for k in INDEX_FIELDS] for row in rows]}
+
+
+def write_map_index(build: Path) -> Path:
+    """Write data/build/map-index.json (compact, rows as arrays in `fields` order). Returns its path."""
+    path = Path(build) / INDEX_NAME
+    text = json.dumps(build_map_index(Path(build)), ensure_ascii=False, separators=(",", ":")) + "\n"
+    if not path.exists() or path.read_text(encoding="utf-8") != text:
+        path.write_text(text, encoding="utf-8")
+    return path
+
+
 # ── Rendering ──
 
 def check_template(template: str) -> None:
@@ -455,7 +543,7 @@ def check_template(template: str) -> None:
         if not pattern.search(template):
             raise ValueError(f"map/index.html has no {what}")
     for ref in REF_RE.findall(template):
-        if not (ref.startswith("/") or ref.startswith("https://") or ref.startswith("http://") or ref.startswith("#")):
+        if not ref.startswith(("/", "https://", "http://", "#", "data:")):
             raise ValueError(f"map/index.html uses relative path {ref!r}; stubs need absolute paths")
 
 
@@ -567,6 +655,7 @@ def generate_routes(repo_root: Path, sitemap: bool = True) -> int:
     check_template(template)
     build = repo_root / "data" / "build"
     pages = plan_pages(build)
+    write_map_index(build)
 
     manifest_path = map_dir / MANIFEST_NAME
     previous: set[str] = set()

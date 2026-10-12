@@ -52,6 +52,17 @@ export const config = Object.freeze({
   desktopPanelWidth: 380,
   comparePanelWidth: 600,
   compare: { min: 2, max: 4 },
+  // Heat surface for the color modes (map/js/heat.js). Display settings only: how far a resort's value
+  // spreads on the map. They change no resort number. Method in docs/map/ARCHITECTURE.md, "Frontend".
+  heat: {
+    radiusKm: 120,        // a resort's value reaches this far, then stops (empty beyond)
+    power: 2,             // inverse distance weighting exponent
+    minDistanceKm: 5,     // distances below this count as this (avoids a spike at each resort)
+    fadeStart: 0.6,       // opacity is full up to this share of the radius, then fades to zero at the radius
+    maxAlpha: 0.85,
+    pxPerDegree: 12,      // image resolution, about 7 km per pixel at 40 degrees north
+    maxPixels: 600000,    // per region image
+  },
 });
 
 export function prefersReducedMotion() {

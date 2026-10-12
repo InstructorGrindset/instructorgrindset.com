@@ -9,9 +9,15 @@ import { hrefFor } from './router.js';
 import {
   h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd, markdown,
 } from './ui.js';
-import {
-  destroyCharts, renderResortCharts, renderCompareCharts, seasonTotal, SERIES,
-} from './charts.js';
+
+// Chart.js and the chart code load only when a resort or comparison shows climate data.
+let chartsMod = null;
+let chartsPromise = null;
+function charts() {
+  if (!chartsPromise) chartsPromise = import('./charts.js').then((m) => { chartsMod = m; return m; });
+  return chartsPromise;
+}
+function destroyCharts() { if (chartsMod) chartsMod.destroyCharts(); }
 
 // Same links as the static pages written by pipeline/routes.py.
 const RELATED = [
@@ -61,6 +67,8 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
   let compareState = { clusterId: null, open: false, selected: [] };
 
   function sourceLink(id) {
+    // Sources arrive with the full data after the first paint; fillSources() swaps these placeholders.
+    if (!index.detailsReady) return h('span', { class: 'muted src-pending', dataset: { src: id } }, 'Loading source');
     const s = index.sources.get(id);
     if (!s) return h('span', { class: 'muted' }, 'Source record pending');
     const url = safeUrl(s.url);
@@ -219,10 +227,9 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     function draw() {
       clear(list);
       for (const r of resorts) {
-        const acres = r.size.acres;
         const link = navLink({ level: 'resort', stateCode: view.stateCode, clusterId: c.id, resortId: r.id }, { class: 'nav-item' },
           h('span', { class: 'nav-name' }, r.name, ' ', tierTags(r)),
-          h('span', { class: 'nav-meta' }, acres ? `${fmtInt(acres.value)} skiable acres` : 'Size not yet verified',
+          h('span', { class: 'nav-meta' }, r.acres != null ? `${fmtInt(r.acres)} skiable acres` : 'Size not yet verified',
             r.climate_available ? ' · Climate charts' : ''));
         const li = h('li', { class: compareState.open ? 'with-check' : null });
         if (compareState.open) {
@@ -270,13 +277,35 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     ];
   }
 
+  /** Breadcrumb and heading from the slim index while the full record loads, then the full view. */
+  function waitForDetails(view, my, eyebrow, title) {
+    index.loadDetails().catch(() => null).then(() => {
+      if (my !== token) return;
+      const hadFocus = document.activeElement && document.activeElement.id === 'panel-heading';
+      const notice = root.querySelector(':scope > .notice');
+      const el = api.render(view, { keepToken: true });
+      if (notice) root.prepend(notice);
+      if (hadFocus && el) el.focus({ preventScroll: true });
+    });
+    return [breadcrumb(view), ...heading(eyebrow, title), h('p', { class: 'loading' }, 'Loading resort details')];
+  }
+
+  function unavailable(view, eyebrow, title) {
+    return [breadcrumb(view), ...heading(eyebrow, title),
+      h('p', { class: 'not-verified' }, 'The details for this resort could not load. Try reloading the page.')];
+  }
+
   function resort(view, my) {
-    const r = index.resorts.get(view.resortId);
+    const slim = index.resorts.get(view.resortId);
     const c = index.clusters.get(view.clusterId);
+    const eyebrow = `Resort in ${c.name}, ${slim.state}`;
+    if (!index.detailsReady) return waitForDetails(view, my, eyebrow, slim.name);
+    const r = index.full(view.resortId);
+    if (!r) return unavailable(view, eyebrow, slim.name);
     const climateRoot = h('div', { class: 'climate' });
     const out = [
       breadcrumb(view),
-      ...heading(`Resort in ${c.name}, ${r.state}`, r.name),
+      ...heading(eyebrow, r.name),
       h('div', { class: 'tier-row' }, resortTags(r)),
       h('dl', { class: 'facts' }, fact('Owner', r.owner, fmt.text)),
     ];
@@ -333,9 +362,11 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
         if (my !== token) return;
         clear(climateRoot);
         if (!climate) { climateRoot.append(h('p', { class: 'not-verified' }, 'Climate data is being compiled.')); return; }
-        climateRoot.append(climateHeader(climate));
         try {
-          await renderResortCharts(climateRoot, climate, index.definitions);
+          const ch = await charts();
+          if (my !== token) return;
+          climateRoot.append(climateHeader(climate, ch));
+          await ch.renderResortCharts(climateRoot, climate, index.definitions);
         } catch (err) {
           console.warn('[map] charts', err.message);
           climateRoot.append(h('p', { class: 'not-verified' }, 'Charts could not load. Try reloading the page.'));
@@ -712,9 +743,9 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     return String(v);
   }
 
-  function climateHeader(climate) {
-    const total = seasonTotal(climate, 'snowfall_in');
-    const powder = seasonTotal(climate, 'powder_days');
+  function climateHeader(climate, ch) {
+    const total = ch.seasonTotal(climate, 'snowfall_in');
+    const powder = ch.seasonTotal(climate, 'powder_days');
     return h('div', { class: 'climate-head' },
       stats([
         ['Snowfall, Oct to May', total == null ? h('span', { class: 'not-verified' }, 'Not yet verified') : `${fmtInt(total)} in`],
@@ -727,7 +758,13 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
 
   function compare(view, my) {
     const c = index.clusters.get(view.clusterId);
-    const picks = view.compare.map((id) => index.resorts.get(id)).filter(Boolean);
+    if (!index.detailsReady || !chartsMod) {
+      if (!index.detailsReady) return waitForDetails(view, my, 'Cluster comparison', `Compare resorts in ${c.name}`);
+      charts().catch(() => null).then(() => { if (my === token) api.render(view, { keepToken: true }); });
+      return [breadcrumb(view), ...heading('Cluster comparison', `Compare resorts in ${c.name}`), h('p', { class: 'loading' }, 'Loading the comparison')];
+    }
+    const { SERIES, seasonTotal, renderCompareCharts } = chartsMod;
+    const picks = view.compare.map((id) => index.full(id)).filter(Boolean);
     const chartsRoot = h('div', { class: 'climate' }, h('p', { class: 'loading' }, 'Loading climate data'));
     const tableRoot = h('div', { class: 'table-scroll' });
     const noteRoot = h('div');
@@ -753,7 +790,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     Promise.all(picks.map((r) => (r.climate_available ? loadClimate(r.id) : Promise.resolve(null)))).then(async (climates) => {
       if (my !== token) return;
       const entries = picks.map((r, i) => ({ resort: r, climate: climates[i] }));
-      tableRoot.append(compareTable(entries));
+      tableRoot.append(compareTable(entries, seasonTotal));
       const missing = entries.filter((e) => !e.climate).map((e) => e.resort.name);
       if (missing.length) noteRoot.append(h('p', { class: 'not-verified' }, `Climate data is being compiled for ${joinAnd(missing)}.`));
       clear(chartsRoot);
@@ -767,7 +804,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     return out;
   }
 
-  function compareTable(entries) {
+  function compareTable(entries, seasonTotal) {
     const mini = (src, format) => (src
       ? h('span', { class: 'cell-sourced' }, format(src.value), ' ', badge(src.confidence))
       : h('span', { class: 'not-verified' }, 'Not yet verified'));
@@ -788,7 +825,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     return h('table', { class: 'compare-table' },
       h('caption', { class: 'visually-hidden' }, 'Resort comparison'),
       h('thead', null, h('tr', null, h('td', null), entries.map((e, i) => h('th', { scope: 'col' },
-        h('span', { class: 'key', style: `background:${SERIES[i]}`, 'aria-hidden': 'true' }), e.resort.name)))),
+        h('span', { class: 'key', style: `background:${chartsMod.SERIES[i]}`, 'aria-hidden': 'true' }), e.resort.name)))),
       h('tbody', null, rows.map(([label, fn]) => h('tr', null, h('th', { scope: 'row' }, label), entries.map((e) => h('td', null, fn(e)))))));
   }
 
@@ -803,10 +840,15 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
         config.isDevData ? ' Test fixture data loaded.' : ''));
   }
 
-  return {
-    /** Render a view. Returns a short summary for the live region. */
-    render(view) {
-      token += 1;
+  /** Swap the source placeholders once sources.json has loaded. */
+  function fillSources() {
+    for (const el of root.querySelectorAll('.src-pending')) el.replaceWith(sourceLink(el.dataset.src));
+  }
+
+  const api = {
+    /** Render a view. Returns the heading element. */
+    render(view, { keepToken = false } = {}) {
+      if (!keepToken) token += 1;
       const my = token;
       destroyCharts();
       clear(root);
@@ -823,6 +865,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     },
     /** Select a housing site from the map. */
     selectSite(id) { selectSite(id, { scroll: true }); },
+    fillSources,
     renderError(message) {
       destroyCharts();
       clear(root);
@@ -831,4 +874,5 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
         h('p', { class: 'fact-meta' }, message), footer());
     },
   };
+  return api;
 }
