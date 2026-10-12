@@ -128,11 +128,12 @@ def prof(score, status="computed"):
     return {"score": score if status == "computed" else None, "status": status, "breakdown": rows}
 
 
-def lucr(low, mid, high, status="computed"):
+def lucr(low, mid, high, status="computed", rent_source=None):
     vals = [(k, l, None if status == "assumptions_unset" and k == "food_monthly_usd" else v) for k, l, v in ASSUMPTIONS]
     return {"low": low if status == "computed" else None, "mid": mid if status == "computed" else None,
             "high": high if status == "computed" else None, "status": status,
-            "assumptions": [{"key": k, "label": l, "value": v} for k, l, v in vals]}
+            "assumptions": [{"key": k, "label": l, "value": v} for k, l, v in vals]
+            + ([{"key": "rent_source", "label": "Rent used", "value": rent_source}] if rent_source else [])}
 
 
 def career_data():
@@ -141,7 +142,7 @@ def career_data():
         "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
-                       "professionalism": prof(72), "lucrativeness": lucr(3200, 6100, 8900),
+                       "professionalism": prof(72), "lucrativeness": lucr(3200, 6100, 8900, rent_source="site:alpha-staff-village"),
                        "stale_fields": ["pay.level_1", "private_split", "professionalism.clinic_access"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(None, "weights_unset"), "lucrativeness": lucr(None, None, None, "assumptions_unset"),
@@ -152,7 +153,7 @@ def career_data():
         "foxtrot-basin": {"pay": pay_rows(22, ["level_1", "level_2", "level_3"]),
                           "private_rate": sourced({"low": 700, "high": 950, "unit": "full_day"}),
                           "private_split": sourced(40, "fixture-model", "estimated"),
-                          "professionalism": prof(85), "lucrativeness": lucr(4800, 7900, 10600), "stale_fields": []},
+                          "professionalism": prof(85), "lucrativeness": lucr(4800, 7900, 10600, rent_source="fmr_studio"), "stale_fields": []},
         "hotel-lake": {"pay": pay_rows(23, ["level_1", "level_2"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(61), "lucrativeness": lucr(None, None, None, "insufficient_data"),
                        "stale_fields": []},
@@ -224,6 +225,9 @@ def resort_record(row):
     }
     if rid != "lima-hollow":
         record["facility_type"] = facility
+    record["detail_available"] = rid in DETAIL_IDS
+    record["housing_summary"] = ({"site_count": 3, "cheapest_rent_monthly_low": 550, "cheapest_site_id": "alpha-staff-village",
+                                  "has_transit": True} if rid == "alpha-peak" else None)
     ids = {"fixture-location"}
     for group in ("size", "elevation", "season", "terrain"):
         for v in record[group].values():
@@ -323,6 +327,78 @@ def recolor_props(r):
     }
 
 
+DETAIL_IDS = {"alpha-peak", "foxtrot-basin"}
+
+
+def circle(lon, lat, km, n=24):
+    dlat = km / 111.0
+    dlon = km / (111.0 * math.cos(math.radians(lat)))
+    ring = [[round(lon + dlon * math.cos(2 * math.pi * i / n), 4), round(lat + dlat * math.sin(2 * math.pi * i / n), 4)] for i in range(n)]
+    return {"type": "Polygon", "coordinates": [ring + [ring[0]]]}
+
+
+def lifts_for(lon, lat, names):
+    feats = []
+    for i, name in enumerate(names):
+        a = math.radians(40 + i * 35)
+        end = [round(lon + 0.02 * math.cos(a), 5), round(lat + 0.015 * math.sin(a), 5)]
+        feats.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[lon, lat], end]},
+                      "properties": {"name": name, "lift_type": "chair_lift", "source_id": "fixture-location"}})
+    return {"type": "FeatureCollection", "features": feats}
+
+
+def detail_record(r):
+    lon, lat = r["lon"], r["lat"]
+    base = {"lat": lat, "lon": lon, "source_id": "fixture-location"}
+    if r["id"] == "foxtrot-basin":  # lifts only, the shape real Tier A detail has today
+        return {"version": 1, "generated_at": GENERATED_AT, "resort_id": r["id"], "base_area": base,
+                "lifts": lifts_for(lon, lat, ["Fixture Lift One", "Fixture Lift Two", None]),
+                "housing": [], "rent_baseline": None, "transit": None, "isochrones": []}
+    town = [round(lon + 0.09, 4), round(lat - 0.03, 4)]
+    def line(a, b):
+        return {"type": "LineString", "coordinates": [a, [round((a[0] + b[0]) / 2, 4), round((a[1] + b[1]) / 2 + 0.01, 4)], b]}
+    housing = [
+        {"id": "alpha-staff-village", "resort_id": r["id"], "name": "Fixture Staff Village", "type": "resort_owned",
+         "lat": round(lat - 0.01, 4), "lon": round(lon + 0.025, 4), "location_source_id": "fixture-location", "precision": "building",
+         "rent_monthly": sourced({"low": 550, "high": 700}), "occupancy": "shared", "deposit": sourced(300),
+         "eligibility_note": "Synthetic note: full time staff only.", "confidence": "published", "verified_date": AS_OF,
+         "commutes": [
+             {"mode": "drive", "minutes": 6, "distance_mi": 2.1, "transit_route_ids": [],
+              "geometry": line([round(lon + 0.025, 4), round(lat - 0.01, 4)], [lon, lat]), "source_id": "fixture-model"},
+             {"mode": "walk", "minutes": 25, "distance_mi": 1.2, "transit_route_ids": [],
+              "geometry": line([round(lon + 0.025, 4), round(lat - 0.01, 4)], [lon, lat]), "source_id": "fixture-model"}]},
+        {"id": "alpha-town-lease", "resort_id": r["id"], "name": "Fixture Town Lease", "type": "master_lease",
+         "lat": town[1], "lon": town[0], "location_source_id": "fixture-location", "precision": "neighborhood",
+         "rent_monthly": sourced({"low": 800, "high": 950}, "fixture-survey", "reported"), "occupancy": "mixed", "deposit": None,
+         "eligibility_note": None, "confidence": "reported", "verified_date": AS_OF,
+         "commutes": [
+             {"mode": "bus", "minutes": 28, "distance_mi": 7.4, "transit_route_ids": ["fixture-blue"],
+              "geometry": line(town, [lon, lat]), "source_id": "fixture-model"},
+             {"mode": "drive", "minutes": None, "distance_mi": None, "transit_route_ids": [], "geometry": None, "source_id": None}]},
+        {"id": "alpha-market-west", "resort_id": r["id"], "name": "Fixture West Rentals", "type": "market",
+         "lat": round(lat + 0.04, 4), "lon": round(lon - 0.08, 4), "location_source_id": "fixture-location", "precision": "neighborhood",
+         "rent_monthly": sourced({"low": 1200, "high": 1600}, "fixture-model", "estimated"), "occupancy": "private", "deposit": None,
+         "eligibility_note": None, "confidence": "estimated", "verified_date": AS_OF, "commutes": []},
+    ]
+    transit = {"routes": [{"id": "fixture-blue", "agency": "Fixture Transit", "short_name": "Blue", "long_name": "Fixture Blue Line",
+                           "color": "3987E5", "geometry": {"type": "MultiLineString", "coordinates": [[town, [lon, lat]]]}},
+                          {"id": "fixture-red", "agency": "Fixture Transit", "short_name": "Red", "long_name": None, "color": "bad",
+                           "geometry": {"type": "LineString", "coordinates": [[round(lon - 0.08, 4), round(lat + 0.04, 4)], [lon, lat]]}}],
+               "stops": [{"id": "s1", "name": "Fixture Town Center", "lat": town[1], "lon": town[0], "route_ids": ["fixture-blue"]},
+                         {"id": "s2", "name": "Fixture Base Stop", "lat": lat, "lon": lon, "route_ids": ["fixture-blue", "fixture-red"]}],
+               "source_ids": ["fixture-model"]}
+    return {"version": 1, "generated_at": GENERATED_AT, "resort_id": r["id"], "base_area": base,
+            "lifts": lifts_for(lon, lat, ["Fixture Express", "Fixture Summit Chair", "Fixture Bowl Lift", None]),
+            "housing": housing,
+            "rent_baseline": {"county_fips": "00000", "county_name": "Fixture County",
+                              "fmr": {"studio": sourced(1100, "fixture-model", "estimated"), "one_br": sourced(1300, "fixture-model", "estimated"),
+                                      "two_br": sourced(1650, "fixture-model", "estimated")},
+                              "acs_median_gross_rent": sourced(1450, "fixture-model", "estimated")},
+            "transit": transit,
+            "isochrones": [{"minutes": m, "mode": "drive", "geometry": circle(lon, lat, km), "source_id": "fixture-model"}
+                           for m, km in ((45, 40), (30, 26), (15, 12))]}
+
+
 def write(name, data):
     path = OUT / name
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -377,6 +453,9 @@ def main():
                                "density": {"dry_max_pct": 7, "moist_min_pct": 12},
                                "display": {"priority": ["published", "reported", "estimated"]},
                                "reports": {"aggregation_min": 3}, "staleness": {"max_age_months": 18}})
+    for r in resorts:
+        if r["detail_available"]:
+            write(f"detail/{r['id']}.json", detail_record(r))
     for row in RESORTS:
         if row[11]:
             write(f"climate/{row[0]}.json", climate_record(row))

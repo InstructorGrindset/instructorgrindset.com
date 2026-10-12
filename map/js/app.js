@@ -10,6 +10,7 @@ import { applyMeta } from './meta.js';
 import { h } from './ui.js';
 import { FILTERS } from './labels.js';
 import { createRecolor } from './recolor.js';
+import { createDetailControls } from './detailcontrols.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -25,6 +26,7 @@ const els = {
   listToggle: $('list-toggle'),
   filter: $('facility-filter'),
   recolor: $('recolor'),
+  detailLayers: $('detail-layers'),
   devBadge: $('dev-badge'),
 };
 
@@ -84,7 +86,17 @@ async function main() {
   }
 
   let router;
-  const panel = createPanel(els.content, index, { onCompare: (view) => router.go(view) });
+  const detailControls = createDetailControls(els.detailLayers, { onToggle: (g, on) => mapCtl && mapCtl.setLayerGroup(g, on) });
+  let detailFor = null;
+  const panel = createPanel(els.content, index, {
+    onCompare: (view) => router.go(view),
+    onDetail: (resortId, detail) => {
+      detailFor = detail ? resortId : null;
+      const groups = mapCtl ? mapCtl.setDetail(detail) : [];
+      if (detail && groups.length) detailControls.show(groups); else detailControls.hide();
+    },
+    onSiteSelect: (id) => mapCtl && mapCtl.selectSite(id),
+  });
   const list = createListView(els.list, index);
 
   try {
@@ -92,6 +104,7 @@ async function main() {
       getPadding: padding,
       onPick(target, current) {
         const cur = current || { level: 'national' };
+        if (target.kind === 'housing') { panel.selectSite(target.id); return; }
         if (target.kind === 'state') {
           if (cur.stateCode === target.id && cur.level === 'state') return;
           router.go({ level: 'state', stateCode: target.id });
@@ -116,6 +129,11 @@ async function main() {
   }
 
   router = createRouter(index, (view, { initial, fellBack }) => {
+    if (detailFor && (view.level !== 'resort' || view.resortId !== detailFor)) {
+      detailFor = null;
+      if (mapCtl) mapCtl.setDetail(null);
+      detailControls.hide();
+    }
     els.panel.classList.toggle('is-wide', view.level === 'compare');
     els.stage.classList.toggle('is-wide', view.level === 'compare');
     const headingEl = panel.render(view);
@@ -156,10 +174,12 @@ async function main() {
       announce(`Showing ${f.key === 'all' ? 'every facility type' : f.label.toLowerCase()}.`);
     },
   }, f.label));
-  els.filter.append(...filterButtons);
-  els.filter.hidden = false;
+  if (els.filter) {
+    els.filter.append(...filterButtons);
+    els.filter.hidden = false;
+  }
 
-  if (mapCtl) createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce });
+  if (mapCtl && els.recolor) createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce });
 
   els.listToggle.addEventListener('click', () => setListView(els.list.hidden));
   els.listToggle.hidden = false;

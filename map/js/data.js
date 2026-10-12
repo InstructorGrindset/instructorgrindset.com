@@ -2,7 +2,7 @@
 import { config } from './config.js';
 import {
   ResortsFile, Resort, FeatureCollectionShell, ClusterFeature, ResortFeature, StateFeature,
-  StatesFile, SourcesFile, ClimateFile, DefinitionsFile,
+  StatesFile, SourcesFile, ClimateFile, DefinitionsFile, DetailFile, LiftFeature, HousingSite,
 } from './schemas.js';
 
 export class DataError extends Error {}
@@ -255,6 +255,33 @@ export function loadClimate(resortId) {
     climateCache.set(resortId, p);
   }
   return climateCache.get(resortId);
+}
+
+const detailCache = new Map();
+
+/** Lazy load detail/{id}.json (Tier A resort detail map). Resolves to null when unavailable or invalid. */
+export function loadDetail(resortId) {
+  if (!detailCache.has(resortId)) {
+    const p = fetchJson(`detail/${encodeURIComponent(resortId)}.json`, { optional: true }).then((raw) => {
+      if (!raw) return null;
+      const r = DetailFile.safeParse(raw);
+      if (!r.success) {
+        console.warn(`[map] detail/${resortId}.json failed validation`, r.error.issues.slice(0, 5));
+        return null;
+      }
+      const d = r.data;
+      return {
+        ...d,
+        lifts: { type: 'FeatureCollection', features: parseEach(LiftFeature, d.lifts.features, `detail/${resortId} lifts`) },
+        housing: parseEach(HousingSite, d.housing, `detail/${resortId} housing`, (x) => x && x.id),
+      };
+    }).catch((err) => {
+      console.warn(`[map] detail/${resortId}.json`, err.message);
+      return null;
+    });
+    detailCache.set(resortId, p);
+  }
+  return detailCache.get(resortId);
 }
 
 /** Counts by facility type for a list of resorts. */

@@ -123,6 +123,13 @@ export const Resort = z.object({
   career: Career.nullish().transform((v) => v ?? null),
   editorial: z.unknown().nullish(),
   climate_available: z.boolean(),
+  detail_available: z.boolean().nullish().transform((v) => Boolean(v)),
+  housing_summary: z.object({
+    site_count: z.number().int().nonnegative().nullish(),
+    cheapest_rent_monthly_low: numOrNull,
+    cheapest_site_id: z.string().nullish(),
+    has_transit: z.boolean().nullish(),
+  }).nullish().transform((v) => v ?? null),
   sources: z.array(z.string()),
 });
 
@@ -241,3 +248,72 @@ export const DefinitionsFile = z.object({
     moist_min_pct: z.number().positive().nullish(),
   }).passthrough().nullish(),
 }).passthrough();
+
+// ── Resort detail (Phase 5): data/build/detail/<id>.json ──
+const LineGeom = z.object({ type: z.literal('LineString'), coordinates: z.array(Position).min(2) });
+const MultiLineGeom = z.object({ type: z.literal('MultiLineString'), coordinates: z.array(z.array(Position).min(2)).min(1) });
+const AnyLine = z.union([LineGeom, MultiLineGeom]);
+
+export const LiftFeature = z.object({
+  type: z.literal('Feature'),
+  geometry: AnyLine,
+  properties: z.object({ name: z.string().nullish(), lift_type: z.string().nullish(), source_id: z.string().nullish() })
+    .passthrough().nullish().transform((v) => v ?? {}),
+});
+
+export const Commute = z.object({
+  mode: z.enum(['drive', 'bus', 'walk', 'shuttle']),
+  minutes: numOrNull,
+  distance_mi: numOrNull,
+  transit_route_ids: strList,
+  geometry: AnyLine.nullish().transform((v) => v ?? null),
+  source_id: z.string().nullish(),
+});
+
+export const HousingSite = z.object({
+  id: Slug,
+  resort_id: z.string().nullish(),
+  name: z.string().min(1),
+  type: z.enum(['resort_owned', 'master_lease', 'market']),
+  lat: z.number().min(-90).max(90),
+  lon: z.number().min(-180).max(180),
+  location_source_id: z.string().nullish(),
+  precision: z.enum(['building', 'neighborhood']),
+  rent_monthly: sourced(z.object({ low: numOrNull, high: numOrNull })),
+  occupancy: z.enum(['shared', 'private', 'mixed']).nullish().transform((v) => v ?? null),
+  deposit: sourced(z.number()),
+  eligibility_note: z.string().nullish(),
+  confidence: Confidence.nullish(),
+  verified_date: z.string().nullish(),
+  commutes: z.array(Commute).nullish().transform((v) => v ?? []),
+});
+
+export const DetailFile = z.object({
+  version: z.number().int(),
+  generated_at: z.string(),
+  resort_id: z.string(),
+  base_area: z.object({ lat: z.number(), lon: z.number(), source_id: z.string().nullish() }).nullish().transform((v) => v ?? null),
+  // Arrays are validated per item in data.js so one odd lift cannot hide the rest.
+  lifts: z.object({ type: z.literal('FeatureCollection'), features: z.array(z.unknown()) }).passthrough()
+    .nullish().transform((v) => v ?? { type: 'FeatureCollection', features: [] }),
+  housing: z.array(z.unknown()).nullish().transform((v) => v ?? []),
+  rent_baseline: z.object({
+    county_fips: z.string().nullish(),
+    county_name: z.string().nullish(),
+    fmr: z.object({ studio: sourced(z.number()), one_br: sourced(z.number()), two_br: sourced(z.number()) })
+      .nullish().transform((v) => v ?? { studio: null, one_br: null, two_br: null }),
+    acs_median_gross_rent: sourced(z.number()),
+  }).nullish().transform((v) => v ?? null),
+  transit: z.object({
+    routes: z.array(z.object({
+      id: z.string(), agency: z.string().nullish(), short_name: z.string().nullish(), long_name: z.string().nullish(),
+      color: z.string().nullish(), geometry: AnyLine,
+    })).nullish().transform((v) => v ?? []),
+    stops: z.array(z.object({ id: z.string(), name: z.string(), lat: z.number(), lon: z.number(), route_ids: strList }))
+      .nullish().transform((v) => v ?? []),
+    source_ids: strList,
+  }).nullish().transform((v) => v ?? null),
+  isochrones: z.array(z.object({
+    minutes: z.number(), mode: z.string().nullish(), geometry: AreaGeom, source_id: z.string().nullish(),
+  })).nullish().transform((v) => v ?? []),
+});

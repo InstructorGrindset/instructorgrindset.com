@@ -1,6 +1,6 @@
 // Side panel (desktop) / bottom sheet (phone) content for each level.
 import { config } from './config.js';
-import { clusterResorts, clusterOrder, loadClimate, facilityCounts } from './data.js';
+import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts } from './data.js';
 import {
   FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, COMPONENT_LABEL, RATE_UNIT, tagLabel,
 } from './labels.js';
@@ -48,8 +48,10 @@ function navLink(view, attrs, ...children) {
   return h('a', { href: hrefFor(view), 'data-nav': '', ...attrs }, ...children);
 }
 
-export function createPanel(root, index, { onCompare }) {
+export function createPanel(root, index, { onCompare, onDetail = () => {}, onSiteSelect = () => {} }) {
   let token = 0;
+  let siteButtons = new Map();
+  let currentDetail = null;
   let compareState = { clusterId: null, open: false, selected: [] };
 
   function sourceLink(id) {
@@ -306,6 +308,7 @@ export function createPanel(root, index, { onCompare }) {
     if (fitBits.length) {
       out.push(section('Clients and fit', fitBits.map(([label, l]) => [h('p', { class: 'sub' }, label), tags(l)])));
     }
+    out.push(housingSection(r, my));
     out.push(section('Snow and climate', climateRoot));
     out.push(h('p', { class: 'fact-meta location' }, `Base area ${r.lat.toFixed(3)}, ${r.lon.toFixed(3)}`,
       r.location_source_id ? [' · ', sourceLink(r.location_source_id)] : null));
@@ -421,13 +424,114 @@ export function createPanel(root, index, { onCompare }) {
         h('span', { class: 'fact-value' }, moneyRange(l.low, l.high)), badge('estimated')));
       body.push(h('span', { class: 'fact-meta' }, `Mid case ${money(l.mid)}. Low and high cases bracket the mid case.`));
     }
-    if (l.assumptions.length) {
+    // rent_source says which rent fed the model: "site:<housing id>", "fmr_studio" or "acs_median".
+    const rentSource = l.assumptions.find((a) => a.key === 'rent_source' && a.value != null);
+    const listed = l.assumptions.filter((a) => a.key !== 'rent_source');
+    if (rentSource) body.push(h('p', { class: 'fact-meta rent-used', dataset: { source: String(rentSource.value) } }, rentUsedText(String(rentSource.value), currentDetail)));
+    if (listed.length) {
       body.push(h('p', { class: 'sub' }, 'Assumptions'),
-        h('ul', { class: 'assumptions' }, l.assumptions.map((a) => h('li', null,
+        h('ul', { class: 'assumptions' }, listed.map((a) => h('li', null,
           h('span', null, a.label), ' ',
           a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet') : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))))));
     }
     return h('div', null, body);
+  }
+
+  function rentUsedText(value, detail) {
+    if (value === 'fmr_studio') return 'Rent used: HUD Fair Market Rent for a studio in the county.';
+    if (value === 'acs_median') return 'Rent used: Census ACS median gross rent in the county.';
+    const id = value.replace(/^site:/, '');
+    const site = detail && detail.housing.find((x) => x.id === id);
+    return `Rent used: ${site ? site.name : humanize(id)}, the cheapest employee housing listed.`;
+  }
+
+  // ── Housing and commute (Phase 5) ──
+
+  const HOUSING_TYPE = { resort_owned: 'Resort owned', master_lease: 'Master lease', market: 'Market rental' };
+  const PRECISION = { building: 'Listed building', neighborhood: 'Neighborhood area' };
+  const OCCUPANCY = { shared: 'Shared rooms', private: 'Private rooms', mixed: 'Shared and private rooms' };
+  const MODE = { drive: 'Drive', bus: 'Bus', walk: 'Walk', shuttle: 'Shuttle' };
+  const TYPE_ORDER = { resort_owned: 0, master_lease: 1, market: 2 };
+
+  function housingSection(r, my) {
+    const body = h('div', { class: 'housing' });
+    siteButtons = new Map();
+    currentDetail = null;
+    if (!r.detail_available) {
+      body.append(h('p', { class: 'not-verified' }, 'Housing data is being collected.'));
+      onDetail(r.id, null);
+    } else {
+      body.append(h('p', { class: 'loading' }, 'Loading housing and commute data'));
+      loadDetail(r.id).then((detail) => {
+        if (my !== token) return;
+        currentDetail = detail;
+        clear(body);
+        renderHousing(body, detail);
+        for (const el of root.querySelectorAll('.rent-used')) el.textContent = rentUsedText(el.dataset.source, detail);
+        onDetail(r.id, detail);
+      });
+    }
+    return section('Housing and commute', body);
+  }
+
+  function renderHousing(body, detail) {
+    const sites = detail ? [...detail.housing].sort((a, b) => (TYPE_ORDER[a.type] - TYPE_ORDER[b.type])
+      || ((a.rent_monthly && a.rent_monthly.value.low) ?? Infinity) - ((b.rent_monthly && b.rent_monthly.value.low) ?? Infinity)) : [];
+    if (!sites.length) body.append(h('p', { class: 'not-verified' }, 'Housing data is being collected.'));
+    else {
+      body.append(h('p', { class: 'fact-meta' }, 'Select a site to see it on the map with its commute.'));
+      body.append(h('ul', { class: 'site-list' }, sites.map((site) => h('li', null, siteCard(site, detail)))));
+    }
+    const b = detail && detail.rent_baseline;
+    if (b && [b.fmr.studio, b.fmr.one_br, b.fmr.two_br, b.acs_median_gross_rent].some(Boolean)) {
+      body.append(h('p', { class: 'sub' }, `Rent baseline${b.county_name ? ` for ${b.county_name}` : ''}`),
+        h('dl', { class: 'facts' },
+          fact('HUD FMR studio', b.fmr.studio, monthly),
+          fact('HUD FMR one bedroom', b.fmr.one_br, monthly),
+          fact('HUD FMR two bedroom', b.fmr.two_br, monthly),
+          fact('ACS median gross rent', b.acs_median_gross_rent, monthly)));
+    }
+  }
+
+  const monthly = (v) => `${money(v)} per month`;
+
+  function siteCard(site, detail) {
+    const btn = h('button', {
+      type: 'button', class: 'site-select', 'aria-pressed': 'false', dataset: { site: site.id },
+      onclick: () => selectSite(btn.getAttribute('aria-pressed') === 'true' ? null : site.id),
+    },
+    h('span', { class: `site-dot site-${site.type} prec-${site.precision}`, 'aria-hidden': 'true' }),
+    h('span', { class: 'nav-name' }, site.name),
+    h('span', { class: 'nav-meta' }, `${HOUSING_TYPE[site.type]} \u00b7 ${PRECISION[site.precision]}`));
+    siteButtons.set(site.id, btn);
+    const routes = new Map(((detail.transit && detail.transit.routes) || []).map((x) => [x.id, x.short_name || x.long_name || x.id]));
+    return h('div', { class: 'site', id: `site-${site.id}` },
+      btn,
+      h('dl', { class: 'facts site-facts' },
+        fact('Rent', site.rent_monthly, (v) => `${moneyRange(v.low, v.high)} per month`),
+        h('div', { class: 'fact' }, h('dt', null, 'Occupancy'),
+          h('dd', null, site.occupancy ? OCCUPANCY[site.occupancy] : h('span', { class: 'not-verified' }, 'Not yet verified'))),
+        fact('Deposit', site.deposit, (v) => money(v))),
+      site.eligibility_note ? h('p', { class: 'site-note' }, site.eligibility_note) : null,
+      site.commutes.length
+        ? h('table', { class: 'commute-table' },
+          h('caption', { class: 'visually-hidden' }, `Commute from ${site.name} to the base area`),
+          h('thead', null, h('tr', null, ['Mode', 'Time', 'Distance', 'Routes'].map((t) => h('th', { scope: 'col' }, t)))),
+          h('tbody', null, site.commutes.map((c) => h('tr', null,
+            h('th', { scope: 'row' }, MODE[c.mode]),
+            h('td', null, c.minutes == null ? h('span', { class: 'not-verified' }, 'Being calculated') : `${fmtInt(c.minutes)} min`),
+            h('td', null, c.distance_mi == null ? '' : `${fmt1(c.distance_mi)} mi`),
+            h('td', null, c.transit_route_ids.map((id) => routes.get(id) || id).join(', '))))))
+        : h('p', { class: 'not-verified' }, 'Commute times are being calculated.'));
+  }
+
+  function selectSite(id, { scroll = false } = {}) {
+    for (const [sid, b] of siteButtons) b.setAttribute('aria-pressed', String(sid === id));
+    onSiteSelect(id);
+    if (id && scroll) {
+      const el = root.querySelector(`#site-${CSS.escape(id)}`);
+      if (el) el.scrollIntoView({ block: 'nearest' });
+    }
   }
 
   function fmtAssumption(key, v) {
@@ -547,6 +651,8 @@ export function createPanel(root, index, { onCompare }) {
       root.append(...body.flat().filter(Boolean), footer());
       return root.querySelector('#panel-heading');
     },
+    /** Select a housing site from the map. */
+    selectSite(id) { selectSite(id, { scroll: true }); },
     renderError(message) {
       destroyCharts();
       clear(root);

@@ -351,6 +351,11 @@
        "key": "rent_monthly_usd",
        "label": "Rent used per month (USD)",
        "value": 650
+      },
+      {
+       "key": "rent_source",
+       "label": "Rent used",
+       "value": "site:alpha-staff-village"
       }
      ]
     },
@@ -363,6 +368,13 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": true,
+   "housing_summary": {
+    "site_count": 3,
+    "cheapest_rent_monthly_low": 550,
+    "cheapest_site_id": "alpha-staff-village",
+    "has_transit": true
+   },
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -661,6 +673,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -925,6 +939,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -979,6 +995,8 @@
    "editorial": null,
    "climate_available": false,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location"
    ]
@@ -1101,6 +1119,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1419,6 +1439,11 @@
        "key": "rent_monthly_usd",
        "label": "Rent used per month (USD)",
        "value": 650
+      },
+      {
+       "key": "rent_source",
+       "label": "Rent used",
+       "value": "fmr_studio"
       }
      ]
     },
@@ -1427,6 +1452,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": true,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1552,6 +1579,8 @@
    "editorial": null,
    "climate_available": false,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1848,6 +1877,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -1973,6 +2004,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -2097,6 +2130,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -2249,6 +2284,8 @@
    "editorial": null,
    "climate_available": true,
    "facility_type": "ski_area",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -2373,6 +2410,8 @@
    "career": null,
    "editorial": null,
    "climate_available": false,
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
@@ -2508,6 +2547,8 @@
    "editorial": null,
    "climate_available": false,
    "facility_type": "indoor",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-ownership",
@@ -2624,6 +2665,8 @@
    "editorial": null,
    "climate_available": false,
    "facility_type": "training_center",
+   "detail_available": false,
+   "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-ownership",

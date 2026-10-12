@@ -1,6 +1,9 @@
 // MapLibre map: state outlines, cluster polygons, resort circles.
 import { config, prefersReducedMotion } from './config.js';
 import { h } from './ui.js';
+import {
+  addDetailLayers, setDetailData, showSiteCommutes, setGroupVisible, detailBounds, groupsWithData,
+} from './detailmap.js';
 
 const C = config.basemap.colors;
 
@@ -246,6 +249,10 @@ export function createMap(container, index, { onPick, getPadding }) {
   }
 
   function boundsFor(view) {
+    if (view.level === 'resort' && detail && detail.resort_id === view.resortId) {
+      const db = detailBounds(detail);
+      if (db) return { b: db, maxZoom: 13 };
+    }
     if (view.level === 'resort') {
       const r = index.resorts.get(view.resortId);
       // Frame the resort with its neighbours around it.
@@ -269,14 +276,29 @@ export function createMap(container, index, { onPick, getPadding }) {
   }
 
   // Hit testing: resorts beat clusters beat states.
+  const layersIn = (ids) => ids.filter((id) => map.getLayer(id) && map.getLayoutProperty(id, 'visibility') !== 'none');
+
   function pick(point) {
     const pad = 6;
     const box = [[point.x - pad, point.y - pad], [point.x + pad, point.y + pad]];
+    if (detail) {
+      const hs = map.queryRenderedFeatures(box, { layers: layersIn(['detail-housing-point', 'detail-housing-area']) });
+      if (hs.length) return { kind: 'housing', id: hs[0].properties.id, name: hs[0].properties.name };
+      const base = map.queryRenderedFeatures(box, { layers: layersIn(['detail-base']) });
+      if (base.length) return { kind: 'base', id: 'base', name: 'Base area', passive: true };
+    }
     const r = map.queryRenderedFeatures(box, { layers: resortLayers() });
     if (r.length) {
       // Prefer the nearest Tier A, then any.
       const f = r.find((x) => x.properties.tier === 'A') || r[0];
       return { kind: 'resort', id: f.properties.id, name: f.properties.name };
+    }
+    if (detail) {
+      const lb = [[point.x - 4, point.y - 4], [point.x + 4, point.y + 4]];
+      const lift = map.queryRenderedFeatures(lb, { layers: layersIn(['detail-lifts']) });
+      if (lift.length) return { kind: 'lift', id: lift[0].id, name: lift[0].properties.name ? `Lift: ${lift[0].properties.name}` : 'Unnamed lift', passive: true };
+      const stop = map.queryRenderedFeatures(lb, { layers: layersIn(['detail-transit-stop']) });
+      if (stop.length) return { kind: 'stop', id: stop[0].properties.id, name: `Stop: ${stop[0].properties.name}`, passive: true };
     }
     const c = map.queryRenderedFeatures(point, { layers: ['clusters-fill'] });
     if (c.length) {
@@ -294,7 +316,9 @@ export function createMap(container, index, { onPick, getPadding }) {
     return null;
   }
 
-  function setHover(target) {
+  function setHover(rawTarget) {
+    // Base area and transit stops have no feature ids; they show a tooltip only.
+    const target = rawTarget && (rawTarget.kind === 'base' || rawTarget.kind === 'stop') ? null : rawTarget;
     if (hovered && (!target || hovered.kind !== target.kind || hovered.id !== target.id)) {
       map.setFeatureState(hoverKey(hovered), { hover: false });
       hovered = null;
@@ -310,7 +334,7 @@ export function createMap(container, index, { onPick, getPadding }) {
   map.on('mousemove', (e) => {
     const t = pick(e.point);
     setHover(t);
-    map.getCanvas().style.cursor = t ? 'pointer' : '';
+    map.getCanvas().style.cursor = t && !t.passive ? 'pointer' : '';
     if (t) {
       tip.hidden = false;
       tip.textContent = t.kind === 'resort' ? t.name
@@ -323,10 +347,12 @@ export function createMap(container, index, { onPick, getPadding }) {
 
   map.on('click', (e) => {
     const t = pick(e.point);
-    if (t) onPick(t, current);
+    if (t && !t.passive) onPick(t, current);
   });
 
   let filter = 'all';
+  let detail = null;
+  let selectedSite = null;
   let recolor = null; // { prop, stops } or null for default
 
   function applyRecolor() {
@@ -360,6 +386,8 @@ export function createMap(container, index, { onPick, getPadding }) {
   map.on('load', async () => {
     for (const { id, img } of await facilityImages()) if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 });
     map.addLayer(FACILITY_LAYER);
+    addDetailLayers(map);
+    if (detail) setDetailData(map, detail);
     applyFilter();
     applyRecolor();
     loaded = true;
@@ -378,6 +406,24 @@ export function createMap(container, index, { onPick, getPadding }) {
       fitView(view, animate);
     },
     refit() { if (loaded && current) fitView(current, false); },
+    /** Resort detail mode. Pass null to leave it. Returns the layer groups that have data. */
+    setDetail(next) {
+      detail = next;
+      selectedSite = null;
+      if (!loaded) return groupsWithData(next);
+      setDetailData(map, next);
+      showSiteCommutes(map, null);
+      if (next && current && current.level === 'resort' && current.resortId === next.resort_id) fitView(current, true);
+      return groupsWithData(next);
+    },
+    selectSite(id) {
+      if (!loaded) return;
+      if (selectedSite) map.setFeatureState({ source: 'detail-housing', id: selectedSite }, { selected: false });
+      selectedSite = id;
+      if (id) map.setFeatureState({ source: 'detail-housing', id }, { selected: true });
+      showSiteCommutes(map, id);
+    },
+    setLayerGroup(group, on) { if (loaded) setGroupVisible(map, group, on); },
     /** null for default colors, or { prop, stops } from classBreaks. */
     setRecolor(next) { recolor = next; if (loaded) applyRecolor(); },
     /** 'all' | 'ski_area' | 'facility' */
@@ -387,7 +433,8 @@ export function createMap(container, index, { onPick, getPadding }) {
 }
 
 function hoverKey(t) {
-  return { source: t.kind === 'resort' ? 'resorts' : t.kind === 'cluster' ? 'clusters' : 'states', id: t.id };
+  const source = { resort: 'resorts', cluster: 'clusters', state: 'states', housing: 'detail-housing', lift: 'detail-lifts', base: 'detail-base', stop: 'detail-transit-stops' }[t.kind];
+  return { source, id: t.id };
 }
 
 /** Grow a bbox around its center to at least spanX by spanY degrees. */

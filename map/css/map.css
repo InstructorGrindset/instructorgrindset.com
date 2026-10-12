@@ -361,3 +361,54 @@ body.list-mode .recolor { display: none; }
   .recolor-modes .filter-btn { flex: 0 0 auto; }
   .ramp li { min-width: 46px; }
 }
+
+/* ── Resort detail map (Phase 5) ── */
+body.detail-mode .recolor { display: none; }
+.detail-layers {
+  position: absolute; top: 52px; left: 52px; z-index: 4; width: 230px;
+  background: rgba(16,21,30,.95); border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: .5rem .65rem; font-size: .75rem; color: var(--muted); max-height: calc(100% - 70px); overflow-y: auto;
+}
+.detail-layers[hidden] { display: none; }
+body.list-mode .detail-layers { display: none; }
+.detail-box > summary { cursor: pointer; list-style: revert; min-height: 28px; display: list-item; }
+.detail-box[open] > summary { margin-bottom: .35rem; }
+.detail-title { margin: 0; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--map-faint); }
+.detail-toggles { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.detail-toggles label { display: flex; align-items: center; gap: .45rem; color: var(--ink); font-weight: 600; min-height: 28px; cursor: pointer; }
+.detail-toggles input { width: 16px; height: 16px; accent-color: var(--cta); }
+.detail-legend { list-style: none; margin: .1rem 0 .25rem 1.6rem; padding: 0; display: grid; gap: .2rem; }
+.detail-legend[hidden] { display: none; }
+.detail-legend li { display: flex; align-items: center; gap: .4rem; }
+.detail-legend .legend-note { color: var(--map-faint); }
+.chip-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.chip-sq { width: 12px; height: 10px; border-radius: 2px; display: inline-block; opacity: .75; flex-shrink: 0; }
+.base-dot { background: #fff; box-shadow: 0 0 0 2px #0a0e14, 0 0 0 3px #fff; }
+.stop-dot { background: #0a0e14; border: 1.5px solid #e7e9ee; }
+.line-sample { width: 26px; height: 8px; flex-shrink: 0; }
+
+.site-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.site { border: 1px solid var(--line); border-radius: var(--r-md); padding: .5rem .6rem; background: var(--surface-1); }
+.site-select {
+  width: 100%; display: grid; grid-template-columns: auto 1fr; column-gap: .5rem; align-items: center; text-align: left;
+  font: inherit; color: var(--ink); background: transparent; border: 1px solid transparent; border-radius: var(--r-sm);
+  padding: .3rem .35rem; cursor: pointer; min-height: 44px;
+}
+.site-select .nav-meta { grid-column: 2; }
+.site-select:hover { border-color: rgba(166,200,255,.4); }
+.site-select[aria-pressed="true"] { border-color: var(--cta); background: rgba(196,137,42,.1); }
+.site-dot { grid-row: span 2; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #fff; }
+.site-dot.prec-neighborhood { width: 16px; height: 16px; border: 0; opacity: .6; filter: blur(.5px); }
+.site-resort_owned { background: #199e70; }
+.site-master_lease { background: #9085e9; }
+.site-market { background: #d95926; }
+.site-facts { margin: .4rem 0; }
+.site-note { margin: .2rem 0 .4rem; color: var(--muted); font-size: var(--text-xs); }
+.commute-table { width: 100%; border-collapse: collapse; font-size: .72rem; }
+.commute-table th, .commute-table td { text-align: left; padding: .25rem .3rem; border-bottom: 1px solid var(--line); }
+.commute-table thead th { color: var(--map-faint); font-weight: 600; }
+.commute-table tbody th { color: var(--muted); font-weight: 600; }
+@media (max-width: 759.98px) {
+  .detail-layers { top: 46px; left: 46px; width: auto; max-width: min(240px, calc(100% - 56px)); max-height: 45%; padding: .35rem .6rem; }
+  .panel, .panel.is-wide { background: #10151e; }
+}

@@ -84,7 +84,11 @@ function watch(page, label) {
   const requests = [];
   page.on('console', (m) => {
     if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) problems.push(`console: ${m.text()}`);
-    if (m.type() === 'warning' && /\[map\]/.test(m.text())) log(`    warn ${m.text()}`);
+    if (m.type() === 'warning' && /\[map\]/.test(m.text())) {
+      log(`    warn ${m.text()}`);
+      // MapLibre style and expression errors are bugs, not data gaps.
+      if (/layers\.|does not exist|expression|Expected|Unimplemented/.test(m.text())) problems.push(`style: ${m.text()}`);
+    }
   });
   page.on('pageerror', (e) => problems.push(`pageerror: ${e.message}`));
   page.on('request', (r) => requests.push(r.url()));
@@ -279,6 +283,60 @@ async function desktop(browser, base) {
     && await page.locator('.pay-table tr[data-level="level_3"] .badge-reported').count() === 1, 'reported pay row shows its aggregate count');
   check(await page.locator('.tag', { hasText: 'Destination families' }).count() === 1, 'client profile chips use readable labels');
   check(await page.locator('.sub', { hasText: 'Best suited for skiers and riders' }).count() === 1, 'best suited tags render');
+
+  // Phase 5: resort detail map and Housing and commute.
+  await page.waitForSelector('.site-select', { timeout: 10000 });
+  await mapIdle(page);
+  const counts = () => page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const n = (id) => (m.getLayer(id) && m.getLayoutProperty(id, 'visibility') !== 'none' ? m.queryRenderedFeatures({ layers: [id] }).length : 0);
+    return { lifts: n('detail-lifts'), point: n('detail-housing-point'), area: n('detail-housing-area'), iso: n('detail-iso-fill'),
+      transit: n('detail-transit-line'), stops: n('detail-transit-stop'), base: n('detail-base'),
+      bus: n('detail-commute-bus'), drive: n('detail-commute-drive') };
+  });
+  let c = await counts();
+  check(c.lifts > 0 && c.base === 1 && c.point === 1 && c.area === 2 && c.iso > 0 && c.transit > 0 && c.stops === 2,
+    `detail map draws lifts, base, housing by precision, isochrones, transit (${JSON.stringify(c)})`);
+  check(c.bus === 0 && c.drive === 0, 'commute lines hidden until a site is selected');
+  check(await page.locator('body.detail-mode').count() === 1 && await page.locator('#recolor').isHidden(), 'detail mode replaces the recolor control');
+  check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts', 'Housing', 'Commute', 'Transit', 'Drive time']), 'a toggle per layer with data');
+  check((await page.locator('#detail-layers').innerText()).includes('45 min'), 'isochrone legend shows 15, 30, 45 minutes');
+  check(await page.locator('.site-select').count() === 3, 'housing lists every site');
+  check(JSON.stringify(await page.locator('.site-select .nav-name').allInnerTexts()) === JSON.stringify(['Fixture Staff Village', 'Fixture Town Lease', 'Fixture West Rentals']), 'employee housing listed first');
+  const lease = page.locator('.site', { hasText: 'Fixture Town Lease' });
+  check((await lease.innerText()).includes('$800 to $950 per month') && await lease.locator('.badge-reported').count() === 1, 'site rent range with badge');
+  check((await lease.innerText()).includes('Master lease · Neighborhood area'), 'site type and precision label');
+  check((await lease.locator('.commute-table').innerText()).includes('Bus\t28 min\t7.4 mi\tBlue'), 'commute row shows mode, minutes, distance and route name');
+  check(await lease.locator('.not-verified', { hasText: 'Being calculated' }).count() === 1, 'missing commute minutes marked');
+  check(await page.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.not-verified', { hasText: 'Commute times are being calculated.' }).count() === 1, 'site without commutes shows empty state');
+  check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).innerText()).includes('Synthetic note: full time staff only.'), 'eligibility note renders');
+  check(await page.locator('.housing .facts .fact', { hasText: 'HUD FMR' }).count() === 3 && await page.locator('.housing .fact', { hasText: 'ACS median gross rent' }).locator('.badge-estimated').count() === 1, 'rent baseline with badges');
+  check((await page.locator('.rent-used').innerText()) === 'Rent used: Fixture Staff Village, the cheapest employee housing listed.', 'lucrativeness says which rent was used');
+  await page.locator('.site-select', { hasText: 'Fixture Town Lease' }).click();
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['detail-commute-bus'] }).length > 0, null, { timeout: 5000 }).catch(() => {});
+  c = await counts();
+  check(await page.locator('.site-select[aria-pressed="true"]').innerText().then((t) => t.includes('Fixture Town Lease')) && c.bus > 0, 'selecting a site draws its commute line');
+  check(await page.evaluate(() => window.__careerMap.mapCtl.map.getFeatureState({ source: 'detail-housing', id: 'alpha-town-lease' }).selected === true), 'selected site pin is highlighted');
+  await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = el.querySelector('.housing').offsetTop - 80; });
+  await shot(page, 'desktop-10-detail-map.png');
+  // Click the building pin on the map.
+  const fx = JSON.parse(fs.readFileSync(path.join(REPO, 'tests', 'map', 'fixtures', 'detail', 'alpha-peak.json'), 'utf8'));
+  const sv = fx.housing.find((x) => x.id === 'alpha-staff-village');
+  await clickMapAt(page, [sv.lon, sv.lat]);
+  await page.waitForTimeout(300);
+  check((await page.locator('.site-select[aria-pressed="true"]').innerText()).includes('Fixture Staff Village'), 'clicking a housing pin selects it in the panel');
+  check(new URL(page.url()).pathname.endsWith('/alpha-peak/'), 'housing pin click keeps the resort view');
+  // Lift hover name.
+  const lift = fx.lifts.features[1].geometry.coordinates;
+  const mid = [(lift[0][0] + lift[1][0]) / 2, (lift[0][1] + lift[1][1]) / 2];
+  const lp = await page.evaluate((ll) => { const m = window.__careerMap.mapCtl.map; const p = m.project(ll); const r = m.getContainer().getBoundingClientRect(); return { x: r.left + p.x, y: r.top + p.y }; }, mid);
+  await page.mouse.move(lp.x, lp.y);
+  await page.waitForTimeout(200);
+  check((await page.locator('.map-tip').innerText()).startsWith('Lift: Fixture'), 'lift hover shows its name');
+  await page.locator('#layer-isochrones').uncheck();
+  check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('detail-iso-fill', 'visibility')) === 'none', 'drive time toggle hides isochrones');
+  await page.locator('#layer-isochrones').check();
+  await shot(page, 'desktop-11-detail-pin-selected.png');
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 900; });
   await page.waitForTimeout(200);
   await shot(page, 'desktop-05-resort-charts.png');
@@ -303,6 +361,19 @@ async function desktop(browser, base) {
   await page.waitForURL(/charlie-hill/);
   check(await page.locator('.score-block .not-verified', { hasText: 'Not enough verified data yet' }).count() === 2, 'insufficient_data renders not enough data');
 
+  // Lifts only detail (the shape of real Tier A data today), then leave detail mode.
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'UT', clusterId: 'fixture-wasatch-like', resortId: 'foxtrot-basin' }));
+  await page.waitForFunction(() => document.querySelectorAll('.detail-toggles label').length > 0, null, { timeout: 10000 });
+  check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'layers without data are hidden');
+  check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'empty housing state');
+  check((await page.locator('.rent-used').innerText()).includes('HUD Fair Market Rent for a studio'), 'baseline rent source named');
+  // Leave to a resort without detail.
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'CO', clusterId: 'fixture-front-range', resortId: 'charlie-hill' }));
+  await page.waitForURL(/charlie-hill/);
+  await mapIdle(page);
+  check(await page.locator('#detail-layers').isHidden() && await page.locator('body.detail-mode').count() === 0, 'leaving the resort leaves detail mode');
+  check(await page.evaluate(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['detail-lifts'] }).length) === 0, 'detail layers cleared after leaving');
+
   // Indoor facility record.
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
   await page.locator('.resort-list a', { hasText: 'Mike Snow Dome' }).click();
@@ -318,6 +389,8 @@ async function desktop(browser, base) {
   check(await page.locator('.not-verified', { hasText: 'Not yet verified' }).count() >= 8, 'null values render Not yet verified');
   check(await page.locator('.climate', { hasText: 'Climate data is being compiled' }).count() === 1, 'missing climate message');
   check(await page.locator('.panel-section', { hasText: 'Career data is being collected.' }).count() === 1, 'career null renders being collected');
+  check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'resort without detail shows housing empty state');
+  check(!w.requests.some((u) => u.includes('/detail/delta-ridge.json')), 'no detail fetch when detail_available is false');
   check(!w.requests.some((u) => u.includes('/climate/delta-ridge.json')), 'no climate fetch when climate_available is false');
   await shot(page, 'desktop-06-resort-sparse.png');
 
@@ -466,6 +539,24 @@ async function phone(browser, base) {
   await page.waitForTimeout(400);
   await shot(page, 'phone-06-compare.png');
 
+  // Detail map on phone.
+  await page.goto(`${base}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(page);
+  await page.waitForSelector('.site-select', { timeout: 10000 });
+  await mapIdle(page);
+  check(await page.locator('#detail-layers').isVisible() && !(await page.locator('#detail-layers details').getAttribute('open') !== null), 'phone: detail layers start collapsed');
+  await page.locator('#detail-layers summary').click();
+  check(await page.locator('#layer-lifts').isVisible(), 'phone: layers open on tap');
+  await page.locator('#detail-layers summary').click();
+  await page.locator('.site-select', { hasText: 'Fixture Town Lease' }).click();
+  await page.waitForTimeout(400);
+  await shot(page, 'phone-09-detail-map.png');
+  await handle.click();
+  await page.waitForTimeout(300);
+  await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = el.querySelector('.housing').offsetTop - 40; });
+  await page.waitForTimeout(200);
+  await shot(page, 'phone-10-housing.png');
+
   // Multi state cluster stub under the second state.
   await page.goto(`${base}/map/nv/fixture-lake-crest/`);
   await ready(page);
@@ -589,6 +680,16 @@ async function realData(browser, base) {
         check(await page.locator('.criteria .criterion').count() === appr.tier_a_criteria.length, 'real data: every criterion renders with a label');
         await shot(page, 'real-desktop-approved.png');
       } else log('  skip no approved Tier A stub in the real build yet');
+      const withDetail = all.find((r) => r.tier === 'A' && r.detail_available && pages.includes(`${r.state.toLowerCase()}/${r.cluster_id}/${r.id}/`));
+      if (withDetail) {
+        await page.goto(`${base}/map/${withDetail.state.toLowerCase()}/${withDetail.cluster_id}/${withDetail.id}/`);
+        await ready(page);
+        await page.waitForFunction(() => document.querySelector('.housing') && !document.querySelector('.housing .loading'), null, { timeout: 15000 });
+        await mapIdle(page);
+        const n = await page.evaluate(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['detail-lifts'] }).length);
+        check(n > 0, `real data: lifts render for ${withDetail.name} (${n} rendered)`);
+        await shot(page, 'real-desktop-detail-lifts.png');
+      } else log('  skip no Tier A resort with detail_available in the real build yet');
     }
     w.assertClean();
     await page.close();

@@ -1,0 +1,82 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-11T12:00:00Z",
+ "resort_id": "foxtrot-basin",
+ "base_area": {
+  "lat": 40.59,
+  "lon": -111.64,
+  "source_id": "fixture-location"
+ },
+ "lifts": {
+  "type": "FeatureCollection",
+  "features": [
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -111.64,
+       40.59
+      ],
+      [
+       -111.62468,
+       40.59964
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Lift One",
+     "lift_type": "chair_lift",
+     "source_id": "fixture-location"
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -111.64,
+       40.59
+      ],
+      [
+       -111.63482,
+       40.60449
+      ]
+     ]
+    },
+    "properties": {
+     "name": "Fixture Lift Two",
+     "lift_type": "chair_lift",
+     "source_id": "fixture-location"
+    }
+   },
+   {
+    "type": "Feature",
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       -111.64,
+       40.59
+      ],
+      [
+       -111.64684,
+       40.6041
+      ]
+     ]
+    },
+    "properties": {
+     "name": null,
+     "lift_type": "chair_lift",
+     "source_id": "fixture-location"
+    }
+   }
+  ]
+ },
+ "housing": [],
+ "rent_baseline": null,
+ "transit": null,
+ "isochrones": []
+}
