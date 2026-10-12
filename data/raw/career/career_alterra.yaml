@@ -1,0 +1,56 @@
+batch: career-alterra
+researched_date: 2026-10-11
+sources:
+  - {id: pay-alterra-deervalley-private-lessons, url: "https://www.deervalley.com/plan-your-trip/ski-school/ski-lessons-private", title: "Deer Valley Private Ski Lessons, 26/27 pricing", accessed_date: 2026-10-11}
+  - {id: pay-alterra-schweitzer-private-lessons, url: "https://www.schweitzer.com/plan-your-trip/lessons/private-lessons", title: "Schweitzer Private Ski & Snowboard Lessons", accessed_date: 2026-10-11}
+  - {id: pay-alterra-abasin-lessons, url: "https://www.arapahoebasin.com/lessons/", title: "Arapahoe Basin Ski School, Snowboard & Ski Lessons", accessed_date: 2026-10-11}
+resorts:
+  - resort_id: deer-valley
+    private_rate:
+      value: {low: 1490, high: 1690, unit: full_day}
+      source_id: pay-alterra-deervalley-private-lessons
+      as_of: 2026-10-11
+      confidence: published
+      note: "26/27 full day private (9 a.m. to 4 p.m.): regular season $1,490, high season $1,610, holiday season $1,690."
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: schweitzer
+    private_rate:
+      value: {low: 600, high: 600, unit: full_day}
+      source_id: pay-alterra-schweitzer-private-lessons
+      as_of: 2026-10-11
+      confidence: published
+      note: "Posted as starting at $600 for a 6 hour private; 3 hour privates start at $400. Groups up to five."
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: arapahoe-basin
+    private_rate: null
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: [adaptive]
+    enthusiast_types: []
+    professional_types: []
