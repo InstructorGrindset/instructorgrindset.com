@@ -120,6 +120,11 @@ no coordinates are left out. About 16 KB gzipped against 87 KB for `resorts.json
 The frontend builds its resort points from this file and falls back to `resorts.json` and `resorts.geojson` when it
 is absent.
 
+### `sitemap.xml` (written by `pipeline/routes.py`)
+Only the `/map/` entries are rewritten; every other entry stays byte for byte. The map entries are the canonical URLs of
+`/map/`, every state page, every cluster page and Tier A resort pages. Tier B resort pages are generated, linked and
+crawlable (no `noindex`) but left out of the sitemap.
+
 ### Resort route stubs embed their record
 Each resort page under `/map/` carries `<script type="application/json" id="resort-record">` with
 `{ version, generated_at, resort: <its resorts.json record>, sources: [<the sources listed in resort.sources>] }`
@@ -333,8 +338,11 @@ Writes `docs/map/staleness.md`: every sourced value in `resorts.json` and `detai
 ## Frontend (`/map`)
 
 ### Load order (Phase 8 performance)
-1. The page head starts `maplibre-gl.js` (271 KB gzipped, the largest file) as an `async` script with
-   `fetchpriority="high"`, and preloads `map-index.json`, `clusters.geojson` and `states.json`. The modules on this path
+1. The page head preloads `maplibre-gl.js` (271 KB gzipped, the largest file) at low priority, so the render blocking
+   CSS goes first, and preloads `map-index.json`, `clusters.geojson` and `states.json`. `app.js` runs MapLibre only
+   after the first contentful paint, so its parse and the WebGL setup never hold back the first paint. The map
+   control CSS loads without blocking the paint. `/map/index.html` carries the national heading and intro as its
+   prerendered block, so the first paint already shows real text. The modules on this path
    (`app`, `config`, `data`, `router`, `panel`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`) carry no
    Zod and no charts. The first paint files are checked by hand in `data.js`, mirroring `schemas.js`.
 2. The panel and the list view render from the slim index. `preview.js` draws the first map frame on a 2D canvas
@@ -358,6 +366,11 @@ Writes `docs/map/staleness.md`: every sourced value in `resorts.json` and `detai
   phone); WebGL load 4.5 to 5.4 s, down from 7 to 8 s before this change. The WebGL gap is SwiftShader and
   4x CPU: downloading MapLibre takes about 2 s, evaluating it about 0.5 s, the map constructor about 0.4 s, and
   shader compiling plus the first worker tiles another 1.5 to 2 s.
+* Lighthouse (mobile defaults, simulated throttling, same SwiftShader Chromium) scores Performance about 65 on `/map/`
+  and resort pages, with Accessibility, Best Practices and SEO at 100. First contentful paint is about 1.5 s and
+  largest contentful paint about 2 s; total blocking time is 5 to 7 s, all of it MapLibre's script evaluation and
+  WebGL setup scaled by the 4x CPU factor. Reaching 90 would mean starting the WebGL map only on the first
+  interaction with the map, which is a product decision for the owner.
 
 ### Color modes: value heat maps
 Lucrativeness, Professionalism, Season length and Snowfall draw a heat surface of the value
