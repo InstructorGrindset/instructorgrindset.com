@@ -376,7 +376,10 @@
     </main>
   </div>
 
-  <script>
+  <script type="module">
+    // Formulas and tax tables live in /assets/js/season-income.mjs (shared with the Career Map pipeline).
+    import { seasonIncome, stateTaxRate } from '/assets/js/season-income.mjs?v=1';
+
     function $(id){ return document.getElementById(id) }
     function fmt(n){ return '$' + Math.round(n).toLocaleString() }
     function fmtPct(n){ return (n*100).toFixed(1)+'%' }
@@ -390,17 +393,9 @@
       else                    el.textContent = n+' '+unit;
     }
 
-    function federalTax(g) {
-      if (g<=11600)  return g*.10;
-      if (g<=47150)  return 1160+(g-11600)*.12;
-      if (g<=100525) return 5426+(g-47150)*.22;
-      if (g<=191950) return 17168+(g-100525)*.24;
-      return 39110+(g-191950)*.32;
-    }
-
     function calc() {
       var sel = $('state-select'), opt = sel.options[sel.selectedIndex];
-      var stateRate = parseFloat(opt.value), stateName = opt.getAttribute('data-name');
+      var stateName = opt.getAttribute('data-name'), stateRate = stateTaxRate(stateName);
 
       var weeks = +$('s-weeks').value, dpw = +$('s-dpw').value, hpd = +$('s-hpd').value;
       var gRate = +$('s-grate').value, pRate = +$('s-prate').value;
@@ -408,32 +403,18 @@
       var housing = +$('s-hous').value, life = +$('s-life').value;
       var trans = +$('s-trans').value, gear = +$('s-gear').value;
 
-      var totalDays = weeks * dpw;
-      var privDays  = Math.round(totalDays * pPct / 100);
-      var groupDays = totalDays - privDays;
-      var privHrs   = privDays * pLen;
-      var groupHrs  = groupDays * hpd;
-
-      var groupInc  = groupHrs * gRate;
-      var privInc   = privHrs * pRate;
-      var tipInc    = totalDays * tips;
-      var taxable   = groupInc + privInc;
-      var gross     = taxable + tipInc;
-
-      var fedTax    = federalTax(taxable);
-      var stateTax  = taxable * stateRate;
-      var fica      = taxable * 0.0765;
-      var totalTax  = fedTax + stateTax + fica;
-      var effRate   = taxable > 0 ? totalTax / taxable : 0;
-      var afterTax  = gross - totalTax;
-
-      var months    = weeks / 4.33;
-      var housingCost = housing * months;
-      var lifeCost  = life * months;
-      var totalExp  = housingCost + lifeCost + trans + gear;
-
-      var net       = afterTax - totalExp;
-      var weeklyNet = net / weeks;
+      var r = seasonIncome({
+        stateRate: stateRate, weeks: weeks, daysPerWeek: dpw, hoursPerDay: hpd,
+        groupRate: gRate, privateRate: pRate, privatePct: pPct, privateLengthHours: pLen, tipsPerDay: tips,
+        rentMonthly: housing, lifeMonthly: life, transport: trans, gear: gear
+      });
+      var totalDays = r.totalDays, privHrs = r.privateHours, groupHrs = r.groupHours;
+      var groupInc = r.groupIncome, privInc = r.privateIncome, tipInc = r.tipIncome;
+      var taxable = r.taxable, gross = r.gross;
+      var fedTax = r.federalTax, stateTax = r.stateTax, fica = r.fica, totalTax = r.totalTax;
+      var effRate = r.effectiveRate, afterTax = r.afterTax;
+      var months = r.months, housingCost = r.housingCost, lifeCost = r.lifeCost, totalExp = r.totalExpenses;
+      var net = r.net, weeklyNet = r.weeklyNet;
 
       // Net hero
       var netEl = $('m-net');
@@ -449,19 +430,18 @@
       $('m-exp').textContent      = fmt(totalExp);
 
       // Verdict
-      var ratio = gross > 0 ? net / gross : 0;
       var vEl = $('verdict');
       var vLabel = $('verdict-label'), vBody = $('verdict-body');
       vEl.className = 'verdict';
-      if (ratio > 0.35) {
+      if (r.verdict === 'strong') {
         vEl.classList.add('verdict-strong');
         vLabel.textContent = 'Strong season';
         vBody.textContent = 'You are keeping more than 35% of gross after taxes and expenses. Housing cost control is the primary driver of results like this.';
-      } else if (ratio > 0.1) {
+      } else if (r.verdict === 'workable') {
         vEl.classList.add('verdict-workable');
         vLabel.textContent = 'Workable season';
         vBody.textContent = 'You are covering costs and carrying something forward, but the margin is thin. Private lesson volume and housing are the two levers with the most impact.';
-      } else if (ratio > 0) {
+      } else if (r.verdict === 'tight') {
         vEl.classList.add('verdict-tight');
         vLabel.textContent = 'Tight season';
         vBody.textContent = 'Taxes and expenses are consuming almost everything you earn. One more private day per week or lower housing changes this picture significantly.';
@@ -507,7 +487,7 @@
       iRow('Federal income tax', '&minus;'+fmt(fedTax), 'c-tax');
       iRow(''+stateName+' state tax ('+(stateRate*100).toFixed(2).replace(/\.?0+$/,'')+'%)', '&minus;'+fmt(stateTax), 'c-tax');
       iRow('Social Security &amp; Medicare (7.65%)', '&minus;'+fmt(fica), 'c-tax');
-      iRow('What you keep after tax', fmt(taxable-totalTax), 'c-neu', 'divider');
+      iRow('What you keep after tax', fmt(r.afterTaxWages), 'c-neu', 'divider');
       iRow('Tips ('+totalDays+' days &times; $'+tips+') &mdash; cash, not taxed here', fmt(tipInc), 'c-pos');
       iRow('Total take-home', fmt(afterTax), 'c-pos', 'total-row');
 
@@ -529,14 +509,17 @@
       // State note
       var sn = $('state-note');
       if (stateRate === 0) {
-        sn.textContent = stateName+' has no state income tax. At this income level that saves approximately '+fmt(taxable*0.093)+' compared to California.';
+        sn.textContent = stateName+' has no state income tax. At this income level that saves approximately '+fmt(taxable*stateTaxRate('California'))+' compared to California.';
       } else if (stateName === 'California') {
-        sn.textContent = 'California has the highest rate among ski states. Working in Colorado instead would save approximately '+fmt(Math.max(0, stateTax - taxable*0.044))+' in state taxes.';
+        sn.textContent = 'California has the highest rate among ski states. Working in Colorado instead would save approximately '+fmt(Math.max(0, stateTax - taxable*stateTaxRate('Colorado')))+' in state taxes.';
       } else {
         sn.textContent = 'Your effective total tax rate is '+fmtPct(effRate)+'. Tips are modeled as untaxed in this calculator.';
       }
     }
 
+    // Inline oninput / onchange handlers in the markup call these.
+    window.sv = sv;
+    window.calc = calc;
     calc();
   </script>
 </body>

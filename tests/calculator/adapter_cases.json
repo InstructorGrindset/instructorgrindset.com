@@ -1,0 +1,10 @@
+{
+ "about": "Synthetic test inputs for lucrativeness_inputs (tests only, never real resort data). Keys are the Career Map lucrativeness inputs.",
+ "cases": [
+  {"id": "whole-numbers", "inputs": {"pay_hourly_mid_usd": 22, "hours_per_week": 35, "season_length_days": 126, "rent_monthly_usd": 600, "food_monthly_usd": 500, "transport_monthly_usd": 100, "season_months": 4, "pass_offset_usd": 0, "gear_offset_usd": 300, "state_rate": 0}},
+  {"id": "fractional", "inputs": {"pay_hourly_mid_usd": 23.75, "hours_per_week": 32.5, "season_length_days": 131, "rent_monthly_usd": 812.5, "food_monthly_usd": 537.25, "transport_monthly_usd": 100.1, "season_months": 4.5, "pass_offset_usd": 899.99, "gear_offset_usd": 450, "state_rate": 0.0465}},
+  {"id": "negative-savings", "inputs": {"pay_hourly_mid_usd": 16.5, "hours_per_week": 20, "season_length_days": 98, "rent_monthly_usd": 1650, "food_monthly_usd": 700, "transport_monthly_usd": 150, "season_months": 5, "pass_offset_usd": 0, "gear_offset_usd": 500, "state_rate": 0.093}},
+  {"id": "high-pay-top-bracket", "inputs": {"pay_hourly_mid_usd": 140, "hours_per_week": 40, "season_length_days": 182, "rent_monthly_usd": 2200.75, "food_monthly_usd": 900, "transport_monthly_usd": 0, "season_months": 6, "pass_offset_usd": 1200, "gear_offset_usd": 800, "state_rate": 0.066}},
+  {"id": "zero-season", "inputs": {"pay_hourly_mid_usd": 25, "hours_per_week": 30, "season_length_days": 0, "rent_monthly_usd": 500, "food_monthly_usd": 400, "transport_monthly_usd": 50, "season_months": 0, "pass_offset_usd": 0, "gear_offset_usd": 0, "state_rate": 0.044}}
+ ]
+}
