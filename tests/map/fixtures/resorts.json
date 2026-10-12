@@ -353,9 +353,14 @@
        "value": 650
       },
       {
-       "key": "rent_source",
-       "label": "Rent used",
-       "value": "site:alpha-staff-village"
+       "key": "rent_basis",
+       "label": "Rent basis",
+       "value": "employee_housing:alpha-staff-village"
+      },
+      {
+       "key": "rent_source_id",
+       "label": "Rent source",
+       "value": "fixture-resort-site"
       }
      ]
     },
@@ -1441,9 +1446,14 @@
        "value": 650
       },
       {
-       "key": "rent_source",
-       "label": "Rent used",
+       "key": "rent_basis",
+       "label": "Rent basis",
        "value": "fmr_studio"
+      },
+      {
+       "key": "rent_source_id",
+       "label": "Rent source",
+       "value": "fixture-model"
       }
      ]
     },

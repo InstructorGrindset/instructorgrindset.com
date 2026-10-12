@@ -279,6 +279,7 @@ export const HousingSite = z.object({
   lon: z.number().min(-180).max(180),
   location_source_id: z.string().nullish(),
   precision: z.enum(['building', 'neighborhood']),
+  address: sourced(z.string()),   // required by the pipeline for building precision
   rent_monthly: sourced(z.object({ low: numOrNull, high: numOrNull })),
   occupancy: z.enum(['shared', 'private', 'mixed']).nullish().transform((v) => v ?? null),
   deposit: sourced(z.number()),

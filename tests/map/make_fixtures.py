@@ -133,7 +133,8 @@ def lucr(low, mid, high, status="computed", rent_source=None):
     return {"low": low if status == "computed" else None, "mid": mid if status == "computed" else None,
             "high": high if status == "computed" else None, "status": status,
             "assumptions": [{"key": k, "label": l, "value": v} for k, l, v in vals]
-            + ([{"key": "rent_source", "label": "Rent used", "value": rent_source}] if rent_source else [])}
+            + ([{"key": "rent_basis", "label": "Rent basis", "value": rent_source[0]},
+                {"key": "rent_source_id", "label": "Rent source", "value": rent_source[1]}] if rent_source else [])}
 
 
 def career_data():
@@ -142,7 +143,7 @@ def career_data():
         "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
-                       "professionalism": prof(72), "lucrativeness": lucr(3200, 6100, 8900, rent_source="site:alpha-staff-village"),
+                       "professionalism": prof(72), "lucrativeness": lucr(3200, 6100, 8900, rent_source=("employee_housing:alpha-staff-village", "fixture-resort-site")),
                        "stale_fields": ["pay.level_1", "private_split", "professionalism.clinic_access"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(None, "weights_unset"), "lucrativeness": lucr(None, None, None, "assumptions_unset"),
@@ -153,7 +154,7 @@ def career_data():
         "foxtrot-basin": {"pay": pay_rows(22, ["level_1", "level_2", "level_3"]),
                           "private_rate": sourced({"low": 700, "high": 950, "unit": "full_day"}),
                           "private_split": sourced(40, "fixture-model", "estimated"),
-                          "professionalism": prof(85), "lucrativeness": lucr(4800, 7900, 10600, rent_source="fmr_studio"), "stale_fields": []},
+                          "professionalism": prof(85), "lucrativeness": lucr(4800, 7900, 10600, rent_source=("fmr_studio", "fixture-model")), "stale_fields": []},
         "hotel-lake": {"pay": pay_rows(23, ["level_1", "level_2"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(61), "lucrativeness": lucr(None, None, None, "insufficient_data"),
                        "stale_fields": []},
@@ -360,6 +361,7 @@ def detail_record(r):
     housing = [
         {"id": "alpha-staff-village", "resort_id": r["id"], "name": "Fixture Staff Village", "type": "resort_owned",
          "lat": round(lat - 0.01, 4), "lon": round(lon + 0.025, 4), "location_source_id": "fixture-location", "precision": "building",
+         "address": sourced("1 Fixture Way, Fixture Town"),
          "rent_monthly": sourced({"low": 550, "high": 700}), "occupancy": "shared", "deposit": sourced(300),
          "eligibility_note": "Synthetic note: full time staff only.", "confidence": "published", "verified_date": AS_OF,
          "commutes": [

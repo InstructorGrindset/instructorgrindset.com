@@ -106,6 +106,12 @@
    "lon": -106.345,
    "location_source_id": "fixture-location",
    "precision": "building",
+   "address": {
+    "value": "1 Fixture Way, Fixture Town",
+    "source_id": "fixture-resort-site",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
    "rent_monthly": {
     "value": {
      "low": 550,

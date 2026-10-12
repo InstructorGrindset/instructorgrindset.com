@@ -424,10 +424,16 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
         h('span', { class: 'fact-value' }, moneyRange(l.low, l.high)), badge('estimated')));
       body.push(h('span', { class: 'fact-meta' }, `Mid case ${money(l.mid)}. Low and high cases bracket the mid case.`));
     }
-    // rent_source says which rent fed the model: "site:<housing id>", "fmr_studio" or "acs_median".
-    const rentSource = l.assumptions.find((a) => a.key === 'rent_source' && a.value != null);
-    const listed = l.assumptions.filter((a) => a.key !== 'rent_source');
-    if (rentSource) body.push(h('p', { class: 'fact-meta rent-used', dataset: { source: String(rentSource.value) } }, rentUsedText(String(rentSource.value), currentDetail)));
+    // rent_basis says which rent fed the model: "employee_housing:<site id>" or a baseline key (fmr_studio, acs_median);
+    // rent_source_id is its source.
+    const basis = l.assumptions.find((a) => a.key === 'rent_basis' && a.value != null);
+    const basisSource = l.assumptions.find((a) => a.key === 'rent_source_id' && a.value != null);
+    const listed = l.assumptions.filter((a) => a.key !== 'rent_basis' && a.key !== 'rent_source_id');
+    if (basis) {
+      body.push(h('p', { class: 'fact-meta' },
+        h('span', { class: 'rent-used', dataset: { source: String(basis.value) } }, rentUsedText(String(basis.value), currentDetail)),
+        basisSource ? [' ', sourceLink(String(basisSource.value))] : null));
+    }
     if (listed.length) {
       body.push(h('p', { class: 'sub' }, 'Assumptions'),
         h('ul', { class: 'assumptions' }, listed.map((a) => h('li', null,
@@ -439,8 +445,10 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
 
   function rentUsedText(value, detail) {
     if (value === 'fmr_studio') return 'Rent used: HUD Fair Market Rent for a studio in the county.';
+    if (value === 'fmr_one_br') return 'Rent used: HUD Fair Market Rent for one bedroom in the county.';
     if (value === 'acs_median') return 'Rent used: Census ACS median gross rent in the county.';
-    const id = value.replace(/^site:/, '');
+    if (!value.startsWith('employee_housing:')) return `Rent used: ${humanize(value)}.`;
+    const id = value.slice('employee_housing:'.length);
     const site = detail && detail.housing.find((x) => x.id === id);
     return `Rent used: ${site ? site.name : humanize(id)}, the cheapest employee housing listed.`;
   }
@@ -508,6 +516,7 @@ export function createPanel(root, index, { onCompare, onDetail = () => {}, onSit
     return h('div', { class: 'site', id: `site-${site.id}` },
       btn,
       h('dl', { class: 'facts site-facts' },
+        site.address ? fact('Address', site.address, (v) => v) : null,
         fact('Rent', site.rent_monthly, (v) => `${moneyRange(v.low, v.high)} per month`),
         h('div', { class: 'fact' }, h('dt', null, 'Occupancy'),
           h('dd', null, site.occupancy ? OCCUPANCY[site.occupancy] : h('span', { class: 'not-verified' }, 'Not yet verified'))),

@@ -311,7 +311,10 @@ async function desktop(browser, base) {
   check(await page.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.not-verified', { hasText: 'Commute times are being calculated.' }).count() === 1, 'site without commutes shows empty state');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).innerText()).includes('Synthetic note: full time staff only.'), 'eligibility note renders');
   check(await page.locator('.housing .facts .fact', { hasText: 'HUD FMR' }).count() === 3 && await page.locator('.housing .fact', { hasText: 'ACS median gross rent' }).locator('.badge-estimated').count() === 1, 'rent baseline with badges');
-  check((await page.locator('.rent-used').innerText()) === 'Rent used: Fixture Staff Village, the cheapest employee housing listed.', 'lucrativeness says which rent was used');
+  check((await page.locator('.rent-used').innerText()) === 'Rent used: Fixture Staff Village, the cheapest employee housing listed.'
+    && await page.locator('.rent-used + a.src-link', { hasText: 'Synthetic fixture: resort facts' }).count() === 1, 'lucrativeness says which rent was used, with its source');
+  check(await page.locator('.assumptions li', { hasText: 'Rent basis' }).count() === 0, 'rent basis keys stay out of the assumption list');
+  check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).locator('.fact', { hasText: 'Address' }).innerText()).includes('1 Fixture Way, Fixture Town'), 'building site shows its sourced address');
   await page.locator('.site-select', { hasText: 'Fixture Town Lease' }).click();
   await page.waitForFunction(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['detail-commute-bus'] }).length > 0, null, { timeout: 5000 }).catch(() => {});
   c = await counts();
@@ -680,14 +683,25 @@ async function realData(browser, base) {
         check(await page.locator('.criteria .criterion').count() === appr.tier_a_criteria.length, 'real data: every criterion renders with a label');
         await shot(page, 'real-desktop-approved.png');
       } else log('  skip no approved Tier A stub in the real build yet');
-      const withDetail = all.find((r) => r.tier === 'A' && r.detail_available && pages.includes(`${r.state.toLowerCase()}/${r.cluster_id}/${r.id}/`));
+      const inPages = (r) => r.tier === 'A' && r.detail_available && pages.includes(`${r.state.toLowerCase()}/${r.cluster_id}/${r.id}/`);
+      const withDetail = all.find((r) => r.id === 'vail' && inPages(r)) || all.find((r) => r.id === 'arapahoe-basin' && inPages(r)) || all.find(inPages);
       if (withDetail) {
         await page.goto(`${base}/map/${withDetail.state.toLowerCase()}/${withDetail.cluster_id}/${withDetail.id}/`);
         await ready(page);
         await page.waitForFunction(() => document.querySelector('.housing') && !document.querySelector('.housing .loading'), null, { timeout: 15000 });
         await mapIdle(page);
         const n = await page.evaluate(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['detail-lifts'] }).length);
-        check(n > 0, `real data: lifts render for ${withDetail.name} (${n} rendered)`);
+        const file = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'detail', `${withDetail.id}.json`), 'utf8'));
+        const timing = await page.evaluate((id) => {
+          const e = performance.getEntriesByType('resource').find((x) => x.name.endsWith(`/detail/${id}.json`));
+          return e ? { ms: Math.round(e.duration), bytes: e.transferSize || e.encodedBodySize } : null;
+        }, withDetail.id);
+        check(n > 0, `real data: lifts render for ${withDetail.name} (${n} rendered of ${file.lifts.features.length} lifts)`);
+        log(`  real detail/${withDetail.id}.json: ${fs.statSync(path.join(REPO, 'data', 'build', 'detail', `${withDetail.id}.json`)).size} bytes on disk, fetch ${timing ? `${timing.ms} ms` : 'n/a'}`);
+        check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'real data: only layers with data get a toggle');
+        check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'real data: housing empty state');
+        const unnamed = file.lifts.features.findIndex((f) => !f.properties.name);
+        if (unnamed >= 0) log(`  real data: ${file.lifts.features.filter((f) => !f.properties.name).length} unnamed lifts render as "Unnamed lift"`);
         await shot(page, 'real-desktop-detail-lifts.png');
       } else log('  skip no Tier A resort with detail_available in the real build yet');
     }
