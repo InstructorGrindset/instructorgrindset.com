@@ -6,7 +6,7 @@ import pytest
 from pydantic import ValidationError
 
 from pipeline.career import (
-    add_months, build_career, cheapest_employee_rent, is_stale, lucrativeness, professionalism, select_pay,
+    add_months, build_career, is_stale, lucrativeness, professionalism, select_pay,
 )
 from pipeline.config import LucrativenessDefs, ProfessionalismDefs
 from pipeline.schemas import CareerBatch, CareerInputs, PayBatch, PayRecord, Resort
@@ -235,11 +235,15 @@ def test_lucrativeness_assumptions_unset_and_echo():
     keys = [a["key"] for a in out["assumptions"]]
     assert keys == ["cert_level", "hours_per_week", "season_months", "housing_choice", "food_monthly_usd",
                     "transport_monthly_usd", "pass_offset_usd", "gear_offset_usd", "range_spread_low",
-                    "range_spread_high", "pay_hourly_mid_usd", "season_length_days", "rent_monthly_usd"]
+                    "range_spread_high", "pay_hourly_mid_usd", "season_length_days", "rent_monthly_usd",
+                    "rent_basis", "rent_source_id"]
     by = {a["key"]: a for a in out["assumptions"]}
     assert by["food_monthly_usd"]["value"] is None and by["hours_per_week"]["value"] == 40
     assert by["pay_hourly_mid_usd"]["value"] == 22 and by["rent_monthly_usd"]["value"] == 800
     assert all(a["label"] and "-" not in a["label"] for a in out["assumptions"])
+    echoed = lucrativeness([L2_ROW], 140, 800, luc_defs(), "employee_housing:lodge", "src-b")["assumptions"]
+    assert {a["key"]: a["value"] for a in echoed}["rent_basis"] == "employee_housing:lodge"
+    assert {a["key"]: a["value"] for a in echoed}["rent_source_id"] == "src-b"
 
 
 def test_lucrativeness_insufficient_data():
@@ -252,16 +256,6 @@ def test_real_config_is_unset(cfg):
     out = lucrativeness([L2_ROW], 140, 800, cfg.definitions.lucrativeness)
     assert out["status"] == "assumptions_unset"
     assert professionalism(inputs(cert_pay_differential=1.0), cfg.definitions.professionalism)["status"] == "weights_unset"
-
-
-def test_cheapest_employee_rent():
-    class Site:
-        def __init__(self, resort_id, type, rent):
-            self.resort_id, self.type, self.rent_monthly_low = resort_id, type, rent
-    sites = [Site("r", "market", 500), Site("r", "resort_owned", 900), Site("r", "master_lease", 700),
-             Site("other", "resort_owned", 100), Site("r", "resort_owned", None)]
-    assert cheapest_employee_rent(sites, "r") == 700
-    assert cheapest_employee_rent(sites, "none") is None
 
 
 # ----------------------------------------------------------------- assembly

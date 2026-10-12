@@ -5,3 +5,5 @@ __pycache__/
 .venv/
 data/raw/climate/
 data/raw/openskimap/*.full.geojson
+data/raw/transit/*/gtfs.zip
+data/raw/routing/

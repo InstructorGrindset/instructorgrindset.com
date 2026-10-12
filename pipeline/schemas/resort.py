@@ -6,6 +6,7 @@ from typing import Literal, Optional
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 
 from .career import Career
+from .housing import HousingSummary
 from .common import (
     Latitude,
     Longitude,
@@ -132,6 +133,8 @@ class Resort(StrictModel):
     career: Optional[Career] = None
     editorial: Optional[Editorial] = None
     climate_available: bool = False
+    detail_available: bool = False
+    housing_summary: Optional[HousingSummary] = None
     sources: list[Slug] = Field(default_factory=list)
 
     @field_validator("location_source_id")

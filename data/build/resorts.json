@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-12T00:12:26Z",
+  "generated_at": "2026-10-12T00:39:19Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -74,6 +74,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -150,6 +152,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -226,6 +230,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -464,6 +470,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -471,6 +487,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-afton-cert-2026",
@@ -551,6 +569,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -789,6 +809,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -796,6 +826,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-alpine-valley-cert-2026",
@@ -876,6 +908,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -952,6 +986,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -1050,6 +1086,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-alta-ski-area"
       ]
@@ -1126,6 +1164,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -1359,6 +1399,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -1366,6 +1416,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-alyeska-instructor",
         "wikipedia-alyeska-resort"
@@ -1443,6 +1495,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -1519,6 +1573,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -1595,6 +1651,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -1671,6 +1729,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -1747,6 +1807,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -2022,6 +2084,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -2029,6 +2101,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-abasin-instructor-2627",
@@ -2107,6 +2181,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -2183,6 +2259,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -2259,6 +2337,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -2335,6 +2415,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -2563,6 +2645,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -2570,6 +2662,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-aspen-ski-instructor-2627",
         "wikipedia-aspen-highlands"
@@ -2804,6 +2898,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -2811,6 +2915,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-aspen-ski-instructor-2627",
         "wikipedia-aspen-mountain-ski-area",
@@ -3045,6 +3151,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -3052,6 +3168,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -3133,6 +3251,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3209,6 +3329,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3285,6 +3407,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3361,6 +3485,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3437,6 +3563,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3513,6 +3641,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3589,6 +3719,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3687,6 +3819,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "wikipedia-bear-mountain-ski-area"
@@ -3764,6 +3898,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3840,6 +3976,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3916,6 +4054,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -3992,6 +4132,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -4240,6 +4382,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -4247,6 +4399,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-beaver-creek-cert-2026",
@@ -4327,6 +4481,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -4403,6 +4559,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -4479,6 +4637,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -4555,6 +4715,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -4653,6 +4815,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-berkshire-east-ski-resort"
       ]
@@ -4729,6 +4893,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -4966,6 +5132,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -4973,6 +5149,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -5054,6 +5232,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5130,6 +5310,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5206,6 +5388,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5282,6 +5466,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5380,6 +5566,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-big-sky-resort"
       ]
@@ -5607,6 +5795,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -5614,6 +5812,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-east-big-snow-private-lessons",
@@ -5692,6 +5892,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5768,6 +5970,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5844,6 +6048,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5920,6 +6126,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -5990,6 +6198,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6082,6 +6292,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-black-mountain-of-maine"
@@ -6159,6 +6371,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6235,6 +6449,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6311,6 +6527,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6387,6 +6605,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6463,6 +6683,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6539,6 +6761,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6615,6 +6839,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6691,6 +6917,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6789,6 +7017,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-bogus-basin"
       ]
@@ -6865,6 +7095,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -6941,6 +7173,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -7163,6 +7397,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -7170,6 +7414,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -7250,6 +7496,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -7326,6 +7574,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -7402,6 +7652,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -7500,6 +7752,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-boyne-mountain-resort"
       ]
@@ -7722,6 +7976,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -7729,6 +7993,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -7809,6 +8075,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -7885,6 +8153,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -8118,6 +8388,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -8125,6 +8405,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-breckenridge-cert-2026",
@@ -8204,6 +8486,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -8280,6 +8564,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -8500,6 +8786,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -8507,6 +8803,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-bridger-bowl-ski-area"
       ]
@@ -8605,6 +8903,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-boyne-resorts",
         "wikipedia-brighton-ski-resort"
@@ -8682,6 +8982,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -8758,6 +9060,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -8834,6 +9138,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -8910,6 +9216,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -8986,6 +9294,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -9208,6 +9518,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -9215,6 +9535,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-east-buck-hill-ski-instructor",
@@ -9293,6 +9615,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -9369,6 +9693,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -9445,6 +9771,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -9543,6 +9871,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-burke-mountain-academy",
         "wikipedia-burke-mountain-ski-area"
@@ -9772,6 +10102,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -9779,6 +10119,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-aspen-ski-instructor-2627",
         "wikipedia-buttermilk-ski-area",
@@ -9857,6 +10199,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -9933,6 +10277,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10009,6 +10355,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10085,6 +10433,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10161,6 +10511,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10237,6 +10589,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10313,6 +10667,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10389,6 +10745,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10465,6 +10823,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10563,6 +10923,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-cannon-mountain-ski-area"
       ]
@@ -10639,6 +11001,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10715,6 +11079,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10791,6 +11157,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10867,6 +11235,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -10943,6 +11313,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11019,6 +11391,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11095,6 +11469,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11171,6 +11547,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11247,6 +11625,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11323,6 +11703,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11399,6 +11781,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11475,6 +11859,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11551,6 +11937,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11627,6 +12015,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11703,6 +12093,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11773,6 +12165,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11849,6 +12243,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -11925,6 +12321,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12001,6 +12399,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12077,6 +12477,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12153,6 +12555,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12229,6 +12633,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12462,6 +12868,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -12469,6 +12885,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-west-copper-certified-adult-2627",
@@ -12548,6 +12966,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12624,6 +13044,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12700,6 +13122,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12776,6 +13200,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12852,6 +13278,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -12950,6 +13378,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-cranmore-mountain-resort"
@@ -13027,6 +13457,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -13103,6 +13535,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -13346,6 +13780,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -13353,6 +13797,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-crested-butte-cert-2026",
@@ -13590,6 +14036,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -13597,6 +14053,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -13835,6 +14293,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -13842,6 +14310,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-crystal-instructor-pt-2627",
@@ -13920,6 +14390,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -13996,6 +14468,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14072,6 +14546,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14148,6 +14624,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14224,6 +14702,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14492,6 +14972,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -14499,6 +14989,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-deervalley-dol-level3-2627",
@@ -14580,6 +15072,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14656,6 +15150,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14732,6 +15228,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14808,6 +15306,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14884,6 +15384,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -14960,6 +15462,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15052,6 +15556,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-dollar-mountain",
         "wikipedia-sun-valley-idaho"
@@ -15129,6 +15635,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15205,6 +15713,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15281,6 +15791,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15357,6 +15869,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15433,6 +15947,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15509,6 +16025,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15585,6 +16103,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15661,6 +16181,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15737,6 +16259,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15813,6 +16337,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15889,6 +16415,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -15965,6 +16493,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16041,6 +16571,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16117,6 +16649,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16193,6 +16727,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16269,6 +16805,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16345,6 +16883,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16421,6 +16961,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16497,6 +17039,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16573,6 +17117,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16649,6 +17195,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16725,6 +17273,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16801,6 +17351,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -16893,6 +17445,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -16971,6 +17525,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17047,6 +17603,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17123,6 +17681,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17199,6 +17759,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17275,6 +17837,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17351,6 +17915,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17421,6 +17987,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17497,6 +18065,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17589,6 +18159,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-gunstock-mountain-resort"
       ]
@@ -17665,6 +18237,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17741,6 +18315,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17817,6 +18393,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -17893,6 +18471,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -18121,6 +18701,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -18128,6 +18718,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-heavenly-cert-2026",
@@ -18207,6 +18799,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -18429,6 +19023,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -18436,6 +19040,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-east-hermitage-instructor",
@@ -18514,6 +19120,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -18590,6 +19198,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -18666,6 +19276,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -18742,6 +19354,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -18970,6 +19584,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -18977,6 +19601,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -19209,6 +19835,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -19216,6 +19852,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-hidden-valley-pa-cert-2026",
@@ -19295,6 +19933,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19371,6 +20011,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19447,6 +20089,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19523,6 +20167,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19599,6 +20245,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19675,6 +20323,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19751,6 +20401,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19827,6 +20479,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -19903,6 +20557,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -20006,6 +20662,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-howelsen-hill-ski-area",
         "wikipedia-steamboat-springs-winter-sports-club"
@@ -20083,6 +20741,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -20159,6 +20819,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -20402,6 +21064,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -20409,6 +21081,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-hunter-cert-2026",
@@ -20489,6 +21163,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -20581,6 +21257,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-hyland-hills-ski-area"
       ]
@@ -20813,6 +21491,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -20820,6 +21508,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-jack-frost-cert-2026",
@@ -20900,6 +21590,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -21132,6 +21824,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -21139,6 +21841,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-jh-private-lessons",
         "wikipedia-jackson-hole-mountain-resort",
@@ -21369,6 +22073,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -21376,6 +22090,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-east-jay-peak-new-instructor",
         "wikipedia-jay-peak-resort"
@@ -21453,6 +22169,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -21711,6 +22429,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -21718,6 +22446,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-june-ski-certified-2627",
@@ -21797,6 +22527,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -21873,6 +22605,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -21949,6 +22683,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -22025,6 +22761,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -22101,6 +22839,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -22177,6 +22917,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -22415,6 +23157,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -22422,6 +23174,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-keystone-cert-2026",
@@ -22529,6 +23283,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-killington-ski-resort"
       ]
@@ -22605,6 +23361,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -22708,6 +23466,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -22787,6 +23547,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -22863,6 +23625,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -22939,6 +23703,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -23017,6 +23783,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "wikipedia-lake-placid-olympic-ski-jumping-complex",
         "wikipedia-us-olympic-paralympic-training-centers"
@@ -23094,6 +23862,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -23322,6 +24092,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -23329,6 +24109,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -23409,6 +24191,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -23485,6 +24269,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -23561,6 +24347,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -23799,6 +24587,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -23806,6 +24604,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-liberty-cert-2026",
@@ -23886,6 +24686,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -23962,6 +24764,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24038,6 +24842,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24114,6 +24920,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24190,6 +24998,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24266,6 +25076,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24342,6 +25154,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24418,6 +25232,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24494,6 +25310,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24570,6 +25388,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24646,6 +25466,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24722,6 +25544,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -24798,6 +25622,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -25024,6 +25850,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -25031,6 +25867,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-east-mrg-adult-ski-school",
         "wikipedia-mad-river-glen"
@@ -25130,6 +25968,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -25354,6 +26194,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -25361,6 +26211,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-east-magic-lessons",
         "wikipedia-magic-mountain-ski-area"
@@ -25438,6 +26290,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -25701,6 +26555,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -25708,6 +26572,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-mammoth-ski-certified-2627",
@@ -25787,6 +26653,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -25863,6 +26731,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -25939,6 +26809,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26015,6 +26887,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26091,6 +26965,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26167,6 +27043,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26243,6 +27121,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26319,6 +27199,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26547,6 +27429,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -26554,6 +27446,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-east-middlebury-snow-school-s01439",
         "wikipedia-middlebury-college-snow-bowl"
@@ -26631,6 +27525,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26707,6 +27603,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26783,6 +27681,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26859,6 +27759,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -26935,6 +27837,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27011,6 +27915,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27087,6 +27993,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27179,6 +28087,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-montana-snowbowl"
@@ -27250,6 +28160,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27326,6 +28238,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27402,6 +28316,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27494,6 +28410,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-mount-bohemia"
@@ -27593,6 +28511,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
@@ -27671,6 +28591,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27747,6 +28669,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27823,6 +28747,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27899,6 +28825,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -27975,6 +28903,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28051,6 +28981,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28127,6 +29059,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28203,6 +29137,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28279,6 +29215,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28355,6 +29293,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28431,6 +29371,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28507,6 +29449,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -28755,6 +29699,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -28762,6 +29716,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -28843,6 +29799,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -29081,6 +30039,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -29088,6 +30056,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-sunapee-cert-2026",
@@ -29162,6 +30132,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -29238,6 +30210,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -29314,6 +30288,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -29390,6 +30366,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -29466,6 +30444,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -29694,6 +30674,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -29701,6 +30691,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-west-mtbachelor-instructors-2627",
@@ -29931,6 +30923,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -29938,6 +30940,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-mtbaker-new-instructor-2627",
         "wikipedia-mt-baker-legendary-banked-slalom",
@@ -30016,6 +31020,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30092,6 +31098,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30168,6 +31176,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30244,6 +31254,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30336,6 +31348,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "wikipedia-mount-hood-meadows"
@@ -30413,6 +31427,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30489,6 +31505,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30565,6 +31583,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30641,6 +31661,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30717,6 +31739,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30793,6 +31817,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30869,6 +31895,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -30945,6 +31973,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31021,6 +32051,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31097,6 +32129,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31173,6 +32207,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31249,6 +32285,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31325,6 +32363,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31401,6 +32441,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31644,6 +32686,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -31651,6 +32703,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -31732,6 +32786,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31808,6 +32864,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31884,6 +32942,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -31960,6 +33020,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -32036,6 +33098,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -32112,6 +33176,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -32350,6 +33416,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -32357,6 +33433,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-okemo-cert-2026",
@@ -32437,6 +33515,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -32513,6 +33593,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -32589,6 +33671,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -32837,6 +33921,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -32844,6 +33938,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-palisades-dol-level3-2627",
@@ -32945,6 +34041,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "wikipedia-alpine-meadows-ski-resort"
@@ -33168,6 +34266,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -33175,6 +34283,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -33427,6 +34537,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -33434,6 +34554,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-park-city-cert-2026",
@@ -33514,6 +34636,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -33590,6 +34714,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -33666,6 +34792,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -33742,6 +34870,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -33818,6 +34948,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -33894,6 +35026,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -33992,6 +35126,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-killington-ski-resort",
         "wikipedia-pico-mountain"
@@ -34069,6 +35205,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34145,6 +35283,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34221,6 +35361,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34297,6 +35439,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34373,6 +35517,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34449,6 +35595,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34525,6 +35673,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34601,6 +35751,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34677,6 +35829,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34753,6 +35907,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34829,6 +35985,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34899,6 +36057,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -34997,6 +36157,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-powder-mountain"
       ]
@@ -35073,6 +36235,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35149,6 +36313,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35225,6 +36391,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35301,6 +36469,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35377,6 +36547,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35453,6 +36625,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35529,6 +36703,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35605,6 +36781,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35681,6 +36859,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35757,6 +36937,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35833,6 +37015,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35909,6 +37093,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -35985,6 +37171,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36061,6 +37249,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36137,6 +37327,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36213,6 +37405,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36311,6 +37505,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -36390,6 +37586,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36466,6 +37664,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36542,6 +37742,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36612,6 +37814,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36688,6 +37892,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36764,6 +37970,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -36862,6 +38070,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-saskadena-six"
       ]
@@ -36938,6 +38148,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -37014,6 +38226,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -37090,6 +38304,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -37328,6 +38544,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -37335,6 +38561,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-schweitzer-childrens-center-2627",
@@ -37414,6 +38642,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -37490,6 +38720,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -37728,6 +38960,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -37735,6 +38977,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-seven-springs-cert-2026",
@@ -37815,6 +39059,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -37891,6 +39137,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -37967,6 +39215,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38043,6 +39293,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38119,6 +39371,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38211,6 +39465,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-silverton-mountain"
@@ -38288,6 +39544,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38364,6 +39622,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38440,6 +39700,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38516,6 +39778,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38592,6 +39856,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38668,6 +39934,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38744,6 +40012,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38820,6 +40090,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38896,6 +40168,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -38994,6 +40268,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-ski-cooper"
       ]
@@ -39070,6 +40346,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39146,6 +40424,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39222,6 +40502,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39298,6 +40580,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39374,6 +40658,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39450,6 +40736,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39526,6 +40814,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39602,6 +40892,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39678,6 +40970,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39754,6 +41048,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39830,6 +41126,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39906,6 +41204,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -39982,6 +41282,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -40058,6 +41360,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -40156,6 +41460,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -40235,6 +41541,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -40311,6 +41619,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -40387,6 +41697,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -40463,6 +41775,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -40561,6 +41875,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "wikipedia-snow-summit"
@@ -40638,6 +41954,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -40866,6 +42184,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -40873,6 +42201,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-snowvalley-apprentice-2627",
@@ -40973,6 +42303,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-snowbasin"
       ]
@@ -41192,6 +42524,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -41199,6 +42541,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-powdr",
         "wikipedia-snowbird-utah"
@@ -41276,6 +42620,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -41352,6 +42698,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -41580,6 +42928,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -41587,6 +42945,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-aspen-ski-instructor-2627",
         "wikipedia-snowmass-ski-area",
@@ -41817,6 +43177,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -41824,6 +43194,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-snowshoe-instructor-2627",
@@ -41902,6 +43274,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -41978,6 +43352,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -42054,6 +43430,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -42152,6 +43530,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "wikipedia-solitude-mountain-resort"
@@ -42229,6 +43609,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -42305,6 +43687,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -42381,6 +43765,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -42457,6 +43843,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -42527,6 +43915,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -42760,6 +44150,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -42767,6 +44167,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-steamboat-ski-instructor-2627",
@@ -42846,6 +44248,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -43074,6 +44478,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -43081,6 +44495,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-stevens-pass-cert-2026",
@@ -43160,6 +44576,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -43408,6 +44826,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -43415,6 +44843,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-stowe-cert-2026",
@@ -43657,6 +45087,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -43664,6 +45104,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-stratton-ski-instructor-2627",
@@ -43910,6 +45352,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -43917,6 +45369,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-west-sugarbowl-dol-l2-2627",
@@ -43996,6 +45450,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -44224,6 +45680,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -44231,6 +45697,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-sugarbush-new-instructor-2627",
@@ -44461,6 +45929,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -44468,6 +45946,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-east-sugarloaf-instructor-24652",
         "wikipedia-carrabassett-valley-academy",
@@ -44540,6 +46020,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -44616,6 +46098,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -44686,6 +46170,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -44762,6 +46248,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45002,6 +46490,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -45009,6 +46507,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-sunvalley-dol-l3-2627",
         "wikipedia-bald-mountain-idaho",
@@ -45087,6 +46587,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45163,6 +46665,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45393,6 +46897,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -45400,6 +46914,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-east-sunday-river-instructor-24529",
@@ -45479,6 +46995,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45555,6 +47073,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45631,6 +47151,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45707,6 +47229,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45783,6 +47307,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45859,6 +47385,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -45935,6 +47463,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46038,6 +47568,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-ernie-blake",
         "wikipedia-taos-ski-valley"
@@ -46267,6 +47799,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -46274,6 +47816,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-telluride-dol-l3-2627",
         "wikipedia-telluride-ski-resort"
@@ -46351,6 +47895,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46427,6 +47973,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46503,6 +48051,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46579,6 +48129,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46677,6 +48229,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-the-highlands-at-harbor-springs"
@@ -46754,6 +48308,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46830,6 +48386,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46906,6 +48464,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -46982,6 +48542,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47052,6 +48614,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47128,6 +48692,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47204,6 +48770,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47280,6 +48848,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47350,6 +48920,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47426,6 +48998,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47654,6 +49228,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -47661,6 +49245,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "pay-west-timberline-instructors-2627",
         "wikipedia-magic-mile",
@@ -47739,6 +49325,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47823,6 +49411,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "wikipedia-palmer-glacier",
         "wikipedia-timberline-lodge-ski-area"
@@ -47900,6 +49490,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -47976,6 +49568,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48052,6 +49646,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48128,6 +49724,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48204,6 +49802,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48280,6 +49880,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48356,6 +49958,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48432,6 +50036,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48502,6 +50108,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48578,6 +50186,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -48651,6 +50261,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "wikipedia-park-city-utah",
         "wikipedia-united-states-ski-team",
@@ -48755,6 +50367,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-aerials-water-ramps",
@@ -48865,6 +50479,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -48944,6 +50560,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49020,6 +50638,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49096,6 +50716,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49172,6 +50794,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49248,6 +50872,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49324,6 +50950,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49400,6 +51028,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49476,6 +51106,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49579,6 +51211,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "wikipedia-waterville-valley-resort"
       ]
@@ -49655,6 +51289,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49731,6 +51367,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49807,6 +51445,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49883,6 +51523,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -49959,6 +51601,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -50035,6 +51679,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -50283,6 +51929,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -50290,6 +51946,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-east-whiteface-employment",
@@ -50391,6 +52049,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-whitefish-mountain-resort"
@@ -50630,6 +52290,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -50637,6 +52307,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
@@ -50718,6 +52390,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -50961,6 +52635,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -50968,6 +52652,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-wildcat-cert-2026",
@@ -51048,6 +52734,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -51124,6 +52812,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -51362,6 +53052,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -51369,6 +53069,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-vail-wilmot-cert-2026",
@@ -51449,6 +53151,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -51682,6 +53386,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -51689,6 +53403,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "owner-decisions-2026-10-11",
         "pay-alterra-winterpark-instructor-2627",
@@ -51767,6 +53483,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -51843,6 +53561,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -51919,6 +53639,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -51995,6 +53717,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -52071,6 +53795,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -52147,6 +53873,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -52215,6 +53943,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "wikipedia-copper-mountain-colorado",
         "wikipedia-powdr"
@@ -52308,6 +54038,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "wikipedia-powdr"
@@ -52507,6 +54239,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -52514,6 +54256,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "pay-east-woodward-tahoe-instructor-jr6759",
         "wikipedia-boreal-mountain-resort"
@@ -52585,6 +54329,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -52661,6 +54407,8 @@
       "career": null,
       "editorial": null,
       "climate_available": false,
+      "detail_available": false,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas"
       ]
@@ -52889,6 +54637,16 @@
               "key": "rent_monthly_usd",
               "value": null,
               "label": "Rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
             }
           ]
         },
@@ -52896,6 +54654,8 @@
       },
       "editorial": null,
       "climate_available": false,
+      "detail_available": true,
+      "housing_summary": null,
       "sources": [
         "openskimap-ski-areas",
         "pay-west-yc-certified-2627",

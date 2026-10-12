@@ -25,11 +25,16 @@ if __package__ in (None, ""):  # executed as a script: python pipeline/build.py
 from pydantic import ValidationError  # noqa: E402
 
 from pipeline import openskimap  # noqa: E402
-from pipeline.career import CareerData, build_career, cheapest_employee_rent, load_career_data  # noqa: E402
+from pipeline import lifts as lifts_mod  # noqa: E402
+from pipeline import rent as rent_mod  # noqa: E402
+from pipeline.career import CareerData, build_career, load_career_data  # noqa: E402
+from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
+from pipeline.routing import RoutingClient  # noqa: E402
+from pipeline.transit import load_extracts as load_transit  # noqa: E402
 from pipeline.clusters import ClusterAssignmentError, ClusterInfo, Member, assign_clusters, build_clusters  # noqa: E402
 from pipeline.config import Config, load_config  # noqa: E402
 from pipeline.names import slugify  # noqa: E402
-from pipeline.schemas import Cluster, Resort, Source, State  # noqa: E402
+from pipeline.schemas import Cluster, DetailFile, Resort, Source, State  # noqa: E402
 from pipeline.schemas.raw import TierABatch, TierARecord  # noqa: E402
 from pipeline.sources import SourceRegistry  # noqa: E402
 from pipeline.states import STATE_NAMES, build_states, build_us_states_geojson  # noqa: E402
@@ -281,17 +286,35 @@ def build(
             if unknown:
                 errors.append(f"resort '{d['id']}': {block}.{key} tags {unknown} are not in config career.vocab.{vk}")
 
+    housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
+    errors += housing_errors
+
     if errors:
         raise BuildError(errors)
+
+    p5 = _prepare_phase5(raw_dir, cfg, registry, match, records, warnings, rel, fetch=fetch)
 
     climate_dir = out_dir / "climate"
     ctx = registry.context()
     today = build_date()
+    header = {"version": OUTPUT_VERSION, "generated_at": generated_at()}
+    details: dict[str, dict] = {}
     resorts: list[Resort] = []
     for d in drafts:
         d["cluster_id"] = assignment[d["id"]]
         d["climate_available"] = (climate_dir / f"{d['id']}.json").is_file()
-        _attach_career(d, career_data, cfg, today, warnings)
+        sites = housing.get(d["id"], [])
+        baseline = p5.baselines.get(d["id"])
+        rent = rent_input(sites, baseline, cfg.definitions.rent.lucrativeness_rent, cfg.definitions.rent.baseline_preference)
+        _attach_career(d, career_data, cfg, today, warnings, rent)
+        d["detail_available"], d["housing_summary"] = False, None
+        if d["tier"] == "A":
+            lift_fc = lifts_mod.lifts_for(p5.lift_features, p5.area_ids.get(d["id"], []))
+            if lift_fc["features"] or sites:
+                details[d["id"]] = assemble_detail(d, sites, lift_fc, baseline, p5.transit, p5.router,
+                                                   cfg.definitions, header)
+                d["detail_available"] = True
+                d["housing_summary"] = housing_summary(sites, details[d["id"]]["transit"] is not None)
         d["sources"] = sorted(_refs(d))
         try:
             resorts.append(Resort.model_validate(d, context=ctx))
@@ -319,12 +342,21 @@ def build(
         warnings.append(f"{len(empty)} configured clusters have no member resorts yet and are not emitted: {', '.join(empty)}")
 
     states = [State.model_validate(s) for s in build_states((r.id, r.state, r.cluster_id) for r in resorts)]
+    if p5.router is not None and p5.router.source() is not None:
+        registry.add(p5.router.source(), "data/raw/routing")
+    elif details and any(dd["housing"] for dd in details.values()):
+        warnings.append("no routing cache: drive commutes and isochrones are empty; run `python -m pipeline.routing run`")
+    detail_ctx = registry.context()
+    for rid, dd in details.items():
+        try:
+            DetailFile.model_validate(dd, context=detail_ctx)
+        except ValidationError as e:
+            for m in e.errors():
+                errors.append(f"detail '{rid}': {'.'.join(map(str, m['loc']))}: {m['msg']}")
     if errors:
         raise BuildError(errors)
 
     # ------------------------------------------------------------- write
-    stamp = generated_at()
-    header = {"version": OUTPUT_VERSION, "generated_at": stamp}
     resort_dicts = [r.model_dump(mode="json") for r in resorts]
     _write_json(out_dir / "resorts.json", {**header, "resorts": resort_dicts})
     display = cfg.definitions.display
@@ -362,6 +394,13 @@ def build(
         } for c in clusters],
     }, compact=True)
     _write_json(out_dir / "definitions.json", {**header, **display_definitions(cfg)})
+    detail_dir = out_dir / "detail"
+    for rid, dd in details.items():
+        _write_json(detail_dir / f"{rid}.json", dd, compact=True)
+    if detail_dir.is_dir():
+        for old_file in detail_dir.glob("*.json"):
+            if old_file.stem not in details:
+                old_file.unlink()
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
 
@@ -402,7 +441,8 @@ def annual_snowfall_in(path: Path) -> Optional[float]:
     return round(sum(vals), 1) if vals else None
 
 
-def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warnings: list[str]) -> None:
+def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warnings: list[str],
+                   rent: tuple[Optional[float], Optional[str], Optional[str]] = (None, None, None)) -> None:
     """Set d["career"] and merge career tags into clients and fit."""
     inputs = data.inputs.get(d["id"])
     if inputs is not None:
@@ -415,11 +455,69 @@ def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warni
             merged += [t for t in tags if t not in merged]
             block[key] = merged
     season_len = ((d.get("season") or {}).get("length_days") or {}).get("value")
-    # Rent: cheapest employee housing (Phase 5) or the HUD / ACS baseline; neither exists yet.
-    rent = cheapest_employee_rent([], d["id"])
-    career, w = build_career(data.pay.get(d["id"], []), inputs, season_len, rent, cfg.definitions, today)
+    # rent = (monthly USD, basis, source_id): cheapest employee housing, else the baseline (config rent)
+    career, w = build_career(data.pay.get(d["id"], []), inputs, season_len, rent[0], cfg.definitions, today,
+                             rent[1], rent[2])
     warnings.extend(w)
     d["career"] = career
+
+
+@dataclass
+class Phase5:
+    lift_features: list = field(default_factory=list)
+    area_ids: dict = field(default_factory=dict)
+    baselines: dict = field(default_factory=dict)
+    transit: list = field(default_factory=list)
+    router: Optional[RoutingClient] = None
+
+
+def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match, records, warnings: list[str],
+                    rel=str, fetch: bool = False) -> Phase5:
+    """Lifts, rent baselines, transit extracts and the cached router. Each skips cleanly without input."""
+    p5 = Phase5()
+    p5.area_ids = {rid: sorted(a.osm_id for a in areas) for rid, areas in match.by_tier_a.items() if areas}
+    osm_dir = raw_dir / "openskimap"
+    full, extract = osm_dir / lifts_mod.FULL_NAME, osm_dir / lifts_mod.EXTRACT_NAME
+    if fetch:
+        try:
+            print(f"fetching {lifts_mod.URL} ...")
+            lifts_mod.fetch(full)
+        except Exception as e:  # noqa: BLE001 - keep building with what is cached
+            warnings.append(f"OpenSkiMap lifts download failed ({type(e).__name__}: {e})")
+    n = lifts_mod.refresh_extract(full, extract, [i for ids in p5.area_ids.values() for i in ids])
+    if n is not None:
+        print(f"filtered {rel(full)} -> {rel(extract)}: {n} lifts at Tier A resorts")
+    fetched, p5.lift_features = lifts_mod.load_extract(extract)
+    if fetched and p5.lift_features:
+        registry.add(lifts_mod.source(fetched), rel(extract))
+    elif not extract.exists():
+        warnings.append(f"no lifts extract at {rel(extract)}; run `python pipeline/build.py --fetch` to add lifts")
+
+    rent_dir = raw_dir / "rent"
+    if rent_dir.is_dir() and any(p.suffix in (".json", ".csv") for p in rent_dir.rglob("*") if p.is_file()):
+        counties = rent_mod.load_counties(raw_dir / "geo" / "us-counties.geojson")
+        rd = cfg.definitions.rent
+        for _, rec in records:
+            county = rent_mod.county_for(rec.lat, rec.lon, counties)
+            if county is None:
+                continue
+            baseline, sources = rent_mod.baseline_for(county, rent_dir, rd.acs_year, rd.acs_dataset)
+            if baseline:
+                for src in sources:
+                    registry.add(src, rel(rent_dir))
+                p5.baselines[rec.id] = baseline
+    else:
+        warnings.append(f"no rent baseline cache in {rel(rent_dir)}; run `python -m pipeline.rent fetch` (HUD needs HUD_API_TOKEN)")
+
+    p5.transit = load_transit(raw_dir / "transit")
+    for ex in p5.transit:
+        registry.add(Source.model_validate(ex["source"]), rel(raw_dir / "transit"))
+    if not p5.transit:
+        warnings.append(f"no transit extracts in {rel(raw_dir / 'transit')}; see data/raw/transit/README.md")
+
+    cache = raw_dir / "routing"
+    p5.router = RoutingClient(cfg.definitions.routing, cache_dir=cache, offline=True)
+    return p5
 
 
 def _refs(d: dict) -> set[str]:

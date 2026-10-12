@@ -14,6 +14,9 @@ from .career import (
     LucrativenessOut, PayBatch, PayRecord, PayRow, Professionalism, ProfessionalismInputs,
 )
 from .geo import Cluster, Geometry, State
+from .housing import (
+    DetailFile, HousingBatch, HousingOut, HousingSummary, Isochrone, RentBaseline, SourcedRent, TransitExtract,
+)
 from .raw import OwnershipEntry, OwnershipFile, SourcesFile, TierABatch, TierARecord
 from .records import Commute, HousingSite, Report
 from .resort import (
@@ -40,7 +43,8 @@ __all__ = [
     "Approval", "Career", "Clients", "Elevation", "SourcesFile", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
     "Fit", "Geometry", "HousingSite", "LucrativenessOut", "CareerInputs", "CareerBatch", "PayBatch",
     "PayRow", "Professionalism", "ProfessionalismInputs", "BreakdownItem", "Assumption", "CERT_LEVELS",
-    "PROFESSIONALISM_COMPONENTS", "OwnershipEntry", "OwnershipFile",
+    "PROFESSIONALISM_COMPONENTS", "DetailFile", "HousingBatch", "HousingOut", "HousingSummary", "Isochrone",
+    "RentBaseline", "SourcedRent", "TransitExtract", "OwnershipEntry", "OwnershipFile",
     "PayRecord", "Report", "Resort", "Season", "Size", "Source", "Sourced", "SourcedMonthDay",
     "SourcedNumber", "SourcedString", "State", "StrictModel", "Terrain", "TierABatch",
     "TierACriterion", "TierARecord", "check_source_ref", "referenced_source_ids",

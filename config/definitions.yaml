@@ -104,6 +104,35 @@ lucrativeness:
     low: null
     high: null
 
+rent:
+  # Order of baseline values used for a housing site with no published rent (shown as
+  # confidence estimated with the baseline source): fmr_studio, fmr_one_br, fmr_two_br, acs_median.
+  baseline_preference: [fmr_studio, acs_median]
+  # Rent input for lucrativeness: cheapest employee housing (resort_owned or master_lease), else the baseline.
+  lucrativeness_rent: [employee_housing, baseline]
+  # Data vintages fetched by `python -m pipeline.rent fetch`. hud_fmr_year null means HUD's latest.
+  hud_fmr_year: null
+  acs_year: 2024
+  acs_dataset: acs/acs5
+
+transit:
+  # Stops within this distance of a housing site or the base area are kept in the transit extract.
+  search_radius_km: 2
+  # Bus commute = walk to stop + scheduled ride + walk from stop, with no waiting time.
+  # Alexandre sets these; bus commutes stay null until then.
+  walk_speed_kmh: null
+  max_walk_km: null
+
+routing:
+  # Drive time, distance and route geometry (housing to base area) and drive isochrones around the base.
+  # provider: valhalla | osrm | ors. OSRM has no isochrones. api_key_env names the environment variable
+  # holding a key (ORS needs one; the public Valhalla and OSRM servers do not).
+  provider: valhalla
+  base_url: https://valhalla1.openstreetmap.de
+  api_key_env: null
+  isochrone_minutes: [15, 30, 45]
+  timeout_s: 30
+
 career:
   # Tag vocabularies for data/raw/career and data/raw/tier_a. Unknown tags fail the build.
   vocab:

@@ -39,8 +39,9 @@ ASSUMPTION_LABELS: dict[str, str] = {
     "pay_hourly_mid_usd": "Hourly pay used, midpoint (USD)",
     "season_length_days": "Season length (days)",
     "rent_monthly_usd": "Rent per month (USD)",
+    "rent_basis": "Rent basis",
+    "rent_source_id": "Rent source",
 }
-EMPLOYEE_HOUSING_TYPES = ("resort_owned", "master_lease")
 
 
 # ----------------------------------------------------------------- staleness
@@ -135,20 +136,13 @@ def professionalism(inputs: Optional[CareerInputs], defs: ProfessionalismDefs) -
 
 
 # -------------------------------------------------------------- lucrativeness
-def cheapest_employee_rent(sites: Iterable[Any], resort_id: str) -> Optional[float]:
-    """Lowest monthly rent among a resort's employee housing (resort owned or master lease)."""
-    rents = [
-        s.rent_monthly_low for s in sites
-        if s.resort_id == resort_id and s.type in EMPLOYEE_HOUSING_TYPES and s.rent_monthly_low is not None
-    ]
-    return min(rents) if rents else None
-
-
 def lucrativeness(
     pay_rows: Sequence[dict],
     season_length_days: Optional[float],
     rent_monthly: Optional[float],
     defs: LucrativenessDefs,
+    rent_basis: Optional[str] = None,
+    rent_source_id: Optional[str] = None,
 ) -> dict:
     """Season savings low / mid / high in USD, with every assumption echoed.
 
@@ -167,6 +161,9 @@ def lucrativeness(
         {"key": "pay_hourly_mid_usd", "value": pay_mid, "label": ASSUMPTION_LABELS["pay_hourly_mid_usd"]},
         {"key": "season_length_days", "value": season_length_days, "label": ASSUMPTION_LABELS["season_length_days"]},
         {"key": "rent_monthly_usd", "value": rent_monthly, "label": ASSUMPTION_LABELS["rent_monthly_usd"]},
+        # which rent was used: "employee_housing:<site id>" or a baseline key such as fmr_studio
+        {"key": "rent_basis", "value": rent_basis, "label": ASSUMPTION_LABELS["rent_basis"]},
+        {"key": "rent_source_id", "value": rent_source_id, "label": ASSUMPTION_LABELS["rent_source_id"]},
     ]
     empty = {"low": None, "mid": None, "high": None}
     if any(v is None for v in a.model_dump().values()) or spread.low is None or spread.high is None:
@@ -191,6 +188,8 @@ def build_career(
     rent_monthly: Optional[float],
     defs: Definitions,
     today: dt.date,
+    rent_basis: Optional[str] = None,
+    rent_source_id: Optional[str] = None,
 ) -> tuple[Optional[dict], list[str]]:
     """Resort.career, or None when the resort has no pay records and no career inputs."""
     if not pay_records and inputs is None:
@@ -212,7 +211,8 @@ def build_career(
         "private_rate": inputs.private_rate.model_dump(mode="json") if inputs and inputs.private_rate else None,
         "private_split": inputs.private_split.model_dump(mode="json") if inputs and inputs.private_split else None,
         "professionalism": professionalism(inputs, defs.professionalism),
-        "lucrativeness": lucrativeness(rows, season_length_days, rent_monthly, defs.lucrativeness),
+        "lucrativeness": lucrativeness(rows, season_length_days, rent_monthly, defs.lucrativeness,
+                                       rent_basis, rent_source_id),
         "stale_fields": stale,
     }
     return career, warnings

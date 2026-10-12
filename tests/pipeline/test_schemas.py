@@ -168,9 +168,9 @@ def test_other_entities():
                                 "resort_ids": ["a"], "tier_a_count": 0})
     with pytest.raises(ValidationError, match="not defined"):
         HousingSite.model_validate({"id": "h", "resort_id": "r", "name": "H", "type": "market", "lat": 1, "lon": 1,
-                                    "precision": "neighborhood", "confidence": "estimated", "verified_date": "2026-10-01",
-                                    "sources": ["nowhere"]}, context=CTX)
-    Commute.model_validate({"housing_id": "h", "resort_id": "r", "mode": "bus", "minutes": 20, "distance_mi": 8})
+                                    "location_source_id": "nowhere", "precision": "neighborhood",
+                                    "confidence": "estimated", "verified_date": "2026-10-01"}, context=CTX)
+    Commute.model_validate({"mode": "bus", "minutes": 20, "distance_mi": 8, "source_id": "src-a"}, context=CTX)
     with pytest.raises(ValidationError, match="hourly_low"):
         PayRecord.model_validate({"resort_id": "r", "season": "2026-27", "cert_level": "level_2", "hourly_low": 30,
                                   "hourly_high": 20, "confidence": "published", "source_id": "src-a",

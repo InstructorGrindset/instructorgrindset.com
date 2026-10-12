@@ -61,6 +61,8 @@ Resort {
   career: Career | null,   // Phase 4, see "Phase 4 career" below; null when a resort has no pay records and no career inputs
   editorial: null,    // Phase 6; only reviewed editorial is emitted
   climate_available: boolean,                      // true when climate/<id>.json exists
+  detail_available: boolean,                       // true when detail/<id>.json exists (Phase 5)
+  housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
 }
 ```
@@ -164,6 +166,63 @@ career: {
   rent or season length is missing. `assumptions` echoes every config assumption, both spreads, and the resort inputs
   used (`pay_hourly_mid_usd`, `season_length_days`, `rent_monthly_usd`), each with a display label.
 
+## Phase 5 housing and commute
+
+Raw inputs (every value sourced; research and ETL fill them later):
+* data/raw/housing/*.yaml: `{batch, researched_date, sources: [...], sites: [HousingSite]}`
+  HousingSite { id, resort_id, name, type: resort_owned|master_lease|market, lat, lon, location_source_id,
+                precision: building|neighborhood,   # building only when the address is publicly listed
+                rent_monthly: Sourced<{low, high}> | null, occupancy: shared|private|mixed|null, deposit: Sourced<number>|null,
+                eligibility_note: string|null, confidence, verified_date }
+* data/raw/rent/: HUD Fair Market Rents and Census ACS median gross rent, cached API responses or CSV
+  (county and ZIP level), loaded by pipeline/rent.py into a baseline per resort (county of the base area,
+  plus ZIPs of housing sites). HUD API needs a token in env HUD_API_TOKEN; ACS works without a key at low volume.
+* data/raw/transit/<agency>/gtfs.zip (gitignored) -> pipeline/transit.py extracts routes and stops within
+  `transit.search_radius_km` of any housing site or the base area; committed extract data/raw/transit/<agency>.json.
+* data/raw/routing/ cache (gitignored) of routing responses. pipeline/routing.py: provider in config
+  (`routing.provider: valhalla|osrm|ors`, base URL, API key env var), drive time/distance and route geometry
+  housing -> base, and drive isochrones at `routing.isochrone_minutes` [15, 30, 45] around the base area.
+  Transit commute times come from GTFS schedules (walk to stop + ride, simplest sound model, documented) or are
+  null; never estimated from memory.
+* Lifts: OpenSkiMap https://tiles.openskimap.org/geojson/lifts.geojson (reachable now); keep lifts whose
+  skiAreas reference the OpenSkiMap area(s) matched to each Tier A resort; committed extract
+  data/raw/openskimap/us_lifts_tier_a.geojson (full download gitignored).
+
+Build outputs:
+* data/build/detail/<resort_id>.json, lazy loaded by the resort detail map (Tier A only):
+```
+{ version, generated_at, resort_id,
+  base_area: { lat, lon, source_id },
+  lifts: FeatureCollection<LineString> props { name, lift_type, source_id: "openskimap-lifts" },
+  housing: [ { ...HousingSite fields, rent_monthly (Sourced range, display priority applied, HUD/ACS baseline
+               used only when no site rent exists and then confidence "estimated" with the baseline source),
+               commutes: [ { mode: drive|bus|walk|shuttle, minutes, distance_mi, transit_route_ids, geometry
+               (LineString), source_id } ] } ],
+  rent_baseline: { county_fips, county_name, fmr: { studio, one_br, two_br } each Sourced, acs_median_gross_rent:
+                   Sourced } | null,
+  transit: { routes: [ { id, agency, short_name, long_name, color, geometry (MultiLineString) } ],
+             stops: [ { id, name, lat, lon, route_ids } ], source_ids } | null,
+  isochrones: [ { minutes, mode: "drive", geometry (Polygon|MultiPolygon), source_id } ] }
+```
+  Written for every Tier A resort that has at least lifts or housing; empty lists or null where data is missing.
+* resorts.json Resort gains `detail_available: bool` and
+  `housing_summary: { site_count, cheapest_rent_monthly_low (number|null), cheapest_site_id, has_transit } | null`.
+* The Phase 4 lucrativeness rent input uses the cheapest employee housing site (resort_owned or master_lease) rent,
+  else the baseline (studio FMR), per config; career output echoes which was used.
+* config/definitions.yaml gains: `routing: {provider, base_url, api_key_env, isochrone_minutes: [15, 30, 45]}`,
+  `transit: {search_radius_km}`, `rent: {baseline_preference: [fmr_studio, acs_median]}` with sensible defaults
+  for provider settings and nulls for anything that is a judgment call for Alexandre.
+
+### Pipeline notes (additions to the contract)
+* **HousingSite** also takes `address: Sourced<string> | null`; `precision: building` requires it (the publicly listed address and its source). Site ids are unique across all housing files; `resort_id` must exist in the build.
+* **County lookup:** point in polygon of the base area against `data/raw/geo/us-counties.geojson` (us-atlas counties-10m via `npm run build:counties`, committed). ZIP level baselines need ZCTA outlines and are not wired yet.
+* **Rent sources:** `hud-fmr-fy<year>` and `census-acs5-<year>-b25064`. A site without published rent shows the first value in `rent.baseline_preference` as `{low: v, high: v}`, confidence `estimated`, with a note naming the baseline.
+* **Lucrativeness rent:** `rent.lucrativeness_rent` order (`employee_housing`, then `baseline`); `career.lucrativeness.assumptions` gains `rent_basis` (`employee_housing:<site id>` or a baseline key such as `fmr_studio`) and `rent_source_id`.
+* **Transit extract** (`data/raw/transit/<agency>.json`): `{ version, agency, source, search_radius_km, routes, stops, patterns }`; ids are prefixed `<agency>:`; `patterns: [{ route_id, stop_ids, offsets_min, trip_count }]` hold median scheduled minutes from the first kept stop. Bus commute = walk to a stop within `transit.max_walk_km` + scheduled ride + walk from a stop within `max_walk_km` of the base, at `transit.walk_speed_kmh`, no waiting time; null until Alexandre sets both.
+* **Routing:** source id `routing-<provider>`; the build reads only the cache `data/raw/routing/<provider>/<sha1>.json` written by `python -m pipeline.routing run`. Drive commute `source_id` is `routing-<provider>`; bus commute `source_id` is `gtfs-<agency>`.
+* **Lifts:** extract features carry `{ id, name, ref, lift_type, ski_area_ids }`; only `status: operating` lifts. Detail lifts carry exactly `{ name, lift_type, source_id }`. `name` may be null in OpenStreetMap.
+* **Detail files** are written compact; files for resorts that no longer qualify are removed. `housing_summary.cheapest_rent_monthly_low` uses published site rents only (never the baseline); `has_transit` is true when the detail file has transit.
+
 ## Raw inputs (`/data/raw`)
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
@@ -186,6 +245,11 @@ pipeline/
   states.py           # us-atlas to us-states.geojson
   routes.py           # deep link stubs under /map/
   career.py           # Phase 4 pay display, staleness, professionalism, lucrativeness
+  lifts.py            # Phase 5 OpenSkiMap lifts for Tier A resorts
+  housing.py          # Phase 5 housing sites, rent display, detail file assembly
+  rent.py             # Phase 5 HUD FMR and ACS baselines, county lookup
+  transit.py          # Phase 5 GTFS extraction and bus commute model
+  routing.py          # Phase 5 Valhalla / OSRM / ORS client with cache
   climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation)
 config/
   definitions.yaml    # thresholds, weights, assumptions (ROADMAP Section 6)

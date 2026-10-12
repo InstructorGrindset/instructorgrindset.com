@@ -390,3 +390,155 @@ def test_no_career_data_means_null_career(repo_root, raw_dir, out, tmp_path):
     for f in _load(out, "resorts.geojson")["features"]:
         p = f["properties"]
         assert p["professionalism_score"] is None and p["lucrativeness_mid"] is None
+
+
+HOUSING_YAML = """
+batch: fixture-housing
+researched_date: 2026-10-01
+sources:
+  - {id: fixture-housing-page, url: https://example.org/housing, title: Fixture housing page, accessed_date: 2026-10-01}
+sites:
+  - id: peak-staff-lodge
+    resort_id: fixture-peak
+    name: Staff Lodge
+    type: resort_owned
+    lat: 39.61
+    lon: -106.31
+    location_source_id: fixture-housing-page
+    precision: building
+    address: {value: "1 Fixture Way", source_id: fixture-housing-page, as_of: 2026-10-01, confidence: published}
+    rent_monthly: {value: {low: 650, high: 900}, source_id: fixture-housing-page, as_of: 2026-10-01, confidence: published}
+    occupancy: shared
+    confidence: published
+    verified_date: 2026-10-01
+  - id: peak-town-flats
+    resort_id: fixture-peak
+    name: Town Flats
+    type: market
+    lat: 39.7
+    lon: -106.2005
+    location_source_id: fixture-housing-page
+    precision: neighborhood
+    confidence: estimated
+    verified_date: 2026-10-01
+"""
+
+
+def _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg):
+    import datetime as dt
+    import shutil
+
+    from pipeline.routing import RoutingClient
+    from pipeline.schemas.common import Source
+    from pipeline.transit import extract_gtfs
+
+    (raw_dir / "openskimap" / "lifts.full.geojson").write_text(json.dumps(lifts_full))
+    (raw_dir / "housing").mkdir()
+    (raw_dir / "housing" / "fixture.yaml").write_text(HOUSING_YAML)
+    shutil.copytree(counties_geojson.parent, raw_dir / "geo")
+    (raw_dir / "rent" / "hud_fmr").mkdir(parents=True)
+    (raw_dir / "rent" / "hud_fmr" / "08998.json").write_text(json.dumps({"fetched_date": "2026-10-02", "url": "u", "response": {
+        "data": {"county_name": "Fixture County", "basicdata": {"Efficiency": 1478, "One-Bedroom": 1640, "Two-Bedroom": 2094, "year": "2026"}}}}))
+    src = Source(id="gtfs-fixture", url="https://example.org/gtfs.zip", title="Fixture GTFS", accessed_date=dt.date(2026, 10, 1))
+    ex = extract_gtfs(gtfs_writer(raw_dir / "transit" / "fixture" / "gtfs.zip", gtfs_tables), "fixture",
+                      [(39.6, -106.3), (39.7, -106.2005)], 1.0, src)
+    (raw_dir / "transit" / "fixture.json").write_text(json.dumps(ex))
+
+    def http(method, url, body, headers, timeout):
+        if url.endswith("/route"):
+            a, b = body["locations"]
+            return {"trip": {"summary": {"time": 900, "length": 6.2},
+                             "legs": [{"shape": polyline_encoder([[a["lon"], a["lat"]], [b["lon"], b["lat"]]])}]}}
+        p = body["locations"][0]
+        ring = [[p["lon"] - 0.1, p["lat"] - 0.1], [p["lon"] + 0.1, p["lat"] - 0.1], [p["lon"], p["lat"] + 0.1],
+                [p["lon"] - 0.1, p["lat"] - 0.1]]
+        return {"features": [{"properties": {"contour": c["time"]}, "geometry": {"type": "Polygon", "coordinates": [ring]}}
+                             for c in body["contours"]]}
+    client = RoutingClient(cfg.definitions.routing, cache_dir=raw_dir / "routing", offline=False, http=http)
+    client.isochrones((39.6, -106.3))
+    client.route((39.61, -106.31), (39.6, -106.3))  # only the staff lodge has a cached route
+
+
+def test_phase5_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, counties_geojson, gtfs_writer,
+                           gtfs_tables, polyline_encoder, monkeypatch):
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1790000000")
+    _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert not any("no routing cache" in w or "no rent baseline" in w or "no transit" in w for w in result.warnings)
+    assert (raw_dir / "openskimap" / "us_lifts_tier_a.geojson").exists()
+
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    peak = by["fixture-peak"]
+    assert peak["detail_available"] is True
+    assert peak["housing_summary"] == {"site_count": 2, "cheapest_rent_monthly_low": 650,
+                                       "cheapest_site_id": "peak-staff-lodge", "has_transit": True}
+    assert by["fixture-basin"]["detail_available"] is True and by["fixture-basin"]["housing_summary"] is None  # lifts only
+    assert by["fixture-indoor"]["detail_available"] is False and by["fixture-valley"]["detail_available"] is False
+    assert sorted(p.name for p in (out / "detail").iterdir()) == ["fixture-basin.json", "fixture-peak.json"]
+
+    d = _load(out / "detail", "fixture-peak.json")
+    assert d["version"] == 1 and d["resort_id"] == "fixture-peak"
+    assert [f["properties"]["name"] for f in d["lifts"]["features"]] == ["Fixture Express", None]
+    assert d["rent_baseline"]["county_fips"] == "08998" and d["rent_baseline"]["fmr"]["studio"]["value"] == 1478
+    lodge, flats = d["housing"]
+    assert lodge["id"] == "peak-staff-lodge" and lodge["rent_monthly"]["confidence"] == "published"
+    assert lodge["commutes"] == [{"mode": "drive", "minutes": 15.0, "distance_mi": 6.2, "transit_route_ids": [],
+                                  "geometry": {"type": "LineString", "coordinates": [[-106.31, 39.61], [-106.3, 39.6]]},
+                                  "source_id": "routing-valhalla"}]
+    assert flats["rent_monthly"]["confidence"] == "estimated" and flats["rent_monthly"]["source_id"] == "hud-fmr-fy2026"
+    assert flats["commutes"] == []  # no cached route; bus model settings are null in config
+    assert d["transit"]["source_ids"] == ["gtfs-fixture"]
+    assert [i["minutes"] for i in d["isochrones"]] == [15, 30, 45]
+
+    sources = {s["id"] for s in _load(out, "sources.json")["sources"]}
+    assert {"openskimap-lifts", "hud-fmr-fy2026", "gtfs-fixture", "routing-valhalla", "fixture-housing-page"} <= sources
+
+
+def test_phase5_rent_reaches_lucrativeness(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, counties_geojson,
+                                           gtfs_writer, gtfs_tables, polyline_encoder):
+    _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
+    (raw_dir / "pay").mkdir()
+    (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
+    _run(repo_root, raw_dir, out, tmp_path)
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    echo = {a["key"]: a["value"] for a in by["fixture-peak"]["career"]["lucrativeness"]["assumptions"]}
+    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == \
+        (650, "employee_housing:peak-staff-lodge", "fixture-housing-page")
+
+
+def test_phase5_baseline_rent_when_no_employee_housing(repo_root, raw_dir, out, tmp_path, cfg, lifts_full,
+                                                       counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder):
+    _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
+    (raw_dir / "housing" / "fixture.yaml").write_text(HOUSING_YAML.replace("type: resort_owned", "type: market"))
+    (raw_dir / "pay").mkdir()
+    (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
+    _run(repo_root, raw_dir, out, tmp_path)
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    echo = {a["key"]: a["value"] for a in peak["career"]["lucrativeness"]["assumptions"]}
+    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == (1478.0, "fmr_studio", "hud-fmr-fy2026")
+
+
+def test_phase5_housing_validation(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "housing").mkdir()
+    (raw_dir / "housing" / "a.yaml").write_text(HOUSING_YAML.replace("    address: {value: \"1 Fixture Way\", source_id: fixture-housing-page, as_of: 2026-10-01, confidence: published}\n", ""))
+    with pytest.raises(BuildError, match="site 'peak-staff-lodge': .*publicly listed address"):
+        _run(repo_root, raw_dir, out, tmp_path)
+    (raw_dir / "housing" / "a.yaml").write_text(HOUSING_YAML.replace("resort_id: fixture-peak", "resort_id: ghost", 1))
+    with pytest.raises(BuildError, match="resort_id 'ghost' matches no resort"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_phase5_skips_cleanly(repo_root, raw_dir, out, tmp_path):
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    w = "\n".join(result.warnings)
+    assert "no lifts extract" in w and "no rent baseline cache" in w and "no transit extracts" in w
+    assert not (out / "detail").exists() or not list((out / "detail").iterdir())
+    assert all(r["detail_available"] is False and r["housing_summary"] is None
+               for r in _load(out, "resorts.json")["resorts"])
+
+
+def test_stale_detail_files_removed(repo_root, raw_dir, out, tmp_path):
+    (out / "detail").mkdir(parents=True)
+    (out / "detail" / "gone-resort.json").write_text("{}")
+    _run(repo_root, raw_dir, out, tmp_path)
+    assert not (out / "detail" / "gone-resort.json").exists()

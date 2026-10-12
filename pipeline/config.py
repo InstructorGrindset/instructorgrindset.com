@@ -149,6 +149,31 @@ class LucrativenessDefs(StrictModel):
     range_spread: RangeSpread
 
 
+BaselineKey = Literal["fmr_studio", "fmr_one_br", "fmr_two_br", "acs_median"]
+
+
+class RentDefs(StrictModel):
+    baseline_preference: list[BaselineKey] = Field(min_length=1)
+    lucrativeness_rent: list[Literal["employee_housing", "baseline"]] = Field(min_length=1)
+    hud_fmr_year: Optional[int] = None
+    acs_year: int
+    acs_dataset: str = "acs/acs5"
+
+
+class TransitDefs(StrictModel):
+    search_radius_km: float = Field(gt=0)
+    walk_speed_kmh: Optional[float] = Field(default=None, gt=0)
+    max_walk_km: Optional[float] = Field(default=None, gt=0)
+
+
+class RoutingDefs(StrictModel):
+    provider: Literal["valhalla", "osrm", "ors"]
+    base_url: str = Field(pattern=r"^https?://")
+    api_key_env: Optional[str] = None
+    isochrone_minutes: list[int] = Field(default_factory=list)
+    timeout_s: float = Field(default=30, gt=0)
+
+
 class CareerVocab(StrictModel):
     client_profiles: list[str]
     enthusiast_types: list[str] = Field(default_factory=list)
@@ -173,6 +198,9 @@ class Definitions(StrictModel):
     professionalism: ProfessionalismDefs
     lucrativeness: LucrativenessDefs
     career: CareerDefs
+    rent: RentDefs
+    transit: TransitDefs
+    routing: RoutingDefs
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 
