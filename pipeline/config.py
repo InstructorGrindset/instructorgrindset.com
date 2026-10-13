@@ -347,9 +347,37 @@ class HeatIsolines(StrictModel):
         return [self.start + i * self.step for i in range(n + 1)]
 
 
+class HeatSnowfallSnotel(StrictModel):
+    """NRCS SNOTEL station snowfall (pipeline/climate/snotel_stations.py): the water years and the completeness
+    rule of the committed extract."""
+    first_water_year: int = Field(ge=1980, le=2100)
+    last_water_year: int = Field(ge=1980, le=2100)
+    min_complete_years: int = Field(ge=1, le=60)
+
+    @model_validator(mode="after")
+    def _check(self) -> "HeatSnowfallSnotel":
+        if self.last_water_year < self.first_water_year:
+            raise ValueError("heat.snowfall.snotel.last_water_year must not be before first_water_year")
+        if self.min_complete_years > self.last_water_year - self.first_water_year + 1:
+            raise ValueError("heat.snowfall.snotel.min_complete_years exceeds the water years in the window")
+        return self
+
+
+class HeatSnowfallElevation(StrictModel):
+    """Elevation aware snowfall field (pipeline/heat.py ``gids_node``): a local snowfall gradient with
+    elevation from each node's neighbours, applied at every pixel's terrain height (pipeline/terrain.py)."""
+    log_offset_in: float = Field(gt=0, le=100)
+    max_gradient_per_km: float = Field(ge=0, le=5)
+    spread_prior_m: float = Field(gt=0, le=2000)
+    max_extrapolation_m: float = Field(ge=0, le=1000)
+    pocket_terrain: bool = True
+
+
 class HeatSnowfall(StrictModel):
     accept_completeness: list[Literal["S", "R", "P", "E"]] = Field(min_length=1)
     accept_measurement_flags: list[Literal["", "M", "V", "W", "X", "Y", "Z"]] = Field(min_length=1)
+    snotel: Optional[HeatSnowfallSnotel] = None
+    elevation: Optional[HeatSnowfallElevation] = None
     neighbors: int = Field(ge=1, le=64)
     min_distance_km: float = Field(gt=0)
     pocket_radius_km: float = Field(ge=5, le=50)

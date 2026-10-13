@@ -1,8 +1,9 @@
-"""Minimal PNG writer (stdlib only: zlib and struct).
+"""Minimal PNG writer and reader (stdlib only: zlib and struct).
 
 Writes 8 bit RGBA images (colour type 6) with one filter per scanline. The pipeline uses it for the
 heat map rasters in data/build/heat/ (docs/map/ARCHITECTURE.md, "Heat maps"), so the build needs no
-imaging library.
+imaging library. Also writes and reads 16 bit greyscale images (the committed terrain extract,
+``pipeline/terrain.py``) and reads 8 bit RGB tiles (the Terrain Tiles download).
 """
 from __future__ import annotations
 
@@ -67,3 +68,86 @@ def encode_rgba(width: int, height: int, pixels: bytes | bytearray, *, filter_ty
         prev = row
     ihdr = struct.pack(">IIBBBBB", width, height, 8, 6, 0, 0, 0)
     return SIGNATURE + _chunk(b"IHDR", ihdr) + _chunk(b"IDAT", zlib.compress(bytes(raw), level)) + _chunk(b"IEND", b"")
+
+
+def encode_gray16(width: int, height: int, values: list[int] | tuple[int, ...], *, filter_type: int = FILTER_UP,
+                  level: int = 9) -> bytes:
+    """PNG bytes of a 16 bit greyscale image (colour type 0): ``height`` rows of ``width`` values 0 to 65535."""
+    if width <= 0 or height <= 0:
+        raise ValueError("width and height must be positive")
+    if len(values) != width * height:
+        raise ValueError(f"expected {width * height} values, got {len(values)}")
+    raw = bytearray()
+    prev = bytes(width * 2)
+    for j in range(height):
+        row = struct.pack(f">{width}H", *values[j * width:(j + 1) * width])
+        raw.append(filter_type)
+        raw += _filter_row(row, prev, filter_type, bpp=2)
+        prev = row
+    ihdr = struct.pack(">IIBBBBB", width, height, 16, 0, 0, 0, 0)
+    return SIGNATURE + _chunk(b"IHDR", ihdr) + _chunk(b"IDAT", zlib.compress(bytes(raw), level)) + _chunk(b"IEND", b"")
+
+
+_CHANNELS = {0: 1, 2: 3, 4: 2, 6: 4}
+
+
+def decode(data: bytes) -> tuple[int, int, int, int, bytes]:
+    """(width, height, channels, bit depth, unfiltered pixel bytes, top row first) of a non interlaced PNG in
+    colour type 0, 2, 4 or 6 at 8 or 16 bits. Checks the signature and every chunk CRC."""
+    if data[:8] != SIGNATURE:
+        raise ValueError("not a PNG")
+    pos, idat, ihdr = 8, [], None
+    while pos + 8 <= len(data):
+        (n,) = struct.unpack(">I", data[pos:pos + 4])
+        kind, body = data[pos + 4:pos + 8], data[pos + 8:pos + 8 + n]
+        (crc,) = struct.unpack(">I", data[pos + 8 + n:pos + 12 + n])
+        if zlib.crc32(kind + body) & 0xFFFFFFFF != crc:
+            raise ValueError(f"bad CRC in {kind!r}")
+        if kind == b"IHDR":
+            ihdr = struct.unpack(">IIBBBBB", body)
+        elif kind == b"IDAT":
+            idat.append(body)
+        elif kind == b"IEND":
+            break
+        pos += 12 + n
+    if ihdr is None:
+        raise ValueError("PNG without IHDR")
+    width, height, depth, ctype, comp, filt, inter = ihdr
+    if ctype not in _CHANNELS or depth not in (8, 16) or comp or filt or inter:
+        raise ValueError(f"unsupported PNG (colour type {ctype}, depth {depth}, interlace {inter})")
+    bpp = _CHANNELS[ctype] * depth // 8
+    stride = width * bpp
+    raw = zlib.decompress(b"".join(idat))
+    if len(raw) != height * (stride + 1):
+        raise ValueError("PNG data has the wrong length")
+    out = bytearray()
+    prev = bytes(stride)
+    for j in range(height):
+        ft = raw[j * (stride + 1)]
+        row = bytearray(raw[j * (stride + 1) + 1:(j + 1) * (stride + 1)])
+        if ft == FILTER_UP:
+            row = bytearray((x + p) & 0xFF for x, p in zip(row, prev))
+        elif ft == FILTER_SUB:
+            for i in range(bpp, stride):
+                row[i] = (row[i] + row[i - bpp]) & 0xFF
+        elif ft == FILTER_AVERAGE:
+            for i in range(stride):
+                row[i] = (row[i] + (((row[i - bpp] if i >= bpp else 0) + prev[i]) >> 1)) & 0xFF
+        elif ft == FILTER_PAETH:
+            for i in range(stride):
+                a = row[i - bpp] if i >= bpp else 0
+                c = prev[i - bpp] if i >= bpp else 0
+                row[i] = (row[i] + _paeth(a, prev[i], c)) & 0xFF
+        elif ft != FILTER_NONE:
+            raise ValueError(f"unknown PNG filter {ft}")
+        out += row
+        prev = bytes(row)
+    return width, height, _CHANNELS[ctype], depth, bytes(out)
+
+
+def decode_gray16(data: bytes) -> tuple[int, int, list[int]]:
+    """(width, height, values) of a 16 bit greyscale PNG."""
+    w, h, ch, depth, px = decode(data)
+    if ch != 1 or depth != 16:
+        raise ValueError("expected a 16 bit greyscale PNG")
+    return w, h, list(struct.unpack(f">{w * h}H", px))

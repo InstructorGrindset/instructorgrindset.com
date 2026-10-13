@@ -136,6 +136,16 @@ def test_page_credits_every_source(page):
     assert "Book a Free Consultation" in text
 
 
+def test_page_credits_the_transit_feeds_and_their_licenses(page):
+    import yaml
+    html, p = page
+    assert "Mobility Database" in " ".join(p.parts) and "https://mobilitydatabase.org/" in p.hrefs
+    feeds = yaml.safe_load((REPO / "data" / "raw" / "transit" / "feeds.yaml").read_text())["feeds"]
+    for f in feeds:
+        if f.get("license"):
+            assert f["license"] in p.hrefs, f"{f['agency']} license {f['license']}"
+
+
 def test_page_names_each_vendored_library_with_its_version_and_license(page):
     html, p = page
     versions = json.loads((REPO / "map" / "vendor" / "VERSIONS.json").read_text())

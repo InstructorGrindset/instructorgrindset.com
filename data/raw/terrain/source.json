@@ -1,0 +1,36 @@
+{
+  "source": {
+    "id": "aws-terrain-tiles",
+    "url": "https://registry.opendata.aws/terrain-tiles/",
+    "title": "Terrain Tiles on AWS (Mapzen terrarium elevation tiles)",
+    "accessed_date": "2026-10-13",
+    "note": "Mean ground height per 0.0625 degree cell from the terrarium tiles at zoom 6 (https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png). In the United States the tiles are built from USGS 3DEP (formerly NED), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and NOAA ETOPO1, all public domain; ArcticDEM data were created from DigitalGlobe, Inc., imagery and funded under National Science Foundation awards 1043681, 1559691 and 1542736. Used only to shape the snowfall heat map between stations; no height is displayed."
+  },
+  "confidence": "published",
+  "license": "public domain (US sources), attribution in the note",
+  "units": "m",
+  "encoding": "16 bit greyscale PNG, value = metres + 0; rows from the north edge, columns from the west edge, cell centers at half steps",
+  "zoom": 6,
+  "regions": {
+    "lower48": {
+      "file": "terrain-lower48.png",
+      "west": -125.0,
+      "north": 49.5,
+      "step_deg": 0.0625,
+      "width": 931,
+      "height": 402,
+      "tiles": 84,
+      "bytes": 344742
+    },
+    "alaska": {
+      "file": "terrain-alaska.png",
+      "west": -180.0,
+      "north": 71.6,
+      "step_deg": 0.0625,
+      "width": 808,
+      "height": 326,
+      "tiles": 81,
+      "bytes": 171308
+    }
+  }
+}

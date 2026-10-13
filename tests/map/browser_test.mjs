@@ -1253,7 +1253,15 @@ async function realData(browser, base) {
         }, withDetail.id);
         check(n > 0, `real data: lifts render for ${withDetail.name} (${n} rendered of ${file.lifts.features.length} lifts)`);
         log(`  real detail/${withDetail.id}.json: ${fs.statSync(path.join(REPO, 'data', 'build', 'detail', `${withDetail.id}.json`)).size} bytes on disk, fetch ${timing ? `${timing.ms} ms` : 'n/a'}`);
-        check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'real data: only layers with data get a toggle');
+        const hasTransit = Boolean(file.transit && (file.transit.routes.length || file.transit.stops.length));
+        const expected = [file.lifts.features.length && 'Lifts', file.housing.length && 'Housing',
+          file.housing.some((s) => s.commutes.some((c) => c.geometry)) && 'Commute', hasTransit && 'Transit',
+          file.isochrones.length && 'Drive time'].filter(Boolean);
+        check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(expected), `real data: only layers with data get a toggle (${expected.join(', ')})`);
+        if (hasTransit) {
+          const t = await page.evaluate(() => ['detail-transit-line', 'detail-transit-stop'].map((id) => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: [id] }).length));
+          check(t[0] > 0 && t[1] > 0, `real data: GTFS transit routes and stops draw for ${withDetail.name} (${t[0]} line pieces, ${t[1]} stops; ${file.transit.source_ids.join(', ')})`);
+        }
         check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'real data: housing empty state');
         const endpoint = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'definitions.json'), 'utf8')).submissions.endpoint;
         check(endpoint ? await page.locator('.report-form').count() === 1

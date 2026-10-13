@@ -57,6 +57,7 @@ class Point:
     lon: float
     lat: float
     value: float
+    elev_m: Optional[float] = None   # station height (snowfall stations); None for resorts and season points
 
 
 # ------------------------------------------------------------------ Web Mercator grid
@@ -196,6 +197,35 @@ class PointIndex:
             ring += 1
         return sorted(((-nd, v) for nd, v in heap), key=lambda t: t[0])
 
+    def nearest_points(self, lon: float, lat: float, k: int) -> list[tuple[float, Point]]:
+        """The ``k`` nearest points as [(distance km, point)], nearest first (as :meth:`nearest`)."""
+        if not self.count:
+            return []
+        k = min(k, self.count)
+        kmlon = KM_PER_DEG_LON * math.cos(lat * RAD)
+        cx, cy = math.floor(lon / self.cell), math.floor(lat / self.cell)
+        max_ring = max(abs(cx - self.ix[0]), abs(cx - self.ix[1]), abs(cy - self.iy[0]), abs(cy - self.iy[1]))
+        step_km = self.cell * min(kmlon, KM_PER_DEG_LAT)
+        heap: list[tuple[float, int, Point]] = []
+        ring = 0
+        while True:
+            if ring == 0:
+                cells = [(cx, cy)]
+            else:
+                cells = [(cx + dx, cy + dy) for dx in range(-ring, ring + 1) for dy in (-ring, ring)]
+                cells += [(cx + dx, cy + dy) for dx in (-ring, ring) for dy in range(-ring + 1, ring)]
+            for c in cells:
+                for p in self.buckets.get(c, ()):
+                    d = math.hypot((p.lon - lon) * kmlon, (p.lat - lat) * KM_PER_DEG_LAT)
+                    if len(heap) < k:
+                        heapq.heappush(heap, (-d, id(p), p))
+                    elif d < -heap[0][0]:
+                        heapq.heapreplace(heap, (-d, id(p), p))
+            if (len(heap) == k and ring * step_km >= -heap[0][0]) or ring > max_ring:
+                break
+            ring += 1
+        return sorted(((-nd, p) for nd, _, p in heap), key=lambda t: t[0])
+
 
 def shepard(nbrs: Sequence[tuple[float, float]], k: int, min_km: float) -> Optional[float]:
     """Adaptive modified Shepard value from up to k + 1 nearest [(distance, value)], nearest first."""
@@ -288,17 +318,185 @@ def needed_nodes(grid: Grid, cols: Sequence[int], rows: Sequence[int], covered: 
     return need
 
 
+# ------------------------------------------------------------------ elevation aware snowfall field
+@dataclass(frozen=True)
+class NodeFit:
+    """The local snowfall model at one node, in u = ln(snowfall + c) (c = ``log_offset_in``):
+    u(z) = a + beta * clamp(z, z_lo, z_hi), then clamped to [u_lo, u_hi]. z in km."""
+
+    a: float
+    beta: float
+    z_lo: float
+    z_hi: float
+    u_lo: float
+    u_hi: float
+    dist_km: float
+
+
+def gids_fit(nbrs: Sequence[tuple[float, Point]], k: int, min_km: float, c: float, max_gradient: float,
+             spread_prior_km: float, extrapolation_km: float) -> Optional[NodeFit]:
+    """Gradient plus inverse distance (after Nalder and Wein 1998) on log snowfall, from up to k + 1 nearest
+    [(distance km, station)], nearest first.
+
+    The value weights are the adaptive modified Shepard weights of :func:`shepard`. The local gradient of
+    u = ln(v + c) with station height is a weighted least squares slope with the square roots of those weights
+    (inverse distance with the same taper, so it changes smoothly between nodes), shrunk toward zero when the
+    neighbours span little height: beta = Sxy / (Sxx + spread_prior^2), then clamped to [0, max_gradient]
+    (snowfall never falls with height). Then u(z) = sum w_i (u_i + beta (z - z_i)) / sum w_i = a + beta z. The
+    height a pixel is read at is clamped to the neighbours' range widened by ``extrapolation_km``, and u to the
+    neighbours' range, so the field never goes above the highest or below the lowest neighbour.
+    """
+    if not nbrs:
+        return None
+    if len(nbrs) <= k:
+        pairs = [(1 / max(d, min_km) ** 2, p) for d, p in nbrs]
+    else:
+        r = nbrs[k][0]
+        pairs = [(((r - d) / (r * max(d, min_km))) ** 2 if r > d else 0.0, p) for d, p in nbrs[:k]]
+    sw = sum(w for w, _ in pairs)
+    if sw <= 0:
+        pairs = [(1.0, nbrs[0][1])]
+        sw = 1.0
+    us = [math.log(max(p.value, 0.0) + c) for _, p in pairs]
+    zs = [(p.elev_m or 0.0) / 1000.0 for _, p in pairs]
+    ws = [w / sw for w, _ in pairs]
+    ubar = sum(w * u for w, u in zip(ws, us))
+    zbar = sum(w * z for w, z in zip(ws, zs))
+    beta = 0.0
+    if all(p.elev_m is not None for _, p in pairs):
+        rw = [math.sqrt(w) for w in ws]
+        srw = sum(rw) or 1.0
+        rw = [x / srw for x in rw]
+        zr = sum(w * z for w, z in zip(rw, zs))
+        ur = sum(w * u for w, u in zip(rw, us))
+        sxx = sum(w * (z - zr) ** 2 for w, z in zip(rw, zs))
+        sxy = sum(w * (z - zr) * (u - ur) for w, z, u in zip(rw, zs, us))
+        beta = min(max_gradient, max(0.0, sxy / (sxx + spread_prior_km ** 2)))
+    used = [u for (w, _), u in zip(pairs, us) if w > 0] or us
+    zused = [z for (w, _), z in zip(pairs, zs) if w > 0] or zs
+    return NodeFit(a=ubar - beta * zbar, beta=beta, z_lo=min(zused) - extrapolation_km,
+                   z_hi=max(zused) + extrapolation_km, u_lo=min(used), u_hi=max(used), dist_km=nbrs[0][0])
+
+
+def gids_value(fit: NodeFit, z_km: float, c: float) -> float:
+    """Snowfall (in) of a node fit at height z (km)."""
+    u = fit.a + fit.beta * min(fit.z_hi, max(fit.z_lo, z_km))
+    return max(0.0, math.exp(min(fit.u_hi, max(fit.u_lo, u))) - c)
+
+
+def terrain_heights(grid: Grid, dem: Any, cov: Sequence[float]) -> list[Optional[float]]:
+    """Ground height (km) at every covered pixel center from the terrain grid (``pipeline.terrain.Dem``)."""
+    w = grid.width
+    out: list[Optional[float]] = [None] * (w * grid.height)
+    lons = [grid.lon_at(i) for i in range(w)]
+    for j in range(grid.height):
+        lat = grid.lat_at(j)
+        base = j * w
+        for i in range(w):
+            if cov[base + i] > 0:
+                z = dem.sample(lons[i], lat)
+                out[base + i] = None if z is None else z / 1000.0
+    return out
+
+
+def solve_elevation_field(grid: Grid, cov: Sequence[float], points: Sequence[Point], box: Any, k: int,
+                          min_km: float, step: int, heights_km: Sequence[Optional[float]],
+                          elev: Any) -> tuple[list, list, list]:
+    """(value, distance to the nearest station km, local gradient per km) at every covered pixel.
+
+    The node fits (:func:`gids_fit`) are solved on every ``step`` pixel; their six parameters blend bilinearly
+    to each pixel, which then reads the model at its own ground height. A pixel without a height reads it at
+    the neighbours' weighted mean height (plain interpolation)."""
+    cols = node_positions(grid.width, step)
+    rows = node_positions(grid.height, step)
+    index = index_for(points, box, k)
+    need = needed_nodes(grid, cols, rows, cov)
+    nc = len(cols)
+    c = elev.log_offset_in
+    fits: list[Optional[NodeFit]] = [None] * (nc * len(rows))
+    for r, j in enumerate(rows):
+        lat = grid.lat_at(j)
+        for ci, i in enumerate(cols):
+            q = r * nc + ci
+            if need[q]:
+                fits[q] = gids_fit(index.nearest_points(grid.lon_at(i), lat, k + 1), k, min_km, c,
+                                   elev.max_gradient_per_km, elev.spread_prior_m / 1000.0,
+                                   elev.max_extrapolation_m / 1000.0)
+    cx, fx = _cell_of(cols, grid.width)
+    cy, fy = _cell_of(rows, grid.height)
+    w = grid.width
+    n = w * grid.height
+    values: list[Optional[float]] = [None] * n
+    dists: list[Optional[float]] = [None] * n
+    betas: list[Optional[float]] = [None] * n
+    exp = math.exp
+    for j in range(grid.height):
+        top_row = cy[j] * nc
+        bot_row = top_row + nc
+        ty = fy[j]
+        base = j * w
+        for i in range(w):
+            if cov[base + i] <= 0:
+                continue
+            ci = cx[i]
+            f00 = fits[top_row + ci]; f10 = fits[top_row + ci + 1]; f01 = fits[bot_row + ci]; f11 = fits[bot_row + ci + 1]
+            if f00 is None or f10 is None or f01 is None or f11 is None:
+                continue
+            tx = fx[i]
+            w00 = (1 - tx) * (1 - ty); w10 = tx * (1 - ty); w01 = (1 - tx) * ty; w11 = tx * ty
+            a = w00 * f00.a + w10 * f10.a + w01 * f01.a + w11 * f11.a
+            beta = w00 * f00.beta + w10 * f10.beta + w01 * f01.beta + w11 * f11.beta
+            z_lo = w00 * f00.z_lo + w10 * f10.z_lo + w01 * f01.z_lo + w11 * f11.z_lo
+            z_hi = w00 * f00.z_hi + w10 * f10.z_hi + w01 * f01.z_hi + w11 * f11.z_hi
+            u_lo = w00 * f00.u_lo + w10 * f10.u_lo + w01 * f01.u_lo + w11 * f11.u_lo
+            u_hi = w00 * f00.u_hi + w10 * f10.u_hi + w01 * f01.u_hi + w11 * f11.u_hi
+            z = heights_km[base + i]
+            if z is None:
+                z = (z_lo + z_hi) / 2
+            u = a + beta * (z_hi if z > z_hi else z_lo if z < z_lo else z)
+            u = u_hi if u > u_hi else u_lo if u < u_lo else u
+            v = exp(u) - c
+            values[base + i] = v if v > 0 else 0.0
+            dists[base + i] = w00 * f00.dist_km + w10 * f10.dist_km + w01 * f01.dist_km + w11 * f11.dist_km
+            betas[base + i] = beta
+    return values, dists, betas
+
+
+@dataclass(frozen=True)
+class PocketTerrain:
+    """Terrain aware pockets: pixel ground heights (km) and local gradients (per km of u = ln(v + c))."""
+
+    heights_km: Sequence[Optional[float]]
+    gradients: Sequence[Optional[float]]
+    log_offset_in: float
+
+
+def pocket_target(value: float, resort_km: Optional[float], z_km: Optional[float], beta: Optional[float],
+                  c: float) -> float:
+    """The value a resort's pocket pulls a pixel toward: the resort's own value at or above the resort's ground
+    height, and below it the value moved down the local gradient, (value + c) exp(beta (z - z_resort)) - c.
+    Never above the resort's value."""
+    if resort_km is None or z_km is None or not beta or z_km >= resort_km:
+        return value
+    return max(0.0, (value + c) * math.exp(beta * (z_km - resort_km)) - c)
+
+
 def apply_pockets(grid: Grid, background: Sequence[Optional[float]], pockets: Iterable[Point],
-                  radius_km: float) -> tuple[list[Optional[float]], dict[int, float]]:
+                  radius_km: float, terrain: Optional[PocketTerrain] = None,
+                  pocket_heights_km: Optional[Sequence[Optional[float]]] = None) -> tuple[list[Optional[float]], dict[int, float]]:
     """Raise the background toward each resort's value within ``radius_km``; never lower it.
 
-    v = b + g(d) * max(0, resort - b), g(d) = (1 - (d / r)^2)^2; overlapping pockets take the highest.
+    v = b + g(d) * max(0, T - b), g(d) = (1 - (d / r)^2)^2; overlapping pockets take the highest. T is the
+    resort's value, or with ``terrain`` its :func:`pocket_target` at the pixel's height (``pocket_heights_km``
+    holds each resort's ground height), so a pocket fills the slopes and stays out of the valleys below.
     Returns (values, {pixel index: distance km to the nearest pocket center} inside any pocket).
     """
     out = list(background)
     near: dict[int, float] = {}
     w, h = grid.width, grid.height
-    for p in pockets:
+    pockets = list(pockets)
+    for n, p in enumerate(pockets):
+        p_km = pocket_heights_km[n] if terrain is not None and pocket_heights_km is not None else None
         dlat = radius_km / KM_PER_DEG_LAT
         j0 = max(0, math.floor(grid.y_of(p.lat + dlat)))
         j1 = min(h - 1, math.ceil(grid.y_of(p.lat - dlat)))
@@ -319,8 +517,12 @@ def apply_pockets(grid: Grid, background: Sequence[Optional[float]], pockets: It
                 b = background[idx]
                 if b is None or p.value <= b:
                     continue
+                target = p.value if p_km is None else pocket_target(
+                    p.value, p_km, terrain.heights_km[idx], terrain.gradients[idx], terrain.log_offset_in)
+                if target <= b:
+                    continue
                 q = d / radius_km
-                cand = b + (1 - q * q) ** 2 * (p.value - b)
+                cand = b + (1 - q * q) ** 2 * (target - b)
                 if cand > out[idx]:
                     out[idx] = cand
     return out, near
@@ -708,12 +910,14 @@ def contour_lines(values: Sequence[Optional[float]], width: int, height: int,
 
 def refined_isolines(grid: Grid, background: Sequence[Optional[float]], values: Sequence[Optional[float]],
                      pockets: Sequence[Point], radius_km: float, levels: Sequence[float],
-                     supersample: int) -> dict[float, list[list[tuple[float, float]]]]:
+                     supersample: int, terrain: Optional[PocketTerrain] = None,
+                     pocket_heights_km: Optional[Sequence[Optional[float]]] = None) -> dict[float, list[list[tuple[float, float]]]]:
     """Isolines of the snowfall field on a grid ``supersample`` times finer than the pixels, where they can occur.
 
     Active cells: pixel cells with a corner within one level step of the lowest level, and their neighbours. Inside
     them the background is bilinear between pixel centers (it varies slowly) and every pocket is evaluated exactly
-    (``apply_pockets``), so pocket rings come out round instead of as pixel polygons. At pixel centers the field
+    (``apply_pockets``), so pocket edges come out smooth instead of as pixel polygons. With ``terrain`` the pocket
+    target reads the ground height and gradient bilinear between pixel centers too. At pixel centers the field
     equals the raster's. Points are continuous pixel coordinates, as ``contour_lines``.
     """
     levels = sorted(levels)
@@ -748,8 +952,9 @@ def refined_isolines(grid: Grid, background: Sequence[Optional[float]], values: 
                 if cell not in active and 0 <= cell[0] < w - 1 and 0 <= cell[1] < h - 1 and corners(*cell):
                     active.add(cell)
     # Pockets that can reach each active cell (the pixel box of the radius, one pixel wider).
-    near: dict[tuple[int, int], list[Point]] = defaultdict(list)
-    for p in pockets:
+    near: dict[tuple[int, int], list[tuple[Point, Optional[float]]]] = defaultdict(list)
+    for n, p in enumerate(pockets):
+        p_km = pocket_heights_km[n] if terrain is not None and pocket_heights_km is not None else None
         dlat = radius_km / KM_PER_DEG_LAT
         j0 = max(0, math.floor(grid.y_of(p.lat + dlat)) - 1)
         j1 = min(h - 2, math.ceil(grid.y_of(p.lat - dlat)) + 1)
@@ -759,7 +964,7 @@ def refined_isolines(grid: Grid, background: Sequence[Optional[float]], values: 
         for j in range(j0, j1 + 1):
             for i in range(i0, i1 + 1):
                 if (i, j) in active:
-                    near[(i, j)].append(p)
+                    near[(i, j)].append((p, p_km))
     stride = (w - 1) * s + 1
     yn, ys = grid.y_north, grid.y_south
     span_x = (grid.east - grid.west) / w
@@ -789,14 +994,22 @@ def refined_isolines(grid: Grid, background: Sequence[Optional[float]], values: 
             lon = grid.west + (0.5 + fi / s) * span_x
             lat = lat_of(yn - (0.5 + fj / s) / h * (yn - ys))
             kmlon = KM_PER_DEG_LON * math.cos(lat * RAD)
-            for p in cand_pockets:
+            z_here = beta_here = None
+            if terrain is not None:
+                z_here = _bilinear(terrain.heights_km, q, w, tx, ty)
+                beta_here = _bilinear(terrain.gradients, q, w, tx, ty)
+            for p, p_km in cand_pockets:
                 if p.value <= bg:
                     continue
                 dd = math.hypot((p.lon - lon) * kmlon, (p.lat - lat) * KM_PER_DEG_LAT)
                 if dd >= radius_km:
                     continue
+                target = p.value if p_km is None else pocket_target(p.value, p_km, z_here, beta_here,
+                                                                    terrain.log_offset_in)
+                if target <= bg:
+                    continue
                 t = dd / radius_km
-                cand = bg + (1 - t * t) ** 2 * (p.value - bg)
+                cand = bg + (1 - t * t) ** 2 * (target - bg)
                 if cand > v:
                     v = cand
         field[key] = v
@@ -805,6 +1018,15 @@ def refined_isolines(grid: Grid, background: Sequence[Optional[float]], values: 
     cells = ((ci * s + si, cj * s + sj) for ci, cj in sorted(active, key=lambda c: (c[1], c[0]))
              for sj in range(s) for si in range(s))
     return _march(cells, get, stride, levels, scale=s)
+
+
+def _bilinear(field: Sequence[Optional[float]], q: int, w: int, tx: float, ty: float) -> Optional[float]:
+    """Bilinear value inside the pixel cell whose top left center is pixel q (None when a corner has none)."""
+    a, b, c, d = field[q], field[q + 1], field[q + w], field[q + w + 1]
+    if a is None or b is None or c is None or d is None:
+        return None
+    top = a + (b - a) * tx
+    return top + (c + (d - c) * tx - top) * ty
 
 
 def _join(segments: list[tuple[int, int]], book: dict[int, tuple[float, float]]) -> list[list[tuple[float, float]]]:

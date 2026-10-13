@@ -7,7 +7,12 @@ data/raw/climate/*
 # The NOAA normals extract is committed; its archive download is not.
 !data/raw/climate/noaa_normals/
 data/raw/climate/noaa_normals/download/
+# The SNOTEL station snowfall extract is committed; its daily downloads are not.
+!data/raw/climate/snotel_snowfall/
+data/raw/climate/snotel_snowfall/download/
 data/raw/openskimap/*.full.geojson
+# The terrain extract is committed; its tile download is not.
+data/raw/terrain/download/
 data/raw/transit/*/gtfs.zip
 data/raw/routing/
 data/raw/reports/queue/

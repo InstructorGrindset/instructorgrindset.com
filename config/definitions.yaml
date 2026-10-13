@@ -261,6 +261,16 @@ heat:
     # restore it.
     accept_completeness: [S, R, P]      # NOAA completeness codes kept (E, estimated, is dropped)
     accept_measurement_flags: ["", X]   # blank or X (nonzero rounded to zero); M, V, W, Y and Z are dropped
+    snotel:
+      # NRCS SNOTEL mountain stations (ROADMAP item 14), from the committed extract that
+      # pipeline/climate/snotel_stations.py writes (data/raw/climate/snotel_snowfall/). Each station's annual
+      # snowfall is the median of its water year totals of derived new snow (daily SWE gain / new snow
+      # density, the SNOW-17 step and the climate.snotel parameters of pipeline/climate/snotel_snowfall.py).
+      # A water year (Oct 1 to Sep 30, named by its September year) counts when its snow months (Nov to Apr)
+      # have climate.min_month_coverage of their days with data; a station needs min_complete_years of them.
+      first_water_year: 2011
+      last_water_year: 2025
+      min_complete_years: 8
     neighbors: 10
     min_distance_km: 12
     pocket_radius_km: 25
