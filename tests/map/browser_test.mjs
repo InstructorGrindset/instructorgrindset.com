@@ -535,11 +535,16 @@ async function desktop(browser, base) {
   check(await page.locator('.src-note', { hasText: 'synthetic source note' }).count() >= 1, 'source note renders');
   check(await page.locator('.src-tag', { hasText: 'SNOTEL' }).count() === 1, 'density chart labelled SNOTEL');
   check(await page.locator('.chart-caption', { hasText: 'A powder day brings 6 in or more' }).count() === 1, 'powder threshold read from definitions.json');
+  // Chart.js draws the charts when their section nears the screen (charts.js nearView).
+  check(await page.evaluate(() => typeof window.Chart === 'undefined'), 'Chart.js waits while the charts are out of view');
+  await page.locator('.climate').scrollIntoViewIfNeeded();
+  await page.waitForFunction(() => window.Chart && Object.keys(window.Chart.instances).length >= 5, null, { timeout: 10000 });
   check(await page.evaluate(() => {
     const c = window.Chart && Object.values(window.Chart.instances).find((x) => x.data.datasets.length === 3);
     return c ? c.data.datasets[0].label : '';
   }) === 'Dry, under 7%', 'density legend uses definitions.json cutoffs');
   check(await page.locator('.climate canvas').count() === 5, 'five climate charts');
+  await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 0; });
   check(w.requests.some((u) => u.includes('/climate/alpha-peak.json')), 'climate lazy loaded for resort');
   check(await page.locator('.panel-footer a[href="/contact"]').count() === 1, 'Free Consultation link in footer');
   await shot(page, 'desktop-04-resort.png');

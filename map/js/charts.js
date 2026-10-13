@@ -88,6 +88,8 @@ function theme(Chart) {
 export function destroyCharts() {
   for (const c of live) c.destroy();
   live.clear();
+  for (const io of waiting) io.disconnect(); // sections that never came into view
+  waiting.clear();
 }
 
 /** Months of a climate file restricted to the ski season and sorted in season order. */
@@ -164,9 +166,28 @@ function mount(Chart, canvas, cfg) {
 /** One chart per task, so drawing five charts never blocks the page for long. False once root has left the page. */
 const nextChart = (root) => new Promise((resolve) => { setTimeout(() => resolve(root.isConnected), 0); });
 
-/** Render resort climate charts into root. */
+/**
+ * Resolves when el comes within about a screen of the visible part of its scroll container (the panel), at once
+ * without IntersectionObserver. Chart.js (69 KB) and its first canvas cost about 200 ms of main thread time, so a
+ * section below the fold draws its charts only when the reader gets near it.
+ */
+const waiting = new Set();
+function nearView(el) {
+  if (!('IntersectionObserver' in window)) return Promise.resolve();
+  return new Promise((resolve) => {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { io.disconnect(); waiting.delete(io); resolve(); }
+    }, { root: el.closest('.panel-scroll'), rootMargin: '600px 0px' });
+    waiting.add(io);
+    io.observe(el);
+  });
+}
+
+/**
+ * Render resort climate charts into root. The figures (titles, captions, data labels) and the data table go in at
+ * once; Chart.js loads and draws them when the section nears the screen.
+ */
 export async function renderResortCharts(root, climate, defs = null) {
-  const Chart = await loadChartJs();
   const t = thresholds(defs);
   const dlabels = densityLabels(t);
   const months = seasonMonths(climate);
@@ -193,7 +214,12 @@ export async function renderResortCharts(root, climate, defs = null) {
   const hasMix = mix.some(Boolean);
   if (hasMix) root.append(f4.node);
   root.append(f5.node);
+  root.append(climateTable(climate));
 
+  await nearView(root);
+  if (!root.isConnected) return;
+  const Chart = await loadChartJs();
+  if (!root.isConnected) return;
   mount(Chart, f1.canvas, {
     data: { labels: labels(), datasets: [bar('Snowfall', snow, SERIES[0])] },
     options: { scales: axes({ unit: '"' }), plugins: { legend: { display: false }, tooltip: tooltipUnit(' in') } },
@@ -237,8 +263,6 @@ export async function renderResortCharts(root, climate, defs = null) {
       plugins: { legend: { position: 'top', align: 'start' }, tooltip: tooltipUnit('°F', 0) },
     },
   });
-
-  root.append(climateTable(climate));
 }
 
 function climateTable(climate) {
