@@ -54,6 +54,7 @@ Resort {
   cluster_id, state,
   size: { acres, vertical_ft, lifts, ski_school_staff_est },          // each Sourced<number> | null
   elevation: { base_ft, summit_ft },                                  // each Sourced<number> | null; Tier A research first, else OpenSkiMap (estimated)
+  snow: { annual_avg_in: Sourced<number> | null } | null,   // resort reported average annual snowfall (inches), e.g. Wikipedia infobox; null when absent
   season: { open_typical, close_typical, length_days, training_start }, // each Sourced | null; dates as "MM-DD"
   terrain: { beginner_pct, intermediate_pct, advanced_pct, expert_pct, character_tags },  // pcts Sourced<number 0 to 100> | null; tags string[]
   fit: { enthusiast_types: string[], professional_types: string[] },
@@ -76,7 +77,7 @@ GeoJSON FeatureCollection, one Polygon or MultiPolygon per cluster. `properties`
 Polygons are convex hulls of member resorts buffered by about 15 km, or hand drawn polygons from `config/clusters.yaml` when supplied.
 
 ### `resorts.geojson`
-Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank, season_length_days, snowfall_annual_in, professionalism_score, lucrativeness_mid }` where `size_rank` is 1 to 5 from acres (null acres gives 1). The last four are for map recolor modes, each number | null: `season_length_days` is `season.length_days.value`, `snowfall_annual_in` is the sum of the climate file's monthly `snowfall_in` (null without a climate file or without any monthly value), `professionalism_score` is `career.professionalism.score`, `lucrativeness_mid` is `career.lucrativeness.mid`.
+Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank, season_length_days, snowfall_annual_in, snowfall_annual_source, professionalism_score, lucrativeness_mid }` where `size_rank` is 1 to 5 from acres (null acres gives 1). The last five are for map recolor modes (numbers or null, plus the snowfall source): `season_length_days` is `season.length_days.value`, `snowfall_annual_in` is the resort's published `snow.annual_avg_in` when present, else the sum of the climate file's monthly `snowfall_in` over months whose `snowfall_source` is not null (null when neither exists), and `snowfall_annual_source` says which (`published` | `climate` | null), `professionalism_score` is `career.professionalism.score`, `lucrativeness_mid` is `career.lucrativeness.mid`.
 
 ### `states.json`
 ```

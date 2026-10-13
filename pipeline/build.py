@@ -128,7 +128,7 @@ def _tier_b_draft(area: openskimap.SkiArea, rid: str, as_of: dt.date) -> dict:
         "owner": None, "lat": round(area.lat, 5), "lon": round(area.lon, 5),
         "location_source_id": openskimap.SOURCE_ID, "state": area.state,
         "size": {"acres": None, "vertical_ft": None, "lifts": None, "ski_school_staff_est": None},
-        "elevation": {"base_ft": None, "summit_ft": None},
+        "elevation": {"base_ft": None, "summit_ft": None}, "snow": None,
         "career": None, "editorial": None,
     }
     _osm_fill(d, area, as_of)
@@ -413,7 +413,8 @@ def build(
                 "lifts": num(r["size"]["lifts"]), "size_rank": display.size_rank(num(r["size"]["acres"])),
                 # map recolor modes (number | null)
                 "season_length_days": num(r["season"]["length_days"]),
-                "snowfall_annual_in": annual_snowfall_in(climate_dir / f"{r['id']}.json") if r["climate_available"] else None,
+                "snowfall_annual_in": snowfall_annual(r, climate_dir)[0],
+                "snowfall_annual_source": snowfall_annual(r, climate_dir)[1],
                 "professionalism_score": (r["career"] or {}).get("professionalism", {}).get("score"),
                 "lucrativeness_mid": (r["career"] or {}).get("lucrativeness", {}).get("mid"),
             },
@@ -481,13 +482,27 @@ def build_date() -> dt.date:
 
 
 def annual_snowfall_in(path: Path) -> Optional[float]:
-    """Sum of monthly snowfall_in in a climate file; null when no month has a value."""
+    """Sum of monthly snowfall_in in a climate file over months whose snowfall_source is set;
+    null when no such month has a value."""
     try:
         months = json.loads(path.read_text(encoding="utf-8")).get("months") or []
     except (OSError, ValueError, AttributeError):
         return None
-    vals = [m.get("snowfall_in") for m in months if isinstance(m, dict) and isinstance(m.get("snowfall_in"), (int, float))]
+    vals = [m["snowfall_in"] for m in months if isinstance(m, dict) and m.get("snowfall_source") is not None
+            and isinstance(m.get("snowfall_in"), (int, float))]
     return round(sum(vals), 1) if vals else None
+
+
+def snowfall_annual(resort: dict, climate_dir: Path) -> tuple[Optional[float], Optional[str]]:
+    """(inches, "published" | "climate" | None): the resort's published annual average, else the climate sum."""
+    published = ((resort.get("snow") or {}).get("annual_avg_in") or {}).get("value")
+    if published is not None:
+        return published, "published"
+    if resort.get("climate_available"):
+        total = annual_snowfall_in(climate_dir / f"{resort['id']}.json")
+        if total is not None:
+            return total, "climate"
+    return None, None
 
 
 def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warnings: list[str],
@@ -663,7 +678,7 @@ def _refs(d: dict) -> set[str]:
             for v in o:
                 walk(v)
 
-    for key in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career", "editorial"):
+    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "season", "terrain", "career", "editorial"):
         walk(d.get(key))
     return found
 

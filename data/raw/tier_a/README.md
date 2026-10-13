@@ -43,6 +43,8 @@ resorts:
       - {criterion: operator_compensation, rationale: "Vail Resorts US resort.", source_id: owner-decisions-2026-10-11}
     tier_a_status: approved          # optional; overrides the batch status
     approval: {by: Alexandre, date: 2026-10-11, note: null}   # required when approved
+    snow:
+      annual_avg_in: {value: <inches as the source states>, source_id: wikipedia-vail-ski-resort, as_of: 2026-10-11, confidence: published, note: resort reported average}
     size:
       acres: {value: 5317, source_id: wikipedia-vail-ski-resort, as_of: 2026-10-11, confidence: published, note: optional}
       vertical_ft: null
@@ -83,6 +85,7 @@ A facility record (no OpenSkiMap match and no size data is fine):
 | `tier_a_criteria` | yes, 1 or more | `criterion` is one of `diehard`, `luxury`, `athlete_development`, `heritage`, `operator_compensation`, `year_round_training`, `owner_selection` (owner decision; cite `owner-decisions-2026-10-11`) |
 | `size` | no | `acres`, `vertical_ft`, `lifts`, `ski_school_staff_est`; each Sourced number or `null` |
 | `elevation` | no | `base_ft`, `summit_ft`; each Sourced number or `null`. When null, the build fills them from OpenSkiMap (confidence `estimated`) |
+| `snow` | no | `annual_avg_in`: Sourced number, the resort reported average annual snowfall in inches (for example the Wikipedia infobox "snowfall" field); omit or `null` when unsourced |
 | `season` | no | `open_typical`, `close_typical`, `training_start` as Sourced `"MM-DD"` strings; `length_days` Sourced number |
 | `terrain` | no | `beginner_pct`, `intermediate_pct`, `advanced_pct`, `expert_pct` Sourced numbers (0 to 100); `character_tags: []` |
 | `fit` | no | `enthusiast_types: []`, `professional_types: []` |

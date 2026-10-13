@@ -30,6 +30,7 @@ from .resort import (
     Resort,
     Season,
     Size,
+    Snow,
     Terrain,
     TierACriterion,
     referenced_source_ids,
@@ -46,7 +47,7 @@ __all__ = [
     "PayRow", "Professionalism", "ProfessionalismInputs", "BreakdownItem", "Assumption", "CERT_LEVELS",
     "PROFESSIONALISM_COMPONENTS", "DetailFile", "HousingBatch", "HousingOut", "HousingSummary", "Isochrone",
     "RentBaseline", "SourcedRent", "TransitExtract", "TrailmapFile", "OwnershipEntry", "OwnershipFile",
-    "PayRecord", "Report", "Resort", "Season", "Size", "Source", "Sourced", "SourcedMonthDay",
+    "PayRecord", "Report", "Resort", "Season", "Size", "Snow", "Source", "Sourced", "SourcedMonthDay",
     "SourcedNumber", "SourcedString", "State", "StrictModel", "Terrain", "TierABatch",
     "TierACriterion", "TierARecord", "check_source_ref", "referenced_source_ids",
 ]

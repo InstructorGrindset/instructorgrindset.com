@@ -120,7 +120,8 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
                                      "cluster_id": "i70-corridor", "state": "CO", "acres": 4000,
                                      "vertical_ft": round((3500.0 - 2400.12346) * 3.280839895), "lifts": 11,
                                      "size_rank": 4, "season_length_days": None, "snowfall_annual_in": None,
-                                     "professionalism_score": None, "lucrativeness_mid": None}
+                                     "snowfall_annual_source": None, "professionalism_score": None,
+                                     "lucrativeness_mid": None}
     assert next(f for f in pts["features"] if f["properties"]["id"] == "faraway-hill")["properties"]["size_rank"] == 1
 
     states = _load(out, "states.json")["states"]
@@ -340,7 +341,8 @@ def test_career_layer_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch)
     (raw_dir / "career").mkdir()
     (raw_dir / "career" / "fixture.yaml").write_text(CAREER_YAML)
     (out / "climate").mkdir(parents=True)
-    months = [{"month": m, "snowfall_in": v} for m, v in zip(range(1, 13), [50, 40, 30, 10, None, 0, 0, 0, 0, 5, 20, 45.5])]
+    months = [{"month": m, "snowfall_in": v, "snowfall_source": "open-meteo"}
+              for m, v in zip(range(1, 13), [50, 40, 30, 10, None, 0, 0, 0, 0, 5, 20, 45.5])]
     (out / "climate" / "fixture-peak.json").write_text(json.dumps({"months": months}))
     result = _run(repo_root, raw_dir, out, tmp_path)
     assert any("aggregates 2 reports, fewer than 3" in w for w in result.warnings)
@@ -810,3 +812,43 @@ def test_trailmap_end_to_end(repo_root, raw_dir, out, tmp_path, lifts_full):
     assert len(tm["lifts"]["features"]) == 2 and tm["resort_id"] == "fixture-peak"
     assert "openskimap-runs" in {s["id"] for s in _load(out, "sources.json")["sources"]}
     assert (raw_dir / "openskimap" / runs_mod.EXTRACT_NAME).exists()
+
+
+def test_published_snowfall_preferred_over_climate(repo_root, raw_dir, out, tmp_path):
+    p = raw_dir / "tier_a" / "fixture.yaml"
+    data = yaml.safe_load(p.read_text())
+    data["resorts"][0]["snow"] = {"annual_avg_in": {"value": 300, "source_id": "fixture-source-a", "as_of": "2026-10-01",
+                                                    "confidence": "published", "note": "resort reported average"}}
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
+    (out / "climate").mkdir(parents=True)
+    months = [{"month": m, "snowfall_in": v, "snowfall_source": src} for m, v, src in
+              [(1, 50, "open-meteo"), (2, 40, "open-meteo"), (3, 30, None), (4, 10, "open-meteo"), (5, None, "open-meteo")]]
+    for rid in ("fixture-peak", "fixture-basin"):
+        (out / "climate" / f"{rid}.json").write_text(json.dumps({"months": months}))
+    (out / "climate" / "fixture-indoor.json").write_text(json.dumps({"months": [{"month": 1, "snowfall_in": 5, "snowfall_source": None}]}))
+    _run(repo_root, raw_dir, out, tmp_path)
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    assert by["fixture-peak"]["snow"]["annual_avg_in"]["value"] == 300
+    assert by["fixture-basin"]["snow"] is None and by["fixture-valley"]["snow"] is None
+    assert "fixture-source-a" in by["fixture-peak"]["sources"]
+    props = {f["properties"]["id"]: f["properties"] for f in _load(out, "resorts.geojson")["features"]}
+    assert (props["fixture-peak"]["snowfall_annual_in"], props["fixture-peak"]["snowfall_annual_source"]) == (300, "published")
+    # climate path: only months with a snowfall_source count (50 + 40 + 10)
+    assert (props["fixture-basin"]["snowfall_annual_in"], props["fixture-basin"]["snowfall_annual_source"]) == (100, "climate")
+    assert (props["fixture-indoor"]["snowfall_annual_in"], props["fixture-indoor"]["snowfall_annual_source"]) == (None, None)
+    assert (props["fixture-valley"]["snowfall_annual_in"], props["fixture-valley"]["snowfall_annual_source"]) == (None, None)
+
+
+def test_snow_schema_rules():
+    from pydantic import ValidationError
+    from pipeline.schemas import Snow
+    ok = {"value": 300, "source_id": "a", "as_of": "2026-10-01", "confidence": "published"}
+    assert Snow.model_validate({"annual_avg_in": ok}).annual_avg_in.value == 300
+    with pytest.raises(ValidationError, match="positive"):
+        Snow.model_validate({"annual_avg_in": {**ok, "value": 0}})
+    with pytest.raises(ValidationError):
+        Snow.model_validate({"annual_avg_in": {**ok, "value": "lots"}})
+    with pytest.raises(ValidationError, match="Extra inputs"):
+        Snow.model_validate({"annual_max_in": ok})
+    with pytest.raises(ValidationError, match="not defined"):
+        Snow.model_validate({"annual_avg_in": ok}, context={"source_ids": {"b"}})

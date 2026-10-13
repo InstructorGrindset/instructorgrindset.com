@@ -68,6 +68,18 @@ class Elevation(StrictModel):
         return self
 
 
+class Snow(StrictModel):
+    """Resort reported snowfall (for example the Wikipedia infobox "snowfall" field)."""
+
+    annual_avg_in: Optional[SourcedNumber] = None
+
+    @model_validator(mode="after")
+    def _positive(self) -> "Snow":
+        if self.annual_avg_in is not None and self.annual_avg_in.value <= 0:
+            raise ValueError("annual_avg_in must be a positive number of inches")
+        return self
+
+
 class Season(StrictModel):
     open_typical: Optional[SourcedMonthDay] = None
     close_typical: Optional[SourcedMonthDay] = None
@@ -135,6 +147,7 @@ class Resort(StrictModel):
     state: StateCode
     size: Size = Field(default_factory=Size)
     elevation: Elevation = Field(default_factory=Elevation)
+    snow: Optional[Snow] = None
     season: Season = Field(default_factory=Season)
     terrain: Terrain = Field(default_factory=Terrain)
     fit: Fit = Field(default_factory=Fit)
@@ -208,6 +221,6 @@ def referenced_source_ids(resort: Resort) -> set[str]:
             for item in obj:
                 walk(item)
 
-    for name in ("tier_a_criteria", "owner", "size", "elevation", "season", "terrain", "career", "editorial"):
+    for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "season", "terrain", "career", "editorial"):
         walk(getattr(resort, name))
     return found
