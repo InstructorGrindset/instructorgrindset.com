@@ -51,6 +51,8 @@ resorts:
       intermediate_pct: {value: 42, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 44, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 400, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-13, confidence: published}
 
   - id: winter-park
     name: Winter Park Resort
@@ -77,6 +79,8 @@ resorts:
       intermediate_pct: {value: 18, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: null
       expert_pct: {value: 3, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published, note: "Source lists five shares: 8% beginner, 18% intermediate, 19% advanced (square diamond), 52% most difficult (black diamond), 3% expert (double black diamond). The 19% and 52% tiers sit between intermediate and expert, so advanced is left empty. Recorded shares sum to 29."}
+    snow:
+      annual_avg_in: {value: 370, source_id: wikipedia-winter-park-resort, as_of: 2026-10-13, confidence: published, note: "Infobox value. The statistics list in the article gives 317.5 in."}
 
   - id: arapahoe-basin
     name: Arapahoe Basin
@@ -103,6 +107,8 @@ resorts:
       intermediate_pct: {value: 20, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 49, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 24, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share Extreme."}
+    snow:
+      annual_avg_in: {value: 350, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-13, confidence: published}
 
   - id: palisades-tahoe
     name: Palisades Tahoe
@@ -126,6 +132,8 @@ resorts:
     elevation:
       base_ft: {value: 6200, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 9050, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: "Infobox value; the article body gives 9,010 ft at Granite Chief."}
+    snow:
+      annual_avg_in: {value: 400, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-13, confidence: published}
 
   - id: mammoth-mountain
     name: Mammoth Mountain
@@ -152,6 +160,8 @@ resorts:
       intermediate_pct: {value: 48, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 37, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 400, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-13, confidence: published}
 
   - id: deer-valley
     name: Deer Valley Resort
@@ -179,6 +189,8 @@ resorts:
       intermediate_pct: {value: 44, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 21, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 294, source_id: wikipedia-deer-valley, as_of: 2026-10-13, confidence: published, note: "Infobox gives two figures, under 150 in at the base and 294 in at the peak; the peak figure is recorded."}
 
   - id: crystal-mountain
     name: Crystal Mountain
@@ -205,6 +217,8 @@ resorts:
       intermediate_pct: {value: 54, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 35, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 350, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-13, confidence: published}
 
   - id: stratton
     name: Stratton Mountain Resort
@@ -232,6 +246,8 @@ resorts:
       intermediate_pct: {value: 35, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 25, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 180, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-13, confidence: published}
 
   - id: solitude
     name: Solitude Mountain Resort
@@ -257,6 +273,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 50, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Facts and figures section. Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 500, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-13, confidence: published}
 
   - id: schweitzer
     name: Schweitzer Mountain
@@ -282,6 +300,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 35, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 5, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published, note: "Infobox. The statistics section gives 15% expert."}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-13, confidence: published}
 
   - id: sugarbush
     name: Sugarbush Resort
@@ -302,6 +322,8 @@ resorts:
     elevation:
       base_ft: {value: 1483, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 4083, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text and statistics list give 262 in."}
 
   - id: snowshoe
     name: Snowshoe Mountain
@@ -322,6 +344,8 @@ resorts:
     elevation:
       base_ft: {value: 3348, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 4848, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 180, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-13, confidence: published}
 
   - id: june-mountain
     name: June Mountain
@@ -347,6 +371,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 45, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: bear-mountain
     name: Bear Mountain
@@ -372,6 +398,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Source lists a separate 15% low intermediate share (blue square) that is not included here. Recorded shares sum to 85."}
       advanced_pct: {value: 30, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 100, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: snow-summit
     name: Snow Summit
@@ -397,6 +425,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published, note: "Source lists a separate 25% low intermediate share (blue square) that is not included here. Recorded shares sum to 75."}
       advanced_pct: {value: 25, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 100, source_id: wikipedia-snow-summit, as_of: 2026-10-13, confidence: published}
 
   - id: snow-valley
     name: Snow Valley Mountain Resort
@@ -422,6 +452,8 @@ resorts:
       intermediate_pct: {value: 45, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 31, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 10, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share Experts only."}
+    snow:
+      annual_avg_in: {value: 150, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-13, confidence: published}
 
   - id: palisades-tahoe-alpine-meadows
     name: Palisades Tahoe (Alpine Meadows)
@@ -448,3 +480,5 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 35, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 495, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-13, confidence: published}

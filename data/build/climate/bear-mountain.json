@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-13T00:45:05Z",
+  "resort_id": "bear-mountain",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "anderson-1976-new-snow-density"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": "no usable SNOTEL station and the ERA5 grid cell sits 1,861 ft below the 7,140 ft base, so ERA5 snowfall would misstate mountain snowfall",
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "bear-mountain",
+      "month": 10,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 63.3,
+      "temp_low_f": 43.0,
+      "wind_mph": 6.6,
+      "sun_pct": 94.9
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 11,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 13.8,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.273,
+        "moist": 0.727
+      },
+      "density_source": "estimated",
+      "temp_high_f": 52.6,
+      "temp_low_f": 34.3,
+      "wind_mph": 6.5,
+      "sun_pct": 92.3
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 12,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 12.5,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.348,
+        "moist": 0.652
+      },
+      "density_source": "estimated",
+      "temp_high_f": 44.5,
+      "temp_low_f": 28.0,
+      "wind_mph": 6.6,
+      "sun_pct": 86.3
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 1,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 12.9,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.32,
+        "moist": 0.68
+      },
+      "density_source": "estimated",
+      "temp_high_f": 44.9,
+      "temp_low_f": 28.4,
+      "wind_mph": 6.6,
+      "sun_pct": 89.7
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 2,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 13.4,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.333,
+        "moist": 0.667
+      },
+      "density_source": "estimated",
+      "temp_high_f": 46.3,
+      "temp_low_f": 28.5,
+      "wind_mph": 7.4,
+      "sun_pct": 88.4
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 3,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 13.0,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.115,
+        "moist": 0.885
+      },
+      "density_source": "estimated",
+      "temp_high_f": 51.8,
+      "temp_low_f": 32.1,
+      "wind_mph": 8.0,
+      "sun_pct": 93.2
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 4,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 15.2,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 58.0,
+      "temp_low_f": 36.0,
+      "wind_mph": 8.3,
+      "sun_pct": 93.9
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 5,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 65.6,
+      "temp_low_f": 42.6,
+      "wind_mph": 7.9,
+      "sun_pct": 95.1
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 6,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 76.4,
+      "temp_low_f": 51.5,
+      "wind_mph": 7.4,
+      "sun_pct": 95.8
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 7,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 80.9,
+      "temp_low_f": 58.0,
+      "wind_mph": 6.5,
+      "sun_pct": 95.9
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 8,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 79.4,
+      "temp_low_f": 57.2,
+      "wind_mph": 6.2,
+      "sun_pct": 95.8
+    },
+    {
+      "resort_id": "bear-mountain",
+      "month": 9,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 73.5,
+      "temp_low_f": 52.3,
+      "wind_mph": 6.6,
+      "sun_pct": 95.3
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T00:36:32Z",
+  "generated_at": "2026-10-13T00:39:50Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -673,7 +673,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 120,
+          "source_id": "wikipedia-alpine-valley-ski-area-ohio",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -1096,7 +1104,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 545,
+          "source_id": "wikipedia-alta-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text gives 543 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -1301,7 +1317,15 @@
           "note": "Lift served; the summit is 3,939 ft."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 650,
+          "source_id": "wikipedia-alyeska-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox gives three figures, 650 in at the top, 512 in at mid mountain and 208 in at the base; the top figure is recorded."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -1974,7 +1998,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 350,
+          "source_id": "wikipedia-arapahoe-basin",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -2611,7 +2643,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-aspen-highlands",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -2890,7 +2930,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-aspen-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -4001,7 +4049,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "wikipedia-bear-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -4452,7 +4508,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 323,
+          "source_id": "wikipedia-beaver-creek-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -5053,7 +5117,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 110,
+          "source_id": "wikipedia-berkshire-east-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -7349,7 +7421,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "wikipedia-bogus-basin",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text gives a historical average of 200 to 250 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -8630,7 +8710,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 355,
+          "source_id": "wikipedia-breckenridge-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -9066,7 +9154,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 350,
+          "source_id": "wikipedia-bridger-bowl-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -9307,7 +9403,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 700,
+          "source_id": "wikipedia-brighton-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -9822,7 +9926,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "wikipedia-buck-hill",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text says less than 60 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -10313,7 +10425,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 217,
+          "source_id": "wikipedia-burke-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -10416,7 +10536,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "wikipedia-buttermilk-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -11411,7 +11539,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 160,
+          "source_id": "wikipedia-cannon-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -13290,7 +13426,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 310,
+          "source_id": "wikipedia-copper-mountain-colorado",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -14252,7 +14396,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-crested-butte-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -14815,7 +14967,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 350,
+          "source_id": "wikipedia-crystal-mountain-washington",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -15494,7 +15654,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 294,
+          "source_id": "wikipedia-deer-valley",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox gives two figures, under 150 in at the base and 294 in at the peak; the peak figure is recorded."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -16270,7 +16438,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "wikipedia-dollar-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -18207,7 +18383,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 500,
+          "source_id": "wikipedia-grand-targhee-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -18963,7 +19147,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 120,
+          "source_id": "wikipedia-gunstock-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -19409,7 +19601,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 360,
+          "source_id": "wikipedia-heavenly-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -21572,7 +21772,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 170,
+          "source_id": "wikipedia-howelsen-hill-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -21840,7 +22048,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 120,
+          "source_id": "wikipedia-hunter-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -22201,7 +22417,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "wikipedia-hyland-hills-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text says less than 60 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -22645,7 +22869,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 459,
+          "source_id": "wikipedia-jackson-hole-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -22913,7 +23145,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 359,
+          "source_id": "wikipedia-jay-peak-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -23243,7 +23483,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "wikipedia-june-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -24023,7 +24271,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 230,
+          "source_id": "wikipedia-keystone-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -24309,7 +24565,15 @@
           "note": "Infobox value; the statistics section gives Killington Peak as 4,229 ft."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "wikipedia-killington-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -24514,7 +24778,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 500,
+          "source_id": "wikipedia-kirkwood-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox gives about 500 in. The article text gives seasonal snowfall of 354 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -25533,7 +25805,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 31,
+          "source_id": "wikipedia-liberty-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -26859,7 +27139,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "wikipedia-mad-river-glen",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text says it averages over 150 in of snow a year."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -27225,7 +27513,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 145,
+          "source_id": "wikipedia-magic-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -27559,7 +27855,15 @@
           "note": "Infobox value; the article body says 11,059 ft."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 400,
+          "source_id": "wikipedia-mammoth-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -28499,7 +28803,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "wikipedia-middlebury-college-snow-bowl",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -29303,7 +29615,15 @@
           "note": "Top of LaValle Creek chair, rounded."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-montana-snowbowl",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -29634,7 +29954,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-mount-bohemia",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text gives a 250 to 300 in average."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -30829,7 +31157,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 150,
+          "source_id": "wikipedia-mount-snow",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article statistics give 158 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -31197,7 +31533,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "wikipedia-mount-sunapee-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -31872,7 +32216,15 @@
           "note": "Top of Summit Express."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 462,
+          "source_id": "wikipedia-mount-bachelor-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -32147,7 +32499,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 641,
+          "source_id": "wikipedia-mt-baker-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -32730,7 +33090,15 @@
           "note": "Infobox value; the text gives 7,305 ft at the top of Cascade Express."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 430,
+          "source_id": "wikipedia-mount-hood-meadows",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -33982,7 +34350,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 350,
+          "source_id": "wikipedia-northstar-california",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -34744,7 +35120,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 199.2,
+          "source_id": "wikipedia-okemo-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox gives 16.6 ft, converted to inches."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -35257,7 +35641,15 @@
           "note": "Infobox value; the article body gives 9,010 ft at Granite Chief."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 400,
+          "source_id": "wikipedia-palisades-tahoe",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -35519,7 +35911,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 495,
+          "source_id": "wikipedia-alpine-meadows-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -35634,7 +36034,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 25,
+          "source_id": "wikipedia-paoli-peaks",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -35915,7 +36323,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 355,
+          "source_id": "wikipedia-park-city-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The statistics list in the article gives 365 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -36676,7 +37092,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "wikipedia-pico-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -37733,7 +38157,15 @@
           "note": "Lift served; 9,422 ft by hiking."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 360,
+          "source_id": "wikipedia-powder-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -39736,7 +40168,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 110,
+          "source_id": "wikipedia-saskadena-six",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -40078,7 +40518,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-schweitzer-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -40524,7 +40972,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 135,
+          "source_id": "wikipedia-seven-springs-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -41205,7 +41661,15 @@
           "note": "Includes hike to terrain."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 475,
+          "source_id": "wikipedia-silverton-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Midpoint of the infobox range of 450 to 500 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -42028,7 +42492,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "wikipedia-ski-cooper",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -43693,7 +44165,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "wikipedia-snow-summit",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -43894,7 +44374,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 150,
+          "source_id": "wikipedia-snow-valley-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -44169,7 +44657,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 350,
+          "source_id": "wikipedia-snowbasin",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -44289,7 +44785,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 500,
+          "source_id": "wikipedia-snowbird-utah",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox average. It also lists a record of 838 in for 2023."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -44983,7 +45487,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 180,
+          "source_id": "wikipedia-snowshoe-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45474,7 +45986,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 500,
+          "source_id": "wikipedia-solitude-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45994,7 +46514,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 400,
+          "source_id": "wikipedia-steamboat-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -46344,7 +46872,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 450,
+          "source_id": "wikipedia-stevens-pass-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -46704,7 +47240,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 224,
+          "source_id": "wikipedia-stowe-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Average annual snowfall at the resort summit, per the article text."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -46995,7 +47539,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 180,
+          "source_id": "wikipedia-stratton-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -47270,7 +47822,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 500,
+          "source_id": "wikipedia-sugar-bowl-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -47630,7 +48190,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "wikipedia-sugarbush-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text and statistics list give 262 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -47881,7 +48449,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "wikipedia-sugarloaf-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox gives this as a 10 year average."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -48474,7 +49050,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 220,
+          "source_id": "wikipedia-bald-mountain-idaho",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox of the Bald Mountain article."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -48905,7 +49489,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 155,
+          "source_id": "wikipedia-sunday-river-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -49748,7 +50340,15 @@
           "note": "Top of the Kachina lift."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-taos-ski-valley",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -49869,7 +50469,15 @@
           "note": "Includes hike to terrain."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 330,
+          "source_id": "wikipedia-telluride-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text says over 300 in each winter season."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -51348,7 +51956,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 540,
+          "source_id": "wikipedia-timberline-lodge-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox gives yearly snowfall of 45 ft, converted to inches."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -52777,7 +53393,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 354,
+          "source_id": "wikipedia-vail-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text says snowfall has averaged 360 in over the last thirty years, and its statistics list gives 370 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -53545,7 +54169,15 @@
           "note": "Lift served; true summit 3,997 ft."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 148,
+          "source_id": "wikipedia-waterville-valley-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -54145,7 +54777,15 @@
           "note": "Lift served; hike to terrain tops out at 4,650 ft."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 190,
+          "source_id": "wikipedia-whiteface-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -54435,7 +55075,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "wikipedia-whitefish-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -54929,7 +55577,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "wikipedia-wildcat-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The article text says over 200 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -55370,7 +56026,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 48,
+          "source_id": "wikipedia-wilmot-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -55718,7 +56382,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 370,
+          "source_id": "wikipedia-winter-park-resort",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": "Infobox value. The statistics list in the article gives 317.5 in."
+        }
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,

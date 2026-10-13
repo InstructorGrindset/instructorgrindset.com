@@ -62,6 +62,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 50, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Infobox labels this black diamond share most difficult; the article says half of the terrain is rated expert. Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 459, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-13, confidence: published}
 
   - id: aspen-mountain
     tier_a_status: approved
@@ -88,6 +90,8 @@ resorts:
       intermediate_pct: {value: 48, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 26, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 26, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: aspen-highlands
     tier_a_status: approved
@@ -113,6 +117,8 @@ resorts:
       intermediate_pct: {value: 23, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 12, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 65, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-aspen-highlands, as_of: 2026-10-13, confidence: published}
 
   - id: telluride
     tier_a_status: approved
@@ -138,6 +144,8 @@ resorts:
       intermediate_pct: {value: 36, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 41, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 330, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says over 300 in each winter season."}
 
   - id: sun-valley
     name: Sun Valley (Bald Mountain)
@@ -166,6 +174,8 @@ resorts:
       intermediate_pct: {value: 42, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 22, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 220, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-13, confidence: published, note: "Infobox of the Bald Mountain article."}
 
   - id: dollar-mountain
     name: Dollar Mountain
@@ -187,6 +197,8 @@ resorts:
     elevation:
       base_ft: {value: 6010, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 6638, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-dollar-mountain, as_of: 2026-10-13, confidence: published}
 
   - id: alta
     tier_a_status: approved
@@ -212,6 +224,8 @@ resorts:
       intermediate_pct: {value: 30, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 55, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 545, source_id: wikipedia-alta-ski-area, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text gives 543 in."}
 
   - id: snowbird
     tier_a_status: approved
@@ -237,6 +251,8 @@ resorts:
       intermediate_pct: {value: 38, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 35, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 500, source_id: wikipedia-snowbird-utah, as_of: 2026-10-13, confidence: published, note: "Infobox average. It also lists a record of 838 in for 2023."}
 
   - id: sugarloaf
     tier_a_status: approved
@@ -262,6 +278,8 @@ resorts:
       intermediate_pct: {value: 31, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 25, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 21, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-13, confidence: published, note: "Infobox gives this as a 10 year average."}
 
   - id: sugar-bowl
     tier_a_status: approved
@@ -288,6 +306,8 @@ resorts:
       intermediate_pct: {value: 45, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 38, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 500, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-13, confidence: published}
 
   - id: burke
     tier_a_status: approved
@@ -308,6 +328,8 @@ resorts:
     elevation:
       base_ft: {value: 1210, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3267, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 217, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: waterville-valley
     tier_a_status: approved
@@ -334,6 +356,8 @@ resorts:
       intermediate_pct: {value: 59, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 26, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published, note: "Infobox labels the black diamond share Expert; the article lead says 26% advanced/expert. Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 148, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-13, confidence: published}
 
   - id: big-sky
     name: Big Sky Resort
@@ -387,6 +411,8 @@ resorts:
       intermediate_pct: {value: 25, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 51, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-13, confidence: published}
 
   - id: snowmass
     name: Snowmass
@@ -439,3 +465,5 @@ resorts:
       intermediate_pct: {value: 39, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 26, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 0, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-13, confidence: published}

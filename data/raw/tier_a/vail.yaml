@@ -225,6 +225,13 @@ resorts:
       confidence: published
       note: "Infobox labels this share advanced; the trails section gives 53% advanced/expert. Source combines advanced and expert."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 354
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The article text says snowfall has averaged 360 in over the last thirty years, and its statistics list gives 370 in."
 - id: beaver-creek
   name: Beaver Creek
   state: CO
@@ -296,6 +303,12 @@ resorts:
       confidence: published
       note: "Source combines advanced and expert."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 323
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-13
+      confidence: published
 - id: breckenridge
   name: Breckenridge
   state: CO
@@ -367,6 +380,12 @@ resorts:
       source_id: wikipedia-breckenridge-ski-resort
       as_of: 2026-10-12
       confidence: published
+  snow:
+    annual_avg_in:
+      value: 355
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-13
+      confidence: published
 - id: crested-butte
   name: Crested Butte
   state: CO
@@ -437,6 +456,12 @@ resorts:
       confidence: published
       note: "Source combines advanced and expert."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 300
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
 - id: park-city
   name: Park City
   state: UT
@@ -509,6 +534,13 @@ resorts:
       as_of: 2026-10-12
       confidence: published
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 355
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The statistics list in the article gives 365 in."
 - id: northstar
   name: Northstar California
   state: CA
@@ -573,6 +605,12 @@ resorts:
       as_of: 2026-10-12
       confidence: published
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 350
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-13
+      confidence: published
 - id: kirkwood
   name: Kirkwood
   state: CA
@@ -638,6 +676,13 @@ resorts:
       confidence: published
       note: "Source combines advanced and expert."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 500
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox gives about 500 in. The article text gives seasonal snowfall of 354 in."
 - id: stowe
   name: Stowe
   state: VT
@@ -709,6 +754,13 @@ resorts:
       confidence: published
       note: "Source combines advanced and expert. Shares sum to 101 as stated."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 224
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Average annual snowfall at the resort summit, per the article text."
 - id: mount-snow
   name: Mount Snow
   state: VT
@@ -779,6 +831,13 @@ resorts:
       source_id: wikipedia-mount-snow
       as_of: 2026-10-12
       confidence: published
+  snow:
+    annual_avg_in:
+      value: 150
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The article statistics give 158 in."
 - id: wildcat
   name: Wildcat Mountain
   state: NH
@@ -846,6 +905,13 @@ resorts:
       confidence: published
       note: "Source labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 200
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The article text says over 200 in."
 - id: keystone
   name: Keystone
   state: CO
@@ -910,6 +976,12 @@ resorts:
       confidence: published
       note: "Infobox, 135 trails, labels this share advanced; the trails section gives 130 trails at 12% beginner, 39% intermediate and 49% advanced/expert. Source combines advanced and expert."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 230
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-13
+      confidence: published
 - id: heavenly
   name: Heavenly
   state: CA
@@ -974,6 +1046,12 @@ resorts:
       as_of: 2026-10-12
       confidence: published
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 360
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
 - id: stevens-pass
   name: Stevens Pass
   state: WA
@@ -1040,6 +1118,12 @@ resorts:
       as_of: 2026-10-12
       confidence: published
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 450
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-13
+      confidence: published
 - id: okemo
   name: Okemo
   state: VT
@@ -1088,6 +1172,13 @@ resorts:
       source_id: wikipedia-okemo-mountain
       as_of: '2026-10-11'
       confidence: published
+  snow:
+    annual_avg_in:
+      value: 199.2
+      source_id: wikipedia-okemo-mountain
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox gives 16.6 ft, converted to inches."
 - id: attitash
   name: Attitash Mountain
   state: NH
@@ -1209,6 +1300,12 @@ resorts:
       source_id: wikipedia-hunter-mountain-ski-area
       as_of: 2026-10-12
       confidence: published
+  snow:
+    annual_avg_in:
+      value: 120
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-13
+      confidence: published
 - id: mount-sunapee
   name: Mount Sunapee Resort
   state: NH
@@ -1274,6 +1371,12 @@ resorts:
       confidence: published
       note: "Infobox labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert. The article text says 26% easy, 49% intermediate and 25% advanced."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 100
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-13
+      confidence: published
 - id: crotched-mountain
   name: Crotched Mountain
   state: NH
@@ -1396,6 +1499,12 @@ resorts:
       value: 10
       source_id: wikipedia-seven-springs-mountain-resort
       as_of: 2026-10-12
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 135
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-13
       confidence: published
 - id: hidden-valley-pa
   name: Hidden Valley Resort
@@ -1557,6 +1666,12 @@ resorts:
       value: 18
       source_id: wikipedia-liberty-mountain-resort
       as_of: 2026-10-12
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 31
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-13
       confidence: published
 - id: roundtop-mountain
   name: Roundtop Mountain Resort
@@ -1879,6 +1994,12 @@ resorts:
       source_id: wikipedia-alpine-valley-ski-area-ohio
       as_of: '2026-10-11'
       confidence: published
+  snow:
+    annual_avg_in:
+      value: 120
+      source_id: wikipedia-alpine-valley-ski-area-ohio
+      as_of: 2026-10-13
+      confidence: published
 - id: boston-mills
   name: Boston Mills
   state: OH
@@ -2146,6 +2267,12 @@ resorts:
       confidence: published
       note: "Infobox. The article text gives 10% advanced and 10% freestyle terrain park."
     expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 25
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-13
+      confidence: published
 - id: mount-brighton
   name: Mount Brighton
   state: MI
@@ -2257,4 +2384,10 @@ resorts:
       value: 960
       source_id: wikipedia-wilmot-mountain
       as_of: '2026-10-11'
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 48
+      source_id: wikipedia-wilmot-mountain
+      as_of: 2026-10-13
       confidence: published

@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-13T00:45:05Z",
+  "resort_id": "attitash",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "anderson-1976-new-snow-density"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": null,
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "attitash",
+      "month": 10,
+      "snowfall_in": 1.6,
+      "powder_days": 0.04,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 2.8,
+      "snowfall_source": "era5",
+      "density_pct_median": 16.9,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 58.0,
+      "temp_low_f": 40.8,
+      "wind_mph": 8.3,
+      "sun_pct": 65.3
+    },
+    {
+      "resort_id": "attitash",
+      "month": 11,
+      "snowfall_in": 7.1,
+      "powder_days": 0.24,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.3,
+      "snowfall_source": "era5",
+      "density_pct_median": 16.0,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.07,
+        "moist": 0.93
+      },
+      "density_source": "estimated",
+      "temp_high_f": 45.4,
+      "temp_low_f": 29.9,
+      "wind_mph": 8.7,
+      "sun_pct": 64.7
+    },
+    {
+      "resort_id": "attitash",
+      "month": 12,
+      "snowfall_in": 16.5,
+      "powder_days": 0.4,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.9,
+      "snowfall_source": "era5",
+      "density_pct_median": 11.9,
+      "density_mix": {
+        "dry": 0.08,
+        "average": 0.443,
+        "moist": 0.477
+      },
+      "density_source": "estimated",
+      "temp_high_f": 34.0,
+      "temp_low_f": 18.5,
+      "wind_mph": 9.1,
+      "sun_pct": 61.4
+    },
+    {
+      "resort_id": "attitash",
+      "month": 1,
+      "snowfall_in": 15.1,
+      "powder_days": 0.24,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.4,
+      "snowfall_source": "era5",
+      "density_pct_median": 11.2,
+      "density_mix": {
+        "dry": 0.167,
+        "average": 0.433,
+        "moist": 0.4
+      },
+      "density_source": "estimated",
+      "temp_high_f": 28.1,
+      "temp_low_f": 11.5,
+      "wind_mph": 9.3,
+      "sun_pct": 68.7
+    },
+    {
+      "resort_id": "attitash",
+      "month": 2,
+      "snowfall_in": 18.0,
+      "powder_days": 0.4,
+      "banner_days": 0.04,
+      "avg_storm_depth_in": 4.3,
+      "snowfall_source": "era5",
+      "density_pct_median": 11.1,
+      "density_mix": {
+        "dry": 0.178,
+        "average": 0.389,
+        "moist": 0.433
+      },
+      "density_source": "estimated",
+      "temp_high_f": 30.9,
+      "temp_low_f": 13.3,
+      "wind_mph": 9.7,
+      "sun_pct": 70.7
+    },
+    {
+      "resort_id": "attitash",
+      "month": 3,
+      "snowfall_in": 14.4,
+      "powder_days": 0.44,
+      "banner_days": 0.08,
+      "avg_storm_depth_in": 3.9,
+      "snowfall_source": "era5",
+      "density_pct_median": 14.2,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.237,
+        "moist": 0.763
+      },
+      "density_source": "estimated",
+      "temp_high_f": 40.0,
+      "temp_low_f": 23.0,
+      "wind_mph": 9.7,
+      "sun_pct": 69.7
+    },
+    {
+      "resort_id": "attitash",
+      "month": 4,
+      "snowfall_in": 8.9,
+      "powder_days": 0.32,
+      "banner_days": 0.04,
+      "avg_storm_depth_in": 4.1,
+      "snowfall_source": "era5",
+      "density_pct_median": 16.9,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.068,
+        "moist": 0.932
+      },
+      "density_source": "estimated",
+      "temp_high_f": 53.2,
+      "temp_low_f": 35.0,
+      "wind_mph": 9.5,
+      "sun_pct": 66.5
+    },
+    {
+      "resort_id": "attitash",
+      "month": 5,
+      "snowfall_in": 0.7,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 2.5,
+      "snowfall_source": "era5",
+      "density_pct_median": 16.9,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 65.9,
+      "temp_low_f": 46.2,
+      "wind_mph": 8.5,
+      "sun_pct": 65.5
+    },
+    {
+      "resort_id": "attitash",
+      "month": 6,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 74.2,
+      "temp_low_f": 55.3,
+      "wind_mph": 7.8,
+      "sun_pct": 68.6
+    },
+    {
+      "resort_id": "attitash",
+      "month": 7,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 80.0,
+      "temp_low_f": 61.1,
+      "wind_mph": 7.4,
+      "sun_pct": 76.2
+    },
+    {
+      "resort_id": "attitash",
+      "month": 8,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 78.0,
+      "temp_low_f": 59.1,
+      "wind_mph": 7.1,
+      "sun_pct": 78.1
+    },
+    {
+      "resort_id": "attitash",
+      "month": 9,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 71.1,
+      "temp_low_f": 51.7,
+      "wind_mph": 7.3,
+      "sun_pct": 73.0
+    }
+  ]
+}

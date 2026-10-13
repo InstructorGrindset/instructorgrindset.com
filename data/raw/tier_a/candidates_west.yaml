@@ -69,6 +69,8 @@ resorts:
       intermediate_pct: {value: 25, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 36, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 18, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 310, source_id: wikipedia-copper-mountain-colorado, as_of: 2026-10-13, confidence: published}
 
   - id: ski-cooper
     name: Ski Cooper
@@ -95,6 +97,8 @@ resorts:
       intermediate_pct: {value: 35, source_id: wikipedia-ski-cooper, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 34, source_id: wikipedia-ski-cooper, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-ski-cooper, as_of: 2026-10-13, confidence: published}
 
   - id: silverton-mountain
     name: Silverton Mountain
@@ -116,6 +120,8 @@ resorts:
     elevation:
       base_ft: {value: 10400, source_id: wikipedia-silverton-mountain, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 13487, source_id: wikipedia-silverton-mountain, as_of: 2026-10-11, confidence: published, note: "Includes hike to terrain."}
+    snow:
+      annual_avg_in: {value: 475, source_id: wikipedia-silverton-mountain, as_of: 2026-10-13, confidence: published, note: "Midpoint of the infobox range of 450 to 500 in."}
 
   - id: howelsen-hill
     name: Howelsen Hill Ski Area
@@ -138,6 +144,8 @@ resorts:
     elevation:
       base_ft: {value: 6696, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 7136, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 170, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: brighton
     name: Brighton Ski Resort
@@ -164,6 +172,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 39, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 700, source_id: wikipedia-brighton-ski-resort, as_of: 2026-10-13, confidence: published}
 
   - id: snowbasin
     name: Snowbasin
@@ -190,6 +200,8 @@ resorts:
       intermediate_pct: {value: 50, source_id: wikipedia-snowbasin, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 30, source_id: wikipedia-snowbasin, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 350, source_id: wikipedia-snowbasin, as_of: 2026-10-13, confidence: published}
 
   - id: powder-mountain
     name: Powder Mountain
@@ -216,6 +228,8 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-powder-mountain, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 35, source_id: wikipedia-powder-mountain, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 360, source_id: wikipedia-powder-mountain, as_of: 2026-10-13, confidence: published}
 
   - id: mt-bachelor
     name: Mt. Bachelor
@@ -242,6 +256,8 @@ resorts:
       intermediate_pct: {value: 35, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 30, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 20, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 462, source_id: wikipedia-mount-bachelor-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: timberline-lodge
     name: Timberline Lodge ski area
@@ -268,6 +284,8 @@ resorts:
       intermediate_pct: {value: 50, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 30, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 540, source_id: wikipedia-timberline-lodge-ski-area, as_of: 2026-10-13, confidence: published, note: "Infobox gives yearly snowfall of 45 ft, converted to inches."}
 
   - id: mt-baker
     name: Mt. Baker Ski Area
@@ -295,6 +313,8 @@ resorts:
       intermediate_pct: {value: 45, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 31, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 641, source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: bridger-bowl
     name: Bridger Bowl
@@ -316,6 +336,8 @@ resorts:
     elevation:
       base_ft: {value: 6100, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 8700, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 350, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: whitefish-mountain
     name: Whitefish Mountain Resort
@@ -342,6 +364,8 @@ resorts:
       intermediate_pct: {value: 35, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 40, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 10, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-13, confidence: published}
 
   - id: alyeska
     name: Alyeska Resort
@@ -369,6 +393,8 @@ resorts:
       intermediate_pct: {value: 52, source_id: wikipedia-alyeska-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 37, source_id: wikipedia-alyeska-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 650, source_id: wikipedia-alyeska-resort, as_of: 2026-10-13, confidence: published, note: "Infobox gives three figures, 650 in at the top, 512 in at mid mountain and 208 in at the base; the top figure is recorded."}
 
   - id: bogus-basin
     name: Bogus Basin
@@ -395,6 +421,8 @@ resorts:
       intermediate_pct: {value: 45, source_id: wikipedia-bogus-basin, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 33, source_id: wikipedia-bogus-basin, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-bogus-basin, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text gives a historical average of 200 to 250 in."}
 
   - id: montana-snowbowl
     name: Montana Snowbowl
@@ -416,6 +444,8 @@ resorts:
     elevation:
       base_ft: {value: 5000, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published, note: "Rounded in the infobox."}
       summit_ft: {value: 7600, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-11, confidence: published, note: "Top of LaValle Creek chair, rounded."}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-montana-snowbowl, as_of: 2026-10-13, confidence: published}
 
   # Owner approved additions (coordinator message, 2026-10-11). Owner selection is the only criterion:
   # neither article supports diehard, luxury, athlete_development, heritage or year_round_training
@@ -446,6 +476,8 @@ resorts:
       intermediate_pct: {value: 70, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 15, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 5, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 500, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-13, confidence: published}
 
   - id: mt-hood-meadows
     name: Mt. Hood Meadows
@@ -473,3 +505,5 @@ resorts:
       intermediate_pct: {value: 40, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 15, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 30, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 430, source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-13, confidence: published}

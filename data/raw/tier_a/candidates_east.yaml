@@ -73,6 +73,8 @@ resorts:
       intermediate_pct: {value: 46, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 30, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 190, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-13, confidence: published}
 
   # ---------------------------------------------------------------- Vermont
   - id: killington
@@ -101,6 +103,8 @@ resorts:
       intermediate_pct: {value: 33, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 39, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-13, confidence: published}
 
   - id: pico
     tier_a_status: approved
@@ -122,6 +126,8 @@ resorts:
     elevation:
       base_ft: {value: 2000, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3967, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-pico-mountain, as_of: 2026-10-13, confidence: published}
 
   - id: mad-river-glen
     tier_a_status: approved
@@ -144,6 +150,8 @@ resorts:
     elevation:
       base_ft: {value: 1600, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3637, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-mad-river-glen, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says it averages over 150 in of snow a year."}
 
   - id: jay-peak
     tier_a_status: approved
@@ -165,6 +173,8 @@ resorts:
     elevation:
       base_ft: {value: 1815, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 3862, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 359, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-13, confidence: published}
 
   - id: magic-mountain
     tier_a_status: approved
@@ -186,6 +196,8 @@ resorts:
     elevation:
       base_ft: {value: 1350, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 2850, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 145, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: hermitage-club
     tier_a_status: approved
@@ -225,6 +237,8 @@ resorts:
     elevation:
       base_ft: {value: 550, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 1200, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 110, source_id: wikipedia-saskadena-six, as_of: 2026-10-13, confidence: published}
 
   - id: middlebury-snow-bowl
     tier_a_status: approved
@@ -246,6 +260,8 @@ resorts:
     elevation:
       base_ft: {value: 1720, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 2720, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-13, confidence: published}
 
   # ---------------------------------------------------------------- New Hampshire
   - id: cannon
@@ -273,6 +289,8 @@ resorts:
       intermediate_pct: {value: 47, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 32, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Infobox labels the black diamond share Expert; the article section is titled Expert and advanced (32%). Source combines advanced and expert."}
       expert_pct: null
+    snow:
+      annual_avg_in: {value: 160, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-13, confidence: published}
 
   - id: cranmore
     tier_a_status: approved
@@ -322,6 +340,8 @@ resorts:
       intermediate_pct: {value: 52, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 31, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 2, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 120, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-13, confidence: published}
 
   # ---------------------------------------------------------------- Maine
   - id: sunday-river
@@ -349,6 +369,8 @@ resorts:
       intermediate_pct: {value: 36, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 19, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 12, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 155, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-13, confidence: published}
 
   - id: black-mountain-maine
     tier_a_status: approved
@@ -397,6 +419,8 @@ resorts:
       intermediate_pct: {value: 35, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
       advanced_pct: {value: 30, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
       expert_pct: {value: 5, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 110, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-13, confidence: published}
 
   # ---------------------------------------------------------------- Michigan
   - id: boyne-mountain
@@ -459,6 +483,8 @@ resorts:
       acres: {value: 550, source_id: wikipedia-mount-bohemia, as_of: 2026-10-11, confidence: published}
       vertical_ft: {value: 804, source_id: wikipedia-mount-bohemia, as_of: 2026-10-11, confidence: published}
       lifts: {value: 2, source_id: wikipedia-mount-bohemia, as_of: 2026-10-11, confidence: published, note: "1 triple and 1 double chair."}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-mount-bohemia, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text gives a 250 to 300 in average."}
 
   # ---------------------------------------------------------------- Minnesota
   - id: buck-hill
@@ -481,6 +507,8 @@ resorts:
     elevation:
       base_ft: {value: 949, source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 1211, source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 60, source_id: wikipedia-buck-hill, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says less than 60 in."}
 
   - id: hyland-hills
     tier_a_status: approved
@@ -502,3 +530,5 @@ resorts:
     elevation:
       base_ft: {value: 900, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published}
       summit_ft: {value: 1075, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 60, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says less than 60 in."}
