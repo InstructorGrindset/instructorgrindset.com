@@ -677,7 +677,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 * Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
   A resort page validates the record its stub embeds, so it needs Zod and `definitions.json` but no `resorts.json`.
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
-* Lazy modules: `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only), `detailcontrols.js` (resort
+* Lazy modules: `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
+  when the climate section nears the screen), `detailcontrols.js` (resort
   detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event and the first
   contentful paint. The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
@@ -726,7 +727,9 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 * **Changes:**
   1. Background work waits for the window `load` event and the first contentful paint (`whenPainted` in `data.js`,
      the font loader in the page head). Job postings (`loadPostings`, which bring Zod onto cluster pages) and the
-     climate charts wait for the first paint too; the charts then draw one per task.
+     climate charts wait for the first paint too. The chart figures and the data table render then; Chart.js loads
+     and draws the charts, one per task, only when the climate section comes within 600 px of the panel's visible
+     part (`nearView` in `charts.js`, an IntersectionObserver on `.panel-scroll`).
   2. The first map frame is an inline SVG (`preview.js`); the compositor draws it off the main thread.
   3. Startup runs as three short tasks. The list view builds the first time it opens. The first render skips a
      forced layout.
@@ -739,13 +742,18 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   | `/map/` | 92 [91 to 97] | 98 [98 to 99] | 2.00 s, 1.97 s | 293 ms, 10 ms |
   | Vail | 90 [68 to 93] | 97 [96 to 97] | 2.72 s, 2.45 s | 205 ms, 28 ms |
   | I 70 Corridor (cluster) | 92 [90 to 95] | 98 [98 to 99] | 2.70 s, 1.97 s | 184 ms, 41 ms |
-  | Aspen Mountain (climate charts) | 78 [71 to 79] | 87 [85 to 88] | 3.22 s, 2.29 s | 501 ms, 385 ms |
+  | Aspen Mountain (climate charts) | 78 [71 to 79] | 97 [96 to 97] | 3.22 s, 2.28 s | 501 ms, 66 ms |
+  | Alta (climate charts) | 92 [85 to 94] | 97 [95 to 97] | 2.30 s, 2.29 s | 259 ms, 59 ms |
+
+  The Aspen and Alta "after" runs include the charts drawn on scroll (5 more interleaved runs, load 0.7 to 3.7;
+  Alta's "before" is the tree with every other change, where charts drew right after the first paint: Aspen was 90
+  [75 to 95] there).
 
   Under a load of 9 to 14 the gap widens: `/map/` 67 before, 98 after (95 to 98). CLS stays at 0.003.
 * **What is left** on resort pages: the stub's record and `detail/<id>.json` are validated with Zod during the first
   render (`detail/vail.json` is 166 KB, mostly transit), and the web font swap relays out the long panel (30 to
-  60 ms). On the 11 resorts with climate charts, Chart.js (69 KB) and its first canvas (about 130 ms) plus the chart
-  animations keep blocking time near 400 ms; drawing the charts when their section scrolls into view would remove it.
+  60 ms). On the 11 resorts with climate charts, Chart.js (69 KB), its first canvas (about 130 ms) and the chart
+  animations now cost their time when the reader scrolls to the section.
 
 ### Color modes: heat maps
 Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state
