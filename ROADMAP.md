@@ -204,7 +204,7 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | 16 | 3 | GTFS transit extracts for Tier A clusters (Summit Stage, RFTA, Park City Transit, TART, ECO Transit) | R+C | Done: 20 agencies, 30 Tier A detail maps, schedule dates shown; Park City, Jackson, Big Sky, Whitefish, Taos and Mt Hood feeds are not in the reachable catalog; ECO, Crested Butte, Tahoe TD and Mountain Rides feeds are stale |
 | 17 | 3 | Yearly ownership re-verification job for Vail and Alterra | C | 11 | Build fails when a portfolio source is older than one build cycle |
 | 18 | 3 | Real device QA after launch: phones and tablets, Lighthouse and axe on the live site | C | 11 | Issues filed and fixed |
-| 18a | 1 | Map page performance: make Lighthouse Performance on /map/ reliably 90+ (median 95+); split the 2D preview long task, fix late paint | C | none | In progress |
+| 18a | 1 | Map page performance: make Lighthouse Performance on /map/ reliably 90+ (median 95+); split the 2D preview long task, fix late paint | C | none | Done: /map/ 98 [98 to 99], Vail 97, cluster 98. Still open: the 11 resorts with climate charts score 87 |
 | 18b | 1 | Mammoth base point: the record uses the Wikipedia article coordinate (37.63056, -119.0325), about 2.3 km from Main Lodge (37.6514, -119.0373); move it to a sourced base area point | R | none | Base point cited; transit and commute recomputed |
 | 19 | ongoing | **Owner:** MetroSlopes exact address when the facility opens; import Formspree reports each month | R | Owner | Dot moved; reports aggregated |
 
