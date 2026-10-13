@@ -132,7 +132,7 @@ export async function createRecolor(root, index, { onChange, announce }) {
       ? `Heat map of ${m.label.toLowerCase()}, on a scale of ${lg.ticks.join(', ')}.`
       : d.min === d.max
         ? `Heat map of ${m.label.toLowerCase()}. Every resort with data shows ${SPOKEN[key](d.min)}.`
-        : `Heat map of ${m.label.toLowerCase()}. Resorts range from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.`);
+        : `Heat map of ${m.label.toLowerCase()}. Resorts range from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.${surface.raster ? ' The background comes from NOAA station normals.' : ''}`);
   }
 
   function drawLegend(m, d, surface) {
@@ -147,7 +147,7 @@ export async function createRecolor(root, index, { onChange, announce }) {
       return h('span', { class: `heat-tick${edge ? ` heat-tick-${edge}` : ''}`, style: `left:${x.toFixed(1)}%` }, tick(t));
     });
     const notes = surface.raster
-      ? [`Background: NOAA station normals, 1991 to 2020. Each resort adds a pocket of its own published snowfall within ${fmtInt(surface.raster.pockets.radius_km)} km.`,
+      ? [`Background: NOAA station normals, 1991 to 2020, with a ${fmtInt(surface.raster.pockets.radius_km)} km pocket of each resort's published snowfall.`,
         'Colors between stations and resorts are smoothed estimates. Tooltips and resort pages show only sourced values.']
       : ['Colors between resorts are smoothed estimates. Tooltips and resort pages show only sourced values.',
         `Colors fade where the nearest resort with data is more than ${km} km away.`];

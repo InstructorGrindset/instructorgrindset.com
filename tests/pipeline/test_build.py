@@ -245,11 +245,13 @@ def test_undefined_source_blocks_build(repo_root, raw_dir, out, tmp_path):
 
 
 def test_fetch_failure_falls_back(repo_root, raw_dir, out, tmp_path, monkeypatch):
-    from pipeline import openskimap
+    from pipeline import lifts, openskimap, runs
 
     def boom(*a, **k):
         raise OSError("network blocked")
-    monkeypatch.setattr(openskimap, "fetch", boom)
+    # Every --fetch download fails (ski areas, lifts and the 835 MB runs file), so the test never touches the network.
+    for mod in (openskimap, lifts, runs):
+        monkeypatch.setattr(mod, "fetch", boom)
     result = _run(repo_root, raw_dir, out, tmp_path, fetch=True)
     assert any("download failed" in w for w in result.warnings)
     assert len(result.resorts) == 10  # cached full download is still filtered

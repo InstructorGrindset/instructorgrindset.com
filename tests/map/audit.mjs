@@ -11,7 +11,7 @@
 //    decision 9); the audit clicks once the page settles and reports click to WebGL `load`.
 //    Times come from the page's own performance marks (navigation start = 0).
 // 2. The homepage makes zero requests to /map/ or /data/build/.
-// 3. axe-core on the national map, a resort page, the list view and the phone layout.
+// 3. axe-core on the national map, a resort page, the list view, the phone layout and two heat map modes.
 // 4. Lighthouse (mobile defaults) on /map/ and two resort pages.
 //
 // Files are served by a small static server with gzip, like GitHub Pages; python's
@@ -138,6 +138,8 @@ async function axe(browser, base) {
     { label: 'resort page, phone', url: '/map/co/i70-corridor/vail/', phone: true },
     { label: 'trail map dialog (Vail)', url: '/map/co/i70-corridor/vail/', trail: true },
     { label: 'trail map dialog, phone', url: '/map/co/i70-corridor/vail/', trail: true, phone: true },
+    { label: 'national map, snowfall heat map', url: '/map/', heat: 'snowfall' },
+    { label: 'national map, season heat map, phone', url: '/map/', heat: 'season', phone: true },
   ];
   for (const c of cases) {
     const ctx = await browser.newContext(c.phone ? { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: 1280, height: 800 } });
@@ -151,6 +153,13 @@ async function axe(browser, base) {
       await page.waitForTimeout(1500);
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
+    if (c.heat) {
+      await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 30000 });
+      await page.locator(`.recolor-modes .filter-btn[data-mode="${c.heat}"]`).click();
+      await page.waitForFunction((k) => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith(`heat-${k}-`)), c.heat, { timeout: 30000 });
+      await page.waitForSelector('#recolor-legend:not([hidden])', { timeout: 10000 });
+      await page.waitForTimeout(500);
+    }
     if (c.trail) {
       await page.locator('#panel-content button', { hasText: 'Open the interactive map' }).click();
       await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded(); }, null, { timeout: 30000 });

@@ -362,7 +362,7 @@ body.list-mode .recolor { display: none; }
 .filter-btn[aria-disabled="true"] { color: #5d6778; cursor: not-allowed; text-decoration: line-through; text-decoration-color: rgba(93,103,120,.6); }
 .recolor-label { white-space: nowrap; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--map-faint); padding: .35rem .6rem; border-right: 1px solid var(--line); display: inline-flex; align-items: center; }
 .recolor-legend {
-  position: absolute; right: calc(var(--panel-w) + 12px); bottom: 14px; width: 250px;
+  position: absolute; right: calc(var(--panel-w) + 12px); bottom: 14px; width: 232px;
   background: rgba(16,21,30,.95); border: 1px solid var(--line); border-radius: var(--r-md); padding: .45rem .6rem; font-size: .72rem; color: var(--muted);
 }
 .map-stage.is-wide .recolor-legend { right: calc(min(var(--panel-w-wide), 62%) + 12px); }
