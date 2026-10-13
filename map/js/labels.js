@@ -37,11 +37,8 @@ export const FILTERS = [
   { key: 'all', label: 'All' },
   { key: 'ski_area', label: 'Ski areas' },
   { key: 'facility', label: 'Indoor and training' },
-  // Resorts with an open role in jobs/postings.json or a sourced hiring window that covers this month.
-  { key: 'hiring', label: 'Hiring now' },
+  { key: 'hiring', label: 'Hiring now' }, // count and rule in hiring.js
 ];
-/** Title of the Hiring now chip while no resort qualifies (the chip stays visible, disabled). */
-export const HIRING_NONE_TITLE = 'No resort lists an open role or a hiring window for this month.';
 
 /** Certification levels in display order (the Phase 4 contract). */
 export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner', 'unspecified'];

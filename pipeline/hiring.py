@@ -108,7 +108,7 @@ def parse_window(text: str, as_of: dt.date, max_months: int) -> Optional[HiringM
 
 
 def covers(window: Optional[HiringMonths], today: dt.date) -> bool:
-    """True when today's month falls inside the window (both ends included). Mirrors map/js/data.js hiringWindowCovers."""
+    """True when today's month falls inside the window, both ends included (as map/js/hiring.js windowCovers)."""
     if window is None:
         return False
     key = f"{today.year:04d}-{today.month:02d}"

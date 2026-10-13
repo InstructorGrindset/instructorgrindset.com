@@ -307,7 +307,6 @@ body.list-mode .facility-filter { left: 1.5rem; }
 .criterion-why { color: var(--muted); }
 .tier-row { flex-wrap: wrap; }
 @media (max-width: 759.98px) {
-  /* Narrow phones scroll the chips sideways, like the color modes below them. */
   .facility-filter { left: 46px; top: 8px; max-width: calc(100% - 56px); overflow-x: auto; scrollbar-width: none; }
   .facility-filter::-webkit-scrollbar { display: none; }
   .filter-btn { padding: .3rem .55rem; }

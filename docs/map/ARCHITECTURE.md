@@ -561,12 +561,13 @@ closes it when none are; it never commits.
   to its board) with a Published badge and "N open roles", then "Updated <date>.". The resort list adds "Live cams".
 * Zod: `Webcams`, `Jobs`, `PostingsFile` in `schemas.js`; a bad item drops only that item, a bad block only the block.
 
-### Hiring now filter (ROADMAP item 13; `pipeline/hiring.py`, `map/js/data.js`, `map/js/app.js`)
+### Hiring now filter (ROADMAP item 13; `pipeline/hiring.py`, `map/js/hiring.js`, `map/js/app.js`)
 * Window months (`parse_window`): the build reads `start_month` and `end_month` from a hiring window's text only when
   the text is explicit about both. The start is the date a posting or the applications opened ("Instructor posting
   opened July 1, 2026", "Posted July 1, 2026", "applications open August 15"), or else a statement that hiring is open
   ("Hiring is rolling", "Posting open and still accepting applications", "Now hiring"), which counts from the month of
-  the window's `as_of`. The end is an application deadline ("applications are accepted until December 15", "apply by")
+  the window's `as_of`. The end is an application deadline ("applications are accepted until December 15",
+  "accepting applications until", "apply by")
   or the job's own start date ("target start of", "estimated start", "start date is", "positions begin in").
   A date without a year takes it from the other end (an end falls on or after the start). Unparsed (both null):
   season or employment dates, arrival dates, words in place of a month ("early fall", "once the snow flies"), hedged
@@ -577,15 +578,18 @@ closes it when none are; it never commits.
 * A resort is hiring now when (a) `jobs/postings.json` has an open role at one of its `job_employers` (a board in
   `boards`, an https url) that names this resort or no single resort, or (b) its `hiring_window` months cover the
   viewer's current month (both ends included).
-* Chip: a fourth button, "Hiring now (N)", after All, Ski areas and Indoor and training (group label "Filter
-  resorts"); it filters the map (an `in` filter on resort ids over the resort and facility layers, inset included)
-  and the list view like the others and is announced ("Showing N resorts hiring now."). At N = 0 it stays visible with
-  `aria-disabled="true"` and the title "No resort lists an open role or a hiring window for this month."; a click only
-  announces that. Phones scroll the chip row sideways.
-* Cost: at startup N comes from the slim index alone (windows; a loop over the rows, no request). Once the window
-  `load` event and the first paint have passed, at idle, `jobs/postings.json` loads (only when some row has
-  `job_employers`), is checked by hand (no Zod) and adds the open roles; the panel's `loadPostings` reuses the same
-  request. The feed is empty today, so the count is the windows alone.
+* Chip: a fourth button after All, Ski areas and Indoor and training (group label "Filter resorts"). It reads
+  "Hiring now" until `hiring.js` has counted, then "Hiring now (N)". It filters the map (an `in` filter on resort ids
+  over the resort and facility layers, inset included) and the list view like the others and is announced ("Showing N
+  resorts hiring now."). At N = 0 it stays visible with `aria-disabled="true"` and the title "No resort lists an open
+  role or a hiring window for this month."; a click only announces that. Phones scroll the chip row sideways.
+* Cost: nothing on the startup path but the two index values and the button. `hiring.js` (about 1.5 KB gzipped, no
+  Zod) loads once the window `load` event and the first paint have passed, at idle, or on the chip's first click. It
+  counts the windows from the slim index at once, then, when some row has `job_employers`, reads `jobs/postings.json`
+  (checked by hand; the panel's `loadPostings` reuses the same request) and adds the open roles, updating a selected
+  filter. The feed is empty today, so the count is the windows alone. Keeping the count off the startup path matters:
+  1.1 KB more gzipped JavaScript on it moved the simulated Lighthouse LCP on `/map/` from 1.96 s to 2.12 s (one more
+  slow start round trip), with the score unchanged at 98.
 
 ## Trail map (OpenSkiMap runs)
 
@@ -750,7 +754,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 * Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
   A resort page validates the record its stub embeds, so it needs Zod and `definitions.json` but no `resorts.json`.
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
-* Lazy modules: `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
+* Lazy modules: `hiring.js` (the Hiring now count, at idle), `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
   when the climate section nears the screen), `detailcontrols.js` (resort
   detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event and the first
   contentful paint. The snowfall

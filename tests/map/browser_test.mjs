@@ -1540,9 +1540,9 @@ async function hiringChecks(browser, base) {
   await page.waitForTimeout(300);
   const all = await page.evaluate(() => new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'] }).map((f) => f.properties.id)).size);
   check(all > 3, `All brings every resort back (${all} on screen)`);
-  // The rule itself (map/js/data.js hiringNowIds) on synthetic rows: which postings and windows count.
+  // The rule itself (map/js/hiring.js hiringNowIds) on synthetic rows: which postings and windows count.
   const unit = await page.evaluate(async () => {
-    const { hiringNowIds } = await import('/map/js/data.js');
+    const { hiringNowIds } = await import('/map/js/hiring.js');
     const R = (id, hiring_window, job_employers) => ({ id, hiring_window, job_employers });
     const rows = [R('named', null, ['emp']), R('wide', null, ['wide-co']), R('other', null, ['emp']), R('no-board', null, ['ghost']),
       R('http', null, ['plain']), R('win', ['2026-09', '2026-10'], null), R('next', ['2026-11', '2027-02'], null), R('none', null, null)];
@@ -1557,6 +1557,32 @@ async function hiringChecks(browser, base) {
   `rule: a role naming the resort or no resort counts; another resort's role, an employer without a board and an http link do not; window months are inclusive (${JSON.stringify(unit)})`);
   w.assertClean();
   await ctx.close();
+
+  // A click before postings.json is in (held back here): the chip counts the windows at once, and the open roles
+  // join the selected filter when the file lands.
+  {
+    const c = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    await c.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+    let release;
+    const held = new Promise((r) => { release = r; });
+    await c.route(/\/tests\/map\/fixtures\/jobs\/postings\.json$/, async (route) => { await held; await route.continue(); });
+    const p = await c.newPage();
+    const wp = watch(p, 'hiring now early click');
+    await p.goto(`${base}/map/${Q}`);
+    await ready(p, { start: false });
+    const early = p.locator('#facility-filter .filter-btn[data-filter="hiring"]');
+    check(/^Hiring now( \(1\))?$/.test(await early.innerText()), `until hiring.js loads the chip reads Hiring now (${await early.innerText()})`);
+    await p.getByRole('button', { name: 'List view' }).click();
+    await early.click();
+    await p.waitForFunction(() => document.querySelector('[data-filter="hiring"]').getAttribute('aria-pressed') === 'true', null, { timeout: 5000 });
+    const first = await listNames(p);
+    release();
+    await p.waitForFunction(() => document.querySelectorAll('#list-view a.tree-resort').length === 3, null, { timeout: 20000 });
+    check(JSON.stringify(first) === JSON.stringify(['Kilo Notch']) && JSON.stringify(await listNames(p)) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Kilo Notch'])
+      && await early.innerText() === 'Hiring now (3)', `an early click filters by the windows, then the open roles join (${first.join(', ')})`);
+    wp.assertClean();
+    await c.close();
+  }
 
   // An empty feed (today's real postings.json): the hiring windows alone.
   ({ ctx, page, w, chip } = await open('2026-10-13T12:00:00', { empty: true }));
