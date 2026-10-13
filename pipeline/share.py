@@ -40,7 +40,8 @@ BRAND_TEXT = "Instructor Grindset Career Map"
 C = {k: hex_color(v) for k, v in {
     "bg": "#0f1217", "ink": "#e7e9ee", "title": "#f4f6fb", "muted": "#cbd5e1", "faint": "#8891a0", "line": "#2a3140",
     "eyebrow": "#f2c27a", "map_bg": "#0a0e14", "state": "#121821", "state_line": "#283244", "focus": "#1f2a3a",
-    "focus_line": "#6f86a8", "cluster": "#a6c8ff", "tier_a": "#e0a03a", "tier_a_ring": "#fff4dc", "tier_b": "#7fa6d9",
+    "focus_line": "#6f86a8", "cluster": "#a6c8ff", "cluster_fill": "#2c3b53", "tier_a": "#e0a03a",
+    "tier_a_ring": "#fff4dc", "tier_b": "#7fa6d9",
     "published": "#6fd3ac", "reported": "#a6c8ff", "estimated": "#e0b064",
 }.items()}
 
@@ -256,8 +257,8 @@ def draw_map(cv: Canvas, m: dict, states: dict[str, Any]) -> None:
             cv.fill([s for r in rings for s in stroke(r, 1.6)], C["focus_line"], clip=clip, sub=3)
         rings = _shape(proj, cluster)
         if rings:
-            cv.fill(rings, C["cluster"], 0.14, clip=clip, sub=3)
-            cv.fill([s for r in rings for s in stroke(r, 1.8)], C["cluster"], 0.85, clip=clip, sub=3)
+            cv.fill(rings, C["cluster_fill"], clip=clip, sub=3)
+            cv.fill([s for r in rings for s in stroke(r, 1.8)], C["cluster"], clip=clip, sub=3)
         big = m.get("focus") is None
         for lon, lat, tier in sorted(m["points"], key=lambda p: p[2] == "A"):
             x, y = proj(lon, lat)
@@ -269,8 +270,7 @@ def draw_map(cv: Canvas, m: dict, states: dict[str, Any]) -> None:
                 cv.fill([circle(x, y, 4.2 if big else 3.4)], C["tier_b"], clip=clip)
         if m.get("focus"):
             x, y = proj(*m["focus"])
-            cv.fill([circle(x, y, 30)], C["tier_a"], 0.16, clip=clip)
-            cv.fill([circle(x, y, 19)], C["tier_a"], 0.22, clip=clip)
+            cv.fill(stroke(circle(x, y, 22), 2.5), C["tier_a"], clip=clip)
             cv.fill([circle(x, y, 12.5)], C["tier_a_ring"], clip=clip)
             cv.fill([circle(x, y, 9.5)], C["tier_a"], clip=clip)
     r = PANEL_RADIUS
@@ -345,10 +345,10 @@ def draw_text(cv: Canvas, card: dict, bold: glyphs.Font, regular: glyphs.Font) -
 def render(card: dict, states: dict[str, Any]) -> bytes:
     """PNG bytes of one card (palette PNG, deterministic for the same inputs)."""
     bold, regular = glyphs.load("inter-bold"), glyphs.load("inter-regular")
-    cv = Canvas(WIDTH, HEIGHT, C["bg"])
-    draw_map(cv, card["map"], states)
+    cv = Canvas(WIDTH, HEIGHT, C["bg"], reserve=C.values())
     draw_brand(cv, bold)
     draw_text(cv, card, bold, regular)
+    draw_map(cv, card["map"], states)
     return png.encode_indexed(WIDTH, HEIGHT, cv.px, cv.palette)
 
 

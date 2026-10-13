@@ -87,11 +87,15 @@ class Canvas:
     """A palette image: one byte per pixel (top row first) indexing ``palette``. Blends add palette entries; past
     256 colors a blend takes the nearest existing color, so the image always fits an 8 bit palette PNG."""
 
-    def __init__(self, width: int, height: int, background: Color):
+    def __init__(self, width: int, height: int, background: Color, reserve: Iterable[Color] = ()):
+        """``reserve`` lists the solid colors to place first, so they stay exact if blends fill the palette."""
         self.w, self.h = width, height
         self.palette: list[Color] = [tuple(background)]
         self._index: dict[Color, int] = {tuple(background): 0}
         self.px = bytearray(width * height)
+        self.overflow = 0
+        for c in reserve:
+            self.color_index(tuple(c))
 
     def color_index(self, rgb: Color) -> int:
         i = self._index.get(rgb)
@@ -101,6 +105,7 @@ class Canvas:
                 self.palette.append(rgb)
             else:
                 i = min(range(256), key=lambda k: (sum((a - b) ** 2 for a, b in zip(rgb, self.palette[k])), k))
+                self.overflow += 1
             self._index[rgb] = i
         return i
 

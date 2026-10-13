@@ -1432,11 +1432,19 @@ async function liveLinksChecks(browser, stubBase) {
   await p2.goto(`${stubBase}/map/vt/fixture-green-ridge/kilo-notch/`);
   await ready(p2, { start: false });
   await p2.waitForSelector('#panel-content section.jobs', { timeout: 15000 });
-  check((await p2.locator('#panel-content section.jobs .jobs-window').innerText()).startsWith('Hiring window: Applications open September 1'),
+  check((await p2.locator('#panel-content section.jobs .jobs-window').innerText()).startsWith('Hiring window: Instructor posting opened September 1, 2026'),
     'a hiring window shows even before any jobs links');
   check((await p2.locator('#panel-content section.jobs').innerText()).includes('Jobs links are being collected.')
     && await p2.locator('#panel-content .live-cams').count() === 0, 'Tier A without links: Jobs says links are being collected; no Live cams row');
-  check(!w2.requests.some((u) => u.includes('/jobs/postings.json')), 'no postings fetch for a resort without a feed');
+  // postings.json loads only for the Hiring now count here, once and after the first paint; the panel shows no roles.
+  await p2.waitForFunction(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/jobs/postings.json')), null, { timeout: 15000 });
+  const fetchAt = await p2.evaluate(() => ({
+    n: performance.getEntriesByType('resource').filter((e) => e.name.includes('/jobs/postings.json')).length,
+    start: performance.getEntriesByType('resource').find((e) => e.name.includes('/jobs/postings.json')).startTime,
+    fcp: (performance.getEntriesByName('first-contentful-paint')[0] || { startTime: Infinity }).startTime,
+  }));
+  check(fetchAt.n === 1 && fetchAt.start >= fetchAt.fcp && await p2.locator('#panel-content .jobs-live').count() === 0,
+    `a resort without a feed shows no open roles; postings.json loads once after the first paint for the count (${Math.round(fetchAt.start)} ms, paint ${Math.round(fetchAt.fcp)} ms)`);
   await p2.waitForLoadState('networkidle');   // the web font loads after `load`; let it finish first
   await p2.goto(`${stubBase}/map/co/fixture-front-range/charlie-hill/`);
   await ready(p2, { start: false });
@@ -1466,6 +1474,81 @@ async function liveLinksChecks(browser, stubBase) {
   check(JSON.stringify(await np.locator('#panel-content .job-group h4').allInnerTexts())
     === JSON.stringify(['Ski school', 'Coaching and clubs', 'Management', 'Parent company', 'Job boards']), 'prerendered job groups in order');
   await nojs.close();
+}
+
+// Hiring now (ROADMAP item 13): the chip counts resorts with an open role in jobs/postings.json (at a linked employer,
+// naming the resort or no single resort) or a hiring window whose months cover today. It filters the map and the list
+// view, works with an empty feed and stays visible, disabled, at 0. The clock is fixed so the fixture windows hold.
+async function hiringChecks(browser, base) {
+  log('\nHiring now filter');
+  const open = async (iso, { empty = false, width = 1280, height = 800 } = {}) => {
+    const ctx = await browser.newContext({ viewport: { width, height } });
+    await ctx.clock.setFixedTime(new Date(iso));
+    if (empty) {
+      await ctx.route(/\/tests\/map\/fixtures\/jobs\/postings\.json$/, (route) => route.fulfill({ status: 200, contentType: 'application/json',
+        body: JSON.stringify({ version: 1, generated_at: '2026-10-13T00:00:00Z', fetched_at: null, keywords: [], boards: [], sources: [], postings: [] }) }));
+    }
+    const page = await ctx.newPage();
+    const w = watch(page, `hiring now ${iso.slice(0, 10)}${empty ? ' empty feed' : ''}`);
+    await page.goto(`${base}/map/${Q}`);
+    await ready(page, { start: false });
+    await page.waitForFunction(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/jobs/postings.json')), null, { timeout: 15000 });
+    await page.waitForTimeout(300);
+    return { ctx, page, w, chip: page.locator('#facility-filter .filter-btn[data-filter="hiring"]') };
+  };
+  const listNames = async (page) => (await page.locator('#list-view a.tree-resort').allInnerTexts()).sort();
+
+  // Open roles at Alpha Peak and Bravo Bowl (Fixture Parent board) plus Kilo Notch's window (2026-09 to 2026-12).
+  // Alpha Peak's window names no end, so the text alone would not count.
+  let { ctx, page, w, chip } = await open('2026-10-13T12:00:00');
+  check(await chip.innerText() === 'Hiring now (3)' && await chip.getAttribute('aria-disabled') === null,
+    `chip counts open roles and current hiring windows (${await chip.innerText()})`);
+  check(JSON.stringify(await page.locator('#facility-filter .filter-btn').allInnerTexts()) === JSON.stringify(['All', 'Ski areas', 'Indoor and training', 'Hiring now (3)']),
+    'Hiring now sits next to All, Ski areas and Indoor and training');
+  await page.getByRole('button', { name: 'List view' }).click();
+  await chip.click();
+  check(await chip.getAttribute('aria-pressed') === 'true' && JSON.stringify(await listNames(page)) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Kilo Notch']),
+    'list view: Hiring now lists the hiring resorts only');
+  check(await page.waitForFunction(() => document.getElementById('panel-status').textContent.includes('Showing 3 resorts hiring now.'), null, { timeout: 3000 })
+    .then(() => true, () => false), 'the filter change is announced');
+  await shot(page, 'hiring-01-list.png');
+  await page.getByRole('button', { name: 'Map view' }).click();
+  await ready(page);
+  await mapIdle(page);
+  const shown = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    return [...new Set(m.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'] }).map((f) => f.properties.id))].sort();
+  });
+  check(JSON.stringify(shown) === JSON.stringify(['alpha-peak', 'bravo-bowl', 'kilo-notch']), `map: Hiring now keeps only the hiring resorts (${shown.join(', ')})`);
+  await shot(page, 'hiring-02-map.png');
+  await page.getByRole('button', { name: 'All', exact: true }).click();
+  await page.waitForTimeout(300);
+  const all = await page.evaluate(() => new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'] }).map((f) => f.properties.id)).size);
+  check(all > 3, `All brings every resort back (${all} on screen)`);
+  w.assertClean();
+  await ctx.close();
+
+  // An empty feed (today's real postings.json): the hiring windows alone.
+  ({ ctx, page, w, chip } = await open('2026-10-13T12:00:00', { empty: true }));
+  check(await chip.innerText() === 'Hiring now (1)', `empty feed: the chip counts the hiring windows (${await chip.innerText()})`);
+  await page.getByRole('button', { name: 'List view' }).click();
+  await chip.click();
+  check(JSON.stringify(await listNames(page)) === JSON.stringify(['Kilo Notch']), 'empty feed: the list shows the resort whose window covers today');
+  w.assertClean();
+  await ctx.close();
+
+  // After every window and with no postings: 0, visible and disabled with a short title; a click changes nothing.
+  ({ ctx, page, w, chip } = await open('2027-01-15T12:00:00', { empty: true, width: 390, height: 844 }));
+  check(await chip.isVisible() && await chip.innerText() === 'Hiring now (0)' && await chip.getAttribute('aria-disabled') === 'true'
+    && await chip.getAttribute('title') === 'No resort lists an open role or a hiring window for this month.', 'at 0 the chip stays visible, disabled, with a title');
+  await chip.click({ force: true });
+  check(await chip.getAttribute('aria-pressed') === 'false' && await page.getByRole('button', { name: 'All', exact: true }).getAttribute('aria-pressed') === 'true',
+    'a disabled Hiring now cannot be selected');
+  const fit = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: innerWidth }));
+  check(fit.sw <= fit.vw, 'phone: the four chips never widen the page');
+  await shot(page, 'hiring-03-phone-zero.png');
+  w.assertClean();
+  await ctx.close();
 }
 
 // Resort search (map/js/search.js): loose matching and ranking, keyboard selection before the map starts, the deep
@@ -1666,6 +1749,7 @@ try {
   await phone(browser, STUB_BASE);
   await searchChecks(browser, REPO_BASE, STUB_BASE);
   await liveLinksChecks(browser, STUB_BASE);
+  await hiringChecks(browser, REPO_BASE);
   await realData(browser, REPO_BASE);
   await browser.close();
 } catch (err) {
