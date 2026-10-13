@@ -199,7 +199,7 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | 11 | 2 | **Owner:** launch. Owner says "open the PR"; review, merge, then check live: USGS imagery and CORS, Lighthouse on the real host, sitemap submitted to Search Console | C | 1, Owner | Map live at instructorgrindset.com/map/ with green checks |
 | 12 | 3 | Epic and Ikon pass filter: pass membership from the pass companies' own sites, then a filter chip | R+C | 11 | Filter works in map and list view; every membership sourced |
 | 13 | 3 | Hiring window display on resort pages and a "hiring now" filter | C | 6 | Shows only sourced windows |
-| 14 | 3 | SNOTEL mountain stations in the snowfall heat map, in addition to resort pockets | C | 1 | In progress: SNOTEL SWE based station snowfall blended with NOAA normals, validated against published resort snowfall |
+| 14 | 3 | SNOTEL mountain stations in the snowfall heat map, in addition to resort pockets | C | 1 | Done: 831 SNOTEL stations, terrain aware field, pockets 10 km; validation in docs/map/climate-validation.md |
 | 15 | 3 | Share images per resort page (static PNG built by the pipeline) | C | 11 | Every resort stub has an og:image |
 | 16 | 3 | GTFS transit extracts for Tier A clusters (Summit Stage, RFTA, Park City Transit, TART, ECO Transit) | R+C | Done: 20 agencies, 30 Tier A detail maps, schedule dates shown; Park City, Jackson, Big Sky, Whitefish, Taos and Mt Hood feeds are not in the reachable catalog; ECO, Crested Butte, Tahoe TD and Mountain Rides feeds are stale |
 | 17 | 3 | Yearly ownership re-verification job for Vail and Alterra | C | 11 | Build fails when a portfolio source is older than one build cycle |
