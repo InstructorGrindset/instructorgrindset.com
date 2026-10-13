@@ -1,0 +1,155 @@
+# Hiring windows for Tier A resorts (ROADMAP Section 8, item 6): when applications open, job fairs and when
+# clinics start, each in its source's own words. Copied verbatim from the pay and training research sidecar
+# (training-sidecar.yaml, researched 2026-10-13) at the coordinator's request; the text is never reworded.
+# Every source is declared in data/raw/facts/training.yaml, data/raw/pay or data/raw/jobs. Search result values are
+# estimated (search result rule). Format: docs/map/ARCHITECTURE.md, "Webcams and jobs".
+batch: jobs-hiring-windows
+researched_date: '2026-10-13'
+sources: []
+hiring_windows:
+- resort_id: aspen-mountain
+  text: New hires should arrive by December 2, 2026 (J-1 college students by December 9). Onboarding is the first workday,
+    then a week of new hire training.
+  source_id: facts-training-aspen-employment
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: aspen-highlands
+  text: New hires should arrive by December 2, 2026 (J-1 college students by December 9). Onboarding is the first workday,
+    then a week of new hire training.
+  source_id: facts-training-aspen-employment
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snowmass
+  text: New hires should arrive by December 2, 2026 (J-1 college students by December 9). Onboarding is the first workday,
+    then a week of new hire training.
+  source_id: facts-training-aspen-employment
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: buttermilk
+  text: New hires should arrive by December 2, 2026 (J-1 college students by December 9). Buttermilk new hire training is
+    December 13 to 18, 2026.
+  source_id: facts-training-aspen-employment
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mt-baker
+  text: Ski and snowboard instructor applications open August 15 on the 2026-2027 seasonal jobs table; online pre season training
+    follows in October.
+  source_id: pay-west-mtbaker-jobs-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: crystal-mountain
+  text: Season runs about November 7, 2026 to April 18, 2027. Instructors commit to 15 or more days and attend the required
+    orientation and training dates.
+  source_id: facts-training-crystal-ft-instructor-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mammoth-mountain
+  text: Start date options are November 17, December 8 or December 14; hires must be able to work until April 11, with instructing
+    work often available to the end of May.
+  source_id: pay-alterra-mammoth-ski-noncertified-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: arapahoe-basin
+  text: Posting open and still accepting applications; estimated start December 5, 2026; part time commitments start at 20
+    days a season.
+  source_id: facts-training-abasin-alterra-instructor
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: sunday-river
+  text: Instructor posting opened July 1, 2026 with a target start of December 1, 2026.
+  source_id: pay-east-sunday-river-instructor-24529
+  as_of: '2026-10-13'
+  confidence: published
+- resort_id: sugarloaf
+  text: Instructor posting opened July 23, 2026 with a target start of November 21, 2026.
+  source_id: pay-east-sugarloaf-instructor-24652
+  as_of: '2026-10-13'
+  confidence: published
+- resort_id: deer-valley
+  text: Experienced instructor posting (Alpine Level 2) covers December 2, 2026 to April 18, 2027.
+  source_id: pay-alterra-deervalley-experienced-2627
+  as_of: '2026-10-13'
+  confidence: published
+- resort_id: yellowstone-club
+  text: Posting dated April 24, 2026; winter employment runs roughly November 23 to April 21.
+  source_id: facts-training-yc-coolworks-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: timberline-lodge
+  text: Interviews are scheduled in early to mid October; the expected start date is once the snow flies.
+  source_id: pay-west-timberline-instructors-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: vail
+  text: Hiring is rolling; applications are accepted until December 15 or until the positions are filled.
+  source_id: facts-training-vail-cert-ski-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: hunter-mountain
+  text: Hiring is rolling; applications are accepted until December 15 or until the positions are filled.
+  source_id: pay-vail-hunter-noncert-2026
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mount-snow
+  text: Hiring is rolling; applications are accepted until December 15 or until the positions are filled.
+  source_id: facts-training-mountsnow-cert-snowboard-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: stowe
+  text: Hiring is rolling; applications are accepted until December 15 or until the positions are filled.
+  source_id: facts-training-stowe-noncert-snowboard-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: liberty-mountain
+  text: Hiring is rolling; applications are accepted until December 15 or until the positions are filled.
+  source_id: facts-training-liberty-cert-snowboard-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: alta
+  text: Certified instructors commit from December 1 to mid April. Candidates without teaching experience apply in the apprentice
+    window, which opens in late summer; apprentices commit from mid November to mid April.
+  source_id: facts-training-alta-certified-instructor
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snowshoe
+  text: Instructors start around the end of November or the beginning of December, with training required before mid December.
+    The posting names no season.
+  source_id: facts-training-snowshoe-instructor
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: copper-mountain
+  text: Posted July 1, 2026; seasonal ski school positions begin in December and end mid April.
+  source_id: facts-training-copper-cert-snowboard-2627
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: big-sky
+  text: Recruiting for the season of November 5, 2026 to April 30, 2027; staff may be asked to arrive earlier for training.
+  source_id: facts-training-bigsky-coolworks-profile
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: telluride
+  text: Recruiting for the season of November 26, 2026 to April 4, 2027.
+  source_id: facts-training-telluride-coolworks-jobs
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: grand-targhee
+  text: Recruiting for the season of November 17, 2026 to April 19, 2027, including full and part time ski and snowboard instructors.
+  source_id: facts-training-targhee-coolworks-profile
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: whitefish-mountain
+  text: The winter selection process begins in September. Preseason training runs from two days to two weeks before the season
+    opens in December.
+  source_id: jobs-whitefish-jobs
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: bridger-bowl
+  text: Hiring for winter work starts in early fall; H-2B and J-1 visas are not sponsored.
+  source_id: jobs-bridger-employment
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: wilmot-mountain
+  text: Now hiring part time and full time instructors for winter 2026/27.
+  source_id: facts-training-wilmot-home
+  as_of: '2026-10-13'
+  confidence: estimated

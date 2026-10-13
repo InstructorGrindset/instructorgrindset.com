@@ -51,8 +51,12 @@ export function liveCams(r, ctx) {
  */
 export function jobsSection(r, ctx) {
   const jobs = r.jobs;
-  if (!jobs) {
-    return r.tier === 'A' ? h('section', { class: 'panel-section jobs' }, h('h3', null, 'Jobs'),
+  const hw = jobs && jobs.hiring_window;
+  // The source's own words on when hiring or training happens (ROADMAP item 6), never reworded.
+  const window = hw ? h('p', { class: 'jobs-window' }, h('strong', null, 'Hiring window:'), ` ${hw.text} `, ctx.badge(hw.confidence),
+    ' ', h('span', { class: 'fact-meta' }, verified(hw, ctx))) : null;
+  if (!jobs || !jobs.links.length) {
+    return r.tier === 'A' || window ? h('section', { class: 'panel-section jobs' }, h('h3', null, 'Jobs'), window,
       h('p', { class: 'not-verified' }, 'Jobs links are being collected.')) : null;
   }
   const live = h('div', { class: 'jobs-live', hidden: true });
@@ -74,7 +78,7 @@ export function jobsSection(r, ctx) {
       if (block) { live.append(...block); live.hidden = false; }
     });
   }
-  return h('section', { class: 'panel-section jobs' }, h('h3', null, 'Jobs'),
+  return h('section', { class: 'panel-section jobs' }, h('h3', null, 'Jobs'), window,
     h('p', { class: 'fact-meta' }, "Links open each employer's own site in a new tab."), live, groups);
 }
 

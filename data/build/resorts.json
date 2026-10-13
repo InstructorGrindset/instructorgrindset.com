@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T15:28:30Z",
+  "generated_at": "2026-10-13T15:52:10Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -449,7 +449,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -875,7 +876,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -1415,7 +1417,14 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Certified instructors commit from December 1 to mid April. Candidates without teaching experience apply in the apprentice window, which opens in late summer; apprentices commit from mid November to mid April.",
+          "source_id": "facts-training-alta-certified-instructor",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -1494,6 +1503,7 @@
         "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-alta-ski-area",
         "ed-west-wiki-alta-utah",
+        "facts-training-alta-certified-instructor",
         "facts-west1-fox13-utah-closings-2025",
         "facts-west1-kpcw-utah-openings-2024",
         "jobs-alta-jobs-postings",
@@ -1739,7 +1749,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -2648,7 +2659,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Posting open and still accepting applications; estimated start December 5, 2026; part time commitments start at 20 days a season.",
+          "source_id": "facts-training-abasin-alterra-instructor",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -2672,7 +2690,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "12-05",
+          "source_id": "pay-alterra-abasin-instructor-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Estimated start date of December 5, 2026 in the instructor posting (recorded in data/raw/pay/pay_alterra.yaml), read as the first day of staff training."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -2856,6 +2880,7 @@
         "ed-west-wiki-arapahoe-basin",
         "ed-west-wiki-frisco-colorado",
         "ed-west-wiki-summit-county-colorado",
+        "facts-training-abasin-alterra-instructor",
         "facts-west1-abasin-closing-2025",
         "facts-west1-wiki-arapahoe-basin",
         "jobs-alterra-corporate-posting",
@@ -3063,8 +3088,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Median of 3 seasons: 2023-24 11-21 (facts-gapfill-tgr-snowbowl-nov21); 2024-25 11-08, earliest ever (facts-gapfill-abc15-snowbowl-2024); 2025-26 11-20 (this page)."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "04-15",
+          "source_id": "facts-gapfill2-snowbowl-closing-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One season, midpoint of 2 values: 2025-26 scheduled close Sunday 04-12 after 134 days (this page), extended to 04-19 (facts-gapfill2-snowbrains-snowbowl-2026)."
+        },
+        "length_days": {
+          "value": 147,
+          "source_id": "facts-gapfill2-snowbowl-closing-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-20 to 04-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -3090,6 +3127,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-tgr-snowbowl-2025",
+        "facts-gapfill2-snowbowl-closing-2026",
         "facts-west1-wiki-arizona-snowbowl",
         "openskimap-ski-areas",
         "webcams-arizona-snowbowl-search"
@@ -3420,7 +3458,14 @@
             "note": null
           }
         ],
-        "feed": true
+        "feed": true,
+        "hiring_window": {
+          "text": "New hires should arrive by December 2, 2026 (J-1 college students by December 9). Onboarding is the first workday, then a week of new hire training.",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -3444,7 +3489,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "12-06",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New Hire Training for Aspen, Highlands and Snowmass runs December 6 to 11, 2026. It covers all new hires, the ski school among them."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -3586,6 +3637,7 @@
         "ed-west-wiki-aspen-colorado",
         "ed-west-wiki-aspen-highlands",
         "ed-west-wiki-aspen-skiing-company",
+        "facts-training-aspen-employment",
         "facts-west1-aspen-dates-2026-27",
         "facts-west1-aspen-opening-2025",
         "jobs-aspen-international",
@@ -3760,7 +3812,14 @@
             "note": null
           }
         ],
-        "feed": true
+        "feed": true,
+        "hiring_window": {
+          "text": "New hires should arrive by December 2, 2026 (J-1 college students by December 9). Onboarding is the first workday, then a week of new hire training.",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -3784,7 +3843,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "12-06",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New Hire Training for Aspen, Highlands and Snowmass runs December 6 to 11, 2026, after onboarding on the first workday. It covers all new hires, the ski school among them. A CoolWorks ski instructor posting (Jul 14, 2026) gives a November 23, 2026 start."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -3926,6 +3991,7 @@
         "ed-west-wiki-aspen-colorado",
         "ed-west-wiki-aspen-mountain",
         "ed-west-wiki-aspen-skiing-company",
+        "facts-training-aspen-employment",
         "facts-west1-aspen-dates-2026-27",
         "facts-west1-aspen-opening-2025",
         "jobs-aspen-international",
@@ -4085,7 +4151,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -4443,9 +4510,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "01-05",
+          "source_id": "facts-gapfill2-sri-badger",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"early January - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-sri-badger",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"early January - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 80,
+          "source_id": "facts-gapfill2-sri-badger",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (01-05 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -4470,6 +4555,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-badger",
         "facts-west2-wp-badger-mountain",
         "openskimap-ski-areas"
       ]
@@ -5163,7 +5249,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -5869,7 +5956,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -6651,7 +6739,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -6985,7 +7074,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -7774,7 +7864,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Recruiting for the season of November 5, 2026 to April 30, 2027; staff may be asked to arrive earlier for training.",
+          "source_id": "facts-training-bigsky-coolworks-profile",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -7943,6 +8040,7 @@
         "ed-west-wiki-bozeman-montana",
         "ed-west-wiki-yellowstone-club",
         "facts-gapfill-bigsky-pr-longest",
+        "facts-training-bigsky-coolworks-profile",
         "jobs-big-sky-icims",
         "jobs-boyne-careers-home",
         "jobs-fasterskier-jobpostings",
@@ -8074,7 +8172,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": null,
@@ -8341,9 +8440,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-25",
+          "source_id": "facts-gapfill2-skiresortcom-birchhill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. The page lists the general season as \"early April - late November\", which reads as the two ends reversed for a Fairbanks ski hill; taken as late November to early April; late = 25."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-gapfill2-skiresortcom-birchhill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. The page lists the general season as \"early April - late November\", which reads as the two ends reversed for a Fairbanks ski hill; taken as late November to early April; early = 05."
+        },
+        "length_days": {
+          "value": 132,
+          "source_id": "facts-gapfill2-skiresortcom-birchhill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-25 to 04-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -8368,6 +8485,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-birchhill",
         "openskimap-ski-areas"
       ]
     },
@@ -8786,7 +8904,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -9134,8 +9253,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Midpoint of 2 seasons: 2023-24 01-14 and 2024-25 12-13 (this page). Natural snow only."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-28",
+          "source_id": "facts-gapfill2-fb-blacktail-2015",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 seasons: 2014-15 closed the weekend before this 03-30 article, Sunday 03-29 (this page); 2025-26 final day Saturday 03-28 (facts-gapfill2-fb-blacktail-2026)."
+        },
+        "length_days": {
+          "value": 90,
+          "source_id": "facts-gapfill2-fb-blacktail-2015",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-29 to 03-28)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -9161,6 +9292,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-fb-blacktail-2024",
+        "facts-gapfill2-fb-blacktail-2015",
         "facts-west3-wp-blacktail-mountain-ski-area",
         "openskimap-ski-areas",
         "webcams-blacktail-search"
@@ -10338,7 +10470,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -10982,7 +11115,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -11199,7 +11333,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -11703,7 +11838,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -12298,7 +12434,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Hiring for winter work starts in early fall; H-2B and J-1 visas are not sponsored.",
+          "source_id": "jobs-bridger-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -12608,7 +12751,8 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -13460,7 +13604,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -14044,7 +14189,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -14272,7 +14418,14 @@
             "note": null
           }
         ],
-        "feed": true
+        "feed": true,
+        "hiring_window": {
+          "text": "New hires should arrive by December 2, 2026 (J-1 college students by December 9). Buttermilk new hire training is December 13 to 18, 2026.",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -14296,7 +14449,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "12-13",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New Hire Training for Buttermilk runs December 13 to 18, 2026. It covers all new hires, the ski school among them."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -14438,6 +14597,7 @@
         "ed-west-wiki-aspen-skiing-company",
         "ed-west-wiki-buttermilk-ski-area",
         "ed-west-wiki-x-games",
+        "facts-training-aspen-employment",
         "facts-west1-aspen-dates-2026-27",
         "facts-west1-aspen-opening-2025",
         "jobs-aspen-international",
@@ -15147,9 +15307,27 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-18",
+          "source_id": "facts-gapfill2-ots-campgaw",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-18 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-gapfill2-ots-campgaw",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-14 for 2026-27."
+        },
+        "length_days": {
+          "value": 87,
+          "source_id": "facts-gapfill2-ots-campgaw",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-18 to 03-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -15174,6 +15352,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-campgaw",
         "openskimap-ski-areas",
         "webcams-campgaw-search"
       ]
@@ -15331,9 +15510,27 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-11",
+          "source_id": "facts-gapfill2-ots-canaan",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-11 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-gapfill2-ots-canaan",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-07 for 2026-27 (same window on facts-gapfill2-ots-canaan-tickets)."
+        },
+        "length_days": {
+          "value": 87,
+          "source_id": "facts-gapfill2-ots-canaan",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-11 to 03-07)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -15358,6 +15555,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-canaan",
         "facts-northeast2-canaan-valley-ski-resort-wikipedia",
         "openskimap-ski-areas",
         "webcams-canaan-valley-search"
@@ -15509,7 +15707,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -16310,9 +16509,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-chapman",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-skiresortcom-chapman",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-skiresortcom-chapman",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -16337,6 +16554,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-chapman",
         "openskimap-ski-areas"
       ]
     },
@@ -17376,9 +17594,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-cloudmont",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-05",
+          "source_id": "facts-gapfill2-skiresortcom-cloudmont",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 81,
+          "source_id": "facts-gapfill2-skiresortcom-cloudmont",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -17403,6 +17639,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-cloudmont",
         "facts-northeast2-wikipedia-se-comparison",
         "openskimap-ski-areas"
       ]
@@ -18086,7 +18323,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Posted July 1, 2026; seasonal ski school positions begin in December and end mid April.",
+          "source_id": "facts-training-copper-cert-snowboard-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -18250,6 +18494,7 @@
         "access-wikipedia-us-bus-transit-systems",
         "ed-west-wiki-copper-mountain-colorado",
         "ed-west-wiki-frisco-colorado",
+        "facts-training-copper-cert-snowboard-2627",
         "facts-west1-frisco-copper-opening-2025",
         "facts-west1-unofficial-copper-closing-2025",
         "jobs-fasterskier-jobpostings",
@@ -18857,7 +19102,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -19100,9 +19346,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-17",
+          "source_id": "facts-gapfill2-ots-crescent",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-19 for 2026-27 (this page); phrase \"mid December - early March\" (facts-gapfill2-skiresortcom-crescent), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-06",
+          "source_id": "facts-gapfill2-ots-crescent",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-07 for 2026-27 (this page); phrase \"mid December - early March\" (facts-gapfill2-skiresortcom-crescent), early = 05."
+        },
+        "length_days": {
+          "value": 80,
+          "source_id": "facts-gapfill2-ots-crescent",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-17 to 03-06)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -19127,6 +19391,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-crescent",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -19295,7 +19560,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -19616,7 +19882,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -19962,7 +20229,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Season runs about November 7, 2026 to April 18, 2027. Instructors commit to 15 or more days and attend the required orientation and training dates.",
+          "source_id": "facts-training-crystal-ft-instructor-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -19986,7 +20260,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates (open from facts-west2-fox13-wa-openings, close from facts-west2-ots-wa-closing)"
         },
-        "training_start": null
+        "training_start": {
+          "value": "11-07",
+          "source_id": "facts-training-crystal-ft-instructor-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Required orientation on November 7, or on November 8 plus December 5, 6, 12 and 13; training days follow in early December."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -20117,6 +20397,7 @@
       "housing_summary": null,
       "sources": [
         "ed-west-wiki-crystal-mountain-washington",
+        "facts-training-crystal-ft-instructor-2627",
         "facts-west2-fox13-wa-openings",
         "facts-west2-ots-wa-closing",
         "jobs-alterra-corporate-posting",
@@ -20850,7 +21131,14 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Experienced instructor posting (Alpine Level 2) covers December 2, 2026 to April 18, 2027.",
+          "source_id": "pay-alterra-deervalley-experienced-2627",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -20874,7 +21162,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "12-02",
+          "source_id": "pay-alterra-deervalley-experienced-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "The experienced instructor posting runs 12/2/2026 to 4/18/2027 (recorded in data/raw/pay/pay_alterra.yaml); its first day is read as the first day of staff training."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -21919,10 +22213,17 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
-        "open_typical": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-gapfill2-mtexpress-dollar-2024",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: 2024-25 opened Friday 12-13 (this page); 2018-19 opened on Thanksgiving, 11-22, with Bald Mountain (facts-gapfill2-wrw-sunvalley-2018); phrase \"early December - early April\" (facts-gapfill2-sri-dollar), early = 05."
+        },
         "close_typical": {
           "value": "03-29",
           "source_id": "facts-gapfill-eye-dollar-2026",
@@ -21930,7 +22231,13 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. One season: Dollar Mountain closed 03-22 in 2026, a week ahead of its scheduled end with Dollar Daze; scheduled close taken as 03-29."
         },
-        "length_days": null,
+        "length_days": {
+          "value": 115,
+          "source_id": "facts-gapfill2-mtexpress-dollar-2024",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-05 to 03-29)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -21969,6 +22276,7 @@
         "ed-west-wiki-dollar-mountain",
         "ed-west-wiki-sun-valley-idaho",
         "facts-gapfill-eye-dollar-2026",
+        "facts-gapfill2-mtexpress-dollar-2024",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-sun-valley-jobs",
@@ -22234,9 +22542,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-08",
+          "source_id": "facts-gapfill2-ots-dryhill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-02 (this page); phrase \"mid December - late March\" (facts-gapfill2-sri-dryhill), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-19",
+          "source_id": "facts-gapfill2-ots-dryhill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-14 for 2026-27 (this page); phrase \"mid December - late March\" (facts-gapfill2-sri-dryhill), late = 25."
+        },
+        "length_days": {
+          "value": 102,
+          "source_id": "facts-gapfill2-ots-dryhill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-08 to 03-19)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -22261,6 +22587,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-dryhill",
         "openskimap-ski-areas"
       ]
     },
@@ -22493,8 +22820,20 @@
           "confidence": "estimated",
           "note": "From search results for the pages named here; pages not opened. Median of 2 seasons: 2024-25 12-20 (facts-west1-kpcw-utah-openings-2024); 2025-26 12-19 (facts-west1-kpcw-utah-openings-2025)."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-28",
+          "source_id": "facts-gapfill2-ots-eaglepoint",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-21 for 2026-27 (this page); phrase \"early December - early April\" (facts-gapfill2-sri-eaglepoint), early = 05."
+        },
+        "length_days": {
+          "value": 100,
+          "source_id": "facts-gapfill2-ots-eaglepoint",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-19 to 03-28)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -22519,6 +22858,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-eaglepoint",
         "facts-west1-kpcw-utah-openings-2025",
         "openskimap-ski-areas"
       ]
@@ -22870,9 +23210,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-08",
+          "source_id": "facts-gapfill2-dirco-echo",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 4 values: 2023-24 opened 12-12 (this page); OnTheSnow projection 12-12 for 2026-27 (facts-gapfill2-ots-echo); a Wednesday 12-01 opening in 2010 (facts-gapfill2-sbmag-echo-121); phrase \"early December - mid April\" (facts-gapfill2-skiresortcom-echo), early = 05."
+        },
+        "close_typical": {
+          "value": "04-14",
+          "source_id": "facts-gapfill2-dirco-echo",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: 2023-24 closed 04-14 (this page); OnTheSnow projection 04-04 for 2026-27 (facts-gapfill2-ots-echo); phrase \"early December - mid April\" (facts-gapfill2-skiresortcom-echo), mid = 15."
+        },
+        "length_days": {
+          "value": 128,
+          "source_id": "facts-gapfill2-dirco-echo",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-08 to 04-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -22897,6 +23255,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-dirco-echo",
         "facts-west1-wiki-echo-mountain",
         "openskimap-ski-areas"
       ]
@@ -23601,9 +23960,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-13",
+          "source_id": "facts-gapfill2-ots-fourlakes",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-12 for 2026-27 (this page, also on facts-gapfill2-ots-midwest-openings); phrase \"mid December - mid March\" (facts-gapfill2-skiresortcom-fourlakes), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-11",
+          "source_id": "facts-gapfill2-ots-fourlakes",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-07 for 2026-27 (this page); phrase \"mid December - mid March\" (facts-gapfill2-skiresortcom-fourlakes), mid = 15."
+        },
+        "length_days": {
+          "value": 89,
+          "source_id": "facts-gapfill2-ots-fourlakes",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-13 to 03-11)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -23628,6 +24005,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-fourlakes",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -23973,9 +24351,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-gladstone",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-gladstone",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-gladstone",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -24000,6 +24396,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-gladstone",
         "openskimap-ski-areas"
       ]
     },
@@ -24418,7 +24815,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Recruiting for the season of November 17, 2026 to April 19, 2027, including full and part time ski and snowboard instructors.",
+          "source_id": "facts-training-targhee-coolworks-profile",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -24506,6 +24910,7 @@
         "ed-west-wiki-driggs-idaho",
         "ed-west-wiki-grand-targhee-resort",
         "facts-gapfill-gt-lift-tickets",
+        "facts-training-targhee-coolworks-profile",
         "facts-west3-wp-grand-targhee",
         "jobs-fasterskier-jobpostings",
         "jobs-grand-targhee-careers",
@@ -24812,9 +25217,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-gapfill2-sri-granlibakken",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"early December - early April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-gapfill2-sri-granlibakken",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"early December - early April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 122,
+          "source_id": "facts-gapfill2-sri-granlibakken",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-05 to 04-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -24839,6 +25262,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-granlibakken",
         "openskimap-ski-areas"
       ]
     },
@@ -24896,9 +25320,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-greatbear",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-skiresortcom-greatbear",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-skiresortcom-greatbear",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -24923,6 +25365,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-greatbear",
         "openskimap-ski-areas"
       ]
     },
@@ -26076,7 +26519,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -26450,7 +26894,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -27161,7 +27606,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -27471,7 +27917,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -27769,9 +28216,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-26",
+          "source_id": "facts-gapfill2-ots-hilltop",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 11-28 for 2026-27 (this page); phrase \"late November - late March\" (facts-gapfill2-skiresortcom-hilltop), late = 25."
+        },
+        "close_typical": {
+          "value": "04-02",
+          "source_id": "facts-gapfill2-ots-hilltop",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 04-11 for 2026-27 (this page); phrase \"late November - late March\" (facts-gapfill2-skiresortcom-hilltop), late = 25."
+        },
+        "length_days": {
+          "value": 128,
+          "source_id": "facts-gapfill2-ots-hilltop",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-26 to 04-02)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -27796,6 +28261,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-hilltop",
         "facts-west2-wp-hilltop",
         "openskimap-ski-areas"
       ]
@@ -28056,9 +28522,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-19",
+          "source_id": "facts-gapfill2-ots-holidaymtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-19 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-gapfill2-ots-holidaymtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-21 for 2026-27 (85 projected days)."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-gapfill2-ots-holidaymtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-19 to 03-21)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -28083,6 +28567,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-holidaymtn",
         "openskimap-ski-areas"
       ]
     },
@@ -28285,8 +28770,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. OnTheSnow projected opening date for 2026 to 27"
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "04-03",
+          "source_id": "facts-gapfill2-ots-holimont",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 04-03 for 2026-27."
+        },
+        "length_days": {
+          "value": 113,
+          "source_id": "facts-gapfill2-ots-holimont",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-12 to 04-03)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -28311,6 +28808,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-holimont",
         "facts-northeast2-ots-buffalo-openings",
         "openskimap-ski-areas",
         "webcams-holimont-search"
@@ -28881,9 +29379,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-hunthollow",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25. Private club."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-hunthollow",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25. Private club."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-hunthollow",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -28908,6 +29424,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-hunthollow",
         "openskimap-ski-areas"
       ]
     },
@@ -29062,7 +29579,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Hiring is rolling; applications are accepted until December 15 or until the positions are filled.",
+          "source_id": "pay-vail-hunter-noncert-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -29652,7 +30176,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -29879,9 +30404,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-gapfill2-sri-jacksoncreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"early December - early April\" (general season); early = 05, mid = 15, late = 25. Jackson Creek Summit at Snowriver Mountain Resort."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-gapfill2-sri-jacksoncreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"early December - early April\" (general season); early = 05, mid = 15, late = 25. Jackson Creek Summit at Snowriver Mountain Resort."
+        },
+        "length_days": {
+          "value": 122,
+          "source_id": "facts-gapfill2-sri-jacksoncreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-05 to 04-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -29906,6 +30449,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-jacksoncreek",
         "facts-midwest-wiki-snowriver",
         "openskimap-ski-areas"
       ]
@@ -30087,7 +30631,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -30407,7 +30952,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -30855,7 +31401,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -31327,9 +31874,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-07",
+          "source_id": "facts-gapfill2-ouray-kendall-2019",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: 2019-20 lift opened Saturday 12-07, a week ahead of the planned 12-14 (this page, both values); phrase \"late November - mid April\" (facts-gapfill2-skiresortcom-kendall), late = 25."
+        },
+        "close_typical": {
+          "value": "04-15",
+          "source_id": "facts-gapfill2-skiresortcom-kendall",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late November - mid April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 130,
+          "source_id": "facts-gapfill2-skiresortcom-kendall",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-07 to 04-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -31354,6 +31919,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ouray-kendall-2019",
+        "facts-gapfill2-skiresortcom-kendall",
         "facts-west1-wiki-comparison-colorado",
         "openskimap-ski-areas"
       ]
@@ -31412,9 +31979,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-25",
+          "source_id": "facts-gapfill2-sri-kettlebowl",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-kettlebowl",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 81,
+          "source_id": "facts-gapfill2-sri-kettlebowl",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-25 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -31439,6 +32024,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-kettlebowl",
         "openskimap-ski-areas"
       ]
     },
@@ -31588,9 +32174,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-keyespeak",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-keyespeak",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-keyespeak",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -31615,6 +32219,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-keyespeak",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -31778,7 +32383,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -32137,7 +32743,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -32492,7 +33099,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -32856,9 +33464,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-dg-other-hills-2017",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"open from mid December to mid March\", weather permitting; mid = 15."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-dg-other-hills-2017",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"open from mid December to mid March\", weather permitting; mid = 15."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-dg-other-hills-2017",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -32883,6 +33509,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-dg-other-hills-2017",
         "openskimap-ski-areas"
       ]
     },
@@ -33215,7 +33842,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -33421,9 +34049,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-25",
+          "source_id": "facts-gapfill2-sri-leavenworth",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late November - mid April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "04-15",
+          "source_id": "facts-gapfill2-sri-leavenworth",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late November - mid April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 142,
+          "source_id": "facts-gapfill2-sri-leavenworth",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-25 to 04-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -33448,6 +34094,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-leavenworth",
         "openskimap-ski-areas"
       ]
     },
@@ -33794,7 +34441,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Hiring is rolling; applications are accepted until December 15 or until the positions are filled.",
+          "source_id": "facts-training-liberty-cert-snowboard-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -33971,6 +34625,7 @@
         "ed-east-wikipedia-whitetail-ski-resort",
         "facts-gapfill-dcski-liberty-2015",
         "facts-gapfill-ots-liberty",
+        "facts-training-liberty-cert-snowboard-2627",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-vail-resorts-home",
@@ -34043,9 +34698,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-littleskihill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-littleskihill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-littleskihill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -34070,6 +34743,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-littleskihill",
         "facts-west3-wp-little-ski-hill",
         "openskimap-ski-areas"
       ]
@@ -35546,7 +36220,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -35834,7 +36509,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -36069,7 +36745,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -36551,7 +37228,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Start date options are November 17, December 8 or December 14; hires must be able to work until April 11, with instructing work often available to the end of May.",
+          "source_id": "pay-alterra-mammoth-ski-noncertified-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -36575,7 +37259,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates (open from facts-west2-un-ca-openings-2026, close from facts-west2-activenorcal-mammoth-close)"
         },
-        "training_start": null
+        "training_start": {
+          "value": "11-17",
+          "source_id": "pay-alterra-mammoth-ski-noncertified-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Non certified ski instructor posting gives start date options of November 17, December 8 or December 14; the earliest is used."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -36812,9 +37502,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-maple",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-skiresortcom-maple",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-skiresortcom-maple",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -36839,6 +37547,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-maple",
         "openskimap-ski-areas"
       ]
     },
@@ -37477,9 +38186,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-12",
+          "source_id": "facts-gapfill2-ots-meadowlark",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 OnTheSnow projections for 2026-27: 12-12 (this page) and 12-13 (facts-gapfill2-ots-meadowlark-report)."
+        },
+        "close_typical": {
+          "value": "04-04",
+          "source_id": "facts-gapfill2-ots-meadowlark",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 04-04 for 2026-27 (about 60 projected days)."
+        },
+        "length_days": {
+          "value": 114,
+          "source_id": "facts-gapfill2-ots-meadowlark",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-12 to 04-04)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -37504,6 +38231,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-meadowlark",
         "openskimap-ski-areas"
       ]
     },
@@ -37567,9 +38295,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-25",
+          "source_id": "facts-gapfill2-sri-meany",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-sri-meany",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-meany",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-25 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -37594,6 +38340,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-meany",
         "facts-west2-wp-meany-lodge",
         "openskimap-ski-areas"
       ]
@@ -37827,7 +38574,8 @@
             "note": null
           }
         ],
-        "feed": true
+        "feed": true,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -38031,9 +38779,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-25",
+          "source_id": "facts-gapfill2-skiresortcom-missaukee",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-05",
+          "source_id": "facts-gapfill2-skiresortcom-missaukee",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 71,
+          "source_id": "facts-gapfill2-skiresortcom-missaukee",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-25 to 03-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -38058,6 +38824,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-missaukee",
         "openskimap-ski-areas"
       ]
     },
@@ -38508,9 +39275,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-25",
+          "source_id": "facts-gapfill2-sri-montdulac",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late November - early April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-gapfill2-sri-montdulac",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late November - early April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 132,
+          "source_id": "facts-gapfill2-sri-montdulac",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-25 to 04-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -38535,6 +39320,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-montdulac",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -38907,7 +39693,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -39615,7 +40402,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -40473,9 +41261,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-mtpisgah",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-sri-mtpisgah",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-sri-mtpisgah",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -40500,6 +41306,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-mtpisgah",
         "openskimap-ski-areas"
       ]
     },
@@ -40557,9 +41364,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-11",
+          "source_id": "facts-gapfill2-ots-mtpleasant-pa",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-11 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-gapfill2-ots-mtpleasant-pa",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-14 for 2026-27 (85 projected days)."
+        },
+        "length_days": {
+          "value": 94,
+          "source_id": "facts-gapfill2-ots-mtpleasant-pa",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-11 to 03-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -40584,6 +41409,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-mtpleasant-pa",
         "openskimap-ski-areas"
       ]
     },
@@ -40868,9 +41694,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-skigull",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-05",
+          "source_id": "facts-gapfill2-skiresortcom-skigull",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 81,
+          "source_id": "facts-gapfill2-skiresortcom-skigull",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -40895,6 +41739,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-skigull",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -41055,7 +41900,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Hiring is rolling; applications are accepted until December 15 or until the positions are filled.",
+          "source_id": "facts-training-mountsnow-cert-snowboard-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -41235,6 +42087,7 @@
         "ed-east-wikipedia-west-dover-vermont",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
+        "facts-training-mountsnow-cert-snowboard-2627",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-vail-resorts-home",
@@ -41513,7 +42366,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -41874,9 +42728,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-mtzion",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-sri-mtzion",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-sri-mtzion",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -41901,6 +42773,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-mtzion",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -41974,9 +42847,27 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-06",
+          "source_id": "facts-gapfill2-ots-mountaincreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 12-05 for 2026-27 (this page); snow report window from 12-06 (facts-gapfill2-ots-mountaincreek-report); phrase \"mid December - mid March\" (facts-gapfill2-skiresortcom-mountaincreek), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-gapfill2-ots-mountaincreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 03-21 for 2026-27 (this page); snow report window to 03-22 (facts-gapfill2-ots-mountaincreek-report); phrase \"mid December - mid March\" (facts-gapfill2-skiresortcom-mountaincreek), mid = 15."
+        },
+        "length_days": {
+          "value": 106,
+          "source_id": "facts-gapfill2-ots-mountaincreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-06 to 03-21)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -42001,6 +42892,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-mountaincreek",
         "facts-northeast2-mountain-creek-wikipedia",
         "openskimap-ski-areas",
         "webcams-mountain-creek-search"
@@ -42372,7 +43264,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -42687,7 +43580,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Ski and snowboard instructor applications open August 15 on the 2026-2027 seasonal jobs table; online pre season training follows in October.",
+          "source_id": "pay-west-mtbaker-jobs-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -42711,7 +43611,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates (open from facts-west2-fox13-wa-openings, close from facts-west2-wp-mt-baker)"
         },
-        "training_start": null
+        "training_start": {
+          "value": "11-01",
+          "source_id": "facts-training-mtbaker-application-process",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. The application timeline lists online pre season training in October, then \"Nov. 1 & 2, Instructor Training, beginning of training for hired instructors\". The page names no year."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -42844,11 +43750,13 @@
       "sources": [
         "ed-west-wiki-glacier-washington",
         "ed-west-wiki-mt-baker-ski-area",
+        "facts-training-mtbaker-application-process",
         "facts-west2-fox13-wa-openings",
         "facts-west2-wp-mt-baker",
         "jobs-fasterskier-jobpostings",
         "jobs-mt-baker-jobs",
         "jobs-skiracing-job-board",
+        "pay-west-mtbaker-jobs-2627",
         "pay-west-mtbaker-new-instructor-2627",
         "tmo-mt-baker",
         "wikipedia-mt-baker-legendary-banked-slalom",
@@ -43435,7 +44343,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -43838,9 +44747,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-mcsauba",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-mcsauba",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-mcsauba",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -43865,6 +44792,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-mcsauba",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -43953,8 +44881,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Median of 4 seasons: about 2018 12-12; 2020-21 12-26 (facts-gapfill-krcr-shasta-dec26); 2023-24 01-10 (facts-gapfill-anc-shasta-jan10); 2024-25 12-11 (this page). Midpoint of the two middle values."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-12",
+          "source_id": "facts-gapfill2-kdrv-shasta-2022",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 seasons: 2021-22 03-12 (this page); 2025-26 03-10 (facts-gapfill2-krcr-shasta-early); 2019-20 03-15 (facts-gapfill2-anc-shasta-final). All three seasons ended early (low snow, warm weather, COVID 19), so the typical close may be later."
+        },
+        "length_days": {
+          "value": 84,
+          "source_id": "facts-gapfill2-kdrv-shasta-2022",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-19 to 03-12)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -43980,6 +44920,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-kobi-shasta-2024",
+        "facts-gapfill2-kdrv-shasta-2022",
         "facts-west2-wp-mt-shasta",
         "openskimap-ski-areas",
         "webcams-mt-shasta-search"
@@ -44182,9 +45123,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-12",
+          "source_id": "facts-gapfill2-ots-mulligans",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-12 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-gapfill2-ots-mulligans",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-14 for 2026-27."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-gapfill2-ots-mulligans",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-12 to 03-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -44209,6 +45168,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-mulligans",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -44267,9 +45227,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-mystic-pa",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25. Mystic Mountain at Nemacolin, Farmington."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-mystic-pa",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25. Mystic Mountain at Nemacolin, Farmington."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-mystic-pa",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -44294,6 +45272,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-mystic-pa",
         "openskimap-ski-areas"
       ]
     },
@@ -45181,7 +46160,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -45759,9 +46739,27 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-13",
+          "source_id": "facts-gapfill2-ots-oakmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-12 for 2026-27 (this page); phrase \"mid December - late March\" (facts-gapfill2-sri-oakmtn), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-23",
+          "source_id": "facts-gapfill2-ots-oakmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-21 for 2026-27 (this page); phrase \"mid December - late March\" (facts-gapfill2-sri-oakmtn), late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-ots-oakmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-13 to 03-23)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -45786,6 +46784,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-oakmtn",
         "openskimap-ski-areas",
         "webcams-oak-mountain-search"
       ]
@@ -45963,9 +46962,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-oglebay",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-skiresortcom-oglebay",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-skiresortcom-oglebay",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -45990,6 +47007,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-oglebay",
         "openskimap-ski-areas"
       ]
     },
@@ -46139,7 +47157,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -46832,7 +47851,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -47178,7 +48198,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -47418,7 +48439,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -47782,7 +48804,8 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -48377,8 +49400,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. OnTheSnow projected opening date for 2026 to 27"
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-23",
+          "source_id": "facts-gapfill2-ots-peeknpeak",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-21 for 2026-27 (this page); phrase \"mid December - late March\" (facts-gapfill2-sri-peeknpeak), late = 25."
+        },
+        "length_days": {
+          "value": 109,
+          "source_id": "facts-gapfill2-ots-peeknpeak",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-05 to 03-23)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -48403,6 +49438,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-peeknpeak",
         "facts-northeast2-ots-buffalo-openings",
         "facts-northeast2-peekn-peak-ski-area-wikipedia",
         "openskimap-ski-areas"
@@ -48590,9 +49626,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-25",
+          "source_id": "facts-gapfill2-skiresortcom-petoskey",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-skiresortcom-petoskey",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 81,
+          "source_id": "facts-gapfill2-skiresortcom-petoskey",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-25 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -48617,6 +49671,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-petoskey",
         "openskimap-ski-areas"
       ]
     },
@@ -48779,7 +49834,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -48917,9 +49973,27 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-pinecreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-skiresortcom-pinecreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-skiresortcom-pinecreek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -48944,6 +50018,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-pinecreek",
         "openskimap-ski-areas",
         "webcams-pine-creek-search"
       ]
@@ -50206,7 +51281,8 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -50809,9 +51885,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-powersbluff",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-powersbluff",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-gapfill2-sri-powersbluff",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -50836,6 +51930,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-powersbluff",
         "openskimap-ski-areas"
       ]
     },
@@ -51916,9 +53011,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-28",
+          "source_id": "facts-gapfill2-eye-rotarun-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 4 values: 2025-26 opened 01-03 after rain delayed a late December start (this page); 2024-25 opened Saturday 12-21 (facts-gapfill2-eye-rotarun-pancake); 2023-24 opened Sunday 12-31 (facts-gapfill2-rotarun-dec31); the season normally starts at Christmas, 12-25 (facts-gapfill2-mtx-rotarun-close)."
+        },
+        "close_typical": {
+          "value": "03-23",
+          "source_id": "facts-gapfill2-mtx-rotarun-close",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values on this page: the season normally runs to the end of March, taken as 03-31; 2025-26 closing day moved up to Sunday 03-15 after warm weather and lift trouble."
+        },
+        "length_days": {
+          "value": 86,
+          "source_id": "facts-gapfill2-mtx-rotarun-close",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-28 to 03-23)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -51943,6 +53056,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-eye-rotarun-2026",
+        "facts-gapfill2-mtx-rotarun-close",
         "openskimap-ski-areas"
       ]
     },
@@ -52084,7 +53199,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -52237,9 +53353,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-06",
+          "source_id": "facts-gapfill2-ots-royal",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-06 for 2026-27."
+        },
+        "close_typical": {
+          "value": "04-03",
+          "source_id": "facts-gapfill2-ots-royal",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 04-03 for 2026-27."
+        },
+        "length_days": {
+          "value": 119,
+          "source_id": "facts-gapfill2-ots-royal",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-06 to 04-03)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -52264,6 +53398,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-royal",
         "openskimap-ski-areas"
       ]
     },
@@ -52743,9 +53878,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-12",
+          "source_id": "facts-gapfill2-ots-sapphire",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 4 values: OnTheSnow projection 12-18 (this page); OnTheSnow projection 12-13 (facts-gapfill2-ots-sapphire-report); 2020-21 targeted opening 12-12 (facts-gapfill2-sse-sapphire-target); phrase \"mid November - early April\" (facts-gapfill2-skiresortcom-sapphire), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-08",
+          "source_id": "facts-gapfill2-ots-sapphire",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 03-07 (this page); OnTheSnow projection 03-08 (facts-gapfill2-ots-sapphire-report); phrase \"mid November - early April\" (facts-gapfill2-skiresortcom-sapphire), early = 05."
+        },
+        "length_days": {
+          "value": 87,
+          "source_id": "facts-gapfill2-ots-sapphire",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-12 to 03-08)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -52770,6 +53923,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-sapphire",
         "facts-northeast2-wikipedia-se-comparison",
         "openskimap-ski-areas"
       ]
@@ -52903,7 +54057,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -53409,7 +54564,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -53944,7 +55100,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -54833,7 +55990,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -54985,8 +56143,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Single season only: the resort scheduled its 2025-26 opening for Nov 21 (also reported by the Los Alamos Daily Post). The Wikipedia article describes the season as \"from November to April\"."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "04-06",
+          "source_id": "facts-gapfill2-krqe-nm-closing-2024",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 seasons: 2023-24 04-06 (this page); 2025-26 projected 04-05 (facts-gapfill2-skinm-sendoffs-2026); 2017-18 weekend skiing until 04-18 (facts-gapfill2-sfnm-closing-2018)."
+        },
+        "length_days": {
+          "value": 137,
+          "source_id": "facts-gapfill2-krqe-nm-closing-2024",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-21 to 04-06)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -55011,6 +56181,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-krqe-nm-closing-2024",
         "facts-west1-sipapu-opening-2025",
         "facts-west1-wiki-sipapu",
         "openskimap-ski-areas",
@@ -55239,9 +56410,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-25",
+          "source_id": "facts-gapfill2-skiresortcom-skeetawk",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late November - late April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "04-25",
+          "source_id": "facts-gapfill2-skiresortcom-skeetawk",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late November - late April\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 152,
+          "source_id": "facts-gapfill2-skiresortcom-skeetawk",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-25 to 04-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -55266,6 +56455,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-skeetawk",
         "openskimap-ski-areas"
       ]
     },
@@ -56103,9 +57293,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-gapfill2-wiki-skiland",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Median of 3 values: phrase \"mid December into late April\" (this page, opened 2026-10-13), mid = 15; the official site's \"Early Dec to end of April\" (facts-gapfill2-skiland-skiing) and an older site page's \"early December through mid April\" (facts-gapfill2-skiland-older), both from a search result, pages not opened; early = 05."
+        },
+        "close_typical": {
+          "value": "04-25",
+          "source_id": "facts-gapfill2-wiki-skiland",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Median of 3 values: phrase \"mid December into late April\" (this page, opened 2026-10-13), late = 25; the official site's \"end of April\" (facts-gapfill2-skiland-skiing), taken as 04-30, and an older site page's \"mid April\" (facts-gapfill2-skiland-older), both from a search result, pages not opened."
+        },
+        "length_days": {
+          "value": 142,
+          "source_id": "facts-gapfill2-wiki-skiland",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-05 to 04-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -56130,6 +57338,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-wiki-skiland",
         "openskimap-ski-areas"
       ]
     },
@@ -56385,8 +57594,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Median of 3 seasons: 2023-24 11-23; 2024-25 11-23; 2025-26 11-29 (this page)."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "04-02",
+          "source_id": "facts-gapfill2-skinm-sendoffs-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 seasons: 2025-26 projected close 04-05 (this page); 2023-24 closed 03-30, a week early (facts-gapfill2-krqe-nm-closing-2024)."
+        },
+        "length_days": {
+          "value": 131,
+          "source_id": "facts-gapfill2-skinm-sendoffs-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-23 to 04-02)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -56412,6 +57633,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-skisantafe-2025",
+        "facts-gapfill2-skinm-sendoffs-2026",
         "facts-west1-wiki-ski-santa-fe",
         "openskimap-ski-areas",
         "webcams-ski-santa-fe-search"
@@ -56480,9 +57702,27 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-12",
+          "source_id": "facts-gapfill2-ots-sawmill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-12 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-gapfill2-ots-sawmill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-14 for 2026-27 (90 projected days)."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-gapfill2-ots-sawmill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-12 to 03-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -56507,6 +57747,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-sawmill",
         "openskimap-ski-areas",
         "webcams-ski-sawmill-search"
       ]
@@ -56586,8 +57827,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Median of 3 seasons: 2016-17 target 12-13 (this page); 2023-24 01-17 (facts-gapfill-kwqc-snowstar-2024); 2025-26 about 12-12, three weeks earlier than normal (facts-gapfill-kwqc-snowstar-2025)."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-gapfill2-ots-il-closing",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-07 for 2026-27 (same date on facts-gapfill2-ots-snowstar-report)."
+        },
+        "length_days": {
+          "value": 85,
+          "source_id": "facts-gapfill2-ots-il-closing",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-13 to 03-07)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -56613,6 +57866,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-wqad-snowstar-2016",
+        "facts-gapfill2-ots-il-closing",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -57367,9 +58621,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-25",
+          "source_id": "facts-gapfill2-ots-elko",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 12-30 for 2026-27 (this page); 2025-26 estimate 12-19 (facts-gapfill2-ots-elko-tickets); phrase \"late December - early March\" (facts-gapfill2-sri-elko), late = 25. Elko SnoBowl."
+        },
+        "close_typical": {
+          "value": "03-05",
+          "source_id": "facts-gapfill2-ots-elko",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 03-07 for 2026-27 (this page); 2025-26 estimate 03-01 (facts-gapfill2-ots-elko-tickets); phrase \"late December - early March\" (facts-gapfill2-sri-elko), early = 05. Elko SnoBowl."
+        },
+        "length_days": {
+          "value": 71,
+          "source_id": "facts-gapfill2-ots-elko",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-25 to 03-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -57394,6 +58666,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-elko",
         "openskimap-ski-areas"
       ]
     },
@@ -57543,7 +58816,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -57553,8 +58827,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. One season projection: OnTheSnow projected opening 12-26 for 2026-27."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-11",
+          "source_id": "facts-gapfill2-kshb-snowcreek-early",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 4 values: the normal season end is mid March, mid = 15 (this page); 2022-23 closed on schedule Sunday 03-05 (facts-gapfill2-kctv5-snowcreek-2023); a St. Patrick's Day closing Sunday, 03-17 (facts-gapfill2-fox4-snowcreek-stpat); OnTheSnow projected closing 03-07 (facts-gapfill2-ots-snowcreek)."
+        },
+        "length_days": {
+          "value": 76,
+          "source_id": "facts-gapfill2-kshb-snowcreek-early",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-26 to 03-11)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -57592,6 +58878,7 @@
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-snow-creek-ski-resort",
         "facts-gapfill-ots-mo-openings",
+        "facts-gapfill2-kshb-snowcreek-early",
         "facts-midwest-wiki-comparison",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
@@ -57989,9 +59276,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-08",
+          "source_id": "facts-gapfill2-ots-snowsnake",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 4 values: OnTheSnow projection 12-12 (this page); 12-05 on facts-gapfill2-ots-mi-open and on the older facts-gapfill2-ots-snowsnake-tickets; phrase \"mid December - mid March\" (facts-gapfill2-sri-snowsnake), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-gapfill2-ots-snowsnake",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 03-14 (this page); 03-14 on facts-gapfill2-ots-snowsnake-tickets; phrase \"mid December - mid March\" (facts-gapfill2-sri-snowsnake), mid = 15."
+        },
+        "length_days": {
+          "value": 97,
+          "source_id": "facts-gapfill2-ots-snowsnake",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-08 to 03-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -58016,6 +59321,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-snowsnake",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -58177,7 +59483,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -58545,7 +59852,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -58881,7 +60189,8 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -59137,7 +60446,8 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -59450,9 +60760,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-snowhaven",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-sri-snowhaven",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-sri-snowhaven",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -59477,6 +60805,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-snowhaven",
         "facts-west3-wp-snowhaven",
         "openskimap-ski-areas"
       ]
@@ -59638,7 +60967,14 @@
             "note": null
           }
         ],
-        "feed": true
+        "feed": true,
+        "hiring_window": {
+          "text": "New hires should arrive by December 2, 2026 (J-1 college students by December 9). Onboarding is the first workday, then a week of new hire training.",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -59662,7 +60998,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "12-06",
+          "source_id": "facts-training-aspen-employment",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New Hire Training for Aspen, Highlands and Snowmass runs December 6 to 11, 2026. It covers all new hires, the ski school among them."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -59806,6 +61148,7 @@
         "ed-west-wiki-aspen-skiing-company",
         "ed-west-wiki-snowmass-ski-area",
         "ed-west-wiki-snowmass-village-colorado",
+        "facts-training-aspen-employment",
         "facts-west1-aspen-opening-2025",
         "facts-west1-aspensnowmass-snowmass",
         "facts-west1-wiki-comparison-colorado",
@@ -60005,7 +61348,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Instructors start around the end of November or the beginning of December, with training required before mid December. The posting names no season.",
+          "source_id": "facts-training-snowshoe-instructor",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -60148,6 +61498,7 @@
         "ed-east-wikipedia-snowshoe-mountain",
         "ed-east-wikipedia-snowshoe-west-virginia",
         "facts-northeast2-snowshoe-ots",
+        "facts-training-snowshoe-instructor",
         "jobs-alterra-corporate-posting",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
@@ -60486,7 +61837,13 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
+        "open_typical": {
+          "value": "12-27",
+          "source_id": "facts-gapfill2-kmvt-soldier-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 seasons: 2025-26 opened 01-10 after a late storm (this page); 2024-25 opened Saturday 12-14 (facts-gapfill2-ktvb-soldier-saturday)."
+        },
         "close_typical": {
           "value": "04-12",
           "source_id": "facts-gapfill-idahonews-soldier-2025",
@@ -60494,7 +61851,13 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. One season: 2025-26 Thursday to Sunday operations until 04-12."
         },
-        "length_days": null,
+        "length_days": {
+          "value": 107,
+          "source_id": "facts-gapfill2-kmvt-soldier-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-27 to 04-12)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -60520,6 +61883,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-idahonews-soldier-2025",
+        "facts-gapfill2-kmvt-soldier-2026",
         "facts-west3-wp-soldier-mountain-ski-area",
         "openskimap-ski-areas",
         "webcams-soldier-mountain-search"
@@ -60693,7 +62057,8 @@
             "note": "Regional page that points to each Utah resort's careers page."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -61058,9 +62423,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-12",
+          "source_id": "facts-gapfill2-ots-springmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-12 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-gapfill2-ots-springmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-14 for 2026-27."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-gapfill2-ots-springmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-12 to 03-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -61085,6 +62468,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-springmtn",
         "openskimap-ski-areas"
       ]
     },
@@ -61448,7 +62832,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -61677,9 +63062,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-sri-steeplechase",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-sri-steeplechase",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-sri-steeplechase",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -61704,6 +63107,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-steeplechase",
         "openskimap-ski-areas"
       ]
     },
@@ -61853,7 +63257,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -62282,7 +63687,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Hiring is rolling; applications are accepted until December 15 or until the positions are filled.",
+          "source_id": "facts-training-stowe-noncert-snowboard-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -62454,6 +63866,7 @@
         "ed-east-wikipedia-stowe-vermont",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
+        "facts-training-stowe-noncert-snowboard-2627",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-vail-resorts-home",
@@ -62664,7 +64077,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -63004,7 +64418,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -63270,8 +64685,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. OnTheSnow projected opening date for 2026 to 27"
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-ots-sugarmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 OnTheSnow projections: 03-21 (this page) and 03-29 (facts-gapfill2-ots-nc-closing)."
+        },
+        "length_days": {
+          "value": 135,
+          "source_id": "facts-gapfill2-ots-sugarmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-11 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -63296,6 +64723,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-sugarmtn",
         "facts-northeast2-ots-nc-open-resorts",
         "facts-northeast2-wikipedia-se-comparison",
         "openskimap-ski-areas"
@@ -63471,7 +64899,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -63812,7 +65241,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Instructor posting opened July 23, 2026 with a target start of November 21, 2026.",
+          "source_id": "pay-east-sugarloaf-instructor-24652",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -63836,7 +65272,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "11-21",
+          "source_id": "pay-east-sugarloaf-instructor-24652",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Target start date of 11/21/2026 in the instructor posting (recorded in data/raw/pay/pay_east.yaml), read as the first day of staff training."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -64513,7 +65955,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -65087,7 +66530,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Instructor posting opened July 1, 2026 with a target start of December 1, 2026.",
+          "source_id": "pay-east-sunday-river-instructor-24529",
+          "as_of": "2026-10-13",
+          "confidence": "published",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -65111,7 +66561,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates"
         },
-        "training_start": null
+        "training_start": {
+          "value": "12-01",
+          "source_id": "pay-east-sunday-river-instructor-24529",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Target start date of 12/1/2026 in the instructor posting (recorded in data/raw/pay/pay_east.yaml), read as the first day of staff training."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -65167,7 +66623,17 @@
             "stale": false
           }
         ],
-        "private_rate": null,
+        "private_rate": {
+          "value": {
+            "low": 735.0,
+            "high": 795.0,
+            "unit": "full_day"
+          },
+          "source_id": "career-followups-sundayriver-private-lessons",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 2024-25 pricing, 6 hour private $735 non peak and $795 peak; 2 hour $315 to $340, 3 hour $420 to $480. No later season price was found."
+        },
         "private_split": null,
         "lucrativeness": {
           "low": null,
@@ -65253,6 +66719,7 @@
       "housing_summary": null,
       "sources": [
         "access-sun-journal-sunday-river-staff-housing",
+        "career-followups-sundayriver-private-lessons",
         "ed-east-wikipedia-bethel-maine",
         "ed-east-wikipedia-gould-academy",
         "ed-east-wikipedia-newry-maine",
@@ -65707,8 +67174,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. OnTheSnow projected opening date for 2026 to 27"
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-gapfill2-ots-swain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-28 for 2026-27 (this page); phrase \"mid December - mid March\" (facts-gapfill2-sri-swain), mid = 15."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-gapfill2-ots-swain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-19 to 03-21)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -65733,6 +67212,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-swain",
         "facts-northeast2-ots-buffalo-openings",
         "openskimap-ski-areas"
       ]
@@ -65791,9 +67271,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-08",
+          "source_id": "facts-gapfill2-ots-swissvalley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-11 for 2026-27 (this page); phrase \"early December - late March\" (facts-gapfill2-sri-swissvalley), early = 05."
+        },
+        "close_typical": {
+          "value": "03-19",
+          "source_id": "facts-gapfill2-ots-swissvalley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-14 for 2026-27 (this page); phrase \"early December - late March\" (facts-gapfill2-sri-swissvalley), late = 25."
+        },
+        "length_days": {
+          "value": 102,
+          "source_id": "facts-gapfill2-ots-swissvalley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-08 to 03-19)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -65818,6 +67316,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-swissvalley",
         "openskimap-ski-areas"
       ]
     },
@@ -66219,7 +67718,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -66455,7 +67955,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Recruiting for the season of November 26, 2026 to April 4, 2027.",
+          "source_id": "facts-training-telluride-coolworks-jobs",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -66626,6 +68133,7 @@
         "ed-west-wiki-mountain-village-colorado",
         "ed-west-wiki-telluride-colorado",
         "ed-west-wiki-telluride-ski-resort",
+        "facts-training-telluride-coolworks-jobs",
         "facts-west1-telluride-dates-2024-25",
         "facts-west1-telluridenews-close-2026",
         "jobs-fasterskier-jobpostings",
@@ -67228,7 +68736,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -67371,9 +68880,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-20",
+          "source_id": "facts-gapfill2-ots-homestead-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-26 (this page); phrase \"mid December - mid March\" (facts-gapfill2-sri-homestead-mi), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-gapfill2-sri-homestead-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - mid March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 86,
+          "source_id": "facts-gapfill2-sri-homestead-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-20 to 03-15)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -67398,6 +68925,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-homestead-mi",
+        "facts-gapfill2-sri-homestead-mi",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -67588,9 +69117,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-11",
+          "source_id": "facts-gapfill2-ots-grandgeneva",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 OnTheSnow projections: 12-11 (this page) and 12-12 (facts-gapfill2-ots-grandgeneva-report)."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-gapfill2-ots-grandgeneva",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 OnTheSnow projections: 03-07 (this page) and 03-08 (facts-gapfill2-ots-grandgeneva-report)."
+        },
+        "length_days": {
+          "value": 87,
+          "source_id": "facts-gapfill2-ots-grandgeneva",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-11 to 03-07)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -67615,6 +69162,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-grandgeneva",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -67919,9 +69467,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-skiresortcom-thrillhills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-skiresortcom-thrillhills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"mid December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-gapfill2-skiresortcom-thrillhills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-15 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -67946,6 +69512,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-skiresortcom-thrillhills",
         "openskimap-ski-areas"
       ]
     },
@@ -68018,9 +69585,27 @@
       },
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-26",
+          "source_id": "facts-gapfill2-ots-thunderridge",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-26 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-28",
+          "source_id": "facts-gapfill2-ots-thunderridge",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-28 for 2026-27."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-gapfill2-ots-thunderridge",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-26 to 03-28)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -68045,6 +69630,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-thunderridge",
         "facts-northeast2-thunder-ridge-wikipedia",
         "openskimap-ski-areas",
         "webcams-thunder-ridge-search"
@@ -68394,7 +69980,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Interviews are scheduled in early to mid October; the expected start date is once the snow flies.",
+          "source_id": "pay-west-timberline-instructors-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -68404,7 +69997,13 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. This page gives an average winter opening day of November 16."
         },
-        "close_typical": null,
+        "close_typical": {
+          "value": "08-02",
+          "source_id": "facts-gapfill2-un-timberline-2026",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 summer closes on this page: 2026 07-19, 2025 08-17 and 2015 08-02. This is the end of lift served summer skiing on the Palmer Snowfield."
+        },
         "length_days": {
           "value": 287,
           "source_id": "facts-gapfill-tgr-timberline-287",
@@ -68412,7 +70011,13 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. One season: the lifts ran 287 consecutive days before the summer close. Timberline skis into summer on the Palmer Snowfield, so no single closing date is recorded."
         },
-        "training_start": null
+        "training_start": {
+          "value": "11-14",
+          "source_id": "pay-west-timberline-instructors-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Required training for 2026/2027 is the Instructor Training Course on 11/14 to 11/15, then New Hire Orientation on 11/21 to 11/22 and 12/5 to 12/6, 8am to 5pm."
+        }
       },
       "terrain": {
         "beginner_pct": {
@@ -68552,6 +70157,7 @@
         "ed-west-wiki-timberline-lodge-ski-area",
         "facts-gapfill-katu-timberline",
         "facts-gapfill-tgr-timberline-287",
+        "facts-gapfill2-un-timberline-2026",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-timberline-jobs",
@@ -68796,7 +70402,8 @@
             "note": "RLK and Company operates the lifts on the Palmer Snowfield; summer camp coaches are hired by each camp."
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": null,
@@ -69162,8 +70769,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Median of 4 values: the resort says opening usually occurs around Thanksgiving, about 11-25 (this page); 2022-23 12-03 (facts-gapfill-9and10-treetops-2022); 2023-24 11-29 (facts-gapfill-9and10-treetops-2023); 2025-26 anticipated 12-05 (facts-gapfill-treetops-report)."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-gapfill2-ots-treetops",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-14 for 2026-27 (Treetops Resort)."
+        },
+        "length_days": {
+          "value": 104,
+          "source_id": "facts-gapfill2-ots-treetops",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-01 to 03-14)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -69189,6 +70808,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-treetops-about",
+        "facts-gapfill2-ots-treetops",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -69548,8 +71168,20 @@
           "confidence": "estimated",
           "note": "From a search result for this page; page not opened. Median of 3 seasons: 2013-14 daily from 12-26 (this page); 2019-20 01-10 (facts-gapfill-fb-turner-2020); 2022-23 tentative 12-23 (facts-gapfill-tw-turner-2022). Volunteer run, weekends."
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-gapfill2-sri-turner",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"early December - late March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 90,
+          "source_id": "facts-gapfill2-sri-turner",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-26 to 03-25)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -69575,6 +71207,7 @@
       "housing_summary": null,
       "sources": [
         "facts-gapfill-tw-turner-2013",
+        "facts-gapfill2-sri-turner",
         "facts-west3-wp-turner-mountain",
         "openskimap-ski-areas"
       ]
@@ -70002,7 +71635,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": null,
@@ -70191,7 +71825,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": null,
@@ -70416,7 +72051,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Hiring is rolling; applications are accepted until December 15 or until the positions are filled.",
+          "source_id": "facts-training-vail-cert-ski-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -70497,6 +72139,7 @@
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-vail-colorado",
         "ed-west-wiki-vail-ski-resort",
+        "facts-training-vail-cert-ski-2627",
         "facts-west1-vaildaily-vail-2026-opening",
         "facts-west1-vaildaily-vail-close-2026",
         "jobs-fasterskier-jobpostings",
@@ -70831,9 +72474,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-18",
+          "source_id": "facts-gapfill2-ots-villaolivia",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 OnTheSnow projections: 12-18 for 2026-27 (this page) and 12-19 for 2025-26 (facts-gapfill2-ots-villaolivia-report)."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-gapfill2-ots-villaolivia",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 OnTheSnow projections: 03-07 for 2026-27 (this page) and 03-08 for 2025-26 (facts-gapfill2-ots-villaolivia-report)."
+        },
+        "length_days": {
+          "value": 80,
+          "source_id": "facts-gapfill2-ots-villaolivia",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-18 to 03-07)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -70858,6 +72519,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-villaolivia",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
@@ -70916,9 +72578,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-25",
+          "source_id": "facts-gapfill2-sri-villaroma",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "close_typical": {
+          "value": "03-05",
+          "source_id": "facts-gapfill2-sri-villaroma",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase \"late December - early March\" (general season); early = 05, mid = 15, late = 25."
+        },
+        "length_days": {
+          "value": 71,
+          "source_id": "facts-gapfill2-sri-villaroma",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-25 to 03-05)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -70943,6 +72623,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-sri-villaroma",
         "openskimap-ski-areas"
       ]
     },
@@ -71429,7 +73110,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -71695,7 +73377,13 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-gapfill2-gfbj-westmtn-2020",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: planned 2020-21 opening 12-12 (this page); a Saturday 12-19 opening (facts-gapfill2-iloveny-westmtn-1219)."
+        },
         "close_typical": null,
         "length_days": null,
         "training_start": null
@@ -71722,6 +73410,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-gfbj-westmtn-2020",
         "facts-northeast2-west-mountain-ski-resort-wikipedia",
         "openskimap-ski-areas"
       ]
@@ -72335,7 +74024,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -72674,7 +74364,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "The winter selection process begins in September. Preseason training runs from two days to two weeks before the season opens in December.",
+          "source_id": "jobs-whitefish-jobs",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -72907,7 +74604,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -73166,8 +74864,20 @@
           "confidence": "estimated",
           "note": "median of the opening days Wikipedia lists for seasons 1982 to 2025 (39 recorded seasons; earliest Oct 7, latest Nov 28)"
         },
-        "close_typical": null,
-        "length_days": null,
+        "close_typical": {
+          "value": "03-28",
+          "source_id": "facts-gapfill2-ots-wildmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-28 for 2026-27; an older OnTheSnow note says the area normally stays open into April."
+        },
+        "length_days": {
+          "value": 149,
+          "source_id": "facts-gapfill2-ots-wildmtn",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (10-31 to 03-28)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -73192,6 +74902,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-wildmtn",
         "facts-midwest-wiki-comparison",
         "facts-midwest-wiki-wild-mountain",
         "openskimap-ski-areas"
@@ -73348,7 +75059,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -73712,9 +75424,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-16",
+          "source_id": "facts-gapfill2-ots-willard",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-16 for 2026-27."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-gapfill2-ots-willard",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-21 for 2026-27."
+        },
+        "length_days": {
+          "value": 96,
+          "source_id": "facts-gapfill2-ots-willard",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-16 to 03-21)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -73739,6 +75469,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-willard",
         "openskimap-ski-areas"
       ]
     },
@@ -73888,7 +75619,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Now hiring part time and full time instructors for winter 2026/27.",
+          "source_id": "facts-training-wilmot-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -74039,6 +75777,7 @@
         "ed-east-wikipedia-wilmot-mountain",
         "facts-gapfill-ots-wilmot",
         "facts-gapfill-tmj4-wilmot",
+        "facts-training-wilmot-home",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-vail-resorts-home",
@@ -74354,7 +76093,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": {
@@ -75162,9 +76902,27 @@
       "webcams": null,
       "jobs": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-13",
+          "source_id": "facts-gapfill2-ots-woodsvalley-tickets",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 values: 2025-26 estimate 12-13 (this page); OnTheSnow projection 12-12 for 2026-27 (facts-gapfill2-ots-ny-openings); phrase \"mid December - late March\" (facts-gapfill2-sri-woodsvalley), mid = 15."
+        },
+        "close_typical": {
+          "value": "03-30",
+          "source_id": "facts-gapfill2-ots-woodsvalley-tickets",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Midpoint of 2 values: 2025-26 estimate 04-05 (this page); phrase \"mid December - late March\" (facts-gapfill2-sri-woodsvalley), late = 25."
+        },
+        "length_days": {
+          "value": 108,
+          "source_id": "facts-gapfill2-ots-woodsvalley-tickets",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (12-13 to 03-30)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -75189,6 +76947,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-gapfill2-ots-woodsvalley-tickets",
         "openskimap-ski-areas"
       ]
     },
@@ -75283,7 +77042,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": null,
@@ -75457,12 +77217,31 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-23",
+          "source_id": "facts-gapfill2-kpcw-woodward-2024",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Median of 3 seasons: 2024-25 tubing set to open 11-23 (this page); 2025-26 opened 11-28 with tubing first (facts-gapfill2-kpcw-woodward-2025); 2022-23 opened Friday 11-18, its earliest opening day at the time (facts-gapfill2-townlift-woodward-2022)."
+        },
+        "close_typical": {
+          "value": "04-04",
+          "source_id": "facts-gapfill2-snowstash-woodward-pc",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. One season: this page lists the 2025-26 winter season through 04-04."
+        },
+        "length_days": {
+          "value": 133,
+          "source_id": "facts-gapfill2-snowstash-woodward-pc",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates (11-23 to 04-04)"
+        },
         "training_start": null
       },
       "terrain": {
@@ -75518,12 +77297,12 @@
             },
             {
               "key": "season_months",
-              "value": 5.0,
-              "label": "Season months (standard 5 month season)"
+              "value": 4.38,
+              "label": "Season months (sourced season length divided by 30.4 days)"
             },
             {
               "key": "season_months_basis",
-              "value": "default",
+              "value": "season_length",
               "label": "Season months basis"
             },
             {
@@ -75579,6 +77358,8 @@
         "access-hvt-route-108",
         "ed-west-wiki-park-city-utah",
         "ed-west-wiki-powdr",
+        "facts-gapfill2-kpcw-woodward-2024",
+        "facts-gapfill2-snowstash-woodward-pc",
         "jobs-fasterskier-jobpostings",
         "jobs-powdr-workday-posting",
         "jobs-skiracing-job-board",
@@ -75688,7 +77469,8 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": null
       },
       "season": {
         "open_typical": null,
@@ -76143,7 +77925,14 @@
             "note": null
           }
         ],
-        "feed": false
+        "feed": false,
+        "hiring_window": {
+          "text": "Posting dated April 24, 2026; winter employment runs roughly November 23 to April 21.",
+          "source_id": "facts-training-yc-coolworks-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
       },
       "season": {
         "open_typical": {
@@ -76167,7 +77956,13 @@
           "confidence": "estimated",
           "note": "computed from typical dates (11-25 to 04-15)"
         },
-        "training_start": null
+        "training_start": {
+          "value": "11-23",
+          "source_id": "facts-training-yc-coolworks-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Certified snowsports instructor posting for 2026-2027 gives a November 23, 2026 start."
+        }
       },
       "terrain": {
         "beginner_pct": null,
@@ -76284,6 +78079,7 @@
         "ed-west-wiki-big-sky-montana",
         "ed-west-wiki-yellowstone-club",
         "facts-gapfill-sri-yellowstone-club",
+        "facts-training-yc-coolworks-2627",
         "facts-west3-wp-yellowstone-club",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",

@@ -72,7 +72,8 @@ Resort {
   webcams: { cams_page: { url, source_id, as_of, confidence, note } | null,
              cams: [{ label, url, kind: page|image|stream, source_id, as_of, confidence, note }] } | null,
                                                    // live cams links, at most webcams.max_named_cams cams (Webcams and jobs)
-  jobs: { links: [JobLink], feed: boolean } | null,   // jobs links by role group; employers in jobs/employers.json
+  jobs: { links: [JobLink], feed: boolean,          // jobs links by role group; employers in jobs/employers.json
+          hiring_window: { text, source_id, as_of, confidence, note } | null } | null,   // null without links and window
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
 }
@@ -368,6 +369,11 @@ where a public board exists. Cams, streams and job pages are linked in a new tab
             disciplines?: [race|freeride|freestyle|park|nordic|adaptive|snowboard|moguls], label, url,
             source_id, as_of, confidence, note? }
   ```
+* Hiring windows (ROADMAP item 6): a jobs batch may also hold `hiring_windows: [{ resort_id, text, source_id, as_of,
+  confidence, note? }]`, the source's own sentence on when applications open, job fairs or clinics start, copied word
+  for word (max 400 characters, no em or en dashes). One per resort across all files. `data/raw/jobs/hiring_windows.yaml`
+  holds the 27 from the pay and training research; their sources live in `data/raw/facts/training.yaml`,
+  `data/raw/pay` and `data/raw/jobs`.
 * Missing or empty folders are fine (no records). Rules, each a build error: an `http` (or any non https) url; an
   unknown resort, employer or source id; a bad enum value; a resort listed twice in one file; webcams for one resort
   in two files; a cam url or label listed twice, or a cam equal to the cams page; a jobs url listed twice in one role
@@ -439,11 +445,12 @@ closes it when none are; it never commits.
 * Resort panel, under the trail map links: "Live cams", then "Open live cams" (the cams page) with its badge,
   site name, "opens in a new tab" and "Last verified", then up to four named cams with badge and kind (Web page,
   Still image, Live stream).
-* "Jobs" section after Career: "Links open each employer's own site in a new tab.", then groups in this order: Ski
+* "Jobs" section after Career: "Hiring window: <text>" with its badge, date and source when the resort has one, then
+  "Links open each employer's own site in a new tab.", then groups in this order: Ski
   school (`ski_school`), Coaching and clubs (`coaching`, disciplines as small tags), Management (`management`),
   Parent company (`corporate`), Job boards (`all`). Each link has its badge and "Last verified <date>", plus its
-  source when the source is another page. Tier A resorts without links say "Jobs links are being collected."; Tier B
-  resorts without links show no section.
+  source when the source is another page. Tier A resorts without links say "Jobs links are being collected." (after
+  a hiring window when there is one); Tier B resorts without links or window show no section.
 * Open roles (panel only, never prerendered since they change daily): when `jobs.feed` is true the panel loads
   `jobs/postings.json` once (`loadPostings`, lazy, Zod `PostingsFile`) and, for postings of the resort's linked
   employers, shows "N open roles" (Published badge) for postings naming this resort with up to five titles linked out

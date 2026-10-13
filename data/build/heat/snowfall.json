@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T15:28:30Z",
+  "generated_at": "2026-10-13T15:33:13Z",
   "mode": "snowfall",
   "units": "in",
   "scale": "classed",
@@ -119,18 +119,18 @@
       {
         "region": "lower48",
         "file": "snowfall-isolines-lower48.geojson",
-        "bytes": 92818,
+        "bytes": 120866,
         "features": 222
       },
       {
         "region": "alaska",
         "file": "snowfall-isolines-alaska.geojson",
-        "bytes": 9472,
+        "bytes": 12976,
         "features": 28
       }
     ]
   },
-  "inputs_sha256": "8f490c249c184c6c3e6f7c9983fb8a269d63a9e472b99ebe43a48b229cb63e85",
+  "inputs_sha256": "4efc3a61e232f7ebc3772f1ef8d23b14d59502a79bea9985b7302d7dfbc6b781",
   "rasters": [
     {
       "region": "lower48",

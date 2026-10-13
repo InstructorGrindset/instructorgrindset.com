@@ -296,11 +296,16 @@ def render_webcams(ctx: Ctx, r: dict) -> str:
 def render_jobs(ctx: Ctx, r: dict) -> str:
     """The "Jobs" section: links grouped as Ski school, Coaching and clubs, Management, Parent company, Job boards.
     Live postings are added by the panel from jobs/postings.json, never prerendered (they change daily)."""
-    links = [x for x in ((r.get("jobs") or {}).get("links") or []) if str(x.get("url", "")).startswith("https://")]
+    jobs = r.get("jobs") or {}
+    links = [x for x in (jobs.get("links") or []) if str(x.get("url", "")).startswith("https://")]
+    hw = jobs.get("hiring_window") or {}
+    window = (f'<p class="jobs-window"><strong>Hiring window:</strong> {_esc(hw["text"])} {_badge(hw.get("confidence"))} '
+              f'<span class="fact-meta">{_link_meta(ctx, hw)}</span></p>') if hw.get("text") else ""
     if not links:
-        if r.get("tier") != "A":
+        if r.get("tier") != "A" and not window:
             return ""
-        return '<section class="panel-section jobs"><h3>Jobs</h3><p class="not-verified">Jobs links are being collected.</p></section>'
+        return (f'<section class="panel-section jobs"><h3>Jobs</h3>{window}'
+                '<p class="not-verified">Jobs links are being collected.</p></section>')
     groups = []
     for key, title in JOB_GROUPS:
         items = [x for x in links if x.get("role_group") == key]
@@ -314,7 +319,7 @@ def render_jobs(ctx: Ctx, r: dict) -> str:
                        f'{tags}<span class="fact-meta">{_link_meta(ctx, x)}</span></li>')
         groups.append(f'<div class="job-group" data-group="{key}"><h4 class="sub">{_esc(title)}</h4>'
                       f'<ul class="job-links">{"".join(lis)}</ul></div>')
-    return ('<section class="panel-section jobs"><h3>Jobs</h3>'
+    return ('<section class="panel-section jobs"><h3>Jobs</h3>' + window +
             '<p class="fact-meta">Links open each employer\'s own site in a new tab.</p>' + "".join(groups) + "</section>")
 
 

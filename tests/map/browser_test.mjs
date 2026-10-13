@@ -102,7 +102,7 @@ function watch(page, label) {
     // Allowed: the site wide Rooftop font (missing repo wide) and definitions.json, which is optional.
     if (r.status() === 404 && /\/definitions\.json$/.test(r.url())) { log(`    note definitions.json absent at ${r.url()}`); return; }
     // The fallback test build has no slim index on purpose.
-    if (r.status() === 404 && /\/legacy-build\/(map-index|heat\/snowfall)\.json$/.test(r.url())) return;
+    if (r.status() === 404 && /\/legacy-build\/(map-index|heat\/snowfall|heat\/season)\.json$/.test(r.url())) return;
     // The report form test answers one send with 500 on purpose to exercise the retry.
     if (r.status() === 500 && r.url() === 'https://reports.example.test/submit') return;
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
@@ -340,12 +340,16 @@ async function desktop(browser, base) {
   });
   // Points far from every fixture resort, between distant clusters, all inside the fixture states.
   const BETWEEN = [[-115.5, 40.0], [-108.5, 42.8], [-117.0, 37.5], [-112.5, 37.6], [-72.0, 43.6]];
+  // Season length covers the states with season data (NV, CA, UT here); deep inside one without (WY) it stays clear.
+  const SEASON_BETWEEN = [[-115.5, 40.0], [-117.0, 37.5], [-112.5, 37.6]];
   const heatModes = [
-    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', range: 'Resort values: $8,900 to $10,600', n: 2, first: '$8.5K', last: '$11K' },
-    { mode: 'season', prop: 'season_length_days', unit: 'Days', range: 'Resort values: 112 to 168', n: 11, first: '100', last: '180' },
-    { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', range: 'Resort values: 256 to 460', n: 9, first: '0', last: '500', raster: true },
+    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', range: 'Resort values: $8,900 to $10,600', n: 2, first: '$8.5K', last: '$11K', between: BETWEEN },
+    { mode: 'season', prop: 'season_length_days', unit: 'Days', range: 'Resort values: 112 to 168', n: 11, first: '90', last: '180', raster: true, classed: true, between: SEASON_BETWEEN, clear: [[-107.5, 43.6]] },
+    { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', range: null, n: 9, first: '0', last: '800', raster: true, classed: true, between: BETWEEN },
   ];
+  const firstRaster = w.requests.length;
   for (const hm of heatModes) {
+    const before = w.requests.length;
     await page.locator(`.recolor-modes .filter-btn[data-mode="${hm.mode}"]`).click();
     await page.waitForFunction((k) => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith(`heat-${k}-`)), hm.mode, { timeout: 10000 });
     await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 10000 });
@@ -359,31 +363,65 @@ async function desktop(browser, base) {
     if (hm.ticks) {
       check(JSON.stringify(ticks) === JSON.stringify(hm.ticks) && !/Min|Max|100|Resort values/.test(text), `${hm.mode}: legend shows only ${hm.ticks.join(', ')}`);
     } else {
-      check(await leg.isVisible() && text.includes(hm.unit) && text.includes(hm.range) && ticks.length >= 3 && ticks[0] === hm.first && ticks[ticks.length - 1] === hm.last,
-        `${hm.mode}: legend with numeric ticks (${ticks.join(', ')}), units and the sourced resort range`);
+      check(await leg.isVisible() && text.includes(hm.unit) && (hm.range ? text.includes(hm.range) : !/Resort values/.test(text))
+        && ticks.length >= 3 && ticks[0] === hm.first && ticks[ticks.length - 1] === hm.last,
+        `${hm.mode}: legend with numeric ticks (${ticks.join(', ')}), units and ${hm.range ? 'the sourced resort range' : 'its fixed scale'}`);
     }
     check(text.includes(`${hm.n} resort`) && await leg.locator('.heat-bar').count() === 1, `${hm.mode}: legend counts ${hm.n} resorts with data and shows the ramp`);
+    if (hm.classed) {
+      const bar = await leg.locator('.heat-bar').evaluate((el) => getComputedStyle(el).backgroundImage);
+      check(await leg.locator('.heat-bar-classed').count() === 1 && (bar.match(/rgb\(/g) || []).length >= 16,
+        `${hm.mode}: legend draws hard edged class boxes`);
+    }
     check(/smoothed estimates/.test(text) && /only sourced values/.test(text), `${hm.mode}: legend says the colors between resorts are smoothed estimates`);
     // A real heat map: every point between distant resorts is colored (no gaps), at the floor opacity or more.
-    const between = await sampleHeat(page, BETWEEN);
+    const between = await sampleHeat(page, hm.between);
     check(between.every((px) => px[3] >= 0.33 * 255), `${hm.mode}: continuous coverage between distant resorts (alpha ${between.map((px) => px[3]).join(', ')})`);
+    if (hm.clear) {
+      const clear = await sampleHeat(page, hm.clear);
+      check(clear.every((px) => px[3] === 0), `${hm.mode}: a state with no data stays clear far from its border (alpha ${clear.map((px) => px[3]).join(', ')})`);
+    }
+    const iso = await page.evaluate(() => ['heat-iso-minor', 'heat-iso-major', 'heat-iso-label'].filter((id) => window.__careerMap.mapCtl.map.getLayer(id)));
     if (hm.raster) {
-      const src = await page.evaluate(() => {
+      const src = await page.evaluate((k) => {
         const m = window.__careerMap.mapCtl.map;
-        const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-snowfall-')).map((l) => l.id);
+        const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith(`heat-${k}-`)).map((l) => l.id);
         return { urls: ids.map((id) => m.getSource(id).url), credit: Boolean(m.getSource('heat-credit')),
           attrib: (document.querySelector('.maplibregl-ctrl-attrib-inner') || {}).textContent || '' };
-      });
-      check(src.urls.length >= 1 && src.urls.every((u) => /\/tests\/map\/fixtures\/heat\/snowfall-lower48\.png$/.test(u)),
-        `snowfall: the precomputed raster source loads (${src.urls.join(', ')})`);
-      check(w.requests.some((u) => /\/heat\/snowfall\.json$/.test(u)) && w.requests.some((u) => /\/heat\/snowfall-lower48\.png$/.test(u)), 'snowfall: the sidecar and the PNG are fetched');
-      check(src.credit && src.attrib.includes('Snowfall normals: NOAA NCEI 1991 to 2020'), `snowfall: attribution names the NOAA normals (${src.attrib.slice(0, 160)})`);
-      check(/NOAA station normals, 1991 to 2020/.test(text), 'snowfall: legend names the NOAA background');
+      }, hm.mode);
+      const re = new RegExp(`/tests/map/fixtures/heat/${hm.mode}-lower48\\.png$`);
+      check(src.urls.length >= 1 && src.urls.every((u) => re.test(u)), `${hm.mode}: the precomputed raster source loads (${src.urls.join(', ')})`);
+      const mine = w.requests.slice(before);
+      check(mine.some((u) => u.endsWith(`/heat/${hm.mode}.json`)) && mine.some((u) => u.endsWith(`/heat/${hm.mode}-lower48.png`))
+        && !w.requests.slice(0, before).some((u) => u.includes(`/heat/${hm.mode}`)), `${hm.mode}: the sidecar and the PNG are fetched once the mode is selected`);
+      if (hm.mode === 'snowfall') {
+        check(src.credit && src.attrib.includes('Snowfall normals: NOAA NCEI 1991 to 2020'), `snowfall: attribution names the NOAA normals (${src.attrib.slice(0, 160)})`);
+        check(/NOAA station normals, 1991 to 2020/.test(text), 'snowfall: legend names the NOAA background');
+        check(/Grey: under 24 in, little or no snow/.test(text) && /Lines every 50 in from 200, bolder every 100/.test(text),
+          'snowfall: legend explains the grey class and the isolines');
+        await page.waitForFunction(() => Boolean(window.__careerMap.mapCtl.map.getLayer('heat-iso-label')), null, { timeout: 10000 }).catch(() => {});
+        const isoState = await page.evaluate(() => {
+          const m = window.__careerMap.mapCtl.map;
+          const layers = m.getStyle().layers.map((l) => l.id);
+          const src = m.getSource('heat-iso');
+          return { layers: ['heat-iso-minor', 'heat-iso-major', 'heat-iso-label'].map((id) => layers.indexOf(id)), states: layers.indexOf('states-line'),
+            resorts: layers.indexOf('resorts'), features: src ? (src._data && src._data.features ? src._data.features.length : -1) : 0,
+            labelMin: m.getLayer('heat-iso-label') ? m.getLayer('heat-iso-label').minzoom : null, image: m.hasImage('iso-300') };
+        });
+        check(isoState.layers.every((i) => i >= 0 && i < isoState.resorts) && isoState.layers[1] < isoState.states && isoState.features !== 0,
+          `snowfall: isolines draw over the heat surface and under the resorts (${JSON.stringify(isoState)})`);
+        check(isoState.labelMin >= 6 && isoState.image, 'snowfall: isoline labels are images (no glyph server) shown from mountain range zoom');
+        check(mine.some((u) => u.endsWith('/heat/snowfall-isolines-lower48.geojson')), 'snowfall: the isolines load with the mode');
+      } else {
+        check(!src.credit && /States with no resort data stay clear/.test(text) && iso.length === 0,
+          'season: resort values only (no NOAA credit), no isolines, and the legend says states without data stay clear');
+      }
+    } else {
+      check(iso.length === 0, `${hm.mode}: no isolines`);
     }
     await shot(page, `desktop-01c-heat-${hm.mode}.png`);
   }
-  check(!w.requests.slice(0, w.requests.findIndex((u) => /\/heat\/snowfall\.json$/.test(u))).some((u) => /\/heat\//.test(u)),
-    'heat rasters load only once snowfall mode is selected');
+  check(!w.requests.slice(0, firstRaster).some((u) => /\/heat\//.test(u)), 'heat rasters load only once a raster mode is selected');
   // Zoomed into the Front Range: the surface stays smooth around each resort.
   await page.evaluate(() => window.__careerMap.mapCtl.map.jumpTo({ center: [-106.1, 39.6], zoom: 7 }));
   await page.waitForTimeout(600);
@@ -392,7 +430,8 @@ async function desktop(browser, base) {
   await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
   await page.waitForTimeout(200);
   check(await leg.isHidden() && (await heatState()).ids.length === 0, 'Default removes the heat surface and hides its legend');
-  check(await page.evaluate(() => !window.__careerMap.mapCtl.map.getSource('heat-credit')), 'Default removes the NOAA credit');
+  check(await page.evaluate(() => !window.__careerMap.mapCtl.map.getSource('heat-credit') && !window.__careerMap.mapCtl.map.getSource('heat-iso')
+    && !window.__careerMap.mapCtl.map.getLayer('heat-iso-major')), 'Default removes the NOAA credit and the isolines');
   check((await heatState()).color.includes('#e0a03a') && !(await heatState()).color.includes('season_length_days'), 'Default restores tier colors');
 
   // The surface shows value, not density: a cluster of low resorts counts as one voice, opacity never grows with
@@ -973,6 +1012,20 @@ async function desktopStub(browser, base) {
   check(fallback.urls.length >= 1 && fallback.urls.every((u) => u.startsWith('data:image/png')) && !fallback.credit
     && !/NOAA/.test(fallback.legend) && /smoothed estimates/.test(fallback.legend),
     `without the snowfall rasters the map draws the resort only surface (${fallback.urls.length} images)`);
+  // Without heat/season.json the season mode draws in the browser, with the same classes and the same fade.
+  const t0 = Date.now();
+  await page.locator('.recolor-modes .filter-btn[data-mode="season"]').click();
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith('heat-season-')), null, { timeout: 15000 });
+  const seasonFallback = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-season-')).map((l) => l.id);
+    return { urls: ids.map((id) => m.getSource(id).url), legend: document.getElementById('recolor-legend').innerText };
+  });
+  const seasonClear = await sampleHeat(page, [[-107.5, 43.6]]);
+  const seasonIn = await sampleHeat(page, [[-112.5, 37.6]]);
+  check(seasonFallback.urls.length >= 1 && seasonFallback.urls.every((u) => u.startsWith('data:image/png')) && /stay clear/.test(seasonFallback.legend)
+    && seasonClear[0][3] === 0 && seasonIn[0][3] >= 0.33 * 255,
+    `without the season rasters the browser draws them (${Date.now() - t0} ms; WY clear ${seasonClear[0][3]}, UT ${seasonIn[0][3]})`);
   await page.goto(`${base}/map/`);
   await ready(page);
   await page.goto(`${base}/map/co/fixture-front-range/?compare=alpha-peak,charlie-hill`);
@@ -1038,10 +1091,24 @@ async function realData(browser, base) {
         await page.waitForFunction((k) => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith(`heat-${k}-`)), mode, { timeout: 15000 });
         await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 15000 }).catch(() => {});
         await page.waitForTimeout(400);
-        const px = await sampleHeat(page, REAL_BETWEEN);
+        // Season length covers the states with season data; Kansas, Texas and Georgia have none and stay clear.
+        const covered = mode === 'season' ? [REAL_BETWEEN[0], REAL_BETWEEN[4], REAL_BETWEEN[5]] : REAL_BETWEEN;
+        const px = await sampleHeat(page, covered);
         check(px.every((c) => c[3] >= 0.33 * 255), `real data: ${mode} heat covers the map between distant resorts, Alaska included (alpha ${px.map((c) => c[3]).join(', ')})`);
+        if (mode === 'season') {
+          const clear = await sampleHeat(page, [REAL_BETWEEN[1], REAL_BETWEEN[2], REAL_BETWEEN[3]]);
+          check(clear.every((c) => c[3] === 0), `real data: season stays clear in Kansas, Texas and Georgia (alpha ${clear.map((c) => c[3]).join(', ')})`);
+        }
         const layers = await page.evaluate(() => window.__careerMap.mapCtl.map.getStyle().layers.filter((l) => l.id.startsWith('heat-')).map((l) => l.id));
         check(layers.some((id) => id.endsWith('-inset')), `real data: ${mode} heat also draws in the Alaska inset`);
+        if (mode === 'season' && fs.existsSync(path.join(REPO, 'data', 'build', 'heat', 'season.json'))) {
+          const urls = await page.evaluate(() => {
+            const m = window.__careerMap.mapCtl.map;
+            return m.getStyle().layers.filter((l) => l.type === 'raster' && /^heat-season-\d+$/.test(l.id)).map((l) => m.getSource(l.id).url);
+          });
+          check(urls.length === 2 && urls.some((u) => u.endsWith('/data/build/heat/season-lower48.png')) && urls.some((u) => u.endsWith('/data/build/heat/season-alaska.png')),
+            `real data: season draws the precomputed rasters (${urls.map((u) => u.split('/').pop()).join(', ')})`);
+        }
         if (mode === 'snowfall' && fs.existsSync(path.join(REPO, 'data', 'build', 'heat', 'snowfall.json'))) {
           const urls = await page.evaluate(() => {
             const m = window.__careerMap.mapCtl.map;
@@ -1264,6 +1331,10 @@ async function liveLinksChecks(browser, stubBase) {
   check(await cams.locator('.badge-estimated').count() === 5, 'every cam link shows its confidence badge');
   check(await panel.locator('iframe, video, embed, object, img').count() === 0, 'cams are linked, never embedded');
   const jobs = panel.locator('section.jobs');
+  const win = jobs.locator('.jobs-window');
+  check(await win.count() === 1 && (await win.innerText()).startsWith('Hiring window: Applications open August 15; staff training starts in mid November.')
+    && await win.locator('.badge-estimated').count() === 1 && (await win.innerText()).includes('Last verified Oct 1, 2026'),
+  'hiring window line tops the Jobs section in the source\'s words, with its badge and date');
   check(JSON.stringify(await jobs.locator('.job-group h4').allInnerTexts())
     === JSON.stringify(['Ski school', 'Coaching and clubs', 'Management', 'Parent company', 'Job boards']), 'job groups in order');
   check(JSON.stringify(await jobs.locator('.job-group[data-group="coaching"] .tag').allInnerTexts()) === JSON.stringify(['Race', 'Freeride']),
@@ -1322,9 +1393,12 @@ async function liveLinksChecks(browser, stubBase) {
   await p2.goto(`${stubBase}/map/vt/fixture-green-ridge/kilo-notch/`);
   await ready(p2, { start: false });
   await p2.waitForSelector('#panel-content section.jobs', { timeout: 15000 });
+  check((await p2.locator('#panel-content section.jobs .jobs-window').innerText()).startsWith('Hiring window: Applications open September 1'),
+    'a hiring window shows even before any jobs links');
   check((await p2.locator('#panel-content section.jobs').innerText()).includes('Jobs links are being collected.')
     && await p2.locator('#panel-content .live-cams').count() === 0, 'Tier A without links: Jobs says links are being collected; no Live cams row');
   check(!w2.requests.some((u) => u.includes('/jobs/postings.json')), 'no postings fetch for a resort without a feed');
+  await p2.waitForLoadState('networkidle');   // the web font loads after `load`; let it finish first
   await p2.goto(`${stubBase}/map/co/fixture-front-range/charlie-hill/`);
   await ready(p2, { start: false });
   await p2.waitForFunction(() => document.querySelectorAll('#panel-content .facts').length >= 3, null, { timeout: 15000 });
@@ -1332,6 +1406,7 @@ async function liveLinksChecks(browser, stubBase) {
   // An empty feed: the panel shows the links only.
   await ctx2.route(/\/data\/build\/jobs\/postings\.json$/, (route) => route.fulfill({ status: 200, contentType: 'application/json',
     body: JSON.stringify({ version: 1, generated_at: '2026-10-13T00:00:00Z', fetched_at: null, keywords: [], boards: [], sources: [], postings: [] }) }));
+  await p2.waitForLoadState('networkidle');   // the web font loads after `load`; let it finish first
   await p2.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
   await ready(p2, { start: false });
   await p2.waitForSelector('#panel-content section.jobs .job-link', { timeout: 15000 });

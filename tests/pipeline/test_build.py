@@ -7,6 +7,7 @@ import pytest
 import yaml
 
 from pipeline.build import build
+from pipeline.config import load_config
 from pipeline.schemas import Cluster, Resort
 from pipeline.tier_a import BuildError
 
@@ -304,9 +305,14 @@ def test_definitions_json(repo_root, tmp_path, out):
     d = _load(out, "definitions.json")
     assert d["version"] == 1 and "generated_at" in d
     heat = d.pop("heat")
-    assert set(heat) == {"ramp", "regions", "field", "modes"}
+    # The pipeline only snowfall block stays out; the season fade reaches the browser fallback.
+    assert set(heat) == {"ramp", "neutral", "regions", "field", "modes", "season"}
     assert heat["ramp"]["colors"][0] == "#414487" and set(heat["modes"]) == {"lucrativeness", "season", "snowfall"}
-    assert heat["field"]["floor_alpha"] == 0.35 and heat["field"]["full_opacity_km"] == 200
+    cfg_heat = load_config(repo_root / "config").definitions.heat
+    assert heat["field"] == cfg_heat.field.model_dump(mode="json")
+    assert heat["season"] == cfg_heat.season.model_dump(mode="json") and heat["neutral"] == cfg_heat.neutral
+    snow = heat["modes"]["snowfall"]
+    assert snow["scale"] == "classed" and len(snow["colors"]) == len(snow["breaks"]) + 1 and snow["breaks"][0] == 24
     assert {k: v for k, v in d.items() if k not in ("version", "generated_at")} == {
         "snow": {"powder_day_in": 6, "banner_day_in": 12},
         "density": {"dry_max_pct": 7, "moist_min_pct": 12},

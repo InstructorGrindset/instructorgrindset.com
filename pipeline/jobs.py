@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Optional
 
 from .links import domain_of, load_batches
-from .schemas.jobs import ROLE_GROUPS, Employer, EmployerOut, JobLink, JobsBatch
+from .schemas.jobs import ROLE_GROUPS, Employer, EmployerOut, HiringWindowRecord, JobLink, JobsBatch
 from .sources import SourceRegistry
 
 RAW_SUBDIR = "jobs"
@@ -41,6 +41,7 @@ def board_url(employer: Employer) -> Optional[str]:
 class JobsData:
     employers: dict[str, Employer] = field(default_factory=dict)
     links: dict[str, list[JobLink]] = field(default_factory=dict)   # resort_id -> links, file order
+    hiring_windows: dict[str, HiringWindowRecord] = field(default_factory=dict)   # resort_id -> window
 
     def allowed_domains(self, employer_id: str, ats_domains: dict[str, set[str]]) -> set[str]:
         e = self.employers[employer_id]
@@ -56,13 +57,15 @@ def load_jobs(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], ats_
               rel=str, blocked_domains: frozenset[str] | set[str] = frozenset()) -> tuple[JobsData, list[str]]:
     """Validate data/raw/jobs/*.yaml. No folder gives empty data and no errors.
 
-    Fails (returns errors) on an unknown resort, employer or source id, a link off its employer's careers domain and
-    ATS domains and its own source's domain (or on a blocked aggregator domain), an employer declared twice with different details, and a url listed twice in one role group of a resort. An
-    ats.board on a vendor without a public postings API (Workday, iCIMS and the rest) is kept as a note; the feed
-    never reads it.
+    Fails (returns errors) on an unknown resort, employer or source id; a link whose domain is none of its employer's
+    careers domain, ATS domains and its own source's domain, or is a blocked aggregator; an employer declared twice
+    with different details; a url listed twice in one role group of a resort; and two hiring windows for one resort.
+    An ats.board on a vendor without a public postings API (Workday, iCIMS and the rest) is kept; the feed never
+    reads it.
     """
     batches, errors = load_batches(raw_dir, RAW_SUBDIR, JobsBatch, registry, rel,
-                                   record_lists=(("records", "resort_id"), ("employers", "id")))
+                                   record_lists=(("records", "resort_id"), ("employers", "id"),
+                                                 ("hiring_windows", "resort_id")))
     data = JobsData()
     where: dict[str, str] = {}
     for path, batch in batches:
@@ -99,19 +102,32 @@ def load_jobs(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], ats_
                     errors.append(f"{label}: link '{link.label}' url domain {dom} is neither the careers domain, an ATS "
                                   f"domain of '{link.employer_id}' nor its source's domain ({', '.join(sorted(allowed))})")
                 data.links.setdefault(r.resort_id, []).append(link)
+    window_from: dict[str, str] = {}
+    for path, batch in batches:
+        for hw in batch.hiring_windows:
+            label = f"{path} hiring window '{hw.resort_id}'"
+            if hw.resort_id not in known_ids:
+                errors.append(f"{label}: no such resort in this build")
+            if hw.resort_id in data.hiring_windows:
+                errors.append(f"{label}: also has a hiring window in {window_from[hw.resort_id]}")
+                continue
+            data.hiring_windows[hw.resort_id] = hw
+            window_from[hw.resort_id] = path
     return data, errors
 
 
 def resort_jobs(data: JobsData, resort_id: str) -> Optional[dict]:
     """Resort.jobs in resorts.json: links ordered by role group (ski school, coaching, management, corporate, all),
-    file order within a group, and whether a linked employer has a live postings feed."""
-    links = data.links.get(resort_id)
-    if not links:
+    file order within a group, whether a linked employer has a live postings feed, and the hiring window."""
+    links = data.links.get(resort_id) or []
+    window = data.hiring_windows.get(resort_id)
+    if not links and window is None:
         return None
     order = {g: i for i, g in enumerate(ROLE_GROUPS)}
     ordered = sorted(enumerate(links), key=lambda x: (order[x[1].role_group], x[0]))
     feed = any(data.employers[x.employer_id].ats.feed for x in links if x.employer_id in data.employers)
-    return {"links": [x.model_dump(mode="json") for _, x in ordered], "feed": feed}
+    return {"links": [x.model_dump(mode="json") for _, x in ordered], "feed": feed,
+            "hiring_window": window.model_dump(mode="json", exclude={"resort_id"}) if window else None}
 
 
 def employers_output(data: JobsData, header: dict) -> dict:

@@ -1,31 +1,77 @@
 {
-  "version": 1,
+  "version": 2,
   "generated_at": "2026-10-11T12:00:00Z",
   "mode": "snowfall",
   "units": "in",
-  "scale": "sqrt",
+  "scale": "classed",
   "domain": {
     "min": 0.0,
-    "max": 500
+    "max": 900.0
   },
   "ticks": [
     0.0,
-    25.0,
-    100.0,
+    180.0,
+    300.0,
+    400.0,
+    500.0,
+    600.0,
+    700.0,
+    800.0
+  ],
+  "breaks": [
+    24.0,
+    60.0,
+    120.0,
+    180.0,
     200.0,
-    500
+    250.0,
+    300.0,
+    350.0,
+    400.0,
+    450.0,
+    500.0,
+    550.0,
+    600.0,
+    650.0,
+    700.0,
+    750.0,
+    800.0,
+    850.0
   ],
-  "ramp": [
-    "#414487",
-    "#355f8d",
-    "#2a788e",
-    "#21918c",
-    "#22a884",
-    "#44bf70",
-    "#7ad151",
-    "#bddf26",
-    "#fde725"
+  "colors": [
+    "#666a70",
+    "#384e6e",
+    "#41628d",
+    "#4677ad",
+    "#20c2ec",
+    "#159ca4",
+    "#1dcfb9",
+    "#0ca871",
+    "#79d26a",
+    "#86a005",
+    "#d6be07",
+    "#c28c17",
+    "#fead68",
+    "#ee7145",
+    "#fdaeae",
+    "#ee6e9d",
+    "#ffabe6",
+    "#ce7fe6",
+    "#d5c5fe"
   ],
+  "legend": {
+    "ticks": [
+      0.0,
+      180.0,
+      300.0,
+      400.0,
+      500.0,
+      600.0,
+      700.0,
+      800.0
+    ],
+    "compress_below": 180.0
+  },
   "background": {
     "source_id": "fixture-noaa-normals",
     "as_of": "2026-10-01",
@@ -44,12 +90,41 @@
     "min_distance_km": 12.0,
     "grid_step_px": 4,
     "px_per_degree": 10,
-    "full_opacity_km": 200.0,
-    "fade_end_km": 600.0,
-    "floor_alpha": 0.35
+    "full_opacity_km": 300.0,
+    "fade_end_km": 800.0,
+    "floor_alpha": 0.35,
+    "fade_to": "alpha"
   },
   "attribution": "Snowfall normals: NOAA NCEI 1991 to 2020",
-  "inputs_sha256": "aeef6634b229675648850cb8d2ba95fce0e18383d641c01dd789c21d71511388",
+  "isolines": {
+    "levels": [
+      200.0,
+      250.0,
+      300.0,
+      350.0,
+      400.0,
+      450.0,
+      500.0,
+      550.0,
+      600.0,
+      650.0,
+      700.0,
+      750.0,
+      800.0,
+      850.0,
+      900.0
+    ],
+    "major_step": 100.0,
+    "files": [
+      {
+        "region": "lower48",
+        "file": "snowfall-isolines-lower48.geojson",
+        "bytes": 6256,
+        "features": 15
+      }
+    ]
+  },
+  "inputs_sha256": "25dd62ddc92127e894e072e61e7ce9e822c7e2160489df9e75a3519af939f640",
   "rasters": [
     {
       "region": "lower48",
@@ -74,7 +149,7 @@
           24.4
         ]
       ],
-      "bytes": 17000,
+      "bytes": 8552,
       "stations": 1318,
       "pockets": 9
     }

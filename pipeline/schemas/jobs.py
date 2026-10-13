@@ -112,17 +112,40 @@ class JobsRecord(StrictModel):
         return self
 
 
+class HiringWindow(_Cited):
+    """When applications open, job fairs or when clinics start, in the source's own words (ROADMAP item 6)."""
+
+    text: str = Field(min_length=1, max_length=400)
+    source_id: Slug
+    as_of: dt.date
+    confidence: Confidence
+    note: Optional[str] = None
+
+    @field_validator("text")
+    @classmethod
+    def _text(cls, v: str) -> str:
+        if "\u2014" in v or "\u2013" in v:
+            raise ValueError("text: no em or en dashes (Alexandre's style)")
+        return " ".join(v.split())
+
+
+class HiringWindowRecord(HiringWindow):
+    resort_id: Slug
+
+
 class JobsBatch(StrictModel):
     batch: Slug
     researched_date: dt.date
     sources: list[Source] = Field(default_factory=list)
     employers: list[Employer] = Field(default_factory=list)
     records: list[JobsRecord] = Field(default_factory=list)
+    hiring_windows: list[HiringWindowRecord] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def _unique(self) -> "JobsBatch":
         for what, ids in (("employer ids", [e.id for e in self.employers]),
-                          ("resort ids", [r.resort_id for r in self.records])):
+                          ("resort ids", [r.resort_id for r in self.records]),
+                          ("hiring window resort ids", [h.resort_id for h in self.hiring_windows])):
             dup = sorted({i for i in ids if ids.count(i) > 1})
             if dup:
                 raise ValueError(f"{what} listed twice: {', '.join(dup)}")
@@ -131,10 +154,18 @@ class JobsBatch(StrictModel):
 
 class Jobs(StrictModel):
     """Resort.jobs in resorts.json. ``feed`` is true when one of the linked employers has a public board that
-    pipeline/jobs_feed.py reads, so the panel loads jobs/postings.json only then."""
+    pipeline/jobs_feed.py reads, so the panel loads jobs/postings.json only then. ``hiring_window`` is the source's
+    own sentence on when hiring or training happens."""
 
-    links: list[JobLink] = Field(min_length=1)
+    links: list[JobLink] = Field(default_factory=list)
     feed: bool = False
+    hiring_window: Optional[HiringWindow] = None
+
+    @model_validator(mode="after")
+    def _something(self) -> "Jobs":
+        if not self.links and self.hiring_window is None:
+            raise ValueError("jobs needs at least one link or a hiring window")
+        return self
 
 
 # ---------------------------------------------------------------- build output: jobs/employers.json

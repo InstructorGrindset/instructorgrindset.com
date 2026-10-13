@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T15:28:30Z",
+  "generated_at": "2026-10-13T15:52:10Z",
   "mode": "season",
   "units": "days",
   "scale": "classed",
@@ -46,8 +46,8 @@
   },
   "values": {
     "field": "season.length_days",
-    "resorts": 330,
-    "points": 252
+    "resorts": 409,
+    "points": 312
   },
   "method": {
     "interpolation": "adaptive modified Shepard",
@@ -56,14 +56,14 @@
     "decluster_km": 20.0,
     "grid_step_px": 4,
     "px_per_degree": 16.0,
-    "full_opacity_km": 200.0,
+    "full_opacity_km": 250.0,
     "fade_end_km": 450.0,
-    "floor_alpha": 0.0,
+    "floor_alpha": 0.6,
     "fade_to": "neutral",
     "no_data_reach_km": 120.0
   },
   "attribution": null,
-  "inputs_sha256": "918a92417100ccbbd5cd75ad955b07e4ece5341a41f8f39f83c024531750a493",
+  "inputs_sha256": "9dddd1caea68dc0eb6fa2c167554535fcf28191871d4cafa7d73216ba25ff7dc",
   "rasters": [
     {
       "region": "lower48",
@@ -88,10 +88,9 @@
           24.4
         ]
       ],
-      "bytes": 109056,
-      "resorts": 326,
+      "bytes": 94482,
+      "resorts": 401,
       "no_data_states": [
-        "AL",
         "AR",
         "DE",
         "FL",
@@ -101,7 +100,6 @@
         "LA",
         "MS",
         "NE",
-        "NJ",
         "OK",
         "SC",
         "TX"
@@ -130,8 +128,8 @@
           51.2
         ]
       ],
-      "bytes": 63383,
-      "resorts": 4,
+      "bytes": 71480,
+      "resorts": 8,
       "no_data_states": []
     }
   ]

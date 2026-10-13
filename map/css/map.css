@@ -600,3 +600,5 @@ body.map-page { background: var(--bg); }
 .jobs-open { margin: 0 0 .2rem; gap: .4rem; }
 .posting-list li { line-height: 1.35; }
 .jobs-live .fact-meta { margin: .35rem 0 0; }
+.jobs-window { margin: .2rem 0 .5rem; line-height: 1.45; }
+.jobs-window .fact-meta { display: block; }

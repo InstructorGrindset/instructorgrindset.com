@@ -273,21 +273,22 @@ heat:
       step: 50
       major_step: 100
       supersample: 4
-      simplify_px: 0.25
+      simplify_px: 0.1
       min_length_px: 4
-      label_min_px: 30
+      label_min_px: 12
   season:
     # Precomputed season length rasters (pipeline/heat.py -> data/build/heat/season*) from the resorts'
     # sourced season lengths (season.length_days, else a sourced open and close pair), interpolated with the
     # `field` method. Same regions and Web Mercator rows as snowfall. Also the browser fallback's fade.
     px_per_degree: 16
     grid_step_px: 4
-    # Full color within full_opacity_km of a resort with data, then the color blends into `neutral` while
-    # it fades out, gone at fade_end_km: far from any resort (the Plains) the map shows the base, not a
-    # dark smudge. In states with no resort data the colors end within no_data_reach_km of a resort.
-    full_opacity_km: 200
+    # Full color within full_opacity_km of a resort with data, then the color blends into the light
+    # `neutral` grey (at floor_alpha) by fade_end_km, so far from resorts the map turns flat grey instead of
+    # a dark smudge. States with no resort data (the southern Plains, the Deep South) stay clear: the colors
+    # of their neighbours fade out within no_data_reach_km past the border.
+    full_opacity_km: 250
     fade_end_km: 450
-    floor_alpha: 0
+    floor_alpha: 0.6
     fade_to: neutral
     no_data_reach_km: 120
 

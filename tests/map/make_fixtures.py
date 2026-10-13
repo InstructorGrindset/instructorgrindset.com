@@ -128,7 +128,10 @@ JOBS = {
         job_link("fixture-parent", "management", "Ski school leadership", "https://example.com/fixture/careers/leadership"),
         job_link("fixture-parent", "corporate", "Fixture Parent corporate jobs", "https://example.com/fixture/parent/corporate"),
         job_link("fixture-parent", "all", "All Fixture Parent jobs", "https://example.com/fixture/parent/jobs"),
-    ]},
+    ], "hiring_window": {"text": "Applications open August 15; staff training starts in mid November.",
+                         "source_id": "fixture-resort-site", **CITE}},
+    "kilo-notch": {"feed": False, "links": [], "hiring_window": {
+        "text": "Applications open September 1; staff clinics start in late November.", "source_id": "fixture-careers", **CITE}},
     "bravo-bowl": {"feed": True, "links": [
         job_link("fixture-parent", "all", "All Fixture Parent jobs", "https://example.com/fixture/parent/jobs")]},
 }
@@ -316,6 +319,8 @@ def resort_record(row):
     w = record["webcams"] or {}
     ids.update(x["source_id"] for x in ([w["cams_page"]] if w.get("cams_page") else []) + w.get("cams", []))
     ids.update(x["source_id"] for x in (record["jobs"] or {}).get("links", []))
+    if (record["jobs"] or {}).get("hiring_window"):
+        ids.add(record["jobs"]["hiring_window"]["source_id"])
     record["sources"] = sorted(ids)
     return record
 
@@ -539,6 +544,9 @@ def write_heat_fixture(cfg, resorts, outlines):
         old.unlink()
     heat.write_snowfall(out_dir, stations=stations, pockets=pockets, outlines=outlines, heat=h,
                         source={"id": "fixture-noaa-normals"}, generated_at=GENERATED_AT, as_of=AS_OF)
+    # heat/season.json and its PNG from the fixture resorts' synthetic season lengths (the real transform).
+    h = h.model_copy(update={"season": h.season.model_copy(update={"px_per_degree": 8})})
+    heat.write_season(out_dir, resorts=resorts, outlines=outlines, heat=h, generated_at=GENERATED_AT)
 
 
 def write(name, data):

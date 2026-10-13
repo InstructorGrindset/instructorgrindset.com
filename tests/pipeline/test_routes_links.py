@@ -78,3 +78,18 @@ def test_render_helpers_skip_unsafe_links():
     ctx = Ctx({}, {}, {}, {})
     assert render_webcams(ctx, {"webcams": {"cams_page": {"url": "http://x.example.com"}, "cams": []}}) == ""
     assert render_jobs(ctx, {"tier": "B", "jobs": {"links": [link("all", "x", "javascript:alert(1)")]}}) == ""
+
+
+def test_hiring_window_line_tops_the_jobs_section(site: Path):
+    resorts, clusters, states = default_data()
+    window = {"text": "Applications open August 15 <online>.", **CITE, "note": None}
+    resorts[0]["jobs"] = {**JOBS, "hiring_window": window}
+    resorts[1]["jobs"] = {"links": [], "feed": False, "hiring_window": window}
+    write_build(site, resorts, clusters, states)
+    generate_routes(site)
+    a = _prerender(read(site, "co/front/alpha-peak"))
+    assert ('<h3>Jobs</h3><p class="jobs-window"><strong>Hiring window:</strong> Applications open August 15 &lt;online&gt;. '
+            '<span class="badge badge-estimated">Estimated</span>') in a
+    assert a.index("jobs-window") < a.index("job-group")
+    b = _prerender(read(site, "co/front/bravo-bowl"))
+    assert "Hiring window:" in b and "Jobs links are being collected." in b   # Tier B with a window only

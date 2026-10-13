@@ -200,7 +200,46 @@ def test_committed_files_validate():
     known = {r["id"] for r in json.loads(build.read_text())["resorts"]}
     registry = SourceRegistry()
     from pipeline.tier_a import _register_sources, _yaml_files
-    for p in _yaml_files(REPO / "data" / "raw" / "sources"):
-        _register_sources(yaml.safe_load(p.read_text()), p.name, registry, [])
+    for sub in ("sources", "facts", "pay", "career", "tier_a"):   # hiring windows cite facts and pay sources
+        for p in _yaml_files(REPO / "data" / "raw" / sub):
+            _register_sources(yaml.safe_load(p.read_text()), p.name, registry, [])
     _, errors = load_jobs(REPO / "data" / "raw", registry, known, ATS, rel=lambda p: p.name, blocked_domains=BLOCKED)
     assert errors == []
+
+
+def test_hiring_windows_load_once_per_resort_and_reach_resort_jobs(tmp_path):
+    hw = {"resort_id": "alpha-peak", "text": "Applications open August 15;  clinics start in November.",
+          "source_id": "jobs-alpha", "as_of": "2026-10-13", "confidence": "estimated"}
+    d = tmp_path / "jobs"
+    d.mkdir()
+    (d / "windows.yaml").write_text(yaml.safe_dump({"batch": "jobs-windows", "researched_date": "2026-10-13",
+                                                    "hiring_windows": [hw]}))
+    data, errors = run(tmp_path, [{"resort_id": "alpha-peak", "links": [link()]}])
+    assert errors == []
+    out = resort_jobs(data, "alpha-peak")
+    assert out["hiring_window"] == {"text": "Applications open August 15; clinics start in November.",
+                                    "source_id": "jobs-alpha", "as_of": "2026-10-13", "confidence": "estimated", "note": None}
+    # a window alone still gives Resort.jobs (no links yet)
+    (d / "windows.yaml").write_text(yaml.safe_dump({"batch": "jobs-windows", "researched_date": "2026-10-13",
+                                                    "hiring_windows": [{**hw, "resort_id": "bravo-bowl"}]}))
+    data, errors = run(tmp_path, [{"resort_id": "alpha-peak", "links": [link()]}])
+    assert errors == [] and resort_jobs(data, "bravo-bowl") == {"links": [], "feed": False, "hiring_window": {
+        **{k: v for k, v in hw.items() if k != "resort_id"}, "text": "Applications open August 15; clinics start in November.",
+        "note": None}}
+    assert resort_jobs(data, "alpha-peak")["hiring_window"] is None
+    for bad, needle in (({**hw, "resort_id": "nope"}, "no such resort"), ({**hw, "text": "Open now \u2014 apply"}, "em or en dashes"),
+                        ({**hw, "source_id": "missing"}, "not defined"), ({**hw, "confidence": "sure"}, "confidence")):
+        (d / "windows.yaml").write_text(yaml.safe_dump({"batch": "jobs-windows", "researched_date": "2026-10-13",
+                                                        "hiring_windows": [bad]}))
+        _, errors = run(tmp_path, [])
+        assert any(needle in e for e in errors), (needle, errors)
+    (d / "windows.yaml").write_text(yaml.safe_dump({"batch": "jobs-windows", "researched_date": "2026-10-13",
+                                                    "hiring_windows": [hw, hw]}))
+    _, errors = run(tmp_path, [])
+    assert any("hiring window resort ids listed twice" in e for e in errors)
+    (d / "windows.yaml").write_text(yaml.safe_dump({"batch": "jobs-windows", "researched_date": "2026-10-13",
+                                                    "hiring_windows": [hw]}))
+    (d / "more.yaml").write_text(yaml.safe_dump({"batch": "jobs-more", "researched_date": "2026-10-13",
+                                                 "hiring_windows": [hw]}))
+    _, errors = run(tmp_path, [])
+    assert any("also has a hiring window in" in e for e in errors)

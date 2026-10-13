@@ -175,7 +175,9 @@ export async function createRecolor(root, index, { onChange, announce }) {
       ? [`Background: NOAA station normals, 1991 to 2020, with a ${fmtInt(surface.raster.pockets.radius_km)} km pocket of each resort's published snowfall.`,
         'Colors between stations and resorts are smoothed estimates. Tooltips and resort pages show only sourced values.']
       : ['Colors between resorts are smoothed estimates. Tooltips and resort pages show only sourced values.',
-        `Colors fade where the nearest resort with data is more than ${km} km away.`];
+        field.fade_to === 'neutral'
+          ? `Colors turn grey where the nearest resort with data is more than ${km} km away.`
+          : `Colors fade where the nearest resort with data is more than ${km} km away.`];
     if (m.key === 'season' && field.no_data_reach_km != null) notes.push('States with no resort data stay clear.');
     // Classed snowfall: the grey class and the isolines get a line of their own.
     const lowest = lg.scale === 'classed' && m.key === 'snowfall' ? lg.colors[0] : null;

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T15:28:30Z",
+  "generated_at": "2026-10-13T15:33:13Z",
   "heat": {
     "ramp": {
       "name": "viridis",
@@ -153,9 +153,9 @@
     "season": {
       "px_per_degree": 16.0,
       "grid_step_px": 4,
-      "full_opacity_km": 200.0,
+      "full_opacity_km": 250.0,
       "fade_end_km": 450.0,
-      "floor_alpha": 0.0,
+      "floor_alpha": 0.6,
       "fade_to": "neutral",
       "no_data_reach_km": 120.0
     }

@@ -111,7 +111,9 @@ export const JobLink = z.object({
 export const Jobs = z.object({
   links: keepValid(JobLink),
   feed: z.boolean().nullish().transform((v) => Boolean(v)),
-}).nullish().catch(null).transform((v) => (v && v.links.length ? v : null));
+  // The source's own words on when hiring or training happens; a bad value drops only the window.
+  hiring_window: z.object({ text: z.string().min(1), ...Cited }).nullish().catch(null).transform((v) => v ?? null),
+}).nullish().catch(null).transform((v) => (v && (v.links.length || v.hiring_window) ? v : null));
 
 /** data/build/jobs/postings.json (pipeline/jobs_feed.py, daily). */
 export const PostingsFile = z.object({

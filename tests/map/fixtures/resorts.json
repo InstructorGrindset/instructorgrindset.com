@@ -432,7 +432,14 @@
       "confidence": "estimated",
       "note": null
      }
-    ]
+    ],
+    "hiring_window": {
+     "text": "Applications open August 15; staff training starts in mid November.",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    }
    },
    "access": {
     "rating": "transit_friendly",
@@ -2135,7 +2142,17 @@
    "detail_available": false,
    "trailmap_available": false,
    "webcams": null,
-   "jobs": null,
+   "jobs": {
+    "feed": false,
+    "links": [],
+    "hiring_window": {
+     "text": "Applications open September 1; staff clinics start in late November.",
+     "source_id": "fixture-careers",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    }
+   },
    "access": {
     "rating": "car_centric",
     "summary_md": "Most staff drive about 20 minutes from the valley towns.",
@@ -2145,6 +2162,7 @@
    },
    "housing_summary": null,
    "sources": [
+    "fixture-careers",
     "fixture-location",
     "fixture-model",
     "fixture-ownership",

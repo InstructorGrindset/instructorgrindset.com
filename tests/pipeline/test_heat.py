@@ -286,7 +286,11 @@ def test_write_snowfall_rasters_and_sidecar(tmp_path, heat_cfg):
     pockets = [heat.Point(-111.64, 40.59, 545)]
     m = heat.write_snowfall(tmp_path, stations=stations, pockets=pockets, outlines=SQUARE_STATES, heat=h,
                             source={"id": "fixture-noaa"}, generated_at="2026-10-13T00:00:00Z", as_of="2026-10-13")
-    assert m["domain"] == {"min": 0, "max": 600} and m["ticks"][-1] == 600 and m["scale"] == "sqrt"
+    mode = h.modes.snowfall
+    assert m["scale"] == "classed" and m["domain"] == {"min": mode.domain[0], "max": mode.domain[1]}
+    assert m["breaks"] == mode.breaks and m["colors"] == mode.colors and "ramp" not in m
+    assert m["ticks"] == mode.legend_ticks == m["legend"]["ticks"] and m["legend"]["compress_below"] == 180
+    assert m["isolines"]["levels"] == h.snowfall.isolines.levels() and m["isolines"]["major_step"] == 100
     assert m["background"] == {"source_id": "fixture-noaa", "as_of": "2026-10-13", "confidence": "published",
                                "field": "ANN-SNOW-NORMAL", "stations": len(stations)}
     assert m["attribution"] == "Snowfall normals: NOAA NCEI 1991 to 2020"
@@ -306,6 +310,19 @@ def test_write_snowfall_rasters_and_sidecar(tmp_path, heat_cfg):
     _, _, px = decode_png((tmp_path / "heat" / r["image"]).read_bytes())
     alpha = lambda lon, lat: px[(int(g.y_of(lat)) * g.width + int(g.x_of(lon))) * 4 + 3]  # noqa: E731
     assert alpha(-111.5, 39.5) == 255 and alpha(-100, 39.5) == 0 and alpha(-120, 45) == 0
+    # Every opaque pixel holds a class color, or a blend of two neighbouring classes on a class edge.
+    palette = {heat.hex_rgb(c) for c in mode.colors}
+    opaque = [tuple(px[k:k + 3]) for k in range(0, len(px), 4) if px[k + 3] == 255]
+    assert sum(c in palette for c in opaque) / len(opaque) > 0.8
+    # Isolines: small GeoJSON with one feature per line, rings around the pocket from 200 to 500 in.
+    files = {f["region"]: f for f in m["isolines"]["files"]}
+    fc = json.loads((tmp_path / "heat" / files["lower48"]["file"]).read_text())
+    assert files["lower48"]["features"] == len(fc["features"]) and files["lower48"]["bytes"] < 300_000
+    values = {f["properties"]["value"] for f in fc["features"]}
+    # At this coarse test resolution (4 px per degree) rings under 4 px long are dropped (min_length_px).
+    assert {200, 250} <= values <= set(h.snowfall.isolines.levels()) and 550 not in values
+    assert all(f["properties"]["major"] == (f["properties"]["value"] % 100 == 0) for f in fc["features"])
+    assert all(f["properties"]["region"] == "lower48" and f["geometry"]["type"] == "LineString" for f in fc["features"])
 
 
 def test_write_snowfall_skips_unchanged_inputs(tmp_path, heat_cfg):
@@ -340,3 +357,286 @@ def test_build_writes_the_committed_rasters_within_budget():
     assert m["background"]["source_id"] == "noaa-ncei-normals-1991-2020" and m["background"]["stations"] > 5000
     sources = {s["id"] for s in json.loads((REPO / "data" / "build" / "sources.json").read_text())["sources"]}
     assert "noaa-ncei-normals-1991-2020" in sources
+
+
+# ------------------------------------------------------------------ classes
+def test_class_index_puts_each_break_in_the_class_above():
+    breaks = [24, 60, 120, 180, 200]
+    assert [heat.class_index(v, breaks) for v in (0, 23.9, 24, 59.99, 60, 180, 199, 200, 900)] == [0, 0, 1, 1, 2, 4, 4, 5, 5]
+
+
+def test_classed_colorizer_uses_the_class_colors(heat_cfg):
+    mode = heat_cfg.modes.snowfall
+    color = heat.colorizer(mode, heat_cfg.ramp.colors, (0, 900))
+    for v, i in ((0, 0), (23, 0), (24, 1), (180, 4), (249, 5), (250, 6), (899, 18), (2000, 18)):
+        assert color(v) == heat.hex_rgb(mode.colors[i]), v
+    linear = heat.colorizer(heat_cfg.modes.lucrativeness, heat_cfg.ramp.colors, (0, 10))
+    assert linear(0) == heat.hex_rgb(heat_cfg.ramp.colors[0]) and linear(10) == heat.hex_rgb(heat_cfg.ramp.colors[-1])
+
+
+def test_class_edges_are_antialiased_and_interiors_keep_the_plain_color():
+    breaks, colors = [90], [(0, 0, 0), (200, 100, 40)]
+    w, h = 6, 3
+    values = [40.0 * i for j in range(h) for i in range(w)]  # 90 falls a quarter pixel right of pixel 2's center
+    assert heat.class_color_aa(values, w + 0, w, h, breaks, colors) == (0, 0, 0)        # far from the edge
+    assert heat.class_color_aa(values, w + 5, w, h, breaks, colors) == (200, 100, 40)
+    assert heat.class_color_aa(values, w + 2, w, h, breaks, colors) == (100, 50, 20)    # half of its area above
+    assert heat.class_color_aa(values, w + 3, w, h, breaks, colors) == (200, 100, 40)   # wholly above
+
+
+def test_classed_palettes_separate_neighbours_on_both_bases(heat_cfg):
+    from pipeline.color import contrast, delta_e
+    bg = re.search(r"background: '(#[0-9a-f]{6})'", (REPO / "map" / "js" / "config.js").read_text()).group(1)
+    snow = heat_cfg.modes.snowfall
+    # The grey class (little or no snow) stays visible on the dark base and is the configured neutral grey.
+    assert snow.colors[0] == heat_cfg.neutral and contrast(snow.colors[0], bg) >= 3.0
+    # 180 in and up: every 50 in step differs by 11 or more in OKLab, also under simulated color blindness.
+    top = snow.colors[snow.breaks.index(180) + 1:]
+    for a, b in zip(top, top[1:]):
+        for kind in (None, "protan", "deutan"):
+            assert delta_e(a, b, kind) >= 11, (a, b, kind)
+    # Every class at 180 in and up stands out from the dark base (and so from the muted imagery it covers).
+    assert all(contrast(c, bg) >= 5 for c in top)
+    season = heat_cfg.modes.season
+    for a, b in zip(season.colors, season.colors[1:]):
+        assert delta_e(a, b) >= 10 and min(delta_e(a, b, k) for k in ("protan", "deutan")) >= 8, (a, b)
+
+
+def test_classed_mode_validation_rejects_bad_palettes(heat_cfg):
+    Mode = type(heat_cfg.modes.snowfall)
+    with pytest.raises(ValueError):
+        Mode.model_validate({"scale": "classed", "breaks": [10, 20], "colors": ["#000000", "#ffffff"]})
+    with pytest.raises(ValueError):
+        Mode.model_validate({"scale": "classed", "breaks": [10], "colors": ["#666a70", "#676b71"]})
+    with pytest.raises(ValueError):
+        Mode.model_validate({"scale": "classed", "breaks": [20, 10], "colors": ["#000000", "#808080", "#ffffff"]})
+
+
+# ------------------------------------------------------------------ fade
+def test_paint_fades_to_neutral_and_clears_states_without_data():
+    neutral = (102, 106, 112)
+    fade = heat.Fade(100, 300, 1.0, 0.6, "neutral", neutral, no_data_reach_km=120)
+    color = lambda v: (250, 20, 20)  # noqa: E731
+    values = [1.0] * 6
+    dist = [50, 200, 1000, 50, 50, 50]
+    cov = [1, 1, 1, 1, 1, 0.5]
+    no_data = [0, 0, 0, 1, 1, 0]
+    border = [0, 0, 0, 30, 500, 0]
+    buf, n = heat.paint(values, dist, cov, color, fade, no_data, border)
+    px = [tuple(buf[k:k + 4]) for k in range(0, len(buf), 4)]
+    assert px[0] == (250, 20, 20, 255)                         # near data: full color
+    assert px[1][3] == round(0.8 * 255) and px[1][0] < 250     # mid fade: half way to grey and to the floor
+    assert px[2] == (*neutral, round(0.6 * 255))               # far: flat neutral grey at the floor
+    assert 0 < px[3][3] < 255                                  # 30 km into a state with no data: partly kept
+    assert px[4] == (0, 0, 0, 0) and n == 5                    # deep inside it: clear
+    assert px[5][3] == round(0.5 * 255)                        # outline coverage scales the alpha
+    assert heat.reach(0, 120) == 1 and heat.reach(120, 120) == 0 and heat.reach(60, 120) == pytest.approx(0.5)
+
+
+def test_border_distance_counts_km_past_the_states_with_data():
+    g = heat.Grid.for_box(-110, 39, -100, 41, 10)
+    inside = [1.0 if g.lon_at(i) < -105 else 0.0 for j in range(g.height) for i in range(g.width)]
+    d = heat.border_distance(g, inside, 2, [1.0] * (g.width * g.height))
+    j = g.height // 2
+    row = d[j * g.width:(j + 1) * g.width]
+    assert all(v == 0 for v, i in zip(row, range(g.width)) if g.lon_at(i) < -105.3)
+    km_per_deg = heat.KM_PER_DEG_LON * math.cos(g.lat_at(j) * heat.RAD)
+    i = int(g.x_of(-103.0))
+    assert row[i] == pytest.approx((g.lon_at(i) + 105) * km_per_deg, rel=0.08)
+    assert all(b >= a for a, b in zip(row, row[1:]))
+
+
+# ------------------------------------------------------------------ isolines
+def _cone(w, h, cx, cy, top, slope):
+    return [top - slope * math.hypot(i - cx, j - cy) for j in range(h) for i in range(w)]
+
+
+def test_contour_lines_trace_a_closed_ring_at_the_right_radius():
+    w = h = 41
+    values = _cone(w, h, 20, 20, 500, 10)  # 10 per pixel down from 500 at the center
+    lines = heat.contour_lines(values, w, h, [350, 400, 600])
+    assert lines[600] == [] and len(lines[350]) == 1 and len(lines[400]) == 1
+    ring = lines[350][0]
+    assert ring[0] == ring[-1]  # closed
+    radii = [math.hypot(x - 20.5, y - 20.5) for x, y in ring]
+    assert min(radii) > 14.6 and max(radii) < 15.1  # 15 px; on a cone marching squares stays within half a pixel
+    # A level that reaches the edge of the data ends there: open lines.
+    assert all(line[0] != line[-1] for line in heat.contour_lines(values, w, h, [300])[300])
+
+
+def test_contour_lines_end_open_at_the_edge_of_the_data():
+    w, h = 20, 10
+    values = [float(i) for j in range(h) for i in range(w)]  # a ramp from west to east
+    values[5 * w + 10] = None                              # a hole cuts the 9.5 line in two
+    lines = heat.contour_lines(values, w, h, [9.5])[9.5]
+    assert len(lines) == 2 and all(line[0] != line[-1] for line in lines)
+    assert all(abs(x - 10.0) < 1e-9 for line in lines for x, _ in line)
+
+
+def test_contour_lines_resolve_a_saddle_with_the_cell_mean():
+    lines = heat.contour_lines([1.0, 0.0, 0.0, 1.0], 2, 2, [0.5])[0.5]
+    assert len(lines) == 2  # two separate segments, never crossing
+    assert all(len(line) == 2 for line in lines)
+
+
+def test_refined_isolines_make_round_pocket_rings():
+    g = heat.Grid.for_box(-112.5, 40.0, -111.0, 41.0, 20)
+    bg = [100.0] * (g.width * g.height)
+    pocket = heat.Point(-111.75, 40.5, 500)
+    values, _ = heat.apply_pockets(g, bg, [pocket], 25)
+    lines = heat.refined_isolines(g, bg, values, [pocket], 25, [300], 4)[300]
+    assert len(lines) == 1 and lines[0][0] == lines[0][-1]
+    # v = b + (1 - (d / r)^2)^2 (R - b): the 300 in line sits where (1 - (d / r)^2)^2 = 0.5.
+    expect = 25 * math.sqrt(1 - math.sqrt(0.5))
+    yn, ys = g.y_north, g.y_south
+    errs = []
+    for x, y in lines[0]:
+        lon = g.west + x / g.width * (g.east - g.west)
+        lat = heat.lat_of(yn - y / g.height * (yn - ys))
+        kmlon = heat.KM_PER_DEG_LON * math.cos(lat * heat.RAD)
+        errs.append(abs(math.hypot((lon - pocket.lon) * kmlon, (lat - pocket.lat) * heat.KM_PER_DEG_LAT) - expect))
+    coarse = heat.contour_lines(values, g.width, g.height, [300])[300][0]
+    assert max(errs) < 0.25 and len(lines[0]) > 2 * len(coarse)  # within 250 m, much finer than the pixels
+
+
+def test_simplify_keeps_the_ends_and_stays_within_tolerance():
+    line = [(x / 10, math.sin(x / 10)) for x in range(200)]
+    out = heat.simplify(line, 0.05)
+    assert out[0] == line[0] and out[-1] == line[-1] and len(out) < len(line) / 4
+    for x, y in line:
+        # every dropped point lies within the tolerance of the simplified polyline
+        best = min(abs((by - ay) * (x - ax) - (bx - ax) * (y - ay)) / math.hypot(bx - ax, by - ay)
+                   for (ax, ay), (bx, by) in zip(out, out[1:]) if ax <= x <= bx or bx <= x <= ax)
+        assert best <= 0.05 + 1e-9
+    ring = [(math.cos(t / 20 * math.pi), math.sin(t / 20 * math.pi)) for t in range(40)] + [(1.0, 0.0)]
+    simple_ring = heat.simplify(ring, 0.01)
+    assert simple_ring[0] == simple_ring[-1] and len(simple_ring) >= 8
+
+
+def test_isoline_features_label_long_lines_and_mark_majors(heat_cfg):
+    g = heat.Grid.for_box(-112.5, 40.0, -111.0, 41.0, 20)
+    iso = heat_cfg.snowfall.isolines
+    lines = {200.0: [[(1, 1), (40, 1)]], 250.0: [[(1, 2), (6, 2)]], 300.0: [[(1, 3), (2, 3)]]}
+    feats = heat.isoline_features(g, lines, iso, "lower48")
+    by = {f["properties"]["value"]: f for f in feats}
+    assert set(by) == {200, 250}  # the 1 px line is dropped (min_length_px)
+    assert by[200]["properties"] == {"value": 200, "major": True, "label": True, "region": "lower48"}
+    assert by[250]["properties"]["major"] is False and by[250]["properties"]["label"] is False
+    (lon0, lat0), (lon1, _) = by[200]["geometry"]["coordinates"]
+    assert lon0 == round(g.west + 1 / g.width * (g.east - g.west), 3) and lon1 > lon0 and 40.0 < lat0 < 41.0
+
+
+# ------------------------------------------------------------------ season length
+def _season(length=None, open_=None, close=None, source="s"):
+    f = lambda v: None if v is None else {"value": v, "source_id": source, "as_of": "2026-10-01", "confidence": "estimated"}  # noqa: E731
+    return {"open_typical": f(open_), "close_typical": f(close), "length_days": f(length), "training_start": None}
+
+
+def test_season_days_uses_sourced_values_only():
+    assert heat.days_open("11-29", "04-19") == 142 and heat.days_open("12-05", "04-15") == 132
+    assert heat.days_open("06-01", "06-30") == 30 and heat.days_open("02-29", "03-01") == 2
+    assert heat.season_days({"season": _season(length=150, open_="11-01", close="12-01")}) == 150
+    assert heat.season_days({"season": _season(open_="11-20", close="03-31")}) == 132
+    assert heat.season_days({"season": _season(length=150, source="")}) is None   # no source, no value
+    assert heat.season_days({"season": _season(open_="11-20")}) is None           # half a pair
+    assert heat.season_days({"season": None}) is None
+    pts = heat.season_points([{"lat": 40.5, "lon": -111.6, "state": "ut", "season": _season(length=120)},
+                              {"lat": None, "lon": -111.6, "state": "UT", "season": _season(length=120)}])
+    assert pts == [(heat.Point(-111.6, 40.5, 120.0), "UT")]
+
+
+SEASON_STATES = {"features": [
+    {"properties": {"code": "UT"}, "geometry": {"type": "Polygon", "coordinates": [[[-114, 37], [-109, 37], [-109, 42], [-114, 42], [-114, 37]]]}},
+    {"properties": {"code": "KS"}, "geometry": {"type": "Polygon", "coordinates": [[[-109, 37], [-100, 37], [-100, 42], [-109, 42], [-109, 37]]]}},
+    {"properties": {"code": "AK"}, "geometry": {"type": "Polygon", "coordinates": [[[-150, 60], [-145, 60], [-145, 63], [-150, 63], [-150, 60]]]}},
+]}
+
+
+def test_write_season_rasters_from_sourced_lengths(tmp_path, heat_cfg):
+    h = heat_cfg.model_copy(update={"season": heat_cfg.season.model_copy(update={"px_per_degree": 6})})
+    resorts = [{"lat": 40.6, "lon": -111.6, "state": "UT", "season": _season(length=160)},
+               {"lat": 38.5, "lon": -112.5, "state": "UT", "season": _season(open_="12-15", close="03-31")},
+               {"lat": 61.0, "lon": -149.0, "state": "AK", "season": _season(length=142)},
+               {"lat": 39.0, "lon": -104.0, "state": "KS", "season": _season(length=999, source="")}]
+    m = heat.write_season(tmp_path, resorts=resorts, outlines=SEASON_STATES, heat=h, generated_at="2026-10-13T00:00:00Z")
+    mode = h.modes.season
+    assert m["mode"] == "season" and m["scale"] == "classed" and m["breaks"] == mode.breaks and m["colors"] == mode.colors
+    assert m["domain"] == {"min": 107.0, "max": 160.0} and m["values"]["resorts"] == 3  # the unsourced 999 is ignored
+    assert m["attribution"] is None and m["ticks"] == mode.legend_ticks
+    assert {r["region"] for r in m["rasters"]} == {"lower48", "alaska"}
+    l48 = next(r for r in m["rasters"] if r["region"] == "lower48")
+    assert l48["no_data_states"] == ["KS"] and l48["resorts"] == 2
+    w, hgt, px = decode_png((tmp_path / "heat" / l48["image"]).read_bytes())
+    g = heat.Grid.for_box(h.regions.lower48.west, h.regions.lower48.south, h.regions.lower48.east, h.regions.lower48.north, 6)
+    at = lambda lon, lat: tuple(px[(int(g.y_of(lat)) * g.width + int(g.x_of(lon))) * 4:][:4])  # noqa: E731
+    near = at(-111.6, 40.6)
+    assert near == (*heat.hex_rgb(mode.colors[heat.class_index(160, mode.breaks)]), 255)
+    assert 0 < at(-108.6, 40.0)[3] < 255      # just inside the state with no data: fading
+    assert at(-101.0, 40.0)[3] == 0           # deep inside it: clear
+    assert at(-120.0, 40.0)[3] == 0           # outside every outline
+    # Alaska: its own resort colors its ski areas.
+    ak = next(r for r in m["rasters"] if r["region"] == "alaska")
+    _, _, apx = decode_png((tmp_path / "heat" / ak["image"]).read_bytes())
+    ga = heat.Grid.for_box(h.regions.alaska.west, h.regions.alaska.south, h.regions.alaska.east, h.regions.alaska.north, 6)
+    k = (int(ga.y_of(61.0)) * ga.width + int(ga.x_of(-149.0))) * 4
+    assert tuple(apx[k:k + 4]) == (*heat.hex_rgb(mode.colors[heat.class_index(142, mode.breaks)]), 255)
+    # Unchanged inputs skip the work; no values at all removes the files.
+    again = heat.write_season(tmp_path, resorts=resorts, outlines=SEASON_STATES, heat=h, generated_at="2026-10-14T00:00:00Z")
+    assert again == m
+    assert heat.write_season(tmp_path, resorts=[], outlines=SEASON_STATES, heat=h, generated_at="x") is None
+    assert not list((tmp_path / "heat").glob("season*"))
+
+
+def test_far_from_resorts_the_season_map_turns_neutral_grey(tmp_path, heat_cfg):
+    h = heat_cfg.model_copy(update={"season": heat_cfg.season.model_copy(update={"px_per_degree": 4})})
+    wide = {"features": [{"properties": {"code": "MT"}, "geometry": {"type": "Polygon", "coordinates": [
+        [[-124, 37], [-100, 37], [-100, 49], [-124, 49], [-124, 37]]]}}]}
+    resorts = [{"lat": 48.0, "lon": -123.0, "state": "MT", "season": _season(length=95)}]
+    m = heat.write_season(tmp_path, resorts=resorts, outlines=wide, heat=h, generated_at="x")
+    r = next(x for x in m["rasters"] if x["region"] == "lower48")
+    _, _, px = decode_png((tmp_path / "heat" / r["image"]).read_bytes())
+    g = heat.Grid.for_box(h.regions.lower48.west, h.regions.lower48.south, h.regions.lower48.east, h.regions.lower48.north, 4)
+    k = (int(g.y_of(38.0)) * g.width + int(g.x_of(-101.0))) * 4   # about 2000 km away
+    assert tuple(px[k:k + 4]) == (*heat.hex_rgb(h.neutral), round(h.season.floor_alpha * 255))
+
+
+def test_season_fade_config_is_checked(heat_cfg):
+    Season = type(heat_cfg.season)
+    base = heat_cfg.season.model_dump()
+    with pytest.raises(ValueError):
+        Season.model_validate({**base, "fade_end_km": base["full_opacity_km"]})
+    with pytest.raises(ValueError):
+        Season.model_validate({**base, "floor_alpha": 1.5})
+
+
+def test_build_writes_the_committed_season_rasters_from_sourced_values():
+    m = json.loads((REPO / "data" / "build" / "heat" / "season.json").read_text())
+    resorts = json.loads((REPO / "data" / "build" / "resorts.json").read_text())["resorts"]
+    sourced = [r for r in resorts if heat.season_days(r) is not None and r.get("lat") is not None]
+    assert m["values"]["resorts"] == len(sourced) > 300
+    assert {r["region"] for r in m["rasters"]} == {"lower48", "alaska"}
+    for r in m["rasters"]:
+        assert (REPO / "data" / "build" / "heat" / r["image"]).stat().st_size < 400_000
+    # Alaska's ski areas with a sourced season all sit inside the Alaska raster.
+    ak = next(r for r in m["rasters"] if r["region"] == "alaska")
+    assert ak["resorts"] == sum(1 for r in sourced if r["state"] == "AK") >= 4
+    snow = json.loads((REPO / "data" / "build" / "heat" / "snowfall.json").read_text())
+    assert {f["region"] for f in snow["isolines"]["files"]} == {"lower48", "alaska"}
+    for f in snow["isolines"]["files"]:
+        assert (REPO / "data" / "build" / "heat" / f["file"]).stat().st_size < 300_000 and f["features"] > 0
+
+
+def test_snowfall_region_colors_each_pixel_by_its_class(heat_cfg):
+    box = heat_cfg.regions.lower48.model_copy(update={"west": -112.5, "east": -111.0, "south": 40.0, "north": 41.0})
+    g = heat.Grid.for_box(box.west, box.south, box.east, box.north, 40)
+    ring = [(box.west, box.south), (box.east, box.south), (box.east, box.north), (box.west, box.north), (box.west, box.south)]
+    stations = [heat.Point(-112.5 + i * 0.25, 40 + j * 0.25, 80) for i in range(7) for j in range(5)]
+    pocket = heat.Point(-111.64, 40.59, 545)
+    mode = heat_cfg.modes.snowfall
+    rgba, info = heat.render_region(g, stations=stations, pockets=[pocket], polygons=[[ring]], heat=heat_cfg,
+                                    domain=(0, 900), scale="classed", box=box)
+    k = int(g.y_of(pocket.lat)) * g.width + int(g.x_of(pocket.lon))
+    assert info["values"][k] == pytest.approx(545, abs=5) and info["background"][k] == pytest.approx(80)
+    assert tuple(rgba[4 * k:4 * k + 4]) == (*heat.hex_rgb(mode.colors[heat.class_index(info["values"][k], mode.breaks)]), 255)
+    far = 2 * g.width + 2
+    assert tuple(rgba[4 * far:4 * far + 3]) == heat.hex_rgb(mode.colors[heat.class_index(80, mode.breaks)])
