@@ -532,7 +532,8 @@ def validation_section(matches: Sequence[Match], noaa_pairs: Sequence[dict], sum
         f"daily SWE gain divided by new snow density (the same SNOW-17 step and `climate.snotel` parameters as "
         f"`snotel_swe` above), from water years whose November to April days are at least "
         f"`climate.min_month_coverage` complete, with at least {cfg['min_complete_years']} such years. "
-        f"{usable_n} of {stations} SNOTEL stations qualify. AWDB publishes no snowfall element or snowfall "
+        f"{usable_n} of the {stations} SNOTEL stations whose record spans {cfg['min_complete_years']} or more water "
+        f"years of the window qualify. AWDB publishes no snowfall element or snowfall "
         f"normal for SNOTEL; its SWE and snow depth normals describe the pack on the ground, not new snow, so "
         f"the derived figure is the better fit.",
         "",
@@ -558,8 +559,8 @@ def validation_section(matches: Sequence[Match], noaa_pairs: Sequence[dict], sum
     lines += [
         "",
         f"Cross check against measured snowfall: NOAA normals stations (the heat map background) within "
-        f"{max_km:.0f} km and {max_elev_m:.0f} m of a qualifying SNOTEL station. NOAA measures snowfall with a "
-        f"ruler, so this pair has no marketing in it.",
+        f"{max_km:.0f} km and {max_elev_m:.0f} m of a qualifying SNOTEL station. NOAA observers measure snowfall "
+        f"directly, so this pair checks the method without the resorts' own figures.",
         "",
         f"Summary: {noaa_summary['n']} pairs. Median difference {pct(noaa_summary['median_diff_pct'])}, median "
         f"absolute difference {abs(noaa_summary['median_abs_diff_pct'] or 0):.0f}%; "

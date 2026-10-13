@@ -281,6 +281,8 @@ def _small(heat_cfg, ppd=4):
 
 def test_write_snowfall_rasters_and_sidecar(tmp_path, heat_cfg):
     h = _small(heat_cfg)
+    # A wide pocket, so its rings stay visible at this coarse test resolution.
+    h = h.model_copy(update={"snowfall": h.snowfall.model_copy(update={"pocket_radius_km": 25.0})})
     stations = [heat.Point(-114 + i * 0.5, 37 + j * 0.5, 40 + 10 * i) for i in range(11) for j in range(11)]
     stations += [heat.Point(-148, 61, 70), heat.Point(-146, 62.5, 90)]
     pockets = [heat.Point(-111.64, 40.59, 545)]
@@ -822,3 +824,41 @@ def test_build_blends_the_committed_snotel_extract():
     assert m["terrain"]["source_id"] == "aws-terrain-tiles"
     sources = {s["id"] for s in json.loads((REPO / "data" / "build" / "sources.json").read_text())["sources"]}
     assert {"nrcs-snotel-awdb-annual-snowfall", "aws-terrain-tiles"} <= sources
+
+
+def test_raise_field_keeps_the_larger_value_and_its_gradient():
+    vals, grads = heat.raise_field([100.0, 300.0, None, 50.0], [150.0, 200.0, 80.0, None], [0.1, 0.2, None, 0.4],
+                                   [1.1, 1.2, 1.3, None])
+    assert vals == [150.0, 300.0, 80.0, 50.0] and grads == [1.1, 0.2, 1.3, 0.4]
+
+
+def test_resort_points_spread_along_the_terrain_and_never_lower_the_field(heat_cfg):
+    """With resort points on, every pixel is at least the stations' own field (pockets off to isolate the step),
+    and a high resort lifts the ridge around it more than the valley beside it."""
+    box = heat_cfg.regions.lower48.model_copy(update={"west": -112.0, "east": -110.0, "south": 39.5, "north": 40.5})
+    g = heat.Grid.for_box(box.west, box.south, box.east, box.north, 16)
+    ring = [(box.west, box.south), (box.east, box.south), (box.east, box.north), (box.west, box.north), (box.west, box.south)]
+    stations = []
+    for k in range(9):
+        lat = 39.55 + 0.11 * k
+        stations += [heat.Point(-111.0, lat, 250, 3000), heat.Point(-111.9, lat, 40, 1000),
+                     heat.Point(-110.1, lat, 40, 1000)]
+    resorts = [heat.Point(-111.0, 40.0, 600), heat.Point(-111.6, 39.7, 20)]
+    dem = _Dem()
+
+    def run(resort_points):
+        snow = heat_cfg.snowfall.model_copy(update={
+            "elevation": heat_cfg.snowfall.elevation.model_copy(update={"resort_points": resort_points}),
+            "pocket_radius_km": 5.0})
+        h = heat_cfg.model_copy(update={"snowfall": snow})
+        # A pocket radius of 5 km at 16 px per degree reaches no pixel center beyond the resort's own.
+        _, info = heat.render_region(g, stations=stations, pockets=resorts, polygons=[[ring]], heat=h,
+                                     domain=(0, 900), scale="classed", box=box, dem=dem)
+        return info["background"]
+
+    plain, joined = run(False), run(True)
+    assert all(j >= p - 1e-9 for p, j in zip(plain, joined) if p is not None)
+    j = int(g.y_of(40.0))
+    ridge = j * g.width + int(g.x_of(-111.0)) + 3
+    valley = j * g.width + int(g.x_of(-111.6))
+    assert joined[ridge] - plain[ridge] > joined[valley] - plain[valley] >= 0

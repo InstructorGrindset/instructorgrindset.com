@@ -575,15 +575,40 @@ async function readStateOutlines(index) {
   return fc;
 }
 
+let paintedPromise = null;
+
+/**
+ * Resolves once the browser has shown the first contentful paint (or after `latestMs`), for loads the first paint
+ * does not need. A slow first frame otherwise lets them start before it, and Lighthouse then counts them as needed
+ * for the paint (docs/map/ARCHITECTURE.md "Performance budget").
+ */
+export function whenPainted(latestMs = 8000) {
+  if (!paintedPromise) {
+    paintedPromise = new Promise((resolve) => {
+      const go = () => setTimeout(resolve, 0);
+      try {
+        if (performance.getEntriesByName('first-contentful-paint').length) { go(); return; }
+        const po = new PerformanceObserver((list) => {
+          if (list.getEntriesByName('first-contentful-paint').length) { po.disconnect(); go(); }
+        });
+        po.observe({ type: 'paint', buffered: true });
+      } catch { /* no paint timing: the timer below */ }
+      setTimeout(resolve, latestMs);
+    });
+  }
+  return paintedPromise;
+}
+
 let postingsPromise = null;
 
 /**
  * Open job postings (jobs/postings.json, refreshed daily by pipeline/jobs_feed.py), loaded once, only when a resort
- * or cluster view has jobs links. Resolves to the validated file, or null when it is absent, empty or invalid.
+ * or cluster view has jobs links, after the first paint. Resolves to the validated file, or null when it is absent,
+ * empty or invalid.
  */
 export function loadPostings() {
   if (!postingsPromise) {
-    postingsPromise = Promise.all([fetchJson('jobs/postings.json', { optional: true }), schemas()]).then(([raw, sch]) => {
+    postingsPromise = whenPainted().then(() => Promise.all([fetchJson('jobs/postings.json', { optional: true }), schemas()])).then(([raw, sch]) => {
       if (!raw) return null;
       const r = sch.PostingsFile.safeParse(raw);
       if (!r.success) {

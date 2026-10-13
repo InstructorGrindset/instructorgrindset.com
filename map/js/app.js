@@ -4,10 +4,11 @@
 // 1. map-index.json, clusters.geojson and states.json, then the panel and the list view render.
 // 2. A 2D picture of the view (preview.js) with "Click (Tap) to explore the map". The first click or tap runs
 //    MapLibre (preloaded by the page head) and builds the WebGL map (owner decision 9).
-// 3. resorts.json, sources.json and definitions.json load when the page is idle (a resort or comparison view
-//    asks for them straight away); after the WebGL map loads, the recolor control and the state outlines.
+// 3. After the load event and the first paint, when idle: map.js and MapLibre download, sources.json loads when the
+//    panel shows source links, and resorts.json is only prefetched (a resort or comparison view loads it at once).
+//    After the WebGL map loads: the full data, the recolor control and the state outlines.
 import { config, isPhone } from './config.js';
-import { loadAll, loadStateOutlines } from './data.js';
+import { loadAll, loadStateOutlines, whenPainted } from './data.js';
 import { createRouter } from './router.js';
 import { createPanel } from './panel.js';
 import { createSheet } from './sheet.js';
@@ -112,8 +113,8 @@ function whenMapLibre() {
   return mapLibrePromise;
 }
 
-/** Run fn once the browser has painted content (first-contentful-paint), or after `latestMs` at the latest. */
-function afterFirstPaint(fn, latestMs = 1500) {
+/** Run fn once the browser has painted content (first-contentful-paint), or after 1.5 s at the latest. */
+function afterFirstPaint(fn) {
   let fired = false;
   const go = () => { if (!fired) { fired = true; setTimeout(fn, 0); } };
   try {
@@ -123,7 +124,7 @@ function afterFirstPaint(fn, latestMs = 1500) {
     });
     po.observe({ type: 'paint', buffered: true });
   } catch { /* no paint timing: fall back to the timer */ }
-  setTimeout(go, latestMs);
+  setTimeout(go, 1500);
 }
 
 /** A new task, so long startup work splits into short tasks and the browser can paint in between. */
@@ -329,8 +330,7 @@ async function main() {
   const loaded = new Promise((resolve) => {
     if (document.readyState === 'complete') resolve(); else window.addEventListener('load', resolve, { once: true });
   });
-  const painted = new Promise((resolve) => afterFirstPaint(resolve, 8000));
-  const afterLoad = (fn) => Promise.all([loaded, painted]).then(() => idle(fn));
+  const afterLoad = (fn) => Promise.all([loaded, whenPainted()]).then(() => idle(fn));
   // When idle: source records if the panel shows source links, and only a cache warming download of the rest
   // (resorts.json is 2.6 MB; parsing it is a long task). A view that needs full records loads them (panel.js).
   afterLoad(() => { idleReached = true; if (sourcesWanted) loadSources(); index.prefetchDetails(); });

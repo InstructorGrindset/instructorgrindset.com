@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T18:50:12Z",
+  "generated_at": "2026-10-13T19:17:56Z",
   "mode": "snowfall",
   "units": "in",
   "scale": "classed",
@@ -79,6 +79,18 @@
     "field": "ANN-SNOW-NORMAL",
     "stations": 5568
   },
+  "mountain_stations": {
+    "source_id": "nrcs-snotel-awdb-annual-snowfall",
+    "as_of": "2026-10-13",
+    "confidence": "estimated",
+    "field": "annual_snowfall_in",
+    "method": "median of water year totals of daily SWE gain / new snow density",
+    "water_years": [
+      2011,
+      2025
+    ],
+    "stations": 831
+  },
   "terrain": {
     "source_id": "aws-terrain-tiles",
     "as_of": "2026-10-13",
@@ -88,7 +100,7 @@
   "pockets": {
     "field": "snow.annual_avg_in",
     "resorts": 274,
-    "radius_km": 25.0,
+    "radius_km": 10.0,
     "terrain": true
   },
   "method": {
@@ -106,11 +118,12 @@
       "max_gradient_per_km": 2.0,
       "spread_prior_m": 150.0,
       "max_extrapolation_m": 0.0,
-      "terrain_smooth_cells": 0,
+      "terrain_smooth_cells": 2,
+      "resort_points": true,
       "pocket_terrain": true
     }
   },
-  "attribution": "Snowfall normals: NOAA NCEI 1991 to 2020",
+  "attribution": "Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL",
   "isolines": {
     "levels": [
       200.0,
@@ -134,18 +147,18 @@
       {
         "region": "lower48",
         "file": "snowfall-isolines-lower48.geojson",
-        "bytes": 138627,
-        "features": 247
+        "bytes": 127982,
+        "features": 266
       },
       {
         "region": "alaska",
         "file": "snowfall-isolines-alaska.geojson",
-        "bytes": 13472,
-        "features": 29
+        "bytes": 15012,
+        "features": 40
       }
     ]
   },
-  "inputs_sha256": "637402b78062a9c14a837bab0c1d2fd273a5c3b6033dd68cbb1c33a29e999d69",
+  "inputs_sha256": "1db4d55fca304c25f5fdcf33fdf1e42a3158d30d64dd2fce227d1213af9dbb05",
   "rasters": [
     {
       "region": "lower48",
@@ -170,9 +183,9 @@
           24.4
         ]
       ],
-      "bytes": 174938,
+      "bytes": 135866,
       "stations": 5486,
-      "mountain_stations": 0,
+      "mountain_stations": 792,
       "terrain": true,
       "pockets": 271
     },
@@ -199,9 +212,9 @@
           51.2
         ]
       ],
-      "bytes": 115757,
+      "bytes": 83995,
       "stations": 82,
-      "mountain_stations": 0,
+      "mountain_stations": 39,
       "terrain": true,
       "pockets": 3
     }

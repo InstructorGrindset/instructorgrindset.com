@@ -1,9 +1,12 @@
 """Heat rasters for the Career Map (docs/map/ARCHITECTURE.md, "Heat maps"): snowfall and season length.
 
 Snowfall background: NOAA NCEI U.S. Climate Normals 1991 to 2020 station values (ANN-SNOW-NORMAL, inches),
-from the committed extract that ``pipeline/climate/noaa_normals.py`` writes. Pockets: each resort's own
-published annual snowfall (``snow.annual_avg_in``) raised over the background within
-``heat.snowfall.pocket_radius_km``. A pocket only ever raises the field.
+from the committed extract that ``pipeline/climate/noaa_normals.py`` writes, blended with NRCS SNOTEL mountain
+stations (``pipeline/climate/snotel_stations.py``). With the terrain extract (``pipeline/terrain.py``) the field
+follows the ground height: gradient plus inverse distance on log snowfall (``gids_fit``,
+``heat.snowfall.elevation``). Resorts: each resort's own published annual snowfall (``snow.annual_avg_in``) joins
+the stations at its ground height where that raises the field (``resort_points``), then a pocket within
+``heat.snowfall.pocket_radius_km`` lifts its own pixels to its figure. Neither ever lowers the field.
 
 Season length: the resorts' own sourced season lengths (``season.length_days``, else a sourced open and close
 pair), the ``heat.field`` method with the ``heat.season`` resolution and fade.
@@ -14,7 +17,8 @@ Method (config/definitions.yaml ``heat``):
   distance R to the next one; weight w_i = ((R - d_i) / (R * max(d_i, min_distance_km)))^2. A point's
   weight reaches zero just as it leaves the set, so the surface is continuous. The field is solved on
   every ``grid_step_px`` pixel and blended bilinearly between.
-* Pockets (snowfall): v = b + g(d) * max(0, resort - b), g(d) = (1 - (d / r)^2)^2 for d < r, the highest wins.
+* Pockets (snowfall): v = b + g(d) * max(0, T - b), g(d) = (1 - (d / r)^2)^2 for d < r, the highest wins; T is the
+  resort's value, moved down the local gradient below the resort's ground height (``pocket_target``).
 * Color: classed modes take the color of the value's class (``breaks``, ``colors``); other modes use
   ``heat.ramp`` over the mode's scale.
 * Opacity: from the distance to the nearest station or resort with data, times the share of the pixel inside
@@ -462,6 +466,20 @@ def solve_elevation_field(grid: Grid, cov: Sequence[float], points: Sequence[Poi
             dists[base + i] = w00 * f00.dist_km + w10 * f10.dist_km + w01 * f01.dist_km + w11 * f11.dist_km
             betas[base + i] = beta
     return values, dists, betas
+
+
+def raise_field(base: Sequence[Optional[float]], raised: Sequence[Optional[float]], base_grad: Sequence[Optional[float]],
+                raised_grad: Sequence[Optional[float]]) -> tuple[list[Optional[float]], list[Optional[float]]]:
+    """Per pixel, the larger of two fields (and the gradient of the one kept): the field with the resorts can only
+    raise the stations' field."""
+    vals: list[Optional[float]] = []
+    grads: list[Optional[float]] = []
+    for b, r, gb, gr in zip(base, raised, base_grad, raised_grad):
+        if r is not None and (b is None or r > b):
+            vals.append(r); grads.append(gr)
+        else:
+            vals.append(b); grads.append(gb)
+    return vals, grads
 
 
 @dataclass(frozen=True)
@@ -1162,8 +1180,20 @@ def render_region(grid: Grid, *, stations: Sequence[Point], pockets: Sequence[Po
     pocket_km: Optional[list[Optional[float]]] = None
     if dem is not None and elev is not None and all(p.elev_m is not None for p in stations):
         heights = terrain_heights(grid, dem, cov)
-        background, dist, betas = solve_elevation_field(grid, cov, stations, box, snow.neighbors, snow.min_distance_km,
+        # Stations take the terrain grid's height at their place (their own height outside it), so a station
+        # reads back its own value at its pixel and the gradient compares like with like: the smoothed ground.
+        on_dem = [Point(p.lon, p.lat, p.value, z if (z := dem.sample(p.lon, p.lat)) is not None else p.elev_m)
+                  for p in stations]
+        background, dist, betas = solve_elevation_field(grid, cov, on_dem, box, snow.neighbors, snow.min_distance_km,
                                                         snow.grid_step_px, heights, elev)
+        if elev.resort_points and pockets:
+            # Resorts join the stations at their ground height, so their snow spreads along the terrain instead
+            # of in rings; the larger of the two fields is kept, so a resort never lowers the field.
+            with_resorts = on_dem + [Point(p.lon, p.lat, p.value, z) for p in pockets
+                                     if (z := dem.sample(p.lon, p.lat)) is not None]
+            raised, _, betas_r = solve_elevation_field(grid, cov, with_resorts, box, snow.neighbors,
+                                                       snow.min_distance_km, snow.grid_step_px, heights, elev)
+            background, betas = raise_field(background, raised, betas, betas_r)
         if elev.pocket_terrain:
             terrain = PocketTerrain(heights, betas, elev.log_offset_in)
             pocket_km = [None if (z := dem.sample(p.lon, p.lat)) is None else z / 1000.0 for p in pockets]
@@ -1351,7 +1381,9 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
                                    dem=(dems or {}).get(name) if use_terrain else None)
         if not info["covered_pixels"]:
             continue
-        data = png.encode_rgba(grid.width, grid.height, rgba)
+        # Flat class colors compress best unfiltered (zlib finds the repeated pixels); about 30 percent smaller
+        # than the Up filter here. Lossless either way.
+        data = png.encode_rgba(grid.width, grid.height, rgba, filter_type=png.FILTER_NONE)
         image = f"snowfall-{name}.png"
         _write_if_changed(heat_dir / image, data)
         rasters.append({"region": name, "image": image, "width": grid.width, "height": grid.height,

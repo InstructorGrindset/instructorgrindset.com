@@ -259,11 +259,13 @@ heat:
       legend_ticks: [0, 180, 300, 400, 500, 600, 700, 800]
   snowfall:
     # Precomputed snowfall rasters (pipeline/heat.py -> data/build/heat/): NOAA NCEI U.S. Climate Normals
-    # 1991 to 2020 station values (ANN-SNOW-NORMAL) as the background, then each resort's own published
-    # annual snowfall (snow.annual_avg_in) as a local pocket: inside pocket_radius_km the value rises
-    # toward the resort's value, v = b + g(d) * max(0, resort - b) with g(d) = (1 - (d / r)^2)^2, so a
-    # pocket only ever raises the background. Valley stations undercount mountain snow; the pockets
-    # restore it.
+    # 1991 to 2020 station values (ANN-SNOW-NORMAL) and NRCS SNOTEL mountain stations (`snotel`) as the
+    # background, read at each pixel's ground height (`elevation`), then each resort's own published annual
+    # snowfall (snow.annual_avg_in) as a local pocket: inside pocket_radius_km the value rises toward the
+    # resort's value, v = b + g(d) * max(0, T - b) with g(d) = (1 - (d / r)^2)^2 and T the resort's value
+    # (moved down the slope below the resort with `elevation.pocket_terrain`), so a pocket only ever raises
+    # the background. Valley stations undercount mountain snow; SNOTEL and the terrain restore the ranges,
+    # the pockets the resorts.
     accept_completeness: [S, R, P]      # NOAA completeness codes kept (E, estimated, is dropped)
     accept_measurement_flags: ["", X]   # blank or X (nonzero rounded to zero); M, V, W, Y and Z are dropped
     snotel:
@@ -290,12 +292,22 @@ heat:
       max_gradient_per_km: 2.0
       spread_prior_m: 150
       max_extrapolation_m: 0
-      # Pockets follow the terrain: below the resort's ground height the pocket pulls toward the resort's value
-      # moved down the local gradient, so it fills the slopes and fades into the valleys instead of a ring.
+      # The terrain grid is smoothed first (two box blurs of this many 1/16 degree cells each way, about 15 km
+      # across): snowfall follows the broad shape of a range, not every gully, and the isolines stay readable.
+      # Stations take the smoothed height at their place, so each one reads back its own value.
+      terrain_smooth_cells: 2
+      # Resorts join the stations as points at their ground height, so a resort's published snowfall spreads
+      # along the terrain like a station's instead of in a ring. The field with the resorts is kept only where it
+      # is higher than the stations' field, so a resort never lowers it.
+      resort_points: true
+      # Pockets follow the terrain too: below the resort's ground height the pocket pulls toward the resort's
+      # value moved down the local gradient, so it fills the slopes and fades into the valleys.
       pocket_terrain: true
     neighbors: 10
     min_distance_km: 12
-    pocket_radius_km: 25
+    # 25 km until the SNOTEL stations, the terrain and the resort points carried the mountains (item 14); now a
+    # small pocket only lifts each resort's own pixels to its published figure.
+    pocket_radius_km: 10
     px_per_degree: 32                   # about 2.8 km per pixel at 40 degrees north
     grid_step_px: 4
     # Stations cover the country, so the fade only touches remote Alaska: it keeps the class color and
@@ -315,7 +327,7 @@ heat:
       step: 50
       major_step: 100
       supersample: 4
-      simplify_px: 0.1
+      simplify_px: 0.2                  # 0.1 before item 14; the terrain makes longer lines
       min_length_px: 4
       label_min_px: 12
   season:

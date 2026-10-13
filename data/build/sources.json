@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T18:50:12Z",
+  "generated_at": "2026-10-13T19:13:44Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -10529,6 +10529,13 @@
       "title": "NRCS SNOTEL Snowbird (766:UT:SNTL), daily snow water equivalent and snow depth",
       "accessed_date": "2026-10-13",
       "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
+    },
+    {
+      "id": "nrcs-snotel-awdb-annual-snowfall",
+      "url": "https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1/",
+      "title": "NRCS SNOTEL daily snow water equivalent, snow depth and air temperature (AWDB REST API), station annual snowfall derived for the snowfall heat map",
+      "accessed_date": "2026-10-13",
+      "note": "Public domain (US government work, USDA NRCS National Water and Climate Center). Derived, not measured: SNOTEL measures snow water equivalent and depth, not snowfall. Daily new snow = daily SWE gain / new snow density (the SNOW-17 step HCN = PX / DHN), never below the daily depth gain, with the climate.snotel thresholds (SWE gain 0.1 to 6.0 in, depth spike 40.0 in, cap 60.0 in, rain snow threshold 1.0 C). Density: the station's own monthly median storm density, else the anderson_1976 estimate from the station's daily mean air temperature (TAVG). Annual figure: the median of the water year totals 2011 to 2025; a year counts when Nov to Apr have 90% of their days with data, and a station needs 8 such years. Values describe the station elevation."
     },
     {
       "id": "open-meteo-era5-archive",

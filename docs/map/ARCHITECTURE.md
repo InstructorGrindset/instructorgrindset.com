@@ -160,15 +160,17 @@ resort pockets, with isolines) and `season` (season length from the resorts' sou
               coordinates: [[w, n], [e, n], [e, s], [w, s]],   // exact corners, the region box from config
               bytes, stations?, mountain_stations?, terrain?, pockets?, resorts?, no_data_states? }] }
 ```
-* PNG: 8 bit RGBA written with the stdlib (`pipeline/png.py`, zlib, Up filter). Columns evenly spaced in longitude,
+* PNG: 8 bit RGBA written with the stdlib (`pipeline/png.py`, zlib; Up filter for season length, no filter for
+  snowfall, whose flat class colors compress about 30 percent better unfiltered). Columns evenly spaced in longitude,
   rows evenly spaced in Web Mercator y (MapLibre image sources expect that), pixel centers at half steps inside the
   corners. Each pixel takes its class color; on a class edge the color is the mean of four subsamples, each bilinear
   between pixel centers, so edges stay smooth when MapLibre magnifies the image. Alpha is the mode's opacity rule
   times the share of the pixel inside the region's state outlines (antialiased scanline coverage, 4 samples per row).
   Fully transparent pixels are zero. Each file must stay under 400 KB.
-* Snowfall: 32 px per degree (about 2.8 km at 40 degrees north): 1862 by 1023 px, 160 KB for the lower 48 and 110 KB
-  for Alaska. Opacity from `heat.snowfall` (full to 300 km from a station or resort, then the alpha alone fades to 0.35
-  at 800 km; it only touches remote Alaska).
+* Snowfall: 32 px per degree (about 2.8 km at 40 degrees north): 1862 by 1023 px, 136 KB for the lower 48 and 84 KB
+  for Alaska (160 KB and 110 KB with the Up filter before item 14; the terrain field alone would have made them about
+  195 KB and 116 KB). Opacity from `heat.snowfall` (full to 300 km from a station or resort, then the alpha alone fades
+  to 0.35 at 800 km; it only touches remote Alaska). The field method is under Color modes, Snowfall.
 * Season length: 16 px per degree (931 by 511 px), 94 KB for the lower 48 and 71 KB for Alaska. Values: `season.length_days`, else the
   days from a sourced `open_typical` to a sourced `close_typical`, both counted (`heat.season_days`); unsourced values are
   ignored. The `heat.field` interpolation (decluster 20 km, 8 neighbors) at every 4th pixel, bilinear between. Fade from
@@ -177,7 +179,8 @@ resort pockets, with isolines) and `season` (season length from the resorts' sou
   falls smoothly from 1 at the border to 0 at `no_data_reach_km` (120 km) past it, measured with a chamfer distance
   transform from the states with data (`heat.border_distance`). So the southern Plains and the Deep South stay clear.
 * A region without outlines is skipped. Without the NOAA extract the build leaves the snowfall files alone; without
-  `us-states.geojson` it leaves both. The frontend falls back to the browser surface (`map/js/heat.js`) when a manifest
+  the SNOTEL extract it draws NOAA stations only; without the terrain extract it falls back to plain station
+  interpolation (both with a build warning); without `us-states.geojson` it leaves both modes. The frontend falls back to the browser surface (`map/js/heat.js`) when a manifest
   is absent or invalid.
 
 ### `heat/snowfall-isolines-<region>.geojson` (snowfall isolines, `pipeline/heat.py`)
@@ -188,11 +191,13 @@ resort pockets, with isolines) and `season` (season length from the resorts' sou
 * Lines of equal snowfall every `heat.snowfall.isolines.step` (50 in) from `start` (200) to `end` (900), `major` every
   `major_step` (100). Traced on the same field as the raster with marching squares (`heat.refined_isolines`): in every
   pixel cell within one step of the lowest level (and its neighbours) the field is resampled `supersample` (4) times
-  finer, the background bilinear and each resort pocket evaluated exactly, so pocket rings come out round. Saddles use
-  the cell mean; segments are joined into lines (closed lines repeat their first point); lines shorter than
-  `min_length_px` (4 raster px) are dropped; Douglas Peucker at `simplify_px` (0.1 raster px); coordinates round to 0.001
-  degree. `label` marks lines at least `label_min_px` (12 raster px) long.
-* About 120 KB for the lower 48 (222 lines) and 13 KB for Alaska; each file must stay under 300 KB.
+  finer, the background bilinear and each resort pocket evaluated exactly (its terrain target with the ground height
+  and gradient bilinear between pixel centers too), so pocket edges come out smooth. Saddles use the cell mean;
+  segments are joined into lines (closed lines repeat their first point); lines shorter than `min_length_px` (4 raster
+  px) are dropped; Douglas Peucker at `simplify_px` (0.2 raster px, 0.1 before item 14: the terrain makes longer, more
+  winding lines); coordinates round to 0.001 degree. `label` marks lines at least `label_min_px` (12 raster px) long.
+* About 128 KB for the lower 48 (266 lines) and 15 KB for Alaska (40 lines), against 121 KB and 13 KB before item 14;
+  each file must stay under 300 KB.
 
 ### `map-index.json` (Phase 8, written by `pipeline/routes.py`)
 Slim national index the map loads first. Compact JSON, one row per resort as an array in `fields` order:
@@ -646,31 +651,35 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 ## Frontend (`/map`)
 
 ### Load order (Phase 8 performance)
-1. The page head preloads `maplibre-gl.js` (271 KB gzipped, the largest file) at low priority, so the render blocking
-   CSS goes first, and preloads `map-index.json`, `clusters.geojson` and `states.json`. `app.js` runs MapLibre only
-   after the first contentful paint, so its parse and the WebGL setup never hold back the first paint. The map
-   control CSS loads without blocking the paint. `/map/index.html` carries the national heading and intro as its
-   prerendered block, so the first paint already shows real text. The modules on this path
+1. The page head preloads `map-index.json`, `clusters.geojson` and `states.json`. The map control CSS loads without
+   blocking the paint. `/map/index.html` carries the national heading and intro as its prerendered block, so the
+   first paint already shows real text. The modules on this path
    (`app`, `config`, `data`, `router`, `panel`, `livelinks`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`) carry no
-   Zod and no charts. The first paint files are checked by hand in `data.js`, mirroring `schemas.js`.
-2. The panel and the list view render from the slim index. `preview.js` draws the first map frame on a 2D canvas
-   (clusters and resort dots with the WebGL map's framing and colors) with a "Click to explore the map" button
-   ("Tap to explore the map" on touch screens). It is a picture only.
+   Zod and no charts. The first paint files are checked by hand in `data.js`, mirroring `schemas.js`. `app.js` runs
+   its startup as three short tasks (index the data, render the panel, draw the picture) so no single task blocks
+   the page for long.
+2. The panel renders from the slim index; the list view builds the first time it opens. `preview.js` draws the first
+   map frame as an inline SVG (clusters, the Alaska inset and resort dots with the WebGL map's framing and colors)
+   with a "Click to explore the map" button ("Tap to explore the map" on touch screens). It is a picture only.
 3. Owner decision 9 (2026-10-13): the WebGL map starts on the first click or tap over the picture, or Enter or Space
    on the button. Then MapLibre runs (it was preloaded), `map.js` builds the map (workers prewarmed first), the
    picture and button go as soon as the data layers have drawn (the style plus the states, clusters and resorts
    sources; `mapCtl.whenReady`, mark `careermap:map`), and focus moves to the map canvas. MapLibre's own `load` also
    waits for every imagery tile, so it never gates readiness: tiles that hang or fail leave the plain dark base. Every view waits for the
    click, deep links included; in app navigation before the click redraws the picture for the new view.
-4. `resorts.json`, `sources.json` and `definitions.json` (`index.loadDetails()`) load when the page is idle after
-   the window `load` event, or at once when a resort or comparison view needs them. After the WebGL `load`: the color
-   mode control (`recolor.js`, `heat.js`), then `us-states.geojson`. Source links rendered earlier show a placeholder
-   that fills in when `sources.json` lands.
+4. Background work waits for the window `load` event and the first contentful paint, then for idle time: `map.js`
+   and a preload of `maplibre-gl.js` (271 KB gzipped); `sources.json` and `definitions.json` (`index.loadSources()`)
+   when the panel shows a source link it cannot resolve yet; and a link prefetch of `resorts.json` and `sources.json`,
+   which only fills the HTTP cache. `resorts.json` (2.6 MB, 250 KB gzipped) is parsed only when a view needs full
+   records (`index.loadDetails()`: a resort without an embedded record, a comparison, the trail map) or once the WebGL
+   map is ready. After the WebGL map is ready: the color mode control (`recolor.js`, `heat.js`), then
+   `us-states.geojson`. Source links rendered earlier show a placeholder that fills in when `sources.json` lands.
 * Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
   A resort page validates the record its stub embeds, so it needs Zod and `definitions.json` but no `resorts.json`.
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
 * Lazy modules: `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only), `detailcontrols.js` (resort
-  detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event. The snowfall
+  detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event and the first
+  contentful paint. The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
   `jobs/postings.json` loads once, only for a resort whose `jobs.feed` is true or a cluster with `jobs_available`
@@ -683,12 +692,11 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   (`careermap:preview`, the 2D picture). The audit then clicks the start button and reports click to WebGL first frame
   (`careermap:first-render`) and `load` (`careermap:map`). Measured 2026-10-13: interactive 1.4 to 1.7 s on `/map/`
   and the Vail page (desktop and phone); click to WebGL load 4.4 to 5.8 s when the click comes right after the first
-  paint, because MapLibre (271 KB) only starts downloading after the window `load` event. Under SwiftShader the WebGL
+  paint, because MapLibre (271 KB) only starts downloading after the window `load` event and the first paint. Under SwiftShader the WebGL
   setup alone takes 1.5 to 2.5 s.
-* Lighthouse (mobile defaults, simulated throttling, same SwiftShader Chromium), 2026-10-13: Performance 96 on `/map/`,
-  95 on Vail, 97 on Jackson Hole (94 to 97 across runs); Accessibility, Best Practices and SEO 100 on all three. Before the click to start
-  (owner decision 9) and the deferred MapLibre download, Performance was about 65, held down by 5 to 7 s of blocking
-  time from MapLibre.
+* Lighthouse (mobile defaults, simulated throttling, same SwiftShader Chromium): see "Performance budget" below for
+  the current numbers. Accessibility, Best Practices and SEO 100. Before the click to start (owner decision 9) and
+  the deferred MapLibre download, Performance was about 65, held down by 5 to 7 s of blocking time from MapLibre.
 * Satellite imagery (`config.basemap.imagery`): USGS The National Map `USGSImageryOnly` tiles (public domain, 256 px,
   max zoom 16) as the first layer above the background, muted (`raster-saturation` -0.35, `raster-brightness-max`
   0.7, `raster-contrast` -0.1). State fills turn 55% opaque over it so outlines, heat colors and markers stay readable;
@@ -696,6 +704,45 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   tiles load only after the click to start, so the first load and Lighthouse never fetch them. The tests answer
   tile requests with a synthetic local tile (`tests/map/fixtures/imagery-tile.png`), since the sandbox cannot reach the
   USGS service.
+
+### Performance budget
+* **Target** (Phase 8, queue item 18a): Lighthouse Performance (mobile defaults) with a median of 95 or more over 5
+  runs on `/map/` and no run under 90; resort and cluster pages 90 or more.
+* **Method:** the gzip server and SwiftShader Chromium of `tests/map/audit.mjs`, 5 runs per page, median and worst
+  run. Check the load average first: on this 4 core machine other jobs above a load of 2 move scores by 10 or more.
+* **How Lighthouse scores these pages** (simulated throttling): it rebuilds the load from the observed trace. Every
+  request that ended before the observed first paint counts as needed for FCP and LCP. Total Blocking Time (30% of
+  the score) takes every main thread task after FCP, multiplied by 4 (by 2 when the task did layout), and counts the
+  part of each task above 50 ms. So nothing optional may start before the first paint, and a task after it should
+  stay under about 12 ms (25 ms with layout).
+* **Causes of the old variance** (2026-10-13: 58 to 99 on `/map/`, 56 to 97 on Vail):
+  1. Under SwiftShader the first frame waits 0.5 to 2.5 s on the GPU process, long after the page is ready. Loads
+     that started at the window `load` event (`resorts.json`, `sources.json`, `maplibre-gl.js`, the web font style
+     sheet, about 600 KB) often finished before that paint, and Lighthouse then put LCP at 5.6 to 6.1 s instead of 2.0 s.
+  2. The first draw on a 2D canvas waits for a GPU channel while the GPU process is busy with that first frame: 100 to
+     360 ms inside the startup task, the largest share of blocking time.
+  3. `resorts.json` (2.6 MB) was fetched and parsed at idle: tasks of 70 to 300 ms.
+  4. The hidden list view (about 2,000 nodes) and a forced layout lengthened the startup task.
+* **Changes:**
+  1. Background work waits for the window `load` event and the first contentful paint (`whenPainted` in `data.js`,
+     the font loader in the page head). Job postings (`loadPostings`) wait for the first paint too.
+  2. The first map frame is an inline SVG (`preview.js`); the compositor draws it off the main thread.
+  3. Startup runs as three short tasks. The list view builds the first time it opens. The first render skips a
+     forced layout.
+  4. Idle time only prefetches `resorts.json`. `sources.json` loads when the panel shows a source link. Full records
+     load when a view needs them or once the WebGL map is ready.
+* **Result** (5 interleaved runs per page against a copy of the tree before the change, load average 2 to 5):
+
+  | Page | Before: median [range] | After: median [range] | After: LCP, TBT (median) |
+  |---|---|---|---|
+  | `/map/` | 93 [89 to 97] | 98 [98 to 99] | 1.97 s, 11 ms |
+  | Vail | 90 [78 to 96] | 96 [89 to 96] | 2.47 s, 45 ms |
+  | I 70 Corridor (cluster) | 91 [86 to 95] | 96 [95 to 96] | 2.54 s, 33 ms |
+
+  Under a load of 9 to 14 the gap widens: `/map/` 67 before, 98 after (95 to 98). CLS stays at 0.003.
+* **What is left** on resort pages: the stub's record and `detail/<id>.json` are validated with Zod during the first
+  render (`detail/vail.json` is 166 KB, mostly transit), and the web font swap relays out the long panel (30 to
+  60 ms). These set the worst runs there.
 
 ### Color modes: heat maps
 Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state
@@ -726,14 +773,38 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
   grey instead of a dark smudge, and states with no resort data stay clear beyond `no_data_reach_km` (120 km) past their
   border (Kansas, Nebraska, Oklahoma, Texas and the Deep South). Lucrativeness uses `heat.field`. Density never raises
   opacity or value.
-* **Snowfall** draws the precomputed NOAA rasters (`heat/snowfall.json`, see Build outputs): NOAA NCEI U.S. Climate
-  Normals 1991 to 2020 station values as the background, with each resort's own published `snow.annual_avg_in` as a
-  pocket within `heat.snowfall.pocket_radius_km` (25 km): v = b + g(d) × max(0, resort − b), g(d) = (1 − (d / r)²)², the
-  highest pocket wins, so a pocket only raises the field. Valley stations undercount mountain snow; the pockets put the
-  high snowfall resorts (Alta, Mt Baker, Mammoth, Brighton) back on top. Its attribution "Snowfall normals: NOAA NCEI 1991
-  to 2020" joins the map attribution control while the mode is on (an empty GeoJSON source carries it, since image
-  sources have no attribution). ERA5 and Open Meteo are never used for this background (their mountain undercount is in
-  `docs/map/climate-validation.md`).
+* **Snowfall** draws the precomputed rasters (`heat/snowfall.json`, see Build outputs), built from two station sets and
+  the terrain (ROADMAP item 14):
+  * Stations: the NOAA NCEI U.S. Climate Normals 1991 to 2020 (`ANN-SNOW-NORMAL`, 5,568 usable stations, mostly in
+    valleys and towns) and the NRCS SNOTEL mountain stations (831 of 873 with 8 or more complete water years; each
+    station's median water year total 2011 to 2025 of derived new snow, `data/raw/climate/snotel_snowfall/`).
+    The SNOTEL figure is checked against published resort snowfall and against nearby NOAA stations in
+    `docs/map/climate-validation.md` (median 28 percent under the resorts' own figures, 4 percent under the
+    measured NOAA normals nearby).
+  * Elevation aware field (`heat.snowfall.elevation`, `gids_fit` and `solve_elevation_field`): gradient plus inverse
+    distance after Nalder and Wein (1998). At each node (every `grid_step_px` pixel) the `neighbors` (10) nearest
+    stations give the adaptive modified Shepard weights; the local gradient of u = ln(v + `log_offset_in`) with height
+    is the slope of a weighted least squares fit (square root weights), shrunk by `spread_prior_m` (150 m) when the
+    neighbours span little height and clamped to 0 .. `max_gradient_per_km` (2 per km); every station's value is moved
+    to the pixel's height along that gradient and the moved values are averaged, v = exp(a + beta z) − c. With no
+    gradient (flat country, or neighbours at one height) this is the plain Shepard value. The six node parameters
+    blend bilinearly to every pixel, which reads the model at its own ground height: the terrain extract
+    (`data/raw/terrain/`, 1/16 degree mean heights) after `terrain_smooth_cells` (2) box blurs, bilinear to the pixel
+    center. The height is clamped to the neighbours' height range (`max_extrapolation_m` 0) and the value to their
+    value range, so the field never goes above the highest or below the lowest station near it. Stations take the
+    smoothed ground height at their own place, so each station reads back its own value and the gradient compares
+    like with like. Without the terrain extract the field is plain station interpolation (`solve_field`).
+  * Resorts: with `resort_points` each resort's published `snow.annual_avg_in` joins the stations at its ground
+    height, so its snow follows the terrain instead of a ring; the field with the resorts is kept only where it is
+    higher than the stations' field (`raise_field`). Then a pocket within `pocket_radius_km` (10 km; 25 km before item
+    14) lifts the resort's own pixels to its figure: v = b + g(d) × max(0, T − b), g(d) = (1 − (d / r)²)², the
+    highest pocket wins. T is the resort's value at or above its ground height and, with `pocket_terrain`, below it
+    (value + c) exp(beta (z − z_resort)) − c, so a pocket fills the slopes and fades into the valleys. Neither step
+    ever lowers the field (tests in `tests/pipeline/test_heat.py`).
+  * Its attribution "Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL" (or "Snowfall normals: NOAA NCEI 1991 to
+    2020" without SNOTEL stations) joins the map attribution control while the mode is on (an empty GeoJSON source
+    carries it, since image sources have no attribution). The terrain source is credited on /map/credits/. ERA5 and
+    Open Meteo are never used for this background (their mountain undercount is in `docs/map/climate-validation.md`).
 * **Isolines** (Snowfall only, `heat/snowfall-isolines-<region>.geojson`, loaded with the mode after its manifest; the
   rasters draw without waiting): one GeoJSON source `heat-iso` with three layers over the heat surface and under the
   state lines (labels under the resorts): `heat-iso-minor` (thin, from zoom 4.5), `heat-iso-major` (every 100 in, bolder,
@@ -761,8 +832,10 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
   Snowfall adds "Grey: under 24 in, little or no snow" and "Lines every 50 in from 200, bolder every 100". Notes:
   "Colors between resorts are smoothed estimates. Tooltips and resort pages show only sourced values." plus the fade
   ("Colors turn grey where the nearest resort with data is more than 250 km away." and "States with no resort data stay
-  clear." for Season length), or for the NOAA rasters "Background: NOAA station normals, 1991 to 2020, with a 25 km
-  pocket of each resort's published snowfall." and the same smoothing note for stations and resorts.
+  clear." for Season length), or for the snowfall rasters "Background: NOAA station normals, 1991 to 2020, and NRCS
+  SNOTEL mountain stations, shaped by the terrain, with a 10 km pocket of each resort's published snowfall." (the
+  SNOTEL and terrain parts only when the manifest has `mountain_stations` and `terrain`; the radius from `pockets`)
+  and the same smoothing note for stations and resorts.
 * Images are MapLibre image sources with linear resampling under the state lines, cluster outlines and resort dots;
   cluster tints are off in these modes. Each mode's surface is computed or fetched once (cached).
 * A mode with no values is disabled and says why ("No resort has snowfall data yet."). Nothing animates, so

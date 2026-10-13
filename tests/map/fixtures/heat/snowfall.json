@@ -79,10 +79,23 @@
     "field": "ANN-SNOW-NORMAL",
     "stations": 1318
   },
+  "mountain_stations": {
+    "source_id": "fixture-snotel",
+    "as_of": "2026-10-01",
+    "confidence": "estimated",
+    "field": "annual_snowfall_in",
+    "method": "median of water year totals of daily SWE gain / new snow density",
+    "water_years": [
+      2011,
+      2025
+    ],
+    "stations": 7
+  },
   "pockets": {
     "field": "snow.annual_avg_in",
     "resorts": 9,
-    "radius_km": 25.0
+    "radius_km": 10.0,
+    "terrain": false
   },
   "method": {
     "interpolation": "adaptive modified Shepard",
@@ -95,7 +108,7 @@
     "floor_alpha": 0.35,
     "fade_to": "alpha"
   },
-  "attribution": "Snowfall normals: NOAA NCEI 1991 to 2020",
+  "attribution": "Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL",
   "isolines": {
     "levels": [
       200.0,
@@ -119,12 +132,12 @@
       {
         "region": "lower48",
         "file": "snowfall-isolines-lower48.geojson",
-        "bytes": 6256,
-        "features": 15
+        "bytes": 4192,
+        "features": 13
       }
     ]
   },
-  "inputs_sha256": "25dd62ddc92127e894e072e61e7ce9e822c7e2160489df9e75a3519af939f640",
+  "inputs_sha256": "f72a1de7f17241ca13915f73871e14c9c44a635aeffe43b0be57ece3906c627d",
   "rasters": [
     {
       "region": "lower48",
@@ -149,8 +162,10 @@
           24.4
         ]
       ],
-      "bytes": 8552,
+      "bytes": 6709,
       "stations": 1318,
+      "mountain_stations": 7,
+      "terrain": false,
       "pockets": 9
     }
   ]

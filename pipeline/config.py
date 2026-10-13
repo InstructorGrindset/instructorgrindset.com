@@ -385,6 +385,7 @@ class HeatSnowfallElevation(StrictModel):
     spread_prior_m: float = Field(gt=0, le=2000)
     max_extrapolation_m: float = Field(ge=0, le=1000)
     terrain_smooth_cells: int = Field(default=0, ge=0, le=8)
+    resort_points: bool = False
     pocket_terrain: bool = True
 
 
