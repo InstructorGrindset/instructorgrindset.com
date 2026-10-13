@@ -23,6 +23,8 @@ sources:
   - {id: wikipedia-park-city-utah, url: "https://en.wikipedia.org/wiki/Park_City,_Utah", title: "Park City, Utah (Wikipedia)", accessed_date: 2026-10-11, note: "town coordinates only"}
   - {id: openskimap-ski-areas, url: "https://openskimap.org/", title: "OpenSkiMap ski areas (derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-11, note: "repository extract data/raw/openskimap/us_ski_areas.geojson"}
   - {id: access-wikipedia-american-dream-mall, url: "https://en.wikipedia.org/wiki/American_Dream_(shopping_mall)", title: "American Dream (shopping mall) (Wikipedia), transit", accessed_date: 2026-10-13, note: "NJ Transit bus routes and the Meadowlands Rail Line."}
+  - {id: metroslopes-ziprecruiter, url: "https://www.ziprecruiter.com/co/MetroSlopes", title: "MetroSlopes company page (ZipRecruiter)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Describes an indoor ski and snowboard training center (immersive infinite slopes, indoor freestyle park, trampoline area, beginner dry slope, skier gym) and year round coach hiring."}
+  - {id: wikipedia-san-francisco-international-airport, url: "https://en.wikipedia.org/wiki/San_Francisco_International_Airport", title: "San Francisco International Airport (Wikipedia)", accessed_date: 2026-10-13, note: "airport coordinates, used as a regional placeholder"}
 resorts:
   - id: big-snow-american-dream
     tier_a_status: approved
@@ -158,3 +160,18 @@ resorts:
       - {criterion: year_round_training, rationale: "Ski jumping runs year round on a plastic mat out run, and aerialists train in summer at the Freestyle Aerial Training Center by jumping into a 750,000 gallon pool.", source_id: wikipedia-lake-placid-olympic-ski-jumping-complex}
       - {criterion: athlete_development, rationale: "Freestyle ski is one of four resident sports at the Lake Placid Olympic and Paralympic Training Center.", source_id: wikipedia-us-olympic-paralympic-training-centers}
       - {criterion: heritage, rationale: "Jumps on this site served the 1932 and 1980 Winter Olympics and the 1950 Nordic World Ski Championships.", source_id: wikipedia-lake-placid-olympic-ski-jumping-complex}
+  - id: metroslopes-bay-area
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-13, note: "Added by owner request. The dot is a regional placeholder at SFO until the facility opens and its address is public."}
+    name: MetroSlopes Next Gen Ski Lab
+    facility_type: training_center
+    state: CA
+    owner: {value: MetroSlopes, source_id: metroslopes-ziprecruiter, as_of: 2026-10-13, confidence: estimated}
+    operator_scale: {value: 2, source_id: metroslopes-ziprecruiter, as_of: 2026-10-13, confidence: estimated, note: "Independent business running a single facility."}
+    lat: 37.6189
+    lon: -122.375
+    location_source_id: wikipedia-san-francisco-international-airport
+    cluster_hint: other-ca
+    tier_a_criteria:
+      - {criterion: owner_selection, rationale: "Added to Tier A by owner decision. The facility is coming soon to the San Francisco Peninsula, and its location will be shared when it opens.", source_id: owner-decisions-2026-10-11}
+      - {criterion: year_round_training, rationale: "An indoor ski and snowboard training center with immersive infinite slopes, an indoor freestyle park, a trampoline area, a beginner dry slope and a gym for skiers and snowboarders, hiring coaches for year round work.", source_id: metroslopes-ziprecruiter}
