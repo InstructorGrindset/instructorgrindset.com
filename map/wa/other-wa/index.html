@@ -14,8 +14,6 @@
   <meta property="og:url" content="https://instructorgrindset.com/map/wa/other-wa/" />
   <meta property="og:image" content="https://instructorgrindset.com/images/ig-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <!-- MapLibre is the largest file. It downloads from the start; app.js runs it after the panel's first paint. -->
-  <link rel="preload" href="/map/vendor/maplibre-gl/maplibre-gl.js" as="script" fetchpriority="low">
   <link rel="preload" href="/data/build/map-index.json" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/clusters.geojson" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/states.json" as="fetch" crossorigin="anonymous">
@@ -38,8 +36,7 @@
   <link rel="modulepreload" href="/map/js/meta.js">
   <link rel="modulepreload" href="/map/js/preview.js">
   <link rel="modulepreload" href="/map/js/camera.js">
-  <link rel="modulepreload" href="/map/js/map.js">
-  <link rel="modulepreload" href="/map/js/detailmap.js">
+  <link rel="modulepreload" href="/map/js/inset.js">
   <!-- The web font loads after the page (and MapLibre) so it never competes with the map; text uses the fallback font until then. -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script>addEventListener("load",function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},{once:true})</script>

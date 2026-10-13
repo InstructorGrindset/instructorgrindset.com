@@ -430,10 +430,14 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
    (`app`, `config`, `data`, `router`, `panel`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`) carry no
    Zod and no charts. The first paint files are checked by hand in `data.js`, mirroring `schemas.js`.
 2. The panel and the list view render from the slim index. `preview.js` draws the first map frame on a 2D canvas
-   (clusters and resort dots with the WebGL map's framing and colors). It is a picture only, removed when MapLibre
-   fires `load`.
-3. When MapLibre arrives, `map.js` builds the WebGL map (workers prewarmed first).
-4. After the map's `load`: `resorts.json`, `sources.json` and `definitions.json` (`index.loadDetails()`), the color
+   (clusters and resort dots with the WebGL map's framing and colors) with a "Click to explore the map" button
+   ("Tap to explore the map" on touch screens). It is a picture only.
+3. Owner decision 9 (2026-10-13): the WebGL map starts on the first click or tap over the picture, or Enter or Space
+   on the button. Then MapLibre runs (it was preloaded), `map.js` builds the map (workers prewarmed first), the
+   picture and button go when MapLibre fires `load`, and focus moves to the map canvas. Every view waits for the
+   click, deep links included; in app navigation before the click redraws the picture for the new view.
+4. `resorts.json`, `sources.json` and `definitions.json` (`index.loadDetails()`) load when the page is idle after
+   the window `load` event, or at once when a resort or comparison view needs them. After the WebGL `load`: the color
    mode control (`recolor.js`, `heat.js`), then `us-states.geojson`. Source links rendered earlier show a placeholder
    that fills in when `sources.json` lands.
 * Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
@@ -473,11 +477,39 @@ an interpolated grid instead (`map/js/heat.js`):
   these modes so they do not shift the colors.
 * Ramp: one hue, sequential blue steps 600 to 100 (`#184f95` to `#cde2fb`), dark for low and light for high on the
   dark map; the darkest step keeps about 2:1 against the background. The legend is a continuous bar with min, max,
-  units (USD per season, score out of 100, days, inches per season), the resort count and the method in one line.
+  units (USD per season, days, inches per season), the resort count and the method in one line. Professionalism
+  (owner decision 5) uses the fixed range 1 to 3, only values 1, 2 and 3 count, and its legend shows only 1, 2, 3.
   Resort dots stay small: dark fill with a light ring, an amber ring for Tier A.
+* Alaska only regions also draw in the national inset: the same image with its corners moved by the inset transform.
 * A mode with no values is disabled and says why ("No resort has snowfall data yet."). Nothing animates, so
   `prefers-reduced-motion` needs no special case.
 * The settings live in `config.heat` in `map/js/config.js`. They are display settings and change no resort number.
+
+### National Alaska inset (`map/js/inset.js`)
+At the national view Alaska draws as an atlas style inset in the lower left, below the Pacific coast and clear of the
+lower 48, inside a thin dashed frame: its outline, its clusters, its resorts and its heat surface are copies moved by
+one uniform scale plus a move in Web Mercator (shapes keep their form; image corners stay aligned). Its true place is
+hidden at that view. Hover and click on the inset work like the real features: the inset state opens Alaska and an
+inset resort opens that resort, both at true coordinates. The national frame (`config.nationalBounds`) reaches south to
+22 degrees to hold the inset. Hawaii, DC and the territories (no ski areas) never draw. The 2D first frame draws the
+same inset.
+
+### Panel changes from the 2026-10-13 owner decisions
+* Professionalism (decision 5): "Professionalism" with "N of 3" from `resort.operator_scale.value`, no badge,
+  breakdown, definition or tooltip; "Not yet rated" without a value. The old breakdown UI is removed.
+* Lucrativeness (decision 4): the headline is `mid` (top of the posted wage scale), then the range "bottom of the
+  scale to top". Assumptions list every `{key, value, label}` except `rent_basis`, `rent_source_id` and
+  `season_months_basis`; `tips_season_usd` (null) and `tax` show as statements from their labels. `rent_basis`
+  becomes the "Rent used" line with each of its sources.
+* Access (decision 6): Housing and commute opens with "Getting to the mountain": the rating label (Convenient,
+  Transit friendly, Mixed, Car centric), its badge, the one sentence `summary_md` and the source with its date
+  (`resort.access`, or the detail file's `access` when the resort has none).
+* Reports (decision 11): the form POSTs JSON to `definitions.submissions.endpoint` (the site's Formspree form) with
+  `Accept: application/json`. Fields are flat and match the `python -m pipeline.reports import` columns:
+  `_subject` ("Career Map report: <resort name>"), `resort_id`, `kind`, `season`, `cert_level` (pay),
+  `housing_site_id` (housing), `hourly_usd` or `monthly_usd`, `proof_url` (optional), `submitted_at`. Success says
+  "Thanks. Your report goes to review before anything appears on the map."; a failure shows an error and a
+  "Try again" button that resends the same report. Submitted values never render.
 
 ### Trail map dialog (`map/js/trailmap.js`)
 * Opened from "Open the trail map" in the resort panel and from a map control (mountain icon under the zoom buttons)

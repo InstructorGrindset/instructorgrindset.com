@@ -1,0 +1,1927 @@
+# Resort facts overlay, batch facts-northeast1 (VT, NH, ME, MA, CT, RI).
+# Wikipedia pages were read in full via action=raw. Most other hosts are blocked from the research
+# environment, so season dates from OnTheSnow, skiresort.info and others come from web search results
+# that named the page (confidence estimated, note says so).
+batch: facts-northeast1
+researched_date: 2026-10-13
+sources:
+- id: facts-northeast1-ots-vt-open
+  url: https://www.onthesnow.com/vermont/projected-openings
+  title: 'OnTheSnow: Vermont Ski Resort Projected Opening Dates 2026/2027'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-vt-close
+  url: https://www.onthesnow.com/vermont/projected-closing
+  title: 'OnTheSnow: Vermont Ski Resort Projected Closing Dates'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-nh-open
+  url: https://www.onthesnow.com/new-hampshire/projected-openings
+  title: 'OnTheSnow: New Hampshire Ski Resort Projected Opening Dates 2026/2027'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-nh-close
+  url: https://www.onthesnow.com/new-hampshire/projected-closing
+  title: 'OnTheSnow: New Hampshire Ski Resort Projected Closing Dates'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-ma-open
+  url: https://www.onthesnow.com/massachusetts/projected-openings
+  title: 'OnTheSnow: Massachusetts Ski Resort Projected Opening Dates 2026/2027'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-ma-close
+  url: https://www.onthesnow.com/massachusetts/projected-closing
+  title: 'OnTheSnow: Massachusetts Ski Resort Projected Closing Dates'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-ct-open
+  url: https://www.onthesnow.com/connecticut/projected-openings
+  title: 'OnTheSnow: Connecticut Ski Resort Projected Opening Dates'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-ct-close
+  url: https://www.onthesnow.com/connecticut/projected-closing
+  title: 'OnTheSnow: Connecticut Ski Resort Projected Closing Dates'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-sunday-river
+  url: https://www.onthesnow.com/maine/sunday-river/ski-resort
+  title: 'OnTheSnow: Sunday River Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-pleasant-mountain
+  url: https://www.onthesnow.com/maine/pleasant-mountain/ski-resort
+  title: 'OnTheSnow: Pleasant Mountain Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-lost-valley
+  url: https://www.onthesnow.com/maine/lost-valley/ski-resort
+  title: 'OnTheSnow: Lost Valley Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-camden-snow-bowl
+  url: https://www.onthesnow.com/maine/camden-snow-bowl/ski-resort
+  title: 'OnTheSnow: Camden Snow Bowl Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-mt-abram
+  url: https://www.onthesnow.com/maine/mt-abram-ski-resort/ski-resort
+  title: 'OnTheSnow: Mt. Abram Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-black-mountain-maine
+  url: https://www.onthesnow.com/maine/black-mountain-of-maine/ski-resort
+  title: 'OnTheSnow: Black Mountain of Maine Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-mt-jefferson
+  url: https://www.onthesnow.com/maine/mt-jefferson/ski-resort
+  title: 'OnTheSnow: Mt. Jefferson Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-saddleback
+  url: https://www.onthesnow.com/maine/saddleback-inc/ski-resort
+  title: 'OnTheSnow: Saddleback Inc. Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-big-moose
+  url: https://www.onthesnow.com/maine/big-squaw-mountain-ski-resort/ski-resort
+  title: 'OnTheSnow: Big Moose Mountain Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-new-hermon
+  url: https://www.onthesnow.com/maine/new-hermon-mountain/ski-resort
+  title: 'OnTheSnow: New Hermon Mountain Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-waterville-valley
+  url: https://www.onthesnow.com/new-hampshire/waterville-valley/ski-resort
+  title: 'OnTheSnow: Waterville Valley Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-ots-yawgoo-valley
+  url: https://www.onthesnow.com/rhode-island/yawgoo-valley/ski-resort
+  title: 'OnTheSnow: Yawgoo Valley Ski Resort Area Overview'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-middlebury
+  url: https://www.skiresort.info/ski-resort/middlebury-college-snow-bowl
+  title: 'Skiresort.info: Middlebury College Snow Bowl'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-hermitage
+  url: https://www.skiresort.info/ski-resort/haystack-mountain-the-hermitage-club/photos/
+  title: 'Skiresort.info: Haystack Mountain (The Hermitage Club)'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-granite-gorge
+  url: https://www.skiresort.info/ski-resort/granite-gorge-mountain-park/
+  title: 'Skiresort.info: Granite Gorge Mountain Park'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-hardack
+  url: https://skiresort.info/ski-resort/hardack-aldis-hill-st-albans
+  title: 'Skiresort.info: Hard''Ack (Aldis Hill) St. Albans'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-northeast-slopes
+  url: https://www.skiresort.com/en/ski-resort/northeast-slopes-east-corinth/snow-report/
+  title: 'Skiresort.info: Northeast Slopes East Corinth snow report (skiresort.com)'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-abenaki
+  url: https://www.skiresort.com/en/ski-resort/abenaki/snow-report/
+  title: 'Skiresort.info: Abenaki snow report (skiresort.com)'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-bigrock
+  url: https://skiresort.info/ski-resort/bigrock-mountain
+  title: 'Skiresort.info: BigRock Mountain'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-titcomb
+  url: https://www.skiresort.info/ski-resort/titcomb-mountain/
+  title: 'Skiresort.info: Titcomb Mountain'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-lonesome-pine
+  url: https://www.skiresort.info/ski-resort/lonesome-pine-trails-fort-kent
+  title: 'Skiresort.info: Lonesome Pine Trails Fort Kent'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-quoggy-jo
+  url: https://skiresort.info/ski-resort/quoggy-jo-ski-center-presque-isle
+  title: 'Skiresort.info: Quoggy Jo Ski Center Presque Isle'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-spruce
+  url: https://www.skiresort.info/ski-resort/spruce-mountain-jay
+  title: 'Skiresort.info: Spruce Mountain Jay'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-skiresort-storrs-hill
+  url: https://www.skiresort.info/ski-resort/storrs-hill-lebanon/
+  title: 'Skiresort.info: Storrs Hill Lebanon'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-nesh-cochrans
+  url: https://newenglandskihistory.com/Vermont/cochrans.php
+  title: 'NewEnglandSkiHistory.com: Cochran''s Ski Area'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-manchester-snow
+  url: https://manchesternh.gov/Departments/Parks-and-Recreation/Activities/Snow-Ski-Board-and-Tube
+  title: 'City of Manchester NH Parks and Recreation: Snow Ski, Board and Tube'
+  accessed_date: 2026-10-13
+  note: Not opened from this environment; values taken from web search results that named this page.
+- id: facts-northeast1-wp-attitash
+  url: https://en.wikipedia.org/wiki/Attitash_Mountain_Resort
+  title: 'Wikipedia: Attitash Mountain Resort'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-sugarloaf
+  url: https://en.wikipedia.org/wiki/Sugarloaf_(ski_resort)
+  title: 'Wikipedia: Sugarloaf (ski resort)'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-wildcat
+  url: https://en.wikipedia.org/wiki/Wildcat_Mountain_Ski_Area
+  title: 'Wikipedia: Wildcat Mountain Ski Area'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-blue-hills-ski-area
+  url: https://en.wikipedia.org/wiki/Blue_Hills_Ski_Area
+  title: 'Wikipedia: Blue Hills Ski Area'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-bolton-valley-resort
+  url: https://en.wikipedia.org/wiki/Bolton_Valley
+  title: 'Wikipedia: Bolton Valley'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-bousquet-mountain
+  url: https://en.wikipedia.org/wiki/Bousquet_Mountain
+  title: 'Wikipedia: Bousquet Mountain'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-bretton-woods-ski-area
+  url: https://en.wikipedia.org/wiki/Bretton_Woods_Mountain_Resort
+  title: 'Wikipedia: Bretton Woods Mountain Resort'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-bromley-mountain-ski-resort-bromley-mountain
+  url: https://en.wikipedia.org/wiki/Bromley_Mountain
+  title: 'Wikipedia: Bromley Mountain'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-camden-snow-bowl
+  url: https://en.wikipedia.org/wiki/Camden_Snow_Bowl
+  title: 'Wikipedia: Camden Snow Bowl'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-dartmouth-skiway
+  url: https://en.wikipedia.org/wiki/Dartmouth_Skiway
+  title: 'Wikipedia: Dartmouth Skiway'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-jiminy-peak-resort
+  url: https://en.wikipedia.org/wiki/Jiminy_Peak_(ski_area)
+  title: 'Wikipedia: Jiminy Peak (ski area)'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-lost-valley-ski-area
+  url: https://en.wikipedia.org/wiki/Lost_Valley_Ski_Area
+  title: 'Wikipedia: Lost Valley Ski Area'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-mohawk-mountain-ski-area
+  url: https://en.wikipedia.org/wiki/Mohawk_Mountain_Ski_Area
+  title: 'Wikipedia: Mohawk Mountain Ski Area'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-mount-abram
+  url: https://en.wikipedia.org/wiki/Ski_Mount_Abram
+  title: 'Wikipedia: Ski Mount Abram'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-mount-southington-ski-area
+  url: https://en.wikipedia.org/wiki/Mount_Southington
+  title: 'Wikipedia: Mount Southington'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-northeast-slopes
+  url: https://en.wikipedia.org/wiki/Northeast_Slopes
+  title: 'Wikipedia: Northeast Slopes'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-otis-ridge
+  url: https://en.wikipedia.org/wiki/Otis_Ridge
+  title: 'Wikipedia: Otis Ridge'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-pats-peak
+  url: https://en.wikipedia.org/wiki/Pats_Peak
+  title: 'Wikipedia: Pats Peak'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-powder-ridge-ski-area
+  url: https://en.wikipedia.org/wiki/Powder_Ridge_Ski_Area
+  title: 'Wikipedia: Powder Ridge Ski Area'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-saddleback-mountain
+  url: https://en.wikipedia.org/wiki/Saddleback_Maine
+  title: 'Wikipedia: Saddleback Maine'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-ski-bradford
+  url: https://en.wikipedia.org/wiki/Ski_Bradford
+  title: 'Wikipedia: Ski Bradford'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-ski-butternut
+  url: https://en.wikipedia.org/wiki/Ski_Butternut
+  title: 'Wikipedia: Ski Butternut'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-smugglers-notch-resort
+  url: https://en.wikipedia.org/wiki/Smugglers'_Notch_Resort
+  title: 'Wikipedia: Smugglers'' Notch Resort'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-tenney-mountain-resort
+  url: https://en.wikipedia.org/wiki/Tenney_Mountain_Ski_Resort
+  title: 'Wikipedia: Tenney Mountain Ski Resort'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-titcomb-mountain
+  url: https://en.wikipedia.org/wiki/Titcomb_Mountain
+  title: 'Wikipedia: Titcomb Mountain'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-wachusett-mountain-ski-area
+  url: https://en.wikipedia.org/wiki/Wachusett_Mountain_(ski_area)
+  title: 'Wikipedia: Wachusett Mountain (ski area)'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-whaleback-mountain
+  url: https://en.wikipedia.org/wiki/Whaleback_(ski_area)
+  title: 'Wikipedia: Whaleback (ski area)'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-king-pine
+  url: https://en.wikipedia.org/wiki/King_Pine
+  title: 'Wikipedia: King Pine'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-pleasant-mountain
+  url: https://en.wikipedia.org/wiki/Pleasant_Mountain_Ski_Area
+  title: 'Wikipedia: Pleasant Mountain Ski Area'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-ski-sundown
+  url: https://en.wikipedia.org/wiki/Ski_Sundown
+  title: 'Wikipedia: Ski Sundown'
+  accessed_date: 2026-10-13
+- id: facts-northeast1-wp-yawgoo-valley-ski-area
+  url: https://en.wikipedia.org/wiki/Yawgoo_Valley
+  title: 'Wikipedia: Yawgoo Valley'
+  accessed_date: 2026-10-13
+records:
+- resort_id: abenaki-ski-area
+  open_typical:
+    value: 12-25
+    source_id: facts-northeast1-skiresort-abenaki
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "late December - early March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season. The Town of Wolfeboro reportedly
+      says the area opens annually on December 26.
+  close_typical:
+    value: 03-05
+    source_id: facts-northeast1-skiresort-abenaki
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "late December - early March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season. The Town of Wolfeboro reportedly
+      says the area opens annually on December 26.
+  length_days:
+    value: 71
+    source_id: facts-northeast1-skiresort-abenaki
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: attitash
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-wp-attitash
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia: "Typical season length: Early December through Early April". Mapped with mid = 15, early = 05, late = 25. OnTheSnow projects Dec 04 to Apr 04 for 2026-27 (search result), which agrees.'
+  close_typical:
+    value: 04-05
+    source_id: facts-northeast1-wp-attitash
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia: "Typical season length: Early December through Early April". Mapped with mid = 15, early = 05, late = 25. OnTheSnow projects Dec 04 to Apr 04 for 2026-27 (search result), which agrees.'
+  length_days:
+    value: 122
+    source_id: facts-northeast1-wp-attitash
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 120
+    source_id: facts-northeast1-wp-attitash
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia article: "Average annual snowfall: 120 in".'
+  acres:
+    value: 311
+    source_id: facts-northeast1-wp-attitash
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia article: "Total skiable area: 311 acres".'
+- resort_id: berkshire-east
+  open_typical:
+    value: 12-11
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-03
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 114
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: big-moose-mountain-ski-area
+  open_typical:
+    value: 12-26
+    source_id: facts-northeast1-ots-big-moose
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-21
+    source_id: facts-northeast1-ots-big-moose
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 86
+    source_id: facts-northeast1-ots-big-moose
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: big-rock-mountain
+  open_typical:
+    value: 12-15
+    source_id: facts-northeast1-skiresort-bigrock
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-25
+    source_id: facts-northeast1-skiresort-bigrock
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 101
+    source_id: facts-northeast1-skiresort-bigrock
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: black-mountain
+  open_typical:
+    value: 11-15
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 05-02
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 169
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: black-mountain-maine
+  open_typical:
+    value: 12-26
+    source_id: facts-northeast1-ots-black-mountain-maine
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-black-mountain-maine
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 93
+    source_id: facts-northeast1-ots-black-mountain-maine
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: blue-hills-ski-area
+  open_typical:
+    value: 12-19
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 86
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 60
+    source_id: facts-northeast1-wp-blue-hills-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: bolton-valley-resort
+  open_typical:
+    value: 11-21
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 142
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 165
+    source_id: facts-northeast1-wp-bolton-valley-resort
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: bousquet-mountain
+  open_typical:
+    value: 12-11
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 108
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 200
+    source_id: facts-northeast1-wp-bousquet-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: bretton-woods-ski-area
+  open_typical:
+    value: 11-14
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 149
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 200
+    source_id: facts-northeast1-wp-bretton-woods-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 468
+    source_id: facts-northeast1-wp-bretton-woods-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: bromley-mountain-ski-resort-bromley-mountain
+  open_typical:
+    value: 11-27
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-04
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 129
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 145
+    source_id: facts-northeast1-wp-bromley-mountain-ski-resort-bromley-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 178
+    source_id: facts-northeast1-wp-bromley-mountain-ski-resort-bromley-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: burke
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 128
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: camden-snow-bowl
+  open_typical:
+    value: 12-18
+    source_id: facts-northeast1-ots-camden-snow-bowl
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-21
+    source_id: facts-northeast1-ots-camden-snow-bowl
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 94
+    source_id: facts-northeast1-ots-camden-snow-bowl
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 70
+    source_id: facts-northeast1-wp-camden-snow-bowl
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 105
+    source_id: facts-northeast1-wp-camden-snow-bowl
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: cannon
+  open_typical:
+    value: 11-27
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 136
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: cochrans-ski-area
+  open_typical:
+    value: 12-17
+    source_id: facts-northeast1-nesh-cochrans
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Median of seasons 2020-21 to 2025-26 opening days (Dec 19, 18, 18, 16, 14, 13).
+  close_typical:
+    value: 03-26
+    source_id: facts-northeast1-nesh-cochrans
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Median of seasons 2020-21 to 2025-26 closing days (Mar 28, 26, 26, 24, 23, 29).
+  length_days:
+    value: 100
+    source_id: facts-northeast1-nesh-cochrans
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: cranmore
+  open_typical:
+    value: 12-04
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-03
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 121
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: crotched-mountain
+  open_typical:
+    value: 12-11
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 108
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: dartmouth-skiway
+  open_typical:
+    value: 12-18
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 87
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 100
+    source_id: facts-northeast1-wp-dartmouth-skiway
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: granite-gorge-ski-area
+  open_typical:
+    value: 12-15
+    source_id: facts-northeast1-skiresort-granite-gorge
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season. Another skiresort.info listing
+      gives mid December - late March.
+  close_typical:
+    value: 03-15
+    source_id: facts-northeast1-skiresort-granite-gorge
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season. Another skiresort.info listing
+      gives mid December - late March.
+  length_days:
+    value: 91
+    source_id: facts-northeast1-skiresort-granite-gorge
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: gunstock
+  open_typical:
+    value: 12-04
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-03
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 121
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: hardack-ski-area
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-skiresort-hardack
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-25
+    source_id: facts-northeast1-skiresort-hardack
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 111
+    source_id: facts-northeast1-skiresort-hardack
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: hermitage-club
+  open_typical:
+    value: 12-15
+    source_id: facts-northeast1-skiresort-hermitage
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid April" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 04-15
+    source_id: facts-northeast1-skiresort-hermitage
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid April" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 122
+    source_id: facts-northeast1-skiresort-hermitage
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: hermon-mountain
+  open_typical:
+    value: 12-18
+    source_id: facts-northeast1-ots-new-hermon
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-21
+    source_id: facts-northeast1-ots-new-hermon
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 94
+    source_id: facts-northeast1-ots-new-hermon
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: jay-peak
+  open_typical:
+    value: 11-22
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 05-16
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 176
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: jiminy-peak-resort
+  open_typical:
+    value: 11-27
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-04
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 129
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 108
+    source_id: facts-northeast1-wp-jiminy-peak-resort
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 170
+    source_id: facts-northeast1-wp-jiminy-peak-resort
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: killington
+  open_typical:
+    value: 11-11
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 05-24
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 195
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: king-pine
+  open_typical:
+    value: 12-11
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 108
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 45
+    source_id: facts-northeast1-wp-king-pine
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia article: "King Pine has 45 skiable acres".'
+- resort_id: lonesome-pine-trails
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-skiresort-lonesome-pine
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-25
+    source_id: facts-northeast1-skiresort-lonesome-pine
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 111
+    source_id: facts-northeast1-skiresort-lonesome-pine
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: loon-mountain-resort
+  open_typical:
+    value: 11-20
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-18
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date. The OnTheSnow New England page detail section lists Mar 21; the state table
+      value is used.
+  length_days:
+    value: 150
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: lost-valley-ski-area
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-ots-lost-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-lost-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 114
+    source_id: facts-northeast1-ots-lost-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 45
+    source_id: facts-northeast1-wp-lost-valley-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: mad-river-glen
+  open_typical:
+    value: 12-12
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-03
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 113
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: magic-mountain
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-03
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 120
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: mcintyre-ski-area
+  open_typical:
+    value: 12-25
+    source_id: facts-northeast1-manchester-snow
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. City of Manchester: "open from Christmas vacation through mid March, depending on the weather conditions". Christmas vacation start mapped
+      to 12-25.'
+  close_typical:
+    value: 03-15
+    source_id: facts-northeast1-manchester-snow
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. City of Manchester: "open from Christmas vacation through mid March, depending on the weather conditions". mid = 15.'
+  length_days:
+    value: 81
+    source_id: facts-northeast1-manchester-snow
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: middlebury-snow-bowl
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-skiresort-middlebury
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season. The Snow Bowl site reportedly
+      gives December through March.
+  close_typical:
+    value: 03-25
+    source_id: facts-northeast1-skiresort-middlebury
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season. The Snow Bowl site reportedly
+      gives December through March.
+  length_days:
+    value: 111
+    source_id: facts-northeast1-skiresort-middlebury
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: mohawk-mountain-ski-area
+  open_typical:
+    value: 12-18
+    source_id: facts-northeast1-ots-ct-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-21
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 94
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 112
+    source_id: facts-northeast1-wp-mohawk-mountain-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: mount-abram
+  open_typical:
+    value: 12-19
+    source_id: facts-northeast1-ots-mt-abram
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-mt-abram
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 100
+    source_id: facts-northeast1-ots-mt-abram
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 250
+    source_id: facts-northeast1-wp-mount-abram
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia infobox: 250 acres trail, 650 acres total; trail acreage used.'
+- resort_id: mount-jefferson-ski-area
+  open_typical:
+    value: 12-26
+    source_id: facts-northeast1-ots-mt-jefferson
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-mt-jefferson
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 79
+    source_id: facts-northeast1-ots-mt-jefferson
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: mount-snow
+  open_typical:
+    value: 11-21
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-18
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 149
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: mount-southington-ski-area
+  open_typical:
+    value: 12-12
+    source_id: facts-northeast1-ots-ct-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-21
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 100
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 40
+    source_id: facts-northeast1-wp-mount-southington-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 51
+    source_id: facts-northeast1-wp-mount-southington-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: mount-sunapee
+  open_typical:
+    value: 12-04
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-04
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 122
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: nashoba-valley-ski-area
+  open_typical:
+    value: 12-12
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-21
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 100
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: northeast-slopes
+  open_typical:
+    value: 12-15
+    source_id: facts-northeast1-skiresort-northeast-slopes
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-15
+    source_id: facts-northeast1-skiresort-northeast-slopes
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 91
+    source_id: facts-northeast1-skiresort-northeast-slopes
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 35
+    source_id: facts-northeast1-wp-northeast-slopes
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: okemo
+  open_typical:
+    value: 11-20
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 143
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: otis-ridge
+  open_typical:
+    value: 12-18
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-21
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date. The OnTheSnow New England page lists Mar 29; the state table value is used.
+  length_days:
+    value: 94
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 132
+    source_id: facts-northeast1-wp-otis-ridge
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: pats-peak
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 114
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 103
+    source_id: facts-northeast1-wp-pats-peak
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: pico
+  open_typical:
+    value: 12-11
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-04
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 115
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: pleasant-mountain
+  open_typical:
+    value: 12-04
+    source_id: facts-northeast1-ots-pleasant-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-04
+    source_id: facts-northeast1-ots-pleasant-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 122
+    source_id: facts-northeast1-ots-pleasant-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 245
+    source_id: facts-northeast1-wp-pleasant-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia article: "245 skiable acres".'
+- resort_id: powder-ridge-ski-area
+  open_typical:
+    value: 12-19
+    source_id: facts-northeast1-ots-ct-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 86
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 60
+    source_id: facts-northeast1-wp-powder-ridge-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 80
+    source_id: facts-northeast1-wp-powder-ridge-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: quoggy-jo-ski-center
+  open_typical:
+    value: 12-15
+    source_id: facts-northeast1-skiresort-quoggy-jo
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-15
+    source_id: facts-northeast1-skiresort-quoggy-jo
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 91
+    source_id: facts-northeast1-skiresort-quoggy-jo
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: ragged-mountain-resort
+  open_typical:
+    value: 12-04
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-04
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 122
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: saddleback-mountain
+  open_typical:
+    value: 12-04
+    source_id: facts-northeast1-ots-saddleback
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-18
+    source_id: facts-northeast1-ots-saddleback
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 136
+    source_id: facts-northeast1-ots-saddleback
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 225
+    source_id: facts-northeast1-wp-saddleback-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 600
+    source_id: facts-northeast1-wp-saddleback-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: saskadena-six
+  open_typical:
+    value: 12-19
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-29
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 101
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: ski-bradford
+  open_typical:
+    value: 12-19
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 86
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 48
+    source_id: facts-northeast1-wp-ski-bradford
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: ski-butternut
+  open_typical:
+    value: 12-11
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 108
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 115
+    source_id: facts-northeast1-wp-ski-butternut
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: ski-sundown
+  open_typical:
+    value: 12-04
+    source_id: facts-northeast1-ots-ct-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date. One OnTheSnow table lists a Dec 12 opening; the resort overview value Dec
+      04 is used.
+  close_typical:
+    value: 03-28
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 115
+    source_id: facts-northeast1-ots-ct-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 70
+    source_id: facts-northeast1-wp-ski-sundown
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia article: "70 acres of skiable terrain".'
+- resort_id: ski-ward
+  open_typical:
+    value: 11-14
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 121
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: smugglers-notch-resort
+  open_typical:
+    value: 11-27
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 136
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 312
+    source_id: facts-northeast1-wp-smugglers-notch-resort
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: spruce-mountain-ski-slope
+  open_typical:
+    value: 12-15
+    source_id: facts-northeast1-skiresort-spruce
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-15
+    source_id: facts-northeast1-skiresort-spruce
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 91
+    source_id: facts-northeast1-skiresort-spruce
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: storrs-hill-ski-area
+  open_typical:
+    value: 12-15
+    source_id: facts-northeast1-skiresort-storrs-hill
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-15
+    source_id: facts-northeast1-skiresort-storrs-hill
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 91
+    source_id: facts-northeast1-skiresort-storrs-hill
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: stowe
+  open_typical:
+    value: 11-20
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-25
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 157
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: stratton
+  open_typical:
+    value: 11-18
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-12
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 146
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: sugarbush
+  open_typical:
+    value: 11-21
+    source_id: facts-northeast1-ots-vt-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 05-02
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 163
+    source_id: facts-northeast1-ots-vt-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: sugarloaf
+  open_typical:
+    value: 11-15
+    source_id: facts-northeast1-wp-sugarloaf
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia: "The Sugarloaf season runs from mid-November through early May". Mapped with mid = 15, early = 05, late = 25. OnTheSnow projects Nov 20 to Apr 25 for 2026-27 (search result).'
+  close_typical:
+    value: 05-05
+    source_id: facts-northeast1-wp-sugarloaf
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia: "The Sugarloaf season runs from mid-November through early May". Mapped with mid = 15, early = 05, late = 25. OnTheSnow projects Nov 20 to Apr 25 for 2026-27 (search result).'
+  length_days:
+    value: 172
+    source_id: facts-northeast1-wp-sugarloaf
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: sunday-river
+  open_typical:
+    value: 11-15
+    source_id: facts-northeast1-ots-sunday-river
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-18
+    source_id: facts-northeast1-ots-sunday-river
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 155
+    source_id: facts-northeast1-ots-sunday-river
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: tenney-mountain-resort
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 128
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  acres:
+    value: 110
+    source_id: facts-northeast1-wp-tenney-mountain-resort
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: titcomb-mountain
+  open_typical:
+    value: 12-05
+    source_id: facts-northeast1-skiresort-titcomb
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  close_typical:
+    value: 03-25
+    source_id: facts-northeast1-skiresort-titcomb
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" mapped with mid = 15, early = 05, late = 25. Skiresort.info general season.
+  length_days:
+    value: 111
+    source_id: facts-northeast1-skiresort-titcomb
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 85
+    source_id: facts-northeast1-wp-titcomb-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 45
+    source_id: facts-northeast1-wp-titcomb-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: wachusett-mountain-ski-area
+  open_typical:
+    value: 11-21
+    source_id: facts-northeast1-ots-ma-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-09
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 140
+    source_id: facts-northeast1-ots-ma-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 100
+    source_id: facts-northeast1-wp-wachusett-mountain-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 110
+    source_id: facts-northeast1-wp-wachusett-mountain-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: waterville-valley
+  open_typical:
+    value: 11-28
+    source_id: facts-northeast1-ots-waterville-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 04-11
+    source_id: facts-northeast1-ots-waterville-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date. The New Hampshire projected closing list gives the same date.
+  length_days:
+    value: 135
+    source_id: facts-northeast1-ots-waterville-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: whaleback-mountain
+  open_typical:
+    value: 12-26
+    source_id: facts-northeast1-ots-nh-open
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date.
+  length_days:
+    value: 79
+    source_id: facts-northeast1-ots-nh-close
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 110
+    source_id: facts-northeast1-wp-whaleback-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 85
+    source_id: facts-northeast1-wp-whaleback-mountain
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+- resort_id: wildcat
+  open_typical:
+    value: 11-15
+    source_id: facts-northeast1-wp-wildcat
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia: "the ski and snowboard season generally lasts from mid-November through early May". Mapped with mid = 15, early = 05, late = 25. OnTheSnow projects Dec 02 to Apr 04 for 2026-27 (search
+      result).'
+  close_typical:
+    value: 05-05
+    source_id: facts-northeast1-wp-wildcat
+    as_of: 2026-10-13
+    confidence: estimated
+    note: 'Wikipedia: "the ski and snowboard season generally lasts from mid-November through early May". Mapped with mid = 15, early = 05, late = 25. OnTheSnow projects Dec 02 to Apr 04 for 2026-27 (search
+      result).'
+  length_days:
+    value: 172
+    source_id: facts-northeast1-wp-wildcat
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+- resort_id: yawgoo-valley-ski-area
+  open_typical:
+    value: 12-12
+    source_id: facts-northeast1-ots-yawgoo-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 opening date, used as the typical date.
+  close_typical:
+    value: 03-14
+    source_id: facts-northeast1-ots-yawgoo-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projected 2026-27 closing date, used as the typical date. The OnTheSnow New England opening and closing lists give the same dates.
+  length_days:
+    value: 93
+    source_id: facts-northeast1-ots-yawgoo-valley
+    as_of: 2026-10-13
+    confidence: estimated
+    note: computed from typical dates
+  annual_snowfall_in:
+    value: 39
+    source_id: facts-northeast1-wp-yawgoo-valley-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.
+  acres:
+    value: 36
+    source_id: facts-northeast1-wp-yawgoo-valley-ski-area
+    as_of: 2026-10-13
+    confidence: estimated
+    note: Wikipedia infobox.

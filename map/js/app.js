@@ -35,8 +35,16 @@ const els = {
   devBadge: $('dev-badge'),
 };
 
-// The map module starts downloading now, alongside the data; it runs once MapLibre is here.
-const mapModule = import('./map.js');
+// The WebGL map starts on the first click (owner decision 9). MapLibre and the map module download once the page
+// has loaded and gone idle, so they never compete with the first paint; a click before then fetches them at once.
+let mapModulePromise = null;
+const mapModule = () => (mapModulePromise ||= import('./map.js'));
+function prefetchMap() {
+  mapModule().catch(() => { mapModulePromise = null; });
+  const l = document.createElement('link');
+  l.rel = 'preload'; l.as = 'script'; l.href = MAPLIBRE_URL;
+  document.head.append(l);
+}
 
 if (config.isDevData && els.devBadge) {
   els.devBadge.hidden = false;
@@ -85,13 +93,14 @@ function summary(index, view) {
  * Runs MapLibre (preloaded by the page head) once the panel has painted, so its parse and the WebGL setup
  * never delay the first paint. Resolves with window.maplibregl.
  */
+const MAPLIBRE_URL = '/map/vendor/maplibre-gl/maplibre-gl.js';
 let mapLibrePromise = null;
 function whenMapLibre() {
   if (window.maplibregl) return Promise.resolve(window.maplibregl);
   if (mapLibrePromise) return mapLibrePromise;
   mapLibrePromise = new Promise((resolve, reject) => {
     const s = document.createElement('script');
-    s.src = '/map/vendor/maplibre-gl/maplibre-gl.js';
+    s.src = MAPLIBRE_URL;
     const done = () => (window.maplibregl ? resolve(window.maplibregl) : reject(new Error('MapLibre failed to load')));
     s.onload = done;
     s.onerror = done;
@@ -273,7 +282,9 @@ async function main() {
   const loadDetails = () => index.loadDetails().then(() => panel.fillSources()).catch(() => {
     for (const el of els.content.querySelectorAll('.src-pending')) el.textContent = 'Source record pending';
   });
-  window.addEventListener('load', () => idle(loadDetails), { once: true });
+  const afterLoad = (fn) => (document.readyState === 'complete' ? idle(fn) : window.addEventListener('load', () => idle(fn), { once: true }));
+  afterLoad(loadDetails);
+  afterLoad(prefetchMap);
 
   let starting = null;
   function startMap() {
@@ -296,7 +307,7 @@ async function main() {
         // Start the worker threads before the map constructor occupies the main thread.
         if (typeof m.prewarm === 'function') m.prewarm();
         return m;
-      }), mapModule]);
+      }), mapModule()]);
       mapCtl = createMap(els.map, index, maplibregl, {
         getPadding: padding,
         onPick(target, current) {
