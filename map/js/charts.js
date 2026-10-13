@@ -161,6 +161,9 @@ function mount(Chart, canvas, cfg) {
   return c;
 }
 
+/** One chart per task, so drawing five charts never blocks the page for long. False once root has left the page. */
+const nextChart = (root) => new Promise((resolve) => { setTimeout(() => resolve(root.isConnected), 0); });
+
 /** Render resort climate charts into root. */
 export async function renderResortCharts(root, climate, defs = null) {
   const Chart = await loadChartJs();
@@ -195,14 +198,17 @@ export async function renderResortCharts(root, climate, defs = null) {
     data: { labels: labels(), datasets: [bar('Snowfall', snow, SERIES[0])] },
     options: { scales: axes({ unit: '"' }), plugins: { legend: { display: false }, tooltip: tooltipUnit(' in') } },
   });
+  if (!(await nextChart(root))) return;
   mount(Chart, f2.canvas, {
     data: { labels: labels(), datasets: [bar('Powder days', powder, SERIES[0]), bar('Banner days', banner, SERIES[1])] },
     options: { scales: axes(), plugins: { legend: { position: 'top', align: 'start' }, tooltip: tooltipUnit(' days') } },
   });
+  if (!(await nextChart(root))) return;
   mount(Chart, f3.canvas, {
     data: { labels: labels(), datasets: [bar('Storm depth', storm, SERIES[0])] },
     options: { scales: axes({ unit: '"' }), plugins: { legend: { display: false }, tooltip: tooltipUnit(' in') } },
   });
+  if (!(await nextChart(root))) return;
   if (hasMix) {
     const seg = (label, key, color, top) => bar(label, pct(key), color,
       { borderRadius: top ? { topLeft: 4, topRight: 4 } : 0, borderSkipped: false, borderWidth: { top: 2 }, barPercentage: 0.8 });
@@ -217,6 +223,7 @@ export async function renderResortCharts(root, climate, defs = null) {
       },
     });
   }
+  if (!(await nextChart(root))) return;
   mount(Chart, f5.canvas, {
     data: {
       labels: labels(),

@@ -1,6 +1,6 @@
 // Side panel (desktop) / bottom sheet (phone) content for each level.
 import { config } from './config.js';
-import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts } from './data.js';
+import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts, whenPainted } from './data.js';
 import {
   FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, ACCESS_LABEL, TRAILMAP_FORMAT, tagLabel,
 } from './labels.js';
@@ -388,7 +388,8 @@ export function createPanel(root, index, {
       climateRoot.append(h('p', { class: 'not-verified' }, 'Climate data is being compiled.'));
     } else {
       climateRoot.append(h('p', { class: 'loading' }, 'Loading climate data'));
-      loadClimate(r.id).then(async (climate) => {
+      // Charts wait for the first paint: a canvas drawn while the first frame is in progress blocks the page.
+      Promise.all([loadClimate(r.id), whenPainted()]).then(async ([climate]) => {
         if (my !== token) return;
         clear(climateRoot);
         if (!climate) { climateRoot.append(h('p', { class: 'not-verified' }, 'Climate data is being compiled.')); return; }

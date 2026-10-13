@@ -725,7 +725,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   4. The hidden list view (about 2,000 nodes) and a forced layout lengthened the startup task.
 * **Changes:**
   1. Background work waits for the window `load` event and the first contentful paint (`whenPainted` in `data.js`,
-     the font loader in the page head). Job postings (`loadPostings`) wait for the first paint too.
+     the font loader in the page head). Job postings (`loadPostings`, which bring Zod onto cluster pages) and the
+     climate charts wait for the first paint too; the charts then draw one per task.
   2. The first map frame is an inline SVG (`preview.js`); the compositor draws it off the main thread.
   3. Startup runs as three short tasks. The list view builds the first time it opens. The first render skips a
      forced layout.
