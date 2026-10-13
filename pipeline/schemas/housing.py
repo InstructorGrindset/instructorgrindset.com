@@ -151,7 +151,9 @@ class RentBaseline(StrictModel):
 # ------------------------------------------------------------------- transit
 class TransitRoute(StrictModel):
     id: str = Field(min_length=1)          # "<agency>:<route_id>", unique across agencies
-    agency: str = Field(min_length=1)
+    agency: str = Field(min_length=1)      # the feed slug
+    agency_name: Optional[str] = None      # agency.txt agency_name of the operator
+    agency_url: Optional[str] = Field(default=None, pattern=r"^https?://")
     short_name: Optional[str] = None
     long_name: Optional[str] = None
     color: Optional[str] = Field(default=None, pattern=r"^#[0-9A-Fa-f]{6}$")
@@ -237,13 +239,22 @@ class HousingOut(HousingSite):
     commutes: list[CommuteOut] = Field(default_factory=list)
 
 
+class TransitAgency(StrictModel):
+    name: str = Field(min_length=1)
+    url: Optional[str] = Field(default=None, pattern=r"^https?://")
+
+
 class TransitFeedRef(StrictModel):
-    """One feed shown on a detail map, with its validity (``as_of`` is the start)."""
+    """One feed shown on a detail map, with its validity (``as_of`` is the start), the agencies whose
+    routes it shows, and the schedule note flags (``covers_winter``, ``ended``; null when unknown)."""
 
     source_id: Slug
     agency: Slug
     as_of: dt.date
     valid_to: Optional[dt.date] = None
+    agencies: list[TransitAgency] = Field(default_factory=list)
+    covers_winter: Optional[bool] = None
+    ended: Optional[bool] = None
 
     @field_validator("source_id")
     @classmethod

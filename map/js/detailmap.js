@@ -1,5 +1,6 @@
 // Resort detail map layers (Phase 5): base area, lifts, housing, commutes, transit, drive time isochrones.
 import { config } from './config.js';
+import { transitSchedule, transitNote } from './labels.js';
 
 const C = config.basemap.colors;
 const EMPTY = { type: 'FeatureCollection', features: [] };
@@ -109,8 +110,22 @@ export function addDetailLayers(map) {
 const fc = (features) => ({ type: 'FeatureCollection', features });
 const pt = (lon, lat, properties) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [lon, lat] }, properties });
 
+// Feeds of the detail file last passed to groupsWithData, for the transit legend (detailcontrols.js).
+let legendFeeds = [];
+
+/** [{ agencies: [{ name, url }], schedule, note }] for the transit legend of the current detail map. */
+export function transitLegend() { return legendFeeds; }
+
+/** Legend rows for a detail file's transit feeds. */
+export function transitFeeds(detail) {
+  const t = detail && detail.transit;
+  if (!t) return [];
+  return t.feeds.map((f) => ({ agencies: f.agencies, schedule: transitSchedule(f), note: transitNote(f) }));
+}
+
 /** Which layer groups have data in a detail file. */
 export function groupsWithData(detail) {
+  legendFeeds = transitFeeds(detail);
   if (!detail) return [];
   const out = [];
   if (detail.isochrones.length) out.push('isochrones');
@@ -146,7 +161,10 @@ export function setDetailData(map, detail) {
   }
   set('detail-iso', fc(detail.isochrones.map((i) => ({ type: 'Feature', geometry: i.geometry, properties: { minutes: i.minutes } }))));
   const t = detail.transit;
-  set('detail-transit-routes', fc(t ? t.routes.map((r) => ({ type: 'Feature', geometry: r.geometry, properties: { id: r.id, color: hex(r.color), name: r.short_name || r.long_name || r.id } })) : []));
+  const feedOf = new Map(t ? t.feeds.map((f) => [f.agency, f]) : []);
+  set('detail-transit-routes', fc(t ? t.routes.map((r) => ({ type: 'Feature', geometry: r.geometry, properties: {
+    id: r.id, color: hex(r.color), name: r.short_name || r.long_name || r.id,
+    agency: r.agency_name || '', schedule: transitSchedule(feedOf.get(r.agency)) || '' } })) : []));
   set('detail-transit-stops', fc(t ? t.stops.map((s) => pt(s.lon, s.lat, { id: s.id, name: s.name })) : []));
   set('detail-lifts', fc(detail.lifts.features.map((f) => ({ type: 'Feature', geometry: f.geometry, properties: { name: f.properties.name || null, lift_type: f.properties.lift_type || null } }))));
   set('detail-housing', fc(detail.housing.map((s) => pt(s.lon, s.lat, { id: s.id, name: s.name, type: s.type, precision: s.precision }))));

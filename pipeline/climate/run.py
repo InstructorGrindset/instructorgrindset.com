@@ -701,6 +701,12 @@ Summary: {summary or 'no resorts'}.
 | Resort | Tier | Snowfall source | Derived annual (in) | Published annual (in) | Published source | Difference | Status | Note |
 |---|---|---|---|---|---|---|---|---|
 """ + "\n".join(rows) + "\n"
+    # Keep the SNOTEL station section that pipeline/climate/snotel_stations.py writes below the resort table.
+    from pipeline.climate.snotel_stations import VALIDATION_MARKER  # noqa: PLC0415
+
+    old = path.read_text(encoding="utf-8") if path.is_file() else ""
+    if VALIDATION_MARKER in old:
+        text += "\n" + VALIDATION_MARKER + old.split(VALIDATION_MARKER, 1)[1]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
 

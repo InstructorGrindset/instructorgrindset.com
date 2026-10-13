@@ -60,8 +60,13 @@ def test_transit_feed_currency_settings(cfg, repo_root):
     assert t.max_validity_years == 3 and t.simplify_tolerance_m == 10
     assert (t.walk_speed_kmh, t.max_walk_km) == (None, None)   # owner decision 6: no walking model
     data = yaml.safe_load((repo_root / "config/definitions.yaml").read_text())
+    assert (t.winter_window.start, t.winter_window.end, t.winter_min_overlap_days) == ("12-01", "03-31", 30)
     data["transit"]["target_season"] = {"start": "2027-04-30", "end": "2026-11-01"}
     with pytest.raises(ValidationError, match="end is before start"):
+        Definitions.model_validate(data)
+    data = yaml.safe_load((repo_root / "config/definitions.yaml").read_text())
+    data["transit"]["winter_window"] = {"start": "12-01", "end": "02-30"}
+    with pytest.raises(ValidationError, match="day is out of range"):
         Definitions.model_validate(data)
 
 

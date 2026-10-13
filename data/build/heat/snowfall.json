@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T15:33:13Z",
+  "generated_at": "2026-10-13T18:50:12Z",
   "mode": "snowfall",
   "units": "in",
   "scale": "classed",
@@ -79,13 +79,20 @@
     "field": "ANN-SNOW-NORMAL",
     "stations": 5568
   },
+  "terrain": {
+    "source_id": "aws-terrain-tiles",
+    "as_of": "2026-10-13",
+    "confidence": "published",
+    "step_deg": 0.0625
+  },
   "pockets": {
     "field": "snow.annual_avg_in",
     "resorts": 274,
-    "radius_km": 25.0
+    "radius_km": 25.0,
+    "terrain": true
   },
   "method": {
-    "interpolation": "adaptive modified Shepard",
+    "interpolation": "gradient plus inverse distance on log snowfall",
     "neighbors": 10,
     "min_distance_km": 12.0,
     "grid_step_px": 4,
@@ -93,7 +100,15 @@
     "full_opacity_km": 300.0,
     "fade_end_km": 800.0,
     "floor_alpha": 0.35,
-    "fade_to": "alpha"
+    "fade_to": "alpha",
+    "elevation": {
+      "log_offset_in": 10.0,
+      "max_gradient_per_km": 2.0,
+      "spread_prior_m": 150.0,
+      "max_extrapolation_m": 0.0,
+      "terrain_smooth_cells": 0,
+      "pocket_terrain": true
+    }
   },
   "attribution": "Snowfall normals: NOAA NCEI 1991 to 2020",
   "isolines": {
@@ -119,18 +134,18 @@
       {
         "region": "lower48",
         "file": "snowfall-isolines-lower48.geojson",
-        "bytes": 120866,
-        "features": 222
+        "bytes": 138627,
+        "features": 247
       },
       {
         "region": "alaska",
         "file": "snowfall-isolines-alaska.geojson",
-        "bytes": 12976,
-        "features": 28
+        "bytes": 13472,
+        "features": 29
       }
     ]
   },
-  "inputs_sha256": "4efc3a61e232f7ebc3772f1ef8d23b14d59502a79bea9985b7302d7dfbc6b781",
+  "inputs_sha256": "637402b78062a9c14a837bab0c1d2fd273a5c3b6033dd68cbb1c33a29e999d69",
   "rasters": [
     {
       "region": "lower48",
@@ -155,8 +170,10 @@
           24.4
         ]
       ],
-      "bytes": 159914,
+      "bytes": 174938,
       "stations": 5486,
+      "mountain_stations": 0,
+      "terrain": true,
       "pockets": 271
     },
     {
@@ -182,8 +199,10 @@
           51.2
         ]
       ],
-      "bytes": 109746,
+      "bytes": 115757,
       "stations": 82,
+      "mountain_stations": 0,
+      "terrain": true,
       "pockets": 3
     }
   ]

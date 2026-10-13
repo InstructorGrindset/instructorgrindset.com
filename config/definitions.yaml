@@ -139,6 +139,11 @@ transit:
   # current; the build drops such extracts with a warning. Move target_season forward each year.
   target_season: {start: 2026-11-01, end: 2027-04-30}
   max_validity_years: 3
+  # Schedule note on the detail map. A feed covers winter when its validity overlaps a yearly
+  # winter_window (Dec 1 to Mar 31) by at least winter_min_overlap_days; other feeds get an offseason
+  # note. A winter feed whose validity ended before the build date gets a last season note.
+  winter_window: {start: "12-01", end: "03-31"}
+  winter_min_overlap_days: 30
   # Bus commute = walk to stop + scheduled ride + walk from stop, with no waiting time.
   # Alexandre sets these; bus commutes stay null until then.
   walk_speed_kmh: null
@@ -271,6 +276,23 @@ heat:
       first_water_year: 2011
       last_water_year: 2025
       min_complete_years: 8
+    elevation:
+      # Elevation aware field (pipeline/heat.py gids_fit), gradient plus inverse distance after Nalder and Wein
+      # (1998) on u = ln(snowfall + log_offset_in): at each node the neighbours' Shepard weights give the value,
+      # and a weighted slope of u with station height gives the local gradient, shrunk toward zero when the
+      # neighbours span little height (slope = Sxy / (Sxx + spread_prior_m^2)) and clamped to 0 ..
+      # max_gradient_per_km (snowfall never falls with height). Every pixel then reads the model at its own
+      # ground height (data/raw/terrain, AWS Terrain Tiles, mean height per 1/16 degree cell), clamped to the
+      # neighbours' height range widened by max_extrapolation_m, and the value is clamped to the neighbours'
+      # range, so the field never invents a value above the highest or below the lowest station near it.
+      # Without the terrain extract the field is plain station interpolation.
+      log_offset_in: 10
+      max_gradient_per_km: 2.0
+      spread_prior_m: 150
+      max_extrapolation_m: 0
+      # Pockets follow the terrain: below the resort's ground height the pocket pulls toward the resort's value
+      # moved down the local gradient, so it fills the slopes and fades into the valleys instead of a ring.
+      pocket_terrain: true
     neighbors: 10
     min_distance_km: 12
     pocket_radius_km: 25

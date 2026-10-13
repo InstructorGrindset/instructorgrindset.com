@@ -43,11 +43,14 @@ export function createListView(root, index) {
 
   function keyOf(v) { return [v.stateCode || '', v.clusterId || '', v.resortId || ''].join('/'); }
 
-  build();
+  // Built the first time it is shown (show()), so the first paint skips about 2,000 hidden nodes.
+  let built = false;
   return {
-    setFilter(next) { filter = next; build(); if (current) this.highlight(current); },
+    show() { if (!built) { built = true; build(); if (current) this.highlight(current); } },
+    setFilter(next) { filter = next; if (built) { build(); if (current) this.highlight(current); } },
     highlight(view) {
       current = view;
+      if (!built) return;
       for (const a of root.querySelectorAll('[aria-current]')) a.removeAttribute('aria-current');
       const k = keyOf({ stateCode: view.stateCode, clusterId: view.clusterId, resortId: view.resortId });
       const el = root.querySelector(`a[data-key="${CSS.escape(k)}"]`);

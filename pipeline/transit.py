@@ -34,6 +34,7 @@ option is kept. No commute is produced while those settings are null.
 from __future__ import annotations
 
 import argparse
+import calendar
 import csv
 import datetime as dt
 import io
@@ -133,13 +134,45 @@ def defs_status(feed: dict, today: dt.date, defs: Any) -> tuple[bool, str]:
     return feed_status(d("valid_from"), d("valid_to"), today, defs.staleness.max_age_months, season, t.max_validity_years)
 
 
+def _month_day(year: int, md: str) -> dt.date:
+    m, d = int(md[:2]), int(md[3:])
+    return dt.date(year, m, min(d, calendar.monthrange(year, m)[1]))
+
+
+def winter_overlap_days(valid_from: dt.date, valid_to: dt.date, start_md: str, end_md: str) -> int:
+    """Longest overlap in days between the validity period and one yearly ``start_md`` to ``end_md`` window
+    (both "MM-DD"; an end before the start runs into the next year)."""
+    wraps = end_md < start_md
+    best = 0
+    for y in range(valid_from.year - 1, valid_to.year + 1):
+        lo = max(_month_day(y, start_md), valid_from)
+        hi = min(_month_day(y + 1 if wraps else y, end_md), valid_to)
+        if hi >= lo:
+            best = max(best, (hi - lo).days + 1)
+    return best
+
+
+def schedule_flags(feed: dict, today: dt.date, defs: Any) -> dict:
+    """``{covers_winter, ended}`` for the detail map's schedule note; None where the feed's dates are unknown."""
+    def d(k: str) -> Optional[dt.date]:
+        v = feed.get(k)
+        return dt.date.fromisoformat(str(v)) if v else None
+    start, end = d("valid_from"), d("valid_to")
+    if start is None or end is None:
+        return {"covers_winter": None, "ended": None}
+    w = defs.transit.winter_window
+    days = winter_overlap_days(start, end, w.start, w.end)
+    return {"covers_winter": days >= defs.transit.winter_min_overlap_days, "ended": end < today}
+
+
 def current_extracts(extracts: Sequence[dict], today: dt.date, defs: Any) -> tuple[list[dict], list[str]]:
-    """Extracts whose feed is current on ``today``, and a warning for each one dropped."""
+    """Extracts whose feed is current on ``today``, each with its ``schedule`` flags, and a warning for
+    each one dropped."""
     kept, warnings = [], []
     for ex in extracts:
         ok, why = defs_status(ex.get("feed") or {}, today, defs)
         if ok:
-            kept.append(ex)
+            kept.append({**ex, "schedule": schedule_flags(ex.get("feed") or {}, today, defs)})
         else:
             warnings.append(f"transit extract '{ex.get('agency')}' is not current ({why}); not shown. "
                             "Refresh it with `python -m pipeline.transit fetch` and `extract`")
@@ -160,6 +193,7 @@ def extract_gtfs(zip_path: Path, agency: str, anchors: Sequence[tuple[float, flo
     shuttle or paratransit). ``simplify_tolerance_m`` simplifies route lines (Douglas Peucker).
     ``feed_meta`` (catalog id, urls, license) is merged into the ``feed`` block with the feed's own dates."""
     with zipfile.ZipFile(zip_path) as zf:
+        agencies = {a.get("agency_id", ""): a for a in _table(zf, "agency.txt")}
         routes = {r["route_id"]: r for r in _table(zf, "routes.txt")}
         trips = {t["trip_id"]: t for t in _table(zf, "trips.txt")}
         stops = {s["stop_id"]: s for s in _table(zf, "stops.txt")}
@@ -231,12 +265,19 @@ def extract_gtfs(zip_path: Path, agency: str, anchors: Sequence[tuple[float, flo
         key = (trips[tid]["route_id"], tuple(st["stop_id"] for st in seq))
         patterns.setdefault(key, []).append([max(0.0, o - t0) for o in offs])
 
+    def operator(r: dict) -> dict:
+        """The GTFS agency running a route; agency_id may be blank when the feed has one agency."""
+        a = agencies.get(r.get("agency_id", "")) or (next(iter(agencies.values())) if len(agencies) == 1 else {})
+        url = (a.get("agency_url") or "").strip()
+        return {"agency_name": " ".join((a.get("agency_name") or "").split()) or None,
+                "agency_url": url if url.startswith(("https://", "http://")) else None}
+
     pfx = f"{agency}:"
     out_routes = []
     for rid in sorted(route_lines):
         r = routes.get(rid, {})
         out_routes.append({
-            "id": pfx + rid, "agency": agency, "short_name": r.get("route_short_name") or None,
+            "id": pfx + rid, "agency": agency, **operator(r), "short_name": r.get("route_short_name") or None,
             "long_name": r.get("route_long_name") or None, "color": _color(r.get("route_color", "")),
             "geometry": {"type": "MultiLineString", "coordinates": [[list(p) for p in line] for line in sorted(route_lines[rid])]},
         })

@@ -421,6 +421,9 @@ body.list-mode .detail-layers { display: none; }
 .detail-legend[hidden] { display: none; }
 .detail-legend li { display: flex; align-items: center; gap: .4rem; }
 .detail-legend .legend-note { color: var(--map-faint); }
+.detail-legend .legend-feed { flex-direction: column; align-items: flex-start; gap: .05rem; margin-top: .25rem; }
+.detail-legend .feed-agencies { color: var(--ink); font-weight: 600; }
+.detail-legend a { color: var(--accent); }
 .chip-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 .chip-sq { width: 12px; height: 10px; border-radius: 2px; display: inline-block; opacity: .75; flex-shrink: 0; }
 .base-dot { background: #fff; box-shadow: 0 0 0 2px #0a0e14, 0 0 0 3px #fff; }

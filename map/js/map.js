@@ -323,6 +323,12 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       if (lift.length) return { kind: 'lift', id: lift[0].id, name: lift[0].properties.name ? `Lift: ${lift[0].properties.name}` : 'Unnamed lift', passive: true };
       const stop = map.queryRenderedFeatures(lb, { layers: layersIn(['detail-transit-stop']) });
       if (stop.length) return { kind: 'stop', id: stop[0].properties.id, name: `Stop: ${stop[0].properties.name}`, passive: true };
+      const route = map.queryRenderedFeatures(lb, { layers: layersIn(['detail-transit-line']) });
+      if (route.length) {
+        // "Route: Intown, Vail Transit. Schedule for May 21 to Dec 6, 2026"
+        const p = route[0].properties;
+        return { kind: 'route', id: p.id, name: `Route: ${p.name}${p.agency ? `, ${p.agency}` : ''}${p.schedule ? `. ${p.schedule}` : ''}`, passive: true };
+      }
     }
     const c = map.queryRenderedFeatures(point, { layers: layersIn(['clusters-fill', 'inset-clusters-fill']) });
     if (c.length) {
@@ -341,8 +347,8 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
   }
 
   function setHover(rawTarget) {
-    // Base area and transit stops have no feature ids; they show a tooltip only.
-    const target = rawTarget && (rawTarget.kind === 'base' || rawTarget.kind === 'stop') ? null : rawTarget;
+    // Base area, transit stops and routes have no feature ids; they show a tooltip only.
+    const target = rawTarget && ['base', 'stop', 'route'].includes(rawTarget.kind) ? null : rawTarget;
     if (hovered && (!target || hovered.kind !== target.kind || hovered.id !== target.id)) {
       map.setFeatureState(hoverKey(hovered), { hover: false });
       hovered = null;

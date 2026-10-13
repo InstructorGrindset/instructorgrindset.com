@@ -640,3 +640,185 @@ def test_snowfall_region_colors_each_pixel_by_its_class(heat_cfg):
     assert tuple(rgba[4 * k:4 * k + 4]) == (*heat.hex_rgb(mode.colors[heat.class_index(info["values"][k], mode.breaks)]), 255)
     far = 2 * g.width + 2
     assert tuple(rgba[4 * far:4 * far + 3]) == heat.hex_rgb(mode.colors[heat.class_index(80, mode.breaks)])
+
+
+# ------------------------------------------------------------------ SNOTEL blend and the elevation aware field
+def _elev_cfg(heat_cfg, **kw):
+    return heat_cfg.snowfall.elevation.model_copy(update=kw)
+
+
+def _nbrs(points, lon=-111.0, lat=40.0):
+    idx = heat.PointIndex(points, 0.5)
+    return idx.nearest_points(lon, lat, len(points))
+
+
+def test_gids_fit_finds_the_height_gradient_and_reads_it_at_any_height(heat_cfg):
+    """Stations whose log snowfall rises 1.2 per km of height: the fit recovers the slope, and the field at a
+    height between the stations follows it instead of the distance weighted mean."""
+    c = 10.0
+    pts = []
+    for n in range(12):
+        z = 1.5 + 0.2 * n  # 1.5 to 3.7 km
+        lon, lat = -111.0 + 0.05 * math.cos(n), 40.0 + 0.05 * math.sin(n)
+        pts.append(heat.Point(lon, lat, math.exp(3.0 + 1.2 * z) - c, z * 1000))
+    nb = _nbrs(pts)
+    fit = heat.gids_fit(nb, 10, 1.0, c, 2.0, 0.05, 0.0)
+    assert fit.beta == pytest.approx(1.2, rel=0.03)
+    hi, lo = heat.gids_value(fit, 3.5, c), heat.gids_value(fit, 1.7, c)
+    assert hi == pytest.approx(math.exp(3.0 + 1.2 * 3.5) - c, rel=0.06)
+    assert lo == pytest.approx(math.exp(3.0 + 1.2 * 1.7) - c, rel=0.06)
+    # Clamped: above every neighbour the field stays at the highest neighbour's height and value.
+    top = max(p.value for _, p in nb[:10])
+    assert heat.gids_value(fit, 9.0, c) <= top + 1e-6
+    assert heat.gids_value(fit, -1.0, c) >= min(p.value for _, p in nb[:10]) - 1e-6
+
+
+def test_gids_fit_without_height_spread_is_the_plain_shepard_value(heat_cfg):
+    rnd = random.Random(3)
+    pts = [heat.Point(-111 + rnd.uniform(-1, 1), 40 + rnd.uniform(-1, 1), rnd.uniform(20, 300), 1500.0)
+           for _ in range(30)]
+    nb = _nbrs(pts, -110.9, 40.1)
+    fit = heat.gids_fit(nb[:11], 10, 12.0, 10.0, 2.0, 0.15, 0.0)
+    assert abs(fit.beta) < 1e-12
+    plain = heat.shepard([(d, p.value) for d, p in nb[:11]], 10, 12.0)
+    assert heat.gids_value(fit, 3.0, 10.0) == pytest.approx(plain, rel=1e-9)
+
+
+def test_gids_gradient_never_turns_negative_and_shrinks_with_a_small_height_span():
+    c = 10.0
+    falling = [heat.Point(-111 + 0.01 * n, 40, 300 - 20 * n, 1500 + 200 * n) for n in range(8)]
+    assert heat.gids_fit(_nbrs(falling), 6, 1.0, c, 2.0, 0.15, 0.0).beta == 0.0
+    steep = [heat.Point(-111 + 0.01 * n, 40, math.exp(2 + 5 * (1.5 + 0.2 * n)) - c, 1500 + 200 * n) for n in range(8)]
+    assert heat.gids_fit(_nbrs(steep), 6, 1.0, c, 2.0, 0.15, 0.0).beta == 2.0  # clamped to the maximum
+    flat_span = [heat.Point(-111 + 0.01 * n, 40, math.exp(2 + 1.2 * (1.5 + 0.005 * n)) - c, 1500 + 5 * n)
+                 for n in range(8)]
+    assert heat.gids_fit(_nbrs(flat_span), 6, 1.0, c, 2.0, 0.15, 0.0).beta < 0.01
+
+
+def _ridge(lon):
+    """A north south ridge 3 km high at -111.0, 1 km in the valleys."""
+    return 1000 + 2000 * max(0.0, 1 - abs(lon + 111.0) / 0.3)
+
+
+def _Dem(west=-115.0, north=43.0, east=-107.0, south=36.0, step=1 / 32):
+    from pipeline.terrain import Dem
+    w, hgt = round((east - west) / step), round((north - south) / step)
+    return Dem(west, north, step, w, hgt, [_ridge(west + (i + 0.5) * step) for _ in range(hgt) for i in range(w)])
+
+
+def test_elevation_field_follows_the_terrain_between_stations(heat_cfg):
+    g = heat.Grid.for_box(-112.0, 39.5, -110.0, 40.5, 16)
+    cov = [1.0] * (g.width * g.height)
+    dem = _Dem()
+    stations = []
+    for k in range(9):
+        lat = 39.55 + 0.11 * k
+        stations += [heat.Point(-111.0, lat, 400, 3000), heat.Point(-111.9, lat, 40, 1000),
+                     heat.Point(-110.1, lat, 40, 1000)]
+    elev = _elev_cfg(heat_cfg, spread_prior_m=100, max_extrapolation_m=0)
+    heights = heat.terrain_heights(g, dem, cov)
+    vals, dist, betas = heat.solve_elevation_field(g, cov, stations, g, 10, 5.0, 4, heights, elev)
+    plain, _ = heat.solve_field(g, cov, stations, g, 10, 5.0, 4)
+    j = g.height // 2
+    row = lambda f: f[j * g.width:(j + 1) * g.width]  # noqa: E731
+    i_ridge, i_flank = int(g.x_of(-111.0)), int(g.x_of(-111.45))
+    # On the ridge the field holds the high stations; on the low flank, closer to the valley stations than the
+    # plain interpolation suggests, it drops with the ground.
+    assert row(vals)[i_ridge] == pytest.approx(400, rel=0.1)
+    assert row(vals)[i_flank] < row(plain)[i_flank]
+    assert all(40 - 1e-6 <= v <= 400 + 1e-6 for v in vals if v is not None)
+    assert max(b for b in betas if b is not None) > 0.5
+    assert all(d is not None and d >= 0 for d in dist)
+
+
+def test_terrain_pockets_never_lower_the_field_and_fade_below_the_resort():
+    g = heat.Grid.for_box(-112.5, 40.0, -111.0, 41.0, 40)
+    n = g.width * g.height
+    rnd = random.Random(11)
+    bg = [rnd.uniform(50, 500) for _ in range(n)]
+    heights = [rnd.uniform(1.2, 3.5) for _ in range(n)]
+    grads = [rnd.uniform(0, 2) for _ in range(n)]
+    terrain = heat.PocketTerrain(heights, grads, 10.0)
+    pockets = [heat.Point(-111.64, 40.59, 545), heat.Point(-111.9, 40.4, 420), heat.Point(-112.2, 40.8, 60)]
+    out, near = heat.apply_pockets(g, bg, pockets, 20, terrain, [2.8, 2.5, 1.5])
+    assert all(o >= b for o, b in zip(out, bg)) and any(o > b for o, b in zip(out, bg))
+    assert all(o <= max(b, 545) + 1e-9 for o, b in zip(out, bg))
+    # The pocket target: the resort's value at or above its height, lower below it along the gradient.
+    assert heat.pocket_target(545, 2.8, 3.0, 1.2, 10) == 545
+    assert heat.pocket_target(545, 2.8, 1.8, 1.2, 10) == pytest.approx(555 * math.exp(-1.2) - 10)
+    assert heat.pocket_target(545, 2.8, None, 1.2, 10) == 545 and heat.pocket_target(545, None, 1.0, 1.2, 10) == 545
+    # Same resort, same distance: a valley pixel rises less than a slope pixel.
+    flat = [200.0] * n
+    k_valley = int(g.y_of(40.59)) * g.width + int(g.x_of(-111.64)) + 2
+    hv = list(heights); hv[k_valley] = 1.5
+    gv = [1.2] * n
+    valley, _ = heat.apply_pockets(g, flat, pockets[:1], 20, heat.PocketTerrain(hv, gv, 10.0), [2.8])
+    hs = list(heights); hs[k_valley] = 2.9
+    slope, _ = heat.apply_pockets(g, flat, pockets[:1], 20, heat.PocketTerrain(hs, gv, 10.0), [2.8])
+    assert 200 <= valley[k_valley] < slope[k_valley]
+
+
+def test_refined_isolines_read_the_terrain_pockets_like_the_raster():
+    g = heat.Grid.for_box(-112.5, 40.0, -111.0, 41.0, 20)
+    n = g.width * g.height
+    bg = [100.0] * n
+    pocket = heat.Point(-111.75, 40.5, 500)
+    heights = [2.0 + 0.8 * math.sin(i / 3.0) for i in range(n)]
+    terrain = heat.PocketTerrain(heights, [1.0] * n, 10.0)
+    values, _ = heat.apply_pockets(g, bg, [pocket], 25, terrain, [2.5])
+    lines = heat.refined_isolines(g, bg, values, [pocket], 25, [300], 2, terrain, [2.5])[300]
+    coarse = heat.contour_lines(values, g.width, g.height, [300])[300]
+    assert lines and coarse
+    # Without the gradient the terrain pocket is the plain round pocket.
+    flat = heat.PocketTerrain(heights, [0.0] * n, 10.0)
+    plain, _ = heat.apply_pockets(g, bg, [pocket], 25)
+    same, _ = heat.apply_pockets(g, bg, [pocket], 25, flat, [2.5])
+    assert same == plain
+
+
+def test_write_snowfall_blends_snotel_stations_and_records_the_sources(tmp_path, heat_cfg):
+    h = _small(heat_cfg)
+    noaa = [heat.Point(-114 + i * 0.5, 37 + j * 0.5, 40 + 5 * i, 1500.0) for i in range(11) for j in range(11)]
+    noaa += [heat.Point(-148, 61, 70, 100.0), heat.Point(-146, 62.5, 90, 300.0)]
+    snotel = [heat.Point(-111.6, 40.6, 420, 2900.0), heat.Point(-111.2, 39.9, 260, 2700.0),
+              heat.Point(-147, 61.5, 300, 900.0)]
+    dems = {"lower48": _Dem(), "alaska": _Dem(-151.0, 64.0, -144.0, 59.0, 1 / 8)}
+    kw = dict(stations=noaa, pockets=[heat.Point(-111.64, 40.59, 545)], outlines=SQUARE_STATES, heat=h,
+              source={"id": "fixture-noaa"}, generated_at="2026-10-13T00:00:00Z", as_of="2026-10-13")
+    plain = heat.write_snowfall(tmp_path / "plain", **kw)
+    m = heat.write_snowfall(tmp_path / "blend", mountain_stations=snotel,
+                            mountain_source={"id": "fixture-snotel", "accessed_date": "2026-10-13",
+                                             "water_years": [2011, 2025]},
+                            dems=dems, terrain_source={"id": "fixture-terrain", "accessed_date": "2026-10-13"}, **kw)
+    assert plain["attribution"] == heat.NOAA_ATTRIBUTION and "mountain_stations" not in plain
+    assert m["attribution"] == "Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL"
+    assert m["background"]["stations"] == len(noaa) and m["background"]["confidence"] == "published"
+    assert m["mountain_stations"] == {"source_id": "fixture-snotel", "as_of": "2026-10-13", "confidence": "estimated",
+                                      "field": "annual_snowfall_in",
+                                      "method": "median of water year totals of daily SWE gain / new snow density",
+                                      "water_years": [2011, 2025], "stations": 3}
+    assert m["terrain"]["source_id"] == "fixture-terrain" and m["pockets"]["terrain"] is True
+    assert m["method"]["interpolation"].startswith("gradient plus inverse distance")
+    assert m["method"]["elevation"]["log_offset_in"] == h.snowfall.elevation.log_offset_in
+    assert {r["region"]: r["mountain_stations"] for r in m["rasters"]} == {"lower48": 2, "alaska": 1}
+    assert all(r["terrain"] for r in m["rasters"]) and m["inputs_sha256"] != plain["inputs_sha256"]
+    # The blend changes the picture: the mountain stations raise the field around them.
+    a = (tmp_path / "plain" / "heat" / "snowfall-lower48.png").read_bytes()
+    b = (tmp_path / "blend" / "heat" / "snowfall-lower48.png").read_bytes()
+    assert a != b
+    # Without terrain the SNOTEL stations still blend in, with plain station interpolation.
+    flat = heat.write_snowfall(tmp_path / "flat", mountain_stations=snotel,
+                               mountain_source={"id": "fixture-snotel", "accessed_date": "2026-10-13"}, **kw)
+    assert flat["method"]["interpolation"] == "adaptive modified Shepard" and "terrain" not in flat
+    assert flat["mountain_stations"]["stations"] == 3 and flat["pockets"]["terrain"] is False
+
+
+def test_build_blends_the_committed_snotel_extract():
+    """The committed snowfall manifest names the NRCS SNOTEL stations and the terrain."""
+    m = json.loads((REPO / "data" / "build" / "heat" / "snowfall.json").read_text())
+    assert m["attribution"] == "Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL"
+    assert m["mountain_stations"]["source_id"] == "nrcs-snotel-awdb-annual-snowfall"
+    assert m["mountain_stations"]["confidence"] == "estimated" and m["mountain_stations"]["stations"] > 500
+    assert m["terrain"]["source_id"] == "aws-terrain-tiles"
+    sources = {s["id"] for s in json.loads((REPO / "data" / "build" / "sources.json").read_text())["sources"]}
+    assert {"nrcs-snotel-awdb-annual-snowfall", "aws-terrain-tiles"} <= sources

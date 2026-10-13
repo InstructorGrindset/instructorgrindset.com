@@ -155,7 +155,7 @@ export async function createRecolor(root, index, { onChange, announce }) {
       ? `Heat map of ${m.label.toLowerCase()}, on a scale of ${lg.ticks.join(', ')}.`
       : d.min === d.max
         ? `Heat map of ${m.label.toLowerCase()}. Every resort with data shows ${SPOKEN[key](d.min)}.`
-        : `Heat map of ${m.label.toLowerCase()}. Resorts range from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.${surface.raster && surface.raster.background ? ' The background comes from NOAA station normals.' : ''}`);
+        : `Heat map of ${m.label.toLowerCase()}. Resorts range from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.${surface.raster && surface.raster.background ? (surface.raster.mountain_stations ? ' The background comes from NOAA station normals and NRCS SNOTEL mountain stations.' : ' The background comes from NOAA station normals.') : ''}`);
   }
 
   function drawLegend(m, d, surface) {
@@ -171,8 +171,13 @@ export async function createRecolor(root, index, { onChange, announce }) {
       return h('span', { class: `heat-tick${edge ? ` heat-tick-${edge}` : ''}`, style: `left:${x.toFixed(1)}%` }, tick(t));
     });
     const noaa = surface.raster && surface.raster.background;
+    // Snowfall: NOAA normals, plus NRCS SNOTEL mountain stations and the terrain when the manifest has them.
+    const snotel = noaa && surface.raster.mountain_stations;
+    const shaped = snotel && surface.raster.terrain ? ', shaped by the terrain' : '';
     const notes = noaa
-      ? [`Background: NOAA station normals, 1991 to 2020, with a ${fmtInt(surface.raster.pockets.radius_km)} km pocket of each resort's published snowfall.`,
+      ? [snotel
+        ? `Background: NOAA station normals, 1991 to 2020, and NRCS SNOTEL mountain stations${shaped}, with a ${fmtInt(surface.raster.pockets.radius_km)} km pocket of each resort's published snowfall.`
+        : `Background: NOAA station normals, 1991 to 2020, with a ${fmtInt(surface.raster.pockets.radius_km)} km pocket of each resort's published snowfall.`,
         'Colors between stations and resorts are smoothed estimates. Tooltips and resort pages show only sourced values.']
       : ['Colors between resorts are smoothed estimates. Tooltips and resort pages show only sourced values.',
         field.fade_to === 'neutral'

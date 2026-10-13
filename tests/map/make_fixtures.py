@@ -457,13 +457,22 @@ def detail_record(r):
          "rent_monthly": sourced({"low": 1200, "high": 1600}, "fixture-model", "estimated"), "occupancy": "private", "deposit": None,
          "eligibility_note": None, "confidence": "estimated", "verified_date": AS_OF, "commutes": []},
     ]
-    transit = {"routes": [{"id": "fixture-blue", "agency": "Fixture Transit", "short_name": "Blue", "long_name": "Fixture Blue Line",
+    transit = {"routes": [{"id": "fixture-blue", "agency": "fixture-transit", "agency_name": "Fixture Transit",
+                           "agency_url": "https://transit.example.com/", "short_name": "Blue", "long_name": "Fixture Blue Line",
                            "color": "3987E5", "geometry": {"type": "MultiLineString", "coordinates": [[town, [lon, lat]]]}},
-                          {"id": "fixture-red", "agency": "Fixture Transit", "short_name": "Red", "long_name": None, "color": "bad",
+                          {"id": "fixture-red", "agency": "fixture-shuttle", "agency_name": "Fixture Shuttle",
+                           "agency_url": "javascript:alert(1)", "short_name": "Red", "long_name": None, "color": "bad",
                            "geometry": {"type": "LineString", "coordinates": [[round(lon - 0.08, 4), round(lat + 0.04, 4)], [lon, lat]]}}],
                "stops": [{"id": "s1", "name": "Fixture Town Center", "lat": town[1], "lon": town[0], "route_ids": ["fixture-blue"]},
                          {"id": "s2", "name": "Fixture Base Stop", "lat": lat, "lon": lon, "route_ids": ["fixture-blue", "fixture-red"]}],
-               "source_ids": ["fixture-model"]}
+               "source_ids": ["fixture-model"],
+               # An offseason feed that is still running, and a winter feed that has ended (the bad link is dropped).
+               "feeds": [{"source_id": "fixture-model", "agency": "fixture-transit", "as_of": "2026-05-21", "valid_to": "2026-12-06",
+                          "agencies": [{"name": "Fixture Transit", "url": "https://transit.example.com/"}],
+                          "covers_winter": False, "ended": False},
+                         {"source_id": "fixture-model", "agency": "fixture-shuttle", "as_of": "2025-11-19", "valid_to": "2026-04-12",
+                          "agencies": [{"name": "Fixture Shuttle", "url": "javascript:alert(1)"}],
+                          "covers_winter": True, "ended": True}]}
     return {"version": 1, "generated_at": GENERATED_AT, "resort_id": r["id"], "base_area": base,
             "lifts": lifts_for(lon, lat, ["Fixture Express", "Fixture Summit Chair", "Fixture Bowl Lift", None]),
             "housing": housing,
@@ -542,8 +551,13 @@ def write_heat_fixture(cfg, resorts, outlines):
     (out_dir / "heat").mkdir(parents=True, exist_ok=True)
     for old in (out_dir / "heat").glob("*"):
         old.unlink()
+    # Invented mountain stations along the fixture ridges stand in for NRCS SNOTEL (test data only).
+    mountain = [heat.Point(-111.6 + 0.3 * k, 40.4 + 0.1 * k, 380 - 20 * k, 2900.0 - 50 * k) for k in range(4)]
+    mountain += [heat.Point(-120.2, 39.2 + 0.2 * k, 400 - 30 * k, 2400.0) for k in range(3)]
     heat.write_snowfall(out_dir, stations=stations, pockets=pockets, outlines=outlines, heat=h,
-                        source={"id": "fixture-noaa-normals"}, generated_at=GENERATED_AT, as_of=AS_OF)
+                        source={"id": "fixture-noaa-normals"}, generated_at=GENERATED_AT, as_of=AS_OF,
+                        mountain_stations=mountain,
+                        mountain_source={"id": "fixture-snotel", "accessed_date": AS_OF, "water_years": [2011, 2025]})
     # heat/season.json and its PNG from the fixture resorts' synthetic season lengths (the real transform).
     h = h.model_copy(update={"season": h.season.model_copy(update={"px_per_degree": 8})})
     heat.write_season(out_dir, resorts=resorts, outlines=outlines, heat=h, generated_at=GENERATED_AT)

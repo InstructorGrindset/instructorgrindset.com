@@ -37,9 +37,9 @@
   <link rel="modulepreload" href="/map/js/preview.js">
   <link rel="modulepreload" href="/map/js/camera.js">
   <link rel="modulepreload" href="/map/js/inset.js">
-  <!-- The web font loads after the page (and MapLibre) so it never competes with the map; text uses the fallback font until then. -->
+  <!-- The web font loads after the window load event and the first contentful paint, so it never competes with the first paint; text uses the fallback font until then. -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script>addEventListener("load",function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},{once:true})</script>
+  <script>(function(){var n=0,p=0,f=function(){if(++n!==2)return;var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},g=function(){if(!p){p=1;f()}};addEventListener("load",f,{once:true});try{new PerformanceObserver(function(x,o){if(x.getEntriesByName("first-contentful-paint").length){o.disconnect();g()}}).observe({type:"paint",buffered:true})}catch(e){g()}setTimeout(g,8000)})()</script>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Illinois Resorts and Clusters for Snowsports Instructors • Instructor Grindset","url":"https://instructorgrindset.com/map/il/","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Other Illinois","url":"https://instructorgrindset.com/map/il/other-il/"}]}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Snowsports Career Map","item":"https://instructorgrindset.com/map/"},{"@type":"ListItem","position":2,"name":"Illinois","item":"https://instructorgrindset.com/map/il/"}]}]}</script>
 </head>

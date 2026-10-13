@@ -395,8 +395,8 @@ async function desktop(browser, base) {
       check(mine.some((u) => u.endsWith(`/heat/${hm.mode}.json`)) && mine.some((u) => u.endsWith(`/heat/${hm.mode}-lower48.png`))
         && !w.requests.slice(0, before).some((u) => u.includes(`/heat/${hm.mode}`)), `${hm.mode}: the sidecar and the PNG are fetched once the mode is selected`);
       if (hm.mode === 'snowfall') {
-        check(src.credit && src.attrib.includes('Snowfall normals: NOAA NCEI 1991 to 2020'), `snowfall: attribution names the NOAA normals (${src.attrib.slice(0, 160)})`);
-        check(/NOAA station normals, 1991 to 2020/.test(text), 'snowfall: legend names the NOAA background');
+        check(src.credit && src.attrib.includes('Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL'), `snowfall: attribution names the NOAA normals and NRCS SNOTEL (${src.attrib.slice(0, 160)})`);
+        check(/NOAA station normals, 1991 to 2020, and NRCS SNOTEL mountain stations/.test(text), 'snowfall: legend names the NOAA and SNOTEL background');
         check(/Grey: under 24 in, little or no snow/.test(text) && /Lines every 50 in from 200, bolder every 100/.test(text),
           'snowfall: legend explains the grey class and the isolines');
         await page.waitForFunction(() => Boolean(window.__careerMap.mapCtl.map.getLayer('heat-iso-label')), null, { timeout: 10000 }).catch(() => {});
@@ -633,6 +633,26 @@ async function desktop(browser, base) {
   await page.mouse.move(lp.x, lp.y);
   await page.waitForTimeout(200);
   check((await page.locator('.map-tip').innerText()).startsWith('Lift: Fixture'), 'lift hover shows its name');
+  // Transit legend: each feed's agency (linked when agency.txt gives a web link), schedule dates and note.
+  const feedRows = page.locator('#detail-layers .legend-feed');
+  const feedText = await feedRows.allInnerTexts();
+  check(feedText.length === 2 && feedText[0].includes('Fixture Transit') && feedText[0].includes('Schedule for May 21 to Dec 6, 2026')
+    && feedText[0].includes('Offseason schedule. Winter ski service can differ; check the agency.')
+    && feedText[1].includes('Fixture Shuttle') && feedText[1].includes('Schedule for Nov 19, 2025 to Apr 12, 2026')
+    && feedText[1].includes("Last season's schedule. This winter's service can differ; check the agency."),
+  `transit legend shows each feed's agency, dates and schedule note (${feedText.map((t) => t.replace(/\n/g, ' / ')).join(' | ')})`);
+  check(await feedRows.nth(0).locator('a[href="https://transit.example.com/"][target="_blank"][rel="noopener"]').count() === 1
+    && await feedRows.nth(1).locator('a').count() === 0, 'agency name links to its site; a link that is not http or https is dropped');
+  // Route hover: route, agency and schedule (housing hidden so its soft circles do not catch the pointer).
+  await page.locator('#layer-housing').uncheck();
+  const blue = fx.transit.routes[0].geometry.coordinates[0];
+  const rp = await page.evaluate((ll) => { const m = window.__careerMap.mapCtl.map; const p = m.project(ll); const r = m.getContainer().getBoundingClientRect(); return { x: r.left + p.x, y: r.top + p.y }; },
+    [blue[0][0] * 0.6 + blue[1][0] * 0.4, blue[0][1] * 0.6 + blue[1][1] * 0.4]);
+  await page.mouse.move(rp.x, rp.y);
+  await page.waitForTimeout(200);
+  const routeTip = await page.locator('.map-tip').innerText();
+  check(routeTip === 'Route: Blue, Fixture Transit. Schedule for May 21 to Dec 6, 2026', `route hover shows the route, agency and schedule (${routeTip})`);
+  await page.locator('#layer-housing').check();
   await page.locator('#layer-isochrones').uncheck();
   check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('detail-iso-fill', 'visibility')) === 'none', 'drive time toggle hides isochrones');
   await page.locator('#layer-isochrones').check();
@@ -1261,6 +1281,9 @@ async function realData(browser, base) {
         if (hasTransit) {
           const t = await page.evaluate(() => ['detail-transit-line', 'detail-transit-stop'].map((id) => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: [id] }).length));
           check(t[0] > 0 && t[1] > 0, `real data: GTFS transit routes and stops draw for ${withDetail.name} (${t[0]} line pieces, ${t[1]} stops; ${file.transit.source_ids.join(', ')})`);
+          const rows = await page.locator('#detail-layers .legend-feed').allInnerTexts();
+          check(rows.length === file.transit.feeds.length && rows.every((r) => /Schedule (for|from) [A-Z][a-z]{2} \d/.test(r)),
+            `real data: transit legend lists each feed with its schedule dates (${rows.map((r) => r.replace(/\n/g, ' / ')).join(' | ')})`);
         }
         check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'real data: housing empty state');
         const endpoint = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'definitions.json'), 'utf8')).submissions.endpoint;

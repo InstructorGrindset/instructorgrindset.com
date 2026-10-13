@@ -505,8 +505,11 @@ def test_phase5_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, c
     assert flats["rent_monthly"]["confidence"] == "estimated" and flats["rent_monthly"]["source_id"] == "hud-fmr-fy2026"
     assert flats["commutes"] == []  # no cached route; bus model settings are null in config
     assert d["transit"]["source_ids"] == ["gtfs-fixture"]
+    # the operator from agency.txt and the schedule note flags (valid through the 2026 to 27 winter, still running)
     assert d["transit"]["feeds"] == [{"source_id": "gtfs-fixture", "agency": "fixture", "as_of": "2026-01-01",
-                                      "valid_to": "2027-12-31"}]
+                                      "valid_to": "2027-12-31", "agencies": [{"name": "Fixture Transit", "url": None}],
+                                      "covers_winter": True, "ended": False}]
+    assert {r["agency_name"] for r in d["transit"]["routes"]} == {"Fixture Transit"}
     assert [i["minutes"] for i in d["isochrones"]] == [15, 30, 45]
 
     sources = {s["id"] for s in _load(out, "sources.json")["sources"]}

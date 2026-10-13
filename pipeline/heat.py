@@ -335,16 +335,18 @@ class NodeFit:
 
 def gids_fit(nbrs: Sequence[tuple[float, Point]], k: int, min_km: float, c: float, max_gradient: float,
              spread_prior_km: float, extrapolation_km: float) -> Optional[NodeFit]:
-    """Gradient plus inverse distance (after Nalder and Wein 1998) on log snowfall, from up to k + 1 nearest
-    [(distance km, station)], nearest first.
+    """Gradient plus inverse distance (after Nalder and Wein 1998) with a multiplicative height gradient, from up
+    to k + 1 nearest [(distance km, station)], nearest first.
 
-    The value weights are the adaptive modified Shepard weights of :func:`shepard`. The local gradient of
+    The value weights w_i are the adaptive modified Shepard weights of :func:`shepard`. The local gradient beta of
     u = ln(v + c) with station height is a weighted least squares slope with the square roots of those weights
     (inverse distance with the same taper, so it changes smoothly between nodes), shrunk toward zero when the
     neighbours span little height: beta = Sxy / (Sxx + spread_prior^2), then clamped to [0, max_gradient]
-    (snowfall never falls with height). Then u(z) = sum w_i (u_i + beta (z - z_i)) / sum w_i = a + beta z. The
-    height a pixel is read at is clamped to the neighbours' range widened by ``extrapolation_km``, and u to the
-    neighbours' range, so the field never goes above the highest or below the lowest neighbour.
+    (snowfall never falls with height). Each station's value is moved to the pixel's height along that gradient
+    and the moved values are averaged: v(z) = sum w_i ((v_i + c) exp(beta (z - z_i)) - c) = exp(a + beta z) - c
+    with a = ln sum w_i (v_i + c) exp(-beta z_i). With beta 0 this is the plain Shepard value. The height a pixel
+    is read at is clamped to the neighbours' range widened by ``extrapolation_km``, and u to the neighbours'
+    range, so the field never goes above the highest or below the lowest neighbour.
     """
     if not nbrs:
         return None
@@ -360,7 +362,6 @@ def gids_fit(nbrs: Sequence[tuple[float, Point]], k: int, min_km: float, c: floa
     us = [math.log(max(p.value, 0.0) + c) for _, p in pairs]
     zs = [(p.elev_m or 0.0) / 1000.0 for _, p in pairs]
     ws = [w / sw for w, _ in pairs]
-    ubar = sum(w * u for w, u in zip(ws, us))
     zbar = sum(w * z for w, z in zip(ws, zs))
     beta = 0.0
     if all(p.elev_m is not None for _, p in pairs):
@@ -374,7 +375,8 @@ def gids_fit(nbrs: Sequence[tuple[float, Point]], k: int, min_km: float, c: floa
         beta = min(max_gradient, max(0.0, sxy / (sxx + spread_prior_km ** 2)))
     used = [u for (w, _), u in zip(pairs, us) if w > 0] or us
     zused = [z for (w, _), z in zip(pairs, zs) if w > 0] or zs
-    return NodeFit(a=ubar - beta * zbar, beta=beta, z_lo=min(zused) - extrapolation_km,
+    a = math.log(sum(w * math.exp(u - beta * (z - zbar)) for w, u, z in zip(ws, us, zs))) - beta * zbar
+    return NodeFit(a=a, beta=beta, z_lo=min(zused) - extrapolation_km,
                    z_hi=max(zused) + extrapolation_km, u_lo=min(used), u_hi=max(used), dist_km=nbrs[0][0])
 
 
@@ -1147,12 +1149,27 @@ def solve_field(grid: Grid, cov: Sequence[float], points: Sequence[Point], box: 
 
 
 def render_region(grid: Grid, *, stations: Sequence[Point], pockets: Sequence[Point], polygons: list,
-                  heat: Any, domain: tuple[float, float], scale: str, box: Any) -> tuple[bytes, dict]:
-    """Snowfall RGBA bytes of one region and a summary (colored pixels, pockets drawn, the pixel field)."""
+                  heat: Any, domain: tuple[float, float], scale: str, box: Any, dem: Any = None) -> tuple[bytes, dict]:
+    """Snowfall RGBA bytes of one region and a summary (colored pixels, pockets drawn, the pixel field).
+
+    With a terrain grid ``dem`` (``pipeline.terrain.Dem``) and ``heat.snowfall.elevation`` set, the background
+    follows the ground height (:func:`solve_elevation_field`) and, with ``pocket_terrain``, so do the pockets.
+    Otherwise it is plain station interpolation (:func:`solve_field`)."""
     snow = heat.snowfall
     cov = coverage(grid, polygons)
-    background, dist = solve_field(grid, cov, stations, box, snow.neighbors, snow.min_distance_km, snow.grid_step_px)
-    values, near = apply_pockets(grid, background, pockets, snow.pocket_radius_km)
+    elev = snow.elevation
+    terrain: Optional[PocketTerrain] = None
+    pocket_km: Optional[list[Optional[float]]] = None
+    if dem is not None and elev is not None and all(p.elev_m is not None for p in stations):
+        heights = terrain_heights(grid, dem, cov)
+        background, dist, betas = solve_elevation_field(grid, cov, stations, box, snow.neighbors, snow.min_distance_km,
+                                                        snow.grid_step_px, heights, elev)
+        if elev.pocket_terrain:
+            terrain = PocketTerrain(heights, betas, elev.log_offset_in)
+            pocket_km = [None if (z := dem.sample(p.lon, p.lat)) is None else z / 1000.0 for p in pockets]
+    else:
+        background, dist = solve_field(grid, cov, stations, box, snow.neighbors, snow.min_distance_km, snow.grid_step_px)
+    values, near = apply_pockets(grid, background, pockets, snow.pocket_radius_km, terrain, pocket_km)
     for k, pd in near.items():
         if dist[k] is not None and pd < dist[k]:
             dist[k] = pd
@@ -1163,7 +1180,8 @@ def render_region(grid: Grid, *, stations: Sequence[Point], pockets: Sequence[Po
     classes = (list(mode.breaks), list(mode.colors), grid.width, grid.height) if scale == "classed" else None
     buf, colored = paint(values, dist, cov, color_of, fade, classes=classes)
     drawn = sum(1 for p in pockets if 0 <= grid.x_of(p.lon) < grid.width and 0 <= grid.y_of(p.lat) < grid.height)
-    return bytes(buf), {"covered_pixels": colored, "pockets": drawn, "values": values, "background": background}
+    return bytes(buf), {"covered_pixels": colored, "pockets": drawn, "values": values, "background": background,
+                        "terrain": terrain, "pocket_heights_km": pocket_km}
 
 
 def inputs_digest(*parts: Any) -> str:
@@ -1260,20 +1278,45 @@ def _classes(mode: Any) -> dict:
             "legend": {"ticks": list(mode.legend_ticks or mode.breaks), "compress_below": mode.legend_compress_below}}
 
 
+def _dem_digest(dems: Optional[dict]) -> Optional[list]:
+    if not dems:
+        return None
+    out = []
+    for name in sorted(dems):
+        d = dems[name]
+        out.append([name, d.west, d.north, d.step, d.width, d.height,
+                    hashlib.sha256(json.dumps([round(v, 1) for v in d.values]).encode()).hexdigest()])
+    return out
+
+
+SNOTEL_ATTRIBUTION = "Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL"
+NOAA_ATTRIBUTION = "Snowfall normals: NOAA NCEI 1991 to 2020"
+
+
 def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequence[Point], outlines: dict, heat: Any,
-                   source: dict, generated_at: str, as_of: str) -> dict:
+                   source: dict, generated_at: str, as_of: str, mountain_stations: Sequence[Point] = (),
+                   mountain_source: Optional[dict] = None, dems: Optional[dict] = None,
+                   terrain_source: Optional[dict] = None) -> dict:
     """Write ``heat/snowfall-<region>.png``, ``heat/snowfall-isolines-<region>.geojson`` and ``heat/snowfall.json``;
     skip the work when inputs are unchanged.
 
     ``stations`` are the usable NOAA stations; ``source`` is the NOAA source record (``id`` used).
-    Returns the manifest.
+    ``mountain_stations`` are the usable NRCS SNOTEL stations (``mountain_source``: their record, with ``id``,
+    ``accessed_date`` and ``water_years``), blended into the same field. ``dems`` ({region: Dem}) makes the
+    field follow the ground height (``heat.snowfall.elevation``; ``terrain_source`` is its record). Returns the
+    manifest.
     """
     heat_dir = out_dir / "heat"
     mode = heat.modes.snowfall
     iso = heat.snowfall.isolines
     regions = {"lower48": heat.regions.lower48, "alaska": heat.regions.alaska}
-    stations = [Point(normalize_lon(p.lon, p.lat), p.lat, p.value) for p in stations]
+    noaa = [Point(normalize_lon(p.lon, p.lat), p.lat, p.value, p.elev_m) for p in stations]
+    mountain = [Point(normalize_lon(p.lon, p.lat), p.lat, p.value, p.elev_m) for p in mountain_stations]
+    stations = noaa + mountain
     pockets = [Point(normalize_lon(p.lon, p.lat), p.lat, p.value) for p in pockets]
+    use_terrain = bool(dems) and heat.snowfall.elevation is not None and all(p.elev_m is not None for p in stations)
+    if use_terrain and heat.snowfall.elevation.terrain_smooth_cells:
+        dems = {k: d.smoothed(heat.snowfall.elevation.terrain_smooth_cells) for k, d in dems.items()}
 
     def inside(p: Point, box: Any) -> bool:
         return box.west <= p.lon <= box.east and box.south <= p.lat <= box.north
@@ -1287,8 +1330,11 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
         ticks = list(mode.ticks or [lo, hi])
     else:
         ticks = sqrt_ticks(mode.ticks or [], lo, hi) if mode.scale == "sqrt" else [lo, hi]
-    digest = inputs_digest([(p.lon, p.lat, p.value) for p in stations], [(p.lon, p.lat, p.value) for p in pockets],
-                           outlines.get("features", []), heat.model_dump(mode="json"), MANIFEST_VERSION, _code_digest())
+    digest = inputs_digest([(p.lon, p.lat, p.value, p.elev_m) for p in stations],
+                           [(p.lon, p.lat, p.value) for p in pockets], outlines.get("features", []),
+                           heat.model_dump(mode="json"), MANIFEST_VERSION, _code_digest(),
+                           _dem_digest(dems) if use_terrain else None, len(mountain),
+                           (mountain_source or {}).get("id"), (terrain_source or {}).get("id"))
     manifest_path = heat_dir / "snowfall.json"
     old = _load_manifest(manifest_path, digest)
     if old:
@@ -1301,7 +1347,8 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
             continue
         grid = Grid.for_box(box.west, box.south, box.east, box.north, heat.snowfall.px_per_degree)
         rgba, info = render_region(grid, stations=stations, pockets=pockets, polygons=polys, heat=heat,
-                                   domain=(lo, hi), scale=mode.scale, box=box)
+                                   domain=(lo, hi), scale=mode.scale, box=box,
+                                   dem=(dems or {}).get(name) if use_terrain else None)
         if not info["covered_pixels"]:
             continue
         data = png.encode_rgba(grid.width, grid.height, rgba)
@@ -1309,9 +1356,12 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
         _write_if_changed(heat_dir / image, data)
         rasters.append({"region": name, "image": image, "width": grid.width, "height": grid.height,
                         "coordinates": grid.coordinates(), "bytes": len(data),
-                        "stations": sum(1 for p in stations if inside(p, box)), "pockets": info["pockets"]})
+                        "stations": sum(1 for p in noaa if inside(p, box)),
+                        "mountain_stations": sum(1 for p in mountain if inside(p, box)),
+                        "terrain": bool(use_terrain and (dems or {}).get(name)),
+                        "pockets": info["pockets"]})
         lines = refined_isolines(grid, info["background"], info["values"], pockets, heat.snowfall.pocket_radius_km,
-                                 iso.levels(), iso.supersample)
+                                 iso.levels(), iso.supersample, info["terrain"], info["pocket_heights_km"])
         feats = isoline_features(grid, lines, iso, name)
         body = json.dumps({"type": "FeatureCollection", "features": feats}, separators=(",", ":")).encode()
         file = f"snowfall-isolines-{name}.geojson"
@@ -1332,13 +1382,25 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
         **({} if mode.scale == "classed" else {"ramp": list(heat.ramp.colors)}),
         "background": {"source_id": source["id"], "as_of": as_of, "confidence": "published",
                        "field": "ANN-SNOW-NORMAL", "stations": sum(r["stations"] for r in rasters)},
+        **({"mountain_stations": {
+            "source_id": mountain_source["id"], "as_of": str(mountain_source.get("accessed_date", as_of)),
+            "confidence": "estimated", "field": "annual_snowfall_in",
+            "method": "median of water year totals of daily SWE gain / new snow density",
+            "water_years": list(mountain_source.get("water_years") or []),
+            "stations": sum(r["mountain_stations"] for r in rasters)}} if mountain and mountain_source else {}),
+        **({"terrain": {"source_id": terrain_source["id"], "as_of": str(terrain_source.get("accessed_date", as_of)),
+                        "confidence": "published", "step_deg": next(iter(dems.values())).step}}
+           if use_terrain and terrain_source else {}),
         # Each pocket value is a resort's own sourced snow.annual_avg_in in resorts.json (source there).
-        "pockets": {"field": "snow.annual_avg_in", "resorts": len(pockets), "radius_km": snow.pocket_radius_km},
-        "method": {"interpolation": "adaptive modified Shepard", "neighbors": snow.neighbors,
+        "pockets": {"field": "snow.annual_avg_in", "resorts": len(pockets), "radius_km": snow.pocket_radius_km,
+                    "terrain": bool(use_terrain and snow.elevation and snow.elevation.pocket_terrain)},
+        "method": {"interpolation": "gradient plus inverse distance on log snowfall" if use_terrain
+                   else "adaptive modified Shepard", "neighbors": snow.neighbors,
                    "min_distance_km": snow.min_distance_km, "grid_step_px": snow.grid_step_px,
                    "px_per_degree": snow.px_per_degree, "full_opacity_km": snow.full_opacity_km,
-                   "fade_end_km": snow.fade_end_km, "floor_alpha": snow.floor_alpha, "fade_to": snow.fade_to},
-        "attribution": "Snowfall normals: NOAA NCEI 1991 to 2020",
+                   "fade_end_km": snow.fade_end_km, "floor_alpha": snow.floor_alpha, "fade_to": snow.fade_to,
+                   **({"elevation": snow.elevation.model_dump(mode="json")} if use_terrain else {})},
+        "attribution": SNOTEL_ATTRIBUTION if mountain else NOAA_ATTRIBUTION,
         "isolines": {"levels": iso.levels(), "major_step": iso.major_step, "files": iso_files},
         "inputs_sha256": digest,
         "rasters": rasters,

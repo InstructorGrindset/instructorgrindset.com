@@ -1,5 +1,5 @@
 // User facing labels for facility types and Tier A criteria.
-import { humanize, joinAnd, plural } from './ui.js';
+import { formatIsoDate, humanize, joinAnd, plural } from './ui.js';
 
 export const FACILITY_LABEL = {
   ski_area: 'Ski area',
@@ -89,3 +89,22 @@ export const DISCIPLINE_LABEL = {
   race: 'Race', freeride: 'Freeride', freestyle: 'Freestyle', park: 'Park', nordic: 'Nordic',
   adaptive: 'Adaptive', snowboard: 'Snowboard', moguls: 'Moguls',
 };
+
+// ── Transit schedules on the resort detail map ──
+/** "Schedule for May 21 to Dec 6, 2026" (the year once when both dates share it); null without dates. */
+export function transitSchedule(feed) {
+  if (!feed || !feed.as_of) return null;
+  if (!feed.valid_to) return `Schedule from ${formatIsoDate(feed.as_of)}`;
+  const [a, b] = [formatIsoDate(feed.as_of), formatIsoDate(feed.valid_to)];
+  const sameYear = feed.as_of.slice(0, 4) === feed.valid_to.slice(0, 4);
+  return `Schedule for ${sameYear ? a.replace(/, \d{4}$/, '') : a} to ${b}`;
+}
+
+/** The one line caution under a feed: an offseason schedule, or a winter schedule that has ended. */
+export function transitNote(feed) {
+  if (!feed) return null;
+  if (feed.covers_winter === false) return 'Offseason schedule. Winter ski service can differ; check the agency.';
+  if (feed.covers_winter === true && feed.ended) return "Last season's schedule. This winter's service can differ; check the agency.";
+  if (feed.covers_winter == null) return 'Winter ski service can differ; check the agency.';
+  return null;
+}

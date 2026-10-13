@@ -173,8 +173,11 @@ def assemble_detail(resort: dict, sites: Sequence[HousingSite], lifts_fc: dict, 
             tsources.append(ex["source"]["id"])
             feed = ex.get("feed") or {}
             if feed.get("as_of"):
+                ops = list(dict.fromkeys((r["agency_name"], r.get("agency_url")) for r in hit["routes"] if r.get("agency_name")))
+                flags = ex.get("schedule") or {}
                 feeds.append({"source_id": ex["source"]["id"], "agency": ex["agency"], "as_of": feed["as_of"],
-                              "valid_to": feed.get("valid_to")})
+                              "valid_to": feed.get("valid_to"), "agencies": [{"name": n, "url": u} for n, u in ops],
+                              "covers_winter": flags.get("covers_winter"), "ended": flags.get("ended")})
     transit = ({"routes": routes, "stops": stops, "source_ids": sorted(set(tsources)),
                 "feeds": sorted(feeds, key=lambda f: f["source_id"])} if stops else None)
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T18:23:24Z",
+  "generated_at": "2026-10-13T18:50:12Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -358,6 +358,13 @@
       "title": "Anderson (1976) Alta new snow density relation, as implemented in the NCAR Community Land Model (CTSM SnowHydrologyMod.F90, NewSnowBulkDensity)",
       "accessed_date": "2026-10-13",
       "note": "Estimated density: rho = 50 + 1.7 (T + 15)^1.5 kg/m3 for -15 C < T <= 2 C, 50 kg/m3 at or below -15 C, 50 + 1.7 (17)^1.5 above 2 C, using the snowfall weighted daily mean ERA5 air temperature over each storm at the resort base coordinate. The same relation in g/cm3 is in NWS SNOW-17 (https://github.com/NOAA-OWP/snow17/blob/ea142f94a4788ddf0be7b4d7da59c1f9f552df45/src/snow19/SNEW.f)."
+    },
+    {
+      "id": "aws-terrain-tiles",
+      "url": "https://registry.opendata.aws/terrain-tiles/",
+      "title": "Terrain Tiles on AWS (Mapzen terrarium elevation tiles)",
+      "accessed_date": "2026-10-13",
+      "note": "Mean ground height per 0.0625 degree cell from the terrarium tiles at zoom 6 (https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png). In the United States the tiles are built from USGS 3DEP (formerly NED), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and NOAA ETOPO1, all public domain; ArcticDEM data were created from DigitalGlobe, Inc., imagery and funded under National Science Foundation awards 1043681, 1559691 and 1542736. Used only to shape the snowfall heat map between stations; no height is displayed."
     },
     {
       "id": "career-followups-breckenridge-all-lessons",

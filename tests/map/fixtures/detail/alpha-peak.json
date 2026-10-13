@@ -312,7 +312,9 @@
   "routes": [
    {
     "id": "fixture-blue",
-    "agency": "Fixture Transit",
+    "agency": "fixture-transit",
+    "agency_name": "Fixture Transit",
+    "agency_url": "https://transit.example.com/",
     "short_name": "Blue",
     "long_name": "Fixture Blue Line",
     "color": "3987E5",
@@ -334,7 +336,9 @@
    },
    {
     "id": "fixture-red",
-    "agency": "Fixture Transit",
+    "agency": "fixture-shuttle",
+    "agency_name": "Fixture Shuttle",
+    "agency_url": "javascript:alert(1)",
     "short_name": "Red",
     "long_name": null,
     "color": "bad",
@@ -376,6 +380,36 @@
   ],
   "source_ids": [
    "fixture-model"
+  ],
+  "feeds": [
+   {
+    "source_id": "fixture-model",
+    "agency": "fixture-transit",
+    "as_of": "2026-05-21",
+    "valid_to": "2026-12-06",
+    "agencies": [
+     {
+      "name": "Fixture Transit",
+      "url": "https://transit.example.com/"
+     }
+    ],
+    "covers_winter": false,
+    "ended": false
+   },
+   {
+    "source_id": "fixture-model",
+    "agency": "fixture-shuttle",
+    "as_of": "2025-11-19",
+    "valid_to": "2026-04-12",
+    "agencies": [
+     {
+      "name": "Fixture Shuttle",
+      "url": "javascript:alert(1)"
+     }
+    ],
+    "covers_winter": true,
+    "ended": true
+   }
   ]
  },
  "isochrones": [

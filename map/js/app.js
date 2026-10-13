@@ -60,7 +60,9 @@ function announce(text) {
   requestAnimationFrame(() => { els.status.textContent = text; });
 }
 
+let listView = null;
 function setListView(on) {
+  if (on && listView) listView.show();
   document.body.classList.toggle('list-mode', on);
   els.listToggle.setAttribute('aria-pressed', String(on));
   els.listToggle.textContent = on ? 'Map view' : 'List view';
@@ -110,8 +112,8 @@ function whenMapLibre() {
   return mapLibrePromise;
 }
 
-/** Run fn once the browser has painted content (first-contentful-paint), or after 1.5 s at the latest. */
-function afterFirstPaint(fn) {
+/** Run fn once the browser has painted content (first-contentful-paint), or after `latestMs` at the latest. */
+function afterFirstPaint(fn, latestMs = 1500) {
   let fired = false;
   const go = () => { if (!fired) { fired = true; setTimeout(fn, 0); } };
   try {
@@ -121,8 +123,11 @@ function afterFirstPaint(fn) {
     });
     po.observe({ type: 'paint', buffered: true });
   } catch { /* no paint timing: fall back to the timer */ }
-  setTimeout(go, 1500);
+  setTimeout(go, latestMs);
 }
+
+/** A new task, so long startup work splits into short tasks and the browser can paint in between. */
+const nextTask = () => new Promise((resolve) => { setTimeout(resolve, 0); });
 
 const idle = (fn) => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));
 
@@ -132,6 +137,7 @@ async function main() {
   try {
     index = await loadAll();
     performance.mark('careermap:data');
+    await nextTask();
   } catch (err) {
     console.warn('[map] data load failed:', err.message);
     const panel = createPanel(els.content, null, { onCompare: () => {} });
@@ -147,6 +153,8 @@ async function main() {
   let detailFor = null;
   let detailData = null;
   let filterKey = 'all';
+  let idleReached = false; // the first idle time after the load event and the first paint has come
+  let sourcesWanted = false; // the panel showed a source placeholder before then
 
   async function showDetailControls(groups) {
     if (!detailControls) {
@@ -191,8 +199,17 @@ async function main() {
       applyDetail();
     },
     onSiteSelect: (id) => mapCtl && mapCtl.selectSite(id),
+    onSourcesNeeded: () => { if (idleReached) loadSources(); else sourcesWanted = true; },
   });
   const list = createListView(els.list, index);
+  listView = list;
+
+  // Source records for the panel's source links, and the full data (resort records too).
+  const sourcesFailed = () => {
+    for (const el of els.content.querySelectorAll('.src-pending')) el.textContent = 'Source record pending';
+  };
+  const loadSources = () => index.loadSources().then(() => panel.fillSources()).catch(sourcesFailed);
+  const loadDetails = () => index.loadDetails().then(() => panel.fillSources()).catch(sourcesFailed);
 
   router = createRouter(index, (view, { initial, fellBack }) => {
     if (trailFor && (view.level !== 'resort' || view.resortId !== trailFor.id)) setTrailControl(null);
@@ -205,7 +222,7 @@ async function main() {
     els.panel.classList.toggle('is-wide', view.level === 'compare');
     els.stage.classList.toggle('is-wide', view.level === 'compare');
     const headingEl = panel.render(view);
-    els.scroll.scrollTop = 0;
+    if (!initial) els.scroll.scrollTop = 0; // a fresh page is at the top already; setting it forces a layout
     applyMeta(index, view);
     list.highlight(view);
     if (mapCtl) {
@@ -282,6 +299,7 @@ async function main() {
   router.start();
   performance.mark('careermap:panel');
   els.panel.setAttribute('aria-busy', 'false');
+  await nextTask();
 
   // The WebGL map starts on the first click or tap over the map (owner decision 9, 2026-10-13). Until then a 2D
   // picture of the current view (preview.js) fills the map area with a button that starts it.
@@ -306,12 +324,16 @@ async function main() {
   let resizeTimer = null;
   window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (!mapCtl) drawFrame(); }, 150); });
 
-  // Full records and sources: right away when the view needs them (the panel asked already), else when idle.
-  const loadDetails = () => index.loadDetails().then(() => panel.fillSources()).catch(() => {
-    for (const el of els.content.querySelectorAll('.src-pending')) el.textContent = 'Source record pending';
+  // Background work waits for the window load event and the first contentful paint, then for idle time, so it
+  // never competes with the first paint (a slow first frame used to let 600 KB of it start before the paint).
+  const loaded = new Promise((resolve) => {
+    if (document.readyState === 'complete') resolve(); else window.addEventListener('load', resolve, { once: true });
   });
-  const afterLoad = (fn) => (document.readyState === 'complete' ? idle(fn) : window.addEventListener('load', () => idle(fn), { once: true }));
-  afterLoad(loadDetails);
+  const painted = new Promise((resolve) => afterFirstPaint(resolve, 8000));
+  const afterLoad = (fn) => Promise.all([loaded, painted]).then(() => idle(fn));
+  // When idle: source records if the panel shows source links, and only a cache warming download of the rest
+  // (resorts.json is 2.6 MB; parsing it is a long task). A view that needs full records loads them (panel.js).
+  afterLoad(() => { idleReached = true; if (sourcesWanted) loadSources(); index.prefetchDetails(); });
   afterLoad(prefetchMap);
 
   let starting = null;
@@ -319,7 +341,7 @@ async function main() {
     if (!starting) starting = createWebGLMap();
     return starting;
   }
-  els.map.addEventListener('click', (e) => { if (!state.mapStarted && (e.target === preview || e.target === els.map || e.target === startBtn)) startMap(); });
+  els.map.addEventListener('click', (e) => { if (!state.mapStarted && ((preview && preview.contains(e.target)) || e.target === els.map || e.target === startBtn)) startMap(); });
   state.startMap = startMap;
 
   async function createWebGLMap() {

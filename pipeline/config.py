@@ -185,11 +185,25 @@ class DateWindow(StrictModel):
         return self
 
 
+class MonthDayWindow(StrictModel):
+    """A yearly window of "MM-DD" days; an end before the start runs into the next year (Dec 1 to Mar 31)."""
+    start: str = Field(pattern=r"^\d{2}-\d{2}$")
+    end: str = Field(pattern=r"^\d{2}-\d{2}$")
+
+    @model_validator(mode="after")
+    def _real_days(self) -> "MonthDayWindow":
+        for v in (self.start, self.end):
+            dt.date(2024, int(v[:2]), int(v[3:]))   # a leap year, so 02-29 is allowed
+        return self
+
+
 class TransitDefs(StrictModel):
     search_radius_km: float = Field(gt=0)
     simplify_tolerance_m: Optional[float] = Field(default=None, gt=0, le=50)
     target_season: Optional[DateWindow] = None   # a feed overlapping this window is current
     max_validity_years: float = Field(default=3, gt=0)
+    winter_window: MonthDayWindow = Field(default_factory=lambda: MonthDayWindow(start="12-01", end="03-31"))
+    winter_min_overlap_days: int = Field(default=30, ge=1)
     walk_speed_kmh: Optional[float] = Field(default=None, gt=0)
     max_walk_km: Optional[float] = Field(default=None, gt=0)
 
@@ -370,6 +384,7 @@ class HeatSnowfallElevation(StrictModel):
     max_gradient_per_km: float = Field(ge=0, le=5)
     spread_prior_m: float = Field(gt=0, le=2000)
     max_extrapolation_m: float = Field(ge=0, le=1000)
+    terrain_smooth_cells: int = Field(default=0, ge=0, le=8)
     pocket_terrain: bool = True
 
 

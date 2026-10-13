@@ -131,8 +131,8 @@ classed palette has neighbouring colors closer than 6 in OKLab (x 100) or the wr
 State outlines (simplified) with `properties: { code, name }`.
 
 ### `heat/<mode>.json` and `heat/<mode>-<region>.png` (heat map rasters, `pipeline/heat.py`)
-Two modes are precomputed: `snowfall` (NOAA normals plus resort pockets, with isolines) and `season` (season length from
-the resorts' sourced values only). Manifest version 2:
+Two modes are precomputed: `snowfall` (NOAA normals and NRCS SNOTEL mountain stations, shaped by the terrain, plus
+resort pockets, with isolines) and `season` (season length from the resorts' sourced values only). Manifest version 2:
 ```
 { version: 2, generated_at, mode: "snowfall" | "season", units: "in" | "days", scale: "classed",
   domain: { min, max },                          // snowfall: heat.modes.snowfall.domain (0 to 900); season: the sourced resort range
@@ -143,17 +143,22 @@ the resorts' sourced values only). Manifest version 2:
   // snowfall only:
   background: { source_id: "noaa-ncei-normals-1991-2020", as_of, confidence: "published", field: "ANN-SNOW-NORMAL",
                 stations },                      // usable NOAA stations inside the regions
-  pockets: { field: "snow.annual_avg_in", resorts, radius_km },
+  mountain_stations?: { source_id: "nrcs-snotel-awdb-annual-snowfall", as_of, confidence: "estimated",
+                field: "annual_snowfall_in", method, water_years: [first, last], stations },   // usable SNOTEL stations
+  terrain?: { source_id: "aws-terrain-tiles", as_of, confidence: "published", step_deg },     // when the field follows it
+  pockets: { field: "snow.annual_avg_in", resorts, radius_km, terrain: boolean },
   isolines: { levels: number[], major_step, files: [{ region, file: "snowfall-isolines-<region>.geojson", bytes, features }] },
   // season only:
   values: { field: "season.length_days", resorts, points },   // resorts with a sourced value; points after declustering
   method: { interpolation, neighbors, min_distance_km, grid_step_px, px_per_degree, full_opacity_km, fade_end_km,
-            floor_alpha, fade_to, decluster_km?, no_data_reach_km? },
-  attribution: "Snowfall normals: NOAA NCEI 1991 to 2020" | null,   // season: null (sources sit on each resort record)
+            floor_alpha, fade_to, decluster_km?, no_data_reach_km?,
+            elevation? },                        // snowfall with terrain: heat.snowfall.elevation as configured
+  attribution: "Snowfall: NOAA NCEI 1991 to 2020 normals and NRCS SNOTEL"   // snowfall with SNOTEL stations
+             | "Snowfall normals: NOAA NCEI 1991 to 2020" | null,          // NOAA only; season: null
   inputs_sha256,                                 // points, outlines, heat config and the code; unchanged means no rebuild
   rasters: [{ region: "lower48" | "alaska", image: "<mode>-<region>.png", width, height,
               coordinates: [[w, n], [e, n], [e, s], [w, s]],   // exact corners, the region box from config
-              bytes, stations?, pockets?, resorts?, no_data_states? }] }
+              bytes, stations?, mountain_stations?, terrain?, pockets?, resorts?, no_data_states? }] }
 ```
 * PNG: 8 bit RGBA written with the stdlib (`pipeline/png.py`, zlib, Up filter). Columns evenly spaced in longitude,
   rows evenly spaced in Web Mercator y (MapLibre image sources expect that), pixel centers at half steps inside the
@@ -843,7 +848,7 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
 * `data/raw/sources/*.yaml`: pipeline owned shared sources (`{ sources: Source[] }`, e.g. `owner-decisions-2026-10-11`) that any research file may cite. Source ids are unique across all of `/data/raw`; the same id may repeat only with an identical url.
 * `data/raw/openskimap/`: downloaded OpenSkiMap ski areas (gitignored when large; the filtered US extract is committed).
 * `data/raw/transit/`: `feeds.yaml` (GTFS feeds from the Mobility Database catalog), downloaded `<agency>/gtfs.zip` (gitignored) and the committed `<agency>.json` extracts (Phase 5 above; coverage and skipped feeds in `data/raw/transit/README.md`).
-* `data/raw/climate/`: cached Open Meteo and SNOTEL responses (gitignored).
+* `data/raw/climate/`: cached Open Meteo and SNOTEL responses (gitignored), except the two committed extracts below.
 * `data/raw/climate/noaa_normals/` (committed): `ann_snow_normals.csv`, one row per station of the 50 states with the
   `ANN-SNOW-NORMAL` column of the NOAA NCEI U.S. Climate Normals 1991 to 2020 (annual and seasonal, by station):
   `station_id, name, lat, lon, elevation_m, ann_snow_in, meas_flag, comp_flag, years` (5,653 rows, about 380 KB), and
@@ -855,6 +860,30 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
   `heat.snowfall.accept_completeness` (S, R, P; E, estimated from neighbors, is dropped) and its measurement flag in
   `accept_measurement_flags` (blank or X, a nonzero value rounded to zero; M, V, W, Y and Z are dropped). Zero snowfall
   stations in the South are real data and stay. 5,568 stations fall inside the two regions.
+* `data/raw/climate/snotel_snowfall/` (committed): `snotel_annual_snowfall.csv`, one row per NRCS SNOTEL station whose
+  record could hold `heat.snowfall.snotel.min_complete_years` water years of the window:
+  `station_id` (AWDB triplet), `name, state, lat, lon, elevation_ft, annual_snowfall_in, years_used, complete_years,
+  first_water_year, last_water_year, method`, and `source.json` (source `nrcs-snotel-awdb-annual-snowfall`, confidence
+  `estimated`, public domain, the derivation in its note). Written by `python -m pipeline.climate.snotel_stations
+  fetch` (station list and daily WTEQ, SNWD and TAVG from the AWDB REST API, one station per request, retries and
+  backoff from `pipeline/climate/http.py`, cached as gzip JSON in `download/`, gitignored) then `extract`. Derivation:
+  daily new snow = daily SWE gain / new snow density, never below the daily depth gain, with every `climate.snotel`
+  threshold (the `snotel_swe` method of `pipeline/climate/snotel_snowfall.py`); density from the station's own
+  monthly median storm density, else the Anderson (1976) estimate from the station's daily mean air temperature
+  (TAVG) in place of ERA5. Per water year (Oct 1 to Sep 30, named by the September year) the days are summed; a
+  year is complete when November to April have `climate.min_month_coverage` of their days with data. The annual
+  figure is the median of the complete years `first_water_year` to `last_water_year` (2011 to 2025), published only
+  with at least `min_complete_years` (8); otherwise `annual_snowfall_in` is empty and `years_used` 0. AWDB has no
+  snowfall element or snowfall normal for SNOTEL (its SWE and depth normals describe the pack), so the derived
+  figure is used. `python -m pipeline.climate.snotel_stations validate` writes the comparison with published resort
+  snowfall into `docs/map/climate-validation.md` (its own section, kept when the climate run rewrites the file).
+* `data/raw/terrain/` (committed): `terrain-lower48.png` and `terrain-alaska.png`, 16 bit greyscale PNGs of the mean
+  ground height (m, under sea level stored as 0) per 1/16 degree cell over each heat region box (rows from the north
+  edge, columns from the west edge, cell centers at half steps), and `source.json` (source `aws-terrain-tiles`, the
+  grid of each region and the attribution). `python -m pipeline.terrain fetch` averages the AWS Terrain Tiles
+  (Mapzen terrarium PNGs, zoom 6, from USGS 3DEP, SRTM and GMTED2010 and NOAA ETOPO1) into the grid; the tiles stay
+  in `download/` (gitignored). About 345 KB and 170 KB. The build only shapes the snowfall field with it; no height
+  is displayed.
 
 ## Pipeline layout
 
@@ -884,9 +913,12 @@ pipeline/
   jobs.py             # jobs links and employers -> Resort.jobs, jobs/employers.json, empty jobs/postings.json
   jobs_feed.py        # daily open postings from public job board APIs -> jobs/postings.json (GitHub Actions)
   link_check.py       # monthly check of trail map, webcam and jobs links (GitHub Actions issue)
-  heat.py             # Heat maps: snowfall rasters and isolines (NOAA normals plus resort pockets), season rasters
-  png.py              # Minimal stdlib PNG writer for the heat rasters
-  climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation); noaa_normals.py (NOAA station normals)
+  heat.py             # Heat maps: snowfall rasters and isolines (NOAA and SNOTEL stations shaped by the terrain,
+                      # plus resort pockets), season rasters
+  png.py              # Minimal stdlib PNG writer and reader (heat rasters, terrain grid and tiles)
+  terrain.py          # Terrain grid for the snowfall field (AWS Terrain Tiles -> data/raw/terrain)
+  climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation); noaa_normals.py (NOAA station normals);
+                      # snotel_stations.py (SNOTEL station annual snowfall for the snowfall heat map)
 config/
   definitions.yaml    # thresholds, weights, assumptions (ROADMAP Section 6)
   clusters.yaml       # cluster definitions and membership rules

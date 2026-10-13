@@ -27,6 +27,8 @@ from pydantic import ValidationError  # noqa: E402
 from pipeline import heat as heat_mod  # noqa: E402
 from pipeline import openskimap  # noqa: E402
 from pipeline.climate import noaa_normals  # noqa: E402
+from pipeline.climate import snotel_stations  # noqa: E402
+from pipeline import terrain as terrain_mod  # noqa: E402
 from pipeline import lifts as lifts_mod  # noqa: E402
 from pipeline import rent as rent_mod  # noqa: E402
 from pipeline import runs as runs_mod  # noqa: E402
@@ -252,6 +254,8 @@ def build(
     if climate_sources.exists():
         _merge_climate_sources(climate_sources, registry, errors, rel)
     noaa = _load_noaa_normals(raw_dir, cfg, registry, errors, warnings, rel)
+    snotel_snow = _load_snotel_snowfall(raw_dir, cfg, registry, errors, warnings, rel) if noaa else None
+    dems = _load_terrain(raw_dir, cfg, registry, errors, warnings, rel) if noaa else None
 
     records = inputs.records
     match = match_openskimap([r for _, r in records], areas, cfg.definitions.matching)
@@ -477,7 +481,7 @@ def build(
         _write_json(out_dir / jobs_mod.OUT_SUBDIR / jobs_mod.POSTINGS_NAME, jobs_mod.empty_postings(header, cfg.definitions.jobs))
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
-    _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings)
+    _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings, snotel_snow, dems)
 
 
     result = BuildResult(out_dir, resorts, clusters, states, len(registry), warnings, inputs)
@@ -518,10 +522,58 @@ def _load_noaa_normals(raw_dir: Path, cfg: Config, registry: SourceRegistry, err
     return usable, meta
 
 
+def _load_snotel_snowfall(raw_dir: Path, cfg: Config, registry: SourceRegistry, errors: list[str],
+                          warnings: list[str], rel=str) -> Optional[tuple[list, dict]]:
+    """Usable NRCS SNOTEL station snowfall (heat.snowfall.snotel) and its source record; registers the source."""
+    d = raw_dir / "climate" / "snotel_snowfall"
+    snow = cfg.definitions.heat.snowfall
+    if snow.snotel is None:
+        return None
+    if not (d / snotel_stations.EXTRACT_NAME).is_file():
+        warnings.append(f"no SNOTEL snowfall extract in {rel(d)}; snowfall heat map uses NOAA stations only "
+                        "(python -m pipeline.climate.snotel_stations fetch, then extract)")
+        return None
+    try:
+        rows, meta = snotel_stations.load_extract(d)
+    except (OSError, ValueError, KeyError) as e:
+        errors.append(f"{rel(d)}: unreadable SNOTEL snowfall extract ({e})")
+        return None
+    src = meta.get("source") or {}
+    if not src.get("id"):
+        errors.append(f"{rel(d / snotel_stations.SOURCE_NAME)}: SNOTEL snowfall extract has no source record")
+        return None
+    _add_source(registry, src, rel(d / snotel_stations.SOURCE_NAME), errors)
+    usable = snotel_stations.usable(rows, snow.snotel.min_complete_years)
+    if not usable:
+        warnings.append(f"{rel(d)}: no usable SNOTEL stations; snowfall heat map uses NOAA stations only")
+        return None
+    return usable, meta
+
+
+def _load_terrain(raw_dir: Path, cfg: Config, registry: SourceRegistry, errors: list[str], warnings: list[str],
+                  rel=str) -> Optional[tuple[dict, dict]]:
+    """Terrain grids per heat region (pipeline/terrain.py) and their source record; registers the source."""
+    if cfg.definitions.heat.snowfall.elevation is None:
+        return None
+    d = raw_dir / "terrain"
+    if not (d / terrain_mod.SOURCE_NAME).is_file():
+        warnings.append(f"no terrain extract in {rel(d)}; snowfall heat map is plain station interpolation "
+                        "(python -m pipeline.terrain fetch)")
+        return None
+    try:
+        dems, meta = terrain_mod.load(d)
+    except (OSError, ValueError, KeyError) as e:
+        errors.append(f"{rel(d)}: unreadable terrain extract ({e})")
+        return None
+    _add_source(registry, meta.get("source") or {}, rel(d / terrain_mod.SOURCE_NAME), errors)
+    return dems, meta
+
+
 def _write_heat(out_dir: Path, repo_root: Path, noaa: Optional[tuple[list, dict]], resort_dicts: list[dict],
-                cfg: Config, header: dict, warnings: list[str]) -> None:
-    """data/build/heat/: snowfall rasters and isolines (NOAA background plus resort pockets), season length
-    rasters (sourced resort values), and their sidecars."""
+                cfg: Config, header: dict, warnings: list[str], snotel_snow: Optional[tuple[list, dict]] = None,
+                dems: Optional[tuple[dict, dict]] = None) -> None:
+    """data/build/heat/: snowfall rasters and isolines (NOAA and SNOTEL stations, following the terrain, plus
+    resort pockets), season length rasters (sourced resort values), and their sidecars."""
     outlines_path = out_dir / "us-states.geojson"
     if not outlines_path.is_file():
         outlines_path = repo_root / "data" / "build" / "us-states.geojson"
@@ -532,12 +584,19 @@ def _write_heat(out_dir: Path, repo_root: Path, noaa: Optional[tuple[list, dict]
     if noaa:
         stations, meta = noaa
         src = meta["source"]
+        mountain, mountain_src = [], None
+        if snotel_snow:
+            rows, smeta = snotel_snow
+            mountain = [heat_mod.Point(r.lon, r.lat, r.annual_snowfall_in, r.elevation_ft * 0.3048) for r in rows]
+            mountain_src = {**smeta["source"], "water_years": smeta.get("water_years")}
         heat_mod.write_snowfall(
             out_dir,
-            stations=[heat_mod.Point(s.lon, s.lat, s.ann_snow_in) for s in stations],
+            stations=[heat_mod.Point(s.lon, s.lat, s.ann_snow_in, s.elevation_m) for s in stations],
             pockets=heat_mod.resort_pockets(resort_dicts),
             outlines=outlines,
-            heat=cfg.definitions.heat, source=src, generated_at=header["generated_at"], as_of=str(src["accessed_date"]))
+            heat=cfg.definitions.heat, source=src, generated_at=header["generated_at"], as_of=str(src["accessed_date"]),
+            mountain_stations=mountain, mountain_source=mountain_src,
+            dems=dems[0] if dems else None, terrain_source=dems[1]["source"] if dems else None)
     if heat_mod.write_season(out_dir, resorts=resort_dicts, outlines=outlines, heat=cfg.definitions.heat,
                              generated_at=header["generated_at"]) is None:
         warnings.append("no resort has a sourced season length; season heat rasters not written")

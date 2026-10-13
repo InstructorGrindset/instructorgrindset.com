@@ -72,7 +72,7 @@ function navLink(view, attrs, ...children) {
 }
 
 export function createPanel(root, index, {
-  onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {},
+  onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {}, onSourcesNeeded = () => {},
 }) {
   let token = 0;
   let siteButtons = new Map();
@@ -80,8 +80,11 @@ export function createPanel(root, index, {
   let compareState = { clusterId: null, open: false, selected: [] };
 
   function sourceLink(id) {
-    // Sources arrive with the full data after the first paint; fillSources() swaps these placeholders.
-    if (!index.detailsReady && !index.sources.has(id)) return h('span', { class: 'muted src-pending', dataset: { src: id } }, 'Loading source');
+    // Sources arrive after the first paint (index.loadSources); fillSources() swaps these placeholders.
+    if (!index.sourcesReady && !index.sources.has(id)) {
+      onSourcesNeeded();
+      return h('span', { class: 'muted src-pending', dataset: { src: id } }, 'Loading source');
+    }
     const s = index.sources.get(id);
     if (!s) return h('span', { class: 'muted' }, 'Source record pending');
     const url = safeUrl(s.url);

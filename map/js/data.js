@@ -363,27 +363,42 @@ function attachDetails(index, legacy) {
     return r.data;
   };
 
+  // sources.json, definitions.json and Zod: what source links need (index.sourcesReady once done).
+  let sourcesPending = null;
+  index.loadSources = () => {
+    if (!sourcesPending) {
+      sourcesPending = Promise.all([fetchJson('sources.json', { optional: true }), loadDefinitions(), schemas()])
+        .then(([sourcesRaw, definitions, sch]) => {
+          schemaMod = schemaMod || sch;
+          if (sourcesRaw) {
+            const sf = sch.SourcesFile.safeParse(sourcesRaw);
+            if (sf.success) for (const s of sf.data.sources) index.sources.set(s.id, s);
+            else console.warn('[map] sources.json failed validation', sf.error.issues.slice(0, 5));
+          }
+          index.definitions = definitions;
+          index.sourcesReady = true;
+          return index;
+        }).catch((err) => {
+          console.warn('[map] sources failed to load:', err.message);
+          sourcesPending = null;
+          throw err;
+        });
+    }
+    return sourcesPending;
+  };
+
   index.loadDetails = () => {
     if (!pending) {
       pending = Promise.all([
         legacy ? null : fetchJson('resorts.json', { optional: true }),
-        fetchJson('sources.json', { optional: true }),
-        loadDefinitions(),
-        schemas(),
-      ]).then(([resortsRaw, sourcesRaw, definitions, sch]) => {
-        schemaMod = sch;
+        index.loadSources(),
+      ]).then(([resortsRaw]) => {
         if (resortsRaw) {
-          const file = sch.ResortsFile.safeParse(resortsRaw);
+          const file = schemaMod.ResortsFile.safeParse(resortsRaw);
           if (file.success) {
             for (const r of file.data.resorts) if (r && typeof r === 'object' && typeof r.id === 'string') raw.set(r.id, r);
           } else console.warn('[map] resorts.json failed validation', file.error.issues.slice(0, 5));
         }
-        if (sourcesRaw) {
-          const sf = sch.SourcesFile.safeParse(sourcesRaw);
-          if (sf.success) for (const s of sf.data.sources) index.sources.set(s.id, s);
-          else console.warn('[map] sources.json failed validation', sf.error.issues.slice(0, 5));
-        }
-        index.definitions = definitions;
         index.detailsReady = true;
         performance.mark('careermap:details');
         return index;
@@ -394,6 +409,23 @@ function attachDetails(index, legacy) {
       });
     }
     return pending;
+  };
+
+  /**
+   * Warm the HTTP cache for loadDetails() without parsing anything: a link prefetch downloads off the main thread,
+   * where fetching and parsing resorts.json (2.6 MB) is a long task. Views that need the records load them.
+   */
+  let prefetched = false;
+  index.prefetchDetails = () => {
+    if (prefetched) return;
+    prefetched = true;
+    const files = [pending || legacy ? null : 'resorts.json', sourcesPending ? null : 'sources.json'].filter(Boolean);
+    for (const f of files) {
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = config.dataBase + f;
+      document.head.append(l);
+    }
   };
 
   /** One resort: from the record its page embeds when there is one (no resorts.json wait), else loadDetails. */

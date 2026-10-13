@@ -132,7 +132,7 @@ def test_current_extracts_drops_stale_with_warning(cfg):
     stale = {"agency": "stale", "feed": {"valid_from": "2023-01-23", "valid_to": "2023-04-15"}}
     undated = {"agency": "undated"}
     kept, warnings = transit.current_extracts([fresh, stale, undated], dt.date(2026, 10, 13), cfg.definitions)
-    assert kept == [fresh]
+    assert kept == [{**fresh, "schedule": {"covers_winter": False, "ended": False}}]
     assert len(warnings) == 2 and "'stale' is not current" in warnings[0] and "'undated'" in warnings[1]
 
 
@@ -226,3 +226,62 @@ def test_run_extract_writes_current_feeds_and_skips_the_rest(tmp_path, gtfs_writ
     assert ex["simplify_tolerance_m"] == cfg.definitions.transit.simplify_tolerance_m
     log = transit.run_extract([{**FEED, "agency": "far"}], tmp_path, [(10.0, 10.0)], cfg.definitions, dt.date(2026, 10, 13))
     assert "no stop within" in log[0] and not (tmp_path / "far.json").exists()
+
+
+# ------------------------------------------------------------- schedule note flags
+@pytest.mark.parametrize("start, end, days", [
+    ("2026-04-02", "2026-11-14", 0),      # Summit Stage summer feed
+    ("2026-05-21", "2026-12-06", 6),      # Vail: into the next winter by six days
+    ("2026-03-30", "2026-06-30", 2),      # TART: the last two days of March
+    ("2026-02-20", "2026-07-01", 40),     # Mountain Transit: Feb 20 to Mar 31
+    ("2025-11-19", "2026-04-12", 121),    # Breckenridge Free Ride: all of Dec 1 to Mar 31
+    ("2025-11-17", "2027-01-01", 121),    # longest single winter, not the sum of two
+    ("2023-12-01", "2024-03-31", 122),    # a leap year February
+])
+def test_winter_overlap_days(start, end, days):
+    d = dt.date.fromisoformat
+    assert transit.winter_overlap_days(d(start), d(end), "12-01", "03-31") == days
+
+
+def test_winter_overlap_days_window_within_a_year():
+    d = dt.date.fromisoformat
+    assert transit.winter_overlap_days(d("2026-06-01"), d("2026-07-10"), "07-01", "08-31") == 10
+
+
+@pytest.mark.parametrize("start, end, covers, ended", [
+    ("2026-04-02", "2026-11-14", False, False),   # summer, still running
+    ("2026-05-24", "2026-06-20", False, True),    # summer, already over
+    ("2026-03-30", "2026-06-30", False, True),    # two winter days are under the 30 day minimum
+    ("2025-11-19", "2026-04-12", True, True),     # last winter's schedule
+    ("2025-11-26", "2026-11-25", True, False),    # year round, still running
+])
+def test_schedule_flags(cfg, start, end, covers, ended):
+    flags = transit.schedule_flags({"valid_from": start, "valid_to": end}, dt.date(2026, 10, 13), cfg.definitions)
+    assert flags == {"covers_winter": covers, "ended": ended}
+
+
+def test_schedule_flags_unknown_without_both_dates(cfg):
+    assert transit.schedule_flags({"valid_from": "2026-01-01"}, dt.date(2026, 10, 13), cfg.definitions) == {
+        "covers_winter": None, "ended": None}
+
+
+def test_extract_names_each_route_operator(tmp_path, gtfs_writer, gtfs_tables):
+    gtfs_tables["agency.txt"] = [["agency_id", "agency_name", "agency_url"], ["fx", " Fixture   Transit ", "https://fixture.example.org/"],
+                                 ["shuttle", "Shuttle Co", "javascript:alert(1)"]]
+    gtfs_tables["routes.txt"][2][1] = "shuttle"
+    ex = _extract(tmp_path, gtfs_writer, gtfs_tables)
+    by = {r["id"]: r for r in ex["routes"]}
+    assert (by["fixture:blue"]["agency_name"], by["fixture:blue"]["agency_url"]) == ("Fixture Transit", "https://fixture.example.org/")
+    assert (by["fixture:red"]["agency_name"], by["fixture:red"]["agency_url"]) == ("Shuttle Co", None)  # only http(s) links
+    TransitExtract.model_validate(ex)
+
+
+def test_extract_single_agency_with_blank_route_agency_id(tmp_path, gtfs_writer, gtfs_tables):
+    gtfs_tables["agency.txt"] = [["agency_name", "agency_url"], ["Solo Transit", "http://solo.example.org"]]
+    for row in gtfs_tables["routes.txt"][1:]:
+        row[1] = ""
+    ex = _extract(tmp_path, gtfs_writer, gtfs_tables)
+    assert {(r["agency_name"], r["agency_url"]) for r in ex["routes"]} == {("Solo Transit", "http://solo.example.org")}
+    gtfs_tables.pop("agency.txt")
+    ex = _extract(tmp_path, gtfs_writer, gtfs_tables)
+    assert {(r["agency_name"], r["agency_url"]) for r in ex["routes"]} == {(None, None)}

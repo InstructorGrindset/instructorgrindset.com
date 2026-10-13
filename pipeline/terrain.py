@@ -76,6 +76,32 @@ class Dem:
         bot = v[j1 * w + i0] * (1 - tx) + v[j1 * w + i1] * tx
         return top * (1 - ty) + bot * ty
 
+    def smoothed(self, radius: int, passes: int = 2) -> "Dem":
+        """The grid after ``passes`` box blurs of ``radius`` cells each way (a near Gaussian low pass; edges use
+        the cells inside the grid). Radius 0 returns the grid unchanged."""
+        if radius <= 0 or passes <= 0:
+            return self
+        vals = list(self.values)
+        for _ in range(passes):
+            vals = box_blur(vals, self.width, self.height, radius)
+        return Dem(self.west, self.north, self.step, self.width, self.height, vals)
+
+
+def _blur_line(line: Sequence[float], radius: int) -> list[float]:
+    n = len(line)
+    pre = [0.0]
+    for v in line:
+        pre.append(pre[-1] + v)
+    return [(pre[min(n, k + radius + 1)] - pre[max(0, k - radius)]) / (min(n, k + radius + 1) - max(0, k - radius))
+            for k in range(n)]
+
+
+def box_blur(values: Sequence[float], width: int, height: int, radius: int) -> list[float]:
+    """Separable box mean over (2 radius + 1) cells each way, shrinking at the edges."""
+    rows = [_blur_line(values[j * width:(j + 1) * width], radius) for j in range(height)]
+    cols = [_blur_line([rows[j][i] for j in range(height)], radius) for i in range(width)]
+    return [cols[i][j] for j in range(height) for i in range(width)]
+
 
 # ------------------------------------------------------------------ tiles
 def tile_x(lon: float, z: int) -> float:

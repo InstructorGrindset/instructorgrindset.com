@@ -90,6 +90,8 @@ export const OfficialTrailmap = z.object({
 
 // ── Live cams and jobs (links only; ARCHITECTURE "Webcams and jobs"). A bad item drops only that item. ──
 const HttpsUrl = z.string().regex(/^https:\/\//, 'https link');
+// Transit agency sites from GTFS agency.txt; many are still plain http. A bad link becomes null.
+const HttpUrl = z.string().regex(/^https?:\/\//, 'web link').nullish().catch(null).transform((v) => v ?? null);
 const Cited = { source_id: Slug, as_of: IsoDate, confidence: Confidence, note: z.string().nullish() };
 const keepValid = (item) => z.array(item.nullable().catch(null)).nullish().transform((a) => (a ?? []).filter(Boolean));
 
@@ -361,8 +363,11 @@ export const HeatRasterFile = z.object({
   breaks: z.array(z.number()).min(1).nullish(),   // classed
   colors: z.array(Hex).min(2).nullish(),          // classed, one more than breaks
   legend: z.object({ ticks: z.array(z.number()).min(1), compress_below: z.number().nullish() }).passthrough().nullish(),
-  // Snowfall: NOAA station normals with resort pockets. Season length: resort values only.
+  // Snowfall: NOAA station normals and NRCS SNOTEL mountain stations, shaped by the terrain, with resort pockets.
+  // Season length: resort values only.
   background: z.object({ source_id: z.string(), as_of: z.string(), confidence: Confidence, stations: z.number().int().nonnegative() }).passthrough().nullish(),
+  mountain_stations: z.object({ source_id: z.string(), as_of: z.string(), confidence: Confidence, stations: z.number().int().nonnegative() }).passthrough().nullish(),
+  terrain: z.object({ source_id: z.string(), as_of: z.string() }).passthrough().nullish(),
   pockets: z.object({ resorts: z.number().int().nonnegative(), radius_km: z.number().positive() }).passthrough().nullish(),
   attribution: z.string().min(1).nullish(),
   isolines: z.object({
@@ -457,11 +462,18 @@ export const DetailFile = z.object({
   transit: z.object({
     routes: z.array(z.object({
       id: z.string(), agency: z.string().nullish(), short_name: z.string().nullish(), long_name: z.string().nullish(),
+      agency_name: z.string().nullish().transform((v) => v ?? null), agency_url: HttpUrl,
       color: z.string().nullish(), geometry: AnyLine,
     })).nullish().transform((v) => v ?? []),
     stops: z.array(z.object({ id: z.string(), name: z.string(), lat: z.number(), lon: z.number(), route_ids: strList }))
       .nullish().transform((v) => v ?? []),
     source_ids: strList,
+    // One entry per GTFS feed: its validity and the schedule note flags (ARCHITECTURE.md, Phase 5).
+    feeds: keepValid(z.object({
+      source_id: z.string(), agency: z.string(), as_of: z.string(), valid_to: z.string().nullish().transform((v) => v ?? null),
+      agencies: keepValid(z.object({ name: z.string(), url: HttpUrl })),
+      covers_winter: z.boolean().nullish().transform((v) => v ?? null), ended: z.boolean().nullish().transform((v) => v ?? null),
+    })),
   }).nullish().transform((v) => v ?? null),
   isochrones: z.array(z.object({
     minutes: z.number(), mode: z.string().nullish(), geometry: AreaGeom, source_id: z.string().nullish(),
