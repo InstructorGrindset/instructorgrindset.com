@@ -1,6 +1,7 @@
 """Load and validate config/definitions.yaml and config/clusters.yaml."""
 from __future__ import annotations
 
+import datetime as dt
 from pathlib import Path
 from typing import Annotated, Any, Literal, Optional
 
@@ -173,8 +174,22 @@ class RentDefs(StrictModel):
     acs_dataset: str = "acs/acs5"
 
 
+class DateWindow(StrictModel):
+    start: dt.date
+    end: dt.date
+
+    @model_validator(mode="after")
+    def _order(self) -> "DateWindow":
+        if self.end < self.start:
+            raise ValueError("end is before start")
+        return self
+
+
 class TransitDefs(StrictModel):
     search_radius_km: float = Field(gt=0)
+    simplify_tolerance_m: Optional[float] = Field(default=None, gt=0, le=50)
+    target_season: Optional[DateWindow] = None   # a feed overlapping this window is current
+    max_validity_years: float = Field(default=3, gt=0)
     walk_speed_kmh: Optional[float] = Field(default=None, gt=0)
     max_walk_km: Optional[float] = Field(default=None, gt=0)
 

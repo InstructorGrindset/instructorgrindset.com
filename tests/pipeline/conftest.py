@@ -144,6 +144,9 @@ GTFS_TABLES = {
                   ["base", "Base Area", "39.6005", "-106.3005", "0"],
                   ["station", "Parent Station", "39.6000", "-106.3000", "1"],
                   ["remote", "Remote Stop", "45.0000", "-110.0000", "0"]],
+    # Valid through the configured 2026 to 27 target season, so the fixture feed stays current.
+    "calendar.txt": [["service_id", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+                      "start_date", "end_date"], ["wk", "1", "1", "1", "1", "1", "0", "0", "20260101", "20271231"]],
     "stop_times.txt": [["trip_id", "arrival_time", "departure_time", "stop_id", "stop_sequence"],
                        ["b1", "07:00:00", "07:00:00", "town", "1"], ["b1", "07:10:00", "07:10:00", "mid", "2"],
                        ["b1", "07:25:00", "07:25:00", "base", "3"],

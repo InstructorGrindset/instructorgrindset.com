@@ -129,6 +129,16 @@ rent:
 transit:
   # Stops within this distance of a housing site or the base area are kept in the transit extract.
   search_radius_km: 2
+  # Route lines in the extract are simplified (Douglas Peucker) to this tolerance in metres,
+  # under one pixel at zoom 13, so long regional routes stay small.
+  simplify_tolerance_m: 10
+  # Feed currency. A GTFS feed is current when its validity period overlaps target_season, or when
+  # its validity starts (its as_of) within staleness.max_age_months of the build date. A validity
+  # period longer than max_validity_years is an open ended placeholder (a calendar running to 2099)
+  # and does not count as covering the season. The extract command skips feeds that are not
+  # current; the build drops such extracts with a warning. Move target_season forward each year.
+  target_season: {start: 2026-11-01, end: 2027-04-30}
+  max_validity_years: 3
   # Bus commute = walk to stop + scheduled ride + walk from stop, with no waiting time.
   # Alexandre sets these; bus commutes stay null until then.
   walk_speed_kmh: null

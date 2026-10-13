@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T16:30:32Z",
+  "generated_at": "2026-10-13T18:23:24Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -9745,6 +9745,146 @@
       "title": "Wikipedia: Yellowstone Club",
       "accessed_date": "2026-10-13",
       "note": null
+    },
+    {
+      "id": "gtfs-avon-transit",
+      "url": "https://www.avon.org/DocumentCenter/View/25051/TownOfAvon_gtfs",
+      "title": "Avon Transit GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 2433; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-avon-transit-gtfs-2433.zip?alt=media; feed valid 2026-03-31 to 2026-11-25; license: https://creativecommons.org/licenses/by/4.0/."
+    },
+    {
+      "id": "gtfs-breckenridge-free-ride",
+      "url": "http://data.trilliumtransit.com/gtfs/breckenridgefreeride-co-us/breckenridgefreeride-co-us.zip",
+      "title": "Breckenridge Free Ride GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 237; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-breckenridge-free-ride-gtfs-237.zip?alt=media; feed valid 2025-11-19 to 2026-04-12; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-bustang",
+      "url": "https://www.rtd-denver.com/files/gtfs/bustang-co-us.zip",
+      "title": "Bustang GTFS (Colorado Department of Transportation)",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 2280; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-regional-transportation-district-rtd-gtfs-2280.zip?alt=media; feed valid 2026-01-04 to 2026-06-06; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-bustang-outrider",
+      "url": "https://data.trilliumtransit.com/gtfs/outrider-co-us/outrider-co-us.zip",
+      "title": "Bustang Outrider GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 2330; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-bustang-outrider-gtfs-2330.zip?alt=media; feed valid 2026-01-29 to 2026-08-01; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-green-mountain-transit",
+      "url": "http://data.trilliumtransit.com/gtfs/ccta-vt-us/ccta-vt-us.zip",
+      "title": "Green Mountain Transit GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 629; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-chittenden-county-transportation-authority-ccta-gtfs-629.zip?alt=media; feed valid 2026-04-24 to 2026-06-28; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-greene-county-transit",
+      "url": "https://s3.amazonaws.com/datatools-511ny/public/Greene_County_Transit.zip",
+      "title": "Greene County Transit GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 613; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-new-york-greene-county-transit-gtfs-613.zip?alt=media; feed valid 2025-11-17 to 2027-01-01; license: https://data.ny.gov/download/77gx-ii52/application/pdf."
+    },
+    {
+      "id": "gtfs-gunnison-valley-rta",
+      "url": "http://mjcaction.com/MJC_GTFS_Public/gunnisonrta_google_transit.zip",
+      "title": "Gunnison Valley RTA GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 163; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-gunnison-valley-transportation-authority-rta-gtfs-163.zip?alt=media; feed valid 2025-11-26 to 2026-11-25; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-marble-valley-rtd",
+      "url": "http://data.trilliumtransit.com/gtfs/thebus-vt-us/thebus-vt-us.zip",
+      "title": "Marble Valley Regional Transit District (The Bus) GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 430; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-marble-valley-regional-transit-district-mvrtd-gtfs-430.zip?alt=media; feed valid 2026-03-25 to 2026-08-31; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-moover",
+      "url": "https://data.trilliumtransit.com/gtfs/sevt-vt-us/sevt-vt-us.zip",
+      "title": "Southeast Vermont Transit MOOver GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 2194; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-rockingham-moover-gtfs-2194.zip?alt=media; feed valid 2026-03-23 to 2026-06-22; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-mountain-transit",
+      "url": "http://data.trilliumtransit.com/gtfs/bigbear-ca-us/bigbear-ca-us.zip",
+      "title": "Mountain Transit GTFS (Big Bear)",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 107; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-california-mountain-transit-gtfs-107.zip?alt=media; feed valid 2026-02-20 to 2026-07-01; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-rfta",
+      "url": "https://www.rfta.com/RFTAGTFSExport.zip",
+      "title": "Roaring Fork Transportation Authority GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 2278; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-roaring-fork-transportation-authority-gtfs-2278.zip?alt=media; feed valid 2026-06-01 to 2026-09-20; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-san-miguel-county",
+      "url": "https://data.trilliumtransit.com/gtfs/sanmiguelcounty-co-us/sanmiguelcounty-co-us.zip",
+      "title": "Telluride, Mountain Village and SMART GTFS (Galloping Goose)",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 2195; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-san-miguel-county-gtfs-2195.zip?alt=media; feed valid 2026-06-02 to 2026-10-19; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-snowmass-village",
+      "url": "http://data.trilliumtransit.com/gtfs/snowmassvillagetransportation-co-us/snowmassvillagetransportation-co-us.zip",
+      "title": "Snowmass Village Shuttle GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 164; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-snowmass-village-transportation-gtfs-164.zip?alt=media; feed valid 2026-05-27 to 2026-09-20; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-steamboat-springs-transit",
+      "url": "https://data.trilliumtransit.com/gtfs/steamboatsprings-co-us/steamboatsprings-co-us--flex-v2.zip",
+      "title": "Steamboat Springs Transit GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 2051; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-steamboat-springs-transit-gtfs-2051.zip?alt=media; feed valid 2026-04-30 to 2026-11-27; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-summit-stage",
+      "url": "http://data.trilliumtransit.com/gtfs/summitstage-co-us/summitstage-co-us.zip",
+      "title": "Summit Stage GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 820; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-summit-stage-gtfs-820.zip?alt=media; feed valid 2026-04-02 to 2026-11-14; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-tart",
+      "url": "http://data.trilliumtransit.com/gtfs/laketahoe-ca-us/laketahoe-ca-us.zip",
+      "title": "Tahoe Truckee Area Regional Transit (TART) GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 94; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-california-tahoe-area-regional-transit-tart-north-lake-tahoe-express-gtfs-94.zip?alt=media; feed valid 2026-03-30 to 2026-06-30; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-tri-valley-transit",
+      "url": "http://data.trilliumtransit.com/gtfs/trivalleytransit-vt-us/trivalleytransit-vt-us.zip",
+      "title": "Tri Valley Transit GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 852; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-tri-valley-transit-gtfs-852.zip?alt=media; feed valid 2026-05-27 to 2026-08-01; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-uta",
+      "url": "https://gtfsfeed.rideuta.com/GTFS.zip",
+      "title": "Utah Transit Authority GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 170; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-utah-utah-transit-authority-uta-gtfs-170.zip?alt=media; feed valid 2026-05-24 to 2026-06-20; license: http://developer.rideuta.com/TermsOfUse.aspx."
+    },
+    {
+      "id": "gtfs-vail-transit",
+      "url": "http://data.trilliumtransit.com/gtfs/vailtransit-co-us/vailtransit-co-us.zip",
+      "title": "Vail Transit GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 174; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-vail-transit-gtfs-174.zip?alt=media; feed valid 2026-05-21 to 2026-12-06; license: none listed in the catalog."
+    },
+    {
+      "id": "gtfs-winter-park-lift",
+      "url": "http://data.trilliumtransit.com/gtfs/winterpark-co-us/winterpark-co-us.zip",
+      "title": "Winter Park The Lift GTFS",
+      "accessed_date": "2026-10-13",
+      "note": "Mobility Database catalog entry 175; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-winter-park-transit-gtfs-175.zip?alt=media; feed valid 2026-05-23 to 2026-11-14; license: none listed in the catalog."
     },
     {
       "id": "jobs-alta-jobs-postings",

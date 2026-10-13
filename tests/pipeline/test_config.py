@@ -53,6 +53,18 @@ def test_invalid_definitions_rejected(tmp_path, repo_root):
         load_definitions(p)
 
 
+def test_transit_feed_currency_settings(cfg, repo_root):
+    import datetime as dt
+    t = cfg.definitions.transit
+    assert (t.target_season.start, t.target_season.end) == (dt.date(2026, 11, 1), dt.date(2027, 4, 30))
+    assert t.max_validity_years == 3 and t.simplify_tolerance_m == 10
+    assert (t.walk_speed_kmh, t.max_walk_km) == (None, None)   # owner decision 6: no walking model
+    data = yaml.safe_load((repo_root / "config/definitions.yaml").read_text())
+    data["transit"]["target_season"] = {"start": "2027-04-30", "end": "2026-11-01"}
+    with pytest.raises(ValidationError, match="end is before start"):
+        Definitions.model_validate(data)
+
+
 def test_clusters_config(cfg):
     assert [c.id for c in cfg.clusters.clusters] == EXPECTED_CLUSTERS
     assert cfg.clusters.membership.tier_b_radius_km == 80

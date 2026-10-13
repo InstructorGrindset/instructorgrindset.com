@@ -1,0 +1,143 @@
+# GTFS feeds for agencies serving Tier A clusters (ROADMAP Section 8, item 16).
+# Researched 2026-10-13 from the Mobility Database catalog (sources.csv, updated 2026-10-13):
+# https://storage.googleapis.com/download/storage/v1/b/mdb-csv/o/sources.csv?alt=media
+#
+# url:            the agency's own feed (urls.direct_download); it becomes the source url gtfs-<agency>
+# mirror_url:     the catalog's latest copy (urls.latest); `fetch` tries it first because the agency
+#                 hosts are unreachable from the build environment
+# mdb_source_id:  the catalog id
+# license:        urls.license from the catalog; null when the catalog lists none
+# agency_ids:     optional; keep only these GTFS agencies of a shared feed
+#
+# Feeds checked and left out (stale, no stop near a Tier A base, or not in the catalog) are listed in
+# README.md. Validity dates are read from each zip by `python -m pipeline.transit check`.
+feeds:
+  # Colorado, I 70 corridor
+  - agency: summit-stage
+    title: Summit Stage GTFS
+    mdb_source_id: 820
+    url: http://data.trilliumtransit.com/gtfs/summitstage-co-us/summitstage-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-summit-stage-gtfs-820.zip?alt=media
+    license: null
+  - agency: breckenridge-free-ride
+    title: Breckenridge Free Ride GTFS
+    mdb_source_id: 237
+    url: http://data.trilliumtransit.com/gtfs/breckenridgefreeride-co-us/breckenridgefreeride-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-breckenridge-free-ride-gtfs-237.zip?alt=media
+    license: null
+  - agency: vail-transit
+    title: Vail Transit GTFS
+    mdb_source_id: 174
+    url: http://data.trilliumtransit.com/gtfs/vailtransit-co-us/vailtransit-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-vail-transit-gtfs-174.zip?alt=media
+    license: null
+  - agency: avon-transit
+    title: Avon Transit GTFS
+    mdb_source_id: 2433
+    url: https://www.avon.org/DocumentCenter/View/25051/TownOfAvon_gtfs
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-avon-transit-gtfs-2433.zip?alt=media
+    license: https://creativecommons.org/licenses/by/4.0/
+  - agency: winter-park-lift
+    title: Winter Park The Lift GTFS
+    mdb_source_id: 175
+    url: http://data.trilliumtransit.com/gtfs/winterpark-co-us/winterpark-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-winter-park-transit-gtfs-175.zip?alt=media
+    license: null
+  - agency: bustang
+    title: Bustang GTFS (Colorado Department of Transportation)
+    mdb_source_id: 2280
+    url: https://www.rtd-denver.com/files/gtfs/bustang-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-regional-transportation-district-rtd-gtfs-2280.zip?alt=media
+    license: null
+  - agency: bustang-outrider
+    title: Bustang Outrider GTFS
+    mdb_source_id: 2330
+    url: https://data.trilliumtransit.com/gtfs/outrider-co-us/outrider-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-bustang-outrider-gtfs-2330.zip?alt=media
+    license: null
+  # Colorado, Roaring Fork, Northern Colorado and Southwest Colorado
+  - agency: rfta
+    title: Roaring Fork Transportation Authority GTFS
+    mdb_source_id: 2278
+    url: https://www.rfta.com/RFTAGTFSExport.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-roaring-fork-transportation-authority-gtfs-2278.zip?alt=media
+    license: null
+  - agency: snowmass-village
+    title: Snowmass Village Shuttle GTFS
+    mdb_source_id: 164
+    url: http://data.trilliumtransit.com/gtfs/snowmassvillagetransportation-co-us/snowmassvillagetransportation-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-snowmass-village-transportation-gtfs-164.zip?alt=media
+    license: null
+  - agency: steamboat-springs-transit
+    title: Steamboat Springs Transit GTFS
+    mdb_source_id: 2051
+    url: https://data.trilliumtransit.com/gtfs/steamboatsprings-co-us/steamboatsprings-co-us--flex-v2.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-steamboat-springs-transit-gtfs-2051.zip?alt=media
+    license: null
+    agency_ids: ["4887"]   # Steamboat Springs Transit; drops the Yellow Zone on demand service
+  - agency: san-miguel-county
+    title: Telluride, Mountain Village and SMART GTFS (Galloping Goose)
+    mdb_source_id: 2195
+    url: https://data.trilliumtransit.com/gtfs/sanmiguelcounty-co-us/sanmiguelcounty-co-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-san-miguel-county-gtfs-2195.zip?alt=media
+    license: null
+  - agency: gunnison-valley-rta
+    title: Gunnison Valley RTA GTFS
+    mdb_source_id: 163
+    url: http://mjcaction.com/MJC_GTFS_Public/gunnisonrta_google_transit.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-gunnison-valley-transportation-authority-rta-gtfs-163.zip?alt=media
+    license: null
+  # Utah, Wasatch
+  - agency: uta
+    title: Utah Transit Authority GTFS
+    mdb_source_id: 170
+    url: https://gtfsfeed.rideuta.com/GTFS.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-utah-utah-transit-authority-uta-gtfs-170.zip?alt=media
+    license: http://developer.rideuta.com/TermsOfUse.aspx
+  # California, Lake Tahoe and Southern California
+  - agency: tart
+    title: Tahoe Truckee Area Regional Transit (TART) GTFS
+    mdb_source_id: 94
+    url: http://data.trilliumtransit.com/gtfs/laketahoe-ca-us/laketahoe-ca-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-california-tahoe-area-regional-transit-tart-north-lake-tahoe-express-gtfs-94.zip?alt=media
+    license: null
+    agency_ids: ["904"]   # TART; drops the North Lake Tahoe Express airport shuttle (reservations only)
+  - agency: mountain-transit
+    title: Mountain Transit GTFS (Big Bear)
+    mdb_source_id: 107
+    url: http://data.trilliumtransit.com/gtfs/bigbear-ca-us/bigbear-ca-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-california-mountain-transit-gtfs-107.zip?alt=media
+    license: null
+  # Vermont
+  - agency: green-mountain-transit
+    title: Green Mountain Transit GTFS
+    mdb_source_id: 629
+    url: http://data.trilliumtransit.com/gtfs/ccta-vt-us/ccta-vt-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-chittenden-county-transportation-authority-ccta-gtfs-629.zip?alt=media
+    license: null
+    agency_ids: ["461"]   # Green Mountain Transit; drops the Special Services Transportation Agency
+  - agency: marble-valley-rtd
+    title: Marble Valley Regional Transit District (The Bus) GTFS
+    mdb_source_id: 430
+    url: http://data.trilliumtransit.com/gtfs/thebus-vt-us/thebus-vt-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-marble-valley-regional-transit-district-mvrtd-gtfs-430.zip?alt=media
+    license: null
+  - agency: moover
+    title: Southeast Vermont Transit MOOver GTFS
+    mdb_source_id: 2194
+    url: https://data.trilliumtransit.com/gtfs/sevt-vt-us/sevt-vt-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-rockingham-moover-gtfs-2194.zip?alt=media
+    license: null
+  - agency: tri-valley-transit
+    title: Tri Valley Transit GTFS
+    mdb_source_id: 852
+    url: http://data.trilliumtransit.com/gtfs/trivalleytransit-vt-us/trivalleytransit-vt-us.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-vermont-tri-valley-transit-gtfs-852.zip?alt=media
+    license: null
+  # New York, Catskills
+  - agency: greene-county-transit
+    title: Greene County Transit GTFS
+    mdb_source_id: 613
+    url: https://s3.amazonaws.com/datatools-511ny/public/Greene_County_Transit.zip
+    mirror_url: https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-new-york-greene-county-transit-gtfs-613.zip?alt=media
+    license: https://data.ny.gov/download/77gx-ii52/application/pdf

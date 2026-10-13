@@ -505,10 +505,27 @@ def test_phase5_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, c
     assert flats["rent_monthly"]["confidence"] == "estimated" and flats["rent_monthly"]["source_id"] == "hud-fmr-fy2026"
     assert flats["commutes"] == []  # no cached route; bus model settings are null in config
     assert d["transit"]["source_ids"] == ["gtfs-fixture"]
+    assert d["transit"]["feeds"] == [{"source_id": "gtfs-fixture", "agency": "fixture", "as_of": "2026-01-01",
+                                      "valid_to": "2027-12-31"}]
     assert [i["minutes"] for i in d["isochrones"]] == [15, 30, 45]
 
     sources = {s["id"] for s in _load(out, "sources.json")["sources"]}
     assert {"openskimap-lifts", "hud-fmr-fy2026", "gtfs-fixture", "routing-valhalla", "fixture-housing-page"} <= sources
+
+
+def test_phase5_drops_transit_extracts_that_are_not_current(repo_root, raw_dir, out, tmp_path, cfg, lifts_full,
+                                                            counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder,
+                                                            monkeypatch):
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1790000000")  # 2026-09-21
+    gtfs_tables["calendar.txt"][1][-2:] = ["20230123", "20230415"]  # a feed from the 2022 to 23 season
+    _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
+    result = _run(repo_root, raw_dir, out, tmp_path)
+    assert any("transit extract 'fixture' is not current" in w and "older than 18 months" in w for w in result.warnings)
+    assert not any("no transit extracts" in w for w in result.warnings)
+    d = _load(out / "detail", "fixture-peak.json")
+    assert d["transit"] is None
+    peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
+    assert peak["housing_summary"]["has_transit"] is False
 
 
 def test_phase5_rent_reaches_lucrativeness(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, counties_geojson,

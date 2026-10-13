@@ -164,13 +164,19 @@ def assemble_detail(resort: dict, sites: Sequence[HousingSite], lifts_fc: dict, 
     routes: list[dict] = []
     stops: list[dict] = []
     tsources: list[str] = []
+    feeds: list[dict] = []
     for ex in transit_extracts:
         hit = nearby(ex, anchors, tdefs.search_radius_km)
         if hit:
             routes += hit["routes"]
             stops += hit["stops"]
             tsources.append(ex["source"]["id"])
-    transit = {"routes": routes, "stops": stops, "source_ids": sorted(set(tsources))} if stops else None
+            feed = ex.get("feed") or {}
+            if feed.get("as_of"):
+                feeds.append({"source_id": ex["source"]["id"], "agency": ex["agency"], "as_of": feed["as_of"],
+                              "valid_to": feed.get("valid_to")})
+    transit = ({"routes": routes, "stops": stops, "source_ids": sorted(set(tsources)),
+                "feeds": sorted(feeds, key=lambda f: f["source_id"])} if stops else None)
 
     housing = []
     for s in sites:

@@ -40,11 +40,12 @@ from pipeline.housing import assemble_detail, housing_summary, load_housing, ren
 from pipeline import reports as reports_mod  # noqa: E402
 from pipeline import staleness as staleness_mod  # noqa: E402
 from pipeline.routing import RoutingClient  # noqa: E402
+from pipeline.transit import current_extracts as current_transit  # noqa: E402
 from pipeline.transit import load_extracts as load_transit  # noqa: E402
 from pipeline.clusters import ClusterAssignmentError, ClusterInfo, Member, assign_clusters, build_clusters  # noqa: E402
 from pipeline.config import Config, load_config  # noqa: E402
 from pipeline.names import slugify  # noqa: E402
-from pipeline.schemas import Cluster, DetailFile, Resort, Source, State, TrailmapFile  # noqa: E402
+from pipeline.schemas import Cluster, DetailFile, Resort, Source, State, TrailmapFile, TransitExtract  # noqa: E402
 from pipeline.schemas.raw import TierABatch, TierARecord  # noqa: E402
 from pipeline.sources import SourceConflictError, SourceRegistry  # noqa: E402
 from pipeline.states import STATE_NAMES, build_states, build_us_states_geojson  # noqa: E402
@@ -734,10 +735,18 @@ def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match,
     else:
         warnings.append(f"no rent baseline cache in {rel(rent_dir)}; run `python -m pipeline.rent fetch` (HUD needs HUD_API_TOKEN)")
 
-    p5.transit = load_transit(raw_dir / "transit")
-    for ex in p5.transit:
-        _add_source(registry, ex.get("source") or {}, rel(raw_dir / "transit"), errors)
-    if not p5.transit:
+    extracts = load_transit(raw_dir / "transit")
+    for ex in extracts:
+        origin = rel(raw_dir / "transit" / f"{ex.get('agency')}.json")
+        _add_source(registry, ex.get("source") or {}, origin, errors)
+        try:
+            TransitExtract.model_validate(ex)
+        except ValidationError as e:
+            errors.extend(f"{origin}: {'.'.join(map(str, m['loc'])) or '(record)'}: {m['msg']}" for m in e.errors())
+    # Feeds that are no longer current (ARCHITECTURE.md, transit) are dropped with a warning.
+    p5.transit, stale = current_transit(extracts, build_date(), cfg.definitions)
+    warnings.extend(stale)
+    if not extracts:
         warnings.append(f"no transit extracts in {rel(raw_dir / 'transit')}; see data/raw/transit/README.md")
 
     cache = raw_dir / "routing"

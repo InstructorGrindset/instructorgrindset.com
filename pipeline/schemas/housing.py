@@ -183,13 +183,36 @@ class TransitPattern(StrictModel):
         return self
 
 
+class TransitFeed(StrictModel):
+    """The feed behind an extract: catalog fields from feeds.yaml plus the feed's own validity dates."""
+
+    mdb_source_id: Optional[int] = None       # Mobility Database catalog id
+    url: Optional[str] = None                 # the agency's own feed URL (also the source url)
+    mirror_url: Optional[str] = None          # the catalog mirror copy that was downloaded
+    license: Optional[str] = None             # as listed in the catalog; null when it lists none
+    agency_ids: Optional[list[str]] = None    # GTFS agencies kept from a shared feed
+    version: Optional[str] = None             # feed_info.txt feed_version
+    valid_from: Optional[dt.date] = None
+    valid_to: Optional[dt.date] = None
+    validity_basis: Optional[Literal["feed_info", "calendar", "feed_info+calendar"]] = None
+    as_of: Optional[dt.date] = None           # the start of the validity period
+
+    @model_validator(mode="after")
+    def _order(self) -> "TransitFeed":
+        if self.valid_from and self.valid_to and self.valid_to < self.valid_from:
+            raise ValueError("valid_to is before valid_from")
+        return self
+
+
 class TransitExtract(StrictModel):
     """data/raw/transit/<agency>.json, written by pipeline/transit.py from a GTFS zip."""
 
     version: int = 1
     agency: Slug
     source: Source
+    feed: Optional[TransitFeed] = None
     search_radius_km: float = Field(gt=0)
+    simplify_tolerance_m: Optional[float] = Field(default=None, gt=0)
     routes: list[TransitRoute] = Field(default_factory=list)
     stops: list[TransitStop] = Field(default_factory=list)
     patterns: list[TransitPattern] = Field(default_factory=list)
@@ -214,10 +237,25 @@ class HousingOut(HousingSite):
     commutes: list[CommuteOut] = Field(default_factory=list)
 
 
+class TransitFeedRef(StrictModel):
+    """One feed shown on a detail map, with its validity (``as_of`` is the start)."""
+
+    source_id: Slug
+    agency: Slug
+    as_of: dt.date
+    valid_to: Optional[dt.date] = None
+
+    @field_validator("source_id")
+    @classmethod
+    def _src(cls, v: str, info: ValidationInfo) -> str:
+        return check_source_ref(v, info)
+
+
 class TransitOut(StrictModel):
     routes: list[TransitRoute]
     stops: list[TransitStop]
     source_ids: list[Slug] = Field(min_length=1)
+    feeds: list[TransitFeedRef] = Field(default_factory=list)
 
 
 class Isochrone(StrictModel):
