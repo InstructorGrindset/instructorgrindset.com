@@ -43,6 +43,12 @@ sources:
   - {id: wikipedia-grand-targhee-resort, url: https://en.wikipedia.org/wiki/Grand_Targhee_Resort, title: Grand Targhee Resort (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-mount-hood-meadows, url: https://en.wikipedia.org/wiki/Mount_Hood_Meadows, title: Mount Hood Meadows (Wikipedia), accessed_date: 2026-10-11}
   - {id: access-wikipedia-mount-hood-express, url: "https://en.wikipedia.org/wiki/Mount_Hood_Express", title: "Mount Hood Express (Wikipedia)", accessed_date: 2026-10-13}
+  - {id: access-summit-daily-ski-cooper-shuttle, url: "https://www.summitdaily.com/news/free-shuttle-will-offer-service-connecting-leadville-to-nearby-ski-cooper/", title: "Free shuttle will offer service connecting Leadville to nearby Ski Cooper (Summit Daily)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free weekend shuttle from 3rd and Harrison in downtown Leadville to Ski Cooper, 2024 to 2025 season."}
+  - {id: access-ktvz-mt-bachelor-shuttle, url: "https://ktvz.com/news/deschutes-county/2023/03/13/mt-bachelor-shuttle-buses-can-help-skiers-boarders-deal-with-traffic-jams-heading-to-the-slopes/", title: "Mt. Bachelor shuttle buses can help skiers, boarders deal with traffic jams (KTVZ, March 13, 2023)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Cascades East Transit Mt. Bachelor shuttles ran every 15 minutes on weekends."}
+  - {id: access-streamline-bridger-bowl, url: "https://streamlinebus.com/bridgerbowl", title: "Bridger Bowl (Streamline)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free weekend service to Bridger Bowl for the 2024 to 2025 season from the MSU Strand Union Building and the Gallatin County Fairgrounds park and ride."}
+  - {id: access-snow-bus-winter-2025-26, url: "https://www.courses-uhms.org/images/courses/Winter_Symposium/SNOWBusWinter25-26.pdf", title: "SNOW Bus winter 2025 to 2026 schedule (copy hosted by courses-uhms.org)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free bus from December 4, 2025 to April 5, 2026 with stops at Mountain Mall, the Depot Transit Center, downtown lodges and the resort's Base Lodge and Village."}
+  - {id: access-ktvb-bogus-basin-bus, url: "https://ktvb.com/article/news/local/bogus-basin-weekend-holiday-bus-service-to-resume/277-65be581c-50f3-41fa-a45c-c5601a1c70b0", title: "Bogus Basin weekend, holiday bus service to resume (KTVB)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Paid bus from Meridian, Eagle and downtown Boise on weekends and holidays."}
+  - {id: access-grand-targhee-teton-valley-shuttle, url: "https://www.grandtarghee.com/sites/default/files/2023-11/Teton%20Valley%20Shuttle%20Schedule.pdf", title: "Teton Valley Shuttle Schedule, November 2023 (Grand Targhee Resort)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Stops include the Victor Depot, Driggs Transit Center, Teton Valley Resort and Driggs Employee Housing."}
 resorts:
   - id: copper-mountain
     name: Copper Mountain
@@ -83,6 +89,7 @@ resorts:
     state: CO
     owner: {value: Lake County, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published, note: "Managed by Cooper Hill Ski Area, a 501(c)4 nonprofit with a volunteer board."}
     operator_scale: {value: 2, source_id: wikipedia-ski-cooper, as_of: 2026-10-13, confidence: published, note: "Owned by Lake County and managed by a nonprofit with a volunteer board. Public owner."}
+    access: {rating: mixed, summary_md: "A free weekend shuttle has run in winter from downtown Leadville to Ski Cooper.", source_id: access-summit-daily-ski-cooper-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 2024 to 2025 season, run by Downtowner; the current season was not confirmed."}
     lat: 39.36
     lon: -106.302
     location_source_id: wikipedia-ski-cooper
@@ -111,6 +118,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: null   # article says founded by Aaron and Jen Brill in 2002 but does not state the current owner
+    access: {rating: car_centric, summary_md: "Staff typically drive the six miles from the town of Silverton to the ski area.", source_id: wikipedia-silverton-mountain, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Silverton, Colorado article."}
     lat: 37.8847
     lon: -107.66529
     location_source_id: wikipedia-silverton-mountain
@@ -135,6 +143,7 @@ resorts:
     state: CO
     owner: {value: City of Steamboat Springs, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published, note: "Owned and operated by the Parks, Open Space and Recreation Department."}
     operator_scale: {value: 2, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-13, confidence: published, note: "Owned and operated by the City of Steamboat Springs parks department. Municipal operator."}
+    access: {rating: convenient, summary_md: "The ski area sits on Howelsen Hill in the city of Steamboat Springs.", source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-13, confidence: published, note: "Rated convenient because the city sits at the base. Free Steamboat Springs Transit buses run in the city (access-steamboat-springs-transit-winter)."}
     lat: 40.483
     lon: -106.839
     location_source_id: wikipedia-howelsen-hill-ski-area
@@ -250,6 +259,7 @@ resorts:
     state: OR
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Owned since 2001. POWDR announced a sale in August 2024 and later said it would keep Mt. Bachelor."}
     operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation. POWDR announced a sale in 2024 and later said it would keep Mt. Bachelor."}
+    access: {rating: transit_friendly, summary_md: "Cascades East Transit runs a winter shuttle to Mt. Bachelor from Bend.", source_id: access-ktvz-mt-bachelor-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. A Lonely Planet guide gives mid December to mid April from the Bend park and ride and says resort staff sometimes ride free."}
     lat: 44.003
     lon: -121.677
     location_source_id: wikipedia-mount-bachelor-ski-area
@@ -339,6 +349,7 @@ resorts:
     state: MT
     owner: {value: Bridger Bowl (locally owned nonprofit), source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 2, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-13, confidence: published, note: "Locally owned nonprofit."}
+    access: {rating: mixed, summary_md: "Free Streamline buses run to Bridger Bowl on winter weekends from Montana State University and the Bozeman fairgrounds.", source_id: access-streamline-bridger-bowl, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The Montana State University Bridger Bowl Ski Bus page says Bridger Bowl contracts First Student and Streamline for the service."}
     lat: 45.818
     lon: -110.897
     location_source_id: wikipedia-bridger-bowl-ski-area
@@ -363,6 +374,7 @@ resorts:
     state: MT
     owner: {value: "Winter Sports, Inc.", source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says billionaire Bill Foley became majority shareholder in 2007 and reports no later change; not confirmed on the resort site."}
     operator_scale: {value: 2, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "Winter Sports, Inc., with Bill Foley as majority shareholder since 2007. Independent company."}
+    access: {rating: convenient, summary_md: "The free SNOW Bus runs between downtown Whitefish and the resort's Base Lodge and Village.", source_id: access-snow-bus-winter-2025-26, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The nonprofit Big Mountain Commercial Association runs it; the resort also posts a 2026 summer schedule at skiwhitefish.com."}
     lat: 48.5
     lon: -114.34
     location_source_id: wikipedia-whitefish-mountain-resort
@@ -423,6 +435,7 @@ resorts:
     state: ID
     owner: {value: Bogus Basin Recreation Association (nonprofit), source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: estimated, note: "Operator per the article; that sentence is marked citation needed."}
     operator_scale: {value: 2, source_id: wikipedia-bogus-basin, as_of: 2026-10-13, confidence: estimated, note: "Operated by the Bogus Basin Recreation Association, a nonprofit (citation needed in the source)."}
+    access: {rating: mixed, summary_md: "A paid bus runs to Bogus Basin on weekends and holidays from Meridian, Eagle and downtown Boise.", source_id: access-ktvb-bogus-basin-bus, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The report date is not shown in the result; the current season was not confirmed."}
     lat: 43.764
     lon: -116.104
     location_source_id: wikipedia-bogus-basin
@@ -479,6 +492,7 @@ resorts:
     state: WY
     owner: {value: Gillett family, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says George and Rose Gillett and their four sons bought the resort from Booth Creek in June 2000 and reports no later sale; not confirmed on the resort site."}
     operator_scale: {value: 1, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-13, confidence: estimated, note: "The Gillett family bought the resort in 2000 and no later sale is reported; single resort family ownership."}
+    access: {rating: convenient, summary_md: "The resort's Teton Valley shuttle links the base with Driggs, Victor and the Driggs employee housing.", source_id: access-grand-targhee-teton-valley-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. East Idaho News reported a plan to end Victor service in favor of more Driggs trips; the resort page still lists park and ride at the Victor Depot."}
     lat: 43.789
     lon: -110.957
     location_source_id: wikipedia-grand-targhee-resort

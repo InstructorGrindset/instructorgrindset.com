@@ -8,6 +8,7 @@ status: draft
 # the article says most of the club's ski runs are.
 sources:
   - {id: wikipedia-yellowstone-club, url: https://en.wikipedia.org/wiki/Yellowstone_Club, title: Yellowstone Club (Wikipedia), accessed_date: 2026-10-11}
+  - {id: access-dol-yellowstone-club-transportation-driver, url: "https://seasonaljobs.dol.gov/jobs/H-400-26222-156948", title: "Employee Transportation Driver job order, Yellowstone Club (U.S. Department of Labor SeasonalJobs)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Drivers carry employees to and from lodges, employee housing, Big Sky and Belgrade; November 2026 to April 2027 season."}
 resorts:
   - id: yellowstone-club
     name: Yellowstone Club
@@ -16,6 +17,7 @@ resorts:
     state: MT
     owner: {value: CrossHarbor Capital Partners, source_id: wikipedia-yellowstone-club, as_of: 2026-10-11, confidence: published, note: "Bought for 115 million dollars in June 2009 out of Chapter 11 by CrossHarbor, a firm led by club member Sam Byrne; the article names CrossHarbor as the owner."}
     operator_scale: {value: 2, source_id: wikipedia-yellowstone-club, as_of: 2026-10-13, confidence: estimated, note: "Sold in 2009 to the private equity firm CrossHarbor Capital Partners; a single private club, no large multi resort corporate operation shown."}
+    access: {rating: convenient, summary_md: "Club drivers carry staff between employee housing, the lodges, Big Sky and Belgrade.", source_id: access-dol-yellowstone-club-transportation-driver, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Related postings describe shuttles between employee housing and the club."}
     lat: 45.23138
     lon: -111.45126
     location_source_id: wikipedia-yellowstone-club

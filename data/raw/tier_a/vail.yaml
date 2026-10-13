@@ -184,6 +184,21 @@ sources:
   title: Southeast Vermont Transit (Wikipedia), MOOver routes
   accessed_date: '2026-10-13'
   note: Mount Snow circulators and the Bellows Falls to Okemo shuttle.
+- id: access-truckee-tart-winter-2026
+  url: "https://www.truckee.com/news/reduce-traffic-congestion-headaches-take-tart-to-ski-ride-and-tart-connect-to-get-around-truckee-this-winter"
+  title: "Take TART to ski and ride this winter (Truckee.com, January 8, 2026)"
+  accessed_date: '2026-10-13'
+  note: "From a search result for this page; page not opened. Free daily Highway 89, Highway 267 and Truckee Local routes; hourly daytime buses to Northstar."
+- id: access-timeout-ourbus-ski-routes
+  url: "https://www.timeout.com/newyork/news/a-new-car-free-ski-bus-service-will-take-you-from-manhattan-to-the-catskills-and-poconos-010626"
+  title: "A new car free ski bus service will take you from Manhattan to the Catskills and Poconos (Time Out New York, 2026)"
+  accessed_date: '2026-10-13'
+  note: "From a search result for this page; page not opened. OurBus seasonal routes to Windham, Hunter and Belleayre on Wednesdays, Saturdays and Sundays."
+- id: access-wikipedia-laurel-mountain-state-park
+  url: "https://en.wikipedia.org/wiki/Laurel_Mountain_State_Park"
+  title: "Laurel Mountain State Park (Wikipedia)"
+  accessed_date: '2026-10-13'
+  note: "The park and its ski area lie 2 miles south of US 30 near Jennerstown."
 resorts:
 - id: vail
   name: Vail
@@ -591,6 +606,7 @@ resorts:
     confidence: published
     note: operated under lease per 10-K Item 2; Wikipedia names EPR Properties as property owner
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free TART Highway 267 buses run daily between Truckee and Northstar.", source_id: access-truckee-tart-winter-2026, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Hourly daytime trips; night service also links Truckee and Northstar."}
   lat: 39.264
   lon: -120.125
   location_source_id: wikipedia-northstar-california
@@ -1245,6 +1261,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort on US 302 in Bartlett, near North Conway.", source_id: wikipedia-attitash-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Bartlett, New Hampshire article."}
   lat: 44.0822
   lon: -71.2297
   location_source_id: wikipedia-attitash-mountain-resort
@@ -1297,6 +1314,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: mixed, summary_md: "OurBus runs seasonal ski buses from New York City to Hunter on Wednesdays and weekends.", source_id: access-timeout-ourbus-ski-routes, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Day trip service for skiers; no local bus to the base found."}
   lat: 42.2003
   lon: -74.2303
   location_source_id: wikipedia-hunter-mountain-ski-area
@@ -1375,6 +1393,7 @@ resorts:
     confidence: published
     note: owned and leased per 10-K Item 2
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Mount Sunapee State Park in Newbury.", source_id: wikipedia-mount-sunapee-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 43.3306
   lon: -72.08
   location_source_id: wikipedia-mount-sunapee-resort
@@ -1446,6 +1465,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Bennington and Francestown.", source_id: wikipedia-crotched-mountain-ski-and-ride, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 43.0023
   lon: -71.8786
   location_source_id: wikipedia-crotched-mountain-ski-and-ride
@@ -1503,6 +1523,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in the borough of Seven Springs.", source_id: wikipedia-seven-springs-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article; a search found no staff housing source. The borough, population 26, covers most of the resort (Seven Springs, Pennsylvania Wikipedia), so it is rated car centric."}
   lat: 40.0231
   lon: -79.2928
   location_source_id: wikipedia-seven-springs-mountain-resort
@@ -1577,6 +1598,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort near the village of Hidden Valley in the Laurel Highlands.", source_id: wikipedia-hidden-valley-resort-pennsylvania, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 40.058
   lon: -79.2583
   location_source_id: wikipedia-hidden-valley-resort-pennsylvania
@@ -1626,6 +1648,7 @@ resorts:
     confidence: published
     note: leased per 10-K Item 2; Wikipedia names the Commonwealth of Pennsylvania as owner
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Laurel Mountain State Park, south of US 30 near Jennerstown.", source_id: access-wikipedia-laurel-mountain-state-park, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 40.1671
   lon: -79.1692
   location_source_id: openskimap-ski-areas
@@ -1673,6 +1696,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in southern Pennsylvania.", source_id: wikipedia-liberty-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 39.7635
   lon: -77.375
   location_source_id: wikipedia-liberty-mountain-resort
@@ -1747,6 +1771,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in York County, Pennsylvania.", source_id: wikipedia-roundtop-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 40.108
   lon: -76.926
   location_source_id: wikipedia-roundtop-mountain-resort
@@ -1812,6 +1837,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort on Two Top Mountain between Mercersburg, Pennsylvania and Clear Spring, Maryland.", source_id: wikipedia-whitetail-ski-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 39.7417
   lon: -77.9328
   location_source_id: wikipedia-whitetail-ski-resort
@@ -1873,6 +1899,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Kidder Township in the Pocono Mountains.", source_id: wikipedia-jack-frost-big-boulder, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 41.111
   lon: -75.652
   location_source_id: wikipedia-jack-frost-big-boulder
@@ -1916,6 +1943,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Kidder Township in the Pocono Mountains.", source_id: wikipedia-jack-frost-big-boulder, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the Jack Frost and Big Boulder article."}
   lat: 41.0483
   lon: -75.6014
   location_source_id: openskimap-ski-areas
@@ -1962,6 +1990,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area on the St. Croix River south of Afton.", source_id: wikipedia-afton-alps, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 44.8556
   lon: -92.7892
   location_source_id: wikipedia-afton-alps
@@ -2027,6 +2056,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Munson Township, east of Chesterland.", source_id: wikipedia-alpine-valley-ski-area-ohio, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 41.5303
   lon: -81.2662
   location_source_id: wikipedia-alpine-valley-ski-area-ohio
@@ -2081,6 +2111,7 @@ resorts:
     confidence: published
     note: owned per 10-K Item 2; Wikipedia infobox names EPR Properties
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Cuyahoga Valley National Park near Peninsula.", source_id: wikipedia-boston-mills-brandywine, as_of: 2026-10-13, confidence: estimated, note: "No bus found in the article. The Cuyahoga Valley Scenic Railroad, an excursion line, lists Boston Mills Ski Resort at its Boston Mill station (Wikipedia); winter service not checked."}
   lat: 41.2648
   lon: -81.5644
   location_source_id: wikipedia-boston-mills-brandywine
@@ -2109,6 +2140,7 @@ resorts:
     confidence: published
     note: owned per 10-K Item 2; Wikipedia infobox names EPR Properties
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Cuyahoga Valley National Park near Peninsula.", source_id: wikipedia-boston-mills-brandywine, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 41.2849
   lon: -81.5517
   location_source_id: wikipedia-boston-mills-brandywine
@@ -2137,6 +2169,7 @@ resorts:
     confidence: published
     note: leased per 10-K Item 2
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort off US 33 east of Bellefontaine.", source_id: wikipedia-mad-river-mountain, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 40.3163
   lon: -83.6806
   location_source_id: wikipedia-mad-river-mountain
@@ -2198,6 +2231,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in the St. Louis suburb of Wildwood.", source_id: wikipedia-hidden-valley-ski-area-missouri, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 38.5356
   lon: -90.6529
   location_source_id: wikipedia-hidden-valley-ski-area-missouri
@@ -2260,6 +2294,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort on the Missouri River bluffs northwest of Kansas City.", source_id: wikipedia-snow-creek-ski-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 39.4687
   lon: -94.972
   location_source_id: wikipedia-snow-creek-ski-resort
@@ -2300,6 +2335,7 @@ resorts:
     confidence: published
     note: owned and leased per 10-K Item 2
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area near Paoli, Indiana.", source_id: wikipedia-paoli-peaks, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 38.5578
   lon: -86.5103
   location_source_id: wikipedia-paoli-peaks
@@ -2359,6 +2395,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Brighton, Michigan.", source_id: wikipedia-mount-brighton, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 42.5381
   lon: -83.8069
   location_source_id: wikipedia-mount-brighton
@@ -2425,6 +2462,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area just north of the Illinois border, 55 miles north of Chicago.", source_id: wikipedia-wilmot-mountain, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 42.5
   lon: -88.1889
   location_source_id: wikipedia-wilmot-mountain

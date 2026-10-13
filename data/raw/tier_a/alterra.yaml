@@ -31,12 +31,19 @@ sources:
   - {id: access-wikipedia-utah-transit-authority, url: "https://en.wikipedia.org/wiki/Utah_Transit_Authority", title: "Utah Transit Authority (Wikipedia), ski service", accessed_date: 2026-10-13, note: "Seasonal ski buses to Alta, Brighton, Snowbird, Solitude, Snowbasin and Powder Mountain."}
   - {id: access-wikipedia-eastern-sierra-transit, url: "https://en.wikipedia.org/wiki/Eastern_Sierra_Transit", title: "Eastern Sierra Transit (Wikipedia), bus routes", accessed_date: 2026-10-13, note: "Seasonally adjusted Mammoth Lakes routes."}
   - {id: access-wikipedia-mountain-transit, url: "https://en.wikipedia.org/wiki/Mountain_Transit", title: "Mountain Transit (Wikipedia), route overview", accessed_date: 2026-10-13, note: "Red Line serves Big Bear Mountain Resort; route 5 serves Snow Valley."}
+  - {id: access-steamboat-springs-transit-winter, url: "https://steamboatsprings.net/DocumentCenter/View/41418/Steamboat-Springs-Transit-Shifts-Gears-into-Winter", title: "Steamboat Springs Transit Shifts Gears into Winter (City of Steamboat Springs)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free Steamboat Springs Transit routes serve the Gondola Transit Center at the ski area; winter 2025 to 2026 release."}
+  - {id: access-tart-route-hwy89, url: "https://tahoetruckeetransit.com/routes/route-hwy89", title: "Route Hwy89 (Tahoe Truckee Area Regional Transit)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free bus from Tahoe City through Olympic Valley to Truckee."}
+  - {id: access-stratton-public-transit, url: "https://www.stratton.com/plan-your-trip/getting-here/stratton-public-transit", title: "Public Transit To Stratton Mountain (Stratton Mountain Resort)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Winter MOOver service between Stratton and Manchester; employee shuttles from the housing lodges."}
+  - {id: access-schweitzer-directions, url: "https://www.schweitzer.com/discover-schweitzer/directions", title: "Directions (Schweitzer)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Winter connector from the Red Barn park and ride lot to Schweitzer Village."}
+  - {id: access-coolworks-snowshoe, url: "https://www.coolworks.com/snowshoe-mountain-resort/profile", title: "Snowshoe Mountain Resort employer profile (Cool Works)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Housing is provided for staff, included in pay or at a cost."}
+  - {id: access-wikipedia-june-lake-california, url: "https://en.wikipedia.org/wiki/June_Lake,_California", title: "June Lake, California (Wikipedia)", accessed_date: 2026-10-13, note: "Most of the June Mountain winter workforce lives in employee housing in Mammoth Lakes and rides a daily employer bus."}
 resorts:
   - id: steamboat
     name: Steamboat
     state: CO
     owner: {value: Alterra Mountain Company, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner; the article says the resort is operated by the Steamboat Ski & Resort Corporation."}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Free Steamboat Springs Transit buses run from downtown and west Steamboat to the Gondola Transit Center at the base.", source_id: access-steamboat-springs-transit-winter, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. City release for the 2025 to 2026 winter."}
     lat: 40.459
     lon: -106.803
     location_source_id: wikipedia-steamboat-ski-resort
@@ -126,6 +133,7 @@ resorts:
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Free TART Highway 89 buses run from Tahoe City through Olympic Valley to Truckee.", source_id: access-tart-route-hwy89, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. A Town of Truckee notice from January 2026 also lists weekend park and ride shuttles from Truckee to Palisades Tahoe."}
     lat: 39.196
     lon: -120.235
     location_source_id: wikipedia-palisades-tahoe
@@ -243,6 +251,7 @@ resorts:
     state: VT
     owner: {value: Alterra Mountain Company, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Fare free MOOver buses run in winter between Stratton and Manchester, and resort shuttles serve the employee housing lodges.", source_id: access-stratton-public-transit, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. MOOver and Stratton started the Manchester route in November 2021 for employees and the community, alongside 150 new employee housing beds. Fares from access-wikipedia-southeast-vermont-transit. No summer service."}
     lat: 43.11417
     lon: -72.90667
     location_source_id: wikipedia-stratton-mountain-resort
@@ -302,6 +311,7 @@ resorts:
     state: ID
     owner: {value: Alterra Mountain Company, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "SPOT buses link Sandpoint with the Red Barn park and ride, where a winter connector climbs to Schweitzer Village.", source_id: access-schweitzer-directions, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The Sandpoint Reader reported SPOT taking over the Schweitzer shuttle as a free service; the Sandpoint, Idaho Wikipedia article says SPOT charges no fare."}
     lat: 48.367
     lon: -116.623
     location_source_id: wikipedia-schweitzer-mountain
@@ -354,6 +364,7 @@ resorts:
     state: WV
     owner: {value: Alterra Mountain Company, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: convenient, summary_md: "Snowshoe provides staff housing, and the resort village sits on the mountain near the summit.", source_id: access-coolworks-snowshoe, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Snowshoe job postings on jobs.alterramtnco.com also list on mountain employee housing for rent. Village location from wikipedia-snowshoe-mountain."}
     lat: 38.40889
     lon: -79.99472
     location_source_id: wikipedia-snowshoe-mountain
@@ -377,6 +388,7 @@ resorts:
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: convenient, summary_md: "Most June Mountain staff live in employee housing in Mammoth Lakes and ride a daily employer bus to the resort.", source_id: access-wikipedia-june-lake-california, as_of: 2026-10-13, confidence: published, note: "The housing sits in Mammoth Lakes; rated convenient because the employer houses and buses staff."}
     lat: 37.7683
     lon: -119.0906
     location_source_id: wikipedia-june-mountain-ski-area
@@ -492,6 +504,7 @@ resorts:
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published, note: "Merged into Alterra in 2018; operates with Palisades Tahoe on one pass, linked by the base to base gondola."}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: mixed, summary_md: "A free resort shuttle links Alpine Meadows with the Olympic Valley base, which TART Highway 89 buses serve.", source_id: wikipedia-palisades-tahoe, as_of: 2026-10-13, confidence: estimated, note: "Free shuttles between the two bases from wikipedia-palisades-tahoe, stated for the combined resort. TART facts from access-tart-route-hwy89. No TART stop at Alpine Meadows found."}
     lat: 39.164
     lon: -120.239
     location_source_id: wikipedia-alpine-meadows-ski-resort

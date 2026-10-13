@@ -25,6 +25,10 @@ sources:
   - {id: access-wikipedia-american-dream-mall, url: "https://en.wikipedia.org/wiki/American_Dream_(shopping_mall)", title: "American Dream (shopping mall) (Wikipedia), transit", accessed_date: 2026-10-13, note: "NJ Transit bus routes and the Meadowlands Rail Line."}
   - {id: metroslopes-ziprecruiter, url: "https://www.ziprecruiter.com/co/MetroSlopes", title: "MetroSlopes company page (ZipRecruiter)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Describes an indoor ski and snowboard training center (immersive infinite slopes, indoor freestyle park, trampoline area, beginner dry slope, skier gym) and year round coach hiring."}
   - {id: wikipedia-san-francisco-international-airport, url: "https://en.wikipedia.org/wiki/San_Francisco_International_Airport", title: "San Francisco International Airport (Wikipedia)", accessed_date: 2026-10-13, note: "airport coordinates, used as a regional placeholder"}
+  - {id: access-utah-olympic-legacy-residences, url: "https://utaholympiclegacy.org/residences-at-utah-olympic-park/", title: "Residences at Utah Olympic Park (Utah Olympic Legacy Foundation)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. The Kimball Junction Transit Center is 1.2 miles away, and High Valley Transit runs free service from 5 a.m. to 1 a.m."}
+  - {id: access-hvt-route-108, url: "https://www.hvtutah.gov/bus-108-to-silver-creek-village", title: "108 to Silver Creek Village (High Valley Transit)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Route 108 stops at Woodward Park City between Silver Creek Village and the Jeremy Ranch park and ride."}
+  - {id: access-truckee-chamber-tart, url: "https://business.truckee.com/list/member/tahoe-truckee-area-regional-transit-tart-5560", title: "Tahoe Truckee Area Regional Transit (TART) member listing (Truckee Chamber of Commerce)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. In winter, Truckee local service extends to the Donner Summit ski areas, including Boreal, Sugar Bowl and Soda Springs."}
+  - {id: access-lakeplacid-xprss-trolley, url: "https://www.lakeplacid.com/story/2023/3-ways-to-tour-lake-placid-this-summer", title: "3 ways to tour Lake Placid this summer (lakeplacid.com, 2023)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Green trolleys run between the Lake Placid Jumping Complex and the Price Chopper supermarket with about ten stops."}
 resorts:
   - id: big-snow-american-dream
     tier_a_status: approved
@@ -75,6 +79,7 @@ resorts:
     state: UT
     owner: {value: Utah Athletic Foundation, source_id: wikipedia-utah-olympic-park, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 2, source_id: wikipedia-utah-olympic-park, as_of: 2026-10-13, confidence: estimated, note: "Owned by the Utah Athletic Foundation. Nonprofit owner."}
+    access: {rating: mixed, summary_md: "Free High Valley Transit buses serve the Kimball Junction Transit Center, 1.2 miles from the park.", source_id: access-utah-olympic-legacy-residences, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The Park Record reported a free park shuttle from the transit center to the Quinney Welcome Center (parkrecord.com, about 2017); current service not confirmed."}
     lat: 40.71207
     lon: -111.56193
     location_source_id: wikipedia-utah-olympic-park
@@ -93,6 +98,7 @@ resorts:
     # Approximate: Park City town coordinates from Wikipedia. The facility is at 1 Victory Lane, Park City;
     # no reachable source gave its own coordinates. Replace before approval.
     operator_scale: {value: 2, source_id: wikipedia-us-ski-and-snowboard, as_of: 2026-10-13, confidence: estimated, note: "U.S. Ski & Snowboard, the national governing body. Nonprofit owner."}
+    access: {rating: transit_friendly, summary_md: "Park City Transit runs fare free buses on 13 routes across Park City, the home of the center.", source_id: access-wikipedia-park-city-transit, as_of: 2026-10-13, confidence: estimated, note: "The stop nearest the center was not verified; location from wikipedia-park-city-utah."}
     lat: 40.6503
     lon: -111.5014
     location_source_id: wikipedia-park-city-utah
@@ -109,6 +115,7 @@ resorts:
     state: UT
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Fare free High Valley Transit route 108 stops at Woodward on its way between Silver Creek Village and the Jeremy Ranch park and ride.", source_id: access-hvt-route-108, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. KPCW reported in October 2024 that the Woodward stop was being added. Fares from the High Valley Transit Wikipedia article."}
     lat: 40.75237
     lon: -111.58347
     location_source_id: openskimap-ski-areas
@@ -138,6 +145,7 @@ resorts:
     state: CA
     owner: {value: POWDR, source_id: wikipedia-boreal-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Boreal Mountain, home of Woodward Tahoe, is owned by Powdr"}
     operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation."}
+    access: {rating: mixed, summary_md: "In winter TART's Truckee local service extends to the Donner Summit ski areas, including Boreal.", source_id: access-truckee-chamber-tart, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Woodward Tahoe sits at Boreal (wikipedia-boreal-mountain-resort). The service is seasonal while the facility runs all year."}
     lat: 39.3317
     lon: -120.3511
     location_source_id: wikipedia-boreal-mountain-resort
@@ -152,6 +160,7 @@ resorts:
     state: NY
     owner: {value: Olympic Regional Development Authority, source_id: wikipedia-lake-placid-olympic-ski-jumping-complex, as_of: 2026-10-11, confidence: published, note: operator}
     operator_scale: {value: 2, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-13, confidence: published, note: "Operated by the Olympic Regional Development Authority, a New York State public benefit corporation."}
+    access: {rating: transit_friendly, summary_md: "The Lake Placid Xprss trolley runs between the Jumping Complex and the village, with several stops on Main Street.", source_id: access-lakeplacid-xprss-trolley, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The article describes summer service; winter service was not confirmed."}
     lat: 44.2561
     lon: -73.964
     location_source_id: wikipedia-lake-placid-olympic-ski-jumping-complex
