@@ -1,0 +1,1460 @@
+# Live webcam links (owner request 2026-10-13: "add live webcam links for all resorts that have those").
+# Links only, opened in a new tab, never embedded. Every URL was seen in a web search result on the resort's own
+# domain or its operator's domain (search result rule: page not opened, confidence estimated). Aggregators are
+# never used. Resorts with no cams page found have no record.
+batch: webcams-tier-b
+researched_date: 2026-10-13
+sources:
+- id: webcams-bear-valley-search
+  url: https://www.bearvalley.com/webcam
+  title: WEBCAM (Bear Valley)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mt-spokane-search
+  url: https://www.mtspokane.com/webcams
+  title: Mt. Spokane Web Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-sierra-at-tahoe-search
+  url: https://sierraattahoe.com/live-cams/
+  title: Sierra-at-Tahoe Webcams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mission-ridge-search
+  url: https://www.missionridge.com/mountain-report/#webcam
+  title: Mountain Report (Mission Ridge, webcam section)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-brundage-search
+  url: https://brundage.com/live-cams/
+  title: Live Cams - Brundage Mountain Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-silver-mountain-search
+  url: https://www.silvermt.com/index.php/mountain/about/webcams
+  title: Silver Mountain (webcams page)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-white-pass-search
+  url: https://skiwhitepass.com/mountain-cams
+  title: Mountain Cams (White Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-powderhorn-search
+  url: https://www.powderhorn.com/explore/conditions/webcams.html
+  title: Webcams (Powderhorn Mountain Resort)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-wolf-creek-search
+  url: https://wolfcreekski.com/webcams/
+  title: Webcams - Wolf Creek Ski Area - Colorado
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-purgatory-search
+  url: https://www.purgatory.ski/mountain/weather-conditions-webcams/webcams/
+  title: Webcams - Purgatory Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mount-rose-search
+  url: https://skirose.com/the-mountain-web-cams/
+  title: See What Conditions Are Like At Mt. Rose Right Now Via Our Webcams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-loveland-search
+  url: https://skiloveland.com/webcams/
+  title: Loveland Ski Area Weather Webcam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-red-lodge-search
+  url: https://www.redlodgemountain.com/webcam/
+  title: Webcam - Red Lodge Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-china-peak-search
+  url: https://www.skichinapeak.com/webcam/
+  title: China Peak Mountain Resort (webcam page)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-soldier-mountain-search
+  url: https://soldiermountain.com/snowcam/
+  title: SnowCam - Soldier Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-tamarack-search
+  url: https://tamarackidaho.com/about/webcams
+  title: Tamarack Resort Live Webcams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-lookout-pass-search
+  url: https://skilookout.com/snow-report/
+  title: Snow Report - Lookout Pass Ski & Recreation Area
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-pebble-creek-search
+  url: https://pebblecreekskiarea.com/live-stream/
+  title: Webcam (Pebble Creek)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-discovery-search
+  url: https://www.skidiscovery.com/conditions/
+  title: Conditions (Discovery Ski Area)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-dodge-ridge-search
+  url: https://dodgeridge.com/mountain-web-cams/
+  title: Mountain Web Cams - Dodge Ridge Mountain Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-dodge-ridge-summit-web-cam-search
+  url: https://dodgeridge.com/mountain-web-cams/summit-web-cam/
+  title: Summit Web Cam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-dodge-ridge-mid-mountain-cam-search
+  url: https://dodgeridge.com/mountain-web-cams/mid-mountain-cam/
+  title: Mid Mountain Cam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-dodge-ridge-base-area-web-cam-search
+  url: https://dodgeridge.com/mountain-web-cams/base-area-web-cam
+  title: Base Area Web Cam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-skibowl-search
+  url: https://skibowl.com/jet-popup/video-cam-menu/
+  title: Video Cam Menu - Mt. Hood Ski Bowl
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-arizona-snowbowl-search
+  url: https://www.snowbowl.ski/the-mountain/weather-conditions-webcams/
+  title: Weather, Conditions & Webcams - Arizona Snowbowl
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-hoodoo-search
+  url: https://hoodoo.com/the-mountain/webcams/
+  title: Webcams - Hoodoo Ski Area
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mt-baldy-search
+  url: https://winter.mtbaldyresort.com/webcams/
+  title: Webcams - Mt Baldy Resort Winter Activities
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-homewood-search
+  url: https://skihomewood.com/webcams/
+  title: Mountain Cams (Homewood)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-monarch-search
+  url: https://skimonarch.com/conditions/
+  title: Conditions @ Monarch Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-lost-trail-search
+  url: https://losttrail.com/
+  title: Snow Report - Lost Trail Ski Area
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-ski-santa-fe-search
+  url: https://skisantafe.com/webcams/
+  title: Ski Santa Fe - Live Webcams - Real-Time Mountain Views
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-ski-apache-search
+  url: https://skiapache.com/mountain-info/live-webcams/
+  title: Ski Apache Webcam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-brian-head-search
+  url: https://www.brianhead.com/weather-conditions-webcams/
+  title: Weather, Conditions & Webcams - Brian Head Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-diamond-peak-search
+  url: https://www.diamondpeak.com/the-mountain/web-cams/
+  title: Diamond Peak Web Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-diamond-peak-diamond-peak-summit-web-cam-search
+  url: https://www.diamondpeak.com/the-mountain/web-cams/summit-cam/
+  title: Diamond Peak Summit Web Cam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-sunlight-search
+  url: https://sunlightmtn.com/the-mountain/live-cams/leonards-lookout
+  title: Sunlight Mountain Snow Cam - Glenwood Springs Webcam (Leonard's Lookout)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-beaver-mountain-search
+  url: https://www.skithebeav.com/mountain/conditions/
+  title: Conditions - Beaver Mountain Ski Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mt-shasta-search
+  url: https://www.skipark.com/winter/mountain-cams
+  title: Webcams & Conditions (Mt. Shasta Ski Park)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-angel-fire-search
+  url: https://www.angelfireresort.com/weather/
+  title: Weather & Webcams - Angel Fire Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-lutsen-search
+  url: https://www.lutsen.com/mountain-info/our-webcam
+  title: Our Webcam (Lutsen Mountains)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-saddleback-search
+  url: https://www.saddlebackmaine.com/webcams/
+  title: Webcams (Saddleback)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-willamette-pass-search
+  url: https://www.willamettepass.ski/weather-conditions-webcams/webcams/
+  title: Webcams - Willamette Pass
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-terry-peak-search
+  url: https://terrypeak.com/the-mountain/live-web-cams/
+  title: Live Weather Web Cams (Terry Peak)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-gore-search
+  url: https://goremountain.com/the-mountain/webcam/
+  title: Base Area Webcam - Gore Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-gore-bear-mountain-webcam-search
+  url: https://goremountain.com/the-mountain/bear-mountain-webcam/
+  title: Bear Mountain Webcam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bretton-woods-search
+  url: https://www.brettonwoods.com/live-cam-forecast/
+  title: Bretton Woods Live Cam & Forecast
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bluewood-search
+  url: https://bluewood.com/conditions
+  title: Conditions - Bluewood
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-boreal-search
+  url: https://www.rideboreal.com/explore/webcams/
+  title: Live Webcams (Boreal Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-boreal-boreal-mountain-webcam-search
+  url: https://www.rideboreal.com/explore/webcams/boreal-mountain-cam/
+  title: Boreal Mountain Webcam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-boreal-boreal-snow-stake-cam-search
+  url: https://www.rideboreal.com/explore/webcams/snowstake-cam/
+  title: Boreal Snow Stake Cam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-boreal-bunker-cam-search
+  url: https://www.rideboreal.com/explore/webcams/bunker-camera/
+  title: Bunker Cam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mountain-high-search
+  url: https://www.mthigh.com/site/mountain/mountain-info/livecams
+  title: Mountain High - Live Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-snow-king-search
+  url: https://snowkingmountain.com/mountain/webcams/
+  title: Jackson Hole Webcams at Snow King Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-granby-ranch-search
+  url: https://granbyranch.com/granby-ranch-webcam/
+  title: Granby Ranch Webcams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-big-powderhorn-search
+  url: https://bigpowderhorn.net/the-mountain/web-cams
+  title: Live Webcams (Big Powderhorn Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-big-powderhorn-summit-view-search
+  url: https://bigpowderhorn.net/the-mountain/web-cams/summit-view/
+  title: Summit View
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-big-powderhorn-base-view-search
+  url: https://bigpowderhorn.net/the-mountain/web-cams/base-view/
+  title: Base View
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-big-powderhorn-lower-smoke-search
+  url: https://bigpowderhorn.net/the-mountain/web-cams/lower-smoke/
+  title: Lower Smoke
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-snowy-range-search
+  url: https://snowyrangeski.com/webcams/
+  title: WEBCAMS - Snowy Range Ski Area
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-windham-search
+  url: https://www.windhammountainclub.com/mountain-cam-base/
+  title: Mountain Cam Base Area - Windham Mountain Club
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-granite-peak-search
+  url: https://www.skigranitepeak.com/mountain-info/live-web-cams
+  title: Live Web Cams (Granite Peak)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mount-ashland-search
+  url: https://www.mtashland.com/webcams/
+  title: Webcams (Mt. Ashland)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-holiday-valley-search
+  url: https://www.holidayvalley.com/webcams/
+  title: Webcams (Holiday Valley)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-chestnut-search
+  url: https://www.chestnutmtn.com/live-cameras/
+  title: Live Cameras - Chestnut Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-caberfae-search
+  url: https://caberfaepeaks.com/live-cam-caberfae/
+  title: Live Cams - Caberfae Peaks Ski & Golf Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-red-river-search
+  url: https://www.redriverskiarea.com/explore/about/webcams/
+  title: Webcams (Red River Ski Area)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-greek-peak-search
+  url: https://www.greekpeak.net/ski-ride/webcams/
+  title: Greek Peak Webcams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-sipapu-search
+  url: https://www.sipapu.ski/the-mountain/sipapu-webcams/
+  title: Sipapu Webcams Live Views
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bousquet-search
+  url: https://bousquetmountain.com/live-cam/
+  title: Live Cam - Bousquet Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bromley-search
+  url: https://bromley.com/webcams
+  title: Webcams - Bromley Mountain Ski Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-cascade-search
+  url: https://www.cascademountain.com/snow-cams/
+  title: Live Streaming Snow Cams - Cascade Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-belleayre-search
+  url: https://www.belleayre.com/mountain/web-cams/
+  title: Web Cams (Belleayre Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bolton-valley-search
+  url: https://www.boltonvalley.com/the-resort/live-webcams/
+  title: BV Live Webcams - Bolton Valley
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bristol-search
+  url: https://www.bristolmountain.com/webcam/
+  title: Webcams (Bristol Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-camelback-search
+  url: https://www.camelbackresort.com/resort-information/live-cameras
+  title: Camelback Live Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-blue-mountain-pa-search
+  url: https://www.skibluemt.com/mountain-cams/
+  title: Live Blue Mountain Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-marquette-search
+  url: https://www.marquettemountain.com/winter/live-trail-camera/
+  title: Live Ski Cam & Trail View (Marquette Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mountain-creek-search
+  url: https://mountaincreek.com/skiing-riding/mountain-report/live-cam/
+  title: Live Cam (Mountain Creek)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-shawnee-search
+  url: https://shawneemt.com/mountain-cams/
+  title: LIVE Mountain Cameras (Shawnee Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-crystal-mountain-mi-search
+  url: https://www.crystalmountain.com/ski/cams-conditions/webcams
+  title: Webcams (Crystal Mountain, Michigan)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mohawk-search
+  url: https://www.mohawkmtn.com/the-mountain/webcam/
+  title: mountain webcams (Mohawk Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-pats-peak-search
+  url: https://www.patspeak.com/the-mountain/cams-media/web-cams/
+  title: Web Cams - Pats Peak
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-canaan-valley-search
+  url: https://www.canaanresort.com/resort-webcam
+  title: Resort Webcam (Canaan Valley Resort)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-beech-mountain-search
+  url: https://www.beechmountainresort.com/mountain/webcams/
+  title: Web Cameras (Beech Mountain Resort)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-winterplace-search
+  url: https://winterplace.com/mountain/mountainhouse-cam
+  title: Mountain House Webcam (Winterplace)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-nordic-valley-search
+  url: https://www.nordicvalley.ski/nordic-valley-weather-conditions-webcams/
+  title: Weather, Conditions & Webcams - Nordic Valley Ski Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bear-creek-search
+  url: https://www.bcmountainresort.com/play/snowsports/webcams-ski-area-pennsylvania/
+  title: Mountain Webcam Tour in Pennsylvania - Bear Creek Mountain Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-thunder-ridge-search
+  url: https://thunderridgeski.com/the-mountain/mountain-cam/
+  title: Mountain Cam (Thunder Ridge)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-powder-ridge-ct-search
+  url: https://powderridgepark.com/powder-ridge-webcam/
+  title: Powder Ridge Webcam - Powder Ridge Mountain Park & Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-massanutten-search
+  url: https://www.massresort.com/play/snow-sports/snow-webcams/
+  title: Live Snow Webcams at Massanutten Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-sundown-ia-search
+  url: https://sundownmtn.com/live-webcams-at-sundown-mountain-resort/
+  title: Live Webcams at Sundown Mountain Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-cataloochee-search
+  url: https://cataloochee.com/the-mountain/webcams/
+  title: Webcams of Cataloochee Ski Area
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-summit-snoqualmie-search
+  url: https://www.summitatsnoqualmie.com/webcams
+  title: Webcams (The Summit at Snoqualmie)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-smuggs-search
+  url: https://www.smuggs.com/conditions-stats/web-cams/
+  title: Web Cams at Smugglers' Notch Resort Vermont
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-great-divide-search
+  url: https://www.skigd.com/webcam
+  title: Live Mountain Webcam (Great Divide)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-lee-canyon-search
+  url: https://leecanyonlv.com/the-mountain/webcams
+  title: Webcam - Lee Canyon
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-49-north-search
+  url: https://ski49n.com/mountain-info/webcams
+  title: Webcams (49 Degrees North)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-blacktail-search
+  url: https://blacktailmountain.com/blacktail-webcam/
+  title: Blacktail Webcam - Blacktail Mountain Ski Area
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-plattekill-search
+  url: https://plattekill.com/webcams
+  title: Conditions + Trail Report (Plattekill Mountain webcams)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-ragged-search
+  url: https://www.raggedmountainresort.com/mountain-report-cams/
+  title: 'Mountain Report: Recent Snowfall and Surface Conditions - Ragged Mountain Resort'
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-titus-search
+  url: https://www.titusmountain.com/conditions
+  title: Conditions (Titus Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-oak-mountain-search
+  url: https://oakmountainski.com/the-mountain/webcam
+  title: Oak Mountain - Live WebCam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-holimont-search
+  url: https://holimont.com/resources/slope-report
+  title: 'HoliMont Slope Report: Snow Conditions and SnowCam'
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-kissing-bridge-search
+  url: https://kbski.com/mountain-cams
+  title: Mountain Cams (Kissing Bridge)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-wachusett-search
+  url: https://www.wachusett.com/the-mountain/media-center/webcams/
+  title: Web Cams - Wachusett Mountain
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-perfect-north-search
+  url: https://perfectnorth.com/snow-cams/
+  title: Snow Cams (Perfect North Slopes)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-jiminy-peak-search
+  url: https://www.jiminypeak.com/webcams/
+  title: Webcams (Jiminy Peak)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-catamount-search
+  url: https://catamountski.com/mountain-cam
+  title: Mountain Conditions (Catamount mountain cams)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-hatley-pointe-search
+  url: https://hatleypointe.com/the-mountain/webcams/
+  title: Webcams (Hatley Pointe)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-cooper-spur-search
+  url: https://cooperspur.com/conditions-report/
+  title: Weather Conditions Report - at Cooper Spur Mountain Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-nordic-mountain-search
+  url: https://www.nordicmountain.com/mountain-info/snow-report
+  title: Snow Report (Nordic Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-timber-ridge-mi-search
+  url: https://www.timberridgeski.com/snow-cam/
+  title: Snow Cam - Timber Ridge Ski Area
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-snow-ridge-search
+  url: https://snowridge.com/live-feed/
+  title: Live Feed - Snow Ridge
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-nashoba-search
+  url: https://skinashoba.com/webcams/
+  title: Webcams (Nashoba Valley)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-shanty-creek-search
+  url: https://www.shantycreek.com/ski/conditions-cams/
+  title: 'Ski Conditions, Snow Reports - Michigan Ski Webcams : Shanty Creek Resort'
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mount-peter-search
+  url: https://mtpeter.com/webcam/
+  title: Webcam (Mount Peter)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-campgaw-search
+  url: https://www.skicampgaw.com/live-webcams
+  title: Campgaw Mountain Live Webcams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-ski-sawmill-search
+  url: https://skisawmill.com/webcams/
+  title: Webcams (Ski Sawmill)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-granite-gorge-search
+  url: https://granitegorge.com/webcam/
+  title: Webcam - Granite Gorge Mountain Park
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-pine-creek-search
+  url: https://www.pinecreekskiresort.com/weather
+  title: Weather/Webcams - Pine Creek Ski Resort
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+records:
+- resort_id: bear-valley
+  cams_page:
+    url: https://www.bearvalley.com/webcam
+    source_id: webcams-bear-valley-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mt-spokane
+  cams_page:
+    url: https://www.mtspokane.com/webcams
+    source_id: webcams-mt-spokane-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: sierra-at-tahoe-ski-resort
+  cams_page:
+    url: https://sierraattahoe.com/live-cams/
+    source_id: webcams-sierra-at-tahoe-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mission-ridge
+  cams_page:
+    url: https://www.missionridge.com/mountain-report/#webcam
+    source_id: webcams-mission-ridge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Webcam section of the mountain report page; URL exactly as
+      the search result listed it.
+- resort_id: brundage-mountain
+  cams_page:
+    url: https://brundage.com/live-cams/
+    source_id: webcams-brundage-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: silver-mountain-resort
+  cams_page:
+    url: https://www.silvermt.com/index.php/mountain/about/webcams
+    source_id: webcams-silver-mountain-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. URL exactly as the search result listed it.
+- resort_id: white-pass-ski-area
+  cams_page:
+    url: https://skiwhitepass.com/mountain-cams
+    source_id: webcams-white-pass-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: powderhorn
+  cams_page:
+    url: https://www.powderhorn.com/explore/conditions/webcams.html
+    source_id: webcams-powderhorn-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: wolf-creek-ski-area
+  cams_page:
+    url: https://wolfcreekski.com/webcams/
+    source_id: webcams-wolf-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: purgatory-resort
+  cams_page:
+    url: https://www.purgatory.ski/mountain/weather-conditions-webcams/webcams/
+    source_id: webcams-purgatory-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mount-rose-ski-tahoe
+  cams_page:
+    url: https://skirose.com/the-mountain-web-cams/
+    source_id: webcams-mount-rose-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: loveland-basin-ski-area
+  cams_page:
+    url: https://skiloveland.com/webcams/
+    source_id: webcams-loveland-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page; the search result listed cams for both Loveland
+      Basin and Loveland Valley.
+- resort_id: loveland-valley-ski-area
+  cams_page:
+    url: https://skiloveland.com/webcams/
+    source_id: webcams-loveland-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page; the search result listed cams for both Loveland
+      Basin and Loveland Valley.
+- resort_id: red-lodge-mountain
+  cams_page:
+    url: https://www.redlodgemountain.com/webcam/
+    source_id: webcams-red-lodge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: china-peak-mountain-resort
+  cams_page:
+    url: https://www.skichinapeak.com/webcam/
+    source_id: webcams-china-peak-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: soldier-mountain-ski-area
+  cams_page:
+    url: https://soldiermountain.com/snowcam/
+    source_id: webcams-soldier-mountain-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: tamarack-resort
+  cams_page:
+    url: https://tamarackidaho.com/about/webcams
+    source_id: webcams-tamarack-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: lookout-pass
+  cams_page:
+    url: https://skilookout.com/snow-report/
+    source_id: webcams-lookout-pass-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Snow report page; the search result showed its live slope views.
+- resort_id: pebble-creek
+  cams_page:
+    url: https://pebblecreekskiarea.com/live-stream/
+    source_id: webcams-pebble-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. The result snippet said the stream was offline for the off
+      season.
+- resort_id: discovery-ski-area
+  cams_page:
+    url: https://www.skidiscovery.com/conditions/
+    source_id: webcams-discovery-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Conditions page; the search result showed its webcam images.
+- resort_id: dodge-ridge-ski-area
+  cams_page:
+    url: https://dodgeridge.com/mountain-web-cams/
+    source_id: webcams-dodge-ridge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  cams:
+  - label: Summit Web Cam
+    url: https://dodgeridge.com/mountain-web-cams/summit-web-cam/
+    kind: page
+    source_id: webcams-dodge-ridge-summit-web-cam-search
+  - label: Mid Mountain Cam
+    url: https://dodgeridge.com/mountain-web-cams/mid-mountain-cam/
+    kind: page
+    source_id: webcams-dodge-ridge-mid-mountain-cam-search
+  - label: Base Area Web Cam
+    url: https://dodgeridge.com/mountain-web-cams/base-area-web-cam
+    kind: page
+    source_id: webcams-dodge-ridge-base-area-web-cam-search
+- resort_id: mt-hood-skibowl
+  cams_page:
+    url: https://skibowl.com/jet-popup/video-cam-menu/
+    source_id: webcams-skibowl-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Cam menu page; URL exactly as the search result listed it.
+- resort_id: arizona-snowbowl
+  cams_page:
+    url: https://www.snowbowl.ski/the-mountain/weather-conditions-webcams/
+    source_id: webcams-arizona-snowbowl-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: hoodoo-ski-area
+  cams_page:
+    url: https://hoodoo.com/the-mountain/webcams/
+    source_id: webcams-hoodoo-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mt-baldy
+  cams_page:
+    url: https://winter.mtbaldyresort.com/webcams/
+    source_id: webcams-mt-baldy-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: homewood-ski-area
+  cams_page:
+    url: https://skihomewood.com/webcams/
+    source_id: webcams-homewood-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. The result snippet said the cams were down for maintenance
+      when it was indexed.
+- resort_id: monarch-mountain
+  cams_page:
+    url: https://skimonarch.com/conditions/
+    source_id: webcams-monarch-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Conditions page; the search result showed its cams section.
+- resort_id: lost-trail
+  cams_page:
+    url: https://losttrail.com/
+    source_id: webcams-lost-trail-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Snow report home page; the search result showed its Chair 1
+      cam, which runs only when the area has power.
+- resort_id: ski-santa-fe-santa-fe-q38555
+  cams_page:
+    url: https://skisantafe.com/webcams/
+    source_id: webcams-ski-santa-fe-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: ski-apache
+  cams_page:
+    url: https://skiapache.com/mountain-info/live-webcams/
+    source_id: webcams-ski-apache-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: brian-head-resort
+  cams_page:
+    url: https://www.brianhead.com/weather-conditions-webcams/
+    source_id: webcams-brian-head-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: diamond-peak
+  cams_page:
+    url: https://www.diamondpeak.com/the-mountain/web-cams/
+    source_id: webcams-diamond-peak-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  cams:
+  - label: Diamond Peak Summit Web Cam
+    url: https://www.diamondpeak.com/the-mountain/web-cams/summit-cam/
+    kind: page
+    source_id: webcams-diamond-peak-diamond-peak-summit-web-cam-search
+- resort_id: sunlight-mountain-resort
+  cams_page:
+    url: https://sunlightmtn.com/the-mountain/live-cams/leonards-lookout
+    source_id: webcams-sunlight-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Single cam page; the result snippet said the cams were paused
+      during a lift replacement project.
+- resort_id: beaver-mountain
+  cams_page:
+    url: https://www.skithebeav.com/mountain/conditions/
+    source_id: webcams-beaver-mountain-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Conditions page; the search result showed its Lodge View, Cabin,
+      Snowstake and Parking lot cams.
+- resort_id: mt-shasta-ski-park
+  cams_page:
+    url: https://www.skipark.com/winter/mountain-cams
+    source_id: webcams-mt-shasta-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: angel-fire-resort
+  cams_page:
+    url: https://www.angelfireresort.com/weather/
+    source_id: webcams-angel-fire-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: lutsen-mountains
+  cams_page:
+    url: https://www.lutsen.com/mountain-info/our-webcam
+    source_id: webcams-lutsen-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: saddleback-mountain
+  cams_page:
+    url: https://www.saddlebackmaine.com/webcams/
+    source_id: webcams-saddleback-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: willamette-pass
+  cams_page:
+    url: https://www.willamettepass.ski/weather-conditions-webcams/webcams/
+    source_id: webcams-willamette-pass-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: terry-peak-ski-area
+  cams_page:
+    url: https://terrypeak.com/the-mountain/live-web-cams/
+    source_id: webcams-terry-peak-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: gore-mountain
+  cams_page:
+    url: https://goremountain.com/the-mountain/webcam/
+    source_id: webcams-gore-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Base area cam page; no index page of all Gore cams appeared
+      in the search.
+  cams:
+  - label: Bear Mountain Webcam
+    url: https://goremountain.com/the-mountain/bear-mountain-webcam/
+    kind: page
+    source_id: webcams-gore-bear-mountain-webcam-search
+- resort_id: bretton-woods-ski-area
+  cams_page:
+    url: https://www.brettonwoods.com/live-cam-forecast/
+    source_id: webcams-bretton-woods-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: bluewood
+  cams_page:
+    url: https://bluewood.com/conditions
+    source_id: webcams-bluewood-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Conditions page; the result snippet said the webcams are live
+      only while the generator runs.
+- resort_id: boreal-mountain-resort
+  cams_page:
+    url: https://www.rideboreal.com/explore/webcams/
+    source_id: webcams-boreal-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  cams:
+  - label: Boreal Mountain Webcam
+    url: https://www.rideboreal.com/explore/webcams/boreal-mountain-cam/
+    kind: page
+    source_id: webcams-boreal-boreal-mountain-webcam-search
+  - label: Boreal Snow Stake Cam
+    url: https://www.rideboreal.com/explore/webcams/snowstake-cam/
+    kind: page
+    source_id: webcams-boreal-boreal-snow-stake-cam-search
+  - label: Bunker Cam
+    url: https://www.rideboreal.com/explore/webcams/bunker-camera/
+    kind: page
+    source_id: webcams-boreal-bunker-cam-search
+- resort_id: mountain-high
+  cams_page:
+    url: https://www.mthigh.com/site/mountain/mountain-info/livecams
+    source_id: webcams-mountain-high-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: snow-king-mountain
+  cams_page:
+    url: https://snowkingmountain.com/mountain/webcams/
+    source_id: webcams-snow-king-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: granby-ranch
+  cams_page:
+    url: https://granbyranch.com/granby-ranch-webcam/
+    source_id: webcams-granby-ranch-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: big-powderhorn-mountain-resort
+  cams_page:
+    url: https://bigpowderhorn.net/the-mountain/web-cams
+    source_id: webcams-big-powderhorn-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  cams:
+  - label: Summit View
+    url: https://bigpowderhorn.net/the-mountain/web-cams/summit-view/
+    kind: stream
+    source_id: webcams-big-powderhorn-summit-view-search
+  - label: Base View
+    url: https://bigpowderhorn.net/the-mountain/web-cams/base-view/
+    kind: stream
+    source_id: webcams-big-powderhorn-base-view-search
+  - label: Lower Smoke
+    url: https://bigpowderhorn.net/the-mountain/web-cams/lower-smoke/
+    kind: stream
+    source_id: webcams-big-powderhorn-lower-smoke-search
+- resort_id: snowy-range
+  cams_page:
+    url: https://snowyrangeski.com/webcams/
+    source_id: webcams-snowy-range-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: windham-mountain-club
+  cams_page:
+    url: https://www.windhammountainclub.com/mountain-cam-base/
+    source_id: webcams-windham-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Base area cam page; no index page of all cams appeared in the
+      search.
+- resort_id: granite-peak-ski-area
+  cams_page:
+    url: https://www.skigranitepeak.com/mountain-info/live-web-cams
+    source_id: webcams-granite-peak-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mount-ashland
+  cams_page:
+    url: https://www.mtashland.com/webcams/
+    source_id: webcams-mount-ashland-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: holiday-valley
+  cams_page:
+    url: https://www.holidayvalley.com/webcams/
+    source_id: webcams-holiday-valley-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: chestnut-mountain-resort
+  cams_page:
+    url: https://www.chestnutmtn.com/live-cameras/
+    source_id: webcams-chestnut-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: caberfae-peaks
+  cams_page:
+    url: https://caberfaepeaks.com/live-cam-caberfae/
+    source_id: webcams-caberfae-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: red-river-ski-area
+  cams_page:
+    url: https://www.redriverskiarea.com/explore/about/webcams/
+    source_id: webcams-red-river-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: greek-peak-mountain-resort
+  cams_page:
+    url: https://www.greekpeak.net/ski-ride/webcams/
+    source_id: webcams-greek-peak-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: sipapu-ski-and-summer-resort
+  cams_page:
+    url: https://www.sipapu.ski/the-mountain/sipapu-webcams/
+    source_id: webcams-sipapu-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: bousquet-mountain
+  cams_page:
+    url: https://bousquetmountain.com/live-cam/
+    source_id: webcams-bousquet-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: bromley-mountain-ski-resort-bromley-mountain
+  cams_page:
+    url: https://bromley.com/webcams
+    source_id: webcams-bromley-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: cascade-mountain
+  cams_page:
+    url: https://www.cascademountain.com/snow-cams/
+    source_id: webcams-cascade-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: belleayre-mountain-ski-center
+  cams_page:
+    url: https://www.belleayre.com/mountain/web-cams/
+    source_id: webcams-belleayre-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: bolton-valley-resort
+  cams_page:
+    url: https://www.boltonvalley.com/the-resort/live-webcams/
+    source_id: webcams-bolton-valley-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: bristol-mountain-ski-resort
+  cams_page:
+    url: https://www.bristolmountain.com/webcam/
+    source_id: webcams-bristol-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: camelback-mountain-resort
+  cams_page:
+    url: https://www.camelbackresort.com/resort-information/live-cameras
+    source_id: webcams-camelback-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: blue-mountain-resort
+  cams_page:
+    url: https://www.skibluemt.com/mountain-cams/
+    source_id: webcams-blue-mountain-pa-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: marquette-mountain
+  cams_page:
+    url: https://www.marquettemountain.com/winter/live-trail-camera/
+    source_id: webcams-marquette-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mountain-creek
+  cams_page:
+    url: https://mountaincreek.com/skiing-riding/mountain-report/live-cam/
+    source_id: webcams-mountain-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: shawnee-mountain
+  cams_page:
+    url: https://shawneemt.com/mountain-cams/
+    source_id: webcams-shawnee-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: crystal-mountain-mi
+  cams_page:
+    url: https://www.crystalmountain.com/ski/cams-conditions/webcams
+    source_id: webcams-crystal-mountain-mi-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mohawk-mountain-ski-area
+  cams_page:
+    url: https://www.mohawkmtn.com/the-mountain/webcam/
+    source_id: webcams-mohawk-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: pats-peak
+  cams_page:
+    url: https://www.patspeak.com/the-mountain/cams-media/web-cams/
+    source_id: webcams-pats-peak-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: canaan-valley-ski-resort
+  cams_page:
+    url: https://www.canaanresort.com/resort-webcam
+    source_id: webcams-canaan-valley-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: beech-mountain-resort
+  cams_page:
+    url: https://www.beechmountainresort.com/mountain/webcams/
+    source_id: webcams-beech-mountain-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: winterplace-ski-resort
+  cams_page:
+    url: https://winterplace.com/mountain/mountainhouse-cam
+    source_id: webcams-winterplace-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Single cam page; no index page of all cams appeared in the
+      search.
+- resort_id: nordic-valley-resort-wolf-mountain
+  cams_page:
+    url: https://www.nordicvalley.ski/nordic-valley-weather-conditions-webcams/
+    source_id: webcams-nordic-valley-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: bear-creek-mountain-resort-ski-slopes
+  cams_page:
+    url: https://www.bcmountainresort.com/play/snowsports/webcams-ski-area-pennsylvania/
+    source_id: webcams-bear-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: thunder-ridge
+  cams_page:
+    url: https://thunderridgeski.com/the-mountain/mountain-cam/
+    source_id: webcams-thunder-ridge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: powder-ridge-ski-area
+  cams_page:
+    url: https://powderridgepark.com/powder-ridge-webcam/
+    source_id: webcams-powder-ridge-ct-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: massanutten-resort
+  cams_page:
+    url: https://www.massresort.com/play/snow-sports/snow-webcams/
+    source_id: webcams-massanutten-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: sundown-mountain-resort
+  cams_page:
+    url: https://sundownmtn.com/live-webcams-at-sundown-mountain-resort/
+    source_id: webcams-sundown-ia-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: cataloochee-ski-area
+  cams_page:
+    url: https://cataloochee.com/the-mountain/webcams/
+    source_id: webcams-cataloochee-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. The result snippet said some feeds were down for repair after
+      weather damage.
+- resort_id: alpental
+  cams_page:
+    url: https://www.summitatsnoqualmie.com/webcams
+    source_id: webcams-summit-snoqualmie-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page for the Summit at Snoqualmie areas, Alpental
+      and Summit West included.
+- resort_id: summit-west
+  cams_page:
+    url: https://www.summitatsnoqualmie.com/webcams
+    source_id: webcams-summit-snoqualmie-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page for the Summit at Snoqualmie areas, Alpental
+      and Summit West included.
+- resort_id: smugglers-notch-resort
+  cams_page:
+    url: https://www.smuggs.com/conditions-stats/web-cams/
+    source_id: webcams-smuggs-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: great-divide-ski-area
+  cams_page:
+    url: https://www.skigd.com/webcam
+    source_id: webcams-great-divide-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: lee-canyon
+  cams_page:
+    url: https://leecanyonlv.com/the-mountain/webcams
+    source_id: webcams-lee-canyon-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: 49-north-mountain-resort
+  cams_page:
+    url: https://ski49n.com/mountain-info/webcams
+    source_id: webcams-49-north-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: blacktail-mountain-ski-area
+  cams_page:
+    url: https://blacktailmountain.com/blacktail-webcam/
+    source_id: webcams-blacktail-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: plattekill-mountain-ski-area
+  cams_page:
+    url: https://plattekill.com/webcams
+    source_id: webcams-plattekill-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: ragged-mountain-resort
+  cams_page:
+    url: https://www.raggedmountainresort.com/mountain-report-cams/
+    source_id: webcams-ragged-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: titus-mountain
+  cams_page:
+    url: https://www.titusmountain.com/conditions
+    source_id: webcams-titus-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Conditions page; the search result showed its Live Snowcams
+      section.
+- resort_id: oak-mountain-ski-center
+  cams_page:
+    url: https://oakmountainski.com/the-mountain/webcam
+    source_id: webcams-oak-mountain-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: holimont
+  cams_page:
+    url: https://holimont.com/resources/slope-report
+    source_id: webcams-holimont-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: kissing-bridge
+  cams_page:
+    url: https://kbski.com/mountain-cams
+    source_id: webcams-kissing-bridge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: wachusett-mountain-ski-area
+  cams_page:
+    url: https://www.wachusett.com/the-mountain/media-center/webcams/
+    source_id: webcams-wachusett-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: perfect-north-slopes
+  cams_page:
+    url: https://perfectnorth.com/snow-cams/
+    source_id: webcams-perfect-north-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: jiminy-peak-resort
+  cams_page:
+    url: https://www.jiminypeak.com/webcams/
+    source_id: webcams-jiminy-peak-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: catamount-mountain-resort
+  cams_page:
+    url: https://catamountski.com/mountain-cam
+    source_id: webcams-catamount-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: hatley-pointe
+  cams_page:
+    url: https://hatleypointe.com/the-mountain/webcams/
+    source_id: webcams-hatley-pointe-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: cooper-spur-ski-area
+  cams_page:
+    url: https://cooperspur.com/conditions-report/
+    source_id: webcams-cooper-spur-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Conditions report page; the search result showed its live view
+      of the ski area.
+- resort_id: nordic-mountain
+  cams_page:
+    url: https://www.nordicmountain.com/mountain-info/snow-report
+    source_id: webcams-nordic-mountain-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. Snow report page; the search result showed its live cams.
+- resort_id: timber-ridge-ski-area
+  cams_page:
+    url: https://www.timberridgeski.com/snow-cam/
+    source_id: webcams-timber-ridge-mi-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: snow-ridge
+  cams_page:
+    url: https://snowridge.com/live-feed/
+    source_id: webcams-snow-ridge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: nashoba-valley-ski-area
+  cams_page:
+    url: https://skinashoba.com/webcams/
+    source_id: webcams-nashoba-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: schuss-mountain
+  cams_page:
+    url: https://www.shantycreek.com/ski/conditions-cams/
+    source_id: webcams-shanty-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared Shanty Creek page for Schuss Mountain and Summit
+      Mountain.
+- resort_id: summit-mountain
+  cams_page:
+    url: https://www.shantycreek.com/ski/conditions-cams/
+    source_id: webcams-shanty-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared Shanty Creek page for Schuss Mountain and Summit
+      Mountain.
+- resort_id: mount-peter
+  cams_page:
+    url: https://mtpeter.com/webcam/
+    source_id: webcams-mount-peter-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: campgaw-mountain-ski-area
+  cams_page:
+    url: https://www.skicampgaw.com/live-webcams
+    source_id: webcams-campgaw-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: ski-sawmill-family-resort
+  cams_page:
+    url: https://skisawmill.com/webcams/
+    source_id: webcams-ski-sawmill-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: granite-gorge-ski-area
+  cams_page:
+    url: https://granitegorge.com/webcam/
+    source_id: webcams-granite-gorge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: pine-creek-ski-area
+  cams_page:
+    url: https://www.pinecreekskiresort.com/weather
+    source_id: webcams-pine-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
