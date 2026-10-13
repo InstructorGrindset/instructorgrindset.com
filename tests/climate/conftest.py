@@ -32,6 +32,12 @@ def no_sleep(monkeypatch):
     monkeypatch.setattr(http, "_sleep", lambda s: None)
 
 
+@pytest.fixture(autouse=True)
+def no_api_key(monkeypatch):
+    """Tests run on the free endpoint unless they set OPEN_METEO_API_KEY themselves."""
+    monkeypatch.delenv("OPEN_METEO_API_KEY", raising=False)
+
+
 @pytest.fixture
 def fake_api(monkeypatch):
     api = FakeApi()

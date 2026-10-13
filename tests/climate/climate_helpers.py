@@ -120,7 +120,7 @@ class FakeApi:
         self.calls.append((url, params))
         if self.blocked:
             raise http.NetworkBlocked("cannot reach host: Tunnel connection failed: 403 Forbidden")
-        if url == open_meteo.ARCHIVE_URL:
+        if url in (open_meteo.ARCHIVE_URL, open_meteo.CUSTOMER_ARCHIVE_URL):
             lats = [float(x) for x in str(params["latitude"]).split(",")]
             lons = [float(x) for x in str(params["longitude"]).split(",")]
             start = date.fromisoformat(params["start_date"])

@@ -395,7 +395,13 @@ def parse_args(argv: Optional[list[str]]) -> argparse.Namespace:
         default=REPO_ROOT / "docs/map/climate-validation.md",
         help="markdown report comparing derived and published annual snowfall",
     )
-    p.add_argument("--daily-budget", type=float, default=open_meteo.LIMIT_PER_DAY * open_meteo.SAFETY)
+    p.add_argument(
+        "--daily-budget",
+        type=float,
+        default=None,
+        help="weighted Open Meteo calls per day (default: climate.open_meteo.paid_daily_budget with "
+        "OPEN_METEO_API_KEY set, else 80 percent of the free tier)",
+    )
     return p.parse_args(argv)
 
 
@@ -472,12 +478,17 @@ def main(argv: Optional[list[str]] = None, *, today: Optional[date] = None, log:
         )
     )
 
+    budget_probe = open_meteo.make_budget(om_cache, settings.open_meteo_paid_daily_budget, args.daily_budget)
+    daily_budget = budget_probe.per_day
+    if open_meteo.api_key():
+        mode = "paid budget" if settings.open_meteo_paid_daily_budget else "free tier limits (no paid_daily_budget)"
+        log(f"climate: OPEN_METEO_API_KEY is set; using {open_meteo.CUSTOMER_ARCHIVE_URL} with {mode}")
     weight = open_meteo.estimated_total_weight(len(need_om), start_year, end_year)
     log(
         f"climate: {len(resorts)} resorts, period Oct {start_year} to Sep {end_year} "
         f"({end_year - start_year} seasons); {len(need_om)} need Open Meteo "
-        f"(about {weight:,.0f} weighted calls, {open_meteo.days_needed(len(need_om), start_year, end_year)} "
-        f"day(s) at {args.daily_budget:,.0f} per day); {len(need_grid)} need the ERA5 grid cell height; "
+        f"(about {weight:,.0f} weighted calls, {max(1, -(-int(weight) // int(daily_budget))) if weight else 0} "
+        f"day(s) at {daily_budget:,.0f} per day); {len(need_grid)} need the ERA5 grid cell height; "
         f"SNOTEL fetch needed: {need_snotel}"
     )
     if args.plan:
@@ -487,7 +498,7 @@ def main(argv: Optional[list[str]] = None, *, today: Optional[date] = None, log:
         hosts = []
         try:
             if need_om or need_grid:
-                hosts.append("archive-api.open-meteo.com")
+                hosts.append(open_meteo.archive_endpoint()[0].split("/")[2])
                 open_meteo.preflight()
             if need_snotel:
                 hosts.append("wcc.sc.egov.usda.gov")
@@ -511,7 +522,7 @@ def main(argv: Optional[list[str]] = None, *, today: Optional[date] = None, log:
     deferred: dict[str, str] = {}
     try:
         if (need_om or need_grid) and not args.offline:
-            budget = open_meteo.WeightBudget(om_cache / "_usage.json", per_day=args.daily_budget)
+            budget = open_meteo.make_budget(om_cache, settings.open_meteo_paid_daily_budget, args.daily_budget)
             budget.events.append((datetime.now(timezone.utc).timestamp(), 1.0))  # preflight call
             if need_grid:
                 try:

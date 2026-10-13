@@ -111,6 +111,8 @@ climate:
   low_relief_max_base_ft: 4000       # ... and base under this
   validation_flag_pct: 35       # flag annual totals this far from the published annual snowfall
   validation_suppress_pct: 50   # null monthly snowfall when the annual total is this far off
+  open_meteo:
+    paid_daily_budget: null     # weighted calls per day with OPEN_METEO_API_KEY set; null keeps free tier limits
   snotel:
     radius_km: 25               # search radius around the resort base
     elevation_band_below_ft: 1500   # station may sit this far below the resort elevation
@@ -175,6 +177,9 @@ class ClimateSettings:
     validation_flag_pct: float
     validation_suppress_pct: float
     snotel: SnotelSettings
+    # Weighted Open Meteo calls per day allowed with a paid key (OPEN_METEO_API_KEY);
+    # None keeps the free tier limits.
+    open_meteo_paid_daily_budget: Optional[float] = None
 
 
 def _lookup(defs: Mapping[str, Any], path: str) -> Any:
@@ -243,7 +248,16 @@ def climate_settings(defs: Mapping[str, Any]) -> ClimateSettings:
         raise DefinitionsError(
             f"climate.density_estimate_method must be one of {sorted(METHODS)}, got {method!r}"
         )
+    om_block = (defs.get("climate") or {}).get("open_meteo") or {}
+    if not isinstance(om_block, Mapping):
+        raise DefinitionsError("climate.open_meteo must be a mapping")
+    paid = om_block.get("paid_daily_budget")
+    if isinstance(paid, Mapping):
+        paid = paid.get("value")
+    if paid is not None and (isinstance(paid, bool) or not isinstance(paid, (int, float)) or paid <= 0):
+        raise DefinitionsError(f"climate.open_meteo.paid_daily_budget must be a positive number or null, got {paid!r}")
     return ClimateSettings(
+        open_meteo_paid_daily_budget=float(paid) if paid is not None else None,
         powder_day_in=powder,
         banner_day_in=banner,
         dry_below_pct=dry,

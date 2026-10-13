@@ -40,6 +40,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import time
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
@@ -52,6 +53,28 @@ from pipeline.climate.seasons import period_dates, season_chunks, season_of
 from pipeline.climate.units import c_to_f, cm_to_in, kmh_to_mph, mps_to_mph
 
 ARCHIVE_URL = "https://archive-api.open-meteo.com/v1/archive"
+# Paid plans: the docs' apikey parameter "requires the prefix customer-" on the server URL;
+# results-preview.svelte builds https://customer-{type}-api.open-meteo.com/v1/{action}.
+CUSTOMER_ARCHIVE_URL = "https://customer-archive-api.open-meteo.com/v1/archive"
+API_KEY_ENV = "OPEN_METEO_API_KEY"
+
+
+def api_key() -> Optional[str]:
+    key = os.environ.get(API_KEY_ENV, "").strip()
+    return key or None
+
+
+def archive_endpoint() -> tuple[str, dict[str, str]]:
+    """(URL, extra params): the customer server with ``apikey`` when OPEN_METEO_API_KEY is set."""
+    key = api_key()
+    if key:
+        return CUSTOMER_ARCHIVE_URL, {"apikey": key}
+    return ARCHIVE_URL, {}
+
+
+def _get_archive(params: dict[str, Any], **kwargs: Any) -> Any:
+    url, extra = archive_endpoint()
+    return http.get_json(url, {**params, **extra}, **kwargs)
 MODEL = "era5"
 DAILY_VARIABLES: tuple[str, ...] = (
     "snowfall_sum",
@@ -393,7 +416,7 @@ def _params(batch: list[Location], start: date, end: date) -> dict[str, Any]:
 
 def fetch_window(batch: list[Location], start: date, end: date) -> list[dict[str, Any]]:
     """One archive request for ``batch``; returns one payload per location."""
-    payload = http.get_json(ARCHIVE_URL, _params(batch, start, end))
+    payload = _get_archive(_params(batch, start, end))
     if isinstance(payload, dict):
         if payload.get("error"):
             raise ValueError(f"Open Meteo error: {payload.get('reason')}")
@@ -525,8 +548,7 @@ def fetch_grid_elevations(
         batch = todo[i : i + batch_size]
         if budget is not None:
             budget.acquire(float(len(batch)))
-        payload = http.get_json(
-            ARCHIVE_URL,
+        payload = _get_archive(
             {
                 "latitude": ",".join(f"{l.lat:.5f}" for l in batch),
                 "longitude": ",".join(f"{l.lon:.5f}" for l in batch),
@@ -557,12 +579,26 @@ def fetch_grid_elevations(
 def preflight() -> None:
     """Cheapest possible request (one location, one day, one variable). Raises NetworkBlocked."""
     day = (date.today() - timedelta(days=30)).isoformat()
-    http.get_json(
-        ARCHIVE_URL,
+    _get_archive(
         {"latitude": "39.64", "longitude": "-106.37", "start_date": day, "end_date": day, "daily": "snowfall_sum", "models": MODEL},
         retries=5,
         backoff=5.0,
     )
+
+
+def make_budget(cache_dir: Path, paid_daily_budget: Optional[float], daily_override: Optional[float] = None) -> WeightBudget:
+    """Free tier sliding windows, or one daily paid budget when a key and a paid budget are set.
+
+    With a key and ``climate.open_meteo.paid_daily_budget`` the only guard is that
+    daily total (the free tier minute and hour windows are not applied; check the
+    plan's own limits when choosing the budget).
+    A key without a paid budget keeps the free tier limits. Paid and free usage
+    keep separate ledgers.
+    """
+    if api_key() and paid_daily_budget:
+        per_day = daily_override or paid_daily_budget
+        return WeightBudget(Path(cache_dir) / "_usage_paid.json", per_minute=per_day, per_hour=per_day, per_day=per_day)
+    return WeightBudget(Path(cache_dir) / "_usage.json", per_day=daily_override or LIMIT_PER_DAY * SAFETY)
 
 
 def estimated_total_weight(n_resorts: int, start_year: int, end_year: int) -> float:

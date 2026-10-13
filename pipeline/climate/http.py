@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import http.client
 import json
+import re
 import socket
 import ssl
 import time
@@ -28,7 +29,8 @@ class NetworkBlocked(RuntimeError):
 
 class HttpStatusError(RuntimeError):
     def __init__(self, url: str, status: int, body: str):
-        super().__init__(f"HTTP {status} from {url}: {body[:300]}")
+        url = redact(url)
+        super().__init__(f"HTTP {status} from {url}: {redact(body[:300])}")
         self.url = url
         self.status = status
         self.body = body
@@ -40,6 +42,14 @@ class RateLimited(RuntimeError):
     def __init__(self, message: str, daily: bool = False):
         super().__init__(message)
         self.daily = daily
+
+
+_SECRET_PARAMS = re.compile(r"(\bapikey=)[^&#\s\"']*", re.IGNORECASE)
+
+
+def redact(text: str) -> str:
+    """Hide API keys in URLs before they reach messages or logs."""
+    return _SECRET_PARAMS.sub(r"\1REDACTED", text)
 
 
 def build_url(url: str, params: Optional[Mapping[str, Any]] = None) -> str:
@@ -120,14 +130,14 @@ def get_json(
             _sleep(wait)
     if isinstance(last_error, RuntimeError):
         raise last_error
-    raise HttpStatusError(full, 0, f"giving up after {retries + 1} attempts: {last_error}")
+    raise HttpStatusError(full, 0, f"giving up after {retries + 1} attempts: {redact(str(last_error))}")
 
 
 def _reason(body: str) -> str:
     try:
         data = json.loads(body)
         if isinstance(data, dict) and data.get("reason"):
-            return str(data["reason"])
+            return redact(str(data["reason"]))
     except ValueError:
         pass
-    return body[:200]
+    return redact(body[:200])
