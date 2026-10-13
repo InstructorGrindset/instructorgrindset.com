@@ -449,3 +449,18 @@ jobs:
     # both (pipeline/hiring.py). A window longer than this many months is left unparsed: a span that long means an
     # old posting or a misread date.
     max_months: 9
+
+passes:
+  # Multi resort pass membership (data/raw/passes, ROADMAP item 12: the Epic and Ikon filter chips).
+  # Only memberships of this season reach data/build. A new season goes in its own batch file next to the old one;
+  # move this value once that batch is complete.
+  season: "2026/27"
+  # Every membership cites a page on its pass company's own site (registered domain, the last two labels).
+  # Ownership never implies a pass: a resort is on a pass only when one of these sites says so.
+  domains:
+    epic: [epicpass.com, vailresorts.com]
+    ikon: [ikonpass.com]
+    mountain_collective: [mountaincollective.com]
+    indy: [indyskipass.com]
+  # Reference sites a membership may cite in addition (marked estimated, with the list's season in the note).
+  supplemental_domains: [wikipedia.org]

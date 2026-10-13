@@ -22,6 +22,7 @@ from .common import (
 )
 from .trailmaps_official import OfficialTrailmap
 from .jobs import Jobs
+from .passes import PassMembership
 from .webcams import Webcams
 
 import datetime as dt
@@ -196,6 +197,7 @@ class Resort(StrictModel):
     official_trailmap: Optional[OfficialTrailmap] = None   # link to the resort's own trail map (never rehosted)
     webcams: Optional[Webcams] = None   # links to the resort's live cams (never embedded)
     jobs: Optional[Jobs] = None         # jobs links; employers in jobs/employers.json
+    passes: list[PassMembership] = Field(default_factory=list)   # Epic, Ikon and other pass memberships
     season: Season = Field(default_factory=Season)
     terrain: Terrain = Field(default_factory=Terrain)
     fit: Fit = Field(default_factory=Fit)
@@ -270,6 +272,6 @@ def referenced_source_ids(resort: Resort) -> set[str]:
                 walk(item)
 
     for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "webcams",
-                 "jobs", "season", "terrain", "career", "editorial"):
+                 "jobs", "passes", "season", "terrain", "career", "editorial"):
         walk(getattr(resort, name))
     return found

@@ -88,6 +88,9 @@ FACILITY_LABEL = {"ski_area": "Ski area", "indoor": "Indoor ski facility", "trai
 CERT_LABEL = {"none": "No certification", "level_1": "Level 1", "level_2": "Level 2", "level_3": "Level 3",
               "trainer": "Trainer", "examiner": "Examiner"}
 CONFIDENCE_LABEL = {"published": "Published", "reported": "Reported", "estimated": "Estimated"}
+# Pass families in display order (keep in step with map/js/labels.js PASS_LABEL and pipeline/schemas/passes.py).
+PASS_ORDER = ("epic", "ikon", "mountain_collective", "indy")
+PASS_LABEL = {"epic": "Epic Pass", "ikon": "Ikon Pass", "mountain_collective": "Mountain Collective", "indy": "Indy Pass"}
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
@@ -324,6 +327,47 @@ def render_jobs(ctx: Ctx, r: dict) -> str:
             '<p class="fact-meta">Links open each employer\'s own site in a new tab.</p>' + "".join(groups) + "</section>")
 
 
+# ── Pass membership (ARCHITECTURE "Pass membership"; match map/js/labels.js passAccess and panel.js passesFact) ──
+
+def pass_access(m: dict) -> str:
+    """'unlimited', '7 days', 'limited days' or 'days not stated' for one membership."""
+    if m.get("access") == "unlimited":
+        return "unlimited"
+    if m.get("access") == "limited":
+        days = m.get("days")
+        return _plural(days, "day", "days") if isinstance(days, int) and days > 0 else "limited days"
+    return "days not stated"
+
+
+def pass_line(m: dict) -> str:
+    """'Epic Pass: unlimited'."""
+    return f"{PASS_LABEL.get(m.get('pass'), m.get('pass'))}: {pass_access(m)}"
+
+
+def render_passes(ctx: Ctx, r: dict) -> str:
+    """The "Passes" fact under Owner: one line per pass with its badge, season, blackout rule, date and source.
+    Nothing when the resort has no membership."""
+    items = [m for m in r.get("passes") or [] if isinstance(m, dict) and m.get("pass") in PASS_LABEL]
+    if not items:
+        return ""
+    lis = []
+    for m in items:
+        meta = [f"{_esc(m['season'])} season"] if m.get("season") else []
+        if m.get("blackout") is True:
+            meta.append("Blackout dates apply")
+        elif m.get("blackout") is False:
+            meta.append("No blackout dates")
+        meta.append(f"Last verified {_esc(_date(m.get('as_of')))}")
+        link = _source_link(ctx, m.get("source_id"))
+        if link:
+            meta.append(link)
+        note = f'<span class="fact-note">{_esc(m["note"])}</span>' if m.get("note") else ""
+        lis.append(f'<li class="pass-item" data-pass="{_esc(m["pass"])}"><span class="sourced"><span class="sourced-main">'
+                   f'<span class="fact-value">{_esc(pass_line(m))}</span> {_badge(m.get("confidence"))}</span>{note}'
+                   f'<span class="fact-meta">{" · ".join(meta)}</span></span></li>')
+    return f'<div class="fact passes"><dt>Passes</dt><dd><ul class="pass-list">{"".join(lis)}</ul></dd></div>'
+
+
 def render_resort(ctx: Ctx, r: dict, c: dict, st: str) -> str:
     st_name = ctx.state_names.get(st.upper(), st)
     crumbs = _crumbs([("United States", "/map/"), (st_name, f"/map/{st}/"), (c["name"], f"/map/{st}/{c['id']}/"), (r["name"], None)])
@@ -342,7 +386,7 @@ def render_resort(ctx: Ctx, r: dict, c: dict, st: str) -> str:
                     f'rel="noopener noreferrer">Official trail map from {_esc(r["name"])}</a> <span class="fact-meta">{_esc(bits)}</span></p>')
     out = [crumbs, _heading(f"Resort in {c['name']}, {r['state'].upper()}", r["name"]),
            f'<div class="tier-row">{"".join(tags)}</div>', otm_html, render_webcams(ctx, r),
-           f'<dl class="facts">{_sourced(ctx, "Owner", r.get("owner"), str)}</dl>']
+           f'<dl class="facts">{_sourced(ctx, "Owner", r.get("owner"), str)}{render_passes(ctx, r)}</dl>']
     crit = r.get("tier_a_criteria") or []
     if r["tier"] == "A" and crit:
         lis = "".join(f'<li><span class="criterion">{_esc(CRITERION_LABEL.get(k["criterion"], k["criterion"]))}</span>'
@@ -559,7 +603,7 @@ def plan_pages(build: Path) -> dict[str, Page]:
 INDEX_NAME = "map-index.json"
 INDEX_FIELDS = ("id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
                 "acres", "size_rank", "climate_available", "detail_available", "webcams_available", "jobs_available",
-                "season_length_days", "snowfall_annual_in", "lucrativeness_mid", "hiring_window", "job_employers")
+                "season_length_days", "snowfall_annual_in", "lucrativeness_mid", "hiring_window", "job_employers", "passes")
 RECOLOR_PROPS = ("season_length_days", "snowfall_annual_in", "lucrativeness_mid")
 
 
@@ -595,6 +639,13 @@ def _hiring_index(r: dict, feed_ids: Optional[set]) -> tuple[Optional[list], Opt
     ids = {x["employer_id"] for x in jobs.get("links") or [] if x.get("employer_id")} if jobs.get("feed") else set()
     ids = sorted(ids if feed_ids is None else ids & feed_ids)
     return window, ids or None
+
+
+def _passes_index(r: dict) -> Optional[list]:
+    """The pass filter's index value: the resort's pass ids in PASS_ORDER, or null for none."""
+    ids = {m.get("pass") for m in r.get("passes") or [] if isinstance(m, dict)}
+    out = [p for p in PASS_ORDER if p in ids]
+    return out or None
 
 
 def build_map_index(build: Path) -> dict:
@@ -636,6 +687,7 @@ def build_map_index(build: Path) -> dict:
             "webcams_available": bool(r.get("webcams")), "jobs_available": bool((r.get("jobs") or {}).get("links")),
         }
         row["hiring_window"], row["job_employers"] = _hiring_index(r, feed_ids)
+        row["passes"] = _passes_index(r)
         for k in RECOLOR_PROPS:
             row[k] = p[k] if k in p else derived[k]
         rows.append({k: row[k] for k in INDEX_FIELDS})

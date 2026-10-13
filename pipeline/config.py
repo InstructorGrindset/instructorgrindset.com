@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Annotated, Any, Literal, Optional
 
 import yaml
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 
 from .schemas.common import Slug, StateCode, StrictModel
 from .color import delta_e, oklab
@@ -490,6 +490,27 @@ class JobsDefs(StrictModel):
         return set(self.ats_domains.get(vendor) or [])
 
 
+class PassesDefs(StrictModel):
+    """Multi resort pass membership (data/raw/passes, ROADMAP item 12)."""
+
+    # Only memberships of this season reach data/build.
+    season: str = "2026/27"
+    # A membership must cite a page on its pass company's own site: registered domains per pass id.
+    domains: dict[Literal["epic", "ikon", "mountain_collective", "indy"], list[Annotated[str, Field(pattern=DOMAIN_RE)]]] = \
+        Field(default_factory=dict)
+    # Reference sites a membership may cite in addition (for example a Wikipedia list), marked estimated.
+    supplemental_domains: list[Annotated[str, Field(pattern=DOMAIN_RE)]] = Field(default_factory=list)
+
+    @field_validator("season")
+    @classmethod
+    def _season(cls, v: str) -> str:
+        from .schemas.passes import check_season
+        return check_season(v)
+
+    def domain_sets(self) -> dict[str, set[str]]:
+        return {k: set(v) for k, v in self.domains.items()}
+
+
 class Definitions(StrictModel):
     version: int
     snow: SnowDefs
@@ -514,6 +535,7 @@ class Definitions(StrictModel):
     heat: HeatDefs
     webcams: WebcamDefs = Field(default_factory=WebcamDefs)
     jobs: JobsDefs = Field(default_factory=JobsDefs)
+    passes: PassesDefs = Field(default_factory=PassesDefs)
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 

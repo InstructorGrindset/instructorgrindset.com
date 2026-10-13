@@ -451,7 +451,7 @@ def test_map_index_carries_hiring_window_months_and_feed_employers(site: Path):
     write_build(site, resorts, clusters, states)
     generate_routes(site)
     rows, data = _index_rows(site)
-    assert data["fields"][-2:] == ["hiring_window", "job_employers"]
+    assert data["fields"][-3:-1] == ["hiring_window", "job_employers"]
     # without jobs/employers.json every linked employer of a feed resort is listed
     assert rows["alpha-peak"]["hiring_window"] == ["2026-07", "2026-12"]
     assert rows["alpha-peak"]["job_employers"] == ["feed-co", "plain-co"]

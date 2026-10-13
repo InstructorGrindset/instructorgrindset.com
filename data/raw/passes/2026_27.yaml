@@ -1,0 +1,284 @@
+# Multi resort pass membership for the 2026/27 season (ROADMAP item 12: Epic and Ikon pass filter).
+#
+# Sources are the pass companies' own sites: epicpass.com (Vail Resorts), ikonpass.com and its blog
+# lifted.ikonpass.com (Alterra Mountain Company), and mountaincollective.com. These sites are blocked from the
+# research environment, so every value comes from a web search result that named the page (search result rule:
+# confidence estimated, note "From a search result for this page; page not opened"). Wikipedia (read in full via
+# action=raw) is cited only for which mountains make up a multi mountain pass destination; it has no pass list.
+#
+# Rules followed:
+# * A pass is never inferred from ownership. Every Vail Resorts resort below is listed by an Epic Pass page and
+#   every Alterra resort by an Ikon Pass page. Ikon partner resorts that Alterra does not own are listed the same way.
+# * access describes the top pass of each family (the Epic Pass, the Ikon Pass, the Mountain Collective pass):
+#   unlimited, limited (days when the page states a number) or unspecified (the page lists the resort without days).
+#   blackout is set only when the page says whether blackout or restricted dates apply to that pass.
+# * Destinations made of several mountains map to each mountain record only when a source names the mountains.
+#   Summit at Snoqualmie: Alpental and Summit West have records; the Three Summits record is a separate
+#   OpenSkiMap area whose identity is unclear, so it is left out. Mountain Collective's Sun Valley maps to Bald
+#   Mountain only (no source names Dollar Mountain for that pass).
+# * Indy Pass is not researched in this batch (about 200 destinations; the search budget would cover a fraction).
+#   Mountain Collective covers its 13 US destinations from the pass's own homepage.
+batch: passes-2026-27
+researched_date: 2026-10-13
+sources:
+# ---------------------------------------------------------------- Epic Pass (Vail Resorts)
+- id: passes-epic-pass
+  url: https://www.epicpass.com/passes/epic-pass.aspx
+  title: Epic Pass
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. The result listed the resorts with unlimited access on
+    the Epic Pass, every day of the season, with no restricted dates, under a "2025/26 Passes On Sale" heading.
+- id: passes-epic-rockies
+  url: https://www.epicpass.com/regions/us/rockies.aspx
+  title: Rocky Mountain Ski & Snowboard Resorts (Epic Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: passes-epic-west
+  url: https://www.epicpass.com/regions/us/west.aspx
+  title: West Ski & Snowboard Resorts (Epic Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: passes-epic-northeast
+  url: https://www.epicpass.com/regions/us/northeast.aspx
+  title: Northeast Ski & Snowboard Resorts (Epic Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: passes-epic-mid-atlantic
+  url: https://www.epicpass.com/regions/us/mid-atlantic.aspx
+  title: Pennsylvania Ski & Snowboard Resorts (Epic Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: passes-epic-midwest
+  url: https://www.epicpass.com/regions/us/midwest.aspx
+  title: Midwest Ski & Snowboard Resorts (Epic Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: passes-epic-partners
+  url: https://www.epicpass.com/regions/partner-resorts.aspx
+  title: Epic Pass Partners
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. The only US partner named is Telluride.
+- id: passes-epic-telluride
+  url: https://www.epicpass.com/regions/us/rockies/telluride.aspx
+  title: Telluride Ski Resort (Epic Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. For 2026/27 the Epic Pass includes up to 7 days at
+    Telluride, not necessarily consecutive; the Epic Local and Epic Military passes do not include Telluride.
+- id: passes-epic-restricted-dates
+  url: https://www.epicpass.com/info/peak-restricted-dates.aspx
+  title: Restricted Peak Dates (Epic Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Lists 2026/27 restricted dates for lower Epic products
+    at Vail, Beaver Creek, Breckenridge, Keystone, Park City, Crested Butte and the partner resorts.
+# ---------------------------------------------------------------- Ikon Pass (Alterra Mountain Company)
+- id: passes-ikon-pass-2627
+  url: https://www.ikonpass.com/en/shop-passes/ikon-pass
+  title: 26/27 Ikon Pass
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Lists 18 unlimited destinations, a group with up to
+    7 days, and states that the Ikon Pass has no blackout dates.
+- id: passes-ikon-base-2627
+  url: https://www.ikonpass.com/en/shop-passes/ikon-base-pass
+  title: 26/27 Ikon Base Pass
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Its Midwest and East list names Boyne Mountain, The
+    Highlands, Snowriver Mountain Resort, Lutsen Mountains, Camelback Resort and Granite Peak Resort.
+- id: passes-ikon-compare-2627
+  url: https://www.ikonpass.com/en/compare-passes
+  title: Compare 26/27 Ikon Pass Access
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. The access table by destination and pass.
+- id: passes-ikon-faq
+  url: https://www.ikonpass.com/en/faq
+  title: Ikon Pass FAQ
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. States that Killington and Pico share days and that
+    the four Aspen Snowmass mountains share 7 days on the Ikon Pass.
+- id: passes-ikon-whats-new-2627
+  url: https://lifted.ikonpass.com/whats-new-ikon-pass-2026-2027/
+  title: 'Everything unique. So much new. (Ikon Pass 26/27)'
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Names Snowriver Mountain Resort (its two areas,
+    Jackson Creek Summit and Black River Basin), Lutsen Mountains and Granite Peak as new Ikon Pass destinations.
+- id: passes-ikon-opening-dates-2627
+  url: https://www.ikonpass.com/en/opening-closing-dates
+  title: Opening and Closing Dates (Ikon Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Lists 26/27 Ikon destinations, including "Blue
+    Mountain Resort, PA".
+- id: passes-ikon-aspen-snowmass
+  url: https://www.ikonpass.com/en/destinations/aspen-snowmass
+  title: Aspen Snowmass (Ikon Pass destination)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: passes-ikon-sun-valley
+  url: https://www.ikonpass.com/en/destinations/sun-valley
+  title: Sun Valley Is On Ikon Pass
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. 7 days on the Ikon Pass, shared across Sun Valley and
+    Dollar Mountain.
+- id: passes-ikon-palisades-tahoe
+  url: https://www.ikonpass.com/en/destinations/palisades-tahoe
+  title: Palisades Tahoe (Ikon Pass destination)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Unlimited on the Ikon Pass with no blackout dates.
+- id: passes-ikon-summit-snoqualmie
+  url: https://www.ikonpass.com/en/destinations/summit-snoqualmie
+  title: The Summit at Snoqualmie Is On Ikon Pass
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. 7 days on the Ikon Pass; the page describes Alpental.
+- id: passes-ikon-deer-valley
+  url: https://www.ikonpass.com/en/destinations/deer-valley-resort
+  title: Deer Valley Resort Is On Ikon Pass
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. 7 days on the Ikon Pass for 26/27; lift reservations
+    required.
+- id: passes-ikon-alta
+  url: https://www.ikonpass.com/en/destinations/alta-ski-area
+  title: Alta Ski Area (Ikon Pass destination)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. 7 days combined between Alta Ski Area and Snowbird,
+    with no blackouts.
+- id: passes-wikipedia-summit-at-snoqualmie
+  url: https://en.wikipedia.org/wiki/The_Summit_at_Snoqualmie
+  title: The Summit at Snoqualmie (Wikipedia)
+  accessed_date: 2026-10-13
+  note: Read in full via action=raw. Composition only; the article has no pass list. The resort is Alpental,
+    Summit West, Summit Central and Summit East.
+- id: passes-wikipedia-palisades-tahoe
+  url: https://en.wikipedia.org/wiki/Palisades_Tahoe
+  title: Palisades Tahoe (Wikipedia)
+  accessed_date: 2026-10-13
+  note: Read in full via action=raw. Composition only; the article has no pass list. Palisades Tahoe merged with
+    Alpine Meadows in 2012 to offer joint access, linked by a gondola.
+# ---------------------------------------------------------------- Mountain Collective
+- id: passes-mountain-collective-home
+  url: https://mountaincollective.com/
+  title: Mountain Collective (multi resort ski pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Lists 27 destinations, 13 in the USA (Alta, Aspen
+    Snowmass, Big Sky, Grand Targhee, Jackson Hole, Snowbasin, Snowbird, Sugar Bowl, Sugarloaf, Sun Valley, Sunday
+    River, Taos Ski Valley and Whiteface, new this season).
+- id: passes-mountain-collective-2627
+  url: https://mountaincollective.com/2026-27-mountain-collective-passes-now-on-sale-2/
+  title: 2026/27 Mountain Collective Passes Now on Sale
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened. Two days at each partner resort plus 50% off
+    additional days, with no blackout dates.
+
+memberships:
+# ================================================================ Epic Pass
+# Rockies (passes-epic-rockies lists the six; passes-epic-pass gives unlimited access with no restricted dates).
+- {resort_id: vail, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: beaver-creek, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: breckenridge, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: keystone, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: crested-butte, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: park-city, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: telluride, pass: epic, access: limited, days: 7, season: 2026/27, source_id: passes-epic-telluride, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Partner resort: up to 7 days on the Epic Pass. The Epic Local and Epic Military passes leave it out."}
+# West (passes-epic-west).
+- {resort_id: heavenly, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass West page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: northstar, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass West page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: kirkwood, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass West page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: stevens-pass, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass West page. The unlimited list was seen under a 2025/26 heading."}
+# Northeast (passes-epic-northeast).
+- {resort_id: stowe, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: okemo, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: mount-snow, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: mount-sunapee, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: attitash, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: wildcat, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: crotched-mountain, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: hunter-mountain, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Northeast page. The unlimited list was seen under a 2025/26 heading."}
+# Mid-Atlantic (passes-epic-mid-atlantic).
+- {resort_id: liberty-mountain, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: roundtop-mountain, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: whitetail, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: jack-frost, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: big-boulder, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: seven-springs, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: laurel-mountain, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: hidden-valley-pa, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Hidden Valley (PA), also listed on the Epic Pass Mid Atlantic page. The unlimited list was seen under a 2025/26 heading."}
+# Midwest (passes-epic-midwest).
+- {resort_id: afton-alps, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: mount-brighton, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: wilmot-mountain, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: alpine-valley-oh, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Alpine Valley (OH), also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: boston-mills, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: brandywine, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: mad-river-mountain, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: hidden-valley-mo, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Hidden Valley (MO), also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: snow-creek, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+- {resort_id: paoli-peaks, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Midwest page. The unlimited list was seen under a 2025/26 heading."}
+
+# ================================================================ Ikon Pass
+# Unlimited on the 26/27 Ikon Pass, no blackout dates (passes-ikon-pass-2627).
+- {resort_id: arapahoe-basin, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: copper-mountain, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: eldora, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: steamboat, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: winter-park, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: solitude, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: mammoth-mountain, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: june-mountain, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: bear-mountain, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed as Big Bear Mountain Resort (Bear Mountain and Snow Summit)."}
+- {resort_id: snow-summit, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed as Big Bear Mountain Resort (Bear Mountain and Snow Summit)."}
+- {resort_id: snow-valley, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: palisades-tahoe, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-palisades-tahoe, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also in the unlimited list of the 26/27 Ikon Pass page."}
+- {resort_id: palisades-tahoe-alpine-meadows, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-palisades-tahoe, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Ikon lists Palisades Tahoe, which shares its access with Alpine Meadows (Wikipedia, Palisades Tahoe)."}
+- {resort_id: crystal-mountain, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Crystal Mountain, Washington."}
+- {resort_id: schweitzer, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: snowshoe, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: stratton, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: sugarbush, pass: ikon, access: unlimited, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+# Up to 7 days on the 26/27 Ikon Pass.
+- {resort_id: alta, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-alta, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined with Snowbird."}
+- {resort_id: snowbird, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-alta, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined with Alta."}
+- {resort_id: brighton, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: snowbasin, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: deer-valley, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-deer-valley, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Lift reservations required."}
+- {resort_id: aspen-mountain, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-faq, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."}
+- {resort_id: aspen-highlands, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-faq, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."}
+- {resort_id: buttermilk, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-faq, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."}
+- {resort_id: snowmass, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-faq, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."}
+- {resort_id: jackson-hole, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Lift reservations required."}
+- {resort_id: big-sky, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: taos, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: sun-valley, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-sun-valley, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days shared with Dollar Mountain."}
+- {resort_id: dollar-mountain, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-sun-valley, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days shared with Sun Valley."}
+- {resort_id: alyeska, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: mt-bachelor, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-pass-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: alpental, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-summit-snoqualmie, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Part of The Summit at Snoqualmie (Wikipedia, The Summit at Snoqualmie)."}
+- {resort_id: summit-west, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-summit-snoqualmie, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Part of The Summit at Snoqualmie (Wikipedia, The Summit at Snoqualmie). Whether the days are shared across its areas is not stated."}
+- {resort_id: killington, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-faq, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined with Pico."}
+- {resort_id: pico, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-faq, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. 7 days combined with Killington."}
+- {resort_id: sugarloaf, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-compare-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: sunday-river, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-compare-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: loon-mountain-resort, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-compare-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Lift reservations required."}
+- {resort_id: boyne-mountain, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-compare-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: camelback-mountain-resort, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-compare-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+- {resort_id: granite-peak-ski-area, pass: ikon, access: limited, days: 7, blackout: false, season: 2026/27, source_id: passes-ikon-compare-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. New for 26/27 per the Ikon Pass blog. The 7 day count came from a result with old page metadata."}
+# Listed for 26/27 without a day count for the Ikon Pass.
+- {resort_id: the-highlands, pass: ikon, access: unspecified, season: 2026/27, source_id: passes-ikon-base-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed in the Midwest and East; days on the Ikon Pass not seen."}
+- {resort_id: jackson-creek-summit, pass: ikon, access: unspecified, season: 2026/27, source_id: passes-ikon-whats-new-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. New for 26/27 as part of Snowriver Mountain Resort; days not seen."}
+- {resort_id: black-river-basin, pass: ikon, access: unspecified, season: 2026/27, source_id: passes-ikon-whats-new-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. New for 26/27 as part of Snowriver Mountain Resort; days not seen."}
+- {resort_id: lutsen-mountains, pass: ikon, access: unspecified, season: 2026/27, source_id: passes-ikon-whats-new-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. New for 26/27; days not seen."}
+- {resort_id: blue-mountain-resort, pass: ikon, access: unspecified, season: 2026/27, source_id: passes-ikon-opening-dates-2627, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed as Blue Mountain Resort, PA; days not seen."}
+
+# ================================================================ Mountain Collective (2 days each, no blackout dates)
+- {resort_id: alta, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: aspen-mountain, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."}
+- {resort_id: aspen-highlands, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."}
+- {resort_id: buttermilk, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."}
+- {resort_id: snowmass, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."}
+- {resort_id: big-sky, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: grand-targhee, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: jackson-hole, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: snowbasin, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: snowbird, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: sugar-bowl, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: sugarloaf, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: sun-valley, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: sunday-river, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: taos, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."}
+- {resort_id: whiteface, pass: mountain_collective, access: limited, days: 2, blackout: false, season: 2026/27, source_id: passes-mountain-collective-home, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. New this season per the page."}

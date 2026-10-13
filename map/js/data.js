@@ -70,6 +70,7 @@ function parseEach(schema, items, name, idOf) {
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const FACILITY = new Set(['ski_area', 'indoor', 'training_center']);
+const PASS_IDS = ['epic', 'ikon', 'mountain_collective', 'indy']; // labels.js PASS_ORDER
 const isStr = (v) => typeof v === 'string' && v.length > 0;
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 const numOrNull = (v) => (isNum(v) ? v : null);
@@ -102,8 +103,12 @@ function slimFromRow(fields, row) {
     season_length_days: numOrNull(o.season_length_days), snowfall_annual_in: numOrNull(o.snowfall_annual_in),
     lucrativeness_mid: numOrNull(o.lucrativeness_mid),
     hiring_window: o.hiring_window, job_employers: o.job_employers, // checked in hiring.js
+    passes: passIds(o.passes),
   };
 }
+
+/** Known pass ids in PASS_IDS order, without repeats; [] for anything else. */
+function passIds(v) { return Array.isArray(v) ? PASS_IDS.filter((p) => v.includes(p)) : []; }
 
 function checkCluster(f) {
   const p = f && f.properties;
@@ -198,6 +203,7 @@ function slimFromFull(r, props) {
       : (r.career && r.career.lucrativeness ? r.career.lucrativeness.mid : null),
     hiring_window: r.jobs && r.jobs.hiring_window && [r.jobs.hiring_window.start_month, r.jobs.hiring_window.end_month],
     job_employers: r.jobs && r.jobs.feed && r.jobs.links.map((l) => l.employer_id),
+    passes: passIds((r.passes || []).map((m) => m.pass)),
   };
 }
 
@@ -700,12 +706,22 @@ export function facilityCounts(list) {
   return out;
 }
 
-/** Filter key used by the facility filter: all | ski_area | facility (indoor and training) | hiring. */
-export function matchesFilter(resort, filter) {
-  if (!filter || filter === 'all') return true;
-  if (filter === 'ski_area') return resort.facility_type === 'ski_area';
-  if (filter === 'hiring') return resort.hiring_now === true;
-  return resort.facility_type === 'indoor' || resort.facility_type === 'training_center';
+/**
+ * The filter chips' state: facility all | ski_area | facility (indoor and training), hiring (Hiring now) and passes
+ * (pass ids). Every active part must match (AND); a resort on any of the chosen passes matches the pass part.
+ */
+export const NO_FILTER = Object.freeze({ facility: 'all', hiring: false, passes: Object.freeze([]) });
+
+/** True when some part of the filter is active. */
+export function isFiltered(f) { return Boolean(f && (f.facility !== 'all' || f.hiring || (f.passes && f.passes.length))); }
+
+export function matchesFilter(resort, f) {
+  if (!f) return true;
+  if (f.facility === 'ski_area' && resort.facility_type !== 'ski_area') return false;
+  if (f.facility === 'facility' && resort.facility_type !== 'indoor' && resort.facility_type !== 'training_center') return false;
+  if (f.hiring && resort.hiring_now !== true) return false;
+  if (f.passes && f.passes.length && !(resort.passes || []).some((p) => f.passes.includes(p))) return false;
+  return true;
 }
 
 /** Resorts of a cluster: Tier A first, then by size, then by name. */

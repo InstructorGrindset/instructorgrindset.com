@@ -3,6 +3,7 @@ import { config } from './config.js';
 import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts, whenPainted } from './data.js';
 import {
   FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, ACCESS_LABEL, TRAILMAP_FORMAT, tagLabel,
+  PASS_LABEL, passLine,
 } from './labels.js';
 import { hrefFor } from './router.js';
 import { clusterHiring, jobsSection, liveCams } from './livelinks.js';
@@ -336,7 +337,7 @@ export function createPanel(root, index, {
       h('div', { class: 'tier-row' }, resortTags(r)),
       trailMaps(r),
       liveCams(r, linkCtx()),
-      h('dl', { class: 'facts' }, fact('Owner', r.owner, fmt.text)),
+      h('dl', { class: 'facts' }, fact('Owner', r.owner, fmt.text), passesFact(r)),
     ];
     if (r.tier === 'A' && r.tier_a_criteria.length) {
       const approval = r.tier_a_status === 'approved' && r.approval
@@ -405,6 +406,24 @@ export function createPanel(root, index, {
       });
     }
     return out;
+  }
+
+  /**
+   * "Passes" under Owner: one line per pass ("Epic Pass: unlimited") with its badge, season, blackout rule, date and
+   * source. Nothing when the resort has no membership. Matches pipeline/routes.py render_passes.
+   */
+  function passesFact(r) {
+    const items = (r.passes || []).filter((m) => PASS_LABEL[m.pass]);
+    if (!items.length) return null;
+    return h('div', { class: 'fact passes' }, h('dt', null, 'Passes'), h('dd', null, h('ul', { class: 'pass-list' }, items.map((m) => {
+      const meta = [m.season ? `${m.season} season` : null,
+        m.blackout === true ? 'Blackout dates apply' : m.blackout === false ? 'No blackout dates' : null,
+        `Last verified ${formatIsoDate(m.as_of)}`].filter(Boolean);
+      return h('li', { class: 'pass-item', dataset: { pass: m.pass } }, h('span', { class: 'sourced' },
+        h('span', { class: 'sourced-main' }, h('span', { class: 'fact-value' }, passLine(m)), badge(m.confidence)),
+        m.note ? h('span', { class: 'fact-note' }, m.note) : null,
+        h('span', { class: 'fact-meta' }, `${meta.join(' · ')} · `, sourceLink(m.source_id))));
+    }))));
   }
 
   // ── Career (Phase 4) ──

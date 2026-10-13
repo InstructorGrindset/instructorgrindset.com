@@ -123,6 +123,17 @@ export const Jobs = z.object({
   }).nullish().catch(null).transform((v) => v ?? null),
 }).nullish().catch(null).transform((v) => (v && (v.links.length || v.hiring_window) ? v : null));
 
+// ── Pass membership (ARCHITECTURE "Pass membership"). A bad membership drops only that membership. ──
+export const PASS_IDS = ['epic', 'ikon', 'mountain_collective', 'indy'];
+export const PassMembership = z.object({
+  pass: z.enum(PASS_IDS),
+  access: z.enum(['unlimited', 'limited', 'unspecified']),
+  days: z.number().int().positive().nullish().transform((v) => v ?? null),
+  blackout: z.boolean().nullish().transform((v) => v ?? null),
+  season: z.string().regex(/^20\d\d\/\d\d$/, 'season'),
+  ...Cited,
+});
+
 /** data/build/jobs/postings.json (pipeline/jobs_feed.py, daily). */
 export const PostingsFile = z.object({
   ...Envelope,
@@ -200,6 +211,7 @@ export const Resort = z.object({
   // Live cams and jobs links (never embedded); a bad value drops only that block.
   webcams: Webcams,
   jobs: Jobs,
+  passes: keepValid(PassMembership),
   housing_summary: z.object({
     site_count: z.number().int().nonnegative().nullish(),
     cheapest_rent_monthly_low: numOrNull,

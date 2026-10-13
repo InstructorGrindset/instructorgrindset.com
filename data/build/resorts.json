@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T20:22:30Z",
+  "generated_at": "2026-10-13T22:16:25Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -64,6 +64,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-23",
@@ -169,6 +170,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -272,6 +274,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -452,6 +455,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -695,6 +699,19 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-summit-snoqualmie",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Part of The Summit at Snoqualmie (Wikipedia, The Summit at Snoqualmie)."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "01-04",
@@ -744,6 +761,7 @@
         "facts-gapfill-summit-alpental-2020",
         "facts-west2-ots-wa-closing",
         "openskimap-ski-areas",
+        "passes-ikon-summit-snoqualmie",
         "webcams-summit-snoqualmie-search"
       ]
     },
@@ -887,6 +905,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -1113,6 +1132,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -1226,6 +1246,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -1437,6 +1458,30 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-alta",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined with Snowbird."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-23",
@@ -1522,6 +1567,8 @@
         "jobs-ski-utah-resort-careers",
         "jobs-skiracing-job-board",
         "openskimap-lift-alta-collins",
+        "passes-ikon-alta",
+        "passes-mountain-collective-home",
         "webcams-alta-search",
         "wikipedia-alta-ski-area"
       ]
@@ -1579,6 +1626,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -1764,6 +1812,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-29",
@@ -1925,6 +1986,7 @@
         "jobs-alyeska-talentnest",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "passes-ikon-pass-2627",
         "pay-west-alyeska-instructor",
         "tmo-alyeska",
         "webcams-alyeska-search",
@@ -1998,6 +2060,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -2125,6 +2188,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -2230,6 +2294,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -2347,6 +2412,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -2458,6 +2524,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -2682,6 +2749,19 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "10-22",
@@ -2902,6 +2982,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-arapahoe-basin-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-abasin-instructor-2627",
         "tmo-arapahoe-basin",
         "webcams-arapahoe-basin-search",
@@ -2967,6 +3048,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-16",
@@ -3094,6 +3176,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -3200,6 +3283,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -3284,6 +3368,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -3483,6 +3568,30 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-faq",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -3660,6 +3769,8 @@
         "jobs-aspen-smartrecruiters",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "passes-ikon-faq",
+        "passes-mountain-collective-home",
         "pay-west-aspen-ski-instructor-2627",
         "tmo-aspen-highlands",
         "webcams-aspen-snowmass-search",
@@ -3839,6 +3950,30 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-faq",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -4016,6 +4151,8 @@
         "jobs-aspen-smartrecruiters",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "passes-ikon-faq",
+        "passes-mountain-collective-home",
         "pay-west-aspen-ski-instructor-2627",
         "tmo-aspen-mountain",
         "webcams-aspen-mountain-search",
@@ -4172,6 +4309,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -4410,6 +4548,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -4527,6 +4666,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "01-05",
@@ -4645,6 +4785,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-22",
@@ -4749,6 +4890,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -4847,6 +4989,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -4951,6 +5094,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -5058,6 +5202,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -5270,6 +5415,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed as Big Bear Mountain Resort (Bear Mountain and Snow Summit)."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -5354,6 +5512,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-big-bear-mountain-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "tmo-bear-mountain",
         "webcams-bear-mountain-search",
         "wikipedia-bear-mountain-ski-area"
@@ -5426,6 +5585,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-24",
@@ -5553,6 +5713,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -5665,6 +5826,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "05-25",
@@ -5768,6 +5930,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -5977,6 +6140,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -6235,6 +6399,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-23",
@@ -6355,6 +6520,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -6475,6 +6641,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -6580,6 +6747,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -6760,6 +6928,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -6905,6 +7074,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -7095,6 +7265,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -7325,6 +7496,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -7429,6 +7601,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -7575,6 +7748,7 @@
         ]
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -7683,6 +7857,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -7893,6 +8068,30 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-23",
@@ -8065,6 +8264,8 @@
         "jobs-boyne-careers-home",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "passes-ikon-pass-2627",
+        "passes-mountain-collective-home",
         "pay-followups-bigsky-dol-2425",
         "tmo-big-sky",
         "webcams-big-sky-search",
@@ -8195,6 +8396,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -8375,6 +8577,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -8459,6 +8662,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -8576,6 +8780,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -8680,6 +8885,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -8778,6 +8984,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -8935,6 +9142,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -9069,6 +9277,19 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unspecified",
+          "days": null,
+          "blackout": null,
+          "season": "2026/27",
+          "source_id": "passes-ikon-whats-new-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New for 26/27 as part of Snowriver Mountain Resort; days not seen."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -9117,7 +9338,8 @@
       "sources": [
         "facts-midwest-season-black-river-basin",
         "facts-midwest-wiki-snowriver",
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "passes-ikon-whats-new-2627"
       ]
     },
     {
@@ -9173,6 +9395,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -9274,6 +9497,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-29",
@@ -9380,6 +9604,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -9470,6 +9695,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -9575,6 +9801,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -9701,6 +9928,19 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unspecified",
+          "days": null,
+          "blackout": null,
+          "season": "2026/27",
+          "source_id": "passes-ikon-opening-dates-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed as Blue Mountain Resort, PA; days not seen."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -9750,6 +9990,7 @@
         "facts-northeast2-blue-mountain-resort-ots",
         "facts-northeast2-blue-mountain-resort-wikipedia",
         "openskimap-ski-areas",
+        "passes-ikon-opening-dates-2627",
         "webcams-blue-mountain-pa-search"
       ]
     },
@@ -9829,6 +10070,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -9989,6 +10231,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -10140,6 +10383,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -10297,6 +10541,7 @@
         ]
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -10502,6 +10747,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -10712,6 +10958,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -10831,6 +11078,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -10937,6 +11185,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -11147,6 +11396,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-compare-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -11211,6 +11473,7 @@
         "jobs-boyne-mountain-employment",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "passes-ikon-compare-2627",
         "tmo-boyne-mountain",
         "webcams-boyne-mountain-search",
         "wikipedia-boyne-mountain-resort"
@@ -11365,6 +11628,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -11569,6 +11833,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -11672,6 +11937,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -11870,6 +12136,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-07",
@@ -12135,6 +12402,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-14",
@@ -12264,6 +12532,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-08",
@@ -12474,6 +12743,7 @@
           "end_month": null
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -12785,6 +13055,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -12869,6 +13152,7 @@
         "jobs-fasterskier-jobpostings",
         "jobs-ski-utah-resort-careers",
         "jobs-skiracing-job-board",
+        "passes-ikon-pass-2627",
         "tmo-brighton",
         "webcams-brighton-search",
         "wikipedia-boyne-resorts",
@@ -12951,6 +13235,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -13079,6 +13364,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -13199,6 +13485,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -13318,6 +13605,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -13437,6 +13725,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-09",
@@ -13638,6 +13927,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -13839,6 +14129,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -13937,6 +14228,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -14041,6 +14333,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -14223,6 +14516,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -14461,6 +14755,30 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-faq",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -14638,6 +14956,8 @@
         "jobs-aspen-smartrecruiters",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "passes-ikon-faq",
+        "passes-mountain-collective-home",
         "pay-west-aspen-ski-instructor-2627",
         "tmo-buttermilk",
         "webcams-aspen-snowmass-search",
@@ -14721,6 +15041,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -14840,6 +15161,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -14967,6 +15289,19 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-compare-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -15004,6 +15339,7 @@
         "facts-northeast2-camelback-mountain-resort-wikipedia",
         "facts-northeast2-camelback-ots",
         "openskimap-ski-areas",
+        "passes-ikon-compare-2627",
         "webcams-camelback-search"
       ]
     },
@@ -15060,6 +15396,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -15144,6 +15481,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -15247,6 +15585,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -15340,6 +15679,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -15444,6 +15784,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -15543,6 +15884,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -15744,6 +16086,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -15891,6 +16234,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -16018,6 +16362,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -16139,6 +16484,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -16269,6 +16615,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-10",
@@ -16374,6 +16721,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -16458,6 +16806,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -16542,6 +16891,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -16659,6 +17009,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-14",
@@ -16778,6 +17129,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-14",
@@ -16905,6 +17257,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -17010,6 +17363,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -17117,6 +17471,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -17223,6 +17578,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -17321,6 +17677,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -17439,6 +17796,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -17537,6 +17895,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -17627,6 +17986,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -17731,6 +18091,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-17",
@@ -17834,6 +18195,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -17932,6 +18294,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -18037,6 +18400,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -18144,6 +18508,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -18368,6 +18733,19 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-07",
@@ -18537,6 +18915,7 @@
         "jobs-powdr-workday-posting",
         "jobs-skiracing-job-board",
         "openskimap-ski-areas",
+        "passes-ikon-pass-2627",
         "pay-west-copper-certified-adult-2627",
         "tmo-copper-mountain",
         "webcams-copper-super-bee-excelerator-webcam-search",
@@ -18598,6 +18977,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -18682,6 +19062,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -18766,6 +19147,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -18864,6 +19246,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -18969,6 +19352,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -19141,6 +19525,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -19283,6 +19668,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -19381,6 +19767,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-17",
@@ -19599,6 +19986,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -19921,6 +20309,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -20277,6 +20666,19 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Crystal Mountain, Washington."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -20444,6 +20846,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-crystal-mountain-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-crystal-instructor-pt-2627",
         "tmo-crystal-mountain",
         "webcams-crystal-search",
@@ -20526,6 +20929,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -20636,6 +21040,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -20740,6 +21145,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -20838,6 +21244,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -20929,6 +21336,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -21181,6 +21589,19 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-deer-valley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Lift reservations required."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -21382,6 +21803,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-deer-valley-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-deer-valley",
         "pay-alterra-deervalley-dol-level3-2627",
         "pay-alterra-deervalley-experienced-2627",
         "pay-alterra-deervalley-private-lessons",
@@ -21450,6 +21872,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -21568,6 +21991,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-07",
@@ -21697,6 +22121,7 @@
         ]
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -21827,6 +22252,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-03",
@@ -21933,6 +22359,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -22060,6 +22487,7 @@
         ]
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -22257,6 +22685,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-sun-valley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days shared with Sun Valley."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -22322,6 +22763,7 @@
         "jobs-skiracing-job-board",
         "jobs-sun-valley-jobs",
         "openskimap-lift-dollar-mountain-dollar",
+        "passes-ikon-sun-valley",
         "tmo-sun-valley",
         "webcams-sun-valley-search",
         "wikipedia-dollar-mountain",
@@ -22395,6 +22837,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -22499,6 +22942,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -22583,6 +23027,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -22686,6 +23131,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -22770,6 +23216,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -22854,6 +23301,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -22958,6 +23406,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -23056,6 +23505,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -23159,6 +23609,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -23251,6 +23702,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -23361,6 +23813,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -23479,6 +23932,19 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-19",
@@ -23527,7 +23993,8 @@
       "sources": [
         "facts-gapfill-un-eldora-2026",
         "facts-west1-wiki-eldora",
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "passes-ikon-pass-2627"
       ]
     },
     {
@@ -23597,6 +24064,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -23701,6 +24169,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -23799,6 +24268,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -23903,6 +24373,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -24001,6 +24472,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -24105,6 +24577,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -24189,6 +24662,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -24287,6 +24761,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -24392,6 +24867,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -24528,6 +25004,7 @@
         ]
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -24658,6 +25135,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-09",
@@ -24868,6 +25346,19 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -24961,6 +25452,7 @@
         "jobs-skiracing-job-board",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
+        "passes-mountain-collective-home",
         "tmo-grand-targhee",
         "webcams-grand-targhee-search",
         "wikipedia-grand-targhee-resort"
@@ -25028,6 +25520,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -25155,6 +25648,19 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-compare-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New for 26/27 per the Ikon Pass blog. The 7 day count came from a result with old page metadata."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -25204,6 +25710,7 @@
         "facts-gapfill-snowstash-granite-peak",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
+        "passes-ikon-compare-2627",
         "webcams-granite-peak-search"
       ]
     },
@@ -25260,6 +25767,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -25363,6 +25871,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -25483,6 +25992,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -25612,6 +26122,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -25711,6 +26222,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -25795,6 +26307,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -25927,6 +26440,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -26069,6 +26583,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -26172,6 +26687,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -26279,6 +26795,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-21",
@@ -26386,6 +26903,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -26566,6 +27084,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -26792,6 +27311,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -26941,6 +27461,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -27141,6 +27662,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -27258,6 +27780,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-27",
@@ -27368,6 +27891,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "01-05",
@@ -27473,6 +27997,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -27653,6 +28178,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-22",
@@ -27964,6 +28490,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-22",
@@ -28169,6 +28696,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -28259,6 +28787,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -28363,6 +28892,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -28461,6 +28991,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -28565,6 +29096,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -28691,6 +29223,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -28806,6 +29339,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -28934,6 +29468,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -29063,6 +29598,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -29219,6 +29755,7 @@
       },
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -29338,6 +29875,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -29422,6 +29960,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -29634,6 +30173,7 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -29886,6 +30426,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -30035,6 +30576,7 @@
       },
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -30235,6 +30777,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -30459,6 +31002,19 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unspecified",
+          "days": null,
+          "blackout": null,
+          "season": "2026/27",
+          "source_id": "passes-ikon-whats-new-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New for 26/27 as part of Snowriver Mountain Resort; days not seen."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -30507,7 +31063,8 @@
       "sources": [
         "facts-gapfill2-sri-jacksoncreek",
         "facts-midwest-wiki-snowriver",
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "passes-ikon-whats-new-2627"
       ]
     },
     {
@@ -30690,6 +31247,30 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Lift reservations required."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -30856,6 +31437,8 @@
         "jobs-jhsc-freeride",
         "jobs-skiracing-job-board",
         "openskimap-lift-jackson-hole-aerial-tram",
+        "passes-ikon-pass-2627",
+        "passes-mountain-collective-home",
         "pay-west-jh-private-lessons",
         "tmo-jackson-hole",
         "webcams-jackson-hole-search",
@@ -31012,6 +31595,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -31249,6 +31833,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -31462,6 +32047,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -31655,6 +32253,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-june-mountain-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-june-ski-certified-2627",
         "pay-alterra-june-ski-noncertified-2627",
         "tmo-june-mountain",
@@ -31715,6 +32314,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -31813,6 +32413,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-10",
@@ -31931,6 +32532,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-07",
@@ -32036,6 +32638,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -32139,6 +32742,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -32231,6 +32835,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -32444,6 +33049,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-01",
@@ -32804,6 +33410,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-faq",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined with Pico."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-11",
@@ -32889,6 +33508,7 @@
         "jobs-killington-employment",
         "jobs-skiracing-job-board",
         "jobs-vass-careers",
+        "passes-ikon-faq",
         "tmo-killington",
         "webcams-killington-killington-peak-360-live-cam-search",
         "webcams-killington-search",
@@ -32954,6 +33574,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -33160,6 +33781,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -33313,6 +33935,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -33418,6 +34041,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -33521,6 +34145,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -33633,6 +34258,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -33731,6 +34357,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -33903,6 +34530,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-23",
@@ -34106,6 +34734,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -34218,6 +34847,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-24",
@@ -34322,6 +34952,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -34510,6 +35141,7 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -34757,6 +35389,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -34875,6 +35508,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -34979,6 +35613,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -35063,6 +35698,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -35189,6 +35825,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -35293,6 +35930,19 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-compare-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Lift reservations required."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -35341,7 +35991,8 @@
       "sources": [
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
-        "openskimap-ski-areas"
+        "openskimap-ski-areas",
+        "passes-ikon-compare-2627"
       ]
     },
     {
@@ -35420,6 +36071,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -35531,6 +36183,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -35649,6 +36302,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -35775,6 +36429,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "10-29",
@@ -35897,6 +36552,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -36006,6 +36662,19 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unspecified",
+          "days": null,
+          "blackout": null,
+          "season": "2026/27",
+          "source_id": "passes-ikon-whats-new-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New for 26/27; days not seen."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -36056,6 +36725,7 @@
         "facts-midwest-wiki-lutsen",
         "facts-midwest-wiki-lutsen-mountains",
         "openskimap-ski-areas",
+        "passes-ikon-whats-new-2627",
         "webcams-lutsen-search"
       ]
     },
@@ -36112,6 +36782,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -36291,6 +36962,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -36581,6 +37253,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -36817,6 +37490,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -37031,6 +37705,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-10",
@@ -37309,6 +37984,19 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-13",
@@ -37510,6 +38198,7 @@
         "jobs-workday-mammoth-mountain-resort",
         "openskimap-lift-mammoth-panorama-gondola-lower",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-mammoth-ski-certified-2627",
         "pay-alterra-mammoth-ski-noncertified-2627",
         "tmo-mammoth-mountain",
@@ -37574,6 +38263,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -37700,6 +38390,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -37828,6 +38519,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -37948,6 +38640,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -38052,6 +38745,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -38155,6 +38849,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -38258,6 +38953,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -38367,6 +39063,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -38468,6 +39165,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -38650,6 +39348,7 @@
         "feed": true,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -38851,6 +39550,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -38977,6 +39677,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -39098,6 +39799,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -39227,6 +39929,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-29",
@@ -39347,6 +40050,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -39465,6 +40169,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -39583,6 +40288,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-09",
@@ -39777,6 +40483,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -39899,6 +40606,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -40009,6 +40717,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -40128,6 +40837,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -40271,6 +40981,7 @@
       },
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -40488,6 +41199,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -40637,6 +41349,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -40722,6 +41435,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -40806,6 +41520,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -40890,6 +41605,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -41007,6 +41723,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -41125,6 +41842,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -41238,6 +41956,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -41343,6 +42062,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -41446,6 +42166,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -41549,6 +42270,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -41656,6 +42378,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-08",
@@ -41776,6 +42499,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -41994,6 +42718,7 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -42254,6 +42979,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -42455,6 +43181,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -42703,6 +43430,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -42813,6 +43541,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -42932,6 +43661,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -43037,6 +43767,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -43136,6 +43867,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -43353,6 +44085,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -43523,6 +44268,7 @@
         "jobs-powdr-workday-posting",
         "jobs-skiracing-job-board",
         "openskimap-ski-areas",
+        "passes-ikon-pass-2627",
         "pay-west-mtbachelor-instructors-2627",
         "tmo-mt-bachelor",
         "webcams-mt-bachelor-search",
@@ -43677,6 +44423,7 @@
           "end_month": null
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-03",
@@ -43927,6 +44674,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -44032,6 +44780,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -44130,6 +44879,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -44240,6 +44990,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -44434,6 +45185,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -44605,6 +45357,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -44723,6 +45476,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-09",
@@ -44834,6 +45588,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -44961,6 +45716,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -45090,6 +45846,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -45210,6 +45967,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -45314,6 +46072,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -45426,6 +46185,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -45531,6 +46291,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45615,6 +46376,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45722,6 +46484,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -45850,6 +46613,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -45956,6 +46720,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -46046,6 +46811,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -46251,6 +47017,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -46503,6 +47270,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -46622,6 +47390,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -46732,6 +47501,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -46826,6 +47596,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -46944,6 +47715,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -47049,6 +47821,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -47248,6 +48021,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -47471,6 +48245,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -47590,6 +48365,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -47708,6 +48484,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -47942,6 +48719,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-palisades-tahoe",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Also in the unlimited list of the 26/27 Ikon Pass page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -48109,6 +48899,7 @@
         "jobs-team-palisades-posting",
         "jobs-workday-palisades-tahoe-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-palisades-tahoe",
         "pay-alterra-palisades-dol-level3-2627",
         "pay-alterra-palisades-kids-instructor-2627",
         "tmo-palisades-tahoe",
@@ -48289,6 +49080,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-palisades-tahoe",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Ikon lists Palisades Tahoe, which shares its access with Alpine Meadows (Wikipedia, Palisades Tahoe)."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -48375,6 +49179,7 @@
         "jobs-team-palisades-posting",
         "jobs-workday-palisades-tahoe-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-palisades-tahoe",
         "tmo-palisades-tahoe",
         "webcams-palisades-search",
         "wikipedia-alpine-meadows-ski-resort",
@@ -48530,6 +49335,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -48895,6 +49701,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -49148,6 +49955,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -49254,6 +50062,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -49361,6 +50170,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -49480,6 +50290,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -49608,6 +50419,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -49713,6 +50525,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -49925,6 +50738,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-faq",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined with Killington."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -49992,6 +50818,7 @@
         "jobs-killington-employment",
         "jobs-skiracing-job-board",
         "jobs-vass-careers",
+        "passes-ikon-faq",
         "tmo-pico",
         "webcams-pico-search",
         "wikipedia-killington-ski-resort",
@@ -50060,6 +50887,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -50170,6 +50998,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -50288,6 +51117,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -50392,6 +51222,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -50493,6 +51324,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -50605,6 +51437,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -50709,6 +51542,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -50793,6 +51627,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -50877,6 +51712,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -50975,6 +51811,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-17",
@@ -51094,6 +51931,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -51192,6 +52030,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -51372,6 +52211,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-09",
@@ -51526,6 +52366,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-01",
@@ -51653,6 +52494,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -51782,6 +52624,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -51888,6 +52731,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -51972,6 +52816,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -52075,6 +52920,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -52182,6 +53028,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -52288,6 +53135,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -52372,6 +53220,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -52484,6 +53333,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -52589,6 +53439,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -52696,6 +53547,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -52824,6 +53676,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -52930,6 +53783,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -53014,6 +53868,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -53098,6 +53953,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-28",
@@ -53290,6 +54146,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-17",
@@ -53440,6 +54297,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -53566,6 +54424,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -53671,6 +54530,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -53749,6 +54609,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -53847,6 +54708,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -53965,6 +54827,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -54148,6 +55011,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -54267,6 +55131,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -54351,6 +55216,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -54444,6 +55310,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -54655,6 +55522,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -54833,6 +55713,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-schweitzer-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-schweitzer-childrens-center-2627",
         "pay-alterra-schweitzer-private-lessons",
         "tmo-schweitzer",
@@ -54893,6 +55774,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -54991,6 +55873,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -55191,6 +56074,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -55445,6 +56329,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -55563,6 +56448,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -55690,6 +56576,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -55796,6 +56683,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -55903,6 +56791,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -56089,6 +56978,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-29",
@@ -56232,6 +57122,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -56338,6 +57229,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -56422,6 +57314,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -56506,6 +57399,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -56632,6 +57526,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -56744,6 +57639,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -56863,6 +57759,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-14",
@@ -56976,6 +57873,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -57095,6 +57993,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -57253,6 +58152,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-10",
@@ -57389,6 +58289,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -57492,6 +58393,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -57576,6 +58478,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -57683,6 +58586,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-23",
@@ -57798,6 +58702,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -57916,6 +58821,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -58027,6 +58933,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -58132,6 +59039,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-14",
@@ -58250,6 +59158,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -58335,6 +59244,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -58419,6 +59329,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -58509,6 +59420,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -58611,6 +59523,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -58717,6 +59630,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -58916,6 +59830,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -59064,6 +59979,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -59169,6 +60085,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -59262,6 +60179,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -59372,6 +60290,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -59583,6 +60502,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed as Big Bear Mountain Resort (Bear Mountain and Snow Summit)."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -59668,6 +60600,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-big-bear-mountain-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "tmo-bear-mountain",
         "webcams-big-bear-search",
         "wikipedia-snow-summit"
@@ -59740,6 +60673,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -59952,6 +60886,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-19",
@@ -60123,6 +61070,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-big-bear-mountain-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-snowvalley-apprentice-2627",
         "tmo-bear-mountain",
         "webcams-big-bear-search",
@@ -60289,6 +61237,30 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -60371,6 +61343,8 @@
         "jobs-ski-utah-resort-careers",
         "jobs-skiracing-job-board",
         "jobs-snowbasin-employment",
+        "passes-ikon-pass-2627",
+        "passes-mountain-collective-home",
         "tmo-snowbasin",
         "webcams-snowbasin-search",
         "wikipedia-snowbasin"
@@ -60546,6 +61520,30 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-alta",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined with Alta."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-02",
@@ -60698,6 +61696,8 @@
         "jobs-powdr-workday-posting",
         "jobs-ski-utah-resort-careers",
         "jobs-skiracing-job-board",
+        "passes-ikon-alta",
+        "passes-mountain-collective-home",
         "tmo-snowbird",
         "webcams-snowbird-search",
         "webcams-snowbird-snowstake-webcam-search",
@@ -60758,6 +61758,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -60856,6 +61857,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -61075,6 +62077,30 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-faq",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days combined across the four Aspen Snowmass mountains."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed as Aspen Snowmass, four mountains per the Ikon Pass FAQ; whether the 2 days are shared is not stated."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -61255,6 +62281,8 @@
         "jobs-aspen-smartrecruiters",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "passes-ikon-faq",
+        "passes-mountain-collective-home",
         "pay-west-aspen-ski-instructor-2627",
         "tmo-snowmass",
         "webcams-aspen-snowmass-search",
@@ -61458,6 +62486,19 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -61605,6 +62646,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-snowshoe-mountain-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-snowshoe-instructor-2627",
         "tmo-snowshoe",
         "webcams-snowshoe-ballhooter-slope-live-camera-search",
@@ -61690,6 +62732,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -61809,6 +62852,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -61937,6 +62981,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-27",
@@ -62161,6 +63206,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -62244,6 +63302,7 @@
         "jobs-skiracing-job-board",
         "jobs-solitude-employment",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "tmo-solitude",
         "webcams-solitude-search",
         "wikipedia-solitude-mountain-resort"
@@ -62302,6 +63361,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-09",
@@ -62419,6 +63479,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -62523,6 +63584,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -62626,6 +63688,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -62729,6 +63792,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -62936,6 +64000,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -63101,6 +64178,7 @@
         "jobs-skiracing-job-board",
         "jobs-workday-steamboat-ski-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-steamboat-ski-instructor-2627",
         "tmo-steamboat",
         "webcams-steamboat-christie-express-live-cam-search",
@@ -63162,6 +64240,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -63361,6 +64440,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -63582,6 +64662,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -63799,6 +64880,7 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -64183,6 +65265,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-18",
@@ -64352,6 +65447,7 @@
         "jobs-stratton-swsc-posting",
         "jobs-workday-stratton-mountain-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-stratton-ski-instructor-2627",
         "tmo-stratton",
         "webcams-stratton-search",
@@ -64524,6 +65620,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -64706,6 +65815,7 @@
         "jobs-skiracing-job-board",
         "jobs-sugar-bowl-jobs",
         "openskimap-ski-areas",
+        "passes-mountain-collective-home",
         "pay-west-sugarbowl-dol-l2-2627",
         "pay-west-sugarbowl-jobs-l1",
         "tmo-sugar-bowl",
@@ -64780,6 +65890,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-11",
@@ -65005,6 +66116,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -65166,6 +66290,7 @@
         "jobs-vass-careers",
         "jobs-workday-sugarbush-resort",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-sugarbush-new-instructor-2627",
         "tmo-sugarbush",
         "webcams-sugarbush-search",
@@ -65355,6 +66480,30 @@
           "end_month": "2026-11"
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-compare-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -65534,6 +66683,8 @@
         "jobs-skiracing-job-board",
         "jobs-sugarloaf-jobs",
         "openskimap-lift-sugarloaf-superquad",
+        "passes-ikon-compare-2627",
+        "passes-mountain-collective-home",
         "pay-east-sugarloaf-instructor-24652",
         "tmo-sugarloaf",
         "webcams-sugarloaf-search",
@@ -65588,6 +66739,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -65681,6 +66833,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -65760,6 +66913,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -65853,6 +67007,19 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-summit-snoqualmie",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Part of The Summit at Snoqualmie (Wikipedia, The Summit at Snoqualmie). Whether the days are shared across its areas is not stated."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -65902,6 +67069,7 @@
         "facts-west2-fox13-wa-openings",
         "facts-west2-ots-wa-closing",
         "openskimap-ski-areas",
+        "passes-ikon-summit-snoqualmie",
         "webcams-summit-snoqualmie-search"
       ]
     },
@@ -66064,6 +67232,30 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-sun-valley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 7 days shared with Dollar Mountain."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -66229,6 +67421,8 @@
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-sun-valley-jobs",
+        "passes-ikon-sun-valley",
+        "passes-mountain-collective-home",
         "pay-west-sunvalley-dol-l3-2627",
         "tmo-sun-valley",
         "webcams-sun-valley-search",
@@ -66303,6 +67497,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -66414,6 +67609,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-03",
@@ -66647,6 +67843,30 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-compare-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -66839,6 +68059,8 @@
         "jobs-skiracing-job-board",
         "jobs-sunday-river-employment",
         "openskimap-ski-areas",
+        "passes-ikon-compare-2627",
+        "passes-mountain-collective-home",
         "pay-east-sunday-river-instructor-24529",
         "tmo-sunday-river",
         "webcams-sunday-river-search",
@@ -66922,6 +68144,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -67051,6 +68274,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -67171,6 +68395,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -67274,6 +68499,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -67378,6 +68604,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -67495,6 +68722,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -67622,6 +68850,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -67829,6 +69058,30 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "limited",
+          "days": 7,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        },
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Two days and no blackout dates per the 2026/27 on sale page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -67912,6 +69165,8 @@
         "jobs-skiracing-job-board",
         "jobs-taos-coolworks",
         "openskimap-lift-taos-lift-1",
+        "passes-ikon-pass-2627",
+        "passes-mountain-collective-home",
         "tmo-taos",
         "webcams-taos-search",
         "wikipedia-ernie-blake",
@@ -68075,6 +69330,19 @@
           "end_month": null
         }
       },
+      "passes": [
+        {
+          "pass": "epic",
+          "access": "limited",
+          "days": 7,
+          "blackout": null,
+          "season": "2026/27",
+          "source_id": "passes-epic-telluride",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Partner resort: up to 7 days on the Epic Pass. The Epic Local and Epic Military passes leave it out."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -68250,6 +69518,7 @@
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "jobs-telluride-employment",
+        "passes-epic-telluride",
         "pay-west-telluride-dol-l3-2627",
         "tmo-telluride",
         "webcams-telluride-search",
@@ -68315,6 +69584,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -68435,6 +69705,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -68555,6 +69826,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -68659,6 +69931,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -68850,6 +70123,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unspecified",
+          "days": null,
+          "blackout": null,
+          "season": "2026/27",
+          "source_id": "passes-ikon-base-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Listed in the Midwest and East; days on the Ikon Pass not seen."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -68918,6 +70204,7 @@
         "jobs-highlands-employment",
         "jobs-skiracing-job-board",
         "openskimap-ski-areas",
+        "passes-ikon-base-2627",
         "tmo-the-highlands",
         "webcams-highlands-search",
         "wikipedia-the-highlands-at-harbor-springs"
@@ -68990,6 +70277,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -69109,6 +70397,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -69227,6 +70516,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -69331,6 +70621,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -69409,6 +70700,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -69493,6 +70785,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -69577,6 +70870,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -69695,6 +70989,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -69794,6 +71089,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -69893,6 +71189,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -70102,6 +71399,7 @@
           "end_month": null
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-16",
@@ -70348,6 +71646,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -70518,6 +71817,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -70634,6 +71934,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -70755,6 +72056,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -70874,6 +72176,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-01",
@@ -70979,6 +72282,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -71077,6 +72381,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-13",
@@ -71181,6 +72486,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -71273,6 +72579,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -71384,6 +72691,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -71482,6 +72790,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -71580,6 +72889,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-29",
@@ -71751,6 +73061,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -71941,6 +73252,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -72175,6 +73487,7 @@
           "end_month": "2026-12"
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-13",
@@ -72322,6 +73635,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -72406,6 +73720,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -72490,6 +73805,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -72588,6 +73904,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -72692,6 +74009,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-25",
@@ -72818,6 +74136,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -72938,6 +74257,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -73043,6 +74363,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -73228,6 +74549,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -73381,6 +74703,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -73491,6 +74814,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-15",
@@ -73597,6 +74921,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -73725,6 +75050,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -73831,6 +75157,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-24",
@@ -73942,6 +75269,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -74142,6 +75470,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "mountain_collective",
+          "access": "limited",
+          "days": 2,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-mountain-collective-home",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. New this season per the page."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -74327,6 +75668,7 @@
         "jobs-whiteface-employment",
         "openskimap-lift-whiteface-cloudsplitter-gondola",
         "openskimap-ski-areas",
+        "passes-mountain-collective-home",
         "pay-east-whiteface-employment",
         "pay-east-whiteface-private-lessons",
         "tmo-whiteface",
@@ -74491,6 +75833,7 @@
           "end_month": null
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -74726,6 +76069,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -74975,6 +76319,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "10-31",
@@ -75181,6 +76526,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -75437,6 +76783,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -75542,6 +76889,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-16",
@@ -75749,6 +77097,7 @@
           "end_month": null
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -75987,6 +77336,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -76217,6 +77567,19 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [
+        {
+          "pass": "ikon",
+          "access": "unlimited",
+          "days": null,
+          "blackout": false,
+          "season": "2026/27",
+          "source_id": "passes-ikon-pass-2627",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened."
+        }
+      ],
       "season": {
         "open_typical": {
           "value": "10-31",
@@ -76383,6 +77746,7 @@
         "jobs-winter-park-coach-job-order",
         "jobs-winter-park-employment",
         "owner-decisions-2026-10-11",
+        "passes-ikon-pass-2627",
         "pay-alterra-winterpark-instructor-2627",
         "tmo-winter-park",
         "webcams-winter-park-search",
@@ -76456,6 +77820,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-07",
@@ -76584,6 +77949,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -76704,6 +78070,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-14",
@@ -76809,6 +78176,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -76916,6 +78284,7 @@
         "cams": []
       },
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-11",
@@ -77022,6 +78391,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -77166,6 +78536,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -77341,6 +78712,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-23",
@@ -77593,6 +78965,7 @@
         "feed": false,
         "hiring_window": null
       },
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -77768,6 +79141,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -77866,6 +79240,7 @@
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -78057,6 +79432,7 @@
           "end_month": null
         }
       },
+      "passes": [],
       "season": {
         "open_typical": {
           "value": "11-25",

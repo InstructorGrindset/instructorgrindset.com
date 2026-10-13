@@ -33,12 +33,33 @@ export function facilityPhrase(counts) {
   return parts.length ? joinAnd(parts) : 'no resorts yet';
 }
 
+/**
+ * Filter chips (map and list view). All clears every filter; Ski areas and Indoor and training pick a facility
+ * type; Hiring now and the pass chips switch on and off. Active parts combine with AND; several passes match any
+ * of them (data.js matchesFilter).
+ */
 export const FILTERS = [
-  { key: 'all', label: 'All' },
-  { key: 'ski_area', label: 'Ski areas' },
-  { key: 'facility', label: 'Indoor and training' },
-  { key: 'hiring', label: 'Hiring now' }, // count and rule in hiring.js
+  { key: 'all', label: 'All', group: 'all' },
+  { key: 'ski_area', label: 'Ski areas', group: 'facility' },
+  { key: 'facility', label: 'Indoor and training', group: 'facility' },
+  { key: 'hiring', label: 'Hiring now', group: 'hiring' }, // count and rule in hiring.js
+  { key: 'epic', label: 'Epic', group: 'pass', title: 'Resorts on the Epic Pass' },
+  { key: 'ikon', label: 'Ikon', group: 'pass', title: 'Resorts on the Ikon Pass' },
 ];
+
+/** Multi resort passes (pass ids from data/raw/passes). Keep in step with pipeline/routes.py PASS_LABEL. */
+export const PASS_ORDER = ['epic', 'ikon', 'mountain_collective', 'indy'];
+export const PASS_LABEL = { epic: 'Epic Pass', ikon: 'Ikon Pass', mountain_collective: 'Mountain Collective', indy: 'Indy Pass' };
+
+/** 'unlimited', '7 days', 'limited days' or 'days not stated' for one membership (pipeline/routes.py pass_access). */
+export function passAccess(m) {
+  if (m.access === 'unlimited') return 'unlimited';
+  if (m.access === 'limited') return Number.isInteger(m.days) && m.days > 0 ? plural(m.days, 'day', 'days') : 'limited days';
+  return 'days not stated';
+}
+
+/** 'Epic Pass: unlimited'. */
+export function passLine(m) { return `${PASS_LABEL[m.pass] || humanize(m.pass)}: ${passAccess(m)}`; }
 
 /** Certification levels in display order (the Phase 4 contract). */
 export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner', 'unspecified'];

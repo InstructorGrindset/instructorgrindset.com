@@ -39,7 +39,8 @@ function el(tag, attrs) {
 
 const n1 = (v) => Math.round(v * 10) / 10;
 
-export function drawPreview(container, index, view, padding) {
+/** keep (optional): the filter chips' predicate; resorts it rejects are left out, as on the WebGL map. */
+export function drawPreview(container, index, view, padding, keep = null) {
   const w = container.clientWidth; const hgt = container.clientHeight;
   if (!w || !hgt) return null;
   const { b, maxZoom } = viewFrame(index, view);
@@ -90,6 +91,7 @@ export function drawPreview(container, index, view, padding) {
   const dots = el('g', null);
   const list = [...index.resorts.values()].sort((a, b2) => (a.tier === 'A') - (b2.tier === 'A'));
   for (const r of list) {
+    if (keep && !keep(r)) continue;
     const [x, y] = national && r.state === INSET_STATE ? px(...toInset(r.lon, r.lat)) : px(r.lon, r.lat);
     if (x < -10 || y < -10 || x > w + 10 || y > hgt + 10) continue;
     const dim = focus && !focus.has(r.id);

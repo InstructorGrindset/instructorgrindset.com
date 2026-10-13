@@ -443,6 +443,30 @@
      "end_month": null
     }
    },
+   "passes": [
+    {
+     "pass": "epic",
+     "access": "unlimited",
+     "days": null,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    },
+    {
+     "pass": "mountain_collective",
+     "access": "limited",
+     "days": 2,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    }
+   ],
    "access": {
     "rating": "transit_friendly",
     "summary_md": "A free bus links the staff village and the town to the base all day.",
@@ -461,6 +485,7 @@
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
+    "fixture-pass-site",
     "fixture-resort-site",
     "fixture-survey"
    ]
@@ -706,11 +731,25 @@
      }
     ]
    },
+   "passes": [
+    {
+     "pass": "epic",
+     "access": "limited",
+     "days": 7,
+     "blackout": true,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "Synthetic note: 7 days shared with a sister resort."
+    }
+   ],
    "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
+    "fixture-pass-site",
     "fixture-resort-site",
     "fixture-survey"
    ]
@@ -907,10 +946,24 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [
+    {
+     "pass": "ikon",
+     "access": "unlimited",
+     "days": null,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    }
+   ],
    "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
+    "fixture-pass-site",
     "fixture-resort-site"
    ]
   },
@@ -966,6 +1019,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location"
@@ -1093,6 +1147,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1366,11 +1421,25 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [
+    {
+     "pass": "ikon",
+     "access": "limited",
+     "days": 7,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    }
+   ],
    "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
+    "fixture-pass-site",
     "fixture-resort-site"
    ]
   },
@@ -1496,6 +1565,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1729,6 +1799,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1859,6 +1930,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1988,6 +2060,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2157,6 +2230,19 @@
      "end_month": "2026-12"
     }
    },
+   "passes": [
+    {
+     "pass": "ikon",
+     "access": "limited",
+     "days": null,
+     "blackout": null,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    }
+   ],
    "access": {
     "rating": "car_centric",
     "summary_md": "Most staff drive about 20 minutes from the valley towns.",
@@ -2170,6 +2256,7 @@
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
+    "fixture-pass-site",
     "fixture-resort-site"
    ]
   },
@@ -2294,6 +2381,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2434,10 +2522,24 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [
+    {
+     "pass": "epic",
+     "access": "unspecified",
+     "days": null,
+     "blackout": null,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    }
+   ],
    "housing_summary": null,
    "sources": [
     "fixture-location",
     "fixture-ownership",
+    "fixture-pass-site",
     "fixture-resort-site"
    ]
   },
@@ -2555,6 +2657,7 @@
    "trailmap_available": false,
    "webcams": null,
    "jobs": null,
+   "passes": [],
    "housing_summary": null,
    "sources": [
     "fixture-location",

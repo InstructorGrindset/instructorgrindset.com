@@ -70,6 +70,11 @@ export function joinAnd(items) {
   return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
 }
 
+export function joinOr(items) {
+  if (items.length <= 1) return items.join('');
+  return `${items.slice(0, -1).join(', ')} or ${items[items.length - 1]}`;
+}
+
 export function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
 
 /**

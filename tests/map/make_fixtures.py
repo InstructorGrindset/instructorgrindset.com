@@ -43,6 +43,8 @@ SOURCES = [
      "title": "Synthetic fixture: station snowfall normals", "accessed_date": AS_OF},
     {"id": "fixture-careers", "url": "https://example.com/fixture/careers",
      "title": "Synthetic fixture: careers page", "accessed_date": AS_OF},
+    {"id": "fixture-pass-site", "url": "https://example.com/fixture/pass-site",
+     "title": "Synthetic fixture: pass company page", "accessed_date": AS_OF},
     # Trail map files always cite this id (contract); the fixture points it at example.com.
     {"id": "openskimap-runs", "url": "https://example.com/fixture/runs",
      "title": "Synthetic fixture: runs", "accessed_date": AS_OF},
@@ -113,6 +115,23 @@ WEBCAMS = {"alpha-peak": {
               "source_id": "fixture-resort-site", **CITE}
              for label, slug, kind in (("Summit cam", "summit", "stream"), ("Base area", "base", "image"),
                                        ("Back bowls", "bowls", "page"), ("Terrain park", "park", "stream"))]}}
+
+
+# Pass memberships (ROADMAP item 12). Synthetic: Epic at Alpha Peak, Bravo Bowl and the indoor Mike Snow Dome, Ikon
+# at Charlie Hill, Foxtrot Basin and Kilo Notch, so the chips can be checked alone, together and with the others.
+def pass_m(pass_id, access, days=None, blackout=None, note=None):
+    return {"pass": pass_id, "access": access, "days": days, "blackout": blackout, "season": "2026/27",
+            "source_id": "fixture-pass-site", "as_of": AS_OF, "confidence": "estimated", "note": note}
+
+
+PASSES = {
+    "alpha-peak": [pass_m("epic", "unlimited", blackout=False), pass_m("mountain_collective", "limited", 2, False)],
+    "bravo-bowl": [pass_m("epic", "limited", 7, True, "Synthetic note: 7 days shared with a sister resort.")],
+    "mike-dome": [pass_m("epic", "unspecified")],
+    "charlie-hill": [pass_m("ikon", "unlimited", blackout=False)],
+    "foxtrot-basin": [pass_m("ikon", "limited", 7, False)],
+    "kilo-notch": [pass_m("ikon", "limited")],
+}
 
 
 def with_months(jobs):
@@ -312,6 +331,7 @@ def resort_record(row):
                                        "confidence": "estimated", "note": None}
     record["webcams"] = WEBCAMS.get(rid)
     record["jobs"] = with_months(JOBS.get(rid))
+    record["passes"] = PASSES.get(rid, [])
     if rid in ACCESS:
         record["access"] = {"rating": ACCESS[rid][0], "summary_md": ACCESS[rid][1], "source_id": "fixture-location",
                             "as_of": AS_OF, "confidence": "estimated"}
@@ -337,6 +357,7 @@ def resort_record(row):
     ids.update(x["source_id"] for x in (record["jobs"] or {}).get("links", []))
     if (record["jobs"] or {}).get("hiring_window"):
         ids.add(record["jobs"]["hiring_window"]["source_id"])
+    ids.update(m["source_id"] for m in record["passes"])
     record["sources"] = sorted(ids)
     return record
 

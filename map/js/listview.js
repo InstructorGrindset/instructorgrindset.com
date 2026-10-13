@@ -1,5 +1,5 @@
 // List view: the full state, cluster and resort hierarchy without the map.
-import { clusterResorts, clusterOrder, matchesFilter } from './data.js';
+import { clusterResorts, clusterOrder, isFiltered, matchesFilter, NO_FILTER } from './data.js';
 import { hrefFor } from './router.js';
 import { h, clear, plural } from './ui.js';
 import { FACILITY_LABEL } from './labels.js';
@@ -9,7 +9,7 @@ export function createListView(root, index) {
     return h('a', { href: hrefFor(view), 'data-nav': '', class: cls, dataset: { key: keyOf(view) } }, label);
   }
 
-  let filter = 'all';
+  let filter = NO_FILTER;
   let current = null;
 
   function build() {
@@ -33,7 +33,7 @@ export function createListView(root, index) {
               link({ level: 'resort', stateCode: s.code, clusterId: c.id, resortId: r.id }, r.name, 'tree-resort'),
               r.tier === 'A' ? h('span', { class: 'tier tier-a' }, 'Tier A') : null,
               r.facility_type !== 'ski_area' ? h('span', { class: `tier tier-facility fac-${r.facility_type}` }, FACILITY_LABEL[r.facility_type]) : null))))))))));
-    if (filter !== 'all') {
+    if (isFiltered(filter)) {
       // Drop clusters and states left empty by the filter.
       for (const ul of root.querySelectorAll('.tree ul ul')) if (!ul.children.length) ul.parentElement.remove();
       for (const li of root.querySelectorAll('.tree > li')) if (!li.querySelector('.tree-resort')) li.remove();

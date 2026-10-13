@@ -76,6 +76,10 @@ Resort {
                            start_month: "YYYY-MM" | null, end_month: "YYYY-MM" | null } | null } | null,
                                                    // null without links and window; months read from the text
                                                    // by pipeline/hiring.py, both null when it is not explicit
+  passes: [{ pass: epic|ikon|mountain_collective|indy, access: unlimited|limited|unspecified,
+             days: int | null, blackout: boolean | null, season: "2026/27", source_id, as_of, confidence, note }],
+                                                   // pass memberships of passes.season in pass order, [] for none
+                                                   // (see "Pass membership"); never inferred from owner
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
 }
@@ -208,13 +212,14 @@ Slim national index the map loads first. Compact JSON, one row per resort as an 
 { version, generated_at,                 // copied from resorts.json
   fields: ["id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
            "acres", "size_rank", "climate_available", "detail_available", "webcams_available", "jobs_available",
-           "season_length_days", "snowfall_annual_in", "lucrativeness_mid", "hiring_window", "job_employers"],
+           "season_length_days", "snowfall_annual_in", "lucrativeness_mid", "hiring_window", "job_employers", "passes"],
   resorts: [[...], ...] }
 ```
 Every value is copied from `resorts.json` (`acres` is `size.acres.value`; `webcams_available` is `webcams != null`,
 `jobs_available` is `jobs.links` not empty, `hiring_window` is `[start_month, end_month]` of `jobs.hiring_window` or
 null, `job_employers` is the sorted ids of the linked employers that have a feed in `jobs/employers.json`, every linked
-employer when that file is absent, null when `jobs.feed` is false) and `resorts.geojson` (`size_rank` and the four
+employer when that file is absent, null when `jobs.feed` is false, `passes` is the resort's pass ids in pass order
+(`["ikon", "mountain_collective"]`) or null) and `resorts.geojson` (`size_rank` and the four
 recolor values); without `resorts.geojson`, `size_rank` uses `display.size_rank_acres_breaks` and the recolor values
 come from `resorts.json` as in the `resorts.geojson` rules, with `snowfall_annual_in` null. Resorts with an unsafe id or
 no coordinates are left out. About 16 KB gzipped against 87 KB for `resorts.json` plus 21 KB for `resorts.geojson`.
@@ -578,11 +583,13 @@ closes it when none are; it never commits.
 * A resort is hiring now when (a) `jobs/postings.json` has an open role at one of its `job_employers` (a board in
   `boards`, an https url) that names this resort or no single resort, or (b) its `hiring_window` months cover the
   viewer's current month (both ends included).
-* Chip: a fourth button after All, Ski areas and Indoor and training (group label "Filter resorts"). It reads
-  "Hiring now" until `hiring.js` has counted, then "Hiring now (N)". It filters the map (an `in` filter on resort ids
-  over the resort and facility layers, inset included) and the list view like the others and is announced ("Showing N
-  resorts hiring now."). At N = 0 it stays visible with `aria-disabled="true"` and the title "No resort lists an open
-  role or a hiring window for this month."; a click only announces that. Phones scroll the chip row sideways.
+* Chip: the fourth button after All, Ski areas and Indoor and training (group label "Filter resorts"), before the
+  pass chips (see "Pass membership"). It reads "Hiring now" until `hiring.js` has counted, then "Hiring now (N)". It
+  switches on and off and combines with the other chips using AND; it filters the map (an `in` filter on resort ids
+  over the resort and facility layers, inset included), the 2D picture before the map starts, and the list view, and
+  is announced ("Showing N resorts hiring now."). At N = 0 it stays visible with `aria-disabled="true"` and the title
+  "No resort lists an open role or a hiring window for this month."; a click only announces that (or turns an active
+  Hiring now off). Phones scroll the chip row sideways.
 * Cost: nothing on the startup path but the two index values and the button. `hiring.js` (about 1.5 KB gzipped, no
   Zod) loads once the window `load` event and the first paint have passed, at idle, or on the chip's first click. It
   counts the windows from the slim index at once, then, when some row has `job_employers`, reads `jobs/postings.json`
@@ -590,6 +597,65 @@ closes it when none are; it never commits.
   filter. The feed is empty today, so the count is the windows alone. Keeping the count off the startup path matters:
   1.1 KB more gzipped JavaScript on it moved the simulated Lighthouse LCP on `/map/` from 1.96 s to 2.12 s (one more
   slow start round trip), with the score unchanged at 98.
+
+## Pass membership (ROADMAP item 12; `pipeline/passes.py`, `map/js/app.js`, `map/js/panel.js`)
+
+Instructors often pick a mountain by its pass benefits, so each resort records which multi resort pass families it is
+on for a season, with the access level of the family's top pass (the Epic Pass, the Ikon Pass, the Mountain Collective
+pass, the Indy Pass) where the pass company states it.
+
+### Raw input: `data/raw/passes/<season>.yaml`
+```
+{ batch, researched_date, sources: [Source],
+  memberships: [{ resort_id, pass: epic|ikon|mountain_collective|indy, access: unlimited|limited|unspecified,
+                  days?: int 1 to 366, blackout?: bool, season: "2026/27", source_id, as_of, confidence, note? }] }
+```
+validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (through `links.load_batches`).
+* `access`: `unlimited`; `limited` (with `days` when the page states a number; days shared between mountains go in the
+  note, for example "7 days combined with Pico"); `unspecified` when the page lists the resort without days.
+  `blackout` only when the page says whether blackout dates apply to that pass.
+* Rules, each a build error: an unknown resort; the same resort, pass and season twice (in one file or across
+  files); a bad enum value; `days` without `access: limited`, or under 1; a season that is not two consecutive years
+  ("2026/27"); an undefined source; a source whose registered domain is not the pass company's own
+  (`passes.domains` in `config/definitions.yaml`: epicpass.com and vailresorts.com for Epic, ikonpass.com for Ikon
+  (lifted.ikonpass.com included), mountaincollective.com, indyskipass.com) or a `passes.supplemental_domains`
+  reference (wikipedia.org). An owner's portfolio page never proves a pass: ownership is never membership.
+* Only memberships of `passes.season` ("2026/27") reach the build; other seasons are validated and left out with a
+  warning, so next season's batch can sit next to this one until `passes.season` moves.
+* 2026-10-13 batch (`data/raw/passes/2026_27.yaml`): the pass sites are blocked from the research environment, so
+  every value comes from a web search result that named the page (confidence `estimated`, note "From a search result
+  for this page; page not opened"); 30 searches. Wikipedia has no Epic or Ikon list (both titles redirect to the
+  owners' articles), so it is cited only for which mountains make up a destination (The Summit at Snoqualmie,
+  Palisades Tahoe). Coverage: Epic 37 resorts (the 36 Vail Resorts US resorts listed on the epicpass.com region
+  pages, plus Telluride, 7 days); Ikon 49 (18 unlimited, 26 with 7 days, 5 listed without days); Mountain
+  Collective 16 (its 13 US destinations, Aspen Snowmass as four mountains, 2 days each). The Epic unlimited list was
+  seen under a 2025/26 heading of the Epic Pass page; every Epic note says so. Left out: Indy Pass (about 200
+  destinations, beyond the search budget), the Three Summits record (identity unclear), Windham and Jay Peak (no
+  pass page found).
+
+### Build output
+* `Resort.passes` (the memberships without `resort_id`, in the order epic, ikon, mountain_collective, indy; `[]` for
+  none); their sources join `resort.sources`, so stubs embed them. `map-index.json` gains `passes` (pass ids or null).
+  About 0.3 KB more gzipped on the index.
+
+### UI
+* Chips: "Epic" and "Ikon" (titles "Resorts on the Epic Pass", "Resorts on the Ikon Pass") follow Hiring now in the
+  "Filter resorts" group. All clears every chip and is pressed only when none is; Ski areas and Indoor and training
+  pick one facility type (a second click goes back to all); Hiring now, Epic and Ikon switch on and off. Active
+  parts combine with AND; Epic and Ikon together keep resorts on either pass (`data.js` `matchesFilter`). The rule
+  applies to the WebGL map (one `in` filter on resort ids plus the facility layer visibility), the 2D picture before
+  the map starts (`preview.js` `keep`) and the list view. Announcements: "Showing 37 resorts on the Epic Pass.",
+  "Showing 6 resorts on the Epic Pass or Ikon Pass.", "Showing 2 ski areas hiring now on the Ikon Pass.",
+  "Showing every resort." A pass chip with no resort on its pass in the loaded index stays visible with
+  `aria-disabled="true"` and the title "No resort lists the Epic Pass yet."
+* Resort panel and stub (`panel.js` `passesFact`, `routes.py` `render_passes`): a "Passes" fact under Owner, one line
+  per membership, "Epic Pass: unlimited", "Ikon Pass: 7 days", "Ikon Pass: limited days" (no number stated) or "Ikon
+  Pass: days not stated", with the confidence badge, the note, and "2026/27 season · No blackout dates · Last
+  verified <date> · <source>". No line for a resort without a membership. Pass names are proper nouns ("Epic Pass",
+  "Ikon Pass", "Mountain Collective", "Indy Pass").
+* Zod: `PassMembership` in `schemas.js`; a bad membership drops only itself. Tests: `tests/pipeline/test_passes.py`,
+  `passChecks` in `tests/map/browser_test.mjs` (fixtures: Epic at Alpha Peak, Bravo Bowl and Mike Snow Dome, Ikon at
+  Charlie Hill, Foxtrot Basin and Kilo Notch, all synthetic).
 
 ## Trail map (OpenSkiMap runs)
 
@@ -1008,6 +1074,7 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
   the build fails (see "Refreshing the ownership sources").
 * `data/raw/facts/*.yaml`: season, snowfall and size facts for every resort (Resort facts overlay above).
 * `data/raw/webcams/*.yaml`, `data/raw/jobs/*.yaml`: live cams and jobs links (Webcams and jobs above).
+* `data/raw/passes/*.yaml`: Epic, Ikon, Mountain Collective and Indy pass membership per season (Pass membership above).
 * `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
 * `data/raw/reports/`: Phase 7 queue and moderated reports (gitignored) and `aggregates.json` (committed).
 * `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
@@ -1105,6 +1172,7 @@ pipeline/
   webcams.py          # live webcam links -> Resort.webcams
   jobs.py             # jobs links and employers -> Resort.jobs, jobs/employers.json, empty jobs/postings.json
   hiring.py           # hiring window text -> start and end month (the Hiring now filter)
+  passes.py           # pass membership (data/raw/passes) -> Resort.passes (the Epic and Ikon chips)
   jobs_feed.py        # daily open postings from public job board APIs -> jobs/postings.json (GitHub Actions)
   link_check.py       # monthly check of trail map, webcam and jobs links (GitHub Actions issue)
   heat.py             # Heat maps: snowfall rasters and isolines (NOAA and SNOTEL stations shaped by the terrain,

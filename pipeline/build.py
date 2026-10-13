@@ -38,6 +38,7 @@ from pipeline.facts import load_facts, merge_facts  # noqa: E402
 from pipeline.trailmaps_official import as_output as official_trailmap_output, load_official_trailmaps  # noqa: E402
 from pipeline import jobs as jobs_mod  # noqa: E402
 from pipeline.webcams import as_output as webcams_output, load_webcams  # noqa: E402
+from pipeline import passes as passes_mod  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
 from pipeline import staleness as staleness_mod  # noqa: E402
@@ -327,9 +328,15 @@ def build(
                                                 {k: set(v) for k, v in jobs_cfg.ats_domains.items()}, rel,
                                                 set(jobs_cfg.blocked_domains))
     errors += jobs_errors
+    passes_cfg = cfg.definitions.passes
+    pass_data, pass_errors, pass_warnings = passes_mod.load_passes(
+        raw_dir, registry, known_ids, passes_cfg.season, passes_cfg.domain_sets(), set(passes_cfg.supplemental_domains), rel)
+    errors += pass_errors
+    warnings += pass_warnings
     for d in drafts:
         d["webcams"] = webcams_output(webcams.get(d["id"]), cfg.definitions.webcams.max_named_cams)
         d["jobs"] = jobs_mod.resort_jobs(jobs_data, d["id"], jobs_cfg.hiring_windows.max_months)
+        d["passes"] = passes_mod.as_output(pass_data.get(d["id"]))
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
     cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
@@ -834,7 +841,7 @@ def _refs(d: dict) -> set[str]:
                 walk(v)
 
     for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "webcams", "jobs",
-                "season", "terrain", "career", "editorial"):
+                "passes", "season", "terrain", "career", "editorial"):
         walk(d.get(key))
     return found
 

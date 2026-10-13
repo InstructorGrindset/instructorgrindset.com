@@ -1122,6 +1122,18 @@ async function realData(browser, base) {
       const chipText = await page.locator('#facility-filter .filter-btn[data-filter="hiring"]').innerText();
       check(feed.postings.length ? /^Hiring now \(\d+\)$/.test(chipText) : chipText === `Hiring now (${windows})`,
         `real data: ${chipText} (${idx.resorts.filter((r) => r[hw]).length} parsed hiring windows, ${feed.postings.length} postings)`);
+      // Pass chips with the real build: the list view keeps exactly the index rows on each pass.
+      const pf = idx.fields.indexOf('passes');
+      const onPass = (p) => idx.resorts.filter((r) => Array.isArray(r[pf]) && r[pf].includes(p)).length;
+      await page.getByRole('button', { name: 'List view' }).click();
+      for (const p of ['epic', 'ikon']) {
+        await page.locator(`#facility-filter .filter-btn[data-filter="${p}"]`).click();
+        const shown = new Set(await page.locator('#list-view a.tree-resort').evaluateAll((els) => els.map((a) => a.getAttribute('href').split('/').filter(Boolean).pop()))).size;
+        check(onPass(p) > 0 && shown === onPass(p), `real data: the ${p} chip lists ${shown} resorts (${onPass(p)} in the index)`);
+        await page.locator(`#facility-filter .filter-btn[data-filter="${p}"]`).click();
+      }
+      await page.getByRole('button', { name: 'Map view' }).click();
+      await mapIdle(page);
       // Each heat mode with the real build: continuous coverage across the lower 48 and the Alaska inset.
       const REAL_BETWEEN = [[-116.5, 39.5], [-98.5, 38.5], [-99.0, 31.5], [-84.0, 32.5], [-108.0, 47.5], [-150.0, 64.5]];
       for (const [mode, prop] of Object.entries(props)) {
@@ -1518,8 +1530,8 @@ async function hiringChecks(browser, base) {
   let { ctx, page, w, chip } = await open('2026-10-13T12:00:00');
   check(await chip.innerText() === 'Hiring now (3)' && await chip.getAttribute('aria-disabled') === null,
     `chip counts open roles and current hiring windows (${await chip.innerText()})`);
-  check(JSON.stringify(await page.locator('#facility-filter .filter-btn').allInnerTexts()) === JSON.stringify(['All', 'Ski areas', 'Indoor and training', 'Hiring now (3)']),
-    'Hiring now sits next to All, Ski areas and Indoor and training');
+  check(JSON.stringify(await page.locator('#facility-filter .filter-btn').allInnerTexts()) === JSON.stringify(['All', 'Ski areas', 'Indoor and training', 'Hiring now (3)', 'Epic', 'Ikon']),
+    'Hiring now sits next to All, Ski areas and Indoor and training, before the pass chips');
   await page.getByRole('button', { name: 'List view' }).click();
   await chip.click();
   check(await chip.getAttribute('aria-pressed') === 'true' && JSON.stringify(await listNames(page)) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Kilo Notch']),
@@ -1601,10 +1613,152 @@ async function hiringChecks(browser, base) {
   check(await chip.getAttribute('aria-pressed') === 'false' && await page.getByRole('button', { name: 'All', exact: true }).getAttribute('aria-pressed') === 'true',
     'a disabled Hiring now cannot be selected');
   const fit = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: innerWidth }));
-  check(fit.sw <= fit.vw, 'phone: the four chips never widen the page');
+  check(fit.sw <= fit.vw, 'phone: the six chips never widen the page');
   await shot(page, 'hiring-03-phone-zero.png');
   w.assertClean();
   await ctx.close();
+}
+
+// Epic and Ikon pass chips (ROADMAP item 12): each keeps the resorts on its pass; together they keep either pass;
+// they combine with the facility chips and Hiring now (AND) in the list view and on the map; All clears them. The
+// resort panel and its prerendered stub show a "Passes" line with badge, season, blackout rule and source.
+async function passChecks(browser, base, stubBase) {
+  log('\nEpic and Ikon pass chips');
+  const axeSrc = (() => {
+    try { return fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [path.join(REPO, 'tests', 'map')] }), 'utf8'); } catch { return null; }
+  })();
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await ctx.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+  const page = await ctx.newPage();
+  const w = watch(page, 'pass chips');
+  const postings = page.waitForResponse((r) => r.url().includes('/jobs/postings.json'), { timeout: 20000 });
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await postings;
+  await page.waitForTimeout(300);
+  const chip = (k) => page.locator(`#facility-filter .filter-btn[data-filter="${k}"]`);
+  const pressed = async () => (await page.locator('#facility-filter .filter-btn[aria-pressed="true"]').evaluateAll((els) => els.map((e) => e.dataset.filter)));
+  const names = async () => (await page.locator('#list-view a.tree-resort').allInnerTexts()).sort();
+  const said = (text) => page.waitForFunction((t) => document.getElementById('panel-status').textContent === t, text, { timeout: 3000 }).then(() => true, () => false);
+  check(await chip('epic').innerText() === 'Epic' && await chip('ikon').innerText() === 'Ikon'
+    && await chip('epic').getAttribute('title') === 'Resorts on the Epic Pass' && await chip('epic').getAttribute('aria-disabled') === null,
+  'Epic and Ikon chips follow Hiring now, with a title naming the pass');
+  // Before the WebGL map starts, the 2D picture keeps only the resorts the chips keep.
+  const dots = () => page.locator('#map .map-preview circle').count();
+  const allDots = await dots();
+  await chip('epic').click();
+  const epicDots = await dots();
+  await chip('epic').click();
+  check(allDots === 14 && epicDots === 3 && await dots() === 14, `2D picture: Epic keeps 3 of ${allDots} dots, and turning it off brings them back`);
+  await page.getByRole('button', { name: 'List view' }).click();
+  await chip('epic').click();
+  check(JSON.stringify(await names()) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Mike Snow Dome']) && await said('Showing 3 resorts on the Epic Pass.'),
+    'list view: Epic keeps the Epic Pass resorts, facilities included, and is announced');
+  await chip('ikon').click();
+  check((await names()).length === 6 && JSON.stringify(await pressed()) === JSON.stringify(['epic', 'ikon'])
+    && await said('Showing 6 resorts on the Epic Pass or Ikon Pass.'), 'Epic and Ikon together keep the resorts on either pass');
+  await chip('epic').click();
+  check(JSON.stringify(await names()) === JSON.stringify(['Charlie Hill', 'Foxtrot Basin', 'Kilo Notch']), 'a second click turns Epic off');
+  await chip('hiring').click();
+  check(JSON.stringify(await names()) === JSON.stringify(['Kilo Notch']) && JSON.stringify(await pressed()) === JSON.stringify(['hiring', 'ikon'])
+    && await said('Showing 1 resort hiring now on the Ikon Pass.'), 'Ikon AND Hiring now keeps the hiring Ikon resorts');
+  await page.getByRole('button', { name: 'All', exact: true }).click();
+  check((await names()).length === 14 && JSON.stringify(await pressed()) === JSON.stringify(['all']) && await said('Showing every resort.'),
+    'All clears every chip');
+  await chip('epic').click();
+  await page.getByRole('button', { name: 'Ski areas' }).click();
+  check(JSON.stringify(await names()) === JSON.stringify(['Alpha Peak', 'Bravo Bowl']) && await said('Showing 2 ski areas on the Epic Pass.'),
+    'Epic AND Ski areas drops the indoor facility');
+  await page.getByRole('button', { name: 'Indoor and training' }).click();
+  check(JSON.stringify(await names()) === JSON.stringify(['Mike Snow Dome']) && JSON.stringify(await pressed()) === JSON.stringify(['facility', 'epic']),
+    'Epic AND Indoor and training keeps the indoor facility only');
+  await shot(page, 'passes-01-list.png');
+  // The map: the same rule on the resort and facility layers.
+  await page.getByRole('button', { name: 'Map view' }).click();
+  await ready(page);
+  await mapIdle(page);
+  const onMap = () => page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    return [...new Set(m.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'] }).map((f) => f.properties.id))].sort();
+  });
+  check(JSON.stringify(await onMap()) === JSON.stringify(['mike-dome']), 'map: Epic AND Indoor and training (set before the map started) applies once it runs');
+  await page.getByRole('button', { name: 'Indoor and training' }).click();
+  await chip('ikon').click();
+  await page.waitForTimeout(300);
+  check(JSON.stringify(await onMap()) === JSON.stringify(['alpha-peak', 'bravo-bowl', 'charlie-hill', 'foxtrot-basin', 'kilo-notch', 'mike-dome']),
+    `map: Epic or Ikon keeps the six pass resorts (${(await onMap()).join(', ')})`);
+  await chip('hiring').click();
+  await page.waitForTimeout(300);
+  check(JSON.stringify(await onMap()) === JSON.stringify(['alpha-peak', 'bravo-bowl', 'kilo-notch']), 'map: the passes AND Hiring now');
+  await shot(page, 'passes-02-map.png');
+  await page.getByRole('button', { name: 'All', exact: true }).click();
+  await page.waitForTimeout(300);
+  check((await onMap()).length > 6, 'map: All brings every resort back');
+  // A build without pass data (older index): the chips stay visible and disabled with a title.
+  const unit = await page.evaluate(async () => {
+    const { matchesFilter, isFiltered, NO_FILTER } = await import('/map/js/data.js');
+    const { passLine } = await import('/map/js/labels.js');
+    const r = (facility_type, passes, hiring_now = false) => ({ facility_type, passes, hiring_now });
+    const f = (o) => ({ ...NO_FILTER, ...o });
+    return {
+      none: matchesFilter(r('ski_area', []), NO_FILTER) && !isFiltered(NO_FILTER),
+      either: [r('ski_area', ['epic']), r('ski_area', ['ikon']), r('ski_area', ['mountain_collective'])].map((x) => matchesFilter(x, f({ passes: ['epic', 'ikon'] }))),
+      and: [r('indoor', ['epic']), r('ski_area', ['epic'], true), r('ski_area', ['epic'])].map((x) => matchesFilter(x, f({ facility: 'ski_area', hiring: true, passes: ['epic'] }))),
+      lines: [passLine({ pass: 'epic', access: 'unlimited' }), passLine({ pass: 'ikon', access: 'limited', days: 7 }),
+        passLine({ pass: 'mountain_collective', access: 'limited', days: null }), passLine({ pass: 'ikon', access: 'unspecified' })],
+    };
+  });
+  check(unit.none && JSON.stringify(unit.either) === '[true,true,false]' && JSON.stringify(unit.and) === '[false,true,false]',
+    `rule: passes match any chosen pass, and every active part must match (${JSON.stringify(unit)})`);
+  check(JSON.stringify(unit.lines) === JSON.stringify(['Epic Pass: unlimited', 'Ikon Pass: 7 days', 'Mountain Collective: limited days', 'Ikon Pass: days not stated']),
+    'pass lines read "Epic Pass: unlimited", "Ikon Pass: 7 days"');
+  w.assertClean();
+  await ctx.close();
+
+  // Resort panel: the Passes line under Owner, with badge, season, blackout rule, date and source.
+  const rp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const wr = watch(rp, 'passes panel');
+  await rp.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(rp, { start: false });
+  await rp.waitForSelector('#panel-content .fact.passes .src-link', { timeout: 15000 });
+  const items = await rp.locator('#panel-content .fact.passes li').allInnerTexts();
+  check(items.length === 2 && items[0].includes('Epic Pass: unlimited') && /estimated/i.test(items[0])
+    && items[0].includes('2026/27 season · No blackout dates · Last verified Oct 1, 2026') && items[0].includes('Synthetic fixture: pass company page')
+    && items[1].includes('Mountain Collective: 2 days'), `panel: Passes line per pass with badge, season, blackout and source (${items.map((x) => x.replace(/\s+/g, ' ')).join(' | ')})`);
+  check(await rp.locator('#panel-content .facts .fact').nth(1).locator('dt').innerText() === 'Passes', 'panel: Passes sits right under Owner');
+  if (axeSrc) {
+    await rp.addScriptTag({ content: axeSrc });
+    const res = await rp.evaluate(async () => (await window.axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] } }))
+      .violations.map((v) => `${v.id} (${v.impact}): ${v.help} ${JSON.stringify(v.nodes.slice(0, 3).map((n) => n.target.join(' ')))}`));
+    check(res.length === 0, `axe resort panel with Passes: ${res.length} violations${res.length ? `\n      ${res.join('\n      ')}` : ''}`);
+  } else log('  skip axe passes: run (cd tests/map && npm install) for axe-core');
+  await shot(rp, 'passes-03-panel.png');
+  await rp.goto(`${stubBase}/map/vt/fixture-green-ridge/lima-hollow/`);
+  await ready(rp, { start: false });
+  await rp.waitForSelector('#panel-content .facts', { timeout: 15000 });
+  check(await rp.locator('#panel-content .fact.passes').count() === 0, 'panel: a resort with no membership shows no Passes line');
+  wr.assertClean();
+  await rp.close();
+
+  // Prerendered stub: the same line before any JavaScript runs.
+  const html = await (await fetch(`${stubBase}/map/co/fixture-front-range/bravo-bowl/`)).text();
+  const pre = html.slice(html.indexOf('<!-- prerender:start -->'), html.indexOf('<!-- prerender:end -->'));
+  check(pre.includes('<dt>Passes</dt>') && pre.includes('Epic Pass: 7 days') && pre.includes('Blackout dates apply')
+    && pre.includes('badge-estimated') && pre.includes('href="https://example.com/fixture/pass-site"'), 'stub: prerendered Passes line with badge and source link');
+
+  // Phone: six chips scroll sideways inside their row.
+  const pp = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const wpp = watch(pp, 'pass chips phone');
+  await pp.goto(`${base}/map/${Q}`);
+  await ready(pp, { start: false });
+  await pp.locator('#facility-filter .filter-btn[data-filter="ikon"]').scrollIntoViewIfNeeded();
+  await pp.locator('#facility-filter .filter-btn[data-filter="ikon"]').click();
+  const fit = await pp.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: innerWidth,
+    pressed: document.querySelector('[data-filter="ikon"]').getAttribute('aria-pressed') }));
+  check(fit.sw <= fit.vw && fit.pressed === 'true', 'phone: the Ikon chip is reachable and the row never widens the page');
+  await shot(pp, 'passes-04-phone.png');
+  wpp.assertClean();
+  await pp.close();
 }
 
 // Resort search (map/js/search.js): loose matching and ranking, keyboard selection before the map starts, the deep
@@ -1806,6 +1960,7 @@ try {
   await searchChecks(browser, REPO_BASE, STUB_BASE);
   await liveLinksChecks(browser, STUB_BASE);
   await hiringChecks(browser, REPO_BASE);
+  await passChecks(browser, REPO_BASE, STUB_BASE);
   await realData(browser, REPO_BASE);
   await browser.close();
 } catch (err) {

@@ -8,14 +8,14 @@
 //    panel shows source links, and resorts.json is only prefetched (a resort or comparison view loads it at once).
 //    After the WebGL map loads: the full data, the recolor control and the state outlines.
 import { config, isPhone } from './config.js';
-import { loadAll, loadStateOutlines, whenPainted } from './data.js';
+import { isFiltered, loadAll, loadStateOutlines, matchesFilter, NO_FILTER, whenPainted } from './data.js';
 import { createRouter } from './router.js';
 import { createPanel } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
-import { h } from './ui.js';
-import { FILTERS } from './labels.js';
+import { h, joinOr, plural } from './ui.js';
+import { FILTERS, PASS_LABEL } from './labels.js';
 import { drawPreview } from './preview.js';
 
 const $ = (id) => document.getElementById(id);
@@ -153,7 +153,7 @@ async function main() {
   let detailControls = null;
   let detailFor = null;
   let detailData = null;
-  let filterKey = 'all';
+  let filter = NO_FILTER; // the chips' state (data.js matchesFilter)
   let idleReached = false; // the first idle time after the load event and the first paint has come
   let sourcesWanted = false; // the panel showed a source placeholder before then
 
@@ -250,31 +250,66 @@ async function main() {
     router.goHref(a.getAttribute('href'));
   });
 
-  // Facility filter and Hiring now: apply to the map and the list view. hiring.js counts Hiring now after the first
-  // paint (or on its first click); a disabled chip only announces its title.
-  const applyFilter = (key) => {
-    filterKey = key;
-    if (mapCtl) mapCtl.setFilter(key, index.hiringIds);
-    list.setFilter(key);
+  // Filter chips (labels.js FILTERS): All, the facility types, Hiring now and the passes, combined with AND. They
+  // apply to the map and the list view. hiring.js counts Hiring now after the first paint (or on its first click);
+  // a disabled chip only announces its title.
+  const onlyIds = (f) => (f.hiring || f.passes.length
+    ? index.resortList.filter((r) => matchesFilter(r, { ...f, facility: 'all' })).map((r) => r.id) : null);
+  const applyFilter = (next = filter) => {
+    filter = next;
+    if (mapCtl) mapCtl.setFilter(filter, onlyIds(filter));
+    list.setFilter(filter);
   };
   let hiringMod = null;
   const hiring = () => (hiringMod ||= import('./hiring.js').then((m) => { m.markHiring(index, null, hiringBtn); return m; },
     (err) => { hiringMod = null; throw err; }));
-  const select = (btn, f) => {
-    for (const b of filterButtons) b.setAttribute('aria-pressed', String(b === btn));
-    applyFilter(f.key);
-    const n = f.key === 'hiring' && index.hiringIds.length;
-    announce(f.key === 'hiring' ? `Showing ${n} resort${n === 1 ? '' : 's'} hiring now.`
-      : `Showing ${f.key === 'all' ? 'every facility type' : f.label.toLowerCase()}.`);
+  const syncChips = () => {
+    for (const b of filterButtons) {
+      const k = b.dataset.filter;
+      const on = k === 'all' ? !isFiltered(filter) : k === 'hiring' ? filter.hiring
+        : b.dataset.group === 'pass' ? filter.passes.includes(k) : filter.facility === k;
+      b.setAttribute('aria-pressed', String(on));
+    }
   };
-  const filterButtons = FILTERS.map((f) => h('button', {
-    type: 'button', class: 'filter-btn', 'aria-pressed': String(f.key === 'all'), dataset: { filter: f.key },
-    onclick: (e) => {
-      const btn = e.currentTarget;
-      if (f.key !== 'hiring') select(btn, f);
-      else hiring().then(() => (btn.getAttribute('aria-disabled') ? announce(btn.title) : select(btn, f)), (err) => console.warn('[map] hiring', err.message));
-    },
-  }, f.label));
+  /** "Showing 3 resorts hiring now.", "Showing 37 resorts on the Epic Pass.", "Showing every resort." */
+  const filterSummary = (f) => {
+    if (!isFiltered(f)) return 'Showing every resort.';
+    const n = index.resortList.filter((r) => matchesFilter(r, f)).length;
+    const noun = f.facility === 'ski_area' ? ['ski area', 'ski areas']
+      : f.facility === 'facility' ? ['indoor or training facility', 'indoor and training facilities'] : ['resort', 'resorts'];
+    const passes = f.passes.length ? ` on the ${joinOr(f.passes.map((p) => PASS_LABEL[p]))}` : '';
+    return `Showing ${plural(n, ...noun)}${f.hiring ? ' hiring now' : ''}${passes}.`;
+  };
+  const toggle = (f) => {
+    if (f.key === 'all') return NO_FILTER;
+    if (f.group === 'facility') return { ...filter, facility: filter.facility === f.key ? 'all' : f.key };
+    if (f.key === 'hiring') return { ...filter, hiring: !filter.hiring };
+    const passes = filter.passes.includes(f.key) ? filter.passes.filter((p) => p !== f.key) : [...filter.passes, f.key];
+    return { ...filter, passes: FILTERS.filter((x) => x.group === 'pass' && passes.includes(x.key)).map((x) => x.key) };
+  };
+  const select = (f) => {
+    applyFilter(toggle(f));
+    syncChips();
+    announce(filterSummary(filter));
+    onViewChange(); // redraws the 2D picture until the WebGL map runs
+  };
+  // A pass chip with no resort on its pass in this build stays visible and disabled.
+  const passCount = (key) => index.resortList.filter((r) => r.passes.includes(key)).length;
+  const filterButtons = FILTERS.map((f) => {
+    const empty = f.group === 'pass' && !passCount(f.key);
+    return h('button', {
+      type: 'button', class: 'filter-btn',
+      'aria-pressed': String(f.key === 'all'), dataset: { filter: f.key, group: f.group },
+      title: empty ? `No resort lists the ${PASS_LABEL[f.key]} yet.` : f.title,
+      'aria-disabled': empty ? 'true' : null,
+      onclick: (e) => {
+        const btn = e.currentTarget;
+        if (btn.getAttribute('aria-disabled') && f.key !== 'hiring') { announce(btn.title); return; }
+        if (f.key !== 'hiring') select(f);
+        else hiring().then(() => (btn.getAttribute('aria-disabled') && !filter.hiring ? announce(btn.title) : select(f)), (err) => console.warn('[map] hiring', err.message));
+      },
+    }, f.label);
+  });
   const hiringBtn = filterButtons.find((b) => b.dataset.filter === 'hiring');
   if (els.filter) {
     els.filter.append(...filterButtons);
@@ -322,7 +357,8 @@ async function main() {
   let preview = null;
   const drawFrame = () => {
     if (mapCtl || els.map.hidden || !router.current) return;
-    const next = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current)); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
+    const keep = isFiltered(filter) ? (r) => matchesFilter(r, filter) : null;
+    const next = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
     if (preview) preview.remove();
     preview = next;
     if (preview) els.map.insertBefore(preview, startBtn);
@@ -355,7 +391,7 @@ async function main() {
     const file = await m.feedPostings(index);
     const before = index.hiringIds.join();
     if (file) m.markHiring(index, file, hiringBtn);
-    if (filterKey === 'hiring' && index.hiringIds.join() !== before) applyFilter('hiring');
+    if (filter.hiring && index.hiringIds.join() !== before) { applyFilter(); onViewChange(); }
   }).catch((err) => console.warn('[map] hiring', err.message)));
 
   let starting = null;
@@ -414,7 +450,7 @@ async function main() {
     }
 
     state.mapCtl = mapCtl;
-    if (filterKey !== 'all') mapCtl.setFilter(filterKey, index.hiringIds);
+    if (isFiltered(filter)) mapCtl.setFilter(filter, onlyIds(filter));
     if (detailFor) applyDetail();
     if (trailFor) setTrailControl(trailFor);
     if (router.current) mapCtl.show(router.current, { animate: false });

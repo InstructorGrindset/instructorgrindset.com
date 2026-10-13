@@ -193,6 +193,9 @@
 .tag-list { list-style: none; padding: 0; margin: .6rem 0 0; display: flex; flex-wrap: wrap; gap: .35rem; }
 .tag { font-size: var(--text-xs); color: var(--ink); background: var(--surface-1); border: 1px solid var(--line); border-radius: 999px; padding: .1rem .55rem; }
 .criteria { list-style: none; padding: 0; margin: 0; display: grid; gap: .3rem; }
+.pass-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
+/* 12 px, so pages with several passes keep Lighthouse's legible text share. */
+.pass-list .fact-meta, .pass-list .fact-note { font-size: var(--text-xs); }
 .criterion { font-weight: 600; }
 .location { margin-top: 1rem; }
 
