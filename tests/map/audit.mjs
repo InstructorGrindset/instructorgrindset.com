@@ -208,6 +208,17 @@ const base = 'http://127.0.0.1:8821';
 try {
   const browser = ONLY_LH ? null : await chromium.launch({ executablePath: CHROME, args: ARGS });
   if (browser) {
+    // Imagery tiles: a synthetic local tile stands in for the USGS service, which this sandbox cannot reach.
+    const tile = fs.readFileSync(path.join(HERE, 'fixtures', 'imagery-tile.png'));
+    const newContext = browser.newContext.bind(browser);
+    browser.newContext = async (opts) => {
+      const c = await newContext(opts);
+      await c.route(/basemap\.nationalmap\.gov\//, (route) => route.fulfill({ status: 200, contentType: 'image/png', body: tile, headers: { 'Access-Control-Allow-Origin': '*' } }));
+      return c;
+    };
+    browser.newPage = async (opts) => (await browser.newContext(opts)).newPage();
+  }
+  if (browser) {
   console.log('Performance budget (4G, 4x CPU, gzip)');
   await throttled(browser, `${base}/map/`, 'national map, desktop');
   await throttled(browser, `${base}/map/`, 'national map, phone', { phone: true });

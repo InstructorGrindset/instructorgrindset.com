@@ -2,7 +2,7 @@
 import { config, prefersReducedMotion } from './config.js';
 import { h } from './ui.js';
 import { viewFrame, clampPadding as clampTo } from './camera.js';
-import { INSET_STATE, HIDDEN_CODES, insetFeatures, insetFrame, insetCorners } from './inset.js';
+import { INSET_STATE, HIDDEN_CODES, insetFeatures, insetFrame, insetPanel, insetCorners } from './inset.js';
 import {
   addDetailLayers, setDetailData, showSiteCommutes, setGroupVisible, detailBounds, groupsWithData,
 } from './detailmap.js';
@@ -84,9 +84,11 @@ const FACILITY_LAYER = {
 };
 
 function buildStyle(index) {
+  const img = config.basemap.imagery;
   return {
     version: 8,
     sources: {
+      ...(img ? { imagery: { type: 'raster', tiles: img.tiles, tileSize: img.tileSize, maxzoom: img.maxzoom, attribution: img.attribution } } : {}),
       states: { type: 'geojson', data: index.geo.usStates, promoteId: 'code' },
       clusters: { type: 'geojson', data: index.geo.clusters, promoteId: 'id' },
       resorts: { type: 'geojson', data: index.geo.resorts, promoteId: 'id' },
@@ -95,12 +97,16 @@ function buildStyle(index) {
       'inset-clusters': { type: 'geojson', data: insetFeatures(index.geo.clusters.features.filter((f) => f.properties.ak)) },
       'inset-resorts': { type: 'geojson', data: insetFeatures(index.geo.resorts.features.filter((f) => f.properties.state === INSET_STATE)) },
       'inset-frame': { type: 'geojson', data: insetFrame() },
+      'inset-panel': { type: 'geojson', data: insetPanel() },
     },
     layers: [
       { id: 'background', type: 'background', paint: { 'background-color': C.background } },
+      // Satellite imagery sits under every data layer.
+      ...(img ? [{ id: 'imagery', type: 'raster', source: 'imagery', paint: img.paint }] : []),
       {
         id: 'states-fill', type: 'fill', source: 'states',
         paint: {
+          'fill-opacity': img ? img.state_fill_opacity : 1,
           'fill-color': ['case', fs('selected'), C.stateFillSelected,
             ['all', fs('hover'), ['boolean', ['get', 'has_resorts'], false]], '#1c2533',
             ['boolean', ['get', 'has_resorts'], false], C.stateFillActive, C.stateFill],
@@ -154,6 +160,8 @@ function buildStyle(index) {
           'circle-stroke-opacity': ['case', fs('dim'), 0.3, 1],
         },
       },
+      // The inset sits on its own dark panel: the imagery under it is not Alaska.
+      { id: 'inset-panel', type: 'fill', source: 'inset-panel', paint: { 'fill-color': C.background, 'fill-opacity': 0.92 } },
       { id: 'inset-frame', type: 'line', source: 'inset-frame', paint: { 'line-color': C.stateLine, 'line-width': 1, 'line-dasharray': [3, 2] } },
       { id: 'inset-states-fill', type: 'fill', source: 'inset-states', paint: { 'fill-color': C.stateFillActive } },
       { id: 'inset-states-line', type: 'line', source: 'inset-states', paint: { 'line-color': C.stateLine, 'line-width': 0.8 } },
@@ -168,7 +176,7 @@ function buildStyle(index) {
   };
 }
 
-const INSET_LAYERS = ['inset-frame', 'inset-states-fill', 'inset-states-line', 'inset-clusters-fill', 'inset-clusters-line', 'inset-resorts', 'inset-resorts-facility'];
+const INSET_LAYERS = ['inset-panel', 'inset-frame', 'inset-states-fill', 'inset-states-line', 'inset-clusters-fill', 'inset-clusters-line', 'inset-resorts', 'inset-resorts-facility'];
 const NOT_HIDDEN = ['!', ['in', ['get', 'code'], ['literal', HIDDEN_CODES]]];
 
 export function createMap(container, index, maplibregl, { onPick, getPadding }) {

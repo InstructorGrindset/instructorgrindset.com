@@ -45,6 +45,12 @@ export function insetFrame() {
   return { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: [[w, s], [e, s], [e, n], [w, n], [w, s]] } }] };
 }
 
+/** The frame as a filled box (the dark panel behind the inset). */
+export function insetPanel() {
+  const [[w, s], [e, n]] = insetFrameBounds();
+  return { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [[[w, s], [e, s], [e, n], [w, n], [w, s]]] } }] };
+}
+
 /** Rings that cross the antimeridian wrap west; parts west of the drawn box are dropped. */
 function mapRing(ring) {
   const wrapped = ring.map(([lon, lat]) => [lon > 0 ? lon - 360 : lon, lat]);

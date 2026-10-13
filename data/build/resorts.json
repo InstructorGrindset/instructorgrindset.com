@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T02:08:41Z",
+  "generated_at": "2026-10-13T02:13:20Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -344,7 +344,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "vail-10k-fy2026",
@@ -354,9 +362,27 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-04",
+          "source_id": "facts-midwest-ots-afton-alps",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 21. The general manager is quoted elsewhere aiming for mid to end of November."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-midwest-ots-afton-alps",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 21. The general manager is quoted elsewhere aiming for mid to end of November."
+        },
+        "length_days": {
+          "value": 108,
+          "source_id": "facts-midwest-ots-afton-alps",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -488,12 +514,12 @@
             },
             {
               "key": "season_months",
-              "value": 5.0,
-              "label": "Season months (standard 5 month season)"
+              "value": 3.55,
+              "label": "Season months (sourced season length divided by 30.4 days)"
             },
             {
               "key": "season_months_basis",
-              "value": "default",
+              "value": "season_length",
               "label": "Season months basis"
             },
             {
@@ -550,6 +576,8 @@
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-afton-alps",
         "ed-east-wikipedia-afton-minnesota",
+        "facts-midwest-ots-afton-alps",
+        "facts-midwest-wiki-comparison",
         "owner-decisions-2026-10-11",
         "pay-vail-afton-cert-2026",
         "pay-vail-afton-noncert-2026",
@@ -734,9 +762,27 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-19",
+          "source_id": "facts-midwest-ots-alpine-valley-oh",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 19, closing Mar 07."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-midwest-ots-alpine-valley-oh",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 19, closing Mar 07."
+        },
+        "length_days": {
+          "value": 79,
+          "source_id": "facts-midwest-ots-alpine-valley-oh",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -850,12 +896,12 @@
             },
             {
               "key": "season_months",
-              "value": 5.0,
-              "label": "Season months (standard 5 month season)"
+              "value": 2.6,
+              "label": "Season months (sourced season length divided by 30.4 days)"
             },
             {
               "key": "season_months_basis",
-              "value": "default",
+              "value": "season_length",
               "label": "Season months basis"
             },
             {
@@ -910,6 +956,7 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-alpine-valley-ski-area-ohio",
+        "facts-midwest-ots-alpine-valley-oh",
         "owner-decisions-2026-10-11",
         "pay-vail-alpine-valley-cert-2026",
         "pay-vail-alpine-valley-noncert-2026",
@@ -932,7 +979,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 90,
+          "source_id": "facts-midwest-wiki-alpine-valley-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        },
         "vertical_ft": {
           "value": 295,
           "source_id": "openskimap-ski-areas",
@@ -965,13 +1018,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 80,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-midwest-ots-alpine-valley-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 15. skiresort.info gives \"mid December - mid March\", which agrees."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-midwest-ots-alpine-valley-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 15. skiresort.info gives \"mid December - mid March\", which agrees."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-midwest-ots-alpine-valley-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -996,6 +1075,9 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-alpine-valley-resort",
+        "facts-midwest-wiki-alpine-valley-resort",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -1047,13 +1129,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 20,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-11; acres left out: the table gives 40 and OnTheSnow 100"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-04",
+          "source_id": "facts-midwest-ots-alpine-valley-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 14. skiresort.info gives \"mid December - mid March\"."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-midwest-ots-alpine-valley-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 14. skiresort.info gives \"mid December - mid March\"."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-midwest-ots-alpine-valley-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -1078,6 +1186,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-alpine-valley-ski-area",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -1650,7 +1760,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 35,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        },
         "vertical_ft": {
           "value": 216,
           "source_id": "openskimap-ski-areas",
@@ -1683,13 +1799,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 55,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-27",
+          "source_id": "facts-midwest-ots-andes-tower-hills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Nov 27, closing Mar 21 (the 2025/26 projection was Nov 21 to Mar 22)."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-midwest-ots-andes-tower-hills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Nov 27, closing Mar 21 (the 2025/26 projection was Nov 21 to Mar 22)."
+        },
+        "length_days": {
+          "value": 115,
+          "source_id": "facts-midwest-ots-andes-tower-hills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -1714,6 +1856,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-andes-tower-hills",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -3817,9 +3961,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-midwest-season-ausblick-ski-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - mid March\"."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-midwest-season-ausblick-ski-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - mid March\"."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-midwest-season-ausblick-ski-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -3844,6 +4006,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-season-ausblick-ski-hill",
         "openskimap-ski-areas"
       ]
     },
@@ -6248,7 +6411,13 @@
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 23,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        },
         "vertical_ft": {
           "value": 137,
           "source_id": "openskimap-ski-areas",
@@ -6281,13 +6450,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 102,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-midwest-season-big-creek-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - late March\"."
+        },
+        "close_typical": {
+          "value": "03-25",
+          "source_id": "facts-midwest-season-big-creek-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - late March\"."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-midwest-season-big-creek-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -6312,6 +6507,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-season-big-creek-ski-area",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -6431,7 +6628,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 253,
+          "source_id": "facts-midwest-wiki-big-powderhorn-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow also gives 253 acres"
+        },
         "vertical_ft": {
           "value": 426,
           "source_id": "openskimap-ski-areas",
@@ -6468,9 +6671,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-26",
+          "source_id": "facts-midwest-ots-big-powderhorn-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 26, closing Mar 28."
+        },
+        "close_typical": {
+          "value": "03-28",
+          "source_id": "facts-midwest-ots-big-powderhorn-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 26, closing Mar 28."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-midwest-ots-big-powderhorn-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -6495,6 +6716,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-big-powderhorn-mountain-resort",
+        "facts-midwest-wiki-big-powderhorn-mountain-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -7195,7 +7418,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 82,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2026-01-09"
+        },
         "vertical_ft": {
           "value": 312,
           "source_id": "openskimap-ski-areas",
@@ -7228,13 +7457,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 90,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2026-01-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-04",
+          "source_id": "facts-midwest-ots-bittersweet",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 14 (another OnTheSnow page shows Mar 15)."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-midwest-ots-bittersweet",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 14 (another OnTheSnow page shows Mar 15)."
+        },
+        "length_days": {
+          "value": 101,
+          "source_id": "facts-midwest-ots-bittersweet",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -7259,6 +7514,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-bittersweet",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -7591,7 +7848,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 126,
+          "source_id": "facts-midwest-wiki-snowriver",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Black River Basin infobox in the Snowriver article: 126 acres, snowfall \"17 ft\" converted to 204 in"
+        },
         "vertical_ft": {
           "value": 423,
           "source_id": "openskimap-ski-areas",
@@ -7624,13 +7887,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 204,
+          "source_id": "facts-midwest-wiki-snowriver",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Black River Basin infobox in the Snowriver article: 126 acres, snowfall \"17 ft\" converted to 204 in"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-midwest-season-black-river-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: general season \"early December - early April\"; a second third party page estimates Dec 5 to Apr 5, which agrees."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-midwest-season-black-river-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: general season \"early December - early April\"; a second third party page estimates Dec 5 to Apr 5, which agrees."
+        },
+        "length_days": {
+          "value": 122,
+          "source_id": "facts-midwest-season-black-river-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -7655,6 +7944,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-season-black-river-basin",
+        "facts-midwest-wiki-snowriver",
         "openskimap-ski-areas"
       ]
     },
@@ -8726,7 +9017,13 @@
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-midwest-ots-boston-mills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow lists 40 acres of skiable terrain for Boston Mills alone"
+        },
         "vertical_ft": {
           "value": 208,
           "source_id": "openskimap-ski-areas",
@@ -8759,7 +9056,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 54,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28; snowfall given for Boston Mills and Brandywine together"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "vail-10k-fy2026",
@@ -8769,9 +9074,27 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-18",
+          "source_id": "facts-midwest-ots-boston-mills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 18, closing Mar 07."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-midwest-ots-boston-mills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 18, closing Mar 07."
+        },
+        "length_days": {
+          "value": 80,
+          "source_id": "facts-midwest-ots-boston-mills",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -8875,12 +9198,12 @@
             },
             {
               "key": "season_months",
-              "value": 5.0,
-              "label": "Season months (standard 5 month season)"
+              "value": 2.63,
+              "label": "Season months (sourced season length divided by 30.4 days)"
             },
             {
               "key": "season_months_basis",
-              "value": "default",
+              "value": "season_length",
               "label": "Season months basis"
             },
             {
@@ -8935,6 +9258,8 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-boston-mills-brandywine",
+        "facts-midwest-ots-boston-mills",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-boston-mills-noncert-2026",
@@ -9304,7 +9629,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 140,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-20"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "wikipedia-boyne-resorts",
@@ -9314,9 +9647,27 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-04",
+          "source_id": "facts-midwest-ots-boyne-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing May 24 (the prior projection was Nov 29 to May 10; late spring skiing is on stockpiled snow)."
+        },
+        "close_typical": {
+          "value": "05-24",
+          "source_id": "facts-midwest-ots-boyne-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing May 24 (the prior projection was Nov 29 to May 10; late spring skiing is on stockpiled snow)."
+        },
+        "length_days": {
+          "value": 172,
+          "source_id": "facts-midwest-ots-boyne-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -9353,6 +9704,8 @@
       "sources": [
         "ed-east-wikipedia-boyne-falls-michigan",
         "ed-east-wikipedia-boyne-mountain-resort",
+        "facts-midwest-ots-boyne-mountain",
+        "facts-midwest-wiki-comparison",
         "wikipedia-boyne-mountain-resort",
         "wikipedia-boyne-resorts"
       ]
@@ -9388,7 +9741,13 @@
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 85,
+          "source_id": "facts-midwest-ots-brandywine",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow lists 85 acres of skiable terrain for Brandywine alone"
+        },
         "vertical_ft": {
           "value": 199,
           "source_id": "openskimap-ski-areas",
@@ -9421,7 +9780,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 54,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28; snowfall given for Boston Mills and Brandywine together"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "vail-10k-fy2026",
@@ -9431,9 +9798,27 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-26",
+          "source_id": "facts-midwest-ots-brandywine",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 26, closing Mar 14."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-midwest-ots-brandywine",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 26, closing Mar 14."
+        },
+        "length_days": {
+          "value": 79,
+          "source_id": "facts-midwest-ots-brandywine",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -9537,12 +9922,12 @@
             },
             {
               "key": "season_months",
-              "value": 5.0,
-              "label": "Season months (standard 5 month season)"
+              "value": 2.6,
+              "label": "Season months (sourced season length divided by 30.4 days)"
             },
             {
               "key": "season_months_basis",
-              "value": "default",
+              "value": "season_length",
               "label": "Season months basis"
             },
             {
@@ -9597,6 +9982,8 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-boston-mills-brandywine",
+        "facts-midwest-ots-brandywine",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-boston-mills-noncert-2026",
@@ -11014,7 +11401,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "vertical_ft": {
           "value": 321,
           "source_id": "openskimap-ski-areas",
@@ -11047,13 +11440,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 42,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-19",
+          "source_id": "facts-midwest-ots-bruce-mound-winter-sports-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 19, closing Mar 07. skiresort.com gives \"mid December - mid March\"."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-midwest-ots-bruce-mound-winter-sports-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 19, closing Mar 07. skiresort.com gives \"mid December - mid March\"."
+        },
+        "length_days": {
+          "value": 79,
+          "source_id": "facts-midwest-ots-bruce-mound-winter-sports-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -11078,6 +11497,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-bruce-mound-winter-sports-area",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -11311,7 +11732,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01; OnTheSnow also gives 45 acres"
+        },
         "vertical_ft": {
           "value": 258,
           "source_id": "openskimap-ski-areas",
@@ -11362,9 +11789,27 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-04",
+          "source_id": "facts-midwest-ots-buck-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 21 (an older page shows Dec 05 to Mar 22)."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-midwest-ots-buck-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 21 (an older page shows Dec 05 to Mar 22)."
+        },
+        "length_days": {
+          "value": 108,
+          "source_id": "facts-midwest-ots-buck-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -11468,12 +11913,12 @@
             },
             {
               "key": "season_months",
-              "value": 5.0,
-              "label": "Season months (standard 5 month season)"
+              "value": 3.55,
+              "label": "Season months (sourced season length divided by 30.4 days)"
             },
             {
               "key": "season_months_basis",
-              "value": "default",
+              "value": "season_length",
               "label": "Season months basis"
             },
             {
@@ -11526,6 +11971,8 @@
       "housing_summary": null,
       "sources": [
         "ed-east-wikipedia-buck-hill",
+        "facts-midwest-ots-buck-hill",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "pay-east-buck-hill-ski-instructor",
         "wikipedia-buck-hill"
@@ -11628,7 +12075,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 30,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        },
         "vertical_ft": {
           "value": 176,
           "source_id": "openskimap-ski-areas",
@@ -11661,13 +12114,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 78,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-midwest-ots-buena-vista-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 21 (another snapshot shows Dec 06 to Mar 15)."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-midwest-ots-buena-vista-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 21 (another snapshot shows Dec 06 to Mar 15)."
+        },
+        "length_days": {
+          "value": 107,
+          "source_id": "facts-midwest-ots-buena-vista-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -11692,6 +12171,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-buena-vista-ski-area",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -12279,7 +12760,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 225,
+          "source_id": "facts-midwest-wiki-caberfae-peaks",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow gives 200 acres and 89 in, the comparison table 95 acres and 140 in"
+        },
         "vertical_ft": {
           "value": 363,
           "source_id": "openskimap-ski-areas",
@@ -12312,13 +12799,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 125,
+          "source_id": "facts-midwest-wiki-caberfae-peaks",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow gives 200 acres and 89 in, the comparison table 95 acres and 140 in"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-midwest-ots-caberfae-peaks",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 28 (the 2025/26 projection was Dec 06 to Mar 22)."
+        },
+        "close_typical": {
+          "value": "03-28",
+          "source_id": "facts-midwest-ots-caberfae-peaks",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 28 (the 2025/26 projection was Dec 06 to Mar 22)."
+        },
+        "length_days": {
+          "value": 114,
+          "source_id": "facts-midwest-ots-caberfae-peaks",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -12343,6 +12856,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-caberfae-peaks",
+        "facts-midwest-wiki-caberfae-peaks",
         "openskimap-ski-areas"
       ]
     },
@@ -12700,9 +13215,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-midwest-season-camp-10",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - mid March\"; the Town of Harrison says \"open Dec through mid March\"."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-midwest-season-camp-10",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - mid March\"; the Town of Harrison says \"open Dec through mid March\"."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-midwest-season-camp-10",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -12727,6 +13260,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-season-camp-10",
         "openskimap-ski-areas"
       ]
     },
@@ -13281,13 +13815,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-22; acres left out: the table gives 56 and OnTheSnow 100"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-12",
+          "source_id": "facts-midwest-ots-cannonsburg-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 12, closing Mar 14 (the snow report page shows Dec 13 to Mar 15)."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-midwest-ots-cannonsburg-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 12, closing Mar 14 (the snow report page shows Dec 13 to Mar 15)."
+        },
+        "length_days": {
+          "value": 93,
+          "source_id": "facts-midwest-ots-cannonsburg-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -13312,6 +13872,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-cannonsburg-ski-area",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -13330,7 +13892,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 175,
+          "source_id": "facts-midwest-wiki-cascade-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow and SnowStash also give 175 acres"
+        },
         "vertical_ft": {
           "value": 416,
           "source_id": "openskimap-ski-areas",
@@ -13363,13 +13931,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 56,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-28",
+          "source_id": "facts-midwest-ots-cascade-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Nov 28, closing Mar 14 (the 2025/26 projection was Dec 05 to Mar 15)."
+        },
+        "close_typical": {
+          "value": "03-14",
+          "source_id": "facts-midwest-ots-cascade-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Nov 28, closing Mar 14 (the 2025/26 projection was Dec 05 to Mar 15)."
+        },
+        "length_days": {
+          "value": 107,
+          "source_id": "facts-midwest-ots-cascade-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -13394,6 +13988,9 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-cascade-mountain",
+        "facts-midwest-wiki-cascade-mountain",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -13955,7 +14552,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 6,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        },
         "vertical_ft": {
           "value": 151,
           "source_id": "openskimap-ski-areas",
@@ -13988,13 +14591,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-14",
+          "source_id": "facts-midwest-chesterbowl-ski",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Operator page gives the 2025/26 season as opening day Sunday December 14 2025 and projected closing Sunday March 15 2026; one season only, used as typical. The 2024/25 season ended March 9."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-midwest-chesterbowl-ski",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Operator page gives the 2025/26 season as opening day Sunday December 14 2025 and projected closing Sunday March 15 2026; one season only, used as typical. The 2024/25 season ended March 9."
+        },
+        "length_days": {
+          "value": 92,
+          "source_id": "facts-midwest-chesterbowl-ski",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -14019,6 +14648,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-chesterbowl-ski",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -14037,7 +14668,13 @@
       "cluster_id": "other-il",
       "state": "IL",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 220,
+          "source_id": "facts-midwest-wiki-chestnut-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow gives 139 acres"
+        },
         "vertical_ft": {
           "value": 416,
           "source_id": "openskimap-ski-areas",
@@ -14070,13 +14707,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 34,
+          "source_id": "facts-midwest-wiki-chestnut-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow gives 139 acres"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-04",
+          "source_id": "facts-midwest-ots-chestnut-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 07 (an older page shows Dec 05 to Mar 15)."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-midwest-ots-chestnut-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 07 (an older page shows Dec 05 to Mar 15)."
+        },
+        "length_days": {
+          "value": 94,
+          "source_id": "facts-midwest-ots-chestnut-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -14101,6 +14764,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-chestnut-mountain-resort",
+        "facts-midwest-wiki-chestnut-mountain-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -14387,7 +15052,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; OnTheSnow also gives 45 acres"
+        },
         "vertical_ft": {
           "value": 346,
           "source_id": "openskimap-ski-areas",
@@ -14420,13 +15091,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 48,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; OnTheSnow also gives 45 acres"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-midwest-ots-christie-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 21 (the snow report page shows Dec 06 to Mar 22)."
+        },
+        "close_typical": {
+          "value": "03-21",
+          "source_id": "facts-midwest-ots-christie-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 05, closing Mar 21 (the snow report page shows Dec 06 to Mar 22)."
+        },
+        "length_days": {
+          "value": 107,
+          "source_id": "facts-midwest-ots-christie-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -14451,6 +15148,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-christie-mountain-ski-area",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -14469,7 +15168,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "vertical_ft": {
           "value": 194,
           "source_id": "openskimap-ski-areas",
@@ -14502,13 +15207,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 20,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-19",
+          "source_id": "facts-midwest-ots-christmas-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 19, closing Mar 07. A Wisconsin Dells tourism page says opening typically falls at the end of November."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-midwest-ots-christmas-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 19, closing Mar 07. A Wisconsin Dells tourism page says opening typically falls at the end of November."
+        },
+        "length_days": {
+          "value": 79,
+          "source_id": "facts-midwest-ots-christmas-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -14533,6 +15264,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-ots-christmas-mountain",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -14899,7 +15632,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 28,
+          "source_id": "facts-midwest-indy-coffee-mill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Indy Pass lists 28 acres; the OnTheSnow description also says 28 acres (its stats box and the comparison table say 40)"
+        },
         "vertical_ft": {
           "value": 412,
           "source_id": "openskimap-ski-areas",
@@ -14932,13 +15671,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 48,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-04",
+          "source_id": "facts-midwest-ots-coffee-mill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 07."
+        },
+        "close_typical": {
+          "value": "03-07",
+          "source_id": "facts-midwest-ots-coffee-mill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. OnTheSnow projected dates for 2026/27, which OnTheSnow bases on past seasons: opening Dec 04, closing Mar 07."
+        },
+        "length_days": {
+          "value": 94,
+          "source_id": "facts-midwest-ots-coffee-mill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -14963,6 +15728,9 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-indy-coffee-mill",
+        "facts-midwest-ots-coffee-mill",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -16132,7 +16900,13 @@
       "cluster_id": "other-ia",
       "state": "IA",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 50,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29; row \"Mount Crescent\""
+        },
         "vertical_ft": {
           "value": 231,
           "source_id": "openskimap-ski-areas",
@@ -16165,7 +16939,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 30,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29; row \"Mount Crescent\""
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -16196,6 +16978,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -17148,7 +17931,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 103,
+          "source_id": "facts-midwest-wiki-crystal-mountain-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow gives 102 acres"
+        },
         "vertical_ft": {
           "value": 338,
           "source_id": "openskimap-ski-areas",
@@ -17181,13 +17970,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 132,
+          "source_id": "facts-midwest-wiki-crystal-mountain-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; OnTheSnow gives 102 acres"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-25",
+          "source_id": "facts-midwest-wiki-crystal-mountain-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia: \"season runs from approximately Thanksgiving weekend to early April\"; Thanksgiving weekend mapped to late November (25), early April to 04-05. OnTheSnow projects Nov 27 to Apr 04, which agrees."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-midwest-wiki-crystal-mountain-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia: \"season runs from approximately Thanksgiving weekend to early April\"; Thanksgiving weekend mapped to late November (25), early April to 04-05. OnTheSnow projects Nov 27 to Apr 04, which agrees."
+        },
+        "length_days": {
+          "value": 132,
+          "source_id": "facts-midwest-wiki-crystal-mountain-mi",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -17212,6 +18027,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-crystal-mountain-mi",
         "openskimap-ski-areas"
       ]
     },
@@ -17230,7 +18046,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 75,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; row \"The Rock Snowpark\""
+        },
         "vertical_ft": {
           "value": 224,
           "source_id": "openskimap-ski-areas",
@@ -17267,9 +18089,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-midwest-season-crystal-ridge-rock-snowpark",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - mid March\"."
+        },
+        "close_typical": {
+          "value": "03-15",
+          "source_id": "facts-midwest-season-crystal-ridge-rock-snowpark",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - mid March\"."
+        },
+        "length_days": {
+          "value": 91,
+          "source_id": "facts-midwest-season-crystal-ridge-rock-snowpark",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -17294,6 +18134,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-season-crystal-ridge-rock-snowpark",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -17949,7 +18791,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01; Visit Detroit Lakes also gives 45 acres"
+        },
         "vertical_ft": {
           "value": 198,
           "source_id": "openskimap-ski-areas",
@@ -17986,9 +18834,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-midwest-season-detroit-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - early April\". The general manager targets the Friday after Thanksgiving for opening."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-midwest-season-detroit-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Phrase mapped with mid = 15, early = 05, late = 25: skiresort.info general season \"mid December - early April\". The general manager targets the Friday after Thanksgiving for opening."
+        },
+        "length_days": {
+          "value": 112,
+          "source_id": "facts-midwest-season-detroit-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -18013,6 +18879,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-season-detroit-mountain",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -18031,7 +18899,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 268,
+          "source_id": "facts-midwest-wiki-devils-head-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the resort site is reported to say about 300 acres of terrain"
+        },
         "vertical_ft": {
           "value": 495,
           "source_id": "openskimap-ski-areas",
@@ -18064,13 +18938,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 55,
+          "source_id": "facts-midwest-wiki-devils-head-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the resort site is reported to say about 300 acres of terrain"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-07",
+          "source_id": "facts-midwest-snowpak-wisconsin-best",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. SnowPak lists Devil's Head opening Dec 7 2026 and closing Apr 6 2027, marked as estimates based on historical data."
+        },
+        "close_typical": {
+          "value": "04-06",
+          "source_id": "facts-midwest-snowpak-wisconsin-best",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. SnowPak lists Devil's Head opening Dec 7 2026 and closing Apr 6 2027, marked as estimates based on historical data."
+        },
+        "length_days": {
+          "value": 121,
+          "source_id": "facts-midwest-snowpak-wisconsin-best",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -18095,6 +18995,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-snowpak-wisconsin-best",
+        "facts-midwest-wiki-devils-head-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -20047,7 +20949,13 @@
       "cluster_id": "other-il",
       "state": "IL",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 9,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29; row \"Four Lakes Alpine Snowsports\""
+        },
         "vertical_ft": {
           "value": 89,
           "source_id": "openskimap-ski-areas",
@@ -20080,7 +20988,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 24,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29; row \"Four Lakes Alpine Snowsports\""
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -20111,6 +21027,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -20293,7 +21210,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 202,
+          "source_id": "facts-midwest-wiki-giants-ridge-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        },
         "vertical_ft": {
           "value": 434,
           "source_id": "openskimap-ski-areas",
@@ -20326,7 +21249,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 85,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -20357,6 +21288,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
+        "facts-midwest-wiki-giants-ridge-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -20931,7 +21864,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 220,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "vertical_ft": {
           "value": 666,
           "source_id": "openskimap-ski-areas",
@@ -20964,7 +21903,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 75,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -20995,6 +21942,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -22918,7 +23866,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 32,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-23"
+        },
         "vertical_ft": {
           "value": 221,
           "source_id": "openskimap-ski-areas",
@@ -22982,6 +23936,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -23137,7 +24092,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 19,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "vail-10k-fy2026",
@@ -23331,6 +24294,7 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-hidden-valley-ski-area-missouri",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-hidden-valley-mo-cert-2026",
@@ -25157,7 +26121,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 35,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        },
         "vertical_ft": {
           "value": 175,
           "source_id": "wikipedia-hyland-hills-ski-area",
@@ -25247,6 +26217,7 @@
       "sources": [
         "ed-east-wikipedia-buck-hill",
         "ed-east-wikipedia-hyland-hills-ski-area",
+        "facts-midwest-wiki-comparison",
         "wikipedia-hyland-hills-ski-area"
       ]
     },
@@ -25564,7 +26535,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 204,
+          "source_id": "facts-midwest-wiki-snowriver",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Snowriver infobox snowfall \"17 ft\" converted to 204 in; Jackson Creek Summit is the Snowriver area apart from Black River Basin"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -25595,6 +26574,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-snowriver",
         "openskimap-ski-areas"
       ]
     },
@@ -27088,7 +28068,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; row \"Keyes Peak Ski Hill\""
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -27119,6 +28107,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -29248,7 +30237,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 50,
+          "source_id": "facts-midwest-wiki-little-switzerland",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        },
         "vertical_ft": {
           "value": 158,
           "source_id": "openskimap-ski-areas",
@@ -29281,7 +30276,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-little-switzerland",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -29312,6 +30315,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-little-switzerland",
         "openskimap-ski-areas"
       ]
     },
@@ -30190,7 +31194,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 593,
+          "source_id": "facts-midwest-wiki-lutsen-mountains",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox (\"app. 115 in\" snowfall)"
+        },
         "vertical_ft": {
           "value": 787,
           "source_id": "openskimap-ski-areas",
@@ -30223,12 +31233,26 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 115,
+          "source_id": "facts-midwest-wiki-lutsen-mountains",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox (\"app. 115 in\" snowfall)"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
         "open_typical": null,
-        "close_typical": null,
+        "close_typical": {
+          "value": "04-15",
+          "source_id": "facts-midwest-wiki-lutsen",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia: \"The ski season extends from November into mid-April\"; mid April mapped to 04-15. Opening left out because the phrase gives no part of November."
+        },
         "length_days": null,
         "training_start": null
       },
@@ -30254,6 +31278,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-lutsen",
+        "facts-midwest-wiki-lutsen-mountains",
         "openskimap-ski-areas"
       ]
     },
@@ -30687,7 +31713,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 36,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "vail-10k-fy2026",
@@ -30754,6 +31788,7 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-mad-river-mountain",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
@@ -31552,7 +32587,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 169,
+          "source_id": "facts-midwest-wiki-marquette-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the comparison table gives 139 acres"
+        },
         "vertical_ft": {
           "value": 531,
           "source_id": "openskimap-ski-areas",
@@ -31585,7 +32626,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 117,
+          "source_id": "facts-midwest-wiki-marquette-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the comparison table gives 139 acres"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -31616,6 +32665,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-marquette-mountain",
         "openskimap-ski-areas"
       ]
     },
@@ -32849,7 +33899,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 10,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "vertical_ft": {
           "value": 280,
           "source_id": "openskimap-ski-areas",
@@ -32882,7 +33938,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 55,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -32913,6 +33977,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -32931,7 +33996,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 112,
+          "source_id": "facts-midwest-wiki-mont-ripley-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the comparison table gives 67 acres"
+        },
         "vertical_ft": {
           "value": 431,
           "source_id": "openskimap-ski-areas",
@@ -32964,13 +34035,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 275,
+          "source_id": "facts-midwest-wiki-mont-ripley-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the comparison table gives 67 acres"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-25",
+          "source_id": "facts-midwest-wiki-mont-ripley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia: \"the season has been extended from late November to late March or early April\"; late November mapped to 11-25, \"late March or early April\" to the midpoint 03-31."
+        },
+        "close_typical": {
+          "value": "03-31",
+          "source_id": "facts-midwest-wiki-mont-ripley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia: \"the season has been extended from late November to late March or early April\"; late November mapped to 11-25, \"late March or early April\" to the midpoint 03-31."
+        },
+        "length_days": {
+          "value": 127,
+          "source_id": "facts-midwest-wiki-mont-ripley",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -32995,6 +34092,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-mont-ripley",
+        "facts-midwest-wiki-mont-ripley-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -33710,7 +34809,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-25"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "vail-10k-fy2026",
@@ -33777,6 +34884,7 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-mount-brighton",
+        "facts-midwest-wiki-comparison",
         "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
         "wikipedia-mount-brighton"
@@ -34153,7 +35261,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 55,
+          "source_id": "facts-midwest-wiki-mount-kato-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        },
         "vertical_ft": {
           "value": 225,
           "source_id": "openskimap-ski-areas",
@@ -34186,7 +35300,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 50,
+          "source_id": "facts-midwest-wiki-mount-kato-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -34217,6 +35339,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-mount-kato-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -34771,7 +35894,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        },
         "vertical_ft": {
           "value": 199,
           "source_id": "openskimap-ski-areas",
@@ -34804,7 +35933,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 50,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -34835,6 +35972,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -35716,7 +36854,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 20,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        },
         "vertical_ft": {
           "value": 296,
           "source_id": "openskimap-ski-areas",
@@ -35780,6 +36924,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -36839,7 +37984,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        },
         "vertical_ft": {
           "value": 200,
           "source_id": "openskimap-ski-areas",
@@ -36872,7 +38023,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 120,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -36903,6 +38062,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -36921,7 +38081,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-25"
+        },
         "vertical_ft": {
           "value": 281,
           "source_id": "openskimap-ski-areas",
@@ -36985,6 +38151,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -37290,7 +38457,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 100,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "vertical_ft": {
           "value": 439,
           "source_id": "openskimap-ski-areas",
@@ -37323,7 +38496,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -37354,6 +38535,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -37372,7 +38554,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 4,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        },
         "vertical_ft": {
           "value": 149,
           "source_id": "openskimap-ski-areas",
@@ -37436,6 +38624,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -37655,7 +38844,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 10,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        },
         "vertical_ft": {
           "value": 152,
           "source_id": "openskimap-ski-areas",
@@ -37688,7 +38883,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -37719,6 +38922,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -38085,7 +39289,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "vertical_ft": {
           "value": 239,
           "source_id": "openskimap-ski-areas",
@@ -38118,7 +39328,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 80,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -38149,6 +39367,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -38773,7 +39992,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 103,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-25"
+        },
         "vertical_ft": {
           "value": 310,
           "source_id": "openskimap-ski-areas",
@@ -38806,7 +40031,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-25"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -38837,6 +40070,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -38855,7 +40089,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 248,
+          "source_id": "facts-midwest-wiki-nubs-nob",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        },
         "vertical_ft": {
           "value": 409,
           "source_id": "openskimap-ski-areas",
@@ -38888,7 +40128,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 123,
+          "source_id": "facts-midwest-wiki-nubs-nob",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -38919,6 +40167,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-nubs-nob",
         "openskimap-ski-areas"
       ]
     },
@@ -38937,7 +40186,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 10,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "vertical_ft": {
           "value": 117,
           "source_id": "openskimap-ski-areas",
@@ -39001,6 +40256,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -39690,7 +40946,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 132,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-26"
+        },
         "vertical_ft": {
           "value": 317,
           "source_id": "openskimap-ski-areas",
@@ -39723,7 +40985,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 150,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-26"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -39754,6 +41024,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -40357,7 +41628,13 @@
       "cluster_id": "other-in",
       "state": "IN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 65,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        },
         "vertical_ft": {
           "value": 300,
           "source_id": "wikipedia-paoli-peaks",
@@ -40592,6 +41869,7 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-paoli-peaks",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-paoli-noncert-2026",
@@ -41320,7 +42598,13 @@
       "cluster_id": "other-in",
       "state": "IN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 100,
+          "source_id": "facts-midwest-wiki-perfect-north-slopes",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        },
         "vertical_ft": {
           "value": 376,
           "source_id": "openskimap-ski-areas",
@@ -41353,7 +42637,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 23,
+          "source_id": "facts-midwest-wiki-perfect-north-slopes",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -41384,6 +42676,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-perfect-north-slopes",
         "openskimap-ski-areas"
       ]
     },
@@ -41719,7 +43012,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-26"
+        },
         "vertical_ft": {
           "value": 259,
           "source_id": "openskimap-ski-areas",
@@ -41783,6 +43082,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -41801,7 +43101,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 75,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-26; row \"Pine Mountain Resort\", Iron Mountain"
+        },
         "vertical_ft": {
           "value": 370,
           "source_id": "openskimap-ski-areas",
@@ -41834,7 +43140,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-26; row \"Pine Mountain Resort\", Iron Mountain"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -41865,6 +43179,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -42492,7 +43807,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 250,
+          "source_id": "facts-midwest-wiki-porcupine-mountains-winter-sports-complex",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the comparison table gives 220 acres"
+        },
         "vertical_ft": {
           "value": 627,
           "source_id": "openskimap-ski-areas",
@@ -42525,7 +43846,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "facts-midwest-wiki-porcupine-mountains-winter-sports-complex",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the comparison table gives 220 acres"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -42556,6 +43885,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-porcupine-mountains-winter-sports-complex",
         "openskimap-ski-areas"
       ]
     },
@@ -42826,7 +44156,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 60,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        },
         "vertical_ft": {
           "value": 255,
           "source_id": "openskimap-ski-areas",
@@ -42859,7 +44195,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -42890,6 +44234,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -45731,7 +47076,13 @@
       "cluster_id": "other-ia",
       "state": "IA",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 35,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        },
         "vertical_ft": {
           "value": 179,
           "source_id": "openskimap-ski-areas",
@@ -45764,7 +47115,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -45795,6 +47154,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -47262,7 +48622,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 90,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-12"
+        },
         "vertical_ft": {
           "value": 315,
           "source_id": "openskimap-ski-areas",
@@ -47295,7 +48661,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 150,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-12"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -47326,6 +48700,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -48144,7 +49519,13 @@
       "cluster_id": "other-il",
       "state": "IL",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 28,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        },
         "vertical_ft": {
           "value": 191,
           "source_id": "openskimap-ski-areas",
@@ -48177,7 +49558,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 38,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -48208,6 +49597,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -48698,7 +50088,13 @@
       "cluster_id": "other-ia",
       "state": "IA",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 80,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        },
         "vertical_ft": {
           "value": 121,
           "source_id": "openskimap-ski-areas",
@@ -48762,6 +50158,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -49028,7 +50425,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 20,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "vail-10k-fy2026",
@@ -49077,6 +50482,7 @@
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-snow-creek-ski-resort",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "vail-10k-fy2026",
@@ -49344,7 +50750,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        },
         "vertical_ft": {
           "value": 162,
           "source_id": "openskimap-ski-areas",
@@ -49408,6 +50820,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -49605,7 +51018,13 @@
       "cluster_id": "other-oh",
       "state": "OH",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 80,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        },
         "vertical_ft": {
           "value": 237,
           "source_id": "openskimap-ski-areas",
@@ -49638,7 +51057,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 52,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -49669,6 +51096,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -51738,7 +53166,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 175,
+          "source_id": "facts-midwest-wiki-spirit-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox (\"90 inches (average)\")"
+        },
         "vertical_ft": {
           "value": 568,
           "source_id": "openskimap-ski-areas",
@@ -51771,7 +53205,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 90,
+          "source_id": "facts-midwest-wiki-spirit-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox (\"90 inches (average)\")"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -51802,6 +53244,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-spirit-mountain",
         "openskimap-ski-areas"
       ]
     },
@@ -52011,7 +53454,13 @@
           "confidence": "estimated",
           "note": "highest minus lowest mapped lift or downhill run elevation (OpenSkiMap)"
         },
-        "lifts": null,
+        "lifts": {
+          "value": 1,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        },
         "ski_school_staff_est": null
       },
       "elevation": {
@@ -52061,6 +53510,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -55151,7 +56601,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; row \"Sunburst Winter Sports Park\""
+        },
         "vertical_ft": {
           "value": 202,
           "source_id": "openskimap-ski-areas",
@@ -55184,7 +56640,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 50,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; row \"Sunburst Winter Sports Park\""
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -55215,6 +56679,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -55639,7 +57104,13 @@
       "cluster_id": "other-ia",
       "state": "IA",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 55,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        },
         "vertical_ft": {
           "value": 431,
           "source_id": "openskimap-ski-areas",
@@ -55672,7 +57143,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -55703,6 +57182,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -57168,7 +58648,15 @@
           "note": null
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 140,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-22"
+        }
+      },
       "operator_scale": {
         "value": 3,
         "source_id": "wikipedia-boyne-resorts",
@@ -57219,6 +58707,7 @@
         "ed-east-wikipedia-boyne-mountain-resort",
         "ed-east-wikipedia-harbor-springs-michigan",
         "ed-east-wikipedia-the-highlands-at-harbor-springs",
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "wikipedia-boyne-resorts",
         "wikipedia-the-highlands-at-harbor-springs"
@@ -57239,7 +58728,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 23,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2015-02-23"
+        },
         "vertical_ft": {
           "value": 200,
           "source_id": "openskimap-ski-areas",
@@ -57272,7 +58767,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 150,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2015-02-23"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -57303,6 +58806,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -57418,7 +58922,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 30,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; row \"Grand Geneva Resort and Spa\""
+        },
         "vertical_ft": {
           "value": 124,
           "source_id": "openskimap-ski-areas",
@@ -57451,7 +58961,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 25,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09; row \"Grand Geneva Resort and Spa\""
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -57482,6 +59000,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -57987,7 +59506,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 50,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15"
+        },
         "vertical_ft": {
           "value": 215,
           "source_id": "openskimap-ski-areas",
@@ -58051,6 +59576,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -58773,7 +60299,13 @@
       "cluster_id": "other-mi",
       "state": "MI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 80,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15; row \"Treetops Resort\""
+        },
         "vertical_ft": {
           "value": 221,
           "source_id": "openskimap-ski-areas",
@@ -58806,7 +60338,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 175,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15; row \"Treetops Resort\""
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -58837,6 +60377,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -58937,7 +60478,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 80,
+          "source_id": "facts-midwest-wiki-trollhaugen-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox gives 80 acres; the article body lists 90 acres and the comparison table 86; snowfall from the article stats list (\"Average Snowfall: 50.7inches\")"
+        },
         "vertical_ft": {
           "value": 236,
           "source_id": "openskimap-ski-areas",
@@ -58970,7 +60517,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 50.7,
+          "source_id": "facts-midwest-wiki-trollhaugen-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox gives 80 acres; the article body lists 90 acres and the comparison table 86; snowfall from the article stats list (\"Average Snowfall: 50.7inches\")"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -59001,6 +60556,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-trollhaugen-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -59348,7 +60904,13 @@
       "cluster_id": "other-wi",
       "state": "WI",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 32,
+          "source_id": "facts-midwest-wiki-tyrol-basin-ski-and-snowboard-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox; the comparison table gives 30 acres"
+        },
         "vertical_ft": {
           "value": 284,
           "source_id": "openskimap-ski-areas",
@@ -59381,7 +60943,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 41,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-12-09"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -59412,6 +60982,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
+        "facts-midwest-wiki-tyrol-basin-ski-and-snowboard-area",
         "openskimap-ski-areas"
       ]
     },
@@ -60094,7 +61666,13 @@
       "cluster_id": "other-il",
       "state": "IL",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 15,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        },
         "vertical_ft": {
           "value": 122,
           "source_id": "openskimap-ski-areas",
@@ -60127,7 +61705,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 25,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-29"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -60158,6 +61744,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -60726,7 +62313,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 140,
+          "source_id": "facts-midwest-wiki-welch-village",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        },
         "vertical_ft": {
           "value": 324,
           "source_id": "openskimap-ski-areas",
@@ -60759,7 +62352,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 45,
+          "source_id": "facts-midwest-wiki-welch-village",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": null
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -60790,6 +62391,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-welch-village",
         "openskimap-ski-areas"
       ]
     },
@@ -61246,7 +62848,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-15; acres left out: the table gives 208 and the Whitecap article 400"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -61277,6 +62887,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
       ]
     },
@@ -62054,7 +63665,13 @@
       "cluster_id": "other-mn",
       "state": "MN",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 100,
+          "source_id": "facts-midwest-wiki-comparison",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
+        },
         "vertical_ft": {
           "value": 271,
           "source_id": "openskimap-ski-areas",
@@ -62087,11 +63704,25 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 40,
+          "source_id": "facts-midwest-wiki-wild-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "infobox (\"40 inches\")"
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
+        "open_typical": {
+          "value": "10-31",
+          "source_id": "facts-midwest-wiki-wild-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "median of the opening days Wikipedia lists for seasons 1982 to 2025 (39 recorded seasons; earliest Oct 7, latest Nov 28)"
+        },
         "close_typical": null,
         "length_days": null,
         "training_start": null
@@ -62118,6 +63749,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-midwest-wiki-comparison",
+        "facts-midwest-wiki-wild-mountain",
         "openskimap-ski-areas"
       ]
     },

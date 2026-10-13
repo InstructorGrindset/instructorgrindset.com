@@ -226,6 +226,16 @@ async function desktop(browser, base) {
   await page.waitForFunction(() => window.__careerMap.mapCtl, null, { timeout: 20000 });
   await page.waitForFunction(() => !document.getElementById('map-start'), null, { timeout: 20000 });
   check(await page.evaluate(() => document.activeElement === window.__careerMap.mapCtl.map.getCanvas()), 'Enter on the start button starts the map and focus moves to it');
+  const imagery = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const ids = m.getStyle().layers.map((l) => l.id);
+    const src = m.getStyle().sources.imagery;
+    const data = ['states-fill', 'clusters-fill', 'resorts'].map((id) => ids.indexOf(id));
+    return { src: src && src.type, tiles: src && src.tiles[0], idx: ids.indexOf('imagery'), data, attrib: document.querySelector('.maplibregl-ctrl-attrib-inner').textContent };
+  });
+  check(imagery.src === 'raster' && /basemap\.nationalmap\.gov/.test(imagery.tiles) && imagery.idx === 1 && imagery.data.every((i) => i > imagery.idx),
+    'USGS imagery raster sits under every data layer');
+  check(imagery.attrib.includes('Imagery: USGS The National Map'), 'imagery attribution shows');
   await ready(page);
   await mapIdle(page);
   check(await heading(page) === 'United States', 'national heading');
@@ -1044,6 +1054,16 @@ try {
     executablePath,
     args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
   });
+  // Imagery tiles (config.basemap.imagery) come from a synthetic local tile: the USGS service is outside the
+  // test sandbox. Every context gets the route.
+  const tile = fs.readFileSync(path.join(REPO, 'tests', 'map', 'fixtures', 'imagery-tile.png'));
+  const newContext = browser.newContext.bind(browser);
+  browser.newContext = async (opts) => {
+    const c = await newContext(opts);
+    await c.route(/basemap\.nationalmap\.gov\//, (route) => route.fulfill({ status: 200, contentType: 'image/png', body: tile, headers: { 'Access-Control-Allow-Origin': '*' } }));
+    return c;
+  };
+  browser.newPage = async (opts) => (await browser.newContext(opts)).newPage();
   servers.push(await serve(REPO, 8811));
   stubRoot = makeStubSite();
   servers.push(await serve(stubRoot, 8812));
