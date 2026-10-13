@@ -111,6 +111,8 @@ function watch(page, label) {
     if (/\/fonts\/Rooftop/.test(r.url())) return;
     // MapLibre cancels imagery tiles it no longer needs while the camera moves.
     if (/basemap\.nationalmap\.gov\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
+    // The Inter web font loads after the first paint, so a test that moves on quickly can cancel its download.
+    if (/^https:\/\/fonts\.gstatic\.com\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`);
   });
   return {
