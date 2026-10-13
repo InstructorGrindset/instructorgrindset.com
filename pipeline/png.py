@@ -92,29 +92,20 @@ def encode_gray16(width: int, height: int, values: list[int] | tuple[int, ...], 
 def encode_indexed(width: int, height: int, indices: bytes | bytearray, palette: list[tuple[int, int, int]], *,
                    level: int = 9) -> bytes:
     """PNG bytes of an 8 bit palette image (colour type 3): ``height`` rows of ``width`` palette indices, top row
-    first, and up to 256 RGB palette entries. Writes the smaller of no filter and the Up filter on every row
-    (palette images usually compress best unfiltered), so the output depends only on the input."""
+    first, and up to 256 RGB palette entries. Rows are unfiltered, which compresses palette images best."""
     if width <= 0 or height <= 0:
         raise ValueError("width and height must be positive")
     if len(indices) != width * height:
         raise ValueError(f"expected {width * height} indices, got {len(indices)}")
     if not 0 < len(palette) <= 256 or max(indices) >= len(palette):
         raise ValueError("palette must hold 1 to 256 colors and cover every index")
-    best = b""
-    for kind in (FILTER_NONE, FILTER_UP):
-        raw = bytearray()
-        prev = bytes(width)
-        for j in range(height):
-            row = bytes(indices[j * width:(j + 1) * width])
-            raw.append(kind)
-            raw += _filter_row(row, prev, kind, bpp=1)
-            prev = row
-        packed = zlib.compress(bytes(raw), level)
-        if not best or len(packed) < len(best):
-            best = packed
+    raw = bytearray()
+    for j in range(height):
+        raw.append(FILTER_NONE)
+        raw += indices[j * width:(j + 1) * width]
     ihdr = struct.pack(">IIBBBBB", width, height, 8, 3, 0, 0, 0)
     plte = b"".join(bytes(c) for c in palette)
-    return (SIGNATURE + _chunk(b"IHDR", ihdr) + _chunk(b"PLTE", plte) + _chunk(b"IDAT", best)
+    return (SIGNATURE + _chunk(b"IHDR", ihdr) + _chunk(b"PLTE", plte) + _chunk(b"IDAT", zlib.compress(bytes(raw), level))
             + _chunk(b"IEND", b""))
 
 

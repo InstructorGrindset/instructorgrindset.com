@@ -217,15 +217,17 @@ def test_hiring_windows_load_once_per_resort_and_reach_resort_jobs(tmp_path):
     data, errors = run(tmp_path, [{"resort_id": "alpha-peak", "links": [link()]}])
     assert errors == []
     out = resort_jobs(data, "alpha-peak")
+    # the text names no end and no year, so no months (pipeline/hiring.py)
     assert out["hiring_window"] == {"text": "Applications open August 15; clinics start in November.",
-                                    "source_id": "jobs-alpha", "as_of": "2026-10-13", "confidence": "estimated", "note": None}
+                                    "source_id": "jobs-alpha", "as_of": "2026-10-13", "confidence": "estimated", "note": None,
+                                    "start_month": None, "end_month": None}
     # a window alone still gives Resort.jobs (no links yet)
     (d / "windows.yaml").write_text(yaml.safe_dump({"batch": "jobs-windows", "researched_date": "2026-10-13",
                                                     "hiring_windows": [{**hw, "resort_id": "bravo-bowl"}]}))
     data, errors = run(tmp_path, [{"resort_id": "alpha-peak", "links": [link()]}])
     assert errors == [] and resort_jobs(data, "bravo-bowl") == {"links": [], "feed": False, "hiring_window": {
         **{k: v for k, v in hw.items() if k != "resort_id"}, "text": "Applications open August 15; clinics start in November.",
-        "note": None}}
+        "note": None, "start_month": None, "end_month": None}}
     assert resort_jobs(data, "alpha-peak")["hiring_window"] is None
     for bad, needle in (({**hw, "resort_id": "nope"}, "no such resort"), ({**hw, "text": "Open now \u2014 apply"}, "em or en dashes"),
                         ({**hw, "source_id": "missing"}, "not defined"), ({**hw, "confidence": "sure"}, "confidence")):
@@ -243,3 +245,31 @@ def test_hiring_windows_load_once_per_resort_and_reach_resort_jobs(tmp_path):
                                                  "hiring_windows": [hw]}))
     _, errors = run(tmp_path, [])
     assert any("also has a hiring window in" in e for e in errors)
+
+
+def test_hiring_window_months_reach_resort_jobs_with_their_citation(tmp_path):
+    hw = {"resort_id": "alpha-peak", "text": "Instructor posting opened July 1, 2026 with a target start of December 1, 2026.",
+          "source_id": "jobs-alpha", "as_of": "2026-10-13", "confidence": "published"}
+    d = tmp_path / "jobs"
+    d.mkdir()
+    (d / "windows.yaml").write_text(yaml.safe_dump({"batch": "jobs-windows", "researched_date": "2026-10-13",
+                                                    "hiring_windows": [hw]}))
+    data, errors = run(tmp_path, [{"resort_id": "alpha-peak", "links": [link()]}])
+    assert errors == []
+    out = resort_jobs(data, "alpha-peak", JOBS_CFG.hiring_windows.max_months)["hiring_window"]
+    assert out == {"text": hw["text"], "source_id": "jobs-alpha", "as_of": "2026-10-13", "confidence": "published",
+                   "note": None, "start_month": "2026-07", "end_month": "2026-12"}
+    # a shorter limit leaves the same text unparsed; the text and its citation stay
+    short = resort_jobs(data, "alpha-peak", 3)["hiring_window"]
+    assert (short["start_month"], short["end_month"], short["text"]) == (None, None, hw["text"])
+    # the build schema accepts both, and rejects one month without the other or an end before the start
+    from pydantic import ValidationError
+
+    from pipeline.schemas.jobs import Jobs
+    Jobs.model_validate({"links": [], "hiring_window": out})
+    for bad in ({**out, "end_month": None}, {**out, "end_month": "2026-06"}, {**out, "start_month": "2026-13"}):
+        try:
+            Jobs.model_validate({"links": [], "hiring_window": bad})
+        except ValidationError:
+            continue
+        raise AssertionError(bad)

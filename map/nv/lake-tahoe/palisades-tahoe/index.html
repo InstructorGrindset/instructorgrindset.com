@@ -12,8 +12,11 @@
   <meta property="og:title" content="Instructor pay, housing, and snow at Palisades Tahoe" />
   <meta property="og:description" content="Plan a season at Palisades Tahoe in the Lake Tahoe cluster, California. See instructor pay, housing, season dates, snowfall, terrain, and operation size, with a source on every number." />
   <meta property="og:url" content="https://instructorgrindset.com/map/ca/lake-tahoe/palisades-tahoe/" />
-  <meta property="og:image" content="https://instructorgrindset.com/images/ig-logo.png" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://instructorgrindset.com/images/share/ca/lake-tahoe/palisades-tahoe.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Career Map card for Palisades Tahoe, Lake Tahoe, California, with the resort marked on a map of California. 3,600 skiable acres, 181 day season and 400 in annual snowfall." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preload" href="/data/build/map-index.json" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/clusters.geojson" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/states.json" as="fetch" crossorigin="anonymous">
@@ -22,7 +25,7 @@
   <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"></noscript>
-  <link rel="stylesheet" href="/map/css/map.css?v=9">
+  <link rel="stylesheet" href="/map/css/map.css?v=10">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%23e0a03a'/%3E%3C/svg%3E">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
@@ -84,7 +87,7 @@
       <div class="map-stage" id="map-stage">
         <div id="map" class="map" role="region" aria-label="Interactive map of US ski resorts. The panel and the list view hold the same information."></div>
         <section id="list-view" class="list-view" aria-label="List view of every state, cluster and resort" hidden></section>
-        <div id="facility-filter" class="facility-filter" role="group" aria-label="Show facility types" hidden></div>
+        <div id="facility-filter" class="facility-filter" role="group" aria-label="Filter resorts" hidden></div>
         <div id="recolor" class="recolor" hidden></div>
         <div id="detail-layers" class="detail-layers" role="group" aria-label="Resort detail layers" hidden></div>
 

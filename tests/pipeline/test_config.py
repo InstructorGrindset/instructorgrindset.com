@@ -78,6 +78,17 @@ def test_clusters_config(cfg):
     assert by["new-york-metro"].states == ["NJ", "NY", "CT"]
     assert by["mount-hood"].states == ["OR"] and by["laurel-highlands"].states == ["PA"]
     assert cfg.definitions.ownership.missing_tier_a_record == "fail"
+
+
+def test_ownership_and_hiring_window_settings_are_pinned(cfg, repo_root):
+    # One build cycle for the Vail and Alterra portfolio sources (ROADMAP item 17); a change here is a decision.
+    assert cfg.definitions.ownership.max_source_age_days == 400
+    # The Hiring now filter reads windows of at most this many months (pipeline/hiring.py).
+    assert cfg.definitions.jobs.hiring_windows.max_months == 9
+    data = yaml.safe_load((repo_root / "config/definitions.yaml").read_text())
+    data["ownership"]["max_source_age_days"] = 0
+    with pytest.raises(ValidationError, match="max_source_age_days"):
+        Definitions.model_validate(data)
     for c in cfg.clusters.clusters:
         assert "-" not in c.name, "cluster display names follow the no hyphen style rule"
 

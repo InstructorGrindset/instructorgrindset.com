@@ -6,15 +6,15 @@ and an end month from it only when the text is explicit about both:
 * Start: the date a posting or the applications opened ("Instructor posting opened July 1, 2026", "Posted July 1,
   2026", "applications open August 15"), or else a statement that hiring is open ("Hiring is rolling", "Posting open
   and still accepting applications", "Now hiring"), which counts from the month of the source's ``as_of`` date.
-* End: an application deadline ("applications are accepted until December 15", "apply by November 1") or the job's
-  own start date ("target start of December 1, 2026", "estimated start December 5, 2026", "positions begin in
-  December").
+* End: an application deadline ("applications are accepted until December 15", "accepting applications until",
+  "apply by November 1") or the job's own start date ("target start of December 1, 2026", "estimated start
+  December 5, 2026", "positions begin in December").
 
 Everything else stays unparsed (``None``): season or employment dates ("Season runs about November 7"), arrival
 dates, words in place of a month ("early fall", "late summer", "once the snow flies"), hedged dates ("roughly
 November 23"), two different starts or two different ends, dates with no year to fix them, an end before the start,
-and windows longer than ``jobs.hiring_windows.max_months``. Month names must be written out with a capital letter
-("Dec" and "Dec." count; "may" never does).
+and windows longer than ``jobs.hiring_windows.max_months``. Month names (in full, as three letters, or "Sept") must
+start with a capital letter, so the verb "may" is never a month.
 
 Years: a date without a year takes its year from the other end of the window (an end falls on or after the start;
 a start falls on or before the end). The open now start uses the year of ``as_of``. A window whose dates carry no
@@ -51,6 +51,7 @@ OPEN_NOW = re.compile(
 # An application deadline, or the job's own start date.
 ENDS = [re.compile(p + _DATE) for p in (
     r"\b(?i:applications?|postings?) (?i:are |is |will be |remain )?(?i:accepted|taken|considered|open) (?i:until|through|by) ",
+    r"\b(?i:accepting|taking) (?i:applications) (?i:until|through) ",
     r"\b(?i:applications?|postings?) (?i:are |is )?(?i:due|close|closes|closed)(?: (?i:on|by))? ",
     r"\b(?i:apply by|deadline(?: is| of)?) ",
     r"\b(?i:(?:target|estimated|expected|anticipated|planned) start(?: date)?|start date)(?: (?i:of|is|on))? ",

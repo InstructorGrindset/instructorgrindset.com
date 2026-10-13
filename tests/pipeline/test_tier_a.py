@@ -4,7 +4,7 @@ import yaml
 from pipeline import openskimap
 from pipeline.names import name_similarity, slugify
 from pipeline.sources import SourceRegistry
-from pipeline.tier_a import BuildError, load_raw, match_openskimap, ownership_cross_check
+from pipeline.tier_a import BuildError, load_raw, match_openskimap, ownership_cross_check, ownership_source_age_check
 
 
 def _edit(path, fn):
@@ -102,6 +102,56 @@ def test_ownership_cross_check_fails_without_file(raw_dir):
     _edit(raw_dir / "tier_a" / "fixture.yaml", alterra)
     errors, _ = ownership_cross_check(load_raw(raw_dir, SourceRegistry()))
     assert [e for e in errors if "no ownership file for Alterra" in e] and len(errors) == 1
+
+
+def test_ownership_source_age_fresh_source_passes(raw_dir, cfg):
+    # The fixture portfolio source was accessed 2026-10-01 (tests/pipeline/fixtures/raw/ownership/vail.yaml).
+    import datetime as dt
+    registry = SourceRegistry()
+    inputs = load_raw(raw_dir, registry)
+    limit = cfg.definitions.ownership.max_source_age_days
+    assert ownership_source_age_check(inputs, registry, dt.date(2026, 10, 13), limit) == []
+    # exactly one build cycle old still passes; a source accessed after the build date counts as fresh
+    assert ownership_source_age_check(inputs, registry, dt.date(2026, 10, 1) + dt.timedelta(days=limit), limit) == []
+    assert ownership_source_age_check(inputs, registry, dt.date(2026, 9, 1), limit) == []
+
+
+def test_ownership_source_age_stale_source_fails(raw_dir, cfg):
+    import datetime as dt
+    registry = SourceRegistry()
+    inputs = load_raw(raw_dir, registry)
+    limit = cfg.definitions.ownership.max_source_age_days
+    today = dt.date(2026, 10, 1) + dt.timedelta(days=limit + 1)
+    errors = ownership_source_age_check(inputs, registry, today, limit, rel=lambda p: p.name)
+    assert len(errors) == 1
+    msg = errors[0]
+    for part in ("vail.yaml", "Vail Resorts ownership source 'fixture-owner-list'", "accessed on 2026-10-01",
+                 f"{limit + 1} days before this build ({today.isoformat()})", f"One build cycle is {limit} days",
+                 "ownership.max_source_age_days", "Refreshing the ownership sources"):
+        assert part in msg, (part, msg)
+    assert "\u2014" not in msg and "\u2013" not in msg
+
+
+def test_ownership_source_age_checks_every_cited_source_of_vail_and_alterra_only(raw_dir):
+    import datetime as dt
+
+    def add_old_source(d):
+        d["sources"].append({"id": "fixture-old-list", "url": "https://example.org/old", "title": "Old list",
+                             "accessed_date": dt.date(2024, 1, 2)})
+        d["sources"].append({"id": "fixture-unused", "url": "https://example.org/unused", "title": "Unused",
+                             "accessed_date": dt.date(2020, 1, 1)})
+        d["resorts"][1]["source_id"] = "fixture-old-list"
+    _edit(raw_dir / "ownership" / "vail.yaml", add_old_source)
+    registry = SourceRegistry()
+    inputs = load_raw(raw_dir, registry)
+    errors = ownership_source_age_check(inputs, registry, dt.date(2026, 10, 13), 400)
+    # only the cited old source fails; a declared source no entry cites is not used for ownership
+    assert len(errors) == 1 and "'fixture-old-list'" in errors[0]
+    # another operator's file is not a Vail or Alterra portfolio
+    _edit(raw_dir / "ownership" / "vail.yaml", lambda d: d.update(operator="Fixture Mountain Co"))
+    registry = SourceRegistry()
+    inputs = load_raw(raw_dir, registry)
+    assert ownership_source_age_check(inputs, registry, dt.date(2026, 10, 13), 400) == []
 
 
 def test_match_openskimap(raw_dir, cfg):

@@ -72,7 +72,10 @@ Resort {
              cams: [{ label, url, kind: page|image|stream, source_id, as_of, confidence, note }] } | null,
                                                    // live cams links, at most webcams.max_named_cams cams (Webcams and jobs)
   jobs: { links: [JobLink], feed: boolean,          // jobs links by role group; employers in jobs/employers.json
-          hiring_window: { text, source_id, as_of, confidence, note } | null } | null,   // null without links and window
+          hiring_window: { text, source_id, as_of, confidence, note,
+                           start_month: "YYYY-MM" | null, end_month: "YYYY-MM" | null } | null } | null,
+                                                   // null without links and window; months read from the text
+                                                   // by pipeline/hiring.py, both null when it is not explicit
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
 }
@@ -205,11 +208,13 @@ Slim national index the map loads first. Compact JSON, one row per resort as an 
 { version, generated_at,                 // copied from resorts.json
   fields: ["id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
            "acres", "size_rank", "climate_available", "detail_available", "webcams_available", "jobs_available",
-           "season_length_days", "snowfall_annual_in", "lucrativeness_mid"],
+           "season_length_days", "snowfall_annual_in", "lucrativeness_mid", "hiring_window", "job_employers"],
   resorts: [[...], ...] }
 ```
 Every value is copied from `resorts.json` (`acres` is `size.acres.value`; `webcams_available` is `webcams != null`,
-`jobs_available` is `jobs.links` not empty) and `resorts.geojson` (`size_rank` and the four
+`jobs_available` is `jobs.links` not empty, `hiring_window` is `[start_month, end_month]` of `jobs.hiring_window` or
+null, `job_employers` is the sorted ids of the linked employers that have a feed in `jobs/employers.json`, every linked
+employer when that file is absent, null when `jobs.feed` is false) and `resorts.geojson` (`size_rank` and the four
 recolor values); without `resorts.geojson`, `size_rank` uses `display.size_rank_acres_breaks` and the recolor values
 come from `resorts.json` as in the `resorts.geojson` rules, with `snowfall_annual_in` null. Resorts with an unsafe id or
 no coordinates are left out. About 16 KB gzipped against 87 KB for `resorts.json` plus 21 KB for `resorts.geojson`.
@@ -227,6 +232,47 @@ Each resort page under `/map/` carries `<script type="application/json" id="reso
 `{ version, generated_at, resort: <its resorts.json record>, sources: [<the sources listed in resort.sources>] }`
 (every `<` escaped as `<`; an editorial block that is not `reviewed` is dropped). The panel validates it with the
 same Zod schema as `resorts.json` and renders the resort without waiting for the full file.
+
+### Share cards (`images/share/`, written by `pipeline/share.py`)
+`pipeline/routes.py` calls `share.write_cards` with every page's canonical URL. Each cluster page and each Tier A
+resort page gets a 1200 x 630 PNG card; its stubs (every state copy) set
+`og:image` (`https://instructorgrindset.com/images/share/...`), `og:image:width` 1200, `og:image:height` 630,
+`og:image:alt` and `twitter:card` `summary_large_image`. **Tier B resort pages, state pages and `/map/` keep the site
+logo** (`/images/ig-logo.png`, `twitter:card` `summary`): about 415 Tier B cards would add roughly 11 MB to the
+repository for pages that are not in the sitemap.
+```
+images/share/{state}/{cluster}.png              // cluster card; state = the cluster's canonical state
+images/share/{state}/{cluster}/{resort}.png     // Tier A resort card; state = the resort's canonical state
+images/share/.cards.json                        // { generated_by, note, cards: { "<path>": key } } (dotfile; Jekyll skips it)
+```
+* **Content.** The site name "Instructor Grindset Career Map" with the favicon mark; an eyebrow ("Tier A ski area",
+  "Tier A indoor ski facility", "Tier A year round training center", or "Cluster"); the resort or cluster name
+  (Inter Bold, 88 px down to 38 px, up to 4 lines, then an ellipsis); the cluster and state ("I 70 Corridor,
+  Colorado"; the state alone for an `other-` cluster or one named after its state; for a cluster, its states); and
+  a map panel: the focus state outline(s) from `us-states.geojson` with neighbouring states, the cluster polygon,
+  the cluster's resorts (amber Tier A, blue Tier B) and, on a resort card, the resort as a ringed amber dot.
+* **Facts.** A resort card shows up to three facts, each only when its `Sourced` value is a positive number with a
+  `source_id`: `size.acres` ("Skiable acres"), `season.length_days` ("Season length", "N days") and
+  `snow.annual_avg_in` ("Annual snowfall", "N in", the resort's own figure), each with its confidence label in the
+  badge colors. A cluster card shows its resort count and Tier A count. Heat map values, pay, lucrativeness and the
+  operator scale never reach a card (`tests/pipeline/test_share.py`).
+* **Alt text.** "Career Map card for Vail, I 70 Corridor, Colorado, with the resort marked on a map of Colorado.
+  5,317 skiable acres, 158 day season and 354 in annual snowfall." and "Career Map card for the Lake Tahoe cluster
+  in California and Nevada, with its resorts marked on a map. 20 resorts, 7 Tier A."
+* **Drawing (stdlib only).** `pipeline/raster.py` fills antialiased rings (nonzero winding, exact coverage along
+  rows, 5 samples down each pixel, 32 alpha steps) into a palette image; `Canvas.indexed` keeps the solid colors and
+  the most used blends (256 at most). Text uses vector outlines from `pipeline/fonts/inter-bold.json` and
+  `inter-regular.json` (Inter 4.0, SIL OFL 1.1, `pipeline/fonts/OFL.txt`) with advance widths and the `kern`
+  feature's pair kerning; `python -m pipeline.otf <font.otf> <out.json>` regenerates them from an Inter OTF.
+  `png.encode_indexed` writes an 8 bit palette PNG (unfiltered rows, zlib level 9). Cards average about 27 KB and
+  stay under 60 KB; 179 cards are about 5 MB.
+* **Determinism and rebuilds.** Point coordinates are rounded to 1/256 px, so the same inputs give the same bytes.
+  Each card's key hashes its plan, the state outlines and the drawing code (`share.py`, `raster.py`, `glyphs.py`,
+  `png.py`, the font files). A card is drawn only when its key differs from `.cards.json` and written only when its
+  bytes differ; cards no page uses are deleted. A first build draws all cards in about 75 s; a rebuild with no
+  change takes under a second.
+* **Fallbacks.** Without `us-states.geojson`, or when `images/share` resolves outside the site root (the browser
+  test's throwaway site links the repository's `images`), no card is written and every page keeps the logo.
 
 ### `climate/{resort_id}.json` (Phase 3, lazy loaded per resort)
 ```
@@ -443,7 +489,8 @@ where a public board exists. Cams, streams and job pages are linked in a new tab
 * `Resort.webcams` (cams trimmed to `webcams.max_named_cams`, 4) and `Resort.jobs` (`links` ordered ski_school,
   coaching, management, corporate, all, file order within a group; `feed` true when a linked employer has a public
   board). Their sources join `resort.sources`, so stubs embed them; `map-index.json` gains `webcams_available` and
-  `jobs_available`.
+  `jobs_available`, plus `hiring_window` and `job_employers` for the Hiring now filter.
+* `Resort.jobs.hiring_window.start_month` and `end_month` (`pipeline/hiring.py`, see "Hiring now filter" below).
 * `jobs/employers.json`: `{ version, generated_at, employers: [Employer + { feed, board_url }] }`, every employer once
   (parent companies are not repeated per resort). `board_url` is the public board page when `feed` is true:
   `https://boards.greenhouse.io/{board}`, `https://jobs.lever.co/{board}`, `https://careers.smartrecruiters.com/{board}`,
@@ -513,6 +560,32 @@ closes it when none are; it never commits.
 * Cluster panel: a "Hiring" section after the resort list, when postings exist for its resorts: each employer (link
   to its board) with a Published badge and "N open roles", then "Updated <date>.". The resort list adds "Live cams".
 * Zod: `Webcams`, `Jobs`, `PostingsFile` in `schemas.js`; a bad item drops only that item, a bad block only the block.
+
+### Hiring now filter (ROADMAP item 13; `pipeline/hiring.py`, `map/js/data.js`, `map/js/app.js`)
+* Window months (`parse_window`): the build reads `start_month` and `end_month` from a hiring window's text only when
+  the text is explicit about both. The start is the date a posting or the applications opened ("Instructor posting
+  opened July 1, 2026", "Posted July 1, 2026", "applications open August 15"), or else a statement that hiring is open
+  ("Hiring is rolling", "Posting open and still accepting applications", "Now hiring"), which counts from the month of
+  the window's `as_of`. The end is an application deadline ("applications are accepted until December 15", "apply by")
+  or the job's own start date ("target start of", "estimated start", "start date is", "positions begin in").
+  A date without a year takes it from the other end (an end falls on or after the start). Unparsed (both null):
+  season or employment dates, arrival dates, words in place of a month ("early fall", "once the snow flies"), hedged
+  dates ("roughly November 23"), two different starts or ends, no year anywhere, an end before the start, and a span
+  over `jobs.hiring_windows.max_months` (9). Month names must be capitalized ("may" is never a month). The text, its
+  source, `as_of` and confidence stay as they are. On 2026-10-13: 9 of 27 windows parse (Vail, Hunter, Mount Snow,
+  Stowe, Liberty, Arapahoe Basin, Sunday River, Sugarloaf, Copper). Tests: `tests/pipeline/test_hiring.py`.
+* A resort is hiring now when (a) `jobs/postings.json` has an open role at one of its `job_employers` (a board in
+  `boards`, an https url) that names this resort or no single resort, or (b) its `hiring_window` months cover the
+  viewer's current month (both ends included).
+* Chip: a fourth button, "Hiring now (N)", after All, Ski areas and Indoor and training (group label "Filter
+  resorts"); it filters the map (an `in` filter on resort ids over the resort and facility layers, inset included)
+  and the list view like the others and is announced ("Showing N resorts hiring now."). At N = 0 it stays visible with
+  `aria-disabled="true"` and the title "No resort lists an open role or a hiring window for this month."; a click only
+  announces that. Phones scroll the chip row sideways.
+* Cost: at startup N comes from the slim index alone (windows; a loop over the rows, no request). Once the window
+  `load` event and the first paint have passed, at idle, `jobs/postings.json` loads (only when some row has
+  `job_employers`), is checked by hand (no Zod) and adds the open roles; the panel's `loadPostings` reuses the same
+  request. The feed is empty today, so the count is the windows alone.
 
 ## Trail map (OpenSkiMap runs)
 
@@ -683,7 +756,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   contentful paint. The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
-  `jobs/postings.json` loads once, only for a resort whose `jobs.feed` is true or a cluster with `jobs_available`
+  `jobs/postings.json` loads once, after the first paint at idle for the Hiring now count (when some resort has
+  `job_employers`), and Zod validates it only for a resort whose `jobs.feed` is true or a cluster with `jobs_available`
   resorts; `livelinks.js` (about 3 KB gzipped, no Zod) loads with `panel.js`. `search.js` loads on the first focus of
   the search box.
 * **Budget method** (`tests/map/audit.mjs`): Playwright with Chromium under SwiftShader, CDP network throttling
@@ -926,6 +1000,8 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
 * `data/raw/ownership/*.yaml`: verified Vail and Alterra US portfolios with sources. Every listed resort needs a Tier A record (operator compensation).
+  Every source an entry cites must be younger than one build cycle (`ownership.max_source_age_days`, 400 days), else
+  the build fails (see "Refreshing the ownership sources").
 * `data/raw/facts/*.yaml`: season, snowfall and size facts for every resort (Resort facts overlay above).
 * `data/raw/webcams/*.yaml`, `data/raw/jobs/*.yaml`: live cams and jobs links (Webcams and jobs above).
 * `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
@@ -971,6 +1047,28 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
   in `download/` (gitignored). About 345 KB and 170 KB. The build only shapes the snowfall field with it; no height
   is displayed.
 
+## Refreshing the ownership sources (yearly, ROADMAP item 17)
+
+Ownership is verified from the companies' own sites or filings each build cycle (CLAUDE.md). One build cycle is
+`ownership.max_source_age_days` in `config/definitions.yaml` (400 days: a year plus a month of slack).
+`tier_a.ownership_source_age_check` measures each source that an entry of `data/raw/ownership/vail.yaml` or
+`alterra.yaml` cites, from its `accessed_date` to the build date (`SOURCE_DATE_EPOCH` when set, else today), and the
+build fails with one line per stale source: the file, the source id, its `accessed_date`, its age and the limit.
+Tests: `tests/pipeline/test_tier_a.py` (fresh passes, stale fails, the limit pinned in `tests/pipeline/test_config.py`).
+
+1. **Open** the current portfolio pages. Vail Resorts: the latest Form 10-K on SEC EDGAR (company 0000812011,
+   Item 1 Business and Item 2 Properties; filed after the fiscal year that ends July 31) and the resort list on
+   `https://www.vailresorts.com/`. Alterra Mountain Company: its own destinations page (`alterramtnco.com`, which
+   redirects to `alterramtn.co`); until that page is reachable from the research environment, the Wikipedia list of
+   resorts and each resort's infobox stay the cited secondary sources, as the header of `alterra.yaml` explains.
+2. **Update** `data/raw/ownership/<operator>.yaml`: add resorts the operator bought and remove resorts it sold (US
+   only); point each source at the current page (a new 10-K has a new url and title) and set `accessed_date` to the
+   day you opened it; set `verified_date` to the same day; keep the notes factual. A new resort needs a Tier A record
+   (operator compensation, `missing_tier_a_record: fail`); a sold resort's Tier A record needs its new `owner`.
+3. **Rerun** `python pipeline/build.py` (the ownership cross check and the age check), then `python -m pytest -q`, and
+   read the ownership section of `docs/map/tier-a-draft.md`. Commit the ownership files with the rebuilt
+   `data/build`.
+
 ## Pipeline layout
 
 ```
@@ -979,10 +1077,15 @@ pipeline/
   schemas/            # Pydantic models for every entity in this file
   sources.py          # source registry, validation of source_id references
   openskimap.py       # fetch + filter US operating downhill areas (Tier B)
-  tier_a.py           # load data/raw/tier_a + ownership, merge with OpenSkiMap
+  tier_a.py           # load data/raw/tier_a + ownership (cross check, source age), merge with OpenSkiMap
   clusters.py         # cluster assignment and polygon generation
   states.py           # us-atlas to us-states.geojson
   routes.py           # deep link stubs under /map/, data/build/map-index.json
+  share.py            # share cards images/share/*.png for cluster and Tier A resort pages (og:image)
+  raster.py           # stdlib antialiased polygon rasterizer into a palette image (share cards)
+  glyphs.py           # vector text from pipeline/fonts/*.json: layout, kerning, wrapping (share cards)
+  otf.py              # one time OpenType CFF reader that writes pipeline/fonts/*.json
+  fonts/              # Inter Bold and Regular outlines (SIL OFL 1.1, OFL.txt)
   career.py           # Phase 4 pay display, staleness, lucrativeness (professionalism model internal only)
   lifts.py            # Phase 5 OpenSkiMap lifts for Tier A resorts
   runs.py             # Trail map: OpenSkiMap runs for Tier A resorts
@@ -997,11 +1100,12 @@ pipeline/
   links.py            # shared loader for the link only batches (webcams, jobs)
   webcams.py          # live webcam links -> Resort.webcams
   jobs.py             # jobs links and employers -> Resort.jobs, jobs/employers.json, empty jobs/postings.json
+  hiring.py           # hiring window text -> start and end month (the Hiring now filter)
   jobs_feed.py        # daily open postings from public job board APIs -> jobs/postings.json (GitHub Actions)
   link_check.py       # monthly check of trail map, webcam and jobs links (GitHub Actions issue)
   heat.py             # Heat maps: snowfall rasters and isolines (NOAA and SNOTEL stations shaped by the terrain,
                       # plus resort pockets), season rasters
-  png.py              # Minimal stdlib PNG writer and reader (heat rasters, terrain grid and tiles)
+  png.py              # Minimal stdlib PNG writer and reader (heat rasters, terrain grid and tiles, palette cards)
   terrain.py          # Terrain grid for the snowfall field (AWS Terrain Tiles -> data/raw/terrain)
   climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation); noaa_normals.py (NOAA station normals);
                       # snotel_stations.py (SNOTEL station annual snowfall for the snowfall heat map)

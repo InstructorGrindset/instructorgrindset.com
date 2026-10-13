@@ -13,7 +13,9 @@ no heat map value, no pay, and never the operator scale (owner decision 2026-10-
 Cards are written to ``images/share/<state>/<cluster>/<resort>.png`` and ``images/share/<state>/<cluster>.png``
 (the canonical state), served as static files. ``images/share/.cards.json`` maps each card to a key over its
 inputs and the code that draws it; a card is drawn only when its key changed and written only when its bytes
-changed, so rebuilds leave unchanged PNGs alone. Cards no page uses are removed.
+changed, so rebuilds leave unchanged PNGs alone. Cards no page uses are removed. Without
+``us-states.geojson``, or when ``images/share`` resolves outside the site root (a test site that links the
+repository's images folder), no card is written and every page keeps the logo.
 
     python -m pipeline.share   # rewrite the cards for the current data/build (routes.py does this too)
 """
@@ -349,7 +351,8 @@ def render(card: dict, states: dict[str, Any]) -> bytes:
     draw_brand(cv, bold)
     draw_text(cv, card, bold, regular)
     draw_map(cv, card["map"], states)
-    return png.encode_indexed(WIDTH, HEIGHT, cv.px, cv.palette)
+    pixels, palette = cv.indexed()
+    return png.encode_indexed(WIDTH, HEIGHT, pixels, palette)
 
 
 # ── Writing ──
@@ -394,10 +397,13 @@ def write_cards(repo_root: Path, canonicals: Iterable[str], log=None) -> dict[st
         log("share: images/share resolves outside the site root; pages keep the site logo")
         return {}
     build = repo_root / "data" / "build"
-    plans = plan_cards(build, canonicals)
     geo = _load(build, "us-states.geojson") or {}
     states = {f["properties"]["code"].upper(): f.get("geometry") for f in geo.get("features", [])
               if isinstance(f.get("properties"), dict) and f["properties"].get("code")}
+    if not states:
+        log("share: data/build/us-states.geojson is missing; pages keep the site logo")
+        return {}
+    plans = plan_cards(build, canonicals)
     manifest_path = out / MANIFEST
     try:
         old = json.loads(manifest_path.read_text(encoding="utf-8")).get("cards", {})

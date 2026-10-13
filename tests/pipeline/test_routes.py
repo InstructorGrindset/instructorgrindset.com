@@ -438,6 +438,33 @@ def test_map_index_skips_unsafe_ids_and_missing_coordinates(site: Path):
     assert "../evil" not in rows and "no-coords" not in rows
 
 
+def test_map_index_carries_hiring_window_months_and_feed_employers(site: Path):
+    """The Hiring now filter reads the slim index: window months and the employers whose board feeds postings.json."""
+    resorts, clusters, states = default_data()
+    cite = {"source_id": "src-a", "as_of": "2026-10-11", "confidence": "estimated", "note": None}
+    link = lambda e: {"employer_id": e, "role_group": "all", "disciplines": [], "label": "Jobs",  # noqa: E731
+                      "url": f"https://example.com/{e}", **cite}
+    resorts[0]["jobs"] = {"links": [link("feed-co"), link("plain-co")], "feed": True, "hiring_window": {
+        "text": "Posted July 1, 2026; positions begin in December.", **cite, "start_month": "2026-07", "end_month": "2026-12"}}
+    resorts[1]["jobs"] = {"links": [link("plain-co")], "feed": False, "hiring_window": {
+        "text": "Hiring for winter work starts in early fall.", **cite, "start_month": None, "end_month": None}}
+    write_build(site, resorts, clusters, states)
+    generate_routes(site)
+    rows, data = _index_rows(site)
+    assert data["fields"][-2:] == ["hiring_window", "job_employers"]
+    # without jobs/employers.json every linked employer of a feed resort is listed
+    assert rows["alpha-peak"]["hiring_window"] == ["2026-07", "2026-12"]
+    assert rows["alpha-peak"]["job_employers"] == ["feed-co", "plain-co"]
+    assert rows["bravo-bowl"]["hiring_window"] is None and rows["bravo-bowl"]["job_employers"] is None
+    assert rows["lake-west"]["hiring_window"] is None and rows["lake-west"]["job_employers"] is None
+    (site / "data" / "build" / "jobs").mkdir()
+    (site / "data" / "build" / "jobs" / "employers.json").write_text(json.dumps({**_env(), "employers": [
+        {"id": "feed-co", "feed": True}, {"id": "plain-co", "feed": False}]}))
+    generate_routes(site)
+    rows, _ = _index_rows(site)
+    assert rows["alpha-peak"]["job_employers"] == ["feed-co"]
+
+
 def test_map_index_idempotent(site: Path):
     generate_routes(site)
     path = site / "data" / "build" / "map-index.json"

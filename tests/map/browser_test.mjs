@@ -1110,6 +1110,18 @@ async function realData(browser, base) {
       }
       await page.locator('.recolor-modes .filter-btn[data-mode="lucrativeness"]').hover();
       await shot(page, 'real-desktop-recolor-disabled.png');
+      // Hiring now with the real build: with an empty feed the count is the windows whose months cover this month.
+      const idx = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'map-index.json'), 'utf8'));
+      const feed = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'jobs', 'postings.json'), 'utf8'));
+      const now = new Date();
+      const month = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+      const hw = idx.fields.indexOf('hiring_window');
+      const windows = idx.resorts.filter((r) => r[hw] && r[hw][0] <= month && month <= r[hw][1]).length;
+      await page.waitForFunction(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/jobs/postings.json')), null, { timeout: 15000 }).catch(() => {});
+      await page.waitForTimeout(300);
+      const chipText = await page.locator('#facility-filter .filter-btn[data-filter="hiring"]').innerText();
+      check(feed.postings.length ? /^Hiring now \(\d+\)$/.test(chipText) : chipText === `Hiring now (${windows})`,
+        `real data: ${chipText} (${idx.resorts.filter((r) => r[hw]).length} parsed hiring windows, ${feed.postings.length} postings)`);
       // Each heat mode with the real build: continuous coverage across the lower 48 and the Alaska inset.
       const REAL_BETWEEN = [[-116.5, 39.5], [-98.5, 38.5], [-99.0, 31.5], [-84.0, 32.5], [-108.0, 47.5], [-150.0, 64.5]];
       for (const [mode, prop] of Object.entries(props)) {
@@ -1490,9 +1502,12 @@ async function hiringChecks(browser, base) {
     }
     const page = await ctx.newPage();
     const w = watch(page, `hiring now ${iso.slice(0, 10)}${empty ? ' empty feed' : ''}`);
+    // The fixed clock also empties the performance timeline, so wait on the response itself (the paint wait then
+    // falls back to its timer).
+    const postings = page.waitForResponse((r) => r.url().includes('/jobs/postings.json'), { timeout: 20000 });
     await page.goto(`${base}/map/${Q}`);
     await ready(page, { start: false });
-    await page.waitForFunction(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/jobs/postings.json')), null, { timeout: 15000 });
+    await postings;
     await page.waitForTimeout(300);
     return { ctx, page, w, chip: page.locator('#facility-filter .filter-btn[data-filter="hiring"]') };
   };
@@ -1525,6 +1540,21 @@ async function hiringChecks(browser, base) {
   await page.waitForTimeout(300);
   const all = await page.evaluate(() => new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'] }).map((f) => f.properties.id)).size);
   check(all > 3, `All brings every resort back (${all} on screen)`);
+  // The rule itself (map/js/data.js hiringNowIds) on synthetic rows: which postings and windows count.
+  const unit = await page.evaluate(async () => {
+    const { hiringNowIds } = await import('/map/js/data.js');
+    const R = (id, hiring_window, job_employers) => ({ id, hiring_window, job_employers });
+    const rows = [R('named', null, ['emp']), R('wide', null, ['wide-co']), R('other', null, ['emp']), R('no-board', null, ['ghost']),
+      R('http', null, ['plain']), R('win', ['2026-09', '2026-10'], null), R('next', ['2026-11', '2027-02'], null), R('none', null, null)];
+    const P = (employer_id, resort_ids, url = 'https://jobs.example.test/1') => ({ employer_id, resort_ids, url });
+    const feed = { boards: [{ employer_id: 'emp' }, { employer_id: 'wide-co' }, { employer_id: 'plain' }],
+      postings: [P('emp', ['named']), P('wide-co', []), P('ghost', ['no-board']), P('plain', ['http'], 'http://jobs.example.test/2'), P('emp', ['elsewhere'])] };
+    const at = (d) => [...hiringNowIds(rows, feed, new Date(d))].sort();
+    return { oct: at('2026-10-31T12:00:00'), nov: at('2026-11-01T12:00:00'), noFeed: [...hiringNowIds(rows, null, new Date('2026-12-15T12:00:00'))] };
+  });
+  check(JSON.stringify(unit.oct) === JSON.stringify(['named', 'wide', 'win']) && JSON.stringify(unit.nov) === JSON.stringify(['named', 'next', 'wide'])
+    && JSON.stringify(unit.noFeed) === JSON.stringify(['next']),
+  `rule: a role naming the resort or no resort counts; another resort's role, an employer without a board and an http link do not; window months are inclusive (${JSON.stringify(unit)})`);
   w.assertClean();
   await ctx.close();
 

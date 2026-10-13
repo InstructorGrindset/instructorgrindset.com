@@ -2,12 +2,15 @@
 
 Shapes are lists of closed rings in pixel coordinates (x right, y down) filled with the nonzero winding rule.
 Coverage is exact along each row and sampled ``sub`` times per pixel vertically, then quantized to ``LEVELS``
-steps, so a card holds few distinct colors and fits a palette PNG. Everything is deterministic: the same calls
-give the same pixels on every machine.
+steps, so a card holds few distinct colors; ``Canvas.indexed`` reduces them to a 256 color palette for a palette
+PNG. Point coordinates are rounded to 1/256 pixel before use, so the same calls give the same pixels on every
+machine.
 """
 from __future__ import annotations
 
 import math
+from array import array
+from collections import Counter
 from typing import Iterable, Optional, Sequence
 
 Point = tuple[float, float]
@@ -84,28 +87,26 @@ def decimate(ring: Sequence[Point], min_step: float = 0.6) -> Ring:
 
 
 class Canvas:
-    """A palette image: one byte per pixel (top row first) indexing ``palette``. Blends add palette entries; past
-    256 colors a blend takes the nearest existing color, so the image always fits an 8 bit palette PNG."""
+    """An image held as palette indices (one per pixel, top row first, ``array('H')``) into ``palette``. Blends add
+    palette entries as needed; ``indexed`` reduces the palette to 256 colors for an 8 bit palette PNG."""
 
     def __init__(self, width: int, height: int, background: Color, reserve: Iterable[Color] = ()):
-        """``reserve`` lists the solid colors to place first, so they stay exact if blends fill the palette."""
+        """``reserve`` lists the solid colors, which ``indexed`` always keeps exact."""
         self.w, self.h = width, height
         self.palette: list[Color] = [tuple(background)]
         self._index: dict[Color, int] = {tuple(background): 0}
-        self.px = bytearray(width * height)
-        self.overflow = 0
+        self.px = array("H", [0]) * (width * height)
         for c in reserve:
             self.color_index(tuple(c))
+        self.reserved = len(self.palette)
 
     def color_index(self, rgb: Color) -> int:
         i = self._index.get(rgb)
         if i is None:
-            if len(self.palette) < 256:
-                i = len(self.palette)
-                self.palette.append(rgb)
-            else:
-                i = min(range(256), key=lambda k: (sum((a - b) ** 2 for a, b in zip(rgb, self.palette[k])), k))
-                self.overflow += 1
+            if len(self.palette) >= 65535:
+                raise ValueError("too many colors")
+            i = len(self.palette)
+            self.palette.append(rgb)
             self._index[rgb] = i
         return i
 
@@ -131,6 +132,7 @@ class Canvas:
             for k in range(n):
                 xa, ya = ring[k]
                 xb, yb = ring[(k + 1) % n]
+                xa, ya, xb, yb = round(xa * 256) / 256, round(ya * 256) / 256, round(xb * 256) / 256, round(yb * 256) / 256
                 if ya == yb:
                     continue
                 d = 1
@@ -165,10 +167,27 @@ class Canvas:
                 blends[key] = v
             return v
 
+        eps = 0.5 / LEVELS
+        solid_run = array("H", [solid]) * width if solid >= 0 else None
+
+        def paint(o: int, a: int, b: int, c: float) -> None:
+            """Pixels o + a to o + b - 1 at coverage c."""
+            if c > 0.999 and solid_run is not None:
+                px[o + a:o + b] = solid_run[:b - a]
+                return
+            q = top if c > 0.999 else round(alpha * c * LEVELS)
+            if q <= 0:
+                return
+            if q >= LEVELS and solid >= 0:
+                for i in range(o + a, o + b):
+                    px[i] = solid
+                return
+            for i in range(o + a, o + b):
+                px[i] = blend(px[i], min(q, LEVELS))
+
         for row in range(rows):
-            acc = [0.0] * (width + 2)
-            dif = [0.0] * (width + 2)
-            hit = False
+            acc: dict[int, float] = {}
+            ev: dict[int, float] = {}
             for s in range(sub):
                 cr = buckets[row * sub + s]
                 if not cr:
@@ -185,43 +204,60 @@ class Canvas:
                         ue = (x if x < x_hi else x_hi) - x_lo
                         if ue <= us:
                             continue
-                        hit = True
                         i0, i1 = int(us), int(ue)
                         if i0 == i1:
-                            acc[i0] += (ue - us) * inv
+                            acc[i0] = acc.get(i0, 0.0) + (ue - us) * inv
                         else:
-                            acc[i0] += (i0 + 1 - us) * inv
-                            dif[i0 + 1] += inv
-                            dif[i1] -= inv
-                            acc[i1] += (ue - i1) * inv
-            if not hit:
+                            acc[i0] = acc.get(i0, 0.0) + (i0 + 1 - us) * inv
+                            ev[i0 + 1] = ev.get(i0 + 1, 0.0) + inv
+                            ev[i1] = ev.get(i1, 0.0) - inv
+                            if ue > i1:
+                                acc[i1] = acc.get(i1, 0.0) + (ue - i1) * inv
+            if not acc and not ev:
                 continue
             o = (y_lo + row) * self.w + x_lo
             run = 0.0
-            for i in range(width):
-                run += dif[i]
-                c = run + acc[i]
-                if c > 0.999:
-                    if solid >= 0:
-                        px[o + i] = solid
-                    else:
-                        px[o + i] = blend(px[o + i], top)
-                elif c > 0.0:
-                    q = round(alpha * c * LEVELS)
-                    if q >= LEVELS:
-                        px[o + i] = blend(px[o + i], LEVELS) if solid < 0 else solid
-                    elif q > 0:
-                        px[o + i] = blend(px[o + i], q)
+            prev = -1
+            # Coverage changes only at these pixels; between them it is constant (run).
+            for idx in sorted(set(acc) | set(ev)):
+                if idx - prev > 1 and run > eps:
+                    paint(o, prev + 1, min(idx, width), run)
+                run += ev.get(idx, 0.0)
+                c = run + acc.get(idx, 0.0)
+                if idx < width and c > eps:
+                    paint(o, idx, idx + 1, c)
+                prev = idx
 
     def rect(self, x0: int, y0: int, x1: int, y1: int, color: Color) -> None:
         """Fill a pixel aligned rectangle with an opaque color."""
         x0, y0, x1, y1 = max(0, x0), max(0, y0), min(self.w, x1), min(self.h, y1)
         if x0 >= x1:
             return
-        run = bytes([self.color_index(tuple(color))]) * (x1 - x0)
+        run = array("H", [self.color_index(tuple(color))]) * (x1 - x0)
         for y in range(y0, y1):
             o = y * self.w + x0
             self.px[o:o + len(run)] = run
 
     def rgb(self, x: int, y: int) -> Color:
         return self.palette[self.px[y * self.w + x]]
+
+    def indexed(self, max_colors: int = 256) -> tuple[bytes, list[Color]]:
+        """(one byte per pixel, palette of at most ``max_colors``). Keeps the reserved colors and then the most
+        used colors; every other color maps to its nearest kept color (ties to the lower index)."""
+        used = Counter(self.px)
+        if len(self.palette) <= max_colors:
+            return bytes(self.px.tolist()), list(self.palette)
+        reserved = [i for i in range(self.reserved) if i in used or i == 0]
+        rest = sorted((i for i in used if i >= self.reserved), key=lambda i: (-used[i], i))
+        kept = sorted(reserved + rest[:max_colors - len(reserved)])
+        pal = [self.palette[i] for i in kept]
+        lookup = [0] * len(self.palette)
+        for n, i in enumerate(kept):
+            lookup[i] = n
+        keep = set(kept)
+        for i in used:
+            if i not in keep:
+                r, g, b = self.palette[i]
+                lookup[i] = min(range(len(pal)), key=lambda n: ((pal[n][0] - r) ** 2 + (pal[n][1] - g) ** 2
+                                                                + (pal[n][2] - b) ** 2, n))
+        return bytes(map(lookup.__getitem__, self.px)), pal

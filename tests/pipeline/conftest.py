@@ -14,6 +14,17 @@ FIXTURES = Path(__file__).parent / "fixtures"
 FETCHED = dt.date(2026, 10, 1)
 
 
+# Builds in tests run on a fixed date unless a test sets its own, so date checks (the ownership source age, one build
+# cycle from the fixture sources accessed 2026-10-01) give the same answer every day.
+PINNED_BUILD_EPOCH = "1791892800"  # 2026-10-13T12:00:00Z
+
+
+@pytest.fixture(autouse=True)
+def _pinned_build_date(monkeypatch):
+    if "SOURCE_DATE_EPOCH" not in os.environ:
+        monkeypatch.setenv("SOURCE_DATE_EPOCH", PINNED_BUILD_EPOCH)
+
+
 @pytest.fixture
 def cfg():
     return load_config(REPO_ROOT / "config")

@@ -3,7 +3,8 @@
 GitHub Pages has no rewrites, so every deep link needs a real file. Each page is
 a copy of /map/index.html with:
 
-* its own <title>, meta description, canonical URL and Open Graph tags,
+* its own <title>, meta description, canonical URL and Open Graph tags (cluster and Tier A
+  resort pages point og:image at their share card from pipeline/share.py; the others keep OG_IMAGE),
 * JSON-LD (SkiResort with geo for resorts, CollectionPage with an ItemList for
   states and clusters, plus a BreadcrumbList),
 * prerendered summary HTML from data/build between the `prerender` markers, so
@@ -462,6 +463,7 @@ class Page:
     jsonld: dict = field(default_factory=dict)
     record: Optional[dict] = None
     in_sitemap: bool = True
+    image: Optional[dict] = None  # share card {url, width, height, alt} (pipeline/share.py); None keeps OG_IMAGE
 
 
 def _load(build: Path, name: str, optional: bool = False):
@@ -681,6 +683,36 @@ def _jsonld_script(data: dict) -> str:
     return f'<script type="application/ld+json">{raw}</script>'
 
 
+OG_IMAGE_RE = re.compile(r'(<meta\s+property="og:image"\s+content=")[^"]*("\s*/?>)', re.S)
+TWITTER_CARD_RE = re.compile(r'(<meta\s+name="twitter:card"\s+content=")[^"]*(")', re.S)
+
+
+def _image_meta(out: str, image: dict) -> str:
+    """Point og:image at the page's share card, add its size and alt text, and use the large Twitter card."""
+    extra = (f'<meta property="og:image:width" content="{int(image["width"])}" />\n'
+             f'  <meta property="og:image:height" content="{int(image["height"])}" />\n'
+             f'  <meta property="og:image:alt" content="{html.escape(image["alt"])}" />')
+    if OG_IMAGE_RE.search(out):
+        out = OG_IMAGE_RE.sub(lambda m: f"{m.group(1)}{html.escape(image['url'])}{m.group(2)}\n  {extra}", out, count=1)
+    else:
+        out = out.replace("</head>", f'  <meta property="og:image" content="{html.escape(image["url"])}" />\n  {extra}\n</head>', 1)
+    if TWITTER_CARD_RE.search(out):
+        return TWITTER_CARD_RE.sub(lambda m: f"{m.group(1)}summary_large_image{m.group(2)}", out, count=1)
+    return out.replace("</head>", '  <meta name="twitter:card" content="summary_large_image" />\n</head>', 1)
+
+
+def _share_cards(repo_root: Path, pages: dict[str, Page]) -> None:
+    """Attach a share card to every cluster and Tier A resort page (pipeline/share.py writes the PNGs)."""
+    try:
+        from pipeline import share  # noqa: PLC0415
+    except ImportError:  # run as python pipeline/routes.py
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        from pipeline import share  # noqa: PLC0415
+    cards = share.write_cards(repo_root, {p.canonical for p in pages.values()})
+    for p in pages.values():
+        p.image = cards.get(p.canonical)
+
+
 def render_stub(template: str, page: Page) -> str:
     title, description = page.title, page.description
     url = SITE + page.canonical
@@ -690,6 +722,8 @@ def render_stub(template: str, page: Page) -> str:
     og = {"title": title.split(" • ")[0], "description": description, "url": url}
     for key, rx in OG_RE.items():
         out = rx.sub(lambda m, v=og[key]: f"{m.group(1)}{html.escape(v)}{m.group(2)}", out, count=1)
+    if page.image:
+        out = _image_meta(out, page.image)
     if page.body:
         out = PRERENDER_RE.sub(lambda m: f"{m.group(1)}\n{page.body}\n{m.group(2)}", out, count=1)
     if page.jsonld:
@@ -789,6 +823,7 @@ def generate_routes(repo_root: Path, sitemap: bool = True) -> int:
     build = repo_root / "data" / "build"
     pages = plan_pages(build)
     write_map_index(build)
+    _share_cards(repo_root, pages)
 
     manifest_path = map_dir / MANIFEST_NAME
     previous: set[str] = set()

@@ -233,6 +233,20 @@ def test_ownership_failure_blocks_build(repo_root, raw_dir, out, tmp_path):
         _run(repo_root, raw_dir, out, tmp_path)
 
 
+def test_stale_ownership_source_blocks_build(repo_root, raw_dir, out, tmp_path, monkeypatch, cfg):
+    # The fixture portfolio source was accessed 2026-10-01; one build cycle later plus a day, the build stops.
+    import datetime as dt
+    limit = cfg.definitions.ownership.max_source_age_days
+    day = dt.datetime(2026, 10, 1, 12, tzinfo=dt.timezone.utc) + dt.timedelta(days=limit + 1)
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", str(int(day.timestamp())))
+    with pytest.raises(BuildError, match=r"the Vail Resorts ownership source 'fixture-owner-list' was accessed on "
+                                         rf"2026-10-01, {limit + 1} days before this build"):
+        _run(repo_root, raw_dir, out, tmp_path)
+    # on the last day of the cycle it still builds
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", str(int((day - dt.timedelta(days=1)).timestamp())))
+    _run(repo_root, raw_dir, out, tmp_path)
+
+
 def test_strict_ownership_check_blocks_build(repo_root, raw_dir, out, tmp_path):
     with pytest.raises(BuildError, match="Fixture Ridge \\(CO\\) is in the ownership file but has no Tier A record"):
         _run(repo_root, raw_dir, out, tmp_path, config_dir=_config_dir(repo_root, tmp_path, "fail"))
