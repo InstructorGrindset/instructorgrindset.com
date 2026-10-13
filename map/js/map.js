@@ -2,6 +2,7 @@
 import { config, prefersReducedMotion } from './config.js';
 import { h } from './ui.js';
 import { viewFrame, clampPadding as clampTo } from './camera.js';
+import { INSET_STATE, HIDDEN_CODES, insetFeatures, insetFrame, insetCorners } from './inset.js';
 import {
   addDetailLayers, setDetailData, showSiteCommutes, setGroupVisible, detailBounds, groupsWithData,
 } from './detailmap.js';
@@ -70,6 +71,7 @@ const DEFAULT_ICON = ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', '
 
 const FACILITY_LAYER = {
   id: 'resorts-facility', type: 'symbol', source: 'resorts',
+  // (an inset copy of this layer reads the inset-resorts source)
   filter: ['!', IS_SKI_AREA],
   layout: {
     'icon-image': DEFAULT_ICON,
@@ -88,6 +90,11 @@ function buildStyle(index) {
       states: { type: 'geojson', data: index.geo.usStates, promoteId: 'code' },
       clusters: { type: 'geojson', data: index.geo.clusters, promoteId: 'id' },
       resorts: { type: 'geojson', data: index.geo.resorts, promoteId: 'id' },
+      // Alaska inset (national view only): moved copies of its outline, clusters and resorts.
+      'inset-states': { type: 'geojson', data: { type: 'FeatureCollection', features: [] } },
+      'inset-clusters': { type: 'geojson', data: insetFeatures(index.geo.clusters.features.filter((f) => f.properties.ak)) },
+      'inset-resorts': { type: 'geojson', data: insetFeatures(index.geo.resorts.features.filter((f) => f.properties.state === INSET_STATE)) },
+      'inset-frame': { type: 'geojson', data: insetFrame() },
     },
     layers: [
       { id: 'background', type: 'background', paint: { 'background-color': C.background } },
@@ -147,9 +154,22 @@ function buildStyle(index) {
           'circle-stroke-opacity': ['case', fs('dim'), 0.3, 1],
         },
       },
+      { id: 'inset-frame', type: 'line', source: 'inset-frame', paint: { 'line-color': C.stateLine, 'line-width': 1, 'line-dasharray': [3, 2] } },
+      { id: 'inset-states-fill', type: 'fill', source: 'inset-states', paint: { 'fill-color': C.stateFillActive } },
+      { id: 'inset-states-line', type: 'line', source: 'inset-states', paint: { 'line-color': C.stateLine, 'line-width': 0.8 } },
+      { id: 'inset-clusters-fill', type: 'fill', source: 'inset-clusters', paint: { 'fill-color': C.cluster, 'fill-opacity': ['case', ['boolean', ['get', 'fallback'], false], 0, 0.08] } },
+      { id: 'inset-clusters-line', type: 'line', source: 'inset-clusters', filter: ['!=', ['get', 'fallback'], true], paint: { 'line-color': C.cluster, 'line-opacity': 0.5, 'line-width': 1 } },
+      {
+        id: 'inset-resorts', type: 'circle', source: 'inset-resorts', filter: IS_SKI_AREA,
+        layout: { 'circle-sort-key': ['get', 'tier_a'] },
+        paint: { 'circle-radius': radius(), ...DEFAULT_PAINT, 'circle-opacity': ['case', ['==', ['get', 'tier'], 'A'], 1, 0.85] },
+      },
     ],
   };
 }
+
+const INSET_LAYERS = ['inset-frame', 'inset-states-fill', 'inset-states-line', 'inset-clusters-fill', 'inset-clusters-line', 'inset-resorts', 'inset-resorts-facility'];
+const NOT_HIDDEN = ['!', ['in', ['get', 'code'], ['literal', HIDDEN_CODES]]];
 
 export function createMap(container, index, maplibregl, { onPick, getPadding }) {
   if (!maplibregl) throw new Error('MapLibre failed to load');
@@ -203,6 +223,8 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     const cluster = view.clusterId ? index.clusters.get(view.clusterId) : null;
     if (state) setFS('states', state.code, { selected: true });
     map.setFilter('states-line-selected', ['==', ['get', 'code'], state ? state.code : '']);
+    national = view.level === 'national';
+    syncLayers();
 
     let focusResorts = null;
     if (cluster) {
@@ -266,7 +288,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       const stop = map.queryRenderedFeatures(lb, { layers: layersIn(['detail-transit-stop']) });
       if (stop.length) return { kind: 'stop', id: stop[0].properties.id, name: `Stop: ${stop[0].properties.name}`, passive: true };
     }
-    const c = map.queryRenderedFeatures(point, { layers: ['clusters-fill'] });
+    const c = map.queryRenderedFeatures(point, { layers: layersIn(['clusters-fill', 'inset-clusters-fill']) });
     if (c.length) {
       // Smallest cluster wins where polygons overlap.
       const best = c.map((f) => index.clusters.get(f.properties.id)).filter(Boolean)
@@ -274,7 +296,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
         .sort((a, b) => (a.fallback - b.fallback) || (area(a.bbox) - area(b.bbox)))[0];
       if (best) return { kind: 'cluster', id: best.id, name: best.name };
     }
-    const s = map.queryRenderedFeatures(point, { layers: ['states-fill'] });
+    const s = map.queryRenderedFeatures(point, { layers: layersIn(['states-fill', 'inset-states-fill']) });
     if (s.length) {
       const code = s[0].properties.code;
       if (index.states.has(code)) return { kind: 'state', id: code, name: index.states.get(code).name };
@@ -320,6 +342,9 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
   let detail = null;
   let selectedSite = null;
   let trailCtl = null;
+  let national = true;
+  let heatAK = [];     // heat layers of Alaska only regions, at true coordinates
+  let heatInset = [];  // their copies in the national inset
   let recolor = null; // { key, prop, images, format } or null for default
   let heatIds = [];
 
@@ -336,47 +361,88 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       if (map.getSource(id)) map.removeSource(id);
     }
     heatIds = [];
+    heatAK = [];
+    heatInset = [];
   }
 
   function applyRecolor() {
     if (!map.getLayer('resorts')) return;
     clearHeat();
     if (!recolor) {
-      for (const [k, v] of Object.entries(DEFAULT_PAINT)) map.setPaintProperty('resorts', k, v);
-      map.setPaintProperty('resorts', 'circle-radius', radius());
+      for (const id of ['resorts', 'inset-resorts']) {
+        for (const [k, v] of Object.entries(DEFAULT_PAINT)) map.setPaintProperty(id, k, v);
+        map.setPaintProperty(id, 'circle-radius', radius());
+      }
+      map.setPaintProperty('inset-clusters-fill', 'fill-opacity', ['case', ['boolean', ['get', 'fallback'], false], 0, 0.08]);
       map.setPaintProperty('clusters-fill', 'fill-opacity', CLUSTER_FILL_OPACITY);
       if (map.getLayer('resorts-facility')) map.setPaintProperty('resorts-facility', 'icon-opacity', ['case', fs('dim'), 0.3, 1]);
       return;
     }
     // Heat surface under the state lines, cluster outlines and resorts; one image per region.
     const before = map.getLayer('states-line') ? 'states-line' : undefined;
-    recolor.images.forEach((img, i) => {
-      const id = `heat-${recolor.key}-${i}`;
-      map.addSource(id, { type: 'image', url: img.url, coordinates: img.coordinates });
+    const raster = (id, url, coordinates, beforeId) => {
+      map.addSource(id, { type: 'image', url, coordinates });
       map.addLayer({
         id, type: 'raster', source: id,
         paint: { 'raster-opacity': 1, 'raster-resampling': 'linear', 'raster-fade-duration': 0 },
-      }, before);
+      }, beforeId);
       heatIds.push(id);
+    };
+    recolor.images.forEach((img, i) => {
+      const id = `heat-${recolor.key}-${i}`;
+      raster(id, img.url, img.coordinates, before);
+      if (img.ak) {
+        // The same image, moved into the national inset (the inset transform keeps image corners aligned).
+        heatAK.push(id);
+        raster(`${id}-inset`, img.url, insetCorners(img.coordinates), map.getLayer('inset-states-line') ? 'inset-states-line' : undefined);
+        heatInset.push(`${id}-inset`);
+      }
     });
+    syncLayers();
     // Cluster tints would shift the heat colors; outlines stay.
     map.setPaintProperty('clusters-fill', 'fill-opacity', 0);
     const isNull = ['==', ['get', recolor.prop], null];
-    map.setPaintProperty('resorts', 'circle-radius', ['interpolate', ['linear'], ['zoom'], 3, 2.2, 7, 3.4, 11, 5]);
-    map.setPaintProperty('resorts', 'circle-color', ['case', isNull, NO_DATA, HEAT_DOT.fill]);
-    map.setPaintProperty('resorts', 'circle-stroke-color', ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], HEAT_DOT.strokeA, isNull, C.background, HEAT_DOT.strokeB]);
-    map.setPaintProperty('resorts', 'circle-stroke-width', ['case', fs('hover'), 2.5, ['==', ['get', 'tier'], 'A'], 1.8, 1]);
+    for (const id of ['resorts', 'inset-resorts']) {
+      map.setPaintProperty(id, 'circle-radius', ['interpolate', ['linear'], ['zoom'], 3, 2.2, 7, 3.4, 11, 5]);
+      map.setPaintProperty(id, 'circle-color', ['case', isNull, NO_DATA, HEAT_DOT.fill]);
+      map.setPaintProperty(id, 'circle-stroke-color', ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], HEAT_DOT.strokeA, isNull, C.background, HEAT_DOT.strokeB]);
+      map.setPaintProperty(id, 'circle-stroke-width', ['case', fs('hover'), 2.5, ['==', ['get', 'tier'], 'A'], 1.8, 1]);
+    }
+    map.setPaintProperty('inset-clusters-fill', 'fill-opacity', 0);
     if (map.getLayer('resorts-facility')) map.setPaintProperty('resorts-facility', 'icon-opacity', ['case', fs('dim'), 0.3, isNull, 0.6, 1]);
   }
-  function resortLayers() { return ['resorts', 'resorts-facility'].filter((id) => map.getLayer(id)); }
-  function applyFilter() {
-    if (map.getLayer('resorts')) map.setLayoutProperty('resorts', 'visibility', filter === 'facility' ? 'none' : 'visible');
-    if (map.getLayer('resorts-facility')) map.setLayoutProperty('resorts-facility', 'visibility', filter === 'ski_area' ? 'none' : 'visible');
+  function resortLayers() { return layersIn(['resorts', 'resorts-facility', 'inset-resorts', 'inset-resorts-facility']); }
+  function applyFilter() { syncLayers(); }
+
+  /**
+   * Visibility and filters for the facility filter and the national Alaska inset: at the national view Alaska
+   * draws only in the inset; elsewhere at its true place. Territories without ski areas never draw.
+   */
+  function syncLayers() {
+    const vis = (id, on) => { if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none'); };
+    const notAK = (key) => (national ? ['!=', ['get', key], INSET_STATE] : true);
+    if (map.getLayer('states-fill')) {
+      map.setFilter('states-fill', ['all', NOT_HIDDEN, notAK('code')]);
+      map.setFilter('states-line', ['all', NOT_HIDDEN, notAK('code')]);
+    }
+    const notAKCluster = national ? ['!=', ['get', 'ak'], true] : true;
+    map.setFilter('clusters-fill', notAKCluster);
+    map.setFilter('clusters-line', ['all', ['!=', ['get', 'fallback'], true], notAKCluster]);
+    map.setFilter('clusters-line-fallback', ['all', ['==', ['get', 'fallback'], true], notAKCluster]);
+    map.setFilter('resorts', ['all', IS_SKI_AREA, notAK('state')]);
+    if (map.getLayer('resorts-facility')) map.setFilter('resorts-facility', ['all', ['!', IS_SKI_AREA], notAK('state')]);
+    vis('resorts', filter !== 'facility');
+    vis('resorts-facility', filter !== 'ski_area');
+    for (const id of INSET_LAYERS) vis(id, national);
+    if (national) { vis('inset-resorts', filter !== 'facility'); vis('inset-resorts-facility', filter !== 'ski_area'); }
+    for (const id of heatAK) vis(id, !national);
+    for (const id of heatInset) vis(id, national);
   }
 
   map.on('load', async () => {
     for (const { id, img } of await facilityImages()) if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 });
     map.addLayer(FACILITY_LAYER);
+    map.addLayer({ ...FACILITY_LAYER, id: 'inset-resorts-facility', source: 'inset-resorts', paint: { 'icon-opacity': 1 } });
     addDetailLayers(map);
     if (detail) setDetailData(map, detail);
     applyFilter();
@@ -399,7 +465,12 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     refit() { if (loaded && current) fitView(current, false); },
     /** State outlines arrive after first render. */
     setStates(fc) {
-      const apply = () => { const src = map.getSource('states'); if (src) src.setData(fc); if (current && current.stateCode) applyView(current); };
+      const apply = () => {
+        const src = map.getSource('states'); if (src) src.setData(fc);
+        const ins = map.getSource('inset-states');
+        if (ins) ins.setData(insetFeatures(fc.features.filter((f) => f.properties.code === INSET_STATE)));
+        if (current && current.stateCode) applyView(current);
+      };
       if (loaded) apply(); else map.once('load', apply);
     },
     /** Resort detail mode. Pass null to leave it. Returns the layer groups that have data. */

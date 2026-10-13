@@ -164,7 +164,9 @@ export function buildHeat(points, domain, outlines, opts = {}) {
       traceOutlines(ctx, outlines, toPx, e < 0);
       ctx.fill('evenodd');
     }
-    out.push({ url: canvas.toDataURL('image/png'), coordinates: [[w, n], [e, n], [e, s], [w, s]], width: W, height: H });
+    // `ak`: a region of Alaska resorts only, which the national view also draws in the inset.
+    out.push({ url: canvas.toDataURL('image/png'), coordinates: [[w, n], [e, n], [e, s], [w, s]], width: W, height: H,
+      ak: reg.pts.every((p) => p.state === 'AK') });
   }
   return out;
 }

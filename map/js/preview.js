@@ -3,6 +3,7 @@
 // removed when the WebGL map fires `load`. It is a picture only; the panel and list view carry the controls.
 import { config } from './config.js';
 import { viewFrame, clampPadding, resortRadius } from './camera.js';
+import { INSET_STATE, insetGeometry, insetFrameBounds, toInset } from './inset.js';
 
 const C = config.basemap.colors;
 const TILE = 512;
@@ -53,9 +54,23 @@ export function drawPreview(container, index, view, padding) {
     for (const cid of state.cluster_ids) for (const id of index.clusters.get(cid).resort_ids) focus.add(id);
   }
 
+  // National view: Alaska draws in the lower left inset, as on the WebGL map.
+  const national = view.level === 'national';
+  if (national) {
+    const [[fw, fs], [fe, fn]] = insetFrameBounds();
+    const [x0, y0] = px(fw, fn); const [x1, y1] = px(fe, fs);
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = C.stateLine;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 2]);
+    ctx.strokeRect(x0, y0, x1 - x0, y1 - y0);
+    ctx.setLineDash([]);
+  }
   for (const c of index.clusters.values()) {
     if (c.fallback) continue;
-    const g = c.geometry;
+    const ak = c.states.every((x) => x === INSET_STATE);
+    const g = national && ak ? insetGeometry(c.geometry) : c.geometry;
+    if (!g) continue;
     const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
     ctx.beginPath();
     for (const poly of polys) {
@@ -77,7 +92,7 @@ export function drawPreview(container, index, view, padding) {
   // Tier B first, Tier A on top, as on the map.
   const list = [...index.resorts.values()].sort((a, b2) => (a.tier === 'A') - (b2.tier === 'A'));
   for (const r of list) {
-    const [x, y] = px(r.lon, r.lat);
+    const [x, y] = national && r.state === INSET_STATE ? px(...toInset(r.lon, r.lat)) : px(r.lon, r.lat);
     if (x < -10 || y < -10 || x > w + 10 || y > hgt + 10) continue;
     const dim = focus && !focus.has(r.id);
     const a = r.tier === 'A';

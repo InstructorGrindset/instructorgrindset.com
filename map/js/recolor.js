@@ -46,7 +46,7 @@ export function createRecolor(root, index, { onChange, announce }) {
     if (!cache.has(m.key)) {
       cache.set(m.key, loadStateOutlines(index).catch(() => null).then((outlines) => {
         const pts = features.filter((f) => inDomain(m, f.properties[m.prop]))
-          .map((f) => ({ lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], value: f.properties[m.prop] }));
+          .map((f) => ({ lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], value: f.properties[m.prop], state: f.properties.state }));
         return buildHeat(pts, info[m.key], outlines);
       }));
     }

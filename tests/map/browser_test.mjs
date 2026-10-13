@@ -904,6 +904,48 @@ async function realData(browser, base) {
       await shot(page, 'real-desktop-recolor-disabled.png');
     }
     await shot(page, `real-${vp.name}-national.png`);
+    // Alaska inset (national view): Alaska draws as a moved copy in the lower left; territories never draw.
+    const geoAll = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'map-index.json'), 'utf8'));
+    const akCount = geoAll.resorts.filter((r) => r[geoAll.fields.indexOf('state')] === 'AK').length;
+    if (akCount) {
+      const ins = await page.evaluate(() => {
+        const m = window.__careerMap.mapCtl.map;
+        const q = (layers) => m.queryRenderedFeatures({ layers });
+        const inset = q(['inset-resorts', 'inset-resorts-facility']);
+        const frame = m.getSource('inset-frame')._data.features[0].geometry.coordinates;
+        const cont = m.getContainer().getBoundingClientRect();
+        const pts = inset.map((f) => m.project(f.geometry.coordinates));
+        const fr = frame.map((c) => m.project(c));
+        return {
+          inset: new Set(inset.map((f) => f.properties.id)).size,
+          mainAK: q(['resorts', 'resorts-facility']).filter((f) => f.properties.state === 'AK').length,
+          states: [...new Set(q(['states-fill']).map((f) => f.properties.code))],
+          insetState: q(['inset-states-fill']).length,
+          lowerLeft: pts.every((p) => p.x < cont.width * 0.35 && p.y > cont.height * 0.5),
+          inView: fr.every((p) => p.x >= 0 && p.y >= 0 && p.x <= cont.width && p.y <= cont.height),
+          first: inset[0] && { id: inset[0].properties.id, ll: inset[0].geometry.coordinates },
+        };
+      });
+      check(ins.inset === akCount && ins.mainAK === 0, `real data ${vp.name}: Alaska resorts draw only in the inset (${ins.inset} of ${akCount})`);
+      check(ins.lowerLeft && ins.inView && ins.insetState > 0, `real data ${vp.name}: the inset sits in the lower left, framed and in view`);
+      check(!ins.states.some((c) => ['PR', 'VI', 'GU', 'MP', 'AS', 'HI', 'AK'].includes(c)), `real data ${vp.name}: territories and Alaska's true shape hidden at the national view`);
+      if (vp.name === 'desktop') {
+        await shot(page, 'real-desktop-alaska-inset.png');
+        await clickMapAt(page, ins.first.ll);
+        await page.waitForURL(/\/map\/ak\//, { timeout: 10000 });
+        await mapIdle(page);
+        const after = await page.evaluate((id) => {
+          const m = window.__careerMap.mapCtl.map;
+          const r = window.__careerMap.index.resorts.get(id);
+          const c = m.getCenter();
+          return { insetHidden: m.getLayoutProperty('inset-resorts', 'visibility') === 'none', near: Math.abs(c.lng - r.lon) < 1 && Math.abs(c.lat - r.lat) < 1 };
+        }, ins.first.id);
+        check(after.insetHidden && after.near, 'real data: clicking an inset resort opens it at its true place');
+        await page.goto(`${base}/map/`);
+        await ready(page);
+        await mapIdle(page);
+      }
+    }
     if (vp.name === 'desktop' && n) {
       // Drill down through the first state, cluster and resort in the real data.
       await page.locator('.nav-list a').first().click();

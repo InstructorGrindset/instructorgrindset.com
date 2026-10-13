@@ -46,8 +46,8 @@ export const config = Object.freeze({
       ring: '#ffffff',
     },
   },
-  // Contiguous US, used for the national view.
-  nationalBounds: [[-125.0, 24.4], [-66.9, 49.5]],
+  // Contiguous US plus the Alaska inset in the lower left (inset.js), used for the national view.
+  nationalBounds: [[-125.0, 22.0], [-66.9, 49.5]],
   phoneMaxWidth: 759.98,
   desktopPanelWidth: 380,
   comparePanelWidth: 600,

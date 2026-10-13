@@ -290,7 +290,8 @@ export async function loadAll() {
     detailsReady: false,
     geo: {
       usStates: { type: 'FeatureCollection', features: [] },
-      clusters: { type: 'FeatureCollection', features: clusterFeatures.map((f) => ({ type: 'Feature', geometry: f.geometry, properties: { id: f.properties.id, name: f.properties.name, fallback: isFallbackCluster(f.properties.id) } })) },
+      // `ak` marks Alaska only clusters, drawn in the national inset (inset.js).
+      clusters: { type: 'FeatureCollection', features: clusterFeatures.map((f) => ({ type: 'Feature', geometry: f.geometry, properties: { id: f.properties.id, name: f.properties.name, fallback: isFallbackCluster(f.properties.id), ak: f.properties.states.every((x) => x === 'AK') } })) },
       resorts: { type: 'FeatureCollection', features: resortPoints },
     },
   };
