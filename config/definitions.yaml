@@ -33,9 +33,9 @@ reports:
   aggregation_min: 3
 
 submissions:
-  # URL the map report form posts to (pay, rent, housing reports). The backend is the owner's choice;
-  # the form stays hidden while this is null.
-  endpoint: null
+  # Owner decision 11: the site's existing Formspree form (the one /contact uses). The map form POSTs
+  # JSON with Accept: application/json and a _subject such as "Career Map report: <resort>".
+  endpoint: https://formspree.io/f/xyzbdqgq
 
 staleness:
   # Flag any record whose verified date is older than this.
@@ -66,8 +66,21 @@ ownership:
   # warn while research is in progress; fail once the Vail and Alterra lists are complete.
   missing_tier_a_record: fail
 
+operator_scale:
+  # Owner decision 5: the public Professionalism value ("N of 3") is the operator scale.
+  # Internal labels only; the map shows no definitions or explanation.
+  values:
+    1: family_owned
+    2: independent_business
+    3: large_corporate
+
+access:
+  # Owner decision 6: researched access rating per Tier A resort. Public labels in the UI:
+  # Convenient, Transit friendly, Mixed, Car centric.
+  ratings: [convenient, transit_friendly, mixed, car_centric]
+
 professionalism:
-  # Score from 0 to 100, weighted from the components below.
+  # Unused since owner decision 5 (kept in code). Score from 0 to 100, weighted from the components below.
   # Alexandre sets these weights in Phase 4. Do not fill them in before then.
   scale_min: 0
   scale_max: 100

@@ -75,6 +75,20 @@ class SubmissionsDefs(StrictModel):
     endpoint: Optional[str] = Field(default=None, pattern=r"^https://")
 
 
+class OperatorScaleDefs(StrictModel):
+    values: dict[int, str]
+
+    @model_validator(mode="after")
+    def _check(self) -> "OperatorScaleDefs":
+        if sorted(self.values) != [1, 2, 3]:
+            raise ValueError("operator_scale.values needs exactly 1, 2 and 3")
+        return self
+
+
+class AccessDefs(StrictModel):
+    ratings: list[Literal["convenient", "transit_friendly", "mixed", "car_centric"]]
+
+
 class StalenessDefs(StrictModel):
     max_age_months: int = Field(gt=0)
 
@@ -194,6 +208,8 @@ class Definitions(StrictModel):
     display: DisplayDefs
     reports: ReportDefs
     staleness: StalenessDefs
+    operator_scale: OperatorScaleDefs
+    access: AccessDefs
     submissions: SubmissionsDefs = Field(default_factory=SubmissionsDefs)
     matching: MatchingDefs
     openskimap: OpenSkiMapDefs

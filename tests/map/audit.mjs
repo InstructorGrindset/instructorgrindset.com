@@ -7,9 +7,9 @@
 //    throttling (4G: 150 ms RTT, 1.6 Mbps down, 750 Kbps up, 4x CPU slowdown).
 //    Interactive means the panel and the list view work (for a resort page: the full resort record is
 //    rendered) and the first map frame is on screen. The first map frame is the 2D preview that
-//    map/js/preview.js draws from the slim index; the WebGL map replaces it when MapLibre fires `load`.
-//    Times come from the page's own performance marks (navigation start = 0). The WebGL `load` time is
-//    reported next to the budget; under SwiftShader (software WebGL) it lands well after 3 s.
+//    map/js/preview.js draws from the slim index. The WebGL map starts on the first click or tap (owner
+//    decision 9); the audit clicks once the page settles and reports click to WebGL `load`.
+//    Times come from the page's own performance marks (navigation start = 0).
 // 2. The homepage makes zero requests to /map/ or /data/build/.
 // 3. axe-core on the national map, a resort page, the list view and the phone layout.
 // 4. Lighthouse (mobile defaults) on /map/ and two resort pages.
@@ -95,21 +95,25 @@ async function throttled(browser, url, label, { phone = false } = {}) {
   cdp.on('Network.loadingFinished', (e) => { bytes += e.encodedDataLength; });
   await page.goto(url, { waitUntil: 'commit' });
   await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 60000 });
-  await page.waitForFunction(() => performance.getEntriesByName('careermap:map').length > 0
+  await page.waitForFunction(() => performance.getEntriesByName('careermap:preview').length > 0
     && !document.querySelector('#panel-content[aria-busy="true"]'), null, { timeout: 60000, polling: 100 });
+  // Owner decision 9: the WebGL map starts on the first click or tap. Click once the page has settled.
+  await page.waitForTimeout(500);
+  await page.locator('#map-start').click();
+  await page.waitForFunction(() => performance.getEntriesByName('careermap:map').length > 0, null, { timeout: 60000, polling: 100 });
   const m = await page.evaluate(() => {
     const t = (n) => { const e = performance.getEntriesByName(n)[0]; return e ? Math.round(e.startTime) : null; };
     return { panel: t('careermap:panel'), panelFull: t('careermap:panel-full'), preview: t('careermap:preview'),
-      firstRender: t('careermap:first-render'), load: t('careermap:map'), fcp: t('first-contentful-paint') };
+      click: t('careermap:start-map'), firstRender: t('careermap:first-render'), load: t('careermap:map'), fcp: t('first-contentful-paint') };
   });
   const panelMs = m.panelFull ?? m.panel;
-  const frameMs = m.preview ?? m.firstRender;
+  const frameMs = m.preview;
   const interactive = Math.max(panelMs, frameMs);
   const r = { label, url, panel_ms: panelMs, first_map_frame_ms: frameMs, interactive_ms: interactive,
-    webgl_first_frame_ms: m.firstRender, webgl_load_ms: m.load, fcp_ms: m.fcp, transferred_kb: Math.round(bytes / 1024) };
+    webgl_click_to_load_ms: m.load - m.click, fcp_ms: m.fcp, transferred_kb: Math.round(bytes / 1024) };
   results.budget.push(r);
   check(interactive < 3000, `${label}: interactive in ${interactive} ms (panel ${panelMs} ms, first map frame ${frameMs} ms, ${r.transferred_kb} KB transferred)`);
-  console.log(`       WebGL map: first frame ${m.firstRender} ms, load ${m.load} ms`);
+  console.log(`       WebGL map after the click: first frame in ${m.firstRender - m.click} ms, load in ${m.load - m.click} ms`);
   await ctx.close();
 }
 
@@ -127,6 +131,7 @@ async function homepage(browser, base) {
 async function axe(browser, base) {
   const axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [HERE] }), 'utf8');
   const cases = [
+    { label: 'national map, before the map starts', url: '/map/', waiting: true },
     { label: 'national map', url: '/map/' },
     { label: 'resort page (Vail)', url: '/map/co/i70-corridor/vail/' },
     { label: 'list view', url: '/map/', list: true },
@@ -139,7 +144,12 @@ async function axe(browser, base) {
     const page = await ctx.newPage();
     await page.goto(base + c.url);
     await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 30000 });
-    await page.waitForTimeout(1500);
+    if (c.waiting) await page.waitForTimeout(800);
+    else {
+      await page.locator('#map-start').click();
+      await page.waitForFunction(() => performance.getEntriesByName('careermap:map').length > 0, null, { timeout: 30000 });
+      await page.waitForTimeout(1500);
+    }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
     if (c.trail) {
       await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();

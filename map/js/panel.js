@@ -2,7 +2,7 @@
 import { config } from './config.js';
 import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts } from './data.js';
 import {
-  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, COMPONENT_LABEL, RATE_UNIT, tagLabel,
+  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, tagLabel,
 } from './labels.js';
 import { hrefFor } from './router.js';
 import {
@@ -49,6 +49,18 @@ export function moneyRange(low, high, digits = 0) {
   if (low == null && high == null) return 'Not yet verified';
   if (low == null || high == null || low === high) return money(low ?? high, digits);
   return `${money(low, digits)} to ${money(high, digits)}`;
+}
+
+/**
+ * Operator scale 1, 2 or 3 (owner decision 5): resort.operator_scale.value, else career.professionalism.score when
+ * the build carries the scale there. null when unrated.
+ */
+export function operatorScale(r) {
+  const ok = (v) => (v === 1 || v === 2 || v === 3 ? v : null);
+  const o = r.operator_scale && ok(r.operator_scale.value);
+  if (o) return o;
+  const p = r.career && r.career.professionalism;
+  return p ? ok(p.score) : null;
 }
 
 export function badge(confidence) {
@@ -389,9 +401,18 @@ export function createPanel(root, index, {
 
   // ── Career (Phase 4) ──
 
+  /** Professionalism (owner decision 5): the operator scale value 1 to 3, shown as the value only. */
+  function professionalismBlock(r) {
+    const v = operatorScale(r);
+    return h('div', { class: 'score-block professionalism' },
+      h('p', { class: 'sub' }, 'Professionalism'),
+      v == null ? h('p', { class: 'not-verified' }, 'Not yet rated')
+        : h('p', { class: 'fact-value score-value', 'aria-label': `Professionalism: ${v} of 3` }, `${v} of 3`));
+  }
+
   function careerSection(r) {
     const c = r.career;
-    if (!c) return section('Career', h('p', { class: 'not-verified' }, 'Career data is being collected.'));
+    if (!c) return section('Career', h('p', { class: 'not-verified' }, 'Career data is being collected.'), professionalismBlock(r));
     const stale = new Set(c.stale_fields);
     return section('Career',
       h('p', { class: 'sub' }, 'Hourly pay by certification'),
@@ -399,7 +420,7 @@ export function createPanel(root, index, {
       h('dl', { class: 'facts career-facts' },
         fact('Private lesson rate', c.private_rate, fmtRate, { stale: stale.has('private_rate') }),
         fact('Instructor split', c.private_split, (v) => `${fmt1(v)}% to the instructor`, { stale: stale.has('private_split') })),
-      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Professionalism'), professionalism(c.professionalism, stale)),
+      professionalismBlock(r),
       h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Lucrativeness, estimated savings per season'), lucrativeness(c.lucrativeness)));
   }
 
@@ -433,50 +454,17 @@ export function createPanel(root, index, {
     return 'Scoring model is being finalized';
   }
 
-  let tipSeq = 0;
-  function professionalism(p, stale = new Set()) {
-    if (!p) return h('p', { class: 'not-verified' }, 'Not enough verified data yet');
-    if (p.status !== 'computed' || p.score == null) return h('p', { class: 'not-verified' }, statusText(p.status, 'weights_unset'));
-    tipSeq += 1;
-    const id = `breakdown-${tipSeq}`;
-    const fmtW = (v) => (v == null ? 'No data' : nf2.format(v));
-    const tip = h('div', { class: 'breakdown', role: 'tooltip', id, hidden: true },
-      h('table', null,
-        h('caption', null, 'How the score is built'),
-        h('thead', null, h('tr', null, ['Component', 'Weight', 'Value', 'Points'].map((t) => h('th', { scope: 'col' }, t)))),
-        h('tbody', null, p.breakdown.map((b) => h('tr', null,
-          h('th', { scope: 'row' }, COMPONENT_LABEL[b.component] || humanize(b.component),
-            stale.has(`professionalism.${b.component}`) ? h('span', { class: 'stale-mark' }, ' (needs update)') : null),
-          h('td', null, fmtW(b.weight)), h('td', null, fmtW(b.value)),
-          h('td', null, b.points == null ? 'No data' : fmt1(b.points)))))));
-    const trigger = h('button', {
-      type: 'button', class: 'score-trigger', 'aria-describedby': id, 'aria-expanded': 'false',
-      'aria-label': `Professionalism score ${fmtInt(p.score)} out of 100. Focus or hover to see the breakdown.`,
-    }, h('span', { class: 'fact-value score-value' }, fmtInt(p.score)), h('span', { class: 'score-max' }, ' / 100'));
-    const wrap = h('div', { class: 'score-wrap' }, trigger, tip);
-    const show = (on) => { tip.hidden = !on; trigger.setAttribute('aria-expanded', String(on)); };
-    wrap.addEventListener('mouseenter', () => show(true));
-    wrap.addEventListener('mouseleave', () => { if (document.activeElement !== trigger) show(false); });
-    trigger.addEventListener('focus', () => show(true));
-    trigger.addEventListener('blur', () => show(false));
-    trigger.addEventListener('click', () => show(tip.hidden));
-    trigger.addEventListener('keydown', (e) => { if (e.key === 'Escape') show(false); });
-    const srcIds = [...new Set(p.breakdown.map((b) => b.source_id).filter(Boolean))];
-    const staleParts = p.breakdown.filter((b) => stale.has(`professionalism.${b.component}`));
-    return h('div', null,
-      h('div', { class: 'sourced-main' }, wrap, badge('estimated'), staleParts.length ? staleTag() : null),
-      h('span', { class: 'fact-meta' }, 'Model score from weighted components in config.',
-        srcIds.length ? [' Sources: ', srcIds.map((sid, i) => [i ? ', ' : '', sourceLink(sid)])] : null));
-  }
-
   function lucrativeness(l) {
     if (!l) return h('p', { class: 'not-verified' }, 'Not enough verified data yet');
     const body = [];
     if (l.status !== 'computed' || l.mid == null) body.push(h('p', { class: 'not-verified' }, statusText(l.status, 'assumptions_unset')));
     else {
+      // Owner decision 4: the headline is the top of the posted wage scale; the range runs bottom to top.
       body.push(h('div', { class: 'sourced-main' },
-        h('span', { class: 'fact-value' }, moneyRange(l.low, l.high)), badge('estimated')));
-      body.push(h('span', { class: 'fact-meta' }, `Mid case ${money(l.mid)}. Low and high cases bracket the mid case.`));
+        h('span', { class: 'fact-value' }, money(l.mid)), badge('estimated')));
+      body.push(h('span', { class: 'fact-meta' }, 'At the top of the posted wage scale, before tax.',
+        l.low != null && l.high != null && l.low !== l.high
+          ? ` Range ${money(l.low)} at the bottom of the scale to ${money(l.high)} at the top.` : ''));
     }
     // rent_basis says which rent fed the model: "employee_housing:<site id>" or a baseline key (fmr_studio, acs_median);
     // rent_source_id is its source.
@@ -492,7 +480,9 @@ export function createPanel(root, index, {
       body.push(h('p', { class: 'sub' }, 'Assumptions'),
         h('ul', { class: 'assumptions' }, listed.map((a) => h('li', null,
           h('span', null, a.label), ' ',
-          a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet') : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))))));
+          a.value == null || (a.key.startsWith('tips') && a.value === 0)
+            ? h('span', { class: 'not-verified' }, a.key.startsWith('tips') ? 'Tips are not included yet' : 'Not set yet')
+            : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))))));
     }
     return h('div', null, body);
   }
@@ -639,6 +629,9 @@ export function createPanel(root, index, {
     if (value === 'fmr_studio') return 'Rent used: HUD Fair Market Rent for a studio in the county.';
     if (value === 'fmr_one_br') return 'Rent used: HUD Fair Market Rent for one bedroom in the county.';
     if (value === 'acs_median') return 'Rent used: Census ACS median gross rent in the county.';
+    if (value === 'employee_housing' || value === 'employee_housing_mean' || value === 'employee_housing_average') {
+      return 'Rent used: the average of the employee housing rents listed for this resort.';
+    }
     if (!value.startsWith('employee_housing:')) return `Rent used: ${humanize(value)}.`;
     const id = value.slice('employee_housing:'.length);
     const site = detail && detail.housing.find((x) => x.id === id);
@@ -749,7 +742,7 @@ export function createPanel(root, index, {
     if (typeof v === 'number' && key.startsWith('range_spread')) return `${fmt1(v * 100)}% of earnings`;
     if (typeof v === 'number' && key.endsWith('_days')) return `${fmtInt(v)} days`;
     if (typeof v === 'string') return humanize(v);
-    if (typeof v === 'number') return Math.abs(v) >= 100 ? fmtInt(v) : fmt1(v);
+    if (typeof v === 'number') return Math.abs(v) >= 100 ? fmtInt(v) : nf2.format(v);
     if (typeof v === 'boolean') return v ? 'Yes' : 'No';
     return String(v);
   }

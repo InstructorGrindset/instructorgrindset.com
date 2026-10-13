@@ -108,7 +108,8 @@ class ReportStore:
 
 # --------------------------------------------------------------------- import
 def _report_id(row: dict) -> str:
-    key = json.dumps({k: row.get(k) for k in IMPORT_COLUMNS if k != "id"}, sort_keys=True, default=str)
+    key = json.dumps({k: (str(row.get(k)) if row.get(k) not in (None, "") else None)
+                      for k in IMPORT_COLUMNS if k != "id"}, sort_keys=True)
     return "r-" + hashlib.sha1(key.encode()).hexdigest()[:12]
 
 
@@ -118,9 +119,46 @@ def _num(v: Any) -> Optional[float]:
     return float(v)
 
 
+# Formspree CSV exports name the submission time differently over time and per locale; the first match wins.
+TIMESTAMP_COLUMNS = ("submitted_at", "created_at", "date", "_date", "submitted", "timestamp", "time", "received_at")
+_DATE_FORMATS = ("%Y-%m-%d %H:%M:%S %Z", "%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M", "%m/%d/%Y %H:%M:%S", "%m/%d/%Y %H:%M",
+                 "%b %d, %Y %I:%M %p", "%b %d, %Y %H:%M", "%d %b %Y %H:%M:%S", "%Y-%m-%d")
+
+
+def _norm_key(k: str) -> str:
+    return k.strip().lower().replace(" ", "_").replace("-", "_")
+
+
+def parse_timestamp(v: Any) -> Optional[str]:
+    """ISO datetime string from an export timestamp (ISO, "2026-10-13 14:05:22 UTC", "10/13/2026 14:05", ...)."""
+    if v in (None, ""):
+        return None
+    text = str(v).strip().replace(" UTC", "+00:00").replace("Z", "+00:00")
+    try:
+        d = dt.datetime.fromisoformat(text)
+    except ValueError:
+        d = None
+        for fmt in _DATE_FORMATS:
+            try:
+                d = dt.datetime.strptime(str(v).strip(), fmt)
+                break
+            except ValueError:
+                continue
+        if d is None:
+            raise ValueError(f"unreadable timestamp {v!r}")
+    if d.tzinfo is None:
+        d = d.replace(tzinfo=dt.timezone.utc)
+    return d.isoformat()
+
+
 def row_to_report(row: dict) -> Report:
-    """One exported form submission (JSON object or CSV row) to a pending Report."""
-    row = {k.strip(): (v.strip() if isinstance(v, str) else v) for k, v in row.items() if k}
+    """One exported form submission (JSON object, CSV row or Formspree CSV row) to a pending Report.
+
+    Column names are matched case and space insensitively; Formspree metadata columns (_subject,
+    email, _replyto, ...) and any other unknown column are ignored."""
+    row = {_norm_key(k): (v.strip() if isinstance(v, str) else v) for k, v in row.items() if k}
+    stamp = next((row[k] for k in TIMESTAMP_COLUMNS if row.get(k) not in (None, "")), None)
+    row["submitted_at"] = parse_timestamp(stamp)
     values = row.get("values") if isinstance(row.get("values"), dict) else {
         "hourly_usd": _num(row.get("hourly_usd")), "monthly_usd": _num(row.get("monthly_usd"))}
     data = {
@@ -128,7 +166,7 @@ def row_to_report(row: dict) -> Report:
         "season": row.get("season"), "cert_level": row.get("cert_level") or None,
         "housing_site_id": row.get("housing_site_id") or None,
         "values": {k: v for k, v in values.items() if v is not None},
-        "proof_url": row.get("proof_url") or None, "submitted_at": row.get("submitted_at") or _now().isoformat(),
+        "proof_url": row.get("proof_url") or None, "submitted_at": row["submitted_at"] or _now().isoformat(),
         "status": "pending",  # whatever the export says, every import starts in the queue
     }
     return Report.model_validate(data)

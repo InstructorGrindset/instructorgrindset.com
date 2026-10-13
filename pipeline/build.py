@@ -112,6 +112,8 @@ def _tier_a_draft(batch: TierABatch, rec: TierARecord, matches: list[openskimap.
                   osm_as_of: Optional[dt.date]) -> dict:
     d = rec.model_dump(mode="json")
     d.pop("cluster_hint")
+    if d.get("operator_scale"):
+        d["operator_scale"]["note"] = None  # owner decision 5: the scale's note stays internal (data/raw only)
     d.pop("openskimap_names")
     if len(matches) == 1 and osm_as_of is not None:
         _osm_fill(d, matches[0], osm_as_of)
@@ -415,7 +417,9 @@ def build(
                 "season_length_days": num(r["season"]["length_days"]),
                 "snowfall_annual_in": snowfall_annual(r, climate_dir)[0],
                 "snowfall_annual_source": snowfall_annual(r, climate_dir)[1],
-                "professionalism_score": (r["career"] or {}).get("professionalism", {}).get("score"),
+                # owner decision 5: professionalism is the operator scale (1 to 3)
+                "professionalism_score": (r.get("operator_scale") or {}).get("value"),
+                "access_rating": (r.get("access") or {}).get("rating"),
                 "lucrativeness_mid": (r["career"] or {}).get("lucrativeness", {}).get("mid"),
             },
         } for r in resort_dicts],
