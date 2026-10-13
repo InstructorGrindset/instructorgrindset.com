@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T19:13:44Z",
+  "generated_at": "2026-10-13T19:30:31Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -10543,6 +10543,13 @@
       "title": "Open Meteo Historical Weather API, ERA5 reanalysis daily history (models=era5)",
       "accessed_date": "2026-10-13",
       "note": "Weather data by Open-Meteo.com (CC BY 4.0), from Copernicus ERA5 (Hersbach et al. 2020). ERA5 snowfall is water equivalent; Open Meteo reports it as snow depth with a fixed ratio (docs: 7 cm snow = 10 mm precipitation water equivalent, about 14 percent density), so snowfall_in, powder_days, banner_days and avg_storm_depth_in carry that assumption and miss real variation in snow density. ERA5 is a 25 km grid that smooths mountain terrain, so totals usually run below resort reported upper mountain snowfall. Values are downscaled to the Open Meteo 90 m elevation model at the resort coordinate (base area). wind_mph is the mean daily maximum 10 m wind. sun_pct is sunshine_duration over daylight_duration."
+    },
+    {
+      "id": "openskimap-lift-mammoth-panorama-gondola-lower",
+      "url": "https://openskimap.org/",
+      "title": "Panorama Gondola Lower bottom station, Mammoth Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Main Lodge base point. Lift 'Panorama Gondola Lower' (OpenStreetMap way/1525905377, OpenSkiMap lift e3b8c6cb99ef5d2c6ab71c785cdde6a2e34d0b13); its bottom station is OpenStreetMap node/96939620 at 37.6510607, -119.037773, 2712 m. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
     },
     {
       "id": "openskimap-lifts",

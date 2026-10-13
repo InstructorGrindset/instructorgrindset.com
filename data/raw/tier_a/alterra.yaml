@@ -3,7 +3,8 @@ researched_date: 2026-10-11
 status: draft
 # All values come from Wikipedia pages fetched on 2026-10-11. Resort and Alterra sites were
 # unreachable from the research environment, so nothing here is verified against a resort site yet.
-# lat/lon are the Wikipedia infobox coordinates, used as the base area point.
+# lat/lon are the Wikipedia infobox coordinates, used as the base area point, except Mammoth
+# Mountain, which uses a lift bottom station at Main Lodge (see its record).
 sources:
   - {id: wikipedia-alterra-mountain-company, url: https://en.wikipedia.org/wiki/Alterra_Mountain_Company, title: Alterra Mountain Company (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-steamboat-ski-resort, url: https://en.wikipedia.org/wiki/Steamboat_Ski_Resort, title: Steamboat Ski Resort (Wikipedia), accessed_date: 2026-10-11}
@@ -12,6 +13,7 @@ sources:
   - {id: wikipedia-arapahoe-basin, url: https://en.wikipedia.org/wiki/Arapahoe_Basin, title: Arapahoe Basin (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-palisades-tahoe, url: https://en.wikipedia.org/wiki/Palisades_Tahoe, title: Palisades Tahoe (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-mammoth-mountain-resort, url: https://en.wikipedia.org/wiki/Mammoth_Mountain_Resort, title: Mammoth Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: openskimap-lift-mammoth-panorama-gondola-lower, url: "https://openskimap.org/", title: "Panorama Gondola Lower bottom station, Mammoth Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Main Lodge base point. Lift 'Panorama Gondola Lower' (OpenStreetMap way/1525905377, OpenSkiMap lift e3b8c6cb99ef5d2c6ab71c785cdde6a2e34d0b13); its bottom station is OpenStreetMap node/96939620 at 37.6510607, -119.037773, 2712 m. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
   - {id: wikipedia-deer-valley, url: https://en.wikipedia.org/wiki/Deer_Valley, title: Deer Valley (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-crystal-mountain-washington, url: https://en.wikipedia.org/wiki/Crystal_Mountain_(Washington), title: Crystal Mountain (Washington) (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-stratton-mountain-resort, url: https://en.wikipedia.org/wiki/Stratton_Mountain_Resort, title: Stratton Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
@@ -161,9 +163,11 @@ resorts:
     owner: {value: Alterra Mountain Company, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     access: {rating: transit_friendly, summary_md: "Eastern Sierra Transit runs seasonal routes in the town of Mammoth Lakes, home of the resort, and a gondola links the village to Canyon Lodge.", source_id: access-wikipedia-eastern-sierra-transit, as_of: 2026-10-13, confidence: estimated, note: "Gondola and in town location from wikipedia-mammoth-mountain-resort; that town routes reach the base lodges is inferred."}
-    lat: 37.63056
-    lon: -119.0325
-    location_source_id: wikipedia-mammoth-mountain-resort
+    # Main Lodge base: the Panorama Gondola lower terminal (OpenSkiMap lifts), chosen over the
+    # Wikipedia article coordinate (37.63056, -119.0325), which sits about 2.3 km from Main Lodge.
+    lat: 37.65106
+    lon: -119.03777
+    location_source_id: openskimap-lift-mammoth-panorama-gondola-lower
     cluster_hint: eastern-sierra
     tier_a_status: approved
     approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
