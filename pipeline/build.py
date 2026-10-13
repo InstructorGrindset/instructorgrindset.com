@@ -116,8 +116,9 @@ def _tier_a_draft(batch: TierABatch, rec: TierARecord, matches: list[openskimap.
                   osm_as_of: Optional[dt.date]) -> dict:
     d = rec.model_dump(mode="json")
     d.pop("cluster_hint")
-    if d.get("operator_scale"):
-        d["operator_scale"]["note"] = None  # owner decision 5: the scale's note stays internal (data/raw only)
+    # Owner decision 2026-10-13: the professionalism rating is off the public site. operator_scale stays in
+    # data/raw/tier_a as an internal note and never reaches data/build.
+    d.pop("operator_scale", None)
     d.pop("openskimap_names")
     if len(matches) == 1 and osm_as_of is not None:
         _osm_fill(d, matches[0], osm_as_of)
@@ -134,7 +135,7 @@ def _tier_b_draft(area: openskimap.SkiArea, rid: str, as_of: dt.date) -> dict:
         "owner": None, "lat": round(area.lat, 5), "lon": round(area.lon, 5),
         "location_source_id": openskimap.SOURCE_ID, "state": area.state,
         "size": {"acres": None, "vertical_ft": None, "lifts": None, "ski_school_staff_est": None},
-        "elevation": {"base_ft": None, "summit_ft": None}, "snow": None, "operator_scale": None, "access": None,
+        "elevation": {"base_ft": None, "summit_ft": None}, "snow": None, "access": None,
         "career": None, "editorial": None,
     }
     _osm_fill(d, area, as_of)
@@ -431,8 +432,6 @@ def build(
                 "season_length_days": num(r["season"]["length_days"]),
                 "snowfall_annual_in": snowfall_annual(r, climate_dir)[0],
                 "snowfall_annual_source": snowfall_annual(r, climate_dir)[1],
-                # owner decision 5: professionalism is the operator scale (1 to 3)
-                "professionalism_score": (r.get("operator_scale") or {}).get("value"),
                 "access_rating": (r.get("access") or {}).get("rating"),
                 "lucrativeness_mid": (r["career"] or {}).get("lucrativeness", {}).get("mid"),
             },
@@ -741,7 +740,7 @@ def _refs(d: dict) -> set[str]:
             for v in o:
                 walk(v)
 
-    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "official_trailmap", "season", "terrain",
+    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "season", "terrain",
                 "career", "editorial"):
         walk(d.get(key))
     return found

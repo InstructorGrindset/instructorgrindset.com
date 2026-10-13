@@ -54,18 +54,6 @@ export const Career = z.object({
   pay: z.array(PayRow).nullish().transform((v) => v ?? []),
   private_rate: sourced(z.object({ low: numOrNull, high: numOrNull, unit: z.enum(['hour', 'half_day', 'full_day']) })),
   private_split: sourced(z.number().min(0).max(100)),
-  // Status stays a string so a status added later renders as "being finalized" instead of dropping the resort.
-  professionalism: z.object({
-    score: z.number().min(0).max(100).nullish().transform((v) => v ?? null),
-    status: z.string(),
-    breakdown: z.array(z.object({
-      component: z.string(),
-      weight: numOrNull,
-      value: numOrNull,
-      points: numOrNull,
-      source_id: z.string().nullish(),
-    })).nullish().transform((v) => v ?? []),
-  }).nullish().transform((v) => v ?? null),
   lucrativeness: z.object({
     low: numOrNull,
     mid: numOrNull,
@@ -155,8 +143,6 @@ export const Resort = z.object({
   climate_available: z.boolean(),
   detail_available: z.boolean().nullish().transform((v) => Boolean(v)),
   trailmap_available: z.boolean().nullish().transform((v) => Boolean(v)),
-  // Owner decision 5: operator scale 1 to 3 (public UI shows the value only).
-  operator_scale: sourced(z.number().int().min(1).max(3)).catch(null),
   access: Access,
   // Link to the resort's own official trail map (never rehosted or embedded). A bad value drops the link only.
   official_trailmap: OfficialTrailmap,
@@ -215,7 +201,6 @@ export const ResortFeature = z.object({
     // Recolor values (Phase 4); absent until the build emits them.
     season_length_days: numOrNull,
     snowfall_annual_in: numOrNull,
-    professionalism_score: numOrNull,
     lucrativeness_mid: numOrNull,
   }),
 });
@@ -298,7 +283,7 @@ export const HeatDefinitions = z.object({
     grid_step_px: z.number().int().positive(),
     max_pixels: z.number().int().positive(),
   }).passthrough(),
-  modes: z.object({ lucrativeness: HeatMode, professionalism: HeatMode, season: HeatMode, snowfall: HeatMode }).passthrough(),
+  modes: z.object({ lucrativeness: HeatMode, season: HeatMode, snowfall: HeatMode }).passthrough(),
 }).passthrough();
 
 /** heat/<mode>.json: precomputed heat rasters (pipeline/heat.py). */

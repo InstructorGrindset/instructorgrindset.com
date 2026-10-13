@@ -245,7 +245,7 @@ class Career(StrictModel):
     pay: list[PayRow] = Field(default_factory=list)
     private_rate: Optional[SourcedPrivateRate] = None
     private_split: Optional[SourcedPercent] = None
-    professionalism: Professionalism
+    # No professionalism block: the rating is off the public site (owner decision 2026-10-13).
     lucrativeness: LucrativenessOut
     stale_fields: list[str] = Field(default_factory=list)
 

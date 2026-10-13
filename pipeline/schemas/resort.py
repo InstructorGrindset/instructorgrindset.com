@@ -71,8 +71,8 @@ class Elevation(StrictModel):
 
 
 class SourcedOperatorScale(SourcedNumber):
-    """Professionalism shown publicly as "N of 3": 1 family owned, 2 independent business owned,
-    3 large scale corporate operation (owner decision 5; the meaning, note and source stay internal)."""
+    """Internal operator scale in data/raw/tier_a: 1 family owned, 2 independent business owned, 3 large scale
+    corporate operation. Validated on load, never written to data/build (owner decision 2026-10-13)."""
 
     value: StrictInt  # type: ignore[assignment]
 
@@ -190,7 +190,6 @@ class Resort(StrictModel):
     size: Size = Field(default_factory=Size)
     elevation: Elevation = Field(default_factory=Elevation)
     snow: Optional[Snow] = None
-    operator_scale: Optional[SourcedOperatorScale] = None
     access: Optional[Access] = None
     official_trailmap: Optional[OfficialTrailmap] = None   # link to the resort's own trail map (never rehosted)
     season: Season = Field(default_factory=Season)
@@ -266,7 +265,7 @@ def referenced_source_ids(resort: Resort) -> set[str]:
             for item in obj:
                 walk(item)
 
-    for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "official_trailmap", "season",
+    for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "season",
                  "terrain", "career", "editorial"):
         walk(getattr(resort, name))
     return found

@@ -1,4 +1,4 @@
-"""Phase 4 career layer: pay display, staleness, professionalism, lucrativeness.
+"""Phase 4 career layer: pay display, staleness, lucrativeness (and the internal professionalism model).
 
 Every weight and assumption comes from config/definitions.yaml. While Alexandre
 has not set them they are null and the formulas report a status
@@ -103,6 +103,8 @@ def select_pay(
 
 
 # ------------------------------------------------------------ professionalism
+# Internal only: the professionalism rating is off the public site (owner decision 2026-10-13), so build_career
+# never calls this and nothing of it reaches data/build. Kept for the owner's private use.
 def professionalism(inputs: Optional[CareerInputs], defs: ProfessionalismDefs) -> dict:
     """score = 100 x sum(w x v) / sum(w) over components with a value.
 
@@ -233,16 +235,10 @@ def build_career(
         s = getattr(inputs, name) if inputs else None
         if s is not None and is_stale(s.as_of, today, max_age):
             stale.append(name)
-    if inputs:
-        for comp in PROFESSIONALISM_COMPONENTS:
-            s = getattr(inputs.professionalism_inputs, comp)
-            if s is not None and is_stale(s.as_of, today, max_age):
-                stale.append(f"professionalism.{comp}")
     career = {
         "pay": rows,
         "private_rate": inputs.private_rate.model_dump(mode="json") if inputs and inputs.private_rate else None,
         "private_split": inputs.private_split.model_dump(mode="json") if inputs and inputs.private_split else None,
-        "professionalism": professionalism(inputs, defs.professionalism),
         "lucrativeness": lucrativeness(rows, season_length_days, rent_monthly, defs.lucrativeness,
                                        rent_basis, rent_source_id),
         "stale_fields": stale,

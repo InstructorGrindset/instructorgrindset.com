@@ -51,18 +51,6 @@ export function moneyRange(low, high, digits = 0) {
   return `${money(low, digits)} to ${money(high, digits)}`;
 }
 
-/**
- * Operator scale 1, 2 or 3 (owner decision 5): resort.operator_scale.value, else career.professionalism.score when
- * the build carries the scale there. null when unrated.
- */
-export function operatorScale(r) {
-  const ok = (v) => (v === 1 || v === 2 || v === 3 ? v : null);
-  const o = r.operator_scale && ok(r.operator_scale.value);
-  if (o) return o;
-  const p = r.career && r.career.professionalism;
-  return p ? ok(p.score) : null;
-}
-
 /** "Official trail map from <resort>" link (new tab) with its format and season; null when there is none. */
 export function officialTrailmapLink(r) {
   const o = r.official_trailmap;
@@ -422,18 +410,9 @@ export function createPanel(root, index, {
       drawn ? h('p', { class: 'trailmap-drawn' }, drawn, h('span', { class: 'fact-meta' }, ' Interactive map from OpenSkiMap')) : null);
   }
 
-  /** Professionalism (owner decision 5): the operator scale value 1 to 3, shown as the value only. */
-  function professionalismBlock(r) {
-    const v = operatorScale(r);
-    return h('div', { class: 'score-block professionalism' },
-      h('p', { class: 'sub' }, 'Professionalism'),
-      v == null ? h('p', { class: 'not-verified' }, 'Not yet rated')
-        : h('p', { class: 'fact-value score-value', 'aria-label': `Professionalism: ${v} of 3` }, `${v} of 3`));
-  }
-
   function careerSection(r) {
     const c = r.career;
-    if (!c) return section('Career', h('p', { class: 'not-verified' }, 'Career data is being collected.'), professionalismBlock(r));
+    if (!c) return section('Career', h('p', { class: 'not-verified' }, 'Career data is being collected.'));
     const stale = new Set(c.stale_fields);
     return section('Career',
       h('p', { class: 'sub' }, 'Hourly pay by certification'),
@@ -441,7 +420,6 @@ export function createPanel(root, index, {
       h('dl', { class: 'facts career-facts' },
         fact('Private lesson rate', c.private_rate, fmtRate, { stale: stale.has('private_rate') }),
         fact('Instructor split', c.private_split, (v) => `${fmt1(v)}% to the instructor`, { stale: stale.has('private_split') })),
-      professionalismBlock(r),
       h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Lucrativeness, estimated savings per season'), lucrativeness(c.lucrativeness)));
   }
 

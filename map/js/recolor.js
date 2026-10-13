@@ -1,4 +1,4 @@
-// Map color modes (Default, Lucrativeness, Professionalism, Season length, Snowfall) and their legend.
+// Map color modes (Default, Lucrativeness, Season length, Snowfall) and their legend.
 // Every mode except Default draws a heat map with the resorts on top. Settings come from definitions.json `heat`.
 // Snowfall loads the precomputed NOAA rasters (heat/snowfall.json) when they exist; every other case draws the
 // resort only surface from heat.js. Interpolated colors never become numbers: the legend shows the scale, and
@@ -15,20 +15,17 @@ const usdShort = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
 /** Legend tick labels. */
 const TICK = {
   lucrativeness: (v) => usdShort.format(v),
-  professionalism: (v) => fmtInt(v),
   season: (v) => fmtInt(v),
   snowfall: (v) => fmtInt(v),
 };
 const FORMAT = {
   lucrativeness: (v) => usd.format(v),
-  professionalism: (v) => fmtInt(v),
   season: (v) => fmtInt(v),
   snowfall: (v) => fmtInt(v),
 };
 /** Value with its unit, for announcements and the resort tooltip. */
 const SPOKEN = {
   lucrativeness: (v) => `${usd.format(v)} per season`,
-  professionalism: (v) => `${fmtInt(v)} of 3`,
   season: (v) => `${fmtInt(v)} days`,
   snowfall: (v) => `${fmtInt(v)} in per season`,
 };
@@ -47,7 +44,7 @@ export async function createRecolor(root, index, { onChange, announce }) {
   const features = index.geo.resorts.features;
   const info = {};
   const modeCfg = (m) => (heat && heat.modes[m.key]) || {};
-  // A mode with a fixed domain (professionalism, 1 to 3) uses only values inside it.
+  // A mode with a fixed domain uses only values inside it.
   const inDomain = (m, v) => {
     if (typeof v !== 'number' || !Number.isFinite(v)) return false;
     const d = modeCfg(m).domain;

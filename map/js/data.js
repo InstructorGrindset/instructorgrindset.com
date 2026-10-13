@@ -99,7 +99,7 @@ function slimFromRow(fields, row) {
     acres: numOrNull(o.acres), size_rank: rank,
     climate_available: o.climate_available === true, detail_available: o.detail_available === true,
     season_length_days: numOrNull(o.season_length_days), snowfall_annual_in: numOrNull(o.snowfall_annual_in),
-    professionalism_score: numOrNull(o.professionalism_score), lucrativeness_mid: numOrNull(o.lucrativeness_mid),
+    lucrativeness_mid: numOrNull(o.lucrativeness_mid),
   };
 }
 
@@ -191,14 +191,12 @@ function slimFromFull(r, props) {
     climate_available: r.climate_available, detail_available: r.detail_available,
     season_length_days: p.season_length_days !== undefined ? numOrNull(p.season_length_days) : (r.season.length_days ? r.season.length_days.value : null),
     snowfall_annual_in: numOrNull(p.snowfall_annual_in),
-    professionalism_score: p.professionalism_score !== undefined ? numOrNull(p.professionalism_score)
-      : (r.career && r.career.professionalism ? r.career.professionalism.score : null),
     lucrativeness_mid: p.lucrativeness_mid !== undefined ? numOrNull(p.lucrativeness_mid)
       : (r.career && r.career.lucrativeness ? r.career.lucrativeness.mid : null),
   };
 }
 
-const RECOLOR_KEYS = ['season_length_days', 'snowfall_annual_in', 'professionalism_score', 'lucrativeness_mid'];
+const RECOLOR_KEYS = ['season_length_days', 'snowfall_annual_in', 'lucrativeness_mid'];
 
 /**
  * Load what the first paint needs and build the index. Resolves to

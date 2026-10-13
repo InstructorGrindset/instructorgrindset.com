@@ -67,8 +67,8 @@ ownership:
   missing_tier_a_record: fail
 
 operator_scale:
-  # Owner decision 5: the public Professionalism value ("N of 3") is the operator scale.
-  # Internal labels only; the map shows no definitions or explanation.
+  # Internal operator scale for data/raw/tier_a (validated on load). Owner decision 2026-10-13: the
+  # professionalism rating is off the public site, so the build never writes operator_scale to data/build.
   values:
     1: family_owned
     2: independent_business
@@ -80,7 +80,7 @@ access:
   ratings: [convenient, transit_friendly, mixed, car_centric]
 
 professionalism:
-  # Unused since owner decision 5 (kept in code). Score from 0 to 100, weighted from the components below.
+  # Internal model only (kept in code, never in data/build; owner decision 2026-10-13). Score 0 to 100 from the components below.
   # Alexandre sets these weights in Phase 4. Do not fill them in before then.
   scale_min: 0
   scale_max: 100
@@ -166,7 +166,7 @@ career:
     professional_types: []
 
 heat:
-  # Heat maps for the map color modes (Lucrativeness, Professionalism, Season length, Snowfall).
+  # Heat maps for the map color modes (Lucrativeness, Season length, Snowfall).
   # Display settings only: they change no resort number. Method and contract in docs/map/ARCHITECTURE.md
   # ("Heat maps"). Exported to definitions.json; map/js/heat.js and pipeline/heat.py both read them.
   ramp:
@@ -207,8 +207,6 @@ heat:
     # tick steps (domain_min pins the low end). ticks: fixed legend ticks (fixed domain) or candidate
     # ticks (sqrt scale, the domain maximum is always the last tick).
     lucrativeness: {scale: linear}
-    # Owner decision 5: Professionalism is the operator scale; the legend shows 1, 2 and 3 only.
-    professionalism: {scale: linear, domain: [1, 3], ticks: [1, 2, 3]}
     season: {scale: linear}
     # Most of the country gets under 100 in and the mountains up to 700, so a square root scale keeps
     # both readable.

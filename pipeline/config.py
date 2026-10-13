@@ -287,7 +287,6 @@ class HeatMode(StrictModel):
 
 class HeatModes(StrictModel):
     lucrativeness: HeatMode
-    professionalism: HeatMode
     season: HeatMode
     snowfall: HeatMode
 

@@ -1,4 +1,4 @@
-// Heat surfaces for the map color modes (lucrativeness, professionalism, season length, snowfall).
+// Heat surfaces for the map color modes (lucrativeness, season length, snowfall).
 //
 // Settings come from definitions.json `heat` (config/definitions.yaml); the method is in docs/map/ARCHITECTURE.md,
 // "Heat maps", and pipeline/heat.py is the Python twin that precomputes the snowfall rasters.

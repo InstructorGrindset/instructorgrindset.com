@@ -52,15 +52,6 @@ export const CERT_LABEL = {
   unspecified: 'All levels (posted range)',
 };
 
-export const COMPONENT_LABEL = {
-  cert_pay_differential: 'Cert pay differential',
-  paid_training_hours: 'Paid training hours',
-  examiner_trainer_presence: 'Examiner and trainer presence',
-  private_lesson_share: 'Private lesson share',
-  year_round_staff: 'Year round staff',
-  clinic_access: 'Clinic access',
-};
-
 export const ACCESS_LABEL = { convenient: 'Convenient', transit_friendly: 'Transit friendly', mixed: 'Mixed', car_centric: 'Car centric' };
 
 export const RATE_UNIT = { hour: 'per hour', half_day: 'per half day', full_day: 'per full day' };
@@ -81,8 +72,6 @@ export function tagLabel(tag) { return TAG_LABEL[tag] || humanize(tag); }
 export const RECOLOR_MODES = [
   { key: 'default', label: 'Default' },
   { key: 'lucrativeness', label: 'Lucrativeness', prop: 'lucrativeness_mid', title: 'Estimated season savings, mid case', unit: 'USD per season', noun: 'lucrativeness' },
-  // Owner decision 5: operator scale 1 to 3; the legend shows only 1, 2 and 3.
-  { key: 'professionalism', label: 'Professionalism', prop: 'professionalism_score', title: 'Professionalism', unit: null, noun: 'professionalism', domain: { min: 1, max: 3 }, ticks: [1, 2, 3] },
   { key: 'season', label: 'Season length', prop: 'season_length_days', title: 'Typical season length', unit: 'Days', noun: 'season length' },
   { key: 'snowfall', label: 'Snowfall', prop: 'snowfall_annual_in', title: 'Average snowfall per season', unit: 'Inches per season', noun: 'snowfall' },
 ];

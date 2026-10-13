@@ -471,8 +471,8 @@ def plan_pages(build: Path) -> dict[str, Page]:
 INDEX_NAME = "map-index.json"
 INDEX_FIELDS = ("id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
                 "acres", "size_rank", "climate_available", "detail_available",
-                "season_length_days", "snowfall_annual_in", "professionalism_score", "lucrativeness_mid")
-RECOLOR_PROPS = ("season_length_days", "snowfall_annual_in", "professionalism_score", "lucrativeness_mid")
+                "season_length_days", "snowfall_annual_in", "lucrativeness_mid")
+RECOLOR_PROPS = ("season_length_days", "snowfall_annual_in", "lucrativeness_mid")
 
 
 def _size_breaks() -> Optional[list[float]]:
@@ -518,7 +518,6 @@ def build_map_index(build: Path) -> dict:
         derived = {
             "season_length_days": _value(season.get("length_days")),
             "snowfall_annual_in": None,
-            "professionalism_score": (career.get("professionalism") or {}).get("score"),
             "lucrativeness_mid": (career.get("lucrativeness") or {}).get("mid"),
         }
         rank = p.get("size_rank")

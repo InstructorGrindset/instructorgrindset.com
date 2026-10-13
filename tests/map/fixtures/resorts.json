@@ -233,54 +233,6 @@
      "as_of": "2026-10-01",
      "confidence": "reported"
     },
-    "professionalism": {
-     "score": 72,
-     "status": "computed",
-     "breakdown": [
-      {
-       "component": "cert_pay_differential",
-       "weight": 0.25,
-       "value": 0.82,
-       "points": 20.5,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "paid_training_hours",
-       "weight": 0.2,
-       "value": 0.67,
-       "points": 13.4,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "examiner_trainer_presence",
-       "weight": 0.15,
-       "value": 0.77,
-       "points": 11.6,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "private_lesson_share",
-       "weight": 0.15,
-       "value": 0.62,
-       "points": 9.3,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "year_round_staff",
-       "weight": 0.15,
-       "value": 0.72,
-       "points": 10.8,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "clinic_access",
-       "weight": 0.1,
-       "value": 0.72,
-       "points": 7.2,
-       "source_id": "fixture-model"
-      }
-     ]
-    },
     "lucrativeness": {
      "low": 3200,
      "mid": 8900,
@@ -346,8 +298,7 @@
     },
     "stale_fields": [
      "pay.level_1",
-     "private_split",
-     "professionalism.clinic_access"
+     "private_split"
     ]
    },
    "editorial": {
@@ -364,13 +315,6 @@
    "facility_type": "ski_area",
    "detail_available": true,
    "trailmap_available": true,
-   "operator_scale": {
-    "value": 3,
-    "source_id": "fixture-ownership",
-    "as_of": "2026-10-01",
-    "confidence": "published",
-    "note": "synthetic internal note"
-   },
    "official_trailmap": {
     "url": "https://example.com/fixture/alpha-peak-trail-map-2025-26.pdf",
     "format": "pdf",
@@ -565,54 +509,6 @@
     ],
     "private_rate": null,
     "private_split": null,
-    "professionalism": {
-     "score": null,
-     "status": "weights_unset",
-     "breakdown": [
-      {
-       "component": "cert_pay_differential",
-       "weight": null,
-       "value": 0.6,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "paid_training_hours",
-       "weight": null,
-       "value": 0.45,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "examiner_trainer_presence",
-       "weight": null,
-       "value": 0.55,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "private_lesson_share",
-       "weight": null,
-       "value": 0.4,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "year_round_staff",
-       "weight": null,
-       "value": 0.5,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "clinic_access",
-       "weight": null,
-       "value": 0.5,
-       "points": null,
-       "source_id": "fixture-model"
-      }
-     ]
-    },
     "lucrativeness": {
      "low": null,
      "mid": null,
@@ -812,54 +708,6 @@
     ],
     "private_rate": null,
     "private_split": null,
-    "professionalism": {
-     "score": null,
-     "status": "insufficient_data",
-     "breakdown": [
-      {
-       "component": "cert_pay_differential",
-       "weight": 0.25,
-       "value": 0.6,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "paid_training_hours",
-       "weight": 0.2,
-       "value": 0.45,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "examiner_trainer_presence",
-       "weight": 0.15,
-       "value": null,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "private_lesson_share",
-       "weight": 0.15,
-       "value": null,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "year_round_staff",
-       "weight": 0.15,
-       "value": null,
-       "points": null,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "clinic_access",
-       "weight": 0.1,
-       "value": null,
-       "points": null,
-       "source_id": "fixture-model"
-      }
-     ]
-    },
     "lucrativeness": {
      "low": null,
      "mid": null,
@@ -1303,54 +1151,6 @@
      "as_of": "2026-10-01",
      "confidence": "estimated"
     },
-    "professionalism": {
-     "score": 85,
-     "status": "computed",
-     "breakdown": [
-      {
-       "component": "cert_pay_differential",
-       "weight": 0.25,
-       "value": 0.95,
-       "points": 23.8,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "paid_training_hours",
-       "weight": 0.2,
-       "value": 0.8,
-       "points": 16.0,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "examiner_trainer_presence",
-       "weight": 0.15,
-       "value": 0.9,
-       "points": 13.5,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "private_lesson_share",
-       "weight": 0.15,
-       "value": 0.75,
-       "points": 11.2,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "year_round_staff",
-       "weight": 0.15,
-       "value": 0.85,
-       "points": 12.8,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "clinic_access",
-       "weight": 0.1,
-       "value": 0.85,
-       "points": 8.5,
-       "source_id": "fixture-model"
-      }
-     ]
-    },
     "lucrativeness": {
      "low": 4800,
      "mid": 10600,
@@ -1421,13 +1221,6 @@
    "facility_type": "ski_area",
    "detail_available": true,
    "trailmap_available": false,
-   "operator_scale": {
-    "value": 2,
-    "source_id": "fixture-ownership",
-    "as_of": "2026-10-01",
-    "confidence": "published",
-    "note": "synthetic internal note"
-   },
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1727,54 +1520,6 @@
     ],
     "private_rate": null,
     "private_split": null,
-    "professionalism": {
-     "score": 61,
-     "status": "computed",
-     "breakdown": [
-      {
-       "component": "cert_pay_differential",
-       "weight": 0.25,
-       "value": 0.71,
-       "points": 17.8,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "paid_training_hours",
-       "weight": 0.2,
-       "value": 0.56,
-       "points": 11.2,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "examiner_trainer_presence",
-       "weight": 0.15,
-       "value": 0.66,
-       "points": 9.9,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "private_lesson_share",
-       "weight": 0.15,
-       "value": 0.51,
-       "points": 7.7,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "year_round_staff",
-       "weight": 0.15,
-       "value": 0.61,
-       "points": 9.2,
-       "source_id": "fixture-model"
-      },
-      {
-       "component": "clinic_access",
-       "weight": 0.1,
-       "value": 0.61,
-       "points": 6.1,
-       "source_id": "fixture-model"
-      }
-     ]
-    },
     "lucrativeness": {
      "low": null,
      "mid": null,
@@ -1835,13 +1580,6 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
-   "operator_scale": {
-    "value": 1,
-    "source_id": "fixture-ownership",
-    "as_of": "2026-10-01",
-    "confidence": "published",
-    "note": "synthetic internal note"
-   },
    "housing_summary": null,
    "sources": [
     "fixture-location",

@@ -92,8 +92,6 @@ SEASON_LENGTH = {"alpha-peak": 150, "bravo-bowl": 138, "charlie-hill": 120, "ech
                  "lima-hollow": 118}
 
 LEVELS = ["none", "level_1", "level_2", "level_3", "trainer", "examiner"]
-COMPONENTS = ["cert_pay_differential", "paid_training_hours", "examiner_trainer_presence",
-              "private_lesson_share", "year_round_staff", "clinic_access"]
 ASSUMPTIONS = [  # owner decision 4 keys and labels per docs/map/ARCHITECTURE.md; values synthetic
     ("wage_top_usd", "Top of the posted wage scale, per hour", 32.5),
     ("wage_bottom_usd", "Bottom of the posted wage scale, per hour", 21),
@@ -105,7 +103,6 @@ ASSUMPTIONS = [  # owner decision 4 keys and labels per docs/map/ARCHITECTURE.md
     ("rent_monthly_usd", "Average rent per month", 1150),
     ("tax", "Savings are before tax", None),
 ]
-OPERATOR_SCALE = {"alpha-peak": 3, "foxtrot-basin": 2, "hotel-lake": 1}
 ACCESS = {
     "alpha-peak": ("transit_friendly", "A free bus links the staff village and the town to the base all day."),
     "kilo-notch": ("car_centric", "Most staff drive about 20 minutes from the valley towns."),
@@ -125,21 +122,6 @@ def pay_rows(base, levels, stale_level=None, confidence="published", reported_le
     return rows
 
 
-def prof(score, status="computed"):
-    """All six components, always (contract). Non computed statuses carry null weights or values."""
-    weights = [0.25, 0.2, 0.15, 0.15, 0.15, 0.1]
-    base = (score if score is not None else 50) / 100
-    vals = [round(min(1, max(0, base + d)), 2) for d in (0.1, -0.05, 0.05, -0.1, 0.0, 0.0)]
-    if status == "insufficient_data":
-        vals = [vals[0], vals[1]] + [None] * 4
-    rows = []
-    for c, w, v in zip(COMPONENTS, weights, vals):
-        w = None if status == "weights_unset" else w
-        pts = round(100 * w * v, 1) if status == "computed" and v is not None else None
-        rows.append({"component": c, "weight": w, "value": v, "points": pts, "source_id": "fixture-model"})
-    return {"score": score if status == "computed" else None, "status": status, "breakdown": rows}
-
-
 def lucr(low, mid, high, status="computed", rent_source=None):
     vals = [(k, l, None if status == "assumptions_unset" and k == "hours_per_week" else v) for k, l, v in ASSUMPTIONS]
     return {"low": low if status == "computed" else None, "mid": mid if status == "computed" else None,
@@ -155,20 +137,19 @@ def career_data():
         "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
-                       "professionalism": prof(72), "lucrativeness": lucr(3200, 8900, 8900, rent_source=("employee_housing_mean:alpha-staff-village,alpha-town-lease", "fixture-resort-site, fixture-survey")),
-                       "stale_fields": ["pay.level_1", "private_split", "professionalism.clinic_access"]},
+                       "lucrativeness": lucr(3200, 8900, 8900, rent_source=("employee_housing_mean:alpha-staff-village,alpha-town-lease", "fixture-resort-site, fixture-survey")),
+                       "stale_fields": ["pay.level_1", "private_split"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
-                       "professionalism": prof(None, "weights_unset"), "lucrativeness": lucr(None, None, None, "assumptions_unset"),
+                       "lucrativeness": lucr(None, None, None, "assumptions_unset"),
                        "stale_fields": []},
         "charlie-hill": {"pay": pay_rows(17, ["level_2"], confidence="estimated"), "private_rate": None, "private_split": None,
-                         "professionalism": prof(None, "insufficient_data"),
                          "lucrativeness": lucr(None, None, None, "insufficient_data"), "stale_fields": []},
         "foxtrot-basin": {"pay": pay_rows(22, ["level_1", "level_2", "level_3"]),
                           "private_rate": sourced({"low": 700, "high": 950, "unit": "full_day"}),
                           "private_split": sourced(40, "fixture-model", "estimated"),
-                          "professionalism": prof(85), "lucrativeness": lucr(4800, 10600, 10600, rent_source=("acs_median", "fixture-model")), "stale_fields": []},
+                          "lucrativeness": lucr(4800, 10600, 10600, rent_source=("acs_median", "fixture-model")), "stale_fields": []},
         "hotel-lake": {"pay": pay_rows(23, ["level_1", "level_2"]), "private_rate": None, "private_split": None,
-                       "professionalism": prof(61), "lucrativeness": lucr(None, None, None, "insufficient_data"),
+                       "lucrativeness": lucr(None, None, None, "insufficient_data"),
                        "stale_fields": []},
     }
 
@@ -244,9 +225,6 @@ def resort_record(row):
         record["facility_type"] = facility
     record["detail_available"] = rid in DETAIL_IDS
     record["trailmap_available"] = rid in TRAILMAP_IDS
-    if rid in OPERATOR_SCALE:
-        record["operator_scale"] = {"value": OPERATOR_SCALE[rid], "source_id": "fixture-ownership", "as_of": AS_OF,
-                                    "confidence": "published", "note": "synthetic internal note"}
     if rid == "alpha-peak":
         record["official_trailmap"] = {"url": "https://example.com/fixture/alpha-peak-trail-map-2025-26.pdf", "format": "pdf",
                                        "season": "2025/26", "source_id": "fixture-resort-site", "as_of": AS_OF,
@@ -271,8 +249,6 @@ def resort_record(row):
     for k in ("private_rate", "private_split"):
         if career.get(k):
             ids.add(career[k]["source_id"])
-    for b in (career.get("professionalism") or {}).get("breakdown", []):
-        ids.add(b["source_id"])
     record["sources"] = sorted(ids)
     return record
 
@@ -350,7 +326,6 @@ def recolor_props(r):
     return {
         "season_length_days": r["season"]["length_days"]["value"] if r["season"]["length_days"] else None,
         "snowfall_annual_in": snow,
-        "professionalism_score": (r.get("operator_scale") or {}).get("value"),
         "lucrativeness_mid": (c.get("lucrativeness") or {}).get("mid"),
     }
 
