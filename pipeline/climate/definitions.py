@@ -61,6 +61,11 @@ CLIMATE_KEYS = (
     "min_month_coverage",
     "min_storms_per_month",
     "density_estimate_method",
+    "era5_snow_elevation_band_ft",
+    "low_relief_max_vertical_ft",
+    "low_relief_max_base_ft",
+    "validation_flag_pct",
+    "validation_suppress_pct",
 )
 SNOTEL_KEYS = (
     "radius_km",
@@ -74,6 +79,12 @@ SNOTEL_KEYS = (
     "swe_noise_tolerance_in",
     "max_daily_depth_gain_in",
     "min_valid_storms",
+    "min_record_seasons",
+    "swe_min_daily_gain_in",
+    "swe_max_daily_gain_in",
+    "max_daily_new_snow_in",
+    "rain_snow_threshold_c",
+    "lapse_rate_c_per_km",
 )
 
 SUGGESTED_YAML = """\
@@ -93,6 +104,13 @@ climate:
   min_month_coverage: 0.9       # share of days with data before a season month counts
   min_storms_per_month: 5       # storms needed before a month gets a density value
   density_estimate_method: anderson_1976   # or hedstrom_pomeroy_1998
+  # ERA5 snowfall is kept only where no usable SNOTEL station exists and either the
+  # ERA5 grid cell height is within this band of the resort base, or the resort is low relief.
+  era5_snow_elevation_band_ft: 1000
+  low_relief_max_vertical_ft: 1500   # low relief: vertical under this ...
+  low_relief_max_base_ft: 4000       # ... and base under this
+  validation_flag_pct: 35       # flag annual totals this far from the published annual snowfall
+  validation_suppress_pct: 50   # null monthly snowfall when the annual total is this far off
   snotel:
     radius_km: 25               # search radius around the resort base
     elevation_band_below_ft: 1500   # station may sit this far below the resort elevation
@@ -105,6 +123,12 @@ climate:
     swe_noise_tolerance_in: 0.1 # a daily SWE drop larger than this inside a storm is sensor noise
     max_daily_depth_gain_in: 40 # a daily depth jump above this is a sensor spike
     min_valid_storms: 20        # station is usable with at least this many QC passed storms
+    min_record_seasons: 10      # station needs this many seasons of daily SWE in the period
+    swe_min_daily_gain_in: 0.1  # smallest daily SWE gain counted as snowfall (WTEQ precision is 0.1 in)
+    swe_max_daily_gain_in: 6.0  # a daily SWE gain above this is a sensor spike
+    max_daily_new_snow_in: 60   # cap on derived daily new snow
+    rain_snow_threshold_c: 1.0  # SWE gains without a depth gain count as snow at or below this air temperature
+    lapse_rate_c_per_km: 6.5    # standard atmosphere lapse rate, ERA5 temperature to station elevation
 """
 
 
@@ -125,6 +149,12 @@ class SnotelSettings:
     swe_noise_tolerance_in: float
     max_daily_depth_gain_in: float
     min_valid_storms: int
+    min_record_seasons: int
+    swe_min_daily_gain_in: float
+    swe_max_daily_gain_in: float
+    max_daily_new_snow_in: float
+    rain_snow_threshold_c: float
+    lapse_rate_c_per_km: float
 
 
 @dataclass(frozen=True)
@@ -139,6 +169,11 @@ class ClimateSettings:
     min_month_coverage: float
     min_storms_per_month: int
     density_estimate_method: str
+    era5_snow_elevation_band_ft: float
+    low_relief_max_vertical_ft: float
+    low_relief_max_base_ft: float
+    validation_flag_pct: float
+    validation_suppress_pct: float
     snotel: SnotelSettings
 
 
@@ -219,6 +254,11 @@ def climate_settings(defs: Mapping[str, Any]) -> ClimateSettings:
         min_month_coverage=float(climate["min_month_coverage"]),
         min_storms_per_month=int(climate["min_storms_per_month"]),
         density_estimate_method=method,
+        era5_snow_elevation_band_ft=float(climate["era5_snow_elevation_band_ft"]),
+        low_relief_max_vertical_ft=float(climate["low_relief_max_vertical_ft"]),
+        low_relief_max_base_ft=float(climate["low_relief_max_base_ft"]),
+        validation_flag_pct=float(climate["validation_flag_pct"]),
+        validation_suppress_pct=float(climate["validation_suppress_pct"]),
         snotel=SnotelSettings(
             radius_km=float(snotel["radius_km"]),
             elevation_band_below_ft=float(snotel["elevation_band_below_ft"]),
@@ -231,6 +271,12 @@ def climate_settings(defs: Mapping[str, Any]) -> ClimateSettings:
             swe_noise_tolerance_in=float(snotel["swe_noise_tolerance_in"]),
             max_daily_depth_gain_in=float(snotel["max_daily_depth_gain_in"]),
             min_valid_storms=int(snotel["min_valid_storms"]),
+            min_record_seasons=int(snotel["min_record_seasons"]),
+            swe_min_daily_gain_in=float(snotel["swe_min_daily_gain_in"]),
+            swe_max_daily_gain_in=float(snotel["swe_max_daily_gain_in"]),
+            max_daily_new_snow_in=float(snotel["max_daily_new_snow_in"]),
+            rain_snow_threshold_c=float(snotel["rain_snow_threshold_c"]),
+            lapse_rate_c_per_km=float(snotel["lapse_rate_c_per_km"]),
         ),
     )
 

@@ -13,6 +13,11 @@ climate:
   min_month_coverage: 0.9
   min_storms_per_month: 2
   density_estimate_method: anderson_1976
+  era5_snow_elevation_band_ft: 1000
+  low_relief_max_vertical_ft: 1500
+  low_relief_max_base_ft: 4000
+  validation_flag_pct: 35
+  validation_suppress_pct: 50
   snotel:
     radius_km: 25
     elevation_band_below_ft: 1500
@@ -25,3 +30,9 @@ climate:
     swe_noise_tolerance_in: 0.1
     max_daily_depth_gain_in: 40
     min_valid_storms: 5
+    min_record_seasons: 2
+    swe_min_daily_gain_in: 0.1
+    swe_max_daily_gain_in: 6.0
+    max_daily_new_snow_in: 60
+    rain_snow_threshold_c: 1.0
+    lapse_rate_c_per_km: 6.5
