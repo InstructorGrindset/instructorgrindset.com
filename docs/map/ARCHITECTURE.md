@@ -842,6 +842,7 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
 * `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
 * `data/raw/sources/*.yaml`: pipeline owned shared sources (`{ sources: Source[] }`, e.g. `owner-decisions-2026-10-11`) that any research file may cite. Source ids are unique across all of `/data/raw`; the same id may repeat only with an identical url.
 * `data/raw/openskimap/`: downloaded OpenSkiMap ski areas (gitignored when large; the filtered US extract is committed).
+* `data/raw/transit/`: `feeds.yaml` (GTFS feeds from the Mobility Database catalog), downloaded `<agency>/gtfs.zip` (gitignored) and the committed `<agency>.json` extracts (Phase 5 above; coverage and skipped feeds in `data/raw/transit/README.md`).
 * `data/raw/climate/`: cached Open Meteo and SNOTEL responses (gitignored).
 * `data/raw/climate/noaa_normals/` (committed): `ann_snow_normals.csv`, one row per station of the 50 states with the
   `ANN-SNOW-NORMAL` column of the NOAA NCEI U.S. Climate Normals 1991 to 2020 (annual and seasonal, by station):
