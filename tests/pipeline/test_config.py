@@ -26,7 +26,8 @@ def test_definitions_section_6_values(cfg):
 def test_weights_and_assumptions_are_unset(cfg):
     assert all(v is None for v in cfg.definitions.professionalism.weights.model_dump().values())
     assert not cfg.definitions.professionalism.weights_set
-    assert all(v is None for v in cfg.definitions.lucrativeness.assumptions.model_dump().values())
+    a = cfg.definitions.lucrativeness.assumptions   # owner decision 4: stated assumptions, tips unknown
+    assert (a.hours_per_week, a.default_season_months, a.tips_season_usd) == (40, 5, None)
 
 
 def test_density_classes(cfg):

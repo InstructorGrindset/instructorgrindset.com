@@ -113,8 +113,13 @@ function watch(page, label) {
   };
 }
 
-async function ready(page) {
+async function ready(page, { start = true } = {}) {
   await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 20000 });
+  // The WebGL map starts on the first click or tap (owner decision 9); most checks need it running.
+  if (start && await page.evaluate(() => Boolean(window.__careerMap.startMap) && !window.__careerMap.mapStarted)) {
+    await page.locator('#map-start').click();
+    await page.waitForFunction(() => window.__careerMap.mapCtl || document.querySelector('.map-fallback'), null, { timeout: 20000 });
+  }
 }
 
 async function mapIdle(page) {
@@ -205,6 +210,20 @@ async function desktop(browser, base) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   const w = watch(page, 'desktop');
   await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await page.waitForTimeout(300);
+  const before = await page.evaluate(() => ({
+    started: window.__careerMap.mapStarted, maplibre: typeof window.maplibregl, preview: document.querySelectorAll('.map-preview').length,
+    label: document.getElementById('map-start') && document.getElementById('map-start').textContent,
+  }));
+  check(!before.started && before.maplibre === 'undefined' && before.preview === 1, 'the WebGL map waits for a click; a 2D picture shows the view');
+  check(before.label === 'Click to explore the map', `start button reads "${before.label}"`);
+  await shot(page, 'desktop-00-start-map.png');
+  await page.locator('#map-start').focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => window.__careerMap.mapCtl, null, { timeout: 20000 });
+  await page.waitForFunction(() => !document.getElementById('map-start'), null, { timeout: 20000 });
+  check(await page.evaluate(() => document.activeElement === window.__careerMap.mapCtl.map.getCanvas()), 'Enter on the start button starts the map and focus moves to it');
   await ready(page);
   await mapIdle(page);
   check(await heading(page) === 'United States', 'national heading');
@@ -675,6 +694,13 @@ async function phone(browser, base) {
   const w = watch(page, 'phone');
 
   await page.goto(`${base}/map/`);
+  await ready(page, { start: false });
+  check(await page.locator('#map-start').innerText() === 'Tap to explore the map', 'phone: start button reads "Tap to explore the map"');
+  await shot(page, 'phone-00-start-map.png');
+  // A tap anywhere on the picture starts the map.
+  await page.mouse.click(195, 160);
+  await page.waitForFunction(() => window.__careerMap.mapCtl, null, { timeout: 20000 });
+  check(true, 'phone: a tap on the picture starts the map');
   await ready(page);
   await mapIdle(page);
   check(await page.locator('#panel').getAttribute('data-sheet') === 'half', 'sheet starts half open');

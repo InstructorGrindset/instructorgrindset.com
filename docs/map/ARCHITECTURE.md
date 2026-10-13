@@ -153,6 +153,8 @@ Snowfall sources (`snowfall_source`), in order of preference:
 * `era5`: Open Meteo ERA5 daily snowfall, used only without a usable station and only for low relief resorts or where the ERA5 grid cell height is close to the resort base (thresholds in `config/definitions.yaml` `climate`).
 * `null`: no source fits, or the derived annual total is more than `climate.validation_suppress_pct` from the published `Resort.snow.annual_avg_in`. When `snowfall_in` is null, `powder_days`, `banner_days` and `avg_storm_depth_in` are null too. Temperatures, wind, sun and density stay.
 
+Open Meteo access: by default the ETL calls the free endpoint `https://archive-api.open-meteo.com/v1/archive` and keeps under the free tier limits. When the environment variable `OPEN_METEO_API_KEY` is set, it calls the customer endpoint `https://customer-archive-api.open-meteo.com/v1/archive` with the key in the `apikey` query parameter, as Open Meteo's docs describe. The daily budget guard then uses `climate.open_meteo.paid_daily_budget` from `config/definitions.yaml`; null keeps the free tier limits even with a key. The key lives only in the environment. It is never written to config, cache, build output or logs, and error messages redact it.
+
 `climate/provenance.json` (`{ version, generated_at, resorts: { id: {...} } }`) records the ERA5 grid cell, the SNOTEL station and how it was chosen, QC counts and the validation result per resort. `docs/map/climate-validation.md` is generated from it.
 
 ## Phase 4 career

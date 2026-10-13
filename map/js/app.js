@@ -2,9 +2,10 @@
 //
 // Load order (Phase 8 performance, see docs/map/ARCHITECTURE.md "Frontend"):
 // 1. map-index.json, clusters.geojson and states.json, then the panel and the list view render.
-// 2. MapLibre (preloaded by the page head, run after the first paint) builds the WebGL map.
-// 3. After the first map frame: resorts.json, sources.json and definitions.json, the recolor control,
-//    then the state outlines. A resort or comparison view asks for step 3 data straight away.
+// 2. A 2D picture of the view (preview.js) with "Click (Tap) to explore the map". The first click or tap runs
+//    MapLibre (preloaded by the page head) and builds the WebGL map (owner decision 9).
+// 3. resorts.json, sources.json and definitions.json load when the page is idle (a resort or comparison view
+//    asks for them straight away); after the WebGL map loads, the recolor control and the state outlines.
 import { config, isPhone } from './config.js';
 import { loadAll, loadStateOutlines } from './data.js';
 import { createRouter } from './router.js';
@@ -132,6 +133,7 @@ async function main() {
   }
 
   let router;
+  let onViewChange = () => {};
   let detailControls = null;
   let detailFor = null;
   let detailData = null;
@@ -200,7 +202,7 @@ async function main() {
     if (mapCtl) {
       if (!isPhone()) mapCtl.resize();
       mapCtl.show(view, { animate: !initial });
-    }
+    } else onViewChange();
     let msg = summary(index, view);
     if (fellBack) {
       msg = `That link points to a page we could not find, so here is the closest match. ${msg}`;
@@ -243,81 +245,119 @@ async function main() {
   router.start();
   performance.mark('careermap:panel');
   els.panel.setAttribute('aria-busy', 'false');
-  // First map frame while MapLibre downloads (a picture; removed when the WebGL map loads).
-  let preview = null;
-  if (!els.map.hidden && router.current) {
-    try { preview = drawPreview(els.map, index, router.current, padding(router.current)); } catch (err) { console.warn('[map] preview', err.message); }
-  }
-  const dropPreview = () => { if (preview) { preview.remove(); preview = null; } };
-  const state = { index, router, mapCtl: null, panelReady: true, ready: false };
-  window.__careerMap = state;
 
-  // Full records and sources: right away when the view needs them (the panel asked already), else after the map.
+  // The WebGL map starts on the first click or tap over the map (owner decision 9, 2026-10-13). Until then a 2D
+  // picture of the current view (preview.js) fills the map area with a button that starts it.
+  let preview = null;
+  const drawFrame = () => {
+    if (mapCtl || els.map.hidden || !router.current) return;
+    const next = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current)); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
+    if (preview) preview.remove();
+    preview = next;
+    if (preview) els.map.insertBefore(preview, startBtn);
+  };
+  const dropPreview = () => { if (preview) { preview.remove(); preview = null; } };
+  const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  const startLabel = coarse ? 'Tap to explore the map' : 'Click to explore the map';
+  const startBtn = h('button', { type: 'button', class: 'btn map-start', id: 'map-start' }, startLabel);
+  els.map.append(startBtn);
+  els.map.classList.add('map-waiting');
+  drawFrame();
+  const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false };
+  window.__careerMap = state;
+  onViewChange = () => { if (!mapCtl) drawFrame(); };
+  let resizeTimer = null;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (!mapCtl) drawFrame(); }, 150); });
+
+  // Full records and sources: right away when the view needs them (the panel asked already), else when idle.
   const loadDetails = () => index.loadDetails().then(() => panel.fillSources()).catch(() => {
     for (const el of els.content.querySelectorAll('.src-pending')) el.textContent = 'Source record pending';
   });
+  window.addEventListener('load', () => idle(loadDetails), { once: true });
 
-  try {
-    const [maplibregl, { createMap }] = await Promise.all([whenMapLibre().then((m) => {
-      performance.mark('careermap:maplibre');
-      // Start the worker threads before the map constructor occupies the main thread.
-      if (typeof m.prewarm === 'function') m.prewarm();
-      return m;
-    }), mapModule]);
-    mapCtl = createMap(els.map, index, maplibregl, {
-      getPadding: padding,
-      onPick(target, current) {
-        const cur = current || { level: 'national' };
-        if (target.kind === 'housing') { panel.selectSite(target.id); return; }
-        if (target.kind === 'state') {
-          if (cur.stateCode === target.id && cur.level === 'state') return;
-          router.go({ level: 'state', stateCode: target.id });
-        } else if (target.kind === 'cluster') {
-          const c = index.clusters.get(target.id);
-          const st = cur.stateCode && c.states.includes(cur.stateCode) ? cur.stateCode : c.states[0];
-          router.go({ level: 'cluster', stateCode: st, clusterId: c.id });
-        } else {
-          const r = index.resorts.get(target.id);
-          const c = index.clusters.get(r.cluster_id);
-          if (!c) return;
-          const st = cur.stateCode && c.states.includes(cur.stateCode) ? cur.stateCode
-            : (c.states.includes(r.state) ? r.state : c.states[0]);
-          router.go({ level: 'resort', stateCode: st, clusterId: c.id, resortId: r.id });
-        }
-      },
-    });
-  } catch (err) {
-    console.warn('[map] map unavailable, showing list view:', err.message);
-    els.map.append(h('p', { class: 'map-fallback' }, 'The interactive map needs WebGL. The list view shows every resort.'));
-    dropPreview();
-    setListView(true);
-    state.ready = true;
-    loadDetails();
-    return;
+  let starting = null;
+  function startMap() {
+    if (!starting) starting = createWebGLMap();
+    return starting;
   }
+  els.map.addEventListener('click', (e) => { if (!state.mapStarted && (e.target === preview || e.target === els.map || e.target === startBtn)) startMap(); });
+  state.startMap = startMap;
 
-  state.mapCtl = mapCtl;
-  if (filterKey !== 'all') mapCtl.setFilter(filterKey);
-  if (detailFor) applyDetail();
-  if (trailFor) setTrailControl(trailFor);
-  if (router.current) mapCtl.show(router.current, { animate: false });
-  state.ready = true;
-
-  mapCtl.map.once('load', () => {
-    performance.mark('careermap:map');
-    dropPreview();
-    // Off the critical path: full data, the recolor control, then state outlines.
-    loadDetails();
-    if (els.recolor) {
-      import('./recolor.js').then(({ createRecolor }) => {
-        createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce });
-      }).catch((err) => console.warn('[map] recolor', err.message));
+  async function createWebGLMap() {
+    state.mapStarted = true;
+    performance.mark('careermap:start-map');
+    const hadFocus = document.activeElement === startBtn;
+    startBtn.textContent = 'Loading the map';
+    startBtn.setAttribute('aria-disabled', 'true');
+    els.map.setAttribute('aria-busy', 'true');
+    try {
+      const [maplibregl, { createMap }] = await Promise.all([whenMapLibre().then((m) => {
+        performance.mark('careermap:maplibre');
+        // Start the worker threads before the map constructor occupies the main thread.
+        if (typeof m.prewarm === 'function') m.prewarm();
+        return m;
+      }), mapModule]);
+      mapCtl = createMap(els.map, index, maplibregl, {
+        getPadding: padding,
+        onPick(target, current) {
+          const cur = current || { level: 'national' };
+          if (target.kind === 'housing') { panel.selectSite(target.id); return; }
+          if (target.kind === 'state') {
+            if (cur.stateCode === target.id && cur.level === 'state') return;
+            router.go({ level: 'state', stateCode: target.id });
+          } else if (target.kind === 'cluster') {
+            const c = index.clusters.get(target.id);
+            const st = cur.stateCode && c.states.includes(cur.stateCode) ? cur.stateCode : c.states[0];
+            router.go({ level: 'cluster', stateCode: st, clusterId: c.id });
+          } else {
+            const r = index.resorts.get(target.id);
+            const c = index.clusters.get(r.cluster_id);
+            if (!c) return;
+            const st = cur.stateCode && c.states.includes(cur.stateCode) ? cur.stateCode
+              : (c.states.includes(r.state) ? r.state : c.states[0]);
+            router.go({ level: 'resort', stateCode: st, clusterId: c.id, resortId: r.id });
+          }
+        },
+      });
+    } catch (err) {
+      console.warn('[map] map unavailable, showing list view:', err.message);
+      startBtn.remove();
+      els.map.classList.remove('map-waiting');
+      els.map.removeAttribute('aria-busy');
+      els.map.append(h('p', { class: 'map-fallback' }, 'The interactive map needs WebGL. The list view shows every resort.'));
+      dropPreview();
+      setListView(true);
+      return null;
     }
-    idle(() => loadStateOutlines(index).then((fc) => {
-      if (fc) mapCtl.setStates(fc);
-      state.statesReady = true;
-    }));
-  });
+
+    state.mapCtl = mapCtl;
+    if (filterKey !== 'all') mapCtl.setFilter(filterKey);
+    if (detailFor) applyDetail();
+    if (trailFor) setTrailControl(trailFor);
+    if (router.current) mapCtl.show(router.current, { animate: false });
+
+    mapCtl.map.once('load', () => {
+      performance.mark('careermap:map');
+      dropPreview();
+      startBtn.remove();
+      els.map.classList.remove('map-waiting');
+      els.map.removeAttribute('aria-busy');
+      announce('The map is ready. Drag to pan and use the zoom buttons or the plus and minus keys.');
+      if (hadFocus || document.activeElement === document.body) mapCtl.map.getCanvas().focus({ preventScroll: true });
+      // Off the critical path: full data, the recolor control, then state outlines.
+      loadDetails();
+      if (els.recolor) {
+        import('./recolor.js').then(({ createRecolor }) => {
+          createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce });
+        }).catch((err) => console.warn('[map] recolor', err.message));
+      }
+      idle(() => loadStateOutlines(index).then((fc) => {
+        if (fc) mapCtl.setStates(fc);
+        state.statesReady = true;
+      }));
+    });
+    return mapCtl;
+  }
 }
 
 main();

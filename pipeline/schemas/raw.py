@@ -11,7 +11,8 @@ from pydantic import Field, ValidationInfo, field_validator, model_validator
 
 from .common import Latitude, Longitude, Slug, Source, SourcedString, StateCode, StrictModel, check_source_ref
 from .resort import (
-    Approval, Clients, Elevation, FacilityType, Fit, Season, Size, Snow, Terrain, TierACriterion, TierAStatus,
+    Access, Approval, Clients, Elevation, FacilityType, Fit, Season, Size, Snow, SourcedOperatorScale, Terrain,
+    TierACriterion, TierAStatus,
     check_approval,
 )
 
@@ -33,6 +34,8 @@ class TierARecord(StrictModel):
     size: Size = Field(default_factory=Size)
     elevation: Elevation = Field(default_factory=Elevation)
     snow: Optional[Snow] = None
+    operator_scale: Optional[SourcedOperatorScale] = None   # 1 family, 2 independent business, 3 large corporate
+    access: Optional[Access] = None                         # convenient | transit_friendly | mixed | car_centric
     season: Season = Field(default_factory=Season)
     terrain: Terrain = Field(default_factory=Terrain)
     fit: Fit = Field(default_factory=Fit)

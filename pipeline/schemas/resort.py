@@ -8,6 +8,7 @@ from pydantic import Field, ValidationInfo, field_validator, model_validator
 from .career import Career
 from .housing import HousingSummary
 from .common import (
+    Confidence,
     Latitude,
     Longitude,
     Slug,
@@ -66,6 +67,46 @@ class Elevation(StrictModel):
         if self.base_ft is not None and self.summit_ft is not None and self.base_ft.value > self.summit_ft.value:
             raise ValueError("elevation base_ft must not exceed summit_ft")
         return self
+
+
+class SourcedOperatorScale(SourcedNumber):
+    """Professionalism shown publicly as "N of 3": 1 family owned, 2 independent business owned,
+    3 large scale corporate operation (owner decision 5; the meaning, note and source stay internal)."""
+
+    value: int  # type: ignore[assignment]
+
+    @field_validator("value")
+    @classmethod
+    def _range(cls, v: int) -> int:
+        if v not in (1, 2, 3):
+            raise ValueError("operator_scale value must be 1, 2 or 3")
+        return v
+
+
+AccessRating = Literal["convenient", "transit_friendly", "mixed", "car_centric"]
+
+
+class Access(StrictModel):
+    """Researched access rating (owner decision 6). summary_md is one short public sentence."""
+
+    rating: AccessRating
+    summary_md: str = Field(min_length=1, max_length=400)
+    source_id: Slug
+    as_of: dt.date
+    confidence: Confidence
+    note: Optional[str] = None
+
+    @field_validator("source_id")
+    @classmethod
+    def _source_defined(cls, v: str, info: ValidationInfo) -> str:
+        return check_source_ref(v, info)
+
+    @field_validator("summary_md")
+    @classmethod
+    def _style(cls, v: str) -> str:
+        if "\u2014" in v or "\u2013" in v:
+            raise ValueError("summary_md: no em or en dashes (Alexandre's style)")
+        return v.strip()
 
 
 class Snow(StrictModel):
@@ -148,6 +189,8 @@ class Resort(StrictModel):
     size: Size = Field(default_factory=Size)
     elevation: Elevation = Field(default_factory=Elevation)
     snow: Optional[Snow] = None
+    operator_scale: Optional[SourcedOperatorScale] = None
+    access: Optional[Access] = None
     season: Season = Field(default_factory=Season)
     terrain: Terrain = Field(default_factory=Terrain)
     fit: Fit = Field(default_factory=Fit)
@@ -221,6 +264,7 @@ def referenced_source_ids(resort: Resort) -> set[str]:
             for item in obj:
                 walk(item)
 
-    for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "season", "terrain", "career", "editorial"):
+    for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "season",
+                 "terrain", "career", "editorial"):
         walk(getattr(resort, name))
     return found

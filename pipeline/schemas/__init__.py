@@ -21,7 +21,9 @@ from .housing import (
 from .raw import OwnershipEntry, OwnershipFile, SourcesFile, TierABatch, TierARecord
 from .records import Commute, HousingSite, Report
 from .resort import (
+    Access,
     Approval,
+    SourcedOperatorScale,
     Career,
     Clients,
     Editorial,
@@ -42,7 +44,7 @@ except ImportError:  # pragma: no cover - depends on the climate module existing
     ClimateMonth = None  # type: ignore[assignment]
 
 __all__ = [
-    "Approval", "Career", "Clients", "Elevation", "SourcesFile", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
+    "Access", "SourcedOperatorScale", "Approval", "Career", "Clients", "Elevation", "SourcesFile", "ClimateMonth", "Cluster", "Commute", "Confidence", "Editorial",
     "Fit", "Geometry", "HousingSite", "LucrativenessOut", "CareerInputs", "CareerBatch", "PayBatch",
     "PayRow", "Professionalism", "ProfessionalismInputs", "BreakdownItem", "Assumption", "CERT_LEVELS",
     "PROFESSIONALISM_COMPONENTS", "DetailFile", "HousingBatch", "HousingOut", "HousingSummary", "Isochrone",

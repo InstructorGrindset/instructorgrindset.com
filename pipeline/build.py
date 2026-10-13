@@ -128,7 +128,7 @@ def _tier_b_draft(area: openskimap.SkiArea, rid: str, as_of: dt.date) -> dict:
         "owner": None, "lat": round(area.lat, 5), "lon": round(area.lon, 5),
         "location_source_id": openskimap.SOURCE_ID, "state": area.state,
         "size": {"acres": None, "vertical_ft": None, "lifts": None, "ski_school_staff_est": None},
-        "elevation": {"base_ft": None, "summit_ft": None}, "snow": None,
+        "elevation": {"base_ft": None, "summit_ft": None}, "snow": None, "operator_scale": None, "access": None,
         "career": None, "editorial": None,
     }
     _osm_fill(d, area, as_of)
@@ -678,7 +678,8 @@ def _refs(d: dict) -> set[str]:
             for v in o:
                 walk(v)
 
-    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "season", "terrain", "career", "editorial"):
+    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "season", "terrain",
+                "career", "editorial"):
         walk(d.get(key))
     return found
 

@@ -352,7 +352,8 @@ def test_career_layer_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch)
     assert [p["cert_level"] for p in peak["pay"]] == ["level_2"]  # the 2 report aggregate is not displayed
     assert peak["pay"][0]["source_id"] == "fixture-pay-sheet" and peak["pay"][0]["stale"] is False
     assert peak["professionalism"]["status"] == "weights_unset"
-    assert peak["lucrativeness"]["status"] == "assumptions_unset" and peak["lucrativeness"]["mid"] is None
+    # owner decision 4: assumptions are set; no rent data in this fixture, so insufficient_data
+    assert peak["lucrativeness"]["status"] == "insufficient_data" and peak["lucrativeness"]["mid"] is None
     assert "fixture-pay-sheet" in by["fixture-peak"]["sources"]
     basin = by["fixture-basin"]
     assert basin["career"]["private_split"]["value"] == 40 and basin["career"]["pay"] == []
@@ -506,8 +507,12 @@ def test_phase5_rent_reaches_lucrativeness(repo_root, raw_dir, out, tmp_path, cf
     _run(repo_root, raw_dir, out, tmp_path)
     by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
     echo = {a["key"]: a["value"] for a in by["fixture-peak"]["career"]["lucrativeness"]["assumptions"]}
+    # mean of the employee housing rent mids: the staff lodge (650 to 900) is the only employee site
     assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == \
-        (650, "employee_housing:peak-staff-lodge", "fixture-housing-page")
+        (775.0, "employee_housing_mean:peak-staff-lodge", "fixture-housing-page")
+    lucr = by["fixture-peak"]["career"]["lucrativeness"]
+    assert lucr["status"] == "computed" and lucr["mid"] == round(24 * 40 * 5 * 4.33 - 775 * 5)
+    assert lucr["low"] == round(20 * 40 * 5 * 4.33 - 775 * 5)
 
 
 def test_phase5_baseline_rent_when_no_employee_housing(repo_root, raw_dir, out, tmp_path, cfg, lifts_full,
@@ -519,7 +524,8 @@ def test_phase5_baseline_rent_when_no_employee_housing(repo_root, raw_dir, out, 
     _run(repo_root, raw_dir, out, tmp_path)
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
     echo = {a["key"]: a["value"] for a in peak["career"]["lucrativeness"]["assumptions"]}
-    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == (1478.0, "fmr_studio", "hud-fmr-fy2026")
+    # no employee housing and no ACS value in this fixture: HUD FMR one bedroom
+    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == (1640.0, "fmr_one_br", "hud-fmr-fy2026")
 
 
 def test_phase5_housing_validation(repo_root, raw_dir, out, tmp_path):
@@ -644,15 +650,17 @@ def test_reports_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, 
     assert '"hourly_usd"' not in build_text and "99" not in json.dumps(peak["career"])
 
 
-def test_reports_area_rent_feeds_lucrativeness(repo_root, raw_dir, out, tmp_path):
+def test_reports_area_rent_not_in_default_rent_order(repo_root, raw_dir, out, tmp_path):
+    """Owner decision 4 lists employee housing, ACS median, HUD FMR one bedroom; the area report rent
+    is shown in detail files but is not a lucrativeness rent by default."""
     (raw_dir / "pay").mkdir()
     (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
     _reports(raw_dir, [{"kind": "rent", "values": {"monthly_usd": v}} for v in (1000, 1200, 1100)])
     _run(repo_root, raw_dir, out, tmp_path)
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
     echo = {a["key"]: a["value"] for a in peak["career"]["lucrativeness"]["assumptions"]}
-    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == \
-        (1000.0, "reported_area", "instructorgrindset-reports")
+    assert (echo["rent_monthly_usd"], echo["rent_basis"]) == (None, None)
+    assert peak["career"]["lucrativeness"]["status"] == "insufficient_data"
 
 
 def _aggregate_cli(raw_dir, monkeypatch, *args):

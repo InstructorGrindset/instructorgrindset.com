@@ -102,24 +102,41 @@ def cheapest_employee_site(sites: Sequence[HousingSite], site_reported: Optional
     return min(cands, key=lambda sr: (sr[1]["value"]["low"], sr[0].id)) if cands else None
 
 
+def employee_rent_mean(sites: Sequence[HousingSite], site_reported: Optional[dict] = None
+                       ) -> Optional[tuple[float, list[str], list[str]]]:
+    """Mean of the employee housing (resort owned, master lease) rent mids, display priority applied.
+    Returns (mean, site ids, source ids) or None when no employee site has a rent."""
+    site_reported = site_reported or {}
+    rows = [(s, r) for s in sites if s.type in EMPLOYEE_HOUSING and (r := _site_rent(s, site_reported))]
+    if not rows:
+        return None
+    mids = [(r["value"]["low"] + r["value"]["high"]) / 2 for _, r in rows]
+    return sum(mids) / len(mids), [s.id for s, _ in rows], sorted({r["source_id"] for _, r in rows})
+
+
 def rent_input(sites: Sequence[HousingSite], baseline: Optional[dict], order: Sequence[str],
                preference: Sequence[str], site_reported: Optional[dict] = None, area_reported: Optional[dict] = None
                ) -> tuple[Optional[float], Optional[str], Optional[str]]:
-    """Lucrativeness rent: (monthly USD, basis, source_id) following config ``rent.lucrativeness_rent``.
+    """Lucrativeness average rent: (monthly USD, basis, source ids) following ``rent.lucrativeness_rent``.
 
-    basis is "employee_housing:<site id>", "reported_area" or the baseline key (fmr_studio, acs_median, ...).
-    The low end of a range is used.
+    Steps (owner decision 4 default: employee_housing, acs_median, fmr_one_br):
+    * employee_housing: mean of the employee housing rent mids; basis "employee_housing_mean:<site ids>"
+    * reported_area: the area rent from 3+ approved reports (midpoint); basis "reported_area"
+    * acs_median, fmr_studio, fmr_one_br, fmr_two_br: that county baseline value; basis is the key
+    * baseline: the first of ``rent.baseline_preference``
+    Several sources are joined with ", ".
     """
     for step in order:
         if step == "employee_housing":
-            hit = cheapest_employee_site(sites, site_reported)
+            hit = employee_rent_mean(sites, site_reported)
             if hit is not None:
-                return float(hit[1]["value"]["low"]), f"employee_housing:{hit[0].id}", hit[1]["source_id"]
+                return hit[0], "employee_housing_mean:" + ",".join(hit[1]), ", ".join(hit[2])
         elif step == "reported_area":
             if area_reported is not None:
-                return float(area_reported["value"]["low"]), "reported_area", area_reported["source_id"]
+                v = area_reported["value"]
+                return (v["low"] + v["high"]) / 2, "reported_area", area_reported["source_id"]
         else:
-            pick = baseline_value(baseline, preference)
+            pick = baseline_value(baseline, preference if step == "baseline" else [step])
             if pick is not None:
                 return float(pick[1]["value"]), pick[0], pick[1]["source_id"]
     return None, None, None

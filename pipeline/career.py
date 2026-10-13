@@ -10,6 +10,7 @@ Contract: docs/map/ARCHITECTURE.md, "Phase 4 career".
 from __future__ import annotations
 
 import calendar
+from dataclasses import replace
 import datetime as dt
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -27,22 +28,21 @@ from .season_income import lucrativeness_inputs, round_half_up, season_income
 from .sources import SourceRegistry
 
 ASSUMPTION_LABELS: dict[str, str] = {
-    "cert_level": "Cert level used for pay",
-    "hours_per_week": "Hours per week",
-    "season_months": "Months of rent and living costs",
-    "housing_choice": "Housing used for rent",
-    "food_monthly_usd": "Food per month (USD)",
-    "transport_monthly_usd": "Transport per month (USD)",
-    "pass_offset_usd": "Season pass (USD)",
-    "gear_offset_usd": "Gear (USD)",
-    "range_spread_low": "Range below mid, share of earnings",
-    "range_spread_high": "Range above mid, share of earnings",
-    "pay_hourly_mid_usd": "Hourly pay used, midpoint (USD)",
-    "season_length_days": "Season length (days)",
-    "rent_monthly_usd": "Rent per month (USD)",
+    "wage_top_usd": "Top of the posted wage scale (USD per hour)",
+    "wage_bottom_usd": "Bottom of the posted wage scale (USD per hour), used for the low end",
+    "hours_per_week": "Standard full time hours per week",
+    "season_months": "Season months",
+    "season_months_basis": "Season months basis",
+    "weeks_per_month": "Weeks per month",
+    "tips_season_usd": "Tips for the season (USD)",
+    "rent_monthly_usd": "Average rent per month (USD)",
     "rent_basis": "Rent basis",
     "rent_source_id": "Rent source",
+    "tax": "Savings are before tax",
 }
+TIPS_ABSENT_LABEL = "Tips are not included yet"
+SEASON_LENGTH_LABEL = "Season months (sourced season length divided by {d} days)"
+SEASON_DEFAULT_LABEL = "Season months (standard {m} month season)"
 
 
 # ----------------------------------------------------------------- staleness
@@ -144,50 +144,72 @@ def lucrativeness(
     defs: LucrativenessDefs,
     rent_basis: Optional[str] = None,
     rent_source_id: Optional[str] = None,
+    tips_season_usd: Optional[float] = None,
 ) -> dict:
-    """Season savings low / mid / high in USD, with every assumption echoed.
+    """Season savings before tax in USD (owner decision 4), with every stated assumption echoed.
 
-    earnings = mid hourly pay (assumptions.cert_level row) x hours_per_week x season_length_days / 7
-    costs    = (rent + food + transport) x season_months + pass_offset + gear_offset
-    mid = earnings - costs, low = mid - spread_low x earnings, high = mid + spread_high x earnings
+    season months = season_length_days / days_per_month, else default_season_months
+    earnings      = hourly x hours_per_week x season months x weeks_per_month
+    savings       = earnings + tips - rent x season months
+    mid = high = savings at the top of the posted wage scale (highest hourly_high of the displayed pay
+    rows, any cert level); low = savings at the bottom (lowest hourly_low).
 
-    Computed with pipeline.season_income (the calculator's shared model): earnings is its ``gross`` and
-    mid its ``net_before_tax``. Whole dollars use round_half_up (JS Math.round).
+    Computed with pipeline.season_income (the calculator's shared model) with zero offsets: earnings is its
+    ``gross`` and savings its ``net_before_tax``. Whole dollars use round_half_up (JS Math.round).
+    Tips come from ``tips_season_usd`` (a sourced or 3+ report figure), else the config value, else 0.
     """
     a = defs.assumptions
-    spread = defs.range_spread
-    pay = next((r for r in pay_rows if r["cert_level"] == a.cert_level), None) if a.cert_level else None
-    pay_mid = (pay["hourly_low"] + pay["hourly_high"]) / 2 if pay else None
-    echo = [{"key": k, "value": v, "label": ASSUMPTION_LABELS[k]} for k, v in a.model_dump().items()]
-    echo += [
-        {"key": "range_spread_low", "value": spread.low, "label": ASSUMPTION_LABELS["range_spread_low"]},
-        {"key": "range_spread_high", "value": spread.high, "label": ASSUMPTION_LABELS["range_spread_high"]},
-        {"key": "pay_hourly_mid_usd", "value": pay_mid, "label": ASSUMPTION_LABELS["pay_hourly_mid_usd"]},
-        {"key": "season_length_days", "value": season_length_days, "label": ASSUMPTION_LABELS["season_length_days"]},
+    top = max((r["hourly_high"] for r in pay_rows), default=None)
+    bottom = min((r["hourly_low"] for r in pay_rows), default=None)
+    if season_length_days:
+        months, basis = season_length_days / a.days_per_month, "season_length"
+        months_label = SEASON_LENGTH_LABEL.format(d=a.days_per_month)
+    else:
+        months, basis = a.default_season_months, "default"
+        months_label = SEASON_DEFAULT_LABEL.format(m=_fmt(a.default_season_months))
+    tips = tips_season_usd if tips_season_usd is not None else a.tips_season_usd
+    echo = [
+        {"key": "wage_top_usd", "value": top, "label": ASSUMPTION_LABELS["wage_top_usd"]},
+        {"key": "wage_bottom_usd", "value": bottom, "label": ASSUMPTION_LABELS["wage_bottom_usd"]},
+        {"key": "hours_per_week", "value": a.hours_per_week, "label": ASSUMPTION_LABELS["hours_per_week"]},
+        {"key": "season_months", "value": round(months, 2) if months is not None else None, "label": months_label},
+        {"key": "season_months_basis", "value": basis, "label": ASSUMPTION_LABELS["season_months_basis"]},
+        {"key": "weeks_per_month", "value": a.weeks_per_month, "label": ASSUMPTION_LABELS["weeks_per_month"]},
+        {"key": "tips_season_usd", "value": tips,
+         "label": ASSUMPTION_LABELS["tips_season_usd"] if tips is not None else TIPS_ABSENT_LABEL},
         {"key": "rent_monthly_usd", "value": rent_monthly, "label": ASSUMPTION_LABELS["rent_monthly_usd"]},
-        # which rent was used: "employee_housing:<site id>" or a baseline key such as fmr_studio
         {"key": "rent_basis", "value": rent_basis, "label": ASSUMPTION_LABELS["rent_basis"]},
         {"key": "rent_source_id", "value": rent_source_id, "label": ASSUMPTION_LABELS["rent_source_id"]},
+        {"key": "tax", "value": None, "label": ASSUMPTION_LABELS["tax"]},
     ]
     empty = {"low": None, "mid": None, "high": None}
-    if any(v is None for v in a.model_dump().values()) or spread.low is None or spread.high is None:
+    if a.hours_per_week is None or months is None:
         return {**empty, "status": "assumptions_unset", "assumptions": echo}
-    if pay_mid is None or rent_monthly is None or season_length_days is None:
+    if top is None or rent_monthly is None:
         return {**empty, "status": "insufficient_data", "assumptions": echo}
-    # The Season Income Calculator's shared model (Phase 9), so the map and the calculator agree.
-    r = season_income(lucrativeness_inputs(
-        pay_hourly_mid_usd=pay_mid, hours_per_week=a.hours_per_week, season_length_days=season_length_days,
-        rent_monthly_usd=rent_monthly, food_monthly_usd=a.food_monthly_usd,
-        transport_monthly_usd=a.transport_monthly_usd, season_months=a.season_months,
-        pass_offset_usd=a.pass_offset_usd, gear_offset_usd=a.gear_offset_usd))
-    earnings, mid = r.gross, r.net_before_tax   # savings before tax (ROADMAP Section 6)
 
-    def dollars(x: float) -> int:
-        return int(round_half_up(x))  # JS Math.round, like the calculator
-    return {
-        "low": dollars(mid - spread.low * earnings), "mid": dollars(mid), "high": dollars(mid + spread.high * earnings),
-        "status": "computed", "assumptions": echo,
-    }
+    def savings(hourly: float) -> float:
+        return season_savings(hourly, a.hours_per_week, months, a.weeks_per_month, rent_monthly, tips or 0.0).net_before_tax
+
+    mid = int(round_half_up(savings(top)))
+    return {"low": int(round_half_up(savings(bottom))), "mid": mid, "high": mid,
+            "status": "computed", "assumptions": echo}
+
+
+def season_savings(hourly: float, hours_per_week: float, season_months: float, weeks_per_month: float,
+                   rent_monthly: float, tips_season: float = 0.0):
+    """The shared calculator model for one hourly wage (no food, transport, pass or gear offsets)."""
+    inputs = lucrativeness_inputs(
+        pay_hourly_mid_usd=hourly, hours_per_week=hours_per_week,
+        season_length_days=season_months * weeks_per_month * 7, rent_monthly_usd=rent_monthly,
+        food_monthly_usd=0, transport_monthly_usd=0, season_months=season_months, pass_offset_usd=0, gear_offset_usd=0)
+    if tips_season:
+        inputs = replace(inputs, tips_per_day=tips_season / inputs.weeks)  # one work block per week
+    return season_income(inputs)
+
+
+def _fmt(x: Optional[float]) -> str:
+    return "" if x is None else (str(int(x)) if float(x).is_integer() else str(x))
 
 
 # ----------------------------------------------------------------- assembly

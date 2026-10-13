@@ -133,24 +133,17 @@ class ProfessionalismDefs(StrictModel):
 
 
 class LucrativenessAssumptions(StrictModel):
-    cert_level: Optional[Literal["none", "level_1", "level_2", "level_3", "trainer", "examiner"]] = None
+    """Owner decision 4. Null hours or season months means assumptions_unset."""
+
     hours_per_week: Optional[float] = Field(default=None, gt=0)
-    season_months: Optional[float] = Field(default=None, gt=0)
-    housing_choice: Optional[str] = None
-    food_monthly_usd: Optional[float] = Field(default=None, ge=0)
-    transport_monthly_usd: Optional[float] = Field(default=None, ge=0)
-    pass_offset_usd: Optional[float] = Field(default=None, ge=0)
-    gear_offset_usd: Optional[float] = Field(default=None, ge=0)
-
-
-class RangeSpread(StrictModel):
-    low: Optional[float] = Field(default=None, ge=0)
-    high: Optional[float] = Field(default=None, ge=0)
+    default_season_months: Optional[float] = Field(default=None, gt=0)
+    days_per_month: float = Field(default=30.4, gt=0)
+    weeks_per_month: float = Field(default=4.33, gt=0)
+    tips_season_usd: Optional[float] = Field(default=None, ge=0)
 
 
 class LucrativenessDefs(StrictModel):
     assumptions: LucrativenessAssumptions
-    range_spread: RangeSpread
 
 
 BaselineKey = Literal["fmr_studio", "fmr_one_br", "fmr_two_br", "acs_median"]
@@ -158,7 +151,8 @@ BaselineKey = Literal["fmr_studio", "fmr_one_br", "fmr_two_br", "acs_median"]
 
 class RentDefs(StrictModel):
     baseline_preference: list[BaselineKey] = Field(min_length=1)
-    lucrativeness_rent: list[Literal["employee_housing", "reported_area", "baseline"]] = Field(min_length=1)
+    lucrativeness_rent: list[Literal["employee_housing", "reported_area", "baseline", "fmr_studio", "fmr_one_br",
+                                     "fmr_two_br", "acs_median"]] = Field(min_length=1)
     hud_fmr_year: Optional[int] = None
     acs_year: int
     acs_dataset: str = "acs/acs5"

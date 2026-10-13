@@ -64,16 +64,24 @@ def test_display_rent_priority():
 
 
 def test_rent_input_selection():
-    order, pref = ["employee_housing", "baseline"], ["fmr_studio", "acs_median"]
+    """Owner decision 4: mean of employee housing rent mids, else ACS median, else HUD FMR one bedroom."""
+    order, pref = ["employee_housing", "acs_median", "fmr_one_br"], ["fmr_studio"]
     sites = [site(id="a", type="market", rent_monthly={"value": {"low": 300, "high": 400}, **SV}),
              site(id="b", type="master_lease", rent_monthly={"value": {"low": 700, "high": 800}, **SV}),
              site(id="c", type="resort_owned", rent_monthly={"value": {"low": 650, "high": 950}, **SV, "source_id": "src-b"}),
              site(id="d", type="resort_owned", rent_monthly=None)]
-    assert rent_input(sites, BASELINE, order, pref) == (650, "employee_housing:c", "src-b")  # market rent is ignored
+    # (750 + 800) / 2; the market site and the site without rent are left out
+    assert rent_input(sites, BASELINE, order, pref) == (775.0, "employee_housing_mean:b,c", "src-a, src-b")
     assert cheapest_employee_site(sites)[0].id == "c"
-    assert rent_input(sites[:1], BASELINE, order, pref) == (1478.0, "fmr_studio", "hud-fmr-fy2026")
-    assert rent_input(sites, BASELINE, ["baseline", "employee_housing"], ["acs_median"]) == \
-        (1950.0, "acs_median", "census-acs5-2024-b25064")
+    assert rent_input(sites[:1], BASELINE, order, pref) == (1950.0, "acs_median", "census-acs5-2024-b25064")
+    no_acs = {**BASELINE, "acs_median_gross_rent": None,
+              "fmr": {**BASELINE["fmr"], "one_br": {"value": 1640, "source_id": "hud-fmr-fy2026", "as_of": "2026-10-02",
+                                                     "confidence": "published"}}}
+    assert rent_input([], no_acs, order, pref) == (1640.0, "fmr_one_br", "hud-fmr-fy2026")
+    assert rent_input([], {**no_acs, "fmr": {"studio": None, "one_br": None, "two_br": None}}, order, pref) == (None, None, None)
+    assert rent_input([], BASELINE, ["baseline"], ["fmr_studio"]) == (1478.0, "fmr_studio", "hud-fmr-fy2026")
+    area = {"value": {"low": 1000, "high": 1200}, "source_id": "rep", "as_of": "2026-10-01", "confidence": "reported"}
+    assert rent_input([], None, ["reported_area"], pref, area_reported=area) == (1100.0, "reported_area", "rep")
     assert rent_input([], None, order, pref) == (None, None, None)
 
 
@@ -169,7 +177,7 @@ def test_reported_aggregate_beats_estimated_site_rent():
     pub = site(id="p", rent_monthly={"value": {"low": 900, "high": 950}, **SV})
     assert display_rent(pub, BASELINE, ["fmr_studio"], REPORTED)["confidence"] == "published"
     # the same rule feeds lucrativeness and the housing summary
-    assert rent_input([est], None, ["employee_housing"], [], {"e": REPORTED}) == (700.0, "employee_housing:e", "src-b")
+    assert rent_input([est], None, ["employee_housing"], [], {"e": REPORTED}) == (750.0, "employee_housing_mean:e", "src-b")
     assert housing_summary([est], False, {"e": REPORTED})["cheapest_rent_monthly_low"] == 700
 
 

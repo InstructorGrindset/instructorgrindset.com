@@ -84,38 +84,30 @@ professionalism:
   min_components: null
 
 lucrativeness:
-  # Estimated season savings (USD), output as low, mid, high:
-  #   earnings = mid cert hourly pay x hours_per_week x (season length days / 7)
-  #   costs    = (rent + food_monthly_usd + transport_monthly_usd) x season_months
-  #              + pass_offset_usd + gear_offset_usd
-  #   mid = earnings - costs; low = mid - range_spread.low x earnings; high = mid + range_spread.high x earnings
-  # "Mid cert pay" is the midpoint of the displayed pay row for assumptions.cert_level
-  # (none, level_1, level_2, level_3, trainer, examiner). Rent is the cheapest employee
-  # housing (Phase 5), else the HUD or ACS baseline. housing_choice names that rule for the UI.
-  # Standard assumptions per the roadmap: mid cert level, standard full time hours,
-  # cheapest available employee housing.
-  # Alexandre sets these values in Phase 4. Do not fill them in before then.
+  # Owner decision 4 (2026-10-13). Season savings before tax, USD:
+  #   season months = season length days / days_per_month when sourced, else default_season_months
+  #   earnings      = hourly x hours_per_week x (season months x weeks_per_month)
+  #   savings       = earnings + tips - average rent x season months
+  # mid and high use the top of the posted wage scale (highest hourly_high of the displayed pay rows);
+  # low uses the bottom (lowest hourly_low). No food, transport, pass or gear offsets.
+  # Average rent follows rent.lucrativeness_rent. Computed with pipeline/season_income.py (the calculator's model).
   assumptions:
-    cert_level: null
-    hours_per_week: null
-    season_months: null
-    housing_choice: null
-    food_monthly_usd: null
-    transport_monthly_usd: null
-    pass_offset_usd: null
-    gear_offset_usd: null
-  range_spread:
-    # fractions of season earnings, e.g. 0.1 widens the range by 10 percent of earnings
-    low: null
-    high: null
+    hours_per_week: 40          # standard full time hours (ROADMAP Section 6)
+    default_season_months: 5    # when the resort has no sourced season length
+    days_per_month: 30.4
+    weeks_per_month: 4.33       # same as the Season Income Calculator
+    # Season tips (USD). Included only from a sourced figure or an aggregate of 3+ reports; null means
+    # "Tips are not included yet". There is no tips data yet.
+    tips_season_usd: null
 
 rent:
   # Order of baseline values used for a housing site with no published rent (shown as
   # confidence estimated with the baseline source): fmr_studio, fmr_one_br, fmr_two_br, acs_median.
   baseline_preference: [fmr_studio, acs_median]
-  # Rent input for lucrativeness, first available wins: cheapest employee housing (resort_owned or
-  # master_lease, published or reported rent), then the area rent from 3+ approved reports, then the baseline.
-  lucrativeness_rent: [employee_housing, reported_area, baseline]
+  # Average rent for lucrativeness (owner decision 4), first available wins: the mean of the resort's
+  # employee housing rent mids (display priority applies), then the county ACS median gross rent,
+  # then HUD FMR one bedroom. Other steps: reported_area, baseline (baseline_preference), fmr_studio, fmr_two_br.
+  lucrativeness_rent: [employee_housing, acs_median, fmr_one_br]
   # Data vintages fetched by `python -m pipeline.rent fetch`. hud_fmr_year null means HUD's latest.
   hud_fmr_year: null
   acs_year: 2024
@@ -176,6 +168,10 @@ climate:
   low_relief_max_base_ft: 4000       # ... and base under this
   validation_flag_pct: 35       # flag annual totals this far from the published annual snowfall
   validation_suppress_pct: 50   # null monthly snowfall when the annual total is this far off
+  open_meteo:
+    # Weighted calls per day allowed when OPEN_METEO_API_KEY is set (paid plan, customer endpoint).
+    # null keeps the free tier limits even with a key. Set it from the plan the owner buys.
+    paid_daily_budget: null
   snotel:
     radius_km: 25               # search radius around the resort base
     elevation_band_below_ft: 1500   # station may sit this far below the resort elevation

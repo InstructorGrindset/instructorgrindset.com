@@ -52,10 +52,6 @@
   --ease-slow: 0.35s ease;
 }
 
-/* ── Custom fonts ── */
-@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Rooftop"; src: url("/fonts/Rooftop-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
-
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
