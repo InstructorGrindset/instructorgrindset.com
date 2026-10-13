@@ -199,11 +199,12 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | 11 | 2 | **Owner:** launch. Owner says "open the PR"; review, merge, then check live: USGS imagery and CORS, Lighthouse on the real host, sitemap submitted to Search Console | C | 1, Owner | Map live at instructorgrindset.com/map/ with green checks |
 | 12 | 3 | Epic and Ikon pass filter: pass membership from the pass companies' own sites, then a filter chip | R+C | 11 | Filter works in map and list view; every membership sourced |
 | 13 | 3 | Hiring window display on resort pages and a "hiring now" filter | C | 6 | Shows only sourced windows |
-| 14 | 3 | SNOTEL mountain stations in the snowfall heat map, in addition to resort pockets | C | 1 | Western mountain snowfall reads higher than valley stations; tests pass |
+| 14 | 3 | SNOTEL mountain stations in the snowfall heat map, in addition to resort pockets | C | 1 | In progress: SNOTEL SWE based station snowfall blended with NOAA normals, validated against published resort snowfall |
 | 15 | 3 | Share images per resort page (static PNG built by the pipeline) | C | 11 | Every resort stub has an og:image |
 | 16 | 3 | GTFS transit extracts for Tier A clusters (Summit Stage, RFTA, Park City Transit, TART, ECO Transit) | R+C | none In progress: feeds from the Mobility Database mirror on Google Cloud Storage; only feeds valid for 2026 to 27 or under 18 months old |
 | 17 | 3 | Yearly ownership re-verification job for Vail and Alterra | C | 11 | Build fails when a portfolio source is older than one build cycle |
 | 18 | 3 | Real device QA after launch: phones and tablets, Lighthouse and axe on the live site | C | 11 | Issues filed and fixed |
+| 18a | 1 | Map page performance: make Lighthouse Performance on /map/ reliably 90+ (median 95+); split the 2D preview long task, fix late paint | C | none | In progress |
 | 19 | ongoing | **Owner:** MetroSlopes exact address when the facility opens; import Formspree reports each month | R | Owner | Dot moved; reports aggregated |
 
 ## 9. Working with Claude Code
