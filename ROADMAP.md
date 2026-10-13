@@ -200,7 +200,7 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | 12 | 3 | Epic and Ikon pass filter: pass membership from the pass companies' own sites, then a filter chip | R+C | 11 | Filter works in map and list view; every membership sourced |
 | 13 | 3 | Hiring window display on resort pages and a "hiring now" filter | C | 6 | In progress: built before launch; works with an empty postings feed |
 | 14 | 3 | SNOTEL mountain stations in the snowfall heat map, in addition to resort pockets | C | 1 | Done: 831 SNOTEL stations, terrain aware field, pockets 10 km; validation in docs/map/climate-validation.md |
-| 15 | 3 | Share images per resort page (static PNG built by the pipeline) | C | 11 | In progress: built before launch; Tier A and cluster cards, Tier B keeps the logo |
+| 15 | 3 | Share images per resort page (static PNG built by the pipeline) | C | 11 | Done: 179 cards (116 Tier A, 63 clusters), 4.9 MB; Tier B keeps the logo |
 | 16 | 3 | GTFS transit extracts for Tier A clusters (Summit Stage, RFTA, Park City Transit, TART, ECO Transit) | R+C | Done: 20 agencies, 30 Tier A detail maps, schedule dates shown; Park City, Jackson, Big Sky, Whitefish, Taos and Mt Hood feeds are not in the reachable catalog; ECO, Crested Butte, Tahoe TD and Mountain Rides feeds are stale |
 | 17 | 3 | Yearly ownership re-verification job for Vail and Alterra | C | 11 | In progress: built before launch |
 | 18 | 3 | Real device QA after launch: phones and tablets, Lighthouse and axe on the live site | C | 11 | Issues filed and fixed |
