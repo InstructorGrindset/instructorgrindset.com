@@ -1,6 +1,6 @@
-"""Small stdlib HTTP layer: JSON GET with retry, backoff and blocked network detection.
+"""Small stdlib HTTP layer: JSON and binary GET with retry, backoff and blocked network detection.
 
-Fetchers call :func:`get_json` through this module (``http.get_json``) so
+Fetchers call :func:`get_json`, :func:`get_bytes` or :func:`download` through this module (``http.get_json``) so
 tests can monkeypatch one function and run the whole ETL offline.
 """
 
@@ -9,12 +9,14 @@ from __future__ import annotations
 import http.client
 import json
 import re
+import shutil
 import socket
 import ssl
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from pathlib import Path
 from typing import Any, Callable, Mapping, Optional
 
 USER_AGENT = "instructorgrindset-career-map-climate-etl/1.0 (+https://instructorgrindset.com/map/)"
@@ -95,13 +97,54 @@ def get_json(
     :class:`RateLimited` when 429 persists (``daily=True`` for a daily cap),
     and :class:`HttpStatusError` for other HTTP errors.
     """
+    return _get(url, params, "application/json", lambda resp: json.loads(resp.read().decode("utf-8")),
+                timeout=timeout, retries=retries, backoff=backoff)
+
+
+def get_bytes(
+    url: str,
+    params: Optional[Mapping[str, Any]] = None,
+    *,
+    accept: str = "*/*",
+    timeout: float = 120.0,
+    retries: int = 4,
+    backoff: float = 5.0,
+) -> bytes:
+    """GET ``url`` and return the body, with the same retries and errors as :func:`get_json`."""
+    return _get(url, params, accept, lambda resp: resp.read(), timeout=timeout, retries=retries, backoff=backoff)
+
+
+def download(
+    url: str,
+    dest: Path,
+    *,
+    timeout: float = 600.0,
+    retries: int = 4,
+    backoff: float = 5.0,
+) -> Path:
+    """Stream ``url`` into ``dest`` (written to ``dest.part`` first, then renamed), with the same retries."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    part = dest.with_name(dest.name + ".part")
+
+    def save(resp: Any) -> Path:
+        with part.open("wb") as fh:
+            shutil.copyfileobj(resp, fh, 1 << 20)
+        part.replace(dest)
+        return dest
+
+    return _get(url, None, "*/*", save, timeout=timeout, retries=retries, backoff=backoff)
+
+
+def _get(url: str, params: Optional[Mapping[str, Any]], accept: str, handle: Callable[[Any], Any], *,
+         timeout: float, retries: int, backoff: float) -> Any:
     full = build_url(url, params)
-    req = urllib.request.Request(full, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
+    # Generic User-Agent naming the project and its public page. Never an email address.
+    req = urllib.request.Request(full, headers={"User-Agent": USER_AGENT, "Accept": accept})
     last_error: Optional[BaseException] = None
     for attempt in range(retries + 1):
         try:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return json.loads(resp.read().decode("utf-8"))
+                return handle(resp)
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8", "replace") if e.fp else ""
             if e.code == 429:

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Literal, Optional
+from typing import Annotated, Any, Literal, Optional
 
 import yaml
 from pydantic import Field, model_validator
@@ -200,6 +200,116 @@ class CareerDefs(StrictModel):
     vocab: CareerVocab
 
 
+
+# ------------------------------------------------------------------- heat maps
+HEX_COLOR = r"^#[0-9a-fA-F]{6}$"
+
+
+def oklab_lightness(hex_color: str) -> float:
+    """OKLab L (0 to 1) of an sRGB hex color (Bjorn Ottosson's OKLab)."""
+    def lin(c: float) -> float:
+        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+
+    r, g, b = (lin(int(hex_color[i:i + 2], 16) / 255) for i in (1, 3, 5))
+    l_ = (0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b) ** (1 / 3)
+    m_ = (0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b) ** (1 / 3)
+    s_ = (0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b) ** (1 / 3)
+    return 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+
+
+class HeatRamp(StrictModel):
+    name: str = Field(min_length=1)
+    colors: list[Annotated[str, Field(pattern=HEX_COLOR)]] = Field(min_length=3)
+
+    @model_validator(mode="after")
+    def _ordered(self) -> "HeatRamp":
+        ls = [oklab_lightness(c) for c in self.colors]
+        if any(b <= a for a, b in zip(ls, ls[1:])):
+            raise ValueError("heat.ramp.colors must rise in OKLab lightness at every stop (perceptual order)")
+        return self
+
+
+class HeatBox(StrictModel):
+    west: float = Field(ge=-180, le=180)
+    south: float = Field(ge=-85, le=85)
+    east: float = Field(ge=-180, le=180)
+    north: float = Field(ge=-85, le=85)
+
+    @model_validator(mode="after")
+    def _order(self) -> "HeatBox":
+        if self.east <= self.west or self.north <= self.south:
+            raise ValueError("a heat region needs west < east and south < north")
+        return self
+
+
+class HeatRegions(StrictModel):
+    lower48: HeatBox
+    alaska: HeatBox
+
+
+class HeatField(StrictModel):
+    neighbors: int = Field(ge=1, le=64)
+    min_distance_km: float = Field(gt=0)
+    decluster_km: float = Field(ge=0)
+    full_opacity_km: float = Field(gt=0)
+    fade_end_km: float = Field(gt=0)
+    max_alpha: float = Field(gt=0, le=1)
+    floor_alpha: float = Field(gt=0, le=1)
+    px_per_degree: float = Field(gt=0, le=60)
+    grid_step_px: int = Field(ge=1, le=16)
+    max_pixels: int = Field(ge=10000)
+
+    @model_validator(mode="after")
+    def _check(self) -> "HeatField":
+        if self.fade_end_km <= self.full_opacity_km:
+            raise ValueError("heat.field.fade_end_km must exceed full_opacity_km")
+        if self.floor_alpha > self.max_alpha:
+            raise ValueError("heat.field.floor_alpha must not exceed max_alpha")
+        return self
+
+
+class HeatMode(StrictModel):
+    scale: Literal["linear", "sqrt"] = "linear"
+    domain: Optional[list[float]] = Field(default=None, min_length=2, max_length=2)
+    domain_min: Optional[float] = None
+    ticks: Optional[list[float]] = None
+
+    @model_validator(mode="after")
+    def _check(self) -> "HeatMode":
+        if self.domain and self.domain[1] <= self.domain[0]:
+            raise ValueError("heat mode domain must be [min, max] with min < max")
+        if self.ticks and self.ticks != sorted(self.ticks):
+            raise ValueError("heat mode ticks must be ascending")
+        if self.domain and self.ticks and not all(self.domain[0] <= t <= self.domain[1] for t in self.ticks):
+            raise ValueError("heat mode ticks must sit inside the domain")
+        return self
+
+
+class HeatModes(StrictModel):
+    lucrativeness: HeatMode
+    professionalism: HeatMode
+    season: HeatMode
+    snowfall: HeatMode
+
+
+class HeatSnowfall(StrictModel):
+    accept_completeness: list[Literal["S", "R", "P", "E"]] = Field(min_length=1)
+    accept_measurement_flags: list[Literal["", "M", "V", "W", "X", "Y", "Z"]] = Field(min_length=1)
+    neighbors: int = Field(ge=1, le=64)
+    min_distance_km: float = Field(gt=0)
+    pocket_radius_km: float = Field(ge=5, le=50)
+    px_per_degree: float = Field(gt=0, le=60)
+    grid_step_px: int = Field(ge=1, le=16)
+
+
+class HeatDefs(StrictModel):
+    ramp: HeatRamp
+    regions: HeatRegions
+    field: HeatField
+    modes: HeatModes
+    snowfall: HeatSnowfall
+
+
 class Definitions(StrictModel):
     version: int
     snow: SnowDefs
@@ -221,6 +331,7 @@ class Definitions(StrictModel):
     transit: TransitDefs
     routing: RoutingDefs
     trailmap: TrailmapDefs
+    heat: HeatDefs
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 

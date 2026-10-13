@@ -74,6 +74,8 @@ function makeStubSite() {
   // A copy of the fixtures without the slim index, for the fallback path.
   fs.cpSync(path.join(REPO, 'tests', 'map', 'fixtures'), path.join(t, 'legacy-build'), { recursive: true });
   fs.rmSync(path.join(t, 'legacy-build', 'map-index.json'));
+  // ... and without the precomputed heat rasters, for the snowfall fallback to the resort only surface.
+  fs.rmSync(path.join(t, 'legacy-build', 'heat'), { recursive: true, force: true });
   fs.rmSync(path.join(t, 'data', 'build', 'map-index.json'), { force: true });
   const out = execFileSync('python3', [path.join(REPO, 'pipeline', 'routes.py'), '--root', t], { encoding: 'utf8' });
   log(`  ${out.trim()}`);
@@ -100,7 +102,7 @@ function watch(page, label) {
     // Allowed: the site wide Rooftop font (missing repo wide) and definitions.json, which is optional.
     if (r.status() === 404 && /\/definitions\.json$/.test(r.url())) { log(`    note definitions.json absent at ${r.url()}`); return; }
     // The fallback test build has no slim index on purpose.
-    if (r.status() === 404 && /\/legacy-build\/map-index\.json$/.test(r.url())) return;
+    if (r.status() === 404 && /\/legacy-build\/(map-index|heat\/snowfall)\.json$/.test(r.url())) return;
     // The report form test answers one send with 500 on purpose to exercise the retry.
     if (r.status() === 500 && r.url() === 'https://reports.example.test/submit') return;
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
@@ -240,6 +242,33 @@ async function imageryOutage(browser, base) {
   }
 }
 
+// Sample one pixel of the heat images at lon, lat (rows evenly spaced in Web Mercator), as [r, g, b, a].
+function sampleHeat(page, lngLats) {
+  return page.evaluate(async (pts) => {
+    const m = window.__careerMap.mapCtl.map;
+    const imgs = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-') && !l.id.endsWith('-inset'))
+      .map((l) => m.getSource(l.id)).filter(Boolean).map((src) => ({ url: src.url, coordinates: src.coordinates }));
+    const my = (la) => Math.log(Math.tan(Math.PI / 4 + (la * Math.PI) / 360));
+    const decoded = [];
+    for (const im of imgs) {
+      const img = new Image(); img.src = im.url; await img.decode();
+      const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+      const ctx = c.getContext('2d', { willReadFrequently: true }); ctx.drawImage(img, 0, 0);
+      decoded.push({ ...im, ctx, width: c.width, height: c.height });
+    }
+    return pts.map(([lon, lat]) => {
+      for (const im of decoded) {
+        const [[w, n], , [e, s]] = im.coordinates;
+        if (lon < w || lon > e || lat < s || lat > n) continue;
+        const x = Math.floor(((lon - w) / (e - w)) * im.width);
+        const y = Math.floor(((my(n) - my(lat)) / (my(n) - my(s))) * im.height);
+        return [...im.ctx.getImageData(x, y, 1, 1).data];
+      }
+      return [0, 0, 0, 0];
+    });
+  }, lngLats);
+}
+
 async function desktop(browser, base) {
   log('\nDesktop 1280x800, fixtures via ?data=');
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
@@ -309,11 +338,13 @@ async function desktop(browser, base) {
       resortsVisible: m.getLayoutProperty('resorts', 'visibility') !== 'none',
     };
   });
+  // Points far from every fixture resort, between distant clusters, all inside the fixture states.
+  const BETWEEN = [[-115.5, 40.0], [-108.5, 42.8], [-117.0, 37.5], [-112.5, 37.6], [-72.0, 43.6]];
   const heatModes = [
-    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', min: 'Min $8,900', max: 'Max $10,600', n: 2 },
-    { mode: 'professionalism', prop: 'professionalism_score', unit: '', min: '1', max: '3', n: 3, ticks: ['1', '2', '3'] },
-    { mode: 'season', prop: 'season_length_days', unit: 'Days', min: 'Min 112', max: 'Max 168', n: 11 },
-    { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', min: 'Min 256', max: 'Max 460', n: 9 },
+    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', range: 'Resort values: $8,900 to $10,600', n: 2, first: '$8.5K', last: '$11K' },
+    { mode: 'professionalism', prop: 'professionalism_score', unit: '', n: 3, ticks: ['1', '2', '3'] },
+    { mode: 'season', prop: 'season_length_days', unit: 'Days', range: 'Resort values: 112 to 168', n: 11, first: '100', last: '180' },
+    { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', range: 'Resort values: 256 to 460', n: 9, first: '0', last: '500', raster: true },
   ];
   for (const hm of heatModes) {
     await page.locator(`.recolor-modes .filter-btn[data-mode="${hm.mode}"]`).click();
@@ -322,14 +353,38 @@ async function desktop(browser, base) {
     await page.waitForTimeout(300);
     const st = await heatState();
     const text = await leg.innerText();
+    const ticks = await leg.locator('.heat-tick').allInnerTexts();
     check(st.ids.length >= 1 && st.ids.every((id) => id.startsWith(`heat-${hm.mode}-`)), `${hm.mode}: drawn as a heat surface (${st.ids.join(', ')})`);
     check(st.belowResorts && st.resortsVisible, `${hm.mode}: heat sits under the state lines and the resort points`);
     check(st.color.includes(hm.prop) && st.stroke.includes('#e0a03a'), `${hm.mode}: points stay on top, Tier A outlined, no data points grey`);
-    check(await leg.isVisible() && text.includes(hm.unit) && text.includes(hm.min) && text.includes(hm.max), `${hm.mode}: continuous legend with min, max and units (${hm.min}, ${hm.max}, ${hm.unit})`);
+    if (hm.ticks) {
+      check(JSON.stringify(ticks) === JSON.stringify(hm.ticks) && !/Min|Max|100|Resort values/.test(text), `${hm.mode}: legend shows only ${hm.ticks.join(', ')}`);
+    } else {
+      check(await leg.isVisible() && text.includes(hm.unit) && text.includes(hm.range) && ticks.length >= 3 && ticks[0] === hm.first && ticks[ticks.length - 1] === hm.last,
+        `${hm.mode}: legend with numeric ticks (${ticks.join(', ')}), units and the sourced resort range`);
+    }
     check(text.includes(`${hm.n} resort`) && await leg.locator('.heat-bar').count() === 1, `${hm.mode}: legend counts ${hm.n} resorts with data and shows the ramp`);
-    if (hm.ticks) check(JSON.stringify(await leg.locator('.heat-ticks span').allInnerTexts()) === JSON.stringify(hm.ticks) && !/Min|Max|100/.test(text), `${hm.mode}: legend shows only ${hm.ticks.join(', ')}`);
+    check(/smoothed estimates/.test(text) && /only sourced values/.test(text), `${hm.mode}: legend says the colors between resorts are smoothed estimates`);
+    // A real heat map: every point between distant resorts is colored (no gaps), at the floor opacity or more.
+    const between = await sampleHeat(page, BETWEEN);
+    check(between.every((px) => px[3] >= 0.33 * 255), `${hm.mode}: continuous coverage between distant resorts (alpha ${between.map((px) => px[3]).join(', ')})`);
+    if (hm.raster) {
+      const src = await page.evaluate(() => {
+        const m = window.__careerMap.mapCtl.map;
+        const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-snowfall-')).map((l) => l.id);
+        return { urls: ids.map((id) => m.getSource(id).url), credit: Boolean(m.getSource('heat-credit')),
+          attrib: (document.querySelector('.maplibregl-ctrl-attrib-inner') || {}).textContent || '' };
+      });
+      check(src.urls.length >= 1 && src.urls.every((u) => /\/tests\/map\/fixtures\/heat\/snowfall-lower48\.png$/.test(u)),
+        `snowfall: the precomputed raster source loads (${src.urls.join(', ')})`);
+      check(w.requests.some((u) => /\/heat\/snowfall\.json$/.test(u)) && w.requests.some((u) => /\/heat\/snowfall-lower48\.png$/.test(u)), 'snowfall: the sidecar and the PNG are fetched');
+      check(src.credit && src.attrib.includes('Snowfall normals: NOAA NCEI 1991 to 2020'), `snowfall: attribution names the NOAA normals (${src.attrib.slice(0, 160)})`);
+      check(/NOAA station normals, 1991 to 2020/.test(text), 'snowfall: legend names the NOAA background');
+    }
     await shot(page, `desktop-01c-heat-${hm.mode}.png`);
   }
+  check(!w.requests.slice(0, w.requests.findIndex((u) => /\/heat\/snowfall\.json$/.test(u))).some((u) => /\/heat\//.test(u)),
+    'heat rasters load only once snowfall mode is selected');
   // Zoomed into the Front Range: the surface stays smooth around each resort.
   await page.evaluate(() => window.__careerMap.mapCtl.map.jumpTo({ center: [-106.1, 39.6], zoom: 7 }));
   await page.waitForTimeout(600);
@@ -338,12 +393,15 @@ async function desktop(browser, base) {
   await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
   await page.waitForTimeout(200);
   check(await leg.isHidden() && (await heatState()).ids.length === 0, 'Default removes the heat surface and hides its legend');
+  check(await page.evaluate(() => !window.__careerMap.mapCtl.map.getSource('heat-credit')), 'Default removes the NOAA credit');
   check((await heatState()).color.includes('#e0a03a') && !(await heatState()).color.includes('season_length_days'), 'Default restores tier colors');
 
-  // The surface shows value, not density: many low value resorts read as low, far areas stay empty,
-  // and the color at a resort matches its own value when it stands alone.
-  const physics = await page.evaluate(async () => {
-    const { buildHeat, rampColor } = await import('/map/js/heat.js');
+  // The surface shows value, not density: a cluster of low resorts counts as one voice, opacity never grows with
+  // density, a lone resort shows its own value, and far areas keep the floor opacity (never empty).
+  const physics = await page.evaluate(async (fix) => {
+    const { buildHeat, makeRamp } = await import('/map/js/heat.js');
+    const defs = (await (await fetch(`${fix}definitions.json`)).json()).heat;
+    const ramp = makeRamp(defs.ramp.colors);
     const sample = async (images, lon, lat) => {
       for (const im of images) {
         const [[w, n], , [e, s]] = im.coordinates;
@@ -361,19 +419,23 @@ async function desktop(browser, base) {
     const dense = Array.from({ length: 12 }, (_, i) => ({ lon: -106 + (i % 4) * 0.05, lat: 39.5 + Math.floor(i / 4) * 0.05, value: 10 }));
     const lone = { lon: -100, lat: 39.5, value: 10 };
     const high = { lon: -94, lat: 39.5, value: 90 };
-    const domain = { min: 10, max: 90 };
-    const imgs = buildHeat([...dense, lone, high], domain, null);
-    const denseAt = await sample(imgs, -105.92, 39.55);
-    const loneAt = await sample(imgs, lone.lon, lone.lat);
-    const highAt = await sample(imgs, high.lon, high.lat);
-    const far = await sample(imgs, -97, 45.5);
-    return { denseAt, loneAt, highAt, far, low: rampColor(0), top: rampColor(1) };
-  });
+    const opts = { scale: 'linear', domain: { min: 10, max: 90 }, ramp, field: defs.field, regions: defs.regions };
+    const imgs = buildHeat([...dense, lone, high], null, opts);
+    // Cluster against a lone high resort, equally far from both: one voice each gives the middle of the ramp.
+    const duel = buildHeat([...dense, { lon: -103, lat: 39.5, value: 90 }], null, opts);
+    return {
+      denseAt: await sample(imgs, -105.92, 39.55), loneAt: await sample(imgs, lone.lon, lone.lat), highAt: await sample(imgs, high.lon, high.lat),
+      far: await sample(imgs, -70, 30), mid: await sample(duel, -104.46, 39.55), floor: defs.field.floor_alpha,
+      low: ramp.rgb(0), top: ramp.rgb(1), middle: ramp.rgb(0.5),
+    };
+  }, FIX);
   const near = (a, b, tol = 6) => a.slice(0, 3).every((v, i) => Math.abs(v - b[i]) <= tol);
   check(near(physics.denseAt, physics.low) && near(physics.loneAt, physics.low), `twelve low resorts read as low as one low resort (${physics.denseAt} vs ${physics.loneAt})`);
   check(Math.abs(physics.denseAt[3] - physics.loneAt[3]) <= 3, `density does not raise opacity (${physics.denseAt[3]} vs ${physics.loneAt[3]})`);
   check(near(physics.highAt, physics.top), `a lone high resort shows the top of the ramp (${physics.highAt})`);
-  check(physics.far[3] === 0, 'areas beyond the influence radius stay empty');
+  check(near(physics.mid, physics.middle, 14), `a cluster of twelve counts as one voice against a lone resort (${physics.mid} vs ${physics.middle})`);
+  check(physics.far[3] >= Math.floor(physics.floor * 255) - 1 && physics.far[3] <= Math.ceil(physics.floor * 255) + 1,
+    `far from every resort the surface keeps the floor opacity (${physics.far[3]})`);
 
   // Click a state on the map.
   await clickMapAt(page, [-105.0, 38.4]);
@@ -899,6 +961,20 @@ async function desktopStub(browser, base) {
   await page.waitForFunction(() => document.querySelectorAll('#panel-content .facts').length >= 3, null, { timeout: 10000 });
   check(await heading(page) === 'Alpha Peak' && await page.evaluate(() => window.__careerMap.index.resorts.size) === 14,
     'a build without map-index.json falls back to resorts.json');
+  // Without heat/snowfall.json the snowfall mode falls back to the resort only surface.
+  await page.goto(`${base}/map/?data=/legacy-build/`);
+  await ready(page);
+  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 10000 });
+  await page.locator('.recolor-modes .filter-btn[data-mode="snowfall"]').click();
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith('heat-snowfall-')), null, { timeout: 10000 });
+  const fallback = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-snowfall-')).map((l) => l.id);
+    return { urls: ids.map((id) => m.getSource(id).url), credit: Boolean(m.getSource('heat-credit')), legend: document.getElementById('recolor-legend').innerText };
+  });
+  check(fallback.urls.length >= 1 && fallback.urls.every((u) => u.startsWith('data:image/png')) && !fallback.credit
+    && !/NOAA/.test(fallback.legend) && /smoothed estimates/.test(fallback.legend),
+    `without the snowfall rasters the map draws the resort only surface (${fallback.urls.length} images)`);
   await page.goto(`${base}/map/`);
   await ready(page);
   await page.goto(`${base}/map/co/fixture-front-range/?compare=alpha-peak,charlie-hill`);
@@ -955,8 +1031,53 @@ async function realData(browser, base) {
       }
       await page.locator('.recolor-modes .filter-btn[data-mode="lucrativeness"]').hover();
       await shot(page, 'real-desktop-recolor-disabled.png');
+      // Each heat mode with the real build: continuous coverage across the lower 48 and the Alaska inset.
+      const REAL_BETWEEN = [[-116.5, 39.5], [-98.5, 38.5], [-99.0, 31.5], [-84.0, 32.5], [-108.0, 47.5], [-150.0, 64.5]];
+      for (const [mode, prop] of Object.entries(props)) {
+        if (!geo.some((f) => f.properties[prop] != null)) continue;
+        await page.locator(`.recolor-modes .filter-btn[data-mode="${mode}"]`).click();
+        await page.waitForFunction((k) => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith(`heat-${k}-`)), mode, { timeout: 15000 });
+        await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 15000 }).catch(() => {});
+        await page.waitForTimeout(400);
+        const px = await sampleHeat(page, REAL_BETWEEN);
+        check(px.every((c) => c[3] >= 0.33 * 255), `real data: ${mode} heat covers the map between distant resorts, Alaska included (alpha ${px.map((c) => c[3]).join(', ')})`);
+        const layers = await page.evaluate(() => window.__careerMap.mapCtl.map.getStyle().layers.filter((l) => l.id.startsWith('heat-')).map((l) => l.id));
+        check(layers.some((id) => id.endsWith('-inset')), `real data: ${mode} heat also draws in the Alaska inset`);
+        if (mode === 'snowfall' && fs.existsSync(path.join(REPO, 'data', 'build', 'heat', 'snowfall.json'))) {
+          const urls = await page.evaluate(() => {
+            const m = window.__careerMap.mapCtl.map;
+            return m.getStyle().layers.filter((l) => l.type === 'raster' && /^heat-snowfall-\d+$/.test(l.id)).map((l) => m.getSource(l.id).url);
+          });
+          check(urls.length === 2 && urls.some((u) => u.endsWith('/data/build/heat/snowfall-lower48.png')) && urls.some((u) => u.endsWith('/data/build/heat/snowfall-alaska.png')),
+            `real data: snowfall draws the NOAA rasters (${urls.map((u) => u.split('/').pop()).join(', ')})`);
+        }
+        await shot(page, `real-desktop-heat-${mode}.png`);
+        if (mode === 'snowfall') {
+          for (const [name, center, zoom] of [['wasatch', [-111.65, 40.6], 8], ['tahoe', [-120.1, 39.1], 7.5], ['cascades', [-121.6, 48.0], 7], ['colorado', [-106.3, 39.4], 7]]) {
+            await page.evaluate(([c, z]) => window.__careerMap.mapCtl.map.jumpTo({ center: c, zoom: z }), [center, zoom]);
+            await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 15000 }).catch(() => {});
+            await page.waitForTimeout(400);
+            await shot(page, `real-desktop-heat-snowfall-${name}.png`);
+          }
+          await page.evaluate(() => window.__careerMap.mapCtl.refit());
+          await page.waitForTimeout(300);
+        }
+      }
+      await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
+      await page.waitForTimeout(200);
     }
     await shot(page, `real-${vp.name}-national.png`);
+    if (vp.name === 'phone') {
+      await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 10000 });
+      await page.locator('.recolor-modes .filter-btn[data-mode="snowfall"]').click();
+      await page.waitForFunction(() => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith('heat-snowfall-')), null, { timeout: 15000 });
+      await page.waitForTimeout(600);
+      const legendBox = await page.locator('#recolor-legend').boundingBox();
+      check(legendBox && legendBox.x >= 0 && legendBox.x + legendBox.width <= vp.width && (await page.locator('.heat-about').getAttribute('open')) === null,
+        'real data phone: the heat legend fits the screen with its notes folded');
+      await shot(page, 'real-phone-heat-snowfall.png');
+      await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
+    }
     // Alaska inset (national view): Alaska draws as a moved copy in the lower left; territories never draw.
     const geoAll = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'map-index.json'), 'utf8'));
     const akCount = geoAll.resorts.filter((r) => r[geoAll.fields.indexOf('state')] === 'AK').length;

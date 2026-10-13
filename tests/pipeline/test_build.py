@@ -301,6 +301,10 @@ def test_definitions_json(repo_root, tmp_path, out):
     _run(repo_root, raw, out, tmp_path)
     d = _load(out, "definitions.json")
     assert d["version"] == 1 and "generated_at" in d
+    heat = d.pop("heat")
+    assert set(heat) == {"ramp", "regions", "field", "modes"}
+    assert heat["ramp"]["colors"][0] == "#414487" and heat["modes"]["professionalism"]["ticks"] == [1, 2, 3]
+    assert heat["field"]["floor_alpha"] == 0.35 and heat["field"]["full_opacity_km"] == 200
     assert {k: v for k, v in d.items() if k not in ("version", "generated_at")} == {
         "snow": {"powder_day_in": 6, "banner_day_in": 12},
         "density": {"dry_max_pct": 7, "moist_min_pct": 12},

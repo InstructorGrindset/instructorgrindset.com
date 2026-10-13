@@ -419,7 +419,7 @@ function attachDetails(index, legacy) {
  * missing or malformed the UI keeps generic labels and states no thresholds.
  */
 let definitionsPromise = null;
-function loadDefinitions() {
+export function loadDefinitions() {
   if (!definitionsPromise) definitionsPromise = readDefinitions();
   return definitionsPromise;
 }
@@ -431,6 +431,32 @@ async function readDefinitions() {
   const r = (await schemas()).DefinitionsFile.safeParse(raw);
   if (!r.success) { console.warn('[map] definitions.json failed validation', r.error.issues.slice(0, 3)); return null; }
   return r.data;
+}
+
+const heatRasterCache = new Map();
+
+/**
+ * Precomputed heat rasters for a mode (`heat/<mode>.json` and its PNG images, written by pipeline/heat.py).
+ * Loaded only when that mode is selected. Resolves to the validated manifest with absolute image URLs, or null
+ * when the files are absent or invalid (the caller falls back to the resort only surface).
+ */
+export function loadHeatRaster(mode) {
+  if (!heatRasterCache.has(mode)) {
+    const p = Promise.all([fetchJson(`heat/${encodeURIComponent(mode)}.json`, { optional: true }), schemas()]).then(([raw, sch]) => {
+      if (!raw) return null;
+      const r = sch.HeatRasterFile.safeParse(raw);
+      if (!r.success) {
+        console.warn(`[map] heat/${mode}.json failed validation`, r.error.issues.slice(0, 5));
+        return null;
+      }
+      return { ...r.data, rasters: r.data.rasters.map((x) => ({ ...x, url: `${config.dataBase}heat/${x.image}` })) };
+    }).catch((err) => {
+      console.warn(`[map] heat/${mode}.json`, err.message);
+      return null;
+    });
+    heatRasterCache.set(mode, p);
+  }
+  return heatRasterCache.get(mode);
 }
 
 const climateCache = new Map();

@@ -39,6 +39,8 @@ SOURCES = [
      "title": "Synthetic fixture: station density", "accessed_date": AS_OF},
     {"id": "fixture-ownership", "url": "https://example.com/fixture/ownership",
      "title": "Synthetic fixture: ownership", "accessed_date": AS_OF},
+    {"id": "fixture-noaa-normals", "url": "https://example.com/fixture/noaa-normals",
+     "title": "Synthetic fixture: station snowfall normals", "accessed_date": AS_OF},
     # Trail map files always cite this id (contract); the fixture points it at example.com.
     {"id": "openskimap-runs", "url": "https://example.com/fixture/runs",
      "title": "Synthetic fixture: runs", "accessed_date": AS_OF},
@@ -459,6 +461,44 @@ def trailmap_record(r):
             "bounds": [round(min(xs), 5), round(min(ys), 5), round(max(xs), 5), round(max(ys), 5)]}
 
 
+def synthetic_stations():
+    """Invented station snowfall on a half degree lattice over the fixture states: a smooth ridge over the
+    fixture mountains, low elsewhere. Test data only; never real normals."""
+    out = []
+    for i in range(0, 47):
+        for j in range(0, 25):
+            lon, lat = -124.5 + i * 0.5, 34.0 + j * 0.5
+            ridge = math.exp(-((lon + 111.6) ** 2) / 6 - ((lat - 40.6) ** 2) / 3)
+            sierra = math.exp(-((lon + 120.2) ** 2) / 2 - ((lat - 39.2) ** 2) / 4)
+            rockies = math.exp(-((lon + 106.2) ** 2) / 3 - ((lat - 39.5) ** 2) / 5)
+            out.append((lon, lat, round(15 + 180 * max(ridge, sierra, rockies), 1)))
+    for i in range(0, 13):
+        for j in range(0, 11):
+            lon, lat = -74.0 + i * 0.5, 42.5 + j * 0.5
+            out.append((lon, lat, round(60 + 70 * math.exp(-((lon + 72.8) ** 2) - ((lat - 44.4) ** 2)), 1)))
+    return out
+
+
+def write_heat_fixture(cfg, resorts, outlines):
+    """heat/snowfall.json and its PNG, built by pipeline/heat.py from synthetic stations and the fixture
+    resorts' synthetic snowfall, at a lower resolution to keep the fixture small."""
+    from pipeline import heat  # noqa: PLC0415
+    h = cfg.definitions.heat
+    h = h.model_copy(update={"snowfall": h.snowfall.model_copy(update={"px_per_degree": 10})})
+    pockets = []
+    for r in resorts:
+        v = recolor_props(r)["snowfall_annual_in"]
+        if v is not None:
+            pockets.append(heat.Point(r["lon"], r["lat"], v))
+    stations = [heat.Point(lon, lat, v) for lon, lat, v in synthetic_stations()]
+    out_dir = OUT
+    (out_dir / "heat").mkdir(parents=True, exist_ok=True)
+    for old in (out_dir / "heat").glob("*"):
+        old.unlink()
+    heat.write_snowfall(out_dir, stations=stations, pockets=pockets, outlines=outlines, heat=h,
+                        source={"id": "fixture-noaa-normals"}, generated_at=GENERATED_AT, as_of=AS_OF)
+
+
 def write(name, data):
     path = OUT / name
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -510,7 +550,13 @@ def main():
                        "resort_count": sum(r["state"] == code for r in resorts)})
     write("states.json", {"version": 1, "generated_at": GENERATED_AT, "states": states})
     write("sources.json", {"version": 1, "generated_at": GENERATED_AT, "sources": SOURCES})
+    sys.path.insert(0, str(REPO))
+    from pipeline.config import load_config  # noqa: PLC0415
+    from pipeline.build import display_definitions  # noqa: PLC0415
+    cfg = load_config(REPO / "config")
     write("definitions.json", {"version": 1, "generated_at": GENERATED_AT,
+                               # Heat map display settings are config, not resort facts: copied from the real config.
+                               "heat": display_definitions(cfg)["heat"],
                                "snow": {"powder_day_in": 6, "banner_day_in": 12},
                                "density": {"dry_max_pct": 7, "moist_min_pct": 12},
                                "display": {"priority": ["published", "reported", "estimated"]},
@@ -526,8 +572,8 @@ def main():
     for row in RESORTS:
         if row[11]:
             write(f"climate/{row[0]}.json", climate_record(row))
+    write_heat_fixture(cfg, resorts, {"type": "FeatureCollection", "features": feats})
     # The slim national index the map loads first, built the same way as the real one.
-    sys.path.insert(0, str(REPO))
     from pipeline.routes import write_map_index  # noqa: PLC0415
     write_map_index(OUT)
     print(f"wrote fixtures to {OUT}")

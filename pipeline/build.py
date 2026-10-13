@@ -24,7 +24,9 @@ if __package__ in (None, ""):  # executed as a script: python pipeline/build.py
 
 from pydantic import ValidationError  # noqa: E402
 
+from pipeline import heat as heat_mod  # noqa: E402
 from pipeline import openskimap  # noqa: E402
+from pipeline.climate import noaa_normals  # noqa: E402
 from pipeline import lifts as lifts_mod  # noqa: E402
 from pipeline import rent as rent_mod  # noqa: E402
 from pipeline import runs as runs_mod  # noqa: E402
@@ -245,6 +247,7 @@ def build(
     climate_sources = out_dir / "climate" / "sources.json"
     if climate_sources.exists():
         _merge_climate_sources(climate_sources, registry, errors, rel)
+    noaa = _load_noaa_normals(raw_dir, cfg, registry, errors, warnings, rel)
 
     records = inputs.records
     match = match_openskimap([r for _, r in records], areas, cfg.definitions.matching)
@@ -458,6 +461,8 @@ def build(
                     old_file.unlink()
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
+    if noaa:
+        _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings)
 
 
     result = BuildResult(out_dir, resorts, clusters, states, len(registry), warnings, inputs)
@@ -476,10 +481,53 @@ def build(
     return result
 
 
+def _load_noaa_normals(raw_dir: Path, cfg: Config, registry: SourceRegistry, errors: list[str], warnings: list[str],
+                       rel=str) -> Optional[tuple[list, dict]]:
+    """Usable NOAA normals stations (heat.snowfall flags) and the source record; registers the source."""
+    d = raw_dir / "climate" / "noaa_normals"
+    if not (d / noaa_normals.EXTRACT_NAME).is_file():
+        warnings.append(f"no NOAA normals extract in {rel(d)}; snowfall heat rasters not rebuilt "
+                        "(python -m pipeline.climate.noaa_normals fetch)")
+        return None
+    try:
+        stations, meta = noaa_normals.load_extract(d)
+    except (OSError, ValueError, KeyError) as e:
+        errors.append(f"{rel(d)}: unreadable NOAA normals extract ({e})")
+        return None
+    _add_source(registry, meta.get("source") or {}, rel(d / noaa_normals.SOURCE_NAME), errors)
+    snow = cfg.definitions.heat.snowfall
+    usable = noaa_normals.filter_usable(stations, snow.accept_completeness, snow.accept_measurement_flags)
+    if not usable:
+        warnings.append(f"{rel(d)}: no usable NOAA normals stations; snowfall heat rasters not rebuilt")
+        return None
+    return usable, meta
+
+
+def _write_heat(out_dir: Path, repo_root: Path, noaa: tuple[list, dict], resort_dicts: list[dict], cfg: Config,
+                header: dict, warnings: list[str]) -> None:
+    """data/build/heat/: snowfall rasters (NOAA background plus resort pockets) and their sidecar."""
+    outlines_path = out_dir / "us-states.geojson"
+    if not outlines_path.is_file():
+        outlines_path = repo_root / "data" / "build" / "us-states.geojson"
+    if not outlines_path.is_file():
+        warnings.append("us-states.geojson is missing; snowfall heat rasters not rebuilt")
+        return
+    stations, meta = noaa
+    src = meta["source"]
+    heat_mod.write_snowfall(
+        out_dir,
+        stations=[heat_mod.Point(s.lon, s.lat, s.ann_snow_in) for s in stations],
+        pockets=heat_mod.resort_pockets(resort_dicts),
+        outlines=json.loads(outlines_path.read_text(encoding="utf-8")),
+        heat=cfg.definitions.heat, source=src, generated_at=header["generated_at"], as_of=str(src["accessed_date"]))
+
+
 def display_definitions(cfg: Config) -> dict:
     """The subset of config/definitions.yaml the UI needs (definitions.json)."""
     d = cfg.definitions
+    heat = d.heat.model_dump(mode="json")
     return {
+        "heat": {k: heat[k] for k in ("ramp", "regions", "field", "modes")},
         "snow": {"powder_day_in": d.snow.powder_day_in, "banner_day_in": d.snow.banner_day_in},
         "density": {"dry_max_pct": d.density.dry_max_pct, "moist_min_pct": d.density.moist_min_pct},
         "display": {"priority": list(d.display.priority)},

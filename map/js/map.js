@@ -353,7 +353,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
   let national = true;
   let heatAK = [];     // heat layers of Alaska only regions, at true coordinates
   let heatInset = [];  // their copies in the national inset
-  let recolor = null; // { key, prop, images, format } or null for default
+  let recolor = null; // { key, prop, images, format, attribution } or null for default
   let heatIds = [];
 
   function resortTip(t) {
@@ -396,6 +396,13 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       }, beforeId);
       heatIds.push(id);
     };
+    // Credit for precomputed rasters (snowfall: NOAA normals). Image sources carry no attribution, so an empty
+    // GeoJSON source with one invisible layer holds it; MapLibre lists it while the heat map is on.
+    if (recolor.attribution) {
+      map.addSource('heat-credit', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, attribution: recolor.attribution });
+      map.addLayer({ id: 'heat-credit', type: 'fill', source: 'heat-credit', paint: { 'fill-opacity': 0 } }, before);
+      heatIds.push('heat-credit');
+    }
     recolor.images.forEach((img, i) => {
       const id = `heat-${recolor.key}-${i}`;
       raster(id, img.url, img.coordinates, before);
@@ -545,7 +552,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       };
       map.addControl(trailCtl, 'top-left');
     },
-    /** null for default colors, or { key, prop, images, format } from recolor.js. */
+    /** null for default colors, or { key, prop, images, format, attribution } from recolor.js. */
     setRecolor(next) { recolor = next; if (loaded) applyRecolor(); },
     /** 'all' | 'ski_area' | 'facility' */
     setFilter(next) { filter = next; if (loaded) applyFilter(); },

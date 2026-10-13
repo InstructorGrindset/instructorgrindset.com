@@ -3,7 +3,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
-data/raw/climate/
+data/raw/climate/*
+# The NOAA normals extract is committed; its archive download is not.
+!data/raw/climate/noaa_normals/
+data/raw/climate/noaa_normals/download/
 data/raw/openskimap/*.full.geojson
 data/raw/transit/*/gtfs.zip
 data/raw/routing/

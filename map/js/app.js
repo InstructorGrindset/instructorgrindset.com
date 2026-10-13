@@ -358,9 +358,8 @@ async function main() {
       // Off the critical path: full data, the recolor control, then state outlines.
       loadDetails();
       if (els.recolor) {
-        import('./recolor.js').then(({ createRecolor }) => {
-          createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce });
-        }).catch((err) => console.warn('[map] recolor', err.message));
+        import('./recolor.js').then(({ createRecolor }) => createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce }))
+          .catch((err) => console.warn('[map] recolor', err.message));
       }
       idle(() => loadStateOutlines(index).then((fc) => {
         if (fc) mapCtl.setStates(fc);

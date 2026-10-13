@@ -1,0 +1,38 @@
+{
+  "source": {
+    "id": "noaa-ncei-normals-1991-2020",
+    "url": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals",
+    "title": "NOAA NCEI U.S. Climate Normals 1991 to 2020, annual and seasonal normals by station",
+    "accessed_date": "2026-10-13",
+    "note": "Public domain (US government work). Field ANN-SNOW-NORMAL, inches, per station. Read from the NOAA Open Data Dissemination mirror https://noaa-normals-pds.s3.amazonaws.com/normals-annualseasonal/1991-2020/archive/us-climate-normals_1991-2020_v1.0.1_annualseasonal_multivariate_by-station_c20230404.tar.gz."
+  },
+  "confidence": "published",
+  "license": "public domain",
+  "field": "ANN-SNOW-NORMAL",
+  "units": "in",
+  "elevation_units": "m",
+  "archive": {
+    "key": "normals-annualseasonal/1991-2020/archive/us-climate-normals_1991-2020_v1.0.1_annualseasonal_multivariate_by-station_c20230404.tar.gz",
+    "size": 54176270,
+    "etag": "3e460d226747a832d8962d05efadabe5",
+    "last_modified": "2026-07-19T13:49:11.000Z"
+  },
+  "station_files": 15616,
+  "rows": 5653,
+  "flags": {
+    "measurement": {
+      "M": "missing",
+      "V": "too cold to compute",
+      "W": "unused",
+      "X": "nonzero value rounded to zero",
+      "Y": "insufficient values",
+      "Z": "logically inconsistent"
+    },
+    "completeness": {
+      "S": "standard, 24 or more years",
+      "R": "representative, 10 or more years, filled",
+      "P": "provisional, 10 or more years, unfilled",
+      "E": "estimated, 2 or more years"
+    }
+  }
+}

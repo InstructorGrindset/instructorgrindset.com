@@ -274,8 +274,60 @@ export const ClimateFile = z.object({
   months: z.array(ClimateMonth).min(1).max(12),
 });
 
+// Heat map settings (definitions.json `heat`, from config/definitions.yaml).
+const Hex = z.string().regex(/^#[0-9a-fA-F]{6}$/);
+const HeatBox = z.object({ west: z.number(), south: z.number(), east: z.number(), north: z.number() });
+const HeatMode = z.object({
+  scale: z.enum(['linear', 'sqrt']).default('linear'),
+  domain: z.tuple([z.number(), z.number()]).nullish(),
+  domain_min: z.number().nullish(),
+  ticks: z.array(z.number()).nullish(),
+}).passthrough();
+export const HeatDefinitions = z.object({
+  ramp: z.object({ name: z.string(), colors: z.array(Hex).min(2) }).passthrough(),
+  regions: z.object({ lower48: HeatBox, alaska: HeatBox }).passthrough(),
+  field: z.object({
+    neighbors: z.number().int().positive(),
+    min_distance_km: z.number().positive(),
+    decluster_km: z.number().nonnegative(),
+    full_opacity_km: z.number().positive(),
+    fade_end_km: z.number().positive(),
+    max_alpha: z.number().positive().max(1),
+    floor_alpha: z.number().positive().max(1),
+    px_per_degree: z.number().positive(),
+    grid_step_px: z.number().int().positive(),
+    max_pixels: z.number().int().positive(),
+  }).passthrough(),
+  modes: z.object({ lucrativeness: HeatMode, professionalism: HeatMode, season: HeatMode, snowfall: HeatMode }).passthrough(),
+}).passthrough();
+
+/** heat/<mode>.json: precomputed heat rasters (pipeline/heat.py). */
+const Corner = z.tuple([z.number(), z.number()]);
+export const HeatRasterFile = z.object({
+  version: z.number().int(),
+  generated_at: z.string(),
+  mode: z.string(),
+  units: z.string(),
+  scale: z.enum(['linear', 'sqrt']),
+  domain: z.object({ min: z.number(), max: z.number() }),
+  ticks: z.array(z.number()).min(2),
+  ramp: z.array(Hex).min(2),
+  background: z.object({ source_id: z.string(), as_of: z.string(), confidence: Confidence, stations: z.number().int().nonnegative() }).passthrough(),
+  pockets: z.object({ resorts: z.number().int().nonnegative(), radius_km: z.number().positive() }).passthrough(),
+  attribution: z.string().min(1),
+  rasters: z.array(z.object({
+    region: z.enum(['lower48', 'alaska']),
+    image: z.string().regex(/^[a-z0-9-]+\.png$/),
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+    coordinates: z.tuple([Corner, Corner, Corner, Corner]),
+  }).passthrough()).min(1),
+}).passthrough();
+
 /** definitions.json: the keys the UI reads are checked; the rest passes through. */
 export const DefinitionsFile = z.object({
+  // A malformed heat block only turns the heat maps off; the rest of the file still counts.
+  heat: HeatDefinitions.nullish().catch(null),
   snow: z.object({
     powder_day_in: z.number().positive().nullish(),
     banner_day_in: z.number().positive().nullish(),
