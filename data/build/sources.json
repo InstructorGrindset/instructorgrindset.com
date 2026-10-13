@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T19:30:31Z",
+  "generated_at": "2026-10-13T19:45:21Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -10545,11 +10545,109 @@
       "note": "Weather data by Open-Meteo.com (CC BY 4.0), from Copernicus ERA5 (Hersbach et al. 2020). ERA5 snowfall is water equivalent; Open Meteo reports it as snow depth with a fixed ratio (docs: 7 cm snow = 10 mm precipitation water equivalent, about 14 percent density), so snowfall_in, powder_days, banner_days and avg_storm_depth_in carry that assumption and miss real variation in snow density. ERA5 is a 25 km grid that smooths mountain terrain, so totals usually run below resort reported upper mountain snowfall. Values are downscaled to the Open Meteo 90 m elevation model at the resort coordinate (base area). wind_mph is the mean daily maximum 10 m wind. sun_pct is sunshine_duration over daylight_duration."
     },
     {
+      "id": "openskimap-lift-alta-collins",
+      "url": "https://openskimap.org/",
+      "title": "Collins bottom station, Alta Ski Area (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Wildcat base point. Lift 'Collins' (OpenStreetMap way/10140309, OpenSkiMap lift 9a0cb0074e4212dc4c149287bb2b64eb67a64560); its bottom station is OpenStreetMap way/232716841 at 40.587955, -111.637994, 2603 m. Wikipedia (wikipedia-alta-ski-area) names the Wildcat and Albion base areas and gives an 8,530 ft base elevation, which matches the Wildcat base in Collins Gulch (Collins bottom 8,542 ft; Albion's Sunnyside bottom 8,652 ft). Collins, the two stage high speed quad, has the largest vertical rise of the lifts there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-burke-carpet",
+      "url": "https://openskimap.org/",
+      "title": "Carpet bottom station, Burke Mountain Ski Area (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Lower base point. Lift 'Carpet' (OpenStreetMap way/235742403, OpenSkiMap lift 445ab70bb9503e7daebcc356234b75499bf490b9); its bottom station is OpenStreetMap node/2437989318 at 44.5874555, -71.9156098, 371 m. Wikipedia (wikipedia-burke-mountain-ski-area) names no base area. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. The Sherburne Express and J-Bar bottoms are within 50 m, and its 1,216 ft elevation is close to the article's 1,210 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-crotched-mountain-valley",
+      "url": "https://openskimap.org/",
+      "title": "Valley bottom station, Crotched Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Lowest lift base point. Lift 'Valley' (OpenStreetMap way/255586623, OpenSkiMap lift e1f31d04a46d1e240b482adaf46a9b57fbc4af7d); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 43.0110235, -71.8760917, 316 m. Wikipedia (wikipedia-crotched-mountain-ski-and-ride) names no base area beyond a new lodge. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. All five lift bottoms lie within 0.4 km of it, and its 1,036 ft elevation is close to the article's 1,050 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-dollar-mountain-dollar",
+      "url": "https://openskimap.org/",
+      "title": "Dollar bottom station, Dollar Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Dollar day lodge point. Lift 'Dollar' (OpenStreetMap way/13728602, OpenSkiMap lift af96d1f9fc12cc3ba3e1d03d832e61f3ed5cc687); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 43.689827, -114.3458385, 1817 m. Wikipedia (wikipedia-dollar-mountain) puts the day lodge at the base of Dollar and names the Dollar, Half Dollar, Quarter Dollar and Elkhorn chairs. Dollar has the largest vertical rise (185 m) of the lifts at that base; Elkhorn starts at Elkhorn Village, 1.5 km south. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-hunter-mountain-kaatskill-flyer",
+      "url": "https://openskimap.org/",
+      "title": "Kaatskill Flyer bottom station, Hunter Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Hunter Mountain base area point. Lift 'Kaatskill Flyer' (OpenStreetMap way/47793897, OpenSkiMap lift d6d4cb917f9c71f76043135e67e824d4577ec0c4); its bottom station is OpenStreetMap node/607840896 at 42.204279, -74.2119221, 516 m. Wikipedia (wikipedia-hunter-mountain-ski-area) calls the Kaatskill Flyer the main lift out of the Hunter Mountain base area. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-jackson-hole-aerial-tram",
+      "url": "https://openskimap.org/",
+      "title": "Aerial Tram bottom station, Jackson Hole Mountain Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Teton Village point. Lift 'Aerial Tram' (OpenStreetMap way/15778675, OpenSkiMap lift ea46c6b659ce667178451287f1123ae3d86f51c7); its bottom station is OpenStreetMap node/158165879 at 43.5875426, -110.82789, 1926 m. Wikipedia (wikipedia-jackson-hole-mountain-resort) places the resort in Teton Village and says the tram rises 4,139 ft to 10,450 ft, which puts its bottom at the 6,311 ft base. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-jay-peak-village-double-chair",
+      "url": "https://openskimap.org/",
+      "title": "Village Double Chair bottom station, Jay Peak Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Lowest lift base point. Lift 'Village Double Chair' (OpenStreetMap way/199923636, OpenSkiMap lift 6181e593fbb38804aa7529e88ba78b65d377d7b5); its bottom station is OpenStreetMap node/2099136550 at 44.9359538, -72.5008193, 560 m. Wikipedia (wikipedia-jay-peak-resort) says the resort has two base lodges and names neither. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. It is 0.53 km from the Aerial Tram bottom (Tramside) and 0.69 km from the Stateside Moving Carpet, and its 1,838 ft elevation is close to the article's 1,815 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-magic-mountain-red-chair",
+      "url": "https://openskimap.org/",
+      "title": "Red Chair bottom station, Magic Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Base lodge point. Lift 'Red Chair' (OpenStreetMap way/233471851, OpenSkiMap lift c2835104fe12e6e84a4c7dd0a6b6b43aa10a6675); its bottom station is OpenStreetMap node/2418518274 at 43.2020984, -72.7717909, 419 m. Wikipedia (wikipedia-magic-mountain-ski-area) gives one base at 1,350 ft and lists the Red Chair as the summit double with the largest vertical (1,500 ft). Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
       "id": "openskimap-lift-mammoth-panorama-gondola-lower",
       "url": "https://openskimap.org/",
       "title": "Panorama Gondola Lower bottom station, Mammoth Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
       "accessed_date": "2026-10-12",
       "note": "Main Lodge base point. Lift 'Panorama Gondola Lower' (OpenStreetMap way/1525905377, OpenSkiMap lift e3b8c6cb99ef5d2c6ab71c785cdde6a2e34d0b13); its bottom station is OpenStreetMap node/96939620 at 37.6510607, -119.037773, 2712 m. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-mount-bohemia-honey-pot-hoist",
+      "url": "https://openskimap.org/",
+      "title": "Honey Pot Hoist bottom station, Mount Bohemia (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Lowest lift base point. Lift 'Honey Pot Hoist' (OpenStreetMap way/127262427, OpenSkiMap lift 1e3377be506e96f5c083c3310e1e58d77f594d00); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 47.3858669, -88.0083575, 198 m. Wikipedia (wikipedia-mount-bohemia) names no base area and no base elevation. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. Its 651 ft elevation is close to the 661 ft implied by the article's 1,465 ft peak and 804 ft vertical; the Mountain Dew Hoist bottom is 0.89 km west at 746 ft. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-mount-snow-bluebird-express",
+      "url": "https://openskimap.org/",
+      "title": "Bluebird Express #17 bottom station, Mount Snow (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Main Base Area point. Lift 'Bluebird Express #17' (OpenStreetMap way/143874600, OpenSkiMap lift a1075e5fbabe8518f5bd88146fd39faec7086994); its bottom station is OpenStreetMap node/1574427559 at 42.9673987, -72.895394, 604 m. Wikipedia (wikipedia-mount-snow) names the Main Base Area, where four high speed lifts start, and calls the Bluebird Express the resort's flagship lift; in OSM it rises from the main base to 1,092 m near the summit. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-sugarloaf-superquad",
+      "url": "https://openskimap.org/",
+      "title": "Sugarloaf SuperQuad bottom station, Sugarloaf (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Base Lodge point. Lift 'Sugarloaf SuperQuad' (OpenStreetMap way/137778468, OpenSkiMap lift 68e18ca3a18bda9571eb18cb52477370ec07c5c5); its bottom station is OpenStreetMap way/1240350167 at 45.0538156, -70.3103429, 538 m. Wikipedia (wikipedia-sugarloaf-ski-resort) names the Base Lodge, with the bus drop off in front of it and the Sawduster carrying passengers from the Inn to it. The SuperQuad bottom is 0.17 km from the Sawduster top and has the largest vertical rise (538 m) of the lifts starting there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-taos-lift-1",
+      "url": "https://openskimap.org/",
+      "title": "Lift 1 bottom station, Taos Ski Valley (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Base village point. Lift 'Lift 1' (OpenStreetMap way/53215268, OpenSkiMap lift ab73245c4043c87f2ca90f4095a2aa2d25323059); its bottom station is OpenStreetMap node/673538178 at 36.5944413, -105.449452, 2876 m. Wikipedia (wikipedia-taos-ski-valley) describes Taos Ski Valley as a village and ski resort, with the village at 9,321 ft and the ski base at 9,200 ft, and names no main lift. Lift 1 has the largest vertical rise (514 m) of the lifts starting in the base village (bottom stations within 0.4 km). Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-whiteface-cloudsplitter-gondola",
+      "url": "https://openskimap.org/",
+      "title": "Cloudsplitter Gondola bottom station, Whiteface Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Base area point. Lift 'Cloudsplitter Gondola' (OpenStreetMap way/32051122, OpenSkiMap lift cbb70c88f2d73b35e86134ef2e1e8fed85339285); its bottom station is OpenStreetMap node/359773111 at 44.3532236, -73.8612525, 372 m. Wikipedia (wikipedia-whiteface-mountain) gives one base area at 1,220 ft. The gondola bottom station is at 372 m (1,220 ft), the lowest lift bottom at the resort, and the gondola has the largest vertical rise of the lifts there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-whitefish-big-mountain-express",
+      "url": "https://openskimap.org/",
+      "title": "Chair 1 Big Mountain Express bottom station, Whitefish Mountain Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-12",
+      "note": "Village base area point. Lift 'Chair 1 Big Mountain Express' (OpenStreetMap way/5728340, OpenSkiMap lift 1cbdd9dde734c0f2e6c546bce4df2c3665c5a414); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 48.4839594, -114.3537867, 1427 m. Wikipedia (wikipedia-whitefish-mountain-resort) calls the Big Mountain Express the main lift out of the Village base area. The Snow Ghost Express, which also serves the front side, starts at the Base Lodge 0.46 km southeast. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
     },
     {
       "id": "openskimap-lifts",

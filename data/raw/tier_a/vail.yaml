@@ -199,6 +199,21 @@ sources:
   title: "Laurel Mountain State Park (Wikipedia)"
   accessed_date: '2026-10-13'
   note: "The park and its ski area lie 2 miles south of US 30 near Jennerstown."
+- id: openskimap-lift-mount-snow-bluebird-express
+  url: https://openskimap.org/
+  title: "Bluebird Express #17 bottom station, Mount Snow (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)"
+  accessed_date: '2026-10-12'
+  note: "Main Base Area point. Lift 'Bluebird Express #17' (OpenStreetMap way/143874600, OpenSkiMap lift a1075e5fbabe8518f5bd88146fd39faec7086994); its bottom station is OpenStreetMap node/1574427559 at 42.9673987, -72.895394, 604 m. Wikipedia (wikipedia-mount-snow) names the Main Base Area, where four high speed lifts start, and calls the Bluebird Express the resort's flagship lift; in OSM it rises from the main base to 1,092 m near the summit. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+- id: openskimap-lift-hunter-mountain-kaatskill-flyer
+  url: https://openskimap.org/
+  title: "Kaatskill Flyer bottom station, Hunter Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)"
+  accessed_date: '2026-10-12'
+  note: "Hunter Mountain base area point. Lift 'Kaatskill Flyer' (OpenStreetMap way/47793897, OpenSkiMap lift d6d4cb917f9c71f76043135e67e824d4577ec0c4); its bottom station is OpenStreetMap node/607840896 at 42.204279, -74.2119221, 516 m. Wikipedia (wikipedia-hunter-mountain-ski-area) calls the Kaatskill Flyer the main lift out of the Hunter Mountain base area. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+- id: openskimap-lift-crotched-mountain-valley
+  url: https://openskimap.org/
+  title: "Valley bottom station, Crotched Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)"
+  accessed_date: '2026-10-12'
+  note: "Lowest lift base point. Lift 'Valley' (OpenStreetMap way/255586623, OpenSkiMap lift e1f31d04a46d1e240b482adaf46a9b57fbc4af7d); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 43.0110235, -71.8760917, 316 m. Wikipedia (wikipedia-crotched-mountain-ski-and-ride) names no base area beyond a new lodge. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. All five lift bottoms lie within 0.4 km of it, and its 1,036 ft elevation is close to the article's 1,050 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
 resorts:
 - id: vail
   name: Vail
@@ -832,9 +847,11 @@ resorts:
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   access: {rating: transit_friendly, summary_md: "Fare free MOOver buses run ski season circulators around Mount Snow and year round service from Wilmington to West Dover.", source_id: access-wikipedia-southeast-vermont-transit, as_of: 2026-10-13, confidence: published}
-  lat: 42.959
-  lon: -72.922
-  location_source_id: wikipedia-mount-snow
+  # Main Base Area: Bluebird Express #17 bottom station (OpenSkiMap lifts), chosen over the
+  # Wikipedia infobox coordinate (42.959, -72.922), 2.4 km away.
+  lat: 42.9674
+  lon: -72.89539
+  location_source_id: openskimap-lift-mount-snow-bluebird-express
   cluster_hint: southern-vermont
   tier_a_status: approved
   approval:
@@ -1315,9 +1332,11 @@ resorts:
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   access: {rating: mixed, summary_md: "OurBus runs seasonal ski buses from New York City to Hunter on Wednesdays and weekends.", source_id: access-timeout-ourbus-ski-routes, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Day trip service for skiers; no local bus to the base found."}
-  lat: 42.2003
-  lon: -74.2303
-  location_source_id: wikipedia-hunter-mountain-ski-area
+  # Hunter Mountain base area: Kaatskill Flyer bottom station (OpenSkiMap lifts), chosen over the
+  # Wikipedia infobox coordinate (42.2003, -74.2303), 1.6 km away.
+  lat: 42.20428
+  lon: -74.21192
+  location_source_id: openskimap-lift-hunter-mountain-kaatskill-flyer
   cluster_hint: catskills
   tier_a_status: approved
   approval:
@@ -1466,9 +1485,11 @@ resorts:
     confidence: published
   operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Bennington and Francestown.", source_id: wikipedia-crotched-mountain-ski-and-ride, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
-  lat: 43.0023
-  lon: -71.8786
-  location_source_id: wikipedia-crotched-mountain-ski-and-ride
+  # Lowest lift base: Valley bottom station (OpenSkiMap lifts), chosen over the
+  # Wikipedia infobox coordinate (43.0023, -71.8786), 1.0 km away.
+  lat: 43.01102
+  lon: -71.87609
+  location_source_id: openskimap-lift-crotched-mountain-valley
   cluster_hint: other-nh
   tier_a_status: approved
   approval:

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T19:30:31Z",
+  "generated_at": "2026-10-13T19:45:21Z",
   "mode": "season",
   "units": "days",
   "scale": "classed",
@@ -47,7 +47,7 @@
   "values": {
     "field": "season.length_days",
     "resorts": 409,
-    "points": 312
+    "points": 314
   },
   "method": {
     "interpolation": "adaptive modified Shepard",
@@ -63,7 +63,7 @@
     "no_data_reach_km": 120.0
   },
   "attribution": null,
-  "inputs_sha256": "a6ab570763115e8c8456645c43b000bc78d1165d8442e3c4759a7861ca265b24",
+  "inputs_sha256": "6d2eb62db31bce3687493e21f27d04e972403b0d8a9dea9491c2150d3da07556",
   "rasters": [
     {
       "region": "lower48",
@@ -88,7 +88,7 @@
           24.4
         ]
       ],
-      "bytes": 94498,
+      "bytes": 94584,
       "resorts": 401,
       "no_data_states": [
         "AR",

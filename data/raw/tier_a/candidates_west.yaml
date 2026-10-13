@@ -5,7 +5,8 @@ status: draft            # for Alexandre's approval
 # pages fetched on 2026-10-11 through the Wikipedia API. Resort and operator websites were
 # blocked by the research environment's egress policy (HTTP 403), so ownership is NOT yet
 # confirmed on each resort's own site; owners taken from Wikipedia carry a note.
-# lat/lon are the Wikipedia infobox coordinates, used as the base area point.
+# lat/lon are the Wikipedia infobox coordinates, used as the base area point, except records with a
+# comment above lat, which use a lift bottom station at the base (OpenSkiMap lifts).
 #
 # Researched and left out (no fetched source supports a Tier A criterion as written):
 #   loveland (CO): opened 1936, Pete Seibert was GM in 1955; local favourite near Denver. State level history only.
@@ -49,6 +50,7 @@ sources:
   - {id: access-snow-bus-winter-2025-26, url: "https://www.courses-uhms.org/images/courses/Winter_Symposium/SNOWBusWinter25-26.pdf", title: "SNOW Bus winter 2025 to 2026 schedule (copy hosted by courses-uhms.org)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free bus from December 4, 2025 to April 5, 2026 with stops at Mountain Mall, the Depot Transit Center, downtown lodges and the resort's Base Lodge and Village."}
   - {id: access-ktvb-bogus-basin-bus, url: "https://ktvb.com/article/news/local/bogus-basin-weekend-holiday-bus-service-to-resume/277-65be581c-50f3-41fa-a45c-c5601a1c70b0", title: "Bogus Basin weekend, holiday bus service to resume (KTVB)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Paid bus from Meridian, Eagle and downtown Boise on weekends and holidays."}
   - {id: access-grand-targhee-teton-valley-shuttle, url: "https://www.grandtarghee.com/sites/default/files/2023-11/Teton%20Valley%20Shuttle%20Schedule.pdf", title: "Teton Valley Shuttle Schedule, November 2023 (Grand Targhee Resort)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Stops include the Victor Depot, Driggs Transit Center, Teton Valley Resort and Driggs Employee Housing."}
+  - {id: openskimap-lift-whitefish-big-mountain-express, url: "https://openskimap.org/", title: "Chair 1 Big Mountain Express bottom station, Whitefish Mountain Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Village base area point. Lift 'Chair 1 Big Mountain Express' (OpenStreetMap way/5728340, OpenSkiMap lift 1cbdd9dde734c0f2e6c546bce4df2c3665c5a414); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 48.4839594, -114.3537867, 1427 m. Wikipedia (wikipedia-whitefish-mountain-resort) calls the Big Mountain Express the main lift out of the Village base area. The Snow Ghost Express, which also serves the front side, starts at the Base Lodge 0.46 km southeast. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
 resorts:
   - id: copper-mountain
     name: Copper Mountain
@@ -375,9 +377,11 @@ resorts:
     owner: {value: "Winter Sports, Inc.", source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says billionaire Bill Foley became majority shareholder in 2007 and reports no later change; not confirmed on the resort site."}
     operator_scale: {value: 2, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "Winter Sports, Inc., with Bill Foley as majority shareholder since 2007. Independent company."}
     access: {rating: convenient, summary_md: "The free SNOW Bus runs between downtown Whitefish and the resort's Base Lodge and Village.", source_id: access-snow-bus-winter-2025-26, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The nonprofit Big Mountain Commercial Association runs it; the resort also posts a 2026 summer schedule at skiwhitefish.com."}
-    lat: 48.5
-    lon: -114.34
-    location_source_id: wikipedia-whitefish-mountain-resort
+    # Village base area: Chair 1 Big Mountain Express bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (48.5, -114.34), 2.1 km away.
+    lat: 48.48396
+    lon: -114.35379
+    location_source_id: openskimap-lift-whitefish-big-mountain-express
     cluster_hint: inland-northwest
     tier_a_criteria:
       - {criterion: heritage, rationale: "The mountain hosted the U.S. Alpine Championships in 1949 and 2001, and 1994 Olympic downhill champion Tommy Moe learned to ski and race there.", source_id: wikipedia-whitefish-mountain-resort}

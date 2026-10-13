@@ -690,10 +690,10 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   performance marks from navigation start. *Interactive* is the later of two marks: the panel usable
   (`careermap:panel`, or `careermap:panel-full` when a resort record had to load) and the first map frame
   (`careermap:preview`, the 2D picture). The audit then clicks the start button and reports click to WebGL first frame
-  (`careermap:first-render`) and `load` (`careermap:map`). Measured 2026-10-13: interactive 1.4 to 1.7 s on `/map/`
-  and the Vail page (desktop and phone); click to WebGL load 4.4 to 5.8 s when the click comes right after the first
-  paint, because MapLibre (271 KB) only starts downloading after the window `load` event and the first paint. Under SwiftShader the WebGL
-  setup alone takes 1.5 to 2.5 s.
+  (`careermap:first-render`) and `load` (`careermap:map`). Measured 2026-10-13 at a load average of 5: interactive
+  1.7 to 1.8 s on `/map/` and the Vail page (desktop and phone); click to WebGL load 6.1 to 6.9 s when the click comes
+  right after the first paint, because MapLibre (271 KB) only starts downloading after the window `load` event and the
+  first paint. Under SwiftShader the WebGL setup alone takes 1.5 to 2.5 s.
 * Lighthouse (mobile defaults, simulated throttling, same SwiftShader Chromium): see "Performance budget" below for
   the current numbers. Accessibility, Best Practices and SEO 100. Before the click to start (owner decision 9) and
   the deferred MapLibre download, Performance was about 65, held down by 5 to 7 s of blocking time from MapLibre.
@@ -732,18 +732,20 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
      forced layout.
   4. Idle time only prefetches `resorts.json`. `sources.json` loads when the panel shows a source link. Full records
      load when a view needs them or once the WebGL map is ready.
-* **Result** (5 interleaved runs per page against a copy of the tree before the change, load average 2 to 5):
+* **Result** (5 interleaved runs per page against a copy of the tree before the change, load average 1.3 to 4):
 
-  | Page | Before: median [range] | After: median [range] | After: LCP, TBT (median) |
-  |---|---|---|---|
-  | `/map/` | 93 [89 to 97] | 98 [98 to 99] | 1.97 s, 11 ms |
-  | Vail | 90 [78 to 96] | 96 [89 to 96] | 2.47 s, 45 ms |
-  | I 70 Corridor (cluster) | 91 [86 to 95] | 96 [95 to 96] | 2.54 s, 33 ms |
+  | Page | Before: median [range] | After: median [range] | LCP before, after | TBT before, after |
+  |---|---|---|---|---|
+  | `/map/` | 92 [91 to 97] | 98 [98 to 99] | 2.00 s, 1.97 s | 293 ms, 10 ms |
+  | Vail | 90 [68 to 93] | 97 [96 to 97] | 2.72 s, 2.45 s | 205 ms, 28 ms |
+  | I 70 Corridor (cluster) | 92 [90 to 95] | 98 [98 to 99] | 2.70 s, 1.97 s | 184 ms, 41 ms |
+  | Aspen Mountain (climate charts) | 78 [71 to 79] | 87 [85 to 88] | 3.22 s, 2.29 s | 501 ms, 385 ms |
 
   Under a load of 9 to 14 the gap widens: `/map/` 67 before, 98 after (95 to 98). CLS stays at 0.003.
 * **What is left** on resort pages: the stub's record and `detail/<id>.json` are validated with Zod during the first
   render (`detail/vail.json` is 166 KB, mostly transit), and the web font swap relays out the long panel (30 to
-  60 ms). These set the worst runs there.
+  60 ms). On the 11 resorts with climate charts, Chart.js (69 KB) and its first canvas (about 130 ms) plus the chart
+  animations keep blocking time near 400 ms; drawing the charts when their section scrolls into view would remove it.
 
 ### Color modes: heat maps
 Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state

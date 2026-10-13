@@ -3,7 +3,8 @@ researched_date: 2026-10-11
 status: draft
 # All values come from Wikipedia pages fetched on 2026-10-11. Resort sites were unreachable from
 # the research environment, so ownership is not yet confirmed on each resort's own site.
-# lat/lon are the Wikipedia infobox coordinates, used as the base area point.
+# lat/lon are the Wikipedia infobox coordinates, used as the base area point, except records with a
+# comment above lat, which use a lift bottom station at the base (OpenSkiMap lifts).
 #
 # Big Sky, Taos, Snowmass, Buttermilk, Sun Valley (Bald Mountain) and Dollar Mountain were
 # approved as Tier A by the site owner on 2026-10-11 (ROADMAP decisions log). Those records
@@ -44,6 +45,12 @@ sources:
   - {id: access-sugarloaf-shuttles, url: "https://www.sugarloaf.com/shuttles", title: "Sugarloaf Shuttles (Sugarloaf)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. The free Sugarloaf Explorer, owned and run by Western Maine Transportation, serves condos and villages across Carrabassett Valley on set routes."}
   - {id: access-tart-sugar-bowl-shuttle, url: "https://tahoetruckeetransit.com/sugar-bowl-donner-summit-shuttle", title: "Sugar Bowl Donner Summit Shuttle (Tahoe Truckee Area Regional Transit)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free public shuttle, December 8, 2025 to April 12, 2026, from the Cold Stream Road TART stop with timed transfers to the Truckee Local route."}
   - {id: access-waterville-resort-shuttle, url: "https://waterville.com/resort-shuttle", title: "Resort Shuttle (Waterville Valley Resort)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free on demand shuttle in ski season linking the ski area, lodges, condominiums and Town Square."}
+  - {id: openskimap-lift-jackson-hole-aerial-tram, url: "https://openskimap.org/", title: "Aerial Tram bottom station, Jackson Hole Mountain Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Teton Village point. Lift 'Aerial Tram' (OpenStreetMap way/15778675, OpenSkiMap lift ea46c6b659ce667178451287f1123ae3d86f51c7); its bottom station is OpenStreetMap node/158165879 at 43.5875426, -110.82789, 1926 m. Wikipedia (wikipedia-jackson-hole-mountain-resort) places the resort in Teton Village and says the tram rises 4,139 ft to 10,450 ft, which puts its bottom at the 6,311 ft base. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-dollar-mountain-dollar, url: "https://openskimap.org/", title: "Dollar bottom station, Dollar Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Dollar day lodge point. Lift 'Dollar' (OpenStreetMap way/13728602, OpenSkiMap lift af96d1f9fc12cc3ba3e1d03d832e61f3ed5cc687); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 43.689827, -114.3458385, 1817 m. Wikipedia (wikipedia-dollar-mountain) puts the day lodge at the base of Dollar and names the Dollar, Half Dollar, Quarter Dollar and Elkhorn chairs. Dollar has the largest vertical rise (185 m) of the lifts at that base; Elkhorn starts at Elkhorn Village, 1.5 km south. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-alta-collins, url: "https://openskimap.org/", title: "Collins bottom station, Alta Ski Area (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Wildcat base point. Lift 'Collins' (OpenStreetMap way/10140309, OpenSkiMap lift 9a0cb0074e4212dc4c149287bb2b64eb67a64560); its bottom station is OpenStreetMap way/232716841 at 40.587955, -111.637994, 2603 m. Wikipedia (wikipedia-alta-ski-area) names the Wildcat and Albion base areas and gives an 8,530 ft base elevation, which matches the Wildcat base in Collins Gulch (Collins bottom 8,542 ft; Albion's Sunnyside bottom 8,652 ft). Collins, the two stage high speed quad, has the largest vertical rise of the lifts there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-sugarloaf-superquad, url: "https://openskimap.org/", title: "Sugarloaf SuperQuad bottom station, Sugarloaf (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base Lodge point. Lift 'Sugarloaf SuperQuad' (OpenStreetMap way/137778468, OpenSkiMap lift 68e18ca3a18bda9571eb18cb52477370ec07c5c5); its bottom station is OpenStreetMap way/1240350167 at 45.0538156, -70.3103429, 538 m. Wikipedia (wikipedia-sugarloaf-ski-resort) names the Base Lodge, with the bus drop off in front of it and the Sawduster carrying passengers from the Inn to it. The SuperQuad bottom is 0.17 km from the Sawduster top and has the largest vertical rise (538 m) of the lifts starting there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-burke-carpet, url: "https://openskimap.org/", title: "Carpet bottom station, Burke Mountain Ski Area (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Lower base point. Lift 'Carpet' (OpenStreetMap way/235742403, OpenSkiMap lift 445ab70bb9503e7daebcc356234b75499bf490b9); its bottom station is OpenStreetMap node/2437989318 at 44.5874555, -71.9156098, 371 m. Wikipedia (wikipedia-burke-mountain-ski-area) names no base area. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. The Sherburne Express and J-Bar bottoms are within 50 m, and its 1,216 ft elevation is close to the article's 1,210 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-taos-lift-1, url: "https://openskimap.org/", title: "Lift 1 bottom station, Taos Ski Valley (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base village point. Lift 'Lift 1' (OpenStreetMap way/53215268, OpenSkiMap lift ab73245c4043c87f2ca90f4095a2aa2d25323059); its bottom station is OpenStreetMap node/673538178 at 36.5944413, -105.449452, 2876 m. Wikipedia (wikipedia-taos-ski-valley) describes Taos Ski Valley as a village and ski resort, with the village at 9,321 ft and the ski base at 9,200 ft, and names no main lift. Lift 1 has the largest vertical rise (514 m) of the lifts starting in the base village (bottom stations within 0.4 km). Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
 resorts:
   - id: jackson-hole
     tier_a_status: approved
@@ -53,9 +60,11 @@ resorts:
     owner: {value: "Eric Macy and Mike Corbat", source_id: wikipedia-jay-kemmerer, as_of: 2026-10-11, confidence: published, note: "Jay Kemmerer, who bought the resort for his family in 1992, sold it on February 1, 2024 to board members Eric Macy and Mike Corbat; the Kemmerer family remains an equity owner. Not confirmed on the resort site."}
     operator_scale: {value: 2, source_id: wikipedia-jay-kemmerer, as_of: 2026-10-13, confidence: estimated, note: "Owned since 2024 by two individual investors, board members Eric Macy and Mike Corbat, with the Kemmerer family keeping equity. Independent single resort."}
     access: {rating: transit_friendly, summary_md: "START buses link Jackson, Star Valley and Teton Valley with Teton Village at the base.", source_id: access-wikipedia-start-bus, as_of: 2026-10-13, confidence: published, note: "START was founded to carry skiers between Jackson and the resort and now serves commuters."}
-    lat: 43.59
-    lon: -110.89
-    location_source_id: wikipedia-jackson-hole-mountain-resort
+    # Teton Village: Aerial Tram bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (43.59, -110.89), 5.0 km away.
+    lat: 43.58754
+    lon: -110.82789
+    location_source_id: openskimap-lift-jackson-hole-aerial-tram
     cluster_hint: tetons
     tier_a_criteria:
       - {criterion: diehard, rationale: "Jackson Hole is known for its steep, challenging terrain including Corbet's Couloir and a 4,139 ft continuous vertical, with half its terrain rated expert.", source_id: wikipedia-jackson-hole-mountain-resort}
@@ -203,9 +212,11 @@ resorts:
     owner: {value: R. Earl Holding family (Grand America Hotels & Resorts), source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Part of the Sun Valley ski resort; the Sun Valley article infobox gives the owner."}
     operator_scale: {value: 1, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-13, confidence: published, note: "Part of the Sun Valley resort. The infobox says Sun Valley is privately owned by the R. Earl Holding family; the Holding children run the resort directly. The family also owns Snowbasin and Grand America Hotels, but it runs these resorts itself rather than through a multi resort corporate operator, so it is scored family owned."}
     access: {rating: transit_friendly, summary_md: "Mountain Rides runs public buses in Ketchum, Sun Valley and Blaine County.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: estimated, note: "List row only; that routes reach Dollar Mountain is inferred."}
-    lat: 43.68306
-    lon: -114.34694
-    location_source_id: wikipedia-dollar-mountain
+    # Dollar day lodge: Dollar bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (43.68306, -114.34694), 0.8 km away.
+    lat: 43.68983
+    lon: -114.34584
+    location_source_id: openskimap-lift-dollar-mountain-dollar
     cluster_hint: wood-river
     openskimap_names: ["Sun Valley - Dollar Mountain"]
     tier_a_criteria:
@@ -228,9 +239,11 @@ resorts:
     owner: {value: "Private shareholders (Laughlin family 51%, Quinney family 25%, Bass family 11%)", source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
     operator_scale: {value: 1, source_id: wikipedia-alta-ski-area, as_of: 2026-10-13, confidence: estimated, note: "Single resort owned by several individuals; the Laughlin family holds a 51 percent majority (Quinney 25, Bass 11). Scored family owned because one family controls it."}
     access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses run up Little Cottonwood Canyon from the Salt Lake Valley.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: published, note: "Sandy, Utah article: the ski route runs from Historic Sandy TRAX station to Alta and Snowbird."}
-    lat: 40.58083
-    lon: -111.63722
-    location_source_id: wikipedia-alta-ski-area
+    # Wildcat base: Collins bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (40.58083, -111.63722), 0.8 km away.
+    lat: 40.58796
+    lon: -111.63799
+    location_source_id: openskimap-lift-alta-collins
     cluster_hint: wasatch
     tier_a_criteria:
       - {criterion: heritage, rationale: "Alta is one of the oldest ski resorts in the country, opening its first lift on January 15, 1939.", source_id: wikipedia-alta-ski-area}
@@ -286,9 +299,11 @@ resorts:
     owner: {value: Boyne Resorts, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner. The article body says American Skiing Company sold Sugarloaf to CNL Lifestyle Properties in 2007, to be managed by Boyne, and does not describe a later transfer to Boyne."}
     operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
     access: {rating: transit_friendly, summary_md: "The free Sugarloaf Explorer, run by Western Maine Transportation, links condos and villages across Carrabassett Valley with the resort.", source_id: access-sugarloaf-shuttles, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
-    lat: 45.03139
-    lon: -70.31306
-    location_source_id: wikipedia-sugarloaf-ski-resort
+    # Base Lodge: Sugarloaf SuperQuad bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (45.03139, -70.31306), 2.5 km away.
+    lat: 45.05382
+    lon: -70.31034
+    location_source_id: openskimap-lift-sugarloaf-superquad
     cluster_hint: western-maine
     tier_a_criteria:
       - {criterion: athlete_development, rationale: "Carrabassett Valley Academy, a ski and snowboard academy at the base of Sugarloaf since 1982, counts 12 Olympians and 39 US national team members among its alumni.", source_id: wikipedia-carrabassett-valley-academy}
@@ -345,9 +360,11 @@ resorts:
     owner: {value: Bear Den Partners, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Purchased in April 2025 for a reported 11.5 million dollars after a period of federal receivership tied to the Jay Peak EB 5 case."}
     operator_scale: {value: 2, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-13, confidence: published, note: "Owned by Bear Den Partners, which the Berkshire East article calls a New England ski resort investment group (Berkshire East, Burke, a majority of Smugglers' Notch)."}
     access: {rating: car_centric, summary_md: "Staff typically drive to the resort on Burke Mountain in Vermont's Northeast Kingdom.", source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Burke, Vermont article."}
-    lat: 44.57
-    lon: -71.895
-    location_source_id: wikipedia-burke-mountain-ski-area
+    # Lowest lift base: Carpet bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (44.57, -71.895), 2.5 km away.
+    lat: 44.58746
+    lon: -71.91561
+    location_source_id: openskimap-lift-burke-carpet
     cluster_hint: northern-vermont
     tier_a_criteria:
       - {criterion: athlete_development, rationale: "Burke Mountain Academy, founded in 1970 as the first ski academy in North America, trains alpine ski racers on the slopes of Burke Mountain Ski Area.", source_id: wikipedia-burke-mountain-academy}
@@ -427,9 +444,11 @@ resorts:
     owner: {value: "Louis Bacon (Taos Ski Valley, Inc.)", source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "The Blake family sold Taos Ski Valley, Inc. to Louis Bacon in December 2013."}
     operator_scale: {value: 2, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-13, confidence: estimated, note: "Louis Bacon, an individual investor, owns Taos Ski Valley, Inc. since 2013. Independent single resort company."}
     access: {rating: transit_friendly, summary_md: "The Chile Line bus runs free service in Taos and seasonal service up to Taos Ski Valley.", source_id: access-wikipedia-taos-new-mexico, as_of: 2026-10-13, confidence: published, note: "North Central RTD article also lists seasonal daily service from Taos to the ski valley."}
-    lat: 36.59
-    lon: -105.43694
-    location_source_id: wikipedia-taos-ski-valley
+    # Base village: Lift 1 bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (36.59, -105.43694), 1.2 km away.
+    lat: 36.59444
+    lon: -105.44945
+    location_source_id: openskimap-lift-taos-lift-1
     cluster_hint: northern-new-mexico
     openskimap_names: ["Taos Ski Valley"]
     tier_a_criteria:

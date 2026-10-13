@@ -4,7 +4,8 @@ status: draft
 # Eastern and Midwest Tier A candidates, drafted for owner approval.
 # All values come from Wikipedia pages fetched on 2026-10-11 (resort, operator and news sites
 # were blocked by the research environment's proxy), so ownership is not yet confirmed on each
-# resort's own site. lat/lon are the Wikipedia infobox coordinates, used as the base area point.
+# resort's own site. lat/lon are the Wikipedia infobox coordinates, used as the base area point,
+# except records with a comment above lat, which use a lift bottom station at the base (OpenSkiMap lifts).
 # Nothing here is owned or operated by Vail Resorts or Alterra (covered in vail.yaml and alterra.yaml).
 #
 # Researched and left out because no fetched source supports a criterion as written:
@@ -54,6 +55,10 @@ sources:
   - {id: access-tri-valley-snow-bowl-shuttle, url: "https://www.trivalleytransit.org/rider-alerts/snow-bowl-shuttle", title: "Snow Bowl Shuttle (Tri-Valley Transit)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free seasonal bus serving Middlebury, East Middlebury, Ripton, the Bread Loaf campus and the Snow Bowl."}
   - {id: access-sun-journal-sunday-river-staff-housing, url: "https://www.sunjournal.com/?p=10496723", title: "Sunday River staff housing report (Sun Journal)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. The resort leases Bethel area lodges and apartments for staff and converted a ski team dorm on the mountain; about 400 beds at peak."}
   - {id: access-mvta-buck-hill, url: "https://www.mvta.com/wp-content/uploads/2024/12/Buck-Hill.pdf", title: "Buck Hill route schedule (Minnesota Valley Transit Authority)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Seasonal Saturday and Sunday route from Burnsville Transit Station, Heart of the City and Burnsville Center."}
+  - {id: openskimap-lift-whiteface-cloudsplitter-gondola, url: "https://openskimap.org/", title: "Cloudsplitter Gondola bottom station, Whiteface Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base area point. Lift 'Cloudsplitter Gondola' (OpenStreetMap way/32051122, OpenSkiMap lift cbb70c88f2d73b35e86134ef2e1e8fed85339285); its bottom station is OpenStreetMap node/359773111 at 44.3532236, -73.8612525, 372 m. Wikipedia (wikipedia-whiteface-mountain) gives one base area at 1,220 ft. The gondola bottom station is at 372 m (1,220 ft), the lowest lift bottom at the resort, and the gondola has the largest vertical rise of the lifts there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-jay-peak-village-double-chair, url: "https://openskimap.org/", title: "Village Double Chair bottom station, Jay Peak Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Lowest lift base point. Lift 'Village Double Chair' (OpenStreetMap way/199923636, OpenSkiMap lift 6181e593fbb38804aa7529e88ba78b65d377d7b5); its bottom station is OpenStreetMap node/2099136550 at 44.9359538, -72.5008193, 560 m. Wikipedia (wikipedia-jay-peak-resort) says the resort has two base lodges and names neither. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. It is 0.53 km from the Aerial Tram bottom (Tramside) and 0.69 km from the Stateside Moving Carpet, and its 1,838 ft elevation is close to the article's 1,815 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-magic-mountain-red-chair, url: "https://openskimap.org/", title: "Red Chair bottom station, Magic Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base lodge point. Lift 'Red Chair' (OpenStreetMap way/233471851, OpenSkiMap lift c2835104fe12e6e84a4c7dd0a6b6b43aa10a6675); its bottom station is OpenStreetMap node/2418518274 at 43.2020984, -72.7717909, 419 m. Wikipedia (wikipedia-magic-mountain-ski-area) gives one base at 1,350 ft and lists the Red Chair as the summit double with the largest vertical (1,500 ft). Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-mount-bohemia-honey-pot-hoist, url: "https://openskimap.org/", title: "Honey Pot Hoist bottom station, Mount Bohemia (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Lowest lift base point. Lift 'Honey Pot Hoist' (OpenStreetMap way/127262427, OpenSkiMap lift 1e3377be506e96f5c083c3310e1e58d77f594d00); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 47.3858669, -88.0083575, 198 m. Wikipedia (wikipedia-mount-bohemia) names no base area and no base elevation. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. Its 651 ft elevation is close to the 661 ft implied by the article's 1,465 ft peak and 804 ft vertical; the Mountain Dew Hoist bottom is 0.89 km west at 746 ft. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
 resorts:
   # ---------------------------------------------------------------- New York
   - id: whiteface
@@ -65,9 +70,11 @@ resorts:
     owner: {value: Olympic Regional Development Authority, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published, note: "New York State public benefit corporation; the article says ORDA runs the ski area."}
     operator_scale: {value: 2, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-13, confidence: published, note: "Run by the Olympic Regional Development Authority, a New York State public benefit corporation."}
     access: {rating: transit_friendly, summary_md: "The free Mountain Valley Shuttle runs in ski season between Lake Placid, Wilmington and Whiteface.", source_id: access-lakeplacid-mountain-valley-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Essex County Public Transportation runs it with ORDA; whiteface.com gives December 15 to March 15."}
-    lat: 44.3658
-    lon: -73.9028
-    location_source_id: wikipedia-whiteface-mountain   # infobox gives the mountain's coordinates, not the base lodge
+    # Base area: Cloudsplitter Gondola bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (44.3658, -73.9028), 3.6 km away.
+    lat: 44.35322
+    lon: -73.86125
+    location_source_id: openskimap-lift-whiteface-cloudsplitter-gondola
     cluster_hint: adirondacks
     tier_a_criteria:
       - {criterion: heritage, rationale: "Whiteface hosted all six alpine skiing events of the 1980 Winter Olympics and the alpine events of the 2023 Winter World University Games.", source_id: wikipedia-whiteface-mountain}
@@ -178,9 +185,11 @@ resorts:
     owner: {value: Pacific Group Resorts, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published, note: "Bought at a court supervised auction in September 2022 and closed in November 2022, after six years of federal receivership."}
     operator_scale: {value: 2, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-13, confidence: estimated, note: "Pacific Group Resorts, a Park City company for which Jay Peak was its second New England resort. Small multi resort company; no large scale corporate operation shown."}
     access: {rating: convenient, summary_md: "Jay Peak offers limited employee housing, and a resort shuttle serves the team housing sites.", source_id: access-jay-peak-employee-housing, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. First Tracks reported a free employee vanpool pilot from Newport, Richford and other towns with the Vermont Agency of Transportation, likely 2024 to 2025."}
-    lat: 44.9294
-    lon: -72.5322
-    location_source_id: wikipedia-jay-peak-resort
+    # Lowest lift base: Village Double Chair bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (44.9294, -72.5322), 2.6 km away.
+    lat: 44.93595
+    lon: -72.50082
+    location_source_id: openskimap-lift-jay-peak-village-double-chair
     cluster_hint: northern-vermont
     tier_a_criteria:
       - {criterion: diehard, rationale: "Jay Peak receives the most snowfall of any ski area in the Northeastern U.S., is known for its gladed skiing, and is home to the Face Chutes, arguably the steepest marked terrain in the East.", source_id: wikipedia-jay-peak-resort}
@@ -203,9 +212,11 @@ resorts:
     owner: {value: SKI MAGIC LLC, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Group led by Geoff Hatheway; purchase closed November 2016."}
     operator_scale: {value: 2, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "SKI MAGIC LLC, an investor group led by Geoff Hatheway."}
     access: {rating: car_centric, summary_md: "Staff typically drive to the ski area on Glebe Mountain in Londonderry.", source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
-    lat: 43.1928
-    lon: -72.76
-    location_source_id: wikipedia-magic-mountain-ski-area
+    # Base lodge: Red Chair bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (43.1928, -72.76), 1.4 km away.
+    lat: 43.2021
+    lon: -72.77179
+    location_source_id: openskimap-lift-magic-mountain-red-chair
     cluster_hint: southern-vermont
     tier_a_criteria:
       - {criterion: diehard, rationale: "After reopening in 1997 Magic regained a small but passionate following among ski enthusiasts for its classic, challenging terrain, and a group led by a local Magic skier bought the area in 2016.", source_id: wikipedia-magic-mountain-ski-area}
@@ -516,9 +527,11 @@ resorts:
     state: MI
     owner: null   # article names no owner
     access: {rating: car_centric, summary_md: "Staff typically drive to the resort at the northern tip of the Keweenaw Peninsula.", source_id: wikipedia-mount-bohemia, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
-    lat: 47.3917
-    lon: -88.0136
-    location_source_id: wikipedia-mount-bohemia
+    # Lowest lift base: Honey Pot Hoist bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (47.3917, -88.0136), 0.8 km away.
+    lat: 47.38587
+    lon: -88.00836
+    location_source_id: openskimap-lift-mount-bohemia-honey-pot-hoist
     cluster_hint: other-mi
     tier_a_criteria:
       - {criterion: diehard, rationale: "Mount Bohemia makes no snow and grooms no runs, relies on 250 to 300 inches of lake effect snow a year, and offers only black diamond runs plus three intermediate runs, with no beginner trails.", source_id: wikipedia-mount-bohemia}
