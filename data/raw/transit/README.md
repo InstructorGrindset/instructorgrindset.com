@@ -63,7 +63,7 @@ python pipeline/build.py                 # adds transit to data/build/detail/<id
 | Tri Valley Transit | 852 | 2026-05-27 to 2026-08-01 | Middlebury Snow Bowl |
 | Greene County Transit (NY open data license) | 613 | 2025-11-17 to 2027-01-01 | Hunter Mountain |
 
-Most current feeds carry a summer or spring schedule, so winter only ski routes may be missing until the agencies publish winter feeds. UTA's summer feed runs route 994 to Snowbird and Alta; its winter ski buses (972 to Solitude and Brighton, 674 to Powder Mountain, 675 and 677 to Snowbasin) have no trips in it. Refresh before the season.
+Most current feeds carry a summer or spring schedule, so winter only ski routes may be missing until the agencies publish winter feeds. The detail map says so: its legend gives each feed's agency (linked to the site in agency.txt) and schedule dates, with "Offseason schedule. Winter ski service can differ; check the agency." for a feed that overlaps Dec 1 to Mar 31 (`transit.winter_window`) by fewer than 30 days (`winter_min_overlap_days`), and "Last season's schedule. This winter's service can differ; check the agency." for a winter feed that ended before the build date. Extracts carry each route's `agency_name` and `agency_url`. UTA's summer feed runs route 994 to Snowbird and Alta; its winter ski buses (972 to Solitude and Brighton, 674 to Powder Mountain, 675 and 677 to Snowbasin) have no trips in it. Refresh before the season.
 
 ## Checked and left out
 
