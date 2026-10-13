@@ -1,0 +1,372 @@
+# Live webcam links (owner request 2026-10-13: "add live webcam links for all resorts that have those").
+# Links only, opened in a new tab, never embedded. Every URL was seen in a web search result on the resort's own
+# domain or its operator's domain (search result rule: page not opened, confidence estimated). Aggregators are
+# never used. Resorts with no cams page found have no record.
+batch: webcams-tier-a
+researched_date: 2026-10-13
+sources:
+- id: webcams-vail-search
+  url: https://www.vail.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Vail Live Mountain Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-crested-butte-search
+  url: https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Mountain Cams (Crested Butte)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-hunter-search
+  url: https://www.huntermtn.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Mountain Cams (Hunter Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-northstar-search
+  url: https://www.northstarcalifornia.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Mountain Cams (Northstar California)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-stevens-pass-search
+  url: https://www.stevenspass.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Mountain Cams (Stevens Pass)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mount-snow-search
+  url: https://www.mountsnow.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Mountain Cams - Somerset (Mount Snow)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-seven-springs-search
+  url: https://www.7springs.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Seven Springs)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-park-city-search
+  url: https://www.parkcitymountain.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Utah Live Mountain Cam (Park City Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-kirkwood-search
+  url: https://www.kirkwood.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Webcams (Kirkwood)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-stowe-search
+  url: https://www.stowe.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Stowe Mountain Snow Weather Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-keystone-search
+  url: https://www.keystoneresort.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Keystone Live Mountain Cam
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-breckenridge-search
+  url: https://www.breckenridge.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Snow Stake Cam (Breckenridge)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-okemo-search
+  url: https://www.okemo.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Ludlow, Vermont Mountain Snow Webcam (Okemo)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-bmbw-search
+  url: https://www.bmbw.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Boston Mills Brandywine)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-wildcat-search
+  url: https://www.skiwildcat.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Wildcat Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-attitash-search
+  url: https://www.attitash.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Attitash)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-crotched-search
+  url: https://crotchedmtn.com/The%20Mountain/Mountain%20Conditions/Mountain%20Cams
+  title: Mountain Cams (Crotched Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-mount-sunapee-search
+  url: https://www.mountsunapee.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: New Hampshire Mountain Web Cam (Mount Sunapee)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-heavenly-search
+  url: https://www.skiheavenly.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Lake Tahoe Resort Live Mountain Cam (Heavenly)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-afton-alps-search
+  url: https://www.aftonalps.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Minnesota Snow Web Cam (Afton Alps)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-wilmot-search
+  url: https://www.wilmotmountain.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Wilmot Live Mountain Cams
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-beaver-creek-search
+  url: https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Colorado Snow Cam (Beaver Creek)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-paoli-peaks-search
+  url: https://www.paolipeaks.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Paoli Peaks)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-roundtop-search
+  url: https://www.skiroundtop.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Roundtop Mountain Resort)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-hidden-valley-pa-search
+  url: https://www.hiddenvalleyresort.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Hidden Valley Resort, PA)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-liberty-search
+  url: https://www.libertymountainresort.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Fairfield Pennsylvania Snow Weather Cam (Liberty Mountain)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-snow-creek-search
+  url: https://www.skisnowcreek.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Mountain Cams (Snow Creek)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-jfbb-search
+  url: https://www.jfbb.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Mountain Cams (Jack Frost Big Boulder)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+- id: webcams-whitetail-search
+  url: https://www.skiwhitetail.com/the-mountain/mountain-conditions/mountain-cams.aspx
+  title: Live Mountain Cams (Whitetail)
+  accessed_date: 2026-10-13
+  note: From a search result for this page; page not opened.
+records:
+- resort_id: vail
+  cams_page:
+    url: https://www.vail.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-vail-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: crested-butte
+  cams_page:
+    url: https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-crested-butte-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: hunter-mountain
+  cams_page:
+    url: https://www.huntermtn.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-hunter-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: northstar
+  cams_page:
+    url: https://www.northstarcalifornia.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-northstar-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: stevens-pass
+  cams_page:
+    url: https://www.stevenspass.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-stevens-pass-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: mount-snow
+  cams_page:
+    url: https://www.mountsnow.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-mount-snow-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: seven-springs
+  cams_page:
+    url: https://www.7springs.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-seven-springs-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: park-city
+  cams_page:
+    url: https://www.parkcitymountain.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-park-city-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: kirkwood
+  cams_page:
+    url: https://www.kirkwood.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-kirkwood-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: stowe
+  cams_page:
+    url: https://www.stowe.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-stowe-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: keystone
+  cams_page:
+    url: https://www.keystoneresort.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-keystone-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: breckenridge
+  cams_page:
+    url: https://www.breckenridge.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-breckenridge-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: okemo
+  cams_page:
+    url: https://www.okemo.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-okemo-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: boston-mills
+  cams_page:
+    url: https://www.bmbw.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-bmbw-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page for Boston Mills and Brandywine.
+- resort_id: brandywine
+  cams_page:
+    url: https://www.bmbw.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-bmbw-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page for Boston Mills and Brandywine.
+- resort_id: wildcat
+  cams_page:
+    url: https://www.skiwildcat.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-wildcat-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: attitash
+  cams_page:
+    url: https://www.attitash.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-attitash-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: crotched-mountain
+  cams_page:
+    url: https://crotchedmtn.com/The%20Mountain/Mountain%20Conditions/Mountain%20Cams
+    source_id: webcams-crotched-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. URL exactly as the search result listed it.
+- resort_id: mount-sunapee
+  cams_page:
+    url: https://www.mountsunapee.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-mount-sunapee-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: heavenly
+  cams_page:
+    url: https://www.skiheavenly.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-heavenly-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: afton-alps
+  cams_page:
+    url: https://www.aftonalps.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-afton-alps-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: wilmot-mountain
+  cams_page:
+    url: https://www.wilmotmountain.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-wilmot-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: beaver-creek
+  cams_page:
+    url: https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-beaver-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: paoli-peaks
+  cams_page:
+    url: https://www.paolipeaks.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-paoli-peaks-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: roundtop-mountain
+  cams_page:
+    url: https://www.skiroundtop.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-roundtop-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: hidden-valley-pa
+  cams_page:
+    url: https://www.hiddenvalleyresort.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-hidden-valley-pa-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: liberty-mountain
+  cams_page:
+    url: https://www.libertymountainresort.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-liberty-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: snow-creek
+  cams_page:
+    url: https://www.skisnowcreek.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-snow-creek-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+- resort_id: jack-frost
+  cams_page:
+    url: https://www.jfbb.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-jfbb-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page for Jack Frost and Big Boulder. The result
+      snippet said the cams were down for the off season and return in the fall.
+- resort_id: big-boulder
+  cams_page:
+    url: https://www.jfbb.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-jfbb-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened. One shared page for Jack Frost and Big Boulder. The result
+      snippet said the cams were down for the off season and return in the fall.
+- resort_id: whitetail
+  cams_page:
+    url: https://www.skiwhitetail.com/the-mountain/mountain-conditions/mountain-cams.aspx
+    source_id: webcams-whitetail-search
+    as_of: 2026-10-13
+    confidence: estimated
+    note: From a search result for this page; page not opened.
