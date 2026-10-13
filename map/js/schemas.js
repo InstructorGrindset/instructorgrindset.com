@@ -80,6 +80,16 @@ export const Career = z.object({
   stale_fields: strList,
 });
 
+// Owner decision 6: a researched access rating per Tier A resort. A bad value drops the rating, never the resort.
+export const ACCESS_RATINGS = ['convenient', 'transit_friendly', 'mixed', 'car_centric'];
+export const Access = z.object({
+  rating: z.enum(ACCESS_RATINGS),
+  summary_md: z.string().nullish().transform((v) => v ?? null),
+  source_id: Slug,
+  as_of: IsoDate,
+  confidence: Confidence,
+}).nullish().catch(null).transform((v) => v ?? null);
+
 export const Resort = z.object({
   id: Slug,
   name: z.string().min(1),
@@ -135,6 +145,9 @@ export const Resort = z.object({
   climate_available: z.boolean(),
   detail_available: z.boolean().nullish().transform((v) => Boolean(v)),
   trailmap_available: z.boolean().nullish().transform((v) => Boolean(v)),
+  // Owner decision 5: operator scale 1 to 3 (public UI shows the value only).
+  operator_scale: sourced(z.number().int().min(1).max(3)).catch(null),
+  access: Access,
   housing_summary: z.object({
     site_count: z.number().int().nonnegative().nullish(),
     cheapest_rent_monthly_low: numOrNull,
@@ -332,6 +345,7 @@ export const DetailFile = z.object({
   isochrones: z.array(z.object({
     minutes: z.number(), mode: z.string().nullish(), geometry: AreaGeom, source_id: z.string().nullish(),
   })).nullish().transform((v) => v ?? []),
+  access: Access,
 });
 
 // ── Trail map (data/build/trailmap/<resort_id>.json, contract in docs/map/ARCHITECTURE.md) ──

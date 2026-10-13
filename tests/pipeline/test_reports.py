@@ -196,3 +196,34 @@ def test_housing_aggregates_keyed_by_resort_and_site():
     agg = load_aggregates(aggregate(rows, 3, "x"), 3)
     assert set(agg.housing) == {("fixture-peak", "lodge"), ("other-resort", "lodge")}
     assert agg.housing[("other-resort", "lodge")]["low"] == 800
+
+
+def test_formspree_csv_import(tmp_path):
+    """Owner decision 11: a Formspree CSV export (title case headers, metadata columns, its own date format)."""
+    store = ReportStore(tmp_path)
+    csv_path = tmp_path / "formspree.csv"
+    csv_path.write_text(
+        "Date,_subject,Resort ID,Kind,Season,Cert Level,Housing Site ID,Hourly USD,Monthly USD,Proof URL,email\n"
+        "2026-10-13 14:05:22 UTC,Career Map report: Fixture Peak,fixture-peak,pay,2025-26,level_2,,21.5,,,a@example.org\n"
+        "10/14/2026 09:30,Career Map report: Fixture Peak,fixture-peak,rent,2025-26,,,,950,https://example.org/lease,\n"
+        "not a date,Career Map report: Fixture Peak,fixture-peak,rent,2025-26,,,,900,,\n")
+    added, problems = import_export(csv_path, store, {"fixture-peak"})
+    assert added == 2 and len(problems) == 1 and "unreadable timestamp" in problems[0]
+    pending = sorted(store.pending()[0], key=lambda r: r.kind)
+    pay, rent = pending
+    assert (pay.kind, pay.cert_level, pay.values.hourly_usd) == ("pay", "level_2", 21.5)
+    assert pay.submitted_at == dt.datetime(2026, 10, 13, 14, 5, 22, tzinfo=dt.timezone.utc)
+    assert rent.values.monthly_usd == 950 and rent.proof_url == "https://example.org/lease"
+    assert rent.submitted_at.date() == dt.date(2026, 10, 14)
+    text = "".join(p.read_text() for p in (tmp_path / "queue").glob("*.yaml"))
+    assert "a@example.org" not in text and "_subject" not in text   # metadata columns are ignored
+
+
+def test_parse_timestamp_formats():
+    from pipeline.reports import parse_timestamp
+    assert parse_timestamp("2026-10-13T14:05:22Z") == "2026-10-13T14:05:22+00:00"
+    assert parse_timestamp("2026-10-13 14:05:22 UTC") == "2026-10-13T14:05:22+00:00"
+    assert parse_timestamp("Oct 13, 2026 2:05 PM") == "2026-10-13T14:05:00+00:00"
+    assert parse_timestamp("") is None
+    with pytest.raises(ValueError):
+        parse_timestamp("yesterday")

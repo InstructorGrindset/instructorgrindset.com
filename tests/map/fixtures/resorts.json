@@ -283,79 +283,49 @@
     },
     "lucrativeness": {
      "low": 3200,
-     "mid": 6100,
+     "mid": 8900,
      "high": 8900,
      "status": "computed",
      "assumptions": [
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "level_2"
-      },
-      {
        "key": "hours_per_week",
        "label": "Hours per week",
-       "value": 32
+       "value": 40
       },
       {
        "key": "season_months",
        "label": "Season months",
-       "value": 5
+       "value": 4.93
       },
       {
-       "key": "housing_choice",
-       "label": "Housing used",
-       "value": "cheapest_employee_housing"
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
       },
       {
-       "key": "food_monthly_usd",
-       "label": "Food per month (USD)",
-       "value": 450
+       "key": "pay_hourly_top_usd",
+       "label": "Top of the posted wage scale (USD per hour)",
+       "value": 32.5
       },
       {
-       "key": "transport_monthly_usd",
-       "label": "Transport per month (USD)",
-       "value": 120
-      },
-      {
-       "key": "pass_offset_usd",
-       "label": "Pass offset (USD)",
-       "value": 0
-      },
-      {
-       "key": "gear_offset_usd",
-       "label": "Gear offset (USD)",
-       "value": 400
-      },
-      {
-       "key": "range_spread_low",
-       "label": "Range below mid, share of earnings",
-       "value": 0.15
-      },
-      {
-       "key": "range_spread_high",
-       "label": "Range above mid, share of earnings",
-       "value": 0.12
-      },
-      {
-       "key": "pay_hourly_mid_usd",
-       "label": "Hourly pay used, midpoint (USD)",
-       "value": 27.5
-      },
-      {
-       "key": "season_length_days",
-       "label": "Season length used (days)",
-       "value": 150
+       "key": "pay_hourly_bottom_usd",
+       "label": "Bottom of the posted wage scale (USD per hour)",
+       "value": 21
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Rent used per month (USD)",
-       "value": 650
+       "label": "Average rent per month (USD)",
+       "value": 1150
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Season tips",
+       "value": null
       },
       {
        "key": "rent_basis",
        "label": "Rent basis",
-       "value": "employee_housing:alpha-staff-village"
+       "value": "employee_housing"
       },
       {
        "key": "rent_source_id",
@@ -384,6 +354,20 @@
    "facility_type": "ski_area",
    "detail_available": true,
    "trailmap_available": true,
+   "operator_scale": {
+    "value": 3,
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published",
+    "note": "synthetic internal note"
+   },
+   "access": {
+    "rating": "transit_friendly",
+    "summary_md": "A free bus links the staff village and the town to the base all day.",
+    "source_id": "fixture-location",
+    "as_of": "2026-10-01",
+    "confidence": "estimated"
+   },
    "housing_summary": {
     "site_count": 3,
     "cheapest_rent_monthly_low": 550,
@@ -617,69 +601,39 @@
      "status": "assumptions_unset",
      "assumptions": [
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "level_2"
-      },
-      {
        "key": "hours_per_week",
        "label": "Hours per week",
-       "value": 32
+       "value": null
       },
       {
        "key": "season_months",
        "label": "Season months",
-       "value": 5
+       "value": 4.93
       },
       {
-       "key": "housing_choice",
-       "label": "Housing used",
-       "value": "cheapest_employee_housing"
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
       },
       {
-       "key": "food_monthly_usd",
-       "label": "Food per month (USD)",
-       "value": null
+       "key": "pay_hourly_top_usd",
+       "label": "Top of the posted wage scale (USD per hour)",
+       "value": 32.5
       },
       {
-       "key": "transport_monthly_usd",
-       "label": "Transport per month (USD)",
-       "value": 120
-      },
-      {
-       "key": "pass_offset_usd",
-       "label": "Pass offset (USD)",
-       "value": 0
-      },
-      {
-       "key": "gear_offset_usd",
-       "label": "Gear offset (USD)",
-       "value": 400
-      },
-      {
-       "key": "range_spread_low",
-       "label": "Range below mid, share of earnings",
-       "value": 0.15
-      },
-      {
-       "key": "range_spread_high",
-       "label": "Range above mid, share of earnings",
-       "value": 0.12
-      },
-      {
-       "key": "pay_hourly_mid_usd",
-       "label": "Hourly pay used, midpoint (USD)",
-       "value": 27.5
-      },
-      {
-       "key": "season_length_days",
-       "label": "Season length used (days)",
-       "value": 150
+       "key": "pay_hourly_bottom_usd",
+       "label": "Bottom of the posted wage scale (USD per hour)",
+       "value": 21
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Rent used per month (USD)",
-       "value": 650
+       "label": "Average rent per month (USD)",
+       "value": 1150
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Season tips",
+       "value": null
       }
      ]
     },
@@ -884,69 +838,39 @@
      "status": "insufficient_data",
      "assumptions": [
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "level_2"
-      },
-      {
        "key": "hours_per_week",
        "label": "Hours per week",
-       "value": 32
+       "value": 40
       },
       {
        "key": "season_months",
        "label": "Season months",
-       "value": 5
+       "value": 4.93
       },
       {
-       "key": "housing_choice",
-       "label": "Housing used",
-       "value": "cheapest_employee_housing"
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
       },
       {
-       "key": "food_monthly_usd",
-       "label": "Food per month (USD)",
-       "value": 450
+       "key": "pay_hourly_top_usd",
+       "label": "Top of the posted wage scale (USD per hour)",
+       "value": 32.5
       },
       {
-       "key": "transport_monthly_usd",
-       "label": "Transport per month (USD)",
-       "value": 120
-      },
-      {
-       "key": "pass_offset_usd",
-       "label": "Pass offset (USD)",
-       "value": 0
-      },
-      {
-       "key": "gear_offset_usd",
-       "label": "Gear offset (USD)",
-       "value": 400
-      },
-      {
-       "key": "range_spread_low",
-       "label": "Range below mid, share of earnings",
-       "value": 0.15
-      },
-      {
-       "key": "range_spread_high",
-       "label": "Range above mid, share of earnings",
-       "value": 0.12
-      },
-      {
-       "key": "pay_hourly_mid_usd",
-       "label": "Hourly pay used, midpoint (USD)",
-       "value": 27.5
-      },
-      {
-       "key": "season_length_days",
-       "label": "Season length used (days)",
-       "value": 150
+       "key": "pay_hourly_bottom_usd",
+       "label": "Bottom of the posted wage scale (USD per hour)",
+       "value": 21
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Rent used per month (USD)",
-       "value": 650
+       "label": "Average rent per month (USD)",
+       "value": 1150
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Season tips",
+       "value": null
       }
      ]
     },
@@ -1390,79 +1314,49 @@
     },
     "lucrativeness": {
      "low": 4800,
-     "mid": 7900,
+     "mid": 10600,
      "high": 10600,
      "status": "computed",
      "assumptions": [
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "level_2"
-      },
-      {
        "key": "hours_per_week",
        "label": "Hours per week",
-       "value": 32
+       "value": 40
       },
       {
        "key": "season_months",
        "label": "Season months",
-       "value": 5
+       "value": 4.93
       },
       {
-       "key": "housing_choice",
-       "label": "Housing used",
-       "value": "cheapest_employee_housing"
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
       },
       {
-       "key": "food_monthly_usd",
-       "label": "Food per month (USD)",
-       "value": 450
+       "key": "pay_hourly_top_usd",
+       "label": "Top of the posted wage scale (USD per hour)",
+       "value": 32.5
       },
       {
-       "key": "transport_monthly_usd",
-       "label": "Transport per month (USD)",
-       "value": 120
-      },
-      {
-       "key": "pass_offset_usd",
-       "label": "Pass offset (USD)",
-       "value": 0
-      },
-      {
-       "key": "gear_offset_usd",
-       "label": "Gear offset (USD)",
-       "value": 400
-      },
-      {
-       "key": "range_spread_low",
-       "label": "Range below mid, share of earnings",
-       "value": 0.15
-      },
-      {
-       "key": "range_spread_high",
-       "label": "Range above mid, share of earnings",
-       "value": 0.12
-      },
-      {
-       "key": "pay_hourly_mid_usd",
-       "label": "Hourly pay used, midpoint (USD)",
-       "value": 27.5
-      },
-      {
-       "key": "season_length_days",
-       "label": "Season length used (days)",
-       "value": 150
+       "key": "pay_hourly_bottom_usd",
+       "label": "Bottom of the posted wage scale (USD per hour)",
+       "value": 21
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Rent used per month (USD)",
-       "value": 650
+       "label": "Average rent per month (USD)",
+       "value": 1150
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Season tips",
+       "value": null
       },
       {
        "key": "rent_basis",
        "label": "Rent basis",
-       "value": "fmr_studio"
+       "value": "acs_median"
       },
       {
        "key": "rent_source_id",
@@ -1478,6 +1372,13 @@
    "facility_type": "ski_area",
    "detail_available": true,
    "trailmap_available": false,
+   "operator_scale": {
+    "value": 2,
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published",
+    "note": "synthetic internal note"
+   },
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1832,69 +1733,39 @@
      "status": "insufficient_data",
      "assumptions": [
       {
-       "key": "cert_level",
-       "label": "Cert level used",
-       "value": "level_2"
-      },
-      {
        "key": "hours_per_week",
        "label": "Hours per week",
-       "value": 32
+       "value": 40
       },
       {
        "key": "season_months",
        "label": "Season months",
-       "value": 5
+       "value": 4.93
       },
       {
-       "key": "housing_choice",
-       "label": "Housing used",
-       "value": "cheapest_employee_housing"
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
       },
       {
-       "key": "food_monthly_usd",
-       "label": "Food per month (USD)",
-       "value": 450
+       "key": "pay_hourly_top_usd",
+       "label": "Top of the posted wage scale (USD per hour)",
+       "value": 32.5
       },
       {
-       "key": "transport_monthly_usd",
-       "label": "Transport per month (USD)",
-       "value": 120
-      },
-      {
-       "key": "pass_offset_usd",
-       "label": "Pass offset (USD)",
-       "value": 0
-      },
-      {
-       "key": "gear_offset_usd",
-       "label": "Gear offset (USD)",
-       "value": 400
-      },
-      {
-       "key": "range_spread_low",
-       "label": "Range below mid, share of earnings",
-       "value": 0.15
-      },
-      {
-       "key": "range_spread_high",
-       "label": "Range above mid, share of earnings",
-       "value": 0.12
-      },
-      {
-       "key": "pay_hourly_mid_usd",
-       "label": "Hourly pay used, midpoint (USD)",
-       "value": 27.5
-      },
-      {
-       "key": "season_length_days",
-       "label": "Season length used (days)",
-       "value": 150
+       "key": "pay_hourly_bottom_usd",
+       "label": "Bottom of the posted wage scale (USD per hour)",
+       "value": 21
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Rent used per month (USD)",
-       "value": 650
+       "label": "Average rent per month (USD)",
+       "value": 1150
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Season tips",
+       "value": null
       }
      ]
     },
@@ -1905,6 +1776,13 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "operator_scale": {
+    "value": 1,
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published",
+    "note": "synthetic internal note"
+   },
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2315,6 +2193,13 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "access": {
+    "rating": "car_centric",
+    "summary_md": "Most staff drive about 20 minutes from the valley towns.",
+    "source_id": "fixture-location",
+    "as_of": "2026-10-01",
+    "confidence": "estimated"
+   },
    "housing_summary": null,
    "sources": [
     "fixture-location",

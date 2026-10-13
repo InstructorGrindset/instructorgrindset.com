@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Literal, Optional
 
-from pydantic import Field, ValidationInfo, field_validator, model_validator
+from pydantic import Field, StrictInt, ValidationInfo, field_validator, model_validator
 
 from .career import Career
 from .housing import HousingSummary
@@ -73,7 +73,7 @@ class SourcedOperatorScale(SourcedNumber):
     """Professionalism shown publicly as "N of 3": 1 family owned, 2 independent business owned,
     3 large scale corporate operation (owner decision 5; the meaning, note and source stay internal)."""
 
-    value: int  # type: ignore[assignment]
+    value: StrictInt  # type: ignore[assignment]
 
     @field_validator("value")
     @classmethod

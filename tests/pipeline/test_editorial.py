@@ -159,3 +159,18 @@ def test_render_review(tmp_path):
     assert "python -m pipeline.editorial approve resort fixture-basin --by Alexandre" in md
     assert "fixture-peak" not in md  # reviewed entries are not listed as drafts
     assert json.dumps(md)  # plain text
+
+
+def test_approve_all(tmp_path, monkeypatch):
+    import pipeline.editorial as ed
+    raw = _raw(tmp_path / "data" / "raw")
+    monkeypatch.setattr(ed, "REPO_ROOT", tmp_path)
+    assert ed.main(["approve-all", "--by", "site owner", "--date", "2026-10-13"]) == 0
+    text = (raw / "editorial" / "fixture.yaml").read_text()
+    entries = yaml.safe_load(text)["entries"]
+    assert [e["status"] for e in entries] == ["reviewed"] * 3
+    drafts_before = [e for e in entries if e["id"] in ("i70-corridor", "fixture-basin")]
+    assert all(e["reviewed_by"] == "site owner" and e["reviewed_date"] == dt.date(2026, 10, 13) for e in drafts_before)
+    assert "reviewed_by" not in next(e for e in entries if e["id"] == "fixture-peak")  # already reviewed: untouched
+    assert "# synthetic test fixture" in text
+    assert ed.approve_all(raw, "site owner") == (0, [])

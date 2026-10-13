@@ -55,6 +55,9 @@ Resort {
   size: { acres, vertical_ft, lifts, ski_school_staff_est },          // each Sourced<number> | null
   elevation: { base_ft, summit_ft },                                  // each Sourced<number> | null; Tier A research first, else OpenSkiMap (estimated)
   snow: { annual_avg_in: Sourced<number> | null } | null,   // resort reported average annual snowfall (inches), e.g. Wikipedia infobox; null when absent
+  operator_scale: Sourced<1 | 2 | 3> | null,       // owner decision 5: public "Professionalism N of 3"; note is always null here (internal)
+  access: { rating: convenient | transit_friendly | mixed | car_centric, summary_md, source_id, as_of, confidence, note } | null,
+                                                   // owner decision 6; public labels Convenient, Transit friendly, Mixed, Car centric; summary_md is one public sentence
   season: { open_typical, close_typical, length_days, training_start }, // each Sourced | null; dates as "MM-DD"
   terrain: { beginner_pct, intermediate_pct, advanced_pct, expert_pct, character_tags },  // pcts Sourced<number 0 to 100> | null; tags string[]
   fit: { enthusiast_types: string[], professional_types: string[] },
@@ -77,7 +80,7 @@ GeoJSON FeatureCollection, one Polygon or MultiPolygon per cluster. `properties`
 Polygons are convex hulls of member resorts buffered by about 15 km, or hand drawn polygons from `config/clusters.yaml` when supplied.
 
 ### `resorts.geojson`
-Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank, season_length_days, snowfall_annual_in, snowfall_annual_source, professionalism_score, lucrativeness_mid }` where `size_rank` is 1 to 5 from acres (null acres gives 1). The last five are for map recolor modes (numbers or null, plus the snowfall source): `season_length_days` is `season.length_days.value`, `snowfall_annual_in` is the resort's published `snow.annual_avg_in` when present, else the sum of the climate file's monthly `snowfall_in` over months whose `snowfall_source` is not null (null when neither exists), and `snowfall_annual_source` says which (`published` | `climate` | null), `professionalism_score` is `career.professionalism.score`, `lucrativeness_mid` is `career.lucrativeness.mid`.
+Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank, season_length_days, snowfall_annual_in, snowfall_annual_source, professionalism_score, access_rating, lucrativeness_mid }` where `size_rank` is 1 to 5 from acres (null acres gives 1). The last six are for map recolor modes (numbers or null, plus the snowfall source and the access rating): `season_length_days` is `season.length_days.value`, `snowfall_annual_in` is the resort's published `snow.annual_avg_in` when present, else the sum of the climate file's monthly `snowfall_in` over months whose `snowfall_source` is not null (null when neither exists), and `snowfall_annual_source` says which (`published` | `climate` | null), `professionalism_score` is `operator_scale.value` (1 to 3, owner decision 5), `access_rating` is `access.rating`, `lucrativeness_mid` is `career.lucrativeness.mid`.
 
 ### `states.json`
 ```
@@ -197,19 +200,29 @@ career: {
 ```
 * **Staleness:** a value is stale when its `as_of` / `verified_date` plus `staleness.max_age_months` (18) calendar months is
   before the build date. A value exactly 18 months old is still current.
-* **Professionalism:** score = 100 × Σ(weight × value) / Σ(weight) over components with a value. `points` = that component's
-  share of the score. Status `weights_unset` while any weight or `professionalism.min_components` in config is null;
-  `insufficient_data` when fewer than `min_components` components have values; otherwise `computed`.
-* **Lucrativeness:** earnings = mid cert pay (midpoint of the displayed row for `assumptions.cert_level`) × `hours_per_week`
-  × season length days / 7. costs = (rent + `food_monthly_usd` + `transport_monthly_usd`) × `season_months` +
-  `pass_offset_usd` + `gear_offset_usd`. mid = earnings − costs; low = mid − `range_spread.low` × earnings;
-  high = mid + `range_spread.high` × earnings; whole dollars. Rent is the cheapest employee housing (Phase 5) or the
-  HUD / ACS baseline. Status `assumptions_unset` while any assumption or spread is null; `insufficient_data` when pay,
-  rent or season length is missing. `assumptions` echoes every config assumption, both spreads, and the resort inputs
-  used (`pay_hourly_mid_usd`, `season_length_days`, `rent_monthly_usd`), each with a display label.
+* **Professionalism (owner decision 5, 2026-10-13):** the public Professionalism value is `resort.operator_scale.value`
+  (1, 2 or 3), shown only as "1 of 3", "2 of 3" or "3 of 3", with no breakdown, definitions or tooltip text.
+  `resorts.geojson` `professionalism_score` is that value (heat map range 1 to 3). The six component model below stays in
+  code but is unused: `career.professionalism` is still emitted with `status: weights_unset`; do not display it.
+  (Old model: score = 100 × Σ(weight × value) / Σ(weight) over components with a value.)
+* **Lucrativeness (owner decision 4, 2026-10-13):** season savings before tax, USD.
+  season months = `season.length_days` / `days_per_month` (30.4) when sourced, else `default_season_months` (5).
+  earnings = hourly × `hours_per_week` (40, standard full time) × season months × `weeks_per_month` (4.33).
+  savings = earnings + tips − average rent × season months. No food, transport, pass or gear offsets.
+  `mid` and `high` are the savings at the top of the posted wage scale (highest `hourly_high` of the displayed pay rows,
+  any cert level); `low` uses the bottom (lowest `hourly_low`). Tips only from a sourced or 3+ report figure, else 0 with
+  the stated assumption "Tips are not included yet". Average rent follows `rent.lucrativeness_rent`: the mean of the
+  resort's employee housing rent mids (display priority applies), else the county ACS median gross rent, else HUD FMR
+  one bedroom. Status `insufficient_data` when there is no pay row or no rent; `assumptions_unset` only if hours or the
+  default season months are null in config. `assumptions` (each `{key, value, label}`, labels ready to show):
+  `wage_top_usd`, `wage_bottom_usd`, `hours_per_week`, `season_months` (label says sourced length or standard season),
+  `season_months_basis` (`season_length` | `default`), `weeks_per_month`, `tips_season_usd` (label "Tips are not included
+  yet" when null), `rent_monthly_usd`, `rent_basis` (`employee_housing_mean:<site ids>` | `acs_median` | `fmr_one_br` |
+  ...), `rent_source_id` (several joined with ", "), `tax` (label "Savings are before tax").
 * **Shared calculator model (Phase 9):** lucrativeness is computed by `pipeline/season_income.py`, the Python mirror of
-  `assets/js/season-income.mjs` used by the Season Income Calculator: earnings = its `gross`, mid = its
-  `net_before_tax` (via `lucrativeness_inputs`), so the map and the calculator agree for the same inputs. Whole dollars
+  `assets/js/season-income.mjs` used by the Season Income Calculator, with zero offsets (`lucrativeness_inputs` with
+  season length = months × 4.33 × 7 days): earnings = its `gross`, savings = its `net_before_tax`, so the map and the
+  calculator agree for the same inputs. Whole dollars
   use `round_half_up` (JS `Math.round`, ties toward positive infinity). The calculator's headline net is after tax;
   the map's lucrativeness is savings before tax (ROADMAP Section 6) and applies no tax assumption, which stays the
   owner's call. The calculator has state income tax rates for only 13 states (WA, WY, NV, AK, NH, CO, UT, ID, VT, MT,
@@ -266,7 +279,7 @@ Build outputs:
 * **HousingSite** also takes `address: Sourced<string> | null`; `precision: building` requires it (the publicly listed address and its source). Site ids are unique across all housing files; `resort_id` must exist in the build.
 * **County lookup:** point in polygon of the base area against `data/raw/geo/us-counties.geojson` (us-atlas counties-10m via `npm run build:counties`, committed). ZIP level baselines need ZCTA outlines and are not wired yet.
 * **Rent sources:** `hud-fmr-fy<year>` and `census-acs5-<year>-b25064`. A site without published rent shows the first value in `rent.baseline_preference` as `{low: v, high: v}`, confidence `estimated`, with a note naming the baseline.
-* **Lucrativeness rent:** `rent.lucrativeness_rent` order (`employee_housing`, then `baseline`); `career.lucrativeness.assumptions` gains `rent_basis` (`employee_housing:<site id>` or a baseline key such as `fmr_studio`) and `rent_source_id`.
+* **Lucrativeness rent:** see Phase 4 (owner decision 4): `rent.lucrativeness_rent` steps `employee_housing` (mean of employee housing rent mids), `acs_median`, `fmr_one_br`; also available: `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`. Commutes: no walking speed or distance model is used (owner decision 6); each Tier A resort carries the researched `access` rating instead.
 * **Transit extract** (`data/raw/transit/<agency>.json`): `{ version, agency, source, search_radius_km, routes, stops, patterns }`; ids are prefixed `<agency>:`; `patterns: [{ route_id, stop_ids, offsets_min, trip_count }]` hold median scheduled minutes from the first kept stop. Bus commute = walk to a stop within `transit.max_walk_km` + scheduled ride + walk from a stop within `max_walk_km` of the base, at `transit.walk_speed_kmh`, no waiting time; null until Alexandre sets both.
 * **Routing:** source id `routing-<provider>`; the build reads only the cache `data/raw/routing/<provider>/<sha1>.json` written by `python -m pipeline.routing run`. Drive commute `source_id` is `routing-<provider>`; bus commute `source_id` is `gtfs-<agency>`.
 * **Lifts:** extract features carry `{ id, name, ref, lift_type, ski_area_ids }`; only `status: operating` lifts. Detail lifts carry exactly `{ name, lift_type, source_id }`. `name` may be null in OpenStreetMap.
@@ -315,6 +328,17 @@ Build outputs:
   Runs under another convention (europe, japan) get `difficulty_us: null`.
 * Source `openskimap-runs`: OpenSkiMap runs, data © OpenStreetMap contributors (ODbL). The popup shows that attribution.
 
+## Resort facts overlay
+
+`data/raw/facts/<batch>.yaml` (format in `data/raw/facts/README.md`): `{ batch, researched_date, sources, records }`,
+one record per resort (Tier A or Tier B) across all files, with optional Sourced `open_typical`, `close_typical`,
+`training_start` ("MM-DD"), `length_days` (1 to 366), `annual_snowfall_in`, `acres`, `vertical_ft`, `lifts` (positive).
+The build merges each field into `Resort.season`, `Resort.snow.annual_avg_in` and `Resort.size`: the higher confidence
+wins (published > reported > estimated); on a tie the value already on the resort (Tier A YAML, or OpenSkiMap for lifts
+and vertical) wins. `season.length_days` then drives `resorts.geojson` `season_length_days` and the lucrativeness season
+months; `snow.annual_avg_in` drives `snowfall_annual_in` with `snowfall_annual_source: published` (the published path,
+whatever the value's confidence).
+
 ## Phase 6 editorial
 
 ### Raw input: `data/raw/editorial/<batch>.yaml`
@@ -339,7 +363,7 @@ EditorialEntry { target: "cluster" | "resort", id,            // an existing clu
 * `docs/map/editorial-review.md` (generated each build) lists every draft with its text, source links and lint warnings,
   plus the Phase 6 gate: Tier A clusters with and without a reviewed overview.
 * Mark an entry reviewed by setting `status: reviewed` in the YAML, or
-  `python -m pipeline.editorial approve <cluster|resort> <id> [--by NAME]`, which flips the status in place and records
+  `python -m pipeline.editorial approve <cluster|resort> <id> [--by NAME]` (or `approve-all --by NAME`), which flips the status in place and records
   `reviewed_by` and `reviewed_date`.
 
 ## Phase 7 crowdsourcing and freshness
@@ -380,8 +404,8 @@ Report { id, resort_id, kind: pay | rent | housing, season ("2025-26"),
   confidence (a published site rent beats the aggregate; the aggregate, `reported` with the count in `note`, beats an
   estimated site rent), else the county baseline (`estimated`). A raw housing file may not declare a `reported` rent.
   Detail files gain `rent_reported: Sourced<{low, high}> | null` (latest season `rent` aggregate for the resort,
-  `note` gives the count). Lucrativeness rent order (`rent.lucrativeness_rent`): `employee_housing` (published or
-  reported site rent), `reported_area` (`rent_reported`), `baseline`.
+  `note` gives the count). The area `rent_reported` is shown in detail files; it is not in the default lucrativeness
+  rent order (owner decision 4), which uses the employee housing mean (published or reported site rents), then ACS, then FMR.
 
 ### Staleness (`python -m pipeline.staleness`)
 Writes `docs/map/staleness.md`: every sourced value in `resorts.json` and `detail/*.json` whose `as_of` or
@@ -389,8 +413,11 @@ Writes `docs/map/staleness.md`: every sourced value in `resorts.json` and `detai
 `career.stale_fields` and `pay[].stale` in the build output.
 
 ### Submissions endpoint
-`config/definitions.yaml` `submissions: { endpoint: null }` is exposed in `definitions.json` as
-`submissions: { endpoint }`. The UI shows the report form only when `endpoint` is a URL.
+`config/definitions.yaml` `submissions: { endpoint }` is exposed in `definitions.json`. Owner decision 11: the endpoint is
+the site's existing Formspree form `https://formspree.io/f/xyzbdqgq` (the one /contact uses; it emails the owner). The map
+form POSTs JSON with `Accept: application/json`, a `_subject` such as "Career Map report: <resort name>", and flat fields
+`resort_id, kind, season, cert_level, housing_site_id, hourly_usd, monthly_usd, proof_url`. `python -m pipeline.reports
+import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 
 ## Frontend (`/map`)
 
@@ -470,6 +497,7 @@ an interpolated grid instead (`map/js/heat.js`):
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
 * `data/raw/ownership/*.yaml`: verified Vail and Alterra US portfolios with sources. Every listed resort needs a Tier A record (operator compensation).
+* `data/raw/facts/*.yaml`: season, snowfall and size facts for every resort (Resort facts overlay above).
 * `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
 * `data/raw/reports/`: Phase 7 queue and moderated reports (gitignored) and `aggregates.json` (committed).
 * `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
@@ -499,6 +527,7 @@ pipeline/
   editorial.py        # Phase 6 editorial loader, approve command, review document
   reports.py          # Phase 7 report import, moderation, aggregation
   staleness.py        # Phase 7 stale value report
+  facts.py            # Resort facts overlay loader and merge
   climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation)
 config/
   definitions.yaml    # thresholds, weights, assumptions (ROADMAP Section 6)

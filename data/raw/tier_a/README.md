@@ -86,6 +86,8 @@ A facility record (no OpenSkiMap match and no size data is fine):
 | `size` | no | `acres`, `vertical_ft`, `lifts`, `ski_school_staff_est`; each Sourced number or `null` |
 | `elevation` | no | `base_ft`, `summit_ft`; each Sourced number or `null`. When null, the build fills them from OpenSkiMap (confidence `estimated`) |
 | `snow` | no | `annual_avg_in`: Sourced number, the resort reported average annual snowfall in inches (for example the Wikipedia infobox "snowfall" field); omit or `null` when unsourced |
+| `operator_scale` | no | owner decision 5: Sourced integer 1 (family owned), 2 (independent business owned) or 3 (large scale corporate operation). Shown publicly only as "Professionalism N of 3"; `note` and the meaning stay internal and the build drops `note` |
+| `access` | no | owner decision 6: `{rating, summary_md, source_id, as_of, confidence, note?}` with `rating` one of `convenient`, `transit_friendly`, `mixed`, `car_centric`; `summary_md` is one short public sentence, no dashes |
 | `season` | no | `open_typical`, `close_typical`, `training_start` as Sourced `"MM-DD"` strings; `length_days` Sourced number |
 | `terrain` | no | `beginner_pct`, `intermediate_pct`, `advanced_pct`, `expert_pct` Sourced numbers (0 to 100); `character_tags: []` |
 | `fit` | no | `enthusiast_types: []`, `professional_types: []` |

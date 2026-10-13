@@ -101,6 +101,8 @@ function watch(page, label) {
     if (r.status() === 404 && /\/definitions\.json$/.test(r.url())) { log(`    note definitions.json absent at ${r.url()}`); return; }
     // The fallback test build has no slim index on purpose.
     if (r.status() === 404 && /\/legacy-build\/map-index\.json$/.test(r.url())) return;
+    // The report form test answers one send with 500 on purpose to exercise the retry.
+    if (r.status() === 500 && r.url() === 'https://reports.example.test/submit') return;
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
   });
   page.on('requestfailed', (r) => /\/fonts\/Rooftop/.test(r.url()) || problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`));
@@ -265,8 +267,8 @@ async function desktop(browser, base) {
     };
   });
   const heatModes = [
-    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', min: 'Min $6,100', max: 'Max $7,900', n: 2 },
-    { mode: 'professionalism', prop: 'professionalism_score', unit: 'Score out of 100', min: 'Min 61', max: 'Max 85', n: 3 },
+    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', min: 'Min $8,900', max: 'Max $10,600', n: 2 },
+    { mode: 'professionalism', prop: 'professionalism_score', unit: '', min: '1', max: '3', n: 3, ticks: ['1', '2', '3'] },
     { mode: 'season', prop: 'season_length_days', unit: 'Days', min: 'Min 112', max: 'Max 168', n: 11 },
     { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', min: 'Min 256', max: 'Max 460', n: 9 },
   ];
@@ -282,6 +284,7 @@ async function desktop(browser, base) {
     check(st.color.includes(hm.prop) && st.stroke.includes('#e0a03a'), `${hm.mode}: points stay on top, Tier A outlined, no data points grey`);
     check(await leg.isVisible() && text.includes(hm.unit) && text.includes(hm.min) && text.includes(hm.max), `${hm.mode}: continuous legend with min, max and units (${hm.min}, ${hm.max}, ${hm.unit})`);
     check(text.includes(`${hm.n} resort`) && await leg.locator('.heat-bar').count() === 1, `${hm.mode}: legend counts ${hm.n} resorts with data and shows the ramp`);
+    if (hm.ticks) check(JSON.stringify(await leg.locator('.heat-ticks span').allInnerTexts()) === JSON.stringify(hm.ticks) && !/Min|Max|100/.test(text), `${hm.mode}: legend shows only ${hm.ticks.join(', ')}`);
     await shot(page, `desktop-01c-heat-${hm.mode}.png`);
   }
   // Zoomed into the Front Range: the surface stays smooth around each resort.
@@ -411,30 +414,21 @@ async function desktop(browser, base) {
   const split = page.locator('.career-facts .fact', { hasText: 'Instructor split' });
   check((await split.innerText()).includes('45% to the instructor') && await split.locator('.badge-reported').count() === 1
     && await split.locator('.tier-stale').count() === 1, 'instructor split with badge and Needs update');
-  const trigger = page.locator('.score-trigger');
-  const tip = page.locator('.breakdown');
-  check(await tip.isHidden(), 'breakdown hidden until hover or focus');
-  await page.locator('#panel-scroll').evaluate((el) => {
-    const t = el.querySelector('.score-trigger'); el.scrollTop = t.offsetTop - 120;
-  });
-  await trigger.hover();
-  check(await tip.isVisible(), 'breakdown shows on hover');
-  check((await tip.innerText()).includes('Clinic access (needs update)'), 'stale professionalism component marked in breakdown');
-  check(await tip.locator('tbody tr').count() === 6 && JSON.stringify(await tip.locator('thead th').allInnerTexts()) ===
-    JSON.stringify(['Component', 'Weight', 'Value', 'Points']), 'breakdown lists component, weight, value, points');
-  await shot(page, 'desktop-04b-professionalism-hover.png');
-  await page.mouse.move(5, 400);
-  check(await tip.isHidden(), 'breakdown hides on mouse leave');
-  await trigger.focus();
-  check(await tip.isVisible() && await trigger.getAttribute('aria-expanded') === 'true', 'breakdown shows on keyboard focus');
-  await page.keyboard.press('Escape');
-  check(await tip.isHidden(), 'Escape closes the breakdown');
-  check((await trigger.innerText()).includes('72'), 'professionalism score 0 to 100 renders');
-  check((await page.locator('.score-block', { hasText: 'Lucrativeness' }).innerText()).includes('$3,200 to $8,900'), 'lucrativeness range renders');
-  check(await page.locator('.assumptions li').count() === 13, 'lucrativeness assumptions listed beneath (8 config, 2 spreads, 3 resort inputs)');
-  const assumptions = await page.locator('.assumptions').innerText();
-  check(assumptions.includes('Level 2') && assumptions.includes('$650') && assumptions.includes('15% of earnings') && assumptions.includes('$27.50'),
-    'assumption values formatted (cert label, dollars, spreads)');
+  // Owner decision 5: professionalism shows the operator scale value only, with no breakdown or explanation.
+  const prof = page.locator('.score-block.professionalism');
+  check((await prof.innerText()).replace(/\s+/g, ' ').trim() === 'Professionalism 3 of 3', `professionalism shows the value only (${(await prof.innerText()).replace(/\s+/g, ' ')})`);
+  check(await page.locator('.breakdown, .score-trigger').count() === 0 && await prof.locator('[title]').count() === 0, 'no professionalism breakdown or tooltip');
+  // Owner decision 4: the headline is the top of the wage scale; the range runs bottom to top.
+  const luc = page.locator('.score-block', { hasText: 'Lucrativeness' });
+  const lucText = await luc.innerText();
+  check(lucText.includes('$8,900') && lucText.includes('At the top of the posted wage scale') && lucText.includes('Range $3,200 at the bottom of the scale to $8,900 at the top'),
+    'lucrativeness headline is the top of scale figure with the bottom to top range');
+  check(await page.locator('.assumptions li').count() === 7, 'lucrativeness lists the new assumptions');
+  const assumptions = (await page.locator('.assumptions').innerText()).replace(/\s+/g, ' ');
+  check(assumptions.includes('Hours per week 40') && assumptions.includes('$32.50') && assumptions.includes('$1,150') && assumptions.includes('4.33')
+    && assumptions.includes('Tips are not included yet'), `assumption values formatted, tips note shown (${assumptions.replace(/\n/g, ' | ')})`);
+  check((await luc.locator('.rent-used').innerText()) === 'Rent used: the average of the employee housing rents listed for this resort.', 'average rent basis explained');
+  await shot(page, 'desktop-04b-career.png');
   check((await page.locator('.pay-table tr[data-level="level_3"]').innerText()).includes('Range from 4 reports')
     && await page.locator('.pay-table tr[data-level="level_3"] .badge-reported').count() === 1, 'reported pay row shows its aggregate count');
   check(await page.locator('.tag', { hasText: 'Destination families' }).count() === 1, 'client profile chips use readable labels');
@@ -442,6 +436,11 @@ async function desktop(browser, base) {
 
   // Phase 5: resort detail map and Housing and commute.
   await page.waitForSelector('.site-select', { timeout: 10000 });
+  // Owner decision 6: access rating with its one sentence summary and source.
+  const acc = page.locator('.panel-section', { hasText: 'Housing and commute' }).locator('.access');
+  check(await acc.count() === 1 && (await acc.locator('.access-rating').innerText()) === 'Transit friendly'
+    && (await acc.innerText()).includes('A free bus links the staff village') && await acc.locator('a.src-link').count() === 1,
+    'access rating, summary and source show in Housing and commute');
   await mapIdle(page);
   const counts = () => page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
@@ -467,7 +466,7 @@ async function desktop(browser, base) {
   check(await page.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.not-verified', { hasText: 'Commute times are being calculated.' }).count() === 1, 'site without commutes shows empty state');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).innerText()).includes('Synthetic note: full time staff only.'), 'eligibility note renders');
   check(await page.locator('.housing .facts .fact', { hasText: 'HUD FMR' }).count() === 3 && await page.locator('.housing .fact', { hasText: 'ACS median gross rent' }).locator('.badge-estimated').count() === 1, 'rent baseline with badges');
-  check((await page.locator('.rent-used').innerText()) === 'Rent used: Fixture Staff Village, the cheapest employee housing listed.'
+  check((await page.locator('.rent-used').innerText()) === 'Rent used: the average of the employee housing rents listed for this resort.'
     && await page.locator('.rent-used + a.src-link', { hasText: 'Synthetic fixture: resort facts' }).count() === 1, 'lucrativeness says which rent was used, with its source');
   check(await page.locator('.assumptions li', { hasText: 'Rent basis' }).count() === 0, 'rent basis keys stay out of the assumption list');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).locator('.fact', { hasText: 'Address' }).innerText()).includes('1 Fixture Way, Fixture Town'), 'building site shows its sourced address');
@@ -514,9 +513,13 @@ async function desktop(browser, base) {
 
   // Phase 7: report form (endpoint intercepted; nothing leaves the test).
   const posted = [];
+  let failNext = false;
+  const accepts = [];
   await page.route('https://reports.example.test/submit', async (route) => {
+    accepts.push(route.request().headers().accept);
+    if (failNext) { failNext = false; await route.fulfill({ status: 500, contentType: 'application/json', body: '{"ok":false}' }); return; }
     posted.push(JSON.parse(route.request().postData()));
-    await route.fulfill({ status: 202, contentType: 'application/json', body: '{"ok":true}' });
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
   });
   const form = page.locator('.report-form');
   check(await form.count() === 1, 'report form shows when an endpoint is configured');
@@ -532,19 +535,28 @@ async function desktop(browser, base) {
   await form.locator('select[name=cert_level]').selectOption('level_2');
   await form.locator('input[name=amount]').fill('24.5');
   await form.locator('input[name=proof_url]').fill('https://example.com/stub.pdf');
+  // A failed send shows an error with a retry that resends the same report.
+  failNext = true;
   await form.locator('button[type=submit]').click();
-  await page.waitForFunction(() => /moderation queue/.test(document.querySelector('.form-status').textContent), null, { timeout: 5000 });
+  await page.waitForFunction(() => /could not be sent/.test(document.querySelector('.form-status').textContent), null, { timeout: 5000 });
+  check(await form.locator('.report-retry').isVisible() && posted.length === 0, 'a failed send shows an error and a retry button');
+  await form.locator('.report-retry').click();
+  await page.waitForFunction(() => document.querySelector('.form-status').textContent === 'Thanks. Your report goes to review before anything appears on the map.', null, { timeout: 5000 });
+  check(await form.locator('.report-retry').isHidden(), `retry sends it and shows the review message (${await form.locator('.form-status').innerText()})`);
   check(posted.length === 1 && posted[0].resort_id === 'alpha-peak' && posted[0].kind === 'pay' && posted[0].cert_level === 'level_2'
-    && posted[0].values.hourly_usd === 24.5 && /^\d{4}-\d{2}$/.test(posted[0].season) && posted[0].proof_url === 'https://example.com/stub.pdf',
-    `pay report posts the contract fields (${JSON.stringify(posted[0])})`);
+    && posted[0].hourly_usd === 24.5 && /^\d{4}-\d{2}$/.test(posted[0].season) && posted[0].proof_url === 'https://example.com/stub.pdf'
+    && posted[0]._subject === 'Career Map report: Alpha Peak',
+    `pay report posts the import columns and a subject (${JSON.stringify(posted[0])})`);
+  check(accepts.every((a) => a === 'application/json'), 'the form asks for a JSON answer (Accept: application/json)');
   await form.locator('select[name=kind]').selectOption('housing');
   check(await form.locator('[data-field=cert_level]').isHidden() && await form.locator('[data-field=housing_site_id]').isVisible()
     && (await form.locator('[data-field=amount] label').innerText()) === 'Monthly rent in USD', 'housing report asks for a site and a monthly rent');
   await form.locator('select[name=housing_site_id]').selectOption('alpha-town-lease');
   await form.locator('input[name=amount]').fill('875');
   await form.locator('button[type=submit]').click();
-  await page.waitForFunction(() => document.querySelector('.form-status').textContent.includes('moderation'), null, { timeout: 5000 });
-  check(posted.length === 2 && posted[1].housing_site_id === 'alpha-town-lease' && posted[1].values.monthly_usd === 875 && !('cert_level' in posted[1]), 'housing report posts site and monthly value');
+  await page.waitForFunction((n) => document.querySelector('.form-status').textContent.includes('goes to review') && document.querySelector('.form-status').dataset.n !== n, '', { timeout: 5000 });
+  await page.waitForTimeout(200);
+  check(posted.length === 2 && posted[1].housing_site_id === 'alpha-town-lease' && posted[1].monthly_usd === 875 && !('cert_level' in posted[1]), 'housing report posts site and monthly value');
   check(await page.locator('#panel-content').evaluate((el) => !el.innerText.includes('875')), 'submitted values are never displayed');
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 900; });
   await page.waitForTimeout(200);
@@ -562,20 +574,21 @@ async function desktop(browser, base) {
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length >= 5);
   check(await page.locator('.tier-row .tier-draft', { hasText: 'Draft profile' }).count() === 1, 'resort shows Draft profile tag');
   check(await page.locator('.badge-reported').count() >= 1, 'reported badge renders');
-  check(await page.locator('.score-block .not-verified', { hasText: 'Scoring model is being finalized' }).count() === 2, 'weights_unset and assumptions_unset render being finalized');
+  check(await page.locator('.score-block .not-verified', { hasText: 'Scoring model is being finalized' }).count() === 1, 'assumptions_unset renders being finalized');
+  check(await page.locator('.score-block.professionalism .not-verified', { hasText: 'Not yet rated' }).count() === 1, 'an unrated resort says Not yet rated');
   check(await page.locator('.assumptions .not-verified', { hasText: 'Not set yet' }).count() === 1, 'unset assumption marked');
   check(await page.locator('.src-tag', { hasText: 'Estimated' }).count() === 1, 'density chart labelled Estimated');
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
   await page.locator('.resort-list a', { hasText: 'Charlie Hill' }).click();
   await page.waitForURL(/charlie-hill/);
-  check(await page.locator('.score-block .not-verified', { hasText: 'Not enough verified data yet' }).count() === 2, 'insufficient_data renders not enough data');
+  check(await page.locator('.score-block .not-verified', { hasText: 'Not enough verified data yet' }).count() === 1, 'insufficient_data renders not enough data');
 
   // Lifts only detail (the shape of real Tier A data today), then leave detail mode.
   await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'UT', clusterId: 'fixture-wasatch-like', resortId: 'foxtrot-basin' }));
   await page.waitForFunction(() => document.querySelectorAll('.detail-toggles label').length > 0, null, { timeout: 10000 });
   check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'layers without data are hidden');
   check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'empty housing state');
-  check((await page.locator('.rent-used').innerText()).includes('HUD Fair Market Rent for a studio'), 'baseline rent source named');
+  check((await page.locator('.rent-used').innerText()).includes('Census ACS median gross rent'), 'baseline rent source named');
   // Leave to a resort without detail.
   await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'CO', clusterId: 'fixture-front-range', resortId: 'charlie-hill' }));
   await page.waitForURL(/charlie-hill/);
@@ -956,8 +969,10 @@ async function realData(browser, base) {
         log(`  real detail/${withDetail.id}.json: ${fs.statSync(path.join(REPO, 'data', 'build', 'detail', `${withDetail.id}.json`)).size} bytes on disk, fetch ${timing ? `${timing.ms} ms` : 'n/a'}`);
         check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'real data: only layers with data get a toggle');
         check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'real data: housing empty state');
-        check(await page.locator('.panel-section', { hasText: 'Pay and rent reports open soon.' }).count() === 1 && await page.locator('.report-form').count() === 0,
-          'real data: report form hidden while the endpoint is null');
+        const endpoint = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'definitions.json'), 'utf8')).submissions.endpoint;
+        check(endpoint ? await page.locator('.report-form').count() === 1
+          : await page.locator('.panel-section', { hasText: 'Pay and rent reports open soon.' }).count() === 1 && await page.locator('.report-form').count() === 0,
+        `real data: report form ${endpoint ? `shows for ${endpoint}` : 'hidden while the endpoint is null'}`);
         const unnamed = file.lifts.features.findIndex((f) => !f.properties.name);
         if (unnamed >= 0) log(`  real data: ${file.lifts.features.filter((f) => !f.properties.name).length} unnamed lifts render as "Unnamed lift"`);
         await shot(page, 'real-desktop-detail-lifts.png');

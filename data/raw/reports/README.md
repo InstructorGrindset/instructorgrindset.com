@@ -22,6 +22,14 @@ python -m pipeline.reports aggregate --replace     # rebuild it from this checko
 python pipeline/build.py
 ```
 
+## Formspree (owner decision 11)
+
+Reports go to the site's existing Formspree form (`https://formspree.io/f/xyzbdqgq`, `submissions.endpoint` in `config/definitions.yaml`). Download the form's submissions as CSV from the Formspree dashboard and run `python -m pipeline.reports import <file>.csv`. Formspree writes one column per submitted field plus its own columns:
+
+* Column names match case and space insensitively (`Resort ID`, `resort_id` and `resort id` are the same).
+* The submission time is read from the first of `submitted_at`, `created_at`, `date`, `_date`, `submitted`, `timestamp`, `time`, `received_at`; ISO, `2026-10-13 14:05:22 UTC`, `10/13/2026 14:05` and `Oct 13, 2026 2:05 PM` style dates are understood. A row with an unreadable date is reported and skipped.
+* Formspree metadata (`_subject`, `email`, `_replyto`, ...) and any unknown column are ignored, so no email address reaches the report files.
+
 ## Import columns
 
 A CSV with these headers, or a JSON list of objects with the same keys (also accepted: `{"reports": [...]}`):

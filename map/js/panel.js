@@ -2,7 +2,7 @@
 import { config } from './config.js';
 import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts } from './data.js';
 import {
-  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, tagLabel,
+  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, ACCESS_LABEL, tagLabel,
 } from './labels.js';
 import { hrefFor } from './router.js';
 import {
@@ -595,31 +595,55 @@ export function createPanel(root, index, {
       return first;
     }
 
+    // Owner decision 11: JSON to the configured endpoint (the site's Formspree form). Flat fields match the
+    // `python -m pipeline.reports import` columns. Nothing submitted is ever shown on the map.
+    const retry = h('button', { type: 'button', class: 'btn btn-sm btn-ghost report-retry', hidden: true }, 'Try again');
+    form.append(retry);
+    let lastPayload = null;
+
+    async function send(payload) {
+      submit.disabled = true;
+      retry.hidden = true;
+      status.textContent = 'Sending your report';
+      form.classList.remove('is-sent', 'is-error');
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+          credentials: 'omit',
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        sync();
+        lastPayload = null;
+        form.classList.add('is-sent');
+        status.textContent = 'Thanks. Your report goes to review before anything appears on the map.';
+      } catch {
+        form.classList.add('is-error');
+        status.textContent = 'The report could not be sent. Check your connection and try again.';
+        retry.hidden = false;
+      } finally {
+        submit.disabled = false;
+      }
+    }
+    retry.addEventListener('click', () => { if (lastPayload) send(lastPayload); });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       status.textContent = '';
       const bad = validate();
       if (bad) { bad.focus(); status.textContent = 'Please fix the highlighted fields.'; return; }
       const k = kind.value;
-      const payload = {
+      lastPayload = {
+        _subject: `Career Map report: ${r.name}`,
         resort_id: r.id, kind: k, season: season.value,
-        ...(k === 'pay' ? { cert_level: cert.value, values: { hourly_usd: Number(amount.value) } } : { values: { monthly_usd: Number(amount.value) } }),
+        ...(k === 'pay' ? { cert_level: cert.value, hourly_usd: Number(amount.value) } : { monthly_usd: Number(amount.value) }),
         ...(k === 'housing' ? { housing_site_id: site.value } : {}),
         ...(proof.value.trim() ? { proof_url: proof.value.trim() } : {}),
         submitted_at: new Date().toISOString(),
       };
-      submit.disabled = true;
-      try {
-        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), credentials: 'omit' });
-        if (!res.ok) throw new Error(String(res.status));
-        form.reset();
-        sync();
-        status.textContent = 'Thank you. Your report is in the moderation queue.';
-      } catch {
-        status.textContent = 'The report could not be sent. Please try again later.';
-      } finally {
-        submit.disabled = false;
-      }
+      await send(lastPayload);
     });
     return form;
   }
@@ -646,7 +670,18 @@ export function createPanel(root, index, {
   const MODE = { drive: 'Drive', bus: 'Bus', walk: 'Walk', shuttle: 'Shuttle' };
   const TYPE_ORDER = { resort_owned: 0, master_lease: 1, market: 2 };
 
+  /** Access rating and its one sentence summary (owner decision 6), with its source. */
+  function accessBlock(a) {
+    if (!a) return null;
+    return h('div', { class: 'access' },
+      h('p', { class: 'sub' }, 'Getting to the mountain'),
+      h('div', { class: 'sourced-main' }, h('span', { class: 'fact-value access-rating' }, ACCESS_LABEL[a.rating]), badge(a.confidence)),
+      a.summary_md ? h('div', { class: 'access-summary' }, markdown(a.summary_md)) : null,
+      h('p', { class: 'fact-meta' }, `Last verified ${formatIsoDate(a.as_of)} · `, sourceLink(a.source_id)));
+  }
+
   function housingSection(r, my) {
+    const accessSlot = h('div', { class: 'access-slot' }, accessBlock(r.access));
     const body = h('div', { class: 'housing' });
     siteButtons = new Map();
     currentDetail = null;
@@ -658,6 +693,7 @@ export function createPanel(root, index, {
       loadDetail(r.id).then((detail) => {
         if (my !== token) return;
         currentDetail = detail;
+        if (!r.access && detail && detail.access) { clear(accessSlot); accessSlot.append(accessBlock(detail.access)); }
         clear(body);
         renderHousing(body, detail);
         for (const el of root.querySelectorAll('.rent-used')) el.textContent = rentUsedText(el.dataset.source, detail);
@@ -665,7 +701,7 @@ export function createPanel(root, index, {
         onDetail(r.id, detail);
       });
     }
-    return section('Housing and commute', body);
+    return section('Housing and commute', accessSlot, body);
   }
 
   function renderHousing(body, detail) {

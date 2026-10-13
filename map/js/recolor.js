@@ -17,7 +17,7 @@ const FORMAT = {
 /** Value with its unit, for announcements and the resort tooltip. */
 const SPOKEN = {
   lucrativeness: (v) => `${usd.format(v)} per season`,
-  professionalism: (v) => `${fmtInt(v)} out of 100`,
+  professionalism: (v) => `${fmtInt(v)} of 3`,
   season: (v) => `${fmtInt(v)} days`,
   snowfall: (v) => `${fmtInt(v)} in per season`,
 };
@@ -32,9 +32,12 @@ export function valueDomain(values) {
 export function createRecolor(root, index, { onChange, announce }) {
   const features = index.geo.resorts.features;
   const info = {};
+  // A mode with a fixed domain (professionalism, 1 to 3) uses only values inside it.
+  const inDomain = (m, v) => typeof v === 'number' && Number.isFinite(v) && (!m.domain || (v >= m.domain.min && v <= m.domain.max));
   for (const m of RECOLOR_MODES) {
     if (!m.prop) continue;
-    info[m.key] = valueDomain(features.map((f) => f.properties[m.prop]));
+    const d = valueDomain(features.map((f) => f.properties[m.prop]).filter((v) => inDomain(m, v)));
+    info[m.key] = d && m.domain ? { ...d, min: m.domain.min, max: m.domain.max } : d;
   }
   const cache = new Map();
   let seq = 0;
@@ -42,7 +45,7 @@ export function createRecolor(root, index, { onChange, announce }) {
   async function heatFor(m) {
     if (!cache.has(m.key)) {
       cache.set(m.key, loadStateOutlines(index).catch(() => null).then((outlines) => {
-        const pts = features.filter((f) => typeof f.properties[m.prop] === 'number' && Number.isFinite(f.properties[m.prop]))
+        const pts = features.filter((f) => inDomain(m, f.properties[m.prop]))
           .map((f) => ({ lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], value: f.properties[m.prop] }));
         return buildHeat(pts, info[m.key], outlines);
       }));
@@ -86,7 +89,9 @@ export function createRecolor(root, index, { onChange, announce }) {
     root.removeAttribute('aria-busy');
     onChange({ key, prop: m.prop, images, format: SPOKEN[key] });
     drawLegend(m, d);
-    announce(d.min === d.max
+    announce(m.ticks
+      ? `Heat map of ${m.label.toLowerCase()}, on a scale of ${m.ticks.join(', ')}.`
+      : d.min === d.max
       ? `Heat map of ${m.label.toLowerCase()}. Every resort with data shows ${SPOKEN[key](d.min)}.`
       : `Heat map of ${m.label.toLowerCase()}, from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.`);
   }
@@ -96,11 +101,13 @@ export function createRecolor(root, index, { onChange, announce }) {
     const f = FORMAT[m.key];
     const km = fmtInt(config.heat.radiusKm);
     legend.append(
-      h('p', { class: 'legend-title' }, m.title, h('span', { class: 'legend-unit' }, m.unit)),
+      h('p', { class: 'legend-title' }, m.title, m.unit ? h('span', { class: 'legend-unit' }, m.unit) : null),
       h('div', { class: 'heat-bar', style: `background:${rampCss()}`, 'aria-hidden': 'true' }),
-      d.min === d.max
-        ? h('p', { class: 'heat-scale' }, h('span', null, `Every resort with data: ${f(d.min)}`))
-        : h('p', { class: 'heat-scale' }, h('span', null, `Min ${f(d.min)}`), h('span', null, `Max ${f(d.max)}`)),
+      m.ticks
+        ? h('p', { class: 'heat-scale heat-ticks' }, m.ticks.map((t) => h('span', null, f(t))))
+        : d.min === d.max
+          ? h('p', { class: 'heat-scale' }, h('span', null, `Every resort with data: ${f(d.min)}`))
+          : h('p', { class: 'heat-scale' }, h('span', null, `Min ${f(d.min)}`), h('span', null, `Max ${f(d.max)}`)),
       h('p', { class: 'ramp-note' }, `Each color blends the values of resorts within ${km} km, weighted by distance. Areas farther than ${km} km from a resort with data stay empty.`),
       h('ul', { class: 'heat-keys' },
         h('li', null, h('span', { class: 'key-dot key-a', 'aria-hidden': 'true' }), 'Tier A'),

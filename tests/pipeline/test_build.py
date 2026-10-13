@@ -121,7 +121,7 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
                                      "vertical_ft": round((3500.0 - 2400.12346) * 3.280839895), "lifts": 11,
                                      "size_rank": 4, "season_length_days": None, "snowfall_annual_in": None,
                                      "snowfall_annual_source": None, "professionalism_score": None,
-                                     "lucrativeness_mid": None}
+                                     "access_rating": None, "lucrativeness_mid": None}
     assert next(f for f in pts["features"] if f["properties"]["id"] == "faraway-hill")["properties"]["size_rank"] == 1
 
     states = _load(out, "states.json")["states"]
@@ -307,7 +307,7 @@ def test_definitions_json(repo_root, tmp_path, out):
         "display": {"priority": ["published", "reported", "estimated"]},
         "reports": {"aggregation_min": 3},
         "staleness": {"max_age_months": 18},
-        "submissions": {"endpoint": None},
+        "submissions": {"endpoint": "https://formspree.io/f/xyzbdqgq"},
     }
 
 
@@ -860,3 +860,138 @@ def test_snow_schema_rules():
         Snow.model_validate({"annual_max_in": ok})
     with pytest.raises(ValidationError, match="not defined"):
         Snow.model_validate({"annual_avg_in": ok}, context={"source_ids": {"b"}})
+
+
+FACTS_YAML = """
+batch: facts-fixture
+researched_date: 2026-10-13
+sources:
+  - {id: facts-fixture-a, url: https://example.org/facts, title: Fixture facts, accessed_date: 2026-10-13}
+records:
+  - resort_id: fixture-peak
+    open_typical: {value: "11-25", source_id: facts-fixture-a, as_of: 2026-10-13, confidence: estimated}
+    close_typical: {value: "04-12", source_id: facts-fixture-a, as_of: 2026-10-13, confidence: published}
+    length_days: {value: 152, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: estimated, note: computed from typical dates}
+    acres: {value: 3500, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: published}
+    lifts: {value: 12, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: published}
+    annual_snowfall_in: {value: 250, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: estimated}
+  - resort_id: fixture-valley
+    length_days: {value: 120, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: estimated}
+    vertical_ft: {value: 900, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: estimated}
+    lifts: {value: 4, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: published}
+"""
+
+
+def test_facts_overlay_merge_priority(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "facts").mkdir()
+    (raw_dir / "facts" / "fixture.yaml").write_text(FACTS_YAML)
+    (raw_dir / "pay").mkdir()
+    (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
+    _run(repo_root, raw_dir, out, tmp_path)
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    peak, valley = by["fixture-peak"], by["fixture-valley"]
+    # open_typical: Tier A YAML has 11-20 published; the estimated facts value loses
+    assert peak["season"]["open_typical"]["value"] == "11-20"
+    assert peak["season"]["close_typical"]["value"] == "04-12" and peak["season"]["length_days"]["value"] == 152
+    # acres: Tier A YAML 4000 published vs facts 3500 published: tie, the existing value wins
+    assert peak["size"]["acres"]["value"] == 4000
+    # lifts: OpenSkiMap estimated 11 loses to the published facts value
+    assert peak["size"]["lifts"] == {"value": 12, "source_id": "facts-fixture-a", "as_of": "2026-10-13",
+                                     "confidence": "published", "note": None}
+    assert peak["snow"]["annual_avg_in"]["value"] == 250 and "facts-fixture-a" in peak["sources"]
+    # Tier B: OpenSkiMap vertical (estimated) ties the estimated facts value, so it stays;
+    # the published facts lift count beats the OpenSkiMap estimate
+    assert valley["size"]["vertical_ft"]["value"] == 984 and valley["size"]["vertical_ft"]["source_id"] == "openskimap-ski-areas"
+    assert valley["size"]["lifts"]["value"] == 4
+    props = {f["properties"]["id"]: f["properties"] for f in _load(out, "resorts.geojson")["features"]}
+    assert props["fixture-peak"]["season_length_days"] == 152 and props["fixture-valley"]["season_length_days"] == 120
+    assert (props["fixture-peak"]["snowfall_annual_in"], props["fixture-peak"]["snowfall_annual_source"]) == (250, "published")
+    echo = {a["key"]: a for a in peak["career"]["lucrativeness"]["assumptions"]}
+    assert echo["season_months"]["value"] == round(152 / 30.4, 2) and echo["season_months_basis"]["value"] == "season_length"
+
+
+def test_facts_validation(repo_root, raw_dir, out, tmp_path):
+    (raw_dir / "facts").mkdir()
+    bad = [
+        (FACTS_YAML.replace('"11-25"', '"2026-11-25"'), "MM-DD"),
+        (FACTS_YAML.replace("value: 3500", "value: -1"), "positive"),
+        (FACTS_YAML.replace("value: 152", "value: 400"), "366"),
+        (FACTS_YAML.replace("resort_id: fixture-valley", "resort_id: ghost"), "resort 'ghost': no such resort"),
+        (FACTS_YAML.replace("source_id: facts-fixture-a, as_of: 2026-10-13, confidence: published}\n    lifts",
+                            "source_id: nowhere, as_of: 2026-10-13, confidence: published}\n    lifts"), "not defined"),
+        (FACTS_YAML.replace("resort_id: fixture-valley", "resort_id: fixture-peak"), "duplicate resort_id"),
+        (FACTS_YAML + "  - resort_id: fixture-basin\n", "at least one field"),
+        (FACTS_YAML.replace("lifts: {value: 4,", "chairs: {value: 4,"), "Extra inputs"),
+    ]
+    for text, msg in bad:
+        (raw_dir / "facts" / "fixture.yaml").write_text(text)
+        with pytest.raises(BuildError, match=msg):
+            _run(repo_root, raw_dir, out, tmp_path)
+    (raw_dir / "facts" / "fixture.yaml").write_text(FACTS_YAML)
+    (raw_dir / "facts" / "second.yaml").write_text(
+        "batch: facts-two\nresearched_date: 2026-10-13\nrecords:\n  - resort_id: fixture-peak\n"
+        "    lifts: {value: 3, source_id: facts-fixture-a, as_of: 2026-10-13, confidence: estimated}\n")
+    with pytest.raises(BuildError, match="also has a facts record in"):
+        _run(repo_root, raw_dir, out, tmp_path)
+
+
+def test_merge_facts_unit():
+    from pipeline.facts import merge_facts
+    from pipeline.schemas.facts import FactsRecord
+    sv = lambda v, c: {"value": v, "source_id": "s", "as_of": "2026-10-13", "confidence": c}
+    rec = FactsRecord.model_validate({"resort_id": "r", "length_days": sv(100, "reported"), "acres": sv(50, "estimated"),
+                                      "training_start": sv("11-01", "estimated")})
+    d = {"season": {"length_days": sv(90, "estimated")}, "size": {"acres": sv(60, "estimated")}, "snow": None}
+    assert merge_facts(d, rec, ["published", "reported", "estimated"]) == ["length_days", "training_start"]
+    assert d["season"]["length_days"]["value"] == 100 and d["size"]["acres"]["value"] == 60
+    assert d["season"]["training_start"]["value"] == "11-01" and d["snow"] is None
+
+
+def test_operator_scale_and_access(repo_root, raw_dir, out, tmp_path):
+    p = raw_dir / "tier_a" / "fixture.yaml"
+    data = yaml.safe_load(p.read_text())
+    data["resorts"][0]["operator_scale"] = {"value": 3, "source_id": "fixture-source-a", "as_of": "2026-10-13",
+                                            "confidence": "published", "note": "internal reasoning"}
+    data["resorts"][0]["access"] = {"rating": "transit_friendly", "summary_md": "Free buses run from town to the base.",
+                                    "source_id": "fixture-source-b", "as_of": "2026-10-13", "confidence": "estimated"}
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
+    _run(repo_root, raw_dir, out, tmp_path)
+    by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
+    peak = by["fixture-peak"]
+    assert peak["operator_scale"] == {"value": 3, "source_id": "fixture-source-a", "as_of": "2026-10-13",
+                                      "confidence": "published", "note": None}   # the note stays internal
+    assert "internal reasoning" not in (out / "resorts.json").read_text()
+    assert peak["access"]["rating"] == "transit_friendly" and "fixture-source-b" in peak["sources"]
+    assert by["fixture-basin"]["operator_scale"] is None and by["fixture-valley"]["access"] is None
+    props = {f["properties"]["id"]: f["properties"] for f in _load(out, "resorts.geojson")["features"]}
+    assert (props["fixture-peak"]["professionalism_score"], props["fixture-peak"]["access_rating"]) == (3, "transit_friendly")
+    assert (props["fixture-basin"]["professionalism_score"], props["fixture-basin"]["access_rating"]) == (None, None)
+
+
+def test_operator_scale_and_access_validation():
+    from pydantic import ValidationError
+    from pipeline.schemas import Access, SourcedOperatorScale
+    base = {"source_id": "a", "as_of": "2026-10-13", "confidence": "published"}
+    for v in (1, 2, 3):
+        assert SourcedOperatorScale.model_validate({**base, "value": v}).value == v
+    for v in (0, 4, 2.5, "3"):
+        with pytest.raises(ValidationError):
+            SourcedOperatorScale.model_validate({**base, "value": v})
+    ok = {**base, "rating": "car_centric", "summary_md": "Most staff drive."}
+    assert Access.model_validate(ok).rating == "car_centric"
+    with pytest.raises(ValidationError):
+        Access.model_validate({**ok, "rating": "walkable"})
+    with pytest.raises(ValidationError, match="dashes"):
+        Access.model_validate({**ok, "summary_md": "Drive — always."})
+    with pytest.raises(ValidationError, match="not defined"):
+        Access.model_validate(ok, context={"source_ids": {"b"}})
+    with pytest.raises(ValidationError):
+        Access.model_validate({**ok, "summary_md": ""})
+
+
+def test_config_owner_decisions(cfg):
+    d = cfg.definitions
+    assert d.operator_scale.values == {1: "family_owned", 2: "independent_business", 3: "large_corporate"}
+    assert d.access.ratings == ["convenient", "transit_friendly", "mixed", "car_centric"]
+    assert d.submissions.endpoint == "https://formspree.io/f/xyzbdqgq"
+    assert d.rent.lucrativeness_rent == ["employee_housing", "acs_median", "fmr_one_br"]

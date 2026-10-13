@@ -58,7 +58,7 @@
 .map-waiting .map-preview { pointer-events: auto; }
 .map-start {
   position: absolute; z-index: 2; top: 50%; left: calc((100% - var(--panel-w)) / 2); transform: translate(-50%, -50%);
-  box-shadow: 0 6px 24px rgba(0,0,0,.45); white-space: nowrap;
+  box-shadow: 0 6px 24px rgba(0,0,0,.45); white-space: nowrap; color: #10151e;
 }
 .map-stage.is-wide .map-start { left: calc((100% - var(--panel-w-wide)) / 2); }
 .map-start[aria-disabled="true"] { cursor: progress; opacity: .85; }
@@ -502,3 +502,8 @@ body.map-page { background: var(--bg); }
   .trailmap-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; }
   .trailmap-side { border-left: 0; border-top: 1px solid var(--line); max-height: 38dvh; }
 }
+.report-retry[hidden] { display: none; }
+.report-form.is-sent .form-status { color: var(--pub); }
+.report-form.is-error .form-status { color: #f2a7a7; }
+.access { margin: 0 0 .8rem; }
+.access-summary p { margin: .25rem 0; }

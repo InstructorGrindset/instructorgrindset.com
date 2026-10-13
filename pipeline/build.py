@@ -30,6 +30,7 @@ from pipeline import rent as rent_mod  # noqa: E402
 from pipeline import runs as runs_mod  # noqa: E402
 from pipeline.career import CareerData, build_career, load_career_data  # noqa: E402
 from pipeline.editorial import load_editorial, render_review, resort_editorial  # noqa: E402
+from pipeline.facts import load_facts, merge_facts  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
 from pipeline import staleness as staleness_mod  # noqa: E402
@@ -294,6 +295,11 @@ def build(
             if unknown:
                 errors.append(f"resort '{d['id']}': {block}.{key} tags {unknown} are not in config career.vocab.{vk}")
 
+    facts, facts_errors = load_facts(raw_dir, registry, known_ids, rel)
+    errors += facts_errors
+    for d in drafts:
+        if d["id"] in facts:
+            merge_facts(d, facts[d["id"]], cfg.definitions.display.priority)
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
     cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())

@@ -92,16 +92,20 @@ SEASON_LENGTH = {"alpha-peak": 150, "bravo-bowl": 138, "charlie-hill": 120, "ech
 LEVELS = ["none", "level_1", "level_2", "level_3", "trainer", "examiner"]
 COMPONENTS = ["cert_pay_differential", "paid_training_hours", "examiner_trainer_presence",
               "private_lesson_share", "year_round_staff", "clinic_access"]
-ASSUMPTIONS = [  # keys and labels per pipeline/career.py; values synthetic
-    ("cert_level", "Cert level used", "level_2"), ("hours_per_week", "Hours per week", 32),
-    ("season_months", "Season months", 5), ("housing_choice", "Housing used", "cheapest_employee_housing"),
-    ("food_monthly_usd", "Food per month (USD)", 450), ("transport_monthly_usd", "Transport per month (USD)", 120),
-    ("pass_offset_usd", "Pass offset (USD)", 0), ("gear_offset_usd", "Gear offset (USD)", 400),
-    ("range_spread_low", "Range below mid, share of earnings", 0.15),
-    ("range_spread_high", "Range above mid, share of earnings", 0.12),
-    ("pay_hourly_mid_usd", "Hourly pay used, midpoint (USD)", 27.5),
-    ("season_length_days", "Season length used (days)", 150), ("rent_monthly_usd", "Rent used per month (USD)", 650),
+ASSUMPTIONS = [  # owner decision 4 keys and labels as the pipeline emits them; values synthetic
+    ("hours_per_week", "Hours per week", 40),
+    ("season_months", "Season months", 4.93),
+    ("weeks_per_month", "Weeks per month", 4.33),
+    ("pay_hourly_top_usd", "Top of the posted wage scale (USD per hour)", 32.5),
+    ("pay_hourly_bottom_usd", "Bottom of the posted wage scale (USD per hour)", 21),
+    ("rent_monthly_usd", "Average rent per month (USD)", 1150),
+    ("tips_season_usd", "Season tips", None),
 ]
+OPERATOR_SCALE = {"alpha-peak": 3, "foxtrot-basin": 2, "hotel-lake": 1}
+ACCESS = {
+    "alpha-peak": ("transit_friendly", "A free bus links the staff village and the town to the base all day."),
+    "kilo-notch": ("car_centric", "Most staff drive about 20 minutes from the valley towns."),
+}
 
 
 def pay_rows(base, levels, stale_level=None, confidence="published", reported_level=None):
@@ -133,7 +137,7 @@ def prof(score, status="computed"):
 
 
 def lucr(low, mid, high, status="computed", rent_source=None):
-    vals = [(k, l, None if status == "assumptions_unset" and k == "food_monthly_usd" else v) for k, l, v in ASSUMPTIONS]
+    vals = [(k, l, None if status == "assumptions_unset" and k == "hours_per_week" else v) for k, l, v in ASSUMPTIONS]
     return {"low": low if status == "computed" else None, "mid": mid if status == "computed" else None,
             "high": high if status == "computed" else None, "status": status,
             "assumptions": [{"key": k, "label": l, "value": v} for k, l, v in vals]
@@ -147,7 +151,7 @@ def career_data():
         "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
-                       "professionalism": prof(72), "lucrativeness": lucr(3200, 6100, 8900, rent_source=("employee_housing:alpha-staff-village", "fixture-resort-site")),
+                       "professionalism": prof(72), "lucrativeness": lucr(3200, 8900, 8900, rent_source=("employee_housing", "fixture-resort-site")),
                        "stale_fields": ["pay.level_1", "private_split", "professionalism.clinic_access"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(None, "weights_unset"), "lucrativeness": lucr(None, None, None, "assumptions_unset"),
@@ -158,7 +162,7 @@ def career_data():
         "foxtrot-basin": {"pay": pay_rows(22, ["level_1", "level_2", "level_3"]),
                           "private_rate": sourced({"low": 700, "high": 950, "unit": "full_day"}),
                           "private_split": sourced(40, "fixture-model", "estimated"),
-                          "professionalism": prof(85), "lucrativeness": lucr(4800, 7900, 10600, rent_source=("fmr_studio", "fixture-model")), "stale_fields": []},
+                          "professionalism": prof(85), "lucrativeness": lucr(4800, 10600, 10600, rent_source=("acs_median", "fixture-model")), "stale_fields": []},
         "hotel-lake": {"pay": pay_rows(23, ["level_1", "level_2"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(61), "lucrativeness": lucr(None, None, None, "insufficient_data"),
                        "stale_fields": []},
@@ -236,6 +240,12 @@ def resort_record(row):
         record["facility_type"] = facility
     record["detail_available"] = rid in DETAIL_IDS
     record["trailmap_available"] = rid in TRAILMAP_IDS
+    if rid in OPERATOR_SCALE:
+        record["operator_scale"] = {"value": OPERATOR_SCALE[rid], "source_id": "fixture-ownership", "as_of": AS_OF,
+                                    "confidence": "published", "note": "synthetic internal note"}
+    if rid in ACCESS:
+        record["access"] = {"rating": ACCESS[rid][0], "summary_md": ACCESS[rid][1], "source_id": "fixture-location",
+                            "as_of": AS_OF, "confidence": "estimated"}
     record["housing_summary"] = ({"site_count": 3, "cheapest_rent_monthly_low": 550, "cheapest_site_id": "alpha-staff-village",
                                   "has_transit": True} if rid == "alpha-peak" else None)
     ids = {"fixture-location"}
@@ -332,7 +342,7 @@ def recolor_props(r):
     return {
         "season_length_days": r["season"]["length_days"]["value"] if r["season"]["length_days"] else None,
         "snowfall_annual_in": snow,
-        "professionalism_score": (c.get("professionalism") or {}).get("score"),
+        "professionalism_score": (r.get("operator_scale") or {}).get("value"),
         "lucrativeness_mid": (c.get("lucrativeness") or {}).get("mid"),
     }
 
