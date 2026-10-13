@@ -25,11 +25,18 @@ sources:
   - {id: wikipedia-snow-summit, url: "https://en.wikipedia.org/wiki/Snow_Summit", title: "Snow Summit (Wikipedia)", accessed_date: 2026-10-11}
   - {id: wikipedia-snow-valley-mountain-resort, url: "https://en.wikipedia.org/wiki/Snow_Valley_Mountain_Resort", title: "Snow Valley Mountain Resort (Wikipedia)", accessed_date: 2026-10-11}
   - {id: wikipedia-alpine-meadows-ski-resort, url: "https://en.wikipedia.org/wiki/Alpine_Meadows_(ski_resort)", title: "Alpine Meadows (ski resort) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: access-wikipedia-winter-park-colorado, url: "https://en.wikipedia.org/wiki/Winter_Park,_Colorado", title: "Winter Park, Colorado (Wikipedia), transportation", accessed_date: 2026-10-13, note: "The Lift bus system and Amtrak service."}
+  - {id: access-wikipedia-bustang, url: "https://en.wikipedia.org/wiki/Bustang", title: "Bustang (Wikipedia), Snowstang", accessed_date: 2026-10-13, note: "Snowstang ski buses from Denver."}
+  - {id: access-wikipedia-park-city-transit, url: "https://en.wikipedia.org/wiki/Park_City_Transit", title: "Park City Transit (Wikipedia), routes", accessed_date: 2026-10-13, note: "Fare free routes ending at Snow Park Lodge, Deer Valley."}
+  - {id: access-wikipedia-utah-transit-authority, url: "https://en.wikipedia.org/wiki/Utah_Transit_Authority", title: "Utah Transit Authority (Wikipedia), ski service", accessed_date: 2026-10-13, note: "Seasonal ski buses to Alta, Brighton, Snowbird, Solitude, Snowbasin and Powder Mountain."}
+  - {id: access-wikipedia-eastern-sierra-transit, url: "https://en.wikipedia.org/wiki/Eastern_Sierra_Transit", title: "Eastern Sierra Transit (Wikipedia), bus routes", accessed_date: 2026-10-13, note: "Seasonally adjusted Mammoth Lakes routes."}
+  - {id: access-wikipedia-mountain-transit, url: "https://en.wikipedia.org/wiki/Mountain_Transit", title: "Mountain Transit (Wikipedia), route overview", accessed_date: 2026-10-13, note: "Red Line serves Big Bear Mountain Resort; route 5 serves Snow Valley."}
 resorts:
   - id: steamboat
     name: Steamboat
     state: CO
     owner: {value: Alterra Mountain Company, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner; the article says the resort is operated by the Steamboat Ski & Resort Corporation."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     lat: 40.459
     lon: -106.803
     location_source_id: wikipedia-steamboat-ski-resort
@@ -58,6 +65,8 @@ resorts:
     name: Winter Park Resort
     state: CO
     owner: {value: Alterra Mountain Company, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published, note: "Operator. The infobox owner is the City and County of Denver; Alterra operates the resort after acquiring Intrawest, Denver's partner since 2002."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Operator scored: the City and County of Denver owns the resort and Alterra Mountain Company, a privately held multi resort hospitality company owned by KSL Capital Partners and Henry Crown and Company, operates it. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "The Lift buses serve the resort from Winter Park and Fraser, with commuter service to Granby.", source_id: access-wikipedia-winter-park-colorado, as_of: 2026-10-13, confidence: published}
     lat: 39.88694
     lon: -105.7625
     location_source_id: wikipedia-winter-park-resort
@@ -86,6 +95,8 @@ resorts:
     name: Arapahoe Basin
     state: CO
     owner: {value: Alterra Mountain Company, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: "Purchase agreed February 2024 and closed November 19, 2024."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: mixed, summary_md: "Bustang's Snowstang ski bus runs from Denver to the base.", source_id: access-wikipedia-bustang, as_of: 2026-10-13, confidence: estimated, note: "No Summit Stage service to Arapahoe Basin found in the fetched sources; Snowstang serves Denver day skiers, so commuting from Summit County towns is limited."}
     lat: 39.64167
     lon: -105.87167
     location_source_id: wikipedia-arapahoe-basin
@@ -114,6 +125,7 @@ resorts:
     name: Palisades Tahoe
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     lat: 39.196
     lon: -120.235
     location_source_id: wikipedia-palisades-tahoe
@@ -139,6 +151,8 @@ resorts:
     name: Mammoth Mountain
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Eastern Sierra Transit runs seasonal routes in the town of Mammoth Lakes, home of the resort, and a gondola links the village to Canyon Lodge.", source_id: access-wikipedia-eastern-sierra-transit, as_of: 2026-10-13, confidence: estimated, note: "Gondola and in town location from wikipedia-mammoth-mountain-resort; that town routes reach the base lodges is inferred."}
     lat: 37.63056
     lon: -119.0325
     location_source_id: wikipedia-mammoth-mountain-resort
@@ -167,6 +181,8 @@ resorts:
     name: Deer Valley Resort
     state: UT
     owner: {value: Alterra Mountain Company, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Several free Park City Transit routes end at Snow Park Lodge, and High Valley Transit links Heber, Kimball Junction and Salt Lake City.", source_id: access-wikipedia-park-city-transit, as_of: 2026-10-13, confidence: published, note: "High Valley Transit fact from its own Wikipedia article."}
     lat: 40.62278
     lon: -111.48944
     location_source_id: wikipedia-deer-valley
@@ -196,6 +212,8 @@ resorts:
     name: Crystal Mountain
     state: WA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: car_centric, summary_md: "Staff typically drive in on State Route 410 from the Seattle and Tacoma area.", source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article; access described by highway and parking."}
     lat: 46.93
     lon: -121.48
     location_source_id: wikipedia-crystal-mountain-washington
@@ -224,6 +242,7 @@ resorts:
     name: Stratton Mountain Resort
     state: VT
     owner: {value: Alterra Mountain Company, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     lat: 43.11417
     lon: -72.90667
     location_source_id: wikipedia-stratton-mountain-resort
@@ -253,6 +272,8 @@ resorts:
     name: Solitude Mountain Resort
     state: UT
     owner: {value: Alterra Mountain Company, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses run up Big Cottonwood Canyon from the Salt Lake Valley.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: published}
     lat: 40.615139
     lon: -111.588917
     location_source_id: wikipedia-solitude-mountain-resort
@@ -280,6 +301,7 @@ resorts:
     name: Schweitzer Mountain
     state: ID
     owner: {value: Alterra Mountain Company, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     lat: 48.367
     lon: -116.623
     location_source_id: wikipedia-schweitzer-mountain
@@ -307,6 +329,8 @@ resorts:
     name: Sugarbush Resort
     state: VT
     owner: {value: Alterra Mountain Company, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Green Mountain Transit runs Mad River Valley routes, including Mount Ellen, Access Road and Mountain Condos service.", source_id: access-wikipedia-green-mountain-transit-authority, as_of: 2026-10-13, confidence: estimated, note: "Sugarbush article mentions a shuttle bus that drops off at the Lincoln and Ellen base areas."}
     lat: 44.135098
     lon: -72.885962
     location_source_id: wikipedia-sugarbush-resort
@@ -329,6 +353,7 @@ resorts:
     name: Snowshoe Mountain
     state: WV
     owner: {value: Alterra Mountain Company, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     lat: 38.40889
     lon: -79.99472
     location_source_id: wikipedia-snowshoe-mountain
@@ -351,6 +376,7 @@ resorts:
     name: June Mountain
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     lat: 37.7683
     lon: -119.0906
     location_source_id: wikipedia-june-mountain-ski-area
@@ -378,6 +404,8 @@ resorts:
     name: Bear Mountain
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Operated with Snow Summit as Big Bear Bear Mountain Resort"}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Mountain Transit's Red Line bus serves Big Bear Mountain Resort.", source_id: access-wikipedia-mountain-transit, as_of: 2026-10-13, confidence: published}
     lat: 34.2267
     lon: -116.8602
     location_source_id: wikipedia-bear-mountain-ski-area
@@ -405,6 +433,8 @@ resorts:
     name: Snow Summit
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published, note: "Operated with Bear Mountain as Big Bear Mountain Resort"}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Mountain Transit's Red Line serves Big Bear Mountain Resort, and a free bus links Snow Summit with Bear Mountain.", source_id: access-wikipedia-mountain-transit, as_of: 2026-10-13, confidence: estimated, note: "Free shuttle fact from wikipedia-snow-summit; that the Red Line stops at Snow Summit is inferred from the shared resort name."}
     lat: 34.2286
     lon: -116.8911
     location_source_id: wikipedia-snow-summit
@@ -432,6 +462,8 @@ resorts:
     name: Snow Valley Mountain Resort
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Acquired January 2023 per the Alterra Wikipedia list; run with Big Bear Mountain Resort"}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: mixed, summary_md: "Mountain Transit route 5 serves Snow Valley on its way to San Bernardino.", source_id: access-wikipedia-mountain-transit, as_of: 2026-10-13, confidence: estimated, note: "A single regional route; frequency not stated."}
     lat: 34.223375
     lon: -117.037423
     location_source_id: wikipedia-snow-valley-mountain-resort
@@ -459,6 +491,7 @@ resorts:
     name: Palisades Tahoe (Alpine Meadows)
     state: CA
     owner: {value: Alterra Mountain Company, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published, note: "Merged into Alterra in 2018; operates with Palisades Tahoe on one pass, linked by the base to base gondola."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
     lat: 39.164
     lon: -120.239
     location_source_id: wikipedia-alpine-meadows-ski-resort

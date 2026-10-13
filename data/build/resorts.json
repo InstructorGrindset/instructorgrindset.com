@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T01:38:58Z",
+  "generated_at": "2026-10-13T01:49:04Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -319,7 +319,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -686,7 +692,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -1115,8 +1127,21 @@
           "note": "Infobox value. The article text gives 543 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 1,
+        "source_id": "wikipedia-alta-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Seasonal UTA ski buses run up Little Cottonwood Canyon from the Salt Lake Valley.",
+        "source_id": "access-wikipedia-utah-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Sandy, Utah article: the ski route runs from Historic Sandy TRAX station to Alta and Snowbird."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -1173,6 +1198,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-alta-ski-area",
         "ed-west-wiki-alta-utah",
         "wikipedia-alta-ski-area"
@@ -1344,8 +1370,21 @@
           "note": "Infobox gives three figures, 650 in at the top, 512 in at mid mountain and 208 in at the base; the top figure is recorded."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-alyeska-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Glacier Valley Transit runs local buses in Girdwood, the community at the base.",
+        "source_id": "access-wikipedia-us-bus-transit-systems",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "List row only; routes and frequency not stated."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -1529,6 +1568,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-us-bus-transit-systems",
         "ed-west-wiki-alyeska-resort",
         "ed-west-wiki-girdwood-alaska",
         "pay-west-alyeska-instructor",
@@ -2029,8 +2069,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Bustang's Snowstang ski bus runs from Denver to the base.",
+        "source_id": "access-wikipedia-bustang",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No Summit Stage service to Arapahoe Basin found in the fetched sources; Snowstang serves Denver day skiers, so commuting from Summit County towns is limited."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -2263,11 +2316,13 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-bustang",
         "ed-west-wiki-arapahoe-basin",
         "ed-west-wiki-frisco-colorado",
         "ed-west-wiki-summit-county-colorado",
         "owner-decisions-2026-10-11",
         "pay-alterra-abasin-instructor-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-arapahoe-basin"
       ]
     },
@@ -2678,8 +2733,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-aspen-skiing-company",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free RFTA buses run within Aspen and Snowmass Village, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.",
+        "source_id": "access-wikipedia-rfta",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "RFTA history: the Aspen Free Shuttle served the Aspen Skiing Company mountains."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -2870,11 +2938,13 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-rfta",
         "ed-west-wiki-aspen-colorado",
         "ed-west-wiki-aspen-highlands",
         "ed-west-wiki-aspen-skiing-company",
         "pay-west-aspen-ski-instructor-2627",
-        "wikipedia-aspen-highlands"
+        "wikipedia-aspen-highlands",
+        "wikipedia-aspen-skiing-company"
       ]
     },
     {
@@ -2961,8 +3031,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-aspen-skiing-company",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free RFTA buses run within Aspen and Snowmass Village, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.",
+        "source_id": "access-wikipedia-rfta",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Aspen Mountain rises directly above the town of Aspen."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -3153,6 +3236,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-rfta",
         "ed-west-wiki-aspen-colorado",
         "ed-west-wiki-aspen-mountain",
         "ed-west-wiki-aspen-skiing-company",
@@ -3226,7 +3310,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -4090,8 +4180,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Mountain Transit's Red Line bus serves Big Bear Mountain Resort.",
+        "source_id": "access-wikipedia-mountain-transit",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -4148,9 +4251,11 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-mountain-transit",
         "ed-west-wiki-bear-mountain-ski-area",
         "ed-west-wiki-big-bear-lake-california",
         "owner-decisions-2026-10-11",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-bear-mountain-ski-area"
       ]
     },
@@ -4571,8 +4676,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Avon runs free town buses, CORE Transit links Avon with Vail, Edwards, Eagle and Leadville, and the Riverfront Express Gondola climbs from Avon to the mountain.",
+        "source_id": "access-wikipedia-avon-colorado",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Gondola fact from wikipedia-beaver-creek-resort."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -4767,6 +4885,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-avon-colorado",
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-avon-colorado",
         "ed-west-wiki-beaver-creek-resort",
@@ -5184,7 +5303,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-berkshire-east-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -5405,7 +5530,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -5993,8 +6124,21 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-boyne-resorts",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "The Skyline bus runs between Bozeman and Big Sky.",
+        "source_id": "access-wikipedia-bozeman-montana",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -6059,11 +6203,13 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-bozeman-montana",
         "ed-west-wiki-big-sky-montana",
         "ed-west-wiki-big-sky-resort",
         "ed-west-wiki-bozeman-montana",
         "ed-west-wiki-yellowstone-club",
-        "wikipedia-big-sky-resort"
+        "wikipedia-big-sky-resort",
+        "wikipedia-boyne-resorts"
       ]
     },
     {
@@ -6137,8 +6283,21 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-big-snow-american-dream",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "NJ Transit buses and the Meadowlands Rail Line serve the American Dream complex.",
+        "source_id": "access-wikipedia-american-dream-mall",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -6303,6 +6462,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-american-dream-mall",
         "ed-east-wikipedia-american-dream-mall",
         "ed-east-wikipedia-big-snow-american-dream",
         "openskimap-ski-areas",
@@ -6779,7 +6939,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-black-mountain-of-maine",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -7560,7 +7726,13 @@
           "note": "Infobox value. The article text gives a historical average of 200 to 250 in."
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-bogus-basin",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -7852,7 +8024,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -8345,7 +8523,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-boyne-resorts",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -8387,7 +8571,8 @@
       "sources": [
         "ed-east-wikipedia-boyne-falls-michigan",
         "ed-east-wikipedia-boyne-mountain-resort",
-        "wikipedia-boyne-mountain-resort"
+        "wikipedia-boyne-mountain-resort",
+        "wikipedia-boyne-resorts"
       ]
     },
     {
@@ -8455,7 +8640,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -8879,8 +9070,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free Summit Stage buses link Breckenridge with Frisco and Silverthorne, and the BreckConnect Gondola runs from the town transit center to Peak 8.",
+        "source_id": "access-wikipedia-frisco-colorado",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Gondola fact from wikipedia-breckenridge-ski-resort."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -9071,6 +9275,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-frisco-colorado",
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-breckenridge-colorado",
         "ed-west-wiki-breckenridge-ski-resort",
@@ -9323,7 +9528,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-bridger-bowl-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -9566,8 +9777,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-boyne-resorts",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Seasonal UTA ski buses run up Big Cottonwood Canyon from the Salt Lake Valley.",
+        "source_id": "access-wikipedia-utah-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -9624,6 +9848,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-brighton-ski-resort",
         "ed-west-wiki-brighton-utah",
         "wikipedia-boyne-resorts",
@@ -10113,7 +10338,13 @@
           "note": "Infobox value. The article text says less than 60 in."
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 1,
+        "source_id": "wikipedia-buck-hill",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -10610,7 +10841,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-berkshire-east-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -10654,6 +10891,7 @@
         "ed-east-wikipedia-burke-mountain-academy",
         "ed-east-wikipedia-burke-mountain-ski-area",
         "ed-east-wikipedia-burke-vermont",
+        "wikipedia-berkshire-east-ski-resort",
         "wikipedia-burke-mountain-academy",
         "wikipedia-burke-mountain-ski-area"
       ]
@@ -10737,8 +10975,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-aspen-skiing-company",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free RFTA buses run within Aspen and Snowmass Village, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.",
+        "source_id": "access-wikipedia-rfta",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "RFTA history: the Aspen Free Shuttle served the Aspen Skiing Company mountains."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -10929,10 +11180,12 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-rfta",
         "ed-west-wiki-aspen-skiing-company",
         "ed-west-wiki-buttermilk-ski-area",
         "ed-west-wiki-x-games",
         "pay-west-aspen-ski-instructor-2627",
+        "wikipedia-aspen-skiing-company",
         "wikipedia-buttermilk-ski-area",
         "wikipedia-x-games"
       ]
@@ -11754,7 +12007,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-cannon-mountain-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -13699,8 +13958,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Summit Stage county buses serve Copper along with Breckenridge, Frisco, Dillon and Silverthorne.",
+        "source_id": "access-wikipedia-us-bus-transit-systems",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -13890,6 +14162,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-us-bus-transit-systems",
         "ed-west-wiki-copper-mountain-colorado",
         "ed-west-wiki-frisco-colorado",
         "openskimap-ski-areas",
@@ -14379,7 +14652,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-cranmore-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -14693,8 +14972,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "The town of Crested Butte runs a free bus to the resort, and buses connect the town with Gunnison.",
+        "source_id": "wikipedia-crested-butte-colorado",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Gunnison article adds that the Gunnison Valley RTA bus serves Crested Butte Mountain Resort."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -14969,7 +15261,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -15260,8 +15558,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive in on State Route 410 from the Seattle and Tacoma area.",
+        "source_id": "wikipedia-crystal-mountain-washington",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article; access described by highway and parking."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -15447,6 +15758,7 @@
         "ed-west-wiki-crystal-mountain-washington",
         "owner-decisions-2026-10-11",
         "pay-alterra-crystal-instructor-pt-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-crystal-mountain-washington"
       ]
     },
@@ -15949,8 +16261,21 @@
           "note": "Infobox gives two figures, under 150 in at the base and 294 in at the peak; the peak figure is recorded."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Several free Park City Transit routes end at Snow Park Lodge, and High Valley Transit links Heber, Kimball Junction and Salt Lake City.",
+        "source_id": "access-wikipedia-park-city-transit",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "High Valley Transit fact from its own Wikipedia article."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -16164,6 +16489,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-park-city-transit",
         "ed-west-wiki-deer-valley",
         "ed-west-wiki-park-city-utah",
         "owner-decisions-2026-10-11",
@@ -16171,6 +16497,7 @@
         "pay-alterra-deervalley-experienced-2627",
         "pay-alterra-deervalley-private-lessons",
         "pay-alterra-deervalley-ski-school-jobs",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-deer-valley"
       ]
     },
@@ -16739,8 +17066,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 1,
+        "source_id": "wikipedia-sun-valley-idaho",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Mountain Rides runs public buses in Ketchum, Sun Valley and Blaine County.",
+        "source_id": "access-wikipedia-us-bus-transit-systems",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "List row only; that routes reach Dollar Mountain is inferred."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -16779,6 +17119,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-us-bus-transit-systems",
         "ed-west-wiki-dollar-mountain",
         "ed-west-wiki-sun-valley-idaho",
         "wikipedia-dollar-mountain",
@@ -18744,7 +19085,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 1,
+        "source_id": "wikipedia-grand-targhee-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -19540,7 +19887,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-gunstock-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -20016,8 +20369,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "A gondola rises from Heavenly Village in South Lake Tahoe, where Tahoe Transportation District runs local buses.",
+        "source_id": "wikipedia-heavenly-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Local bus fact from the South Lake Tahoe article; the district ended its ski shuttles in 2018."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -20362,7 +20728,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-haystack-mountain-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -20935,7 +21307,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -21200,7 +21578,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -22199,7 +22583,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-howelsen-hill-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -22495,7 +22885,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -22864,7 +23260,13 @@
           "note": "Infobox value. The article text says less than 60 in."
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-hyland-hills-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -22974,7 +23376,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -23328,8 +23736,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-jay-kemmerer",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "START buses link Jackson, Star Valley and Teton Valley with Teton Village at the base.",
+        "source_id": "access-wikipedia-start-bus",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "START was founded to carry skiers between Jackson and the resort and now serves commuters."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -23514,6 +23935,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-start-bus",
         "ed-west-wiki-jackson-hole-mountain-resort",
         "ed-west-wiki-jackson-wyoming",
         "ed-west-wiki-jay-kemmerer",
@@ -23602,7 +24024,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-jay-peak-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -23936,7 +24364,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -24156,6 +24590,7 @@
         "owner-decisions-2026-10-11",
         "pay-alterra-june-ski-certified-2627",
         "pay-alterra-june-ski-noncertified-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-june-mountain-ski-area"
       ]
     },
@@ -24730,8 +25165,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Summit Stage county buses serve Keystone along with Breckenridge, Frisco, Dillon and Silverthorne.",
+        "source_id": "access-wikipedia-us-bus-transit-systems",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -24926,6 +25374,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-us-bus-transit-systems",
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-keystone-colorado",
         "ed-west-wiki-keystone-resort",
@@ -25020,8 +25469,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-killington-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "mixed",
+        "summary_md": "The Bus runs a limited daily Rutland to Killington commuter route.",
+        "source_id": "access-wikipedia-marble-valley-rtd",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -25079,6 +25541,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-marble-valley-rtd",
         "ed-east-wikipedia-killington-ski-resort",
         "ed-east-wikipedia-killington-vermont",
         "ed-east-wikipedia-pico-mountain",
@@ -25251,8 +25714,21 @@
           "note": "Infobox gives about 500 in. The article text gives seasonal snowfall of 354 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive State Route 88, the all weather highway that links the resort with the rest of California.",
+        "source_id": "wikipedia-kirkwood-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article or the Tahoe transit articles; remote highway location."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -25616,7 +26092,13 @@
         "summit_ft": null
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-whiteface-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -25659,7 +26141,8 @@
         "ed-east-wikipedia-lake-placid-new-york",
         "ed-east-wikipedia-lake-placid-olympic-ski-jumping-complex",
         "wikipedia-lake-placid-olympic-ski-jumping-complex",
-        "wikipedia-us-olympic-paralympic-training-centers"
+        "wikipedia-us-olympic-paralympic-training-centers",
+        "wikipedia-whiteface-mountain"
       ]
     },
     {
@@ -25815,7 +26298,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -26314,7 +26803,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -27670,7 +28165,13 @@
           "note": "Infobox value. The article text says it averages over 150 in of snow a year."
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-mad-river-glen",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -27915,7 +28416,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -28054,7 +28561,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-magic-mountain-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -28392,8 +28905,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Eastern Sierra Transit runs seasonal routes in the town of Mammoth Lakes, home of the resort, and a gondola links the village to Canyon Lodge.",
+        "source_id": "access-wikipedia-eastern-sierra-transit",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Gondola and in town location from wikipedia-mammoth-mountain-resort; that town routes reach the base lodges is inferred."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -28607,11 +29133,13 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-eastern-sierra-transit",
         "ed-west-wiki-mammoth-lakes-california",
         "ed-west-wiki-mammoth-mountain-resort",
         "owner-decisions-2026-10-11",
         "pay-alterra-mammoth-ski-certified-2627",
         "pay-alterra-mammoth-ski-noncertified-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-mammoth-mountain-resort"
       ]
     },
@@ -29350,7 +29878,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-middlebury-college-snow-bowl",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -30171,7 +30705,14 @@
         }
       },
       "operator_scale": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive from Interstate 90 up Grant Creek Road to a base with little development.",
+        "source_id": "wikipedia-montana-snowbowl",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article or the Mountain Line article."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -30648,7 +31189,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -31786,8 +32333,21 @@
           "note": "Infobox value. The article statistics give 158 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Fare free MOOver buses run ski season circulators around Mount Snow and year round service from Wilmington to West Dover.",
+        "source_id": "access-wikipedia-southeast-vermont-transit",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -31989,6 +32549,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-southeast-vermont-transit",
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-dover-vermont",
         "ed-east-wikipedia-mount-snow",
@@ -32162,7 +32723,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -32851,7 +33418,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -33131,7 +33704,14 @@
         }
       },
       "operator_scale": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive State Route 542, which ends at the ski area.",
+        "source_id": "wikipedia-mt-baker-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -33724,7 +34304,14 @@
         }
       },
       "operator_scale": null,
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Several bus services reach the base, including Columbia Gorge Area Transit.",
+        "source_id": "wikipedia-mount-hood-meadows",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "The article says many buses serve the area; schedules not stated."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -35027,7 +35614,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -35807,8 +36400,21 @@
           "note": "Infobox gives 16.6 ft, converted to inches."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Seasonal buses reach Okemo from Bellows Falls and Rutland.",
+        "source_id": "access-wikipedia-southeast-vermont-transit",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "SEVT route 61 Bellows Falls to Okemo shuttle is seasonal; MVRTD runs a winter Rutland to Ludlow connector."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -35985,6 +36591,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-southeast-vermont-transit",
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-ludlow-town-vermont",
         "ed-east-wikipedia-okemo-mountain",
@@ -36330,7 +36937,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -36512,6 +37125,7 @@
         "owner-decisions-2026-10-11",
         "pay-alterra-palisades-dol-level3-2627",
         "pay-alterra-palisades-kids-instructor-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-palisades-tahoe"
       ]
     },
@@ -36594,7 +37208,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -36657,7 +37277,8 @@
         "ed-west-wiki-lake-tahoe",
         "ed-west-wiki-palisades-tahoe",
         "owner-decisions-2026-10-11",
-        "wikipedia-alpine-meadows-ski-resort"
+        "wikipedia-alpine-meadows-ski-resort",
+        "wikipedia-alterra-mountain-company"
       ]
     },
     {
@@ -36733,7 +37354,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -37016,8 +37643,21 @@
           "note": "Infobox value. The statistics list in the article gives 365 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free Park City Transit buses run across town and to Canyons Village, and High Valley Transit runs to Salt Lake City.",
+        "source_id": "wikipedia-park-city-utah",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Park City Transit article lists a winter express to Park City Mountain."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -37219,7 +37859,8 @@
         "pay-vail-park-city-cert-2026",
         "pay-vail-park-city-h2b-level3-dol-2025",
         "vail-10k-fy2026",
-        "wikipedia-park-city-mountain-resort"
+        "wikipedia-park-city-mountain-resort",
+        "wikipedia-park-city-utah"
       ]
     },
     {
@@ -37793,7 +38434,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-killington-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -38898,8 +39545,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-powder-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Seasonal UTA ski buses serve Powder Mountain from the Ogden area.",
+        "source_id": "access-wikipedia-utah-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "UTA article lists seasonal buses to Powder Mountain; the Ogden origin and frequency are inferred."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -38956,6 +39616,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-eden-utah",
         "ed-west-wiki-powder-mountain",
         "wikipedia-powder-mountain"
@@ -40344,7 +41005,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -40983,7 +41650,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-saskadena-six",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -41353,7 +42026,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -41559,6 +42238,7 @@
         "owner-decisions-2026-10-11",
         "pay-alterra-schweitzer-childrens-center-2627",
         "pay-alterra-schweitzer-private-lessons",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-schweitzer-mountain"
       ]
     },
@@ -41805,7 +42485,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -43363,7 +44049,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-ski-cooper",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -44645,7 +45337,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -45100,8 +45798,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Mountain Transit's Red Line serves Big Bear Mountain Resort, and a free bus links Snow Summit with Bear Mountain.",
+        "source_id": "access-wikipedia-mountain-transit",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Free shuttle fact from wikipedia-snow-summit; that the Red Line stops at Snow Summit is inferred from the shared resort name."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45159,10 +45870,12 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-mountain-transit",
         "ed-west-wiki-big-bear-lake-california",
         "ed-west-wiki-snow-summit",
         "ed-west-wiki-x-games",
         "owner-decisions-2026-10-11",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-snow-summit"
       ]
     },
@@ -45327,8 +46040,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Mountain Transit route 5 serves Snow Valley on its way to San Bernardino.",
+        "source_id": "access-wikipedia-mountain-transit",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "A single regional route; frequency not stated."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45519,11 +46245,13 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-mountain-transit",
         "ed-west-wiki-running-springs-california",
         "ed-west-wiki-snow-summit",
         "ed-west-wiki-snow-valley-mountain-resort",
         "owner-decisions-2026-10-11",
         "pay-alterra-snowvalley-apprentice-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-snow-valley-mountain-resort"
       ]
     },
@@ -45606,8 +46334,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 1,
+        "source_id": "wikipedia-snowbasin",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Seasonal UTA ski buses serve Snowbasin from the Ogden area.",
+        "source_id": "access-wikipedia-utah-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "UTA article lists seasonal buses to Snowbasin; the Ogden origin and frequency are inferred."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45664,6 +46405,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-huntsville-utah",
         "ed-west-wiki-snowbasin",
         "wikipedia-snowbasin"
@@ -45748,8 +46490,21 @@
           "note": "Infobox average. It also lists a record of 838 in for 2023."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Seasonal UTA ski buses run up Little Cottonwood Canyon from the Salt Lake Valley.",
+        "source_id": "access-wikipedia-utah-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Sandy, Utah article: the ski route runs from Historic Sandy TRAX station to Alta and Snowbird."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -45924,6 +46679,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-powdr",
         "ed-west-wiki-snowbird-utah",
         "wikipedia-powdr",
@@ -46165,8 +46921,21 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-aspen-skiing-company",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free RFTA buses run within Snowmass Village and to Aspen, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.",
+        "source_id": "access-wikipedia-rfta",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -46358,11 +47127,13 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-rfta",
         "ed-west-wiki-aspen-colorado",
         "ed-west-wiki-aspen-skiing-company",
         "ed-west-wiki-snowmass-ski-area",
         "ed-west-wiki-snowmass-village-colorado",
         "pay-west-aspen-ski-instructor-2627",
+        "wikipedia-aspen-skiing-company",
         "wikipedia-snowmass-ski-area",
         "wikipedia-snowmass-village-colorado"
       ]
@@ -46446,7 +47217,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -46619,6 +47396,7 @@
         "ed-east-wikipedia-snowshoe-west-virginia",
         "owner-decisions-2026-10-11",
         "pay-alterra-snowshoe-instructor-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-snowshoe-mountain"
       ]
     },
@@ -46947,8 +47725,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Seasonal UTA ski buses run up Big Cottonwood Canyon from the Salt Lake Valley.",
+        "source_id": "access-wikipedia-utah-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -47004,8 +47795,10 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-solitude-mountain-resort",
         "owner-decisions-2026-10-11",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-solitude-mountain-resort"
       ]
     },
@@ -47497,7 +48290,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -47688,6 +48487,7 @@
         "ed-west-wiki-steamboat-springs-winter-sports-club",
         "owner-decisions-2026-10-11",
         "pay-alterra-steamboat-ski-instructor-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-steamboat-ski-resort",
         "wikipedia-steamboat-springs-winter-sports-club"
       ]
@@ -47853,8 +48653,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive US Highway 2 to the resort at the crest of the pass.",
+        "source_id": "wikipedia-stevens-pass-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article; it mentions added employee housing capacity for 2022 to 2023."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -48217,8 +49030,21 @@
           "note": "Average annual snowfall at the resort summit, per the article text."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Green Mountain Transit runs a fare free seasonal Mountain Road Shuttle in Stowe.",
+        "source_id": "access-wikipedia-green-mountain-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Route list plus fares section; that the shuttle reaches the resort base is inferred from the route name."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -48413,6 +49239,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-green-mountain-transit-authority",
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-stowe-mountain-resort",
         "ed-east-wikipedia-stowe-vermont",
@@ -48512,7 +49339,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -48705,6 +49538,7 @@
         "ed-east-wikipedia-winhall-vermont",
         "owner-decisions-2026-10-11",
         "pay-alterra-stratton-ski-instructor-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-stratton-mountain-resort",
         "wikipedia-stratton-mountain-school"
       ]
@@ -48793,7 +49627,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-sugar-bowl-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -49155,8 +49995,21 @@
           "note": "Infobox value. The article text and statistics list give 262 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Green Mountain Transit runs Mad River Valley routes, including Mount Ellen, Access Road and Mountain Condos service.",
+        "source_id": "access-wikipedia-green-mountain-transit-authority",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Sugarbush article mentions a shuttle bus that drops off at the Lincoln and Ellen base areas."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -49324,12 +50177,14 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-green-mountain-transit-authority",
         "ed-east-wikipedia-fayston-vermont",
         "ed-east-wikipedia-sugarbush-resort",
         "ed-east-wikipedia-waitsfield-vermont",
         "ed-east-wikipedia-warren-vermont",
         "owner-decisions-2026-10-11",
         "pay-alterra-sugarbush-new-instructor-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-sugarbush-resort"
       ]
     },
@@ -49412,7 +50267,13 @@
           "note": "Infobox gives this as a 10 year average."
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-boyne-resorts",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -49610,6 +50471,7 @@
         "ed-east-wikipedia-kingfield-maine",
         "ed-east-wikipedia-sugarloaf-ski-resort",
         "pay-east-sugarloaf-instructor-24652",
+        "wikipedia-boyne-resorts",
         "wikipedia-carrabassett-valley-academy",
         "wikipedia-sugarloaf-ski-resort"
       ]
@@ -50019,8 +50881,21 @@
           "note": "Infobox of the Bald Mountain article."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 1,
+        "source_id": "wikipedia-sun-valley-idaho",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Mountain Rides runs public buses in Ketchum and Blaine County, the home of Bald Mountain.",
+        "source_id": "access-wikipedia-us-bus-transit-systems",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "List row only; that routes reach the River Run and Warm Springs bases is inferred."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -50207,6 +51082,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-us-bus-transit-systems",
         "ed-west-wiki-bald-mountain-idaho",
         "ed-west-wiki-ketchum-idaho",
         "ed-west-wiki-sun-valley-idaho",
@@ -50458,7 +51334,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-boyne-resorts",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -50659,6 +51541,7 @@
         "ed-east-wikipedia-sunday-river-ski-resort",
         "openskimap-ski-areas",
         "pay-east-sunday-river-instructor-24529",
+        "wikipedia-boyne-resorts",
         "wikipedia-gould-academy",
         "wikipedia-sunday-river-ski-resort"
       ]
@@ -51321,8 +52204,21 @@
           "note": null
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-taos-ski-valley",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "The Chile Line bus runs free service in Taos and seasonal service up to Taos Ski Valley.",
+        "source_id": "access-wikipedia-taos-new-mexico",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "North Central RTD article also lists seasonal daily service from Taos to the ski valley."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -51379,6 +52275,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-taos-new-mexico",
         "ed-west-wiki-taos-new-mexico",
         "ed-west-wiki-taos-ski-valley",
         "wikipedia-ernie-blake",
@@ -51464,8 +52361,21 @@
           "note": "Infobox value. The article text says over 300 in each winter season."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-telluride-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
+      "access": {
+        "rating": "convenient",
+        "summary_md": "A free gondola links the town of Telluride with Mountain Village at the base of the ski area.",
+        "source_id": "access-wikipedia-telluride-colorado",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -51650,6 +52560,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-telluride-colorado",
         "ed-west-wiki-mountain-village-colorado",
         "ed-west-wiki-telluride-colorado",
         "ed-west-wiki-telluride-ski-resort",
@@ -52056,7 +52967,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-boyne-resorts",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -52101,6 +53018,7 @@
         "ed-east-wikipedia-harbor-springs-michigan",
         "ed-east-wikipedia-the-highlands-at-harbor-springs",
         "openskimap-ski-areas",
+        "wikipedia-boyne-resorts",
         "wikipedia-the-highlands-at-harbor-springs"
       ]
     },
@@ -52991,8 +53909,21 @@
           "note": "Infobox gives yearly snowfall of 45 ft, converted to inches."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 1,
+        "source_id": "wikipedia-magic-mile",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Mount Hood Express buses run Highway 26 from Sandy through Government Camp to Timberline Lodge.",
+        "source_id": "access-wikipedia-mount-hood-express",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -53178,6 +54109,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-mount-hood-express",
         "ed-west-wiki-government-camp-oregon",
         "ed-west-wiki-magic-mile",
         "ed-west-wiki-timberline-lodge",
@@ -53327,7 +54259,14 @@
       },
       "snow": null,
       "operator_scale": null,
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Mount Hood Express buses run Highway 26 from Sandy through Government Camp to Timberline Lodge.",
+        "source_id": "access-wikipedia-mount-hood-express",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Palmer Snowfield is reached from Timberline Lodge."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -53366,6 +54305,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-mount-hood-express",
         "ed-west-wiki-palmer-glacier",
         "ed-west-wiki-timberline-lodge-ski-area",
         "wikipedia-palmer-glacier",
@@ -54232,7 +55172,13 @@
         "summit_ft": null
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-us-ski-and-snowboard",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -54354,7 +55300,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-utah-olympic-park",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -54490,8 +55442,21 @@
           "note": "Infobox value. The article text says snowfall has averaged 360 in over the last thirty years, and its statistics list gives 370 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free town shuttles run between Golden Peak, Vail Village and Lionshead, and Eagle County buses connect Vail with Avon, Edwards, Eagle, Gypsum and Leadville.",
+        "source_id": "access-wikipedia-vail-colorado",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -54549,6 +55514,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-vail-colorado",
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-vail-colorado",
         "ed-west-wiki-vail-ski-resort",
@@ -55298,7 +56264,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-waterville-valley-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -55932,7 +56904,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-whiteface-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -56226,7 +57204,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-whitefish-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -56367,7 +57351,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -56740,8 +57730,21 @@
           "note": "Infobox value. The article text says over 200 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive NH Route 16 to the base in Pinkham Notch.",
+        "source_id": "wikipedia-wildcat-mountain-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -57189,7 +58192,13 @@
           "note": null
         }
       },
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "vail-10k-fy2026",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -57541,8 +58550,21 @@
           "note": "Infobox value. The statistics list in the article gives 317.5 in."
         }
       },
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-alterra-mountain-company",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "The Lift buses serve the resort from Winter Park and Fraser, with commuter service to Granby.",
+        "source_id": "access-wikipedia-winter-park-colorado",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -57727,11 +58749,13 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-winter-park-colorado",
         "ed-west-wiki-fraser-colorado",
         "ed-west-wiki-winter-park-colorado",
         "ed-west-wiki-winter-park-resort",
         "owner-decisions-2026-10-11",
         "pay-alterra-winterpark-instructor-2627",
+        "wikipedia-alterra-mountain-company",
         "wikipedia-winter-park-resort"
       ]
     },
@@ -58268,8 +59292,21 @@
         "summit_ft": null
       },
       "snow": null,
-      "operator_scale": null,
-      "access": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Summit Stage county buses serve Copper along with Breckenridge, Frisco, Dillon and Silverthorne.",
+        "source_id": "access-wikipedia-us-bus-transit-systems",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Woodward Copper sits at Copper Mountain."
+      },
       "season": {
         "open_typical": null,
         "close_typical": null,
@@ -58308,6 +59345,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-us-bus-transit-systems",
         "ed-west-wiki-copper-mountain-colorado",
         "ed-west-wiki-powdr",
         "wikipedia-copper-mountain-colorado",
@@ -58379,7 +59417,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -58466,7 +59510,13 @@
         "summit_ft": null
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 3,
+        "source_id": "wikipedia-powdr",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,
@@ -58636,7 +59686,8 @@
         "ed-west-wiki-boreal-mountain-resort",
         "ed-west-wiki-powdr",
         "pay-east-woodward-tahoe-instructor-jr6759",
-        "wikipedia-boreal-mountain-resort"
+        "wikipedia-boreal-mountain-resort",
+        "wikipedia-powdr"
       ]
     },
     {
@@ -58868,7 +59919,13 @@
         }
       },
       "snow": null,
-      "operator_scale": null,
+      "operator_scale": {
+        "value": 2,
+        "source_id": "wikipedia-yellowstone-club",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "access": null,
       "season": {
         "open_typical": null,

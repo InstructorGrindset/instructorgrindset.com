@@ -22,6 +22,7 @@ sources:
   - {id: wikipedia-boreal-mountain-resort, url: https://en.wikipedia.org/wiki/Boreal_Mountain_Resort, title: Boreal Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-park-city-utah, url: "https://en.wikipedia.org/wiki/Park_City,_Utah", title: "Park City, Utah (Wikipedia)", accessed_date: 2026-10-11, note: "town coordinates only"}
   - {id: openskimap-ski-areas, url: "https://openskimap.org/", title: "OpenSkiMap ski areas (derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-11, note: "repository extract data/raw/openskimap/us_ski_areas.geojson"}
+  - {id: access-wikipedia-american-dream-mall, url: "https://en.wikipedia.org/wiki/American_Dream_(shopping_mall)", title: "American Dream (shopping mall) (Wikipedia), transit", accessed_date: 2026-10-13, note: "NJ Transit bus routes and the Meadowlands Rail Line."}
 resorts:
   - id: big-snow-american-dream
     tier_a_status: approved
@@ -31,6 +32,8 @@ resorts:
     facility_type: indoor
     state: NJ
     owner: {value: Snow Operating, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-11, confidence: published, note: "operator, which also runs Mountain Creek; the slope is owned by Triple Five Group"}
+    operator_scale: {value: 2, source_id: wikipedia-big-snow-american-dream, as_of: 2026-10-13, confidence: estimated, note: "Operator scored: Snow Operating, which also runs Mountain Creek. The slope itself is owned by the Triple Five Group, the mall developer."}
+    access: {rating: transit_friendly, summary_md: "NJ Transit buses and the Meadowlands Rail Line serve the American Dream complex.", source_id: access-wikipedia-american-dream-mall, as_of: 2026-10-13, confidence: published}
     lat: 40.8111
     lon: -74.07
     location_source_id: wikipedia-big-snow-american-dream
@@ -48,6 +51,7 @@ resorts:
     facility_type: training_center
     state: OR
     owner: null     # Wikipedia names no current ski area operator (operator line marked citation needed)
+    access: {rating: transit_friendly, summary_md: "Mount Hood Express buses run Highway 26 from Sandy through Government Camp to Timberline Lodge.", source_id: access-wikipedia-mount-hood-express, as_of: 2026-10-13, confidence: published, note: "Palmer Snowfield is reached from Timberline Lodge."}
     lat: 45.3525
     lon: -121.7075
     location_source_id: wikipedia-palmer-glacier
@@ -68,6 +72,7 @@ resorts:
     facility_type: training_center
     state: UT
     owner: {value: Utah Athletic Foundation, source_id: wikipedia-utah-olympic-park, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-utah-olympic-park, as_of: 2026-10-13, confidence: estimated, note: "Owned by the Utah Athletic Foundation. Nonprofit owner."}
     lat: 40.71207
     lon: -111.56193
     location_source_id: wikipedia-utah-olympic-park
@@ -85,6 +90,7 @@ resorts:
     owner: {value: U.S. Ski & Snowboard, source_id: wikipedia-us-ski-and-snowboard, as_of: 2026-10-11, confidence: published}
     # Approximate: Park City town coordinates from Wikipedia. The facility is at 1 Victory Lane, Park City;
     # no reachable source gave its own coordinates. Replace before approval.
+    operator_scale: {value: 2, source_id: wikipedia-us-ski-and-snowboard, as_of: 2026-10-13, confidence: estimated, note: "U.S. Ski & Snowboard, the national governing body. Nonprofit owner."}
     lat: 40.6503
     lon: -111.5014
     location_source_id: wikipedia-park-city-utah
@@ -100,6 +106,7 @@ resorts:
     facility_type: training_center
     state: UT
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation."}
     lat: 40.75237
     lon: -111.58347
     location_source_id: openskimap-ski-areas
@@ -113,6 +120,8 @@ resorts:
     facility_type: training_center
     state: CO
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Powdr owns Copper Mountain and lists Copper Mountain among Woodward camp locations"}
+    operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Summit Stage county buses serve Copper along with Breckenridge, Frisco, Dillon and Silverthorne.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: published, note: "Woodward Copper sits at Copper Mountain."}
     lat: 39.5017
     lon: -106.1564
     location_source_id: wikipedia-copper-mountain-colorado
@@ -126,6 +135,7 @@ resorts:
     facility_type: training_center
     state: CA
     owner: {value: POWDR, source_id: wikipedia-boreal-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Boreal Mountain, home of Woodward Tahoe, is owned by Powdr"}
+    operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation."}
     lat: 39.3317
     lon: -120.3511
     location_source_id: wikipedia-boreal-mountain-resort
@@ -139,6 +149,7 @@ resorts:
     facility_type: training_center
     state: NY
     owner: {value: Olympic Regional Development Authority, source_id: wikipedia-lake-placid-olympic-ski-jumping-complex, as_of: 2026-10-11, confidence: published, note: operator}
+    operator_scale: {value: 2, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-13, confidence: published, note: "Operated by the Olympic Regional Development Authority, a New York State public benefit corporation."}
     lat: 44.2561
     lon: -73.964
     location_source_id: wikipedia-lake-placid-olympic-ski-jumping-complex

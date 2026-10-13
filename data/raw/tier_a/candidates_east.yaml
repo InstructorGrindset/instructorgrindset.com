@@ -46,6 +46,7 @@ sources:
   - {id: wikipedia-mount-bohemia, url: https://en.wikipedia.org/wiki/Mount_Bohemia, title: Mount Bohemia (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-buck-hill, url: https://en.wikipedia.org/wiki/Buck_Hill, title: Buck Hill (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-hyland-hills-ski-area, url: https://en.wikipedia.org/wiki/Hyland_Hills_Ski_Area, title: Hyland Hills Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: access-wikipedia-marble-valley-rtd, url: "https://en.wikipedia.org/wiki/Marble_Valley_Regional_Transit_District", title: "Marble Valley Regional Transit District (Wikipedia), route list", accessed_date: 2026-10-13, note: "Limited daily service to Killington; winter Rutland to Ludlow connector."}
 resorts:
   # ---------------------------------------------------------------- New York
   - id: whiteface
@@ -55,6 +56,7 @@ resorts:
     facility_type: ski_area
     state: NY
     owner: {value: Olympic Regional Development Authority, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published, note: "New York State public benefit corporation; the article says ORDA runs the ski area."}
+    operator_scale: {value: 2, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-13, confidence: published, note: "Run by the Olympic Regional Development Authority, a New York State public benefit corporation."}
     lat: 44.3658
     lon: -73.9028
     location_source_id: wikipedia-whiteface-mountain   # infobox gives the mountain's coordinates, not the base lodge
@@ -84,6 +86,8 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: Killington Independence Group, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Local passholders and community members bought Killington and Pico from Powdr on 2024-09-27."}
+    operator_scale: {value: 2, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-13, confidence: published, note: "Bought from POWDR in 2024 by the Killington Independence Group of local passholders and community members."}
+    access: {rating: mixed, summary_md: "The Bus runs a limited daily Rutland to Killington commuter route.", source_id: access-wikipedia-marble-valley-rtd, as_of: 2026-10-13, confidence: published}
     lat: 43.626
     lon: -72.798
     location_source_id: wikipedia-killington-ski-resort
@@ -113,6 +117,7 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: Killington Independence Group, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Bought together with Killington from Powdr in September 2024; the Pico article itself names no current owner."}
+    operator_scale: {value: 2, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-13, confidence: published, note: "Bought with Killington from POWDR in 2024 by the Killington Independence Group of local passholders and community members."}
     lat: 43.6617
     lon: -72.8425
     location_source_id: wikipedia-pico-mountain
@@ -136,6 +141,7 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: Mad River Glen Cooperative, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published, note: "Skier owned cooperative formed in 1995."}
+    operator_scale: {value: 2, source_id: wikipedia-mad-river-glen, as_of: 2026-10-13, confidence: published, note: "Skier owned cooperative since 1995."}
     lat: 44.2008
     lon: -72.9244
     location_source_id: wikipedia-mad-river-glen
@@ -160,6 +166,7 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: Pacific Group Resorts, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published, note: "Bought at a court supervised auction in September 2022 and closed in November 2022, after six years of federal receivership."}
+    operator_scale: {value: 2, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-13, confidence: estimated, note: "Pacific Group Resorts, a Park City company for which Jay Peak was its second New England resort. Small multi resort company; no large scale corporate operation shown."}
     lat: 44.9294
     lon: -72.5322
     location_source_id: wikipedia-jay-peak-resort
@@ -183,6 +190,7 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: SKI MAGIC LLC, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Group led by Geoff Hatheway; purchase closed November 2016."}
+    operator_scale: {value: 2, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "SKI MAGIC LLC, an investor group led by Geoff Hatheway."}
     lat: 43.1928
     lon: -72.76
     location_source_id: wikipedia-magic-mountain-ski-area
@@ -206,6 +214,7 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: Hermitage Members Group, source_id: wikipedia-haystack-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Non profit entity formed by 181 former members who bought the club at auction in March 2020; over 400 members as of December 2025."}
+    operator_scale: {value: 2, source_id: wikipedia-haystack-mountain-ski-area, as_of: 2026-10-13, confidence: published, note: "Hermitage Members Group, a nonprofit formed by former members. Member owned club."}
     lat: 42.9226
     lon: -72.8946
     location_source_id: wikipedia-haystack-mountain-ski-area
@@ -224,6 +233,7 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: Woodstock Inn, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: estimated, note: "The article says the area continued to operate as the ski area of the Woodstock Inn as of late 2011 and describes no later change."}
+    operator_scale: {value: 2, source_id: wikipedia-saskadena-six, as_of: 2026-10-13, confidence: estimated, note: "Operated as the ski area of the Woodstock Inn. Independent business."}
     lat: 43.6639
     lon: -72.5444
     location_source_id: wikipedia-saskadena-six
@@ -247,6 +257,7 @@ resorts:
     facility_type: ski_area
     state: VT
     owner: {value: Middlebury College, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-13, confidence: published, note: "Owned by Middlebury College. Institutional nonprofit owner."}
     lat: 43.94
     lon: -72.96
     location_source_id: wikipedia-middlebury-college-snow-bowl
@@ -271,6 +282,7 @@ resorts:
     facility_type: ski_area
     state: NH
     owner: {value: State of New Hampshire, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "State owned ski area inside Franconia Notch State Park."}
+    operator_scale: {value: 2, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-13, confidence: published, note: "State owned ski area in Franconia Notch State Park. Public operator."}
     lat: 44.1578
     lon: -71.6989
     location_source_id: wikipedia-cannon-mountain-ski-area
@@ -299,6 +311,7 @@ resorts:
     facility_type: ski_area
     state: NH
     owner: {value: "Brian Fairbank, Tyler Fairbank and Joseph O'Donnell", source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "Buyers in June 2010 per the history section; the lead says only that a group of New England businessmen owns it. Current owner not confirmed on the resort site."}
+    operator_scale: {value: 2, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "A group of New England businessmen (the Fairbanks and Joseph O'Donnell). Investor group."}
     lat: 44.0564
     lon: -71.11
     location_source_id: wikipedia-cranmore-mountain-resort
@@ -322,6 +335,7 @@ resorts:
     facility_type: ski_area
     state: NH
     owner: {value: Belknap County, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-13, confidence: published, note: "Owned by Belknap County. Public operator."}
     lat: 43.5414
     lon: -71.3675
     location_source_id: wikipedia-gunstock-mountain-resort
@@ -351,6 +365,7 @@ resorts:
     facility_type: ski_area
     state: ME
     owner: {value: Boyne Resorts, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published, note: "Operated by Boyne since 2007; Boyne bought its leased New England areas from CNL Lifestyle in 2018."}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
     lat: 44.4734
     lon: -70.8569
     location_source_id: wikipedia-sunday-river-ski-resort
@@ -379,6 +394,7 @@ resorts:
     facility_type: ski_area
     state: ME
     owner: {value: Maine Winter Sports Center, source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-11, confidence: estimated, note: "Purchased in 2003 per the history section; the article describes no later change."}
+    operator_scale: {value: 2, source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-13, confidence: estimated, note: "Maine Winter Sports Center, a nonprofit, bought it in 2003."}
     lat: 44.58
     lon: -70.6175
     location_source_id: wikipedia-black-mountain-of-maine
@@ -401,6 +417,7 @@ resorts:
     facility_type: ski_area
     state: MA
     owner: {value: Jon Shaefer, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published, note: "Shaefer is CEO of Bear Den Partners, which bought Burke in May 2025 and a majority of Smugglers' Notch in February 2026."}
+    operator_scale: {value: 2, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-13, confidence: published, note: "Owner Jon Shaefer is CEO of Bear Den Partners, a New England ski resort investment group of a few resorts."}
     lat: 42.6208
     lon: -72.8769
     location_source_id: wikipedia-berkshire-east-ski-resort
@@ -430,6 +447,7 @@ resorts:
     facility_type: ski_area
     state: MI
     owner: {value: Boyne Resorts, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
     lat: 45.1639
     lon: -84.9328
     location_source_id: wikipedia-boyne-mountain-resort
@@ -451,6 +469,7 @@ resorts:
     facility_type: ski_area
     state: MI
     owner: {value: Boyne Resorts, source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-11, confidence: published, note: "Known as Boyne Highlands until December 2021."}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
     lat: 45.4708
     lon: -84.9347
     location_source_id: wikipedia-the-highlands-at-harbor-springs
@@ -494,6 +513,7 @@ resorts:
     facility_type: ski_area
     state: MN
     owner: {value: "David and Corrine Solner", source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 1, source_id: wikipedia-buck-hill, as_of: 2026-10-13, confidence: estimated, note: "Owned by David and Corrine Solner; single area owned by a couple, scored family owned."}
     lat: 44.724
     lon: -93.283
     location_source_id: wikipedia-buck-hill
@@ -517,6 +537,7 @@ resorts:
     facility_type: ski_area
     state: MN
     owner: {value: Three Rivers Park District, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-13, confidence: published, note: "Owned by Three Rivers Park District. Public operator."}
     lat: 44.844
     lon: -93.364
     location_source_id: wikipedia-hyland-hills-ski-area

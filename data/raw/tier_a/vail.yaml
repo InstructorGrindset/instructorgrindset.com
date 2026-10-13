@@ -154,6 +154,36 @@ sources:
   title: OpenSkiMap ski areas (US extract committed at data/raw/openskimap/us_ski_areas.geojson)
   accessed_date: '2026-10-11'
   note: Used only for base coordinates of Big Boulder and Laurel Mountain, which have no Wikipedia coordinates.
+- id: access-wikipedia-vail-colorado
+  url: https://en.wikipedia.org/wiki/Vail,_Colorado
+  title: Vail, Colorado (Wikipedia), transportation
+  accessed_date: '2026-10-13'
+  note: Free in town shuttle and Eagle County bus routes.
+- id: access-wikipedia-avon-colorado
+  url: https://en.wikipedia.org/wiki/Avon,_Colorado
+  title: Avon, Colorado (Wikipedia), transportation
+  accessed_date: '2026-10-13'
+  note: Free Avon buses and CORE Transit routes.
+- id: access-wikipedia-frisco-colorado
+  url: https://en.wikipedia.org/wiki/Frisco,_Colorado
+  title: Frisco, Colorado (Wikipedia), transportation
+  accessed_date: '2026-10-13'
+  note: Summit Stage free service between Silverthorne, Frisco and Breckenridge.
+- id: access-wikipedia-us-bus-transit-systems
+  url: https://en.wikipedia.org/wiki/List_of_bus_transit_systems_in_the_United_States
+  title: List of bus transit systems in the United States (Wikipedia)
+  accessed_date: '2026-10-13'
+  note: Summit Stage, Mountain Rides and Glacier Valley Transit rows.
+- id: access-wikipedia-green-mountain-transit-authority
+  url: https://en.wikipedia.org/wiki/Green_Mountain_Transit_Authority
+  title: Green Mountain Transit Agency (Wikipedia), route list and fares
+  accessed_date: '2026-10-13'
+  note: Stowe and Mad River Valley routes.
+- id: access-wikipedia-southeast-vermont-transit
+  url: https://en.wikipedia.org/wiki/Southeast_Vermont_Transit
+  title: Southeast Vermont Transit (Wikipedia), MOOver routes
+  accessed_date: '2026-10-13'
+  note: Mount Snow circulators and the Bellows Falls to Okemo shuttle.
 resorts:
 - id: vail
   name: Vail
@@ -163,6 +193,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: 2026-10-11
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free town shuttles run between Golden Peak, Vail Village and Lionshead, and Eagle County buses connect Vail with Avon, Edwards, Eagle, Gypsum and Leadville.", source_id: access-wikipedia-vail-colorado, as_of: 2026-10-13, confidence: published}
   lat: 39.639
   lon: -106.374
   location_source_id: wikipedia-vail-ski-resort
@@ -240,6 +272,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: 2026-10-11
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Avon runs free town buses, CORE Transit links Avon with Vail, Edwards, Eagle and Leadville, and the Riverfront Express Gondola climbs from Avon to the mountain.", source_id: access-wikipedia-avon-colorado, as_of: 2026-10-13, confidence: published, note: "Gondola fact from wikipedia-beaver-creek-resort."}
   lat: 39.6314
   lon: -106.5217
   location_source_id: wikipedia-beaver-creek-resort
@@ -317,6 +351,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: 2026-10-11
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free Summit Stage buses link Breckenridge with Frisco and Silverthorne, and the BreckConnect Gondola runs from the town transit center to Peak 8.", source_id: access-wikipedia-frisco-colorado, as_of: 2026-10-13, confidence: published, note: "Gondola fact from wikipedia-breckenridge-ski-resort."}
   lat: 39.48
   lon: -106.067
   location_source_id: wikipedia-breckenridge-ski-resort
@@ -394,6 +430,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: 2026-10-11
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "The town of Crested Butte runs a free bus to the resort, and buses connect the town with Gunnison.", source_id: wikipedia-crested-butte-colorado, as_of: 2026-10-13, confidence: published, note: "Gunnison article adds that the Gunnison Valley RTA bus serves Crested Butte Mountain Resort."}
   lat: 38.8997
   lon: -106.965
   location_source_id: wikipedia-crested-butte-mountain-resort
@@ -471,6 +509,8 @@ resorts:
     as_of: 2026-10-11
     confidence: published
     note: mountain terrain leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free Park City Transit buses run across town and to Canyons Village, and High Valley Transit runs to Salt Lake City.", source_id: wikipedia-park-city-utah, as_of: 2026-10-13, confidence: published, note: "Park City Transit article lists a winter express to Park City Mountain."}
   lat: 40.6508
   lon: -111.5075
   location_source_id: wikipedia-park-city-mountain-resort
@@ -550,6 +590,7 @@ resorts:
     as_of: 2026-10-11
     confidence: published
     note: operated under lease per 10-K Item 2; Wikipedia names EPR Properties as property owner
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 39.264
   lon: -120.125
   location_source_id: wikipedia-northstar-california
@@ -619,6 +660,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: 2026-10-11
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive State Route 88, the all weather highway that links the resort with the rest of California.", source_id: wikipedia-kirkwood-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Tahoe transit articles; remote highway location."}
   lat: 38.684
   lon: -120.068
   location_source_id: wikipedia-kirkwood-mountain-resort
@@ -692,6 +735,8 @@ resorts:
     as_of: 2026-10-11
     confidence: published
     note: Mount Mansfield terrain leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Green Mountain Transit runs a fare free seasonal Mountain Road Shuttle in Stowe.", source_id: access-wikipedia-green-mountain-transit-authority, as_of: 2026-10-13, confidence: estimated, note: "Route list plus fares section; that the shuttle reaches the resort base is inferred from the route name."}
   lat: 44.5319
   lon: -72.7875
   location_source_id: wikipedia-stowe-mountain-resort
@@ -769,6 +814,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: 2026-10-11
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Fare free MOOver buses run ski season circulators around Mount Snow and year round service from Wilmington to West Dover.", source_id: access-wikipedia-southeast-vermont-transit, as_of: 2026-10-13, confidence: published}
   lat: 42.959
   lon: -72.922
   location_source_id: wikipedia-mount-snow
@@ -846,6 +893,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: 2026-10-11
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive NH Route 16 to the base in Pinkham Notch.", source_id: wikipedia-wildcat-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
   lat: 44.2631
   lon: -71.2383
   location_source_id: wikipedia-wildcat-mountain-ski-area
@@ -920,6 +969,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Summit Stage county buses serve Keystone along with Breckenridge, Frisco, Dillon and Silverthorne.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: published}
   lat: 39.605
   lon: -105.9542
   location_source_id: wikipedia-keystone-resort
@@ -990,6 +1041,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "A gondola rises from Heavenly Village in South Lake Tahoe, where Tahoe Transportation District runs local buses.", source_id: wikipedia-heavenly-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "Local bus fact from the South Lake Tahoe article; the district ended its ski shuttles in 2018."}
   lat: 38.9353
   lon: -119.94
   location_source_id: wikipedia-heavenly-mountain-resort
@@ -1060,6 +1113,8 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive US Highway 2 to the resort at the crest of the pass.", source_id: wikipedia-stevens-pass-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article; it mentions added employee housing capacity for 2022 to 2023."}
   lat: 47.7447
   lon: -121.0889
   location_source_id: wikipedia-stevens-pass-ski-area
@@ -1133,6 +1188,8 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
     note: mountain terrain leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: mixed, summary_md: "Seasonal buses reach Okemo from Bellows Falls and Rutland.", source_id: access-wikipedia-southeast-vermont-transit, as_of: 2026-10-13, confidence: published, note: "SEVT route 61 Bellows Falls to Okemo shuttle is seasonal; MVRTD runs a winter Rutland to Ludlow connector."}
   lat: 43.4014
   lon: -72.7167
   location_source_id: wikipedia-okemo-mountain
@@ -1187,6 +1244,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 44.0822
   lon: -71.2297
   location_source_id: wikipedia-attitash-mountain-resort
@@ -1238,6 +1296,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 42.2003
   lon: -74.2303
   location_source_id: wikipedia-hunter-mountain-ski-area
@@ -1315,6 +1374,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
     note: owned and leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 43.3306
   lon: -72.08
   location_source_id: wikipedia-mount-sunapee-resort
@@ -1385,6 +1445,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 43.0023
   lon: -71.8786
   location_source_id: wikipedia-crotched-mountain-ski-and-ride
@@ -1441,6 +1502,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 40.0231
   lon: -79.2928
   location_source_id: wikipedia-seven-springs-mountain-resort
@@ -1514,6 +1576,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 40.058
   lon: -79.2583
   location_source_id: wikipedia-hidden-valley-resort-pennsylvania
@@ -1562,6 +1625,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
     note: leased per 10-K Item 2; Wikipedia names the Commonwealth of Pennsylvania as owner
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 40.1671
   lon: -79.1692
   location_source_id: openskimap-ski-areas
@@ -1608,6 +1672,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 39.7635
   lon: -77.375
   location_source_id: wikipedia-liberty-mountain-resort
@@ -1681,6 +1746,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 40.108
   lon: -76.926
   location_source_id: wikipedia-roundtop-mountain-resort
@@ -1745,6 +1811,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 39.7417
   lon: -77.9328
   location_source_id: wikipedia-whitetail-ski-resort
@@ -1805,6 +1872,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 41.111
   lon: -75.652
   location_source_id: wikipedia-jack-frost-big-boulder
@@ -1847,6 +1915,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 41.0483
   lon: -75.6014
   location_source_id: openskimap-ski-areas
@@ -1892,6 +1961,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 44.8556
   lon: -92.7892
   location_source_id: wikipedia-afton-alps
@@ -1956,6 +2026,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 41.5303
   lon: -81.2662
   location_source_id: wikipedia-alpine-valley-ski-area-ohio
@@ -2009,6 +2080,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
     note: owned per 10-K Item 2; Wikipedia infobox names EPR Properties
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 41.2648
   lon: -81.5644
   location_source_id: wikipedia-boston-mills-brandywine
@@ -2036,6 +2108,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
     note: owned per 10-K Item 2; Wikipedia infobox names EPR Properties
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 41.2849
   lon: -81.5517
   location_source_id: wikipedia-boston-mills-brandywine
@@ -2063,6 +2136,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
     note: leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 40.3163
   lon: -83.6806
   location_source_id: wikipedia-mad-river-mountain
@@ -2123,6 +2197,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 38.5356
   lon: -90.6529
   location_source_id: wikipedia-hidden-valley-ski-area-missouri
@@ -2184,6 +2259,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 39.4687
   lon: -94.972
   location_source_id: wikipedia-snow-creek-ski-resort
@@ -2223,6 +2299,7 @@ resorts:
     as_of: '2026-10-11'
     confidence: published
     note: owned and leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 38.5578
   lon: -86.5103
   location_source_id: wikipedia-paoli-peaks
@@ -2281,6 +2358,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 42.5381
   lon: -83.8069
   location_source_id: wikipedia-mount-brighton
@@ -2346,6 +2424,7 @@ resorts:
     source_id: vail-10k-fy2026
     as_of: '2026-10-11'
     confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
   lat: 42.5
   lon: -88.1889
   location_source_id: wikipedia-wilmot-mountain

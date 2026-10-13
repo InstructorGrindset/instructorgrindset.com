@@ -42,6 +42,7 @@ sources:
   - {id: wikipedia-montana-snowbowl, url: https://en.wikipedia.org/wiki/Montana_Snowbowl, title: Montana Snowbowl (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-grand-targhee-resort, url: https://en.wikipedia.org/wiki/Grand_Targhee_Resort, title: Grand Targhee Resort (Wikipedia), accessed_date: 2026-10-11}
   - {id: wikipedia-mount-hood-meadows, url: https://en.wikipedia.org/wiki/Mount_Hood_Meadows, title: Mount Hood Meadows (Wikipedia), accessed_date: 2026-10-11}
+  - {id: access-wikipedia-mount-hood-express, url: "https://en.wikipedia.org/wiki/Mount_Hood_Express", title: "Mount Hood Express (Wikipedia)", accessed_date: 2026-10-13}
 resorts:
   - id: copper-mountain
     name: Copper Mountain
@@ -50,6 +51,8 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Bought from Intrawest in December 2009; the Copper Mountain article says the resort is operated by POWDR."}
+    operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Summit Stage county buses serve Copper along with Breckenridge, Frisco, Dillon and Silverthorne.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: published}
     lat: 39.50167
     lon: -106.15639
     location_source_id: wikipedia-copper-mountain-colorado
@@ -79,6 +82,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: {value: Lake County, source_id: wikipedia-ski-cooper, as_of: 2026-10-11, confidence: published, note: "Managed by Cooper Hill Ski Area, a 501(c)4 nonprofit with a volunteer board."}
+    operator_scale: {value: 2, source_id: wikipedia-ski-cooper, as_of: 2026-10-13, confidence: published, note: "Owned by Lake County and managed by a nonprofit with a volunteer board. Public owner."}
     lat: 39.36
     lon: -106.302
     location_source_id: wikipedia-ski-cooper
@@ -130,6 +134,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: CO
     owner: {value: City of Steamboat Springs, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-11, confidence: published, note: "Owned and operated by the Parks, Open Space and Recreation Department."}
+    operator_scale: {value: 2, source_id: wikipedia-howelsen-hill-ski-area, as_of: 2026-10-13, confidence: published, note: "Owned and operated by the City of Steamboat Springs parks department. Municipal operator."}
     lat: 40.483
     lon: -106.839
     location_source_id: wikipedia-howelsen-hill-ski-area
@@ -154,6 +159,8 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: UT
     owner: {value: Boyne Resorts, source_id: wikipedia-boyne-resorts, as_of: 2026-10-11, confidence: published, note: "Boyne bought Brighton in 1986, sold it in 2007 while leasing it back, and repurchased it in 2018."}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
+    access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses run up Big Cottonwood Canyon from the Salt Lake Valley.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: published}
     lat: 40.6
     lon: -111.58333
     location_source_id: wikipedia-brighton-ski-resort
@@ -182,6 +189,8 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: UT
     owner: {value: Earl Holding family, source_id: wikipedia-snowbasin, as_of: 2026-10-11, confidence: estimated, note: "The article says Earl Holding, owner of Sun Valley, bought the area in October 1984 and reports no later sale; current ownership not confirmed on the resort site."}
+    operator_scale: {value: 1, source_id: wikipedia-snowbasin, as_of: 2026-10-13, confidence: estimated, note: "Earl Holding family (owner of Sun Valley) bought the area in 1984 and no later sale is reported; family owned and run, same rule as Sun Valley."}
+    access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses serve Snowbasin from the Ogden area.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: estimated, note: "UTA article lists seasonal buses to Snowbasin; the Ogden origin and frequency are inferred."}
     lat: 41.216
     lon: -111.857
     location_source_id: wikipedia-snowbasin
@@ -210,6 +219,8 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: UT
     owner: {value: Reed Hastings, source_id: wikipedia-powder-mountain, as_of: 2026-10-11, confidence: published, note: "Acquired in 2023; Hastings serves as CEO and chairman."}
+    operator_scale: {value: 2, source_id: wikipedia-powder-mountain, as_of: 2026-10-13, confidence: estimated, note: "Owned by Reed Hastings, an individual investor, since 2023. Independent single resort."}
+    access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses serve Powder Mountain from the Ogden area.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: estimated, note: "UTA article lists seasonal buses to Powder Mountain; the Ogden origin and frequency are inferred."}
     lat: 41.38
     lon: -111.78028
     location_source_id: wikipedia-powder-mountain
@@ -238,6 +249,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: OR
     owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "Owned since 2001. POWDR announced a sale in August 2024 and later said it would keep Mt. Bachelor."}
+    operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation. POWDR announced a sale in 2024 and later said it would keep Mt. Bachelor."}
     lat: 44.003
     lon: -121.677
     location_source_id: wikipedia-mount-bachelor-ski-area
@@ -266,6 +278,8 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: OR
     owner: {value: Kohnstamm family (operator), source_id: wikipedia-magic-mile, as_of: 2026-10-11, confidence: published, note: "The lodge is publicly owned by the U.S. Forest Service; Richard Kohnstamm took over operation in 1955 and his family still manages the resort. The summer Palmer program is a separate record (timberline-palmer-summer)."}
+    operator_scale: {value: 1, source_id: wikipedia-magic-mile, as_of: 2026-10-13, confidence: published, note: "The lodge is publicly owned by the US Forest Service; Richard Kohnstamm took over operation in 1955 and his family still manages the resort."}
+    access: {rating: transit_friendly, summary_md: "Mount Hood Express buses run Highway 26 from Sandy through Government Camp to Timberline Lodge.", source_id: access-wikipedia-mount-hood-express, as_of: 2026-10-13, confidence: published}
     lat: 45.33
     lon: -121.71
     location_source_id: wikipedia-timberline-lodge-ski-area
@@ -294,6 +308,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: WA
     owner: null   # not stated in the article
+    access: {rating: car_centric, summary_md: "Staff typically drive State Route 542, which ends at the ski area.", source_id: wikipedia-mt-baker-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
     lat: 48.862
     lon: -121.654
     location_source_id: wikipedia-mt-baker-ski-area
@@ -323,6 +338,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: MT
     owner: {value: Bridger Bowl (locally owned nonprofit), source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-bridger-bowl-ski-area, as_of: 2026-10-13, confidence: published, note: "Locally owned nonprofit."}
     lat: 45.818
     lon: -110.897
     location_source_id: wikipedia-bridger-bowl-ski-area
@@ -346,6 +362,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: MT
     owner: {value: "Winter Sports, Inc.", source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says billionaire Bill Foley became majority shareholder in 2007 and reports no later change; not confirmed on the resort site."}
+    operator_scale: {value: 2, source_id: wikipedia-whitefish-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "Winter Sports, Inc., with Bill Foley as majority shareholder since 2007. Independent company."}
     lat: 48.5
     lon: -114.34
     location_source_id: wikipedia-whitefish-mountain-resort
@@ -374,6 +391,8 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: AK
     owner: {value: Pomeroy Lodging, source_id: wikipedia-alyeska-resort, as_of: 2026-10-11, confidence: estimated, note: "The article reports an October 2018 contract to sell substantially all resort assets to Pomeroy Lodging; closing and current ownership not confirmed."}
+    operator_scale: {value: 2, source_id: wikipedia-alyeska-resort, as_of: 2026-10-13, confidence: estimated, note: "Pomeroy Lodging, a lodging company, contracted to buy the resort assets in 2018. Independent business; closing not confirmed."}
+    access: {rating: mixed, summary_md: "Glacier Valley Transit runs local buses in Girdwood, the community at the base.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: estimated, note: "List row only; routes and frequency not stated."}
     lat: 60.9705
     lon: -149.0982
     location_source_id: wikipedia-alyeska-resort
@@ -403,6 +422,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: ID
     owner: {value: Bogus Basin Recreation Association (nonprofit), source_id: wikipedia-bogus-basin, as_of: 2026-10-11, confidence: estimated, note: "Operator per the article; that sentence is marked citation needed."}
+    operator_scale: {value: 2, source_id: wikipedia-bogus-basin, as_of: 2026-10-13, confidence: estimated, note: "Operated by the Bogus Basin Recreation Association, a nonprofit (citation needed in the source)."}
     lat: 43.764
     lon: -116.104
     location_source_id: wikipedia-bogus-basin
@@ -431,6 +451,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: MT
     owner: null   # not stated in the article
+    access: {rating: car_centric, summary_md: "Staff typically drive from Interstate 90 up Grant Creek Road to a base with little development.", source_id: wikipedia-montana-snowbowl, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Mountain Line article."}
     lat: 47.02
     lon: -114.0
     location_source_id: wikipedia-montana-snowbowl
@@ -457,6 +478,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: WY
     owner: {value: Gillett family, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-11, confidence: estimated, note: "The article says George and Rose Gillett and their four sons bought the resort from Booth Creek in June 2000 and reports no later sale; not confirmed on the resort site."}
+    operator_scale: {value: 1, source_id: wikipedia-grand-targhee-resort, as_of: 2026-10-13, confidence: estimated, note: "The Gillett family bought the resort in 2000 and no later sale is reported; single resort family ownership."}
     lat: 43.789
     lon: -110.957
     location_source_id: wikipedia-grand-targhee-resort
@@ -486,6 +508,7 @@ resorts:
     approval: {by: "site owner", date: 2026-10-11, note: "Approved from the candidate review"}
     state: OR
     owner: null   # not stated in the article
+    access: {rating: transit_friendly, summary_md: "Several bus services reach the base, including Columbia Gorge Area Transit.", source_id: wikipedia-mount-hood-meadows, as_of: 2026-10-13, confidence: estimated, note: "The article says many buses serve the area; schedules not stated."}
     lat: 45.32889
     lon: -121.6625
     location_source_id: wikipedia-mount-hood-meadows
