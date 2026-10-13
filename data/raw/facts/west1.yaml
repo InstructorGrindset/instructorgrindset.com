@@ -496,6 +496,12 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: computed from typical dates
+  training_start:
+    value: 12-05
+    source_id: pay-alterra-abasin-instructor-2627
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: Estimated start date of December 5, 2026 in the instructor posting (recorded in data/raw/pay/pay_alterra.yaml), read as the first day of staff training.
 - resort_id: arizona-snowbowl
   acres:
     value: 777
@@ -535,6 +541,12 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: computed from typical dates
+  training_start:
+    value: 12-06
+    source_id: facts-training-aspen-employment
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. New Hire Training for Aspen, Highlands and Snowmass runs December 6 to 11, 2026. It covers all new hires, the ski school among them.
 - resort_id: aspen-mountain
   open_typical:
     value: "11-27"
@@ -554,6 +566,13 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: computed from typical dates
+  training_start:
+    value: 12-06
+    source_id: facts-training-aspen-employment
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. New Hire Training for Aspen, Highlands and Snowmass runs December 6 to 11, 2026, after onboarding on the first workday. It covers all new hires,
+      the ski school among them. A CoolWorks ski instructor posting (Jul 14, 2026) gives a November 23, 2026 start.
 - resort_id: beaver-creek
   open_typical:
     value: "11-26"
@@ -692,6 +711,12 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: computed from typical dates
+  training_start:
+    value: 12-13
+    source_id: facts-training-aspen-employment
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. New Hire Training for Buttermilk runs December 13 to 18, 2026. It covers all new hires, the ski school among them.
 - resort_id: cherry-peak-ski-area
   acres:
     value: 200
@@ -794,6 +819,12 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: computed from typical dates
+  training_start:
+    value: 12-02
+    source_id: pay-alterra-deervalley-experienced-2627
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: The experienced instructor posting runs 12/2/2026 to 4/18/2027 (recorded in data/raw/pay/pay_alterra.yaml); its first day is read as the first day of staff training.
 - resort_id: eagle-point
   open_typical:
     value: "12-19"
@@ -1461,6 +1492,12 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Comparison table row. Statistics updated March 2020.
+  training_start:
+    value: 12-06
+    source_id: facts-training-aspen-employment
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. New Hire Training for Aspen, Highlands and Snowmass runs December 6 to 11, 2026. It covers all new hires, the ski school among them.
 - resort_id: solitude
   open_typical:
     value: "11-20"

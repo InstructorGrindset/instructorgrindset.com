@@ -616,6 +616,12 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: computed from typical dates (open from facts-west2-fox13-wa-openings, close from facts-west2-ots-wa-closing)
+  training_start:
+    value: 11-07
+    source_id: facts-training-crystal-ft-instructor-2627
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Required orientation on November 7, or on November 8 plus December 5, 6, 12 and 13; training days follow in early December.
 - resort_id: diamond-peak
   open_typical:
     value: "12-04"
@@ -988,6 +994,12 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: computed from typical dates (open from facts-west2-un-ca-openings-2026, close from facts-west2-activenorcal-mammoth-close)
+  training_start:
+    value: 11-17
+    source_id: pay-alterra-mammoth-ski-noncertified-2627
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Non certified ski instructor posting gives start date options of November 17, December 8 or December 14; the earliest is used.
 - resort_id: meany-lodge
   acres:
     value: 54
@@ -1214,6 +1226,13 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: computed from typical dates (open from facts-west2-fox13-wa-openings, close from facts-west2-wp-mt-baker)
+  training_start:
+    value: 11-01
+    source_id: facts-training-mtbaker-application-process
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The application timeline lists online pre season training in October, then "Nov. 1 & 2, Instructor Training, beginning of training for hired
+      instructors". The page names no year.
 - resort_id: mt-baldy
   acres:
     value: 800

@@ -80,7 +80,15 @@ resorts:
     enthusiast_types: []
     professional_types: []
   - resort_id: sunday-river
-    private_rate: null
+    private_rate:
+      value:
+        low: 735
+        high: 795
+        unit: full_day
+      source_id: career-followups-sundayriver-private-lessons
+      as_of: '2026-10-13'
+      confidence: estimated
+      note: From a search result for this page; page not opened. 2024-25 pricing, 6 hour private $735 non peak and $795 peak; 2 hour $315 to $340, 3 hour $420 to $480. No later season price was found.
     private_split: null
     professionalism_inputs:
       cert_pay_differential: null

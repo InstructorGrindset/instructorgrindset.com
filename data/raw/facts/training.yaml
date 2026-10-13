@@ -1,0 +1,88 @@
+# Staff training start dates (ROADMAP Section 8, item 6). Written by apply_training.py from the
+# research sidecar. Holds the sources for the training_start values merged into the other facts
+# files, plus records for resorts that had no facts record. Values seen only in a search result
+# are `estimated` and say so in `note`.
+batch: facts-training
+researched_date: '2026-10-13'
+sources:
+- id: facts-training-aspen-employment
+  url: https://www.aspensnowmass.com/employment
+  title: Aspen Snowmass Employment (new hire arrival and training dates, winter 2026-27)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-mtbaker-application-process
+  url: https://www.mtbaker.us/jobs/jobs/application-process/
+  title: Application Process, Mt. Baker Ski Area
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-crystal-ft-instructor-2627
+  url: https://alterra.wd1.myworkdayjobs.com/en-us/crystalmountain/job/ski---snowboard-instructor--ft---winter-26-27_jr132182
+  title: Crystal Mountain Ski / Snowboard Instructor, Full Time, Winter 26/27 (Alterra Workday JR132182)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-yc-coolworks-2627
+  url: https://www.coolworks.com/yellowstone-club/highlighted-job/80485-certified-snowsports-instructor-2
+  title: Certified Snowsports Instructor, Yellowstone Club, Apr 24, 2026 (CoolWorks)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-vail-cert-ski-2627
+  url: https://jobs.vailresortscareers.com/vail/job/Vail-Certified-Ski-Instructor-CO-81657/1388396800/
+  title: Vail Mountain Certified Ski Instructor, Winter Seasonal 2026/2027 (Vail Resorts careers)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-stowe-noncert-snowboard-2627
+  url: https://jobs.vailresortscareers.com/stowe/job/Stowe-Non-Certified-Snowboard-Instructor-VT-05672/1388375600/
+  title: Stowe Mountain Resort Non-Certified Snowboard Instructor (Vail Resorts careers)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened. Returned for an exact phrase search of the December 15 application deadline.
+- id: facts-training-liberty-cert-snowboard-2627
+  url: https://jobs.vailresortscareers.com/liberty/job/Fairfield-Certified-Snowboard-Instructor-PA/1388420200/
+  title: Liberty Mountain Resort Certified Snowboard Instructor (Vail Resorts careers)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened. Returned for an exact phrase search of the December 15 application deadline.
+- id: facts-training-mountsnow-cert-snowboard-2627
+  url: https://thesnowpros.org/job/mount-snow-west-dover-vt-us-winter-seasonal-certified-snowboard-instructor/
+  title: Mount Snow Certified Snowboard Instructor, Winter Seasonal 2026/2027 (PSIA-AASI job board)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-alta-certified-instructor
+  url: https://www.alta.com/jobs/psia-certified-ski-instructor
+  title: Alta Ski Area, PSIA Certified Ski Instructor (Alf Engen Ski School)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-snowshoe-instructor
+  url: https://alterra.wd1.myworkdayjobs.com/en-US/SnowshoeMountain/job/Ski-Snowboard-School-Instructor_JR124787
+  title: Snowshoe Mountain Ski/Snowboard School Instructor (Alterra Workday JR124787)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened. An earlier posting than pay-alterra-snowshoe-instructor-2627 (JR134077); the result did not name its season.
+- id: facts-training-copper-cert-snowboard-2627
+  url: https://powdr.wd12.myworkdayjobs.com/en-US/POWDR_Careers/job/Certified-Adult-Snowboard-School-Instructor---Full-Time_JR6257
+  title: 'POWDR Careers, Winter 26/27: Certified Adult Snowboard School Instructor, Full Time, Copper Mountain (JR6257)'
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened. The result dates the posting July 1, 2026.
+- id: facts-training-bigsky-coolworks-profile
+  url: https://www.coolworks.com/big-sky-resort/profile
+  title: Big Sky Resort profile (CoolWorks)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-telluride-coolworks-jobs
+  url: https://coolworks.com/telluride-ski-resort/jobs
+  title: Telluride Ski and Golf Resort jobs (CoolWorks)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-targhee-coolworks-profile
+  url: https://www.coolworks.com/grand-targhee-resort/profile
+  title: Grand Targhee Resort profile (CoolWorks)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-abasin-alterra-instructor
+  url: https://jobs.alterramtnco.com/arapahoe-basin/job/ski-and-ride-school-instructor/74046814637957830
+  title: Arapahoe Basin Ski and Ride School Instructor (jobs.alterramtnco.com)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+- id: facts-training-wilmot-home
+  url: https://www.wilmotmountain.com/
+  title: Wilmot Mountain home page (now hiring for winter 2026/27)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened.
+records: []

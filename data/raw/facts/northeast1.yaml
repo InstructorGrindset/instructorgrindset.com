@@ -1717,6 +1717,12 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: computed from typical dates
+  training_start:
+    value: 11-21
+    source_id: pay-east-sugarloaf-instructor-24652
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: Target start date of 11/21/2026 in the instructor posting (recorded in data/raw/pay/pay_east.yaml), read as the first day of staff training.
 - resort_id: sunday-river
   open_typical:
     value: 11-15
@@ -1736,6 +1742,12 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: computed from typical dates
+  training_start:
+    value: 12-01
+    source_id: pay-east-sunday-river-instructor-24529
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: Target start date of 12/1/2026 in the instructor posting (recorded in data/raw/pay/pay_east.yaml), read as the first day of staff training.
 - resort_id: tenney-mountain-resort
   open_typical:
     value: 12-05
