@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T14:52:09Z",
+  "generated_at": "2026-10-13T15:07:44Z",
   "heat": {
     "ramp": {
       "name": "viridis",
@@ -16,6 +16,7 @@
         "#fde725"
       ]
     },
+    "neutral": "#666a70",
     "regions": {
       "lower48": {
         "west": -125.0,
@@ -143,6 +144,15 @@
           900.0
         ]
       }
+    },
+    "season": {
+      "px_per_degree": 16.0,
+      "grid_step_px": 4,
+      "full_opacity_km": 200.0,
+      "fade_end_km": 450.0,
+      "floor_alpha": 0.0,
+      "fade_to": "neutral",
+      "no_data_reach_km": 120.0
     }
   },
   "snow": {

@@ -315,6 +315,7 @@ class HeatIsolines(StrictModel):
     step: float = Field(gt=0)
     major_step: float = Field(gt=0)
     simplify_px: float = Field(ge=0, le=5)
+    min_length_px: float = Field(default=0, ge=0)
     label_min_px: float = Field(ge=0)
 
     @model_validator(mode="after")
@@ -346,8 +347,21 @@ class HeatSnowfall(StrictModel):
 
 
 class HeatSeason(StrictModel):
+    """Season length rasters: resolution and fade (the interpolation itself is heat.field)."""
     px_per_degree: float = Field(gt=0, le=60)
     grid_step_px: int = Field(ge=1, le=16)
+    full_opacity_km: float = Field(gt=0)
+    fade_end_km: float = Field(gt=0)
+    floor_alpha: float = Field(ge=0, le=1)
+    fade_to: Literal["neutral", "alpha"] = "neutral"
+    # In states with no resort data the colors end this far from the nearest resort with data.
+    no_data_reach_km: float = Field(ge=0)
+
+    @model_validator(mode="after")
+    def _check(self) -> "HeatSeason":
+        if self.fade_end_km <= self.full_opacity_km:
+            raise ValueError("heat.season.fade_end_km must exceed full_opacity_km")
+        return self
 
 
 class HeatDefs(StrictModel):
@@ -358,6 +372,51 @@ class HeatDefs(StrictModel):
     modes: HeatModes
     snowfall: HeatSnowfall
     season: HeatSeason
+
+
+# ---------------------------------------------------------------- webcams and jobs (links, live postings)
+class WebcamDefs(StrictModel):
+    max_named_cams: int = Field(default=4, ge=0, le=12)
+
+
+DOMAIN_RE = r"^[a-z0-9-]+(\.[a-z0-9-]+)+$"
+
+
+class JobsFeedDefs(StrictModel):
+    keywords: list[str] = Field(default_factory=list)
+    exclude_keywords: list[str] = Field(default_factory=list)
+    role_keywords: dict[Literal["management", "coaching", "ski_school"], list[str]] = Field(default_factory=dict)
+    location_aliases: dict[Slug, list[str]] = Field(default_factory=dict)
+    max_postings_per_board: int = Field(default=150, ge=1, le=1000)
+    max_age_days: int = Field(default=14, ge=1)
+    refresh_days: int = Field(default=7, ge=1)
+    timeout_s: float = Field(default=20, gt=0)
+
+    @model_validator(mode="after")
+    def _words(self) -> "JobsFeedDefs":
+        words = self.keywords + self.exclude_keywords + [w for ws in self.role_keywords.values() for w in ws]
+        words += [w for ws in self.location_aliases.values() for w in ws]
+        bad = [w for w in words if not w.strip()]
+        if bad:
+            raise ValueError("jobs.feed keywords and aliases must not be empty")
+        return self
+
+
+class JobsDefs(StrictModel):
+    ats_domains: dict[str, list[Annotated[str, Field(pattern=DOMAIN_RE)]]] = Field(default_factory=dict)
+    blocked_domains: list[Annotated[str, Field(pattern=DOMAIN_RE)]] = Field(default_factory=list)
+    feed: JobsFeedDefs = Field(default_factory=JobsFeedDefs)
+
+    @model_validator(mode="after")
+    def _vendors(self) -> "JobsDefs":
+        from .schemas.jobs import ATS_VENDORS
+        unknown = sorted(set(self.ats_domains) - set(ATS_VENDORS))
+        if unknown:
+            raise ValueError(f"jobs.ats_domains has unknown vendors: {unknown}")
+        return self
+
+    def domains(self, vendor: str) -> set[str]:
+        return set(self.ats_domains.get(vendor) or [])
 
 
 class Definitions(StrictModel):
@@ -382,6 +441,8 @@ class Definitions(StrictModel):
     routing: RoutingDefs
     trailmap: TrailmapDefs
     heat: HeatDefs
+    webcams: WebcamDefs = Field(default_factory=WebcamDefs)
+    jobs: JobsDefs = Field(default_factory=JobsDefs)
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 

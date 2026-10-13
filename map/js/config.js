@@ -26,6 +26,7 @@ export const config = Object.freeze({
   mapBase: '/map/',
   siteOrigin: 'https://instructorgrindset.com',
   consultUrl: '/contact',
+  creditsUrl: '/map/credits/',
   vendor: {
     chartjs: '/map/vendor/chart.js/chart.umd.min.js',
   },
@@ -44,7 +45,7 @@ export const config = Object.freeze({
       // State fills turn translucent over the imagery (0 shows the imagery plainly, 1 hides it inside the states).
       state_fill_opacity: 0.55,
     },
-    attribution: 'Ski areas: <a href="https://openskimap.org/" target="_blank" rel="noopener">OpenSkiMap</a>, \u00a9 <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> (ODbL). State outlines: US Census Bureau via us-atlas',
+    attribution: 'Ski areas: <a href="https://openskimap.org/" target="_blank" rel="noopener">OpenSkiMap</a>, \u00a9 <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> (ODbL). State outlines: US Census Bureau via us-atlas. <a href="/map/credits/">Sources and credits</a>',
     colors: {
       background: '#0a0e14',
       stateFill: '#121821',

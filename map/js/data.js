@@ -98,6 +98,7 @@ function slimFromRow(fields, row) {
     state: o.state.toUpperCase(), cluster_id: o.cluster_id, lat: o.lat, lon: o.lon,
     acres: numOrNull(o.acres), size_rank: rank,
     climate_available: o.climate_available === true, detail_available: o.detail_available === true,
+    webcams_available: o.webcams_available === true, jobs_available: o.jobs_available === true,
     season_length_days: numOrNull(o.season_length_days), snowfall_annual_in: numOrNull(o.snowfall_annual_in),
     lucrativeness_mid: numOrNull(o.lucrativeness_mid),
   };
@@ -189,6 +190,7 @@ function slimFromFull(r, props) {
     acres: r.size.acres ? r.size.acres.value : null,
     size_rank: Number.isInteger(p.size_rank) ? p.size_rank : 1,
     climate_available: r.climate_available, detail_available: r.detail_available,
+    webcams_available: Boolean(r.webcams), jobs_available: Boolean(r.jobs),
     season_length_days: p.season_length_days !== undefined ? numOrNull(p.season_length_days) : (r.season.length_days ? r.season.length_days.value : null),
     snowfall_annual_in: numOrNull(p.snowfall_annual_in),
     lucrativeness_mid: p.lucrativeness_mid !== undefined ? numOrNull(p.lucrativeness_mid)
@@ -511,6 +513,30 @@ async function readStateOutlines(index) {
   };
   index.geo.usStates = fc;
   return fc;
+}
+
+let postingsPromise = null;
+
+/**
+ * Open job postings (jobs/postings.json, refreshed daily by pipeline/jobs_feed.py), loaded once, only when a resort
+ * or cluster view has jobs links. Resolves to the validated file, or null when it is absent, empty or invalid.
+ */
+export function loadPostings() {
+  if (!postingsPromise) {
+    postingsPromise = Promise.all([fetchJson('jobs/postings.json', { optional: true }), schemas()]).then(([raw, sch]) => {
+      if (!raw) return null;
+      const r = sch.PostingsFile.safeParse(raw);
+      if (!r.success) {
+        console.warn('[map] jobs/postings.json failed validation', r.error.issues.slice(0, 5));
+        return null;
+      }
+      return r.data.postings.length ? r.data : null;
+    }).catch((err) => {
+      console.warn('[map] jobs/postings.json', err.message);
+      return null;
+    });
+  }
+  return postingsPromise;
 }
 
 const detailCache = new Map();

@@ -259,20 +259,31 @@ heat:
     floor_alpha: 0.35
     fade_to: alpha
     isolines:
-      # Lines of equal snowfall from the same field, every `step` in from `start` to `end`, bolder every
-      # `major_step`. Douglas Peucker at simplify_px pixels; a label point sits on every line longer than
-      # label_min_px pixels (the map shows labels from mountain range zoom).
+      # Lines of equal snowfall from the same pixel field as the raster (marching squares), every `step` in
+      # from `start` to `end`, bolder every `major_step`. Simplified with Douglas Peucker at simplify_px
+      # pixels; lines shorter than min_length_px pixels are dropped; lines longer than label_min_px pixels
+      # carry a label (the map shows labels from mountain range zoom).
       start: 200
       end: 900
       step: 50
       major_step: 100
       simplify_px: 0.7
+      min_length_px: 4
       label_min_px: 30
   season:
-    # Precomputed season length rasters from the resorts' sourced season lengths (season.length_days),
-    # the `field` method and fade. Same regions and Web Mercator rows as snowfall.
+    # Precomputed season length rasters (pipeline/heat.py -> data/build/heat/season*) from the resorts'
+    # sourced season lengths (season.length_days, else a sourced open and close pair), interpolated with the
+    # `field` method. Same regions and Web Mercator rows as snowfall. Also the browser fallback's fade.
     px_per_degree: 16
     grid_step_px: 4
+    # Full color within full_opacity_km of a resort with data, then the color blends into `neutral` while
+    # it fades out, gone at fade_end_km: far from any resort (the Plains) the map shows the base, not a
+    # dark smudge. In states with no resort data the colors end within no_data_reach_km of a resort.
+    full_opacity_km: 200
+    fade_end_km: 450
+    floor_alpha: 0
+    fade_to: neutral
+    no_data_reach_km: 120
 
 # Phase 3 climate ETL settings. Read and validated by pipeline/climate/definitions.py
 # (owned by the climate ETL); pipeline/config.py passes this block through unchanged.
@@ -312,3 +323,55 @@ climate:
     max_daily_new_snow_in: 60   # cap on derived daily new snow
     rain_snow_threshold_c: 1.0  # SWE gains without a depth gain count as snow at or below this air temperature
     lapse_rate_c_per_km: 6.5    # standard atmosphere lapse rate, ERA5 temperature to station elevation
+
+webcams:
+  # Live webcam links (data/raw/webcams). Links only: streams and images are never embedded.
+  # The resort panel and its page show at most this many named cams under "Open live cams".
+  max_named_cams: 4
+
+jobs:
+  # Jobs links (data/raw/jobs) and the daily live postings feed (pipeline/jobs_feed.py).
+  # A link's url must sit on its employer's careers domain, one of its ATS vendor's domains below, or the domain of
+  # the link's own source (the employer's site that publishes it). Domains in blocked_domains always fail.
+  # Domains are registered domains (the last two labels of the host name).
+  ats_domains:
+    greenhouse: [greenhouse.io]
+    lever: [lever.co]
+    smartrecruiters: [smartrecruiters.com]
+    workable: [workable.com]
+    ashby: [ashbyhq.com]
+    workday: [myworkdayjobs.com, myworkday.com, workday.com]
+    icims: [icims.com]
+    ultipro: [ultipro.com, ukg.net, ukg.com]
+    paylocity: [paylocity.com]
+    adp: [adp.com]
+    paycom: [paycomonline.net, paycom.com]
+    jazzhr: [applytojob.com, jazzhr.com]
+    bamboohr: [bamboohr.com]
+    other: []
+    unknown: []
+  # Job aggregators: link the employer's own careers page or ATS board instead.
+  blocked_domains: [indeed.com, glassdoor.com, ziprecruiter.com, simplyhired.com, monster.com]
+  feed:
+    # Postings are kept when one of these words or phrases appears in the title, department or team
+    # (whole words, any case).
+    keywords: [instructor, coach, coaching, ski school, snowsports, snow sports, ride school, supervisor, director,
+               trainer, freeride, race, racing, freestyle, adaptive]
+    # Postings with one of these words are dropped even when a keyword matches. Empty keeps every match.
+    exclude_keywords: []
+    # Role group guess for each kept posting: the first group with a matching word wins. Postings with no match
+    # fall to corporate (parent company employers) or all.
+    role_keywords:
+      management: [supervisor, manager, director, head of, lead, coordinator, executive, president]
+      coaching: [coach, coaching, club, team, race, racing, freeride, freestyle, moguls, program]
+      ski_school: [instructor, ski school, snowsports, snow sports, ride school, lesson, trainer, adaptive]
+    # A posting of an employer linked from several resorts counts for a resort when the resort's name, or one of
+    # these aliases, appears in its location (then its title or department). Keys are resort ids.
+    location_aliases: {}
+    # Keep at most this many postings per board, so postings.json stays small.
+    max_postings_per_board: 150
+    # A board that fails to load keeps its last postings for this many days, then they are dropped.
+    max_age_days: 14
+    # postings.json is rewritten when its postings change, or when its last fetch is older than this many days.
+    refresh_days: 7
+    timeout_s: 20

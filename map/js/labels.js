@@ -78,3 +78,14 @@ export const RECOLOR_MODES = [
 
 /** Official trail map formats as shown next to the link. */
 export const TRAILMAP_FORMAT = { pdf: 'PDF', jpg: 'JPG image', png: 'PNG image', page: 'Web page' };
+
+/** Live cams and jobs (links only). Keep in step with pipeline/routes.py. */
+export const WEBCAM_KIND = { page: 'Web page', image: 'Still image', stream: 'Live stream' };
+export const JOB_GROUPS = [
+  ['ski_school', 'Ski school'], ['coaching', 'Coaching and clubs'], ['management', 'Management'],
+  ['corporate', 'Parent company'], ['all', 'Job boards'],
+];
+export const DISCIPLINE_LABEL = {
+  race: 'Race', freeride: 'Freeride', freestyle: 'Freestyle', park: 'Park', nordic: 'Nordic',
+  adaptive: 'Adaptive', snowboard: 'Snowboard', moguls: 'Moguls',
+};

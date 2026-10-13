@@ -88,6 +88,47 @@ export const OfficialTrailmap = z.object({
   note: z.string().nullish(),
 }).nullish().catch(null).transform((v) => v ?? null);
 
+// ── Live cams and jobs (links only; ARCHITECTURE "Webcams and jobs"). A bad item drops only that item. ──
+const HttpsUrl = z.string().regex(/^https:\/\//, 'https link');
+const Cited = { source_id: Slug, as_of: IsoDate, confidence: Confidence, note: z.string().nullish() };
+const keepValid = (item) => z.array(item.nullable().catch(null)).nullish().transform((a) => (a ?? []).filter(Boolean));
+
+export const WEBCAM_KINDS = ['page', 'image', 'stream'];
+export const Webcams = z.object({
+  cams_page: z.object({ url: HttpsUrl, ...Cited }).nullish().catch(null).transform((v) => v ?? null),
+  cams: keepValid(z.object({ label: z.string().min(1), url: HttpsUrl, kind: z.enum(WEBCAM_KINDS), ...Cited })),
+}).nullish().catch(null).transform((v) => (v && (v.cams_page || v.cams.length) ? v : null));
+
+export const ROLE_GROUPS = ['ski_school', 'coaching', 'management', 'corporate', 'all'];
+export const JobLink = z.object({
+  employer_id: Slug,
+  role_group: z.enum(ROLE_GROUPS),
+  disciplines: strList,
+  label: z.string().min(1),
+  url: HttpsUrl,
+  ...Cited,
+});
+export const Jobs = z.object({
+  links: keepValid(JobLink),
+  feed: z.boolean().nullish().transform((v) => Boolean(v)),
+}).nullish().catch(null).transform((v) => (v && v.links.length ? v : null));
+
+/** data/build/jobs/postings.json (pipeline/jobs_feed.py, daily). */
+export const PostingsFile = z.object({
+  ...Envelope,
+  fetched_at: z.string().nullish(),
+  boards: keepValid(z.object({
+    employer_id: Slug, employer_name: z.string().min(1), vendor: z.string(), board: z.string(), url: HttpsUrl,
+    source_id: Slug, status: z.string(), fetched_at: z.string().nullish(), as_of: IsoDate.nullish(),
+    total: z.number().int().nullish(), matched: z.number().int().nullish(),
+  })),
+  postings: keepValid(z.object({
+    id: z.string().min(1), employer_id: Slug, title: z.string().min(1), location: z.string().nullish(),
+    department: z.string().nullish(), url: HttpsUrl, role_group: z.string(), resort_ids: z.array(z.string()),
+    source_id: Slug, as_of: IsoDate, confidence: Confidence, fetched_at: z.string(),
+  })),
+});
+
 export const Resort = z.object({
   id: Slug,
   name: z.string().min(1),
@@ -146,6 +187,9 @@ export const Resort = z.object({
   access: Access,
   // Link to the resort's own official trail map (never rehosted or embedded). A bad value drops the link only.
   official_trailmap: OfficialTrailmap,
+  // Live cams and jobs links (never embedded); a bad value drops only that block.
+  webcams: Webcams,
+  jobs: Jobs,
   housing_summary: z.object({
     site_count: z.number().int().nonnegative().nullish(),
     cheapest_rent_monthly_low: numOrNull,

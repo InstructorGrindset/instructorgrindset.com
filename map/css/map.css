@@ -528,3 +528,66 @@ body.map-page { background: var(--bg); }
 .official-trailmap-link { font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 .trailmap-drawn { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
 .trailmap-kind { margin: 0 0 .4rem; font-weight: 600; }
+
+/* ── Resort search (map/js/search.js): combobox in the header, results float over the map ── */
+.map-header { position: relative; z-index: 20; }
+.map-search { position: relative; margin-left: auto; flex: 0 1 20rem; min-width: 9rem; }
+.map-search[hidden] { display: none; }
+.map-search + .list-toggle { margin-left: 0; }
+.map-search-input {
+  width: 100%; min-height: 36px; padding: .35rem .7rem .35rem 2rem;
+  font: inherit; font-size: var(--text-sm); color: var(--ink);
+  background: var(--map-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%238891a0' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='8.5' cy='8.5' r='5.5'/%3E%3Cpath d='m13 13 4 4'/%3E%3C/svg%3E") no-repeat .6rem 50% / 15px 15px;
+  border: 1px solid var(--line); border-radius: 999px;
+}
+.map-search-input::placeholder { color: var(--map-faint); opacity: 1; }
+.map-search-input:focus { outline: none; }
+.map-search-input:focus-visible { outline: 2px solid var(--cta); outline-offset: 1px; border-color: var(--cta); border-radius: 999px; }
+.map-search-list, .map-search-empty {
+  position: absolute; top: calc(100% + 6px); right: 0; width: min(24rem, calc(100vw - 1.5rem));
+  margin: 0; background: #10151e; border: 1px solid var(--line); border-radius: var(--r-md);
+  box-shadow: 0 12px 32px rgba(0,0,0,.5);
+}
+.map-search-list { list-style: none; padding: .3rem; overflow-y: auto; overscroll-behavior: contain; max-height: 26rem; }
+.map-search-list[hidden], .map-search-empty[hidden] { display: none; }
+.map-search-empty { padding: .7rem .9rem; font-size: var(--text-sm); color: var(--muted); }
+.map-search-option {
+  display: grid; gap: .05rem; min-height: 44px; align-content: center;
+  padding: .4rem .65rem; border-radius: var(--r-sm); cursor: pointer; line-height: 1.3;
+}
+.map-search-option:hover { background: var(--surface-2); }
+.map-search-option[aria-selected="true"] { background: rgba(196,137,42,.18); outline: 2px solid var(--cta); outline-offset: -2px; }
+.map-search-name { font-weight: 600; color: var(--ink); font-size: var(--text-sm); }
+.map-search-meta { font-size: var(--text-xs); color: var(--map-faint); }
+.map-search-option[aria-selected="true"] .map-search-meta { color: var(--muted); }
+@media (max-width: 759.98px) {
+  /* Phones: the title wraps to two lines so the search fits the top bar; results span the screen and stop
+     above the bottom sheet (app.js sets the height). */
+  .map-header h1 { white-space: normal; overflow: visible; font-size: .9rem; line-height: 1.1; flex: 0 0 6.4rem; }
+  .map-search { position: static; flex: 1 1 auto; min-width: 6.5rem; }
+  .map-search-input { font-size: 1rem; padding-left: 1.85rem; background-position: .55rem 50%; }
+  .map-search-list, .map-search-empty { top: calc(100% + 4px); left: .5rem; right: .5rem; width: auto; }
+}
+@media (max-width: 379.98px) {
+  .map-header h1 { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* ── Live cams and jobs (links only, opened in a new tab; map/js/livelinks.js and pipeline/routes.py) ── */
+.live-cams { margin: .6rem 0 0; }
+.live-cams .live-cams-title { margin: 0 0 .2rem; }
+.live-cams-main { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .4rem; }
+.live-cams-link, .cam-link, .job-link, .posting-link {
+  color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px;
+}
+.live-cams-link { font-weight: 600; }
+.cam-list, .job-links, .posting-list, .hiring-list { list-style: none; padding: 0; margin: .3rem 0 0; display: grid; gap: .35rem; }
+.cam-list li, .job-links li, .hiring-list li { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem .4rem; }
+.job-links li .fact-meta { flex-basis: 100%; }
+.job-group h4.sub { font-weight: 600; margin: .8rem 0 .2rem; }
+.job-tags { display: inline-flex; flex-wrap: wrap; gap: .25rem; }
+.job-tags .tag { font-size: .68rem; padding: 0 .45rem; }
+.jobs-live { margin: .5rem 0 .2rem; padding: .55rem .7rem; border: 1px solid var(--line); border-radius: var(--r-md, 10px); }
+.jobs-live[hidden], .hiring[hidden] { display: none; }
+.jobs-open { margin: 0 0 .2rem; gap: .4rem; }
+.posting-list li { line-height: 1.35; }
+.jobs-live .fact-meta { margin: .35rem 0 0; }

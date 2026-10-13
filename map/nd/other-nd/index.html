@@ -22,7 +22,7 @@
   <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"></noscript>
-  <link rel="stylesheet" href="/map/css/map.css?v=8">
+  <link rel="stylesheet" href="/map/css/map.css?v=9">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%23e0a03a'/%3E%3C/svg%3E">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
@@ -67,6 +67,14 @@
       <header class="map-header">
         <h1>Snowsports Career Map</h1>
         <span id="dev-badge" class="dev-badge" hidden></span>
+        <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
+        <div id="map-search" class="map-search" role="search" hidden>
+          <label class="visually-hidden" for="map-search-input">Search resorts, clusters and states</label>
+          <input id="map-search-input" class="map-search-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search resorts">
+          <ul id="map-search-list" class="map-search-list" role="listbox" aria-label="Search results" hidden></ul>
+          <p class="map-search-empty" hidden>No resort, cluster or state matches that name.</p>
+          <div class="visually-hidden" role="status" aria-live="polite"></div>
+        </div>
         <button id="list-toggle" class="btn btn-sm btn-ghost list-toggle" type="button" aria-pressed="false" aria-controls="list-view" hidden>List view</button>
       </header>
 
@@ -82,7 +90,7 @@
           <div id="panel-scroll" class="panel-scroll">
             <div id="panel-content" class="panel-content">
               <!-- prerender:start -->
-<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/map/">United States</a></li><li><a href="/map/nd/">North Dakota</a></li><li><span aria-current="page">Other North Dakota</span></li></ol></nav><span class="eyebrow">Cluster</span><h2 id="panel-heading" tabindex="-1">Other North Dakota</h2><p class="intro">4 resorts in North Dakota, 0 Tier A resorts.</p><section class="panel-section"><h3>Resorts</h3><ul class="nav-list"><li><a class="nav-item" href="/map/nd/other-nd/bottineau-winter-park/"><span class="nav-name">Bottineau Winter Park</span></a></li><li><a class="nav-item" href="/map/nd/other-nd/frost-fire-park/"><span class="nav-name">Frost Fire Park</span></a></li><li><a class="nav-item" href="/map/nd/other-nd/huff-hills-ski-resort/"><span class="nav-name">Huff Hills Ski Resort</span></a></li><li><a class="nav-item" href="/map/nd/other-nd/thrill-hills/"><span class="nav-name">Thrill Hills</span></a></li></ul></section><footer class="panel-footer"><p>Choosing your next mountain? Talk it through with Alexandre.</p><a class="btn btn-sm" href="/contact">Book a Free Consultation</a><nav class="related" aria-label="Related tools and reading"><p class="sub">Keep planning</p><ul><li><a href="/blog">Blog</a></li><li><a href="/reading-list">The Reading List</a></li><li><a href="/income-calculator">Season Income Calculator</a></li><li><a href="/career-plan">Plan Your Career</a></li><li><a href="/priority-predictor">Priority Predictor</a></li></ul></nav></footer>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/map/">United States</a></li><li><a href="/map/nd/">North Dakota</a></li><li><span aria-current="page">Other North Dakota</span></li></ol></nav><span class="eyebrow">Cluster</span><h2 id="panel-heading" tabindex="-1">Other North Dakota</h2><p class="intro">4 resorts in North Dakota, 0 Tier A resorts.</p><section class="panel-section"><h3>Resorts</h3><ul class="nav-list"><li><a class="nav-item" href="/map/nd/other-nd/bottineau-winter-park/"><span class="nav-name">Bottineau Winter Park</span></a></li><li><a class="nav-item" href="/map/nd/other-nd/frost-fire-park/"><span class="nav-name">Frost Fire Park</span></a></li><li><a class="nav-item" href="/map/nd/other-nd/huff-hills-ski-resort/"><span class="nav-name">Huff Hills Ski Resort</span></a></li><li><a class="nav-item" href="/map/nd/other-nd/thrill-hills/"><span class="nav-name">Thrill Hills</span></a></li></ul></section><footer class="panel-footer"><p>Choosing your next mountain? Talk it through with Alexandre.</p><a class="btn btn-sm" href="/contact">Book a Free Consultation</a><nav class="related" aria-label="Related tools and reading"><p class="sub">Keep planning</p><ul><li><a href="/blog">Blog</a></li><li><a href="/reading-list">The Reading List</a></li><li><a href="/income-calculator">Season Income Calculator</a></li><li><a href="/career-plan">Plan Your Career</a></li><li><a href="/priority-predictor">Priority Predictor</a></li></ul></nav><p class="fact-meta credits-link"><a href="/map/credits/">Sources and credits</a></p></footer>
 <!-- prerender:end -->
             </div>
           </div>

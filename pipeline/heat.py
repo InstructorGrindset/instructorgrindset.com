@@ -1,25 +1,32 @@
-"""Snowfall heat rasters for the Career Map (docs/map/ARCHITECTURE.md, "Heat maps").
+"""Heat rasters for the Career Map (docs/map/ARCHITECTURE.md, "Heat maps"): snowfall and season length.
 
-Background: NOAA NCEI U.S. Climate Normals 1991 to 2020 station values (ANN-SNOW-NORMAL, inches), from
-the committed extract that ``pipeline/climate/noaa_normals.py`` writes. Pockets: each resort's own
+Snowfall background: NOAA NCEI U.S. Climate Normals 1991 to 2020 station values (ANN-SNOW-NORMAL, inches),
+from the committed extract that ``pipeline/climate/noaa_normals.py`` writes. Pockets: each resort's own
 published annual snowfall (``snow.annual_avg_in``) raised over the background within
 ``heat.snowfall.pocket_radius_km``. A pocket only ever raises the field.
 
+Season length: the resorts' own sourced season lengths (``season.length_days``, else a sourced open and close
+pair), the ``heat.field`` method with the ``heat.season`` resolution and fade.
+
 Method (config/definitions.yaml ``heat``):
 
-* Interpolation: adaptive modified Shepard. At a point, take the ``neighbors`` nearest stations and the
-  distance R to the next one; weight w_i = ((R - d_i) / (R * max(d_i, min_distance_km)))^2. A station's
+* Interpolation: adaptive modified Shepard. At a point, take the ``neighbors`` nearest points and the
+  distance R to the next one; weight w_i = ((R - d_i) / (R * max(d_i, min_distance_km)))^2. A point's
   weight reaches zero just as it leaves the set, so the surface is continuous. The field is solved on
   every ``grid_step_px`` pixel and blended bilinearly between.
-* Pockets: v = b + g(d) * max(0, resort - b), g(d) = (1 - (d / r)^2)^2 for d < r, the highest pocket wins.
-* Color: ``heat.ramp`` over the mode's scale (``heat.modes.snowfall``, square root from 0).
-* Opacity: from the distance to the nearest station or resort (``heat.field``), times the share of the
-  pixel inside the state outlines (antialiased scanline coverage).
+* Pockets (snowfall): v = b + g(d) * max(0, resort - b), g(d) = (1 - (d / r)^2)^2 for d < r, the highest wins.
+* Color: classed modes take the color of the value's class (``breaks``, ``colors``); other modes use
+  ``heat.ramp`` over the mode's scale.
+* Opacity: from the distance to the nearest station or resort with data, times the share of the pixel inside
+  the state outlines (antialiased scanline coverage). Season length also ends its colors within
+  ``no_data_reach_km`` of the nearest resort inside states with no resort data.
+* Isolines (snowfall): marching squares on the same pixel field, joined into lines, simplified with
+  Douglas Peucker, written as small GeoJSON files.
 
-Output (``data/build/heat/``): ``snowfall-lower48.png`` and ``snowfall-alaska.png`` (RGBA, rows evenly
-spaced in Web Mercator, as MapLibre image sources expect) and ``snowfall.json`` with each image's exact
-corner coordinates, the scale, the legend ticks and the sources. Stdlib only (``pipeline/png.py``).
-The JavaScript twin of the interpolation, for the resort only surfaces, is ``map/js/heat.js``.
+Output (``data/build/heat/``): ``<mode>-lower48.png`` and ``<mode>-alaska.png`` (RGBA, rows evenly spaced in
+Web Mercator, as MapLibre image sources expect), ``<mode>.json`` with each image's exact corner coordinates,
+the classes, the legend ticks and the sources, and ``snowfall-isolines-<region>.geojson``. Stdlib only
+(``pipeline/png.py``). The JavaScript twin of the interpolation, for the browser fallback, is ``map/js/heat.js``.
 """
 from __future__ import annotations
 
@@ -32,14 +39,14 @@ import math
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Optional, Sequence
+from typing import Any, Callable, Iterable, Optional, Sequence
 
 from pipeline import png
 
 KM_PER_DEG_LAT = 110.57
 KM_PER_DEG_LON = 111.32
 RAD = math.pi / 180
-MANIFEST_VERSION = 1
+MANIFEST_VERSION = 2
 # States and territories each region draws (the map hides Hawaii, DC and the territories).
 HIDDEN_CODES = {"AS", "GU", "MP", "PR", "VI", "HI", "DC"}
 REGION_STATES = {"lower48": lambda code: code not in HIDDEN_CODES and code != "AK", "alaska": lambda code: code == "AK"}
@@ -388,15 +395,26 @@ def coverage(grid: Grid, polygons: Iterable[list[list[tuple[float, float]]]], su
     return out
 
 
-def region_polygons(outlines: dict, region: str) -> list:
+def region_polygons(outlines: dict, region: str, only: Optional[Iterable[str]] = None) -> list:
+    """Polygons of the region's states, or of the states among ``only`` (state codes) when given."""
     keep = REGION_STATES[region]
+    pick = None if only is None else {c.upper() for c in only}
     polys = []
     for f in outlines.get("features", []):
         code = str((f.get("properties") or {}).get("code", "")).upper()
         g = f.get("geometry")
-        if keep(code) and g and g.get("type") in ("Polygon", "MultiPolygon"):
+        if keep(code) and (pick is None or code in pick) and g and g.get("type") in ("Polygon", "MultiPolygon"):
             polys += _rings(g, wrap_west=region == "alaska")
     return polys
+
+
+def region_codes(outlines: dict, region: str) -> set[str]:
+    """State codes drawn in the region."""
+    keep = REGION_STATES[region]
+    codes = {str((f.get("properties") or {}).get("code", "")).upper() for f in outlines.get("features", [])}
+    return {c for c in codes if keep(c)}
+
+
 
 
 # ------------------------------------------------------------------ color
@@ -437,14 +455,295 @@ def sqrt_ticks(candidates: Sequence[float], lo: float, hi: float, min_gap: float
     return out + [hi]
 
 
+def class_index(v: float, breaks: Sequence[float]) -> int:
+    """Class of a value: 0 below breaks[0], i for breaks[i - 1] <= v < breaks[i], len(breaks) from the last break."""
+    return bisect.bisect_right(breaks, v)
+
+
+def colorizer(mode: Any, ramp: Sequence[str], domain: tuple[float, float]) -> Callable[[float], tuple[int, int, int]]:
+    """Value to RGB for a heat mode: its class color when classed, else ``ramp`` on the mode's scale."""
+    if mode.scale == "classed":
+        cols = [hex_rgb(c) for c in mode.colors]
+        breaks = list(mode.breaks)
+        return lambda v: cols[bisect.bisect_right(breaks, v)]
+    lo, hi = domain
+    n = 1024
+    lut = [ramp_rgb(i / (n - 1), ramp) for i in range(n)]
+    scale = mode.scale
+    return lambda v: lut[int(scale_t(v, scale, lo, hi) * (n - 1) + 0.5)]
+
+
+def smoothstep(t: float) -> float:
+    t = 0.0 if t < 0 else 1.0 if t > 1 else t
+    return t * t * (3 - 2 * t)
+
+
 def opacity(d_km: float, full_km: float, fade_end_km: float, max_alpha: float, floor_alpha: float) -> float:
     """max_alpha within full_km of data, a smooth fade to floor_alpha at fade_end_km, floor_alpha beyond."""
     if d_km <= full_km:
         return max_alpha
     if d_km >= fade_end_km:
         return floor_alpha
-    t = (d_km - full_km) / (fade_end_km - full_km)
-    return max_alpha - (max_alpha - floor_alpha) * t * t * (3 - 2 * t)
+    return max_alpha - (max_alpha - floor_alpha) * smoothstep((d_km - full_km) / (fade_end_km - full_km))
+
+
+def reach(d_km: float, reach_km: float) -> float:
+    """Share of the color kept inside a state with no data, d_km past its border: a smooth fade from 1 at the
+    border to 0 at reach_km."""
+    if reach_km <= 0:
+        return 0.0
+    return 1.0 - smoothstep(d_km / reach_km)
+
+
+def border_distance(grid: Grid, inside: Sequence[float], step: int, cov: Sequence[float]) -> list:
+    """Distance (km) from each covered pixel to the nearest pixel mostly inside ``inside`` (coverage over 0.5).
+
+    A chamfer distance transform on every ``step`` pixel (two passes, weights 1 and the square root of 2), blended
+    bilinearly between. Web Mercator is conformal, so a pixel spans KM_PER_DEG_LON cos(lat) / px_per_degree km
+    both ways at its latitude.
+    """
+    cols = node_positions(grid.width, step)
+    rows = node_positions(grid.height, step)
+    nc, nr = len(cols), len(rows)
+    inf = float("inf")
+    d = [0.0 if inside[j * grid.width + i] > 0.5 else inf for j in rows for i in cols]
+    diag = math.sqrt(2)
+    order = [(r, c) for r in range(nr) for c in range(nc)]
+    for passes in (order, order[::-1]):
+        sgn = 1 if passes is order else -1
+        for r, c in passes:
+            q = r * nc + c
+            v = d[q]
+            if v == 0:
+                continue
+            cp = c - sgn
+            rp = r - sgn
+            if 0 <= cp < nc:
+                v = min(v, d[q - sgn] + 1)
+            if 0 <= rp < nr:
+                up = q - sgn * nc
+                v = min(v, d[up] + 1)
+                if 0 <= cp < nc:
+                    v = min(v, d[up - sgn] + diag)
+                cn = c + sgn
+                if 0 <= cn < nc:
+                    v = min(v, d[up + sgn] + diag)
+            d[q] = v
+    width_deg = (grid.east - grid.west) / grid.width
+    node_km = []
+    for r, j in enumerate(rows):
+        km_px = KM_PER_DEG_LON * math.cos(grid.lat_at(j) * RAD) * width_deg * step
+        node_km += [x * km_px if x != inf else 1e9 for x in d[r * nc:(r + 1) * nc]]
+    return upsample(grid, cols, rows, node_km, cov)
+
+
+@dataclass(frozen=True)
+class Fade:
+    """The opacity rule of one raster (see ``paint``)."""
+
+    full_km: float
+    end_km: float
+    max_alpha: float
+    floor_alpha: float
+    fade_to: str            # "neutral": the color blends into ``neutral`` as it fades; "alpha": only opacity drops
+    neutral: tuple[int, int, int]
+    no_data_reach_km: Optional[float] = None
+
+
+def paint(values: Sequence[Optional[float]], dist: Sequence[Optional[float]], cov: Sequence[float],
+          color_of: Callable[[float], tuple[int, int, int]], fade: Fade,
+          no_data: Optional[Sequence[float]] = None, border_km: Optional[Sequence[Optional[float]]] = None
+          ) -> tuple[bytearray, int]:
+    """RGBA pixels: the value's color, opacity from the distance to data, times the outline coverage.
+
+    Beyond ``fade.full_km`` the opacity falls smoothly to ``fade.floor_alpha`` at ``fade.end_km`` (and the color
+    blends into ``fade.neutral`` by the same share when ``fade_to`` is neutral). ``no_data`` is each pixel's share
+    inside states with no data and ``border_km`` its distance past the border of the states with data: that share
+    keeps its color only up to ``fade.no_data_reach_km`` past the border (``reach``).
+    Returns (pixels, colored pixel count). Fully transparent pixels are zero, which keeps the PNG small.
+    """
+    buf = bytearray(len(cov) * 4)
+    colored = 0
+    span = fade.end_km - fade.full_km
+    nr, ng, nb = fade.neutral
+    for k, c in enumerate(cov):
+        if c <= 0:
+            continue
+        v = values[k]
+        if v is None:
+            continue
+        d = dist[k]
+        if d is None:
+            d = math.inf
+        r, g, b = color_of(v)
+        if d <= fade.full_km:
+            a = fade.max_alpha
+        else:
+            f = smoothstep((d - fade.full_km) / span) if span > 0 else 1.0
+            a = fade.max_alpha - (fade.max_alpha - fade.floor_alpha) * f
+            if fade.fade_to == "neutral" and f > 0:
+                r, g, b = round(r + (nr - r) * f), round(g + (ng - g) * f), round(b + (nb - b) * f)
+        if no_data is not None and fade.no_data_reach_km is not None:
+            nd = no_data[k]
+            if nd > 0:
+                bd = border_km[k] if border_km is not None and border_km[k] is not None else 0.0
+                a *= (1 - nd) + nd * reach(bd, fade.no_data_reach_km)
+        alpha = round(a * c * 255)
+        if alpha <= 0:
+            continue
+        colored += 1
+        buf[4 * k] = r; buf[4 * k + 1] = g; buf[4 * k + 2] = b; buf[4 * k + 3] = alpha
+    return buf, colored
+
+
+# ------------------------------------------------------------------ isolines
+# Marching squares cases: corner bits top left 8, top right 4, bottom right 2, bottom left 1 (set when the
+# corner is at or above the level). Edges: 0 top, 1 right, 2 bottom, 3 left. Saddles (5, 10) use the cell mean.
+_CASES: dict[int, tuple[tuple[int, int], ...]] = {
+    1: ((3, 2),), 2: ((2, 1),), 3: ((3, 1),), 4: ((0, 1),), 6: ((0, 2),), 7: ((3, 0),), 8: ((3, 0),),
+    9: ((0, 2),), 11: ((0, 1),), 12: ((3, 1),), 13: ((2, 1),), 14: ((3, 2),),
+}
+_SADDLE = {5: (((3, 0), (2, 1)), ((3, 2), (0, 1))), 10: (((0, 1), (3, 2)), ((3, 0), (2, 1)))}
+
+
+def contour_lines(values: Sequence[Optional[float]], width: int, height: int,
+                  levels: Sequence[float]) -> dict[float, list[list[tuple[float, float]]]]:
+    """Lines of equal value through a pixel field (flat, row major, None where undefined).
+
+    Marching squares over cells whose four corners (pixel centers) all hold a value, with linear interpolation
+    along the cell edges, then the segments joined into lines. Points are continuous pixel coordinates (pixel
+    i's center is at x = i + 0.5). Closed lines repeat their first point at the end. Returns {level: [line]}.
+    """
+    levels = sorted(levels)
+    segs: dict[float, list[tuple[int, int]]] = {lv: [] for lv in levels}
+    pts: dict[float, dict[int, tuple[float, float]]] = {lv: {} for lv in levels}
+    w = width
+    for j in range(height - 1):
+        row, below = j * w, (j + 1) * w
+        for i in range(w - 1):
+            a = values[row + i]; b = values[row + i + 1]; c = values[below + i + 1]; d = values[below + i]
+            if a is None or b is None or c is None or d is None:
+                continue
+            lo = min(a, b, c, d); hi = max(a, b, c, d)
+            first = bisect.bisect_right(levels, lo)
+            last = bisect.bisect_right(levels, hi)
+            for lv in levels[first:last]:          # lo < lv <= hi: the level crosses this cell
+                case = (8 if a >= lv else 0) | (4 if b >= lv else 0) | (2 if c >= lv else 0) | (1 if d >= lv else 0)
+                if case == 0 or case == 15:
+                    continue
+                if case in _SADDLE:
+                    pairs = _SADDLE[case][0 if (a + b + c + d) / 4 >= lv else 1]
+                else:
+                    pairs = _CASES[case]
+                # Edge ids: top = horizontal edge (i, j), bottom = (i, j + 1); left = vertical (i, j), right = (i + 1, j).
+                ids = (2 * (row + i), 2 * (row + i + 1) + 1, 2 * (below + i), 2 * (row + i) + 1)
+                book = pts[lv]
+                for e0, e1 in pairs:
+                    for e in (e0, e1):
+                        eid = ids[e]
+                        if eid in book:
+                            continue
+                        if e == 0:
+                            book[eid] = (i + 0.5 + (lv - a) / (b - a), j + 0.5)
+                        elif e == 2:
+                            book[eid] = (i + 0.5 + (lv - d) / (c - d), j + 1.5)
+                        elif e == 3:
+                            book[eid] = (i + 0.5, j + 0.5 + (lv - a) / (d - a))
+                        else:
+                            book[eid] = (i + 1.5, j + 0.5 + (lv - b) / (c - b))
+                    segs[lv].append((ids[e0], ids[e1]))
+    return {lv: _join(segs[lv], pts[lv]) for lv in levels}
+
+
+def _join(segments: list[tuple[int, int]], book: dict[int, tuple[float, float]]) -> list[list[tuple[float, float]]]:
+    """Chain segments that share an edge point into lines: open lines from their ends first, then loops."""
+    at: dict[int, list[int]] = defaultdict(list)
+    for n, (e0, e1) in enumerate(segments):
+        at[e0].append(n)
+        at[e1].append(n)
+    used = [False] * len(segments)
+    lines = []
+
+    def walk(start_edge: int, seg: int) -> list[int]:
+        chain = [start_edge]
+        edge = start_edge
+        while seg is not None and not used[seg]:
+            used[seg] = True
+            e0, e1 = segments[seg]
+            edge = e1 if e0 == edge else e0
+            chain.append(edge)
+            seg = next((s for s in at[edge] if not used[s]), None)
+        return chain
+
+    for edge, owners in sorted(at.items()):
+        if len(owners) == 1 and not used[owners[0]]:
+            lines.append(walk(edge, owners[0]))
+    for n, (e0, _) in enumerate(segments):
+        if not used[n]:
+            lines.append(walk(e0, n))
+    return [[book[e] for e in chain] for chain in lines]
+
+
+def simplify(line: Sequence[tuple[float, float]], tolerance: float) -> list[tuple[float, float]]:
+    """Douglas Peucker: drop points within ``tolerance`` of the simplified line; the ends stay."""
+    if tolerance <= 0 or len(line) < 3:
+        return list(line)
+    keep = [False] * len(line)
+    keep[0] = keep[-1] = True
+    stack = [(0, len(line) - 1)]
+    closed = line[0] == line[-1]
+    if closed:
+        # A loop's ends coincide: split it at the point farthest from the start first.
+        far = max(range(1, len(line) - 1), key=lambda k: math.dist(line[0], line[k]))
+        keep[far] = True
+        stack = [(0, far), (far, len(line) - 1)]
+    while stack:
+        s, e = stack.pop()
+        (x0, y0), (x1, y1) = line[s], line[e]
+        dx, dy = x1 - x0, y1 - y0
+        norm = math.hypot(dx, dy)
+        best, idx = -1.0, -1
+        for k in range(s + 1, e):
+            px, py = line[k]
+            dist = abs(dy * (px - x0) - dx * (py - y0)) / norm if norm > 0 else math.hypot(px - x0, py - y0)
+            if dist > best:
+                best, idx = dist, k
+        if idx > 0 and best > tolerance:
+            keep[idx] = True
+            stack += [(s, idx), (idx, e)]
+    return [p for p, k in zip(line, keep) if k]
+
+
+def line_length(line: Sequence[tuple[float, float]]) -> float:
+    return sum(math.dist(a, b) for a, b in zip(line, line[1:]))
+
+
+def isoline_features(grid: Grid, values: Sequence[Optional[float]], iso: Any, region: str) -> list[dict]:
+    """GeoJSON LineString features of the isolines of one region (properties: value, major, label, region)."""
+    out = []
+    lines = contour_lines(values, grid.width, grid.height, iso.levels())
+    yn, ys = grid.y_north, grid.y_south
+    span_x = (grid.east - grid.west) / grid.width
+    for lv in sorted(lines):
+        major = abs(lv / iso.major_step - round(lv / iso.major_step)) < 1e-9
+        for line in lines[lv]:
+            if line_length(line) < iso.min_length_px:
+                continue
+            simple = simplify(line, iso.simplify_px)
+            coords = []
+            for x, y in simple:
+                lon = round(grid.west + x * span_x, 3)
+                lat = round(lat_of(yn - y / grid.height * (yn - ys)), 3)
+                if not coords or coords[-1] != [lon, lat]:
+                    coords.append([lon, lat])
+            if len(coords) < 2:
+                continue
+            value = int(lv) if float(lv).is_integer() else lv
+            out.append({"type": "Feature",
+                        "properties": {"value": value, "major": major, "label": line_length(simple) >= iso.label_min_px,
+                                       "region": region},
+                        "geometry": {"type": "LineString", "coordinates": coords}})
+    return out
 
 
 # ------------------------------------------------------------------ raster
@@ -459,49 +758,34 @@ def index_for(points: Sequence[Point], box: Any, k: int) -> PointIndex:
     return PointIndex(pts, cell_deg=cell)
 
 
+def solve_field(grid: Grid, cov: Sequence[float], points: Sequence[Point], box: Any, k: int, min_km: float,
+                step: int) -> tuple[list, list]:
+    """Field value and the distance to the nearest point (km) at every covered pixel (None elsewhere)."""
+    cols = node_positions(grid.width, step)
+    rows = node_positions(grid.height, step)
+    index = index_for(points, box, k)
+    need = needed_nodes(grid, cols, rows, cov)
+    node_v, node_d = solve_nodes(grid, cols, rows, index, k, min_km, need)
+    return upsample(grid, cols, rows, node_v, cov), upsample(grid, cols, rows, node_d, cov)
+
+
 def render_region(grid: Grid, *, stations: Sequence[Point], pockets: Sequence[Point], polygons: list,
                   heat: Any, domain: tuple[float, float], scale: str, box: Any) -> tuple[bytes, dict]:
-    """RGBA bytes of one region and a summary (covered pixels, pockets drawn)."""
-    snow, field = heat.snowfall, heat.field
+    """Snowfall RGBA bytes of one region and a summary (colored pixels, pockets drawn, the pixel field)."""
+    snow = heat.snowfall
     cov = coverage(grid, polygons)
-    cols = node_positions(grid.width, snow.grid_step_px)
-    rows = node_positions(grid.height, snow.grid_step_px)
-    index = index_for(stations, box, snow.neighbors)
-    need = needed_nodes(grid, cols, rows, cov)
-    node_v, node_d = solve_nodes(grid, cols, rows, index, snow.neighbors, snow.min_distance_km, need)
-    background = upsample(grid, cols, rows, node_v, cov)
-    dist = upsample(grid, cols, rows, node_d, cov)
+    background, dist = solve_field(grid, cov, stations, box, snow.neighbors, snow.min_distance_km, snow.grid_step_px)
     values, near = apply_pockets(grid, background, pockets, snow.pocket_radius_km)
-    lo, hi = domain
-    span = hi - lo if hi > lo else 1.0
-    lut_n = 1024
-    lut = [bytes(ramp_rgb(i / (lut_n - 1), heat.ramp.colors)) for i in range(lut_n)]
-    use_sqrt = scale == "sqrt"
-    full, fade_end, amax, afloor = field.full_opacity_km, field.fade_end_km, field.max_alpha, field.floor_alpha
-    buf = bytearray(grid.width * grid.height * 4)
-    covered = 0
-    for k, c in enumerate(cov):
-        if c <= 0:
-            continue
-        v = values[k]
-        if v is None:
-            continue
-        covered += 1
-        t = (v - lo) / span
-        t = 0.0 if t < 0 else 1.0 if t > 1 else t
-        if use_sqrt:
-            t = math.sqrt(t)
-        d = dist[k]
-        if d is None:
-            d = math.inf
-        pd = near.get(k)
-        if pd is not None and pd < d:
-            d = pd
-        a = amax if d <= full else opacity(d, full, fade_end, amax, afloor)
-        buf[4 * k:4 * k + 3] = lut[int(t * (lut_n - 1) + 0.5)]
-        buf[4 * k + 3] = round(a * c * 255)
+    for k, pd in near.items():
+        if dist[k] is not None and pd < dist[k]:
+            dist[k] = pd
+    mode = heat.modes.snowfall
+    color_of = colorizer(mode if mode.scale == scale else mode.model_copy(update={"scale": scale}), heat.ramp.colors, domain)
+    fade = Fade(snow.full_opacity_km, snow.fade_end_km, heat.field.max_alpha, snow.floor_alpha, snow.fade_to,
+                hex_rgb(heat.neutral))
+    buf, colored = paint(values, dist, cov, color_of, fade)
     drawn = sum(1 for p in pockets if 0 <= grid.x_of(p.lon) < grid.width and 0 <= grid.y_of(p.lat) < grid.height)
-    return bytes(buf), {"covered_pixels": covered, "pockets": drawn}
+    return bytes(buf), {"covered_pixels": colored, "pockets": drawn, "values": values}
 
 
 def inputs_digest(*parts: Any) -> str:
@@ -509,6 +793,11 @@ def inputs_digest(*parts: Any) -> str:
     for p in parts:
         h.update(json.dumps(p, sort_keys=True, separators=(",", ":"), default=str).encode())
     return h.hexdigest()
+
+
+def _code_digest() -> list[str]:
+    """The method itself: a code change rebuilds the rasters too."""
+    return [hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), hashlib.sha256(Path(png.__file__).read_bytes()).hexdigest()]
 
 
 def resort_pockets(resorts: Iterable[dict]) -> list[Point]:
@@ -521,15 +810,89 @@ def resort_pockets(resorts: Iterable[dict]) -> list[Point]:
     return out
 
 
+def _sourced(field: Any) -> bool:
+    return isinstance(field, dict) and field.get("value") is not None and bool(field.get("source_id"))
+
+
+def days_open(open_mmdd: str, close_mmdd: str) -> int:
+    """Days from open to close, both counted (a non leap year; a close before the open is next year)."""
+    import datetime as dt  # noqa: PLC0415
+    om, od = (int(x) for x in open_mmdd.split("-"))
+    cm, cd = (int(x) for x in close_mmdd.split("-"))
+    o = dt.date(2001, om, min(od, 28) if om == 2 else od)
+    c = dt.date(2001, cm, min(cd, 28) if cm == 2 else cd)
+    if c < o:
+        c = c.replace(year=2002)
+    return (c - o).days + 1
+
+
+def season_days(resort: dict) -> Optional[float]:
+    """A resort's sourced season length: ``season.length_days``, else its sourced open and close pair."""
+    s = resort.get("season") or {}
+    length = s.get("length_days")
+    if _sourced(length) and isinstance(length["value"], (int, float)):
+        return float(length["value"])
+    o, c = s.get("open_typical"), s.get("close_typical")
+    if _sourced(o) and _sourced(c):
+        try:
+            return float(days_open(str(o["value"]), str(c["value"])))
+        except (ValueError, TypeError):
+            return None
+    return None
+
+
+def season_points(resorts: Iterable[dict]) -> list[tuple[Point, str]]:
+    """(point, state code) of every resort with a sourced season length and coordinates."""
+    out = []
+    for r in resorts:
+        v = season_days(r)
+        if v is not None and r.get("lat") is not None and r.get("lon") is not None:
+            out.append((Point(float(r["lon"]), float(r["lat"]), v), str(r.get("state", "")).upper()))
+    return out
+
+
+def _load_manifest(path: Path, digest: str) -> Optional[dict]:
+    try:
+        old = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    files = [r["image"] for r in old.get("rasters", [])] + [f["file"] for f in (old.get("isolines") or {}).get("files", [])]
+    if old.get("inputs_sha256") == digest and all((path.parent / f).is_file() for f in files):
+        return old
+    return None
+
+
+def _write_if_changed(path: Path, data: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.is_file() or path.read_bytes() != data:
+        path.write_bytes(data)
+
+
+def _drop_stale(heat_dir: Path, pattern: str, keep: set[str]) -> None:
+    for stale in heat_dir.glob(pattern) if heat_dir.is_dir() else []:
+        if stale.name not in keep:
+            stale.unlink()
+
+
+def _classes(mode: Any) -> dict:
+    """The class and legend settings a classed manifest carries (empty for other scales)."""
+    if mode.scale != "classed":
+        return {}
+    return {"breaks": list(mode.breaks), "colors": list(mode.colors),
+            "legend": {"ticks": list(mode.legend_ticks or mode.breaks), "compress_below": mode.legend_compress_below}}
+
+
 def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequence[Point], outlines: dict, heat: Any,
                    source: dict, generated_at: str, as_of: str) -> dict:
-    """Write ``heat/snowfall-<region>.png`` and ``heat/snowfall.json``; skip the work when inputs are unchanged.
+    """Write ``heat/snowfall-<region>.png``, ``heat/snowfall-isolines-<region>.geojson`` and ``heat/snowfall.json``;
+    skip the work when inputs are unchanged.
 
     ``stations`` are the usable NOAA stations; ``source`` is the NOAA source record (``id`` used).
     Returns the manifest.
     """
     heat_dir = out_dir / "heat"
     mode = heat.modes.snowfall
+    iso = heat.snowfall.isolines
     regions = {"lower48": heat.regions.lower48, "alaska": heat.regions.alaska}
     stations = [Point(normalize_lon(p.lon, p.lat), p.lat, p.value) for p in stations]
     pockets = [Point(normalize_lon(p.lon, p.lat), p.lat, p.value) for p in pockets]
@@ -540,22 +903,20 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
     lo = mode.domain[0] if mode.domain else (mode.domain_min if mode.domain_min is not None else 0.0)
     vals = [p.value for p in stations if any(inside(p, b) for b in regions.values())] + [p.value for p in pockets]
     hi = mode.domain[1] if mode.domain else nice_ceil(max(vals) if vals else 1.0)
-    ticks = list(mode.ticks or []) if mode.domain else (sqrt_ticks(mode.ticks or [], lo, hi) if mode.scale == "sqrt"
-                                                        else [lo, hi])
+    if mode.scale == "classed":
+        ticks = list(mode.legend_ticks or mode.breaks)
+    elif mode.domain:
+        ticks = list(mode.ticks or [lo, hi])
+    else:
+        ticks = sqrt_ticks(mode.ticks or [], lo, hi) if mode.scale == "sqrt" else [lo, hi]
     digest = inputs_digest([(p.lon, p.lat, p.value) for p in stations], [(p.lon, p.lat, p.value) for p in pockets],
-                           outlines.get("features", []), heat.model_dump(mode="json"), MANIFEST_VERSION,
-                           # the method itself: a code change rebuilds the rasters too
-                           hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                           hashlib.sha256(Path(png.__file__).read_bytes()).hexdigest())
+                           outlines.get("features", []), heat.model_dump(mode="json"), MANIFEST_VERSION, _code_digest())
     manifest_path = heat_dir / "snowfall.json"
-    try:
-        old = json.loads(manifest_path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        old = None
-    if old and old.get("inputs_sha256") == digest and all((heat_dir / r["image"]).is_file() for r in old.get("rasters", [])):
+    old = _load_manifest(manifest_path, digest)
+    if old:
         return old
 
-    rasters = []
+    rasters, iso_files = [], []
     for name, box in regions.items():
         polys = region_polygons(outlines, name)
         if not polys:
@@ -567,16 +928,17 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
             continue
         data = png.encode_rgba(grid.width, grid.height, rgba)
         image = f"snowfall-{name}.png"
-        heat_dir.mkdir(parents=True, exist_ok=True)
-        path = heat_dir / image
-        if not path.is_file() or path.read_bytes() != data:
-            path.write_bytes(data)
+        _write_if_changed(heat_dir / image, data)
         rasters.append({"region": name, "image": image, "width": grid.width, "height": grid.height,
                         "coordinates": grid.coordinates(), "bytes": len(data),
                         "stations": sum(1 for p in stations if inside(p, box)), "pockets": info["pockets"]})
-    for stale in heat_dir.glob("snowfall-*.png") if heat_dir.is_dir() else []:
-        if stale.name not in {r["image"] for r in rasters}:
-            stale.unlink()
+        feats = isoline_features(grid, info["values"], iso, name)
+        body = json.dumps({"type": "FeatureCollection", "features": feats}, separators=(",", ":")).encode()
+        file = f"snowfall-isolines-{name}.geojson"
+        _write_if_changed(heat_dir / file, body)
+        iso_files.append({"region": name, "file": file, "bytes": len(body), "features": len(feats)})
+    _drop_stale(heat_dir, "snowfall-*.png", {r["image"] for r in rasters})
+    _drop_stale(heat_dir, "snowfall-isolines-*.geojson", {f["file"] for f in iso_files})
     snow = heat.snowfall
     manifest = {
         "version": MANIFEST_VERSION,
@@ -586,16 +948,100 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
         "scale": mode.scale,
         "domain": {"min": lo, "max": hi},
         "ticks": ticks,
-        "ramp": list(heat.ramp.colors),
+        **_classes(mode),
+        **({} if mode.scale == "classed" else {"ramp": list(heat.ramp.colors)}),
         "background": {"source_id": source["id"], "as_of": as_of, "confidence": "published",
                        "field": "ANN-SNOW-NORMAL", "stations": sum(r["stations"] for r in rasters)},
         # Each pocket value is a resort's own sourced snow.annual_avg_in in resorts.json (source there).
         "pockets": {"field": "snow.annual_avg_in", "resorts": len(pockets), "radius_km": snow.pocket_radius_km},
         "method": {"interpolation": "adaptive modified Shepard", "neighbors": snow.neighbors,
                    "min_distance_km": snow.min_distance_km, "grid_step_px": snow.grid_step_px,
-                   "px_per_degree": snow.px_per_degree, "full_opacity_km": heat.field.full_opacity_km,
-                   "fade_end_km": heat.field.fade_end_km, "floor_alpha": heat.field.floor_alpha},
+                   "px_per_degree": snow.px_per_degree, "full_opacity_km": snow.full_opacity_km,
+                   "fade_end_km": snow.fade_end_km, "floor_alpha": snow.floor_alpha, "fade_to": snow.fade_to},
         "attribution": "Snowfall normals: NOAA NCEI 1991 to 2020",
+        "isolines": {"levels": iso.levels(), "major_step": iso.major_step, "files": iso_files},
+        "inputs_sha256": digest,
+        "rasters": rasters,
+    }
+    heat_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return manifest
+
+
+def write_season(out_dir: Path, *, resorts: Sequence[dict], outlines: dict, heat: Any, generated_at: str) -> Optional[dict]:
+    """Write ``heat/season-<region>.png`` and ``heat/season.json`` from the resorts' sourced season lengths.
+
+    The field (``heat.field``: decluster, neighbors, min distance) at the ``heat.season`` resolution, colored by
+    the season classes, faded by ``heat.season``. Returns the manifest, or None when no resort has a value.
+    """
+    heat_dir = out_dir / "heat"
+    mode = heat.modes.season
+    cfg, field = heat.season, heat.field
+    sp = season_points(resorts)
+    if not sp:
+        _drop_stale(heat_dir, "season*", set())
+        return None
+    data_states = {code for _, code in sp}
+    raw = [Point(normalize_lon(p.lon, p.lat), p.lat, p.value) for p, _ in sp]
+    pts = decluster(raw, field.decluster_km)
+    values = [p.value for p, _ in sp]
+    lo, hi = min(values), max(values)
+    regions = {"lower48": heat.regions.lower48, "alaska": heat.regions.alaska}
+    digest = inputs_digest(sorted((p.lon, p.lat, p.value) for p in raw), sorted(data_states), outlines.get("features", []),
+                           heat.model_dump(mode="json"), MANIFEST_VERSION, _code_digest())
+    manifest_path = heat_dir / "season.json"
+    old = _load_manifest(manifest_path, digest)
+    if old:
+        return old
+    color_of = colorizer(mode, heat.ramp.colors, (lo, hi))
+    fade = Fade(cfg.full_opacity_km, cfg.fade_end_km, field.max_alpha, cfg.floor_alpha, cfg.fade_to,
+                hex_rgb(heat.neutral), cfg.no_data_reach_km)
+    rasters = []
+    for name, box in regions.items():
+        polys = region_polygons(outlines, name)
+        if not polys:
+            continue
+        grid = Grid.for_box(box.west, box.south, box.east, box.north, cfg.px_per_degree)
+        cov = coverage(grid, polys)
+        empty = region_codes(outlines, name) - data_states
+        no_data = border = None
+        if empty:
+            no_data = coverage(grid, region_polygons(outlines, name, only=empty))
+            with_data = coverage(grid, region_polygons(outlines, name, only=region_codes(outlines, name) - empty))
+            border = border_distance(grid, with_data, cfg.grid_step_px, cov)
+        vals, dist = solve_field(grid, cov, pts, box, field.neighbors, field.min_distance_km, cfg.grid_step_px)
+        buf, colored = paint(vals, dist, cov, color_of, fade, no_data, border)
+        if not colored:
+            continue
+        data = png.encode_rgba(grid.width, grid.height, bytes(buf))
+        image = f"season-{name}.png"
+        _write_if_changed(heat_dir / image, data)
+        rasters.append({"region": name, "image": image, "width": grid.width, "height": grid.height,
+                        "coordinates": grid.coordinates(), "bytes": len(data),
+                        "resorts": sum(1 for p in raw if box.west <= p.lon <= box.east and box.south <= p.lat <= box.north),
+                        "no_data_states": sorted(empty)})
+    _drop_stale(heat_dir, "season-*.png", {r["image"] for r in rasters})
+    if not rasters:
+        return None
+    manifest = {
+        "version": MANIFEST_VERSION,
+        "generated_at": generated_at,
+        "mode": "season",
+        "units": "days",
+        "scale": mode.scale,
+        "domain": {"min": lo, "max": hi},
+        "ticks": list(mode.legend_ticks or mode.breaks or [lo, hi]),
+        **_classes(mode),
+        **({} if mode.scale == "classed" else {"ramp": list(heat.ramp.colors)}),
+        # Each value is a resort's own sourced season.length_days (or its sourced open and close pair) in
+        # resorts.json, with its source there.
+        "values": {"field": "season.length_days", "resorts": len(sp), "points": len(pts)},
+        "method": {"interpolation": "adaptive modified Shepard", "neighbors": field.neighbors,
+                   "min_distance_km": field.min_distance_km, "decluster_km": field.decluster_km,
+                   "grid_step_px": cfg.grid_step_px, "px_per_degree": cfg.px_per_degree,
+                   "full_opacity_km": cfg.full_opacity_km, "fade_end_km": cfg.fade_end_km,
+                   "floor_alpha": cfg.floor_alpha, "fade_to": cfg.fade_to, "no_data_reach_km": cfg.no_data_reach_km},
+        "attribution": None,
         "inputs_sha256": digest,
         "rasters": rasters,
     }

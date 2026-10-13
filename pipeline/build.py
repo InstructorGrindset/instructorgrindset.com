@@ -34,6 +34,8 @@ from pipeline.career import CareerData, build_career, load_career_data  # noqa: 
 from pipeline.editorial import load_editorial, render_review, resort_editorial  # noqa: E402
 from pipeline.facts import load_facts, merge_facts  # noqa: E402
 from pipeline.trailmaps_official import as_output as official_trailmap_output, load_official_trailmaps  # noqa: E402
+from pipeline import jobs as jobs_mod  # noqa: E402
+from pipeline.webcams import as_output as webcams_output, load_webcams  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
 from pipeline import staleness as staleness_mod  # noqa: E402
@@ -309,6 +311,16 @@ def build(
     errors += official_errors
     for d in drafts:
         d["official_trailmap"] = official_trailmap_output(official_maps.get(d["id"]))
+    webcams, webcam_errors = load_webcams(raw_dir, registry, known_ids, rel)
+    errors += webcam_errors
+    jobs_cfg = cfg.definitions.jobs
+    jobs_data, jobs_errors = jobs_mod.load_jobs(raw_dir, registry, known_ids,
+                                                {k: set(v) for k, v in jobs_cfg.ats_domains.items()}, rel,
+                                                set(jobs_cfg.blocked_domains))
+    errors += jobs_errors
+    for d in drafts:
+        d["webcams"] = webcams_output(webcams.get(d["id"]), cfg.definitions.webcams.max_named_cams)
+        d["jobs"] = jobs_mod.resort_jobs(jobs_data, d["id"])
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
     cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
@@ -407,6 +419,7 @@ def build(
         except ValidationError as e:
             for m in e.errors()[:5]:
                 errors.append(f"trailmap '{rid}': {'.'.join(map(str, m['loc']))}: {m['msg']}")
+    postings = jobs_mod.check_postings(out_dir / jobs_mod.OUT_SUBDIR / jobs_mod.POSTINGS_NAME, jobs_data, errors, warnings, rel)
     if errors:
         raise BuildError(errors)
 
@@ -458,10 +471,12 @@ def build(
             for old_file in sub_dir.glob("*.json"):
                 if old_file.stem not in files:
                     old_file.unlink()
+    _write_json(out_dir / jobs_mod.OUT_SUBDIR / jobs_mod.EMPLOYERS_NAME, jobs_mod.employers_output(jobs_data, header))
+    if postings is None:  # the jobs feed (pipeline/jobs_feed.py, daily in GitHub Actions) fills it
+        _write_json(out_dir / jobs_mod.OUT_SUBDIR / jobs_mod.POSTINGS_NAME, jobs_mod.empty_postings(header, cfg.definitions.jobs))
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
-    if noaa:
-        _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings)
+    _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings)
 
 
     result = BuildResult(out_dir, resorts, clusters, states, len(registry), warnings, inputs)
@@ -502,23 +517,29 @@ def _load_noaa_normals(raw_dir: Path, cfg: Config, registry: SourceRegistry, err
     return usable, meta
 
 
-def _write_heat(out_dir: Path, repo_root: Path, noaa: tuple[list, dict], resort_dicts: list[dict], cfg: Config,
-                header: dict, warnings: list[str]) -> None:
-    """data/build/heat/: snowfall rasters (NOAA background plus resort pockets) and their sidecar."""
+def _write_heat(out_dir: Path, repo_root: Path, noaa: Optional[tuple[list, dict]], resort_dicts: list[dict],
+                cfg: Config, header: dict, warnings: list[str]) -> None:
+    """data/build/heat/: snowfall rasters and isolines (NOAA background plus resort pockets), season length
+    rasters (sourced resort values), and their sidecars."""
     outlines_path = out_dir / "us-states.geojson"
     if not outlines_path.is_file():
         outlines_path = repo_root / "data" / "build" / "us-states.geojson"
     if not outlines_path.is_file():
-        warnings.append("us-states.geojson is missing; snowfall heat rasters not rebuilt")
+        warnings.append("us-states.geojson is missing; heat rasters not rebuilt")
         return
-    stations, meta = noaa
-    src = meta["source"]
-    heat_mod.write_snowfall(
-        out_dir,
-        stations=[heat_mod.Point(s.lon, s.lat, s.ann_snow_in) for s in stations],
-        pockets=heat_mod.resort_pockets(resort_dicts),
-        outlines=json.loads(outlines_path.read_text(encoding="utf-8")),
-        heat=cfg.definitions.heat, source=src, generated_at=header["generated_at"], as_of=str(src["accessed_date"]))
+    outlines = json.loads(outlines_path.read_text(encoding="utf-8"))
+    if noaa:
+        stations, meta = noaa
+        src = meta["source"]
+        heat_mod.write_snowfall(
+            out_dir,
+            stations=[heat_mod.Point(s.lon, s.lat, s.ann_snow_in) for s in stations],
+            pockets=heat_mod.resort_pockets(resort_dicts),
+            outlines=outlines,
+            heat=cfg.definitions.heat, source=src, generated_at=header["generated_at"], as_of=str(src["accessed_date"]))
+    if heat_mod.write_season(out_dir, resorts=resort_dicts, outlines=outlines, heat=cfg.definitions.heat,
+                             generated_at=header["generated_at"]) is None:
+        warnings.append("no resort has a sourced season length; season heat rasters not written")
 
 
 def display_definitions(cfg: Config) -> dict:
@@ -526,7 +547,7 @@ def display_definitions(cfg: Config) -> dict:
     d = cfg.definitions
     heat = d.heat.model_dump(mode="json")
     return {
-        "heat": {k: heat[k] for k in ("ramp", "regions", "field", "modes")},
+        "heat": {k: heat[k] for k in ("ramp", "neutral", "regions", "field", "modes", "season")},
         "snow": {"powder_day_in": d.snow.powder_day_in, "banner_day_in": d.snow.banner_day_in},
         "density": {"dry_max_pct": d.density.dry_max_pct, "moist_min_pct": d.density.moist_min_pct},
         "display": {"priority": list(d.display.priority)},
@@ -740,8 +761,8 @@ def _refs(d: dict) -> set[str]:
             for v in o:
                 walk(v)
 
-    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "season", "terrain",
-                "career", "editorial"):
+    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "webcams", "jobs",
+                "season", "terrain", "career", "editorial"):
         walk(d.get(key))
     return found
 

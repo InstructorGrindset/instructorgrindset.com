@@ -251,6 +251,34 @@ async function main() {
   els.listToggle.addEventListener('click', () => setListView(els.list.hidden));
   els.listToggle.hidden = false;
 
+  // Resort search: search.js loads on first focus and navigates through the router, as a click does. On phones
+  // its list stays above the bottom sheet (a fully open sheet drops to half first).
+  const searchEl = $('map-search');
+  if (searchEl) {
+    let searchMod = null;
+    const loadSearch = () => {
+      searchMod ||= import('./search.js').then(({ createSearch }) => createSearch(searchEl, index, {
+        current: () => router.current,
+        onSelect: (view) => {
+          router.go(view);
+          const cur = !els.list.hidden && els.list.querySelector('[aria-current="page"]');
+          if (cur) cur.scrollIntoView({ block: 'center' });
+        },
+        listBottom: () => {
+          if (!isPhone()) return window.innerHeight - 16;
+          if (sheet.state === 'full') sheet.set('half');
+          return els.stage.getBoundingClientRect().bottom - sheet.visible();
+        },
+      })).catch((err) => { searchMod = null; console.warn('[map] search', err.message); });
+      return searchMod;
+    };
+    const input = $('map-search-input');
+    if (!isPhone()) input.placeholder = 'Search resorts and clusters';
+    input.addEventListener('focus', loadSearch);
+    input.addEventListener('pointerdown', loadSearch, { passive: true });
+    searchEl.hidden = false;
+  }
+
   router.start();
   performance.mark('careermap:panel');
   els.panel.setAttribute('aria-busy', 'false');

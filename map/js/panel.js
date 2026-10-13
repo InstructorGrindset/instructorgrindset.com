@@ -5,6 +5,7 @@ import {
   FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, ACCESS_LABEL, TRAILMAP_FORMAT, tagLabel,
 } from './labels.js';
 import { hrefFor } from './router.js';
+import { clusterHiring, jobsSection, liveCams } from './livelinks.js';
 import {
   h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd, markdown,
 } from './ui.js';
@@ -110,6 +111,12 @@ export function createPanel(root, index, {
 
   function section(title, ...body) {
     return h('section', { class: 'panel-section' }, h('h3', null, title), ...body);
+  }
+
+  /** Helpers for the live cams and jobs blocks (livelinks.js); current() is false once another view renders. */
+  function linkCtx() {
+    const my = token;
+    return { badge, sourceLink, sources: index.sources, section, current: () => my === token };
   }
 
   function tags(list) {
@@ -242,7 +249,7 @@ export function createPanel(root, index, {
         const link = navLink({ level: 'resort', stateCode: view.stateCode, clusterId: c.id, resortId: r.id }, { class: 'nav-item' },
           h('span', { class: 'nav-name' }, r.name, ' ', tierTags(r)),
           h('span', { class: 'nav-meta' }, r.acres != null ? `${fmtInt(r.acres)} skiable acres` : 'Size not yet verified',
-            r.climate_available ? ' · Climate charts' : ''));
+            r.climate_available ? ' · Climate charts' : '', r.webcams_available ? ' · Live cams' : ''));
         const li = h('li', { class: compareState.open ? 'with-check' : null });
         if (compareState.open) {
           const box = h('input', {
@@ -286,6 +293,7 @@ export function createPanel(root, index, {
       h('section', { class: 'panel-section' },
         h('div', { class: 'section-head' }, h('h3', null, 'Resorts'), resorts.length >= config.compare.min ? toggle : null),
         bar, list),
+      clusterHiring(resorts, linkCtx()),
     ];
   }
 
@@ -324,6 +332,7 @@ export function createPanel(root, index, {
       ...heading(eyebrow, r.name),
       h('div', { class: 'tier-row' }, resortTags(r)),
       trailMaps(r),
+      liveCams(r, linkCtx()),
       h('dl', { class: 'facts' }, fact('Owner', r.owner, fmt.text)),
     ];
     if (r.tier === 'A' && r.tier_a_criteria.length) {
@@ -339,6 +348,7 @@ export function createPanel(root, index, {
       ['Overview', r.editorial.overview_md], ['Culture', r.editorial.culture_md], ["Alexandre's take", r.editorial.alexandre_take_md],
     ], r.editorial.source_ids, r.editorial.reviewed_date));
     out.push(careerSection(r));
+    out.push(jobsSection(r, linkCtx()));
     out.push(section('Operation size', h('dl', { class: 'facts' },
       fact('Skiable acres', r.size.acres, fmt.int),
       fact('Vertical drop', r.size.vertical_ft, fmt.ft),
@@ -879,7 +889,8 @@ export function createPanel(root, index, {
         h('p', { class: 'sub' }, 'Keep planning'),
         h('ul', null, RELATED.map(([href, label]) => h('li', null, h('a', { href }, label))))),
       h('p', { class: 'fact-meta' }, index && index.generatedAt ? `Map data compiled ${formatIsoDate(index.generatedAt)}.` : '',
-        config.isDevData ? ' Test fixture data loaded.' : ''));
+        config.isDevData ? ' Test fixture data loaded.' : ''),
+      h('p', { class: 'fact-meta credits-link' }, h('a', { href: config.creditsUrl }, 'Sources and credits')));
   }
 
   /** Swap the source placeholders once sources.json has loaded. */
