@@ -20,6 +20,7 @@ from .common import (
     StrictModel,
     check_source_ref,
 )
+from .trailmaps_official import OfficialTrailmap
 
 import datetime as dt
 
@@ -191,6 +192,7 @@ class Resort(StrictModel):
     snow: Optional[Snow] = None
     operator_scale: Optional[SourcedOperatorScale] = None
     access: Optional[Access] = None
+    official_trailmap: Optional[OfficialTrailmap] = None   # link to the resort's own trail map (never rehosted)
     season: Season = Field(default_factory=Season)
     terrain: Terrain = Field(default_factory=Terrain)
     fit: Fit = Field(default_factory=Fit)
@@ -264,7 +266,7 @@ def referenced_source_ids(resort: Resort) -> set[str]:
             for item in obj:
                 walk(item)
 
-    for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "season",
+    for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "official_trailmap", "season",
                  "terrain", "career", "editorial"):
         walk(getattr(resort, name))
     return found

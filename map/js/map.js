@@ -447,7 +447,26 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     for (const id of heatInset) vis(id, national);
   }
 
-  map.on('load', async () => {
+  // Ready as soon as the style and the data sources (states, clusters, resorts) are in and drawn. MapLibre's own
+  // `load` also waits for every imagery tile, so a slow or failing imagery service must never hold the map back.
+  const DATA_SOURCES = ['states', 'clusters', 'resorts'];
+  const readyFns = [];
+  let styleIn = false;
+  let armed = false;
+  let readyFired = false;
+  const dataIn = () => DATA_SOURCES.every((id) => map.getSource(id) && map.isSourceLoaded(id));
+  function checkReady() {
+    if (armed || !styleIn || !dataIn()) return;
+    armed = true;
+    map.off('sourcedata', checkReady);
+    map.off('render', checkReady);
+    setup();
+  }
+  map.once('style.load', () => { styleIn = true; checkReady(); });
+  map.on('sourcedata', checkReady);
+  map.on('render', checkReady);
+
+  async function setup() {
     for (const { id, img } of await facilityImages()) if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 });
     map.addLayer(FACILITY_LAYER);
     map.addLayer({ ...FACILITY_LAYER, id: 'inset-resorts-facility', source: 'inset-resorts', paint: { 'icon-opacity': 1 } });
@@ -460,10 +479,19 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     const attrib = container.querySelector('.maplibregl-ctrl-attrib');
     if (attrib) attrib.classList.remove('maplibregl-compact-show');
     if (pending) { const v = pending; pending = null; applyView(v.view); fitView(v.view, false); }
-  });
+    // Fire on the next frame, once the data layers are on screen.
+    map.once('render', () => { readyFired = true; for (const fn of readyFns.splice(0)) fn(); });
+    map.triggerRepaint();
+  }
+
+  /** Run fn once the data layers have rendered (imagery may still be loading). */
+  function whenReady(fn) { if (readyFired) fn(); else readyFns.push(fn); }
 
   return {
     map,
+    whenReady,
+    /** True once the data layers are drawn; MapLibre's loaded() may stay false while imagery tiles load. */
+    get ready() { return readyFired; },
     show(view, { animate = true } = {}) {
       current = view;
       if (!loaded) { pending = { view }; return; }
@@ -479,7 +507,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
         if (ins) ins.setData(insetFeatures(fc.features.filter((f) => f.properties.code === INSET_STATE)));
         if (current && current.stateCode) applyView(current);
       };
-      if (loaded) apply(); else map.once('load', apply);
+      whenReady(apply);
     },
     /** Resort detail mode. Pass null to leave it. Returns the layer groups that have data. */
     setDetail(next) {

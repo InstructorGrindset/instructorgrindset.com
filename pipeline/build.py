@@ -31,6 +31,7 @@ from pipeline import runs as runs_mod  # noqa: E402
 from pipeline.career import CareerData, build_career, load_career_data  # noqa: E402
 from pipeline.editorial import load_editorial, render_review, resort_editorial  # noqa: E402
 from pipeline.facts import load_facts, merge_facts  # noqa: E402
+from pipeline.trailmaps_official import as_output as official_trailmap_output, load_official_trailmaps  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
 from pipeline import staleness as staleness_mod  # noqa: E402
@@ -300,6 +301,10 @@ def build(
     for d in drafts:
         if d["id"] in facts:
             merge_facts(d, facts[d["id"]], cfg.definitions.display.priority)
+    official_maps, official_errors = load_official_trailmaps(raw_dir, registry, known_ids, rel)
+    errors += official_errors
+    for d in drafts:
+        d["official_trailmap"] = official_trailmap_output(official_maps.get(d["id"]))
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
     cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
@@ -688,7 +693,7 @@ def _refs(d: dict) -> set[str]:
             for v in o:
                 walk(v)
 
-    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "season", "terrain",
+    for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "operator_scale", "access", "official_trailmap", "season", "terrain",
                 "career", "editorial"):
         walk(d.get(key))
     return found

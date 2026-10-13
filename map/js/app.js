@@ -347,7 +347,7 @@ async function main() {
     if (trailFor) setTrailControl(trailFor);
     if (router.current) mapCtl.show(router.current, { animate: false });
 
-    mapCtl.map.once('load', () => {
+    mapCtl.whenReady(() => {
       performance.mark('careermap:map');
       dropPreview();
       startBtn.remove();

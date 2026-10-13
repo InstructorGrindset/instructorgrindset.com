@@ -267,6 +267,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: From a search result for this page; page not opened. OnTheSnow 2025/26 projected closing 04-26; one season projection
+  open_typical:
+    value: 11-23
+    source_id: facts-gapfill-kxly-49n-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: 2024-25 opened 11-22 (this page); the resort typically tries to open around Thanksgiving (facts-gapfill-kxly-49n-week),
+      about 11-25.'
+  length_days:
+    value: 155
+    source_id: facts-gapfill-kxly-49n-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-23 to 04-26)
 - resort_id: alpental
   close_typical:
     value: "04-12"
@@ -274,6 +287,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: From a search result for this page; page not opened. OnTheSnow 2025/26 projected closing 04-12; one season projection
+  open_typical:
+    value: 01-04
+    source_id: facts-gapfill-summit-alpental-2020
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 seasons: 2019-20 01-04 (this page); 2021-22 12-22 (facts-gapfill-summit-2122); 2025-26 01-07 (facts-gapfill-summit-edelweiss-2026).
+      Alpental opens later than the rest of the Summit.'
+  length_days:
+    value: 99
+    source_id: facts-gapfill-summit-alpental-2020
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (01-04 to 04-12)
 - resort_id: alyeska
   open_typical:
     value: "11-29"
@@ -281,6 +307,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: From a search result for this page; page not opened. 2024/25 season opened Friday, Nov. 29, 2024 (day after Thanksgiving); the resort traditionally opens Thanksgiving weekend
+  close_typical:
+    value: 04-19
+    source_id: facts-gapfill-snowstash-alyeska
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values for 2025-26: 04-13 (this page) and OnTheSnow projection 04-26 (facts-gapfill-ots-ak-closing). Snowy seasons ran into May.'
+  length_days:
+    value: 142
+    source_id: facts-gapfill-snowstash-alyeska
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-29 to 04-19)
 - resort_id: anthony-lakes-mountain-resort
   open_typical:
     value: "12-19"
@@ -300,6 +338,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  close_typical:
+    value: 04-03
+    source_id: facts-gapfill-bendbulletin-anthony-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. 2021-22 final day 04-03 (this page); OnTheSnow projection 04-04 for 2026-27 (facts-gapfill-ots-anthony).
+  length_days:
+    value: 106
+    source_id: facts-gapfill-bendbulletin-anthony-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-19 to 04-03)
 - resort_id: arctic-valley-ski-area
   acres:
     value: 320
@@ -307,6 +357,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 12-16
+    source_id: facts-gapfill-adn-arctic-2023
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season: 2023-24 opened the weekend of 12-16. In a normal year the area aims for the weekend after Thanksgiving.'
+  close_typical:
+    value: 04-14
+    source_id: facts-gapfill-adn-arctic-2023
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season: 2023-24 was scheduled to run "through at least the second weekend of April"; taken as 04-14.'
+  length_days:
+    value: 120
+    source_id: facts-gapfill-adn-arctic-2023
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-16 to 04-14)
 - resort_id: badger-mountain-ski-area
   acres:
     value: 10
@@ -333,6 +401,25 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-22
+    source_id: facts-gapfill-ots-badger
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: OnTheSnow projection 12-26 (this page); a past opening moved to 12-19 (facts-gapfill-sno-badger-dec19); planned 2026 alpine
+      opening 01-16 (facts-gapfill-yty-badger); usual window from mid December, mid = 15. Some seasons never open.'
+  close_typical:
+    value: 03-14
+    source_id: facts-gapfill-ots-badger
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. OnTheSnow projection 03-14 (this page); usual window to mid March.
+  length_days:
+    value: 83
+    source_id: facts-gapfill-ots-badger
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-22 to 03-14)
 - resort_id: bear-mountain
   open_typical:
     value: "11-22"
@@ -371,6 +458,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  close_typical:
+    value: 03-28
+    source_id: facts-gapfill-bearvalley-close-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. 2025-26 closing day 03-29 (resort post, this page); OnTheSnow projection 03-28 for 2026-27 (facts-gapfill-ots-bearvalley).
+  length_days:
+    value: 122
+    source_id: facts-gapfill-bearvalley-close-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-27 to 03-28)
 - resort_id: bluewood
   close_typical:
     value: "03-29"
@@ -390,6 +489,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-20
+    source_id: facts-gapfill-wt-bluewood-2019
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 5 values: 2015-16 12-18 (facts-gapfill-wt-bluewood-2015); 2017-18 about 12-22; 2019-20 12-20 (this page); 2020-21 12-11 (facts-gapfill-wt-bluewood-2020);
+      OnTheSnow projection 12-26.'
+  length_days:
+    value: 100
+    source_id: facts-gapfill-wt-bluewood-2019
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-20 to 03-29)
 - resort_id: boreal-mountain-resort
   open_typical:
     value: "11-21"
@@ -409,6 +521,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  close_typical:
+    value: 04-15
+    source_id: facts-gapfill-snowstash-boreal
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: phrase "into mid-April" (this page), mid = 15; 2025-26 listed closing 04-19 (facts-gapfill-skitalk-tahoe-2526); OnTheSnow
+      projection 04-11 (facts-gapfill-ots-boreal).'
+  length_days:
+    value: 146
+    source_id: facts-gapfill-snowstash-boreal
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-21 to 04-15)
 - resort_id: china-peak-mountain-resort
   open_typical:
     value: "11-27"
@@ -428,6 +553,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  close_typical:
+    value: 04-05
+    source_id: facts-gapfill-abc30-chinapeak-2025
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: 2025 closed 04-13 (this page); OnTheSnow projection 03-28 for 2026-27 (facts-gapfill-ots-chinapeak).'
+  length_days:
+    value: 130
+    source_id: facts-gapfill-abc30-chinapeak-2025
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-27 to 04-05)
 - resort_id: cooper-spur-ski-area
   acres:
     value: 50
@@ -441,6 +578,25 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: infobox 8.3 ft converted to inches and rounded
+  open_typical:
+    value: 12-20
+    source_id: facts-gapfill-ots-cooperspur
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 5 values: OnTheSnow projections 12-20 and 12-26 (this page); 2016-17 12-16 (facts-gapfill-columbian-cooperspur-2016); 2011-12 01-19
+      (facts-gapfill-columbian-cooperspur-2012); phrase "mid December" (facts-gapfill-skiresortcom-cooperspur), mid = 15.'
+  close_typical:
+    value: 03-15
+    source_id: facts-gapfill-ots-cooperspur
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: OnTheSnow projections 03-14 and 03-29 (this page); phrase "mid March" (facts-gapfill-skiresortcom-cooperspur), mid = 15.'
+  length_days:
+    value: 86
+    source_id: facts-gapfill-ots-cooperspur
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-20 to 03-15)
 - resort_id: crystal-mountain
   open_typical:
     value: "11-25"
@@ -473,6 +629,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  close_typical:
+    value: 04-18
+    source_id: facts-gapfill-ots-diamond
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 5 values: OnTheSnow projections 03-28 and 04-18 (this page); 2026 closed early 03-29 (facts-gapfill-moonshine-diamond-2026); 2018
+      extended to 04-21; 2023 extended to 05-01 (facts-gapfill-diamond-extends-may1).'
+  length_days:
+    value: 136
+    source_id: facts-gapfill-ots-diamond
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-04 to 04-18)
 - resort_id: dodge-ridge-ski-area
   open_typical:
     value: "11-25"
@@ -511,6 +680,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-08
+    source_id: facts-gapfill-ots-donner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-11 (this page); phrase "early December" (facts-gapfill-skiresortcom-donner), early = 05.'
+  close_typical:
+    value: 04-01
+    source_id: facts-gapfill-ots-donner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-28 (this page); phrase "early April" (facts-gapfill-skiresortcom-donner), early = 05.'
+  length_days:
+    value: 115
+    source_id: facts-gapfill-ots-donner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-08 to 04-01)
 - resort_id: eaglecrest-ski-area
   open_typical:
     value: "12-05"
@@ -549,6 +736,25 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 12-20
+    source_id: facts-gapfill-sri-echo-valley
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 phrases: "mid December" (this page), mid = 15, and "late December" (facts-gapfill-hoa-echo-valley), late = 25. Weekends and holidays
+      only.'
+  close_typical:
+    value: 03-01
+    source_id: facts-gapfill-sri-echo-valley
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 phrases: "early March" (this page), early = 05, and "late February" (facts-gapfill-hoa-echo-valley), late = 25.'
+  length_days:
+    value: 72
+    source_id: facts-gapfill-sri-echo-valley
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-20 to 03-01)
 - resort_id: ferguson-ridge-ski-area
   acres:
     value: 170
@@ -562,6 +768,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: infobox 25 ft converted to inches
+  open_typical:
+    value: 12-11
+    source_id: facts-gapfill-fergi-home
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The official site says the season usually runs from "the second Saturday in December" (falls 12-08 to 12-14); taken as 12-11.
+  close_typical:
+    value: 04-04
+    source_id: facts-gapfill-fergi-home
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The official site says the season usually runs "to the first Saturday in April" (falls 04-01 to 04-07); taken as 04-04.
+  length_days:
+    value: 115
+    source_id: facts-gapfill-fergi-home
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-11 to 04-04)
 - resort_id: heavenly
   open_typical:
     value: "11-15"
@@ -601,6 +825,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-26
+    source_id: facts-gapfill-homewood-open-2025
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. 2025-26 opened 12-27 (this page); OnTheSnow projection 12-26 (facts-gapfill-ots-homewood).
+  close_typical:
+    value: 03-19
+    source_id: facts-gapfill-yahoo-homewood-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2026 posted 03-22, actual 03-17 (this page); OnTheSnow projection 03-14 (facts-gapfill-ots-homewood); 2017 extended to 04-16.'
+  length_days:
+    value: 84
+    source_id: facts-gapfill-yahoo-homewood-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-26 to 03-19)
 - resort_id: hoodoo-ski-area
   open_typical:
     value: "11-27"
@@ -620,6 +862,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  close_typical:
+    value: 03-29
+    source_id: facts-gapfill-snowstash-hoodoo
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2025-26 03-29 (this page); OnTheSnow projection 03-28; 2022-23 04-23, one to two weeks later than usual (facts-gapfill-redmond-hoodoo-2023).'
+  length_days:
+    value: 123
+    source_id: facts-gapfill-snowstash-hoodoo
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-27 to 03-29)
 - resort_id: hurricane-ridge
   annual_snowfall_in:
     value: 400
@@ -627,6 +881,25 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-06
+    source_id: facts-gapfill-nps-hurricane-2016
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 seasons: 2016-17 "early December" (this page), early = 05; 2019-20 12-22 (facts-gapfill-sg-hurricane-2019); 2020-21 12-06 (facts-gapfill-sg-hurricane-2020).
+      Weekends and holidays only.'
+  close_typical:
+    value: 03-26
+    source_id: facts-gapfill-nps-hurricane-2016
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 seasons: 2016-17 "late March" (this page), late = 25; 2020-21 03-28 (facts-gapfill-sg-hurricane-2020).'
+  length_days:
+    value: 111
+    source_id: facts-gapfill-nps-hurricane-2016
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-06 to 03-26)
 - resort_id: june-mountain
   open_typical:
     value: "12-19"
@@ -760,6 +1033,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: 'article text: "the largest ski area in interior Alaska, with 750 acres"'
+  open_typical:
+    value: 11-20
+    source_id: facts-gapfill-moose-about
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The resort says it normally opens "in mid to late November"; taken as 11-20.
+  close_typical:
+    value: 03-31
+    source_id: facts-gapfill-moose-about
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The resort says it runs "through end of March".
+  length_days:
+    value: 132
+    source_id: facts-gapfill-moose-about
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-20 to 03-31)
 - resort_id: mount-ashland
   open_typical:
     value: "12-05"
@@ -811,6 +1102,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  close_typical:
+    value: 04-28
+    source_id: facts-gapfill-skirose-info
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. 2023-24 closed 04-28 (this page); 2024-25 closed 04-28 (facts-gapfill-2news-closings-2024 and others); OnTheSnow projection 04-18 (facts-gapfill-ots-mtrose).
+  length_days:
+    value: 172
+    source_id: facts-gapfill-skirose-info
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-08 to 04-28)
 - resort_id: mount-waterman
   acres:
     value: 150
@@ -830,6 +1133,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: 'Wikipedia infobox: 3 chairlifts'
+  open_typical:
+    value: 12-05
+    source_id: facts-gapfill-sri-waterman
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" (general season); early = 05. Natural snow only; some seasons never open.
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill-sri-waterman
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" (general season); late = 25.
+  length_days:
+    value: 111
+    source_id: facts-gapfill-sri-waterman
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-05 to 03-25)
 - resort_id: mountain-high
   acres:
     value: 290
@@ -837,6 +1158,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 11-27
+    source_id: facts-gapfill-ots-mountain-high
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season projection: OnTheSnow projected opening 11-27 for 2026-27.'
+  close_typical:
+    value: 03-28
+    source_id: facts-gapfill-ots-mountain-high
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season projection: OnTheSnow projected closing 03-28 for 2026-27 (150 projected days).'
+  length_days:
+    value: 122
+    source_id: facts-gapfill-ots-mountain-high
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-27 to 03-28)
 - resort_id: mt-bachelor
   open_typical:
     value: "11-15"
@@ -888,6 +1227,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 11-27
+    source_id: facts-gapfill-ots-mt-baldy
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season projection: OnTheSnow projected opening 11-27 for 2026-27.'
+  close_typical:
+    value: 04-04
+    source_id: facts-gapfill-ots-mt-baldy
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season projection: OnTheSnow projected closing 04-04 for 2026-27.'
+  length_days:
+    value: 129
+    source_id: facts-gapfill-ots-mt-baldy
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-27 to 04-04)
 - resort_id: mt-hood-meadows
   open_typical:
     value: "11-26"
@@ -951,6 +1308,13 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-19
+    source_id: facts-gapfill-kobi-shasta-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 seasons: about 2018 12-12; 2020-21 12-26 (facts-gapfill-krcr-shasta-dec26); 2023-24 01-10 (facts-gapfill-anc-shasta-jan10); 2024-25
+      12-11 (this page). Midpoint of the two middle values.'
 - resort_id: mt-spokane
   close_typical:
     value: "04-12"
@@ -970,6 +1334,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-06
+    source_id: facts-gapfill-krem-mtspokane-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2013 11-23 (facts-gapfill-inlander-inw-2013); 2023 mid December Wednesday, about 12-13; 2024 11-29, a week ahead of its
+      scheduled 12-07 (this page); OnTheSnow projection 12-26 (facts-gapfill-ots-mtspokane).'
+  length_days:
+    value: 128
+    source_id: facts-gapfill-krem-mtspokane-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-06 to 04-12)
 - resort_id: northstar
   open_typical:
     value: "11-20"
@@ -1027,6 +1404,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  close_typical:
+    value: 04-20
+    source_id: facts-gapfill-abc7-tahoe-closing-2425
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One scheduled date: projected closing 04-20 on this list; in 2026 the resort closed early on 03-22.'
+  length_days:
+    value: 144
+    source_id: facts-gapfill-abc7-tahoe-closing-2425
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-28 to 04-20)
 - resort_id: sky-tavern
   acres:
     value: 200
@@ -1066,6 +1455,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: From a search result for this page; page not opened. 2022/23 season closed Sunday, April 16, 2023; the 2020/21 season also closed in mid April; one season date
+  open_typical:
+    value: 11-19
+    source_id: facts-gapfill-spectrum-snowvalley-2020
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 seasons: 2020-21 opened 11-16 (this page); 2022-23 opened 11-23 (85th opening day, facts-gapfill-foxla-snowvalley).'
+  length_days:
+    value: 149
+    source_id: facts-gapfill-spectrum-snowvalley-2020
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-19 to 04-16)
 - resort_id: soda-springs
   acres:
     value: 200
@@ -1079,6 +1480,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-05
+    source_id: facts-gapfill-ots-soda
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 12-18 (this page); 2024-25 projected 11-22 (facts-gapfill-abc7-tahoe-opening-2024).'
+  close_typical:
+    value: 04-13
+    source_id: facts-gapfill-abc7-tahoe-closing-2425
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 04-13 on this list; 04-14 (facts-gapfill-anc-tahoe-closing); OnTheSnow projection 03-21 (facts-gapfill-ots-soda).'
+  length_days:
+    value: 130
+    source_id: facts-gapfill-abc7-tahoe-closing-2425
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-05 to 04-13)
 - resort_id: stevens-pass
   open_typical:
     value: "12-08"
@@ -1105,6 +1524,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: From a search result for this page; page not opened. 2026/27 target opening Nov. 27; OpenSnow listed Nov. 21 for 2025/26
+  close_typical:
+    value: 04-12
+    source_id: facts-gapfill-ots-sugarbowl
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 seasons: 2013 04-14 (facts-gapfill-thisisreno-sugarbowl-2013); 2015 03-22 (facts-gapfill-thisisreno-sugarbowl-2015); 2023 extended
+      to 04-23 (facts-gapfill-un-sugarbowl-2023); 2026-27 OnTheSnow projection 04-11 (this page).'
+  length_days:
+    value: 137
+    source_id: facts-gapfill-ots-sugarbowl
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-27 to 04-12)
 - resort_id: summit-west
   open_typical:
     value: "12-12"
@@ -1137,6 +1569,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-12
+    source_id: facts-gapfill-ots-tahoedonner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. 2019-20 opened 12-13 (facts-gapfill-tahoedonner-2019); OnTheSnow projection 12-12 (this page).
+  close_typical:
+    value: 04-05
+    source_id: facts-gapfill-ots-tahoedonner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: OnTheSnow projections 04-04 and 04-05 (this page); 2024-25 closed 04-06 (facts-gapfill-abc7-tahoe-closing-2425).'
+  length_days:
+    value: 115
+    source_id: facts-gapfill-ots-tahoedonner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-12 to 04-05)
 - resort_id: warner-canyon-ski-area
   acres:
     value: 300
@@ -1150,6 +1600,25 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-19
+    source_id: facts-gapfill-kobi-warner-tentative
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2025-26 tentative 12-19 (this page); phrase "mid December" (facts-gapfill-sri-warner), mid = 15; usually opens the final
+      week of December (facts-gapfill-hn-warner-open), about 12-28.'
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill-sri-warner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - late March" (general season); late = 25.
+  length_days:
+    value: 97
+    source_id: facts-gapfill-sri-warner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-19 to 03-25)
 - resort_id: white-pass-ski-area
   open_typical:
     value: "12-04"
@@ -1194,3 +1663,21 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox average snowfall
+  open_typical:
+    value: 12-26
+    source_id: facts-gapfill-snowstash-willamette
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2023-24 01-10 (facts-gapfill-willamette-2324); 2025-26 12-13 (this page); OnTheSnow projection 12-26 (facts-gapfill-ots-willamette).'
+  close_typical:
+    value: 03-29
+    source_id: facts-gapfill-snowstash-willamette
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2024-25 extended to 05-11; 2025-26 03-29 (this page); OnTheSnow projection 03-21 (facts-gapfill-ots-willamette).'
+  length_days:
+    value: 94
+    source_id: facts-gapfill-snowstash-willamette
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-26 to 03-29)

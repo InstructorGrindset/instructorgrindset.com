@@ -212,6 +212,34 @@ async function trailMapChecks(page, label, file, { shotName, via = 'panel', phon
   check(!(await dlg.evaluate((d) => d.open)) && await opener.evaluate((el) => el === document.activeElement), `${label}: the close button closes it and focus returns`);
 }
 
+// Imagery never gates readiness: tiles that hang or fail still give a working map on the dark base.
+async function imageryOutage(browser, base) {
+  log('\nImagery outage (tiles hang, then fail)');
+  for (const mode of ['hang', 'fail']) {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    await ctx.route(/basemap\.nationalmap\.gov\//, (route) => (mode === 'fail' ? route.abort('failed') : undefined));
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto(`${base}/map/${Q}`);
+    await ready(page);
+    const t0 = Date.now();
+    await page.waitForFunction(() => window.__careerMap.mapCtl && window.__careerMap.mapCtl.ready && !document.getElementById('map-start'), null, { timeout: 15000 })
+      .catch(() => {});
+    const st = await page.evaluate(() => {
+      const c = window.__careerMap.mapCtl;
+      return { ready: c.ready, button: Boolean(document.getElementById('map-start')), preview: document.querySelectorAll('.map-preview').length,
+        resorts: c.map.queryRenderedFeatures({ layers: ['resorts'] }).length, mlLoaded: c.map.loaded() };
+    });
+    check(st.ready && !st.button && st.preview === 0 && st.resorts > 0,
+      `imagery ${mode}: the map is ready in ${Date.now() - t0} ms after the click and the data layers draw (${st.resorts} resorts)`);
+    if (mode === 'hang') check(!st.mlLoaded, 'imagery hang: readiness does not wait for MapLibre load (tiles still pending)');
+    check(errors.length === 0, `imagery ${mode}: no page errors${errors.length ? ` (${errors.join('; ')})` : ''}`);
+    if (mode === 'hang') await page.screenshot({ path: path.join(SHOTS, 'desktop-00b-imagery-hang.png') });
+    await ctx.close();
+  }
+}
+
 async function desktop(browser, base) {
   log('\nDesktop 1280x800, fixtures via ?data=');
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
@@ -1073,6 +1101,7 @@ try {
   stubRoot = makeStubSite();
   servers.push(await serve(stubRoot, 8812));
 
+  await imageryOutage(browser, 'http://127.0.0.1:8811');
   await desktop(browser, 'http://127.0.0.1:8811');
   await desktopStub(browser, 'http://127.0.0.1:8812');
   await phone(browser, 'http://127.0.0.1:8812');

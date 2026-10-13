@@ -458,6 +458,25 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 12-12
+    source_id: facts-gapfill-snowstash-angelfire
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2021-22 12-10 (facts-gapfill-ladp-angelfire-2021); 2022-23 12-16 (facts-gapfill-ladp-angelfire-2022); 2025-26 12-13 (this
+      page); OnTheSnow projection 12-11.'
+  close_typical:
+    value: 03-20
+    source_id: facts-gapfill-snowstash-angelfire
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2021-22 03-20; 2022-23 03-19; 2025-26 03-22 (this page); OnTheSnow projection 03-21.'
+  length_days:
+    value: 99
+    source_id: facts-gapfill-snowstash-angelfire
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-12 to 03-20)
 - resort_id: arapahoe-basin
   open_typical:
     value: "10-22"
@@ -490,6 +509,13 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 11-20
+    source_id: facts-gapfill-tgr-snowbowl-2025
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 seasons: 2023-24 11-21 (facts-gapfill-tgr-snowbowl-nov21); 2024-25 11-08, earliest ever (facts-gapfill-abc15-snowbowl-2024); 2025-26
+      11-20 (this page).'
 - resort_id: aspen-highlands
   open_typical:
     value: "12-13"
@@ -560,6 +586,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox. Cites Ski Utah.
+  open_typical:
+    value: 12-23
+    source_id: facts-gapfill-snowstash-beaver
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: 2025-26 12-20 (this page); OnTheSnow projection 12-26 for 2026-27 (facts-gapfill-ots-beaver). Natural snow only.'
+  close_typical:
+    value: 03-29
+    source_id: facts-gapfill-snowstash-beaver
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2025-26 03-29 (this page); OnTheSnow projections 03-28 (2026-27) and 04-05 (2025-26).'
+  length_days:
+    value: 97
+    source_id: facts-gapfill-snowstash-beaver
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-23 to 03-29)
 - resort_id: breckenridge
   open_typical:
     value: "11-07"
@@ -661,6 +705,25 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox. Cites Ski Utah.
+  open_typical:
+    value: 12-14
+    source_id: facts-gapfill-skiutah-cherry-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2019-20 12-20 (facts-gapfill-sin-cherry-2019); 2022-23 12-08 (this page); 2024-25 12-26 (facts-gapfill-visitutah-cherry);
+      phrase "late November" (facts-gapfill-sri-cherry), late = 25.'
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill-sri-cherry
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "late November - late March" (general season); late = 25.
+  length_days:
+    value: 102
+    source_id: facts-gapfill-sri-cherry
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-14 to 03-25)
 - resort_id: copper-mountain
   open_typical:
     value: "11-07"
@@ -764,6 +827,19 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox. The Colorado comparison table gives 225; the resort stats page it cites is titled 300 inches of snow annually.
+  close_typical:
+    value: 04-16
+    source_id: facts-gapfill-un-eldora-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 scheduled closings: 2026 set for 04-19 before an early 04-05 close (this page); 2023-24 scheduled 04-14, then extended to 04-21
+      (facts-gapfill-denver7-eldora-2024).'
+  length_days:
+    value: 149
+    source_id: facts-gapfill-un-eldora-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-19 to 04-16)
 - resort_id: granby-ranch
   close_typical:
     value: "03-30"
@@ -783,6 +859,19 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Comparison table row. No statistics date given.
+  open_typical:
+    value: 12-09
+    source_id: facts-gapfill-granby-2023
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 seasons: 2021-22 12-11 (facts-gapfill-granby-2021); 2022-23 12-10 (facts-gapfill-granby-2022); 2023-24 12-09 (this page); 2025-26
+      11-26 (facts-gapfill-dg-granby-2025). Midpoint of the two middle values, rounded down.'
+  length_days:
+    value: 112
+    source_id: facts-gapfill-granby-2023
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-09 to 03-30)
 - resort_id: hesperus-ski-area
   acres:
     value: 60
@@ -796,6 +885,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 12-27
+    source_id: facts-gapfill-dirco-hesperus
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season: listed opening 12-27 for 2025-26.'
+  close_typical:
+    value: 03-15
+    source_id: facts-gapfill-dirco-hesperus
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season: listed closing 03-15 for 2026; the Durango Herald says the area usually targets mid March for closing.'
+  length_days:
+    value: 79
+    source_id: facts-gapfill-dirco-hesperus
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-27 to 03-15)
 - resort_id: howelsen-hill
   open_typical:
     value: "11-30"
@@ -860,6 +967,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox. Loveland ski area figure.
+  open_typical:
+    value: 10-29
+    source_id: facts-gapfill-loveland-dates
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The ski area's history page gives a 5 year average opening of October 29 (40 year average about October 21).
+  close_typical:
+    value: 05-08
+    source_id: facts-gapfill-loveland-dates
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The ski area's history page gives a 5 year average closing of May 8 (40 year average about May 6).
+  length_days:
+    value: 186
+    source_id: facts-gapfill-loveland-dates
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The ski area's history page gives a 5 year average season of 186 days (40 year average about 198).
 - resort_id: loveland-valley-ski-area
   annual_snowfall_in:
     value: 422
@@ -880,6 +1005,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Comparison table row. Statistics updated May 2026. The Monarch article infobox gives 400.
+  open_typical:
+    value: 11-29
+    source_id: facts-gapfill-krdo-monarch-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2020 11-27 (facts-gapfill-csc-monarch-nov27); 2022-23 12-01 (this page); 2024-25 11-22; OnTheSnow projection 12-04 (facts-gapfill-ots-monarch).'
+  close_typical:
+    value: 04-09
+    source_id: facts-gapfill-krdo-monarch-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: 2024 closing extended to 04-21 (this page); OnTheSnow projection 03-28 for 2026-27 (facts-gapfill-ots-monarch).'
+  length_days:
+    value: 132
+    source_id: facts-gapfill-krdo-monarch-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-29 to 04-09)
 - resort_id: mount-lemmon-ski-valley
   acres:
     value: 200
@@ -893,6 +1036,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 12-15
+    source_id: facts-gapfill-sri-lemmon
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" (general season); mid = 15.
+  close_typical:
+    value: 03-15
+    source_id: facts-gapfill-sri-lemmon
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" (general season); mid = 15.
+  length_days:
+    value: 91
+    source_id: facts-gapfill-sri-lemmon
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-15 to 03-15)
 - resort_id: nordic-valley-resort-wolf-mountain
   acres:
     value: 100
@@ -906,6 +1067,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Wolf Mountain (formerly Nordic Valley) article infobox.
+  open_typical:
+    value: 12-06
+    source_id: facts-gapfill-visitutah-nordic
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 seasons: 2018-19 12-05 (facts-gapfill-visitogden-nordic-2018); 2024-25 12-06 (this page); 2025-26 anticipated 01-11 (facts-gapfill-ots-nordic).'
+  close_typical:
+    value: 03-28
+    source_id: facts-gapfill-sltrib-utah-2021
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2021 last day 03-28 (this page); 2024 possibly 03-24 (facts-gapfill-sltrib-nordic-2024); OnTheSnow projection 03-29 (facts-gapfill-ots-nordic).'
+  length_days:
+    value: 113
+    source_id: facts-gapfill-sltrib-utah-2021
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-06 to 03-28)
 - resort_id: pajarito-mountain
   open_typical:
     value: "12-25"
@@ -988,6 +1167,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 12-04
+    source_id: facts-gapfill-kkco-powderhorn-2025
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2023-24 11-24 (facts-gapfill-dirco-powderhorn); 2025-26 Friday 12-05 (this page); OnTheSnow projection 12-04 (facts-gapfill-ots-powderhorn).'
+  close_typical:
+    value: 04-03
+    source_id: facts-gapfill-kjct-powderhorn-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2021-22 04-03 (this page); 2023-24 04-14 (facts-gapfill-dirco-powderhorn); OnTheSnow projection 03-21 (facts-gapfill-ots-powderhorn).'
+  length_days:
+    value: 121
+    source_id: facts-gapfill-kjct-powderhorn-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-04 to 04-03)
 - resort_id: purgatory-resort
   acres:
     value: 1650
@@ -1001,6 +1198,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 11-25
+    source_id: facts-gapfill-sin-purgatory-60
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values for 2025-26: 11-28 (this page) and 11-22 (facts-gapfill-snowstash-purgatory). 2024-25 was planned from 11-16.'
+  close_typical:
+    value: 04-05
+    source_id: facts-gapfill-snowstash-purgatory
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season: 2025-26 daily operations planned through 04-05 (this page). 2024-25 was planned through 04-13.'
+  length_days:
+    value: 132
+    source_id: facts-gapfill-snowstash-purgatory
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-25 to 04-05)
 - resort_id: red-river-ski-area
   acres:
     value: 209
@@ -1014,6 +1229,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Comparison table row. Statistics updated November 2021.
+  open_typical:
+    value: 11-26
+    source_id: facts-gapfill-redriver-1718
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2017-18 11-22 (this page); 2024-25 11-27 (facts-gapfill-abqj-nm-2024); OnTheSnow projection 11-26 (facts-gapfill-ots-redriver).'
+  close_typical:
+    value: 03-21
+    source_id: facts-gapfill-ots-redriver
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One season projection: OnTheSnow projected closing 03-21 for 2026-27.'
+  length_days:
+    value: 116
+    source_id: facts-gapfill-ots-redriver
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-26 to 03-21)
 - resort_id: sandia-peak-ski-area
   acres:
     value: 200
@@ -1027,6 +1260,25 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 12-20
+    source_id: facts-gapfill-snowstash-sandia
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2024-25 official opening 12-28 (facts-gapfill-abqj-nm-2024); 2025-26 12-20 (this page); OnTheSnow projection 12-11 (facts-gapfill-ots-sandia).'
+  close_typical:
+    value: 02-23
+    source_id: facts-gapfill-snowstash-sandia
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2024-25 suspended 02-04; 2025-26 02-23 (this page); OnTheSnow projection 03-21 (facts-gapfill-ots-sandia). Short natural
+      snow seasons.'
+  length_days:
+    value: 66
+    source_id: facts-gapfill-snowstash-sandia
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-20 to 02-23)
 - resort_id: sipapu-ski-and-summer-resort
   open_typical:
     value: "11-21"
@@ -1059,6 +1311,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Comparison table row. Statistics updated November 2021 from the resort history and stats page.
+  open_typical:
+    value: 11-25
+    source_id: facts-gapfill-skiapache-faq
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The resort FAQ says the season typically opens "in late November"; late = 25.
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill-skiapache-faq
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. The resort FAQ says the season typically concludes "in late March"; late = 25.
+  length_days:
+    value: 121
+    source_id: facts-gapfill-skiapache-faq
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-25 to 03-25)
 - resort_id: ski-cloudcroft
   acres:
     value: 74
@@ -1072,6 +1342,24 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 12-15
+    source_id: facts-gapfill-skiresortcom-cloudcroft
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - early March" (general season); mid = 15. Operates only in good snow years.
+  close_typical:
+    value: 03-05
+    source_id: facts-gapfill-skiresortcom-cloudcroft
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - early March" (general season); early = 05.
+  length_days:
+    value: 81
+    source_id: facts-gapfill-skiresortcom-cloudcroft
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-15 to 03-05)
 - resort_id: ski-cooper
   open_typical:
     value: "12-10"
@@ -1104,6 +1392,12 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  open_typical:
+    value: 11-23
+    source_id: facts-gapfill-skisantafe-2025
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 seasons: 2023-24 11-23; 2024-25 11-23; 2025-26 11-29 (this page).'
 - resort_id: snowbasin
   open_typical:
     value: "11-25"
@@ -1218,6 +1512,19 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox.
+  close_typical:
+    value: 03-30
+    source_id: facts-gapfill-snowstash-sundance
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2022-23 04-02 (facts-gapfill-un-utah-closing-2023); 2024-25 planned 04-06 (facts-gapfill-yahoo-utah-closing-2025); 2025-26
+      03-28 (this page); OnTheSnow projection 03-28.'
+  length_days:
+    value: 118
+    source_id: facts-gapfill-snowstash-sundance
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-03 to 03-30)
 - resort_id: sunlight-mountain-resort
   close_typical:
     value: "04-06"
@@ -1237,6 +1544,19 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox. The comparison table gives 252.
+  open_typical:
+    value: 12-11
+    source_id: facts-gapfill-dirco-sunlight
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: 2023-24 12-08 (this page); 2024-25 official launch 12-13 (facts-gapfill-pi-sunlight-2024); an earlier season 12-11 (facts-gapfill-sopris-sunlight);
+      OnTheSnow projection 12-12.'
+  length_days:
+    value: 117
+    source_id: facts-gapfill-dirco-sunlight
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-11 to 04-06)
 - resort_id: sunrise-park-resort
   open_typical:
     value: "11-25"
@@ -1338,3 +1658,23 @@ records:
     as_of: "2026-10-13"
     confidence: estimated
     note: Article infobox. The comparison table also gives 430.
+  open_typical:
+    value: 11-11
+    source_id: facts-gapfill-9news-wolfcreek-2023
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2023-24 lifts started 11-11 (this page); 2024-25 opened 10-22 (facts-gapfill-9news-wolfcreek-2024); OnTheSnow projection
+      11-21 (facts-gapfill-ots-wolfcreek).'
+  close_typical:
+    value: 04-17
+    source_id: facts-gapfill-pagosasun-wolfcreek-easter
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: closing on Easter Sunday 04-17 (this page); 2018-19 Easter Sunday 04-21; OnTheSnow projection 04-04. The area usually closes
+      around Easter.'
+  length_days:
+    value: 158
+    source_id: facts-gapfill-pagosasun-wolfcreek-easter
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-11 to 04-17)
