@@ -288,14 +288,29 @@
      "status": "computed",
      "assumptions": [
       {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
        "key": "hours_per_week",
-       "label": "Hours per week",
+       "label": "Hours per week, standard full time",
        "value": 40
       },
       {
        "key": "season_months",
-       "label": "Season months",
+       "label": "Season months, from the sourced season length",
        "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
       },
       {
        "key": "weeks_per_month",
@@ -303,34 +318,29 @@
        "value": 4.33
       },
       {
-       "key": "pay_hourly_top_usd",
-       "label": "Top of the posted wage scale (USD per hour)",
-       "value": 32.5
-      },
-      {
-       "key": "pay_hourly_bottom_usd",
-       "label": "Bottom of the posted wage scale (USD per hour)",
-       "value": 21
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month (USD)",
+       "label": "Average rent per month",
        "value": 1150
       },
       {
-       "key": "tips_season_usd",
-       "label": "Season tips",
+       "key": "tax",
+       "label": "Savings are before tax",
        "value": null
       },
       {
        "key": "rent_basis",
        "label": "Rent basis",
-       "value": "employee_housing"
+       "value": "employee_housing_mean:alpha-staff-village,alpha-town-lease"
       },
       {
        "key": "rent_source_id",
        "label": "Rent source",
-       "value": "fixture-resort-site"
+       "value": "fixture-resort-site, fixture-survey"
       }
      ]
     },
@@ -601,14 +611,29 @@
      "status": "assumptions_unset",
      "assumptions": [
       {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
        "key": "hours_per_week",
-       "label": "Hours per week",
+       "label": "Hours per week, standard full time",
        "value": null
       },
       {
        "key": "season_months",
-       "label": "Season months",
+       "label": "Season months, from the sourced season length",
        "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
       },
       {
        "key": "weeks_per_month",
@@ -616,23 +641,18 @@
        "value": 4.33
       },
       {
-       "key": "pay_hourly_top_usd",
-       "label": "Top of the posted wage scale (USD per hour)",
-       "value": 32.5
-      },
-      {
-       "key": "pay_hourly_bottom_usd",
-       "label": "Bottom of the posted wage scale (USD per hour)",
-       "value": 21
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month (USD)",
+       "label": "Average rent per month",
        "value": 1150
       },
       {
-       "key": "tips_season_usd",
-       "label": "Season tips",
+       "key": "tax",
+       "label": "Savings are before tax",
        "value": null
       }
      ]
@@ -838,14 +858,29 @@
      "status": "insufficient_data",
      "assumptions": [
       {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
        "key": "hours_per_week",
-       "label": "Hours per week",
+       "label": "Hours per week, standard full time",
        "value": 40
       },
       {
        "key": "season_months",
-       "label": "Season months",
+       "label": "Season months, from the sourced season length",
        "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
       },
       {
        "key": "weeks_per_month",
@@ -853,23 +888,18 @@
        "value": 4.33
       },
       {
-       "key": "pay_hourly_top_usd",
-       "label": "Top of the posted wage scale (USD per hour)",
-       "value": 32.5
-      },
-      {
-       "key": "pay_hourly_bottom_usd",
-       "label": "Bottom of the posted wage scale (USD per hour)",
-       "value": 21
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month (USD)",
+       "label": "Average rent per month",
        "value": 1150
       },
       {
-       "key": "tips_season_usd",
-       "label": "Season tips",
+       "key": "tax",
+       "label": "Savings are before tax",
        "value": null
       }
      ]
@@ -1319,14 +1349,29 @@
      "status": "computed",
      "assumptions": [
       {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
        "key": "hours_per_week",
-       "label": "Hours per week",
+       "label": "Hours per week, standard full time",
        "value": 40
       },
       {
        "key": "season_months",
-       "label": "Season months",
+       "label": "Season months, from the sourced season length",
        "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
       },
       {
        "key": "weeks_per_month",
@@ -1334,23 +1379,18 @@
        "value": 4.33
       },
       {
-       "key": "pay_hourly_top_usd",
-       "label": "Top of the posted wage scale (USD per hour)",
-       "value": 32.5
-      },
-      {
-       "key": "pay_hourly_bottom_usd",
-       "label": "Bottom of the posted wage scale (USD per hour)",
-       "value": 21
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month (USD)",
+       "label": "Average rent per month",
        "value": 1150
       },
       {
-       "key": "tips_season_usd",
-       "label": "Season tips",
+       "key": "tax",
+       "label": "Savings are before tax",
        "value": null
       },
       {
@@ -1733,14 +1773,29 @@
      "status": "insufficient_data",
      "assumptions": [
       {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
        "key": "hours_per_week",
-       "label": "Hours per week",
+       "label": "Hours per week, standard full time",
        "value": 40
       },
       {
        "key": "season_months",
-       "label": "Season months",
+       "label": "Season months, from the sourced season length",
        "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
       },
       {
        "key": "weeks_per_month",
@@ -1748,23 +1803,18 @@
        "value": 4.33
       },
       {
-       "key": "pay_hourly_top_usd",
-       "label": "Top of the posted wage scale (USD per hour)",
-       "value": 32.5
-      },
-      {
-       "key": "pay_hourly_bottom_usd",
-       "label": "Bottom of the posted wage scale (USD per hour)",
-       "value": 21
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month (USD)",
+       "label": "Average rent per month",
        "value": 1150
       },
       {
-       "key": "tips_season_usd",
-       "label": "Season tips",
+       "key": "tax",
+       "label": "Savings are before tax",
        "value": null
       }
      ]

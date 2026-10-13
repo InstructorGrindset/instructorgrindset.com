@@ -470,19 +470,22 @@ export function createPanel(root, index, {
     // rent_source_id is its source.
     const basis = l.assumptions.find((a) => a.key === 'rent_basis' && a.value != null);
     const basisSource = l.assumptions.find((a) => a.key === 'rent_source_id' && a.value != null);
-    const listed = l.assumptions.filter((a) => a.key !== 'rent_basis' && a.key !== 'rent_source_id');
+    // rent_basis and rent_source_id show as the "Rent used" line; season_months_basis is in the season months label.
+    const listed = l.assumptions.filter((a) => !['rent_basis', 'rent_source_id', 'season_months_basis'].includes(a.key));
+    // Statements carry their meaning in the label (owner decision 4): tips not included yet, savings before tax.
+    const statement = (a) => a.key === 'tax' || (a.key.startsWith('tips') && (a.value == null || a.value === 0));
     if (basis) {
       body.push(h('p', { class: 'fact-meta' },
         h('span', { class: 'rent-used', dataset: { source: String(basis.value) } }, rentUsedText(String(basis.value), currentDetail)),
-        basisSource ? [' ', sourceLink(String(basisSource.value))] : null));
+        basisSource ? String(basisSource.value).split(',').map((id, i) => [i ? ', ' : ' ', sourceLink(id.trim())]) : null));
     }
     if (listed.length) {
       body.push(h('p', { class: 'sub' }, 'Assumptions'),
         h('ul', { class: 'assumptions' }, listed.map((a) => h('li', null,
-          h('span', null, a.label), ' ',
-          a.value == null || (a.key.startsWith('tips') && a.value === 0)
-            ? h('span', { class: 'not-verified' }, a.key.startsWith('tips') ? 'Tips are not included yet' : 'Not set yet')
-            : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))))));
+          statement(a)
+            ? h('span', { class: 'assumption-statement' }, a.key.startsWith('tips') && !/not included/i.test(a.label) ? 'Tips are not included yet' : a.label)
+            : [h('span', null, a.label), ' ', a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet')
+              : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))]))));
     }
     return h('div', null, body);
   }
@@ -653,7 +656,7 @@ export function createPanel(root, index, {
     if (value === 'fmr_studio') return 'Rent used: HUD Fair Market Rent for a studio in the county.';
     if (value === 'fmr_one_br') return 'Rent used: HUD Fair Market Rent for one bedroom in the county.';
     if (value === 'acs_median') return 'Rent used: Census ACS median gross rent in the county.';
-    if (value === 'employee_housing' || value === 'employee_housing_mean' || value === 'employee_housing_average') {
+    if (value === 'employee_housing' || value.startsWith('employee_housing_mean')) {
       return 'Rent used: the average of the employee housing rents listed for this resort.';
     }
     if (!value.startsWith('employee_housing:')) return `Rent used: ${humanize(value)}.`;

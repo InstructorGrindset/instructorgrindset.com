@@ -423,10 +423,10 @@ async function desktop(browser, base) {
   const lucText = await luc.innerText();
   check(lucText.includes('$8,900') && lucText.includes('At the top of the posted wage scale') && lucText.includes('Range $3,200 at the bottom of the scale to $8,900 at the top'),
     'lucrativeness headline is the top of scale figure with the bottom to top range');
-  check(await page.locator('.assumptions li').count() === 7, 'lucrativeness lists the new assumptions');
+  check(await page.locator('.assumptions li').count() === 8, 'lucrativeness lists the new assumptions (basis keys stay out)');
   const assumptions = (await page.locator('.assumptions').innerText()).replace(/\s+/g, ' ');
-  check(assumptions.includes('Hours per week 40') && assumptions.includes('$32.50') && assumptions.includes('$1,150') && assumptions.includes('4.33')
-    && assumptions.includes('Tips are not included yet'), `assumption values formatted, tips note shown (${assumptions.replace(/\n/g, ' | ')})`);
+  check(assumptions.includes('Hours per week, standard full time 40') && assumptions.includes('$32.50') && assumptions.includes('$1,150') && assumptions.includes('4.33')
+    && assumptions.includes('Tips are not included yet') && assumptions.includes('Savings are before tax') && !assumptions.includes('Not set yet'), `assumption values formatted, tips note shown (${assumptions.replace(/\n/g, ' | ')})`);
   check((await luc.locator('.rent-used').innerText()) === 'Rent used: the average of the employee housing rents listed for this resort.', 'average rent basis explained');
   await shot(page, 'desktop-04b-career.png');
   check((await page.locator('.pay-table tr[data-level="level_3"]').innerText()).includes('Range from 4 reports')
@@ -467,7 +467,7 @@ async function desktop(browser, base) {
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).innerText()).includes('Synthetic note: full time staff only.'), 'eligibility note renders');
   check(await page.locator('.housing .facts .fact', { hasText: 'HUD FMR' }).count() === 3 && await page.locator('.housing .fact', { hasText: 'ACS median gross rent' }).locator('.badge-estimated').count() === 1, 'rent baseline with badges');
   check((await page.locator('.rent-used').innerText()) === 'Rent used: the average of the employee housing rents listed for this resort.'
-    && await page.locator('.rent-used + a.src-link', { hasText: 'Synthetic fixture: resort facts' }).count() === 1, 'lucrativeness says which rent was used, with its source');
+    && await page.locator('.rent-used ~ a.src-link').count() === 2, 'lucrativeness says which rent was used, with its sources');
   check(await page.locator('.assumptions li', { hasText: 'Rent basis' }).count() === 0, 'rent basis keys stay out of the assumption list');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).locator('.fact', { hasText: 'Address' }).innerText()).includes('1 Fixture Way, Fixture Town'), 'building site shows its sourced address');
   await page.locator('.site-select', { hasText: 'Fixture Town Lease' }).click();
@@ -908,11 +908,12 @@ async function realData(browser, base) {
     const geoAll = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'map-index.json'), 'utf8'));
     const akCount = geoAll.resorts.filter((r) => r[geoAll.fields.indexOf('state')] === 'AK').length;
     if (akCount) {
-      const ins = await page.evaluate(() => {
+      const ins = await page.evaluate(async () => {
+        const { insetFrameBounds } = await import('/map/js/inset.js');
         const m = window.__careerMap.mapCtl.map;
         const q = (layers) => m.queryRenderedFeatures({ layers });
         const inset = q(['inset-resorts', 'inset-resorts-facility']);
-        const frame = m.getSource('inset-frame')._data.features[0].geometry.coordinates;
+        const frame = insetFrameBounds();
         const cont = m.getContainer().getBoundingClientRect();
         const pts = inset.map((f) => m.project(f.geometry.coordinates));
         const fr = frame.map((c) => m.project(c));
@@ -921,7 +922,9 @@ async function realData(browser, base) {
           mainAK: q(['resorts', 'resorts-facility']).filter((f) => f.properties.state === 'AK').length,
           states: [...new Set(q(['states-fill']).map((f) => f.properties.code))],
           insetState: q(['inset-states-fill']).length,
-          lowerLeft: pts.every((p) => p.x < cont.width * 0.35 && p.y > cont.height * 0.5),
+          lowerLeft: (fr[0].x + fr[1].x) / 2 < cont.width * 0.5
+            && pts.every((p) => p.x >= Math.min(fr[0].x, fr[1].x) && p.x <= Math.max(fr[0].x, fr[1].x) && p.y >= Math.min(fr[0].y, fr[1].y) && p.y <= Math.max(fr[0].y, fr[1].y))
+            && Math.min(fr[0].y, fr[1].y) > m.project([-120, 33]).y,
           inView: fr.every((p) => p.x >= 0 && p.y >= 0 && p.x <= cont.width && p.y <= cont.height),
           first: inset[0] && { id: inset[0].properties.id, ll: inset[0].geometry.coordinates },
         };

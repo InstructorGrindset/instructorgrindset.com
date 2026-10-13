@@ -92,14 +92,16 @@ SEASON_LENGTH = {"alpha-peak": 150, "bravo-bowl": 138, "charlie-hill": 120, "ech
 LEVELS = ["none", "level_1", "level_2", "level_3", "trainer", "examiner"]
 COMPONENTS = ["cert_pay_differential", "paid_training_hours", "examiner_trainer_presence",
               "private_lesson_share", "year_round_staff", "clinic_access"]
-ASSUMPTIONS = [  # owner decision 4 keys and labels as the pipeline emits them; values synthetic
-    ("hours_per_week", "Hours per week", 40),
-    ("season_months", "Season months", 4.93),
+ASSUMPTIONS = [  # owner decision 4 keys and labels per docs/map/ARCHITECTURE.md; values synthetic
+    ("wage_top_usd", "Top of the posted wage scale, per hour", 32.5),
+    ("wage_bottom_usd", "Bottom of the posted wage scale, per hour", 21),
+    ("hours_per_week", "Hours per week, standard full time", 40),
+    ("season_months", "Season months, from the sourced season length", 4.93),
+    ("season_months_basis", "Season months basis", "season_length"),
     ("weeks_per_month", "Weeks per month", 4.33),
-    ("pay_hourly_top_usd", "Top of the posted wage scale (USD per hour)", 32.5),
-    ("pay_hourly_bottom_usd", "Bottom of the posted wage scale (USD per hour)", 21),
-    ("rent_monthly_usd", "Average rent per month (USD)", 1150),
-    ("tips_season_usd", "Season tips", None),
+    ("tips_season_usd", "Tips are not included yet", None),
+    ("rent_monthly_usd", "Average rent per month", 1150),
+    ("tax", "Savings are before tax", None),
 ]
 OPERATOR_SCALE = {"alpha-peak": 3, "foxtrot-basin": 2, "hotel-lake": 1}
 ACCESS = {
@@ -151,7 +153,7 @@ def career_data():
         "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
-                       "professionalism": prof(72), "lucrativeness": lucr(3200, 8900, 8900, rent_source=("employee_housing", "fixture-resort-site")),
+                       "professionalism": prof(72), "lucrativeness": lucr(3200, 8900, 8900, rent_source=("employee_housing_mean:alpha-staff-village,alpha-town-lease", "fixture-resort-site, fixture-survey")),
                        "stale_fields": ["pay.level_1", "private_split", "professionalism.clinic_access"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
                        "professionalism": prof(None, "weights_unset"), "lucrativeness": lucr(None, None, None, "assumptions_unset"),
