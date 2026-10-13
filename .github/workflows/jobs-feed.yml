@@ -1,0 +1,54 @@
+# Daily live job postings for the Career Map (pipeline/jobs_feed.py, docs/map/ARCHITECTURE.md "Webcams and jobs").
+# Reads only public job board APIs (Greenhouse, Lever, SmartRecruiters, Workable, Ashby) for employers whose
+# data/raw/jobs record sets ats.board, and commits data/build/jobs/postings.json only when it changed.
+#
+# Scheduled runs happen only once this file is on the repository's default branch; before that, run it from the
+# Actions tab (workflow_dispatch) on any branch. It uses the default GITHUB_TOKEN; no secret is needed.
+name: Jobs feed
+
+on:
+  schedule:
+    - cron: "41 12 * * *"   # daily, 12:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit postings.json
+  pages: write      # ask GitHub Pages to rebuild after that commit
+
+concurrency:
+  group: jobs-feed
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the pipeline requirements
+        run: pip install -r requirements.txt
+      - name: Fetch open postings from public job boards
+        run: python -m pipeline.jobs_feed fetch
+      - name: Commit postings.json when it changed
+        id: commit
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- data/build/jobs/postings.json)" ]; then
+            echo "postings.json is unchanged; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/build/jobs/postings.json
+          git commit -m "Jobs feed: update open postings"
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+      - name: Ask GitHub Pages to rebuild
+        if: steps.commit.outputs.pushed == 'true'
+        continue-on-error: true   # a push by GITHUB_TOKEN may already trigger the build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" --silent

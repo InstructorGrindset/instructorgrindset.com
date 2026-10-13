@@ -1,0 +1,72 @@
+# Pay follow ups (ROADMAP Section 8, item 7), researched 2026-10-13.
+# Resort sites, the DOL seasonal jobs site, CoolWorks and Workday were blocked from this
+# environment, so every row below comes from a search result that names its page. Those rows are
+# `estimated` and carry the note "From a search result for this page; page not opened".
+#
+# Leads with no published instructor wage found (no row written):
+# * killington: searches of killington.com/employment, the POWDR Workday board, CoolWorks and the
+#   PSIA-AASI job board showed only the general pay policy ("starting pay depends on the position and
+#   previous experience") and a Mountain Sports Supervisor salary, never an instructor hourly rate.
+# * gunstock: Gunstock postings for 2025/26 part time, full time and Nordic instructors showed no
+#   pay figure; only non instruction roles (lift operator, custodian) list wages.
+# * burke: the Burke Mountain ski and ride instructor listing showed duties and no pay rate.
+batch: pay-followups-2026-10
+researched_date: 2026-10-13
+sources:
+  - id: pay-followups-bigsky-dol-2425
+    url: https://seasonaljobs.dol.gov/jobs/H-400-24196-195059
+    title: SeasonalJobs.dol.gov H-2B job order H-400-24196-195059, Mountain Sports Instructor and Trainer, Big Sky Resort (Boyne USA, Inc.)
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened. The result marks the job order inactive.
+  - id: pay-followups-bigsky-dol-2324
+    url: https://seasonaljobs.dol.gov/jobs/H-400-23213-228458
+    title: SeasonalJobs.dol.gov H-2B job order H-400-23213-228458, Mountain Sports Instructor and Trainer, Big Sky Resort (Boyne USA, Inc.), 10/30/2023 to 4/30/2024
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+  - id: pay-followups-woodward-pc-coach-2627
+    url: https://powdr.wd12.myworkdayjobs.com/POWDR_Careers/job/Woodward-Park-City/Ski-Snowboarding-Coach-Winter-26-27-Woodward-Park-City_JR6518
+    title: POWDR Careers, Ski / Snowboarding Coach, Winter 26/27, Woodward Park City (JR6518)
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened. The result dates the posting July 2026.
+  - id: pay-followups-schweitzer-ski-instructor
+    url: https://jobs.alterramtnco.com/schweitzer-mountain-resort/job/ski-instructor-winter-season/129597477014643398
+    title: Schweitzer Mountain Resort, Ski Instructor, Winter Season (jobs.alterramtnco.com)
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+records:
+  - resort_id: big-sky
+    season: 2024-25
+    cert_level: unspecified
+    hourly_low: 20.92
+    hourly_high: 58.00
+    confidence: estimated
+    source_id: pay-followups-bigsky-dol-2425
+    verified_date: 2026-10-13
+    note: From a search result for this page; page not opened. H-2B job order for 10 full time Mountain Sports Instructor and Trainer roles; requires 18 months of experience and a current ISIA stamp. Gratuity eligible. Season read as 2024-25 from the 2024 case number. No 2026-27 Big Sky Resort posting with a wage was found.
+  - resort_id: big-sky
+    season: 2023-24
+    cert_level: unspecified
+    hourly_low: 18.61
+    hourly_high: 52.00
+    confidence: estimated
+    source_id: pay-followups-bigsky-dol-2324
+    verified_date: 2026-10-13
+    note: From a search result for this page; page not opened. H-2B job order for Mountain Sports Instructor and Trainer, 10/30/2023 to 4/30/2024, 35 hours per week, overtime 27.92 to 76.50. Gratuity eligible.
+  - resort_id: woodward-park-city
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 18.00
+    hourly_high: 18.00
+    confidence: estimated
+    source_id: pay-followups-woodward-pc-coach-2627
+    verified_date: 2026-10-13
+    note: From a search result for this page; page not opened. Ski and snowboard coach posting for Winter 26/27 with an $18 minimum plus facility access; PSIA, AASI or USASA certification preferred. The result did not state the pay unit; read as hourly. No separate instructor posting with pay was found.
+  - resort_id: schweitzer
+    season: 2026-27
+    cert_level: unspecified
+    hourly_low: 19.00
+    hourly_high: 45.00
+    confidence: estimated
+    source_id: pay-followups-schweitzer-ski-instructor
+    verified_date: 2026-10-13
+    note: From a search result for this page; page not opened. Wage range $19.00 to $45.00 per hour based on certification and lesson type, full or part time seasonal. The result did not name the season; read as 2026-27 because it appeared beside 2026-27 postings in October 2026. Found while researching item 6, outside the five leads.

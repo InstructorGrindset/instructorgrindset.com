@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T15:07:49Z",
+  "generated_at": "2026-10-13T15:15:11Z",
   "mode": "snowfall",
   "units": "in",
   "scale": "classed",
@@ -9,7 +9,7 @@
     "max": 900.0
   },
   "ticks": [
-    24.0,
+    0.0,
     180.0,
     300.0,
     400.0,
@@ -62,7 +62,7 @@
   ],
   "legend": {
     "ticks": [
-      24.0,
+      0.0,
       180.0,
       300.0,
       400.0,
@@ -132,7 +132,7 @@
       }
     ]
   },
-  "inputs_sha256": "228fdce4d4190b5ef779c4976f912755547904fd40a97508b08eb71ac81b6acc",
+  "inputs_sha256": "61e306182cc73b4209d645faf5cff3875ae671bc0b5d2dd35082119fb555a67f",
   "rasters": [
     {
       "region": "lower48",

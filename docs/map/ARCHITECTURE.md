@@ -69,6 +69,10 @@ Resort {
   trailmap_available: boolean,                     // true when trailmap/<id>.json exists (Trail map)
   official_trailmap: { url, format: pdf|jpg|png|page, season: "2025/26" | null, source_id, as_of, confidence, note } | null,
                                                    // link to the resort's own official trail map (Official trail maps)
+  webcams: { cams_page: { url, source_id, as_of, confidence, note } | null,
+             cams: [{ label, url, kind: page|image|stream, source_id, as_of, confidence, note }] } | null,
+                                                   // live cams links, at most webcams.max_named_cams cams (Webcams and jobs)
+  jobs: { links: [JobLink], feed: boolean } | null,   // jobs links by role group; employers in jobs/employers.json
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
 }
@@ -149,11 +153,12 @@ Slim national index the map loads first. Compact JSON, one row per resort as an 
 ```
 { version, generated_at,                 // copied from resorts.json
   fields: ["id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
-           "acres", "size_rank", "climate_available", "detail_available",
+           "acres", "size_rank", "climate_available", "detail_available", "webcams_available", "jobs_available",
            "season_length_days", "snowfall_annual_in", "professionalism_score", "lucrativeness_mid"],
   resorts: [[...], ...] }
 ```
-Every value is copied from `resorts.json` (`acres` is `size.acres.value`) and `resorts.geojson` (`size_rank` and the four
+Every value is copied from `resorts.json` (`acres` is `size.acres.value`; `webcams_available` is `webcams != null`,
+`jobs_available` is `jobs.links` not empty) and `resorts.geojson` (`size_rank` and the four
 recolor values); without `resorts.geojson`, `size_rank` uses `display.size_rank_acres_breaks` and the recolor values
 come from `resorts.json` as in the `resorts.geojson` rules, with `snowfall_annual_in` null. Resorts with an unsafe id or
 no coordinates are left out. About 16 KB gzipped against 87 KB for `resorts.json` plus 21 KB for `resorts.geojson`.
@@ -163,7 +168,8 @@ is absent.
 ### `sitemap.xml` (written by `pipeline/routes.py`)
 Only the `/map/` entries are rewritten; every other entry stays byte for byte. The map entries are the canonical URLs of
 `/map/`, every state page, every cluster page and Tier A resort pages. Tier B resort pages are generated, linked and
-crawlable (no `noindex`) but left out of the sitemap.
+crawlable (no `noindex`) but left out of the sitemap. Hand written pages in `routes.STATIC_PAGES` (`/map/credits/`) join
+the map entries when their `index.html` exists; `routes.py` never writes or removes them (`credits` is protected).
 
 ### Resort route stubs embed their record
 Each resort page under `/map/` carries `<script type="application/json" id="resort-record">` with
@@ -339,6 +345,115 @@ links to them in a new tab and never downloads, vendors, rehosts, hotlinks or em
   without a link: Alpine Valley (OH), Alta (winter), Black Mountain (ME), Burke, Hermitage Club, Hyland Hills, Mad River
   Glen, Montana Snowbowl, Saskadena Six, Silverton, Yellowstone Club, and the training and indoor facilities.
 
+## Webcams and jobs (links only)
+
+Owner requests 2026-10-13: link every resort's live cams, and its jobs: ski school, coaching and club (race,
+freeride, freestyle and other disciplines), management, parent company and job boards, with live open role counts
+where a public board exists. Cams, streams and job pages are linked in a new tab (`target="_blank"`,
+`rel="noopener noreferrer"`) and never embedded, proxied or rehosted.
+
+### Raw inputs (research batches; formats are fixed)
+* `data/raw/webcams/<batch>.yaml`: `{ batch, researched_date, sources: [Source], records: [{ resort_id,
+  cams_page: { url, source_id, as_of, confidence, note? } | null, cams?: [{ label, url, kind: page|image|stream,
+  source_id, as_of?, confidence?, note? }] }] }`, validated by `pipeline/schemas/webcams.py`, loaded by
+  `pipeline/webcams.py`. A record needs a `cams_page` or at least one cam; a cam without `as_of` and `confidence`
+  takes the cams page's (and fails when there is no cams page).
+* `data/raw/jobs/<batch>.yaml`: `{ batch, researched_date, sources, employers: [Employer], records: [{ resort_id,
+  links: [JobLink] }] }`, validated by `pipeline/schemas/jobs.py`, loaded by `pipeline/jobs.py`.
+  ```
+  Employer { id, name, kind: parent_company|resort_operator|club|ski_school|other, careers_url,
+             ats: { vendor: greenhouse|lever|smartrecruiters|workable|ashby|workday|icims|ultipro|paylocity|adp|paycom|
+                            jazzhr|bamboohr|other|unknown, board?: token }, source_id, as_of, confidence, note? }
+  JobLink { employer_id, role_group: ski_school|coaching|management|corporate|all,
+            disciplines?: [race|freeride|freestyle|park|nordic|adaptive|snowboard|moguls], label, url,
+            source_id, as_of, confidence, note? }
+  ```
+* Missing or empty folders are fine (no records). Rules, each a build error: an `http` (or any non https) url; an
+  unknown resort, employer or source id; a bad enum value; a resort listed twice in one file; webcams for one resort
+  in two files; a cam url or label listed twice, or a cam equal to the cams page; a jobs url listed twice in one role
+  group of a resort (one board may serve several groups); an employer declared again with a different name, kind,
+  careers url or ats. Jobs records for one resort in several files merge.
+* Domains (registered domain, the last two labels): a webcam url (cams page or cam) must equal its own source's
+  domain. A jobs link url must be the employer's careers domain, one of its ATS vendor's domains
+  (`jobs.ats_domains`, for example myworkdayjobs.com for Workday) or its own source's domain (a page on the employer's
+  site while its careers page sits on the ATS). Job aggregators in `jobs.blocked_domains` (Indeed, Glassdoor,
+  ZipRecruiter, SimplyHired, Monster) always fail. An `ats.board` on a vendor without a public postings API (a
+  Workday tenant) is kept and never fetched.
+
+### Build outputs
+* `Resort.webcams` (cams trimmed to `webcams.max_named_cams`, 4) and `Resort.jobs` (`links` ordered ski_school,
+  coaching, management, corporate, all, file order within a group; `feed` true when a linked employer has a public
+  board). Their sources join `resort.sources`, so stubs embed them; `map-index.json` gains `webcams_available` and
+  `jobs_available`.
+* `jobs/employers.json`: `{ version, generated_at, employers: [Employer + { feed, board_url }] }`, every employer once
+  (parent companies are not repeated per resort). `board_url` is the public board page when `feed` is true:
+  `https://boards.greenhouse.io/{board}`, `https://jobs.lever.co/{board}`, `https://careers.smartrecruiters.com/{board}`,
+  `https://apply.workable.com/{board}/`, `https://jobs.ashbyhq.com/{board}`.
+* `jobs/postings.json` (written by the feed; the build writes an empty one when it is missing and validates it
+  otherwise, never overwriting it):
+  ```
+  { version, generated_at, fetched_at: ISO datetime | null, keywords: string[],
+    boards: [{ employer_id, employer_name, vendor, board, url (board page), source_id, status: ok|error,
+               fetched_at (last good fetch) | null, as_of | null, total, matched, error | null }],
+    sources: [Source],                     // one per board: the board page, accessed_date = as_of
+    postings: [{ id, employer_id, title, location | null, department | null, url, role_group (a guess),
+                 resort_ids: string[],     // [] = a role at the employer with no single resort named
+                 source_id, as_of, confidence: "published", fetched_at }] }
+  ```
+
+### Live postings feed (`pipeline/jobs_feed.py`, `.github/workflows/jobs-feed.yml`)
+* `python -m pipeline.jobs_feed fetch` reads `jobs/employers.json` and `resorts.json` and, for employers with
+  `feed` that some resort links, calls only these public keyless APIs: Greenhouse
+  `boards-api.greenhouse.io/v1/boards/{board}/jobs`, Lever `api.lever.co/v0/postings/{board}?mode=json`,
+  SmartRecruiters `api.smartrecruiters.com/v1/companies/{board}/postings` (pages of 100, at most 10), Workable
+  `apply.workable.com/api/v1/widget/accounts/{board}`, Ashby `api.ashbyhq.com/posting-api/job-board/{board}` (listed
+  jobs only). Workday, iCIMS, UKG, Paylocity, ADP, Indeed, Glassdoor and every other page are never fetched or scraped.
+* Kept: a posting whose title, department or team holds a `jobs.feed.keywords` word or phrase (whole words, any case;
+  instructor, coach, ski school, snowsports, ride school, supervisor, director, trainer, freeride, race, freestyle,
+  adaptive and more), none of `exclude_keywords`, and, for employers in `require_keywords` (a college board such as
+  Middlebury's), one of their words in the title, department or location. Posting urls must be https on the vendor's
+  or the careers domain; at most `max_postings_per_board` (150) per board.
+* Role group guess: the first of `jobs.feed.role_keywords` management, coaching, ski_school with a matching word;
+  else corporate for a parent company, else all.
+* Resorts: an employer linked from one resort gives every kept posting to it. For an employer linked from several
+  resorts, a posting goes to the resorts whose name (also without a trailing "Ski Resort", "Ski Area" or "Resort") or
+  `jobs.feed.location_aliases` entry appears in its location, else in its title or department (the employer's own
+  name removed first); terms under four letters never match. None named gives `resort_ids: []`.
+* Writes only when postings or board states change (timestamps ignored) or the last fetch is `refresh_days` (7) old,
+  so the daily job commits only real changes. A failed board keeps its last postings and `fetched_at` for
+  `max_age_days` (14), then drops them.
+* `jobs-feed.yml`: daily cron and `workflow_dispatch`, `permissions: contents: write` (plus `pages: write` to request
+  a Pages build after a push), default `GITHUB_TOKEN`; commits only `data/build/jobs/postings.json`. Scheduled runs
+  start only once the workflow is on the default branch. Tests use recorded responses in
+  `tests/pipeline/fixtures/jobs_feed/` (synthetic, in each vendor's documented shape); the sandbox cannot reach the APIs.
+
+### Link checker (`pipeline/link_check.py`, `.github/workflows/link-check.yml`)
+Monthly (cron on the 1st and `workflow_dispatch`): every `official_trailmap`, cams page, cam and jobs link url in
+`resorts.json` plus every careers page in `jobs/employers.json`, once each. HEAD, then GET when HEAD is refused; one
+retry for timeouts and server errors. Broken: HTTP 404 or 410, no DNS answer, an invalid TLS certificate. Could not
+verify: other error statuses (often bot protection) and timeouts, listed in a folded section. The workflow
+(`contents: read`, `issues: write`) opens or updates one issue labelled `link-check` while links are broken and
+closes it when none are; it never commits.
+
+### UI (`map/js/livelinks.js`; stubs in `pipeline/routes.py` `render_webcams`, `render_jobs`)
+* Resort panel, under the trail map links: "Live cams", then "Open live cams" (the cams page) with its badge,
+  site name, "opens in a new tab" and "Last verified", then up to four named cams with badge and kind (Web page,
+  Still image, Live stream).
+* "Jobs" section after Career: "Links open each employer's own site in a new tab.", then groups in this order: Ski
+  school (`ski_school`), Coaching and clubs (`coaching`, disciplines as small tags), Management (`management`),
+  Parent company (`corporate`), Job boards (`all`). Each link has its badge and "Last verified <date>", plus its
+  source when the source is another page. Tier A resorts without links say "Jobs links are being collected."; Tier B
+  resorts without links show no section.
+* Open roles (panel only, never prerendered since they change daily): when `jobs.feed` is true the panel loads
+  `jobs/postings.json` once (`loadPostings`, lazy, Zod `PostingsFile`) and, for postings of the resort's linked
+  employers, shows "N open roles" (Published badge) for postings naming this resort with up to five titles linked out
+  (ski school first), "N more roles on the job boards below.", "Plus N roles at <employer> with no single resort
+  named." for employer wide postings, and "Updated <earliest board as_of> from <employer> job board." With an empty
+  feed, no match or no file, the section shows the links only.
+* Cluster panel: a "Hiring" section after the resort list, when postings exist for its resorts: each employer (link
+  to its board) with a Published badge and "N open roles", then "Updated <date>.". The resort list adds "Live cams".
+* Zod: `Webcams`, `Jobs`, `PostingsFile` in `schemas.js`; a bad item drops only that item, a bad block only the block.
+
 ## Trail map (OpenSkiMap runs)
 
 ### Raw input
@@ -481,7 +596,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
    after the first contentful paint, so its parse and the WebGL setup never hold back the first paint. The map
    control CSS loads without blocking the paint. `/map/index.html` carries the national heading and intro as its
    prerendered block, so the first paint already shows real text. The modules on this path
-   (`app`, `config`, `data`, `router`, `panel`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`) carry no
+   (`app`, `config`, `data`, `router`, `panel`, `livelinks`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`) carry no
    Zod and no charts. The first paint files are checked by hand in `data.js`, mirroring `schemas.js`.
 2. The panel and the list view render from the slim index. `preview.js` draws the first map frame on a 2D canvas
    (clusters and resort dots with the WebGL map's framing and colors) with a "Click to explore the map" button
@@ -502,6 +617,9 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 * Lazy modules: `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only), `detailcontrols.js` (resort
   detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event. The snowfall
   rasters (`heat/snowfall.json` and its PNGs, about 350 KB) load only when the Snowfall mode is selected.
+  `jobs/postings.json` loads once, only for a resort whose `jobs.feed` is true or a cluster with `jobs_available`
+  resorts; `livelinks.js` (about 3 KB gzipped, no Zod) loads with `panel.js`. `search.js` loads on the first focus of
+  the search box.
 * **Budget method** (`tests/map/audit.mjs`): Playwright with Chromium under SwiftShader, CDP network throttling
   (150 ms RTT, 1.6 Mbps down, 750 Kbps up), 4x CPU slowdown, cache off, files gzipped. Times are the page's own
   performance marks from navigation start. *Interactive* is the later of two marks: the panel usable
@@ -609,11 +727,41 @@ same inset.
   sign. Legend with the four signs plus terrain park, lift and base area; attribution to OpenSkiMap and
   OpenStreetMap contributors (ODbL), plus the `openskimap-runs` source link.
 
+### Resort search (`map/js/search.js`)
+* A combobox in the header (`#map-search`, WAI-ARIA APG list autocomplete: `role="combobox"` input with
+  `aria-expanded`, `aria-controls` and `aria-activedescendant`, a `role="listbox"` of `role="option"` results, a polite
+  status with the result count). Shown once the slim index has loaded; the module (about 3 KB gzipped, no Zod) loads on
+  the first focus or tap of the box and searches only data already in memory: state, cluster and resort names from
+  `map-index.json`, `clusters.geojson` and `states.json`.
+* Matching: names and queries lose accents, case and punctuation ("Smugglers" finds "Smugglers' Notch Resort"); "Mount"
+  and "Mt", "Saint" and "St", "Fort" and "Ft" match each other; a two letter state code finds its state. Rank: exact,
+  then prefix (spaces ignored, so "i70" finds "I 70 Corridor"), then word prefix, then every query word starting a
+  word, then anywhere; ties go states, clusters, resorts (catch all "Other" clusters last), Tier A first, shorter names
+  first. At most 8 results, each with its kind, tier and state ("Tier A resort in Colorado").
+* Keys: Down and Up move through the results (wrapping), Enter opens the active result (or the first), Escape closes
+  the list and a second Escape clears the box, Tab closes it. A click or tap opens a result.
+* A result goes through `router.go` with the map click's state rule (keep the current state when the cluster spans
+  it), so the panel, URL and list view update and focus moves to the panel heading. Before the WebGL map starts this
+  only redraws the 2D picture; the map starts on that view later. With the map running, it flies there. In the list
+  view the current entry scrolls into view.
+* Phones: the title wraps to two lines (it gives way while the box has focus) and the results span the screen below
+  the top bar, ending above the bottom sheet; a fully open sheet drops to half when the results open.
+
+### Sources and credits page (`/map/credits/`)
+A hand written static page in the site layout (sidebar placeholder and fetch snippet from the map shell, no map
+JavaScript). It credits OpenSkiMap and OpenStreetMap contributors (ODbL), USGS The National Map imagery, US Census
+outlines via `us-atlas`, NOAA NCEI U.S. Climate Normals 1991 to 2020, NRCS SNOTEL, Open Meteo with ERA5 (CC BY 4.0),
+Wikipedia (CC BY SA 4.0) and the vendored libraries with their versions and the license files in `/map/vendor/`; it
+explains the confidence levels and describes exactly the fields the report form sends to Formspree. Linked from the
+map attribution, the panel footer and the footer of every prerendered stub. `tests/pipeline/test_credits_page.py`
+checks the credits against `map/vendor/VERSIONS.json` and the report payload in `panel.js`.
+
 ## Raw inputs (`/data/raw`)
 
 * `data/raw/tier_a/*.yaml`: hand researched Tier A records, one file per research batch (see `data/raw/tier_a/README.md`).
 * `data/raw/ownership/*.yaml`: verified Vail and Alterra US portfolios with sources. Every listed resort needs a Tier A record (operator compensation).
 * `data/raw/facts/*.yaml`: season, snowfall and size facts for every resort (Resort facts overlay above).
+* `data/raw/webcams/*.yaml`, `data/raw/jobs/*.yaml`: live cams and jobs links (Webcams and jobs above).
 * `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
 * `data/raw/reports/`: Phase 7 queue and moderated reports (gitignored) and `aggregates.json` (committed).
 * `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
@@ -655,6 +803,11 @@ pipeline/
   reports.py          # Phase 7 report import, moderation, aggregation
   staleness.py        # Phase 7 stale value report
   facts.py            # Resort facts overlay loader and merge
+  links.py            # shared loader for the link only batches (webcams, jobs)
+  webcams.py          # live webcam links -> Resort.webcams
+  jobs.py             # jobs links and employers -> Resort.jobs, jobs/employers.json, empty jobs/postings.json
+  jobs_feed.py        # daily open postings from public job board APIs -> jobs/postings.json (GitHub Actions)
+  link_check.py       # monthly check of trail map, webcam and jobs links (GitHub Actions issue)
   heat.py             # Heat maps: snowfall rasters (NOAA normals plus resort pockets), data/build/heat/
   png.py              # Minimal stdlib PNG writer for the heat rasters
   climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation); noaa_normals.py (NOAA station normals)

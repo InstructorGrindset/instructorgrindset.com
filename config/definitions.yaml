@@ -222,6 +222,8 @@ heat:
       scale: classed
       breaks: [90, 100, 110, 120, 130, 150, 180]
       colors: ["#6331a0", "#405ec9", "#158abe", "#1aadb3", "#41ce90", "#9fd959", "#feeba4", "#f37511"]
+      # Legend: each class box is as wide as its span (open ends one 10 day class); every other break labeled.
+      legend_ticks: [90, 110, 130, 150, 180]
     snowfall:
       # Owner request 2026-10-13: the most contrast in 180 to 900 in, where people ski, and a 50 in step easy
       # to read. Under 24 in is neutral grey (little or no snow); 24 to 180 gets three muted blues; 180 to
@@ -235,9 +237,11 @@ heat:
                "#86a005", "#d6be07", "#c28c17", "#fead68", "#ee7145", "#fdaeae", "#ee6e9d", "#ffabe6", "#ce7fe6",
                "#d5c5fe"]
       domain: [0, 900]
-      # Legend: classes below 180 in take half the width of a 50 in class, so 180 to 900 fills most of it.
+      # Legend: classes below 180 in take half the width of a 50 in class, so 180 to 900 fills 88 percent of
+      # it. The grey class gets its own legend line ("under 24 in"), so the ticks start at 0 and 180; the top
+      # class (850 and up) ends the bar.
       legend_compress_below: 180
-      legend_ticks: [24, 180, 300, 400, 500, 600, 700, 800, 900]
+      legend_ticks: [0, 180, 300, 400, 500, 600, 700, 800]
   snowfall:
     # Precomputed snowfall rasters (pipeline/heat.py -> data/build/heat/): NOAA NCEI U.S. Climate Normals
     # 1991 to 2020 station values (ANN-SNOW-NORMAL) as the background, then each resort's own published
@@ -250,7 +254,7 @@ heat:
     neighbors: 10
     min_distance_km: 12
     pocket_radius_km: 25
-    px_per_degree: 20                   # about 4 km per pixel at 40 degrees north
+    px_per_degree: 32                   # about 2.8 km per pixel at 40 degrees north
     grid_step_px: 4
     # Stations cover the country, so the fade only touches remote Alaska: it keeps the class color and
     # lowers the opacity (a grey fade would read as the no snow class).
@@ -259,15 +263,17 @@ heat:
     floor_alpha: 0.35
     fade_to: alpha
     isolines:
-      # Lines of equal snowfall from the same pixel field as the raster (marching squares), every `step` in
-      # from `start` to `end`, bolder every `major_step`. Simplified with Douglas Peucker at simplify_px
-      # pixels; lines shorter than min_length_px pixels are dropped; lines longer than label_min_px pixels
-      # carry a label (the map shows labels from mountain range zoom).
+      # Lines of equal snowfall from the same field as the raster (marching squares), every `step` in from
+      # `start` to `end`, bolder every `major_step`. Traced on a grid `supersample` times finer than the
+      # raster pixels where lines can occur, with each pocket evaluated exactly, so pocket rings stay round.
+      # Simplified with Douglas Peucker at simplify_px raster pixels; lines shorter than min_length_px pixels
+      # are dropped; lines longer than label_min_px pixels carry a label (shown from mountain range zoom).
       start: 200
       end: 900
       step: 50
       major_step: 100
-      simplify_px: 0.7
+      supersample: 4
+      simplify_px: 0.25
       min_length_px: 4
       label_min_px: 30
   season:
@@ -359,6 +365,10 @@ jobs:
                trainer, freeride, race, racing, freestyle, adaptive]
     # Postings with one of these words are dropped even when a keyword matches. Empty keeps every match.
     exclude_keywords: []
+    # Employers whose board also lists jobs outside snowsports (a college, a town): their postings must also name one
+    # of these words in the title, department or location. Keys are employer ids from data/raw/jobs.
+    require_keywords:
+      middlebury-college: [snow bowl, rikert, ski, skiing, snowboard, nordic]
     # Role group guess for each kept posting: the first group with a matching word wins. Postings with no match
     # fall to corporate (parent company employers) or all.
     role_keywords:

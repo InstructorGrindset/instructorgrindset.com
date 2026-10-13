@@ -1,0 +1,38 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-11T12:00:00Z",
+ "employers": [
+  {
+   "id": "fixture-club",
+   "name": "Alpha Peak Ski Club",
+   "kind": "club",
+   "careers_url": "https://example.com/fixture/club/coaches",
+   "ats": {
+    "vendor": "unknown",
+    "board": null
+   },
+   "source_id": "fixture-resort-site",
+   "as_of": "2026-10-01",
+   "confidence": "estimated",
+   "note": null,
+   "feed": false,
+   "board_url": null
+  },
+  {
+   "id": "fixture-parent",
+   "name": "Fixture Parent",
+   "kind": "parent_company",
+   "careers_url": "https://example.com/fixture/parent/jobs",
+   "ats": {
+    "vendor": "greenhouse",
+    "board": "fixtureparent"
+   },
+   "source_id": "fixture-resort-site",
+   "as_of": "2026-10-01",
+   "confidence": "estimated",
+   "note": null,
+   "feed": true,
+   "board_url": "https://boards.greenhouse.io/fixtureparent"
+  }
+ ]
+}

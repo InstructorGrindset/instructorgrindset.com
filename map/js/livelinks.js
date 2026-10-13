@@ -47,11 +47,14 @@ export function liveCams(r, ctx) {
 
 /**
  * The "Jobs" section: links grouped as Ski school, Coaching and clubs, Management, Parent company and Job boards,
- * with open roles on top once jobs/postings.json has matches. ctx: { badge, sourceLink, sources, section, current }.
+ * with open roles on top once jobs/postings.json has matches. ctx: { badge, sourceLink, sources, current }.
  */
 export function jobsSection(r, ctx) {
   const jobs = r.jobs;
-  if (!jobs) return r.tier === 'A' ? ctx.section('Jobs', h('p', { class: 'not-verified' }, 'Jobs links are being collected.')) : null;
+  if (!jobs) {
+    return r.tier === 'A' ? h('section', { class: 'panel-section jobs' }, h('h3', null, 'Jobs'),
+      h('p', { class: 'not-verified' }, 'Jobs links are being collected.')) : null;
+  }
   const live = h('div', { class: 'jobs-live', hidden: true });
   const groups = JOB_GROUPS.map(([key, title]) => {
     const items = jobs.links.map((l) => ({ ...l, href: safeUrl(l.url) })).filter((l) => l.role_group === key && l.href);

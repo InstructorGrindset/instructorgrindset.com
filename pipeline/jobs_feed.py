@@ -5,7 +5,8 @@
 
 Reads data/build/jobs/employers.json and data/build/resorts.json (run pipeline/build.py first), fetches the open
 postings of every employer whose ATS vendor publishes a public postings API and whose board is set, keeps the postings
-that match config `jobs.feed.keywords`, guesses a role group from the title, assigns resorts and writes
+that match config `jobs.feed.keywords` (and, for employers listed in `jobs.feed.require_keywords`, one of their
+words), guesses a role group from the title, assigns resorts and writes
 data/build/jobs/postings.json. GitHub Actions runs it daily (.github/workflows/jobs-feed.yml).
 
 Only these public, documented, keyless endpoints are read:
@@ -252,6 +253,7 @@ class Matcher:
         f = cfg.feed
         self.keep = word_pattern(f.keywords)
         self.exclude = word_pattern(f.exclude_keywords)
+        self.require = {eid: word_pattern(words) for eid, words in f.require_keywords.items()}
         self.roles = [(group, word_pattern(words)) for group, words in f.role_keywords.items()]
         self.by_employer: dict[str, list[str]] = {}
         names: dict[str, list[str]] = {}
@@ -263,9 +265,12 @@ class Matcher:
             names[r["id"]] = resort_terms(r.get("name", ""), f.location_aliases.get(r["id"], []))
         self.patterns = {rid: word_pattern(t) for rid, t in names.items()}
 
-    def kept(self, p: RawPosting) -> bool:
+    def kept(self, p: RawPosting, employer_id: str = "") -> bool:
         text = normalize(f"{p.title} {p.department or ''}")
-        return bool(self.keep and self.keep.search(text)) and not (self.exclude and self.exclude.search(text))
+        if not (self.keep and self.keep.search(text)) or (self.exclude and self.exclude.search(text)):
+            return False
+        need = self.require.get(employer_id)
+        return need is None or bool(need.search(normalize(f"{p.title} {p.department or ''} {p.location or ''}")))
 
     def role_group(self, p: RawPosting, employer_kind: str) -> str:
         text = normalize(f"{p.title} {p.department or ''}")
@@ -348,7 +353,7 @@ def collect(employers: list[dict], resorts: list[dict], cfg: JobsDefs, get: Gett
             kept = []
             seen = set()
             for p in raw:
-                if not p.title or p.id in seen or not _allowed_url(p.url, vendor, e["careers_url"], cfg) or not matcher.kept(p):
+                if not p.title or p.id in seen or not _allowed_url(p.url, vendor, e["careers_url"], cfg) or not matcher.kept(p, e["id"]):
                     continue
                 seen.add(p.id)
                 kept.append({"id": p.id[:200], "employer_id": e["id"], "title": p.title, "location": p.location,

@@ -550,22 +550,59 @@ class Fade:
     no_data_reach_km: Optional[float] = None
 
 
+# Subsamples of a pixel for antialiased class edges: offsets from its center, in pixels.
+_AA = ((-0.25, -0.25), (0.25, -0.25), (-0.25, 0.25), (0.25, 0.25))
+
+
+def class_color_aa(values: Sequence[Optional[float]], k: int, width: int, height: int, breaks: Sequence[float],
+                   colors: Sequence[tuple[int, int, int]]) -> tuple[int, int, int]:
+    """Class color of pixel k, antialiased: the mean of the class colors at four subsamples, each bilinear between
+    the pixel centers around it. Pixels whose neighbours share their class keep the plain color."""
+    v = values[k]
+    ci = bisect.bisect_right(breaks, v)
+    i, j = k % width, k // width
+    same = True
+    for q in (k - 1 if i > 0 else None, k + 1 if i < width - 1 else None,
+              k - width if j > 0 else None, k + width if j < height - 1 else None):
+        if q is not None and values[q] is not None and bisect.bisect_right(breaks, values[q]) != ci:
+            same = False
+            break
+    if same:
+        return colors[ci]
+    r = g = b = 0
+    for dx, dy in _AA:
+        ni, nj = i + (1 if dx > 0 else -1), j + (1 if dy > 0 else -1)
+        sv = v
+        if 0 <= ni < width and 0 <= nj < height:
+            vx, vy, vxy = values[j * width + ni], values[nj * width + i], values[nj * width + ni]
+            if vx is not None and vy is not None and vxy is not None:
+                tx, ty = abs(dx), abs(dy)
+                sv = v * (1 - tx) * (1 - ty) + vx * tx * (1 - ty) + vy * (1 - tx) * ty + vxy * tx * ty
+        cr, cg, cb = colors[bisect.bisect_right(breaks, sv)]
+        r += cr; g += cg; b += cb
+    return round(r / 4), round(g / 4), round(b / 4)
+
+
 def paint(values: Sequence[Optional[float]], dist: Sequence[Optional[float]], cov: Sequence[float],
           color_of: Callable[[float], tuple[int, int, int]], fade: Fade,
-          no_data: Optional[Sequence[float]] = None, border_km: Optional[Sequence[Optional[float]]] = None
-          ) -> tuple[bytearray, int]:
+          no_data: Optional[Sequence[float]] = None, border_km: Optional[Sequence[Optional[float]]] = None,
+          classes: Optional[tuple[Sequence[float], Sequence[str], int, int]] = None) -> tuple[bytearray, int]:
     """RGBA pixels: the value's color, opacity from the distance to data, times the outline coverage.
 
     Beyond ``fade.full_km`` the opacity falls smoothly to ``fade.floor_alpha`` at ``fade.end_km`` (and the color
     blends into ``fade.neutral`` by the same share when ``fade_to`` is neutral). ``no_data`` is each pixel's share
     inside states with no data and ``border_km`` its distance past the border of the states with data: that share
-    keeps its color only up to ``fade.no_data_reach_km`` past the border (``reach``).
+    keeps its color only up to ``fade.no_data_reach_km`` past the border (``reach``). ``classes`` (breaks, colors,
+    width, height) antialiases the class edges (``class_color_aa``) instead of calling ``color_of``.
     Returns (pixels, colored pixel count). Fully transparent pixels are zero, which keeps the PNG small.
     """
     buf = bytearray(len(cov) * 4)
     colored = 0
     span = fade.end_km - fade.full_km
     nr, ng, nb = fade.neutral
+    if classes:
+        breaks, hexes, width, height = classes
+        class_rgb = [hex_rgb(x) for x in hexes]
     for k, c in enumerate(cov):
         if c <= 0:
             continue
@@ -575,7 +612,10 @@ def paint(values: Sequence[Optional[float]], dist: Sequence[Optional[float]], co
         d = dist[k]
         if d is None:
             d = math.inf
-        r, g, b = color_of(v)
+        if classes:
+            r, g, b = class_color_aa(values, k, width, height, breaks, class_rgb)
+        else:
+            r, g, b = color_of(v)
         if d <= fade.full_km:
             a = fade.max_alpha
         else:
@@ -606,53 +646,165 @@ _CASES: dict[int, tuple[tuple[int, int], ...]] = {
 _SADDLE = {5: (((3, 0), (2, 1)), ((3, 2), (0, 1))), 10: (((0, 1), (3, 2)), ((3, 0), (2, 1)))}
 
 
-def contour_lines(values: Sequence[Optional[float]], width: int, height: int,
-                  levels: Sequence[float]) -> dict[float, list[list[tuple[float, float]]]]:
-    """Lines of equal value through a pixel field (flat, row major, None where undefined).
+def _march(cells: Iterable[tuple[int, int]], get: Callable[[int, int], Optional[float]], stride: int,
+           levels: Sequence[float], scale: float = 1.0, offset: float = 0.5) -> dict[float, list[list[tuple[float, float]]]]:
+    """Marching squares over the given cells of a node field, joined into lines.
 
-    Marching squares over cells whose four corners (pixel centers) all hold a value, with linear interpolation
-    along the cell edges, then the segments joined into lines. Points are continuous pixel coordinates (pixel
-    i's center is at x = i + 0.5). Closed lines repeat their first point at the end. Returns {level: [line]}.
+    A cell (i, j) has corners (i, j), (i + 1, j), (i + 1, j + 1), (i, j + 1); ``get`` gives a corner's value or None
+    (the cell is skipped). ``stride`` exceeds every i (it numbers the shared edges). Points are returned as
+    offset + (node position) / scale, with linear interpolation along the cell edges. Saddles use the cell mean.
     """
     levels = sorted(levels)
     segs: dict[float, list[tuple[int, int]]] = {lv: [] for lv in levels}
     pts: dict[float, dict[int, tuple[float, float]]] = {lv: {} for lv in levels}
-    w = width
-    for j in range(height - 1):
-        row, below = j * w, (j + 1) * w
+    for i, j in cells:
+        a = get(i, j); b = get(i + 1, j); c = get(i + 1, j + 1); d = get(i, j + 1)
+        if a is None or b is None or c is None or d is None:
+            continue
+        lo = min(a, b, c, d); hi = max(a, b, c, d)
+        first = bisect.bisect_right(levels, lo)
+        last = bisect.bisect_right(levels, hi)
+        if first == last:
+            continue
+        top, below = j * stride + i, (j + 1) * stride + i
+        # Edge ids: top = horizontal edge (i, j), bottom = (i, j + 1); left = vertical (i, j), right = (i + 1, j).
+        ids = (2 * top, 2 * (top + 1) + 1, 2 * below, 2 * top + 1)
+        for lv in levels[first:last]:          # lo < lv <= hi: the level crosses this cell
+            case = (8 if a >= lv else 0) | (4 if b >= lv else 0) | (2 if c >= lv else 0) | (1 if d >= lv else 0)
+            if case in _SADDLE:
+                pairs = _SADDLE[case][0 if (a + b + c + d) / 4 >= lv else 1]
+            else:
+                pairs = _CASES[case]
+            book = pts[lv]
+            for e0, e1 in pairs:
+                for e in (e0, e1):
+                    eid = ids[e]
+                    if eid in book:
+                        continue
+                    if e == 0:
+                        x, y = i + (lv - a) / (b - a), j
+                    elif e == 2:
+                        x, y = i + (lv - d) / (c - d), j + 1
+                    elif e == 3:
+                        x, y = i, j + (lv - a) / (d - a)
+                    else:
+                        x, y = i + 1, j + (lv - b) / (c - b)
+                    book[eid] = (offset + x / scale, offset + y / scale)
+                segs[lv].append((ids[e0], ids[e1]))
+    return {lv: _join(segs[lv], pts[lv]) for lv in levels}
+
+
+def contour_lines(values: Sequence[Optional[float]], width: int, height: int,
+                  levels: Sequence[float]) -> dict[float, list[list[tuple[float, float]]]]:
+    """Lines of equal value through a pixel field (flat, row major, None where undefined).
+
+    Marching squares over cells whose four corners (pixel centers) all hold a value, then the segments joined
+    into lines. Points are continuous pixel coordinates (pixel i's center is at x = i + 0.5). Closed lines repeat
+    their first point at the end. Returns {level: [line]}.
+    """
+    cells = ((i, j) for j in range(height - 1) for i in range(width - 1))
+    return _march(cells, lambda i, j: values[j * width + i], width, levels)
+
+
+def refined_isolines(grid: Grid, background: Sequence[Optional[float]], values: Sequence[Optional[float]],
+                     pockets: Sequence[Point], radius_km: float, levels: Sequence[float],
+                     supersample: int) -> dict[float, list[list[tuple[float, float]]]]:
+    """Isolines of the snowfall field on a grid ``supersample`` times finer than the pixels, where they can occur.
+
+    Active cells: pixel cells with a corner within one level step of the lowest level, and their neighbours. Inside
+    them the background is bilinear between pixel centers (it varies slowly) and every pocket is evaluated exactly
+    (``apply_pockets``), so pocket rings come out round instead of as pixel polygons. At pixel centers the field
+    equals the raster's. Points are continuous pixel coordinates, as ``contour_lines``.
+    """
+    levels = sorted(levels)
+    w, h = grid.width, grid.height
+    if not levels or w < 2 or h < 2:
+        return {lv: [] for lv in levels}
+    s = max(1, int(supersample))
+    step = levels[1] - levels[0] if len(levels) > 1 else 0.0
+    floor = levels[0] - step
+
+    def corners(i: int, j: int) -> Optional[tuple[float, float, float, float]]:
+        q = j * w + i
+        a, b, c, d = values[q], values[q + 1], values[q + w + 1], values[q + w]
+        if a is None or b is None or c is None or d is None:
+            return None
+        return a, b, c, d
+
+    seeds = []
+    for j in range(h - 1):
         for i in range(w - 1):
-            a = values[row + i]; b = values[row + i + 1]; c = values[below + i + 1]; d = values[below + i]
+            q = j * w + i
+            a, b, c, d = values[q], values[q + 1], values[q + w + 1], values[q + w]
             if a is None or b is None or c is None or d is None:
                 continue
-            lo = min(a, b, c, d); hi = max(a, b, c, d)
-            first = bisect.bisect_right(levels, lo)
-            last = bisect.bisect_right(levels, hi)
-            for lv in levels[first:last]:          # lo < lv <= hi: the level crosses this cell
-                case = (8 if a >= lv else 0) | (4 if b >= lv else 0) | (2 if c >= lv else 0) | (1 if d >= lv else 0)
-                if case == 0 or case == 15:
+            if a >= floor or b >= floor or c >= floor or d >= floor:
+                seeds.append((i, j))
+    active = set()
+    for i, j in seeds:
+        for dj in (-1, 0, 1):
+            for di in (-1, 0, 1):
+                cell = (i + di, j + dj)
+                if cell not in active and 0 <= cell[0] < w - 1 and 0 <= cell[1] < h - 1 and corners(*cell):
+                    active.add(cell)
+    # Pockets that can reach each active cell (the pixel box of the radius, one pixel wider).
+    near: dict[tuple[int, int], list[Point]] = defaultdict(list)
+    for p in pockets:
+        dlat = radius_km / KM_PER_DEG_LAT
+        j0 = max(0, math.floor(grid.y_of(p.lat + dlat)) - 1)
+        j1 = min(h - 2, math.ceil(grid.y_of(p.lat - dlat)) + 1)
+        dlon = radius_km / max(KM_PER_DEG_LON * math.cos(min(abs(p.lat) + dlat, 89.0) * RAD), 1e-6)
+        i0 = max(0, math.floor(grid.x_of(p.lon - dlon)) - 1)
+        i1 = min(w - 2, math.ceil(grid.x_of(p.lon + dlon)) + 1)
+        for j in range(j0, j1 + 1):
+            for i in range(i0, i1 + 1):
+                if (i, j) in active:
+                    near[(i, j)].append(p)
+    stride = (w - 1) * s + 1
+    yn, ys = grid.y_north, grid.y_south
+    span_x = (grid.east - grid.west) / w
+    field: dict[int, Optional[float]] = {}
+
+    def get(fi: int, fj: int) -> Optional[float]:
+        key = fj * stride + fi
+        if key in field:
+            return field[key]
+        i, si = divmod(fi, s)
+        j, sj = divmod(fj, s)
+        if i == w - 1:
+            i, si = w - 2, s
+        if j == h - 1:
+            j, sj = h - 2, s
+        q = j * w + i
+        b00, b10, b11, b01 = background[q], background[q + 1], background[q + w + 1], background[q + w]
+        if b00 is None or b10 is None or b11 is None or b01 is None:
+            field[key] = None
+            return None
+        tx, ty = si / s, sj / s
+        top = b00 + (b10 - b00) * tx
+        bg = top + (b01 + (b11 - b01) * tx - top) * ty
+        v = bg
+        cand_pockets = near.get((i, j))
+        if cand_pockets:
+            lon = grid.west + (0.5 + fi / s) * span_x
+            lat = lat_of(yn - (0.5 + fj / s) / h * (yn - ys))
+            kmlon = KM_PER_DEG_LON * math.cos(lat * RAD)
+            for p in cand_pockets:
+                if p.value <= bg:
                     continue
-                if case in _SADDLE:
-                    pairs = _SADDLE[case][0 if (a + b + c + d) / 4 >= lv else 1]
-                else:
-                    pairs = _CASES[case]
-                # Edge ids: top = horizontal edge (i, j), bottom = (i, j + 1); left = vertical (i, j), right = (i + 1, j).
-                ids = (2 * (row + i), 2 * (row + i + 1) + 1, 2 * (below + i), 2 * (row + i) + 1)
-                book = pts[lv]
-                for e0, e1 in pairs:
-                    for e in (e0, e1):
-                        eid = ids[e]
-                        if eid in book:
-                            continue
-                        if e == 0:
-                            book[eid] = (i + 0.5 + (lv - a) / (b - a), j + 0.5)
-                        elif e == 2:
-                            book[eid] = (i + 0.5 + (lv - d) / (c - d), j + 1.5)
-                        elif e == 3:
-                            book[eid] = (i + 0.5, j + 0.5 + (lv - a) / (d - a))
-                        else:
-                            book[eid] = (i + 1.5, j + 0.5 + (lv - b) / (c - b))
-                    segs[lv].append((ids[e0], ids[e1]))
-    return {lv: _join(segs[lv], pts[lv]) for lv in levels}
+                dd = math.hypot((p.lon - lon) * kmlon, (p.lat - lat) * KM_PER_DEG_LAT)
+                if dd >= radius_km:
+                    continue
+                t = dd / radius_km
+                cand = bg + (1 - t * t) ** 2 * (p.value - bg)
+                if cand > v:
+                    v = cand
+        field[key] = v
+        return v
+
+    cells = ((ci * s + si, cj * s + sj) for ci, cj in sorted(active, key=lambda c: (c[1], c[0]))
+             for sj in range(s) for si in range(s))
+    return _march(cells, get, stride, levels, scale=s)
 
 
 def _join(segments: list[tuple[int, int]], book: dict[int, tuple[float, float]]) -> list[list[tuple[float, float]]]:
@@ -718,10 +870,13 @@ def line_length(line: Sequence[tuple[float, float]]) -> float:
     return sum(math.dist(a, b) for a, b in zip(line, line[1:]))
 
 
-def isoline_features(grid: Grid, values: Sequence[Optional[float]], iso: Any, region: str) -> list[dict]:
-    """GeoJSON LineString features of the isolines of one region (properties: value, major, label, region)."""
+def isoline_features(grid: Grid, lines: dict[float, list[list[tuple[float, float]]]], iso: Any,
+                     region: str) -> list[dict]:
+    """GeoJSON LineString features from isolines in pixel coordinates (properties: value, major, label, region).
+
+    Lines shorter than ``iso.min_length_px`` are dropped; the rest are simplified (``iso.simplify_px``) and carry
+    a label when at least ``iso.label_min_px`` long. Coordinates round to 0.001 degree (about 100 m)."""
     out = []
-    lines = contour_lines(values, grid.width, grid.height, iso.levels())
     yn, ys = grid.y_north, grid.y_south
     span_x = (grid.east - grid.west) / grid.width
     for lv in sorted(lines):
@@ -783,9 +938,10 @@ def render_region(grid: Grid, *, stations: Sequence[Point], pockets: Sequence[Po
     color_of = colorizer(mode if mode.scale == scale else mode.model_copy(update={"scale": scale}), heat.ramp.colors, domain)
     fade = Fade(snow.full_opacity_km, snow.fade_end_km, heat.field.max_alpha, snow.floor_alpha, snow.fade_to,
                 hex_rgb(heat.neutral))
-    buf, colored = paint(values, dist, cov, color_of, fade)
+    classes = (list(mode.breaks), list(mode.colors), grid.width, grid.height) if scale == "classed" else None
+    buf, colored = paint(values, dist, cov, color_of, fade, classes=classes)
     drawn = sum(1 for p in pockets if 0 <= grid.x_of(p.lon) < grid.width and 0 <= grid.y_of(p.lat) < grid.height)
-    return bytes(buf), {"covered_pixels": colored, "pockets": drawn, "values": values}
+    return bytes(buf), {"covered_pixels": colored, "pockets": drawn, "values": values, "background": background}
 
 
 def inputs_digest(*parts: Any) -> str:
@@ -932,7 +1088,9 @@ def write_snowfall(out_dir: Path, *, stations: Sequence[Point], pockets: Sequenc
         rasters.append({"region": name, "image": image, "width": grid.width, "height": grid.height,
                         "coordinates": grid.coordinates(), "bytes": len(data),
                         "stations": sum(1 for p in stations if inside(p, box)), "pockets": info["pockets"]})
-        feats = isoline_features(grid, info["values"], iso, name)
+        lines = refined_isolines(grid, info["background"], info["values"], pockets, heat.snowfall.pocket_radius_km,
+                                 iso.levels(), iso.supersample)
+        feats = isoline_features(grid, lines, iso, name)
         body = json.dumps({"type": "FeatureCollection", "features": feats}, separators=(",", ":")).encode()
         file = f"snowfall-isolines-{name}.geojson"
         _write_if_changed(heat_dir / file, body)
@@ -1010,7 +1168,8 @@ def write_season(out_dir: Path, *, resorts: Sequence[dict], outlines: dict, heat
             with_data = coverage(grid, region_polygons(outlines, name, only=region_codes(outlines, name) - empty))
             border = border_distance(grid, with_data, cfg.grid_step_px, cov)
         vals, dist = solve_field(grid, cov, pts, box, field.neighbors, field.min_distance_km, cfg.grid_step_px)
-        buf, colored = paint(vals, dist, cov, color_of, fade, no_data, border)
+        classes = (list(mode.breaks), list(mode.colors), grid.width, grid.height) if mode.scale == "classed" else None
+        buf, colored = paint(vals, dist, cov, color_of, fade, no_data, border, classes)
         if not colored:
             continue
         data = png.encode_rgba(grid.width, grid.height, bytes(buf))

@@ -306,12 +306,18 @@ export const ClimateFile = z.object({
 // Heat map settings (definitions.json `heat`, from config/definitions.yaml).
 const Hex = z.string().regex(/^#[0-9a-fA-F]{6}$/);
 const HeatBox = z.object({ west: z.number(), south: z.number(), east: z.number(), north: z.number() });
+// Classed modes: `breaks` split the values into breaks.length + 1 classes, one color each.
 const HeatMode = z.object({
-  scale: z.enum(['linear', 'sqrt']).default('linear'),
+  scale: z.enum(['linear', 'sqrt', 'classed']).default('linear'),
   domain: z.tuple([z.number(), z.number()]).nullish(),
   domain_min: z.number().nullish(),
   ticks: z.array(z.number()).nullish(),
-}).passthrough();
+  breaks: z.array(z.number()).nullish(),
+  colors: z.array(Hex).nullish(),
+  legend_compress_below: z.number().nullish(),
+  legend_ticks: z.array(z.number()).nullish(),
+}).passthrough().refine((m) => m.scale !== 'classed' || (m.breaks && m.colors && m.colors.length === m.breaks.length + 1),
+  { message: 'a classed mode needs breaks and one more color than breaks' });
 export const HeatDefinitions = z.object({
   ramp: z.object({ name: z.string(), colors: z.array(Hex).min(2) }).passthrough(),
   regions: z.object({ lower48: HeatBox, alaska: HeatBox }).passthrough(),
@@ -328,6 +334,15 @@ export const HeatDefinitions = z.object({
     max_pixels: z.number().int().positive(),
   }).passthrough(),
   modes: z.object({ lucrativeness: HeatMode, season: HeatMode, snowfall: HeatMode }).passthrough(),
+  neutral: Hex.nullish(),
+  // Season length fade (pipeline rasters and the browser fallback); null keeps `field`.
+  season: z.object({
+    full_opacity_km: z.number().positive(),
+    fade_end_km: z.number().positive(),
+    floor_alpha: z.number().min(0).max(1),
+    fade_to: z.enum(['neutral', 'alpha']).default('neutral'),
+    no_data_reach_km: z.number().nonnegative(),
+  }).passthrough().nullish(),
 }).passthrough();
 
 /** heat/<mode>.json: precomputed heat rasters (pipeline/heat.py). */
@@ -337,13 +352,22 @@ export const HeatRasterFile = z.object({
   generated_at: z.string(),
   mode: z.string(),
   units: z.string(),
-  scale: z.enum(['linear', 'sqrt']),
+  scale: z.enum(['linear', 'sqrt', 'classed']),
   domain: z.object({ min: z.number(), max: z.number() }),
   ticks: z.array(z.number()).min(2),
-  ramp: z.array(Hex).min(2),
-  background: z.object({ source_id: z.string(), as_of: z.string(), confidence: Confidence, stations: z.number().int().nonnegative() }).passthrough(),
-  pockets: z.object({ resorts: z.number().int().nonnegative(), radius_km: z.number().positive() }).passthrough(),
-  attribution: z.string().min(1),
+  ramp: z.array(Hex).min(2).nullish(),            // linear and sqrt
+  breaks: z.array(z.number()).min(1).nullish(),   // classed
+  colors: z.array(Hex).min(2).nullish(),          // classed, one more than breaks
+  legend: z.object({ ticks: z.array(z.number()).min(1), compress_below: z.number().nullish() }).passthrough().nullish(),
+  // Snowfall: NOAA station normals with resort pockets. Season length: resort values only.
+  background: z.object({ source_id: z.string(), as_of: z.string(), confidence: Confidence, stations: z.number().int().nonnegative() }).passthrough().nullish(),
+  pockets: z.object({ resorts: z.number().int().nonnegative(), radius_km: z.number().positive() }).passthrough().nullish(),
+  attribution: z.string().min(1).nullish(),
+  isolines: z.object({
+    levels: z.array(z.number()),
+    major_step: z.number().positive(),
+    files: z.array(z.object({ region: z.enum(['lower48', 'alaska']), file: z.string().regex(/^[a-z0-9-]+\.geojson$/) }).passthrough()),
+  }).passthrough().nullish(),
   rasters: z.array(z.object({
     region: z.enum(['lower48', 'alaska']),
     image: z.string().regex(/^[a-z0-9-]+\.png$/),
@@ -351,7 +375,9 @@ export const HeatRasterFile = z.object({
     height: z.number().int().positive(),
     coordinates: z.tuple([Corner, Corner, Corner, Corner]),
   }).passthrough()).min(1),
-}).passthrough();
+}).passthrough().refine((r) => (r.scale === 'classed'
+  ? Boolean(r.breaks && r.colors && r.colors.length === r.breaks.length + 1)
+  : Boolean(r.ramp)), { message: 'classed rasters need breaks and colors; other scales need a ramp' });
 
 /** definitions.json: the keys the UI reads are checked; the rest passes through. */
 export const DefinitionsFile = z.object({

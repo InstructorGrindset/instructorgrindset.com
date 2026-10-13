@@ -41,6 +41,8 @@ SOURCES = [
      "title": "Synthetic fixture: ownership", "accessed_date": AS_OF},
     {"id": "fixture-noaa-normals", "url": "https://example.com/fixture/noaa-normals",
      "title": "Synthetic fixture: station snowfall normals", "accessed_date": AS_OF},
+    {"id": "fixture-careers", "url": "https://example.com/fixture/careers",
+     "title": "Synthetic fixture: careers page", "accessed_date": AS_OF},
     # Trail map files always cite this id (contract); the fixture points it at example.com.
     {"id": "openskimap-runs", "url": "https://example.com/fixture/runs",
      "title": "Synthetic fixture: runs", "accessed_date": AS_OF},
@@ -103,6 +105,66 @@ ASSUMPTIONS = [  # owner decision 4 keys and labels per docs/map/ARCHITECTURE.md
     ("rent_monthly_usd", "Average rent per month", 1150),
     ("tax", "Savings are before tax", None),
 ]
+# Live cams and jobs (links only). Every URL is example.com; the employers and postings are invented.
+CITE = {"as_of": AS_OF, "confidence": "estimated", "note": None}
+WEBCAMS = {"alpha-peak": {
+    "cams_page": {"url": "https://example.com/fixture/alpha-peak/cams", "source_id": "fixture-resort-site", **CITE},
+    "cams": [{"label": label, "url": f"https://example.com/fixture/alpha-peak/cams/{slug}", "kind": kind,
+              "source_id": "fixture-resort-site", **CITE}
+             for label, slug, kind in (("Summit cam", "summit", "stream"), ("Base area", "base", "image"),
+                                       ("Back bowls", "bowls", "page"), ("Terrain park", "park", "stream"))]}}
+
+
+def job_link(employer, group, label, url, source="fixture-resort-site", disciplines=()):
+    return {"employer_id": employer, "role_group": group, "disciplines": list(disciplines), "label": label, "url": url,
+            "source_id": source, **CITE}
+
+
+JOBS = {
+    "alpha-peak": {"feed": True, "links": [
+        job_link("fixture-parent", "ski_school", "Ski and ride school jobs", "https://example.com/fixture/careers", "fixture-careers"),
+        job_link("fixture-club", "coaching", "Alpha Peak Ski Club coaches", "https://example.com/fixture/club/coaches",
+                 disciplines=("race", "freeride")),
+        job_link("fixture-parent", "management", "Ski school leadership", "https://example.com/fixture/careers/leadership"),
+        job_link("fixture-parent", "corporate", "Fixture Parent corporate jobs", "https://example.com/fixture/parent/corporate"),
+        job_link("fixture-parent", "all", "All Fixture Parent jobs", "https://example.com/fixture/parent/jobs"),
+    ]},
+    "bravo-bowl": {"feed": True, "links": [
+        job_link("fixture-parent", "all", "All Fixture Parent jobs", "https://example.com/fixture/parent/jobs")]},
+}
+EMPLOYERS = [
+    {"id": "fixture-club", "name": "Alpha Peak Ski Club", "kind": "club", "careers_url": "https://example.com/fixture/club/coaches",
+     "ats": {"vendor": "unknown", "board": None}, "source_id": "fixture-resort-site", **CITE, "feed": False, "board_url": None},
+    {"id": "fixture-parent", "name": "Fixture Parent", "kind": "parent_company", "careers_url": "https://example.com/fixture/parent/jobs",
+     "ats": {"vendor": "greenhouse", "board": "fixtureparent"}, "source_id": "fixture-resort-site", **CITE,
+     "feed": True, "board_url": "https://boards.greenhouse.io/fixtureparent"},
+]
+FEED_AT = "2026-10-12T12:41:00Z"
+POSTING_ROWS = [  # (title, role group, resort ids, location)
+    ("Ski Instructor", "ski_school", ["alpha-peak"], "Alpha Peak, CO"),
+    ("Snowboard Instructor", "ski_school", ["alpha-peak"], "Alpha Peak, CO"),
+    ("Kids Ski Instructor", "ski_school", ["alpha-peak"], "Alpha Peak, CO"),
+    ("Adaptive Instructor", "ski_school", ["alpha-peak"], "Alpha Peak, CO"),
+    ("Freeride Coach", "coaching", ["alpha-peak"], "Alpha Peak, CO"),
+    ("Race Coach", "coaching", ["alpha-peak"], "Alpha Peak, CO"),
+    ("Ski School Supervisor", "management", ["alpha-peak"], "Alpha Peak, CO"),
+    ("Ski Instructor, Bravo Bowl", "ski_school", ["bravo-bowl"], "Bravo Bowl, CO"),
+    ("Director of Mountain Operations", "management", [], "Fixture City, CO"),
+    ("Snowsports Trainer", "ski_school", [], None),
+]
+POSTINGS = {"version": 1, "generated_at": FEED_AT, "fetched_at": FEED_AT, "keywords": ["instructor", "coach"],
+            "boards": [{"employer_id": "fixture-parent", "employer_name": "Fixture Parent", "vendor": "greenhouse",
+                        "board": "fixtureparent", "url": "https://example.com/fixture/parent/board",
+                        "source_id": "jobs-board-greenhouse-fixtureparent", "status": "ok", "fetched_at": FEED_AT,
+                        "as_of": "2026-10-12", "total": 40, "matched": len(POSTING_ROWS), "error": None}],
+            "sources": [{"id": "jobs-board-greenhouse-fixtureparent", "url": "https://example.com/fixture/parent/board",
+                         "title": "Synthetic fixture: job board", "accessed_date": "2026-10-12"}],
+            "postings": [{"id": f"greenhouse-{i + 1}", "employer_id": "fixture-parent", "title": t, "location": loc,
+                          "department": None, "url": f"https://example.com/fixture/parent/board/jobs/{i + 1}",
+                          "role_group": g, "resort_ids": ids, "source_id": "jobs-board-greenhouse-fixtureparent",
+                          "as_of": "2026-10-12", "confidence": "published", "fetched_at": FEED_AT}
+                         for i, (t, g, ids, loc) in enumerate(POSTING_ROWS)]}
+
 ACCESS = {
     "alpha-peak": ("transit_friendly", "A free bus links the staff village and the town to the base all day."),
     "kilo-notch": ("car_centric", "Most staff drive about 20 minutes from the valley towns."),
@@ -229,6 +291,8 @@ def resort_record(row):
         record["official_trailmap"] = {"url": "https://example.com/fixture/alpha-peak-trail-map-2025-26.pdf", "format": "pdf",
                                        "season": "2025/26", "source_id": "fixture-resort-site", "as_of": AS_OF,
                                        "confidence": "estimated", "note": None}
+    record["webcams"] = WEBCAMS.get(rid)
+    record["jobs"] = JOBS.get(rid)
     if rid in ACCESS:
         record["access"] = {"rating": ACCESS[rid][0], "summary_md": ACCESS[rid][1], "source_id": "fixture-location",
                             "as_of": AS_OF, "confidence": "estimated"}
@@ -249,6 +313,9 @@ def resort_record(row):
     for k in ("private_rate", "private_split"):
         if career.get(k):
             ids.add(career[k]["source_id"])
+    w = record["webcams"] or {}
+    ids.update(x["source_id"] for x in ([w["cams_page"]] if w.get("cams_page") else []) + w.get("cams", []))
+    ids.update(x["source_id"] for x in (record["jobs"] or {}).get("links", []))
     record["sources"] = sorted(ids)
     return record
 
@@ -547,6 +614,8 @@ def main():
     for row in RESORTS:
         if row[11]:
             write(f"climate/{row[0]}.json", climate_record(row))
+    write("jobs/employers.json", {"version": 1, "generated_at": GENERATED_AT, "employers": EMPLOYERS})
+    write("jobs/postings.json", POSTINGS)
     write_heat_fixture(cfg, resorts, {"type": "FeatureCollection", "features": feats})
     # The slim national index the map loads first, built the same way as the real one.
     from pipeline.routes import write_map_index  # noqa: PLC0415

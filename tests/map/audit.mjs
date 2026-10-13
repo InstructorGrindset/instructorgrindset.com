@@ -11,8 +11,9 @@
 //    decision 9); the audit clicks once the page settles and reports click to WebGL `load`.
 //    Times come from the page's own performance marks (navigation start = 0).
 // 2. The homepage makes zero requests to /map/ or /data/build/.
-// 3. axe-core on the national map, a resort page, the list view, the phone layout and two heat map modes.
-// 4. Lighthouse (mobile defaults) on /map/ and two resort pages.
+// 3. axe-core on the national map, a resort page, the list view, the phone layout, two heat map modes, the open
+//    search results and the Sources and credits page.
+// 4. Lighthouse (mobile defaults) on /map/, two resort pages and /map/credits/.
 //
 // Files are served by a small static server with gzip, like GitHub Pages; python's
 // http.server sends everything uncompressed, which would misstate the budget.
@@ -134,25 +135,40 @@ async function axe(browser, base) {
     { label: 'national map, before the map starts', url: '/map/', waiting: true },
     { label: 'national map', url: '/map/' },
     { label: 'resort page (Vail)', url: '/map/co/i70-corridor/vail/' },
+    { label: 'resort page with live cams and a jobs feed (Aspen Mountain)', url: '/map/co/roaring-fork/aspen-mountain/' },
+    { label: 'cluster page with jobs links (Roaring Fork)', url: '/map/co/roaring-fork/' },
     { label: 'list view', url: '/map/', list: true },
     { label: 'resort page, phone', url: '/map/co/i70-corridor/vail/', phone: true },
     { label: 'trail map dialog (Vail)', url: '/map/co/i70-corridor/vail/', trail: true },
     { label: 'trail map dialog, phone', url: '/map/co/i70-corridor/vail/', trail: true, phone: true },
     { label: 'national map, snowfall heat map', url: '/map/', heat: 'snowfall' },
     { label: 'national map, season heat map, phone', url: '/map/', heat: 'season', phone: true },
+    { label: 'search results open, before the map starts', url: '/map/', waiting: true, search: 'mount' },
+    { label: 'search results open on a resort page, phone', url: '/map/co/i70-corridor/vail/', waiting: true, search: 'tahoe', phone: true },
+    { label: 'search results in the list view', url: '/map/', list: true, search: 'big' },
+    { label: 'sources and credits page', url: '/map/credits/', static: true },
+    { label: 'sources and credits page, phone', url: '/map/credits/', static: true, phone: true },
   ];
   for (const c of cases) {
     const ctx = await browser.newContext(c.phone ? { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: 1280, height: 800 } });
     const page = await ctx.newPage();
     await page.goto(base + c.url);
-    await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 30000 });
-    if (c.waiting) await page.waitForTimeout(800);
+    if (c.static) await page.waitForSelector('.nav-root', { timeout: 30000 });
+    else await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 30000 });
+    if (c.waiting || c.static) await page.waitForTimeout(800);
     else {
       await page.locator('#map-start').click();
       await page.waitForFunction(() => performance.getEntriesByName('careermap:map').length > 0, null, { timeout: 30000 });
       await page.waitForTimeout(1500);
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
+    if (c.search) {
+      await page.locator('#map-search-input').focus();
+      await page.keyboard.type(c.search);
+      await page.waitForSelector('#map-search-list:not([hidden])', { timeout: 10000 });
+      await page.keyboard.press('ArrowDown');
+      await page.waitForTimeout(300);
+    }
     if (c.heat) {
       await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 30000 });
       await page.locator(`.recolor-modes .filter-btn[data-mode="${c.heat}"]`).click();
@@ -192,7 +208,7 @@ function run(bin, args, env, timeoutMs) {
 async function lighthouse(base) {
   const bin = path.join(HERE, 'node_modules', '.bin', 'lighthouse');
   if (!fs.existsSync(bin)) { console.log('  skip lighthouse not installed (cd tests/map && npm install)'); return; }
-  const pages = ['/map/', '/map/co/i70-corridor/vail/', '/map/wy/tetons/jackson-hole/'];
+  const pages = ['/map/', '/map/co/i70-corridor/vail/', '/map/wy/tetons/jackson-hole/', '/map/credits/'];
   for (const p of pages) {
     const out = path.join(OUT, `lighthouse${p.replace(/\//g, '_')}.json`);
     const res = await run(bin, [base + p, '--quiet', '--output=json', `--output-path=${out}`,
@@ -212,8 +228,10 @@ async function lighthouse(base) {
   }
 }
 
-const server = await serve(REPO, 8821);
-const base = 'http://127.0.0.1:8821';
+// MAP_AUDIT_PORT moves the server so parallel runs do not collide (default 8821).
+const AUDIT_PORT = Number(process.env.MAP_AUDIT_PORT) || 8821;
+const server = await serve(REPO, AUDIT_PORT);
+const base = `http://127.0.0.1:${AUDIT_PORT}`;
 try {
   const browser = ONLY_LH ? null : await chromium.launch({ executablePath: CHROME, args: ARGS });
   if (browser) {

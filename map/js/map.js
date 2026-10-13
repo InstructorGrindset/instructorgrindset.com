@@ -37,6 +37,34 @@ const TRAIL_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="2
 // Color modes draw a heat surface (heat.js) under small resort dots. Grey marks resorts without data.
 export const NO_DATA = '#8891a0';
 const HEAT_DOT = { fill: C.background, strokeA: C.tierA, strokeB: '#e7e9ee' };
+// Snowfall isolines: dark lines over the bright upper classes, bolder every major step. Minor lines come in from
+// zoom 4.5; labels from mountain range zoom. Labels are canvas drawn images, since the style has no glyph server.
+const ISO = { color: C.background, labelMinZoom: 6.5 };
+const ISO_LAYERS = ['heat-iso-minor', 'heat-iso-major', 'heat-iso-label'];
+
+/** A small "300 in" label image for an isoline value (2x pixel ratio). */
+function isoLabelImage(value) {
+  const text = `${value} in`;
+  const ratio = 2;
+  const font = `600 ${10.5 * ratio}px Inter, system-ui, sans-serif`;
+  const c = document.createElement('canvas');
+  const ctx = c.getContext('2d', { willReadFrequently: true });
+  ctx.font = font;
+  const pad = 3 * ratio;
+  c.width = Math.ceil(ctx.measureText(text).width + 2 * pad);
+  c.height = 15 * ratio;
+  ctx.font = font;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = 3 * ratio;
+  ctx.strokeStyle = 'rgba(255,255,255,0.88)';
+  ctx.strokeText(text, c.width / 2, c.height / 2);
+  ctx.fillStyle = '#10151e';
+  ctx.fillText(text, c.width / 2, c.height / 2);
+  const d = ctx.getImageData(0, 0, c.width, c.height);
+  return { width: c.width, height: c.height, data: new Uint8Array(d.data.buffer) };
+}
 
 function svgImage(id, shape, fill, stroke, width) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="${fill}" stroke="${stroke}" stroke-width="${width}" stroke-linejoin="round">${shape}</g></svg>`;
@@ -353,7 +381,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
   let national = true;
   let heatAK = [];     // heat layers of Alaska only regions, at true coordinates
   let heatInset = [];  // their copies in the national inset
-  let recolor = null; // { key, prop, images, format, attribution } or null for default
+  let recolor = null; // { key, prop, images, format, attribution, isolines } or null for default
   let heatIds = [];
 
   function resortTip(t) {
@@ -413,6 +441,11 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
         heatInset.push(`${id}-inset`);
       }
     });
+    if (recolor.isolines) {
+      const mine = recolor;
+      Promise.resolve(recolor.isolines).then((fc) => { if (fc && recolor === mine && map.getLayer('resorts')) addIsolines(fc); })
+        .catch((err) => console.warn('[map] isolines', err.message));
+    }
     syncLayers();
     // Cluster tints would shift the heat colors; outlines stay.
     map.setPaintProperty('clusters-fill', 'fill-opacity', 0);
@@ -425,6 +458,45 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     }
     map.setPaintProperty('inset-clusters-fill', 'fill-opacity', 0);
     if (map.getLayer('resorts-facility')) map.setPaintProperty('resorts-facility', 'icon-opacity', ['case', fs('dim'), 0.3, isNull, 0.6, 1]);
+  }
+  /** Snowfall isolines over the heat surface (true coordinates only; the national inset is too small for them). */
+  function addIsolines(fc) {
+    if (map.getSource('heat-iso')) return;
+    for (const v of new Set(fc.features.map((f) => f.properties.value))) {
+      if (!map.hasImage(`iso-${v}`)) map.addImage(`iso-${v}`, isoLabelImage(v), { pixelRatio: 2 });
+    }
+    map.addSource('heat-iso', { type: 'geojson', data: fc });
+    const lines = map.getLayer('states-line') ? 'states-line' : undefined;
+    const labels = map.getLayer('states-line-selected') ? 'states-line-selected' : undefined;
+    const major = ['boolean', ['get', 'major'], false];
+    map.addLayer({
+      id: 'heat-iso-minor', type: 'line', source: 'heat-iso', filter: ['!', major], minzoom: 4.5,
+      layout: { 'line-join': 'round', 'line-cap': 'round' },
+      paint: {
+        'line-color': ISO.color,
+        'line-opacity': ['interpolate', ['linear'], ['zoom'], 4.5, 0, 6, 0.5, 9, 0.6],
+        'line-width': ['interpolate', ['linear'], ['zoom'], 5, 0.4, 8, 0.8, 11, 1.2],
+      },
+    }, lines);
+    map.addLayer({
+      id: 'heat-iso-major', type: 'line', source: 'heat-iso', filter: major,
+      layout: { 'line-join': 'round', 'line-cap': 'round' },
+      paint: {
+        'line-color': ISO.color,
+        'line-opacity': ['interpolate', ['linear'], ['zoom'], 3, 0.45, 6, 0.8],
+        'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.5, 6, 1.1, 9, 1.8, 11, 2.2],
+      },
+    }, lines);
+    map.addLayer({
+      id: 'heat-iso-label', type: 'symbol', source: 'heat-iso', minzoom: ISO.labelMinZoom,
+      filter: ['==', ['get', 'label'], true],
+      layout: {
+        'symbol-placement': 'line', 'symbol-spacing': 280, 'icon-image': ['concat', 'iso-', ['to-string', ['get', 'value']]],
+        'icon-rotation-alignment': 'map', 'icon-keep-upright': true, 'icon-size': 1, 'icon-padding': 2,
+      },
+    }, labels);
+    heatIds.push(...ISO_LAYERS, 'heat-iso');
+    syncLayers();
   }
   function resortLayers() { return layersIn(['resorts', 'resorts-facility', 'inset-resorts', 'inset-resorts-facility']); }
   function applyFilter() { syncLayers(); }
@@ -452,6 +524,14 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     if (national) { vis('inset-resorts', filter !== 'facility'); vis('inset-resorts-facility', filter !== 'ski_area'); }
     for (const id of heatAK) vis(id, !national);
     for (const id of heatInset) vis(id, national);
+    // Alaska's isolines draw at its true place only, which the national view hides.
+    const isoAK = national ? ['!=', ['get', 'region'], 'alaska'] : true;
+    if (map.getLayer('heat-iso-minor')) {
+      const major = ['boolean', ['get', 'major'], false];
+      map.setFilter('heat-iso-minor', ['all', ['!', major], isoAK]);
+      map.setFilter('heat-iso-major', ['all', major, isoAK]);
+      map.setFilter('heat-iso-label', ['all', ['==', ['get', 'label'], true], isoAK]);
+    }
   }
 
   // Ready as soon as the style and the data sources (states, clusters, resorts) are in and drawn. MapLibre's own

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T15:07:44Z",
+  "generated_at": "2026-10-13T15:15:11Z",
   "heat": {
     "ramp": {
       "name": "viridis",
@@ -80,7 +80,13 @@
           "#f37511"
         ],
         "legend_compress_below": null,
-        "legend_ticks": null
+        "legend_ticks": [
+          90.0,
+          110.0,
+          130.0,
+          150.0,
+          180.0
+        ]
       },
       "snowfall": {
         "scale": "classed",
@@ -133,7 +139,7 @@
         ],
         "legend_compress_below": 180.0,
         "legend_ticks": [
-          24.0,
+          0.0,
           180.0,
           300.0,
           400.0,

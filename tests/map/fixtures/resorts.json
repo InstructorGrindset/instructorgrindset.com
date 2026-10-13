@@ -324,6 +324,116 @@
     "confidence": "estimated",
     "note": null
    },
+   "webcams": {
+    "cams_page": {
+     "url": "https://example.com/fixture/alpha-peak/cams",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    },
+    "cams": [
+     {
+      "label": "Summit cam",
+      "url": "https://example.com/fixture/alpha-peak/cams/summit",
+      "kind": "stream",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "label": "Base area",
+      "url": "https://example.com/fixture/alpha-peak/cams/base",
+      "kind": "image",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "label": "Back bowls",
+      "url": "https://example.com/fixture/alpha-peak/cams/bowls",
+      "kind": "page",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "label": "Terrain park",
+      "url": "https://example.com/fixture/alpha-peak/cams/park",
+      "kind": "stream",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
+   "jobs": {
+    "feed": true,
+    "links": [
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "ski_school",
+      "disciplines": [],
+      "label": "Ski and ride school jobs",
+      "url": "https://example.com/fixture/careers",
+      "source_id": "fixture-careers",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-club",
+      "role_group": "coaching",
+      "disciplines": [
+       "race",
+       "freeride"
+      ],
+      "label": "Alpha Peak Ski Club coaches",
+      "url": "https://example.com/fixture/club/coaches",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "management",
+      "disciplines": [],
+      "label": "Ski school leadership",
+      "url": "https://example.com/fixture/careers/leadership",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "corporate",
+      "disciplines": [],
+      "label": "Fixture Parent corporate jobs",
+      "url": "https://example.com/fixture/parent/corporate",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "all",
+      "disciplines": [],
+      "label": "All Fixture Parent jobs",
+      "url": "https://example.com/fixture/parent/jobs",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
    "access": {
     "rating": "transit_friendly",
     "summary_md": "A free bus links the staff village and the town to the base all day.",
@@ -338,6 +448,7 @@
     "has_transit": true
    },
    "sources": [
+    "fixture-careers",
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
@@ -569,6 +680,23 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": {
+    "feed": true,
+    "links": [
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "all",
+      "disciplines": [],
+      "label": "All Fixture Parent jobs",
+      "url": "https://example.com/fixture/parent/jobs",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -768,6 +896,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -825,6 +955,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location"
@@ -950,6 +1082,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1221,6 +1355,8 @@
    "facility_type": "ski_area",
    "detail_available": true,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1349,6 +1485,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1580,6 +1718,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1708,6 +1848,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1835,6 +1977,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1990,6 +2134,8 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "access": {
     "rating": "car_centric",
     "summary_md": "Most staff drive about 20 minutes from the valley towns.",
@@ -2124,6 +2270,8 @@
    "climate_available": false,
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2262,6 +2410,8 @@
    "facility_type": "indoor",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2381,6 +2531,8 @@
    "facility_type": "training_center",
    "detail_available": false,
    "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",

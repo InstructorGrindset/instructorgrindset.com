@@ -1205,6 +1205,14 @@ async function realData(browser, base) {
           const href = await page.locator('#panel-content .official-trailmap a').getAttribute('href');
           check(href === r.official_trailmap.url, `real data ${r.name}: official trail map link (${href})`);
         }
+        if (r.webcams && r.webcams.cams_page) {
+          const cam = await page.locator('#panel-content a.live-cams-link').getAttribute('href');
+          check(cam === r.webcams.cams_page.url, `real data ${r.name}: Open live cams links the resort's cams page`);
+        }
+        if (r.jobs) {
+          check(await page.locator('#panel-content section.jobs a.job-link').count() === r.jobs.links.length,
+            `real data ${r.name}: every jobs link renders (${r.jobs.links.length})`);
+        }
         await trailMapChecks(page, `real data ${r.name}`, path.join(REPO, 'data', 'build', 'trailmap', `${id}.json`), { shotName: `real-desktop-trail-map-${id}.png`, base: [r.lon, r.lat] });
       }
     }
@@ -1213,6 +1221,306 @@ async function realData(browser, base) {
   }
 }
 
+// Live cams and jobs (map/js/livelinks.js, pipeline/routes.py): links only, each in a new tab with noopener; job
+// groups in order; open roles from the fixture jobs/postings.json; the cluster Hiring summary; an empty feed;
+// prerendered stubs; keyboard use; axe on the panel.
+async function liveLinksChecks(browser, stubBase) {
+  log('\nLive cams and jobs');
+  const axeSrc = (() => {
+    try { return fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [path.join(REPO, 'tests', 'map')] }), 'utf8'); } catch { return null; }
+  })();
+  const newCtx = async () => {
+    const c = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    // Links point at example.com; answer the new tabs locally (the sandbox has no outside network).
+    await c.route(/^https:\/\/example\.com\//, (route) => route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>Example</title>' }));
+    return c;
+  };
+  async function axePanel(page, label) {
+    if (!axeSrc) { log(`  skip axe ${label}: run (cd tests/map && npm install) for axe-core`); return; }
+    await page.addScriptTag({ content: axeSrc });
+    const res = await page.evaluate(async () => {
+      const r = await window.axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] } });
+      return r.violations.map((v) => `${v.id} (${v.impact}): ${v.help} ${JSON.stringify(v.nodes.slice(0, 3).map((n) => n.target.join(' ')))}`);
+    });
+    check(res.length === 0, `axe ${label}: ${res.length} violations${res.length ? `\n      ${res.join('\n      ')}` : ''}`);
+  }
+
+  const ctx = await newCtx();
+  const page = await ctx.newPage();
+  const w = watch(page, 'live cams and jobs');
+  await page.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(page, { start: false });
+  await page.waitForSelector('#panel-content .jobs-live:not([hidden])', { timeout: 15000 });
+  const panel = page.locator('#panel-content');
+  const cams = panel.locator('.live-cams');
+  const open = cams.locator('a.live-cams-link');
+  check(await cams.locator('.live-cams-title').innerText() === 'Live cams' && await open.innerText() === 'Open live cams'
+    && await open.getAttribute('href') === 'https://example.com/fixture/alpha-peak/cams', 'Live cams row: Open live cams links the resort cams page');
+  check(JSON.stringify(await cams.locator('.cam-list a').allInnerTexts()) === JSON.stringify(['Summit cam', 'Base area', 'Back bowls', 'Terrain park']),
+    'Live cams row lists the named cams');
+  const camText = await cams.innerText();
+  check(camText.includes('Live stream') && camText.includes('Still image') && camText.includes('example.com · opens in a new tab'),
+    'named cams say what they are; the cams page names its site');
+  check(await cams.locator('.badge-estimated').count() === 5, 'every cam link shows its confidence badge');
+  check(await panel.locator('iframe, video, embed, object, img').count() === 0, 'cams are linked, never embedded');
+  const jobs = panel.locator('section.jobs');
+  check(JSON.stringify(await jobs.locator('.job-group h4').allInnerTexts())
+    === JSON.stringify(['Ski school', 'Coaching and clubs', 'Management', 'Parent company', 'Job boards']), 'job groups in order');
+  check(JSON.stringify(await jobs.locator('.job-group[data-group="coaching"] .tag').allInnerTexts()) === JSON.stringify(['Race', 'Freeride']),
+    'coaching and club links show disciplines as tags');
+  check(await jobs.locator('.job-links li').count() === 5 && await jobs.locator('.job-links .badge-estimated').count() === 5,
+    'every jobs link shows its confidence badge');
+  const ski = await jobs.locator('.job-group[data-group="ski_school"] li').innerText();
+  check(ski.includes('Last verified Oct 1, 2026') && !ski.includes('Synthetic fixture: careers page'), 'a link whose source is the same page shows only its date');
+  check((await jobs.locator('.job-group[data-group="management"] li').innerText()).includes('Synthetic fixture: resort facts'),
+    'a link cites its source when the source is another page');
+  const live = jobs.locator('.jobs-live');
+  const liveText = await live.innerText();
+  check((await live.locator('.jobs-open').innerText()).startsWith('7 open roles') && await live.locator('.jobs-open .badge-published').count() === 1,
+    'open roles: count with a Published badge');
+  check(JSON.stringify(await live.locator('.posting-list a').allInnerTexts())
+    === JSON.stringify(['Adaptive Instructor', 'Kids Ski Instructor', 'Ski Instructor', 'Snowboard Instructor', 'Freeride Coach']),
+  'open roles: up to 5 titles, ski school first');
+  check(liveText.includes('2 more roles on the job boards below.') && liveText.includes('Plus 2 roles at Fixture Parent with no single resort named.'),
+    'open roles: the rest and the employer wide roles are counted');
+  check(liveText.includes('Updated Oct 12, 2026 from Fixture Parent job board.') && !liveText.includes('Bravo Bowl'),
+    "open roles: Updated date and board; another resort's roles stay off");
+  const rels = await page.$$eval('#panel-content .live-cams a, #panel-content section.jobs a', (as) => as.map((a) => [a.target, a.rel]));
+  check(rels.length >= 5 + 5 + 5 && rels.every(([t, rel]) => t === '_blank' && /\bnoopener\b/.test(rel)),
+    `every cam, jobs and posting link opens in a new tab with rel noopener (${rels.length} links)`);
+  // Keyboard: Tab from the heading reaches Open live cams, and Enter opens it in a new tab.
+  await page.locator('#panel-heading').focus();
+  let reached = false;
+  for (let i = 0; i < 40 && !reached; i++) {
+    await page.keyboard.press('Tab');
+    reached = await page.evaluate(() => document.activeElement && document.activeElement.classList.contains('live-cams-link'));
+  }
+  check(reached, 'Tab reaches Open live cams');
+  const [popup] = await Promise.all([ctx.waitForEvent('page'), page.keyboard.press('Enter')]);
+  await popup.waitForLoadState();
+  check(popup.url() === 'https://example.com/fixture/alpha-peak/cams' && new URL(page.url()).pathname.endsWith('/alpha-peak/'),
+    'Enter opens the cams page in a new tab and the map stays put');
+  await popup.close();
+  await shot(page, 'desktop-20-live-cams-jobs.png');
+  await axePanel(page, 'resort page with live cams, jobs and open roles');
+
+  // Cluster: compact Hiring summary, and Live cams in the resort list.
+  await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
+  await page.waitForSelector('#panel-content .hiring:not([hidden])', { timeout: 15000 });
+  const hiring = (await panel.locator('.hiring').textContent()).replace(/\s+/g, ' ');
+  check(hiring.startsWith('Hiring') && hiring.includes('Fixture Parent') && hiring.includes('8 open roles') && hiring.includes('Updated Oct 12, 2026.'),
+    `cluster Hiring summary lists employers with open roles (${hiring.replace(/\s+/g, ' ')})`);
+  check((await panel.locator('.resort-list a', { hasText: 'Alpha Peak' }).innerText()).includes('Live cams'), 'cluster list marks resorts with live cams');
+  await axePanel(page, 'cluster page with the Hiring summary');
+  w.assertClean();
+  await ctx.close();
+
+  // A Tier A resort without jobs links never loads postings; a Tier B resort without them shows no Jobs section.
+  const ctx2 = await newCtx();
+  const p2 = await ctx2.newPage();
+  const w2 = watch(p2, 'resorts without jobs');
+  await p2.goto(`${stubBase}/map/vt/fixture-green-ridge/kilo-notch/`);
+  await ready(p2, { start: false });
+  await p2.waitForSelector('#panel-content section.jobs', { timeout: 15000 });
+  check((await p2.locator('#panel-content section.jobs').innerText()).includes('Jobs links are being collected.')
+    && await p2.locator('#panel-content .live-cams').count() === 0, 'Tier A without links: Jobs says links are being collected; no Live cams row');
+  check(!w2.requests.some((u) => u.includes('/jobs/postings.json')), 'no postings fetch for a resort without a feed');
+  await p2.goto(`${stubBase}/map/co/fixture-front-range/charlie-hill/`);
+  await ready(p2, { start: false });
+  await p2.waitForFunction(() => document.querySelectorAll('#panel-content .facts').length >= 3, null, { timeout: 15000 });
+  check(await p2.locator('#panel-content section.jobs').count() === 0, 'Tier B without links has no Jobs section');
+  // An empty feed: the panel shows the links only.
+  await ctx2.route(/\/data\/build\/jobs\/postings\.json$/, (route) => route.fulfill({ status: 200, contentType: 'application/json',
+    body: JSON.stringify({ version: 1, generated_at: '2026-10-13T00:00:00Z', fetched_at: null, keywords: [], boards: [], sources: [], postings: [] }) }));
+  await p2.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(p2, { start: false });
+  await p2.waitForSelector('#panel-content section.jobs .job-link', { timeout: 15000 });
+  await p2.waitForFunction(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/jobs/postings.json')), null, { timeout: 15000 });
+  await p2.waitForTimeout(300);
+  check(await p2.locator('#panel-content .jobs-live').isHidden() && await p2.locator('#panel-content .job-link').count() === 5,
+    'with an empty feed the Jobs section shows the links only');
+  w2.assertClean();
+  await ctx2.close();
+
+  // Without JavaScript the stub carries the cams and jobs links (never the postings, which change daily).
+  const nojs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 800 } });
+  const np = await nojs.newPage();
+  await np.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  check(await np.locator('#panel-content a.live-cams-link').count() === 1 && await np.locator('#panel-content .cam-list a').count() === 4
+    && await np.locator('#panel-content .job-link').count() === 5 && await np.locator('#panel-content .jobs-live, #panel-content .posting-list').count() === 0,
+  'prerendered stub links the cams and jobs');
+  check(JSON.stringify(await np.locator('#panel-content .job-group h4').allInnerTexts())
+    === JSON.stringify(['Ski school', 'Coaching and clubs', 'Management', 'Parent company', 'Job boards']), 'prerendered job groups in order');
+  await nojs.close();
+}
+
+// Resort search (map/js/search.js): loose matching and ranking, keyboard selection before the map starts, the deep
+// link a result lands on, the list view, the WebGL map flying to a result, and the phone layout above the sheet.
+async function searchChecks(browser, base, stubBase) {
+  log('\nResort search');
+  // Wait for the background loads (map prefetch after the window load, climate and charts) so leaving the page
+  // aborts nothing.
+  const inflight = new WeakMap();
+  const track = (p) => {
+    inflight.set(p, 0);
+    p.on('request', () => inflight.set(p, inflight.get(p) + 1));
+    for (const ev of ['requestfinished', 'requestfailed']) p.on(ev, () => inflight.set(p, inflight.get(p) - 1));
+  };
+  const settle = async (p) => {
+    await p.waitForFunction(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/map/js/map.js')), null, { timeout: 10000 });
+    for (let quiet = 0; quiet < 5;) { await p.waitForTimeout(100); quiet = inflight.get(p) <= 0 ? quiet + 1 : 0; }
+  };
+  const fix = JSON.parse(fs.readFileSync(path.join(REPO, 'tests', 'map', 'fixtures', 'map-index.json'), 'utf8'));
+  const at = (id) => { const row = fix.resorts.find((r) => r[0] === id); return [row[fix.fields.indexOf('lon')], row[fix.fields.indexOf('lat')]]; };
+  const inView = (page, lngLat) => page.evaluate((ll) => { const m = window.__careerMap.mapCtl.map; return m.getBounds().contains(ll) && m.getZoom() > 7; }, lngLat);
+  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const w = watch(page, 'search');
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  const input = page.getByRole('combobox', { name: 'Search resorts, clusters and states' });
+  const list = page.locator('#map-search-list');
+  const opts = list.getByRole('option');
+  const loaded = () => page.evaluate(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/map/js/search.js')));
+  check(await input.isVisible() && await input.getAttribute('aria-expanded') === 'false' && !(await loaded()), 'search box shows; search.js waits for first use');
+
+  const unit = await page.evaluate(async () => {
+    const m = await import('/map/js/search.js');
+    const items = m.buildItems(window.__careerMap.index);
+    const names = (q) => m.search(items, q).map((x) => x.name);
+    return { norm: m.normalize("Smúgglers’ NOTCH, Mt. Hood"), ch: names('ch'), mount: names('mount hood'), alpha: names('ALPHA'), co: names('co')[0], none: names('zzz').length };
+  });
+  check(unit.norm === 'smugglers notch mt hood', `matching ignores accents, case and punctuation ("${unit.norm}")`);
+  check(unit.ch[0] === 'Charlie Hill' && unit.ch.indexOf('Echo Mesa') > 0, `prefix matches rank first (ch: ${unit.ch.join(', ')})`);
+  check(unit.alpha[0] === 'Alpha Peak' && unit.co === 'Colorado' && unit.none === 0, 'case loose names and state codes match');
+
+  await input.focus();
+  await page.keyboard.type('bravo');
+  await list.waitFor({ state: 'visible' });
+  const first = (await opts.first().innerText()).replace(/\s+/g, ' ');
+  check(await input.getAttribute('aria-expanded') === 'true' && await opts.count() === 1 && first === 'Bravo Bowl Tier A resort in Colorado',
+    `typing lists matches with tier and state ("${first}")`);
+  await page.keyboard.press('ArrowDown');
+  const active = await input.getAttribute('aria-activedescendant');
+  const ring = active && await page.locator(`#${active}`).evaluate((el) => `${el.getAttribute('aria-selected')} ${getComputedStyle(el).outlineStyle} ${getComputedStyle(el).outlineWidth}`);
+  check(ring === 'true solid 2px', `ArrowDown makes the option active with a visible focus ring (${ring})`);
+  check(await input.evaluate((el) => getComputedStyle(el).outlineStyle) === 'solid', 'the search box shows a focus ring');
+  await shot(page, 'search-01-results.png');
+  await page.keyboard.press('Enter');
+  await page.waitForURL(/\/map\/co\/fixture-front-range\/bravo-bowl\/\?data=/);
+  check(await heading(page) === 'Bravo Bowl', 'Enter opens the resort through the router');
+  check(await list.isHidden() && await input.getAttribute('aria-expanded') === 'false' && await input.inputValue() === '', 'the list closes and the box clears');
+  check(await page.evaluate(() => document.activeElement.id === 'panel-heading'), 'focus moves to the panel heading, as after a click');
+  check(await page.evaluate(() => !window.__careerMap.mapStarted && !window.__careerMap.mapCtl && document.querySelectorAll('.map-preview').length === 1),
+    'a result chosen before the map starts leaves the WebGL map waiting and redraws the picture');
+
+  await input.focus();
+  await page.keyboard.type('fixture');
+  await list.waitFor({ state: 'visible' });
+  const n = await opts.count();
+  await page.keyboard.press('ArrowUp');
+  check(n === 5 && await input.getAttribute('aria-activedescendant') === `map-search-list-opt-${n - 1}`, `ArrowUp wraps to the last of ${n} results`);
+  await page.keyboard.press('Escape');
+  check(await list.isHidden() && await input.inputValue() === 'fixture', 'Escape closes the list and keeps the text');
+  await page.keyboard.press('Escape');
+  check(await input.inputValue() === '', 'a second Escape clears the box');
+  await page.keyboard.type('zz top');
+  check(await page.locator('.map-search-empty').isVisible() && await list.isHidden(), 'no match says so');
+  await input.fill('');
+
+  // List view: the panel follows and the list marks the result.
+  await page.getByRole('button', { name: 'List view' }).click();
+  await input.focus();
+  await page.keyboard.type('kilo');
+  await list.waitFor({ state: 'visible' });
+  await page.keyboard.press('Enter');
+  await page.waitForURL(/\/map\/vt\/fixture-green-ridge\/kilo-notch\//);
+  const cur = page.locator('#list-view a[aria-current="page"]');
+  const shown = await cur.evaluate((el) => { const r = el.getBoundingClientRect(); const l = el.closest('#list-view').getBoundingClientRect(); return r.top >= l.top && r.bottom <= l.bottom; });
+  check(await heading(page) === 'Kilo Notch' && await page.locator('#list-view').isVisible() && await cur.innerText() === 'Kilo Notch' && shown,
+    'list view: a result opens the resort and the list marks it');
+  await shot(page, 'search-02-list-view.png');
+  await page.getByRole('button', { name: 'Map view' }).click();
+
+  // The map starts on the chosen view, then flies to the next result (picked with the mouse).
+  await page.locator('#map-start').click();
+  await page.waitForFunction(() => window.__careerMap.mapCtl, null, { timeout: 20000 });
+  await mapIdle(page);
+  check(await inView(page, at('kilo-notch')), 'the WebGL map starts on the result chosen before it ran');
+  await input.click();
+  await page.keyboard.type('hotel');
+  await list.waitFor({ state: 'visible' });
+  await opts.first().click();
+  await page.waitForURL(/\/map\/ca\/fixture-lake-crest\/hotel-lake\//);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.isMoving(), null, { timeout: 3000 }).catch(() => {});
+  await mapIdle(page);
+  check(await heading(page) === 'Hotel Lake' && await inView(page, at('hotel-lake')), 'with the map running, a clicked result flies the map there');
+  w.assertClean();
+  await page.close();
+
+  // Deep link stubs: a result lands on a real page URL, and a cluster keeps the state the visitor is in.
+  const sp = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const ws = watch(sp, 'search on stubs');
+  track(sp);
+  await sp.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(sp, { start: false });
+  const sInput = sp.getByRole('combobox', { name: 'Search resorts, clusters and states' });
+  await sInput.focus();
+  await sp.keyboard.type('Hotel');
+  await sp.locator('#map-search-list').waitFor({ state: 'visible' });
+  await sp.keyboard.press('Enter');
+  await sp.waitForURL(/\/map\/ca\/fixture-lake-crest\/hotel-lake\/$/);
+  await settle(sp); // let the background loads (map prefetch, climate, charts) finish before leaving the page
+  await sp.reload();
+  await ready(sp, { start: false });
+  check(await heading(sp) === 'Hotel Lake' && (await sp.title()).startsWith('Instructor pay, housing, and snow at Hotel Lake'),
+    'the URL a result lands on is a working deep link');
+  await settle(sp);
+  await sp.goto(`${stubBase}/map/nv/`);
+  await ready(sp, { start: false });
+  await sInput.focus();
+  await sp.keyboard.type('lake crest');
+  await sp.locator('#map-search-list').waitFor({ state: 'visible' });
+  await sp.keyboard.press('Enter');
+  await sp.waitForURL(/\/map\/nv\/fixture-lake-crest\/$/);
+  check(await heading(sp) === 'Fixture Lake Crest', 'a cluster result keeps the current state (/map/nv/fixture-lake-crest/)');
+  await settle(sp);
+  ws.assertClean();
+  await sp.close();
+
+  // Phone: the box fits the top bar and the results stop above the bottom sheet.
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+  const pp = await ctx.newPage();
+  const wp = watch(pp, 'search phone');
+  await pp.goto(`${base}/map/${Q}`);
+  await ready(pp, { start: false });
+  const box = (sel) => pp.locator(sel).boundingBox();
+  const [hdr, sbox, tog] = [await box('.map-header'), await box('#map-search'), await box('#list-toggle')];
+  check(sbox.y >= hdr.y && sbox.y + sbox.height <= hdr.y + hdr.height && sbox.x + sbox.width <= tog.x, 'phone: the search box fits the top bar');
+  await pp.locator('#sheet-handle').click();
+  await pp.waitForTimeout(400);
+  const pInput = pp.getByRole('combobox', { name: 'Search resorts, clusters and states' });
+  await pInput.tap();
+  await pp.keyboard.type('a');
+  await pp.locator('#map-search-list').waitFor({ state: 'visible' });
+  // Wait for the sheet to finish sliding to half.
+  await pp.waitForFunction(() => { const t = document.getElementById('panel').getBoundingClientRect().top; const same = window.__sheetTop === t; window.__sheetTop = t; return same; },
+    null, { polling: 150, timeout: 5000 });
+  const fit = await pp.evaluate(() => ({ list: document.getElementById('map-search-list').getBoundingClientRect().bottom,
+    sheet: document.getElementById('panel').getBoundingClientRect().top, state: document.getElementById('panel').dataset.sheet,
+    rows: document.querySelectorAll('#map-search-list [role="option"]').length }));
+  check(fit.state === 'half' && fit.list <= fit.sheet && fit.rows > 1, `phone: results stop above the sheet (list ${Math.round(fit.list)} px, sheet ${Math.round(fit.sheet)} px; a full sheet drops to half)`);
+  await shot(pp, 'search-03-phone.png');
+  await pp.locator('#map-search-list [role="option"]', { hasText: 'Alpha Peak' }).tap();
+  await pp.waitForURL(/\/map\/co\/fixture-front-range\/alpha-peak\//);
+  check(await heading(pp) === 'Alpha Peak', 'phone: a tapped result opens the resort');
+  wp.assertClean();
+  await ctx.close();
+}
+
+// MAP_TEST_PORT moves both servers (repository, stub site) so parallel runs do not collide; default 8811 and 8812.
+const PORT = Number(process.env.MAP_TEST_PORT) || 8811;
+const REPO_BASE = `http://127.0.0.1:${PORT}`;
+const STUB_BASE = `http://127.0.0.1:${PORT + 1}`;
 const servers = [];
 let stubRoot = null;
 try {
@@ -1231,15 +1539,17 @@ try {
     return c;
   };
   browser.newPage = async (opts) => (await browser.newContext(opts)).newPage();
-  servers.push(await serve(REPO, 8811));
+  servers.push(await serve(REPO, PORT));
   stubRoot = makeStubSite();
-  servers.push(await serve(stubRoot, 8812));
+  servers.push(await serve(stubRoot, PORT + 1));
 
-  await imageryOutage(browser, 'http://127.0.0.1:8811');
-  await desktop(browser, 'http://127.0.0.1:8811');
-  await desktopStub(browser, 'http://127.0.0.1:8812');
-  await phone(browser, 'http://127.0.0.1:8812');
-  await realData(browser, 'http://127.0.0.1:8811');
+  await imageryOutage(browser, REPO_BASE);
+  await desktop(browser, REPO_BASE);
+  await desktopStub(browser, STUB_BASE);
+  await phone(browser, STUB_BASE);
+  await searchChecks(browser, REPO_BASE, STUB_BASE);
+  await liveLinksChecks(browser, STUB_BASE);
+  await realData(browser, REPO_BASE);
   await browser.close();
 } catch (err) {
   failures.push(`crashed: ${err.stack || err}`);

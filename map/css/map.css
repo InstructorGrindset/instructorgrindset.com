@@ -382,6 +382,11 @@ body.list-mode .recolor { display: none; }
 .heat-tick-end { transform: translateX(-100%); }
 .heat-tick-end::before { left: auto; right: 0; }
 .heat-range { margin: .25rem 0 0; color: var(--ink); }
+.heat-bar-classed { height: 12px; }
+.heat-low { display: flex; align-items: center; gap: .35rem; margin: .25rem 0 0; color: var(--muted); }
+.key-swatch { width: 14px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+/* An isoline over a class color, as drawn on the map. */
+.key-line { width: 14px; height: 9px; border-radius: 2px; flex-shrink: 0; background: linear-gradient(var(--iso-under) 0 3.5px, #0a0e14 3.5px 5.5px, var(--iso-under) 5.5px); }
 .heat-about { margin: .3rem 0 0; }
 .heat-about summary { cursor: pointer; color: var(--muted); }
 .heat-about summary:focus-visible { outline: 2px solid var(--accent, #e0a03a); outline-offset: 2px; }
@@ -571,9 +576,13 @@ body.map-page { background: var(--bg); }
 @media (max-width: 379.98px) {
   .map-header h1 { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
+@media (max-width: 759.98px) {
+  /* While typing, the search takes the title's room (the title stays for screen readers). */
+  .map-header:has(.map-search-input:focus) h1 { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 
 /* ── Live cams and jobs (links only, opened in a new tab; map/js/livelinks.js and pipeline/routes.py) ── */
-.live-cams { margin: .6rem 0 0; }
+.live-cams { margin: .6rem 0 .9rem; }
 .live-cams .live-cams-title { margin: 0 0 .2rem; }
 .live-cams-main { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .4rem; }
 .live-cams-link, .cam-link, .job-link, .posting-link {

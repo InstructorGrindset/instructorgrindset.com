@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T15:07:44Z",
+  "generated_at": "2026-10-13T15:15:11Z",
   "mode": "season",
   "units": "days",
   "scale": "classed",
@@ -10,9 +10,7 @@
   },
   "ticks": [
     90.0,
-    100.0,
     110.0,
-    120.0,
     130.0,
     150.0,
     180.0
@@ -39,9 +37,7 @@
   "legend": {
     "ticks": [
       90.0,
-      100.0,
       110.0,
-      120.0,
       130.0,
       150.0,
       180.0
@@ -67,7 +63,7 @@
     "no_data_reach_km": 120.0
   },
   "attribution": null,
-  "inputs_sha256": "fc94c46ca3f8b671df55759ceb34b2a1e5a2c71c16135980d0dcb2c70b21f612",
+  "inputs_sha256": "073aae02bd869a536bdcae309a64543d0ca09b7da0f357ffca389a44dfeac725",
   "rasters": [
     {
       "region": "lower48",
@@ -92,7 +88,7 @@
           24.4
         ]
       ],
-      "bytes": 77008,
+      "bytes": 90162,
       "resorts": 326,
       "no_data_states": [
         "AL",

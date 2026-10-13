@@ -459,6 +459,34 @@ export function loadHeatRaster(mode) {
   return heatRasterCache.get(mode);
 }
 
+const isolineCache = new Map();
+const isIsoline = (f) => f && f.type === 'Feature' && f.geometry && f.geometry.type === 'LineString'
+  && Array.isArray(f.geometry.coordinates) && f.geometry.coordinates.length >= 2
+  && f.properties && typeof f.properties.value === 'number' && Number.isFinite(f.properties.value);
+
+/**
+ * Isolines listed in a raster manifest (`isolines.files`, GeoJSON LineStrings with `value`, `major`, `label`,
+ * `region`), merged into one FeatureCollection. Loaded only with their mode. Resolves to null when there are none
+ * or none load; malformed features are dropped.
+ */
+export function loadHeatIsolines(manifest) {
+  const files = manifest && manifest.isolines && Array.isArray(manifest.isolines.files) ? manifest.isolines.files : [];
+  const names = files.map((f) => f && f.file).filter((f) => typeof f === 'string' && /^[a-z0-9-]+\.geojson$/.test(f));
+  if (!names.length) return Promise.resolve(null);
+  const key = `${manifest.mode}:${names.join(',')}`;
+  if (!isolineCache.has(key)) {
+    const p = Promise.all(names.map((n) => fetchJson(`heat/${n}`, { optional: true }).catch((err) => {
+      console.warn(`[map] heat/${n}`, err.message);
+      return null;
+    }))).then((parts) => {
+      const features = parts.flatMap((fc) => (fc && Array.isArray(fc.features) ? fc.features.filter(isIsoline) : []));
+      return features.length ? { type: 'FeatureCollection', features } : null;
+    });
+    isolineCache.set(key, p);
+  }
+  return isolineCache.get(key);
+}
+
 const climateCache = new Map();
 
 /** Lazy load climate/{id}.json. Resolves to null when unavailable or invalid. */

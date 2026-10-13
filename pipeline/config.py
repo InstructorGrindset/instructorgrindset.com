@@ -315,6 +315,7 @@ class HeatIsolines(StrictModel):
     step: float = Field(gt=0)
     major_step: float = Field(gt=0)
     simplify_px: float = Field(ge=0, le=5)
+    supersample: int = Field(default=1, ge=1, le=8)
     min_length_px: float = Field(default=0, ge=0)
     label_min_px: float = Field(ge=0)
 
@@ -385,6 +386,7 @@ DOMAIN_RE = r"^[a-z0-9-]+(\.[a-z0-9-]+)+$"
 class JobsFeedDefs(StrictModel):
     keywords: list[str] = Field(default_factory=list)
     exclude_keywords: list[str] = Field(default_factory=list)
+    require_keywords: dict[Slug, list[str]] = Field(default_factory=dict)
     role_keywords: dict[Literal["management", "coaching", "ski_school"], list[str]] = Field(default_factory=dict)
     location_aliases: dict[Slug, list[str]] = Field(default_factory=dict)
     max_postings_per_board: int = Field(default=150, ge=1, le=1000)
@@ -396,6 +398,7 @@ class JobsFeedDefs(StrictModel):
     def _words(self) -> "JobsFeedDefs":
         words = self.keywords + self.exclude_keywords + [w for ws in self.role_keywords.values() for w in ws]
         words += [w for ws in self.location_aliases.values() for w in ws]
+        words += [w for ws in self.require_keywords.values() for w in ws]
         bad = [w for w in words if not w.strip()]
         if bad:
             raise ValueError("jobs.feed keywords and aliases must not be empty")

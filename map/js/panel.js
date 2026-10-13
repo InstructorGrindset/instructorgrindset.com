@@ -116,7 +116,7 @@ export function createPanel(root, index, {
   /** Helpers for the live cams and jobs blocks (livelinks.js); current() is false once another view renders. */
   function linkCtx() {
     const my = token;
-    return { badge, sourceLink, sources: index.sources, section, current: () => my === token };
+    return { badge, sourceLink, sources: index.sources, current: () => my === token };
   }
 
   function tags(list) {

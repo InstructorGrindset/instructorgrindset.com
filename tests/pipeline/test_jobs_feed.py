@@ -172,3 +172,15 @@ def test_http_getter_reads_https_only():
 def test_unexpected_response_shapes_fail_the_board_only():
     doc, _ = run_collect(getter=lambda url: {"unexpected": True})
     assert doc["postings"] == [] and all(b["status"] == "error" for b in doc["boards"])
+
+
+def test_require_keywords_limit_a_broad_employer_board():
+    """A college board lists every campus job; only snowsports ones reach the ski area's page."""
+    cfg = CFG.model_copy(deep=True)
+    cfg.feed.require_keywords = {"work-co": ["snow bowl"]}
+    get = jf.FixtureGetter(FIX)
+    doc = jf.collect(EMPLOYERS, RESORTS, cfg, get, NOW)
+    assert "workable-ABC123" not in by_id(doc)   # "Snow Sports Instructor" in Charlie names no Snow Bowl
+    cfg.feed.require_keywords = {"work-co": ["charlie"]}
+    doc = jf.collect(EMPLOYERS, RESORTS, cfg, jf.FixtureGetter(FIX), NOW)
+    assert "workable-ABC123" in by_id(doc)       # the location counts

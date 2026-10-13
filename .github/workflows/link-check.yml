@@ -1,0 +1,53 @@
+# Monthly check of every outbound link on the Career Map: official trail maps, live cams and jobs pages
+# (pipeline/link_check.py). Opens or updates one issue labelled link-check while links are broken and closes it when
+# none are. It never commits.
+#
+# Scheduled runs happen only once this file is on the repository's default branch; run it from the Actions tab
+# (workflow_dispatch) at any time. It uses the default GITHUB_TOKEN; no secret is needed.
+name: Link check
+
+on:
+  schedule:
+    - cron: "23 7 1 * *"   # the 1st of every month, 07:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: link-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check every trail map, webcam and jobs link
+        run: python -m pipeline.link_check --report "$RUNNER_TEMP/link-report.md" --summary "$RUNNER_TEMP/link-summary.json"
+      - name: Open, update or close the link check issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          title="Broken links: trail maps, webcams and jobs"
+          broken=$(python -c "import json, os; print(json.load(open(os.path.join(os.environ['RUNNER_TEMP'], 'link-summary.json')))['broken'])")
+          gh label create link-check --color B60205 --description "Monthly link check" --force
+          number=$(gh issue list --label link-check --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ "$broken" -gt 0 ]; then
+            if [ -n "$number" ]; then
+              gh issue edit "$number" --title "$title" --body-file "$RUNNER_TEMP/link-report.md"
+            else
+              gh issue create --title "$title" --label link-check --body-file "$RUNNER_TEMP/link-report.md"
+            fi
+          elif [ -n "$number" ]; then
+            gh issue comment "$number" --body "The link check on $(date -u +%Y-%m-%d) found no broken links."
+            gh issue close "$number" --reason completed
+          else
+            echo "No broken links."
+          fi

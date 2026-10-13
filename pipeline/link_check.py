@@ -172,7 +172,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         print("link check: data/build/resorts.json is missing; run python pipeline/build.py first", file=sys.stderr)
         return 1
     links = collect_links(build)
-    results = check_all(links, workers=args.workers)
+    results = check_all(links, _open, workers=args.workers)
     counts = {s: sum(1 for r in results if r.state == s) for s in ("ok", "broken", "unverified")}
     args.report.write_text(render_report(links, results, dt.datetime.now(dt.timezone.utc).date()), encoding="utf-8")
     args.summary.write_text(json.dumps({"checked": len(results), **counts}) + "\n", encoding="utf-8")

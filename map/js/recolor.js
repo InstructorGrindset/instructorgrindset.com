@@ -1,11 +1,11 @@
 // Map color modes (Default, Lucrativeness, Season length, Snowfall) and their legend.
 // Every mode except Default draws a heat map with the resorts on top. Settings come from definitions.json `heat`.
-// Snowfall loads the precomputed NOAA rasters (heat/snowfall.json) when they exist; every other case draws the
-// resort only surface from heat.js. Interpolated colors never become numbers: the legend shows the scale, and
-// tooltips show each resort's sourced value.
+// Snowfall and Season length load their precomputed rasters (heat/<mode>.json, pipeline/heat.py) when they exist,
+// and Snowfall its isolines; every other case draws the resort only surface from heat.js. Interpolated colors
+// never become numbers: the legend shows the scale, and tooltips show each resort's sourced value.
 import { RECOLOR_MODES } from './labels.js';
-import { buildHeat, legendScale, makeRamp, scaleT } from './heat.js';
-import { loadDefinitions, loadHeatRaster, loadStateOutlines } from './data.js';
+import { buildHeat, legendScale, legendPos, legendCss, makeRamp } from './heat.js';
+import { loadDefinitions, loadHeatRaster, loadHeatIsolines, loadStateOutlines } from './data.js';
 import { h, clear, fmtInt } from './ui.js';
 import { isPhone } from './config.js';
 
@@ -29,6 +29,11 @@ const SPOKEN = {
   season: (v) => `${fmtInt(v)} days`,
   snowfall: (v) => `${fmtInt(v)} in per season`,
 };
+
+/** Precomputed rasters per mode (heat/<mode>.json); other modes draw in the browser. */
+const RASTER_MODES = new Set(['snowfall', 'season']);
+/** The heat.season keys that set the season fade (the browser keeps its own resolution). */
+const SEASON_FADE = ['full_opacity_km', 'fade_end_km', 'floor_alpha', 'fade_to', 'no_data_reach_km'];
 
 /** Min, max and count over the finite values of a property; null when no resort has one. */
 export function valueDomain(values) {
@@ -59,22 +64,42 @@ export async function createRecolor(root, index, { onChange, announce }) {
   const cache = new Map();
   let seq = 0;
 
-  /** { images, legend, raster, attribution } for a mode, cached. */
+  /** Field settings of a mode: heat.field, with the season fade for Season length. */
+  const fieldFor = (m) => {
+    if (m.key !== 'season' || !heat.season) return heat.field;
+    const f = { ...heat.field };
+    for (const k of SEASON_FADE) if (heat.season[k] != null) f[k] = heat.season[k];
+    return f;
+  };
+
+  /** { images, legend, raster, attribution, isolines (a promise or null) } for a mode, cached. */
   function heatFor(m) {
     if (!cache.has(m.key)) {
       const resortSurface = () => loadStateOutlines(index).catch(() => null).then((outlines) => {
-        const pts = features.filter((f) => inDomain(m, f.properties[m.prop]))
-          .map((f) => ({ lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], value: f.properties[m.prop] }));
+        const feats = features.filter((f) => inDomain(m, f.properties[m.prop]));
+        const pts = feats.map((f) => ({ lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], value: f.properties[m.prop] }));
         const lg = info[m.key].legend;
-        return { images: buildHeat(pts, outlines, { ...lg, ramp, field: heat.field, regions: heat.regions }), legend: lg, raster: null };
+        const field = fieldFor(m);
+        // States with a resort value; the others keep color only near their border (season length).
+        const dataStates = field.no_data_reach_km != null ? new Set(feats.map((f) => String(f.properties.state || '').toUpperCase())) : null;
+        return {
+          images: buildHeat(pts, outlines, { ...lg, ramp, field, regions: heat.regions, neutral: heat.neutral, dataStates }),
+          legend: lg, raster: null, isolines: null,
+        };
       });
-      const p = m.key === 'snowfall'
-        ? loadHeatRaster('snowfall').then((r) => (r ? {
-          images: r.rasters.map((x) => ({ url: x.url, coordinates: x.coordinates, width: x.width, height: x.height, region: x.region, ak: x.region === 'alaska' })),
-          legend: { scale: r.scale, domain: r.domain, ticks: r.ticks },
-          raster: r,
-          attribution: r.attribution,
-        } : resortSurface()))
+      const fromRaster = (r) => ({
+        images: r.rasters.map((x) => ({ url: x.url, coordinates: x.coordinates, width: x.width, height: x.height, region: x.region, ak: x.region === 'alaska' })),
+        legend: r.scale === 'classed'
+          ? { scale: 'classed', domain: r.domain, ticks: (r.legend && r.legend.ticks) || r.ticks, breaks: r.breaks, colors: r.colors,
+            compressBelow: r.legend ? r.legend.compress_below ?? null : null, fixed: Boolean(modeCfg(m).domain) }
+          : { scale: r.scale, domain: r.domain, ticks: r.ticks },
+        raster: r,
+        attribution: r.attribution || null,
+        // Snowfall isolines load with the mode, after the manifest; the rasters draw without waiting for them.
+        isolines: r.isolines ? loadHeatIsolines(r) : null,
+      });
+      const p = RASTER_MODES.has(m.key)
+        ? loadHeatRaster(m.key).then((r) => (r ? fromRaster(r) : resortSurface()))
         : resortSurface();
       cache.set(m.key, p.catch((err) => { cache.delete(m.key); throw err; }));
     }
@@ -122,14 +147,15 @@ export async function createRecolor(root, index, { onChange, announce }) {
     }
     if (my !== seq) return;
     root.removeAttribute('aria-busy');
-    onChange({ key, prop: m.prop, images: surface.images, format: SPOKEN[key], attribution: surface.attribution || null });
+    onChange({ key, prop: m.prop, images: surface.images, format: SPOKEN[key], attribution: surface.attribution || null,
+      isolines: surface.isolines || null });
     drawLegend(m, d, surface);
     const lg = surface.legend;
     announce(modeCfg(m).domain
       ? `Heat map of ${m.label.toLowerCase()}, on a scale of ${lg.ticks.join(', ')}.`
       : d.min === d.max
         ? `Heat map of ${m.label.toLowerCase()}. Every resort with data shows ${SPOKEN[key](d.min)}.`
-        : `Heat map of ${m.label.toLowerCase()}. Resorts range from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.${surface.raster ? ' The background comes from NOAA station normals.' : ''}`);
+        : `Heat map of ${m.label.toLowerCase()}. Resorts range from ${SPOKEN[key](d.min)} to ${SPOKEN[key](d.max)}.${surface.raster && surface.raster.background ? ' The background comes from NOAA station normals.' : ''}`);
   }
 
   function drawLegend(m, d, surface) {
@@ -137,21 +163,31 @@ export async function createRecolor(root, index, { onChange, announce }) {
     const lg = surface.legend;
     const tick = TICK[m.key];
     const fixed = Boolean(modeCfg(m).domain);
-    const km = fmtInt(heat.field.full_opacity_km);
+    const field = fieldFor(m);
+    const km = fmtInt(field.full_opacity_km);
     const ticks = lg.ticks.map((t, i) => {
-      const x = scaleT(t, lg.scale, lg.domain) * 100;
+      const x = legendPos(t, lg) * 100;
       const edge = i === 0 && x < 8 ? 'start' : i === lg.ticks.length - 1 && x > 92 ? 'end' : null;
       return h('span', { class: `heat-tick${edge ? ` heat-tick-${edge}` : ''}`, style: `left:${x.toFixed(1)}%` }, tick(t));
     });
-    const notes = surface.raster
+    const noaa = surface.raster && surface.raster.background;
+    const notes = noaa
       ? [`Background: NOAA station normals, 1991 to 2020, with a ${fmtInt(surface.raster.pockets.radius_km)} km pocket of each resort's published snowfall.`,
         'Colors between stations and resorts are smoothed estimates. Tooltips and resort pages show only sourced values.']
       : ['Colors between resorts are smoothed estimates. Tooltips and resort pages show only sourced values.',
         `Colors fade where the nearest resort with data is more than ${km} km away.`];
+    if (m.key === 'season' && field.no_data_reach_km != null) notes.push('States with no resort data stay clear.');
+    // Classed snowfall: the grey class and the isolines get a line of their own.
+    const lowest = lg.scale === 'classed' && m.key === 'snowfall' ? lg.colors[0] : null;
+    const iso = surface.raster && surface.raster.isolines;
     legend.append(...[
       h('p', { class: 'legend-title' }, m.title, m.unit ? h('span', { class: 'legend-unit' }, m.unit) : null),
-      h('div', { class: 'heat-bar', style: `background:${ramp.css}`, 'aria-hidden': 'true' }),
+      h('div', { class: `heat-bar${lg.scale === 'classed' ? ' heat-bar-classed' : ''}`, style: `background:${legendCss(lg, ramp)}`, 'aria-hidden': 'true' }),
       h('p', { class: 'heat-ticks' }, h('span', { class: 'visually-hidden' }, 'Scale: '), ticks),
+      lowest ? h('p', { class: 'heat-low' }, h('span', { class: 'key-swatch', style: `background:${lowest}`, 'aria-hidden': 'true' }),
+        `Grey: under ${fmtInt(lg.breaks[0])} in, little or no snow`) : null,
+      iso && iso.levels.length ? h('p', { class: 'heat-low' }, h('span', { class: 'key-line', style: `--iso-under:${lg.colors ? lg.colors[Math.floor(lg.colors.length / 2)] : '#79d26a'}`, 'aria-hidden': 'true' }),
+        `Lines every ${fmtInt(iso.levels[1] - iso.levels[0] || iso.major_step)} in from ${fmtInt(iso.levels[0])}, bolder every ${fmtInt(iso.major_step)}`) : null,
       fixed ? null : h('p', { class: 'heat-range' }, d.min === d.max
         ? `Every resort with data: ${FORMAT[m.key](d.min)}`
         : `Resort values: ${FORMAT[m.key](d.min)} to ${FORMAT[m.key](d.max)}`),
