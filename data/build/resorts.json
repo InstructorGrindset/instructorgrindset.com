@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T15:08:31Z",
+  "generated_at": "2026-10-13T15:28:30Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -382,7 +382,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-10-01"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area on the St. Croix River south of Afton.",
+        "source_id": "wikipedia-afton-alps",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.aftonalps.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -818,7 +825,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area in Munson Township, east of Chesterland.",
+        "source_id": "wikipedia-alpine-valley-ski-area-ohio",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -4004,7 +4018,14 @@
           "note": "Wikipedia article: \"Average annual snowfall: 120 in\"."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort on US 302 in Bartlett, near North Conway.",
+        "source_id": "wikipedia-attitash-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article or the Bartlett, New Hampshire article."
+      },
       "official_trailmap": {
         "url": "https://www.attitash.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -6563,7 +6584,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area on Mount Institute in Charlemont.",
+        "source_id": "wikipedia-berkshire-east-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://berkshireeast.com/plan/trail-maps",
         "format": "page",
@@ -6890,7 +6918,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in Kidder Township in the Pocono Mountains.",
+        "source_id": "wikipedia-jack-frost-big-boulder",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the Jack Frost and Big Boulder article."
+      },
       "official_trailmap": {
         "url": "https://www.jfbb.com/-/aemasset/sitecore/jack-frost-big-boulder/maps/20231103_JFBB_winter-trail_map_002.pdf",
         "format": "pdf",
@@ -7804,7 +7839,86 @@
         "profile_tags": [],
         "notes_md": null
       },
-      "career": null,
+      "career": {
+        "pay": [
+          {
+            "cert_level": "unspecified",
+            "hourly_low": 20.92,
+            "hourly_high": 58.0,
+            "confidence": "estimated",
+            "source_id": "pay-followups-bigsky-dol-2425",
+            "as_of": "2026-10-13",
+            "season": "2024-25",
+            "stale": false
+          }
+        ],
+        "private_rate": null,
+        "private_split": null,
+        "lucrativeness": {
+          "low": null,
+          "mid": null,
+          "high": null,
+          "status": "insufficient_data",
+          "assumptions": [
+            {
+              "key": "wage_top_usd",
+              "value": 58.0,
+              "label": "Top of the posted wage scale (USD per hour)"
+            },
+            {
+              "key": "wage_bottom_usd",
+              "value": 20.92,
+              "label": "Bottom of the posted wage scale (USD per hour), used for the low end"
+            },
+            {
+              "key": "hours_per_week",
+              "value": 40.0,
+              "label": "Standard full time hours per week"
+            },
+            {
+              "key": "season_months",
+              "value": 5.1,
+              "label": "Season months (sourced season length divided by 30.4 days)"
+            },
+            {
+              "key": "season_months_basis",
+              "value": "season_length",
+              "label": "Season months basis"
+            },
+            {
+              "key": "weeks_per_month",
+              "value": 4.33,
+              "label": "Weeks per month"
+            },
+            {
+              "key": "tips_season_usd",
+              "value": null,
+              "label": "Tips are not included yet"
+            },
+            {
+              "key": "rent_monthly_usd",
+              "value": null,
+              "label": "Average rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
+            },
+            {
+              "key": "tax",
+              "value": null,
+              "label": "Savings are before tax"
+            }
+          ]
+        },
+        "stale_fields": []
+      },
       "editorial": {
         "overview_md": "Big Sky Resort sits on Lone Mountain in Big Sky, Montana, reached from Bozeman through Gallatin Canyon. It has 5,850 acres and 4,350 feet of vertical, and its Lone Peak Tram reaches expert terrain from the 11,166 foot summit. Former NBC anchor Chet Huntley founded the resort, which opened in December 1973. Boyne Resorts bought it in 1976 and owns it today. In 2013 Big Sky added the terrain of neighboring Moonlight Basin. It has one of the largest chairlift fleets in North America.",
         "culture_md": "Tourism is the main industry of Big Sky, an unincorporated community of 3,591 people in 2020, up from 2,308 in 2010. In 2020, 57.3 percent of its housing units were vacant. Bozeman, the fourth largest city in Montana, lies about 45 miles away. The Skyline bus links Bozeman and Big Sky, and Bozeman Yellowstone International Airport serves both. Big Sky shares a five mile border with the private Yellowstone Club, and the two lift systems connect.",
@@ -7833,6 +7947,7 @@
         "jobs-boyne-careers-home",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
+        "pay-followups-bigsky-dol-2425",
         "tmo-big-sky",
         "webcams-big-sky-search",
         "wikipedia-big-sky-resort"
@@ -8621,7 +8736,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area in Rumford.",
+        "source_id": "wikipedia-black-mountain-of-maine",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -9678,7 +9800,14 @@
           "note": "Infobox value. The article text gives a historical average of 200 to 250 in."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "A paid bus runs to Bogus Basin on weekends and holidays from Meridian, Eagle and downtown Boise.",
+        "source_id": "access-ktvb-bogus-basin-bus",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The report date is not shown in the result; the current season was not confirmed."
+      },
       "official_trailmap": {
         "url": "https://bogusbasin.org/your-mountain/maps-statistics/",
         "format": "page",
@@ -9773,6 +9902,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-ktvb-bogus-basin-bus",
         "ed-west-wiki-bogus-basin",
         "ed-west-wiki-boise-idaho",
         "facts-west3-wp-bogus-basin",
@@ -10141,7 +10271,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28; snowfall given for Boston Mills and Brandywine together"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in Cuyahoga Valley National Park near Peninsula.",
+        "source_id": "wikipedia-boston-mills-brandywine",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No bus found in the article. The Cuyahoga Valley Scenic Railroad, an excursion line, lists Boston Mills Ski Resort at its Boston Mill station (Wikipedia); winter service not checked."
+      },
       "official_trailmap": {
         "url": "https://www.bmbw.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -10767,7 +10904,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-20"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort near Boyne City in Northern Michigan.",
+        "source_id": "wikipedia-boyne-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article; a search found no staff housing source."
+      },
       "official_trailmap": {
         "url": "https://www.boynemountain.com/mountain-maps",
         "format": "page",
@@ -10988,7 +11132,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28; snowfall given for Boston Mills and Brandywine together"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in Cuyahoga Valley National Park near Peninsula.",
+        "source_id": "wikipedia-boston-mills-brandywine",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.bmbw.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -11630,7 +11781,17 @@
             "stale": false
           }
         ],
-        "private_rate": null,
+        "private_rate": {
+          "value": {
+            "low": 1333.0,
+            "high": 1455.0,
+            "unit": "full_day"
+          },
+          "source_id": "career-followups-breckenridge-all-lessons",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Full day private from Peak 8 Village starting 9:00 AM, one day including fees, $1,333 online and $1,455 at the window. The listing may be the snowboard private; ski and snowboard privates usually share a price."
+        },
         "private_split": null,
         "lucrativeness": {
           "low": null,
@@ -11715,6 +11876,7 @@
       "housing_summary": null,
       "sources": [
         "access-wikipedia-frisco-colorado",
+        "career-followups-breckenridge-all-lessons",
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-breckenridge-colorado",
         "ed-west-wiki-breckenridge-ski-resort",
@@ -12069,7 +12231,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Free Streamline buses run to Bridger Bowl on winter weekends from Montana State University and the Bozeman fairgrounds.",
+        "source_id": "access-streamline-bridger-bowl",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The Montana State University Bridger Bowl Ski Bus page says Bridger Bowl contracts First Student and Streamline for the service."
+      },
       "official_trailmap": {
         "url": "https://bridgerbowl.com/mountain/trail-map",
         "format": "page",
@@ -12258,6 +12427,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-streamline-bridger-bowl",
         "ed-west-wiki-bozeman-montana",
         "ed-west-wiki-bridger-bowl-ski-area",
         "facts-gapfill-ebs-bridger-2026",
@@ -13223,7 +13393,14 @@
           "note": "Infobox value. The article text says less than 60 in."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "MVTA runs a seasonal weekend bus to Buck Hill from Burnsville Transit Station, Heart of the City and Burnsville Center.",
+        "source_id": "access-mvta-buck-hill",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. An MVTA notice from November 2025 gives hourly Saturday and Sunday trips through mid March 2026; no weekday service."
+      },
       "official_trailmap": {
         "url": "https://buckhill.com/skiing-snowboarding/winter-trail-map/",
         "format": "page",
@@ -13419,6 +13596,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-mvta-buck-hill",
         "ed-east-wikipedia-buck-hill",
         "facts-midwest-ots-buck-hill",
         "facts-midwest-wiki-comparison",
@@ -13816,7 +13994,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort on Burke Mountain in Vermont's Northeast Kingdom.",
+        "source_id": "wikipedia-burke-mountain-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article or the Burke, Vermont article."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -15257,7 +15442,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area inside Franconia Notch State Park.",
+        "source_id": "wikipedia-cannon-mountain-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article or the Franconia, New Hampshire article."
+      },
       "official_trailmap": {
         "url": "https://www.cannonmt.com/trail-map",
         "format": "page",
@@ -18598,7 +18790,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "Cranmore sits in the village of North Conway.",
+        "source_id": "wikipedia-cranmore-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Rated convenient because the village sits at the base. No local bus to the base found."
+      },
       "official_trailmap": {
         "url": "https://cranmore.com/trail-map",
         "format": "page",
@@ -19350,7 +19549,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area in Bennington and Francestown.",
+        "source_id": "wikipedia-crotched-mountain-ski-and-ride",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.crotchedmtn.com/the-mountain/about-the-mountain/trail-maps.aspx",
         "format": "page",
@@ -24145,7 +24351,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "The resort's Teton Valley shuttle links the base with Driggs, Victor and the Driggs employee housing.",
+        "source_id": "access-grand-targhee-teton-valley-shuttle",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. East Idaho News reported a plan to end Victor service in favor of more Driggs trips; the resort page still lists park and ride at the Victor Depot."
+      },
       "official_trailmap": {
         "url": "https://www.grandtarghee.com/the-mountain/mountain-information/trail-maps",
         "format": "page",
@@ -24288,6 +24501,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-grand-targhee-teton-valley-shuttle",
         "ed-west-wiki-alta-wyoming",
         "ed-west-wiki-driggs-idaho",
         "ed-west-wiki-grand-targhee-resort",
@@ -25198,7 +25412,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort on Gunstock Mountain in Gilford.",
+        "source_id": "wikipedia-gunstock-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article or the Gilford, New Hampshire article."
+      },
       "official_trailmap": {
         "url": "https://www.gunstock.com/winter/trail-map/",
         "format": "page",
@@ -26179,7 +26400,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Fare free MOOver buses serve Wilmington and the Deerfield Valley, the home of Haystack Mountain.",
+        "source_id": "access-wikipedia-southeast-vermont-transit",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Haystack location from wikipedia-haystack-mountain-ski-area. No MOOver stop at the private club found."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -26359,6 +26587,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-southeast-vermont-transit",
         "ed-east-wikipedia-haystack-mountain-ski-area",
         "ed-east-wikipedia-wilmington-vermont",
         "facts-northeast1-skiresort-hermitage",
@@ -26865,7 +27094,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area in the St. Louis suburb of Wildwood.",
+        "source_id": "wikipedia-hidden-valley-ski-area-missouri",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.hiddenvalleyski.com/the-mountain/about-the-mountain/trail-maps.aspx",
         "format": "page",
@@ -27168,7 +27404,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort near the village of Hidden Valley in the Laurel Highlands.",
+        "source_id": "wikipedia-hidden-valley-resort-pennsylvania",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.hiddenvalleyresort.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -28415,7 +28658,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "The ski area sits on Howelsen Hill in the city of Steamboat Springs.",
+        "source_id": "wikipedia-howelsen-hill-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "Rated convenient because the city sits at the base. Free Steamboat Springs Transit buses run in the city (access-steamboat-springs-transit-winter)."
+      },
       "official_trailmap": {
         "url": "https://steamboatsprings.net/983/Trail-Maps",
         "format": "page",
@@ -28745,7 +28995,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "OurBus runs seasonal ski buses from New York City to Hunter on Wednesdays and weekends.",
+        "source_id": "access-timeout-ourbus-ski-routes",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Day trip service for skiers; no local bus to the base found."
+      },
       "official_trailmap": {
         "url": "https://www.huntermtn.com/-/aemasset/sitecore/hunter/maps/winter-2025-2026/20251122_HU_winter-trail_map_001.pdf",
         "format": "pdf",
@@ -28978,6 +29235,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-timeout-ourbus-ski-routes",
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-hunter-mountain-ski-area",
         "ed-east-wikipedia-hunter-new-york",
@@ -29187,7 +29445,14 @@
           "note": "Infobox value. The article text says less than 60 in."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Hyland Hills sits in suburban Bloomington, where Metro Transit runs regional buses.",
+        "source_id": "access-wikipedia-us-bus-transit-systems",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "List row only. Bloomington location from wikipedia-hyland-hills-ski-area. No Metro Transit stop at the ski area confirmed; a search found route 538 serving Normandale Community College in Bloomington."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
@@ -29247,6 +29512,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-us-bus-transit-systems",
         "ed-east-wikipedia-buck-hill",
         "ed-east-wikipedia-hyland-hills-ski-area",
         "facts-gapfill-sri-hyland",
@@ -29319,7 +29585,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in Kidder Township in the Pocono Mountains.",
+        "source_id": "wikipedia-jack-frost-big-boulder",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.jfbb.com/-/aemasset/sitecore/jack-frost-big-boulder/maps/20231103_JFBB_winter-trail_map_002.pdf",
         "format": "pdf",
@@ -30067,7 +30340,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "Jay Peak offers limited employee housing, and a resort shuttle serves the team housing sites.",
+        "source_id": "access-jay-peak-employee-housing",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. First Tracks reported a free employee vanpool pilot from Newport, Richford and other towns with the Vermont Agency of Transportation, likely 2024 to 2025."
+      },
       "official_trailmap": {
         "url": "https://jaypeakresort.com/skiing-riding/snow-report-maps/trail-map",
         "format": "page",
@@ -30181,7 +30461,17 @@
             "stale": false
           }
         ],
-        "private_rate": null,
+        "private_rate": {
+          "value": {
+            "low": 999.0,
+            "high": 1200.0,
+            "unit": "full_day"
+          },
+          "source_id": "career-followups-jaypeak-private-lessons",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 2026/27 full day private (9am to 3:45pm) $999 weekday, $1,099 weekend, $1,200 holiday. Each added person (up to 6) is $145. Lift tickets are extra."
+        },
         "private_split": null,
         "lucrativeness": {
           "low": null,
@@ -30264,6 +30554,8 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-jay-peak-employee-housing",
+        "career-followups-jaypeak-private-lessons",
         "ed-east-wikipedia-jay-peak-resort",
         "ed-east-wikipedia-jay-vermont",
         "facts-northeast1-ots-vt-close",
@@ -30485,7 +30777,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "Most June Mountain staff live in employee housing in Mammoth Lakes and ride a daily employer bus to the resort.",
+        "source_id": "access-wikipedia-june-lake-california",
+        "as_of": "2026-10-13",
+        "confidence": "published",
+        "note": "The housing sits in Mammoth Lakes; rated convenient because the employer houses and buses staff."
+      },
       "official_trailmap": {
         "url": "https://www.junemountain.com/mountain-information/trail-map",
         "format": "page",
@@ -30741,6 +31040,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-june-lake-california",
         "ed-west-wiki-june-lake-california",
         "ed-west-wiki-june-mountain-ski-area",
         "facts-west2-snowstash-june",
@@ -32637,7 +32937,14 @@
         "summit_ft": null
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "The Lake Placid Xprss trolley runs between the Jumping Complex and the village, with several stops on Main Street.",
+        "source_id": "access-lakeplacid-xprss-trolley",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The article describes summer service; winter service was not confirmed."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": null,
@@ -32679,6 +32986,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "access-lakeplacid-xprss-trolley",
         "ed-east-wikipedia-lake-placid-new-york",
         "ed-east-wikipedia-lake-placid-olympic-ski-jumping-complex",
         "wikipedia-lake-placid-olympic-ski-jumping-complex",
@@ -32840,7 +33148,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area in Laurel Mountain State Park, south of US 30 near Jennerstown.",
+        "source_id": "access-wikipedia-laurel-mountain-state-park",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.laurelmountainski.com/-/aemasset/sitecore/laurel-mountain/trail-base-maps/20221122_LM_winter-trail_map_001.pdf",
         "format": "pdf",
@@ -33036,6 +33351,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-laurel-mountain-state-park",
         "ed-east-wikipedia-laurel-mountain-ski-resort",
         "facts-gapfill-laurel-hours",
         "facts-gapfill-triblive-finale-2024",
@@ -33411,7 +33727,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in southern Pennsylvania.",
+        "source_id": "wikipedia-liberty-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.libertymountainresort.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -35164,7 +35487,14 @@
           "note": "Infobox value. The article text says it averages over 150 in of snow a year."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Green Mountain Transit's Mad Bus has served the Mad River Valley, including Sugarbush and Mad River Glen.",
+        "source_id": "access-gmta-2014-report",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. A 2014 report; the 2025 to 2026 valley map found in search shows Sugarbush routes, and a current Mad River Glen stop was not confirmed."
+      },
       "official_trailmap": null,
       "webcams": {
         "cams_page": {
@@ -35353,6 +35683,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-gmta-2014-report",
         "ed-east-wikipedia-fayston-vermont",
         "ed-east-wikipedia-mad-river-glen",
         "ed-east-wikipedia-waitsfield-vermont",
@@ -35445,7 +35776,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort off US 33 east of Bellefontaine.",
+        "source_id": "wikipedia-mad-river-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.skimadriver.com/the-mountain/about-the-mountain/trail-maps.aspx",
         "format": "page",
@@ -35659,7 +35997,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area on Glebe Mountain in Londonderry.",
+        "source_id": "wikipedia-magic-mountain-ski-area",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.magicmtn.com/trail-map",
         "format": "page",
@@ -37415,7 +37760,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Tri Valley Transit runs a free seasonal Snow Bowl bus from Middlebury and the college campus.",
+        "source_id": "access-tri-valley-snow-bowl-shuttle",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The Snow Bowl's getting here page names the Adirondack Circle stop at Middlebury College."
+      },
       "official_trailmap": {
         "url": "https://middleburysnowbowl.com/trail-map/",
         "format": "page",
@@ -37612,6 +37964,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-tri-valley-snow-bowl-shuttle",
         "ed-east-wikipedia-hancock-vermont",
         "ed-east-wikipedia-middlebury-college-snow-bowl",
         "facts-northeast1-skiresort-middlebury",
@@ -39030,7 +39383,14 @@
           "note": "Infobox value. The article text gives a 250 to 300 in average."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort at the northern tip of the Keweenaw Peninsula.",
+        "source_id": "wikipedia-mount-bohemia",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.mtbohemia.com/trail-maps/",
         "format": "page",
@@ -39188,7 +39548,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-03-25"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area in Brighton, Michigan.",
+        "source_id": "wikipedia-mount-brighton",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.mtbrighton.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -41079,7 +41446,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in Mount Sunapee State Park in Newbury.",
+        "source_id": "wikipedia-mount-sunapee-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.mountsunapee.com/the-mountain/about-the-mountain/trail-maps.aspx",
         "format": "page",
@@ -41915,7 +42289,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Cascades East Transit runs a winter shuttle to Mt. Bachelor from Bend.",
+        "source_id": "access-ktvz-mt-bachelor-shuttle",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. A Lonely Planet guide gives mid December to mid April from the Bend park and ride and says resort staff sometimes ride free."
+      },
       "official_trailmap": {
         "url": "https://www.mtbachelor.com/the-mountain/maps/winter-lift-trail-map/",
         "format": "page",
@@ -42153,6 +42534,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-ktvz-mt-bachelor-shuttle",
         "ed-west-wiki-bend-oregon",
         "ed-west-wiki-mount-bachelor-ski-area",
         "ed-west-wiki-powdr",
@@ -44732,7 +45114,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free TART Highway 267 buses run daily between Truckee and Northstar.",
+        "source_id": "access-truckee-tart-winter-2026",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Hourly daytime trips; night service also links Truckee and Northstar."
+      },
       "official_trailmap": {
         "url": "https://www.northstarcalifornia.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -44959,6 +45348,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-truckee-tart-winter-2026",
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-lake-tahoe",
         "ed-west-wiki-northstar-california",
@@ -46351,7 +46741,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free TART Highway 89 buses run from Tahoe City through Olympic Valley to Truckee.",
+        "source_id": "access-tart-route-hwy89",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. A Town of Truckee notice from January 2026 also lists weekend park and ride shuttles from Truckee to Palisades Tahoe."
+      },
       "official_trailmap": {
         "url": "https://www.palisadestahoe.com/mountain-information/trail-maps",
         "format": "page",
@@ -46499,7 +46896,17 @@
             "stale": false
           }
         ],
-        "private_rate": null,
+        "private_rate": {
+          "value": {
+            "low": 880.0,
+            "high": 930.0,
+            "unit": "full_day"
+          },
+          "source_id": "career-followups-palisades-child-private",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Child private, full day, $880 midweek and $930 weekend or holiday. No adult full day price was shown. The result did not name the season."
+        },
         "private_split": null,
         "lucrativeness": {
           "low": null,
@@ -46582,6 +46989,8 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-tart-route-hwy89",
+        "career-followups-palisades-child-private",
         "ed-west-wiki-olympic-valley-california",
         "ed-west-wiki-palisades-tahoe",
         "facts-west2-un-ca-openings-2026",
@@ -46678,7 +47087,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "A free resort shuttle links Alpine Meadows with the Olympic Valley base, which TART Highway 89 buses serve.",
+        "source_id": "wikipedia-palisades-tahoe",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Free shuttles between the two bases from wikipedia-palisades-tahoe, stated for the combined resort. TART facts from access-tart-route-hwy89. No TART stop at Alpine Meadows found."
+      },
       "official_trailmap": {
         "url": "https://www.palisadestahoe.com/mountain-information/trail-maps",
         "format": "page",
@@ -46852,7 +47268,8 @@
         "owner-decisions-2026-10-11",
         "tmo-palisades-tahoe",
         "webcams-palisades-search",
-        "wikipedia-alpine-meadows-ski-resort"
+        "wikipedia-alpine-meadows-ski-resort",
+        "wikipedia-palisades-tahoe"
       ]
     },
     {
@@ -46934,7 +47351,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area near Paoli, Indiana.",
+        "source_id": "wikipedia-paoli-peaks",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.paolipeaks.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -48275,7 +48699,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "The Bus runs a Rutland to Killington commuter route with a stop at the Pico Resort Hotel.",
+        "source_id": "access-thebus-rkc-winter-2023-24",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The 2026 summer schedule also lists the Pico stop. Rated mixed to match Killington on the same route."
+      },
       "official_trailmap": {
         "url": "https://picomountain.com/winter-trail-map",
         "format": "page",
@@ -48407,6 +48838,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-thebus-rkc-winter-2023-24",
         "ed-east-wikipedia-killington-ski-resort",
         "ed-east-wikipedia-killington-vermont",
         "ed-east-wikipedia-pico-mountain",
@@ -51585,7 +52017,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in York County, Pennsylvania.",
+        "source_id": "wikipedia-roundtop-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.skiroundtop.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -52414,7 +52853,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area in South Pomfret.",
+        "source_id": "wikipedia-saskadena-six",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -52885,7 +53331,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "SPOT buses link Sandpoint with the Red Barn park and ride, where a winter connector climbs to Schweitzer Village.",
+        "source_id": "access-schweitzer-directions",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The Sandpoint Reader reported SPOT taking over the Schweitzer shuttle as a free service; the Sandpoint, Idaho Wikipedia article says SPOT charges no fare."
+      },
       "official_trailmap": {
         "url": "https://schweitzer.com/discover/trail-maps",
         "format": "page",
@@ -53127,6 +53580,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-schweitzer-directions",
         "ed-west-wiki-sandpoint-idaho",
         "ed-west-wiki-schweitzer-mountain",
         "facts-gapfill-skiresortcom-schweitzer",
@@ -53423,7 +53877,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort in the borough of Seven Springs.",
+        "source_id": "wikipedia-seven-springs-mountain-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article; a search found no staff housing source. The borough, population 26, covers most of the resort (Seven Springs, Pennsylvania Wikipedia), so it is rated car centric."
+      },
       "official_trailmap": {
         "url": "https://www.7springs.com/-/aemasset/sitecore/seven-springs/trail-base-maps/winter-2025-2026/20251205_SN_winter-trail_map_001.pdf",
         "format": "pdf",
@@ -54322,7 +54783,14 @@
           "note": "Midpoint of the infobox range of 450 to 500 in."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive the six miles from the town of Silverton to the ski area.",
+        "source_id": "wikipedia-silverton-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article or the Silverton, Colorado article."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -55470,7 +55938,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "A free weekend shuttle has run in winter from downtown Leadville to Ski Cooper.",
+        "source_id": "access-summit-daily-ski-cooper-shuttle",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. 2024 to 2025 season, run by Downtowner; the current season was not confirmed."
+      },
       "official_trailmap": {
         "url": "https://www.skicooper.com/mountain-stats-map/",
         "format": "page",
@@ -55565,6 +56040,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-summit-daily-ski-cooper-shuttle",
         "ed-west-wiki-leadville-colorado",
         "ed-west-wiki-ski-cooper",
         "facts-west1-skicooper-site",
@@ -57000,7 +57476,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2019-09-28"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort on the Missouri River bluffs northwest of Kansas City.",
+        "source_id": "wikipedia-snow-creek-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.skisnowcreek.com/the-mountain/about-the-mountain/trail-maps.aspx",
         "format": "page",
@@ -59416,7 +59899,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "Snowshoe provides staff housing, and the resort village sits on the mountain near the summit.",
+        "source_id": "access-coolworks-snowshoe",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Snowshoe job postings on jobs.alterramtnco.com also list on mountain employee housing for rent. Village location from wikipedia-snowshoe-mountain."
+      },
       "official_trailmap": {
         "url": "https://www.snowshoemtn.com/mountain-info/maps",
         "format": "page",
@@ -59653,6 +60143,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-coolworks-snowshoe",
         "ed-east-wikipedia-pocahontas-county-west-virginia",
         "ed-east-wikipedia-snowshoe-mountain",
         "ed-east-wikipedia-snowshoe-west-virginia",
@@ -60869,7 +61360,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Free Steamboat Springs Transit buses run from downtown and west Steamboat to the Gondola Transit Center at the base.",
+        "source_id": "access-steamboat-springs-transit-winter",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. City release for the 2025 to 2026 winter."
+      },
       "official_trailmap": {
         "url": "https://www.steamboat.com/the-mountain/trail-map",
         "format": "page",
@@ -61106,6 +61604,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-steamboat-springs-transit-winter",
         "ed-west-wiki-steamboat-ski-resort",
         "ed-west-wiki-steamboat-springs-colorado",
         "ed-west-wiki-steamboat-springs-winter-sports-club",
@@ -62056,7 +62555,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Fare free MOOver buses run in winter between Stratton and Manchester, and resort shuttles serve the employee housing lodges.",
+        "source_id": "access-stratton-public-transit",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. MOOver and Stratton started the Manchester route in November 2021 for employees and the community, alongside 150 new employee housing beds. Fares from access-wikipedia-southeast-vermont-transit. No summer service."
+      },
       "official_trailmap": {
         "url": "https://www.stratton.com/the-mountain/interactive-trail-map",
         "format": "page",
@@ -62315,6 +62821,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-stratton-public-transit",
         "ed-east-wikipedia-stratton-mountain-resort",
         "ed-east-wikipedia-stratton-mountain-school",
         "ed-east-wikipedia-stratton-vermont",
@@ -62419,7 +62926,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "A free seasonal shuttle makes several daily trips from Truckee to Sugar Bowl, timed with TART's Truckee Local route.",
+        "source_id": "access-tart-sugar-bowl-shuttle",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Six departures a day from Cold Stream Road in 2025 to 2026; it does not run when Old Highway 40 is closed."
+      },
       "official_trailmap": {
         "url": "https://www.sugarbowl.com/trailmaps",
         "format": "page",
@@ -62572,7 +63086,17 @@
             "stale": false
           }
         ],
-        "private_rate": null,
+        "private_rate": {
+          "value": {
+            "low": 799.0,
+            "high": 799.0,
+            "unit": "full_day"
+          },
+          "source_id": "career-followups-sugarbowl-privates",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. All Day Private posted as starting at $799, at most three people per private. The result did not name the season."
+        },
         "private_split": null,
         "lucrativeness": {
           "low": null,
@@ -62654,6 +63178,8 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-tart-sugar-bowl-shuttle",
+        "career-followups-sugarbowl-privates",
         "ed-west-wiki-sugar-bowl-ski-resort",
         "facts-gapfill-ots-sugarbowl",
         "facts-west2-un-ca-openings-2026",
@@ -62999,7 +63525,17 @@
             "stale": false
           }
         ],
-        "private_rate": null,
+        "private_rate": {
+          "value": {
+            "low": 629.0,
+            "high": 629.0,
+            "unit": "full_day"
+          },
+          "source_id": "career-followups-sugarbush-private-ski",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. 2025/26 six hour full day private (9am to 3pm) posted as starting at $629. Rentals and helmets are extra."
+        },
         "private_split": null,
         "lucrativeness": {
           "low": null,
@@ -63085,6 +63621,7 @@
       "housing_summary": null,
       "sources": [
         "access-wikipedia-green-mountain-transit-authority",
+        "career-followups-sugarbush-private-ski",
         "ed-east-wikipedia-fayston-vermont",
         "ed-east-wikipedia-sugarbush-resort",
         "ed-east-wikipedia-waitsfield-vermont",
@@ -63182,7 +63719,14 @@
           "note": "Infobox gives this as a 10 year average."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "The free Sugarloaf Explorer, run by Western Maine Transportation, links condos and villages across Carrabassett Valley with the resort.",
+        "source_id": "access-sugarloaf-shuttles",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened."
+      },
       "official_trailmap": {
         "url": "https://www.sugarloaf.com/mountain-info/mountain-maps",
         "format": "page",
@@ -63431,6 +63975,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-sugarloaf-shuttles",
         "ed-east-wikipedia-carrabassett-valley-academy",
         "ed-east-wikipedia-carrabassett-valley-maine",
         "ed-east-wikipedia-kingfield-maine",
@@ -64451,7 +64996,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "Sunday River houses staff in leased lodges and apartments around Bethel and in a converted dorm on the mountain.",
+        "source_id": "access-sun-journal-sunday-river-staff-housing",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Report from about 2022 to 2023; the staff shuttle was parked then for lack of drivers. The free Mountain Explorer bus from Bethel later ended (sunjournal.com/?p=10919202)."
+      },
       "official_trailmap": {
         "url": "https://www.sundayriver.com/resort-maps",
         "format": "page",
@@ -64700,6 +65252,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-sun-journal-sunday-river-staff-housing",
         "ed-east-wikipedia-bethel-maine",
         "ed-east-wikipedia-gould-academy",
         "ed-east-wikipedia-newry-maine",
@@ -65974,7 +66527,17 @@
             "stale": false
           }
         ],
-        "private_rate": null,
+        "private_rate": {
+          "value": {
+            "low": 770.0,
+            "high": 1300.0,
+            "unit": "full_day"
+          },
+          "source_id": "career-followups-telluride-ski-school",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Full day private (9am to 4pm) $770 early season (late November to mid December) and $1,300 regular season. The result did not name the season."
+        },
         "private_split": null,
         "lucrativeness": {
           "low": null,
@@ -66059,6 +66622,7 @@
       "housing_summary": null,
       "sources": [
         "access-wikipedia-telluride-colorado",
+        "career-followups-telluride-ski-school",
         "ed-west-wiki-mountain-village-colorado",
         "ed-west-wiki-telluride-colorado",
         "ed-west-wiki-telluride-ski-resort",
@@ -66586,7 +67150,14 @@
           "note": "Wikipedia comparison table (tagged for original research); statistics dated 2025-02-22"
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort near Harbor Springs in Northern Michigan.",
+        "source_id": "wikipedia-the-highlands-at-harbor-springs",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.highlandsharborsprings.com/resort-maps",
         "format": "page",
@@ -69362,7 +69933,14 @@
         "summit_ft": null
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Park City Transit runs fare free buses on 13 routes across Park City, the home of the center.",
+        "source_id": "access-wikipedia-park-city-transit",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "The stop nearest the center was not verified; location from wikipedia-park-city-utah."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -69464,6 +70042,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "access-wikipedia-park-city-transit",
         "ed-west-wiki-united-states-ski-team",
         "ed-west-wiki-us-ski-and-snowboard",
         "jobs-fasterskier-jobpostings",
@@ -69549,7 +70128,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "Free High Valley Transit buses serve the Kimball Junction Transit Center, 1.2 miles from the park.",
+        "source_id": "access-utah-olympic-legacy-residences",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The Park Record reported a free park shuttle from the transit center to the Quinney Welcome Center (parkrecord.com, about 2017); current service not confirmed."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -69645,6 +70231,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-utah-olympic-legacy-residences",
         "ed-west-wiki-park-city-utah",
         "ed-west-wiki-utah-olympic-park",
         "jobs-fasterskier-jobpostings",
@@ -70775,7 +71362,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "A free on demand resort shuttle links the ski area with the lodges, condos and Town Square of Waterville Valley.",
+        "source_id": "access-waterville-resort-shuttle",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The resort operates within the planned resort community of Waterville Valley (wikipedia-waterville-valley-resort)."
+      },
       "official_trailmap": {
         "url": "https://www.waterville.com/maps",
         "format": "page",
@@ -70911,6 +71505,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-waterville-resort-shuttle",
         "ed-east-wikipedia-waterville-valley-new-hampshire",
         "ed-east-wikipedia-waterville-valley-resort",
         "facts-northeast1-ots-waterville-valley",
@@ -71673,7 +72268,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "The free Mountain Valley Shuttle runs in ski season between Lake Placid, Wilmington and Whiteface.",
+        "source_id": "access-lakeplacid-mountain-valley-shuttle",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Essex County Public Transportation runs it with ORDA; whiteface.com gives December 15 to March 15."
+      },
       "official_trailmap": {
         "url": "https://whiteface.com/mountain/trail-map/",
         "format": "page",
@@ -71909,6 +72511,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-lakeplacid-mountain-valley-shuttle",
         "ed-east-wikipedia-lake-placid-new-york",
         "ed-east-wikipedia-whiteface-mountain",
         "ed-east-wikipedia-wilmington-new-york",
@@ -72004,7 +72607,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "The free SNOW Bus runs between downtown Whitefish and the resort's Base Lodge and Village.",
+        "source_id": "access-snow-bus-winter-2025-26",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. The nonprofit Big Mountain Commercial Association runs it; the resort also posts a 2026 summer schedule at skiwhitefish.com."
+      },
       "official_trailmap": {
         "url": "https://skiwhitefish.com/trail-maps/",
         "format": "page",
@@ -72146,6 +72756,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-snow-bus-winter-2025-26",
         "ed-west-wiki-whitefish-montana",
         "ed-west-wiki-whitefish-mountain-resort",
         "facts-gapfill-ots-whitefish",
@@ -72229,7 +72840,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the resort on Two Top Mountain between Mercersburg, Pennsylvania and Clear Spring, Maryland.",
+        "source_id": "wikipedia-whitetail-ski-resort",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.skiwhitetail.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -73203,7 +73821,14 @@
           "note": null
         }
       },
-      "access": null,
+      "access": {
+        "rating": "car_centric",
+        "summary_md": "Staff typically drive to the ski area just north of the Illinois border, 55 miles north of Chicago.",
+        "source_id": "wikipedia-wilmot-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "No transit found in the article."
+      },
       "official_trailmap": {
         "url": "https://www.wilmotmountain.com/the-mountain/about-the-mountain/trail-map.aspx",
         "format": "page",
@@ -74773,7 +75398,14 @@
         }
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "transit_friendly",
+        "summary_md": "Fare free High Valley Transit route 108 stops at Woodward on its way between Silver Creek Village and the Jeremy Ranch park and ride.",
+        "source_id": "access-hvt-route-108",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. KPCW reported in October 2024 that the Woodward stop was being added. Fares from the High Valley Transit Wikipedia article."
+      },
       "official_trailmap": null,
       "webcams": {
         "cams_page": {
@@ -74848,7 +75480,86 @@
         "profile_tags": [],
         "notes_md": null
       },
-      "career": null,
+      "career": {
+        "pay": [
+          {
+            "cert_level": "unspecified",
+            "hourly_low": 18.0,
+            "hourly_high": 18.0,
+            "confidence": "estimated",
+            "source_id": "pay-followups-woodward-pc-coach-2627",
+            "as_of": "2026-10-13",
+            "season": "2026-27",
+            "stale": false
+          }
+        ],
+        "private_rate": null,
+        "private_split": null,
+        "lucrativeness": {
+          "low": null,
+          "mid": null,
+          "high": null,
+          "status": "insufficient_data",
+          "assumptions": [
+            {
+              "key": "wage_top_usd",
+              "value": 18.0,
+              "label": "Top of the posted wage scale (USD per hour)"
+            },
+            {
+              "key": "wage_bottom_usd",
+              "value": 18.0,
+              "label": "Bottom of the posted wage scale (USD per hour), used for the low end"
+            },
+            {
+              "key": "hours_per_week",
+              "value": 40.0,
+              "label": "Standard full time hours per week"
+            },
+            {
+              "key": "season_months",
+              "value": 5.0,
+              "label": "Season months (standard 5 month season)"
+            },
+            {
+              "key": "season_months_basis",
+              "value": "default",
+              "label": "Season months basis"
+            },
+            {
+              "key": "weeks_per_month",
+              "value": 4.33,
+              "label": "Weeks per month"
+            },
+            {
+              "key": "tips_season_usd",
+              "value": null,
+              "label": "Tips are not included yet"
+            },
+            {
+              "key": "rent_monthly_usd",
+              "value": null,
+              "label": "Average rent per month (USD)"
+            },
+            {
+              "key": "rent_basis",
+              "value": null,
+              "label": "Rent basis"
+            },
+            {
+              "key": "rent_source_id",
+              "value": null,
+              "label": "Rent source"
+            },
+            {
+              "key": "tax",
+              "value": null,
+              "label": "Savings are before tax"
+            }
+          ]
+        },
+        "stale_fields": []
+      },
       "editorial": {
         "overview_md": "Woodward Park City is an action sports training and recreation center in Park City, Utah. POWDR opened it in December 2019 as a youth sports complex. It belongs to the Woodward network that POWDR built after buying a majority share of Camp Woodward in 2011, alongside Woodward Copper, Woodward Tahoe and Woodward Mt. Bachelor. Park City also holds Park City Mountain, Deer Valley and Utah Olympic Park.",
         "culture_md": null,
@@ -74865,12 +75576,14 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-hvt-route-108",
         "ed-west-wiki-park-city-utah",
         "ed-west-wiki-powdr",
         "jobs-fasterskier-jobpostings",
         "jobs-powdr-workday-posting",
         "jobs-skiracing-job-board",
         "openskimap-ski-areas",
+        "pay-followups-woodward-pc-coach-2627",
         "webcams-woodward-park-city-search",
         "wikipedia-powdr"
       ]
@@ -74916,7 +75629,14 @@
         "summit_ft": null
       },
       "snow": null,
-      "access": null,
+      "access": {
+        "rating": "mixed",
+        "summary_md": "In winter TART's Truckee local service extends to the Donner Summit ski areas, including Boreal.",
+        "source_id": "access-truckee-chamber-tart",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Woodward Tahoe sits at Boreal (wikipedia-boreal-mountain-resort). The service is seasonal while the facility runs all year."
+      },
       "official_trailmap": null,
       "webcams": {
         "cams_page": {
@@ -75087,6 +75807,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "access-truckee-chamber-tart",
         "ed-west-wiki-boreal-mountain-resort",
         "ed-west-wiki-powdr",
         "jobs-fasterskier-jobpostings",
@@ -75372,7 +76093,14 @@
           "note": "Article text: 'Snowfall averages approximately 300 inches a year'."
         }
       },
-      "access": null,
+      "access": {
+        "rating": "convenient",
+        "summary_md": "Club drivers carry staff between employee housing, the lodges, Big Sky and Belgrade.",
+        "source_id": "access-dol-yellowstone-club-transportation-driver",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "From a search result for this page; page not opened. Related postings describe shuttles between employee housing and the club."
+      },
       "official_trailmap": null,
       "webcams": null,
       "jobs": {
@@ -75552,6 +76280,7 @@
       "trailmap_available": true,
       "housing_summary": null,
       "sources": [
+        "access-dol-yellowstone-club-transportation-driver",
         "ed-west-wiki-big-sky-montana",
         "ed-west-wiki-yellowstone-club",
         "facts-gapfill-sri-yellowstone-club",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-10-13T15:15:11Z",
+  "generated_at": "2026-10-13T15:28:30Z",
   "mode": "snowfall",
   "units": "in",
   "scale": "classed",
@@ -16,8 +16,7 @@
     500.0,
     600.0,
     700.0,
-    800.0,
-    900.0
+    800.0
   ],
   "breaks": [
     24.0,
@@ -69,8 +68,7 @@
       500.0,
       600.0,
       700.0,
-      800.0,
-      900.0
+      800.0
     ],
     "compress_below": 180.0
   },
@@ -91,7 +89,7 @@
     "neighbors": 10,
     "min_distance_km": 12.0,
     "grid_step_px": 4,
-    "px_per_degree": 20.0,
+    "px_per_degree": 32.0,
     "full_opacity_km": 300.0,
     "fade_end_km": 800.0,
     "floor_alpha": 0.35,
@@ -121,24 +119,24 @@
       {
         "region": "lower48",
         "file": "snowfall-isolines-lower48.geojson",
-        "bytes": 57174,
-        "features": 206
+        "bytes": 92818,
+        "features": 222
       },
       {
         "region": "alaska",
         "file": "snowfall-isolines-alaska.geojson",
-        "bytes": 6374,
-        "features": 24
+        "bytes": 9472,
+        "features": 28
       }
     ]
   },
-  "inputs_sha256": "61e306182cc73b4209d645faf5cff3875ae671bc0b5d2dd35082119fb555a67f",
+  "inputs_sha256": "8f490c249c184c6c3e6f7c9983fb8a269d63a9e472b99ebe43a48b229cb63e85",
   "rasters": [
     {
       "region": "lower48",
       "image": "snowfall-lower48.png",
-      "width": 1164,
-      "height": 639,
+      "width": 1862,
+      "height": 1023,
       "coordinates": [
         [
           -125.0,
@@ -157,15 +155,15 @@
           24.4
         ]
       ],
-      "bytes": 61533,
+      "bytes": 159914,
       "stations": 5486,
       "pockets": 271
     },
     {
       "region": "alaska",
       "image": "snowfall-alaska.png",
-      "width": 1010,
-      "height": 890,
+      "width": 1616,
+      "height": 1424,
       "coordinates": [
         [
           -180.0,
@@ -184,7 +182,7 @@
           51.2
         ]
       ],
-      "bytes": 54869,
+      "bytes": 109746,
       "stations": 82,
       "pockets": 3
     }

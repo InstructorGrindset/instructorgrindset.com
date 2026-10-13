@@ -153,7 +153,7 @@ async function axe(browser, base) {
     const ctx = await browser.newContext(c.phone ? { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: 1280, height: 800 } });
     const page = await ctx.newPage();
     await page.goto(base + c.url);
-    if (c.static) await page.waitForSelector('.nav-root', { timeout: 30000 });
+    if (c.static) await page.waitForSelector('.nav-root', { state: 'attached', timeout: 30000 });
     else await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 30000 });
     if (c.waiting || c.static) await page.waitForTimeout(800);
     else {
