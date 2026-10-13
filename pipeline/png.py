@@ -3,7 +3,8 @@
 Writes 8 bit RGBA images (colour type 6) with one filter per scanline. The pipeline uses it for the
 heat map rasters in data/build/heat/ (docs/map/ARCHITECTURE.md, "Heat maps"), so the build needs no
 imaging library. Also writes and reads 16 bit greyscale images (the committed terrain extract,
-``pipeline/terrain.py``) and reads 8 bit RGB tiles (the Terrain Tiles download).
+``pipeline/terrain.py``), reads 8 bit RGB tiles (the Terrain Tiles download) and writes and reads 8 bit
+palette images (colour type 3, the share cards of ``pipeline/share.py``).
 """
 from __future__ import annotations
 
@@ -88,12 +89,54 @@ def encode_gray16(width: int, height: int, values: list[int] | tuple[int, ...], 
     return SIGNATURE + _chunk(b"IHDR", ihdr) + _chunk(b"IDAT", zlib.compress(bytes(raw), level)) + _chunk(b"IEND", b"")
 
 
-_CHANNELS = {0: 1, 2: 3, 4: 2, 6: 4}
+def encode_indexed(width: int, height: int, indices: bytes | bytearray, palette: list[tuple[int, int, int]], *,
+                   level: int = 9) -> bytes:
+    """PNG bytes of an 8 bit palette image (colour type 3): ``height`` rows of ``width`` palette indices, top row
+    first, and up to 256 RGB palette entries. Writes the smaller of no filter and the Up filter on every row
+    (palette images usually compress best unfiltered), so the output depends only on the input."""
+    if width <= 0 or height <= 0:
+        raise ValueError("width and height must be positive")
+    if len(indices) != width * height:
+        raise ValueError(f"expected {width * height} indices, got {len(indices)}")
+    if not 0 < len(palette) <= 256 or max(indices) >= len(palette):
+        raise ValueError("palette must hold 1 to 256 colors and cover every index")
+    best = b""
+    for kind in (FILTER_NONE, FILTER_UP):
+        raw = bytearray()
+        prev = bytes(width)
+        for j in range(height):
+            row = bytes(indices[j * width:(j + 1) * width])
+            raw.append(kind)
+            raw += _filter_row(row, prev, kind, bpp=1)
+            prev = row
+        packed = zlib.compress(bytes(raw), level)
+        if not best or len(packed) < len(best):
+            best = packed
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 3, 0, 0, 0)
+    plte = b"".join(bytes(c) for c in palette)
+    return (SIGNATURE + _chunk(b"IHDR", ihdr) + _chunk(b"PLTE", plte) + _chunk(b"IDAT", best)
+            + _chunk(b"IEND", b""))
+
+
+def palette(data: bytes) -> list[tuple[int, int, int]]:
+    """The PLTE entries of a PNG (empty when it has none)."""
+    pos = 8
+    while pos + 8 <= len(data):
+        (n,) = struct.unpack(">I", data[pos:pos + 4])
+        if data[pos + 4:pos + 8] == b"PLTE":
+            body = data[pos + 8:pos + 8 + n]
+            return [tuple(body[i:i + 3]) for i in range(0, len(body), 3)]
+        pos += 12 + n
+    return []
+
+
+_CHANNELS = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}
 
 
 def decode(data: bytes) -> tuple[int, int, int, int, bytes]:
     """(width, height, channels, bit depth, unfiltered pixel bytes, top row first) of a non interlaced PNG in
-    colour type 0, 2, 4 or 6 at 8 or 16 bits. Checks the signature and every chunk CRC."""
+    colour type 0, 2, 4 or 6 at 8 or 16 bits, or colour type 3 at 8 bits (the bytes are palette indices, see
+    ``palette``). Checks the signature and every chunk CRC."""
     if data[:8] != SIGNATURE:
         raise ValueError("not a PNG")
     pos, idat, ihdr = 8, [], None
@@ -113,7 +156,7 @@ def decode(data: bytes) -> tuple[int, int, int, int, bytes]:
     if ihdr is None:
         raise ValueError("PNG without IHDR")
     width, height, depth, ctype, comp, filt, inter = ihdr
-    if ctype not in _CHANNELS or depth not in (8, 16) or comp or filt or inter:
+    if ctype not in _CHANNELS or depth not in (8, 16) or (ctype == 3 and depth != 8) or comp or filt or inter:
         raise ValueError(f"unsupported PNG (colour type {ctype}, depth {depth}, interlace {inter})")
     bpp = _CHANNELS[ctype] * depth // 8
     stride = width * bpp

@@ -90,6 +90,7 @@ export const OfficialTrailmap = z.object({
 
 // ── Live cams and jobs (links only; ARCHITECTURE "Webcams and jobs"). A bad item drops only that item. ──
 const HttpsUrl = z.string().regex(/^https:\/\//, 'https link');
+const YearMonth = z.string().regex(/^20\d\d-(0[1-9]|1[0-2])$/, 'YYYY-MM');
 // Transit agency sites from GTFS agency.txt; many are still plain http. A bad link becomes null.
 const HttpUrl = z.string().regex(/^https?:\/\//, 'web link').nullish().catch(null).transform((v) => v ?? null);
 const Cited = { source_id: Slug, as_of: IsoDate, confidence: Confidence, note: z.string().nullish() };
@@ -113,8 +114,13 @@ export const JobLink = z.object({
 export const Jobs = z.object({
   links: keepValid(JobLink),
   feed: z.boolean().nullish().transform((v) => Boolean(v)),
-  // The source's own words on when hiring or training happens; a bad value drops only the window.
-  hiring_window: z.object({ text: z.string().min(1), ...Cited }).nullish().catch(null).transform((v) => v ?? null),
+  // The source's own words on when hiring or training happens; a bad value drops only the window. start_month and
+  // end_month (YYYY-MM) are what pipeline/hiring.py reads from the text, null when it is not explicit.
+  hiring_window: z.object({
+    text: z.string().min(1), ...Cited,
+    start_month: YearMonth.nullish().catch(null).transform((v) => v ?? null),
+    end_month: YearMonth.nullish().catch(null).transform((v) => v ?? null),
+  }).nullish().catch(null).transform((v) => v ?? null),
 }).nullish().catch(null).transform((v) => (v && (v.links.length || v.hiring_window) ? v : null));
 
 /** data/build/jobs/postings.json (pipeline/jobs_feed.py, daily). */

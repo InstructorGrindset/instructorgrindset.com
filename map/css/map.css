@@ -307,9 +307,12 @@ body.list-mode .facility-filter { left: 1.5rem; }
 .criterion-why { color: var(--muted); }
 .tier-row { flex-wrap: wrap; }
 @media (max-width: 759.98px) {
-  .facility-filter { left: 46px; top: 8px; }
+  /* Narrow phones scroll the chips sideways, like the color modes below them. */
+  .facility-filter { left: 46px; top: 8px; max-width: calc(100% - 56px); overflow-x: auto; scrollbar-width: none; }
+  .facility-filter::-webkit-scrollbar { display: none; }
   .filter-btn { padding: .3rem .55rem; }
-  body.list-mode .facility-filter { left: 1rem; }
+  .facility-filter .filter-btn { flex: 0 0 auto; }
+  body.list-mode .facility-filter { left: 1rem; max-width: calc(100% - 2rem); }
 }
 .stats-note { margin: -.25rem 0 .75rem; color: var(--muted); font-size: var(--text-xs); }
 

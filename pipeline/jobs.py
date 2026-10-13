@@ -11,7 +11,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
+from .hiring import parse_window
 from .links import domain_of, load_batches
+from .config import HiringWindowDefs
 from .schemas.jobs import ROLE_GROUPS, Employer, EmployerOut, HiringWindowRecord, JobLink, JobsBatch
 from .sources import SourceRegistry
 
@@ -116,9 +118,20 @@ def load_jobs(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], ats_
     return data, errors
 
 
-def resort_jobs(data: JobsData, resort_id: str) -> Optional[dict]:
+def hiring_window_output(window: Optional[HiringWindowRecord], max_months: int) -> Optional[dict]:
+    """Resort.jobs.hiring_window: the source's text and citation, plus start_month and end_month (YYYY-MM) when
+    pipeline/hiring.py can read both from the text, else null."""
+    if window is None:
+        return None
+    months = parse_window(window.text, window.as_of, max_months)
+    return {**window.model_dump(mode="json", exclude={"resort_id"}),
+            "start_month": months.start if months else None, "end_month": months.end if months else None}
+
+
+def resort_jobs(data: JobsData, resort_id: str, max_months: int = HiringWindowDefs().max_months) -> Optional[dict]:
     """Resort.jobs in resorts.json: links ordered by role group (ski school, coaching, management, corporate, all),
-    file order within a group, whether a linked employer has a live postings feed, and the hiring window."""
+    file order within a group, whether a linked employer has a live postings feed, and the hiring window.
+    ``max_months`` is config jobs.hiring_windows.max_months."""
     links = data.links.get(resort_id) or []
     window = data.hiring_windows.get(resort_id)
     if not links and window is None:
@@ -127,7 +140,7 @@ def resort_jobs(data: JobsData, resort_id: str) -> Optional[dict]:
     ordered = sorted(enumerate(links), key=lambda x: (order[x[1].role_group], x[0]))
     feed = any(data.employers[x.employer_id].ats.feed for x in links if x.employer_id in data.employers)
     return {"links": [x.model_dump(mode="json") for _, x in ordered], "feed": feed,
-            "hiring_window": window.model_dump(mode="json", exclude={"resort_id"}) if window else None}
+            "hiring_window": hiring_window_output(window, max_months)}
 
 
 def employers_output(data: JobsData, header: dict) -> dict:

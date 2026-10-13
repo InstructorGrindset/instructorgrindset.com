@@ -8,14 +8,14 @@
 //    panel shows source links, and resorts.json is only prefetched (a resort or comparison view loads it at once).
 //    After the WebGL map loads: the full data, the recolor control and the state outlines.
 import { config, isPhone } from './config.js';
-import { loadAll, loadStateOutlines, whenPainted } from './data.js';
+import { loadAll, loadStateOutlines, whenPainted, markHiring, hiringPostings } from './data.js';
 import { createRouter } from './router.js';
 import { createPanel } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
 import { h } from './ui.js';
-import { FILTERS } from './labels.js';
+import { FILTERS, HIRING_NONE_TITLE } from './labels.js';
 import { drawPreview } from './preview.js';
 
 const $ = (id) => document.getElementById(id);
@@ -250,17 +250,35 @@ async function main() {
     router.goHref(a.getAttribute('href'));
   });
 
-  // Facility filter: applies to the map and the list view.
+  // Facility filter and Hiring now: apply to the map and the list view.
+  const applyFilter = (key) => {
+    filterKey = key;
+    if (mapCtl) mapCtl.setFilter(key, index.hiringIds);
+    list.setFilter(key);
+  };
   const filterButtons = FILTERS.map((f) => h('button', {
     type: 'button', class: 'filter-btn', 'aria-pressed': String(f.key === 'all'), dataset: { filter: f.key },
-    onclick: () => {
+    onclick: (e) => {
+      // A disabled chip stays focusable; the click only says why.
+      if (e.currentTarget.getAttribute('aria-disabled') === 'true') { announce(HIRING_NONE_TITLE); return; }
       for (const b of filterButtons) b.setAttribute('aria-pressed', String(b === filterButtons[FILTERS.indexOf(f)]));
-      filterKey = f.key;
-      if (mapCtl) mapCtl.setFilter(f.key);
-      list.setFilter(f.key);
-      announce(`Showing ${f.key === 'all' ? 'every facility type' : f.label.toLowerCase()}.`);
+      applyFilter(f.key);
+      announce(f.key === 'hiring' ? `Showing ${index.hiringIds.length === 1 ? '1 resort' : `${index.hiringIds.length} resorts`} hiring now.`
+        : `Showing ${f.key === 'all' ? 'every facility type' : f.label.toLowerCase()}.`);
     },
   }, f.label));
+  // Hiring now (n): the count comes from the slim index at startup (hiring windows that cover this month) and adds
+  // the open roles once jobs/postings.json has loaded after the first paint. At 0 the chip stays, disabled.
+  const hiringBtn = filterButtons[FILTERS.findIndex((f) => f.key === 'hiring')];
+  const showHiring = (n) => {
+    if (!hiringBtn) return;
+    hiringBtn.textContent = `Hiring now (${n})`;
+    if (n) { hiringBtn.removeAttribute('aria-disabled'); hiringBtn.removeAttribute('title'); } else {
+      hiringBtn.setAttribute('aria-disabled', 'true');
+      hiringBtn.title = HIRING_NONE_TITLE;
+    }
+  };
+  showHiring(markHiring(index, null));
   if (els.filter) {
     els.filter.append(...filterButtons);
     els.filter.hidden = false;
@@ -335,6 +353,13 @@ async function main() {
   // (resorts.json is 2.6 MB; parsing it is a long task). A view that needs full records loads them (panel.js).
   afterLoad(() => { idleReached = true; if (sourcesWanted) loadSources(); index.prefetchDetails(); });
   afterLoad(prefetchMap);
+  // Open roles join the Hiring now count once the background loads start (one small file, no Zod).
+  afterLoad(() => hiringPostings(index).then((postings) => {
+    if (!postings) return;
+    const before = index.hiringIds.join(',');
+    showHiring(markHiring(index, postings));
+    if (filterKey === 'hiring' && index.hiringIds.join(',') !== before) applyFilter('hiring');
+  }));
 
   let starting = null;
   function startMap() {
@@ -392,7 +417,7 @@ async function main() {
     }
 
     state.mapCtl = mapCtl;
-    if (filterKey !== 'all') mapCtl.setFilter(filterKey);
+    if (filterKey !== 'all') mapCtl.setFilter(filterKey, index.hiringIds);
     if (detailFor) applyDetail();
     if (trailFor) setTrailControl(trailFor);
     if (router.current) mapCtl.show(router.current, { animate: false });

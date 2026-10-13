@@ -228,6 +228,36 @@ def ownership_cross_check(inputs: RawInputs, missing_record: str = "warn") -> tu
     return errors, warnings
 
 
+def ownership_source_age_check(inputs: RawInputs, registry: SourceRegistry, today, max_age_days: int,
+                               rel=str) -> list[str]:
+    """Errors for every source a Vail Resorts or Alterra ownership entry cites whose accessed_date is more than
+    ``max_age_days`` (config ownership.max_source_age_days, one build cycle) before ``today`` (the build date).
+
+    Ownership is verified from the companies' own sites or filings each build cycle (CLAUDE.md), so a portfolio
+    source older than one cycle stops the build until it is refreshed (docs/map/ARCHITECTURE.md, "Refreshing the
+    ownership sources"). A source accessed after ``today`` counts as fresh.
+    """
+    errors: list[str] = []
+    for lo in inputs.ownership:
+        key = verified_operator(lo.file.operator)
+        if key is None:
+            continue
+        for sid in sorted({e.source_id for e in lo.file.resorts}):
+            if sid not in registry:
+                continue  # an undefined source id is already a validation error
+            accessed = registry.get(sid).accessed_date
+            age = (today - accessed).days
+            if age > max_age_days:
+                errors.append(
+                    f"{rel(lo.path)}: the {VERIFIED_OPERATORS[key]} ownership source '{sid}' was accessed on "
+                    f"{accessed.isoformat()}, {age} days before this build ({today.isoformat()}). One build cycle "
+                    f"is {max_age_days} days (config ownership.max_source_age_days). Re verify the portfolio from the "
+                    f"company's own site or filings, update the source and its accessed_date, then rebuild. Steps: "
+                    f"docs/map/ARCHITECTURE.md, \"Refreshing the ownership sources\"."
+                )
+    return errors
+
+
 @dataclass
 class MatchResult:
     by_tier_a: dict[str, list[SkiArea]]

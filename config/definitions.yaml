@@ -65,6 +65,10 @@ ownership:
   # Every resort in data/raw/ownership/*.yaml needs a Tier A record (operator compensation).
   # warn while research is in progress; fail once the Vail and Alterra lists are complete.
   missing_tier_a_record: fail
+  # One build cycle, in days. Ownership is re verified once a year (ROADMAP item 17), so the build fails when a
+  # source that a Vail Resorts or Alterra ownership entry cites has an accessed_date older than this. 400 days is a
+  # year plus a month of slack for the refresh. Runbook: docs/map/ARCHITECTURE.md, "Refreshing the ownership sources".
+  max_source_age_days: 400
 
 operator_scale:
   # Internal operator scale for data/raw/tier_a (validated on load). Owner decision 2026-10-13: the
@@ -440,3 +444,8 @@ jobs:
     # postings.json is rewritten when its postings change, or when its last fetch is older than this many days.
     refresh_days: 7
     timeout_s: 20
+  hiring_windows:
+    # The "Hiring now" filter reads a start and an end month from a hiring window's text only when the text names
+    # both (pipeline/hiring.py). A window longer than this many months is left unparsed: a span that long means an
+    # old posting or a misread date.
+    max_months: 9

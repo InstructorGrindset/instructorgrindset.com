@@ -557,7 +557,7 @@ def plan_pages(build: Path) -> dict[str, Page]:
 INDEX_NAME = "map-index.json"
 INDEX_FIELDS = ("id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
                 "acres", "size_rank", "climate_available", "detail_available", "webcams_available", "jobs_available",
-                "season_length_days", "snowfall_annual_in", "lucrativeness_mid")
+                "season_length_days", "snowfall_annual_in", "lucrativeness_mid", "hiring_window", "job_employers")
 RECOLOR_PROPS = ("season_length_days", "snowfall_annual_in", "lucrativeness_mid")
 
 
@@ -583,6 +583,18 @@ def _value(src: Any) -> Any:
     return src.get("value") if isinstance(src, dict) else None
 
 
+def _hiring_index(r: dict, feed_ids: Optional[set]) -> tuple[Optional[list], Optional[list]]:
+    """The "Hiring now" filter's two index values: hiring_window [start_month, end_month] (read from the text by
+    pipeline/hiring.py) or null, and job_employers, the linked employers whose board feeds jobs/postings.json
+    (every linked employer without jobs/employers.json), or null."""
+    jobs = r.get("jobs") or {}
+    hw = jobs.get("hiring_window") or {}
+    window = [hw["start_month"], hw["end_month"]] if hw.get("start_month") and hw.get("end_month") else None
+    ids = {x["employer_id"] for x in jobs.get("links") or [] if x.get("employer_id")} if jobs.get("feed") else set()
+    ids = sorted(ids if feed_ids is None else ids & feed_ids)
+    return window, ids or None
+
+
 def build_map_index(build: Path) -> dict:
     """Slim rows from resorts.json plus the recolor values from resorts.geojson (when present).
 
@@ -593,6 +605,8 @@ def build_map_index(build: Path) -> dict:
     geo = _load(build, "resorts.geojson", optional=True) or {"features": []}
     props = {f["properties"]["id"]: f["properties"] for f in geo.get("features", [])
              if isinstance(f, dict) and isinstance(f.get("properties"), dict) and f["properties"].get("id")}
+    employers = _load(build, "jobs/employers.json", optional=True)
+    feed_ids = {e["id"] for e in employers.get("employers", []) if e.get("feed")} if employers else None
     rows = []
     breaks: Any = False  # loaded on first need
     for r in meta.get("resorts", []):
@@ -619,6 +633,7 @@ def build_map_index(build: Path) -> dict:
             "climate_available": bool(r.get("climate_available")), "detail_available": bool(r.get("detail_available")),
             "webcams_available": bool(r.get("webcams")), "jobs_available": bool((r.get("jobs") or {}).get("links")),
         }
+        row["hiring_window"], row["job_employers"] = _hiring_index(r, feed_ids)
         for k in RECOLOR_PROPS:
             row[k] = p[k] if k in p else derived[k]
         rows.append({k: row[k] for k in INDEX_FIELDS})

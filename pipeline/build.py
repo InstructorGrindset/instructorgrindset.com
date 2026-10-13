@@ -51,7 +51,9 @@ from pipeline.schemas import Cluster, DetailFile, Resort, Source, State, Trailma
 from pipeline.schemas.raw import TierABatch, TierARecord  # noqa: E402
 from pipeline.sources import SourceConflictError, SourceRegistry  # noqa: E402
 from pipeline.states import STATE_NAMES, build_states, build_us_states_geojson  # noqa: E402
-from pipeline.tier_a import BuildError, RawInputs, load_raw, match_openskimap, ownership_cross_check  # noqa: E402
+from pipeline.tier_a import (  # noqa: E402
+    BuildError, RawInputs, load_raw, match_openskimap, ownership_cross_check, ownership_source_age_check,
+)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_VERSION = 1
@@ -240,6 +242,8 @@ def build(
     own_errors, own_warnings = ownership_cross_check(inputs, cfg.definitions.ownership.missing_tier_a_record)
     errors += own_errors
     warnings += own_warnings
+    # One build cycle: a Vail Resorts or Alterra portfolio source older than this fails the build (ROADMAP item 17).
+    errors += ownership_source_age_check(inputs, registry, build_date(), cfg.definitions.ownership.max_source_age_days, rel)
 
     us_states_path = out_dir / "us-states.geojson"
     if states_geojson and not us_states_path.exists() and not build_us_states_geojson(repo_root, us_states_path):
@@ -325,7 +329,7 @@ def build(
     errors += jobs_errors
     for d in drafts:
         d["webcams"] = webcams_output(webcams.get(d["id"]), cfg.definitions.webcams.max_named_cams)
-        d["jobs"] = jobs_mod.resort_jobs(jobs_data, d["id"])
+        d["jobs"] = jobs_mod.resort_jobs(jobs_data, d["id"], jobs_cfg.hiring_windows.max_months)
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
     cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())

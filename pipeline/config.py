@@ -117,6 +117,8 @@ class OpenSkiMapDefs(StrictModel):
 
 class OwnershipDefs(StrictModel):
     missing_tier_a_record: Literal["warn", "fail"] = "warn"
+    # One build cycle in days: a Vail Resorts or Alterra ownership source accessed longer ago fails the build.
+    max_source_age_days: int = Field(default=400, ge=1)
 
 
 class ProfessionalismWeights(StrictModel):
@@ -464,10 +466,17 @@ class JobsFeedDefs(StrictModel):
         return self
 
 
+class HiringWindowDefs(StrictModel):
+    """How pipeline/hiring.py reads a hiring window's text into months (the "Hiring now" filter)."""
+
+    max_months: int = Field(default=9, ge=1, le=12)
+
+
 class JobsDefs(StrictModel):
     ats_domains: dict[str, list[Annotated[str, Field(pattern=DOMAIN_RE)]]] = Field(default_factory=dict)
     blocked_domains: list[Annotated[str, Field(pattern=DOMAIN_RE)]] = Field(default_factory=list)
     feed: JobsFeedDefs = Field(default_factory=JobsFeedDefs)
+    hiring_windows: HiringWindowDefs = Field(default_factory=HiringWindowDefs)
 
     @model_validator(mode="after")
     def _vendors(self) -> "JobsDefs":

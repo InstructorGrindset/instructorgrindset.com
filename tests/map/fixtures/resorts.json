@@ -438,7 +438,9 @@
      "source_id": "fixture-resort-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "start_month": null,
+     "end_month": null
     }
    },
    "access": {
@@ -2146,11 +2148,13 @@
     "feed": false,
     "links": [],
     "hiring_window": {
-     "text": "Applications open September 1; staff clinics start in late November.",
+     "text": "Instructor posting opened September 1, 2026 with a target start of December 1, 2026.",
      "source_id": "fixture-careers",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "start_month": "2026-09",
+     "end_month": "2026-12"
     }
    },
    "access": {

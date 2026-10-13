@@ -74,6 +74,12 @@ const isStr = (v) => typeof v === 'string' && v.length > 0;
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 const numOrNull = (v) => (isNum(v) ? v : null);
 const strArray = (v) => Array.isArray(v) && v.every((x) => typeof x === 'string');
+const YEAR_MONTH = /^20\d\d-(0[1-9]|1[0-2])$/;
+
+/** [start_month, end_month] (YYYY-MM, start first), or null. */
+function monthWindow(v) {
+  return Array.isArray(v) && v.length === 2 && YEAR_MONTH.test(v[0]) && YEAR_MONTH.test(v[1]) && v[0] <= v[1] ? [v[0], v[1]] : null;
+}
 
 function isArea(g) {
   return g && (g.type === 'Polygon' || g.type === 'MultiPolygon') && Array.isArray(g.coordinates) && g.coordinates.length > 0;
@@ -101,6 +107,9 @@ function slimFromRow(fields, row) {
     webcams_available: o.webcams_available === true, jobs_available: o.jobs_available === true,
     season_length_days: numOrNull(o.season_length_days), snowfall_annual_in: numOrNull(o.snowfall_annual_in),
     lucrativeness_mid: numOrNull(o.lucrativeness_mid),
+    hiring_window: monthWindow(o.hiring_window),
+    job_employers: strArray(o.job_employers) && o.job_employers.length ? o.job_employers.filter((x) => SLUG.test(x)) : null,
+    hiring_now: false,
   };
 }
 
@@ -195,6 +204,9 @@ function slimFromFull(r, props) {
     snowfall_annual_in: numOrNull(p.snowfall_annual_in),
     lucrativeness_mid: p.lucrativeness_mid !== undefined ? numOrNull(p.lucrativeness_mid)
       : (r.career && r.career.lucrativeness ? r.career.lucrativeness.mid : null),
+    hiring_window: r.jobs && r.jobs.hiring_window ? monthWindow([r.jobs.hiring_window.start_month, r.jobs.hiring_window.end_month]) : null,
+    job_employers: r.jobs && r.jobs.feed ? [...new Set(r.jobs.links.map((l) => l.employer_id))].sort() : null,
+    hiring_now: false,
   };
 }
 
@@ -599,6 +611,18 @@ export function whenPainted(latestMs = 8000) {
   return paintedPromise;
 }
 
+let postingsRawPromise = null;
+/** jobs/postings.json as fetched (one request for the panel and the Hiring now count), after the first paint. */
+function postingsRaw() {
+  if (!postingsRawPromise) {
+    postingsRawPromise = whenPainted().then(() => fetchJson('jobs/postings.json', { optional: true })).catch((err) => {
+      console.warn('[map] jobs/postings.json', err.message);
+      return null;
+    });
+  }
+  return postingsRawPromise;
+}
+
 let postingsPromise = null;
 
 /**
@@ -608,7 +632,7 @@ let postingsPromise = null;
  */
 export function loadPostings() {
   if (!postingsPromise) {
-    postingsPromise = whenPainted().then(() => Promise.all([fetchJson('jobs/postings.json', { optional: true }), schemas()])).then(([raw, sch]) => {
+    postingsPromise = Promise.all([postingsRaw(), schemas()]).then(([raw, sch]) => {
       if (!raw) return null;
       const r = sch.PostingsFile.safeParse(raw);
       if (!r.success) {
@@ -678,6 +702,64 @@ export function loadTrailMap(resortId) {
   return trailCache.get(resortId);
 }
 
+// ── Hiring now filter (docs/map/ARCHITECTURE.md "Hiring now filter") ──
+
+/** "YYYY-MM" of a date in the viewer's time zone. */
+export function monthKey(date) {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+}
+
+/** True when the month of `date` falls inside [start_month, end_month]. Mirrors pipeline/hiring.py covers(). */
+export function hiringWindowCovers(window, date) {
+  if (!window) return false;
+  const key = monthKey(date);
+  return window[0] <= key && key <= window[1];
+}
+
+/**
+ * Ids of the resorts that are hiring now: a sourced hiring window covers `date`, or postings.json has an open role
+ * at one of the resort's linked employers that names this resort or no single resort. `postings` is the raw file
+ * (or null); only rows of employers with a board and an https url count, as in the panel's open roles.
+ */
+export function hiringNowIds(resorts, postings, date) {
+  const out = new Set();
+  for (const r of resorts) if (hiringWindowCovers(r.hiring_window, date)) out.add(r.id);
+  const boards = postings && Array.isArray(postings.boards) ? new Set(postings.boards.map((b) => b && b.employer_id)) : null;
+  const rows = boards && Array.isArray(postings.postings) ? postings.postings : [];
+  if (!rows.length) return out;
+  const named = new Map(); // employer id -> Set of resort ids named by its postings ('' = no single resort)
+  for (const p of rows) {
+    if (!p || !isStr(p.employer_id) || !boards.has(p.employer_id) || !Array.isArray(p.resort_ids)
+      || typeof p.url !== 'string' || !p.url.startsWith('https://')) continue;
+    if (!named.has(p.employer_id)) named.set(p.employer_id, new Set());
+    const set = named.get(p.employer_id);
+    if (!p.resort_ids.length) set.add('');
+    for (const id of p.resort_ids) if (typeof id === 'string') set.add(id);
+  }
+  for (const r of resorts) {
+    if (!r.job_employers || out.has(r.id)) continue;
+    if (r.job_employers.some((e) => named.has(e) && (named.get(e).has(r.id) || named.get(e).has('')))) out.add(r.id);
+  }
+  return out;
+}
+
+/**
+ * Mark the slim records with hiring_now, keep the sorted ids in index.hiringIds and return the count. At startup
+ * `postings` is null, so only the hiring windows in the slim index count; app.js calls it again with the raw
+ * postings once jobs/postings.json has loaded after the first paint.
+ */
+export function markHiring(index, postings, date = new Date()) {
+  const ids = hiringNowIds(index.resortList, postings, date);
+  for (const r of index.resortList) r.hiring_now = ids.has(r.id);
+  index.hiringIds = [...ids].sort();
+  return ids.size;
+}
+
+/** Resolves to the raw postings file when some resort links an employer with a feed, else null (no request). */
+export function hiringPostings(index) {
+  return index.resortList.some((r) => r.job_employers) ? postingsRaw() : Promise.resolve(null);
+}
+
 /** Counts by facility type for a list of resorts. */
 export function facilityCounts(list) {
   const out = { ski_area: 0, indoor: 0, training_center: 0, total: list.length };
@@ -685,10 +767,11 @@ export function facilityCounts(list) {
   return out;
 }
 
-/** Filter key used by the facility filter: all | ski_area | facility (indoor and training). */
+/** Filter key used by the facility filter: all | ski_area | facility (indoor and training) | hiring (Hiring now). */
 export function matchesFilter(resort, filter) {
   if (!filter || filter === 'all') return true;
   if (filter === 'ski_area') return resort.facility_type === 'ski_area';
+  if (filter === 'hiring') return resort.hiring_now === true;
   return resort.facility_type === 'indoor' || resort.facility_type === 'training_center';
 }
 

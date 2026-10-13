@@ -381,6 +381,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
   });
 
   let filter = 'all';
+  let hiringIds = []; // resort ids for the Hiring now filter
   let detail = null;
   let selectedSite = null;
   let trailCtl = null;
@@ -522,8 +523,12 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     map.setFilter('clusters-fill', notAKCluster);
     map.setFilter('clusters-line', ['all', ['!=', ['get', 'fallback'], true], notAKCluster]);
     map.setFilter('clusters-line-fallback', ['all', ['==', ['get', 'fallback'], true], notAKCluster]);
-    map.setFilter('resorts', ['all', IS_SKI_AREA, notAK('state')]);
-    if (map.getLayer('resorts-facility')) map.setFilter('resorts-facility', ['all', ['!', IS_SKI_AREA], notAK('state')]);
+    // Hiring now keeps only the listed resorts, ski areas and facilities alike.
+    const only = filter === 'hiring' ? [['in', ['get', 'id'], ['literal', hiringIds]]] : [];
+    map.setFilter('resorts', ['all', IS_SKI_AREA, notAK('state'), ...only]);
+    if (map.getLayer('resorts-facility')) map.setFilter('resorts-facility', ['all', ['!', IS_SKI_AREA], notAK('state'), ...only]);
+    map.setFilter('inset-resorts', ['all', IS_SKI_AREA, ...only]);
+    if (map.getLayer('inset-resorts-facility')) map.setFilter('inset-resorts-facility', ['all', ['!', IS_SKI_AREA], ...only]);
     vis('resorts', filter !== 'facility');
     vis('resorts-facility', filter !== 'ski_area');
     for (const id of INSET_LAYERS) vis(id, national);
@@ -640,8 +645,8 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     },
     /** null for default colors, or { key, prop, images, format, attribution } from recolor.js. */
     setRecolor(next) { recolor = next; if (loaded) applyRecolor(); },
-    /** 'all' | 'ski_area' | 'facility' */
-    setFilter(next) { filter = next; if (loaded) applyFilter(); },
+    /** 'all' | 'ski_area' | 'facility' | 'hiring' (with the resort ids that are hiring now) */
+    setFilter(next, ids) { filter = next; hiringIds = Array.isArray(ids) ? ids : []; if (loaded) applyFilter(); },
     resize() { map.resize(); },
   };
 }

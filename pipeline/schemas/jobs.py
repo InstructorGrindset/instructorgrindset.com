@@ -133,6 +133,25 @@ class HiringWindowRecord(HiringWindow):
     resort_id: Slug
 
 
+YEAR_MONTH = r"^20\d\d-(0[1-9]|1[0-2])$"
+
+
+class HiringWindowOut(HiringWindow):
+    """Resort.jobs.hiring_window: the raw window plus the months pipeline/hiring.py reads from its text (both null
+    when the text is not explicit about when hiring opens and when it closes)."""
+
+    start_month: Optional[str] = Field(default=None, pattern=YEAR_MONTH)
+    end_month: Optional[str] = Field(default=None, pattern=YEAR_MONTH)
+
+    @model_validator(mode="after")
+    def _months(self) -> "HiringWindowOut":
+        if (self.start_month is None) != (self.end_month is None):
+            raise ValueError("start_month and end_month are set together or not at all")
+        if self.start_month and self.end_month < self.start_month:
+            raise ValueError("end_month is before start_month")
+        return self
+
+
 class JobsBatch(StrictModel):
     batch: Slug
     researched_date: dt.date
@@ -155,11 +174,11 @@ class JobsBatch(StrictModel):
 class Jobs(StrictModel):
     """Resort.jobs in resorts.json. ``feed`` is true when one of the linked employers has a public board that
     pipeline/jobs_feed.py reads, so the panel loads jobs/postings.json only then. ``hiring_window`` is the source's
-    own sentence on when hiring or training happens."""
+    own sentence on when hiring or training happens, with the months it names."""
 
     links: list[JobLink] = Field(default_factory=list)
     feed: bool = False
-    hiring_window: Optional[HiringWindow] = None
+    hiring_window: Optional[HiringWindowOut] = None
 
     @model_validator(mode="after")
     def _something(self) -> "Jobs":

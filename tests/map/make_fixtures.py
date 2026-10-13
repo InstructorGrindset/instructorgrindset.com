@@ -115,6 +115,19 @@ WEBCAMS = {"alpha-peak": {
                                        ("Back bowls", "bowls", "page"), ("Terrain park", "park", "stream"))]}}
 
 
+def with_months(jobs):
+    """Resort.jobs with the hiring window's start_month and end_month, read by the pipeline's own parser."""
+    if not jobs or not jobs.get("hiring_window"):
+        return jobs
+    sys.path.insert(0, str(REPO))
+    import datetime as dt  # noqa: PLC0415
+    from pipeline.config import HiringWindowDefs  # noqa: PLC0415
+    from pipeline.hiring import parse_window  # noqa: PLC0415
+    hw = jobs["hiring_window"]
+    m = parse_window(hw["text"], dt.date.fromisoformat(hw["as_of"]), HiringWindowDefs().max_months)
+    return {**jobs, "hiring_window": {**hw, "start_month": m.start if m else None, "end_month": m.end if m else None}}
+
+
 def job_link(employer, group, label, url, source="fixture-resort-site", disciplines=()):
     return {"employer_id": employer, "role_group": group, "disciplines": list(disciplines), "label": label, "url": url,
             "source_id": source, **CITE}
@@ -130,8 +143,11 @@ JOBS = {
         job_link("fixture-parent", "all", "All Fixture Parent jobs", "https://example.com/fixture/parent/jobs"),
     ], "hiring_window": {"text": "Applications open August 15; staff training starts in mid November.",
                          "source_id": "fixture-resort-site", **CITE}},
+    # Explicit about both ends, so the pipeline reads 2026-09 to 2026-12 from it (Hiring now); Alpha Peak's text
+    # names no end and stays unparsed.
     "kilo-notch": {"feed": False, "links": [], "hiring_window": {
-        "text": "Applications open September 1; staff clinics start in late November.", "source_id": "fixture-careers", **CITE}},
+        "text": "Instructor posting opened September 1, 2026 with a target start of December 1, 2026.",
+        "source_id": "fixture-careers", **CITE}},
     "bravo-bowl": {"feed": True, "links": [
         job_link("fixture-parent", "all", "All Fixture Parent jobs", "https://example.com/fixture/parent/jobs")]},
 }
@@ -295,7 +311,7 @@ def resort_record(row):
                                        "season": "2025/26", "source_id": "fixture-resort-site", "as_of": AS_OF,
                                        "confidence": "estimated", "note": None}
     record["webcams"] = WEBCAMS.get(rid)
-    record["jobs"] = JOBS.get(rid)
+    record["jobs"] = with_months(JOBS.get(rid))
     if rid in ACCESS:
         record["access"] = {"rating": ACCESS[rid][0], "summary_md": ACCESS[rid][1], "source_id": "fixture-location",
                             "as_of": AS_OF, "confidence": "estimated"}
