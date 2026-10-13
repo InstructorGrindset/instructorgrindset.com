@@ -449,16 +449,22 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   (150 ms RTT, 1.6 Mbps down, 750 Kbps up), 4x CPU slowdown, cache off, files gzipped. Times are the page's own
   performance marks from navigation start. *Interactive* is the later of two marks: the panel usable
   (`careermap:panel`, or `careermap:panel-full` when a resort record had to load) and the first map frame
-  (`careermap:preview`). The WebGL map's first frame (`careermap:first-render`) and `load` (`careermap:map`) are
-  reported next to it. Measured 2026-10-12: interactive 1.6 to 1.9 s on `/map/` and the Vail page (desktop and
-  phone); WebGL load 4.5 to 5.4 s, down from 7 to 8 s before this change. The WebGL gap is SwiftShader and
-  4x CPU: downloading MapLibre takes about 2 s, evaluating it about 0.5 s, the map constructor about 0.4 s, and
-  shader compiling plus the first worker tiles another 1.5 to 2 s.
-* Lighthouse (mobile defaults, simulated throttling, same SwiftShader Chromium) scores Performance about 65 on `/map/`
-  and resort pages, with Accessibility, Best Practices and SEO at 100. First contentful paint is about 1.5 s and
-  largest contentful paint about 2 s; total blocking time is 5 to 7 s, all of it MapLibre's script evaluation and
-  WebGL setup scaled by the 4x CPU factor. Reaching 90 would mean starting the WebGL map only on the first
-  interaction with the map, which is a product decision for the owner.
+  (`careermap:preview`, the 2D picture). The audit then clicks the start button and reports click to WebGL first frame
+  (`careermap:first-render`) and `load` (`careermap:map`). Measured 2026-10-13: interactive 1.4 to 1.7 s on `/map/`
+  and the Vail page (desktop and phone); click to WebGL load 4.4 to 5.8 s when the click comes right after the first
+  paint, because MapLibre (271 KB) only starts downloading after the window `load` event. Under SwiftShader the WebGL
+  setup alone takes 1.5 to 2.5 s.
+* Lighthouse (mobile defaults, simulated throttling, same SwiftShader Chromium), 2026-10-13: Performance 96 on `/map/`,
+  95 on Vail, 97 on Jackson Hole (94 to 97 across runs); Accessibility, Best Practices and SEO 100 on all three. Before the click to start
+  (owner decision 9) and the deferred MapLibre download, Performance was about 65, held down by 5 to 7 s of blocking
+  time from MapLibre.
+* Satellite imagery (`config.basemap.imagery`): USGS The National Map `USGSImageryOnly` tiles (public domain, 256 px,
+  max zoom 16) as the first layer above the background, muted (`raster-saturation` -0.35, `raster-brightness-max`
+  0.7, `raster-contrast` -0.1). State fills turn 55% opaque over it so outlines, heat colors and markers stay readable;
+  the Alaska inset sits on its own dark panel. Attribution "Imagery: USGS The National Map" comes from the source. The
+  tiles load only after the click to start, so the first load and Lighthouse never fetch them. The tests answer
+  tile requests with a synthetic local tile (`tests/map/fixtures/imagery-tile.png`), since the sandbox cannot reach the
+  USGS service.
 
 ### Color modes: value heat maps
 Lucrativeness, Professionalism, Season length and Snowfall draw a heat surface of the value

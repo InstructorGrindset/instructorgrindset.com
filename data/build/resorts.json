@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T02:13:20Z",
+  "generated_at": "2026-10-13T02:23:02Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -2010,9 +2010,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-west3-skiresort-antelope-butte",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Skiresort.info gives the general season as 'mid December - mid April'; mid mapped to the 15th."
+        },
+        "close_typical": {
+          "value": "04-15",
+          "source_id": "facts-west3-skiresort-antelope-butte",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Skiresort.info gives 'mid December - mid April'; SkiBum.net (facts-west3-skibum-wyoming) also gives 'December to mid-April'. Mid mapped to the 15th."
+        },
+        "length_days": {
+          "value": 122,
+          "source_id": "facts-west3-skiresort-antelope-butte",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -2037,6 +2055,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-skiresort-antelope-butte",
         "openskimap-ski-areas"
       ]
     },
@@ -4301,7 +4320,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 140,
+          "source_id": "facts-west3-wp-bald-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 655,
           "source_id": "openskimap-ski-areas",
@@ -4334,7 +4359,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "facts-west3-wp-bald-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Infobox and article text: 'the average snowfall is 100 in'."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -4365,6 +4398,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-bald-mountain-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -4759,7 +4793,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 80,
+          "source_id": "facts-west3-wp-bear-paw-ski-bowl",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 874,
           "source_id": "openskimap-ski-areas",
@@ -4792,7 +4832,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 140,
+          "source_id": "facts-west3-wp-bear-paw-ski-bowl",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -4823,6 +4871,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-bear-paw-ski-bowl",
         "openskimap-ski-areas"
       ]
     },
@@ -4945,7 +4994,13 @@
       "cluster_id": "other-wy",
       "state": "WY",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 600,
+          "source_id": "facts-west3-wp-beartooth-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 566,
           "source_id": "openskimap-ski-areas",
@@ -4982,9 +5037,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "05-25",
+          "source_id": "facts-west3-wp-beartooth-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Summer only ski area. Article: 'open in the summer, generally from late May through early July'; late mapped to the 25th, early to the 5th."
+        },
+        "close_typical": {
+          "value": "07-05",
+          "source_id": "facts-west3-wp-beartooth-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Summer only ski area. Article: 'open in the summer, generally from late May through early July'; late mapped to the 25th, early to the 5th."
+        },
+        "length_days": {
+          "value": 42,
+          "source_id": "facts-west3-wp-beartooth-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -5009,6 +5082,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-beartooth-basin",
         "openskimap-ski-areas"
       ]
     },
@@ -8079,7 +8153,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "facts-west3-wp-blacktail-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -8110,6 +8192,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-blacktail-mountain-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -8713,9 +8796,27 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-25",
+          "source_id": "facts-west3-wp-bogus-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article (marked citation needed): 'Ski season generally runs from Thanksgiving weekend until the weekend preceding April 15'. Mapped to the median Friday after Thanksgiving for 2016 to 2025."
+        },
+        "close_typical": {
+          "value": "04-11",
+          "source_id": "facts-west3-wp-bogus-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article (marked citation needed): 'until the weekend preceding April 15'. Mapped to the median Sunday before April 15 for 2017 to 2026 (April 11.5, rounded down)."
+        },
+        "length_days": {
+          "value": 138,
+          "source_id": "facts-west3-wp-bogus-basin",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -8770,6 +8871,7 @@
       "sources": [
         "ed-west-wiki-bogus-basin",
         "ed-west-wiki-boise-idaho",
+        "facts-west3-wp-bogus-basin",
         "wikipedia-bogus-basin"
       ]
     },
@@ -9282,7 +9384,13 @@
       "cluster_id": "other-nd",
       "state": "ND",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-west3-wp-bottineau-winter-park",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 181,
           "source_id": "openskimap-ski-areas",
@@ -9346,6 +9454,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-bottineau-winter-park",
         "openskimap-ski-areas"
       ]
     },
@@ -10815,7 +10924,13 @@
       },
       "access": null,
       "season": {
-        "open_typical": null,
+        "open_typical": {
+          "value": "12-06",
+          "source_id": "facts-west3-ktvh-bridger-2019",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. KTVH reports the 2019-20 opening day set for Friday, December 6; SnowStash (facts-west3-snowstash-bridger-bowl) lists the 2025-26 season opening on 6 December 2025. Two seasons agree on December 6. No closing date is recorded because results conflict (a planned April 13, 2026 close and an early March 22, 2026 close)."
+        },
         "close_typical": null,
         "length_days": null,
         "training_start": null
@@ -10973,6 +11088,7 @@
       "sources": [
         "ed-west-wiki-bozeman-montana",
         "ed-west-wiki-bridger-bowl-ski-area",
+        "facts-west3-ktvh-bridger-2019",
         "wikipedia-bridger-bowl-ski-area"
       ]
     },
@@ -11517,7 +11633,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1500,
+          "source_id": "facts-west3-wp-brundage-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Infobox. Snowfall is given only as a 300 to 350 in range, so it is not recorded."
+        },
         "vertical_ft": {
           "value": 1776,
           "source_id": "openskimap-ski-areas",
@@ -11581,6 +11703,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-brundage-mountain",
         "openskimap-ski-areas"
       ]
     },
@@ -16491,7 +16614,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 260,
+          "source_id": "facts-west3-wp-cottonwood-butte-ski-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 677,
           "source_id": "openskimap-ski-areas",
@@ -16524,7 +16653,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 45,
+          "source_id": "facts-west3-wp-cottonwood-butte-ski-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -16555,6 +16692,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-cottonwood-butte-ski-hill",
         "openskimap-ski-areas"
       ]
     },
@@ -19111,7 +19249,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 2200,
+          "source_id": "facts-west3-wp-discovery-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 2444,
           "source_id": "openskimap-ski-areas",
@@ -19144,7 +19288,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 215,
+          "source_id": "facts-west3-wp-discovery-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -19175,6 +19327,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-discovery-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -21627,7 +21780,13 @@
       "cluster_id": "tetons",
       "state": "WY",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 3000,
+          "source_id": "facts-west3-wp-grand-targhee",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Infobox: 3,000 acres, plus 1,000 acres reserved for cat skiing (not included)."
+        },
         "vertical_ft": {
           "value": 2237,
           "source_id": "openskimap-ski-areas",
@@ -21743,6 +21902,7 @@
         "ed-west-wiki-alta-wyoming",
         "ed-west-wiki-driggs-idaho",
         "ed-west-wiki-grand-targhee-resort",
+        "facts-west3-wp-grand-targhee",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "wikipedia-grand-targhee-resort"
@@ -22158,7 +22318,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 180,
+          "source_id": "facts-west3-wp-great-divide-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -22189,6 +22357,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-great-divide-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -24824,7 +24993,13 @@
       "cluster_id": "other-wy",
       "state": "WY",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 60,
+          "source_id": "facts-west3-wp-hogadon-basin-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 585,
           "source_id": "openskimap-ski-areas",
@@ -24857,7 +25032,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 140,
+          "source_id": "facts-west3-wp-hogadon-basin-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -24888,6 +25071,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-hogadon-basin-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -27692,7 +27876,13 @@
       "cluster_id": "tetons",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 640,
+          "source_id": "facts-west3-wp-kelly-canyon-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 878,
           "source_id": "openskimap-ski-areas",
@@ -27725,7 +27915,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 200,
+          "source_id": "facts-west3-wp-kelly-canyon-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -27756,6 +27954,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-kelly-canyon-ski-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -30155,7 +30354,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 50,
+          "source_id": "facts-west3-wp-little-ski-hill",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 398,
           "source_id": "openskimap-ski-areas",
@@ -30219,6 +30424,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-little-ski-hill",
         "openskimap-ski-areas"
       ]
     },
@@ -30517,7 +30723,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1023,
+          "source_id": "facts-west3-wp-lookout-pass",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Infobox value; the article also says the Eagle Peak expansion (lift opened December 2022) added 500 acres, so this may predate it."
+        },
         "vertical_ft": {
           "value": 1658,
           "source_id": "openskimap-ski-areas",
@@ -30550,13 +30762,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 400,
+          "source_id": "facts-west3-wp-lookout-pass",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-west3-wp-lookout-pass",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article: 'Lookout Pass operates seven days per week from mid-December until mid-April'; mid mapped to the 15th."
+        },
+        "close_typical": {
+          "value": "04-15",
+          "source_id": "facts-west3-wp-lookout-pass",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article: 'Lookout Pass operates seven days per week from mid-December until mid-April'; mid mapped to the 15th."
+        },
+        "length_days": {
+          "value": 122,
+          "source_id": "facts-west3-wp-lookout-pass",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -30581,6 +30819,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-lookout-pass",
         "openskimap-ski-areas"
       ]
     },
@@ -30701,7 +30940,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 900,
+          "source_id": "facts-west3-wp-lost-trail",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 1762,
           "source_id": "openskimap-ski-areas",
@@ -30734,7 +30979,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "facts-west3-wp-lost-trail",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -30765,6 +31018,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-lost-trail",
         "openskimap-ski-areas"
       ]
     },
@@ -32081,7 +32335,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 120,
+          "source_id": "facts-west3-wp-magic-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 656,
           "source_id": "openskimap-ski-areas",
@@ -32114,7 +32374,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 230,
+          "source_id": "facts-west3-wp-magic-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -32145,6 +32413,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-magic-mountain-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -32781,7 +33050,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 210,
+          "source_id": "facts-west3-wp-maverick-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 1583,
           "source_id": "openskimap-ski-areas",
@@ -32814,7 +33089,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 180,
+          "source_id": "facts-west3-wp-maverick-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -32845,6 +33128,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-maverick-mountain-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -34277,7 +34561,13 @@
         "note": "No transit found in the article or the Mountain Line article."
       },
       "season": {
-        "open_typical": null,
+        "open_typical": {
+          "value": "12-05",
+          "source_id": "facts-west3-wp-montana-snowbowl",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article: 'The ski area often opens with weekend skiing in early December'; early mapped to the 5th."
+        },
         "close_typical": null,
         "length_days": null,
         "training_start": null
@@ -34316,6 +34606,7 @@
       "sources": [
         "ed-west-wiki-missoula-montana",
         "ed-west-wiki-montana-snowbowl",
+        "facts-west3-wp-montana-snowbowl",
         "openskimap-ski-areas",
         "wikipedia-montana-snowbowl"
       ]
@@ -42412,7 +42703,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1100,
+          "source_id": "facts-west3-wp-pebble-creek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 2133,
           "source_id": "openskimap-ski-areas",
@@ -42445,7 +42742,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "facts-west3-wp-pebble-creek",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -42476,6 +42781,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-pebble-creek",
         "openskimap-ski-areas"
       ]
     },
@@ -43725,7 +44031,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 500,
+          "source_id": "facts-west3-wp-pomerelle-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 943,
           "source_id": "openskimap-ski-areas",
@@ -43758,7 +44070,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 500,
+          "source_id": "facts-west3-wp-pomerelle-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -43789,6 +44109,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-pomerelle-mountain-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -45177,7 +45498,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1600,
+          "source_id": "facts-west3-wp-red-lodge-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 2294,
           "source_id": "openskimap-ski-areas",
@@ -45210,7 +45537,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "facts-west3-wp-red-lodge-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -45241,6 +45576,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-red-lodge-mountain",
         "openskimap-ski-areas"
       ]
     },
@@ -47596,7 +47932,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 640,
+          "source_id": "facts-west3-wp-showdown",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 1321,
           "source_id": "openskimap-ski-areas",
@@ -47629,13 +47971,39 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 240,
+          "source_id": "facts-west3-wp-showdown",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Infobox gives 20 ft, converted to 240 in."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "12-15",
+          "source_id": "facts-west3-skiresort-showdown",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Skiresort.info gives the general season as 'mid-December to early April'; mid mapped to the 15th."
+        },
+        "close_typical": {
+          "value": "04-05",
+          "source_id": "facts-west3-skiresort-showdown",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "From a search result for this page; page not opened. Skiresort.info gives 'mid-December to early April' (early mapped to the 5th). OnTheSnow (facts-west3-onthesnow-montana-closing) listed April 5 for the 2025/26 season."
+        },
+        "length_days": {
+          "value": 112,
+          "source_id": "facts-west3-skiresort-showdown",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -47660,6 +48028,8 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-skiresort-showdown",
+        "facts-west3-wp-showdown",
         "openskimap-ski-areas"
       ]
     },
@@ -47864,7 +48234,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1600,
+          "source_id": "facts-west3-wp-silver-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 3966,
           "source_id": "openskimap-ski-areas",
@@ -47897,7 +48273,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "facts-west3-wp-silver-mountain-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -47928,6 +48312,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-silver-mountain-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -50504,7 +50889,13 @@
       "cluster_id": "tetons",
       "state": "WY",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 400,
+          "source_id": "facts-west3-wp-snow-king-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 1701,
           "source_id": "openskimap-ski-areas",
@@ -50537,7 +50928,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 500,
+          "source_id": "facts-west3-wp-snow-king-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -50568,6 +50967,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-snow-king-mountain",
         "openskimap-ski-areas"
       ]
     },
@@ -51967,7 +52367,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 40,
+          "source_id": "facts-west3-wp-snowhaven",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 370,
           "source_id": "openskimap-ski-areas",
@@ -52000,7 +52406,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 60,
+          "source_id": "facts-west3-wp-snowhaven",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -52031,6 +52445,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-snowhaven",
         "openskimap-ski-areas"
       ]
     },
@@ -52647,7 +53062,13 @@
       "cluster_id": "other-wy",
       "state": "WY",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 250,
+          "source_id": "facts-west3-wp-snowy-range",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 876,
           "source_id": "openskimap-ski-areas",
@@ -52680,7 +53101,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "facts-west3-wp-snowy-range",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -52711,6 +53140,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-snowy-range",
         "openskimap-ski-areas"
       ]
     },
@@ -52826,7 +53256,13 @@
       "cluster_id": "wood-river",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1180,
+          "source_id": "facts-west3-wp-soldier-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 1394,
           "source_id": "openskimap-ski-areas",
@@ -52859,7 +53295,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 100,
+          "source_id": "facts-west3-wp-soldier-mountain-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -52890,6 +53334,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-soldier-mountain-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -57688,7 +58133,13 @@
       "cluster_id": "other-id",
       "state": "ID",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 1100,
+          "source_id": "facts-west3-wp-tamarack-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 2758,
           "source_id": "openskimap-ski-areas",
@@ -57721,7 +58172,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "facts-west3-wp-tamarack-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -57752,6 +58211,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-tamarack-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -58347,7 +58807,13 @@
       "cluster_id": "other-sd",
       "state": "SD",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 450,
+          "source_id": "facts-west3-wp-terry-peak-ski-area",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 1079,
           "source_id": "openskimap-ski-areas",
@@ -58411,6 +58877,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-terry-peak-ski-area",
         "openskimap-ski-areas"
       ]
     },
@@ -58429,7 +58896,13 @@
       "cluster_id": "other-mt",
       "state": "MT",
       "size": {
-        "acres": null,
+        "acres": {
+          "value": 114,
+          "source_id": "facts-west3-wp-teton-pass-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Skiable acres."
+        },
         "vertical_ft": {
           "value": 912,
           "source_id": "openskimap-ski-areas",
@@ -58462,7 +58935,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "facts-west3-wp-teton-pass-ski-resort",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -58493,6 +58974,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-teton-pass-ski-resort",
         "openskimap-ski-areas"
       ]
     },
@@ -60690,7 +61172,15 @@
           "note": "highest mapped lift or downhill run elevation (OpenSkiMap)"
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 250,
+          "source_id": "facts-west3-wp-turner-mountain",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Wikipedia infobox. Average annual snowfall."
+        }
+      },
       "operator_scale": null,
       "access": null,
       "season": {
@@ -60721,6 +61211,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-turner-mountain",
         "openskimap-ski-areas"
       ]
     },
@@ -62770,9 +63261,27 @@
       "operator_scale": null,
       "access": null,
       "season": {
-        "open_typical": null,
-        "close_typical": null,
-        "length_days": null,
+        "open_typical": {
+          "value": "11-24",
+          "source_id": "facts-west3-wp-white-pine",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article: 'regular season usually runs annually between Thanksgiving and Easter'. Mapped to the median Thanksgiving date for 2016 to 2025."
+        },
+        "close_typical": {
+          "value": "04-10",
+          "source_id": "facts-west3-wp-white-pine",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article: 'between Thanksgiving and Easter'. Mapped to the median Easter date for 2017 to 2026 (between April 9 and April 12, rounded down)."
+        },
+        "length_days": {
+          "value": 138,
+          "source_id": "facts-west3-wp-white-pine",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "computed from typical dates"
+        },
         "training_start": null
       },
       "terrain": {
@@ -62797,6 +63306,7 @@
       "trailmap_available": false,
       "housing_summary": null,
       "sources": [
+        "facts-west3-wp-white-pine",
         "openskimap-ski-areas"
       ]
     },
@@ -66189,7 +66699,15 @@
           "note": "Summit of Pioneer Mountain, where most of the ski runs are."
         }
       },
-      "snow": null,
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "facts-west3-wp-yellowstone-club",
+          "as_of": "2026-10-13",
+          "confidence": "estimated",
+          "note": "Article text: 'Snowfall averages approximately 300 inches a year'."
+        }
+      },
       "operator_scale": {
         "value": 2,
         "source_id": "wikipedia-yellowstone-club",
@@ -66365,6 +66883,7 @@
       "sources": [
         "ed-west-wiki-big-sky-montana",
         "ed-west-wiki-yellowstone-club",
+        "facts-west3-wp-yellowstone-club",
         "openskimap-ski-areas",
         "pay-west-yc-certified-2627",
         "wikipedia-yellowstone-club"

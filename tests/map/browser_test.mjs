@@ -105,7 +105,12 @@ function watch(page, label) {
     if (r.status() === 500 && r.url() === 'https://reports.example.test/submit') return;
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
   });
-  page.on('requestfailed', (r) => /\/fonts\/Rooftop/.test(r.url()) || problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`));
+  page.on('requestfailed', (r) => {
+    if (/\/fonts\/Rooftop/.test(r.url())) return;
+    // MapLibre cancels imagery tiles it no longer needs while the camera moves.
+    if (/basemap\.nationalmap\.gov\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
+    problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`);
+  });
   return {
     requests,
     assertClean() {
