@@ -455,6 +455,40 @@ sources:
   title: Trail Maps
   accessed_date: '2026-10-13'
   note: From a search result for this page; page not opened
+# Remainder of ROADMAP Section 8 item 2 (2026-10-13): the Tier A ski areas that had no link. Searched but not
+# linked: Alta (search results show only the summer map page), Burke (no trail map page surfaced on skiburke.com),
+# Saskadena Six and Hermitage Club (no page whose result names a trail map), Yellowstone Club (private club; only a
+# 2021/22 Nordic map PDF surfaced on yellowstoneclub.com, no alpine trail map).
+- id: tmo-alpine-valley-oh
+  url: https://alpinevalleyohio.com/trail-map
+  title: Alpine Valley
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-black-mountain-maine
+  url: https://skiblackmountain.org/maps
+  title: Black Mountain of Maine trail maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-hyland-hills
+  url: https://www.threeriversparks.org/page/hyland-hills-ski-runs-terrain-park
+  title: Ski Runs & Terrain Park Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mad-river-glen
+  url: https://www.madriverglen.com/trail-maps/
+  title: Trail Maps - Mad River Glen, Vermont
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-montana-snowbowl
+  url: https://montanasnowbowl.com/trailmap.html
+  title: Montana Snowbowl Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-silverton-mountain
+  url: https://silvertonmountain.com/mountain/trail-map/
+  title: Trail Map - Silverton Mountain
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
 trailmaps:
 - resort_id: vail
   url: https://www.vail.com/the-mountain/about-the-mountain/trail-map.aspx
@@ -1129,5 +1163,48 @@ trailmaps:
   format: page
   season: null
   source_id: tmo-mount-bohemia
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: alpine-valley-oh
+  url: https://alpinevalleyohio.com/trail-map
+  format: page
+  season: null
+  source_id: tmo-alpine-valley-oh
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: black-mountain-maine
+  url: https://skiblackmountain.org/maps
+  format: page
+  season: null
+  source_id: tmo-black-mountain-maine
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: hyland-hills
+  url: https://www.threeriversparks.org/page/hyland-hills-ski-runs-terrain-park
+  format: page
+  season: null
+  source_id: tmo-hyland-hills
+  as_of: '2026-10-13'
+  confidence: estimated
+  note: Hosted by Three Rivers Park District, which owns and operates the ski area.
+- resort_id: mad-river-glen
+  url: https://www.madriverglen.com/trail-maps/
+  format: page
+  season: null
+  source_id: tmo-mad-river-glen
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: montana-snowbowl
+  url: https://montanasnowbowl.com/trailmap.html
+  format: page
+  season: null
+  source_id: tmo-montana-snowbowl
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: silverton-mountain
+  url: https://silvertonmountain.com/mountain/trail-map/
+  format: page
+  season: null
+  source_id: tmo-silverton-mountain
   as_of: '2026-10-13'
   confidence: estimated
