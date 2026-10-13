@@ -119,14 +119,16 @@ WEBCAMS = {"alpha-peak": {
 
 # Pass memberships (ROADMAP item 12). Synthetic: Epic at Alpha Peak, Bravo Bowl and the indoor Mike Snow Dome, Ikon
 # at Charlie Hill, Foxtrot Basin and Kilo Notch, so the chips can be checked alone, together and with the others.
-def pass_m(pass_id, access, days=None, blackout=None, note=None):
-    return {"pass": pass_id, "access": access, "days": days, "blackout": blackout, "season": "2026/27",
-            "source_id": "fixture-pass-site", "as_of": AS_OF, "confidence": "estimated", "note": note}
+def pass_m(pass_id, access, days=None, blackout=None, note=None, fallback=False):
+    return {"pass": pass_id, "access": access, "days": days, "blackout": blackout,
+            "season": "2025/26" if fallback else "2026/27", "source_id": "fixture-pass-site", "as_of": AS_OF,
+            "confidence": "estimated", "note": note, "season_fallback": fallback}
 
 
 PASSES = {
     "alpha-peak": [pass_m("epic", "unlimited", blackout=False), pass_m("mountain_collective", "limited", 2, False)],
-    "bravo-bowl": [pass_m("epic", "limited", 7, True, "Synthetic note: 7 days shared with a sister resort.")],
+    # A previous season fallback (passes.fallback_previous_season): the 2025/26 record, no 2026/27 one.
+    "bravo-bowl": [pass_m("epic", "limited", 7, True, "Synthetic note: 7 days shared with a sister resort.", fallback=True)],
     "mike-dome": [pass_m("epic", "unspecified")],
     "charlie-hill": [pass_m("ikon", "unlimited", blackout=False)],
     "foxtrot-basin": [pass_m("ikon", "limited", 7, False)],

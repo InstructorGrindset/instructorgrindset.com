@@ -493,8 +493,10 @@ class JobsDefs(StrictModel):
 class PassesDefs(StrictModel):
     """Multi resort pass membership (data/raw/passes, ROADMAP item 12)."""
 
-    # Only memberships of this season reach data/build.
+    # Only memberships of this season reach data/build, plus (when fallback_previous_season) the previous season's
+    # record for a resort and pass that has none for this season, marked season_fallback.
     season: str = "2026/27"
+    fallback_previous_season: bool = True
     # A membership must cite a page on its pass company's own site: registered domains per pass id.
     domains: dict[Literal["epic", "ikon", "mountain_collective", "indy"], list[Annotated[str, Field(pattern=DOMAIN_RE)]]] = \
         Field(default_factory=dict)

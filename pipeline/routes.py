@@ -340,8 +340,9 @@ def pass_access(m: dict) -> str:
 
 
 def pass_line(m: dict) -> str:
-    """'Epic Pass: unlimited'."""
-    return f"{PASS_LABEL.get(m.get('pass'), m.get('pass'))}: {pass_access(m)}"
+    """'Epic Pass: unlimited', or 'Epic Pass: unlimited (2025/26 list)' for a previous season fallback."""
+    line = f"{PASS_LABEL.get(m.get('pass'), m.get('pass'))}: {pass_access(m)}"
+    return f"{line} ({m['season']} list)" if m.get("season_fallback") and m.get("season") else line
 
 
 def render_passes(ctx: Ctx, r: dict) -> str:

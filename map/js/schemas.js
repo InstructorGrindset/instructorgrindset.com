@@ -131,6 +131,7 @@ export const PassMembership = z.object({
   days: z.number().int().positive().nullish().transform((v) => v ?? null),
   blackout: z.boolean().nullish().transform((v) => v ?? null),
   season: z.string().regex(/^20\d\d\/\d\d$/, 'season'),
+  season_fallback: z.boolean().nullish().transform((v) => Boolean(v)),
   ...Cited,
 });
 

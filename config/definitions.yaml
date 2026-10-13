@@ -452,9 +452,13 @@ jobs:
 
 passes:
   # Multi resort pass membership (data/raw/passes, ROADMAP item 12: the Epic and Ikon filter chips).
-  # Only memberships of this season reach data/build. A new season goes in its own batch file next to the old one;
+  # Memberships of this season reach data/build. A new season goes in its own batch file next to the old one;
   # move this value once that batch is complete.
   season: "2026/27"
+  # When a resort has no record for that season on a pass, use its record from the season one year back (never
+  # older), marked season_fallback and shown as "Epic Pass: unlimited (2025/26 list)". The build warns with the
+  # count. False drops such resorts from the pass until this season's list is researched.
+  fallback_previous_season: true
   # Every membership cites a page on its pass company's own site (registered domain, the last two labels).
   # Ownership never implies a pass: a resort is on a pass only when one of these sites says so.
   domains:

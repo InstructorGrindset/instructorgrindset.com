@@ -453,7 +453,8 @@
      "source_id": "fixture-pass-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "season_fallback": false
     },
     {
      "pass": "mountain_collective",
@@ -464,7 +465,8 @@
      "source_id": "fixture-pass-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "season_fallback": false
     }
    ],
    "access": {
@@ -737,11 +739,12 @@
      "access": "limited",
      "days": 7,
      "blackout": true,
-     "season": "2026/27",
+     "season": "2025/26",
      "source_id": "fixture-pass-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": "Synthetic note: 7 days shared with a sister resort."
+     "note": "Synthetic note: 7 days shared with a sister resort.",
+     "season_fallback": true
     }
    ],
    "housing_summary": null,
@@ -956,7 +959,8 @@
      "source_id": "fixture-pass-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "season_fallback": false
     }
    ],
    "housing_summary": null,
@@ -1431,7 +1435,8 @@
      "source_id": "fixture-pass-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "season_fallback": false
     }
    ],
    "housing_summary": null,
@@ -2240,7 +2245,8 @@
      "source_id": "fixture-pass-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "season_fallback": false
     }
    ],
    "access": {
@@ -2532,7 +2538,8 @@
      "source_id": "fixture-pass-site",
      "as_of": "2026-10-01",
      "confidence": "estimated",
-     "note": null
+     "note": null,
+     "season_fallback": false
     }
    ],
    "housing_summary": null,

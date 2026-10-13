@@ -77,8 +77,10 @@ Resort {
                                                    // null without links and window; months read from the text
                                                    // by pipeline/hiring.py, both null when it is not explicit
   passes: [{ pass: epic|ikon|mountain_collective|indy, access: unlimited|limited|unspecified,
-             days: int | null, blackout: boolean | null, season: "2026/27", source_id, as_of, confidence, note }],
-                                                   // pass memberships of passes.season in pass order, [] for none
+             days: int | null, blackout: boolean | null, season: "2026/27", season_fallback: boolean,
+             source_id, as_of, confidence, note }],
+                                                   // pass memberships of passes.season in pass order, [] for none;
+                                                   // season_fallback true when the record is the previous season's
                                                    // (see "Pass membership"); never inferred from owner
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
@@ -620,8 +622,13 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
   (`passes.domains` in `config/definitions.yaml`: epicpass.com and vailresorts.com for Epic, ikonpass.com for Ikon
   (lifted.ikonpass.com included), mountaincollective.com, indyskipass.com) or a `passes.supplemental_domains`
   reference (wikipedia.org). An owner's portfolio page never proves a pass: ownership is never membership.
-* Only memberships of `passes.season` ("2026/27") reach the build; other seasons are validated and left out with a
-  warning, so next season's batch can sit next to this one until `passes.season` moves.
+* Season (`passes.season`, "2026/27"): per resort and pass the record for that season wins. Without one, and with
+  `passes.fallback_previous_season: true`, the record for the season one year back ("2025/26") is used and marked
+  `season_fallback: true`; never an older season, never a later one. The build warns with the count ("data/raw/passes:
+  36 memberships use the 2025/26 list (no 2026/27 record; passes.fallback_previous_season)"), which is not an error.
+  Every other record is validated and left out with a warning, so next season's batch can sit next to this one until
+  `passes.season` moves. `season_fallback` is set by the build only; a raw record that sets it fails. A record's
+  `season` is the season its source shows, never a guess.
 * 2026-10-13 batch (`data/raw/passes/2026_27.yaml`): the pass sites are blocked from the research environment, so
   every value comes from a web search result that named the page (confidence `estimated`, note "From a search result
   for this page; page not opened"); 30 searches. Wikipedia has no Epic or Ikon list (both titles redirect to the
@@ -629,7 +636,8 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
   Palisades Tahoe). Coverage: Epic 37 resorts (the 36 Vail Resorts US resorts listed on the epicpass.com region
   pages, plus Telluride, 7 days); Ikon 49 (18 unlimited, 26 with 7 days, 5 listed without days); Mountain
   Collective 16 (its 13 US destinations, Aspen Snowmass as four mountains, 2 days each). The Epic unlimited list was
-  seen under a 2025/26 heading of the Epic Pass page; every Epic note says so. Left out: Indy Pass (about 200
+  seen under a 2025/26 heading of the Epic Pass page, so those 36 records carry `season: 2025/26` and reach the build
+  as previous season fallbacks; Telluride's 2026/27 page gives it a 2026/27 record. Left out: Indy Pass (about 200
   destinations, beyond the search budget), the Three Summits record (identity unclear), Windham and Jay Peak (no
   pass page found).
 
@@ -651,11 +659,13 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
 * Resort panel and stub (`panel.js` `passesFact`, `routes.py` `render_passes`): a "Passes" fact under Owner, one line
   per membership, "Epic Pass: unlimited", "Ikon Pass: 7 days", "Ikon Pass: limited days" (no number stated) or "Ikon
   Pass: days not stated", with the confidence badge, the note, and "2026/27 season · No blackout dates · Last
-  verified <date> · <source>". No line for a resort without a membership. Pass names are proper nouns ("Epic Pass",
+  verified <date> · <source>". A previous season fallback names its list: "Epic Pass: unlimited (2025/26 list)",
+  with "2025/26 season" in its meta line. The chips count fallbacks like any membership. No line for a resort
+  without a membership. Pass names are proper nouns ("Epic Pass",
   "Ikon Pass", "Mountain Collective", "Indy Pass").
 * Zod: `PassMembership` in `schemas.js`; a bad membership drops only itself. Tests: `tests/pipeline/test_passes.py`,
-  `passChecks` in `tests/map/browser_test.mjs` (fixtures: Epic at Alpha Peak, Bravo Bowl and Mike Snow Dome, Ikon at
-  Charlie Hill, Foxtrot Basin and Kilo Notch, all synthetic).
+  `passChecks` in `tests/map/browser_test.mjs` (fixtures: Epic at Alpha Peak, Bravo Bowl (a 2025/26 fallback) and
+  Mike Snow Dome, Ikon at Charlie Hill, Foxtrot Basin and Kilo Notch, all synthetic).
 
 ## Trail map (OpenSkiMap runs)
 

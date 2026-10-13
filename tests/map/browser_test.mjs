@@ -1705,13 +1705,14 @@ async function passChecks(browser, base, stubBase) {
       either: [r('ski_area', ['epic']), r('ski_area', ['ikon']), r('ski_area', ['mountain_collective'])].map((x) => matchesFilter(x, f({ passes: ['epic', 'ikon'] }))),
       and: [r('indoor', ['epic']), r('ski_area', ['epic'], true), r('ski_area', ['epic'])].map((x) => matchesFilter(x, f({ facility: 'ski_area', hiring: true, passes: ['epic'] }))),
       lines: [passLine({ pass: 'epic', access: 'unlimited' }), passLine({ pass: 'ikon', access: 'limited', days: 7 }),
-        passLine({ pass: 'mountain_collective', access: 'limited', days: null }), passLine({ pass: 'ikon', access: 'unspecified' })],
+        passLine({ pass: 'mountain_collective', access: 'limited', days: null }), passLine({ pass: 'ikon', access: 'unspecified' }),
+        passLine({ pass: 'epic', access: 'unlimited', season: '2025/26', season_fallback: true })],
     };
   });
   check(unit.none && JSON.stringify(unit.either) === '[true,true,false]' && JSON.stringify(unit.and) === '[false,true,false]',
     `rule: passes match any chosen pass, and every active part must match (${JSON.stringify(unit)})`);
-  check(JSON.stringify(unit.lines) === JSON.stringify(['Epic Pass: unlimited', 'Ikon Pass: 7 days', 'Mountain Collective: limited days', 'Ikon Pass: days not stated']),
-    'pass lines read "Epic Pass: unlimited", "Ikon Pass: 7 days"');
+  check(JSON.stringify(unit.lines) === JSON.stringify(['Epic Pass: unlimited', 'Ikon Pass: 7 days', 'Mountain Collective: limited days',
+    'Ikon Pass: days not stated', 'Epic Pass: unlimited (2025/26 list)']), 'pass lines read "Epic Pass: unlimited", "Ikon Pass: 7 days", "Epic Pass: unlimited (2025/26 list)"');
   w.assertClean();
   await ctx.close();
 
@@ -1743,8 +1744,8 @@ async function passChecks(browser, base, stubBase) {
   // Prerendered stub: the same line before any JavaScript runs.
   const html = await (await fetch(`${stubBase}/map/co/fixture-front-range/bravo-bowl/`)).text();
   const pre = html.slice(html.indexOf('<!-- prerender:start -->'), html.indexOf('<!-- prerender:end -->'));
-  check(pre.includes('<dt>Passes</dt>') && pre.includes('Epic Pass: 7 days') && pre.includes('Blackout dates apply')
-    && pre.includes('badge-estimated') && pre.includes('href="https://example.com/fixture/pass-site"'), 'stub: prerendered Passes line with badge and source link');
+  check(pre.includes('<dt>Passes</dt>') && pre.includes('Epic Pass: 7 days (2025/26 list)') && pre.includes('2025/26 season · Blackout dates apply')
+    && pre.includes('badge-estimated') && pre.includes('href="https://example.com/fixture/pass-site"'), 'stub: prerendered Passes line with badge and source; a previous season fallback names its list');
 
   // Phone: six chips scroll sideways inside their row.
   const pp = await browser.newPage({ viewport: { width: 390, height: 844 } });

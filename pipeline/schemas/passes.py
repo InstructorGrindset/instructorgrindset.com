@@ -19,6 +19,12 @@ PASS_ORDER: tuple[str, ...] = ("epic", "ikon", "mountain_collective", "indy")
 SEASON_RE = re.compile(r"^(20\d\d)/(\d\d)$")
 
 
+def previous_season(season: str) -> str:
+    """The season one year back: "2026/27" -> "2025/26"."""
+    start = int(check_season(season)[:4]) - 1
+    return f"{start}/{(start + 1) % 100:02d}"
+
+
 def check_season(v: str) -> str:
     """Raise unless ``v`` is a ski season such as "2026/27" (two consecutive years)."""
     m = SEASON_RE.match(v or "")
@@ -41,6 +47,9 @@ class PassMembership(StrictModel):
     as_of: dt.date
     confidence: Confidence
     note: Optional[str] = None
+    # Set by the build only: this record is the previous season's, used because the configured season has none for
+    # this resort and pass (passes.fallback_previous_season).
+    season_fallback: bool = False
 
     @field_validator("season")
     @classmethod
@@ -81,8 +90,15 @@ class PassMembershipIn(PassMembership):
 
     resort_id: Slug
 
-    def membership(self) -> PassMembership:
-        return PassMembership.model_validate(self.model_dump(exclude={"resort_id"}))
+    @model_validator(mode="after")
+    def _no_fallback_flag(self) -> "PassMembershipIn":
+        if self.season_fallback:
+            raise ValueError("season_fallback is set by the build; give the season the source shows instead")
+        return self
+
+    def membership(self, season_fallback: bool = False) -> PassMembership:
+        d = self.model_dump(exclude={"resort_id"})
+        return PassMembership.model_validate({**d, "season_fallback": season_fallback})
 
 
 class PassBatch(StrictModel):

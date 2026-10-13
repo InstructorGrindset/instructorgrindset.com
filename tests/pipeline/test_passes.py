@@ -5,6 +5,7 @@ real data/raw/passes batch against the real build."""
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -14,7 +15,7 @@ from pydantic import ValidationError
 from pipeline import routes
 from pipeline.config import PassesDefs, load_config
 from pipeline.passes import as_output, load_passes
-from pipeline.schemas.passes import PASS_ORDER, PassMembership, check_season
+from pipeline.schemas.passes import PASS_ORDER, PassMembership, check_season, previous_season
 from pipeline.schemas.resort import Resort
 from pipeline.sources import SourceRegistry
 
@@ -51,10 +52,11 @@ def write(tmp_path: Path, memberships, name="2026_27.yaml", sources=SOURCES):
                                           "sources": list(sources), "memberships": memberships}))
 
 
-def run(tmp_path: Path, memberships=None, season="2026/27", supplemental=frozenset(), name="2026_27.yaml"):
+def run(tmp_path: Path, memberships=None, season="2026/27", supplemental=frozenset(), name="2026_27.yaml", fallback=True):
     if memberships is not None:
         write(tmp_path, memberships, name)
-    return load_passes(tmp_path, SourceRegistry(), set(KNOWN), season, DOMAINS, set(supplemental), rel=lambda p: p.name)
+    return load_passes(tmp_path, SourceRegistry(), set(KNOWN), season, DOMAINS, set(supplemental), rel=lambda p: p.name,
+                       fallback_previous=fallback)
 
 
 # ---------------------------------------------------------------- loader
@@ -78,7 +80,7 @@ def test_valid_batch_reaches_output_in_pass_order(tmp_path: Path):
     assert [m["pass"] for m in a] == ["ikon", "mountain_collective"]
     assert a[0] == {"pass": "ikon", "access": "limited", "days": 7, "blackout": False, "season": "2026/27",
                     "source_id": "pass-ikon-blog", "as_of": "2026-10-13", "confidence": "estimated",
-                    "note": "7 days combined with Bravo."}
+                    "note": "7 days combined with Bravo.", "season_fallback": False}
     b = as_output(out["bravo-bowl"])[0]
     assert b["access"] == "unspecified" and b["days"] is None and b["blackout"] is None
     assert "charlie-hill" not in out and as_output(None) == []
@@ -159,11 +161,62 @@ def test_source_must_be_the_pass_companys_own_site(tmp_path: Path):
 
 
 def test_other_seasons_are_validated_and_left_out(tmp_path: Path):
-    out, errors, warnings = run(tmp_path, [mem(), mem("bravo-bowl", season="2025/26"), mem("charlie-hill", season="2025/26")])
+    out, errors, warnings = run(tmp_path, [mem(), mem("bravo-bowl", season="2025/26"), mem("charlie-hill", season="2025/26")],
+                                fallback=False)
     assert errors == [] and set(out) == {"alpha-peak"}
     assert warnings == ["data/raw/passes: 2 memberships for 2025/26 left out (passes.season is 2026/27)"]
     _, errors, _ = run(tmp_path, [mem("zulu-ghost", season="2025/26")])
     assert any("no such resort" in e for e in errors)
+
+
+def test_previous_season():
+    assert previous_season("2026/27") == "2025/26" and previous_season("2030/31") == "2029/30"
+    assert previous_season("2050/51") == "2049/50"
+
+
+def test_fallback_current_season_wins(tmp_path: Path):
+    """A resort and pass with records for both seasons keeps the configured season's; the older one is left out."""
+    out, errors, warnings = run(tmp_path, [mem(access="limited", days=7), mem(season="2025/26")])
+    assert errors == []
+    [m] = out["alpha-peak"]
+    assert (m.season, m.access, m.days, m.season_fallback) == ("2026/27", "limited", 7, False)
+    assert warnings == ["data/raw/passes: 1 memberships for 2025/26 left out (passes.season is 2026/27)"]
+
+
+def test_fallback_uses_the_previous_season_when_the_current_one_is_missing(tmp_path: Path):
+    out, errors, warnings = run(tmp_path, [
+        mem("alpha-peak", season="2025/26"),                      # no 2026/27 Epic record: falls back
+        mem("alpha-peak", "ikon", access="limited", days=7),      # 2026/27 on another pass: unaffected
+        mem("bravo-bowl", season="2025/26", access="unspecified"),
+    ])
+    assert errors == []
+    a = {m.pass_id: m for m in out["alpha-peak"]}
+    assert a["epic"].season == "2025/26" and a["epic"].season_fallback is True
+    assert a["ikon"].season == "2026/27" and a["ikon"].season_fallback is False
+    assert as_output(out["bravo-bowl"])[0]["season_fallback"] is True
+    assert warnings == ["data/raw/passes: 2 memberships use the 2025/26 list (no 2026/27 record; passes.fallback_previous_season)"]
+    # Switched off, the previous season is only left out.
+    out, _, warnings = run(tmp_path, fallback=False)
+    assert set(out) == {"alpha-peak"} and [m.pass_id for m in out["alpha-peak"]] == ["ikon"]
+    assert warnings == ["data/raw/passes: 2 memberships for 2025/26 left out (passes.season is 2026/27)"]
+
+
+def test_fallback_never_reaches_further_back_than_one_season(tmp_path: Path):
+    out, errors, warnings = run(tmp_path, [mem("alpha-peak", season="2024/25"), mem("bravo-bowl", season="2025/26"),
+                                           mem("bravo-bowl", season="2024/25")])
+    assert errors == [] and "alpha-peak" not in out
+    [b] = out["bravo-bowl"]
+    assert b.season == "2025/26" and b.season_fallback is True
+    assert warnings == ["data/raw/passes: 1 memberships use the 2025/26 list (no 2026/27 record; passes.fallback_previous_season)",
+                        "data/raw/passes: 2 memberships for 2024/25 left out (passes.season is 2026/27)"]
+    # A future season is never a fallback either.
+    out, _, _ = run(tmp_path, [mem(season="2027/28")])
+    assert out == {}
+
+
+def test_raw_records_cannot_claim_the_fallback_flag(tmp_path: Path):
+    _, errors, _ = run(tmp_path, [mem(season="2025/26", season_fallback=True)])
+    assert any("season_fallback is set by the build" in e for e in errors)
 
 
 def test_membership_schema_dumps_the_pass_key():
@@ -185,7 +238,7 @@ def test_resort_lists_pass_sources_and_checks_them():
     with pytest.raises(ValidationError, match="sources is missing referenced ids"):
         Resort.model_validate(_resort(passes=[m]), context=ctx)
     r = Resort.model_validate(_resort(passes=[m], sources=["loc", "pass-epic-page"]), context=ctx)
-    assert r.model_dump(mode="json")["passes"] == [{**m, "days": None}]
+    assert r.model_dump(mode="json")["passes"] == [{**m, "days": None, "season_fallback": False}]
     with pytest.raises(ValidationError, match="not defined"):
         Resort.model_validate(_resort(passes=[m], sources=["loc", "pass-epic-page"]), context={"source_ids": {"loc"}})
     assert Resort.model_validate(_resort(), context={"source_ids": {"loc"}}).passes == []
@@ -200,6 +253,15 @@ def test_config_season_and_domains():
 
 
 # ---------------------------------------------------------------- routes: stubs and the slim index
+
+
+def test_fallback_line_names_its_list():
+    m = {"pass": "epic", "access": "unlimited", "season": "2025/26", "season_fallback": True}
+    assert routes.pass_line(m) == "Epic Pass: unlimited (2025/26 list)"
+    assert routes.pass_line({**m, "season_fallback": False}) == "Epic Pass: unlimited"
+    ctx = routes.Ctx(sources={}, state_names={}, clusters={}, resorts={})
+    html = routes.render_passes(ctx, {"passes": [{**m, "as_of": "2026-10-13", "confidence": "estimated"}]})
+    assert "Epic Pass: unlimited (2025/26 list)" in html and "2025/26 season" in html
 
 
 def test_access_text_and_line():
@@ -267,11 +329,20 @@ def test_real_batch_is_valid_against_the_build():
     cfg = load_config(REPO / "config").definitions.passes
     registry, ids = _real_registry_and_ids()
     out, errors, warnings = load_passes(REPO / "data" / "raw", registry, ids, cfg.season, cfg.domain_sets(),
-                                        set(cfg.supplemental_domains))
-    assert errors == [] and warnings == []
+                                        set(cfg.supplemental_domains), fallback_previous=cfg.fallback_previous_season)
+    assert errors == []
+    # The one allowed warning: the count of previous season fallbacks (the Epic list was seen under 2025/26).
+    fallback = re.compile(rf"^data/raw/passes: \d+ memberships use the {re.escape(previous_season(cfg.season))} list "
+                          rf"\(no {re.escape(cfg.season)} record; passes.fallback_previous_season\)$")
+    assert len(warnings) <= 1 and all(fallback.match(w) for w in warnings), warnings
     flat = [(rid, m) for rid, ms in out.items() for m in ms]
     assert {m.pass_id for _, m in flat} >= {"epic", "ikon"}
     # Search result values only: every membership is estimated and says the page was not opened.
     assert all(m.confidence == "estimated" and m.note and m.note.startswith(NOTE) for _, m in flat)
     # Public notes carry no internal source ids.
     assert not [rid for rid, m in flat if "passes-" in (m.note or "")]
+    # Fallbacks are only ever the season one year back, and the warning counts every one of them.
+    used = [m for _, m in flat if m.season_fallback]
+    assert all(m.season == previous_season(cfg.season) for _, m in flat if m.season_fallback)
+    assert all(m.season == cfg.season for _, m in flat if not m.season_fallback)
+    assert (f" {len(used)} memberships use " in warnings[0]) if used else warnings == []

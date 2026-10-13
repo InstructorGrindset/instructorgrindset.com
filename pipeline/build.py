@@ -330,7 +330,8 @@ def build(
     errors += jobs_errors
     passes_cfg = cfg.definitions.passes
     pass_data, pass_errors, pass_warnings = passes_mod.load_passes(
-        raw_dir, registry, known_ids, passes_cfg.season, passes_cfg.domain_sets(), set(passes_cfg.supplemental_domains), rel)
+        raw_dir, registry, known_ids, passes_cfg.season, passes_cfg.domain_sets(), set(passes_cfg.supplemental_domains), rel,
+        passes_cfg.fallback_previous_season)
     errors += pass_errors
     warnings += pass_warnings
     for d in drafts:

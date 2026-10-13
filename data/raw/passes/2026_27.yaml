@@ -168,6 +168,9 @@ sources:
 
 memberships:
 # ================================================================ Epic Pass
+# The Epic Pass page showed its unlimited list under a 2025/26 heading, so these 36 records carry season 2025/26 and
+# reach the build as previous season fallbacks (passes.fallback_previous_season), shown as "(2025/26 list)".
+# Telluride's record comes from its 2026/27 partner page.
 # Rockies (passes-epic-rockies lists the six; passes-epic-pass gives unlimited access with no restricted dates).
 - {resort_id: vail, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}
 - {resort_id: beaver-creek, pass: epic, access: unlimited, blackout: false, season: 2025/26, source_id: passes-epic-pass, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Also listed on the Epic Pass Rockies page. The unlimited list was seen under a 2025/26 heading."}

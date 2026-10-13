@@ -58,8 +58,10 @@ export function passAccess(m) {
   return 'days not stated';
 }
 
-/** 'Epic Pass: unlimited'. */
-export function passLine(m) { return `${PASS_LABEL[m.pass] || humanize(m.pass)}: ${passAccess(m)}`; }
+/** 'Epic Pass: unlimited', or 'Epic Pass: unlimited (2025/26 list)' for a previous season fallback. */
+export function passLine(m) {
+  return `${PASS_LABEL[m.pass] || humanize(m.pass)}: ${passAccess(m)}${m.season_fallback && m.season ? ` (${m.season} list)` : ''}`;
+}
 
 /** Certification levels in display order (the Phase 4 contract). */
 export const CERT_LEVELS = ['none', 'level_1', 'level_2', 'level_3', 'trainer', 'examiner', 'unspecified'];
