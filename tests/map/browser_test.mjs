@@ -321,8 +321,8 @@ async function desktop(browser, base) {
 
   // Color modes: value heat maps (map/js/heat.js) with the resorts on top.
   const modes = page.locator('.recolor-modes .filter-btn');
-  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 10000 });
-  check(JSON.stringify(await modes.allInnerTexts()) === JSON.stringify(['Default', 'Lucrativeness', 'Professionalism', 'Season length', 'Snowfall']), 'recolor control lists five modes');
+  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 10000 });
+  check(JSON.stringify(await modes.allInnerTexts()) === JSON.stringify(['Default', 'Lucrativeness', 'Season length', 'Snowfall']), 'recolor control lists four modes (no Professionalism)');
   check(await page.locator('.recolor-modes [aria-disabled="true"]').count() === 0, 'every mode enabled with fixture data');
   const leg = page.locator('#recolor-legend');
   const heatState = () => page.evaluate(() => {
@@ -342,7 +342,6 @@ async function desktop(browser, base) {
   const BETWEEN = [[-115.5, 40.0], [-108.5, 42.8], [-117.0, 37.5], [-112.5, 37.6], [-72.0, 43.6]];
   const heatModes = [
     { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', range: 'Resort values: $8,900 to $10,600', n: 2, first: '$8.5K', last: '$11K' },
-    { mode: 'professionalism', prop: 'professionalism_score', unit: '', n: 3, ticks: ['1', '2', '3'] },
     { mode: 'season', prop: 'season_length_days', unit: 'Days', range: 'Resort values: 112 to 168', n: 11, first: '100', last: '180' },
     { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', range: 'Resort values: 256 to 460', n: 9, first: '0', last: '500', raster: true },
   ];
@@ -519,10 +518,9 @@ async function desktop(browser, base) {
   const split = page.locator('.career-facts .fact', { hasText: 'Instructor split' });
   check((await split.innerText()).includes('45% to the instructor') && await split.locator('.badge-reported').count() === 1
     && await split.locator('.tier-stale').count() === 1, 'instructor split with badge and Needs update');
-  // Owner decision 5: professionalism shows the operator scale value only, with no breakdown or explanation.
-  const prof = page.locator('.score-block.professionalism');
-  check((await prof.innerText()).replace(/\s+/g, ' ').trim() === 'Professionalism 3 of 3', `professionalism shows the value only (${(await prof.innerText()).replace(/\s+/g, ' ')})`);
-  check(await page.locator('.breakdown, .score-trigger').count() === 0 && await prof.locator('[title]').count() === 0, 'no professionalism breakdown or tooltip');
+  // Owner decision 2026-10-13: no professionalism rating anywhere on the page.
+  check(!/professionalism/i.test(await page.locator('body').innerText()) && await page.locator('.breakdown, .score-trigger, .professionalism').count() === 0,
+    'the resort panel shows no professionalism rating');
   // Owner decision 4: the headline is the top of the wage scale; the range runs bottom to top.
   const luc = page.locator('.score-block', { hasText: 'Lucrativeness' });
   const lucText = await luc.innerText();
@@ -690,7 +688,7 @@ async function desktop(browser, base) {
   check(await page.locator('.tier-row .tier-draft', { hasText: 'Draft profile' }).count() === 1, 'resort shows Draft profile tag');
   check(await page.locator('.badge-reported').count() >= 1, 'reported badge renders');
   check(await page.locator('.score-block .not-verified', { hasText: 'Scoring model is being finalized' }).count() === 1, 'assumptions_unset renders being finalized');
-  check(await page.locator('.score-block.professionalism .not-verified', { hasText: 'Not yet rated' }).count() === 1, 'an unrated resort says Not yet rated');
+  check(!/professionalism|not yet rated/i.test(await page.locator('#panel-content').innerText()), 'no professionalism line on a resort without career data');
   check(await page.locator('.assumptions .not-verified', { hasText: 'Not set yet' }).count() === 1, 'unset assumption marked');
   check(await page.locator('.src-tag', { hasText: 'Estimated' }).count() === 1, 'density chart labelled Estimated');
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
@@ -964,7 +962,7 @@ async function desktopStub(browser, base) {
   // Without heat/snowfall.json the snowfall mode falls back to the resort only surface.
   await page.goto(`${base}/map/?data=/legacy-build/`);
   await ready(page);
-  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 10000 });
+  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 10000 });
   await page.locator('.recolor-modes .filter-btn[data-mode="snowfall"]').click();
   await page.waitForFunction(() => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith('heat-snowfall-')), null, { timeout: 10000 });
   const fallback = await page.evaluate(() => {
@@ -1017,7 +1015,8 @@ async function realData(browser, base) {
     check(await page.locator('#dev-badge').isHidden(), `real data ${vp.name}: no fixture badge`);
     if (vp.name === 'desktop') {
       const geo = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'resorts.geojson'), 'utf8')).features;
-      const props = { lucrativeness: 'lucrativeness_mid', professionalism: 'professionalism_score', season: 'season_length_days', snowfall: 'snowfall_annual_in' };
+      const props = { lucrativeness: 'lucrativeness_mid', season: 'season_length_days', snowfall: 'snowfall_annual_in' };
+      check(!/professionalism/i.test(await page.locator('body').innerText()), 'real data: no professionalism text on the national view');
       for (const [mode, prop] of Object.entries(props)) {
         const has = geo.some((f) => f.properties[prop] != null);
         const btn = page.locator(`.recolor-modes .filter-btn[data-mode="${mode}"]`);
@@ -1068,7 +1067,7 @@ async function realData(browser, base) {
     }
     await shot(page, `real-${vp.name}-national.png`);
     if (vp.name === 'phone') {
-      await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 10000 });
+      await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 10000 });
       await page.locator('.recolor-modes .filter-btn[data-mode="snowfall"]').click();
       await page.waitForFunction(() => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith('heat-snowfall-')), null, { timeout: 15000 });
       await page.waitForTimeout(600);

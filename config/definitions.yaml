@@ -170,12 +170,14 @@ heat:
   # Display settings only: they change no resort number. Method and contract in docs/map/ARCHITECTURE.md
   # ("Heat maps"). Exported to definitions.json; map/js/heat.js and pipeline/heat.py both read them.
   ramp:
-    # Viridis (van der Walt and Smith, matplotlib), its upper 80 percent. Multi hue and perceptually
-    # uniform, ordered dark to light (OKLab lightness rises at every stop, checked by config validation),
-    # and readable for red green color blindness. Low values stay dark and high values glow on the dark
-    # base and the muted imagery; the darkest stop keeps about 2.2:1 against the base background.
+    # Continuous ramp for modes without classes (Lucrativeness). Viridis (van der Walt and Smith,
+    # matplotlib), its upper 80 percent: OKLab lightness rises at every stop (checked by config validation)
+    # and it reads for red green color blindness. The classed palettes in `modes` follow their own rule.
     name: viridis
     colors: ["#414487", "#355f8d", "#2a788e", "#21918c", "#22a884", "#44bf70", "#7ad151", "#bddf26", "#fde725"]
+  # Neutral grey: the no snow class, and the color far from any resort with data. It keeps 3.5:1 against the
+  # dark base and reads as flat grey over the satellite imagery.
+  neutral: "#666a70"
   regions:
     # One image per region. Alaska matches the box the national inset draws (map/js/inset.js SOURCE);
     # rings west of 180 degrees wrap to negative longitudes and the far Aleutians fall outside.
@@ -191,39 +193,85 @@ heat:
     neighbors: 8
     min_distance_km: 10
     decluster_km: 20
-    # Opacity from the distance to the nearest point with data: max_alpha up to full_opacity_km, then a
-    # smooth fade to floor_alpha at fade_end_km and beyond. Density never raises opacity.
+    # Distance to the nearest point with data: the full color up to full_opacity_km, then a smooth blend
+    # until fade_end_km. fade_to neutral blends the color into `neutral` and the opacity down to
+    # floor_alpha, so areas far from resorts (the Plains) read as clean grey. fade_to alpha keeps the color
+    # and lowers only the opacity. Density never changes either.
     full_opacity_km: 200
-    fade_end_km: 600
+    fade_end_km: 400
     max_alpha: 1.0
-    floor_alpha: 0.35
+    floor_alpha: 0.7
+    fade_to: neutral
     # Browser surfaces: about 7 km per pixel, the field solved on every grid_step_px pixel and blended
     # bilinearly between, rows evenly spaced in Web Mercator, clipped to the state outlines.
     px_per_degree: 12
     grid_step_px: 4
     max_pixels: 600000
   modes:
-    # scale: linear | sqrt. domain: fixed [min, max]; else min..max of the resort values, widened to round
-    # tick steps (domain_min pins the low end). ticks: fixed legend ticks (fixed domain) or candidate
-    # ticks (sqrt scale, the domain maximum is always the last tick).
+    # scale: linear | sqrt | classed. Linear and sqrt use `ramp` over `domain` (else min..max of the resort
+    # values, widened to round steps). Classed: `breaks` split the values into len(breaks) + 1 classes,
+    # class i covering breaks[i - 1] to breaks[i], each with its color in `colors`. Neighbouring classes
+    # must differ by at least 6 in OKLab (x 100), checked by config validation; the tests check them under
+    # simulated color blindness too.
     lucrativeness: {scale: linear}
-    season: {scale: linear}
-    # Most of the country gets under 100 in and the mountains up to 700, so a square root scale keeps
-    # both readable.
-    snowfall: {scale: sqrt, domain_min: 0, ticks: [0, 25, 100, 200, 400]}
+    season:
+      # From the 330 sourced season lengths (2026-10-13): 10th percentile 86 days, median 114, 90th 150,
+      # top 287 (Timberline). Classes hold 4 to 17 percent of the resorts each, so the common 90 to 150 day
+      # range splits into five steps instead of one teal. Multi hue, lightness rising up to 180 days; the
+      # 180 plus class turns orange so the longest seasons stand apart.
+      scale: classed
+      breaks: [90, 100, 110, 120, 130, 150, 180]
+      colors: ["#6331a0", "#405ec9", "#158abe", "#1aadb3", "#41ce90", "#9fd959", "#feeba4", "#f37511"]
+    snowfall:
+      # Owner request 2026-10-13: the most contrast in 180 to 900 in, where people ski, and a 50 in step easy
+      # to read. Under 24 in is neutral grey (little or no snow); 24 to 180 gets three muted blues; 180 to
+      # 900 gets 15 classes of 50 in (180 to 200 first) that sweep the hue wheel from cyan through green,
+      # yellow, orange and pink to lavender while the lightness alternates between neighbours, so every
+      # neighbouring pair differs by 11 or more in OKLab even under simulated protanopia and deuteranopia.
+      # Isolines (heat.snowfall.isolines) carry the exact steps; color alone does not have to.
+      scale: classed
+      breaks: [24, 60, 120, 180, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850]
+      colors: ["#666a70", "#384e6e", "#41628d", "#4677ad", "#20c2ec", "#159ca4", "#1dcfb9", "#0ca871", "#79d26a",
+               "#86a005", "#d6be07", "#c28c17", "#fead68", "#ee7145", "#fdaeae", "#ee6e9d", "#ffabe6", "#ce7fe6",
+               "#d5c5fe"]
+      domain: [0, 900]
+      # Legend: classes below 180 in take half the width of a 50 in class, so 180 to 900 fills most of it.
+      legend_compress_below: 180
+      legend_ticks: [24, 180, 300, 400, 500, 600, 700, 800, 900]
   snowfall:
     # Precomputed snowfall rasters (pipeline/heat.py -> data/build/heat/): NOAA NCEI U.S. Climate Normals
     # 1991 to 2020 station values (ANN-SNOW-NORMAL) as the background, then each resort's own published
     # annual snowfall (snow.annual_avg_in) as a local pocket: inside pocket_radius_km the value rises
     # toward the resort's value, v = b + g(d) * max(0, resort - b) with g(d) = (1 - (d / r)^2)^2, so a
     # pocket only ever raises the background. Valley stations undercount mountain snow; the pockets
-    # restore it. Opacity follows field (full_opacity_km and the fade) from the nearest station or resort.
+    # restore it.
     accept_completeness: [S, R, P]      # NOAA completeness codes kept (E, estimated, is dropped)
     accept_measurement_flags: ["", X]   # blank or X (nonzero rounded to zero); M, V, W, Y and Z are dropped
     neighbors: 10
     min_distance_km: 12
     pocket_radius_km: 25
     px_per_degree: 20                   # about 4 km per pixel at 40 degrees north
+    grid_step_px: 4
+    # Stations cover the country, so the fade only touches remote Alaska: it keeps the class color and
+    # lowers the opacity (a grey fade would read as the no snow class).
+    full_opacity_km: 300
+    fade_end_km: 800
+    floor_alpha: 0.35
+    fade_to: alpha
+    isolines:
+      # Lines of equal snowfall from the same field, every `step` in from `start` to `end`, bolder every
+      # `major_step`. Douglas Peucker at simplify_px pixels; a label point sits on every line longer than
+      # label_min_px pixels (the map shows labels from mountain range zoom).
+      start: 200
+      end: 900
+      step: 50
+      major_step: 100
+      simplify_px: 0.7
+      label_min_px: 30
+  season:
+    # Precomputed season length rasters from the resorts' sourced season lengths (season.length_days),
+    # the `field` method and fade. Same regions and Web Mercator rows as snowfall.
+    px_per_degree: 16
     grid_step_px: 4
 
 # Phase 3 climate ETL settings. Read and validated by pipeline/climate/definitions.py

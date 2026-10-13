@@ -154,7 +154,7 @@ async function axe(browser, base) {
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
     if (c.heat) {
-      await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 5, null, { timeout: 30000 });
+      await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 30000 });
       await page.locator(`.recolor-modes .filter-btn[data-mode="${c.heat}"]`).click();
       await page.waitForFunction((k) => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith(`heat-${k}-`)), c.heat, { timeout: 30000 });
       await page.waitForSelector('#recolor-legend:not([hidden])', { timeout: 10000 });

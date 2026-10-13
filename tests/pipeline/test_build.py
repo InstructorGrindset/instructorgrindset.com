@@ -120,7 +120,7 @@ def test_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch):
                                      "cluster_id": "i70-corridor", "state": "CO", "acres": 4000,
                                      "vertical_ft": round((3500.0 - 2400.12346) * 3.280839895), "lifts": 11,
                                      "size_rank": 4, "season_length_days": None, "snowfall_annual_in": None,
-                                     "snowfall_annual_source": None, "professionalism_score": None,
+                                     "snowfall_annual_source": None,
                                      "access_rating": None, "lucrativeness_mid": None}
     assert next(f for f in pts["features"] if f["properties"]["id"] == "faraway-hill")["properties"]["size_rank"] == 1
 
@@ -305,7 +305,7 @@ def test_definitions_json(repo_root, tmp_path, out):
     assert d["version"] == 1 and "generated_at" in d
     heat = d.pop("heat")
     assert set(heat) == {"ramp", "regions", "field", "modes"}
-    assert heat["ramp"]["colors"][0] == "#414487" and heat["modes"]["professionalism"]["ticks"] == [1, 2, 3]
+    assert heat["ramp"]["colors"][0] == "#414487" and set(heat["modes"]) == {"lucrativeness", "season", "snowfall"}
     assert heat["field"]["floor_alpha"] == 0.35 and heat["field"]["full_opacity_km"] == 200
     assert {k: v for k, v in d.items() if k not in ("version", "generated_at")} == {
         "snow": {"powder_day_in": 6, "banner_day_in": 12},
@@ -357,7 +357,7 @@ def test_career_layer_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch)
     peak = by["fixture-peak"]["career"]
     assert [p["cert_level"] for p in peak["pay"]] == ["level_2"]  # the 2 report aggregate is not displayed
     assert peak["pay"][0]["source_id"] == "fixture-pay-sheet" and peak["pay"][0]["stale"] is False
-    assert peak["professionalism"]["status"] == "weights_unset"
+    assert "professionalism" not in peak  # owner decision 2026-10-13: never in data/build
     # owner decision 4: assumptions are set; no rent data in this fixture, so insufficient_data
     assert peak["lucrativeness"]["status"] == "insufficient_data" and peak["lucrativeness"]["mid"] is None
     assert "fixture-pay-sheet" in by["fixture-peak"]["sources"]
@@ -368,7 +368,7 @@ def test_career_layer_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch)
 
     props = {f["properties"]["id"]: f["properties"] for f in _load(out, "resorts.geojson")["features"]}
     assert props["fixture-peak"]["snowfall_annual_in"] == 200.5
-    assert props["fixture-peak"]["professionalism_score"] is None and props["fixture-peak"]["lucrativeness_mid"] is None
+    assert "professionalism_score" not in props["fixture-peak"] and props["fixture-peak"]["lucrativeness_mid"] is None
     assert props["fixture-basin"]["snowfall_annual_in"] is None and props["fixture-basin"]["season_length_days"] is None
 
     report = (tmp_path / "tier-a-draft.md").read_text()
@@ -400,7 +400,7 @@ def test_no_career_data_means_null_career(repo_root, raw_dir, out, tmp_path):
     assert all(r["career"] is None for r in _load(out, "resorts.json")["resorts"])
     for f in _load(out, "resorts.geojson")["features"]:
         p = f["properties"]
-        assert p["professionalism_score"] is None and p["lucrativeness_mid"] is None
+        assert "professionalism_score" not in p and p["lucrativeness_mid"] is None
 
 
 HOUSING_YAML = """
@@ -964,14 +964,22 @@ def test_operator_scale_and_access(repo_root, raw_dir, out, tmp_path):
     _run(repo_root, raw_dir, out, tmp_path)
     by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
     peak = by["fixture-peak"]
-    assert peak["operator_scale"] == {"value": 3, "source_id": "fixture-source-a", "as_of": "2026-10-13",
-                                      "confidence": "published", "note": None}   # the note stays internal
+    # Owner decision 2026-10-13: the operator scale is validated in data/raw but never written to data/build.
+    assert all("operator_scale" not in r for r in by.values())
     assert "internal reasoning" not in (out / "resorts.json").read_text()
     assert peak["access"]["rating"] == "transit_friendly" and "fixture-source-b" in peak["sources"]
-    assert by["fixture-basin"]["operator_scale"] is None and by["fixture-valley"]["access"] is None
+    assert by["fixture-valley"]["access"] is None
     props = {f["properties"]["id"]: f["properties"] for f in _load(out, "resorts.geojson")["features"]}
-    assert (props["fixture-peak"]["professionalism_score"], props["fixture-peak"]["access_rating"]) == (3, "transit_friendly")
-    assert (props["fixture-basin"]["professionalism_score"], props["fixture-basin"]["access_rating"]) == (None, None)
+    assert props["fixture-peak"]["access_rating"] == "transit_friendly" and props["fixture-basin"]["access_rating"] is None
+    assert all("professionalism_score" not in p for p in props.values())
+    leaks = [f.name for f in out.rglob("*") if f.is_file() and f.suffix in (".json", ".geojson")
+             and any(k in f.read_text(encoding="utf-8") for k in ("operator_scale", "professionalism"))]
+    assert leaks == []
+    # An invalid raw scale still fails the build: the loader validates it.
+    data["resorts"][0]["operator_scale"]["value"] = 4
+    p.write_text(yaml.safe_dump(data, sort_keys=False))
+    with pytest.raises(BuildError):
+        _run(repo_root, raw_dir, out, tmp_path)
 
 
 def test_operator_scale_and_access_validation():

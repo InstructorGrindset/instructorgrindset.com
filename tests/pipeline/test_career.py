@@ -273,11 +273,12 @@ def test_build_career_output_validates(cfg):
     career, warnings = build_career([pay(), pay(cert_level="level_1", verified_date="2025-01-01")], ci, 140, 800,
                                     defs, TODAY)
     assert warnings == []
-    assert career["stale_fields"] == ["pay.level_1", "private_rate", "professionalism.paid_training_hours"]
+    # Professionalism inputs never surface: no stale flag and no score (owner decision 2026-10-13).
+    assert career["stale_fields"] == ["pay.level_1", "private_rate"]
+    assert "professionalism" not in career
     # top of scale 24 (level_2 row), 140 day season = 140 / 30.4 months
     m = 140 / 30.4
     assert career["lucrativeness"]["mid"] == round(24 * 40 * m * 4.33 - 800 * m)
-    assert career["professionalism"]["score"] == 71.4
     model = Career.model_validate(career, context=CTX)
     assert model.pay[1].cert_level == "level_2"
     # and inside a Resort, the career source ids must be listed
@@ -289,13 +290,11 @@ def test_build_career_output_validates(cfg):
 
 
 def test_career_output_status_rules():
-    base = {"pay": [], "professionalism": {"score": None, "status": "weights_unset", "breakdown": []},
-            "lucrativeness": {"status": "assumptions_unset", "assumptions": []}}
+    base = {"pay": [], "lucrativeness": {"status": "assumptions_unset", "assumptions": []}}
     Career.model_validate(base)
-    bad = copy.deepcopy(base)
-    bad["professionalism"]["score"] = 50
-    with pytest.raises(ValidationError, match="exactly when status is computed"):
-        Career.model_validate(bad)
+    # The public career block has no professionalism field at all.
+    with pytest.raises(ValidationError, match="Extra inputs"):
+        Career.model_validate({**base, "professionalism": {"score": None, "status": "weights_unset", "breakdown": []}})
     bad = copy.deepcopy(base)
     bad["lucrativeness"] = {"low": 3, "mid": 2, "high": 1, "status": "computed", "assumptions": []}
     with pytest.raises(ValidationError, match="low <= mid <= high"):

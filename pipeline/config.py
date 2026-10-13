@@ -8,6 +8,7 @@ import yaml
 from pydantic import Field, model_validator
 
 from .schemas.common import Slug, StateCode, StrictModel
+from .color import delta_e, oklab
 from .schemas.geo import Geometry
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -203,23 +204,19 @@ class CareerDefs(StrictModel):
 
 # ------------------------------------------------------------------- heat maps
 HEX_COLOR = r"^#[0-9a-fA-F]{6}$"
+HexColor = Annotated[str, Field(pattern=HEX_COLOR)]
+# Neighbouring classes of a classed palette must differ by at least this much (OKLab x 100, normal vision).
+CLASS_MIN_DELTA_E = 6.0
 
 
 def oklab_lightness(hex_color: str) -> float:
     """OKLab L (0 to 1) of an sRGB hex color (Bjorn Ottosson's OKLab)."""
-    def lin(c: float) -> float:
-        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
-
-    r, g, b = (lin(int(hex_color[i:i + 2], 16) / 255) for i in (1, 3, 5))
-    l_ = (0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b) ** (1 / 3)
-    m_ = (0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b) ** (1 / 3)
-    s_ = (0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b) ** (1 / 3)
-    return 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+    return oklab(hex_color)[0]
 
 
 class HeatRamp(StrictModel):
     name: str = Field(min_length=1)
-    colors: list[Annotated[str, Field(pattern=HEX_COLOR)]] = Field(min_length=3)
+    colors: list[HexColor] = Field(min_length=3)
 
     @model_validator(mode="after")
     def _ordered(self) -> "HeatRamp":
@@ -255,6 +252,7 @@ class HeatField(StrictModel):
     fade_end_km: float = Field(gt=0)
     max_alpha: float = Field(gt=0, le=1)
     floor_alpha: float = Field(gt=0, le=1)
+    fade_to: Literal["neutral", "alpha"] = "neutral"
     px_per_degree: float = Field(gt=0, le=60)
     grid_step_px: int = Field(ge=1, le=16)
     max_pixels: int = Field(ge=10000)
@@ -269,10 +267,14 @@ class HeatField(StrictModel):
 
 
 class HeatMode(StrictModel):
-    scale: Literal["linear", "sqrt"] = "linear"
+    scale: Literal["linear", "sqrt", "classed"] = "linear"
     domain: Optional[list[float]] = Field(default=None, min_length=2, max_length=2)
     domain_min: Optional[float] = None
     ticks: Optional[list[float]] = None
+    breaks: Optional[list[float]] = None
+    colors: Optional[list[HexColor]] = None
+    legend_compress_below: Optional[float] = None
+    legend_ticks: Optional[list[float]] = None
 
     @model_validator(mode="after")
     def _check(self) -> "HeatMode":
@@ -282,6 +284,22 @@ class HeatMode(StrictModel):
             raise ValueError("heat mode ticks must be ascending")
         if self.domain and self.ticks and not all(self.domain[0] <= t <= self.domain[1] for t in self.ticks):
             raise ValueError("heat mode ticks must sit inside the domain")
+        if self.scale == "classed":
+            # The lightness rule of `ramp` does not apply: a classed palette may change lightness in both
+            # directions (snowfall alternates it on purpose) as long as neighbours stay distinct.
+            if not self.breaks or not self.colors:
+                raise ValueError("a classed heat mode needs breaks and colors")
+            if self.breaks != sorted(set(self.breaks)):
+                raise ValueError("heat mode breaks must be strictly ascending")
+            if len(self.colors) != len(self.breaks) + 1:
+                raise ValueError("a classed heat mode needs one more color than breaks")
+            weak = [(a, b) for a, b in zip(self.colors, self.colors[1:]) if delta_e(a, b) < CLASS_MIN_DELTA_E]
+            if weak:
+                raise ValueError(f"neighbouring heat classes too alike (OKLab below {CLASS_MIN_DELTA_E}): {weak}")
+            if self.legend_ticks and self.legend_ticks != sorted(self.legend_ticks):
+                raise ValueError("heat mode legend_ticks must be ascending")
+        elif self.breaks or self.colors:
+            raise ValueError("breaks and colors belong to scale: classed")
         return self
 
 
@@ -289,6 +307,27 @@ class HeatModes(StrictModel):
     lucrativeness: HeatMode
     season: HeatMode
     snowfall: HeatMode
+
+
+class HeatIsolines(StrictModel):
+    start: float = Field(gt=0)
+    end: float = Field(gt=0)
+    step: float = Field(gt=0)
+    major_step: float = Field(gt=0)
+    simplify_px: float = Field(ge=0, le=5)
+    label_min_px: float = Field(ge=0)
+
+    @model_validator(mode="after")
+    def _check(self) -> "HeatIsolines":
+        if self.end < self.start:
+            raise ValueError("heat.snowfall.isolines end must not be below start")
+        if abs(self.major_step / self.step - round(self.major_step / self.step)) > 1e-9:
+            raise ValueError("heat.snowfall.isolines major_step must be a multiple of step")
+        return self
+
+    def levels(self) -> list[float]:
+        n = int(round((self.end - self.start) / self.step))
+        return [self.start + i * self.step for i in range(n + 1)]
 
 
 class HeatSnowfall(StrictModel):
@@ -299,14 +338,26 @@ class HeatSnowfall(StrictModel):
     pocket_radius_km: float = Field(ge=5, le=50)
     px_per_degree: float = Field(gt=0, le=60)
     grid_step_px: int = Field(ge=1, le=16)
+    full_opacity_km: float = Field(gt=0)
+    fade_end_km: float = Field(gt=0)
+    floor_alpha: float = Field(gt=0, le=1)
+    fade_to: Literal["neutral", "alpha"] = "alpha"
+    isolines: HeatIsolines
+
+
+class HeatSeason(StrictModel):
+    px_per_degree: float = Field(gt=0, le=60)
+    grid_step_px: int = Field(ge=1, le=16)
 
 
 class HeatDefs(StrictModel):
     ramp: HeatRamp
+    neutral: HexColor
     regions: HeatRegions
     field: HeatField
     modes: HeatModes
     snowfall: HeatSnowfall
+    season: HeatSeason
 
 
 class Definitions(StrictModel):

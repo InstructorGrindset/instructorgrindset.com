@@ -412,7 +412,7 @@ def test_map_index_written_with_slim_rows(site: Path):
     # Unknown values stay null; nothing is invented.
     b = rows["bravo-bowl"]
     assert b["acres"] is None and b["season_length_days"] is None and b["snowfall_annual_in"] is None
-    assert b["professionalism_score"] is None and b["lucrativeness_mid"] is None
+    assert "professionalism_score" not in b and b["lucrativeness_mid"] is None
 
 
 def test_map_index_takes_recolor_values_from_resorts_geojson(site: Path):
@@ -420,12 +420,11 @@ def test_map_index_takes_recolor_values_from_resorts_geojson(site: Path):
     (build / "resorts.geojson").write_text(json.dumps({"type": "FeatureCollection", **_env(), "features": [
         {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-106.0, 39.5]},
          "properties": {"id": "alpha-peak", "size_rank": 3, "season_length_days": 150, "snowfall_annual_in": 310.5,
-                        "professionalism_score": 72, "lucrativeness_mid": 6100}}]}))
+                        "lucrativeness_mid": 6100}}]}))
     generate_routes(site)
     rows, _ = _index_rows(site)
     a = rows["alpha-peak"]
-    assert (a["size_rank"], a["season_length_days"], a["snowfall_annual_in"], a["professionalism_score"], a["lucrativeness_mid"]) \
-        == (3, 150, 310.5, 72, 6100)
+    assert (a["size_rank"], a["season_length_days"], a["snowfall_annual_in"], a["lucrativeness_mid"]) == (3, 150, 310.5, 6100)
     assert rows["lake-west"]["snowfall_annual_in"] is None
 
 
