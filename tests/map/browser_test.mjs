@@ -1462,11 +1462,12 @@ async function searchChecks(browser, base, stubBase) {
     const m = await import('/map/js/search.js');
     const items = m.buildItems(window.__careerMap.index);
     const names = (q) => m.search(items, q).map((x) => x.name);
-    return { norm: m.normalize("Smúgglers’ NOTCH, Mt. Hood"), ch: names('ch'), mount: names('mount hood'), alpha: names('ALPHA'), co: names('co')[0], none: names('zzz').length };
+    return { norm: m.normalize("Smúgglers’ NOTCH, Mt. Hood"), ch: names('ch'), alpha: names('ALPHA'), co: names('co')[0], none: names('zzz').length, one: names('e') };
   });
   check(unit.norm === 'smugglers notch mt hood', `matching ignores accents, case and punctuation ("${unit.norm}")`);
   check(unit.ch[0] === 'Charlie Hill' && unit.ch.indexOf('Echo Mesa') > 0, `prefix matches rank first (ch: ${unit.ch.join(', ')})`);
   check(unit.alpha[0] === 'Alpha Peak' && unit.co === 'Colorado' && unit.none === 0, 'case loose names and state codes match');
+  check(unit.one.join() === 'Echo Mesa', `one letter matches word starts only (e: ${unit.one.join(', ')})`);
 
   await input.focus();
   await page.keyboard.type('bravo');
@@ -1521,6 +1522,8 @@ async function searchChecks(browser, base, stubBase) {
   await page.waitForFunction(() => window.__careerMap.mapCtl, null, { timeout: 20000 });
   await mapIdle(page);
   check(await inView(page, at('kilo-notch')), 'the WebGL map starts on the result chosen before it ran');
+  check(await page.locator('.maplibregl-ctrl-attrib-inner a[href="/map/credits/"]').count() === 1
+    && await page.locator('#panel-content .panel-footer a[href="/map/credits/"]').count() === 1, 'the map attribution and the panel footer link Sources and credits');
   await input.click();
   await page.keyboard.type('hotel');
   await list.waitFor({ state: 'visible' });
@@ -1575,7 +1578,7 @@ async function searchChecks(browser, base, stubBase) {
   await pp.waitForTimeout(400);
   const pInput = pp.getByRole('combobox', { name: 'Search resorts, clusters and states' });
   await pInput.tap();
-  await pp.keyboard.type('a');
+  await pp.keyboard.type('ra');
   await pp.locator('#map-search-list').waitFor({ state: 'visible' });
   // Wait for the sheet to finish sliding to half.
   await pp.waitForFunction(() => { const t = document.getElementById('panel').getBoundingClientRect().top; const same = window.__sheetTop === t; window.__sheetTop = t; return same; },
@@ -1585,9 +1588,9 @@ async function searchChecks(browser, base, stubBase) {
     rows: document.querySelectorAll('#map-search-list [role="option"]').length }));
   check(fit.state === 'half' && fit.list <= fit.sheet && fit.rows > 1, `phone: results stop above the sheet (list ${Math.round(fit.list)} px, sheet ${Math.round(fit.sheet)} px; a full sheet drops to half)`);
   await shot(pp, 'search-03-phone.png');
-  await pp.locator('#map-search-list [role="option"]', { hasText: 'Alpha Peak' }).tap();
-  await pp.waitForURL(/\/map\/co\/fixture-front-range\/alpha-peak\//);
-  check(await heading(pp) === 'Alpha Peak', 'phone: a tapped result opens the resort');
+  await pp.locator('#map-search-list [role="option"]', { hasText: 'November Ramps' }).tap();
+  await pp.waitForURL(/\/map\/ut\/fixture-wasatch-like\/november-ramps\//);
+  check(await heading(pp) === 'November Ramps', 'phone: a tapped result opens the resort');
   wp.assertClean();
   await ctx.close();
 }

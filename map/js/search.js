@@ -73,7 +73,8 @@ export function search(items, query, limit = MAX_RESULTS) {
         if (s != null && (best == null || s < best)) best = s;
       }
     }
-    if (best != null) hits.push({ it, s: best });
+    // One letter matches only at the start of a word.
+    if (best != null && (q.length > 1 || best <= 2)) hits.push({ it, s: best });
   }
   hits.sort((a, b) => (a.s - b.s) || (KIND_ORDER[a.it.kind] - KIND_ORDER[b.it.kind])
     || ((a.it.fallback ? 1 : 0) - (b.it.fallback ? 1 : 0)) || ((a.it.tier === 'A' ? 0 : 1) - (b.it.tier === 'A' ? 0 : 1))

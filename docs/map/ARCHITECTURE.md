@@ -55,7 +55,6 @@ Resort {
   size: { acres, vertical_ft, lifts, ski_school_staff_est },          // each Sourced<number> | null
   elevation: { base_ft, summit_ft },                                  // each Sourced<number> | null; Tier A research first, else OpenSkiMap (estimated)
   snow: { annual_avg_in: Sourced<number> | null } | null,   // resort reported average annual snowfall (inches), e.g. Wikipedia infobox; null when absent
-  operator_scale: Sourced<1 | 2 | 3> | null,       // owner decision 5: public "Professionalism N of 3"; note is always null here (internal)
   access: { rating: convenient | transit_friendly | mixed | car_centric, summary_md, source_id, as_of, confidence, note } | null,
                                                    // owner decision 6; public labels Convenient, Transit friendly, Mixed, Car centric; summary_md is one public sentence
   season: { open_typical, close_typical, length_days, training_start }, // each Sourced | null; dates as "MM-DD"
@@ -87,7 +86,7 @@ GeoJSON FeatureCollection, one Polygon or MultiPolygon per cluster. `properties`
 Polygons are convex hulls of member resorts buffered by about 15 km, or hand drawn polygons from `config/clusters.yaml` when supplied.
 
 ### `resorts.geojson`
-Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank, season_length_days, snowfall_annual_in, snowfall_annual_source, professionalism_score, access_rating, lucrativeness_mid }` where `size_rank` is 1 to 5 from acres (null acres gives 1). The last six are for map recolor modes (numbers or null, plus the snowfall source and the access rating): `season_length_days` is `season.length_days.value`, `snowfall_annual_in` is the resort's published `snow.annual_avg_in` when present, else the sum of the climate file's monthly `snowfall_in` over months whose `snowfall_source` is not null (null when neither exists), and `snowfall_annual_source` says which (`published` | `climate` | null), `professionalism_score` is `operator_scale.value` (1 to 3, owner decision 5), `access_rating` is `access.rating`, `lucrativeness_mid` is `career.lucrativeness.mid`.
+Point FeatureCollection mirroring `resorts.json` for MapLibre. `properties`: `{ id, name, tier, facility_type, cluster_id, state, acres, vertical_ft, lifts, size_rank, season_length_days, snowfall_annual_in, snowfall_annual_source, access_rating, lucrativeness_mid }` where `size_rank` is 1 to 5 from acres (null acres gives 1). The last five are for map recolor modes (numbers or null, plus the snowfall source and the access rating): `season_length_days` is `season.length_days.value`, `snowfall_annual_in` is the resort's published `snow.annual_avg_in` when present, else the sum of the climate file's monthly `snowfall_in` over months whose `snowfall_source` is not null (null when neither exists), and `snowfall_annual_source` says which (`published` | `climate` | null), `access_rating` is `access.rating`, `lucrativeness_mid` is `career.lucrativeness.mid`. No professionalism or operator scale field exists in any build output (owner decision 2026-10-13; `tests/pipeline/test_no_professionalism.py`).
 
 ### `states.json`
 ```
@@ -112,42 +111,83 @@ Display relevant subset of `config/definitions.yaml`, so the UI never hardcodes 
   reports: { aggregation_min },                      // approved reports needed before a Reported range shows
   submissions: { endpoint: string | null },          // report form target; the form is hidden while null
   staleness: { max_age_months },                     // records older than this are flagged
-  heat: { ramp: { name, colors: hex[] },             // the one heat map ramp (see "Heat maps")
+  heat: { ramp: { name, colors: hex[] },             // continuous ramp for modes without classes (see "Heat maps")
+          neutral: hex,                              // neutral grey: the snowfall no snow class and the far fade color
           regions: { lower48: Box, alaska: Box },    // Box { west, south, east, north }
           field: { neighbors, min_distance_km, decluster_km, full_opacity_km, fade_end_km, max_alpha, floor_alpha,
-                   px_per_degree, grid_step_px, max_pixels },
-          modes: { lucrativeness, professionalism, season, snowfall: { scale: linear|sqrt, domain?, domain_min?, ticks? } } } }
+                   fade_to: neutral|alpha, px_per_degree, grid_step_px, max_pixels },
+          modes: { lucrativeness, season, snowfall: HeatMode },
+          season: { px_per_degree, grid_step_px, full_opacity_km, fade_end_km, floor_alpha, fade_to, no_data_reach_km } } }
+HeatMode { scale: linear|sqrt|classed, domain?: [min, max], domain_min?, ticks?,
+           breaks?: number[], colors?: hex[],        // classed: breaks.length + 1 classes, class i from breaks[i - 1] to breaks[i]
+           legend_compress_below?, legend_ticks? }   // classed legend layout (see "Heat maps", Legend)
 ```
-`heat` is `config/definitions.yaml` `heat` without its `snowfall` block (pipeline only). The UI never hardcodes the ramp
-or the field settings; without a valid `heat` block the heat map modes are disabled ("Heat map settings did not load.").
+`heat` is `config/definitions.yaml` `heat` without its `snowfall` block (pipeline only). `season` holds the season length
+fade, which the browser fallback uses too. The UI never hardcodes the colors or the field settings; without a valid
+`heat` block the heat map modes are disabled ("Heat map settings did not load."). Config validation fails when a
+classed palette has neighbouring colors closer than 6 in OKLab (x 100) or the wrong number of colors.
 
 ### `us-states.geojson`
 State outlines (simplified) with `properties: { code, name }`.
 
-### `heat/snowfall.json` and `heat/snowfall-<region>.png` (snowfall heat map rasters, `pipeline/heat.py`)
+### `heat/<mode>.json` and `heat/<mode>-<region>.png` (heat map rasters, `pipeline/heat.py`)
+Two modes are precomputed: `snowfall` (NOAA normals plus resort pockets, with isolines) and `season` (season length from
+the resorts' sourced values only). Manifest version 2:
 ```
-{ version, generated_at, mode: "snowfall", units: "in", scale: "sqrt", domain: { min, max }, ticks: number[],
-  ramp: hex[],                                   // heat.ramp.colors used to color the PNGs
+{ version: 2, generated_at, mode: "snowfall" | "season", units: "in" | "days", scale: "classed",
+  domain: { min, max },                          // snowfall: heat.modes.snowfall.domain (0 to 900); season: the sourced resort range
+  ticks: number[],                               // legend ticks (heat.modes.<mode>.legend_ticks, else the breaks)
+  breaks: number[], colors: hex[],               // the classes the PNGs are colored with (heat.modes.<mode>)
+  legend: { ticks, compress_below: number | null },
+  ramp?: hex[],                                  // only for a mode configured linear or sqrt (heat.ramp)
+  // snowfall only:
   background: { source_id: "noaa-ncei-normals-1991-2020", as_of, confidence: "published", field: "ANN-SNOW-NORMAL",
                 stations },                      // usable NOAA stations inside the regions
   pockets: { field: "snow.annual_avg_in", resorts, radius_km },
-  method: { interpolation, neighbors, min_distance_km, grid_step_px, px_per_degree, full_opacity_km, fade_end_km, floor_alpha },
-  attribution: "Snowfall normals: NOAA NCEI 1991 to 2020",
-  inputs_sha256,                                 // stations, pockets, outlines, heat config and the code; unchanged means no rebuild
-  rasters: [{ region: "lower48" | "alaska", image: "snowfall-lower48.png", width, height,
+  isolines: { levels: number[], major_step, files: [{ region, file: "snowfall-isolines-<region>.geojson", bytes, features }] },
+  // season only:
+  values: { field: "season.length_days", resorts, points },   // resorts with a sourced value; points after declustering
+  method: { interpolation, neighbors, min_distance_km, grid_step_px, px_per_degree, full_opacity_km, fade_end_km,
+            floor_alpha, fade_to, decluster_km?, no_data_reach_km? },
+  attribution: "Snowfall normals: NOAA NCEI 1991 to 2020" | null,   // season: null (sources sit on each resort record)
+  inputs_sha256,                                 // points, outlines, heat config and the code; unchanged means no rebuild
+  rasters: [{ region: "lower48" | "alaska", image: "<mode>-<region>.png", width, height,
               coordinates: [[w, n], [e, n], [e, s], [w, s]],   // exact corners, the region box from config
-              bytes, stations, pockets }] }
+              bytes, stations?, pockets?, resorts?, no_data_states? }] }
 ```
 * PNG: 8 bit RGBA written with the stdlib (`pipeline/png.py`, zlib, Up filter). Columns evenly spaced in longitude,
   rows evenly spaced in Web Mercator y (MapLibre image sources expect that), pixel centers at half steps inside the
-  corners. Colored with `heat.ramp` on the snowfall scale; alpha is the opacity rule of `heat.field` times the share of
-  the pixel inside the region's state outlines (antialiased scanline coverage, 4 samples per row). About 250 KB for the
-  lower 48 (1164 by 639 px, 20 px per degree) and 100 KB for Alaska (1010 by 890 px); each file must stay under 400 KB.
-* Domain: `domain_min` (0) to the nice ceiling (1, 1.5, 2, 2.5, 3, 4, 5, 6, 7, 8 or 10 times a power of ten) of the
-  highest station or resort value (700 in, Brighton). Ticks: the configured candidates clear of the top end, then the
-  maximum.
-* A region without outlines is skipped. Without the NOAA extract or `us-states.geojson` the build warns and leaves the
-  rasters alone; the frontend falls back to the resort only surface when `heat/snowfall.json` is absent or invalid.
+  corners. Each pixel takes its class color; on a class edge the color is the mean of four subsamples, each bilinear
+  between pixel centers, so edges stay smooth when MapLibre magnifies the image. Alpha is the mode's opacity rule
+  times the share of the pixel inside the region's state outlines (antialiased scanline coverage, 4 samples per row).
+  Fully transparent pixels are zero. Each file must stay under 400 KB.
+* Snowfall: 32 px per degree (about 2.8 km at 40 degrees north): 1862 by 1023 px, 160 KB for the lower 48 and 110 KB
+  for Alaska. Opacity from `heat.snowfall` (full to 300 km from a station or resort, then the alpha alone fades to 0.35
+  at 800 km; it only touches remote Alaska).
+* Season length: 16 px per degree (931 by 511 px), 94 KB for the lower 48 and 71 KB for Alaska. Values: `season.length_days`, else the
+  days from a sourced `open_typical` to a sourced `close_typical`, both counted (`heat.season_days`); unsourced values are
+  ignored. The `heat.field` interpolation (decluster 20 km, 8 neighbors) at every 4th pixel, bilinear between. Fade from
+  `heat.season`: full color within 250 km of a resort with data, then a blend into `heat.neutral` and down to 0.6
+  opacity by 450 km. States with no resort data (`no_data_states`) keep color only near their border: the share kept
+  falls smoothly from 1 at the border to 0 at `no_data_reach_km` (120 km) past it, measured with a chamfer distance
+  transform from the states with data (`heat.border_distance`). So the southern Plains and the Deep South stay clear.
+* A region without outlines is skipped. Without the NOAA extract the build leaves the snowfall files alone; without
+  `us-states.geojson` it leaves both. The frontend falls back to the browser surface (`map/js/heat.js`) when a manifest
+  is absent or invalid.
+
+### `heat/snowfall-isolines-<region>.geojson` (snowfall isolines, `pipeline/heat.py`)
+```
+{ type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "LineString", coordinates: [[lon, lat], ...] },
+  properties: { value: 200..900, major: boolean, label: boolean, region: "lower48" | "alaska" } }] }   // compact JSON
+```
+* Lines of equal snowfall every `heat.snowfall.isolines.step` (50 in) from `start` (200) to `end` (900), `major` every
+  `major_step` (100). Traced on the same field as the raster with marching squares (`heat.refined_isolines`): in every
+  pixel cell within one step of the lowest level (and its neighbours) the field is resampled `supersample` (4) times
+  finer, the background bilinear and each resort pocket evaluated exactly, so pocket rings come out round. Saddles use
+  the cell mean; segments are joined into lines (closed lines repeat their first point); lines shorter than
+  `min_length_px` (4 raster px) are dropped; Douglas Peucker at `simplify_px` (0.1 raster px); coordinates round to 0.001
+  degree. `label` marks lines at least `label_min_px` (12 raster px) long.
+* About 120 KB for the lower 48 (222 lines) and 13 KB for Alaska; each file must stay under 300 KB.
 
 ### `map-index.json` (Phase 8, written by `pipeline/routes.py`)
 Slim national index the map loads first. Compact JSON, one row per resort as an array in `fields` order:
@@ -155,7 +195,7 @@ Slim national index the map loads first. Compact JSON, one row per resort as an 
 { version, generated_at,                 // copied from resorts.json
   fields: ["id", "name", "tier", "tier_a_status", "facility_type", "state", "cluster_id", "lat", "lon",
            "acres", "size_rank", "climate_available", "detail_available", "webcams_available", "jobs_available",
-           "season_length_days", "snowfall_annual_in", "professionalism_score", "lucrativeness_mid"],
+           "season_length_days", "snowfall_annual_in", "lucrativeness_mid"],
   resorts: [[...], ...] }
 ```
 Every value is copied from `resorts.json` (`acres` is `size.acres.value`; `webcams_available` is `webcams != null`,
@@ -233,20 +273,17 @@ career: {
         // season, then highest confidence (published > reported > estimated), then latest verified_date, then source_id.
         // `reported` rows only come from aggregates of reports.aggregation_min (3)+ approved reports and are never single reports
   private_rate: Sourced | null, private_split: Sourced | null,
-  professionalism: { score: number|null (0..100), status: computed|weights_unset|insufficient_data,
-                     breakdown: [{ component, weight, value, points, source_id }] },   // all six components, always
   lucrativeness: { low, mid, high (USD season savings) | null, status: computed|assumptions_unset|insufficient_data,
                    assumptions: [{ key, value, label }] },
-  stale_fields: string[]   // "pay.<cert_level>", "private_rate", "private_split", "professionalism.<component>"
+  stale_fields: string[]   // "pay.<cert_level>", "private_rate", "private_split"
 }
 ```
 * **Staleness:** a value is stale when its `as_of` / `verified_date` plus `staleness.max_age_months` (18) calendar months is
   before the build date. A value exactly 18 months old is still current.
-* **Professionalism (owner decision 5, 2026-10-13):** the public Professionalism value is `resort.operator_scale.value`
-  (1, 2 or 3), shown only as "1 of 3", "2 of 3" or "3 of 3", with no breakdown, definitions or tooltip text.
-  `resorts.geojson` `professionalism_score` is that value (heat map range 1 to 3). The six component model below stays in
-  code but is unused: `career.professionalism` is still emitted with `status: weights_unset`; do not display it.
-  (Old model: score = 100 × Σ(weight × value) / Σ(weight) over components with a value.)
+* **Professionalism (owner decision, 2026-10-13, later the same day):** removed from the public site. `operator_scale`
+  stays in `data/raw/tier_a` as an internal note; the build drops it, `build_career` emits no professionalism block, and
+  no file in `data/build`, no route stub and no map module names it (`tests/pipeline/test_no_professionalism.py`). The
+  six component model in `pipeline/career.py` stays for the owner's private use only.
 * **Lucrativeness (owner decision 4, 2026-10-13):** season savings before tax, USD.
   season months = `season.length_days` / `days_per_month` (30.4) when sourced, else `default_season_months` (5).
   earnings = hourly × `hours_per_week` (40, standard full time) × season months × `weeks_per_month` (4.33).
@@ -623,7 +660,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
 * Lazy modules: `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only), `detailcontrols.js` (resort
   detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event. The snowfall
-  rasters (`heat/snowfall.json` and its PNGs, about 350 KB) load only when the Snowfall mode is selected.
+  rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
+  Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
   `jobs/postings.json` loads once, only for a resort whose `jobs.feed` is true or a cluster with `jobs_available`
   resorts; `livelinks.js` (about 3 KB gzipped, no Zod) loads with `panel.js`. `search.js` loads on the first focus of
   the search box.
@@ -649,47 +687,72 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   USGS service.
 
 ### Color modes: heat maps
-Lucrativeness, Professionalism, Season length and Snowfall draw a heat map that fills the whole map: the lower 48
-clipped to the state outlines, and Alaska (at its true place, and in the national inset). Values come from the slim
-index (`lucrativeness_mid`, `professionalism_score`, `season_length_days`, `snowfall_annual_in`). Every setting lives
-in `config/definitions.yaml` `heat` and reaches the UI through `definitions.json`.
-* **Ramp** (`heat.ramp`): viridis, its upper 80 percent (`#414487` to `#fde725`, nine stops), a multi hue sequential
-  ramp in the style of a weather map. OKLab lightness rises at every stop (config validation fails otherwise), it reads
-  for red green color blindness, and dark low values keep 2.2:1 against the base `#0a0e14` while high values glow over
-  the muted imagery. One ramp for every mode and for the precomputed rasters.
+Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state
+outlines, and Alaska (at its true place, and in the national inset). Lucrativeness stays disabled until rent data exists
+(item 9). Values come from the slim index (`lucrativeness_mid`, `season_length_days`, `snowfall_annual_in`). Every
+setting lives in `config/definitions.yaml` `heat` and reaches the UI through `definitions.json`.
+* **Classes** (`heat.modes.<mode>`, `scale: classed`): Snowfall and Season length use hard edged classes, so a step of
+  one class is easy to read. Snowfall (owner request 2026-10-13: the most contrast in 180 to 900 in, a 50 in step easy
+  to read, grey for little or no snow): under 24 in is the neutral grey `#666a70` (3.5:1 on the dark base), 24 to 180 in
+  three muted blues, then 15 classes from 180 to 200, 200 to 250 and every 50 in to 850 and up. Their hues sweep cyan,
+  green, yellow, orange, pink and lavender while the lightness alternates between neighbours, so every neighbouring pair
+  from 180 in differs by 11 or more in OKLab (x 100), also under simulated protanopia and deuteranopia, and every class
+  from 180 in keeps 5:1 or more against the dark base `#0a0e14`; inside the lower 48 the raster is opaque, so the muted
+  imagery never mixes into the colors. Season length: classes at 90, 100, 110, 120, 130, 150 and 180 days, multi hue
+  with rising lightness up to 180 and orange above. The tests check these numbers (`tests/pipeline/test_heat.py`).
+* **Ramp** (`heat.ramp`): viridis, its upper 80 percent (`#414487` to `#fde725`, nine stops), for modes without classes
+  (Lucrativeness). OKLab lightness rises at every stop (config validation fails otherwise).
 * **Field** (`heat.field`, `map/js/heat.js` and its Python twin `pipeline/heat.py`): adaptive modified Shepard
   interpolation. Resorts closer than `decluster_km` (20) merge first (mean place, mean value), so a cluster of hills
   counts once and twelve resorts of one value give the same color as one. At a point, take the `neighbors` (8) nearest
   and the distance R to the next one: w = ((R − d) / (R × max(d, `min_distance_km`)))², value = Σ w v / Σ w. A resort's
   weight reaches zero just as it leaves the set, so the surface is continuous everywhere and blends between resorts with
   no gaps. Distances use km per degree at the pixel latitude. The field is solved on every `grid_step_px` (4) pixel and
-  blended bilinearly between, at `px_per_degree` (12, about 7 km), rows evenly spaced in Web Mercator.
-* **Opacity**: from the distance to the nearest resort with data: `max_alpha` (1) within `full_opacity_km` (200), then a
-  smooth fade to `floor_alpha` (0.35) at `fade_end_km` (600) and beyond. It never reaches zero, and density never raises
-  it. The surface is clipped to the region's state outlines with the canvas fill as coverage.
-* **Scales** (`heat.modes`): linear for lucrativeness and season length, with the domain widened to four or fewer round
-  steps (those steps are the legend ticks). Professionalism (owner decision 5) is fixed at 1 to 3 with ticks 1, 2, 3
-  only, values outside the range ignored, and no explanation. Snowfall uses a square root scale from 0, since most of the
-  country gets under 100 in and the mountains up to 700.
-* **Snowfall** draws the precomputed NOAA rasters (`heat/snowfall.json`, see Build outputs) when they load: NOAA NCEI
-  U.S. Climate Normals 1991 to 2020 station values as the background, with each resort's own published
-  `snow.annual_avg_in` as a pocket within `heat.snowfall.pocket_radius_km` (25 km): v = b + g(d) × max(0, resort − b),
-  g(d) = (1 − (d / r)²)², the highest pocket wins, so a pocket only raises the field. Valley stations undercount mountain
-  snow; the pockets put the high snowfall resorts (Alta, Mt Baker, Mammoth, Brighton) back on top. Its attribution "Snowfall
-  normals: NOAA NCEI 1991 to 2020" joins the map attribution control while the mode is on (an empty GeoJSON source
-  carries it, since image sources have no attribution). ERA5 and Open Meteo are never used for this background (their
-  mountain undercount is in `docs/map/climate-validation.md`). Without the rasters, Snowfall draws the resort only field.
+  blended bilinearly between, rows evenly spaced in Web Mercator.
+* **Opacity and fade**: from the distance to the nearest point with data: `max_alpha` (1) within `full_opacity_km`, then
+  a smooth fade to `floor_alpha` at `fade_end_km`; with `fade_to: neutral` the color blends into `heat.neutral` by the
+  same share. Season length uses `heat.season` (250 km, 450 km, 0.6, neutral), so far from resorts the map turns flat
+  grey instead of a dark smudge, and states with no resort data stay clear beyond `no_data_reach_km` (120 km) past their
+  border (Kansas, Nebraska, Oklahoma, Texas and the Deep South). Lucrativeness uses `heat.field`. Density never raises
+  opacity or value.
+* **Snowfall** draws the precomputed NOAA rasters (`heat/snowfall.json`, see Build outputs): NOAA NCEI U.S. Climate
+  Normals 1991 to 2020 station values as the background, with each resort's own published `snow.annual_avg_in` as a
+  pocket within `heat.snowfall.pocket_radius_km` (25 km): v = b + g(d) × max(0, resort − b), g(d) = (1 − (d / r)²)², the
+  highest pocket wins, so a pocket only raises the field. Valley stations undercount mountain snow; the pockets put the
+  high snowfall resorts (Alta, Mt Baker, Mammoth, Brighton) back on top. Its attribution "Snowfall normals: NOAA NCEI 1991
+  to 2020" joins the map attribution control while the mode is on (an empty GeoJSON source carries it, since image
+  sources have no attribution). ERA5 and Open Meteo are never used for this background (their mountain undercount is in
+  `docs/map/climate-validation.md`).
+* **Isolines** (Snowfall only, `heat/snowfall-isolines-<region>.geojson`, loaded with the mode after its manifest; the
+  rasters draw without waiting): one GeoJSON source `heat-iso` with three layers over the heat surface and under the
+  state lines (labels under the resorts): `heat-iso-minor` (thin, from zoom 4.5), `heat-iso-major` (every 100 in, bolder,
+  from the national view) in the dark base color, and `heat-iso-label` ("300 in" images placed along the lines, upright,
+  from zoom 6.5, mountain range zoom). Labels are canvas drawn images (`map.addImage`), since the style has no glyph
+  server. Alaska's lines draw at its true place only; the national inset is too small for them.
+* **Season length** draws the precomputed rasters (`heat/season.json`) of the resorts' sourced season lengths; it has
+  no NOAA credit, since every value is a resort's own sourced fact.
+* **Browser fallback**: when a manifest is absent or invalid, `buildHeat` in `map/js/heat.js` draws the same classes
+  from the slim index in the browser (the Season length fade and the no data state rule included, with a node chamfer
+  distance like the pipeline), at `heat.field.px_per_degree` (12). Measured 2026-10-13 under SwiftShader on a loaded
+  4 core sandbox, real data, click to surface ready: precomputed season rasters 54 to 61 ms (116 to 153 ms at 4x CPU
+  slowdown) against 291 to 345 ms (1.0 to 2.7 s) for the old browser path and 0.5 to 0.8 s (1.2 to 1.6 s) for the new
+  fallback. The first WebGL frame after that is SwiftShader bound (0.3 to 3.7 s).
 * Interpolated values never show as numbers. Tooltips and the panel show only the resorts' sourced values; resorts with
   a null value show as grey dots on top of the surface and add nothing to it.
-* **Legend** (bottom right of the map on wide screens, under the mode buttons on phones): title and units, the ramp
-  bar, numeric ticks placed on the scale, "Resort values: min to max" (sourced values; not for Professionalism), the dot
-  key and the resort count, then "About these colors" (open on wide screens, folded on phones): "Colors between resorts
-  are smoothed estimates. Tooltips and resort pages show only sourced values." plus the fade distance, or for the NOAA
-  rasters "Background: NOAA station normals, 1991 to 2020, with a 25 km pocket of each resort's published snowfall." and
-  the same smoothing note for stations and resorts.
+* **Legend** (bottom right of the map on wide screens, under the mode buttons on phones): title and units, the bar,
+  numeric ticks placed on it, "Resort values: min to max" (sourced values; only for modes without a fixed domain), the
+  dot key and the resort count, then "About these colors" (open on wide screens, folded on phones). Classed bars are
+  hard edged class boxes (`classBoxes` in `heat.js`): each box is as wide as its class spans in value; open end classes
+  take one typical class span (the most common span between breaks), or reach the fixed domain; classes that end at or
+  below `legend_compress_below` take half a typical class each. Snowfall: 0 to 180 in takes 12 percent of the bar and
+  180 to 900 in 88 percent; ticks 0, 180, 300 and every 100 to 800. Season length: ticks 90, 110, 130, 150 and 180.
+  Snowfall adds "Grey: under 24 in, little or no snow" and "Lines every 50 in from 200, bolder every 100". Notes:
+  "Colors between resorts are smoothed estimates. Tooltips and resort pages show only sourced values." plus the fade
+  ("Colors turn grey where the nearest resort with data is more than 250 km away." and "States with no resort data stay
+  clear." for Season length), or for the NOAA rasters "Background: NOAA station normals, 1991 to 2020, with a 25 km
+  pocket of each resort's published snowfall." and the same smoothing note for stations and resorts.
 * Images are MapLibre image sources with linear resampling under the state lines, cluster outlines and resort dots;
-  cluster tints are off in these modes. The browser computes each mode's surface once (cached, about 0.2 s on a
-  desktop; the mask canvas is CPU backed so its read back stays fast).
+  cluster tints are off in these modes. Each mode's surface is computed or fetched once (cached).
 * A mode with no values is disabled and says why ("No resort has snowfall data yet."). Nothing animates, so
   `prefers-reduced-motion` needs no special case.
 
@@ -704,8 +767,8 @@ inset resort opens that resort, both at true coordinates. The national frame (`c
 same inset.
 
 ### Panel changes from the 2026-10-13 owner decisions
-* Professionalism (decision 5): "Professionalism" with "N of 3" from `resort.operator_scale.value`, no badge,
-  breakdown, definition or tooltip; "Not yet rated" without a value. The old breakdown UI is removed.
+* Professionalism: removed from the public site (owner decision, 2026-10-13). The panel, the list and compare views,
+  the route stubs and their meta descriptions show no rating.
 * Lucrativeness (decision 4): the headline is `mid` (top of the posted wage scale), then the range "bottom of the
   scale to top". Assumptions list every `{key, value, label}` except `rent_basis`, `rent_source_id` and
   `season_months_basis`; `tips_season_usd` (null) and `tax` show as statements from their labels. `rent_basis`
@@ -799,7 +862,7 @@ pipeline/
   clusters.py         # cluster assignment and polygon generation
   states.py           # us-atlas to us-states.geojson
   routes.py           # deep link stubs under /map/, data/build/map-index.json
-  career.py           # Phase 4 pay display, staleness, professionalism, lucrativeness
+  career.py           # Phase 4 pay display, staleness, lucrativeness (professionalism model internal only)
   lifts.py            # Phase 5 OpenSkiMap lifts for Tier A resorts
   runs.py             # Trail map: OpenSkiMap runs for Tier A resorts
   housing.py          # Phase 5 housing sites, rent display, detail file assembly
@@ -815,7 +878,7 @@ pipeline/
   jobs.py             # jobs links and employers -> Resort.jobs, jobs/employers.json, empty jobs/postings.json
   jobs_feed.py        # daily open postings from public job board APIs -> jobs/postings.json (GitHub Actions)
   link_check.py       # monthly check of trail map, webcam and jobs links (GitHub Actions issue)
-  heat.py             # Heat maps: snowfall rasters (NOAA normals plus resort pockets), data/build/heat/
+  heat.py             # Heat maps: snowfall rasters and isolines (NOAA normals plus resort pockets), season rasters
   png.py              # Minimal stdlib PNG writer for the heat rasters
   climate/            # Phase 3 ETL (Open Meteo, SNOTEL, density, aggregation); noaa_normals.py (NOAA station normals)
 config/
