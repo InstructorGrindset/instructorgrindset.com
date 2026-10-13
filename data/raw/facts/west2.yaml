@@ -388,6 +388,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: infobox 10 ft converted to inches
+  open_typical:
+    value: 01-05
+    source_id: facts-gapfill2-sri-badger
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early January - late March" (general season); early = 05, mid = 15, late = 25.
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill2-sri-badger
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early January - late March" (general season); early = 05, mid = 15, late = 25.
+  length_days:
+    value: 80
+    source_id: facts-gapfill2-sri-badger
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (01-05 to 03-25)
 - resort_id: badger-pass-ski-area
   acres:
     value: 90
@@ -818,6 +836,26 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 11-26
+    source_id: facts-gapfill2-ots-hilltop
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 11-28 for 2026-27 (this page); phrase "late November - late March" (facts-gapfill2-skiresortcom-hilltop),
+      late = 25.'
+  close_typical:
+    value: 04-02
+    source_id: facts-gapfill2-ots-hilltop
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 04-11 for 2026-27 (this page); phrase "late November - late March" (facts-gapfill2-skiresortcom-hilltop),
+      late = 25.'
+  length_days:
+    value: 128
+    source_id: facts-gapfill2-ots-hilltop
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-26 to 04-02)
 - resort_id: homewood-ski-area
   acres:
     value: 1260
@@ -1007,6 +1045,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 12-25
+    source_id: facts-gapfill2-sri-meany
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "late December - late March" (general season); early = 05, mid = 15, late = 25.
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill2-sri-meany
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "late December - late March" (general season); early = 05, mid = 15, late = 25.
+  length_days:
+    value: 91
+    source_id: facts-gapfill2-sri-meany
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-25 to 03-25)
 - resort_id: mission-ridge
   open_typical:
     value: "11-28"
@@ -1334,6 +1390,19 @@ records:
     confidence: estimated
     note: 'From a search result for this page; page not opened. Median of 4 seasons: about 2018 12-12; 2020-21 12-26 (facts-gapfill-krcr-shasta-dec26); 2023-24 01-10 (facts-gapfill-anc-shasta-jan10); 2024-25
       12-11 (this page). Midpoint of the two middle values.'
+  close_typical:
+    value: 03-12
+    source_id: facts-gapfill2-kdrv-shasta-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 seasons: 2021-22 03-12 (this page); 2025-26 03-10 (facts-gapfill2-krcr-shasta-early); 2019-20 03-15 (facts-gapfill2-anc-shasta-final).
+      All three seasons ended early (low snow, warm weather, COVID 19), so the typical close may be later.'
+  length_days:
+    value: 84
+    source_id: facts-gapfill2-kdrv-shasta-2022
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-19 to 03-12)
 - resort_id: mt-spokane
   close_typical:
     value: "04-12"

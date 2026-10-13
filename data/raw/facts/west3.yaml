@@ -292,6 +292,18 @@ records:
     as_of: '2026-10-13'
     confidence: estimated
     note: 'From a search result for this page; page not opened. Midpoint of 2 seasons: 2023-24 01-14 and 2024-25 12-13 (this page). Natural snow only.'
+  close_typical:
+    value: 03-28
+    source_id: facts-gapfill2-fb-blacktail-2015
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 seasons: 2014-15 closed the weekend before this 03-30 article, Sunday 03-29 (this page); 2025-26 final day Saturday 03-28 (facts-gapfill2-fb-blacktail-2026).'
+  length_days:
+    value: 90
+    source_id: facts-gapfill2-fb-blacktail-2015
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-29 to 03-28)
 - resort_id: bogus-basin
   open_typical:
     value: 11-25
@@ -565,6 +577,24 @@ records:
     as_of: '2026-10-13'
     confidence: estimated
     note: Wikipedia infobox. Skiable acres.
+  open_typical:
+    value: 12-15
+    source_id: facts-gapfill2-sri-littleskihill
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" (general season); early = 05, mid = 15, late = 25.
+  close_typical:
+    value: 03-15
+    source_id: facts-gapfill2-sri-littleskihill
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - mid March" (general season); early = 05, mid = 15, late = 25.
+  length_days:
+    value: 91
+    source_id: facts-gapfill2-sri-littleskihill
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-15 to 03-15)
 - resort_id: lookout-pass
   open_typical:
     value: 12-15
@@ -917,6 +947,24 @@ records:
     as_of: '2026-10-13'
     confidence: estimated
     note: Wikipedia infobox. Average annual snowfall.
+  open_typical:
+    value: 12-15
+    source_id: facts-gapfill2-sri-snowhaven
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - late March" (general season); early = 05, mid = 15, late = 25.
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill2-sri-snowhaven
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - late March" (general season); early = 05, mid = 15, late = 25.
+  length_days:
+    value: 101
+    source_id: facts-gapfill2-sri-snowhaven
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-15 to 03-25)
 - resort_id: snowy-range
   acres:
     value: 250
@@ -967,6 +1015,18 @@ records:
     as_of: '2026-10-13'
     confidence: estimated
     note: 'From a search result for this page; page not opened. One season: 2025-26 Thursday to Sunday operations until 04-12.'
+  open_typical:
+    value: 12-27
+    source_id: facts-gapfill2-kmvt-soldier-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 seasons: 2025-26 opened 01-10 after a late storm (this page); 2024-25 opened Saturday 12-14 (facts-gapfill2-ktvb-soldier-saturday).'
+  length_days:
+    value: 107
+    source_id: facts-gapfill2-kmvt-soldier-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-27 to 04-12)
 - resort_id: tamarack-resort
   acres:
     value: 1100
@@ -1069,6 +1129,18 @@ records:
     confidence: estimated
     note: 'From a search result for this page; page not opened. Median of 3 seasons: 2013-14 daily from 12-26 (this page); 2019-20 01-10 (facts-gapfill-fb-turner-2020); 2022-23 tentative 12-23 (facts-gapfill-tw-turner-2022).
       Volunteer run, weekends.'
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill2-sri-turner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "early December - late March" (general season); early = 05, mid = 15, late = 25.
+  length_days:
+    value: 90
+    source_id: facts-gapfill2-sri-turner
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-26 to 03-25)
 - resort_id: white-pine-resort
   open_typical:
     value: 11-24

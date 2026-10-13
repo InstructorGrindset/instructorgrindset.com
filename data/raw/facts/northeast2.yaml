@@ -568,6 +568,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 12-11
+    source_id: facts-gapfill2-ots-canaan
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-11 for 2026-27.'
+  close_typical:
+    value: 03-07
+    source_id: facts-gapfill2-ots-canaan
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-07 for 2026-27 (same window on facts-gapfill2-ots-canaan-tickets).'
+  length_days:
+    value: 87
+    source_id: facts-gapfill2-ots-canaan
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-11 to 03-07)
 - resort_id: cataloochee-ski-area
   open_typical:
     value: "11-28"
@@ -631,6 +649,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia comparison table (statistics dated September 29, 2019)
+  open_typical:
+    value: 12-15
+    source_id: facts-gapfill2-skiresortcom-cloudmont
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - early March" (general season); early = 05, mid = 15, late = 25.
+  close_typical:
+    value: 03-05
+    source_id: facts-gapfill2-skiresortcom-cloudmont
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: From a search result for this page; page not opened. Phrase "mid December - early March" (general season); early = 05, mid = 15, late = 25.
+  length_days:
+    value: 81
+    source_id: facts-gapfill2-skiresortcom-cloudmont
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-15 to 03-05)
 - resort_id: elk-mountain-ski-resort
   annual_snowfall_in:
     value: 60
@@ -797,6 +833,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: From a search result for this page; page not opened. OnTheSnow projected opening date for 2026 to 27
+  close_typical:
+    value: 04-03
+    source_id: facts-gapfill2-ots-holimont
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One projection: OnTheSnow projected closing 04-03 for 2026-27.'
+  length_days:
+    value: 113
+    source_id: facts-gapfill2-ots-holimont
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-12 to 04-03)
 - resort_id: hunter-mountain
   open_typical:
     value: "11-21"
@@ -943,6 +991,26 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 12-06
+    source_id: facts-gapfill2-ots-mountaincreek
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 12-05 for 2026-27 (this page); snow report window from 12-06 (facts-gapfill2-ots-mountaincreek-report);
+      phrase "mid December - mid March" (facts-gapfill2-skiresortcom-mountaincreek), mid = 15.'
+  close_typical:
+    value: 03-21
+    source_id: facts-gapfill2-ots-mountaincreek
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 03-21 for 2026-27 (this page); snow report window to 03-22 (facts-gapfill2-ots-mountaincreek-report);
+      phrase "mid December - mid March" (facts-gapfill2-skiresortcom-mountaincreek), mid = 15.'
+  length_days:
+    value: 106
+    source_id: facts-gapfill2-ots-mountaincreek
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-06 to 03-21)
 - resort_id: ober-mountain
   annual_snowfall_in:
     value: 9
@@ -994,6 +1062,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  close_typical:
+    value: 03-23
+    source_id: facts-gapfill2-ots-peeknpeak
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-21 for 2026-27 (this page); phrase "mid December - late March" (facts-gapfill2-sri-peeknpeak),
+      late = 25.'
+  length_days:
+    value: 109
+    source_id: facts-gapfill2-ots-peeknpeak
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-05 to 03-23)
 - resort_id: plattekill-mountain-ski-area
   annual_snowfall_in:
     value: 175
@@ -1033,6 +1114,26 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia comparison table (statistics dated December 28, 2023)
+  open_typical:
+    value: 12-12
+    source_id: facts-gapfill2-ots-sapphire
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 4 values: OnTheSnow projection 12-18 (this page); OnTheSnow projection 12-13 (facts-gapfill2-ots-sapphire-report); 2020-21 targeted
+      opening 12-12 (facts-gapfill2-sse-sapphire-target); phrase "mid November - early April" (facts-gapfill2-skiresortcom-sapphire), mid = 15.'
+  close_typical:
+    value: 03-08
+    source_id: facts-gapfill2-ots-sapphire
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 03-07 (this page); OnTheSnow projection 03-08 (facts-gapfill2-ots-sapphire-report); phrase "mid November
+      - early April" (facts-gapfill2-skiresortcom-sapphire), early = 05.'
+  length_days:
+    value: 87
+    source_id: facts-gapfill2-ots-sapphire
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-12 to 03-08)
 - resort_id: seven-springs
   open_typical:
     value: "11-25"
@@ -1115,6 +1216,18 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia comparison table (statistics dated December 11, 2019)
+  close_typical:
+    value: 03-25
+    source_id: facts-gapfill2-ots-sugarmtn
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 OnTheSnow projections: 03-21 (this page) and 03-29 (facts-gapfill2-ots-nc-closing).'
+  length_days:
+    value: 135
+    source_id: facts-gapfill2-ots-sugarmtn
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (11-11 to 03-25)
 - resort_id: swain-ski-and-snowboard-resort
   open_typical:
     value: "12-19"
@@ -1122,6 +1235,19 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: From a search result for this page; page not opened. OnTheSnow projected opening date for 2026 to 27
+  close_typical:
+    value: 03-21
+    source_id: facts-gapfill2-ots-swain
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: OnTheSnow projection 03-28 for 2026-27 (this page); phrase "mid December - mid March" (facts-gapfill2-sri-swain), mid
+      = 15.'
+  length_days:
+    value: 93
+    source_id: facts-gapfill2-ots-swain
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-19 to 03-21)
 - resort_id: the-homestead-ski-area
   annual_snowfall_in:
     value: 50
@@ -1160,6 +1286,24 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 12-26
+    source_id: facts-gapfill2-ots-thunderridge
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One projection: OnTheSnow projected opening 12-26 for 2026-27.'
+  close_typical:
+    value: 03-28
+    source_id: facts-gapfill2-ots-thunderridge
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. One projection: OnTheSnow projected closing 03-28 for 2026-27.'
+  length_days:
+    value: 93
+    source_id: facts-gapfill2-ots-thunderridge
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-26 to 03-28)
 - resort_id: timberline-mountain
   annual_snowfall_in:
     value: 200
@@ -1248,6 +1392,12 @@ records:
     as_of: 2026-10-13
     confidence: estimated
     note: Wikipedia infobox skiable area
+  open_typical:
+    value: 12-15
+    source_id: facts-gapfill2-gfbj-westmtn-2020
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Midpoint of 2 values: planned 2020-21 opening 12-12 (this page); a Saturday 12-19 opening (facts-gapfill2-iloveny-westmtn-1219).'
 - resort_id: whiteface
   open_typical:
     value: "11-21"

@@ -1553,6 +1553,19 @@ records:
     as_of: '2026-10-13'
     confidence: estimated
     note: 'From a search result for this page; page not opened. One season: Dollar Mountain closed 03-22 in 2026, a week ahead of its scheduled end with Dollar Daze; scheduled close taken as 03-29.'
+  open_typical:
+    value: 12-05
+    source_id: facts-gapfill2-mtexpress-dollar-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 values: 2024-25 opened Friday 12-13 (this page); 2018-19 opened on Thanksgiving, 11-22, with Bald Mountain (facts-gapfill2-wrw-sunvalley-2018);
+      phrase "early December - early April" (facts-gapfill2-sri-dollar), early = 05.'
+  length_days:
+    value: 115
+    source_id: facts-gapfill2-mtexpress-dollar-2024
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: computed from typical dates (12-05 to 03-29)
 - resort_id: hidden-valley-pa
   open_typical:
     value: 12-22
@@ -1907,6 +1920,12 @@ records:
     confidence: estimated
     note: From a search result for this page; page not opened. Required training for 2026/2027 is the Instructor Training Course on 11/14 to 11/15, then New Hire Orientation on 11/21 to 11/22 and 12/5 to
       12/6, 8am to 5pm.
+  close_typical:
+    value: 08-02
+    source_id: facts-gapfill2-un-timberline-2026
+    as_of: '2026-10-13'
+    confidence: estimated
+    note: 'From a search result for this page; page not opened. Median of 3 summer closes on this page: 2026 07-19, 2025 08-17 and 2015 08-02. This is the end of lift served summer skiing on the Palmer Snowfield.'
 - resort_id: whitefish-mountain
   open_typical:
     value: 12-04
