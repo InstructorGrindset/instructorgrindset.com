@@ -136,14 +136,24 @@ same Zod schema as `resorts.json` and renders the resort without waiting for the
 ### `climate/{resort_id}.json` (Phase 3, lazy loaded per resort)
 ```
 { version, generated_at, resort_id,
-  source_ids: string[], period: { start_year, end_year },
+  source_ids: string[], confidence: "estimated",
+  snowfall_null_reason: string | null,          // why snowfall values are null; required when every month is null
+  period: { start_year, end_year },             // Oct 1 of start_year to Sep 30 of end_year
   months: ClimateMonth[12] }   // ordered by ski season: Oct, Nov, Dec, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep
 ClimateMonth { resort_id, month (1..12), snowfall_in, powder_days, banner_days, avg_storm_depth_in,
+               snowfall_source: "snotel_swe" | "era5" | null,   // covers the four snowfall fields
                density_pct_median, density_mix: { dry, average, moist },   // fractions summing to 1, or null
                density_source: "snotel" | "estimated" | null,
                temp_high_f, temp_low_f, wind_mph, sun_pct }
 ```
-Monthly values are climatological means over `period`; `powder_days` and `banner_days` are mean days per month. Climate values are modeled (ERA5 reanalysis and SNOTEL derived), so the UI treats them as confidence `estimated`, with `as_of` equal to the climate file's `generated_at` and sources from `source_ids`.
+Monthly values are climatological means over `period`; `powder_days` and `banner_days` are mean days per month. Climate values are modeled (ERA5 reanalysis and SNOTEL derived), so every file carries `confidence: "estimated"`; the UI uses `as_of` equal to the file's `generated_at` and sources from `source_ids`.
+
+Snowfall sources (`snowfall_source`), in order of preference:
+* `snotel_swe`: daily new snow at the chosen NRCS SNOTEL station, from daily SWE gains divided by new snow density, never below the daily depth gain. Values describe the station elevation.
+* `era5`: Open Meteo ERA5 daily snowfall, used only without a usable station and only for low relief resorts or where the ERA5 grid cell height is close to the resort base (thresholds in `config/definitions.yaml` `climate`).
+* `null`: no source fits, or the derived annual total is more than `climate.validation_suppress_pct` from the published `Resort.snow.annual_avg_in`. When `snowfall_in` is null, `powder_days`, `banner_days` and `avg_storm_depth_in` are null too. Temperatures, wind, sun and density stay.
+
+`climate/provenance.json` (`{ version, generated_at, resorts: { id: {...} } }`) records the ERA5 grid cell, the SNOTEL station and how it was chosen, QC counts and the validation result per resort. `docs/map/climate-validation.md` is generated from it.
 
 ## Phase 4 career
 

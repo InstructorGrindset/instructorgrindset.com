@@ -254,3 +254,16 @@ def test_get_json_persistent_429_raises_rate_limited(monkeypatch):
     with pytest.raises(http.RateLimited, match="Hourly") as e:
         http.get_json("https://example.org/x", retries=2)
     assert not e.value.daily
+
+
+def test_grid_elevation_fetch_disables_downscaling_and_caches(tmp_path, fake_api):
+    locs = [Location("a", 39.6, -106.35), Location("b", 40.5, -111.6)]
+    out = open_meteo.fetch_grid_elevations(locs, tmp_path)
+    assert out == {"a": 2500.0, "b": 2500.0}
+    calls = [p for u, p in fake_api.calls if u == open_meteo.ARCHIVE_URL]
+    assert len(calls) == 1 and calls[0]["elevation"] == "nan,nan"
+    assert calls[0]["start_date"] == calls[0]["end_date"]
+    open_meteo.fetch_grid_elevations(locs, tmp_path)
+    assert fake_api.count(open_meteo.ARCHIVE_URL) == 1
+    assert open_meteo.cached_grid_elevation_m(tmp_path, Location("a", 39.7, -106.35)) is None  # moved resort
+    assert request_weight(50, 1, 1) == 50.0

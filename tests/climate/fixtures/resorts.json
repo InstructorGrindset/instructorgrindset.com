@@ -12,6 +12,14 @@
       "elevation": {
         "base_ft": null,
         "summit_ft": null
+      },
+      "snow": {
+        "annual_avg_in": {
+          "value": 300,
+          "source_id": "synthetic-published-snow",
+          "as_of": "2026-10-11",
+          "confidence": "published"
+        }
       }
     },
     {
@@ -21,7 +29,28 @@
       "lat": 40.5,
       "lon": -111.6,
       "state": "UT",
-      "elevation": null
+      "elevation": {
+        "base_ft": {
+          "value": 3000,
+          "source_id": "synthetic-test-source",
+          "as_of": "2026-10-11",
+          "confidence": "published"
+        },
+        "summit_ft": {
+          "value": 4000,
+          "source_id": "synthetic-test-source",
+          "as_of": "2026-10-11",
+          "confidence": "published"
+        }
+      },
+      "snow": {
+        "annual_avg_in": {
+          "value": 260,
+          "source_id": "synthetic-published-snow",
+          "as_of": "2026-10-11",
+          "confidence": "published"
+        }
+      }
     },
     {
       "id": "lonely-hill",
@@ -30,7 +59,8 @@
       "lat": 44.0,
       "lon": -100.0,
       "state": "SD",
-      "elevation": null
+      "elevation": null,
+      "snow": null
     },
     {
       "id": "banded-bowl",
@@ -49,6 +79,14 @@
         "summit_ft": {
           "value": 11500,
           "source_id": "synthetic-test-source",
+          "as_of": "2026-10-11",
+          "confidence": "published"
+        }
+      },
+      "snow": {
+        "annual_avg_in": {
+          "value": 150,
+          "source_id": "synthetic-published-snow",
           "as_of": "2026-10-11",
           "confidence": "published"
         }

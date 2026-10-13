@@ -14,6 +14,7 @@ def month(m, **over):
         "powder_days": 3.2,
         "banner_days": 0.8,
         "avg_storm_depth_in": 7.5,
+        "snowfall_source": "snotel_swe",
         "density_pct_median": 8.1,
         "density_mix": {"dry": 0.3, "average": 0.5, "moist": 0.2},
         "density_source": "snotel",
@@ -32,6 +33,8 @@ def full_file():
         "generated_at": "2026-10-11T12:00:00+00:00",
         "resort_id": "test-peak",
         "source_ids": ["open-meteo-era5-archive", "nrcs-snotel-9001-co"],
+        "confidence": "estimated",
+        "snowfall_null_reason": None,
         "period": {"start_year": 2001, "end_year": 2026},
         "months": [
             month(m)
@@ -46,9 +49,11 @@ def test_full_climate_file_validates():
     f = ClimateFile.model_validate(full_file())
     assert [m.month for m in f.months] == list(SEASON_MONTH_ORDER)
     dumped = f.model_dump(mode="json")
-    assert set(dumped) == {"version", "generated_at", "resort_id", "source_ids", "period", "months"}
+    assert set(dumped) == {
+        "version", "generated_at", "resort_id", "source_ids", "confidence", "snowfall_null_reason", "period", "months"
+    }
     assert set(dumped["months"][0]) == {
-        "resort_id", "month", "snowfall_in", "powder_days", "banner_days", "avg_storm_depth_in",
+        "resort_id", "month", "snowfall_in", "powder_days", "banner_days", "avg_storm_depth_in", "snowfall_source",
         "density_pct_median", "density_mix", "density_source", "temp_high_f", "temp_low_f",
         "wind_mph", "sun_pct",
     }
@@ -124,5 +129,31 @@ def test_period_and_sources():
         ClimateFile.model_validate(data)
     data = full_file()
     data["source_ids"] = ["Open Meteo"]
+    with pytest.raises(ValidationError):
+        ClimateFile.model_validate(data)
+
+
+def test_snowfall_source_rules():
+    with pytest.raises(ValidationError, match="needs a snowfall_source"):
+        ClimateMonth.model_validate(month(1, snowfall_source=None))
+    with pytest.raises(ValidationError, match="snowfall_in is null"):
+        ClimateMonth.model_validate(month(1, snowfall_in=None))
+    with pytest.raises(ValidationError, match="need snowfall_in"):
+        ClimateMonth.model_validate(month(1, snowfall_in=None, snowfall_source=None))
+    ok = month(1, snowfall_in=None, snowfall_source=None, powder_days=None, banner_days=None, avg_storm_depth_in=None)
+    ClimateMonth.model_validate(ok)
+    with pytest.raises(ValidationError):
+        ClimateMonth.model_validate(month(1, snowfall_source="model"))
+
+
+def test_all_null_snowfall_needs_reason_and_confidence_required():
+    data = full_file()
+    for m in data["months"]:
+        m.update(snowfall_in=None, snowfall_source=None, powder_days=None, banner_days=None, avg_storm_depth_in=None)
+    with pytest.raises(ValidationError, match="snowfall_null_reason"):
+        ClimateFile.model_validate(data)
+    data["snowfall_null_reason"] = "ERA5 grid cell sits 2,077 ft below the resort base"
+    ClimateFile.model_validate(data)
+    del data["confidence"]
     with pytest.raises(ValidationError):
         ClimateFile.model_validate(data)

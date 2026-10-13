@@ -7,10 +7,17 @@ Contract: docs/map/ARCHITECTURE.md, section ``climate/{resort_id}.json``.
       months: ClimateMonth[12] }   // Oct, Nov, Dec, Jan, ..., Sep
 
     ClimateMonth { resort_id, month (1..12), snowfall_in, powder_days, banner_days,
-                   avg_storm_depth_in, density_pct_median,
+                   avg_storm_depth_in, snowfall_source: "snotel_swe" | "era5" | null,
+                   density_pct_median,
                    density_mix: { dry, average, moist } | null,
                    density_source: "snotel" | "estimated" | null,
                    temp_high_f, temp_low_f, wind_mph, sun_pct }
+
+File level: ``confidence`` ("estimated" for every climate file) and
+``snowfall_null_reason`` (why snowfall values are null, or null).
+
+``snowfall_source`` covers snowfall_in, powder_days, banner_days and
+avg_storm_depth_in. When snowfall_in is null, the other three are null too.
 
 ``period`` holds calendar years: data runs from October 1 of ``start_year``
 through September 30 of ``end_year``, so the file averages
@@ -58,6 +65,7 @@ class ClimateMonth(_Strict):
     powder_days: Optional[float] = Field(default=None, ge=0, le=31)
     banner_days: Optional[float] = Field(default=None, ge=0, le=31)
     avg_storm_depth_in: Optional[float] = Field(default=None, ge=0)
+    snowfall_source: Optional[Literal["snotel_swe", "era5"]] = None
     density_pct_median: Optional[float] = Field(default=None, gt=0, le=100)
     density_mix: Optional[DensityMix] = None
     density_source: Optional[Literal["snotel", "estimated"]] = None
@@ -73,6 +81,13 @@ class ClimateMonth(_Strict):
             raise ValueError("density values need a density_source")
         if not has_density and self.density_source is not None:
             raise ValueError("density_source is set but there are no density values")
+        if self.snowfall_in is None:
+            if self.snowfall_source is not None:
+                raise ValueError("snowfall_source is set but snowfall_in is null")
+            if any(v is not None for v in (self.powder_days, self.banner_days, self.avg_storm_depth_in)):
+                raise ValueError("powder_days, banner_days and avg_storm_depth_in need snowfall_in")
+        elif self.snowfall_source is None:
+            raise ValueError("snowfall_in needs a snowfall_source")
         if (
             self.powder_days is not None
             and self.banner_days is not None
@@ -104,6 +119,8 @@ class ClimateFile(_Strict):
     generated_at: datetime
     resort_id: str = Field(pattern=_SLUG)
     source_ids: list[str] = Field(min_length=1)
+    confidence: Literal["published", "reported", "estimated"]
+    snowfall_null_reason: Optional[str] = None
     period: ClimatePeriod
     months: list[ClimateMonth] = Field(min_length=12, max_length=12)
 
@@ -124,6 +141,8 @@ class ClimateFile(_Strict):
         order = tuple(m.month for m in self.months)
         if order != SEASON_MONTH_ORDER:
             raise ValueError(f"months must be in season order {SEASON_MONTH_ORDER}, got {order}")
+        if all(m.snowfall_in is None for m in self.months) and not self.snowfall_null_reason:
+            raise ValueError("snowfall_null_reason is required when every month has null snowfall")
         for m in self.months:
             if m.resort_id != self.resort_id:
                 raise ValueError(

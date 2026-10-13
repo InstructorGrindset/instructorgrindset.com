@@ -143,3 +143,18 @@ def test_summit_caps_band_top(stations, settings):
     assert cands[1].elevation_diff_ft == pytest.approx(3800.0)
     # Summit unknown: base + elevation_band_above_ft.
     assert [c.station.triplet for c in select_candidates(39.60, -106.35, 6500.0, stations, settings.snotel, period)] == ["9005:CO:SNTL"]
+
+
+def test_short_record_station_is_skipped(stations, settings):
+    from dataclasses import replace as dc_replace
+
+    from pipeline.climate.snotel import record_seasons
+
+    period = (date(2001, 10, 1), date(2026, 9, 30))
+    new = dc_replace(stations[3], begin_date=date(2022, 8, 24))  # like Atwater, 4 seasons of record
+    assert record_seasons(new, *period) == 4  # seasons starting Oct 2022 through Oct 2025
+    s = dc_replace(settings.snotel, min_record_seasons=10)
+    cands = select_candidates(39.60, -106.35, None, [new, stations[0]], s, period)
+    assert [c.station.triplet for c in cands] == ["9001:CO:SNTL"]
+    # A short test period needs only as many seasons as it has.
+    assert select_candidates(39.60, -106.35, None, [new], s, (date(2023, 10, 1), date(2025, 9, 30)))

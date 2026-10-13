@@ -17,7 +17,8 @@ known, a station must also sit no more than ``elevation_band_below_ft`` below
 the base and no higher than the summit (``elevation.summit_ft``), or no more
 than ``elevation_band_above_ft`` above the base when the summit is unknown.
 With no base elevation, selection is by distance only, and the provenance file
-records which mode was used.
+records which mode was used. A station also needs ``min_record_seasons`` whole
+seasons of record inside the period (from its metadata beginDate and endDate).
 
 Storms: a storm day has a daily snow depth gain of at least
 ``storm_min_daily_depth_gain_in``. Consecutive storm days form a storm. Its
@@ -150,6 +151,16 @@ def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 2 * r * math.asin(math.sqrt(a))
 
 
+def record_seasons(st: Station, start: date, end: date) -> int:
+    """Whole Oct 1 to Sep 30 seasons of the period inside the station's metadata record."""
+    n = 0
+    for season in range(start.year, end.year):
+        s0, s1 = date(season, 10, 1), date(season + 1, 9, 30)
+        if (st.begin_date is None or st.begin_date <= s0) and (st.end_date is None or st.end_date >= s1):
+            n += 1
+    return n
+
+
 def select_candidates(
     lat: float,
     lon: float,
@@ -178,6 +189,8 @@ def select_candidates(
             if st.begin_date and st.begin_date > end:
                 continue
             if st.end_date and st.end_date < start:
+                continue
+            if record_seasons(st, start, end) < min(settings.min_record_seasons, end.year - start.year):
                 continue
         d = haversine_km(lat, lon, st.lat, st.lon)
         if d > settings.radius_km:
@@ -382,6 +395,9 @@ def source_entry(station: Station, accessed: date) -> dict[str, str]:
         "note": (
             "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow "
             "depth gain per storm, after quality control; settlement during storms makes densities "
-            "lean slightly high."
+            "lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain "
+            "divided by new snow density (the station's monthly median storm density, else the "
+            "Anderson 1976 temperature estimate), never below the daily depth gain, as new snow "
+            "depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
         ),
     }

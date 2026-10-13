@@ -484,6 +484,76 @@ def _fetch_batch(
         _write_cache(cache_dir, data)
 
 
+GRID_ELEVATION_FILE = "_grid_elevation.json"
+
+
+def load_grid_elevations(cache_dir: Path) -> dict[str, Any]:
+    path = Path(cache_dir) / GRID_ELEVATION_FILE
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except ValueError:
+        return {}
+
+
+def cached_grid_elevation_m(cache_dir: Path, loc: Location) -> Optional[float]:
+    row = load_grid_elevations(cache_dir).get(loc.resort_id)
+    if not row or abs(row["latitude"] - loc.lat) > 1e-6 or abs(row["longitude"] - loc.lon) > 1e-6:
+        return None
+    return row.get("grid_elevation_m")
+
+
+def fetch_grid_elevations(
+    locations: Iterable[Location],
+    cache_dir: Path,
+    budget: Optional[WeightBudget] = None,
+    batch_size: int = 50,
+) -> dict[str, Optional[float]]:
+    """Mean ERA5 grid cell height (m) per location, cached.
+
+    ``elevation=nan`` disables downscaling, so the response ``elevation`` is the
+    average grid cell height (docs: "If &elevation=nan is specified, downscaling
+    will be disabled and the API uses the average grid-cell height"). One day of
+    one variable weighs one call per location.
+    """
+    cache_dir = Path(cache_dir)
+    data = load_grid_elevations(cache_dir)
+    todo = [l for l in locations if cached_grid_elevation_m(cache_dir, l) is None]
+    day = "2020-01-01"
+    for i in range(0, len(todo), batch_size):
+        batch = todo[i : i + batch_size]
+        if budget is not None:
+            budget.acquire(float(len(batch)))
+        payload = http.get_json(
+            ARCHIVE_URL,
+            {
+                "latitude": ",".join(f"{l.lat:.5f}" for l in batch),
+                "longitude": ",".join(f"{l.lon:.5f}" for l in batch),
+                "elevation": ",".join("nan" for _ in batch),
+                "start_date": day,
+                "end_date": day,
+                "daily": "temperature_2m_max",
+                "models": MODEL,
+            },
+        )
+        rows = payload if isinstance(payload, list) else [payload]
+        fetched_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        for loc, row in zip(batch, rows):
+            data[loc.resort_id] = {
+                "latitude": loc.lat,
+                "longitude": loc.lon,
+                "grid_latitude": row.get("latitude"),
+                "grid_longitude": row.get("longitude"),
+                "grid_elevation_m": row.get("elevation"),
+                "fetched_at": fetched_at,
+            }
+        path = cache_dir / GRID_ELEVATION_FILE
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(data, indent=1), encoding="utf-8")
+    return {l.resort_id: cached_grid_elevation_m(cache_dir, l) for l in locations}
+
+
 def preflight() -> None:
     """Cheapest possible request (one location, one day, one variable). Raises NetworkBlocked."""
     day = (date.today() - timedelta(days=30)).isoformat()
