@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T15:52:10Z",
+  "generated_at": "2026-10-13T16:30:32Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -834,7 +834,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://alpinevalleyohio.com/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-alpine-valley-oh",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "webcams": null,
       "jobs": {
         "links": [
@@ -1033,6 +1041,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-alpine-valley-cert-2026",
         "pay-vail-alpine-valley-noncert-2026",
+        "tmo-alpine-valley-oh",
         "vail-10k-fy2026",
         "wikipedia-alpine-valley-ski-area-ohio"
       ]
@@ -8862,7 +8871,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://skiblackmountain.org/maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-black-mountain-maine",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "webcams": null,
       "jobs": {
         "links": [
@@ -8970,6 +8987,7 @@
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
         "openskimap-ski-areas",
+        "tmo-black-mountain-maine",
         "wikipedia-black-mountain-of-maine"
       ]
     },
@@ -29977,7 +29995,15 @@
         "confidence": "estimated",
         "note": "List row only. Bloomington location from wikipedia-hyland-hills-ski-area. No Metro Transit stop at the ski area confirmed; a search found route 538 serving Normandale Community College in Bloomington."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.threeriversparks.org/page/hyland-hills-ski-runs-terrain-park",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-hyland-hills",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "Hosted by Three Rivers Park District, which owns and operates the ski area."
+      },
       "webcams": null,
       "jobs": null,
       "season": {
@@ -30041,6 +30067,7 @@
         "ed-east-wikipedia-hyland-hills-ski-area",
         "facts-gapfill-sri-hyland",
         "facts-midwest-wiki-comparison",
+        "tmo-hyland-hills",
         "wikipedia-hyland-hills-ski-area"
       ]
     },
@@ -36169,7 +36196,15 @@
         "confidence": "estimated",
         "note": "From a search result for this page; page not opened. A 2014 report; the 2025 to 2026 valley map found in search shows Sugarbush routes, and a current Mad River Glen stop was not confirmed."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.madriverglen.com/trail-maps/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mad-river-glen",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "webcams": {
         "cams_page": {
           "url": "https://www.madriverglen.com/?Page=cams.html",
@@ -36368,6 +36403,7 @@
         "jobs-mad-river-glen-employment",
         "jobs-skiracing-job-board",
         "pay-east-mrg-adult-ski-school",
+        "tmo-mad-river-glen",
         "webcams-mad-river-glen-search",
         "wikipedia-mad-river-glen"
       ]
@@ -39642,7 +39678,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article or the Mountain Line article."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://montanasnowbowl.com/trailmap.html",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-montana-snowbowl",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "webcams": {
         "cams_page": {
           "url": "https://www.montanasnowbowl.com/base-web-cam/",
@@ -39760,6 +39804,7 @@
         "jobs-skiracing-job-board",
         "jobs-snowbowl-working",
         "openskimap-ski-areas",
+        "tmo-montana-snowbowl",
         "webcams-montana-snowbowl-search",
         "wikipedia-montana-snowbowl"
       ]
@@ -55948,7 +55993,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article or the Silverton, Colorado article."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://silvertonmountain.com/mountain/trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-silverton-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "webcams": null,
       "jobs": {
         "links": [
@@ -56056,6 +56109,7 @@
         "jobs-silverton-employment",
         "jobs-skiracing-job-board",
         "openskimap-ski-areas",
+        "tmo-silverton-mountain",
         "wikipedia-silverton-mountain"
       ]
     },

@@ -734,9 +734,10 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
 * **Browser fallback**: when a manifest is absent or invalid, `buildHeat` in `map/js/heat.js` draws the same classes
   from the slim index in the browser (the Season length fade and the no data state rule included, with a node chamfer
   distance like the pipeline), at `heat.field.px_per_degree` (12). Measured 2026-10-13 under SwiftShader on a loaded
-  4 core sandbox, real data, click to surface ready: precomputed season rasters 54 to 61 ms (116 to 153 ms at 4x CPU
-  slowdown) against 291 to 345 ms (1.0 to 2.7 s) for the old browser path and 0.5 to 0.8 s (1.2 to 1.6 s) for the new
-  fallback. The first WebGL frame after that is SwiftShader bound (0.3 to 3.7 s).
+  4 core sandbox, real data, click to surface ready: precomputed season rasters 39 to 61 ms (109 to 383 ms at 4x CPU
+  slowdown) against 215 to 387 ms (0.9 to 2.7 s) for the old browser path and 0.5 to 0.8 s (1.2 to 1.6 s) for the new
+  fallback. Click to drawn layer: 0.7 to 2.1 s (1.7 to 2.9 s) against 2.0 to 4.0 s (2.5 to 3.4 s) before; the first
+  WebGL frame is SwiftShader bound.
 * Interpolated values never show as numbers. Tooltips and the panel show only the resorts' sourced values; resorts with
   a null value show as grey dots on top of the surface and add nothing to it.
 * **Legend** (bottom right of the map on wide screens, under the mode buttons on phones): title and units, the bar,
