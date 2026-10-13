@@ -152,7 +152,7 @@ async function axe(browser, base) {
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
     if (c.trail) {
-      await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
+      await page.locator('#panel-content button', { hasText: 'Open the interactive map' }).click();
       await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded(); }, null, { timeout: 30000 });
       await page.locator('.trailmap-runs summary').click();
       await page.waitForTimeout(300);

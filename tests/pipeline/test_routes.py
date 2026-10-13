@@ -474,3 +474,17 @@ def test_embedded_sources_follow_the_record(site: Path):
     import re as _re
     raw = _re.search(r'id="resort-record">(.*?)</script>', read(site, "co/front/alpha-peak"), _re.S).group(1)
     assert [s["id"] for s in json.loads(raw)["sources"]] == ["test-src"]
+
+
+def test_resort_page_links_the_official_trail_map(site: Path):
+    resorts, clusters, states = default_data()
+    resorts[0]["official_trailmap"] = {"url": "https://www.alpha.example.com/trail-map.pdf", "format": "pdf", "season": "2025/26",
+                                       "source_id": "test-src", "as_of": "2026-10-13", "confidence": "estimated"}
+    resorts[1]["official_trailmap"] = {"url": "javascript:alert(1)", "format": "page"}
+    write_build(site, resorts, clusters, states)
+    generate_routes(site)
+    body = _prerender(read(site, "co/front/alpha-peak"))
+    assert ('<a class="official-trailmap-link" href="https://www.alpha.example.com/trail-map.pdf" target="_blank" '
+            'rel="noopener noreferrer">Official trail map from Alpha Peak</a>') in body
+    assert "PDF · 2025/26 season · opens in a new tab" in body
+    assert "official-trailmap" not in _prerender(read(site, "co/front/bravo-bowl"))

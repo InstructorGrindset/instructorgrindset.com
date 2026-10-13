@@ -67,6 +67,8 @@ Resort {
   climate_available: boolean,                      // true when climate/<id>.json exists
   detail_available: boolean,                       // true when detail/<id>.json exists (Phase 5)
   trailmap_available: boolean,                     // true when trailmap/<id>.json exists (Trail map)
+  official_trailmap: { url, format: pdf|jpg|png|page, season: "2025/26" | null, source_id, as_of, confidence, note } | null,
+                                                   // link to the resort's own official trail map (Official trail maps)
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
   sources: string[]                                // every source_id referenced by this resort
 }
@@ -285,6 +287,25 @@ Build outputs:
 * **Lifts:** extract features carry `{ id, name, ref, lift_type, ski_area_ids }`; only `status: operating` lifts. Detail lifts carry exactly `{ name, lift_type, source_id }`. `name` may be null in OpenStreetMap.
 * **Detail files** are written compact; files for resorts that no longer qualify are removed. `housing_summary.cheapest_rent_monthly_low` uses published or reported site rents (never the baseline); `has_transit` is true when the detail file has transit.
 
+## Official trail maps (links only)
+
+Official trail maps are copyrighted art owned by the resorts or their artists (James Niehues and others). The site
+links to them in a new tab and never downloads, vendors, rehosts, hotlinks or embeds them.
+* Raw input `data/raw/trailmaps_official/<batch>.yaml` (see its README): `{ batch, researched_date, sources: [Source],
+  trailmaps: [{ resort_id, url, format: pdf|jpg|png|page, season ("2025/26" or null), source_id, as_of, confidence,
+  note? }] }`, validated by `pipeline/schemas/trailmaps_official.py` and loaded by `pipeline/trailmaps_official.py`.
+* Rules: https only; the url's domain (last two labels) equals its source's, which must be the resort's or its
+  operator's own site; pdf, jpg and png need that file extension and page must not be a file; season only when the
+  source names it; one record per resort. URLs found by web search follow the search result rule (source note "From a
+  search result for this page; page not opened", confidence `estimated`).
+* Build output: `Resort.official_trailmap` (the record without `resort_id`); its source joins `resort.sources`.
+  Route stubs prerender the link. The panel shows "Official trail map from <resort name>" with the format and season;
+  the trail map dialog shows the same link next to "Interactive map from OpenSkiMap".
+* 2026-10-13 batch: 96 Tier A resorts from 19 searches (multi domain queries; the Vail Resorts pattern
+  `/the-mountain/about-the-mountain/trail-map(s).aspx` was guessed once and every URL was seen in a result). Still
+  without a link: Alpine Valley (OH), Alta (winter), Black Mountain (ME), Burke, Hermitage Club, Hyland Hills, Mad River
+  Glen, Montana Snowbowl, Saskadena Six, Silverton, Yellowstone Club, and the training and indoor facilities.
+
 ## Trail map (OpenSkiMap runs)
 
 ### Raw input
@@ -434,7 +455,9 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
    ("Tap to explore the map" on touch screens). It is a picture only.
 3. Owner decision 9 (2026-10-13): the WebGL map starts on the first click or tap over the picture, or Enter or Space
    on the button. Then MapLibre runs (it was preloaded), `map.js` builds the map (workers prewarmed first), the
-   picture and button go when MapLibre fires `load`, and focus moves to the map canvas. Every view waits for the
+   picture and button go as soon as the data layers have drawn (the style plus the states, clusters and resorts
+   sources; `mapCtl.whenReady`, mark `careermap:map`), and focus moves to the map canvas. MapLibre's own `load` also
+   waits for every imagery tile, so it never gates readiness: tiles that hang or fail leave the plain dark base. Every view waits for the
    click, deep links included; in app navigation before the click redraws the picture for the new view.
 4. `resorts.json`, `sources.json` and `definitions.json` (`index.loadDetails()`) load when the page is idle after
    the window `load` event, or at once when a resort or comparison view needs them. After the WebGL `load`: the color
@@ -518,7 +541,7 @@ same inset.
   "Try again" button that resends the same report. Submitted values never render.
 
 ### Trail map dialog (`map/js/trailmap.js`)
-* Opened from "Open the trail map" in the resort panel and from a map control (mountain icon under the zoom buttons)
+* Labelled "Interactive map from OpenSkiMap" and titled "<resort> interactive map". Opened from "Open the interactive map" in the resort panel and from a map control (mountain icon under the zoom buttons)
   on resort views whose record has `trailmap_available`. The module, `trailmap/<id>.json` (validated with
   `TrailMapFile` and per feature `RunFeature` and `LiftFeature` in `schemas.js`) and MapLibre load on first open.
 * A native modal `<dialog>`: the page behind is inert, Tab cycles inside, Escape, the Close button and a backdrop click

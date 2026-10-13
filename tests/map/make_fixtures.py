@@ -245,6 +245,10 @@ def resort_record(row):
     if rid in OPERATOR_SCALE:
         record["operator_scale"] = {"value": OPERATOR_SCALE[rid], "source_id": "fixture-ownership", "as_of": AS_OF,
                                     "confidence": "published", "note": "synthetic internal note"}
+    if rid == "alpha-peak":
+        record["official_trailmap"] = {"url": "https://example.com/fixture/alpha-peak-trail-map-2025-26.pdf", "format": "pdf",
+                                       "season": "2025/26", "source_id": "fixture-resort-site", "as_of": AS_OF,
+                                       "confidence": "estimated", "note": None}
     if rid in ACCESS:
         record["access"] = {"rating": ACCESS[rid][0], "summary_md": ACCESS[rid][1], "source_id": "fixture-location",
                             "as_of": AS_OF, "confidence": "estimated"}

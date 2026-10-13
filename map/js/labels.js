@@ -86,3 +86,6 @@ export const RECOLOR_MODES = [
   { key: 'season', label: 'Season length', prop: 'season_length_days', title: 'Typical season length', unit: 'Days', noun: 'season length' },
   { key: 'snowfall', label: 'Snowfall', prop: 'snowfall_annual_in', title: 'Average snowfall per season', unit: 'Inches per season', noun: 'snowfall' },
 ];
+
+/** Official trail map formats as shown next to the link. */
+export const TRAILMAP_FORMAT = { pdf: 'PDF', jpg: 'JPG image', png: 'PNG image', page: 'Web page' };

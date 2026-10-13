@@ -155,7 +155,7 @@ async function clickMapAt(page, lngLat) {
 // Trail map dialog (map/js/trailmap.js): open, legend, a run hover, focus trap, Escape, reopen with its last view.
 async function trailMapChecks(page, label, file, { shotName, via = 'panel', phone = false, fresh = true, base: home = null } = {}) {
   const tm = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const opener = via === 'control' ? page.locator('.trailmap-ctrl') : page.locator('#panel-content button', { hasText: 'Open the trail map' });
+  const opener = via === 'control' ? page.locator('.trailmap-ctrl') : page.locator('#panel-content button', { hasText: 'Open the interactive map' });
   await opener.waitFor({ timeout: 10000 });
   check(await opener.count() === 1, `${label}: trail map ${via === 'control' ? 'map control' : 'button'} present`);
   await opener.click();
@@ -538,10 +538,20 @@ async function desktop(browser, base) {
   check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('detail-iso-fill', 'visibility')) === 'none', 'drive time toggle hides isochrones');
   await page.locator('#layer-isochrones').check();
   await shot(page, 'desktop-11-detail-pin-selected.png');
+  // Official trail map: a link to the resort's own map (new tab), never an image or frame in the page.
+  const off = page.locator('#panel-content .official-trailmap');
+  check(await off.count() === 1 && (await off.locator('a').innerText()) === 'Official trail map from Alpha Peak'
+    && (await off.locator('a').getAttribute('target')) === '_blank' && /noopener/.test(await off.locator('a').getAttribute('rel'))
+    && (await off.innerText()).includes('PDF · 2025/26 season · opens in a new tab'), 'panel links the official trail map with format and season');
+  check(await page.locator('img[src*="trail-map"], iframe, embed, object').count() === 0, 'the official map is never embedded');
+  check((await page.locator('#panel-content .trailmap-drawn').innerText()).includes('Interactive map from OpenSkiMap'), 'the drawn map is labelled Interactive map from OpenSkiMap');
   const tmFixture = path.join(REPO, 'tests', 'map', 'fixtures', 'trailmap', 'alpha-peak.json');
   await trailMapChecks(page, 'trail map', tmFixture, { shotName: 'desktop-14-trail-map.png', base: [-106.37, 39.64] });
   await trailMapChecks(page, 'trail map from the map control', tmFixture, { via: 'control', fresh: false, base: [-106.37, 39.64] });
   check(await page.locator('.trailmap-runs .run-group').count() >= 5, 'trail map lists runs by trail sign');
+  check(await page.locator('dialog.trailmap-dialog .trailmap-kind').innerText() === 'Interactive map from OpenSkiMap'
+    && await page.locator('dialog.trailmap-dialog .official-trailmap a', { hasText: 'Official trail map from Alpha Peak' }).count() === 1,
+  'the dialog names the drawn map and links the official one');
 
   // Phase 6: reviewed editorial with sources.
   const ed = page.locator('.editorial', { hasText: 'About Alpha Peak' });
@@ -1071,6 +1081,10 @@ async function realData(browser, base) {
         await page.goto(`${base}/map/${r.state.toLowerCase()}/${r.cluster_id}/${r.id}/`);
         await ready(page);
         await mapIdle(page);
+        if (r.official_trailmap) {
+          const href = await page.locator('#panel-content .official-trailmap a').getAttribute('href');
+          check(href === r.official_trailmap.url, `real data ${r.name}: official trail map link (${href})`);
+        }
         await trailMapChecks(page, `real data ${r.name}`, path.join(REPO, 'data', 'build', 'trailmap', `${id}.json`), { shotName: `real-desktop-trail-map-${id}.png`, base: [r.lon, r.lat] });
       }
     }

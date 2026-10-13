@@ -90,6 +90,16 @@ export const Access = z.object({
   confidence: Confidence,
 }).nullish().catch(null).transform((v) => v ?? null);
 
+export const OfficialTrailmap = z.object({
+  url: z.string().regex(/^https:\/\//, 'https link'),
+  format: z.enum(['pdf', 'jpg', 'png', 'page']),
+  season: z.string().nullish().transform((v) => v ?? null),
+  source_id: Slug,
+  as_of: IsoDate,
+  confidence: Confidence,
+  note: z.string().nullish(),
+}).nullish().catch(null).transform((v) => v ?? null);
+
 export const Resort = z.object({
   id: Slug,
   name: z.string().min(1),
@@ -148,6 +158,8 @@ export const Resort = z.object({
   // Owner decision 5: operator scale 1 to 3 (public UI shows the value only).
   operator_scale: sourced(z.number().int().min(1).max(3)).catch(null),
   access: Access,
+  // Link to the resort's own official trail map (never rehosted or embedded). A bad value drops the link only.
+  official_trailmap: OfficialTrailmap,
   housing_summary: z.object({
     site_count: z.number().int().nonnegative().nullish(),
     cheapest_rent_monthly_low: numOrNull,

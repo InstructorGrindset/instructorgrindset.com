@@ -247,8 +247,15 @@ def render_resort(ctx: Ctx, r: dict, c: dict, st: str) -> str:
         tags.append('<span class="tier tier-approved">Approved</span>')
     elif r["tier"] == "A" and r.get("tier_a_status") == "draft":
         tags.append('<span class="tier tier-draft">Draft profile</span>')
+    otm = r.get("official_trailmap") or {}
+    otm_html = ""
+    if str(otm.get("url", "")).startswith("https://"):
+        fmt = {"pdf": "PDF", "jpg": "JPG image", "png": "PNG image", "page": "Web page"}.get(otm.get("format"), "")
+        bits = " · ".join(x for x in (fmt, f"{otm['season']} season" if otm.get("season") else "", "opens in a new tab") if x)
+        otm_html = (f'<p class="official-trailmap"><a class="official-trailmap-link" href="{_esc(otm["url"])}" target="_blank" '
+                    f'rel="noopener noreferrer">Official trail map from {_esc(r["name"])}</a> <span class="fact-meta">{_esc(bits)}</span></p>')
     out = [crumbs, _heading(f"Resort in {c['name']}, {r['state'].upper()}", r["name"]),
-           f'<div class="tier-row">{"".join(tags)}</div>',
+           f'<div class="tier-row">{"".join(tags)}</div>', otm_html,
            f'<dl class="facts">{_sourced(ctx, "Owner", r.get("owner"), str)}</dl>']
     crit = r.get("tier_a_criteria") or []
     if r["tier"] == "A" and crit:

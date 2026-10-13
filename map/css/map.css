@@ -507,3 +507,7 @@ body.map-page { background: var(--bg); }
 .report-form.is-error .form-status { color: #f2a7a7; }
 .access { margin: 0 0 .8rem; }
 .access-summary p { margin: .25rem 0; }
+.trailmap-open .official-trailmap { margin: 0 0 .35rem; }
+.official-trailmap-link { font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.trailmap-drawn { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.trailmap-kind { margin: 0 0 .4rem; font-weight: 600; }

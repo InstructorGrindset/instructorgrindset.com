@@ -534,7 +534,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       trailCtl = {
         onAdd() {
           const btn = h('button', {
-            type: 'button', class: 'trailmap-ctrl', 'aria-haspopup': 'dialog', title: 'Open the trail map', 'aria-label': 'Open the trail map',
+            type: 'button', class: 'trailmap-ctrl', 'aria-haspopup': 'dialog', title: 'Open the interactive map', 'aria-label': 'Open the interactive map',
             onclick: () => onOpen(btn),
           });
           btn.innerHTML = TRAIL_ICON;

@@ -2,7 +2,7 @@
 import { config } from './config.js';
 import { clusterResorts, clusterOrder, loadClimate, loadDetail, facilityCounts } from './data.js';
 import {
-  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, ACCESS_LABEL, tagLabel,
+  FACILITY_LABEL, criterionLabel, facilityPhrase, CERT_LABEL, CERT_LEVELS, RATE_UNIT, ACCESS_LABEL, TRAILMAP_FORMAT, tagLabel,
 } from './labels.js';
 import { hrefFor } from './router.js';
 import {
@@ -61,6 +61,17 @@ export function operatorScale(r) {
   if (o) return o;
   const p = r.career && r.career.professionalism;
   return p ? ok(p.score) : null;
+}
+
+/** "Official trail map from <resort>" link (new tab) with its format and season; null when there is none. */
+export function officialTrailmapLink(r) {
+  const o = r.official_trailmap;
+  const url = o && safeUrl(o.url);
+  if (!url) return null;
+  const bits = [TRAILMAP_FORMAT[o.format] || o.format, o.season ? `${o.season} season` : null, 'opens in a new tab'].filter(Boolean);
+  return h('p', { class: 'official-trailmap' },
+    h('a', { href: url, target: '_blank', rel: 'noopener noreferrer', class: 'official-trailmap-link' }, `Official trail map from ${r.name}`),
+    h('span', { class: 'fact-meta' }, ` ${bits.join(' · ')}`));
 }
 
 export function badge(confidence) {
@@ -324,12 +335,7 @@ export function createPanel(root, index, {
       breadcrumb(view),
       ...heading(eyebrow, r.name),
       h('div', { class: 'tier-row' }, resortTags(r)),
-      r.trailmap_available && onTrailMap
-        ? h('p', { class: 'trailmap-open' }, h('button', {
-          type: 'button', class: 'btn btn-sm btn-ghost', 'aria-haspopup': 'dialog',
-          onclick: (e) => onTrailMap(r, e.currentTarget),
-        }, 'Open the trail map'))
-        : null,
+      trailMaps(r),
       h('dl', { class: 'facts' }, fact('Owner', r.owner, fmt.text)),
     ];
     if (r.tier === 'A' && r.tier_a_criteria.length) {
@@ -400,6 +406,21 @@ export function createPanel(root, index, {
   }
 
   // ── Career (Phase 4) ──
+
+  /** The resort's official trail map (a link, never shown in the page) and the interactive OpenSkiMap drawing. */
+  function trailMaps(r) {
+    const official = officialTrailmapLink(r);
+    const drawn = r.trailmap_available && onTrailMap
+      ? h('button', {
+        type: 'button', class: 'btn btn-sm btn-ghost', 'aria-haspopup': 'dialog',
+        onclick: (e) => onTrailMap(r, e.currentTarget),
+      }, 'Open the interactive map')
+      : null;
+    if (!official && !drawn) return null;
+    return h('div', { class: 'trailmap-open' },
+      official,
+      drawn ? h('p', { class: 'trailmap-drawn' }, drawn, h('span', { class: 'fact-meta' }, ' Interactive map from OpenSkiMap')) : null);
+  }
 
   /** Professionalism (owner decision 5): the operator scale value 1 to 3, shown as the value only. */
   function professionalismBlock(r) {

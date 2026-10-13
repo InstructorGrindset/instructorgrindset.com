@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T02:48:03Z",
+  "generated_at": "2026-10-13T02:49:30Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -377,7 +377,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.aftonalps.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-afton-alps",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -598,6 +606,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-afton-cert-2026",
         "pay-vail-afton-noncert-2026",
+        "tmo-afton-alps",
         "vail-10k-fy2026",
         "wikipedia-afton-alps"
       ]
@@ -1584,7 +1593,15 @@
         "confidence": "estimated",
         "note": "List row only; routes and frequency not stated."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.alyeskaresort.com/mountain/about-trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-alyeska",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-29",
@@ -1792,6 +1809,7 @@
         "facts-gapfill-snowstash-alyeska",
         "facts-west2-adn-alyeska-2024-open",
         "pay-west-alyeska-instructor",
+        "tmo-alyeska",
         "wikipedia-alyeska-resort"
       ]
     },
@@ -2457,7 +2475,15 @@
         "confidence": "estimated",
         "note": "No Summit Stage service to Arapahoe Basin found in the fetched sources; Snowstang serves Denver day skiers, so commuting from Summit County towns is limited."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.arapahoebasin.com/trail-maps/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-arapahoe-basin",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "10-22",
@@ -2716,6 +2742,7 @@
         "facts-west1-wiki-arapahoe-basin",
         "owner-decisions-2026-10-11",
         "pay-alterra-abasin-instructor-2627",
+        "tmo-arapahoe-basin",
         "wikipedia-alterra-mountain-company",
         "wikipedia-arapahoe-basin"
       ]
@@ -3194,7 +3221,15 @@
         "confidence": "published",
         "note": "RFTA history: the Aspen Free Shuttle served the Aspen Skiing Company mountains."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.aspensnowmass.com/four-mountains/aspen-highlands/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-aspen-highlands",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -3410,6 +3445,7 @@
         "facts-west1-aspen-dates-2026-27",
         "facts-west1-aspen-opening-2025",
         "pay-west-aspen-ski-instructor-2627",
+        "tmo-aspen-highlands",
         "wikipedia-aspen-highlands",
         "wikipedia-aspen-skiing-company"
       ]
@@ -3513,7 +3549,15 @@
         "confidence": "published",
         "note": "Aspen Mountain rises directly above the town of Aspen."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.aspensnowmass.com/four-mountains/aspen-mountain/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-aspen-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -3729,6 +3773,7 @@
         "facts-west1-aspen-dates-2026-27",
         "facts-west1-aspen-opening-2025",
         "pay-west-aspen-ski-instructor-2627",
+        "tmo-aspen-mountain",
         "wikipedia-aspen-mountain-ski-area",
         "wikipedia-aspen-skiing-company"
       ]
@@ -3820,7 +3865,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.attitash.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-attitash",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -4045,6 +4098,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-attitash-cert-2026",
         "pay-vail-attitash-noncert-2026",
+        "tmo-attitash",
         "vail-10k-fy2026",
         "wikipedia-attitash-mountain-resort"
       ]
@@ -4860,7 +4914,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.bigbearmountainresort.com/mountain-information/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-bear-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -4941,6 +5003,7 @@
         "facts-west2-bbmr-hours",
         "facts-west2-snowstash-big-bear",
         "owner-decisions-2026-10-11",
+        "tmo-bear-mountain",
         "wikipedia-alterra-mountain-company",
         "wikipedia-bear-mountain-ski-area"
       ]
@@ -5494,7 +5557,15 @@
         "confidence": "published",
         "note": "Gondola fact from wikipedia-beaver-creek-resort."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.beavercreek.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-beaver-creek",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -5716,6 +5787,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-beaver-creek-cert-2026",
         "pay-vail-beaver-creek-noncert-2026",
+        "tmo-beaver-creek",
         "vail-10k-fy2026",
         "wikipedia-beaver-creek-resort"
       ]
@@ -6225,7 +6297,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://berkshireeast.com/plan/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-berkshire-east",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -6310,6 +6390,7 @@
         "ed-east-wikipedia-charlemont-massachusetts",
         "facts-northeast1-ots-ma-close",
         "facts-northeast1-ots-ma-open",
+        "tmo-berkshire-east",
         "wikipedia-berkshire-east-ski-resort"
       ]
     },
@@ -6493,7 +6574,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.jfbb.com/-/aemasset/sitecore/jack-frost-big-boulder/maps/20231103_JFBB_winter-trail_map_002.pdf",
+        "format": "pdf",
+        "season": null,
+        "source_id": "tmo-jack-frost",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "The file name carries an older date; the resort may have a newer map."
+      },
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -6696,6 +6785,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-jack-frost-cert-2026",
         "pay-vail-jack-frost-noncert-2026",
+        "tmo-jack-frost",
         "vail-10k-fy2026",
         "wikipedia-jack-frost-big-boulder"
       ]
@@ -7216,7 +7306,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.bigskyresort.com/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-big-sky",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-23",
@@ -7305,6 +7403,7 @@
         "ed-west-wiki-bozeman-montana",
         "ed-west-wiki-yellowstone-club",
         "facts-gapfill-bigsky-pr-longest",
+        "tmo-big-sky",
         "wikipedia-big-sky-resort",
         "wikipedia-boyne-resorts"
       ]
@@ -9084,7 +9183,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://bogusbasin.org/your-mountain/maps-statistics/",
+        "format": "page",
+        "season": "2024/25",
+        "source_id": "tmo-bogus-basin",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -9162,6 +9269,7 @@
         "ed-west-wiki-bogus-basin",
         "ed-west-wiki-boise-idaho",
         "facts-west3-wp-bogus-basin",
+        "tmo-bogus-basin",
         "wikipedia-bogus-basin"
       ]
     },
@@ -9480,7 +9588,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.bmbw.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-boston-mills",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-18",
@@ -9671,6 +9787,7 @@
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-boston-mills-noncert-2026",
+        "tmo-boston-mills",
         "vail-10k-fy2026",
         "wikipedia-boston-mills-brandywine"
       ]
@@ -10083,7 +10200,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.boynemountain.com/mountain-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-boyne-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -10144,6 +10269,7 @@
         "ed-east-wikipedia-boyne-mountain-resort",
         "facts-midwest-ots-boyne-mountain",
         "facts-midwest-wiki-comparison",
+        "tmo-boyne-mountain",
         "wikipedia-boyne-mountain-resort",
         "wikipedia-boyne-resorts"
       ]
@@ -10235,7 +10361,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.bmbw.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-boston-mills",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -10426,6 +10560,7 @@
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-boston-mills-noncert-2026",
+        "tmo-boston-mills",
         "vail-10k-fy2026",
         "wikipedia-boston-mills-brandywine"
       ]
@@ -10714,7 +10849,15 @@
         "confidence": "published",
         "note": "Gondola fact from wikipedia-breckenridge-ski-resort."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.breckenridge.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-breckenridge",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-07",
@@ -10931,6 +11074,7 @@
         "facts-west1-summitdaily-breck-keystone-2024",
         "owner-decisions-2026-10-11",
         "pay-vail-breckenridge-cert-2026",
+        "tmo-breckenridge",
         "vail-10k-fy2026",
         "wikipedia-breckenridge-ski-resort"
       ]
@@ -11258,7 +11402,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://bridgerbowl.com/mountain/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-bridger-bowl",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -11438,6 +11590,7 @@
         "ed-west-wiki-bridger-bowl-ski-area",
         "facts-gapfill-ebs-bridger-2026",
         "facts-west3-ktvh-bridger-2019",
+        "tmo-bridger-bowl",
         "wikipedia-bridger-bowl-ski-area"
       ]
     },
@@ -11535,7 +11688,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.brightonresort.com/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-brighton",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -11615,6 +11776,7 @@
         "ed-west-wiki-brighton-utah",
         "facts-west1-brighton-opening-2025",
         "facts-west1-fox13-utah-closings-2025",
+        "tmo-brighton",
         "wikipedia-boyne-resorts",
         "wikipedia-brighton-ski-resort"
       ]
@@ -12285,7 +12447,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://buckhill.com/skiing-snowboarding/winter-trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-buck-hill",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -12473,6 +12643,7 @@
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "pay-east-buck-hill-ski-instructor",
+        "tmo-buck-hill",
         "wikipedia-buck-hill"
       ]
     },
@@ -13027,7 +13198,15 @@
         "confidence": "published",
         "note": "RFTA history: the Aspen Free Shuttle served the Aspen Skiing Company mountains."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.aspensnowmass.com/four-mountains/buttermilk/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-buttermilk",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -13243,6 +13422,7 @@
         "facts-west1-aspen-dates-2026-27",
         "facts-west1-aspen-opening-2025",
         "pay-west-aspen-ski-instructor-2627",
+        "tmo-buttermilk",
         "wikipedia-aspen-skiing-company",
         "wikipedia-buttermilk-ski-area",
         "wikipedia-x-games"
@@ -14198,7 +14378,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.cannonmt.com/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-cannon",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -14277,6 +14465,7 @@
         "ed-east-wikipedia-franconia-new-hampshire",
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
+        "tmo-cannon",
         "wikipedia-cannon-mountain-ski-area"
       ]
     },
@@ -16625,7 +16814,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.coppercolorado.com/the-mountain/trail-area-maps/winter-trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-copper-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-07",
@@ -16840,6 +17037,7 @@
         "facts-west1-unofficial-copper-closing-2025",
         "openskimap-ski-areas",
         "pay-west-copper-certified-adult-2627",
+        "tmo-copper-mountain",
         "wikipedia-copper-mountain-colorado",
         "wikipedia-powdr"
       ]
@@ -17373,7 +17571,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://cranmore.com/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-cranmore",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -17455,6 +17661,7 @@
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
         "openskimap-ski-areas",
+        "tmo-cranmore",
         "wikipedia-cranmore-mountain-resort"
       ]
     },
@@ -17738,7 +17945,15 @@
         "confidence": "published",
         "note": "Gunnison article adds that the Gunnison Valley RTA bus serves Crested Butte Mountain Resort."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skicb.com/-/aemasset/sitecore/crested-butte/maps/winter-2025-2026/20251103_CB_winter-trail_map_001.pdf",
+        "format": "pdf",
+        "season": "2025/26",
+        "source_id": "tmo-crested-butte",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -17963,6 +18178,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-crested-butte-cert-2026",
         "pay-vail-crested-butte-noncert-2026",
+        "tmo-crested-butte",
         "vail-10k-fy2026",
         "wikipedia-crested-butte-colorado",
         "wikipedia-crested-butte-mountain-resort"
@@ -18041,7 +18257,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.crotchedmtn.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-crotched-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -18263,6 +18487,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-crotched-cert-2026",
         "pay-vail-crotched-noncert-2026",
+        "tmo-crotched-mountain",
         "vail-10k-fy2026",
         "wikipedia-crotched-mountain-ski-and-ride"
       ]
@@ -18366,7 +18591,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article; access described by highway and parking."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.crystalmountainresort.com/the-mountain/trail-maps",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-crystal-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -18572,6 +18805,7 @@
         "facts-west2-ots-wa-closing",
         "owner-decisions-2026-10-11",
         "pay-alterra-crystal-instructor-pt-2627",
+        "tmo-crystal-mountain",
         "wikipedia-alterra-mountain-company",
         "wikipedia-crystal-mountain-washington"
       ]
@@ -19196,7 +19430,15 @@
         "confidence": "published",
         "note": "High Valley Transit fact from its own Wikipedia article."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.deervalley.com/media-room/101725-updated-trail-map",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-deer-valley",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -19438,6 +19680,7 @@
         "pay-alterra-deervalley-experienced-2627",
         "pay-alterra-deervalley-private-lessons",
         "pay-alterra-deervalley-ski-school-jobs",
+        "tmo-deer-valley",
         "wikipedia-alterra-mountain-company",
         "wikipedia-deer-valley"
       ]
@@ -20175,7 +20418,15 @@
         "confidence": "estimated",
         "note": "List row only; that routes reach Dollar Mountain is inferred."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.sunvalley.com/the-mountain/maps-guides/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-sun-valley",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": null,
         "close_typical": {
@@ -20224,6 +20475,7 @@
         "ed-west-wiki-dollar-mountain",
         "ed-west-wiki-sun-valley-idaho",
         "facts-gapfill-eye-dollar-2026",
+        "tmo-sun-valley",
         "wikipedia-dollar-mountain",
         "wikipedia-sun-valley-idaho"
       ]
@@ -22555,7 +22807,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.grandtarghee.com/the-mountain/mountain-information/trail-maps",
+        "format": "page",
+        "season": "2026/27",
+        "source_id": "tmo-grand-targhee",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -22644,6 +22904,7 @@
         "facts-west3-wp-grand-targhee",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
+        "tmo-grand-targhee",
         "wikipedia-grand-targhee-resort"
       ]
     },
@@ -23502,7 +23763,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.gunstock.com/winter/trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-gunstock",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -23587,6 +23856,7 @@
         "ed-east-wikipedia-gunstock-mountain-resort",
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
+        "tmo-gunstock",
         "wikipedia-gunstock-mountain-resort"
       ]
     },
@@ -24071,7 +24341,15 @@
         "confidence": "estimated",
         "note": "Local bus fact from the South Lake Tahoe article; the district ended its ski shuttles in 2018."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skiheavenly.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-heavenly",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -24284,6 +24562,7 @@
         "facts-west2-wp-heavenly",
         "owner-decisions-2026-10-11",
         "pay-vail-heavenly-cert-2026",
+        "tmo-heavenly",
         "vail-10k-fy2026",
         "wikipedia-heavenly-mountain-resort"
       ]
@@ -25135,7 +25414,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.hiddenvalleyski.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-hidden-valley-mo",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-22",
@@ -25345,6 +25632,7 @@
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-hidden-valley-mo-cert-2026",
+        "tmo-hidden-valley-mo",
         "vail-10k-fy2026",
         "wikipedia-hidden-valley-ski-area-missouri"
       ]
@@ -25428,7 +25716,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.hiddenvalleyresort.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-hidden-valley-pa",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-22",
@@ -25620,6 +25916,7 @@
         "facts-gapfill-triblive-hv-open",
         "owner-decisions-2026-10-11",
         "pay-vail-hidden-valley-pa-cert-2026",
+        "tmo-hidden-valley-pa",
         "vail-10k-fy2026",
         "wikipedia-hidden-valley-resort-pennsylvania"
       ]
@@ -26616,7 +26913,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://steamboatsprings.net/983/Trail-Maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-howelsen-hill",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -26678,6 +26983,7 @@
         "ed-west-wiki-steamboat-springs-colorado",
         "ed-west-wiki-steamboat-springs-winter-sports-club",
         "facts-west1-dircom-howelsen",
+        "tmo-howelsen-hill",
         "wikipedia-howelsen-hill-ski-area",
         "wikipedia-steamboat-springs-winter-sports-club"
       ]
@@ -26940,7 +27246,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.huntermtn.com/-/aemasset/sitecore/hunter/maps/winter-2025-2026/20251122_HU_winter-trail_map_001.pdf",
+        "format": "pdf",
+        "season": "2025/26",
+        "source_id": "tmo-hunter-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -27169,6 +27483,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-hunter-cert-2026",
         "pay-vail-hunter-noncert-2026",
+        "tmo-hunter-mountain",
         "vail-10k-fy2026",
         "wikipedia-hunter-mountain-ski-area"
       ]
@@ -27508,7 +27823,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.jfbb.com/-/aemasset/sitecore/jack-frost-big-boulder/maps/20231103_JFBB_winter-trail_map_002.pdf",
+        "format": "pdf",
+        "season": null,
+        "source_id": "tmo-jack-frost",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "The file name carries an older date; the resort may have a newer map."
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -27711,6 +28034,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-jack-frost-cert-2026",
         "pay-vail-jack-frost-noncert-2026",
+        "tmo-jack-frost",
         "vail-10k-fy2026",
         "wikipedia-jack-frost-big-boulder"
       ]
@@ -27906,7 +28230,15 @@
         "confidence": "published",
         "note": "START was founded to carry skiers between Jackson and the resort and now serves commuters."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.jacksonhole.com/maps/mountain-winter",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-jackson-hole",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -28116,6 +28448,7 @@
         "ed-west-wiki-teton-county-wyoming",
         "facts-gapfill-tgr-jhmr-2425",
         "pay-west-jh-private-lessons",
+        "tmo-jackson-hole",
         "wikipedia-jackson-hole-mountain-resort",
         "wikipedia-jay-kemmerer"
       ]
@@ -28207,7 +28540,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://jaypeakresort.com/skiing-riding/snow-report-maps/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-jay-peak",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -28396,6 +28737,7 @@
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "pay-east-jay-peak-new-instructor",
+        "tmo-jay-peak",
         "wikipedia-jay-peak-resort"
       ]
     },
@@ -28604,7 +28946,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.junemountain.com/mountain-information/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-june-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -28843,6 +29193,7 @@
         "owner-decisions-2026-10-11",
         "pay-alterra-june-ski-certified-2627",
         "pay-alterra-june-ski-noncertified-2627",
+        "tmo-june-mountain",
         "wikipedia-alterra-mountain-company",
         "wikipedia-june-mountain-ski-area"
       ]
@@ -29497,7 +29848,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.keystoneresort.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-keystone",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-01",
@@ -29719,6 +30078,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-keystone-cert-2026",
         "pay-vail-keystone-noncert-2026",
+        "tmo-keystone",
         "vail-10k-fy2026",
         "wikipedia-keystone-resort"
       ]
@@ -29822,7 +30182,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://killington.com/winter-trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-killington",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-11",
@@ -29904,6 +30272,7 @@
         "ed-east-wikipedia-pico-mountain",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
+        "tmo-killington",
         "wikipedia-killington-ski-resort"
       ]
     },
@@ -30116,7 +30485,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article or the Tahoe transit articles; remote highway location."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.kirkwood.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-kirkwood",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -30199,6 +30576,7 @@
         "facts-west2-visitlaketahoe-kirkwood",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
+        "tmo-kirkwood",
         "vail-10k-fy2026",
         "wikipedia-kirkwood-mountain-resort"
       ]
@@ -30758,7 +31136,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.laurelmountainski.com/-/aemasset/sitecore/laurel-mountain/trail-base-maps/20221122_LM_winter-trail_map_001.pdf",
+        "format": "pdf",
+        "season": null,
+        "source_id": "tmo-laurel-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": "The file name carries an older date; the resort may have a newer map."
+      },
       "season": {
         "open_typical": {
           "value": "12-23",
@@ -30947,6 +31333,7 @@
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-laurel-noncert-2026",
+        "tmo-laurel-mountain",
         "vail-10k-fy2026",
         "wikipedia-laurel-mountain-ski-resort"
       ]
@@ -31306,7 +31693,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.libertymountainresort.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-liberty-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-19",
@@ -31533,6 +31928,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-liberty-cert-2026",
         "pay-vail-liberty-noncert-2026",
+        "tmo-liberty-mountain",
         "vail-10k-fy2026",
         "wikipedia-liberty-mountain-resort"
       ]
@@ -33266,7 +33662,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skimadriver.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mad-river-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -33347,6 +33751,7 @@
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
+        "tmo-mad-river-mountain",
         "vail-10k-fy2026",
         "wikipedia-mad-river-mountain"
       ]
@@ -33432,7 +33837,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.magicmtn.com/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-magic-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -33620,6 +34033,7 @@
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "pay-east-magic-lessons",
+        "tmo-magic-mountain",
         "wikipedia-magic-mountain-ski-area"
       ]
     },
@@ -33840,7 +34254,15 @@
         "confidence": "estimated",
         "note": "Gondola and in town location from wikipedia-mammoth-mountain-resort; that town routes reach the base lodges is inferred."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.mammothmountain.com/on-the-mountain/winter-trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mammoth-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-13",
@@ -34080,6 +34502,7 @@
         "owner-decisions-2026-10-11",
         "pay-alterra-mammoth-ski-certified-2627",
         "pay-alterra-mammoth-ski-noncertified-2627",
+        "tmo-mammoth-mountain",
         "wikipedia-alterra-mountain-company",
         "wikipedia-mammoth-mountain-resort"
       ]
@@ -35071,7 +35494,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://middleburysnowbowl.com/trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-middlebury-snow-bowl",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -35259,6 +35690,7 @@
         "ed-east-wikipedia-middlebury-college-snow-bowl",
         "facts-northeast1-skiresort-middlebury",
         "pay-east-middlebury-snow-school-s01439",
+        "tmo-middlebury-snow-bowl",
         "wikipedia-middlebury-college-snow-bowl"
       ]
     },
@@ -36565,7 +36997,15 @@
       },
       "operator_scale": null,
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.mtbohemia.com/trail-maps/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mount-bohemia",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-13",
@@ -36629,6 +37069,7 @@
         "facts-gapfill-ots-bohemia",
         "facts-gapfill-snowstash-bohemia",
         "openskimap-ski-areas",
+        "tmo-mount-bohemia",
         "wikipedia-mount-bohemia"
       ]
     },
@@ -36719,7 +37160,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.mtbrighton.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mount-brighton",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -36799,6 +37248,7 @@
         "facts-gapfill-wilx-brighton-2025",
         "facts-midwest-wiki-comparison",
         "owner-decisions-2026-10-11",
+        "tmo-mount-brighton",
         "vail-10k-fy2026",
         "wikipedia-mount-brighton"
       ]
@@ -38069,7 +38519,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.mountsnow.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mount-snow",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -38300,6 +38758,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-mount-snow-cert-2026",
         "pay-vail-mount-snow-noncert-2026",
+        "tmo-mount-snow",
         "vail-10k-fy2026",
         "wikipedia-mount-snow"
       ]
@@ -38509,7 +38968,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.mountsunapee.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mount-sunapee",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -38730,6 +39197,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-sunapee-cert-2026",
         "pay-vail-sunapee-noncert-2026",
+        "tmo-mount-sunapee",
         "vail-10k-fy2026",
         "wikipedia-mount-sunapee-resort"
       ]
@@ -39310,7 +39778,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.mtbachelor.com/the-mountain/maps/winter-lift-trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mt-bachelor",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -39525,6 +40001,7 @@
         "facts-west2-wp-mount-bachelor",
         "openskimap-ski-areas",
         "pay-west-mtbachelor-instructors-2627",
+        "tmo-mt-bachelor",
         "wikipedia-mount-bachelor-ski-area",
         "wikipedia-powdr"
       ]
@@ -39616,7 +40093,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.mtbaker.us/the-mountain/trail-map/",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-mt-baker",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-03",
@@ -39823,6 +40308,7 @@
         "facts-west2-fox13-wa-openings",
         "facts-west2-wp-mt-baker",
         "pay-west-mtbaker-new-instructor-2627",
+        "tmo-mt-baker",
         "wikipedia-mt-baker-legendary-banked-slalom",
         "wikipedia-mt-baker-ski-area"
       ]
@@ -40335,7 +40821,15 @@
         "confidence": "estimated",
         "note": "The article says many buses serve the area; schedules not stated."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skihood.com/explore/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-mt-hood-meadows",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -40423,6 +40917,7 @@
         "facts-west2-koin-meadows-openings",
         "facts-west2-ots-pnw-closing",
         "owner-decisions-2026-10-11",
+        "tmo-mt-hood-meadows",
         "wikipedia-mount-hood-meadows"
       ]
     },
@@ -41942,7 +42437,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.northstarcalifornia.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-northstar",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -42166,6 +42669,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-northstar-cert-2026",
         "pay-vail-northstar-h2b-level3-dol-2026",
+        "tmo-northstar",
         "vail-10k-fy2026",
         "wikipedia-northstar-california"
       ]
@@ -42873,7 +43377,15 @@
         "confidence": "published",
         "note": "SEVT route 61 Bellows Falls to Okemo shuttle is seasonal; MVRTD runs a winter Rutland to Ludlow connector."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.okemo.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-okemo",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -43077,6 +43589,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-okemo-cert-2026",
         "pay-vail-okemo-noncert-2026",
+        "tmo-okemo",
         "vail-10k-fy2026",
         "wikipedia-okemo-mountain"
       ]
@@ -43522,7 +44035,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.palisadestahoe.com/mountain-information/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-palisades-tahoe",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -43723,6 +44244,7 @@
         "owner-decisions-2026-10-11",
         "pay-alterra-palisades-dol-level3-2627",
         "pay-alterra-palisades-kids-instructor-2627",
+        "tmo-palisades-tahoe",
         "wikipedia-alterra-mountain-company",
         "wikipedia-palisades-tahoe"
       ]
@@ -43814,7 +44336,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.palisadestahoe.com/mountain-information/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-palisades-tahoe",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -43896,6 +44426,7 @@
         "facts-gapfill-inertia-palisades-2026",
         "facts-gapfill-skitalk-tahoe-2223",
         "owner-decisions-2026-10-11",
+        "tmo-palisades-tahoe",
         "wikipedia-alpine-meadows-ski-resort",
         "wikipedia-alterra-mountain-company"
       ]
@@ -43987,7 +44518,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.paolipeaks.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-paoli-peaks",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-12",
@@ -44196,6 +44735,7 @@
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
         "pay-vail-paoli-noncert-2026",
+        "tmo-paoli-peaks",
         "vail-10k-fy2026",
         "wikipedia-paoli-peaks"
       ]
@@ -44304,7 +44844,15 @@
         "confidence": "published",
         "note": "Park City Transit article lists a winter express to Park City Mountain."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.parkcitymountain.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-park-city",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -44525,6 +45073,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-park-city-cert-2026",
         "pay-vail-park-city-h2b-level3-dol-2025",
+        "tmo-park-city",
         "vail-10k-fy2026",
         "wikipedia-park-city-mountain-resort",
         "wikipedia-park-city-utah"
@@ -45232,7 +45781,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://picomountain.com/winter-trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-pico",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-11",
@@ -45295,6 +45852,7 @@
         "ed-east-wikipedia-pico-mountain",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
+        "tmo-pico",
         "wikipedia-killington-ski-resort",
         "wikipedia-pico-mountain"
       ]
@@ -46567,7 +47125,15 @@
         "confidence": "estimated",
         "note": "UTA article lists seasonal buses to Powder Mountain; the Ogden origin and frequency are inferred."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://powdermountain.com/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-powder-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-09",
@@ -46647,6 +47213,7 @@
         "ed-west-wiki-powder-mountain",
         "facts-west1-fox13-utah-closings-2025",
         "facts-west1-kpcw-utah-openings-2025",
+        "tmo-powder-mountain",
         "wikipedia-powder-mountain"
       ]
     },
@@ -48304,7 +48871,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skiroundtop.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-roundtop-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-17",
@@ -48393,6 +48968,7 @@
         "facts-gapfill-ots-roundtop",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
+        "tmo-roundtop-mountain",
         "vail-10k-fy2026",
         "wikipedia-roundtop-mountain-resort"
       ]
@@ -49478,7 +50054,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://schweitzer.com/discover/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-schweitzer",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -49702,6 +50286,7 @@
         "owner-decisions-2026-10-11",
         "pay-alterra-schweitzer-childrens-center-2627",
         "pay-alterra-schweitzer-private-lessons",
+        "tmo-schweitzer",
         "wikipedia-alterra-mountain-company",
         "wikipedia-schweitzer-mountain"
       ]
@@ -49993,7 +50578,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.7springs.com/-/aemasset/sitecore/seven-springs/trail-base-maps/winter-2025-2026/20251205_SN_winter-trail_map_001.pdf",
+        "format": "pdf",
+        "season": "2025/26",
+        "source_id": "tmo-seven-springs",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -50219,6 +50812,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-seven-springs-cert-2026",
         "pay-vail-seven-springs-noncert-2026",
+        "tmo-seven-springs",
         "vail-10k-fy2026",
         "wikipedia-seven-springs-mountain-resort"
       ]
@@ -51921,7 +52515,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skicooper.com/mountain-stats-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-ski-cooper",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-10",
@@ -51999,6 +52601,7 @@
         "ed-west-wiki-leadville-colorado",
         "ed-west-wiki-ski-cooper",
         "facts-west1-skicooper-site",
+        "tmo-ski-cooper",
         "wikipedia-ski-cooper"
       ]
     },
@@ -53393,7 +53996,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skisnowcreek.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-snow-creek",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-26",
@@ -53444,6 +54055,7 @@
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
+        "tmo-snow-creek",
         "vail-10k-fy2026",
         "wikipedia-snow-creek-ski-resort"
       ]
@@ -53934,7 +54546,15 @@
         "confidence": "estimated",
         "note": "Free shuttle fact from wikipedia-snow-summit; that the Red Line stops at Snow Summit is inferred from the shared resort name."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.bigbearmountainresort.com/mountain-information/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-bear-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -54016,6 +54636,7 @@
         "ed-west-wiki-x-games",
         "facts-west2-snowstash-snow-summit",
         "owner-decisions-2026-10-11",
+        "tmo-bear-mountain",
         "wikipedia-alterra-mountain-company",
         "wikipedia-snow-summit"
       ]
@@ -54232,7 +54853,15 @@
         "confidence": "estimated",
         "note": "A single regional route; frequency not stated."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.bigbearmountainresort.com/mountain-information/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-bear-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-19",
@@ -54449,6 +55078,7 @@
         "facts-west2-alpine-mountaineer-snow-valley",
         "owner-decisions-2026-10-11",
         "pay-alterra-snowvalley-apprentice-2627",
+        "tmo-bear-mountain",
         "wikipedia-alterra-mountain-company",
         "wikipedia-snow-valley-mountain-resort"
       ]
@@ -54547,7 +55177,15 @@
         "confidence": "estimated",
         "note": "UTA article lists seasonal buses to Snowbasin; the Ogden origin and frequency are inferred."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.snowbasin.com/the-mountain/trail-maps/",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-snowbasin",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-25",
@@ -54626,6 +55264,7 @@
         "ed-west-wiki-huntsville-utah",
         "ed-west-wiki-snowbasin",
         "facts-west1-wiki-snowbasin",
+        "tmo-snowbasin",
         "wikipedia-snowbasin"
       ]
     },
@@ -54723,7 +55362,15 @@
         "confidence": "published",
         "note": "Sandy, Utah article: the ski route runs from Historic Sandy TRAX station to Alta and Snowbird."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.snowbird.com/lifts-trails/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-snowbird",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-02",
@@ -54920,6 +55567,7 @@
         "ed-west-wiki-powdr",
         "ed-west-wiki-snowbird-utah",
         "facts-west1-kpcw-utah-season-end-2025",
+        "tmo-snowbird",
         "wikipedia-powdr",
         "wikipedia-snowbird-utah"
       ]
@@ -55199,7 +55847,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.aspensnowmass.com/four-mountains/snowmass/trail-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-snowmass",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -55418,6 +56074,7 @@
         "facts-west1-aspensnowmass-snowmass",
         "facts-west1-wiki-comparison-colorado",
         "pay-west-aspen-ski-instructor-2627",
+        "tmo-snowmass",
         "wikipedia-aspen-skiing-company",
         "wikipedia-snowmass-ski-area",
         "wikipedia-snowmass-village-colorado"
@@ -55510,7 +56167,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.snowshoemtn.com/mountain-info/maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-snowshoe",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -55701,6 +56366,7 @@
         "facts-northeast2-snowshoe-ots",
         "owner-decisions-2026-10-11",
         "pay-alterra-snowshoe-instructor-2627",
+        "tmo-snowshoe",
         "wikipedia-alterra-mountain-company",
         "wikipedia-snowshoe-mountain"
       ]
@@ -56139,7 +56805,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.solitudemountain.com/-/media/Solitude/Trail-Map-PDFs/2122-Solitude-Winter-Trail-Map.pdf",
+        "format": "pdf",
+        "season": "2021/22",
+        "source_id": "tmo-solitude",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -56218,6 +56892,7 @@
         "facts-west1-snowstash-utah-openings-2026",
         "facts-west1-unofficial-solitude-2025",
         "owner-decisions-2026-10-11",
+        "tmo-solitude",
         "wikipedia-alterra-mountain-company",
         "wikipedia-solitude-mountain-resort"
       ]
@@ -56802,7 +57477,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.steamboat.com/the-mountain/trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-steamboat",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-22",
@@ -57012,6 +57695,7 @@
         "facts-west1-dircom-steamboat",
         "owner-decisions-2026-10-11",
         "pay-alterra-steamboat-ski-instructor-2627",
+        "tmo-steamboat",
         "wikipedia-alterra-mountain-company",
         "wikipedia-steamboat-ski-resort",
         "wikipedia-steamboat-springs-winter-sports-club"
@@ -57194,7 +57878,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article; it mentions added employee housing capacity for 2022 to 2023."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.stevenspass.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-stevens-pass",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-08",
@@ -57402,6 +58094,7 @@
         "facts-west2-ots-wa-closing",
         "owner-decisions-2026-10-11",
         "pay-vail-stevens-pass-cert-2026",
+        "tmo-stevens-pass",
         "vail-10k-fy2026",
         "wikipedia-stevens-pass-ski-area"
       ]
@@ -57612,7 +58305,15 @@
         "confidence": "estimated",
         "note": "Route list plus fares section; that the shuttle reaches the resort base is inferred from the route name."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.stowe.com/the-mountain/about-the-mountain/trail-maps.aspx",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-stowe",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-20",
@@ -57834,6 +58535,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-stowe-cert-2026",
         "pay-vail-stowe-noncert-2026",
+        "tmo-stowe",
         "vail-10k-fy2026",
         "wikipedia-stowe-mountain-resort"
       ]
@@ -57935,7 +58637,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.stratton.com/the-mountain/interactive-trail-map",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-stratton",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-18",
@@ -58147,6 +58857,7 @@
         "facts-northeast1-ots-vt-open",
         "owner-decisions-2026-10-11",
         "pay-alterra-stratton-ski-instructor-2627",
+        "tmo-stratton",
         "wikipedia-alterra-mountain-company",
         "wikipedia-stratton-mountain-resort",
         "wikipedia-stratton-mountain-school"
@@ -58244,7 +58955,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.sugarbowl.com/trailmaps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-sugar-bowl",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-27",
@@ -58461,6 +59180,7 @@
         "openskimap-ski-areas",
         "pay-west-sugarbowl-dol-l2-2627",
         "pay-west-sugarbowl-jobs-l1",
+        "tmo-sugar-bowl",
         "wikipedia-sugar-bowl-ski-resort"
       ]
     },
@@ -58663,7 +59383,15 @@
         "confidence": "estimated",
         "note": "Sugarbush article mentions a shuttle bus that drops off at the Lincoln and Ellen base areas."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.sugarbush.com/mountain/terrain-and-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-sugarbush",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -58858,6 +59586,7 @@
         "facts-northeast1-ots-vt-open",
         "owner-decisions-2026-10-11",
         "pay-alterra-sugarbush-new-instructor-2627",
+        "tmo-sugarbush",
         "wikipedia-alterra-mountain-company",
         "wikipedia-sugarbush-resort"
       ]
@@ -58949,7 +59678,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.sugarloaf.com/mountain-info/mountain-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-sugarloaf",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -59165,6 +59902,7 @@
         "ed-east-wikipedia-sugarloaf-ski-resort",
         "facts-northeast1-wp-sugarloaf",
         "pay-east-sugarloaf-instructor-24652",
+        "tmo-sugarloaf",
         "wikipedia-boyne-resorts",
         "wikipedia-carrabassett-valley-academy",
         "wikipedia-sugarloaf-ski-resort"
@@ -59614,7 +60352,15 @@
         "confidence": "estimated",
         "note": "List row only; that routes reach the River Run and Warm Springs bases is inferred."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.sunvalley.com/the-mountain/maps-guides/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-sun-valley",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-30",
@@ -59826,6 +60572,7 @@
         "facts-gapfill-sri-bald-mountain",
         "facts-gapfill-sv-hours",
         "pay-west-sunvalley-dol-l3-2627",
+        "tmo-sun-valley",
         "wikipedia-bald-mountain-idaho",
         "wikipedia-sun-valley-idaho"
       ]
@@ -60145,7 +60892,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.sundayriver.com/resort-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-sunday-river",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -60364,6 +61119,7 @@
         "facts-northeast1-ots-sunday-river",
         "openskimap-ski-areas",
         "pay-east-sunday-river-instructor-24529",
+        "tmo-sunday-river",
         "wikipedia-boyne-resorts",
         "wikipedia-gould-academy",
         "wikipedia-sunday-river-ski-resort"
@@ -61228,7 +61984,15 @@
         "confidence": "published",
         "note": "North Central RTD article also lists seasonal daily service from Taos to the ski valley."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skitaos.com/mountain/lifts-trails",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-taos",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-26",
@@ -61308,6 +62072,7 @@
         "ed-west-wiki-taos-ski-valley",
         "facts-gapfill-kob-taos-close",
         "facts-gapfill-taos-pr-2026",
+        "tmo-taos",
         "wikipedia-ernie-blake",
         "wikipedia-taos-ski-valley"
       ]
@@ -61406,7 +62171,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://tellurideskiresort.com/mountain/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-telluride",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -61616,6 +62389,7 @@
         "facts-west1-telluride-dates-2024-25",
         "facts-west1-telluridenews-close-2026",
         "pay-west-telluride-dol-l3-2627",
+        "tmo-telluride",
         "wikipedia-telluride-ski-resort"
       ]
     },
@@ -62126,7 +62900,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.highlandsharborsprings.com/resort-maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-the-highlands",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-05",
@@ -62191,6 +62973,7 @@
         "facts-gapfill-ots-highlands",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas",
+        "tmo-the-highlands",
         "wikipedia-boyne-resorts",
         "wikipedia-the-highlands-at-harbor-springs"
       ]
@@ -63204,7 +63987,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://timberlinelodge.com/mountain/trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-timberline-lodge",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-16",
@@ -63410,6 +64201,7 @@
         "facts-gapfill-katu-timberline",
         "facts-gapfill-tgr-timberline-287",
         "pay-west-timberline-instructors-2627",
+        "tmo-timberline-lodge",
         "wikipedia-magic-mile",
         "wikipedia-timberline-lodge-ski-area"
       ]
@@ -64996,7 +65788,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.vail.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-vail",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-13",
@@ -65080,6 +65880,7 @@
         "facts-west1-vaildaily-vail-close-2026",
         "openskimap-ski-areas",
         "owner-decisions-2026-10-11",
+        "tmo-vail",
         "vail-10k-fy2026",
         "wikipedia-vail-ski-resort"
       ]
@@ -65925,7 +66726,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.waterville.com/maps",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-waterville-valley",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-28",
@@ -66003,6 +66812,7 @@
         "ed-east-wikipedia-waterville-valley-new-hampshire",
         "ed-east-wikipedia-waterville-valley-resort",
         "facts-northeast1-ots-waterville-valley",
+        "tmo-waterville-valley",
         "wikipedia-waterville-valley-resort"
       ]
     },
@@ -66749,7 +67559,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://whiteface.com/mountain/trail-map/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-whiteface",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-21",
@@ -66980,6 +67798,7 @@
         "openskimap-ski-areas",
         "pay-east-whiteface-employment",
         "pay-east-whiteface-private-lessons",
+        "tmo-whiteface",
         "wikipedia-whiteface-mountain"
       ]
     },
@@ -67070,7 +67889,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://skiwhitefish.com/trail-maps/",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-whitefish-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-04",
@@ -67155,6 +67982,7 @@
         "ed-west-wiki-whitefish-mountain-resort",
         "facts-gapfill-ots-whitefish",
         "openskimap-ski-areas",
+        "tmo-whitefish-mountain",
         "wikipedia-whitefish-mountain-resort"
       ]
     },
@@ -67237,7 +68065,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skiwhitetail.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-whitetail",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-20",
@@ -67459,6 +68295,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-whitetail-cert-2026",
         "pay-vail-whitetail-noncert-2026",
+        "tmo-whitetail",
         "vail-10k-fy2026",
         "wikipedia-whitetail-ski-resort"
       ]
@@ -67667,7 +68504,15 @@
         "confidence": "estimated",
         "note": "No transit found in the article."
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.skiwildcat.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": null,
+        "source_id": "tmo-wildcat",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "11-15",
@@ -67887,6 +68732,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-wildcat-cert-2026",
         "pay-vail-wildcat-noncert-2026",
+        "tmo-wildcat",
         "vail-10k-fy2026",
         "wikipedia-wildcat-mountain-ski-area"
       ]
@@ -68178,7 +69024,15 @@
         "note": null
       },
       "access": null,
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.wilmotmountain.com/the-mountain/about-the-mountain/trail-map.aspx",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-wilmot-mountain",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "12-06",
@@ -68379,6 +69233,7 @@
         "owner-decisions-2026-10-11",
         "pay-vail-wilmot-cert-2026",
         "pay-vail-wilmot-noncert-2026",
+        "tmo-wilmot-mountain",
         "vail-10k-fy2026",
         "wikipedia-wilmot-mountain"
       ]
@@ -68599,7 +69454,15 @@
         "confidence": "published",
         "note": null
       },
-      "official_trailmap": null,
+      "official_trailmap": {
+        "url": "https://www.winterparkresort.com/the-mountain/mountain-information/maps",
+        "format": "page",
+        "season": "2025/26",
+        "source_id": "tmo-winter-park",
+        "as_of": "2026-10-13",
+        "confidence": "estimated",
+        "note": null
+      },
       "season": {
         "open_typical": {
           "value": "10-31",
@@ -68810,6 +69673,7 @@
         "facts-west1-unofficial-winterpark-2025",
         "owner-decisions-2026-10-11",
         "pay-alterra-winterpark-instructor-2627",
+        "tmo-winter-park",
         "wikipedia-alterra-mountain-company",
         "wikipedia-winter-park-resort"
       ]

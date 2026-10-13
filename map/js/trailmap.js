@@ -4,6 +4,7 @@
 import { isPhone } from './config.js';
 import { loadTrailMap } from './data.js';
 import { h, clear, fmtInt, formatIsoDate, safeUrl } from './ui.js';
+import { officialTrailmapLink } from './panel.js';
 
 // Sign colors on the light trail map surface. Black and double black share the ink and differ by width and dash,
 // as their signs differ by one or two diamonds.
@@ -180,12 +181,14 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
 
   async function build(resort) {
     clear(side);
-    status.textContent = 'Loading the trail map';
+    status.textContent = 'Loading the interactive map';
     status.hidden = false;
     const [data, maplibregl] = await Promise.all([loadTrailMap(resort.id), getMapLibre().catch(() => null)]);
     if (!current || current.id !== resort.id) return;
     if (!data) { status.textContent = 'The trail map could not load. Try again later.'; return; }
     side.append(
+      h('p', { class: 'trailmap-kind' }, 'Interactive map from OpenSkiMap'),
+      officialTrailmapLink(resort),
       h('p', { class: 'trailmap-help', id: 'trailmap-help' }, isPhone() ? 'Tap a run or lift for its name.' : 'Hover or tap a run or lift for its name.'),
       legend(data),
       runList(data.runs),
@@ -245,9 +248,9 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
     /** Open the trail map of a resort. trigger gets focus back on close. */
     open(resort, from) {
       trigger = from || document.activeElement;
-      title.textContent = `${resort.name} trail map`;
+      title.textContent = `${resort.name} interactive map`;
       mapEl.setAttribute('aria-label', `Trail map of ${resort.name}. Hover or tap a run or lift for its name. The run list holds the same runs.`);
-      closeBtn.setAttribute('aria-label', `Close the ${resort.name} trail map`);
+      closeBtn.setAttribute('aria-label', `Close the ${resort.name} interactive map`);
       if (!dialog.open) dialog.showModal();
       if (current && current.id === resort.id) {
         // Same resort: keep its last view.
