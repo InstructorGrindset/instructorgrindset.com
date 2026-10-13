@@ -201,10 +201,11 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | 13 | 3 | Hiring window display on resort pages and a "hiring now" filter | C | 6 | Shows only sourced windows |
 | 14 | 3 | SNOTEL mountain stations in the snowfall heat map, in addition to resort pockets | C | 1 | In progress: SNOTEL SWE based station snowfall blended with NOAA normals, validated against published resort snowfall |
 | 15 | 3 | Share images per resort page (static PNG built by the pipeline) | C | 11 | Every resort stub has an og:image |
-| 16 | 3 | GTFS transit extracts for Tier A clusters (Summit Stage, RFTA, Park City Transit, TART, ECO Transit) | R+C | none In progress: feeds from the Mobility Database mirror on Google Cloud Storage; only feeds valid for 2026 to 27 or under 18 months old |
+| 16 | 3 | GTFS transit extracts for Tier A clusters (Summit Stage, RFTA, Park City Transit, TART, ECO Transit) | R+C | Done: 20 agencies, 30 Tier A detail maps, schedule dates shown; Park City, Jackson, Big Sky, Whitefish, Taos and Mt Hood feeds are not in the reachable catalog; ECO, Crested Butte, Tahoe TD and Mountain Rides feeds are stale |
 | 17 | 3 | Yearly ownership re-verification job for Vail and Alterra | C | 11 | Build fails when a portfolio source is older than one build cycle |
 | 18 | 3 | Real device QA after launch: phones and tablets, Lighthouse and axe on the live site | C | 11 | Issues filed and fixed |
 | 18a | 1 | Map page performance: make Lighthouse Performance on /map/ reliably 90+ (median 95+); split the 2D preview long task, fix late paint | C | none | In progress |
+| 18b | 1 | Mammoth base point: the record uses the Wikipedia article coordinate (37.63056, -119.0325), about 2.3 km from Main Lodge (37.6514, -119.0373); move it to a sourced base area point | R | none | Base point cited; transit and commute recomputed |
 | 19 | ongoing | **Owner:** MetroSlopes exact address when the facility opens; import Formspree reports each month | R | Owner | Dot moved; reports aggregated |
 
 ## 9. Working with Claude Code
