@@ -1096,7 +1096,8 @@ async function realData(browser, base) {
         const px = await sampleHeat(page, covered);
         check(px.every((c) => c[3] >= 0.33 * 255), `real data: ${mode} heat covers the map between distant resorts, Alaska included (alpha ${px.map((c) => c[3]).join(', ')})`);
         if (mode === 'season') {
-          const clear = await sampleHeat(page, [REAL_BETWEEN[1], REAL_BETWEEN[2], REAL_BETWEEN[3]]);
+          // Kansas, Texas and eastern Georgia: more than no_data_reach_km past any state with season data.
+          const clear = await sampleHeat(page, [REAL_BETWEEN[1], REAL_BETWEEN[2], [-82.6, 32.2]]);
           check(clear.every((c) => c[3] === 0), `real data: season stays clear in Kansas, Texas and Georgia (alpha ${clear.map((c) => c[3]).join(', ')})`);
         }
         const layers = await page.evaluate(() => window.__careerMap.mapCtl.map.getStyle().layers.filter((l) => l.id.startsWith('heat-')).map((l) => l.id));
