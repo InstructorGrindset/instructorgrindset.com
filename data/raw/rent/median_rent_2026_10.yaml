@@ -1,0 +1,1467 @@
+# Median rent research batch (owner request 2026-10-14: use median rent from Zillow, Redfin, blogs and others).
+# Only figures the result labels a median. Every figure is from a search result that names its page; no page was
+# opened (Zillow, Redfin and most rental sites are blocked here), so every figure is confidence "estimated".
+# Zillow pages in the results gave only averages, so no Zillow figure is recorded.
+# Contract: pipeline/schemas/rent.py (MedianRentBatch). Loader: pipeline/rent_median.py.
+batch: median-rent-2026-10
+researched_date: 2026-10-14
+sources:
+- id: medrent-zumper-breckenridge
+  url: https://www.zumper.com/rent-research/breckenridge-co
+  title: Average Rent in Breckenridge, CO and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-vail-address
+  url: "https://www.zumper.com/address/5124-grouse-ln-vail-co-81657-usa"
+  title: 5124 grouse ln vail co 81657 usa (Zumper address page)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-truckee
+  url: https://www.zumper.com/rent-research/truckee-ca
+  title: Average Rent in Truckee, CA and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-jackson
+  url: https://www.zumper.com/rent-research/jackson-wy
+  title: Average Rent in Jackson, WY and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-south-lake-tahoe
+  url: https://www.zumper.com/rent-research/south-lake-tahoe-ca
+  title: Average Rent in South Lake Tahoe, CA and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-south-lake-tahoe-address
+  url: "https://www.zumper.com/address/1043-gln-rd-south-lake-tahoe-ca-96150-usa"
+  title: "1043 gln rd south lake tahoe ca 96150 usa (Zumper address page)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-mammoth-lakes
+  url: https://www.zumper.com/rent-research/mammoth-lakes-ca
+  title: Average Rent in Mammoth Lakes, CA and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-big-bear
+  url: https://www.zumper.com/rent-research/big-bear-ca
+  title: Average Rent in Big Bear, CA and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-bozeman-address
+  url: "https://www.zumper.com/address/1107-w-story-st-bozeman-mt-59715-usa"
+  title: 1107 w story st bozeman mt 59715 usa (Zumper address page)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-bend
+  url: https://www.zumper.com/rent-research/bend-or
+  title: Average Rent in Bend, OR and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-anchorage
+  url: https://www.zumper.com/rent-research/anchorage-ak
+  title: Average Rent in Anchorage, AK and Rent Price Trends
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-silverthorne-address
+  url: "https://www.zumper.com/address/1516-adams-ave-silverthorne-co-80498-usa"
+  title: "1516 adams ave silverthorne co 80498 usa (Zumper address page)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-driggs-address
+  url: "https://www.zumper.com/address/107-n-5th-st-driggs-id-83422-usa"
+  title: 107 n 5th st driggs id 83422 usa (Zumper address page)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-north-conway-address
+  url: "https://www.zumper.com/address/30-alpine-pl-dr-north-conway-nh-03860-usa"
+  title: "30 alpine pl dr north conway nh 03860 usa (Zumper address page)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-zumper-boise-address
+  url: "https://www.zumper.com/address/206-w-boise-ave-boise-city-id-83706-usa"
+  title: "206 w boise ave boise city id 83706 usa (Zumper address page)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-redfin-breckenridge
+  url: "https://www.redfin.com/city/2171/CO/Breckenridge/rental-market"
+  title: "Average rent in Breckenridge, CO & rental prices by neighborhood (Redfin)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-redfin-cottonwood-heights
+  url: "https://www.redfin.com/city/4227/UT/Cottonwood-Heights/rental-market"
+  title: Rental market trends for Cottonwood Heights, UT (Redfin)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-redfin-burnsville
+  url: https://www.redfin.com/city/2282/MN/Burnsville/rental-market
+  title: Rental market trends for Burnsville, MN (Redfin)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-avon
+  url: https://www.rentometer.com/average-rent-in/co/avon-co
+  title: Average Rent in Avon, CO (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-vail
+  url: https://www.rentometer.com/average-rent-in/co/vail-co
+  title: Average Rent in Vail, CO (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-park-city
+  url: https://www.rentometer.com/average-rent-in/ut/park-city-ut
+  title: Average Rent in Park City, UT (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-jackson
+  url: https://www.rentometer.com/average-rent-in/wy/jackson-wy
+  title: Average Rent in Jackson, WY (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-bozeman
+  url: https://www.rentometer.com/average-rent-in/mt/bozeman-mt
+  title: Average Rent in Bozeman, MT (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-aspen
+  url: https://www.rentometer.com/average-rent-in/co/aspen-co
+  title: Average Rent in Aspen, CO (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-cottonwood-heights
+  url: "https://assets.rentometer.com/average-rent-in/ut/cottonwood-heights-ut"
+  title: Average Rent in Cottonwood Heights, UT (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-gunnison-county
+  url: "https://www.rentometer.com/average-rent-in/county/gunnison-county-co"
+  title: Average Rent in Gunnison County (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-crested-butte
+  url: "https://www.rentometer.com/average-rent-in/co/crested-butte-co"
+  title: Average Rent in Crested Butte, CO (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-winter-park
+  url: https://www.rentometer.com/average-rent-in/co/winter-park-co
+  title: Average Rent in Winter Park, CO (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-whitefish
+  url: https://www.rentometer.com/average-rent-in/mt/whitefish-mt
+  title: Average Rent in Whitefish, MT (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-hailey
+  url: https://www.rentometer.com/average-rent-in/id/hailey-id
+  title: Average Rent in Hailey, ID (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-taos
+  url: https://assets.rentometer.com/average-rent-in/nm/taos-nm
+  title: Average Rent in Taos, NM (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-sandy-or
+  url: https://www.rentometer.com/average-rent-in/or/sandy-or
+  title: Average Rent in Sandy, OR (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-enumclaw
+  url: https://www.rentometer.com/average-rent-in/wa/enumclaw-wa
+  title: Average Rent in Enumclaw, WA (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-ogden-metro
+  url: https://www.rentometer.com/average-rent-in/metro/ogden-ut-2
+  title: Ogden, UT Rent Report (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-missoula
+  url: https://www.rentometer.com/average-rent-in/mt/missoula-mt
+  title: Average Rent in Missoula, MT (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-rutland
+  url: https://www.rentometer.com/average-rent-in/vt/rutland-vt
+  title: Average Rent in Rutland, VT (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-burnsville
+  url: https://www.rentometer.com/average-rent-in/mn/burnsville-mn
+  title: Average Rent in Burnsville, MN (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-rentometer-cuyahoga-falls
+  url: "https://www.rentometer.com/average-rent-in/oh/cuyahoga-falls-oh"
+  title: Average Rent in Cuyahoga Falls, OH (Rentometer)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-breckenridge-micro
+  url: https://sfranalytics.com/rental-yields/co/breckenridge-co
+  title: "Breckenridge, CO rental yields (SFR Analytics, metro data updated Jun 30, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-truckee-grass-valley
+  url: "https://sfranalytics.com/rental-yields/ca/truckee-grass-valley-ca"
+  title: "Truckee Grass Valley, CA rental yields (SFR Analytics, metro data updated Jul 1, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-jackson-wy-id
+  url: https://sfranalytics.com/rental-yields/wy/jackson-wy-id
+  title: "Jackson, WY ID rental yields (SFR Analytics, metro data updated Jun 19, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-steamboat-springs
+  url: "https://sfranalytics.com/rental-yields/co/steamboat-springs-co"
+  title: "Steamboat Springs, CO rental yields (SFR Analytics, metro data updated Jul 1, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-bozeman
+  url: https://sfranalytics.com/rental-yields/mt/bozeman-mt
+  title: "Bozeman, MT rental yields (SFR Analytics, metro data updated Jul 1, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-hailey
+  url: https://sfranalytics.com/rental-yields/id/hailey-id
+  title: "Hailey, ID rental yields (SFR Analytics, metro data updated Jun 21, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-sandpoint
+  url: https://sfranalytics.com/rental-yields/id/sandpoint-id
+  title: "Sandpoint, ID rental yields (SFR Analytics, metro data updated Jul 1, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-taos
+  url: https://sfranalytics.com/rental-yields/nm/taos-nm
+  title: "Taos, NM rental yields (SFR Analytics, metro data updated Jun 20, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-ogden
+  url: https://sfranalytics.com/rental-yields/ut/ogden-ut
+  title: "Ogden, UT rental yields (SFR Analytics, metro data updated Jul 1, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-missoula
+  url: https://sfranalytics.com/rental-yields/mt/missoula-mt
+  title: "Missoula, MT rental yields (SFR Analytics, metro data updated Jul 1, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-sfr-brattleboro
+  url: https://sfranalytics.com/rental-yields/vt/brattleboro-vt
+  title: "Brattleboro, VT rental yields (SFR Analytics, metro data updated Jun 30, 2026)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-avon
+  url: "https://www.foreclosure.com/listings/avon-co/preforeclosure_sheriff%20sale/"
+  title: "Avon, CO preforeclosure sheriff sale listings (Foreclosure.com)"
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-frisco-80443
+  url: https://www.foreclosure.com/listings/frisco-co-80443/
+  title: Frisco, CO 80443 listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-park-city
+  url: "https://www.foreclosure.com/listings/park-city-ut/foreclosures/"
+  title: Park City, UT foreclosure listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-aspen
+  url: https://www.foreclosure.com/listings/aspen-co/land/
+  title: Aspen, CO land listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-telluride
+  url: https://www.foreclosure.com/listings/telluride-co/auctions/
+  title: Telluride, CO auction listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-winter-park
+  url: https://www.foreclosure.com/listings/winter-park-co/
+  title: Winter Park, CO listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-fraser
+  url: https://www.foreclosure.com/listings/fraser-co/condo/
+  title: Fraser, CO condo listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-big-sky
+  url: https://www.foreclosure.com/listings/big-sky-mt/?view=list
+  title: Big Sky, MT listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-driggs
+  url: "https://www.foreclosure.com/listings/driggs-id/preforeclosures/"
+  title: Driggs, ID preforeclosure listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-hood-river
+  url: "https://www.foreclosure.com/listings/hood-river-or/foreclosures/"
+  title: Hood River, OR foreclosure listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-enumclaw
+  url: https://www.foreclosure.com/listings/enumclaw-wa/condo/
+  title: Enumclaw, WA condo listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-stowe
+  url: https://www.foreclosure.com/listings/stowe-vt/auctions/
+  title: Stowe, VT auction listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-morrisville
+  url: https://www.foreclosure.com/listings/morrisville-vt/condo/
+  title: Morrisville, VT condo listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-manchester-vt
+  url: "https://www.foreclosure.com/listings/manchester-vt/preforeclosures/"
+  title: Manchester, VT preforeclosure listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-waitsfield
+  url: "https://www.foreclosure.com/listings/waitsfield-vt/foreclosures/"
+  title: Waitsfield, VT foreclosure listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-white-haven
+  url: "https://www.foreclosure.com/listings/white-haven-pa/preforeclosures/"
+  title: White Haven, PA preforeclosure listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-foreclosure-leadville
+  url: "https://www.foreclosure.com/listings/leadville-co/commercial/"
+  title: Leadville, CO commercial listings (Foreclosure.com)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-padmapper-aspen
+  url: https://www.padmapper.com/apartments/aspen-co
+  title: Apartments for rent in Aspen, CO (PadMapper)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-padmapper-cottonwood-heights
+  url: https://www.padmapper.com/apartments/cottonwood-heights-ut
+  title: Apartments for rent in Cottonwood Heights, UT (PadMapper)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-padmapper-plymouth-nh
+  url: https://www.padmapper.com/apartments/plymouth-nh
+  title: Apartments for rent in Plymouth, NH (PadMapper)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-padmapper-lake-harmony
+  url: https://www.padmapper.com/apartments/lake-harmony-pa
+  title: Apartments for rent in Lake Harmony, PA (PadMapper)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+- id: medrent-apartmentlist-akron
+  url: https://www.apartmentlist.com/rent-report/oh/akron
+  title: Akron, OH rent report (Apartment List)
+  accessed_date: 2026-10-14
+  note: From a search result for this page; page not opened.
+figures:
+- resort_ids:
+  - breckenridge
+  town: Breckenridge, CO
+  geography: city
+  unit: all
+  median_rent_usd: 3703
+  period: 2026-05
+  publisher: zumper
+  source_id: medrent-zumper-breckenridge
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper lists the median for all rentals at $3,703 as of May 2026, and says that is a 10% increase compared to the previous year'."
+- resort_ids:
+  - breckenridge
+  town: Breckenridge, CO
+  geography: city
+  unit: all
+  median_rent_usd: 9000
+  period: 2025-09
+  publisher: redfin
+  source_id: medrent-redfin-breckenridge
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Its rental page shows a $9,000 figure, labeled as both median and average, last updated 09/24/2025'. Far above every other Breckenridge source; likely a small sample of high end listings. Kept because the page labels it a median."
+- resort_ids:
+  - breckenridge
+  - keystone
+  - copper-mountain
+  - woodward-copper
+  - arapahoe-basin
+  town: Breckenridge, CO micro area (Summit County)
+  geography: metro
+  unit: all
+  median_rent_usd: 4400
+  period: 2026-06
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-breckenridge-micro
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics (June 2026): It reports the median asking rent at $4,400, based on active listings'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - keystone
+  - copper-mountain
+  - woodward-copper
+  - arapahoe-basin
+  town: Frisco, CO
+  geography: zip
+  unit: all
+  median_rent_usd: 1920
+  period: '2026-07-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-frisco-80443
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'A separate listing aggregator shows a median rent of $1,920 as of 2026-07-14'. ZIP 80443 page. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - keystone
+  - copper-mountain
+  - woodward-copper
+  - arapahoe-basin
+  town: Silverthorne, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 2250
+  period: 2026-07
+  publisher: zumper
+  source_id: medrent-zumper-silverthorne-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper's one-bedroom median series shows $2,250 in July 2026, though that figure is tied to the Zumper page's own 'as of Jul 11 2026' date'. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - vail
+  town: Vail, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 1500
+  period: '2026-04-30'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-vail
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer, Vail (data as of April 30, 2026): The median one-bedroom apartment rent is $1,500, and the median two-bedroom is $3,875'."
+- resort_ids:
+  - vail
+  town: Vail, CO
+  geography: city
+  unit: 2br
+  median_rent_usd: 3875
+  period: '2026-04-30'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-vail
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer, Vail (data as of April 30, 2026): The median one-bedroom apartment rent is $1,500, and the median two-bedroom is $3,875'."
+- resort_ids:
+  - vail
+  town: Vail, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 3050
+  period: '2026-06-13'
+  publisher: zumper
+  source_id: medrent-zumper-vail-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper (median as of June 13, 2026): One listing-based figure shows a June 2026 median rent of $3,050 for one-bedroom apartments in Vail'. The only Zumper page in the result was this address page. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - beaver-creek
+  town: Avon, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 1400
+  period: '2026-01-11'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-avon
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of Jan 11, 2026): Only 1-bedroom apartments had enough data. The median was $1,400 ... Apartment 1 Bedroom $1,540 $1,400'."
+- resort_ids:
+  - beaver-creek
+  town: Avon, CO
+  geography: city
+  unit: all
+  median_rent_usd: 1920
+  period: '2026-07-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-avon
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com (July 2026): Median rent: $1,920 as of 2026-07-14. Its average rental price is listed as $2,248'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - aspen-mountain
+  - aspen-highlands
+  - buttermilk
+  - snowmass
+  town: Aspen, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 3500
+  period: '2026-01-10'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-aspen
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of January 10, 2026): the 1-bedroom apartment median is about $3,500, with an average of $3,341'. The word 'about' is the search result's; the page may state an exact figure."
+- resort_ids:
+  - aspen-mountain
+  - aspen-highlands
+  - buttermilk
+  - snowmass
+  town: Aspen, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 8250
+  period: 2026-08
+  publisher: other
+  publisher_name: PadMapper
+  source_id: medrent-padmapper-aspen
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'PadMapper (August 2026): the 1-bedroom median is $8,250, up 3.13% from the prior period, and the studio median is $5,250'. Far above Rentometer; PadMapper's Aspen listings include luxury and seasonal units."
+- resort_ids:
+  - aspen-mountain
+  - aspen-highlands
+  - buttermilk
+  - snowmass
+  town: Aspen, CO
+  geography: city
+  unit: all
+  median_rent_usd: 2240
+  period: '2026-06-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-aspen
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com: it lists a median rent of $2,240 as of 2026-06-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - steamboat
+  - howelsen-hill
+  town: Steamboat Springs, CO micro area (Routt County)
+  geography: metro
+  unit: all
+  median_rent_usd: 3900
+  period: 2026-07
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-steamboat-springs
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'As of July 2026, the median asking rent in Steamboat Springs, CO is $3,900'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - crested-butte
+  town: Crested Butte, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 1500
+  period: 2026-02
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-crested-butte
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Crested Butte (Rentometer, data as of Feb 2026): The one-bedroom median is also $1,500, with an average of $1,634'."
+- resort_ids:
+  - crested-butte
+  town: Gunnison County, CO
+  geography: county
+  unit: 1br
+  median_rent_usd: 1500
+  period: 2026-02
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-gunnison-county
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Gunnison (Rentometer, data as of Feb 2026): One-bedroom apartments show a median of $1,500 and an average of $1,519'."
+- resort_ids:
+  - telluride
+  town: Telluride, CO
+  geography: city
+  unit: all
+  median_rent_usd: 2340
+  period: '2026-07-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-telluride
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com lists a median rent of $2,340 as of July 14, 2026, with rent unchanged month over month. Median rent: $2,340 as of 2026-07-14. The same site showed the identical figure in June 2026'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - winter-park
+  town: Winter Park, CO
+  geography: city
+  unit: 1br
+  median_rent_usd: 1385
+  period: 2026-06
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-winter-park
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer's June 2026 data lists a median of $2,200 for two-bedroom apartments and $1,385 for one-bedroom apartments'. The same page's prose says 'median rent hovering around the $2880 mark', which does not match its table; that figure is not used."
+- resort_ids:
+  - winter-park
+  town: Winter Park, CO
+  geography: city
+  unit: 2br
+  median_rent_usd: 2200
+  period: 2026-06
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-winter-park
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer's June 2026 data lists a median of $2,200 for two-bedroom apartments and $1,385 for one-bedroom apartments'."
+- resort_ids:
+  - winter-park
+  town: Winter Park, CO
+  geography: city
+  unit: all
+  median_rent_usd: 1630
+  period: '2026-08-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-winter-park
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com reports a median rent: $1,630 as of 2026-08-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - winter-park
+  town: Fraser, CO
+  geography: city
+  unit: all
+  median_rent_usd: 1600
+  period: '2026-08-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-fraser
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Fraser: Foreclosure.com reports a median rent: $1,600 as of 2026-08-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - ski-cooper
+  town: Leadville, CO
+  geography: city
+  unit: all
+  median_rent_usd: 1440
+  period: '2026-06-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-leadville
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com lists a median rent: $1,440 as of 2026-06-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - palisades-tahoe
+  - palisades-tahoe-alpine-meadows
+  - northstar
+  - sugar-bowl
+  - woodward-tahoe
+  town: Truckee, CA
+  geography: city
+  unit: all
+  median_rent_usd: 4475
+  period: 2025-07
+  publisher: zumper
+  source_id: medrent-zumper-truckee
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'The Zumper page shows a median of $4,475, but it is dated July 2025 ... It reports 23 total rentals'."
+- resort_ids:
+  - palisades-tahoe
+  - palisades-tahoe-alpine-meadows
+  - northstar
+  - sugar-bowl
+  - woodward-tahoe
+  town: Truckee Grass Valley, CA metro (Nevada County)
+  geography: metro
+  unit: all
+  median_rent_usd: 3000
+  period: 2026-07
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-truckee-grass-valley
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'For the Truckee-Grass Valley metro, the median asking rent is $3,000 as of July 2026, based on active rental listings across the metro'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians. The metro is Nevada County; Palisades Tahoe and Alpine Meadows sit in Placer County."
+- resort_ids:
+  - heavenly
+  - kirkwood
+  town: South Lake Tahoe, CA
+  geography: city
+  unit: all
+  median_rent_usd: 2500
+  period: 2026-08
+  publisher: zumper
+  source_id: medrent-zumper-south-lake-tahoe
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper puts the median rent at about $2,500 a month as of August 2026, up roughly 11% year over year'. The word 'about' is the search result's; the page may state an exact figure."
+- resort_ids:
+  - heavenly
+  - kirkwood
+  town: South Lake Tahoe, CA
+  geography: city
+  unit: 3br
+  median_rent_usd: 3450
+  period: 2026-08
+  publisher: zumper
+  source_id: medrent-zumper-south-lake-tahoe-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper (3-bedroom): The median series reached June 2026 $3,337, July 2026 $3,312, and August 2026 $3,450. The same series appears on several Zumper listing pages'. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - mammoth-mountain
+  - june-mountain
+  town: Mammoth Lakes, CA
+  geography: city
+  unit: all
+  median_rent_usd: 3500
+  period: 2026-10
+  publisher: zumper
+  source_id: medrent-zumper-mammoth-lakes
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Mammoth Lakes: The median is listed at $3,500 a month as of October 2026, down about 3% from the prior year'."
+- resort_ids:
+  - bear-mountain
+  - snow-summit
+  town: Big Bear, CA
+  geography: city
+  unit: all
+  median_rent_usd: 1995
+  period: 2026-06
+  publisher: zumper
+  source_id: medrent-zumper-big-bear
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Big Bear: The median for all rentals is about $1,995 a month as of June 2026, roughly 2% above the national average'. Zumper's 'Big Bear' page; its Big Bear Lake pages differ. The word 'about' is the search result's."
+- resort_ids:
+  - park-city
+  - deer-valley
+  - woodward-park-city
+  - utah-olympic-park
+  - usss-center-of-excellence
+  town: Park City, UT
+  geography: city
+  unit: all
+  median_rent_usd: 3220
+  period: '2026-07-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-park-city
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com (as of July 14, 2026): Median rent of $3,220, with rent down 5.85% year over year'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - park-city
+  - deer-valley
+  - woodward-park-city
+  - utah-olympic-park
+  - usss-center-of-excellence
+  town: Park City, UT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1750
+  period: '2026-07-13'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-park-city
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of July 13, 2026): One-bedroom apartments have a median of $1,750'."
+- resort_ids:
+  - alta
+  - snowbird
+  - brighton
+  - solitude
+  town: Cottonwood Heights, UT
+  geography: city
+  unit: all
+  median_rent_usd: 1757
+  period: 2025-08
+  publisher: redfin
+  source_id: medrent-redfin-cottonwood-heights
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Redfin (August 2025): It reports a median rent of $1,757, but that data is a year old'."
+- resort_ids:
+  - alta
+  - snowbird
+  - brighton
+  - solitude
+  town: Cottonwood Heights, UT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1275
+  period: 2026-08
+  publisher: other
+  publisher_name: PadMapper
+  source_id: medrent-padmapper-cottonwood-heights
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'PadMapper (August 2026): Its listing-based medians are about $1,210 for a studio, $1,275 for a one-bedroom, $1,518 for a two-bedroom, and $2,273 for a three-bedroom'. A second PadMapper page (Cottonwood Heights neighborhood) shows a one bedroom median of $1,535; the city page figure is used."
+- resort_ids:
+  - alta
+  - snowbird
+  - brighton
+  - solitude
+  town: Cottonwood Heights, UT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1400
+  period: 2025-10
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-cottonwood-heights
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of October 2025): One-bedroom apartments have a median near $1,400'. The word 'near' is the search result's; the page may state an exact figure."
+- resort_ids:
+  - snowbasin
+  - powder-mountain
+  town: Ogden, UT metro
+  geography: metro
+  unit: all
+  median_rent_usd: 2345
+  period: 2026-07
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-ogden
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics (updated July 2026) puts the metro's median asking rent at $2,345, with a 5.81% gross rental yield'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - snowbasin
+  - powder-mountain
+  town: Ogden, UT metro
+  geography: metro
+  unit: 1br
+  median_rent_usd: 1248
+  period: '2026-01-10'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-ogden-metro
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data dated 01/10/2026) lists apartment medians of about $1,159 for studios, $1,248 for one-bedrooms, $1,482 for two-bedrooms, and $1,839 for three-bedrooms'."
+- resort_ids:
+  - jackson-hole
+  town: Jackson, WY
+  geography: city
+  unit: all
+  median_rent_usd: 3179
+  period: 2026-10
+  publisher: zumper
+  source_id: medrent-zumper-jackson
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper lists the median rent at $3,179 per month as of October 2026 ... Only 4 rentals were listed on Zumper at the time, so the sample is thin'. The same page also words the figure as an average."
+- resort_ids:
+  - jackson-hole
+  town: Jackson, WY
+  geography: city
+  unit: 1br
+  median_rent_usd: 2300
+  period: '2025-10-23'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-jackson
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (city): Its report, data as of October 23, 2025, shows a median of about $2,300 for one-bedroom apartments'. The word 'about' is the search result's; the page may state an exact figure."
+- resort_ids:
+  - jackson-hole
+  town: "Jackson, WY ID micro area (Teton County WY and Teton County ID)"
+  geography: metro
+  unit: all
+  median_rent_usd: 7400
+  period: 2026-06
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-jackson-wy-id
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics: It reports a median asking rent of $7,400 for the Jackson, WY-ID metro as of June 2026, based on active listings'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - grand-targhee
+  town: Driggs, ID
+  geography: city
+  unit: all
+  median_rent_usd: 1570
+  period: '2026-05-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-driggs
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com puts Driggs's median rent at $1,570 as of May 14, 2026 (Median rent: $1,570 as of 2026-05-14.)'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - grand-targhee
+  town: Driggs, ID
+  geography: city
+  unit: 3br
+  median_rent_usd: 3000
+  period: 2026-07
+  publisher: zumper
+  source_id: medrent-zumper-driggs-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper's data for a Driggs address shows a 3-bedroom median of $3,000 in July 2026 and $3,280 in May 2026'. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - bridger-bowl
+  town: Bozeman, MT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1825
+  period: 2026-08
+  publisher: zumper
+  source_id: medrent-zumper-bozeman-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper's trend tables show Bozeman's median 1-bedroom rent at $1,825 in August 2026. Its 2-bedroom median for August 2026 was $1,875'. The result listed several Bozeman address pages; this is the first. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - bridger-bowl
+  town: Bozeman, MT
+  geography: city
+  unit: 2br
+  median_rent_usd: 1875
+  period: 2026-08
+  publisher: zumper
+  source_id: medrent-zumper-bozeman-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper's trend tables show Bozeman's median 1-bedroom rent at $1,825 in August 2026. Its 2-bedroom median for August 2026 was $1,875'. The result listed several Bozeman address pages; this is the first. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - bridger-bowl
+  town: Bozeman, MT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1931
+  period: 2026-01
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-bozeman
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer: Its data as of January 2026 put the 1-bedroom apartment median at $1,931 and the 2-bedroom median at $2,052'."
+- resort_ids:
+  - bridger-bowl
+  town: Bozeman, MT
+  geography: city
+  unit: 2br
+  median_rent_usd: 2052
+  period: 2026-01
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-bozeman
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer: Its data as of January 2026 put the 1-bedroom apartment median at $1,931 and the 2-bedroom median at $2,052'."
+- resort_ids:
+  - bridger-bowl
+  - big-sky
+  - yellowstone-club
+  town: Bozeman, MT metro (Gallatin County)
+  geography: metro
+  unit: all
+  median_rent_usd: 2900
+  period: 2026-07
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-bozeman
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics: It says the median asking rent in Bozeman, MT is $2,900 as of July 2026, based on active rental listings across the metro'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians. Gallatin County includes most of Big Sky; many Big Sky and Yellowstone Club staff live in Bozeman."
+- resort_ids:
+  - big-sky
+  - yellowstone-club
+  town: Big Sky, MT
+  geography: city
+  unit: all
+  median_rent_usd: 2140
+  period: '2026-09-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-big-sky
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com (most recent, Sept. 14, 2026): Median rent: $2,140 as of 2026-09-14. Rent: +0.00% MoM, -0.47% YoY'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - whitefish-mountain
+  town: Whitefish, MT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1500
+  period: '2026-02-11'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-whitefish
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of February 11, 2026): the one-bedroom median is about $1,500 and the two-bedroom median about $2,900'. The word 'about' is the search result's; the page may state an exact figure."
+- resort_ids:
+  - whitefish-mountain
+  town: Whitefish, MT
+  geography: city
+  unit: 2br
+  median_rent_usd: 2900
+  period: '2026-02-11'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-whitefish
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of February 11, 2026): the one-bedroom median is about $1,500 and the two-bedroom median about $2,900'. The word 'about' is the search result's; the page may state an exact figure."
+- resort_ids:
+  - montana-snowbowl
+  town: Missoula, MT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1195
+  period: 2026-05
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-missoula
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of May 2026): Median rent is about $950 for studios and about $1,195 for one-bedroom apartments'. The word 'about' is the search result's; the page may state an exact figure."
+- resort_ids:
+  - montana-snowbowl
+  town: Missoula, MT metro
+  geography: metro
+  unit: all
+  median_rent_usd: 2500
+  period: 2026-07
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-missoula
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics (July 2026): Its metro-wide median asking rent is $2,500, based on active rental listings across the metro'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - sun-valley
+  - dollar-mountain
+  town: Hailey, ID micro area (Blaine County)
+  geography: metro
+  unit: all
+  median_rent_usd: 4000
+  period: 2026-06
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-hailey
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics reports a median asking rent in Hailey, ID is $4,000 as of June 2026, based on active listings'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - sun-valley
+  - dollar-mountain
+  town: Hailey, ID
+  geography: city
+  unit: 1br
+  median_rent_usd: 1900
+  period: '2026-05-31'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-hailey
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer's report, data as of 05/31/2026, is much lower by unit size: one-bedrooms have a median rate near $1900, and two-bedrooms have a median rent around $2250'. The words 'near' and 'around' are the page's or the search result's; the page may state exact figures."
+- resort_ids:
+  - sun-valley
+  - dollar-mountain
+  town: Hailey, ID
+  geography: city
+  unit: 2br
+  median_rent_usd: 2250
+  period: '2026-05-31'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-hailey
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer's report, data as of 05/31/2026, is much lower by unit size: one-bedrooms have a median rate near $1900, and two-bedrooms have a median rent around $2250'. The words 'near' and 'around' are the page's or the search result's; the page may state exact figures."
+- resort_ids:
+  - schweitzer
+  town: Sandpoint, ID micro area (Bonner County)
+  geography: metro
+  unit: all
+  median_rent_usd: 2400
+  period: 2026-07
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-sandpoint
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'The most direct answer is SFR Analytics' figure: a median asking rent of $2,400 in Sandpoint as of July 2026'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - bogus-basin
+  town: Boise, ID
+  geography: city
+  unit: 1br
+  median_rent_usd: 1290
+  period: 2026-07
+  publisher: zumper
+  source_id: medrent-zumper-boise-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'A Zumper listing page shows monthly medians for Boise City 1-bedrooms that run from about $1,267 in June 2026 to $1,290 in July 2026'. The result listed several Boise address pages; this is the first. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - taos
+  town: Taos, NM micro area (Taos County)
+  geography: metro
+  unit: all
+  median_rent_usd: 2500
+  period: 2026-06
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-taos
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics puts the median asking rent in Taos at $2,500 as of June 2026, based on active rental listings across the metro'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians."
+- resort_ids:
+  - taos
+  town: Taos, NM
+  geography: city
+  unit: 1br
+  median_rent_usd: 1337
+  period: 2026-01
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-taos
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer, January 2026 data: The city-level report lists a one-bedroom median of $1,337 and a two-bedroom median of $1,950'."
+- resort_ids:
+  - taos
+  town: Taos, NM
+  geography: city
+  unit: 2br
+  median_rent_usd: 1950
+  period: 2026-01
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-taos
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer, January 2026 data: The city-level report lists a one-bedroom median of $1,337 and a two-bedroom median of $1,950'."
+- resort_ids:
+  - mt-bachelor
+  town: Bend, OR
+  geography: city
+  unit: all
+  median_rent_usd: 2472
+  period: 2026-08
+  publisher: zumper
+  source_id: medrent-zumper-bend
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper lists a median of $2,472/month as of August 2026, roughly 28% above the national average'. The same page also words the figure as an average ('The average rent in Bend is $2,472 per month as of August 2026')."
+- resort_ids:
+  - mt-hood-meadows
+  town: Hood River, OR
+  geography: city
+  unit: all
+  median_rent_usd: 1440
+  period: '2026-06-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-hood-river
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com puts the median rent at $1,440 as of June 14, 2026 Median rent: $1,440 as of 2026-06-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - timberline-lodge
+  - timberline-palmer-summer
+  town: Sandy, OR
+  geography: city
+  unit: 1br
+  median_rent_usd: 1695
+  period: '2026-05-21'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-sandy-or
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of May 21, 2026) reports one-bedroom units averaging in the $1,600s and median rents near $1,695'. The word 'near' is the page's or the search result's; the page may state an exact figure. Government Camp itself returned no figure."
+- resort_ids:
+  - crystal-mountain
+  town: Enumclaw, WA
+  geography: city
+  unit: all
+  median_rent_usd: 1830
+  period: '2026-09-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-enumclaw
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com gives a single citywide median of $1,830 as of 2026-05-14. A later page dated September 14, 2026 repeats that $1,830 figure. Median rent: $1,830 as of 2026-09-14'. The result showed two Enumclaw pages (bankruptcy and condo listings); this is one of them. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - crystal-mountain
+  town: Enumclaw, WA
+  geography: city
+  unit: 2br
+  median_rent_usd: 1895
+  period: '2026-01-18'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-enumclaw
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of January 18, 2026) puts the 2-bedroom apartment median at $1,895 and the 3-bedroom apartment median at $2,293'."
+- resort_ids:
+  - crystal-mountain
+  town: Enumclaw, WA
+  geography: city
+  unit: 3br
+  median_rent_usd: 2293
+  period: '2026-01-18'
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-enumclaw
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer (data as of January 18, 2026) puts the 2-bedroom apartment median at $1,895 and the 3-bedroom apartment median at $2,293'."
+- resort_ids:
+  - alyeska
+  town: Anchorage, AK (municipality, includes Girdwood)
+  geography: city
+  unit: all
+  median_rent_usd: 1750
+  period: 2026-05
+  publisher: zumper
+  source_id: medrent-zumper-anchorage
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'As of May 2026, the median rent for all bedroom counts and property types in Anchorage, AK is $1,750'. Girdwood is inside the Municipality of Anchorage; no Girdwood figure was found."
+- resort_ids:
+  - stowe
+  town: Stowe, VT
+  geography: city
+  unit: all
+  median_rent_usd: 1940
+  period: '2026-06-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-stowe
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com reports a median of $1,940 as of June 14, 2026. Median rent: $1,940 as of 2026-06-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - stowe
+  town: Morrisville, VT
+  geography: city
+  unit: all
+  median_rent_usd: 1510
+  period: '2026-07-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-morrisville
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Foreclosure.com reports a median of $1,510 as of July 14, 2026. Median rent: $1,510 as of 2026-07-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - killington
+  - pico
+  town: Rutland, VT
+  geography: city
+  unit: 1br
+  median_rent_usd: 1250
+  period: 2026-08
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-rutland
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rutland city (most recent, Aug. 2026): Rentometer's medians were about $1,250 for a 1-bedroom and $1,400 for a 2-bedroom apartment. Apartment 1 Bedroom $1,228 $1,250'."
+- resort_ids:
+  - killington
+  - pico
+  town: Rutland, VT
+  geography: city
+  unit: 2br
+  median_rent_usd: 1400
+  period: 2026-08
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-rutland
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rutland city (most recent, Aug. 2026): Rentometer's medians were about $1,250 for a 1-bedroom and $1,400 for a 2-bedroom apartment. Apartment 2 Bedroom $1,262 $1,400'."
+- resort_ids:
+  - mount-snow
+  - hermitage-club
+  town: Brattleboro, VT micro area (Windham County)
+  geography: metro
+  unit: all
+  median_rent_usd: 2700
+  period: 2026-06
+  publisher: other
+  publisher_name: SFR Analytics
+  source_id: medrent-sfr-brattleboro
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'SFR Analytics reports a much higher figure, a $2,700 median asking rent as of June 2026, but that appears to cover all rental listings, not just apartments'. SFR Analytics median asking rent from active rental listings across the metro or micro area; it covers all property types and runs above apartment medians. Windham County includes Dover (West Dover) and Wilmington."
+- resort_ids:
+  - stratton
+  - magic-mountain
+  town: Manchester, VT
+  geography: city
+  unit: all
+  median_rent_usd: 1560
+  period: '2026-06-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-manchester-vt
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Median rent of $1,560 as of June 14, 2026, per a foreclosure.com market page. Median rent: $1,560 as of 2026-06-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - sugarbush
+  - mad-river-glen
+  town: Waitsfield, VT
+  geography: city
+  unit: all
+  median_rent_usd: 1720
+  period: '2026-07-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-waitsfield
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Waitsfield: Foreclosure.com lists a median rent of $1,720 as of July 14, 2026, with rents flat month over month. Median rent: $1,720 as of 2026-07-14'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - cranmore
+  - attitash
+  - wildcat
+  town: North Conway, NH
+  geography: city
+  unit: 1br
+  median_rent_usd: 1975
+  period: 2026-08
+  publisher: zumper
+  source_id: medrent-zumper-north-conway-address
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Zumper (1-bedroom, North Conway): Its trend table shows a median of about $1,975 in August 2026, up from $1,550 in late 2025'. The result listed two North Conway address pages; this is the first. The word 'about' is the search result's. Zumper address pages carry the city's median rent trend table for the bedroom count of the listing; the figure is the city trend, not the listing's own rent."
+- resort_ids:
+  - waterville-valley
+  town: Plymouth, NH
+  geography: city
+  unit: 1br
+  median_rent_usd: 1950
+  period: 2026-07
+  publisher: other
+  publisher_name: PadMapper
+  source_id: medrent-padmapper-plymouth-nh
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'PadMapper, based on 10 listings, reports a median 1-bedroom rent of $1,950 as of July 2026, and a median of $2,300 for 2-bedrooms'. Small sample (10 listings)."
+- resort_ids:
+  - waterville-valley
+  town: Plymouth, NH
+  geography: city
+  unit: 2br
+  median_rent_usd: 2300
+  period: 2026-07
+  publisher: other
+  publisher_name: PadMapper
+  source_id: medrent-padmapper-plymouth-nh
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'PadMapper, based on 10 listings, reports a median 1-bedroom rent of $1,950 as of July 2026, and a median of $2,300 for 2-bedrooms'. Small sample (10 listings)."
+- resort_ids:
+  - jack-frost
+  - big-boulder
+  town: White Haven, PA
+  geography: city
+  unit: all
+  median_rent_usd: 1050
+  period: '2026-06-14'
+  publisher: other
+  publisher_name: Foreclosure.com
+  source_id: medrent-foreclosure-white-haven
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'White Haven: Median rent was $1,050 as of 2026-06-14 according to foreclosure.com'. Foreclosure.com market box on a listings page; its method is not stated. Its figures are round to $10 and often show 0% month over month change, and the same value appears for several towns on the same date (for example $1,920 for Avon and Frisco on 2026-07-14, $1,440 for Hood River and Leadville on 2026-06-14). Weight with care."
+- resort_ids:
+  - big-boulder
+  - jack-frost
+  town: Lake Harmony, PA
+  geography: city
+  unit: 1br
+  median_rent_usd: 1800
+  period: 2026-08
+  publisher: other
+  publisher_name: PadMapper
+  source_id: medrent-padmapper-lake-harmony
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'PadMapper's August 2026 data puts the median at $1,850 for a studio and $1,800 for a one-bedroom, based on its 2 listings in Lake Harmony'. Very small sample (2 listings)."
+- resort_ids:
+  - buck-hill
+  town: Burnsville, MN
+  geography: city
+  unit: 1br
+  median_rent_usd: 1394
+  period: 2026-01
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-burnsville
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Rentometer's data from January 2026 gives typical unit prices ... Its table lists a one-bedroom apartment median of $1,394'."
+- resort_ids:
+  - buck-hill
+  town: Burnsville, MN
+  geography: city
+  unit: all
+  median_rent_usd: 1500
+  period: 2025-09
+  publisher: redfin
+  source_id: medrent-redfin-burnsville
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Redfin's city figure is older, dated September 2025, and lists a median of $1,500'."
+- resort_ids:
+  - boston-mills
+  - brandywine
+  town: Akron, OH
+  geography: city
+  unit: all
+  median_rent_usd: 990
+  period: 2026-07
+  publisher: other
+  publisher_name: Apartment List
+  source_id: medrent-apartmentlist-akron
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Akron citywide (Apartment List, July 2026): The overall median rent in the city stands at $990, roughly the same as last month'. Boston Mills and Brandywine sit in the Cuyahoga Valley between Akron and Cleveland."
+- resort_ids:
+  - boston-mills
+  - brandywine
+  town: Cuyahoga Falls, OH
+  geography: city
+  unit: 1br
+  median_rent_usd: 972
+  period: 2026-05
+  publisher: other
+  publisher_name: Rentometer
+  source_id: medrent-rentometer-cuyahoga-falls
+  as_of: 2026-10-14
+  confidence: estimated
+  note: "From a search result for this page; page not opened. Search result wording: 'Cuyahoga Falls (Rentometer, data as of May 2026): Its table lists apartment medians by bedroom count, including Studio $750 and 1 Bedroom $972'."
