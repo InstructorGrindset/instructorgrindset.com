@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T00:45:05+00:00",
+  "generated_at": "2026-10-14T00:28:56+00:00",
   "resorts": {
     "afton-alps": {
       "name": "Afton Alps",
@@ -31,10 +31,10 @@
       },
       "validation": {
         "annual_in": 36.5,
-        "published_in": null,
-        "diff_pct": null,
-        "status": "no comparison",
-        "published_source_id": null,
+        "published_in": 60.0,
+        "diff_pct": -39.2,
+        "status": "flagged",
+        "published_source_id": "facts-midwest-wiki-comparison",
         "snowfall_source": "era5"
       },
       "density_estimate_method": "anderson_1976",
@@ -228,30 +228,30 @@
       },
       "open_meteo": {
         "model": "era5",
-        "requested_lat": 40.58083,
-        "requested_lon": -111.63722,
+        "requested_lat": 40.58796,
+        "requested_lon": -111.63799,
         "grid_latitude": 40.5,
         "grid_longitude": -111.75,
-        "elevation_m": 2812.0,
-        "elevation_ft": 9226.0,
+        "elevation_m": 2604.0,
+        "elevation_ft": 8543.0,
         "elevation_source": "Open Meteo 90 m DEM default (no elevation parameter sent)",
         "grid_cell_elevation_m": 1967.0,
         "timezone": "America/Denver",
-        "fetched_at": "2026-10-13T00:25:43+00:00"
+        "fetched_at": "2026-10-14T00:23:56+00:00"
       },
       "snowfall": {
         "era5_grid_elevation_ft": 6453.0,
         "station": "766:UT:SNTL",
         "station_elevation_ft": 9170.0,
         "seasons_with_data": 25,
-        "swe_annual_in": 411.1,
+        "swe_annual_in": 411.2,
         "depth_gain_annual_in": 294.1,
         "qc_counts": {
-          "rain_or_warm_swe_gain": 629,
+          "rain_or_warm_swe_gain": 628,
           "depth_only_day": 85
         },
         "density_from": {
-          "station_month": 1714,
+          "station_month": 1715,
           "estimated": 0
         },
         "reason": "SNOTEL 766:UT:SNTL daily SWE gains",
@@ -259,7 +259,7 @@
         "null_reason": null
       },
       "validation": {
-        "annual_in": 410.9,
+        "annual_in": 411.0,
         "published_in": 545.0,
         "diff_pct": -24.6,
         "status": "ok",
@@ -339,7 +339,7 @@
           {
             "triplet": "766:UT:SNTL",
             "name": "Snowbird",
-            "distance_km": 2.22,
+            "distance_km": 2.72,
             "station_elevation_ft": 9170.0,
             "elevation_diff_ft": 640.0,
             "qc_counts": {
@@ -939,10 +939,10 @@
       },
       "validation": {
         "annual_in": 82.3,
-        "published_in": null,
-        "diff_pct": null,
-        "status": "no comparison",
-        "published_source_id": null,
+        "published_in": 120.0,
+        "diff_pct": -31.4,
+        "status": "ok",
+        "published_source_id": "facts-northeast1-wp-attitash",
         "snowfall_source": "era5"
       },
       "density_estimate_method": "anderson_1976",
@@ -1121,6 +1121,605 @@
         "selection_mode": "distance_and_elevation",
         "resort_base_ft": 7140.0,
         "resort_summit_ft": 8805.0,
+        "radius_km": 25.0,
+        "tried": [],
+        "result": "no SNOTEL station within radius and elevation band with enough record"
+      }
+    },
+    "beaver-creek": {
+      "name": "Beaver Creek",
+      "tier": "A",
+      "period": {
+        "start_year": 2001,
+        "end_year": 2026,
+        "seasons": 25
+      },
+      "open_meteo": {
+        "model": "era5",
+        "requested_lat": 39.6314,
+        "requested_lon": -106.5217,
+        "grid_latitude": 39.75,
+        "grid_longitude": -106.5,
+        "elevation_m": 2266.0,
+        "elevation_ft": 7434.0,
+        "elevation_source": "Open Meteo 90 m DEM default (no elevation parameter sent)",
+        "grid_cell_elevation_m": 2780.0,
+        "timezone": "America/Denver",
+        "fetched_at": "2026-10-14T00:23:56+00:00"
+      },
+      "snowfall": {
+        "era5_grid_elevation_ft": 9121.0,
+        "station": "1041:CO:SNTL",
+        "station_elevation_ft": 8530.0,
+        "seasons_with_data": 23,
+        "swe_annual_in": 185.3,
+        "depth_gain_annual_in": 122.1,
+        "qc_counts": {
+          "rain_or_warm_swe_gain": 429,
+          "depth_only_day": 182
+        },
+        "density_from": {
+          "station_month": 1174,
+          "estimated": 1
+        },
+        "reason": "SNOTEL 1041:CO:SNTL daily SWE gains",
+        "snowfall_source": "snotel_swe",
+        "null_reason": null
+      },
+      "validation": {
+        "annual_in": 185.4,
+        "published_in": 323.0,
+        "diff_pct": -42.6,
+        "status": "flagged",
+        "published_source_id": "wikipedia-beaver-creek-resort",
+        "snowfall_source": "snotel_swe"
+      },
+      "density_estimate_method": "anderson_1976",
+      "storms": 842,
+      "months": {
+        "10": {
+          "seasons_used": 23,
+          "storms": 56,
+          "density_storms": 18
+        },
+        "11": {
+          "seasons_used": 23,
+          "storms": 115,
+          "density_storms": 53
+        },
+        "12": {
+          "seasons_used": 23,
+          "storms": 145,
+          "density_storms": 71
+        },
+        "1": {
+          "seasons_used": 23,
+          "storms": 159,
+          "density_storms": 67
+        },
+        "2": {
+          "seasons_used": 23,
+          "storms": 133,
+          "density_storms": 66
+        },
+        "3": {
+          "seasons_used": 23,
+          "storms": 114,
+          "density_storms": 54
+        },
+        "4": {
+          "seasons_used": 23,
+          "storms": 93,
+          "density_storms": 50
+        },
+        "5": {
+          "seasons_used": 23,
+          "storms": 25,
+          "density_storms": 8
+        },
+        "6": {
+          "seasons_used": 23,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "7": {
+          "seasons_used": 23,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "8": {
+          "seasons_used": 24,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "9": {
+          "seasons_used": 24,
+          "storms": 2,
+          "density_storms": 0
+        }
+      },
+      "snotel": {
+        "selection_mode": "distance_and_elevation",
+        "resort_base_ft": 8100.0,
+        "resort_summit_ft": 11440.0,
+        "radius_km": 25.0,
+        "tried": [
+          {
+            "triplet": "1041:CO:SNTL",
+            "name": "Beaver Ck Village",
+            "distance_km": 3.75,
+            "station_elevation_ft": 8530.0,
+            "elevation_diff_ft": 430.0,
+            "qc_counts": {
+              "ok": 387,
+              "small_depth_gain": 330,
+              "no_swe_gain": 12,
+              "density_out_of_range": 2,
+              "negative_swe_jump": 14
+            },
+            "valid_storms": 387,
+            "result": "used"
+          }
+        ],
+        "station": "1041:CO:SNTL"
+      }
+    },
+    "berkshire-east": {
+      "name": "Berkshire East Mountain Resort",
+      "tier": "A",
+      "period": {
+        "start_year": 2001,
+        "end_year": 2026,
+        "seasons": 25
+      },
+      "open_meteo": {
+        "model": "era5",
+        "requested_lat": 42.6208,
+        "requested_lon": -72.8769,
+        "grid_latitude": 42.5,
+        "grid_longitude": -73.0,
+        "elevation_m": 187.0,
+        "elevation_ft": 614.0,
+        "elevation_source": "Open Meteo 90 m DEM default (no elevation parameter sent)",
+        "grid_cell_elevation_m": 466.0,
+        "timezone": "America/New_York",
+        "fetched_at": "2026-10-14T00:23:56+00:00"
+      },
+      "snowfall": {
+        "era5_grid_elevation_ft": 1529.0,
+        "reason": "low relief (vertical 1,180 ft, base 520 ft)",
+        "snowfall_source": null,
+        "null_reason": "derived annual snowfall 52 in differs from the published 110 in by -53 percent, over the 50 percent limit"
+      },
+      "validation": {
+        "annual_in": 51.6,
+        "published_in": 110.0,
+        "diff_pct": -53.1,
+        "status": "suppressed",
+        "published_source_id": "wikipedia-berkshire-east-ski-resort",
+        "snowfall_source": "era5"
+      },
+      "density_estimate_method": "anderson_1976",
+      "storms": 294,
+      "months": {
+        "10": {
+          "seasons_used": 25,
+          "storms": 8,
+          "density_storms": 8
+        },
+        "11": {
+          "seasons_used": 25,
+          "storms": 17,
+          "density_storms": 17
+        },
+        "12": {
+          "seasons_used": 25,
+          "storms": 62,
+          "density_storms": 62
+        },
+        "1": {
+          "seasons_used": 25,
+          "storms": 65,
+          "density_storms": 65
+        },
+        "2": {
+          "seasons_used": 25,
+          "storms": 77,
+          "density_storms": 77
+        },
+        "3": {
+          "seasons_used": 25,
+          "storms": 47,
+          "density_storms": 47
+        },
+        "4": {
+          "seasons_used": 25,
+          "storms": 17,
+          "density_storms": 17
+        },
+        "5": {
+          "seasons_used": 25,
+          "storms": 1,
+          "density_storms": 0
+        },
+        "6": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "7": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "8": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "9": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        }
+      },
+      "snotel": {
+        "selection_mode": "distance_and_elevation",
+        "resort_base_ft": 520.0,
+        "resort_summit_ft": 1840.0,
+        "radius_km": 25.0,
+        "tried": [],
+        "result": "no SNOTEL station within radius and elevation band with enough record"
+      }
+    },
+    "big-boulder": {
+      "name": "Big Boulder Mountain",
+      "tier": "A",
+      "period": {
+        "start_year": 2001,
+        "end_year": 2026,
+        "seasons": 25
+      },
+      "open_meteo": {
+        "model": "era5",
+        "requested_lat": 41.0483,
+        "requested_lon": -75.6014,
+        "grid_latitude": 41.0,
+        "grid_longitude": -75.5,
+        "elevation_m": 580.0,
+        "elevation_ft": 1903.0,
+        "elevation_source": "Open Meteo 90 m DEM default (no elevation parameter sent)",
+        "grid_cell_elevation_m": 380.0,
+        "timezone": "America/New_York",
+        "fetched_at": "2026-10-14T00:26:09+00:00"
+      },
+      "snowfall": {
+        "era5_grid_elevation_ft": 1247.0,
+        "reason": "low relief (vertical 475 ft, base 1,700 ft)",
+        "snowfall_source": "era5",
+        "null_reason": null
+      },
+      "validation": {
+        "annual_in": 34.8,
+        "published_in": null,
+        "diff_pct": null,
+        "status": "no comparison",
+        "published_source_id": null,
+        "snowfall_source": "era5"
+      },
+      "density_estimate_method": "anderson_1976",
+      "storms": 207,
+      "months": {
+        "10": {
+          "seasons_used": 25,
+          "storms": 5,
+          "density_storms": 5
+        },
+        "11": {
+          "seasons_used": 25,
+          "storms": 12,
+          "density_storms": 12
+        },
+        "12": {
+          "seasons_used": 25,
+          "storms": 43,
+          "density_storms": 43
+        },
+        "1": {
+          "seasons_used": 25,
+          "storms": 49,
+          "density_storms": 49
+        },
+        "2": {
+          "seasons_used": 25,
+          "storms": 55,
+          "density_storms": 55
+        },
+        "3": {
+          "seasons_used": 25,
+          "storms": 39,
+          "density_storms": 39
+        },
+        "4": {
+          "seasons_used": 25,
+          "storms": 4,
+          "density_storms": 0
+        },
+        "5": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "6": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "7": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "8": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "9": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        }
+      },
+      "snotel": {
+        "selection_mode": "distance_and_elevation",
+        "resort_base_ft": 1700.0,
+        "resort_summit_ft": 2175.0,
+        "radius_km": 25.0,
+        "tried": [],
+        "result": "no SNOTEL station within radius and elevation band with enough record"
+      }
+    },
+    "big-sky": {
+      "name": "Big Sky Resort",
+      "tier": "A",
+      "period": {
+        "start_year": 2001,
+        "end_year": 2026,
+        "seasons": 25
+      },
+      "open_meteo": {
+        "model": "era5",
+        "requested_lat": 45.275,
+        "requested_lon": -111.4319,
+        "grid_latitude": 45.25,
+        "grid_longitude": -111.5,
+        "elevation_m": 2820.0,
+        "elevation_ft": 9252.0,
+        "elevation_source": "Open Meteo 90 m DEM default (no elevation parameter sent)",
+        "grid_cell_elevation_m": 2233.0,
+        "timezone": "America/Denver",
+        "fetched_at": "2026-10-14T00:26:09+00:00"
+      },
+      "snowfall": {
+        "era5_grid_elevation_ft": 7326.0,
+        "station": "590:MT:SNTL",
+        "station_elevation_ft": 8820.0,
+        "seasons_with_data": 25,
+        "swe_annual_in": 251.3,
+        "depth_gain_annual_in": 173.2,
+        "qc_counts": {
+          "rain_or_warm_swe_gain": 645,
+          "depth_only_day": 65
+        },
+        "density_from": {
+          "station_month": 2169,
+          "estimated": 2
+        },
+        "reason": "SNOTEL 590:MT:SNTL daily SWE gains",
+        "snowfall_source": "snotel_swe",
+        "null_reason": null
+      },
+      "validation": {
+        "annual_in": 251.3,
+        "published_in": null,
+        "diff_pct": null,
+        "status": "no comparison",
+        "published_source_id": null,
+        "snowfall_source": "snotel_swe"
+      },
+      "density_estimate_method": "anderson_1976",
+      "storms": 1202,
+      "months": {
+        "10": {
+          "seasons_used": 25,
+          "storms": 114,
+          "density_storms": 48
+        },
+        "11": {
+          "seasons_used": 25,
+          "storms": 167,
+          "density_storms": 76
+        },
+        "12": {
+          "seasons_used": 25,
+          "storms": 165,
+          "density_storms": 101
+        },
+        "1": {
+          "seasons_used": 25,
+          "storms": 157,
+          "density_storms": 78
+        },
+        "2": {
+          "seasons_used": 25,
+          "storms": 155,
+          "density_storms": 84
+        },
+        "3": {
+          "seasons_used": 25,
+          "storms": 166,
+          "density_storms": 91
+        },
+        "4": {
+          "seasons_used": 25,
+          "storms": 150,
+          "density_storms": 78
+        },
+        "5": {
+          "seasons_used": 25,
+          "storms": 79,
+          "density_storms": 42
+        },
+        "6": {
+          "seasons_used": 25,
+          "storms": 24,
+          "density_storms": 12
+        },
+        "7": {
+          "seasons_used": 25,
+          "storms": 1,
+          "density_storms": 0
+        },
+        "8": {
+          "seasons_used": 25,
+          "storms": 1,
+          "density_storms": 0
+        },
+        "9": {
+          "seasons_used": 25,
+          "storms": 23,
+          "density_storms": 7
+        }
+      },
+      "snotel": {
+        "selection_mode": "distance_and_elevation",
+        "resort_base_ft": 6800.0,
+        "resort_summit_ft": 11166.0,
+        "radius_km": 25.0,
+        "tried": [
+          {
+            "triplet": "590:MT:SNTL",
+            "name": "Lone Mountain",
+            "distance_km": 0.4,
+            "station_elevation_ft": 8820.0,
+            "elevation_diff_ft": 2020.0,
+            "qc_counts": {
+              "ok": 617,
+              "small_depth_gain": 455,
+              "negative_swe_jump": 8,
+              "no_swe_gain": 2
+            },
+            "valid_storms": 617,
+            "result": "used"
+          }
+        ],
+        "station": "590:MT:SNTL"
+      }
+    },
+    "big-snow-american-dream": {
+      "name": "Big SNOW American Dream",
+      "tier": "A",
+      "period": {
+        "start_year": 2001,
+        "end_year": 2026,
+        "seasons": 25
+      },
+      "open_meteo": {
+        "model": "era5",
+        "requested_lat": 40.8111,
+        "requested_lon": -74.07,
+        "grid_latitude": 40.75,
+        "grid_longitude": -74.0,
+        "elevation_m": 4.0,
+        "elevation_ft": 13.0,
+        "elevation_source": "Open Meteo 90 m DEM default (no elevation parameter sent)",
+        "grid_cell_elevation_m": 18.0,
+        "timezone": "America/New_York",
+        "fetched_at": "2026-10-14T00:26:09+00:00"
+      },
+      "snowfall": {
+        "era5_grid_elevation_ft": 59.0,
+        "reason": "low relief (vertical 160 ft, base 10 ft)",
+        "snowfall_source": "era5",
+        "null_reason": null
+      },
+      "validation": {
+        "annual_in": 24.8,
+        "published_in": null,
+        "diff_pct": null,
+        "status": "no comparison",
+        "published_source_id": null,
+        "snowfall_source": "era5"
+      },
+      "density_estimate_method": "anderson_1976",
+      "storms": 143,
+      "months": {
+        "10": {
+          "seasons_used": 25,
+          "storms": 1,
+          "density_storms": 0
+        },
+        "11": {
+          "seasons_used": 25,
+          "storms": 3,
+          "density_storms": 0
+        },
+        "12": {
+          "seasons_used": 25,
+          "storms": 25,
+          "density_storms": 25
+        },
+        "1": {
+          "seasons_used": 25,
+          "storms": 39,
+          "density_storms": 39
+        },
+        "2": {
+          "seasons_used": 25,
+          "storms": 43,
+          "density_storms": 43
+        },
+        "3": {
+          "seasons_used": 25,
+          "storms": 30,
+          "density_storms": 30
+        },
+        "4": {
+          "seasons_used": 25,
+          "storms": 2,
+          "density_storms": 0
+        },
+        "5": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "6": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "7": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "8": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        },
+        "9": {
+          "seasons_used": 25,
+          "storms": 0,
+          "density_storms": 0
+        }
+      },
+      "snotel": {
+        "selection_mode": "distance_and_elevation",
+        "resort_base_ft": 10.0,
+        "resort_summit_ft": 11.0,
         "radius_km": 25.0,
         "tried": [],
         "result": "no SNOTEL station within radius and elevation band with enough record"
