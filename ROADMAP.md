@@ -243,7 +243,7 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | Report submissions (2026-10-13) | Reports go to the site's existing Formspree form (https://formspree.io/f/xyzbdqgq); `python -m pipeline.reports import` reads its CSV export |
 | Season facts sourcing (2026-10-13) | Search results that name their page may supply season facts as `estimated`, with the note "From a search result for this page; page not opened" |
 | Basemap (2026-10-13) | Muted USGS The National Map imagery under the data; public domain; readiness never waits on tiles |
-| Alaska (2026-10-13) | Alaska draws as a smaller inset in the lower left; the lower 48 stays centered |
+| Alaska (2026-10-13, changed 2026-10-14) | First: a smaller inset in the lower left. Owner decision 2026-10-14: no inset. Alaska draws at its real location and scale; the start view stays centered on the lower 48, and panning reaches far enough to drag Alaska to the middle of the screen |
 | Heat maps (2026-10-13) | Real heat maps that cover the map, not highlighted resorts. Snowfall uses NOAA NCEI 1991 to 2020 station normals with a pocket for each resort's sourced snowfall. Interpolated colors are never shown as numbers |
 | Snowfall contrast (2026-10-13) | Most contrast goes to 180 to 900 in, where people actually ski; a 50 in difference must be easy to read. Little or no snow shows as grey |
 | Official trail maps (2026-10-13, changed 2026-10-14) | First: link only. Owner decision 2026-10-14: embed the official map in the trail map dialog, loaded straight from the resort's own servers (hotlinked, never copied, rehosted or modified) and credited to the resort. The OpenSkiMap drawing stays as the Interactive tab and the fallback |
