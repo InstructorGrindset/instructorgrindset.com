@@ -172,7 +172,7 @@ Each phase lists what shipped and what is still open. Open items are scheduled i
 * Analytics skipped by owner decision.
 
 ### Phase 9: Shared calculator infrastructure ✅
-* Shipped: shared season income module in `assets/js/season-income.mjs` and `pipeline/season_income.py`, with 105 golden vectors proving identical results.
+* Shipped: shared season income module in `assets/js/season-income.mjs` and `pipeline/season_income.py`, with 124 golden vectors (captured from the calculator page on main) proving identical results.
 
 ### Facts research (cross phase) ✅ (data partial)
 * Shipped: typical open and close dates for 329 of 531 resorts, terrain mix for 74, annual snowfall for 274, acres and vertical gap fill from Wikipedia. Most season dates are `estimated` from search results.

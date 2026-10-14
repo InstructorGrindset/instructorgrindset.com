@@ -11,8 +11,8 @@
 //   Same as Number.prototype.toFixed. Used for displayed rates and months.
 // Every other value is an unrounded double.
 
-// Federal income tax brackets used by the calculator (single filer, no deductions).
-// tax = base + (taxable - over) x rate for the first bracket with taxable <= upTo.
+// Federal income tax brackets used by the calculator (single filer), applied to wages after the
+// standard deduction: tax = base + (x - over) x rate for the first bracket with x <= upTo.
 export const FEDERAL_BRACKETS = Object.freeze([
   Object.freeze({ over: 0, upTo: 11600, base: 0, rate: 0.10 }),
   Object.freeze({ over: 11600, upTo: 47150, base: 1160, rate: 0.12 }),
@@ -20,6 +20,10 @@ export const FEDERAL_BRACKETS = Object.freeze([
   Object.freeze({ over: 100525, upTo: 191950, base: 17168, rate: 0.24 }),
   Object.freeze({ over: 191950, upTo: Infinity, base: 39110, rate: 0.32 }),
 ]);
+
+// 2024 standard deduction for a single filer. Federal tax applies to max(0, wages - STANDARD_DEDUCTION).
+// State tax and FICA apply to all wages.
+export const STANDARD_DEDUCTION = 14600;
 
 // Social Security and Medicare, employee share, on wages.
 export const FICA_RATE = 0.0765;
@@ -63,7 +67,7 @@ export function toFixedHalfUp(x, digits) {
   return Number(x).toFixed(digits);
 }
 
-/** Federal income tax on taxable wages. */
+/** Federal income tax from the brackets alone; seasonIncome passes wages after the standard deduction. */
 export function federalTax(taxable) {
   for (const b of FEDERAL_BRACKETS) {
     if (taxable <= b.upTo) return b.over === 0 ? taxable * b.rate : b.base + (taxable - b.over) * b.rate;
@@ -83,9 +87,11 @@ export function verdict(ratio) {
  * The calculator's season model.
  *
  * inputs: { stateRate, weeks, daysPerWeek, hoursPerDay, groupRate, privateRate, privatePct (0..100),
- *           privateLengthHours (hours per private day), tipsPerDay, rentMonthly, lifeMonthly,
- *           transport (one time), gear (one time), months? (default weeks / WEEKS_PER_MONTH) }
- * Tips are untaxed. Federal tax, state tax and FICA apply to wages only.
+ *           privateLengthHours (private lesson hours on a private day), tipsPerDay, rentMonthly, lifeMonthly,
+ *           transport (per month, like rent and life), gear (one time), months? (default weeks / WEEKS_PER_MONTH) }
+ * A private day is a full work day: privateLengthHours at the private rate, the rest of hoursPerDay
+ * (never below 0) at the group rate. Tips are untaxed. Federal tax, state tax and FICA apply to wages
+ * only; federal tax applies after the standard deduction.
  */
 export function seasonIncome(inputs) {
   const {
@@ -98,7 +104,7 @@ export function seasonIncome(inputs) {
   const privateDays = roundHalfUp(privateDaysRaw);
   const groupDays = totalDays - privateDays;
   const privateHours = privateDays * privateLengthHours;
-  const groupHours = groupDays * hoursPerDay;
+  const groupHours = groupDays * hoursPerDay + privateDays * Math.max(0, hoursPerDay - privateLengthHours);
 
   const groupIncome = groupHours * groupRate;
   const privateIncome = privateHours * privateRate;
@@ -106,7 +112,8 @@ export function seasonIncome(inputs) {
   const taxable = groupIncome + privateIncome;
   const gross = taxable + tipIncome;
 
-  const fedTax = federalTax(taxable);
+  const federalTaxable = Math.max(0, taxable - STANDARD_DEDUCTION);
+  const fedTax = federalTax(federalTaxable);
   const stateTax = taxable * stateRate;
   const fica = taxable * FICA_RATE;
   const totalTax = fedTax + stateTax + fica;
@@ -117,7 +124,8 @@ export function seasonIncome(inputs) {
   const months = inputs.months ?? weeks / WEEKS_PER_MONTH;
   const housingCost = rentMonthly * months;
   const lifeCost = lifeMonthly * months;
-  const totalExpenses = housingCost + lifeCost + transport + gear;
+  const transportCost = transport * months;
+  const totalExpenses = housingCost + lifeCost + transportCost + gear;
 
   const net = afterTax - totalExpenses;
   const netBeforeTax = gross - totalExpenses;
@@ -127,8 +135,8 @@ export function seasonIncome(inputs) {
   return {
     totalDays, privateDaysRaw, privateDays, groupDays, groupHours, privateHours,
     groupIncome, privateIncome, tipIncome, taxable, gross,
-    federalTax: fedTax, stateTax, fica, totalTax, effectiveRate, afterTax, afterTaxWages,
-    months, housingCost, lifeCost, totalExpenses,
+    federalTaxable, federalTax: fedTax, stateTax, fica, totalTax, effectiveRate, afterTax, afterTaxWages,
+    months, housingCost, lifeCost, transportCost, totalExpenses,
     net, netBeforeTax, weeklyNet, ratio, verdict: verdict(ratio),
   };
 }
@@ -136,8 +144,8 @@ export function seasonIncome(inputs) {
 /**
  * Maps the Career Map lucrativeness assumptions onto seasonIncome inputs (no privates, no tips):
  *   weeks = seasonLengthDays / 7, one work block per week of hoursPerWeek hours at payHourlyMidUsd,
- *   rent = rentMonthlyUsd, life = foodMonthlyUsd + transportMonthlyUsd, months = seasonMonths,
- *   one time costs = passOffsetUsd + gearOffsetUsd (in the gear slot), transport slot 0.
+ *   rent = rentMonthlyUsd, life = foodMonthlyUsd, transport = transportMonthlyUsd (both per month),
+ *   months = seasonMonths, one time costs = passOffsetUsd + gearOffsetUsd (in the gear slot).
  * The map (pipeline/career.py) calls the Python twin with rent, food, transport, pass and gear at 0 and no tips
  * (owner decision 2026-10-14), once per wage: the middle of the posted wage range gives the lucrativeness `mid`
  * ("Estimated net income"), the bottom `low` and the top `high`. netBeforeTax (then equal to gross) is that value.
@@ -150,7 +158,7 @@ export function lucrativenessInputs({
   return {
     stateRate, weeks: seasonLengthDays / 7, daysPerWeek: 1, hoursPerDay: hoursPerWeek,
     groupRate: payHourlyMidUsd, privateRate: 0, privatePct: 0, privateLengthHours: 0, tipsPerDay: 0,
-    rentMonthly: rentMonthlyUsd, lifeMonthly: foodMonthlyUsd + transportMonthlyUsd,
-    transport: 0, gear: passOffsetUsd + gearOffsetUsd, months: seasonMonths,
+    rentMonthly: rentMonthlyUsd, lifeMonthly: foodMonthlyUsd,
+    transport: transportMonthlyUsd, gear: passOffsetUsd + gearOffsetUsd, months: seasonMonths,
   };
 }

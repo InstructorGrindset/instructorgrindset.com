@@ -1,7 +1,8 @@
 """Season Income Calculator: Python mirror against the golden vectors and the JS module.
 
-golden.json was captured from the live /income-calculator/ page before the shared module
-refactor (tests/calculator/page_golden.mjs --capture). Values are compared exactly as doubles.
+golden.json was captured from main's inline script /income-calculator/ page (commit be2553b: private
+day remainder at the group rate, 14600 standard deduction, monthly transportation) with
+tests/calculator/page_golden.mjs --capture. Values are compared exactly as doubles.
 Rounding rules: whole dollars by round_half_up (JS Math.round, ties toward positive infinity);
 displayed decimals by to_fixed_half_up (JS toFixed, exact binary value, ties away from zero).
 """
@@ -56,7 +57,23 @@ def test_golden_set_shape():
     assert len({v["id"] for v in VECTORS}) == len(VECTORS)
     assert {v["inputs"]["state"] for v in ui} == {s["name"] for s in si.STATE_TAX_RATES}
     assert {v["verdict"] for v in VECTORS} == {"strong", "workable", "tight", "negative"}
-    assert GOLDEN["captured_from"]["git_blob"] == "8aec73ce34624e7136e886a2142fc2db866ae49e"
+    assert GOLDEN["captured_from"]["git_blob"] == "736d84a41b55e8299e23a4b0c68475dd8f273292"
+    assert GOLDEN["captured_from"]["git_commit"] == "be2553ba60391c13b84dcf7e9c144683ec7931ed"
+
+
+def test_golden_covers_main_formula_changes():
+    by_id = {v["id"]: v["values"] for v in VECTORS}
+    # rest of a private day at the group rate, never below 0 hours
+    assert by_id["private-remainder-max"]["group_hours"] > 0
+    assert by_id["private-length-exceeds-day"]["group_hours"] == by_id["private-length-exceeds-day"]["total_days"] / 2 * 4
+    # wages on both sides of the standard deduction
+    assert [by_id[f"standard-deduction-{k}"]["taxable"] for k in ("just-below", "exact", "just-above")] == \
+        [14599, 14600, 14601]
+    assert [by_id[f"standard-deduction-{k}"]["federal_tax"] for k in ("just-below", "exact", "just-above")] == \
+        [0, 0, 0.1]
+    # transportation per month
+    v = by_id["transport-monthly-max"]
+    assert v["transport_cost"] == 1500 * v["months"]
 
 
 @pytest.mark.parametrize("vec", VECTORS, ids=[v["id"] for v in VECTORS])
@@ -114,6 +131,47 @@ def test_federal_tax_brackets(g, want):
     assert si.federal_tax(g) == pytest.approx(want, abs=1e-9)
 
 
+def _inputs(**over) -> si.SeasonInputs:
+    base = dict(state_rate=0.044, weeks=18, days_per_week=5, hours_per_day=7, group_rate=22, private_rate=38,
+                private_pct=30, private_length_hours=2, tips_per_day=25, rent_monthly=150, life_monthly=800,
+                transport=150, gear=300)
+    return si.SeasonInputs(**{**base, **over})
+
+
+def test_private_day_rest_paid_at_group_rate():
+    r = si.season_income(_inputs())  # 90 days, 27 private days of 2 private hours in a 7 hour day
+    assert r.private_days == 27 and r.group_days == 63
+    assert r.private_hours == 27 * 2 and r.group_hours == 63 * 7 + 27 * (7 - 2)
+    assert r.group_income == r.group_hours * 22 and r.private_income == 54 * 38
+
+
+def test_private_longer_than_day_adds_no_group_hours():
+    r = si.season_income(_inputs(hours_per_day=4, private_length_hours=8, private_pct=50))
+    assert r.group_hours == r.group_days * 4 and r.private_hours == r.private_days * 8
+
+
+def test_federal_tax_after_standard_deduction():
+    assert si.STANDARD_DEDUCTION == 14600
+    for wages, fed_in in ((0, 0), (14599, 0), (14600, 0), (14601, 1), (40000, 25400)):
+        r = si.season_income(_inputs(weeks=1, days_per_week=1, hours_per_day=1, private_pct=0, group_rate=wages,
+                                     tips_per_day=0))
+        assert r.taxable == wages and r.federal_taxable == fed_in
+        assert r.federal_tax == si.federal_tax(fed_in)
+        assert r.state_tax == wages * 0.044 and r.fica == wages * si.FICA_RATE  # no deduction for these
+
+
+def test_transport_is_monthly():
+    r = si.season_income(_inputs(transport=200))
+    assert r.transport_cost == 200 * r.months and r.months == 18 / si.WEEKS_PER_MONTH
+    assert r.total_expenses == r.housing_cost + r.life_cost + r.transport_cost + 300
+
+
+def test_js_max_semantics():
+    assert si._js_max(0.0, -3.0) == 0 and si._js_max(0.0, 2.5) == 2.5
+    assert math.copysign(1, si._js_max(0.0, -0.0)) == 1 and math.copysign(1, si._js_max(-0.0, 0.0)) == 1
+    assert math.isnan(si._js_max(0.0, math.nan)) and math.isnan(si._js_max(math.nan, 0.0))
+
+
 def test_federal_bracket_bases_as_published_in_calculator():
     # Each base is the tax at the bracket start, except 17168: the 22% bracket ends at 17168.5,
     # so tax drops by $0.50 just above $100,525. Kept as is: the live calculator computes it this way.
@@ -139,6 +197,9 @@ def test_page_uses_shared_module():
     assert re.search(r"<script type=\"module\">\s*//[^\n]*\n\s*import \{[^}]*seasonIncome[^}]*\} from "
                      r"'/assets/js/season-income\.mjs", html)
     assert "function federalTax" not in html and "0.0765" not in html and "4.33" not in html
+    assert "14600" not in html and "Math.max(0, hpd" not in html
+    # main's accessibility additions stay: aria-valuetext on every slider, kept in step by sv()
+    assert "setAttribute('aria-valuetext'" in html and "window.sv = sv" in html and "window.calc = calc" in html
 
 
 # ------------------------------------------------------------ JS parity
@@ -165,6 +226,7 @@ def test_tables_match_js(js_dump):
                    for b in si.FEDERAL_BRACKETS]
     assert [{k: _num(v) for k, v in b.items()} for b in t["federal_brackets"]] == py_brackets
     assert t["fica_rate"] == si.FICA_RATE and t["weeks_per_month"] == si.WEEKS_PER_MONTH
+    assert t["standard_deduction"] == si.STANDARD_DEDUCTION
     assert t["state_tax_rates"] == [dict(s) for s in si.STATE_TAX_RATES]
     assert t["verdict_thresholds"] == si.VERDICT_THRESHOLDS
 

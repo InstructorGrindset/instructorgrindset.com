@@ -33,6 +33,7 @@ if (process.argv.includes('--dump')) {
   process.stdout.write(JSON.stringify({
     tables: {
       federal_brackets: si.FEDERAL_BRACKETS,
+      standard_deduction: si.STANDARD_DEDUCTION,
       fica_rate: si.FICA_RATE, weeks_per_month: si.WEEKS_PER_MONTH, state_tax_rates: si.STATE_TAX_RATES,
       verdict_thresholds: si.VERDICT_THRESHOLDS,
     },

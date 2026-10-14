@@ -13,7 +13,7 @@ Rounding rules (identical in both languages):
   (JS ``Number.prototype.toFixed``). Used for displayed rates and months.
 
 Every other value is an unrounded double. Division follows JS: dividing by zero gives an infinity
-or NaN instead of raising.
+or NaN instead of raising. ``_js_max`` follows JS ``Math.max`` (NaN wins, +0 beats -0).
 """
 from __future__ import annotations
 
@@ -22,8 +22,8 @@ from dataclasses import asdict, dataclass
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Optional
 
-# Federal income tax brackets (single filer, no deductions):
-# tax = base + (taxable - over) x rate for the first bracket with taxable <= up_to.
+# Federal income tax brackets (single filer), applied to wages after the standard deduction:
+# tax = base + (x - over) x rate for the first bracket with x <= up_to.
 FEDERAL_BRACKETS: tuple[dict, ...] = (
     {"over": 0, "up_to": 11600, "base": 0, "rate": 0.10},
     {"over": 11600, "up_to": 47150, "base": 1160, "rate": 0.12},
@@ -31,6 +31,10 @@ FEDERAL_BRACKETS: tuple[dict, ...] = (
     {"over": 100525, "up_to": 191950, "base": 17168, "rate": 0.24},
     {"over": 191950, "up_to": math.inf, "base": 39110, "rate": 0.32},
 )
+
+# 2024 standard deduction for a single filer. Federal tax applies to max(0, wages - STANDARD_DEDUCTION).
+# State tax and FICA apply to all wages.
+STANDARD_DEDUCTION = 14600
 
 # Social Security and Medicare, employee share, on wages.
 FICA_RATE = 0.0765
@@ -107,8 +111,18 @@ def _div(a: float, b: float) -> float:
     return a / b
 
 
+def _js_max(a: float, b: float) -> float:
+    """JS Math.max of two numbers: NaN if either is NaN, and +0 over -0."""
+    a, b = float(a), float(b)
+    if math.isnan(a) or math.isnan(b):
+        return math.nan
+    if a == b:
+        return b if math.copysign(1.0, a) < 0 else a
+    return a if a > b else b
+
+
 def federal_tax(taxable: float) -> float:
-    """Federal income tax on taxable wages."""
+    """Federal income tax from the brackets alone; season_income passes wages after the standard deduction."""
     taxable = float(taxable)
     for b in FEDERAL_BRACKETS:
         if taxable <= b["up_to"]:
@@ -129,7 +143,8 @@ def verdict(ratio: float) -> str:
 
 @dataclass(frozen=True)
 class SeasonInputs:
-    """Calculator inputs. ``private_pct`` is 0..100; transport and gear are one time costs.
+    """Calculator inputs. ``private_pct`` is 0..100. ``private_length_hours`` is the private lesson hours on a
+    private day. ``rent_monthly``, ``life_monthly`` and ``transport`` are per month; ``gear`` is one time.
 
     ``months`` defaults to ``weeks / WEEKS_PER_MONTH`` (the calculator never sets it).
     """
@@ -162,6 +177,7 @@ class SeasonResult:
     tip_income: float
     taxable: float
     gross: float
+    federal_taxable: float
     federal_tax: float
     state_tax: float
     fica: float
@@ -172,6 +188,7 @@ class SeasonResult:
     months: float
     housing_cost: float
     life_cost: float
+    transport_cost: float
     total_expenses: float
     net: float
     net_before_tax: float
@@ -184,7 +201,12 @@ class SeasonResult:
 
 
 def season_income(inputs: SeasonInputs) -> SeasonResult:
-    """The calculator's season model. Tips are untaxed; federal, state and FICA apply to wages only."""
+    """The calculator's season model.
+
+    A private day is a full work day: ``private_length_hours`` at the private rate, the rest of
+    ``hours_per_day`` (never below 0) at the group rate. Tips are untaxed; federal, state and FICA apply to
+    wages only, federal after the standard deduction. Transport is a monthly cost like rent and life.
+    """
     f = {k: (None if v is None else float(v)) for k, v in asdict(inputs).items()}
     weeks = f["weeks"]
 
@@ -193,7 +215,8 @@ def season_income(inputs: SeasonInputs) -> SeasonResult:
     private_days = round_half_up(private_days_raw)
     group_days = total_days - private_days
     private_hours = private_days * f["private_length_hours"]
-    group_hours = group_days * f["hours_per_day"]
+    rest_of_private_day = _js_max(0.0, f["hours_per_day"] - f["private_length_hours"])
+    group_hours = group_days * f["hours_per_day"] + private_days * rest_of_private_day
 
     group_income = group_hours * f["group_rate"]
     private_income = private_hours * f["private_rate"]
@@ -201,7 +224,8 @@ def season_income(inputs: SeasonInputs) -> SeasonResult:
     taxable = group_income + private_income
     gross = taxable + tip_income
 
-    fed = federal_tax(taxable)
+    federal_taxable = _js_max(0.0, taxable - STANDARD_DEDUCTION)
+    fed = federal_tax(federal_taxable)
     state_tax = taxable * f["state_rate"]
     fica = taxable * FICA_RATE
     total_tax = fed + state_tax + fica
@@ -212,7 +236,8 @@ def season_income(inputs: SeasonInputs) -> SeasonResult:
     months = f["months"] if f["months"] is not None else _div(weeks, WEEKS_PER_MONTH)
     housing_cost = f["rent_monthly"] * months
     life_cost = f["life_monthly"] * months
-    total_expenses = housing_cost + life_cost + f["transport"] + f["gear"]
+    transport_cost = f["transport"] * months
+    total_expenses = housing_cost + life_cost + transport_cost + f["gear"]
 
     net = after_tax - total_expenses
     net_before_tax = gross - total_expenses
@@ -223,10 +248,10 @@ def season_income(inputs: SeasonInputs) -> SeasonResult:
         total_days=total_days, private_days_raw=private_days_raw, private_days=private_days,
         group_days=group_days, group_hours=group_hours, private_hours=private_hours,
         group_income=group_income, private_income=private_income, tip_income=tip_income,
-        taxable=taxable, gross=gross, federal_tax=fed, state_tax=state_tax, fica=fica,
+        taxable=taxable, gross=gross, federal_taxable=federal_taxable, federal_tax=fed, state_tax=state_tax, fica=fica,
         total_tax=total_tax, effective_rate=effective_rate, after_tax=after_tax,
         after_tax_wages=after_tax_wages, months=months, housing_cost=housing_cost,
-        life_cost=life_cost, total_expenses=total_expenses, net=net, net_before_tax=net_before_tax,
+        life_cost=life_cost, transport_cost=transport_cost, total_expenses=total_expenses, net=net, net_before_tax=net_before_tax,
         weekly_net=weekly_net, ratio=ratio, verdict=verdict(ratio),
     )
 
@@ -247,8 +272,9 @@ def lucrativeness_inputs(
     """Map the Career Map lucrativeness assumptions onto calculator inputs (no privates, no tips).
 
     weeks = season_length_days / 7, one work block per week of ``hours_per_week`` hours at
-    ``pay_hourly_mid_usd``; rent = rent_monthly_usd; life = food + transport per month;
-    months = season_months; one time costs = pass_offset + gear_offset (gear slot); transport slot 0.
+    ``pay_hourly_mid_usd``; rent = rent_monthly_usd; life = food_monthly_usd and transport =
+    transport_monthly_usd (both per month); months = season_months; one time costs = pass_offset +
+    gear_offset (gear slot).
     The map (pipeline/career.py) calls it with rent, food, transport, pass and gear at 0 and no tips (owner
     decision 2026-10-14), once per wage: the middle of the posted wage range gives the lucrativeness ``mid``
     ("Estimated net income"), the bottom ``low`` and the top ``high``. ``.net_before_tax`` (then equal to
@@ -258,6 +284,6 @@ def lucrativeness_inputs(
         state_rate=state_rate, weeks=_div(float(season_length_days), 7.0), days_per_week=1,
         hours_per_day=hours_per_week, group_rate=pay_hourly_mid_usd, private_rate=0, private_pct=0,
         private_length_hours=0, tips_per_day=0, rent_monthly=rent_monthly_usd,
-        life_monthly=float(food_monthly_usd) + float(transport_monthly_usd), transport=0,
+        life_monthly=float(food_monthly_usd), transport=float(transport_monthly_usd),
         gear=float(pass_offset_usd) + float(gear_offset_usd), months=season_months,
     )
