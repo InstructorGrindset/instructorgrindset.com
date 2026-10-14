@@ -4,6 +4,7 @@ Contract: docs/map/ARCHITECTURE.md, "Phase 5 housing and commute".
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any, Optional, Sequence
 
@@ -66,6 +67,32 @@ def load_housing(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], r
 
 
 CONFIDENCE_RANK = {"published": 0, "reported": 1, "estimated": 2}
+
+_STATE_ZIP = re.compile(r"^(?:(?P<town>.*?)\s+)?(?P<state>[A-Z]{2})(?:\s+\d{5}(?:-\d{4})?)?$")
+
+
+def town_from_address(address: Optional[str]) -> Optional[str]:
+    """The town of a US street address written "street, town, ST 12345" (or "street, town ST 12345"); None when the
+    address does not have that shape. Reads only the sourced address text."""
+    parts = [p.strip() for p in (address or "").split(",") if p.strip()]
+    if parts and parts[-1].upper() in ("USA", "US", "UNITED STATES"):
+        parts = parts[:-1]
+    if len(parts) < 2:
+        return None
+    m = _STATE_ZIP.match(parts[-1])
+    if not m:
+        return None
+    town = m.group("town") if m.group("town") else (parts[-2] if len(parts) >= 3 else None)
+    if not town or any(ch.isdigit() for ch in town):
+        return None
+    return town
+
+
+def site_town(site: HousingSite) -> Optional[str]:
+    """The site's own sourced town, else the town of its publicly listed address."""
+    if site.town:
+        return site.town
+    return town_from_address(site.address.value) if site.address is not None else None
 
 
 def _site_rent(site: HousingSite, site_reported: dict) -> Optional[dict]:
@@ -192,7 +219,7 @@ def assemble_detail(resort: dict, sites: Sequence[HousingSite], lifts_fc: dict, 
                if (c := bus_commute((s.lat, s.lon), base, ex, tdefs.walk_speed_kmh, tdefs.max_walk_km))]
         if bus:
             commutes.append(min(bus, key=lambda c: c["minutes"]))
-        housing.append({**s.model_dump(mode="json"),
+        housing.append({**s.model_dump(mode="json"), "town": site_town(s),
                         "rent_monthly": display_rent(s, baseline, defs.rent.baseline_preference,
                                                      (site_reported or {}).get(s.id)),
                         "commutes": commutes})

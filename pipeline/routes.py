@@ -327,6 +327,35 @@ def render_jobs(ctx: Ctx, r: dict) -> str:
             '<p class="fact-meta">Links open each employer\'s own site in a new tab.</p>' + "".join(groups) + "</section>")
 
 
+# ── Housing links (ARCHITECTURE "Housing search"; links only; match map/js/housinglinks.js) ──
+
+TOOL_KIND = {"employer_portal": "Employer portal", "housing_authority": "Housing authority", "listing_site": "Listing site",
+             "facebook_group": "Facebook group", "craigslist": "Craigslist", "property_manager": "Property manager",
+             "app": "App", "other": "Other"}
+
+
+def render_housing(ctx: Ctx, r: dict) -> str:
+    """The "Housing" section: the Furnished Finder link and the housing search tools, ranked, as plain links. The
+    panel adds employee housing from the detail file and each tool's reason and sources. Nothing without links."""
+    hs = r.get("housing_search") or {}
+    ff = hs.get("furnished_finder") or {}
+    tools = [t for t in hs.get("tools") or [] if str(t.get("url", "")).startswith("https://") and t.get("name")]
+    parts = []
+    if str(ff.get("url", "")).startswith("https://") and ff.get("town"):
+        parts.append('<h4 class="sub">Furnished rentals</h4>'
+                     f'<p class="ff-main"><a class="ff-link" href="{_esc(ff["url"])}" {NEW_TAB}>Furnished Finder listings near '
+                     f'{_esc(ff["town"])}</a> {_badge(ff.get("confidence"))} <span class="fact-meta">{_esc(_host(ff["url"]))} · '
+                     f'opens in a new tab · {_link_meta(ctx, ff)}</span></p>')
+    if tools:
+        lis = "".join(f'<li><a class="tool-link" href="{_esc(t["url"])}" {NEW_TAB}>{_esc(t["name"])}</a> '
+                      f'<span class="tag tool-kind">{_esc(TOOL_KIND.get(t.get("kind"), str(t.get("kind", "")).replace("_", " ").capitalize()))}</span></li>'
+                      for t in tools)
+        parts.append(f'<h4 class="sub">Where people find housing here</h4><ol class="housing-tools">{lis}</ol>')
+    if not parts:
+        return ""
+    return f'<section class="panel-section housing-search"><h3>Housing</h3>{"".join(parts)}</section>'
+
+
 # ── Pass membership (ARCHITECTURE "Pass membership"; match map/js/labels.js passAccess and panel.js passesFact) ──
 
 def pass_access(m: dict) -> str:
@@ -431,6 +460,7 @@ def render_resort(ctx: Ctx, r: dict, c: dict, st: str) -> str:
             pay = '<p class="not-verified">Not yet verified</p>'
         out.append(f'<section class="panel-section"><h3>Career</h3><p class="sub">Hourly pay by certification</p>{pay}</section>')
     out.append(render_jobs(ctx, r))
+    out.append(render_housing(ctx, r))
     out.append(_footer())
     return "".join(x for x in out if x)
 

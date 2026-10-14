@@ -7,6 +7,7 @@ from pydantic import Field, StrictInt, ValidationInfo, field_validator, model_va
 
 from .career import Career
 from .housing import HousingSummary
+from .housing_search import HousingSearch
 from .common import (
     Confidence,
     Latitude,
@@ -208,6 +209,7 @@ class Resort(StrictModel):
     detail_available: bool = False
     trailmap_available: bool = False
     housing_summary: Optional[HousingSummary] = None
+    housing_search: Optional[HousingSearch] = None   # Furnished Finder link and ranked housing search tools (links only)
     sources: list[Slug] = Field(default_factory=list)
 
     @field_validator("location_source_id")
@@ -272,6 +274,6 @@ def referenced_source_ids(resort: Resort) -> set[str]:
                 walk(item)
 
     for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "webcams",
-                 "jobs", "passes", "season", "terrain", "career", "editorial"):
+                 "jobs", "passes", "season", "terrain", "career", "editorial", "housing_search"):
         walk(getattr(resort, name))
     return found

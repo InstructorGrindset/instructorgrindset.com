@@ -469,6 +469,64 @@
      "season_fallback": false
     }
    ],
+   "housing_search": {
+    "furnished_finder": {
+     "town": "Fixture Town",
+     "url": "https://example.com/fixture/furnished/fixture-town",
+     "source_id": "fixture-ff-page",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    },
+    "tools": [
+     {
+      "name": "Fixture Staff Housing Portal",
+      "kind": "employer_portal",
+      "url": "https://example.com/fixture/alpha-peak/staff-housing",
+      "why": "Synthetic reason: staff apply here before the season starts.",
+      "scope": "resort",
+      "named_by": 3,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-housing-guide",
+       "fixture-forum-one"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Front Range Rooms",
+      "kind": "facebook_group",
+      "url": "https://example.com/fixture/groups/front-range-rooms",
+      "why": "Synthetic reason: both sources say rooms post here first each fall.",
+      "scope": "cluster",
+      "named_by": 2,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-forum-one",
+       "fixture-forum-two"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Valley Listings",
+      "kind": "listing_site",
+      "url": "https://example.com/fixture/listings",
+      "why": "Synthetic reason: the guide names it for long stays.",
+      "scope": "cluster",
+      "named_by": 1,
+      "source_ids": [
+       "fixture-housing-guide"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
    "access": {
     "rating": "transit_friendly",
     "summary_md": "A free bus links the staff village and the town to the base all day.",
@@ -484,6 +542,11 @@
    },
    "sources": [
     "fixture-careers",
+    "fixture-ff-page",
+    "fixture-forum-one",
+    "fixture-forum-two",
+    "fixture-housing-guide",
+    "fixture-housing-news",
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
@@ -747,8 +810,47 @@
      "season_fallback": true
     }
    ],
+   "housing_search": {
+    "furnished_finder": null,
+    "tools": [
+     {
+      "name": "Fixture Front Range Rooms",
+      "kind": "facebook_group",
+      "url": "https://example.com/fixture/groups/front-range-rooms",
+      "why": "Synthetic reason: both sources say rooms post here first each fall.",
+      "scope": "cluster",
+      "named_by": 2,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-forum-one",
+       "fixture-forum-two"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Valley Listings",
+      "kind": "listing_site",
+      "url": "https://example.com/fixture/listings",
+      "why": "Synthetic reason: the guide names it for long stays.",
+      "scope": "cluster",
+      "named_by": 1,
+      "source_ids": [
+       "fixture-housing-guide"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
    "housing_summary": null,
    "sources": [
+    "fixture-forum-one",
+    "fixture-forum-two",
+    "fixture-housing-guide",
+    "fixture-housing-news",
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
@@ -963,8 +1065,47 @@
      "season_fallback": false
     }
    ],
+   "housing_search": {
+    "furnished_finder": null,
+    "tools": [
+     {
+      "name": "Fixture Front Range Rooms",
+      "kind": "facebook_group",
+      "url": "https://example.com/fixture/groups/front-range-rooms",
+      "why": "Synthetic reason: both sources say rooms post here first each fall.",
+      "scope": "cluster",
+      "named_by": 2,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-forum-one",
+       "fixture-forum-two"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Valley Listings",
+      "kind": "listing_site",
+      "url": "https://example.com/fixture/listings",
+      "why": "Synthetic reason: the guide names it for long stays.",
+      "scope": "cluster",
+      "named_by": 1,
+      "source_ids": [
+       "fixture-housing-guide"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
    "housing_summary": null,
    "sources": [
+    "fixture-forum-one",
+    "fixture-forum-two",
+    "fixture-housing-guide",
+    "fixture-housing-news",
     "fixture-location",
     "fixture-model",
     "fixture-pass-site",
@@ -1024,6 +1165,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location"
@@ -1152,6 +1294,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1439,6 +1582,7 @@
      "season_fallback": false
     }
    ],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1571,6 +1715,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1805,6 +1950,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -1936,6 +2082,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2066,6 +2213,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2249,6 +2397,7 @@
      "season_fallback": false
     }
    ],
+   "housing_search": null,
    "access": {
     "rating": "car_centric",
     "summary_md": "Most staff drive about 20 minutes from the valley towns.",
@@ -2388,6 +2537,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2542,6 +2692,7 @@
      "season_fallback": false
     }
    ],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",
@@ -2665,6 +2816,7 @@
    "webcams": null,
    "jobs": null,
    "passes": [],
+   "housing_search": null,
    "housing_summary": null,
    "sources": [
     "fixture-location",

@@ -50,6 +50,24 @@ export const PayRow = z.object({
   aggregate_count: z.number().int().nullish().transform((v) => v ?? null),   // reported rows only
 });
 
+// The rent lucrativeness used (owner decision 2026-10-14): the median of the sourced median rents, else Zillow's
+// typical rent (ZORI), else ACS, else HUD FMR. A bad block drops the rent line, never the resort.
+export const RentUsed = z.object({
+  value: z.number(),
+  basis: z.string().min(1),
+  label: z.string().min(1),
+  source_ids: z.array(Slug).min(1),
+  as_of: IsoDate,
+  confidence: Confidence,
+  note: z.string().nullish().transform((v) => v ?? null),
+  unit: z.string().nullish().transform((v) => v ?? null),
+  count: z.number().int().nullish().transform((v) => v ?? null),
+  publishers: strList,
+  period: z.object({ first: z.string(), last: z.string() }).nullish().transform((v) => v ?? null),
+  geography: z.object({ level: z.string(), id: z.string().nullish(), name: z.string() }).nullish().transform((v) => v ?? null),
+  stale: z.boolean().nullish().transform((v) => Boolean(v)),
+}).nullish().catch(null).transform((v) => v ?? null);
+
 export const Career = z.object({
   pay: z.array(PayRow).nullish().transform((v) => v ?? []),
   private_rate: sourced(z.object({ low: numOrNull, high: numOrNull, unit: z.enum(['hour', 'half_day', 'full_day']) })),
@@ -64,6 +82,7 @@ export const Career = z.object({
       value: z.union([z.number(), z.string(), z.boolean()]).nullish(),
       label: z.string(),
     })).nullish().transform((v) => v ?? []),
+    rent: RentUsed,
   }).nullish().transform((v) => v ?? null),
   stale_fields: strList,
 });
@@ -151,6 +170,25 @@ export const PostingsFile = z.object({
   })),
 });
 
+// ── Housing search links (ARCHITECTURE "Housing search"; links only). A bad tool drops only that tool. ──
+export const TOOL_KINDS = ['employer_portal', 'housing_authority', 'listing_site', 'facebook_group', 'craigslist',
+  'property_manager', 'app', 'other'];
+export const HousingSearch = z.object({
+  furnished_finder: z.object({ town: z.string().min(1), url: HttpsUrl, ...Cited }).nullish().catch(null).transform((v) => v ?? null),
+  tools: keepValid(z.object({
+    name: z.string().min(1),
+    kind: z.string().min(1),   // a kind added to the contract later renders humanized
+    url: HttpsUrl,
+    why: z.string().min(1),
+    scope: z.enum(['resort', 'cluster']).nullish().transform((v) => v ?? null),
+    named_by: z.number().int().positive(),
+    source_ids: z.array(Slug).min(1),
+    as_of: IsoDate,
+    confidence: Confidence,
+    note: z.string().nullish(),
+  })),
+}).nullish().catch(null).transform((v) => (v && (v.furnished_finder || v.tools.length) ? v : null));
+
 export const Resort = z.object({
   id: Slug,
   name: z.string().min(1),
@@ -213,6 +251,7 @@ export const Resort = z.object({
   webcams: Webcams,
   jobs: Jobs,
   passes: keepValid(PassMembership),
+  housing_search: HousingSearch,
   housing_summary: z.object({
     site_count: z.number().int().nonnegative().nullish(),
     cheapest_rent_monthly_low: numOrNull,
@@ -446,6 +485,7 @@ export const HousingSite = z.object({
   id: Slug,
   resort_id: z.string().nullish(),
   name: z.string().min(1),
+  town: z.string().min(1).nullish().catch(null).transform((v) => v ?? null),   // sourced, or read from the listed address
   type: z.enum(['resort_owned', 'master_lease', 'market']),
   lat: z.number().min(-90).max(90),
   lon: z.number().min(-180).max(180),

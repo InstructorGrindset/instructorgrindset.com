@@ -87,6 +87,7 @@ class HousingSite(StrictModel):
     id: Slug
     resort_id: Slug
     name: str = Field(min_length=1)
+    town: Optional[str] = Field(default=None, min_length=1, max_length=80)   # the town the site is in, when sourced
     type: HousingType
     lat: Latitude
     lon: Longitude

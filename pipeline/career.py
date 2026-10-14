@@ -35,10 +35,19 @@ ASSUMPTION_LABELS: dict[str, str] = {
     "season_months_basis": "Season months basis",
     "weeks_per_month": "Weeks per month",
     "tips_season_usd": "Tips for the season (USD)",
-    "rent_monthly_usd": "Average rent per month (USD)",
+    "rent_monthly_usd": "Median rent per month (USD)",
     "rent_basis": "Rent basis",
     "rent_source_id": "Rent source",
     "tax": "Savings are before tax",
+}
+# The rent assumption names what the number is: a median for median_rent and ACS, Zillow's typical rent for ZORI.
+RENT_LABELS: dict[str, str] = {
+    "zillow_zori": "Zillow typical rent (ZORI) per month (USD)",
+    "fmr_studio": "HUD Fair Market Rent per month (USD)",
+    "fmr_one_br": "HUD Fair Market Rent per month (USD)",
+    "fmr_two_br": "HUD Fair Market Rent per month (USD)",
+    "employee_housing": "Employee housing rent per month (USD)",
+    "reported_area": "Reported rent per month (USD)",
 }
 TIPS_ABSENT_LABEL = "Tips are not included yet"
 SEASON_LENGTH_LABEL = "Season months (sourced season length divided by {d} days)"
@@ -147,12 +156,15 @@ def lucrativeness(
     rent_basis: Optional[str] = None,
     rent_source_id: Optional[str] = None,
     tips_season_usd: Optional[float] = None,
+    rent: Optional[dict] = None,
 ) -> dict:
     """Season savings before tax in USD (owner decision 4), with every stated assumption echoed.
 
     season months = season_length_days / days_per_month, else default_season_months
     earnings      = hourly x hours_per_week x season months x weeks_per_month
-    savings       = earnings + tips - rent x season months
+    savings       = earnings + tips - median rent x season months
+
+    ``rent`` is the RentUsed block (pipeline/rent_used.py) behind ``rent_monthly``; it is echoed as ``rent``.
     mid = high = savings at the top of the posted wage scale (highest hourly_high of the displayed pay
     rows, any cert level); low = savings at the bottom (lowest hourly_low).
 
@@ -179,23 +191,25 @@ def lucrativeness(
         {"key": "weeks_per_month", "value": a.weeks_per_month, "label": ASSUMPTION_LABELS["weeks_per_month"]},
         {"key": "tips_season_usd", "value": tips,
          "label": ASSUMPTION_LABELS["tips_season_usd"] if tips is not None else TIPS_ABSENT_LABEL},
-        {"key": "rent_monthly_usd", "value": rent_monthly, "label": ASSUMPTION_LABELS["rent_monthly_usd"]},
+        {"key": "rent_monthly_usd", "value": rent_monthly,
+         "label": RENT_LABELS.get((rent_basis or "").split(":")[0].replace("employee_housing_mean", "employee_housing"),
+                                  ASSUMPTION_LABELS["rent_monthly_usd"])},
         {"key": "rent_basis", "value": rent_basis, "label": ASSUMPTION_LABELS["rent_basis"]},
         {"key": "rent_source_id", "value": rent_source_id, "label": ASSUMPTION_LABELS["rent_source_id"]},
         {"key": "tax", "value": None, "label": ASSUMPTION_LABELS["tax"]},
     ]
     empty = {"low": None, "mid": None, "high": None}
     if a.hours_per_week is None or months is None:
-        return {**empty, "status": "assumptions_unset", "assumptions": echo}
+        return {**empty, "status": "assumptions_unset", "assumptions": echo, "rent": rent}
     if top is None or rent_monthly is None:
-        return {**empty, "status": "insufficient_data", "assumptions": echo}
+        return {**empty, "status": "insufficient_data", "assumptions": echo, "rent": rent}
 
     def savings(hourly: float) -> float:
         return season_savings(hourly, a.hours_per_week, months, a.weeks_per_month, rent_monthly, tips or 0.0).net_before_tax
 
     mid = int(round_half_up(savings(top)))
     return {"low": int(round_half_up(savings(bottom))), "mid": mid, "high": mid,
-            "status": "computed", "assumptions": echo}
+            "status": "computed", "assumptions": echo, "rent": rent}
 
 
 def season_savings(hourly: float, hours_per_week: float, season_months: float, weeks_per_month: float,
@@ -224,8 +238,10 @@ def build_career(
     today: dt.date,
     rent_basis: Optional[str] = None,
     rent_source_id: Optional[str] = None,
+    rent: Optional[dict] = None,
 ) -> tuple[Optional[dict], list[str]]:
-    """Resort.career, or None when the resort has no pay records and no career inputs."""
+    """Resort.career, or None when the resort has no pay records and no career inputs. ``rent`` is the RentUsed
+    block (pipeline/rent_used.py); a stale rent adds ``lucrativeness.rent`` to ``stale_fields``."""
     if not pay_records and inputs is None:
         return None, []
     max_age = defs.staleness.max_age_months
@@ -240,8 +256,8 @@ def build_career(
         "private_rate": inputs.private_rate.model_dump(mode="json") if inputs and inputs.private_rate else None,
         "private_split": inputs.private_split.model_dump(mode="json") if inputs and inputs.private_split else None,
         "lucrativeness": lucrativeness(rows, season_length_days, rent_monthly, defs.lucrativeness,
-                                       rent_basis, rent_source_id),
-        "stale_fields": stale,
+                                       rent_basis, rent_source_id, rent=rent),
+        "stale_fields": stale + (["lucrativeness.rent"] if rent and rent.get("stale") else []),
     }
     return career, warnings
 

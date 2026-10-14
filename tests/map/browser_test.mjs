@@ -609,7 +609,7 @@ async function desktop(browser, base) {
   check(JSON.stringify(await page.locator('.site-select .nav-name').allInnerTexts()) === JSON.stringify(['Fixture Staff Village', 'Fixture Town Lease', 'Fixture West Rentals']), 'employee housing listed first');
   const lease = page.locator('.site', { hasText: 'Fixture Town Lease' });
   check((await lease.innerText()).includes('$800 to $950 per month') && await lease.locator('.badge-reported').count() === 1, 'site rent range with badge');
-  check((await lease.innerText()).includes('Master lease · Neighborhood area'), 'site type and precision label');
+  check(/Master lease\s+Fixture Town · Neighborhood area, shown as a circle/.test(await lease.innerText()), 'site type badge, town and precision note');
   check((await lease.locator('.commute-table').innerText()).includes('Bus\t28 min\t7.4 mi\tBlue'), 'commute row shows mode, minutes, distance and route name');
   check(await lease.locator('.not-verified', { hasText: 'Being calculated' }).count() === 1, 'missing commute minutes marked');
   check(await page.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.not-verified', { hasText: 'Commute times are being calculated.' }).count() === 1, 'site without commutes shows empty state');
@@ -766,7 +766,7 @@ async function desktop(browser, base) {
   await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'UT', clusterId: 'fixture-wasatch-like', resortId: 'foxtrot-basin' }));
   await page.waitForFunction(() => document.querySelectorAll('.detail-toggles label').length > 0, null, { timeout: 10000 });
   check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'layers without data are hidden');
-  check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'empty housing state');
+  check(await page.locator('.housing .not-verified', { hasText: 'No employee housing listed publicly yet.' }).count() === 1, 'empty housing state');
   check((await page.locator('.rent-used').innerText()).includes('Census ACS median gross rent'), 'baseline rent source named');
   // Leave to a resort without detail.
   await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'CO', clusterId: 'fixture-front-range', resortId: 'charlie-hill' }));
@@ -791,7 +791,7 @@ async function desktop(browser, base) {
   check(await page.locator('.climate', { hasText: 'Climate data is being compiled' }).count() === 1, 'missing climate message');
   check(await page.locator('.panel-section', { hasText: 'Career data is being collected.' }).count() === 1, 'career null renders being collected');
   check(await page.locator('.editorial').count() === 0, 'no editorial section when the build has none');
-  check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'resort without detail shows housing empty state');
+  check(await page.locator('.housing .not-verified', { hasText: 'No employee housing listed publicly yet.' }).count() === 1, 'resort without detail shows housing empty state');
   check(!w.requests.some((u) => u.includes('/detail/delta-ridge.json')), 'no detail fetch when detail_available is false');
   check(!w.requests.some((u) => u.includes('/climate/delta-ridge.json')), 'no climate fetch when climate_available is false');
   await shot(page, 'desktop-06-resort-sparse.png');
@@ -1316,7 +1316,9 @@ async function realData(browser, base) {
           check(rows.length === file.transit.feeds.length && rows.every((r) => /Schedule (for|from) [A-Z][a-z]{2} \d/.test(r)),
             `real data: transit legend lists each feed with its schedule dates (${rows.map((r) => r.replace(/\n/g, ' / ')).join(' | ')})`);
         }
-        check(await page.locator('.housing .not-verified', { hasText: 'Housing data is being collected.' }).count() === 1, 'real data: housing empty state');
+        check(file.housing.length ? await page.locator('.site-select').count() === file.housing.length
+          : await page.locator('.housing .not-verified', { hasText: 'No employee housing listed publicly yet.' }).count() === 1,
+        `real data: ${file.housing.length ? `${file.housing.length} employee housing sites listed` : 'employee housing empty state'}`);
         const endpoint = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'definitions.json'), 'utf8')).submissions.endpoint;
         check(endpoint ? await page.locator('.report-form').count() === 1
           : await page.locator('.panel-section', { hasText: 'Pay and rent reports open soon.' }).count() === 1 && await page.locator('.report-form').count() === 0,

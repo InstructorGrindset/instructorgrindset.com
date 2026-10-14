@@ -104,10 +104,10 @@ lucrativeness:
   # Owner decision 4 (2026-10-13). Season savings before tax, USD:
   #   season months = season length days / days_per_month when sourced, else default_season_months
   #   earnings      = hourly x hours_per_week x (season months x weeks_per_month)
-  #   savings       = earnings + tips - average rent x season months
+  #   savings       = earnings + tips - median rent x season months
   # mid and high use the top of the posted wage scale (highest hourly_high of the displayed pay rows);
   # low uses the bottom (lowest hourly_low). No food, transport, pass or gear offsets.
-  # Average rent follows rent.lucrativeness_rent. Computed with pipeline/season_income.py (the calculator's model).
+  # The median rent follows rent.lucrativeness_rent. Computed with pipeline/season_income.py (the calculator's model).
   assumptions:
     hours_per_week: 40          # standard full time hours (ROADMAP Section 6)
     default_season_months: 5    # when the resort has no sourced season length
@@ -121,10 +121,31 @@ rent:
   # Order of baseline values used for a housing site with no published rent (shown as
   # confidence estimated with the baseline source): fmr_studio, fmr_one_br, fmr_two_br, acs_median.
   baseline_preference: [fmr_studio, acs_median]
-  # Average rent for lucrativeness (owner decision 4), first available wins: the mean of the resort's
-  # employee housing rent mids (display priority applies), then the county ACS median gross rent,
-  # then HUD FMR one bedroom. Other steps: reported_area, baseline (baseline_preference), fmr_studio, fmr_two_br.
-  lucrativeness_rent: [employee_housing, acs_median, fmr_one_br]
+  # Median rent for lucrativeness (owner decision 2026-10-14), first available wins:
+  #   median_rent  the median of the sourced median rent figures for the resort's town (Zillow, Redfin,
+  #                Apartments.com, news, blogs; data/raw/rent/median_rent_*.yaml), see `median` below
+  #   zillow_zori  Zillow Observed Rent Index, labelled "Zillow typical rent (ZORI)": a typical rent, not a median
+  #                (data/raw/rent/zillow/zori_extract.csv), see `zori` below
+  #   acs_median   Census ACS median gross rent of the county
+  #   fmr_one_br   HUD Fair Market Rent, one bedroom
+  # Employee housing rent no longer feeds lucrativeness; it still shows with each housing site.
+  # Other steps: employee_housing, reported_area, baseline (baseline_preference), fmr_studio, fmr_two_br.
+  lucrativeness_rent: [median_rent, zillow_zori, acs_median, fmr_one_br]
+  median:
+    # Figures for all unit sizes when the resort has any, else one bedroom; the unit used is shown.
+    units: [all, 1br]
+    # One figure per source: the most specific geography, then the latest period.
+    geography_order: [city, zip, county, metro]
+    # Figures whose period ended more than this many months before the build are ignored.
+    max_age_months: 18
+  zori:
+    # Nearest ZIP whose centroid lies within zip_radius_km of the base, else the county, else its metro.
+    match_levels: [zip, county, metro]
+    zip_radius_km: 10
+    # latest: the latest month with a value (as_of is that month); trailing_mean: the mean of trailing_months
+    # months ending there. Both are kept in the extract; the trailing mean needs every month in the window.
+    value: latest
+    trailing_months: 12
   # Data vintages fetched by `python -m pipeline.rent fetch`. hud_fmr_year null means HUD's latest.
   hud_fmr_year: null
   acs_year: 2024
@@ -468,3 +489,11 @@ passes:
     indy: [indyskipass.com]
   # Reference sites a membership may cite in addition (marked estimated, with the list's season in the note).
   supplemental_domains: [wikipedia.org]
+
+housing_search:
+  # Housing search links (data/raw/housing_search, ROADMAP item 8c). Links only: listings are never copied or embedded.
+  # A resort shows at most this many tools: those sources name for the resort first, then those named for its cluster,
+  # each group ranked by how many independent sources (distinct publishers) name the tool, then by name.
+  max_tools: 8
+  # The Furnished Finder link for a resort's nearest town must sit on one of these registered domains.
+  furnished_finder_domains: [furnishedfinder.com]

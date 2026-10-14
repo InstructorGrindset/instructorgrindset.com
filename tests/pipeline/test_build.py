@@ -1,4 +1,5 @@
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -553,12 +554,14 @@ def test_phase5_rent_reaches_lucrativeness(repo_root, raw_dir, out, tmp_path, cf
     _run(repo_root, raw_dir, out, tmp_path)
     by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
     echo = {a["key"]: a["value"] for a in by["fixture-peak"]["career"]["lucrativeness"]["assumptions"]}
-    # mean of the employee housing rent mids: the staff lodge (650 to 900) is the only employee site
-    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == \
-        (775.0, "employee_housing_mean:peak-staff-lodge", "fixture-housing-page")
+    # Owner decision 2026-10-14: employee housing (the staff lodge, 650 to 900) no longer feeds lucrativeness. With no
+    # median rent figures, no ZORI extract and no ACS value in this fixture, HUD FMR one bedroom is used.
+    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == (1640.0, "fmr_one_br", "hud-fmr-fy2026")
     lucr = by["fixture-peak"]["career"]["lucrativeness"]
-    assert lucr["status"] == "computed" and lucr["mid"] == round(24 * 40 * 5 * 4.33 - 775 * 5)
-    assert lucr["low"] == round(20 * 40 * 5 * 4.33 - 775 * 5)
+    assert lucr["status"] == "computed" and lucr["mid"] == round(24 * 40 * 5 * 4.33 - 1640 * 5)
+    assert lucr["low"] == round(20 * 40 * 5 * 4.33 - 1640 * 5)
+    assert lucr["rent"]["label"] == "HUD Fair Market Rent, one bedroom" and lucr["rent"]["source_ids"] == ["hud-fmr-fy2026"]
+    assert lucr["rent"]["geography"] == {"level": "county", "id": "08998", "name": "Fixture County"}
 
 
 def test_phase5_baseline_rent_when_no_employee_housing(repo_root, raw_dir, out, tmp_path, cfg, lifts_full,
@@ -693,12 +696,13 @@ def test_reports_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, 
     assert peak["housing_summary"]["cheapest_rent_monthly_low"] == 650
     build_text = "".join(p.read_text() for p in out.rglob("*.json"))
     assert "r-0" not in build_text and "r-pending" not in build_text and "no proof" not in build_text
-    assert '"hourly_usd"' not in build_text and "99" not in json.dumps(peak["career"])
+    # the rejected 99 USD report appears nowhere as a number (county FIPS 08998 in the rent block is not a 99)
+    assert '"hourly_usd"' not in build_text and not re.search(r"(?<![\d.])99(?![\d.])", json.dumps(peak["career"]))
 
 
 def test_reports_area_rent_not_in_default_rent_order(repo_root, raw_dir, out, tmp_path):
-    """Owner decision 4 lists employee housing, ACS median, HUD FMR one bedroom; the area report rent
-    is shown in detail files but is not a lucrativeness rent by default."""
+    """The default rent order (owner decision 2026-10-14) is median rent, Zillow ZORI, ACS median, HUD FMR one
+    bedroom; the area report rent is shown in detail files but is not a lucrativeness rent by default."""
     (raw_dir / "pay").mkdir()
     (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
     _reports(raw_dir, [{"kind": "rent", "values": {"monthly_usd": v}} for v in (1000, 1200, 1100)])
@@ -1048,4 +1052,7 @@ def test_config_owner_decisions(cfg):
     assert d.operator_scale.values == {1: "family_owned", 2: "independent_business", 3: "large_corporate"}
     assert d.access.ratings == ["convenient", "transit_friendly", "mixed", "car_centric"]
     assert d.submissions.endpoint == "https://formspree.io/f/xyzbdqgq"
-    assert d.rent.lucrativeness_rent == ["employee_housing", "acs_median", "fmr_one_br"]
+    # Owner decision 2026-10-14: median of sourced median rents, then Zillow ZORI, then ACS median, then HUD FMR 1 BR.
+    assert d.rent.lucrativeness_rent == ["median_rent", "zillow_zori", "acs_median", "fmr_one_br"]
+    assert d.rent.median.units == ["all", "1br"] and d.rent.median.max_age_months == 18
+    assert d.rent.zori.match_levels == ["zip", "county", "metro"] and d.rent.zori.zip_radius_km == 10

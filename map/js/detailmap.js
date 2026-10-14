@@ -153,6 +153,16 @@ export function detailBounds(detail) {
   return [[b[0][0] - pad, b[0][1] - pad], [b[1][0] + pad, b[1][1] + pad]];
 }
 
+/** Bounds around the housing pins only (the "Show on the detail map" button), with room for the circles. */
+export function housingBounds(detail) {
+  const pts = ((detail && detail.housing) || []).map((s) => [s.lon, s.lat]);
+  if (!pts.length) return null;
+  let b = [[Infinity, Infinity], [-Infinity, -Infinity]];
+  for (const [x, y] of pts) b = [[Math.min(b[0][0], x), Math.min(b[0][1], y)], [Math.max(b[1][0], x), Math.max(b[1][1], y)]];
+  const pad = 0.01;
+  return [[b[0][0] - pad, b[0][1] - pad], [b[1][0] + pad, b[1][1] + pad]];
+}
+
 export function setDetailData(map, detail) {
   const set = (id, data) => { const s = map.getSource(id); if (s) s.setData(data); };
   if (!detail) {

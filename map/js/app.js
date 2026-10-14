@@ -171,6 +171,25 @@ async function main() {
     if (detailFor || detailControls) showDetailControls(groups);
   }
 
+  // "Show on the detail map" (Employee housing): start the WebGL map when needed, switch the housing layer on and fit
+  // the map to the housing pins. Phones drop the sheet to its peek so the map shows.
+  async function showHousing(resortId, n) {
+    if (!els.list.hidden) setListView(false);
+    const start = window.__careerMap && window.__careerMap.startMap;
+    const ctl = mapCtl || (start ? await start() : null);
+    if (!ctl) return;   // no WebGL: the list view and its message are up
+    ctl.whenReady(() => {
+      if (detailFor !== resortId || !detailData) return;
+      if (detailControls) detailControls.ensure('housing'); else ctl.setLayerGroup('housing', true);
+      if (isPhone()) {
+        sheet.set('peek');
+        ctl.map.getCanvas().focus({ preventScroll: true });   // the button scrolls away with the sheet
+      }
+      const shown = ctl.fitHousing() || n;
+      announce(`Showing ${plural(shown, 'housing site', 'housing sites')} on the detail map. Pins mark listed addresses and circles mark neighborhood areas.`);
+    });
+  }
+
   // Trail map dialog: module and data load on first open.
   let trail = null;
   let trailFor = null; // resort record whose map control is up (or waiting for the map)
@@ -200,6 +219,7 @@ async function main() {
       applyDetail();
     },
     onSiteSelect: (id) => mapCtl && mapCtl.selectSite(id),
+    onShowHousing: (resortId, n) => showHousing(resortId, n),
     onSourcesNeeded: () => { if (idleReached) loadSources(); else sourcesWanted = true; },
   });
   const list = createListView(els.list, index);

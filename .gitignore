@@ -17,3 +17,8 @@ data/raw/transit/*/gtfs.zip
 data/raw/routing/
 data/raw/reports/queue/
 data/raw/reports/moderated/
+# Zillow ZORI: the compact extract data/raw/rent/zillow/zori_extract.csv is committed; the full CSVs
+# (downloaded into download/ or placed by hand) and the Census Gazetteer ZCTA file are not.
+data/raw/rent/zillow/download/
+data/raw/rent/zillow/*_zori_*
+data/raw/rent/zillow/*Gaz_zcta*

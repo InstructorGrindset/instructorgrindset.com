@@ -27,7 +27,7 @@ function legendFor(group) {
   switch (group) {
     case 'housing':
       return h('ul', { class: 'detail-legend' },
-        Object.entries({ resort_owned: 'Resort owned', master_lease: 'Master lease', market: 'Market rental' }).map(([k, label]) =>
+        Object.entries({ resort_owned: 'Resort owned', master_lease: 'Master lease', market: 'Market' }).map(([k, label]) =>
           h('li', null, h('span', { class: 'chip-dot', style: `background:${HOUSING_COLOR[k]}`, 'aria-hidden': 'true' }), label)),
         h('li', { class: 'legend-note' }, 'Dots mark listed buildings. Soft circles mark neighborhood areas.'));
     case 'isochrones':
@@ -56,7 +56,7 @@ export function createDetailControls(root, { onToggle }) {
   const state = {};
   // A route stub built from an older shell may lack the container; detail layers then stay on with no toggles.
   if (!root) {
-    return { show(groups) { for (const g of groups) onToggle(g, true); }, hide() {} };
+    return { show(groups) { for (const g of groups) onToggle(g, true); }, ensure(g) { onToggle(g, true); }, hide() {} };
   }
   return {
     show(groups) {
@@ -82,6 +82,17 @@ export function createDetailControls(root, { onToggle }) {
         }));
       root.hidden = false;
       document.body.classList.add('detail-mode');
+    },
+    /** Switch a group on (its checkbox too), for example housing before the map fits to the housing pins. */
+    ensure(group) {
+      state[group] = true;
+      const box = root.querySelector(`input[data-group="${group}"]`);
+      if (box && !box.checked) {
+        box.checked = true;
+        const legend = box.closest('li') && box.closest('li').querySelector('.detail-legend');
+        if (legend) legend.hidden = false;
+      }
+      onToggle(group, true);
     },
     hide() {
       clear(root);

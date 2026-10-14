@@ -20,6 +20,13 @@ function charts() {
 }
 function destroyCharts() { if (chartsMod) chartsMod.destroyCharts(); }
 
+// The Furnished Finder link and the housing search tools (housinglinks.js) load on the first resort view.
+let housingLinksPromise = null;
+function housingLinks() {
+  if (!housingLinksPromise) housingLinksPromise = import('./housinglinks.js').catch((err) => { housingLinksPromise = null; throw err; });
+  return housingLinksPromise;
+}
+
 // Same links as the static pages written by pipeline/routes.py.
 const RELATED = [
   ['/blog', 'Blog'], ['/reading-list', 'The Reading List'], ['/income-calculator', 'Season Income Calculator'],
@@ -74,6 +81,7 @@ function navLink(view, attrs, ...children) {
 
 export function createPanel(root, index, {
   onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {}, onSourcesNeeded = () => {},
+  onShowHousing = null,
 }) {
   let token = 0;
   let siteButtons = new Map();
@@ -506,7 +514,8 @@ export function createPanel(root, index, {
     const listed = l.assumptions.filter((a) => !['rent_basis', 'rent_source_id', 'season_months_basis'].includes(a.key));
     // Statements carry their meaning in the label (owner decision 4): tips not included yet, savings before tax.
     const statement = (a) => a.key === 'tax' || (a.key.startsWith('tips') && (a.value == null || a.value === 0));
-    if (basis) {
+    if (l.rent) body.push(rentLine(l.rent));
+    else if (basis) {
       body.push(h('p', { class: 'fact-meta' },
         h('span', { class: 'rent-used', dataset: { source: String(basis.value) } }, rentUsedText(String(basis.value), currentDetail)),
         basisSource ? String(basisSource.value).split(',').map((id, i) => [i ? ', ' : ' ', sourceLink(id.trim())]) : null));
@@ -697,10 +706,12 @@ export function createPanel(root, index, {
     return `Rent used: ${site ? site.name : humanize(id)}, the cheapest employee housing listed.`;
   }
 
-  // ── Housing and commute (Phase 5) ──
+  // ── Housing and commute (Phase 5), with the housing links of ROADMAP item 8c ──
 
-  const HOUSING_TYPE = { resort_owned: 'Resort owned', master_lease: 'Master lease', market: 'Market rental' };
-  const PRECISION = { building: 'Listed building', neighborhood: 'Neighborhood area' };
+  const HOUSING_TYPE = { resort_owned: 'Resort owned', master_lease: 'Master lease', market: 'Market' };
+  // How the detail map marks a site: a pin at a publicly listed address, or a circle over its neighborhood.
+  const PRECISION = { building: 'Listed address, shown as a pin', neighborhood: 'Neighborhood area, shown as a circle' };
+  const NO_SITES = 'No employee housing listed publicly yet.';
   const OCCUPANCY = { shared: 'Shared rooms', private: 'Private rooms', mixed: 'Shared and private rooms' };
   const MODE = { drive: 'Drive', bus: 'Bus', walk: 'Walk', shuttle: 'Shuttle' };
   const TYPE_ORDER = { resort_owned: 0, master_lease: 1, market: 2 };
@@ -715,13 +726,30 @@ export function createPanel(root, index, {
       h('p', { class: 'fact-meta' }, `Last verified ${formatIsoDate(a.as_of)} · `, sourceLink(a.source_id)));
   }
 
+  /**
+   * Housing and commute: Getting to the mountain, Furnished rentals (housinglinks.js), Employee housing (the detail
+   * file's sites), Where people find housing here (housinglinks.js), then Rent near the resort.
+   */
   function housingSection(r, my) {
     const accessSlot = h('div', { class: 'access-slot' }, accessBlock(r.access));
-    const body = h('div', { class: 'housing' });
+    const ffSlot = h('div', { class: 'ff-slot' });
+    const body = h('div', { class: 'housing-sites' });
+    const toolsSlot = h('div', { class: 'tools-slot' });
+    const rentBody = h('div', { class: 'housing-rent' });
     siteButtons = new Map();
     currentDetail = null;
+    if (r.housing_search || r.tier === 'A') {
+      const ctx = linkCtx();
+      housingLinks().then((m) => {
+        if (!ctx.current()) return;
+        const ff = m.furnishedRentals(r, ctx);
+        if (ff) ffSlot.append(ff);
+        const tools = m.housingTools(r, ctx);
+        if (tools) toolsSlot.append(tools);
+      }).catch((err) => console.warn('[map] housing links', err.message));
+    }
     if (!r.detail_available) {
-      body.append(h('p', { class: 'not-verified' }, 'Housing data is being collected.'));
+      body.append(h('p', { class: 'not-verified' }, NO_SITES));
       onDetail(r.id, null);
     } else {
       body.append(h('p', { class: 'loading' }, 'Loading housing and commute data'));
@@ -730,21 +758,29 @@ export function createPanel(root, index, {
         currentDetail = detail;
         if (!r.access && detail && detail.access) { clear(accessSlot); accessSlot.append(accessBlock(detail.access)); }
         clear(body);
-        renderHousing(body, detail);
+        renderHousing(body, detail, rentBody);
+        if (rentBody.childElementCount) rentBody.prepend(h('h4', { class: 'sub' }, 'Rent near the resort'));
         for (const el of root.querySelectorAll('.rent-used')) el.textContent = rentUsedText(el.dataset.source, detail);
         if (detail && detail.housing.length) refreshReportForm(r);
         onDetail(r.id, detail);
       });
     }
-    return section('Housing and commute', accessSlot, body);
+    return section('Housing and commute', accessSlot, h('div', { class: 'housing' }, ffSlot,
+      h('div', { class: 'housing-block employee' }, h('h4', { class: 'sub' }, 'Employee housing'), body), toolsSlot, rentBody));
   }
 
-  function renderHousing(body, detail) {
+  function renderHousing(body, detail, rentBody = body) {
     const sites = detail ? [...detail.housing].sort((a, b) => (TYPE_ORDER[a.type] - TYPE_ORDER[b.type])
       || ((a.rent_monthly && a.rent_monthly.value.low) ?? Infinity) - ((b.rent_monthly && b.rent_monthly.value.low) ?? Infinity)) : [];
-    if (!sites.length) body.append(h('p', { class: 'not-verified' }, 'Housing data is being collected.'));
+    if (!sites.length) body.append(h('p', { class: 'not-verified' }, NO_SITES));
     else {
       body.append(h('p', { class: 'fact-meta' }, 'Select a site to see it on the map with its commute.'));
+      // Opens the detail map (starting it when needed) and fits it to the housing pins (app.js, map.js fitHousing).
+      if (onShowHousing) {
+        body.append(h('p', { class: 'housing-show' }, h('button', {
+          type: 'button', class: 'btn btn-sm btn-ghost housing-show-btn', onclick: () => onShowHousing(detail.resort_id, sites.length),
+        }, 'Show on the detail map')));
+      }
       body.append(h('ul', { class: 'site-list' }, sites.map((site) => h('li', null, siteCard(site, detail)))));
     }
     if (detail && detail.rent_reported) {
@@ -752,11 +788,11 @@ export function createPanel(root, index, {
       const rr = detail.rent_reported;
       const n = rr.note && /(\d+)/.exec(rr.note);
       const shown = n ? { ...rr, note: `Range from ${fmtInt(Number(n[1]))} reports` } : rr;
-      body.append(h('dl', { class: 'facts' }, fact('Reported rent near the resort', shown, (v) => `${moneyRange(v.low, v.high)} per month`)));
+      rentBody.append(h('dl', { class: 'facts' }, fact('Reported rent near the resort', shown, (v) => `${moneyRange(v.low, v.high)} per month`)));
     }
     const b = detail && detail.rent_baseline;
     if (b && [b.fmr.studio, b.fmr.one_br, b.fmr.two_br, b.acs_median_gross_rent].some(Boolean)) {
-      body.append(h('p', { class: 'sub' }, `Rent baseline${b.county_name ? ` for ${b.county_name}` : ''}`),
+      rentBody.append(h('p', { class: 'sub' }, `Rent baseline${b.county_name ? ` for ${b.county_name}` : ''}`),
         h('dl', { class: 'facts' },
           fact('HUD FMR studio', b.fmr.studio, monthly),
           fact('HUD FMR one bedroom', b.fmr.one_br, monthly),
@@ -774,14 +810,15 @@ export function createPanel(root, index, {
     },
     h('span', { class: `site-dot site-${site.type} prec-${site.precision}`, 'aria-hidden': 'true' }),
     h('span', { class: 'nav-name' }, site.name),
-    h('span', { class: 'nav-meta' }, `${HOUSING_TYPE[site.type]} \u00b7 ${PRECISION[site.precision]}`));
+    h('span', { class: 'nav-meta' }, h('span', { class: `tier site-type type-${site.type}` }, HOUSING_TYPE[site.type]), ' ',
+      [site.town, PRECISION[site.precision]].filter(Boolean).join(' \u00b7 ')));
     siteButtons.set(site.id, btn);
     const routes = new Map(((detail.transit && detail.transit.routes) || []).map((x) => [x.id, x.short_name || x.long_name || x.id]));
     return h('div', { class: 'site', id: `site-${site.id}` },
       btn,
       h('dl', { class: 'facts site-facts' },
         site.address ? fact('Address', site.address, (v) => v) : null,
-        fact('Rent', site.rent_monthly, (v) => `${moneyRange(v.low, v.high)} per month`),
+        site.rent_monthly ? fact('Rent', site.rent_monthly, (v) => `${moneyRange(v.low, v.high)} per month`) : null,
         h('div', { class: 'fact' }, h('dt', null, 'Occupancy'),
           h('dd', null, site.occupancy ? OCCUPANCY[site.occupancy] : h('span', { class: 'not-verified' }, 'Not yet verified'))),
         fact('Deposit', site.deposit, (v) => money(v))),

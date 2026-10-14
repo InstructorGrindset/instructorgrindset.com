@@ -31,6 +31,10 @@ from pipeline.climate import snotel_stations  # noqa: E402
 from pipeline import terrain as terrain_mod  # noqa: E402
 from pipeline import lifts as lifts_mod  # noqa: E402
 from pipeline import rent as rent_mod  # noqa: E402
+from pipeline import rent_median as rent_median_mod  # noqa: E402
+from pipeline import rent_zillow as zillow_mod  # noqa: E402
+from pipeline import heat_lucrativeness as heat_luc_mod  # noqa: E402
+from pipeline.rent_used import as_inputs as rent_as_inputs, rent_used  # noqa: E402
 from pipeline import runs as runs_mod  # noqa: E402
 from pipeline.career import CareerData, build_career, load_career_data  # noqa: E402
 from pipeline.editorial import load_editorial, render_review, resort_editorial  # noqa: E402
@@ -39,7 +43,8 @@ from pipeline.trailmaps_official import as_output as official_trailmap_output, l
 from pipeline import jobs as jobs_mod  # noqa: E402
 from pipeline.webcams import as_output as webcams_output, load_webcams  # noqa: E402
 from pipeline import passes as passes_mod  # noqa: E402
-from pipeline.housing import assemble_detail, housing_summary, load_housing, rent_input  # noqa: E402
+from pipeline.housing import assemble_detail, housing_summary, load_housing  # noqa: E402
+from pipeline import housing_search as housing_search_mod  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
 from pipeline import staleness as staleness_mod  # noqa: E402
 from pipeline.routing import RoutingClient  # noqa: E402
@@ -341,6 +346,12 @@ def build(
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
     cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
+    for rid in sorted(set(housing) & {d["id"] for d in drafts if d["tier"] != "A"}):
+        warnings.append(f"housing sites at Tier B resort '{rid}' are not shown: detail maps are Tier A only")
+    hs_cfg = cfg.definitions.housing_search
+    search_data, search_errors = housing_search_mod.load_housing_search(
+        raw_dir, registry, known_ids, cluster_ids, hs_cfg.furnished_finder_domains, rel)
+    errors += search_errors
     editorial, editorial_errors = load_editorial(raw_dir, registry, known_ids, cluster_ids, rel)
     errors += editorial_errors
     agg = _report_aggregates(raw_dir, cfg, known_ids, housing, registry, errors, warnings, rel)
@@ -349,6 +360,9 @@ def build(
     site_keys = {(rid, s.id) for rid, ss in housing.items() for s in ss}
     for rid, sid in sorted(set(agg.housing) - site_keys):
         warnings.append(f"housing report aggregate for '{sid}' at '{rid}' matches no housing site of that resort; not shown")
+    # Median rent figures across sources (owner decision 2026-10-14), the first lucrativeness rent step.
+    median_rents, median_errors = rent_median_mod.load_median_rent(raw_dir, registry, known_ids, rel)
+    errors += median_errors
 
     if errors:
         raise BuildError(errors)
@@ -372,10 +386,12 @@ def build(
         site_reported = {s.id: reports_mod.reported_rent(agg.housing[(d["id"], s.id)])
                          for s in sites if (d["id"], s.id) in agg.housing}
         area_reported = reports_mod.reported_rent(agg.rent.get(d["id"]))
-        rent = rent_input(sites, baseline, cfg.definitions.rent.lucrativeness_rent, cfg.definitions.rent.baseline_preference,
-                          site_reported, area_reported)
+        rent_block = _rent_block(d["id"], cfg, median_rents, p5, baseline, sites, site_reported, area_reported, today,
+                                 warnings)
         d["editorial"] = resort_editorial(editorial.reviewed("resort").get(d["id"]))
-        _attach_career(d, career_data, cfg, today, warnings, rent)
+        d["housing_search"] = housing_search_mod.resort_housing_search(search_data, d["id"], d["cluster_id"], registry,
+                                                                       hs_cfg.max_tools)
+        _attach_career(d, career_data, cfg, today, warnings, rent_as_inputs(rent_block), rent_block)
         d["detail_available"], d["housing_summary"], d["trailmap_available"] = False, None, False
         if d["tier"] == "A":
             lift_fc = lifts_mod.lifts_for(p5.lift_features, p5.area_ids.get(d["id"], []))
@@ -612,6 +628,10 @@ def _write_heat(out_dir: Path, repo_root: Path, noaa: Optional[tuple[list, dict]
     if heat_mod.write_season(out_dir, resorts=resort_dicts, outlines=outlines, heat=cfg.definitions.heat,
                              generated_at=header["generated_at"]) is None:
         warnings.append("no resort has a sourced season length; season heat rasters not written")
+    # Lucrativeness turns on by itself once a resort has pay and a rent: its rasters follow the computed mids.
+    if heat_luc_mod.write_lucrativeness(out_dir, resorts=resort_dicts, outlines=outlines, heat=cfg.definitions.heat,
+                                        generated_at=header["generated_at"]) is None:
+        warnings.append("no resort has a computed lucrativeness (pay and a rent); lucrativeness heat rasters not written")
 
 
 def display_definitions(cfg: Config) -> dict:
@@ -660,8 +680,27 @@ def snowfall_annual(resort: dict, climate_dir: Path) -> tuple[Optional[float], O
     return None, None
 
 
+def _rent_block(rid: str, cfg: Config, median_rents: "rent_median_mod.MedianRentData", p5: "Phase5",
+                baseline: Optional[dict], sites: list, site_reported: dict, area_reported: Optional[dict],
+                today: dt.date, warnings: list[str]) -> Optional[dict]:
+    """The rent lucrativeness uses (pipeline/rent_used.py): ``rent.lucrativeness_rent`` in order, by default the
+    median of the sourced median rent figures, then Zillow ZORI, then ACS median, then HUD FMR one bedroom."""
+    rd = cfg.definitions.rent
+    median, ignored = rent_median_mod.median_rent_for(median_rents.for_resort(rid), today, rd.median, median_rents.titles)
+    if ignored:
+        warnings.append(f"median rent '{rid}': {ignored} figure(s) older than {rd.median.max_age_months} months ignored")
+    block = rent_used(rd.lucrativeness_rent, median=median, zori=p5.zori.get(rid), baseline=baseline,
+                      preference=rd.baseline_preference, sites=sites, site_reported=site_reported,
+                      area_reported=area_reported, today=today, max_age_months=cfg.definitions.staleness.max_age_months)
+    if block and block.get("stale"):
+        warnings.append(f"rent for '{rid}' ({block['basis']}, as of {block['as_of']}) is older than "
+                        f"{cfg.definitions.staleness.max_age_months} months; shown with Needs update")
+    return block
+
+
 def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warnings: list[str],
-                   rent: tuple[Optional[float], Optional[str], Optional[str]] = (None, None, None)) -> None:
+                   rent: tuple[Optional[float], Optional[str], Optional[str]] = (None, None, None),
+                   rent_block: Optional[dict] = None) -> None:
     """Set d["career"] and merge career tags into clients and fit."""
     inputs = data.inputs.get(d["id"])
     if inputs is not None:
@@ -674,9 +713,9 @@ def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warni
             merged += [t for t in tags if t not in merged]
             block[key] = merged
     season_len = ((d.get("season") or {}).get("length_days") or {}).get("value")
-    # rent = (monthly USD, basis, source_id): cheapest employee housing, else the baseline (config rent)
+    # rent = (monthly USD, basis, source ids) from rent_block, the first rent.lucrativeness_rent step with a value
     career, w = build_career(data.pay.get(d["id"], []), inputs, season_len, rent[0], cfg.definitions, today,
-                             rent[1], rent[2])
+                             rent[1], rent[2], rent=rent_block)
     warnings.extend(w)
     d["career"] = career
 
@@ -740,12 +779,21 @@ def _add_source(registry: SourceRegistry, src: Any, origin: str, errors: list[st
         errors.append(f"{origin}: {e}")
 
 
+def _placeholder_location(source_id: str, registry: SourceRegistry) -> bool:
+    """True when a record's location source says its point is a placeholder (MetroSlopes sits at SFO until it opens)."""
+    if source_id not in registry:
+        return False
+    src = registry.get(source_id)
+    return "placeholder" in f"{src.note or ''} {src.title}".lower()
+
+
 @dataclass
 class Phase5:
     lift_features: list = field(default_factory=list)
     run_features: list = field(default_factory=list)
     area_ids: dict = field(default_factory=dict)
     baselines: dict = field(default_factory=dict)
+    zori: dict = field(default_factory=dict)   # resort id -> Zillow ZORI rent block (rent_zillow.zori_rent)
     transit: list = field(default_factory=list)
     router: Optional[RoutingClient] = None
 
@@ -791,11 +839,24 @@ def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match,
         warnings.append(f"no runs extract at {rel(extract)}; run `python pipeline/build.py --fetch` to add trail maps")
 
     rent_dir = raw_dir / "rent"
-    if rent_dir.is_dir() and any(p.suffix in (".json", ".csv") for p in rent_dir.rglob("*") if p.is_file()):
+    zdir = rent_dir / zillow_mod.ZILLOW_DIR.name
+    rd = cfg.definitions.rent
+    has_baseline = rent_dir.is_dir() and (any(rent_dir.glob("hud_fmr_*.csv")) or any(
+        p.is_file() and p.suffix == ".json" for sub in ("hud_fmr", "acs") for p in (rent_dir / sub).glob("*")))
+    zori_files = zillow_mod.find_inputs(zdir).files if zdir.is_dir() else {}
+    extract_path = zdir / zillow_mod.EXTRACT_NAME
+    # Rent by place (ZORI, ACS, HUD) needs a real base point: a placeholder location (its source says so) gets none.
+    placed = [rec for _, rec in records if not _placeholder_location(rec.location_source_id, registry)]
+    county_of: dict[str, Any] = {}
+    if has_baseline or zori_files or extract_path.is_file():
         counties = rent_mod.load_counties(raw_dir / "geo" / "us-counties.geojson")
-        rd = cfg.definitions.rent
-        for _, rec in records:
+        for rec in placed:
             county = rent_mod.county_for(rec.lat, rec.lon, counties)
+            if county is not None:
+                county_of[rec.id] = county
+    if has_baseline:
+        for rec in placed:
+            county = county_of.get(rec.id)
             if county is None:
                 continue
             baseline, sources = rent_mod.baseline_for(county, rent_dir, rd.acs_year, rd.acs_dataset)
@@ -805,6 +866,31 @@ def _prepare_phase5(raw_dir: Path, cfg: Config, registry: SourceRegistry, match,
                 p5.baselines[rec.id] = baseline
     else:
         warnings.append(f"no rent baseline cache in {rel(rent_dir)}; run `python -m pipeline.rent fetch` (HUD needs HUD_API_TOKEN)")
+    # Zillow ZORI: full CSVs (downloaded or placed by hand) refresh the committed extract; the build reads the extract.
+    if zori_files:
+        targets = zillow_mod.Targets({c.fips: (c.name, c.state) for c in county_of.values()},
+                                     [(rec.lat, rec.lon) for rec in placed], rd.zori.zip_radius_km)
+        try:
+            n, notes = zillow_mod.refresh_extract(zdir, targets, rd.zori.trailing_months)
+            print(f"filtered Zillow ZORI files in {rel(zdir)} -> {rel(extract_path)}: {n} regions")
+            warnings.extend(f"Zillow ZORI: {note}" for note in notes)
+        except (zillow_mod.ZoriFormatError, OSError, UnicodeDecodeError) as e:
+            errors.append(f"{rel(zdir)}: {e}")
+    extract = zillow_mod.load_extract(extract_path)
+    if extract is None:
+        warnings.append(f"no Zillow ZORI extract at {rel(extract_path)}; run `python -m pipeline.rent_zillow fetch` or "
+                        "place the ZORI CSVs by hand (data/raw/rent/README.md)")
+    else:
+        for rec in placed:
+            county = county_of.get(rec.id)
+            m = zillow_mod.match_resort(rec.lat, rec.lon, county.fips if county else None, extract,
+                                        rd.zori.zip_radius_km, rd.zori.match_levels)
+            block = zillow_mod.zori_rent(m, rd.zori.value) if m else None
+            if block:
+                p5.zori[rec.id] = block
+        src = zillow_mod.source(extract)
+        if p5.zori and src is not None:
+            _add_source(registry, src, rel(extract_path), errors)
 
     extracts = load_transit(raw_dir / "transit")
     for ex in extracts:
@@ -842,7 +928,7 @@ def _refs(d: dict) -> set[str]:
                 walk(v)
 
     for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "webcams", "jobs",
-                "passes", "season", "terrain", "career", "editorial"):
+                "passes", "season", "terrain", "career", "editorial", "housing_search"):
         walk(d.get(key))
     return found
 

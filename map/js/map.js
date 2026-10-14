@@ -4,7 +4,7 @@ import { h } from './ui.js';
 import { viewFrame, clampPadding as clampTo } from './camera.js';
 import { INSET_STATE, HIDDEN_CODES, insetFeatures, insetFrame, insetPanel, insetCorners } from './inset.js';
 import {
-  addDetailLayers, setDetailData, showSiteCommutes, setGroupVisible, detailBounds, groupsWithData,
+  addDetailLayers, setDetailData, showSiteCommutes, setGroupVisible, detailBounds, groupsWithData, housingBounds,
 } from './detailmap.js';
 
 const C = config.basemap.colors;
@@ -625,6 +625,18 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       showSiteCommutes(map, id);
     },
     setLayerGroup(group, on) { if (loaded) setGroupVisible(map, group, on); },
+    /** Fit the map to the detail file's housing pins. Returns the number of sites shown (0 when there are none). */
+    fitHousing() {
+      const b = loaded && detail ? housingBounds(detail) : null;
+      if (!b) return 0;
+      map.fitBounds(b, {
+        padding: clampPadding(getPadding(current || { level: 'resort' })),
+        maxZoom: 14,
+        duration: prefersReducedMotion() ? 0 : 900,
+        essential: false,
+      });
+      return detail.housing.length;
+    },
     /** Trail map button on the map (resort views with a trail map). Pass null to remove it. */
     setTrailControl(onOpen) {
       if (trailCtl) { map.removeControl(trailCtl); trailCtl = null; }

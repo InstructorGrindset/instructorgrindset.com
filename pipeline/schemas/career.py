@@ -14,6 +14,7 @@ from typing import Literal, Optional, Union
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 
 from .common import Confidence, Slug, Source, Sourced, SourcedNumber, StrictModel, check_source_ref
+from .rent import RentUsed
 
 CertLevel = Literal["none", "level_1", "level_2", "level_3", "trainer", "examiner", "unspecified"]
 CERT_LEVELS: tuple[str, ...] = ("none", "level_1", "level_2", "level_3", "trainer", "examiner", "unspecified")
@@ -229,6 +230,7 @@ class LucrativenessOut(StrictModel):
     high: Optional[float] = None
     status: Literal["computed", "assumptions_unset", "insufficient_data"]
     assumptions: list[Assumption]
+    rent: Optional[RentUsed] = None   # the median rent (or fallback) the model used, with every source
 
     @model_validator(mode="after")
     def _status(self) -> "LucrativenessOut":

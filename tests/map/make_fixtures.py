@@ -45,6 +45,17 @@ SOURCES = [
      "title": "Synthetic fixture: careers page", "accessed_date": AS_OF},
     {"id": "fixture-pass-site", "url": "https://example.com/fixture/pass-site",
      "title": "Synthetic fixture: pass company page", "accessed_date": AS_OF},
+    # Housing search (ROADMAP item 8c): a news page, a guide and two pages of one forum (one publisher).
+    {"id": "fixture-ff-page", "url": "https://example.com/fixture/furnished/fixture-town",
+     "title": "Synthetic fixture: furnished rentals page", "accessed_date": AS_OF},
+    {"id": "fixture-housing-news", "url": "https://example.org/fixture/housing-news",
+     "title": "Synthetic fixture: housing news", "accessed_date": AS_OF},
+    {"id": "fixture-housing-guide", "url": "https://example.net/fixture/housing-guide",
+     "title": "Synthetic fixture: housing guide", "accessed_date": AS_OF},
+    {"id": "fixture-forum-one", "url": "https://example.com/fixture/forum/1",
+     "title": "Synthetic fixture: forum thread one", "accessed_date": AS_OF},
+    {"id": "fixture-forum-two", "url": "https://example.com/fixture/forum/2",
+     "title": "Synthetic fixture: forum thread two", "accessed_date": AS_OF},
     # Trail map files always cite this id (contract); the fixture points it at example.com.
     {"id": "openskimap-runs", "url": "https://example.com/fixture/runs",
      "title": "Synthetic fixture: runs", "accessed_date": AS_OF},
@@ -211,6 +222,30 @@ ACCESS = {
 }
 
 
+def housing_tool(name, kind, url, scope, named_by, source_ids, why):
+    return {"name": name, "kind": kind, "url": url, "why": why, "scope": scope, "named_by": named_by,
+            "source_ids": source_ids, "as_of": AS_OF, "confidence": "estimated", "note": None}
+
+
+# Resort.housing_search as pipeline/housing_search.py ranks it: resort scoped tools, then the cluster's.
+FRONT_RANGE_TOOLS = [
+    housing_tool("Fixture Front Range Rooms", "facebook_group", "https://example.com/fixture/groups/front-range-rooms", "cluster", 2,
+                 ["fixture-housing-news", "fixture-forum-one", "fixture-forum-two"],
+                 "Synthetic reason: both sources say rooms post here first each fall."),
+    housing_tool("Fixture Valley Listings", "listing_site", "https://example.com/fixture/listings", "cluster", 1,
+                 ["fixture-housing-guide"], "Synthetic reason: the guide names it for long stays."),
+]
+HOUSING_SEARCH = {
+    "alpha-peak": {
+        "furnished_finder": {"town": "Fixture Town", "url": "https://example.com/fixture/furnished/fixture-town",
+                             "source_id": "fixture-ff-page", "as_of": AS_OF, "confidence": "estimated", "note": None},
+        "tools": [housing_tool("Fixture Staff Housing Portal", "employer_portal", "https://example.com/fixture/alpha-peak/staff-housing",
+                               "resort", 3, ["fixture-housing-news", "fixture-housing-guide", "fixture-forum-one"],
+                               "Synthetic reason: staff apply here before the season starts.")] + FRONT_RANGE_TOOLS},
+    **{rid: {"furnished_finder": None, "tools": FRONT_RANGE_TOOLS} for rid in ("bravo-bowl", "charlie-hill")},
+}
+
+
 def pay_rows(base, levels, stale_level=None, confidence="published", reported_level=None):
     rows = []
     for i, lvl in enumerate(levels):
@@ -334,6 +369,7 @@ def resort_record(row):
     record["webcams"] = WEBCAMS.get(rid)
     record["jobs"] = with_months(JOBS.get(rid))
     record["passes"] = PASSES.get(rid, [])
+    record["housing_search"] = HOUSING_SEARCH.get(rid)
     if rid in ACCESS:
         record["access"] = {"rating": ACCESS[rid][0], "summary_md": ACCESS[rid][1], "source_id": "fixture-location",
                             "as_of": AS_OF, "confidence": "estimated"}
@@ -360,6 +396,10 @@ def resort_record(row):
     if (record["jobs"] or {}).get("hiring_window"):
         ids.add(record["jobs"]["hiring_window"]["source_id"])
     ids.update(m["source_id"] for m in record["passes"])
+    hs = record["housing_search"] or {}
+    if hs.get("furnished_finder"):
+        ids.add(hs["furnished_finder"]["source_id"])
+    ids.update(i for t in hs.get("tools", []) for i in t["source_ids"])
     record["sources"] = sorted(ids)
     return record
 
@@ -473,7 +513,7 @@ def detail_record(r):
     def line(a, b):
         return {"type": "LineString", "coordinates": [a, [round((a[0] + b[0]) / 2, 4), round((a[1] + b[1]) / 2 + 0.01, 4)], b]}
     housing = [
-        {"id": "alpha-staff-village", "resort_id": r["id"], "name": "Fixture Staff Village", "type": "resort_owned",
+        {"id": "alpha-staff-village", "resort_id": r["id"], "name": "Fixture Staff Village", "town": "Fixture Town", "type": "resort_owned",
          "lat": round(lat - 0.01, 4), "lon": round(lon + 0.025, 4), "location_source_id": "fixture-location", "precision": "building",
          "address": sourced("1 Fixture Way, Fixture Town"),
          "rent_monthly": sourced({"low": 550, "high": 700}), "occupancy": "shared", "deposit": sourced(300),
@@ -483,7 +523,7 @@ def detail_record(r):
               "geometry": line([round(lon + 0.025, 4), round(lat - 0.01, 4)], [lon, lat]), "source_id": "fixture-model"},
              {"mode": "walk", "minutes": 25, "distance_mi": 1.2, "transit_route_ids": [],
               "geometry": line([round(lon + 0.025, 4), round(lat - 0.01, 4)], [lon, lat]), "source_id": "fixture-model"}]},
-        {"id": "alpha-town-lease", "resort_id": r["id"], "name": "Fixture Town Lease", "type": "master_lease",
+        {"id": "alpha-town-lease", "resort_id": r["id"], "name": "Fixture Town Lease", "town": "Fixture Town", "type": "master_lease",
          "lat": town[1], "lon": town[0], "location_source_id": "fixture-location", "precision": "neighborhood",
          "rent_monthly": sourced({"low": 800, "high": 950}, "fixture-survey", "reported"), "occupancy": "mixed", "deposit": None,
          "eligibility_note": None, "confidence": "reported", "verified_date": AS_OF,

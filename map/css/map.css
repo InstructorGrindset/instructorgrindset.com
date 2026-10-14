@@ -610,3 +610,22 @@ body.map-page { background: var(--bg); }
 .jobs-live .fact-meta { margin: .35rem 0 0; }
 .jobs-window { margin: .2rem 0 .5rem; line-height: 1.45; }
 .jobs-window .fact-meta { display: block; }
+
+/* ── Housing links and employee housing (ROADMAP item 8c; map/js/housinglinks.js, panel.js and pipeline/routes.py) ── */
+.housing-block h4.sub, .housing-rent h4.sub, .housing-search h4.sub { font-weight: 600; margin: .9rem 0 .25rem; }
+.ff-main { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .4rem; }
+.ff-link, .tool-link { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; font-weight: 600; }
+.housing-show { margin: .2rem 0 .5rem; }
+.site-select .nav-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .4rem; }
+.site-type { text-transform: none; letter-spacing: 0; font-size: .7rem; }
+.type-resort_owned { color: #7fdcb6; background: rgba(25,158,112,.14); border-color: rgba(25,158,112,.5); }
+.type-master_lease { color: #c9c2ff; background: rgba(144,133,233,.14); border-color: rgba(144,133,233,.5); }
+.type-market { color: #f4ab88; background: rgba(217,89,38,.14); border-color: rgba(217,89,38,.5); }
+.housing-tools { list-style: decimal; padding: 0 0 0 1.4rem; margin: .3rem 0 0; }
+.housing-tools > li { margin: 0 0 .6rem; }
+.housing-tools > li::marker { color: var(--map-faint); font-weight: 700; font-size: var(--text-xs); }
+.housing-tool p { margin: 0; }
+.tool-head { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .4rem; }
+.tool-kind { font-size: .68rem; padding: 0 .45rem; }
+.tool-why { color: var(--muted); font-size: var(--text-xs); line-height: 1.45; margin: .15rem 0 !important; }
+.housing-search .housing-tools > li { margin: .2rem 0; }

@@ -167,10 +167,38 @@ class LucrativenessDefs(StrictModel):
 BaselineKey = Literal["fmr_studio", "fmr_one_br", "fmr_two_br", "acs_median"]
 
 
+class MedianRentDefs(StrictModel):
+    """Median rent across sources (pipeline/rent_median.py)."""
+
+    # Unit sizes in order of preference: the first with any current figure is used (all, then one bedroom).
+    units: list[Literal["all", "studio", "1br", "2br", "3br"]] = Field(default_factory=lambda: ["all", "1br"], min_length=1)
+    # One figure per source: the most specific geography first.
+    geography_order: list[Literal["city", "zip", "county", "metro"]] = Field(
+        default_factory=lambda: ["city", "zip", "county", "metro"], min_length=1)
+    # Figures whose period ended longer ago than this are ignored.
+    max_age_months: int = Field(default=18, ge=1)
+
+
+class ZoriDefs(StrictModel):
+    """Zillow Observed Rent Index (pipeline/rent_zillow.py)."""
+
+    match_levels: list[Literal["zip", "county", "metro"]] = Field(
+        default_factory=lambda: ["zip", "county", "metro"], min_length=1)
+    zip_radius_km: float = Field(default=10, gt=0, le=50)
+    # latest: the latest month with a value; trailing_mean: the mean of the trailing_months months to then.
+    value: Literal["latest", "trailing_mean"] = "latest"
+    trailing_months: int = Field(default=12, ge=1, le=36)
+
+
+RentStep = Literal["median_rent", "zillow_zori", "employee_housing", "reported_area", "baseline", "fmr_studio",
+                   "fmr_one_br", "fmr_two_br", "acs_median"]
+
+
 class RentDefs(StrictModel):
     baseline_preference: list[BaselineKey] = Field(min_length=1)
-    lucrativeness_rent: list[Literal["employee_housing", "reported_area", "baseline", "fmr_studio", "fmr_one_br",
-                                     "fmr_two_br", "acs_median"]] = Field(min_length=1)
+    lucrativeness_rent: list[RentStep] = Field(min_length=1)
+    median: MedianRentDefs = Field(default_factory=MedianRentDefs)
+    zori: ZoriDefs = Field(default_factory=ZoriDefs)
     hud_fmr_year: Optional[int] = None
     acs_year: int
     acs_dataset: str = "acs/acs5"
@@ -513,6 +541,16 @@ class PassesDefs(StrictModel):
         return {k: set(v) for k, v in self.domains.items()}
 
 
+class HousingSearchDefs(StrictModel):
+    """Housing search links (data/raw/housing_search, ROADMAP item 8c)."""
+
+    # A resort shows at most this many housing search tools (resort scoped first, then its cluster's).
+    max_tools: int = Field(default=8, ge=1, le=20)
+    # A Furnished Finder link must sit on one of these registered domains.
+    furnished_finder_domains: list[Annotated[str, Field(pattern=DOMAIN_RE)]] = Field(
+        default_factory=lambda: ["furnishedfinder.com"])
+
+
 class Definitions(StrictModel):
     version: int
     snow: SnowDefs
@@ -538,6 +576,7 @@ class Definitions(StrictModel):
     webcams: WebcamDefs = Field(default_factory=WebcamDefs)
     jobs: JobsDefs = Field(default_factory=JobsDefs)
     passes: PassesDefs = Field(default_factory=PassesDefs)
+    housing_search: HousingSearchDefs = Field(default_factory=HousingSearchDefs)
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 
