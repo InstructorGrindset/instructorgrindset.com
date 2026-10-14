@@ -101,12 +101,12 @@ professionalism:
   min_components: null
 
 lucrativeness:
-  # Owner decision 4 (2026-10-13). Season savings before tax, USD:
+  # Owner decision 4 (2026-10-13). Estimated net income for the season, before tax and other living costs, USD:
   #   season months = season length days / days_per_month when sourced, else default_season_months
   #   earnings      = hourly x hours_per_week x (season months x weeks_per_month)
-  #   savings       = earnings + tips - median rent x season months
-  # mid and high use the top of the posted wage scale (highest hourly_high of the displayed pay rows);
-  # low uses the bottom (lowest hourly_low). No food, transport, pass or gear offsets.
+  #   net income    = earnings + tips - median rent x season months
+  # mid and high use the top of the posted wage scale (highest hourly_high of the displayed pay rows) and
+  # show as "Estimated net income"; low uses the bottom (lowest hourly_low) and shows with the assumptions. No food, transport, pass or gear offsets.
   # The median rent follows rent.lucrativeness_rent. Computed with pipeline/season_income.py (the calculator's model).
   assumptions:
     hours_per_week: 40          # standard full time hours (ROADMAP Section 6)

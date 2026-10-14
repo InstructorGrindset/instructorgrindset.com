@@ -59,7 +59,7 @@ def legend_scale(mode: Any, values: Sequence[float]) -> dict:
 
 
 def lucrativeness_points(resorts: Iterable[dict]) -> list[Point]:
-    """Resorts with a computed ``career.lucrativeness.mid`` (season savings at the top of the wage scale)."""
+    """Resorts with a computed ``career.lucrativeness.mid`` (estimated net income at the top of the wage scale)."""
     out = []
     for r in resorts:
         luc = (r.get("career") or {}).get("lucrativeness") or {}

@@ -38,7 +38,7 @@ ASSUMPTION_LABELS: dict[str, str] = {
     "rent_monthly_usd": "Median rent per month (USD)",
     "rent_basis": "Rent basis",
     "rent_source_id": "Rent source",
-    "tax": "Savings are before tax",
+    "tax": "Before tax and other living costs",
 }
 # The rent assumption names what the number is: a median for median_rent and ACS, Zillow's typical rent for ZORI.
 RENT_LABELS: dict[str, str] = {
@@ -158,18 +158,19 @@ def lucrativeness(
     tips_season_usd: Optional[float] = None,
     rent: Optional[dict] = None,
 ) -> dict:
-    """Season savings before tax in USD (owner decision 4), with every stated assumption echoed.
+    """Estimated net income for the season in USD, before tax (owner decision 4), with every stated assumption echoed.
 
     season months = season_length_days / days_per_month, else default_season_months
     earnings      = hourly x hours_per_week x season months x weeks_per_month
-    savings       = earnings + tips - median rent x season months
+    net income    = earnings + tips - median rent x season months (before tax and other living costs)
 
     ``rent`` is the RentUsed block (pipeline/rent_used.py) behind ``rent_monthly``; it is echoed as ``rent``.
-    mid = high = savings at the top of the posted wage scale (highest hourly_high of the displayed pay
-    rows, any cert level); low = savings at the bottom (lowest hourly_low).
+    mid = high = net income at the top of the posted wage scale (highest hourly_high of the displayed pay
+    rows, any cert level); low = net income at the bottom (lowest hourly_low). The map shows the top as
+    "Estimated net income" and lists the bottom with the assumptions.
 
     Computed with pipeline.season_income (the calculator's shared model) with zero offsets: earnings is its
-    ``gross`` and savings its ``net_before_tax``. Whole dollars use round_half_up (JS Math.round).
+    ``gross`` and net income its ``net_before_tax``. Whole dollars use round_half_up (JS Math.round).
     Tips come from ``tips_season_usd`` (a sourced or 3+ report figure), else the config value, else 0.
     """
     a = defs.assumptions

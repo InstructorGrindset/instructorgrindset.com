@@ -461,7 +461,7 @@ export function createPanel(root, index, {
       h('dl', { class: 'facts career-facts' },
         fact('Private lesson rate', c.private_rate, fmtRate, { stale: stale.has('private_rate') }),
         fact('Instructor split', c.private_split, (v) => `${fmt1(v)}% to the instructor`, { stale: stale.has('private_split') })),
-      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Lucrativeness, estimated savings per season'), lucrativeness(c.lucrativeness)));
+      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Estimated net income'), lucrativeness(c.lucrativeness)));
   }
 
   function fmtRate(v) {
@@ -499,12 +499,13 @@ export function createPanel(root, index, {
     const body = [];
     if (l.status !== 'computed' || l.mid == null) body.push(h('p', { class: 'not-verified' }, statusText(l.status, 'assumptions_unset')));
     else {
-      // Owner decision 4: the headline is the top of the posted wage scale; the range runs bottom to top.
+      // Owner wording (2026-10-14): one headline, the top of the posted wage scale (lucrativeness mid), and one
+      // basis line. The bottom of the scale (low) is listed with the assumptions.
+      const hours = l.assumptions.find((a) => a.key === 'hours_per_week' && a.value != null);
       body.push(h('div', { class: 'sourced-main' },
         h('span', { class: 'fact-value' }, money(l.mid)), badge('estimated')));
-      body.push(h('span', { class: 'fact-meta' }, 'At the top of the posted wage scale, before tax.',
-        l.low != null && l.high != null && l.low !== l.high
-          ? ` Range ${money(l.low)} at the bottom of the scale to ${money(l.high)} at the top.` : ''));
+      body.push(h('span', { class: 'fact-meta lucr-basis' },
+        `Top of the posted wage scale${hours ? `, ${fmtAssumption(hours.key, hours.value)} hours a week` : ''}, minus median rent. Before tax.`));
     }
     // rent_basis says which rent fed the model: "employee_housing:<site id>" or a baseline key (fmr_studio, acs_median);
     // rent_source_id is its source.
@@ -512,7 +513,7 @@ export function createPanel(root, index, {
     const basisSource = l.assumptions.find((a) => a.key === 'rent_source_id' && a.value != null);
     // rent_basis and rent_source_id show as the "Rent used" line; season_months_basis is in the season months label.
     const listed = l.assumptions.filter((a) => !['rent_basis', 'rent_source_id', 'season_months_basis'].includes(a.key));
-    // Statements carry their meaning in the label (owner decision 4): tips not included yet, savings before tax.
+    // Statements carry their meaning in the label (owner decision 4): tips not included yet, before tax.
     const statement = (a) => a.key === 'tax' || (a.key.startsWith('tips') && (a.value == null || a.value === 0));
     if (l.rent) body.push(rentLine(l.rent));
     else if (basis) {
@@ -522,11 +523,15 @@ export function createPanel(root, index, {
     }
     if (listed.length) {
       body.push(h('p', { class: 'sub' }, 'Assumptions'),
-        h('ul', { class: 'assumptions' }, listed.map((a) => h('li', null,
+        h('ul', { class: 'assumptions' }, listed.map((a) => [h('li', null,
           statement(a)
             ? h('span', { class: 'assumption-statement' }, a.key.startsWith('tips') && !/not included/i.test(a.label) ? 'Tips are not included yet' : a.label)
             : [h('span', null, a.label), ' ', a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet')
-              : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))]))));
+              : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))]),
+          // The bottom of the scale result (lucrativeness low) follows its wage.
+          a.key === 'wage_bottom_usd' && l.status === 'computed' && l.low != null
+            ? h('li', { class: 'assumption-low' }, h('span', null, 'Bottom of the wage scale:'), ' ', h('span', { class: 'assumption-value' }, money(l.low)))
+            : null]))));
     }
     return h('div', null, body);
   }

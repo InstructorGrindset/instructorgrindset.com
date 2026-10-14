@@ -252,7 +252,7 @@ def lucrativeness_inputs(
     bedroom; pipeline/rent_used.py); life = food + transport per month;
     months = season_months; one time costs = pass_offset + gear_offset (gear slot); transport slot 0.
     ``season_income(...).gross`` is then lucrativeness earnings and ``.net_before_tax`` is the
-    lucrativeness mid. ``state_rate`` only affects the after tax figures (net, total_tax, ...).
+    lucrativeness ``mid`` value (estimated net income at the top of the posted wage scale, before tax). ``state_rate`` only affects the after tax figures (net, total_tax, ...).
     """
     return SeasonInputs(
         state_rate=state_rate, weeks=_div(float(season_length_days), 7.0), days_per_week=1,

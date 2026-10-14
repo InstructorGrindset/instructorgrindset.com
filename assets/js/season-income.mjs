@@ -140,7 +140,8 @@ export function seasonIncome(inputs) {
  *   resort's town, else Zillow's typical rent, ACS median gross rent or HUD FMR one bedroom),
  *   life = foodMonthlyUsd + transportMonthlyUsd, months = seasonMonths,
  *   one time costs = passOffsetUsd + gearOffsetUsd (in the gear slot), transport slot 0.
- * Then gross is lucrativeness earnings and netBeforeTax is lucrativeness mid.
+ * Then gross is lucrativeness earnings and netBeforeTax is the lucrativeness `mid` value
+ * (estimated net income at the top of the posted wage scale, before tax).
  * stateRate only affects the after tax figures (net, totalTax, ...).
  */
 export function lucrativenessInputs({

@@ -350,7 +350,7 @@ career: {
         // season, then highest confidence (published > reported > estimated), then latest verified_date, then source_id.
         // `reported` rows only come from aggregates of reports.aggregation_min (3)+ approved reports and are never single reports
   private_rate: Sourced | null, private_split: Sourced | null,
-  lucrativeness: { low, mid, high (USD season savings) | null, status: computed|assumptions_unset|insufficient_data,
+  lucrativeness: { low, mid, high (USD estimated net income for the season, before tax) | null, status: computed|assumptions_unset|insufficient_data,
                    assumptions: [{ key, value, label }],
                    rent: RentUsed | null },   // the rent the model used, with every source (null: no rent)
   stale_fields: string[]   // "pay.<cert_level>", "private_rate", "private_split", "lucrativeness.rent"
@@ -373,11 +373,12 @@ line, never the resort).
   stays in `data/raw/tier_a` as an internal note; the build drops it, `build_career` emits no professionalism block, and
   no file in `data/build`, no route stub and no map module names it (`tests/pipeline/test_no_professionalism.py`). The
   six component model in `pipeline/career.py` stays for the owner's private use only.
-* **Lucrativeness (owner decision 4, 2026-10-13):** season savings before tax, USD.
+* **Lucrativeness (owner decision 4, 2026-10-13):** estimated net income for the season, before tax and other living
+  costs, USD.
   season months = `season.length_days` / `days_per_month` (30.4) when sourced, else `default_season_months` (5).
   earnings = hourly × `hours_per_week` (40, standard full time) × season months × `weeks_per_month` (4.33).
-  savings = earnings + tips − median rent × season months. No food, transport, pass or gear offsets.
-  `mid` and `high` are the savings at the top of the posted wage scale (highest `hourly_high` of the displayed pay rows,
+  net income = earnings + tips − median rent × season months. No food, transport, pass or gear offsets.
+  `mid` and `high` are the net income at the top of the posted wage scale (highest `hourly_high` of the displayed pay rows,
   any cert level); `low` uses the bottom (lowest `hourly_low`). Tips only from a sourced or 3+ report figure, else 0 with
   the stated assumption "Tips are not included yet". The median rent follows `rent.lucrativeness_rent` (owner decision
   2026-10-14, see "Lucrativeness rent" below): the median of the sourced median rent figures for the resort's town, else
@@ -388,7 +389,11 @@ line, never the resort).
   `season_months_basis` (`season_length` | `default`), `weeks_per_month`, `tips_season_usd` (label "Tips are not included
   yet" when null), `rent_monthly_usd` (label "Median rent per month (USD)", or "Zillow typical rent (ZORI) per month
   (USD)" and "HUD Fair Market Rent per month (USD)" for those steps), `rent_basis` (`median_rent` | `zillow_zori` |
-  `acs_median` | `fmr_one_br` | ...), `rent_source_id` (several joined with ", "), `tax` (label "Savings are before tax").
+  `acs_median` | `fmr_one_br` | ...), `rent_source_id` (several joined with ", "), `tax` (label "Before tax and other living costs").
+  Wording (owner decision 2026-10-14): the panel heading and the Color by mode read "Estimated net income". The panel
+  shows `mid` as the one headline figure with the basis line "Top of the posted wage scale, 40 hours a week, minus
+  median rent. Before tax." (hours from `hours_per_week`), and lists `low` with the assumptions as "Bottom of the wage
+  scale". The figure is never called savings.
 * **Lucrativeness rent (owner decision 2026-10-14; `pipeline/rent_used.py`):** the first step of `rent.lucrativeness_rent`
   (`[median_rent, zillow_zori, acs_median, fmr_one_br]`) with a value becomes `lucrativeness.rent`; nothing is ever
   interpolated. Also available as steps: `employee_housing`, `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`.
@@ -420,10 +425,10 @@ line, never the resort).
   * `acs_median`, `fmr_one_br`: the county baseline (Phase 5), with `geography` the county.
 * **Shared calculator model (Phase 9):** lucrativeness is computed by `pipeline/season_income.py`, the Python mirror of
   `assets/js/season-income.mjs` used by the Season Income Calculator, with zero offsets (`lucrativeness_inputs` with
-  season length = months × 4.33 × 7 days): earnings = its `gross`, savings = its `net_before_tax`, so the map and the
+  season length = months × 4.33 × 7 days): earnings = its `gross`, net income = its `net_before_tax`, so the map and the
   calculator agree for the same inputs. Whole dollars
   use `round_half_up` (JS `Math.round`, ties toward positive infinity). The calculator's headline net is after tax;
-  the map's lucrativeness is savings before tax (ROADMAP Section 6) and applies no tax assumption, which stays the
+  the map's lucrativeness is net income before tax (ROADMAP Section 6) and applies no tax assumption, which stays the
   owner's call. The calculator has state income tax rates for only 13 states (WA, WY, NV, AK, NH, CO, UT, ID, VT, MT,
   NY, OR, CA).
 
