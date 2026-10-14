@@ -132,7 +132,7 @@ Internal only: `operator_scale` stays in `data/raw/tier_a` as a research note an
 * **Density classes (water content of new snow):** dry under 7%, average 7 to 12%, moist over 12%
 * **Season length:** median of recent seasons' open to close where data exists, else computed from sourced typical open and close dates
 * **Display priority:** Published > Reported (3+ approved reports, shown as range) > Estimated
-* **Lucrativeness:** season savings before tax = top of the posted wage scale × 40 h × season months × 4.33 weeks + tips, minus average rent × season months. Low uses the bottom of the scale. Assumptions are stated in config and shown in the UI
+* **Lucrativeness:** season savings before tax = top of the posted wage scale × 40 h × season months × 4.33 weeks + tips, minus median rent × season months. Low uses the bottom of the scale. Assumptions are stated in config and shown in the UI
 * **Heat maps:** ramp, bins, reach, fade and pocket radius live in the `heat` block
 
 ## 7. Phases (completed)
@@ -235,7 +235,7 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | Tier A approval (2026-10-11) | Owner approved every drafted Tier A record (independents, facilities, western and eastern candidates). The Section 3 approval gate is cleared; Phase 4 data collection can begin |
 | Editorial publication (2026-10-13) | Every editorial draft is published as is: status reviewed, reviewed_by "site owner", reviewed_date 2026-10-13 |
 | Public owner phrases (2026-10-13) | Keep "compensation packages are top of the industry ... (owner assessment)" and "Approved by site owner" |
-| Lucrativeness model (2026-10-13) | Season savings before tax = top of the posted wage scale x 40 h x season months x 4.33 weeks + tips, minus average rent x season months. Season months from sourced length / 30.4, else 5. Low uses the bottom of the scale. Tips only when sourced or 3+ reports ("Tips are not included yet"). Rent: employee housing mean, else ACS median, else HUD FMR one bedroom. No other offsets |
+| Lucrativeness model (2026-10-13) | Season savings before tax = top of the posted wage scale x 40 h x season months x 4.33 weeks + tips, minus median rent x season months. Season months from sourced length / 30.4, else 5. Low uses the bottom of the scale. Tips only when sourced or 3+ reports ("Tips are not included yet"). Rent: employee housing mean, else ACS median, else HUD FMR one bedroom. No other offsets |
 | Professionalism (2026-10-13) | First an operator scale 1, 2, 3 shown as "N of 3". Later the same day: **removed from the public site** (owner decision; low confidence in the rating and risk of offending resorts). `operator_scale` stays in `data/raw` as an internal note and never reaches `data/build` |
 | Commute (2026-10-13) | No walking speed or distance assumptions; each Tier A resort gets a researched access rating: Convenient, Transit friendly, Mixed, Car centric, with one short sentence |
 | Map start (2026-10-13) | The interactive WebGL map starts on first click or tap over the 2D preview ("Tap to explore the map"), keyboard accessible |
@@ -248,6 +248,6 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | Snowfall contrast (2026-10-13) | Most contrast goes to 180 to 900 in, where people actually ski; a 50 in difference must be easy to read. Little or no snow shows as grey |
 | Official trail maps (2026-10-13) | Link to the resort's own trail map in a new tab; never rehost or embed copyrighted maps. The OpenSkiMap drawing stays as the interactive map |
 | Webcams and jobs (2026-10-13) | Link live cams and job pages for every resort that has them: ski school, coaching and clubs, management, parent companies and job boards. Live posting counts come only from public job board APIs; never scrape Indeed, Glassdoor or Workday pages |
-| Rent source (2026-10-14) | Rent comes from Zillow Research's Observed Rent Index (ZORI, all homes plus multifamily, smoothed) by ZIP, then county, then metro. Priority: employee housing mean, then ZORI, then ACS, then HUD. Zillow is credited on /map/credits/ |
+| Rent source (2026-10-14) | Lucrativeness uses median rent: the median across sourced "median rent" figures for the resort's town (Zillow, Redfin, Zumper, Apartments.com, news and blogs; all units first, else one bedroom; 18 month limit). Fallbacks: Zillow ZORI (labelled typical rent), then ACS, then HUD. Employee housing rent shows in the Housing section only. Zillow is credited on /map/credits/ |
 | Housing section (2026-10-14) | Each resort shows Furnished Finder listings by link only (never copied or embedded), publicly listed employee housing, and the housing tools that sources name for the area. "Best" means named by the most independent sources |
 | MetroSlopes (2026-10-13) | MetroSlopes Next Gen Ski Lab is Tier A (owner selection). Until it opens, its dot is a regional placeholder at SFO and no street or city is published |
