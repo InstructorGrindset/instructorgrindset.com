@@ -147,12 +147,11 @@ def test_lower48_box_covers_the_national_view(sidecar):
     assert uw + feather <= w and ue - feather >= e and us + feather <= s and un - feather >= n
 
 
-def test_alaska_box_is_the_inset_source_box(sidecar):
-    """The inset copy maps by its corners into the inset frame, which is drawn around this box."""
-    js = (REPO / "map" / "js" / "inset.js").read_text()
-    box = dict((k, float(v)) for k, v in re.findall(r"(\w+): (-?[\d.]+)", re.search(r"const SOURCE = \{(.*?)\}", js).group(1)))
+def test_alaska_box_is_the_heat_region(sidecar):
+    """The Alaska image draws at its true place, on the same box as the heat maps' Alaska region."""
+    ak = yaml.safe_load((REPO / "config" / "definitions.yaml").read_text())["heat"]["regions"]["alaska"]
     [[w, n], _, [e, s], _] = next(r for r in sidecar["rasters"] if r["region"] == "alaska")["coordinates"]
-    assert (w, s, e, n) == (box["west"], box["south"], box["east"], box["north"])
+    assert (w, s, e, n) == (ak["west"], ak["south"], ak["east"], ak["north"])
 
 
 def test_tone_and_background_match_the_map(sidecar):

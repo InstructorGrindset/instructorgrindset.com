@@ -353,7 +353,7 @@ body.list-mode .facility-filter { left: 1.5rem; }
 
 /* ── Recolor control and legend ── */
 /* The control layer spans the map stage and lets clicks through; the mode buttons sit top left and the heat
-   legend bottom right, clear of the West and of the Alaska inset (phones put it under the buttons). */
+   legend bottom right, clear of the West (phones put it under the buttons). */
 .recolor { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
 .recolor > * { pointer-events: auto; }
 body.list-mode .recolor { display: none; }

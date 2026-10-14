@@ -261,11 +261,11 @@ def test_scales_ticks_and_nice_numbers():
     assert heat.sqrt_ticks([0, 25, 100, 200, 400], 0, 450) == [0, 25, 100, 200, 450]
 
 
-def test_alaska_region_matches_the_national_inset(heat_cfg):
-    src = (REPO / "map" / "js" / "inset.js").read_text()
-    m = re.search(r"const SOURCE = \{ west: ([-\d.]+), east: ([-\d.]+), south: ([-\d.]+), north: ([-\d.]+) \}", src)
+def test_alaska_region_matches_the_underlay_box(heat_cfg):
+    """Both draw at Alaska's true place, so the heat surface and the satellite style underlay share their edges."""
+    from pipeline.tools import make_underlay as mu
     ak = heat_cfg.regions.alaska
-    assert [float(x) for x in m.groups()] == [ak.west, ak.east, ak.south, ak.north]
+    assert (ak.west, ak.south, ak.east, ak.north) == mu.REGIONS["alaska"]["box"]
 
 
 # ------------------------------------------------------------------ the rasters

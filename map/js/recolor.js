@@ -89,7 +89,7 @@ export async function createRecolor(root, index, { onChange, announce }) {
         };
       });
       const fromRaster = (r) => ({
-        images: r.rasters.map((x) => ({ url: x.url, coordinates: x.coordinates, width: x.width, height: x.height, region: x.region, ak: x.region === 'alaska' })),
+        images: r.rasters.map((x) => ({ url: x.url, coordinates: x.coordinates, width: x.width, height: x.height, region: x.region })),
         legend: r.scale === 'classed'
           ? { scale: 'classed', domain: r.domain, ticks: (r.legend && r.legend.ticks) || r.ticks, breaks: r.breaks, colors: r.colors,
             compressBelow: r.legend ? r.legend.compress_below ?? null : null, fixed: Boolean(modeCfg(m).domain) }

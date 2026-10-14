@@ -61,7 +61,8 @@ BACKGROUND = (0x0A, 0x0E, 0x14)
 TONE = {"saturation": -0.3, "contrast": 0.05, "brightness_max": 0.55, "gamma": 1.4}
 
 # Boxes (west, south, east, north). The lower 48 box reaches well past the national view so its fading edge stays off
-# the states. The Alaska box is the inset's source box in map/js/inset.js, so the inset copy fills its frame exactly.
+# the states. The Alaska box is the heat maps' Alaska region (config/definitions.yaml heat.regions.alaska), so the two
+# line up at Alaska's true place.
 # Each image stays within MAX_SIDE pixels: MapLibre uploads an image source as one WebGL texture, and many phones cap
 # textures at 4096 pixels a side.
 MAX_SIDE = 4096

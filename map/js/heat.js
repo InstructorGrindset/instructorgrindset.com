@@ -257,7 +257,7 @@ function traceOutlines(ctx, features, toPx, westOfZero) {
  * definitions.json `heat`, plus for classed modes `breaks` and `colors`, `neutral` (the fade_to "neutral" color) and
  * `dataStates` (codes of the states with a resort value; the others keep color only `field.no_data_reach_km` past
  * their border). outlines: state FeatureCollection or null (then nothing is clipped).
- * Returns [{ url, coordinates: [[w, n], [e, n], [e, s], [w, s]], width, height, region, ak }].
+ * Returns [{ url, coordinates: [[w, n], [e, n], [e, s], [w, s]], width, height, region }].
  */
 export function buildHeat(points, outlines, opts) {
   const f = opts.field;
@@ -408,7 +408,7 @@ export function buildHeat(points, outlines, opts) {
     }
     ctx.putImageData(img, 0, 0);
     out.push({ url: canvas.toDataURL('image/png'), coordinates: [[w, n], [e, n], [e, s], [w, s]], width: W, height: H,
-      region: name, ak: name === 'alaska' });
+      region: name });
   }
   return out;
 }
