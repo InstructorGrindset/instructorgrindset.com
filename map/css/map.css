@@ -632,3 +632,6 @@ body.map-page { background: var(--bg); }
 .tool-kind { font-size: .68rem; padding: 0 .45rem; }
 .tool-why { color: var(--muted); font-size: var(--text-xs); line-height: 1.45; margin: .15rem 0 !important; }
 .housing-search .housing-tools > li { margin: .2rem 0; }
+/* 12 px, so resorts with many listed sites and tools keep Lighthouse's legible text share. */
+.housing .fact-meta, .housing .fact-note, .housing-search .fact-meta, .housing .tool-kind, .housing-search .tool-kind,
+.housing .site-type, .housing .src-note { font-size: var(--text-xs); }

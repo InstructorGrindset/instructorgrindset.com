@@ -796,6 +796,10 @@ characters at most) from the cited sources.
   across 2 pages" when one publisher has several pages). Tier A resorts without tools say "Housing search tools are
   being collected."; Tier B resorts without tools show nothing.
 * `housinglinks.js` (about 1.6 KB gzipped, no Zod) loads on the first resort view, so `/map/` carries none of it.
+  The section's small text (meta lines, notes, kind tags, type badges) is 12 px (`--text-xs`): at 11.5 px the long
+  source lines of Jackson Hole's listed sites took Lighthouse's legible text share under 60 percent (Best Practices
+  96). Lighthouse on 2026-10-14 (3 runs, real data with 114 resorts linked and 66 sites): `/map/` median 98 [96 to
+  98], Vail 96 [96], Jackson Hole 96 [96], Accessibility, Best Practices and SEO 100.
 * Prerendered stubs: a "Housing" section after Jobs with "Furnished rentals" (the link and its badge) and "Where
   people find housing here" (the tool names as plain links in rank order, with their kind). No section without
   links.
