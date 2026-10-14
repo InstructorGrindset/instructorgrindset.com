@@ -531,6 +531,34 @@ export function createPanel(root, index, {
     return h('div', null, body);
   }
 
+  // ── The rent lucrativeness used (owner decision 2026-10-14) ──
+  const RENT_UNIT_TEXT = { studio: ' for a studio', '1br': ' for one bedroom', '2br': ' for two bedrooms', '3br': ' for three bedrooms' };
+  const MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  /** "Median rent $2,450 a month (median of 3 sources: Zillow, Redfin, Summit Daily), 2026" and the fallbacks
+   * "Zillow typical rent (ZORI) $2,450 a month (Summit County, CO, Aug 2026)", "Census ACS median gross rent ...". */
+  function rentLineText(rent) {
+    const amount = `${money(rent.value)} a month`;
+    if (rent.basis === 'median_rent') {
+      const years = rent.period ? [rent.period.first.slice(0, 4), rent.period.last.slice(0, 4)] : [];
+      const when = years.length ? (years[0] === years[1] ? years[0] : `${years[0]} to ${years[1]}`) : '';
+      const from = rent.count > 1 ? `median of ${fmtInt(rent.count)} sources: ` : '1 source: ';
+      return `${rent.label} ${amount}${RENT_UNIT_TEXT[rent.unit] || ''} (${from}${rent.publishers.join(', ')})${when ? `, ${when}` : ''}`;
+    }
+    const m = /^(\d{4})-(\d{2})/.exec(rent.as_of);
+    const month = rent.basis === 'zillow_zori' && m ? `${MONTH_SHORT[Number(m[2]) - 1]} ${m[1]}` : '';
+    const where = [rent.geography ? rent.geography.name : '', month].filter(Boolean).join(', ');
+    return `${rent.label}${rent.label.includes(',') ? ',' : ''} ${amount}${where ? ` (${where})` : ''}`;
+  }
+
+  function rentLine(rent) {
+    return h('p', { class: 'fact-meta rent-line', dataset: { basis: rent.basis } },
+      h('span', { class: 'rent-text' }, rentLineText(rent)), ' ', badge(rent.confidence),
+      rent.stale ? [' ', staleTag()] : null,
+      ` Last verified ${formatIsoDate(rent.as_of)} · `,
+      rent.source_ids.map((id, i) => [i ? ', ' : '', sourceLink(id)]));
+  }
+
   // ── Editorial (Phase 6): rendered only when the build carries reviewed text ──
   function editorialSection(title, blocks, sourceIds, reviewedDate) {
     const parts = blocks.filter(([, text]) => text && String(text).trim());
