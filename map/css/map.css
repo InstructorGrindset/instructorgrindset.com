@@ -450,6 +450,7 @@ body.list-mode .detail-layers { display: none; }
 .site-resort_owned { background: #199e70; }
 .site-master_lease { background: #9085e9; }
 .site-market { background: #d95926; }
+.site-unspecified { background: #d6609f; }
 .site-facts { margin: .4rem 0; }
 .site-note { margin: .2rem 0 .4rem; color: var(--muted); font-size: var(--text-xs); }
 .commute-table { width: 100%; border-collapse: collapse; font-size: .72rem; }
@@ -621,6 +622,8 @@ body.map-page { background: var(--bg); }
 .type-resort_owned { color: #7fdcb6; background: rgba(25,158,112,.14); border-color: rgba(25,158,112,.5); }
 .type-master_lease { color: #c9c2ff; background: rgba(144,133,233,.14); border-color: rgba(144,133,233,.5); }
 .type-market { color: #f4ab88; background: rgba(217,89,38,.14); border-color: rgba(217,89,38,.5); }
+.type-unspecified { color: #f2a6cd; background: rgba(214,96,159,.14); border-color: rgba(214,96,159,.5); }
+.site-sources { margin: .15rem 0 .2rem; }
 .housing-tools { list-style: decimal; padding: 0 0 0 1.4rem; margin: .3rem 0 0; }
 .housing-tools > li { margin: 0 0 .6rem; }
 .housing-tools > li::marker { color: var(--map-faint); font-weight: 700; font-size: var(--text-xs); }

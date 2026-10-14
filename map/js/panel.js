@@ -739,13 +739,14 @@ export function createPanel(root, index, {
 
   // ── Housing and commute (Phase 5), with the housing links of ROADMAP item 8c ──
 
-  const HOUSING_TYPE = { resort_owned: 'Resort owned', master_lease: 'Master lease', market: 'Market' };
+  // unspecified: the resort lists the site without saying whether it owns or leases it.
+  const HOUSING_TYPE = { resort_owned: 'Resort owned', master_lease: 'Master lease', unspecified: 'Listed by the resort', market: 'Market' };
   // How the detail map marks a site: a pin at a publicly listed address, or a circle over its neighborhood.
   const PRECISION = { building: 'Listed address, shown as a pin', neighborhood: 'Neighborhood area, shown as a circle' };
   const NO_SITES = 'No employee housing listed publicly yet.';
   const OCCUPANCY = { shared: 'Shared rooms', private: 'Private rooms', mixed: 'Shared and private rooms' };
   const MODE = { drive: 'Drive', bus: 'Bus', walk: 'Walk', shuttle: 'Shuttle' };
-  const TYPE_ORDER = { resort_owned: 0, master_lease: 1, market: 2 };
+  const TYPE_ORDER = { resort_owned: 0, master_lease: 1, unspecified: 2, market: 3 };
 
   /** Access rating and its one sentence summary (owner decision 6), with its source. */
   function accessBlock(a) {
@@ -834,6 +835,18 @@ export function createPanel(root, index, {
 
   const monthly = (v) => `${money(v)} per month`;
 
+  /** The site's confidence badge, its listing page (the main source) beside its location source, and its date. */
+  function siteSources(site) {
+    const listing = site.listing_source_id;
+    const location = site.location_source_id && site.location_source_id !== listing ? site.location_source_id : null;
+    if (!listing && !location) return null;
+    return h('p', { class: 'fact-meta site-sources' },
+      site.confidence ? [badge(site.confidence), ' '] : null,
+      listing ? ['Source: ', sourceLink(listing)] : null,
+      location ? [listing ? ' · ' : '', 'Location: ', sourceLink(location)] : null,
+      site.verified_date ? ` · Last verified ${formatIsoDate(site.verified_date)}` : null);
+  }
+
   function siteCard(site, detail) {
     const btn = h('button', {
       type: 'button', class: 'site-select', 'aria-pressed': 'false', dataset: { site: site.id },
@@ -847,6 +860,7 @@ export function createPanel(root, index, {
     const routes = new Map(((detail.transit && detail.transit.routes) || []).map((x) => [x.id, x.short_name || x.long_name || x.id]));
     return h('div', { class: 'site', id: `site-${site.id}` },
       btn,
+      siteSources(site),
       h('dl', { class: 'facts site-facts' },
         site.address ? fact('Address', site.address, (v) => v) : null,
         site.rent_monthly ? fact('Rent', site.rent_monthly, (v) => `${moneyRange(v.low, v.high)} per month`) : null,

@@ -14,8 +14,10 @@ from .common import (
     check_source_ref,
 )
 
-HousingType = Literal["resort_owned", "master_lease", "market"]
-EMPLOYEE_HOUSING = ("resort_owned", "master_lease")
+# unspecified: the resort lists the site for its staff without saying whether it owns or leases it (never assume
+# resort_owned). It counts as employee housing.
+HousingType = Literal["resort_owned", "master_lease", "unspecified", "market"]
+EMPLOYEE_HOUSING = ("resort_owned", "master_lease", "unspecified")
 
 
 # --------------------------------------------------------------- geometry
@@ -92,6 +94,7 @@ class HousingSite(StrictModel):
     lat: Latitude
     lon: Longitude
     location_source_id: Slug
+    listing_source_id: Optional[Slug] = None   # the source page that lists the site (its main source link)
     # building only when the address is publicly listed: `address` must then be given with its source
     precision: Literal["building", "neighborhood"]
     address: Optional[SourcedString] = None
@@ -106,6 +109,11 @@ class HousingSite(StrictModel):
     @classmethod
     def _loc(cls, v: str, info: ValidationInfo) -> str:
         return check_source_ref(v, info)
+
+    @field_validator("listing_source_id")
+    @classmethod
+    def _listing(cls, v: Optional[str], info: ValidationInfo) -> Optional[str]:
+        return None if v is None else check_source_ref(v, info)
 
     @model_validator(mode="after")
     def _precision(self) -> "HousingSite":

@@ -144,8 +144,10 @@ classed palette has neighbouring colors closer than 6 in OKLab (x 100) or the wr
 State outlines (simplified) with `properties: { code, name }`.
 
 ### `heat/<mode>.json` and `heat/<mode>-<region>.png` (heat map rasters, `pipeline/heat.py`)
-Two modes are precomputed: `snowfall` (NOAA normals and NRCS SNOTEL mountain stations, shaped by the terrain, plus
-resort pockets, with isolines) and `season` (season length from the resorts' sourced values only). Manifest version 2:
+Three modes are precomputed: `snowfall` (NOAA normals and NRCS SNOTEL mountain stations, shaped by the terrain, plus
+resort pockets, with isolines), `season` (season length from the resorts' sourced values only) and `lucrativeness`
+(the resorts' computed `career.lucrativeness.mid`, `pipeline/heat_lucrativeness.py`; see the note after the manifest).
+Manifest version 2:
 ```
 { version: 2, generated_at, mode: "snowfall" | "season", units: "in" | "days", scale: "classed",
   domain: { min, max },                          // snowfall: heat.modes.snowfall.domain (0 to 900); season: the sourced resort range
@@ -195,6 +197,14 @@ resort pockets, with isolines) and `season` (season length from the resorts' sou
   the SNOTEL extract it draws NOAA stations only; without the terrain extract it falls back to plain station
   interpolation (both with a build warning); without `us-states.geojson` it leaves both modes. The frontend falls back to the browser surface (`map/js/heat.js`) when a manifest
   is absent or invalid.
+
+* Lucrativeness (`heat/lucrativeness.json`, `pipeline/heat_lucrativeness.py`, kept apart from `heat.py` so its changes
+  leave the snowfall and season digests alone): `mode: "lucrativeness"`, `units: "usd"`, `scale: "linear"` with `ramp`
+  (`heat.ramp`), `domain` and `ticks` from `legend_scale`, the twin of `legendScale` in `map/js/heat.js` (a Node test
+  checks they agree), `values: { field: "career.lucrativeness.mid", resorts, points }`, `method` from `heat.field`,
+  `attribution: null`. The surface is the browser's: the `heat.field` interpolation, resolution (12 px per degree) and
+  fade. Written only when a resort has a computed lucrativeness (pay and a rent); otherwise its files are removed and
+  the mode stays disabled.
 
 ### `heat/snowfall-isolines-<region>.geojson` (snowfall isolines, `pipeline/heat.py`)
 ```
@@ -341,10 +351,22 @@ career: {
         // `reported` rows only come from aggregates of reports.aggregation_min (3)+ approved reports and are never single reports
   private_rate: Sourced | null, private_split: Sourced | null,
   lucrativeness: { low, mid, high (USD season savings) | null, status: computed|assumptions_unset|insufficient_data,
-                   assumptions: [{ key, value, label }] },
-  stale_fields: string[]   // "pay.<cert_level>", "private_rate", "private_split"
+                   assumptions: [{ key, value, label }],
+                   rent: RentUsed | null },   // the rent the model used, with every source (null: no rent)
+  stale_fields: string[]   // "pay.<cert_level>", "private_rate", "private_split", "lucrativeness.rent"
 }
+RentUsed { value (USD per month), basis: median_rent | zillow_zori | acs_median | fmr_one_br | ... (the step used),
+           label ("Median rent", "Zillow typical rent (ZORI)", "Census ACS median gross rent",
+                  "HUD Fair Market Rent, one bedroom", ...),
+           source_ids: Slug[] (every source behind the value, each linked), as_of, confidence, note,
+           unit: all | studio | 1br | 2br | 3br | null,     // median_rent: the unit size used
+           count: int | null, publishers: string[],          // median_rent: figures in the median and their publishers
+           period: { first, last } | null,                   // median_rent: the data periods of those figures
+           geography: { level: zip | city | county | metro, id, name } | null,   // where the rent applies
+           stale: boolean }                                  // as_of older than staleness.max_age_months
 ```
+Schema: `pipeline/schemas/rent.py` (`RentUsed`); Zod: `RentUsed` in `map/js/schemas.js` (a bad block drops the rent
+line, never the resort).
 * **Staleness:** a value is stale when its `as_of` / `verified_date` plus `staleness.max_age_months` (18) calendar months is
   before the build date. A value exactly 18 months old is still current.
 * **Professionalism (owner decision, 2026-10-13, later the same day):** removed from the public site. `operator_scale`
@@ -354,17 +376,48 @@ career: {
 * **Lucrativeness (owner decision 4, 2026-10-13):** season savings before tax, USD.
   season months = `season.length_days` / `days_per_month` (30.4) when sourced, else `default_season_months` (5).
   earnings = hourly × `hours_per_week` (40, standard full time) × season months × `weeks_per_month` (4.33).
-  savings = earnings + tips − average rent × season months. No food, transport, pass or gear offsets.
+  savings = earnings + tips − median rent × season months. No food, transport, pass or gear offsets.
   `mid` and `high` are the savings at the top of the posted wage scale (highest `hourly_high` of the displayed pay rows,
   any cert level); `low` uses the bottom (lowest `hourly_low`). Tips only from a sourced or 3+ report figure, else 0 with
-  the stated assumption "Tips are not included yet". Average rent follows `rent.lucrativeness_rent`: the mean of the
-  resort's employee housing rent mids (display priority applies), else the county ACS median gross rent, else HUD FMR
-  one bedroom. Status `insufficient_data` when there is no pay row or no rent; `assumptions_unset` only if hours or the
+  the stated assumption "Tips are not included yet". The median rent follows `rent.lucrativeness_rent` (owner decision
+  2026-10-14, see "Lucrativeness rent" below): the median of the sourced median rent figures for the resort's town, else
+  Zillow's typical rent (ZORI), else the county ACS median gross rent, else HUD FMR one bedroom. Employee housing rent no
+  longer feeds lucrativeness. Status `insufficient_data` when there is no pay row or no rent; `assumptions_unset` only if hours or the
   default season months are null in config. `assumptions` (each `{key, value, label}`, labels ready to show):
   `wage_top_usd`, `wage_bottom_usd`, `hours_per_week`, `season_months` (label says sourced length or standard season),
   `season_months_basis` (`season_length` | `default`), `weeks_per_month`, `tips_season_usd` (label "Tips are not included
-  yet" when null), `rent_monthly_usd`, `rent_basis` (`employee_housing_mean:<site ids>` | `acs_median` | `fmr_one_br` |
-  ...), `rent_source_id` (several joined with ", "), `tax` (label "Savings are before tax").
+  yet" when null), `rent_monthly_usd` (label "Median rent per month (USD)", or "Zillow typical rent (ZORI) per month
+  (USD)" and "HUD Fair Market Rent per month (USD)" for those steps), `rent_basis` (`median_rent` | `zillow_zori` |
+  `acs_median` | `fmr_one_br` | ...), `rent_source_id` (several joined with ", "), `tax` (label "Savings are before tax").
+* **Lucrativeness rent (owner decision 2026-10-14; `pipeline/rent_used.py`):** the first step of `rent.lucrativeness_rent`
+  (`[median_rent, zillow_zori, acs_median, fmr_one_br]`) with a value becomes `lucrativeness.rent`; nothing is ever
+  interpolated. Also available as steps: `employee_housing`, `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`.
+  A rent whose `as_of` is older than `staleness.max_age_months` is `stale` (Needs update, `stale_fields`
+  `lucrativeness.rent`, a build warning). A Tier A record whose location source says its point is a placeholder
+  (MetroSlopes at SFO) gets no rent by place (ZORI, ACS, HUD).
+  * `median_rent` (`pipeline/rent_median.py`, settings `rent.median`): raw `data/raw/rent/median_rent_<batch>.yaml`
+    `{ batch, researched_date, sources, figures: [{ resort_ids, town, geography: city|zip|county|metro,
+    unit: all|studio|1br|2br|3br, median_rent_usd, period (YYYY | YYYY-MM | YYYY-MM-DD), publisher, publisher_name?,
+    source_id, as_of, confidence (never reported), note }] }`. Figures whose period ended more than `max_age_months` (18)
+    before the build are ignored. The publisher is the registered domain of the source URL, named by
+    `rent.median.publishers` (else `publisher_name`, else the domain). A `last_resort_publishers` figure (Foreclosure.com)
+    counts only when no other publisher has a figure, of any unit size, for the same town at the same level. Only the best
+    level with a usable figure counts (`geography_order`: zip, city, county, metro; never mixed); within it, `all` unit
+    figures when any, else `1br` (`units`); 2br and 3br figures are recorded but never used. The value is the median of
+    those figures, one per source page (even count: the mean of the two middle values); outliers stay as published.
+    `as_of` is the oldest figure's, `confidence` the weakest, `geography.name` the town ("Vail, CO"), "<city> metro",
+    "<city> micro area" or "Municipality of Anchorage".
+  * `zillow_zori` (`pipeline/rent_zillow.py`, settings `rent.zori`): Zillow Observed Rent Index, "ZORI (Smoothed): All
+    Homes Plus Multifamily Time Series ($)". The build reads the committed `data/raw/rent/zillow/zori_extract.csv`; full
+    CSVs (`County_`, `Zip_`, `Metro_zori_uc_sfrcondomfr_sm_month.csv`, downloaded by `python -m pipeline.rent_zillow
+    fetch` into `zillow/download/` or placed by hand in `zillow/`, both gitignored) rebuild it on the next build. Each
+    region's value is its latest month with a value (`as_of` = that month end); the trailing 12 month mean is kept
+    (`value: trailing_mean` would use it). Match: the nearest ZIP whose Census Gazetteer ZCTA centroid lies within
+    `zip_radius_km` (10) of the base (skipped without the Gazetteer file), else the county by FIPS, else the county's
+    metro, else none. Source `zillow-zori` ("Zillow Observed Rent Index (ZORI), Zillow Research",
+    https://www.zillow.com/research/data/, confidence `published`, note "ZORI is a typical market rent for all homes and
+    multifamily, smoothed"). Owner instructions: `data/raw/rent/README.md`.
+  * `acs_median`, `fmr_one_br`: the county baseline (Phase 5), with `geography` the county.
 * **Shared calculator model (Phase 9):** lucrativeness is computed by `pipeline/season_income.py`, the Python mirror of
   `assets/js/season-income.mjs` used by the Season Income Calculator, with zero offsets (`lucrativeness_inputs` with
   season length = months × 4.33 × 7 days): earnings = its `gross`, savings = its `net_before_tax`, so the map and the
@@ -378,11 +431,13 @@ career: {
 
 Raw inputs (every value sourced; research and ETL fill them later):
 * data/raw/housing/*.yaml: `{batch, researched_date, sources: [...], sites: [HousingSite]}`
-  HousingSite { id, resort_id, name, type: resort_owned|master_lease|market, lat, lon, location_source_id,
+  HousingSite { id, resort_id, name, town, type: resort_owned|master_lease|unspecified|market, lat, lon, location_source_id,
+                listing_source_id | null,
                 precision: building|neighborhood,   # building only when the address is publicly listed
                 rent_monthly: Sourced<{low, high}> | null, occupancy: shared|private|mixed|null, deposit: Sourced<number>|null,
                 eligibility_note: string|null, confidence, verified_date }
-* data/raw/rent/: HUD Fair Market Rents and Census ACS median gross rent, cached API responses or CSV
+* data/raw/rent/: median rent figures (`median_rent_*.yaml`) and the Zillow ZORI extract (`zillow/zori_extract.csv`)
+  for lucrativeness (Phase 4, "Lucrativeness rent"); HUD Fair Market Rents and Census ACS median gross rent, cached API responses or CSV
   (county and ZIP level), loaded by pipeline/rent.py into a baseline per resort (county of the base area,
   plus ZIPs of housing sites). HUD API needs a token in env HUD_API_TOKEN; ACS works without a key at low volume.
 * data/raw/transit/<agency>/gtfs.zip (gitignored) -> pipeline/transit.py extracts routes and stops within
@@ -421,7 +476,8 @@ Build outputs:
   Written for every Tier A resort that has at least lifts or housing; empty lists or null where data is missing.
 * resorts.json Resort gains `detail_available: bool` and
   `housing_summary: { site_count, cheapest_rent_monthly_low (number|null), cheapest_site_id, has_transit } | null`.
-* The Phase 4 lucrativeness rent input uses the cheapest employee housing site (resort_owned or master_lease) rent,
+* (Superseded by owner decision 2026-10-14: lucrativeness takes its median rent from `pipeline/rent_used.py`; see Phase 4.)
+  The former Phase 4 lucrativeness rent input used the cheapest employee housing site (resort_owned or master_lease) rent,
   else the baseline (studio FMR), per config; career output echoes which was used.
 * config/definitions.yaml gains: `routing: {provider, base_url, api_key_env, isochrone_minutes: [15, 30, 45]}`,
   `transit: {search_radius_km, simplify_tolerance_m, target_season: {start, end}, max_validity_years, winter_window: {start, end}, winter_min_overlap_days}`, `rent: {baseline_preference: [fmr_studio, acs_median]}` with sensible defaults
@@ -432,11 +488,17 @@ Build outputs:
 * **HousingSite** also takes `town: string | null` (ROADMAP item 8c), the town the site is in when a source names it.
   Detail housing always carries `town`: the raw value, else the town of the listed `address` when it reads "street,
   town, ST 12345" (`housing.town_from_address`; "street, town ST 12345" and a trailing "USA" work too), else null.
-  Every file in `data/raw/housing/` is loaded (`employee_housing_2026_10.yaml` included); sites of a Tier B resort
-  give a build warning and are not shown, since detail files are Tier A only.
+  Every file in `data/raw/housing/` is loaded (`employee_housing_2026_10.yaml` included), after the editorial files,
+  so a site may cite a place source declared in `data/raw/editorial`; sites of a Tier B resort give a build warning
+  and are not shown, since detail files are Tier A only.
+* **HousingSite** `type: unspecified` (coordinator, 2026-10-14) marks a site the resort lists for its staff without
+  saying whether it owns or leases it; it is never assumed `resort_owned`. It counts as employee housing
+  (`EMPLOYEE_HOUSING`: resort owned, master lease, unspecified) and draws in pink (`#d6609f`) on the detail map.
+* **HousingSite** also takes `listing_source_id: slug | null`, the source page that lists the site; it must be a
+  defined source. The panel shows it as the site's main source link, beside the location source.
 * **County lookup:** point in polygon of the base area against `data/raw/geo/us-counties.geojson` (us-atlas counties-10m via `npm run build:counties`, committed). ZIP level baselines need ZCTA outlines and are not wired yet.
 * **Rent sources:** `hud-fmr-fy<year>` and `census-acs5-<year>-b25064`. A site without published rent shows the first value in `rent.baseline_preference` as `{low: v, high: v}`, confidence `estimated`, with a note naming the baseline.
-* **Lucrativeness rent:** see Phase 4 (owner decision 4): `rent.lucrativeness_rent` steps `employee_housing` (mean of employee housing rent mids), `acs_median`, `fmr_one_br`; also available: `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`. Commutes: no walking speed or distance model is used (owner decision 6); each Tier A resort carries the researched `access` rating instead.
+* **Lucrativeness rent:** see Phase 4 (owner decision 2026-10-14): `rent.lucrativeness_rent` steps `median_rent`, `zillow_zori`, `acs_median`, `fmr_one_br`; also available: `employee_housing` (mean of employee housing rent mids), `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`. Commutes: no walking speed or distance model is used (owner decision 6); each Tier A resort carries the researched `access` rating instead.
 * **Transit extract** (`data/raw/transit/<agency>.json`): `{ version, agency, source, feed, search_radius_km, simplify_tolerance_m, routes, stops, patterns }`, written one route, stop or pattern per line; ids are prefixed `<agency>:`; `feed: { mdb_source_id, url, mirror_url, license, agency_ids, version, valid_from, valid_to, validity_basis: feed_info|calendar|feed_info+calendar, as_of }` where the validity comes from feed_info.txt, else calendar.txt and calendar_dates.txt, and `as_of = valid_from`; `source` is `gtfs-<agency>` with the agency's feed URL and a note naming the catalog entry, the mirror, the validity and the license; route lines are Douglas Peucker simplified to `transit.simplify_tolerance_m` and deduplicated; `agency_ids` keeps only those GTFS agencies of a shared feed; GTFS Flex rows without a `stop_id` are ignored. **Feed currency:** current when the validity overlaps `transit.target_season` and spans at most `transit.max_validity_years` (longer is an open ended placeholder), or when `as_of` is within `staleness.max_age_months` of the build date; `python -m pipeline.transit extract` skips other feeds and the build drops an extract that is no longer current (or has no dates) with a warning, so stale transit never renders. **Schedule note:** the build flags each kept feed `covers_winter` (its validity overlaps one yearly `transit.winter_window`, Dec 1 to Mar 31, by at least `transit.winter_min_overlap_days`) and `ended` (`valid_to` before the build date). The detail map legend lists each feed's agencies (linked to `agency_url` in a new tab), "Schedule for <start> to <end>", and one note: "Offseason schedule. Winter ski service can differ; check the agency." when `covers_winter` is false, "Last season's schedule. This winter's service can differ; check the agency." when a winter feed has ended (`map/js/labels.js`); hovering a route shows "Route: <name>, <agency>. Schedule for ..."; `patterns: [{ route_id, stop_ids, offsets_min, trip_count }]` hold median scheduled minutes from the first kept stop. Bus commute = walk to a stop within `transit.max_walk_km` + scheduled ride + walk from a stop within `max_walk_km` of the base, at `transit.walk_speed_kmh`, no waiting time; null until Alexandre sets both.
 * **Routing:** source id `routing-<provider>`; the build reads only the cache `data/raw/routing/<provider>/<sha1>.json` written by `python -m pipeline.routing run`. Drive commute `source_id` is `routing-<provider>`; bus commute `source_id` is `gtfs-<agency>`.
 * **Lifts:** extract features carry `{ id, name, ref, lift_type, ski_area_ids }`; only `status: operating` lifts. Detail lifts carry exactly `{ name, lift_type, source_id }`. `name` may be null in OpenStreetMap.
@@ -715,10 +777,12 @@ characters at most) from the cited sources.
   and the county baseline, once the detail file is in).
 * Furnished rentals: "Furnished Finder listings near <town>" with its badge, "furnishedfinder.com · opens in a new
   tab · Last verified <date>" and the note. Shown only with a sourced https url.
-* Employee housing: the detail file's sites, employee housing first (resort owned, master lease, then market) and
-  by rent within a type. Each site button shows the type badge (Resort owned, Master lease, Market), the town and
-  the precision note ("Listed address, shown as a pin" or "Neighborhood area, shown as a circle"); below it the
-  address, the rent only when the site has one (its own, a reports aggregate, or the county baseline estimate with
+* Employee housing: the detail file's sites, employee housing first (resort owned, master lease, unspecified, then
+  market) and by rent within a type. Each site button shows the type badge (Resort owned, Master lease, Listed by
+  the resort, Market), the town and the precision note ("Listed address, shown as a pin" or "Neighborhood area, shown
+  as a circle"); below it the site's badge with "Source: <listing page> · Location: <location source> · Last verified
+  <date>" (the location source alone when there is no listing page, once when both are the same), the address, the
+  rent only when the site has one (its own, a reports aggregate, or the county baseline estimate with
   its note), occupancy, deposit, eligibility and the commute table. "Show on the detail map" starts the WebGL map
   when needed (it returns to the map from the list view), switches the Housing layer on (its checkbox too), fits the
   map to the housing pins (`mapCtl.fitHousing`, `detailmap.housingBounds`, max zoom 14) and announces "Showing N
@@ -859,7 +923,7 @@ Report { id, resort_id, kind: pay | rent | housing, season ("2025-26"),
   estimated site rent), else the county baseline (`estimated`). A raw housing file may not declare a `reported` rent.
   Detail files gain `rent_reported: Sourced<{low, high}> | null` (latest season `rent` aggregate for the resort,
   `note` gives the count). The area `rent_reported` is shown in detail files; it is not in the default lucrativeness
-  rent order (owner decision 4), which uses the employee housing mean (published or reported site rents), then ACS, then FMR.
+  rent order (owner decision 2026-10-14), which uses the median of the sourced median rents, then Zillow ZORI, then ACS, then FMR.
 
 ### Staleness (`python -m pipeline.staleness`)
 Writes `docs/map/staleness.md`: every sourced value in `resorts.json` and `detail/*.json` whose `as_of` or
@@ -983,8 +1047,9 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 
 ### Color modes: heat maps
 Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state
-outlines, and Alaska (at its true place, and in the national inset). Lucrativeness stays disabled until rent data exists
-(item 9). Values come from the slim index (`lucrativeness_mid`, `season_length_days`, `snowfall_annual_in`). Every
+outlines, and Alaska (at its true place, and in the national inset). Lucrativeness turns on by itself as soon as any
+resort has a computed `lucrativeness_mid` (pay and a rent, owner decision 2026-10-14). Values come from the slim index
+(`lucrativeness_mid`, `season_length_days`, `snowfall_annual_in`). Every
 setting lives in `config/definitions.yaml` `heat` and reaches the UI through `definitions.json`.
 * **Classes** (`heat.modes.<mode>`, `scale: classed`): Snowfall and Season length use hard edged classes, so a step of
   one class is easy to read. Snowfall (owner request 2026-10-13: the most contrast in 180 to 900 in, a 50 in step easy
@@ -1050,6 +1115,8 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
   server. Alaska's lines draw at its true place only; the national inset is too small for them.
 * **Season length** draws the precomputed rasters (`heat/season.json`) of the resorts' sourced season lengths; it has
   no NOAA credit, since every value is a resort's own sourced fact.
+* **Lucrativeness** draws the precomputed rasters (`heat/lucrativeness.json`) of the resorts' computed mids, on the
+  `heat.ramp` with the legend ticks of `legendScale`; without the manifest the browser draws the same surface.
 * **Browser fallback**: when a manifest is absent or invalid, `buildHeat` in `map/js/heat.js` draws the same classes
   from the slim index in the browser (the Season length fade and the no data state rule included, with a node chamfer
   distance like the pipeline), at `heat.field.px_per_degree` (12). Measured 2026-10-13 under SwiftShader on a loaded
@@ -1093,8 +1160,13 @@ same inset.
   the route stubs and their meta descriptions show no rating.
 * Lucrativeness (decision 4): the headline is `mid` (top of the posted wage scale), then the range "bottom of the
   scale to top". Assumptions list every `{key, value, label}` except `rent_basis`, `rent_source_id` and
-  `season_months_basis`; `tips_season_usd` (null) and `tax` show as statements from their labels. `rent_basis`
-  becomes the "Rent used" line with each of its sources.
+  `season_months_basis`; `tips_season_usd` (null) and `tax` show as statements from their labels. The rent line
+  (`.rent-line`, owner decision 2026-10-14) renders `lucrativeness.rent`: "Median rent $2,275 a month for one bedroom in
+  Vail, CO (median of 2 sources: Rentometer, Zumper), 2026", "single source" for one figure, "in the Bozeman metro" or
+  "in the Municipality of Anchorage" for those places; the fallbacks read "Zillow typical rent (ZORI) $2,450 a month
+  (Summit County, CO, Aug 2026)" and "Census ACS median gross rent $1,950 a month (Summit County)". Then its confidence
+  badge, Needs update when `stale`, "Last verified <as_of>" and every source linked. Without `rent` (older builds) the
+  former `rent_basis` "Rent used" line shows with each of its sources.
 * Access (decision 6): Housing and commute opens with "Getting to the mountain": the rating label (Convenient,
   Transit friendly, Mixed, Car centric), its badge, the one sentence `summary_md` and the source with its date
   (`resort.access`, or the detail file's `access` when the resort has none).
@@ -1143,6 +1215,8 @@ same inset.
 A hand written static page in the site layout (sidebar placeholder and fetch snippet from the map shell, no map
 JavaScript). It credits OpenSkiMap and OpenStreetMap contributors (ODbL), USGS The National Map imagery, US Census
 outlines via `us-atlas`, NOAA NCEI U.S. Climate Normals 1991 to 2020, NRCS SNOTEL, Open Meteo with ERA5 (CC BY 4.0),
+the rent sources (section "Rent": published median rents and their publishers; "Rent data: Zillow Observed Rent Index
+(ZORI), Zillow Research" linked to https://www.zillow.com/research/data/; Census ACS and HUD Fair Market Rents),
 Wikipedia (CC BY SA 4.0) and the vendored libraries with their versions and the license files in `/map/vendor/`; it
 explains the confidence levels and describes exactly the fields the report form sends to Formspree. Linked from the
 map attribution, the panel footer and the footer of every prerendered stub. `tests/pipeline/test_credits_page.py`
@@ -1161,6 +1235,9 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
 * `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
 * `data/raw/reports/`: Phase 7 queue and moderated reports (gitignored) and `aggregates.json` (committed).
 * `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
+* `data/raw/rent/`: `median_rent_*.yaml` (median rent figures), `zillow/zori_extract.csv` (committed ZORI extract; the
+  full Zillow CSVs and the Census Gazetteer ZCTA file in `zillow/` and `zillow/download/` are gitignored) and the HUD
+  and ACS cache (Phase 4 "Lucrativeness rent", Phase 5; owner instructions in `data/raw/rent/README.md`).
 * `data/raw/sources/*.yaml`: pipeline owned shared sources (`{ sources: Source[] }`, e.g. `owner-decisions-2026-10-11`) that any research file may cite. Source ids are unique across all of `/data/raw`; the same id may repeat only with an identical url.
 * `data/raw/openskimap/`: downloaded OpenSkiMap ski areas (gitignored when large; the filtered US extract is committed).
 * `data/raw/transit/`: `feeds.yaml` (GTFS feeds from the Mobility Database catalog), downloaded `<agency>/gtfs.zip` (gitignored) and the committed `<agency>.json` extracts (Phase 5 above; coverage and skipped feeds in `data/raw/transit/README.md`).
@@ -1246,6 +1323,10 @@ pipeline/
   housing.py          # Phase 5 housing sites, rent display, detail file assembly
   housing_search.py   # Furnished Finder links and ranked housing search tools -> Resort.housing_search
   rent.py             # Phase 5 HUD FMR and ACS baselines, county lookup
+  rent_median.py      # median rent across sourced figures (lucrativeness rent, first step)
+  rent_zillow.py      # Zillow ZORI fetch, parse, extract and ZIP, county, metro matching
+  rent_used.py        # the lucrativeness rent order -> Resort.career.lucrativeness.rent
+  heat_lucrativeness.py  # lucrativeness heat rasters (heat/lucrativeness.json and PNGs)
   transit.py          # Phase 5 GTFS extraction and bus commute model
   routing.py          # Phase 5 Valhalla / OSRM / ORS client with cache
   editorial.py        # Phase 6 editorial loader, approve command, review document

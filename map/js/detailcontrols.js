@@ -27,7 +27,7 @@ function legendFor(group) {
   switch (group) {
     case 'housing':
       return h('ul', { class: 'detail-legend' },
-        Object.entries({ resort_owned: 'Resort owned', master_lease: 'Master lease', market: 'Market' }).map(([k, label]) =>
+        Object.entries({ resort_owned: 'Resort owned', master_lease: 'Master lease', unspecified: 'Listed by the resort', market: 'Market' }).map(([k, label]) =>
           h('li', null, h('span', { class: 'chip-dot', style: `background:${HOUSING_COLOR[k]}`, 'aria-hidden': 'true' }), label)),
         h('li', { class: 'legend-note' }, 'Dots mark listed buildings. Soft circles mark neighborhood areas.'));
     case 'isochrones':

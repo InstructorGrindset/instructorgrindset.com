@@ -5,8 +5,9 @@ import { transitSchedule, transitNote } from './labels.js';
 const C = config.basemap.colors;
 const EMPTY = { type: 'FeatureCollection', features: [] };
 
-// Housing type colors: validated as a 3 color set (all pairs) on the dark map surface.
-export const HOUSING_COLOR = { resort_owned: '#199e70', master_lease: '#9085e9', market: '#d95926' };
+// Housing type colors: validated as a 3 color set (all pairs) on the dark map surface; pink marks sites the resort
+// lists without saying whether it owns or leases them.
+export const HOUSING_COLOR = { resort_owned: '#199e70', master_lease: '#9085e9', unspecified: '#d6609f', market: '#d95926' };
 // Isochrones: one hue, light (closest) to dark (farthest).
 export const ISO_COLOR = { 15: '#86b6ef', 30: '#5598e7', 45: '#2a78d6' };
 // Commute modes share one ink color and differ by dash pattern.
@@ -83,7 +84,7 @@ export function addDetailLayers(map) {
     filter: ['==', ['get', 'precision'], 'neighborhood'],
     paint: {
       'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 12, 14, 42],
-      'circle-color': ['match', ['get', 'type'], 'resort_owned', HOUSING_COLOR.resort_owned, 'master_lease', HOUSING_COLOR.master_lease, HOUSING_COLOR.market],
+      'circle-color': ['match', ['get', 'type'], 'resort_owned', HOUSING_COLOR.resort_owned, 'master_lease', HOUSING_COLOR.master_lease, 'unspecified', HOUSING_COLOR.unspecified, HOUSING_COLOR.market],
       'circle-opacity': ['case', fs('selected'), 0.45, 0.28],
       'circle-blur': 0.45,
       'circle-stroke-color': '#ffffff',
@@ -96,7 +97,7 @@ export function addDetailLayers(map) {
     filter: ['==', ['get', 'precision'], 'building'],
     paint: {
       'circle-radius': ['case', fs('selected'), 8, 6],
-      'circle-color': ['match', ['get', 'type'], 'resort_owned', HOUSING_COLOR.resort_owned, 'master_lease', HOUSING_COLOR.master_lease, HOUSING_COLOR.market],
+      'circle-color': ['match', ['get', 'type'], 'resort_owned', HOUSING_COLOR.resort_owned, 'master_lease', HOUSING_COLOR.master_lease, 'unspecified', HOUSING_COLOR.unspecified, HOUSING_COLOR.market],
       'circle-stroke-color': '#ffffff',
       'circle-stroke-width': ['case', fs('selected'), 3, fs('hover'), 2.5, 1.5],
     },

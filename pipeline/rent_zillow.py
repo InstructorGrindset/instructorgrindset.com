@@ -508,13 +508,14 @@ class FetchBlocked(RuntimeError):
 def _download(url: str, dest: Path, timeout: float = 120) -> None:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     tmp = dest.with_name(dest.name + ".part")
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    with urllib.request.urlopen(req, timeout=timeout) as resp, tmp.open("wb") as fh:
-        while True:
-            chunk = resp.read(1 << 20)
-            if not chunk:
-                break
-            fh.write(chunk)
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        dest.parent.mkdir(parents=True, exist_ok=True)   # only once the host answers: a blocked fetch leaves nothing
+        with tmp.open("wb") as fh:
+            while True:
+                chunk = resp.read(1 << 20)
+                if not chunk:
+                    break
+                fh.write(chunk)
     tmp.replace(dest)
 
 
@@ -548,18 +549,19 @@ def build_targets() -> Targets:  # pragma: no cover - wiring for the command lin
     from pipeline.sources import SourceRegistry
     from pipeline.tier_a import load_raw
 
+    from pipeline.build import _placeholder_location
+
     cfg = load_config().definitions.rent.zori
-    recs = load_raw(REPO_ROOT / "data" / "raw", SourceRegistry(), REPO_ROOT).records
+    registry = SourceRegistry()
+    recs = [rec for _, rec in load_raw(REPO_ROOT / "data" / "raw", registry, REPO_ROOT).records
+            if not _placeholder_location(rec.location_source_id, registry)]   # Tier A records with a real base point
     counties = load_counties()
     found: dict[str, tuple[str, Optional[str]]] = {}
-    bases = []
-    for _, rec in recs:
+    for rec in recs:
         c = county_for(rec.lat, rec.lon, counties)
         if c:
             found[c.fips] = (c.name, c.state)
-        if rec.tier == "A":
-            bases.append((rec.lat, rec.lon))
-    return Targets(found, bases, cfg.zip_radius_km)
+    return Targets(found, [(rec.lat, rec.lon) for rec in recs], cfg.zip_radius_km)
 
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -574,7 +576,6 @@ def main(argv: Optional[list[str]] = None) -> int:
             return 2
         for p in paths:
             print(f"downloaded {p.relative_to(REPO_ROOT)} ({p.stat().st_size:,} bytes)")
-        print("now run: python pipeline/build.py (it rebuilds data/raw/rent/zillow/zori_extract.csv)")
     from pipeline.config import load_config
     n, notes = refresh_extract(ZILLOW_DIR, build_targets(), load_config().definitions.rent.zori.trailing_months)
     for note in notes:
@@ -582,7 +583,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     if n is None:
         print(f"no ZORI files in {ZILLOW_DIR.relative_to(REPO_ROOT)}/ or its download/ folder", file=sys.stderr)
         return 1
-    print(f"wrote {(ZILLOW_DIR / EXTRACT_NAME).relative_to(REPO_ROOT)}: {n} rows")
+    print(f"wrote {(ZILLOW_DIR / EXTRACT_NAME).relative_to(REPO_ROOT)}: {n} rows; now run python pipeline/build.py")
     return 0
 
 

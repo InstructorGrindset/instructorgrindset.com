@@ -605,16 +605,16 @@ async function desktop(browser, base) {
       bus: n('detail-commute-bus'), drive: n('detail-commute-drive') };
   });
   let c = await counts();
-  check(c.lifts > 0 && c.base === 1 && c.point === 1 && c.area === 2 && c.iso > 0 && c.transit > 0 && c.stops === 2,
+  check(c.lifts > 0 && c.base === 1 && c.point === 1 && c.area === 3 && c.iso > 0 && c.transit > 0 && c.stops === 2,
     `detail map draws lifts, base, housing by precision, isochrones, transit (${JSON.stringify(c)})`);
   check(c.bus === 0 && c.drive === 0, 'commute lines hidden until a site is selected');
   check(await page.locator('body.detail-mode').count() === 1 && await page.locator('#recolor').isHidden(), 'detail mode replaces the recolor control');
   check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts', 'Housing', 'Commute', 'Transit', 'Drive time']), 'a toggle per layer with data');
   check((await page.locator('#detail-layers').innerText()).includes('45 min'), 'isochrone legend shows 15, 30, 45 minutes');
-  check(await page.locator('.site-select').count() === 3, 'housing lists every site');
-  check(JSON.stringify(await page.locator('.site-select .nav-name').allInnerTexts()) === JSON.stringify(['Fixture Staff Village', 'Fixture Town Lease', 'Fixture West Rentals']), 'employee housing listed first');
+  check(await page.locator('.site-select').count() === 4, 'housing lists every site');
+  check(JSON.stringify(await page.locator('.site-select .nav-name').allInnerTexts()) === JSON.stringify(['Fixture Staff Village', 'Fixture Town Lease', 'Fixture Listed Lodge', 'Fixture West Rentals']), 'employee housing listed first');
   const lease = page.locator('.site', { hasText: 'Fixture Town Lease' });
-  check((await lease.innerText()).includes('$800 to $950 per month') && await lease.locator('.badge-reported').count() === 1, 'site rent range with badge');
+  check((await lease.innerText()).includes('$800 to $950 per month') && await lease.locator('.fact', { hasText: 'Rent' }).locator('.badge-reported').count() === 1, 'site rent range with badge');
   check(/Master lease\s+Fixture Town · Neighborhood area, shown as a circle/.test(await lease.innerText()), 'site type badge, town and precision note');
   check((await lease.locator('.commute-table').innerText()).includes('Bus\t28 min\t7.4 mi\tBlue'), 'commute row shows mode, minutes, distance and route name');
   check(await lease.locator('.not-verified', { hasText: 'Being calculated' }).count() === 1, 'missing commute minutes marked');
@@ -1541,8 +1541,17 @@ async function housingChecks(browser, stubBase) {
   'Furnished rentals: one sourced link to the listings near the town, with its badge and date');
   check(await sec.locator('iframe, embed, object, img').count() === 0, 'listings are linked, never embedded');
   // Employee housing: type badge, town, precision note; rent only where sourced.
-  check(JSON.stringify(await sec.locator('.site-type').allInnerTexts()) === JSON.stringify(['Resort owned', 'Master lease', 'Market']),
-    'every site shows its type badge (Resort owned, Master lease, Market)');
+  check(JSON.stringify(await sec.locator('.site-type').allInnerTexts()) === JSON.stringify(['Resort owned', 'Master lease', 'Listed by the resort', 'Market']),
+    'every site shows its type badge (Resort owned, Master lease, Listed by the resort, Market)');
+  const listed = sec.locator('.site', { hasText: 'Fixture Listed Lodge' });
+  const listedSrc = listed.locator('.site-sources');
+  check((await listedSrc.textContent()).replace(/\s+/g, ' ').trim()
+    === 'Estimated Source: Synthetic fixture: careers page · Location: Synthetic fixture: base area location · Last verified Oct 1, 2026'
+    && await listedSrc.locator('a').first().getAttribute('href') === 'https://example.com/fixture/careers'
+    && await listed.locator('.fact', { hasText: 'Rent' }).count() === 0,
+  'the listing page is the site\'s main source, beside its location source; no rent without a sourced one');
+  check((await sec.locator('.site', { hasText: 'Fixture Town Lease' }).locator('.site-sources').textContent()).startsWith('Reported Location: Synthetic fixture: base area location'),
+    'a site without a listing page cites its location source');
   const village = await sec.locator('.site', { hasText: 'Fixture Staff Village' }).locator('.nav-meta').innerText();
   const west = await sec.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.nav-meta').innerText();
   check(/Fixture Town · Listed address, shown as a pin/.test(village) && /^Market\s+Neighborhood area, shown as a circle$/.test(west.trim()),
@@ -1597,10 +1606,10 @@ async function housingChecks(browser, stubBase) {
       blur: [m.getPaintProperty('detail-housing-point', 'circle-blur') || 0, m.getPaintProperty('detail-housing-area', 'circle-blur')],
       status: document.getElementById('panel-status').textContent, focus: document.activeElement && document.activeElement.className };
   }, fx.housing);
-  check(fit.inside && fit.zoom > 10 && fit.point === 1 && fit.area === 2,
-    `the detail map centers on the housing pins: 1 building pin and 2 neighborhood circles (${JSON.stringify(fit)})`);
+  check(fit.inside && fit.zoom > 10 && fit.point === 1 && fit.area === 3,
+    `the detail map centers on the housing pins: 1 building pin and 3 neighborhood circles (${JSON.stringify(fit)})`);
   check(fit.blur[0] === 0 && fit.blur[1] > 0, 'building pins and neighborhood circles draw in distinct styles');
-  check(fit.status === 'Showing 3 housing sites on the detail map. Pins mark listed addresses and circles mark neighborhood areas.'
+  check(fit.status === 'Showing 4 housing sites on the detail map. Pins mark listed addresses and circles mark neighborhood areas.'
     && /housing-show-btn/.test(fit.focus), 'the move is announced and focus stays on the button');
   // With the housing layer switched off, the button switches it back on.
   await page.locator('#layer-housing').uncheck();

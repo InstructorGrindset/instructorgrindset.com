@@ -276,3 +276,47 @@ def test_site_town_prefers_the_sourced_town():
     assert site_town(HousingSite.model_validate(base)) == "Alpha Town"
     assert site_town(HousingSite.model_validate({**base, "town": "Beta Town"})) == "Beta Town"
     assert site_town(HousingSite.model_validate({**base, "precision": "neighborhood", "address": None})) is None
+
+
+# ------------------------------------------------- unspecified type and the listing source (coordinator 2026-10-14)
+from pipeline.housing import cheapest_employee_site  # noqa: E402
+
+
+def _site(**kw):
+    base = {"id": "s1", "resort_id": "alpha-peak", "name": "Listed Lodge", "type": "unspecified", "lat": 39.6,
+            "lon": -106.3, "location_source_id": "loc", "listing_source_id": "careers", "precision": "neighborhood",
+            "confidence": "estimated", "verified_date": "2026-10-14"}
+    return HousingSite.model_validate({**base, **kw}, context={"source_ids": {"loc", "careers", "rent"}})
+
+
+def test_unspecified_sites_and_their_listing_source():
+    s = _site()
+    assert s.type == "unspecified" and s.listing_source_id == "careers"
+    assert _site(listing_source_id=None).listing_source_id is None
+    with pytest.raises(ValidationError, match="not defined in any sources list"):
+        _site(listing_source_id="nowhere")
+    with pytest.raises(ValidationError):
+        _site(type="unknown")
+    # a site the resort lists for its staff counts as employee housing, whatever its tenure
+    rent = {"value": {"low": 500, "high": 700}, "source_id": "rent", "as_of": "2026-10-14", "confidence": "published"}
+    best = cheapest_employee_site([_site(rent_monthly=rent), _site(id="s2", type="market", rent_monthly={**rent, "value": {"low": 100, "high": 200}})])
+    assert best[0].id == "s1"
+
+
+def test_build_carries_the_listing_source_into_the_detail_pins(repo_root, raw_dir, tmp_path):
+    out = tmp_path / "build"
+    (raw_dir / "housing").mkdir()
+    (raw_dir / "housing" / "employee_housing_fixture.yaml").write_text(HOUSING_YAML.replace(
+        "    type: market\n", "    type: unspecified\n    listing_source_id: fixture-housing-page\n"))
+    _run(repo_root, raw_dir, out, tmp_path)
+    d = _load(out / "detail", "fixture-peak.json")
+    flats = next(s for s in d["housing"] if s["id"] == "peak-town-flats")
+    lodge = next(s for s in d["housing"] if s["id"] == "peak-staff-lodge")
+    assert flats["type"] == "unspecified" and flats["listing_source_id"] == "fixture-housing-page"
+    assert lodge["listing_source_id"] is None
+    from pipeline.tier_a import BuildError
+    (raw_dir / "housing" / "employee_housing_fixture.yaml").write_text(HOUSING_YAML.replace(
+        "    type: market\n", "    type: unspecified\n    listing_source_id: ghost-page\n"))
+    with pytest.raises(BuildError) as e:
+        _run(repo_root, raw_dir, tmp_path / "build2", tmp_path)
+    assert any("site 'peak-town-flats': listing_source_id" in m and "ghost-page" in m for m in e.value.errors)

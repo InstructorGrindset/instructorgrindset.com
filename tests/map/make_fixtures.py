@@ -388,7 +388,7 @@ def resort_record(row):
     if rid in ACCESS:
         record["access"] = {"rating": ACCESS[rid][0], "summary_md": ACCESS[rid][1], "source_id": "fixture-location",
                             "as_of": AS_OF, "confidence": "estimated"}
-    record["housing_summary"] = ({"site_count": 3, "cheapest_rent_monthly_low": 550, "cheapest_site_id": "alpha-staff-village",
+    record["housing_summary"] = ({"site_count": 4, "cheapest_rent_monthly_low": 550, "cheapest_site_id": "alpha-staff-village",
                                   "has_transit": True} if rid == "alpha-peak" else None)
     ids = {"fixture-location"}
     for group in ("size", "elevation", "season", "terrain"):
@@ -546,6 +546,11 @@ def detail_record(r):
              {"mode": "bus", "minutes": 28, "distance_mi": 7.4, "transit_route_ids": ["fixture-blue"],
               "geometry": line(town, [lon, lat]), "source_id": "fixture-model"},
              {"mode": "drive", "minutes": None, "distance_mi": None, "transit_route_ids": [], "geometry": None, "source_id": None}]},
+        # Listed by the resort without saying whether it owns or leases it; no published rent.
+        {"id": "alpha-listed-lodge", "resort_id": r["id"], "name": "Fixture Listed Lodge", "town": "Fixture Town", "type": "unspecified",
+         "lat": round(lat + 0.02, 4), "lon": round(lon + 0.06, 4), "location_source_id": "fixture-location",
+         "listing_source_id": "fixture-careers", "precision": "neighborhood", "rent_monthly": None, "occupancy": None, "deposit": None,
+         "eligibility_note": None, "confidence": "estimated", "verified_date": AS_OF, "commutes": []},
         {"id": "alpha-market-west", "resort_id": r["id"], "name": "Fixture West Rentals", "type": "market",
          "lat": round(lat + 0.04, 4), "lon": round(lon - 0.08, 4), "location_source_id": "fixture-location", "precision": "neighborhood",
          "rent_monthly": sourced({"low": 1200, "high": 1600}, "fixture-model", "estimated"), "occupancy": "private", "deposit": None,

@@ -486,10 +486,11 @@ export const HousingSite = z.object({
   resort_id: z.string().nullish(),
   name: z.string().min(1),
   town: z.string().min(1).nullish().catch(null).transform((v) => v ?? null),   // sourced, or read from the listed address
-  type: z.enum(['resort_owned', 'master_lease', 'market']),
+  type: z.enum(['resort_owned', 'master_lease', 'unspecified', 'market']),
   lat: z.number().min(-90).max(90),
   lon: z.number().min(-180).max(180),
   location_source_id: z.string().nullish(),
+  listing_source_id: z.string().nullish().transform((v) => v ?? null),   // the page that lists the site
   precision: z.enum(['building', 'neighborhood']),
   address: sourced(z.string()),   // required by the pipeline for building precision
   rent_monthly: sourced(z.object({ low: numOrNull, high: numOrNull })),
