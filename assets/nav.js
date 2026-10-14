@@ -6,8 +6,10 @@
   fetch('/partials/sidebar.html?v=14')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
     .then(function (html) {
+      // data-defer-images on the placeholder holds drawer images until the drawer first opens.
+      var defer = t.hasAttribute('data-defer-images');
       var d = document.createElement('div');
-      d.innerHTML = html.trim();
+      d.innerHTML = defer ? html.trim().replace(/<img ([^>]*?)src="/g, '<img $1data-src="') : html.trim();
       var root = d.firstElementChild;
       t.replaceWith(root);
       wire(root);
@@ -22,6 +24,10 @@
     var backdrop = root.querySelector('.nav-backdrop');
 
     function open() {
+      root.querySelectorAll('img[data-src]').forEach(function (i) {
+        i.src = i.getAttribute('data-src');
+        i.removeAttribute('data-src');
+      });
       root.classList.add('is-open');
       burger.setAttribute('aria-expanded', 'true');
       closeBtn.focus();
