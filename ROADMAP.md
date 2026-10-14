@@ -38,7 +38,7 @@ At each level the side panel shows:
 7. **Static first.** All data compiles to versioned JSON, GeoJSON and PNG rasters at build time. Report submissions go to a hosted form (Formspree); there is no backend.
 8. **Editorial text is never invented by the model.** Claude Code may draft culture and economy overviews only from cited sources, and every draft is marked `status: draft` until Alexandre reviews it.
 9. **Heat maps show smoothed estimates between resorts.** Colors between resorts are interpolated for display only. Tooltips, panels and pages show only sourced values.
-10. **Official trail maps are linked, never copied.** Resort trail map art is copyrighted. The site links to the resort's own file and draws its own interactive map from OpenSkiMap.
+10. **Official trail maps load from the resort, never copied.** Resort trail map art is copyrighted. The dialog shows the resort's own published file from its own servers, credited, and the site draws its own interactive map from OpenSkiMap.
 
 ## 3. Tier A criteria
 
@@ -246,8 +246,9 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | Alaska (2026-10-13) | Alaska draws as a smaller inset in the lower left; the lower 48 stays centered |
 | Heat maps (2026-10-13) | Real heat maps that cover the map, not highlighted resorts. Snowfall uses NOAA NCEI 1991 to 2020 station normals with a pocket for each resort's sourced snowfall. Interpolated colors are never shown as numbers |
 | Snowfall contrast (2026-10-13) | Most contrast goes to 180 to 900 in, where people actually ski; a 50 in difference must be easy to read. Little or no snow shows as grey |
-| Official trail maps (2026-10-13) | Link to the resort's own trail map in a new tab; never rehost or embed copyrighted maps. The OpenSkiMap drawing stays as the interactive map |
+| Official trail maps (2026-10-13, changed 2026-10-14) | First: link only. Owner decision 2026-10-14: embed the official map in the trail map dialog, loaded straight from the resort's own servers (hotlinked, never copied, rehosted or modified) and credited to the resort. The OpenSkiMap drawing stays as the Interactive tab and the fallback |
 | Webcams and jobs (2026-10-13) | Link live cams and job pages for every resort that has them: ski school, coaching and clubs, management, parent companies and job boards. Live posting counts come only from public job board APIs; never scrape Indeed, Glassdoor or Workday pages |
 | Rent source (2026-10-14) | Lucrativeness uses median rent: the median across sourced "median rent" figures for the resort's town (Zillow, Redfin, Zumper, Apartments.com, news and blogs; all units first, else one bedroom; 18 month limit). Fallbacks: Zillow ZORI (labelled typical rent), then ACS, then HUD. Employee housing rent shows in the Housing section only. Zillow is credited on /map/credits/ |
+| Lucrativeness wording (2026-10-14) | The figure is "Season earnings after rent, before tax and other living costs", shown from the bottom to the top of the posted wage scale. It is never called savings |
 | Housing section (2026-10-14) | Each resort shows Furnished Finder listings by link only (never copied or embedded), publicly listed employee housing, and the housing tools that sources name for the area. "Best" means named by the most independent sources |
 | MetroSlopes (2026-10-13) | MetroSlopes Next Gen Ski Lab is Tier A (owner selection). Until it opens, its dot is a regional placeholder at SFO and no street or city is published |
