@@ -64,7 +64,7 @@ const latOf = (y) => (360 / Math.PI) * Math.atan(Math.exp((0.5 - y) * 2 * Math.P
  * middle of the open map area (the container minus `pad`) stays inside `box` [[west, south], [east, north]] and the
  * container stays between the poles. The box may reach past -180 degrees: the map draws world copies, so lng comes
  * wrapped, and a lng in the gap east of the box counts from whichever side of it is nearer.
- * Returns [lng, lat] (lng unwrapped, west of -180 when past the antimeridian), or null when the camera is inside.
+ * Returns [lng, lat] (west of -180 when past the antimeridian), or null when the camera is already inside.
  */
 export function panCenter(lng, lat, zoom, w, hgt, pad, box) {
   if (!w || !hgt || !Number.isFinite(lng) || !Number.isFinite(lat)) return null;
@@ -83,7 +83,7 @@ export function panCenter(lng, lat, zoom, w, hgt, pad, box) {
   const x = vx - dx;
   let y = vy - dy;
   y = ws >= hgt ? Math.min(ws - hgt / 2, Math.max(hgt / 2, y)) : ws / 2;
-  if (Math.abs(x - cx) < 1e-6 && Math.abs(y - cy) < 1e-6) return lon === lng ? null : [lon, lat];
+  if (Math.abs(x - cx) < 1e-6 && Math.abs(y - cy) < 1e-6) return null;
   return [lonOf(x / ws), latOf(y / ws)];
 }
 
