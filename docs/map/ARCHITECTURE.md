@@ -786,7 +786,8 @@ characters at most) from the cited sources.
   its note), occupancy, deposit, eligibility and the commute table. "Show on the detail map" starts the WebGL map
   when needed (it returns to the map from the list view), switches the Housing layer on (its checkbox too), fits the
   map to the housing pins (`mapCtl.fitHousing`, `detailmap.housingBounds`, max zoom 14) and announces "Showing N
-  housing sites on the detail map. Pins mark listed addresses and circles mark neighborhood areas." Phones drop the
+  housing sites on the detail map." with "Pins mark listed addresses.", "Circles mark neighborhood areas." or both,
+  for the sites it shows. Phones drop the
   sheet to its peek and move focus to the map. Building pins are solid dots with a white ring; neighborhood areas
   are soft, blurred circles. Without sites: "No employee housing listed publicly yet."
 * Where people find housing here: an ordered list in rank order; each tool has its link, a kind tag (Employer portal,

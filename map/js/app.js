@@ -186,7 +186,10 @@ async function main() {
         ctl.map.getCanvas().focus({ preventScroll: true });   // the button scrolls away with the sheet
       }
       const shown = ctl.fitHousing() || n;
-      announce(`Showing ${plural(shown, 'housing site', 'housing sites')} on the detail map. Pins mark listed addresses and circles mark neighborhood areas.`);
+      const pins = detailData.housing.filter((s) => s.precision === 'building').length;
+      const key = pins === 0 ? 'Circles mark neighborhood areas.' : pins === detailData.housing.length ? 'Pins mark listed addresses.'
+        : 'Pins mark listed addresses and circles mark neighborhood areas.';
+      announce(`Showing ${plural(shown, 'housing site', 'housing sites')} on the detail map. ${key}`);
     });
   }
 
