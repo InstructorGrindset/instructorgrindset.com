@@ -48,3 +48,47 @@ export function resortRadius(rank, zoom) {
   }
   return stops[stops.length - 1][1];
 }
+
+const TILE = 512;
+const MAX_LAT = 85.051129;
+const mercX = (lon) => (lon + 180) / 360;
+const mercY = (lat) => {
+  const s = Math.sin((Math.max(-MAX_LAT, Math.min(MAX_LAT, lat)) * Math.PI) / 180);
+  return 0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI);
+};
+const lonOf = (x) => x * 360 - 180;
+const latOf = (y) => (360 / Math.PI) * Math.atan(Math.exp((0.5 - y) * 2 * Math.PI)) - 90;
+
+/**
+ * The pan limit (config.pan.center): the camera center for a container of w by hgt px at this zoom such that the
+ * middle of the open map area (the container minus `pad`) stays inside `box` [[west, south], [east, north]] and the
+ * container stays between the poles. The box may reach past -180 degrees: the map draws world copies, so lng comes
+ * wrapped, and a lng in the gap east of the box counts from whichever side of it is nearer.
+ * Returns [lng, lat] (lng unwrapped, west of -180 when past the antimeridian), or null when the camera is inside.
+ */
+export function panCenter(lng, lat, zoom, w, hgt, pad, box) {
+  if (!w || !hgt || !Number.isFinite(lng) || !Number.isFinite(lat)) return null;
+  const [[west, south], [east, north]] = box;
+  const mid = (east + west + 360) / 2; // middle of the gap between the box's east edge and its west edge a world on
+  let lon = lng;
+  while (lon > mid) lon -= 360;
+  while (lon <= mid - 360) lon += 360;
+  const ws = TILE * 2 ** zoom;
+  const p = pad || {};
+  const dx = ((p.left || 0) - (p.right || 0)) / 2;
+  const dy = ((p.top || 0) - (p.bottom || 0)) / 2;
+  const cx = mercX(lon) * ws; const cy = mercY(lat) * ws;
+  const vx = Math.min(mercX(east) * ws, Math.max(mercX(west) * ws, cx + dx));
+  const vy = Math.min(mercY(south) * ws, Math.max(mercY(north) * ws, cy + dy));
+  const x = vx - dx;
+  let y = vy - dy;
+  y = ws >= hgt ? Math.min(ws - hgt / 2, Math.max(hgt / 2, y)) : ws / 2;
+  if (Math.abs(x - cx) < 1e-6 && Math.abs(y - cy) < 1e-6) return lon === lng ? null : [lon, lat];
+  return [lonOf(x / ws), latOf(y / ws)];
+}
+
+/** The zoom out limit for a screen w px wide: pan.minZoom, or more where the screen would span more than maxWorldShare of the world. */
+export function panMinZoom(w, pan) {
+  if (!w) return null;
+  return Math.max(pan.minZoom, Math.log2(w / (TILE * pan.maxWorldShare)));
+}

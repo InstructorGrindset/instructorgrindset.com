@@ -70,8 +70,15 @@ export const config = Object.freeze({
       ring: '#ffffff',
     },
   },
-  // Contiguous US plus the Alaska inset in the lower left (inset.js), used for the national view.
-  nationalBounds: [[-125.0, 22.0], [-66.9, 49.5]],
+  // The contiguous US, framed by the national view. Alaska draws at its true place, up and to the left of it.
+  nationalBounds: [[-125.0, 24.4], [-66.9, 49.5]],
+  // How far the WebGL map pans and zooms out (map.js constrainCamera). The middle of the open map area (the map
+  // minus the side panel or the phone sheet) stays inside `center`, [[west, south], [east, north]]: from past the
+  // antimeridian, so the far Aleutians reach the middle, to past Maine, and from below the Florida Keys to the Arctic
+  // coast past the Brooks Range. The map draws world copies, so Alaska's islands west of 180 degrees sit beside it.
+  // Zooming out stops at `minZoom`, or sooner where the screen would span more than `maxWorldShare` of the world
+  // (the map side by side with its own copy). At those zooms Alaska and the lower 48 show together.
+  pan: { center: [[-190.0, 18.0], [-60.0, 72.0]], minZoom: 1.2, maxWorldShare: 0.62 },
   phoneMaxWidth: 759.98,
   desktopPanelWidth: 380,
   comparePanelWidth: 600,
