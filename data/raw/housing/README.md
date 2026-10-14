@@ -10,6 +10,8 @@ Employee and market housing near Tier A resorts, one YAML file per research batc
 * `precision: building` only when the street address is publicly listed. Then `address` is required, as a Sourced string. Otherwise use `precision: neighborhood` and a neighborhood level point.
 * `rent_monthly` is a Sourced range `{low, high}` in USD per person per month; `low` must not exceed `high`. A site without a published rent shows the county baseline (HUD FMR or ACS) as an estimate.
 * `occupancy`: `shared`, `private`, `mixed` or `null`. `deposit` is a Sourced number or `null`.
+* `town` (optional): the town the site is in, when a source names it. Without it the panel reads the town from a
+  building's listed address ("street, town, ST 12345").
 
 ## Example (fictional resort and numbers, for format only)
 

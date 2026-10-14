@@ -1502,6 +1502,168 @@ async function liveLinksChecks(browser, stubBase) {
   await nojs.close();
 }
 
+// Housing (ROADMAP item 8c): Furnished rentals, Employee housing with "Show on the detail map", and the housing search
+// tools ranked by independent sources, inside Housing and commute; the stub prerenders the links; keyboard; axe.
+async function housingChecks(browser, stubBase) {
+  log('\nHousing links and employee housing');
+  const axeSrc = (() => {
+    try { return fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [path.join(REPO, 'tests', 'map')] }), 'utf8'); } catch { return null; }
+  })();
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await ctx.route(/^https:\/\/example\.(com|org|net)\//, (route) => route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>Example</title>' }));
+  const page = await ctx.newPage();
+  const w = watch(page, 'housing');
+  await page.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(page, { start: false });
+  await page.waitForSelector('#panel-content .housing .tool-link', { timeout: 15000 });
+  await page.waitForSelector('#panel-content .housing .site-select', { timeout: 15000 });
+  const sec = page.locator('#panel-content .panel-section', { has: page.locator('h3', { hasText: 'Housing and commute' }) });
+  check(JSON.stringify(await sec.locator('h4').allInnerTexts())
+    === JSON.stringify(['Furnished rentals', 'Employee housing', 'Where people find housing here', 'Rent near the resort']),
+  'Housing and commute: Furnished rentals, Employee housing, Where people find housing here, Rent near the resort');
+  check(await sec.locator('.access').count() === 1 && await page.evaluate(() => {
+      const s = [...document.querySelectorAll('#panel-content .panel-section')].find((x) => x.querySelector('h3').textContent === 'Housing and commute');
+      return s.querySelector('.access').compareDocumentPosition(s.querySelector('.ff-link')) === Node.DOCUMENT_POSITION_FOLLOWING;
+    }), 'Getting to the mountain stays first');
+  const ff = sec.locator('a.ff-link');
+  check(await ff.innerText() === 'Furnished Finder listings near Fixture Town' && await ff.getAttribute('href') === 'https://example.com/fixture/furnished/fixture-town'
+    && await sec.locator('.ff .badge-estimated').count() === 1 && (await sec.locator('.ff').innerText()).includes('opens in a new tab · Last verified Oct 1, 2026'),
+  'Furnished rentals: one sourced link to the listings near the town, with its badge and date');
+  check(await sec.locator('iframe, embed, object, img').count() === 0, 'listings are linked, never embedded');
+  // Employee housing: type badge, town, precision note; rent only where sourced.
+  check(JSON.stringify(await sec.locator('.site-type').allInnerTexts()) === JSON.stringify(['Resort owned', 'Master lease', 'Market']),
+    'every site shows its type badge (Resort owned, Master lease, Market)');
+  const village = await sec.locator('.site', { hasText: 'Fixture Staff Village' }).locator('.nav-meta').innerText();
+  const west = await sec.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.nav-meta').innerText();
+  check(/Fixture Town · Listed address, shown as a pin/.test(village) && /^Market\s+Neighborhood area, shown as a circle$/.test(west.trim()),
+    `site town and precision note; no town when none is sourced (${village.replace(/\n/g, ' ')} | ${west.replace(/\n/g, ' ')})`);
+  // Tools: ranked, kind tags, the sources' reason, Named by N sources with the source links.
+  const tools = sec.locator('ol.housing-tools > li');
+  check(JSON.stringify(await tools.locator('.tool-link').allInnerTexts())
+    === JSON.stringify(['Fixture Staff Housing Portal', 'Fixture Front Range Rooms', 'Fixture Valley Listings']),
+  'tools keep the build ranking: resort scoped first, then the cluster by independent sources');
+  check(JSON.stringify(await tools.locator('.tool-kind').allInnerTexts()) === JSON.stringify(['Employer portal', 'Facebook group', 'Listing site']),
+    'each tool shows its kind');
+  check(await tools.locator('.badge-estimated').count() === 3, 'each tool shows its confidence badge');
+  const srcLines = await tools.locator('.tool-sources').allInnerTexts();
+  check(srcLines[0].startsWith('Named by 3 sources: Synthetic fixture: housing news, Synthetic fixture: housing guide, Synthetic fixture: forum thread one')
+    && srcLines[1].startsWith('Named by 2 sources across 3 pages: ') && srcLines[2].startsWith('Named by 1 source: Synthetic fixture: housing guide')
+    && srcLines.every((t) => t.includes('Last verified Oct 1, 2026')), `Named by N sources with the source links (${srcLines.join(' | ')})`);
+  check((await tools.nth(1).locator('.tool-why').innerText()) === 'Synthetic reason: both sources say rooms post here first each fall.',
+    'each tool shows the sources\' reason');
+  check(JSON.stringify(await tools.nth(0).locator('.tool-sources a').evaluateAll((as) => as.map((a) => a.href)))
+    === JSON.stringify(['https://example.org/fixture/housing-news', 'https://example.net/fixture/housing-guide', 'https://example.com/fixture/forum/1']),
+  'source links point at each source');
+  const rels = await sec.locator('.housing a').evaluateAll((as) => as.map((a) => [a.target, a.rel]));
+  check(rels.length >= 1 + 3 + 7 && rels.every(([t, rel]) => t === '_blank' && /\bnoopener\b/.test(rel)),
+    `every housing link opens in a new tab with rel noopener (${rels.length} links)`);
+  // Keyboard: Tab reaches the Furnished Finder link and Enter opens it in a new tab.
+  await page.locator('#panel-heading').focus();
+  let reached = false;
+  for (let i = 0; i < 80 && !reached; i++) {
+    await page.keyboard.press('Tab');
+    reached = await page.evaluate(() => document.activeElement && document.activeElement.classList.contains('ff-link'));
+  }
+  check(reached, 'Tab reaches the Furnished Finder link');
+  const [popup] = await Promise.all([ctx.waitForEvent('page'), page.keyboard.press('Enter')]);
+  await popup.waitForLoadState();
+  check(popup.url() === 'https://example.com/fixture/furnished/fixture-town' && new URL(page.url()).pathname.endsWith('/alpha-peak/'),
+    'Enter opens the listings in a new tab and the map stays put');
+  await popup.close();
+  // Show on the detail map: starts the WebGL map, switches housing on and fits the map to the pins.
+  const show = sec.locator('button.housing-show-btn');
+  check(await show.innerText() === 'Show on the detail map' && !(await page.evaluate(() => window.__careerMap.mapStarted)), 'Show on the detail map waits for a click');
+  await show.focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => window.__careerMap.mapCtl && window.__careerMap.mapCtl.ready, null, { timeout: 30000 });
+  await page.waitForFunction(() => /housing sites on the detail map/.test(document.getElementById('panel-status').textContent), null, { timeout: 15000 });
+  await mapIdle(page);
+  const fx = JSON.parse(fs.readFileSync(path.join(REPO, 'tests', 'map', 'fixtures', 'detail', 'alpha-peak.json'), 'utf8'));
+  const fit = await page.evaluate((sites) => {
+    const m = window.__careerMap.mapCtl.map;
+    const b = m.getBounds();
+    const n = (id) => (m.getLayoutProperty(id, 'visibility') !== 'none' ? m.queryRenderedFeatures({ layers: [id] }).length : 0);
+    return { inside: sites.every((s) => b.contains([s.lon, s.lat])), zoom: m.getZoom(), point: n('detail-housing-point'), area: n('detail-housing-area'),
+      blur: [m.getPaintProperty('detail-housing-point', 'circle-blur') || 0, m.getPaintProperty('detail-housing-area', 'circle-blur')],
+      status: document.getElementById('panel-status').textContent, focus: document.activeElement && document.activeElement.className };
+  }, fx.housing);
+  check(fit.inside && fit.zoom > 10 && fit.point === 1 && fit.area === 2,
+    `the detail map centers on the housing pins: 1 building pin and 2 neighborhood circles (${JSON.stringify(fit)})`);
+  check(fit.blur[0] === 0 && fit.blur[1] > 0, 'building pins and neighborhood circles draw in distinct styles');
+  check(fit.status === 'Showing 3 housing sites on the detail map. Pins mark listed addresses and circles mark neighborhood areas.'
+    && /housing-show-btn/.test(fit.focus), 'the move is announced and focus stays on the button');
+  // With the housing layer switched off, the button switches it back on.
+  await page.locator('#layer-housing').uncheck();
+  await page.evaluate(() => window.__careerMap.mapCtl.map.jumpTo({ center: [-100, 40], zoom: 4 }));
+  await show.click();
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getZoom() > 10, null, { timeout: 10000 });
+  check(await page.locator('#layer-housing').isChecked()
+    && await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('detail-housing-point', 'visibility') !== 'none'),
+  'Show on the detail map turns the housing layer back on');
+  await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = el.querySelector('.housing').offsetTop - 60; });
+  await shot(page, 'desktop-22-housing.png');
+  if (axeSrc) {
+    await page.addScriptTag({ content: axeSrc });
+    const res = await page.evaluate(async () => (await window.axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] } }))
+      .violations.map((v) => `${v.id} (${v.impact}): ${v.help} ${JSON.stringify(v.nodes.slice(0, 3).map((n) => n.target.join(' ')))}`));
+    check(res.length === 0, `axe resort panel with housing: ${res.length} violations${res.length ? `\n      ${res.join('\n      ')}` : ''}`);
+  } else log('  skip axe housing: run (cd tests/map && npm install) for axe-core');
+
+  // A Tier B resort gets its cluster's tools and no listed sites; a Tier A resort without links says so.
+  await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
+  await page.locator('.resort-list a', { hasText: 'Charlie Hill' }).click();
+  await page.waitForSelector('#panel-content .housing .tool-link', { timeout: 15000 });
+  const b = page.locator('#panel-content .housing');
+  check(JSON.stringify(await b.locator('.tool-link').allInnerTexts()) === JSON.stringify(['Fixture Front Range Rooms', 'Fixture Valley Listings'])
+    && await b.locator('.ff-link').count() === 0 && (await b.innerText()).includes('No employee housing listed publicly yet.')
+    && await b.locator('.housing-show-btn').count() === 0,
+  'Tier B resort: cluster tools, no Furnished Finder link without a sourced url, no listed sites');
+  w.assertClean();
+  const p2 = await ctx.newPage();
+  const w2 = watch(p2, 'housing, Tier A without links');
+  await p2.goto(`${stubBase}/map/vt/fixture-green-ridge/kilo-notch/`);
+  await ready(p2, { start: false });
+  await p2.waitForSelector('#panel-content .housing .tools', { timeout: 15000 });
+  const k = await p2.locator('#panel-content .housing').innerText();
+  check(k.includes('Housing search tools are being collected.') && k.includes('No employee housing listed publicly yet.') && !k.includes('Furnished rentals'),
+    'Tier A without links: tools are being collected, no employee housing listed, no Furnished rentals');
+  w2.assertClean();
+  await ctx.close();
+
+  // Phone: the button drops the sheet to its peek so the map shows the pins.
+  const pctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+  const pp = await pctx.newPage();
+  const wp = watch(pp, 'housing phone');
+  await pp.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(pp, { start: false });
+  await pp.waitForSelector('#panel-content .housing-show-btn', { timeout: 15000 });
+  await pp.locator('#panel-content .housing-show-btn').scrollIntoViewIfNeeded();
+  await pp.locator('#panel-content .housing-show-btn').tap();
+  await pp.waitForFunction(() => /housing sites on the detail map/.test(document.getElementById('panel-status').textContent), null, { timeout: 30000 });
+  await pp.waitForTimeout(1200);
+  const ph = await pp.evaluate((sites) => {
+    const m = window.__careerMap.mapCtl.map;
+    const b = m.getBounds();
+    return { sheet: document.getElementById('panel').dataset.sheet, inside: sites.every((s) => b.contains([s.lon, s.lat])) };
+  }, fx.housing);
+  check(ph.sheet === 'peek' && ph.inside, `phone: the sheet drops to its peek and the map shows every pin (${JSON.stringify(ph)})`);
+  await shot(pp, 'phone-12-housing-map.png');
+  wp.assertClean();
+  await pctx.close();
+
+  // Without JavaScript the stub carries the Furnished Finder link and the tool names as plain links.
+  const nojs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 800 } });
+  const np = await nojs.newPage();
+  await np.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  const pre = np.locator('#panel-content .housing-search');
+  check(await pre.locator('h3').innerText() === 'Housing' && await pre.locator('a.ff-link').innerText() === 'Furnished Finder listings near Fixture Town'
+    && JSON.stringify(await pre.locator('a.tool-link').allInnerTexts())
+      === JSON.stringify(['Fixture Staff Housing Portal', 'Fixture Front Range Rooms', 'Fixture Valley Listings'])
+    && (await pre.locator('a').evaluateAll((as) => as.every((a) => a.target === '_blank' && /\bnoopener\b/.test(a.rel)))),
+  'prerendered stub links Furnished Finder and the tools, in rank order, in a new tab');
+  await nojs.close();
+}
+
 // Hiring now (ROADMAP item 13): the chip counts resorts with an open role in jobs/postings.json (at a linked employer,
 // naming the resort or no single resort) or a hiring window whose months cover today. It filters the map and the list
 // view, works with an empty feed and stays visible, disabled, at 0. The clock is fixed so the fixture windows hold.
@@ -1962,6 +2124,7 @@ try {
   await phone(browser, STUB_BASE);
   await searchChecks(browser, REPO_BASE, STUB_BASE);
   await liveLinksChecks(browser, STUB_BASE);
+  await housingChecks(browser, STUB_BASE);
   await hiringChecks(browser, REPO_BASE);
   await passChecks(browser, REPO_BASE, STUB_BASE);
   await realData(browser, REPO_BASE);

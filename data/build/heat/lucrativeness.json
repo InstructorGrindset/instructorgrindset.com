@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-14T02:17:57Z",
+  "mode": "lucrativeness",
+  "units": "usd",
+  "scale": "linear",
+  "domain": {
+    "min": -20000.0,
+    "max": 60000.0
+  },
+  "ticks": [
+    -20000.0,
+    0.0,
+    20000.0,
+    40000.0,
+    60000.0
+  ],
+  "ramp": [
+    "#414487",
+    "#355f8d",
+    "#2a788e",
+    "#21918c",
+    "#22a884",
+    "#44bf70",
+    "#7ad151",
+    "#bddf26",
+    "#fde725"
+  ],
+  "values": {
+    "field": "career.lucrativeness.mid",
+    "resorts": 43,
+    "points": 29
+  },
+  "method": {
+    "interpolation": "adaptive modified Shepard",
+    "neighbors": 8,
+    "min_distance_km": 10.0,
+    "decluster_km": 20.0,
+    "grid_step_px": 4,
+    "px_per_degree": 12.0,
+    "full_opacity_km": 200.0,
+    "fade_end_km": 400.0,
+    "floor_alpha": 0.7,
+    "fade_to": "neutral"
+  },
+  "attribution": null,
+  "inputs_sha256": "ae4c68449f3acd5c0b270e3605e6a3c1df99f70d5cc0e57c38c20d9e60823604",
+  "rasters": [
+    {
+      "region": "lower48",
+      "image": "lucrativeness-lower48.png",
+      "width": 698,
+      "height": 384,
+      "coordinates": [
+        [
+          -125.0,
+          49.5
+        ],
+        [
+          -66.8,
+          49.5
+        ],
+        [
+          -66.8,
+          24.4
+        ],
+        [
+          -125.0,
+          24.4
+        ]
+      ],
+      "bytes": 82508,
+      "resorts": 42
+    },
+    {
+      "region": "alaska",
+      "image": "lucrativeness-alaska.png",
+      "width": 606,
+      "height": 534,
+      "coordinates": [
+        [
+          -180.0,
+          71.6
+        ],
+        [
+          -129.5,
+          71.6
+        ],
+        [
+          -129.5,
+          51.2
+        ],
+        [
+          -180.0,
+          51.2
+        ]
+      ],
+      "bytes": 36963,
+      "resorts": 1
+    }
+  ]
+}

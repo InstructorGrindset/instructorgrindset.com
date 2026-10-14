@@ -1,9 +1,9 @@
 // Heat surfaces for the map color modes (lucrativeness, season length, snowfall).
 //
 // Settings come from definitions.json `heat` (config/definitions.yaml); the method is in docs/map/ARCHITECTURE.md,
-// "Heat maps", and pipeline/heat.py is the Python twin that precomputes the snowfall and season length rasters.
-// This module draws the surfaces the pipeline did not precompute (lucrativeness) and the fallback when a raster
-// file is missing.
+// "Heat maps", and pipeline/heat.py is the Python twin that precomputes the snowfall and season length rasters
+// (pipeline/heat_lucrativeness.py the lucrativeness ones, with legend_scale as the twin of legendScale below).
+// This module draws the fallback when a raster file is missing.
 // * Color: classed modes (`breaks`, `colors`) take the color of the value's class; the others use the ramp.
 // * Field: adaptive modified Shepard interpolation over the resorts with a value, merged first within decluster_km
 //   so a cluster of hills counts once. At a point, take the `neighbors` nearest and the distance R to the next one;

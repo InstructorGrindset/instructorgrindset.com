@@ -132,12 +132,29 @@ rent:
   # Other steps: employee_housing, reported_area, baseline (baseline_preference), fmr_studio, fmr_two_br.
   lucrativeness_rent: [median_rent, zillow_zori, acs_median, fmr_one_br]
   median:
-    # Figures for all unit sizes when the resort has any, else one bedroom; the unit used is shown.
+    # Only the best geography level with a usable figure counts, in this order; levels are never mixed.
+    geography_order: [zip, city, county, metro]
+    # Within that level: figures for all unit sizes when there are any, else one bedroom; the unit used is
+    # shown. Two and three bedroom figures stay in the research file but are not used.
     units: [all, 1br]
-    # One figure per source: the most specific geography, then the latest period.
-    geography_order: [city, zip, county, metro]
     # Figures whose period ended more than this many months before the build are ignored.
     max_age_months: 18
+    # The publisher is the registered domain of the source URL; the name shown for each.
+    publishers:
+      zillow.com: Zillow
+      redfin.com: Redfin
+      zumper.com: Zumper
+      padmapper.com: PadMapper
+      rentometer.com: Rentometer
+      apartmentlist.com: Apartment List
+      apartments.com: Apartments.com
+      rentcafe.com: RentCafe
+      rent.com: Rent.com
+      sfranalytics.com: SFR Analytics
+      foreclosure.com: Foreclosure.com
+    # Foreclosure.com figures look like formula output (the same value repeats across towns on one date), so
+    # they count only when no other publisher has a figure, of any unit size, for that town at that level.
+    last_resort_publishers: [foreclosure.com]
   zori:
     # Nearest ZIP whose centroid lies within zip_radius_km of the base, else the county, else its metro.
     match_levels: [zip, county, metro]

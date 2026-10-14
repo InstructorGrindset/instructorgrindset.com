@@ -247,7 +247,9 @@ def lucrativeness_inputs(
     """Map the Career Map lucrativeness assumptions onto calculator inputs (no privates, no tips).
 
     weeks = season_length_days / 7, one work block per week of ``hours_per_week`` hours at
-    ``pay_hourly_mid_usd``; rent = rent_monthly_usd; life = food + transport per month;
+    ``pay_hourly_mid_usd``; rent = rent_monthly_usd (the map's median rent per month: the median of the sourced
+    median rent figures for the resort's town, else Zillow's typical rent, ACS median gross rent or HUD FMR one
+    bedroom; pipeline/rent_used.py); life = food + transport per month;
     months = season_months; one time costs = pass_offset + gear_offset (gear slot); transport slot 0.
     ``season_income(...).gross`` is then lucrativeness earnings and ``.net_before_tax`` is the
     lucrativeness mid. ``state_rate`` only affects the after tax figures (net, total_tax, ...).

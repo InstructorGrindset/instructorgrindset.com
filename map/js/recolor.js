@@ -1,7 +1,8 @@
 // Map color modes (Default, Lucrativeness, Season length, Snowfall) and their legend.
 // Every mode except Default draws a heat map with the resorts on top. Settings come from definitions.json `heat`.
-// Snowfall and Season length load their precomputed rasters (heat/<mode>.json, pipeline/heat.py) when they exist,
-// and Snowfall its isolines; every other case draws the resort only surface from heat.js. Interpolated colors
+// Snowfall, Season length and Lucrativeness load their precomputed rasters (heat/<mode>.json, pipeline/heat.py and
+// pipeline/heat_lucrativeness.py) when they exist, and Snowfall its isolines; every other case draws the resort only
+// surface from heat.js. Lucrativeness turns on by itself once any resort has a computed value (pay and a rent). Interpolated colors
 // never become numbers: the legend shows the scale, and tooltips show each resort's sourced value.
 import { RECOLOR_MODES } from './labels.js';
 import { buildHeat, legendScale, legendPos, legendCss, makeRamp } from './heat.js';
@@ -30,8 +31,8 @@ const SPOKEN = {
   snowfall: (v) => `${fmtInt(v)} in per season`,
 };
 
-/** Precomputed rasters per mode (heat/<mode>.json); other modes draw in the browser. */
-const RASTER_MODES = new Set(['snowfall', 'season']);
+/** Precomputed rasters per mode (heat/<mode>.json); without a manifest a mode draws in the browser. */
+const RASTER_MODES = new Set(['snowfall', 'season', 'lucrativeness']);
 /** The heat.season keys that set the season fade (the browser keeps its own resolution). */
 const SEASON_FADE = ['full_opacity_km', 'fade_end_km', 'floor_alpha', 'fade_to', 'no_data_reach_km'];
 

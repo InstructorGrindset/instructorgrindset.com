@@ -535,15 +535,18 @@ export function createPanel(root, index, {
   const RENT_UNIT_TEXT = { studio: ' for a studio', '1br': ' for one bedroom', '2br': ' for two bedrooms', '3br': ' for three bedrooms' };
   const MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  /** "Median rent $2,450 a month (median of 3 sources: Zillow, Redfin, Summit Daily), 2026" and the fallbacks
+  /** "Median rent $2,275 a month for one bedroom in Vail, CO (median of 2 sources: Rentometer, Zumper), 2026",
+   * "Median rent $2,900 a month in the Bozeman metro (single source: SFR Analytics), 2026", and the fallbacks
    * "Zillow typical rent (ZORI) $2,450 a month (Summit County, CO, Aug 2026)", "Census ACS median gross rent ...". */
   function rentLineText(rent) {
     const amount = `${money(rent.value)} a month`;
     if (rent.basis === 'median_rent') {
       const years = rent.period ? [rent.period.first.slice(0, 4), rent.period.last.slice(0, 4)] : [];
       const when = years.length ? (years[0] === years[1] ? years[0] : `${years[0]} to ${years[1]}`) : '';
-      const from = rent.count > 1 ? `median of ${fmtInt(rent.count)} sources: ` : '1 source: ';
-      return `${rent.label} ${amount}${RENT_UNIT_TEXT[rent.unit] || ''} (${from}${rent.publishers.join(', ')})${when ? `, ${when}` : ''}`;
+      const from = rent.count > 1 ? `median of ${fmtInt(rent.count)} sources: ` : 'single source: ';
+      const g = rent.geography;
+      const place = g ? ` in ${g.level === 'metro' || /^Municipality/.test(g.name) ? 'the ' : ''}${g.name}` : '';
+      return `${rent.label} ${amount}${RENT_UNIT_TEXT[rent.unit] || ''}${place} (${from}${rent.publishers.join(', ')})${when ? `, ${when}` : ''}`;
     }
     const m = /^(\d{4})-(\d{2})/.exec(rent.as_of);
     const month = rent.basis === 'zillow_zori' && m ? `${MONTH_SHORT[Number(m[2]) - 1]} ${m[1]}` : '';

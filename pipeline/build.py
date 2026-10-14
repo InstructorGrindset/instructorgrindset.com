@@ -686,7 +686,7 @@ def _rent_block(rid: str, cfg: Config, median_rents: "rent_median_mod.MedianRent
     """The rent lucrativeness uses (pipeline/rent_used.py): ``rent.lucrativeness_rent`` in order, by default the
     median of the sourced median rent figures, then Zillow ZORI, then ACS median, then HUD FMR one bedroom."""
     rd = cfg.definitions.rent
-    median, ignored = rent_median_mod.median_rent_for(median_rents.for_resort(rid), today, rd.median, median_rents.titles)
+    median, ignored = rent_median_mod.median_rent_for(rid, median_rents, today, rd.median)
     if ignored:
         warnings.append(f"median rent '{rid}': {ignored} figure(s) older than {rd.median.max_age_months} months ignored")
     block = rent_used(rd.lucrativeness_rent, median=median, zori=p5.zori.get(rid), baseline=baseline,

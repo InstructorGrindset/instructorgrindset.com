@@ -136,6 +136,16 @@ def test_page_credits_every_source(page):
     assert "Book a Free Consultation" in text
 
 
+def test_page_credits_zillow_and_the_rent_sources(page):
+    """Owner decision 2026-10-14: Zillow is credited on /map/credits/, with a link to Zillow Research."""
+    html, p = page
+    text = " ".join(" ".join(p.parts).split())
+    assert "Rent data: Zillow Observed Rent Index (ZORI), Zillow Research" in text
+    assert "https://www.zillow.com/research/data/" in p.hrefs and 'href="#rent"' in html
+    for name in ("Zumper", "Rentometer", "Redfin", "Foreclosure.com", "American Community Survey", "HUD Fair Market Rent"):
+        assert name in text, name
+
+
 def test_page_credits_the_transit_feeds_and_their_licenses(page):
     import yaml
     html, p = page

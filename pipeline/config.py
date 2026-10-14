@@ -172,11 +172,15 @@ class MedianRentDefs(StrictModel):
 
     # Unit sizes in order of preference: the first with any current figure is used (all, then one bedroom).
     units: list[Literal["all", "studio", "1br", "2br", "3br"]] = Field(default_factory=lambda: ["all", "1br"], min_length=1)
-    # One figure per source: the most specific geography first.
-    geography_order: list[Literal["city", "zip", "county", "metro"]] = Field(
-        default_factory=lambda: ["city", "zip", "county", "metro"], min_length=1)
+    # Only the best geography level with a usable figure is used; levels are never mixed.
+    geography_order: list[Literal["zip", "city", "county", "metro"]] = Field(
+        default_factory=lambda: ["zip", "city", "county", "metro"], min_length=1)
     # Figures whose period ended longer ago than this are ignored.
     max_age_months: int = Field(default=18, ge=1)
+    # The publisher is the registered domain of the source URL; this maps it to the name shown.
+    publishers: dict[str, str] = Field(default_factory=dict)
+    # Domains used only when no other publisher has a figure (any unit) for the same town at the same level.
+    last_resort_publishers: list[str] = Field(default_factory=list)
 
 
 class ZoriDefs(StrictModel):

@@ -83,6 +83,10 @@ Resort {
                                                    // season_fallback true when the record is the previous season's
                                                    // (see "Pass membership"); never inferred from owner
   housing_summary: { site_count, cheapest_rent_monthly_low, cheapest_site_id, has_transit } | null,   // Phase 5
+  housing_search: { furnished_finder: { town, url, source_id, as_of, confidence, note } | null,
+                    tools: [{ name, kind, url, why, scope: resort|cluster, named_by, source_ids, as_of, confidence, note }] } | null,
+                                                   // Furnished Finder link and ranked housing search tools, links only
+                                                   // (see "Housing search"); null without a link and a tool
   sources: string[]                                // every source_id referenced by this resort
 }
 ```
@@ -425,6 +429,11 @@ Build outputs:
 
 ### Pipeline notes (additions to the contract)
 * **HousingSite** also takes `address: Sourced<string> | null`; `precision: building` requires it (the publicly listed address and its source). Site ids are unique across all housing files; `resort_id` must exist in the build.
+* **HousingSite** also takes `town: string | null` (ROADMAP item 8c), the town the site is in when a source names it.
+  Detail housing always carries `town`: the raw value, else the town of the listed `address` when it reads "street,
+  town, ST 12345" (`housing.town_from_address`; "street, town ST 12345" and a trailing "USA" work too), else null.
+  Every file in `data/raw/housing/` is loaded (`employee_housing_2026_10.yaml` included); sites of a Tier B resort
+  give a build warning and are not shown, since detail files are Tier A only.
 * **County lookup:** point in polygon of the base area against `data/raw/geo/us-counties.geojson` (us-atlas counties-10m via `npm run build:counties`, committed). ZIP level baselines need ZCTA outlines and are not wired yet.
 * **Rent sources:** `hud-fmr-fy<year>` and `census-acs5-<year>-b25064`. A site without published rent shows the first value in `rent.baseline_preference` as `{low: v, high: v}`, confidence `estimated`, with a note naming the baseline.
 * **Lucrativeness rent:** see Phase 4 (owner decision 4): `rent.lucrativeness_rent` steps `employee_housing` (mean of employee housing rent mids), `acs_median`, `fmr_one_br`; also available: `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`. Commutes: no walking speed or distance model is used (owner decision 6); each Tier A resort carries the researched `access` rating instead.
@@ -667,6 +676,69 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
   `passChecks` in `tests/map/browser_test.mjs` (fixtures: Epic at Alpha Peak, Bravo Bowl (a 2025/26 fallback) and
   Mike Snow Dome, Ikon at Charlie Hill, Foxtrot Basin and Kilo Notch, all synthetic).
 
+## Housing search (links only; ROADMAP item 8c; `pipeline/housing_search.py`, `map/js/housinglinks.js`)
+
+Owner request 2026-10-14: a resort shows its Furnished Finder listings, the employee housing that is publicly listed,
+and the apps and sites that work best for finding housing there. Decision: "best" means named by the most
+independent sources. Furnished Finder and every tool are linked in a new tab (`target="_blank"`,
+`rel="noopener noreferrer"`); listings are never copied, scraped or embedded.
+
+### Raw input: `data/raw/housing_search/<batch>.yaml`
+```
+{ batch, researched_date, sources: [Source],
+  furnished_finder: [{ resort_id, town, url, source_id, as_of, confidence, note? }],
+  tools: [{ scope: cluster|resort, scope_id, name, kind, url, why, source_ids: [id, ...], as_of, confidence, note? }] }
+kind: employer_portal | housing_authority | listing_site | facebook_group | craigslist | property_manager | app | other
+```
+Validated by `pipeline/schemas/housing_search.py` (`HousingSearchBatch`) and loaded by `load_housing_search`. Each
+of these is a build error: a url that is not https; an unknown resort id (`furnished_finder.resort_id`, a resort
+`scope_id`), cluster id (a cluster `scope_id`) or source id; a bad `kind`, `scope` or `confidence`; a Furnished
+Finder url outside `housing_search.furnished_finder_domains` (furnishedfinder.com); a resort with two Furnished
+Finder links (in one file or across files); one url listed twice for one scope; a source id listed twice in one
+tool; an empty `source_ids`; an em or en dash in `town`, `name` or `why`. `why` is one public sentence (400
+characters at most) from the cited sources.
+
+### Ranking and build output
+* `Resort.housing_search` (`resort_housing_search`): the resort's Furnished Finder link and its tools. Tools scoped
+  to the resort come first, then tools scoped to its cluster; inside each group the tool named by more independent
+  sources comes first, then by name (case blind). Independent sources are publishers: the distinct registered
+  domains (last two labels) of the tool's source urls, so two Reddit threads or two pages of one town site count
+  once. That count is `named_by`. A cluster tool whose url (host without "www.", path without a trailing slash,
+  query kept) is already in the resort group is dropped. At most `housing_search.max_tools` (8) tools are kept.
+  Every resort of a cluster, Tier B included, gets the cluster's tools. Null without a link and a tool.
+* The link and tool sources join `resort.sources`, so stubs embed them. Size on 2026-10-14: 114 resorts, about
+  140 KB more in `resorts.json` (about 5 percent); nothing reaches `map-index.json`.
+
+### UI (`map/js/panel.js` Housing and commute, `map/js/housinglinks.js`; stub `pipeline/routes.py` `render_housing`)
+* The resort panel's "Housing and commute" section holds, in order: "Getting to the mountain" (access), "Furnished
+  rentals", "Employee housing", "Where people find housing here", then "Rent near the resort" (the reported rent
+  and the county baseline, once the detail file is in).
+* Furnished rentals: "Furnished Finder listings near <town>" with its badge, "furnishedfinder.com · opens in a new
+  tab · Last verified <date>" and the note. Shown only with a sourced https url.
+* Employee housing: the detail file's sites, employee housing first (resort owned, master lease, then market) and
+  by rent within a type. Each site button shows the type badge (Resort owned, Master lease, Market), the town and
+  the precision note ("Listed address, shown as a pin" or "Neighborhood area, shown as a circle"); below it the
+  address, the rent only when the site has one (its own, a reports aggregate, or the county baseline estimate with
+  its note), occupancy, deposit, eligibility and the commute table. "Show on the detail map" starts the WebGL map
+  when needed (it returns to the map from the list view), switches the Housing layer on (its checkbox too), fits the
+  map to the housing pins (`mapCtl.fitHousing`, `detailmap.housingBounds`, max zoom 14) and announces "Showing N
+  housing sites on the detail map. Pins mark listed addresses and circles mark neighborhood areas." Phones drop the
+  sheet to its peek and move focus to the map. Building pins are solid dots with a white ring; neighborhood areas
+  are soft, blurred circles. Without sites: "No employee housing listed publicly yet."
+* Where people find housing here: an ordered list in rank order; each tool has its link, a kind tag (Employer portal,
+  Housing authority, Listing site, Facebook group, Craigslist, Property manager, App, Other), its badge, the sources'
+  `why` sentence, the note, and "Named by N sources: <source links> · Last verified <date>" ("Named by 1 source
+  across 2 pages" when one publisher has several pages). Tier A resorts without tools say "Housing search tools are
+  being collected."; Tier B resorts without tools show nothing.
+* `housinglinks.js` (about 1.6 KB gzipped, no Zod) loads on the first resort view, so `/map/` carries none of it.
+* Prerendered stubs: a "Housing" section after Jobs with "Furnished rentals" (the link and its badge) and "Where
+  people find housing here" (the tool names as plain links in rank order, with their kind). No section without
+  links.
+* Zod: `HousingSearch` in `schemas.js` (a bad tool drops only that tool, a bad link only the link; an unknown kind
+  renders humanized) and `town` on `HousingSite`. Tests: `tests/pipeline/test_housing_search.py`,
+  `tests/pipeline/test_routes_housing.py`, `housingChecks` in `tests/map/browser_test.mjs` (synthetic fixtures:
+  Alpha Peak with a link and three tools, Bravo Bowl and Charlie Hill with the cluster's two tools).
+
 ## Trail map (OpenSkiMap runs)
 
 ### Raw input
@@ -832,7 +904,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
 * Lazy modules: `hiring.js` (the Hiring now count, at idle), `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
   when the climate section nears the screen), `detailcontrols.js` (resort
-  detail map only), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event and the first
+  detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event and the first
   contentful paint. The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
@@ -1085,6 +1157,7 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
 * `data/raw/facts/*.yaml`: season, snowfall and size facts for every resort (Resort facts overlay above).
 * `data/raw/webcams/*.yaml`, `data/raw/jobs/*.yaml`: live cams and jobs links (Webcams and jobs above).
 * `data/raw/passes/*.yaml`: Epic, Ikon, Mountain Collective and Indy pass membership per season (Pass membership above).
+* `data/raw/housing_search/*.yaml`: Furnished Finder links and housing search tools (Housing search above).
 * `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
 * `data/raw/reports/`: Phase 7 queue and moderated reports (gitignored) and `aggregates.json` (committed).
 * `data/raw/pay/*.yaml`, `data/raw/career/*.yaml`: Phase 4 pay records and career inputs (formats above).
@@ -1171,6 +1244,7 @@ pipeline/
   lifts.py            # Phase 5 OpenSkiMap lifts for Tier A resorts
   runs.py             # Trail map: OpenSkiMap runs for Tier A resorts
   housing.py          # Phase 5 housing sites, rent display, detail file assembly
+  housing_search.py   # Furnished Finder links and ranked housing search tools -> Resort.housing_search
   rent.py             # Phase 5 HUD FMR and ACS baselines, county lookup
   transit.py          # Phase 5 GTFS extraction and bus commute model
   routing.py          # Phase 5 Valhalla / OSRM / ORS client with cache

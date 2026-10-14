@@ -70,7 +70,7 @@ class MedianRentBatch(StrictModel):
 
 # ------------------------------------------------------------------ build output
 class RentGeography(StrictModel):
-    level: Literal["zip", "county", "metro"]
+    level: Literal["zip", "city", "county", "metro"]
     id: Optional[str] = None
     name: str = Field(min_length=1)
 

@@ -144,9 +144,10 @@ def employee_rent_mean(sites: Sequence[HousingSite], site_reported: Optional[dic
 def rent_input(sites: Sequence[HousingSite], baseline: Optional[dict], order: Sequence[str],
                preference: Sequence[str], site_reported: Optional[dict] = None, area_reported: Optional[dict] = None
                ) -> tuple[Optional[float], Optional[str], Optional[str]]:
-    """Lucrativeness average rent: (monthly USD, basis, source ids) following ``rent.lucrativeness_rent``.
+    """Housing based rent steps: (monthly USD, basis, source ids) for an order of employee_housing, reported_area and
+    baseline keys. Lucrativeness now takes its median rent from pipeline/rent_used.py (owner decision 2026-10-14).
 
-    Steps (owner decision 4 default: employee_housing, acs_median, fmr_one_br):
+    Steps (the former owner decision 4 default was employee_housing, acs_median, fmr_one_br):
     * employee_housing: mean of the employee housing rent mids; basis "employee_housing_mean:<site ids>"
     * reported_area: the area rent from 3+ approved reports (midpoint); basis "reported_area"
     * acs_median, fmr_studio, fmr_one_br, fmr_two_br: that county baseline value; basis is the key
