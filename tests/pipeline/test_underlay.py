@@ -76,6 +76,11 @@ def test_row_edges_are_even_in_web_mercator():
         assert mid == pytest.approx(grid.lat_at(j), abs=1e-9)
 
 
+def test_small_size():
+    assert mu.small_size(4060, 2835) == (1015, 709)
+    assert mu.small_size(5, 3) == (2, 2)
+
+
 def test_feather_ramp():
     ramp = mu.feather_ramp(100, 10)
     assert ramp == ramp[::-1]
@@ -123,6 +128,13 @@ def test_sidecar_matches_the_images(sidecar):
         grid = mu.region_grid(spec["box"], spec["px_per_degree"])
         assert (r["width"], r["height"]) == (grid.width, grid.height)
         assert r["coordinates"] == grid.coordinates()
+        # The quarter size copy for national zooms: same corners, a quarter of the pixels each way.
+        sm = r["small"]
+        sdata = (SIDECAR.parent / sm["image"]).read_bytes()
+        assert sm["image"] == f"underlay-{region}-small.webp" and len(sdata) == sm["bytes"]
+        assert hashlib.sha256(sdata).hexdigest() == sm["sha256"]
+        assert webp_size(sdata) == (sm["width"], sm["height"]) == mu.small_size(r["width"], r["height"])
+        assert len(sdata) <= mu.SMALL_MAX_BYTES[region]
     assert rasters["lower48"]["bytes"] <= 600_000 and rasters["alaska"]["bytes"] <= 250_000
 
 

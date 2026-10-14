@@ -114,15 +114,20 @@ const FACILITY_LAYER = {
 
 // Satellite style underlay (underlay.js): image sources under every data layer, at all zooms. Alaska draws at its
 // true place, and a copy fills the national inset frame (its box is the inset's source box). The tone is baked in.
+// The quarter size copies (`-small`, and the inset) carry national zooms; the full images join above them from
+// UNDERLAY_FULL_FROM_ZOOM, so phones that stay national never decode or upload them.
 const UNDERLAY_PAINT = { 'raster-opacity': 1, 'raster-fade-duration': 0, 'raster-resampling': 'linear' };
-const UNDERLAY_BASE = ['underlay-lower48', 'underlay-alaska'];
-function underlaySources(u) {
+const UNDERLAY_SMALL = ['underlay-lower48-small', 'underlay-alaska-small'];
+const UNDERLAY_FULL_FROM_ZOOM = 4.5;
+function underlaySources(u, full) {
   const out = {};
   const r = u ? u.rasters : {};
-  if (r.lower48) out['underlay-lower48'] = { type: 'image', url: r.lower48.url, coordinates: r.lower48.coordinates };
+  const src = (raster) => (full || !raster.small ? raster : raster.small).url;
+  const id = (region) => `underlay-${region}${full ? '' : '-small'}`;
+  if (r.lower48) out[id('lower48')] = { type: 'image', url: src(r.lower48), coordinates: r.lower48.coordinates };
   if (r.alaska) {
-    out['underlay-alaska'] = { type: 'image', url: r.alaska.url, coordinates: r.alaska.coordinates };
-    out['underlay-alaska-inset'] = { type: 'image', url: r.alaska.url, coordinates: insetCorners(r.alaska.coordinates) };
+    out[id('alaska')] = { type: 'image', url: src(r.alaska), coordinates: r.alaska.coordinates };
+    if (!full) out['underlay-alaska-inset'] = { type: 'image', url: src(r.alaska), coordinates: insetCorners(r.alaska.coordinates) };
   }
   return out;
 }
@@ -135,7 +140,7 @@ function stateFillOpacity(on) {
 
 function buildStyle(index, underlay) {
   const img = config.basemap.imagery;
-  const ul = underlaySources(underlay);
+  const ul = underlaySources(underlay, false);
   const translucent = Boolean(img || config.basemap.underlay);
   return {
     version: 8,
@@ -155,7 +160,7 @@ function buildStyle(index, underlay) {
     layers: [
       { id: 'background', type: 'background', paint: { 'background-color': C.background } },
       // The underlay, then the USGS imagery over it from its minzoom, both under every data layer.
-      ...UNDERLAY_BASE.filter((id) => ul[id]).map(underlayLayer),
+      ...UNDERLAY_SMALL.filter((id) => ul[id]).map(underlayLayer),
       ...(img ? [{ id: 'imagery', type: 'raster', source: 'imagery', minzoom: img.minzoom || 0, paint: img.paint }] : []),
       {
         id: 'states-fill', type: 'fill', source: 'states',
@@ -562,6 +567,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     for (const id of INSET_LAYERS) vis(id, national);
     if (national) { vis('inset-resorts', facility !== 'facility'); vis('inset-resorts-facility', facility !== 'ski_area'); }
     vis('underlay-alaska', !national);
+    vis('underlay-alaska-small', !national);
     for (const id of heatAK) vis(id, !national);
     for (const id of heatInset) vis(id, national);
     // Alaska's isolines draw at its true place only, which the national view hides.
@@ -591,18 +597,23 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
   }
   map.once('style.load', () => { styleIn = true; checkReady(); });
 
-  // An underlay the picture had not loaded (a click before it came, or a resort picture) joins once the data layers
-  // are drawn, under the imagery (or the data), so its decode and texture upload never hold the first frame back.
-  if (!underlayNow()) loadUnderlay().then((u) => { if (u) whenReady(() => addUnderlay(u)); });
+  // Underlay layers the first style lacks join once the data layers are drawn, under the imagery (or the data), so
+  // their decode and texture upload never hold the first frame back: the quarter size copies when the picture had
+  // not loaded them (a quick click, a resort page), then the full images from state zooms.
+  loadUnderlay().then((u) => { if (u) whenReady(() => addUnderlay(u)); });
   function addUnderlay(u) {
-    if (map.getSource('underlay-lower48') || map.getSource('underlay-alaska')) return;
-    const src = underlaySources(u);
-    const base = map.getLayer('imagery') ? 'imagery' : 'states-fill';
-    for (const [id, spec] of Object.entries(src)) {
-      map.addSource(id, spec);
-      map.addLayer(underlayLayer(id), id === 'underlay-alaska-inset' ? 'inset-frame' : base);
-    }
-    if (map.getLayer('resorts')) syncLayers();
+    const before = map.getLayer('imagery') ? 'imagery' : 'states-fill';
+    const put = (src) => {
+      for (const [id, spec] of Object.entries(src)) {
+        if (map.getSource(id)) continue;
+        map.addSource(id, spec);
+        map.addLayer(underlayLayer(id), id === 'underlay-alaska-inset' ? 'inset-frame' : before);
+      }
+      syncLayers();
+    };
+    put(underlaySources(u, false));
+    const full = () => map.getZoom() >= UNDERLAY_FULL_FROM_ZOOM && (put(underlaySources(u, true)), true);
+    if (!full()) { const onZoom = () => { if (full()) map.off('zoom', onZoom); }; map.on('zoom', onZoom); }
   }
   map.on('sourcedata', checkReady);
   map.on('render', checkReady);

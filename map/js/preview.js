@@ -5,7 +5,7 @@
 // while it is busy with the page's first frame, which held the main thread for 100 to 300 ms. SVG is drawn by
 // the compositor off the main thread. See docs/map/ARCHITECTURE.md "Performance budget".
 // The satellite style underlay (underlay.js) joins the picture after the first paint (addPreviewUnderlay).
-import { config, prefersReducedMotion } from './config.js';
+import { config } from './config.js';
 import { viewFrame, clampPadding, resortRadius } from './camera.js';
 import { INSET_STATE, insetGeometry, insetFrameBounds, toInset, insetCorners } from './inset.js';
 
@@ -53,45 +53,53 @@ export function wantsUnderlay(svg) {
   return Boolean(cam && cam.zoom <= UNDERLAY_MAX_ZOOM);
 }
 
+/** The images a picture draws: [{ url, box: [x0, y0, x1, y1], inset }], each the smallest copy that covers it. */
+function underlayPlan(cam, underlay) {
+  const { px, national, panel } = cam;
+  const r = underlay.rasters;
+  const dpr = window.devicePixelRatio || 1;
+  const out = [];
+  const add = (raster, corners, inset) => {
+    if (!raster) return;
+    const [x0, y0] = px(corners[0][0], corners[0][1]);
+    const [x1, y1] = px(corners[2][0], corners[2][1]);
+    if (Math.min(cam.w, x1) <= Math.max(0, x0) || Math.min(cam.hgt, y1) <= Math.max(0, y0)) return;
+    // The quarter size copy up to 2x upscaled: plenty under a muted picture, and it skips the full image's decode.
+    const src = raster.small && (x1 - x0) * dpr <= raster.small.width * 2 ? raster.small : raster;
+    out.push({ url: src.url, box: [x0, y0, x1, y1], inset });
+  };
+  add(r.lower48, r.lower48 && r.lower48.coordinates, false);
+  if (!national) add(r.alaska, r.alaska && r.alaska.coordinates, false);
+  else if (panel && r.alaska) add(r.alaska, insetCorners(r.alaska.coordinates), true);
+  return out;
+}
+
+/** The image URLs this picture would draw (none for a resort picture), to load and decode ahead. */
+export function previewUnderlayUrls(svg, underlay) {
+  const cam = svg && cams.get(svg);
+  return cam && underlay && cam.zoom <= UNDERLAY_MAX_ZOOM ? underlayPlan(cam, underlay).map((p) => p.url) : [];
+}
+
 /**
  * Draw the underlay (underlay.js) under the clusters and dots of a picture, in its Web Mercator projection: the
  * lower 48, Alaska at its true place or (national view) in the inset on its dark panel. Each image is an SVG feImage
  * on a rect clipped to the view: a picture drawn by a filter is never a Largest Contentful Paint candidate (an SVG
- * image element is), so the late image leaves LCP alone. fade: ease it in (skipped for reduced motion).
+ * image element is), so the late image leaves LCP alone. No fade: each frame of one would raster the filter again.
  */
-export function addPreviewUnderlay(svg, underlay, { fade = false } = {}) {
+export function addPreviewUnderlay(svg, underlay) {
   const cam = cams.get(svg);
   if (!cam || !underlay || cam.zoom > UNDERLAY_MAX_ZOOM || svg.querySelector('.map-preview-underlay')) return;
-  const { px, w, hgt, national, bg, panel } = cam;
-  const r = underlay.rasters;
-  const group = (items) => {
-    const g = el('g', { class: 'map-preview-underlay' });
-    for (const [raster, corners] of items) {
-      if (!raster) continue;
-      const [x0, y0] = px(corners[0][0], corners[0][1]);
-      const [x1, y1] = px(corners[2][0], corners[2][1]);
-      const cx0 = Math.max(0, x0); const cy0 = Math.max(0, y0);
-      const cx1 = Math.min(w, x1); const cy1 = Math.min(hgt, y1);
-      if (cx1 <= cx0 || cy1 <= cy0) continue;
-      const id = `map-preview-underlay-${++filterSeq}`;
-      const box = { x: n1(cx0), y: n1(cy0), width: n1(cx1 - cx0), height: n1(cy1 - cy0) };
-      const f = el('filter', { id, filterUnits: 'userSpaceOnUse', primitiveUnits: 'userSpaceOnUse', 'color-interpolation-filters': 'sRGB', ...box });
-      f.append(el('feImage', { href: raster.url, x: n1(x0), y: n1(y0), width: n1(x1 - x0), height: n1(y1 - y0), preserveAspectRatio: 'none' }));
-      g.append(f, el('rect', { ...box, fill: C.background, filter: `url(#${id})` }));
-    }
-    return g.childNodes.length ? g : null;
-  };
-  const base = group([[r.lower48, r.lower48 && r.lower48.coordinates], [!national && r.alaska, r.alaska && r.alaska.coordinates]]);
-  const inset = national && panel && r.alaska ? group([[r.alaska, insetCorners(r.alaska.coordinates)]]) : null;
-  for (const [g, after] of [[base, bg], [inset, panel]]) {
-    if (!g) continue;
-    after.after(g);
-    if (fade && !prefersReducedMotion()) {
-      g.style.opacity = '0';
-      g.style.transition = 'opacity 450ms ease-out';
-      requestAnimationFrame(() => requestAnimationFrame(() => { g.style.opacity = '1'; }));
-    }
+  const groups = { base: el('g', { class: 'map-preview-underlay' }), inset: el('g', { class: 'map-preview-underlay' }) };
+  for (const { url, box: [x0, y0, x1, y1], inset } of underlayPlan(cam, underlay)) {
+    const id = `map-preview-underlay-${++filterSeq}`;
+    const cx0 = Math.max(0, x0); const cy0 = Math.max(0, y0);
+    const box = { x: n1(cx0), y: n1(cy0), width: n1(Math.min(cam.w, x1) - cx0), height: n1(Math.min(cam.hgt, y1) - cy0) };
+    const f = el('filter', { id, filterUnits: 'userSpaceOnUse', primitiveUnits: 'userSpaceOnUse', 'color-interpolation-filters': 'sRGB', ...box });
+    f.append(el('feImage', { href: url, x: n1(x0), y: n1(y0), width: n1(x1 - x0), height: n1(y1 - y0), preserveAspectRatio: 'none' }));
+    groups[inset ? 'inset' : 'base'].append(f, el('rect', { ...box, fill: C.background, filter: `url(#${id})` }));
   }
+  if (groups.base.childNodes.length) cam.bg.after(groups.base);
+  if (groups.inset.childNodes.length && cam.panel) cam.panel.after(groups.inset);
 }
 
 /**

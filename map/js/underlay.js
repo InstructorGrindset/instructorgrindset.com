@@ -7,7 +7,10 @@ import { config } from './config.js';
 let pending = null;
 let meta = null;
 
-/** { rasters: { lower48, alaska }: { url, coordinates, width, height } } or null when off or unreadable. Fetched once. */
+/**
+ * { rasters: { lower48, alaska }: { url, coordinates, width, height, small: { url, width, height } } } or null when off
+ * or unreadable. `small` is a quarter size copy for national zooms (same corners). Fetched once.
+ */
 export function loadUnderlay() {
   const url = config.basemap.underlay && config.basemap.underlay.url;
   if (!url) return Promise.resolve(null);
@@ -19,7 +22,8 @@ export function loadUnderlay() {
         for (const r of j.rasters || []) {
           const c = r.coordinates;
           if (!r.image || !Array.isArray(c) || c.length !== 4) continue;
-          rasters[r.region] = { url: new URL(r.image, url).href, coordinates: c, width: r.width, height: r.height };
+          const sm = r.small && r.small.image ? { url: new URL(r.small.image, url).href, width: r.small.width, height: r.small.height } : null;
+          rasters[r.region] = { url: new URL(r.image, url).href, coordinates: c, width: r.width, height: r.height, small: sm };
         }
         meta = Object.keys(rasters).length ? { rasters } : null;
         return meta;
@@ -32,15 +36,14 @@ export function loadUnderlay() {
 /** The underlay once loadUnderlay has resolved, else null. */
 export function underlayNow() { return meta; }
 
-/** Download and decode the images off the main thread (detached images, so none is a paint timing candidate). */
-export function decodeUnderlay(m) {
-  if (!m) return Promise.resolve(null);
-  const jobs = Object.values(m.rasters).map((r) => {
+/** Download and decode images off the main thread (detached images, so none is a paint timing candidate). */
+export function decodeUnderlay(urls) {
+  const jobs = [...new Set(urls)].map((u) => {
     const img = new Image();
     img.decoding = 'async';
     img.fetchPriority = 'low';
-    img.src = r.url;
+    img.src = u;
     return img.decode();
   });
-  return Promise.all(jobs).then(() => m, (err) => { console.warn('[map] underlay image:', err && err.message); return null; });
+  return Promise.all(jobs).then(() => true, (err) => { console.warn('[map] underlay image:', err && err.message); return false; });
 }

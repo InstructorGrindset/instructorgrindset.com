@@ -70,6 +70,10 @@ REGIONS = {
     "alaska": {"box": (-180.0, 51.2, -129.5, 71.6), "px_per_degree": 36.0, "feather_deg": 0.35, "max_bytes": 250_000},
 }
 QUALITY_START, QUALITY_MIN, QUALITY_STEP = 74, 40, 4
+# A quarter size copy of each image for national zooms (the 2D picture and the WebGL map until state zooms): it shows
+# the lower 48 at about 15 px per degree, so the full image's decode and texture upload wait until they are needed.
+SMALL_FACTOR = 4
+SMALL_MAX_BYTES = {"lower48": 120_000, "alaska": 50_000}
 
 
 # ------------------------------------------------------------------ pure math (tested without Pillow)
@@ -134,6 +138,11 @@ def feather_ramp(n: int, px: float) -> list[float]:
     if px <= 0:
         return [1.0] * n
     return [smoothstep(min(i + 0.5, n - i - 0.5) / px) for i in range(n)]
+
+
+def small_size(width: int, height: int) -> tuple[int, int]:
+    """The quarter size copy's pixels (same corners, so its rows stay even in Web Mercator)."""
+    return max(2, round(width / SMALL_FACTOR)), max(2, round(height / SMALL_FACTOR))
 
 
 def region_grid(box: Sequence[float], px_per_degree: float) -> Grid:
@@ -213,6 +222,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--out", type=Path, default=OUT_DIR)
     args = ap.parse_args(argv)
 
+    from PIL import Image
     tif = ensure_tif(args.zip, args.download_dir)
     src = open_source(tif)
     matrix = tone_matrix(TONE["saturation"], TONE["contrast"], TONE["brightness_max"])
@@ -228,13 +238,20 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         data, quality = encode(im, spec["max_bytes"])
         name = f"underlay-{region}.webp"
         (args.out / name).write_bytes(data)
+        size = small_size(grid.width, grid.height)
+        sdata, squality = encode(im.resize(size, Image.Resampling.LANCZOS), SMALL_MAX_BYTES[region])
+        sname = f"underlay-{region}-small.webp"
+        (args.out / sname).write_bytes(sdata)
         rasters.append({
             "region": region, "image": name, "width": grid.width, "height": grid.height,
             "px_per_degree": spec["px_per_degree"], "coordinates": grid.coordinates(),
             "feather_deg": spec["feather_deg"], "quality": quality, "bytes": len(data),
             "sha256": hashlib.sha256(data).hexdigest(),
+            "small": {"image": sname, "width": size[0], "height": size[1], "quality": squality, "bytes": len(sdata),
+                      "sha256": hashlib.sha256(sdata).hexdigest()},
         })
         print(f"{name}: {grid.width} x {grid.height}, WebP quality {quality}, {len(data):,} bytes")
+        print(f"{sname}: {size[0]} x {size[1]}, WebP quality {squality}, {len(sdata):,} bytes")
     sidecar = {
         "version": 1,
         "generated_by": "pipeline/tools/make_underlay.py",

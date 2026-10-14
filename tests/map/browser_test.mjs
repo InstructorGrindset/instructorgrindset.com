@@ -537,11 +537,11 @@ async function underlayChecks(browser, base, stubBase) {
     first: document.querySelector('.map-preview').children[1].getAttribute('class'),
     lcp: window.__lcp, started: window.__careerMap.mapStarted,
   }));
-  check(!pv.started && pv.hrefs.length === 2 && pv.hrefs.every((h) => h.origin && /^\/images\/basemap\/underlay-(lower48|alaska)\.webp$/.test(h.path)) && pv.first === 'map-preview-underlay',
-    `before the click the picture draws the lower 48 and the Alaska inset underlay from local paths (${pv.hrefs.map((h) => h.path).join(', ')})`);
+  check(!pv.started && pv.hrefs.length === 2 && pv.hrefs.every((h) => h.origin && /^\/images\/basemap\/underlay-(lower48|alaska)-small\.webp$/.test(h.path)) && pv.first === 'map-preview-underlay',
+    `before the click the picture draws the lower 48 and the Alaska inset underlay from local paths, the quarter size copies at the national view (${pv.hrefs.map((h) => h.path).join(', ')})`);
   check(pv.lcp.length > 0 && pv.lcp.every((e) => e.tag !== 'image' && !/\/images\/basemap\//.test(e.url || '')), `the underlay is never the LCP element (${pv.lcp.map((e) => e.tag).join(', ')})`);
   check(images.length >= 3 && images.every((i) => i.status === 200) && images.some((i) => /underlay\.json$/.test(i.url)) && images.filter((i) => /\.webp$/.test(i.url)).every((i) => i.type === 'image/webp'),
-    `underlay.json and both WebP images load from the site (${images.map((i) => `${i.status} ${i.url.replace(/^.*\/images\//, '')}`).join(', ')})`);
+    `underlay.json and the WebP images load from the site (${images.map((i) => `${i.status} ${i.url.replace(/^.*\/images\//, '')}`).join(', ')})`);
   const pvDark = await darkShare(page);
   check(pvDark < 0.2, `the picture shows the underlay (${Math.round(pvDark * 100)}% of the sampled area is the plain dark base)`);
   await shot(page, 'underlay-01-picture-before-click.png');
@@ -552,16 +552,17 @@ async function underlayChecks(browser, base, stubBase) {
   const st = await page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
     const style = m.getStyle(); const ids = style.layers.map((l) => l.id);
-    const src = ['underlay-lower48', 'underlay-alaska', 'underlay-alaska-inset'].map((id) => {
+    const src = ['underlay-lower48-small', 'underlay-alaska-small', 'underlay-alaska-inset'].map((id) => {
       const s = style.sources[id]; const u = s && new URL(s.url, location.href);
-      return { id, type: s && s.type, local: Boolean(u && u.origin === location.origin && /^\/images\/basemap\/underlay-(lower48|alaska)\.webp$/.test(u.pathname)), loaded: m.isSourceLoaded(id) };
+      return { id, type: s && s.type, local: Boolean(u && u.origin === location.origin && /^\/images\/basemap\/underlay-(lower48|alaska)-small\.webp$/.test(u.pathname)), loaded: m.isSourceLoaded(id) };
     });
     const vis = (id) => m.getLayoutProperty(id, 'visibility') !== 'none';
     const img = style.layers.find((l) => l.id === 'imagery');
-    return { src, ids, zoom: m.getZoom(), imgMin: img && img.minzoom, insetVis: vis('underlay-alaska-inset'), akVis: vis('underlay-alaska'),
+    return { src, ids, zoom: m.getZoom(), imgMin: img && img.minzoom, insetVis: vis('underlay-alaska-inset'), akVis: vis('underlay-alaska-small'), full: Boolean(m.getSource('underlay-lower48')),
       inset: ids.indexOf('underlay-alaska-inset'), panel: ids.indexOf('inset-panel'), frame: ids.indexOf('inset-frame'), resorts: ids.indexOf('resorts') };
   });
   check(st.src.every((s) => s.type === 'image' && s.local && s.loaded), `the WebGL map has the underlay image sources from local paths, loaded (${st.src.map((s) => `${s.id} ${s.loaded ? 'loaded' : 'pending'}`).join(', ')})`);
+  check(!st.full, 'national view: the full images wait for state zooms');
   check(st.inset > st.panel && st.inset < st.frame && st.insetVis && !st.akVis, 'national view: the Alaska underlay fills the inset on its panel; Alaska at its true place is hidden');
   check(st.imgMin === 6.5 && st.zoom < 6.5 && usgs.length === 0, `national view (zoom ${st.zoom.toFixed(2)}) requests no USGS tile; the imagery joins from zoom ${st.imgMin}`);
   const natDark = await darkShare(page);
@@ -570,7 +571,11 @@ async function underlayChecks(browser, base, stubBase) {
 
   // State zoom with every USGS tile failing: the underlay still shows.
   await page.evaluate(() => window.__careerMap.mapCtl.map.jumpTo({ center: [-106.0, 39.2], zoom: 7.2 }));
+  await page.waitForFunction(() => { const m = window.__careerMap.mapCtl.map; return m.getSource('underlay-lower48') && m.isSourceLoaded('underlay-lower48'); }, null, { timeout: 15000 }).catch(() => {});
   await mapIdle(page);
+  const fullSrc = await page.evaluate(() => { const m = window.__careerMap.mapCtl.map; const s = m.getSource('underlay-lower48'); const ids = m.getStyle().layers.map((l) => l.id);
+    return { path: s && new URL(s.url).pathname, loaded: m.isSourceLoaded('underlay-lower48'), above: ids.indexOf('underlay-lower48') > ids.indexOf('underlay-lower48-small') && ids.indexOf('underlay-lower48') < ids.indexOf('imagery') }; });
+  check(fullSrc.path === '/images/basemap/underlay-lower48.webp' && fullSrc.loaded && fullSrc.above, 'from zoom 4.5 the full lower 48 image joins above its quarter size copy, under the imagery');
   const zoomDark = await darkShare(page);
   const at = await page.evaluate(() => ({ attrib: document.querySelector('.maplibregl-ctrl-attrib-inner').textContent }));
   check(usgs.length > 0 && zoomDark < 0.2, `zoom 7.2 with ${usgs.length} USGS tiles failing: the underlay still shows (${Math.round(zoomDark * 100)}% plain dark base)`);
@@ -637,13 +642,13 @@ async function desktop(browser, base) {
   await page.waitForFunction(() => !document.getElementById('map-start'), null, { timeout: 20000 });
   check(await page.evaluate(() => document.activeElement === window.__careerMap.mapCtl.map.getCanvas()), 'Enter on the start button starts the map and focus moves to it');
   // A click before the picture loaded the underlay adds it once the data layers are drawn.
-  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getSource('underlay-lower48'), null, { timeout: 15000 }).catch(() => {});
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getSource('underlay-lower48-small'), null, { timeout: 15000 }).catch(() => {});
   const imagery = await page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
     const ids = m.getStyle().layers.map((l) => l.id);
     const src = m.getStyle().sources.imagery;
     const data = ['states-fill', 'clusters-fill', 'resorts'].map((id) => ids.indexOf(id));
-    const under = ['underlay-lower48', 'underlay-alaska'].map((id) => ids.indexOf(id));
+    const under = ['underlay-lower48-small', 'underlay-alaska-small'].map((id) => ids.indexOf(id));
     return { src: src && src.type, tiles: src && src.tiles[0], idx: ids.indexOf('imagery'), under, data, attrib: document.querySelector('.maplibregl-ctrl-attrib-inner').textContent };
   });
   check(imagery.src === 'raster' && /basemap\.nationalmap\.gov/.test(imagery.tiles) && imagery.under.join() === '1,2' && imagery.idx === 3 && imagery.data.every((i) => i > imagery.idx),

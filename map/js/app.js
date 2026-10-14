@@ -16,7 +16,7 @@ import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
 import { h, joinOr, plural } from './ui.js';
 import { FILTERS, PASS_LABEL } from './labels.js';
-import { drawPreview, addPreviewUnderlay, wantsUnderlay } from './preview.js';
+import { drawPreview, addPreviewUnderlay, previewUnderlayUrls, wantsUnderlay } from './preview.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -416,16 +416,19 @@ async function main() {
   // (resorts.json is 2.6 MB; parsing it is a long task). A view that needs full records loads them (panel.js).
   afterLoad(() => { idleReached = true; if (sourcesWanted) loadSources(); index.prefetchDetails(); });
   afterLoad(() => prefetchMap().then(() => { mapPrefetched = true; startUnderlay(); }));
-  // The underlay (470 KB) joins the picture after the first paint at low priority, once the MapLibre download is
-  // done so a quick click keeps the bandwidth, and only for a picture that draws it (national to cluster zooms; a
-  // resort picture skips it). It is decoded off the main thread first.
+  // The underlay joins the picture after the first paint at low priority, once the MapLibre download is done so a
+  // quick click keeps the bandwidth, and only for a picture that draws it (national to cluster zooms; a resort
+  // picture skips it). The images it needs (the 38 KB quarter size copies at national zooms) decode off the main
+  // thread first.
   function startUnderlay() {
     if (underlayStarted || !mapPrefetched || mapCtl || !wantsUnderlay(preview)) return;
     underlayStarted = true;
-    import('./underlay.js').then((m) => m.loadUnderlay().then(m.decodeUnderlay)).then((u) => {
-      underlay = u;
-      if (u && preview && !mapCtl) addPreviewUnderlay(preview, u, { fade: true });
-    }).catch((err) => console.warn('[map] underlay', err.message));
+    import('./underlay.js').then((m) => m.loadUnderlay()
+      .then((u) => (u ? m.decodeUnderlay(previewUnderlayUrls(preview, u)).then(() => u) : null)))
+      .then((u) => {
+        underlay = u;
+        if (u && preview && !mapCtl) addPreviewUnderlay(preview, u);
+      }).catch((err) => console.warn('[map] underlay', err.message));
   }
   // Hiring now: the windows count, then the open roles once jobs/postings.json is in.
   afterLoad(() => hiring().then(async (m) => {
