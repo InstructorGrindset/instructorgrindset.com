@@ -117,9 +117,9 @@ def page() -> tuple[str, _Text]:
 
 def test_page_loads_no_map_javascript(page):
     html, p = page
-    assert all(not s.get("src") for s in p.scripts), "the credits page loads no external script"
+    assert [s.get("src") for s in p.scripts if s.get("src")] == ["/assets/nav.js?v=15"], "the only external script is the site nav"
     assert "/map/js/" not in html and "maplibre-gl.js" not in html and 'type="module"' not in html
-    assert '<aside id="sidebar-placeholder"' in html and 'fetch("/partials/sidebar.html' in html
+    assert '<aside id="sidebar-placeholder" class="side" aria-busy="true" data-defer-images>' in html
 
 
 def test_page_credits_every_source(page):

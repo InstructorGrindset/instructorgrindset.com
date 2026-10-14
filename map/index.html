@@ -16,8 +16,8 @@
   <link rel="preload" href="/data/build/map-index.json" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/clusters.geojson" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="/data/build/states.json" as="fetch" crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/global.css?v=1">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=12">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"></noscript>
@@ -43,22 +43,8 @@
 <body class="map-page">
   <a class="skip-link" href="#panel">Skip to the map details</a>
   <div class="page">
-    <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-    <script>
-      (function(){
-        var t=document.getElementById("sidebar-placeholder");
-        fetch("/partials/sidebar.html?v=13")
-          .then(function(r){return r.text()})
-          .then(function(h){
-            /* Map page only: the drawer logo (about 500 KB) loads when the drawer first opens, not with the map. */
-            var d=document.createElement("div");d.innerHTML=h.trim().replace(/<img ([^>]*?)src="/g,'<img $1data-src="');
-            var el=d.firstElementChild;t.replaceWith(el);
-            var show=function(){el.querySelectorAll("img[data-src]").forEach(function(i){i.src=i.getAttribute("data-src");i.removeAttribute("data-src")})};
-            var hb=el.querySelector(".hamburger");if(hb){hb.addEventListener("click",show,{once:true})}else{show()}
-          })
-          .catch(function(){t.innerHTML="<div style='padding:1rem;color:#fca5a5'>Navigation failed to load.</div>"});
-      })();
-    </script>
+    <aside id="sidebar-placeholder" class="side" aria-busy="true" data-defer-images></aside>
+    <script src="/assets/nav.js?v=15"></script>
 
     <main class="main map-main" id="main">
       <header class="map-header">

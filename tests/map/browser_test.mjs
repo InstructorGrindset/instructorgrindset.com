@@ -55,8 +55,10 @@ function findChromium() {
 }
 
 async function serve(root, port) {
+  // http.server logs each request to stderr. An unread pipe fills at 64 KB and the server then blocks mid request,
+  // so discard the log; the fetch loop below reports a server that fails to start.
   const proc = spawn('python3', ['-m', 'http.server', String(port), '--bind', '127.0.0.1', '--directory', root],
-    { stdio: ['ignore', 'ignore', 'pipe'] });
+    { stdio: 'ignore' });
   for (let i = 0; i < 50; i++) {
     try { const r = await fetch(`http://127.0.0.1:${port}/`); if (r.ok || r.status) return proc; } catch { /* wait */ }
     await new Promise((r) => setTimeout(r, 100));
@@ -138,6 +140,15 @@ async function ready(page, { start = true } = {}) {
     await page.locator('#map-start').click();
     await page.waitForFunction(() => window.__careerMap.mapCtl || document.querySelector('.map-fallback'), null, { timeout: 20000 });
   }
+}
+
+// Counts this page's requests in flight; quiet() resolves after 500 ms with none, so leaving the page aborts nothing.
+// waitForLoadState('networkidle') returns at once when the page went idle before a later click started new loads.
+function trackInflight(page) {
+  let n = 0;
+  page.on('request', () => { n += 1; });
+  for (const ev of ['requestfinished', 'requestfailed']) page.on(ev, () => { n -= 1; });
+  return async () => { for (let quiet = 0; quiet < 5;) { await page.waitForTimeout(100); quiet = n <= 0 ? quiet + 1 : 0; } };
 }
 
 async function mapIdle(page) {
@@ -1366,6 +1377,7 @@ async function desktopStub(browser, base) {
   log('\nDesktop deep link stub');
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   const w = watch(page, 'desktop stub');
+  const quiet = trackInflight(page);
   await page.goto(`${base}/map/ca/fixture-lake-crest/hotel-lake/`);
   await ready(page);
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length >= 5, null, { timeout: 10000 });
@@ -1427,7 +1439,15 @@ async function desktopStub(browser, base) {
     `without the season rasters the browser draws them (${Date.now() - t0} ms; WY clear ${seasonClear[0][3]}, UT ${seasonIn[0][3]})`);
   await page.goto(`${base}/map/`);
   await ready(page);
-  await page.waitForLoadState('networkidle');   // postings.json loads at idle for the Hiring now count; let it finish
+  // The start click begins a second wave of loads (full data, sources, the recolor control, state outlines) and
+  // postings.json loads at idle for the Hiring now count. Wait for each to report done, then for the network to go
+  // quiet, so the next page load aborts nothing.
+  await mapIdle(page);
+  await page.waitForFunction(() => {
+    const c = window.__careerMap;
+    return c.index.detailsReady && c.index.sourcesReady && document.getElementById('recolor-legend');
+  }, null, { timeout: 15000 });
+  await quiet();
   await page.goto(`${base}/map/co/fixture-front-range/?compare=alpha-peak,charlie-hill`);
   await ready(page);
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length === 2, null, { timeout: 10000 });
