@@ -6,7 +6,10 @@ Employee and market housing near Tier A resorts, one YAML file per research batc
 
 * Sources: resort HR and careers pages, housing authority sites, published listings. Every value is sourced; anything you cannot source is `null`.
 * `resort_id` must be a resort in the build. Site `id` is a kebab case slug, unique across all housing files.
-* `type`: `resort_owned`, `master_lease` (resort leased units for staff) or `market`.
+* `type`: `resort_owned`, `master_lease` (resort leased units for staff), `unspecified` (the resort lists the site for
+  its staff without saying whether it owns or leases it; never guess `resort_owned`) or `market`.
+* `listing_source_id` (optional): the source page that lists the site. It must be declared in `sources`. The panel
+  shows it as the site's main source link, beside `location_source_id`.
 * `precision: building` only when the street address is publicly listed. Then `address` is required, as a Sourced string. Otherwise use `precision: neighborhood` and a neighborhood level point.
 * `rent_monthly` is a Sourced range `{low, high}` in USD per person per month; `low` must not exceed `high`. A site without a published rent shows the county baseline (HUD FMR or ACS) as an estimate.
 * `occupancy`: `shared`, `private`, `mixed` or `null`. `deposit` is a Sourced number or `null`.
