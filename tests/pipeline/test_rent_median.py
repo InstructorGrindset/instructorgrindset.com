@@ -272,6 +272,7 @@ def test_lucrativeness_end_to_end_with_the_median_rent(cfg):
     luc = career["lucrativeness"]
     months = 152 / 30.4
     assert luc["status"] == "computed" and b["value"] == 2200
-    assert luc["mid"] == round(24 * 40 * months * 4.33 - 2200 * months) and luc["low"] == round(20 * 40 * months * 4.33 - 2200 * months)
+    assert luc["mid"] == round(22 * 40 * months * 4.33 - 2200 * months)     # middle of the 20 to 24 range
+    assert luc["high"] == round(24 * 40 * months * 4.33 - 2200 * months) and luc["low"] == round(20 * 40 * months * 4.33 - 2200 * months)
     assert {a["key"]: a for a in luc["assumptions"]}["rent_monthly_usd"]["label"] == "Median rent per month (USD)"
     Career.model_validate(career, context={"source_ids": {"zum", "rto"}})

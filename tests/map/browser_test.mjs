@@ -324,7 +324,7 @@ async function desktop(browser, base) {
   // Color modes: value heat maps (map/js/heat.js) with the resorts on top.
   const modes = page.locator('.recolor-modes .filter-btn');
   await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 10000 });
-  check(JSON.stringify(await modes.allInnerTexts()) === JSON.stringify(['Default', 'Lucrativeness', 'Season length', 'Snowfall']), 'recolor control lists four modes (no Professionalism)');
+  check(JSON.stringify(await modes.allInnerTexts()) === JSON.stringify(['Default', 'Estimated net income', 'Season length', 'Snowfall']), 'recolor control lists four modes (no Professionalism)');
   check(await page.locator('.recolor-modes [aria-disabled="true"]').count() === 0, 'every mode enabled with fixture data');
   const leg = page.locator('#recolor-legend');
   const heatState = () => page.evaluate(() => {
@@ -570,15 +570,18 @@ async function desktop(browser, base) {
   // Owner decision 2026-10-13: no professionalism rating anywhere on the page.
   check(!/professionalism/i.test(await page.locator('body').innerText()) && await page.locator('.breakdown, .score-trigger, .professionalism').count() === 0,
     'the resort panel shows no professionalism rating');
-  // Owner decision 4: the headline is the top of the wage scale; the range runs bottom to top.
-  const luc = page.locator('.score-block', { hasText: 'Lucrativeness' });
+  // Owner decision 2026-10-14: "Estimated net income" at the middle of the wage range, one basis line, then the range.
+  const luc = page.locator('.score-block', { hasText: 'Estimated net income' });
   const lucText = await luc.innerText();
-  check(lucText.includes('$8,900') && lucText.includes('At the top of the posted wage scale') && lucText.includes('Range $3,200 at the bottom of the scale to $8,900 at the top'),
-    'lucrativeness headline is the top of scale figure with the bottom to top range');
-  check(await page.locator('.assumptions li').count() === 8, 'lucrativeness lists the new assumptions (basis keys stay out)');
+  check((await luc.locator('.sub').first().innerText()) === 'Estimated net income' && (await luc.locator('.fact-value').first().innerText()) === '$8,900'
+    && (await luc.locator('.lucr-basis').innerText()) === 'Middle of the posted ski school wage range, 40 hours a week, minus median rent. Before tax.'
+    && (await luc.locator('.lucr-range').innerText()) === 'Range: $3,200 to $14,600 across the wage scale.',
+  'net income headline is the middle of the wage range, with the basis line and the bottom to top range');
+  check(!/saving|mid case/i.test(lucText), `net income block never says savings or mid case (${lucText.replace(/\n/g, ' | ')})`);
+  check(await page.locator('.assumptions li').count() === 9, 'lucrativeness lists the new assumptions (basis keys stay out)');
   const assumptions = (await page.locator('.assumptions').innerText()).replace(/\s+/g, ' ');
-  check(assumptions.includes('Hours per week, standard full time 40') && assumptions.includes('$32.50') && assumptions.includes('$1,150') && assumptions.includes('4.33')
-    && assumptions.includes('Tips are not included yet') && assumptions.includes('Savings are before tax') && !assumptions.includes('Not set yet'), `assumption values formatted, tips note shown (${assumptions.replace(/\n/g, ' | ')})`);
+  check(assumptions.includes('Hours per week, standard full time 40') && assumptions.includes('$32.50') && assumptions.includes('Middle of the posted wage range (USD per hour) $26.75') && assumptions.includes('$1,150') && assumptions.includes('4.33')
+    && assumptions.includes('Tips are not included yet') && assumptions.includes('Before tax and other living costs') && !assumptions.includes('Not set yet'), `assumption values formatted, tips note shown (${assumptions.replace(/\n/g, ' | ')})`);
   // Owner decision 2026-10-14: the median of the sourced median rents, with the place, the publishers and every source.
   check((await luc.locator('.rent-line .rent-text').innerText()) === 'Median rent $1,150 a month for one bedroom in Fixture Town, CO (median of 2 sources: Fixture Rentals, Fixture Daily), 2026'
     && await luc.locator('.rent-line a.src-link').count() === 2 && await luc.locator('.rent-line .badge-estimated').count() === 1,

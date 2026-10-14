@@ -28,6 +28,7 @@ from .season_income import lucrativeness_inputs, round_half_up, season_income
 from .sources import SourceRegistry
 
 ASSUMPTION_LABELS: dict[str, str] = {
+    "wage_mid_usd": "Middle of the posted wage range (USD per hour)",
     "wage_top_usd": "Top of the posted wage scale (USD per hour)",
     "wage_bottom_usd": "Bottom of the posted wage scale (USD per hour), used for the low end",
     "hours_per_week": "Standard full time hours per week",
@@ -165,9 +166,10 @@ def lucrativeness(
     net income    = earnings + tips - median rent x season months (before tax and other living costs)
 
     ``rent`` is the RentUsed block (pipeline/rent_used.py) behind ``rent_monthly``; it is echoed as ``rent``.
-    mid = high = net income at the top of the posted wage scale (highest hourly_high of the displayed pay
-    rows, any cert level); low = net income at the bottom (lowest hourly_low). The map shows the top as
-    "Estimated net income" and lists the bottom with the assumptions.
+    The wage range is the displayed pay rows, any cert level: bottom = lowest hourly_low, top = highest
+    hourly_high. low = net income at the bottom, high = net income at the top, and mid = net income at the
+    middle of the range, (bottom + top) / 2 (owner decision 2026-10-14). The map shows mid as
+    "Estimated net income", colors by it, and shows low to high as the range.
 
     Computed with pipeline.season_income (the calculator's shared model) with zero offsets: earnings is its
     ``gross`` and net income its ``net_before_tax``. Whole dollars use round_half_up (JS Math.round).
@@ -176,6 +178,7 @@ def lucrativeness(
     a = defs.assumptions
     top = max((r["hourly_high"] for r in pay_rows), default=None)
     bottom = min((r["hourly_low"] for r in pay_rows), default=None)
+    middle = (bottom + top) / 2 if top is not None and bottom is not None else None
     if season_length_days:
         months, basis = season_length_days / a.days_per_month, "season_length"
         months_label = SEASON_LENGTH_LABEL.format(d=a.days_per_month)
@@ -184,6 +187,8 @@ def lucrativeness(
         months_label = SEASON_DEFAULT_LABEL.format(m=_fmt(a.default_season_months))
     tips = tips_season_usd if tips_season_usd is not None else a.tips_season_usd
     echo = [
+        {"key": "wage_mid_usd", "value": round(middle, 3) if middle is not None else None,
+         "label": ASSUMPTION_LABELS["wage_mid_usd"]},
         {"key": "wage_top_usd", "value": top, "label": ASSUMPTION_LABELS["wage_top_usd"]},
         {"key": "wage_bottom_usd", "value": bottom, "label": ASSUMPTION_LABELS["wage_bottom_usd"]},
         {"key": "hours_per_week", "value": a.hours_per_week, "label": ASSUMPTION_LABELS["hours_per_week"]},
@@ -205,15 +210,15 @@ def lucrativeness(
     if top is None or rent_monthly is None:
         return {**empty, "status": "insufficient_data", "assumptions": echo, "rent": rent}
 
-    def savings(hourly: float) -> float:
-        return season_savings(hourly, a.hours_per_week, months, a.weeks_per_month, rent_monthly, tips or 0.0).net_before_tax
+    def net_income(hourly: float) -> int:
+        net = season_net_income(hourly, a.hours_per_week, months, a.weeks_per_month, rent_monthly, tips or 0.0)
+        return int(round_half_up(net.net_before_tax))
 
-    mid = int(round_half_up(savings(top)))
-    return {"low": int(round_half_up(savings(bottom))), "mid": mid, "high": mid,
+    return {"low": net_income(bottom), "mid": net_income(middle), "high": net_income(top),
             "status": "computed", "assumptions": echo, "rent": rent}
 
 
-def season_savings(hourly: float, hours_per_week: float, season_months: float, weeks_per_month: float,
+def season_net_income(hourly: float, hours_per_week: float, season_months: float, weeks_per_month: float,
                    rent_monthly: float, tips_season: float = 0.0):
     """The shared calculator model for one hourly wage (no food, transport, pass or gear offsets)."""
     inputs = lucrativeness_inputs(

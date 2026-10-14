@@ -558,7 +558,9 @@ def test_phase5_rent_reaches_lucrativeness(repo_root, raw_dir, out, tmp_path, cf
     # median rent figures, no ZORI extract and no ACS value in this fixture, HUD FMR one bedroom is used.
     assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == (1640.0, "fmr_one_br", "hud-fmr-fy2026")
     lucr = by["fixture-peak"]["career"]["lucrativeness"]
-    assert lucr["status"] == "computed" and lucr["mid"] == round(24 * 40 * 5 * 4.33 - 1640 * 5)
+    # Displayed range 20 to 24: mid at the middle wage, 22 (owner decision 2026-10-14), high at the top.
+    assert lucr["status"] == "computed" and lucr["mid"] == round(22 * 40 * 5 * 4.33 - 1640 * 5)
+    assert lucr["high"] == round(24 * 40 * 5 * 4.33 - 1640 * 5)
     assert lucr["low"] == round(20 * 40 * 5 * 4.33 - 1640 * 5)
     assert lucr["rent"]["label"] == "HUD Fair Market Rent, one bedroom" and lucr["rent"]["source_ids"] == ["hud-fmr-fy2026"]
     assert lucr["rent"]["geography"] == {"level": "county", "id": "08998", "name": "Fixture County"}

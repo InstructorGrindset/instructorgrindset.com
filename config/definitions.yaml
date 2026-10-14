@@ -105,8 +105,9 @@ lucrativeness:
   #   season months = season length days / days_per_month when sourced, else default_season_months
   #   earnings      = hourly x hours_per_week x (season months x weeks_per_month)
   #   net income    = earnings + tips - median rent x season months
-  # mid and high use the top of the posted wage scale (highest hourly_high of the displayed pay rows) and
-  # show as "Estimated net income"; low uses the bottom (lowest hourly_low) and shows with the assumptions. No food, transport, pass or gear offsets.
+  # Wage range from the displayed pay rows: bottom = lowest hourly_low, top = highest hourly_high.
+  # mid uses the middle of the range, (bottom + top) / 2 (owner decision 2026-10-14), shows as "Estimated net income"
+  # and colors the map; low uses the bottom and high the top, shown as the range. No food, transport, pass or gear offsets.
   # The median rent follows rent.lucrativeness_rent. Computed with pipeline/season_income.py (the calculator's model).
   assumptions:
     hours_per_week: 40          # standard full time hours (ROADMAP Section 6)
@@ -195,6 +196,11 @@ trailmap:
   # Douglas Peucker tolerance for OpenSkiMap run geometry in the trail map popup (metres).
   # 6 m (about 1.5 px at zoom 15) keeps run shapes readable and big resorts near 150 KB.
   simplify_tolerance_m: 6
+  # Official trail map files (data/raw/trailmaps_official image_url) load straight from the resort's servers.
+  # The build accepts an image_url on the resort's own site (the registered domain of its page url or source)
+  # or on one of these operator image CDNs. Each entry matches that host and its subdomains.
+  official_image_domains:
+    - vailresorts.com     # Vail Resorts: Adobe Scene7 image CDN (scene7.vailresorts.com) for its resort sites
 
 routing:
   # Drive time, distance and route geometry (housing to base area) and drive isochrones around the base.

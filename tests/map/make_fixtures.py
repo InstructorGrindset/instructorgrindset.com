@@ -108,6 +108,7 @@ SEASON_LENGTH = {"alpha-peak": 150, "bravo-bowl": 138, "charlie-hill": 120, "ech
 
 LEVELS = ["none", "level_1", "level_2", "level_3", "trainer", "examiner"]
 ASSUMPTIONS = [  # owner decision 4 keys and labels per docs/map/ARCHITECTURE.md; values synthetic
+    ("wage_mid_usd", "Middle of the posted wage range (USD per hour)", 26.75),
     ("wage_top_usd", "Top of the posted wage scale, per hour", 32.5),
     ("wage_bottom_usd", "Bottom of the posted wage scale, per hour", 21),
     ("hours_per_week", "Hours per week, standard full time", 40),
@@ -116,7 +117,7 @@ ASSUMPTIONS = [  # owner decision 4 keys and labels per docs/map/ARCHITECTURE.md
     ("weeks_per_month", "Weeks per month", 4.33),
     ("tips_season_usd", "Tips are not included yet", None),
     ("rent_monthly_usd", "Median rent per month", 1150),
-    ("tax", "Savings are before tax", None),
+    ("tax", "Before tax and other living costs", None),
 ]
 # Live cams and jobs (links only). Every URL is example.com; the employers and postings are invented.
 CITE = {"as_of": AS_OF, "confidence": "estimated", "note": None}
@@ -287,7 +288,7 @@ def career_data():
         "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
-                       "lucrativeness": lucr(3200, 8900, 8900, rent_source=("median_rent", "fixture-resort-site, fixture-survey"),
+                       "lucrativeness": lucr(3200, 8900, 14600, rent_source=("median_rent", "fixture-resort-site, fixture-survey"),
                                              rent=RENT_MEDIAN),
                        "stale_fields": ["pay.level_1", "private_split"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
@@ -298,7 +299,7 @@ def career_data():
         "foxtrot-basin": {"pay": pay_rows(22, ["level_1", "level_2", "level_3"]),
                           "private_rate": sourced({"low": 700, "high": 950, "unit": "full_day"}),
                           "private_split": sourced(40, "fixture-model", "estimated"),
-                          "lucrativeness": lucr(4800, 10600, 10600, rent_source=("zillow_zori", "fixture-model"), rent=RENT_ZORI),
+                          "lucrativeness": lucr(4800, 10600, 16400, rent_source=("zillow_zori", "fixture-model"), rent=RENT_ZORI),
                           "stale_fields": ["lucrativeness.rent"]},
         "hotel-lake": {"pay": pay_rows(23, ["level_1", "level_2"]), "private_rate": None, "private_split": None,
                        "lucrativeness": lucr(None, None, None, "insufficient_data"),

@@ -378,22 +378,23 @@ line, never the resort).
   season months = `season.length_days` / `days_per_month` (30.4) when sourced, else `default_season_months` (5).
   earnings = hourly × `hours_per_week` (40, standard full time) × season months × `weeks_per_month` (4.33).
   net income = earnings + tips − median rent × season months. No food, transport, pass or gear offsets.
-  `mid` and `high` are the net income at the top of the posted wage scale (highest `hourly_high` of the displayed pay rows,
-  any cert level); `low` uses the bottom (lowest `hourly_low`). Tips only from a sourced or 3+ report figure, else 0 with
+  The wage range comes from the displayed pay rows, any cert level: bottom = lowest `hourly_low`, top = highest
+  `hourly_high`. `low` is the net income at the bottom, `high` at the top, and `mid` at the middle of the range,
+  (bottom + top) / 2 (owner decision 2026-10-14: the mid earnings case). Tips only from a sourced or 3+ report figure, else 0 with
   the stated assumption "Tips are not included yet". The median rent follows `rent.lucrativeness_rent` (owner decision
   2026-10-14, see "Lucrativeness rent" below): the median of the sourced median rent figures for the resort's town, else
   Zillow's typical rent (ZORI), else the county ACS median gross rent, else HUD FMR one bedroom. Employee housing rent no
   longer feeds lucrativeness. Status `insufficient_data` when there is no pay row or no rent; `assumptions_unset` only if hours or the
   default season months are null in config. `assumptions` (each `{key, value, label}`, labels ready to show):
-  `wage_top_usd`, `wage_bottom_usd`, `hours_per_week`, `season_months` (label says sourced length or standard season),
+  `wage_mid_usd` (label "Middle of the posted wage range (USD per hour)"), `wage_top_usd`, `wage_bottom_usd`, `hours_per_week`, `season_months` (label says sourced length or standard season),
   `season_months_basis` (`season_length` | `default`), `weeks_per_month`, `tips_season_usd` (label "Tips are not included
   yet" when null), `rent_monthly_usd` (label "Median rent per month (USD)", or "Zillow typical rent (ZORI) per month
   (USD)" and "HUD Fair Market Rent per month (USD)" for those steps), `rent_basis` (`median_rent` | `zillow_zori` |
   `acs_median` | `fmr_one_br` | ...), `rent_source_id` (several joined with ", "), `tax` (label "Before tax and other living costs").
   Wording (owner decision 2026-10-14): the panel heading and the Color by mode read "Estimated net income". The panel
-  shows `mid` as the one headline figure with the basis line "Top of the posted wage scale, 40 hours a week, minus
-  median rent. Before tax." (hours from `hours_per_week`), and lists `low` with the assumptions as "Bottom of the wage
-  scale". The figure is never called savings.
+  shows `mid` as the one headline figure with the basis line "Middle of the posted ski school wage range, 40 hours a
+  week, minus median rent. Before tax." (hours from `hours_per_week`), then "Range: $low to $high across the wage
+  scale." The figure is never called savings.
 * **Lucrativeness rent (owner decision 2026-10-14; `pipeline/rent_used.py`):** the first step of `rent.lucrativeness_rent`
   (`[median_rent, zillow_zori, acs_median, fmr_one_br]`) with a value becomes `lucrativeness.rent`; nothing is ever
   interpolated. Also available as steps: `employee_housing`, `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`.
@@ -1168,8 +1169,8 @@ same inset.
 ### Panel changes from the 2026-10-13 owner decisions
 * Professionalism: removed from the public site (owner decision, 2026-10-13). The panel, the list and compare views,
   the route stubs and their meta descriptions show no rating.
-* Lucrativeness (decision 4): the headline is `mid` (top of the posted wage scale), then the range "bottom of the
-  scale to top". Assumptions list every `{key, value, label}` except `rent_basis`, `rent_source_id` and
+* Lucrativeness (decision 4, wording and mid of 2026-10-14): the headline "Estimated net income" is `mid` (middle of
+  the posted wage range), then the basis line and "Range: $low to $high across the wage scale." Assumptions list every `{key, value, label}` except `rent_basis`, `rent_source_id` and
   `season_months_basis`; `tips_season_usd` (null) and `tax` show as statements from their labels. The rent line
   (`.rent-line`, owner decision 2026-10-14) renders `lucrativeness.rent`: "Median rent $2,275 a month for one bedroom in
   Vail, CO (median of 2 sources: Rentometer, Zumper), 2026", "single source" for one figure, "in the Bozeman metro" or

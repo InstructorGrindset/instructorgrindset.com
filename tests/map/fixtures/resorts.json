@@ -236,9 +236,14 @@
     "lucrativeness": {
      "low": 3200,
      "mid": 8900,
-     "high": 8900,
+     "high": 14600,
      "status": "computed",
      "assumptions": [
+      {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
       {
        "key": "wage_top_usd",
        "label": "Top of the posted wage scale, per hour",
@@ -281,7 +286,7 @@
       },
       {
        "key": "tax",
-       "label": "Savings are before tax",
+       "label": "Before tax and other living costs",
        "value": null
       },
       {
@@ -754,6 +759,11 @@
      "status": "assumptions_unset",
      "assumptions": [
       {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
        "key": "wage_top_usd",
        "label": "Top of the posted wage scale, per hour",
        "value": 32.5
@@ -795,7 +805,7 @@
       },
       {
        "key": "tax",
-       "label": "Savings are before tax",
+       "label": "Before tax and other living costs",
        "value": null
       }
      ],
@@ -1025,6 +1035,11 @@
      "status": "insufficient_data",
      "assumptions": [
       {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
        "key": "wage_top_usd",
        "label": "Top of the posted wage scale, per hour",
        "value": 32.5
@@ -1066,7 +1081,7 @@
       },
       {
        "key": "tax",
-       "label": "Savings are before tax",
+       "label": "Before tax and other living costs",
        "value": null
       }
      ],
@@ -1529,9 +1544,14 @@
     "lucrativeness": {
      "low": 4800,
      "mid": 10600,
-     "high": 10600,
+     "high": 16400,
      "status": "computed",
      "assumptions": [
+      {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
       {
        "key": "wage_top_usd",
        "label": "Top of the posted wage scale, per hour",
@@ -1574,7 +1594,7 @@
       },
       {
        "key": "tax",
-       "label": "Savings are before tax",
+       "label": "Before tax and other living costs",
        "value": null
       },
       {
@@ -1947,6 +1967,11 @@
      "status": "insufficient_data",
      "assumptions": [
       {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
        "key": "wage_top_usd",
        "label": "Top of the posted wage scale, per hour",
        "value": 32.5
@@ -1988,7 +2013,7 @@
       },
       {
        "key": "tax",
-       "label": "Savings are before tax",
+       "label": "Before tax and other living costs",
        "value": null
       }
      ],

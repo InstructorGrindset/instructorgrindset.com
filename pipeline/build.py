@@ -322,7 +322,8 @@ def build(
     for d in drafts:
         if d["id"] in facts:
             merge_facts(d, facts[d["id"]], cfg.definitions.display.priority)
-    official_maps, official_errors = load_official_trailmaps(raw_dir, registry, known_ids, rel)
+    official_maps, official_errors = load_official_trailmaps(raw_dir, registry, known_ids, rel,
+                                                             cfg.definitions.trailmap.official_image_domains)
     errors += official_errors
     for d in drafts:
         d["official_trailmap"] = official_trailmap_output(official_maps.get(d["id"]))

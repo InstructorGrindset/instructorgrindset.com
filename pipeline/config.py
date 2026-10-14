@@ -244,6 +244,8 @@ class TransitDefs(StrictModel):
 
 class TrailmapDefs(StrictModel):
     simplify_tolerance_m: float = Field(gt=0, le=50)
+    # Operator image CDNs an official trail map file (image_url) may load from, besides the resort's own site.
+    official_image_domains: list[str] = Field(default_factory=list)
 
 
 class RoutingDefs(StrictModel):

@@ -499,13 +499,16 @@ export function createPanel(root, index, {
     const body = [];
     if (l.status !== 'computed' || l.mid == null) body.push(h('p', { class: 'not-verified' }, statusText(l.status, 'assumptions_unset')));
     else {
-      // Owner wording (2026-10-14): one headline, the top of the posted wage scale (lucrativeness mid), and one
-      // basis line. The bottom of the scale (low) is listed with the assumptions.
+      // Owner decision 2026-10-14: the headline is the middle of the posted wage range (mid), with one basis line
+      // and the range from the bottom (low) to the top (high) of the scale.
       const hours = l.assumptions.find((a) => a.key === 'hours_per_week' && a.value != null);
       body.push(h('div', { class: 'sourced-main' },
         h('span', { class: 'fact-value' }, money(l.mid)), badge('estimated')));
-      body.push(h('span', { class: 'fact-meta lucr-basis' },
-        `Top of the posted wage scale${hours ? `, ${fmtAssumption(hours.key, hours.value)} hours a week` : ''}, minus median rent. Before tax.`));
+      body.push(h('p', { class: 'fact-meta lucr-basis' },
+        `Middle of the posted ski school wage range${hours ? `, ${fmtAssumption(hours.key, hours.value)} hours a week` : ''}, minus median rent. Before tax.`));
+      if (l.low != null && l.high != null && l.low !== l.high) {
+        body.push(h('p', { class: 'fact-meta lucr-range' }, `Range: ${money(l.low)} to ${money(l.high)} across the wage scale.`));
+      }
     }
     // rent_basis says which rent fed the model: "employee_housing:<site id>" or a baseline key (fmr_studio, acs_median);
     // rent_source_id is its source.
@@ -523,15 +526,11 @@ export function createPanel(root, index, {
     }
     if (listed.length) {
       body.push(h('p', { class: 'sub' }, 'Assumptions'),
-        h('ul', { class: 'assumptions' }, listed.map((a) => [h('li', null,
+        h('ul', { class: 'assumptions' }, listed.map((a) => h('li', null,
           statement(a)
             ? h('span', { class: 'assumption-statement' }, a.key.startsWith('tips') && !/not included/i.test(a.label) ? 'Tips are not included yet' : a.label)
             : [h('span', null, a.label), ' ', a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet')
-              : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))]),
-          // The bottom of the scale result (lucrativeness low) follows its wage.
-          a.key === 'wage_bottom_usd' && l.status === 'computed' && l.low != null
-            ? h('li', { class: 'assumption-low' }, h('span', null, 'Bottom of the wage scale:'), ' ', h('span', { class: 'assumption-value' }, money(l.low)))
-            : null]))));
+              : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))]))));
     }
     return h('div', null, body);
   }

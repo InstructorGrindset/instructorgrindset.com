@@ -1,19 +1,20 @@
 {
   "version": 2,
-  "generated_at": "2026-10-14T02:25:38Z",
+  "generated_at": "2026-10-14T04:03:46Z",
   "mode": "lucrativeness",
   "units": "usd",
   "scale": "linear",
   "domain": {
-    "min": -20000.0,
-    "max": 60000.0
+    "min": -10000.0,
+    "max": 40000.0
   },
   "ticks": [
-    -20000.0,
+    -10000.0,
     0.0,
+    10000.0,
     20000.0,
-    40000.0,
-    60000.0
+    30000.0,
+    40000.0
   ],
   "ramp": [
     "#414487",
@@ -44,7 +45,7 @@
     "fade_to": "neutral"
   },
   "attribution": null,
-  "inputs_sha256": "16ea89177d54b2d8415fe36e5891429fdc576ff077f8409f4f3196e225daefb4",
+  "inputs_sha256": "61c87f6c245d2fcc305e4832d2ec25aa821df7146a373f891240f2f563fb298d",
   "rasters": [
     {
       "region": "lower48",
@@ -69,7 +70,7 @@
           24.4
         ]
       ],
-      "bytes": 80664,
+      "bytes": 79751,
       "resorts": 41
     },
     {
@@ -95,7 +96,7 @@
           51.2
         ]
       ],
-      "bytes": 37047,
+      "bytes": 37002,
       "resorts": 1
     }
   ]

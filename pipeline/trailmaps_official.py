@@ -1,8 +1,10 @@
-"""Official resort trail map links (owner request 2026-10-13).
+"""Official resort trail maps (owner requests 2026-10-13 and 2026-10-14).
 
 data/raw/trailmaps_official/<batch>.yaml lists, per resort, the resort's own official trail map page or file
-(PDF, JPG or PNG on the resort's or its operator's domain). The build copies the link to Resort.official_trailmap.
-The maps themselves are copyrighted art: the site links to them and never downloads, rehosts or embeds them.
+(PDF, JPG or PNG on the resort's or its operator's domain) and, when found, the map file itself (`image_url`: a JPG,
+PNG, WebP or PDF on the resort's domain or its operator's image CDN). The build copies both to
+Resort.official_trailmap. The maps are copyrighted art: the trail map dialog shows the file straight from the
+resort's servers (hotlinked, credited) and the site never downloads, copies, rehosts or modifies it.
 """
 from __future__ import annotations
 
@@ -25,9 +27,23 @@ def registered_domain(host: Optional[str]) -> str:
     return ".".join(parts[-2:])
 
 
-def load_official_trailmaps(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], rel=str
-                            ) -> tuple[dict[str, OfficialTrailmapRecord], list[str]]:
-    """Validate data/raw/trailmaps_official/*.yaml. Returns ({resort_id: record}, errors)."""
+def image_domain_ok(image_url: str, page_url: str, source_url: Optional[str], cdn_domains) -> bool:
+    """The map file sits on the resort's own site (the page url's or the image source's registered domain) or on an
+    operator image CDN listed in config `trailmap.official_image_domains`. A listed entry matches its host name and
+    every subdomain ("vailresorts.com" covers scene7.vailresorts.com)."""
+    host = (urlparse(image_url).hostname or "").lower().rstrip(".")
+    own = {registered_domain(urlparse(page_url).hostname)}
+    if source_url:
+        own.add(registered_domain(urlparse(source_url).hostname))
+    if registered_domain(host) in own:
+        return True
+    return any(host == d or host.endswith("." + d) for d in (str(x).lower().strip(".") for x in cdn_domains or ()))
+
+
+def load_official_trailmaps(raw_dir: Path, registry: SourceRegistry, known_ids: set[str], rel=str,
+                            image_domains=()) -> tuple[dict[str, OfficialTrailmapRecord], list[str]]:
+    """Validate data/raw/trailmaps_official/*.yaml. Returns ({resort_id: record}, errors). image_domains: the
+    operator image CDN host names from config `trailmap.official_image_domains`."""
     from .tier_a import _register_sources, _yaml_files
 
     errors: list[str] = []
@@ -70,6 +86,16 @@ def load_official_trailmaps(raw_dir: Path, registry: SourceRegistry, known_ids: 
             if src is not None and registered_domain(urlparse(r.url).hostname) != registered_domain(urlparse(src.url).hostname):
                 errors.append(f"{label}: url domain {urlparse(r.url).hostname} differs from its source "
                               f"{urlparse(src.url).hostname}; link only the resort's or operator's own site")
+            if r.image_url is not None:
+                isrc = sources.get(r.image_source_id) or (registry.get(r.image_source_id) if r.image_source_id in registry else None)
+                if isrc is not None and not image_domain_ok(r.image_url, isrc.url, None, image_domains):
+                    errors.append(f"{label}: image_url host {urlparse(r.image_url).hostname} differs from its source "
+                                  f"{urlparse(isrc.url).hostname}; use the resort's site or a CDN in config "
+                                  f"trailmap.official_image_domains")
+                if not image_domain_ok(r.image_url, r.url, src.url if src is not None else None, image_domains):
+                    errors.append(f"{label}: image_url host {urlparse(r.image_url).hostname} is neither the resort's "
+                                  f"site ({urlparse(r.url).hostname}) nor an operator CDN in config "
+                                  f"trailmap.official_image_domains")
             out[r.resort_id] = r
             where[r.resort_id] = rel(p)
     return out, errors

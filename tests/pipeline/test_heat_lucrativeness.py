@@ -1,6 +1,6 @@
 """Lucrativeness heat rasters (pipeline/heat_lucrativeness.py) and their legend twin of map/js/heat.js.
 
-SYNTHETIC TEST FIXTURES: the resorts and savings below are invented. Never copy to data/.
+SYNTHETIC TEST FIXTURES: the resorts and net incomes below are invented. Never copy to data/.
 """
 import json
 import shutil

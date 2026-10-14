@@ -1,0 +1,80 @@
+{
+ "version": 1,
+ "generated_by": "pipeline/tools/make_underlay.py",
+ "generated_at": "2026-10-14T04:06:27Z",
+ "source": {
+  "id": "natural-earth-ne1-hr-lc-sr-w",
+  "url": "https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-1/",
+  "title": "Natural Earth I with Shaded Relief, Water and Drainages (1:10m, large size, version 2.0.0)",
+  "license": "public domain",
+  "download": "https://naturalearth.s3.amazonaws.com/10m_raster/NE1_HR_LC_SR_W.zip"
+ },
+ "attribution": "Relief: <a href=\"https://www.naturalearthdata.com/\" target=\"_blank\" rel=\"noopener\">Natural Earth</a>",
+ "projection": "rows evenly spaced in Web Mercator y, columns evenly spaced in longitude (MapLibre image source)",
+ "tone": {
+  "saturation": -0.35,
+  "contrast": -0.1,
+  "brightness_max": 0.62
+ },
+ "background": "#0a0e14",
+ "rasters": [
+  {
+   "region": "lower48",
+   "image": "underlay-lower48.webp",
+   "width": 3672,
+   "height": 2227,
+   "px_per_degree": 54.0,
+   "coordinates": [
+    [
+     -130.0,
+     53.0
+    ],
+    [
+     -62.0,
+     53.0
+    ],
+    [
+     -62.0,
+     21.0
+    ],
+    [
+     -130.0,
+     21.0
+    ]
+   ],
+   "feather_deg": 2.4,
+   "quality": 74,
+   "bytes": 255918,
+   "sha256": "8eec59bd0a1565d9bc7c4e84f18e89407f64f4402edec27bc3ef35b5feb591b0"
+  },
+  {
+   "region": "alaska",
+   "image": "underlay-alaska.webp",
+   "width": 1515,
+   "height": 1335,
+   "px_per_degree": 30.0,
+   "coordinates": [
+    [
+     -180.0,
+     71.6
+    ],
+    [
+     -129.5,
+     71.6
+    ],
+    [
+     -129.5,
+     51.2
+    ],
+    [
+     -180.0,
+     51.2
+    ]
+   ],
+   "feather_deg": 0.35,
+   "quality": 74,
+   "bytes": 80900,
+   "sha256": "a9b52899211ea766f33b760bb7d32b672310d3f2ebd4050b7f3bd7ba85e088ab"
+  }
+ ]
+}

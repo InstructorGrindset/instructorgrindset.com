@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T02:25:38Z",
+  "generated_at": "2026-10-14T04:03:46Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -403,7 +403,13 @@
         "source_id": "tmo-afton-alps",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -561,6 +567,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -613,7 +624,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -880,7 +891,13 @@
         "source_id": "tmo-alpine-valley-oh",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": {
@@ -1011,6 +1028,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -1063,7 +1085,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -1862,7 +1884,13 @@
         "source_id": "tmo-alyeska",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -2005,10 +2033,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 8006.0,
-          "mid": 18524.0,
+          "mid": 13265.0,
           "high": 18524.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 26.5,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 33.0,
@@ -2062,7 +2095,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -2848,7 +2881,13 @@
         "source_id": "tmo-arapahoe-basin",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -3064,10 +3103,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 11732.0,
-          "mid": 31803.0,
+          "mid": 21768.0,
           "high": 31803.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 27.625,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 35.25,
@@ -3121,7 +3165,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -3759,7 +3803,13 @@
         "source_id": "tmo-aspen-highlands",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -3945,10 +3995,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -1296.0,
-          "mid": 15897.0,
+          "mid": 7300.0,
           "high": 15897.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 44.51,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 56.98,
@@ -4002,7 +4057,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -4223,7 +4278,13 @@
         "source_id": "tmo-aspen-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -4409,10 +4470,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -1543.0,
-          "mid": 18919.0,
+          "mid": 8688.0,
           "high": 18919.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 44.51,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 56.98,
@@ -4466,7 +4532,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -4683,7 +4749,13 @@
         "source_id": "tmo-attitash",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -4836,10 +4908,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 5976.0,
-          "mid": 36795.0,
+          "mid": 21385.0,
           "high": 36795.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -4893,7 +4970,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -5873,7 +5950,13 @@
         "source_id": "tmo-bear-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -6686,7 +6769,13 @@
         "source_id": "tmo-beaver-creek",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -6839,10 +6928,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 9437.0,
-          "mid": 44552.0,
+          "mid": 26995.0,
           "high": 44552.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -6896,7 +6990,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -7619,7 +7713,13 @@
         "source_id": "tmo-berkshire-east",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -7958,7 +8058,13 @@
         "source_id": "tmo-jack-frost",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": "The file name carries an older date; the resort may have a newer map."
+        "note": "The file name carries an older date; the resort may have a newer map.",
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -8093,10 +8199,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 7385.0,
-          "mid": 30879.0,
+          "mid": 19132.0,
           "high": 30879.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -8150,7 +8261,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -8788,7 +8899,13 @@
         "source_id": "tmo-big-sky",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -8968,10 +9085,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 7563.0,
-          "mid": 40308.0,
+          "mid": 23936.0,
           "high": 40308.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 39.46,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 58.0,
@@ -9025,7 +9147,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -9297,6 +9419,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": null,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": null,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -9349,7 +9476,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -10012,7 +10139,13 @@
         "source_id": "tmo-black-mountain-maine",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": {
@@ -11183,7 +11316,13 @@
         "source_id": "tmo-bogus-basin",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -11699,7 +11838,13 @@
         "source_id": "tmo-boston-mills",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -11829,6 +11974,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 20.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -11881,7 +12031,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -12382,7 +12532,13 @@
         "source_id": "tmo-boyne-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -12627,7 +12783,13 @@
         "source_id": "tmo-boston-mills",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -12757,6 +12919,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 20.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -12809,7 +12976,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -13166,7 +13333,13 @@
         "source_id": "tmo-breckenridge",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -13338,10 +13511,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -16607.0,
-          "mid": 29321.0,
+          "mid": 6357.0,
           "high": 29321.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.67,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -13395,7 +13573,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -13889,7 +14067,13 @@
         "source_id": "tmo-bridger-bowl",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -14006,6 +14190,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": null,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": null,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -14058,7 +14247,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -14229,7 +14418,13 @@
         "source_id": "tmo-brighton",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -15178,7 +15373,13 @@
         "source_id": "tmo-buck-hill",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -15295,6 +15496,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 13.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 13.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -15347,7 +15553,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -16019,7 +16225,13 @@
         "source_id": "tmo-buttermilk",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -16205,10 +16417,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -1189.0,
-          "mid": 14583.0,
+          "mid": 6697.0,
           "high": 14583.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 44.51,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 56.98,
@@ -16262,7 +16479,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -17461,7 +17678,13 @@
         "source_id": "tmo-cannon",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -20250,7 +20473,13 @@
         "source_id": "tmo-copper-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -20417,10 +20646,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 10507.0,
-          "mid": 16865.0,
+          "mid": 13686.0,
           "high": 16865.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 24.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 27.0,
@@ -20474,7 +20708,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -21175,7 +21409,13 @@
         "source_id": "tmo-cranmore",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -21637,7 +21877,13 @@
         "source_id": "tmo-crested-butte",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -21803,10 +22049,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 8528.0,
-          "mid": 41874.0,
+          "mid": 25201.0,
           "high": 41874.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -21860,7 +22111,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -22026,7 +22277,13 @@
         "source_id": "tmo-crotched-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -22184,6 +22441,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -22236,7 +22498,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -22380,7 +22642,13 @@
         "source_id": "tmo-crystal-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": "https://www.crystalmountainresort.com/-/media/crystal/pdf-files/trail-maps/2025-trail-maps/crystal_2526_smartwool_map.pdf?rev=a8b85630fceb457c84e920dd24d3bffd",
+        "image_format": "pdf",
+        "image_source_id": "tmi-crystal-mountain",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -22553,6 +22821,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 30.625,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 41.25,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -22605,7 +22878,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -23305,7 +23578,13 @@
         "source_id": "tmo-deer-valley",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -23525,10 +23804,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 7612.0,
-          "mid": 36085.0,
+          "mid": 21848.0,
           "high": 36085.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 38.51,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 57.02,
@@ -23582,7 +23866,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -24608,7 +24892,13 @@
         "source_id": "tmo-sun-valley",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -27581,7 +27871,13 @@
         "source_id": "tmo-grand-targhee",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -28857,7 +29153,13 @@
         "source_id": "tmo-gunstock",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -29464,7 +29766,13 @@
         "source_id": "tmo-heavenly",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -29607,10 +29915,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 5686.0,
-          "mid": 43218.0,
+          "mid": 24452.0,
           "high": 43218.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.67,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -29664,7 +29977,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -30048,10 +30361,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 1676.0,
-          "mid": 30869.0,
+          "mid": 16273.0,
           "high": 30869.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 39.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 60.0,
@@ -30105,7 +30423,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -30696,7 +31014,13 @@
         "source_id": "tmo-hidden-valley-mo",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -30844,6 +31168,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.67,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -30896,7 +31225,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -31024,7 +31353,13 @@
         "source_id": "tmo-hidden-valley-pa",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -31154,6 +31489,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.67,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -31206,7 +31546,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -32404,7 +32744,13 @@
         "source_id": "tmo-howelsen-hill",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": null,
@@ -32795,7 +33141,13 @@
         "source_id": "tmo-hunter-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -32967,6 +33319,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -33019,7 +33376,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -33274,7 +33631,13 @@
         "source_id": "tmo-hyland-hills",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": "Hosted by Three Rivers Park District, which owns and operates the ski area."
+        "note": "Hosted by Three Rivers Park District, which owns and operates the ski area.",
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": null,
@@ -33425,7 +33788,13 @@
         "source_id": "tmo-jack-frost",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": "The file name carries an older date; the resort may have a newer map."
+        "note": "The file name carries an older date; the resort may have a newer map.",
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -33560,10 +33929,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 8655.0,
-          "mid": 36191.0,
+          "mid": 22423.0,
           "high": 36191.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -33617,7 +33991,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -33913,7 +34287,13 @@
         "source_id": "tmo-jackson-hole",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -34098,6 +34478,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": null,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": null,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -34150,7 +34535,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -34382,7 +34767,13 @@
         "source_id": "tmo-jay-peak",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -34509,6 +34900,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.125,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 23.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -34561,7 +34957,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -34850,7 +35246,13 @@
         "source_id": "tmo-june-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -35034,10 +35436,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -136.0,
-          "mid": 16244.0,
+          "mid": 8054.0,
           "high": 16244.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 32.5,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 45.0,
@@ -35091,7 +35498,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -35980,7 +36387,13 @@
         "source_id": "tmo-keystone",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -36146,10 +36559,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 7923.0,
-          "mid": 47332.0,
+          "mid": 27628.0,
           "high": 47332.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -36203,7 +36621,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -36437,7 +36855,13 @@
         "source_id": "tmo-killington",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -36850,7 +37274,13 @@
         "source_id": "tmo-kirkwood",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -37677,7 +38107,13 @@
         "source_id": "tmo-laurel-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": "The file name carries an older date; the resort may have a newer map."
+        "note": "The file name carries an older date; the resort may have a newer map.",
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -37807,6 +38243,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 20.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -37859,7 +38300,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -38299,7 +38740,13 @@
         "source_id": "tmo-liberty-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -38471,6 +38918,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -38523,7 +38975,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -40261,7 +40713,13 @@
         "source_id": "tmo-mad-river-glen",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -40377,6 +40835,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": null,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": null,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -40429,7 +40892,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -40600,7 +41063,13 @@
         "source_id": "tmo-mad-river-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": {
@@ -40838,7 +41307,13 @@
         "source_id": "tmo-magic-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": {
@@ -40959,6 +41434,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": null,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": null,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -41011,7 +41491,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -41294,7 +41774,13 @@
         "source_id": "tmo-mammoth-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -41545,10 +42031,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -231.0,
-          "mid": 27544.0,
+          "mid": 13656.0,
           "high": 27544.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 32.5,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 45.0,
@@ -41602,7 +42093,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -42811,7 +43302,13 @@
         "source_id": "tmo-middlebury-snow-bowl",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -42928,6 +43425,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 17.5,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 17.5,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -42980,7 +43482,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -43955,7 +44457,13 @@
         "source_id": "tmo-montana-snowbowl",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -44508,7 +45016,13 @@
         "source_id": "tmo-mount-bohemia",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": null,
@@ -44676,7 +45190,13 @@
         "source_id": "tmo-mount-brighton",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -46253,7 +46773,13 @@
         "source_id": "tmo-mount-snow",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -46420,10 +46946,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 3745.0,
-          "mid": 41385.0,
+          "mid": 22565.0,
           "high": 41385.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -46477,7 +47008,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -46778,7 +47309,13 @@
         "source_id": "tmo-mount-sunapee",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -46936,6 +47473,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -46988,7 +47530,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -47757,7 +48299,13 @@
         "source_id": "tmo-mt-bachelor",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -47927,6 +48475,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 16.5,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 16.5,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -47979,7 +48532,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -48157,7 +48710,13 @@
         "source_id": "tmo-mt-baker",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": {
@@ -48297,6 +48856,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 17.13,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 17.13,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -48349,7 +48913,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -48943,7 +49507,13 @@
         "source_id": "tmo-mt-hood-meadows",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -50841,7 +51411,13 @@
         "source_id": "tmo-northstar",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -50994,10 +51570,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -3776.0,
-          "mid": 46179.0,
+          "mid": 21202.0,
           "high": 46179.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 53.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 85.0,
@@ -51051,7 +51632,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -51945,7 +52526,13 @@
         "source_id": "tmo-okemo",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": "https://www.okemo.com/-/aemasset/sitecore/okemo/maps/winter-2025-2026/20251120_OK_winter-trail_map_001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-okemo",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -52085,6 +52672,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -52137,7 +52729,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -52649,7 +53241,13 @@
         "source_id": "tmo-palisades-tahoe",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -52818,10 +53416,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -4988.0,
-          "mid": 13677.0,
+          "mid": 4344.0,
           "high": 13677.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 30.05,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 39.1,
@@ -52875,7 +53478,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -53086,7 +53689,13 @@
         "source_id": "tmo-palisades-tahoe",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -53414,7 +54023,13 @@
         "source_id": "tmo-paoli-peaks",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -53562,6 +54177,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 20.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -53614,7 +54234,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -53759,7 +54379,13 @@
         "source_id": "tmo-park-city",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": "https://www.parkcitymountain.com/-/aemasset/sitecore/park-city/maps/20251114_PC_winter-trail_map_001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-park-city",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -53949,10 +54575,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 9312.0,
-          "mid": 46350.0,
+          "mid": 27831.0,
           "high": 46350.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.67,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -54006,7 +54637,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -54921,7 +55552,13 @@
         "source_id": "tmo-pico",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -56432,7 +57069,13 @@
         "source_id": "tmo-powder-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -58470,7 +59113,13 @@
         "source_id": "tmo-roundtop-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -59860,7 +60509,13 @@
         "source_id": "tmo-schweitzer",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -60030,10 +60685,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 892.0,
-          "mid": 3234.0,
+          "mid": 2063.0,
           "high": 3234.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 16.5,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 18.0,
@@ -60087,7 +60747,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -60488,7 +61148,13 @@
         "source_id": "tmo-seven-springs",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -60652,6 +61318,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -60704,7 +61375,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -61461,7 +62132,13 @@
         "source_id": "tmo-silverton-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": null,
       "jobs": {
@@ -62678,7 +63355,13 @@
         "source_id": "tmo-ski-cooper",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -64427,7 +65110,13 @@
         "source_id": "tmo-snow-creek",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -65159,7 +65848,13 @@
         "source_id": "tmo-bear-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -65578,7 +66273,13 @@
         "source_id": "tmo-bear-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -65743,6 +66444,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.9,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 22.8,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -65795,7 +66501,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -65964,7 +66670,13 @@
         "source_id": "tmo-snowbasin",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -66288,7 +67000,13 @@
         "source_id": "tmo-snowbird",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -66460,6 +67178,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": null,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": null,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -66512,7 +67235,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -66927,7 +67650,13 @@
         "source_id": "tmo-snowmass",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -67113,10 +67842,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -1468.0,
-          "mid": 17999.0,
+          "mid": 8266.0,
           "high": 17999.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 44.51,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 56.98,
@@ -67170,7 +67904,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -67390,7 +68124,13 @@
         "source_id": "tmo-snowshoe",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -67567,6 +68307,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 15.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 15.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -67619,7 +68364,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -68218,7 +68963,13 @@
         "source_id": "tmo-solitude",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -69068,7 +69819,13 @@
         "source_id": "tmo-steamboat",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -69232,10 +69989,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -3433.0,
-          "mid": -3006.0,
+          "mid": -3220.0,
           "high": -3006.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 18.75,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 19.0,
@@ -69289,7 +70051,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -69593,7 +70355,13 @@
         "source_id": "tmo-stevens-pass",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": "https://www.stevenspass.com/-/aemasset/sitecore/stevens-pass/maps/winter-2024-2025/20241115_SV_winter-trail_map_001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-stevens-pass",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file is the 2024/25 map; the resort may have a newer one."
       },
       "webcams": {
         "cams_page": {
@@ -69741,6 +70509,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.67,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -69793,7 +70566,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -70053,7 +70826,13 @@
         "source_id": "tmo-stowe",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -70214,10 +70993,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 8981.0,
-          "mid": 48643.0,
+          "mid": 28812.0,
           "high": 48643.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -70271,7 +71055,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -70464,7 +71248,13 @@
         "source_id": "tmo-stratton",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -70654,6 +71444,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 20.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -70706,7 +71501,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -70900,7 +71695,13 @@
         "source_id": "tmo-sugar-bowl",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -71074,10 +71875,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": -4556.0,
-          "mid": 11055.0,
+          "mid": 3249.0,
           "high": 11055.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 30.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 40.0,
@@ -71131,7 +71937,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -71477,7 +72283,13 @@
         "source_id": "tmo-sugarbush",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": "https://www.sugarbush.com/-/media/sugarbush/maps/sugarbush-winter-trail-map.pdf?rev=4ed4b3ef5cb64ca889a0756e61a95422",
+        "image_format": "pdf",
+        "image_source_id": "tmi-sugarbush",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -71641,6 +72453,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 18.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 18.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -71693,7 +72510,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -71871,7 +72688,13 @@
         "source_id": "tmo-sugarloaf",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -72077,6 +72900,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 17.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 17.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -72129,7 +72957,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -72731,7 +73559,13 @@
         "source_id": "tmo-sun-valley",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -72893,6 +73727,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 19.18,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 19.18,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -72945,7 +73784,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -73433,7 +74272,13 @@
         "source_id": "tmo-sunday-river",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -73649,6 +74494,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 20.75,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 25.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -73701,7 +74551,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -74782,7 +75632,13 @@
         "source_id": "tmo-taos",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -75065,7 +75921,13 @@
         "source_id": "tmo-telluride",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -75226,10 +76088,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 12568.0,
-          "mid": 33896.0,
+          "mid": 23232.0,
           "high": 33896.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 45.12,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 59.63,
@@ -75283,7 +76150,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -75922,7 +76789,13 @@
         "source_id": "tmo-the-highlands",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -77234,7 +78107,13 @@
         "source_id": "tmo-timberline-lodge",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -77383,6 +78262,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 16.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 16.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -77435,7 +78319,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -79481,7 +80365,13 @@
         "source_id": "tmo-vail",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": "https://www.vail.com/-/aemasset/sitecore/vail/maps/winter-2024-2025/20250103_VL_winter-front-side-trail_map_001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-vail",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "Front Side map for 2024/25; the Back Bowls have their own map. The resort may have a newer one."
       },
       "webcams": {
         "cams_page": {
@@ -80690,7 +81580,13 @@
         "source_id": "tmo-waterville-valley",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -81623,7 +82519,13 @@
         "source_id": "tmo-whiteface",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -81791,6 +82693,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 19.145,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 21.97,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -81843,7 +82750,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -81992,7 +82899,13 @@
         "source_id": "tmo-whitefish-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -82248,7 +83161,13 @@
         "source_id": "tmo-whitetail",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -82406,6 +83325,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -82458,7 +83382,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -82722,7 +83646,13 @@
         "source_id": "tmo-wildcat",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -82875,10 +83805,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 8425.0,
-          "mid": 51875.0,
+          "mid": 30150.0,
           "high": 51875.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 64.34,
@@ -82932,7 +83867,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -83340,7 +84275,13 @@
         "source_id": "tmo-wilmot-mountain",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -83488,6 +84429,11 @@
           "status": "insufficient_data",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 42.17,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 64.34,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -83540,7 +84486,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": null
@@ -83811,7 +84757,13 @@
         "source_id": "tmo-winter-park",
         "as_of": "2026-10-13",
         "confidence": "estimated",
-        "note": null
+        "note": null,
+        "image_url": null,
+        "image_format": null,
+        "image_source_id": null,
+        "image_as_of": null,
+        "image_confidence": null,
+        "image_note": null
       },
       "webcams": {
         "cams_page": {
@@ -83978,10 +84930,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 13403.0,
-          "mid": 40921.0,
+          "mid": 27162.0,
           "high": 40921.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 33.075,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 45.15,
@@ -84035,7 +84992,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -85273,6 +86230,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 18.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 18.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -85325,7 +86287,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -85584,6 +86546,11 @@
           "status": "computed",
           "assumptions": [
             {
+              "key": "wage_mid_usd",
+              "value": 21.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
+            {
               "key": "wage_top_usd",
               "value": 21.0,
               "label": "Top of the posted wage scale (USD per hour)"
@@ -85636,7 +86603,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {
@@ -86147,10 +87114,15 @@
         "private_split": null,
         "lucrativeness": {
           "low": 8612.0,
-          "mid": 26410.0,
+          "mid": 17511.0,
           "high": 26410.0,
           "status": "computed",
           "assumptions": [
+            {
+              "key": "wage_mid_usd",
+              "value": 34.0,
+              "label": "Middle of the posted wage range (USD per hour)"
+            },
             {
               "key": "wage_top_usd",
               "value": 45.0,
@@ -86204,7 +87176,7 @@
             {
               "key": "tax",
               "value": null,
-              "label": "Savings are before tax"
+              "label": "Before tax and other living costs"
             }
           ],
           "rent": {

@@ -97,14 +97,16 @@ def test_median_rent_then_zori_reach_lucrativeness_and_its_heat_map(repo_root, r
     assert peak["rent"]["publishers"] == ["Zumper", "Rentometer", "Redfin"] and peak["rent"]["count"] == 3
     assert peak["rent"]["source_ids"] == ["fx-zumper-peak", "fx-rentometer-peak", "fx-redfin-peak"]
     assert peak["rent"]["geography"] == {"level": "city", "id": None, "name": "Fixture Town, CO"}
-    assert peak["status"] == "computed" and peak["mid"] == round(24 * 40 * 5 * 4.33 - 2400 * 5)
+    # mid at the middle of the 20 to 24 range (owner decision 2026-10-14), high at the top
+    assert peak["status"] == "computed" and peak["mid"] == round(22 * 40 * 5 * 4.33 - 2400 * 5)
+    assert peak["high"] == round(24 * 40 * 5 * 4.33 - 2400 * 5)
     # Fixture Basin: no median figure, so the hand placed ZORI county file (refreshed into the extract)
     basin = by["fixture-basin"]["career"]["lucrativeness"]
     assert basin["rent"]["basis"] == "zillow_zori" and basin["rent"]["label"] == "Zillow typical rent (ZORI)"
     assert basin["rent"]["value"] == 1810 and basin["rent"]["as_of"] == "2026-08-31"
     assert basin["rent"]["confidence"] == "published" and basin["rent"]["source_ids"] == ["zillow-zori"]
     assert basin["rent"]["geography"] == {"level": "county", "id": "49998", "name": "Basin Fixture County, UT"}
-    assert basin["mid"] == round(23 * 40 * 5 * 4.33 - 1810 * 5)
+    assert basin["mid"] == round(21 * 40 * 5 * 4.33 - 1810 * 5) and basin["high"] == round(23 * 40 * 5 * 4.33 - 1810 * 5)
     extract = (raw_dir / "rent" / "zillow" / "zori_extract.csv").read_text().splitlines()
     assert len(extract) == 3 and extract[0].startswith("level,region_id")
     sources = {s["id"]: s for s in json.loads((out / "sources.json").read_text())["sources"]}
