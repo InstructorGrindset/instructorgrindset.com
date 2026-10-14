@@ -1,4 +1,5 @@
-"""The rent lucrativeness uses: the first available step of ``rent.lucrativeness_rent``, as one RentUsed block.
+"""The town's rent: the first available step of ``rent.lucrativeness_rent``, as one RentUsed block. It shows in the
+Housing section and no longer feeds lucrativeness (owner decision 2026-10-14).
 
 Default order (owner decision 2026-10-14): ``median_rent`` (the median of the sourced median rent figures for the
 resort's town, pipeline/rent_median.py), then ``zillow_zori`` (Zillow's typical rent, pipeline/rent_zillow.py; a

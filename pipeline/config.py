@@ -157,7 +157,6 @@ class LucrativenessAssumptions(StrictModel):
     default_season_months: Optional[float] = Field(default=None, gt=0)
     days_per_month: float = Field(default=30.4, gt=0)
     weeks_per_month: float = Field(default=4.33, gt=0)
-    tips_season_usd: Optional[float] = Field(default=None, ge=0)
 
 
 class LucrativenessDefs(StrictModel):

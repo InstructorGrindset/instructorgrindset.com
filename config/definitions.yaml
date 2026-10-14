@@ -101,22 +101,19 @@ professionalism:
   min_components: null
 
 lucrativeness:
-  # Owner decision 4 (2026-10-13). Estimated net income for the season, before tax and other living costs, USD:
+  # Owner decisions 4 (2026-10-13) and 2026-10-14. Estimated net income for the season, before tax, USD:
   #   season months = season length days / days_per_month when sourced, else default_season_months
-  #   earnings      = hourly x hours_per_week x (season months x weeks_per_month)
-  #   net income    = earnings + tips - median rent x season months
-  # Wage range from the displayed pay rows: bottom = lowest hourly_low, top = highest hourly_high.
-  # mid uses the middle of the range, (bottom + top) / 2 (owner decision 2026-10-14), shows as "Estimated net income"
-  # and colors the map; low uses the bottom and high the top, shown as the range. No food, transport, pass or gear offsets.
-  # The median rent follows rent.lucrativeness_rent. Computed with pipeline/season_income.py (the calculator's model).
+  #   net income    = hourly x hours_per_week x (season months x weeks_per_month)
+  # No rent, tips, tax or other living costs. Wage range from the displayed pay rows: bottom = lowest hourly_low,
+  # top = highest hourly_high. mid uses the middle of the range, (bottom + top) / 2, shows as "Estimated net income"
+  # and colors the map; low uses the bottom and high the top, shown as the range.
+  # Computed with pipeline/season_income.py (the calculator's model) with rent, tips and every offset at 0.
+  # The median rent (rent.lucrativeness_rent) still builds and shows in the Housing section only.
   assumptions:
     hours_per_week: 40          # standard full time hours (ROADMAP Section 6)
     default_season_months: 5    # when the resort has no sourced season length
     days_per_month: 30.4
     weeks_per_month: 4.33       # same as the Season Income Calculator
-    # Season tips (USD). Included only from a sourced figure or an aggregate of 3+ reports; null means
-    # "Tips are not included yet". There is no tips data yet.
-    tips_season_usd: null
 
 rent:
   # Order of baseline values used for a housing site with no published rent (shown as
@@ -199,8 +196,12 @@ trailmap:
   # Official trail map files (data/raw/trailmaps_official image_url) load straight from the resort's servers.
   # The build accepts an image_url on the resort's own site (the registered domain of its page url or source)
   # or on one of these operator image CDNs. Each entry matches that host and its subdomains.
+  # Every file in the 2026-10 batch sits on the resort's own site, so none needs this list yet. A search for the
+  # Vail Resorts Scene7 host (scene7.vailresorts.com) surfaced no file, so no record uses it.
   official_image_domains:
-    - vailresorts.com     # Vail Resorts: Adobe Scene7 image CDN (scene7.vailresorts.com) for its resort sites
+    - vailresorts.com     # Vail Resorts' own domain and its image hosts (scene7.vailresorts.com)
+    - snow.com            # Vail Resorts' shared site for its resorts
+    - alterramtnco.com    # Alterra Mountain Company's own domain and its image hosts
 
 routing:
   # Drive time, distance and route geometry (housing to base area) and drive isochrones around the base.

@@ -230,7 +230,7 @@ class LucrativenessOut(StrictModel):
     high: Optional[float] = None
     status: Literal["computed", "assumptions_unset", "insufficient_data"]
     assumptions: list[Assumption]
-    rent: Optional[RentUsed] = None   # the median rent (or fallback) the model used, with every source
+    rent: Optional[RentUsed] = None   # the town's median rent (or fallback) for the Housing section; never in the figure
 
     @model_validator(mode="after")
     def _status(self) -> "LucrativenessOut":

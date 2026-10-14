@@ -60,10 +60,13 @@ BACKGROUND = (0x0A, 0x0E, 0x14)
 # Baked in, so the 2D picture and the WebGL map show the same pixels (the map draws it with a neutral paint).
 TONE = {"saturation": -0.3, "contrast": 0.05, "brightness_max": 0.55, "gamma": 1.4}
 
-# Boxes (west, south, east, north). The lower 48 box reaches past the national view so its fading edge stays off the
-# states. The Alaska box is the inset's source box in map/js/inset.js, so the inset copy fills its frame exactly.
+# Boxes (west, south, east, north). The lower 48 box reaches well past the national view so its fading edge stays off
+# the states. The Alaska box is the inset's source box in map/js/inset.js, so the inset copy fills its frame exactly.
+# Each image stays within MAX_SIDE pixels: MapLibre uploads an image source as one WebGL texture, and many phones cap
+# textures at 4096 pixels a side.
+MAX_SIDE = 4096
 REGIONS = {
-    "lower48": {"box": (-130.0, 21.0, -62.0, 53.0), "px_per_degree": 60.0, "feather_deg": 2.4, "max_bytes": 600_000},
+    "lower48": {"box": (-131.0, 17.0, -61.0, 55.0), "px_per_degree": 58.0, "feather_deg": 2.4, "max_bytes": 600_000},
     "alaska": {"box": (-180.0, 51.2, -129.5, 71.6), "px_per_degree": 36.0, "feather_deg": 0.35, "max_bytes": 250_000},
 }
 QUALITY_START, QUALITY_MIN, QUALITY_STEP = 74, 40, 4
@@ -218,6 +221,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     rasters = []
     for region, spec in REGIONS.items():
         grid = region_grid(spec["box"], spec["px_per_degree"])
+        if max(grid.width, grid.height) > MAX_SIDE:
+            raise SystemExit(f"{region}: {grid.width} x {grid.height} is over {MAX_SIDE} pixels a side")
         im = resample(src, grid).convert("RGB", matrix).point(lut)
         im = feather(im, spec["feather_deg"] * spec["px_per_degree"])
         data, quality = encode(im, spec["max_bytes"])

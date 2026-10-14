@@ -8,7 +8,7 @@ import {
 import { hrefFor } from './router.js';
 import { clusterHiring, jobsSection, liveCams } from './livelinks.js';
 import {
-  h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, humanize, joinAnd, markdown,
+  h, clear, safeUrl, formatIsoDate, formatMonthDay, fmtInt, fmt1, plural, joinAnd, markdown,
 } from './ui.js';
 
 // Chart.js and the chart code load only when a resort or comparison shows climate data.
@@ -49,7 +49,6 @@ export const fmt = {
   text: (v) => String(v),
 };
 
-const nf2 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
 const usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 /** Whole dollars, or cents when digits is set and the value has a fraction. */
@@ -69,6 +68,20 @@ export function officialTrailmapLink(r) {
   return h('p', { class: 'official-trailmap' },
     h('a', { href: url, target: '_blank', rel: 'noopener noreferrer', class: 'official-trailmap-link' }, `Official trail map from ${r.name}`),
     h('span', { class: 'fact-meta' }, ` ${bits.join(' · ')}`));
+}
+
+/**
+ * The official map file the trail map dialog shows from the resort's servers: image_url (jpg, png, webp or pdf), else
+ * the url when it is itself a file. { url, format, note, page } or null. page is the resort's page link.
+ */
+export function officialMapFile(r) {
+  const o = r && r.official_trailmap;
+  if (!o) return null;
+  const page = safeUrl(o.url);
+  const image = o.image_url && o.image_format ? safeUrl(o.image_url) : null;
+  if (image) return { url: image, format: o.image_format, note: o.image_note || null, page };
+  if (page && o.format !== 'page') return { url: page, format: o.format, note: o.note || null, page };
+  return null;
 }
 
 export function badge(confidence) {
@@ -439,16 +452,18 @@ export function createPanel(root, index, {
   /** The resort's official trail map (a link, never shown in the page) and the interactive OpenSkiMap drawing. */
   function trailMaps(r) {
     const official = officialTrailmapLink(r);
-    const drawn = r.trailmap_available && onTrailMap
+    const file = officialMapFile(r);
+    const views = [file ? `Official map from ${r.name}` : null, r.trailmap_available ? 'Interactive map from OpenSkiMap' : null].filter(Boolean);
+    const open = views.length && onTrailMap
       ? h('button', {
         type: 'button', class: 'btn btn-sm btn-ghost', 'aria-haspopup': 'dialog',
         onclick: (e) => onTrailMap(r, e.currentTarget),
-      }, 'Open the interactive map')
+      }, 'Open the trail map')
       : null;
-    if (!official && !drawn) return null;
+    if (!official && !open) return null;
     return h('div', { class: 'trailmap-open' },
       official,
-      drawn ? h('p', { class: 'trailmap-drawn' }, drawn, h('span', { class: 'fact-meta' }, ' Interactive map from OpenSkiMap')) : null);
+      open ? h('p', { class: 'trailmap-drawn' }, open, h('span', { class: 'fact-meta' }, ` ${views.join(' · ')}`)) : null);
   }
 
   function careerSection(r) {
@@ -461,7 +476,7 @@ export function createPanel(root, index, {
       h('dl', { class: 'facts career-facts' },
         fact('Private lesson rate', c.private_rate, fmtRate, { stale: stale.has('private_rate') }),
         fact('Instructor split', c.private_split, (v) => `${fmt1(v)}% to the instructor`, { stale: stale.has('private_split') })),
-      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Estimated net income'), lucrativeness(c.lucrativeness)));
+      h('div', { class: 'score-block' }, h('p', { class: 'sub' }, 'Estimated net income'), lucrativeness(c.lucrativeness, r)));
   }
 
   function fmtRate(v) {
@@ -494,48 +509,24 @@ export function createPanel(root, index, {
     return 'Scoring model is being finalized';
   }
 
-  function lucrativeness(l) {
+  // Owner decisions 2026-10-14: only the figure at the middle of the posted wage range (mid) and the range from the
+  // bottom (low) to the top (high). No formula, assumptions or rent here (the method is in config/definitions.yaml
+  // and docs/map/ARCHITECTURE.md); the links cite the pay rows and the season length it comes from.
+  function lucrativeness(l, r) {
     if (!l) return h('p', { class: 'not-verified' }, 'Not enough verified data yet');
-    const body = [];
-    if (l.status !== 'computed' || l.mid == null) body.push(h('p', { class: 'not-verified' }, statusText(l.status, 'assumptions_unset')));
-    else {
-      // Owner decision 2026-10-14: the headline is the middle of the posted wage range (mid), with one basis line
-      // and the range from the bottom (low) to the top (high) of the scale.
-      const hours = l.assumptions.find((a) => a.key === 'hours_per_week' && a.value != null);
-      body.push(h('div', { class: 'sourced-main' },
-        h('span', { class: 'fact-value' }, money(l.mid)), badge('estimated')));
-      body.push(h('p', { class: 'fact-meta lucr-basis' },
-        `Middle of the posted ski school wage range${hours ? `, ${fmtAssumption(hours.key, hours.value)} hours a week` : ''}, minus median rent. Before tax.`));
-      if (l.low != null && l.high != null && l.low !== l.high) {
-        body.push(h('p', { class: 'fact-meta lucr-range' }, `Range: ${money(l.low)} to ${money(l.high)} across the wage scale.`));
-      }
-    }
-    // rent_basis says which rent fed the model: "employee_housing:<site id>" or a baseline key (fmr_studio, acs_median);
-    // rent_source_id is its source.
-    const basis = l.assumptions.find((a) => a.key === 'rent_basis' && a.value != null);
-    const basisSource = l.assumptions.find((a) => a.key === 'rent_source_id' && a.value != null);
-    // rent_basis and rent_source_id show as the "Rent used" line; season_months_basis is in the season months label.
-    const listed = l.assumptions.filter((a) => !['rent_basis', 'rent_source_id', 'season_months_basis'].includes(a.key));
-    // Statements carry their meaning in the label (owner decision 4): tips not included yet, before tax.
-    const statement = (a) => a.key === 'tax' || (a.key.startsWith('tips') && (a.value == null || a.value === 0));
-    if (l.rent) body.push(rentLine(l.rent));
-    else if (basis) {
-      body.push(h('p', { class: 'fact-meta' },
-        h('span', { class: 'rent-used', dataset: { source: String(basis.value) } }, rentUsedText(String(basis.value), currentDetail)),
-        basisSource ? String(basisSource.value).split(',').map((id, i) => [i ? ', ' : ' ', sourceLink(id.trim())]) : null));
-    }
-    if (listed.length) {
-      body.push(h('p', { class: 'sub' }, 'Assumptions'),
-        h('ul', { class: 'assumptions' }, listed.map((a) => h('li', null,
-          statement(a)
-            ? h('span', { class: 'assumption-statement' }, a.key.startsWith('tips') && !/not included/i.test(a.label) ? 'Tips are not included yet' : a.label)
-            : [h('span', null, a.label), ' ', a.value == null ? h('span', { class: 'not-verified' }, 'Not set yet')
-              : h('span', { class: 'assumption-value' }, fmtAssumption(a.key, a.value))]))));
-    }
-    return h('div', null, body);
+    if (l.status !== 'computed' || l.mid == null) return h('p', { class: 'not-verified' }, statusText(l.status, 'assumptions_unset'));
+    const ids = (r.career.pay || []).map((row) => row.source_id);
+    const sourced = l.assumptions.some((a) => a.key === 'season_months_basis' && a.value === 'season_length');
+    const season = sourced && r.season && r.season.length_days ? r.season.length_days.source_id : null;
+    const cited = [...new Set([...ids, season].filter(Boolean))];
+    return h('div', null,
+      h('div', { class: 'sourced-main' }, h('span', { class: 'fact-value' }, money(l.mid)), badge('estimated')),
+      l.low != null && l.high != null && l.low !== l.high
+        ? h('p', { class: 'fact-meta lucr-range' }, `Range: ${money(l.low)} to ${money(l.high)}`) : null,
+      cited.length ? h('p', { class: 'fact-meta lucr-sources' }, 'Sources: ', cited.map((id, i) => [i ? ', ' : '', sourceLink(id)])) : null);
   }
 
-  // ── The rent lucrativeness used (owner decision 2026-10-14) ──
+  // ── The town's median rent, shown in the Housing section (owner decision 2026-10-14; it no longer feeds net income) ──
   const RENT_UNIT_TEXT = { studio: ' for a studio', '1br': ' for one bedroom', '2br': ' for two bedrooms', '3br': ' for three bedrooms' };
   const MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -727,20 +718,6 @@ export function createPanel(root, index, {
     return form;
   }
 
-  function rentUsedText(value, detail) {
-    if (value === 'reported_area') return 'Rent used: the range of approved rent reports near the resort.';
-    if (value === 'fmr_studio') return 'Rent used: HUD Fair Market Rent for a studio in the county.';
-    if (value === 'fmr_one_br') return 'Rent used: HUD Fair Market Rent for one bedroom in the county.';
-    if (value === 'acs_median') return 'Rent used: Census ACS median gross rent in the county.';
-    if (value === 'employee_housing' || value.startsWith('employee_housing_mean')) {
-      return 'Rent used: the average of the employee housing rents listed for this resort.';
-    }
-    if (!value.startsWith('employee_housing:')) return `Rent used: ${humanize(value)}.`;
-    const id = value.slice('employee_housing:'.length);
-    const site = detail && detail.housing.find((x) => x.id === id);
-    return `Rent used: ${site ? site.name : humanize(id)}, the cheapest employee housing listed.`;
-  }
-
   // ── Housing and commute (Phase 5), with the housing links of ROADMAP item 8c ──
 
   // unspecified: the resort lists the site without saying whether it owns or leases it.
@@ -774,6 +751,9 @@ export function createPanel(root, index, {
     const rentBody = h('div', { class: 'housing-rent' });
     siteButtons = new Map();
     currentDetail = null;
+    const rentHead = () => { if (rentBody.childElementCount) rentBody.prepend(h('h4', { class: 'sub' }, 'Rent near the resort')); };
+    const medianRent = r.career && r.career.lucrativeness ? r.career.lucrativeness.rent : null;
+    if (medianRent) rentBody.append(rentLine(medianRent));
     if (r.housing_search || r.tier === 'A') {
       const ctx = linkCtx();
       housingLinks().then((m) => {
@@ -786,6 +766,7 @@ export function createPanel(root, index, {
     }
     if (!r.detail_available) {
       body.append(h('p', { class: 'not-verified' }, NO_SITES));
+      rentHead();
       onDetail(r.id, null);
     } else {
       body.append(h('p', { class: 'loading' }, 'Loading housing and commute data'));
@@ -795,8 +776,7 @@ export function createPanel(root, index, {
         if (!r.access && detail && detail.access) { clear(accessSlot); accessSlot.append(accessBlock(detail.access)); }
         clear(body);
         renderHousing(body, detail, rentBody);
-        if (rentBody.childElementCount) rentBody.prepend(h('h4', { class: 'sub' }, 'Rent near the resort'));
-        for (const el of root.querySelectorAll('.rent-used')) el.textContent = rentUsedText(el.dataset.source, detail);
+        rentHead();
         if (detail && detail.housing.length) refreshReportForm(r);
         onDetail(r.id, detail);
       });
@@ -891,17 +871,6 @@ export function createPanel(root, index, {
       const el = root.querySelector(`#site-${CSS.escape(id)}`);
       if (el) el.scrollIntoView({ block: 'nearest' });
     }
-  }
-
-  function fmtAssumption(key, v) {
-    if (key === 'cert_level' && CERT_LABEL[v]) return CERT_LABEL[v];
-    if (typeof v === 'number' && key.endsWith('_usd')) return money(v, Number.isInteger(v) ? 0 : 2);
-    if (typeof v === 'number' && key.startsWith('range_spread')) return `${fmt1(v * 100)}% of earnings`;
-    if (typeof v === 'number' && key.endsWith('_days')) return `${fmtInt(v)} days`;
-    if (typeof v === 'string') return humanize(v);
-    if (typeof v === 'number') return Math.abs(v) >= 100 ? fmtInt(v) : nf2.format(v);
-    if (typeof v === 'boolean') return v ? 'Yes' : 'No';
-    return String(v);
   }
 
   function climateHeader(climate, ch) {

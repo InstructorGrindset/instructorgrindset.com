@@ -253,13 +253,12 @@ def test_stale_zori_is_flagged_and_reaches_stale_fields(cfg):
     pay = PayRecord.model_validate({"resort_id": "peak", "season": "2025-26", "cert_level": "level_1", "hourly_low": 20,
                                     "hourly_high": 24, "confidence": "published", "source_id": "zum",
                                     "verified_date": "2026-01-15"})
-    career, _ = build_career([pay], None, 152, b["value"], cfg.definitions, TODAY, b["basis"], "zillow-zori", rent=b)
+    career, _ = build_career([pay], None, 152, cfg.definitions, TODAY, rent=b)
     assert "lucrativeness.rent" in career["stale_fields"] and career["lucrativeness"]["rent"]["stale"] is True
-    echo = {a["key"]: a for a in career["lucrativeness"]["assumptions"]}
-    assert echo["rent_monthly_usd"]["label"] == "Zillow typical rent (ZORI) per month (USD)"
+    assert career["lucrativeness"]["rent"]["label"] == "Zillow typical rent (ZORI)"
 
 
-def test_lucrativeness_end_to_end_with_the_median_rent(cfg):
+def test_median_rent_is_echoed_but_never_subtracted(cfg):
     from pipeline.schemas.career import Career, PayRecord
     pay = PayRecord.model_validate({"resort_id": "peak", "season": "2025-26", "cert_level": "level_2", "hourly_low": 20,
                                     "hourly_high": 24, "confidence": "published", "source_id": "zum",
@@ -268,11 +267,12 @@ def test_lucrativeness_end_to_end_with_the_median_rent(cfg):
     median, _ = rm.median_rent_for("peak", d, TODAY, cfg.definitions.rent.median)
     b = rent_used(cfg.definitions.rent.lucrativeness_rent, median=median, zori=ZORI, baseline=BASELINE,
                   today=TODAY, max_age_months=18)
-    career, _ = build_career([pay], None, 152, b["value"], cfg.definitions, TODAY, *as_inputs(b)[1:], rent=b)
+    career, _ = build_career([pay], None, 152, cfg.definitions, TODAY, rent=b)
     luc = career["lucrativeness"]
     months = 152 / 30.4
-    assert luc["status"] == "computed" and b["value"] == 2200
-    assert luc["mid"] == round(22 * 40 * months * 4.33 - 2200 * months)     # middle of the 20 to 24 range
-    assert luc["high"] == round(24 * 40 * months * 4.33 - 2200 * months) and luc["low"] == round(20 * 40 * months * 4.33 - 2200 * months)
-    assert {a["key"]: a for a in luc["assumptions"]}["rent_monthly_usd"]["label"] == "Median rent per month (USD)"
+    assert luc["status"] == "computed" and b["value"] == 2200 and luc["rent"] == b   # echoed for the Housing section
+    # Owner decision 2026-10-14: no rent in the figure; mid at the middle of the 20 to 24 range
+    assert luc["mid"] == round(22 * 40 * months * 4.33)
+    assert luc["high"] == round(24 * 40 * months * 4.33) and luc["low"] == round(20 * 40 * months * 4.33)
+    assert "rent_monthly_usd" not in {a["key"] for a in luc["assumptions"]}
     Career.model_validate(career, context={"source_ids": {"zum", "rto"}})

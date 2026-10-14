@@ -10,7 +10,6 @@ Contract: docs/map/ARCHITECTURE.md, "Phase 4 career".
 from __future__ import annotations
 
 import calendar
-from dataclasses import replace
 import datetime as dt
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -35,22 +34,8 @@ ASSUMPTION_LABELS: dict[str, str] = {
     "season_months": "Season months",
     "season_months_basis": "Season months basis",
     "weeks_per_month": "Weeks per month",
-    "tips_season_usd": "Tips for the season (USD)",
-    "rent_monthly_usd": "Median rent per month (USD)",
-    "rent_basis": "Rent basis",
-    "rent_source_id": "Rent source",
     "tax": "Before tax and other living costs",
 }
-# The rent assumption names what the number is: a median for median_rent and ACS, Zillow's typical rent for ZORI.
-RENT_LABELS: dict[str, str] = {
-    "zillow_zori": "Zillow typical rent (ZORI) per month (USD)",
-    "fmr_studio": "HUD Fair Market Rent per month (USD)",
-    "fmr_one_br": "HUD Fair Market Rent per month (USD)",
-    "fmr_two_br": "HUD Fair Market Rent per month (USD)",
-    "employee_housing": "Employee housing rent per month (USD)",
-    "reported_area": "Reported rent per month (USD)",
-}
-TIPS_ABSENT_LABEL = "Tips are not included yet"
 SEASON_LENGTH_LABEL = "Season months (sourced season length divided by {d} days)"
 SEASON_DEFAULT_LABEL = "Season months (standard {m} month season)"
 
@@ -152,28 +137,26 @@ def professionalism(inputs: Optional[CareerInputs], defs: ProfessionalismDefs) -
 def lucrativeness(
     pay_rows: Sequence[dict],
     season_length_days: Optional[float],
-    rent_monthly: Optional[float],
     defs: LucrativenessDefs,
-    rent_basis: Optional[str] = None,
-    rent_source_id: Optional[str] = None,
-    tips_season_usd: Optional[float] = None,
     rent: Optional[dict] = None,
 ) -> dict:
-    """Estimated net income for the season in USD, before tax (owner decision 4), with every stated assumption echoed.
+    """Estimated net income for the season in USD, before tax (owner decisions 4 and 2026-10-14), with every
+    stated assumption echoed.
 
     season months = season_length_days / days_per_month, else default_season_months
-    earnings      = hourly x hours_per_week x season months x weeks_per_month
-    net income    = earnings + tips - median rent x season months (before tax and other living costs)
+    net income    = hourly x hours_per_week x season months x weeks_per_month
 
-    ``rent`` is the RentUsed block (pipeline/rent_used.py) behind ``rent_monthly``; it is echoed as ``rent``.
-    The wage range is the displayed pay rows, any cert level: bottom = lowest hourly_low, top = highest
-    hourly_high. low = net income at the bottom, high = net income at the top, and mid = net income at the
-    middle of the range, (bottom + top) / 2 (owner decision 2026-10-14). The map shows mid as
-    "Estimated net income", colors by it, and shows low to high as the range.
+    No rent, tips, tax or other living costs (owner decision 2026-10-14). The wage range is the displayed pay
+    rows, any cert level: bottom = lowest hourly_low, top = highest hourly_high. low = net income at the bottom,
+    high = net income at the top, and mid = net income at the middle of the range, (bottom + top) / 2. The map
+    shows mid as "Estimated net income", colors by it, and shows low to high as the range.
 
-    Computed with pipeline.season_income (the calculator's shared model) with zero offsets: earnings is its
-    ``gross`` and net income its ``net_before_tax``. Whole dollars use round_half_up (JS Math.round).
-    Tips come from ``tips_season_usd`` (a sourced or 3+ report figure), else the config value, else 0.
+    ``rent`` is the town's RentUsed block (pipeline/rent_used.py), echoed as ``rent`` for the Housing section;
+    it never enters the figure.
+
+    Computed with pipeline.season_income (the calculator's shared model) with rent, tips and every offset at 0:
+    net income is its ``net_before_tax``, which then equals its ``gross``. Whole dollars use round_half_up
+    (JS Math.round).
     """
     a = defs.assumptions
     top = max((r["hourly_high"] for r in pay_rows), default=None)
@@ -185,7 +168,6 @@ def lucrativeness(
     else:
         months, basis = a.default_season_months, "default"
         months_label = SEASON_DEFAULT_LABEL.format(m=_fmt(a.default_season_months))
-    tips = tips_season_usd if tips_season_usd is not None else a.tips_season_usd
     echo = [
         {"key": "wage_mid_usd", "value": round(middle, 3) if middle is not None else None,
          "label": ASSUMPTION_LABELS["wage_mid_usd"]},
@@ -195,38 +177,29 @@ def lucrativeness(
         {"key": "season_months", "value": round(months, 2) if months is not None else None, "label": months_label},
         {"key": "season_months_basis", "value": basis, "label": ASSUMPTION_LABELS["season_months_basis"]},
         {"key": "weeks_per_month", "value": a.weeks_per_month, "label": ASSUMPTION_LABELS["weeks_per_month"]},
-        {"key": "tips_season_usd", "value": tips,
-         "label": ASSUMPTION_LABELS["tips_season_usd"] if tips is not None else TIPS_ABSENT_LABEL},
-        {"key": "rent_monthly_usd", "value": rent_monthly,
-         "label": RENT_LABELS.get((rent_basis or "").split(":")[0].replace("employee_housing_mean", "employee_housing"),
-                                  ASSUMPTION_LABELS["rent_monthly_usd"])},
-        {"key": "rent_basis", "value": rent_basis, "label": ASSUMPTION_LABELS["rent_basis"]},
-        {"key": "rent_source_id", "value": rent_source_id, "label": ASSUMPTION_LABELS["rent_source_id"]},
         {"key": "tax", "value": None, "label": ASSUMPTION_LABELS["tax"]},
     ]
     empty = {"low": None, "mid": None, "high": None}
     if a.hours_per_week is None or months is None:
         return {**empty, "status": "assumptions_unset", "assumptions": echo, "rent": rent}
-    if top is None or rent_monthly is None:
+    if top is None:
         return {**empty, "status": "insufficient_data", "assumptions": echo, "rent": rent}
 
     def net_income(hourly: float) -> int:
-        net = season_net_income(hourly, a.hours_per_week, months, a.weeks_per_month, rent_monthly, tips or 0.0)
+        net = season_net_income(hourly, a.hours_per_week, months, a.weeks_per_month)
         return int(round_half_up(net.net_before_tax))
 
     return {"low": net_income(bottom), "mid": net_income(middle), "high": net_income(top),
             "status": "computed", "assumptions": echo, "rent": rent}
 
 
-def season_net_income(hourly: float, hours_per_week: float, season_months: float, weeks_per_month: float,
-                   rent_monthly: float, tips_season: float = 0.0):
-    """The shared calculator model for one hourly wage (no food, transport, pass or gear offsets)."""
+def season_net_income(hourly: float, hours_per_week: float, season_months: float, weeks_per_month: float):
+    """The shared calculator model for one hourly wage, called with rent, food, transport, pass and gear at 0
+    and no tips (owner decision 2026-10-14). The model itself is unchanged."""
     inputs = lucrativeness_inputs(
         pay_hourly_mid_usd=hourly, hours_per_week=hours_per_week,
-        season_length_days=season_months * weeks_per_month * 7, rent_monthly_usd=rent_monthly,
+        season_length_days=season_months * weeks_per_month * 7, rent_monthly_usd=0,
         food_monthly_usd=0, transport_monthly_usd=0, season_months=season_months, pass_offset_usd=0, gear_offset_usd=0)
-    if tips_season:
-        inputs = replace(inputs, tips_per_day=tips_season / inputs.weeks)  # one work block per week
     return season_income(inputs)
 
 
@@ -239,15 +212,13 @@ def build_career(
     pay_records: Sequence[PayRecord],
     inputs: Optional[CareerInputs],
     season_length_days: Optional[float],
-    rent_monthly: Optional[float],
     defs: Definitions,
     today: dt.date,
-    rent_basis: Optional[str] = None,
-    rent_source_id: Optional[str] = None,
     rent: Optional[dict] = None,
 ) -> tuple[Optional[dict], list[str]]:
-    """Resort.career, or None when the resort has no pay records and no career inputs. ``rent`` is the RentUsed
-    block (pipeline/rent_used.py); a stale rent adds ``lucrativeness.rent`` to ``stale_fields``."""
+    """Resort.career, or None when the resort has no pay records and no career inputs. ``rent`` is the town's
+    RentUsed block (pipeline/rent_used.py), echoed for the Housing section; it never enters lucrativeness. A
+    stale rent adds ``lucrativeness.rent`` to ``stale_fields``."""
     if not pay_records and inputs is None:
         return None, []
     max_age = defs.staleness.max_age_months
@@ -261,8 +232,7 @@ def build_career(
         "pay": rows,
         "private_rate": inputs.private_rate.model_dump(mode="json") if inputs and inputs.private_rate else None,
         "private_split": inputs.private_split.model_dump(mode="json") if inputs and inputs.private_split else None,
-        "lucrativeness": lucrativeness(rows, season_length_days, rent_monthly, defs.lucrativeness,
-                                       rent_basis, rent_source_id, rent=rent),
+        "lucrativeness": lucrativeness(rows, season_length_days, defs.lucrativeness, rent=rent),
         "stale_fields": stale + (["lucrativeness.rent"] if rent and rent.get("stale") else []),
     }
     return career, warnings

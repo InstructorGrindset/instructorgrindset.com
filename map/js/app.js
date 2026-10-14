@@ -10,13 +10,13 @@
 import { config, isPhone } from './config.js';
 import { isFiltered, loadAll, loadStateOutlines, matchesFilter, NO_FILTER, whenPainted } from './data.js';
 import { createRouter } from './router.js';
-import { createPanel } from './panel.js';
+import { createPanel, officialMapFile } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
 import { h, joinOr, plural } from './ui.js';
 import { FILTERS, PASS_LABEL } from './labels.js';
-import { drawPreview } from './preview.js';
+import { drawPreview, addPreviewUnderlay, wantsUnderlay } from './preview.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -40,11 +40,14 @@ const els = {
 // has loaded and gone idle, so they never compete with the first paint; a click before then fetches them at once.
 let mapModulePromise = null;
 const mapModule = () => (mapModulePromise ||= import('./map.js'));
+/** Resolves once the MapLibre preload has finished (or failed, or after 10 s). */
 function prefetchMap() {
   mapModule().catch(() => { mapModulePromise = null; });
   const l = document.createElement('link');
   l.rel = 'preload'; l.as = 'script'; l.href = MAPLIBRE_URL;
+  const done = new Promise((resolve) => { l.onload = resolve; l.onerror = resolve; setTimeout(resolve, 10000); });
   document.head.append(l);
+  return done;
 }
 
 if (config.isDevData && els.devBadge) {
@@ -208,7 +211,7 @@ async function main() {
     }
   }
   function setTrailControl(r) {
-    trailFor = r && r.trailmap_available ? r : null;
+    trailFor = r && (r.trailmap_available || officialMapFile(r)) ? r : null;
     if (mapCtl) mapCtl.setTrailControl(trailFor ? (btn) => openTrail(trailFor, btn) : null);
   }
 
@@ -378,13 +381,17 @@ async function main() {
   // The WebGL map starts on the first click or tap over the map (owner decision 9, 2026-10-13). Until then a 2D
   // picture of the current view (preview.js) fills the map area with a button that starts it.
   let preview = null;
+  let underlay = null; // the satellite style underlay (underlay.js), once loaded after the first paint
+  let underlayStarted = false;
+  let mapPrefetched = false;
   const drawFrame = () => {
     if (mapCtl || els.map.hidden || !router.current) return;
     const keep = isFiltered(filter) ? (r) => matchesFilter(r, filter) : null;
-    const next = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
+    const next = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
     if (preview) preview.remove();
     preview = next;
     if (preview) els.map.insertBefore(preview, startBtn);
+    startUnderlay();
   };
   const dropPreview = () => { if (preview) { preview.remove(); preview = null; } };
   const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
@@ -408,7 +415,18 @@ async function main() {
   // When idle: source records if the panel shows source links, and only a cache warming download of the rest
   // (resorts.json is 2.6 MB; parsing it is a long task). A view that needs full records loads them (panel.js).
   afterLoad(() => { idleReached = true; if (sourcesWanted) loadSources(); index.prefetchDetails(); });
-  afterLoad(prefetchMap);
+  afterLoad(() => prefetchMap().then(() => { mapPrefetched = true; startUnderlay(); }));
+  // The underlay (470 KB) joins the picture after the first paint at low priority, once the MapLibre download is
+  // done so a quick click keeps the bandwidth, and only for a picture that draws it (national to cluster zooms; a
+  // resort picture skips it). It is decoded off the main thread first.
+  function startUnderlay() {
+    if (underlayStarted || !mapPrefetched || mapCtl || !wantsUnderlay(preview)) return;
+    underlayStarted = true;
+    import('./underlay.js').then((m) => m.loadUnderlay().then(m.decodeUnderlay)).then((u) => {
+      underlay = u;
+      if (u && preview && !mapCtl) addPreviewUnderlay(preview, u, { fade: true });
+    }).catch((err) => console.warn('[map] underlay', err.message));
+  }
   // Hiring now: the windows count, then the open roles once jobs/postings.json is in.
   afterLoad(() => hiring().then(async (m) => {
     const file = await m.feedPostings(index);

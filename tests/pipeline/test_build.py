@@ -379,8 +379,10 @@ def test_career_layer_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch)
     assert [p["cert_level"] for p in peak["pay"]] == ["level_2"]  # the 2 report aggregate is not displayed
     assert peak["pay"][0]["source_id"] == "fixture-pay-sheet" and peak["pay"][0]["stale"] is False
     assert "professionalism" not in peak  # owner decision 2026-10-13: never in data/build
-    # owner decision 4: assumptions are set; no rent data in this fixture, so insufficient_data
-    assert peak["lucrativeness"]["status"] == "insufficient_data" and peak["lucrativeness"]["mid"] is None
+    # owner decision 2026-10-14: pay alone computes, with no rent data in this fixture; mid at the middle wage, 22
+    lucr = peak["lucrativeness"]
+    assert lucr["status"] == "computed" and lucr["rent"] is None and lucr["low"] < lucr["mid"] < lucr["high"]
+    assert {a["key"]: a["value"] for a in lucr["assumptions"]}["wage_mid_usd"] == 22
     assert "fixture-pay-sheet" in by["fixture-peak"]["sources"]
     basin = by["fixture-basin"]
     assert basin["career"]["private_split"]["value"] == 40 and basin["career"]["pay"] == []
@@ -389,7 +391,7 @@ def test_career_layer_end_to_end(repo_root, raw_dir, out, tmp_path, monkeypatch)
 
     props = {f["properties"]["id"]: f["properties"] for f in _load(out, "resorts.geojson")["features"]}
     assert props["fixture-peak"]["snowfall_annual_in"] == 200.5
-    assert "professionalism_score" not in props["fixture-peak"] and props["fixture-peak"]["lucrativeness_mid"] is None
+    assert "professionalism_score" not in props["fixture-peak"] and props["fixture-peak"]["lucrativeness_mid"] == lucr["mid"]
     assert props["fixture-basin"]["snowfall_annual_in"] is None and props["fixture-basin"]["season_length_days"] is None
 
     report = (tmp_path / "tier-a-draft.md").read_text()
@@ -546,22 +548,21 @@ def test_phase5_drops_transit_extracts_that_are_not_current(repo_root, raw_dir, 
     assert peak["housing_summary"]["has_transit"] is False
 
 
-def test_phase5_rent_reaches_lucrativeness(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, counties_geojson,
+def test_phase5_rent_block_and_lucrativeness(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, counties_geojson,
                                            gtfs_writer, gtfs_tables, polyline_encoder):
     _phase5_inputs(raw_dir, lifts_full, counties_geojson, gtfs_writer, gtfs_tables, polyline_encoder, cfg)
     (raw_dir / "pay").mkdir()
     (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
     _run(repo_root, raw_dir, out, tmp_path)
     by = {r["id"]: r for r in _load(out, "resorts.json")["resorts"]}
-    echo = {a["key"]: a["value"] for a in by["fixture-peak"]["career"]["lucrativeness"]["assumptions"]}
-    # Owner decision 2026-10-14: employee housing (the staff lodge, 650 to 900) no longer feeds lucrativeness. With no
-    # median rent figures, no ZORI extract and no ACS value in this fixture, HUD FMR one bedroom is used.
-    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == (1640.0, "fmr_one_br", "hud-fmr-fy2026")
     lucr = by["fixture-peak"]["career"]["lucrativeness"]
-    # Displayed range 20 to 24: mid at the middle wage, 22 (owner decision 2026-10-14), high at the top.
-    assert lucr["status"] == "computed" and lucr["mid"] == round(22 * 40 * 5 * 4.33 - 1640 * 5)
-    assert lucr["high"] == round(24 * 40 * 5 * 4.33 - 1640 * 5)
-    assert lucr["low"] == round(20 * 40 * 5 * 4.33 - 1640 * 5)
+    # Owner decision 2026-10-14: no rent in the figure. Displayed range 20 to 24: mid at the middle wage, 22.
+    assert lucr["status"] == "computed" and lucr["mid"] == round(22 * 40 * 5 * 4.33)
+    assert lucr["high"] == round(24 * 40 * 5 * 4.33)
+    assert lucr["low"] == round(20 * 40 * 5 * 4.33)
+    # The town's rent block is still built for the Housing section: with no median rent figures, no ZORI extract and
+    # no ACS value in this fixture, HUD FMR one bedroom (employee housing never counts).
+    assert (lucr["rent"]["value"], lucr["rent"]["basis"]) == (1640.0, "fmr_one_br")
     assert lucr["rent"]["label"] == "HUD Fair Market Rent, one bedroom" and lucr["rent"]["source_ids"] == ["hud-fmr-fy2026"]
     assert lucr["rent"]["geography"] == {"level": "county", "id": "08998", "name": "Fixture County"}
 
@@ -574,9 +575,9 @@ def test_phase5_baseline_rent_when_no_employee_housing(repo_root, raw_dir, out, 
     (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
     _run(repo_root, raw_dir, out, tmp_path)
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
-    echo = {a["key"]: a["value"] for a in peak["career"]["lucrativeness"]["assumptions"]}
+    rent = peak["career"]["lucrativeness"]["rent"]
     # no employee housing and no ACS value in this fixture: HUD FMR one bedroom
-    assert (echo["rent_monthly_usd"], echo["rent_basis"], echo["rent_source_id"]) == (1640.0, "fmr_one_br", "hud-fmr-fy2026")
+    assert (rent["value"], rent["basis"], rent["source_ids"]) == (1640.0, "fmr_one_br", ["hud-fmr-fy2026"])
 
 
 def test_phase5_housing_validation(repo_root, raw_dir, out, tmp_path):
@@ -704,15 +705,14 @@ def test_reports_end_to_end(repo_root, raw_dir, out, tmp_path, cfg, lifts_full, 
 
 def test_reports_area_rent_not_in_default_rent_order(repo_root, raw_dir, out, tmp_path):
     """The default rent order (owner decision 2026-10-14) is median rent, Zillow ZORI, ACS median, HUD FMR one
-    bedroom; the area report rent is shown in detail files but is not a lucrativeness rent by default."""
+    bedroom; the area report rent is shown in detail files but is not the town's rent block by default."""
     (raw_dir / "pay").mkdir()
     (raw_dir / "pay" / "fixture.yaml").write_text(PAY_YAML)
     _reports(raw_dir, [{"kind": "rent", "values": {"monthly_usd": v}} for v in (1000, 1200, 1100)])
     _run(repo_root, raw_dir, out, tmp_path)
     peak = next(r for r in _load(out, "resorts.json")["resorts"] if r["id"] == "fixture-peak")
-    echo = {a["key"]: a["value"] for a in peak["career"]["lucrativeness"]["assumptions"]}
-    assert (echo["rent_monthly_usd"], echo["rent_basis"]) == (None, None)
-    assert peak["career"]["lucrativeness"]["status"] == "insufficient_data"
+    assert peak["career"]["lucrativeness"]["rent"] is None
+    assert peak["career"]["lucrativeness"]["status"] == "computed"   # rent never blocks the figure
 
 
 def _aggregate_cli(raw_dir, monkeypatch, *args):

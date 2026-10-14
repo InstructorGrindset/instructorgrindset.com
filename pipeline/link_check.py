@@ -61,6 +61,7 @@ def collect_links(build: Path) -> list[Link]:
     for r in resorts:
         rid = r.get("id", "?")
         add((r.get("official_trailmap") or {}).get("url"), f"{rid}: official trail map")
+        add((r.get("official_trailmap") or {}).get("image_url"), f"{rid}: official trail map file (shown in the trail map dialog)")
         w = r.get("webcams") or {}
         add((w.get("cams_page") or {}).get("url"), f"{rid}: live cams page")
         for c in w.get("cams") or []:

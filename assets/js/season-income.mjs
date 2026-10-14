@@ -136,12 +136,11 @@ export function seasonIncome(inputs) {
 /**
  * Maps the Career Map lucrativeness assumptions onto seasonIncome inputs (no privates, no tips):
  *   weeks = seasonLengthDays / 7, one work block per week of hoursPerWeek hours at payHourlyMidUsd,
- *   rent = rentMonthlyUsd (the map's median rent per month: the median of the sourced median rent figures for the
- *   resort's town, else Zillow's typical rent, ACS median gross rent or HUD FMR one bedroom),
- *   life = foodMonthlyUsd + transportMonthlyUsd, months = seasonMonths,
+ *   rent = rentMonthlyUsd, life = foodMonthlyUsd + transportMonthlyUsd, months = seasonMonths,
  *   one time costs = passOffsetUsd + gearOffsetUsd (in the gear slot), transport slot 0.
- * Then gross is lucrativeness earnings and netBeforeTax is the lucrativeness `mid` value
- * (estimated net income at the top of the posted wage scale, before tax).
+ * The map (pipeline/career.py) calls the Python twin with rent, food, transport, pass and gear at 0 and no tips
+ * (owner decision 2026-10-14), once per wage: the middle of the posted wage range gives the lucrativeness `mid`
+ * ("Estimated net income"), the bottom `low` and the top `high`. netBeforeTax (then equal to gross) is that value.
  * stateRate only affects the after tax figures (net, totalTax, ...).
  */
 export function lucrativenessInputs({

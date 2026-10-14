@@ -89,3 +89,13 @@ def test_main_writes_report_and_summary(tmp_path, monkeypatch):
     assert json.loads(summary.read_text()) == {"checked": 5, "ok": 4, "broken": 1, "unverified": 0}
     assert "map.pdf" in report.read_text()
     assert lc.main(["--root", str(tmp_path / "none")]) == 1
+
+
+def test_collect_links_checks_the_official_map_file(tmp_path):
+    build = write_build(tmp_path)
+    data = json.loads((build / "resorts.json").read_text())
+    data["resorts"][0]["official_trailmap"]["image_url"] = "https://a.example.com/media/map-2025-26.png"
+    (build / "resorts.json").write_text(json.dumps(data))
+    by = {x.url: x.used_by for x in lc.collect_links(build)}
+    assert by["https://a.example.com/media/map-2025-26.png"] == ["alpha: official trail map file (shown in the trail map dialog)"]
+    assert by["https://a.example.com/map.pdf"] == ["alpha: official trail map"]

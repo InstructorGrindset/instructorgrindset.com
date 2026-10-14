@@ -349,13 +349,19 @@
    "detail_available": true,
    "trailmap_available": true,
    "official_trailmap": {
-    "url": "https://example.com/fixture/alpha-peak-trail-map-2025-26.pdf",
-    "format": "pdf",
+    "url": "https://example.com/fixture/alpha-peak/trail-map",
+    "format": "page",
     "season": "2025/26",
     "source_id": "fixture-resort-site",
     "as_of": "2026-10-01",
     "confidence": "estimated",
-    "note": null
+    "note": null,
+    "image_url": "https://example.com/fixture/alpha-peak-trail-map-2025-26.png",
+    "image_format": "png",
+    "image_source_id": "fixture-resort-site",
+    "image_as_of": "2026-10-01",
+    "image_confidence": "estimated",
+    "image_note": null
    },
    "webcams": {
     "cams_page": {
@@ -2448,6 +2454,21 @@
    "facility_type": "ski_area",
    "detail_available": false,
    "trailmap_available": false,
+   "official_trailmap": {
+    "url": "https://example.com/fixture/kilo-notch-trail-map.pdf",
+    "format": "pdf",
+    "season": null,
+    "source_id": "fixture-resort-site",
+    "as_of": "2026-10-01",
+    "confidence": "estimated",
+    "note": "The file name carries an older date.",
+    "image_url": null,
+    "image_format": null,
+    "image_source_id": null,
+    "image_as_of": null,
+    "image_confidence": null,
+    "image_note": null
+   },
    "webcams": null,
    "jobs": {
     "feed": false,

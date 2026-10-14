@@ -4,7 +4,8 @@
   Each figure is one published "median rent" for a resort's town from one source (Zillow, Redfin, Apartments.com,
   a news article, a blog). Raw files never carry ``reported`` figures: reported values come only from aggregates of
   3 or more approved reports (data/raw/reports).
-* ``Resort.career.lucrativeness.rent``: the rent the model used (RentUsed), with every source it came from.
+* ``Resort.career.lucrativeness.rent``: the town's rent (RentUsed), with every source it came from. It shows in the
+  Housing section and no longer feeds lucrativeness (owner decision 2026-10-14).
 
 Contract: docs/map/ARCHITECTURE.md, "Phase 4 career" (Lucrativeness rent).
 """

@@ -97,6 +97,8 @@ export const Access = z.object({
   confidence: Confidence,
 }).nullish().catch(null).transform((v) => v ?? null);
 
+// The map file shown in the trail map dialog (image_*): a bad value drops the file only and keeps the link.
+const orNull = (t) => t.nullish().catch(null).transform((v) => v ?? null);
 export const OfficialTrailmap = z.object({
   url: z.string().regex(/^https:\/\//, 'https link'),
   format: z.enum(['pdf', 'jpg', 'png', 'page']),
@@ -105,7 +107,14 @@ export const OfficialTrailmap = z.object({
   as_of: IsoDate,
   confidence: Confidence,
   note: z.string().nullish(),
-}).nullish().catch(null).transform((v) => v ?? null);
+  image_url: orNull(z.string().regex(/^https:\/\//, 'https link')),
+  image_format: orNull(z.enum(['jpg', 'png', 'webp', 'pdf'])),
+  image_source_id: orNull(Slug),
+  image_as_of: orNull(IsoDate),
+  image_confidence: orNull(Confidence),
+  image_note: orNull(z.string()),
+}).transform((v) => (v.image_url && v.image_format ? v : { ...v, image_url: null, image_format: null }))
+  .nullish().catch(null).transform((v) => v ?? null);
 
 // ── Live cams and jobs (links only; ARCHITECTURE "Webcams and jobs"). A bad item drops only that item. ──
 const HttpsUrl = z.string().regex(/^https:\/\//, 'https link');

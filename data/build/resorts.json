@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T04:03:46Z",
+  "generated_at": "2026-10-14T04:16:31Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -404,12 +404,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.aftonalps.com/-/aemasset/sitecore/afton-alps/maps/20211107_AA_Winter-Trail_Map.001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-afton-alps",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -561,10 +561,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 12306.0,
+          "mid": 25948.0,
+          "high": 39589.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -600,26 +600,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -1022,10 +1002,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 9002.0,
+          "mid": 18980.0,
+          "high": 28959.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -1061,26 +1041,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -2032,9 +1992,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 8006.0,
-          "mid": 13265.0,
-          "high": 18524.0,
+          "low": 16181.0,
+          "mid": 21439.0,
+          "high": 26698.0,
           "status": "computed",
           "assumptions": [
             {
@@ -2071,26 +2031,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1750.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-anchorage",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -3102,9 +3042,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 11732.0,
-          "mid": 21768.0,
-          "high": 31803.0,
+          "low": 26322.0,
+          "mid": 36357.0,
+          "high": 46392.0,
           "status": "computed",
           "assumptions": [
             {
@@ -3141,26 +3081,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1920.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-frisco-80443",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -3994,9 +3914,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -1296.0,
-          "mid": 7300.0,
-          "high": 15897.0,
+          "low": 22088.0,
+          "mid": 30684.0,
+          "high": 39281.0,
           "status": "computed",
           "assumptions": [
             {
@@ -4033,26 +3953,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 5875.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-aspen, medrent-padmapper-aspen",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -4469,9 +4369,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -1543.0,
-          "mid": 8688.0,
-          "high": 18919.0,
+          "low": 26286.0,
+          "mid": 36517.0,
+          "high": 46748.0,
           "status": "computed",
           "assumptions": [
             {
@@ -4508,26 +4408,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 5875.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-aspen, medrent-padmapper-aspen",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -4907,9 +4787,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 5976.0,
-          "mid": 21385.0,
-          "high": 36795.0,
+          "low": 13902.0,
+          "mid": 29311.0,
+          "high": 44721.0,
           "status": "computed",
           "assumptions": [
             {
@@ -4946,26 +4826,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1975.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-north-conway-address",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -6927,9 +6787,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 9437.0,
-          "mid": 26995.0,
-          "high": 44552.0,
+          "low": 15839.0,
+          "mid": 33396.0,
+          "high": 50953.0,
           "status": "computed",
           "assumptions": [
             {
@@ -6966,26 +6826,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1400.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-avon",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -8198,9 +8038,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 7385.0,
-          "mid": 19132.0,
-          "high": 30879.0,
+          "low": 10597.0,
+          "mid": 22344.0,
+          "high": 34091.0,
           "status": "computed",
           "assumptions": [
             {
@@ -8237,26 +8077,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1050.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-white-haven",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -9084,9 +8904,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 7563.0,
-          "mid": 23936.0,
-          "high": 40308.0,
+          "low": 18474.0,
+          "mid": 34847.0,
+          "high": 51219.0,
           "status": "computed",
           "assumptions": [
             {
@@ -9123,26 +8943,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2140.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-big-sky",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -9452,26 +9252,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -11968,9 +11748,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 6511.0,
-          "mid": 6511.0,
-          "high": 6511.0,
+          "low": 9116.0,
+          "mid": 9116.0,
+          "high": 9116.0,
           "status": "computed",
           "assumptions": [
             {
@@ -12007,26 +11787,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 990.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-apartmentlist-akron",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -12913,9 +12673,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 6429.0,
-          "mid": 6429.0,
-          "high": 6429.0,
+          "low": 9002.0,
+          "mid": 9002.0,
+          "high": 9002.0,
           "status": "computed",
           "assumptions": [
             {
@@ -12952,26 +12712,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 990.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-apartmentlist-akron",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -13510,9 +13250,9 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": -16607.0,
-          "mid": 6357.0,
-          "high": 29321.0,
+          "low": 22254.0,
+          "mid": 45218.0,
+          "high": 68182.0,
           "status": "computed",
           "assumptions": [
             {
@@ -13549,26 +13289,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 6351.5,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-breckenridge, medrent-redfin-breckenridge",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -14223,26 +13943,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1878.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-bozeman-address, medrent-rentometer-bozeman",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -15490,9 +15190,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 2670.0,
-          "mid": 2670.0,
-          "high": 2670.0,
+          "low": 7999.0,
+          "mid": 7999.0,
+          "high": 7999.0,
           "status": "computed",
           "assumptions": [
             {
@@ -15529,26 +15229,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1500.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-redfin-burnsville",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -16416,9 +16096,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -1189.0,
-          "mid": 6697.0,
-          "high": 14583.0,
+          "low": 20262.0,
+          "mid": 28148.0,
+          "high": 36035.0,
           "status": "computed",
           "assumptions": [
             {
@@ -16455,26 +16135,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 5875.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-aspen, medrent-padmapper-aspen",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -20645,9 +20305,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 10507.0,
-          "mid": 13686.0,
-          "high": 16865.0,
+          "low": 22254.0,
+          "mid": 25433.0,
+          "high": 28612.0,
           "status": "computed",
           "assumptions": [
             {
@@ -20684,26 +20344,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1920.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-frisco-80443",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -21410,12 +21050,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://cranmore.com/assets/documents/2324_Cranmore_TrailMap_withLegend_Web.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-cranmore",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -22048,9 +21688,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 8528.0,
-          "mid": 25201.0,
-          "high": 41874.0,
+          "low": 15041.0,
+          "mid": 31714.0,
+          "high": 48387.0,
           "status": "computed",
           "assumptions": [
             {
@@ -22087,26 +21727,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1500.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-crested-butte",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -22435,10 +22055,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 12306.0,
+          "mid": 25948.0,
+          "high": 39589.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -22474,26 +22094,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -22815,10 +22415,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 20738.0,
+          "mid": 31756.0,
+          "high": 42773.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -22854,26 +22454,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -23803,9 +23383,9 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": 7612.0,
-          "mid": 21848.0,
-          "high": 36085.0,
+          "low": 15383.0,
+          "mid": 29620.0,
+          "high": 43857.0,
           "status": "computed",
           "assumptions": [
             {
@@ -23842,26 +23422,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1750.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-park-city",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -27872,12 +27432,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.grandtarghee.com/sites/default/files/2022-12/22-23%20Winter%20Trail%20Map.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-grand-targhee",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -29914,9 +29474,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 5686.0,
-          "mid": 24452.0,
-          "high": 43218.0,
+          "low": 18186.0,
+          "mid": 36952.0,
+          "high": 55718.0,
           "status": "computed",
           "assumptions": [
             {
@@ -29953,26 +29513,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2500.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-south-lake-tahoe",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -30360,9 +29900,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 1676.0,
-          "mid": 16273.0,
-          "high": 30869.0,
+          "low": 12511.0,
+          "mid": 27108.0,
+          "high": 41705.0,
           "status": "computed",
           "assumptions": [
             {
@@ -30399,26 +29939,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2700.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-sfr-brattleboro",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -31162,10 +30682,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 9093.0,
+          "mid": 18476.0,
+          "high": 27859.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -31201,26 +30721,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -31354,12 +30854,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.hiddenvalleyresort.com/-/aemasset/sitecore/hidden-valley-pa/trail-base-maps/20221122_HP_winter-trail_map_001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-hidden-valley-pa",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -31483,10 +30983,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 9452.0,
+          "mid": 19205.0,
+          "high": 28959.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -31522,26 +31022,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -33313,10 +32793,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 15497.0,
+          "mid": 32675.0,
+          "high": 49853.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -33352,26 +32832,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -33928,9 +33388,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 8655.0,
-          "mid": 22423.0,
-          "high": 36191.0,
+          "low": 12420.0,
+          "mid": 26188.0,
+          "high": 39956.0,
           "status": "computed",
           "assumptions": [
             {
@@ -33967,26 +33427,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1050.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-white-haven",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -34513,26 +33953,6 @@
               "label": "Weeks per month"
             },
             {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 3179.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-jackson",
-              "label": "Rent source"
-            },
-            {
               "key": "tax",
               "value": null,
               "label": "Before tax and other living costs"
@@ -34894,10 +34314,10 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 17297.0,
+          "mid": 20180.0,
+          "high": 23063.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -34933,26 +34353,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -35247,12 +34647,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.junemountain.com/-/media/june/pdfs/trail-map/23-24_jmsa_trailmap_17x12_web.pdf?rev=7c3ab2c434694d61a21b7b82727e027b&hash=B57A030B7A62CCAE5E14CCFAB707EAA7",
+        "image_format": "pdf",
+        "image_source_id": "tmi-june-mountain",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -35435,9 +34835,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -136.0,
-          "mid": 8054.0,
-          "high": 16244.0,
+          "low": 13104.0,
+          "mid": 21294.0,
+          "high": 29484.0,
           "status": "computed",
           "assumptions": [
             {
@@ -35474,26 +34874,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 3500.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-mammoth-lakes",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -36558,9 +35938,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 7923.0,
-          "mid": 27628.0,
-          "high": 47332.0,
+          "low": 17776.0,
+          "mid": 37480.0,
+          "high": 57185.0,
           "status": "computed",
           "assumptions": [
             {
@@ -36597,26 +35977,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1920.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-frisco-80443",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -38237,10 +37597,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 9458.0,
+          "mid": 9458.0,
+          "high": 9458.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -38276,26 +37636,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -38741,12 +38081,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.libertymountainresort.com/-/aemasset/sitecore/liberty/maps/20211110_LB_NEW-Winter-Trail_Map.001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-liberty-mountain",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -38912,10 +38252,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 10711.0,
+          "mid": 22584.0,
+          "high": 34457.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -38951,26 +38291,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -40870,26 +40190,6 @@
               "label": "Weeks per month"
             },
             {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1720.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-waitsfield",
-              "label": "Rent source"
-            },
-            {
               "key": "tax",
               "value": null,
               "label": "Before tax and other living costs"
@@ -41469,26 +40769,6 @@
               "label": "Weeks per month"
             },
             {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1560.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-manchester-vt",
-              "label": "Rent source"
-            },
-            {
               "key": "tax",
               "value": null,
               "label": "Before tax and other living costs"
@@ -42030,9 +41310,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -231.0,
-          "mid": 13656.0,
-          "high": 27544.0,
+          "low": 22220.0,
+          "mid": 36107.0,
+          "high": 49994.0,
           "status": "computed",
           "assumptions": [
             {
@@ -42069,26 +41349,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 3500.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-mammoth-lakes",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -43419,10 +42679,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 11067.0,
+          "mid": 11067.0,
+          "high": 11067.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -43458,26 +42718,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -45017,12 +44257,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.mtbohemia.com/wp-content/uploads/2022/11/bohemia-trail-map.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-mount-bohemia",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": null,
       "jobs": null,
@@ -46945,9 +46185,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 3745.0,
-          "mid": 22565.0,
-          "high": 41385.0,
+          "low": 16978.0,
+          "mid": 35798.0,
+          "high": 54619.0,
           "status": "computed",
           "assumptions": [
             {
@@ -46984,26 +46224,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2700.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-sfr-brattleboro",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -47310,12 +46530,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.mountsunapee.com/-/aemasset/sitecore/mount-sunapee/maps/20231031_MS_winter-trail_map_001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-mount-sunapee",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -47467,10 +46687,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 13902.0,
+          "mid": 29311.0,
+          "high": 44721.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -47506,26 +46726,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -48469,9 +47669,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 2513.0,
-          "mid": 2513.0,
-          "high": 2513.0,
+          "low": 18613.0,
+          "mid": 18613.0,
+          "high": 18613.0,
           "status": "computed",
           "assumptions": [
             {
@@ -48508,26 +47708,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2472.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-bend",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -48850,10 +48030,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 14054.0,
+          "mid": 14054.0,
+          "high": 14054.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -48889,26 +48069,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -51569,9 +50729,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -3776.0,
-          "mid": 21202.0,
-          "high": 46179.0,
+          "low": 16391.0,
+          "mid": 41369.0,
+          "high": 66346.0,
           "status": "computed",
           "assumptions": [
             {
@@ -51608,26 +50768,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 4475.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-truckee",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -52666,10 +51806,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 16294.0,
+          "mid": 34357.0,
+          "high": 52419.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -52705,26 +51845,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -53415,9 +52535,9 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": -4988.0,
-          "mid": 4344.0,
-          "high": 13677.0,
+          "low": 21656.0,
+          "mid": 30988.0,
+          "high": 40321.0,
           "status": "computed",
           "assumptions": [
             {
@@ -53454,26 +52574,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 4475.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-truckee",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -53690,12 +52790,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.palisadestahoe.com/-/media/palisades-tahoe/pdfs/trail-maps/alpine-back-side-trail.pdf?rev=ad5ea90549cc4b6980a80da7976e433e",
+        "image_format": "pdf",
+        "image_source_id": "tmi-palisades-tahoe-alpine-meadows",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "Alpine back side only; the front side has its own map."
       },
       "webcams": {
         "cams_page": {
@@ -54171,10 +53271,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 9799.0,
+          "mid": 9799.0,
+          "high": 9799.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -54210,26 +53310,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -54574,9 +53654,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 9312.0,
-          "mid": 27831.0,
-          "high": 46350.0,
+          "low": 17947.0,
+          "mid": 36466.0,
+          "high": 54985.0,
           "status": "computed",
           "assumptions": [
             {
@@ -54613,26 +53693,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1750.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-park-city",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -60684,9 +59744,9 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": 892.0,
-          "mid": 2063.0,
-          "high": 3234.0,
+          "low": 11708.0,
+          "mid": 12879.0,
+          "high": 14050.0,
           "status": "computed",
           "assumptions": [
             {
@@ -60723,26 +59783,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2400.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-sfr-sandpoint",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -61312,10 +60352,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 16181.0,
+          "mid": 34117.0,
+          "high": 52053.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -61351,26 +60391,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -66438,10 +65458,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 16129.0,
+          "mid": 17742.0,
+          "high": 19355.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -66477,26 +65497,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -67213,26 +66213,6 @@
               "label": "Weeks per month"
             },
             {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1757.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-redfin-cottonwood-heights",
-              "label": "Rent source"
-            },
-            {
               "key": "tax",
               "value": null,
               "label": "Before tax and other living costs"
@@ -67841,9 +66821,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -1468.0,
-          "mid": 8266.0,
-          "high": 17999.0,
+          "low": 25008.0,
+          "mid": 34742.0,
+          "high": 44475.0,
           "status": "computed",
           "assumptions": [
             {
@@ -67880,26 +66860,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 5875.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-aspen, medrent-padmapper-aspen",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -68125,12 +67085,12 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
-        "image_note": null
+        "image_url": "https://www.snowshoemtn.com/-/media/snowshoe/maps/trailmapw2024.pdf?rev=d1fa14e71919433caabacd244dc3a13e",
+        "image_format": "pdf",
+        "image_source_id": "tmi-snowshoe",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
+        "image_note": "The file name carries an older date; the resort may have a newer map."
       },
       "webcams": {
         "cams_page": {
@@ -68301,10 +67261,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 9230.0,
+          "mid": 9230.0,
+          "high": 9230.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -68340,26 +67300,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -69988,9 +68928,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -3433.0,
-          "mid": -3220.0,
-          "high": -3006.0,
+          "low": 15810.0,
+          "mid": 16024.0,
+          "high": 16238.0,
           "status": "computed",
           "assumptions": [
             {
@@ -70027,26 +68967,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 3900.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-sfr-steamboat-springs",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -70503,10 +69423,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 15075.0,
+          "mid": 30631.0,
+          "high": 46188.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -70542,26 +69462,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -70992,9 +69892,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 8981.0,
-          "mid": 28812.0,
-          "high": 48643.0,
+          "low": 17890.0,
+          "mid": 37721.0,
+          "high": 57551.0,
           "status": "computed",
           "assumptions": [
             {
@@ -71031,26 +69931,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1725.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-stowe, medrent-foreclosure-morrisville",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -71438,9 +70318,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 9144.0,
-          "mid": 9144.0,
-          "high": 9144.0,
+          "low": 16636.0,
+          "mid": 16636.0,
+          "high": 16636.0,
           "status": "computed",
           "assumptions": [
             {
@@ -71477,26 +70357,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1560.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-manchester-vt",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -71874,9 +70734,9 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": -4556.0,
-          "mid": 3249.0,
-          "high": 11055.0,
+          "low": 15611.0,
+          "mid": 23416.0,
+          "high": 31222.0,
           "status": "computed",
           "assumptions": [
             {
@@ -71913,26 +70773,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 4475.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-truckee",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -72447,9 +71287,9 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": 7494.0,
-          "mid": 7494.0,
-          "high": 7494.0,
+          "low": 16716.0,
+          "mid": 16716.0,
+          "high": 16716.0,
           "status": "computed",
           "assumptions": [
             {
@@ -72486,26 +71326,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1720.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-waitsfield",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -72894,10 +71714,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 16659.0,
+          "mid": 16659.0,
+          "high": 16659.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -72933,26 +71753,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -73721,9 +72521,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 6268.0,
-          "mid": 6268.0,
-          "high": 6268.0,
+          "low": 14643.0,
+          "mid": 14643.0,
+          "high": 14643.0,
           "status": "computed",
           "assumptions": [
             {
@@ -73760,26 +72560,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1900.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-hailey",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -74488,10 +73268,10 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 14571.0,
+          "mid": 18324.0,
+          "high": 22077.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -74527,26 +73307,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -76087,9 +74847,9 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": 12568.0,
-          "mid": 23232.0,
-          "high": 33896.0,
+          "low": 22497.0,
+          "mid": 33161.0,
+          "high": 43826.0,
           "status": "computed",
           "assumptions": [
             {
@@ -76126,26 +74886,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2340.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-telluride",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -78256,9 +76996,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 10160.0,
-          "mid": 10160.0,
-          "high": 10160.0,
+          "low": 26162.0,
+          "mid": 26162.0,
+          "high": 26162.0,
           "status": "computed",
           "assumptions": [
             {
@@ -78295,26 +77035,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1695.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-sandy-or",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -82687,10 +81407,10 @@
         },
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 13947.0,
+          "mid": 16361.0,
+          "high": 18776.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -82726,26 +81446,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -83319,10 +82019,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 9799.0,
+          "mid": 20662.0,
+          "high": 31525.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -83358,26 +82058,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -83804,9 +82484,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 8425.0,
-          "mid": 30150.0,
-          "high": 51875.0,
+          "low": 19599.0,
+          "mid": 41324.0,
+          "high": 63050.0,
           "status": "computed",
           "assumptions": [
             {
@@ -83843,26 +82523,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1975.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-north-conway-address",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -84276,11 +82936,11 @@
         "as_of": "2026-10-13",
         "confidence": "estimated",
         "note": null,
-        "image_url": null,
-        "image_format": null,
-        "image_source_id": null,
-        "image_as_of": null,
-        "image_confidence": null,
+        "image_url": "https://www.wilmotmountain.com/-/aemasset/sitecore/wilmot/maps/20240916_WM_winter-trail_map_001.pdf",
+        "image_format": "pdf",
+        "image_source_id": "tmi-wilmot-mountain",
+        "image_as_of": "2026-10-14",
+        "image_confidence": "estimated",
         "image_note": null
       },
       "webcams": {
@@ -84423,10 +83083,10 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": null,
-          "mid": null,
-          "high": null,
-          "status": "insufficient_data",
+          "low": 10939.0,
+          "mid": 23065.0,
+          "high": 35191.0,
+          "status": "computed",
           "assumptions": [
             {
               "key": "wage_mid_usd",
@@ -84462,26 +83122,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": null,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": null,
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": null,
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -84929,9 +83569,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 13403.0,
-          "mid": 27162.0,
-          "high": 40921.0,
+          "low": 23929.0,
+          "mid": 37688.0,
+          "high": 51447.0,
           "status": "computed",
           "assumptions": [
             {
@@ -84968,26 +83608,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1600.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-fraser",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -86224,9 +84844,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 5983.0,
-          "mid": 5983.0,
-          "high": 5983.0,
+          "low": 13640.0,
+          "mid": 13640.0,
+          "high": 13640.0,
           "status": "computed",
           "assumptions": [
             {
@@ -86263,26 +84883,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 1750.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-rentometer-park-city",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -86540,9 +85140,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": -4189.0,
-          "mid": -4189.0,
-          "high": -4189.0,
+          "low": 18186.0,
+          "mid": 18186.0,
+          "high": 18186.0,
           "status": "computed",
           "assumptions": [
             {
@@ -86579,26 +85179,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 4475.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-zumper-truckee",
-              "label": "Rent source"
             },
             {
               "key": "tax",
@@ -87113,9 +85693,9 @@
         "private_rate": null,
         "private_split": null,
         "lucrativeness": {
-          "low": 8612.0,
-          "mid": 17511.0,
-          "high": 26410.0,
+          "low": 18608.0,
+          "mid": 27507.0,
+          "high": 36406.0,
           "status": "computed",
           "assumptions": [
             {
@@ -87152,26 +85732,6 @@
               "key": "weeks_per_month",
               "value": 4.33,
               "label": "Weeks per month"
-            },
-            {
-              "key": "tips_season_usd",
-              "value": null,
-              "label": "Tips are not included yet"
-            },
-            {
-              "key": "rent_monthly_usd",
-              "value": 2140.0,
-              "label": "Median rent per month (USD)"
-            },
-            {
-              "key": "rent_basis",
-              "value": "median_rent",
-              "label": "Rent basis"
-            },
-            {
-              "key": "rent_source_id",
-              "value": "medrent-foreclosure-big-sky",
-              "label": "Rent source"
             },
             {
               "key": "tax",

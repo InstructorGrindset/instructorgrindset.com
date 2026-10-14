@@ -2,7 +2,7 @@
 // Every mode except Default draws a heat map with the resorts on top. Settings come from definitions.json `heat`.
 // Snowfall, Season length and Lucrativeness load their precomputed rasters (heat/<mode>.json, pipeline/heat.py and
 // pipeline/heat_lucrativeness.py) when they exist, and Snowfall its isolines; every other case draws the resort only
-// surface from heat.js. Lucrativeness turns on by itself once any resort has a computed value (pay and a rent). Interpolated colors
+// surface from heat.js. Lucrativeness turns on by itself once any resort has a computed value (pay). Interpolated colors
 // never become numbers: the legend shows the scale, and tooltips show each resort's sourced value.
 import { RECOLOR_MODES } from './labels.js';
 import { buildHeat, legendScale, legendPos, legendCss, makeRamp } from './heat.js';

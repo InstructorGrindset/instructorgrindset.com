@@ -9,7 +9,7 @@ The existing site is hand built HTML on GitHub Pages with no build step. The roa
 * `/map/index.html` uses the existing sidebar partial and `/assets/global.css`.
 * Native ES modules in `/map/js/`, no bundler.
 * Third party libraries are vendored from npm into `/map/vendor/` at pinned versions (MapLibre GL JS, Zod, Chart.js). `scripts/vendor.sh` refreshes them. Nothing loads from a CDN.
-* Basemap: state outlines from `us-atlas` compiled to `/data/build/us-states.geojson`. A Protomaps PMTiles basemap plugs in later through `basemap.pmtiles_url` in `/map/js/config.js` once tiles are hosted on R2.
+* Basemap: state outlines from `us-atlas` compiled to `/data/build/us-states.geojson`, over a satellite style underlay served with the site (`/images/basemap/`, see "Basemap underlay") and, from zoom 6.5, USGS imagery tiles. A Protomaps PMTiles basemap plugs in later through `basemap.pmtiles_url` in `/map/js/config.js` once tiles are hosted on R2.
 * Deep links (`/map/co/i70-corridor/vail/`) are served by static route stubs that `pipeline/routes.py` generates from the build output. Each stub is a copy of the map shell, so every URL works on GitHub Pages without rewrites.
 
 Astro remains an option for Phase 8 if per resort static pages outgrow the stub approach.
@@ -66,8 +66,10 @@ Resort {
   climate_available: boolean,                      // true when climate/<id>.json exists
   detail_available: boolean,                       // true when detail/<id>.json exists (Phase 5)
   trailmap_available: boolean,                     // true when trailmap/<id>.json exists (Trail map)
-  official_trailmap: { url, format: pdf|jpg|png|page, season: "2025/26" | null, source_id, as_of, confidence, note } | null,
-                                                   // link to the resort's own official trail map (Official trail maps)
+  official_trailmap: { url, format: pdf|jpg|png|page, season: "2025/26" | null, source_id, as_of, confidence, note,
+                       image_url, image_format: jpg|png|webp|pdf, image_source_id, image_as_of, image_confidence,
+                       image_note } | null,        // the resort's own trail map page and, when found, the map file
+                                                   // the trail map dialog shows from its servers (image_* null when none)
   webcams: { cams_page: { url, source_id, as_of, confidence, note } | null,
              cams: [{ label, url, kind: page|image|stream, source_id, as_of, confidence, note }] } | null,
                                                    // live cams links, at most webcams.max_named_cams cams (Webcams and jobs)
@@ -203,7 +205,7 @@ Manifest version 2:
   (`heat.ramp`), `domain` and `ticks` from `legend_scale`, the twin of `legendScale` in `map/js/heat.js` (a Node test
   checks they agree), `values: { field: "career.lucrativeness.mid", resorts, points }`, `method` from `heat.field`,
   `attribution: null`. The surface is the browser's: the `heat.field` interpolation, resolution (12 px per degree) and
-  fade. Written only when a resort has a computed lucrativeness (pay and a rent); otherwise its files are removed and
+  fade. Written only when a resort has a computed lucrativeness (pay); otherwise its files are removed and
   the mode stays disabled.
 
 ### `heat/snowfall-isolines-<region>.geojson` (snowfall isolines, `pipeline/heat.py`)
@@ -352,7 +354,7 @@ career: {
   private_rate: Sourced | null, private_split: Sourced | null,
   lucrativeness: { low, mid, high (USD estimated net income for the season, before tax) | null, status: computed|assumptions_unset|insufficient_data,
                    assumptions: [{ key, value, label }],
-                   rent: RentUsed | null },   // the rent the model used, with every source (null: no rent)
+                   rent: RentUsed | null },   // the town's rent for the Housing section, never in the figure
   stale_fields: string[]   // "pay.<cert_level>", "private_rate", "private_split", "lucrativeness.rent"
 }
 RentUsed { value (USD per month), basis: median_rent | zillow_zori | acs_median | fmr_one_br | ... (the step used),
@@ -373,31 +375,25 @@ line, never the resort).
   stays in `data/raw/tier_a` as an internal note; the build drops it, `build_career` emits no professionalism block, and
   no file in `data/build`, no route stub and no map module names it (`tests/pipeline/test_no_professionalism.py`). The
   six component model in `pipeline/career.py` stays for the owner's private use only.
-* **Lucrativeness (owner decision 4, 2026-10-13):** estimated net income for the season, before tax and other living
-  costs, USD.
+* **Lucrativeness (owner decisions 4, 2026-10-13, and 2026-10-14):** estimated net income for the season, before
+  tax, USD.
   season months = `season.length_days` / `days_per_month` (30.4) when sourced, else `default_season_months` (5).
-  earnings = hourly × `hours_per_week` (40, standard full time) × season months × `weeks_per_month` (4.33).
-  net income = earnings + tips − median rent × season months. No food, transport, pass or gear offsets.
+  net income = hourly × `hours_per_week` (40, standard full time) × season months × `weeks_per_month` (4.33).
+  No rent, tips, tax, food, transport, pass or gear (owner decision 2026-10-14: "remove rent and tips from math").
   The wage range comes from the displayed pay rows, any cert level: bottom = lowest `hourly_low`, top = highest
   `hourly_high`. `low` is the net income at the bottom, `high` at the top, and `mid` at the middle of the range,
-  (bottom + top) / 2 (owner decision 2026-10-14: the mid earnings case). Tips only from a sourced or 3+ report figure, else 0 with
-  the stated assumption "Tips are not included yet". The median rent follows `rent.lucrativeness_rent` (owner decision
-  2026-10-14, see "Lucrativeness rent" below): the median of the sourced median rent figures for the resort's town, else
-  Zillow's typical rent (ZORI), else the county ACS median gross rent, else HUD FMR one bedroom. Employee housing rent no
-  longer feeds lucrativeness. Status `insufficient_data` when there is no pay row or no rent; `assumptions_unset` only if hours or the
-  default season months are null in config. `assumptions` (each `{key, value, label}`, labels ready to show):
-  `wage_mid_usd` (label "Middle of the posted wage range (USD per hour)"), `wage_top_usd`, `wage_bottom_usd`, `hours_per_week`, `season_months` (label says sourced length or standard season),
-  `season_months_basis` (`season_length` | `default`), `weeks_per_month`, `tips_season_usd` (label "Tips are not included
-  yet" when null), `rent_monthly_usd` (label "Median rent per month (USD)", or "Zillow typical rent (ZORI) per month
-  (USD)" and "HUD Fair Market Rent per month (USD)" for those steps), `rent_basis` (`median_rent` | `zillow_zori` |
-  `acs_median` | `fmr_one_br` | ...), `rent_source_id` (several joined with ", "), `tax` (label "Before tax and other living costs").
+  (bottom + top) / 2 (the mid earnings case). Every resort with a pay row computes. Status `insufficient_data` when
+  there is no pay row; `assumptions_unset` only if hours or the default season months are null in config.
+  `assumptions` (each `{key, value, label}`): `wage_mid_usd` (label "Middle of the posted wage range (USD per hour)"),
+  `wage_top_usd`, `wage_bottom_usd`, `hours_per_week`, `season_months` (label says sourced length or standard season),
+  `season_months_basis` (`season_length` | `default`), `weeks_per_month`, `tax` (label "Before tax and other living
+  costs"). `rent` is the town's rent block (see "Lucrativeness rent" below), kept for the Housing section only.
   Wording (owner decision 2026-10-14): the panel heading and the Color by mode read "Estimated net income". The panel
-  shows `mid` as the one headline figure with the basis line "Middle of the posted ski school wage range, 40 hours a
-  week, minus median rent. Before tax." (hours from `hours_per_week`), then "Range: $low to $high across the wage
-  scale." The figure is never called savings.
+  shows only `mid` and the line "Range: $low to $high", with links to the pay and season length sources. It shows
+  no formula, no assumptions list and no rent. The figure is never called savings.
 * **Lucrativeness rent (owner decision 2026-10-14; `pipeline/rent_used.py`):** the first step of `rent.lucrativeness_rent`
   (`[median_rent, zillow_zori, acs_median, fmr_one_br]`) with a value becomes `lucrativeness.rent`; nothing is ever
-  interpolated. Also available as steps: `employee_housing`, `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`.
+  interpolated. It shows in the Housing section ("Rent near the resort") and no longer feeds the figure. Also available as steps: `employee_housing`, `reported_area`, `baseline`, `fmr_studio`, `fmr_two_br`.
   A rent whose `as_of` is older than `staleness.max_age_months` is `stale` (Needs update, `stale_fields`
   `lucrativeness.rent`, a build warning). A Tier A record whose location source says its point is a placeholder
   (MetroSlopes at SFO) gets no rent by place (ZORI, ACS, HUD).
@@ -425,9 +421,9 @@ line, never the resort).
     multifamily, smoothed"). Owner instructions: `data/raw/rent/README.md`.
   * `acs_median`, `fmr_one_br`: the county baseline (Phase 5), with `geography` the county.
 * **Shared calculator model (Phase 9):** lucrativeness is computed by `pipeline/season_income.py`, the Python mirror of
-  `assets/js/season-income.mjs` used by the Season Income Calculator, with zero offsets (`lucrativeness_inputs` with
-  season length = months × 4.33 × 7 days): earnings = its `gross`, net income = its `net_before_tax`, so the map and the
-  calculator agree for the same inputs. Whole dollars
+  `assets/js/season-income.mjs` used by the Season Income Calculator, unchanged, called with rent, tips and every
+  offset at 0 (`lucrativeness_inputs` with season length = months × 4.33 × 7 days): net income = its `net_before_tax`
+  (then equal to its `gross`), so the map and the calculator agree for the same inputs. Whole dollars
   use `round_half_up` (JS `Math.round`, ties toward positive infinity). The calculator's headline net is after tax;
   the map's lucrativeness is net income before tax (ROADMAP Section 6) and applies no tax assumption, which stays the
   owner's call. The calculator has state income tax rates for only 13 states (WA, WY, NV, AK, NH, CO, UT, ID, VT, MT,
@@ -510,20 +506,37 @@ Build outputs:
 * **Lifts:** extract features carry `{ id, name, ref, lift_type, ski_area_ids }`; only `status: operating` lifts. Detail lifts carry exactly `{ name, lift_type, source_id }`. `name` may be null in OpenStreetMap.
 * **Detail files** are written compact; files for resorts that no longer qualify are removed. `housing_summary.cheapest_rent_monthly_low` uses published or reported site rents (never the baseline); `has_transit` is true when the detail file has transit.
 
-## Official trail maps (links only)
+## Official trail maps (page links and embedded files)
 
-Official trail maps are copyrighted art owned by the resorts or their artists (James Niehues and others). The site
-links to them in a new tab and never downloads, vendors, rehosts, hotlinks or embeds them.
+Official trail maps are copyrighted art owned by the resorts or their artists (James Niehues and others). Owner
+decision 2026-10-14 (ROADMAP Section 10): the trail map dialog shows the resort's own map file, loaded straight from
+the resort's servers (hotlinked) and credited "Trail map © <resort>" with a link to the resort's page. The site never
+downloads, copies, rehosts or modifies the art, and the repository never holds an image of it.
 * Raw input `data/raw/trailmaps_official/<batch>.yaml` (see its README): `{ batch, researched_date, sources: [Source],
   trailmaps: [{ resort_id, url, format: pdf|jpg|png|page, season ("2025/26" or null), source_id, as_of, confidence,
-  note? }] }`, validated by `pipeline/schemas/trailmaps_official.py` and loaded by `pipeline/trailmaps_official.py`.
+  note?, image_url?, image_format?: jpg|png|webp|pdf, image_source_id?, image_as_of?, image_confidence?,
+  image_note? }] }`, validated by `pipeline/schemas/trailmaps_official.py` and loaded by `pipeline/trailmaps_official.py`.
 * Rules: https only; the url's domain (last two labels) equals its source's, which must be the resort's or its
   operator's own site; pdf, jpg and png need that file extension and page must not be a file; season only when the
   source names it; one record per resort. URLs found by web search follow the search result rule (source note "From a
   search result for this page; page not opened", confidence `estimated`).
-* Build output: `Resort.official_trailmap` (the record without `resort_id`); its source joins `resort.sources`.
-  Route stubs prerender the link. The panel shows "Official trail map from <resort name>" with the format and season;
-  the trail map dialog shows the same link next to "Interactive map from OpenSkiMap".
+* Map file rules (`image_*`): the five fields `image_url`, `image_format`, `image_source_id`, `image_as_of`,
+  `image_confidence` come together; `image_note` needs them. `image_url` is https and ends in the format's extension
+  (`.jpg`/`.jpeg`, `.png`, `.webp`, `.pdf`; query strings allowed), or an image CDN names the format in `fmt=` (scene7
+  style). Its host is the resort's own site (the registered domain of the page `url` or of its sources) or an operator
+  image CDN in config `trailmap.official_image_domains` (an entry covers its subdomains), and it matches its own
+  source's site the same way. Only file URLs seen in a search result or on a page; never one built from a pattern.
+* Build output: `Resort.official_trailmap` (the record without `resort_id`, every `image_*` key present and null when
+  there is no file); its sources join `resort.sources`. Route stubs prerender the page link. The panel shows "Official
+  trail map from <resort name>" with the format and season, and "Open the trail map" when there is a file or an
+  OpenSkiMap drawing. The file the dialog shows is `image_url`, else `url` when its format is pdf, jpg or png
+  (`officialMapFile` in `map/js/panel.js`). The link checker (`pipeline/link_check.py`) checks `image_url` monthly too.
+* 2026-10-14 files: 42 web searches (operator CMS paths such as `/-/aemasset/sitecore/` and `/-/media/`, legend
+  wording found only inside map PDFs, two to ten domains per query). Search results never return image file URLs, so
+  every file found is a PDF: Vail, Park City, Okemo, Stevens Pass, Wilmot, Mount Sunapee, Hidden Valley (PA), Liberty,
+  Afton Alps (Vail Resorts), Crystal Mountain, Sugarbush, Snowshoe, Palisades Tahoe Alpine (back side), June Mountain
+  (Alterra), Grand Targhee, Cranmore and Mount Bohemia. With the 7 records whose `url` is a PDF, 24 Tier A resorts
+  embed their official map. Older files carry an `image_note`. No file uses `official_image_domains` yet.
 * 2026-10-13 batch: 96 Tier A resorts from 19 searches (multi domain queries; the Vail Resorts pattern
   `/the-mountain/about-the-mountain/trail-map(s).aspx` was guessed once and every URL was seen in a result). Still
   without a link: Alpine Valley (OH), Alta (winter), Black Mountain (ME), Burke, Hermitage Club, Hyland Hills, Mad River
@@ -974,6 +987,9 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
    records (`index.loadDetails()`: a resort without an embedded record, a comparison, the trail map) or once the WebGL
    map is ready. After the WebGL map is ready: the color mode control (`recolor.js`, `heat.js`), then
    `us-states.geojson`. Source links rendered earlier show a placeholder that fills in when `sources.json` lands.
+   The basemap underlay (`underlay.js`: `underlay.json`, then both WebP images, 470 KB, decoded off the main thread)
+   starts once the MapLibre preload has finished, so a quick click keeps the bandwidth, and then eases into the 2D
+   picture. Resort pictures skip it; a click before it loads brings it with the WebGL map instead.
 * Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
   A resort page validates the record its stub embeds, so it needs Zod and `definitions.json` but no `resorts.json`.
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
@@ -999,13 +1015,50 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 * Lighthouse (mobile defaults, simulated throttling, same SwiftShader Chromium): see "Performance budget" below for
   the current numbers. Accessibility, Best Practices and SEO 100. Before the click to start (owner decision 9) and
   the deferred MapLibre download, Performance was about 65, held down by 5 to 7 s of blocking time from MapLibre.
+* Basemap underlay (`config.basemap.underlay`, `map/js/underlay.js`, owner report 2026-10-14 "where is my united
+  states satellite underlay?"): the USGS tiles load only after the click, so the 2D picture before it had no imagery
+  at all, and they come from an outside host, which a host's content security policy (such as the private claude.ai
+  preview) can block. The underlay is served with the site, so it always shows. Source: Natural Earth I with Shaded Relief, Water and Drainages, 1:10m large size (`NE1_HR_LC_SR_W`, 1 arc
+  minute, public domain; source record `natural-earth-ne1-hr-lc-sr-w` in `data/raw/sources/basemap.yaml`).
+  `pipeline/tools/make_underlay.py` is a one time asset script (the only code that needs Pillow, kept out of
+  `requirements.txt`; its 323 MB download goes to the ignored `data/raw/basemap/download/`). It crops two boxes,
+  resamples them to the `pipeline/heat.py` grid (columns even in longitude, rows even in Web Mercator y, area
+  filtered), mutes them with MapLibre's raster math (saturation -0.3, contrast 0.05, brightness max 0.55) plus a gamma
+  of 1.4 for a darker satellite look, fades the edges into the map background and writes WebP:
+  * `images/basemap/underlay-lower48.webp`: -131 to -61, 17 to 55 (past the national view, so the fade stays off the
+    states), 58 px per degree, 4060 x 2835, 363 KB.
+  * `images/basemap/underlay-alaska.webp`: the inset's source box (-180 to -129.5, 51.2 to 71.6), so the inset copy
+    fills its frame exactly, 36 px per degree, 1818 x 1602, 106 KB.
+  * `images/basemap/underlay.json`: corners (MapLibre order), sizes, hashes, the tone and the source.
+  Each image stays within 4096 px a side, since MapLibre uploads an image source as one WebGL texture and many phones
+  cap textures there. `tests/pipeline/test_underlay.py` checks the math against the shader, the sidecar against the
+  images, the boxes against `nationalBounds` and `inset.js`, and the credits.
+* WebGL map: image sources `underlay-lower48` and `underlay-alaska` are the first layers above the background, at
+  every zoom; `underlay-alaska-inset` (corners through `insetCorners`) sits on the inset panel at the national view,
+  where Alaska at its true place is hidden. The tone is baked in, so the layers use a neutral paint. When the picture
+  has loaded the underlay before the click (the usual case) it is part of the first style, so the switch from the
+  picture shows no gap. Else (a quick click, or a resort page) it joins once the data layers are drawn, so its decode
+  and texture upload never hold the first frame back. It never gates readiness.
+* 2D picture: `addPreviewUnderlay` draws each image as an SVG `feImage` on a rect clipped to the view, in the
+  picture's Web Mercator framing, under the clusters and dots, with the inset on its own dark panel as on the WebGL
+  map. An SVG `<image>` (directly, in a pattern, or faded in from opacity 0) is a Largest Contentful Paint candidate and
+  would move LCP to the late underlay paint; a filter primitive is never one (checked in Chromium 141), so LCP stays
+  on the intro text. The picture has no state outlines, matching the WebGL map until `us-states.geojson` arrives.
+  The picture draws the underlay up to zoom 9 (national, state and cluster views). A resort picture skips it and its
+  download: at 58 px per degree it would be upscaled about 30 times there, and the USGS imagery takes over on the
+  WebGL map.
 * Satellite imagery (`config.basemap.imagery`): USGS The National Map `USGSImageryOnly` tiles (public domain, 256 px,
-  max zoom 16) as the first layer above the background, muted (`raster-saturation` -0.35, `raster-brightness-max`
-  0.7, `raster-contrast` -0.1). State fills turn 55% opaque over it so outlines, heat colors and markers stay readable;
-  the Alaska inset sits on its own dark panel. Attribution "Imagery: USGS The National Map" comes from the source. The
-  tiles load only after the click to start, so the first load and Lighthouse never fetch them. The tests answer
-  tile requests with a synthetic local tile (`tests/map/fixtures/imagery-tile.png`), since the sandbox cannot reach the
-  USGS service.
+  max zoom 16) over the underlay from zoom 6.5 (layer and source `minzoom`), faded in by 7.5 (`raster-opacity`), so
+  national and state views request no tile and cluster and resort views get the detail. Where tiles fail or are
+  blocked, the underlay shows through. Muted (`raster-saturation` -0.35, `raster-brightness-max` 0.7,
+  `raster-contrast` -0.1). State fills turn translucent over both (`basemap.state_fill_opacity`, zoom stops: 30% to
+  zoom 6.5, 55% from 7.5) so the underlay reads at national and state zooms while outlines, heat colors and markers
+  stay readable; the inset's Alaska fill uses the same stops. The map has one dark theme; heat rasters draw above the
+  fills. Attribution: "Relief: Natural Earth" is in `basemap.attribution`; "Imagery: USGS The National Map" comes from
+  the source, so MapLibre lists it only from the imagery's minzoom. The tiles load only after the click to start, so
+  the first load and Lighthouse never fetch them. The tests answer tile requests with a synthetic local tile
+  (`tests/map/fixtures/imagery-tile.png`), since the sandbox cannot reach the USGS service; the underlay checks in
+  `tests/map/browser_test.mjs` make every tile fail instead.
 
 ### Performance budget
 * **Target** (Phase 8, queue item 18a): Lighthouse Performance (mobile defaults) with a median of 95 or more over 5
@@ -1059,7 +1112,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 ### Color modes: heat maps
 Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state
 outlines, and Alaska (at its true place, and in the national inset). Lucrativeness turns on by itself as soon as any
-resort has a computed `lucrativeness_mid` (pay and a rent, owner decision 2026-10-14). Values come from the slim index
+resort has a computed `lucrativeness_mid` (pay, owner decision 2026-10-14). Values come from the slim index
 (`lucrativeness_mid`, `season_length_days`, `snowfall_annual_in`). Every
 setting lives in `config/definitions.yaml` `heat` and reaches the UI through `definitions.json`.
 * **Classes** (`heat.modes.<mode>`, `scale: classed`): Snowfall and Season length use hard edged classes, so a step of
@@ -1169,15 +1222,14 @@ same inset.
 ### Panel changes from the 2026-10-13 owner decisions
 * Professionalism: removed from the public site (owner decision, 2026-10-13). The panel, the list and compare views,
   the route stubs and their meta descriptions show no rating.
-* Lucrativeness (decision 4, wording and mid of 2026-10-14): the headline "Estimated net income" is `mid` (middle of
-  the posted wage range), then the basis line and "Range: $low to $high across the wage scale." Assumptions list every `{key, value, label}` except `rent_basis`, `rent_source_id` and
-  `season_months_basis`; `tips_season_usd` (null) and `tax` show as statements from their labels. The rent line
-  (`.rent-line`, owner decision 2026-10-14) renders `lucrativeness.rent`: "Median rent $2,275 a month for one bedroom in
-  Vail, CO (median of 2 sources: Rentometer, Zumper), 2026", "single source" for one figure, "in the Bozeman metro" or
-  "in the Municipality of Anchorage" for those places; the fallbacks read "Zillow typical rent (ZORI) $2,450 a month
-  (Summit County, CO, Aug 2026)" and "Census ACS median gross rent $1,950 a month (Summit County)". Then its confidence
-  badge, Needs update when `stale`, "Last verified <as_of>" and every source linked. Without `rent` (older builds) the
-  former `rent_basis` "Rent used" line shows with each of its sources.
+* Lucrativeness (decision 4, wording, mid and method of 2026-10-14): the block shows "Estimated net income", `mid`
+  with its estimated badge, "Range: $low to $high" (`.lucr-range`) and the pay and season length sources
+  (`.lucr-sources`). No assumptions list, no formula and no rent. The rent line (`.rent-line`) renders
+  `lucrativeness.rent` first in the Housing section's "Rent near the resort": "Median rent $2,275 a month for one
+  bedroom in Vail, CO (median of 2 sources: Rentometer, Zumper), 2026", "single source" for one figure, "in the
+  Bozeman metro" or "in the Municipality of Anchorage" for those places; the fallbacks read "Zillow typical rent (ZORI)
+  $2,450 a month (Summit County, CO, Aug 2026)" and "Census ACS median gross rent $1,950 a month (Summit County)". Then
+  its confidence badge, Needs update when `stale`, "Last verified <as_of>" and every source linked.
 * Access (decision 6): Housing and commute opens with "Getting to the mountain": the rating label (Convenient,
   Transit friendly, Mixed, Car centric), its badge, the one sentence `summary_md` and the source with its date
   (`resort.access`, or the detail file's `access` when the resort has none).
@@ -1188,12 +1240,29 @@ same inset.
   "Thanks. Your report goes to review before anything appears on the map."; a failure shows an error and a
   "Try again" button that resends the same report. Submitted values never render.
 
-### Trail map dialog (`map/js/trailmap.js`)
-* Labelled "Interactive map from OpenSkiMap" and titled "<resort> interactive map". Opened from "Open the interactive map" in the resort panel and from a map control (mountain icon under the zoom buttons)
-  on resort views whose record has `trailmap_available`. The module, `trailmap/<id>.json` (validated with
-  `TrailMapFile` and per feature `RunFeature` and `LiftFeature` in `schemas.js`) and MapLibre load on first open.
+### Trail map dialog (`map/js/trailmap.js`, `map/js/officialmap.js`)
+* Titled "<resort> trail map". Opened from "Open the trail map" in the resort panel and from a map control (mountain
+  icon under the zoom buttons) on resort views whose record has `trailmap_available` or an official map file.
+  `trailmap.js` and `officialmap.js` load on first open; nothing of the official map loads before the dialog opens.
+* Two tabs (WAI-ARIA tabs, automatic activation; Left, Right, Home and End move between them): **Official map**
+  (when there is a file; selected on open) and **Interactive** (when `trailmap_available`). With one view the tab list
+  is hidden. The Interactive tab loads `trailmap/<id>.json` (validated with `TrailMapFile` and per feature
+  `RunFeature` and `LiftFeature` in `schemas.js`) and MapLibre the first time it shows.
+* Official map, image: an `<img loading="lazy" referrerpolicy="no-referrer" decoding="async">` straight from the
+  resort's server in a zoomable, pannable viewer: mouse wheel (about the pointer), pinch, drag, double click, plus,
+  minus and Reset buttons, and on the focused map the arrow keys (Shift for bigger steps), plus, minus and 0. It starts
+  fitted to the frame; zoom runs from the fit to six times the fit (at least 2x the file's pixels).
+* Official map, PDF: an `<object type="application/pdf">` with a "View full size on <resort>" fallback link inside.
+  Browsers without a PDF viewer (`navigator.pdfViewerEnabled === false`, most phones) get no object.
+* Under the map: "Trail map © <resort>", a link to the resort's trail map page (when it differs from the file),
+  "View full size on <resort>" (the file, new tab), the season and the `image_note`.
+* Fallback: an image `error`, an object `error` (an HTTP error) or no object `load` within 15 s, or no PDF viewer,
+  shows a short note with a link to the file ("The official trail map could not load from <resort>." or "This browser
+  opens PDF trail maps in a new tab.") and selects the Interactive tab when there is one. A PDF that the resort's
+  server refuses to frame or forces to download may show nothing without an error; the link and the Interactive tab
+  stay one click away.
 * A native modal `<dialog>`: the page behind is inert, Tab cycles inside, Escape, the Close button and a backdrop click
-  close it, focus returns to the button that opened it. Reopening the same resort keeps its map and last view;
+  close it, focus returns to the button that opened it. Reopening the same resort keeps its tab, map and last view;
   another resort replaces it. Phones get a full screen sheet with the legend below the map.
 * Its own MapLibre map on a light surface: runs colored by `difficulty_us` (green `#12804a`, blue `#1b5fc1`,
   black `#14171c`, double black the same ink, wider and dashed, terrain park `#d4610a`, unrated grey dotted), area runs
@@ -1224,7 +1293,7 @@ same inset.
 
 ### Sources and credits page (`/map/credits/`)
 A hand written static page in the site layout (sidebar placeholder and fetch snippet from the map shell, no map
-JavaScript). It credits OpenSkiMap and OpenStreetMap contributors (ODbL), USGS The National Map imagery, US Census
+JavaScript). It credits OpenSkiMap and OpenStreetMap contributors (ODbL), the Natural Earth underlay (public domain), USGS The National Map imagery, US Census
 outlines via `us-atlas`, NOAA NCEI U.S. Climate Normals 1991 to 2020, NRCS SNOTEL, Open Meteo with ERA5 (CC BY 4.0),
 the rent sources (section "Rent": published median rents and their publishers; "Rent data: Zillow Observed Rent Index
 (ZORI), Zillow Research" linked to https://www.zillow.com/research/data/; Census ACS and HUD Fair Market Rents),

@@ -518,7 +518,44 @@ body.map-page { background: var(--bg); }
   background: #10151e; color: #f2f4f8; border-radius: 6px; padding: .25rem .5rem; font-size: .8rem; box-shadow: 0 2px 8px rgba(0,0,0,.3);
 }
 .trailmap-label[hidden] { display: none; }
-.trailmap-side { overflow-y: auto; padding: .8rem 1rem 1rem; border-left: 1px solid var(--line); font-size: .85rem; }
+.trailmap-side-wrap { display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--line); }
+.trailmap-side { flex: 1; min-height: 0; overflow-y: auto; padding: .8rem 1rem 1rem; font-size: .85rem; }
+.trailmap-note { margin: 0; padding: .6rem 1rem; font-size: .85rem; background: var(--map-surface-2); border-bottom: 1px solid var(--line); }
+.trailmap-note[hidden] { display: none; }
+.trailmap-note a, .tmo-foot a, .tmo-status a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+/* Tabs: Official map and Interactive */
+.trailmap-head { flex-wrap: wrap; }
+.trailmap-tabs { display: flex; gap: .25rem; margin-right: auto; }
+.trailmap-tabs[hidden], .trailmap-tab[hidden] { display: none; }
+.trailmap-tab {
+  min-height: 36px; padding: .35rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: transparent;
+  color: var(--ink); font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer;
+}
+.trailmap-tab[aria-selected="true"] { background: var(--ink); color: var(--map-surface); border-color: var(--ink); }
+.trailmap-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.trailmap-views { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.trailmap-panel { flex: 1; min-height: 0; }
+.trailmap-panel[hidden] { display: none; }
+/* Official map (map/js/officialmap.js): the resort's own file, shown from its servers */
+.trailmap-official { display: flex; flex-direction: column; }
+.tmo-frame { position: relative; flex: 1; min-height: 0; background: #f3f5f8; }
+.tmo-stage, .tmo-viewer { position: absolute; inset: 0; }
+.tmo-viewport { position: absolute; inset: 0; overflow: hidden; touch-action: none; cursor: grab; user-select: none; }
+.tmo-viewport.is-dragging { cursor: grabbing; }
+.tmo-viewport:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.tmo-img { position: absolute; left: 0; top: 0; max-width: none; max-height: none; transform-origin: 0 0; visibility: hidden; }
+.tmo-viewer.is-ready .tmo-img { visibility: visible; }
+.tmo-tools { position: absolute; top: .6rem; left: .6rem; z-index: 2; display: flex; gap: .3rem; }
+.tmo-btn { min-width: 36px; min-height: 36px; background: #10151e; color: #f2f4f8; border: 1px solid rgba(255,255,255,.25); font-weight: 700; }
+.tmo-btn:disabled { opacity: .45; cursor: default; }
+.tmo-status { color: #2a3140; }
+.tmo-pdf { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.tmo-pdf-fallback { padding: 1rem; color: #2a3140; }
+.tmo-foot { padding: .55rem 1rem .7rem; border-top: 1px solid var(--line); font-size: .85rem; }
+.tmo-foot p { margin: 0 0 .2rem; }
+.tmo-credit { font-weight: 600; }
+.tmo-help { color: var(--muted); }
+.tmo-help[hidden] { display: none; }
 .trailmap-help { margin: 0 0 .6rem; color: var(--muted); }
 .trailmap-legend { list-style: none; margin: 0 0 .8rem; padding: 0; display: grid; gap: .4rem; }
 .trailmap-legend li { display: flex; align-items: center; gap: .5rem; }
@@ -531,7 +568,10 @@ body.map-page { background: var(--bg); }
 @media (max-width: 759.98px) {
   .trailmap-dialog { width: 100vw; height: 100dvh; margin: 0; border: 0; border-radius: 0; inset: 0; }
   .trailmap-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; }
-  .trailmap-side { border-left: 0; border-top: 1px solid var(--line); max-height: 38dvh; }
+  .trailmap-side-wrap { border-left: 0; border-top: 1px solid var(--line); max-height: 38dvh; }
+  .trailmap-head { gap: .5rem; padding: .55rem .75rem; }
+  .trailmap-tabs { order: 3; width: 100%; }
+  .tmo-foot { padding: .5rem .75rem .6rem; }
 }
 .report-retry[hidden] { display: none; }
 .report-form.is-sent .form-status { color: var(--pub); }

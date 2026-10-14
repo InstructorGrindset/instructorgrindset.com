@@ -123,7 +123,7 @@ def write_lucrativeness(out_dir: Path, *, resorts: Sequence[dict], outlines: dic
         "domain": lg["domain"],
         "ticks": lg["ticks"],
         "ramp": list(heat.ramp.colors),
-        # Each value is a resort's computed career.lucrativeness.mid in resorts.json, whose assumptions and rent
+        # Each value is a resort's computed career.lucrativeness.mid in resorts.json, whose assumptions and pay
         # sources are listed there.
         "values": {"field": "career.lucrativeness.mid", "resorts": len(raw), "points": len(pts)},
         "method": {"interpolation": "adaptive modified Shepard", "neighbors": field.neighbors,

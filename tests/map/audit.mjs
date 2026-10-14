@@ -52,7 +52,7 @@ const CHROME = (() => {
 const ARGS = ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'];
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css',
-  '.json': 'application/json', '.geojson': 'application/geo+json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml',
+  '.json': 'application/json', '.geojson': 'application/geo+json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml',
   '.xml': 'application/xml', '.txt': 'text/plain', '.woff2': 'font/woff2' };
 const COMPRESS = /^(text\/|application\/(json|geo\+json|xml)|image\/svg)/;
 
@@ -139,7 +139,8 @@ async function axe(browser, base) {
     { label: 'cluster page with jobs links (Roaring Fork)', url: '/map/co/roaring-fork/' },
     { label: 'list view', url: '/map/', list: true },
     { label: 'resort page, phone', url: '/map/co/i70-corridor/vail/', phone: true },
-    { label: 'trail map dialog (Vail)', url: '/map/co/i70-corridor/vail/', trail: true },
+    { label: 'trail map dialog, official map (Vail PDF)', url: '/map/co/i70-corridor/vail/', trail: 'official' },
+    { label: 'trail map dialog, Interactive tab (Vail)', url: '/map/co/i70-corridor/vail/', trail: true },
     { label: 'trail map dialog, phone', url: '/map/co/i70-corridor/vail/', trail: true, phone: true },
     { label: 'national map, snowfall heat map', url: '/map/', heat: 'snowfall' },
     { label: 'national map, season heat map, phone', url: '/map/', heat: 'season', phone: true },
@@ -177,10 +178,21 @@ async function axe(browser, base) {
       await page.waitForTimeout(500);
     }
     if (c.trail) {
-      await page.locator('#panel-content button', { hasText: 'Open the interactive map' }).click();
-      await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded(); }, null, { timeout: 30000 });
-      await page.locator('.trailmap-runs summary').click();
-      await page.waitForTimeout(300);
+      // The official map file loads from the resort's servers; a one page local PDF stands in (no network here).
+      const pdf = Buffer.from('%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj 2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj '
+        + '3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 396]>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n', 'latin1');
+      await ctx.route((u) => u.hostname !== '127.0.0.1' && /\.(pdf|png|jpe?g|webp)$/i.test(u.pathname),
+        (route) => route.fulfill({ status: 200, contentType: 'application/pdf', body: pdf }));
+      await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
+      await page.waitForSelector('dialog.trailmap-dialog[open]', { timeout: 30000 });
+      if (c.trail === 'official') await page.waitForTimeout(1500);
+      else {
+        const tab = page.locator('#trailmap-tab-interactive');
+        if (await tab.isVisible()) await tab.click();
+        await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded(); }, null, { timeout: 30000 });
+        await page.locator('.trailmap-runs summary').click();
+        await page.waitForTimeout(300);
+      }
     }
     await page.addScriptTag({ content: axeSrc });
     const res = await page.evaluate(async () => {

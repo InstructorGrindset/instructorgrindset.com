@@ -14,6 +14,7 @@
 // Fails (exit 1) on any console error, page error, failed request (except the
 // site wide Rooftop font that /assets/global.css references), or assertion.
 import { spawn, execFileSync } from 'node:child_process';
+import zlib from 'node:zlib';
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -85,7 +86,7 @@ function makeStubSite() {
   return t;
 }
 
-function watch(page, label) {
+function watch(page, label, { allow404 = null } = {}) {
   const problems = [];
   const requests = [];
   page.on('console', (m) => {
@@ -105,6 +106,8 @@ function watch(page, label) {
     if (r.status() === 404 && /\/legacy-build\/(map-index|heat\/snowfall|heat\/season)\.json$/.test(r.url())) return;
     // The report form test answers one send with 500 on purpose to exercise the retry.
     if (r.status() === 500 && r.url() === 'https://reports.example.test/submit') return;
+    // Official map fallback tests answer some files with 404 on purpose.
+    if (r.status() === 404 && allow404 && allow404.test(r.url())) return;
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
   });
   page.on('requestfailed', (r) => {
@@ -113,6 +116,8 @@ function watch(page, label) {
     if (/basemap\.nationalmap\.gov\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     // The Inter web font loads after the first paint, so a test that moves on quickly can cancel its download.
     if (/^https:\/\/fonts\.gstatic\.com\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
+    // So can the underlay images, which load after the first paint at idle.
+    if (/\/images\/basemap\/underlay-[a-z0-9]+\.webp$/.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`);
   });
   return {
@@ -156,14 +161,248 @@ async function clickMapAt(page, lngLat) {
   await page.mouse.click(pt.x, pt.y);
 }
 
+// Official trail map files for the dialog tests (map/js/officialmap.js). Made here at run time, so no image is
+// committed and nothing loads from the network: a 1600 x 1000 synthetic PNG and a one page PDF.
+const CRC_TABLE = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+  return t;
+})();
+function crc32(buf) { let c = 0xffffffff; for (const b of buf) c = CRC_TABLE[(c ^ b) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; }
+function fixturePng(w = 1600, hgt = 1000) {
+  const row = w * 3 + 1;
+  const raw = Buffer.alloc(row * hgt);
+  for (let y = 0; y < hgt; y++) {
+    for (let x = 0; x < w; x++) {
+      const o = y * row + 1 + x * 3;
+      const grid = x % 100 < 3 || y % 100 < 3;
+      raw[o] = grid ? 40 : 200 + ((x * 55) / w) | 0; raw[o + 1] = grid ? 60 : 210 + ((y * 45) / hgt) | 0; raw[o + 2] = grid ? 90 : 235;
+    }
+  }
+  const chunk = (type, data) => {
+    const len = Buffer.alloc(4); len.writeUInt32BE(data.length);
+    const td = Buffer.concat([Buffer.from(type, 'ascii'), data]);
+    const crc = Buffer.alloc(4); crc.writeUInt32BE(crc32(td));
+    return Buffer.concat([len, td, crc]);
+  };
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(w, 0); ihdr.writeUInt32BE(hgt, 4); ihdr[8] = 8; ihdr[9] = 2; // 8 bit RGB
+  return Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), chunk('IHDR', ihdr),
+    chunk('IDAT', zlib.deflateSync(raw)), chunk('IEND', Buffer.alloc(0))]);
+}
+function fixturePdf() {
+  const objs = ['<</Type/Catalog/Pages 2 0 R>>', '<</Type/Pages/Kids[3 0 R]/Count 1>>',
+    '<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 396]/Contents 4 0 R>>'];
+  const stream = 'BT /F1 24 Tf 72 300 Td (Synthetic test map) Tj ET';
+  let out = '%PDF-1.4\n';
+  const offs = [];
+  objs.forEach((o, i) => { offs.push(out.length); out += `${i + 1} 0 obj\n${o}\nendobj\n`; });
+  offs.push(out.length); out += `4 0 obj\n<</Length ${stream.length}>>\nstream\n${stream}\nendstream\nendobj\n`;
+  const xref = out.length;
+  out += `xref\n0 5\n0000000000 65535 f \n${offs.map((o) => `${String(o).padStart(10, '0')} 00000 n \n`).join('')}`;
+  out += `trailer\n<</Size 5/Root 1 0 R>>\nstartxref\n${xref}\n%%EOF\n`;
+  return Buffer.from(out, 'latin1');
+}
+const FIXTURE_FILES = { png: null, pdf: null };
+const servedMaps = new WeakMap(); // page -> { referers: [], missing: Set }
+/** Answer every official map file request (an image or PDF off this host) locally; urls in missing get a 404. */
+async function serveOfficialMaps(page) {
+  if (servedMaps.has(page)) return servedMaps.get(page);
+  const st = { referers: [], requested: [], missing: new Set() };
+  servedMaps.set(page, st);
+  await page.route((u) => u.hostname !== '127.0.0.1' && /\.(pdf|png|jpe?g|webp)$/i.test(u.pathname), (route) => {
+    const req = route.request();
+    st.requested.push(req.url());
+    st.referers.push(req.headers().referer || null);
+    if (st.missing.has(req.url())) return route.fulfill({ status: 404, contentType: 'text/plain', body: 'not found' });
+    const pdf = /\.pdf$/i.test(new URL(req.url()).pathname);
+    if (pdf) FIXTURE_FILES.pdf ||= fixturePdf(); else FIXTURE_FILES.png ||= fixturePng();
+    return route.fulfill({ status: 200, contentType: pdf ? 'application/pdf' : 'image/png', body: pdf ? FIXTURE_FILES.pdf : FIXTURE_FILES.png });
+  });
+  return st;
+}
+const AXE_SRC = (() => {
+  try { return fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [path.join(REPO, 'tests', 'map')] }), 'utf8'); } catch { return null; }
+})();
+async function axeCheck(page, label) {
+  if (!AXE_SRC) { log(`  skip axe ${label}: run (cd tests/map && npm install) for axe-core`); return; }
+  if (!(await page.evaluate(() => Boolean(window.axe)))) await page.addScriptTag({ content: AXE_SRC });
+  const res = await page.evaluate(async () => (await window.axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] } }))
+    .violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`));
+  check(res.length === 0, `axe ${label}: ${res.length} violations${res.length ? `\n      ${res.join('\n      ')}` : ''}`);
+}
+
+// Official map tab (Alpha Peak's image): opens first, zoom and pan by buttons, wheel, drag, pinch and keys, the
+// credit and links, the tabs from the keyboard, axe, and nothing loaded before the dialog opens.
+async function officialImageChecks(page, label, { phone = false, shotName = null } = {}) {
+  const st = await serveOfficialMaps(page);
+  const imageUrl = 'https://example.com/fixture/alpha-peak-trail-map-2025-26.png';
+  check(!st.requested.includes(imageUrl) && await page.locator('dialog.trailmap-dialog img, .tmo-viewer').count() === 0,
+    `${label}: nothing of the official map loads before the dialog opens`);
+  const opener = page.locator('#panel-content button', { hasText: 'Open the trail map' });
+  await opener.click();
+  const dlg = page.locator('dialog.trailmap-dialog');
+  await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.viewer && t.viewer.state().ready; }, null, { timeout: 10000 });
+  const tabs = await dlg.locator('[role="tab"]').evaluateAll((els) => els.map((e) => [e.textContent, e.getAttribute('aria-selected'), e.hidden]));
+  check(JSON.stringify(tabs) === JSON.stringify([['Official map', 'true', false], ['Interactive', 'false', false]]),
+    `${label}: the dialog opens on the Official map tab with Interactive beside it (${JSON.stringify(tabs)})`);
+  check(await page.evaluate(() => !window.__careerMap.trail.map), `${label}: the interactive map waits for its tab`);
+  const img = dlg.locator('.tmo-img');
+  const attrs = await img.evaluate((el) => ({ src: el.getAttribute('src'), loading: el.getAttribute('loading'), ref: el.getAttribute('referrerpolicy'), alt: el.alt }));
+  check(attrs.src === imageUrl && attrs.loading === 'lazy' && attrs.ref === 'no-referrer' && attrs.alt === 'Official trail map of Alpha Peak',
+    `${label}: the image loads from the resort's server, lazy, with no referrer (${JSON.stringify(attrs)})`);
+  check(st.referers.length >= 1 && st.referers.every((r) => r === null), `${label}: the map request sends no Referer`);
+  const credit = await dlg.locator('.tmo-credit').innerText();
+  check(credit.startsWith('Trail map © Alpha Peak') && await dlg.locator('.tmo-credit a', { hasText: 'Trail map page on Alpha Peak' }).getAttribute('href') === 'https://example.com/fixture/alpha-peak/trail-map'
+    && await dlg.locator('a.tmo-full').innerText() === 'View full size on Alpha Peak' && await dlg.locator('a.tmo-full').getAttribute('href') === imageUrl
+    && await dlg.locator('a.tmo-full').getAttribute('target') === '_blank', `${label}: credit line, resort page link and View full size on Alpha Peak (${credit})`);
+  const state = () => page.evaluate(() => window.__careerMap.trail.viewer.state());
+  const s0 = await state();
+  check(s0.scale === s0.fit && s0.fit > 0, `${label}: the map starts fitted to the frame (scale ${s0.fit.toFixed(3)})`);
+  check(await dlg.locator('.tmo-btn[aria-label="Zoom out"]').isDisabled(), `${label}: Zoom out is off at the fitted view`);
+  await dlg.locator('.tmo-btn[aria-label="Zoom in"]').click();
+  const s1 = await state();
+  check(Math.abs(s1.scale / s0.fit - 1.5) < 1e-6, `${label}: the plus button zooms in`);
+  await dlg.locator('.tmo-btn[aria-label="Zoom out"]').click();
+  check(Math.abs((await state()).scale - s0.fit) < 1e-6, `${label}: the minus button zooms out`);
+  const vp = await dlg.locator('.tmo-viewport').boundingBox();
+  const cx = vp.x + vp.width / 2; const cy = vp.y + vp.height / 2;
+  if (!phone) {
+    await page.mouse.move(cx, cy);
+    await page.mouse.wheel(0, -400);
+    await page.waitForTimeout(100);
+    const sw = await state();
+    check(sw.scale > s0.fit * 1.3, `${label}: the mouse wheel zooms in (${(sw.scale / s0.fit).toFixed(2)}x)`);
+    await page.mouse.down();
+    await page.mouse.move(cx + 80, cy + 40, { steps: 4 });
+    await page.mouse.up();
+    const sd = await state();
+    check(Math.abs(sd.x - sw.x - 80) < 1.5 && Math.abs(sd.y - sw.y - 40) < 1.5, `${label}: dragging pans the map`);
+  }
+  // Pinch: two pointers move apart.
+  await dlg.locator('.tmo-btn[aria-label="Reset the view"]').click();
+  const sp0 = await state();
+  await page.evaluate(({ cx: x, cy: y }) => {
+    const el = document.querySelector('.tmo-viewport');
+    const ev = (type, id, px) => el.dispatchEvent(new PointerEvent(type, { pointerId: id, pointerType: 'touch', isPrimary: id === 1, clientX: px, clientY: y, bubbles: true }));
+    ev('pointerdown', 1, x - 50); ev('pointerdown', 2, x + 50);
+    ev('pointermove', 2, x + 100); ev('pointermove', 1, x - 100);
+    ev('pointerup', 1, x - 100); ev('pointerup', 2, x + 100);
+  }, { cx, cy });
+  const sp1 = await state();
+  check(sp1.scale / sp0.scale > 1.9 && sp1.scale / sp0.scale < 2.1, `${label}: pinching zooms (${(sp1.scale / sp0.scale).toFixed(2)}x)`);
+  // Keyboard on the map: + zooms, arrows pan, 0 resets.
+  await dlg.locator('.tmo-viewport').focus();
+  await page.keyboard.press('0');
+  await page.keyboard.press('+');
+  const sk0 = await state();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowDown');
+  const sk1 = await state();
+  check(sk0.scale > s0.fit && sk1.x < sk0.x && sk1.y < sk0.y, `${label}: the plus and arrow keys zoom and pan`);
+  await page.keyboard.press('-');
+  await page.keyboard.press('0');
+  check(Math.abs((await state()).scale - s0.fit) < 1e-6, `${label}: 0 resets the view`);
+  if (shotName) await page.screenshot({ path: path.join(SHOTS, shotName) });
+  await axeCheck(page, `${label} dialog on the Official map tab`);
+  // Tabs from the keyboard: Right goes to Interactive (its map then loads), Left comes back.
+  await dlg.locator('#trailmap-tab-official').focus();
+  await page.keyboard.press('ArrowRight');
+  const onInt = await page.evaluate(() => ({ sel: document.querySelector('#trailmap-tab-interactive').getAttribute('aria-selected'), focus: document.activeElement.id,
+    off: document.querySelector('#trailmap-panel-official').hidden, int: document.querySelector('#trailmap-panel-interactive').hidden }));
+  check(onInt.sel === 'true' && onInt.focus === 'trailmap-tab-interactive' && onInt.off && !onInt.int, `${label}: Right arrow selects the Interactive tab`);
+  await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded() && t.map.getLayer('tm-run'); }, null, { timeout: 20000 });
+  check(true, `${label}: the Interactive tab loads the OpenSkiMap map`);
+  await axeCheck(page, `${label} dialog on the Interactive tab`);
+  await page.keyboard.press('ArrowLeft');
+  check(await page.evaluate(() => document.querySelector('#trailmap-tab-official').getAttribute('aria-selected') === 'true' && !document.querySelector('#trailmap-panel-official').hidden),
+    `${label}: Left arrow returns to the Official map`);
+  await page.keyboard.press('End');
+  await page.keyboard.press('Home');
+  check(await page.evaluate(() => document.activeElement.id === 'trailmap-tab-official'), `${label}: Home and End move between the tabs`);
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(150);
+  check(!(await dlg.evaluate((d) => d.open)) && await opener.evaluate((el) => el === document.activeElement), `${label}: Escape closes it and focus returns`);
+}
+
+// Failures: an image that does not load and a PDF fall back with a short note; PDFs show in an <object>.
+async function officialFallbackChecks(browser, stubBase) {
+  log('\nOfficial trail map fallbacks (stub site, files served by the test)');
+  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const w = watch(page, 'official map fallbacks', { allow404: /\/fixture\/(alpha-peak-trail-map-2025-26\.png|kilo-notch-trail-map\.pdf)$/ });
+  const st = await serveOfficialMaps(page);
+  st.missing.add('https://example.com/fixture/alpha-peak-trail-map-2025-26.png');
+  await page.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+  await ready(page);
+  await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
+  const dlg = page.locator('dialog.trailmap-dialog');
+  await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.tab === 'interactive' && t.map && t.map.loaded(); }, null, { timeout: 20000 });
+  const note = await dlg.locator('.trailmap-note').innerText();
+  check(note.startsWith('The official trail map could not load from Alpha Peak. Showing the interactive map.')
+    && await dlg.locator('.trailmap-note a').getAttribute('href') === 'https://example.com/fixture/alpha-peak-trail-map-2025-26.png',
+  `image that fails: the dialog falls back to Interactive with a note and a link (${note})`);
+  await page.screenshot({ path: path.join(SHOTS, 'desktop-14c-trail-map-fallback.png') });
+  await axeCheck(page, 'trail map dialog after the image failed');
+  await page.keyboard.press('Escape');
+  // Kilo Notch: a PDF and no OpenSkiMap drawing, so only the official map.
+  await page.goto(`${stubBase}/map/vt/fixture-green-ridge/kilo-notch/`);
+  await ready(page);
+  check(await page.locator('#panel-content .trailmap-drawn button').innerText() === 'Open the trail map'
+    && (await page.locator('#panel-content .trailmap-drawn .fact-meta').innerText()).trim() === 'Official map from Kilo Notch', 'PDF only resort: the button names the official map');
+  check(await page.locator('.trailmap-ctrl').count() === 1, 'PDF only resort: the map control opens the trail map too');
+  await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
+  await page.waitForSelector('dialog.trailmap-dialog object.tmo-pdf');
+  const pdf = await page.evaluate(() => {
+    const o = document.querySelector('dialog.trailmap-dialog object.tmo-pdf');
+    return { data: o.getAttribute('data'), type: o.type, tablist: document.querySelector('.trailmap-tabs').hidden, fallback: o.querySelector('a') && o.querySelector('a').href };
+  });
+  check(pdf.data === 'https://example.com/fixture/kilo-notch-trail-map.pdf' && pdf.type === 'application/pdf' && pdf.tablist && pdf.fallback === pdf.data,
+    `PDF: embedded in an <object> with a fallback link and no tabs (${JSON.stringify(pdf)})`);
+  const loaded = await page.waitForFunction(() => document.querySelector('.tmo-status').hidden, null, { timeout: 8000 }).then(() => true).catch(() => false);
+  check(loaded, 'PDF: the object reports it loaded');
+  await page.screenshot({ path: path.join(SHOTS, 'desktop-14d-trail-map-pdf.png') });
+  await axeCheck(page, 'trail map dialog with a PDF');
+  await page.keyboard.press('Escape');
+  // The same PDF answering 404 (a file the resort removed).
+  st.missing.add('https://example.com/fixture/kilo-notch-trail-map.pdf');
+  await page.reload();
+  await ready(page);
+  await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
+  const gone = await page.waitForFunction(() => { const s = document.querySelector('.tmo-status'); return s && !s.hidden && /could not load/.test(s.textContent) && s.textContent; }, null, { timeout: 20000 })
+    .then((hd) => hd.jsonValue()).catch(() => '');
+  check(gone === 'The official trail map could not load from Kilo Notch. Open it on Kilo Notch.' && await page.locator('dialog.trailmap-dialog object').count() === 0,
+    `PDF that fails: a short note and a link (${gone})`);
+  w.assertClean();
+  await page.close();
+  // A browser without a PDF viewer (most phones): no object, a note and the link instead.
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+  await ctx.addInitScript(() => Object.defineProperty(Navigator.prototype, 'pdfViewerEnabled', { get: () => false }));
+  const p2 = await ctx.newPage();
+  const w2 = watch(p2, 'phone without a PDF viewer');
+  await serveOfficialMaps(p2);
+  await p2.goto(`${stubBase}/map/vt/fixture-green-ridge/kilo-notch/`);
+  await ready(p2);
+  await p2.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
+  await p2.waitForSelector('dialog.trailmap-dialog .tmo-status a');
+  const msg = await p2.locator('dialog.trailmap-dialog .tmo-status').innerText();
+  check(msg === 'This browser opens PDF trail maps in a new tab. Open it on Kilo Notch.' && await p2.locator('dialog.trailmap-dialog object').count() === 0,
+    `no PDF viewer: a note and the link instead of an object (${msg})`);
+  w2.assertClean();
+  await ctx.close();
+}
+
 // Trail map dialog (map/js/trailmap.js): open, legend, a run hover, focus trap, Escape, reopen with its last view.
 async function trailMapChecks(page, label, file, { shotName, via = 'panel', phone = false, fresh = true, base: home = null } = {}) {
   const tm = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const opener = via === 'control' ? page.locator('.trailmap-ctrl') : page.locator('#panel-content button', { hasText: 'Open the interactive map' });
+  const opener = via === 'control' ? page.locator('.trailmap-ctrl') : page.locator('#panel-content button', { hasText: 'Open the trail map' });
+  await serveOfficialMaps(page);
   await opener.waitFor({ timeout: 10000 });
   check(await opener.count() === 1, `${label}: trail map ${via === 'control' ? 'map control' : 'button'} present`);
   await opener.click();
   const dlg = page.locator('dialog.trailmap-dialog');
+  // Resorts with an official map file open on it; the OpenSkiMap drawing is the Interactive tab.
+  const intTab = dlg.locator('#trailmap-tab-interactive');
+  if (await intTab.isVisible() && await intTab.getAttribute('aria-selected') !== 'true') await intTab.click();
   await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded() && t.map.getLayer('tm-run'); }, null, { timeout: 20000 });
   await page.waitForTimeout(300);
   check(await dlg.evaluate((d) => d.open && d.matches(':modal')), `${label}: trail map opens as a modal dialog`);
@@ -244,6 +483,105 @@ async function imageryOutage(browser, base) {
   }
 }
 
+// Share of the map area's pixels near the background color (an empty dark base is near 1), from a screenshot.
+async function darkShare(page) {
+  const box = await page.locator('#map').boundingBox();
+  const png = await page.screenshot({ clip: { x: box.x + 20, y: box.y + 130, width: Math.min(560, box.width - 40), height: 360 } });
+  return page.evaluate(async (b64) => {
+    const img = new Image(); img.src = `data:image/png;base64,${b64}`; await img.decode();
+    const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const ctx = c.getContext('2d', { willReadFrequently: true }); ctx.drawImage(img, 0, 0);
+    const d = ctx.getImageData(0, 0, c.width, c.height).data;
+    let dark = 0;
+    for (let i = 0; i < d.length; i += 4) if (Math.abs(d[i] - 10) + Math.abs(d[i + 1] - 14) + Math.abs(d[i + 2] - 20) < 24) dark += 1;
+    return dark / (d.length / 4);
+  }, png.toString('base64'));
+}
+
+// The satellite style underlay is served with the site and shows with no outside host: in the 2D picture before
+// the click (an feImage, never the LCP element) and in the WebGL map at national and state zooms, with every USGS
+// tile failing. The USGS imagery joins only from its minzoom.
+async function underlayChecks(browser, base, stubBase) {
+  log('\nUnderlay (local Natural Earth images, USGS tiles failing)');
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const usgs = [];
+  await ctx.route(/basemap\.nationalmap\.gov\//, (route) => { usgs.push(route.request().url()); return route.abort('failed'); });
+  const page = await ctx.newPage();
+  // The USGS tiles fail on purpose here; anything else that fails or errors is a bug.
+  const problems = [];
+  page.on('pageerror', (e) => problems.push(`pageerror: ${e.message}`));
+  page.on('console', (m) => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) problems.push(`console: ${m.text()}`); });
+  page.on('requestfailed', (r) => { if (!/basemap\.nationalmap\.gov\/|\/fonts\/Rooftop|fonts\.gstatic\.com/.test(r.url())) problems.push(`request failed ${r.url()}`); });
+  page.on('response', (r) => { if (r.status() >= 400 && !/\/fonts\/Rooftop|\/definitions\.json$/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`); });
+  const images = [];
+  page.on('response', (r) => { if (/\/images\/basemap\//.test(r.url())) images.push({ url: r.url(), status: r.status(), type: r.headers()['content-type'] }); });
+  await page.addInitScript(() => {
+    window.__lcp = [];
+    new PerformanceObserver((l) => { for (const e of l.getEntries()) window.__lcp.push({ tag: e.element ? e.element.tagName.toLowerCase() : null, url: e.url }); })
+      .observe({ type: 'largest-contentful-paint', buffered: true });
+  });
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => document.querySelector('.map-preview .map-preview-underlay feImage'), null, { timeout: 15000 });
+  await page.waitForTimeout(700);
+  const pv = await page.evaluate(() => ({
+    hrefs: [...document.querySelectorAll('.map-preview .map-preview-underlay feImage')].map((f) => { const u = new URL(f.getAttribute('href'), location.href); return { origin: u.origin === location.origin, path: u.pathname }; }),
+    first: document.querySelector('.map-preview').children[1].getAttribute('class'),
+    lcp: window.__lcp, started: window.__careerMap.mapStarted,
+  }));
+  check(!pv.started && pv.hrefs.length === 2 && pv.hrefs.every((h) => h.origin && /^\/images\/basemap\/underlay-(lower48|alaska)\.webp$/.test(h.path)) && pv.first === 'map-preview-underlay',
+    `before the click the picture draws the lower 48 and the Alaska inset underlay from local paths (${pv.hrefs.map((h) => h.path).join(', ')})`);
+  check(pv.lcp.length > 0 && pv.lcp.every((e) => e.tag !== 'image' && !/\/images\/basemap\//.test(e.url || '')), `the underlay is never the LCP element (${pv.lcp.map((e) => e.tag).join(', ')})`);
+  check(images.length >= 3 && images.every((i) => i.status === 200) && images.some((i) => /underlay\.json$/.test(i.url)) && images.filter((i) => /\.webp$/.test(i.url)).every((i) => i.type === 'image/webp'),
+    `underlay.json and both WebP images load from the site (${images.map((i) => `${i.status} ${i.url.replace(/^.*\/images\//, '')}`).join(', ')})`);
+  const pvDark = await darkShare(page);
+  check(pvDark < 0.2, `the picture shows the underlay (${Math.round(pvDark * 100)}% of the sampled area is the plain dark base)`);
+  await shot(page, 'underlay-01-picture-before-click.png');
+
+  await page.click('#map-start');
+  await page.waitForFunction(() => window.__careerMap.mapCtl && window.__careerMap.mapCtl.ready && !document.getElementById('map-start'), null, { timeout: 20000 });
+  await mapIdle(page);
+  const st = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const style = m.getStyle(); const ids = style.layers.map((l) => l.id);
+    const src = ['underlay-lower48', 'underlay-alaska', 'underlay-alaska-inset'].map((id) => {
+      const s = style.sources[id]; const u = s && new URL(s.url, location.href);
+      return { id, type: s && s.type, local: Boolean(u && u.origin === location.origin && /^\/images\/basemap\/underlay-(lower48|alaska)\.webp$/.test(u.pathname)), loaded: m.isSourceLoaded(id) };
+    });
+    const vis = (id) => m.getLayoutProperty(id, 'visibility') !== 'none';
+    const img = style.layers.find((l) => l.id === 'imagery');
+    return { src, ids, zoom: m.getZoom(), imgMin: img && img.minzoom, insetVis: vis('underlay-alaska-inset'), akVis: vis('underlay-alaska'),
+      inset: ids.indexOf('underlay-alaska-inset'), panel: ids.indexOf('inset-panel'), frame: ids.indexOf('inset-frame'), resorts: ids.indexOf('resorts') };
+  });
+  check(st.src.every((s) => s.type === 'image' && s.local && s.loaded), `the WebGL map has the underlay image sources from local paths, loaded (${st.src.map((s) => `${s.id} ${s.loaded ? 'loaded' : 'pending'}`).join(', ')})`);
+  check(st.inset > st.panel && st.inset < st.frame && st.insetVis && !st.akVis, 'national view: the Alaska underlay fills the inset on its panel; Alaska at its true place is hidden');
+  check(st.imgMin === 6.5 && st.zoom < 6.5 && usgs.length === 0, `national view (zoom ${st.zoom.toFixed(2)}) requests no USGS tile; the imagery joins from zoom ${st.imgMin}`);
+  const natDark = await darkShare(page);
+  check(natDark < 0.2, `the WebGL map shows the underlay at the national view (${Math.round(natDark * 100)}% plain dark base)`);
+  await shot(page, 'underlay-02-national-after-click.png');
+
+  // State zoom with every USGS tile failing: the underlay still shows.
+  await page.evaluate(() => window.__careerMap.mapCtl.map.jumpTo({ center: [-106.0, 39.2], zoom: 7.2 }));
+  await mapIdle(page);
+  const zoomDark = await darkShare(page);
+  const at = await page.evaluate(() => ({ attrib: document.querySelector('.maplibregl-ctrl-attrib-inner').textContent }));
+  check(usgs.length > 0 && zoomDark < 0.2, `zoom 7.2 with ${usgs.length} USGS tiles failing: the underlay still shows (${Math.round(zoomDark * 100)}% plain dark base)`);
+  check(at.attrib.includes('Imagery: USGS The National Map') && at.attrib.includes('Natural Earth'), 'from its minzoom the USGS imagery is credited too');
+  await shot(page, 'underlay-03-zoom-usgs-failing.png');
+
+  // A resort picture is too close in for the underlay: it skips the picture and its download.
+  const seen = [];
+  page.on('request', (r) => { if (/\/images\/basemap\//.test(r.url())) seen.push(r.url()); });
+  await page.goto(`${stubBase}/map/ut/fixture-wasatch-like/november-ramps/`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => performance.getEntriesByType('resource').some((e) => /maplibre-gl\.js$/.test(e.name) && e.responseEnd > 0), null, { timeout: 20000 });
+  await page.waitForTimeout(1500);
+  const rp = await page.evaluate(() => ({ pic: document.querySelectorAll('.map-preview').length, ul: document.querySelectorAll('.map-preview-underlay').length }));
+  check(rp.pic === 1 && rp.ul === 0 && seen.length === 0, `a resort picture draws no underlay and downloads none (${seen.length} requests)`);
+  check(problems.length === 0, `underlay: no errors or failed requests besides the USGS tiles${problems.length ? `\n      ${problems.join('\n      ')}` : ''}`);
+  await ctx.close();
+}
+
 // Sample one pixel of the heat images at lon, lat (rows evenly spaced in Web Mercator), as [r, g, b, a].
 function sampleHeat(page, lngLats) {
   return page.evaluate(async (pts) => {
@@ -290,16 +628,19 @@ async function desktop(browser, base) {
   await page.waitForFunction(() => window.__careerMap.mapCtl, null, { timeout: 20000 });
   await page.waitForFunction(() => !document.getElementById('map-start'), null, { timeout: 20000 });
   check(await page.evaluate(() => document.activeElement === window.__careerMap.mapCtl.map.getCanvas()), 'Enter on the start button starts the map and focus moves to it');
+  // A click before the picture loaded the underlay adds it once the data layers are drawn.
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getSource('underlay-lower48'), null, { timeout: 15000 }).catch(() => {});
   const imagery = await page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
     const ids = m.getStyle().layers.map((l) => l.id);
     const src = m.getStyle().sources.imagery;
     const data = ['states-fill', 'clusters-fill', 'resorts'].map((id) => ids.indexOf(id));
-    return { src: src && src.type, tiles: src && src.tiles[0], idx: ids.indexOf('imagery'), data, attrib: document.querySelector('.maplibregl-ctrl-attrib-inner').textContent };
+    const under = ['underlay-lower48', 'underlay-alaska'].map((id) => ids.indexOf(id));
+    return { src: src && src.type, tiles: src && src.tiles[0], idx: ids.indexOf('imagery'), under, data, attrib: document.querySelector('.maplibregl-ctrl-attrib-inner').textContent };
   });
-  check(imagery.src === 'raster' && /basemap\.nationalmap\.gov/.test(imagery.tiles) && imagery.idx === 1 && imagery.data.every((i) => i > imagery.idx),
-    'USGS imagery raster sits under every data layer');
-  check(imagery.attrib.includes('Imagery: USGS The National Map'), 'imagery attribution shows');
+  check(imagery.src === 'raster' && /basemap\.nationalmap\.gov/.test(imagery.tiles) && imagery.under.join() === '1,2' && imagery.idx === 3 && imagery.data.every((i) => i > imagery.idx),
+    'the underlay, then the USGS imagery raster, sit under every data layer');
+  check(imagery.attrib.includes('Relief: Natural Earth'), 'underlay attribution shows (Natural Earth)');
   await ready(page);
   await mapIdle(page);
   check(await heading(page) === 'United States', 'national heading');
@@ -570,22 +911,22 @@ async function desktop(browser, base) {
   // Owner decision 2026-10-13: no professionalism rating anywhere on the page.
   check(!/professionalism/i.test(await page.locator('body').innerText()) && await page.locator('.breakdown, .score-trigger, .professionalism').count() === 0,
     'the resort panel shows no professionalism rating');
-  // Owner decision 2026-10-14: "Estimated net income" at the middle of the wage range, one basis line, then the range.
+  // Owner decisions 2026-10-14: only "Estimated net income" (the middle of the wage range) and its range, with the
+  // pay and season length sources; no formula, no assumptions list and no rent in the career block.
   const luc = page.locator('.score-block', { hasText: 'Estimated net income' });
   const lucText = await luc.innerText();
   check((await luc.locator('.sub').first().innerText()) === 'Estimated net income' && (await luc.locator('.fact-value').first().innerText()) === '$8,900'
-    && (await luc.locator('.lucr-basis').innerText()) === 'Middle of the posted ski school wage range, 40 hours a week, minus median rent. Before tax.'
-    && (await luc.locator('.lucr-range').innerText()) === 'Range: $3,200 to $14,600 across the wage scale.',
-  'net income headline is the middle of the wage range, with the basis line and the bottom to top range');
-  check(!/saving|mid case/i.test(lucText), `net income block never says savings or mid case (${lucText.replace(/\n/g, ' | ')})`);
-  check(await page.locator('.assumptions li').count() === 9, 'lucrativeness lists the new assumptions (basis keys stay out)');
-  const assumptions = (await page.locator('.assumptions').innerText()).replace(/\s+/g, ' ');
-  check(assumptions.includes('Hours per week, standard full time 40') && assumptions.includes('$32.50') && assumptions.includes('Middle of the posted wage range (USD per hour) $26.75') && assumptions.includes('$1,150') && assumptions.includes('4.33')
-    && assumptions.includes('Tips are not included yet') && assumptions.includes('Before tax and other living costs') && !assumptions.includes('Not set yet'), `assumption values formatted, tips note shown (${assumptions.replace(/\n/g, ' | ')})`);
-  // Owner decision 2026-10-14: the median of the sourced median rents, with the place, the publishers and every source.
-  check((await luc.locator('.rent-line .rent-text').innerText()) === 'Median rent $1,150 a month for one bedroom in Fixture Town, CO (median of 2 sources: Fixture Rentals, Fixture Daily), 2026'
-    && await luc.locator('.rent-line a.src-link').count() === 2 && await luc.locator('.rent-line .badge-estimated').count() === 1,
-  'median rent line names the place and the publishers and links every source');
+    && await luc.locator('.badge-estimated').count() === 1 && (await luc.locator('.lucr-range').innerText()) === 'Range: $3,200 to $14,600',
+  `net income block shows the middle of the wage range and the bottom to top range (${lucText.replace(/\n/g, ' | ')})`);
+  check(await luc.locator('.lucr-sources a.src-link').count() >= 1, 'net income block links its pay and season sources');
+  check(await luc.locator('.lucr-basis, .assumptions, .rent-line, .rent-used').count() === 0
+    && !/saving|mid case|rent|hours a week|minus|tips/i.test(lucText), `net income block shows no formula, assumptions or rent (${lucText.replace(/\n/g, ' | ')})`);
+  // Owner decision 2026-10-14: the median of the sourced median rents shows in the Housing section, with the place,
+  // the publishers and every source.
+  const housingRent = page.locator('.housing .housing-rent .rent-line');
+  check((await housingRent.locator('.rent-text').innerText()) === 'Median rent $1,150 a month for one bedroom in Fixture Town, CO (median of 2 sources: Fixture Rentals, Fixture Daily), 2026'
+    && await housingRent.locator('a.src-link').count() === 2 && await housingRent.locator('.badge-estimated').count() === 1,
+  'median rent line in Housing names the place and the publishers and links every source');
   await shot(page, 'desktop-04b-career.png');
   check((await page.locator('.pay-table tr[data-level="level_3"]').innerText()).includes('Range from 4 reports')
     && await page.locator('.pay-table tr[data-level="level_3"] .badge-reported').count() === 1, 'reported pay row shows its aggregate count');
@@ -624,9 +965,9 @@ async function desktop(browser, base) {
   check(await page.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.not-verified', { hasText: 'Commute times are being calculated.' }).count() === 1, 'site without commutes shows empty state');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).innerText()).includes('Synthetic note: full time staff only.'), 'eligibility note renders');
   check(await page.locator('.housing .facts .fact', { hasText: 'HUD FMR' }).count() === 3 && await page.locator('.housing .fact', { hasText: 'ACS median gross rent' }).locator('.badge-estimated').count() === 1, 'rent baseline with badges');
-  check((await page.locator('.rent-line .rent-text').innerText()).startsWith('Median rent $1,150 a month') && await page.locator('.rent-used').count() === 0
-    && await page.locator('.rent-line a.src-link').count() === 2, 'lucrativeness says which rent was used, with its sources, once the housing data loads');
-  check(await page.locator('.assumptions li', { hasText: 'Rent basis' }).count() === 0, 'rent basis keys stay out of the assumption list');
+  check(await page.locator('.rent-line').count() === 1 && (await page.locator('.housing-rent').innerText()).startsWith('Rent near the resort')
+    && await page.locator('.rent-used').count() === 0, 'the median rent line stays in Rent near the resort once the housing data loads');
+  check(await page.locator('.assumptions').count() === 0, 'no assumptions list on the page');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).locator('.fact', { hasText: 'Address' }).innerText()).includes('1 Fixture Way, Fixture Town'), 'building site shows its sourced address');
   await page.locator('.site-select', { hasText: 'Fixture Town Lease' }).click();
   await page.waitForFunction(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['detail-commute-bus'] }).length > 0, null, { timeout: 5000 }).catch(() => {});
@@ -673,13 +1014,15 @@ async function desktop(browser, base) {
   check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('detail-iso-fill', 'visibility')) === 'none', 'drive time toggle hides isochrones');
   await page.locator('#layer-isochrones').check();
   await shot(page, 'desktop-11-detail-pin-selected.png');
-  // Official trail map: a link to the resort's own map (new tab), never an image or frame in the page.
+  // Official trail map: the panel links the resort's page (new tab); the dialog shows the resort's own map file.
   const off = page.locator('#panel-content .official-trailmap');
   check(await off.count() === 1 && (await off.locator('a').innerText()) === 'Official trail map from Alpha Peak'
     && (await off.locator('a').getAttribute('target')) === '_blank' && /noopener/.test(await off.locator('a').getAttribute('rel'))
-    && (await off.innerText()).includes('PDF · 2025/26 season · opens in a new tab'), 'panel links the official trail map with format and season');
-  check(await page.locator('img[src*="trail-map"], iframe, embed, object').count() === 0, 'the official map is never embedded');
-  check((await page.locator('#panel-content .trailmap-drawn').innerText()).includes('Interactive map from OpenSkiMap'), 'the drawn map is labelled Interactive map from OpenSkiMap');
+    && (await off.innerText()).includes('Web page · 2025/26 season · opens in a new tab'), 'panel links the official trail map with format and season');
+  check(await page.locator('#panel-content .trailmap-drawn button').innerText() === 'Open the trail map'
+    && (await page.locator('#panel-content .trailmap-drawn .fact-meta').innerText()).trim() === 'Official map from Alpha Peak · Interactive map from OpenSkiMap',
+  'the panel button reads Open the trail map and names the official and interactive maps');
+  await officialImageChecks(page, 'official trail map', { shotName: 'desktop-14b-official-trail-map.png' });
   const tmFixture = path.join(REPO, 'tests', 'map', 'fixtures', 'trailmap', 'alpha-peak.json');
   await trailMapChecks(page, 'trail map', tmFixture, { shotName: 'desktop-14-trail-map.png', base: [-106.37, 39.64] });
   await trailMapChecks(page, 'trail map from the map control', tmFixture, { via: 'control', fresh: false, base: [-106.37, 39.64] });
@@ -764,7 +1107,7 @@ async function desktop(browser, base) {
   check(await page.locator('.badge-reported').count() >= 1, 'reported badge renders');
   check(await page.locator('.score-block .not-verified', { hasText: 'Scoring model is being finalized' }).count() === 1, 'assumptions_unset renders being finalized');
   check(!/professionalism|not yet rated/i.test(await page.locator('#panel-content').innerText()), 'no professionalism line on a resort without career data');
-  check(await page.locator('.assumptions .not-verified', { hasText: 'Not set yet' }).count() === 1, 'unset assumption marked');
+  check(await page.locator('.assumptions').count() === 0, 'assumptions_unset shows no assumptions list');
   check(await page.locator('.src-tag', { hasText: 'Estimated' }).count() === 1, 'density chart labelled Estimated');
   await page.locator('.crumbs a', { hasText: 'Fixture Front Range' }).click();
   await page.locator('.resort-list a', { hasText: 'Charlie Hill' }).click();
@@ -776,7 +1119,7 @@ async function desktop(browser, base) {
   await page.waitForFunction(() => document.querySelectorAll('.detail-toggles label').length > 0, null, { timeout: 10000 });
   check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'layers without data are hidden');
   check(await page.locator('.housing .not-verified', { hasText: 'No employee housing listed publicly yet.' }).count() === 1, 'empty housing state');
-  const zori = page.locator('.rent-line');
+  const zori = page.locator('.housing .housing-rent .rent-line');
   check((await zori.locator('.rent-text').innerText()) === 'Zillow typical rent (ZORI) $1,150 a month (Fixture County, UT, Nov 2024)'
     && await zori.locator('.tier-stale').count() === 1 && await zori.locator('.badge-published').count() === 1,
   'fallback rent: Zillow typical rent with its place and month, flagged Needs update when older than 18 months');
@@ -977,6 +1320,7 @@ async function phone(browser, base) {
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = el.querySelector('.housing').offsetTop - 40; });
   await page.waitForTimeout(200);
   await shot(page, 'phone-10-housing.png');
+  await officialImageChecks(page, 'phone official trail map', { phone: true, shotName: 'phone-11a-official-trail-map.png' });
   await trailMapChecks(page, 'phone trail map', path.join(REPO, 'tests', 'map', 'fixtures', 'trailmap', 'alpha-peak.json'),
     { shotName: 'phone-11-trail-map.png', phone: true, base: [-106.37, 39.64] });
 
@@ -2141,10 +2485,12 @@ try {
   servers.push(await serve(stubRoot, PORT + 1));
 
   await imageryOutage(browser, REPO_BASE);
+  await underlayChecks(browser, REPO_BASE, STUB_BASE);
   await desktop(browser, REPO_BASE);
   await desktopStub(browser, STUB_BASE);
   await phone(browser, STUB_BASE);
   await searchChecks(browser, REPO_BASE, STUB_BASE);
+  await officialFallbackChecks(browser, STUB_BASE);
   await liveLinksChecks(browser, STUB_BASE);
   await housingChecks(browser, STUB_BASE);
   await hiringChecks(browser, REPO_BASE);

@@ -3,6 +3,7 @@ import { config, prefersReducedMotion } from './config.js';
 import { h } from './ui.js';
 import { viewFrame, clampPadding as clampTo } from './camera.js';
 import { INSET_STATE, HIDDEN_CODES, insetFeatures, insetFrame, insetPanel, insetCorners } from './inset.js';
+import { loadUnderlay, underlayNow } from './underlay.js';
 import {
   addDetailLayers, setDetailData, showSiteCommutes, setGroupVisible, detailBounds, groupsWithData, housingBounds,
 } from './detailmap.js';
@@ -111,12 +112,36 @@ const FACILITY_LAYER = {
   paint: { 'icon-opacity': ['case', fs('dim'), 0.3, 1] },
 };
 
-function buildStyle(index) {
+// Satellite style underlay (underlay.js): image sources under every data layer, at all zooms. Alaska draws at its
+// true place, and a copy fills the national inset frame (its box is the inset's source box). The tone is baked in.
+const UNDERLAY_PAINT = { 'raster-opacity': 1, 'raster-fade-duration': 0, 'raster-resampling': 'linear' };
+const UNDERLAY_BASE = ['underlay-lower48', 'underlay-alaska'];
+function underlaySources(u) {
+  const out = {};
+  const r = u ? u.rasters : {};
+  if (r.lower48) out['underlay-lower48'] = { type: 'image', url: r.lower48.url, coordinates: r.lower48.coordinates };
+  if (r.alaska) {
+    out['underlay-alaska'] = { type: 'image', url: r.alaska.url, coordinates: r.alaska.coordinates };
+    out['underlay-alaska-inset'] = { type: 'image', url: r.alaska.url, coordinates: insetCorners(r.alaska.coordinates) };
+  }
+  return out;
+}
+const underlayLayer = (id) => ({ id, type: 'raster', source: id, paint: UNDERLAY_PAINT });
+
+function stateFillOpacity(on) {
+  const stops = config.basemap.state_fill_opacity;
+  return on && Array.isArray(stops) && stops.length ? ['interpolate', ['linear'], ['zoom'], ...stops.flat()] : 1;
+}
+
+function buildStyle(index, underlay) {
   const img = config.basemap.imagery;
+  const ul = underlaySources(underlay);
+  const translucent = Boolean(img || config.basemap.underlay);
   return {
     version: 8,
     sources: {
-      ...(img ? { imagery: { type: 'raster', tiles: img.tiles, tileSize: img.tileSize, maxzoom: img.maxzoom, attribution: img.attribution } } : {}),
+      ...ul,
+      ...(img ? { imagery: { type: 'raster', tiles: img.tiles, tileSize: img.tileSize, minzoom: img.minzoom || 0, maxzoom: img.maxzoom, attribution: img.attribution } } : {}),
       states: { type: 'geojson', data: index.geo.usStates, promoteId: 'code' },
       clusters: { type: 'geojson', data: index.geo.clusters, promoteId: 'id' },
       resorts: { type: 'geojson', data: index.geo.resorts, promoteId: 'id' },
@@ -129,12 +154,13 @@ function buildStyle(index) {
     },
     layers: [
       { id: 'background', type: 'background', paint: { 'background-color': C.background } },
-      // Satellite imagery sits under every data layer.
-      ...(img ? [{ id: 'imagery', type: 'raster', source: 'imagery', paint: img.paint }] : []),
+      // The underlay, then the USGS imagery over it from its minzoom, both under every data layer.
+      ...UNDERLAY_BASE.filter((id) => ul[id]).map(underlayLayer),
+      ...(img ? [{ id: 'imagery', type: 'raster', source: 'imagery', minzoom: img.minzoom || 0, paint: img.paint }] : []),
       {
         id: 'states-fill', type: 'fill', source: 'states',
         paint: {
-          'fill-opacity': img ? img.state_fill_opacity : 1,
+          'fill-opacity': stateFillOpacity(translucent),
           'fill-color': ['case', fs('selected'), C.stateFillSelected,
             ['all', fs('hover'), ['boolean', ['get', 'has_resorts'], false]], '#1c2533',
             ['boolean', ['get', 'has_resorts'], false], C.stateFillActive, C.stateFill],
@@ -188,10 +214,11 @@ function buildStyle(index) {
           'circle-stroke-opacity': ['case', fs('dim'), 0.3, 1],
         },
       },
-      // The inset sits on its own dark panel: the imagery under it is not Alaska.
+      // The inset sits on its own dark panel (the underlay under it is not Alaska), with Alaska's underlay on it.
       { id: 'inset-panel', type: 'fill', source: 'inset-panel', paint: { 'fill-color': C.background, 'fill-opacity': 0.92 } },
+      ...(ul['underlay-alaska-inset'] ? [underlayLayer('underlay-alaska-inset')] : []),
       { id: 'inset-frame', type: 'line', source: 'inset-frame', paint: { 'line-color': C.stateLine, 'line-width': 1, 'line-dasharray': [3, 2] } },
-      { id: 'inset-states-fill', type: 'fill', source: 'inset-states', paint: { 'fill-color': C.stateFillActive } },
+      { id: 'inset-states-fill', type: 'fill', source: 'inset-states', paint: { 'fill-color': C.stateFillActive, 'fill-opacity': stateFillOpacity(translucent) } },
       { id: 'inset-states-line', type: 'line', source: 'inset-states', paint: { 'line-color': C.stateLine, 'line-width': 0.8 } },
       { id: 'inset-clusters-fill', type: 'fill', source: 'inset-clusters', paint: { 'fill-color': C.cluster, 'fill-opacity': ['case', ['boolean', ['get', 'fallback'], false], 0, 0.08] } },
       { id: 'inset-clusters-line', type: 'line', source: 'inset-clusters', filter: ['!=', ['get', 'fallback'], true], paint: { 'line-color': C.cluster, 'line-opacity': 0.5, 'line-width': 1 } },
@@ -204,14 +231,15 @@ function buildStyle(index) {
   };
 }
 
-const INSET_LAYERS = ['inset-panel', 'inset-frame', 'inset-states-fill', 'inset-states-line', 'inset-clusters-fill', 'inset-clusters-line', 'inset-resorts', 'inset-resorts-facility'];
+const INSET_LAYERS = ['inset-panel', 'underlay-alaska-inset', 'inset-frame', 'inset-states-fill', 'inset-states-line', 'inset-clusters-fill', 'inset-clusters-line', 'inset-resorts', 'inset-resorts-facility'];
 const NOT_HIDDEN = ['!', ['in', ['get', 'code'], ['literal', HIDDEN_CODES]]];
 
 export function createMap(container, index, maplibregl, { onPick, getPadding }) {
   if (!maplibregl) throw new Error('MapLibre failed to load');
   const map = new maplibregl.Map({
     container,
-    style: buildStyle(index),
+    // The 2D picture has usually loaded the underlay by now; if not, it joins the style when it arrives.
+    style: buildStyle(index, underlayNow()),
     bounds: config.nationalBounds,
     fitBoundsOptions: { padding: 20 },
     attributionControl: false,
@@ -533,6 +561,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     vis('resorts-facility', facility !== 'ski_area');
     for (const id of INSET_LAYERS) vis(id, national);
     if (national) { vis('inset-resorts', facility !== 'facility'); vis('inset-resorts-facility', facility !== 'ski_area'); }
+    vis('underlay-alaska', !national);
     for (const id of heatAK) vis(id, !national);
     for (const id of heatInset) vis(id, national);
     // Alaska's isolines draw at its true place only, which the national view hides.
@@ -561,6 +590,20 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
     setup();
   }
   map.once('style.load', () => { styleIn = true; checkReady(); });
+
+  // An underlay the picture had not loaded (a click before it came, or a resort picture) joins once the data layers
+  // are drawn, under the imagery (or the data), so its decode and texture upload never hold the first frame back.
+  if (!underlayNow()) loadUnderlay().then((u) => { if (u) whenReady(() => addUnderlay(u)); });
+  function addUnderlay(u) {
+    if (map.getSource('underlay-lower48') || map.getSource('underlay-alaska')) return;
+    const src = underlaySources(u);
+    const base = map.getLayer('imagery') ? 'imagery' : 'states-fill';
+    for (const [id, spec] of Object.entries(src)) {
+      map.addSource(id, spec);
+      map.addLayer(underlayLayer(id), id === 'underlay-alaska-inset' ? 'inset-frame' : base);
+    }
+    if (map.getLayer('resorts')) syncLayers();
+  }
   map.on('sourcedata', checkReady);
   map.on('render', checkReady);
 
@@ -644,7 +687,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding }) 
       trailCtl = {
         onAdd() {
           const btn = h('button', {
-            type: 'button', class: 'trailmap-ctrl', 'aria-haspopup': 'dialog', title: 'Open the interactive map', 'aria-label': 'Open the interactive map',
+            type: 'button', class: 'trailmap-ctrl', 'aria-haspopup': 'dialog', title: 'Open the trail map', 'aria-label': 'Open the trail map',
             onclick: () => onOpen(btn),
           });
           btn.innerHTML = TRAIL_ICON;

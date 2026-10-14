@@ -20,8 +20,7 @@ VOCAB = {"client_profiles": ["destination_families", "race"], "enthusiast_types"
 # synthetic, test only
 WEIGHTS = {"cert_pay_differential": 2, "paid_training_hours": 1, "examiner_trainer_presence": 1,
            "private_lesson_share": 1, "year_round_staff": 0.5, "clinic_access": 0.5}
-ASSUMPTIONS = {"hours_per_week": 40, "default_season_months": 5, "days_per_month": 30.4, "weeks_per_month": 4.33,
-               "tips_season_usd": None}
+ASSUMPTIONS = {"hours_per_week": 40, "default_season_months": 5, "days_per_month": 30.4, "weeks_per_month": 4.33}
 
 
 def pay(**kw):
@@ -200,86 +199,87 @@ def test_professionalism_config_validation():
 
 
 # ------------------------------------------------------------ lucrativeness (owner decision 4)
+# Owner decision 2026-10-14: net income = wage x 40 h x season months x 4.33; no rent, no tips.
 ROWS = [{"cert_level": "level_1", "hourly_low": 18, "hourly_high": 20},
         {"cert_level": "level_3", "hourly_low": 22, "hourly_high": 26}]
+RENT = {"value": 800.0, "basis": "median_rent"}   # a stand in rent block: echoed, never subtracted
 
 
 def test_lucrativeness_middle_top_and_bottom_of_scale(cfg):
-    out = lucrativeness(ROWS, 152, 800, luc_defs(), "employee_housing_mean:a", "src-a")
+    out = lucrativeness(ROWS, 152, luc_defs(), rent=RENT)
     months = 152 / 30.4                                   # 5.0 season months from the sourced length
-    middle = 22 * 40 * months * 4.33 - 800 * months       # middle of the range, (18 + 26) / 2, across cert levels
-    top = 26 * 40 * months * 4.33 - 800 * months          # top of scale, any cert level
-    bottom = 18 * 40 * months * 4.33 - 800 * months       # bottom of scale
     assert out["status"] == "computed"
-    assert out["mid"] == round(middle) == 15052
-    assert out["high"] == round(top) == 18516
-    assert out["low"] == round(bottom) == 11588
+    assert out["mid"] == round(22 * 40 * months * 4.33) == 19052   # middle of the range, (18 + 26) / 2
+    assert out["high"] == round(26 * 40 * months * 4.33) == 22516  # top of scale, any cert level
+    assert out["low"] == round(18 * 40 * months * 4.33) == 15588   # bottom of scale
+    assert out["rent"] is RENT                            # kept for the Housing section only
 
 
 def test_lucrativeness_mid_wage_is_the_middle_of_the_posted_range():
     # Bottom from one row, top from another; the middle can fall on a half cent and is echoed exactly.
     rows = [{"cert_level": "none", "hourly_low": 20.0, "hourly_high": 63.84},
             {"cert_level": "unspecified", "hourly_low": 21.0, "hourly_high": 64.35}]
-    out = lucrativeness(rows, None, 0, luc_defs())
+    out = lucrativeness(rows, None, luc_defs())
     by = {a["key"]: a for a in out["assumptions"]}
     assert by["wage_mid_usd"]["value"] == 42.175
     assert by["wage_mid_usd"]["label"] == "Middle of the posted wage range (USD per hour)"
     assert out["mid"] == round(42.175 * 40 * 5 * 4.33)
     assert out["low"] < out["mid"] < out["high"]
-    assert lucrativeness([], None, 0, luc_defs())["assumptions"][0] == {
+    assert lucrativeness([], None, luc_defs())["assumptions"][0] == {
         "key": "wage_mid_usd", "value": None, "label": "Middle of the posted wage range (USD per hour)"}
 
 
-def test_lucrativeness_default_season_and_tips():
-    out = lucrativeness(ROWS, None, 800, luc_defs())
-    assert out["mid"] == round(22 * 40 * 5 * 4.33 - 800 * 5)   # default 5 month season, middle wage
-    assert out["high"] == round(26 * 40 * 5 * 4.33 - 800 * 5)
+def test_lucrativeness_default_season():
+    out = lucrativeness(ROWS, None, luc_defs())
+    assert out["mid"] == round(22 * 40 * 5 * 4.33)       # default 5 month season, middle wage
+    assert out["high"] == round(26 * 40 * 5 * 4.33) and out["low"] == round(18 * 40 * 5 * 4.33)
     echo = {a["key"]: a for a in out["assumptions"]}
     assert echo["season_months"]["value"] == 5 and echo["season_months_basis"]["value"] == "default"
     assert echo["season_months"]["label"] == "Season months (standard 5 month season)"
-    assert echo["tips_season_usd"] == {"key": "tips_season_usd", "value": None, "label": "Tips are not included yet"}
-    tipped = lucrativeness(ROWS, None, 800, luc_defs(), tips_season_usd=1500)
-    assert tipped["mid"] == out["mid"] + 1500 and tipped["low"] == out["low"] + 1500
-    assert tipped["high"] == out["high"] + 1500
-    assert {a["key"]: a for a in tipped["assumptions"]}["tips_season_usd"]["label"] == "Tips for the season (USD)"
+
+
+def test_lucrativeness_has_no_rent_or_tips():
+    with_rent = lucrativeness(ROWS, 152, luc_defs(), rent=RENT)
+    assert {k: with_rent[k] for k in ("low", "mid", "high")} == \
+        {k: lucrativeness(ROWS, 152, luc_defs())[k] for k in ("low", "mid", "high")}
+    keys = {a["key"] for a in with_rent["assumptions"]}
+    assert not keys & {"tips_season_usd", "rent_monthly_usd", "rent_basis", "rent_source_id"}
 
 
 def test_lucrativeness_echo_labels():
-    out = lucrativeness(ROWS, 152, 800, luc_defs(), "acs_median", "census-acs5-2024-b25064")
+    out = lucrativeness(ROWS, 152, luc_defs())
     keys = [a["key"] for a in out["assumptions"]]
     assert keys == ["wage_mid_usd", "wage_top_usd", "wage_bottom_usd", "hours_per_week", "season_months",
-                    "season_months_basis", "weeks_per_month", "tips_season_usd", "rent_monthly_usd", "rent_basis",
-                    "rent_source_id", "tax"]
+                    "season_months_basis", "weeks_per_month", "tax"]
     by = {a["key"]: a for a in out["assumptions"]}
     assert (by["wage_mid_usd"]["value"], by["wage_top_usd"]["value"], by["wage_bottom_usd"]["value"],
             by["hours_per_week"]["value"]) == (22, 26, 18, 40)
     assert by["hours_per_week"]["label"] == "Standard full time hours per week"
     assert by["tax"]["label"] == "Before tax and other living costs"
-    assert not any("saving" in a["label"].lower() for a in out["assumptions"])
-    assert by["rent_basis"]["value"] == "acs_median"
     assert all(a["label"] and "-" not in a["label"] for a in out["assumptions"])
+    assert not any("saving" in a["label"].lower() for a in out["assumptions"])
 
 
 def test_lucrativeness_insufficient_data():
-    assert lucrativeness([], 152, 800, luc_defs())["status"] == "insufficient_data"
-    assert lucrativeness(ROWS, 152, None, luc_defs())["status"] == "insufficient_data"
-    unset = luc_defs(dict(ASSUMPTIONS, hours_per_week=None))
-    assert lucrativeness(ROWS, 152, 800, unset)["status"] == "assumptions_unset"
-    out = lucrativeness(ROWS, 152, None, luc_defs())
+    assert lucrativeness([], 152, luc_defs())["status"] == "insufficient_data"
+    out = lucrativeness([], 152, luc_defs())
     assert out["low"] is None and out["mid"] is None and out["high"] is None
+    unset = luc_defs(dict(ASSUMPTIONS, hours_per_week=None))
+    assert lucrativeness(ROWS, 152, unset)["status"] == "assumptions_unset"
+    # No rent no longer blocks the figure.
+    assert lucrativeness(ROWS, 152, luc_defs(), rent=None)["status"] == "computed"
 
 
 def test_real_config_lucrativeness(cfg):
     a = cfg.definitions.lucrativeness.assumptions
-    assert (a.hours_per_week, a.default_season_months, a.days_per_month, a.weeks_per_month, a.tips_season_usd) == \
-        (40, 5, 30.4, 4.33, None)
-    assert lucrativeness(ROWS, 152, 800, cfg.definitions.lucrativeness)["status"] == "computed"
+    assert (a.hours_per_week, a.default_season_months, a.days_per_month, a.weeks_per_month) == (40, 5, 30.4, 4.33)
+    assert lucrativeness(ROWS, 152, cfg.definitions.lucrativeness)["status"] == "computed"
     assert professionalism(inputs(cert_pay_differential=1.0), cfg.definitions.professionalism)["status"] == "weights_unset"
 
 
 # ----------------------------------------------------------------- assembly
 def test_build_career_none_without_data(cfg):
-    assert build_career([], None, 140, 800, cfg.definitions, TODAY) == (None, [])
+    assert build_career([], None, 140, cfg.definitions, TODAY) == (None, [])
 
 
 def test_build_career_output_validates(cfg):
@@ -291,7 +291,7 @@ def test_build_career_output_validates(cfg):
         "private_split": sv(40),
         "professionalism_inputs": {"cert_pay_differential": sv(1.0), "paid_training_hours": sv(0.5, as_of="2025-04-10"),
                                    "clinic_access": sv(0.0)}}, context=CTX)
-    career, warnings = build_career([pay(), pay(cert_level="level_1", verified_date="2025-01-01")], ci, 140, 800,
+    career, warnings = build_career([pay(), pay(cert_level="level_1", verified_date="2025-01-01")], ci, 140,
                                     defs, TODAY)
     assert warnings == []
     # Professionalism inputs never surface: no stale flag and no score (owner decision 2026-10-13).
@@ -299,8 +299,8 @@ def test_build_career_output_validates(cfg):
     assert "professionalism" not in career
     # range 20 to 24 (both rows), middle 22; 140 day season = 140 / 30.4 months
     m = 140 / 30.4
-    assert career["lucrativeness"]["mid"] == round(22 * 40 * m * 4.33 - 800 * m)
-    assert career["lucrativeness"]["high"] == round(24 * 40 * m * 4.33 - 800 * m)
+    assert career["lucrativeness"]["mid"] == round(22 * 40 * m * 4.33)
+    assert career["lucrativeness"]["high"] == round(24 * 40 * m * 4.33)
     model = Career.model_validate(career, context=CTX)
     assert model.pay[1].cert_level == "level_2"
     # and inside a Resort, the career source ids must be listed
@@ -329,46 +329,41 @@ def test_career_output_status_rules():
 
 # --------------------------------------------- Phase 9: shared calculator model
 PARITY_CASES = [
-    # (rows, season days or None, rent, tips)
-    ([(20, 24)], 140, 800, None),
-    ([(17.25, 19.80), (21.5, 23.75)], 123, 1135.5, None),
-    ([(30, 30)], None, 0, None),
-    ([(14, 15)], 151, 2100, 2500.0),   # negative net income at the bottom of scale, tips included
+    # (rows, season days or None)
+    ([(20, 24)], 140),
+    ([(17.25, 19.80), (21.5, 23.75)], 123),
+    ([(30, 30)], None),
+    ([(14, 15)], 151),
 ]
 
 
-@pytest.mark.parametrize("rows,days,rent,tips", PARITY_CASES)
-def test_lucrativeness_matches_shared_calculator_model(rows, days, rent, tips):
-    from dataclasses import replace
-
+@pytest.mark.parametrize("rows,days", PARITY_CASES)
+def test_lucrativeness_matches_shared_calculator_model(rows, days):
     from pipeline.season_income import lucrativeness_inputs, round_half_up, season_income
 
     pay_rows = [{"cert_level": "level_2", "hourly_low": lo, "hourly_high": hi} for lo, hi in rows]
-    out = lucrativeness(pay_rows, days, rent, luc_defs(), tips_season_usd=tips)
+    out = lucrativeness(pay_rows, days, luc_defs())
     months = days / 30.4 if days else 5
 
-    def calc(hourly):
-        i = lucrativeness_inputs(pay_hourly_mid_usd=hourly, hours_per_week=40, season_length_days=months * 4.33 * 7,
-                                 rent_monthly_usd=rent, food_monthly_usd=0, transport_monthly_usd=0,
-                                 season_months=months, pass_offset_usd=0, gear_offset_usd=0)
-        if tips:
-            i = replace(i, tips_per_day=tips / i.weeks)
-        return season_income(i)
+    def calc(hourly):   # the unchanged calculator model, with rent, tips and every offset at 0
+        return season_income(lucrativeness_inputs(
+            pay_hourly_mid_usd=hourly, hours_per_week=40, season_length_days=months * 4.33 * 7, rent_monthly_usd=0,
+            food_monthly_usd=0, transport_monthly_usd=0, season_months=months, pass_offset_usd=0, gear_offset_usd=0))
     hi, lo = max(h for _, h in rows), min(lo for lo, _ in rows)
     top, middle, bottom = calc(hi), calc((lo + hi) / 2), calc(lo)
     assert out["high"] == round_half_up(top.net_before_tax)
     assert out["mid"] == round_half_up(middle.net_before_tax)
     assert out["low"] == round_half_up(bottom.net_before_tax)
-    # gross is lucrativeness earnings: hourly x 40 x months x 4.33 (+ tips)
-    assert top.gross == pytest.approx(max(h for _, h in rows) * 40 * months * 4.33 + (tips or 0))
+    # with nothing subtracted, net before tax is the gross: hourly x 40 x months x 4.33
+    assert middle.net_before_tax == pytest.approx(middle.gross)
+    assert middle.gross == pytest.approx((lo + hi) / 2 * 40 * months * 4.33)
 
 
 def test_lucrativeness_rounds_half_up_like_the_calculator():
-    # 1 hour a week, a 1 month season of 1 week: net income = hourly - rent, exact binary halves
+    # 1 hour a week, a 1 month season of 1 week: net income = hourly, exact binary halves
     defs = luc_defs(dict(ASSUMPTIONS, hours_per_week=1, default_season_months=1, weeks_per_month=1))
-    row = [{"cert_level": "level_2", "hourly_low": 10.5, "hourly_high": 10.5}]
-    out = lucrativeness(row, None, 0, defs)                 # 10.5 x 1 x 1 x 1 = 10.5
+    out = lucrativeness([{"cert_level": "level_2", "hourly_low": 10.5, "hourly_high": 10.5}], None, defs)
     assert out["mid"] == 11 and round(10.5) == 10           # Math.round ties up; Python round ties to even
-    out = lucrativeness(row, None, 22, defs)                # 10.5 - 22 = -11.5
-    assert out["mid"] == -11 and round(-11.5) == -12
+    out = lucrativeness([{"cert_level": "level_2", "hourly_low": 12, "hourly_high": 13}], None, defs)
+    assert out["mid"] == 13 and round(12.5) == 12           # the middle wage 12.5 rounds up too
     assert isinstance(out["mid"], int)

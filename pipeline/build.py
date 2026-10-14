@@ -34,7 +34,7 @@ from pipeline import rent as rent_mod  # noqa: E402
 from pipeline import rent_median as rent_median_mod  # noqa: E402
 from pipeline import rent_zillow as zillow_mod  # noqa: E402
 from pipeline import heat_lucrativeness as heat_luc_mod  # noqa: E402
-from pipeline.rent_used import as_inputs as rent_as_inputs, rent_used  # noqa: E402
+from pipeline.rent_used import rent_used  # noqa: E402
 from pipeline import runs as runs_mod  # noqa: E402
 from pipeline.career import CareerData, build_career, load_career_data  # noqa: E402
 from pipeline.editorial import load_editorial, render_review, resort_editorial  # noqa: E402
@@ -393,7 +393,7 @@ def build(
         d["editorial"] = resort_editorial(editorial.reviewed("resort").get(d["id"]))
         d["housing_search"] = housing_search_mod.resort_housing_search(search_data, d["id"], d["cluster_id"], registry,
                                                                        hs_cfg.max_tools)
-        _attach_career(d, career_data, cfg, today, warnings, rent_as_inputs(rent_block), rent_block)
+        _attach_career(d, career_data, cfg, today, warnings, rent_block)
         d["detail_available"], d["housing_summary"], d["trailmap_available"] = False, None, False
         if d["tier"] == "A":
             lift_fc = lifts_mod.lifts_for(p5.lift_features, p5.area_ids.get(d["id"], []))
@@ -630,10 +630,10 @@ def _write_heat(out_dir: Path, repo_root: Path, noaa: Optional[tuple[list, dict]
     if heat_mod.write_season(out_dir, resorts=resort_dicts, outlines=outlines, heat=cfg.definitions.heat,
                              generated_at=header["generated_at"]) is None:
         warnings.append("no resort has a sourced season length; season heat rasters not written")
-    # Lucrativeness turns on by itself once a resort has pay and a rent: its rasters follow the computed mids.
+    # Lucrativeness turns on by itself once a resort has pay: its rasters follow the computed mids.
     if heat_luc_mod.write_lucrativeness(out_dir, resorts=resort_dicts, outlines=outlines, heat=cfg.definitions.heat,
                                         generated_at=header["generated_at"]) is None:
-        warnings.append("no resort has a computed lucrativeness (pay and a rent); lucrativeness heat rasters not written")
+        warnings.append("no resort has a computed lucrativeness (pay); lucrativeness heat rasters not written")
 
 
 def display_definitions(cfg: Config) -> dict:
@@ -701,7 +701,6 @@ def _rent_block(rid: str, cfg: Config, median_rents: "rent_median_mod.MedianRent
 
 
 def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warnings: list[str],
-                   rent: tuple[Optional[float], Optional[str], Optional[str]] = (None, None, None),
                    rent_block: Optional[dict] = None) -> None:
     """Set d["career"] and merge career tags into clients and fit."""
     inputs = data.inputs.get(d["id"])
@@ -715,9 +714,9 @@ def _attach_career(d: dict, data: CareerData, cfg: Config, today: dt.date, warni
             merged += [t for t in tags if t not in merged]
             block[key] = merged
     season_len = ((d.get("season") or {}).get("length_days") or {}).get("value")
-    # rent = (monthly USD, basis, source ids) from rent_block, the first rent.lucrativeness_rent step with a value
-    career, w = build_career(data.pay.get(d["id"], []), inputs, season_len, rent[0], cfg.definitions, today,
-                             rent[1], rent[2], rent=rent_block)
+    # rent_block (the first rent.lucrativeness_rent step with a value) is echoed for the Housing section only;
+    # lucrativeness no longer subtracts rent (owner decision 2026-10-14).
+    career, w = build_career(data.pay.get(d["id"], []), inputs, season_len, cfg.definitions, today, rent=rent_block)
     warnings.extend(w)
     d["career"] = career
 

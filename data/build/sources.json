@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T04:03:46Z",
+  "generated_at": "2026-10-14T04:16:31Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -11952,6 +11952,13 @@
       "note": "From a search result for this page; page not opened. Killington bought the Mendon Mountain View Lodge in 2018 for employee housing; a 30 room lodge in that report."
     },
     {
+      "id": "natural-earth-ne1-hr-lc-sr-w",
+      "url": "https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-1/",
+      "title": "Natural Earth I with Shaded Relief, Water and Drainages (1:10m, large size, version 2.0.0)",
+      "accessed_date": "2026-10-14",
+      "note": "Public domain (Natural Earth terms of use, https://www.naturalearthdata.com/about/terms-of-use/; \"Natural Earth is a public domain map dataset\", https://github.com/nvkelso/natural-earth-vector). Downloaded from the AWS mirror https://naturalearth.s3.amazonaws.com/10m_raster/NE1_HR_LC_SR_W.zip (21,600 x 10,800 pixels, 1 arc minute). Cropped to the lower 48 and Alaska, resampled to Web Mercator rows and muted for the map underlay."
+    },
+    {
       "id": "noaa-ncei-normals-1991-2020",
       "url": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals",
       "title": "NOAA NCEI U.S. Climate Normals 1991 to 2020, annual and seasonal normals by station",
@@ -13121,9 +13128,65 @@
       "note": "From a search result for this page; page not opened. Big Billie's, at the base of Lifts 1 and 10, has 146 furnished double occupancy studios, each with a kitchenette and private bathroom; residents ride the chondola, bus and gondola free."
     },
     {
+      "id": "tmi-afton-alps",
+      "url": "https://www.aftonalps.com/-/aemasset/sitecore/afton-alps/maps/20211107_AA_Winter-Trail_Map.001.pdf",
+      "title": "Afton Alps winter trail map, file dated 2021-11-07 (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-cranmore",
+      "url": "https://cranmore.com/assets/documents/2324_Cranmore_TrailMap_withLegend_Web.pdf",
+      "title": "Cranmore 2023/24 trail map with legend (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
       "id": "tmi-crystal-mountain",
       "url": "https://www.crystalmountainresort.com/-/media/crystal/pdf-files/trail-maps/2025-trail-maps/crystal_2526_smartwool_map.pdf?rev=a8b85630fceb457c84e920dd24d3bffd",
       "title": "Crystal Mountain 2025/26 trail map (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-grand-targhee",
+      "url": "https://www.grandtarghee.com/sites/default/files/2022-12/22-23%20Winter%20Trail%20Map.pdf",
+      "title": "Grand Targhee 22-23 Winter Trail Map (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-hidden-valley-pa",
+      "url": "https://www.hiddenvalleyresort.com/-/aemasset/sitecore/hidden-valley-pa/trail-base-maps/20221122_HP_winter-trail_map_001.pdf",
+      "title": "Hidden Valley winter trail map, file dated 2022-11-22 (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-june-mountain",
+      "url": "https://www.junemountain.com/-/media/june/pdfs/trail-map/23-24_jmsa_trailmap_17x12_web.pdf?rev=7c3ab2c434694d61a21b7b82727e027b&hash=B57A030B7A62CCAE5E14CCFAB707EAA7",
+      "title": "June Mountain 23/24 trail map (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-liberty-mountain",
+      "url": "https://www.libertymountainresort.com/-/aemasset/sitecore/liberty/maps/20211110_LB_NEW-Winter-Trail_Map.001.pdf",
+      "title": "New Liberty Winter Trail Map (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-mount-bohemia",
+      "url": "https://www.mtbohemia.com/wp-content/uploads/2022/11/bohemia-trail-map.pdf",
+      "title": "Mount Bohemia trail map, uploaded 2022-11 (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-mount-sunapee",
+      "url": "https://www.mountsunapee.com/-/aemasset/sitecore/mount-sunapee/maps/20231031_MS_winter-trail_map_001.pdf",
+      "title": "Mount Sunapee Winter Trail Map 2023-2024 (PDF)",
       "accessed_date": "2026-10-14",
       "note": "From a search result for this page; page not opened"
     },
@@ -13135,9 +13198,23 @@
       "note": "From a search result for this page; page not opened"
     },
     {
+      "id": "tmi-palisades-tahoe-alpine-meadows",
+      "url": "https://www.palisadestahoe.com/-/media/palisades-tahoe/pdfs/trail-maps/alpine-back-side-trail.pdf?rev=ad5ea90549cc4b6980a80da7976e433e",
+      "title": "Palisades Tahoe Alpine back side trail map (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
       "id": "tmi-park-city",
       "url": "https://www.parkcitymountain.com/-/aemasset/sitecore/park-city/maps/20251114_PC_winter-trail_map_001.pdf",
       "title": "Park City winter trail map, file dated 2025-11-14 (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-snowshoe",
+      "url": "https://www.snowshoemtn.com/-/media/snowshoe/maps/trailmapw2024.pdf?rev=d1fa14e71919433caabacd244dc3a13e",
+      "title": "Snowshoe winter 2024 trail map (PDF)",
       "accessed_date": "2026-10-14",
       "note": "From a search result for this page; page not opened"
     },
@@ -13159,6 +13236,13 @@
       "id": "tmi-vail",
       "url": "https://www.vail.com/-/aemasset/sitecore/vail/maps/winter-2024-2025/20250103_VL_winter-front-side-trail_map_001.pdf",
       "title": "Vail winter Front Side trail map 2024-2025 (PDF)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened"
+    },
+    {
+      "id": "tmi-wilmot-mountain",
+      "url": "https://www.wilmotmountain.com/-/aemasset/sitecore/wilmot/maps/20240916_WM_winter-trail_map_001.pdf",
+      "title": "Wilmot winter trail map, file dated 2024-09-16 (PDF)",
       "accessed_date": "2026-10-14",
       "note": "From a search result for this page; page not opened"
     },

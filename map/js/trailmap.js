@@ -1,10 +1,14 @@
-// Trail map dialog: its own MapLibre map of one resort with OpenSkiMap runs colored by North American
-// trail sign (difficulty_us), lifts on top, the base area, a legend and a run list. Loaded only when opened.
-// The data file is data/build/trailmap/<resort_id>.json (contract in docs/map/ARCHITECTURE.md, "Trail map").
+// Trail map dialog with two tabs. "Official map": the resort's own trail map file shown straight from the
+// resort's servers (officialmap.js; image viewer or PDF). "Interactive": its own MapLibre map of one resort with
+// OpenSkiMap runs colored by North American trail sign (difficulty_us), lifts on top, the base area, a legend and a
+// run list; also the fallback when the official file fails. Loaded only when opened; the Interactive tab loads its
+// data and MapLibre when first shown. Data: data/build/trailmap/<resort_id>.json and Resort.official_trailmap
+// (contract in docs/map/ARCHITECTURE.md, "Trail map" and "Official trail maps").
 import { isPhone } from './config.js';
 import { loadTrailMap } from './data.js';
 import { h, clear, fmtInt, formatIsoDate, safeUrl } from './ui.js';
-import { officialTrailmapLink } from './panel.js';
+import { officialTrailmapLink, officialMapFile } from './panel.js';
+import { createImageViewer, createPdfViewer, canEmbedPdf } from './officialmap.js';
 
 // Sign colors on the light trail map surface. Black and double black share the ink and differ by width and dash,
 // as their signs differ by one or two diamonds.
@@ -104,21 +108,39 @@ function runList(runs) {
 
 /**
  * The dialog controller. open(resort, trigger) shows the trail map of a resort (resort: full record with
- * id, name, lat, lon); the same resort reopens with its last view.
+ * id, name, lat, lon, trailmap_available, official_trailmap); the same resort reopens on its last tab and view.
  */
 export function createTrailMap({ getMapLibre, sourceTitle }) {
   const title = h('h2', { id: 'trailmap-title', class: 'trailmap-title', tabindex: '-1' });
   const closeBtn = h('button', { type: 'button', class: 'btn btn-sm btn-ghost trailmap-close' }, 'Close');
+  const tab = (key, text) => h('button', {
+    type: 'button', role: 'tab', id: `trailmap-tab-${key}`, class: 'trailmap-tab', 'aria-controls': `trailmap-panel-${key}`,
+    'aria-selected': 'false', tabindex: '-1', dataset: { tab: key },
+  }, text);
+  const tabs = { official: tab('official', 'Official map'), interactive: tab('interactive', 'Interactive') };
+  const tablist = h('div', { class: 'trailmap-tabs', role: 'tablist', 'aria-label': 'Trail map views' }, tabs.official, tabs.interactive);
+  // Official tab
+  const offStage = h('div', { class: 'tmo-stage' });
+  const offStatus = h('p', { class: 'trailmap-status tmo-status', role: 'status' });
+  const offHelp = h('p', { class: 'tmo-help', id: 'tmo-help' }, 'Drag or use the arrow keys to move. Scroll, pinch, the plus and minus buttons or keys zoom; 0 resets.');
+  const offFoot = h('div', { class: 'tmo-foot' });
+  const offPanel = h('div', { class: 'trailmap-panel trailmap-official', role: 'tabpanel', id: 'trailmap-panel-official', 'aria-labelledby': 'trailmap-tab-official', hidden: true },
+    h('div', { class: 'tmo-frame' }, offStage, offStatus), offFoot);
+  // Interactive tab
   const mapEl = h('div', { class: 'trailmap-map', role: 'region', 'aria-roledescription': 'map' });
   const label = h('div', { class: 'trailmap-label', role: 'status', 'aria-live': 'polite', hidden: true });
   const status = h('p', { class: 'trailmap-status' });
+  const note = h('p', { class: 'trailmap-note', role: 'status', hidden: true });
   const side = h('div', { class: 'trailmap-side' });
-  const dialog = h('dialog', { class: 'trailmap-dialog', 'aria-labelledby': 'trailmap-title', 'aria-describedby': 'trailmap-help' },
-    h('div', { class: 'trailmap-head' }, title, closeBtn),
-    h('div', { class: 'trailmap-body' }, h('div', { class: 'trailmap-stage' }, mapEl, label, status), side));
+  const intPanel = h('div', { class: 'trailmap-panel trailmap-body', role: 'tabpanel', id: 'trailmap-panel-interactive', 'aria-labelledby': 'trailmap-tab-interactive', hidden: true },
+    h('div', { class: 'trailmap-stage' }, mapEl, label, status), h('div', { class: 'trailmap-side-wrap' }, note, side));
+  const dialog = h('dialog', { class: 'trailmap-dialog', 'aria-labelledby': 'trailmap-title' },
+    h('div', { class: 'trailmap-head' }, title, tablist, closeBtn),
+    h('div', { class: 'trailmap-views' }, offPanel, intPanel));
   document.body.append(dialog);
 
-  let current = null; // { id, map }
+  // current: { id, resort, map, built, file, viewer, failed, tab }
+  let current = null;
   let trigger = null;
 
   closeBtn.addEventListener('click', () => dialog.close());
@@ -129,8 +151,8 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
   // Keep Tab inside the dialog (the page behind is inert while it is open).
   dialog.addEventListener('keydown', (e) => {
     if (e.key !== 'Tab') return;
-    const items = [...dialog.querySelectorAll('button, [href], summary, [tabindex]:not([tabindex="-1"]), canvas[tabindex]')]
-      .filter((el) => !el.hidden && el.offsetParent !== null && !el.closest('[hidden]'));
+    const items = [...dialog.querySelectorAll('button, [href], summary, [tabindex], canvas[tabindex], object')]
+      .filter((el) => el.tabIndex >= 0 && !el.disabled && !el.hidden && el.offsetParent !== null && !el.closest('[hidden]'));
     if (!items.length) return;
     const first = items[0]; const last = items[items.length - 1];
     if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
@@ -138,6 +160,89 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
   });
   // A click on the backdrop closes it too.
   dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+  // Tabs (WAI-ARIA APG, automatic activation): click, or Left, Right, Home and End on the tab list.
+  for (const t of Object.values(tabs)) t.addEventListener('click', () => select(t.dataset.tab, { focus: true }));
+  tablist.addEventListener('keydown', (e) => {
+    const shown = Object.values(tabs).filter((t) => !t.hidden);
+    const i = shown.indexOf(document.activeElement);
+    if (i < 0) return;
+    const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: shown.length - 1 }[e.key];
+    if (to == null) return;
+    e.preventDefault();
+    select(shown[(to + shown.length) % shown.length].dataset.tab, { focus: true });
+  });
+
+  function select(key, { focus = false } = {}) {
+    if (!current || tabs[key].hidden) return;
+    current.tab = key;
+    for (const [k, t] of Object.entries(tabs)) {
+      const on = k === key;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+    }
+    offPanel.hidden = key !== 'official';
+    intPanel.hidden = key !== 'interactive';
+    if (focus) tabs[key].focus();
+    if (key === 'interactive') {
+      if (!current.built) {
+        current.built = true;
+        const resort = current.resort;
+        build(resort).catch((err) => { console.warn('[map] trail map', err.message); status.textContent = 'The trail map could not load. Try again later.'; });
+      } else if (current.map) requestAnimationFrame(() => current && current.map && current.map.resize());
+    } else if (current.viewer && current.viewer.resize) requestAnimationFrame(() => current && current.viewer && current.viewer.resize());
+  }
+
+  /** The official file failed (or cannot show here): say so and fall back to the Interactive tab when there is one. */
+  function fallback(resort, file, reason) {
+    if (!current || current.id !== resort.id || current.failed) return;
+    current.failed = true;
+    const link = h('a', { href: file.url, target: '_blank', rel: 'noopener noreferrer' }, `Open it on ${resort.name}`);
+    clear(offStage);
+    offHelp.hidden = true;
+    offStatus.hidden = false;
+    clear(offStatus);
+    offStatus.append(`${reason} `, link, '.');
+    if (resort.trailmap_available) {
+      clear(note);
+      note.append(`${reason} Showing the interactive map. `,
+        h('a', { href: file.url, target: '_blank', rel: 'noopener noreferrer' }, `Open the official map on ${resort.name}`), '.');
+      note.hidden = false;
+      if (current.tab === 'official') select('interactive', { focus: dialog.contains(document.activeElement) && document.activeElement === tabs.official });
+    }
+  }
+
+  function buildOfficial(resort, file) {
+    clear(offStage); clear(offFoot);
+    offStatus.hidden = false;
+    offStatus.textContent = 'Loading the official trail map';
+    offHelp.hidden = file.format === 'pdf';
+    const name = resort.name;
+    const alt = `Official trail map of ${name}`;
+    const o = resort.official_trailmap || {};
+    const pageLink = file.page && file.page !== file.url
+      ? h('a', { href: file.page, target: '_blank', rel: 'noopener noreferrer' }, `Trail map page on ${name}`) : null;
+    const fullLink = h('a', { class: 'tmo-full', href: file.url, target: '_blank', rel: 'noopener noreferrer' }, `View full size on ${name}`);
+    offFoot.append(
+      h('p', { class: 'tmo-credit' }, h('span', null, `Trail map © ${name}`), pageLink ? [' · ', pageLink] : null, ' · ', fullLink),
+      file.format === 'pdf' ? null : offHelp,
+      h('p', { class: 'fact-meta' }, [`Shown from ${name}'s own site and unchanged.`, o.season ? ` ${o.season} season.` : null, file.note ? ` ${file.note}` : null].filter(Boolean).join('')));
+    const done = () => { offStatus.hidden = true; };
+    if (file.format === 'pdf') {
+      if (!canEmbedPdf()) { fallback(resort, file, 'This browser opens PDF trail maps in a new tab.'); return null; }
+      const v = createPdfViewer({
+        url: file.url, label: `${alt} (PDF)`, linkText: `View full size on ${name}`,
+        onLoad: done, onError: () => fallback(resort, file, `The official trail map could not load from ${name}.`),
+      });
+      offStage.append(v.el);
+      return v;
+    }
+    const v = createImageViewer({
+      url: file.url, alt, label: `${alt}. Drag, scroll or use the arrow keys to explore it.`, helpId: 'tmo-help',
+      onLoad: done, onError: () => fallback(resort, file, `The official trail map could not load from ${name}.`),
+    });
+    offStage.append(v.el);
+    return v;
+  }
 
   function legend(data) {
     const present = new Set(data.runs.features.map((f) => f.properties.difficulty_us || 'none'));
@@ -248,22 +353,30 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
     /** Open the trail map of a resort. trigger gets focus back on close. */
     open(resort, from) {
       trigger = from || document.activeElement;
-      title.textContent = `${resort.name} interactive map`;
-      mapEl.setAttribute('aria-label', `Trail map of ${resort.name}. Hover or tap a run or lift for its name. The run list holds the same runs.`);
-      closeBtn.setAttribute('aria-label', `Close the ${resort.name} interactive map`);
+      const file = officialMapFile(resort);
+      title.textContent = `${resort.name} trail map`;
+      mapEl.setAttribute('aria-label', `Interactive trail map of ${resort.name}. Hover or tap a run or lift for its name. The run list holds the same runs.`);
+      closeBtn.setAttribute('aria-label', `Close the ${resort.name} trail map`);
       if (!dialog.open) dialog.showModal();
       if (current && current.id === resort.id) {
-        // Same resort: keep its last view.
-        if (current.map) requestAnimationFrame(() => current.map.resize());
+        // Same resort: keep its last tab and view.
+        select(current.tab);
       } else {
         if (current && current.map) current.map.remove();
-        current = { id: resort.id, map: null };
-        label.hidden = true;
-        build(resort).catch((err) => { console.warn('[map] trail map', err.message); status.textContent = 'The trail map could not load. Try again later.'; });
+        if (current && current.viewer) current.viewer.destroy();
+        clear(side); clear(note); note.hidden = true; label.hidden = true;
+        current = { id: resort.id, resort, map: null, built: false, file, viewer: null, failed: false, tab: null };
+        tabs.official.hidden = !file;
+        tabs.interactive.hidden = !resort.trailmap_available;
+        tablist.hidden = !(file && resort.trailmap_available);
+        if (file) current.viewer = buildOfficial(resort, file);
+        select(file && !(current.failed && resort.trailmap_available) ? 'official' : 'interactive');
       }
       closeBtn.focus({ preventScroll: true });
     },
     close() { if (dialog.open) dialog.close(); },
     get map() { return current && current.map; },
+    get viewer() { return current && current.viewer; },
+    get tab() { return current && current.tab; },
   };
 }

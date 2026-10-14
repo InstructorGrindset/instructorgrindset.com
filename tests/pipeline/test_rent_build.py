@@ -87,7 +87,7 @@ def _resorts(out):
     return {r["id"]: r for r in json.loads((out / "resorts.json").read_text())["resorts"]}
 
 
-def test_median_rent_then_zori_reach_lucrativeness_and_its_heat_map(repo_root, raw_dir, out, tmp_path, counties_geojson):
+def test_median_rent_then_zori_reach_the_rent_block_and_the_heat_map(repo_root, raw_dir, out, tmp_path, counties_geojson):
     _inputs(raw_dir, counties_geojson)
     result = _run(repo_root, raw_dir, out, tmp_path)
     by = _resorts(out)
@@ -97,16 +97,16 @@ def test_median_rent_then_zori_reach_lucrativeness_and_its_heat_map(repo_root, r
     assert peak["rent"]["publishers"] == ["Zumper", "Rentometer", "Redfin"] and peak["rent"]["count"] == 3
     assert peak["rent"]["source_ids"] == ["fx-zumper-peak", "fx-rentometer-peak", "fx-redfin-peak"]
     assert peak["rent"]["geography"] == {"level": "city", "id": None, "name": "Fixture Town, CO"}
-    # mid at the middle of the 20 to 24 range (owner decision 2026-10-14), high at the top
-    assert peak["status"] == "computed" and peak["mid"] == round(22 * 40 * 5 * 4.33 - 2400 * 5)
-    assert peak["high"] == round(24 * 40 * 5 * 4.33 - 2400 * 5)
+    # mid at the middle of the 20 to 24 range, high at the top; the rent is not subtracted (owner decision 2026-10-14)
+    assert peak["status"] == "computed" and peak["mid"] == round(22 * 40 * 5 * 4.33)
+    assert peak["high"] == round(24 * 40 * 5 * 4.33)
     # Fixture Basin: no median figure, so the hand placed ZORI county file (refreshed into the extract)
     basin = by["fixture-basin"]["career"]["lucrativeness"]
     assert basin["rent"]["basis"] == "zillow_zori" and basin["rent"]["label"] == "Zillow typical rent (ZORI)"
     assert basin["rent"]["value"] == 1810 and basin["rent"]["as_of"] == "2026-08-31"
     assert basin["rent"]["confidence"] == "published" and basin["rent"]["source_ids"] == ["zillow-zori"]
     assert basin["rent"]["geography"] == {"level": "county", "id": "49998", "name": "Basin Fixture County, UT"}
-    assert basin["mid"] == round(21 * 40 * 5 * 4.33 - 1810 * 5) and basin["high"] == round(23 * 40 * 5 * 4.33 - 1810 * 5)
+    assert basin["mid"] == round(21 * 40 * 5 * 4.33) and basin["high"] == round(23 * 40 * 5 * 4.33)
     extract = (raw_dir / "rent" / "zillow" / "zori_extract.csv").read_text().splitlines()
     assert len(extract) == 3 and extract[0].startswith("level,region_id")
     sources = {s["id"]: s for s in json.loads((out / "sources.json").read_text())["sources"]}
@@ -139,13 +139,16 @@ def test_stale_zori_is_flagged_and_placeholder_locations_get_no_place_rent(repo_
     assert peak["lucrativeness"]["rent"]["stale"] is True and "lucrativeness.rent" in peak["stale_fields"]
     assert any("rent for 'fixture-peak' (zillow_zori, as of 2024-08-31) is older than 18 months" in w for w in result.warnings)
     basin = by["fixture-basin"]["career"]["lucrativeness"]
-    assert basin["rent"] is None and basin["status"] == "insufficient_data"
+    assert basin["rent"] is None and basin["status"] == "computed"   # no rent no longer blocks the figure
 
 
-def test_without_rent_files_the_build_warns_and_lucrativeness_stays_off(repo_root, raw_dir, out, tmp_path):
+def test_without_rent_files_the_build_warns_and_lucrativeness_still_computes(repo_root, raw_dir, out, tmp_path):
     (raw_dir / "pay").mkdir()
     (raw_dir / "pay" / "fixture.yaml").write_text(PAY)
     result = _run(repo_root, raw_dir, out, tmp_path)
     w = "\n".join(result.warnings)
-    assert "no Zillow ZORI extract" in w and "lucrativeness heat rasters not written" in w
-    assert all((r["career"] or {}).get("lucrativeness", {}).get("mid") is None for r in _resorts(out).values())
+    # Owner decision 2026-10-14: lucrativeness needs pay only, so its rasters are written without any rent file.
+    assert "no Zillow ZORI extract" in w and "lucrativeness heat rasters not written" not in w
+    with_pay = [r for r in _resorts(out).values() if (r["career"] or {}).get("pay")]
+    assert with_pay and all(r["career"]["lucrativeness"]["mid"] is not None for r in with_pay)
+    assert all(r["career"]["lucrativeness"]["rent"] is None for r in with_pay)

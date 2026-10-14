@@ -1,20 +1,20 @@
 {
   "version": 2,
-  "generated_at": "2026-10-14T04:03:46Z",
+  "generated_at": "2026-10-14T04:16:31Z",
   "mode": "lucrativeness",
   "units": "usd",
   "scale": "linear",
   "domain": {
-    "min": -10000.0,
-    "max": 40000.0
+    "min": 0.0,
+    "max": 50000.0
   },
   "ticks": [
-    -10000.0,
     0.0,
     10000.0,
     20000.0,
     30000.0,
-    40000.0
+    40000.0,
+    50000.0
   ],
   "ramp": [
     "#414487",
@@ -29,8 +29,8 @@
   ],
   "values": {
     "field": "career.lucrativeness.mid",
-    "resorts": 42,
-    "points": 28
+    "resorts": 66,
+    "points": 50
   },
   "method": {
     "interpolation": "adaptive modified Shepard",
@@ -45,7 +45,7 @@
     "fade_to": "neutral"
   },
   "attribution": null,
-  "inputs_sha256": "61c87f6c245d2fcc305e4832d2ec25aa821df7146a373f891240f2f563fb298d",
+  "inputs_sha256": "2f0d253c5a50a5e5e9171d14a55114a1108bfaf344ab77eb63c12897ead9c7e6",
   "rasters": [
     {
       "region": "lower48",
@@ -70,8 +70,8 @@
           24.4
         ]
       ],
-      "bytes": 79751,
-      "resorts": 41
+      "bytes": 95119,
+      "resorts": 65
     },
     {
       "region": "alaska",
@@ -96,7 +96,7 @@
           51.2
         ]
       ],
-      "bytes": 37002,
+      "bytes": 36702,
       "resorts": 1
     }
   ]
