@@ -22,3 +22,5 @@ data/raw/reports/moderated/
 data/raw/rent/zillow/download/
 data/raw/rent/zillow/*_zori_*
 data/raw/rent/zillow/*Gaz_zcta*
+# Basemap underlay: the Natural Earth zip and TIFF that pipeline/tools/make_underlay.py reads; images/basemap/ is committed.
+data/raw/basemap/download/

@@ -544,6 +544,26 @@ sources:
   title: Afton Alps winter trail map, file dated 2021-11-07 (PDF)
   accessed_date: '2026-10-14'
   note: From a search result for this page; page not opened
+- id: tmi-cranmore
+  url: https://cranmore.com/assets/documents/2324_Cranmore_TrailMap_withLegend_Web.pdf
+  title: Cranmore 2023/24 trail map with legend (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-mount-bohemia
+  url: https://www.mtbohemia.com/wp-content/uploads/2022/11/bohemia-trail-map.pdf
+  title: Mount Bohemia trail map, uploaded 2022-11 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-snowshoe
+  url: https://www.snowshoemtn.com/-/media/snowshoe/maps/trailmapw2024.pdf?rev=d1fa14e71919433caabacd244dc3a13e
+  title: Snowshoe winter 2024 trail map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-grand-targhee
+  url: https://www.grandtarghee.com/sites/default/files/2022-12/22-23%20Winter%20Trail%20Map.pdf
+  title: Grand Targhee 22-23 Winter Trail Map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
 trailmaps:
 - resort_id: vail
   url: https://www.vail.com/the-mountain/about-the-mountain/trail-map.aspx
@@ -886,6 +906,12 @@ trailmaps:
   source_id: tmo-snowshoe
   as_of: '2026-10-13'
   confidence: estimated
+  image_url: https://www.snowshoemtn.com/-/media/snowshoe/maps/trailmapw2024.pdf?rev=d1fa14e71919433caabacd244dc3a13e
+  image_format: pdf
+  image_source_id: tmi-snowshoe
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
 - resort_id: deer-valley
   url: https://www.deervalley.com/media-room/101725-updated-trail-map
   format: page
@@ -1085,6 +1111,12 @@ trailmaps:
   source_id: tmo-grand-targhee
   as_of: '2026-10-13'
   confidence: estimated
+  image_url: https://www.grandtarghee.com/sites/default/files/2022-12/22-23%20Winter%20Trail%20Map.pdf
+  image_format: pdf
+  image_source_id: tmi-grand-targhee
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
 - resort_id: the-highlands
   url: https://www.highlandsharborsprings.com/resort-maps
   format: page
@@ -1099,6 +1131,12 @@ trailmaps:
   source_id: tmo-cranmore
   as_of: '2026-10-13'
   confidence: estimated
+  image_url: https://cranmore.com/assets/documents/2324_Cranmore_TrailMap_withLegend_Web.pdf
+  image_format: pdf
+  image_source_id: tmi-cranmore
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
 - resort_id: sugar-bowl
   url: https://www.sugarbowl.com/trailmaps
   format: page
@@ -1281,6 +1319,12 @@ trailmaps:
   source_id: tmo-mount-bohemia
   as_of: '2026-10-13'
   confidence: estimated
+  image_url: https://www.mtbohemia.com/wp-content/uploads/2022/11/bohemia-trail-map.pdf
+  image_format: pdf
+  image_source_id: tmi-mount-bohemia
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
 - resort_id: alpine-valley-oh
   url: https://alpinevalleyohio.com/trail-map
   format: page

@@ -55,15 +55,16 @@ ATTRIBUTION = 'Relief: <a href="https://www.naturalearthdata.com/" target="_blan
 # Map background (config.basemap.colors.background in map/js/config.js). Edges fade into it.
 BACKGROUND = (0x0A, 0x0E, 0x14)
 
-# The USGS imagery paint (config.basemap.imagery.paint), baked in so the 2D picture and the WebGL map match it.
-# brightness_max is a little lower: Natural Earth's palette is lighter than satellite photos.
-TONE = {"saturation": -0.35, "contrast": -0.1, "brightness_max": 0.62}
+# Muted like the USGS imagery paint (config.basemap.imagery.paint: lower saturation, darker), with MapLibre's raster
+# math, then a gamma that deepens the midtones: Natural Earth's light palette reads as satellite imagery once darker.
+# Baked in, so the 2D picture and the WebGL map show the same pixels (the map draws it with a neutral paint).
+TONE = {"saturation": -0.3, "contrast": 0.05, "brightness_max": 0.55, "gamma": 1.4}
 
 # Boxes (west, south, east, north). The lower 48 box reaches past the national view so its fading edge stays off the
 # states. The Alaska box is the inset's source box in map/js/inset.js, so the inset copy fills its frame exactly.
 REGIONS = {
-    "lower48": {"box": (-130.0, 21.0, -62.0, 53.0), "px_per_degree": 54.0, "feather_deg": 2.4, "max_bytes": 600_000},
-    "alaska": {"box": (-180.0, 51.2, -129.5, 71.6), "px_per_degree": 30.0, "feather_deg": 0.35, "max_bytes": 250_000},
+    "lower48": {"box": (-130.0, 21.0, -62.0, 53.0), "px_per_degree": 60.0, "feather_deg": 2.4, "max_bytes": 600_000},
+    "alaska": {"box": (-180.0, 51.2, -129.5, 71.6), "px_per_degree": 36.0, "feather_deg": 0.35, "max_bytes": 250_000},
 }
 QUALITY_START, QUALITY_MIN, QUALITY_STEP = 74, 40, 4
 
@@ -88,12 +89,18 @@ def tone_matrix(saturation: float, contrast: float, brightness_max: float, brigh
             other, other, own, offset)
 
 
-def apply_tone(rgb: Sequence[float], m: Sequence[float]) -> tuple[int, int, int]:
-    """One pixel through ``tone_matrix`` (rounded and clamped like Pillow)."""
+def gamma_lut(gamma: float) -> list[int]:
+    """256 entry lookup table: v' = 255 (v / 255) ^ gamma (gamma above 1 darkens the midtones)."""
+    return [int(round(255 * (v / 255) ** gamma)) for v in range(256)]
+
+
+def apply_tone(rgb: Sequence[float], m: Sequence[float], lut: Optional[Sequence[int]] = None) -> tuple[int, int, int]:
+    """One pixel through ``tone_matrix`` (rounded and clamped like Pillow), then the gamma table."""
     out = []
     for k in range(3):
         v = m[4 * k] * rgb[0] + m[4 * k + 1] * rgb[1] + m[4 * k + 2] * rgb[2] + m[4 * k + 3]
-        out.append(max(0, min(255, int(round(v)))))
+        v = max(0, min(255, int(round(v))))
+        out.append(lut[v] if lut else v)
     return tuple(out)
 
 
@@ -205,12 +212,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     tif = ensure_tif(args.zip, args.download_dir)
     src = open_source(tif)
-    matrix = tone_matrix(**TONE)
+    matrix = tone_matrix(TONE["saturation"], TONE["contrast"], TONE["brightness_max"])
+    lut = gamma_lut(TONE["gamma"]) * 3
     args.out.mkdir(parents=True, exist_ok=True)
     rasters = []
     for region, spec in REGIONS.items():
         grid = region_grid(spec["box"], spec["px_per_degree"])
-        im = resample(src, grid).convert("RGB", matrix)
+        im = resample(src, grid).convert("RGB", matrix).point(lut)
         im = feather(im, spec["feather_deg"] * spec["px_per_degree"])
         data, quality = encode(im, spec["max_bytes"])
         name = f"underlay-{region}.webp"

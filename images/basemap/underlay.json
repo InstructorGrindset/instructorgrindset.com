@@ -1,7 +1,7 @@
 {
  "version": 1,
  "generated_by": "pipeline/tools/make_underlay.py",
- "generated_at": "2026-10-14T04:06:27Z",
+ "generated_at": "2026-10-14T04:07:49Z",
  "source": {
   "id": "natural-earth-ne1-hr-lc-sr-w",
   "url": "https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-1/",
@@ -12,18 +12,19 @@
  "attribution": "Relief: <a href=\"https://www.naturalearthdata.com/\" target=\"_blank\" rel=\"noopener\">Natural Earth</a>",
  "projection": "rows evenly spaced in Web Mercator y, columns evenly spaced in longitude (MapLibre image source)",
  "tone": {
-  "saturation": -0.35,
-  "contrast": -0.1,
-  "brightness_max": 0.62
+  "saturation": -0.3,
+  "contrast": 0.05,
+  "brightness_max": 0.55,
+  "gamma": 1.4
  },
  "background": "#0a0e14",
  "rasters": [
   {
    "region": "lower48",
    "image": "underlay-lower48.webp",
-   "width": 3672,
-   "height": 2227,
-   "px_per_degree": 54.0,
+   "width": 4080,
+   "height": 2475,
+   "px_per_degree": 60.0,
    "coordinates": [
     [
      -130.0,
@@ -44,15 +45,15 @@
    ],
    "feather_deg": 2.4,
    "quality": 74,
-   "bytes": 255918,
-   "sha256": "8eec59bd0a1565d9bc7c4e84f18e89407f64f4402edec27bc3ef35b5feb591b0"
+   "bytes": 318392,
+   "sha256": "13665ad789be0b7c6f98db4f38d5fcfde70bc6094c56f895533f25b40e85622b"
   },
   {
    "region": "alaska",
    "image": "underlay-alaska.webp",
-   "width": 1515,
-   "height": 1335,
-   "px_per_degree": 30.0,
+   "width": 1818,
+   "height": 1602,
+   "px_per_degree": 36.0,
    "coordinates": [
     [
      -180.0,
@@ -73,8 +74,8 @@
    ],
    "feather_deg": 0.35,
    "quality": 74,
-   "bytes": 80900,
-   "sha256": "a9b52899211ea766f33b760bb7d32b672310d3f2ebd4050b7f3bd7ba85e088ab"
+   "bytes": 106336,
+   "sha256": "4a18895dd8364bfcf2c7e1c37572d9e99043d710b0cc8a38f64bee6cd69ebc81"
   }
  ]
 }
