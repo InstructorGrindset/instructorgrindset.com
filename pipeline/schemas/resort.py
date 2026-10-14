@@ -261,9 +261,10 @@ def referenced_source_ids(resort: Resort) -> set[str]:
 
     def walk(obj: object) -> None:
         if isinstance(obj, StrictModel):
-            sid = getattr(obj, "source_id", None)
-            if isinstance(sid, str):
-                found.add(sid)
+            for key in ("source_id", "image_source_id"):  # image_source_id: the official trail map file
+                sid = getattr(obj, key, None)
+                if isinstance(sid, str):
+                    found.add(sid)
             sids = getattr(obj, "source_ids", None)
             if isinstance(sids, list):
                 found.update(s for s in sids if isinstance(s, str))

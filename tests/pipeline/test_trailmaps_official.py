@@ -208,3 +208,9 @@ def test_committed_image_files_follow_the_search_result_rule():
             src = sources[r["image_source_id"]]
             assert src["url"] == r["image_url"], r["resort_id"]  # the file itself was seen in a result
             assert r["image_confidence"] == "estimated" and src["note"] == "From a search result for this page; page not opened"
+
+
+def test_image_source_joins_the_resort_sources():
+    from pipeline.build import _refs
+    d = {"location_source_id": "loc", "official_trailmap": {"source_id": "tm-page", "image_source_id": "tm-file"}}
+    assert _refs(d) == {"loc", "tm-page", "tm-file"}

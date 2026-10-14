@@ -188,8 +188,15 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
         current.built = true;
         const resort = current.resort;
         build(resort).catch((err) => { console.warn('[map] trail map', err.message); status.textContent = 'The trail map could not load. Try again later.'; });
-      } else if (current.map) requestAnimationFrame(() => current && current.map && current.map.resize());
-    } else if (current.viewer && current.viewer.resize) requestAnimationFrame(() => current && current.viewer && current.viewer.resize());
+      } else if (current.map) {
+        // The panel was hidden (0 x 0): measure it again now and once more after layout settles.
+        current.map.resize();
+        requestAnimationFrame(() => current && current.map && current.map.resize());
+      }
+    } else if (current.viewer && current.viewer.resize) {
+      current.viewer.resize();
+      requestAnimationFrame(() => current && current.viewer && current.viewer.resize());
+    }
   }
 
   /** The official file failed (or cannot show here): say so and fall back to the Interactive tab when there is one. */
@@ -222,10 +229,11 @@ export function createTrailMap({ getMapLibre, sourceTitle }) {
     const pageLink = file.page && file.page !== file.url
       ? h('a', { href: file.page, target: '_blank', rel: 'noopener noreferrer' }, `Trail map page on ${name}`) : null;
     const fullLink = h('a', { class: 'tmo-full', href: file.url, target: '_blank', rel: 'noopener noreferrer' }, `View full size on ${name}`);
-    offFoot.append(
+    offFoot.append(...[ // append() would print a null as text
       h('p', { class: 'tmo-credit' }, h('span', null, `Trail map © ${name}`), pageLink ? [' · ', pageLink] : null, ' · ', fullLink),
       file.format === 'pdf' ? null : offHelp,
-      h('p', { class: 'fact-meta' }, [`Shown from ${name}'s own site and unchanged.`, o.season ? ` ${o.season} season.` : null, file.note ? ` ${file.note}` : null].filter(Boolean).join('')));
+      h('p', { class: 'fact-meta' }, [`Shown from ${name}'s own site and unchanged.`, o.season ? ` ${o.season} season.` : null, file.note ? ` ${file.note}` : null].filter(Boolean).join('')),
+    ].filter(Boolean));
     const done = () => { offStatus.hidden = true; };
     if (file.format === 'pdf') {
       if (!canEmbedPdf()) { fallback(resort, file, 'This browser opens PDF trail maps in a new tab.'); return null; }

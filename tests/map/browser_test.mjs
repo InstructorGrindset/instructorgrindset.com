@@ -86,7 +86,7 @@ function makeStubSite() {
   return t;
 }
 
-function watch(page, label, { allow404 = null } = {}) {
+function watch(page, label, { allowFail = null } = {}) {
   const problems = [];
   const requests = [];
   page.on('console', (m) => {
@@ -107,7 +107,7 @@ function watch(page, label, { allow404 = null } = {}) {
     // The report form test answers one send with 500 on purpose to exercise the retry.
     if (r.status() === 500 && r.url() === 'https://reports.example.test/submit') return;
     // Official map fallback tests answer some files with 404 on purpose.
-    if (r.status() === 404 && allow404 && allow404.test(r.url())) return;
+    if (r.status() === 404 && allowFail && allowFail.test(r.url())) return;
     if (r.status() >= 400 && !/\/fonts\/Rooftop/.test(r.url())) problems.push(`HTTP ${r.status()} ${r.url()}`);
   });
   page.on('requestfailed', (r) => {
@@ -118,6 +118,8 @@ function watch(page, label, { allow404 = null } = {}) {
     if (/^https:\/\/fonts\.gstatic\.com\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     // So can the underlay images, which load after the first paint at idle.
     if (/\/images\/basemap\/underlay-[a-z0-9]+\.webp$/.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
+    // ... and reload while the PDF viewer still reads a file.
+    if (allowFail && allowFail.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`);
   });
   return {
@@ -299,7 +301,8 @@ async function officialImageChecks(page, label, { phone = false, shotName = null
   await page.keyboard.press('ArrowRight');
   await page.keyboard.press('ArrowDown');
   const sk1 = await state();
-  check(sk0.scale > s0.fit && sk1.x < sk0.x && sk1.y < sk0.y, `${label}: the plus and arrow keys zoom and pan`);
+  // On a phone the zoomed map can still be shorter than the frame; it then stays centered vertically.
+  check(sk0.scale > s0.fit && sk1.x < sk0.x && (phone ? sk1.y <= sk0.y : sk1.y < sk0.y), `${label}: the plus and arrow keys zoom and pan`);
   await page.keyboard.press('-');
   await page.keyboard.press('0');
   check(Math.abs((await state()).scale - s0.fit) < 1e-6, `${label}: 0 resets the view`);
@@ -329,7 +332,7 @@ async function officialImageChecks(page, label, { phone = false, shotName = null
 async function officialFallbackChecks(browser, stubBase) {
   log('\nOfficial trail map fallbacks (stub site, files served by the test)');
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
-  const w = watch(page, 'official map fallbacks', { allow404: /\/fixture\/(alpha-peak-trail-map-2025-26\.png|kilo-notch-trail-map\.pdf)$/ });
+  const w = watch(page, 'official map fallbacks', { allowFail: /\/fixture\/(alpha-peak-trail-map-2025-26\.png|kilo-notch-trail-map\.pdf)$/ });
   const st = await serveOfficialMaps(page);
   st.missing.add('https://example.com/fixture/alpha-peak-trail-map-2025-26.png');
   await page.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
@@ -360,6 +363,9 @@ async function officialFallbackChecks(browser, stubBase) {
     `PDF: embedded in an <object> with a fallback link and no tabs (${JSON.stringify(pdf)})`);
   const loaded = await page.waitForFunction(() => document.querySelector('.tmo-status').hidden, null, { timeout: 8000 }).then(() => true).catch(() => false);
   check(loaded, 'PDF: the object reports it loaded');
+  check(!(await page.locator('dialog.trailmap-dialog .tmo-foot').innerText()).includes('null')
+    && await page.locator('dialog.trailmap-dialog .tmo-credit').innerText() === 'Trail map © Kilo Notch · View full size on Kilo Notch',
+  'PDF: the credit names the resort and links the file once (the url is the file)');
   await page.screenshot({ path: path.join(SHOTS, 'desktop-14d-trail-map-pdf.png') });
   await axeCheck(page, 'trail map dialog with a PDF');
   await page.keyboard.press('Escape');
@@ -400,7 +406,9 @@ async function trailMapChecks(page, label, file, { shotName, via = 'panel', phon
   check(await opener.count() === 1, `${label}: trail map ${via === 'control' ? 'map control' : 'button'} present`);
   await opener.click();
   const dlg = page.locator('dialog.trailmap-dialog');
-  // Resorts with an official map file open on it; the OpenSkiMap drawing is the Interactive tab.
+  // Resorts with an official map file open on it; the OpenSkiMap drawing is the Interactive tab. The dialog opens
+  // after its module loads, so wait for it before choosing the tab.
+  await page.waitForFunction(() => { const d = document.querySelector('dialog.trailmap-dialog'); return d && d.open && window.__careerMap.trail && window.__careerMap.trail.tab; }, null, { timeout: 20000 });
   const intTab = dlg.locator('#trailmap-tab-interactive');
   if (await intTab.isVisible() && await intTab.getAttribute('aria-selected') !== 'true') await intTab.click();
   await page.waitForFunction(() => { const t = window.__careerMap.trail; return t && t.map && t.map.loaded() && t.map.getLayer('tm-run'); }, null, { timeout: 20000 });

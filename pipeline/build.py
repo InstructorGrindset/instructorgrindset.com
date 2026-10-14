@@ -918,8 +918,9 @@ def _refs(d: dict) -> set[str]:
 
     def walk(o: Any) -> None:
         if isinstance(o, dict):
-            if isinstance(o.get("source_id"), str):
-                found.add(o["source_id"])
+            for key in ("source_id", "image_source_id"):  # image_source_id: the official trail map file
+                if isinstance(o.get(key), str):
+                    found.add(o[key])
             if isinstance(o.get("source_ids"), list):
                 found.update(x for x in o["source_ids"] if isinstance(x, str))
             for v in o.values():

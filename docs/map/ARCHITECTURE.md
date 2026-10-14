@@ -1018,8 +1018,10 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 * Basemap underlay (`config.basemap.underlay`, `map/js/underlay.js`, owner report 2026-10-14 "where is my united
   states satellite underlay?"): the USGS tiles load only after the click, so the 2D picture before it had no imagery
   at all, and they come from an outside host, which a host's content security policy (such as the private claude.ai
-  preview) can block. The underlay is served with the site, so it always shows. Source: Natural Earth I with Shaded Relief, Water and Drainages, 1:10m large size (`NE1_HR_LC_SR_W`, 1 arc
-  minute, public domain; source record `natural-earth-ne1-hr-lc-sr-w` in `data/raw/sources/basemap.yaml`).
+  preview) can block: MapLibre fetches tiles, so under `connect-src 'self'` every one is refused (checked with the
+  preview bundle on a subpath). The underlay is served with the site, so it always shows. Source: Natural Earth I with Shaded
+  Relief, Water and Drainages, 1:10m large size (`NE1_HR_LC_SR_W`, 1 arc minute, public domain; source record
+  `natural-earth-ne1-hr-lc-sr-w` in `data/raw/sources/basemap.yaml`).
   `pipeline/tools/make_underlay.py` is a one time asset script (the only code that needs Pillow, kept out of
   `requirements.txt`; its 323 MB download goes to the ignored `data/raw/basemap/download/`). It crops two boxes,
   resamples them to the `pipeline/heat.py` grid (columns even in longitude, rows even in Web Mercator y, area
@@ -1046,7 +1048,9 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   on the intro text. The picture has no state outlines, matching the WebGL map until `us-states.geojson` arrives.
   The picture draws the underlay up to zoom 9 (national, state and cluster views). A resort picture skips it and its
   download: at 58 px per degree it would be upscaled about 30 times there, and the USGS imagery takes over on the
-  WebGL map.
+  WebGL map. Measured 2026-10-14 (3 Lighthouse runs interleaved with the tree before, load 3 to 10): `/map/` median
+  96 (before 97), Vail 95 (before 96), LCP 2.12 s and 2.50 s (before 2.14 s and 2.44 s), the intro text in both.
+  Throttled click to WebGL load stays 6.7 to 7.8 s for both trees.
 * Satellite imagery (`config.basemap.imagery`): USGS The National Map `USGSImageryOnly` tiles (public domain, 256 px,
   max zoom 16) over the underlay from zoom 6.5 (layer and source `minzoom`), faded in by 7.5 (`raster-opacity`), so
   national and state views request no tile and cluster and resort views get the detail. Where tiles fail or are
@@ -1261,6 +1265,10 @@ same inset.
   opens PDF trail maps in a new tab.") and selects the Interactive tab when there is one. A PDF that the resort's
   server refuses to frame or forces to download may show nothing without an error; the link and the Interactive tab
   stay one click away.
+* Checks (2026-10-14): `tests/map/browser_test.mjs` serves a generated PNG and PDF for every official map URL (no
+  network, no committed image) and covers the viewer, the tabs from the keyboard, the image, PDF and no PDF viewer
+  fallbacks and axe on each tab; `tests/map/audit.mjs` runs axe on both tabs for Vail. Lighthouse medians over 3 runs
+  (load average 7): `/map/` 98, Vail 96, Jackson Hole 96, credits 100.
 * A native modal `<dialog>`: the page behind is inert, Tab cycles inside, Escape, the Close button and a backdrop click
   close it, focus returns to the button that opened it. Reopening the same resort keeps its tab, map and last view;
   another resort replaces it. Phones get a full screen sheet with the legend below the map.
