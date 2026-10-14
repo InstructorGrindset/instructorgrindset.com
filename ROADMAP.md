@@ -247,4 +247,5 @@ Work the queue top to bottom. Items in the same stage can run in parallel. An it
 | Snowfall contrast (2026-10-13) | Most contrast goes to 180 to 900 in, where people actually ski; a 50 in difference must be easy to read. Little or no snow shows as grey |
 | Official trail maps (2026-10-13) | Link to the resort's own trail map in a new tab; never rehost or embed copyrighted maps. The OpenSkiMap drawing stays as the interactive map |
 | Webcams and jobs (2026-10-13) | Link live cams and job pages for every resort that has them: ski school, coaching and clubs, management, parent companies and job boards. Live posting counts come only from public job board APIs; never scrape Indeed, Glassdoor or Workday pages |
+| Rent source (2026-10-14) | Rent comes from Zillow Research's Observed Rent Index (ZORI, all homes plus multifamily, smoothed) by ZIP, then county, then metro. Priority: employee housing mean, then ZORI, then ACS, then HUD. Zillow is credited on /map/credits/ |
 | MetroSlopes (2026-10-13) | MetroSlopes Next Gen Ski Lab is Tier A (owner selection). Until it opens, its dot is a regional placeholder at SFO and no street or city is published |
