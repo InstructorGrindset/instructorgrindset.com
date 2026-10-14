@@ -115,7 +115,7 @@ ASSUMPTIONS = [  # owner decision 4 keys and labels per docs/map/ARCHITECTURE.md
     ("season_months_basis", "Season months basis", "season_length"),
     ("weeks_per_month", "Weeks per month", 4.33),
     ("tips_season_usd", "Tips are not included yet", None),
-    ("rent_monthly_usd", "Average rent per month", 1150),
+    ("rent_monthly_usd", "Median rent per month", 1150),
     ("tax", "Savings are before tax", None),
 ]
 # Live cams and jobs (links only). Every URL is example.com; the employers and postings are invented.
@@ -259,13 +259,26 @@ def pay_rows(base, levels, stale_level=None, confidence="published", reported_le
     return rows
 
 
-def lucr(low, mid, high, status="computed", rent_source=None):
+# The rent lucrativeness used (pipeline/rent_used.py), synthetic: a median of two invented publishers at Alpha Peak,
+# Zillow's typical rent (ZORI) for a county at Foxtrot Basin, flagged stale.
+RENT_MEDIAN = {"value": 1150, "basis": "median_rent", "label": "Median rent", "source_ids": ["fixture-resort-site", "fixture-survey"],
+               "as_of": AS_OF, "confidence": "estimated", "note": "median of 2 sources (synthetic)", "unit": "1br", "count": 2,
+               "publishers": ["Fixture Rentals", "Fixture Daily"], "period": {"first": "2026-07", "last": "2026-08"},
+               "geography": {"level": "city", "id": None, "name": "Fixture Town, CO"}, "stale": False}
+RENT_ZORI = {"value": 1150, "basis": "zillow_zori", "label": "Zillow typical rent (ZORI)", "source_ids": ["fixture-model"],
+             "as_of": "2024-11-30", "confidence": "published", "note": "synthetic ZORI row", "unit": None, "count": None,
+             "publishers": [], "period": None, "geography": {"level": "county", "id": "00000", "name": "Fixture County, UT"},
+             "stale": True}
+
+
+def lucr(low, mid, high, status="computed", rent_source=None, rent=None):
     vals = [(k, l, None if status == "assumptions_unset" and k == "hours_per_week" else v) for k, l, v in ASSUMPTIONS]
     return {"low": low if status == "computed" else None, "mid": mid if status == "computed" else None,
             "high": high if status == "computed" else None, "status": status,
             "assumptions": [{"key": k, "label": l, "value": v} for k, l, v in vals]
             + ([{"key": "rent_basis", "label": "Rent basis", "value": rent_source[0]},
-                {"key": "rent_source_id", "label": "Rent source", "value": rent_source[1]}] if rent_source else [])}
+                {"key": "rent_source_id", "label": "Rent source", "value": rent_source[1]}] if rent_source else []),
+            "rent": rent}
 
 
 def career_data():
@@ -274,7 +287,8 @@ def career_data():
         "alpha-peak": {"pay": pay_rows(21, LEVELS, stale_level="level_1", reported_level="level_3"),
                        "private_rate": sourced({"low": 150, "high": 220, "unit": "hour"}),
                        "private_split": sourced(45, "fixture-survey", "reported"),
-                       "lucrativeness": lucr(3200, 8900, 8900, rent_source=("employee_housing_mean:alpha-staff-village,alpha-town-lease", "fixture-resort-site, fixture-survey")),
+                       "lucrativeness": lucr(3200, 8900, 8900, rent_source=("median_rent", "fixture-resort-site, fixture-survey"),
+                                             rent=RENT_MEDIAN),
                        "stale_fields": ["pay.level_1", "private_split"]},
         "bravo-bowl": {"pay": pay_rows(19, ["none", "level_1"]), "private_rate": None, "private_split": None,
                        "lucrativeness": lucr(None, None, None, "assumptions_unset"),
@@ -284,7 +298,8 @@ def career_data():
         "foxtrot-basin": {"pay": pay_rows(22, ["level_1", "level_2", "level_3"]),
                           "private_rate": sourced({"low": 700, "high": 950, "unit": "full_day"}),
                           "private_split": sourced(40, "fixture-model", "estimated"),
-                          "lucrativeness": lucr(4800, 10600, 10600, rent_source=("acs_median", "fixture-model")), "stale_fields": []},
+                          "lucrativeness": lucr(4800, 10600, 10600, rent_source=("zillow_zori", "fixture-model"), rent=RENT_ZORI),
+                          "stale_fields": ["lucrativeness.rent"]},
         "hotel-lake": {"pay": pay_rows(23, ["level_1", "level_2"]), "private_rate": None, "private_split": None,
                        "lucrativeness": lucr(None, None, None, "insufficient_data"),
                        "stale_fields": []},
@@ -640,6 +655,9 @@ def write_heat_fixture(cfg, resorts, outlines):
     # heat/season.json and its PNG from the fixture resorts' synthetic season lengths (the real transform).
     h = h.model_copy(update={"season": h.season.model_copy(update={"px_per_degree": 8})})
     heat.write_season(out_dir, resorts=resorts, outlines=outlines, heat=h, generated_at=GENERATED_AT)
+    # heat/lucrativeness.json and its PNGs from the fixture resorts' synthetic lucrativeness mids (the real transform).
+    from pipeline import heat_lucrativeness  # noqa: PLC0415
+    heat_lucrativeness.write_lucrativeness(out_dir, resorts=resorts, outlines=outlines, heat=h, generated_at=GENERATED_AT)
 
 
 def write(name, data):

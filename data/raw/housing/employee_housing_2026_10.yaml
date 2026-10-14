@@ -1,0 +1,894 @@
+# Employee housing that Tier A resorts or their operators publicly list (research batch, October 2026).
+# Schema and rules: data/raw/housing/README.md. Values seen only in a search result that names its page are
+# `estimated` with the note "From a search result for this page; page not opened".
+# Daily and weekly rents are converted to monthly with lucrativeness.assumptions in config/definitions.yaml
+# (days_per_month 30.4, weeks_per_month 4.33), rounded to the dollar; each rent note gives the published rate.
+# Points: precision neighborhood uses the town or village point from Wikipedia, the resort base point already in
+# the build, or a lift bottom station from the repository OpenSkiMap extract (data/raw/openskimap). A street address
+# from a source is kept in `address`; the point stays neighborhood level unless a source gives the building's own
+# coordinates.
+batch: employee-housing-2026-10
+researched_date: 2026-10-14
+sources:
+  # ---------------------------------------------------------------- Vail Resorts
+  - {id: vr-careers-housing-overview, url: "https://jobs.vailresortscareers.com/content/Housing/?locale=en_US", title: "Housing (Jobs at Vail Resorts)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Lists the resorts with employee housing by region (Rockies, West, Northeast and others) and says housing is limited at many locations. Also names Heavenly's complex at 1100 Keller Road, Breckenridge housing at 1360 Airport Rd, Stowe's The Dorm and The Inn, and Sawmill Heights Apartments for Northstar."}
+  - {id: vr-careers-heavenly-housing, url: "https://jobs.vailresortscareers.com/heavenly/content/heavenly-housing/", title: "Heavenly Housing (Jobs at Vail Resorts)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Employee housing complex at 1100 Keller Road, South Lake Tahoe, near the California Main Lodge; guidance of about $300 to $500 per person per month; residents 18 or older, a non drinking agreement for ages 18 to 21, and a commitment of at least three months."}
+  - {id: vr-careers-breckenridge-housing, url: "https://jobs.vailresortscareers.com/breckenridge/content/Breckenridge-Housing/?locale=en_US", title: "Breckenridge Housing (Jobs at Vail Resorts)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Employee housing at 1360 Airport Rd, Breckenridge, CO 80424, or at Keystone; apartments with two people per bedroom."}
+  - {id: vr-careers-keystone-housing, url: "https://jobs.vailresortscareers.com/keystone/content/Keystone-Housing/?locale=en_US", title: "Keystone Housing (Jobs at Vail Resorts)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The employee housing office is at 0065 Tennis Club Road, Keystone, CO 80435, and the complex sits within half a mile of the resort; guidance of about $600 to $1,000 per person per month; assigned to people with a formal job offer and a completed application."}
+  - {id: vr-careers-stowe-housing, url: "https://jobs.vailresortscareers.com/stowe/content/Stowe-housing/?locale=en_US", title: "Stowe Housing (Jobs at Vail Resorts)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Limited on site housing at The Dorm and The Inn."}
+  - {id: vr-careers-northstar-housing, url: "https://jobs.vailresortscareers.com/northstar/content/Northstar-Housing/?locale=en_US", title: "Northstar Housing (Jobs at Vail Resorts)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Points staff to Sawmill Heights Apartments, within the Northstar community."}
+  - {id: kpcw-vail-441-beds-canyons-housing, url: "https://www.kpcw.org/summit-county/2022-04-12/vail-reserves-room-for-441-employees-in-new-canyons-housing-complex", title: "Vail reserves room for 441 employees in new Canyons housing complex (KPCW, 2022-04-12)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Vail Resorts is master lessee of 441 beds in the Canyons Village employee housing development, on a five year lease with two five year renewal options."}
+  - {id: kpcw-slopeside-village-opens, url: "https://www.kpcw.org/summit-county/2023-10-12/slopeside-village-affordable-housing-opens-clearing-way-for-more-canyons-development", title: "Slopeside Village affordable housing opens, clearing way for more Canyons development (KPCW, 2023-10-12)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Opening report; rents from $436 to $1,100 a month, with priority for workers at top Canyons employers earning under 80% of area median income."}
+  - {id: summitdaily-copper-employee-housing, url: "https://www.summitdaily.com/news/as-ski-season-nears-we-take-a-look-at-ski-resort-employee-housing-including-copper-mountains-new-project/", title: "As ski season nears, we take a look at ski resort employee housing, including Copper Mountain's new project (Summit Daily)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Copper Mountain's main employee housing facility, Edge, costs $337 a month for a double occupancy room and is within walking distance of the resort; the article also counts 1,800 shared Breckenridge and Keystone beds. Undated in the results; about 2023."}
+  - {id: summitdaily-workforce-housing-at-resorts, url: "https://www.summitdaily.com/news/how-to-retain-resort-employees-colorado-ski-areas-are-building-workforce-housing-at-the-resorts/", title: "How to retain resort employees? Colorado ski areas are building workforce housing at the resorts (Summit Daily)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Copper Mountain finished Sky Chutes Landing in 2021: 44 studio, one, two and three bedroom apartments for 130 people."}
+  # ---------------------------------------------------------------- Alterra Mountain Company
+  - {id: deer-valley-employee-housing, url: "https://www.deervalley.com/jobs/housing", title: "Employee Housing (Deer Valley Resort)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Four Park City locations on the free bus route, with 2026/27 winter rates charged per day per bed: Prospector (2045 Prospector Ave., dorm style, two or three per room, $25 double, $22 triple), Snowshoe Inn (1450 Empire Ave., two to four per room, near the base of Park City Mountain Village, same rates), Slopeside Village (1823 Ozzy Way, 4 and 10 bedroom furnished apartments near Canyons Village, $29 single, $27 double, at capacity for 26/27) and Snow Country Condominiums (1150 Deer Valley Dr., up to four per condo, $31, at capacity for 26/27). Utilities included; rent is deducted from the paycheck; limited by department and position."}
+  - {id: steamboat-chamber-the-ponds, url: "https://www.steamboatchamber.com/listing/the-ponds-at-steamboat/2625/", title: "The Ponds at Steamboat (Steamboat Springs Chamber listing)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Employee housing for Steamboat Ski & Resort Corporation from November to April; non SSRC tenants only from May to September, by availability. The resort's own sources name no owner or lease for it."}
+  - {id: unofficialnetworks-steamboat-hotels-2021, url: "https://unofficialnetworks.com/2021/10/28/steamboat-springs-to-use-local-hotels-for-affordable-housing/", title: "Steamboat Springs to use local hotels for affordable housing (Unofficial Networks, 2021-10-28)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The town council approved the closed Steamboat Hotel and the Steamboat Mountain Lodge as dormitory style housing for Steamboat Ski Corporation employees. A 2021 report; current use not confirmed."}
+  - {id: winter-park-employee-housing, url: "https://www.winterparkresort.com/employment/employee-housing", title: "Employee Housing (Winter Park Resort)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Fewer than 20% of resort employees live in employee housing; winter beds are allocated by department, all bedrooms are shared, and full time seasonal or year round staff ask their hiring manager about a spot."}
+  - {id: milehighcre-winter-park-housing-opens, url: "https://milehighcre.com/winter-park-resort-opens-workforce-housing-to-first-residents/", title: "Winter Park Resort Opens Workforce Housing to First Residents (Mile High CRE)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Conifer Commons was completed in December 2023, with studio, one bedroom and two bedroom homes behind lockable doors and shared kitchens, bathrooms and living spaces."}
+  - {id: denver-post-winter-park-housing-2023, url: "https://pressreader.com/usa/the-denver-post/20230111/281638194306731", title: "New housing for employees part of $40 million deal (The Denver Post via PressReader, 2023-01-11)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Current Winter Park employee housing includes Fraser Condominiums in Fraser at $420 to $450 per person per month and lodges near the resort at $400 to $450 per person per month."}
+  - {id: schweitzer-employee-housing, url: "https://www.schweitzer.com/employment/schweitzer-employment/housing", title: "Employee Housing at Schweitzer Mountain Resort", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The Duplex near Schweitzer Village (three bedroom, two bath units, bunk beds, two employees per room) and the Hemlock House in Sandpoint (8 bedrooms, two employees each, a half bath per bedroom) at $350 to $700 a month; utilities and internet included; full time staff working 30 or more hours a week, first come first served. The employee housing application PDF on the same site gives $300 a month per employee for shared rooms and $600 for private rooms."}
+  - {id: crystal-rodeway-inn-employee-housing, url: "https://www.crystalmountainresort.com/media/news/rodeway-inn-employee-housing", title: "Crystal Mountain acquires the Rodeway Inn for employee housing (Crystal Mountain news)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. As of February 20, 2026 the resort owns the Rodeway Inn in Enumclaw, renamed The Northway Notch, and will convert it to seasonal workforce housing for up to 80 employees from next winter, with employee transportation."}
+  - {id: bbmr-employee-lodging, url: "https://www.bigbearmountainresort.com/employment/employee-housing", title: "BBMR Employee Lodging (Big Bear Mountain Resort)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Current BBMR employees only; $600 a month for non coed shared housing with a $300 refundable deposit and utilities included; just minutes from Snow Summit and Bear Mountain; limited spots for the 26/27 winter. There is no employee housing in Running Springs; Snow Valley staff can live in the Big Bear Lake housing and ride the employee shuttle."}
+  # ---------------------------------------------------------------- Aspen One (Aspen Skiing Company)
+  - {id: aspen-one-housing-information, url: "https://aspen.com/?p=1490", title: "Housing Information (Aspen One)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Lists Sopris View Apartments in El Jebel and Thunder River Lodge and Keator Grove in Carbondale as long term employee housing, and Willits Hub and Aspen Basalt Campground as short term housing. The excerpt does not say which buildings the company owns and which it leases."}
+  - {id: aspen-snowmass-hub-at-willits, url: "https://www.aspensnowmass.com/discover/experiences/stories/the-hub-at-willits", title: "The Hub at Willits (Aspen Snowmass)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. A 43 unit, 150 bed apartment complex in Willits Town Center, Basalt, 22 miles from downtown Aspen; 35 units for company employees and 8 for licensed childcare workers. Tenants moved in from Memorial Day weekend 2021."}
+  - {id: aspen-snowmass-employment-faq, url: "https://www.aspensnowmass.com/employment/frequently-asked-questions", title: "Employment FAQ (Aspen Snowmass)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Over 1,300 beds across the Roaring Fork Valley; housing is limited, first season employees get preference, leases typically run 5.5 months, and employee housing is closed to ski and snowboard pros."}
+  # ---------------------------------------------------------------- independents and other operators
+  - {id: saminfo-jackson-hole-employee-housing, url: "https://www.saminfo.com/news/sam-headline-news/16726-397-jackson-hole-resort-adds-employee-housing", title: "Jackson Hole resort adds employee housing (SAM)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Powderhorn, the resort's first employee complex in West Jackson, houses 94 workers in furnished four bedroom units with lock off bedrooms; rents are set for seasonal budgets. Related reports (JH News&Guide, Buckrail) describe a second Powderhorn phase of 30 units and 90 beds planned for 2023 to 2024, and say housing goes only to full time employees with rent under 30% of gross income."}
+  - {id: telluride-employee-housing, url: "https://tellurideskiresort.com/housing/", title: "Employee Housing (Telluride Ski Resort)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Big Billie's, at the base of Lifts 1 and 10, has 146 furnished double occupancy studios, each with a kitchenette and private bathroom; residents ride the chondola, bus and gondola free."}
+  - {id: coolworks-sun-valley, url: "https://coolworks.com/sun-valley/profile", title: "Sun Valley Resort employer profile (Cool Works)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Dormitory accommodation for full time employees on site at about $210 a month; the benefits section of the same page says about $280 a month; utilities, WiFi, washer and dryer, and linens included."}
+  - {id: big-sky-mountain-lodge-east, url: "https://bigskyresort.com/press-releases/big-sky-resort-completes-final-phase-of-mountain-lodge-east-workforce-housing-complex", title: "Big Sky Resort completes final phase of Mountain Lodge East workforce housing complex (Big Sky Resort)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The final phase completes the 186 bed complex in Mountain Village, walkable to the ski slopes."}
+  - {id: big-sky-redefining-employee-living, url: "https://www.bigskyresort.com/blog/redefining-employee-living", title: "Redefining Employee Living (Big Sky Resort blog)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Levinski Lodge is a three building campus beside Lake Levinsky with more than 200 beds within a 5 minute walk of the resort; Big Sky Resort houses over half its peak workforce in 1,011 employee beds. Rates are 48% to 60% of market rent."}
+  - {id: explorebigsky-black-bear-employee-housing, url: "https://www.explorebigsky.com/resort-turns-storied-bar-and-grill-into-employee-housing", title: "Resort turns storied bar and grill into employee housing (Explore Big Sky)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The former Black Bear Bar and Grill building in Mountain Village is being converted to add 44 employee beds. It also names the Golden Eagle Lodge in Meadow Village and the Mountain Lodge as existing employee dorms; this batch has no sourced point for those two."}
+  - {id: taosnews-tsv-workforce-housing-2024, url: "https://www.taosnews.com/news/business/tsv-inc-to-expand-workforce-housing-by-30-percent-this-year/article_79f82bbf-231d-56cf-9f4c-d550b5100cdf.html", title: "TSV Inc. to expand workforce housing by 30 percent this year (Taos News)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The resort planned to grow housing from 150 to 200 staff by fall 2024, partly by expanding the Amizette Inn for 16 more employees that fall and 20 more in 2025. The search attributed these figures to a 2024 announcement; Snow Industry News carried a similar report."}
+  - {id: mainebiz-sugarloaf-herbert-grand, url: "https://mainebiz.biz/article/sugarloaf-buys-kingfields-storied-herbert-grand-hotel-will-use-it-for-workforce-housing/", title: "Sugarloaf buys Kingfield's storied Herbert Grand Hotel, will use it for workforce housing (Mainebiz)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The hotel in Kingfield, about 15 miles from the resort, has 26 guest rooms, communal areas and a small restaurant. NewsCenter Maine reported the resort bought a nearby hotel for up to 60 staff."}
+  - {id: killington-employment, url: "https://killington.com/employment", title: "Employment (Killington Resort)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Names The Hillside, The Chalet, The Killington Motel and Mendon Mountain View Lodge as employee housing; $125.00 per person per week for a double room; move in cost of a $300 refundable security deposit plus the first two weeks' rent ($250 for a double). Undated. Mountain Times reported the resort bought Mendon Mountain View Lodge in 2018 and the 90 room Hillside Inn in April 2022."}
+  - {id: bendbulletin-mt-bachelor-campfire, url: "https://bendbulletin.com/?p=495039", title: "Mt. Bachelor announces housing partnership with Campfire Hotel (The Bulletin)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. A 2023 partnership gives subsidized single or double rooms at the Campfire Hotel in Bend to 52 full time seasonal employees; the resort did not release the price."}
+  - {id: opb-mt-bachelor-housing-2026, url: "https://www.opb.org/article/2026/01/20/central-oregon-mt-bachelor-housing-seasonal-work/", title: "Mt. Bachelor seasonal worker housing (OPB, 2026-01-20)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. The resort and hotel have provided low cost December to April housing to some seasonal workers for three years."}
+  - {id: saminfo-waterville-employee-housing, url: "https://www.saminfo.com/news/sam-headline-news/waterville-valley-resort-invests-in-employee-housing", title: "Waterville Valley Resort invests in employee housing (SAM)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. In 2016 the resort and General Properties, LLC bought the Snow Star Inn, 2.5 miles from the resort, for workforce housing: about 40 units in bunk, hotel and condo styles, with transport to the resort."}
+  - {id: alaskapublic-alyeska-village-2023, url: "https://alaskapublic.org/news/2023-12-13/alyeska-ski-resort-plans-to-build-a-new-community-complex-filled-with-shops-condos-and-an-ice-rink", title: "Alyeska ski resort plans a new community complex (Alaska Public Media, 2023-12-13)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Reports that the resort recently completed 71 staff housing units in Girdwood."}
+  - {id: adn-alaska-employer-housing-2022, url: "https://www.adn.com/business-economy/2022/06/19/alaska-workers-face-a-housing-crisis-in-some-communities-employers-hope-that-if-they-build-it-employees-will-come/", title: "Alaska workers face a housing crisis; employers hope that if they build it, employees will come (Anchorage Daily News, 2022-06-19)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Alyeska Resort was building a $6.6 million facility for middle management employees: about 70 studio and one bedroom apartments for 120 people."}
+  - {id: wikipedia-gallatin-gateway-inn, url: "https://en.wikipedia.org/wiki/Gallatin_Gateway_Inn", title: "Gallatin Gateway Inn (Wikipedia)", accessed_date: 2026-10-14, note: "Article text read 2026-10-14 through action=raw. Infobox location U.S. 191, Gallatin Gateway, Montana, coordinates 45 35 37 N, 111 11 54 W (the building, an NRHP listing). In 2015 the building was leased to the Yellowstone Club to house Yellowstone Club, Spanish Peaks Mountain Club and Moonlight Basin employees."}
+  - {id: idahoworks-yellowstone-club-housing, url: "https://idahoworks.gov/jobs/2593013", title: "Yellowstone Club seasonal job posting (IdahoWorks)", accessed_date: 2026-10-14, note: "From a search result for this page; page not opened. Winter 2026/2027 posting: several employee housing venues, including the Gallatin Gateway Inn with Schack's Depot dinner service; $225.00 to $700.00 biweekly depending on location and room style, single or double occupancy, a refundable deposit of $250 to $400, booked through StarRez, with shuttles to the club."}
+  # ---------------------------------------------------------------- points (Wikipedia and OpenSkiMap)
+  - {id: housing-wikipedia-basalt-colorado, url: "https://en.wikipedia.org/wiki/Basalt,_Colorado", title: "Basalt, Colorado (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 39 22 24 N, 107 02 27 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-bend-oregon, url: "https://en.wikipedia.org/wiki/Bend,_Oregon", title: "Bend, Oregon (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 44 03 29 N, 121 18 55 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-bethel-maine, url: "https://en.wikipedia.org/wiki/Bethel,_Maine", title: "Bethel, Maine (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 44 24 50 N, 70 47 24 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-big-bear-lake-california, url: "https://en.wikipedia.org/wiki/Big_Bear_Lake,_California", title: "Big Bear Lake, California (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 34 14 38 N, 116 54 41 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-breckenridge-colorado, url: "https://en.wikipedia.org/wiki/Breckenridge,_Colorado", title: "Breckenridge, Colorado (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 39 30 35 N, 106 02 24 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-carbondale-colorado, url: "https://en.wikipedia.org/wiki/Carbondale,_Colorado", title: "Carbondale, Colorado (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 39 22 50 N, 107 12 51 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-driggs-idaho, url: "https://en.wikipedia.org/wiki/Driggs,_Idaho", title: "Driggs, Idaho (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 43 44 30 N, 111 06 22 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-girdwood-alaska, url: "https://en.wikipedia.org/wiki/Girdwood,_Anchorage,_Alaska", title: "Girdwood, Anchorage, Alaska (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 60 56 33 N, 149 09 59 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-jackson-wyoming, url: "https://en.wikipedia.org/wiki/Jackson,_Wyoming", title: "Jackson, Wyoming (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 43.471936 N, 110.775267 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-killington-vermont, url: "https://en.wikipedia.org/wiki/Killington,_Vermont", title: "Killington, Vermont (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 43 38 53 N, 72 47 36 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-park-city-utah, url: "https://en.wikipedia.org/wiki/Park_City,_Utah", title: "Park City, Utah (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 40 39 01 N, 111 30 05 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-sandpoint-idaho, url: "https://en.wikipedia.org/wiki/Sandpoint,_Idaho", title: "Sandpoint, Idaho (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 48 16 56 N, 116 33 41 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-steamboat-springs-colorado, url: "https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado", title: "Steamboat Springs, Colorado (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 40 28 22 N, 106 48 59 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-jay-vermont, url: "https://en.wikipedia.org/wiki/Jay,_Vermont", title: "Jay, Vermont (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 44 58 50 N, 72 29 35 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-kingfield-maine, url: "https://en.wikipedia.org/wiki/Kingfield,_Maine", title: "Kingfield, Maine (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 44 59 06 N, 70 11 25 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-waterville-valley-new-hampshire, url: "https://en.wikipedia.org/wiki/Waterville_Valley,_New_Hampshire", title: "Waterville Valley, New Hampshire (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 43 56 48 N, 71 28 43 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-fraser-colorado, url: "https://en.wikipedia.org/wiki/Fraser,_Colorado", title: "Fraser, Colorado (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 39 55 49 N, 105 48 11 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-enumclaw-washington, url: "https://en.wikipedia.org/wiki/Enumclaw,_Washington", title: "Enumclaw, Washington (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 47 12 04 N, 121 59 49 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-el-jebel-colorado, url: "https://en.wikipedia.org/wiki/El_Jebel,_Colorado", title: "El Jebel, Colorado (Wikipedia)", accessed_date: 2026-10-14, note: "Community point from the infobox coordinates, 39 24 18 N, 107 05 31 W, read 2026-10-14 through action=raw."}
+  - {id: housing-wikipedia-mendon-vermont, url: "https://en.wikipedia.org/wiki/Mendon,_Vermont", title: "Mendon, Vermont (Wikipedia)", accessed_date: 2026-10-14, note: "Town point from the infobox coordinates, 43 37 30 N, 72 52 44 W, read 2026-10-14 through action=raw."}
+  - {id: openskimap-lift-telluride-chondola, url: "https://openskimap.org/", title: "Chondola (Lift 1) bottom station, Telluride Ski Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-14, note: "Lift 'Chondola', ref 1 (OpenStreetMap way/230902139, OpenSkiMap lift 81253a7eb1548b8078204fe714581bf720889765); the bottom end of the way is at 37.9393953, -107.8563633, 2793 m. The Sunshine Express, ref 10 (OpenSkiMap lift a7bb00d6a206a10d82016b151a457cb8fa884ad3), starts beside it at 37.939, -107.85651. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson and the full download it was filtered from."}
+  - {id: openskimap-lift-big-sky-swift-current-6, url: "https://openskimap.org/", title: "Swift Current 6 bottom station, Big Sky Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-14, note: "Mountain Village base point. Lift 'Swift Current 6' (OpenStreetMap way/843634522, OpenSkiMap lift 7f4fb40695bfc4a8d55b7041793799134c17091c); the bottom end of the way is at 45.2832259, -111.4020288, 2298 m, beside the Ramcharger 8 and Explorer Gondola bottoms. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson and the full download it was filtered from."}
+  - {id: openskimap-lift-park-city-red-pine-gondola, url: "https://openskimap.org/", title: "Red Pine Gondola bottom station, Park City Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-14, note: "Canyons Village point. Lift 'Red Pine Gondola' (OpenStreetMap way/31560012, OpenSkiMap lift b4927e04bf180e01d81d0cacc27ba0cfc9647d44); its bottom station is OpenStreetMap node/353138620 at 40.6855323, -111.5568834, 2111 m. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson and the full download it was filtered from."}
+
+sites:
+  # ================================================================ Vail Resorts
+  - id: park-city-slopeside-village
+    resort_id: park-city
+    name: Slopeside Village
+    town: Park City, UT (Canyons Village)
+    type: master_lease
+    lat: 40.68553
+    lon: -111.55688
+    location_source_id: openskimap-lift-park-city-red-pine-gondola
+    precision: neighborhood
+    address: {value: "1823 Ozzy Way, Park City, UT", source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Address as listed on the Deer Valley housing page."}
+    rent_monthly: {value: {low: 436, high: 1100}, source_id: kpcw-slopeside-village-opens, as_of: 2023-10-12, confidence: estimated, note: "From a search result for this page; page not opened. Range reported when the complex opened in 2023."}
+    occupancy: null
+    deposit: null
+    eligibility_note: "Vail Resorts holds a master lease on 441 beds here for Park City Mountain staff. Priority goes to Canyons area workers earning under 80% of area median income."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: heavenly-keller-road-employee-housing
+    resort_id: heavenly
+    name: Heavenly employee housing complex
+    town: South Lake Tahoe, CA
+    type: resort_owned
+    lat: 38.9353
+    lon: -119.94
+    location_source_id: wikipedia-heavenly-mountain-resort
+    precision: neighborhood
+    address: {value: "1100 Keller Road, South Lake Tahoe, CA", source_id: vr-careers-heavenly-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The page places the complex near the California Main Lodge; the point is Heavenly's base area point. The page does not say whether Vail Resorts owns or leases the complex."}
+    rent_monthly: {value: {low: 300, high: 500}, source_id: vr-careers-heavenly-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The page's rough guidance per person per month; the listing was about 14 months old when seen."}
+    occupancy: null
+    deposit: null
+    eligibility_note: "Residents must be 18 or older and commit to at least three months. Ages 18 to 21 sign a non drinking agreement."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: breckenridge-airport-road-employee-housing
+    resort_id: breckenridge
+    name: Breckenridge employee housing, Airport Road
+    town: Breckenridge, CO
+    type: resort_owned
+    lat: 39.50972
+    lon: -106.04
+    location_source_id: housing-wikipedia-breckenridge-colorado
+    precision: neighborhood
+    address: {value: "1360 Airport Rd, Breckenridge, CO 80424", source_id: vr-careers-breckenridge-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The point is the Breckenridge town point from Wikipedia. The page does not say whether Vail Resorts owns or leases the building."}
+    rent_monthly: null
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Apartments with two people per bedroom. Breckenridge staff may also be placed in Keystone housing."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: keystone-employee-housing-complex
+    resort_id: keystone
+    name: Keystone employee housing complex
+    town: Keystone, CO
+    type: resort_owned
+    lat: 39.605
+    lon: -105.9542
+    location_source_id: wikipedia-keystone-resort
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 600, high: 1000}, source_id: vr-careers-keystone-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The page's rough guidance per person per month."}
+    occupancy: null
+    deposit: null
+    eligibility_note: "Within half a mile of the resort. The housing office is at 0065 Tennis Club Road. Assigned by availability after a formal job offer and an application."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: stowe-the-dorm
+    resort_id: stowe
+    name: The Dorm
+    town: Stowe, VT
+    type: resort_owned
+    lat: 44.5319
+    lon: -72.7875
+    location_source_id: wikipedia-stowe-mountain-resort
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Limited on site housing at the resort."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: stowe-the-inn
+    resort_id: stowe
+    name: The Inn
+    town: Stowe, VT
+    type: resort_owned
+    lat: 44.5319
+    lon: -72.7875
+    location_source_id: wikipedia-stowe-mountain-resort
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Limited on site housing at the resort."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: northstar-sawmill-heights-apartments
+    resort_id: northstar
+    name: Sawmill Heights Apartments
+    town: Northstar, Truckee, CA
+    type: market
+    lat: 39.264
+    lon: -120.125
+    location_source_id: wikipedia-northstar-california
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Northstar points its staff to these apartments in the Northstar community."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  # ================================================================ POWDR
+  - id: copper-edge
+    resort_id: copper-mountain
+    name: Edge
+    town: Copper Mountain, CO
+    type: resort_owned
+    lat: 39.50167
+    lon: -106.15639
+    location_source_id: wikipedia-copper-mountain-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 337, high: 337}, source_id: summitdaily-copper-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Reported as $337 a month for a double occupancy room; the article dates from about 2023."}
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Copper's main employee dorm, a short walk from the lifts."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: copper-sky-chutes-landing
+    resort_id: copper-mountain
+    name: Sky Chutes Landing
+    town: Copper Mountain, CO
+    type: resort_owned
+    lat: 39.50167
+    lon: -106.15639
+    location_source_id: wikipedia-copper-mountain-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "44 studio to three bedroom apartments for about 130 people, finished in 2021."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: mt-bachelor-campfire-hotel
+    resort_id: mt-bachelor
+    name: Campfire Hotel
+    town: Bend, OR
+    type: master_lease
+    lat: 44.05806
+    lon: -121.31528
+    location_source_id: housing-wikipedia-bend-oregon
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: mixed
+    deposit: null
+    eligibility_note: "Subsidized single or double rooms from December to April for some full time seasonal staff."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  # ================================================================ Alterra Mountain Company
+  - id: deer-valley-prospector
+    resort_id: deer-valley
+    name: Prospector
+    town: Park City, UT
+    type: resort_owned
+    lat: 40.65028
+    lon: -111.50139
+    location_source_id: housing-wikipedia-park-city-utah
+    precision: neighborhood
+    address: {value: "2045 Prospector Ave., Park City, UT", source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The point is the Park City town point from Wikipedia. The page does not say whether Deer Valley owns or leases the building."}
+    rent_monthly: {value: {low: 669, high: 760}, source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Published as $22 a day per bed in a triple and $25 in a double (2026/27 winter), times 30.4 days."}
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Dorm style, two or three per room; only triples had space when checked. Utilities included; rent comes out of the Deer Valley paycheck."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: deer-valley-snowshoe-inn
+    resort_id: deer-valley
+    name: Snowshoe Inn
+    town: Park City, UT
+    type: resort_owned
+    lat: 40.6508
+    lon: -111.5075
+    location_source_id: wikipedia-park-city-mountain-resort
+    precision: neighborhood
+    address: {value: "1450 Empire Ave., Park City, UT", source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The page places it near the base of Park City Mountain Village; the point is that base area point. The page does not say whether Deer Valley owns or leases the building."}
+    rent_monthly: {value: {low: 669, high: 760}, source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Published as $22 a day per bed in a triple and $25 in a double (2026/27 winter), times 30.4 days."}
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Dorm style, two to four per room. Mail cannot be delivered to the property address. Utilities included; rent comes out of the Deer Valley paycheck."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: deer-valley-slopeside-village
+    resort_id: deer-valley
+    name: Slopeside Village
+    town: Park City, UT (Canyons Village)
+    type: master_lease
+    lat: 40.68553
+    lon: -111.55688
+    location_source_id: openskimap-lift-park-city-red-pine-gondola
+    precision: neighborhood
+    address: {value: "1823 Ozzy Way, Park City, UT", source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The point is the Canyons Village base (Red Pine Gondola). Recorded as a master lease because the complex is a third party workforce development (KPCW); the Deer Valley page does not state the terms."}
+    rent_monthly: {value: {low: 821, high: 882}, source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Published as $27 a day per bed in a double and $29 in a single (2026/27 winter), times 30.4 days."}
+    occupancy: mixed
+    deposit: null
+    eligibility_note: "Furnished 4 and 10 bedroom apartments with full kitchens. Full for the 2026/27 winter when checked."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: deer-valley-snow-country-condominiums
+    resort_id: deer-valley
+    name: Snow Country Condominiums
+    town: Park City, UT
+    type: resort_owned
+    lat: 40.65028
+    lon: -111.50139
+    location_source_id: housing-wikipedia-park-city-utah
+    precision: neighborhood
+    address: {value: "1150 Deer Valley Dr., Park City, UT", source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The point is the Park City town point from Wikipedia. The page does not say whether Deer Valley owns or leases the condos."}
+    rent_monthly: {value: {low: 942, high: 942}, source_id: deer-valley-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Published as $31 a day per bed (2026/27 winter), times 30.4 days."}
+    occupancy: null
+    deposit: null
+    eligibility_note: "Condos for up to four people. Full for the 2026/27 winter when checked."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: steamboat-the-ponds
+    resort_id: steamboat
+    name: The Ponds at Steamboat
+    town: Steamboat Springs, CO
+    type: resort_owned
+    lat: 40.47278
+    lon: -106.81639
+    location_source_id: housing-wikipedia-steamboat-springs-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Housing for Steamboat Ski & Resort employees from November to April."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: steamboat-former-steamboat-hotel
+    resort_id: steamboat
+    name: Former Steamboat Hotel
+    town: Steamboat Springs, CO
+    type: resort_owned
+    lat: 40.47278
+    lon: -106.81639
+    location_source_id: housing-wikipedia-steamboat-springs-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Approved in 2021 as dorm style housing for Steamboat Ski Corporation staff. Current use not confirmed."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: steamboat-mountain-lodge
+    resort_id: steamboat
+    name: Steamboat Mountain Lodge
+    town: Steamboat Springs, CO
+    type: resort_owned
+    lat: 40.47278
+    lon: -106.81639
+    location_source_id: housing-wikipedia-steamboat-springs-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Approved in 2021 as dorm style housing for Steamboat Ski Corporation staff. Current use not confirmed."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: winter-park-conifer-commons
+    resort_id: winter-park
+    name: Conifer Commons
+    town: Winter Park, CO
+    type: resort_owned
+    lat: 39.87861
+    lon: -105.78278
+    location_source_id: access-wikipedia-winter-park-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Finished December 2023. Studios and one and two bedroom homes with lockable doors and shared kitchens and bathrooms. Beds go by department to full time staff."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: winter-park-fraser-condominiums
+    resort_id: winter-park
+    name: Fraser Condominiums
+    town: Fraser, CO
+    type: resort_owned
+    lat: 39.93028
+    lon: -105.80306
+    location_source_id: housing-wikipedia-fraser-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 420, high: 450}, source_id: denver-post-winter-park-housing-2023, as_of: 2023-01-11, confidence: estimated, note: "From a search result for this page; page not opened. Per person per month in January 2023."}
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Resort employee housing in Fraser. All bedrooms in resort housing are shared."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: schweitzer-duplex
+    resort_id: schweitzer
+    name: Schweitzer Duplex
+    town: Schweitzer Village, ID
+    type: resort_owned
+    lat: 48.367
+    lon: -116.623
+    location_source_id: wikipedia-schweitzer-mountain
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 350, high: 700}, source_id: schweitzer-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Range the housing page gives for the Duplex and the Hemlock House; the resort's application PDF gives $300 a month shared and $600 private."}
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Three bedroom units near Schweitzer Village with bunk beds, two employees per room. Full time staff working 30 or more hours a week; utilities and internet included."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: schweitzer-hemlock-house
+    resort_id: schweitzer
+    name: Hemlock House
+    town: Sandpoint, ID
+    type: resort_owned
+    lat: 48.28222
+    lon: -116.56139
+    location_source_id: housing-wikipedia-sandpoint-idaho
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 350, high: 700}, source_id: schweitzer-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Range the housing page gives for the Duplex and the Hemlock House; the resort's application PDF gives $300 a month shared and $600 private."}
+    occupancy: shared
+    deposit: null
+    eligibility_note: "Eight bedrooms in Sandpoint, two employees each, with a half bath per bedroom. Full time staff working 30 or more hours a week; utilities and internet included."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: crystal-northway-notch
+    resort_id: crystal-mountain
+    name: The Northway Notch
+    town: Enumclaw, WA
+    type: resort_owned
+    lat: 47.20111
+    lon: -121.99694
+    location_source_id: housing-wikipedia-enumclaw-washington
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "The former Rodeway Inn, bought in February 2026. Seasonal housing for up to 80 employees from the 2026/27 winter, with resort transportation."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: snow-summit-bbmr-employee-lodging
+    resort_id: snow-summit
+    name: BBMR Employee Lodging
+    town: Big Bear Lake, CA
+    type: resort_owned
+    lat: 34.24389
+    lon: -116.91139
+    location_source_id: housing-wikipedia-big-bear-lake-california
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 600, high: 600}, source_id: bbmr-employee-lodging, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Utilities included."}
+    occupancy: shared
+    deposit: {value: 300, source_id: bbmr-employee-lodging, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Refundable."}
+    eligibility_note: "Current Big Bear Mountain Resort employees only. Non coed shared rooms, minutes from Snow Summit and Bear Mountain."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: bear-mountain-bbmr-employee-lodging
+    resort_id: bear-mountain
+    name: BBMR Employee Lodging
+    town: Big Bear Lake, CA
+    type: resort_owned
+    lat: 34.24389
+    lon: -116.91139
+    location_source_id: housing-wikipedia-big-bear-lake-california
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 600, high: 600}, source_id: bbmr-employee-lodging, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Utilities included."}
+    occupancy: shared
+    deposit: {value: 300, source_id: bbmr-employee-lodging, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Refundable."}
+    eligibility_note: "Current Big Bear Mountain Resort employees only. Non coed shared rooms, minutes from Snow Summit and Bear Mountain."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: snow-valley-bbmr-employee-lodging
+    resort_id: snow-valley
+    name: BBMR Employee Lodging
+    town: Big Bear Lake, CA
+    type: resort_owned
+    lat: 34.24389
+    lon: -116.91139
+    location_source_id: housing-wikipedia-big-bear-lake-california
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 600, high: 600}, source_id: bbmr-employee-lodging, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Utilities included."}
+    occupancy: shared
+    deposit: {value: 300, source_id: bbmr-employee-lodging, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Refundable."}
+    eligibility_note: "Snow Valley staff live in the Big Bear Lake housing and ride the employee shuttle; Running Springs has no employee housing."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  # ================================================================ Aspen One (four mountains share one housing program)
+  - &aspen-hub
+    id: aspen-mountain-hub-at-willits
+    resort_id: aspen-mountain
+    name: The Hub at Willits
+    town: Basalt, CO (Willits Town Center)
+    type: resort_owned
+    lat: 39.37333
+    lon: -107.04083
+    location_source_id: housing-wikipedia-basalt-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "43 apartments with 150 beds, 22 miles from downtown Aspen. Aspen Snowmass excludes ski and snowboard pros from employee housing; first season employees get preference."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *aspen-hub, id: aspen-highlands-hub-at-willits, resort_id: aspen-highlands}
+  - {<<: *aspen-hub, id: buttermilk-hub-at-willits, resort_id: buttermilk}
+  - {<<: *aspen-hub, id: snowmass-hub-at-willits, resort_id: snowmass}
+
+  - &aspen-campground
+    id: aspen-mountain-aspen-basalt-campground
+    resort_id: aspen-mountain
+    name: Aspen Basalt Campground
+    town: Basalt, CO
+    type: resort_owned
+    lat: 39.37333
+    lon: -107.04083
+    location_source_id: housing-wikipedia-basalt-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Short term employee housing. Aspen Snowmass excludes ski and snowboard pros from employee housing; first season employees get preference."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *aspen-campground, id: aspen-highlands-aspen-basalt-campground, resort_id: aspen-highlands}
+  - {<<: *aspen-campground, id: buttermilk-aspen-basalt-campground, resort_id: buttermilk}
+  - {<<: *aspen-campground, id: snowmass-aspen-basalt-campground, resort_id: snowmass}
+
+  - &aspen-sopris
+    id: aspen-mountain-sopris-view-apartments
+    resort_id: aspen-mountain
+    name: Sopris View Apartments
+    town: El Jebel, CO
+    type: resort_owned
+    lat: 39.405
+    lon: -107.09194
+    location_source_id: housing-wikipedia-el-jebel-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Long term employee housing. Aspen Snowmass excludes ski and snowboard pros from employee housing; first season employees get preference."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *aspen-sopris, id: aspen-highlands-sopris-view-apartments, resort_id: aspen-highlands}
+  - {<<: *aspen-sopris, id: buttermilk-sopris-view-apartments, resort_id: buttermilk}
+  - {<<: *aspen-sopris, id: snowmass-sopris-view-apartments, resort_id: snowmass}
+
+  - &aspen-thunder-river
+    id: aspen-mountain-thunder-river-lodge
+    resort_id: aspen-mountain
+    name: Thunder River Lodge
+    town: Carbondale, CO
+    type: resort_owned
+    lat: 39.38056
+    lon: -107.21417
+    location_source_id: housing-wikipedia-carbondale-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Long term employee housing. Aspen Snowmass excludes ski and snowboard pros from employee housing; first season employees get preference."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *aspen-thunder-river, id: aspen-highlands-thunder-river-lodge, resort_id: aspen-highlands}
+  - {<<: *aspen-thunder-river, id: buttermilk-thunder-river-lodge, resort_id: buttermilk}
+  - {<<: *aspen-thunder-river, id: snowmass-thunder-river-lodge, resort_id: snowmass}
+
+  - &aspen-keator
+    id: aspen-mountain-keator-grove
+    resort_id: aspen-mountain
+    name: Keator Grove
+    town: Carbondale, CO
+    type: resort_owned
+    lat: 39.38056
+    lon: -107.21417
+    location_source_id: housing-wikipedia-carbondale-colorado
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Long term employee housing. Aspen Snowmass excludes ski and snowboard pros from employee housing; first season employees get preference."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *aspen-keator, id: aspen-highlands-keator-grove, resort_id: aspen-highlands}
+  - {<<: *aspen-keator, id: buttermilk-keator-grove, resort_id: buttermilk}
+  - {<<: *aspen-keator, id: snowmass-keator-grove, resort_id: snowmass}
+
+  # ================================================================ independents and other operators
+  - id: jackson-hole-powderhorn
+    resort_id: jackson-hole
+    name: Powderhorn employee housing
+    town: Jackson, WY (West Jackson)
+    type: resort_owned
+    lat: 43.47194
+    lon: -110.77527
+    location_source_id: housing-wikipedia-jackson-wyoming
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: private
+    deposit: null
+    eligibility_note: "Furnished four bedroom units with lock off bedrooms. Full time employees only; rent stays under 30% of gross income."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: telluride-big-billies
+    resort_id: telluride
+    name: Big Billie's
+    town: Mountain Village, CO
+    type: resort_owned
+    lat: 37.9394
+    lon: -107.85636
+    location_source_id: openskimap-lift-telluride-chondola
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: shared
+    deposit: null
+    eligibility_note: "146 furnished double occupancy studios with kitchenettes and private baths, at the base of Lifts 1 and 10. Free chondola, bus and gondola."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - &sun-valley-dorms
+    id: sun-valley-employee-dormitories
+    resort_id: sun-valley
+    name: Sun Valley employee dormitories
+    town: Sun Valley, ID
+    type: resort_owned
+    lat: 43.68983
+    lon: -114.34584
+    location_source_id: openskimap-lift-dollar-mountain-dollar
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 210, high: 280}, source_id: coolworks-sun-valley, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. The page gives about $210 a month in one place and about $280 in another; utilities included. The point is the Dollar Mountain base by the resort village."}
+    occupancy: null
+    deposit: null
+    eligibility_note: "On site dorms for full time employees, with WiFi, laundry and linens."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *sun-valley-dorms, id: dollar-mountain-sun-valley-employee-dormitories, resort_id: dollar-mountain}
+
+  - id: big-sky-mountain-lodge-east
+    resort_id: big-sky
+    name: Mountain Lodge East
+    town: Big Sky, MT (Mountain Village)
+    type: resort_owned
+    lat: 45.28323
+    lon: -111.40203
+    location_source_id: openskimap-lift-big-sky-swift-current-6
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "A 186 bed complex in Mountain Village, walkable to the slopes."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: big-sky-levinski-lodge
+    resort_id: big-sky
+    name: Levinski Lodge
+    town: Big Sky, MT (Mountain Village)
+    type: resort_owned
+    lat: 45.28323
+    lon: -111.40203
+    location_source_id: openskimap-lift-big-sky-swift-current-6
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: mixed
+    deposit: null
+    eligibility_note: "Three buildings beside Lake Levinsky with studios, apartments and dorm rooms; more than 200 beds within a 5 minute walk of the resort."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: big-sky-former-black-bear-building
+    resort_id: big-sky
+    name: Former Black Bear Bar and Grill building
+    town: Big Sky, MT (Mountain Village)
+    type: resort_owned
+    lat: 45.28323
+    lon: -111.40203
+    location_source_id: openskimap-lift-big-sky-swift-current-6
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Converted to add 44 employee beds in Mountain Village."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: yellowstone-club-gallatin-gateway-inn
+    resort_id: yellowstone-club
+    name: Gallatin Gateway Inn
+    town: Gallatin Gateway, MT
+    type: master_lease
+    lat: 45.59361
+    lon: -111.19833
+    location_source_id: wikipedia-gallatin-gateway-inn
+    precision: building
+    address: {value: "U.S. 191, Gallatin Gateway, MT", source_id: wikipedia-gallatin-gateway-inn, as_of: 2026-10-14, confidence: published, note: "Infobox location and building coordinates of the NRHP listed inn."}
+    rent_monthly: {value: {low: 487, high: 1516}, source_id: idahoworks-yellowstone-club-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Published as $225 to $700 biweekly across all Yellowstone Club housing venues and room styles, converted at 4.33 weeks per month."}
+    occupancy: mixed
+    deposit: null
+    eligibility_note: "Leased by the Yellowstone Club since 2015 for staff housing. Single or double rooms, dinner at Schack's Depot, and shuttles to the club."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: taos-amizette-inn
+    resort_id: taos
+    name: Amizette Inn
+    town: Taos Ski Valley, NM (Amizette)
+    type: resort_owned
+    lat: 36.59
+    lon: -105.43694
+    location_source_id: wikipedia-taos-ski-valley
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "Expanded in 2024 and 2025 to house more Taos Ski Valley staff."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: grand-targhee-driggs-employee-housing
+    resort_id: grand-targhee
+    name: Driggs Employee Housing
+    town: Driggs, ID
+    type: resort_owned
+    lat: 43.74167
+    lon: -111.10611
+    location_source_id: housing-wikipedia-driggs-idaho
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "A stop on the resort's Teton Valley shuttle to the base."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: sugarloaf-herbert-grand-hotel
+    resort_id: sugarloaf
+    name: Herbert Grand Hotel
+    town: Kingfield, ME
+    type: resort_owned
+    lat: 44.985
+    lon: -70.19028
+    location_source_id: housing-wikipedia-kingfield-maine
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "A 26 room historic hotel about 15 miles from the resort, bought for workforce housing."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: sunday-river-bethel-leased-lodge
+    resort_id: sunday-river
+    name: Mountain Village Lodge
+    town: Bethel, ME
+    type: master_lease
+    lat: 44.41389
+    lon: -70.79
+    location_source_id: housing-wikipedia-bethel-maine
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: shared
+    deposit: null
+    eligibility_note: "A Bethel lodge the resort leases for staff; some reports call it Mountain View Lodge. Dorm style, two per room, shared kitchen and laundry."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: sunday-river-on-mountain-staff-dorm
+    resort_id: sunday-river
+    name: Former ski team dorm
+    town: Newry, ME
+    type: resort_owned
+    lat: 44.4734
+    lon: -70.8569
+    location_source_id: wikipedia-sunday-river-ski-resort
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: shared
+    deposit: null
+    eligibility_note: "A dorm on the mountain once used by visiting ski teams, now staff housing. Two per room."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - &jay-inglenook
+    id: jay-peak-inglenook-lodge
+    resort_id: jay-peak
+    name: Inglenook Lodge
+    town: Jay, VT
+    type: resort_owned
+    lat: 44.98056
+    lon: -72.49306
+    location_source_id: housing-wikipedia-jay-vermont
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 325, high: 650}, source_id: access-jay-peak-employee-housing, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Per employee, depending on the property; the page gives one range for all its housing."}
+    occupancy: null
+    deposit: null
+    eligibility_note: "Limited temporary housing for approved full time employees, with a resort shuttle between housing sites."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *jay-inglenook, id: jay-peak-timberline-condos, name: Timberline Condos, type: resort_owned}
+
+  - &killington-site
+    id: killington-the-hillside
+    resort_id: killington
+    name: The Hillside
+    town: Killington, VT
+    type: resort_owned
+    lat: 43.64806
+    lon: -72.79333
+    location_source_id: housing-wikipedia-killington-vermont
+    precision: neighborhood
+    address: null
+    rent_monthly: {value: {low: 541, high: 541}, source_id: killington-employment, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Published as $125 per person per week for a double room, converted at 4.33 weeks per month; one rate for all listed housing."}
+    occupancy: shared
+    deposit: {value: 300, source_id: killington-employment, as_of: 2026-10-14, confidence: estimated, note: "From a search result for this page; page not opened. Refundable security deposit, paid with the first two weeks' rent."}
+    eligibility_note: "Killington Resort employee housing; the former Hillside Inn has 90 rooms."
+    confidence: estimated
+    verified_date: 2026-10-14
+  - {<<: *killington-site, id: killington-the-chalet, name: The Chalet, eligibility_note: "Killington Resort employee housing."}
+  - {<<: *killington-site, id: killington-the-killington-motel, name: The Killington Motel, eligibility_note: "Killington Resort employee housing."}
+  - {<<: *killington-site, id: killington-mendon-mountain-view-lodge, name: Mendon Mountain View Lodge, town: "Mendon, VT", lat: 43.625, lon: -72.87889, location_source_id: housing-wikipedia-mendon-vermont, eligibility_note: "Killington Resort employee housing in Mendon, bought in 2018."}
+
+  - id: waterville-valley-snow-star-inn
+    resort_id: waterville-valley
+    name: Snow Star Inn
+    town: Waterville Valley, NH
+    type: resort_owned
+    lat: 43.94667
+    lon: -71.47861
+    location_source_id: housing-wikipedia-waterville-valley-new-hampshire
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: mixed
+    deposit: null
+    eligibility_note: "About 40 bunk, hotel and condo style units 2.5 miles from the resort, bought for staff in 2016, with transport to the mountain."
+    confidence: estimated
+    verified_date: 2026-10-14
+
+  - id: alyeska-staff-apartments
+    resort_id: alyeska
+    name: Alyeska staff apartments
+    town: Girdwood, AK
+    type: resort_owned
+    lat: 60.9425
+    lon: -149.16639
+    location_source_id: housing-wikipedia-girdwood-alaska
+    precision: neighborhood
+    address: null
+    rent_monthly: null
+    occupancy: null
+    deposit: null
+    eligibility_note: "About 70 studio and one bedroom apartments for about 120 staff, built for middle management. Completed by late 2023."
+    confidence: estimated
+    verified_date: 2026-10-14

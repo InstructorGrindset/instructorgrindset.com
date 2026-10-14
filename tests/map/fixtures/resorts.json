@@ -276,7 +276,7 @@
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month",
+       "label": "Median rent per month",
        "value": 1150
       },
       {
@@ -287,14 +287,42 @@
       {
        "key": "rent_basis",
        "label": "Rent basis",
-       "value": "employee_housing_mean:alpha-staff-village,alpha-town-lease"
+       "value": "median_rent"
       },
       {
        "key": "rent_source_id",
        "label": "Rent source",
        "value": "fixture-resort-site, fixture-survey"
       }
-     ]
+     ],
+     "rent": {
+      "value": 1150,
+      "basis": "median_rent",
+      "label": "Median rent",
+      "source_ids": [
+       "fixture-resort-site",
+       "fixture-survey"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": "median of 2 sources (synthetic)",
+      "unit": "1br",
+      "count": 2,
+      "publishers": [
+       "Fixture Rentals",
+       "Fixture Daily"
+      ],
+      "period": {
+       "first": "2026-07",
+       "last": "2026-08"
+      },
+      "geography": {
+       "level": "city",
+       "id": null,
+       "name": "Fixture Town, CO"
+      },
+      "stale": false
+     }
     },
     "stale_fields": [
      "pay.level_1",
@@ -762,7 +790,7 @@
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month",
+       "label": "Median rent per month",
        "value": 1150
       },
       {
@@ -770,7 +798,8 @@
        "label": "Savings are before tax",
        "value": null
       }
-     ]
+     ],
+     "rent": null
     },
     "stale_fields": []
    },
@@ -1032,7 +1061,7 @@
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month",
+       "label": "Median rent per month",
        "value": 1150
       },
       {
@@ -1040,7 +1069,8 @@
        "label": "Savings are before tax",
        "value": null
       }
-     ]
+     ],
+     "rent": null
     },
     "stale_fields": []
    },
@@ -1539,7 +1569,7 @@
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month",
+       "label": "Median rent per month",
        "value": 1150
       },
       {
@@ -1550,16 +1580,39 @@
       {
        "key": "rent_basis",
        "label": "Rent basis",
-       "value": "acs_median"
+       "value": "zillow_zori"
       },
       {
        "key": "rent_source_id",
        "label": "Rent source",
        "value": "fixture-model"
       }
-     ]
+     ],
+     "rent": {
+      "value": 1150,
+      "basis": "zillow_zori",
+      "label": "Zillow typical rent (ZORI)",
+      "source_ids": [
+       "fixture-model"
+      ],
+      "as_of": "2024-11-30",
+      "confidence": "published",
+      "note": "synthetic ZORI row",
+      "unit": null,
+      "count": null,
+      "publishers": [],
+      "period": null,
+      "geography": {
+       "level": "county",
+       "id": "00000",
+       "name": "Fixture County, UT"
+      },
+      "stale": true
+     }
     },
-    "stale_fields": []
+    "stale_fields": [
+     "lucrativeness.rent"
+    ]
    },
    "editorial": null,
    "climate_available": true,
@@ -1930,7 +1983,7 @@
       },
       {
        "key": "rent_monthly_usd",
-       "label": "Average rent per month",
+       "label": "Median rent per month",
        "value": 1150
       },
       {
@@ -1938,7 +1991,8 @@
        "label": "Savings are before tax",
        "value": null
       }
-     ]
+     ],
+     "rent": null
     },
     "stale_fields": []
    },

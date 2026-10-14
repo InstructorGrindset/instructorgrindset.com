@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T02:17:57Z",
+  "generated_at": "2026-10-14T02:25:56Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -353,6 +353,20 @@
       "note": "The Lift bus system and Amtrak service."
     },
     {
+      "id": "adn-alaska-employer-housing-2022",
+      "url": "https://www.adn.com/business-economy/2022/06/19/alaska-workers-face-a-housing-crisis-in-some-communities-employers-hope-that-if-they-build-it-employees-will-come/",
+      "title": "Alaska workers face a housing crisis; employers hope that if they build it, employees will come (Anchorage Daily News, 2022-06-19)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Alyeska Resort was building a $6.6 million facility for middle management employees: about 70 studio and one bedroom apartments for 120 people."
+    },
+    {
+      "id": "alaskapublic-alyeska-village-2023",
+      "url": "https://alaskapublic.org/news/2023-12-13/alyeska-ski-resort-plans-to-build-a-new-community-complex-filled-with-shops-condos-and-an-ice-rink",
+      "title": "Alyeska ski resort plans a new community complex (Alaska Public Media, 2023-12-13)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Reports that the resort recently completed 71 staff housing units in Girdwood."
+    },
+    {
       "id": "anderson-1976-new-snow-density",
       "url": "https://github.com/ESCOMP/CTSM/blob/be1aff2f2a3d3374da37760e846c326616f2da49/src/biogeophys/SnowHydrologyMod.F90#L3727-L3732",
       "title": "Anderson (1976) Alta new snow density relation, as implemented in the NCAR Community Land Model (CTSM SnowHydrologyMod.F90, NewSnowBulkDensity)",
@@ -360,11 +374,60 @@
       "note": "Estimated density: rho = 50 + 1.7 (T + 15)^1.5 kg/m3 for -15 C < T <= 2 C, 50 kg/m3 at or below -15 C, 50 + 1.7 (17)^1.5 above 2 C, using the snowfall weighted daily mean ERA5 air temperature over each storm at the resort base coordinate. The same relation in g/cm3 is in NWS SNOW-17 (https://github.com/NOAA-OWP/snow17/blob/ea142f94a4788ddf0be7b4d7da59c1f9f552df45/src/snow19/SNEW.f)."
     },
     {
+      "id": "aspen-one-housing-information",
+      "url": "https://aspen.com/?p=1490",
+      "title": "Housing Information (Aspen One)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Lists Sopris View Apartments in El Jebel and Thunder River Lodge and Keator Grove in Carbondale as long term employee housing, and Willits Hub and Aspen Basalt Campground as short term housing. The excerpt does not say which buildings the company owns and which it leases."
+    },
+    {
+      "id": "aspen-snowmass-employment-faq",
+      "url": "https://www.aspensnowmass.com/employment/frequently-asked-questions",
+      "title": "Employment FAQ (Aspen Snowmass)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Over 1,300 beds across the Roaring Fork Valley; housing is limited, first season employees get preference, leases typically run 5.5 months, and employee housing is closed to ski and snowboard pros."
+    },
+    {
+      "id": "aspen-snowmass-hub-at-willits",
+      "url": "https://www.aspensnowmass.com/discover/experiences/stories/the-hub-at-willits",
+      "title": "The Hub at Willits (Aspen Snowmass)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. A 43 unit, 150 bed apartment complex in Willits Town Center, Basalt, 22 miles from downtown Aspen; 35 units for company employees and 8 for licensed childcare workers. Tenants moved in from Memorial Day weekend 2021."
+    },
+    {
       "id": "aws-terrain-tiles",
       "url": "https://registry.opendata.aws/terrain-tiles/",
       "title": "Terrain Tiles on AWS (Mapzen terrarium elevation tiles)",
       "accessed_date": "2026-10-13",
       "note": "Mean ground height per 0.0625 degree cell from the terrarium tiles at zoom 6 (https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png). In the United States the tiles are built from USGS 3DEP (formerly NED), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and NOAA ETOPO1, all public domain; ArcticDEM data were created from DigitalGlobe, Inc., imagery and funded under National Science Foundation awards 1043681, 1559691 and 1542736. Used only to shape the snowfall heat map between stations; no height is displayed."
+    },
+    {
+      "id": "bbmr-employee-lodging",
+      "url": "https://www.bigbearmountainresort.com/employment/employee-housing",
+      "title": "BBMR Employee Lodging (Big Bear Mountain Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Current BBMR employees only; $600 a month for non coed shared housing with a $300 refundable deposit and utilities included; just minutes from Snow Summit and Bear Mountain; limited spots for the 26/27 winter. There is no employee housing in Running Springs; Snow Valley staff can live in the Big Bear Lake housing and ride the employee shuttle."
+    },
+    {
+      "id": "bendbulletin-mt-bachelor-campfire",
+      "url": "https://bendbulletin.com/?p=495039",
+      "title": "Mt. Bachelor announces housing partnership with Campfire Hotel (The Bulletin)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. A 2023 partnership gives subsidized single or double rooms at the Campfire Hotel in Bend to 52 full time seasonal employees; the resort did not release the price."
+    },
+    {
+      "id": "big-sky-mountain-lodge-east",
+      "url": "https://bigskyresort.com/press-releases/big-sky-resort-completes-final-phase-of-mountain-lodge-east-workforce-housing-complex",
+      "title": "Big Sky Resort completes final phase of Mountain Lodge East workforce housing complex (Big Sky Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The final phase completes the 186 bed complex in Mountain Village, walkable to the ski slopes."
+    },
+    {
+      "id": "big-sky-redefining-employee-living",
+      "url": "https://www.bigskyresort.com/blog/redefining-employee-living",
+      "title": "Redefining Employee Living (Big Sky Resort blog)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Levinski Lodge is a three building campus beside Lake Levinsky with more than 200 beds within a 5 minute walk of the resort; Big Sky Resort houses over half its peak workforce in 1,011 employee beds. Rates are 48% to 60% of market rent."
     },
     {
       "id": "career-followups-breckenridge-all-lessons",
@@ -414,6 +477,34 @@
       "title": "Telluride Ski Resort, Ski School (private lesson prices)",
       "accessed_date": "2026-10-13",
       "note": "From a search result for this page; page not opened."
+    },
+    {
+      "id": "coolworks-sun-valley",
+      "url": "https://coolworks.com/sun-valley/profile",
+      "title": "Sun Valley Resort employer profile (Cool Works)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Dormitory accommodation for full time employees on site at about $210 a month; the benefits section of the same page says about $280 a month; utilities, WiFi, washer and dryer, and linens included."
+    },
+    {
+      "id": "crystal-rodeway-inn-employee-housing",
+      "url": "https://www.crystalmountainresort.com/media/news/rodeway-inn-employee-housing",
+      "title": "Crystal Mountain acquires the Rodeway Inn for employee housing (Crystal Mountain news)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. As of February 20, 2026 the resort owns the Rodeway Inn in Enumclaw, renamed The Northway Notch, and will convert it to seasonal workforce housing for up to 80 employees from next winter, with employee transportation."
+    },
+    {
+      "id": "deer-valley-employee-housing",
+      "url": "https://www.deervalley.com/jobs/housing",
+      "title": "Employee Housing (Deer Valley Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Four Park City locations on the free bus route, with 2026/27 winter rates charged per day per bed: Prospector (2045 Prospector Ave., dorm style, two or three per room, $25 double, $22 triple), Snowshoe Inn (1450 Empire Ave., two to four per room, near the base of Park City Mountain Village, same rates), Slopeside Village (1823 Ozzy Way, 4 and 10 bedroom furnished apartments near Canyons Village, $29 single, $27 double, at capacity for 26/27) and Snow Country Condominiums (1150 Deer Valley Dr., up to four per condo, $31, at capacity for 26/27). Utilities included; rent is deducted from the paycheck; limited by department and position."
+    },
+    {
+      "id": "denver-post-winter-park-housing-2023",
+      "url": "https://pressreader.com/usa/the-denver-post/20230111/281638194306731",
+      "title": "New housing for employees part of $40 million deal (The Denver Post via PressReader, 2023-01-11)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Current Winter Park employee housing includes Fraser Condominiums in Fraser at $420 to $450 per person per month and lodges near the resort at $400 to $450 per person per month."
     },
     {
       "id": "ed-clusters-wikipedia-alta-utah",
@@ -3389,6 +3480,13 @@
       "title": "Yellowstone Club (Wikipedia)",
       "accessed_date": "2026-10-12",
       "note": null
+    },
+    {
+      "id": "explorebigsky-black-bear-employee-housing",
+      "url": "https://www.explorebigsky.com/resort-turns-storied-bar-and-grill-into-employee-housing",
+      "title": "Resort turns storied bar and grill into employee housing (Explore Big Sky)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The former Black Bear Bar and Grill building in Mountain Village is being converted to add 44 employee beds. It also names the Golden Eagle Lodge in Meadow Village and the Mountain Lodge as existing employee dorms; this batch has no sourced point for those two."
     },
     {
       "id": "facts-gapfill-12oys-wintergreen-2024",
@@ -9894,6 +9992,818 @@
       "note": "Mobility Database catalog entry 175; downloaded from the catalog mirror https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-colorado-winter-park-transit-gtfs-175.zip?alt=media; feed valid 2026-05-23 to 2026-11-14; license: none listed in the catalog."
     },
     {
+      "id": "housing-wikipedia-basalt-colorado",
+      "url": "https://en.wikipedia.org/wiki/Basalt,_Colorado",
+      "title": "Basalt, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 39 22 24 N, 107 02 27 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-bend-oregon",
+      "url": "https://en.wikipedia.org/wiki/Bend,_Oregon",
+      "title": "Bend, Oregon (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 44 03 29 N, 121 18 55 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-bethel-maine",
+      "url": "https://en.wikipedia.org/wiki/Bethel,_Maine",
+      "title": "Bethel, Maine (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 44 24 50 N, 70 47 24 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-big-bear-lake-california",
+      "url": "https://en.wikipedia.org/wiki/Big_Bear_Lake,_California",
+      "title": "Big Bear Lake, California (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 34 14 38 N, 116 54 41 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-breckenridge-colorado",
+      "url": "https://en.wikipedia.org/wiki/Breckenridge,_Colorado",
+      "title": "Breckenridge, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 39 30 35 N, 106 02 24 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-carbondale-colorado",
+      "url": "https://en.wikipedia.org/wiki/Carbondale,_Colorado",
+      "title": "Carbondale, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 39 22 50 N, 107 12 51 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-driggs-idaho",
+      "url": "https://en.wikipedia.org/wiki/Driggs,_Idaho",
+      "title": "Driggs, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 43 44 30 N, 111 06 22 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-el-jebel-colorado",
+      "url": "https://en.wikipedia.org/wiki/El_Jebel,_Colorado",
+      "title": "El Jebel, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Community point from the infobox coordinates, 39 24 18 N, 107 05 31 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-enumclaw-washington",
+      "url": "https://en.wikipedia.org/wiki/Enumclaw,_Washington",
+      "title": "Enumclaw, Washington (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 47 12 04 N, 121 59 49 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-fraser-colorado",
+      "url": "https://en.wikipedia.org/wiki/Fraser,_Colorado",
+      "title": "Fraser, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 39 55 49 N, 105 48 11 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-girdwood-alaska",
+      "url": "https://en.wikipedia.org/wiki/Girdwood,_Anchorage,_Alaska",
+      "title": "Girdwood, Anchorage, Alaska (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 60 56 33 N, 149 09 59 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-jackson-wyoming",
+      "url": "https://en.wikipedia.org/wiki/Jackson,_Wyoming",
+      "title": "Jackson, Wyoming (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 43.471936 N, 110.775267 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-jay-vermont",
+      "url": "https://en.wikipedia.org/wiki/Jay,_Vermont",
+      "title": "Jay, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 44 58 50 N, 72 29 35 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-killington-vermont",
+      "url": "https://en.wikipedia.org/wiki/Killington,_Vermont",
+      "title": "Killington, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 43 38 53 N, 72 47 36 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-kingfield-maine",
+      "url": "https://en.wikipedia.org/wiki/Kingfield,_Maine",
+      "title": "Kingfield, Maine (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 44 59 06 N, 70 11 25 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-mendon-vermont",
+      "url": "https://en.wikipedia.org/wiki/Mendon,_Vermont",
+      "title": "Mendon, Vermont (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 43 37 30 N, 72 52 44 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-park-city-utah",
+      "url": "https://en.wikipedia.org/wiki/Park_City,_Utah",
+      "title": "Park City, Utah (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 40 39 01 N, 111 30 05 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-sandpoint-idaho",
+      "url": "https://en.wikipedia.org/wiki/Sandpoint,_Idaho",
+      "title": "Sandpoint, Idaho (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 48 16 56 N, 116 33 41 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-steamboat-springs-colorado",
+      "url": "https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado",
+      "title": "Steamboat Springs, Colorado (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 40 28 22 N, 106 48 59 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "housing-wikipedia-waterville-valley-new-hampshire",
+      "url": "https://en.wikipedia.org/wiki/Waterville_Valley,_New_Hampshire",
+      "title": "Waterville Valley, New Hampshire (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Town point from the infobox coordinates, 43 56 48 N, 71 28 43 W, read 2026-10-14 through action=raw."
+    },
+    {
+      "id": "hs-adn-alaska-housing-2022",
+      "url": "https://www.adn.com/business-economy/2022/06/19/alaska-workers-face-a-housing-crisis-in-some-communities-employers-hope-that-if-they-build-it-employees-will-come/",
+      "title": "Alaska workers face a housing crisis in some communities (Anchorage Daily News)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-alta-employee-housing",
+      "url": "https://alta.com/jobs/employee-housing-and-transportation",
+      "title": "Employee Housing and Transportation (Alta)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-apcha-rental-property-info",
+      "url": "https://www.apcha.org/DocumentCenter/View/1174/Rental-Property-Info",
+      "title": "Rental Property Info (Aspen Pitkin County Housing Authority)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-apcha-seasonal-rentals",
+      "url": "https://apcha.org/335/Seasonal-Rentals",
+      "title": "Seasonal Rentals (Aspen Pitkin County Housing Authority)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-aspen-one-housing",
+      "url": "https://aspen.com/careers-new-employees/housing-information/",
+      "title": "Housing Information (Aspen One careers)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-bbmr-employee-housing",
+      "url": "https://www.bigbearmountainresort.com/employment/employee-housing",
+      "title": "BBMR Employee Lodging (Big Bear Mountain Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-bcdb-schweitzer-2021",
+      "url": "https://www.bonnercountydailybee.com/news/2021/dec/16/schweitzer-announces-employee-housing/",
+      "title": "Schweitzer announces employee housing (Bonner County Daily Bee)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-bdn-sugarloaf-2024",
+      "url": "https://www.bangordailynews.com/2024/03/14/business/business-housing/sugarloaf-maine-ski-resort-workforce-housing-joam40zk0w/",
+      "title": "Sugarloaf workforce housing (Bangor Daily News)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-bigsky-press-75-beds",
+      "url": "https://bigskyresort.com/press-releases/big-sky-resort-announces-75-additional-workforce-housing-beds-in-big-sky",
+      "title": "Big Sky Resort Announces 75 Additional Workforce Housing Beds in Big Sky (Big Sky Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-buckrail-22rents",
+      "url": "https://buckrail.com/success-story-pup-and-human-find-a-home/",
+      "title": "Success story: Pup and human find a home (Buckrail)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-coloradosun-winterpark-2023",
+      "url": "https://coloradosun.com/2023/04/05/workforce-housing-ski-areas-winter-park/",
+      "title": "Workforce housing at ski areas, Winter Park (Colorado Sun, 2023-04-05)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-coolworks-alyeska",
+      "url": "https://www.coolworks.com/alyeska-resort/profile",
+      "title": "Alyeska Resort (CoolWorks profile)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-coolworks-copper-job",
+      "url": "https://coolworks.com/copper-mountain-ski-resort/help-wanted/69105-lift-ops-ski-and-ride-school-transportation-rental-23",
+      "title": "Copper Mountain Ski Resort job listing (CoolWorks)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-coolworks-gt-room-attendant",
+      "url": "https://www.coolworks.com/grand-targhee-resort/highlighted-job/81778-room-attendant-58",
+      "title": "Room Attendant, Grand Targhee Resort (CoolWorks)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-coolworks-sunvalley",
+      "url": "https://coolworks.com/sun-valley/profile",
+      "title": "Sun Valley Resort (CoolWorks profile)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-coolworks-teton-backcountry",
+      "url": "https://www.coolworks.com/teton-backcountry-rentals/highlighted-job/78643-gear-rental-technician",
+      "title": "Gear Rental Technician, Teton Backcountry Rentals (CoolWorks)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-explorebigsky-leadership",
+      "url": "https://explorebigsky.com/big-sky-resort-continues-leadership-in-workforce-housing/32473",
+      "title": "Big Sky Resort continues leadership in workforce housing (Explore Big Sky)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ak-girdwood",
+      "url": "https://www.furnishedfinder.com/housing/us--ak--girdwood",
+      "title": "Furnished Monthly Rentals in Girdwood, AK",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ca-big-bear-lake",
+      "url": "https://www.furnishedfinder.com/housing/us--ca--big-bear-lake",
+      "title": "Furnished Monthly Rentals in Big Bear Lake, CA",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ca-mammoth-lakes",
+      "url": "https://www.furnishedfinder.com/housing/us--ca--mammoth-lakes",
+      "title": "Furnished Monthly Rentals in Mammoth Lakes, CA",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ca-south-lake-tahoe",
+      "url": "https://www.furnishedfinder.com/housing/us--ca--south-lake-tahoe",
+      "title": "Furnished Monthly Rentals in South Lake Tahoe, CA",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ca-tahoe-city",
+      "url": "https://www.furnishedfinder.com/housing/us--ca--tahoe-city",
+      "title": "Furnished Monthly Rentals in Tahoe City, CA",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ca-truckee",
+      "url": "https://www.furnishedfinder.com/housing/us--ca--truckee",
+      "title": "Furnished Monthly Rentals in Truckee, CA",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-aspen",
+      "url": "https://www.furnishedfinder.com/housing/us--co--aspen",
+      "title": "Furnished Monthly Rentals in Aspen, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-avon",
+      "url": "https://www.furnishedfinder.com/housing/us--co--avon",
+      "title": "Furnished Monthly Rentals in Avon, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-breckenridge",
+      "url": "https://www.furnishedfinder.com/housing/us--co--breckenridge",
+      "title": "Furnished Monthly Rentals in Breckenridge, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-crested-butte",
+      "url": "https://www.furnishedfinder.com/housing/us--co--crested-butte",
+      "title": "Furnished Monthly Rentals in Crested Butte, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-dillon",
+      "url": "https://www.furnishedfinder.com/housing/us--co--dillon",
+      "title": "Furnished Monthly Rentals in Dillon, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-frisco",
+      "url": "https://www.furnishedfinder.com/housing/us--co--frisco?move-in-date=20250403",
+      "title": "Furnished Monthly Rentals in Frisco, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-leadville",
+      "url": "https://www.furnishedfinder.com/housing/us--co--leadville",
+      "title": "Furnished Monthly Rentals in Leadville, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-snowmass-village",
+      "url": "https://www.furnishedfinder.com/housing/us--co--snowmass-village?searchType=REGIONAL&regionType=CITY",
+      "title": "Furnished Monthly Rentals in Snowmass Village, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-steamboat-springs",
+      "url": "https://www.furnishedfinder.com/housing/us--co--steamboat-springs",
+      "title": "Furnished Monthly Rentals in Steamboat Springs, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-telluride",
+      "url": "https://www.furnishedfinder.com/housing/us--co--telluride/corporate",
+      "title": "Corporate Housing Telluride, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-vail",
+      "url": "https://www.furnishedfinder.com/housing/us--co--vail",
+      "title": "Monthly Rentals in Vail, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-co-winter-park",
+      "url": "https://www.furnishedfinder.com/housing/us--co--winter-park",
+      "title": "Furnished Monthly Rentals in Winter Park, CO",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-id-driggs",
+      "url": "https://www.furnishedfinder.com/housing/us--id--driggs",
+      "title": "Furnished Monthly Rentals in Driggs, ID",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-id-ketchum",
+      "url": "https://www.furnishedfinder.com/housing/us--id--ketchum",
+      "title": "Furnished Monthly Rentals in Ketchum, ID",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-id-sandpoint",
+      "url": "https://www.furnishedfinder.com/housing/us--id--sandpoint",
+      "title": "Furnished Monthly Rentals in Sandpoint, ID",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-id-sun-valley",
+      "url": "https://www.furnishedfinder.com/housing/us--id--sun-valley",
+      "title": "Furnished Monthly Rentals in Sun Valley, ID",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-me-bethel",
+      "url": "https://www.furnishedfinder.com/housing/us--me--bethel",
+      "title": "Furnished Monthly Rentals in Bethel, ME",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-mt-big-sky",
+      "url": "https://www.furnishedfinder.com/housing/us--mt--big-sky",
+      "title": "Furnished Monthly Rentals in Big Sky, MT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-mt-bozeman",
+      "url": "https://www.furnishedfinder.com/housing/us--mt--bozeman",
+      "title": "Furnished Monthly Rentals in Bozeman, MT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-mt-whitefish",
+      "url": "https://www.furnishedfinder.com/housing/us--mt--whitefish",
+      "title": "Furnished Monthly Rentals in Whitefish, MT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-nh-new-london",
+      "url": "https://www.furnishedfinder.com/housing/us--nh--new-london",
+      "title": "Furnished Monthly Rentals in New London, NH",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-nh-north-conway",
+      "url": "https://www.furnishedfinder.com/housing/us--nh--north-conway",
+      "title": "Furnished Monthly Rentals in North Conway, NH",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-nh-north-woodstock",
+      "url": "https://www.furnishedfinder.com/housing/us--nh--north-woodstock",
+      "title": "Furnished Monthly Rentals in North Woodstock, NH",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-nm-taos",
+      "url": "https://www.furnishedfinder.com/housing/us--nm--taos",
+      "title": "Furnished Monthly Rentals in Taos, NM",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ny-lake-placid",
+      "url": "https://www.furnishedfinder.com/housing/us--ny--lake-placid",
+      "title": "Furnished Monthly Rentals in Lake Placid, NY",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-or-bend",
+      "url": "https://furnishedfinder.com/housing/us--or--bend?budget=&filters=&map=&moveDate=%7B%22in%22%3A%222025-04-24%22%7D&page=",
+      "title": "Furnished Monthly Rentals in Bend, OR",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-or-welches",
+      "url": "https://www.furnishedfinder.com/housing/us--or--welches",
+      "title": "Furnished Monthly Rentals in Welches, OR",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ut-cottonwood-heights",
+      "url": "https://www.furnishedfinder.com/housing/us--ut--cottonwood-heights",
+      "title": "Furnished Monthly Rentals in Cottonwood Heights, UT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ut-eden",
+      "url": "https://www.furnishedfinder.com/housing/us--ut--eden",
+      "title": "Furnished Monthly Rentals in Eden, UT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ut-park-city",
+      "url": "https://www.furnishedfinder.com/housing/us--ut--park-city",
+      "title": "Furnished Monthly Rentals in Park City, UT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-ut-sandy",
+      "url": "https://www.furnishedfinder.com/housing/us--ut--sandy",
+      "title": "Furnished Monthly Rentals in Sandy, UT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-vt-killington",
+      "url": "https://www.furnishedfinder.com/housing/us--vt--killington",
+      "title": "Furnished Monthly Rentals in Killington, VT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-vt-ludlow",
+      "url": "https://www.furnishedfinder.com/housing/us--vt--ludlow",
+      "title": "Furnished Monthly Rentals in Ludlow, VT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-vt-stowe",
+      "url": "https://www.furnishedfinder.com/housing/us--vt--stowe",
+      "title": "Furnished Monthly Rentals in Stowe, VT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-vt-waitsfield",
+      "url": "https://www.furnishedfinder.com/housing/us--vt--waitsfield",
+      "title": "Furnished Monthly Rentals in Waitsfield, VT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-vt-wilmington",
+      "url": "https://www.furnishedfinder.com/housing/us--vt--wilmington",
+      "title": "Furnished Monthly Rentals in Wilmington, VT",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-wa-enumclaw",
+      "url": "https://www.furnishedfinder.com/housing/us--wa--enumclaw",
+      "title": "Furnished Monthly Rentals in Enumclaw, WA",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-wa-leavenworth",
+      "url": "https://www.furnishedfinder.com/housing/us--wa--leavenworth",
+      "title": "Furnished Monthly Rentals in Leavenworth, WA",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-ff-wy-jackson",
+      "url": "https://www.furnishedfinder.com/housing/us--wy--jackson",
+      "title": "Furnished Monthly Rentals in Jackson, WY",
+      "accessed_date": "2026-10-14",
+      "note": "Furnished Finder town page seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-frisco-renter-resources",
+      "url": "https://www.friscogov.com/departments/community-development/workforce-and-affordable-housing/resources-for-renters-and-buyers/",
+      "title": "Resources for Renters and Buyers (Town of Frisco)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-frisco-workforce-inventory",
+      "url": "https://www.friscogov.com/departments/community-development/workforce-and-affordable-housing/frisco-workforce-housing-inventory/",
+      "title": "Frisco Workforce Housing Inventory (Town of Frisco)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-grandtarghee-careers",
+      "url": "https://grandtarghee.com/careers",
+      "title": "Careers (Grand Targhee Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-jaypeak-employee-housing",
+      "url": "https://jaypeakresort.com/EmployeeHousing",
+      "title": "Employee Housing (Jay Peak Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-kpcw-werip-2024",
+      "url": "https://www.kpcw.org/park-city/2024-09-25/landlords-earn-skis-fitness-passes-in-workforce-rental-incentive-program",
+      "title": "Landlords earn skis, fitness passes in workforce rental incentive program (KPCW)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-kpcw-werip-2025",
+      "url": "https://www.kpcw.org/summit-county/2025-01-09/local-nonprofits-we-rip-program-helps-provide-affordable-housing-to-seasonal-workers",
+      "title": "Local nonprofit's WE RIP program helps provide affordable housing to seasonal workers (KPCW)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-kunr-slt-2022",
+      "url": "https://www.kunr.org/housing/2022-01-10/south-lake-tahoe-long-term-rental-incentives",
+      "title": "South Lake Tahoe long term rental incentives (KUNR)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-manchesterjournal-stratton-2024",
+      "url": "https://www.manchesterjournal.com/local-news/new-stratton-investments-totaling-more-than-20-million-to-serve-employees-guests/article_b1423248-81a6-11ef-96c8-47fa173b345b.html",
+      "title": "New Stratton investments totaling more than $20 million to serve employees, guests (Manchester Journal)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-mono-county-housing-resources",
+      "url": "https://www.monocounty.ca.gov/probation/page/housing-resources",
+      "title": "Housing Resources (Mono County)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-placer-lease-to-locals",
+      "url": "https://www.placer.ca.gov/8627/Lease-to-Locals",
+      "title": "Lease to Locals (Placer County)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-schweitzer-housing",
+      "url": "https://schweitzer.com/employment/schweitzer-employment/housing",
+      "title": "Employee Housing (Schweitzer)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-sierrawave-mlh",
+      "url": "https://sierrawave.net/?p=27123",
+      "title": "Article on Mammoth Lakes Housing rental listings (Sierra Wave)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-southtahoenow-lease-locals-2022",
+      "url": "https://southtahoenow.com/story/01/04/2022/south-lake-tahoe-homeowners-can-receive-10000-renting-locals",
+      "title": "South Lake Tahoe homeowners can receive up to $10,000 for renting to locals (South Tahoe Now)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-steamboat-chamber-yvha",
+      "url": "https://www.steamboatchamber.com/listing/yampa-valley-housing-authority/1876/",
+      "title": "Yampa Valley Housing Authority (Steamboat Chamber directory)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-steamboatpilot-yvha",
+      "url": "https://www.steamboatpilot.com/news/housing-authority-delivers-housing-update-to-steamboat-springs-city-council/",
+      "title": "Yampa Valley Housing Authority delivers update to Steamboat Springs City Council (Steamboat Pilot)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-stratton-jobs",
+      "url": "https://www.stratton.com/jobs",
+      "title": "Fuel your career with your passion (Stratton jobs)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-sugarbowl-housing",
+      "url": "https://www.sugarbowl.com/housing",
+      "title": "Employee Housing (Sugar Bowl)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-sugarbowl-recruiter",
+      "url": "https://www.sugarbowl.com/recruiter",
+      "title": "Careers (Sugar Bowl)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-summitdaily-resort-housing",
+      "url": "https://www.summitdaily.com/news/as-ski-season-nears-we-take-a-look-at-ski-resort-employee-housing-including-copper-mountains-new-project/",
+      "title": "As ski season nears, we take a look at ski resort employee housing, including Copper Mountain's new project (Summit Daily)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-sunvalleymag-2017",
+      "url": "https://sunvalleymag.com/articles/housing-affordability-pickle/",
+      "title": "Housing affordability pickle (Sun Valley Magazine, 2017)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-telluride-town-rentals",
+      "url": "https://telluride-co.gov/745/Town-Owned-Rental-Properties",
+      "title": "Town Owned Rental Properties (Town of Telluride)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-tellurideinside-2024",
+      "url": "https://tellurideinside.com/2024/11/town-of-telluride-council-housing-authority-adopt-new-employee-rental-housing-policies.html",
+      "title": "Town of Telluride council and housing authority adopt new employee rental housing policies (Telluride Inside)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-teton-county-doc-1903",
+      "url": "https://www.tetoncountywy.gov/DocumentCenter/View/1903",
+      "title": "Rental resources document (Teton County Housing Department)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-teton-county-rental-resources",
+      "url": "https://tetoncountywy.gov/749/Teton-County-Rental-Resources",
+      "title": "Teton County Rental Resources (Teton County Housing Department)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-timberline-employment",
+      "url": "https://timberlinelodge.com/employment/",
+      "title": "Employment (Timberline Lodge)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-townlift-werip-2025",
+      "url": "https://townlift.com/2025/10/park-city-chamber-relaunches-rental-incentive-program-to-support-workforce-housing/",
+      "title": "Park City Chamber relaunches rental incentive program to support workforce housing (TownLift)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-truckee-chamber-housing",
+      "url": "https://truckee.com/?p=4225",
+      "title": "Housing & Rentals (Truckee Chamber of Commerce)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-unofficialnetworks-sugarloaf-2022",
+      "url": "https://unofficialnetworks.com/2022/04/14/sugarloaf-adding-employee-housing/",
+      "title": "Sugarloaf adding employee housing (Unofficial Networks)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-utahbusiness-werip-2025",
+      "url": "https://www.utahbusiness.com/press-releases/2025/10/06/park-city-chamber-commerce-visitors-bureau-launches-third-year-we-rip-program",
+      "title": "Park City Chamber and Visitors Bureau launches third year of WE RIP program (Utah Business)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-vail-renter-resources",
+      "url": "https://vail.gov/government/departments/housing/housing-resource-for-renters",
+      "title": "Housing Resources for Renters (Town of Vail)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-visitsunvalley-bcha",
+      "url": "https://visitsunvalley.com/services/blaine-county-housing-authority/",
+      "title": "Blaine County Housing Authority (Visit Sun Valley directory)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-winterpark-employee-housing",
+      "url": "https://www.winterparkresort.com/employment/employee-housing",
+      "title": "Employee Housing (Winter Park Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "hs-woodriverweekly-2019",
+      "url": "https://woodriverweekly.com/index.php/2019/07/08/sun-valley-resort-completes-new-employee-housing/",
+      "title": "Sun Valley Resort Completes New Employee Housing (Wood River Weekly)",
+      "accessed_date": "2026-10-14",
+      "note": "Seen in a search result; page not opened."
+    },
+    {
+      "id": "idahoworks-yellowstone-club-housing",
+      "url": "https://idahoworks.gov/jobs/2593013",
+      "title": "Yellowstone Club seasonal job posting (IdahoWorks)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Winter 2026/2027 posting: several employee housing venues, including the Gallatin Gateway Inn with Schack's Depot dinner service; $225.00 to $700.00 biweekly depending on location and room style, single or double occupancy, a refundable deposit of $250 to $400, booked through StarRez, with shuttles to the club."
+    },
+    {
       "id": "jobs-alta-jobs-postings",
       "url": "https://www.alta.com/jobs/snowmaking",
       "title": "Alta Ski Area job posting, Snowmaking (alta.com/jobs)",
@@ -10489,6 +11399,34 @@
       "note": "From a search result for this page; page not opened. The club's postings say to apply through the YC Careers link at the bottom of the yellowstoneclub.com home page."
     },
     {
+      "id": "killington-employment",
+      "url": "https://killington.com/employment",
+      "title": "Employment (Killington Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Names The Hillside, The Chalet, The Killington Motel and Mendon Mountain View Lodge as employee housing; $125.00 per person per week for a double room; move in cost of a $300 refundable security deposit plus the first two weeks' rent ($250 for a double). Undated. Mountain Times reported the resort bought Mendon Mountain View Lodge in 2018 and the 90 room Hillside Inn in April 2022."
+    },
+    {
+      "id": "kpcw-slopeside-village-opens",
+      "url": "https://www.kpcw.org/summit-county/2023-10-12/slopeside-village-affordable-housing-opens-clearing-way-for-more-canyons-development",
+      "title": "Slopeside Village affordable housing opens, clearing way for more Canyons development (KPCW, 2023-10-12)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Opening report; rents from $436 to $1,100 a month, with priority for workers at top Canyons employers earning under 80% of area median income."
+    },
+    {
+      "id": "kpcw-vail-441-beds-canyons-housing",
+      "url": "https://www.kpcw.org/summit-county/2022-04-12/vail-reserves-room-for-441-employees-in-new-canyons-housing-complex",
+      "title": "Vail reserves room for 441 employees in new Canyons housing complex (KPCW, 2022-04-12)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Vail Resorts is master lessee of 441 beds in the Canyons Village employee housing development, on a five year lease with two five year renewal options."
+    },
+    {
+      "id": "mainebiz-sugarloaf-herbert-grand",
+      "url": "https://mainebiz.biz/article/sugarloaf-buys-kingfields-storied-herbert-grand-hotel-will-use-it-for-workforce-housing/",
+      "title": "Sugarloaf buys Kingfield's storied Herbert Grand Hotel, will use it for workforce housing (Mainebiz)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The hotel in Kingfield, about 15 miles from the resort, has 26 guest rooms, communal areas and a small restaurant. NewsCenter Maine reported the resort bought a nearby hotel for up to 60 staff."
+    },
+    {
       "id": "medrent-apartmentlist-akron",
       "url": "https://www.apartmentlist.com/rent-report/oh/akron",
       "title": "Akron, OH rent report (Apartment List)",
@@ -10993,6 +11931,13 @@
       "note": "From a search result for this page; page not opened. Describes an indoor ski and snowboard training center (immersive infinite slopes, indoor freestyle park, trampoline area, beginner dry slope, skier gym) and year round coach hiring."
     },
     {
+      "id": "milehighcre-winter-park-housing-opens",
+      "url": "https://milehighcre.com/winter-park-resort-opens-workforce-housing-to-first-residents/",
+      "title": "Winter Park Resort Opens Workforce Housing to First Residents (Mile High CRE)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Conifer Commons was completed in December 2023, with studio, one bedroom and two bedroom homes behind lockable doors and shared kitchens, bathrooms and living spaces."
+    },
+    {
       "id": "noaa-ncei-normals-1991-2020",
       "url": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals",
       "title": "NOAA NCEI U.S. Climate Normals 1991 to 2020, annual and seasonal normals by station",
@@ -11049,6 +11994,13 @@
       "note": "Public domain (US government work, USDA NRCS National Water and Climate Center). Derived, not measured: SNOTEL measures snow water equivalent and depth, not snowfall. Daily new snow = daily SWE gain / new snow density (the SNOW-17 step HCN = PX / DHN), never below the daily depth gain, with the climate.snotel thresholds (SWE gain 0.1 to 6.0 in, depth spike 40.0 in, cap 60.0 in, rain snow threshold 1.0 C). Density: the station's own monthly median storm density, else the anderson_1976 estimate from the station's daily mean air temperature (TAVG). Annual figure: the median of the water year totals 2011 to 2025; a year counts when Nov to Apr have 90% of their days with data, and a station needs 8 such years. Values describe the station elevation."
     },
     {
+      "id": "opb-mt-bachelor-housing-2026",
+      "url": "https://www.opb.org/article/2026/01/20/central-oregon-mt-bachelor-housing-seasonal-work/",
+      "title": "Mt. Bachelor seasonal worker housing (OPB, 2026-01-20)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The resort and hotel have provided low cost December to April housing to some seasonal workers for three years."
+    },
+    {
       "id": "open-meteo-era5-archive",
       "url": "https://open-meteo.com/en/docs/historical-weather-api",
       "title": "Open Meteo Historical Weather API, ERA5 reanalysis daily history (models=era5)",
@@ -11061,6 +12013,13 @@
       "title": "Collins bottom station, Alta Ski Area (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
       "accessed_date": "2026-10-12",
       "note": "Wildcat base point. Lift 'Collins' (OpenStreetMap way/10140309, OpenSkiMap lift 9a0cb0074e4212dc4c149287bb2b64eb67a64560); its bottom station is OpenStreetMap way/232716841 at 40.587955, -111.637994, 2603 m. Wikipedia (wikipedia-alta-ski-area) names the Wildcat and Albion base areas and gives an 8,530 ft base elevation, which matches the Wildcat base in Collins Gulch (Collins bottom 8,542 ft; Albion's Sunnyside bottom 8,652 ft). Collins, the two stage high speed quad, has the largest vertical rise of the lifts there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-big-sky-swift-current-6",
+      "url": "https://openskimap.org/",
+      "title": "Swift Current 6 bottom station, Big Sky Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-14",
+      "note": "Mountain Village base point. Lift 'Swift Current 6' (OpenStreetMap way/843634522, OpenSkiMap lift 7f4fb40695bfc4a8d55b7041793799134c17091c); the bottom end of the way is at 45.2832259, -111.4020288, 2298 m, beside the Ramcharger 8 and Explorer Gondola bottoms. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson and the full download it was filtered from."
     },
     {
       "id": "openskimap-lift-burke-carpet",
@@ -11133,6 +12092,13 @@
       "note": "Main Base Area point. Lift 'Bluebird Express #17' (OpenStreetMap way/143874600, OpenSkiMap lift a1075e5fbabe8518f5bd88146fd39faec7086994); its bottom station is OpenStreetMap node/1574427559 at 42.9673987, -72.895394, 604 m. Wikipedia (wikipedia-mount-snow) names the Main Base Area, where four high speed lifts start, and calls the Bluebird Express the resort's flagship lift; in OSM it rises from the main base to 1,092 m near the summit. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
     },
     {
+      "id": "openskimap-lift-park-city-red-pine-gondola",
+      "url": "https://openskimap.org/",
+      "title": "Red Pine Gondola bottom station, Park City Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-14",
+      "note": "Canyons Village point. Lift 'Red Pine Gondola' (OpenStreetMap way/31560012, OpenSkiMap lift b4927e04bf180e01d81d0cacc27ba0cfc9647d44); its bottom station is OpenStreetMap node/353138620 at 40.6855323, -111.5568834, 2111 m. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson and the full download it was filtered from."
+    },
+    {
       "id": "openskimap-lift-sugarloaf-superquad",
       "url": "https://openskimap.org/",
       "title": "Sugarloaf SuperQuad bottom station, Sugarloaf (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
@@ -11145,6 +12111,13 @@
       "title": "Lift 1 bottom station, Taos Ski Valley (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
       "accessed_date": "2026-10-12",
       "note": "Base village point. Lift 'Lift 1' (OpenStreetMap way/53215268, OpenSkiMap lift ab73245c4043c87f2ca90f4095a2aa2d25323059); its bottom station is OpenStreetMap node/673538178 at 36.5944413, -105.449452, 2876 m. Wikipedia (wikipedia-taos-ski-valley) describes Taos Ski Valley as a village and ski resort, with the village at 9,321 ft and the ski base at 9,200 ft, and names no main lift. Lift 1 has the largest vertical rise (514 m) of the lifts starting in the base village (bottom stations within 0.4 km). Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+    },
+    {
+      "id": "openskimap-lift-telluride-chondola",
+      "url": "https://openskimap.org/",
+      "title": "Chondola (Lift 1) bottom station, Telluride Ski Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)",
+      "accessed_date": "2026-10-14",
+      "note": "Lift 'Chondola', ref 1 (OpenStreetMap way/230902139, OpenSkiMap lift 81253a7eb1548b8078204fe714581bf720889765); the bottom end of the way is at 37.9393953, -107.8563633, 2793 m. The Sunshine Express, ref 10 (OpenSkiMap lift a7bb00d6a206a10d82016b151a457cb8fa884ad3), starts beside it at 37.939, -107.85651. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson and the full download it was filtered from."
     },
     {
       "id": "openskimap-lift-whiteface-cloudsplitter-gondola",
@@ -12078,6 +13051,62 @@
       "note": "Employer posting on the PSIA-AASI job board; applications go to the Yellowstone Club ADP portal."
     },
     {
+      "id": "saminfo-jackson-hole-employee-housing",
+      "url": "https://www.saminfo.com/news/sam-headline-news/16726-397-jackson-hole-resort-adds-employee-housing",
+      "title": "Jackson Hole resort adds employee housing (SAM)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Powderhorn, the resort's first employee complex in West Jackson, houses 94 workers in furnished four bedroom units with lock off bedrooms; rents are set for seasonal budgets. Related reports (JH News&Guide, Buckrail) describe a second Powderhorn phase of 30 units and 90 beds planned for 2023 to 2024, and say housing goes only to full time employees with rent under 30% of gross income."
+    },
+    {
+      "id": "saminfo-waterville-employee-housing",
+      "url": "https://www.saminfo.com/news/sam-headline-news/waterville-valley-resort-invests-in-employee-housing",
+      "title": "Waterville Valley Resort invests in employee housing (SAM)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. In 2016 the resort and General Properties, LLC bought the Snow Star Inn, 2.5 miles from the resort, for workforce housing: about 40 units in bunk, hotel and condo styles, with transport to the resort."
+    },
+    {
+      "id": "schweitzer-employee-housing",
+      "url": "https://www.schweitzer.com/employment/schweitzer-employment/housing",
+      "title": "Employee Housing at Schweitzer Mountain Resort",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The Duplex near Schweitzer Village (three bedroom, two bath units, bunk beds, two employees per room) and the Hemlock House in Sandpoint (8 bedrooms, two employees each, a half bath per bedroom) at $350 to $700 a month; utilities and internet included; full time staff working 30 or more hours a week, first come first served. The employee housing application PDF on the same site gives $300 a month per employee for shared rooms and $600 for private rooms."
+    },
+    {
+      "id": "steamboat-chamber-the-ponds",
+      "url": "https://www.steamboatchamber.com/listing/the-ponds-at-steamboat/2625/",
+      "title": "The Ponds at Steamboat (Steamboat Springs Chamber listing)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Employee housing for Steamboat Ski & Resort Corporation from November to April; non SSRC tenants only from May to September, by availability. The resort's own sources name no owner or lease for it."
+    },
+    {
+      "id": "summitdaily-copper-employee-housing",
+      "url": "https://www.summitdaily.com/news/as-ski-season-nears-we-take-a-look-at-ski-resort-employee-housing-including-copper-mountains-new-project/",
+      "title": "As ski season nears, we take a look at ski resort employee housing, including Copper Mountain's new project (Summit Daily)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Copper Mountain's main employee housing facility, Edge, costs $337 a month for a double occupancy room and is within walking distance of the resort; the article also counts 1,800 shared Breckenridge and Keystone beds. Undated in the results; about 2023."
+    },
+    {
+      "id": "summitdaily-workforce-housing-at-resorts",
+      "url": "https://www.summitdaily.com/news/how-to-retain-resort-employees-colorado-ski-areas-are-building-workforce-housing-at-the-resorts/",
+      "title": "How to retain resort employees? Colorado ski areas are building workforce housing at the resorts (Summit Daily)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Copper Mountain finished Sky Chutes Landing in 2021: 44 studio, one, two and three bedroom apartments for 130 people."
+    },
+    {
+      "id": "taosnews-tsv-workforce-housing-2024",
+      "url": "https://www.taosnews.com/news/business/tsv-inc-to-expand-workforce-housing-by-30-percent-this-year/article_79f82bbf-231d-56cf-9f4c-d550b5100cdf.html",
+      "title": "TSV Inc. to expand workforce housing by 30 percent this year (Taos News)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The resort planned to grow housing from 150 to 200 staff by fall 2024, partly by expanding the Amizette Inn for 16 more employees that fall and 20 more in 2025. The search attributed these figures to a 2024 announcement; Snow Industry News carried a similar report."
+    },
+    {
+      "id": "telluride-employee-housing",
+      "url": "https://tellurideskiresort.com/housing/",
+      "title": "Employee Housing (Telluride Ski Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Big Billie's, at the base of Lifts 1 and 10, has 146 furnished double occupancy studios, each with a kitchenette and private bathroom; residents ride the chondola, bus and gondola free."
+    },
+    {
       "id": "tmo-afton-alps",
       "url": "https://www.aftonalps.com/the-mountain/about-the-mountain/trail-map.aspx",
       "title": "Afton Alps Trail Map",
@@ -12750,6 +13779,13 @@
       "note": "From a search result for this page; page not opened"
     },
     {
+      "id": "unofficialnetworks-steamboat-hotels-2021",
+      "url": "https://unofficialnetworks.com/2021/10/28/steamboat-springs-to-use-local-hotels-for-affordable-housing/",
+      "title": "Steamboat Springs to use local hotels for affordable housing (Unofficial Networks, 2021-10-28)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The town council approved the closed Steamboat Hotel and the Steamboat Mountain Lodge as dormitory style housing for Steamboat Ski Corporation employees. A 2021 report; current use not confirmed."
+    },
+    {
       "id": "vail-10k-fy2026",
       "url": "https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm",
       "title": "Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)",
@@ -12762,6 +13798,48 @@
       "title": "Vail Resorts, Inc. home page, Our Resorts list",
       "accessed_date": "2026-10-11",
       "note": "Cross check of the resort list; matches the 10-K."
+    },
+    {
+      "id": "vr-careers-breckenridge-housing",
+      "url": "https://jobs.vailresortscareers.com/breckenridge/content/Breckenridge-Housing/?locale=en_US",
+      "title": "Breckenridge Housing (Jobs at Vail Resorts)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Employee housing at 1360 Airport Rd, Breckenridge, CO 80424, or at Keystone; apartments with two people per bedroom."
+    },
+    {
+      "id": "vr-careers-heavenly-housing",
+      "url": "https://jobs.vailresortscareers.com/heavenly/content/heavenly-housing/",
+      "title": "Heavenly Housing (Jobs at Vail Resorts)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Employee housing complex at 1100 Keller Road, South Lake Tahoe, near the California Main Lodge; guidance of about $300 to $500 per person per month; residents 18 or older, a non drinking agreement for ages 18 to 21, and a commitment of at least three months."
+    },
+    {
+      "id": "vr-careers-housing-overview",
+      "url": "https://jobs.vailresortscareers.com/content/Housing/?locale=en_US",
+      "title": "Housing (Jobs at Vail Resorts)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Lists the resorts with employee housing by region (Rockies, West, Northeast and others) and says housing is limited at many locations. Also names Heavenly's complex at 1100 Keller Road, Breckenridge housing at 1360 Airport Rd, Stowe's The Dorm and The Inn, and Sawmill Heights Apartments for Northstar."
+    },
+    {
+      "id": "vr-careers-keystone-housing",
+      "url": "https://jobs.vailresortscareers.com/keystone/content/Keystone-Housing/?locale=en_US",
+      "title": "Keystone Housing (Jobs at Vail Resorts)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. The employee housing office is at 0065 Tennis Club Road, Keystone, CO 80435, and the complex sits within half a mile of the resort; guidance of about $600 to $1,000 per person per month; assigned to people with a formal job offer and a completed application."
+    },
+    {
+      "id": "vr-careers-northstar-housing",
+      "url": "https://jobs.vailresortscareers.com/northstar/content/Northstar-Housing/?locale=en_US",
+      "title": "Northstar Housing (Jobs at Vail Resorts)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Points staff to Sawmill Heights Apartments, within the Northstar community."
+    },
+    {
+      "id": "vr-careers-stowe-housing",
+      "url": "https://jobs.vailresortscareers.com/stowe/content/Stowe-housing/?locale=en_US",
+      "title": "Stowe Housing (Jobs at Vail Resorts)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Limited on site housing at The Dorm and The Inn."
     },
     {
       "id": "webcams-49-north-search",
@@ -14612,6 +15690,13 @@
       "note": null
     },
     {
+      "id": "wikipedia-gallatin-gateway-inn",
+      "url": "https://en.wikipedia.org/wiki/Gallatin_Gateway_Inn",
+      "title": "Gallatin Gateway Inn (Wikipedia)",
+      "accessed_date": "2026-10-14",
+      "note": "Article text read 2026-10-14 through action=raw. Infobox location U.S. 191, Gallatin Gateway, Montana, coordinates 45 35 37 N, 111 11 54 W (the building, an NRHP listing). In 2015 the building was leased to the Yellowstone Club to house Yellowstone Club, Spanish Peaks Mountain Club and Moonlight Basin employees."
+    },
+    {
       "id": "wikipedia-gould-academy",
       "url": "https://en.wikipedia.org/wiki/Gould_Academy",
       "title": "Gould Academy (Wikipedia)",
@@ -15254,6 +16339,13 @@
       "title": "Yellowstone Club (Wikipedia)",
       "accessed_date": "2026-10-11",
       "note": null
+    },
+    {
+      "id": "winter-park-employee-housing",
+      "url": "https://www.winterparkresort.com/employment/employee-housing",
+      "title": "Employee Housing (Winter Park Resort)",
+      "accessed_date": "2026-10-14",
+      "note": "From a search result for this page; page not opened. Fewer than 20% of resort employees live in employee housing; winter beds are allocated by department, all bedrooms are shared, and full time seasonal or year round staff ask their hiring manager about a spot."
     }
   ]
 }

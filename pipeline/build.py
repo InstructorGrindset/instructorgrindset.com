@@ -343,17 +343,18 @@ def build(
         d["webcams"] = webcams_output(webcams.get(d["id"]), cfg.definitions.webcams.max_named_cams)
         d["jobs"] = jobs_mod.resort_jobs(jobs_data, d["id"], jobs_cfg.hiring_windows.max_months)
         d["passes"] = passes_mod.as_output(pass_data.get(d["id"]))
+    cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
+    editorial, editorial_errors = load_editorial(raw_dir, registry, known_ids, cluster_ids, rel)
+    errors += editorial_errors
+    # Housing loads after editorial, so a site may cite a place source declared in data/raw/editorial.
     housing, housing_errors = load_housing(raw_dir, registry, known_ids, rel)
     errors += housing_errors
-    cluster_ids = {c.id for c in cfg.clusters.clusters} | set(assignment.values())
     for rid in sorted(set(housing) & {d["id"] for d in drafts if d["tier"] != "A"}):
         warnings.append(f"housing sites at Tier B resort '{rid}' are not shown: detail maps are Tier A only")
     hs_cfg = cfg.definitions.housing_search
     search_data, search_errors = housing_search_mod.load_housing_search(
         raw_dir, registry, known_ids, cluster_ids, hs_cfg.furnished_finder_domains, rel)
     errors += search_errors
-    editorial, editorial_errors = load_editorial(raw_dir, registry, known_ids, cluster_ids, rel)
-    errors += editorial_errors
     agg = _report_aggregates(raw_dir, cfg, known_ids, housing, registry, errors, warnings, rel)
     for rid, rows in agg.pay.items():
         career_data.pay.setdefault(rid, []).extend(rows)

@@ -345,7 +345,7 @@ async function desktop(browser, base) {
   // Season length covers the states with season data (NV, CA, UT here); deep inside one without (WY) it stays clear.
   const SEASON_BETWEEN = [[-115.5, 40.0], [-117.0, 37.5], [-112.5, 37.6]];
   const heatModes = [
-    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', range: 'Resort values: $8,900 to $10,600', n: 2, first: '$8.5K', last: '$11K', between: BETWEEN },
+    { mode: 'lucrativeness', prop: 'lucrativeness_mid', unit: 'USD per season', range: 'Resort values: $8,900 to $10,600', n: 2, first: '$8.5K', last: '$11K', raster: true, between: BETWEEN },
     { mode: 'season', prop: 'season_length_days', unit: 'Days', range: 'Resort values: 112 to 168', n: 11, first: '90', last: '180', raster: true, classed: true, between: SEASON_BETWEEN, clear: [[-107.5, 43.6]] },
     { mode: 'snowfall', prop: 'snowfall_annual_in', unit: 'Inches per season', range: null, n: 9, first: '0', last: '800', raster: true, classed: true, between: BETWEEN },
   ];
@@ -414,9 +414,12 @@ async function desktop(browser, base) {
           `snowfall: isolines draw over the heat surface and under the resorts (${JSON.stringify(isoState)})`);
         check(isoState.labelMin >= 6 && isoState.image, 'snowfall: isoline labels are images (no glyph server) shown from mountain range zoom');
         check(mine.some((u) => u.endsWith('/heat/snowfall-isolines-lower48.geojson')), 'snowfall: the isolines load with the mode');
-      } else {
+      } else if (hm.mode === 'season') {
         check(!src.credit && /States with no resort data stay clear/.test(text) && iso.length === 0,
           'season: resort values only (no NOAA credit), no isolines, and the legend says states without data stay clear');
+      } else {
+        check(!src.credit && !/States with no resort data stay clear/.test(text) && iso.length === 0,
+          'lucrativeness: the precomputed resort surface, no NOAA credit, no isolines');
       }
     } else {
       check(iso.length === 0, `${hm.mode}: no isolines`);
@@ -576,7 +579,10 @@ async function desktop(browser, base) {
   const assumptions = (await page.locator('.assumptions').innerText()).replace(/\s+/g, ' ');
   check(assumptions.includes('Hours per week, standard full time 40') && assumptions.includes('$32.50') && assumptions.includes('$1,150') && assumptions.includes('4.33')
     && assumptions.includes('Tips are not included yet') && assumptions.includes('Savings are before tax') && !assumptions.includes('Not set yet'), `assumption values formatted, tips note shown (${assumptions.replace(/\n/g, ' | ')})`);
-  check((await luc.locator('.rent-used').innerText()) === 'Rent used: the average of the employee housing rents listed for this resort.', 'average rent basis explained');
+  // Owner decision 2026-10-14: the median of the sourced median rents, with the place, the publishers and every source.
+  check((await luc.locator('.rent-line .rent-text').innerText()) === 'Median rent $1,150 a month for one bedroom in Fixture Town, CO (median of 2 sources: Fixture Rentals, Fixture Daily), 2026'
+    && await luc.locator('.rent-line a.src-link').count() === 2 && await luc.locator('.rent-line .badge-estimated').count() === 1,
+  'median rent line names the place and the publishers and links every source');
   await shot(page, 'desktop-04b-career.png');
   check((await page.locator('.pay-table tr[data-level="level_3"]').innerText()).includes('Range from 4 reports')
     && await page.locator('.pay-table tr[data-level="level_3"] .badge-reported').count() === 1, 'reported pay row shows its aggregate count');
@@ -615,8 +621,8 @@ async function desktop(browser, base) {
   check(await page.locator('.site', { hasText: 'Fixture West Rentals' }).locator('.not-verified', { hasText: 'Commute times are being calculated.' }).count() === 1, 'site without commutes shows empty state');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).innerText()).includes('Synthetic note: full time staff only.'), 'eligibility note renders');
   check(await page.locator('.housing .facts .fact', { hasText: 'HUD FMR' }).count() === 3 && await page.locator('.housing .fact', { hasText: 'ACS median gross rent' }).locator('.badge-estimated').count() === 1, 'rent baseline with badges');
-  check((await page.locator('.rent-used').innerText()) === 'Rent used: the average of the employee housing rents listed for this resort.'
-    && await page.locator('.rent-used ~ a.src-link').count() === 2, 'lucrativeness says which rent was used, with its sources');
+  check((await page.locator('.rent-line .rent-text').innerText()).startsWith('Median rent $1,150 a month') && await page.locator('.rent-used').count() === 0
+    && await page.locator('.rent-line a.src-link').count() === 2, 'lucrativeness says which rent was used, with its sources, once the housing data loads');
   check(await page.locator('.assumptions li', { hasText: 'Rent basis' }).count() === 0, 'rent basis keys stay out of the assumption list');
   check((await page.locator('.site', { hasText: 'Fixture Staff Village' }).locator('.fact', { hasText: 'Address' }).innerText()).includes('1 Fixture Way, Fixture Town'), 'building site shows its sourced address');
   await page.locator('.site-select', { hasText: 'Fixture Town Lease' }).click();
@@ -767,7 +773,10 @@ async function desktop(browser, base) {
   await page.waitForFunction(() => document.querySelectorAll('.detail-toggles label').length > 0, null, { timeout: 10000 });
   check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'layers without data are hidden');
   check(await page.locator('.housing .not-verified', { hasText: 'No employee housing listed publicly yet.' }).count() === 1, 'empty housing state');
-  check((await page.locator('.rent-used').innerText()).includes('Census ACS median gross rent'), 'baseline rent source named');
+  const zori = page.locator('.rent-line');
+  check((await zori.locator('.rent-text').innerText()) === 'Zillow typical rent (ZORI) $1,150 a month (Fixture County, UT, Nov 2024)'
+    && await zori.locator('.tier-stale').count() === 1 && await zori.locator('.badge-published').count() === 1,
+  'fallback rent: Zillow typical rent with its place and month, flagged Needs update when older than 18 months');
   // Leave to a resort without detail.
   await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'CO', clusterId: 'fixture-front-range', resortId: 'charlie-hill' }));
   await page.waitForURL(/charlie-hill/);
@@ -1055,6 +1064,7 @@ async function desktopStub(browser, base) {
     `without the season rasters the browser draws them (${Date.now() - t0} ms; WY clear ${seasonClear[0][3]}, UT ${seasonIn[0][3]})`);
   await page.goto(`${base}/map/`);
   await ready(page);
+  await page.waitForLoadState('networkidle');   // postings.json loads at idle for the Hiring now count; let it finish
   await page.goto(`${base}/map/co/fixture-front-range/?compare=alpha-peak,charlie-hill`);
   await ready(page);
   await page.waitForFunction(() => document.querySelectorAll('.climate canvas').length === 2, null, { timeout: 10000 });
@@ -1656,7 +1666,7 @@ async function housingChecks(browser, stubBase) {
   const np = await nojs.newPage();
   await np.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
   const pre = np.locator('#panel-content .housing-search');
-  check(await pre.locator('h3').innerText() === 'Housing' && await pre.locator('a.ff-link').innerText() === 'Furnished Finder listings near Fixture Town'
+  check(await pre.locator('h3').textContent() === 'Housing' && await pre.locator('a.ff-link').innerText() === 'Furnished Finder listings near Fixture Town'
     && JSON.stringify(await pre.locator('a.tool-link').allInnerTexts())
       === JSON.stringify(['Fixture Staff Housing Portal', 'Fixture Front Range Rooms', 'Fixture Valley Listings'])
     && (await pre.locator('a').evaluateAll((as) => as.every((a) => a.target === '_blank' && /\bnoopener\b/.test(a.rel)))),
