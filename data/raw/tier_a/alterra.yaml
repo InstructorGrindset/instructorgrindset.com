@@ -1,0 +1,534 @@
+batch: alterra
+researched_date: 2026-10-11
+status: draft
+# All values come from Wikipedia pages fetched on 2026-10-11. Resort and Alterra sites were
+# unreachable from the research environment, so nothing here is verified against a resort site yet.
+# lat/lon are the Wikipedia infobox coordinates, used as the base area point, except Mammoth
+# Mountain, which uses a lift bottom station at Main Lodge (see its record).
+sources:
+  - {id: wikipedia-alterra-mountain-company, url: https://en.wikipedia.org/wiki/Alterra_Mountain_Company, title: Alterra Mountain Company (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-steamboat-ski-resort, url: https://en.wikipedia.org/wiki/Steamboat_Ski_Resort, title: Steamboat Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-steamboat-springs-winter-sports-club, url: https://en.wikipedia.org/wiki/Steamboat_Springs_Winter_Sports_Club, title: Steamboat Springs Winter Sports Club (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-winter-park-resort, url: https://en.wikipedia.org/wiki/Winter_Park_Resort, title: Winter Park Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-arapahoe-basin, url: https://en.wikipedia.org/wiki/Arapahoe_Basin, title: Arapahoe Basin (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-palisades-tahoe, url: https://en.wikipedia.org/wiki/Palisades_Tahoe, title: Palisades Tahoe (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mammoth-mountain-resort, url: https://en.wikipedia.org/wiki/Mammoth_Mountain_Resort, title: Mammoth Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: openskimap-lift-mammoth-panorama-gondola-lower, url: "https://openskimap.org/", title: "Panorama Gondola Lower bottom station, Mammoth Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Main Lodge base point. Lift 'Panorama Gondola Lower' (OpenStreetMap way/1525905377, OpenSkiMap lift e3b8c6cb99ef5d2c6ab71c785cdde6a2e34d0b13); its bottom station is OpenStreetMap node/96939620 at 37.6510607, -119.037773, 2712 m. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: wikipedia-deer-valley, url: https://en.wikipedia.org/wiki/Deer_Valley, title: Deer Valley (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-crystal-mountain-washington, url: https://en.wikipedia.org/wiki/Crystal_Mountain_(Washington), title: Crystal Mountain (Washington) (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-stratton-mountain-resort, url: https://en.wikipedia.org/wiki/Stratton_Mountain_Resort, title: Stratton Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-stratton-mountain-school, url: https://en.wikipedia.org/wiki/Stratton_Mountain_School, title: Stratton Mountain School (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-solitude-mountain-resort, url: "https://en.wikipedia.org/wiki/Solitude_Mountain_Resort", title: "Solitude Mountain Resort (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-schweitzer-mountain, url: "https://en.wikipedia.org/wiki/Schweitzer_Mountain", title: "Schweitzer Mountain (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-sugarbush-resort, url: "https://en.wikipedia.org/wiki/Sugarbush_Resort", title: "Sugarbush Resort (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-snowshoe-mountain, url: "https://en.wikipedia.org/wiki/Snowshoe_Mountain", title: "Snowshoe Mountain (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-june-mountain-ski-area, url: "https://en.wikipedia.org/wiki/June_Mountain_ski_area", title: "June Mountain ski area (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-bear-mountain-ski-area, url: "https://en.wikipedia.org/wiki/Bear_Mountain_(ski_area)", title: "Bear Mountain (ski area) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-snow-summit, url: "https://en.wikipedia.org/wiki/Snow_Summit", title: "Snow Summit (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-snow-valley-mountain-resort, url: "https://en.wikipedia.org/wiki/Snow_Valley_Mountain_Resort", title: "Snow Valley Mountain Resort (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-alpine-meadows-ski-resort, url: "https://en.wikipedia.org/wiki/Alpine_Meadows_(ski_resort)", title: "Alpine Meadows (ski resort) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: access-wikipedia-winter-park-colorado, url: "https://en.wikipedia.org/wiki/Winter_Park,_Colorado", title: "Winter Park, Colorado (Wikipedia), transportation", accessed_date: 2026-10-13, note: "The Lift bus system and Amtrak service."}
+  - {id: access-wikipedia-bustang, url: "https://en.wikipedia.org/wiki/Bustang", title: "Bustang (Wikipedia), Snowstang", accessed_date: 2026-10-13, note: "Snowstang ski buses from Denver."}
+  - {id: access-wikipedia-park-city-transit, url: "https://en.wikipedia.org/wiki/Park_City_Transit", title: "Park City Transit (Wikipedia), routes", accessed_date: 2026-10-13, note: "Fare free routes ending at Snow Park Lodge, Deer Valley."}
+  - {id: access-wikipedia-utah-transit-authority, url: "https://en.wikipedia.org/wiki/Utah_Transit_Authority", title: "Utah Transit Authority (Wikipedia), ski service", accessed_date: 2026-10-13, note: "Seasonal ski buses to Alta, Brighton, Snowbird, Solitude, Snowbasin and Powder Mountain."}
+  - {id: access-wikipedia-eastern-sierra-transit, url: "https://en.wikipedia.org/wiki/Eastern_Sierra_Transit", title: "Eastern Sierra Transit (Wikipedia), bus routes", accessed_date: 2026-10-13, note: "Seasonally adjusted Mammoth Lakes routes."}
+  - {id: access-wikipedia-mountain-transit, url: "https://en.wikipedia.org/wiki/Mountain_Transit", title: "Mountain Transit (Wikipedia), route overview", accessed_date: 2026-10-13, note: "Red Line serves Big Bear Mountain Resort; route 5 serves Snow Valley."}
+  - {id: access-steamboat-springs-transit-winter, url: "https://steamboatsprings.net/DocumentCenter/View/41418/Steamboat-Springs-Transit-Shifts-Gears-into-Winter", title: "Steamboat Springs Transit Shifts Gears into Winter (City of Steamboat Springs)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free Steamboat Springs Transit routes serve the Gondola Transit Center at the ski area; winter 2025 to 2026 release."}
+  - {id: access-tart-route-hwy89, url: "https://tahoetruckeetransit.com/routes/route-hwy89", title: "Route Hwy89 (Tahoe Truckee Area Regional Transit)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free bus from Tahoe City through Olympic Valley to Truckee."}
+  - {id: access-stratton-public-transit, url: "https://www.stratton.com/plan-your-trip/getting-here/stratton-public-transit", title: "Public Transit To Stratton Mountain (Stratton Mountain Resort)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Winter MOOver service between Stratton and Manchester; employee shuttles from the housing lodges."}
+  - {id: access-schweitzer-directions, url: "https://www.schweitzer.com/discover-schweitzer/directions", title: "Directions (Schweitzer)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Winter connector from the Red Barn park and ride lot to Schweitzer Village."}
+  - {id: access-coolworks-snowshoe, url: "https://www.coolworks.com/snowshoe-mountain-resort/profile", title: "Snowshoe Mountain Resort employer profile (Cool Works)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Housing is provided for staff, included in pay or at a cost."}
+  - {id: access-wikipedia-june-lake-california, url: "https://en.wikipedia.org/wiki/June_Lake,_California", title: "June Lake, California (Wikipedia)", accessed_date: 2026-10-13, note: "Most of the June Mountain winter workforce lives in employee housing in Mammoth Lakes and rides a daily employer bus."}
+resorts:
+  - id: steamboat
+    name: Steamboat
+    state: CO
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner; the article says the resort is operated by the Steamboat Ski & Resort Corporation."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Free Steamboat Springs Transit buses run from downtown and west Steamboat to the Gondola Transit Center at the base.", source_id: access-steamboat-springs-transit-winter, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. City release for the 2025 to 2026 winter."}
+    lat: 40.459
+    lon: -106.803
+    location_source_id: wikipedia-steamboat-ski-resort
+    cluster_hint: northern-colorado
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: athlete_development, rationale: "The Steamboat Springs Winter Sports Club has produced 88 Winter Olympians, trains its alpine, freestyle and snowboard athletes on Mt. Werner at the Steamboat ski area, and was the US Ski Team Club of the Year in 1999, 2004 and 2007.", source_id: wikipedia-steamboat-springs-winter-sports-club}
+    size:
+      acres: {value: 3741, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value. The article body still says 2,965 acres and separately describes a 650 acre Mahogany Ridge and Fish Creek Canyon expansion that opened in 2024."}
+      vertical_ft: {value: 3668, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 24, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 6900, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 10568, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 14, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published, note: "Infobox, 170 trails. The statistics section gives 182 trails at about 12% beginner, 40% intermediate and 48% advanced."}
+      intermediate_pct: {value: 42, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 44, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 400, source_id: wikipedia-steamboat-ski-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: winter-park
+    name: Winter Park Resort
+    state: CO
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published, note: "Operator. The infobox owner is the City and County of Denver; Alterra operates the resort after acquiring Intrawest, Denver's partner since 2002."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Operator scored: the City and County of Denver owns the resort and Alterra Mountain Company, a privately held multi resort hospitality company owned by KSL Capital Partners and Henry Crown and Company, operates it. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "The Lift buses serve the resort from Winter Park and Fraser, with commuter service to Granby.", source_id: access-wikipedia-winter-park-colorado, as_of: 2026-10-13, confidence: published}
+    lat: 39.88694
+    lon: -105.7625
+    location_source_id: wikipedia-winter-park-resort
+    cluster_hint: i70-corridor
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: heritage, rationale: "Winter Park opened for the 1939 to 1940 season, was owned and run by Denver for decades with a Ski Train serving it for nearly 70 years, and is home to the National Sports Center for the Disabled, one of the world's largest and oldest disabled skiing programs.", source_id: wikipedia-winter-park-resort}
+    size:
+      acres: {value: 3081, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3060, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 23, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 9000, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 12060, source_id: wikipedia-winter-park-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 8, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 18, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: null
+      expert_pct: {value: 3, source_id: wikipedia-winter-park-resort, as_of: 2026-10-12, confidence: published, note: "Source lists five shares: 8% beginner, 18% intermediate, 19% advanced (square diamond), 52% most difficult (black diamond), 3% expert (double black diamond). The 19% and 52% tiers sit between intermediate and expert, so advanced is left empty. Recorded shares sum to 29."}
+    snow:
+      annual_avg_in: {value: 370, source_id: wikipedia-winter-park-resort, as_of: 2026-10-13, confidence: published, note: "Infobox value. The statistics list in the article gives 317.5 in."}
+
+  - id: arapahoe-basin
+    name: Arapahoe Basin
+    state: CO
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: "Purchase agreed February 2024 and closed November 19, 2024."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: mixed, summary_md: "Bustang's Snowstang ski bus runs from Denver to the base.", source_id: access-wikipedia-bustang, as_of: 2026-10-13, confidence: estimated, note: "No Summit Stage service to Arapahoe Basin found in the fetched sources; Snowstang serves Denver day skiers, so commuting from Summit County towns is limited."}
+    lat: 39.64167
+    lon: -105.87167
+    location_source_id: wikipedia-arapahoe-basin
+    cluster_hint: i70-corridor
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: diehard, rationale: "Arapahoe Basin is known for its extended season and extreme terrain, and is mostly known for advanced and expert skiing such as the hike to East Wall.", source_id: wikipedia-arapahoe-basin}
+    size:
+      acres: {value: 1428, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2270, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: "Lift served vertical from the article body. The infobox says 2,530 ft, which does not match its own top (13,050) and base (10,780) elevations."}
+      lifts: {value: 9, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published, note: "Six chairlifts and three surface lifts."}
+    elevation:
+      base_ft: {value: 10780, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 13050, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 7, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 20, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 49, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 24, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share Extreme."}
+    snow:
+      annual_avg_in: {value: 350, source_id: wikipedia-arapahoe-basin, as_of: 2026-10-13, confidence: published}
+
+  - id: palisades-tahoe
+    name: Palisades Tahoe
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Free TART Highway 89 buses run from Tahoe City through Olympic Valley to Truckee.", source_id: access-tart-route-hwy89, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. A Town of Truckee notice from January 2026 also lists weekend park and ride shuttles from Truckee to Palisades Tahoe."}
+    lat: 39.196
+    lon: -120.235
+    location_source_id: wikipedia-palisades-tahoe
+    cluster_hint: lake-tahoe
+    openskimap_names: ["Palisades Tahoe Olympic Valley"]
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: heritage, rationale: "Founded in 1949 as Squaw Valley, it hosted the 1960 Winter Olympics and is California Historical Landmark 724, marked as a Pioneer Ski Area of America.", source_id: wikipedia-palisades-tahoe}
+      - {criterion: diehard, rationale: "The resort is the largest ski complex in the Lake Tahoe region and is known for its challenging terrain.", source_id: wikipedia-palisades-tahoe}
+    size:
+      acres: {value: 3600, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: "Palisades side only; with Alpine Meadows the combined resort offers about 6,000 acres per the same article."}
+      vertical_ft: {value: 2850, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 30, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: "Palisades side only (23 chairlifts, 4 carpets, tram, base to base gondola, funitel)."}
+    elevation:
+      base_ft: {value: 6200, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 9050, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-11, confidence: published, note: "Infobox value; the article body gives 9,010 ft at Granite Chief."}
+    snow:
+      annual_avg_in: {value: 400, source_id: wikipedia-palisades-tahoe, as_of: 2026-10-13, confidence: published}
+
+  - id: mammoth-mountain
+    name: Mammoth Mountain
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Eastern Sierra Transit runs seasonal routes in the town of Mammoth Lakes, home of the resort, and a gondola links the village to Canyon Lodge.", source_id: access-wikipedia-eastern-sierra-transit, as_of: 2026-10-13, confidence: estimated, note: "Gondola and in town location from wikipedia-mammoth-mountain-resort; that town routes reach the base lodges is inferred."}
+    # Main Lodge base: the Panorama Gondola lower terminal (OpenSkiMap lifts), chosen over the
+    # Wikipedia article coordinate (37.63056, -119.0325), which sits about 2.3 km from Main Lodge.
+    lat: 37.65106
+    lon: -119.03777
+    location_source_id: openskimap-lift-mammoth-panorama-gondola-lower
+    cluster_hint: eastern-sierra
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: athlete_development, rationale: "Mammoth hosts US Grand Prix freestyle and snowboard Olympic qualifiers and FIS World Cup halfpipe and slopestyle events, and serves as a training site for elite snowboarders including Olympic champion Chloe Kim.", source_id: wikipedia-mammoth-mountain-resort}
+    size:
+      acres: {value: 3500, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3100, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 25, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 7953, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: "At Eagle Lodge."}
+      summit_ft: {value: 11053, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value; the article body says 11,059 ft."}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 48, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 37, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 400, source_id: wikipedia-mammoth-mountain-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: deer-valley
+    name: Deer Valley Resort
+    state: UT
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Several free Park City Transit routes end at Snow Park Lodge, and High Valley Transit links Heber, Kimball Junction and Salt Lake City.", source_id: access-wikipedia-park-city-transit, as_of: 2026-10-13, confidence: published, note: "High Valley Transit fact from its own Wikipedia article."}
+    lat: 40.62278
+    lon: -111.48944
+    location_source_id: wikipedia-deer-valley
+    cluster_hint: wasatch
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: luxury, rationale: "Deer Valley is a ski only resort that emphasizes upscale accommodations and amenities.", source_id: wikipedia-deer-valley}
+      - {criterion: heritage, rationale: "Deer Valley hosted freestyle moguls, aerials and alpine slalom at the 2002 Winter Olympics and is scheduled to host moguls and aerials at the 2034 Winter Olympics.", source_id: wikipedia-deer-valley}
+    size:
+      acres: {value: 4300, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3040, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 36, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published, note: "Includes 5 magic carpets."}
+    elevation:
+      base_ft: {value: 6530, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 9570, source_id: wikipedia-deer-valley, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 35, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published, note: "Infobox. The article text, citing the 2024/25 press kit, says 30% beginner and 44% intermediate."}
+      intermediate_pct: {value: 44, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 21, source_id: wikipedia-deer-valley, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 294, source_id: wikipedia-deer-valley, as_of: 2026-10-13, confidence: published, note: "Infobox gives two figures, under 150 in at the base and 294 in at the peak; the peak figure is recorded."}
+
+  - id: crystal-mountain
+    name: Crystal Mountain
+    state: WA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: car_centric, summary_md: "Staff typically drive in on State Route 410 from the Seattle and Tacoma area.", source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article; access described by highway and parking."}
+    lat: 46.93
+    lon: -121.48
+    location_source_id: wikipedia-crystal-mountain-washington
+    cluster_hint: cascades
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: heritage, rationale: "Crystal hosted the US Alpine Ski Championships in 1965 and 1968 and World Cup downhills in 1972, and its racing school was featured in Sports Illustrated in the early 1960s.", source_id: wikipedia-crystal-mountain-washington}
+    size:
+      acres: {value: 2600, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: "2,300 lift serviced plus 300 inbounds backcountry."}
+      vertical_ft: {value: 3100, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: "Lift served vertical is 2,592 ft per the same infobox."}
+      lifts: {value: 11, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published, note: "Sum of the infobox list (1 gondola, 9 chairs, 1 magic carpet)."}
+    elevation:
+      base_ft: {value: 3912, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 7012, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 11, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 54, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 350, source_id: wikipedia-crystal-mountain-washington, as_of: 2026-10-13, confidence: published}
+
+  - id: stratton
+    name: Stratton Mountain Resort
+    state: VT
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Fare free MOOver buses run in winter between Stratton and Manchester, and resort shuttles serve the employee housing lodges.", source_id: access-stratton-public-transit, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. MOOver and Stratton started the Manchester route in November 2021 for employees and the community, alongside 150 new employee housing beds. Fares from access-wikipedia-southeast-vermont-transit. No summer service."}
+    lat: 43.11417
+    lon: -72.90667
+    location_source_id: wikipedia-stratton-mountain-resort
+    cluster_hint: southern-vermont
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+      - {criterion: heritage, rationale: "In the 1980s Stratton became the first ski area to allow snowboarding, home to the first snowboard school, and host of the US Open snowboard races from 1985.", source_id: wikipedia-stratton-mountain-resort}
+      - {criterion: athlete_development, rationale: "Stratton Mountain School, a ski and snowboard prep school at Stratton Mountain founded in 1972, has produced 46 Olympic athletes who won six medals.", source_id: wikipedia-stratton-mountain-school}
+    size:
+      acres: {value: 625, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2003, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 13, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 1872, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 3875, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 40, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Article text, citing the resort mountain stats page; labeled easy."}
+      intermediate_pct: {value: 35, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 25, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 180, source_id: wikipedia-stratton-mountain-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: solitude
+    name: Solitude Mountain Resort
+    state: UT
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses run up Big Cottonwood Canyon from the Salt Lake Valley.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: published}
+    lat: 40.615139
+    lon: -111.588917
+    location_source_id: wikipedia-solitude-mountain-resort
+    cluster_hint: wasatch
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 1200, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2494, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value; its top and base elevations imply 2,500 ft."}
+      lifts: {value: 8, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 7988, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 10488, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 10, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 50, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Facts and figures section. Source combines advanced and expert."}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 500, source_id: wikipedia-solitude-mountain-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: schweitzer
+    name: Schweitzer Mountain
+    state: ID
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "SPOT buses link Sandpoint with the Red Barn park and ride, where a winter connector climbs to Schweitzer Village.", source_id: access-schweitzer-directions, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The Sandpoint Reader reported SPOT taking over the Schweitzer shuttle as a free service; the Sandpoint, Idaho Wikipedia article says SPOT charges no fare."}
+    lat: 48.367
+    lon: -116.623
+    location_source_id: wikipedia-schweitzer-mountain
+    cluster_hint: inland-northwest
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 2900, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2440, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 10, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published, note: "Infobox heading says 10 chairlifts; its breakdown lists 8 chairs plus 2 surface tows."}
+    elevation:
+      base_ft: {value: 3960, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published, note: "Lowest chair (Stella); the main village sits at 4,700 ft."}
+      summit_ft: {value: 6400, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 20, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published, note: "Infobox. The statistics section gives 10% beginner, 40% intermediate, 35% advanced and 15% expert."}
+      intermediate_pct: {value: 40, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 5, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-12, confidence: published, note: "Infobox. The statistics section gives 15% expert."}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-schweitzer-mountain, as_of: 2026-10-13, confidence: published}
+
+  - id: sugarbush
+    name: Sugarbush Resort
+    state: VT
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Green Mountain Transit runs Mad River Valley routes, including Mount Ellen, Access Road and Mountain Condos service.", source_id: access-wikipedia-green-mountain-transit-authority, as_of: 2026-10-13, confidence: estimated, note: "Sugarbush article mentions a shuttle bus that drops off at the Lincoln and Ellen base areas."}
+    lat: 44.135098
+    lon: -72.885962
+    location_source_id: wikipedia-sugarbush-resort
+    cluster_hint: central-vermont
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 484, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published, note: "Skiable trail acres; the article says the resort spans more than 4,000 acres in total."}
+      vertical_ft: {value: 2600, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 16, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published, note: "Includes 3 surface lifts; the article body also says 16 ski lifts."}
+    elevation:
+      base_ft: {value: 1483, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 4083, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-sugarbush-resort, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text and statistics list give 262 in."}
+
+  - id: snowshoe
+    name: Snowshoe Mountain
+    state: WV
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: convenient, summary_md: "Snowshoe provides staff housing, and the resort village sits on the mountain near the summit.", source_id: access-coolworks-snowshoe, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Snowshoe job postings on jobs.alterramtnco.com also list on mountain employee housing for rent. Village location from wikipedia-snowshoe-mountain."}
+    lat: 38.40889
+    lon: -79.99472
+    location_source_id: wikipedia-snowshoe-mountain
+    cluster_hint: appalachia
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 244, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1500, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 14, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 3348, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 4848, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 180, source_id: wikipedia-snowshoe-mountain, as_of: 2026-10-13, confidence: published}
+
+  - id: june-mountain
+    name: June Mountain
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: convenient, summary_md: "Most June Mountain staff live in employee housing in Mammoth Lakes and ride a daily employer bus to the resort.", source_id: access-wikipedia-june-lake-california, as_of: 2026-10-13, confidence: published, note: "The housing sits in Mammoth Lakes; rated convenient because the employer houses and buses staff."}
+    lat: 37.7683
+    lon: -119.0906
+    location_source_id: wikipedia-june-mountain-ski-area
+    cluster_hint: eastern-sierra
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 1500, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2545, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 7, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 7545, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 10090, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 45, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-june-mountain-ski-area, as_of: 2026-10-13, confidence: published}
+
+  - id: bear-mountain
+    name: Bear Mountain
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Operated with Snow Summit as Big Bear Bear Mountain Resort"}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Mountain Transit's Red Line bus serves Big Bear Mountain Resort.", source_id: access-wikipedia-mountain-transit, as_of: 2026-10-13, confidence: published}
+    lat: 34.2267
+    lon: -116.8602
+    location_source_id: wikipedia-bear-mountain-ski-area
+    cluster_hint: southern-california
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 198, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1665, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 7, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 7140, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8805, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Source lists a separate 15% low intermediate share (blue square) that is not included here. Recorded shares sum to 85."}
+      advanced_pct: {value: 30, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 100, source_id: wikipedia-bear-mountain-ski-area, as_of: 2026-10-13, confidence: published}
+
+  - id: snow-summit
+    name: Snow Summit
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published, note: "Operated with Bear Mountain as Big Bear Mountain Resort"}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Mountain Transit's Red Line serves Big Bear Mountain Resort, and a free bus links Snow Summit with Bear Mountain.", source_id: access-wikipedia-mountain-transit, as_of: 2026-10-13, confidence: estimated, note: "Free shuttle fact from wikipedia-snow-summit; that the Red Line stops at Snow Summit is inferred from the shared resort name."}
+    lat: 34.2286
+    lon: -116.8911
+    location_source_id: wikipedia-snow-summit
+    cluster_hint: southern-california
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 240, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1209, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 14, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 6965, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8174, source_id: wikipedia-snow-summit, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 10, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published, note: "Source lists a separate 25% low intermediate share (blue square) that is not included here. Recorded shares sum to 75."}
+      advanced_pct: {value: 25, source_id: wikipedia-snow-summit, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 100, source_id: wikipedia-snow-summit, as_of: 2026-10-13, confidence: published}
+
+  - id: snow-valley
+    name: Snow Valley Mountain Resort
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Acquired January 2023 per the Alterra Wikipedia list; run with Big Bear Mountain Resort"}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: mixed, summary_md: "Mountain Transit route 5 serves Snow Valley on its way to San Bernardino.", source_id: access-wikipedia-mountain-transit, as_of: 2026-10-13, confidence: estimated, note: "A single regional route; frequency not stated."}
+    lat: 34.223375
+    lon: -117.037423
+    location_source_id: wikipedia-snow-valley-mountain-resort
+    cluster_hint: southern-california
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 240, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1041, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 12, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 6800, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 7841, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 14, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 45, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 31, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 10, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share Experts only."}
+    snow:
+      annual_avg_in: {value: 150, source_id: wikipedia-snow-valley-mountain-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: palisades-tahoe-alpine-meadows
+    name: Palisades Tahoe (Alpine Meadows)
+    state: CA
+    owner: {value: Alterra Mountain Company, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published, note: "Merged into Alterra in 2018; operates with Palisades Tahoe on one pass, linked by the base to base gondola."}
+    operator_scale: {value: 3, source_id: wikipedia-alterra-mountain-company, as_of: 2026-10-13, confidence: published, note: "Alterra Mountain Company is a privately held hospitality company owned by KSL Capital Partners and Henry Crown and Company that operates a multi resort portfolio. Large scale corporate operation."}
+    access: {rating: mixed, summary_md: "A free resort shuttle links Alpine Meadows with the Olympic Valley base, which TART Highway 89 buses serve.", source_id: wikipedia-palisades-tahoe, as_of: 2026-10-13, confidence: estimated, note: "Free shuttles between the two bases from wikipedia-palisades-tahoe, stated for the combined resort. TART facts from access-tart-route-hwy89. No TART stop at Alpine Meadows found."}
+    lat: 39.164
+    lon: -120.239
+    location_source_id: wikipedia-alpine-meadows-ski-resort
+    cluster_hint: lake-tahoe
+    openskimap_names: ["Palisades Tahoe Alpine Meadows"]
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All Alterra US resorts approved as Tier A"}
+    tier_a_criteria:
+      - {criterion: operator_compensation, rationale: "Alterra Mountain Company resort; every Alterra resort qualifies as Tier A by owner decision, with compensation set location by location.", source_id: owner-decisions-2026-10-11}
+    size:
+      acres: {value: 2400, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1802, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 13, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published, note: "Article text says 13 lifts (and snowmaking on 11 of 13 lifts); the infobox lift system line says 12."}
+    elevation:
+      base_ft: {value: 6835, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8637, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 25, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 495, source_id: wikipedia-alpine-meadows-ski-resort, as_of: 2026-10-13, confidence: published}

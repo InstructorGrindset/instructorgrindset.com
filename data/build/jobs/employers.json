@@ -1,0 +1,1206 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-13T15:07:44Z",
+  "employers": [
+    {
+      "id": "adaptive-sports-center-crested-butte",
+      "name": "Adaptive Sports Center",
+      "kind": "club",
+      "careers_url": "https://www.adaptivesports.org/about-us/careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-asc-careers-named",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Adaptive ski and snowboard nonprofit at Crested Butte.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "alta-ski-area",
+      "name": "Alta Ski Area",
+      "kind": "resort_operator",
+      "careers_url": "https://www.alta.com/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-alta-jobs-postings",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Link is the jobs section that holds the posting URLs seen in search results; the section page itself was not seen.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "alterra-mountain-company",
+      "name": "Alterra Mountain Company",
+      "kind": "parent_company",
+      "careers_url": "https://jobs.alterramtnco.com/jobs",
+      "ats": {
+        "vendor": "workday",
+        "board": null
+      },
+      "source_id": "jobs-alterra-careers-site",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "One careers site for every Alterra mountain and the Denver corporate office (corporate postings sit under jobs.alterramtnco.com/alterra-mountain-company/). Applications run through Workday at alterra.wd1.myworkdayjobs.com, one board per resort.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "alyeska-resort",
+      "name": "Alyeska Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://alyeskaresort.talentnest.com/en/jobs",
+      "ats": {
+        "vendor": "other",
+        "board": "alyeskaresort"
+      },
+      "source_id": "jobs-alyeska-talentnest",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "TalentNest applicant tracking board.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "arapahoe-basin-resort",
+      "name": "Arapahoe Basin",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/ArapahoeBasin",
+      "ats": {
+        "vendor": "workday",
+        "board": "ArapahoeBasin"
+      },
+      "source_id": "jobs-workday-arapahoe-basin-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "aspen-skiing-company",
+      "name": "Aspen Skiing Company",
+      "kind": "parent_company",
+      "careers_url": "https://careers.smartrecruiters.com/AspenSkiingCompany",
+      "ats": {
+        "vendor": "smartrecruiters",
+        "board": "AspenSkiingCompany"
+      },
+      "source_id": "jobs-aspen-smartrecruiters",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Operates Aspen Mountain, Aspen Highlands, Snowmass and Buttermilk; one SmartRecruiters board covers all four and the company offices.",
+      "feed": true,
+      "board_url": "https://careers.smartrecruiters.com/AspenSkiingCompany"
+    },
+    {
+      "id": "berkshire-east-resort",
+      "name": "Berkshire East Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://berkshireeast.isolvedhire.com/",
+      "ats": {
+        "vendor": "other",
+        "board": "berkshireeast"
+      },
+      "source_id": "jobs-berkshire-east-named",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "iSolved Hire applicant tracking board.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "big-bear-mountain-resort",
+      "name": "Big Bear Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/BigBearMountainResort",
+      "ats": {
+        "vendor": "workday",
+        "board": "BigBearMountainResort"
+      },
+      "source_id": "jobs-workday-big-bear-mountain-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "big-sky-resort",
+      "name": "Big Sky Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://bigsky-boyneresorts.icims.com",
+      "ats": {
+        "vendor": "icims",
+        "board": "bigsky-boyneresorts"
+      },
+      "source_id": "jobs-big-sky-icims",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Boyne Resorts mountain; resort specific iCIMS portal.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "big-snow-american-dream",
+      "name": "Big SNOW American Dream",
+      "kind": "resort_operator",
+      "careers_url": "https://www.bigsnowamericandream.com/employment/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-big-snow-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "black-mountain-maine",
+      "name": "Black Mountain of Maine",
+      "kind": "resort_operator",
+      "careers_url": "https://skiblackmountain.org/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-black-mountain-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "boyne-mountain-resort",
+      "name": "Boyne Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://www.boynemountain.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-boyne-mountain-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Boyne Resorts mountain.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "boyne-resorts",
+      "name": "Boyne Resorts",
+      "kind": "parent_company",
+      "careers_url": "https://careers.boyneresorts.com/careers-home/",
+      "ats": {
+        "vendor": "icims",
+        "board": null
+      },
+      "source_id": "jobs-boyne-careers-home",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Careers home for every Boyne Resorts property. Postings and some resort portals run on iCIMS (careers-boyneresorts.icims.com, brighton-boyneresorts.icims.com, bigsky-boyneresorts.icims.com).",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "breckenridge-outdoor-education-center",
+      "name": "Breckenridge Outdoor Education Center",
+      "kind": "club",
+      "careers_url": "https://boec.org/?p=543",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-boec-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Adaptive ski and snowboard programs at Breckenridge and the Keystone Adaptive Center.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "bridger-bowl",
+      "name": "Bridger Bowl",
+      "kind": "resort_operator",
+      "careers_url": "https://bridgerbowl.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-bridger-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "brighton-resort",
+      "name": "Brighton Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://brighton-boyneresorts.icims.com/",
+      "ats": {
+        "vendor": "icims",
+        "board": "brighton-boyneresorts"
+      },
+      "source_id": "jobs-brighton-icims",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Boyne Resorts mountain; resort specific iCIMS portal.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "buck-hill",
+      "name": "Buck Hill",
+      "kind": "resort_operator",
+      "careers_url": "https://buckhill.com/buck-hill-now-hiring-for-winter",
+      "ats": {
+        "vendor": "paylocity",
+        "board": null
+      },
+      "source_id": "jobs-buck-hill-hiring",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "burke-mountain-resort",
+      "name": "Burke Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://skiburke.com/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-burke-jobs-named",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "cannon-mountain",
+      "name": "Cannon Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://www.cannonmt.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-cannon-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "State of New Hampshire ski area; year round staff get state benefits.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "carrabassett-valley-academy",
+      "name": "Carrabassett Valley Academy",
+      "kind": "club",
+      "careers_url": "https://gocva.com/about-cva/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-cva-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Ski and snowboard academy in Carrabassett Valley that trains at Sugarloaf. Lists coaching and teaching jobs.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "cranmore-mountain-resort",
+      "name": "Cranmore Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://cranmore.com/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-cranmore-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "crystal-mountain-resort",
+      "name": "Crystal Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/CrystalMountain",
+      "ats": {
+        "vendor": "workday",
+        "board": "CrystalMountain"
+      },
+      "source_id": "jobs-workday-crystal-mountain-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "deer-valley-resort",
+      "name": "Deer Valley Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/deervalleyresort",
+      "ats": {
+        "vendor": "workday",
+        "board": "deervalleyresort"
+      },
+      "source_id": "jobs-workday-deer-valley-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "fasterskier-job-postings",
+      "name": "FasterSkier job postings",
+      "kind": "other",
+      "careers_url": "https://fasterskier.com/category/news/jobpostings/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-fasterskier-jobpostings",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "National board for Nordic coaching and club jobs.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "gould-academy",
+      "name": "Gould Academy",
+      "kind": "club",
+      "careers_url": "https://www.gouldacademy.org/about/careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-gould-careers",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Boarding school in Bethel whose competition program trains at Sunday River.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "grand-targhee-resort",
+      "name": "Grand Targhee Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://www.grandtarghee.com/about/jobs-careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-grand-targhee-careers",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Owned by the Gillett family since June 2000 (source jobs-wikipedia-grand-targhee). The careers page says the resort cannot offer H-2B sponsorship.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "hermitage-club",
+      "name": "The Hermitage Club",
+      "kind": "resort_operator",
+      "careers_url": "https://www.hermitageclub.com/careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-hermitage-saminfo-posting",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Careers URL as quoted in the club's own posting; the careers page was not opened.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "jackson-hole-mountain-resort",
+      "name": "Jackson Hole Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://www.jacksonhole.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-jackson-hole-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "jackson-hole-ski-and-snowboard-club",
+      "name": "Jackson Hole Ski and Snowboard Club",
+      "kind": "club",
+      "careers_url": "https://jhskiclub.org/programs/FREERIDE-PROGRAM",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-jhsc-freeride",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Club based at Jackson Hole Mountain Resort with alpine, freeride, snowboard and Nordic programs. Alpine coach openings are posted on Buckrail Jobs (source jobs-jhsc-alpine-coaches).",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "jay-peak-resort",
+      "name": "Jay Peak Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://coolworks.com/jay-peak-resort/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-jay-peak-coolworks",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Employer listing on CoolWorks; the resort's own careers page did not appear in search results.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "june-mountain-resort",
+      "name": "June Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/JuneMountain",
+      "ats": {
+        "vendor": "workday",
+        "board": "JuneMountain"
+      },
+      "source_id": "jobs-workday-june-mountain-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "killington-pico",
+      "name": "Killington Resort and Pico Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://killington.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-killington-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "One employer for both mountains (Killington/Pico Ski Resort Partners).",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "mad-river-glen-cooperative",
+      "name": "Mad River Glen Cooperative",
+      "kind": "resort_operator",
+      "careers_url": "https://www.madriverglen.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-mad-river-glen-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "magic-mountain-vt",
+      "name": "Magic Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://www.magicmtn.com/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-magic-mountain-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "One jobs page covers instructors and race and freeride coaches.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "mammoth-mountain-resort",
+      "name": "Mammoth Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/MammothMountain",
+      "ats": {
+        "vendor": "workday",
+        "board": "MammothMountain"
+      },
+      "source_id": "jobs-workday-mammoth-mountain-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "middlebury-college",
+      "name": "Middlebury College",
+      "kind": "resort_operator",
+      "careers_url": "https://apply.workable.com/middleburycollege/",
+      "ats": {
+        "vendor": "workable",
+        "board": "middleburycollege"
+      },
+      "source_id": "jobs-middlebury-workable-posting",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "The college runs the Snow Bowl and Rikert Nordic Center and posts their jobs on its Workable board.",
+      "feed": true,
+      "board_url": "https://apply.workable.com/middleburycollege/"
+    },
+    {
+      "id": "montana-snowbowl",
+      "name": "Montana Snowbowl",
+      "kind": "resort_operator",
+      "careers_url": "https://montanasnowbowl.com/sbblog/?p=4315",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-snowbowl-working",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "mt-bachelor-sports-education-foundation",
+      "name": "Mt. Bachelor Sports Education Foundation",
+      "kind": "club",
+      "careers_url": "https://mbsef.org/jobs/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-mbsef-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Club based at Mt. Bachelor.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "mt-baker-ski-area",
+      "name": "Mt. Baker Ski Area",
+      "kind": "resort_operator",
+      "careers_url": "https://www.mtbaker.us/jobs/",
+      "ats": {
+        "vendor": "paylocity",
+        "board": null
+      },
+      "source_id": "jobs-mt-baker-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Postings run on Paylocity.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "mt-hood-meadows-resort",
+      "name": "Mt. Hood Meadows",
+      "kind": "resort_operator",
+      "careers_url": "https://www.skihood.com/explore/jobs",
+      "ats": {
+        "vendor": "other",
+        "board": null
+      },
+      "source_id": "jobs-meadows-jobs-named",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Postings run on Dayforce.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "palisades-tahoe-resort",
+      "name": "Palisades Tahoe",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/PalisadesTahoe",
+      "ats": {
+        "vendor": "workday",
+        "board": "PalisadesTahoe"
+      },
+      "source_id": "jobs-workday-palisades-tahoe-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "park-city-ski-and-snowboard",
+      "name": "Park City Ski and Snowboard",
+      "kind": "club",
+      "careers_url": "https://jobs.townlift.com/company/1281/park-city-ski-snowboard/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-pcss-townlift",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Park City club; postings seen were cross country coaching. Employer page on the TownLift local jobs board.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "powdr",
+      "name": "POWDR",
+      "kind": "parent_company",
+      "careers_url": "https://powdr.wd12.myworkdayjobs.com/en-US/POWDR_Careers",
+      "ats": {
+        "vendor": "workday",
+        "board": "POWDR_Careers"
+      },
+      "source_id": "jobs-powdr-workday-posting",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "One Workday board for every POWDR resort, Woodward center and the corporate office. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "rlk-and-company",
+      "name": "RLK and Company (Timberline Lodge)",
+      "kind": "resort_operator",
+      "careers_url": "https://timberlinelodge.com/jobs",
+      "ats": {
+        "vendor": "paylocity",
+        "board": null
+      },
+      "source_id": "jobs-timberline-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Operator of Timberline Lodge and its ski area. Postings run on Paylocity.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "rowmark-ski-academy",
+      "name": "Rowmark Ski Academy (Rowland Hall)",
+      "kind": "club",
+      "careers_url": "https://www.rowlandhall.org/about/job-openings",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-rowmark-posting",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Rowmark is run by Rowland Hall school; jobs are on the Rowland Hall job openings board. Link is the board that holds the posting seen in search results; the board page itself was not seen.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "schweitzer-resort",
+      "name": "Schweitzer",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/Schweitzer",
+      "ats": {
+        "vendor": "workday",
+        "board": "Schweitzer"
+      },
+      "source_id": "jobs-workday-schweitzer-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "silverton-mountain",
+      "name": "Silverton Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://silvertonmountain.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-silverton-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "ski-and-snowboard-club-vail",
+      "name": "Ski and Snowboard Club Vail",
+      "kind": "club",
+      "careers_url": "https://skiclubvail.org/careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-sscv-careers",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Club based at Vail Mountain. Also files H-2B job orders for alpine coaches on seasonaljobs.dol.gov.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "ski-racing-job-board",
+      "name": "Ski Racing job board",
+      "kind": "other",
+      "careers_url": "https://skiracing.com/job-board/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-skiracing-job-board",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "National board for alpine race coaching and club jobs.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "ski-utah",
+      "name": "Ski Utah",
+      "kind": "other",
+      "careers_url": "https://www.skiutah.com/about/Resort-Careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-ski-utah-resort-careers",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Utah ski industry association page that points to each member resort's careers page.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "snowbasin-resort",
+      "name": "Snowbasin Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://www.snowbasin.com/about/employment/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-snowbasin-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "snowshoe-mountain-resort",
+      "name": "Snowshoe Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/SnowshoeMountain",
+      "ats": {
+        "vendor": "workday",
+        "board": "SnowshoeMountain"
+      },
+      "source_id": "jobs-workday-snowshoe-mountain-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "solitude-mountain-resort",
+      "name": "Solitude Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://solitudemountain.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-solitude-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort; postings sit on jobs.alterramtnco.com/solitude-mountain-resort/.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "steamboat-ski-resort",
+      "name": "Steamboat Ski Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/SteamboatSkiResort",
+      "ats": {
+        "vendor": "workday",
+        "board": "SteamboatSkiResort"
+      },
+      "source_id": "jobs-workday-steamboat-ski-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "stratton-mountain-resort",
+      "name": "Stratton Mountain",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/StrattonMountain",
+      "ats": {
+        "vendor": "workday",
+        "board": "StrattonMountain"
+      },
+      "source_id": "jobs-workday-stratton-mountain-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "stratton-mountain-school",
+      "name": "Stratton Mountain School",
+      "kind": "club",
+      "careers_url": "https://gosms.org/careers-sms",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-sms-careers",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Ski and snowboard academy at Stratton Mountain.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "sugar-bowl-academy",
+      "name": "Sugar Bowl Academy",
+      "kind": "club",
+      "careers_url": "https://sbacademy.org/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-sba-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Ski academy at Sugar Bowl Resort. In September 2026 it was also searching for an Executive Director and Head of School through Edgility Search.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "sugar-bowl-resort",
+      "name": "Sugar Bowl Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://jobs.sugarbowl.com/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-sugar-bowl-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "sugarbush-resort",
+      "name": "Sugarbush Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://alterra.wd1.myworkdayjobs.com/en-US/SugarbushResort",
+      "ats": {
+        "vendor": "workday",
+        "board": "SugarbushResort"
+      },
+      "source_id": "jobs-workday-sugarbush-resort",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort. Board root derived from a real posting URL by removing the /job/ path.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "sugarloaf-resort",
+      "name": "Sugarloaf",
+      "kind": "resort_operator",
+      "careers_url": "https://www.sugarloaf.com/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-sugarloaf-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Boyne Resorts mountain.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "sun-valley-company",
+      "name": "Sun Valley Company",
+      "kind": "resort_operator",
+      "careers_url": "https://www.sunvalley.com/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-sun-valley-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "One jobs page for Bald Mountain, Dollar Mountain and the Sun Valley resort.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "sunday-river-resort",
+      "name": "Sunday River",
+      "kind": "resort_operator",
+      "careers_url": "https://www.sundayriver.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-sunday-river-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Boyne Resorts mountain.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "taos-ski-valley",
+      "name": "Taos Ski Valley",
+      "kind": "resort_operator",
+      "careers_url": "https://coolworks.com/taos-ski-valley/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-taos-coolworks",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Employer listing on CoolWorks; the resort's own careers page did not appear in search results.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "telluride-ski-resort",
+      "name": "Telluride Ski Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://tellurideskiresort.com/employment/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-telluride-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "the-highlands-resort",
+      "name": "The Highlands",
+      "kind": "resort_operator",
+      "careers_url": "https://highlandsharborsprings.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-highlands-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Boyne Resorts mountain.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "us-ski-and-snowboard",
+      "name": "U.S. Ski and Snowboard",
+      "kind": "other",
+      "careers_url": "https://www.teamworkonline.com/olympic-jobs/usngbjobs/u-s--ski-and-snowboard-association",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-usss-teamwork",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "National governing body; national team coach and staff jobs. A separate public club jobs board did not appear in search results.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "utah-olympic-legacy-foundation",
+      "name": "Utah Olympic Legacy Foundation",
+      "kind": "resort_operator",
+      "careers_url": "https://utaholympiclegacy.org/careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-uolf-careers-named",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Runs Utah Olympic Park, the Utah Olympic Oval and Soldier Hollow Nordic Center.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "vail-resorts",
+      "name": "Vail Resorts",
+      "kind": "parent_company",
+      "careers_url": "https://jobs.vailresortscareers.com/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-vail-resorts-home",
+      "as_of": "2026-10-13",
+      "confidence": "published",
+      "note": "One careers site for every Vail Resorts mountain and the corporate office. Resort job URLs follow jobs.vailresortscareers.com/<resort>/job/...",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "vermont-adaptive-ski-and-sports",
+      "name": "Vermont Adaptive Ski and Sports",
+      "kind": "club",
+      "careers_url": "https://vermontadaptive.org/careers",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-vass-careers",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Adaptive ski and snowboard programs at Sugarbush, Pico and Killington.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "waterville-valley-resort",
+      "name": "Waterville Valley Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://waterville.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-waterville-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "whiteface-orda",
+      "name": "Whiteface Mountain (ORDA)",
+      "kind": "resort_operator",
+      "careers_url": "https://whiteface.com/employment/",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-whiteface-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Run by the New York State Olympic Regional Development Authority.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "whitefish-mountain-resort",
+      "name": "Whitefish Mountain Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://skiwhitefish.com/jobs",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-whitefish-jobs",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": null,
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "winter-park-resort",
+      "name": "Winter Park Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://www.winterparkresort.com/employment",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-winter-park-employment",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Alterra Mountain Company resort; postings sit on jobs.alterramtnco.com/winter-park-resort/.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "woodstock-inn",
+      "name": "Woodstock Inn and Resort",
+      "kind": "resort_operator",
+      "careers_url": "https://www.woodstockinn.com/employee",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-woodstock-inn-employee",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "The Woodstock Inn and Resort runs Saskadena Six; ski area jobs are hired through the inn.",
+      "feed": false,
+      "board_url": null
+    },
+    {
+      "id": "yellowstone-club",
+      "name": "Yellowstone Club",
+      "kind": "resort_operator",
+      "careers_url": "https://www.coolworks.com/yellowstone-club/profile",
+      "ats": {
+        "vendor": "unknown",
+        "board": null
+      },
+      "source_id": "jobs-yc-coolworks",
+      "as_of": "2026-10-13",
+      "confidence": "estimated",
+      "note": "Private club; its own careers portal is reached from the YC Careers link on yellowstoneclub.com, whose URL did not appear in search results.",
+      "feed": false,
+      "board_url": null
+    }
+  ]
+}

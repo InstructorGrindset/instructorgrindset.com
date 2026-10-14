@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-14T00:28:56Z",
+  "resort_id": "big-boulder",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "anderson-1976-new-snow-density"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": null,
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "big-boulder",
+      "month": 10,
+      "snowfall_in": 0.8,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.9,
+      "snowfall_source": "era5",
+      "density_pct_median": 16.1,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 58.7,
+      "temp_low_f": 42.2,
+      "wind_mph": 10.0,
+      "sun_pct": 66.2
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 11,
+      "snowfall_in": 1.9,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 2.9,
+      "snowfall_source": "era5",
+      "density_pct_median": 14.1,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.25,
+        "moist": 0.75
+      },
+      "density_source": "estimated",
+      "temp_high_f": 47.2,
+      "temp_low_f": 32.1,
+      "wind_mph": 10.6,
+      "sun_pct": 67.9
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 12,
+      "snowfall_in": 7.1,
+      "powder_days": 0.04,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.1,
+      "snowfall_source": "era5",
+      "density_pct_median": 11.2,
+      "density_mix": {
+        "dry": 0.047,
+        "average": 0.558,
+        "moist": 0.395
+      },
+      "density_source": "estimated",
+      "temp_high_f": 36.5,
+      "temp_low_f": 24.2,
+      "wind_mph": 11.0,
+      "sun_pct": 60.8
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 1,
+      "snowfall_in": 8.2,
+      "powder_days": 0.08,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.4,
+      "snowfall_source": "era5",
+      "density_pct_median": 10.3,
+      "density_mix": {
+        "dry": 0.163,
+        "average": 0.572,
+        "moist": 0.265
+      },
+      "density_source": "estimated",
+      "temp_high_f": 31.5,
+      "temp_low_f": 18.3,
+      "wind_mph": 11.4,
+      "sun_pct": 65.6
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 2,
+      "snowfall_in": 9.6,
+      "powder_days": 0.16,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.2,
+      "snowfall_source": "era5",
+      "density_pct_median": 11.1,
+      "density_mix": {
+        "dry": 0.073,
+        "average": 0.6,
+        "moist": 0.327
+      },
+      "density_source": "estimated",
+      "temp_high_f": 34.8,
+      "temp_low_f": 19.8,
+      "wind_mph": 11.5,
+      "sun_pct": 67.9
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 3,
+      "snowfall_in": 6.2,
+      "powder_days": 0.12,
+      "banner_days": 0.04,
+      "avg_storm_depth_in": 3.2,
+      "snowfall_source": "era5",
+      "density_pct_median": 13.2,
+      "density_mix": {
+        "dry": 0.026,
+        "average": 0.256,
+        "moist": 0.718
+      },
+      "density_source": "estimated",
+      "temp_high_f": 44.5,
+      "temp_low_f": 27.7,
+      "wind_mph": 11.7,
+      "sun_pct": 68.5
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 4,
+      "snowfall_in": 1.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.4,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 56.5,
+      "temp_low_f": 38.0,
+      "wind_mph": 11.4,
+      "sun_pct": 68.2
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 5,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 66.2,
+      "temp_low_f": 48.1,
+      "wind_mph": 9.8,
+      "sun_pct": 68.8
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 6,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 74.5,
+      "temp_low_f": 56.8,
+      "wind_mph": 8.9,
+      "sun_pct": 73.1
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 7,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 79.6,
+      "temp_low_f": 62.3,
+      "wind_mph": 8.0,
+      "sun_pct": 79.0
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 8,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 77.2,
+      "temp_low_f": 60.3,
+      "wind_mph": 7.8,
+      "sun_pct": 76.3
+    },
+    {
+      "resort_id": "big-boulder",
+      "month": 9,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 70.9,
+      "temp_low_f": 53.5,
+      "wind_mph": 8.5,
+      "sun_pct": 71.6
+    }
+  ]
+}

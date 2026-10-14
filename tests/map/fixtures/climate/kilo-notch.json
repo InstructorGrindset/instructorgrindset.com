@@ -1,0 +1,218 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-11T12:00:00Z",
+ "resort_id": "kilo-notch",
+ "source_ids": [
+  "fixture-climate"
+ ],
+ "period": {
+  "start_year": 1996,
+  "end_year": 2025
+ },
+ "months": [
+  {
+   "resort_id": "kilo-notch",
+   "month": 10,
+   "snowfall_in": 11.6,
+   "powder_days": 0.8,
+   "banner_days": 0.3,
+   "avg_storm_depth_in": 4.9,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 41,
+   "temp_low_f": 19,
+   "wind_mph": 9.5,
+   "sun_pct": 51
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 11,
+   "snowfall_in": 32.5,
+   "powder_days": 2.3,
+   "banner_days": 0.7,
+   "avg_storm_depth_in": 6.6,
+   "density_pct_median": 7.6,
+   "density_mix": {
+    "dry": 0.41,
+    "average": 0.41,
+    "moist": 0.18
+   },
+   "density_source": "estimated",
+   "temp_high_f": 27,
+   "temp_low_f": 5,
+   "wind_mph": 12.2,
+   "sun_pct": 44
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 12,
+   "snowfall_in": 44.2,
+   "powder_days": 3.2,
+   "banner_days": 1.0,
+   "avg_storm_depth_in": 7.6,
+   "density_pct_median": 7.1,
+   "density_mix": {
+    "dry": 0.45,
+    "average": 0.42,
+    "moist": 0.13
+   },
+   "density_source": "estimated",
+   "temp_high_f": 18,
+   "temp_low_f": -4,
+   "wind_mph": 13.7,
+   "sun_pct": 41
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 1,
+   "snowfall_in": 46.5,
+   "powder_days": 3.3,
+   "banner_days": 1.0,
+   "avg_storm_depth_in": 7.8,
+   "density_pct_median": 7.0,
+   "density_mix": {
+    "dry": 0.46,
+    "average": 0.42,
+    "moist": 0.12
+   },
+   "density_source": "estimated",
+   "temp_high_f": 16,
+   "temp_low_f": -6,
+   "wind_mph": 14.0,
+   "sun_pct": 40
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 2,
+   "snowfall_in": 44.2,
+   "powder_days": 3.2,
+   "banner_days": 1.0,
+   "avg_storm_depth_in": 7.6,
+   "density_pct_median": 7.1,
+   "density_mix": {
+    "dry": 0.45,
+    "average": 0.42,
+    "moist": 0.13
+   },
+   "density_source": "estimated",
+   "temp_high_f": 19,
+   "temp_low_f": -3,
+   "wind_mph": 13.7,
+   "sun_pct": 41
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 3,
+   "snowfall_in": 41.9,
+   "powder_days": 3.0,
+   "banner_days": 0.9,
+   "avg_storm_depth_in": 7.4,
+   "density_pct_median": 7.2,
+   "density_mix": {
+    "dry": 0.44,
+    "average": 0.42,
+    "moist": 0.14
+   },
+   "density_source": "estimated",
+   "temp_high_f": 26,
+   "temp_low_f": 4,
+   "wind_mph": 13.4,
+   "sun_pct": 42
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 4,
+   "snowfall_in": 25.6,
+   "powder_days": 1.8,
+   "banner_days": 0.6,
+   "avg_storm_depth_in": 6.1,
+   "density_pct_median": 7.9,
+   "density_mix": {
+    "dry": 0.39,
+    "average": 0.4,
+    "moist": 0.21
+   },
+   "density_source": "estimated",
+   "temp_high_f": 34,
+   "temp_low_f": 12,
+   "wind_mph": 11.3,
+   "sun_pct": 47
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 5,
+   "snowfall_in": 7.0,
+   "powder_days": 0.5,
+   "banner_days": 0.2,
+   "avg_storm_depth_in": 4.6,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 44,
+   "temp_low_f": 22,
+   "wind_mph": 8.9,
+   "sun_pct": 53
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 6,
+   "snowfall_in": 0.0,
+   "powder_days": 0.0,
+   "banner_days": 0.0,
+   "avg_storm_depth_in": null,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 55,
+   "temp_low_f": 33,
+   "wind_mph": 8,
+   "sun_pct": 55
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 7,
+   "snowfall_in": 0.0,
+   "powder_days": 0.0,
+   "banner_days": 0.0,
+   "avg_storm_depth_in": null,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 63,
+   "temp_low_f": 41,
+   "wind_mph": 8,
+   "sun_pct": 55
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 8,
+   "snowfall_in": 0.0,
+   "powder_days": 0.0,
+   "banner_days": 0.0,
+   "avg_storm_depth_in": null,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 61,
+   "temp_low_f": 39,
+   "wind_mph": 8,
+   "sun_pct": 55
+  },
+  {
+   "resort_id": "kilo-notch",
+   "month": 9,
+   "snowfall_in": 2.3,
+   "powder_days": 0.2,
+   "banner_days": 0.1,
+   "avg_storm_depth_in": 4.2,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 52,
+   "temp_low_f": 30,
+   "wind_mph": 8.3,
+   "sun_pct": 54
+  }
+ ]
+}

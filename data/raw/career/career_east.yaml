@@ -1,0 +1,102 @@
+batch: career-east
+researched_date: 2026-10-11
+sources:
+  - {id: pay-east-whiteface-private-lessons, url: "https://whiteface.com/lessons-programs/private-lessons/", title: "Whiteface Mountain private lessons, 2026/27 prices", accessed_date: 2026-10-11}
+  - {id: pay-east-magic-lessons, url: "https://magicmtn.com/lessons/", title: "Magic Mountain lessons and private lesson prices", accessed_date: 2026-10-11}
+  - {id: pay-east-mrg-adult-ski-school, url: "https://www.madriverglen.com/adults-ski-school/", title: "Mad River Glen adult ski school and private lesson prices", accessed_date: 2026-10-11}
+  - {id: pay-east-big-snow-private-lessons, url: "https://www.bigsnowamericandream.com/private-lessons/", title: "Big SNOW American Dream private lessons", accessed_date: 2026-10-11}
+  - {id: pay-east-sunday-river-private-lessons, url: "https://www.sundayriver.com/lessons/private-lessons", title: "Sunday River private lessons", accessed_date: 2026-10-11}
+resorts:
+  - resort_id: whiteface
+    private_rate:
+      value: {low: 149.50, high: 169.50, unit: hour}
+      source_id: pay-east-whiteface-private-lessons
+      as_of: 2026-10-11
+      confidence: published
+      note: 2026/27 two hour private for one guest is 299 midweek and 339 weekend or holiday, divided by 2. Three hours cost 429 to 469.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: magic-mountain
+    private_rate:
+      value: {low: 130, high: 130, unit: hour}
+      source_id: pay-east-magic-lessons
+      as_of: 2026-10-11
+      confidence: published
+      note: One hour private 130. Two hours 240, half day of 3 hours 350, full day of 4 hours 450. Page names no season.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: mad-river-glen
+    private_rate:
+      value: {low: 104.50, high: 104.50, unit: hour}
+      source_id: pay-east-mrg-adult-ski-school
+      as_of: 2026-10-11
+      confidence: published
+      note: Two hour private lesson priced 209, divided by 2. Additional person 99. Page names no season.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: big-snow-american-dream
+    private_rate:
+      value: {low: 79.995, high: 99.995, unit: hour}
+      source_id: pay-east-big-snow-private-lessons
+      as_of: 2026-10-11
+      confidence: published
+      note: Two hour private sale price 159.99 weekday and 199.99 weekend, divided by 2. The price includes a 2 hour slope access ticket.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: sunday-river
+    private_rate:
+      value:
+        low: 735
+        high: 795
+        unit: full_day
+      source_id: career-followups-sundayriver-private-lessons
+      as_of: '2026-10-13'
+      confidence: estimated
+      note: From a search result for this page; page not opened. 2024-25 pricing, 6 hour private $735 non peak and $795 peak; 2 hour $315 to $340, 3 hour $420 to $480. No later season price was found.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: [adaptive]
+    enthusiast_types: []
+    professional_types: []

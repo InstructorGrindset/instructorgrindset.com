@@ -1,0 +1,594 @@
+batch: candidates-east
+researched_date: 2026-10-11
+status: draft
+# Eastern and Midwest Tier A candidates, drafted for owner approval.
+# All values come from Wikipedia pages fetched on 2026-10-11 (resort, operator and news sites
+# were blocked by the research environment's proxy), so ownership is not yet confirmed on each
+# resort's own site. lat/lon are the Wikipedia infobox coordinates, used as the base area point,
+# except records with a comment above lat, which use a lift bottom station at the base (OpenSkiMap lifts).
+# Nothing here is owned or operated by Vail Resorts or Alterra (covered in vail.yaml and alterra.yaml).
+#
+# Researched and left out because no fetched source supports a criterion as written:
+#   gore (ORDA, NY): largest ski area in NY; Ski magazine "Top 10 for Value" only.
+#   windham (Beall Investment Partners and partners, NY): 2023 rebrand to Windham Mountain Club;
+#       the article gives no clientele, pricing or private lesson evidence.
+#   belleayre (ORDA, NY): New York's first chairlift; state level only.
+#   holiday-valley (NY): family oriented resort, no criterion.
+#   smugglers-notch (VT): family amenities and ski school rankings only. Ownership conflict:
+#       its own article names William Stritzler; the Berkshire East article reports Bear Den
+#       Partners bought a majority stake on 2026-02-11.
+#   bolton-valley, bromley, saddleback, mount-abram, jiminy-peak, loon, bretton-woods,
+#   camelback, lutsen, granite-peak, spirit-mountain, black-mountain-nh, camden-snow-bowl,
+#   mohawk-mountain, bousquet, dartmouth-skiway, plattekill, pats-peak, wachusett:
+#       size, history or regional firsts only.
+#   blue-mountain-pa (BMR Resort, affiliated with KSL Resorts): USSA race team claim is marked
+#       citation needed and names no national team outcome.
+#   Ski jumps (Pine Mountain Jump MI, Copper Peak MI, Snowflake WI) are jumping hills, not ski
+#       areas; flagged for the training facility batch.
+sources:
+  - {id: wikipedia-whiteface-mountain, url: https://en.wikipedia.org/wiki/Whiteface_Mountain, title: Whiteface Mountain (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-killington-ski-resort, url: https://en.wikipedia.org/wiki/Killington_Ski_Resort, title: Killington Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-pico-mountain, url: https://en.wikipedia.org/wiki/Pico_Mountain, title: Pico Mountain (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mad-river-glen, url: https://en.wikipedia.org/wiki/Mad_River_Glen, title: Mad River Glen (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-jay-peak-resort, url: https://en.wikipedia.org/wiki/Jay_Peak_Resort, title: Jay Peak Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-magic-mountain-ski-area, url: https://en.wikipedia.org/wiki/Magic_Mountain_Ski_Area, title: Magic Mountain Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-haystack-mountain-ski-area, url: https://en.wikipedia.org/wiki/Haystack_Mountain_Ski_Area, title: Hermitage Club at Haystack Mountain (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-saskadena-six, url: https://en.wikipedia.org/wiki/Saskadena_Six, title: Saskadena Six (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-middlebury-college-snow-bowl, url: https://en.wikipedia.org/wiki/Middlebury_College_Snow_Bowl, title: Middlebury College Snow Bowl (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-cannon-mountain-ski-area, url: https://en.wikipedia.org/wiki/Cannon_Mountain_Ski_Area, title: Cannon Mountain Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-cranmore-mountain-resort, url: https://en.wikipedia.org/wiki/Cranmore_Mountain_Resort, title: Cranmore Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-gunstock-mountain-resort, url: https://en.wikipedia.org/wiki/Gunstock_Mountain_Resort, title: Gunstock Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-sunday-river-ski-resort, url: "https://en.wikipedia.org/wiki/Sunday_River_(ski_resort)", title: "Sunday River (ski resort) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-gould-academy, url: https://en.wikipedia.org/wiki/Gould_Academy, title: Gould Academy (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-black-mountain-of-maine, url: https://en.wikipedia.org/wiki/Black_Mountain_of_Maine, title: Black Mountain of Maine (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-berkshire-east-ski-resort, url: https://en.wikipedia.org/wiki/Berkshire_East_Ski_Resort, title: Berkshire East Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-boyne-mountain-resort, url: https://en.wikipedia.org/wiki/Boyne_Mountain_Resort, title: Boyne Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-the-highlands-at-harbor-springs, url: https://en.wikipedia.org/wiki/The_Highlands_at_Harbor_Springs, title: The Highlands at Harbor Springs (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-mount-bohemia, url: https://en.wikipedia.org/wiki/Mount_Bohemia, title: Mount Bohemia (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-buck-hill, url: https://en.wikipedia.org/wiki/Buck_Hill, title: Buck Hill (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-hyland-hills-ski-area, url: https://en.wikipedia.org/wiki/Hyland_Hills_Ski_Area, title: Hyland Hills Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: access-wikipedia-marble-valley-rtd, url: "https://en.wikipedia.org/wiki/Marble_Valley_Regional_Transit_District", title: "Marble Valley Regional Transit District (Wikipedia), route list", accessed_date: 2026-10-13, note: "Limited daily service to Killington; winter Rutland to Ludlow connector."}
+  - {id: access-lakeplacid-mountain-valley-shuttle, url: "https://www.lakeplacid.com/explore/getting-here/free-shuttle-service-whiteface-mountain-valley-shuttle", title: "Free Shuttle Service: Whiteface Mountain Valley Shuttle (lakeplacid.com)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free ski season shuttle between Lake Placid and Whiteface with stops in Wilmington, run by Essex County Public Transportation with ORDA."}
+  - {id: access-thebus-rkc-winter-2023-24, url: "https://thebus.com/wp-content/uploads/2021/12/RutlandKillingtonCommuter_Winter2023_24-1.pdf", title: "Rutland Killington Commuter, winter 2023 to 2024 schedule (Marble Valley Regional Transit District)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Lists the Pico Resort Hotel stop with hourly departures from Rutland."}
+  - {id: access-gmta-2014-report, url: "https://www.moretownvt.org/wp-content/uploads/2015/02/2014-Report-GMTA.pdf", title: "Green Mountain Transit Agency 2014 report (Town of Moretown)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. The Mad Bus served the Mad River Valley, Sugarbush Resort and Mad River Glen."}
+  - {id: access-jay-peak-employee-housing, url: "https://jaypeakresort.com/EmployeeHousing", title: "Employee Housing (Jay Peak Resort)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Limited community style housing for full time employees, with a resort shuttle to and from the team housing locations."}
+  - {id: access-tri-valley-snow-bowl-shuttle, url: "https://www.trivalleytransit.org/rider-alerts/snow-bowl-shuttle", title: "Snow Bowl Shuttle (Tri-Valley Transit)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free seasonal bus serving Middlebury, East Middlebury, Ripton, the Bread Loaf campus and the Snow Bowl."}
+  - {id: access-sun-journal-sunday-river-staff-housing, url: "https://www.sunjournal.com/?p=10496723", title: "Sunday River staff housing report (Sun Journal)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. The resort leases Bethel area lodges and apartments for staff and converted a ski team dorm on the mountain; about 400 beds at peak."}
+  - {id: access-mvta-buck-hill, url: "https://www.mvta.com/wp-content/uploads/2024/12/Buck-Hill.pdf", title: "Buck Hill route schedule (Minnesota Valley Transit Authority)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Seasonal Saturday and Sunday route from Burnsville Transit Station, Heart of the City and Burnsville Center."}
+  - {id: openskimap-lift-whiteface-cloudsplitter-gondola, url: "https://openskimap.org/", title: "Cloudsplitter Gondola bottom station, Whiteface Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base area point. Lift 'Cloudsplitter Gondola' (OpenStreetMap way/32051122, OpenSkiMap lift cbb70c88f2d73b35e86134ef2e1e8fed85339285); its bottom station is OpenStreetMap node/359773111 at 44.3532236, -73.8612525, 372 m. Wikipedia (wikipedia-whiteface-mountain) gives one base area at 1,220 ft. The gondola bottom station is at 372 m (1,220 ft), the lowest lift bottom at the resort, and the gondola has the largest vertical rise of the lifts there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-jay-peak-village-double-chair, url: "https://openskimap.org/", title: "Village Double Chair bottom station, Jay Peak Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Lowest lift base point. Lift 'Village Double Chair' (OpenStreetMap way/199923636, OpenSkiMap lift 6181e593fbb38804aa7529e88ba78b65d377d7b5); its bottom station is OpenStreetMap node/2099136550 at 44.9359538, -72.5008193, 560 m. Wikipedia (wikipedia-jay-peak-resort) says the resort has two base lodges and names neither. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. It is 0.53 km from the Aerial Tram bottom (Tramside) and 0.69 km from the Stateside Moving Carpet, and its 1,838 ft elevation is close to the article's 1,815 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-magic-mountain-red-chair, url: "https://openskimap.org/", title: "Red Chair bottom station, Magic Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base lodge point. Lift 'Red Chair' (OpenStreetMap way/233471851, OpenSkiMap lift c2835104fe12e6e84a4c7dd0a6b6b43aa10a6675); its bottom station is OpenStreetMap node/2418518274 at 43.2020984, -72.7717909, 419 m. Wikipedia (wikipedia-magic-mountain-ski-area) gives one base at 1,350 ft and lists the Red Chair as the summit double with the largest vertical (1,500 ft). Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-mount-bohemia-honey-pot-hoist, url: "https://openskimap.org/", title: "Honey Pot Hoist bottom station, Mount Bohemia (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Lowest lift base point. Lift 'Honey Pot Hoist' (OpenStreetMap way/127262427, OpenSkiMap lift 1e3377be506e96f5c083c3310e1e58d77f594d00); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 47.3858669, -88.0083575, 198 m. Wikipedia (wikipedia-mount-bohemia) names no base area and no base elevation. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. Its 651 ft elevation is close to the 661 ft implied by the article's 1,465 ft peak and 804 ft vertical; the Mountain Dew Hoist bottom is 0.89 km west at 746 ft. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+resorts:
+  # ---------------------------------------------------------------- New York
+  - id: whiteface
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Whiteface Mountain
+    facility_type: ski_area
+    state: NY
+    owner: {value: Olympic Regional Development Authority, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published, note: "New York State public benefit corporation; the article says ORDA runs the ski area."}
+    operator_scale: {value: 2, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-13, confidence: published, note: "Run by the Olympic Regional Development Authority, a New York State public benefit corporation."}
+    access: {rating: transit_friendly, summary_md: "The free Mountain Valley Shuttle runs in ski season between Lake Placid, Wilmington and Whiteface.", source_id: access-lakeplacid-mountain-valley-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Essex County Public Transportation runs it with ORDA; whiteface.com gives December 15 to March 15."}
+    # Base area: Cloudsplitter Gondola bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (44.3658, -73.9028), 3.6 km away.
+    lat: 44.35322
+    lon: -73.86125
+    location_source_id: openskimap-lift-whiteface-cloudsplitter-gondola
+    cluster_hint: adirondacks
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Whiteface hosted all six alpine skiing events of the 1980 Winter Olympics and the alpine events of the 2023 Winter World University Games.", source_id: wikipedia-whiteface-mountain}
+    size:
+      acres: {value: 299, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published, note: "The Slides add 35 acres of hike to terrain."}
+      vertical_ft: {value: 3166, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published, note: "Lift served; 3,430 ft including the hike to Slides."}
+      lifts: null   # infobox lists 1 gondola, 9 chairs, 1 conveyor; body says 2 conveyors
+    elevation:
+      base_ft: {value: 1220, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 4386, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-11, confidence: published, note: "Lift served; hike to terrain tops out at 4,650 ft."}
+    terrain:
+      beginner_pct: {value: 24, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 46, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 30, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 190, source_id: wikipedia-whiteface-mountain, as_of: 2026-10-13, confidence: published}
+
+  # ---------------------------------------------------------------- Vermont
+  - id: killington
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Killington Resort
+    facility_type: ski_area
+    state: VT
+    owner: {value: Killington Independence Group, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Local passholders and community members bought Killington and Pico from Powdr on 2024-09-27."}
+    operator_scale: {value: 2, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-13, confidence: published, note: "Bought from POWDR in 2024 by the Killington Independence Group of local passholders and community members."}
+    access: {rating: mixed, summary_md: "The Bus runs a limited daily Rutland to Killington commuter route.", source_id: access-wikipedia-marble-valley-rtd, as_of: 2026-10-13, confidence: published}
+    lat: 43.626
+    lon: -72.798
+    location_source_id: wikipedia-killington-ski-resort
+    cluster_hint: central-vermont
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Since 2016 Killington has hosted women's World Cup giant slalom and slalom races on Superstar each Thanksgiving weekend, the first World Cup races in the eastern U.S. since 1991.", source_id: wikipedia-killington-ski-resort}
+      - {criterion: diehard, rationale: "Nicknamed the Beast of the East, Killington was bought from Powdr in September 2024 by the Killington Independence Group, formed by local passholders and community members.", source_id: wikipedia-killington-ski-resort}
+    size:
+      acres: {value: 1509, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Killington only; about 1,977 acres combined with Pico."}
+      vertical_ft: {value: 3050, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Lead and statistics section; the infobox gives 3,076 ft."}
+      lifts: {value: 21, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 1165, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Skyeship base."}
+      summit_ft: {value: 4241, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox value; the statistics section gives Killington Peak as 4,229 ft."}
+    terrain:
+      beginner_pct: {value: 28, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 33, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 39, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: pico
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Pico Mountain
+    facility_type: ski_area
+    state: VT
+    owner: {value: Killington Independence Group, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-11, confidence: published, note: "Bought together with Killington from Powdr in September 2024; the Pico article itself names no current owner."}
+    operator_scale: {value: 2, source_id: wikipedia-killington-ski-resort, as_of: 2026-10-13, confidence: published, note: "Bought with Killington from POWDR in 2024 by the Killington Independence Group of local passholders and community members."}
+    access: {rating: mixed, summary_md: "The Bus runs a Rutland to Killington commuter route with a stop at the Pico Resort Hotel.", source_id: access-thebus-rkc-winter-2023-24, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The 2026 summer schedule also lists the Pico stop. Rated mixed to match Killington on the same route."}
+    lat: 43.6617
+    lon: -72.8425
+    location_source_id: wikipedia-pico-mountain
+    cluster_hint: central-vermont
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Pico opened in 1937 as one of the first commercial ski resorts in Vermont, ran the first T bar lift in the US from 1940, and was founded by the family of double Olympic gold medalist Andrea Mead Lawrence.", source_id: wikipedia-pico-mountain}
+    size:
+      acres: {value: 468, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1967, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 7, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 2000, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 3967, source_id: wikipedia-pico-mountain, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-pico-mountain, as_of: 2026-10-13, confidence: published}
+
+  - id: mad-river-glen
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Mad River Glen
+    facility_type: ski_area
+    state: VT
+    owner: {value: Mad River Glen Cooperative, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published, note: "Skier owned cooperative formed in 1995."}
+    operator_scale: {value: 2, source_id: wikipedia-mad-river-glen, as_of: 2026-10-13, confidence: published, note: "Skier owned cooperative since 1995."}
+    access: {rating: mixed, summary_md: "Green Mountain Transit's Mad Bus has served the Mad River Valley, including Sugarbush and Mad River Glen.", source_id: access-gmta-2014-report, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. A 2014 report; the 2025 to 2026 valley map found in search shows Sugarbush routes, and a current Mad River Glen stop was not confirmed."}
+    lat: 44.2008
+    lon: -72.9244
+    location_source_id: wikipedia-mad-river-glen
+    cluster_hint: central-vermont
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Founded for dedicated skiers with few commercial amenities, Mad River Glen is owned by a skier cooperative, bans snowboarding, and has terrain Ski magazine ranked the most challenging on the East Coast.", source_id: wikipedia-mad-river-glen}
+      - {criterion: heritage, rationale: "Mad River Glen, founded in 1947, was listed on the National Register of Historic Places as a historic district in 2012 and still runs its 1948 Single Chair, one of two single chairlifts left in the country.", source_id: wikipedia-mad-river-glen}
+    size:
+      acres: null
+      vertical_ft: {value: 2037, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 5, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published, note: "Infobox: 4 chairlifts (3 doubles, 1 single) and 1 surface lift; the lift table lists only the four chairs."}
+    elevation:
+      base_ft: {value: 1600, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 3637, source_id: wikipedia-mad-river-glen, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 250, source_id: wikipedia-mad-river-glen, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says it averages over 150 in of snow a year."}
+
+  - id: jay-peak
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Jay Peak Resort
+    facility_type: ski_area
+    state: VT
+    owner: {value: Pacific Group Resorts, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published, note: "Bought at a court supervised auction in September 2022 and closed in November 2022, after six years of federal receivership."}
+    operator_scale: {value: 2, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-13, confidence: estimated, note: "Pacific Group Resorts, a Park City company for which Jay Peak was its second New England resort. Small multi resort company; no large scale corporate operation shown."}
+    access: {rating: convenient, summary_md: "Jay Peak offers limited employee housing, and a resort shuttle serves the team housing sites.", source_id: access-jay-peak-employee-housing, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. First Tracks reported a free employee vanpool pilot from Newport, Richford and other towns with the Vermont Agency of Transportation, likely 2024 to 2025."}
+    # Lowest lift base: Village Double Chair bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (44.9294, -72.5322), 2.6 km away.
+    lat: 44.93595
+    lon: -72.50082
+    location_source_id: openskimap-lift-jay-peak-village-double-chair
+    cluster_hint: northern-vermont
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Jay Peak receives the most snowfall of any ski area in the Northeastern U.S., is known for its gladed skiing, and is home to the Face Chutes, arguably the steepest marked terrain in the East.", source_id: wikipedia-jay-peak-resort}
+    size:
+      acres: {value: 385, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2153, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 9, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published, note: "1 aerial tram, 6 chairlifts, 2 surface lifts."}
+    elevation:
+      base_ft: {value: 1815, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 3862, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 359, source_id: wikipedia-jay-peak-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: magic-mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Magic Mountain
+    facility_type: ski_area
+    state: VT
+    owner: {value: SKI MAGIC LLC, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Group led by Geoff Hatheway; purchase closed November 2016."}
+    operator_scale: {value: 2, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "SKI MAGIC LLC, an investor group led by Geoff Hatheway."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the ski area on Glebe Mountain in Londonderry.", source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+    # Base lodge: Red Chair bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (43.1928, -72.76), 1.4 km away.
+    lat: 43.2021
+    lon: -72.77179
+    location_source_id: openskimap-lift-magic-mountain-red-chair
+    cluster_hint: southern-vermont
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "After reopening in 1997 Magic regained a small but passionate following among ski enthusiasts for its classic, challenging terrain, and a group led by a local Magic skier bought the area in 2016.", source_id: wikipedia-magic-mountain-ski-area}
+    size:
+      acres: null   # infobox says 205 acres; article body says over 135 acres
+      vertical_ft: {value: 1500, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 6, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "1 fixed grip quad, 2 fixed grip doubles, 1 carpet, 2 handle tows."}
+    elevation:
+      base_ft: {value: 1350, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 2850, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 145, source_id: wikipedia-magic-mountain-ski-area, as_of: 2026-10-13, confidence: published}
+
+  - id: hermitage-club
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Hermitage Club at Haystack Mountain
+    facility_type: ski_area
+    state: VT
+    owner: {value: Hermitage Members Group, source_id: wikipedia-haystack-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Non profit entity formed by 181 former members who bought the club at auction in March 2020; over 400 members as of December 2025."}
+    operator_scale: {value: 2, source_id: wikipedia-haystack-mountain-ski-area, as_of: 2026-10-13, confidence: published, note: "Hermitage Members Group, a nonprofit formed by former members. Member owned club."}
+    access: {rating: mixed, summary_md: "Fare free MOOver buses serve Wilmington and the Deerfield Valley, the home of Haystack Mountain.", source_id: access-wikipedia-southeast-vermont-transit, as_of: 2026-10-13, confidence: estimated, note: "Haystack location from wikipedia-haystack-mountain-ski-area. No MOOver stop at the private club found."}
+    lat: 42.9226
+    lon: -72.8946
+    location_source_id: wikipedia-haystack-mountain-ski-area
+    cluster_hint: southern-vermont
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "The Hermitage Club is a private, member owned ski club on Haystack Mountain whose members use an 80,000 square foot clubhouse with a spa, gym, restaurant and ski lockers.", source_id: wikipedia-haystack-mountain-ski-area}
+    size:
+      acres: null
+      vertical_ft: {value: 1400, source_id: wikipedia-haystack-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Infobox gives 1,400 with no unit; feet assumed from context."}
+      lifts: {value: 4, source_id: wikipedia-haystack-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "1 heated bubble six pack, 2 quads, 1 triple."}
+
+  - id: saskadena-six
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Saskadena Six
+    facility_type: ski_area
+    state: VT
+    owner: {value: Woodstock Inn, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: estimated, note: "The article says the area continued to operate as the ski area of the Woodstock Inn as of late 2011 and describes no later change."}
+    operator_scale: {value: 2, source_id: wikipedia-saskadena-six, as_of: 2026-10-13, confidence: estimated, note: "Operated as the ski area of the Woodstock Inn. Independent business."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in South Pomfret.", source_id: wikipedia-saskadena-six, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+    lat: 43.6639
+    lon: -72.5444
+    location_source_id: wikipedia-saskadena-six
+    cluster_hint: central-vermont
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Saskadena Six, formerly Suicide Six, traces to the first rope tow in the United States, installed in January 1934, and hosted the first National Snow Surfing Championships in 1982.", source_id: wikipedia-saskadena-six}
+    size:
+      acres: {value: 100, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 650, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 3, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published, note: "1 quad, 1 double, 1 surface carpet."}
+    elevation:
+      base_ft: {value: 550, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 1200, source_id: wikipedia-saskadena-six, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 110, source_id: wikipedia-saskadena-six, as_of: 2026-10-13, confidence: published}
+
+  - id: middlebury-snow-bowl
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Middlebury College Snow Bowl
+    facility_type: ski_area
+    state: VT
+    owner: {value: Middlebury College, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-13, confidence: published, note: "Owned by Middlebury College. Institutional nonprofit owner."}
+    access: {rating: transit_friendly, summary_md: "Tri Valley Transit runs a free seasonal Snow Bowl bus from Middlebury and the college campus.", source_id: access-tri-valley-snow-bowl-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The Snow Bowl's getting here page names the Adirondack Circle stop at Middlebury College."}
+    lat: 43.94
+    lon: -72.96
+    location_source_id: wikipedia-middlebury-college-snow-bowl
+    cluster_hint: central-vermont
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Owned by Middlebury College since its first trails were cut in 1934, the Snow Bowl has hosted intercollegiate competitions since the 1930s, and its 1938 log cabin lodge is the oldest standing base lodge in the nation.", source_id: wikipedia-middlebury-college-snow-bowl}
+    size:
+      acres: {value: 600, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published, note: "Infobox; about 100 acres of trails and 500 acres of skiable woods. The lead says more than 700 acres of terrain."}
+      vertical_ft: {value: 1000, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 3, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 1720, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 2720, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-middlebury-college-snow-bowl, as_of: 2026-10-13, confidence: published}
+
+  # ---------------------------------------------------------------- New Hampshire
+  - id: cannon
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Cannon Mountain
+    facility_type: ski_area
+    state: NH
+    owner: {value: State of New Hampshire, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "State owned ski area inside Franconia Notch State Park."}
+    operator_scale: {value: 2, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-13, confidence: published, note: "State owned ski area in Franconia Notch State Park. Public operator."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the ski area inside Franconia Notch State Park.", source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Franconia, New Hampshire article."}
+    lat: 44.1578
+    lon: -71.6989
+    location_source_id: wikipedia-cannon-mountain-ski-area
+    cluster_hint: white-mountains
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Cannon was the site of North America's first passenger aerial tramway, dedicated in 1938, and its Richard Taft Race Course was developed in 1931 and 1932.", source_id: wikipedia-cannon-mountain-ski-area}
+    size:
+      acres: {value: 265, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Plus the 86 acre Mittersill backcountry area."}
+      vertical_ft: {value: 2230, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Infobox, Cannon summit to Mittersill base; the lead gives 2,180 ft."}
+      lifts: {value: 10, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 1850, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Mittersill base."}
+      summit_ft: {value: 4080, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 21, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 47, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 32, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Infobox labels the black diamond share Expert; the article section is titled Expert and advanced (32%). Source combines advanced and expert."}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 160, source_id: wikipedia-cannon-mountain-ski-area, as_of: 2026-10-13, confidence: published}
+
+  - id: cranmore
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Cranmore Mountain Resort
+    facility_type: ski_area
+    state: NH
+    owner: {value: "Brian Fairbank, Tyler Fairbank and Joseph O'Donnell", source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: estimated, note: "Buyers in June 2010 per the history section; the lead says only that a group of New England businessmen owns it. Current owner not confirmed on the resort site."}
+    operator_scale: {value: 2, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "A group of New England businessmen (the Fairbanks and Joseph O'Donnell). Investor group."}
+    access: {rating: convenient, summary_md: "Cranmore sits in the village of North Conway.", source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-13, confidence: published, note: "Rated convenient because the village sits at the base. No local bus to the base found."}
+    lat: 44.0564
+    lon: -71.11
+    location_source_id: wikipedia-cranmore-mountain-resort
+    cluster_hint: white-mountains
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Austrian ski pioneer Hannes Schneider moved to Cranmore in 1939 and spurred its expansion, and in the early 1940s Cranmore was one of the first ski areas to develop trail grooming technology.", source_id: wikipedia-cranmore-mountain-resort}
+    size:
+      acres: {value: 170, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Article says over 170 acres."}
+      vertical_ft: {value: 1200, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 7, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-11, confidence: published, note: "5 chairs and 2 surface lifts."}
+    terrain:
+      beginner_pct: {value: 28, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 44, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Infobox. The article text says 28% easy, 46% intermediate and 26% expert."}
+      advanced_pct: {value: 28, source_id: wikipedia-cranmore-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Infobox. The article text gives 26% expert for the top tier."}
+      expert_pct: null
+
+  - id: gunstock
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Gunstock Mountain Resort
+    facility_type: ski_area
+    state: NH
+    owner: {value: Belknap County, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-13, confidence: published, note: "Owned by Belknap County. Public operator."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the resort on Gunstock Mountain in Gilford.", source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Gilford, New Hampshire article."}
+    lat: 43.5414
+    lon: -71.3675
+    location_source_id: wikipedia-gunstock-mountain-resort
+    cluster_hint: other-nh   # Lakes Region, south of the White Mountains cluster
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Built by the Works Progress Administration and completed in 1937, Gunstock had the first chairlift in the eastern United States and is listed on the New Hampshire State Register of Historic Places.", source_id: wikipedia-gunstock-mountain-resort}
+    size:
+      acres: null   # infobox gives 2,200 acres, which reads as the whole recreation area; not adopted as skiable terrain without a second source
+      vertical_ft: {value: 1340, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Infobox; its base and summit elevations differ by 1,400 ft."}
+      lifts: {value: 7, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published, note: "1 high speed quad, 2 quads, 2 triples, 2 surface lifts."}
+    elevation:
+      base_ft: {value: 867, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 2267, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 52, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 31, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 2, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 120, source_id: wikipedia-gunstock-mountain-resort, as_of: 2026-10-13, confidence: published}
+
+  # ---------------------------------------------------------------- Maine
+  - id: sunday-river
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Sunday River
+    facility_type: ski_area
+    state: ME
+    owner: {value: Boyne Resorts, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published, note: "Operated by Boyne since 2007; Boyne bought its leased New England areas from CNL Lifestyle in 2018."}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
+    access: {rating: convenient, summary_md: "Sunday River houses staff in leased lodges and apartments around Bethel and in a converted dorm on the mountain.", source_id: access-sun-journal-sunday-river-staff-housing, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Report from about 2022 to 2023; the staff shuttle was parked then for lack of drivers. The free Mountain Explorer bus from Bethel later ended (sunjournal.com/?p=10919202)."}
+    lat: 44.4734
+    lon: -70.8569
+    location_source_id: wikipedia-sunday-river-ski-resort
+    cluster_hint: western-maine
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Gould Academy athletes in alpine, freestyle and snowboard spend their winter mornings training at Sunday River, and the school sent three alumni to the 2026 Olympics.", source_id: wikipedia-gould-academy}
+    size:
+      acres: {value: 870, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2340, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: null   # infobox totals 20 lifts; the lead says 19
+    elevation:
+      base_ft: {value: 800, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 3140, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 33, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 36, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 19, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 12, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 155, source_id: wikipedia-sunday-river-ski-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: black-mountain-maine
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Black Mountain of Maine
+    facility_type: ski_area
+    state: ME
+    owner: {value: Maine Winter Sports Center, source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-11, confidence: estimated, note: "Purchased in 2003 per the history section; the article describes no later change."}
+    operator_scale: {value: 2, source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-13, confidence: estimated, note: "Maine Winter Sports Center, a nonprofit, bought it in 2003."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Rumford.", source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+    lat: 44.58
+    lon: -70.6175
+    location_source_id: wikipedia-black-mountain-of-maine
+    cluster_hint: western-maine
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Rumford's Chisholm Ski Club, which opened Black Mountain in 1962, hosted the cross country events of the 1950 FIS Nordic World Ski Championships at its earlier area, and Black Mountain's trails have held US cross country national championships in 1993, 1999, 2003 and 2004.", source_id: wikipedia-black-mountain-of-maine}
+    size:
+      acres: null
+      vertical_ft: {value: 1380, source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-11, confidence: published, note: "Infobox; the history section gives 1,150 ft after the 2005 summit chair."}
+      lifts: {value: 3, source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-11, confidence: published, note: "2 chairs and 1 T bar."}
+    elevation:
+      base_ft: {value: 1000, source_id: wikipedia-black-mountain-of-maine, as_of: 2026-10-11, confidence: published}
+      summit_ft: null
+
+  # ---------------------------------------------------------------- Massachusetts
+  - id: berkshire-east
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Berkshire East Mountain Resort
+    facility_type: ski_area
+    state: MA
+    owner: {value: Jon Shaefer, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published, note: "Shaefer is CEO of Bear Den Partners, which bought Burke in May 2025 and a majority of Smugglers' Notch in February 2026."}
+    operator_scale: {value: 2, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-13, confidence: published, note: "Owner Jon Shaefer is CEO of Bear Den Partners, a New England ski resort investment group of a few resorts."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the ski area on Mount Institute in Charlemont.", source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+    lat: 42.6208
+    lon: -72.8769
+    location_source_id: wikipedia-berkshire-east-ski-resort
+    cluster_hint: other-ma
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Berkshire East is known for strong racing programs that have trained racers up to United States Ski Team members, and it frequently hosts USSA slalom and giant slalom championship races.", source_id: wikipedia-berkshire-east-ski-resort}
+    size:
+      acres: {value: 180, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 1180, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 6, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox: 4 chairs (3 quads, 1 double) and 2 surface lifts."}
+    elevation:
+      base_ft: {value: 520, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 1840, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 30, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published, note: "Article text (Terrain and Lifts)."}
+      intermediate_pct: {value: 35, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 30, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 5, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 110, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-13, confidence: published}
+
+  # ---------------------------------------------------------------- Michigan
+  - id: boyne-mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Boyne Mountain Resort
+    facility_type: ski_area
+    state: MI
+    owner: {value: Boyne Resorts, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the resort near Boyne City in Northern Michigan.", source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article; a search found no staff housing source."}
+    lat: 45.1639
+    lon: -84.9328
+    location_source_id: wikipedia-boyne-mountain-resort
+    cluster_hint: other-mi
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Boyne Mountain still uses parts of the world's first chairlift, built in 1936 for Sun Valley, and with Boyne Highlands it introduced the world's first triple (1963) and quad (1965) chairlifts.", source_id: wikipedia-boyne-mountain-resort}
+    size:
+      acres: {value: 175, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 433, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 11, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Ten chairlifts and a carpet lift."}
+    elevation:
+      base_ft: {value: 719, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 1152, source_id: wikipedia-boyne-mountain-resort, as_of: 2026-10-11, confidence: published}
+
+  - id: the-highlands
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: The Highlands at Harbor Springs
+    facility_type: ski_area
+    state: MI
+    owner: {value: Boyne Resorts, source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-11, confidence: published, note: "Known as Boyne Highlands until December 2021."}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the resort near Harbor Springs in Northern Michigan.", source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+    lat: 45.4708
+    lon: -84.9347
+    location_source_id: wikipedia-the-highlands-at-harbor-springs
+    cluster_hint: other-mi
+    openskimap_names: ["Boyne Highlands Resort"]   # OpenSkiMap still uses the pre 2021 name
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Boyne Highlands opened in 1963 with two three person chairlifts, the first triple chairlifts in the world.", source_id: wikipedia-the-highlands-at-harbor-springs}
+    size:
+      acres: {value: 385, source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 525, source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-11, confidence: published}
+      lifts: null
+    elevation:
+      base_ft: {value: 787, source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 1316, source_id: wikipedia-the-highlands-at-harbor-springs, as_of: 2026-10-11, confidence: published}
+
+  - id: mount-bohemia
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Mount Bohemia
+    facility_type: ski_area
+    state: MI
+    owner: null   # article names no owner
+    access: {rating: car_centric, summary_md: "Staff typically drive to the resort at the northern tip of the Keweenaw Peninsula.", source_id: wikipedia-mount-bohemia, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+    # Lowest lift base: Honey Pot Hoist bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (47.3917, -88.0136), 0.8 km away.
+    lat: 47.38587
+    lon: -88.00836
+    location_source_id: openskimap-lift-mount-bohemia-honey-pot-hoist
+    cluster_hint: other-mi
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Mount Bohemia makes no snow and grooms no runs, relies on 250 to 300 inches of lake effect snow a year, and offers only black diamond runs plus three intermediate runs, with no beginner trails.", source_id: wikipedia-mount-bohemia}
+    size:
+      acres: {value: 550, source_id: wikipedia-mount-bohemia, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 804, source_id: wikipedia-mount-bohemia, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 2, source_id: wikipedia-mount-bohemia, as_of: 2026-10-11, confidence: published, note: "1 triple and 1 double chair."}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-mount-bohemia, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text gives a 250 to 300 in average."}
+
+  # ---------------------------------------------------------------- Minnesota
+  - id: buck-hill
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Buck Hill
+    facility_type: ski_area
+    state: MN
+    owner: {value: "David and Corrine Solner", source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 1, source_id: wikipedia-buck-hill, as_of: 2026-10-13, confidence: estimated, note: "Owned by David and Corrine Solner; single area owned by a couple, scored family owned."}
+    access: {rating: mixed, summary_md: "MVTA runs a seasonal weekend bus to Buck Hill from Burnsville Transit Station, Heart of the City and Burnsville Center.", source_id: access-mvta-buck-hill, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. An MVTA notice from November 2025 gives hourly Saturday and Sunday trips through mid March 2026; no weekday service."}
+    lat: 44.724
+    lon: -93.283
+    location_source_id: wikipedia-buck-hill
+    cluster_hint: other-mn
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "World Cup racers Lindsey Vonn and Kristina Koznick learned to race at Buck Hill under Erich Sailer, its racing coach since 1969 and a 2006 National Ski Hall of Fame inductee.", source_id: wikipedia-buck-hill}
+    size:
+      acres: null
+      vertical_ft: null   # infobox says 262 ft; article body says 310 ft
+      lifts: {value: 8, source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published, note: "2 quads, 1 triple, 3 rope tows, 2 magic carpets; excludes the snow tubing tow."}
+    elevation:
+      base_ft: {value: 949, source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 1211, source_id: wikipedia-buck-hill, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 60, source_id: wikipedia-buck-hill, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says less than 60 in."}
+
+  - id: hyland-hills
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Hyland Hills Ski Area
+    facility_type: ski_area
+    state: MN
+    owner: {value: Three Rivers Park District, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 2, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-13, confidence: published, note: "Owned by Three Rivers Park District. Public operator."}
+    access: {rating: mixed, summary_md: "Hyland Hills sits in suburban Bloomington, where Metro Transit runs regional buses.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: estimated, note: "List row only. Bloomington location from wikipedia-hyland-hills-ski-area. No Metro Transit stop at the ski area confirmed; a search found route 538 serving Normandale Community College in Bloomington."}
+    lat: 44.844
+    lon: -93.364
+    location_source_id: wikipedia-hyland-hills-ski-area
+    cluster_hint: other-mn
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Hyland hosts Three Rivers Racing, a youth alpine club whose racers have gone on to national, World Cup and Olympic level races, along with USSA freestyle and racing teams and the G Team snowboard club.", source_id: wikipedia-hyland-hills-ski-area}
+    size:
+      acres: null
+      vertical_ft: {value: 175, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 8, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published, note: "3 quads, 3 rope tows, 2 magic carpets."}
+    elevation:
+      base_ft: {value: 900, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 1075, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 60, source_id: wikipedia-hyland-hills-ski-area, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says less than 60 in."}

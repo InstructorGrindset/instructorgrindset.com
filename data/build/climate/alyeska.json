@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-14T00:28:56Z",
+  "resort_id": "alyeska",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "nrcs-snotel-1103-ak"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": "derived annual snowfall 278 in differs from the published 650 in by -57 percent, over the 50 percent limit",
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "alyeska",
+      "month": 10,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 11.7,
+      "density_mix": {
+        "dry": 0.143,
+        "average": 0.381,
+        "moist": 0.476
+      },
+      "density_source": "snotel",
+      "temp_high_f": 42.4,
+      "temp_low_f": 34.2,
+      "wind_mph": 4.7,
+      "sun_pct": 45.3
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 11,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 11.7,
+      "density_mix": {
+        "dry": 0.081,
+        "average": 0.468,
+        "moist": 0.451
+      },
+      "density_source": "snotel",
+      "temp_high_f": 32.1,
+      "temp_low_f": 23.7,
+      "wind_mph": 4.3,
+      "sun_pct": 36.7
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 12,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 12.2,
+      "density_mix": {
+        "dry": 0.092,
+        "average": 0.4,
+        "moist": 0.508
+      },
+      "density_source": "snotel",
+      "temp_high_f": 31.4,
+      "temp_low_f": 22.9,
+      "wind_mph": 4.5,
+      "sun_pct": 24.0
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 1,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 11.2,
+      "density_mix": {
+        "dry": 0.068,
+        "average": 0.525,
+        "moist": 0.407
+      },
+      "density_source": "snotel",
+      "temp_high_f": 29.7,
+      "temp_low_f": 20.6,
+      "wind_mph": 4.3,
+      "sun_pct": 39.7
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 2,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 11.1,
+      "density_mix": {
+        "dry": 0.226,
+        "average": 0.371,
+        "moist": 0.403
+      },
+      "density_source": "snotel",
+      "temp_high_f": 30.7,
+      "temp_low_f": 21.3,
+      "wind_mph": 4.4,
+      "sun_pct": 50.9
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 3,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.3,
+      "density_mix": {
+        "dry": 0.107,
+        "average": 0.536,
+        "moist": 0.357
+      },
+      "density_source": "snotel",
+      "temp_high_f": 31.8,
+      "temp_low_f": 21.6,
+      "wind_mph": 3.8,
+      "sun_pct": 65.0
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 4,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.069,
+        "average": 0.586,
+        "moist": 0.345
+      },
+      "density_source": "snotel",
+      "temp_high_f": 41.9,
+      "temp_low_f": 32.7,
+      "wind_mph": 4.1,
+      "sun_pct": 66.4
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 5,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 16.7,
+      "density_mix": {
+        "dry": 0.143,
+        "average": 0.143,
+        "moist": 0.714
+      },
+      "density_source": "snotel",
+      "temp_high_f": 49.6,
+      "temp_low_f": 40.4,
+      "wind_mph": 4.1,
+      "sun_pct": 65.9
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 6,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 59.5,
+      "temp_low_f": 48.1,
+      "wind_mph": 4.9,
+      "sun_pct": 65.4
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 7,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 64.2,
+      "temp_low_f": 53.6,
+      "wind_mph": 5.2,
+      "sun_pct": 60.0
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 8,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 62.7,
+      "temp_low_f": 52.5,
+      "wind_mph": 5.4,
+      "sun_pct": 55.9
+    },
+    {
+      "resort_id": "alyeska",
+      "month": 9,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 54.2,
+      "temp_low_f": 45.1,
+      "wind_mph": 5.5,
+      "sun_pct": 50.5
+    }
+  ]
+}

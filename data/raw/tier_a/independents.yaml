@@ -1,0 +1,528 @@
+batch: independents
+researched_date: 2026-10-11
+status: draft
+# All values come from Wikipedia pages fetched on 2026-10-11. Resort sites were unreachable from
+# the research environment, so ownership is not yet confirmed on each resort's own site.
+# lat/lon are the Wikipedia infobox coordinates, used as the base area point, except records with a
+# comment above lat, which use a lift bottom station at the base (OpenSkiMap lifts).
+#
+# Big Sky, Taos, Snowmass, Buttermilk, Sun Valley (Bald Mountain) and Dollar Mountain were
+# approved as Tier A by the site owner on 2026-10-11 (ROADMAP decisions log). Those records
+# carry tier_a_status: approved; every other record here stays draft with the batch.
+# Resort, Boyne, POWDR and Aspen Snowmass sites were blocked by the research network on
+# 2026-10-11 (proxy policy), so every value below comes from Wikipedia.
+sources:
+  - {id: wikipedia-jackson-hole-mountain-resort, url: https://en.wikipedia.org/wiki/Jackson_Hole_Mountain_Resort, title: Jackson Hole Mountain Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-aspen-skiing-company, url: https://en.wikipedia.org/wiki/Aspen_Skiing_Company, title: Aspen Skiing Company (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-aspen-mountain-ski-area, url: https://en.wikipedia.org/wiki/Aspen_Mountain_(ski_area), title: Aspen Mountain (ski area) (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-aspen-highlands, url: https://en.wikipedia.org/wiki/Aspen_Highlands, title: Aspen Highlands (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-telluride-ski-resort, url: https://en.wikipedia.org/wiki/Telluride_Ski_Resort, title: Telluride Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-sun-valley-idaho, url: "https://en.wikipedia.org/wiki/Sun_Valley,_Idaho", title: "Sun Valley, Idaho (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-alta-ski-area, url: https://en.wikipedia.org/wiki/Alta_Ski_Area, title: Alta Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-snowbird-utah, url: "https://en.wikipedia.org/wiki/Snowbird,_Utah", title: "Snowbird, Utah (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-sugarloaf-ski-resort, url: https://en.wikipedia.org/wiki/Sugarloaf_(ski_resort), title: Sugarloaf (ski resort) (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-carrabassett-valley-academy, url: https://en.wikipedia.org/wiki/Carrabassett_Valley_Academy, title: Carrabassett Valley Academy (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-sugar-bowl-ski-resort, url: https://en.wikipedia.org/wiki/Sugar_Bowl_Ski_Resort, title: Sugar Bowl Ski Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-burke-mountain-ski-area, url: https://en.wikipedia.org/wiki/Burke_Mountain_Ski_Area, title: Burke Mountain Ski Area (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-burke-mountain-academy, url: https://en.wikipedia.org/wiki/Burke_Mountain_Academy, title: Burke Mountain Academy (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-waterville-valley-resort, url: https://en.wikipedia.org/wiki/Waterville_Valley_Resort, title: Waterville Valley Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-bald-mountain-idaho, url: "https://en.wikipedia.org/wiki/Bald_Mountain_(Idaho)", title: "Bald Mountain (Idaho) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-dollar-mountain, url: https://en.wikipedia.org/wiki/Dollar_Mountain, title: Dollar Mountain (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-big-sky-resort, url: https://en.wikipedia.org/wiki/Big_Sky_Resort, title: Big Sky Resort (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-taos-ski-valley, url: "https://en.wikipedia.org/wiki/Taos_Ski_Valley,_New_Mexico", title: "Taos Ski Valley, New Mexico (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-ernie-blake, url: https://en.wikipedia.org/wiki/Ernie_Blake, title: Ernie Blake (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-snowmass-ski-area, url: "https://en.wikipedia.org/wiki/Snowmass_(ski_area)", title: "Snowmass (ski area) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-snowmass-village-colorado, url: "https://en.wikipedia.org/wiki/Snowmass_Village,_Colorado", title: "Snowmass Village, Colorado (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-buttermilk-ski-area, url: "https://en.wikipedia.org/wiki/Buttermilk_(ski_area)", title: "Buttermilk (ski area) (Wikipedia)", accessed_date: 2026-10-11}
+  - {id: wikipedia-x-games, url: https://en.wikipedia.org/wiki/X_Games, title: X Games (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-jay-kemmerer, url: https://en.wikipedia.org/wiki/Jay_Kemmerer, title: Jay Kemmerer (Wikipedia), accessed_date: 2026-10-11}
+  - {id: wikipedia-powdr, url: https://en.wikipedia.org/wiki/Powdr, title: Powdr (Wikipedia), accessed_date: 2026-10-11}
+  - {id: access-wikipedia-start-bus, url: "https://en.wikipedia.org/wiki/START_Bus", title: "START Bus (Wikipedia)", accessed_date: 2026-10-13}
+  - {id: access-wikipedia-rfta, url: "https://en.wikipedia.org/wiki/Roaring_Fork_Transportation_Authority", title: "Roaring Fork Transportation Authority (Wikipedia)", accessed_date: 2026-10-13}
+  - {id: access-wikipedia-telluride-colorado, url: "https://en.wikipedia.org/wiki/Telluride,_Colorado", title: "Telluride, Colorado (Wikipedia), transportation", accessed_date: 2026-10-13, note: "Free gondola to Mountain Village."}
+  - {id: access-wikipedia-bozeman-montana, url: "https://en.wikipedia.org/wiki/Bozeman,_Montana", title: "Bozeman, Montana (Wikipedia), transportation", accessed_date: 2026-10-13, note: "Skyline bus between Bozeman and Big Sky."}
+  - {id: access-wikipedia-taos-new-mexico, url: "https://en.wikipedia.org/wiki/Taos,_New_Mexico", title: "Taos, New Mexico (Wikipedia), transportation", accessed_date: 2026-10-13, note: "Chile Line seasonal service to Taos Ski Valley."}
+  - {id: access-sugarloaf-shuttles, url: "https://www.sugarloaf.com/shuttles", title: "Sugarloaf Shuttles (Sugarloaf)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. The free Sugarloaf Explorer, owned and run by Western Maine Transportation, serves condos and villages across Carrabassett Valley on set routes."}
+  - {id: access-tart-sugar-bowl-shuttle, url: "https://tahoetruckeetransit.com/sugar-bowl-donner-summit-shuttle", title: "Sugar Bowl Donner Summit Shuttle (Tahoe Truckee Area Regional Transit)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free public shuttle, December 8, 2025 to April 12, 2026, from the Cold Stream Road TART stop with timed transfers to the Truckee Local route."}
+  - {id: access-waterville-resort-shuttle, url: "https://waterville.com/resort-shuttle", title: "Resort Shuttle (Waterville Valley Resort)", accessed_date: 2026-10-13, note: "From a search result for this page; page not opened. Free on demand shuttle in ski season linking the ski area, lodges, condominiums and Town Square."}
+  - {id: openskimap-lift-jackson-hole-aerial-tram, url: "https://openskimap.org/", title: "Aerial Tram bottom station, Jackson Hole Mountain Resort (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Teton Village point. Lift 'Aerial Tram' (OpenStreetMap way/15778675, OpenSkiMap lift ea46c6b659ce667178451287f1123ae3d86f51c7); its bottom station is OpenStreetMap node/158165879 at 43.5875426, -110.82789, 1926 m. Wikipedia (wikipedia-jackson-hole-mountain-resort) places the resort in Teton Village and says the tram rises 4,139 ft to 10,450 ft, which puts its bottom at the 6,311 ft base. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-dollar-mountain-dollar, url: "https://openskimap.org/", title: "Dollar bottom station, Dollar Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Dollar day lodge point. Lift 'Dollar' (OpenStreetMap way/13728602, OpenSkiMap lift af96d1f9fc12cc3ba3e1d03d832e61f3ed5cc687); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 43.689827, -114.3458385, 1817 m. Wikipedia (wikipedia-dollar-mountain) puts the day lodge at the base of Dollar and names the Dollar, Half Dollar, Quarter Dollar and Elkhorn chairs. Dollar has the largest vertical rise (185 m) of the lifts at that base; Elkhorn starts at Elkhorn Village, 1.5 km south. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-alta-collins, url: "https://openskimap.org/", title: "Collins bottom station, Alta Ski Area (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Wildcat base point. Lift 'Collins' (OpenStreetMap way/10140309, OpenSkiMap lift 9a0cb0074e4212dc4c149287bb2b64eb67a64560); its bottom station is OpenStreetMap way/232716841 at 40.587955, -111.637994, 2603 m. Wikipedia (wikipedia-alta-ski-area) names the Wildcat and Albion base areas and gives an 8,530 ft base elevation, which matches the Wildcat base in Collins Gulch (Collins bottom 8,542 ft; Albion's Sunnyside bottom 8,652 ft). Collins, the two stage high speed quad, has the largest vertical rise of the lifts there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-sugarloaf-superquad, url: "https://openskimap.org/", title: "Sugarloaf SuperQuad bottom station, Sugarloaf (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base Lodge point. Lift 'Sugarloaf SuperQuad' (OpenStreetMap way/137778468, OpenSkiMap lift 68e18ca3a18bda9571eb18cb52477370ec07c5c5); its bottom station is OpenStreetMap way/1240350167 at 45.0538156, -70.3103429, 538 m. Wikipedia (wikipedia-sugarloaf-ski-resort) names the Base Lodge, with the bus drop off in front of it and the Sawduster carrying passengers from the Inn to it. The SuperQuad bottom is 0.17 km from the Sawduster top and has the largest vertical rise (538 m) of the lifts starting there. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-burke-carpet, url: "https://openskimap.org/", title: "Carpet bottom station, Burke Mountain Ski Area (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Lower base point. Lift 'Carpet' (OpenStreetMap way/235742403, OpenSkiMap lift 445ab70bb9503e7daebcc356234b75499bf490b9); its bottom station is OpenStreetMap node/2437989318 at 44.5874555, -71.9156098, 371 m. Wikipedia (wikipedia-burke-mountain-ski-area) names no base area. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. The Sherburne Express and J-Bar bottoms are within 50 m, and its 1,216 ft elevation is close to the article's 1,210 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+  - {id: openskimap-lift-taos-lift-1, url: "https://openskimap.org/", title: "Lift 1 bottom station, Taos Ski Valley (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)", accessed_date: 2026-10-12, note: "Base village point. Lift 'Lift 1' (OpenStreetMap way/53215268, OpenSkiMap lift ab73245c4043c87f2ca90f4095a2aa2d25323059); its bottom station is OpenStreetMap node/673538178 at 36.5944413, -105.449452, 2876 m. Wikipedia (wikipedia-taos-ski-valley) describes Taos Ski Valley as a village and ski resort, with the village at 9,321 ft and the ski base at 9,200 ft, and names no main lift. Lift 1 has the largest vertical rise (514 m) of the lifts starting in the base village (bottom stations within 0.4 km). Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."}
+resorts:
+  - id: jackson-hole
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Jackson Hole Mountain Resort
+    state: WY
+    owner: {value: "Eric Macy and Mike Corbat", source_id: wikipedia-jay-kemmerer, as_of: 2026-10-11, confidence: published, note: "Jay Kemmerer, who bought the resort for his family in 1992, sold it on February 1, 2024 to board members Eric Macy and Mike Corbat; the Kemmerer family remains an equity owner. Not confirmed on the resort site."}
+    operator_scale: {value: 2, source_id: wikipedia-jay-kemmerer, as_of: 2026-10-13, confidence: estimated, note: "Owned since 2024 by two individual investors, board members Eric Macy and Mike Corbat, with the Kemmerer family keeping equity. Independent single resort."}
+    access: {rating: transit_friendly, summary_md: "START buses link Jackson, Star Valley and Teton Valley with Teton Village at the base.", source_id: access-wikipedia-start-bus, as_of: 2026-10-13, confidence: published, note: "START was founded to carry skiers between Jackson and the resort and now serves commuters."}
+    # Teton Village: Aerial Tram bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (43.59, -110.89), 5.0 km away.
+    lat: 43.58754
+    lon: -110.82789
+    location_source_id: openskimap-lift-jackson-hole-aerial-tram
+    cluster_hint: tetons
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Jackson Hole is known for its steep, challenging terrain including Corbet's Couloir and a 4,139 ft continuous vertical, with half its terrain rated expert.", source_id: wikipedia-jackson-hole-mountain-resort}
+      - {criterion: heritage, rationale: "Jackson Hole hosted World Cup races in the tour's inaugural 1967 season and again in 1970 and 1975, and held the first national Powder 8 Championship in 1970.", source_id: wikipedia-jackson-hole-mountain-resort}
+    size:
+      acres: {value: 2500, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Inbounds; the infobox adds 3,000 acres of gated backcountry."}
+      vertical_ft: {value: 4139, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 16, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published, note: "Sum of the infobox list (1 tram, 2 gondolas, 10 chairlifts, 2 magic carpets, 1 rope tow)."}
+    elevation:
+      base_ft: {value: 6311, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 10450, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 10, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 40, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 50, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-12, confidence: published, note: "Infobox labels this black diamond share most difficult; the article says half of the terrain is rated expert. Source combines advanced and expert."}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 459, source_id: wikipedia-jackson-hole-mountain-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: aspen-mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Aspen Mountain
+    state: CO
+    owner: {value: Aspen Skiing Company, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "The Aspen Skiing Company article says the company is owned by the Crown family of Illinois."}
+    operator_scale: {value: 3, source_id: wikipedia-aspen-skiing-company, as_of: 2026-10-13, confidence: estimated, note: "Owned by the Crown family, but Aspen Skiing Company is a commercial enterprise under the Aspen One umbrella with a professional CEO; it runs four ski areas, one ski school across them and hotels in Colorado and Idaho, and the Crowns also co own Alterra. Scored as a large scale corporate operation, the same rule as Boyne."}
+    access: {rating: transit_friendly, summary_md: "Free RFTA buses run within Aspen and Snowmass Village, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.", source_id: access-wikipedia-rfta, as_of: 2026-10-13, confidence: published, note: "Aspen Mountain rises directly above the town of Aspen."}
+    lat: 39.18639
+    lon: -106.81861
+    location_source_id: wikipedia-aspen-mountain-ski-area
+    cluster_hint: roaring-fork
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Founded in 1946, Aspen opened Lift 1, then the world's longest chairlift, and in 1950 hosted the FIS World Alpine Championships, the first international ski competition in the United States.", source_id: wikipedia-aspen-skiing-company}
+      - {criterion: diehard, rationale: "Aspen Mountain has no beginner runs and keeps a homespun, throwback local culture dating from its 1940s founding, visible in homemade memorials in its trees.", source_id: wikipedia-aspen-mountain-ski-area}
+    size:
+      acres: {value: 673, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3267, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 9, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 7945, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 11212, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 0, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published, note: "Infobox lists the shares without a percent sign (0, 48, 26, 26 of 76 trails); they sum to 100. The article says there are no beginner runs and about 26% of the terrain is expert."}
+      intermediate_pct: {value: 48, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 26, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 26, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-aspen-mountain-ski-area, as_of: 2026-10-13, confidence: published}
+
+  - id: aspen-highlands
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Aspen Highlands
+    state: CO
+    owner: {value: Aspen Skiing Company, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published, note: "Aspen Skiing Company assumed ownership and operation in 1993 per its own article."}
+    operator_scale: {value: 3, source_id: wikipedia-aspen-skiing-company, as_of: 2026-10-13, confidence: estimated, note: "Owned by the Crown family, but Aspen Skiing Company is a commercial enterprise under the Aspen One umbrella with a professional CEO; it runs four ski areas, one ski school across them and hotels in Colorado and Idaho, and the Crowns also co own Alterra. Scored as a large scale corporate operation, the same rule as Boyne."}
+    access: {rating: transit_friendly, summary_md: "Free RFTA buses run within Aspen and Snowmass Village, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.", source_id: access-wikipedia-rfta, as_of: 2026-10-13, confidence: published, note: "RFTA history: the Aspen Free Shuttle served the Aspen Skiing Company mountains."}
+    lat: 39.18111
+    lon: -106.85639
+    location_source_id: wikipedia-aspen-highlands
+    cluster_hint: roaring-fork
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Aspen Highlands is famous for Highland Bowl and other experts only terrain, with 65 percent of its runs rated expert.", source_id: wikipedia-aspen-highlands}
+    size:
+      acres: {value: 1010, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3638, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published, note: "Infobox value. Its top (12,392) and base (8,040) elevations imply 4,352 ft; the top likely includes hike to Highland Bowl."}
+      lifts: {value: 5, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 8040, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 12392, source_id: wikipedia-aspen-highlands, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 0, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published, note: "Infobox lists the shares without a percent sign (0, 23, 12, 65 of 118 trails); they sum to 100, so they read as percentages."}
+      intermediate_pct: {value: 23, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 12, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 65, source_id: wikipedia-aspen-highlands, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-aspen-highlands, as_of: 2026-10-13, confidence: published}
+
+  - id: telluride
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Telluride Ski Resort
+    state: CO
+    owner: {value: Chuck Horning, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published, note: "Through Telluride Ski & Golf. The article says ownership passed to Horning in February 2004 and that he remains the current owner; that sentence is marked citation needed."}
+    operator_scale: {value: 2, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-13, confidence: estimated, note: "Owned by Chuck Horning through Telluride Ski & Golf; individual owner of a single resort company."}
+    access: {rating: convenient, summary_md: "A free gondola links the town of Telluride with Mountain Village at the base of the ski area.", source_id: access-wikipedia-telluride-colorado, as_of: 2026-10-13, confidence: published}
+    lat: 37.93639
+    lon: -107.82028
+    location_source_id: wikipedia-telluride-ski-resort
+    cluster_hint: southwest-colorado
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Telluride is known for its advanced terrain, with 41 percent of runs rated advanced or expert.", source_id: wikipedia-telluride-ski-resort}
+    size:
+      acres: {value: 2000, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3845, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published, note: "Lift served; 4,425 ft including hike to terrain."}
+      lifts: {value: 18, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published, note: "Sum of the infobox list (2 gondolas, 12 chairlifts, 2 surface lifts, 2 magic carpets)."}
+    elevation:
+      base_ft: {value: 8725, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 13150, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-11, confidence: published, note: "Includes hike to terrain."}
+    terrain:
+      beginner_pct: {value: 23, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 36, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 41, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 330, source_id: wikipedia-telluride-ski-resort, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text says over 300 in each winter season."}
+
+  - id: sun-valley
+    name: Sun Valley (Bald Mountain)
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: ID
+    owner: {value: R. Earl Holding family (Grand America Hotels & Resorts), source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Infobox owner. Earl Holding died in 2013 and Carol Holding in December 2024; their children continue to run the resort."}
+    operator_scale: {value: 1, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-13, confidence: published, note: "The infobox says Sun Valley is privately owned by the R. Earl Holding family; the Holding children run the resort directly. The family also owns Snowbasin and Grand America Hotels, but it runs these resorts itself rather than through a multi resort corporate operator, so it is scored family owned."}
+    access: {rating: transit_friendly, summary_md: "Mountain Rides runs public buses in Ketchum and Blaine County, the home of Bald Mountain.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: estimated, note: "List row only; that routes reach the River Run and Warm Springs bases is inferred."}
+    lat: 43.655
+    lon: -114.40917
+    location_source_id: wikipedia-bald-mountain-idaho
+    cluster_hint: wood-river
+    openskimap_names: ["Sun Valley - Bald Mountain"]
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Sun Valley, opened in 1936 by Union Pacific chairman W. Averell Harriman, was the first destination winter resort in the US. Bald Mountain opened for lift served skiing in 1939 to 1940, and from 1940 its Warm Springs side hosted the Harriman Cup, part of the first major international ski competitions in North America.", source_id: wikipedia-sun-valley-idaho}
+      - {criterion: luxury, rationale: "The region has been a seasonal home to the rich and famous since Ernest Hemingway brought it to public attention in the late 1930s.", source_id: wikipedia-sun-valley-idaho}
+      - {criterion: athlete_development, rationale: "Sun Valley was a training site for many nations' alpine and Nordic teams during the 2002 Winter Olympics and hosted the U.S. Alpine Championships on Warm Springs in 2016 and 2018; its Olympic medalists include Gretchen Fraser, Christin Cooper, Picabo Street and Kaitlyn Farrington.", source_id: wikipedia-sun-valley-idaho}
+    size:
+      acres: {value: 2054, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3400, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 15, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published, note: "Infobox list (1 gondola, 2 six packs, 6 high speed quads, 2 triples, 1 surface lift sums to 12); the infobox total is 15 and the article body says fourteen."}
+    elevation:
+      base_ft: {value: 5750, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published, note: "River Run base."}
+      summit_ft: {value: 9150, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 36, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published, note: "Bald Mountain. The article notes the ratings are relative; much of the easiest terrain would rate intermediate elsewhere."}
+      intermediate_pct: {value: 42, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 22, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 220, source_id: wikipedia-bald-mountain-idaho, as_of: 2026-10-13, confidence: published, note: "Infobox of the Bald Mountain article."}
+
+  - id: dollar-mountain
+    name: Dollar Mountain
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: ID
+    owner: {value: R. Earl Holding family (Grand America Hotels & Resorts), source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-11, confidence: published, note: "Part of the Sun Valley ski resort; the Sun Valley article infobox gives the owner."}
+    operator_scale: {value: 1, source_id: wikipedia-sun-valley-idaho, as_of: 2026-10-13, confidence: published, note: "Part of the Sun Valley resort. The infobox says Sun Valley is privately owned by the R. Earl Holding family; the Holding children run the resort directly. The family also owns Snowbasin and Grand America Hotels, but it runs these resorts itself rather than through a multi resort corporate operator, so it is scored family owned."}
+    access: {rating: transit_friendly, summary_md: "Mountain Rides runs public buses in Ketchum, Sun Valley and Blaine County.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: estimated, note: "List row only; that routes reach Dollar Mountain is inferred."}
+    # Dollar day lodge: Dollar bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (43.68306, -114.34694), 0.8 km away.
+    lat: 43.68983
+    lon: -114.34584
+    location_source_id: openskimap-lift-dollar-mountain-dollar
+    cluster_hint: wood-river
+    openskimap_names: ["Sun Valley - Dollar Mountain"]
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "The world's first chairlifts were installed on Sun Valley's Proctor and Dollar mountains in the fall of 1936. Dollar Mountain Lodge, opened in November 2004, is the headquarters of the Sun Valley Ski School.", source_id: wikipedia-sun-valley-idaho}
+    size:
+      acres: null
+      vertical_ft: {value: 628, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 4, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published, note: "Chairlifts (2 detachable quads, 1 triple, 1 double); the article also mentions a magic carpet for first time skiers."}
+    elevation:
+      base_ft: {value: 6010, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 6638, source_id: wikipedia-dollar-mountain, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-dollar-mountain, as_of: 2026-10-13, confidence: published}
+
+  - id: alta
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Alta Ski Area
+    state: UT
+    owner: {value: "Private shareholders (Laughlin family 51%, Quinney family 25%, Bass family 11%)", source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 1, source_id: wikipedia-alta-ski-area, as_of: 2026-10-13, confidence: estimated, note: "Single resort owned by several individuals; the Laughlin family holds a 51 percent majority (Quinney 25, Bass 11). Scored family owned because one family controls it."}
+    access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses run up Little Cottonwood Canyon from the Salt Lake Valley.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: published, note: "Sandy, Utah article: the ski route runs from Historic Sandy TRAX station to Alta and Snowbird."}
+    # Wildcat base: Collins bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (40.58083, -111.63722), 0.8 km away.
+    lat: 40.58796
+    lon: -111.63799
+    location_source_id: openskimap-lift-alta-collins
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Alta is one of the oldest ski resorts in the country, opening its first lift on January 15, 1939.", source_id: wikipedia-alta-ski-area}
+    size:
+      acres: {value: 2614, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2538, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 12, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published, note: "Sum of the infobox list (7 chairlifts, 5 surface tows)."}
+    elevation:
+      base_ft: {value: 8530, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 11068, source_id: wikipedia-alta-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 30, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 55, source_id: wikipedia-alta-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 545, source_id: wikipedia-alta-ski-area, as_of: 2026-10-13, confidence: published, note: "Infobox value. The article text gives 543 in."}
+
+  - id: snowbird
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Snowbird
+    state: UT
+    owner: {value: POWDR, source_id: wikipedia-powdr, as_of: 2026-10-11, confidence: published, note: "The POWDR article lists Snowbird among its ski resorts, citing the NSAA 2023 ownership list; POWDR was founded by John Cumming, son of Ian Cumming, who became Snowbird majority owner in 2014. Not confirmed on snowbird.com."}
+    operator_scale: {value: 3, source_id: wikipedia-powdr, as_of: 2026-10-13, confidence: published, note: "POWDR is a privately held company that owns and operates ski resorts and Woodward parks in several states. Large scale corporate operation."}
+    access: {rating: transit_friendly, summary_md: "Seasonal UTA ski buses run up Little Cottonwood Canyon from the Salt Lake Valley.", source_id: access-wikipedia-utah-transit-authority, as_of: 2026-10-13, confidence: published, note: "Sandy, Utah article: the ski route runs from Historic Sandy TRAX station to Alta and Snowbird."}
+    lat: 40.58111
+    lon: -111.65639
+    location_source_id: wikipedia-snowbird-utah
+    cluster_hint: wasatch
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Snowbird is mainly known for powder skiing and for particularly challenging terrain, with most runs rated intermediate or harder.", source_id: wikipedia-snowbird-utah}
+    size:
+      acres: {value: 2500, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3240, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 13, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 8100, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published, note: "Main base area; the lowest chairlift starts at 7,760 ft."}
+      summit_ft: {value: 11000, source_id: wikipedia-snowbird-utah, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 27, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 38, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 35, source_id: wikipedia-snowbird-utah, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 500, source_id: wikipedia-snowbird-utah, as_of: 2026-10-13, confidence: published, note: "Infobox average. It also lists a record of 838 in for 2023."}
+
+  - id: sugarloaf
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Sugarloaf
+    state: ME
+    owner: {value: Boyne Resorts, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner. The article body says American Skiing Company sold Sugarloaf to CNL Lifestyle Properties in 2007, to be managed by Boyne, and does not describe a later transfer to Boyne."}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
+    access: {rating: transit_friendly, summary_md: "The free Sugarloaf Explorer, run by Western Maine Transportation, links condos and villages across Carrabassett Valley with the resort.", source_id: access-sugarloaf-shuttles, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened."}
+    # Base Lodge: Sugarloaf SuperQuad bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (45.03139, -70.31306), 2.5 km away.
+    lat: 45.05382
+    lon: -70.31034
+    location_source_id: openskimap-lift-sugarloaf-superquad
+    cluster_hint: western-maine
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Carrabassett Valley Academy, a ski and snowboard academy at the base of Sugarloaf since 1982, counts 12 Olympians and 39 US national team members among its alumni.", source_id: wikipedia-carrabassett-valley-academy}
+    size:
+      acres: {value: 1360, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2820, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 15, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 1417, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 4237, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 23, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published, note: "Article text: 40 green, 54 blue, 44 black diamond and 36 double black diamond trails."}
+      intermediate_pct: {value: 31, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 25, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 21, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-sugarloaf-ski-resort, as_of: 2026-10-13, confidence: published, note: "Infobox gives this as a 10 year average."}
+
+  - id: sugar-bowl
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Sugar Bowl Ski Resort
+    state: CA
+    owner: {value: Privately owned (independent), source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published, note: "The article calls it one of the few remaining privately owned resorts in the Lake Tahoe area but does not name the owner."}
+    operator_scale: {value: 2, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-13, confidence: published, note: "The article calls it one of the few remaining privately owned resorts in the Lake Tahoe area. Independent business."}
+    access: {rating: mixed, summary_md: "A free seasonal shuttle makes several daily trips from Truckee to Sugar Bowl, timed with TART's Truckee Local route.", source_id: access-tart-sugar-bowl-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Six departures a day from Cold Stream Road in 2025 to 2026; it does not run when Old Highway 40 is closed."}
+    lat: 39.30444
+    lon: -120.33583
+    location_source_id: wikipedia-sugar-bowl-ski-resort
+    cluster_hint: lake-tahoe
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Founded by Austrian champion Hannes Schroll with Walt Disney as an early shareholder, Sugar Bowl was the first ski area in California to install a chairlift and the first on the West Coast to install a gondola.", source_id: wikipedia-sugar-bowl-ski-resort}
+      - {criterion: athlete_development, rationale: "Sugar Bowl Academy, a college preparatory high school for competitive skiers, was founded at the resort in 1999 and co founded by former US Ski Team member Tricia Hellman Gibbs.", source_id: wikipedia-sugar-bowl-ski-resort}
+    size:
+      acres: {value: 1650, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: null
+      lifts: {value: 13, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published}
+    elevation:
+      base_ft: {value: 6883, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 8383, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 17, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 45, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 38, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 500, source_id: wikipedia-sugar-bowl-ski-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: burke
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Burke Mountain Ski Area
+    state: VT
+    owner: {value: Bear Den Partners, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Purchased in April 2025 for a reported 11.5 million dollars after a period of federal receivership tied to the Jay Peak EB 5 case."}
+    operator_scale: {value: 2, source_id: wikipedia-berkshire-east-ski-resort, as_of: 2026-10-13, confidence: published, note: "Owned by Bear Den Partners, which the Berkshire East article calls a New England ski resort investment group (Berkshire East, Burke, a majority of Smugglers' Notch)."}
+    access: {rating: car_centric, summary_md: "Staff typically drive to the resort on Burke Mountain in Vermont's Northeast Kingdom.", source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Burke, Vermont article."}
+    # Lowest lift base: Carpet bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (44.57, -71.895), 2.5 km away.
+    lat: 44.58746
+    lon: -71.91561
+    location_source_id: openskimap-lift-burke-carpet
+    cluster_hint: northern-vermont
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Burke Mountain Academy, founded in 1970 as the first ski academy in North America, trains alpine ski racers on the slopes of Burke Mountain Ski Area.", source_id: wikipedia-burke-mountain-academy}
+    size:
+      acres: {value: 260, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2057, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 4, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published, note: "Sum of the infobox list (2 high speed quads, 1 J bar, 1 T bar)."}
+    elevation:
+      base_ft: {value: 1210, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 3267, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-11, confidence: published}
+    snow:
+      annual_avg_in: {value: 217, source_id: wikipedia-burke-mountain-ski-area, as_of: 2026-10-13, confidence: published}
+
+  - id: waterville-valley
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "All draft Tier A records approved"}
+    name: Waterville Valley Resort
+    state: NH
+    owner: {value: Sununu family and area investors, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published, note: "Purchased October 2010; the article says it remains independent."}
+    operator_scale: {value: 2, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-13, confidence: published, note: "Sununu family and area investors; the article says the resort remains independent. Investor group, no single family majority stated."}
+    access: {rating: convenient, summary_md: "A free on demand resort shuttle links the ski area with the lodges, condos and Town Square of Waterville Valley.", source_id: access-waterville-resort-shuttle, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. The resort operates within the planned resort community of Waterville Valley (wikipedia-waterville-valley-resort)."}
+    lat: 43.96528
+    lon: -71.52778
+    location_source_id: wikipedia-waterville-valley-resort
+    cluster_hint: white-mountains
+    tier_a_criteria:
+      - {criterion: athlete_development, rationale: "Waterville hosts the Black and Blue Trail Smashers, one of the oldest ski clubs in the US (1934) and USSA Club of the Year in 2006, and Waterville Valley Academy trains skiers and snowboarders there.", source_id: wikipedia-waterville-valley-resort}
+      - {criterion: heritage, rationale: "Waterville first hosted World Cup alpine races in 1969, was a regular tour stop through most of the 1980s, and in 2024 held the first dual moguls World Cup on American soil.", source_id: wikipedia-waterville-valley-resort}
+    size:
+      acres: {value: 265, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2020, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 10, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published, note: "Sum of the infobox list (1 six pack, 2 triples, 2 doubles, 1 platter, 2 T bars, 2 conveyors); the article also says a new Exhibition T bar replaced the Exhibition and World Cup surface lifts for 2025 to 2026, so the current count may be 9."}
+    elevation:
+      base_ft: {value: 1820, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 3840, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-11, confidence: published, note: "Lift served; true summit 3,997 ft."}
+    terrain:
+      beginner_pct: {value: 15, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 59, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 26, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-12, confidence: published, note: "Infobox labels the black diamond share Expert; the article lead says 26% advanced/expert. Source combines advanced and expert."}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 148, source_id: wikipedia-waterville-valley-resort, as_of: 2026-10-13, confidence: published}
+
+  - id: big-sky
+    name: Big Sky Resort
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: MT
+    owner: {value: Boyne Resorts, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "Infobox owner; the article says Boyne Resorts purchased the resort in 1976."}
+    operator_scale: {value: 3, source_id: wikipedia-boyne-resorts, as_of: 2026-10-13, confidence: published, note: "Boyne Resorts is family controlled (Kircher family) but operates 12 resort properties including 10 ski resorts and 12 golf courses across several states. Scored as a large scale corporate operation, the same rule as Aspen Skiing Company."}
+    access: {rating: transit_friendly, summary_md: "The Skyline bus runs between Bozeman and Big Sky.", source_id: access-wikipedia-bozeman-montana, as_of: 2026-10-13, confidence: published}
+    lat: 45.275
+    lon: -111.4319
+    location_source_id: wikipedia-big-sky-resort
+    cluster_hint: southwest-montana
+    openskimap_names: ["Big Sky Resort"]
+    tier_a_criteria:
+      - {criterion: diehard, rationale: "Half of Big Sky's 320 plus runs are rated advanced (31 percent) or expert and extreme (19 percent), and the Lone Peak Tram reaches its most difficult terrain from the 11,166 ft summit of Lone Mountain.", source_id: wikipedia-big-sky-resort}
+    size:
+      acres: {value: 5850, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "Includes Moonlight Basin terrain merged in October 2013."}
+      vertical_ft: {value: 4350, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 40, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "1 aerial tram, 2 gondolas, 8 high speed detachable chairlifts, 16 fixed grip chairlifts, 13 surface lifts."}
+    elevation:
+      base_ft: {value: 6800, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published, note: "Lone Moose base; Mountain Village base is 7,500 ft."}
+      summit_ft: {value: 11166, source_id: wikipedia-big-sky-resort, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 21, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 29, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 31, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 19, source_id: wikipedia-big-sky-resort, as_of: 2026-10-12, confidence: published, note: "Source labels this double black diamond share expert and extreme."}
+
+  - id: taos
+    name: Taos Ski Valley
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: NM
+    owner: {value: "Louis Bacon (Taos Ski Valley, Inc.)", source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "The Blake family sold Taos Ski Valley, Inc. to Louis Bacon in December 2013."}
+    operator_scale: {value: 2, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-13, confidence: estimated, note: "Louis Bacon, an individual investor, owns Taos Ski Valley, Inc. since 2013. Independent single resort company."}
+    access: {rating: transit_friendly, summary_md: "The Chile Line bus runs free service in Taos and seasonal service up to Taos Ski Valley.", source_id: access-wikipedia-taos-new-mexico, as_of: 2026-10-13, confidence: published, note: "North Central RTD article also lists seasonal daily service from Taos to the ski valley."}
+    # Base village: Lift 1 bottom station (OpenSkiMap lifts), chosen over the
+    # Wikipedia infobox coordinate (36.59, -105.43694), 1.2 km away.
+    lat: 36.59444
+    lon: -105.44945
+    location_source_id: openskimap-lift-taos-lift-1
+    cluster_hint: northern-new-mexico
+    openskimap_names: ["Taos Ski Valley"]
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Ernie Blake founded Taos Ski Valley with his wife Rhoda and was inducted into the US Ski Hall of Fame in 1987.", source_id: wikipedia-ernie-blake}
+      - {criterion: diehard, rationale: "Founded in 1955, Taos rates 51 percent of its 110 trails advanced or expert, prohibited snowboarding until March 2008, and was home to the Ernie Blake Snowsports School, one of the highest rated ski schools in North America.", source_id: wikipedia-taos-ski-valley}
+    size:
+      acres: {value: 1294, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 3281, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 14, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "1 gondola, 4 quads, 4 triples, 1 double, 4 surface lifts."}
+    elevation:
+      base_ft: {value: 9200, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 12481, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-11, confidence: published, note: "Top of the Kachina lift."}
+    terrain:
+      beginner_pct: {value: 24, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 25, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 51, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-12, confidence: published, note: "Source combines advanced and expert."}
+      expert_pct: null
+    snow:
+      annual_avg_in: {value: 300, source_id: wikipedia-taos-ski-valley, as_of: 2026-10-13, confidence: published}
+
+  - id: snowmass
+    name: Snowmass
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: CO
+    owner: {value: Aspen Skiing Company, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published, note: "Owned and operated by Aspen Skiing Company, which its own article says is owned by the Crown family of Illinois."}
+    operator_scale: {value: 3, source_id: wikipedia-aspen-skiing-company, as_of: 2026-10-13, confidence: estimated, note: "Owned by the Crown family, but Aspen Skiing Company is a commercial enterprise under the Aspen One umbrella with a professional CEO; it runs four ski areas, one ski school across them and hotels in Colorado and Idaho, and the Crowns also co own Alterra. Scored as a large scale corporate operation, the same rule as Boyne."}
+    access: {rating: transit_friendly, summary_md: "Free RFTA buses run within Snowmass Village and to Aspen, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.", source_id: access-wikipedia-rfta, as_of: 2026-10-13, confidence: published}
+    lat: 39.1956
+    lon: -106.9513
+    location_source_id: wikipedia-snowmass-ski-area
+    cluster_hint: roaring-fork
+    openskimap_names: ["Aspen Snowmass"]
+    tier_a_criteria:
+      - {criterion: luxury, rationale: "Snowmass Village has seen a building boom of luxury homes, mountainside mansions and new hotels, with a rising influx of wealthy tourists and skiers. The ski area opened in 1967 with Olympic medalist Stein Eriksen directing its ski school.", source_id: wikipedia-snowmass-village-colorado}
+    size:
+      acres: {value: 3362, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 4406, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 16, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published, note: "3 gondolas, 7 high speed quads, 2 high speed sixes, 2 quads, 1 double, 2 tows."}
+    elevation:
+      base_ft: {value: 8104, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 12510, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 6, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published, note: "Infobox lists the shares without a percent sign (6, 47, 17, 30 of 94 trails); they sum to 100, so they read as percentages."}
+      intermediate_pct: {value: 47, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 17, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 30, source_id: wikipedia-snowmass-ski-area, as_of: 2026-10-12, confidence: published}
+
+  - id: buttermilk
+    name: Buttermilk
+    tier_a_status: approved
+    approval: {by: "site owner", date: 2026-10-11, note: "Approved in Career Map planning session"}
+    state: CO
+    owner: {value: Aspen Skiing Company, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+    operator_scale: {value: 3, source_id: wikipedia-aspen-skiing-company, as_of: 2026-10-13, confidence: estimated, note: "Owned by the Crown family, but Aspen Skiing Company is a commercial enterprise under the Aspen One umbrella with a professional CEO; it runs four ski areas, one ski school across them and hotels in Colorado and Idaho, and the Crowns also co own Alterra. Scored as a large scale corporate operation, the same rule as Boyne."}
+    access: {rating: transit_friendly, summary_md: "Free RFTA buses run within Aspen and Snowmass Village, and regional RFTA buses connect Basalt, Carbondale and Glenwood Springs.", source_id: access-wikipedia-rfta, as_of: 2026-10-13, confidence: published, note: "RFTA history: the Aspen Free Shuttle served the Aspen Skiing Company mountains."}
+    lat: 39.205
+    lon: -106.86056
+    location_source_id: wikipedia-buttermilk-ski-area
+    cluster_hint: roaring-fork
+    openskimap_names: ["Buttermilk"]
+    tier_a_criteria:
+      - {criterion: heritage, rationale: "Buttermilk first hosted ESPN's Winter X Games in 2002, the first X Games held in Aspen, and the X Games has been held in Aspen every winter since.", source_id: wikipedia-x-games}
+    size:
+      acres: {value: 435, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+      vertical_ft: {value: 2030, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+      lifts: {value: 8, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published, note: "3 high speed quads, 1 double, 4 surface or ski school lifts."}
+    elevation:
+      base_ft: {value: 7870, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+      summit_ft: {value: 9900, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-11, confidence: published}
+    terrain:
+      beginner_pct: {value: 35, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+      intermediate_pct: {value: 39, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+      advanced_pct: {value: 26, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+      expert_pct: {value: 0, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-12, confidence: published}
+    snow:
+      annual_avg_in: {value: 200, source_id: wikipedia-buttermilk-ski-area, as_of: 2026-10-13, confidence: published}

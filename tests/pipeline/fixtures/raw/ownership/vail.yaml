@@ -1,0 +1,9 @@
+# SYNTHETIC TEST FIXTURE. Fictional portfolio. Never copy to data/.
+operator: Vail Resorts
+verified_date: 2026-10-01
+sources:
+  - {id: fixture-owner-list, url: https://example.org/owner, title: Fixture owner list, accessed_date: 2026-10-01}
+resorts:
+  - {name: Fixture Peak Resort, state: CO, source_id: fixture-owner-list, resort_id: fixture-peak, tier_a_candidate: true}
+  - {name: Fixture Ridge, state: CO, source_id: fixture-owner-list}
+  - {name: Fixture Feeder, state: PA, source_id: fixture-owner-list, tier_a_candidate: false, exclusion_reason: Regional feeder hill.}

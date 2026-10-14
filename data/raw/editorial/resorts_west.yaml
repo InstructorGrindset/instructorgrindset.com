@@ -1,0 +1,1183 @@
+# Phase 6 editorial drafts, western Tier A resorts. Drafted only from the cited sources; every entry stays status: draft until Alexandre reviews it.
+# Ownership statements repeat what the data/raw/tier_a records and the cited pages state.
+batch: editorial-west
+researched_date: '2026-10-12'
+sources:
+- id: ed-west-vail-10k-fy2026
+  url: "https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm"
+  title: "Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)"
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-alpine-meadows-ski-resort
+  url: https://en.wikipedia.org/wiki/Alpine_Meadows_(ski_resort)
+  title: Alpine Meadows (ski resort) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-alta-ski-area
+  url: https://en.wikipedia.org/wiki/Alta_Ski_Area
+  title: Alta Ski Area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-alta-utah
+  url: https://en.wikipedia.org/wiki/Alta,_Utah
+  title: Alta, Utah (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-alta-wyoming
+  url: https://en.wikipedia.org/wiki/Alta,_Wyoming
+  title: Alta, Wyoming (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-alyeska-resort
+  url: https://en.wikipedia.org/wiki/Alyeska_Resort
+  title: Alyeska Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-arapahoe-basin
+  url: https://en.wikipedia.org/wiki/Arapahoe_Basin
+  title: Arapahoe Basin (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-aspen-colorado
+  url: https://en.wikipedia.org/wiki/Aspen,_Colorado
+  title: Aspen, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-aspen-highlands
+  url: https://en.wikipedia.org/wiki/Aspen_Highlands
+  title: Aspen Highlands (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-aspen-mountain
+  url: https://en.wikipedia.org/wiki/Aspen_Mountain_(ski_area)
+  title: Aspen Mountain (ski area) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-aspen-skiing-company
+  url: https://en.wikipedia.org/wiki/Aspen_Skiing_Company
+  title: Aspen Skiing Company (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-avon-colorado
+  url: https://en.wikipedia.org/wiki/Avon,_Colorado
+  title: Avon, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-bald-mountain-idaho
+  url: https://en.wikipedia.org/wiki/Bald_Mountain_(Idaho)
+  title: Bald Mountain (Idaho) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-bear-mountain-ski-area
+  url: https://en.wikipedia.org/wiki/Bear_Mountain_(ski_area)
+  title: Bear Mountain (ski area) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-beaver-creek-resort
+  url: https://en.wikipedia.org/wiki/Beaver_Creek_Resort
+  title: Beaver Creek Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-bend-oregon
+  url: https://en.wikipedia.org/wiki/Bend,_Oregon
+  title: Bend, Oregon (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-big-bear-lake-california
+  url: https://en.wikipedia.org/wiki/Big_Bear_Lake,_California
+  title: Big Bear Lake, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-big-sky-montana
+  url: https://en.wikipedia.org/wiki/Big_Sky,_Montana
+  title: Big Sky, Montana (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-big-sky-resort
+  url: https://en.wikipedia.org/wiki/Big_Sky_Resort
+  title: Big Sky Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-bogus-basin
+  url: https://en.wikipedia.org/wiki/Bogus_Basin
+  title: Bogus Basin (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-boise-idaho
+  url: https://en.wikipedia.org/wiki/Boise,_Idaho
+  title: Boise, Idaho (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-boreal-mountain-resort
+  url: https://en.wikipedia.org/wiki/Boreal_Mountain_Resort
+  title: Boreal Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-bozeman-montana
+  url: https://en.wikipedia.org/wiki/Bozeman,_Montana
+  title: Bozeman, Montana (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-breckenridge-colorado
+  url: https://en.wikipedia.org/wiki/Breckenridge,_Colorado
+  title: Breckenridge, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-breckenridge-ski-resort
+  url: https://en.wikipedia.org/wiki/Breckenridge_Ski_Resort
+  title: Breckenridge Ski Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-bridger-bowl-ski-area
+  url: https://en.wikipedia.org/wiki/Bridger_Bowl_Ski_Area
+  title: Bridger Bowl Ski Area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-brighton-ski-resort
+  url: https://en.wikipedia.org/wiki/Brighton_Ski_Resort
+  title: Brighton Ski Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-brighton-utah
+  url: https://en.wikipedia.org/wiki/Brighton,_Utah
+  title: Brighton, Utah (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-buttermilk-ski-area
+  url: https://en.wikipedia.org/wiki/Buttermilk_(ski_area)
+  title: Buttermilk (ski area) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-copper-mountain-colorado
+  url: https://en.wikipedia.org/wiki/Copper_Mountain_(Colorado)
+  title: Copper Mountain (Colorado) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-crested-butte-colorado
+  url: https://en.wikipedia.org/wiki/Crested_Butte,_Colorado
+  title: Crested Butte, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-crested-butte-mountain-resort
+  url: https://en.wikipedia.org/wiki/Crested_Butte_Mountain_Resort
+  title: Crested Butte Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-crystal-mountain-washington
+  url: https://en.wikipedia.org/wiki/Crystal_Mountain_(Washington)
+  title: Crystal Mountain (Washington) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-deer-valley
+  url: https://en.wikipedia.org/wiki/Deer_Valley
+  title: Deer Valley (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-dollar-mountain
+  url: https://en.wikipedia.org/wiki/Dollar_Mountain
+  title: Dollar Mountain (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-driggs-idaho
+  url: https://en.wikipedia.org/wiki/Driggs,_Idaho
+  title: Driggs, Idaho (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-eden-utah
+  url: https://en.wikipedia.org/wiki/Eden,_Utah
+  title: Eden, Utah (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-fraser-colorado
+  url: https://en.wikipedia.org/wiki/Fraser,_Colorado
+  title: Fraser, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-frisco-colorado
+  url: https://en.wikipedia.org/wiki/Frisco,_Colorado
+  title: Frisco, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-girdwood-alaska
+  url: https://en.wikipedia.org/wiki/Girdwood,_Anchorage,_Alaska
+  title: Girdwood, Anchorage, Alaska (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-glacier-washington
+  url: https://en.wikipedia.org/wiki/Glacier,_Washington
+  title: Glacier, Washington (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-government-camp-oregon
+  url: https://en.wikipedia.org/wiki/Government_Camp,_Oregon
+  title: Government Camp, Oregon (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-grand-targhee-resort
+  url: https://en.wikipedia.org/wiki/Grand_Targhee_Resort
+  title: Grand Targhee Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-gunnison-colorado
+  url: https://en.wikipedia.org/wiki/Gunnison,_Colorado
+  title: Gunnison, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-heavenly-mountain-resort
+  url: https://en.wikipedia.org/wiki/Heavenly_Mountain_Resort
+  title: Heavenly Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-hood-river-oregon
+  url: https://en.wikipedia.org/wiki/Hood_River,_Oregon
+  title: Hood River, Oregon (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-howelsen-hill-ski-area
+  url: https://en.wikipedia.org/wiki/Howelsen_Hill_Ski_Area
+  title: Howelsen Hill Ski Area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-huntsville-utah
+  url: https://en.wikipedia.org/wiki/Huntsville,_Utah
+  title: Huntsville, Utah (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-jackson-hole-mountain-resort
+  url: https://en.wikipedia.org/wiki/Jackson_Hole_Mountain_Resort
+  title: Jackson Hole Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-jackson-wyoming
+  url: https://en.wikipedia.org/wiki/Jackson,_Wyoming
+  title: Jackson, Wyoming (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-jay-kemmerer
+  url: https://en.wikipedia.org/wiki/Jay_Kemmerer
+  title: Jay Kemmerer (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-june-lake-california
+  url: https://en.wikipedia.org/wiki/June_Lake,_California
+  title: June Lake, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-june-mountain-ski-area
+  url: https://en.wikipedia.org/wiki/June_Mountain_ski_area
+  title: June Mountain ski area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-ketchum-idaho
+  url: https://en.wikipedia.org/wiki/Ketchum,_Idaho
+  title: Ketchum, Idaho (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-keystone-colorado
+  url: https://en.wikipedia.org/wiki/Keystone,_Colorado
+  title: Keystone, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-keystone-resort
+  url: https://en.wikipedia.org/wiki/Keystone_Resort
+  title: Keystone Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-kirkwood-california
+  url: https://en.wikipedia.org/wiki/Kirkwood,_California
+  title: Kirkwood, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-kirkwood-mountain-resort
+  url: https://en.wikipedia.org/wiki/Kirkwood_Mountain_Resort
+  title: Kirkwood Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-lake-tahoe
+  url: https://en.wikipedia.org/wiki/Lake_Tahoe
+  title: Lake Tahoe (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-leadville-colorado
+  url: https://en.wikipedia.org/wiki/Leadville,_Colorado
+  title: Leadville, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-magic-mile
+  url: https://en.wikipedia.org/wiki/Magic_Mile
+  title: Magic Mile (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-mammoth-lakes-california
+  url: https://en.wikipedia.org/wiki/Mammoth_Lakes,_California
+  title: Mammoth Lakes, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-mammoth-mountain-resort
+  url: https://en.wikipedia.org/wiki/Mammoth_Mountain_Resort
+  title: Mammoth Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-missoula-montana
+  url: https://en.wikipedia.org/wiki/Missoula,_Montana
+  title: Missoula, Montana (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-montana-snowbowl
+  url: https://en.wikipedia.org/wiki/Montana_Snowbowl
+  title: Montana Snowbowl (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-mount-bachelor-ski-area
+  url: https://en.wikipedia.org/wiki/Mount_Bachelor_ski_area
+  title: Mount Bachelor ski area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-mount-hood-meadows
+  url: https://en.wikipedia.org/wiki/Mount_Hood_Meadows
+  title: Mount Hood Meadows (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-mountain-village-colorado
+  url: https://en.wikipedia.org/wiki/Mountain_Village,_Colorado
+  title: Mountain Village, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-mt-baker-ski-area
+  url: https://en.wikipedia.org/wiki/Mt._Baker_Ski_Area
+  title: Mt. Baker Ski Area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-northstar-california
+  url: https://en.wikipedia.org/wiki/Northstar_California
+  title: Northstar California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-olympic-valley-california
+  url: https://en.wikipedia.org/wiki/Olympic_Valley,_California
+  title: Olympic Valley, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-palisades-tahoe
+  url: https://en.wikipedia.org/wiki/Palisades_Tahoe
+  title: Palisades Tahoe (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-palmer-glacier
+  url: https://en.wikipedia.org/wiki/Palmer_Glacier
+  title: Palmer Glacier (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-park-city-mountain-resort
+  url: https://en.wikipedia.org/wiki/Park_City_Mountain_Resort
+  title: Park City Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-park-city-utah
+  url: https://en.wikipedia.org/wiki/Park_City,_Utah
+  title: Park City, Utah (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-powder-mountain
+  url: https://en.wikipedia.org/wiki/Powder_Mountain
+  title: Powder Mountain (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-powdr
+  url: https://en.wikipedia.org/wiki/Powdr
+  title: Powdr (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-running-springs-california
+  url: https://en.wikipedia.org/wiki/Running_Springs,_California
+  title: Running Springs, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-sandpoint-idaho
+  url: https://en.wikipedia.org/wiki/Sandpoint,_Idaho
+  title: Sandpoint, Idaho (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-schweitzer-mountain
+  url: https://en.wikipedia.org/wiki/Schweitzer_Mountain
+  title: Schweitzer Mountain (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-silverton-colorado
+  url: https://en.wikipedia.org/wiki/Silverton,_Colorado
+  title: Silverton, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-silverton-mountain
+  url: https://en.wikipedia.org/wiki/Silverton_Mountain
+  title: Silverton Mountain (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-ski-cooper
+  url: https://en.wikipedia.org/wiki/Ski_Cooper
+  title: Ski Cooper (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-snow-summit
+  url: https://en.wikipedia.org/wiki/Snow_Summit
+  title: Snow Summit (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-snow-valley-mountain-resort
+  url: https://en.wikipedia.org/wiki/Snow_Valley_Mountain_Resort
+  title: Snow Valley Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-snowbasin
+  url: https://en.wikipedia.org/wiki/Snowbasin
+  title: Snowbasin (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-snowbird-utah
+  url: https://en.wikipedia.org/wiki/Snowbird,_Utah
+  title: Snowbird, Utah (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-snowmass-ski-area
+  url: https://en.wikipedia.org/wiki/Snowmass_(ski_area)
+  title: Snowmass (ski area) (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-snowmass-village-colorado
+  url: https://en.wikipedia.org/wiki/Snowmass_Village,_Colorado
+  title: Snowmass Village, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-solitude-mountain-resort
+  url: https://en.wikipedia.org/wiki/Solitude_Mountain_Resort
+  title: Solitude Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-south-lake-tahoe-california
+  url: https://en.wikipedia.org/wiki/South_Lake_Tahoe,_California
+  title: South Lake Tahoe, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-stateline-nevada
+  url: https://en.wikipedia.org/wiki/Stateline,_Nevada
+  title: Stateline, Nevada (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-steamboat-ski-resort
+  url: https://en.wikipedia.org/wiki/Steamboat_Ski_Resort
+  title: Steamboat Ski Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-steamboat-springs-colorado
+  url: https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado
+  title: Steamboat Springs, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-steamboat-springs-winter-sports-club
+  url: "https://en.wikipedia.org/wiki/Steamboat_Springs_Winter_Sports_Club"
+  title: Steamboat Springs Winter Sports Club (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-stevens-pass-ski-area
+  url: https://en.wikipedia.org/wiki/Stevens_Pass_Ski_Area
+  title: Stevens Pass Ski Area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-sugar-bowl-ski-resort
+  url: https://en.wikipedia.org/wiki/Sugar_Bowl_Ski_Resort
+  title: Sugar Bowl Ski Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-summit-county-colorado
+  url: https://en.wikipedia.org/wiki/Summit_County,_Colorado
+  title: Summit County, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-sun-valley-idaho
+  url: https://en.wikipedia.org/wiki/Sun_Valley,_Idaho
+  title: Sun Valley, Idaho (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-taos-new-mexico
+  url: https://en.wikipedia.org/wiki/Taos,_New_Mexico
+  title: Taos, New Mexico (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-taos-ski-valley
+  url: https://en.wikipedia.org/wiki/Taos_Ski_Valley,_New_Mexico
+  title: Taos Ski Valley, New Mexico (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-telluride-colorado
+  url: https://en.wikipedia.org/wiki/Telluride,_Colorado
+  title: Telluride, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-telluride-ski-resort
+  url: https://en.wikipedia.org/wiki/Telluride_Ski_Resort
+  title: Telluride Ski Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-teton-county-wyoming
+  url: https://en.wikipedia.org/wiki/Teton_County,_Wyoming
+  title: Teton County, Wyoming (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-timberline-lodge
+  url: https://en.wikipedia.org/wiki/Timberline_Lodge
+  title: Timberline Lodge (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-timberline-lodge-ski-area
+  url: https://en.wikipedia.org/wiki/Timberline_Lodge_ski_area
+  title: Timberline Lodge ski area (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-truckee-california
+  url: https://en.wikipedia.org/wiki/Truckee,_California
+  title: Truckee, California (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-united-states-ski-team
+  url: https://en.wikipedia.org/wiki/United_States_Ski_Team
+  title: United States Ski Team (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-us-ski-and-snowboard
+  url: https://en.wikipedia.org/wiki/U.S._Ski_%26_Snowboard
+  title: U.S. Ski & Snowboard (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-utah-olympic-park
+  url: https://en.wikipedia.org/wiki/Utah_Olympic_Park
+  title: Utah Olympic Park (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-vail-colorado
+  url: https://en.wikipedia.org/wiki/Vail,_Colorado
+  title: Vail, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-vail-ski-resort
+  url: https://en.wikipedia.org/wiki/Vail_Ski_Resort
+  title: Vail Ski Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-whitefish-montana
+  url: https://en.wikipedia.org/wiki/Whitefish,_Montana
+  title: Whitefish, Montana (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-whitefish-mountain-resort
+  url: https://en.wikipedia.org/wiki/Whitefish_Mountain_Resort
+  title: Whitefish Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-winter-park-colorado
+  url: https://en.wikipedia.org/wiki/Winter_Park,_Colorado
+  title: Winter Park, Colorado (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-winter-park-resort
+  url: https://en.wikipedia.org/wiki/Winter_Park_Resort
+  title: Winter Park Resort (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-x-games
+  url: https://en.wikipedia.org/wiki/X_Games
+  title: X Games (Wikipedia)
+  accessed_date: '2026-10-12'
+- id: ed-west-wiki-yellowstone-club
+  url: https://en.wikipedia.org/wiki/Yellowstone_Club
+  title: Yellowstone Club (Wikipedia)
+  accessed_date: '2026-10-12'
+entries:
+- target: resort
+  id: vail
+  overview_md: "Vail Ski Resort sits above the town of Vail in Eagle County, Colorado, 97 miles west of Denver on I 70. At 5,289 acres it is the third largest single mountain ski resort in the U.S., with the Front Side, the Back Bowls and Blue Sky Basin. Vail opened in late 1962, founded by Pete Seibert and local rancher Earl Eaton. Vail Resorts owns and operates it along with nearby Beaver Creek, Breckenridge and Keystone. The company ranks Vail the second most visited mountain resort in the U.S. for the 2025/2026 season."
+  culture_md: "Vail Village follows Bavarian village styles with pedestrian streets, and it was built when the resort opened. The town economy relies heavily on tourism. Vail had 4,835 residents in 2020, and 67.3 percent of its 7,300 housing units were vacant. The median house price is over $1 million, and the town faces a worker shortage because housing is insufficient. Starting in 2026/2027, every private lesson at Vail becomes Vail Resorts' Epic Ascent product, with concierge support and gear rental."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-vail-ski-resort
+  - ed-west-wiki-vail-colorado
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: beaver-creek
+  overview_md: "Beaver Creek Resort sits about two miles south of Avon in Eagle County, Colorado. It links three villages: Beaver Creek Village, Bachelor Gulch and Arrowhead. Vail Resorts owns and operates it. Beaver Creek hosted the World Ski Championships in 1989, 1999 and 2015, and it holds the Birds of Prey World Cup downhill early each season. Vail Resorts ranks it the thirteenth most visited mountain resort in the U.S. for the 2025/2026 season."
+  culture_md: "Vail Resorts describes Beaver Creek as a European style resort with several villages and a children's ski school with its own children's gondola. From 2026/2027 every private lesson there becomes the Epic Ascent product, with concierge support. Avon, the gateway town, had 6,072 residents in 2020. Its largest employers in 2020 were the Westin Riverfront Resort and Spa, Walmart and City Market. Eagle County Airport is 27 miles west of Avon and Denver International Airport is 130 miles east."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-beaver-creek-resort
+  - ed-west-wiki-avon-colorado
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: breckenridge
+  overview_md: "Breckenridge Ski Resort spreads across five peaks of the Tenmile Range above the town of Breckenridge, the county seat of Summit County, Colorado. Its base sits at 9,600 feet, just west of the Continental Divide. Skiing began on Peak 8 in December 1961. The resort installed the world's first high speed detachable quad in 1981. Vail Resorts owns and operates it and ranks it the third most visited mountain resort in the U.S. for the 2025/2026 season."
+  culture_md: "Breckenridge was founded in 1859 to serve gold miners, and historic clapboard and log buildings line Main Street. The town had 5,078 residents in 2020 and many part time residents with vacation homes; 69.1 percent of its housing units were vacant. Breckenridge holds Ullr Fest each December, honoring the Norse god Ullr, and the Breckenridge Festival of Film each September. Vail Resorts owns half of Breckenridge Terrace, an employee housing complex."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-breckenridge-ski-resort
+  - ed-west-wiki-breckenridge-colorado
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: keystone
+  overview_md: "Keystone Resort sits in the town of Keystone in Summit County, Colorado. It spans three mountains, Dercum Mountain, North Peak and the Outback, reached from the River Run and Mountain House bases. Vail Resorts has owned and operated it since 1997. The company ranks Keystone the seventh most visited mountain resort in the U.S. for the 2025/2026 season and calls it the largest night skiing area in Colorado. Its Kidtopia program offers activities for kids on and off the mountain."
+  culture_md: "Keystone incorporated as a town in April 2023. The former Keystone census area had 1,369 residents in 2020, and 82.1 percent of its housing units were vacant. The Keystone Conference Center is the largest conference facility in the Colorado Rocky Mountain region. In February 2025 the Keystone ski patrol union reached an agreement with Vail Resorts that added wage increases and housing assistance."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-keystone-resort
+  - ed-west-wiki-keystone-colorado
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: aspen-mountain
+  overview_md: "Aspen Mountain, called Ajax by many locals, rises directly above the city of Aspen in Pitkin County, Colorado. Walter Paepcke founded it in 1946 as the first ski area of the Aspen Skiing Company, and its first chairlift was then the longest in the world. Skiers ride up from the town center and ski the Little Nell run back into town. At 673 acres it is much smaller than nearby Snowmass. It is one of the four Aspen Snowmass areas the Aspen Skiing Company operates."
+  culture_md: "The mountain keeps a homespun culture rooted in Paepcke's 1940s vision for Aspen. Homemade memorials to figures such as John Denver and Hunter S. Thompson dot its trees. Aspen grew from a silver mining camp into a ski town and cultural center, home to the Aspen Music Festival and School and the Aspen Institute. Since the 1970s it has drawn celebrities and the wealthy. Many people from the U.S. and abroad vacation there, especially in winter."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-aspen-mountain
+  - ed-west-wiki-aspen-colorado
+  - ed-west-wiki-aspen-skiing-company
+- target: resort
+  id: aspen-highlands
+  overview_md: "Aspen Highlands sits in Aspen, Colorado, and is famous for Highland Bowl and its other experts only terrain. Aspen resident Whip Jones founded it in 1958. The Aspen Skiing Company took over ownership and operation in 1993, and Highlands is now one of the four Aspen Snowmass areas. Most Highland Bowl terrain is reached by hiking from the top of Loge Peak, and the hike brings the skiable vertical to 4,342 feet. Since December 2017 its trail map has shown intermediate and expert terrain only."
+  culture_md: "Highlands draws expert skiers to the hike into Highland Bowl, which fully opened in 2002. A memorial near the top of the Loge Peak lift honors three ski patrollers killed in a 1984 avalanche. Aspen workers face severe housing costs. Rising property values and second homes push many workers into commutes from Snowmass, Basalt, Carbondale and Glenwood Springs, and even deed restricted employee homes can cost close to $1 million."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-aspen-highlands
+  - ed-west-wiki-aspen-skiing-company
+  - ed-west-wiki-aspen-colorado
+- target: resort
+  id: snowmass
+  overview_md: "Snowmass is the largest of the four Aspen Snowmass ski areas and sits in the Town of Snowmass Village near Aspen, Colorado. It opened in December 1967 and hired Olympic medalist Stein Eriksen to direct its ski school. The Aspen Skiing Company owns and operates it. The company, owned by the Crown family of Illinois, also runs the Ski and Snowboard Schools of Aspen Snowmass and a Limelight hotel in Snowmass."
+  culture_md: "Snowmass Village had 3,096 residents in 2020, and 46.6 percent of its housing units were vacant. The village has seen a building boom of condominiums, luxury homes, mountainside mansions and the new Base Village, plus new Westin and Viceroy hotels. It is also seeing a rising influx of wealthy tourists and skiers. The median single family home price there was $5.2 million in 2021."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-snowmass-ski-area
+  - ed-west-wiki-snowmass-village-colorado
+  - ed-west-wiki-aspen-skiing-company
+  - ed-west-wiki-aspen-colorado
+- target: resort
+  id: buttermilk
+  overview_md: "Buttermilk sits about halfway between Aspen and Snowmass Village in Pitkin County, Colorado. Art Pfister developed it in 1958. It is often considered the easiest mountain in the Aspen area and has three sections: Tiehack, Main Buttermilk and West Buttermilk. Its base holds The Hideout, a play and learning area for ski school children ages 2 and a half to 6. The Aspen Skiing Company operates it. Buttermilk first hosted ESPN's Winter X Games in 2002, and the X Games has been held in Aspen every winter since."
+  culture_md: null
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-buttermilk-ski-area
+  - ed-west-wiki-aspen-skiing-company
+  - ed-west-wiki-x-games
+- target: resort
+  id: jackson-hole
+  overview_md: "Jackson Hole Mountain Resort sits in Teton Village, Wyoming, 12 miles northwest of the town of Jackson and due south of Grand Teton National Park. It is known for steep terrain, including Corbet's Couloir, and a continuous vertical drop of 4,139 feet served by its aerial tram. Apres Vous mountain opened in the 1965 to 1966 winter. Jay Kemmerer sold the resort in February 2024 to board members Eric Macy and Mike Corbat. The media often lists it among North America's most expensive ski resorts."
+  culture_md: "Jackson, the largest incorporated town in Wyoming, had 10,760 residents in 2020. Tourism drives a strong local economy, with art galleries, custom jewelers and designer clothing stores around the town square. In 2010, arts, recreation, lodging and food services provided 32.2 percent of local jobs. A 2019 Bloomberg report found Teton County had the highest per capita income of any U.S. county, at $252,000. Jackson Hole Airport, 11 miles from Teton Village, has seasonal flights to 20 U.S. cities."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-jackson-hole-mountain-resort
+  - ed-west-wiki-jackson-wyoming
+  - ed-west-wiki-teton-county-wyoming
+  - ed-west-wiki-jay-kemmerer
+- target: resort
+  id: grand-targhee
+  overview_md: "Grand Targhee Resort sits on the west side of the Teton Range in Wyoming, near the small community of Alta. It lies 42 miles northwest of Jackson and is reached only from the west, through Driggs, Idaho. The resort averages over 500 inches of snow per season, and most of its slopes face west. It opened on December 26, 1969. George and Rose Gillett and their four sons bought it in June 2000."
+  culture_md: "Teton Valley locals helped found Grand Targhee. East Idahoans formed Grand Targhee, Inc. in 1966, and its 900 plus members aimed to benefit the community and the regional economy. Driggs, the seat of Teton County, Idaho, had 1,984 residents in 2020, and Alta had 429. Valley events include the Teton Valley Hot Air Balloon Festival and the Plein Air Arts Festival. In summer the resort hosts music festivals, including a bluegrass festival."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-grand-targhee-resort
+  - ed-west-wiki-driggs-idaho
+  - ed-west-wiki-alta-wyoming
+- target: resort
+  id: park-city
+  overview_md: "Park City Mountain Resort sits in Park City, Utah, 32 miles east of Salt Lake City. It opened on December 21, 1963, as Treasure Mountain, funded partly by a federal program to revive the depressed mining town. Vail Resorts bought it in 2014 and linked it to neighboring Canyons by gondola, creating the largest lift served ski resort in the U.S. at 7,300 skiable acres. It holds several U.S. Ski Team training courses and hosted 2002 Olympic giant slalom and snowboarding events."
+  culture_md: "Park City had 8,396 residents in 2020, and tourists far outnumber them. In 2021 data the city brought an average of $529.8 million a year to the Utah economy, and the town is now one of the most affluent resort towns in the U.S. The resort is a main employer for many residents. In December 2024, 200 ski patrollers struck for higher wages. The town is home to the U.S. Ski Team, Main Street shopping and dining, and the Kimball Arts Festival."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-park-city-mountain-resort
+  - ed-west-wiki-park-city-utah
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: deer-valley
+  overview_md: "Deer Valley Resort sits in Park City, Utah, 36 miles east of Salt Lake City. It is a ski only resort that emphasizes upscale lodging and amenities, and it is one of three U.S. resorts that prohibit snowboarding. Edgar Stern developed it, and it opened on December 26, 1981. Deer Valley hosted 2002 Olympic moguls, aerials and slalom. Its expansion into the former Mayflower area brought the resort to 4,300 acres by 2026. Alterra Mountain Company owns it."
+  culture_md: "Deer Valley shares Park City with Park City Mountain, and the town draws an average of 600,000 tourists a year against about 8,000 residents. Park City is one of the most affluent resort towns in the U.S. Deer Valley regularly hosts FIS moguls and aerials competitions and is scheduled to host both events at the 2034 Winter Olympics."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-deer-valley
+  - ed-west-wiki-park-city-utah
+- target: resort
+  id: alta
+  overview_md: "Alta Ski Area sits in the town of Alta at the head of Little Cottonwood Canyon, Utah. It opened its first lift on January 15, 1939, making it one of the oldest ski areas in the U.S. It averages 543 inches of snow a year and is known for long, steep fall line pitches such as High Rustler and the Baldy Chutes. Alta is one of three U.S. ski areas that prohibit snowboarding. Private shareholders own it, led by the Laughlin family with 51 percent."
+  culture_md: "Alta views itself as a locals and family oriented ski area, even with a reputation as one of the most challenging in bounds areas in the world. The town of Alta had 228 residents in 2020, and the ski area draws about 500,000 visitors a year. The base hotels are independently owned. In 1937 Salt Lake City lawyer Joe Quinney and local businessmen formed the Utah Winter Sports Association to develop skiing at Alta. A lift in Snowbird's Mineral Basin links the two areas."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-alta-ski-area
+  - ed-west-wiki-alta-utah
+- target: resort
+  id: snowbird
+  overview_md: "Snowbird sits in Little Cottonwood Canyon in Utah, 24 miles from downtown Salt Lake City and 29 miles from the airport. It opened in December 1971 and runs almost entirely on private land. The resort has 2,500 acres and 3,240 feet of vertical from Hidden Peak, which tops 11,000 feet. Snowbird is mainly known for powder and challenging terrain, and it receives more than 500 inches of snow a year. POWDR lists Snowbird among its resorts."
+  culture_md: "Snowbird operates year round, with hiking, mountain biking and fishing in summer. It sits on the eastern border of the Salt Lake City suburb of Sandy. Industry magazines often praise its snowfall, terrain and easy access from Salt Lake City International Airport. Snowbird owns Mineral Basin, a large bowl behind Hidden Peak, where a lift gives access to Alta. The Tram Club, a hot spot for locals since 1994, reopened in December 2022."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-snowbird-utah
+  - ed-west-wiki-powdr
+- target: resort
+  id: solitude
+  overview_md: "Solitude Mountain Resort sits in Big Cottonwood Canyon, thirty miles southeast of Salt Lake City. With 1,200 acres and 2,047 feet of vertical, it is one of the smaller resorts near Salt Lake City, along with its neighbor Brighton. Half of its slopes are rated beginner or intermediate, the highest share in the Salt Lake area. Robert Barrett began building it in 1956. Deer Valley bought it in 2015, and Alterra Mountain Company agreed to buy it in 2018."
+  culture_md: "Solitude is a family oriented mountain. It shares the Solbright Pass with Brighton, which covers both resorts for a small surcharge. Solitude was the first Utah resort to charge for parking, up to $20 a day starting in November 2019. It hosted snowboard cross and ski cross at the 2019 FIS Freestyle and Snowboarding World Championships, and it runs a Nordic center."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-solitude-mountain-resort
+- target: resort
+  id: brighton
+  overview_md: "Brighton Ski Resort sits in Big Cottonwood Canyon in Brighton, Utah, about 30 miles from downtown Salt Lake City. It was the first ski resort in Utah, started in 1936 when Alpine Ski Club members built a rope tow from wire and an old elevator motor. Boyne Resorts owns and operates it. Boyne bought Brighton in 1986, sold it in 2007 while leasing it back, and bought it again in May 2018. The whole resort sits on national forest land."
+  culture_md: "From the early 1990s through the 2000s, many top professional and amateur snowboarders called Brighton home. The Disney Channel movies Johnny Tsunami and Cloud 9 were filmed here. Brighton and neighboring Solitude share the Solbright Pass. The town of Brighton had 432 residents in 2020 and is part of the Salt Lake City metro area."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-brighton-ski-resort
+  - ed-west-wiki-brighton-utah
+- target: resort
+  id: snowbasin
+  overview_md: "Snowbasin sits on Mount Ogden in Weber County, Utah, 33 miles northeast of Salt Lake City on the east side of the Wasatch Range. It opened in 1939 as part of an Ogden effort to restore the Wheeler Creek watershed, and it is one of the oldest continuously operating ski areas in the U.S. Earl Holding, owner of Sun Valley, bought it in October 1984. After his investment in lifts and snowmaking, it hosted the 2002 Olympic downhill, combined and super G."
+  culture_md: "M. Earl Miller ran the Snowbasin ski school from the mid 1950s until 1987 and helped draft the PSIA American Ski Technique in 1961. SKI Magazine, Outside and USA Today ranked Snowbasin the top ski resort in the U.S. in 2025. The resort sits above Ogden Valley, where the town of Huntsville had 573 residents in 2020. Huntsville is home to the Shooting Star Saloon, the oldest continuously operating bar west of the Mississippi."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-snowbasin
+  - ed-west-wiki-huntsville-utah
+- target: resort
+  id: powder-mountain
+  overview_md: "Powder Mountain sits east of Eden, Utah, spanning Weber and Cache counties, 55 miles northeast of Salt Lake City International Airport. Its 12,000 acres make it one of the largest ski resorts in the U.S. It opened on February 19, 1972. Netflix cofounder Reed Hastings, a Powder homeowner, bought it in 2023 and serves as CEO and chairman. He introduced a blended public and private model. The resort has five public chairlifts and three lifts for homeowners, plus cat skiing."
+  culture_md: "The summit holds Powder Haven, a 600 family private ski community. Men's Journal named Powder the best ski resort to avoid the crowds in 2024, and SKI Magazine ranked it first in its 2023 Top 30 Resorts in the West. Eden, in Ogden Valley, had 690 residents in 2020 and is part of the Ogden metro area."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-powder-mountain
+  - ed-west-wiki-eden-utah
+- target: resort
+  id: utah-olympic-park
+  overview_md: "Utah Olympic Park is a winter sports complex northwest of Park City, Utah, 28 miles east of Salt Lake City, built for the 2002 Winter Olympics. Its ski jumps and sliding track hosted bobsleigh, skeleton, luge, ski jumping and Nordic combined. Since the Games it has run as a training center for athletes, with a summer aerial training splash pool on site. The Utah Athletic Foundation operates it. It is scheduled to host sliding, ski jumping, Nordic combined, snowboard cross and parallel, and ski cross events at the 2034 Winter Olympics."
+  culture_md: null
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-utah-olympic-park
+  - ed-west-wiki-park-city-utah
+- target: resort
+  id: usss-center-of-excellence
+  overview_md: "The Center of Excellence is the national training and education facility of U.S. Ski & Snowboard, at 1 Victory Lane in Park City, Utah. The organization broke ground in July 2007 and moved in during May 2009. The center holds strength training areas, a gymnasium, a climbing wall, ski and snowboard ramps, trampolines, a nutrition center and rehabilitation facilities. It serves as a training base for elite athletes and an education center for athletes, coaches and clubs."
+  culture_md: null
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-us-ski-and-snowboard
+  - ed-west-wiki-united-states-ski-team
+- target: resort
+  id: woodward-park-city
+  overview_md: "Woodward Park City is an action sports training and recreation center in Park City, Utah. POWDR opened it in December 2019 as a youth sports complex. It belongs to the Woodward network that POWDR built after buying a majority share of Camp Woodward in 2011, alongside Woodward Copper, Woodward Tahoe and Woodward Mt. Bachelor. Park City also holds Park City Mountain, Deer Valley and Utah Olympic Park."
+  culture_md: null
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-powdr
+  - ed-west-wiki-park-city-utah
+- target: resort
+  id: sun-valley
+  overview_md: "Sun Valley is the ski resort on Bald Mountain, or Baldy, next to Ketchum in Idaho's Wood River Valley. Union Pacific chairman W. Averell Harriman opened it in 1936 as the first destination winter resort in the U.S., and Baldy opened for lift served skiing in 1939 to 1940. The mountain has a 9,150 foot summit and 3,400 feet of vertical, with long runs at a steady pitch. The Holding family owns the resort, which Earl Holding bought in 1977."
+  culture_md: "Sun Valley has been a seasonal home to the rich and famous since Ernest Hemingway brought it to public attention in the late 1930s. Harriman invited Hollywood celebrities to promote the resort, and Hemingway later moved to Ketchum. Ketchum had 3,555 residents in 2020, and Sun Valley had 1,783, with 66.6 percent of its housing units vacant. The area hosts the Sun Valley Music Festival, the Sun Valley Film Festival and Ketchum's Wagon Days each Labor Day weekend."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-sun-valley-idaho
+  - ed-west-wiki-bald-mountain-idaho
+  - ed-west-wiki-ketchum-idaho
+- target: resort
+  id: dollar-mountain
+  overview_md: "Dollar Mountain is the treeless beginner and lower intermediate hill of the Sun Valley ski resort in Idaho. It has a 628 foot vertical drop, four chairlifts, a magic carpet and a terrain park on the Half Dollar lift. The world's first chairlifts were installed on Sun Valley's Proctor and Dollar mountains in the fall of 1936. Dollar Mountain Lodge opened in November 2004 and serves as headquarters of the Sun Valley Ski School. The Holding family owns the resort."
+  culture_md: null
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-dollar-mountain
+  - ed-west-wiki-sun-valley-idaho
+- target: resort
+  id: telluride
+  overview_md: "Telluride Ski Resort spans the historic town of Telluride and the newer alpine community of Mountain Village in the San Juan Mountains of southwest Colorado. It has over 2,000 skiable acres. Telluride is known for its advanced terrain, and over half its runs are beginner or intermediate. Joe Zoline founded the ski area, which started in the 1970 to 1971 season. A free gondola links Telluride and Mountain Village. Chuck Horning, a Newport Beach real estate investor, took over ownership in February 2004."
+  culture_md: "Telluride is a former silver mining camp in a box canyon, and its historic district is a National Historic Landmark. When the Pandora mine closed in 1978, skiing and tourism became the town's income. Young newcomers the locals called hippies replaced many mining families. Telluride has hosted the Bluegrass Festival and the Film Festival since 1974 and Mountainfilm since 1979. In the 1980s wealthy skiers flocked to the mountain all winter. Telluride had 2,607 residents in 2020 and Mountain Village had 1,264."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-telluride-ski-resort
+  - ed-west-wiki-telluride-colorado
+  - ed-west-wiki-mountain-village-colorado
+- target: resort
+  id: taos
+  overview_md: "Taos Ski Valley is a village and ski resort in Taos County, New Mexico. Ernie and Rhoda Blake founded it in 1955, and they lived in an eleven foot camper before any lodge was finished. In 2006, 51 percent of its 110 trails were rated advanced or expert. Taos banned snowboarding until March 2008. Its Kachina lift reaches 12,481 feet. The Blake family sold Taos Ski Valley, Inc. to conservationist Louis Bacon in December 2013."
+  culture_md: "Tourism is the village's main industry. In the 2011 to 2012 season the ski company employed about 700 people in winter, and about $47 million is spent in the village economy in an average year. The village had 77 residents in 2020. The town of Taos has a long reputation as an artist colony and counterculture haven next to Taos Pueblo, a UNESCO World Heritage Site. A fare free bus runs seasonally from Taos to the ski valley."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-taos-ski-valley
+  - ed-west-wiki-taos-new-mexico
+- target: resort
+  id: big-sky
+  overview_md: "Big Sky Resort sits on Lone Mountain in Big Sky, Montana, reached from Bozeman through Gallatin Canyon. It has 5,850 acres and 4,350 feet of vertical, and its Lone Peak Tram reaches expert terrain from the 11,166 foot summit. Former NBC anchor Chet Huntley founded the resort, which opened in December 1973. Boyne Resorts bought it in 1976 and owns it today. In 2013 Big Sky added the terrain of neighboring Moonlight Basin. It has one of the largest chairlift fleets in North America."
+  culture_md: "Tourism is the main industry of Big Sky, an unincorporated community of 3,591 people in 2020, up from 2,308 in 2010. In 2020, 57.3 percent of its housing units were vacant. Bozeman, the fourth largest city in Montana, lies about 45 miles away. The Skyline bus links Bozeman and Big Sky, and Bozeman Yellowstone International Airport serves both. Big Sky shares a five mile border with the private Yellowstone Club, and the two lift systems connect."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-big-sky-resort
+  - ed-west-wiki-big-sky-montana
+  - ed-west-wiki-bozeman-montana
+  - ed-west-wiki-yellowstone-club
+- target: resort
+  id: yellowstone-club
+  overview_md: "The Yellowstone Club is a private residential club, ski resort and golf resort in Madison County, Montana, just west of Big Sky. Most of its runs are on Pioneer Mountain, with a 9,859 foot summit, and its lifts tie into Big Sky Resort along a five mile shared border. Developer Tim Blixseth assembled the land. Out of bankruptcy in June 2009, CrossHarbor Capital Partners, led by club member Sam Byrne, bought the club for $115 million."
+  culture_md: "The club is rated among the top 10 lifestyle estates in the world. By late 2014 it had more than 500 member households, and members have included Bill Gates and Mark Zuckerberg. Almost 650 people work at the club in peak season. Big Sky lies 45 miles by road from Bozeman."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-yellowstone-club
+  - ed-west-wiki-big-sky-montana
+- target: resort
+  id: bridger-bowl
+  overview_md: "Bridger Bowl is a locally owned nonprofit ski area in the Bridger Range, 16 miles north of Bozeman, Montana. It opened to the public in 1955 as Bozeman's first ski area. It is known for The Ridge, expert hike terrain that requires an avalanche beacon and shovel. The Schlasman's lift, opened for 2008 to 2009, added 311 acres of expert only terrain. Visitation reached a record 377,663 skiers in the 2022 to 2023 season."
+  culture_md: "Bridger Bowl serves the local population of Gallatin County, including Montana State University, and it aims to give locals affordable skiing. Since 1988 a blue beacon atop the Baxter Hotel in downtown Bozeman flashes when the area gets two inches of new snow. Montana State has hosted the NCAA Skiing Championships eight times, all at Bridger Bowl. Bozeman had 53,293 residents in 2020, and its top employers include Bozeman Health and Montana State University."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-bridger-bowl-ski-area
+  - ed-west-wiki-bozeman-montana
+- target: resort
+  id: steamboat
+  overview_md: "Steamboat Resort sits on Mount Werner in the Park Range, just east of Steamboat Springs in northwest Colorado. It opened on January 12, 1963, as Storm Mountain, largely built by locals Jim Temple and rancher John Fetcher. It has 297 named trails over 2,965 acres, with 44 percent rated advanced, and the Mavericks Superpipe. Alterra Mountain Company bought it from Intrawest in 2017, and the Steamboat Ski & Resort Corporation operates it. Steamboat Springs lies about 150 miles northwest of Denver."
+  culture_md: "Steamboat Springs had 13,224 residents in 2020 and is the largest city in northwest Colorado. Ranching and mining built the regional economy and still have a large presence in the county. The town has produced more Winter Olympians than any other town in North America, and its Winter Sports Club trains on Mount Werner and Howelsen Hill. Housing is short: the median single family home price rose from $529,000 in 2019 to $829,000 in 2022. In 2024 voters blocked a plan for nearly 2,300 affordable worker homes."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-steamboat-ski-resort
+  - ed-west-wiki-steamboat-springs-colorado
+  - ed-west-wiki-steamboat-springs-winter-sports-club
+- target: resort
+  id: howelsen-hill
+  overview_md: "Howelsen Hill Ski Area sits in the town of Steamboat Springs, Colorado. It opened officially in 1914 and is the oldest continuously operating ski area in North America. Norwegian immigrant Carl Howelsen brought ski jumping to Steamboat in 1913, and the hill now bears his name. It holds the largest natural ski jumping complex in North America, with the largest jump at HS127. The City of Steamboat Springs owns and operates it through its Parks, Open Space and Recreation Department."
+  culture_md: "Howelsen Hill is the home area of the Steamboat Springs Winter Sports Club, which has produced 88 Winter Olympians. The club's alpine branch alone has about 400 children. The hill has sent more skiers to international competition than any other area in North America. Carl Howelsen also founded Steamboat's annual Winter Carnival, and the hill has lights for night skiing."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-howelsen-hill-ski-area
+  - ed-west-wiki-steamboat-springs-colorado
+  - ed-west-wiki-steamboat-springs-winter-sports-club
+- target: resort
+  id: heavenly
+  overview_md: "Heavenly Mountain Resort straddles the California and Nevada border above the south shore of Lake Tahoe. It opened as Heavenly Valley on December 15, 1955, and now has 97 runs and 30 lifts across four base areas in both states. Its 10,067 foot top is the highest of the Lake Tahoe resorts, and it averages 360 inches of snow a year. Vail Resorts has owned it since 2002 and ranks it the twelfth most visited mountain resort in the U.S. for the 2025/2026 season."
+  culture_md: "Heavenly sits beside South Lake Tahoe, a city of 21,330 in 2020, and Stateline, Nevada, home to the casinos. The east end of South Lake Tahoe centers on tourism, restaurants, hotels and the resort, and 41.9 percent of the city's housing units were vacant in 2020. Stateline's population swells in the busy winter and summer seasons. Vail Resorts points to Heavenly's nightlife and nearby casinos. Each ski season, skiers from Reno, Las Vegas, Los Angeles, San Diego, San Francisco and Sacramento come to the Tahoe slopes."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-heavenly-mountain-resort
+  - ed-west-wiki-south-lake-tahoe-california
+  - ed-west-wiki-stateline-nevada
+  - ed-west-wiki-lake-tahoe
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: northstar
+  overview_md: "Northstar California sits in Placer County near the northwest shore of Lake Tahoe, about 200 miles from the San Francisco Bay Area. The 3,170 acre resort has 2,280 feet of vertical, 19 lifts, a village with lodging and a cross country center. Vail Resorts has operated it since 2010 under a lease from affiliates of EPR Properties, extended in fiscal 2026 through January 2037. Vail Resorts calls Northstar a luxury resort, with premium lodging and a village of high end shops and restaurants."
+  culture_md: "Each ski season thousands of skiers from across Nevada and California, including San Francisco and Sacramento, come to the Tahoe slopes. Its village holds a conference center and a 9,000 square foot skating rink, and summer brings golf and a lift served bike park. Nearby Truckee, a town of 16,729 in 2020 with 50.6 percent of housing units vacant, counts ski racers Daron Rahlves and Travis Ganong among its notable people."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-northstar-california
+  - ed-west-vail-10k-fy2026
+  - ed-west-wiki-lake-tahoe
+  - ed-west-wiki-truckee-california
+- target: resort
+  id: kirkwood
+  overview_md: "Kirkwood Mountain Resort sits in the Eldorado National Forest about 33 miles south of South Lake Tahoe, reached by State Route 88. It opened in 1972 after Caltrans began plowing Highway 88 year round in 1971, and for most of its history it ran off the grid on diesel generators. It has 2,300 acres, five peaks, ample off piste terrain and only 12 percent beginner runs. It averages 354 inches of snow, second in the Sierra Nevada to Sugar Bowl. Vail Resorts owns it."
+  culture_md: "Kirkwood hosted legs of the North American Freeskiing Championships in 2009 and 2010. The community of Kirkwood had 190 residents in 2020, and only 12.3 percent of its 659 housing units were occupied; 26.8 percent of residents lived in group quarters. In 2026 the resort won the National Ski Areas Association's Golden Eagle Award for sustainability innovation for its on site wood mill."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-kirkwood-mountain-resort
+  - ed-west-wiki-kirkwood-california
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: palisades-tahoe
+  overview_md: "Palisades Tahoe sits in Olympic Valley, California, northwest of Tahoe City. Founded in 1949 as Squaw Valley, it hosted the 1960 Winter Olympics and took its current name in 2021. It is the largest ski complex in the Lake Tahoe region and is known for challenging terrain, with 3,600 acres across six peaks, a tram and the only funitel in the U.S. It averages 400 inches of snow and draws about 600,000 skiers a year. Alterra Mountain Company owns it, joined by gondola to Alpine Meadows."
+  culture_md: "Skiing and racing culture shaped Olympic Valley long before the 1960 Games. The valley has about 924 year round residents and can swell to about 6,573 overnight with visitors. An appointed council of residents advises the Placer County supervisors, and in 2015 the county formation commission said it would vote against incorporation. Base village development plans have drawn opposition from conservation groups such as Sierra Watch. The resort works with the Washoe tribe on a cultural tour. Olympic Valley has hosted the Wanderlust music and yoga festival since 2009."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-palisades-tahoe
+  - ed-west-wiki-olympic-valley-california
+- target: resort
+  id: palisades-tahoe-alpine-meadows
+  overview_md: "Alpine Meadows sits near the northwest shore of Lake Tahoe, with 2,400 acres, 13 lifts and 1,802 feet of vertical. It merged with Squaw Valley in 2012 and became part of Alterra Mountain Company in 2018. Today it operates with Palisades Tahoe as one resort on one season pass, and a gondola connects the two base areas. Together the two areas offer 6,000 skiable acres and over 270 trails."
+  culture_md: "In a 1982 avalanche at Alpine Meadows, employee Anna Conrad was rescued after five days trapped in a collapsed resort building. The area shares Palisades Tahoe's market of Tahoe skiers from across California and Nevada, including San Francisco and Sacramento."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-alpine-meadows-ski-resort
+  - ed-west-wiki-palisades-tahoe
+  - ed-west-wiki-lake-tahoe
+- target: resort
+  id: sugar-bowl
+  overview_md: "Sugar Bowl sits on Donner Pass near Norden, California, about 46 miles west of Reno on I 80. It opened on December 15, 1939. Austrian champion Hannes Schroll founded it with individual investors, and Walt Disney became a shareholder. It was the first ski area in California with a chairlift and the first on the West Coast with a gondola. Sugar Bowl is known for its history, advanced terrain and heavy snowfall, and it is one of the few privately owned resorts left in the Lake Tahoe area."
+  culture_md: "Sugar Bowl is one of the closest ski areas to the San Francisco Bay Area, and many trails carry San Francisco names such as Nob Hill and Market Street. In its early years Hollywood guests came, and wearing suit jackets to dinner was the norm. Skiers from Sacramento and San Francisco skied the area before the resort opened, at the Klein ski school founded in 1936."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-sugar-bowl-ski-resort
+- target: resort
+  id: woodward-tahoe
+  overview_md: "Woodward Tahoe is a 33,000 square foot action sports hub at Boreal Mountain in Soda Springs, California, on I 80 west of Truckee. It is open year round. In summer Boreal and Woodward offer lift served downhill bike trails and an 11 acre network of skateparks, parkour zones and dirt jump lines. Boreal's terrain park includes the Woodward Peace Park, and Boreal offers the only night skiing in Tahoe. POWDR owns Boreal and the Woodward network."
+  culture_md: null
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-boreal-mountain-resort
+  - ed-west-wiki-powdr
+- target: resort
+  id: mammoth-mountain
+  overview_md: "Mammoth Mountain sits on the east side of the Sierra Nevada in the Inyo National Forest, in the town of Mammoth Lakes, California. It has 3,500 acres, 3,100 feet of vertical and an 11,059 foot summit, and it averages 400 inches of snow, with seasons that often run from November into May. Dave McCoy founded it, building the first lift in 1955. Starwood sold it in 2017 to the partnership that became Alterra Mountain Company. It hosts U.S. Grand Prix freestyle and snowboard events, and Chloe Kim trains here."
+  culture_md: "Most Mammoth skiers come from the Los Angeles area, since Bay Area residents must cross four mountain passes to reach it. Mammoth Lakes, the only incorporated town in Mono County, had 7,191 residents in 2020, and 68.6 percent of its housing units were vacant. The town economy is primarily tourism, with summer camping, hiking and fishing. The tourist market has driven property values sharply higher. Eastern Sierra Regional Airport in Bishop has seasonal flights to Los Angeles, San Francisco and Denver."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-mammoth-mountain-resort
+  - ed-west-wiki-mammoth-lakes-california
+- target: resort
+  id: june-mountain
+  overview_md: "June Mountain sits near June Lake in the eastern Sierra Nevada, southeast of Yosemite National Park. It covers 1,500 acres across Rainbow Mountain and June Mountain, with 7 lifts and about 250 inches of snow a year. Mammoth Mountain operates it under a Forest Service permit, and it became part of Alterra Mountain Company with Mammoth in 2017. June closed for the 2012 to 2013 season, and after a citizen campaign it reopened in 2013 to 2014 with new snowmaking and a new chairlift."
+  culture_md: "June Mountain is a favorite of locals for its small crowds and easy access to powder after storms. Tourism is June Lake's chief industry, and over half of its homes are second homes, mostly used in summer. The community had 611 residents in 2020. Most of the June Mountain winter workforce lives in employee housing in Mammoth and rides a daily employer bus."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-june-mountain-ski-area
+  - ed-west-wiki-june-lake-california
+- target: resort
+  id: bear-mountain
+  overview_md: "Bear Mountain sits in the city of Big Bear Lake in the San Bernardino National Forest of Southern California, about 2.4 miles east of Snow Summit. It was established in 1941 and has carried the names Moonridge, Goldmine and Big Bear Mountain. It is known for progressive terrain: it opened the first freestyle terrain park in North America, Outlaw, in 1992, and it holds the only halfpipes and the highest lift served peak in Southern California. It is part of Big Bear Mountain Resort within Alterra Mountain Company."
+  culture_md: "Bear Mountain is known for a youthful atmosphere and has the largest learning areas in Southern California. Big Bear Lake had 5,046 residents in 2020, yet visitors in the greater Big Bear Valley often top 100,000 on weekends. 75.2 percent of the city's housing units were vacant in 2020. Free Mountain Transit buses run several routes in the valley."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-bear-mountain-ski-area
+  - ed-west-wiki-big-bear-lake-california
+- target: resort
+  id: snow-summit
+  overview_md: "Snow Summit sits by Big Bear Lake in the San Bernardino Mountains of Southern California and was established in 1952. It is a mid sized resort with 240 skiable acres and 1,209 feet of vertical, and its snowmaking draws water from Big Bear Lake to cover all marked terrain. Mammoth Resorts bought it with Bear Mountain in 2014 for $38 million, and it became part of Alterra Mountain Company in 2017. It operates with Bear Mountain and Snow Valley as Big Bear Mountain Resort. Snow Summit hosted the first Winter X Games in 1997."
+  culture_md: "Snow Summit is one of the most popular ski and snowboard destinations for people from the Los Angeles area. Big Bear Lake is a year round resort town of 5,046 residents in 2020, and the Big Bear Valley often hosts over 100,000 people on weekends. Big Bear Lake is Southern California's largest recreational lake."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-snow-summit
+  - ed-west-wiki-big-bear-lake-california
+  - ed-west-wiki-x-games
+- target: resort
+  id: snow-valley
+  overview_md: "Snow Valley Mountain Resort sits in Running Springs, California, 17 miles west of Big Bear Lake, in the San Bernardino National Forest. It is the longest continually operating ski resort in Southern California and the first in the San Bernardino Mountains. Norwegian American ski jumper Johnny Elvrum bought and expanded it in 1940. Alterra Mountain Company bought it in January 2023, and it now runs with Bear Mountain and Snow Summit as part of Big Bear Mountain Resort. It has 12 lifts, including one high speed six pack."
+  culture_md: "Running Springs had 5,268 residents in 2020. Its service businesses cater to tourists visiting the San Bernardino National Forest, a year round destination. With nearby communities it also forms a bedroom community for commuters who work in San Bernardino. The Rim, as locals call it, runs about 30 miles from Crestline to Big Bear."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-snow-valley-mountain-resort
+  - ed-west-wiki-running-springs-california
+  - ed-west-wiki-snow-summit
+- target: resort
+  id: arapahoe-basin
+  overview_md: "Arapahoe Basin, often called A Basin or The Basin, sits south of Loveland Pass on U.S. Highway 6 in Summit County, Colorado, about 68 miles west of Denver. It is known for its extended season and extreme terrain, and it mostly draws advanced and expert skiers. Lifts often run from mid October into June, and the 2018 to 2019 season lasted 258 days. Larry and Marnie Jump, Max Dercum and Sandy Shaufler started it, and it opened in 1946. Alterra Mountain Company bought it in November 2024."
+  culture_md: "Arapahoe Basin left Vail Resorts' Epic Pass after the 2018 to 2019 season and joined the Ikon Pass. Its Il Rifugio, at 12,456 feet, is the highest elevation restaurant in North America. Summit County had 31,055 residents in 2020, and 58.7 percent of its housing units were vacant. In nearby Frisco, housing costs by 2025 had forced many workers, ski instructors among them, into homelessness while they kept their jobs."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-arapahoe-basin
+  - ed-west-wiki-summit-county-colorado
+  - ed-west-wiki-frisco-colorado
+- target: resort
+  id: copper-mountain
+  overview_md: "Copper Mountain sits in Summit County, Colorado, about 75 miles west of Denver on I 70. It opened in November 1972 and has 2,465 acres under Forest Service lease. POWDR has operated it since buying it from Intrawest in December 2009. The Forest Service has called its layout the most organized of any ski resort: beginner runs lie to the west and difficulty rises to the east, with Tucker Mountain holding expert terrain. Copper has been an official U.S. Ski Team downhill training venue since 2011 to 2012."
+  culture_md: "Copper's lodging and dining sit in three villages: East Village, Center Village and West Village. Frisco, a town of 2,913 in 2020, sits near Copper, Breckenridge, Keystone and Arapahoe Basin and draws skiers from around the world. By 2025 housing costs there had forced many workers, from ski instructors to emergency room nurses, into homelessness while they kept their jobs. Homeless resort employees may sleep in their cars in local lots if they can prove employment. Bustang buses link Frisco to Denver."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-copper-mountain-colorado
+  - ed-west-wiki-frisco-colorado
+- target: resort
+  id: woodward-copper
+  overview_md: "Woodward Copper is the Woodward training center at Copper Mountain in Summit County, Colorado. In February 2009 Woodward opened a 20,000 square foot indoor ski and snowboard facility there, dedicated to terrain park and halfpipe training. The Woodward Express lift, renamed in 2019, serves the terrain park outside. POWDR owns Copper Mountain and the Woodward network, which it built after buying a majority share of Camp Woodward in 2011."
+  culture_md: null
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-copper-mountain-colorado
+  - ed-west-wiki-powdr
+- target: resort
+  id: winter-park
+  overview_md: "Winter Park Resort sits in Grand County, Colorado, just off U.S. Highway 40, about a ninety minute drive from Denver. It opened for the 1939 to 1940 season. The City and County of Denver owned and ran it until 2002 and still owns it, and Alterra Mountain Company manages it. Its Mary Jane area, opened in 1975, has a separate base and is known for moguls, trees and harder terrain. The resort has 23 lifts and is home to the National Sports Center for the Disabled, one of the world's largest and oldest disabled skiing programs."
+  culture_md: "For nearly 70 years many Denver residents rode the Ski Train to the base through the Moffat Tunnel, and Amtrak's Winter Park Express now runs seasonal ski trains. The town of Winter Park had 1,033 permanent residents in 2020, and 81.3 percent of its housing units were vacant, so the seasonal population is much higher. Nearby Fraser, a town of 1,400, has grown with new condominiums. The Lift bus serves the town, and Bustang links it to Denver."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-winter-park-resort
+  - ed-west-wiki-winter-park-colorado
+  - ed-west-wiki-fraser-colorado
+- target: resort
+  id: ski-cooper
+  overview_md: "Ski Cooper sits at Tennessee Pass near Leadville, Colorado, between the San Isabel and White River national forests. It opened as Cooper Hill Ski Area in 1942 and served as the training site for the 10th Mountain Division, based at nearby Camp Hale during World War II. Lake County owns it, and Cooper Hill Ski Area, a nonprofit with a volunteer board, manages it. It is among the most affordable ski areas in Colorado, second only to Howelsen Hill."
+  culture_md: "Ski Cooper markets itself as a family resort because of its affordability and accessibility. Leadville, at 10,119 feet, is the highest incorporated city in the U.S. and had 2,633 residents in 2020. It is a former silver mining town with a historic district, and after the Climax Mine market collapsed in 1981 the town turned to tourism and outdoor recreation. Each March, Leadville holds a skijoring event on Harrison Avenue, run since 1949."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-ski-cooper
+  - ed-west-wiki-leadville-colorado
+- target: resort
+  id: crested-butte
+  overview_md: "Crested Butte Mountain Resort sits in the town of Mount Crested Butte in Gunnison County, Colorado, next to the historic town of Crested Butte. Fred Rice and Dick Eflin bought a ranch on the mountain in 1960 to start it. Vail Resorts announced its purchase in June 2018 and owns it today. The company lists over 1,500 skiable acres and over 3,000 feet of vertical. Crested Butte hosted the Winter X Games in 1998 and 1999."
+  culture_md: "Crested Butte is a former coal mining town in the Slate River Valley. When the mines closed the town shrank, and the ski resort revived its economy around tourism. The town has since become a retreat for the affluent, and the resulting housing crisis has pushed the average home value over $900,000. The town had 1,639 residents in 2020. Festivals include Flauschink in spring and Vinotok in fall. Buses link Crested Butte to Gunnison, a college town of 6,560 and home to Western Colorado University."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-crested-butte-mountain-resort
+  - ed-west-wiki-crested-butte-colorado
+  - ed-west-wiki-gunnison-colorado
+  - ed-west-wiki-x-games
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: silverton-mountain
+  overview_md: "Silverton Mountain sits near the town of Silverton in the San Juan Mountains of southwest Colorado. Aaron and Jen Brill founded it, and it opened on January 19, 2002, with one double chair bought from Mammoth. The single lift serves 1,819 acres of advanced and expert terrain that is ungroomed and unpatrolled, so avalanche gear is required at all times. Silverton is also the base for over 22,000 acres of heli skiing, sold by the drop, and it opens Thursday through Sunday from December through April."
+  culture_md: "The ski area is known for adventure, powder and steep terrain, and it runs avalanche courses. Silverton is a former mining town in a National Historic Landmark district, and its last mine closed in 1992. The town now depends mainly on tourism and on government remediation and preservation work. It had 622 residents in 2020. Silverton Mountain's opening in 2002 began year round tourism, and winter events such as skijoring now draw crowds that rival summer."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-silverton-mountain
+  - ed-west-wiki-silverton-colorado
+- target: resort
+  id: whitefish-mountain
+  overview_md: "Whitefish Mountain Resort sits on Big Mountain in northwest Montana, west of Glacier National Park, 4 miles from the town of Whitefish and 21 miles north of Kalispell. Winter Sports, Inc. formed in 1947 as a public company of community shareholders to open Big Mountain. The resort hosted the U.S. Alpine Championships in 1949, and Olympic champion Tommy Moe learned to ski and race here. Big Mountain took its current name after billionaire Bill Foley became majority shareholder of Winter Sports, Inc. It has 14 lifts."
+  culture_md: "Local people donated labor to build the resort, clearing slopes and helping push through the mountain road. Whitefish had 7,751 residents in 2020 and is known for environmentalism and protected trails. Its events include the Whitefish Winter Carnival, with a parade and a plunge into Whitefish Lake, and the Under the Big Sky Music Festival. Amtrak's Empire Builder stops in Whitefish on its Chicago to Seattle and Portland route."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-whitefish-mountain-resort
+  - ed-west-wiki-whitefish-montana
+- target: resort
+  id: mt-bachelor
+  overview_md: "Mt. Bachelor sits on the north side of a Cascade Range stratovolcano in Central Oregon, about 22 miles west of Bend. Former 10th Mountain Division ski trooper Bill Healy founded it on December 19, 1958, with money raised from local investors. It is the largest ski resort in Oregon and the second largest single mountain ski resort in the U.S., behind Vail. Its season usually runs from mid November to the end of May, with over 462 inches of snow a year. POWDR has owned it since 2001."
+  culture_md: "Tourism is one of Bend's largest sectors, and Mt. Bachelor brings in tourists from across Oregon, Washington and California. Bend had 99,178 residents in 2020 and is Central Oregon's largest city. In 2011 tourism employed 16 percent of the city's workforce, and families made up the largest group of visitors. Bend is known for its brewing culture, led by Deschutes Brewery. Some Bay Area and Seattle tech workers live in Bend for its outdoors and lower cost of living."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-mount-bachelor-ski-area
+  - ed-west-wiki-bend-oregon
+  - ed-west-wiki-powdr
+- target: resort
+  id: alyeska
+  overview_md: "Alyeska Resort sits in Girdwood, about 30 miles from downtown Anchorage, on Mount Alyeska in the Chugach Mountains. It is the largest ski area in Alaska. The first chairlift opened in 1959, and the 1960 Roundhouse at the top is on the National Register of Historic Places. The mountain has a much higher share of advanced and expert runs than most North American mountains, and snowfall can top 650 inches at the top of the Glacier Bowl Express. In October 2018 the resort announced a contract to sell substantially all its assets to Pomeroy Lodging."
+  culture_md: "Girdwood began as a supply town for 1890s gold miners and moved up the valley after the 1964 earthquake. The resort became an international destination and long shaped the town around seasonal vacation homes. The Alyeska Prince Hotel, opened in the 1990s, shifted Girdwood toward a year round economy. Housing for resort workers is a recurring debate, and many workers over the years have camped illegally on public lands. The valley had an estimated 1,742 residents in 2019."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-alyeska-resort
+  - ed-west-wiki-girdwood-alaska
+- target: resort
+  id: crystal-mountain
+  overview_md: "Crystal Mountain sits in eastern Pierce County, Washington, southeast of Seattle in the Mount Baker Snoqualmie National Forest. It is the largest ski resort in Washington, reached from the Seattle and Tacoma metro area by State Route 410. Its Mt. Rainier Gondola, opened in 2010, is the state's only high speed gondola and runs year round to the summit. Crystal hosted the U.S. Alpine Championships in 1965 and 1968 and World Cup downhills in 1972. Alterra Mountain Company acquired it in 2018."
+  culture_md: "Crystal is primarily a day use area for skiers from the Seattle and Tacoma metro area, with nine chairlifts and several hotels. Local racer Judy Nagel won two national titles here at sixteen. Its master development plan, the largest in Washington's history, includes employee housing."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-crystal-mountain-washington
+- target: resort
+  id: stevens-pass
+  overview_md: "Stevens Pass sits at the crest of Stevens Pass in the Washington Cascades, on U.S. Route 2, less than 85 miles from Seattle. It opened in 1937 and has 37 major runs on 1,125 acres, plus the Mill Valley backside and night skiing. Vail Resorts completed its purchase in August 2018 and added it to the Epic Pass. Vail Resorts notes its bowls, glades and faces and its lighted night terrain."
+  culture_md: "Stevens is a day resort that draws heavily from the Seattle and Everett metro area by U.S. Route 2. In the 2021 to 2022 season, staffing shortages left only five lifts running. A petition gathered nearly 40,000 signatures in two weeks. A new general manager opened the 2022 to 2023 season fully staffed, with more employee housing and pay raises. Vail Resorts owns employee housing at the pass."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-stevens-pass-ski-area
+  - ed-west-vail-10k-fy2026
+- target: resort
+  id: mt-baker
+  overview_md: "Mt. Baker Ski Area sits at the end of State Route 542 in Whatcom County, Washington, about 10 miles south of the Canadian border and closer to Mount Shuksan than Mount Baker. It holds the world record for snowfall in one season, 1,140 inches in 1998 to 1999, and averages 641 inches a year. It is known for challenging in bounds routes and lift accessed backcountry. Its first chairlift, Pan Dome, was built in 1953. The season usually runs from late November to late April."
+  culture_md: "Mt. Baker has hosted the Legendary Banked Slalom every year since 1985, a snowboard race through a natural halfpipe that draws professionals from around the world and amateurs of all ages. Ski and snowboard films often feature the area. Glacier, the closest community, had 300 residents in 2020 and sits a 20 mile drive from the ski area."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-mt-baker-ski-area
+  - ed-west-wiki-glacier-washington
+- target: resort
+  id: mt-hood-meadows
+  overview_md: "Mount Hood Meadows sits on the southeast face of Mount Hood in northern Oregon and is the largest of the mountain's ski resorts, with 2,150 skiable acres. It lies about 67 miles east of Portland and 35 miles from Hood River on Oregon Route 35. Skiers first used the resort in December 1967. It has alpine and Nordic areas and night skiing. Overnight guests stay at Timberline Lodge, Cooper Spur or condos in Government Camp."
+  culture_md: "Many buses serve Meadows, including Columbia Area Transit from the Hood River side. Hood River, a city of 8,313 in 2020, built its economy on agriculture, tourism and sports recreation, and tourism boomed after windsurfers and kiteboarders discovered the Columbia Gorge winds. Since the late 1990s aerospace firms have become some of its largest employers. On the west side, Government Camp is the only town within 5 miles of Mount Hood and serves as its ski town; it had 179 residents in 2020."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-mount-hood-meadows
+  - ed-west-wiki-hood-river-oregon
+  - ed-west-wiki-government-camp-oregon
+- target: resort
+  id: timberline-lodge
+  overview_md: "Timberline Lodge ski area sits on the south face of Mount Hood, about 60 miles east of Portland, below the Works Progress Administration lodge that President Roosevelt dedicated in 1937. Most of its terrain lies below the lodge. It opened as Oregon's first destination ski resort with a portable rope tow, and its Magic Mile chairlift, built in 1938, was then the longest chairlift in existence. The lodge is publicly owned and privately operated; Richard Kohnstamm took over in 1955, and his family still manages the resort."
+  culture_md: "Timberline Lodge is a National Historic Landmark that draws two million visitors a year, and local artisans built and furnished it during the Great Depression. It served as the exterior of the Overlook Hotel in The Shining. Government Camp, the de facto ski town of Mount Hood, had 179 residents in 2020. The Golden Rose Ski Classic, run here since 1936 as part of the Portland Rose Festival, is the oldest known organized ski race in America."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-timberline-lodge-ski-area
+  - ed-west-wiki-timberline-lodge
+  - ed-west-wiki-magic-mile
+  - ed-west-wiki-government-camp-oregon
+- target: resort
+  id: timberline-palmer-summer
+  overview_md: "The Palmer Snowfield on Mount Hood's south slope gives Timberline lift served skiing through the summer. The Palmer chairlift, built in 1983, climbs to 8,500 feet and runs from spring to early fall when conditions allow. Summer skiing and race camps began at Timberline in 1956. Dozens of summer camps enroll thousands of athletes, and a busy midweek day can see 1,500 riders. Ski racing camps are the most popular, followed by snowboard and freeski camps. The season usually ends in August or September."
+  culture_md: "Summer at Timberline centers on week long camps, with snow sessions in the morning and rafting, biking, hiking or trampoline in the afternoon. Lifts are busiest Monday through Friday in summer because of the camps. Mount Hood Summer Ski Camps have hosted campers since the 1970s. The snowfield is shrinking each year, and salting to extend the season adds pollution to the Salmon River."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-palmer-glacier
+  - ed-west-wiki-timberline-lodge-ski-area
+- target: resort
+  id: schweitzer
+  overview_md: "Schweitzer sits in the Selkirk Mountains of north Idaho, 11 miles northwest of Sandpoint, overlooking Lake Pend Oreille. It opened as Schweitzer Basin in the fall of 1963 and is Idaho's largest ski resort, with 2,900 acres, 92 named runs, 10 lifts and over 300 inches of average snowfall. Alterra Mountain Company agreed to buy it in June 2023, after it joined the Ikon Pass. The purchase drew a mixed local reaction, with some passholders pleased and others worried about crowding."
+  culture_md: "Schweitzer turned Sandpoint into a year round tourism destination. Sandpoint had 8,639 residents in 2020, and its economy rests on forest products, light manufacturing, tourism, recreation and government. The town holds a Winter Carnival each February and the Festival at Sandpoint in August, and it has a strong arts community. To meet a critical workforce housing shortage, the resort broke ground in July 2021 on a $22 million, 84 unit apartment complex in Ponderay. Amtrak's Empire Builder stops in Sandpoint."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-schweitzer-mountain
+  - ed-west-wiki-sandpoint-idaho
+- target: resort
+  id: bogus-basin
+  overview_md: "Bogus Basin sits in Boise County, Idaho, 16 road miles north of Boise, on the Boise Ridge above the Treasure Valley. Alf Engen chose the site in 1939, and it opened in December 1942. The Bogus Basin Recreation Association, a nonprofit, operates it on private and leased national forest land. It has 2,600 acres, 7 chairlifts, night skiing on 165 acres and 23 miles of Nordic trails. In 1998 it cut its adult season pass from $500 to $199, and resorts from coast to coast then lowered their pass prices."
+  culture_md: "Bogus Basin overlooks Boise and the Treasure Valley, and its 1998 pass cut lifted skier visits from under 192,000 to over 303,000. Boise's metro area had about 476,000 people in 2024 and has been one of the fastest growing in the U.S. Major employers include Micron Technology, the state government and St. Luke's. Agribusiness magnate J. R. Simplot helped save the area when it struggled with debts in 1953, and the main lodge carries his name."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-bogus-basin
+  - ed-west-wiki-boise-idaho
+- target: resort
+  id: montana-snowbowl
+  overview_md: "Montana Snowbowl sits in the Lolo National Forest 12 miles northwest of Missoula, Montana. It is known for long, steep expert runs such as West Bowl, a 2,600 foot vertical rise and throwback operations. Its lifts include three vintage Riblet double chairs, a Skytrac triple and a vintage Doppelmayr T bar. Base development is minimal, and the access road, improved in 2011, is still unpaved. Snowbowl opened in December 1962, promoted as having the most vertical in the Pacific Northwest."
+  culture_md: "Snowbowl serves Missoula, the second most populous city in Montana with 73,489 residents in 2020. Missoula is home to the University of Montana, and its largest employers are the university, the public schools and two hospitals. The city also holds a U.S. Forest Service regional headquarters and the smokejumpers' headquarters. In summer Snowbowl runs one lift on weekends for hikers and mountain bikers."
+  alexandre_take_md: null
+  status: reviewed
+  reviewed_by: "site owner"
+  reviewed_date: 2026-10-13
+  source_ids:
+  - ed-west-wiki-montana-snowbowl
+  - ed-west-wiki-missoula-montana

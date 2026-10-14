@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-14T00:28:56Z",
+  "resort_id": "alta",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "nrcs-snotel-766-ut"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": null,
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "alta",
+      "month": 10,
+      "snowfall_in": 21.8,
+      "powder_days": 1.24,
+      "banner_days": 0.24,
+      "avg_storm_depth_in": 7.3,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 12.5,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.455,
+        "moist": 0.545
+      },
+      "density_source": "snotel",
+      "temp_high_f": 50.8,
+      "temp_low_f": 28.1,
+      "wind_mph": 6.7,
+      "sun_pct": 88.6
+    },
+    {
+      "resort_id": "alta",
+      "month": 11,
+      "snowfall_in": 47.2,
+      "powder_days": 2.84,
+      "banner_days": 1.0,
+      "avg_storm_depth_in": 10.0,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 11.8,
+      "density_mix": {
+        "dry": 0.173,
+        "average": 0.37,
+        "moist": 0.457
+      },
+      "density_source": "snotel",
+      "temp_high_f": 35.9,
+      "temp_low_f": 16.1,
+      "wind_mph": 5.9,
+      "sun_pct": 83.5
+    },
+    {
+      "resort_id": "alta",
+      "month": 12,
+      "snowfall_in": 71.4,
+      "powder_days": 4.32,
+      "banner_days": 1.6,
+      "avg_storm_depth_in": 12.3,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 11.2,
+      "density_mix": {
+        "dry": 0.11,
+        "average": 0.47,
+        "moist": 0.42
+      },
+      "density_source": "snotel",
+      "temp_high_f": 24.2,
+      "temp_low_f": 8.5,
+      "wind_mph": 5.5,
+      "sun_pct": 77.0
+    },
+    {
+      "resort_id": "alta",
+      "month": 1,
+      "snowfall_in": 69.1,
+      "powder_days": 4.56,
+      "banner_days": 1.68,
+      "avg_storm_depth_in": 12.9,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 12.9,
+      "density_mix": {
+        "dry": 0.149,
+        "average": 0.308,
+        "moist": 0.543
+      },
+      "density_source": "snotel",
+      "temp_high_f": 23.3,
+      "temp_low_f": 8.3,
+      "wind_mph": 4.9,
+      "sun_pct": 79.7
+    },
+    {
+      "resort_id": "alta",
+      "month": 2,
+      "snowfall_in": 64.3,
+      "powder_days": 4.16,
+      "banner_days": 1.44,
+      "avg_storm_depth_in": 12.5,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 13.1,
+      "density_mix": {
+        "dry": 0.08,
+        "average": 0.34,
+        "moist": 0.58
+      },
+      "density_source": "snotel",
+      "temp_high_f": 27.6,
+      "temp_low_f": 11.7,
+      "wind_mph": 5.6,
+      "sun_pct": 82.6
+    },
+    {
+      "resort_id": "alta",
+      "month": 3,
+      "snowfall_in": 67.5,
+      "powder_days": 4.8,
+      "banner_days": 1.28,
+      "avg_storm_depth_in": 12.8,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 12.5,
+      "density_mix": {
+        "dry": 0.103,
+        "average": 0.364,
+        "moist": 0.533
+      },
+      "density_source": "snotel",
+      "temp_high_f": 36.8,
+      "temp_low_f": 18.8,
+      "wind_mph": 6.5,
+      "sun_pct": 85.1
+    },
+    {
+      "resort_id": "alta",
+      "month": 4,
+      "snowfall_in": 46.8,
+      "powder_days": 3.32,
+      "banner_days": 0.76,
+      "avg_storm_depth_in": 9.6,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 13.5,
+      "density_mix": {
+        "dry": 0.093,
+        "average": 0.291,
+        "moist": 0.616
+      },
+      "density_source": "snotel",
+      "temp_high_f": 43.8,
+      "temp_low_f": 23.4,
+      "wind_mph": 7.3,
+      "sun_pct": 88.0
+    },
+    {
+      "resort_id": "alta",
+      "month": 5,
+      "snowfall_in": 17.7,
+      "powder_days": 1.0,
+      "banner_days": 0.08,
+      "avg_storm_depth_in": 7.1,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 13.7,
+      "density_mix": {
+        "dry": 0.139,
+        "average": 0.25,
+        "moist": 0.611
+      },
+      "density_source": "snotel",
+      "temp_high_f": 55.1,
+      "temp_low_f": 31.4,
+      "wind_mph": 7.2,
+      "sun_pct": 89.5
+    },
+    {
+      "resort_id": "alta",
+      "month": 6,
+      "snowfall_in": 1.9,
+      "powder_days": 0.16,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 5.4,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 17.0,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.2,
+        "moist": 0.8
+      },
+      "density_source": "snotel",
+      "temp_high_f": 69.9,
+      "temp_low_f": 42.4,
+      "wind_mph": 8.0,
+      "sun_pct": 94.9
+    },
+    {
+      "resort_id": "alta",
+      "month": 7,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 79.6,
+      "temp_low_f": 51.7,
+      "wind_mph": 7.4,
+      "sun_pct": 96.1
+    },
+    {
+      "resort_id": "alta",
+      "month": 8,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 76.1,
+      "temp_low_f": 49.5,
+      "wind_mph": 7.5,
+      "sun_pct": 93.6
+    },
+    {
+      "resort_id": "alta",
+      "month": 9,
+      "snowfall_in": 3.3,
+      "powder_days": 0.16,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 5.9,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 13.3,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.091,
+        "moist": 0.909
+      },
+      "density_source": "snotel",
+      "temp_high_f": 66.7,
+      "temp_low_f": 40.7,
+      "wind_mph": 7.4,
+      "sun_pct": 94.1
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-11T12:00:00Z",
+ "states": [
+  {
+   "code": "CA",
+   "name": "California",
+   "cluster_ids": [
+    "fixture-lake-crest"
+   ],
+   "resort_count": 2
+  },
+  {
+   "code": "NV",
+   "name": "Nevada",
+   "cluster_ids": [
+    "fixture-lake-crest"
+   ],
+   "resort_count": 1
+  },
+  {
+   "code": "UT",
+   "name": "Utah",
+   "cluster_ids": [
+    "fixture-wasatch-like"
+   ],
+   "resort_count": 3
+  },
+  {
+   "code": "CO",
+   "name": "Colorado",
+   "cluster_ids": [
+    "fixture-front-range",
+    "fixture-high-desert"
+   ],
+   "resort_count": 6
+  },
+  {
+   "code": "VT",
+   "name": "Vermont",
+   "cluster_ids": [
+    "fixture-green-ridge"
+   ],
+   "resort_count": 2
+  }
+ ]
+}

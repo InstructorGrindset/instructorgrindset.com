@@ -1,0 +1,157 @@
+# Private lesson rates (ROADMAP Section 8, item 7), researched 2026-10-13, for Tier A resorts that
+# have pay rows but no private rate. Resort lesson pages were blocked from this environment, so each
+# price comes from a search result that names its page: confidence `estimated`, note "From a search
+# result for this page; page not opened".
+#
+# Career inputs allow one entry per resort across all career files. Sunday River already has an
+# entry in career_east.yaml with private_rate null, so its rate sits in the coordinator sidecar
+# (scratchpad training/career-sidecar.yaml); its source is declared here.
+#
+# No instructor private split was published by any Tier A resort found in this batch.
+batch: career-followups-2026-10
+researched_date: 2026-10-13
+sources:
+  - id: career-followups-telluride-ski-school
+    url: https://tellurideskiresort.com/ski-school/
+    title: Telluride Ski Resort, Ski School (private lesson prices)
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+  - id: career-followups-palisades-child-private
+    url: https://www.palisadestahoe.com/plan-your-visit/lessons-and-guides/child-private
+    title: Palisades Tahoe, Child Private Lessons
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+  - id: career-followups-breckenridge-all-lessons
+    url: https://www.breckenridge.com/plan-your-trip/ski-and-ride-lessons/category/all-lessons.aspx
+    title: Breckenridge Ski Resort, Search all Lessons
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+  - id: career-followups-sugarbowl-privates
+    url: https://www.sugarbowl.com/privates
+    title: Private Ski & Snowboard Lessons at Sugar Bowl Resort
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+  - id: career-followups-jaypeak-private-lessons
+    url: https://jaypeakresort.com/skiing-riding/lessons/private-lessons
+    title: Jay Peak Resort, Private Lessons
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+  - id: career-followups-sugarbush-private-ski
+    url: https://www.sugarbush.com/plan-your-trip/ski-and-ride/lessons/daily-lessons/private-ski-lessons
+    title: Sugarbush Resort, Private Ski Lessons
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened.
+  - id: career-followups-sundayriver-private-lessons
+    url: https://www.sundayriver.com/snowsports-school/private-lessons
+    title: Sunday River SnowSports School, 2-6 Hour Private Lesson
+    accessed_date: 2026-10-13
+    note: From a search result for this page; page not opened. A different page from pay-east-sunday-river-private-lessons (sundayriver.com/lessons/private-lessons).
+resorts:
+  - resort_id: telluride
+    private_rate:
+      value: {low: 770, high: 1300, unit: full_day}
+      source_id: career-followups-telluride-ski-school
+      as_of: 2026-10-13
+      confidence: estimated
+      note: From a search result for this page; page not opened. Full day private (9am to 4pm) $770 early season (late November to mid December) and $1,300 regular season. The result did not name the season.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: palisades-tahoe
+    private_rate:
+      value: {low: 880, high: 930, unit: full_day}
+      source_id: career-followups-palisades-child-private
+      as_of: 2026-10-13
+      confidence: estimated
+      note: From a search result for this page; page not opened. Child private, full day, $880 midweek and $930 weekend or holiday. No adult full day price was shown. The result did not name the season.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: breckenridge
+    private_rate:
+      value: {low: 1333, high: 1455, unit: full_day}
+      source_id: career-followups-breckenridge-all-lessons
+      as_of: 2026-10-13
+      confidence: estimated
+      note: From a search result for this page; page not opened. Full day private from Peak 8 Village starting 9:00 AM, one day including fees, $1,333 online and $1,455 at the window. The listing may be the snowboard private; ski and snowboard privates usually share a price.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: sugar-bowl
+    private_rate:
+      value: {low: 799, high: 799, unit: full_day}
+      source_id: career-followups-sugarbowl-privates
+      as_of: 2026-10-13
+      confidence: estimated
+      note: From a search result for this page; page not opened. All Day Private posted as starting at $799, at most three people per private. The result did not name the season.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: jay-peak
+    private_rate:
+      value: {low: 999, high: 1200, unit: full_day}
+      source_id: career-followups-jaypeak-private-lessons
+      as_of: 2026-10-13
+      confidence: estimated
+      note: From a search result for this page; page not opened. 2026/27 full day private (9am to 3:45pm) $999 weekday, $1,099 weekend, $1,200 holiday. Each added person (up to 6) is $145. Lift tickets are extra.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: sugarbush
+    private_rate:
+      value: {low: 629, high: 629, unit: full_day}
+      source_id: career-followups-sugarbush-private-ski
+      as_of: 2026-10-13
+      confidence: estimated
+      note: From a search result for this page; page not opened. 2025/26 six hour full day private (9am to 3pm) posted as starting at $629. Rentals and helmets are extra.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []

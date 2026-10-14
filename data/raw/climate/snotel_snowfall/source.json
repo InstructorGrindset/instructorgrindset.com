@@ -1,0 +1,29 @@
+{
+  "source": {
+    "id": "nrcs-snotel-awdb-annual-snowfall",
+    "url": "https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1/",
+    "title": "NRCS SNOTEL daily snow water equivalent, snow depth and air temperature (AWDB REST API), station annual snowfall derived for the snowfall heat map",
+    "accessed_date": "2026-10-13",
+    "note": "Public domain (US government work, USDA NRCS National Water and Climate Center). Derived, not measured: SNOTEL measures snow water equivalent and depth, not snowfall. Daily new snow = daily SWE gain / new snow density (the SNOW-17 step HCN = PX / DHN), never below the daily depth gain, with the climate.snotel thresholds (SWE gain 0.1 to 6.0 in, depth spike 40.0 in, cap 60.0 in, rain snow threshold 1.0 C). Density: the station's own monthly median storm density, else the anderson_1976 estimate from the station's daily mean air temperature (TAVG). Annual figure: the median of the water year totals 2011 to 2025; a year counts when Nov to Apr have 90% of their days with data, and a station needs 8 such years. Values describe the station elevation."
+  },
+  "confidence": "estimated",
+  "license": "public domain",
+  "method": "swe_gain_over_density_median",
+  "units": {
+    "annual_snowfall_in": "in",
+    "elevation_ft": "ft"
+  },
+  "water_years": [
+    2011,
+    2025
+  ],
+  "min_complete_years": 8,
+  "elements": [
+    "WTEQ",
+    "SNWD",
+    "TAVG"
+  ],
+  "stations_listed_at": "2026-10-13T18:34:57+00:00",
+  "rows": 873,
+  "usable": 831
+}

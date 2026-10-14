@@ -1,0 +1,26 @@
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+data/raw/climate/*
+# The NOAA normals extract is committed; its archive download is not.
+!data/raw/climate/noaa_normals/
+data/raw/climate/noaa_normals/download/
+# The SNOTEL station snowfall extract is committed; its daily downloads are not.
+!data/raw/climate/snotel_snowfall/
+data/raw/climate/snotel_snowfall/download/
+data/raw/openskimap/*.full.geojson
+# The terrain extract is committed; its tile download is not.
+data/raw/terrain/download/
+data/raw/transit/*/gtfs.zip
+data/raw/routing/
+data/raw/reports/queue/
+data/raw/reports/moderated/
+# Zillow ZORI: the compact extract data/raw/rent/zillow/zori_extract.csv is committed; the full CSVs
+# (downloaded into download/ or placed by hand) and the Census Gazetteer ZCTA file are not.
+data/raw/rent/zillow/download/
+data/raw/rent/zillow/*_zori_*
+data/raw/rent/zillow/*Gaz_zcta*
+# Basemap underlay: the Natural Earth zip and TIFF that pipeline/tools/make_underlay.py reads; images/basemap/ is committed.
+data/raw/basemap/download/

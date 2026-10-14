@@ -1,0 +1,14 @@
+{
+  "name": "instructorgrindset-map-tooling",
+  "private": true,
+  "description": "Dev tooling for the Career Map data pipeline. Nothing here ships to the site.",
+  "type": "module",
+  "scripts": {
+    "build:states": "node scripts/build-states.mjs",
+    "build:counties": "node scripts/build-counties.mjs"
+  },
+  "devDependencies": {
+    "topojson-client": "3.1.0",
+    "us-atlas": "3.0.1"
+  }
+}

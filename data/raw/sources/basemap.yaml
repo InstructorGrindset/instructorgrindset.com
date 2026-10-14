@@ -1,0 +1,12 @@
+# Basemap sources. The satellite style underlay in images/basemap/ (pipeline/tools/make_underlay.py) is a picture
+# under the map; it displays no number. Credited on /map/credits/ and in the map attribution.
+sources:
+  - id: natural-earth-ne1-hr-lc-sr-w
+    url: https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-1/
+    title: Natural Earth I with Shaded Relief, Water and Drainages (1:10m, large size, version 2.0.0)
+    accessed_date: 2026-10-14
+    note: >-
+      Public domain (Natural Earth terms of use, https://www.naturalearthdata.com/about/terms-of-use/; "Natural Earth is
+      a public domain map dataset", https://github.com/nvkelso/natural-earth-vector). Downloaded from the AWS mirror
+      https://naturalearth.s3.amazonaws.com/10m_raster/NE1_HR_LC_SR_W.zip (21,600 x 10,800 pixels, 1 arc minute).
+      Cropped to the lower 48 and Alaska, resampled to Web Mercator rows and muted for the map underlay.

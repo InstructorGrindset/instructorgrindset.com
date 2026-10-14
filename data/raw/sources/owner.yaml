@@ -1,0 +1,7 @@
+# Pipeline owned shared sources. Research files in data/raw/tier_a/ and data/raw/ownership/
+# may cite these ids without redefining them. Source ids are globally unique across data/raw.
+sources:
+  - id: owner-decisions-2026-10-11
+    url: https://github.com/InstructorGrindset/instructorgrindset.com/blob/main/ROADMAP.md#9-decisions-log
+    title: Instructor Grindset owner decisions log
+    accessed_date: 2026-10-11

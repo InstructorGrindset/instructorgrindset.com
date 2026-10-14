@@ -1,0 +1,1394 @@
+# Official resort trail map links (owner request 2026-10-13) and map files (owner decision 2026-10-14). The maps are
+# the resorts' (or their artists') copyrighted art: the trail map dialog shows the image_url file straight from the
+# resort's servers, credited, and it is never downloaded, copied, rehosted or modified. Every URL comes from a web
+# search result on the resort's own domain or its operator's domain (search result rule: page not opened, confidence
+# estimated); image_url sources (tmi-*) are the file URLs as seen in a result. Season labels only where the search
+# result itself named the season. Format and rules: data/raw/trailmaps_official/README.md
+batch: trailmaps-official-2026-10
+researched_date: '2026-10-13'
+sources:
+- id: tmo-vail
+  url: https://www.vail.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Vail Mountain Summer Trail Maps - Hiking and Biking
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-stowe
+  url: https://www.stowe.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Terrain & Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-park-city
+  url: https://www.parkcitymountain.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Park City Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-breckenridge
+  url: https://www.breckenridge.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Breckenridge Resort Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-beaver-creek
+  url: https://www.beavercreek.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Beaver Creek Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-kirkwood
+  url: https://www.kirkwood.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-okemo
+  url: https://www.okemo.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Mountain Terrain & Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-stevens-pass
+  url: https://www.stevenspass.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Stevens Pass Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-heavenly
+  url: https://www.skiheavenly.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Heavenly Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-keystone
+  url: https://www.keystoneresort.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Keystone Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-northstar
+  url: https://www.northstarcalifornia.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Northstar California Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mount-snow
+  url: https://www.mountsnow.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Mountain Terrain & Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mount-sunapee
+  url: https://www.mountsunapee.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Mountain Terrain & Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-crotched-mountain
+  url: https://www.crotchedmtn.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-attitash
+  url: https://www.attitash.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mad-river-mountain
+  url: https://www.skimadriver.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-snow-creek
+  url: https://www.skisnowcreek.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-hidden-valley-mo
+  url: https://www.hiddenvalleyski.com/the-mountain/about-the-mountain/trail-maps.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mount-brighton
+  url: https://www.mtbrighton.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Mt. Brighton Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-hunter-mountain
+  url: https://www.huntermtn.com/-/aemasset/sitecore/hunter/maps/winter-2025-2026/20251122_HU_winter-trail_map_001.pdf
+  title: Hunter Mountain winter trail map 2025-2026 (PDF)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-crested-butte
+  url: https://www.skicb.com/-/aemasset/sitecore/crested-butte/maps/winter-2025-2026/20251103_CB_winter-trail_map_001.pdf
+  title: Crested Butte winter trail map 2025-2026 (PDF)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-boston-mills
+  url: https://www.bmbw.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-wilmot-mountain
+  url: https://www.wilmotmountain.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-liberty-mountain
+  url: https://www.libertymountainresort.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail and Resort Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-seven-springs
+  url: https://www.7springs.com/-/aemasset/sitecore/seven-springs/trail-base-maps/winter-2025-2026/20251205_SN_winter-trail_map_001.pdf
+  title: Seven Springs winter trail map 2025-2026 (PDF)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-hidden-valley-pa
+  url: https://www.hiddenvalleyresort.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-whitetail
+  url: https://www.skiwhitetail.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail and Resort Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-roundtop-mountain
+  url: https://www.skiroundtop.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail and Resort Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-laurel-mountain
+  url: https://www.laurelmountainski.com/-/aemasset/sitecore/laurel-mountain/trail-base-maps/20221122_LM_winter-trail_map_001.pdf
+  title: Laurel Mountain winter trail map (PDF)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-jack-frost
+  url: https://www.jfbb.com/-/aemasset/sitecore/jack-frost-big-boulder/maps/20231103_JFBB_winter-trail_map_002.pdf
+  title: Jack Frost Big Boulder winter trail map (PDF)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-afton-alps
+  url: https://www.aftonalps.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Afton Alps Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-wildcat
+  url: https://www.skiwildcat.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Wildcat Mountain Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-paoli-peaks
+  url: https://www.paolipeaks.com/the-mountain/about-the-mountain/trail-map.aspx
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mammoth-mountain
+  url: https://www.mammothmountain.com/on-the-mountain/winter-trail-map
+  title: Winter Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-palisades-tahoe
+  url: https://www.palisadestahoe.com/mountain-information/trail-maps
+  title: Explore our Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-stratton
+  url: https://www.stratton.com/the-mountain/interactive-trail-map
+  title: Stratton Mountain Resort Interactive Ski Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-steamboat
+  url: https://www.steamboat.com/the-mountain/trail-map
+  title: Trails and Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-snowshoe
+  url: https://www.snowshoemtn.com/mountain-info/maps
+  title: Winter Trail Map - Snowshoe Mountain
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-deer-valley
+  url: https://www.deervalley.com/media-room/101725-updated-trail-map
+  title: Deer Valley Resort updated trail map (media room)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-sugarbush
+  url: https://www.sugarbush.com/mountain/terrain-and-maps
+  title: Trail Map & Terrain Information
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-winter-park
+  url: https://www.winterparkresort.com/the-mountain/mountain-information/maps
+  title: Winter Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-solitude
+  url: https://www.solitudemountain.com/-/media/Solitude/Trail-Map-PDFs/2122-Solitude-Winter-Trail-Map.pdf
+  title: Solitude winter trail map 2021/22 (PDF)
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-bear-mountain
+  url: https://www.bigbearmountainresort.com/mountain-information/trail-maps
+  title: Trail Maps for Snow Valley, Snow Summit, & Bear Mountain
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-schweitzer
+  url: https://schweitzer.com/discover/trail-maps
+  title: Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-crystal-mountain
+  url: https://www.crystalmountainresort.com/the-mountain/trail-maps
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-arapahoe-basin
+  url: https://www.arapahoebasin.com/trail-maps/
+  title: A-Basin Ski & Snowboard Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-june-mountain
+  url: https://www.junemountain.com/mountain-information/trail-map
+  title: Official Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-snowmass
+  url: https://www.aspensnowmass.com/four-mountains/snowmass/trail-maps
+  title: Snowmass Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-buttermilk
+  url: https://www.aspensnowmass.com/four-mountains/buttermilk/trail-maps
+  title: Buttermilk Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-aspen-highlands
+  url: https://www.aspensnowmass.com/four-mountains/aspen-highlands/trail-maps
+  title: Aspen Highlands Winter Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-aspen-mountain
+  url: https://www.aspensnowmass.com/four-mountains/aspen-mountain/trail-maps
+  title: Aspen Mountain Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-big-sky
+  url: https://www.bigskyresort.com/trail-maps
+  title: Trail & Resort Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-jackson-hole
+  url: https://www.jacksonhole.com/maps/mountain-winter
+  title: Trail Map Winter - Jackson Hole Mountain Resort
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-boyne-mountain
+  url: https://www.boynemountain.com/mountain-maps
+  title: Interactive Mountain Trail Maps & Resort Navigation Guides
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-brighton
+  url: https://www.brightonresort.com/trail-maps
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-snowbird
+  url: https://www.snowbird.com/lifts-trails/
+  title: Lifts & Trails
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-sunday-river
+  url: https://www.sundayriver.com/resort-maps
+  title: Resort Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-taos
+  url: https://www.skitaos.com/mountain/lifts-trails
+  title: Lifts & Trails at Taos Ski Valley
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-killington
+  url: https://killington.com/winter-trail-map
+  title: Winter Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-snowbasin
+  url: https://www.snowbasin.com/the-mountain/trail-maps/
+  title: Snowbasin Resort Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-pico
+  url: https://picomountain.com/winter-trail-map
+  title: Winter Trail Map & Visitor Guide at Pico Resort
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-timberline-lodge
+  url: https://timberlinelodge.com/mountain/trail-map/
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-grand-targhee
+  url: https://www.grandtarghee.com/the-mountain/mountain-information/trail-maps
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-the-highlands
+  url: https://www.highlandsharborsprings.com/resort-maps
+  title: Maps - Navigate Around The Resort
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-cranmore
+  url: https://cranmore.com/trail-map
+  title: Trail Map - Cranmore
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-sugar-bowl
+  url: https://www.sugarbowl.com/trailmaps
+  title: Sugar Bowl Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-sugarloaf
+  url: https://www.sugarloaf.com/mountain-info/mountain-maps
+  title: Mountain Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-powder-mountain
+  url: https://powdermountain.com/trail-map
+  title: View the Trail Map at Powder Mountain
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-bridger-bowl
+  url: https://bridgerbowl.com/mountain/trail-map
+  title: Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mt-bachelor
+  url: https://www.mtbachelor.com/the-mountain/maps/winter-lift-trail-map/
+  title: Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-jay-peak
+  url: https://jaypeakresort.com/skiing-riding/snow-report-maps/trail-map
+  title: Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-whitefish-mountain
+  url: https://skiwhitefish.com/trail-maps/
+  title: Trail Maps - Whitefish Mountain Resort
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-whiteface
+  url: https://whiteface.com/mountain/trail-map/
+  title: Trail Map - Check Open Lifts and Trails
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-telluride
+  url: https://tellurideskiresort.com/mountain/
+  title: THE MOUNTAIN
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-cannon
+  url: https://www.cannonmt.com/trail-map
+  title: Trail Map - Cannon Mountain
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-copper-mountain
+  url: https://www.coppercolorado.com/the-mountain/trail-area-maps/winter-trail-map/
+  title: Winter Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-gunstock
+  url: https://www.gunstock.com/winter/trail-map/
+  title: Gunstock - Interactive Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-middlebury-snow-bowl
+  url: https://middleburysnowbowl.com/trail-map/
+  title: Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-magic-mountain
+  url: https://www.magicmtn.com/trail-map
+  title: Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-buck-hill
+  url: https://buckhill.com/skiing-snowboarding/winter-trail-map/
+  title: Winter Trail Map - Buck Hill
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-berkshire-east
+  url: https://berkshireeast.com/plan/trail-maps
+  title: Trail Maps - Berkshire East Mountain Resort
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-alyeska
+  url: https://www.alyeskaresort.com/mountain/about-trail-maps
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mt-baker
+  url: https://www.mtbaker.us/the-mountain/trail-map/
+  title: Trail Map - Mt. Baker Ski Area
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mt-hood-meadows
+  url: https://www.skihood.com/explore/trail-maps
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-waterville-valley
+  url: https://www.waterville.com/maps
+  title: Maps - Waterville Valley Resort
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-bogus-basin
+  url: https://bogusbasin.org/your-mountain/maps-statistics/
+  title: Maps & Statistics
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-sun-valley
+  url: https://www.sunvalley.com/the-mountain/maps-guides/
+  title: Navigate The Mountain with Our Maps & Guides
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-howelsen-hill
+  url: https://steamboatsprings.net/983/Trail-Maps
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-ski-cooper
+  url: https://www.skicooper.com/mountain-stats-map/
+  title: Mountain Stats & Map - Cooper
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mount-bohemia
+  url: https://www.mtbohemia.com/trail-maps/
+  title: Trail Maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+# Remainder of ROADMAP Section 8 item 2 (2026-10-13): the Tier A ski areas that had no link. Searched but not
+# linked: Alta (search results show only the summer map page), Burke (no trail map page surfaced on skiburke.com),
+# Saskadena Six and Hermitage Club (no page whose result names a trail map), Yellowstone Club (private club; only a
+# 2021/22 Nordic map PDF surfaced on yellowstoneclub.com, no alpine trail map).
+- id: tmo-alpine-valley-oh
+  url: https://alpinevalleyohio.com/trail-map
+  title: Alpine Valley
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-black-mountain-maine
+  url: https://skiblackmountain.org/maps
+  title: Black Mountain of Maine trail maps
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-hyland-hills
+  url: https://www.threeriversparks.org/page/hyland-hills-ski-runs-terrain-park
+  title: Ski Runs & Terrain Park Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-mad-river-glen
+  url: https://www.madriverglen.com/trail-maps/
+  title: Trail Maps - Mad River Glen, Vermont
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-montana-snowbowl
+  url: https://montanasnowbowl.com/trailmap.html
+  title: Montana Snowbowl Trail Map
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmo-silverton-mountain
+  url: https://silvertonmountain.com/mountain/trail-map/
+  title: Trail Map - Silverton Mountain
+  accessed_date: '2026-10-13'
+  note: From a search result for this page; page not opened
+- id: tmi-okemo
+  url: https://www.okemo.com/-/aemasset/sitecore/okemo/maps/winter-2025-2026/20251120_OK_winter-trail_map_001.pdf
+  title: Okemo Winter Trail Map 2025-2026 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-park-city
+  url: https://www.parkcitymountain.com/-/aemasset/sitecore/park-city/maps/20251114_PC_winter-trail_map_001.pdf
+  title: Park City winter trail map, file dated 2025-11-14 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-stevens-pass
+  url: https://www.stevenspass.com/-/aemasset/sitecore/stevens-pass/maps/winter-2024-2025/20241115_SV_winter-trail_map_001.pdf
+  title: Stevens Pass winter trail map 2024-2025 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-vail
+  url: https://www.vail.com/-/aemasset/sitecore/vail/maps/winter-2024-2025/20250103_VL_winter-front-side-trail_map_001.pdf
+  title: Vail winter Front Side trail map 2024-2025 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-crystal-mountain
+  url: https://www.crystalmountainresort.com/-/media/crystal/pdf-files/trail-maps/2025-trail-maps/crystal_2526_smartwool_map.pdf?rev=a8b85630fceb457c84e920dd24d3bffd
+  title: Crystal Mountain 2025/26 trail map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-sugarbush
+  url: https://www.sugarbush.com/-/media/sugarbush/maps/sugarbush-winter-trail-map.pdf?rev=4ed4b3ef5cb64ca889a0756e61a95422
+  title: sugarbush-winter-trail-map.pdf
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-mount-sunapee
+  url: https://www.mountsunapee.com/-/aemasset/sitecore/mount-sunapee/maps/20231031_MS_winter-trail_map_001.pdf
+  title: Mount Sunapee Winter Trail Map 2023-2024 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-wilmot-mountain
+  url: https://www.wilmotmountain.com/-/aemasset/sitecore/wilmot/maps/20240916_WM_winter-trail_map_001.pdf
+  title: Wilmot winter trail map, file dated 2024-09-16 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-hidden-valley-pa
+  url: https://www.hiddenvalleyresort.com/-/aemasset/sitecore/hidden-valley-pa/trail-base-maps/20221122_HP_winter-trail_map_001.pdf
+  title: Hidden Valley winter trail map, file dated 2022-11-22 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-liberty-mountain
+  url: https://www.libertymountainresort.com/-/aemasset/sitecore/liberty/maps/20211110_LB_NEW-Winter-Trail_Map.001.pdf
+  title: New Liberty Winter Trail Map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-afton-alps
+  url: https://www.aftonalps.com/-/aemasset/sitecore/afton-alps/maps/20211107_AA_Winter-Trail_Map.001.pdf
+  title: Afton Alps winter trail map, file dated 2021-11-07 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-cranmore
+  url: https://cranmore.com/assets/documents/2324_Cranmore_TrailMap_withLegend_Web.pdf
+  title: Cranmore 2023/24 trail map with legend (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-mount-bohemia
+  url: https://www.mtbohemia.com/wp-content/uploads/2022/11/bohemia-trail-map.pdf
+  title: Mount Bohemia trail map, uploaded 2022-11 (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-snowshoe
+  url: https://www.snowshoemtn.com/-/media/snowshoe/maps/trailmapw2024.pdf?rev=d1fa14e71919433caabacd244dc3a13e
+  title: Snowshoe winter 2024 trail map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-grand-targhee
+  url: https://www.grandtarghee.com/sites/default/files/2022-12/22-23%20Winter%20Trail%20Map.pdf
+  title: Grand Targhee 22-23 Winter Trail Map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-palisades-tahoe-alpine-meadows
+  url: https://www.palisadestahoe.com/-/media/palisades-tahoe/pdfs/trail-maps/alpine-back-side-trail.pdf?rev=ad5ea90549cc4b6980a80da7976e433e
+  title: Palisades Tahoe Alpine back side trail map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+- id: tmi-june-mountain
+  url: https://www.junemountain.com/-/media/june/pdfs/trail-map/23-24_jmsa_trailmap_17x12_web.pdf?rev=7c3ab2c434694d61a21b7b82727e027b&hash=B57A030B7A62CCAE5E14CCFAB707EAA7
+  title: June Mountain 23/24 trail map (PDF)
+  accessed_date: '2026-10-14'
+  note: From a search result for this page; page not opened
+trailmaps:
+- resort_id: vail
+  url: https://www.vail.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-vail
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.vail.com/-/aemasset/sitecore/vail/maps/winter-2024-2025/20250103_VL_winter-front-side-trail_map_001.pdf
+  image_format: pdf
+  image_source_id: tmi-vail
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "Front Side map for 2024/25; the Back Bowls have their own map. The resort may have a newer one."
+- resort_id: stowe
+  url: https://www.stowe.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: 2025/26
+  source_id: tmo-stowe
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: park-city
+  url: https://www.parkcitymountain.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-park-city
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.parkcitymountain.com/-/aemasset/sitecore/park-city/maps/20251114_PC_winter-trail_map_001.pdf
+  image_format: pdf
+  image_source_id: tmi-park-city
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+- resort_id: breckenridge
+  url: https://www.breckenridge.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-breckenridge
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: beaver-creek
+  url: https://www.beavercreek.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-beaver-creek
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: kirkwood
+  url: https://www.kirkwood.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-kirkwood
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: okemo
+  url: https://www.okemo.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-okemo
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.okemo.com/-/aemasset/sitecore/okemo/maps/winter-2025-2026/20251120_OK_winter-trail_map_001.pdf
+  image_format: pdf
+  image_source_id: tmi-okemo
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+- resort_id: stevens-pass
+  url: https://www.stevenspass.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-stevens-pass
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.stevenspass.com/-/aemasset/sitecore/stevens-pass/maps/winter-2024-2025/20241115_SV_winter-trail_map_001.pdf
+  image_format: pdf
+  image_source_id: tmi-stevens-pass
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file is the 2024/25 map; the resort may have a newer one."
+- resort_id: heavenly
+  url: https://www.skiheavenly.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-heavenly
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: keystone
+  url: https://www.keystoneresort.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-keystone
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: northstar
+  url: https://www.northstarcalifornia.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-northstar
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mount-snow
+  url: https://www.mountsnow.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-mount-snow
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mount-sunapee
+  url: https://www.mountsunapee.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-mount-sunapee
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.mountsunapee.com/-/aemasset/sitecore/mount-sunapee/maps/20231031_MS_winter-trail_map_001.pdf
+  image_format: pdf
+  image_source_id: tmi-mount-sunapee
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: crotched-mountain
+  url: https://www.crotchedmtn.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-crotched-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: attitash
+  url: https://www.attitash.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-attitash
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mad-river-mountain
+  url: https://www.skimadriver.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-mad-river-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snow-creek
+  url: https://www.skisnowcreek.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-snow-creek
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: hidden-valley-mo
+  url: https://www.hiddenvalleyski.com/the-mountain/about-the-mountain/trail-maps.aspx
+  format: page
+  season: null
+  source_id: tmo-hidden-valley-mo
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mount-brighton
+  url: https://www.mtbrighton.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-mount-brighton
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: hunter-mountain
+  url: https://www.huntermtn.com/-/aemasset/sitecore/hunter/maps/winter-2025-2026/20251122_HU_winter-trail_map_001.pdf
+  format: pdf
+  season: 2025/26
+  source_id: tmo-hunter-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: crested-butte
+  url: https://www.skicb.com/-/aemasset/sitecore/crested-butte/maps/winter-2025-2026/20251103_CB_winter-trail_map_001.pdf
+  format: pdf
+  season: 2025/26
+  source_id: tmo-crested-butte
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: boston-mills
+  url: https://www.bmbw.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: 2025/26
+  source_id: tmo-boston-mills
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: brandywine
+  url: https://www.bmbw.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: 2025/26
+  source_id: tmo-boston-mills
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: wilmot-mountain
+  url: https://www.wilmotmountain.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: 2025/26
+  source_id: tmo-wilmot-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.wilmotmountain.com/-/aemasset/sitecore/wilmot/maps/20240916_WM_winter-trail_map_001.pdf
+  image_format: pdf
+  image_source_id: tmi-wilmot-mountain
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+- resort_id: liberty-mountain
+  url: https://www.libertymountainresort.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-liberty-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.libertymountainresort.com/-/aemasset/sitecore/liberty/maps/20211110_LB_NEW-Winter-Trail_Map.001.pdf
+  image_format: pdf
+  image_source_id: tmi-liberty-mountain
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: seven-springs
+  url: https://www.7springs.com/-/aemasset/sitecore/seven-springs/trail-base-maps/winter-2025-2026/20251205_SN_winter-trail_map_001.pdf
+  format: pdf
+  season: 2025/26
+  source_id: tmo-seven-springs
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: hidden-valley-pa
+  url: https://www.hiddenvalleyresort.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-hidden-valley-pa
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.hiddenvalleyresort.com/-/aemasset/sitecore/hidden-valley-pa/trail-base-maps/20221122_HP_winter-trail_map_001.pdf
+  image_format: pdf
+  image_source_id: tmi-hidden-valley-pa
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: whitetail
+  url: https://www.skiwhitetail.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-whitetail
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: roundtop-mountain
+  url: https://www.skiroundtop.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-roundtop-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: laurel-mountain
+  url: https://www.laurelmountainski.com/-/aemasset/sitecore/laurel-mountain/trail-base-maps/20221122_LM_winter-trail_map_001.pdf
+  format: pdf
+  season: null
+  source_id: tmo-laurel-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+  note: The file name carries an older date; the resort may have a newer map.
+- resort_id: jack-frost
+  url: https://www.jfbb.com/-/aemasset/sitecore/jack-frost-big-boulder/maps/20231103_JFBB_winter-trail_map_002.pdf
+  format: pdf
+  season: null
+  source_id: tmo-jack-frost
+  as_of: '2026-10-13'
+  confidence: estimated
+  note: The file name carries an older date; the resort may have a newer map.
+- resort_id: big-boulder
+  url: https://www.jfbb.com/-/aemasset/sitecore/jack-frost-big-boulder/maps/20231103_JFBB_winter-trail_map_002.pdf
+  format: pdf
+  season: null
+  source_id: tmo-jack-frost
+  as_of: '2026-10-13'
+  confidence: estimated
+  note: The file name carries an older date; the resort may have a newer map.
+- resort_id: afton-alps
+  url: https://www.aftonalps.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-afton-alps
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.aftonalps.com/-/aemasset/sitecore/afton-alps/maps/20211107_AA_Winter-Trail_Map.001.pdf
+  image_format: pdf
+  image_source_id: tmi-afton-alps
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: wildcat
+  url: https://www.skiwildcat.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-wildcat
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: paoli-peaks
+  url: https://www.paolipeaks.com/the-mountain/about-the-mountain/trail-map.aspx
+  format: page
+  season: null
+  source_id: tmo-paoli-peaks
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mammoth-mountain
+  url: https://www.mammothmountain.com/on-the-mountain/winter-trail-map
+  format: page
+  season: null
+  source_id: tmo-mammoth-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: palisades-tahoe
+  url: https://www.palisadestahoe.com/mountain-information/trail-maps
+  format: page
+  season: null
+  source_id: tmo-palisades-tahoe
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: palisades-tahoe-alpine-meadows
+  url: https://www.palisadestahoe.com/mountain-information/trail-maps
+  format: page
+  season: null
+  source_id: tmo-palisades-tahoe
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.palisadestahoe.com/-/media/palisades-tahoe/pdfs/trail-maps/alpine-back-side-trail.pdf?rev=ad5ea90549cc4b6980a80da7976e433e
+  image_format: pdf
+  image_source_id: tmi-palisades-tahoe-alpine-meadows
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "Alpine back side only; the front side has its own map."
+- resort_id: stratton
+  url: https://www.stratton.com/the-mountain/interactive-trail-map
+  format: page
+  season: null
+  source_id: tmo-stratton
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: steamboat
+  url: https://www.steamboat.com/the-mountain/trail-map
+  format: page
+  season: null
+  source_id: tmo-steamboat
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snowshoe
+  url: https://www.snowshoemtn.com/mountain-info/maps
+  format: page
+  season: null
+  source_id: tmo-snowshoe
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.snowshoemtn.com/-/media/snowshoe/maps/trailmapw2024.pdf?rev=d1fa14e71919433caabacd244dc3a13e
+  image_format: pdf
+  image_source_id: tmi-snowshoe
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: deer-valley
+  url: https://www.deervalley.com/media-room/101725-updated-trail-map
+  format: page
+  season: 2025/26
+  source_id: tmo-deer-valley
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: sugarbush
+  url: https://www.sugarbush.com/mountain/terrain-and-maps
+  format: page
+  season: null
+  source_id: tmo-sugarbush
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.sugarbush.com/-/media/sugarbush/maps/sugarbush-winter-trail-map.pdf?rev=4ed4b3ef5cb64ca889a0756e61a95422
+  image_format: pdf
+  image_source_id: tmi-sugarbush
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+- resort_id: winter-park
+  url: https://www.winterparkresort.com/the-mountain/mountain-information/maps
+  format: page
+  season: 2025/26
+  source_id: tmo-winter-park
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: solitude
+  url: https://www.solitudemountain.com/-/media/Solitude/Trail-Map-PDFs/2122-Solitude-Winter-Trail-Map.pdf
+  format: pdf
+  season: 2021/22
+  source_id: tmo-solitude
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: bear-mountain
+  url: https://www.bigbearmountainresort.com/mountain-information/trail-maps
+  format: page
+  season: null
+  source_id: tmo-bear-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snow-summit
+  url: https://www.bigbearmountainresort.com/mountain-information/trail-maps
+  format: page
+  season: null
+  source_id: tmo-bear-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snow-valley
+  url: https://www.bigbearmountainresort.com/mountain-information/trail-maps
+  format: page
+  season: null
+  source_id: tmo-bear-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: schweitzer
+  url: https://schweitzer.com/discover/trail-maps
+  format: page
+  season: null
+  source_id: tmo-schweitzer
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: crystal-mountain
+  url: https://www.crystalmountainresort.com/the-mountain/trail-maps
+  format: page
+  season: 2025/26
+  source_id: tmo-crystal-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.crystalmountainresort.com/-/media/crystal/pdf-files/trail-maps/2025-trail-maps/crystal_2526_smartwool_map.pdf?rev=a8b85630fceb457c84e920dd24d3bffd
+  image_format: pdf
+  image_source_id: tmi-crystal-mountain
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+- resort_id: arapahoe-basin
+  url: https://www.arapahoebasin.com/trail-maps/
+  format: page
+  season: null
+  source_id: tmo-arapahoe-basin
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: june-mountain
+  url: https://www.junemountain.com/mountain-information/trail-map
+  format: page
+  season: null
+  source_id: tmo-june-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.junemountain.com/-/media/june/pdfs/trail-map/23-24_jmsa_trailmap_17x12_web.pdf?rev=7c3ab2c434694d61a21b7b82727e027b&hash=B57A030B7A62CCAE5E14CCFAB707EAA7
+  image_format: pdf
+  image_source_id: tmi-june-mountain
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: snowmass
+  url: https://www.aspensnowmass.com/four-mountains/snowmass/trail-maps
+  format: page
+  season: null
+  source_id: tmo-snowmass
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: buttermilk
+  url: https://www.aspensnowmass.com/four-mountains/buttermilk/trail-maps
+  format: page
+  season: null
+  source_id: tmo-buttermilk
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: aspen-highlands
+  url: https://www.aspensnowmass.com/four-mountains/aspen-highlands/trail-maps
+  format: page
+  season: null
+  source_id: tmo-aspen-highlands
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: aspen-mountain
+  url: https://www.aspensnowmass.com/four-mountains/aspen-mountain/trail-maps
+  format: page
+  season: null
+  source_id: tmo-aspen-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: big-sky
+  url: https://www.bigskyresort.com/trail-maps
+  format: page
+  season: null
+  source_id: tmo-big-sky
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: jackson-hole
+  url: https://www.jacksonhole.com/maps/mountain-winter
+  format: page
+  season: null
+  source_id: tmo-jackson-hole
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: boyne-mountain
+  url: https://www.boynemountain.com/mountain-maps
+  format: page
+  season: null
+  source_id: tmo-boyne-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: brighton
+  url: https://www.brightonresort.com/trail-maps
+  format: page
+  season: null
+  source_id: tmo-brighton
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snowbird
+  url: https://www.snowbird.com/lifts-trails/
+  format: page
+  season: null
+  source_id: tmo-snowbird
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: sunday-river
+  url: https://www.sundayriver.com/resort-maps
+  format: page
+  season: null
+  source_id: tmo-sunday-river
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: taos
+  url: https://www.skitaos.com/mountain/lifts-trails
+  format: page
+  season: null
+  source_id: tmo-taos
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: killington
+  url: https://killington.com/winter-trail-map
+  format: page
+  season: null
+  source_id: tmo-killington
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: snowbasin
+  url: https://www.snowbasin.com/the-mountain/trail-maps/
+  format: page
+  season: 2025/26
+  source_id: tmo-snowbasin
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: pico
+  url: https://picomountain.com/winter-trail-map
+  format: page
+  season: null
+  source_id: tmo-pico
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: timberline-lodge
+  url: https://timberlinelodge.com/mountain/trail-map/
+  format: page
+  season: null
+  source_id: tmo-timberline-lodge
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: grand-targhee
+  url: https://www.grandtarghee.com/the-mountain/mountain-information/trail-maps
+  format: page
+  season: 2026/27
+  source_id: tmo-grand-targhee
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.grandtarghee.com/sites/default/files/2022-12/22-23%20Winter%20Trail%20Map.pdf
+  image_format: pdf
+  image_source_id: tmi-grand-targhee
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: the-highlands
+  url: https://www.highlandsharborsprings.com/resort-maps
+  format: page
+  season: null
+  source_id: tmo-the-highlands
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: cranmore
+  url: https://cranmore.com/trail-map
+  format: page
+  season: null
+  source_id: tmo-cranmore
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://cranmore.com/assets/documents/2324_Cranmore_TrailMap_withLegend_Web.pdf
+  image_format: pdf
+  image_source_id: tmi-cranmore
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: sugar-bowl
+  url: https://www.sugarbowl.com/trailmaps
+  format: page
+  season: null
+  source_id: tmo-sugar-bowl
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: sugarloaf
+  url: https://www.sugarloaf.com/mountain-info/mountain-maps
+  format: page
+  season: null
+  source_id: tmo-sugarloaf
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: powder-mountain
+  url: https://powdermountain.com/trail-map
+  format: page
+  season: null
+  source_id: tmo-powder-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: bridger-bowl
+  url: https://bridgerbowl.com/mountain/trail-map
+  format: page
+  season: null
+  source_id: tmo-bridger-bowl
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mt-bachelor
+  url: https://www.mtbachelor.com/the-mountain/maps/winter-lift-trail-map/
+  format: page
+  season: null
+  source_id: tmo-mt-bachelor
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: jay-peak
+  url: https://jaypeakresort.com/skiing-riding/snow-report-maps/trail-map
+  format: page
+  season: null
+  source_id: tmo-jay-peak
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: whitefish-mountain
+  url: https://skiwhitefish.com/trail-maps/
+  format: page
+  season: null
+  source_id: tmo-whitefish-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: whiteface
+  url: https://whiteface.com/mountain/trail-map/
+  format: page
+  season: null
+  source_id: tmo-whiteface
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: telluride
+  url: https://tellurideskiresort.com/mountain/
+  format: page
+  season: null
+  source_id: tmo-telluride
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: cannon
+  url: https://www.cannonmt.com/trail-map
+  format: page
+  season: null
+  source_id: tmo-cannon
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: copper-mountain
+  url: https://www.coppercolorado.com/the-mountain/trail-area-maps/winter-trail-map/
+  format: page
+  season: null
+  source_id: tmo-copper-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: gunstock
+  url: https://www.gunstock.com/winter/trail-map/
+  format: page
+  season: null
+  source_id: tmo-gunstock
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: middlebury-snow-bowl
+  url: https://middleburysnowbowl.com/trail-map/
+  format: page
+  season: null
+  source_id: tmo-middlebury-snow-bowl
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: magic-mountain
+  url: https://www.magicmtn.com/trail-map
+  format: page
+  season: null
+  source_id: tmo-magic-mountain
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: buck-hill
+  url: https://buckhill.com/skiing-snowboarding/winter-trail-map/
+  format: page
+  season: null
+  source_id: tmo-buck-hill
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: berkshire-east
+  url: https://berkshireeast.com/plan/trail-maps
+  format: page
+  season: null
+  source_id: tmo-berkshire-east
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: alyeska
+  url: https://www.alyeskaresort.com/mountain/about-trail-maps
+  format: page
+  season: null
+  source_id: tmo-alyeska
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mt-baker
+  url: https://www.mtbaker.us/the-mountain/trail-map/
+  format: page
+  season: 2025/26
+  source_id: tmo-mt-baker
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mt-hood-meadows
+  url: https://www.skihood.com/explore/trail-maps
+  format: page
+  season: null
+  source_id: tmo-mt-hood-meadows
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: waterville-valley
+  url: https://www.waterville.com/maps
+  format: page
+  season: null
+  source_id: tmo-waterville-valley
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: bogus-basin
+  url: https://bogusbasin.org/your-mountain/maps-statistics/
+  format: page
+  season: 2024/25
+  source_id: tmo-bogus-basin
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: sun-valley
+  url: https://www.sunvalley.com/the-mountain/maps-guides/
+  format: page
+  season: null
+  source_id: tmo-sun-valley
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: dollar-mountain
+  url: https://www.sunvalley.com/the-mountain/maps-guides/
+  format: page
+  season: null
+  source_id: tmo-sun-valley
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: howelsen-hill
+  url: https://steamboatsprings.net/983/Trail-Maps
+  format: page
+  season: null
+  source_id: tmo-howelsen-hill
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: ski-cooper
+  url: https://www.skicooper.com/mountain-stats-map/
+  format: page
+  season: null
+  source_id: tmo-ski-cooper
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: mount-bohemia
+  url: https://www.mtbohemia.com/trail-maps/
+  format: page
+  season: null
+  source_id: tmo-mount-bohemia
+  as_of: '2026-10-13'
+  confidence: estimated
+  image_url: https://www.mtbohemia.com/wp-content/uploads/2022/11/bohemia-trail-map.pdf
+  image_format: pdf
+  image_source_id: tmi-mount-bohemia
+  image_as_of: '2026-10-14'
+  image_confidence: estimated
+  image_note: "The file name carries an older date; the resort may have a newer map."
+- resort_id: alpine-valley-oh
+  url: https://alpinevalleyohio.com/trail-map
+  format: page
+  season: null
+  source_id: tmo-alpine-valley-oh
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: black-mountain-maine
+  url: https://skiblackmountain.org/maps
+  format: page
+  season: null
+  source_id: tmo-black-mountain-maine
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: hyland-hills
+  url: https://www.threeriversparks.org/page/hyland-hills-ski-runs-terrain-park
+  format: page
+  season: null
+  source_id: tmo-hyland-hills
+  as_of: '2026-10-13'
+  confidence: estimated
+  note: Hosted by Three Rivers Park District, which owns and operates the ski area.
+- resort_id: mad-river-glen
+  url: https://www.madriverglen.com/trail-maps/
+  format: page
+  season: null
+  source_id: tmo-mad-river-glen
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: montana-snowbowl
+  url: https://montanasnowbowl.com/trailmap.html
+  format: page
+  season: null
+  source_id: tmo-montana-snowbowl
+  as_of: '2026-10-13'
+  confidence: estimated
+- resort_id: silverton-mountain
+  url: https://silvertonmountain.com/mountain/trail-map/
+  format: page
+  season: null
+  source_id: tmo-silverton-mountain
+  as_of: '2026-10-13'
+  confidence: estimated

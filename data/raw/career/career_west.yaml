@@ -1,0 +1,77 @@
+batch: career-west
+researched_date: 2026-10-11
+sources:
+  - id: pay-west-jh-private-lessons
+    url: https://www.jacksonhole.com/private-lessons
+    title: Jackson Hole Mountain Resort, Private Lessons (2025-26 online rates)
+    accessed_date: 2026-10-11
+  - id: pay-west-bridger-lessons
+    url: https://bridgerbowl.com/lessons/
+    title: Bridger Bowl, Lessons
+    accessed_date: 2026-10-11
+  - id: pay-west-snowbird-was-adaptive
+    url: https://powdr.wd12.myworkdayjobs.com/en-US/POWDR_Careers/job/Adaptive-Snowsports-Instructor---Wasatch-Adaptive-Sports---Snowbird_JR7259
+    title: POWDR Careers, Adaptive Snowsports Instructor, Wasatch Adaptive Sports, Snowbird (JR7259)
+    accessed_date: 2026-10-11
+resorts:
+  - resort_id: jackson-hole
+    private_rate:
+      value: {low: 1250, high: 1435, unit: full_day}
+      source_id: pay-west-jh-private-lessons
+      as_of: 2026-10-11
+      confidence: published
+      note: 2025-26 online rates, full day 9am to 4pm, up to 5 guests. Half day is $995 to $1,100.
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    client_profile_tags: []
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: bridger-bowl
+    private_rate: null
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    # Lessons page lists a youth Freeride Team taught by freestyle accredited instructors
+    # and youth multi week programs (Mogul Mice, Mitey Mites, Bridger Badgers).
+    client_profile_tags: [freestyle, local_kids_programs]
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: snowbird
+    private_rate: null
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    # Wasatch Adaptive Sports runs adaptive ski, sit ski, snowboard and ski bike lessons at Snowbird.
+    client_profile_tags: [adaptive]
+    enthusiast_types: []
+    professional_types: []
+  - resort_id: sun-valley
+    private_rate: null
+    private_split: null
+    professionalism_inputs:
+      cert_pay_differential: null
+      paid_training_hours: null
+      examiner_trainer_presence: null
+      private_lesson_share: null
+      year_round_staff: null
+      clinic_access: null
+    # Sun Valley H-2B job order (pay-west-sunvalley-dol-l3-2627) has instructors supporting the Sun Valley Race Department.
+    client_profile_tags: [race]
+    enthusiast_types: []
+    professional_types: []

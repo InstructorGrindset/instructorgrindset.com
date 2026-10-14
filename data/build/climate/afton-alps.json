@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-14T00:28:56Z",
+  "resort_id": "afton-alps",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "anderson-1976-new-snow-density"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": null,
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "afton-alps",
+      "month": 10,
+      "snowfall_in": 0.8,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 2.1,
+      "snowfall_source": "era5",
+      "density_pct_median": 15.3,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 57.9,
+      "temp_low_f": 41.4,
+      "wind_mph": 12.1,
+      "sun_pct": 66.8
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 11,
+      "snowfall_in": 4.1,
+      "powder_days": 0.04,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 2.9,
+      "snowfall_source": "era5",
+      "density_pct_median": 14.2,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.167,
+        "moist": 0.833
+      },
+      "density_source": "estimated",
+      "temp_high_f": 43.2,
+      "temp_low_f": 29.0,
+      "wind_mph": 11.9,
+      "sun_pct": 64.2
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 12,
+      "snowfall_in": 8.0,
+      "powder_days": 0.08,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 2.8,
+      "snowfall_source": "era5",
+      "density_pct_median": 11.0,
+      "density_mix": {
+        "dry": 0.184,
+        "average": 0.367,
+        "moist": 0.449
+      },
+      "density_source": "estimated",
+      "temp_high_f": 28.9,
+      "temp_low_f": 15.6,
+      "wind_mph": 11.3,
+      "sun_pct": 56.4
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 1,
+      "snowfall_in": 5.8,
+      "powder_days": 0.04,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 2.2,
+      "snowfall_source": "era5",
+      "density_pct_median": 9.1,
+      "density_mix": {
+        "dry": 0.278,
+        "average": 0.389,
+        "moist": 0.333
+      },
+      "density_source": "estimated",
+      "temp_high_f": 23.9,
+      "temp_low_f": 9.6,
+      "wind_mph": 11.2,
+      "sun_pct": 65.4
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 2,
+      "snowfall_in": 7.0,
+      "powder_days": 0.04,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.0,
+      "snowfall_source": "era5",
+      "density_pct_median": 11.5,
+      "density_mix": {
+        "dry": 0.1,
+        "average": 0.45,
+        "moist": 0.45
+      },
+      "density_source": "estimated",
+      "temp_high_f": 27.8,
+      "temp_low_f": 11.4,
+      "wind_mph": 11.5,
+      "sun_pct": 72.9
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 3,
+      "snowfall_in": 6.5,
+      "powder_days": 0.04,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.2,
+      "snowfall_source": "era5",
+      "density_pct_median": 14.1,
+      "density_mix": {
+        "dry": 0.053,
+        "average": 0.21,
+        "moist": 0.737
+      },
+      "density_source": "estimated",
+      "temp_high_f": 42.2,
+      "temp_low_f": 25.5,
+      "wind_mph": 12.0,
+      "sun_pct": 71.4
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 4,
+      "snowfall_in": 4.0,
+      "powder_days": 0.04,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.4,
+      "snowfall_source": "era5",
+      "density_pct_median": 16.8,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 55.7,
+      "temp_low_f": 37.7,
+      "wind_mph": 12.8,
+      "sun_pct": 67.5
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 5,
+      "snowfall_in": 0.3,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 6.8,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 68.3,
+      "temp_low_f": 49.9,
+      "wind_mph": 11.9,
+      "sun_pct": 70.2
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 6,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 78.2,
+      "temp_low_f": 60.9,
+      "wind_mph": 11.1,
+      "sun_pct": 76.4
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 7,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 82.5,
+      "temp_low_f": 64.9,
+      "wind_mph": 9.8,
+      "sun_pct": 84.9
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 8,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 79.4,
+      "temp_low_f": 61.9,
+      "wind_mph": 9.7,
+      "sun_pct": 81.1
+    },
+    {
+      "resort_id": "afton-alps",
+      "month": 9,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "era5",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 73.0,
+      "temp_low_f": 54.8,
+      "wind_mph": 11.2,
+      "sun_pct": 76.8
+    }
+  ]
+}

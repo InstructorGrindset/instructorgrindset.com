@@ -1,0 +1,20 @@
+# GitHub Pages (Jekyll) settings.
+# The site is plain static HTML. This file only keeps repository material
+# out of the published site.
+exclude:
+  - ROADMAP.md
+  - CLAUDE.md
+  - README.md
+  - requirements.txt
+  - pytest.ini
+  - package.json
+  - package-lock.json
+  - node_modules
+  - pipeline
+  - config
+  - tests
+  - docs
+  - scripts
+  - src
+  - data/raw
+  - "*.py"

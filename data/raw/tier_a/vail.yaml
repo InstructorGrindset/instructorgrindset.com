@@ -1,0 +1,2531 @@
+# Vail Resorts US portfolio, Tier A batch. Owner decision 2026-10-11: every Vail Resorts US resort is Tier A (operator_compensation).
+# Lifts left null where the Wikipedia infobox total conflicts with its itemized list or another figure in the article
+# (Vail 31 vs 32, Northstar 20 vs 19, Kirkwood 15 vs 13, Roundtop 9 vs 8, Whitetail 8 vs 7).
+batch: vail
+researched_date: 2026-10-11
+status: draft
+sources:
+- id: vail-10k-fy2026
+  url: https://www.sec.gov/Archives/edgar/data/0000812011/000081201126000049/mtn-20260731.htm
+  title: Vail Resorts, Inc. Form 10-K for the fiscal year ended July 31, 2026 (Item 1 Business, Item 2 Properties)
+  accessed_date: 2026-10-11
+- id: wikipedia-vail-ski-resort
+  url: https://en.wikipedia.org/wiki/Vail_Ski_Resort
+  title: Vail Ski Resort (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-beaver-creek-resort
+  url: https://en.wikipedia.org/wiki/Beaver_Creek_Resort
+  title: Beaver Creek Resort (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-breckenridge-ski-resort
+  url: https://en.wikipedia.org/wiki/Breckenridge_Ski_Resort
+  title: Breckenridge Ski Resort (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-crested-butte-mountain-resort
+  url: https://en.wikipedia.org/wiki/Crested_Butte_Mountain_Resort
+  title: Crested Butte Mountain Resort (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-crested-butte-colorado
+  url: https://en.wikipedia.org/wiki/Crested_Butte,_Colorado
+  title: Crested Butte, Colorado (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-park-city-mountain-resort
+  url: https://en.wikipedia.org/wiki/Park_City_Mountain_Resort
+  title: Park City Mountain Resort (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-northstar-california
+  url: https://en.wikipedia.org/wiki/Northstar_California
+  title: Northstar California (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-kirkwood-mountain-resort
+  url: https://en.wikipedia.org/wiki/Kirkwood_Mountain_Resort
+  title: Kirkwood Mountain Resort (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-stowe-mountain-resort
+  url: https://en.wikipedia.org/wiki/Stowe_Mountain_Resort
+  title: Stowe Mountain Resort (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-mount-snow
+  url: https://en.wikipedia.org/wiki/Mount_Snow
+  title: Mount Snow (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-wildcat-mountain-ski-area
+  url: https://en.wikipedia.org/wiki/Wildcat_Mountain_Ski_Area
+  title: Wildcat Mountain Ski Area (Wikipedia)
+  accessed_date: 2026-10-11
+- id: wikipedia-keystone-resort
+  url: https://en.wikipedia.org/wiki/Keystone_Resort
+  title: Keystone Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-heavenly-mountain-resort
+  url: https://en.wikipedia.org/wiki/Heavenly_Mountain_Resort
+  title: Heavenly Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-stevens-pass-ski-area
+  url: https://en.wikipedia.org/wiki/Stevens_Pass_Ski_Area
+  title: Stevens Pass Ski Area (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-okemo-mountain
+  url: https://en.wikipedia.org/wiki/Okemo_Mountain
+  title: Okemo Mountain (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-attitash-mountain-resort
+  url: https://en.wikipedia.org/wiki/Attitash_Mountain_Resort
+  title: Attitash Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-hunter-mountain-ski-area
+  url: https://en.wikipedia.org/wiki/Hunter_Mountain_(ski_area)
+  title: Hunter Mountain (ski area) (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-mount-sunapee-resort
+  url: https://en.wikipedia.org/wiki/Mount_Sunapee_Resort
+  title: Mount Sunapee Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-crotched-mountain-ski-and-ride
+  url: https://en.wikipedia.org/wiki/Crotched_Mountain_Ski_%26_Ride
+  title: Crotched Mountain Ski & Ride (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-seven-springs-mountain-resort
+  url: https://en.wikipedia.org/wiki/Seven_Springs_Mountain_Resort
+  title: Seven Springs Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-hidden-valley-resort-pennsylvania
+  url: https://en.wikipedia.org/wiki/Hidden_Valley_Resort_(Pennsylvania)
+  title: Hidden Valley Resort (Pennsylvania) (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-laurel-mountain-ski-resort
+  url: https://en.wikipedia.org/wiki/Laurel_Mountain_Ski_Resort
+  title: Laurel Mountain Ski Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-liberty-mountain-resort
+  url: https://en.wikipedia.org/wiki/Liberty_Mountain_Resort
+  title: Liberty Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-roundtop-mountain-resort
+  url: https://en.wikipedia.org/wiki/Roundtop_Mountain_Resort
+  title: Roundtop Mountain Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-whitetail-ski-resort
+  url: https://en.wikipedia.org/wiki/Whitetail_Ski_Resort
+  title: Whitetail Ski Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-jack-frost-big-boulder
+  url: https://en.wikipedia.org/wiki/Jack_Frost%E2%80%93Big_Boulder_Ski_Resort
+  title: Jack Frost–Big Boulder Ski Resort (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-afton-alps
+  url: https://en.wikipedia.org/wiki/Afton_Alps
+  title: Afton Alps (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-alpine-valley-ski-area-ohio
+  url: https://en.wikipedia.org/wiki/Alpine_Valley_Ski_Area
+  title: Alpine Valley Ski Area (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-boston-mills-brandywine
+  url: https://en.wikipedia.org/wiki/Boston_Mills/Brandywine_Ski_Resorts
+  title: Boston Mills/Brandywine Ski Resorts (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-mad-river-mountain
+  url: https://en.wikipedia.org/wiki/Mad_River_Mountain
+  title: Mad River Mountain (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-hidden-valley-ski-area-missouri
+  url: https://en.wikipedia.org/wiki/Hidden_Valley_Ski_Area
+  title: Hidden Valley Ski Area (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-snow-creek-ski-resort
+  url: https://en.wikipedia.org/wiki/Snow_Creek_(ski_resort)
+  title: Snow Creek (ski resort) (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-paoli-peaks
+  url: https://en.wikipedia.org/wiki/Paoli_Peaks
+  title: Paoli Peaks (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-mount-brighton
+  url: https://en.wikipedia.org/wiki/Mount_Brighton
+  title: Mount Brighton (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: wikipedia-wilmot-mountain
+  url: https://en.wikipedia.org/wiki/Wilmot_Mountain
+  title: Wilmot Mountain (Wikipedia)
+  accessed_date: '2026-10-11'
+- id: openskimap-ski-areas
+  url: https://openskimap.org/
+  title: OpenSkiMap ski areas (US extract committed at data/raw/openskimap/us_ski_areas.geojson)
+  accessed_date: '2026-10-11'
+  note: Used only for base coordinates of Big Boulder and Laurel Mountain, which have no Wikipedia coordinates.
+- id: access-wikipedia-vail-colorado
+  url: https://en.wikipedia.org/wiki/Vail,_Colorado
+  title: Vail, Colorado (Wikipedia), transportation
+  accessed_date: '2026-10-13'
+  note: Free in town shuttle and Eagle County bus routes.
+- id: access-wikipedia-avon-colorado
+  url: https://en.wikipedia.org/wiki/Avon,_Colorado
+  title: Avon, Colorado (Wikipedia), transportation
+  accessed_date: '2026-10-13'
+  note: Free Avon buses and CORE Transit routes.
+- id: access-wikipedia-frisco-colorado
+  url: https://en.wikipedia.org/wiki/Frisco,_Colorado
+  title: Frisco, Colorado (Wikipedia), transportation
+  accessed_date: '2026-10-13'
+  note: Summit Stage free service between Silverthorne, Frisco and Breckenridge.
+- id: access-wikipedia-us-bus-transit-systems
+  url: https://en.wikipedia.org/wiki/List_of_bus_transit_systems_in_the_United_States
+  title: List of bus transit systems in the United States (Wikipedia)
+  accessed_date: '2026-10-13'
+  note: Summit Stage, Mountain Rides and Glacier Valley Transit rows.
+- id: access-wikipedia-green-mountain-transit-authority
+  url: https://en.wikipedia.org/wiki/Green_Mountain_Transit_Authority
+  title: Green Mountain Transit Agency (Wikipedia), route list and fares
+  accessed_date: '2026-10-13'
+  note: Stowe and Mad River Valley routes.
+- id: access-wikipedia-southeast-vermont-transit
+  url: https://en.wikipedia.org/wiki/Southeast_Vermont_Transit
+  title: Southeast Vermont Transit (Wikipedia), MOOver routes
+  accessed_date: '2026-10-13'
+  note: Mount Snow circulators and the Bellows Falls to Okemo shuttle.
+- id: access-truckee-tart-winter-2026
+  url: "https://www.truckee.com/news/reduce-traffic-congestion-headaches-take-tart-to-ski-ride-and-tart-connect-to-get-around-truckee-this-winter"
+  title: "Take TART to ski and ride this winter (Truckee.com, January 8, 2026)"
+  accessed_date: '2026-10-13'
+  note: "From a search result for this page; page not opened. Free daily Highway 89, Highway 267 and Truckee Local routes; hourly daytime buses to Northstar."
+- id: access-timeout-ourbus-ski-routes
+  url: "https://www.timeout.com/newyork/news/a-new-car-free-ski-bus-service-will-take-you-from-manhattan-to-the-catskills-and-poconos-010626"
+  title: "A new car free ski bus service will take you from Manhattan to the Catskills and Poconos (Time Out New York, 2026)"
+  accessed_date: '2026-10-13'
+  note: "From a search result for this page; page not opened. OurBus seasonal routes to Windham, Hunter and Belleayre on Wednesdays, Saturdays and Sundays."
+- id: access-wikipedia-laurel-mountain-state-park
+  url: "https://en.wikipedia.org/wiki/Laurel_Mountain_State_Park"
+  title: "Laurel Mountain State Park (Wikipedia)"
+  accessed_date: '2026-10-13'
+  note: "The park and its ski area lie 2 miles south of US 30 near Jennerstown."
+- id: openskimap-lift-mount-snow-bluebird-express
+  url: https://openskimap.org/
+  title: "Bluebird Express #17 bottom station, Mount Snow (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)"
+  accessed_date: '2026-10-12'
+  note: "Main Base Area point. Lift 'Bluebird Express #17' (OpenStreetMap way/143874600, OpenSkiMap lift a1075e5fbabe8518f5bd88146fd39faec7086994); its bottom station is OpenStreetMap node/1574427559 at 42.9673987, -72.895394, 604 m. Wikipedia (wikipedia-mount-snow) names the Main Base Area, where four high speed lifts start, and calls the Bluebird Express the resort's flagship lift; in OSM it rises from the main base to 1,092 m near the summit. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+- id: openskimap-lift-hunter-mountain-kaatskill-flyer
+  url: https://openskimap.org/
+  title: "Kaatskill Flyer bottom station, Hunter Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)"
+  accessed_date: '2026-10-12'
+  note: "Hunter Mountain base area point. Lift 'Kaatskill Flyer' (OpenStreetMap way/47793897, OpenSkiMap lift d6d4cb917f9c71f76043135e67e824d4577ec0c4); its bottom station is OpenStreetMap node/607840896 at 42.204279, -74.2119221, 516 m. Wikipedia (wikipedia-hunter-mountain-ski-area) calls the Kaatskill Flyer the main lift out of the Hunter Mountain base area. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+- id: openskimap-lift-crotched-mountain-valley
+  url: https://openskimap.org/
+  title: "Valley bottom station, Crotched Mountain (OpenSkiMap lifts, derived from OpenStreetMap, ODbL)"
+  accessed_date: '2026-10-12'
+  note: "Lowest lift base point. Lift 'Valley' (OpenStreetMap way/255586623, OpenSkiMap lift e1f31d04a46d1e240b482adaf46a9b57fbc4af7d); OpenStreetMap maps no station node for it, so the point is the bottom end of the way at 43.0110235, -71.8760917, 316 m. Wikipedia (wikipedia-crotched-mountain-ski-and-ride) names no base area beyond a new lodge. OpenStreetMap lodge tags could not be read here (Overpass and the OpenStreetMap API are blocked), so this is the lowest bottom station among the resort's OpenSkiMap lifts. All five lift bottoms lie within 0.4 km of it, and its 1,036 ft elevation is close to the article's 1,050 ft base elevation. Article text read 2026-10-13. Read from the repository extract data/raw/openskimap/us_lifts_tier_a.geojson (fetched 2026-10-12) and the full download it was filtered from."
+resorts:
+- id: vail
+  name: Vail
+  state: CO
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free town shuttles run between Golden Peak, Vail Village and Lionshead, and Eagle County buses connect Vail with Avon, Edwards, Eagle, Gypsum and Leadville.", source_id: access-wikipedia-vail-colorado, as_of: 2026-10-13, confidence: published}
+  lat: 39.639
+  lon: -106.374
+  location_source_id: wikipedia-vail-ski-resort
+  cluster_hint: i70-corridor
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: heritage
+    rationale: Vail hosted the 1989 Alpine World Ski Championships and cohosted the 1999 edition, and several of its founders served in the 10th Mountain Division that trained nearby.
+    source_id: wikipedia-vail-ski-resort
+  - criterion: luxury
+    rationale: Vail Resorts is turning every private lesson at Vail into its Epic Ascent product, with concierge support and white glove gear rental, starting in the 2026/2027 season.
+    source_id: vail-10k-fy2026
+  - &id001
+    criterion: operator_compensation
+    rationale: Vail Resorts compensation packages are top of the industry and standardized across its resorts (owner assessment).
+    source_id: owner-decisions-2026-10-11
+  size:
+    acres:
+      value: 5317
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: 10-K gives approximately 5,300 skiable acres
+    vertical_ft:
+      value: 3450
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-11
+      confidence: published
+    lifts: null
+  elevation:
+    base_ft:
+      value: 8120
+      source_id: wikipedia-vail-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 11570
+      source_id: wikipedia-vail-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 18
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 29
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 53
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox labels this share advanced; the trails section gives 53% advanced/expert. Source combines advanced and expert."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 354
+      source_id: wikipedia-vail-ski-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The article text says snowfall has averaged 360 in over the last thirty years, and its statistics list gives 370 in."
+- id: beaver-creek
+  name: Beaver Creek
+  state: CO
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Avon runs free town buses, CORE Transit links Avon with Vail, Edwards, Eagle and Leadville, and the Riverfront Express Gondola climbs from Avon to the mountain.", source_id: access-wikipedia-avon-colorado, as_of: 2026-10-13, confidence: published, note: "Gondola fact from wikipedia-beaver-creek-resort."}
+  lat: 39.6314
+  lon: -106.5217
+  location_source_id: wikipedia-beaver-creek-resort
+  cluster_hint: i70-corridor
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: heritage
+    rationale: Beaver Creek hosted the World Ski Championships in 1989, 1999 and 2015 and is a regular early season host of the Birds of Prey World Cup races.
+    source_id: wikipedia-beaver-creek-resort
+  - criterion: luxury
+    rationale: The 10-K describes a European style resort with a first class children's ski school, and every private lesson there becomes the concierge level Epic Ascent product in the 2026/2027 season.
+    source_id: vail-10k-fy2026
+  - *id001
+  size:
+    acres:
+      value: 2082
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-11
+      confidence: published
+    vertical_ft:
+      value: 3340
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-11
+      confidence: published
+    lifts:
+      value: 24
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: includes 6 magic carpets
+  elevation:
+    base_ft:
+      value: 8100
+      source_id: wikipedia-beaver-creek-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 11440
+      source_id: wikipedia-beaver-creek-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 28
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 38
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 34
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 323
+      source_id: wikipedia-beaver-creek-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: breckenridge
+  name: Breckenridge
+  state: CO
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free Summit Stage buses link Breckenridge with Frisco and Silverthorne, and the BreckConnect Gondola runs from the town transit center to Peak 8.", source_id: access-wikipedia-frisco-colorado, as_of: 2026-10-13, confidence: published, note: "Gondola fact from wikipedia-breckenridge-ski-resort."}
+  lat: 39.48
+  lon: -106.067
+  location_source_id: wikipedia-breckenridge-ski-resort
+  cluster_hint: i70-corridor
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: heritage
+    rationale: Breckenridge installed the world's first high speed detachable quad chairlift in 1981 and hosted the first Winter Dew Tour in 2008.
+    source_id: wikipedia-breckenridge-ski-resort
+  - *id001
+  size:
+    acres:
+      value: 2908
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-11
+      confidence: published
+    vertical_ft:
+      value: 3398
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-11
+      confidence: published
+    lifts:
+      value: 35
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: 20 chairlifts and gondola plus 15 surface lifts
+  elevation:
+    base_ft:
+      value: 9600
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 12998
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 14
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 31
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 19
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 36
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 355
+      source_id: wikipedia-breckenridge-ski-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: crested-butte
+  name: Crested Butte
+  state: CO
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "The town of Crested Butte runs a free bus to the resort, and buses connect the town with Gunnison.", source_id: wikipedia-crested-butte-colorado, as_of: 2026-10-13, confidence: published, note: "Gunnison article adds that the Gunnison Valley RTA bus serves Crested Butte Mountain Resort."}
+  lat: 38.8997
+  lon: -106.965
+  location_source_id: wikipedia-crested-butte-mountain-resort
+  cluster_hint: southwest-colorado
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: luxury
+    rationale: The town changed from a mining town to a tourist retreat catering to the affluent as the ski resort took over the local economy.
+    source_id: wikipedia-crested-butte-colorado
+  - *id001
+  size:
+    acres:
+      value: 1547
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: 10-K gives over 1,500 skiable acres
+    vertical_ft:
+      value: 3055
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: 10-K gives over 3,000 feet
+    lifts:
+      value: 15
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: includes 3 magic carpets
+  elevation:
+    base_ft:
+      value: 9375
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 12162
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 23
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 57
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 20
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 300
+      source_id: wikipedia-crested-butte-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: park-city
+  name: Park City
+  state: UT
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+    note: mountain terrain leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free Park City Transit buses run across town and to Canyons Village, and High Valley Transit runs to Salt Lake City.", source_id: wikipedia-park-city-utah, as_of: 2026-10-13, confidence: published, note: "Park City Transit article lists a winter express to Park City Mountain."}
+  lat: 40.6508
+  lon: -111.5075
+  location_source_id: wikipedia-park-city-mountain-resort
+  cluster_hint: wasatch
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: athlete_development
+    rationale: Park City has several U.S. Ski Team training courses, and its local clubs merged into the Park City Ski and Snowboard Club in 2017.
+    source_id: wikipedia-park-city-mountain-resort
+  - criterion: heritage
+    rationale: Park City hosted the giant slalom and the snowboarding halfpipe and parallel giant slalom events of the 2002 Winter Olympics.
+    source_id: wikipedia-park-city-mountain-resort
+  - *id001
+  size:
+    acres:
+      value: 7300
+      source_id: vail-10k-fy2026
+      as_of: 2026-10-11
+      confidence: published
+      note: Wikipedia infobox gives 6700; company figure preferred
+    vertical_ft:
+      value: 3200
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+    lifts:
+      value: 41
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+  elevation:
+    base_ft:
+      value: 6900
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 10026
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 7
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox, 324 trails. The trails section gives 348 trails at 15% beginner, 54% intermediate and 31% expert."
+    intermediate_pct:
+      value: 49
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 44
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 355
+      source_id: wikipedia-park-city-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The statistics list in the article gives 365 in."
+- id: northstar
+  name: Northstar California
+  state: CA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+    note: operated under lease per 10-K Item 2; Wikipedia names EPR Properties as property owner
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Free TART Highway 267 buses run daily between Truckee and Northstar.", source_id: access-truckee-tart-winter-2026, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Hourly daytime trips; night service also links Truckee and Northstar."}
+  lat: 39.264
+  lon: -120.125
+  location_source_id: wikipedia-northstar-california
+  cluster_hint: lake-tahoe
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: luxury
+    rationale: The 10-K calls Northstar the premier luxury mountain resort near Lake Tahoe, with premium lodging and a village of high end shops and restaurants.
+    source_id: vail-10k-fy2026
+  - *id001
+  size:
+    acres:
+      value: 3170
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-11
+      confidence: published
+      note: 10-K gives over 3,000 skiable acres
+    vertical_ft:
+      value: 2280
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-11
+      confidence: published
+    lifts: null
+  elevation:
+    base_ft:
+      value: 6330
+      source_id: wikipedia-northstar-california
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 8610
+      source_id: wikipedia-northstar-california
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 13
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 60
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 27
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 350
+      source_id: wikipedia-northstar-california
+      as_of: 2026-10-13
+      confidence: published
+- id: kirkwood
+  name: Kirkwood
+  state: CA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive State Route 88, the all weather highway that links the resort with the rest of California.", source_id: wikipedia-kirkwood-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Tahoe transit articles; remote highway location."}
+  lat: 38.684
+  lon: -120.068
+  location_source_id: wikipedia-kirkwood-mountain-resort
+  cluster_hint: lake-tahoe
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: diehard
+    rationale: Kirkwood is known for heavy snowfall and advanced off piste terrain, with only 12 percent beginner terrain, and hosted legs of the North American Freeskiing Championships in 2009 and 2010.
+    source_id: wikipedia-kirkwood-mountain-resort
+  - *id001
+  size:
+    acres:
+      value: 2300
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: 10-K gives over 2,300 skiable acres
+    vertical_ft:
+      value: 2000
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+      note: 10-K also gives 2,000 feet
+    lifts: null
+  elevation:
+    base_ft:
+      value: 7800
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 9800
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 12
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 30
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 58
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 500
+      source_id: wikipedia-kirkwood-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox gives about 500 in. The article text gives seasonal snowfall of 354 in."
+- id: stowe
+  name: Stowe
+  state: VT
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+    note: Mount Mansfield terrain leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Green Mountain Transit runs a fare free seasonal Mountain Road Shuttle in Stowe.", source_id: access-wikipedia-green-mountain-transit-authority, as_of: 2026-10-13, confidence: estimated, note: "Route list plus fares section; that the shuttle reaches the resort base is inferred from the route name."}
+  lat: 44.5319
+  lon: -72.7875
+  location_source_id: wikipedia-stowe-mountain-resort
+  cluster_hint: northern-vermont
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: heritage
+    rationale: The first trails on Mount Mansfield were cut in 1933, and the Mount Mansfield Ski Patrol, founded in 1934, is the oldest in the nation and the model for the National Ski Patrol.
+    source_id: wikipedia-stowe-mountain-resort
+  - criterion: luxury
+    rationale: The 10-K calls Stowe the premier high end regional ski area in the Northeast, with an exceptional base area experience.
+    source_id: vail-10k-fy2026
+  - *id001
+  size:
+    acres:
+      value: 485
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+    vertical_ft:
+      value: 2360
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+    lifts:
+      value: 12
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-11
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1559
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 3719
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 16
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 55
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source combines advanced and expert. Shares sum to 101 as stated."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 224
+      source_id: wikipedia-stowe-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+      note: "Average annual snowfall at the resort summit, per the article text."
+- id: mount-snow
+  name: Mount Snow
+  state: VT
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Fare free MOOver buses run ski season circulators around Mount Snow and year round service from Wilmington to West Dover.", source_id: access-wikipedia-southeast-vermont-transit, as_of: 2026-10-13, confidence: published}
+  # Main Base Area: Bluebird Express #17 bottom station (OpenSkiMap lifts), chosen over the
+  # Wikipedia infobox coordinate (42.959, -72.922), 2.4 km away.
+  lat: 42.9674
+  lon: -72.89539
+  location_source_id: openskimap-lift-mount-snow-bluebird-express
+  cluster_hint: southern-vermont
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: athlete_development
+    rationale: Mount Snow Academy graduates include Kelly Clark, 2002 Olympic halfpipe gold medalist, and Devin Logan, 2014 Olympic slopestyle silver medalist.
+    source_id: wikipedia-mount-snow
+  - criterion: heritage
+    rationale: Mount Snow cohosted the first Extreme Games in 1995, hosted the X Games in 2000 and 2001, and opened the first snowboard park in the East in 1992.
+    source_id: wikipedia-mount-snow
+  - *id001
+  size:
+    acres:
+      value: 601
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-11
+      confidence: published
+    vertical_ft: null
+    lifts:
+      value: 19
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-11
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1900
+      source_id: wikipedia-mount-snow
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 3600
+      source_id: wikipedia-mount-snow
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 16
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
+      confidence: published
+      note: "Article trails section; labeled Novice, More Difficult, Most Difficult and Expert."
+    intermediate_pct:
+      value: 66
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 17
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 1
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-12
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 150
+      source_id: wikipedia-mount-snow
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The article statistics give 158 in."
+- id: wildcat
+  name: Wildcat Mountain
+  state: NH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: 2026-10-11
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive NH Route 16 to the base in Pinkham Notch.", source_id: wikipedia-wildcat-mountain-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 44.2631
+  lon: -71.2383
+  location_source_id: wikipedia-wildcat-mountain-ski-area
+  cluster_hint: white-mountains
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: heritage
+    rationale: Wildcat opened the first gondola lift in North America in 1958 and is home to one of the oldest ski racing trails in the United States.
+    source_id: wikipedia-wildcat-mountain-ski-area
+  - *id001
+  size:
+    acres:
+      value: 225
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-11
+      confidence: published
+    vertical_ft:
+      value: 2112
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-11
+      confidence: published
+    lifts:
+      value: 5
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-11
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1950
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 4062
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 45
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 200
+      source_id: wikipedia-wildcat-mountain-ski-area
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox value. The article text says over 200 in."
+- id: keystone
+  name: Keystone
+  state: CO
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "Summit Stage county buses serve Keystone along with Breckenridge, Frisco, Dillon and Silverthorne.", source_id: access-wikipedia-us-bus-transit-systems, as_of: 2026-10-13, confidence: published}
+  lat: 39.605
+  lon: -105.9542
+  location_source_id: wikipedia-keystone-resort
+  cluster_hint: i70-corridor
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 3148
+      source_id: wikipedia-keystone-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 3128
+      source_id: wikipedia-keystone-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 21
+      source_id: wikipedia-keystone-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 9280
+      source_id: wikipedia-keystone-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 12408
+      source_id: wikipedia-keystone-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 19
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 32
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 49
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox, 135 trails, labels this share advanced; the trails section gives 130 trails at 12% beginner, 39% intermediate and 49% advanced/expert. Source combines advanced and expert."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 230
+      source_id: wikipedia-keystone-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: heavenly
+  name: Heavenly
+  state: CA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: transit_friendly, summary_md: "A gondola rises from Heavenly Village in South Lake Tahoe, where Tahoe Transportation District runs local buses.", source_id: wikipedia-heavenly-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "Local bus fact from the South Lake Tahoe article; the district ended its ski shuttles in 2018."}
+  lat: 38.9353
+  lon: -119.94
+  location_source_id: wikipedia-heavenly-mountain-resort
+  cluster_hint: lake-tahoe
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 4800
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+      note: 10-K gives over 4,800 skiable acres
+    vertical_ft:
+      value: 3812
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 25
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 6255
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 10067
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 20
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 45
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 35
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 360
+      source_id: wikipedia-heavenly-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: stevens-pass
+  name: Stevens Pass
+  state: WA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive US Highway 2 to the resort at the crest of the pass.", source_id: wikipedia-stevens-pass-ski-area, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article; it mentions added employee housing capacity for 2022 to 2023."}
+  lat: 47.7447
+  lon: -121.0889
+  location_source_id: wikipedia-stevens-pass-ski-area
+  cluster_hint: cascades
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 1125
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+      note: 10-K gives more than 1,100 acres
+    vertical_ft:
+      value: 1800
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 10
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+      note: chairlifts only
+  elevation:
+    base_ft:
+      value: 4061
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+      note: main base area; Mill Valley base is 3821 ft
+    summit_ft:
+      value: 5845
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 11
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 54
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 35
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 450
+      source_id: wikipedia-stevens-pass-ski-area
+      as_of: 2026-10-13
+      confidence: published
+- id: okemo
+  name: Okemo
+  state: VT
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+    note: mountain terrain leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: mixed, summary_md: "Seasonal buses reach Okemo from Bellows Falls and Rutland.", source_id: access-wikipedia-southeast-vermont-transit, as_of: 2026-10-13, confidence: published, note: "SEVT route 61 Bellows Falls to Okemo shuttle is seasonal; MVRTD runs a winter Rutland to Ludlow connector."}
+  lat: 43.4014
+  lon: -72.7167
+  location_source_id: wikipedia-okemo-mountain
+  cluster_hint: central-vermont
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 667
+      source_id: wikipedia-okemo-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 2200
+      source_id: wikipedia-okemo-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 20
+      source_id: wikipedia-okemo-mountain
+      as_of: '2026-10-11'
+      confidence: published
+      note: 13 chairlifts and 7 surface lifts
+  elevation:
+    base_ft:
+      value: 1134
+      source_id: wikipedia-okemo-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 3344
+      source_id: wikipedia-okemo-mountain
+      as_of: '2026-10-11'
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 199.2
+      source_id: wikipedia-okemo-mountain
+      as_of: 2026-10-13
+      confidence: published
+      note: "Infobox gives 16.6 ft, converted to inches."
+- id: attitash
+  name: Attitash Mountain
+  state: NH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort on US 302 in Bartlett, near North Conway.", source_id: wikipedia-attitash-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article or the Bartlett, New Hampshire article."}
+  lat: 44.0822
+  lon: -71.2297
+  location_source_id: wikipedia-attitash-mountain-resort
+  cluster_hint: white-mountains
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres: null
+    vertical_ft:
+      value: 1750
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 8
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft: null
+    summit_ft: null
+  terrain:
+    beginner_pct:
+      value: 29
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 44
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 27
+      source_id: wikipedia-attitash-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
+- id: hunter-mountain
+  name: Hunter Mountain
+  state: NY
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: mixed, summary_md: "OurBus runs seasonal ski buses from New York City to Hunter on Wednesdays and weekends.", source_id: access-timeout-ourbus-ski-routes, as_of: 2026-10-13, confidence: estimated, note: "From a search result for this page; page not opened. Day trip service for skiers; no local bus to the base found."}
+  # Hunter Mountain base area: Kaatskill Flyer bottom station (OpenSkiMap lifts), chosen over the
+  # Wikipedia infobox coordinate (42.2003, -74.2303), 1.6 km away.
+  lat: 42.20428
+  lon: -74.21192
+  location_source_id: openskimap-lift-hunter-mountain-kaatskill-flyer
+  cluster_hint: catskills
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: heritage
+    rationale: Hunter Mountain was the first area in the world with summit to base snowmaking and, in 1980, the first ski area in the world with snowmaking on 100 percent of its trails.
+    source_id: wikipedia-hunter-mountain-ski-area
+  - *id001
+  size:
+    acres:
+      value: 320
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 1600
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 15
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1600
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 3200
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 30
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 15
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-12
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 120
+      source_id: wikipedia-hunter-mountain-ski-area
+      as_of: 2026-10-13
+      confidence: published
+- id: mount-sunapee
+  name: Mount Sunapee Resort
+  state: NH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+    note: owned and leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Mount Sunapee State Park in Newbury.", source_id: wikipedia-mount-sunapee-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 43.3306
+  lon: -72.08
+  location_source_id: wikipedia-mount-sunapee-resort
+  cluster_hint: other-nh
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 230
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 1513
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 11
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1230
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 2743
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 26
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 48
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 26
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert. The article text says 26% easy, 49% intermediate and 25% advanced."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 100
+      source_id: wikipedia-mount-sunapee-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: crotched-mountain
+  name: Crotched Mountain
+  state: NH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Bennington and Francestown.", source_id: wikipedia-crotched-mountain-ski-and-ride, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  # Lowest lift base: Valley bottom station (OpenSkiMap lifts), chosen over the
+  # Wikipedia infobox coordinate (43.0023, -71.8786), 1.0 km away.
+  lat: 43.01102
+  lon: -71.87609
+  location_source_id: openskimap-lift-crotched-mountain-valley
+  cluster_hint: other-nh
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres: null
+    vertical_ft: null
+    lifts:
+      value: 5
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1050
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 2066
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 32
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 36
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 32
+      source_id: wikipedia-crotched-mountain-ski-and-ride
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source labels the black diamond share Expert and gives no double black diamond share. Source combines advanced and expert."
+    expert_pct: null
+- id: seven-springs
+  name: Seven Springs Resort
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in the borough of Seven Springs.", source_id: wikipedia-seven-springs-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article; a search found no staff housing source. The borough, population 26, covers most of the resort (Seven Springs, Pennsylvania Wikipedia), so it is rated car centric."}
+  lat: 40.0231
+  lon: -79.2928
+  location_source_id: wikipedia-seven-springs-mountain-resort
+  cluster_hint: laurel-highlands
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 285
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 750
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 14
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 2240
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 2994
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 35
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 40
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 15
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 10
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 135
+      source_id: wikipedia-seven-springs-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: hidden-valley-pa
+  name: Hidden Valley Resort
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort near the village of Hidden Valley in the Laurel Highlands.", source_id: wikipedia-hidden-valley-resort-pennsylvania, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 40.058
+  lon: -79.2583
+  location_source_id: wikipedia-hidden-valley-resort-pennsylvania
+  cluster_hint: laurel-highlands
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 110
+      source_id: wikipedia-hidden-valley-resort-pennsylvania
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 470
+      source_id: wikipedia-hidden-valley-resort-pennsylvania
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 4
+      source_id: wikipedia-hidden-valley-resort-pennsylvania
+      as_of: '2026-10-11'
+      confidence: published
+      note: chairlifts only
+  elevation:
+    base_ft:
+      value: 2405
+      source_id: wikipedia-hidden-valley-resort-pennsylvania
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 2875
+      source_id: wikipedia-hidden-valley-resort-pennsylvania
+      as_of: '2026-10-11'
+      confidence: published
+- id: laurel-mountain
+  name: Laurel Mountain
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+    note: leased per 10-K Item 2; Wikipedia names the Commonwealth of Pennsylvania as owner
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Laurel Mountain State Park, south of US 30 near Jennerstown.", source_id: access-wikipedia-laurel-mountain-state-park, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 40.1671
+  lon: -79.1692
+  location_source_id: openskimap-ski-areas
+  cluster_hint: laurel-highlands
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 70
+      source_id: wikipedia-laurel-mountain-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 761
+      source_id: wikipedia-laurel-mountain-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 2
+      source_id: wikipedia-laurel-mountain-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 2005
+      source_id: wikipedia-laurel-mountain-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 2766
+      source_id: wikipedia-laurel-mountain-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+- id: liberty-mountain
+  name: Liberty Mountain Resort
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in southern Pennsylvania.", source_id: wikipedia-liberty-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 39.7635
+  lon: -77.375
+  location_source_id: wikipedia-liberty-mountain-resort
+  cluster_hint: other-pa
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 100
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 620
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 8
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 570
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 1190
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 27
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 41
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 14
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 18
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 31
+      source_id: wikipedia-liberty-mountain-resort
+      as_of: 2026-10-13
+      confidence: published
+- id: roundtop-mountain
+  name: Roundtop Mountain Resort
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in York County, Pennsylvania.", source_id: wikipedia-roundtop-mountain-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 40.108
+  lon: -76.926
+  location_source_id: wikipedia-roundtop-mountain-resort
+  cluster_hint: other-pa
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 103
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 600
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts: null
+  elevation:
+    base_ft:
+      value: 740
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 1340
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 29
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 30
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 31
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct:
+      value: 10
+      source_id: wikipedia-roundtop-mountain-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source labels this double black diamond share Extremely Difficult."
+- id: whitetail
+  name: Whitetail Resort
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort on Two Top Mountain between Mercersburg, Pennsylvania and Clear Spring, Maryland.", source_id: wikipedia-whitetail-ski-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 39.7417
+  lon: -77.9328
+  location_source_id: wikipedia-whitetail-ski-resort
+  cluster_hint: other-pa
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 120
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 935
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts: null
+  elevation:
+    base_ft:
+      value: 865
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 1800
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 27
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 50
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 18
+      source_id: wikipedia-whitetail-ski-resort
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source also lists 5% terrain park. Recorded shares sum to 95."
+    expert_pct: null
+- id: jack-frost
+  name: Jack Frost Ski Resort
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Kidder Township in the Pocono Mountains.", source_id: wikipedia-jack-frost-big-boulder, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 41.111
+  lon: -75.652
+  location_source_id: wikipedia-jack-frost-big-boulder
+  cluster_hint: poconos
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres: null
+    vertical_ft:
+      value: 600
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 9
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1400
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 2000
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+- id: big-boulder
+  name: Big Boulder Mountain
+  state: PA
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Kidder Township in the Pocono Mountains.", source_id: wikipedia-jack-frost-big-boulder, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the Jack Frost and Big Boulder article."}
+  lat: 41.0483
+  lon: -75.6014
+  location_source_id: openskimap-ski-areas
+  cluster_hint: poconos
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - criterion: heritage
+    rationale: Big Boulder opened in 1947, and employee John Guresh is credited with developing the first usable snowmaking equipment there in the 1950s.
+    source_id: wikipedia-jack-frost-big-boulder
+  - *id001
+  size:
+    acres: null
+    vertical_ft:
+      value: 475
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 7
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1700
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 2175
+      source_id: wikipedia-jack-frost-big-boulder
+      as_of: '2026-10-11'
+      confidence: published
+- id: afton-alps
+  name: Afton Alps
+  state: MN
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area on the St. Croix River south of Afton.", source_id: wikipedia-afton-alps, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 44.8556
+  lon: -92.7892
+  location_source_id: wikipedia-afton-alps
+  cluster_hint: other-mn
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 300
+      source_id: wikipedia-afton-alps
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 350
+      source_id: wikipedia-afton-alps
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 21
+      source_id: wikipedia-afton-alps
+      as_of: '2026-10-11'
+      confidence: published
+      note: 17 chairlifts and 4 surface lifts
+  elevation:
+    base_ft:
+      value: 350
+      source_id: wikipedia-afton-alps
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 700
+      source_id: wikipedia-afton-alps
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-afton-alps
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 50
+      source_id: wikipedia-afton-alps
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 25
+      source_id: wikipedia-afton-alps
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
+- id: alpine-valley-oh
+  name: Alpine Valley Resort
+  state: OH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Munson Township, east of Chesterland.", source_id: wikipedia-alpine-valley-ski-area-ohio, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 41.5303
+  lon: -81.2662
+  location_source_id: wikipedia-alpine-valley-ski-area-ohio
+  cluster_hint: other-oh
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 72
+      source_id: wikipedia-alpine-valley-ski-area-ohio
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 252
+      source_id: wikipedia-alpine-valley-ski-area-ohio
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 5
+      source_id: wikipedia-alpine-valley-ski-area-ohio
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1260
+      source_id: wikipedia-alpine-valley-ski-area-ohio
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 1500
+      source_id: wikipedia-alpine-valley-ski-area-ohio
+      as_of: '2026-10-11'
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 120
+      source_id: wikipedia-alpine-valley-ski-area-ohio
+      as_of: 2026-10-13
+      confidence: published
+- id: boston-mills
+  name: Boston Mills
+  state: OH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+    note: owned per 10-K Item 2; Wikipedia infobox names EPR Properties
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Cuyahoga Valley National Park near Peninsula.", source_id: wikipedia-boston-mills-brandywine, as_of: 2026-10-13, confidence: estimated, note: "No bus found in the article. The Cuyahoga Valley Scenic Railroad, an excursion line, lists Boston Mills Ski Resort at its Boston Mill station (Wikipedia); winter service not checked."}
+  lat: 41.2648
+  lon: -81.5644
+  location_source_id: wikipedia-boston-mills-brandywine
+  cluster_hint: other-oh
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres: null
+    vertical_ft: null
+    lifts: null
+  elevation:
+    base_ft: null
+    summit_ft: null
+- id: brandywine
+  name: Brandywine
+  state: OH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+    note: owned per 10-K Item 2; Wikipedia infobox names EPR Properties
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort in Cuyahoga Valley National Park near Peninsula.", source_id: wikipedia-boston-mills-brandywine, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 41.2849
+  lon: -81.5517
+  location_source_id: wikipedia-boston-mills-brandywine
+  cluster_hint: other-oh
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres: null
+    vertical_ft: null
+    lifts: null
+  elevation:
+    base_ft: null
+    summit_ft: null
+- id: mad-river-mountain
+  name: Mad River Mountain
+  state: OH
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+    note: leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort off US 33 east of Bellefontaine.", source_id: wikipedia-mad-river-mountain, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 40.3163
+  lon: -83.6806
+  location_source_id: wikipedia-mad-river-mountain
+  cluster_hint: other-oh
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 144
+      source_id: wikipedia-mad-river-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft: null
+    lifts:
+      value: 9
+      source_id: wikipedia-mad-river-mountain
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft:
+      value: 1160
+      source_id: wikipedia-mad-river-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 1460
+      source_id: wikipedia-mad-river-mountain
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 46
+      source_id: wikipedia-mad-river-mountain
+      as_of: 2026-10-12
+      confidence: published
+      note: "Article text, citing the resort mountain info page."
+    intermediate_pct:
+      value: 38
+      source_id: wikipedia-mad-river-mountain
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 16
+      source_id: wikipedia-mad-river-mountain
+      as_of: 2026-10-12
+      confidence: published
+    expert_pct: null
+- id: hidden-valley-mo
+  name: Hidden Valley Resort
+  state: MO
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in the St. Louis suburb of Wildwood.", source_id: wikipedia-hidden-valley-ski-area-missouri, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 38.5356
+  lon: -90.6529
+  location_source_id: wikipedia-hidden-valley-ski-area-missouri
+  cluster_hint: other-mo
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 65
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 320
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 9
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: '2026-10-11'
+      confidence: published
+      note: 5 chairlifts and 4 surface lifts
+  elevation:
+    base_ft: null
+    summit_ft:
+      value: 860
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 33
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 19
+      source_id: wikipedia-hidden-valley-ski-area-missouri
+      as_of: 2026-10-12
+      confidence: published
+      note: "Source also lists 13% terrain parks. Recorded shares sum to 77, or 90 with the terrain park share."
+    expert_pct: null
+- id: snow-creek
+  name: Snow Creek
+  state: MO
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the resort on the Missouri River bluffs northwest of Kansas City.", source_id: wikipedia-snow-creek-ski-resort, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 39.4687
+  lon: -94.972
+  location_source_id: wikipedia-snow-creek-ski-resort
+  cluster_hint: other-mo
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 25
+      source_id: wikipedia-snow-creek-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 300
+      source_id: wikipedia-snow-creek-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 5
+      source_id: wikipedia-snow-creek-ski-resort
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft: null
+    summit_ft: null
+- id: paoli-peaks
+  name: Paoli Peaks
+  state: IN
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+    note: owned and leased per 10-K Item 2
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area near Paoli, Indiana.", source_id: wikipedia-paoli-peaks, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 38.5578
+  lon: -86.5103
+  location_source_id: wikipedia-paoli-peaks
+  cluster_hint: other-in
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres: null
+    vertical_ft:
+      value: 300
+      source_id: wikipedia-paoli-peaks
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 8
+      source_id: wikipedia-paoli-peaks
+      as_of: '2026-10-11'
+      confidence: published
+  elevation:
+    base_ft: null
+    summit_ft: null
+  terrain:
+    beginner_pct:
+      value: 25
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 55
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 20
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-12
+      confidence: published
+      note: "Infobox. The article text gives 10% advanced and 10% freestyle terrain park."
+    expert_pct: null
+  snow:
+    annual_avg_in:
+      value: 25
+      source_id: wikipedia-paoli-peaks
+      as_of: 2026-10-13
+      confidence: published
+- id: mount-brighton
+  name: Mount Brighton
+  state: MI
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area in Brighton, Michigan.", source_id: wikipedia-mount-brighton, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 42.5381
+  lon: -83.8069
+  location_source_id: wikipedia-mount-brighton
+  cluster_hint: other-mi
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 130
+      source_id: wikipedia-mount-brighton
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 230
+      source_id: wikipedia-mount-brighton
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 12
+      source_id: wikipedia-mount-brighton
+      as_of: '2026-10-11'
+      confidence: published
+      note: 5 chairlifts and 7 surface lifts
+  elevation:
+    base_ft:
+      value: 1100
+      source_id: wikipedia-mount-brighton
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 1330
+      source_id: wikipedia-mount-brighton
+      as_of: '2026-10-11'
+      confidence: published
+  terrain:
+    beginner_pct:
+      value: 30
+      source_id: wikipedia-mount-brighton
+      as_of: 2026-10-12
+      confidence: published
+    intermediate_pct:
+      value: 40
+      source_id: wikipedia-mount-brighton
+      as_of: 2026-10-12
+      confidence: published
+    advanced_pct:
+      value: 30
+      source_id: wikipedia-mount-brighton
+      as_of: 2026-10-12
+      confidence: published
+      note: "Article stats section. Source combines advanced and expert."
+    expert_pct: null
+- id: wilmot-mountain
+  name: Wilmot Mountain
+  state: WI
+  owner:
+    value: Vail Resorts
+    source_id: vail-10k-fy2026
+    as_of: '2026-10-11'
+    confidence: published
+  operator_scale: {value: 3, source_id: vail-10k-fy2026, as_of: 2026-10-13, confidence: published, note: "Vail Resorts, Inc. is a public company; its 10-K says the Mountain segment operates 42 resorts. Large scale corporate operation."}
+  access: {rating: car_centric, summary_md: "Staff typically drive to the ski area just north of the Illinois border, 55 miles north of Chicago.", source_id: wikipedia-wilmot-mountain, as_of: 2026-10-13, confidence: estimated, note: "No transit found in the article."}
+  lat: 42.5
+  lon: -88.1889
+  location_source_id: wikipedia-wilmot-mountain
+  cluster_hint: other-wi
+  tier_a_status: approved
+  approval:
+    by: site owner
+    date: '2026-10-11'
+    note: All Vail Resorts US resorts approved as Tier A
+  tier_a_criteria:
+  - *id001
+  size:
+    acres:
+      value: 120
+      source_id: wikipedia-wilmot-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    vertical_ft:
+      value: 190
+      source_id: wikipedia-wilmot-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    lifts:
+      value: 11
+      source_id: wikipedia-wilmot-mountain
+      as_of: '2026-10-11'
+      confidence: published
+      note: chairlifts only
+  elevation:
+    base_ft:
+      value: 770
+      source_id: wikipedia-wilmot-mountain
+      as_of: '2026-10-11'
+      confidence: published
+    summit_ft:
+      value: 960
+      source_id: wikipedia-wilmot-mountain
+      as_of: '2026-10-11'
+      confidence: published
+  snow:
+    annual_avg_in:
+      value: 48
+      source_id: wikipedia-wilmot-mountain
+      as_of: 2026-10-13
+      confidence: published

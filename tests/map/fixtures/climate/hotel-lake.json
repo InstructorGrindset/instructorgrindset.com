@@ -1,0 +1,219 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-11T12:00:00Z",
+ "resort_id": "hotel-lake",
+ "source_ids": [
+  "fixture-climate",
+  "fixture-snotel"
+ ],
+ "period": {
+  "start_year": 1996,
+  "end_year": 2025
+ },
+ "months": [
+  {
+   "resort_id": "hotel-lake",
+   "month": 10,
+   "snowfall_in": 19.4,
+   "powder_days": 1.4,
+   "banner_days": 0.4,
+   "avg_storm_depth_in": 5.6,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 52,
+   "temp_low_f": 30,
+   "wind_mph": 9.5,
+   "sun_pct": 51
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 11,
+   "snowfall_in": 54.2,
+   "powder_days": 3.9,
+   "banner_days": 1.2,
+   "avg_storm_depth_in": 8.4,
+   "density_pct_median": 7.6,
+   "density_mix": {
+    "dry": 0.47,
+    "average": 0.35,
+    "moist": 0.18
+   },
+   "density_source": "snotel",
+   "temp_high_f": 38,
+   "temp_low_f": 16,
+   "wind_mph": 12.2,
+   "sun_pct": 44
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 12,
+   "snowfall_in": 73.6,
+   "powder_days": 5.3,
+   "banner_days": 1.6,
+   "avg_storm_depth_in": 9.9,
+   "density_pct_median": 7.1,
+   "density_mix": {
+    "dry": 0.53,
+    "average": 0.34,
+    "moist": 0.13
+   },
+   "density_source": "snotel",
+   "temp_high_f": 29,
+   "temp_low_f": 7,
+   "wind_mph": 13.7,
+   "sun_pct": 41
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 1,
+   "snowfall_in": 77.5,
+   "powder_days": 5.5,
+   "banner_days": 1.7,
+   "avg_storm_depth_in": 10.2,
+   "density_pct_median": 7.0,
+   "density_mix": {
+    "dry": 0.54,
+    "average": 0.34,
+    "moist": 0.12
+   },
+   "density_source": "snotel",
+   "temp_high_f": 27,
+   "temp_low_f": 5,
+   "wind_mph": 14.0,
+   "sun_pct": 40
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 2,
+   "snowfall_in": 73.6,
+   "powder_days": 5.3,
+   "banner_days": 1.6,
+   "avg_storm_depth_in": 9.9,
+   "density_pct_median": 7.1,
+   "density_mix": {
+    "dry": 0.53,
+    "average": 0.34,
+    "moist": 0.13
+   },
+   "density_source": "snotel",
+   "temp_high_f": 30,
+   "temp_low_f": 8,
+   "wind_mph": 13.7,
+   "sun_pct": 41
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 3,
+   "snowfall_in": 69.8,
+   "powder_days": 5.0,
+   "banner_days": 1.6,
+   "avg_storm_depth_in": 9.6,
+   "density_pct_median": 7.2,
+   "density_mix": {
+    "dry": 0.52,
+    "average": 0.34,
+    "moist": 0.14
+   },
+   "density_source": "snotel",
+   "temp_high_f": 37,
+   "temp_low_f": 15,
+   "wind_mph": 13.4,
+   "sun_pct": 42
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 4,
+   "snowfall_in": 42.6,
+   "powder_days": 3.0,
+   "banner_days": 0.9,
+   "avg_storm_depth_in": 7.4,
+   "density_pct_median": 7.9,
+   "density_mix": {
+    "dry": 0.43,
+    "average": 0.36,
+    "moist": 0.21
+   },
+   "density_source": "snotel",
+   "temp_high_f": 45,
+   "temp_low_f": 23,
+   "wind_mph": 11.3,
+   "sun_pct": 47
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 5,
+   "snowfall_in": 11.6,
+   "powder_days": 0.8,
+   "banner_days": 0.3,
+   "avg_storm_depth_in": 4.9,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 55,
+   "temp_low_f": 33,
+   "wind_mph": 8.9,
+   "sun_pct": 53
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 6,
+   "snowfall_in": 0.0,
+   "powder_days": 0.0,
+   "banner_days": 0.0,
+   "avg_storm_depth_in": null,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 66,
+   "temp_low_f": 44,
+   "wind_mph": 8,
+   "sun_pct": 55
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 7,
+   "snowfall_in": 0.0,
+   "powder_days": 0.0,
+   "banner_days": 0.0,
+   "avg_storm_depth_in": null,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 74,
+   "temp_low_f": 52,
+   "wind_mph": 8,
+   "sun_pct": 55
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 8,
+   "snowfall_in": 0.0,
+   "powder_days": 0.0,
+   "banner_days": 0.0,
+   "avg_storm_depth_in": null,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 72,
+   "temp_low_f": 50,
+   "wind_mph": 8,
+   "sun_pct": 55
+  },
+  {
+   "resort_id": "hotel-lake",
+   "month": 9,
+   "snowfall_in": 3.9,
+   "powder_days": 0.3,
+   "banner_days": 0.1,
+   "avg_storm_depth_in": 4.3,
+   "density_pct_median": null,
+   "density_mix": null,
+   "density_source": null,
+   "temp_high_f": 63,
+   "temp_low_f": 41,
+   "wind_mph": 8.3,
+   "sun_pct": 54
+  }
+ ]
+}

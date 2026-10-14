@@ -1,0 +1,524 @@
+# Career Map definitions (ROADMAP Section 6).
+# Every threshold, weight and assumption the pipeline or the UI uses lives here.
+# Loaded and validated by pipeline/config.py; unknown keys are an error.
+version: 1
+
+snow:
+  # A powder day is 6 in or more of new snow in 24 hours.
+  powder_day_in: 6
+  # A banner day is 12 in or more of new snow in 24 hours.
+  banner_day_in: 12
+  window_hours: 24
+
+density:
+  # Water content of new snow, percent (change in SWE / change in snow depth per storm).
+  # dry: below dry_max_pct; average: dry_max_pct to moist_min_pct; moist: above moist_min_pct.
+  dry_max_pct: 7
+  moist_min_pct: 12
+
+season:
+  # Season length is the median of the last N seasons' open to close, where data exists.
+  length_rule: median_open_to_close
+  lookback_seasons: 10
+
+display:
+  # Highest confidence wins, per field.
+  priority: [published, reported, estimated]
+  # resorts.geojson size_rank (1 to 5) from skiable acres: rank = 1 + number of breaks <= acres.
+  # Null acres gives rank 1. Display bucketing only, not a resort fact.
+  size_rank_acres_breaks: [500, 1500, 3000, 5000]
+
+reports:
+  # A field gains a Reported value only with this many approved reports; shown as a range only.
+  aggregation_min: 3
+
+submissions:
+  # Owner decision 11: the site's existing Formspree form (the one /contact uses). The map form POSTs
+  # JSON with Accept: application/json and a _subject such as "Career Map report: <resort>".
+  endpoint: https://formspree.io/f/xyzbdqgq
+
+staleness:
+  # Flag any record whose verified date is older than this.
+  max_age_months: 18
+
+matching:
+  # Tier A to OpenSkiMap de duplication: an OpenSkiMap area within radius_km of a Tier A
+  # base point (or containing it) whose name similarity (0 to 1) is at least
+  # name_similarity_min is the same resort.
+  radius_km: 5
+  name_similarity_min: 0.6
+  # Names this similar are the same resort even a little further away
+  # (large resorts whose OpenSkiMap centroid sits away from the base area).
+  strong_name_similarity_min: 0.9
+  strong_name_radius_km: 15
+
+openskimap:
+  # Tier B extract rules (pipeline/openskimap.py filter_us).
+  # Drop areas with no mapped lift and no mapped downhill run (mostly skimap.org stubs
+  # that duplicate a mapped area or describe a closed hill).
+  require_mapped_lifts_or_runs: true
+  # Merge areas this close together whose names are this alike (0 to 1); the better mapped one is kept.
+  dedupe_radius_km: 2
+  dedupe_name_similarity_min: 0.8
+
+ownership:
+  # Every resort in data/raw/ownership/*.yaml needs a Tier A record (operator compensation).
+  # warn while research is in progress; fail once the Vail and Alterra lists are complete.
+  missing_tier_a_record: fail
+  # One build cycle, in days. Ownership is re verified once a year (ROADMAP item 17), so the build fails when a
+  # source that a Vail Resorts or Alterra ownership entry cites has an accessed_date older than this. 400 days is a
+  # year plus a month of slack for the refresh. Runbook: docs/map/ARCHITECTURE.md, "Refreshing the ownership sources".
+  max_source_age_days: 400
+
+operator_scale:
+  # Internal operator scale for data/raw/tier_a (validated on load). Owner decision 2026-10-13: the
+  # professionalism rating is off the public site, so the build never writes operator_scale to data/build.
+  values:
+    1: family_owned
+    2: independent_business
+    3: large_corporate
+
+access:
+  # Owner decision 6: researched access rating per Tier A resort. Public labels in the UI:
+  # Convenient, Transit friendly, Mixed, Car centric.
+  ratings: [convenient, transit_friendly, mixed, car_centric]
+
+professionalism:
+  # Internal model only (kept in code, never in data/build; owner decision 2026-10-13). Score 0 to 100 from the components below.
+  # Alexandre sets these weights in Phase 4. Do not fill them in before then.
+  scale_min: 0
+  scale_max: 100
+  weights:
+    cert_pay_differential: null
+    paid_training_hours: null
+    examiner_trainer_presence: null
+    private_lesson_share: null
+    year_round_staff: null
+    clinic_access: null
+  # score = 100 x sum(weight x value) / sum(weight) over components that have a value
+  # (each value is normalised 0 to 1 in data/raw/career). A resort with fewer components
+  # than min_components shows insufficient_data. Null until Alexandre sets it (weights_unset).
+  min_components: null
+
+lucrativeness:
+  # Owner decisions 4 (2026-10-13) and 2026-10-14. Estimated net income for the season, before tax, USD:
+  #   season months = season length days / days_per_month when sourced, else default_season_months
+  #   net income    = hourly x hours_per_week x (season months x weeks_per_month)
+  # No rent, tips, tax or other living costs. Wage range from the displayed pay rows: bottom = lowest hourly_low,
+  # top = highest hourly_high. mid uses the middle of the range, (bottom + top) / 2, shows as "Estimated net income"
+  # and colors the map; low uses the bottom and high the top, shown as the range.
+  # Computed with pipeline/season_income.py (the calculator's model) with rent, tips and every offset at 0.
+  # The median rent (rent.lucrativeness_rent) still builds and shows in the Housing section only.
+  assumptions:
+    hours_per_week: 40          # standard full time hours (ROADMAP Section 6)
+    default_season_months: 5    # when the resort has no sourced season length
+    days_per_month: 30.4
+    weeks_per_month: 4.33       # same as the Season Income Calculator
+
+rent:
+  # Order of baseline values used for a housing site with no published rent (shown as
+  # confidence estimated with the baseline source): fmr_studio, fmr_one_br, fmr_two_br, acs_median.
+  baseline_preference: [fmr_studio, acs_median]
+  # Median rent for lucrativeness (owner decision 2026-10-14), first available wins:
+  #   median_rent  the median of the sourced median rent figures for the resort's town (Zillow, Redfin,
+  #                Apartments.com, news, blogs; data/raw/rent/median_rent_*.yaml), see `median` below
+  #   zillow_zori  Zillow Observed Rent Index, labelled "Zillow typical rent (ZORI)": a typical rent, not a median
+  #                (data/raw/rent/zillow/zori_extract.csv), see `zori` below
+  #   acs_median   Census ACS median gross rent of the county
+  #   fmr_one_br   HUD Fair Market Rent, one bedroom
+  # Employee housing rent no longer feeds lucrativeness; it still shows with each housing site.
+  # Other steps: employee_housing, reported_area, baseline (baseline_preference), fmr_studio, fmr_two_br.
+  lucrativeness_rent: [median_rent, zillow_zori, acs_median, fmr_one_br]
+  median:
+    # Only the best geography level with a usable figure counts, in this order; levels are never mixed.
+    geography_order: [zip, city, county, metro]
+    # Within that level: figures for all unit sizes when there are any, else one bedroom; the unit used is
+    # shown. Two and three bedroom figures stay in the research file but are not used.
+    units: [all, 1br]
+    # Figures whose period ended more than this many months before the build are ignored.
+    max_age_months: 18
+    # The publisher is the registered domain of the source URL; the name shown for each.
+    publishers:
+      zillow.com: Zillow
+      redfin.com: Redfin
+      zumper.com: Zumper
+      padmapper.com: PadMapper
+      rentometer.com: Rentometer
+      apartmentlist.com: Apartment List
+      apartments.com: Apartments.com
+      rentcafe.com: RentCafe
+      rent.com: Rent.com
+      sfranalytics.com: SFR Analytics
+      foreclosure.com: Foreclosure.com
+    # Foreclosure.com figures look like formula output (the same value repeats across towns on one date), so
+    # they count only when no other publisher has a figure, of any unit size, for that town at that level.
+    last_resort_publishers: [foreclosure.com]
+  zori:
+    # Nearest ZIP whose centroid lies within zip_radius_km of the base, else the county, else its metro.
+    match_levels: [zip, county, metro]
+    zip_radius_km: 10
+    # latest: the latest month with a value (as_of is that month); trailing_mean: the mean of trailing_months
+    # months ending there. Both are kept in the extract; the trailing mean needs every month in the window.
+    value: latest
+    trailing_months: 12
+  # Data vintages fetched by `python -m pipeline.rent fetch`. hud_fmr_year null means HUD's latest.
+  hud_fmr_year: null
+  acs_year: 2024
+  acs_dataset: acs/acs5
+
+transit:
+  # Stops within this distance of a housing site or the base area are kept in the transit extract.
+  search_radius_km: 2
+  # Route lines in the extract are simplified (Douglas Peucker) to this tolerance in metres,
+  # under one pixel at zoom 13, so long regional routes stay small.
+  simplify_tolerance_m: 10
+  # Feed currency. A GTFS feed is current when its validity period overlaps target_season, or when
+  # its validity starts (its as_of) within staleness.max_age_months of the build date. A validity
+  # period longer than max_validity_years is an open ended placeholder (a calendar running to 2099)
+  # and does not count as covering the season. The extract command skips feeds that are not
+  # current; the build drops such extracts with a warning. Move target_season forward each year.
+  target_season: {start: 2026-11-01, end: 2027-04-30}
+  max_validity_years: 3
+  # Schedule note on the detail map. A feed covers winter when its validity overlaps a yearly
+  # winter_window (Dec 1 to Mar 31) by at least winter_min_overlap_days; other feeds get an offseason
+  # note. A winter feed whose validity ended before the build date gets a last season note.
+  winter_window: {start: "12-01", end: "03-31"}
+  winter_min_overlap_days: 30
+  # Bus commute = walk to stop + scheduled ride + walk from stop, with no waiting time.
+  # Alexandre sets these; bus commutes stay null until then.
+  walk_speed_kmh: null
+  max_walk_km: null
+
+trailmap:
+  # Douglas Peucker tolerance for OpenSkiMap run geometry in the trail map popup (metres).
+  # 6 m (about 1.5 px at zoom 15) keeps run shapes readable and big resorts near 150 KB.
+  simplify_tolerance_m: 6
+  # Official trail map files (data/raw/trailmaps_official image_url) load straight from the resort's servers.
+  # The build accepts an image_url on the resort's own site (the registered domain of its page url or source)
+  # or on one of these operator image CDNs. Each entry matches that host and its subdomains.
+  # Every file in the 2026-10 batch sits on the resort's own site, so none needs this list yet. A search for the
+  # Vail Resorts Scene7 host (scene7.vailresorts.com) surfaced no file, so no record uses it.
+  official_image_domains:
+    - vailresorts.com     # Vail Resorts' own domain and its image hosts (scene7.vailresorts.com)
+    - snow.com            # Vail Resorts' shared site for its resorts
+    - alterramtnco.com    # Alterra Mountain Company's own domain and its image hosts
+
+routing:
+  # Drive time, distance and route geometry (housing to base area) and drive isochrones around the base.
+  # provider: valhalla | osrm | ors. OSRM has no isochrones. api_key_env names the environment variable
+  # holding a key (ORS needs one; the public Valhalla and OSRM servers do not).
+  provider: valhalla
+  base_url: https://valhalla1.openstreetmap.de
+  api_key_env: null
+  isochrone_minutes: [15, 30, 45]
+  timeout_s: 30
+
+career:
+  # Tag vocabularies for data/raw/career and data/raw/tier_a. Unknown tags fail the build.
+  vocab:
+    # client profiles (ROADMAP Section 1)
+    client_profiles:
+      - destination_families
+      - local_kids_programs
+      - adaptive
+      - race
+      - freestyle
+      - international
+      - uhnw_privates
+    # Alexandre fills these lists.
+    enthusiast_types: []
+    professional_types: []
+
+heat:
+  # Heat maps for the map color modes (Lucrativeness, Season length, Snowfall).
+  # Display settings only: they change no resort number. Method and contract in docs/map/ARCHITECTURE.md
+  # ("Heat maps"). Exported to definitions.json; map/js/heat.js and pipeline/heat.py both read them.
+  ramp:
+    # Continuous ramp for modes without classes (Lucrativeness). Viridis (van der Walt and Smith,
+    # matplotlib), its upper 80 percent: OKLab lightness rises at every stop (checked by config validation)
+    # and it reads for red green color blindness. The classed palettes in `modes` follow their own rule.
+    name: viridis
+    colors: ["#414487", "#355f8d", "#2a788e", "#21918c", "#22a884", "#44bf70", "#7ad151", "#bddf26", "#fde725"]
+  # Neutral grey: the no snow class, and the color far from any resort with data. It keeps 3.5:1 against the
+  # dark base and reads as flat grey over the satellite imagery.
+  neutral: "#666a70"
+  regions:
+    # One image per region, drawn at its true place. Alaska lies inside the satellite style underlay's Alaska
+    # box (pipeline/tools/make_underlay.py), so relief lies under all of it; rings west of 180 degrees wrap to
+    # negative longitudes and the far Aleutians fall outside.
+    lower48: {west: -125.0, south: 24.4, east: -66.8, north: 49.5}
+    alaska: {west: -180.0, south: 51.2, east: -129.5, north: 71.6}
+  field:
+    # Adaptive modified Shepard interpolation over the resorts with a value:
+    #   value(x) = sum(w_i v_i) / sum(w_i) over the `neighbors` nearest points,
+    #   w_i = ((R - d_i) / (R * max(d_i, min_distance_km)))^2 with R the distance to the next nearest point,
+    # so weights reach zero just as a point leaves the set and the surface stays continuous everywhere.
+    # Points closer together than decluster_km merge first (mean place, mean value), so a cluster of
+    # hills counts as one voice. Distances use a local flat earth (km per degree at the pixel latitude).
+    neighbors: 8
+    min_distance_km: 10
+    decluster_km: 20
+    # Distance to the nearest point with data: the full color up to full_opacity_km, then a smooth blend
+    # until fade_end_km. fade_to neutral blends the color into `neutral` and the opacity down to
+    # floor_alpha, so areas far from resorts (the Plains) read as clean grey. fade_to alpha keeps the color
+    # and lowers only the opacity. Density never changes either.
+    full_opacity_km: 200
+    fade_end_km: 400
+    max_alpha: 1.0
+    floor_alpha: 0.7
+    fade_to: neutral
+    # Browser surfaces: about 7 km per pixel, the field solved on every grid_step_px pixel and blended
+    # bilinearly between, rows evenly spaced in Web Mercator, clipped to the state outlines.
+    px_per_degree: 12
+    grid_step_px: 4
+    max_pixels: 600000
+  modes:
+    # scale: linear | sqrt | classed. Linear and sqrt use `ramp` over `domain` (else min..max of the resort
+    # values, widened to round steps). Classed: `breaks` split the values into len(breaks) + 1 classes,
+    # class i covering breaks[i - 1] to breaks[i], each with its color in `colors`. Neighbouring classes
+    # must differ by at least 6 in OKLab (x 100), checked by config validation; the tests check them under
+    # simulated color blindness too.
+    lucrativeness: {scale: linear}
+    season:
+      # From the 330 sourced season lengths (2026-10-13): 10th percentile 86 days, median 114, 90th 150,
+      # top 287 (Timberline). Classes hold 4 to 17 percent of the resorts each, so the common 90 to 150 day
+      # range splits into five steps instead of one teal. Multi hue, lightness rising up to 180 days; the
+      # 180 plus class turns orange so the longest seasons stand apart.
+      scale: classed
+      breaks: [90, 100, 110, 120, 130, 150, 180]
+      colors: ["#6331a0", "#405ec9", "#158abe", "#1aadb3", "#41ce90", "#9fd959", "#feeba4", "#f37511"]
+      # Legend: each class box is as wide as its span (open ends one 10 day class); every other break labeled.
+      legend_ticks: [90, 110, 130, 150, 180]
+    snowfall:
+      # Owner request 2026-10-13: the most contrast in 180 to 900 in, where people ski, and a 50 in step easy
+      # to read. Under 24 in is neutral grey (little or no snow); 24 to 180 gets three muted blues; 180 to
+      # 900 gets 15 classes of 50 in (180 to 200 first) that sweep the hue wheel from cyan through green,
+      # yellow, orange and pink to lavender while the lightness alternates between neighbours, so every
+      # neighbouring pair differs by 11 or more in OKLab even under simulated protanopia and deuteranopia.
+      # Isolines (heat.snowfall.isolines) carry the exact steps; color alone does not have to.
+      scale: classed
+      breaks: [24, 60, 120, 180, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850]
+      colors: ["#666a70", "#384e6e", "#41628d", "#4677ad", "#20c2ec", "#159ca4", "#1dcfb9", "#0ca871", "#79d26a",
+               "#86a005", "#d6be07", "#c28c17", "#fead68", "#ee7145", "#fdaeae", "#ee6e9d", "#ffabe6", "#ce7fe6",
+               "#d5c5fe"]
+      domain: [0, 900]
+      # Legend: classes below 180 in take half the width of a 50 in class, so 180 to 900 fills 88 percent of
+      # it. The grey class gets its own legend line ("under 24 in"), so the ticks start at 0 and 180; the top
+      # class (850 and up) ends the bar.
+      legend_compress_below: 180
+      legend_ticks: [0, 180, 300, 400, 500, 600, 700, 800]
+  snowfall:
+    # Precomputed snowfall rasters (pipeline/heat.py -> data/build/heat/): NOAA NCEI U.S. Climate Normals
+    # 1991 to 2020 station values (ANN-SNOW-NORMAL) and NRCS SNOTEL mountain stations (`snotel`) as the
+    # background, read at each pixel's ground height (`elevation`), then each resort's own published annual
+    # snowfall (snow.annual_avg_in) as a local pocket: inside pocket_radius_km the value rises toward the
+    # resort's value, v = b + g(d) * max(0, T - b) with g(d) = (1 - (d / r)^2)^2 and T the resort's value
+    # (moved down the slope below the resort with `elevation.pocket_terrain`), so a pocket only ever raises
+    # the background. Valley stations undercount mountain snow; SNOTEL and the terrain restore the ranges,
+    # the pockets the resorts.
+    accept_completeness: [S, R, P]      # NOAA completeness codes kept (E, estimated, is dropped)
+    accept_measurement_flags: ["", X]   # blank or X (nonzero rounded to zero); M, V, W, Y and Z are dropped
+    snotel:
+      # NRCS SNOTEL mountain stations (ROADMAP item 14), from the committed extract that
+      # pipeline/climate/snotel_stations.py writes (data/raw/climate/snotel_snowfall/). Each station's annual
+      # snowfall is the median of its water year totals of derived new snow (daily SWE gain / new snow
+      # density, the SNOW-17 step and the climate.snotel parameters of pipeline/climate/snotel_snowfall.py).
+      # A water year (Oct 1 to Sep 30, named by its September year) counts when its snow months (Nov to Apr)
+      # have climate.min_month_coverage of their days with data; a station needs min_complete_years of them.
+      first_water_year: 2011
+      last_water_year: 2025
+      min_complete_years: 8
+    elevation:
+      # Elevation aware field (pipeline/heat.py gids_fit), gradient plus inverse distance after Nalder and Wein
+      # (1998) on u = ln(snowfall + log_offset_in): at each node the neighbours' Shepard weights give the value,
+      # and a weighted slope of u with station height gives the local gradient, shrunk toward zero when the
+      # neighbours span little height (slope = Sxy / (Sxx + spread_prior_m^2)) and clamped to 0 ..
+      # max_gradient_per_km (snowfall never falls with height). Every pixel then reads the model at its own
+      # ground height (data/raw/terrain, AWS Terrain Tiles, mean height per 1/16 degree cell), clamped to the
+      # neighbours' height range widened by max_extrapolation_m, and the value is clamped to the neighbours'
+      # range, so the field never invents a value above the highest or below the lowest station near it.
+      # Without the terrain extract the field is plain station interpolation.
+      log_offset_in: 10
+      max_gradient_per_km: 2.0
+      spread_prior_m: 150
+      max_extrapolation_m: 0
+      # The terrain grid is smoothed first (two box blurs of this many 1/16 degree cells each way, about 15 km
+      # across): snowfall follows the broad shape of a range, not every gully, and the isolines stay readable.
+      # Stations take the smoothed height at their place, so each one reads back its own value.
+      terrain_smooth_cells: 2
+      # Resorts join the stations as points at their ground height, so a resort's published snowfall spreads
+      # along the terrain like a station's instead of in a ring. The field with the resorts is kept only where it
+      # is higher than the stations' field, so a resort never lowers it.
+      resort_points: true
+      # Pockets follow the terrain too: below the resort's ground height the pocket pulls toward the resort's
+      # value moved down the local gradient, so it fills the slopes and fades into the valleys.
+      pocket_terrain: true
+    neighbors: 10
+    min_distance_km: 12
+    # 25 km until the SNOTEL stations, the terrain and the resort points carried the mountains (item 14); now a
+    # small pocket only lifts each resort's own pixels to its published figure.
+    pocket_radius_km: 10
+    px_per_degree: 32                   # about 2.8 km per pixel at 40 degrees north
+    grid_step_px: 4
+    # Stations cover the country, so the fade only touches remote Alaska: it keeps the class color and
+    # lowers the opacity (a grey fade would read as the no snow class).
+    full_opacity_km: 300
+    fade_end_km: 800
+    floor_alpha: 0.35
+    fade_to: alpha
+    isolines:
+      # Lines of equal snowfall from the same field as the raster (marching squares), every `step` in from
+      # `start` to `end`, bolder every `major_step`. Traced on a grid `supersample` times finer than the
+      # raster pixels where lines can occur, with each pocket evaluated exactly, so pocket rings stay round.
+      # Simplified with Douglas Peucker at simplify_px raster pixels; lines shorter than min_length_px pixels
+      # are dropped; lines longer than label_min_px pixels carry a label (shown from mountain range zoom).
+      start: 200
+      end: 900
+      step: 50
+      major_step: 100
+      supersample: 4
+      simplify_px: 0.2                  # 0.1 before item 14; the terrain makes longer lines
+      min_length_px: 4
+      label_min_px: 12
+  season:
+    # Precomputed season length rasters (pipeline/heat.py -> data/build/heat/season*) from the resorts'
+    # sourced season lengths (season.length_days, else a sourced open and close pair), interpolated with the
+    # `field` method. Same regions and Web Mercator rows as snowfall. Also the browser fallback's fade.
+    px_per_degree: 16
+    grid_step_px: 4
+    # Full color within full_opacity_km of a resort with data, then the color blends into the light
+    # `neutral` grey (at floor_alpha) by fade_end_km, so far from resorts the map turns flat grey instead of
+    # a dark smudge. States with no resort data (the southern Plains, the Deep South) stay clear: the colors
+    # of their neighbours fade out within no_data_reach_km past the border.
+    full_opacity_km: 250
+    fade_end_km: 450
+    floor_alpha: 0.6
+    fade_to: neutral
+    no_data_reach_km: 120
+
+# Phase 3 climate ETL settings. Read and validated by pipeline/climate/definitions.py
+# (owned by the climate ETL); pipeline/config.py passes this block through unchanged.
+climate:
+  period_seasons: 25            # climatology length in full ski seasons
+  era5_lag_days: 7              # wait this long after Sep 30 before a season counts as complete
+  storm_min_daily_in: 1.0       # a storm is consecutive days with at least this much new snow
+  min_month_coverage: 0.9       # share of days with data before a season month counts
+  min_storms_per_month: 5       # storms needed before a month gets a density value
+  density_estimate_method: anderson_1976   # or hedstrom_pomeroy_1998
+  # ERA5 snowfall is kept only where no usable SNOTEL station exists and either the
+  # ERA5 grid cell height is within this band of the resort base, or the resort is low relief.
+  era5_snow_elevation_band_ft: 1000
+  low_relief_max_vertical_ft: 1500   # low relief: vertical under this ...
+  low_relief_max_base_ft: 4000       # ... and base under this
+  validation_flag_pct: 35       # flag annual totals this far from the published annual snowfall
+  validation_suppress_pct: 50   # null monthly snowfall when the annual total is this far off
+  open_meteo:
+    # Weighted calls per day allowed when OPEN_METEO_API_KEY is set (paid plan, customer endpoint).
+    # null keeps the free tier limits even with a key. Set it from the plan the owner buys.
+    paid_daily_budget: null
+  snotel:
+    radius_km: 25               # search radius around the resort base
+    elevation_band_below_ft: 1500   # station may sit this far below the resort elevation
+    elevation_band_above_ft: 3500   # station may sit this far above the resort elevation
+    max_candidates: 3           # stations tried, nearest first
+    storm_min_daily_depth_gain_in: 1   # daily depth gain that marks a storm day
+    min_storm_depth_gain_in: 3  # storms with less total depth gain are dropped
+    density_min_pct: 2          # QC lower bound for storm density
+    density_max_pct: 40         # QC upper bound for storm density
+    swe_noise_tolerance_in: 0.1 # a daily SWE drop larger than this inside a storm is sensor noise
+    max_daily_depth_gain_in: 40 # a daily depth jump above this is a sensor spike
+    min_valid_storms: 20        # station is usable with at least this many QC passed storms
+    min_record_seasons: 10      # station needs this many seasons of daily SWE in the period
+    swe_min_daily_gain_in: 0.1  # smallest daily SWE gain counted as snowfall (WTEQ precision is 0.1 in)
+    swe_max_daily_gain_in: 6.0  # a daily SWE gain above this is a sensor spike
+    max_daily_new_snow_in: 60   # cap on derived daily new snow
+    rain_snow_threshold_c: 1.0  # SWE gains without a depth gain count as snow at or below this air temperature
+    lapse_rate_c_per_km: 6.5    # standard atmosphere lapse rate, ERA5 temperature to station elevation
+
+webcams:
+  # Live webcam links (data/raw/webcams). Links only: streams and images are never embedded.
+  # The resort panel and its page show at most this many named cams under "Open live cams".
+  max_named_cams: 4
+
+jobs:
+  # Jobs links (data/raw/jobs) and the daily live postings feed (pipeline/jobs_feed.py).
+  # A link's url must sit on its employer's careers domain, one of its ATS vendor's domains below, or the domain of
+  # the link's own source (the employer's site that publishes it). Domains in blocked_domains always fail.
+  # Domains are registered domains (the last two labels of the host name).
+  ats_domains:
+    greenhouse: [greenhouse.io]
+    lever: [lever.co]
+    smartrecruiters: [smartrecruiters.com]
+    workable: [workable.com]
+    ashby: [ashbyhq.com]
+    workday: [myworkdayjobs.com, myworkday.com, workday.com]
+    icims: [icims.com]
+    ultipro: [ultipro.com, ukg.net, ukg.com]
+    paylocity: [paylocity.com]
+    adp: [adp.com]
+    paycom: [paycomonline.net, paycom.com]
+    jazzhr: [applytojob.com, jazzhr.com]
+    bamboohr: [bamboohr.com]
+    other: []
+    unknown: []
+  # Job aggregators: link the employer's own careers page or ATS board instead.
+  blocked_domains: [indeed.com, glassdoor.com, ziprecruiter.com, simplyhired.com, monster.com]
+  feed:
+    # Postings are kept when one of these words or phrases appears in the title, department or team
+    # (whole words, any case).
+    keywords: [instructor, coach, coaching, ski school, snowsports, snow sports, ride school, supervisor, director,
+               trainer, freeride, race, racing, freestyle, adaptive]
+    # Postings with one of these words are dropped even when a keyword matches. Empty keeps every match.
+    exclude_keywords: []
+    # Employers whose board also lists jobs outside snowsports (a college, a town): their postings must also name one
+    # of these words in the title, department or location. Keys are employer ids from data/raw/jobs.
+    require_keywords:
+      middlebury-college: [snow bowl, rikert, ski, skiing, snowboard, nordic]
+    # Role group guess for each kept posting: the first group with a matching word wins. Postings with no match
+    # fall to corporate (parent company employers) or all.
+    role_keywords:
+      management: [supervisor, manager, director, head of, lead, coordinator, executive, president]
+      coaching: [coach, coaching, club, team, race, racing, freeride, freestyle, moguls, program]
+      ski_school: [instructor, ski school, snowsports, snow sports, ride school, lesson, trainer, adaptive]
+    # A posting of an employer linked from several resorts counts for a resort when the resort's name, or one of
+    # these aliases, appears in its location (then its title or department). Keys are resort ids.
+    location_aliases: {}
+    # Keep at most this many postings per board, so postings.json stays small.
+    max_postings_per_board: 150
+    # A board that fails to load keeps its last postings for this many days, then they are dropped.
+    max_age_days: 14
+    # postings.json is rewritten when its postings change, or when its last fetch is older than this many days.
+    refresh_days: 7
+    timeout_s: 20
+  hiring_windows:
+    # The "Hiring now" filter reads a start and an end month from a hiring window's text only when the text names
+    # both (pipeline/hiring.py). A window longer than this many months is left unparsed: a span that long means an
+    # old posting or a misread date.
+    max_months: 9
+
+passes:
+  # Multi resort pass membership (data/raw/passes, ROADMAP item 12: the Epic and Ikon filter chips).
+  # Memberships of this season reach data/build. A new season goes in its own batch file next to the old one;
+  # move this value once that batch is complete.
+  season: "2026/27"
+  # When a resort has no record for that season on a pass, use its record from the season one year back (never
+  # older), marked season_fallback and shown as "Epic Pass: unlimited (2025/26 list)". The build warns with the
+  # count. False drops such resorts from the pass until this season's list is researched.
+  fallback_previous_season: true
+  # Every membership cites a page on its pass company's own site (registered domain, the last two labels).
+  # Ownership never implies a pass: a resort is on a pass only when one of these sites says so.
+  domains:
+    epic: [epicpass.com, vailresorts.com]
+    ikon: [ikonpass.com]
+    mountain_collective: [mountaincollective.com]
+    indy: [indyskipass.com]
+  # Reference sites a membership may cite in addition (marked estimated, with the list's season in the note).
+  supplemental_domains: [wikipedia.org]
+
+housing_search:
+  # Housing search links (data/raw/housing_search, ROADMAP item 8c). Links only: listings are never copied or embedded.
+  # A resort shows at most this many tools: those sources name for the resort first, then those named for its cluster,
+  # each group ranked by how many independent sources (distinct publishers) name the tool, then by name.
+  max_tools: 8
+  # The Furnished Finder link for a resort's nearest town must sit on one of these registered domains.
+  furnished_finder_domains: [furnishedfinder.com]

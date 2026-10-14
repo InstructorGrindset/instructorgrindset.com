@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-14T00:28:56Z",
+  "resort_id": "beaver-creek",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "nrcs-snotel-1041-co",
+    "anderson-1976-new-snow-density"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": null,
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "beaver-creek",
+      "month": 10,
+      "snowfall_in": 10.2,
+      "powder_days": 0.43,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 4.2,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.222,
+        "average": 0.611,
+        "moist": 0.167
+      },
+      "density_source": "snotel",
+      "temp_high_f": 56.7,
+      "temp_low_f": 30.1,
+      "wind_mph": 7.7,
+      "sun_pct": 90.4
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 11,
+      "snowfall_in": 24.6,
+      "powder_days": 0.91,
+      "banner_days": 0.09,
+      "avg_storm_depth_in": 5.4,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 8.0,
+      "density_mix": {
+        "dry": 0.34,
+        "average": 0.528,
+        "moist": 0.132
+      },
+      "density_source": "snotel",
+      "temp_high_f": 43.5,
+      "temp_low_f": 15.7,
+      "wind_mph": 7.2,
+      "sun_pct": 88.6
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 12,
+      "snowfall_in": 35.6,
+      "powder_days": 1.57,
+      "banner_days": 0.09,
+      "avg_storm_depth_in": 5.3,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 7.5,
+      "density_mix": {
+        "dry": 0.465,
+        "average": 0.394,
+        "moist": 0.141
+      },
+      "density_source": "snotel",
+      "temp_high_f": 34.2,
+      "temp_low_f": 9.7,
+      "wind_mph": 6.7,
+      "sun_pct": 83.5
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 1,
+      "snowfall_in": 36.8,
+      "powder_days": 1.96,
+      "banner_days": 0.3,
+      "avg_storm_depth_in": 5.4,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 6.7,
+      "density_mix": {
+        "dry": 0.522,
+        "average": 0.358,
+        "moist": 0.12
+      },
+      "density_source": "snotel",
+      "temp_high_f": 33.6,
+      "temp_low_f": 11.6,
+      "wind_mph": 6.4,
+      "sun_pct": 85.6
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 2,
+      "snowfall_in": 30.4,
+      "powder_days": 1.09,
+      "banner_days": 0.04,
+      "avg_storm_depth_in": 5.5,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 7.5,
+      "density_mix": {
+        "dry": 0.455,
+        "average": 0.439,
+        "moist": 0.106
+      },
+      "density_source": "snotel",
+      "temp_high_f": 36.1,
+      "temp_low_f": 15.2,
+      "wind_mph": 7.8,
+      "sun_pct": 86.4
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 3,
+      "snowfall_in": 26.2,
+      "powder_days": 1.13,
+      "banner_days": 0.09,
+      "avg_storm_depth_in": 4.9,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 8.8,
+      "density_mix": {
+        "dry": 0.333,
+        "average": 0.537,
+        "moist": 0.13
+      },
+      "density_source": "snotel",
+      "temp_high_f": 43.9,
+      "temp_low_f": 22.2,
+      "wind_mph": 8.3,
+      "sun_pct": 89.3
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 4,
+      "snowfall_in": 17.3,
+      "powder_days": 0.83,
+      "banner_days": 0.04,
+      "avg_storm_depth_in": 4.3,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.28,
+        "average": 0.52,
+        "moist": 0.2
+      },
+      "density_source": "snotel",
+      "temp_high_f": 49.2,
+      "temp_low_f": 27.4,
+      "wind_mph": 8.6,
+      "sun_pct": 89.3
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 5,
+      "snowfall_in": 4.2,
+      "powder_days": 0.09,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 3.7,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": 11.8,
+      "density_mix": {
+        "dry": 0.125,
+        "average": 0.5,
+        "moist": 0.375
+      },
+      "density_source": "snotel",
+      "temp_high_f": 58.9,
+      "temp_low_f": 33.2,
+      "wind_mph": 8.2,
+      "sun_pct": 91.0
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 6,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 73.9,
+      "temp_low_f": 42.1,
+      "wind_mph": 8.6,
+      "sun_pct": 91.4
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 7,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 80.8,
+      "temp_low_f": 49.9,
+      "wind_mph": 7.0,
+      "sun_pct": 92.3
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 8,
+      "snowfall_in": 0.0,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": null,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 78.4,
+      "temp_low_f": 48.9,
+      "wind_mph": 7.3,
+      "sun_pct": 93.2
+    },
+    {
+      "resort_id": "beaver-creek",
+      "month": 9,
+      "snowfall_in": 0.1,
+      "powder_days": 0.0,
+      "banner_days": 0.0,
+      "avg_storm_depth_in": 1.0,
+      "snowfall_source": "snotel_swe",
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 71.3,
+      "temp_low_f": 41.9,
+      "wind_mph": 7.6,
+      "sun_pct": 92.1
+    }
+  ]
+}

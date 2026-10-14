@@ -1,0 +1,2928 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-11T12:00:00Z",
+ "resorts": [
+  {
+   "id": "alpha-peak",
+   "name": "Alpha Peak",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "operator_compensation",
+     "rationale": "Synthetic rationale for operator compensation.",
+     "source_id": "fixture-resort-site"
+    },
+    {
+     "criterion": "luxury",
+     "rationale": "Synthetic rationale for luxury.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "approved",
+   "approval": {
+    "by": "Fixture Reviewer",
+    "date": "2026-10-05",
+    "note": "Synthetic approval"
+   },
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 39.64,
+   "lon": -106.37,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-front-range",
+   "state": "CO",
+   "size": {
+    "acres": {
+     "value": 5300,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 3450,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 31,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 1325,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 11550,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 150,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": {
+    "pay": [
+     {
+      "cert_level": "none",
+      "hourly_low": 21.0,
+      "hourly_high": 24.0,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_1",
+      "hourly_low": 23.5,
+      "hourly_high": 26.5,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2024-11-01",
+      "season": "2024-25",
+      "stale": true
+     },
+     {
+      "cert_level": "level_2",
+      "hourly_low": 26.0,
+      "hourly_high": 29.0,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_3",
+      "hourly_low": 28.5,
+      "hourly_high": 31.5,
+      "confidence": "reported",
+      "aggregate_count": 4,
+      "source_id": "fixture-survey",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "trainer",
+      "hourly_low": 31.0,
+      "hourly_high": 34.0,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "examiner",
+      "hourly_low": 33.5,
+      "hourly_high": 36.5,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": {
+     "value": {
+      "low": 150,
+      "high": 220,
+      "unit": "hour"
+     },
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "private_split": {
+     "value": 45,
+     "source_id": "fixture-survey",
+     "as_of": "2026-10-01",
+     "confidence": "reported"
+    },
+    "lucrativeness": {
+     "low": 3200,
+     "mid": 8900,
+     "high": 14600,
+     "status": "computed",
+     "assumptions": [
+      {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
+       "key": "hours_per_week",
+       "label": "Hours per week, standard full time",
+       "value": 40
+      },
+      {
+       "key": "season_months",
+       "label": "Season months, from the sourced season length",
+       "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
+      },
+      {
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Median rent per month",
+       "value": 1150
+      },
+      {
+       "key": "tax",
+       "label": "Before tax and other living costs",
+       "value": null
+      },
+      {
+       "key": "rent_basis",
+       "label": "Rent basis",
+       "value": "median_rent"
+      },
+      {
+       "key": "rent_source_id",
+       "label": "Rent source",
+       "value": "fixture-resort-site, fixture-survey"
+      }
+     ],
+     "rent": {
+      "value": 1150,
+      "basis": "median_rent",
+      "label": "Median rent",
+      "source_ids": [
+       "fixture-resort-site",
+       "fixture-survey"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": "median of 2 sources (synthetic)",
+      "unit": "1br",
+      "count": 2,
+      "publishers": [
+       "Fixture Rentals",
+       "Fixture Daily"
+      ],
+      "period": {
+       "first": "2026-07",
+       "last": "2026-08"
+      },
+      "geography": {
+       "level": "city",
+       "id": null,
+       "name": "Fixture Town, CO"
+      },
+      "stale": false
+     }
+    },
+    "stale_fields": [
+     "pay.level_1",
+     "private_split"
+    ]
+   },
+   "editorial": {
+    "overview_md": "Synthetic overview with **bold** text and a [linked source](https://example.com/fixture/editorial).",
+    "culture_md": "Synthetic culture paragraph one.\n\nSynthetic culture paragraph two.",
+    "alexandre_take_md": "Synthetic take from a reviewer.",
+    "status": "reviewed",
+    "source_ids": [
+     "fixture-resort-site"
+    ],
+    "reviewed_date": "2026-10-10"
+   },
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": true,
+   "trailmap_available": true,
+   "official_trailmap": {
+    "url": "https://example.com/fixture/alpha-peak/trail-map",
+    "format": "page",
+    "season": "2025/26",
+    "source_id": "fixture-resort-site",
+    "as_of": "2026-10-01",
+    "confidence": "estimated",
+    "note": null,
+    "image_url": "https://example.com/fixture/alpha-peak-trail-map-2025-26.png",
+    "image_format": "png",
+    "image_source_id": "fixture-resort-site",
+    "image_as_of": "2026-10-01",
+    "image_confidence": "estimated",
+    "image_note": null
+   },
+   "webcams": {
+    "cams_page": {
+     "url": "https://example.com/fixture/alpha-peak/cams",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    },
+    "cams": [
+     {
+      "label": "Summit cam",
+      "url": "https://example.com/fixture/alpha-peak/cams/summit",
+      "kind": "stream",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "label": "Base area",
+      "url": "https://example.com/fixture/alpha-peak/cams/base",
+      "kind": "image",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "label": "Back bowls",
+      "url": "https://example.com/fixture/alpha-peak/cams/bowls",
+      "kind": "page",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "label": "Terrain park",
+      "url": "https://example.com/fixture/alpha-peak/cams/park",
+      "kind": "stream",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
+   "jobs": {
+    "feed": true,
+    "links": [
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "ski_school",
+      "disciplines": [],
+      "label": "Ski and ride school jobs",
+      "url": "https://example.com/fixture/careers",
+      "source_id": "fixture-careers",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-club",
+      "role_group": "coaching",
+      "disciplines": [
+       "race",
+       "freeride"
+      ],
+      "label": "Alpha Peak Ski Club coaches",
+      "url": "https://example.com/fixture/club/coaches",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "management",
+      "disciplines": [],
+      "label": "Ski school leadership",
+      "url": "https://example.com/fixture/careers/leadership",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "corporate",
+      "disciplines": [],
+      "label": "Fixture Parent corporate jobs",
+      "url": "https://example.com/fixture/parent/corporate",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "all",
+      "disciplines": [],
+      "label": "All Fixture Parent jobs",
+      "url": "https://example.com/fixture/parent/jobs",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ],
+    "hiring_window": {
+     "text": "Applications open August 15; staff training starts in mid November.",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "start_month": null,
+     "end_month": null
+    }
+   },
+   "passes": [
+    {
+     "pass": "epic",
+     "access": "unlimited",
+     "days": null,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "season_fallback": false
+    },
+    {
+     "pass": "mountain_collective",
+     "access": "limited",
+     "days": 2,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "season_fallback": false
+    }
+   ],
+   "housing_search": {
+    "furnished_finder": {
+     "town": "Fixture Town",
+     "url": "https://example.com/fixture/furnished/fixture-town",
+     "source_id": "fixture-ff-page",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null
+    },
+    "tools": [
+     {
+      "name": "Fixture Staff Housing Portal",
+      "kind": "employer_portal",
+      "url": "https://example.com/fixture/alpha-peak/staff-housing",
+      "why": "Synthetic reason: staff apply here before the season starts.",
+      "scope": "resort",
+      "named_by": 3,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-housing-guide",
+       "fixture-forum-one"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Front Range Rooms",
+      "kind": "facebook_group",
+      "url": "https://example.com/fixture/groups/front-range-rooms",
+      "why": "Synthetic reason: both sources say rooms post here first each fall.",
+      "scope": "cluster",
+      "named_by": 2,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-forum-one",
+       "fixture-forum-two"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Valley Listings",
+      "kind": "listing_site",
+      "url": "https://example.com/fixture/listings",
+      "why": "Synthetic reason: the guide names it for long stays.",
+      "scope": "cluster",
+      "named_by": 1,
+      "source_ids": [
+       "fixture-housing-guide"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
+   "access": {
+    "rating": "transit_friendly",
+    "summary_md": "A free bus links the staff village and the town to the base all day.",
+    "source_id": "fixture-location",
+    "as_of": "2026-10-01",
+    "confidence": "estimated"
+   },
+   "housing_summary": {
+    "site_count": 4,
+    "cheapest_rent_monthly_low": 550,
+    "cheapest_site_id": "alpha-staff-village",
+    "has_transit": true
+   },
+   "sources": [
+    "fixture-careers",
+    "fixture-ff-page",
+    "fixture-forum-one",
+    "fixture-forum-two",
+    "fixture-housing-guide",
+    "fixture-housing-news",
+    "fixture-location",
+    "fixture-model",
+    "fixture-ownership",
+    "fixture-pass-site",
+    "fixture-resort-site",
+    "fixture-survey"
+   ]
+  },
+  {
+   "id": "bravo-bowl",
+   "name": "Bravo Bowl",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "luxury",
+     "rationale": "Synthetic rationale for luxury.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "draft",
+   "approval": null,
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 39.48,
+   "lon": -106.07,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-front-range",
+   "state": "CO",
+   "size": {
+    "acres": {
+     "value": 2900,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 2600,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 20,
+     "source_id": "fixture-survey",
+     "as_of": "2026-10-01",
+     "confidence": "reported"
+    },
+    "ski_school_staff_est": {
+     "value": 725,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 10700,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 138,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": {
+    "pay": [
+     {
+      "cert_level": "none",
+      "hourly_low": 19.0,
+      "hourly_high": 22.0,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_1",
+      "hourly_low": 21.5,
+      "hourly_high": 24.5,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": null,
+    "private_split": null,
+    "lucrativeness": {
+     "low": null,
+     "mid": null,
+     "high": null,
+     "status": "assumptions_unset",
+     "assumptions": [
+      {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
+       "key": "hours_per_week",
+       "label": "Hours per week, standard full time",
+       "value": null
+      },
+      {
+       "key": "season_months",
+       "label": "Season months, from the sourced season length",
+       "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
+      },
+      {
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Median rent per month",
+       "value": 1150
+      },
+      {
+       "key": "tax",
+       "label": "Before tax and other living costs",
+       "value": null
+      }
+     ],
+     "rent": null
+    },
+    "stale_fields": []
+   },
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": {
+    "feed": true,
+    "links": [
+     {
+      "employer_id": "fixture-parent",
+      "role_group": "all",
+      "disciplines": [],
+      "label": "All Fixture Parent jobs",
+      "url": "https://example.com/fixture/parent/jobs",
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
+   "passes": [
+    {
+     "pass": "epic",
+     "access": "limited",
+     "days": 7,
+     "blackout": true,
+     "season": "2025/26",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "Synthetic note: 7 days shared with a sister resort.",
+     "season_fallback": true
+    }
+   ],
+   "housing_search": {
+    "furnished_finder": null,
+    "tools": [
+     {
+      "name": "Fixture Front Range Rooms",
+      "kind": "facebook_group",
+      "url": "https://example.com/fixture/groups/front-range-rooms",
+      "why": "Synthetic reason: both sources say rooms post here first each fall.",
+      "scope": "cluster",
+      "named_by": 2,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-forum-one",
+       "fixture-forum-two"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Valley Listings",
+      "kind": "listing_site",
+      "url": "https://example.com/fixture/listings",
+      "why": "Synthetic reason: the guide names it for long stays.",
+      "scope": "cluster",
+      "named_by": 1,
+      "source_ids": [
+       "fixture-housing-guide"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
+   "housing_summary": null,
+   "sources": [
+    "fixture-forum-one",
+    "fixture-forum-two",
+    "fixture-housing-guide",
+    "fixture-housing-news",
+    "fixture-location",
+    "fixture-model",
+    "fixture-ownership",
+    "fixture-pass-site",
+    "fixture-resort-site",
+    "fixture-survey"
+   ]
+  },
+  {
+   "id": "charlie-hill",
+   "name": "Charlie Hill",
+   "tier": "B",
+   "tier_a_criteria": [],
+   "tier_a_status": null,
+   "approval": null,
+   "owner": null,
+   "lat": 39.68,
+   "lon": -105.9,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-front-range",
+   "state": "CO",
+   "size": {
+    "acres": {
+     "value": 700,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 1500,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 7,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 175,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 9600,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 120,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": null
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [],
+    "professional_types": []
+   },
+   "clients": {
+    "profile_tags": [],
+    "notes_md": null
+   },
+   "career": {
+    "pay": [
+     {
+      "cert_level": "level_2",
+      "hourly_low": 22.0,
+      "hourly_high": 25.0,
+      "confidence": "estimated",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": null,
+    "private_split": null,
+    "lucrativeness": {
+     "low": null,
+     "mid": null,
+     "high": null,
+     "status": "insufficient_data",
+     "assumptions": [
+      {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
+       "key": "hours_per_week",
+       "label": "Hours per week, standard full time",
+       "value": 40
+      },
+      {
+       "key": "season_months",
+       "label": "Season months, from the sourced season length",
+       "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
+      },
+      {
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Median rent per month",
+       "value": 1150
+      },
+      {
+       "key": "tax",
+       "label": "Before tax and other living costs",
+       "value": null
+      }
+     ],
+     "rent": null
+    },
+    "stale_fields": []
+   },
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [
+    {
+     "pass": "ikon",
+     "access": "unlimited",
+     "days": null,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "season_fallback": false
+    }
+   ],
+   "housing_search": {
+    "furnished_finder": null,
+    "tools": [
+     {
+      "name": "Fixture Front Range Rooms",
+      "kind": "facebook_group",
+      "url": "https://example.com/fixture/groups/front-range-rooms",
+      "why": "Synthetic reason: both sources say rooms post here first each fall.",
+      "scope": "cluster",
+      "named_by": 2,
+      "source_ids": [
+       "fixture-housing-news",
+       "fixture-forum-one",
+       "fixture-forum-two"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     },
+     {
+      "name": "Fixture Valley Listings",
+      "kind": "listing_site",
+      "url": "https://example.com/fixture/listings",
+      "why": "Synthetic reason: the guide names it for long stays.",
+      "scope": "cluster",
+      "named_by": 1,
+      "source_ids": [
+       "fixture-housing-guide"
+      ],
+      "as_of": "2026-10-01",
+      "confidence": "estimated",
+      "note": null
+     }
+    ]
+   },
+   "housing_summary": null,
+   "sources": [
+    "fixture-forum-one",
+    "fixture-forum-two",
+    "fixture-housing-guide",
+    "fixture-housing-news",
+    "fixture-location",
+    "fixture-model",
+    "fixture-pass-site",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "delta-ridge",
+   "name": "Delta Ridge",
+   "tier": "B",
+   "tier_a_criteria": [],
+   "tier_a_status": null,
+   "approval": null,
+   "owner": null,
+   "lat": 39.58,
+   "lon": -105.8,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-front-range",
+   "state": "CO",
+   "size": {
+    "acres": null,
+    "vertical_ft": null,
+    "lifts": null,
+    "ski_school_staff_est": null
+   },
+   "elevation": {
+    "base_ft": null,
+    "summit_ft": null
+   },
+   "season": {
+    "open_typical": null,
+    "close_typical": null,
+    "length_days": null,
+    "training_start": null
+   },
+   "terrain": {
+    "beginner_pct": null,
+    "intermediate_pct": null,
+    "advanced_pct": null,
+    "expert_pct": null,
+    "character_tags": []
+   },
+   "fit": {
+    "enthusiast_types": [],
+    "professional_types": []
+   },
+   "clients": {
+    "profile_tags": [],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": false,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location"
+   ]
+  },
+  {
+   "id": "echo-mesa",
+   "name": "Echo Mesa",
+   "tier": "B",
+   "tier_a_criteria": [],
+   "tier_a_status": null,
+   "approval": null,
+   "owner": null,
+   "lat": 37.47,
+   "lon": -107.81,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-high-desert",
+   "state": "CO",
+   "size": {
+    "acres": {
+     "value": 1200,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 2000,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 10,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 300,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 10100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 112,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": null
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [],
+    "professional_types": []
+   },
+   "clients": {
+    "profile_tags": [],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "foxtrot-basin",
+   "name": "Foxtrot Basin",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "diehard",
+     "rationale": "Synthetic rationale for diehard.",
+     "source_id": "fixture-resort-site"
+    },
+    {
+     "criterion": "heritage",
+     "rationale": "Synthetic rationale for heritage.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "approved",
+   "approval": null,
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 40.59,
+   "lon": -111.64,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-wasatch-like",
+   "state": "UT",
+   "size": {
+    "acres": {
+     "value": 2600,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 2900,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 12,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 650,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 11000,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 168,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": {
+    "pay": [
+     {
+      "cert_level": "level_1",
+      "hourly_low": 24.5,
+      "hourly_high": 27.5,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_2",
+      "hourly_low": 27.0,
+      "hourly_high": 30.0,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_3",
+      "hourly_low": 29.5,
+      "hourly_high": 32.5,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": {
+     "value": {
+      "low": 700,
+      "high": 950,
+      "unit": "full_day"
+     },
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "private_split": {
+     "value": 40,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "lucrativeness": {
+     "low": 4800,
+     "mid": 10600,
+     "high": 16400,
+     "status": "computed",
+     "assumptions": [
+      {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
+       "key": "hours_per_week",
+       "label": "Hours per week, standard full time",
+       "value": 40
+      },
+      {
+       "key": "season_months",
+       "label": "Season months, from the sourced season length",
+       "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
+      },
+      {
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Median rent per month",
+       "value": 1150
+      },
+      {
+       "key": "tax",
+       "label": "Before tax and other living costs",
+       "value": null
+      },
+      {
+       "key": "rent_basis",
+       "label": "Rent basis",
+       "value": "zillow_zori"
+      },
+      {
+       "key": "rent_source_id",
+       "label": "Rent source",
+       "value": "fixture-model"
+      }
+     ],
+     "rent": {
+      "value": 1150,
+      "basis": "zillow_zori",
+      "label": "Zillow typical rent (ZORI)",
+      "source_ids": [
+       "fixture-model"
+      ],
+      "as_of": "2024-11-30",
+      "confidence": "published",
+      "note": "synthetic ZORI row",
+      "unit": null,
+      "count": null,
+      "publishers": [],
+      "period": null,
+      "geography": {
+       "level": "county",
+       "id": "00000",
+       "name": "Fixture County, UT"
+      },
+      "stale": true
+     }
+    },
+    "stale_fields": [
+     "lucrativeness.rent"
+    ]
+   },
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": true,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [
+    {
+     "pass": "ikon",
+     "access": "limited",
+     "days": 7,
+     "blackout": false,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "season_fallback": false
+    }
+   ],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-ownership",
+    "fixture-pass-site",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "golf-canyon",
+   "name": "Golf Canyon",
+   "tier": "B",
+   "tier_a_criteria": [],
+   "tier_a_status": null,
+   "approval": null,
+   "owner": null,
+   "lat": 40.62,
+   "lon": -111.59,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-wasatch-like",
+   "state": "UT",
+   "size": {
+    "acres": {
+     "value": 1000,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 1700,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 6,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 250,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 9800,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 131,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": null
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [],
+    "professional_types": []
+   },
+   "clients": {
+    "profile_tags": [],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": false,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "hotel-lake",
+   "name": "Hotel Lake",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "luxury",
+     "rationale": "Synthetic rationale for luxury.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "draft",
+   "approval": null,
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 39.2,
+   "lon": -120.24,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-lake-crest",
+   "state": "CA",
+   "size": {
+    "acres": {
+     "value": 6000,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 2850,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 34,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 1500,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 10950,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 160,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": {
+    "pay": [
+     {
+      "cert_level": "level_1",
+      "hourly_low": 25.5,
+      "hourly_high": 28.5,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     },
+     {
+      "cert_level": "level_2",
+      "hourly_low": 28.0,
+      "hourly_high": 31.0,
+      "confidence": "published",
+      "aggregate_count": null,
+      "source_id": "fixture-resort-site",
+      "as_of": "2026-10-01",
+      "season": "2025-26",
+      "stale": false
+     }
+    ],
+    "private_rate": null,
+    "private_split": null,
+    "lucrativeness": {
+     "low": null,
+     "mid": null,
+     "high": null,
+     "status": "insufficient_data",
+     "assumptions": [
+      {
+       "key": "wage_mid_usd",
+       "label": "Middle of the posted wage range (USD per hour)",
+       "value": 26.75
+      },
+      {
+       "key": "wage_top_usd",
+       "label": "Top of the posted wage scale, per hour",
+       "value": 32.5
+      },
+      {
+       "key": "wage_bottom_usd",
+       "label": "Bottom of the posted wage scale, per hour",
+       "value": 21
+      },
+      {
+       "key": "hours_per_week",
+       "label": "Hours per week, standard full time",
+       "value": 40
+      },
+      {
+       "key": "season_months",
+       "label": "Season months, from the sourced season length",
+       "value": 4.93
+      },
+      {
+       "key": "season_months_basis",
+       "label": "Season months basis",
+       "value": "season_length"
+      },
+      {
+       "key": "weeks_per_month",
+       "label": "Weeks per month",
+       "value": 4.33
+      },
+      {
+       "key": "tips_season_usd",
+       "label": "Tips are not included yet",
+       "value": null
+      },
+      {
+       "key": "rent_monthly_usd",
+       "label": "Median rent per month",
+       "value": 1150
+      },
+      {
+       "key": "tax",
+       "label": "Before tax and other living costs",
+       "value": null
+      }
+     ],
+     "rent": null
+    },
+    "stale_fields": []
+   },
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-ownership",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "india-crest",
+   "name": "India Crest",
+   "tier": "B",
+   "tier_a_criteria": [],
+   "tier_a_status": null,
+   "approval": null,
+   "owner": null,
+   "lat": 39.1,
+   "lon": -120.15,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-lake-crest",
+   "state": "CA",
+   "size": {
+    "acres": {
+     "value": 1500,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 1800,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 11,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 375,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 9900,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 142,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": null
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [],
+    "professional_types": []
+   },
+   "clients": {
+    "profile_tags": [],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "juliet-summit",
+   "name": "Juliet Summit",
+   "tier": "B",
+   "tier_a_criteria": [],
+   "tier_a_status": null,
+   "approval": null,
+   "owner": null,
+   "lat": 39.32,
+   "lon": -119.88,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-lake-crest",
+   "state": "NV",
+   "size": {
+    "acres": {
+     "value": 1650,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 1800,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 7,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 412,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 9900,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 134,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": null
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [],
+    "professional_types": []
+   },
+   "clients": {
+    "profile_tags": [],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "kilo-notch",
+   "name": "Kilo Notch",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "diehard",
+     "rationale": "Synthetic rationale for diehard.",
+     "source_id": "fixture-resort-site"
+    },
+    {
+     "criterion": "heritage",
+     "rationale": "Synthetic rationale for heritage.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "approved",
+   "approval": null,
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 44.53,
+   "lon": -72.78,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-green-ridge",
+   "state": "VT",
+   "size": {
+    "acres": {
+     "value": 485,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 2360,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 13,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 121,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 10460,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 151,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": true,
+   "facility_type": "ski_area",
+   "detail_available": false,
+   "trailmap_available": false,
+   "official_trailmap": {
+    "url": "https://example.com/fixture/kilo-notch-trail-map.pdf",
+    "format": "pdf",
+    "season": null,
+    "source_id": "fixture-resort-site",
+    "as_of": "2026-10-01",
+    "confidence": "estimated",
+    "note": "The file name carries an older date.",
+    "image_url": null,
+    "image_format": null,
+    "image_source_id": null,
+    "image_as_of": null,
+    "image_confidence": null,
+    "image_note": null
+   },
+   "webcams": null,
+   "jobs": {
+    "feed": false,
+    "links": [],
+    "hiring_window": {
+     "text": "Instructor posting opened September 1, 2026 with a target start of December 1, 2026.",
+     "source_id": "fixture-careers",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "start_month": "2026-09",
+     "end_month": "2026-12"
+    }
+   },
+   "passes": [
+    {
+     "pass": "ikon",
+     "access": "limited",
+     "days": null,
+     "blackout": null,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "season_fallback": false
+    }
+   ],
+   "housing_search": null,
+   "access": {
+    "rating": "car_centric",
+    "summary_md": "Most staff drive about 20 minutes from the valley towns.",
+    "source_id": "fixture-location",
+    "as_of": "2026-10-01",
+    "confidence": "estimated"
+   },
+   "housing_summary": null,
+   "sources": [
+    "fixture-careers",
+    "fixture-location",
+    "fixture-model",
+    "fixture-ownership",
+    "fixture-pass-site",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "lima-hollow",
+   "name": "Lima Hollow",
+   "tier": "B",
+   "tier_a_criteria": [],
+   "tier_a_status": null,
+   "approval": null,
+   "owner": null,
+   "lat": 44.4,
+   "lon": -72.95,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-green-ridge",
+   "state": "VT",
+   "size": {
+    "acres": {
+     "value": 300,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "vertical_ft": {
+     "value": 1200,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 5,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": {
+     "value": 75,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": "synthetic estimate"
+    }
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 9300,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": {
+     "value": 118,
+     "source_id": "fixture-model",
+     "as_of": "2026-10-01",
+     "confidence": "estimated"
+    },
+    "training_start": null
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [],
+    "professional_types": []
+   },
+   "clients": {
+    "profile_tags": [],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": false,
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-model",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "mike-dome",
+   "name": "Mike Snow Dome",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "year_round_training",
+     "rationale": "Synthetic rationale for year round training.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "approved",
+   "approval": {
+    "by": "Fixture Reviewer",
+    "date": "2026-10-06",
+    "note": null
+   },
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 39.74,
+   "lon": -105.62,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-front-range",
+   "state": "CO",
+   "size": {
+    "acres": null,
+    "vertical_ft": {
+     "value": 300,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "lifts": {
+     "value": 3,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "ski_school_staff_est": null
+   },
+   "elevation": {
+    "base_ft": {
+     "value": 8100,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "summit_ft": {
+     "value": 8400,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": null,
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": false,
+   "facility_type": "indoor",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [
+    {
+     "pass": "epic",
+     "access": "unspecified",
+     "days": null,
+     "blackout": null,
+     "season": "2026/27",
+     "source_id": "fixture-pass-site",
+     "as_of": "2026-10-01",
+     "confidence": "estimated",
+     "note": null,
+     "season_fallback": false
+    }
+   ],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-ownership",
+    "fixture-pass-site",
+    "fixture-resort-site"
+   ]
+  },
+  {
+   "id": "november-ramps",
+   "name": "November Ramps",
+   "tier": "A",
+   "tier_a_criteria": [
+    {
+     "criterion": "year_round_training",
+     "rationale": "Synthetic rationale for year round training.",
+     "source_id": "fixture-resort-site"
+    },
+    {
+     "criterion": "athlete_development",
+     "rationale": "Synthetic rationale for athlete development.",
+     "source_id": "fixture-resort-site"
+    }
+   ],
+   "tier_a_status": "draft",
+   "approval": null,
+   "owner": {
+    "value": "Fixture Mountain Co",
+    "source_id": "fixture-ownership",
+    "as_of": "2026-10-01",
+    "confidence": "published"
+   },
+   "lat": 40.66,
+   "lon": -111.5,
+   "location_source_id": "fixture-location",
+   "cluster_id": "fixture-wasatch-like",
+   "state": "UT",
+   "size": {
+    "acres": null,
+    "vertical_ft": null,
+    "lifts": null,
+    "ski_school_staff_est": null
+   },
+   "elevation": {
+    "base_ft": null,
+    "summit_ft": null
+   },
+   "season": {
+    "open_typical": {
+     "value": "11-20",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "close_typical": {
+     "value": "04-12",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "length_days": null,
+    "training_start": {
+     "value": "11-08",
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    }
+   },
+   "terrain": {
+    "beginner_pct": {
+     "value": 18,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "intermediate_pct": {
+     "value": 29,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "advanced_pct": {
+     "value": 36,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "expert_pct": {
+     "value": 17,
+     "source_id": "fixture-resort-site",
+     "as_of": "2026-10-01",
+     "confidence": "published"
+    },
+    "character_tags": [
+     "bowls",
+     "groomers",
+     "tree_skiing"
+    ]
+   },
+   "fit": {
+    "enthusiast_types": [
+     "powder_hound"
+    ],
+    "professional_types": [
+     "career_instructor"
+    ]
+   },
+   "clients": {
+    "profile_tags": [
+     "destination_families",
+     "private_lessons"
+    ],
+    "notes_md": null
+   },
+   "career": null,
+   "editorial": null,
+   "climate_available": false,
+   "facility_type": "training_center",
+   "detail_available": false,
+   "trailmap_available": false,
+   "webcams": null,
+   "jobs": null,
+   "passes": [],
+   "housing_search": null,
+   "housing_summary": null,
+   "sources": [
+    "fixture-location",
+    "fixture-ownership",
+    "fixture-resort-site"
+   ]
+  }
+ ]
+}

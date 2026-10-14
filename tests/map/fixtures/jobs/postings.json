@@ -1,0 +1,191 @@
+{
+ "version": 1,
+ "generated_at": "2026-10-12T12:41:00Z",
+ "fetched_at": "2026-10-12T12:41:00Z",
+ "keywords": [
+  "instructor",
+  "coach"
+ ],
+ "boards": [
+  {
+   "employer_id": "fixture-parent",
+   "employer_name": "Fixture Parent",
+   "vendor": "greenhouse",
+   "board": "fixtureparent",
+   "url": "https://example.com/fixture/parent/board",
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "status": "ok",
+   "fetched_at": "2026-10-12T12:41:00Z",
+   "as_of": "2026-10-12",
+   "total": 40,
+   "matched": 10,
+   "error": null
+  }
+ ],
+ "sources": [
+  {
+   "id": "jobs-board-greenhouse-fixtureparent",
+   "url": "https://example.com/fixture/parent/board",
+   "title": "Synthetic fixture: job board",
+   "accessed_date": "2026-10-12"
+  }
+ ],
+ "postings": [
+  {
+   "id": "greenhouse-1",
+   "employer_id": "fixture-parent",
+   "title": "Ski Instructor",
+   "location": "Alpha Peak, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/1",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "alpha-peak"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-2",
+   "employer_id": "fixture-parent",
+   "title": "Snowboard Instructor",
+   "location": "Alpha Peak, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/2",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "alpha-peak"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-3",
+   "employer_id": "fixture-parent",
+   "title": "Kids Ski Instructor",
+   "location": "Alpha Peak, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/3",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "alpha-peak"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-4",
+   "employer_id": "fixture-parent",
+   "title": "Adaptive Instructor",
+   "location": "Alpha Peak, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/4",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "alpha-peak"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-5",
+   "employer_id": "fixture-parent",
+   "title": "Freeride Coach",
+   "location": "Alpha Peak, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/5",
+   "role_group": "coaching",
+   "resort_ids": [
+    "alpha-peak"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-6",
+   "employer_id": "fixture-parent",
+   "title": "Race Coach",
+   "location": "Alpha Peak, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/6",
+   "role_group": "coaching",
+   "resort_ids": [
+    "alpha-peak"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-7",
+   "employer_id": "fixture-parent",
+   "title": "Ski School Supervisor",
+   "location": "Alpha Peak, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/7",
+   "role_group": "management",
+   "resort_ids": [
+    "alpha-peak"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-8",
+   "employer_id": "fixture-parent",
+   "title": "Ski Instructor, Bravo Bowl",
+   "location": "Bravo Bowl, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/8",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "bravo-bowl"
+   ],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-9",
+   "employer_id": "fixture-parent",
+   "title": "Director of Mountain Operations",
+   "location": "Fixture City, CO",
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/9",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  },
+  {
+   "id": "greenhouse-10",
+   "employer_id": "fixture-parent",
+   "title": "Snowsports Trainer",
+   "location": null,
+   "department": null,
+   "url": "https://example.com/fixture/parent/board/jobs/10",
+   "role_group": "ski_school",
+   "resort_ids": [],
+   "source_id": "jobs-board-greenhouse-fixtureparent",
+   "as_of": "2026-10-12",
+   "confidence": "published",
+   "fetched_at": "2026-10-12T12:41:00Z"
+  }
+ ]
+}
