@@ -987,9 +987,9 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
    records (`index.loadDetails()`: a resort without an embedded record, a comparison, the trail map) or once the WebGL
    map is ready. After the WebGL map is ready: the color mode control (`recolor.js`, `heat.js`), then
    `us-states.geojson`. Source links rendered earlier show a placeholder that fills in when `sources.json` lands.
-   The basemap underlay (`underlay.js`: `underlay.json`, then both WebP images, 470 KB, decoded off the main thread)
-   starts once the MapLibre preload has finished, so a quick click keeps the bandwidth, and then eases into the 2D
-   picture. Resort pictures skip it; a click before it loads brings it with the WebGL map instead.
+   The basemap underlay (`underlay.js`: `underlay.json`, then the images the picture needs, decoded off the main
+   thread: the 38 KB quarter size copies at the national view) starts once the MapLibre preload has finished, so a
+   quick click keeps the bandwidth. Resort pictures skip it; a click before it loads brings it with the WebGL map.
 * Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
   A resort page validates the record its stub embeds, so it needs Zod and `definitions.json` but no `resorts.json`.
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
@@ -1031,26 +1031,35 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
     states), 58 px per degree, 4060 x 2835, 363 KB.
   * `images/basemap/underlay-alaska.webp`: the inset's source box (-180 to -129.5, 51.2 to 71.6), so the inset copy
     fills its frame exactly, 36 px per degree, 1818 x 1602, 106 KB.
+  * `underlay-lower48-small.webp` (1015 x 709, 29 KB) and `underlay-alaska-small.webp` (454 x 400, 9 KB): quarter
+    size copies, same corners, for national zooms.
   * `images/basemap/underlay.json`: corners (MapLibre order), sizes, hashes, the tone and the source.
   Each image stays within 4096 px a side, since MapLibre uploads an image source as one WebGL texture and many phones
   cap textures there. `tests/pipeline/test_underlay.py` checks the math against the shader, the sidecar against the
   images, the boxes against `nationalBounds` and `inset.js`, and the credits.
-* WebGL map: image sources `underlay-lower48` and `underlay-alaska` are the first layers above the background, at
-  every zoom; `underlay-alaska-inset` (corners through `insetCorners`) sits on the inset panel at the national view,
-  where Alaska at its true place is hidden. The tone is baked in, so the layers use a neutral paint. When the picture
-  has loaded the underlay before the click (the usual case) it is part of the first style, so the switch from the
-  picture shows no gap. Else (a quick click, or a resort page) it joins once the data layers are drawn, so its decode
-  and texture upload never hold the first frame back. It never gates readiness.
+* WebGL map: image sources `underlay-lower48-small` and `underlay-alaska-small` are the first layers above the
+  background, at every zoom; `underlay-alaska-inset` (the small copy, corners through `insetCorners`) sits on the
+  inset panel at the national view, where Alaska at its true place is hidden. The full images (`underlay-lower48`,
+  `underlay-alaska`) join above the small ones once the map reaches zoom 4.5, so a phone that stays national never
+  decodes or uploads them (46 MB as a texture). The tone is baked in, so the layers use a neutral paint. When the
+  picture has loaded the underlay before the click (the usual case) the small copies are part of the first style, so
+  the switch from the picture shows no gap. Else (a quick click, or a resort page) they join once the data layers are
+  drawn, so their decode and texture upload never hold the first frame back. The underlay never gates readiness.
 * 2D picture: `addPreviewUnderlay` draws each image as an SVG `feImage` on a rect clipped to the view, in the
   picture's Web Mercator framing, under the clusters and dots, with the inset on its own dark panel as on the WebGL
   map. An SVG `<image>` (directly, in a pattern, or faded in from opacity 0) is a Largest Contentful Paint candidate and
   would move LCP to the late underlay paint; a filter primitive is never one (checked in Chromium 141), so LCP stays
-  on the intro text. The picture has no state outlines, matching the WebGL map until `us-states.geojson` arrives.
+  on the intro text. Each image is the smallest copy that covers its size on screen (the quarter size copy up to 2x
+  upscaled), so the national picture draws the 38 KB copies and a state picture the full images. There is no fade:
+  each frame of one would raster the filter again. Inserting it costs no main thread time (a 4 ms timer heartbeat
+  stays under 8 ms on a 390 px phone at 2x); under SwiftShader one compositor frame takes about 120 ms. The picture
+  has no state outlines, matching the WebGL map until `us-states.geojson` arrives.
   The picture draws the underlay up to zoom 9 (national, state and cluster views). A resort picture skips it and its
   download: at 58 px per degree it would be upscaled about 30 times there, and the USGS imagery takes over on the
-  WebGL map. Measured 2026-10-14 (3 Lighthouse runs interleaved with the tree before, load 3 to 10): `/map/` median
-  96 (before 97), Vail 95 (before 96), LCP 2.12 s and 2.50 s (before 2.14 s and 2.44 s), the intro text in both.
-  Throttled click to WebGL load stays 6.7 to 7.8 s for both trees.
+  WebGL map. Measured 2026-10-14 (3 Lighthouse runs interleaved with the tree before, load 0.6 to 2.5): `/map/`
+  98, 98, 98 (before 98, 98, 98), Vail 96, 96, 96 (before 97, 96, 96), LCP 2.12 s and 2.45 s (before 2.11 s and
+  2.45 s), the intro text in both, TBT 0. At a load of 3 to 10 the medians were 96 and 95 (before 97 and 96).
+  Throttled click to WebGL load: 5.4 to 5.7 s (before 5.8 s).
 * Satellite imagery (`config.basemap.imagery`): USGS The National Map `USGSImageryOnly` tiles (public domain, 256 px,
   max zoom 16) over the underlay from zoom 6.5 (layer and source `minzoom`), faded in by 7.5 (`raster-opacity`), so
   national and state views request no tile and cluster and resort views get the detail. Where tiles fail or are
