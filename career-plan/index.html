@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • Plan Your Career</title>
   <meta name="description" content="Season plan: transformation-focused goals, creative willpower, fitness, education, and skiing enjoyment systems." />
+  <link rel="canonical" href="https://instructorgrindset.com/career-plan/" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instructor Grindset • Plan Your Career">
+  <meta property="og:description" content="Season plan: transformation-focused goals, creative willpower, fitness, education, and skiing enjoyment systems.">
+  <meta property="og:url" content="https://instructorgrindset.com/career-plan/">
 
   <!-- Fonts + shared sidebar styles -->
-  <link rel="stylesheet" href="/assets/global.css?v=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/global.css?v=1">
-  <link rel="stylesheet" href="/assets/sidebar.css?v=5">
+  <link rel="stylesheet" href="/assets/global.css?v=2">
+  <link rel="stylesheet" href="/assets/sidebar.css?v=14">
 
   <style>
 :root{
@@ -25,12 +29,7 @@
       line-height:1.6;
     }
     /* Rooftop headings (fallback if absent) */
-    .content{
-      width:var(--wrap-max);
-      margin-left:max(14px, calc((100vw - var(--sidebar) - var(--wrap-max))/2 - var(--content-shift)));
-      margin-right:auto; padding-top:1.25rem; padding-bottom:2.5rem;
-    }
-    @media (max-width:960px){ .content{ width:min(94vw, 1100px); margin:0 auto } }
+    .content{width:100%;max-width:1100px;margin:0 auto;padding-top:1.25rem;padding-bottom:2.5rem}
 
     h1,h2{ font-family:"Rooftop", Inter, Arial, sans-serif; letter-spacing:.2px }
     h1{
@@ -44,6 +43,7 @@
     .panel{
       background:var(--panel-bg); border:1px solid var(--line); border-radius:.8rem;
       padding:1.1rem 1.2rem; margin:1rem 0; box-shadow:var(--panel-shadow);
+      scroll-margin-top:5rem;
     }
     .panel h2{ margin:.1rem 0 .6rem }
 
@@ -57,10 +57,11 @@
 
     /* Sub-boxes now match panel style */
     .prompt{
-      background:var(--panel-bg);
+      background:rgba(255,255,255,.07);
       border:1px solid var(--line);
-      border-radius:.8rem;
-      padding:1rem 1.1rem;
+      border-radius:.625rem;
+      padding:.85rem 1rem;
+      font-size:1rem;
       box-shadow:var(--panel-shadow);
     }
     .prompt p{ margin:0 }
@@ -76,9 +77,6 @@
     .check h3{ margin:0 0 .25rem; font-size:1.05rem }
 
     /* Bottom CTA */
-    .cta{
-      display:inline-block; padding:.9rem 1.1rem; border-radius:0; background:var(--cta); color:#e6e7eb; font-weight:800; border:0; text-decoration:none;
-    }
     .cta.big{
       padding:1.05rem 1.4rem;
       box-shadow: 0 0 18px rgba(var(--glow), .25), 0 0 48px rgba(var(--glow), .12);
@@ -97,20 +95,18 @@
     }
     .section-nav a{
       padding:.35rem .8rem;border:1px solid var(--line);border-radius:2rem;
-      color:var(--muted);font-size:.875rem;text-decoration:none;min-height:36px;
+      color:var(--muted);font-size:.875rem;text-decoration:none;min-height:40px;
       display:inline-flex;align-items:center;
       transition:border-color .18s ease,color .18s ease;
     }
     .section-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    @media (max-width:600px){ .section-nav{ position:static } }
 
     /* Panel headings */
     .panel h2{font-size:clamp(1.5rem,2.5vw,2rem);font-family:"Rooftop",Inter,Arial,sans-serif;font-weight:800;background:linear-gradient(92deg,#fff,#eaeefc);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:1rem;margin-top:0}
 
     /* Step badge */
     .step-badge{display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;background:rgba(196,137,42,.18);border:1px solid rgba(196,137,42,.4);color:var(--cta);font-size:.75rem;font-weight:800;font-family:"Rooftop",Inter,Arial,sans-serif;border-radius:50%;float:right;margin:0 0 .5rem .5rem}
-
-    /* Prompts */
-    .prompt{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:.625rem;padding:.85rem 1rem;font-size:1rem}
 
     /* Numbered steps */
     .steps{padding-left:1.3rem;margin:.75rem 0 1rem}
@@ -131,21 +127,14 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="page">
     <!-- Shared sidebar -->
     <aside id="sidebar-placeholder" class="side" aria-busy="true"></aside>
-    <script>
-      (function(){
-        const t = document.getElementById('sidebar-placeholder');
-        fetch('/partials/sidebar.html?v=13')
-          .then(r => r.text())
-          .then(h => { const d=document.createElement('div'); d.innerHTML=h.trim(); t.replaceWith(d.firstElementChild); })
-          .catch(()=>{ t.innerHTML='<div style="padding:1rem;color:#fca5a5">Navigation failed to load.</div>'; });
-      })();
-    </script>
+    <script src="/assets/nav.js?v=14"></script>
 
     <!-- Main -->
-    <main class="main">
+    <main class="main" id="main">
       <div class="content">
         <header>
           <h1>Plan Your Career One Season at a Time</h1>
@@ -167,8 +156,8 @@
         </section>
 
         <!-- Section 1 — Goal Setting -->
-        <section class=”panel” id=”goal-setting”>
-          <span class=”step-badge”>02</span>
+        <section class="panel" id="goal-setting">
+          <span class="step-badge">02</span>
           <h2>”Goal” Setting</h2>
           <p>A simple exercise you can do to reframe your season into a transformation:</p>
 
@@ -266,10 +255,10 @@
         <div class="btn-row">
           <a class="cta big" href="/priority-predictor">Use the Priority Predictor &rarr;</a>
         </div>
-
-        <p class="muted" style="text-align:center;margin:0">© Instructor Grindset</p>
       </div>
     </main>
   </div>
+
+  <div class="footer-wrap"><p class="footer">© Instructor Grindset</p></div>
 </body>
 </html>
