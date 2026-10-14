@@ -423,7 +423,10 @@ line, never the resort).
 * **Shared calculator model (Phase 9):** lucrativeness is computed by `pipeline/season_income.py`, the Python mirror of
   `assets/js/season-income.mjs` used by the Season Income Calculator, unchanged, called with rent, tips and every
   offset at 0 (`lucrativeness_inputs` with season length = months × 4.33 × 7 days): net income = its `net_before_tax`
-  (then equal to its `gross`), so the map and the calculator agree for the same inputs. Whole dollars
+  (then equal to its `gross`), so the map and the calculator agree for the same inputs. The model follows the
+  calculator on main: the rest of a private day is paid at the group rate, federal tax applies after the 14600
+  standard deduction, and transportation is a monthly cost. With no privates, no transport and a before tax figure,
+  the map's values are the same doubles as before. Whole dollars
   use `round_half_up` (JS `Math.round`, ties toward positive infinity). The calculator's headline net is after tax;
   the map's lucrativeness is net income before tax (ROADMAP Section 6) and applies no tax assumption, which stays the
   owner's call. The calculator has state income tax rates for only 13 states (WA, WY, NV, AK, NH, CO, UT, ID, VT, MT,
@@ -678,7 +681,7 @@ closes it when none are; it never commits.
 * Chip: the fourth button after All, Ski areas and Indoor and training (group label "Filter resorts"), before the
   pass chips (see "Pass membership"). It reads "Hiring now" until `hiring.js` has counted, then "Hiring now (N)". It
   switches on and off and combines with the other chips using AND; it filters the map (an `in` filter on resort ids
-  over the resort and facility layers, inset included), the 2D picture before the map starts, and the list view, and
+  over the resort and facility layers), the 2D picture before the map starts, and the list view, and
   is announced ("Showing N resorts hiring now."). At N = 0 it stays visible with `aria-disabled="true"` and the title
   "No resort lists an open role or a hiring window for this month."; a click only announces that (or turns an active
   Hiring now off). Phones scroll the chip row sideways.
@@ -972,7 +975,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
    its startup as three short tasks (index the data, render the panel, draw the picture) so no single task blocks
    the page for long.
 2. The panel renders from the slim index; the list view builds the first time it opens. `preview.js` draws the first
-   map frame as an inline SVG (clusters, the Alaska inset and resort dots with the WebGL map's framing and colors)
+   map frame as an inline SVG (clusters and resort dots, Alaska at its true place, with the WebGL map's framing and colors)
    with a "Click to explore the map" button ("Tap to explore the map" on touch screens). It is a picture only.
 3. Owner decision 9 (2026-10-13): the WebGL map starts on the first click or tap over the picture, or Enter or Space
    on the button. Then MapLibre runs (it was preloaded), `map.js` builds the map (workers prewarmed first), the
@@ -988,7 +991,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
    map is ready. After the WebGL map is ready: the color mode control (`recolor.js`, `heat.js`), then
    `us-states.geojson`. Source links rendered earlier show a placeholder that fills in when `sources.json` lands.
    The basemap underlay (`underlay.js`: `underlay.json`, then the images the picture needs, decoded off the main
-   thread: the 38 KB quarter size copies at the national view) starts once the MapLibre preload has finished, so a
+   thread: the 41 KB quarter size copies at the national view) starts once the MapLibre preload has finished, so a
    quick click keeps the bandwidth. Resort pictures skip it; a click before it loads brings it with the WebGL map.
 * Full resort records are validated with Zod one at a time, the first time a view needs them (`index.full(id)`).
   A resort page validates the record its stub embeds, so it needs Zod and `definitions.json` but no `resorts.json`.
@@ -1029,28 +1032,30 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   of 1.4 for a darker satellite look, fades the edges into the map background and writes WebP:
   * `images/basemap/underlay-lower48.webp`: -131 to -61, 17 to 55 (past the national view, so the fade stays off the
     states), 58 px per degree, 4060 x 2835, 363 KB.
-  * `images/basemap/underlay-alaska.webp`: the inset's source box (-180 to -129.5, 51.2 to 71.6), so the inset copy
-    fills its frame exactly, 36 px per degree, 1818 x 1602, 106 KB.
-  * `underlay-lower48-small.webp` (1015 x 709, 29 KB) and `underlay-alaska-small.webp` (454 x 400, 9 KB): quarter
+  * `images/basemap/underlay-alaska.webp`: -180 to -128, 49.5 to 73, 36 px per degree, 1872 x 1864, 117 KB. It holds
+    the heat maps' Alaska region (-180 to -129.5, 51.2 to 71.6) with room for a 1.5 degree fade that stays off the
+    Arctic coast, the Aleutians and the panhandle. Its edges fade to transparent (RGBA, `"fade": "alpha"` in the
+    sidecar), so where it overlaps the lower 48 image off British Columbia the two blend with no seam; the lower 48
+    image fades into the map background. `--only alaska` regenerates it alone and keeps the lower 48 entry.
+  * `underlay-lower48-small.webp` (1015 x 709, 29 KB) and `underlay-alaska-small.webp` (468 x 466, 12 KB): quarter
     size copies, same corners, for national zooms.
   * `images/basemap/underlay.json`: corners (MapLibre order), sizes, hashes, the tone and the source.
   Each image stays within 4096 px a side, since MapLibre uploads an image source as one WebGL texture and many phones
   cap textures there. `tests/pipeline/test_underlay.py` checks the math against the shader, the sidecar against the
-  images, the boxes against `nationalBounds` and `inset.js`, and the credits.
+  images, the boxes against `nationalBounds` and the heat regions, and the credits.
 * WebGL map: image sources `underlay-lower48-small` and `underlay-alaska-small` are the first layers above the
-  background, at every zoom; `underlay-alaska-inset` (the small copy, corners through `insetCorners`) sits on the
-  inset panel at the national view, where Alaska at its true place is hidden. The full images (`underlay-lower48`,
+  background, at every zoom, each at its true place (Alaska above the lower 48). The full images (`underlay-lower48`,
   `underlay-alaska`) join above the small ones once the map reaches zoom 4.5, so a phone that stays national never
   decodes or uploads them (46 MB as a texture). The tone is baked in, so the layers use a neutral paint. When the
   picture has loaded the underlay before the click (the usual case) the small copies are part of the first style, so
   the switch from the picture shows no gap. Else (a quick click, or a resort page) they join once the data layers are
   drawn, so their decode and texture upload never hold the first frame back. The underlay never gates readiness.
 * 2D picture: `addPreviewUnderlay` draws each image as an SVG `feImage` on a rect clipped to the view, in the
-  picture's Web Mercator framing, under the clusters and dots, with the inset on its own dark panel as on the WebGL
-  map. An SVG `<image>` (directly, in a pattern, or faded in from opacity 0) is a Largest Contentful Paint candidate and
+  picture's Web Mercator framing, under the clusters and dots, each at its true place as on the WebGL map (an image off
+  the picture is skipped; at the national view Alaska's shows only as an edge in the upper left). An SVG `<image>` (directly, in a pattern, or faded in from opacity 0) is a Largest Contentful Paint candidate and
   would move LCP to the late underlay paint; a filter primitive is never one (checked in Chromium 141), so LCP stays
   on the intro text. Each image is the smallest copy that covers its size on screen (the quarter size copy up to 2x
-  upscaled), so the national picture draws the 38 KB copies and a state picture the full images. There is no fade:
+  upscaled), so the national picture draws the 41 KB copies and a state picture the full images. There is no fade:
   each frame of one would raster the filter again. Inserting it costs no main thread time (a 4 ms timer heartbeat
   stays under 8 ms on a 390 px phone at 2x); under SwiftShader one compositor frame takes about 120 ms. The picture
   has no state outlines, matching the WebGL map until `us-states.geojson` arrives.
@@ -1066,7 +1071,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   blocked, the underlay shows through. Muted (`raster-saturation` -0.35, `raster-brightness-max` 0.7,
   `raster-contrast` -0.1). State fills turn translucent over both (`basemap.state_fill_opacity`, zoom stops: 30% to
   zoom 6.5, 55% from 7.5) so the underlay reads at national and state zooms while outlines, heat colors and markers
-  stay readable; the inset's Alaska fill uses the same stops. The map has one dark theme; heat rasters draw above the
+  stay readable. The map has one dark theme; heat rasters draw above the
   fills. Attribution: "Relief: Natural Earth" is in `basemap.attribution`; "Imagery: USGS The National Map" comes from
   the source, so MapLibre lists it only from the imagery's minzoom. The tiles load only after the click to start, so
   the first load and Lighthouse never fetch them. The tests answer tile requests with a synthetic local tile
@@ -1124,7 +1129,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 
 ### Color modes: heat maps
 Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state
-outlines, and Alaska (at its true place, and in the national inset). Lucrativeness turns on by itself as soon as any
+outlines, and Alaska at its true place. Lucrativeness turns on by itself as soon as any
 resort has a computed `lucrativeness_mid` (pay, owner decision 2026-10-14). Values come from the slim index
 (`lucrativeness_mid`, `season_length_days`, `snowfall_annual_in`). Every
 setting lives in `config/definitions.yaml` `heat` and reaches the UI through `definitions.json`.
@@ -1189,7 +1194,7 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
   state lines (labels under the resorts): `heat-iso-minor` (thin, from zoom 4.5), `heat-iso-major` (every 100 in, bolder,
   from the national view) in the dark base color, and `heat-iso-label` ("300 in" images placed along the lines, upright,
   from zoom 6.5, mountain range zoom). Labels are canvas drawn images (`map.addImage`), since the style has no glyph
-  server. Alaska's lines draw at its true place only; the national inset is too small for them.
+  server. Alaska's lines draw at its true place with the rest.
 * **Season length** draws the precomputed rasters (`heat/season.json`) of the resorts' sourced season lengths; it has
   no NOAA credit, since every value is a resort's own sourced fact.
 * **Lucrativeness** draws the precomputed rasters (`heat/lucrativeness.json`) of the resorts' computed mids, on the
@@ -1222,15 +1227,37 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
 * A mode with no values is disabled and says why ("No resort has snowfall data yet."). Nothing animates, so
   `prefers-reduced-motion` needs no special case.
 
-### National Alaska inset (`map/js/inset.js`)
-At the national view Alaska draws as an atlas style inset in the lower left, below the Pacific coast and clear of the
-lower 48, inside a thin dashed frame: its outline, its clusters, its resorts and its heat surface are copies moved by
-one uniform scale plus a move in Web Mercator (shapes keep their form; image corners stay aligned). The heat image of
-Alaska covers exactly the box the inset draws (`heat.regions.alaska` equals `SOURCE` in `inset.js`; a test checks it). Its true place is
-hidden at that view. Hover and click on the inset work like the real features: the inset state opens Alaska and an
-inset resort opens that resort, both at true coordinates. The national frame (`config.nationalBounds`) reaches south to
-22 degrees to hold the inset. Hawaii, DC and the territories (no ski areas) never draw. The 2D first frame draws the
-same inset.
+### Alaska at its true place, and the pan limit
+Owner feedback 2026-10-14: Alaska draws only at its real place and scale (no inset), in the WebGL map and in the 2D
+first frame alike: its outline, clusters, resorts, heat rasters, snowfall isolines and Natural Earth underlay.
+* National view: `config.nationalBounds` frames the contiguous US (-125 to -66.9, 24.4 to 49.5), so the start view
+  stays on the lower 48 and Alaska sits up and to the left, at the edge of the screen or just past it depending on
+  the viewport. The 2D picture uses the same framing (`camera.js` `viewFrame`, `preview.js` `fitCamera`), so the
+  switch to the WebGL map shows no jump. Clicking Alaska in the state list, or an Alaska resort, flies there as for
+  any state.
+* Pan limit (`config.pan`, `camera.js` `panCenter`, passed to MapLibre as `transformConstrain`). The middle of the
+  open map area, the container minus the view's padding (the side panel on desktop, the sheet on phones; `map.js`
+  keeps the padding of the last fit), stays inside `pan.center`: -190 to -60, 18 to 72. That reaches past the
+  antimeridian (the far Aleutians at 172.9 E come to the middle), past the Arctic coast north of the Brooks Range,
+  past Maine and south of the Florida Keys, so a click, hold and drag brings Alaska to the middle at the national zoom
+  and lower, and the map can never be dragged away. The screen also stays between the poles. This limit replaces
+  `maxBounds`, which holds the whole container: the phone's national view reaches far south behind its sheet (about
+  52 S), so bounds that fit it would let a desktop drag far into the Pacific.
+* World copies are on (`renderWorldCopies: true`), so Alaska's islands west of 180 degrees draw beside it. Zooming
+  out stops at `pan.minZoom` (1.2) or sooner, where the screen would span more than `pan.maxWorldShare` (0.62) of the
+  world, so the map never sits beside its own copy (`camera.js` `panMinZoom`, updated on resize). At those zooms
+  Alaska and the lower 48 show together: about 2.0 on a 1280 px desktop, 1.2 on a 390 px phone.
+* Hawaii, DC and the territories (no ski areas) never draw.
+* Cost: the inset's code and layers are gone; the national picture still draws two quarter size underlay copies
+  (Alaska's edge shows in its upper left). Measured 2026-10-14, 3 Lighthouse runs: `/map/` 98, 98, 98 (LCP 2.11 to
+  2.12 s, the intro text), Vail 96, 96, 95, Jackson Hole 97, 97, 97; throttled interactive 1.6 s on desktop and phone.
+* Tests: `tests/pipeline/test_map_pan.py` runs `panCenter` and `panMinZoom` in Node (Alaska, the far Aleutians and
+  the Arctic coast reach the middle; the national views are never clamped; drags stop at each edge; wrapped
+  longitudes; the poles; zoom out over both). The browser test checks, on the real build at desktop and phone sizes,
+  that no inset layer or source exists, that a mouse drag brings Anchorage to the middle at the national zoom, that
+  every Alaska resort and Alaska's outline render at their real coordinates, that a pan far past Alaska stops at the
+  box, that zooming out shows Alaska and the lower 48 together, and that the state list and a resort click open
+  Alaska at its true place.
 
 ### Panel changes from the 2026-10-13 owner decisions
 * Professionalism: removed from the public site (owner decision, 2026-10-13). The panel, the list and compare views,

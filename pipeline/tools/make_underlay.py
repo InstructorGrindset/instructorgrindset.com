@@ -13,6 +13,7 @@ of requirements.txt:
     pip install Pillow
     python pipeline/tools/make_underlay.py                    # downloads the 323 MB zip into data/raw/basemap/download/
     python pipeline/tools/make_underlay.py --zip /path/to/NE1_HR_LC_SR_W.zip
+    python pipeline/tools/make_underlay.py --only alaska      # one region; the others keep their images and entries
 
 The download folder is in .gitignore. Rerun only to change the boxes, resolution or tone below.
 """
@@ -60,15 +61,19 @@ BACKGROUND = (0x0A, 0x0E, 0x14)
 # Baked in, so the 2D picture and the WebGL map show the same pixels (the map draws it with a neutral paint).
 TONE = {"saturation": -0.3, "contrast": 0.05, "brightness_max": 0.55, "gamma": 1.4}
 
-# Boxes (west, south, east, north). The lower 48 box reaches well past the national view so its fading edge stays off
-# the states. The Alaska box is the heat maps' Alaska region (config/definitions.yaml heat.regions.alaska), so the two
-# line up at Alaska's true place.
+# Boxes (west, south, east, north), each drawn at its true place. The lower 48 box reaches well past the national view
+# so its fading edge stays off the states; its edges fade into the map background. The Alaska box holds the heat maps'
+# Alaska region (config/definitions.yaml heat.regions.alaska) with room for its fade, which stays off the Arctic coast,
+# the Aleutians and the panhandle. Its edges fade to transparent ("alpha"), so where it overlaps the lower 48 image
+# off British Columbia the two blend with no dark seam (the map draws Alaska above the lower 48).
 # Each image stays within MAX_SIDE pixels: MapLibre uploads an image source as one WebGL texture, and many phones cap
 # textures at 4096 pixels a side.
 MAX_SIDE = 4096
 REGIONS = {
-    "lower48": {"box": (-131.0, 17.0, -61.0, 55.0), "px_per_degree": 58.0, "feather_deg": 2.4, "max_bytes": 600_000},
-    "alaska": {"box": (-180.0, 51.2, -129.5, 71.6), "px_per_degree": 36.0, "feather_deg": 0.35, "max_bytes": 250_000},
+    "lower48": {"box": (-131.0, 17.0, -61.0, 55.0), "px_per_degree": 58.0, "feather_deg": 2.4, "fade": "background",
+                "max_bytes": 600_000},
+    "alaska": {"box": (-180.0, 49.5, -128.0, 73.0), "px_per_degree": 36.0, "feather_deg": 1.5, "fade": "alpha",
+               "max_bytes": 250_000},
 }
 QUALITY_START, QUALITY_MIN, QUALITY_STEP = 74, 40, 4
 # A quarter size copy of each image for national zooms (the 2D picture and the WebGL map until state zooms): it shows
@@ -194,13 +199,17 @@ def resample(src, grid: Grid):
     return out
 
 
-def feather(im, px: float):
-    """Fade the edges into the map background."""
+def feather(im, px: float, fade: str = "background"):
+    """Fade the edges into the map background (an RGB image), or to transparent (``fade="alpha"``, RGBA)."""
     from PIL import Image, ImageChops
     w, h = im.size
     row = Image.new("L", (w, 1)); row.putdata([round(255 * v) for v in feather_ramp(w, px)])
     col = Image.new("L", (1, h)); col.putdata([round(255 * v) for v in feather_ramp(h, px)])
     mask = ImageChops.multiply(row.resize((w, h), Image.Resampling.NEAREST), col.resize((w, h), Image.Resampling.NEAREST))
+    if fade == "alpha":
+        out = im.convert("RGB")
+        out.putalpha(mask)
+        return out
     return Image.composite(im, Image.new("RGB", (w, h), BACKGROUND), mask)
 
 
@@ -221,7 +230,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--zip", type=Path, help="local NE1_HR_LC_SR_W.zip (else it is downloaded)")
     ap.add_argument("--download-dir", type=Path, default=DOWNLOAD_DIR)
     ap.add_argument("--out", type=Path, default=OUT_DIR)
+    ap.add_argument("--only", action="append", choices=sorted(REGIONS),
+                    help="regenerate only this region (repeatable); the others keep their images and sidecar entries")
     args = ap.parse_args(argv)
+    only = set(args.only or REGIONS)
+    previous = {}
+    if only != set(REGIONS):
+        try:
+            previous = {r["region"]: r for r in json.loads((args.out / SIDECAR).read_text())["rasters"]}
+        except (OSError, ValueError, KeyError) as err:
+            raise SystemExit(f"--only needs the existing {args.out / SIDECAR}: {err}")
+        missing = set(REGIONS) - only - set(previous)
+        if missing:
+            raise SystemExit(f"--only: {args.out / SIDECAR} has no entry for {', '.join(sorted(missing))}")
 
     from PIL import Image
     tif = ensure_tif(args.zip, args.download_dir)
@@ -231,11 +252,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     rasters = []
     for region, spec in REGIONS.items():
+        if region not in only:
+            rasters.append(previous[region])
+            continue
         grid = region_grid(spec["box"], spec["px_per_degree"])
         if max(grid.width, grid.height) > MAX_SIDE:
             raise SystemExit(f"{region}: {grid.width} x {grid.height} is over {MAX_SIDE} pixels a side")
         im = resample(src, grid).convert("RGB", matrix).point(lut)
-        im = feather(im, spec["feather_deg"] * spec["px_per_degree"])
+        im = feather(im, spec["feather_deg"] * spec["px_per_degree"], spec["fade"])
         data, quality = encode(im, spec["max_bytes"])
         name = f"underlay-{region}.webp"
         (args.out / name).write_bytes(data)
@@ -246,7 +270,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         rasters.append({
             "region": region, "image": name, "width": grid.width, "height": grid.height,
             "px_per_degree": spec["px_per_degree"], "coordinates": grid.coordinates(),
-            "feather_deg": spec["feather_deg"], "quality": quality, "bytes": len(data),
+            "feather_deg": spec["feather_deg"], "fade": spec["fade"], "quality": quality, "bytes": len(data),
             "sha256": hashlib.sha256(data).hexdigest(),
             "small": {"image": sname, "width": size[0], "height": size[1], "quality": squality, "bytes": len(sdata),
                       "sha256": hashlib.sha256(sdata).hexdigest()},

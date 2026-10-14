@@ -376,7 +376,10 @@ def test_real_sitemap_keeps_site_entries_and_only_tier_a_resorts():
     text = (REPO / "sitemap.xml").read_text()
     locs = [x.split("</loc>")[0] for x in text.split("<loc>")[1:]]
     site_locs = [u for u in locs if not u.startswith("https://instructorgrindset.com/map/")]
-    assert len(site_locs) == 13
+    # The site's own pages survive the /map/ rewrite: each is listed once and is a real page in the repository.
+    assert "https://instructorgrindset.com/" in site_locs and len(site_locs) == len(set(site_locs))
+    for u in site_locs:
+        assert (REPO / u.removeprefix("https://instructorgrindset.com/") / "index.html").is_file(), u
     resorts = json.loads((REPO / "data" / "build" / "resorts.json").read_text())["resorts"]
     tier = {r["id"]: r["tier"] for r in resorts}
     resort_locs = [u for u in locs if u.count("/") == 7 and "/map/" in u]

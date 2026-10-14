@@ -243,9 +243,9 @@ heat:
   # dark base and reads as flat grey over the satellite imagery.
   neutral: "#666a70"
   regions:
-    # One image per region, drawn at its true place. Alaska matches the satellite style underlay's Alaska box
-    # (pipeline/tools/make_underlay.py), so their edges line up; rings west of 180 degrees wrap to negative
-    # longitudes and the far Aleutians fall outside.
+    # One image per region, drawn at its true place. Alaska lies inside the satellite style underlay's Alaska
+    # box (pipeline/tools/make_underlay.py), so relief lies under all of it; rings west of 180 degrees wrap to
+    # negative longitudes and the far Aleutians fall outside.
     lower48: {west: -125.0, south: 24.4, east: -66.8, north: 49.5}
     alaska: {west: -180.0, south: 51.2, east: -129.5, north: 71.6}
   field:

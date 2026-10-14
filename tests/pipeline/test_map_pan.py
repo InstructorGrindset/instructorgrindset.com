@@ -120,12 +120,13 @@ def test_wrapped_longitudes_count_from_the_nearer_side():
 
 
 def test_the_screen_stays_between_the_poles():
+    """A tall screen zoomed out over the Arctic: the box allows its middle at 72 N, the pole clamp moves it down."""
     z = 1.2
     ws = TILE * 2 ** z
-    r = run([[-150.0, 84.0, z, PHONE]])
+    tall = {"w": 390, "h": 1100, "pad": {"top": 0, "left": 0, "right": 0, "bottom": 0}}
+    r = run([[-150.0, 84.0, z, tall]])
     _, lat = r["out"][0]
-    top = merc_y(lat) * ws - PHONE["h"] / 2
-    assert top == pytest.approx(0, abs=1e-6) or ws < PHONE["h"]
+    assert merc_y(lat) * ws - tall["h"] / 2 == pytest.approx(0, abs=1e-6)
 
 
 def test_zoom_out_shows_alaska_and_the_lower_48_together():

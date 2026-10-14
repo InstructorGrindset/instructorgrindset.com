@@ -147,11 +147,20 @@ def test_lower48_box_covers_the_national_view(sidecar):
     assert uw + feather <= w and ue - feather >= e and us + feather <= s and un - feather >= n
 
 
-def test_alaska_box_is_the_heat_region(sidecar):
-    """The Alaska image draws at its true place, on the same box as the heat maps' Alaska region."""
+def test_alaska_box_holds_alaska_clear_of_its_fade(sidecar):
+    """The Alaska image draws at its true place. It holds the heat maps' Alaska region, its fade stays off the Arctic
+    coast (Point Barrow, 71.39 N), the Aleutians (51.2 N) and the panhandle (130.0 W), and it fades to transparent so
+    it blends over the lower 48 image where the two meet off British Columbia."""
     ak = yaml.safe_load((REPO / "config" / "definitions.yaml").read_text())["heat"]["regions"]["alaska"]
-    [[w, n], _, [e, s], _] = next(r for r in sidecar["rasters"] if r["region"] == "alaska")["coordinates"]
-    assert (w, s, e, n) == (ak["west"], ak["south"], ak["east"], ak["north"])
+    r = next(r for r in sidecar["rasters"] if r["region"] == "alaska")
+    [[w, n], _, [e, s], _] = r["coordinates"]
+    assert w <= ak["west"] and s <= ak["south"] and e >= ak["east"] and n >= ak["north"]
+    f = mu.REGIONS["alaska"]["feather_deg"]
+    assert r["feather_deg"] == f and n - f >= 71.39 and s + f <= 51.2 and e - f >= -130.0
+    assert r["fade"] == mu.REGIONS["alaska"]["fade"] == "alpha"
+    assert mu.REGIONS["lower48"]["fade"] == "background"
+    (lw, ls, le, ln) = mu.REGIONS["lower48"]["box"]
+    assert lw < e and ln > s, "the two images overlap off British Columbia, so no gap opens between them"
 
 
 def test_tone_and_background_match_the_map(sidecar):

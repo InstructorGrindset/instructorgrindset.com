@@ -538,7 +538,7 @@ async function underlayChecks(browser, base, stubBase) {
     lcp: window.__lcp, started: window.__careerMap.mapStarted,
   }));
   check(!pv.started && pv.hrefs.length === 2 && pv.hrefs.every((h) => h.origin && /^\/images\/basemap\/underlay-(lower48|alaska)-small\.webp$/.test(h.path)) && pv.first === 'map-preview-underlay',
-    `before the click the picture draws the lower 48 and the Alaska inset underlay from local paths, the quarter size copies at the national view (${pv.hrefs.map((h) => h.path).join(', ')})`);
+    `before the click the picture draws the lower 48 and Alaska (its edge, at its true place) underlay from local paths, the quarter size copies at the national view (${pv.hrefs.map((h) => h.path).join(', ')})`);
   check(pv.lcp.length > 0 && pv.lcp.every((e) => e.tag !== 'image' && !/\/images\/basemap\//.test(e.url || '')), `the underlay is never the LCP element (${pv.lcp.map((e) => e.tag).join(', ')})`);
   check(images.length >= 3 && images.every((i) => i.status === 200) && images.some((i) => /underlay\.json$/.test(i.url)) && images.filter((i) => /\.webp$/.test(i.url)).every((i) => i.type === 'image/webp'),
     `underlay.json and the WebP images load from the site (${images.map((i) => `${i.status} ${i.url.replace(/^.*\/images\//, '')}`).join(', ')})`);
@@ -552,18 +552,21 @@ async function underlayChecks(browser, base, stubBase) {
   const st = await page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
     const style = m.getStyle(); const ids = style.layers.map((l) => l.id);
-    const src = ['underlay-lower48-small', 'underlay-alaska-small', 'underlay-alaska-inset'].map((id) => {
+    const src = ['underlay-lower48-small', 'underlay-alaska-small'].map((id) => {
       const s = style.sources[id]; const u = s && new URL(s.url, location.href);
       return { id, type: s && s.type, local: Boolean(u && u.origin === location.origin && /^\/images\/basemap\/underlay-(lower48|alaska)-small\.webp$/.test(u.pathname)), loaded: m.isSourceLoaded(id) };
     });
     const vis = (id) => m.getLayoutProperty(id, 'visibility') !== 'none';
     const img = style.layers.find((l) => l.id === 'imagery');
-    return { src, ids, zoom: m.getZoom(), imgMin: img && img.minzoom, insetVis: vis('underlay-alaska-inset'), akVis: vis('underlay-alaska-small'), full: Boolean(m.getSource('underlay-lower48')),
-      inset: ids.indexOf('underlay-alaska-inset'), panel: ids.indexOf('inset-panel'), frame: ids.indexOf('inset-frame'), resorts: ids.indexOf('resorts') };
+    const ak = style.sources['underlay-alaska-small'];
+    return { src, ids, zoom: m.getZoom(), imgMin: img && img.minzoom, akVis: vis('underlay-alaska-small'), full: Boolean(m.getSource('underlay-lower48')),
+      akAbove: ids.indexOf('underlay-alaska-small') > ids.indexOf('underlay-lower48-small'), akWest: ak && ak.coordinates[0][0],
+      inset: ids.filter((id) => /inset/.test(id)).concat(Object.keys(style.sources).filter((id) => /inset/.test(id))) };
   });
   check(st.src.every((s) => s.type === 'image' && s.local && s.loaded), `the WebGL map has the underlay image sources from local paths, loaded (${st.src.map((s) => `${s.id} ${s.loaded ? 'loaded' : 'pending'}`).join(', ')})`);
   check(!st.full, 'national view: the full images wait for state zooms');
-  check(st.inset > st.panel && st.inset < st.frame && st.insetVis && !st.akVis, 'national view: the Alaska underlay fills the inset on its panel; Alaska at its true place is hidden');
+  check(st.akVis && st.akAbove && st.akWest === -180 && st.inset.length === 0,
+    `national view: Alaska's underlay draws at its true place, above the lower 48's, and no inset copy exists (${st.inset.join(', ') || 'none'})`);
   check(st.imgMin === 6.5 && st.zoom < 6.5 && usgs.length === 0, `national view (zoom ${st.zoom.toFixed(2)}) requests no USGS tile; the imagery joins from zoom ${st.imgMin}`);
   const natDark = await darkShare(page);
   check(natDark < 0.2, `the WebGL map shows the underlay at the national view (${Math.round(natDark * 100)}% plain dark base)`);
@@ -599,7 +602,7 @@ async function underlayChecks(browser, base, stubBase) {
 function sampleHeat(page, lngLats) {
   return page.evaluate(async (pts) => {
     const m = window.__careerMap.mapCtl.map;
-    const imgs = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-') && !l.id.endsWith('-inset'))
+    const imgs = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-'))
       .map((l) => m.getSource(l.id)).filter(Boolean).map((src) => ({ url: src.url, coordinates: src.coordinates }));
     const my = (la) => Math.log(Math.tan(Math.PI / 4 + (la * Math.PI) / 360));
     const decoded = [];
@@ -1447,6 +1450,182 @@ async function desktopStub(browser, base) {
   await page.close();
 }
 
+// The open map area: the map container minus the side panel (desktop) or the sheet (phone), in page pixels.
+function openArea(page) {
+  return page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const c = m.getContainer().getBoundingClientRect();
+    const p = document.getElementById('panel').getBoundingClientRect();
+    const phone = p.top > c.top + 10 && p.left <= c.left + 1;
+    const box = phone ? { left: c.left, top: c.top, right: c.right, bottom: p.top } : { left: c.left, top: c.top, right: Math.min(c.right, p.left), bottom: c.bottom };
+    return { ...box, cx: (box.left + box.right) / 2, cy: (box.top + box.bottom) / 2, cont: { left: c.left, top: c.top, width: c.width, height: c.height } };
+  });
+}
+
+// lng, lat in page pixels.
+function pagePoint(page, ll) {
+  return page.evaluate((x) => {
+    const m = window.__careerMap.mapCtl.map;
+    const c = m.getContainer().getBoundingClientRect();
+    const p = m.project(x);
+    return { x: c.left + p.x, y: c.top + p.y };
+  }, ll);
+}
+
+// Drag the map with the mouse (press, move, pause so no inertia, release) until `ll` sits at `to`, in strokes that
+// start and end inside the open area, clear of the zoom buttons and the chip rows along its top. Returns the strokes.
+async function dragTo(page, ll, to, area) {
+  const w = area.right - area.left; const hgt = area.bottom - area.top;
+  let strokes = 0;
+  for (; strokes < 6; strokes++) {
+    const at = await pagePoint(page, ll);
+    let dx = to.x - at.x; let dy = to.y - at.y;
+    if (Math.hypot(dx, dy) < 1.5) break;
+    const sx = dx >= 0 ? area.left + 0.15 * w : area.right - 0.15 * w;
+    const sy = dy >= 0 ? area.top + 0.25 * hgt : area.bottom - 0.15 * hgt;
+    dx = Math.max(area.left + 10 - sx, Math.min(area.right - 10 - sx, dx));
+    dy = Math.max(area.top + 0.25 * hgt - sy, Math.min(area.bottom - 10 - sy, dy));
+    await page.mouse.move(sx, sy);
+    await page.mouse.down();
+    await page.mouse.move(sx + dx, sy + dy, { steps: 25 });
+    await page.waitForTimeout(250);
+    await page.mouse.up();
+    await page.waitForFunction(() => !window.__careerMap.mapCtl.map.isMoving(), null, { timeout: 5000 }).catch(() => {});
+  }
+  return strokes;
+}
+
+const ANCHORAGE = [-149.9, 61.22];
+
+async function alaskaChecks(page, vp, akResorts, base) {
+  const tag = `real data ${vp.name}`;
+  // National start view: the lower 48 in the middle, Alaska at its true place up and to the left.
+  const nat = await page.evaluate(([a, ak]) => {
+    const m = window.__careerMap.mapCtl.map;
+    const style = m.getStyle();
+    const pts = ak.map((r) => m.project([r.lon, r.lat]));
+    const lower = m.project([-98.6, 39.8]);
+    const anch = m.project(a);
+    return {
+      inset: style.layers.filter((l) => /inset/.test(l.id)).length + Object.keys(style.sources).filter((id) => /inset/.test(id)).length,
+      zoom: m.getZoom(), minZoom: m.getMinZoom(), maxBounds: m.getMaxBounds(), worldCopies: m.getRenderWorldCopies(),
+      upLeft: pts.every((p) => p.x < lower.x && p.y < lower.y) && anch.x < lower.x && anch.y < lower.y,
+      states: [...new Set(m.queryRenderedFeatures({ layers: ['states-fill'] }).map((f) => f.properties.code))],
+    };
+  }, [ANCHORAGE, akResorts]);
+  check(nat.inset === 0 && !fs.existsSync(path.join(REPO, 'map', 'js', 'inset.js')), `${tag}: no Alaska inset (no inset layers or sources, map/js/inset.js is gone)`);
+  check(nat.upLeft, `${tag}: the national view keeps the lower 48 in the middle with Alaska at its true place up and to the left`);
+  check(!nat.states.some((c) => ['PR', 'VI', 'GU', 'MP', 'AS', 'HI'].includes(c)), `${tag}: territories never draw`);
+  check(nat.maxBounds === null && nat.worldCopies, `${tag}: no maxBounds; the pan limit (config.pan) and world copies take its place`);
+  await shot(page, `alaska-01-${vp.name}-national-start.png`);
+
+  // Click, hold and drag Alaska to the middle of the open map area at the national zoom.
+  const area = await openArea(page);
+  const strokes = await dragTo(page, ANCHORAGE, { x: area.cx, y: area.cy }, area);
+  const anchAt = await pagePoint(page, ANCHORAGE);
+  const zoomAfter = await page.evaluate(() => window.__careerMap.mapCtl.map.getZoom());
+  check(Math.hypot(anchAt.x - area.cx, anchAt.y - area.cy) < 3 && Math.abs(zoomAfter - nat.zoom) < 1e-6,
+    `${tag}: a mouse drag (${strokes} stroke${strokes === 1 ? '' : 's'}) brings Anchorage to the middle of the open map area at the national zoom ${nat.zoom.toFixed(2)} (off by ${Math.hypot(anchAt.x - area.cx, anchAt.y - area.cy).toFixed(1)} px)`);
+  // Park the cursor on the panel, so no hover tooltip shows in the screenshots.
+  const panelBox = await page.locator('#panel').boundingBox();
+  await page.mouse.move(panelBox.x + panelBox.width / 2, panelBox.y + Math.min(panelBox.height / 2, 200));
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 15000 }).catch(() => {});
+  await page.waitForTimeout(300);
+  const real = await page.evaluate((ak) => {
+    const m = window.__careerMap.mapCtl.map;
+    const got = new Map();
+    for (const f of m.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'].filter((id) => m.getLayer(id)) })) {
+      if (f.properties.state === 'AK') got.set(f.properties.id, f.geometry.coordinates);
+    }
+    const off = ak.map((r) => { const c = got.get(r.id); return c ? Math.max(Math.abs(c[0] - r.lon), Math.abs(c[1] - r.lat)) : Infinity; });
+    return { n: got.size, worst: Math.max(...off), akState: m.queryRenderedFeatures({ layers: ['states-fill'] }).some((f) => f.properties.code === 'AK') };
+  }, akResorts);
+  check(real.n === akResorts.length && real.worst < 0.05 && real.akState,
+    `${tag}: all ${akResorts.length} Alaska resorts and Alaska's outline draw at their real coordinates (${real.n} found, worst ${real.worst.toFixed(4)} degrees off)`);
+  await shot(page, `alaska-02-${vp.name}-dragged-to-middle.png`);
+
+  // Further: the pan limit lets Anchorage, the far Aleutians (west of 180 degrees) and the Arctic coast reach the
+  // middle at lower zooms too, and stops a drag far past Alaska.
+  const further = await page.evaluate(({ area: a, pts }) => {
+    const m = window.__careerMap.mapCtl.map;
+    const c = m.getContainer().getBoundingClientRect();
+    const mid = [a.cx - c.left, a.cy - c.top];
+    const put = (ll, z) => {
+      m.jumpTo({ center: ll, zoom: z });
+      const p = m.project(ll);
+      m.jumpTo({ center: m.unproject([p.x - (mid[0] - c.width / 2), p.y - (mid[1] - c.height / 2)]) });
+      const q = m.project(ll);
+      return Math.hypot(q.x - mid[0], q.y - mid[1]);
+    };
+    const z0 = m.getZoom();
+    const out = { at: pts.map(([ll, dz]) => put(ll, Math.max(m.getMinZoom(), z0 - dz))) };
+    // Far past Alaska (central Asia, then Japan): the middle of the open area stops at the pan box's west edge.
+    const stop = (lng) => { m.jumpTo({ center: [lng, 50], zoom: z0 }); const x = m.unproject(mid); return [x.lng > 0 ? x.lng - 360 : x.lng, x.lat]; };
+    [out.stopLng, out.stopLat] = stop(100);
+    out.stopAgain = stop(140)[0];
+    return out;
+  }, { area, pts: [[ANCHORAGE, 0.8], [[172.9, 52.9], 0], [[-156.79, 71.29], 0]] });
+  check(further.at.every((d) => d < 1), `${tag}: Anchorage at a lower zoom, the far Aleutians and the Arctic coast each reach the middle (off by ${further.at.map((d) => d.toFixed(2)).join(', ')} px)`);
+  check(Math.abs(further.stopLng - -190) < 1.5 && Math.abs(further.stopAgain - further.stopLng) < 1e-6 && further.stopLat > 18 && further.stopLat < 72,
+    `${tag}: a pan far past Alaska stops at the pan box, 190 W (the middle stays at ${further.stopLng.toFixed(2)}, ${further.stopLat.toFixed(2)})`);
+
+  // Zoom out over Alaska and the lower 48 together.
+  const both = await page.evaluate(({ area: a, ak }) => {
+    const m = window.__careerMap.mapCtl.map;
+    const c = m.getContainer().getBoundingClientRect();
+    const padding = { top: a.top - c.top + 12, left: a.left - c.left + 12, right: c.right - a.right + 12, bottom: c.bottom - a.bottom + 12 };
+    const cam = m.cameraForBounds([[-168.0, 24.5], [-66.9, 71.4]], { padding });
+    const reachable = cam.zoom >= m.getMinZoom() - 1e-9;
+    m.jumpTo({ center: cam.center, zoom: Math.max(cam.zoom, m.getMinZoom()) });
+    const ins = (ll) => { const p = m.project(ll); return p.x >= a.left - c.left && p.x <= a.right - c.left && p.y >= a.top - c.top && p.y <= a.bottom - c.top; };
+    const shown = { alaska: ak.every((r) => ins([r.lon, r.lat])), maine: ins([-68.9, 44.9]), california: ins([-120.0, 39.2]), florida: ins([-81.8, 24.6]) };
+    const zoom = m.getZoom();
+    m.zoomTo(0, { duration: 0 });
+    const floor = m.getZoom();
+    const spanDeg = (c.width * 360) / (512 * 2 ** floor);
+    return { reachable, zoom, shown, floor, minZoom: m.getMinZoom(), spanDeg, cam: { center: cam.center, zoom: Math.max(cam.zoom, m.getMinZoom()) } };
+  }, { area, ak: akResorts });
+  check(both.reachable && Object.values(both.shown).every(Boolean),
+    `${tag}: zooming out to ${both.zoom.toFixed(2)} shows every Alaska resort and the lower 48 (Maine, California, the Keys) together in the open map area`);
+  check(Math.abs(both.floor - both.minZoom) < 1e-6 && both.spanDeg < 239,
+    `${tag}: zoom out stops at ${both.floor.toFixed(2)}, where the screen spans ${Math.round(both.spanDeg)} degrees, so the map never sits beside its own world copy`);
+  await page.evaluate((cam) => window.__careerMap.mapCtl.map.jumpTo(cam), both.cam);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 15000 }).catch(() => {});
+  await page.waitForTimeout(300);
+  await shot(page, `alaska-03-${vp.name}-zoomed-out-both.png`);
+
+  if (vp.name !== 'desktop') {
+    await page.evaluate(() => window.__careerMap.mapCtl.refit());
+    await mapIdle(page);
+    return;
+  }
+  // From the national view, clicking Alaska in the state list flies to it; clicking a resort at its true place
+  // opens it there.
+  await page.evaluate(() => window.__careerMap.mapCtl.refit());
+  await mapIdle(page);
+  await page.locator('.nav-list a', { hasText: /^Alaska/ }).first().click();
+  await page.waitForURL(/\/map\/ak\/$/, { timeout: 10000 });
+  await mapIdle(page);
+  const st = await page.evaluate((ak) => {
+    const m = window.__careerMap.mapCtl.map;
+    const c = m.getContainer().getBoundingClientRect();
+    const p = document.getElementById('panel').getBoundingClientRect();
+    return { zoom: m.getZoom(), inView: ak.every((r) => { const q = m.project([r.lon, r.lat]); return q.x > 0 && q.y > 0 && q.x < Math.min(c.width, p.left - c.left) && q.y < c.height; }) };
+  }, akResorts);
+  check(st.zoom > nat.zoom && st.inView, `${tag}: clicking Alaska in the state list flies to it at its true place (zoom ${st.zoom.toFixed(2)}, every resort in view)`);
+  // The resort farthest from any other is the clearest click target.
+  const far = akResorts.filter((r) => r.facility === 'ski_area' || !r.facility).map((r) => ({ r, d: Math.min(...akResorts.filter((o) => o !== r).map((o) => Math.hypot(o.lon - r.lon, o.lat - r.lat))) }))
+    .sort((a, b) => b.d - a.d)[0].r;
+  await clickMapAt(page, [far.lon, far.lat]);
+  await page.waitForURL(new RegExp(`/map/ak/.+/${far.id}/$`), { timeout: 10000 });
+  await mapIdle(page);
+  const after = await page.evaluate((r) => { const c = window.__careerMap.mapCtl.map.getCenter(); return Math.abs(c.lng - r.lon) < 1 && Math.abs(c.lat - r.lat) < 1; }, far);
+  check(after, `${tag}: clicking ${far.id} at its true place opens it there`);
+  await page.goto(`${base}/map/`);
+  await ready(page);
+  await mapIdle(page);
+}
+
 async function realData(browser, base) {
   log('\nReal data/build output');
   const has = fs.existsSync(path.join(REPO, 'data', 'build', 'resorts.json'));
@@ -1504,7 +1683,7 @@ async function realData(browser, base) {
       }
       await page.getByRole('button', { name: 'Map view' }).click();
       await mapIdle(page);
-      // Each heat mode with the real build: continuous coverage across the lower 48 and the Alaska inset.
+      // Each heat mode with the real build: continuous coverage across the lower 48 and Alaska.
       const REAL_BETWEEN = [[-116.5, 39.5], [-98.5, 38.5], [-99.0, 31.5], [-84.0, 32.5], [-108.0, 47.5], [-150.0, 64.5]];
       for (const [mode, prop] of Object.entries(props)) {
         if (!geo.some((f) => f.properties[prop] != null)) continue;
@@ -1521,8 +1700,12 @@ async function realData(browser, base) {
           const clear = await sampleHeat(page, [REAL_BETWEEN[1], REAL_BETWEEN[2], [-82.6, 32.2]]);
           check(clear.every((c) => c[3] === 0), `real data: season stays clear in Kansas, Texas and Georgia (alpha ${clear.map((c) => c[3]).join(', ')})`);
         }
-        const layers = await page.evaluate(() => window.__careerMap.mapCtl.map.getStyle().layers.filter((l) => l.id.startsWith('heat-')).map((l) => l.id));
-        check(layers.some((id) => id.endsWith('-inset')), `real data: ${mode} heat also draws in the Alaska inset`);
+        const heatAK = await page.evaluate(() => {
+          const m = window.__careerMap.mapCtl.map;
+          const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-')).map((l) => l.id);
+          return { ids, west: ids.map((id) => m.getSource(id).coordinates[0][0]) };
+        });
+        check(heatAK.west.includes(-180) && heatAK.ids.every((id) => !/inset/.test(id)), `real data: ${mode} heat draws Alaska at its true place, with no inset copy`);
         if (mode === 'season' && fs.existsSync(path.join(REPO, 'data', 'build', 'heat', 'season.json'))) {
           const urls = await page.evaluate(() => {
             const m = window.__careerMap.mapCtl.map;
@@ -1566,50 +1749,13 @@ async function realData(browser, base) {
       await shot(page, 'real-phone-heat-snowfall.png');
       await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
     }
-    // Alaska inset (national view): Alaska draws as a moved copy in the lower left; territories never draw.
+    // Alaska at its true place (owner feedback 2026-10-14): no inset. The national view stays on the lower 48 with
+    // Alaska up and to the left; a drag brings Alaska to the middle of the open map area; zooming out shows both.
     const geoAll = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'map-index.json'), 'utf8'));
-    const akCount = geoAll.resorts.filter((r) => r[geoAll.fields.indexOf('state')] === 'AK').length;
-    if (akCount) {
-      const ins = await page.evaluate(async () => {
-        const { insetFrameBounds } = await import('/map/js/inset.js');
-        const m = window.__careerMap.mapCtl.map;
-        const q = (layers) => m.queryRenderedFeatures({ layers });
-        const inset = q(['inset-resorts', 'inset-resorts-facility']);
-        const frame = insetFrameBounds();
-        const cont = m.getContainer().getBoundingClientRect();
-        const pts = inset.map((f) => m.project(f.geometry.coordinates));
-        const fr = frame.map((c) => m.project(c));
-        return {
-          inset: new Set(inset.map((f) => f.properties.id)).size,
-          mainAK: q(['resorts', 'resorts-facility']).filter((f) => f.properties.state === 'AK').length,
-          states: [...new Set(q(['states-fill']).map((f) => f.properties.code))],
-          insetState: q(['inset-states-fill']).length,
-          lowerLeft: (fr[0].x + fr[1].x) / 2 < cont.width * 0.5
-            && pts.every((p) => p.x >= Math.min(fr[0].x, fr[1].x) && p.x <= Math.max(fr[0].x, fr[1].x) && p.y >= Math.min(fr[0].y, fr[1].y) && p.y <= Math.max(fr[0].y, fr[1].y))
-            && Math.min(fr[0].y, fr[1].y) > m.project([-120, 33]).y,
-          inView: fr.every((p) => p.x >= 0 && p.y >= 0 && p.x <= cont.width && p.y <= cont.height),
-          first: inset[0] && { id: inset[0].properties.id, ll: inset[0].geometry.coordinates },
-        };
-      });
-      check(ins.inset === akCount && ins.mainAK === 0, `real data ${vp.name}: Alaska resorts draw only in the inset (${ins.inset} of ${akCount})`);
-      check(ins.lowerLeft && ins.inView && ins.insetState > 0, `real data ${vp.name}: the inset sits in the lower left, framed and in view`);
-      check(!ins.states.some((c) => ['PR', 'VI', 'GU', 'MP', 'AS', 'HI', 'AK'].includes(c)), `real data ${vp.name}: territories and Alaska's true shape hidden at the national view`);
-      if (vp.name === 'desktop') {
-        await shot(page, 'real-desktop-alaska-inset.png');
-        await clickMapAt(page, ins.first.ll);
-        await page.waitForURL(/\/map\/ak\//, { timeout: 10000 });
-        await mapIdle(page);
-        const after = await page.evaluate((id) => {
-          const m = window.__careerMap.mapCtl.map;
-          const r = window.__careerMap.index.resorts.get(id);
-          const c = m.getCenter();
-          return { insetHidden: m.getLayoutProperty('inset-resorts', 'visibility') === 'none', near: Math.abs(c.lng - r.lon) < 1 && Math.abs(c.lat - r.lat) < 1 };
-        }, ins.first.id);
-        check(after.insetHidden && after.near, 'real data: clicking an inset resort opens it at its true place');
-        await page.goto(`${base}/map/`);
-        await ready(page);
-        await mapIdle(page);
-      }
+    const fi = (k) => geoAll.fields.indexOf(k);
+    const akResorts = geoAll.resorts.filter((r) => r[fi('state')] === 'AK').map((r) => ({ id: r[fi('id')], lon: r[fi('lon')], lat: r[fi('lat')], facility: r[fi('facility_type')] }));
+    if (akResorts.length) {
+      await alaskaChecks(page, vp, akResorts, base);
     }
     if (vp.name === 'desktop' && n) {
       // Drill down through the first state, cluster and resort in the real data.

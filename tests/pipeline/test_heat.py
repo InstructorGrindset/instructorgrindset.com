@@ -261,11 +261,12 @@ def test_scales_ticks_and_nice_numbers():
     assert heat.sqrt_ticks([0, 25, 100, 200, 400], 0, 450) == [0, 25, 100, 200, 450]
 
 
-def test_alaska_region_matches_the_underlay_box(heat_cfg):
-    """Both draw at Alaska's true place, so the heat surface and the satellite style underlay share their edges."""
+def test_the_underlay_holds_the_alaska_region(heat_cfg):
+    """Both draw at Alaska's true place: relief lies under every pixel of the Alaska heat surface."""
     from pipeline.tools import make_underlay as mu
     ak = heat_cfg.regions.alaska
-    assert (ak.west, ak.south, ak.east, ak.north) == mu.REGIONS["alaska"]["box"]
+    west, south, east, north = mu.REGIONS["alaska"]["box"]
+    assert west <= ak.west and south <= ak.south and east >= ak.east and north >= ak.north
 
 
 # ------------------------------------------------------------------ the rasters

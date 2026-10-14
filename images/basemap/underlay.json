@@ -1,7 +1,7 @@
 {
  "version": 1,
  "generated_by": "pipeline/tools/make_underlay.py",
- "generated_at": "2026-10-14T05:04:37Z",
+ "generated_at": "2026-10-14T14:57:48Z",
  "source": {
   "id": "natural-earth-ne1-hr-lc-sr-w",
   "url": "https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-1/",
@@ -59,38 +59,39 @@
   {
    "region": "alaska",
    "image": "underlay-alaska.webp",
-   "width": 1818,
-   "height": 1602,
+   "width": 1872,
+   "height": 1864,
    "px_per_degree": 36.0,
    "coordinates": [
     [
      -180.0,
-     71.6
+     73.0
     ],
     [
-     -129.5,
-     71.6
+     -128.0,
+     73.0
     ],
     [
-     -129.5,
-     51.2
+     -128.0,
+     49.5
     ],
     [
      -180.0,
-     51.2
+     49.5
     ]
    ],
-   "feather_deg": 0.35,
+   "feather_deg": 1.5,
+   "fade": "alpha",
    "quality": 74,
-   "bytes": 106336,
-   "sha256": "4a18895dd8364bfcf2c7e1c37572d9e99043d710b0cc8a38f64bee6cd69ebc81",
+   "bytes": 116886,
+   "sha256": "ffec157dc36e8a79319a2f21a869e35cf7e2cc3a259ca7713c8500df69a99ef5",
    "small": {
     "image": "underlay-alaska-small.webp",
-    "width": 454,
-    "height": 400,
+    "width": 468,
+    "height": 466,
     "quality": 74,
-    "bytes": 8964,
-    "sha256": "994b9e54a56c205c7f953497a9c3574f8b378a758d35ad3b32ee438b350da0d8"
+    "bytes": 11672,
+    "sha256": "1cfbcf7d34b0f510a2cee964d9fdcaa760b2f72430afa4bd1edcd9e8ef567e86"
    }
   }
  ]
