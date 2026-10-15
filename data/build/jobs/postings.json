@@ -1,25 +1,296 @@
 {
-  "version": 1,
-  "generated_at": "2026-10-13T14:59:10Z",
-  "fetched_at": null,
-  "keywords": [
-    "instructor",
-    "coach",
-    "coaching",
-    "ski school",
-    "snowsports",
-    "snow sports",
-    "ride school",
-    "supervisor",
-    "director",
-    "trainer",
-    "freeride",
-    "race",
-    "racing",
-    "freestyle",
-    "adaptive"
-  ],
-  "boards": [],
-  "sources": [],
-  "postings": []
+ "version": 1,
+ "generated_at": "2026-10-15T17:19:17Z",
+ "fetched_at": "2026-10-15T17:19:17Z",
+ "keywords": [
+  "instructor",
+  "coach",
+  "coaching",
+  "ski school",
+  "snowsports",
+  "snow sports",
+  "ride school",
+  "supervisor",
+  "director",
+  "trainer",
+  "freeride",
+  "race",
+  "racing",
+  "freestyle",
+  "adaptive"
+ ],
+ "boards": [
+  {
+   "employer_id": "aspen-skiing-company",
+   "employer_name": "Aspen Skiing Company",
+   "vendor": "smartrecruiters",
+   "board": "AspenSkiingCompany",
+   "url": "https://careers.smartrecruiters.com/AspenSkiingCompany",
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "status": "ok",
+   "fetched_at": "2026-10-15T17:19:17Z",
+   "as_of": "2026-10-15",
+   "total": 145,
+   "matched": 13,
+   "error": null
+  },
+  {
+   "employer_id": "middlebury-college",
+   "employer_name": "Middlebury College",
+   "vendor": "workable",
+   "board": "middleburycollege",
+   "url": "https://apply.workable.com/middleburycollege/",
+   "source_id": "jobs-board-workable-middleburycollege",
+   "status": "ok",
+   "fetched_at": "2026-10-15T17:19:17Z",
+   "as_of": "2026-10-15",
+   "total": 117,
+   "matched": 2,
+   "error": null
+  }
+ ],
+ "sources": [
+  {
+   "id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "url": "https://careers.smartrecruiters.com/AspenSkiingCompany",
+   "title": "Aspen Skiing Company jobs on SmartRecruiters",
+   "accessed_date": "2026-10-15",
+   "note": "Public job board API; open postings that match the Career Map keywords"
+  },
+  {
+   "id": "jobs-board-workable-middleburycollege",
+   "url": "https://apply.workable.com/middleburycollege/",
+   "title": "Middlebury College jobs on Workable",
+   "accessed_date": "2026-10-15",
+   "note": "Public job board API; open postings that match the Career Map keywords"
+  }
+ ],
+ "postings": [
+  {
+   "id": "smartrecruiters-744000153044740",
+   "employer_id": "aspen-skiing-company",
+   "title": "Sales & Reservations Agent - Ski & Snowboard School - Winter 26-27",
+   "location": "Aspen or Snowmass Village, CO, United States",
+   "department": "90736-Ski School Administration",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000153044740",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "snowmass"
+   ],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000134893910",
+   "employer_id": "aspen-skiing-company",
+   "title": "Ski Instructor - WINTER 26-27",
+   "location": "Aspen or Snowmass Village, CO, United States",
+   "department": "60250-Ski School",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000134893910",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "snowmass"
+   ],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000149045210",
+   "employer_id": "aspen-skiing-company",
+   "title": "Ski School Host - Winter 26-27",
+   "location": "Snowmass Village, CO, United States",
+   "department": "60281-Treehouse Admin",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000149045210",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "snowmass"
+   ],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000148861969",
+   "employer_id": "aspen-skiing-company",
+   "title": "Auditing Supervisor",
+   "location": "Basalt, CO, United States",
+   "department": "92740-Finance & Accounting",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000148861969",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000150208979",
+   "employer_id": "aspen-skiing-company",
+   "title": "Club Supervisor - Snowmass Mountain Club",
+   "location": "Snowmass Village, CO, United States",
+   "department": "42182-Mountain Club",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000150208979",
+   "role_group": "management",
+   "resort_ids": [
+    "snowmass"
+   ],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000152030369",
+   "employer_id": "aspen-skiing-company",
+   "title": "Command Center & Loss Prevention Supervisor - Winter 26-27",
+   "location": "Snowmass Village, CO, United States",
+   "department": "90140-Product Sales and Services",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000152030369",
+   "role_group": "management",
+   "resort_ids": [
+    "snowmass"
+   ],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000153609899",
+   "employer_id": "aspen-skiing-company",
+   "title": "Culinary Supervisor - Limelight Aspen",
+   "location": "Aspen, CO, United States",
+   "department": "40100-Restaurant",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000153609899",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000155619969",
+   "employer_id": "aspen-skiing-company",
+   "title": "Director of Culinary Operations & Experiences - Aspen Hospitality",
+   "location": "Denver, CO, United States",
+   "department": "91900-Executive",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000155619969",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000155096729",
+   "employer_id": "aspen-skiing-company",
+   "title": "Director of Finance - Limelight Aspen & Snowmass",
+   "location": "Aspen and Snowmass, CO, United States",
+   "department": "91906-Accounting",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000155096729",
+   "role_group": "management",
+   "resort_ids": [
+    "snowmass"
+   ],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000151667417",
+   "employer_id": "aspen-skiing-company",
+   "title": "Director of Front Office - Limelight Mammoth - Housing & Relocation Available",
+   "location": "Mammoth Lakes, CA, United States",
+   "department": "43000-Rooms",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000151667417",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000138916699",
+   "employer_id": "aspen-skiing-company",
+   "title": "Director of Sales - The Nell New York",
+   "location": "New York, NY, United States",
+   "department": "21615-Sales Department",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000138916699",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000153604179",
+   "employer_id": "aspen-skiing-company",
+   "title": "Housekeeping Supervisor - Limelight Aspen",
+   "location": "Aspen, CO, United States",
+   "department": "40000-Rooms Department",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000153604179",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "smartrecruiters-744000151668279",
+   "employer_id": "aspen-skiing-company",
+   "title": "PM Food & Beverage Supervisor - Limelight Mammoth",
+   "location": "Mammoth Lakes, CA, United States",
+   "department": "43100-Restaurant",
+   "url": "https://jobs.smartrecruiters.com/AspenSkiingCompany/744000151668279",
+   "role_group": "management",
+   "resort_ids": [],
+   "source_id": "jobs-board-smartrecruiters-aspenskiingcompany",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "workable-6810D4DCD4",
+   "employer_id": "middlebury-college",
+   "title": "Rikert Nordic Ski School Instructor (26-27 Season S01438)",
+   "location": "Ripton, Vermont",
+   "department": "Staff",
+   "url": "https://apply.workable.com/j/6810D4DCD4",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "middlebury-snow-bowl"
+   ],
+   "source_id": "jobs-board-workable-middleburycollege",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  },
+  {
+   "id": "workable-08480E4086",
+   "employer_id": "middlebury-college",
+   "title": "Ski and Snowboard Instructor (AY 26-27 900170)",
+   "location": "Hancock, Vermont",
+   "department": "Student",
+   "url": "https://apply.workable.com/j/08480E4086",
+   "role_group": "ski_school",
+   "resort_ids": [
+    "middlebury-snow-bowl"
+   ],
+   "source_id": "jobs-board-workable-middleburycollege",
+   "as_of": "2026-10-15",
+   "confidence": "published",
+   "fetched_at": "2026-10-15T17:19:17Z"
+  }
+ ]
 }
