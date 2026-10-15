@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-15T01:23:33Z",
+  "resort_id": "burke",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "anderson-1976-new-snow-density"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": "derived annual snowfall 67 in differs from the published 217 in by -69 percent, over the 50 percent limit",
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "burke",
+      "month": 10,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 16.4,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 55.1,
+      "temp_low_f": 37.6,
+      "wind_mph": 9.1,
+      "sun_pct": 59.2
+    },
+    {
+      "resort_id": "burke",
+      "month": 11,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 14.2,
+      "density_mix": {
+        "dry": 0.024,
+        "average": 0.171,
+        "moist": 0.805
+      },
+      "density_source": "estimated",
+      "temp_high_f": 42.0,
+      "temp_low_f": 26.9,
+      "wind_mph": 9.7,
+      "sun_pct": 56.4
+    },
+    {
+      "resort_id": "burke",
+      "month": 12,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.7,
+      "density_mix": {
+        "dry": 0.148,
+        "average": 0.466,
+        "moist": 0.386
+      },
+      "density_source": "estimated",
+      "temp_high_f": 30.5,
+      "temp_low_f": 15.2,
+      "wind_mph": 9.6,
+      "sun_pct": 50.2
+    },
+    {
+      "resort_id": "burke",
+      "month": 1,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.1,
+      "density_mix": {
+        "dry": 0.232,
+        "average": 0.488,
+        "moist": 0.28
+      },
+      "density_source": "estimated",
+      "temp_high_f": 24.7,
+      "temp_low_f": 7.1,
+      "wind_mph": 9.7,
+      "sun_pct": 60.2
+    },
+    {
+      "resort_id": "burke",
+      "month": 2,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.2,
+      "density_mix": {
+        "dry": 0.266,
+        "average": 0.443,
+        "moist": 0.291
+      },
+      "density_source": "estimated",
+      "temp_high_f": 27.9,
+      "temp_low_f": 8.6,
+      "wind_mph": 10.2,
+      "sun_pct": 65.0
+    },
+    {
+      "resort_id": "burke",
+      "month": 3,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 12.6,
+      "density_mix": {
+        "dry": 0.037,
+        "average": 0.444,
+        "moist": 0.519
+      },
+      "density_source": "estimated",
+      "temp_high_f": 37.6,
+      "temp_low_f": 19.4,
+      "wind_mph": 10.7,
+      "sun_pct": 64.3
+    },
+    {
+      "resort_id": "burke",
+      "month": 4,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 15.7,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.143,
+        "moist": 0.857
+      },
+      "density_source": "estimated",
+      "temp_high_f": 51.4,
+      "temp_low_f": 32.7,
+      "wind_mph": 10.6,
+      "sun_pct": 61.9
+    },
+    {
+      "resort_id": "burke",
+      "month": 5,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 64.1,
+      "temp_low_f": 43.7,
+      "wind_mph": 9.4,
+      "sun_pct": 63.5
+    },
+    {
+      "resort_id": "burke",
+      "month": 6,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 71.9,
+      "temp_low_f": 52.3,
+      "wind_mph": 8.6,
+      "sun_pct": 66.5
+    },
+    {
+      "resort_id": "burke",
+      "month": 7,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 76.9,
+      "temp_low_f": 57.8,
+      "wind_mph": 7.9,
+      "sun_pct": 74.1
+    },
+    {
+      "resort_id": "burke",
+      "month": 8,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 75.1,
+      "temp_low_f": 55.6,
+      "wind_mph": 7.6,
+      "sun_pct": 75.6
+    },
+    {
+      "resort_id": "burke",
+      "month": 9,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 68.6,
+      "temp_low_f": 48.2,
+      "wind_mph": 8.0,
+      "sun_pct": 69.4
+    }
+  ]
+}

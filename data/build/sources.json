@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T04:16:31Z",
+  "generated_at": "2026-10-15T01:24:35Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -370,7 +370,7 @@
       "id": "anderson-1976-new-snow-density",
       "url": "https://github.com/ESCOMP/CTSM/blob/be1aff2f2a3d3374da37760e846c326616f2da49/src/biogeophys/SnowHydrologyMod.F90#L3727-L3732",
       "title": "Anderson (1976) Alta new snow density relation, as implemented in the NCAR Community Land Model (CTSM SnowHydrologyMod.F90, NewSnowBulkDensity)",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
       "note": "Estimated density: rho = 50 + 1.7 (T + 15)^1.5 kg/m3 for -15 C < T <= 2 C, 50 kg/m3 at or below -15 C, 50 + 1.7 (17)^1.5 above 2 C, using the snowfall weighted daily mean ERA5 air temperature over each storm at the resort base coordinate. The same relation in g/cm3 is in NWS SNOW-17 (https://github.com/NOAA-OWP/snow17/blob/ea142f94a4788ddf0be7b4d7da59c1f9f552df45/src/snow19/SNEW.f)."
     },
     {
@@ -11969,42 +11969,84 @@
       "id": "nrcs-snotel-1041-co",
       "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=1041",
       "title": "NRCS SNOTEL Beaver Ck Village (1041:CO:SNTL), daily snow water equivalent and snow depth",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
       "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
     },
     {
       "id": "nrcs-snotel-1101-co",
       "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=1101",
       "title": "NRCS SNOTEL Chapman Tunnel (1101:CO:SNTL), daily snow water equivalent and snow depth",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
       "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
     },
     {
       "id": "nrcs-snotel-1103-ak",
       "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=1103",
       "title": "NRCS SNOTEL Mt. Alyeska (1103:AK:SNTL), daily snow water equivalent and snow depth",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
+      "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
+    },
+    {
+      "id": "nrcs-snotel-366-ut",
+      "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=366",
+      "title": "NRCS SNOTEL Brighton (366:UT:SNTL), daily snow water equivalent and snow depth",
+      "accessed_date": "2026-10-15",
+      "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
+    },
+    {
+      "id": "nrcs-snotel-380-co",
+      "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=380",
+      "title": "NRCS SNOTEL Butte (380:CO:SNTL), daily snow water equivalent and snow depth",
+      "accessed_date": "2026-10-15",
+      "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
+    },
+    {
+      "id": "nrcs-snotel-415-co",
+      "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=415",
+      "title": "NRCS SNOTEL Copper Mountain (415:CO:SNTL), daily snow water equivalent and snow depth",
+      "accessed_date": "2026-10-15",
       "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
     },
     {
       "id": "nrcs-snotel-505-co",
       "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=505",
       "title": "NRCS SNOTEL Grizzly Peak (505:CO:SNTL), daily snow water equivalent and snow depth",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
       "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
     },
     {
       "id": "nrcs-snotel-590-mt",
       "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=590",
       "title": "NRCS SNOTEL Lone Mountain (590:MT:SNTL), daily snow water equivalent and snow depth",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
+      "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
+    },
+    {
+      "id": "nrcs-snotel-658-co",
+      "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=658",
+      "title": "NRCS SNOTEL Nast Lake (658:CO:SNTL), daily snow water equivalent and snow depth",
+      "accessed_date": "2026-10-15",
       "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
     },
     {
       "id": "nrcs-snotel-766-ut",
       "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=766",
       "title": "NRCS SNOTEL Snowbird (766:UT:SNTL), daily snow water equivalent and snow depth",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
+      "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
+    },
+    {
+      "id": "nrcs-snotel-929-mt",
+      "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=929",
+      "title": "NRCS SNOTEL Sacajawea (929:MT:SNTL), daily snow water equivalent and snow depth",
+      "accessed_date": "2026-10-15",
+      "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
+    },
+    {
+      "id": "nrcs-snotel-978-id",
+      "url": "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=978",
+      "title": "NRCS SNOTEL Bogus Basin (978:ID:SNTL), daily snow water equivalent and snow depth",
+      "accessed_date": "2026-10-15",
       "note": "Daily WTEQ and SNWD from the NRCS AWDB REST API. Storm density is SWE gain over snow depth gain per storm, after quality control; settlement during storms makes densities lean slightly high. Daily new snow (snowfall_source snotel_swe) is the daily SWE gain divided by new snow density (the station's monthly median storm density, else the Anderson 1976 temperature estimate), never below the daily depth gain, as new snow depth = water / density in NWS SNOW-17 SNEW.f. Values describe the station elevation."
     },
     {
@@ -12025,7 +12067,7 @@
       "id": "open-meteo-era5-archive",
       "url": "https://open-meteo.com/en/docs/historical-weather-api",
       "title": "Open Meteo Historical Weather API, ERA5 reanalysis daily history (models=era5)",
-      "accessed_date": "2026-10-14",
+      "accessed_date": "2026-10-15",
       "note": "Weather data by Open-Meteo.com (CC BY 4.0), from Copernicus ERA5 (Hersbach et al. 2020). ERA5 snowfall is water equivalent; Open Meteo reports it as snow depth with a fixed ratio (docs: 7 cm snow = 10 mm precipitation water equivalent, about 14 percent density), so snowfall_in, powder_days, banner_days and avg_storm_depth_in carry that assumption and miss real variation in snow density. ERA5 is a 25 km grid that smooths mountain terrain, so totals usually run below resort reported upper mountain snowfall. Values are downscaled to the Open Meteo 90 m elevation model at the resort coordinate (base area). wind_mph is the mean daily maximum 10 m wind. sun_pct is sunshine_duration over daylight_duration."
     },
     {

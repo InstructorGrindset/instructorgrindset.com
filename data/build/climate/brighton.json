@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-15T01:23:33Z",
+  "resort_id": "brighton",
+  "source_ids": [
+    "open-meteo-era5-archive",
+    "nrcs-snotel-366-ut",
+    "anderson-1976-new-snow-density"
+  ],
+  "confidence": "estimated",
+  "snowfall_null_reason": "derived annual snowfall 299 in differs from the published 700 in by -57 percent, over the 50 percent limit",
+  "period": {
+    "start_year": 2001,
+    "end_year": 2026
+  },
+  "months": [
+    {
+      "resort_id": "brighton",
+      "month": 10,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 11.8,
+      "density_mix": {
+        "dry": 0.2,
+        "average": 0.429,
+        "moist": 0.371
+      },
+      "density_source": "snotel",
+      "temp_high_f": 49.8,
+      "temp_low_f": 26.3,
+      "wind_mph": 6.7,
+      "sun_pct": 88.9
+    },
+    {
+      "resort_id": "brighton",
+      "month": 11,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.254,
+        "average": 0.394,
+        "moist": 0.352
+      },
+      "density_source": "snotel",
+      "temp_high_f": 35.4,
+      "temp_low_f": 14.6,
+      "wind_mph": 5.7,
+      "sun_pct": 85.1
+    },
+    {
+      "resort_id": "brighton",
+      "month": 12,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.241,
+        "average": 0.391,
+        "moist": 0.368
+      },
+      "density_source": "snotel",
+      "temp_high_f": 25.1,
+      "temp_low_f": 7.9,
+      "wind_mph": 5.2,
+      "sun_pct": 78.2
+    },
+    {
+      "resort_id": "brighton",
+      "month": 1,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.255,
+        "average": 0.378,
+        "moist": 0.367
+      },
+      "density_source": "snotel",
+      "temp_high_f": 24.9,
+      "temp_low_f": 8.6,
+      "wind_mph": 4.9,
+      "sun_pct": 81.0
+    },
+    {
+      "resort_id": "brighton",
+      "month": 2,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.291,
+        "average": 0.337,
+        "moist": 0.372
+      },
+      "density_source": "snotel",
+      "temp_high_f": 28.1,
+      "temp_low_f": 11.5,
+      "wind_mph": 5.7,
+      "sun_pct": 83.9
+    },
+    {
+      "resort_id": "brighton",
+      "month": 3,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.138,
+        "average": 0.535,
+        "moist": 0.327
+      },
+      "density_source": "snotel",
+      "temp_high_f": 35.9,
+      "temp_low_f": 18.1,
+      "wind_mph": 6.5,
+      "sun_pct": 86.0
+    },
+    {
+      "resort_id": "brighton",
+      "month": 4,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 10.0,
+      "density_mix": {
+        "dry": 0.25,
+        "average": 0.344,
+        "moist": 0.406
+      },
+      "density_source": "snotel",
+      "temp_high_f": 41.4,
+      "temp_low_f": 20.8,
+      "wind_mph": 6.9,
+      "sun_pct": 89.0
+    },
+    {
+      "resort_id": "brighton",
+      "month": 5,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 11.7,
+      "density_mix": {
+        "dry": 0.136,
+        "average": 0.409,
+        "moist": 0.455
+      },
+      "density_source": "snotel",
+      "temp_high_f": 52.6,
+      "temp_low_f": 28.0,
+      "wind_mph": 7.1,
+      "sun_pct": 90.1
+    },
+    {
+      "resort_id": "brighton",
+      "month": 6,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 16.9,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 67.9,
+      "temp_low_f": 39.3,
+      "wind_mph": 8.2,
+      "sun_pct": 95.1
+    },
+    {
+      "resort_id": "brighton",
+      "month": 7,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 77.7,
+      "temp_low_f": 48.6,
+      "wind_mph": 7.5,
+      "sun_pct": 96.1
+    },
+    {
+      "resort_id": "brighton",
+      "month": 8,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": null,
+      "density_mix": null,
+      "density_source": null,
+      "temp_high_f": 74.4,
+      "temp_low_f": 46.7,
+      "wind_mph": 7.7,
+      "sun_pct": 93.6
+    },
+    {
+      "resort_id": "brighton",
+      "month": 9,
+      "snowfall_in": null,
+      "powder_days": null,
+      "banner_days": null,
+      "avg_storm_depth_in": null,
+      "snowfall_source": null,
+      "density_pct_median": 16.9,
+      "density_mix": {
+        "dry": 0.0,
+        "average": 0.0,
+        "moist": 1.0
+      },
+      "density_source": "estimated",
+      "temp_high_f": 65.4,
+      "temp_low_f": 38.4,
+      "wind_mph": 7.5,
+      "sun_pct": 94.2
+    }
+  ]
+}
