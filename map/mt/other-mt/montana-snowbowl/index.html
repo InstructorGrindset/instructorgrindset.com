@@ -25,8 +25,8 @@
   <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"></noscript>
-  <link rel="stylesheet" href="/map/css/map.css?v=12">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%23e0a03a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/map/css/map.css?v=13">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%2344ff88'/%3E%3C/svg%3E">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
   <link rel="modulepreload" href="/map/js/data.js">
@@ -39,10 +39,8 @@
   <link rel="modulepreload" href="/map/js/meta.js">
   <link rel="modulepreload" href="/map/js/preview.js">
   <link rel="modulepreload" href="/map/js/camera.js">
-  <!-- The web font loads after the window load event and the first contentful paint, so it never competes with the first paint; text uses the fallback font until then. -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script>(function(){var n=0,p=0,f=function(){if(++n!==2)return;var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},g=function(){if(!p){p=1;f()}};addEventListener("load",f,{once:true});try{new PerformanceObserver(function(x,o){if(x.getEntriesByName("first-contentful-paint").length){o.disconnect();g()}}).observe({type:"paint",buffered:true})}catch(e){g()}setTimeout(g,8000)})()</script>
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
+  <link rel="modulepreload" href="/map/js/controls.js">
+  <!-- Map pages use the system monospace stack (map.css), so they load no web font. -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SkiResort","name":"Montana Snowbowl","url":"https://instructorgrindset.com/map/mt/other-mt/montana-snowbowl/","geo":{"@type":"GeoCoordinates","latitude":47.02,"longitude":-114.0},"address":{"@type":"PostalAddress","addressRegion":"MT","addressCountry":"US"},"containedInPlace":{"@type":"Place","name":"Other Montana"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Snowsports Career Map","item":"https://instructorgrindset.com/map/"},{"@type":"ListItem","position":2,"name":"Montana","item":"https://instructorgrindset.com/map/mt/"},{"@type":"ListItem","position":3,"name":"Other Montana","item":"https://instructorgrindset.com/map/mt/other-mt/"},{"@type":"ListItem","position":4,"name":"Montana Snowbowl","item":"https://instructorgrindset.com/map/mt/other-mt/montana-snowbowl/"}]}]}</script>
   <script type="application/json" id="resort-record">{"version":1,"generated_at":"2026-10-14T04:16:31Z","resort":{"id":"montana-snowbowl","name":"Montana Snowbowl","tier":"A","facility_type":"ski_area","tier_a_criteria":[{"criterion":"diehard","rationale":"Montana Snowbowl is known for long, steep expert runs such as West Bowl and for throwback operations with vintage Riblet chairs and no significant base development.","source_id":"wikipedia-montana-snowbowl"}],"tier_a_status":"approved","approval":{"by":"site owner","date":"2026-10-11","note":"Approved from the candidate review"},"owner":null,"lat":47.02,"lon":-114.0,"location_source_id":"wikipedia-montana-snowbowl","cluster_id":"other-mt","state":"MT","size":{"acres":{"value":950,"source_id":"wikipedia-montana-snowbowl","as_of":"2026-10-11","confidence":"published","note":null},"vertical_ft":{"value":2600,"source_id":"wikipedia-montana-snowbowl","as_of":"2026-10-11","confidence":"published","note":null},"lifts":{"value":6,"source_id":"openskimap-ski-areas","as_of":"2026-10-11","confidence":"estimated","note":"lifts mapped in OpenStreetMap (OpenSkiMap)"},"ski_school_staff_est":null},"elevation":{"base_ft":{"value":5000,"source_id":"wikipedia-montana-snowbowl","as_of":"2026-10-11","confidence":"published","note":"Rounded in the infobox."},"summit_ft":{"value":7600,"source_id":"wikipedia-montana-snowbowl","as_of":"2026-10-11","confidence":"published","note":"Top of LaValle Creek chair, rounded."}},"snow":{"annual_avg_in":{"value":300,"source_id":"wikipedia-montana-snowbowl","as_of":"2026-10-13","confidence":"published","note":null}},"access":{"rating":"car_centric","summary_md":"Staff typically drive from Interstate 90 up Grant Creek Road to a base with little development.","source_id":"wikipedia-montana-snowbowl","as_of":"2026-10-13","confidence":"estimated","note":"No transit found in the article or the Mountain Line article."},"official_trailmap":{"url":"https://montanasnowbowl.com/trailmap.html","format":"page","season":null,"source_id":"tmo-montana-snowbowl","as_of":"2026-10-13","confidence":"estimated","note":null,"image_url":null,"image_format":null,"image_source_id":null,"image_as_of":null,"image_confidence":null,"image_note":null},"webcams":{"cams_page":{"url":"https://www.montanasnowbowl.com/base-web-cam/","source_id":"webcams-montana-snowbowl-search","as_of":"2026-10-13","confidence":"estimated","note":"From a search result for this page; page not opened. Single cam page; no index page of all Snowbowl cams appeared in the search."},"cams":[]},"jobs":{"links":[{"employer_id":"ski-racing-job-board","role_group":"coaching","disciplines":["race"],"label":"Race coaching jobs nationwide","url":"https://skiracing.com/job-board/","source_id":"jobs-skiracing-job-board","as_of":"2026-10-13","confidence":"estimated","note":null},{"employer_id":"fasterskier-job-postings","role_group":"coaching","disciplines":["nordic"],"label":"Nordic coaching jobs nationwide","url":"https://fasterskier.com/category/news/jobpostings/","source_id":"jobs-fasterskier-jobpostings","as_of":"2026-10-13","confidence":"estimated","note":null},{"employer_id":"montana-snowbowl","role_group":"all","disciplines":[],"label":"Working at Snowbowl","url":"https://montanasnowbowl.com/sbblog/?p=4315","source_id":"jobs-snowbowl-working","as_of":"2026-10-13","confidence":"estimated","note":null}],"feed":false,"hiring_window":null},"passes":[],"season":{"open_typical":{"value":"12-05","source_id":"facts-west3-wp-montana-snowbowl","as_of":"2026-10-13","confidence":"estimated","note":"Article: 'The ski area often opens with weekend skiing in early December'; early mapped to the 5th."},"close_typical":{"value":"04-04","source_id":"facts-gapfill-ots-snowbowl","as_of":"2026-10-13","confidence":"estimated","note":"From a search result for this page; page not opened. Median of 3 values: OnTheSnow projection 04-04 (this page); one season closed early on 03-29 while aiming for the second weekend in April (facts-gapfill-nbcmt-snowbowl-early); 2018 closed 04-15."},"length_days":{"value":121,"source_id":"facts-gapfill-ots-snowbowl","as_of":"2026-10-13","confidence":"estimated","note":"computed from typical dates (12-05 to 04-04)"},"training_start":null},"terrain":{"beginner_pct":null,"intermediate_pct":null,"advanced_pct":null,"expert_pct":null,"character_tags":[]},"fit":{"enthusiast_types":[],"professional_types":[]},"clients":{"profile_tags":[],"notes_md":null},"career":null,"editorial":{"overview_md":"Montana Snowbowl sits in the Lolo National Forest 12 miles northwest of Missoula, Montana. It is known for long, steep expert runs such as West Bowl, a 2,600 foot vertical rise and throwback operations. Its lifts include three vintage Riblet double chairs, a Skytrac triple and a vintage Doppelmayr T bar. Base development is minimal, and the access road, improved in 2011, is still unpaved. Snowbowl opened in December 1962, promoted as having the most vertical in the Pacific Northwest.","culture_md":"Snowbowl serves Missoula, the second most populous city in Montana with 73,489 residents in 2020. Missoula is home to the University of Montana, and its largest employers are the university, the public schools and two hospitals. The city also holds a U.S. Forest Service regional headquarters and the smokejumpers' headquarters. In summer Snowbowl runs one lift on weekends for hikers and mountain bikers.","alexandre_take_md":null,"status":"reviewed","source_ids":["ed-west-wiki-montana-snowbowl","ed-west-wiki-missoula-montana"],"reviewed_date":"2026-10-13"},"climate_available":false,"detail_available":true,"trailmap_available":true,"housing_summary":null,"housing_search":null,"sources":["ed-west-wiki-missoula-montana","ed-west-wiki-montana-snowbowl","facts-gapfill-ots-snowbowl","facts-west3-wp-montana-snowbowl","jobs-fasterskier-jobpostings","jobs-skiracing-job-board","jobs-snowbowl-working","openskimap-ski-areas","tmo-montana-snowbowl","webcams-montana-snowbowl-search","wikipedia-montana-snowbowl"]},"sources":[{"id":"ed-west-wiki-missoula-montana","url":"https://en.wikipedia.org/wiki/Missoula,_Montana","title":"Missoula, Montana (Wikipedia)","accessed_date":"2026-10-12","note":null},{"id":"ed-west-wiki-montana-snowbowl","url":"https://en.wikipedia.org/wiki/Montana_Snowbowl","title":"Montana Snowbowl (Wikipedia)","accessed_date":"2026-10-12","note":null},{"id":"facts-gapfill-ots-snowbowl","url":"https://www.onthesnow.com/montana/montana-snowbowl/resort-photos.html","title":"Montana Snowbowl (OnTheSnow)","accessed_date":"2026-10-13","note":null},{"id":"facts-west3-wp-montana-snowbowl","url":"https://en.wikipedia.org/wiki/Montana_Snowbowl","title":"Wikipedia: Montana Snowbowl","accessed_date":"2026-10-13","note":null},{"id":"jobs-fasterskier-jobpostings","url":"https://fasterskier.com/category/news/jobpostings/page/8/","title":"FasterSkier job postings (page 8)","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened. Nordic coaching postings from clubs such as Bridger Ski Foundation, Jackson Hole Ski and Snowboard Club and Green Mountain Valley School. The link uses the first page of the category."},{"id":"jobs-skiracing-job-board","url":"https://skiracing.com/job-board/","title":"Ski Racing Media job board","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened. Carries club coaching openings such as Big Sky Ski Education Foundation, Rowmark and Loveland Ski Club."},{"id":"jobs-snowbowl-working","url":"https://montanasnowbowl.com/sbblog/?p=4315","title":"Working at Snowbowl (Montana Snowbowl employment information)","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened."},{"id":"openskimap-ski-areas","url":"https://openskimap.org/","title":"OpenSkiMap ski areas (derived from OpenStreetMap, ODbL)","accessed_date":"2026-10-11","note":"repository extract data/raw/openskimap/us_ski_areas.geojson"},{"id":"tmo-montana-snowbowl","url":"https://montanasnowbowl.com/trailmap.html","title":"Montana Snowbowl Trail Map","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened"},{"id":"webcams-montana-snowbowl-search","url":"https://www.montanasnowbowl.com/base-web-cam/","title":"Base Web Cam - snowbowl","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened."},{"id":"wikipedia-montana-snowbowl","url":"https://en.wikipedia.org/wiki/Montana_Snowbowl","title":"Montana Snowbowl (Wikipedia)","accessed_date":"2026-10-11","note":null}]}</script>
   <link rel="modulepreload" href="/map/js/schemas.js">
@@ -55,26 +53,72 @@
     <script src="/assets/nav.js?v=15"></script>
 
     <main class="main map-main" id="main">
-      <header class="map-header">
-        <h1>Snowsports Career Map</h1>
-        <span id="dev-badge" class="dev-badge" hidden></span>
-        <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
-        <div id="map-search" class="map-search" role="search" hidden>
-          <label class="visually-hidden" for="map-search-input">Search resorts, clusters and states</label>
-          <input id="map-search-input" class="map-search-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search">
-          <ul id="map-search-list" class="map-search-list" role="listbox" aria-label="Search results" hidden></ul>
-          <p class="map-search-empty" hidden>No resort, cluster or state matches that name.</p>
-          <div class="visually-hidden" role="status" aria-live="polite"></div>
+      <header class="map-header" id="map-header">
+        <div class="mh-bar">
+          <h1 class="mh-title">Snowsports Career Map</h1>
+          <span id="dev-badge" class="dev-badge" hidden></span>
+          <!-- Region jump menu (map/js/controls.js): National and every state with resorts. -->
+          <div id="map-region" class="map-region" hidden>
+            <button id="map-region-btn" class="mh-btn map-region-btn" type="button" aria-expanded="false" aria-controls="map-region-list"><span class="visually-hidden">Jump to a region. Now showing </span><span class="map-region-label">National</span></button>
+            <ul id="map-region-list" class="map-region-list" aria-label="Regions" hidden></ul>
+          </div>
+          <!-- Hiring now count (map/js/hiring.js); a toggle for the Hiring now filter. -->
+          <button id="hiring-pill" class="mh-pill" type="button" aria-pressed="false" hidden><span class="mh-pill-dot" aria-hidden="true"></span>Hiring now <span class="mh-count"></span></button>
+          <!-- Shown only when the jobs feed (data/build/jobs/postings.json) has a real fetch time. -->
+          <p id="feed-live" class="feed-live" hidden><span class="live-dot" aria-hidden="true"></span><span class="live-label">Live</span> <span class="live-what">jobs<span class="visually-hidden"> feed, updated</span></span> <time></time></p>
+          <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
+          <div id="map-search" class="map-search" role="search" hidden>
+            <label class="visually-hidden" for="map-search-input">Search resorts, clusters and states</label>
+            <input id="map-search-input" class="map-search-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search">
+            <ul id="map-search-list" class="map-search-list" role="listbox" aria-label="Search results" hidden></ul>
+            <p class="map-search-empty" hidden>No resort, cluster or state matches that name.</p>
+            <div class="visually-hidden" role="status" aria-live="polite"></div>
+          </div>
+          <div id="map-link" class="map-link" hidden>
+            <button id="link-copy" class="mh-btn" type="button" aria-label="Copy a link to this view" title="Copy a link to this view">Link</button>
+            <span class="mh-copied" aria-hidden="true" hidden>Copied</span>
+          </div>
+          <button id="list-toggle" class="mh-btn list-toggle" type="button" aria-pressed="false" aria-controls="list-view" hidden>List view</button>
+          <button id="layers-toggle" class="mh-btn layers-toggle" type="button" aria-expanded="false" aria-controls="layers-panel" hidden>Layers</button>
         </div>
-        <button id="list-toggle" class="btn btn-sm btn-ghost list-toggle" type="button" aria-pressed="false" aria-controls="list-view" hidden>List view</button>
+        <div class="mh-sub" id="map-subbar">
+          <p id="view-title" class="mh-view"></p>
+          <p class="mh-date"><time id="today-date"></time></p>
+          <div class="mh-sub-right" id="mh-sub-right">
+            <div id="tone-toggle" class="seg tone-toggle" role="group" aria-label="Basemap" hidden>
+              <button type="button" data-tone="map" aria-pressed="true">Map</button><button type="button" data-tone="satellite" aria-pressed="false">Satellite</button>
+            </div>
+          </div>
+        </div>
       </header>
 
       <div class="map-stage" id="map-stage">
         <div id="map" class="map" role="region" aria-label="Interactive map of US ski resorts. The panel and the list view hold the same information."></div>
         <section id="list-view" class="list-view" aria-label="List view of every state, cluster and resort" hidden></section>
-        <div id="facility-filter" class="facility-filter" role="group" aria-label="Filter resorts" hidden></div>
-        <div id="recolor" class="recolor" hidden></div>
-        <div id="detail-layers" class="detail-layers" role="group" aria-label="Resort detail layers" hidden></div>
+        <!-- One floating panel at the top left (a sheet on phones): Color by, the filters, and the resort detail layers. -->
+        <section id="layers-panel" class="layers-panel" aria-label="Map layers" hidden>
+          <div class="lp-sheet-head"><h2 class="lp-sheet-title" tabindex="-1">Layers</h2><button id="layers-close" class="mh-btn lp-close" type="button">Close</button></div>
+          <div id="lp-view" class="lp-view"></div>
+          <div id="recolor" class="recolor" hidden></div>
+          <details id="layers-box" class="lp-box" open>
+            <summary class="lp-summary">Layers</summary>
+            <div id="facility-filter" class="facility-filter" role="group" aria-label="Filter resorts" hidden></div>
+          </details>
+          <div id="detail-layers" class="detail-layers" role="group" aria-label="Resort detail layers" hidden></div>
+        </section>
+        <div id="heat-legend" class="heat-legend"></div>
+        <!-- Focusable, since phones scroll it sideways. -->
+        <div class="map-legend" id="map-legend" role="region" aria-labelledby="map-legend-title" tabindex="0">
+          <p class="ml-title" id="map-legend-title">Legend</p>
+          <ul class="ml-items">
+            <li><span class="ml-dot ml-a" aria-hidden="true"></span>Tier A</li>
+            <li><span class="ml-dot ml-b" aria-hidden="true"></span>Tier B</li>
+            <li><span class="ml-sq" aria-hidden="true"></span>Indoor</li>
+            <li><span class="ml-dia" aria-hidden="true"></span>Training center</li>
+            <li><span class="ml-cluster" aria-hidden="true"></span>Cluster</li>
+            <li><span class="ml-ring" aria-hidden="true"></span>Hiring now</li>
+          </ul>
+        </div>
 
         <aside id="panel" class="panel" aria-label="Map details" aria-busy="true" data-sheet="half" tabindex="-1">
           <button id="sheet-handle" class="sheet-handle" type="button" aria-controls="panel-scroll" aria-label="Resize panel"><span aria-hidden="true"></span></button>

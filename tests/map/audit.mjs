@@ -144,6 +144,8 @@ async function axe(browser, base) {
     { label: 'trail map dialog, phone', url: '/map/co/i70-corridor/vail/', trail: true, phone: true },
     { label: 'national map, snowfall heat map', url: '/map/', heat: 'snowfall' },
     { label: 'national map, season heat map, phone', url: '/map/', heat: 'season', phone: true },
+    { label: 'layers sheet open, phone', url: '/map/', phone: true, layers: true },
+    { label: 'region menu open, before the map starts', url: '/map/', waiting: true, region: true },
     { label: 'search results open, before the map starts', url: '/map/', waiting: true, search: 'mount' },
     { label: 'search results open on a resort page, phone', url: '/map/co/i70-corridor/vail/', waiting: true, search: 'tahoe', phone: true },
     { label: 'search results in the list view', url: '/map/', list: true, search: 'big' },
@@ -163,6 +165,8 @@ async function axe(browser, base) {
       await page.waitForTimeout(1500);
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
+    if (c.layers) { await page.locator('#layers-toggle').click(); await page.waitForTimeout(300); }
+    if (c.region) { await page.locator('#map-region-btn').click(); await page.waitForTimeout(300); }
     if (c.search) {
       await page.locator('#map-search-input').focus();
       await page.keyboard.type(c.search);
@@ -172,7 +176,11 @@ async function axe(browser, base) {
     }
     if (c.heat) {
       await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 30000 });
+      // Phones keep Color by in the layers sheet behind the LAYERS button.
+      const sheet = await page.locator('#layers-toggle').isVisible();
+      if (sheet) await page.locator('#layers-toggle').click();
       await page.locator(`.recolor-modes .filter-btn[data-mode="${c.heat}"]`).click();
+      if (sheet) await page.locator('#layers-close').click();
       await page.waitForFunction((k) => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith(`heat-${k}-`)), c.heat, { timeout: 30000 });
       await page.waitForSelector('#recolor-legend:not([hidden])', { timeout: 10000 });
       await page.waitForTimeout(500);

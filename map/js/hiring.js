@@ -46,20 +46,15 @@ export function hiringNowIds(resorts, postings, date) {
 }
 
 /**
- * Set hiring_now on the slim records and index.hiringIds (sorted), and label the chip "Hiring now (n)". At 0 the
- * chip stays visible with aria-disabled and a short title. Returns n.
+ * Set hiring_now on the slim records and index.hiringIds (sorted), then call update(n) so the controls can say
+ * "Hiring now (n)" (app.js: the layers panel option and the header pill; at 0 they stay visible, disabled, with
+ * NONE_TITLE). Returns n.
  */
-export function markHiring(index, postings, btn, date = new Date()) {
+export function markHiring(index, postings, update, date = new Date()) {
   const found = hiringNowIds(index.resortList, postings, date);
   for (const r of index.resortList) r.hiring_now = found.has(r.id);
   index.hiringIds = [...found].sort();
-  if (btn) {
-    btn.textContent = `Hiring now (${found.size})`;
-    if (found.size) { btn.removeAttribute('aria-disabled'); btn.removeAttribute('title'); } else {
-      btn.setAttribute('aria-disabled', 'true');
-      btn.title = NONE_TITLE;
-    }
-  }
+  if (typeof update === 'function') update(found.size, NONE_TITLE);
   return found.size;
 }
 

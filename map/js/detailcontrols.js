@@ -63,8 +63,9 @@ export function createDetailControls(root, { onToggle }) {
       clear(root);
       if (!groups.length) { root.hidden = true; document.body.classList.remove('detail-mode'); return; }
       const list = ORDER.filter((g) => groups.includes(g));
-      // A disclosure: open on desktop, collapsed on phone so the map stays visible.
-      const open = !window.matchMedia('(max-width: 759.98px)').matches;
+      // A disclosure in the layers panel: open, except on narrow desktops where the panel floats over the map
+      // (phones keep it open inside the layers sheet).
+      const open = !window.matchMedia('(min-width: 760px) and (max-width: 999.98px)').matches;
       const toggles = h('ul', { class: 'detail-toggles' });
       root.append(h('details', { class: 'detail-box', open },
         h('summary', { class: 'detail-title' }, 'Resort detail layers'), toggles));

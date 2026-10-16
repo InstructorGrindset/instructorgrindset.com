@@ -161,7 +161,8 @@ async function mapIdle(page) {
   await page.waitForTimeout(250);
 }
 
-const heading = (page) => page.locator('#panel-heading').innerText();
+// The panel heading shows in uppercase (CSS text-transform), so checks read its text content.
+const heading = async (page) => (await page.locator('#panel-heading').textContent()).trim();
 const shot = (page, name) => page.screenshot({ path: path.join(SHOTS, name) });
 
 async function clickMapAt(page, lngLat) {
@@ -361,7 +362,7 @@ async function officialFallbackChecks(browser, stubBase) {
   // Kilo Notch: a PDF and no OpenSkiMap drawing, so only the official map.
   await page.goto(`${stubBase}/map/vt/fixture-green-ridge/kilo-notch/`);
   await ready(page);
-  check(await page.locator('#panel-content .trailmap-drawn button').innerText() === 'Open the trail map'
+  check((await page.locator('#panel-content .trailmap-drawn button').textContent()).trim() === 'Open the trail map'
     && (await page.locator('#panel-content .trailmap-drawn .fact-meta').innerText()).trim() === 'Official map from Kilo Notch', 'PDF only resort: the button names the official map');
   check(await page.locator('.trailmap-ctrl').count() === 1, 'PDF only resort: the map control opens the trail map too');
   await page.locator('#panel-content button', { hasText: 'Open the trail map' }).click();
@@ -502,19 +503,32 @@ async function imageryOutage(browser, base) {
   }
 }
 
-// Share of the map area's pixels near the background color (an empty dark base is near 1), from a screenshot.
+// Share of the open map area's pixels near the plain base color of the viewer's basemap tone (an empty base is
+// near 1), from a screenshot: a 360 x 160 box (smaller on narrow screens) in the middle of the area left of the side
+// panel and right of the layers panel, inside the lower 48 at the national view.
 async function darkShare(page) {
-  const box = await page.locator('#map').boundingBox();
-  const png = await page.screenshot({ clip: { x: box.x + 20, y: box.y + 130, width: Math.min(560, box.width - 40), height: 360 } });
-  return page.evaluate(async (b64) => {
+  const { box, base } = await page.evaluate(async () => {
+    const { config } = await import('/map/js/config.js');
+    const m = document.getElementById('map').getBoundingClientRect();
+    const p = document.getElementById('panel').getBoundingClientRect();
+    const lp = document.getElementById('layers-panel');
+    const l = lp && lp.offsetParent ? lp.getBoundingClientRect().right + 10 : m.left + 20;
+    const right = Math.min(m.right, p.left) - 20;
+    const w = Math.min(360, right - l); const hgt = Math.min(160, m.height - 200);
+    const x = l + (right - l - w) / 2; const y = m.top + (m.height - hgt) / 2;
+    const hex = config.basemap.tone[document.body.dataset.tone || config.basemap.defaultTone].background;
+    return { box: { x, y, width: w, height: hgt }, base: [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)) };
+  });
+  const png = await page.screenshot({ clip: box });
+  return page.evaluate(async ([b64, rgb]) => {
     const img = new Image(); img.src = `data:image/png;base64,${b64}`; await img.decode();
     const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
     const ctx = c.getContext('2d', { willReadFrequently: true }); ctx.drawImage(img, 0, 0);
     const d = ctx.getImageData(0, 0, c.width, c.height).data;
     let dark = 0;
-    for (let i = 0; i < d.length; i += 4) if (Math.abs(d[i] - 10) + Math.abs(d[i + 1] - 14) + Math.abs(d[i + 2] - 20) < 24) dark += 1;
+    for (let i = 0; i < d.length; i += 4) if (Math.abs(d[i] - rgb[0]) + Math.abs(d[i + 1] - rgb[1]) + Math.abs(d[i + 2] - rgb[2]) < 18) dark += 1;
     return dark / (d.length / 4);
-  }, png.toString('base64'));
+  }, [png.toString('base64'), base]);
 }
 
 // The satellite style underlay is served with the site and shows with no outside host: in the 2D picture before
@@ -682,17 +696,17 @@ async function desktop(browser, base) {
   });
   check(fac.layer && fac.images && fac.n === 2, `indoor and training markers render as symbols (${fac.n})`);
   check(await page.locator('.legend', { hasText: 'Year round training center' }).count() === 1, 'legend lists facility markers');
-  await page.getByRole('button', { name: 'Indoor and training' }).click();
+  await page.getByRole('radio', { name: 'Indoor and training' }).check();
   check(await page.evaluate(() => window.__careerMap.mapCtl.map.getLayoutProperty('resorts', 'visibility')) === 'none', 'filter hides ski area markers');
   await page.waitForTimeout(300);
   await shot(page, 'desktop-01b-national-facility-filter.png');
-  await page.getByRole('button', { name: 'All', exact: true }).click();
+  await page.getByRole('radio', { name: 'All', exact: true }).check();
   await shot(page, 'desktop-01-national.png');
 
   // Color modes: value heat maps (map/js/heat.js) with the resorts on top.
   const modes = page.locator('.recolor-modes .filter-btn');
   await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 10000 });
-  check(JSON.stringify(await modes.allInnerTexts()) === JSON.stringify(['Default', 'Estimated net income', 'Season length', 'Snowfall']), 'recolor control lists four modes (no Professionalism)');
+  check(JSON.stringify(await modes.allTextContents()) === JSON.stringify(['Default', 'Estimated net income', 'Season length', 'Snowfall']), 'recolor control lists four modes (no Professionalism)');
   check(await page.locator('.recolor-modes [aria-disabled="true"]').count() === 0, 'every mode enabled with fixture data');
   const leg = page.locator('#recolor-legend');
   const heatState = () => page.evaluate(() => {
@@ -725,11 +739,12 @@ async function desktop(browser, base) {
     await page.waitForFunction(() => window.__careerMap.mapCtl.map.loaded(), null, { timeout: 10000 });
     await page.waitForTimeout(300);
     const st = await heatState();
-    const text = await leg.innerText();
+    // The notes sit in the folded "About these colors", so read the legend's text content.
+    const text = await leg.textContent();
     const ticks = await leg.locator('.heat-tick').allInnerTexts();
     check(st.ids.length >= 1 && st.ids.every((id) => id.startsWith(`heat-${hm.mode}-`)), `${hm.mode}: drawn as a heat surface (${st.ids.join(', ')})`);
     check(st.belowResorts && st.resortsVisible, `${hm.mode}: heat sits under the state lines and the resort points`);
-    check(st.color.includes(hm.prop) && st.stroke.includes('#e0a03a'), `${hm.mode}: points stay on top, Tier A outlined, no data points grey`);
+    check(st.color.includes(hm.prop) && st.stroke.includes('#ffaa00'), `${hm.mode}: points stay on top, Tier A outlined, no data points grey`);
     if (hm.ticks) {
       check(JSON.stringify(ticks) === JSON.stringify(hm.ticks) && !/Min|Max|100|Resort values/.test(text), `${hm.mode}: legend shows only ${hm.ticks.join(', ')}`);
     } else {
@@ -805,7 +820,7 @@ async function desktop(browser, base) {
   check(await leg.isHidden() && (await heatState()).ids.length === 0, 'Default removes the heat surface and hides its legend');
   check(await page.evaluate(() => !window.__careerMap.mapCtl.map.getSource('heat-credit') && !window.__careerMap.mapCtl.map.getSource('heat-iso')
     && !window.__careerMap.mapCtl.map.getLayer('heat-iso-major')), 'Default removes the NOAA credit and the isolines');
-  check((await heatState()).color.includes('#e0a03a') && !(await heatState()).color.includes('season_length_days'), 'Default restores tier colors');
+  check((await heatState()).color.includes('#ffaa00') && !(await heatState()).color.includes('season_length_days'), 'Default restores tier colors');
 
   // The surface shows value, not density: a cluster of low resorts counts as one voice, opacity never grows with
   // density, a lone resort shows its own value, and far areas keep the floor opacity (never empty).
@@ -980,7 +995,7 @@ async function desktop(browser, base) {
     `detail map draws lifts, base, housing by precision, isochrones, transit (${JSON.stringify(c)})`);
   check(c.bus === 0 && c.drive === 0, 'commute lines hidden until a site is selected');
   check(await page.locator('body.detail-mode').count() === 1 && await page.locator('#recolor').isHidden(), 'detail mode replaces the recolor control');
-  check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts', 'Housing', 'Commute', 'Transit', 'Drive time']), 'a toggle per layer with data');
+  check(JSON.stringify(await page.locator('.detail-toggles label').allTextContents()) === JSON.stringify(['Lifts', 'Housing', 'Commute', 'Transit', 'Drive time']), 'a toggle per layer with data');
   check((await page.locator('#detail-layers').innerText()).includes('45 min'), 'isochrone legend shows 15, 30, 45 minutes');
   check(await page.locator('.site-select').count() === 4, 'housing lists every site');
   check(JSON.stringify(await page.locator('.site-select .nav-name').allInnerTexts()) === JSON.stringify(['Fixture Staff Village', 'Fixture Town Lease', 'Fixture Listed Lodge', 'Fixture West Rentals']), 'employee housing listed first');
@@ -1046,7 +1061,7 @@ async function desktop(browser, base) {
   check(await off.count() === 1 && (await off.locator('a').innerText()) === 'Official trail map from Alpha Peak'
     && (await off.locator('a').getAttribute('target')) === '_blank' && /noopener/.test(await off.locator('a').getAttribute('rel'))
     && (await off.innerText()).includes('Web page · 2025/26 season · opens in a new tab'), 'panel links the official trail map with format and season');
-  check(await page.locator('#panel-content .trailmap-drawn button').innerText() === 'Open the trail map'
+  check((await page.locator('#panel-content .trailmap-drawn button').textContent()).trim() === 'Open the trail map'
     && (await page.locator('#panel-content .trailmap-drawn .fact-meta').innerText()).trim() === 'Official map from Alpha Peak · Interactive map from OpenSkiMap',
   'the panel button reads Open the trail map and names the official and interactive maps');
   await officialImageChecks(page, 'official trail map', { shotName: 'desktop-14b-official-trail-map.png' });
@@ -1108,7 +1123,7 @@ async function desktop(browser, base) {
   check(accepts.every((a) => a === 'application/json'), 'the form asks for a JSON answer (Accept: application/json)');
   await form.locator('select[name=kind]').selectOption('housing');
   check(await form.locator('[data-field=cert_level]').isHidden() && await form.locator('[data-field=housing_site_id]').isVisible()
-    && (await form.locator('[data-field=amount] label').innerText()) === 'Monthly rent in USD', 'housing report asks for a site and a monthly rent');
+    && (await form.locator('[data-field=amount] label').textContent()) === 'Monthly rent in USD', 'housing report asks for a site and a monthly rent');
   await form.locator('select[name=housing_site_id]').selectOption('alpha-town-lease');
   await form.locator('input[name=amount]').fill('875');
   await form.locator('button[type=submit]').click();
@@ -1144,7 +1159,7 @@ async function desktop(browser, base) {
   // Lifts only detail (the shape of real Tier A data today), then leave detail mode.
   await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'UT', clusterId: 'fixture-wasatch-like', resortId: 'foxtrot-basin' }));
   await page.waitForFunction(() => document.querySelectorAll('.detail-toggles label').length > 0, null, { timeout: 10000 });
-  check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(['Lifts']), 'layers without data are hidden');
+  check(JSON.stringify(await page.locator('.detail-toggles label').allTextContents()) === JSON.stringify(['Lifts']), 'layers without data are hidden');
   check(await page.locator('.housing .not-verified', { hasText: 'No employee housing listed publicly yet.' }).count() === 1, 'empty housing state');
   const zori = page.locator('.housing .housing-rent .rent-line');
   check((await zori.locator('.rent-text').innerText()) === 'Zillow typical rent (ZORI) $1,150 a month (Fixture County, UT, Nov 2024)'
@@ -1218,13 +1233,13 @@ async function desktop(browser, base) {
   check(await page.locator('#list-view').isVisible(), 'list view visible');
   check(await page.locator('#map').isHidden(), 'map hidden in list view');
   check(await page.locator('#list-view a.tree-resort').count() === 14, 'list view lists every resort and facility');
-  await page.getByRole('button', { name: 'Indoor and training' }).click();
+  await page.getByRole('radio', { name: 'Indoor and training' }).check();
   check(await page.locator('#list-view a.tree-resort').count() === 2, 'facility filter applies to the list view');
   check(await page.locator('#list-view .tree-state').count() === 2, 'filter drops states with no match');
   await shot(page, 'desktop-08b-list-filtered.png');
-  await page.getByRole('button', { name: 'Ski areas' }).click();
+  await page.getByRole('radio', { name: 'Ski areas' }).check();
   check(await page.locator('#list-view a.tree-resort').count() === 12, 'ski area filter');
-  await page.getByRole('button', { name: 'All', exact: true }).click();
+  await page.getByRole('radio', { name: 'All', exact: true }).check();
   await shot(page, 'desktop-08-list-view.png');
   await page.locator('#list-view a.tree-resort', { hasText: 'Kilo Notch' }).click();
   await page.waitForURL(/\/map\/vt\/fixture-green-ridge\/kilo-notch\//);
@@ -1269,7 +1284,7 @@ async function phone(browser, base) {
 
   await page.goto(`${base}/map/`);
   await ready(page, { start: false });
-  check(await page.locator('#map-start').innerText() === 'Tap to explore the map', 'phone: start button reads "Tap to explore the map"');
+  check(await page.locator('#map-start').textContent() === 'Tap to explore the map', 'phone: start button reads "Tap to explore the map"');
   await shot(page, 'phone-00-start-map.png');
   // A tap anywhere on the picture starts the map.
   await page.mouse.click(195, 160);
@@ -1335,10 +1350,16 @@ async function phone(browser, base) {
   await ready(page);
   await page.waitForSelector('.site-select', { timeout: 10000 });
   await mapIdle(page);
-  check(await page.locator('#detail-layers').isVisible() && !(await page.locator('#detail-layers details').getAttribute('open') !== null), 'phone: detail layers start collapsed');
+  // Phones keep the layers panel, with the resort detail layers, in a sheet behind the LAYERS button.
+  check(await page.locator('#detail-layers').isHidden() && await page.locator('#layers-toggle').getAttribute('aria-expanded') === 'false',
+    'phone: the detail layers wait in the closed layers sheet');
+  await page.locator('#layers-toggle').click();
+  check(await page.locator('#detail-layers').isVisible() && await page.locator('#layer-lifts').isVisible(), 'phone: LAYERS opens the sheet with the detail layers');
   await page.locator('#detail-layers summary').click();
-  check(await page.locator('#layer-lifts').isVisible(), 'phone: layers open on tap');
+  check(await page.locator('#layer-lifts').isHidden(), 'phone: the detail layers fold on tap');
   await page.locator('#detail-layers summary').click();
+  await page.locator('#layers-close').click();
+  check(await page.locator('#layers-panel').isHidden() && await page.evaluate(() => document.activeElement.id === 'layers-toggle'), 'phone: Close shuts the sheet and focus returns to LAYERS');
   await page.locator('.site-select', { hasText: 'Fixture Town Lease' }).click();
   await page.waitForTimeout(400);
   await shot(page, 'phone-09-detail-map.png');
@@ -1418,7 +1439,7 @@ async function desktopStub(browser, base) {
   const fallback = await page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
     const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-snowfall-')).map((l) => l.id);
-    return { urls: ids.map((id) => m.getSource(id).url), credit: Boolean(m.getSource('heat-credit')), legend: document.getElementById('recolor-legend').innerText };
+    return { urls: ids.map((id) => m.getSource(id).url), credit: Boolean(m.getSource('heat-credit')), legend: document.getElementById('recolor-legend').textContent };
   });
   check(fallback.urls.length >= 1 && fallback.urls.every((u) => u.startsWith('data:image/png')) && !fallback.credit
     && !/NOAA/.test(fallback.legend) && /smoothed estimates/.test(fallback.legend),
@@ -1430,7 +1451,7 @@ async function desktopStub(browser, base) {
   const seasonFallback = await page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
     const ids = m.getStyle().layers.filter((l) => l.type === 'raster' && l.id.startsWith('heat-season-')).map((l) => l.id);
-    return { urls: ids.map((id) => m.getSource(id).url), legend: document.getElementById('recolor-legend').innerText };
+    return { urls: ids.map((id) => m.getSource(id).url), legend: document.getElementById('recolor-legend').textContent };
   });
   const seasonClear = await sampleHeat(page, [[-107.5, 43.6]]);
   const seasonIn = await sampleHeat(page, [[-112.5, 37.6]]);
@@ -1458,7 +1479,7 @@ async function desktopStub(browser, base) {
   const np = await nojs.newPage();
   await np.goto(`${base}/map/co/fixture-front-range/alpha-peak/`);
   const text = await np.locator('#panel-content').innerText();
-  check((await np.locator('#panel-heading').innerText()) === 'Alpha Peak' && text.includes('Operator compensation') && text.includes('5,300')
+  check((await np.locator('#panel-heading').textContent()) === 'Alpha Peak' && text.includes('Operator compensation') && text.includes('5,300')
     && text.includes('Level 1'), 'no JS visitors see the prerendered resort summary');
   check(await np.locator('#panel-content a[href="/contact"]').count() === 1 && await np.locator('#panel-content .related a').count() === 5, 'prerendered page links the consultation and related tools');
   const ld = JSON.parse(await np.locator('script[type="application/ld+json"]').textContent());
@@ -1470,14 +1491,15 @@ async function desktopStub(browser, base) {
   await page.close();
 }
 
-// The open map area: the map container minus the side panel (desktop) or the sheet (phone), in page pixels.
+// The open map area: the map container minus the padding of the last fit (map.js openPadding: the side panel or the
+// sheet, the layers panel on wide screens, the zoom column and the legend strip), in page pixels. The pan limit
+// centers on it.
 function openArea(page) {
   return page.evaluate(() => {
     const m = window.__careerMap.mapCtl.map;
     const c = m.getContainer().getBoundingClientRect();
-    const p = document.getElementById('panel').getBoundingClientRect();
-    const phone = p.top > c.top + 10 && p.left <= c.left + 1;
-    const box = phone ? { left: c.left, top: c.top, right: c.right, bottom: p.top } : { left: c.left, top: c.top, right: Math.min(c.right, p.left), bottom: c.bottom };
+    const pad = window.__careerMap.mapCtl.openPadding;
+    const box = { left: c.left + pad.left, top: c.top + pad.top, right: c.right - pad.right, bottom: c.bottom - pad.bottom };
     return { ...box, cx: (box.left + box.right) / 2, cy: (box.top + box.bottom) / 2, cont: { left: c.left, top: c.top, width: c.width, height: c.height } };
   });
 }
@@ -1688,7 +1710,7 @@ async function realData(browser, base) {
       const windows = idx.resorts.filter((r) => r[hw] && r[hw][0] <= month && month <= r[hw][1]).length;
       await page.waitForFunction(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/jobs/postings.json')), null, { timeout: 15000 }).catch(() => {});
       await page.waitForTimeout(300);
-      const chipText = await page.locator('#facility-filter .filter-btn[data-filter="hiring"]').innerText();
+      const chipText = (await page.locator('#facility-filter label[for="filter-hiring"] .lp-text').textContent()).trim();
       check(feed.postings.length ? /^Hiring now \(\d+\)$/.test(chipText) : chipText === `Hiring now (${windows})`,
         `real data: ${chipText} (${idx.resorts.filter((r) => r[hw]).length} parsed hiring windows, ${feed.postings.length} postings)`);
       // Pass chips with the real build: the list view keeps exactly the index rows on each pass.
@@ -1696,10 +1718,10 @@ async function realData(browser, base) {
       const onPass = (p) => idx.resorts.filter((r) => Array.isArray(r[pf]) && r[pf].includes(p)).length;
       await page.getByRole('button', { name: 'List view' }).click();
       for (const p of ['epic', 'ikon']) {
-        await page.locator(`#facility-filter .filter-btn[data-filter="${p}"]`).click();
+        await page.locator(`#facility-filter input[data-filter="${p}"]`).check();
         const shown = new Set(await page.locator('#list-view a.tree-resort').evaluateAll((els) => els.map((a) => a.getAttribute('href').split('/').filter(Boolean).pop()))).size;
-        check(onPass(p) > 0 && shown === onPass(p), `real data: the ${p} chip lists ${shown} resorts (${onPass(p)} in the index)`);
-        await page.locator(`#facility-filter .filter-btn[data-filter="${p}"]`).click();
+        check(onPass(p) > 0 && shown === onPass(p), `real data: the ${p} filter lists ${shown} resorts (${onPass(p)} in the index)`);
+        await page.locator(`#facility-filter input[data-filter="${p}"]`).uncheck();
       }
       await page.getByRole('button', { name: 'Map view' }).click();
       await mapIdle(page);
@@ -1760,14 +1782,18 @@ async function realData(browser, base) {
     await shot(page, `real-${vp.name}-national.png`);
     if (vp.name === 'phone') {
       await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 10000 });
+      await page.locator('#layers-toggle').click();
       await page.locator('.recolor-modes .filter-btn[data-mode="snowfall"]').click();
+      await page.locator('#layers-close').click();
       await page.waitForFunction(() => window.__careerMap.mapCtl.map.getStyle().layers.some((l) => l.id.startsWith('heat-snowfall-')), null, { timeout: 15000 });
       await page.waitForTimeout(600);
       const legendBox = await page.locator('#recolor-legend').boundingBox();
       check(legendBox && legendBox.x >= 0 && legendBox.x + legendBox.width <= vp.width && (await page.locator('.heat-about').getAttribute('open')) === null,
         'real data phone: the heat legend fits the screen with its notes folded');
       await shot(page, 'real-phone-heat-snowfall.png');
+      await page.locator('#layers-toggle').click();
       await page.locator('.recolor-modes .filter-btn[data-mode="default"]').click();
+      await page.locator('#layers-close').click();
     }
     // Alaska at its true place (owner feedback 2026-10-14): no inset. The national view stays on the lower 48 with
     // Alaska up and to the left; a drag brings Alaska to the middle of the open map area; zooming out shows both.
@@ -1844,7 +1870,7 @@ async function realData(browser, base) {
         const expected = [file.lifts.features.length && 'Lifts', file.housing.length && 'Housing',
           file.housing.some((s) => s.commutes.some((c) => c.geometry)) && 'Commute', hasTransit && 'Transit',
           file.isochrones.length && 'Drive time'].filter(Boolean);
-        check(JSON.stringify(await page.locator('.detail-toggles label').allInnerTexts()) === JSON.stringify(expected), `real data: only layers with data get a toggle (${expected.join(', ')})`);
+        check(JSON.stringify(await page.locator('.detail-toggles label').allTextContents()) === JSON.stringify(expected), `real data: only layers with data get a toggle (${expected.join(', ')})`);
         if (hasTransit) {
           const t = await page.evaluate(() => ['detail-transit-line', 'detail-transit-stop'].map((id) => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: [id] }).length));
           check(t[0] > 0 && t[1] > 0, `real data: GTFS transit routes and stops draw for ${withDetail.name} (${t[0]} line pieces, ${t[1]} stops; ${file.transit.source_ids.join(', ')})`);
@@ -2117,7 +2143,7 @@ async function housingChecks(browser, stubBase) {
   await popup.close();
   // Show on the detail map: starts the WebGL map, switches housing on and fits the map to the pins.
   const show = sec.locator('button.housing-show-btn');
-  check(await show.innerText() === 'Show on the detail map' && !(await page.evaluate(() => window.__careerMap.mapStarted)), 'Show on the detail map waits for a click');
+  check((await show.textContent()).trim() === 'Show on the detail map' && !(await page.evaluate(() => window.__careerMap.mapStarted)), 'Show on the detail map waits for a click');
   await show.focus();
   await page.keyboard.press('Enter');
   await page.waitForFunction(() => window.__careerMap.mapCtl && window.__careerMap.mapCtl.ready, null, { timeout: 30000 });
@@ -2230,21 +2256,33 @@ async function hiringChecks(browser, base) {
     await ready(page, { start: false });
     await postings;
     await page.waitForTimeout(300);
-    return { ctx, page, w, chip: page.locator('#facility-filter .filter-btn[data-filter="hiring"]') };
+    return { ctx, page, w, chip: page.locator('#facility-filter input[data-filter="hiring"]') };
   };
+  // The option's label text ("Hiring now (3)"); it shows in uppercase, so read its text content.
+  const chipLabel = async (page) => (await page.locator('#facility-filter label[for="filter-hiring"] .lp-text').textContent()).trim();
   const listNames = async (page) => (await page.locator('#list-view a.tree-resort').allInnerTexts()).sort();
 
   // Open roles at Alpha Peak and Bravo Bowl (Fixture Parent board) plus Kilo Notch's window (2026-09 to 2026-12).
   // Alpha Peak's window names no end, so the text alone would not count.
   let { ctx, page, w, chip } = await open('2026-10-13T12:00:00');
-  check(await chip.innerText() === 'Hiring now (3)' && await chip.getAttribute('aria-disabled') === null,
-    `chip counts open roles and current hiring windows (${await chip.innerText()})`);
-  check(JSON.stringify(await page.locator('#facility-filter .filter-btn').allInnerTexts()) === JSON.stringify(['All', 'Ski areas', 'Indoor and training', 'Hiring now (3)', 'Epic', 'Ikon']),
-    'Hiring now sits next to All, Ski areas and Indoor and training, before the pass chips');
+  check(await chipLabel(page) === 'Hiring now (3)' && await chip.getAttribute('aria-disabled') === null,
+    `Hiring now counts open roles and current hiring windows (${await chipLabel(page)})`);
+  check(JSON.stringify(await page.locator('#facility-filter .lp-text').allTextContents()) === JSON.stringify(['All', 'Ski areas', 'Indoor and training', 'Hiring now (3)', 'Epic', 'Ikon']),
+    'Hiring now leads the Show only options, after All, Ski areas and Indoor and training and before the passes');
+  const pill = page.locator('#hiring-pill');
+  check(await pill.isVisible() && (await pill.textContent()).replace(/\s+/g, ' ').trim() === 'Hiring now 3' && await pill.getAttribute('aria-pressed') === 'false',
+    `the header pill shows the Hiring now count (${(await pill.textContent()).replace(/\s+/g, ' ').trim()})`);
+  const live = page.locator('#feed-live');
+  check(await live.isVisible() && await live.locator('time').textContent() === '12 Oct 12:41 UTC' && await live.locator('time').getAttribute('datetime') === '2026-10-12T12:41:00.000Z'
+    && (await live.getAttribute('title')) === 'Jobs feed last updated Oct 12, 2026 at 12:41 UTC',
+    `LIVE shows when the jobs feed last updated (${await live.textContent()})`);
+  check(await page.locator('#today-date').textContent() === 'Tue, 13 Oct 2026' && await page.locator('#today-date').getAttribute('datetime') === '2026-10-13',
+    `the sub bar shows today's date (${await page.locator('#today-date').textContent()})`);
   await page.getByRole('button', { name: 'List view' }).click();
-  await chip.click();
-  check(await chip.getAttribute('aria-pressed') === 'true' && JSON.stringify(await listNames(page)) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Kilo Notch']),
+  await chip.check();
+  check(await chip.isChecked() && JSON.stringify(await listNames(page)) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Kilo Notch']),
     'list view: Hiring now lists the hiring resorts only');
+  check(await pill.getAttribute('aria-pressed') === 'true', 'the header pill shows the filter is on');
   check(await page.waitForFunction(() => document.getElementById('panel-status').textContent.includes('Showing 3 resorts hiring now.'), null, { timeout: 3000 })
     .then(() => true, () => false), 'the filter change is announced');
   await shot(page, 'hiring-01-list.png');
@@ -2257,10 +2295,21 @@ async function hiringChecks(browser, base) {
   });
   check(JSON.stringify(shown) === JSON.stringify(['alpha-peak', 'bravo-bowl', 'kilo-notch']), `map: Hiring now keeps only the hiring resorts (${shown.join(', ')})`);
   await shot(page, 'hiring-02-map.png');
-  await page.getByRole('button', { name: 'All', exact: true }).click();
+  // The rings: a static green ring on each hiring resort, and a pulse over each one the filters keep.
+  const rings = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const ids = (l) => [...new Set(m.queryRenderedFeatures({ layers: [l] }).map((f) => f.properties.id))].sort();
+    const pulse = document.querySelector('.hiring-pulse-ring');
+    return { ring: ids('resorts-hiring'), pulses: document.querySelectorAll('.hiring-pulse').length,
+      anim: pulse ? getComputedStyle(pulse).animationName : null, hidden: [...document.querySelectorAll('.hiring-pulse')].every((e) => e.getAttribute('aria-hidden') === 'true' && e.getAttribute('role') === 'presentation'),
+      pointer: pulse ? getComputedStyle(pulse.parentElement).pointerEvents : null };
+  });
+  check(JSON.stringify(rings.ring) === JSON.stringify(['alpha-peak', 'bravo-bowl', 'kilo-notch']) && rings.pulses === 3 && rings.anim === 'hiring-pulse' && rings.hidden && rings.pointer === 'none',
+    `map: a green ring and a pulse on each hiring resort, hidden from assistive technology and the pointer (${JSON.stringify(rings)})`);
+  await page.locator('#hiring-pill').click();
   await page.waitForTimeout(300);
   const all = await page.evaluate(() => new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'] }).map((f) => f.properties.id)).size);
-  check(all > 3, `All brings every resort back (${all} on screen)`);
+  check(all > 3 && !(await chip.isChecked()) && await page.locator('#hiring-pill').getAttribute('aria-pressed') === 'false', `the pill turns Hiring now off and every resort comes back (${all} on screen)`);
   // The rule itself (map/js/hiring.js hiringNowIds) on synthetic rows: which postings and windows count.
   const unit = await page.evaluate(async () => {
     const { hiringNowIds } = await import('/map/js/hiring.js');
@@ -2291,38 +2340,41 @@ async function hiringChecks(browser, base) {
     const wp = watch(p, 'hiring now early click');
     await p.goto(`${base}/map/${Q}`);
     await ready(p, { start: false });
-    const early = p.locator('#facility-filter .filter-btn[data-filter="hiring"]');
-    check(/^Hiring now( \(1\))?$/.test(await early.innerText()), `until hiring.js loads the chip reads Hiring now (${await early.innerText()})`);
+    const early = p.locator('#facility-filter input[data-filter="hiring"]');
+    check(/^Hiring now( \(1\))?$/.test(await chipLabel(p)), `until hiring.js loads the option reads Hiring now (${await chipLabel(p)})`);
     await p.getByRole('button', { name: 'List view' }).click();
-    await early.click();
-    await p.waitForFunction(() => document.querySelector('[data-filter="hiring"]').getAttribute('aria-pressed') === 'true', null, { timeout: 5000 });
+    await early.check();
+    await p.waitForFunction(() => document.querySelectorAll('#list-view a.tree-resort').length === 1, null, { timeout: 5000 });
     const first = await listNames(p);
     release();
     await p.waitForFunction(() => document.querySelectorAll('#list-view a.tree-resort').length === 3, null, { timeout: 20000 });
     check(JSON.stringify(first) === JSON.stringify(['Kilo Notch']) && JSON.stringify(await listNames(p)) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Kilo Notch'])
-      && await early.innerText() === 'Hiring now (3)', `an early click filters by the windows, then the open roles join (${first.join(', ')})`);
+      && await chipLabel(p) === 'Hiring now (3)' && await early.isChecked(), `an early click filters by the windows, then the open roles join (${first.join(', ')})`);
     wp.assertClean();
     await c.close();
   }
 
   // An empty feed (today's real postings.json): the hiring windows alone.
   ({ ctx, page, w, chip } = await open('2026-10-13T12:00:00', { empty: true }));
-  check(await chip.innerText() === 'Hiring now (1)', `empty feed: the chip counts the hiring windows (${await chip.innerText()})`);
+  check(await chipLabel(page) === 'Hiring now (1)', `empty feed: Hiring now counts the hiring windows (${await chipLabel(page)})`);
+  check(await page.locator('#feed-live').isHidden(), 'empty feed with no fetch time: no LIVE indicator');
   await page.getByRole('button', { name: 'List view' }).click();
-  await chip.click();
+  await chip.check();
   check(JSON.stringify(await listNames(page)) === JSON.stringify(['Kilo Notch']), 'empty feed: the list shows the resort whose window covers today');
   w.assertClean();
   await ctx.close();
 
   // After every window and with no postings: 0, visible and disabled with a short title; a click changes nothing.
   ({ ctx, page, w, chip } = await open('2027-01-15T12:00:00', { empty: true, width: 390, height: 844 }));
-  check(await chip.isVisible() && await chip.innerText() === 'Hiring now (0)' && await chip.getAttribute('aria-disabled') === 'true'
-    && await chip.getAttribute('title') === 'No resort lists an open role or a hiring window for this month.', 'at 0 the chip stays visible, disabled, with a title');
+  await page.locator('#layers-toggle').click();
+  check(await chip.isVisible() && await chipLabel(page) === 'Hiring now (0)' && await chip.getAttribute('aria-disabled') === 'true'
+    && await chip.getAttribute('title') === 'No resort lists an open role or a hiring window for this month.', 'at 0 Hiring now stays visible, disabled, with a title');
   await chip.click({ force: true });
-  check(await chip.getAttribute('aria-pressed') === 'false' && await page.getByRole('button', { name: 'All', exact: true }).getAttribute('aria-pressed') === 'true',
-    'a disabled Hiring now cannot be selected');
+  check(!(await chip.isChecked()) && await page.getByRole('radio', { name: 'All', exact: true }).isChecked()
+    && await page.waitForFunction(() => document.getElementById('panel-status').textContent.startsWith('No resort lists an open role'), null, { timeout: 3000 }).then(() => true, () => false),
+    'a disabled Hiring now cannot be selected; the click says why');
   const fit = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: innerWidth }));
-  check(fit.sw <= fit.vw, 'phone: the six chips never widen the page');
+  check(fit.sw <= fit.vw, 'phone: the layers sheet never widens the page');
   await shot(page, 'hiring-03-phone-zero.png');
   w.assertClean();
   await ctx.close();
@@ -2345,42 +2397,46 @@ async function passChecks(browser, base, stubBase) {
   await ready(page, { start: false });
   await postings;
   await page.waitForTimeout(300);
-  const chip = (k) => page.locator(`#facility-filter .filter-btn[data-filter="${k}"]`);
-  const pressed = async () => (await page.locator('#facility-filter .filter-btn[aria-pressed="true"]').evaluateAll((els) => els.map((e) => e.dataset.filter)));
+  const chip = (k) => page.locator(`#facility-filter input[data-filter="${k}"]`);
+  const chipText = async (k) => (await page.locator(`#facility-filter label[for="filter-${k}"] .lp-text`).textContent()).trim();
+  // The checked options: the Type radio (always one) and the Show only checkboxes.
+  const pressed = async () => (await page.locator('#facility-filter input:checked').evaluateAll((els) => els.map((e) => e.dataset.filter)));
+  const reset = page.getByRole('button', { name: 'Show every resort' });
   const names = async () => (await page.locator('#list-view a.tree-resort').allInnerTexts()).sort();
   const said = (text) => page.waitForFunction((t) => document.getElementById('panel-status').textContent === t, text, { timeout: 3000 }).then(() => true, () => false);
-  check(await chip('epic').innerText() === 'Epic' && await chip('ikon').innerText() === 'Ikon'
+  check(await chipText('epic') === 'Epic' && await chipText('ikon') === 'Ikon' && await chip('epic').getAttribute('type') === 'checkbox'
     && await chip('epic').getAttribute('title') === 'Resorts on the Epic Pass' && await chip('epic').getAttribute('aria-disabled') === null,
-  'Epic and Ikon chips follow Hiring now, with a title naming the pass');
+  'Epic and Ikon checkboxes follow Hiring now, with a title naming the pass');
   // Before the WebGL map starts, the 2D picture keeps only the resorts the chips keep.
   const dots = () => page.locator('#map .map-preview circle').count();
   const allDots = await dots();
-  await chip('epic').click();
+  await chip('epic').check();
   const epicDots = await dots();
-  await chip('epic').click();
+  await chip('epic').uncheck();
   check(allDots === 14 && epicDots === 3 && await dots() === 14, `2D picture: Epic keeps 3 of ${allDots} dots, and turning it off brings them back`);
   await page.getByRole('button', { name: 'List view' }).click();
-  await chip('epic').click();
+  await chip('epic').check();
   check(JSON.stringify(await names()) === JSON.stringify(['Alpha Peak', 'Bravo Bowl', 'Mike Snow Dome']) && await said('Showing 3 resorts on the Epic Pass.'),
     'list view: Epic keeps the Epic Pass resorts, facilities included, and is announced');
-  await chip('ikon').click();
-  check((await names()).length === 6 && JSON.stringify(await pressed()) === JSON.stringify(['epic', 'ikon'])
+  await chip('ikon').check();
+  check((await names()).length === 6 && JSON.stringify(await pressed()) === JSON.stringify(['all', 'epic', 'ikon'])
     && await said('Showing 6 resorts on the Epic Pass or Ikon Pass.'), 'Epic and Ikon together keep the resorts on either pass');
-  await chip('epic').click();
-  check(JSON.stringify(await names()) === JSON.stringify(['Charlie Hill', 'Foxtrot Basin', 'Kilo Notch']), 'a second click turns Epic off');
-  await chip('hiring').click();
-  check(JSON.stringify(await names()) === JSON.stringify(['Kilo Notch']) && JSON.stringify(await pressed()) === JSON.stringify(['hiring', 'ikon'])
+  await chip('epic').uncheck();
+  check(JSON.stringify(await names()) === JSON.stringify(['Charlie Hill', 'Foxtrot Basin', 'Kilo Notch']), 'unchecking Epic turns it off');
+  await chip('hiring').check();
+  check(JSON.stringify(await names()) === JSON.stringify(['Kilo Notch']) && JSON.stringify(await pressed()) === JSON.stringify(['all', 'hiring', 'ikon'])
     && await said('Showing 1 resort hiring now on the Ikon Pass.'), 'Ikon AND Hiring now keeps the hiring Ikon resorts');
-  await page.getByRole('button', { name: 'All', exact: true }).click();
-  check((await names()).length === 14 && JSON.stringify(await pressed()) === JSON.stringify(['all']) && await said('Showing every resort.'),
-    'All clears every chip');
-  await chip('epic').click();
-  await page.getByRole('button', { name: 'Ski areas' }).click();
+  check(await reset.isVisible(), 'Show every resort appears while a filter is on');
+  await reset.click();
+  check((await names()).length === 14 && JSON.stringify(await pressed()) === JSON.stringify(['all']) && await said('Showing every resort.') && await reset.isHidden(),
+    'Show every resort clears every filter');
+  await chip('epic').check();
+  await page.getByRole('radio', { name: 'Ski areas' }).check();
   check(JSON.stringify(await names()) === JSON.stringify(['Alpha Peak', 'Bravo Bowl']) && await said('Showing 2 ski areas on the Epic Pass.'),
     'Epic AND Ski areas drops the indoor facility');
-  await page.getByRole('button', { name: 'Indoor and training' }).click();
+  await page.getByRole('radio', { name: 'Indoor and training' }).check();
   check(JSON.stringify(await names()) === JSON.stringify(['Mike Snow Dome']) && JSON.stringify(await pressed()) === JSON.stringify(['facility', 'epic']),
-    'Epic AND Indoor and training keeps the indoor facility only');
+    'Epic AND Indoor and training keeps the indoor facility only; Type is single select');
   await shot(page, 'passes-01-list.png');
   // The map: the same rule on the resort and facility layers.
   await page.getByRole('button', { name: 'Map view' }).click();
@@ -2391,18 +2447,18 @@ async function passChecks(browser, base, stubBase) {
     return [...new Set(m.queryRenderedFeatures({ layers: ['resorts', 'resorts-facility'] }).map((f) => f.properties.id))].sort();
   });
   check(JSON.stringify(await onMap()) === JSON.stringify(['mike-dome']), 'map: Epic AND Indoor and training (set before the map started) applies once it runs');
-  await page.getByRole('button', { name: 'Indoor and training' }).click();
-  await chip('ikon').click();
+  await page.getByRole('radio', { name: 'All', exact: true }).check();
+  await chip('ikon').check();
   await page.waitForTimeout(300);
   check(JSON.stringify(await onMap()) === JSON.stringify(['alpha-peak', 'bravo-bowl', 'charlie-hill', 'foxtrot-basin', 'kilo-notch', 'mike-dome']),
     `map: Epic or Ikon keeps the six pass resorts (${(await onMap()).join(', ')})`);
-  await chip('hiring').click();
+  await chip('hiring').check();
   await page.waitForTimeout(300);
   check(JSON.stringify(await onMap()) === JSON.stringify(['alpha-peak', 'bravo-bowl', 'kilo-notch']), 'map: the passes AND Hiring now');
   await shot(page, 'passes-02-map.png');
-  await page.getByRole('button', { name: 'All', exact: true }).click();
+  await reset.click();
   await page.waitForTimeout(300);
-  check((await onMap()).length > 6, 'map: All brings every resort back');
+  check((await onMap()).length > 6, 'map: Show every resort brings every resort back');
   // A build without pass data (older index): the chips stay visible and disabled with a title.
   const unit = await page.evaluate(async () => {
     const { matchesFilter, isFiltered, NO_FILTER } = await import('/map/js/data.js');
@@ -2456,19 +2512,291 @@ async function passChecks(browser, base, stubBase) {
   check(pre.includes('<dt>Passes</dt>') && pre.includes('Epic Pass: 7 days (2025/26 list)') && pre.includes('2025/26 season · Blackout dates apply')
     && pre.includes('badge-estimated') && pre.includes('href="https://example.com/fixture/pass-site"'), 'stub: prerendered Passes line with badge and source; a previous season fallback names its list');
 
-  // Phone: six chips scroll sideways inside their row.
+  // Phone: the filters sit in the layers sheet behind LAYERS.
   const pp = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const wpp = watch(pp, 'pass chips phone');
   await pp.goto(`${base}/map/${Q}`);
   await ready(pp, { start: false });
-  await pp.locator('#facility-filter .filter-btn[data-filter="ikon"]').scrollIntoViewIfNeeded();
-  await pp.locator('#facility-filter .filter-btn[data-filter="ikon"]').click();
+  await pp.locator('#layers-toggle').click();
+  await pp.locator('#facility-filter input[data-filter="ikon"]').scrollIntoViewIfNeeded();
+  await pp.locator('#facility-filter input[data-filter="ikon"]').check();
   const fit = await pp.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: innerWidth,
-    pressed: document.querySelector('[data-filter="ikon"]').getAttribute('aria-pressed') }));
-  check(fit.sw <= fit.vw && fit.pressed === 'true', 'phone: the Ikon chip is reachable and the row never widens the page');
+    pressed: document.querySelector('#facility-filter [data-filter="ikon"]').checked }));
+  check(fit.sw <= fit.vw && fit.pressed, 'phone: the Ikon checkbox is reachable in the layers sheet and never widens the page');
   await shot(pp, 'passes-04-phone.png');
   wpp.assertClean();
   await pp.close();
+}
+
+// World Monitor style chrome (ROADMAP item 21): the header bar and sub bar, the layers panel with its radio and
+// checkbox semantics, the MAP / SATELLITE toggle and its memory, the Link button, the region menu, the legend strip,
+// the zoom column with home, the hiring pulse and reduced motion, the phone header and layers sheet, and no web font.
+async function consoleChecks(browser, base, stubBase) {
+  log('\nConsole look: header, layers panel, basemap toggle, legend, controls');
+  const fonts = [];
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: base });
+  const page = await ctx.newPage();
+  const w = watch(page, 'console look');
+  page.on('request', (r) => { if (/fonts\.(googleapis|gstatic)\.com/.test(r.url())) fonts.push(r.url()); });
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await page.waitForTimeout(300);
+
+  // Header bar: wordmark, region menu, search, Link, List view; sub bar: view title, date, MAP / SATELLITE.
+  const hdr = await page.evaluate(() => {
+    const vis = (id) => { const e = document.getElementById(id); return Boolean(e && e.offsetParent && !e.hidden); };
+    const h1 = document.querySelector('.mh-title');
+    return { title: h1.textContent, upper: getComputedStyle(h1).textTransform, mono: /mono/i.test(getComputedStyle(document.body).fontFamily),
+      shown: ['map-region', 'map-search', 'map-link', 'list-toggle'].map(vis), layers: vis('layers-toggle'),
+      view: document.getElementById('view-title').textContent, tone: [...document.querySelectorAll('#tone-toggle button')].map((b) => [b.textContent, b.getAttribute('aria-pressed')]) };
+  });
+  check(hdr.title === 'Snowsports Career Map' && hdr.upper === 'uppercase' && hdr.mono, `header: uppercase wordmark in the monospace stack (${hdr.title})`);
+  check(hdr.shown.every(Boolean) && !hdr.layers, `header: region menu, search, Link and List view show; the LAYERS button is for phones (${hdr.shown})`);
+  check(hdr.view === 'National viewUnited States' && JSON.stringify(hdr.tone) === JSON.stringify([['Map', 'true'], ['Satellite', 'false']]),
+    `sub bar: the view title and MAP pressed by default (${hdr.view}, ${JSON.stringify(hdr.tone)})`);
+
+  // One layers panel at the top left: LAYERS (collapsible) with a Type radio group and Show only checkboxes.
+  const lp = await page.evaluate(() => {
+    const p = document.getElementById('layers-panel').getBoundingClientRect();
+    const m = document.getElementById('map').getBoundingClientRect();
+    const radios = [...document.querySelectorAll('#facility-filter input[type="radio"]')];
+    const boxes = [...document.querySelectorAll('#facility-filter input[type="checkbox"]')];
+    const legend = (el) => el.closest('fieldset').querySelector('legend').textContent;
+    return { left: p.left - m.left, top: p.top - m.top, width: p.width, radios: radios.map((r) => r.dataset.filter), radioName: new Set(radios.map((r) => r.name)).size,
+      radioLegend: legend(radios[0]), boxes: boxes.map((b) => b.dataset.filter), boxLegend: legend(boxes[0]), checked: radios.filter((r) => r.checked).map((r) => r.dataset.filter),
+      round: getComputedStyle(radios[0]).borderRadius, square: getComputedStyle(boxes[0]).borderRadius };
+  });
+  check(lp.left === 10 && lp.top === 10 && lp.width === 232, `layers panel floats at the top left of the map (${lp.left}, ${lp.top}, ${lp.width} px wide)`);
+  check(JSON.stringify(lp.radios) === JSON.stringify(['all', 'ski_area', 'facility']) && lp.radioName === 1 && lp.radioLegend === 'Type' && JSON.stringify(lp.checked) === JSON.stringify(['all']),
+    'Type is one radio group (All, Ski areas, Indoor and training) with All checked');
+  check(JSON.stringify(lp.boxes) === JSON.stringify(['hiring', 'epic', 'ikon']) && lp.boxLegend === 'Show only', 'Show only holds the Hiring now, Epic and Ikon checkboxes');
+  check(lp.round === '50%' && lp.square === '2px', `radios look round and checkboxes square (${lp.round}, ${lp.square})`);
+  // Arrow keys move through the radio group and apply the type, as a radio group does.
+  await page.getByRole('radio', { name: 'All', exact: true }).focus();
+  await page.keyboard.press('ArrowDown');
+  const afterKey = await page.evaluate(() => ({ checked: document.querySelector('#facility-filter input[type="radio"]:checked').dataset.filter, focus: document.activeElement.dataset.filter }));
+  check(afterKey.checked === 'ski_area' && afterKey.focus === 'ski_area'
+    && await page.waitForFunction(() => document.getElementById('panel-status').textContent === 'Showing 12 ski areas.', null, { timeout: 3000 }).then(() => true, () => false),
+    'ArrowDown in Type selects Ski areas and announces it');
+  await page.keyboard.press('ArrowUp');
+  check(await page.getByRole('radio', { name: 'All', exact: true }).isChecked(), 'ArrowUp goes back to All');
+  await page.locator('#layers-box > summary').click();
+  check(await page.locator('#facility-filter').isHidden() && (await page.locator('#layers-box').getAttribute('open')) === null, 'the LAYERS section folds');
+  await page.locator('#layers-box > summary').click();
+  check(await page.locator('#facility-filter').isVisible(), 'and opens again');
+
+  // Legend strip: centered along the bottom of the open map area, with the marker categories and Hiring now.
+  const strip = await page.evaluate(() => {
+    const el = document.getElementById('map-legend');
+    const items = [...el.querySelectorAll('.ml-items li')].map((li) => li.textContent);
+    const b = el.querySelector('.ml-items').getBoundingClientRect(); const t = el.querySelector('.ml-title').getBoundingClientRect();
+    const m = document.getElementById('map').getBoundingClientRect();
+    const lpR = document.getElementById('layers-panel').getBoundingClientRect().right;
+    const pl = document.getElementById('panel').getBoundingClientRect().left;
+    return { items, title: el.querySelector('.ml-title').textContent, mid: (t.left + b.right) / 2, area: (lpR + pl) / 2, bottom: m.bottom - b.bottom };
+  });
+  check(JSON.stringify(strip.items) === JSON.stringify(['Tier A', 'Tier B', 'Indoor', 'Training center', 'Cluster', 'Hiring now']) && strip.title === 'Legend',
+    `legend strip lists the marker categories and Hiring now (${strip.items.join(', ')})`);
+  check(Math.abs(strip.mid - strip.area) < 3 && strip.bottom > 0 && strip.bottom < 20, `legend strip is centered along the bottom of the open map area (off by ${(strip.mid - strip.area).toFixed(1)} px, ${strip.bottom.toFixed(0)} px up)`);
+
+  // MAP / SATELLITE before the map starts: the picture's underlay carries the MAP color matrix.
+  await page.waitForFunction(() => document.querySelector('.map-preview .map-preview-underlay feImage'), null, { timeout: 15000 });
+  const pvMap = await page.evaluate(() => ({ matrix: document.querySelectorAll('.map-preview .map-preview-underlay feColorMatrix').length, glow: Boolean(document.querySelector('.map-preview filter feGaussianBlur')) }));
+  check(pvMap.matrix > 0 && pvMap.glow, 'MAP darkens the 2D picture underlay with a color matrix; the dots get a blurred halo');
+  const unit = await page.evaluate(async () => {
+    const { toneMatrix } = await import('/map/js/preview.js');
+    const { config } = await import('/map/js/config.js');
+    // The shader: rgb + (mean - rgb) s, then (x - 0.5) c + 0.5, then lo + (hi - lo) x.
+    const shade = (p, rgb) => {
+      const sat = p['raster-saturation']; const con = p['raster-contrast'];
+      const s = sat > 0 ? 1 - 1 / (1.001 - sat) : -sat; const c = con > 0 ? 1 / (1 - con) : 1 + con;
+      const mean = (rgb[0] + rgb[1] + rgb[2]) / 3;
+      return rgb.map((v) => { const a = v + (mean - v) * s; const b = (a - 0.5) * c + 0.5; return p['raster-brightness-min'] + (p['raster-brightness-max'] - p['raster-brightness-min']) * b; });
+    };
+    const p = config.basemap.tone.map.underlay;
+    const m = toneMatrix(p);
+    const apply = (rgb) => [0, 1, 2].map((r) => m[r * 5] * rgb[0] + m[r * 5 + 1] * rgb[1] + m[r * 5 + 2] * rgb[2] + m[r * 5 + 4]);
+    const samples = [[0.17, 0.24, 0.29], [0.37, 0.37, 0.31], [0.6, 0.55, 0.5]];
+    return { worst: Math.max(...samples.map((x) => Math.max(...apply(x).map((v, i) => Math.abs(v - shade(p, x)[i]))))),
+      neutral: toneMatrix(config.basemap.tone.satellite.underlay) };
+  });
+  check(unit.worst < 1e-3 && unit.neutral === null, `the picture's color matrix matches MapLibre's raster math (worst ${unit.worst.toExponential(1)}); SATELLITE is neutral`);
+  await page.locator('#tone-toggle button[data-tone="satellite"]').click();
+  const pvSat = await page.evaluate(() => ({ pressed: document.querySelector('#tone-toggle [data-tone="satellite"]').getAttribute('aria-pressed'),
+    saved: localStorage.getItem('careermap:basemap'), matrix: document.querySelectorAll('.map-preview .map-preview-underlay feColorMatrix').length,
+    under: document.querySelectorAll('.map-preview .map-preview-underlay feImage').length, tone: document.body.dataset.tone }));
+  check(pvSat.pressed === 'true' && pvSat.saved === 'satellite' && pvSat.matrix === 0 && pvSat.under > 0 && pvSat.tone === 'satellite',
+    `SATELLITE redraws the picture in full color and is remembered (${JSON.stringify(pvSat)})`);
+  check(await page.waitForFunction(() => document.getElementById('panel-status').textContent.startsWith('Satellite basemap'), null, { timeout: 3000 }).then(() => true, () => false),
+    'the basemap change is announced');
+  // The choice holds across a reload, and the WebGL map starts in it.
+  await page.reload();
+  await ready(page);
+  await mapIdle(page);
+  const glSat = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    return { pressed: document.querySelector('#tone-toggle [data-tone="satellite"]').getAttribute('aria-pressed'), bg: m.getPaintProperty('background', 'background-color'),
+      sat: m.getPaintProperty('underlay-lower48-small', 'raster-saturation'), img: m.getPaintProperty('imagery', 'raster-saturation') };
+  });
+  check(glSat.pressed === 'true' && glSat.bg === '#0a0e14' && glSat.sat === 0 && glSat.img === -0.35, `after a reload the map starts in SATELLITE, full color (${JSON.stringify(glSat)})`);
+  await page.locator('#tone-toggle button[data-tone="map"]').click();
+  const glMap = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    return { bg: m.getPaintProperty('background', 'background-color'), sat: m.getPaintProperty('underlay-lower48-small', 'raster-saturation'),
+      con: m.getPaintProperty('underlay-lower48-small', 'raster-contrast'), max: m.getPaintProperty('underlay-lower48-small', 'raster-brightness-max'),
+      img: m.getPaintProperty('imagery', 'raster-saturation'), saved: localStorage.getItem('careermap:basemap') };
+  });
+  check(glMap.bg === '#050606' && glMap.sat === -1 && glMap.con === 0.5 && glMap.max === 0.75 && glMap.img === -1 && glMap.saved === 'map',
+    `MAP repaints the underlay and the imagery into a dark monochrome (${JSON.stringify(glMap)})`);
+  await shot(page, 'console-01-national-map.png');
+
+  // Markers: a soft halo under each dot (hidden under the heat maps), the dots on top, hit targets unchanged.
+  const glow = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const ids = m.getStyle().layers.map((l) => l.id);
+    return { below: ids.indexOf('resorts-glow') >= 0 && ids.indexOf('resorts-glow') < ids.indexOf('resorts'), blur: m.getPaintProperty('resorts-glow', 'circle-blur'),
+      ring: ids.indexOf('resorts-hiring') > ids.indexOf('resorts-facility') };
+  });
+  check(glow.below && glow.blur === 1 && glow.ring, 'each dot draws a blurred halo under its crisp core; the hiring ring sits on top');
+
+  // Zoom column on the right edge of the open map area: zoom in, zoom out, home, then the attribution.
+  const ctl = await page.evaluate(() => {
+    const right = document.querySelector('.maplibregl-ctrl-top-right');
+    const btns = [...right.querySelectorAll('button')].map((b) => ({ label: b.getAttribute('aria-label') || b.title, w: b.offsetWidth, h: b.offsetHeight }));
+    const r = right.getBoundingClientRect(); const pl = document.getElementById('panel').getBoundingClientRect().left;
+    return { btns, edge: pl - r.right, left: document.querySelectorAll('.maplibregl-ctrl-top-left .maplibregl-ctrl').length };
+  });
+  const labels = ctl.btns.map((b) => b.label);
+  check(labels[0] === 'Zoom in' && labels[1] === 'Zoom out' && labels[2] === 'Back to the national view' && ctl.btns.slice(0, 3).every((b) => b.w === 32 && b.h === 32)
+    && Math.abs(ctl.edge) < 1 && ctl.left === 0, `square zoom, zoom out and home buttons on the right edge of the map (${labels.join(', ')})`);
+  // Home returns to the national view from anywhere.
+  await page.locator('.nav-list a', { hasText: 'Colorado' }).click();
+  await page.waitForURL(/\/map\/co\/\?data=/);
+  await mapIdle(page);
+  check((await page.locator('#view-title').textContent()) === 'StateColorado' && (await page.locator('#map-region-btn .map-region-label').textContent()) === 'Colorado',
+    'sub bar and region menu follow the view (Colorado)');
+  await page.getByRole('button', { name: 'Back to the national view' }).click();
+  await page.waitForURL(/\/map\/\?data=/);
+  await mapIdle(page);
+  check(await heading(page) === 'United States', 'home returns to the national view');
+  // At the national view, home brings a panned map back.
+  const c0 = await page.evaluate(() => window.__careerMap.mapCtl.map.getCenter().toArray());
+  await page.evaluate(() => window.__careerMap.mapCtl.map.jumpTo({ center: [-80, 35], zoom: 5 }));
+  await page.getByRole('button', { name: 'Back to the national view' }).click();
+  await page.waitForTimeout(1200);
+  await mapIdle(page);
+  const c1 = await page.evaluate(() => ({ c: window.__careerMap.mapCtl.map.getCenter().toArray(), z: window.__careerMap.mapCtl.map.getZoom() }));
+  check(Math.hypot(c1.c[0] - c0[0], c1.c[1] - c0[1]) < 0.5 && c1.z < 4.5, 'at the national view home brings a panned map back to the national frame');
+
+  // Region menu: National and every state with resorts, as links; Escape closes it; a state opens its route.
+  const region = page.locator('#map-region-btn');
+  await region.click();
+  const menu = await page.evaluate(() => [...document.querySelectorAll('#map-region-list a')].map((a) => [a.textContent, a.getAttribute('href'), a.getAttribute('aria-current')]));
+  const states = JSON.parse(fs.readFileSync(path.join(REPO, 'tests', 'map', 'fixtures', 'states.json'), 'utf8')).states.filter((x) => x.resort_count > 0).sort((a, b) => a.name.localeCompare(b.name));
+  check(await region.getAttribute('aria-expanded') === 'true' && menu[0][0] === 'National' && menu[0][2] === 'true'
+    && JSON.stringify(menu.slice(1).map((m) => m[0])) === JSON.stringify(states.map((x) => x.name)) && menu.slice(1).every((m, i) => m[1] === `/map/${states[i].code.toLowerCase()}/?data=${FIX}`),
+    `region menu lists National and the ${states.length} states with resorts, as links to their routes`);
+  await page.keyboard.press('Escape');
+  check(await page.locator('#map-region-list').isHidden() && await region.getAttribute('aria-expanded') === 'false' && await page.evaluate(() => document.activeElement.id === 'map-region-btn'),
+    'Escape closes the region menu and focus returns to its button');
+  await region.focus();
+  await page.keyboard.press('ArrowDown');
+  check(await page.evaluate(() => document.activeElement.closest('#map-region-list') && document.activeElement.dataset.region === 'national'), 'ArrowDown opens the menu on the current region');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await page.waitForURL(new RegExp(`/map/${states[0].code.toLowerCase()}/\\?data=`));
+  check(await heading(page) === states[0].name && await page.locator('#map-region-list').isHidden() && (await page.locator('#map-region-btn .map-region-label').textContent()) === states[0].name,
+    `a region opens its state route (${states[0].name})`);
+
+  // Link copies the current deep link and confirms it in the polite status region.
+  await page.getByRole('button', { name: 'Copy a link to this view' }).click();
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  check(copied === page.url() && await page.locator('.mh-copied').isVisible()
+    && await page.waitForFunction(() => document.getElementById('panel-status').textContent === 'Link to this view copied.', null, { timeout: 3000 }).then(() => true, () => false),
+    `Link copies the deep link (${copied.replace(base, '')}) and says so`);
+  await axeCheck(page, 'console look, desktop with the map running');
+  check(fonts.length === 0, `map pages load no web font (${fonts.length} font requests)`);
+  w.assertClean();
+  await ctx.close();
+
+  // Reduced motion: the green rings stay, the pulse never runs.
+  const rm = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' });
+  await rm.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+  const rp = await rm.newPage();
+  const wr = watch(rp, 'reduced motion');
+  const postings = rp.waitForResponse((r) => r.url().includes('/jobs/postings.json'), { timeout: 20000 });
+  await rp.goto(`${base}/map/${Q}`);
+  await ready(rp);
+  await postings;
+  await mapIdle(rp);
+  await rp.waitForFunction(() => document.querySelector('#hiring-pill') && !document.querySelector('#hiring-pill').hidden, null, { timeout: 10000 });
+  await rp.waitForTimeout(400);
+  const still = await rp.evaluate(() => ({ pulses: document.querySelectorAll('.hiring-pulse').length,
+    rings: new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['resorts-hiring'] }).map((f) => f.properties.id)).size }));
+  check(still.pulses === 0 && still.rings === 3, `reduced motion: no pulse, the three green rings stay (${JSON.stringify(still)})`);
+  wr.assertClean();
+  await rm.close();
+
+  // Storage blocked (a private window or a preview): the toggle still works and the map defaults to MAP.
+  const nb = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await nb.addInitScript(() => {
+    const boom = () => { throw new DOMException('blocked', 'SecurityError'); };
+    try { Object.defineProperty(window, 'localStorage', { get: boom, configurable: true }); } catch { /* fall back below */ }
+    Storage.prototype.getItem = boom;
+    Storage.prototype.setItem = boom;
+  });
+  const bp = await nb.newPage();
+  const errs = [];
+  bp.on('pageerror', (e) => errs.push(e.message));
+  await bp.goto(`${base}/map/${Q}`);
+  await ready(bp, { start: false });
+  await bp.locator('#tone-toggle button[data-tone="satellite"]').click();
+  check(errs.length === 0 && await bp.locator('#tone-toggle [data-tone="satellite"]').getAttribute('aria-pressed') === 'true',
+    `storage blocked: MAP is the default and the toggle still switches (${errs.join('; ') || 'no errors'})`);
+  await nb.close();
+
+  // Phone: the header keeps the wordmark, search and LAYERS; LAYERS opens the panel as a sheet; nothing overflows.
+  for (const vp of [{ width: 390, height: 844 }, { width: 320, height: 640 }]) {
+    const pc = await browser.newContext({ viewport: vp, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+    const pp = await pc.newPage();
+    const wp = watch(pp, `console phone ${vp.width}`);
+    await pp.goto(`${base}/map/${Q}`);
+    await ready(pp, { start: false });
+    await pp.waitForTimeout(300);
+    const lay = await pp.evaluate(() => {
+      const bar = document.querySelector('.mh-bar');
+      const shown = [...bar.querySelectorAll(':scope > *')].filter((e) => e.offsetParent && getComputedStyle(e).position !== 'absolute').map((e) => e.id || e.className);
+      const r = (sel) => document.querySelector(sel).getBoundingClientRect();
+      const strip = document.getElementById('map-legend');
+      return { shown, sw: document.documentElement.scrollWidth, vw: innerWidth, barH: r('.mh-bar').height, sub: document.getElementById('list-toggle').closest('.mh-sub') !== null,
+        stripTop: r('#map-legend').top - r('#map').top, stripScroll: getComputedStyle(strip).overflowX, stripWide: strip.scrollWidth > strip.clientWidth,
+        sheet: getComputedStyle(document.getElementById('layers-panel')).display };
+    });
+    const want = vp.width >= 380 ? ['mh-title', 'map-search', 'layers-toggle'] : ['map-search', 'layers-toggle'];
+    check(JSON.stringify(lay.shown) === JSON.stringify(want) && lay.sub, `phone ${vp.width}: the header holds ${want.join(', ')}; List view moves to the sub bar (${lay.shown.join(', ')})`);
+    check(lay.sw <= lay.vw, `phone ${vp.width}: nothing overflows the page (${lay.sw} px of ${lay.vw})`);
+    check(lay.stripTop >= 0 && lay.stripTop < 16 && lay.stripScroll === 'auto' && lay.stripWide && lay.sheet === 'none',
+      `phone ${vp.width}: the legend strip sits at the top of the map and scrolls sideways; the layers sheet starts closed`);
+    await pp.locator('#layers-toggle').click();
+    const sheet = await pp.evaluate(() => {
+      const p = document.getElementById('layers-panel').getBoundingClientRect();
+      return { open: document.getElementById('layers-toggle').getAttribute('aria-expanded'), bottom: Math.round(innerHeight - p.bottom), width: Math.round(p.width),
+        focus: document.activeElement.classList.contains('lp-sheet-title'), region: Boolean(document.querySelector('#lp-view #map-region')), link: Boolean(document.querySelector('#lp-view #map-link')),
+        sw: document.documentElement.scrollWidth, vw: innerWidth };
+    });
+    check(sheet.open === 'true' && sheet.bottom === 0 && sheet.width === vp.width && sheet.focus && sheet.region && sheet.link && sheet.sw <= sheet.vw,
+      `phone ${vp.width}: LAYERS opens the layers sheet along the bottom with the region menu and Link at its top (${JSON.stringify(sheet)})`);
+    if (vp.width === 390) {
+      await shot(pp, 'console-02-phone-layers-sheet.png');
+      await axeCheck(pp, 'phone layers sheet open');
+    }
+    await pp.keyboard.press('Escape');
+    check(await pp.locator('#layers-panel').isHidden() && await pp.evaluate(() => document.activeElement.id === 'layers-toggle'), `phone ${vp.width}: Escape closes the sheet and focus returns to LAYERS`);
+    if (vp.width === 320) await shot(pp, 'console-03-phone-320.png');
+    wp.assertClean();
+    await pc.close();
+  }
 }
 
 // Resort search (map/js/search.js): loose matching and ranking, keyboard selection before the map starts, the deep
@@ -2614,8 +2942,8 @@ async function searchChecks(browser, base, stubBase) {
   await pp.goto(`${base}/map/${Q}`);
   await ready(pp, { start: false });
   const box = (sel) => pp.locator(sel).boundingBox();
-  const [hdr, sbox, tog] = [await box('.map-header'), await box('#map-search'), await box('#list-toggle')];
-  check(sbox.y >= hdr.y && sbox.y + sbox.height <= hdr.y + hdr.height && sbox.x + sbox.width <= tog.x, 'phone: the search box fits the top bar');
+  const [hdr, sbox, tog] = [await box('.mh-bar'), await box('#map-search'), await box('#layers-toggle')];
+  check(sbox.y >= hdr.y && sbox.y + sbox.height <= hdr.y + hdr.height && sbox.x + sbox.width <= tog.x, 'phone: the search box fits the top bar beside LAYERS');
   await pp.locator('#sheet-handle').click();
   await pp.waitForTimeout(400);
   const pInput = pp.getByRole('combobox', { name: 'Search resorts, clusters and states' });
@@ -2673,6 +3001,7 @@ try {
   await liveLinksChecks(browser, STUB_BASE);
   await housingChecks(browser, STUB_BASE);
   await hiringChecks(browser, REPO_BASE);
+  await consoleChecks(browser, REPO_BASE, STUB_BASE);
   await passChecks(browser, REPO_BASE, STUB_BASE);
   await realData(browser, REPO_BASE);
   await browser.close();
