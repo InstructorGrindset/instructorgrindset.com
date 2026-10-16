@@ -135,6 +135,8 @@ function watch(page, label, { allowFail = null } = {}) {
 
 async function ready(page, { start = true } = {}) {
   await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 20000 });
+  // The header chrome (controls.js: region menu, Link, layers sheet, tone buttons) comes alive after the first paint.
+  await page.waitForFunction(() => window.__careerMap.chromeReady || window.__careerMap.error, null, { timeout: 20000 });
   // The WebGL map starts on the first click or tap (owner decision 9); most checks need it running.
   if (start && await page.evaluate(() => Boolean(window.__careerMap.startMap) && !window.__careerMap.mapStarted)) {
     await page.locator('#map-start').click();

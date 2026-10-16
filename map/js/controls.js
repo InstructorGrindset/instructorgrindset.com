@@ -1,31 +1,12 @@
-// Header bar, sub bar and layers panel chrome (ROADMAP item 21, World Monitor style): the MAP / SATELLITE toggle,
-// the region jump menu, the Link button, the view title and today's date, the LIVE jobs feed indicator, and the
-// phone layers sheet. The filters inside the layers panel live in app.js, next to the filter state they drive.
-import { config, isPhone, savedTone, saveTone } from './config.js';
+// Header and layers panel chrome (ROADMAP item 21, World Monitor style) that the first paint does not need: the MAP /
+// SATELLITE toggle's buttons, the region jump menu, the Link button, the phone layers sheet and the LIVE jobs feed
+// indicator. app.js imports this module after the first paint, so it adds no request before it; the controls are
+// on screen from the start (so nothing shifts when they come alive) and work once it has loaded.
+import { isPhone, saveTone } from './config.js';
 import { hrefFor } from './router.js';
 import { h, monthShort } from './ui.js';
 
 const pad2 = (n) => String(n).padStart(2, '0');
-const WEEKDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-/** "Fri, 16 Oct 2026" for the sub bar (the viewer's own date), with its ISO date. */
-export function todayText(d = new Date()) {
-  return {
-    text: `${WEEKDAY[d.getDay()]}, ${pad2(d.getDate())} ${monthShort(d.getMonth() + 1)} ${d.getFullYear()}`,
-    iso: `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`,
-  };
-}
-
-/** [kind, name] for the sub bar: ['Resort', 'Vail'], ['National view', 'United States']. */
-export function viewTitle(index, view) {
-  switch (view.level) {
-    case 'state': return ['State', index.states.get(view.stateCode).name];
-    case 'cluster': return ['Cluster', index.clusters.get(view.clusterId).name];
-    case 'resort': return ['Resort', index.resorts.get(view.resortId).name];
-    case 'compare': return ['Compare', `${view.compare.length} resorts in ${index.clusters.get(view.clusterId).name}`];
-    default: return ['National view', 'United States'];
-  }
-}
 
 /**
  * The jobs feed time (postings.json fetched_at) as "15 Oct 17:19 UTC", or null when the feed has no real fetch time.
@@ -43,29 +24,20 @@ export function feedTime(iso) {
 }
 
 /**
- * MAP / SATELLITE: two pressed buttons in the sub bar. The choice is remembered in this browser (config.saveTone,
- * guarded) and defaults to MAP. onChange(tone) redraws the picture or repaints the WebGL map.
+ * MAP / SATELLITE: the two pressed buttons in the sub bar (app.js shows them in the viewer's tone at startup). A click
+ * saves the choice in this browser (config.saveTone, guarded), calls onChange(tone) and says so.
  */
-export function createToneToggle(group, { onChange, announce }) {
-  let tone = savedTone();
-  const buttons = group ? [...group.querySelectorAll('button[data-tone]')] : [];
-  const sync = () => {
-    for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.tone === tone));
-    document.body.dataset.tone = tone;
-  };
-  for (const b of buttons) {
+export function createToneToggle(group, { current, onChange, announce }) {
+  if (!group) return;
+  for (const b of group.querySelectorAll('button[data-tone]')) {
     b.addEventListener('click', () => {
-      if (b.dataset.tone === tone) return;
-      tone = b.dataset.tone;
-      sync();
+      const tone = b.dataset.tone;
+      if (tone === current()) return;
       saveTone(tone);
       onChange(tone);
       announce(tone === 'satellite' ? 'Basemap set to Satellite, in full color.' : 'Basemap set to Map, in dark monochrome.');
     });
   }
-  sync();
-  if (group) group.hidden = false;
-  return { get tone() { return tone; } };
 }
 
 /**
@@ -152,7 +124,6 @@ export function createLinkButton(root, announce) {
       timer = setTimeout(() => { done.hidden = true; }, 2000);
     }
   });
-  root.hidden = false;
 }
 
 /**
@@ -171,28 +142,7 @@ export function createLayersSheet(panel, toggle, close) {
   toggle.addEventListener('click', () => set(!panel.classList.contains('is-open')));
   if (close) close.addEventListener('click', () => set(false));
   panel.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isPhone() && panel.classList.contains('is-open')) set(false); });
-  toggle.hidden = false;
   return { set, get open() { return panel.classList.contains('is-open'); } };
-}
-
-/**
- * Phones keep the header to the wordmark, search and LAYERS: the region menu and Link move to the top of the layers
- * sheet and List view to the sub bar. Each control keeps one element, moved back on wider screens.
- */
-export function placeForViewport(moves) {
-  const homes = new Map();
-  const place = () => {
-    const phone = isPhone();
-    for (const [el, target, before] of moves) {
-      if (!el || !target) continue;
-      if (!homes.has(el)) { const mark = document.createComment(''); el.before(mark); homes.set(el, mark); }
-      if (phone) { if (el.parentElement !== target) target.insertBefore(el, before || null); } else if (el.previousSibling !== homes.get(el)) homes.get(el).after(el);
-    }
-  };
-  place();
-  const mq = window.matchMedia(`(max-width: ${config.phoneMaxWidth}px)`);
-  if (mq.addEventListener) mq.addEventListener('change', place);
-  return place;
 }
 
 /** LIVE: shown only when the jobs feed has a real fetch time, with that time. */

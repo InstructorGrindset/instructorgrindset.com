@@ -973,7 +973,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 1. The page head preloads `map-index.json`, `clusters.geojson` and `states.json`. The map control CSS loads without
    blocking the paint. `/map/index.html` carries the national heading and intro as its prerendered block, so the
    first paint already shows real text. The modules on this path
-   (`app`, `config`, `data`, `router`, `panel`, `livelinks`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`, `controls`) carry no
+   (`app`, `config`, `data`, `router`, `panel`, `livelinks`, `ui`, `labels`, `listview`, `sheet`, `meta`, `preview`, `camera`) carry no
    Zod and no charts. The first paint files are checked by hand in `data.js`, mirroring `schemas.js`. `app.js` runs
    its startup as three short tasks (index the data, render the panel, draw the picture) so no single task blocks
    the page for long.
@@ -1130,7 +1130,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   60 ms). On the 11 resorts with climate charts, Chart.js (69 KB), its first canvas (about 130 ms) and the chart
   animations now cost their time when the reader scrolls to the section.
 
-### Console look (ROADMAP item 21; `map/css/map.css`, `map/js/controls.js`, `map/js/app.js`, `map/js/map.js`)
+### Console look (ROADMAP item 21; `map/css/map.css`, `map/css/map-live.css`, `map/js/app.js`, `map/js/controls.js`, `map/js/map.js`)
 World Monitor (worldmonitor.app, AGPL 3.0) is a visual reference only: no code, CSS rules, icons or images are copied;
 only plain color values are reused. Every rule is scoped to map pages (`body.map-page`, and `body.credits-page` on
 `/map/credits/`, which links `map.css` for its tokens); `/assets/global.css` and `/assets/sidebar.css` are unchanged,
@@ -1142,7 +1142,7 @@ and the site nav (`/assets/nav.js`) keeps working with a squared hamburger.
   Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace. Uppercase letter spaced labels for headings, chips, badges
   and buttons; square 1px bordered controls (radius 2 to 3 px). The Inter loader is gone from map pages.
 * Header bar (`.mh-bar`): the wordmark (the page `h1`, uppercase by CSS), the region jump menu, the HIRING NOW pill,
-  the LIVE indicator, the search box, Link and List view. The region menu (`createRegionMenu`) is a disclosure button
+  the LIVE indicator, the search box, Link and List view. The region menu (`controls.js` `createRegionMenu`) is a disclosure button
   with real links to National and every state with resorts (built on first open; Down opens it on the current
   region, Up and Down move, Escape closes it). LIVE shows only when `jobs/postings.json` has a real `fetched_at`
   (`showFeedTime`): "Live jobs 15 Oct 17:19 UTC", read as "Live jobs feed, updated ...". Link copies the current URL
@@ -1184,7 +1184,15 @@ and the site nav (`/assets/nav.js`) keeps working with a squared hamburger.
   the same elements, so ids and handlers stay). LAYERS opens the layers panel as a sheet along the bottom (78% high at
   most, above the panel sheet), with a Close button; Escape closes it and focus returns to LAYERS; picking a region
   closes it. Nothing overflows at 320 px.
-* Cost: `controls.js` (about 2 KB gzipped) joins the startup modules (preloaded). The picture adds one blur filter
+* Cost: the parts of the chrome the first paint uses (the tone value, today's date, the view title, the phone
+  placement and the filters) live in `app.js`; the rest (`map/js/controls.js`: the region menu, Link, the layers
+  sheet, the tone buttons' clicks and LIVE) loads after the first paint, so it adds no request or byte before it.
+  The controls show with the rest of the header (nothing shifts) and come alive with the module
+  (`__careerMap.chromeReady`). The render blocking `map.css` stays
+  at its earlier size (about 9.7 KB gzipped): the styles for the running map (MapLibre controls, the hiring pulse,
+  Color by, the heat legend card, the detail layers) live in `map/css/map-live.css` (about 3 KB gzipped), which
+  app.js adds after the first paint with the MapLibre prefetch and waits for before it builds the map; the trail map
+  dialog's live in `map/css/trailmap.css`, added the first time the dialog opens. The picture adds one blur filter
   on its dot group and one color matrix per underlay image; neither is a Largest Contentful Paint candidate.
 
 ### Color modes: heat maps

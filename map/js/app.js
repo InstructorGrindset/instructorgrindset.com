@@ -7,19 +7,59 @@
 // 3. After the load event and the first paint, when idle: map.js and MapLibre download, sources.json loads when the
 //    panel shows source links, and resorts.json is only prefetched (a resort or comparison view loads it at once).
 //    After the WebGL map loads: the full data, the recolor control and the state outlines.
-import { config, isPhone } from './config.js';
+import { config, isPhone, savedTone } from './config.js';
 import { isFiltered, loadAll, loadStateOutlines, matchesFilter, NO_FILTER, postingsRaw, whenPainted } from './data.js';
 import { createRouter } from './router.js';
 import { createPanel, officialMapFile } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
-import { h, joinOr, plural } from './ui.js';
+import { h, joinOr, monthShort, plural } from './ui.js';
 import { FILTERS, PASS_LABEL } from './labels.js';
 import { drawPreview, addPreviewUnderlay, previewUnderlayUrls, wantsUnderlay } from './preview.js';
-import {
-  createLayersSheet, createLinkButton, createRegionMenu, createToneToggle, placeForViewport, showFeedTime, todayText, viewTitle,
-} from './controls.js';
+
+// ── Header and sub bar parts the first paint uses (the rest of the chrome: controls.js, after the first paint) ──
+const pad2 = (n) => String(n).padStart(2, '0');
+const WEEKDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+/** "Fri, 16 Oct 2026" for the sub bar (the viewer's own date), with its ISO date. */
+function todayText(d = new Date()) {
+  return {
+    text: `${WEEKDAY[d.getDay()]}, ${pad2(d.getDate())} ${monthShort(d.getMonth() + 1)} ${d.getFullYear()}`,
+    iso: `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`,
+  };
+}
+
+/** [kind, name] for the sub bar: ['Resort', 'Vail'], ['National view', 'United States']. */
+function viewTitle(index, view) {
+  switch (view.level) {
+    case 'state': return ['State', index.states.get(view.stateCode).name];
+    case 'cluster': return ['Cluster', index.clusters.get(view.clusterId).name];
+    case 'resort': return ['Resort', index.resorts.get(view.resortId).name];
+    case 'compare': return ['Compare', `${view.compare.length} resorts in ${index.clusters.get(view.clusterId).name}`];
+    default: return ['National view', 'United States'];
+  }
+}
+
+/**
+ * Phones keep the header to the wordmark, search and LAYERS: the region menu and Link move to the top of the layers
+ * sheet and List view to the sub bar. Each control keeps one element, moved back on wider screens.
+ */
+function placeForViewport(moves) {
+  const homes = new Map();
+  const place = () => {
+    const phone = isPhone();
+    for (const [el, target, before] of moves) {
+      if (!el || !target) continue;
+      if (!homes.has(el)) { const mark = document.createComment(''); el.before(mark); homes.set(el, mark); }
+      if (phone) { if (el.parentElement !== target) target.insertBefore(el, before || null); } else if (el.previousSibling !== homes.get(el)) homes.get(el).after(el);
+    }
+  };
+  place();
+  const mq = window.matchMedia(`(max-width: ${config.phoneMaxWidth}px)`);
+  if (mq.addEventListener) mq.addEventListener('change', place);
+  return place;
+}
 
 const $ = (id) => document.getElementById(id);
 
@@ -37,7 +77,7 @@ const els = {
   recolor: $('recolor'),
   detailLayers: $('detail-layers'),
   devBadge: $('dev-badge'),
-  // World Monitor style chrome (controls.js): the layers panel, header widgets and sub bar.
+  // World Monitor style chrome (see the header chrome functions above): the layers panel, header widgets and sub bar.
   layers: $('layers-panel'),
   layersBox: $('layers-box'),
   layersToggle: $('layers-toggle'),
@@ -54,6 +94,24 @@ const els = {
   subRight: $('mh-sub-right'),
 };
 
+// Stylesheets beside map.css that the first paint does not need: the running map's (map-live.css: MapLibre
+// controls, the hiring pulse, Color by, the heat legend, the detail layers) and the trail map dialog's.
+const LIVE_CSS = 'map-live.css?v=1';
+const TRAIL_CSS = 'trailmap.css?v=1';
+const cssLoads = new Map();
+/** Add a stylesheet from map/css once; resolves when it has loaded (or failed). */
+function loadCss(name) {
+  if (!cssLoads.has(name)) {
+    cssLoads.set(name, new Promise((resolve) => {
+      const l = h('link', { rel: 'stylesheet', href: new URL(`../css/${name}`, import.meta.url).href });
+      l.onload = resolve;
+      l.onerror = resolve;
+      document.head.append(l);
+    }));
+  }
+  return cssLoads.get(name);
+}
+
 // The WebGL map starts on the first click (owner decision 9). MapLibre and the map module download once the page
 // has loaded and gone idle, so they never compete with the first paint; a click before then fetches them at once.
 let mapModulePromise = null;
@@ -61,6 +119,7 @@ const mapModule = () => (mapModulePromise ||= import('./map.js'));
 /** Resolves once the MapLibre preload has finished (or failed, or after 10 s). */
 function prefetchMap() {
   mapModule().catch(() => { mapModulePromise = null; });
+  loadCss(LIVE_CSS);
   const l = document.createElement('link');
   l.rel = 'preload'; l.as = 'script'; l.href = MAPLIBRE_URL;
   const done = new Promise((resolve) => { l.onload = resolve; l.onerror = resolve; setTimeout(resolve, 10000); });
@@ -230,12 +289,13 @@ async function main() {
     });
   }
 
-  // Trail map dialog: module and data load on first open.
+  // Trail map dialog: module, data and its stylesheet (kept off the first paint) load on first open.
   let trail = null;
   let trailFor = null; // resort record whose map control is up (or waiting for the map)
   async function openTrail(r, from) {
     try {
-      const [{ createTrailMap }] = await Promise.all([import('./trailmap.js'), index.loadDetails().catch(() => null)]);
+      const [{ createTrailMap }] = await Promise.all([import('./trailmap.js'), index.loadDetails().catch(() => null),
+        loadCss(LIVE_CSS), loadCss(TRAIL_CSS)]);
       if (!trail) trail = createTrailMap({ getMapLibre: whenMapLibre, sourceTitle: (id) => index.sources.get(id) });
       trail.open(r, from);
       window.__careerMap.trail = trail;
@@ -272,7 +332,31 @@ async function main() {
   const loadSources = () => index.loadSources().then(() => panel.fillSources()).catch(sourcesFailed);
   const loadDetails = () => index.loadDetails().then(() => panel.fillSources()).catch(sourcesFailed);
 
-  const region = createRegionMenu(els.region, index);
+  // The rest of the header chrome (controls.js: region menu, Link, layers sheet, tone buttons, LIVE) loads after the
+  // first paint, so the first paint needs no request for it. Until then these stand in; the controls are shown with
+  // the rest of the header (nothing shifts) and come alive with the module.
+  let region = { update() {} };
+  let layersSheet = { open: false, set() {} };
+  let tone = savedTone();
+  const syncTone = () => {
+    for (const b of els.tone ? els.tone.querySelectorAll('button[data-tone]') : []) b.setAttribute('aria-pressed', String(b.dataset.tone === tone));
+    document.body.dataset.tone = tone;
+  };
+  const setTone = (t) => {
+    tone = t;
+    syncTone();
+    if (mapCtl) mapCtl.setTone(t); else onViewChange();
+  };
+  let chromeReady = false;
+  const chrome = new Promise((resolve) => afterFirstPaint(resolve)).then(() => import('./controls.js')).then((m) => {
+    region = m.createRegionMenu(els.region, index);
+    if (router.current) region.update(router.current);
+    m.createLinkButton(els.link, announce);
+    layersSheet = m.createLayersSheet(els.layers, els.layersToggle, els.layersClose);
+    m.createToneToggle(els.tone, { current: () => tone, onChange: setTone, announce });
+    chromeReady = true;
+    return m;
+  }).catch((err) => { console.warn('[map] controls', err.message); return null; });
   router = createRouter(index, (view, { initial, fellBack }) => {
     if (trailFor && (view.level !== 'resort' || view.resortId !== trailFor.id)) setTrailControl(null);
     if (trail) trail.close();
@@ -431,12 +515,11 @@ async function main() {
     });
   }
   // Phones: the layers panel is a sheet behind the LAYERS button; narrow desktops fold the layers list.
-  const layersSheet = createLayersSheet(els.layers, els.layersToggle, els.layersClose);
   if (els.layersBox && !isPhone() && els.stage.clientWidth < config.layersPanel.besideFrom) els.layersBox.open = false;
   if (els.layers) els.layers.hidden = false;
-  createLinkButton(els.link, announce);
   placeForViewport([[els.region, els.lpView, null], [els.link, els.lpView, null], [els.listToggle, els.subRight, els.tone]]);
-  const tone = createToneToggle(els.tone, { onChange: (t) => { if (mapCtl) mapCtl.setTone(t); else onViewChange(); }, announce });
+  syncTone();
+  for (const el of [els.tone, els.link, els.layersToggle]) if (el) el.hidden = false;
 
   els.listToggle.addEventListener('click', () => setListView(els.list.hidden));
   els.listToggle.hidden = false;
@@ -483,7 +566,7 @@ async function main() {
   const drawFrame = () => {
     if (mapCtl || els.map.hidden || !router.current) return;
     const keep = isFiltered(filter) ? (r) => matchesFilter(r, filter) : null;
-    const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone.tone); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
+    const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
     if (preview) preview.remove();
     preview = pic;
     if (preview) els.map.insertBefore(preview, startBtn);
@@ -496,7 +579,8 @@ async function main() {
   els.map.append(startBtn);
   els.map.classList.add('map-waiting');
   drawFrame();
-  const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false, layersSheet };
+  const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false,
+    get layersSheet() { return layersSheet; }, get chromeReady() { return chromeReady; } };
   window.__careerMap = state;
   onViewChange = () => { if (!mapCtl) drawFrame(); };
   let resizeTimer = null;
@@ -534,7 +618,7 @@ async function main() {
     if (file) m.markHiring(index, file, hiringCount);
     if (filter.hiring && index.hiringIds.join() !== before) { applyFilter(); onViewChange(); }
   }).catch((err) => console.warn('[map] hiring', err.message)));
-  afterLoad(() => postingsRaw().then((f) => showFeedTime(els.live, f && f.fetched_at)).catch(() => {}));
+  afterLoad(() => postingsRaw().then((f) => chrome.then((m) => m && m.showFeedTime(els.live, f && f.fetched_at))).catch(() => {}));
 
   let starting = null;
   function startMap() {
@@ -557,10 +641,10 @@ async function main() {
         // Start the worker threads before the map constructor occupies the main thread.
         if (typeof m.prewarm === 'function') m.prewarm();
         return m;
-      }), mapModule()]);
+      }), mapModule(), loadCss(LIVE_CSS)]);
       mapCtl = createMap(els.map, index, maplibregl, {
         getPadding: padding,
-        tone: tone.tone,
+        tone,
         onHome: () => router.go({ level: 'national' }),
         onPick(target, current) {
           const cur = current || { level: 'national' };
