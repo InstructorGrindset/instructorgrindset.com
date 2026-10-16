@@ -2628,7 +2628,7 @@ async function consoleChecks(browser, base, stubBase) {
     under: document.querySelectorAll('.map-preview .map-preview-underlay feImage').length, tone: document.body.dataset.tone }));
   check(pvSat.pressed === 'true' && pvSat.saved === 'satellite' && pvSat.matrix === 0 && pvSat.under > 0 && pvSat.tone === 'satellite',
     `SATELLITE redraws the picture in full color and is remembered (${JSON.stringify(pvSat)})`);
-  check(await page.waitForFunction(() => document.getElementById('panel-status').textContent.startsWith('Satellite basemap'), null, { timeout: 3000 }).then(() => true, () => false),
+  check(await page.waitForFunction(() => document.getElementById('panel-status').textContent === 'Basemap set to Satellite, in full color.', null, { timeout: 3000 }).then(() => true, () => false),
     'the basemap change is announced');
   // The choice holds across a reload, and the WebGL map starts in it.
   await page.reload();
@@ -2647,7 +2647,7 @@ async function consoleChecks(browser, base, stubBase) {
       con: m.getPaintProperty('underlay-lower48-small', 'raster-contrast'), max: m.getPaintProperty('underlay-lower48-small', 'raster-brightness-max'),
       img: m.getPaintProperty('imagery', 'raster-saturation'), saved: localStorage.getItem('careermap:basemap') };
   });
-  check(glMap.bg === '#050606' && glMap.sat === -1 && glMap.con === 0.5 && glMap.max === 0.75 && glMap.img === -1 && glMap.saved === 'map',
+  check(glMap.bg === '#000000' && glMap.sat === -1 && glMap.con === 0.5 && glMap.max === 0.75 && glMap.img === -1 && glMap.saved === 'map',
     `MAP repaints the underlay and the imagery into a dark monochrome (${JSON.stringify(glMap)})`);
   await shot(page, 'console-01-national-map.png');
 

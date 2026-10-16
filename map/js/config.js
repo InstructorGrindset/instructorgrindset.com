@@ -61,10 +61,10 @@ export const config = Object.freeze({
     // the same math as an SVG color matrix (preview.js toneMatrix). SATELLITE keeps the full color.
     tone: {
       map: {
-        // Water (about 0.23 in the underlay) falls to the base color, so the image edges melt into it; land keeps
-        // its relief between about #161616 and #2c2c2c.
-        background: '#050606',
-        underlay: { 'raster-saturation': -1, 'raster-contrast': 0.5, 'raster-brightness-min': 0.02, 'raster-brightness-max': 0.75 },
+        // Water (about 0.23 in the underlay) and the image's faded edges fall to black, the base color, so the
+        // image edges melt into it; land keeps its relief between about #141414 and #2a2a2a.
+        background: '#000000',
+        underlay: { 'raster-saturation': -1, 'raster-contrast': 0.5, 'raster-brightness-min': 0, 'raster-brightness-max': 0.75 },
         imagery: { 'raster-saturation': -1, 'raster-contrast': 0.2, 'raster-brightness-min': 0, 'raster-brightness-max': 0.38 },
       },
       satellite: {
@@ -77,7 +77,7 @@ export const config = Object.freeze({
     attribution: 'Ski areas: <a href="https://openskimap.org/" target="_blank" rel="noopener">OpenSkiMap</a>, \u00a9 <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> (ODbL). State outlines: US Census Bureau via us-atlas. Relief: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a>. <a href="/map/credits/">Sources and credits</a>',
     // Console palette (World Monitor style): near black base, thin teal state lines, glowing category dots.
     colors: {
-      background: '#050606',
+      background: '#000000',
       stateFill: '#141918',
       stateFillActive: '#1a2220',
       stateFillHover: '#22302b',
@@ -105,7 +105,7 @@ export const config = Object.freeze({
   // The floating layers panel at the top left of the map (map.css --lp-w and --lp-inset match these). From a stage
   // of `besideFrom` px the map's padding keeps the panel beside the map; narrower stages fold its layers list and
   // start the map below its folded height.
-  layersPanel: { width: 232, inset: 10, besideFrom: 1000, foldedHeight: 120 },
+  layersPanel: { width: 232, inset: 10, besideFrom: 1200, foldedHeight: 150 },
   desktopPanelWidth: 380,
   comparePanelWidth: 600,
   compare: { min: 2, max: 4 },

@@ -65,7 +65,7 @@ export function createDetailControls(root, { onToggle }) {
       const list = ORDER.filter((g) => groups.includes(g));
       // A disclosure in the layers panel: open, except on narrow desktops where the panel floats over the map
       // (phones keep it open inside the layers sheet).
-      const open = !window.matchMedia('(min-width: 760px) and (max-width: 999.98px)').matches;
+      const open = !window.matchMedia('(min-width: 760px) and (max-width: 1199.98px)').matches;
       const toggles = h('ul', { class: 'detail-toggles' });
       root.append(h('details', { class: 'detail-box', open },
         h('summary', { class: 'detail-title' }, 'Resort detail layers'), toggles));

@@ -60,7 +60,7 @@ export function createToneToggle(group, { onChange, announce }) {
       sync();
       saveTone(tone);
       onChange(tone);
-      announce(tone === 'satellite' ? 'Satellite basemap: full color imagery.' : 'Map basemap: dark monochrome.');
+      announce(tone === 'satellite' ? 'Basemap set to Satellite, in full color.' : 'Basemap set to Map, in dark monochrome.');
     });
   }
   sync();

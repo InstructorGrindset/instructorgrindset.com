@@ -1151,9 +1151,9 @@ and the site nav (`/assets/nav.js`) keeps working with a squared hamburger.
 * Sub bar (`.mh-sub`): the view kind and name ("National view · United States", "Resort · Vail"), today's date
   ("Fri, 16 Oct 2026", the viewer's clock) and the MAP / SATELLITE toggle (two `aria-pressed` buttons).
 * Basemap tone (`config.basemap.tone`): MAP (the default) darkens the Natural Earth underlay and the USGS imagery into
-  a near black monochrome with MapLibre raster paint: underlay saturation -1, contrast 0.5, brightness 0.02 to 0.75
-  (water falls to the base color `#050606`, so the image edges melt into it; land keeps its relief between about
-  `#161616` and `#2c2c2c`), imagery saturation -1, contrast 0.2, brightness 0 to 0.38. SATELLITE restores the earlier
+  a near black monochrome with MapLibre raster paint: underlay saturation -1, contrast 0.5, brightness 0 to 0.75
+  (water and the image's faded edges fall to black, the base color, so the image edges melt into it; land keeps its
+  relief between about `#141414` and `#2a2a2a`), imagery saturation -1, contrast 0.2, brightness 0 to 0.38. SATELLITE restores the earlier
   full color paint and base `#0a0e14`. `mapCtl.setTone` repaints the background, every `underlay-*` layer and the
   imagery; the 2D picture applies the same math as one SVG `feColorMatrix` after its `feImage` (`preview.js`
   `toneMatrix`, checked against the shader in the browser test). The choice is kept in `localStorage`
@@ -1176,7 +1176,9 @@ and the site nav (`/assets/nav.js`) keeps working with a squared hamburger.
   scrolls sideways (focusable, so a keyboard can scroll it). The heat legend card stays for heat modes.
 * Controls: one column on the right edge of the open map area (`top-right`, offset by the side panel): zoom in, zoom
   out, home (back to the national view; at the national view it refits a panned map), the trail map button on resort
-  views, then the compact attribution. All buttons are 32 px squares.
+  views, then the compact attribution. All buttons are 32 px squares. On phones the column sits at the bottom right
+  of the visible map, just above the sheet (`--sheet-visible`, set by `sheet.js` when the sheet snaps), clear of New
+  England at the national view.
 * Phones (under 760 px): the header keeps the wordmark (hidden under 380 px), the search box and LAYERS; List view
   moves to the sub bar, and the region menu and Link move to the top of the layers sheet (`placeForViewport` moves
   the same elements, so ids and handlers stay). LAYERS opens the layers panel as a sheet along the bottom (78% high at
