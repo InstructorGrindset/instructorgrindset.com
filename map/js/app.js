@@ -546,7 +546,7 @@ async function main() {
       return searchMod;
     };
     const input = $('map-search-input');
-    if (!isPhone()) input.placeholder = 'Search resorts and clusters';
+    if (!isPhone()) input.placeholder = 'Search resorts';
     input.addEventListener('focus', loadSearch);
     input.addEventListener('pointerdown', loadSearch, { passive: true });
     searchEl.hidden = false;
