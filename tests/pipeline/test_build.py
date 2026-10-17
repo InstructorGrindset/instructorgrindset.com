@@ -335,6 +335,7 @@ def test_definitions_json(repo_root, tmp_path, out):
         "reports": {"aggregation_min": 3},
         "staleness": {"max_age_months": 18},
         "submissions": {"endpoint": "https://formspree.io/f/xyzbdqgq"},
+        "events": {"season": {"label": "2026/27", "start": "2026-07-01", "end": "2027-06-30"}, "resort_panel_max": 3},
     }
 
 

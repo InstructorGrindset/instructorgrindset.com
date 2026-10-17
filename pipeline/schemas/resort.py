@@ -23,6 +23,7 @@ from .common import (
 )
 from .trailmaps_official import OfficialTrailmap
 from .jobs import Jobs
+from .events import ResortEvents
 from .passes import PassMembership
 from .webcams import Webcams
 
@@ -210,6 +211,7 @@ class Resort(StrictModel):
     trailmap_available: bool = False
     housing_summary: Optional[HousingSummary] = None
     housing_search: Optional[HousingSearch] = None   # Furnished Finder link and ranked housing search tools (links only)
+    events: Optional[ResortEvents] = None   # events this resort hosts (ROADMAP item 22; pipeline/events.py)
     sources: list[Slug] = Field(default_factory=list)
 
     @field_validator("location_source_id")
@@ -275,6 +277,6 @@ def referenced_source_ids(resort: Resort) -> set[str]:
                 walk(item)
 
     for name in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "webcams",
-                 "jobs", "passes", "season", "terrain", "career", "editorial", "housing_search"):
+                 "jobs", "passes", "season", "terrain", "career", "editorial", "housing_search", "events"):
         walk(getattr(resort, name))
     return found

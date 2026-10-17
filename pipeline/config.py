@@ -556,6 +556,95 @@ class HousingSearchDefs(StrictModel):
         default_factory=lambda: ["furnishedfinder.com"])
 
 
+class EventsSeason(StrictModel):
+    label: str
+    start: dt.date
+    end: dt.date
+
+    @field_validator("label")
+    @classmethod
+    def _label(cls, v: str) -> str:
+        from .schemas.passes import check_season
+        return check_season(v)
+
+    @model_validator(mode="after")
+    def _window(self) -> "EventsSeason":
+        first = int(self.label[:4])
+        if self.start != dt.date(first, 7, 1) or self.end != dt.date(first + 1, 6, 30):
+            raise ValueError(f"season {self.label} runs from {first}-07-01 to {first + 1}-06-30")
+        return self
+
+
+class EventsLabel(StrictModel):
+    id: Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]
+    label: str = Field(min_length=1)
+
+
+class EventsGroup(EventsLabel):
+    color: str = Field(pattern=HEX_COLOR)
+    disciplines: list[EventsLabel] = Field(min_length=1)
+
+
+# Group colors carry badge text on the panel surfaces (map.css: #0a0a0a to #1e1e1e), so they need AA contrast on the
+# lightest one, and stay apart from each other (OKLab distance x 100, pipeline/color.py).
+EVENTS_SURFACE = "#1e1e1e"
+EVENTS_MIN_CONTRAST = 4.5
+EVENTS_MIN_DELTA_E = 8.0
+
+
+class EventsDefs(StrictModel):
+    """Events and competitions (data/raw/events, ROADMAP item 22; docs/map/EVENTS.md)."""
+
+    season: EventsSeason
+    groups: list[EventsGroup] = Field(min_length=1)
+    levels: list[EventsLabel] = Field(min_length=1)
+    signup_methods: list[EventsLabel] = Field(min_length=1)
+    venue_kinds: list[EventsLabel] = Field(min_length=1)
+    abroad_groups: list[str] = Field(default_factory=list)
+    format_max_chars: int = Field(default=160, ge=40, le=400)
+    resort_match_km: float = Field(default=1.5, ge=0)
+    month_chips: list[int] = Field(min_length=1)
+    resort_panel_max: int = Field(default=3, ge=1, le=10)
+
+    @model_validator(mode="after")
+    def _check(self) -> "EventsDefs":
+        from .color import contrast
+        for name, items in (("groups", self.groups), ("levels", self.levels), ("signup_methods", self.signup_methods),
+                            ("venue_kinds", self.venue_kinds)):
+            ids = [x.id for x in items]
+            dup = sorted({i for i in ids if ids.count(i) > 1})
+            if dup:
+                raise ValueError(f"events.{name}: ids listed twice: {dup}")
+        disc = [d.id for g in self.groups for d in g.disciplines]
+        dup = sorted({i for i in disc if disc.count(i) > 1})
+        if dup:
+            raise ValueError(f"events.groups: discipline ids in two groups: {dup}")
+        unknown = sorted(set(self.abroad_groups) - {g.id for g in self.groups})
+        if unknown:
+            raise ValueError(f"events.abroad_groups: unknown groups {unknown}")
+        if len(set(self.month_chips)) != len(self.month_chips) or any(not 1 <= m <= 12 for m in self.month_chips):
+            raise ValueError("events.month_chips: distinct month numbers 1 to 12")
+        for g in self.groups:
+            c = contrast(g.color, EVENTS_SURFACE)
+            if c < EVENTS_MIN_CONTRAST:
+                raise ValueError(f"events group {g.id}: color {g.color} has {c:.2f}:1 contrast on {EVENTS_SURFACE}; "
+                                 f"needs {EVENTS_MIN_CONTRAST}:1")
+        for i, a in enumerate(self.groups):
+            for b in self.groups[i + 1:]:
+                d = delta_e(a.color, b.color)
+                if d < EVENTS_MIN_DELTA_E:
+                    raise ValueError(f"events groups {a.id} and {b.id}: colors {a.color} and {b.color} are {d:.1f} apart "
+                                     f"(OKLab x 100); keep them {EVENTS_MIN_DELTA_E} or more apart")
+        return self
+
+    def discipline_group(self) -> dict[str, str]:
+        """Discipline id -> group id."""
+        return {d.id: g.id for g in self.groups for d in g.disciplines}
+
+    def ids(self, name: str) -> list[str]:
+        return [x.id for x in getattr(self, name)]
+
+
 class Definitions(StrictModel):
     version: int
     snow: SnowDefs
@@ -582,6 +671,7 @@ class Definitions(StrictModel):
     jobs: JobsDefs = Field(default_factory=JobsDefs)
     passes: PassesDefs = Field(default_factory=PassesDefs)
     housing_search: HousingSearchDefs = Field(default_factory=HousingSearchDefs)
+    events: Optional[EventsDefs] = None   # Events and competitions (ROADMAP item 22)
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 
