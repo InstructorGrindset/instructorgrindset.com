@@ -10,7 +10,12 @@ listed (organizations, clubs and venues only).
 
 ## Scope
 
-* United States only (the map covers the 50 states).
+* United States venues go on the map. One exception: international instructor events (Interski and its US team
+  selection abroad) may use a venue outside the US with `country:` set; they show in the events list and calendar,
+  not as a map dot.
+* Community competitions count as much as pro events: local rail jams, bump and mogul contests, lap and vertical
+  challenges (for example Gunbarrel 25 at Heavenly), resort race leagues, fun races and any contest open to the
+  public. Give them level `open_amateur`.
 * Snow based sport: every ski and snowboard discipline, snowshoe, skijoring, snowkiting, sled dog racing,
   snowmobile racing, fat bike snow racing and winter ultras on snow, heritage events (longboard and retro races), and
   instructor education events (PSIA-AASI). Ice only sport (hockey, skating, curling, bobsled, luge, skeleton) is out.
@@ -42,7 +47,8 @@ venues:                                  # only venues that are NOT a resort in 
 - id: hayward-wi-birkie-trail            # lowercase, words joined with hyphens
   name: American Birkebeiner Trail
   kind: trail                            # resort | nordic_center | trail | town | lake | park | fairground | arena | jump_complex | other
-  state: WI
+  state: WI                              # two letter state; null for a venue outside the US
+  country: US                            # optional; ISO two letter code, set for venues outside the US (list only)
   town: Cable                            # the nearest town as the source names it
   location:
     lat: 46.2073
@@ -109,7 +115,8 @@ calendars:                               # optional: calendars too large to list
 | sled_dog | sled_dog |
 | snowmobile | snocross, hill_climb, snowmobile_race |
 | winter_ultra | fat_bike, winter_ultra |
-| instructor | psia_aasi_exam, psia_aasi_clinic, psia_aasi_event |
+| instructor | psia_aasi_exam, psia_aasi_clinic, psia_aasi_event, interski |
+| community | endurance (lap and vertical challenges such as Gunbarrel 25), fun_race (costume, dual and open fun races) |
 
 Use the closest id. If none fits, use the closest group's first id and say so in `format`.
 
