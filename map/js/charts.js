@@ -67,7 +67,7 @@ function theme(Chart) {
   const d = Chart.defaults;
   d.color = MUTED;
   d.borderColor = GRID;
-  d.font.family = 'Inter, system-ui, -apple-system, sans-serif';
+  d.font.family = "'SF Mono', Monaco, 'Cascadia Code', 'Fira Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace";
   d.font.size = 11;
   d.maintainAspectRatio = false;
   d.responsive = true;

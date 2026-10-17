@@ -15,43 +15,46 @@
   <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="/assets/global.css?v=2">
   <link rel="stylesheet" href="/assets/sidebar.css?v=14">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%23e0a03a'/%3E%3C/svg%3E">
-  <!-- This page is plain HTML and CSS: it loads none of the map JavaScript. The web font loads after the page. -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script>addEventListener("load",function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},{once:true})</script>
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%2344ff88'/%3E%3C/svg%3E">
+  <!-- This page is plain HTML and CSS: it loads none of the map JavaScript. The console tokens and the monospace
+       stack come from the map stylesheet (body.credits-page); no web font loads. -->
+  <link rel="stylesheet" href="/map/css/map.css?v=13">
   <style>
     body { background: var(--bg); }
+    .credits-page .eyebrow { color: var(--wm-dim); letter-spacing: .14em; }
     .credits-main { padding: 1.5rem 1.25rem 3rem; min-width: 0; }
     .credits { max-width: 52rem; margin: 0 auto; font-size: var(--text-base); }
     .credits-header { text-align: center; padding: .5rem 0 1.25rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
-    .credits-header h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: .2rem 0 .6rem; }
+    .credits-header h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: .2rem 0 .6rem; }
     .credits-header .lede { margin: 0 auto .9rem; max-width: 62ch; }
     .back-link { margin: 0; font-weight: 600; }
     .toc { margin: 0 0 1.5rem; }
     .toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1.1rem; font-size: var(--text-sm); }
     .toc a { display: inline-flex; align-items: center; min-height: 32px; }
-    .credits h2 { font-size: var(--text-xl); margin: 2rem 0 .4rem; scroll-margin-top: 1rem; }
+    .credits h2 { font-size: .95rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin: 2rem 0 .5rem; scroll-margin-top: 1rem; }
+    .credits h2::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 .55rem .12em 0; background: var(--wm-green); vertical-align: middle; }
     .credits h2 + .section-intro { margin-top: 0; }
     .section-intro { color: var(--muted); margin: 0 0 .9rem; }
     .credit-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
     .credit { background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--r-lg); padding: .9rem 1.1rem; }
-    .credit h3 { font-family: Inter, system-ui, sans-serif; font-size: var(--text-base); margin: 0 0 .3rem; }
+    .credit h3 { font-size: .9rem; font-weight: 700; letter-spacing: .04em; margin: 0 0 .3rem; }
     .credit p { margin: 0 0 .35rem; color: var(--muted); font-size: var(--text-sm); line-height: 1.6; }
     .credit p:last-child { margin-bottom: 0; }
     .credit .license { color: var(--ink); }
     .credit .license strong { font-weight: 700; }
     .credits a { text-decoration: underline; text-underline-offset: 2px; }
-    .credits .btn { text-decoration: none; color: #10151e; }
+    .credits .btn { text-decoration: none; color: var(--wm-green-ink); }
+    .credits a:not(.btn) { color: var(--accent); }
+    .credits code { font-family: var(--mono); color: var(--wm-text); }
     .levels { margin: 0; display: grid; gap: .75rem; }
     .levels > div { background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--r-lg); padding: .8rem 1.1rem; }
     .levels dt { margin: 0 0 .25rem; }
     .levels dd { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.6; }
-    .badge { display: inline-flex; align-items: center; font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-      border-radius: 999px; padding: .1rem .55rem; line-height: 1.5; border: 1px solid transparent; }
-    .badge-published { color: #6fd3ac; background: rgba(29,158,117,.14); border-color: rgba(29,158,117,.45); }
-    .badge-reported { color: #a6c8ff; background: rgba(166,200,255,.12); border-color: rgba(166,200,255,.4); }
-    .badge-estimated { color: #e0b064; background: rgba(196,137,42,.13); border-color: rgba(196,137,42,.45); }
+    .badge { display: inline-flex; align-items: center; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      border-radius: 2px; padding: .05rem .45rem; line-height: 1.5; border: 1px solid transparent; }
+    .badge-published { color: var(--pub); background: rgba(68,255,136,.07); border-color: rgba(68,255,136,.45); }
+    .badge-reported { color: var(--rep); background: rgba(51,136,255,.08); border-color: rgba(51,136,255,.5); }
+    .badge-estimated { color: var(--est); background: rgba(255,170,0,.07); border-color: rgba(255,170,0,.5); }
     .prose p, .prose li { color: var(--muted); font-size: var(--text-sm); line-height: 1.65; }
     .prose ul { padding-left: 1.2rem; margin: .4rem 0 .8rem; }
     .prose li { margin: .15rem 0; }
@@ -65,7 +68,7 @@
     @media (max-width: 400px) { .credits-main { padding: 3.75rem .9rem 2.5rem; } .credit { padding: .8rem .9rem; } }
   </style>
 </head>
-<body>
+<body class="credits-page">
   <a class="skip-link" href="#main">Skip to the content</a>
   <div class="page">
     <aside id="sidebar-placeholder" class="side" aria-busy="true" data-defer-images></aside>

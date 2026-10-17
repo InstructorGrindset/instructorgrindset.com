@@ -31,8 +31,12 @@ export function createSheet(panel, handle, stage, { onChange } = {}) {
     panel.dataset.sheet = state;
     handle.setAttribute('aria-label', `${LABEL[state]}. Activate to resize.`);
     handle.setAttribute('aria-expanded', String(state !== 'peek'));
-    if (isPhone()) place(heights()[state], animate);
-    else panel.style.removeProperty('--sheet-offset');
+    if (isPhone()) {
+      place(heights()[state], animate);
+      // The map controls sit just above the sheet (map.css); set on the map only, so a drag restyles nothing else.
+      const map = stage.querySelector('#map');
+      if (map) map.style.setProperty('--sheet-visible', `${heights()[state]}px`);
+    } else panel.style.removeProperty('--sheet-offset');
     if (state === 'peek') {
       const scroller = panel.querySelector('.panel-scroll');
       if (scroller) scroller.scrollTop = 0; // peek always shows the heading

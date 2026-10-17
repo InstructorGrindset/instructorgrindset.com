@@ -8,7 +8,6 @@ import { RECOLOR_MODES } from './labels.js';
 import { buildHeat, legendScale, legendPos, legendCss, makeRamp } from './heat.js';
 import { loadDefinitions, loadHeatRaster, loadHeatIsolines, loadStateOutlines } from './data.js';
 import { h, clear, fmtInt } from './ui.js';
-import { isPhone } from './config.js';
 
 const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const usdShort = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 });
@@ -43,7 +42,11 @@ export function valueDomain(values) {
   return { min: Math.min(...v), max: Math.max(...v), count: v.length };
 }
 
-export async function createRecolor(root, index, { onChange, announce }) {
+/**
+ * root: the Color by row (in the layers panel); legendRoot: where the heat legend card goes (over the map, bottom
+ * right; the root when absent).
+ */
+export async function createRecolor(root, index, { onChange, announce, legendRoot = null }) {
   const defs = await loadDefinitions().catch(() => null);
   const heat = defs && defs.heat ? defs.heat : null;
   const ramp = heat ? makeRamp(heat.ramp.colors) : null;
@@ -204,8 +207,8 @@ export async function createRecolor(root, index, { onChange, announce }) {
         h('li', null, h('span', { class: 'key-dot key-b', 'aria-hidden': 'true' }), 'Tier B'),
         h('li', null, h('span', { class: 'key-dot key-none', 'aria-hidden': 'true' }), 'No data')),
       h('p', { class: 'ramp-note' }, `${fmtInt(d.count)} ${d.count === 1 ? 'resort has' : 'resorts have'} data.`),
-      // Open on wide screens; a tap opens it on phones, where the legend sits over the map.
-      h('details', { class: 'heat-about', open: isPhone() ? null : '' },
+      // Folded, so the card stays short beside the map; a click or tap opens it.
+      h('details', { class: 'heat-about' },
         h('summary', null, 'About these colors'),
         ...notes.map((t) => h('p', { class: 'ramp-note' }, t))),
     ].filter(Boolean));
@@ -213,9 +216,9 @@ export async function createRecolor(root, index, { onChange, announce }) {
   }
 
   root.append(
-    h('div', { class: 'recolor-modes', role: 'group', 'aria-label': 'Color the map by' },
-      h('span', { class: 'recolor-label', 'aria-hidden': 'true' }, 'Color by'), buttons),
-    legend);
+    h('p', { class: 'recolor-label', 'aria-hidden': 'true' }, 'Color by'),
+    h('div', { class: 'recolor-modes', role: 'group', 'aria-label': 'Color the map by' }, buttons));
+  (legendRoot || root).append(legend);
   root.hidden = false;
   return { info, select };
 }

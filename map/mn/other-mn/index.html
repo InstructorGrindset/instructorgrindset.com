@@ -24,9 +24,9 @@
   <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"></noscript>
-  <link rel="stylesheet" href="/map/css/map.css?v=12">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%23e0a03a'/%3E%3C/svg%3E">
+  <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"><style>.map-legend { display: none !important; }</style></noscript>
+  <link rel="stylesheet" href="/map/css/map.css?v=13">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%2344ff88'/%3E%3C/svg%3E">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
   <link rel="modulepreload" href="/map/js/data.js">
@@ -39,10 +39,7 @@
   <link rel="modulepreload" href="/map/js/meta.js">
   <link rel="modulepreload" href="/map/js/preview.js">
   <link rel="modulepreload" href="/map/js/camera.js">
-  <!-- The web font loads after the window load event and the first contentful paint, so it never competes with the first paint; text uses the fallback font until then. -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script>(function(){var n=0,p=0,f=function(){if(++n!==2)return;var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},g=function(){if(!p){p=1;f()}};addEventListener("load",f,{once:true});try{new PerformanceObserver(function(x,o){if(x.getEntriesByName("first-contentful-paint").length){o.disconnect();g()}}).observe({type:"paint",buffered:true})}catch(e){g()}setTimeout(g,8000)})()</script>
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
+  <!-- Map pages use the system monospace stack (map.css), so they load no web font. -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Instructor pay, housing, and snow in Other Minnesota • Instructor Grindset","url":"https://instructorgrindset.com/map/mn/other-mn/","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Afton Alps","url":"https://instructorgrindset.com/map/mn/other-mn/afton-alps/"},{"@type":"ListItem","position":2,"name":"Andes Tower Hills","url":"https://instructorgrindset.com/map/mn/other-mn/andes-tower-hills/"},{"@type":"ListItem","position":3,"name":"Buck Hill","url":"https://instructorgrindset.com/map/mn/other-mn/buck-hill/"},{"@type":"ListItem","position":4,"name":"Buena Vista Ski Area","url":"https://instructorgrindset.com/map/mn/other-mn/buena-vista-ski-area/"},{"@type":"ListItem","position":5,"name":"Chester Bowl","url":"https://instructorgrindset.com/map/mn/other-mn/chester-bowl/"},{"@type":"ListItem","position":6,"name":"Coffee Mill","url":"https://instructorgrindset.com/map/mn/other-mn/coffee-mill/"},{"@type":"ListItem","position":7,"name":"Detroit Mountain","url":"https://instructorgrindset.com/map/mn/other-mn/detroit-mountain/"},{"@type":"ListItem","position":8,"name":"Giants Ridge Resort","url":"https://instructorgrindset.com/map/mn/other-mn/giants-ridge-resort/"},{"@type":"ListItem","position":9,"name":"Hyland Hills Ski Area","url":"https://instructorgrindset.com/map/mn/other-mn/hyland-hills/"},{"@type":"ListItem","position":10,"name":"Lutsen Mountains","url":"https://instructorgrindset.com/map/mn/other-mn/lutsen-mountains/"},{"@type":"ListItem","position":11,"name":"Mount Itasca","url":"https://instructorgrindset.com/map/mn/other-mn/mount-itasca/"},{"@type":"ListItem","position":12,"name":"Mount Kato Ski Area","url":"https://instructorgrindset.com/map/mn/other-mn/mount-kato-ski-area/"},{"@type":"ListItem","position":13,"name":"Mount Ski Gull","url":"https://instructorgrindset.com/map/mn/other-mn/mount-ski-gull/"},{"@type":"ListItem","position":14,"name":"Powder Ridge","url":"https://instructorgrindset.com/map/mn/other-mn/powder-ridge/"},{"@type":"ListItem","position":15,"name":"Spirit Mountain","url":"https://instructorgrindset.com/map/mn/other-mn/spirit-mountain/"},{"@type":"ListItem","position":16,"name":"Steeplechase Ski & Snowboard","url":"https://instructorgrindset.com/map/mn/other-mn/steeplechase-ski-and-snowboard/"},{"@type":"ListItem","position":17,"name":"Welch Village","url":"https://instructorgrindset.com/map/mn/other-mn/welch-village/"},{"@type":"ListItem","position":18,"name":"Wild Mountain","url":"https://instructorgrindset.com/map/mn/other-mn/wild-mountain/"}]}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Snowsports Career Map","item":"https://instructorgrindset.com/map/"},{"@type":"ListItem","position":2,"name":"Minnesota","item":"https://instructorgrindset.com/map/mn/"},{"@type":"ListItem","position":3,"name":"Other Minnesota","item":"https://instructorgrindset.com/map/mn/other-mn/"}]}]}</script>
 </head>
 <body class="map-page">
@@ -52,26 +49,72 @@
     <script src="/assets/nav.js?v=15"></script>
 
     <main class="main map-main" id="main">
-      <header class="map-header">
-        <h1>Snowsports Career Map</h1>
-        <span id="dev-badge" class="dev-badge" hidden></span>
-        <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
-        <div id="map-search" class="map-search" role="search" hidden>
-          <label class="visually-hidden" for="map-search-input">Search resorts, clusters and states</label>
-          <input id="map-search-input" class="map-search-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search">
-          <ul id="map-search-list" class="map-search-list" role="listbox" aria-label="Search results" hidden></ul>
-          <p class="map-search-empty" hidden>No resort, cluster or state matches that name.</p>
-          <div class="visually-hidden" role="status" aria-live="polite"></div>
+      <header class="map-header" id="map-header">
+        <div class="mh-bar">
+          <h1 class="mh-title">Snowsports Career Map</h1>
+          <span id="dev-badge" class="dev-badge" hidden></span>
+          <!-- Region jump menu (map/js/controls.js createRegionMenu): National and every state with resorts. -->
+          <div id="map-region" class="map-region" hidden>
+            <button id="map-region-btn" class="mh-btn map-region-btn" type="button" aria-expanded="false" aria-controls="map-region-list"><span class="visually-hidden">Jump to a region. Now showing </span><span class="map-region-label">National</span></button>
+            <ul id="map-region-list" class="map-region-list" aria-label="Regions" hidden></ul>
+          </div>
+          <!-- Hiring now count (map/js/hiring.js); a toggle for the Hiring now filter. -->
+          <button id="hiring-pill" class="mh-pill" type="button" aria-pressed="false" hidden><span class="mh-pill-dot" aria-hidden="true"></span>Hiring now <span class="mh-count"></span></button>
+          <!-- Shown only when the jobs feed (data/build/jobs/postings.json) has a real fetch time. -->
+          <p id="feed-live" class="feed-live" hidden><span class="live-dot" aria-hidden="true"></span><span class="live-label">Live</span> <span class="live-what">jobs<span class="visually-hidden"> feed, updated</span></span> <time></time></p>
+          <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
+          <div id="map-search" class="map-search" role="search" hidden>
+            <label class="visually-hidden" for="map-search-input">Search resorts, clusters and states</label>
+            <input id="map-search-input" class="map-search-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search">
+            <ul id="map-search-list" class="map-search-list" role="listbox" aria-label="Search results" hidden></ul>
+            <p class="map-search-empty" hidden>No resort, cluster or state matches that name.</p>
+            <div class="visually-hidden" role="status" aria-live="polite"></div>
+          </div>
+          <div id="map-link" class="map-link" hidden>
+            <button id="link-copy" class="mh-btn" type="button" aria-label="Copy a link to this view" title="Copy a link to this view">Link</button>
+            <span class="mh-copied" aria-hidden="true" hidden>Copied</span>
+          </div>
+          <button id="list-toggle" class="mh-btn list-toggle" type="button" aria-pressed="false" aria-controls="list-view" hidden>List view</button>
+          <button id="layers-toggle" class="mh-btn layers-toggle" type="button" aria-expanded="false" aria-controls="layers-panel" hidden>Layers</button>
         </div>
-        <button id="list-toggle" class="btn btn-sm btn-ghost list-toggle" type="button" aria-pressed="false" aria-controls="list-view" hidden>List view</button>
+        <div class="mh-sub" id="map-subbar">
+          <p id="view-title" class="mh-view"></p>
+          <p class="mh-date"><time id="today-date"></time></p>
+          <div class="mh-sub-right" id="mh-sub-right">
+            <div id="tone-toggle" class="seg tone-toggle" role="group" aria-label="Basemap" hidden>
+              <button type="button" data-tone="map" aria-pressed="true">Map</button><button type="button" data-tone="satellite" aria-pressed="false">Satellite</button>
+            </div>
+          </div>
+        </div>
       </header>
 
       <div class="map-stage" id="map-stage">
         <div id="map" class="map" role="region" aria-label="Interactive map of US ski resorts. The panel and the list view hold the same information."></div>
         <section id="list-view" class="list-view" aria-label="List view of every state, cluster and resort" hidden></section>
-        <div id="facility-filter" class="facility-filter" role="group" aria-label="Filter resorts" hidden></div>
-        <div id="recolor" class="recolor" hidden></div>
-        <div id="detail-layers" class="detail-layers" role="group" aria-label="Resort detail layers" hidden></div>
+        <!-- One floating panel at the top left (a sheet on phones): Color by, the filters, and the resort detail layers. -->
+        <section id="layers-panel" class="layers-panel" aria-label="Map layers" hidden>
+          <div class="lp-sheet-head"><h2 class="lp-sheet-title" tabindex="-1">Layers</h2><button id="layers-close" class="mh-btn lp-close" type="button">Close</button></div>
+          <div id="lp-view" class="lp-view"></div>
+          <div id="recolor" class="recolor" hidden></div>
+          <details id="layers-box" class="lp-box" open>
+            <summary class="lp-summary">Layers</summary>
+            <div id="facility-filter" class="facility-filter" role="group" aria-label="Filter resorts" hidden></div>
+          </details>
+          <div id="detail-layers" class="detail-layers" role="group" aria-label="Resort detail layers" hidden></div>
+        </section>
+        <div id="heat-legend" class="heat-legend"></div>
+        <!-- Focusable, since phones scroll it sideways. -->
+        <div class="map-legend" id="map-legend" role="region" aria-labelledby="map-legend-title" tabindex="0">
+          <p class="ml-title" id="map-legend-title">Legend</p>
+          <ul class="ml-items">
+            <li><span class="ml-dot ml-a" aria-hidden="true"></span>Tier A</li>
+            <li><span class="ml-dot ml-b" aria-hidden="true"></span>Tier B</li>
+            <li><span class="ml-sq" aria-hidden="true"></span>Indoor</li>
+            <li><span class="ml-dia" aria-hidden="true"></span>Training center</li>
+            <li><span class="ml-cluster" aria-hidden="true"></span>Cluster</li>
+            <li><span class="ml-ring" aria-hidden="true"></span>Hiring now</li>
+          </ul>
+        </div>
 
         <aside id="panel" class="panel" aria-label="Map details" aria-busy="true" data-sheet="half" tabindex="-1">
           <button id="sheet-handle" class="sheet-handle" type="button" aria-controls="panel-scroll" aria-label="Resize panel"><span aria-hidden="true"></span></button>

@@ -7,16 +7,59 @@
 // 3. After the load event and the first paint, when idle: map.js and MapLibre download, sources.json loads when the
 //    panel shows source links, and resorts.json is only prefetched (a resort or comparison view loads it at once).
 //    After the WebGL map loads: the full data, the recolor control and the state outlines.
-import { config, isPhone } from './config.js';
-import { isFiltered, loadAll, loadStateOutlines, matchesFilter, NO_FILTER, whenPainted } from './data.js';
+import { config, isPhone, savedTone } from './config.js';
+import { isFiltered, loadAll, loadStateOutlines, matchesFilter, NO_FILTER, postingsRaw, whenPainted } from './data.js';
 import { createRouter } from './router.js';
 import { createPanel, officialMapFile } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
-import { h, joinOr, plural } from './ui.js';
+import { h, joinOr, monthShort, plural } from './ui.js';
 import { FILTERS, PASS_LABEL } from './labels.js';
 import { drawPreview, addPreviewUnderlay, previewUnderlayUrls, wantsUnderlay } from './preview.js';
+
+// ── Header and sub bar parts the first paint uses (the rest of the chrome: controls.js, after the first paint) ──
+const pad2 = (n) => String(n).padStart(2, '0');
+const WEEKDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+/** "Fri, 16 Oct 2026" for the sub bar (the viewer's own date), with its ISO date. */
+function todayText(d = new Date()) {
+  return {
+    text: `${WEEKDAY[d.getDay()]}, ${pad2(d.getDate())} ${monthShort(d.getMonth() + 1)} ${d.getFullYear()}`,
+    iso: `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`,
+  };
+}
+
+/** [kind, name] for the sub bar: ['Resort', 'Vail'], ['National view', 'United States']. */
+function viewTitle(index, view) {
+  switch (view.level) {
+    case 'state': return ['State', index.states.get(view.stateCode).name];
+    case 'cluster': return ['Cluster', index.clusters.get(view.clusterId).name];
+    case 'resort': return ['Resort', index.resorts.get(view.resortId).name];
+    case 'compare': return ['Compare', `${view.compare.length} resorts in ${index.clusters.get(view.clusterId).name}`];
+    default: return ['National view', 'United States'];
+  }
+}
+
+/**
+ * Phones keep the header to the wordmark, search and LAYERS: the region menu and Link move to the top of the layers
+ * sheet and List view to the sub bar. Each control keeps one element, moved back on wider screens.
+ */
+function placeForViewport(moves) {
+  const homes = new Map();
+  const place = () => {
+    const phone = isPhone();
+    for (const [el, target, before] of moves) {
+      if (!el || !target) continue;
+      if (!homes.has(el)) { const mark = document.createComment(''); el.before(mark); homes.set(el, mark); }
+      if (phone) { if (el.parentElement !== target) target.insertBefore(el, before || null); } else if (el.previousSibling !== homes.get(el)) homes.get(el).after(el);
+    }
+  };
+  place();
+  const mq = window.matchMedia(`(max-width: ${config.phoneMaxWidth}px)`);
+  if (mq.addEventListener) mq.addEventListener('change', place);
+  return place;
+}
 
 const $ = (id) => document.getElementById(id);
 
@@ -34,7 +77,40 @@ const els = {
   recolor: $('recolor'),
   detailLayers: $('detail-layers'),
   devBadge: $('dev-badge'),
+  // World Monitor style chrome (see the header chrome functions above): the layers panel, header widgets and sub bar.
+  layers: $('layers-panel'),
+  layersBox: $('layers-box'),
+  layersToggle: $('layers-toggle'),
+  layersClose: $('layers-close'),
+  lpView: $('lp-view'),
+  heatLegend: $('heat-legend'),
+  region: $('map-region'),
+  link: $('map-link'),
+  pill: $('hiring-pill'),
+  live: $('feed-live'),
+  viewTitle: $('view-title'),
+  today: $('today-date'),
+  tone: $('tone-toggle'),
+  subRight: $('mh-sub-right'),
 };
+
+// Stylesheets beside map.css that the first paint does not need: the running map's (map-live.css: MapLibre
+// controls, the hiring pulse, Color by, the heat legend, the detail layers) and the trail map dialog's.
+const LIVE_CSS = 'map-live.css?v=1';
+const TRAIL_CSS = 'trailmap.css?v=1';
+const cssLoads = new Map();
+/** Add a stylesheet from map/css once; resolves when it has loaded (or failed). */
+function loadCss(name) {
+  if (!cssLoads.has(name)) {
+    cssLoads.set(name, new Promise((resolve) => {
+      const l = h('link', { rel: 'stylesheet', href: new URL(`../css/${name}`, import.meta.url).href });
+      l.onload = resolve;
+      l.onerror = resolve;
+      document.head.append(l);
+    }));
+  }
+  return cssLoads.get(name);
+}
 
 // The WebGL map starts on the first click (owner decision 9). MapLibre and the map module download once the page
 // has loaded and gone idle, so they never compete with the first paint; a click before then fetches them at once.
@@ -43,6 +119,7 @@ const mapModule = () => (mapModulePromise ||= import('./map.js'));
 /** Resolves once the MapLibre preload has finished (or failed, or after 10 s). */
 function prefetchMap() {
   mapModule().catch(() => { mapModulePromise = null; });
+  loadCss(LIVE_CSS);
   const l = document.createElement('link');
   l.rel = 'preload'; l.as = 'script'; l.href = MAPLIBRE_URL;
   const done = new Promise((resolve) => { l.onload = resolve; l.onerror = resolve; setTimeout(resolve, 10000); });
@@ -57,6 +134,13 @@ if (config.isDevData && els.devBadge) {
 
 let mapCtl = null;
 const sheet = createSheet(els.panel, els.handle, els.stage, { onChange: () => mapCtl && mapCtl.refit() });
+
+// Today's date in the sub bar (the viewer's own clock).
+if (els.today) {
+  const t = todayText();
+  els.today.textContent = t.text;
+  els.today.dateTime = t.iso;
+}
 
 function announce(text) {
   els.status.textContent = '';
@@ -79,10 +163,19 @@ function panelWidth(view) {
   return view.level === 'compare' ? config.comparePanelWidth : config.desktopPanelWidth;
 }
 
+/**
+ * The map's padding: the open map area is what is left. Phones: the legend strip on top, the zoom column on the
+ * right and the sheet below. Wider screens: the side panel and the zoom column on the right, the legend strip below,
+ * and on the left the layers panel (config.layersPanel, kept in step with --lp-w in map.css) when the stage is wide
+ * enough to keep it beside the map; narrower stages fold the layers list and start the map below the panel.
+ */
 function padding(view) {
-  if (isPhone()) return { top: 24, left: 24, right: 24, bottom: sheet.visible() + 16 };
-  const w = Math.min(panelWidth(view), els.stage.clientWidth * 0.6);
-  return { top: 48, left: 56, right: w + 40, bottom: 40 };
+  if (isPhone()) return { top: 56, left: 12, right: 12, bottom: sheet.visible() + 16 };
+  const stageW = els.stage.clientWidth;
+  const w = Math.min(panelWidth(view), stageW * 0.6);
+  const lp = config.layersPanel;
+  const beside = stageW >= lp.besideFrom;
+  return { top: beside ? 48 : lp.foldedHeight + 24, left: beside ? lp.inset + lp.width + 12 : 56, right: w + 36, bottom: 60 };
 }
 
 function summary(index, view) {
@@ -196,12 +289,13 @@ async function main() {
     });
   }
 
-  // Trail map dialog: module and data load on first open.
+  // Trail map dialog: module, data and its stylesheet (kept off the first paint) load on first open.
   let trail = null;
   let trailFor = null; // resort record whose map control is up (or waiting for the map)
   async function openTrail(r, from) {
     try {
-      const [{ createTrailMap }] = await Promise.all([import('./trailmap.js'), index.loadDetails().catch(() => null)]);
+      const [{ createTrailMap }] = await Promise.all([import('./trailmap.js'), index.loadDetails().catch(() => null),
+        loadCss(LIVE_CSS), loadCss(TRAIL_CSS)]);
       if (!trail) trail = createTrailMap({ getMapLibre: whenMapLibre, sourceTitle: (id) => index.sources.get(id) });
       trail.open(r, from);
       window.__careerMap.trail = trail;
@@ -238,6 +332,31 @@ async function main() {
   const loadSources = () => index.loadSources().then(() => panel.fillSources()).catch(sourcesFailed);
   const loadDetails = () => index.loadDetails().then(() => panel.fillSources()).catch(sourcesFailed);
 
+  // The rest of the header chrome (controls.js: region menu, Link, layers sheet, tone buttons, LIVE) loads after the
+  // first paint, so the first paint needs no request for it. Until then these stand in; the controls are shown with
+  // the rest of the header (nothing shifts) and come alive with the module.
+  let region = { update() {} };
+  let layersSheet = { open: false, set() {} };
+  let tone = savedTone();
+  const syncTone = () => {
+    for (const b of els.tone ? els.tone.querySelectorAll('button[data-tone]') : []) b.setAttribute('aria-pressed', String(b.dataset.tone === tone));
+    document.body.dataset.tone = tone;
+  };
+  const setTone = (t) => {
+    tone = t;
+    syncTone();
+    if (mapCtl) mapCtl.setTone(t); else onViewChange();
+  };
+  let chromeReady = false;
+  const chrome = new Promise((resolve) => afterFirstPaint(resolve)).then(() => import('./controls.js')).then((m) => {
+    region = m.createRegionMenu(els.region, index);
+    if (router.current) region.update(router.current);
+    m.createLinkButton(els.link, announce);
+    layersSheet = m.createLayersSheet(els.layers, els.layersToggle, els.layersClose);
+    m.createToneToggle(els.tone, { current: () => tone, onChange: setTone, announce });
+    chromeReady = true;
+    return m;
+  }).catch((err) => { console.warn('[map] controls', err.message); return null; });
   router = createRouter(index, (view, { initial, fellBack }) => {
     if (trailFor && (view.level !== 'resort' || view.resortId !== trailFor.id)) setTrailControl(null);
     if (trail) trail.close();
@@ -252,6 +371,11 @@ async function main() {
     if (!initial) els.scroll.scrollTop = 0; // a fresh page is at the top already; setting it forces a layout
     applyMeta(index, view);
     list.highlight(view);
+    region.update(view);
+    if (els.viewTitle) {
+      const [kind, name] = viewTitle(index, view);
+      els.viewTitle.replaceChildren(h('span', { class: 'mh-kind' }, kind), h('span', { class: 'mh-name' }, name));
+    }
     if (mapCtl) {
       if (!isPhone()) mapCtl.resize();
       mapCtl.show(view, { animate: !initial });
@@ -263,6 +387,8 @@ async function main() {
     }
     announce(msg);
     if (!initial) {
+      // A region picked in the phone layers sheet shows the map and the panel it opens.
+      if (isPhone() && layersSheet.open) layersSheet.set(false, { focus: false });
       sheet.reveal();
       if (headingEl) headingEl.focus({ preventScroll: true });
     }
@@ -276,9 +402,10 @@ async function main() {
     router.goHref(a.getAttribute('href'));
   });
 
-  // Filter chips (labels.js FILTERS): All, the facility types, Hiring now and the passes, combined with AND. They
-  // apply to the map and the list view. hiring.js counts Hiring now after the first paint (or on its first click);
-  // a disabled chip only announces its title.
+  // Filters (labels.js FILTERS) in the layers panel: a Type radio group (All, Ski areas, Indoor and training) and
+  // three checkboxes (Hiring now, Epic, Ikon), combined with AND; "Show every resort" clears them all. They apply to
+  // the map and the list view. hiring.js counts Hiring now after the first paint (or on its first use); a disabled
+  // option only announces its title. The header pill turns Hiring now on and off too.
   const onlyIds = (f) => (f.hiring || f.passes.length
     ? index.resortList.filter((r) => matchesFilter(r, { ...f, facility: 'all' })).map((r) => r.id) : null);
   const applyFilter = (next = filter) => {
@@ -287,16 +414,8 @@ async function main() {
     list.setFilter(filter);
   };
   let hiringMod = null;
-  const hiring = () => (hiringMod ||= import('./hiring.js').then((m) => { m.markHiring(index, null, hiringBtn); return m; },
+  const hiring = () => (hiringMod ||= import('./hiring.js').then((m) => { m.markHiring(index, null, hiringCount); return m; },
     (err) => { hiringMod = null; throw err; }));
-  const syncChips = () => {
-    for (const b of filterButtons) {
-      const k = b.dataset.filter;
-      const on = k === 'all' ? !isFiltered(filter) : k === 'hiring' ? filter.hiring
-        : b.dataset.group === 'pass' ? filter.passes.includes(k) : filter.facility === k;
-      b.setAttribute('aria-pressed', String(on));
-    }
-  };
   /** "Showing 3 resorts hiring now.", "Showing 37 resorts on the Epic Pass.", "Showing every resort." */
   const filterSummary = (f) => {
     if (!isFiltered(f)) return 'Showing every resort.';
@@ -306,41 +425,101 @@ async function main() {
     const passes = f.passes.length ? ` on the ${joinOr(f.passes.map((p) => PASS_LABEL[p]))}` : '';
     return `Showing ${plural(n, ...noun)}${f.hiring ? ' hiring now' : ''}${passes}.`;
   };
-  const toggle = (f) => {
-    if (f.key === 'all') return NO_FILTER;
-    if (f.group === 'facility') return { ...filter, facility: filter.facility === f.key ? 'all' : f.key };
-    if (f.key === 'hiring') return { ...filter, hiring: !filter.hiring };
-    const passes = filter.passes.includes(f.key) ? filter.passes.filter((p) => p !== f.key) : [...filter.passes, f.key];
+  /** The filter after choosing f: a Type option, or a checkbox switched to `on`; null f clears everything. */
+  const next = (f, on) => {
+    if (!f) return NO_FILTER;
+    if (f.key === 'all' || f.group === 'facility') return { ...filter, facility: f.key === 'all' ? 'all' : f.key };
+    if (f.key === 'hiring') return { ...filter, hiring: on };
+    const passes = on ? [...new Set([...filter.passes, f.key])] : filter.passes.filter((p) => p !== f.key);
     return { ...filter, passes: FILTERS.filter((x) => x.group === 'pass' && passes.includes(x.key)).map((x) => x.key) };
   };
-  const select = (f) => {
-    applyFilter(toggle(f));
-    syncChips();
+  const options = [];
+  const syncFilters = () => {
+    for (const { f, input } of options) {
+      input.checked = f.key === 'all' || f.group === 'facility' ? filter.facility === (f.key === 'all' ? 'all' : f.key)
+        : f.key === 'hiring' ? filter.hiring : filter.passes.includes(f.key);
+    }
+    if (els.pill) els.pill.setAttribute('aria-pressed', String(filter.hiring));
+    resetBtn.hidden = !isFiltered(filter);
+  };
+  const select = (f, on) => {
+    applyFilter(next(f, on));
+    syncFilters();
     announce(filterSummary(filter));
     onViewChange(); // redraws the 2D picture until the WebGL map runs
   };
-  // A pass chip with no resort on its pass in this build stays visible and disabled.
+  const disabled = (el) => el.getAttribute('aria-disabled') === 'true';
+  // Hiring now waits for hiring.js; at 0 it only announces its title, or turns an active filter off.
+  const pickHiring = (on) => hiring().then(() => {
+    if (on && disabled(hiringInput) && !filter.hiring) { syncFilters(); announce(hiringInput.title); return; }
+    select(HIRING, on);
+  }, (err) => { syncFilters(); console.warn('[map] hiring', err.message); });
+  // A pass with no resort on it in this build stays listed and disabled.
   const passCount = (key) => index.resortList.filter((r) => r.passes.includes(key)).length;
-  const filterButtons = FILTERS.map((f) => {
+  const option = (f, type) => {
+    const id = `filter-${f.key}`;
     const empty = f.group === 'pass' && !passCount(f.key);
-    return h('button', {
-      type: 'button', class: 'filter-btn',
-      'aria-pressed': String(f.key === 'all'), dataset: { filter: f.key, group: f.group },
-      title: empty ? `No resort lists the ${PASS_LABEL[f.key]} yet.` : f.title,
-      'aria-disabled': empty ? 'true' : null,
-      onclick: (e) => {
-        const btn = e.currentTarget;
-        if (btn.getAttribute('aria-disabled') && f.key !== 'hiring') { announce(btn.title); return; }
-        if (f.key !== 'hiring') select(f);
-        else hiring().then(() => (btn.getAttribute('aria-disabled') && !filter.hiring ? announce(btn.title) : select(f)), (err) => console.warn('[map] hiring', err.message));
-      },
-    }, f.label);
-  });
-  const hiringBtn = filterButtons.find((b) => b.dataset.filter === 'hiring');
+    const title = empty ? `No resort lists the ${PASS_LABEL[f.key]} yet.` : f.title || null;
+    const input = h('input', {
+      type, id, name: type === 'radio' ? 'filter-type' : null, value: f.key, checked: f.key === 'all',
+      title, 'aria-disabled': empty ? 'true' : null, dataset: { filter: f.key, group: f.group },
+    });
+    const text = h('span', { class: 'lp-text' }, f.label);
+    options.push({ f, input, text });
+    return h('label', { class: `lp-opt lp-${type}`, for: id, title },
+      input, text, f.key === 'hiring' ? h('span', { class: 'lp-ring', 'aria-hidden': 'true' }) : null);
+  };
+  const HIRING = FILTERS.find((f) => f.key === 'hiring');
+  const resetBtn = h('button', { type: 'button', class: 'lp-reset', hidden: true, onclick: () => select(null) }, 'Show every resort');
+  const typeGroup = h('fieldset', { class: 'lp-group' }, h('legend', { class: 'lp-legend' }, 'Type'),
+    FILTERS.filter((f) => f.key === 'all' || f.group === 'facility').map((f) => option(f, 'radio')));
+  const onlyGroup = h('fieldset', { class: 'lp-group' }, h('legend', { class: 'lp-legend' }, 'Show only'),
+    FILTERS.filter((f) => f.group === 'hiring' || f.group === 'pass').map((f) => option(f, 'checkbox')));
+  const hiringInput = options.find((o) => o.f.key === 'hiring').input;
+  const hiringText = options.find((o) => o.f.key === 'hiring').text;
+  /** hiring.js reports the count: the option and the pill read "Hiring now (n)"; at 0 both stay, disabled. */
+  function hiringCount(n, noneTitle) {
+    hiringText.textContent = `Hiring now (${n})`;
+    const label = hiringInput.closest('label');
+    for (const el of [hiringInput, label, els.pill].filter(Boolean)) {
+      if (n) { el.removeAttribute('title'); if (el !== label) el.removeAttribute('aria-disabled'); } else {
+        el.title = noneTitle;
+        if (el !== label) el.setAttribute('aria-disabled', 'true');
+      }
+    }
+    if (els.pill) {
+      els.pill.querySelector('.mh-count').textContent = String(n);
+      els.pill.hidden = false;
+    }
+    if (mapCtl) mapCtl.setHiring(index.hiringIds);
+  }
   if (els.filter) {
-    els.filter.append(...filterButtons);
+    els.filter.append(typeGroup, onlyGroup, resetBtn);
+    // A disabled option keeps its state and says why (Space and clicks alike).
+    els.filter.addEventListener('click', (e) => {
+      const input = e.target.closest && e.target.closest('input[data-filter]');
+      if (input && disabled(input) && !(input === hiringInput && filter.hiring)) { e.preventDefault(); announce(input.title); }
+    });
+    els.filter.addEventListener('change', (e) => {
+      const input = e.target.closest && e.target.closest('input[data-filter]');
+      if (!input) return;
+      const f = FILTERS.find((x) => x.key === input.dataset.filter);
+      if (f.key === 'hiring') pickHiring(input.checked); else select(f, input.checked);
+    });
     els.filter.hidden = false;
   }
+  if (els.pill) {
+    els.pill.addEventListener('click', () => {
+      if (disabled(els.pill) && !filter.hiring) { announce(els.pill.title); return; }
+      pickHiring(!filter.hiring);
+    });
+  }
+  // Phones: the layers panel is a sheet behind the LAYERS button; narrow desktops fold the layers list.
+  if (els.layersBox && !isPhone() && els.stage.clientWidth < config.layersPanel.besideFrom) els.layersBox.open = false;
+  if (els.layers) els.layers.hidden = false;
+  placeForViewport([[els.region, els.lpView, null], [els.link, els.lpView, null], [els.listToggle, els.subRight, els.tone]]);
+  syncTone();
+  for (const el of [els.tone, els.link, els.layersToggle]) if (el) el.hidden = false;
 
   els.listToggle.addEventListener('click', () => setListView(els.list.hidden));
   els.listToggle.hidden = false;
@@ -367,7 +546,7 @@ async function main() {
       return searchMod;
     };
     const input = $('map-search-input');
-    if (!isPhone()) input.placeholder = 'Search resorts and clusters';
+    if (!isPhone()) input.placeholder = 'Search resorts';
     input.addEventListener('focus', loadSearch);
     input.addEventListener('pointerdown', loadSearch, { passive: true });
     searchEl.hidden = false;
@@ -387,9 +566,9 @@ async function main() {
   const drawFrame = () => {
     if (mapCtl || els.map.hidden || !router.current) return;
     const keep = isFiltered(filter) ? (r) => matchesFilter(r, filter) : null;
-    const next = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
+    const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
     if (preview) preview.remove();
-    preview = next;
+    preview = pic;
     if (preview) els.map.insertBefore(preview, startBtn);
     startUnderlay();
   };
@@ -400,7 +579,8 @@ async function main() {
   els.map.append(startBtn);
   els.map.classList.add('map-waiting');
   drawFrame();
-  const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false };
+  const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false,
+    get layersSheet() { return layersSheet; }, get chromeReady() { return chromeReady; } };
   window.__careerMap = state;
   onViewChange = () => { if (!mapCtl) drawFrame(); };
   let resizeTimer = null;
@@ -430,13 +610,15 @@ async function main() {
         if (u && preview && !mapCtl) addPreviewUnderlay(preview, u);
       }).catch((err) => console.warn('[map] underlay', err.message));
   }
-  // Hiring now: the windows count, then the open roles once jobs/postings.json is in.
+  // Hiring now: the windows count, then the open roles once jobs/postings.json is in. The same file gives the LIVE
+  // indicator its time, shown only when the feed has a real fetch time.
   afterLoad(() => hiring().then(async (m) => {
     const file = await m.feedPostings(index);
     const before = index.hiringIds.join();
-    if (file) m.markHiring(index, file, hiringBtn);
+    if (file) m.markHiring(index, file, hiringCount);
     if (filter.hiring && index.hiringIds.join() !== before) { applyFilter(); onViewChange(); }
   }).catch((err) => console.warn('[map] hiring', err.message)));
+  afterLoad(() => postingsRaw().then((f) => chrome.then((m) => m && m.showFeedTime(els.live, f && f.fetched_at))).catch(() => {}));
 
   let starting = null;
   function startMap() {
@@ -459,9 +641,11 @@ async function main() {
         // Start the worker threads before the map constructor occupies the main thread.
         if (typeof m.prewarm === 'function') m.prewarm();
         return m;
-      }), mapModule()]);
+      }), mapModule(), loadCss(LIVE_CSS)]);
       mapCtl = createMap(els.map, index, maplibregl, {
         getPadding: padding,
+        tone,
+        onHome: () => router.go({ level: 'national' }),
         onPick(target, current) {
           const cur = current || { level: 'national' };
           if (target.kind === 'housing') { panel.selectSite(target.id); return; }
@@ -495,6 +679,7 @@ async function main() {
 
     state.mapCtl = mapCtl;
     if (isFiltered(filter)) mapCtl.setFilter(filter, onlyIds(filter));
+    if (index.hiringIds) mapCtl.setHiring(index.hiringIds);
     if (detailFor) applyDetail();
     if (trailFor) setTrailControl(trailFor);
     if (router.current) mapCtl.show(router.current, { animate: false });
@@ -510,7 +695,7 @@ async function main() {
       // Off the critical path: full data, the recolor control, then state outlines.
       loadDetails();
       if (els.recolor) {
-        import('./recolor.js').then(({ createRecolor }) => createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce }))
+        import('./recolor.js').then(({ createRecolor }) => createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce, legendRoot: els.heatLegend }))
           .catch((err) => console.warn('[map] recolor', err.message));
       }
       idle(() => loadStateOutlines(index).then((fc) => {

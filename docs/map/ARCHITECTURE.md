@@ -678,15 +678,17 @@ closes it when none are; it never commits.
 * A resort is hiring now when (a) `jobs/postings.json` has an open role at one of its `job_employers` (a board in
   `boards`, an https url) that names this resort or no single resort, or (b) its `hiring_window` months cover the
   viewer's current month (both ends included).
-* Chip: the fourth button after All, Ski areas and Indoor and training (group label "Filter resorts"), before the
-  pass chips (see "Pass membership"). It reads "Hiring now" until `hiring.js` has counted, then "Hiring now (N)". It
-  switches on and off and combines with the other chips using AND; it filters the map (an `in` filter on resort ids
-  over the resort and facility layers), the 2D picture before the map starts, and the list view, and
-  is announced ("Showing N resorts hiring now."). At N = 0 it stays visible with `aria-disabled="true"` and the title
-  "No resort lists an open role or a hiring window for this month."; a click only announces that (or turns an active
-  Hiring now off). Phones scroll the chip row sideways.
-* Cost: nothing on the startup path but the two index values and the button. `hiring.js` (about 1.5 KB gzipped, no
-  Zod) loads once the window `load` event and the first paint have passed, at idle, or on the chip's first click. It
+* Filter: the first checkbox of "Show only" in the layers panel (group label "Filter resorts", after the Type radio
+  group, before the pass checkboxes; see "Console look"). It reads "Hiring now" until `hiring.js` has counted, then
+  "Hiring now (N)" (`markHiring` reports N to app.js, which labels the option and the header pill). It switches on
+  and off and combines with the other filters using AND; it filters the map (an `in` filter on resort ids over the
+  resort and facility layers), the 2D picture before the map starts, and the list view, and is announced ("Showing N
+  resorts hiring now."). At N = 0 it stays visible with `aria-disabled="true"` and the title "No resort lists an open
+  role or a hiring window for this month."; a click only announces that (or turns an active Hiring now off). The
+  header's HIRING NOW pill shows N and switches the same filter (`aria-pressed`); the map rings each hiring resort in
+  green, with a pulse unless the viewer prefers reduced motion.
+* Cost: nothing on the startup path but the two index values and the controls. `hiring.js` (about 1.5 KB gzipped, no
+  Zod) loads once the window `load` event and the first paint have passed, at idle, or on the filter's first use. It
   counts the windows from the slim index at once, then, when some row has `job_employers`, reads `jobs/postings.json`
   (checked by hand; the panel's `loadPostings` reuses the same request) and adds the open roles, updating a selected
   filter. The feed is empty today, so the count is the windows alone. Keeping the count off the startup path matters:
@@ -740,14 +742,15 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
   About 0.3 KB more gzipped on the index.
 
 ### UI
-* Chips: "Epic" and "Ikon" (titles "Resorts on the Epic Pass", "Resorts on the Ikon Pass") follow Hiring now in the
-  "Filter resorts" group. All clears every chip and is pressed only when none is; Ski areas and Indoor and training
-  pick one facility type (a second click goes back to all); Hiring now, Epic and Ikon switch on and off. Active
-  parts combine with AND; Epic and Ikon together keep resorts on either pass (`data.js` `matchesFilter`). The rule
+* Checkboxes: "Epic" and "Ikon" (titles "Resorts on the Epic Pass", "Resorts on the Ikon Pass") follow Hiring now
+  under "Show only" in the "Filter resorts" group of the layers panel. Type is a radio group (All, Ski areas, Indoor
+  and training: one facility type, All by default); Hiring now, Epic and Ikon switch on and off; "Show every resort"
+  (shown while any filter is on) clears them all. Active parts combine with AND; Epic and Ikon together keep resorts
+  on either pass (`data.js` `matchesFilter`). The rule
   applies to the WebGL map (one `in` filter on resort ids plus the facility layer visibility), the 2D picture before
   the map starts (`preview.js` `keep`) and the list view. Announcements: "Showing 37 resorts on the Epic Pass.",
   "Showing 6 resorts on the Epic Pass or Ikon Pass.", "Showing 2 ski areas hiring now on the Ikon Pass.",
-  "Showing every resort." A pass chip with no resort on its pass in the loaded index stays visible with
+  "Showing every resort." A pass checkbox with no resort on its pass in the loaded index stays visible with
   `aria-disabled="true"` and the title "No resort lists the Epic Pass yet."
 * Resort panel and stub (`panel.js` `passesFact`, `routes.py` `render_passes`): a "Passes" fact under Owner, one line
   per membership, "Epic Pass: unlimited", "Ikon Pass: 7 days", "Ikon Pass: limited days" (no number stated) or "Ikon
@@ -998,8 +1001,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
 * Lazy modules: `hiring.js` (the Hiring now count, at idle), `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
   when the climate section nears the screen), `detailcontrols.js` (resort
-  detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`. The Inter web font loads after the window `load` event and the first
-  contentful paint. The snowfall
+  detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`. Map pages load no web font:
+  they use the system monospace stack (see "Console look"). The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
   `jobs/postings.json` loads once, after the first paint at idle for the Hiring now count (when some resort has
@@ -1071,8 +1074,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   blocked, the underlay shows through. Muted (`raster-saturation` -0.35, `raster-brightness-max` 0.7,
   `raster-contrast` -0.1). State fills turn translucent over both (`basemap.state_fill_opacity`, zoom stops: 30% to
   zoom 6.5, 55% from 7.5) so the underlay reads at national and state zooms while outlines, heat colors and markers
-  stay readable. The map has one dark theme; heat rasters draw above the
-  fills. Attribution: "Relief: Natural Earth" is in `basemap.attribution`; "Imagery: USGS The National Map" comes from
+  stay readable. The MAP / SATELLITE toggle sets the raster paint of the underlay and the imagery (see "Console
+  look"); heat rasters draw above the fills. Attribution: "Relief: Natural Earth" is in `basemap.attribution`; "Imagery: USGS The National Map" comes from
   the source, so MapLibre lists it only from the imagery's minzoom. The tiles load only after the click to start, so
   the first load and Lighthouse never fetch them. The tests answer tile requests with a synthetic local tile
   (`tests/map/fixtures/imagery-tile.png`), since the sandbox cannot reach the USGS service; the underlay checks in
@@ -1126,6 +1129,71 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   render (`detail/vail.json` is 166 KB, mostly transit), and the web font swap relays out the long panel (30 to
   60 ms). On the 11 resorts with climate charts, Chart.js (69 KB), its first canvas (about 130 ms) and the chart
   animations now cost their time when the reader scrolls to the section.
+
+### Console look (ROADMAP item 21; `map/css/map.css`, `map/css/map-live.css`, `map/js/app.js`, `map/js/controls.js`, `map/js/map.js`)
+World Monitor (worldmonitor.app, AGPL 3.0) is a visual reference only: no code, CSS rules, icons or images are copied;
+only plain color values are reused. Every rule is scoped to map pages (`body.map-page`, and `body.credits-page` on
+`/map/credits/`, which links `map.css` for its tokens); `/assets/global.css` and `/assets/sidebar.css` are unchanged,
+and the site nav (`/assets/nav.js`) keeps working with a squared hamburger.
+* Tokens (`map.css`): background `#0a0a0a`, secondary `#111`, surface `#141414`, hover `#1e1e1e`, border `#2a2a2a`,
+  strong border `#444`, text `#e8e8e8`, secondary text `#ccc`, dim `#959595` (5.2:1 or more on every surface, so it can
+  carry small text), green `#44ff88` for active states and focus rings, amber `#ffaa00` (Tier A, Estimated), blue
+  `#3388ff` (Tier B; `#6aa6ff` for Reported text). One font for everything: 'SF Mono', Monaco, 'Cascadia Code', 'Fira
+  Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace. Uppercase letter spaced labels for headings, chips, badges
+  and buttons; square 1px bordered controls (radius 2 to 3 px). The Inter loader is gone from map pages.
+* Header bar (`.mh-bar`): the wordmark (the page `h1`, uppercase by CSS), the region jump menu, the HIRING NOW pill,
+  the LIVE indicator, the search box, Link and List view. The region menu (`controls.js` `createRegionMenu`) is a disclosure button
+  with real links to National and every state with resorts (built on first open; Down opens it on the current
+  region, Up and Down move, Escape closes it). LIVE shows only when `jobs/postings.json` has a real `fetched_at`
+  (`showFeedTime`): "Live jobs 15 Oct 17:19 UTC", read as "Live jobs feed, updated ...". Link copies the current URL
+  (Clipboard API, then a textarea fallback) and says "Link to this view copied." in the polite status region. Mid
+  widths drop the LIVE time, then the pill, then LIVE.
+* Sub bar (`.mh-sub`): the view kind and name ("National view · United States", "Resort · Vail"), today's date
+  ("Fri, 16 Oct 2026", the viewer's clock) and the MAP / SATELLITE toggle (two `aria-pressed` buttons).
+* Basemap tone (`config.basemap.tone`): MAP (the default) darkens the Natural Earth underlay and the USGS imagery into
+  a near black monochrome with MapLibre raster paint: underlay saturation -1, contrast 0.5, brightness 0 to 0.75
+  (water and the image's faded edges fall to black, the base color, so the image edges melt into it; land keeps its
+  relief between about `#141414` and `#2a2a2a`), imagery saturation -1, contrast 0.2, brightness 0 to 0.38. SATELLITE restores the earlier
+  full color paint and base `#0a0e14`. `mapCtl.setTone` repaints the background, every `underlay-*` layer and the
+  imagery; the 2D picture applies the same math as one SVG `feColorMatrix` after its `feImage` (`preview.js`
+  `toneMatrix`, checked against the shader in the browser test). The choice is kept in `localStorage`
+  (`careermap:basemap`, every read and write in try/catch; blocked storage falls back to MAP). State lines are thin
+  teal (`#1f6b58`), the selected state green.
+* Layers panel (`#layers-panel`, 232 px, `config.layersPanel` and `--lp-w`): one floating panel at the top left of the
+  map. COLOR BY (a segmented row of the four modes, green when active; after the WebGL map is ready), then LAYERS (a
+  `details` box holding the filters: the Type radio group and the Show only checkboxes, native inputs styled round and
+  square), then, on resort views with detail data, RESORT DETAIL LAYERS in the same style. From a 1000 px stage the
+  map's left padding keeps the panel beside the map (the national view fits between it and the side panel); narrower
+  desktops fold LAYERS and start the map below the folded panel. List view keeps the panel (the list is padded to
+  clear it); Color by and the detail layers hide there.
+* Markers (`map.js`): `resorts-glow`, a fully blurred circle in the tier color under every dot (ski areas and
+  facilities, filtered like them, hidden in heat modes); the dots keep their hit targets and keyboard access.
+  `resorts-hiring` draws a green ring around each resort hiring now; a MapLibre marker per ring carries a CSS pulse
+  (`.hiring-pulse-ring`, transform and opacity only), hidden from assistive technology and the pointer, kept to the
+  resorts the filters and the focused state or cluster show, and never created under `prefers-reduced-motion`.
+* Legend strip (`#map-legend`, static in the template): LEGEND with Tier A, Tier B, Indoor, Training center, Cluster
+  and Hiring now, centered along the bottom of the open map area; on phones it sits at the top of the map and
+  scrolls sideways (focusable, so a keyboard can scroll it). The heat legend card stays for heat modes.
+* Controls: one column on the right edge of the open map area (`top-right`, offset by the side panel): zoom in, zoom
+  out, home (back to the national view; at the national view it refits a panned map), the trail map button on resort
+  views, then the compact attribution. All buttons are 32 px squares. On phones the column sits at the bottom right
+  of the visible map, just above the sheet (`--sheet-visible`, set by `sheet.js` when the sheet snaps), clear of New
+  England at the national view.
+* Phones (under 760 px): the header keeps the wordmark (hidden under 380 px), the search box and LAYERS; List view
+  moves to the sub bar, and the region menu and Link move to the top of the layers sheet (`placeForViewport` moves
+  the same elements, so ids and handlers stay). LAYERS opens the layers panel as a sheet along the bottom (78% high at
+  most, above the panel sheet), with a Close button; Escape closes it and focus returns to LAYERS; picking a region
+  closes it. Nothing overflows at 320 px.
+* Cost: the parts of the chrome the first paint uses (the tone value, today's date, the view title, the phone
+  placement and the filters) live in `app.js`; the rest (`map/js/controls.js`: the region menu, Link, the layers
+  sheet, the tone buttons' clicks and LIVE) loads after the first paint, so it adds no request or byte before it.
+  The controls show with the rest of the header (nothing shifts) and come alive with the module
+  (`__careerMap.chromeReady`). The render blocking `map.css` stays
+  at its earlier size (about 9.7 KB gzipped): the styles for the running map (MapLibre controls, the hiring pulse,
+  Color by, the heat legend card, the detail layers) live in `map/css/map-live.css` (about 3 KB gzipped), which
+  app.js adds after the first paint with the MapLibre prefetch and waits for before it builds the map; the trail map
+  dialog's live in `map/css/trailmap.css`, added the first time the dialog opens. The picture adds one blur filter
+  on its dot group and one color matrix per underlay image; neither is a Largest Contentful Paint candidate.
 
 ### Color modes: heat maps
 Lucrativeness, Season length and Snowfall draw a heat map that fills the map: the lower 48 clipped to the state
@@ -1208,9 +1276,10 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
   WebGL frame is SwiftShader bound.
 * Interpolated values never show as numbers. Tooltips and the panel show only the resorts' sourced values; resorts with
   a null value show as grey dots on top of the surface and add nothing to it.
-* **Legend** (bottom right of the map on wide screens, under the mode buttons on phones): title and units, the bar,
+* **Legend** (a card at the bottom of the left column, under the layers panel, on wide screens; bottom right of the map
+  on narrow desktops; under the legend strip on phones): title and units, the bar,
   numeric ticks placed on it, "Resort values: min to max" (sourced values; only for modes without a fixed domain), the
-  dot key and the resort count, then "About these colors" (open on wide screens, folded on phones). Classed bars are
+  dot key and the resort count, then "About these colors" (folded, so the card stays short; a click opens it). Classed bars are
   hard edged class boxes (`classBoxes` in `heat.js`): each box is as wide as its class spans in value; open end classes
   take one typical class span (the most common span between breaks), or reach the fixed domain; classes that end at or
   below `legend_compress_below` take half a typical class each. Snowfall: 0 to 180 in takes 12 percent of the bar and
@@ -1224,8 +1293,8 @@ setting lives in `config/definitions.yaml` `heat` and reaches the UI through `de
   and the same smoothing note for stations and resorts.
 * Images are MapLibre image sources with linear resampling under the state lines, cluster outlines and resort dots;
   cluster tints are off in these modes. Each mode's surface is computed or fetched once (cached).
-* A mode with no values is disabled and says why ("No resort has snowfall data yet."). Nothing animates, so
-  `prefers-reduced-motion` needs no special case.
+* A mode with no values is disabled and says why ("No resort has snowfall data yet."). Nothing in a heat mode
+  animates; the only animation on the map is the Hiring now pulse, left out under `prefers-reduced-motion`.
 
 ### Alaska at its true place, and the pan limit
 Owner feedback 2026-10-14: Alaska draws only at its real place and scale (no inset), in the WebGL map and in the 2D
@@ -1236,8 +1305,9 @@ first frame alike: its outline, clusters, resorts, heat rasters, snowfall isolin
   switch to the WebGL map shows no jump. Clicking Alaska in the state list, or an Alaska resort, flies there as for
   any state.
 * Pan limit (`config.pan`, `camera.js` `panCenter`, passed to MapLibre as `transformConstrain`). The middle of the
-  open map area, the container minus the view's padding (the side panel on desktop, the sheet on phones; `map.js`
-  keeps the padding of the last fit), stays inside `pan.center`: -190 to -60, 18 to 72. That reaches past the
+  open map area, the container minus the view's padding (the side panel, the layers panel on wide screens, the zoom
+  column and the legend strip on desktop; the legend strip and the sheet on phones; `map.js` keeps the padding of the
+  last fit, `mapCtl.openPadding`), stays inside `pan.center`: -190 to -60, 18 to 72. That reaches past the
   antimeridian (the far Aleutians at 172.9 E come to the middle), past the Arctic coast north of the Brooks Range,
   past Maine and south of the Florida Keys, so a click, hold and drag brings Alaska to the middle at the national zoom
   and lower, and the map can never be dragged away. The screen also stays between the poles. This limit replaces
@@ -1282,7 +1352,8 @@ first frame alike: its outline, clusters, resorts, heat rasters, snowfall isolin
 
 ### Trail map dialog (`map/js/trailmap.js`, `map/js/officialmap.js`)
 * Titled "<resort> trail map". Opened from "Open the trail map" in the resort panel and from a map control (mountain
-  icon under the zoom buttons) on resort views whose record has `trailmap_available` or an official map file.
+  icon under the zoom and home buttons on the right edge) on resort views whose record has `trailmap_available` or an
+  official map file.
   `trailmap.js` and `officialmap.js` load on first open; nothing of the official map loads before the dialog opens.
 * Two tabs (WAI-ARIA tabs, automatic activation; Left, Right, Home and End move between them): **Official map**
   (when there is a file; selected on open) and **Interactive** (when `trailmap_available`). With one view the tab list

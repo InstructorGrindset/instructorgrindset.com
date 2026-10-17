@@ -24,9 +24,9 @@
   <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"></noscript>
-  <link rel="stylesheet" href="/map/css/map.css?v=12">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%23e0a03a'/%3E%3C/svg%3E">
+  <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"><style>.map-legend { display: none !important; }</style></noscript>
+  <link rel="stylesheet" href="/map/css/map.css?v=13">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%2344ff88'/%3E%3C/svg%3E">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
   <link rel="modulepreload" href="/map/js/data.js">
@@ -39,10 +39,7 @@
   <link rel="modulepreload" href="/map/js/meta.js">
   <link rel="modulepreload" href="/map/js/preview.js">
   <link rel="modulepreload" href="/map/js/camera.js">
-  <!-- The web font loads after the window load event and the first contentful paint, so it never competes with the first paint; text uses the fallback font until then. -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script>(function(){var n=0,p=0,f=function(){if(++n!==2)return;var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},g=function(){if(!p){p=1;f()}};addEventListener("load",f,{once:true});try{new PerformanceObserver(function(x,o){if(x.getEntriesByName("first-contentful-paint").length){o.disconnect();g()}}).observe({type:"paint",buffered:true})}catch(e){g()}setTimeout(g,8000)})()</script>
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
+  <!-- Map pages use the system monospace stack (map.css), so they load no web font. -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SkiResort","name":"Mt. Hood Meadows","url":"https://instructorgrindset.com/map/or/mount-hood/mt-hood-meadows/","geo":{"@type":"GeoCoordinates","latitude":45.32889,"longitude":-121.6625},"address":{"@type":"PostalAddress","addressRegion":"OR","addressCountry":"US"},"containedInPlace":{"@type":"Place","name":"Mount Hood"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Snowsports Career Map","item":"https://instructorgrindset.com/map/"},{"@type":"ListItem","position":2,"name":"Oregon","item":"https://instructorgrindset.com/map/or/"},{"@type":"ListItem","position":3,"name":"Mount Hood","item":"https://instructorgrindset.com/map/or/mount-hood/"},{"@type":"ListItem","position":4,"name":"Mt. Hood Meadows","item":"https://instructorgrindset.com/map/or/mount-hood/mt-hood-meadows/"}]}]}</script>
   <script type="application/json" id="resort-record">{"version":1,"generated_at":"2026-10-14T04:16:31Z","resort":{"id":"mt-hood-meadows","name":"Mt. Hood Meadows","tier":"A","facility_type":"ski_area","tier_a_criteria":[{"criterion":"owner_selection","rationale":"Added to Tier A by owner decision.","source_id":"owner-decisions-2026-10-11"}],"tier_a_status":"approved","approval":{"by":"site owner","date":"2026-10-11","note":"Approved from the candidate review"},"owner":null,"lat":45.32889,"lon":-121.6625,"location_source_id":"wikipedia-mount-hood-meadows","cluster_id":"mount-hood","state":"OR","size":{"acres":{"value":2150,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-11","confidence":"published","note":null},"vertical_ft":{"value":2777,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-11","confidence":"published","note":null},"lifts":{"value":11,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-11","confidence":"published","note":"Chairlifts; the article's lift table lists 11."},"ski_school_staff_est":null},"elevation":{"base_ft":{"value":4523,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-11","confidence":"published","note":"Hood River Meadows base, the lowest point; the main lodge is 5,366 ft."},"summit_ft":{"value":7300,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-11","confidence":"published","note":"Infobox value; the text gives 7,305 ft at the top of Cascade Express."}},"snow":{"annual_avg_in":{"value":430,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-13","confidence":"published","note":null}},"access":{"rating":"transit_friendly","summary_md":"Several bus services reach the base, including Columbia Gorge Area Transit.","source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-13","confidence":"estimated","note":"The article says many buses serve the area; schedules not stated."},"official_trailmap":{"url":"https://www.skihood.com/explore/trail-maps","format":"page","season":null,"source_id":"tmo-mt-hood-meadows","as_of":"2026-10-13","confidence":"estimated","note":null,"image_url":null,"image_format":null,"image_source_id":null,"image_as_of":null,"image_confidence":null,"image_note":null},"webcams":{"cams_page":{"url":"https://www.skihood.com/mountain-report","source_id":"webcams-mt-hood-meadows-search","as_of":"2026-10-13","confidence":"estimated","note":"From a search result for this page; page not opened. Mountain report page; the search result showed its Live Web Cams section."},"cams":[]},"jobs":{"links":[{"employer_id":"ski-racing-job-board","role_group":"coaching","disciplines":["race"],"label":"Race coaching jobs nationwide","url":"https://skiracing.com/job-board/","source_id":"jobs-skiracing-job-board","as_of":"2026-10-13","confidence":"estimated","note":null},{"employer_id":"fasterskier-job-postings","role_group":"coaching","disciplines":["nordic"],"label":"Nordic coaching jobs nationwide","url":"https://fasterskier.com/category/news/jobpostings/","source_id":"jobs-fasterskier-jobpostings","as_of":"2026-10-13","confidence":"estimated","note":null},{"employer_id":"mt-hood-meadows-resort","role_group":"all","disciplines":[],"label":"Mt. Hood Meadows jobs","url":"https://www.skihood.com/explore/jobs","source_id":"jobs-meadows-jobs-named","as_of":"2026-10-13","confidence":"estimated","note":null}],"feed":false,"hiring_window":null},"passes":[],"season":{"open_typical":{"value":"11-26","source_id":"facts-west2-koin-meadows-openings","as_of":"2026-10-13","confidence":"estimated","note":"From a search result for this page; page not opened. KOIN review of openings since 1994: most seasons open between November 18 and December 3; value is the midpoint of that range"},"close_typical":{"value":"05-03","source_id":"facts-west2-ots-pnw-closing","as_of":"2026-10-13","confidence":"estimated","note":"From a search result for this page; page not opened. OnTheSnow projected closing May 3; one season projection"},"length_days":{"value":159,"source_id":"facts-west2-ots-pnw-closing","as_of":"2026-10-13","confidence":"estimated","note":"computed from typical dates (open from facts-west2-koin-meadows-openings, close from facts-west2-ots-pnw-closing)"},"training_start":null},"terrain":{"beginner_pct":{"value":15,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-12","confidence":"published","note":"Article trails section."},"intermediate_pct":{"value":40,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-12","confidence":"published","note":null},"advanced_pct":{"value":15,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-12","confidence":"published","note":null},"expert_pct":{"value":30,"source_id":"wikipedia-mount-hood-meadows","as_of":"2026-10-12","confidence":"published","note":null},"character_tags":[]},"fit":{"enthusiast_types":[],"professional_types":[]},"clients":{"profile_tags":[],"notes_md":null},"career":null,"editorial":{"overview_md":"Mount Hood Meadows sits on the southeast face of Mount Hood in northern Oregon and is the largest of the mountain's ski resorts, with 2,150 skiable acres. It lies about 67 miles east of Portland and 35 miles from Hood River on Oregon Route 35. Skiers first used the resort in December 1967. It has alpine and Nordic areas and night skiing. Overnight guests stay at Timberline Lodge, Cooper Spur or condos in Government Camp.","culture_md":"Many buses serve Meadows, including Columbia Area Transit from the Hood River side. Hood River, a city of 8,313 in 2020, built its economy on agriculture, tourism and sports recreation, and tourism boomed after windsurfers and kiteboarders discovered the Columbia Gorge winds. Since the late 1990s aerospace firms have become some of its largest employers. On the west side, Government Camp is the only town within 5 miles of Mount Hood and serves as its ski town; it had 179 residents in 2020.","alexandre_take_md":null,"status":"reviewed","source_ids":["ed-west-wiki-mount-hood-meadows","ed-west-wiki-hood-river-oregon","ed-west-wiki-government-camp-oregon"],"reviewed_date":"2026-10-13"},"climate_available":false,"detail_available":true,"trailmap_available":true,"housing_summary":null,"housing_search":{"furnished_finder":{"town":"Welches, OR","url":"https://www.furnishedfinder.com/housing/us--or--welches","source_id":"hs-ff-or-welches","as_of":"2026-10-14","confidence":"estimated","note":"From a search result for this page; page not opened."},"tools":[]},"sources":["ed-west-wiki-government-camp-oregon","ed-west-wiki-hood-river-oregon","ed-west-wiki-mount-hood-meadows","facts-west2-koin-meadows-openings","facts-west2-ots-pnw-closing","hs-ff-or-welches","jobs-fasterskier-jobpostings","jobs-meadows-jobs-named","jobs-skiracing-job-board","owner-decisions-2026-10-11","tmo-mt-hood-meadows","webcams-mt-hood-meadows-search","wikipedia-mount-hood-meadows"]},"sources":[{"id":"ed-west-wiki-government-camp-oregon","url":"https://en.wikipedia.org/wiki/Government_Camp,_Oregon","title":"Government Camp, Oregon (Wikipedia)","accessed_date":"2026-10-12","note":null},{"id":"ed-west-wiki-hood-river-oregon","url":"https://en.wikipedia.org/wiki/Hood_River,_Oregon","title":"Hood River, Oregon (Wikipedia)","accessed_date":"2026-10-12","note":null},{"id":"ed-west-wiki-mount-hood-meadows","url":"https://en.wikipedia.org/wiki/Mount_Hood_Meadows","title":"Mount Hood Meadows (Wikipedia)","accessed_date":"2026-10-12","note":null},{"id":"facts-west2-koin-meadows-openings","url":"https://digital-release.koin.com/news/oregon/slow-start-to-ski-season-every-mt-hood-meadows-opening-dates-since-1994/","title":"KOIN: Slow start to ski season, every Mt. Hood Meadows opening date since 1994","accessed_date":"2026-10-13","note":"read through search results only"},{"id":"facts-west2-ots-pnw-closing","url":"https://www.onthesnow.com/pacific-northwest/projected-closing","title":"OnTheSnow: Pacific Northwest Ski Resort Projected Closing Dates","accessed_date":"2026-10-13","note":"read through search results only"},{"id":"hs-ff-or-welches","url":"https://www.furnishedfinder.com/housing/us--or--welches","title":"Furnished Monthly Rentals in Welches, OR","accessed_date":"2026-10-14","note":"Furnished Finder town page seen in a search result; page not opened."},{"id":"jobs-fasterskier-jobpostings","url":"https://fasterskier.com/category/news/jobpostings/page/8/","title":"FasterSkier job postings (page 8)","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened. Nordic coaching postings from clubs such as Bridger Ski Foundation, Jackson Hole Ski and Snowboard Club and Green Mountain Valley School. The link uses the first page of the category."},{"id":"jobs-meadows-jobs-named","url":"https://www.skihood.com/explore/jobs","title":"Mt. Hood Meadows jobs page","accessed_date":"2026-10-13","note":"URL named in search result text, not in a result link; page not opened. Results say applications run through a Dayforce portal."},{"id":"jobs-skiracing-job-board","url":"https://skiracing.com/job-board/","title":"Ski Racing Media job board","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened. Carries club coaching openings such as Big Sky Ski Education Foundation, Rowmark and Loveland Ski Club."},{"id":"owner-decisions-2026-10-11","url":"https://github.com/InstructorGrindset/instructorgrindset.com/blob/main/ROADMAP.md#9-decisions-log","title":"Instructor Grindset owner decisions log","accessed_date":"2026-10-11","note":null},{"id":"tmo-mt-hood-meadows","url":"https://www.skihood.com/explore/trail-maps","title":"Trail Maps","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened"},{"id":"webcams-mt-hood-meadows-search","url":"https://www.skihood.com/mountain-report","title":"Conditions (Mt. Hood Meadows)","accessed_date":"2026-10-13","note":"From a search result for this page; page not opened."},{"id":"wikipedia-mount-hood-meadows","url":"https://en.wikipedia.org/wiki/Mount_Hood_Meadows","title":"Mount Hood Meadows (Wikipedia)","accessed_date":"2026-10-11","note":null}]}</script>
   <link rel="modulepreload" href="/map/js/schemas.js">
@@ -55,26 +52,72 @@
     <script src="/assets/nav.js?v=15"></script>
 
     <main class="main map-main" id="main">
-      <header class="map-header">
-        <h1>Snowsports Career Map</h1>
-        <span id="dev-badge" class="dev-badge" hidden></span>
-        <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
-        <div id="map-search" class="map-search" role="search" hidden>
-          <label class="visually-hidden" for="map-search-input">Search resorts, clusters and states</label>
-          <input id="map-search-input" class="map-search-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search">
-          <ul id="map-search-list" class="map-search-list" role="listbox" aria-label="Search results" hidden></ul>
-          <p class="map-search-empty" hidden>No resort, cluster or state matches that name.</p>
-          <div class="visually-hidden" role="status" aria-live="polite"></div>
+      <header class="map-header" id="map-header">
+        <div class="mh-bar">
+          <h1 class="mh-title">Snowsports Career Map</h1>
+          <span id="dev-badge" class="dev-badge" hidden></span>
+          <!-- Region jump menu (map/js/controls.js createRegionMenu): National and every state with resorts. -->
+          <div id="map-region" class="map-region" hidden>
+            <button id="map-region-btn" class="mh-btn map-region-btn" type="button" aria-expanded="false" aria-controls="map-region-list"><span class="visually-hidden">Jump to a region. Now showing </span><span class="map-region-label">National</span></button>
+            <ul id="map-region-list" class="map-region-list" aria-label="Regions" hidden></ul>
+          </div>
+          <!-- Hiring now count (map/js/hiring.js); a toggle for the Hiring now filter. -->
+          <button id="hiring-pill" class="mh-pill" type="button" aria-pressed="false" hidden><span class="mh-pill-dot" aria-hidden="true"></span>Hiring now <span class="mh-count"></span></button>
+          <!-- Shown only when the jobs feed (data/build/jobs/postings.json) has a real fetch time. -->
+          <p id="feed-live" class="feed-live" hidden><span class="live-dot" aria-hidden="true"></span><span class="live-label">Live</span> <span class="live-what">jobs<span class="visually-hidden"> feed, updated</span></span> <time></time></p>
+          <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
+          <div id="map-search" class="map-search" role="search" hidden>
+            <label class="visually-hidden" for="map-search-input">Search resorts, clusters and states</label>
+            <input id="map-search-input" class="map-search-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="map-search-list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search">
+            <ul id="map-search-list" class="map-search-list" role="listbox" aria-label="Search results" hidden></ul>
+            <p class="map-search-empty" hidden>No resort, cluster or state matches that name.</p>
+            <div class="visually-hidden" role="status" aria-live="polite"></div>
+          </div>
+          <div id="map-link" class="map-link" hidden>
+            <button id="link-copy" class="mh-btn" type="button" aria-label="Copy a link to this view" title="Copy a link to this view">Link</button>
+            <span class="mh-copied" aria-hidden="true" hidden>Copied</span>
+          </div>
+          <button id="list-toggle" class="mh-btn list-toggle" type="button" aria-pressed="false" aria-controls="list-view" hidden>List view</button>
+          <button id="layers-toggle" class="mh-btn layers-toggle" type="button" aria-expanded="false" aria-controls="layers-panel" hidden>Layers</button>
         </div>
-        <button id="list-toggle" class="btn btn-sm btn-ghost list-toggle" type="button" aria-pressed="false" aria-controls="list-view" hidden>List view</button>
+        <div class="mh-sub" id="map-subbar">
+          <p id="view-title" class="mh-view"></p>
+          <p class="mh-date"><time id="today-date"></time></p>
+          <div class="mh-sub-right" id="mh-sub-right">
+            <div id="tone-toggle" class="seg tone-toggle" role="group" aria-label="Basemap" hidden>
+              <button type="button" data-tone="map" aria-pressed="true">Map</button><button type="button" data-tone="satellite" aria-pressed="false">Satellite</button>
+            </div>
+          </div>
+        </div>
       </header>
 
       <div class="map-stage" id="map-stage">
         <div id="map" class="map" role="region" aria-label="Interactive map of US ski resorts. The panel and the list view hold the same information."></div>
         <section id="list-view" class="list-view" aria-label="List view of every state, cluster and resort" hidden></section>
-        <div id="facility-filter" class="facility-filter" role="group" aria-label="Filter resorts" hidden></div>
-        <div id="recolor" class="recolor" hidden></div>
-        <div id="detail-layers" class="detail-layers" role="group" aria-label="Resort detail layers" hidden></div>
+        <!-- One floating panel at the top left (a sheet on phones): Color by, the filters, and the resort detail layers. -->
+        <section id="layers-panel" class="layers-panel" aria-label="Map layers" hidden>
+          <div class="lp-sheet-head"><h2 class="lp-sheet-title" tabindex="-1">Layers</h2><button id="layers-close" class="mh-btn lp-close" type="button">Close</button></div>
+          <div id="lp-view" class="lp-view"></div>
+          <div id="recolor" class="recolor" hidden></div>
+          <details id="layers-box" class="lp-box" open>
+            <summary class="lp-summary">Layers</summary>
+            <div id="facility-filter" class="facility-filter" role="group" aria-label="Filter resorts" hidden></div>
+          </details>
+          <div id="detail-layers" class="detail-layers" role="group" aria-label="Resort detail layers" hidden></div>
+        </section>
+        <div id="heat-legend" class="heat-legend"></div>
+        <!-- Focusable, since phones scroll it sideways. -->
+        <div class="map-legend" id="map-legend" role="region" aria-labelledby="map-legend-title" tabindex="0">
+          <p class="ml-title" id="map-legend-title">Legend</p>
+          <ul class="ml-items">
+            <li><span class="ml-dot ml-a" aria-hidden="true"></span>Tier A</li>
+            <li><span class="ml-dot ml-b" aria-hidden="true"></span>Tier B</li>
+            <li><span class="ml-sq" aria-hidden="true"></span>Indoor</li>
+            <li><span class="ml-dia" aria-hidden="true"></span>Training center</li>
+            <li><span class="ml-cluster" aria-hidden="true"></span>Cluster</li>
+            <li><span class="ml-ring" aria-hidden="true"></span>Hiring now</li>
+          </ul>
+        </div>
 
         <aside id="panel" class="panel" aria-label="Map details" aria-busy="true" data-sheet="half" tabindex="-1">
           <button id="sheet-handle" class="sheet-handle" type="button" aria-controls="panel-scroll" aria-label="Resize panel"><span aria-hidden="true"></span></button>
