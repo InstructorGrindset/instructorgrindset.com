@@ -1,3 +1,5 @@
+# Alpine lane: alpine racing, collegiate, masters, NASTAR, adaptive alpine, race leagues.
+# Contract: docs/map/EVENTS.md. Confidence and page status are in each source note.
 batch: events-alpine
 researched_date: 2026-10-17
 sources:
@@ -225,11 +227,6 @@ events:
   venue:
     resort_id: copper-mountain
   organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-wc-2026-27-search
-    as_of: 2026-10-17
-    confidence: estimated
-  sanctioning:
     name: International Ski Federation (FIS)
     source_id: events-alpine-wiki-wc-2026-27
     as_of: 2026-10-17
@@ -268,11 +265,6 @@ events:
   venue:
     resort_id: killington
   organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-wc-2026-27-search
-    as_of: 2026-10-17
-    confidence: estimated
-  sanctioning:
     name: International Ski Federation (FIS)
     source_id: events-alpine-wiki-wc-2026-27
     as_of: 2026-10-17
@@ -312,11 +304,6 @@ events:
   venue:
     resort_id: beaver-creek
   organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-wc-2026-27-search
-    as_of: 2026-10-17
-    confidence: estimated
-  sanctioning:
     name: International Ski Federation (FIS)
     source_id: events-alpine-wiki-wc-2026-27
     as_of: 2026-10-17
@@ -357,11 +344,6 @@ events:
   venue:
     resort_id: beaver-creek
   organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-wc-2026-27-search
-    as_of: 2026-10-17
-    confidence: estimated
-  sanctioning:
     name: International Ski Federation (FIS)
     source_id: events-alpine-wiki-wc-2026-27
     as_of: 2026-10-17
@@ -402,11 +384,6 @@ events:
   venue:
     resort_id: sun-valley
   organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-wc-2026-27-search
-    as_of: 2026-10-17
-    confidence: estimated
-  sanctioning:
     name: International Ski Federation (FIS)
     source_id: events-alpine-wiki-wc-2026-27
     as_of: 2026-10-17
@@ -445,11 +422,7 @@ events:
   - elite
   venue:
     resort_id: stowe
-  organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-2026-27-events-search
-    as_of: 2026-10-17
-    confidence: estimated
+  organizer: null
   format:
     value: Men's giant slalom and slalom
     source_id: events-alpine-usss-2026-27-events-search
@@ -463,12 +436,7 @@ events:
     confidence: estimated
     note: The draft NorAm calendar on skiracing.com gives January 5 to 8 to Whiteface instead.
   signup:
-    method: qualification
-    url:
-      value: https://www.usskiandsnowboard.org/2026-27-events
-      source_id: events-alpine-usss-2026-27-events-search
-      as_of: 2026-10-17
-      confidence: estimated
+    method: null
   website:
     value: https://www.usskiandsnowboard.org/2026-27-events
     source_id: events-alpine-usss-2026-27-events-search
@@ -489,11 +457,7 @@ events:
   - elite
   venue:
     resort_id: burke
-  organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-skiracing-noram-2026-27-search
-    as_of: 2026-10-17
-    confidence: estimated
+  organizer: null
   format:
     value: Eastern NorAm Cup stop
     source_id: events-alpine-skiracing-noram-2026-27-search
@@ -507,12 +471,7 @@ events:
     confidence: estimated
     note: Draft calendar date.
   signup:
-    method: qualification
-    url:
-      value: https://www.usskiandsnowboard.org/2026-27-events
-      source_id: events-alpine-usss-2026-27-events-search
-      as_of: 2026-10-17
-      confidence: estimated
+    method: null
   website:
     value: https://skiracing.com/2026-27-stifel-noram-cup-schedule/
     source_id: events-alpine-skiracing-noram-2026-27-search
@@ -533,11 +492,7 @@ events:
   - elite
   venue:
     resort_id: whiteface
-  organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-2026-27-events-search
-    as_of: 2026-10-17
-    confidence: estimated
+  organizer: null
   format:
     value: Eastern NorAm Cup stop
     source_id: events-alpine-skiracing-noram-2026-27-search
@@ -551,12 +506,7 @@ events:
     confidence: estimated
     note: The draft NorAm calendar on skiracing.com lists Whiteface on January 5 to 8 instead.
   signup:
-    method: qualification
-    url:
-      value: https://www.usskiandsnowboard.org/2026-27-events
-      source_id: events-alpine-usss-2026-27-events-search
-      as_of: 2026-10-17
-      confidence: estimated
+    method: null
   website:
     value: https://www.usskiandsnowboard.org/2026-27-events
     source_id: events-alpine-usss-2026-27-events-search
@@ -576,9 +526,9 @@ events:
     resort_id: mammoth-mountain
   organizer:
     name: U.S. Ski & Snowboard
-    source_id: events-alpine-townlift-2027-nationals-search
+    source_id: events-alpine-wiki-us-alpine-championships
     as_of: 2026-10-17
-    confidence: estimated
+    confidence: reported
   format:
     value: National championships; the 2027 program includes downhill for the first time since 2021
     source_id: events-alpine-townlift-2027-nationals-search
@@ -599,7 +549,7 @@ events:
     confidence: estimated
     note: Held at Vail. The opened Wikipedia page United States Alpine Ski Championships lists Vail as the 2026 host.
   signup:
-    method: qualification
+    method: null
     url:
       value: https://usskiandsnowboard.org/events/us-alpine-national-championships
       source_id: events-alpine-usss-alpine-nationals-page-search
@@ -623,12 +573,7 @@ events:
   - elite
   venue:
     resort_id: whiteface
-  organizer:
-    name: International Ski and Snowboard Federation (FIS)
-    source_id: events-alpine-skiracing-junior-worlds-2027-search
-    as_of: 2026-10-17
-    confidence: estimated
-    note: FIS championship by its title; the local organizing committee was not found.
+  organizer: null
   format:
     value: FIS junior world championships at Whiteface Mountain and Lake Placid
     source_id: events-alpine-skiracing-junior-worlds-2027-search
@@ -641,12 +586,7 @@ events:
     as_of: 2026-10-17
     confidence: estimated
   signup:
-    method: qualification
-    url:
-      value: https://skiracing.com/tag/lake-placid/
-      source_id: events-alpine-skiracing-junior-worlds-2027-search
-      as_of: 2026-10-17
-      confidence: estimated
+    method: null
   website:
     value: https://skiracing.com/tag/lake-placid/
     source_id: events-alpine-skiracing-junior-worlds-2027-search
@@ -684,7 +624,7 @@ events:
     as_of: 2026-10-17
     confidence: estimated
   signup:
-    method: qualification
+    method: null
     url:
       value: https://www.ncaa.org/championship/national-collegiate/skiing/
       source_id: events-alpine-ncaa-skiing-search
@@ -726,7 +666,7 @@ events:
     confidence: estimated
     note: Held at Whiteface Mountain and Mt. Van Hoevenberg in Lake Placid.
   signup:
-    method: qualification
+    method: null
     url:
       value: https://www.uscsa.org/national-championships.html
       source_id: events-alpine-uscsa-nationals-search
@@ -1010,11 +950,7 @@ events:
   - masters
   venue:
     resort_id: alyeska
-  organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-masters-events-search
-    as_of: 2026-10-17
-    confidence: estimated
+  organizer: null
   format:
     value: National masters championships
     source_id: events-alpine-usss-masters-events-search
@@ -1028,7 +964,7 @@ events:
     confidence: estimated
     note: Listed as the week of March 21 to 27; exact final dates, schedule and registration deadline to be announced.
   signup:
-    method: membership_then_online
+    method: null
     url:
       value: https://www.usskiandsnowboard.org/node/36131
       source_id: events-alpine-usss-masters-events-search
@@ -1056,12 +992,7 @@ events:
   - masters
   venue:
     resort_id: beaver-creek
-  organizer:
-    name: U.S. Ski & Snowboard
-    source_id: events-alpine-usss-masters-events-search
-    as_of: 2026-10-17
-    confidence: estimated
-    note: Listed on the U.S. Ski & Snowboard Masters events page; the local organizing club was not found.
+  organizer: null
   format:
     value: FIS Masters Cup and Western Region masters championships
     source_id: events-alpine-usss-masters-events-search
@@ -1076,7 +1007,7 @@ events:
     as_of: 2026-10-17
     confidence: estimated
   signup:
-    method: membership_then_online
+    method: null
     url:
       value: https://www.usskiandsnowboard.org/node/36131
       source_id: events-alpine-usss-masters-events-search
@@ -1111,12 +1042,12 @@ events:
     confidence: estimated
   edition_2026_27:
     start: 2027-01-04
-    end: 2027-01-07
+    end: null
     source_id: events-alpine-patspeak-league-search
     as_of: 2026-10-17
     confidence: estimated
-    note: These are the listed start dates of the league's opening week; races then run weekly, weather permitting. The season
-      end date is not given.
+    note: The listed start dates are January 4 to 7, 2027 (the opening week); races then run weekly, weather permitting. The
+      season end date is not given.
   usual_timing:
     value: Begins the first full week of January
     source_id: events-alpine-patspeak-league-search

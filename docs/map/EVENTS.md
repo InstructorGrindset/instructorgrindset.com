@@ -71,6 +71,9 @@ events:
   edition_2026_27: {start: 2027-02-25, end: 2027-02-27, source_id: ..., as_of: ..., confidence: ...}   # null when not published
   last_edition: {start: 2026-02-19, end: 2026-02-21, season: 2025/26, source_id: ..., as_of: ..., confidence: ...}   # give when edition_2026_27 is null; optional otherwise
   usual_timing: {value: "Late February", source_id: ..., as_of: ..., confidence: ...}   # optional, only when a source says it
+  season_long: {value: true, source_id: ..., as_of: ..., confidence: ...}   # optional: a program that runs all season with no single date
+  # Season long programs (a NASTAR program, a weekly race league, rail jam nights) may leave both edition_2026_27 and
+  # last_edition null when usual_timing (for example "Thursday nights, January to March") or season_long is sourced.
   signup:
     method: online_registration          # online_registration | lottery | qualification | invitation | membership_then_online | at_venue | none_spectator_only
     url: {value: https://..., source_id: ..., as_of: ..., confidence: ...}           # registration page, or the event page that explains sign up
