@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T15:35:25Z",
+  "generated_at": "2026-10-20T16:09:22Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -28947,8 +28947,20 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 4,
         "items": [
+          {
+            "id": "teton-ridge-classic",
+            "name": "Teton Ridge Classic",
+            "discipline_label": "Cross country",
+            "start": "2026-01-31",
+            "end": "2026-01-31",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nwest-teton-ridge-classic-targhee",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
+          },
           {
             "id": "ladies-waist-banked-slalom",
             "name": "Ladies Waist Banked Slalom",
@@ -28994,6 +29006,7 @@
         "events-cwest-grandtarghee-north-shore-banked-slalom",
         "events-cwest-grandtarghee-nye-rail-jam",
         "events-freestyle-grandtarghee-ladies-waist",
+        "events-nwest-teton-ridge-classic-targhee",
         "facts-gapfill-gt-lift-tickets",
         "facts-training-targhee-coolworks-profile",
         "facts-west3-wp-grand-targhee",
@@ -49839,7 +49852,7 @@
         "tools": []
       },
       "events": {
-        "count": 2,
+        "count": 4,
         "items": [
           {
             "id": "dirksen-derby",
@@ -49864,6 +49877,30 @@
             "source_id": "events-instructor-psia-national-events-calendar-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "great-nordeen",
+            "name": "Great Nordeen",
+            "discipline_label": "Cross country",
+            "start": "2026-03-14",
+            "end": "2026-03-14",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nwest-great-nordeen-mbsef",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
+          },
+          {
+            "id": "cascade-crest",
+            "name": "Cascade Crest Nordic Ski Race & Tour",
+            "discipline_label": "Ski marathon",
+            "start": "2026-04-04",
+            "end": "2026-04-04",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nwest-cascade-crest-visitcentraloregon",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -49874,6 +49911,8 @@
         "ed-west-wiki-powdr",
         "events-freestyle-findarace-dirksen-derby",
         "events-instructor-psia-national-events-calendar-search",
+        "events-nwest-cascade-crest-visitcentraloregon",
+        "events-nwest-great-nordeen-mbsef",
         "facts-west2-wp-mount-bachelor",
         "hs-ff-or-bend",
         "jobs-fasterskier-jobpostings",
