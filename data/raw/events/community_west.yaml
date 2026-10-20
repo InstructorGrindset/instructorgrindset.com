@@ -1,8 +1,9 @@
 # Community competitions in the western states (research lane: community_west).
-# Contract: docs/map/EVENTS.md. Facts gathered on 2026-10-17 from web search results (confidence estimated)
+# Contract: docs/map/EVENTS.md. Facts gathered on 2026-10-17 and 2026-10-20 (second pass) from web search
+# results (confidence estimated)
 # and Wikipedia coordinates (confidence reported).
 batch: events-community_west
-researched_date: 2026-10-17
+researched_date: 2026-10-20
 sources:
 - id: events-cwest-sunvalley-stampede-event
   url: https://www.sunvalley.com/Events/Sun-Valley-Stampede
@@ -23,17 +24,6 @@ sources:
 - id: events-cwest-asj-gunbarrel-25
   url: https://adventuresportsjournal.com/?p=31445
   title: Heavenly's Gunbarrel 25
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-cwest-visitlaketahoe-gunbarrel-25
-  url: https://visitlaketahoe.com/event/gunbarrel-25-at-heavenly-mountain-resort
-  title: Gunbarrel 25 at Heavenly Mountain Resort
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-cwest-heavenly-70th-release
-  url: https://www.barchart.com/story/news/36649070/heavenly-mountain-resort-celebrates-70th-anniversary-with-jam-packed-lineup-of-high-energy-events-and-music-all-season-long
-  title: Heavenly Mountain Resort Celebrates 70th Anniversary With Jam Packed Lineup of High Energy Events and Music All Season
-    Long
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
 - id: events-cwest-playwinterpark-rail-rodeo-barrel-racers
@@ -205,6 +195,141 @@ sources:
   title: 2025-26 Events - Mt. Baker Ski Area
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
+- id: events-cwest-skiheavenly-gunbarrel-25
+  url: https://www.skiheavenly.com/explore-the-resort/experience-heavenly/gunbarrel-25.aspx
+  title: Gunbarrel 25
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-regfox-turn-n-burn-2026
+  url: https://powdermountain.regfox.com/turn-n-burn-2026-
+  title: turn n burn 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-townlift-turn-n-burn-2026
+  url: https://townlift.com/2026/02/turn-n-burn-returns-for-its-10th-anniversary-at-powder-mountain/
+  title: Turn N Burn returns for its 10th anniversary at Powder Mountain
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-powdermountain-events
+  url: https://powdermountain.com/events
+  title: Events (Powder Mountain)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-cwest-powdermountain-knucklehead-rail-jam
+  url: https://powdermountain.com/events/knucklehead-rail-jam
+  title: Knucklehead Rail Jam
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-regfox-knucklehead-rail-jam
+  url: https://powdermountain.regfox.com/knucklehead-rail-jam-
+  title: Knucklehead Rail Jam registration (Location Information)
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-gosnowmass-banked-slalom
+  url: https://www.gosnowmass.com/event/banked-slalom/
+  title: Banked Slalom (Go Snowmass events)
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-aspensnowmass-banked-slalom
+  url: https://www.aspensnowmass.com/visit/events/banked-slalom
+  title: Slash the Mass Banked Slalom (Aspen Snowmass events)
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-grandtarghee-north-shore-banked-slalom
+  url: https://www.grandtarghee.com/activities-events/events/event-calendar/north-shore-banked-slalom
+  title: North Shore Banked Slalom
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-snowbowl-slash-n-bash-2026
+  url: https://www.snowbowl.ski/event/2026-slash-n-bash-banked-slalom
+  title: 2026 Slash N Bash Banked Slalom
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-visitlaketahoe-kirkwood-banked-slalom
+  url: https://visitlaketahoe.com/event/legendary-banked-slalom-at-kirkwood-mountain-resort
+  title: Legendary Banked Slalom at Kirkwood Mountain Resort
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-vailresorts-kirkwood-2023-24-tip-sheet
+  url: https://news.vailresorts.com/press-kit?item=29982
+  title: Kirkwood Mountain Resort Winter 2023/24 Tip Sheet
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-southtahoenow-kirkwood-banked-slalom-2020
+  url: https://southtahoenow.com/02/18/2020/26th-annual-banked-slalom-kirkwood-weekend
+  title: 26th annual Banked Slalom at Kirkwood this weekend
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-junemountain-june-jam
+  url: https://www.junemountain.com/things-to-do/rail-jam
+  title: June Mountain Rail Jam
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-mammoth-june-rail-jam
+  url: https://www.mammothmountain.com/things-to-do/events/june-rail-jam
+  title: June Rail Jam (Mammoth Mountain events)
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-townlift-woodward-rail-jam-2025
+  url: https://townlift.com/2025/02/rail-jam-registration-open-at-woodward/
+  title: Rail jam registration open at Woodward
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-skullcandy-crusher-cup-recap
+  url: https://skullcandy.com/blogs/the-feed/feed-2
+  title: Woodward Park City Sets the Stage
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-winterpark-meltdown-rail-jam
+  url: https://www.winterparkresort.com/things-to-do/competition-center/comp-center-events/meltdown-rail-jam
+  title: Meltdown Rail Jam
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-winterpark-spring-bash-and-splash
+  url: https://www.winterparkresort.com/things-to-do/events/spring-bash-and-splash
+  title: Spring Bash and Splash
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-alta-town-racing
+  url: https://www.alta.com/racing-at-alta/alta-town-racing
+  title: Alta Town Racing
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-bigbear-corenation
+  url: https://www.bigbearmountainresort.com/things-to-do/events/corenation
+  title: CoreNation (Big Bear Mountain Resort events)
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-unofficialnetworks-slush-rush-2025
+  url: https://unofficialnetworks.com/2025/06/18/copper-mountains-end-of-season-relay-race-is-truly-unique/
+  title: 2025 Slush Rush Relay Race @ Copper Mountain
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-denvergazette-slush-rush-2024
+  url: https://www.denvergazette.com/2024/04/29/photos-2nd-annual-slush-rush-at-copper-mountain-makes-a-splash-on-april-powder-day/
+  title: 'Photos: 2nd annual Slush Rush at Copper Mountain makes a splash on April powder day'
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-sugarbowl-silver-belt
+  url: https://sugarbowl.com/silverbelt
+  title: Silver Belt (Sugar Bowl)
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-freeskier-silver-belt-2026
+  url: https://www.freeskier.com/the-silver-belt-freeride-comp-at-sugar-bowl-returns-for-2026
+  title: The Silver Belt freeride comp at Sugar Bowl returns for 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-jacksonhole-dicks-ditch-event
+  url: https://jacksonhole.com/events/dicks-ditch-classic-banked-slalom
+  title: Dick's Ditch Classic Banked Slalom (event details)
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-cwest-jacksonhole-dicks-ditch-2026-results
+  url: https://www.jacksonhole.com/blog/dicks-ditch-2026
+  title: 'Dick''s Ditch 2026: Day 2 Final Results'
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
 venues:
 - id: mccall-id-town
   name: McCall
@@ -238,10 +363,11 @@ events:
     confidence: estimated
   last_edition:
     season: 2025/26
-    source_id: events-cwest-heavenly-70th-release
-    as_of: 2026-10-17
+    source_id: events-cwest-skiheavenly-gunbarrel-25
+    as_of: 2026-10-20
     confidence: estimated
-    note: Listed among the 2025/26 season events in Heavenly's December 2025 press release; the date was not seen.
+    note: Set for March 28, 2026 on the Visit Lake Tahoe listing, then cancelled for weather and low snow per Heavenly's event
+      page. The date of the last edition held was not found.
   usual_timing:
     value: Spring
     source_id: events-cwest-asj-gunbarrel-25
@@ -249,11 +375,10 @@ events:
     confidence: estimated
     note: The source calls it Heavenly's spring mogul marathon.
   website:
-    value: https://visitlaketahoe.com/event/gunbarrel-25-at-heavenly-mountain-resort
-    source_id: events-cwest-visitlaketahoe-gunbarrel-25
-    as_of: 2026-10-17
+    value: https://www.skiheavenly.com/explore-the-resort/experience-heavenly/gunbarrel-25.aspx
+    source_id: events-cwest-skiheavenly-gunbarrel-25
+    as_of: 2026-10-20
     confidence: estimated
-    note: Visit Lake Tahoe listing; its date is a placeholder per the search result. The organizer's own page was not found.
 - id: bridger-bowl-king-and-queen-of-the-ridge
   name: King and Queen of the Ridge
   discipline: endurance
@@ -1248,3 +1373,580 @@ events:
     as_of: 2026-10-17
     confidence: estimated
     note: Ski Utah events listing.
+- id: powder-mountain-turn-n-burn
+  name: Turn N Burn
+  discipline: banked_slalom
+  levels:
+  - open_amateur
+  venue:
+    resort_id: powder-mountain
+  edition_2026_27: null
+  format:
+    value: Snowboard only banked slalom, with a course practice day before race day
+    source_id: events-cwest-powdermountain-events
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-03-21
+    end: 2026-03-21
+    source_id: events-cwest-townlift-turn-n-burn-2026
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 10th annual edition.
+  signup:
+    method: online_registration
+    url:
+      value: https://powdermountain.regfox.com/turn-n-burn-2026-
+      source_id: events-cwest-regfox-turn-n-burn-2026
+      as_of: 2026-10-20
+      confidence: estimated
+    platform:
+      value: RegFox
+      source_id: events-cwest-regfox-turn-n-burn-2026
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://powdermountain.com/events
+    source_id: events-cwest-powdermountain-events
+    as_of: 2026-10-20
+    confidence: estimated
+- id: powder-mountain-knucklehead-rail-jam
+  name: Knucklehead Rail Jam
+  discipline: rail_jam
+  levels:
+  - open_amateur
+  venue:
+    resort_id: powder-mountain
+  edition_2026_27: null
+  format:
+    value: Rail jam in the Hidden Lake Terrain Park with amateur and open divisions for men and women, for intermediate to
+      advanced riders
+    source_id: events-cwest-regfox-knucklehead-rail-jam
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-03-07
+    end: 2026-03-07
+    source_id: events-cwest-powdermountain-knucklehead-rail-jam
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Check in from 9am; the jam started at 11:15am.
+  signup:
+    method: online_registration
+    url:
+      value: https://powdermountain.regfox.com/knucklehead-rail-jam-
+      source_id: events-cwest-regfox-knucklehead-rail-jam
+      as_of: 2026-10-20
+      confidence: estimated
+    platform:
+      value: RegFox
+      source_id: events-cwest-regfox-knucklehead-rail-jam
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 0
+      source_id: events-cwest-regfox-knucklehead-rail-jam
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Free with a valid day or season pass.
+    requirements:
+      value: Skiers and snowboarders ages 13 and up; valid day or season pass; helmet required; capped at 100 riders
+      source_id: events-cwest-regfox-knucklehead-rail-jam
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://powdermountain.com/events/knucklehead-rail-jam
+    source_id: events-cwest-powdermountain-knucklehead-rail-jam
+    as_of: 2026-10-20
+    confidence: estimated
+- id: snowmass-slash-the-mass-banked-slalom
+  name: Slash the Mass Banked Slalom
+  discipline: banked_slalom
+  levels: []
+  venue:
+    resort_id: snowmass
+  edition_2026_27: null
+  format:
+    value: Snowboard only banked slalom
+    source_id: events-cwest-gosnowmass-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    source_id: events-cwest-gosnowmass-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+    note: The 12th edition, set for April 4, 2026, was cancelled for snow conditions. Entry rules were not seen.
+  website:
+    value: https://www.aspensnowmass.com/visit/events/banked-slalom
+    source_id: events-cwest-aspensnowmass-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+- id: grand-targhee-north-shore-banked-slalom
+  name: North Shore Banked Slalom
+  discipline: banked_slalom
+  levels:
+  - open_amateur
+  - junior
+  - masters
+  venue:
+    resort_id: grand-targhee
+  edition_2026_27: null
+  organizer:
+    name: Grand Targhee Resort
+    url: https://www.grandtarghee.com/
+    source_id: events-cwest-grandtarghee-north-shore-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+    note: The event page says Grand Targhee puts it on.
+  format:
+    value: 'Banked slalom for skiers and snowboarders: one practice run and two timed runs, fastest counts; part of the proceeds
+      go to the Victor Skatepark Foundation'
+    source_id: events-cwest-grandtarghee-north-shore-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-04-12
+    end: 2026-04-12
+    source_id: events-cwest-grandtarghee-north-shore-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 2nd annual edition. In the 2025 edition the top times won entry to the Mt. Baker Legendary Banked Slalom.
+  signup:
+    method: null
+    url:
+      value: https://www.grandtarghee.com/activities-events/events/event-calendar/north-shore-banked-slalom
+      source_id: events-cwest-grandtarghee-north-shore-banked-slalom
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 50
+      source_id: events-cwest-grandtarghee-north-shore-banked-slalom
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 2026 registration; competitors could also buy $50 discounted lift tickets.
+    requirements:
+      value: Field capped at 150; classes from Next Gen (8 to 12) to Legends (50 and up) for skiers and snowboarders; 2026
+        registration closed at noon the day before
+      source_id: events-cwest-grandtarghee-north-shore-banked-slalom
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.grandtarghee.com/activities-events/events/event-calendar/north-shore-banked-slalom
+    source_id: events-cwest-grandtarghee-north-shore-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+- id: arizona-snowbowl-slash-n-bash-banked-slalom
+  name: Slash N' Bash Banked Slalom
+  discipline: banked_slalom
+  levels:
+  - open_amateur
+  venue:
+    resort_id: arizona-snowbowl
+  edition_2026_27: null
+  format:
+    value: Banked slalom on Agassiz Run for ages 13 and up; two timed runs, best time counts
+    source_id: events-cwest-snowbowl-slash-n-bash-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-04-18
+    end: 2026-04-18
+    source_id: events-cwest-snowbowl-slash-n-bash-2026
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Earlier editions ran April 12, 2025 and April 13, 2024 per the resort's event pages.
+  signup:
+    method: online_registration
+    url:
+      value: https://www.snowbowl.ski/event/2026-slash-n-bash-banked-slalom
+      source_id: events-cwest-snowbowl-slash-n-bash-2026
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 10
+      source_id: events-cwest-snowbowl-slash-n-bash-2026
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Per person, 2026; no refunds.
+    requirements:
+      value: Valid season pass or lift ticket; online waiver, signed by a parent or guardian for minors; limited spots
+      source_id: events-cwest-snowbowl-slash-n-bash-2026
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.snowbowl.ski/event/2026-slash-n-bash-banked-slalom
+    source_id: events-cwest-snowbowl-slash-n-bash-2026
+    as_of: 2026-10-20
+    confidence: estimated
+- id: kirkwood-legendary-banked-slalom
+  name: Kirkwood Legendary Banked Slalom
+  discipline: banked_slalom
+  levels:
+  - open_amateur
+  - junior
+  venue:
+    resort_id: kirkwood
+  edition_2026_27: null
+  format:
+    value: 'Banked slalom in Snow Snake Gully: a kids and family day, then a day of adult categories including Pro/Open and
+      Snowskate'
+    source_id: events-cwest-visitlaketahoe-kirkwood-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2023/24
+    start: 2024-04-06
+    end: 2024-04-06
+    source_id: events-cwest-visitlaketahoe-kirkwood-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Latest date found; weather and snow dependent. Kirkwood's 2023/24 tip sheet called it the 29th annual, and Visit
+      Lake Tahoe lists a banked slalom in Kirkwood's 2026/27 lineup.
+  signup:
+    method: null
+    fee_usd:
+      value: 20
+      source_id: events-cwest-southtahoenow-kirkwood-banked-slalom-2020
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 2020 rate for pass holders; others paid $40 plus a day ticket.
+    requirements:
+      value: In 2020, registration was at the Red Cliffs Club
+      source_id: events-cwest-southtahoenow-kirkwood-banked-slalom-2020
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://visitlaketahoe.com/event/legendary-banked-slalom-at-kirkwood-mountain-resort
+    source_id: events-cwest-visitlaketahoe-kirkwood-banked-slalom
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Visit Lake Tahoe listing for the 2024 edition.
+  calendar_url:
+    value: https://news.vailresorts.com/press-kit?item=29982
+    source_id: events-cwest-vailresorts-kirkwood-2023-24-tip-sheet
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Kirkwood 2023/24 tip sheet that lists the event.
+- id: june-mountain-rail-jam
+  name: June Jam
+  discipline: rail_jam
+  levels:
+  - open_amateur
+  venue:
+    resort_id: june-mountain
+  edition_2026_27: null
+  format:
+    value: Free, family friendly rail jam on Bunker Hill for riders of all ages, with divisions for every level
+    source_id: events-cwest-junemountain-june-jam
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-03-21
+    end: 2026-03-21
+    source_id: events-cwest-junemountain-june-jam
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Mammoth Mountain's listing gave February 21, 2026; the June Mountain page gives March 21.
+  signup:
+    method: online_registration
+    url:
+      value: https://www.junemountain.com/things-to-do/rail-jam
+      source_id: events-cwest-junemountain-june-jam
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 0
+      source_id: events-cwest-junemountain-june-jam
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Free entry.
+    requirements:
+      value: Online registration, or same day registration at the bottom of J1 from 7:30 to 9am
+      source_id: events-cwest-junemountain-june-jam
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.junemountain.com/things-to-do/rail-jam
+    source_id: events-cwest-junemountain-june-jam
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://www.mammothmountain.com/things-to-do/events/june-rail-jam
+    source_id: events-cwest-mammoth-june-rail-jam
+    as_of: 2026-10-20
+    confidence: estimated
+- id: woodward-park-city-crusher-cup
+  name: Skullcandy Crusher Cup at Woodward Park City
+  discipline: rail_jam
+  levels:
+  - open_amateur
+  - junior
+  - elite
+  venue:
+    resort_id: woodward-park-city
+  edition_2026_27: null
+  series:
+    id: skullcandy-crusher-cup
+    name: Skullcandy Crusher Cup
+  format:
+    value: Grassroots snowboard rail jam for all ages and skill levels with 12 and under, 13 and up and pro divisions; the
+      pro purse was $5,000
+    source_id: events-cwest-townlift-woodward-rail-jam-2025
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2024/25
+    start: 2025-03-01
+    end: 2025-03-01
+    source_id: events-cwest-townlift-woodward-rail-jam-2025
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Qualifier for finals scheduled for December 2025. A 2026 stop was not confirmed.
+  website:
+    value: https://skullcandy.com/blogs/the-feed/feed-2
+    source_id: events-cwest-skullcandy-crusher-cup-recap
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Skullcandy recap of the event.
+- id: winter-park-meltdown-rail-jam
+  name: Meltdown Rail Jam
+  discipline: rail_jam
+  levels: []
+  venue:
+    resort_id: winter-park
+  edition_2026_27: null
+  format:
+    value: Rail jam on a custom built course next to Snoasis with a $500 prize, part of Spring Bash and Splash
+    source_id: events-cwest-winterpark-spring-bash-and-splash
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    source_id: events-cwest-winterpark-spring-bash-and-splash
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Listed in the 2026 Spring Bash and Splash lineup, which ran March 28 to April 12, 2026 per a third party listing;
+      the Bucket Banked Slalom page says the Meltdown was cancelled for 2025/26.
+  website:
+    value: https://www.winterparkresort.com/things-to-do/competition-center/comp-center-events/meltdown-rail-jam
+    source_id: events-cwest-winterpark-meltdown-rail-jam
+    as_of: 2026-10-20
+    confidence: estimated
+- id: alta-town-racing
+  name: Alta Town Racing
+  discipline: alpine_racing
+  levels:
+  - open_amateur
+  venue:
+    resort_id: alta
+  edition_2026_27: null
+  format:
+    value: Friday race days from January through March, with an April finale
+    source_id: events-cwest-alta-town-racing
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    source_id: events-cwest-alta-town-racing
+    as_of: 2026-10-20
+    confidence: estimated
+    note: The page lists January to March race days and an April finale marked postponed.
+  usual_timing:
+    value: Fridays, 11am to 3:30pm, January through March
+    source_id: events-cwest-alta-town-racing
+    as_of: 2026-10-20
+    confidence: estimated
+  signup:
+    method: at_venue
+    fee_usd:
+      value: 150
+      source_id: events-cwest-alta-town-racing
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Per racer; Alta employees get a discount.
+    requirements:
+      value: Ages 18 and up; register and pay at the Alf Engen Ski School office before racing
+      source_id: events-cwest-alta-town-racing
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.alta.com/racing-at-alta/alta-town-racing
+    source_id: events-cwest-alta-town-racing
+    as_of: 2026-10-20
+    confidence: estimated
+- id: bear-mountain-corenation-rail-jam
+  name: CoreNation Rail Jam
+  discipline: rail_jam
+  levels:
+  - open_amateur
+  venue:
+    resort_id: bear-mountain
+  edition_2026_27: null
+  series:
+    id: corenation
+    name: CoreNation
+  format:
+    value: Stop of the CoreNation rail jam series at The Scene in the base area; fees, donations and raffle funds go to the
+      nonprofit CORE
+    source_id: events-cwest-bigbear-corenation
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-02-14
+    end: 2026-02-14
+    source_id: events-cwest-bigbear-corenation
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 9am to 3:30pm.
+  signup:
+    method: null
+    url:
+      value: https://www.bigbearmountainresort.com/things-to-do/events/corenation
+      source_id: events-cwest-bigbear-corenation
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 20
+      source_id: events-cwest-bigbear-corenation
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 2026 registration fee.
+    requirements:
+      value: Open to all ages; registration required
+      source_id: events-cwest-bigbear-corenation
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.bigbearmountainresort.com/things-to-do/events/corenation
+    source_id: events-cwest-bigbear-corenation
+    as_of: 2026-10-20
+    confidence: estimated
+- id: copper-mountain-slush-rush
+  name: Slush Rush
+  discipline: fun_race
+  disciplines_also:
+  - pond_skim
+  levels:
+  - open_amateur
+  venue:
+    resort_id: copper-mountain
+  edition_2026_27: null
+  format:
+    value: 'Relay for teams of three: superpipe slalom, banked turns while carrying a full mug of Gatorade, a mini terrain
+      park and a pond skim at the finish'
+    source_id: events-cwest-unofficialnetworks-slush-rush-2025
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2024/25
+    start: 2025-05-03
+    end: 2025-05-03
+    source_id: events-cwest-unofficialnetworks-slush-rush-2025
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 3rd annual edition. The 2nd ran April 27, 2024. No 2026 date was found.
+  signup:
+    method: null
+    requirements:
+      value: Teams of three of any gender, on skis, snowboards or snowblades; minimum age 12; capped at 70 teams; costumes
+        encouraged
+      source_id: events-cwest-unofficialnetworks-slush-rush-2025
+      as_of: 2026-10-20
+      confidence: estimated
+      note: The search summary gave these rules from a listing it did not name.
+  website:
+    value: https://unofficialnetworks.com/2025/06/18/copper-mountains-end-of-season-relay-race-is-truly-unique/
+    source_id: events-cwest-unofficialnetworks-slush-rush-2025
+    as_of: 2026-10-20
+    confidence: estimated
+    note: News story; the resort's event page was not found.
+  results_url:
+    value: https://www.denvergazette.com/2024/04/29/photos-2nd-annual-slush-rush-at-copper-mountain-makes-a-splash-on-april-powder-day/
+    source_id: events-cwest-denvergazette-slush-rush-2024
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Photo story on the 2024 edition.
+- id: sugar-bowl-silver-belt
+  name: Silver Belt
+  discipline: big_mountain
+  disciplines_also:
+  - slopestyle
+  levels:
+  - open_amateur
+  - elite
+  venue:
+    resort_id: sugar-bowl
+  edition_2026_27: null
+  format:
+    value: Freeride contest on a course with features the athletes shape, judged by peer vote, with ski and snowboard divisions
+      for men and women
+    source_id: events-cwest-freeskier-silver-belt-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-04-02
+    end: 2026-04-04
+    source_id: events-cwest-sugarbowl-silver-belt
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Competition day was April 4, 10am to 2pm, after the course build per Freeskier.
+  signup:
+    method: null
+    requirements:
+      value: Open registration in past years; for 2026 the field was trimmed in place of an open qualifier day
+      source_id: events-cwest-freeskier-silver-belt-2026
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://sugarbowl.com/silverbelt
+    source_id: events-cwest-sugarbowl-silver-belt
+    as_of: 2026-10-20
+    confidence: estimated
+- id: jackson-hole-dicks-ditch-classic
+  name: Dick's Ditch Classic Banked Slalom
+  discipline: banked_slalom
+  levels:
+  - open_amateur
+  - elite
+  venue:
+    resort_id: jackson-hole
+  edition_2026_27: null
+  format:
+    value: Banked slalom with a Saturday qualifier and Sunday finals; pro divisions get two final runs, other divisions one
+    source_id: events-cwest-jacksonhole-dicks-ditch-2026-results
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    season: 2025/26
+    start: 2026-03-07
+    end: 2026-03-08
+    source_id: events-cwest-jacksonhole-dicks-ditch-2026-results
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Bib pick up and course inspection on Friday, March 6.
+  signup:
+    method: null
+    requirements:
+      value: 70 percent of each category advances from the qualifier to Sunday
+      source_id: events-cwest-jacksonhole-dicks-ditch-event
+      as_of: 2026-10-20
+      confidence: estimated
+      note: From the 2025 event page.
+  website:
+    value: https://jacksonhole.com/events/dicks-ditch-classic-banked-slalom
+    source_id: events-cwest-jacksonhole-dicks-ditch-event
+    as_of: 2026-10-20
+    confidence: estimated
+  results_url:
+    value: https://www.jacksonhole.com/blog/dicks-ditch-2026
+    source_id: events-cwest-jacksonhole-dicks-ditch-2026-results
+    as_of: 2026-10-20
+    confidence: estimated
