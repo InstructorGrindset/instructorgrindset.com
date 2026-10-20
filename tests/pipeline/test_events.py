@@ -215,7 +215,14 @@ def test_resort_events_for_the_panel(tmp_path, defs):
     assert first["published"] is True and first["season"] == "2026/27" and first["discipline_label"] == "Lap and vertical challenge"
     assert last["published"] is False and last["season"] == "2025/26" and last["start"] == "2026-03-13"
     fun = by_resort["fixture-basin"]["items"][0]
-    assert fun["id"] == "fixture-basin-fun-race" and "end" not in fun and fun["note"] == "End date not seen."
+    assert fun["id"] == "fixture-basin-fun-race" and "end" not in fun and "note" not in fun and "group" not in fun
+    # in the resort record: null and false keys left out
+    from pipeline.schemas.events import ResortEvents
+    dumped = ResortEvents.model_validate(by_resort["fixture-basin"]).model_dump(mode="json")
+    assert dumped["items"][0] == {"id": "fixture-basin-fun-race", "name": "Fixture Basin Fun Race", "discipline_label": "Fun race",
+                                  "start": "2027-04-03", "season": "2026/27", "published": True,
+                                  "source_id": "ev-fixture-league-page", "as_of": "2026-10-17", "confidence": "estimated"}
+    assert dumped["items"][1]["season_long"] is True
 
 
 def test_summary_counts_dated_ends(tmp_path, defs):

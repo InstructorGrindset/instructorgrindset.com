@@ -582,9 +582,7 @@
      {
       "id": "alpha-peak-cup",
       "name": "Alpha Peak Speed Cup",
-      "discipline": "alpine_racing",
       "discipline_label": "Alpine racing",
-      "group": "alpine",
       "start": "2026-12-05",
       "end": "2026-12-06",
       "season": "2026/27",
@@ -596,9 +594,7 @@
      {
       "id": "alpha-peak-rail-jam",
       "name": "Alpha Peak Night Rail Jam",
-      "discipline": "rail_jam",
       "discipline_label": "Rail jam",
-      "group": "freestyle",
       "start": "2027-01-16",
       "end": "2027-01-16",
       "season": "2026/27",
@@ -610,9 +606,7 @@
      {
       "id": "alpha-peak-league",
       "name": "Alpha Peak Thursday Race League",
-      "discipline": "masters_racing",
       "discipline_label": "Masters racing",
-      "group": "alpine",
       "published": false,
       "season_long": true,
       "timing": "Thursday nights, January to March",
@@ -929,17 +923,14 @@
      {
       "id": "bravo-bowl-skimo",
       "name": "Bravo Bowl Skimo Sprint",
-      "discipline": "skimo",
       "discipline_label": "Skimo",
-      "group": "backcountry",
       "start": "2026-03-07",
       "end": "2026-03-07",
       "season": "2025/26",
       "published": false,
       "source_id": "fixture-ev-skimo",
       "as_of": "2026-10-01",
-      "confidence": "estimated",
-      "note": "From a search result for this page; page not opened."
+      "confidence": "estimated"
      }
     ]
    }
@@ -1690,9 +1681,7 @@
      {
       "id": "foxtrot-basin-banked",
       "name": "Foxtrot Basin Banked Slalom",
-      "discipline": "banked_slalom",
       "discipline_label": "Banked slalom",
-      "group": "snowboard",
       "start": "2027-04-10",
       "end": "2027-04-11",
       "season": "2026/27",
@@ -1841,9 +1830,7 @@
      {
       "id": "golf-canyon-fun-race",
       "name": "Golf Canyon Costume Fun Race",
-      "discipline": "fun_race",
       "discipline_label": "Fun race",
-      "group": "community",
       "start": "2027-04-03",
       "end": "2027-04-03",
       "season": "2026/27",
@@ -2093,9 +2080,7 @@
      {
       "id": "hotel-lake-spring-clinic",
       "name": "Hotel Lake Spring Clinic",
-      "discipline": "psia_aasi_clinic",
       "discipline_label": "PSIA AASI clinic",
-      "group": "instructor",
       "start": "2027-05-15",
       "end": "2027-05-16",
       "season": "2026/27",
@@ -2586,9 +2571,7 @@
      {
       "id": "kilo-notch-exam",
       "name": "Kilo Notch Level 2 Exam",
-      "discipline": "psia_aasi_exam",
       "discipline_label": "PSIA AASI exam",
-      "group": "instructor",
       "start": "2026-12-12",
       "end": "2026-12-13",
       "season": "2026/27",

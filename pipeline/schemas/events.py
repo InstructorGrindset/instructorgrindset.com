@@ -11,7 +11,7 @@ from __future__ import annotations
 import datetime as dt
 from typing import Literal, Optional, Union
 
-from pydantic import Field, ValidationInfo, field_validator, model_validator
+from pydantic import Field, ValidationInfo, field_validator, model_serializer, model_validator
 
 from .common import Confidence, Latitude, Longitude, Slug, Source, StateCode, StrictModel, check_source_ref
 
@@ -323,30 +323,33 @@ class EventsBatch(StrictModel):
 
 
 class ResortEventItem(StrictModel):
-    """One event at a resort, as Resort.events lists it (the resort panel's "Events here"). start and end are null
-    when the source does not give them (a last edition known by its season, an end date not seen). The cited fields
-    are the dates' provenance, null for an event that gives no date."""
+    """One event at a resort, as Resort.events lists it (the resort panel's "Events here"): enough for its line, the
+    rest is in events.json. start and end are null when the source does not give them (a last edition known by its
+    season, an end date not seen). The cited fields are the date line's provenance, null for an event without one.
+    Null and false keys are left out of the output, so resort records and their route stubs stay small."""
 
-    source_id: Optional[Slug] = None
-    as_of: Optional[dt.date] = None
-    confidence: Optional[Confidence] = None
-    note: Optional[str] = None
     id: Slug
     name: str
-    discipline: str
     discipline_label: str
-    group: str
     start: Optional[dt.date] = None
     end: Optional[dt.date] = None
     season: Optional[str] = None   # the season of these dates: the map season, or the last edition's
     published: bool                # True: the dates are the map season's edition; False: the last edition's
     season_long: bool = False      # a season long program: timing holds its usual_timing, if any
     timing: Optional[str] = None
+    source_id: Optional[Slug] = None
+    as_of: Optional[dt.date] = None
+    confidence: Optional[Confidence] = None
 
     @field_validator("source_id")
     @classmethod
     def _source_defined(cls, v: Optional[str], info: ValidationInfo) -> Optional[str]:
         return check_source_ref(v, info) if v else v
+
+    @model_serializer(mode="wrap")
+    def _compact(self, handler):
+        d = handler(self)
+        return {k: v for k, v in d.items() if v is not None and not (k == "season_long" and v is False)}
 
 
 class ResortEvents(StrictModel):

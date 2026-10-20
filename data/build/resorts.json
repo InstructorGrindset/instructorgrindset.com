@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T00:39:48Z",
+  "generated_at": "2026-10-20T01:00:40Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -1648,21 +1648,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-alta-town-racing",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "The page lists January to March race days and an April finale marked postponed.",
             "id": "alta-town-racing",
             "name": "Alta Town Racing",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-alta-town-racing",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -2151,55 +2144,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "ifsa-fwt-qualifier-alyeska",
             "name": "Alyeska IFSA Qualifier 1*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-01-22",
             "end": "2027-01-22",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-freestyle-ifsa-events-2027",
             "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
+            "confidence": "estimated"
+          },
+          {
             "id": "ifsa-junior-alyeska",
             "name": "Alyeska IFSA Junior 2*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-01-23",
             "end": "2027-01-24",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-events-2027",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-usss-masters-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed as the week of March 21 to 27; exact final dates, schedule and registration deadline to be announced.",
             "id": "us-alpine-masters-national-championships",
             "name": "U.S. Alpine Masters National Championships",
-            "discipline": "masters_racing",
             "discipline_label": "Masters racing",
-            "group": "alpine",
             "start": "2027-03-21",
             "end": "2027-03-27",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-usss-masters-events-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -2815,21 +2793,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-blowingrock-shred-for-the-cup",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": null,
             "id": "app-ski-mtn-shred-for-the-cup",
             "name": "Smith/686 Shred for the Cup Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Early January (the listing shows January 4 without a year)"
+            "timing": "Early January (the listing shows January 4 without a year)",
+            "source_id": "events-ceast-blowingrock-shred-for-the-cup",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -3311,21 +3283,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-telemark-festivals-2025-26-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The calendar marked these dates as tentative.",
             "id": "summit-telemark-festival",
             "name": "Summit Telemark Festival",
-            "discipline": "telemark",
             "discipline_label": "Telemark",
-            "group": "backcountry",
             "start": "2026-04-18",
             "end": "2026-04-19",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-telemark-festivals-2025-26-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -3465,21 +3432,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-arcticvalley-shredfest-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "arctic-valley-shredfest",
             "name": "Shredfest",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-04-18",
             "end": "2026-04-19",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-arcticvalley-shredfest-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -3617,21 +3579,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-snowbowl-slash-n-bash-2026",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Earlier editions ran April 12, 2025 and April 13, 2024 per the resort's event pages.",
             "id": "arizona-snowbowl-slash-n-bash-banked-slalom",
             "name": "Slash N' Bash Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-04-18",
             "end": "2026-04-18",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-snowbowl-slash-n-bash-2026",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -4246,38 +4203,25 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-cwest-aspensnowmass-town-race-series",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 45th season opened January 10, 2026; this venue's race dates were not seen.",
             "id": "aspen-snowmass-town-race-series-aspen-highlands",
             "name": "Aspen Snowmass Town Race Series",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-aspensnowmass-town-race-series",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-aspensnowmass-hot-doggin",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "aspen-highlands-hot-doggin-world-champs",
             "name": "Hot Doggin' World Champs",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "April 3 to 4"
+            "timing": "April 3 to 4",
+            "source_id": "events-cwest-aspensnowmass-hot-doggin",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -4742,38 +4686,26 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-backcountry-aspen-gov-americas-uphill-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 38th annual race.",
             "id": "americas-uphill",
             "name": "America's Uphill",
-            "discipline": "uphill",
             "discipline_label": "Uphill",
-            "group": "backcountry",
             "start": "2026-03-14",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-aspen-gov-americas-uphill-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-aspensnowmass-town-race-series",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 45th season opened January 10, 2026; this venue's race dates were not seen.",
             "id": "aspen-snowmass-town-race-series-aspen-mountain",
             "name": "Aspen Snowmass Town Race Series",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-aspensnowmass-town-race-series",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -5991,21 +5923,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-bearcreek-nastar-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "nastar-bear-creek-mountain-resort-ski-slopes",
             "name": "NASTAR at Bear Creek Mountain Resort",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": null
+            "source_id": "events-alpine-bearcreek-nastar-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -6305,38 +6230,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-cwest-bigbear-corenation",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "9am to 3:30pm.",
             "id": "bear-mountain-corenation-rail-jam",
             "name": "CoreNation Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-02-14",
             "end": "2026-02-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-bigbear-corenation",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-destinationbigbear-smith-jib-jam",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "bear-mountain-smith-jib-and-jam",
             "name": "Smith Jib & Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-02-28",
             "end": "2026-02-28",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-destinationbigbear-smith-jib-jam",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -7284,89 +7199,64 @@
         "count": 5,
         "items": [
           {
-            "source_id": "events-alpine-wiki-wc-2026-27",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": null,
             "id": "fis-alpine-world-cup-beaver-creek-men",
             "name": "Birds of Prey World Cup, Beaver Creek (men)",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-12-03",
             "end": "2026-12-06",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-alpine-wiki-wc-2026-27",
             "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": "The U.S. Ski & Snowboard release in search results gives December 12 and 13 for the women's downhill and super G.",
+            "confidence": "reported"
+          },
+          {
             "id": "fis-alpine-world-cup-beaver-creek-women",
             "name": "Birds of Prey World Cup, Beaver Creek (women)",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-12-11",
             "end": "2026-12-13",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-wiki-wc-2026-27",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           },
           {
-            "source_id": "events-backcountry-vrd-beaver-creek-uphill-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "vrd-winter-races-beaver-creek",
             "name": "Beaver Creek Uphill & SkiMo",
-            "discipline": "uphill",
             "discipline_label": "Uphill",
-            "group": "backcountry",
             "start": "2026-01-11",
             "end": "2026-01-11",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-vrd-beaver-creek-uphill-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-vrd-arrowhead-uphill-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "vrd-winter-races-arrowhead",
             "name": "Arrowhead Uphill & SkiMo",
-            "discipline": "uphill",
             "discipline_label": "Uphill",
-            "group": "backcountry",
             "start": "2026-01-25",
             "end": "2026-01-25",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-vrd-arrowhead-uphill-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-usss-masters-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-masters-cup-western-regional-beaver-creek",
             "name": "FIS Masters Cup and Western Regional Championships, Beaver Creek",
-            "discipline": "masters_racing",
             "discipline_label": "Masters racing",
-            "group": "alpine",
             "start": "2026-02-06",
             "end": "2026-02-08",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-usss-masters-events-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -7689,21 +7579,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-skisoutheast-beech-adult-race-series-2022",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Date from the Ski Southeast listing address for the 2022 series; no later edition was found.",
             "id": "beech-mountain-adult-race-series",
             "name": "Beech Mountain Adult Race Series",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2022-01-13",
             "end": "2022-01-13",
             "season": "2021/22",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-skisoutheast-beech-adult-race-series-2022",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -8165,21 +8050,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-wupe-vertical-challenge-berkshire-east",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Latest dated stop found; a newer tour stop listing for Charlemont gave no date.",
             "id": "vertical-challenge-berkshire-east",
             "name": "Vertical Challenge at Berkshire East",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2021-03-06",
             "end": "2021-03-06",
             "season": "2020/21",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-wupe-vertical-challenge-berkshire-east",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -9126,21 +9006,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-wagm-vertical-challenge-bigrock",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "News report dated January 7, 2024; the race day was not in the search result.",
             "id": "vertical-challenge-big-rock",
             "name": "Vertical Challenge at Big Rock",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-wagm-vertical-challenge-bigrock",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -9549,38 +9422,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-instructor-psia-2024-25-calendar-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Most recent edition found in search results.",
             "id": "psia-nrm-fall-fest",
             "name": "Fall Fest (PSIA-AASI Northern Rocky Mountain)",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2024-12-06",
             "end": "2024-12-08",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-2024-25-calendar-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-instructor-psia-team-selection-2024-athletes-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Last selection, at Big Sky. No source found for the next selection's dates or venue.",
             "id": "psia-aasi-national-team-selection",
             "name": "PSIA-AASI National Team Selection",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2024-04-21",
             "end": "2024-04-26",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-team-selection-2024-athletes-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -10596,21 +10459,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-mainepublic-vertical-challenge-black-mountain",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Maine Public calendar listing: registration from 7:30 am, victory party at 1:30 pm.",
             "id": "vertical-challenge-black-mountain-maine",
             "name": "Vertical Challenge at Black Mountain of Maine",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-01-18",
             "end": "2026-01-18",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-mainepublic-vertical-challenge-black-mountain",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -11915,21 +11773,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-catamount-green-mountain-skimo-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "green-mountain-skimo-series",
             "name": "Green Mountain Skimo Series",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-01-06",
             "end": "2026-03-10",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-catamount-green-mountain-skimo-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -12463,21 +12316,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-ohiomagazine-boston-mills",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "boston-mills-stick-and-tricks-rail-jam",
             "name": "Stick and Tricks Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-02-07",
             "end": "2026-02-07",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-ohiomagazine-boston-mills",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -13084,21 +12932,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-boyne-nastar-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "nastar-boyne-mountain",
             "name": "NASTAR at Boyne Mountain Resort",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Saturdays and select holidays, 1 to 3 pm, on the North Boyne Race Arena"
+            "timing": "Saturdays and select holidays, 1 to 3 pm, on the North Boyne Race Arena",
+            "source_id": "events-alpine-boyne-nastar-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -14080,72 +13922,52 @@
         "count": 4,
         "items": [
           {
-            "source_id": "events-freestyle-usss-2026-27-events-page",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The U.S. Ski & Snowboard schedule release lists this slopestyle stop as Dec. 10 to 12, 2026 at a venue to be decided; the events page lists Breckenridge on Dec. 12 and 13.",
             "id": "toyota-us-grand-prix-breckenridge",
             "name": "Toyota U.S. Grand Prix slopestyle (FIS Freeski and Snowboard World Cup Breckenridge)",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
             "start": "2026-12-12",
             "end": "2026-12-13",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-2026-27-events-page",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-ifsa-venue-breckenridge",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Year taken from the IFSA listing of events from January 2, 2027.",
             "id": "ifsa-fwt-qualifier-breckenridge",
             "name": "Breckenridge IFSA Qualifier 3*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-03-06",
             "end": "2027-03-07",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-freestyle-ifsa-venue-breckenridge",
             "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Year taken from the IFSA listing of events from January 2, 2027.",
+            "confidence": "estimated"
+          },
+          {
             "id": "ifsa-junior-breckenridge",
             "name": "Breckenridge IFSA Junior 2*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-03-14",
             "end": "2027-03-14",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-venue-breckenridge",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-beaverrun-hartford-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "hartford-ski-spectacular",
             "name": "The Hartford Ski Spectacular",
-            "discipline": "adaptive_alpine",
             "discipline_label": "Adaptive alpine",
-            "group": "adaptive",
             "start": "2025-12-07",
             "end": "2025-12-13",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-beaverrun-hartford-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -14306,21 +14128,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-brettonwoods-tgif-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "bretton-woods-tgif-race-league",
             "name": "Bretton Woods TGIF Race League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": null
+            "source_id": "events-alpine-brettonwoods-tgif-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -14460,55 +14275,38 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-cwest-skiutah-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "brian-head-bank-heist",
             "name": "Bank Heist",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-14",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-skiutah-events-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Most recent edition found; the article names 2024 for this event.",
             "id": "psia-i-spring-clinic",
             "name": "Spring Clinic (PSIA-AASI Intermountain)",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2024-04-12",
             "end": "2024-04-14",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-skiutah-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed among spring 2026 events; the date was not seen.",
             "id": "brian-head-spring-fling-rail-jam",
             "name": "Spring Fling Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-skiutah-events-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -14840,38 +14638,27 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "big-sky-skimo-cup-bridger-bowl",
             "name": "Bridger Skin to Win",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-01-31",
             "end": "2026-01-31",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-visitbozeman-ski-events",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Visit Bozeman lists February 7; an Explore Big Sky item gives February 3. Confirm with Bridger Bowl.",
             "id": "bridger-bowl-king-and-queen-of-the-ridge",
             "name": "King and Queen of the Ridge",
-            "discipline": "endurance",
             "discipline_label": "Lap and vertical challenge",
-            "group": "community",
             "start": "2026-02-07",
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-visitbozeman-ski-events",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -15205,38 +14992,24 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-cwest-skiutah-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed among spring 2026 events; the date was not seen.",
             "id": "brighton-banked-slalom",
             "name": "Brighton Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-cwest-skiutah-events-search",
             "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed among spring 2026 events; the date was not seen.",
+            "confidence": "estimated"
+          },
+          {
             "id": "brighton-park-showdown",
             "name": "Park Showdown",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-skiutah-events-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -15392,21 +15165,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-bristol-league-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "bristol-mountain-adult-race-league",
             "name": "Bristol Mountain Adult Race League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": null
+            "source_id": "events-alpine-bristol-league-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -15545,21 +15311,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-telemark-festivals-2025-26-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "kare-andersen-telemark-festival",
             "name": "Kåre Andersen Telemark Festival",
-            "discipline": "telemark",
             "discipline_label": "Telemark",
-            "group": "backcountry",
             "start": "2026-02-21",
             "end": "2026-02-22",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-telemark-festivals-2025-26-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -16243,72 +16004,47 @@
         "count": 4,
         "items": [
           {
-            "source_id": "events-freestyle-buckhill-rattlesnake-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 2026 page showed registration as full.",
             "id": "rattlesnake-banked-slalom",
             "name": "Rattlesnake Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-08",
             "end": "2026-03-08",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-buckhill-rattlesnake-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-buckhill-buck-bumps-2023",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Latest listing found is the 2023 event page; its date was not in the search result.",
             "id": "buck-hill-buck-bumps",
             "name": "Buck Bumps Mogul Contest",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2022/23",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-buckhill-buck-bumps-2023",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-buckhill-pond-skim-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 2026 event date was not in the search result.",
             "id": "buck-hill-pond-skim-party",
             "name": "Buck Hill Pond Skim Party",
-            "discipline": "pond_skim",
             "discipline_label": "Pond skim",
-            "group": "heritage",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-buckhill-pond-skim-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-skichallenge-leagues",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "buck-hill-ski-challenge-leagues",
             "name": "Ski Challenge Leagues at Buck Hill",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Seven consecutive weeks starting in January"
+            "timing": "Seven consecutive weeks starting in January",
+            "source_id": "events-ceast-skichallenge-leagues",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -16840,38 +16576,27 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-alpine-skiracing-noram-2026-27-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Draft calendar date.",
             "id": "stifel-noram-cup-burke",
             "name": "Stifel NorAm Cup, Burke Mountain",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-01-10",
             "end": "2027-01-11",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-skiracing-noram-2026-27-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-happyvermont-vertical-challenge-burke",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "vertical-challenge-burke",
             "name": "Vertical Challenge at Burke Mountain",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Early March (a listing shows March 8 with no year)"
+            "timing": "Early March (a listing shows March 8 with no year)",
+            "source_id": "events-ceast-happyvermont-vertical-challenge-burke",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -17319,55 +17044,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "toyota-us-grand-prix-aspen-snowmass",
             "name": "Toyota U.S. Grand Prix finals (FIS Freeski and Snowboard World Cup Aspen Snowmass)",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
             "start": "2027-02-27",
             "end": "2027-02-28",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-wikipedia-x-games",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": "Winter X Games 30.",
             "id": "x-games-aspen",
             "name": "X Games Aspen",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
             "start": "2026-01-23",
             "end": "2026-01-25",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-wikipedia-x-games",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           },
           {
-            "source_id": "events-freestyle-usss-rev-tour-aspen-open-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "us-revolution-tour-aspen-snowmass-open",
             "name": "iHeart U.S. Revolution Tour at Aspen Open",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
             "start": "2026-03-23",
             "end": "2026-03-27",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-rev-tour-aspen-open-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -17781,21 +17491,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-camelback-vertical-challenge-event",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": null,
             "id": "vertical-challenge-camelback",
             "name": "Vertical Challenge at Camelback",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Early March (the event page lists March 7 to 8, 7 am to 2 pm)"
+            "timing": "Early March (the event page lists March 7 to 8, 7 am to 2 pm)",
+            "source_id": "events-ceast-camelback-vertical-challenge-event",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -18658,21 +18362,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-skinh-vertical-challenge-cannon",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Ski NH calendar listing; the search result tied it to Cannon.",
             "id": "vertical-challenge-cannon",
             "name": "Vertical Challenge at Cannon Mountain",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-02-13",
             "end": "2026-02-13",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-skinh-vertical-challenge-cannon",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -21690,106 +21389,76 @@
         "count": 6,
         "items": [
           {
-            "source_id": "events-alpine-wiki-wc-2026-27",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": null,
             "id": "fis-alpine-world-cup-copper-mountain",
             "name": "Stifel Copper Cup (FIS Alpine Ski World Cup, men)",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-11-28",
             "end": "2026-11-29",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-wiki-wc-2026-27",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           },
           {
-            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "toyota-us-grand-prix-copper-mountain",
             "name": "Toyota U.S. Grand Prix halfpipe (FIS Freeski and Snowboard World Cup Copper Mountain)",
-            "discipline": "halfpipe",
             "discipline_label": "Halfpipe",
-            "group": "freestyle",
             "start": "2026-12-19",
             "end": "2026-12-20",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-usasa-national-championships",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Snowboard week March 26 to April 1, 2027; freeski week April 2 to 7, 2027. The page says more information is coming.",
             "id": "usasa-national-championships",
             "name": "USASA National Championships",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
             "start": "2027-03-26",
             "end": "2027-04-07",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usasa-national-championships",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-instructor-psia-2027-national-dates-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The national events calendar lists Rider Rally (Snowboard) on the same dates at Copper Mountain.",
             "id": "psia-aasi-national-academy",
             "name": "PSIA-AASI National Academy",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2027-04-12",
             "end": "2027-04-16",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-2027-national-dates-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-usss-rev-tour-copper-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "us-revolution-tour-copper-mountain",
             "name": "iHeart U.S. Revolution Tour at Copper Mountain",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
             "start": "2026-01-12",
             "end": "2026-01-17",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-rev-tour-copper-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-unofficialnetworks-slush-rush-2025",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "3rd annual edition. The 2nd ran April 27, 2024. No 2026 date was found.",
             "id": "copper-mountain-slush-rush",
             "name": "Slush Rush",
-            "discipline": "fun_race",
             "discipline_label": "Fun race",
-            "group": "community",
             "start": "2025-05-03",
             "end": "2025-05-03",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-unofficialnetworks-slush-rush-2025",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -22533,21 +22202,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-cranmore-mm-registration-2025",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Latest season dates found; the 2025/26 and 2026/27 dates were not in the search results.",
             "id": "cranmore-mountain-meisters",
             "name": "Mountain Meisters",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2025-01-08",
             "end": "2025-03-19",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-cranmore-mm-registration-2025",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -23155,38 +22819,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-backcountry-cbnews-al-johnson-2025-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 51st race. No 2026 edition was found.",
             "id": "al-johnson-memorial-uphill-downhill",
             "name": "Al Johnson Memorial Uphill/Downhill Telemark Race",
-            "discipline": "telemark",
             "discipline_label": "Telemark",
-            "group": "backcountry",
             "start": "2025-03-16",
             "end": "2025-03-16",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-cbnews-al-johnson-2025-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-cbnordic-grand-traverse-ski-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 2027 race date was not in the search result, though registration for the 2027 race is announced.",
             "id": "grand-traverse-ski",
             "name": "The Grand Traverse (ski)",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-03-29",
             "end": "2026-03-29",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-cbnordic-grand-traverse-ski-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -23900,55 +23554,37 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-cwest-crystal-berm-brawl",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "First edition.",
             "id": "crystal-mountain-mt-rainier-berm-brawl",
             "name": "Mt. Rainier Berm Brawl Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-04-25",
             "end": "2026-04-26",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-crystal-berm-brawl",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-crystal-wa-league-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "crystal-mountain-thursday-night-race-league",
             "name": "Crystal Mountain Thursday Night Adult Race League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Thursday nights"
+            "timing": "Thursday nights",
+            "source_id": "events-alpine-crystal-wa-league-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-crystal-wa-nastar-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "nastar-crystal-mountain",
             "name": "NASTAR at Crystal Mountain",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": null
+            "source_id": "events-alpine-crystal-wa-nastar-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -24991,72 +24627,50 @@
         "count": 4,
         "items": [
           {
-            "source_id": "events-freestyle-fis-2026-27-wc-sneak-peek",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-freestyle-world-cup-deer-valley",
             "name": "Freestyle International presented by Stifel",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
             "start": "2027-01-28",
             "end": "2027-01-30",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-fis-2026-27-wc-sneak-peek",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-fis-2026-27-noram-sneak-peek",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-freestyle-noram-cup-deer-valley",
             "name": "FIS Freestyle NorAm Cup moguls at Deer Valley",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
             "start": "2027-02-05",
             "end": "2027-02-06",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-fis-2026-27-noram-sneak-peek",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-lls-shred-for-red-deer-valley",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Event day of the 2025/26 challenge, which ran November 1 to March 28.",
             "id": "deer-valley-shred-for-red-vertical-challenge",
             "name": "Shred For Red Vertical Challenge",
-            "discipline": "endurance",
             "discipline_label": "Lap and vertical challenge",
-            "group": "community",
             "start": "2026-03-28",
             "end": "2026-03-28",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-lls-shred-for-red-deer-valley",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-wiki-nastar",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": null,
             "id": "nastar-deer-valley",
             "name": "NASTAR at Deer Valley Resort",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": null
+            "source_id": "events-alpine-wiki-nastar",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           }
         ]
       },
@@ -26182,21 +25796,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-eyeonsunvalley-dollar-baldy",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Previewed in an Eye on Sun Valley story with the March 2026 Baldy Banked Slalom; the date was not seen.",
             "id": "dollar-mountain-rail-jam",
             "name": "Dollar Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-eyeonsunvalley-dollar-baldy",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -27660,21 +27267,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-telemark-skiing-nationals-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Training day March 11, races March 12 to 14.",
             "id": "us-telemark-nationals",
             "name": "US Telemark Nationals",
-            "discipline": "telemark",
             "discipline_label": "Telemark",
-            "group": "backcountry",
             "start": "2026-03-11",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-telemark-skiing-nationals-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -28015,21 +27617,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-sled-eagle-cap-obbg",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Vet checks January 21, noon start January 22 at Ferguson Ridge Ski Area near Joseph, awards January 24.",
             "id": "eagle-cap-extreme",
             "name": "Eagle Cap Extreme Sled Dog Race",
-            "discipline": "sled_dog",
             "discipline_label": "Sled dog racing",
-            "group": "sled_dog",
             "start": "2026-01-22",
             "end": "2026-01-24",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-sled-eagle-cap-obbg",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -28540,21 +28137,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-nordic-pepsi-challenge-runsignup",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "pepsi-challenge-giants-ridge",
             "name": "Pepsi Challenge Cup Race",
-            "discipline": "ski_marathon",
             "discipline_label": "Ski marathon",
-            "group": "nordic",
             "start": "2027-03-06",
             "end": "2027-03-06",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-nordic-pepsi-challenge-runsignup",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -28990,38 +28582,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-cwest-playwinterpark-rail-rodeo-barrel-racers",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "granby-ranch-rail-rodeo-barrel-racers",
             "name": "Rail Rodeo: Barrel Racers Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-02-21",
             "end": "2026-02-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-playwinterpark-rail-rodeo-barrel-racers",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-playwinterpark-rail-rodeo-bull-riders",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "granby-ranch-rail-rodeo-bull-riders",
             "name": "Rail Rodeo: Bull Riders Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-03-21",
             "end": "2026-03-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-playwinterpark-rail-rodeo-bull-riders",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -29375,55 +28957,39 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-freestyle-grandtarghee-ladies-waist",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Registration for 2026 closed April 10 at noon.",
             "id": "ladies-waist-banked-slalom",
             "name": "Ladies Waist Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-04-11",
             "end": "2026-04-11",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-grandtarghee-ladies-waist",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-grandtarghee-north-shore-banked-slalom",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "2nd annual edition. In the 2025 edition the top times won entry to the Mt. Baker Legendary Banked Slalom.",
             "id": "grand-targhee-north-shore-banked-slalom",
             "name": "North Shore Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-04-12",
             "end": "2026-04-12",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-grandtarghee-north-shore-banked-slalom",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-grandtarghee-nye-rail-jam",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "grand-targhee-new-years-eve-rail-jam",
             "name": "New Year's Eve Targhee Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "New Year's Eve"
+            "timing": "New Year's Eve",
+            "source_id": "events-cwest-grandtarghee-nye-rail-jam",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -30090,21 +29656,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "big-sky-skimo-cup-great-divide",
             "name": "Great Divide Skimo",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-02-20",
             "end": "2026-02-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -30608,38 +30169,27 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-lakesregion-gunstock-moonlight-grind",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "The listing says the mountain closed for weather that day; whether the jam ran or moved was not in the search result.",
             "id": "gunstock-moonlight-grind-rail-jam",
             "name": "Moonlight Grind Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2025-12-19",
             "end": "2025-12-19",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-lakesregion-gunstock-moonlight-grind",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-gunstock-nastar-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "nastar-gunstock",
             "name": "NASTAR at Gunstock Mountain Resort",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "10 am to 3 pm on the Ramrod race trail"
+            "timing": "10 am to 3 pm on the Ramrod race trail",
+            "source_id": "events-alpine-gunstock-nastar-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -31455,21 +31005,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-skiheavenly-gunbarrel-25",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Set for March 28, 2026 on the Visit Lake Tahoe listing, then cancelled for weather and low snow per Heavenly's event page. The date of the last edition held was not found.",
             "id": "gunbarrel-25",
             "name": "Gunbarrel 25",
-            "discipline": "endurance",
             "discipline_label": "Lap and vertical challenge",
-            "group": "community",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-skiheavenly-gunbarrel-25",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -34199,21 +33742,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-nordic-steamboat-carnival-sswsc",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "The club lists the 2027 dates on a page that otherwise shows 2026 details; the 2027 jump schedule was not found",
             "id": "steamboat-winter-carnival",
             "name": "Steamboat Winter Carnival",
-            "discipline": "ski_jumping",
             "discipline_label": "Ski jumping",
-            "group": "nordic",
             "start": "2027-02-02",
             "end": "2027-02-07",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-nordic-steamboat-carnival-sswsc",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -35066,21 +34604,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-snowbrains-hyland-june-jam-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The search result reads as June 10, 2026; online registration opened May 26.",
             "id": "hyland-hills-june-jam",
             "name": "Hyland Hills June Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-06-10",
             "end": "2026-06-10",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-snowbrains-hyland-june-jam-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -35998,55 +35531,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "ifsa-junior-jackson-hole",
             "name": "Jackson Hole IFSA Junior 2*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-01-08",
             "end": "2027-01-10",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-events-2027",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-jacksonhole-kings-queens-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Weather window: the contest takes place on a day between February 6 and 13, conditions permitting.",
             "id": "kings-and-queens-of-corbets",
             "name": "Kings and Queens of Corbet's",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-02-06",
             "end": "2027-02-13",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-jacksonhole-kings-queens-2027",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-jacksonhole-dicks-ditch-2026-results",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Bib pick up and course inspection on Friday, March 6.",
             "id": "jackson-hole-dicks-ditch-classic",
             "name": "Dick's Ditch Classic Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-07",
             "end": "2026-03-08",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-jacksonhole-dicks-ditch-2026-results",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -36395,21 +35913,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-patspeak-vertical-challenge",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed as tentative on the Pats Peak page.",
             "id": "vertical-challenge-finals-jay-peak",
             "name": "Vertical Challenge Finals",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-04-11",
             "end": "2026-04-11",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-patspeak-vertical-challenge",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -36559,21 +36072,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-stride-100k-vertical",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Monday, February 22, 2027.",
             "id": "stride-100k-vertical-challenge",
             "name": "STRIDE 100K Vertical Challenge",
-            "discipline": "endurance",
             "discipline_label": "Lap and vertical challenge",
-            "group": "community",
             "start": "2027-02-22",
             "end": "2027-02-22",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-stride-100k-vertical",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -37004,21 +36512,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-junemountain-june-jam",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Mammoth Mountain's listing gave February 21, 2026; the June Mountain page gives March 21.",
             "id": "june-mountain-rail-jam",
             "name": "June Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-03-21",
             "end": "2026-03-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-junemountain-june-jam",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -37425,21 +36928,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-venture-silverton-banked-slalom",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "5th annual edition.",
             "id": "silverton-banked-slalom",
             "name": "Silverton Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-14",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-venture-silverton-banked-slalom",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -38494,106 +37992,76 @@
         "count": 6,
         "items": [
           {
-            "source_id": "events-alpine-wiki-wc-2026-27",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": null,
             "id": "fis-alpine-world-cup-killington",
             "name": "Killington Cup (FIS Alpine Ski World Cup, women)",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-11-28",
             "end": "2026-11-29",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-wiki-wc-2026-27",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           },
           {
-            "source_id": "events-freestyle-fis-2026-27-noram-sneak-peek",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-freestyle-noram-cup-killington",
             "name": "FIS Freestyle NorAm Cup moguls at Killington",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
             "start": "2027-03-06",
             "end": "2027-03-07",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-fis-2026-27-noram-sneak-peek",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-mountaintimes-loaded-turkey-2025",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Saturday, 9 am start.",
             "id": "killington-loaded-turkey-rail-jam",
             "name": "Loaded Turkey Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2025-11-22",
             "end": "2025-11-22",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-mountaintimes-loaded-turkey-2025",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-instructor-mountaintimes-projam-2023-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Most recent edition found in search results; later editions were not found.",
             "id": "psia-e-snow-pro-jam",
             "name": "Masters Academy and Snow Pro Jam (PSIA-AASI Eastern)",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2023-12-11",
             "end": "2023-12-15",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-mountaintimes-projam-2023-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-mountaintimes-deck-the-rails-2025",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "killington-deck-the-rails",
             "name": "Deck the Rails",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2025-12-20",
             "end": "2025-12-20",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-mountaintimes-deck-the-rails-2025",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-mountaintimes-bmmc-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Held on Outer Limits with divisions from youth to 50+.",
             "id": "killington-bear-mountain-mogul-challenge",
             "name": "Bear Mountain Mogul Challenge",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
             "start": "2026-04-04",
             "end": "2026-04-04",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-mountaintimes-bmmc-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -39031,38 +38499,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "ifsa-junior-kirkwood",
             "name": "Kirkwood IFSA Junior 2* (TJFS #3)",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-01-23",
             "end": "2027-01-24",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-events-2027",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-visitlaketahoe-kirkwood-banked-slalom",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Latest date found; weather and snow dependent. Kirkwood's 2023/24 tip sheet called it the 29th annual, and Visit Lake Tahoe lists a banked slalom in Kirkwood's 2026/27 lineup.",
             "id": "kirkwood-legendary-banked-slalom",
             "name": "Kirkwood Legendary Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2024-04-06",
             "end": "2024-04-06",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-visitlaketahoe-kirkwood-banked-slalom",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -39535,55 +38993,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-freestyle-world-cup-lake-placid",
             "name": "Lake Placid Freestyle Cup",
-            "discipline": "aerials",
             "discipline_label": "Aerials",
-            "group": "freestyle",
             "start": "2027-01-16",
             "end": "2027-01-17",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-nordic-lake-placid-nc-wc-unofficial",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Sources differ: one gives February 4 to 6, 2027 and another February 5 to 6, 2027",
             "id": "lake-placid-nordic-combined-world-cup",
             "name": "FIS Nordic Combined World Cup Lake Placid",
-            "discipline": "nordic_combined",
             "discipline_label": "Nordic combined",
-            "group": "nordic",
             "start": "2027-02-04",
             "end": "2027-02-06",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-nordic-lake-placid-nc-wc-unofficial",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup",
-            "as_of": "2026-10-20",
-            "confidence": "reported",
-            "note": "The event name Stifel Lake Placid Ski Jumping Cup comes from a search result for an allsportdb listing",
             "id": "lake-placid-ski-jumping-world-cup",
             "name": "Stifel Lake Placid Ski Jumping Cup (FIS Ski Jumping World Cup)",
-            "discipline": "ski_jumping",
             "discipline_label": "Ski jumping",
-            "group": "nordic",
             "start": "2027-02-06",
             "end": "2027-02-07",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup",
+            "as_of": "2026-10-20",
+            "confidence": "reported"
           }
         ]
       },
@@ -40090,21 +39533,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-skileavenworth-pond-skim-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "A 2026 event page exists; its date was not in the search result.",
             "id": "ski-leavenworth-pond-skim",
             "name": "Ski Leavenworth Pond Skim",
-            "discipline": "pond_skim",
             "discipline_label": "Pond skim",
-            "group": "heritage",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-skileavenworth-pond-skim-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -41346,21 +40782,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-loon-cease-and-desist",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Latest date found; no 2025 or 2026 date was in the search results.",
             "id": "loon-cease-and-desist-rail-jam",
             "name": "Cease & Desist Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2024-11-30",
             "end": "2024-11-30",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-loon-cease-and-desist",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -41499,21 +40930,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-localfreshies-banked-slalom-showcase",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed in a Local Freshies roundup of 2026 banked slaloms; the date was not seen.",
             "id": "lost-trail-a-robs-smash-life-banked-slalom",
             "name": "A-Rob's Smash Life Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-localfreshies-banked-slalom-showcase",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -42237,21 +41661,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-lutsen-north-shore-rail-jam",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "lutsen-north-shore-rail-jam",
             "name": "North Shore Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Mid April (the page lists April 17 to 18 without a year)"
+            "timing": "Mid April (the page lists April 17 to 18 without a year)",
+            "source_id": "events-ceast-lutsen-north-shore-rail-jam",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -42667,38 +42085,24 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-mrg-calendar-february-2026",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Listed on the Mad River Glen calendar for February 2026; the day was not in the search result.",
             "id": "mad-river-glen-mogul-challenge",
             "name": "Mad River Glen Mogul Challenge",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-mrg-calendar-february-2026",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-mrg-racing-triple-crown",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The page lists 2026 men's and women's results; race dates were not in the search result.",
             "id": "mad-river-glen-racing-triple-crown",
             "name": "Mad River Glen Racing Triple Crown",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-mrg-racing-triple-crown",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -43901,55 +43305,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-alpine-townlift-2027-nationals-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "us-alpine-championships",
             "name": "Toyota U.S. Alpine Championships presented by Stifel",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-03-31",
             "end": "2027-04-07",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-townlift-2027-nationals-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-localfreshies-banked-slalom-showcase",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The listing said this date was based on past years and not yet confirmed.",
             "id": "jla-mammoth-banked-slalom",
             "name": "JLA Mammoth Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-02-27",
             "end": "2026-03-01",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-localfreshies-banked-slalom-showcase",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-usss-rev-tour-mammoth-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "us-revolution-tour-mammoth-mountain",
             "name": "iHeart U.S. Revolution Tour at Mammoth",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
             "start": "2026-03-10",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-rev-tour-mammoth-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -44472,21 +43861,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "big-sky-skimo-cup-maverick-mountain",
             "name": "White Thunder Skimo",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-01-17",
             "end": "2026-01-18",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -44707,21 +44091,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-yahoo-mcintyre-rail-jam",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "First edition, announced as a New England qualifier.",
             "id": "mcintyre-a-grand-in-your-hand",
             "name": "A Grand in Your Hand",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-01-18",
             "end": "2026-01-18",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-yahoo-mcintyre-rail-jam",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -45317,21 +44696,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-middlebury-rail-jam-listing",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "middlebury-snow-bowl-rail-jam",
             "name": "Middlebury Snow Bowl Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "January (the listing shows no year)"
+            "timing": "January (the listing shows no year)",
+            "source_id": "events-ceast-middlebury-rail-jam-listing",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -46204,21 +45577,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-montage-league-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "montage-mountain-thursday-night-races",
             "name": "Montage Mountain Thursday Night Races",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-01-08",
             "end": "2026-03-05",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-montage-league-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -47209,21 +46577,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-expeditiondetroit-big-four-2026",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "From a Detroit area ski guide.",
             "id": "mount-brighton-dew-after-dark",
             "name": "Dew After Dark Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-01-23",
             "end": "2026-01-23",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-expeditiondetroit-big-four-2026",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -48953,21 +48316,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-vail-vermont-tip-sheet-2025-26",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed as March 14 on the 2025/26 Vermont tip sheet.",
             "id": "mount-snow-carinthia-classic",
             "name": "Carinthia Classic",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-03-14",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-vail-vermont-tip-sheet-2025-26",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -49116,38 +48474,26 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-cisc-race-league",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": null,
             "id": "cisc-race-league-mount-southington",
             "name": "Connecticut Industrial Ski Council race league at Mount Southington",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Tuesday nights in January and February, at Mount Southington and Ski Sundown"
+            "timing": "Tuesday nights in January and February, at Mount Southington and Ski Sundown",
+            "source_id": "events-ceast-cisc-race-league",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-southington-league-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "mount-southington-adult-race-leagues",
             "name": "Mount Southington Adult Race Leagues",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Monday or Tuesday evenings"
+            "timing": "Monday or Tuesday evenings",
+            "source_id": "events-alpine-southington-league-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -49742,38 +49088,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-sled-snocross-2025-26-release",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for 2024/25 and 2025/26.",
             "id": "amsoil-championship-snocross-ironwood",
             "name": "Mt. Zion Snocross National",
-            "discipline": "snocross",
             "discipline_label": "Snocross",
-            "group": "snowmobile",
             "start": "2025-12-12",
             "end": "2025-12-13",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-sled-snocross-2025-26-release",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-sled-cor-xc-2026-snowgoer",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "2026 season of the series (its 15th); the 2026/27 schedule was not found.",
             "id": "cor-powersports-xc-mt-zion-championship",
             "name": "Mt. Zion Championship",
-            "discipline": "snowmobile_race",
             "discipline_label": "Snowmobile racing",
-            "group": "snowmobile",
             "start": "2026-03-21",
             "end": "2026-03-22",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-sled-cor-xc-2026-snowgoer",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -49904,21 +49240,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-mountaincreek-legacy-rail-jam",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Held during the 60th Anniversary Festival (January 24 to 25, 2026).",
             "id": "mountain-creek-legacy-rail-jam",
             "name": "Legacy Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-01-24",
             "end": "2026-01-24",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-mountaincreek-legacy-rail-jam",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -50574,38 +49905,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-freestyle-findarace-dirksen-derby",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "From a third party race listing; the organizer's own 2026 dates were not seen.",
             "id": "dirksen-derby",
             "name": "Dirksen Derby",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-12-18",
             "end": "2026-12-20",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-findarace-dirksen-derby",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-instructor-psia-national-events-calendar-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 2026 edition was cancelled, per an earlier version of the national events page.",
             "id": "psia-aasi-cross-country-academy",
             "name": "PSIA-AASI Cross Country Academy",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2027-03-21",
             "end": "2027-03-23",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-national-events-calendar-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -50935,38 +50256,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-freestyle-lbs-2027-postponement",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 37th LBS was postponed from 2026 to February 19 to 21, 2027; everyone with a spot in the 2026 race is eligible for 2027.",
             "id": "mt-baker-legendary-banked-slalom",
             "name": "Mt. Baker Legendary Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2027-02-19",
             "end": "2027-02-21",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-lbs-2027-postponement",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-thefront-mtbaker-season",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "mt-baker-last-stand-rail-jam",
             "name": "The Last Stand",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-04-11",
             "end": "2026-04-11",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-thefront-mtbaker-season",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -52686,38 +51997,26 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-nashoba-vertical-challenge",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Latest Nashoba date found; no 2026 or 2027 date was in the search results.",
             "id": "vertical-challenge-nashoba-valley",
             "name": "Vertical Challenge at Nashoba Valley",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2025-02-08",
             "end": "2025-02-08",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-nashoba-vertical-challenge",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-nashoba-racing",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "2025/26 pricing was listed; league dates were not in the search result.",
             "id": "nashoba-adult-team-racing-league",
             "name": "Nashoba Valley Adult Team Racing League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-nashoba-racing",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -53808,21 +53107,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-instructor-psia-national-events-p8176-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Last edition, hosted by the Western Region. The current national events calendar lists 2027 dates as TBD and names no 2027 venue.",
             "id": "psia-aasi-freestyle-academy",
             "name": "PSIA-AASI Freestyle Academy",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2026-02-23",
             "end": "2026-02-27",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-national-events-p8176-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -54095,38 +53389,26 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-instructor-psia-2024-25-calendar-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Most recent edition found in search results.",
             "id": "psia-c-fall-opener",
             "name": "Fall Opener (PSIA-AASI Central)",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2024-12-07",
             "end": "2024-12-08",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-2024-25-calendar-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-nubsnob-calendar",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed on the 2025/26 calendar; the date was not in the search result.",
             "id": "nubs-nob-bahnhof-park-jam",
             "name": "Bahnhof Park Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-nubsnob-calendar",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -55681,89 +54963,64 @@
         "count": 5,
         "items": [
           {
-            "source_id": "events-freestyle-ifsa-venue-palisades",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Only the start date, February 3, 2027, was seen; the end date was not listed in the result.",
             "id": "ifsa-fwt-qualifier-palisades-tahoe",
             "name": "Palisades Tahoe IFSA Qualifier 3*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-02-03",
             "end": "2027-02-03",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-freestyle-ifsa-venue-palisades",
             "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
+            "confidence": "estimated"
+          },
+          {
             "id": "ifsa-junior-palisades-tahoe",
             "name": "Palisades Tahoe IFSA Junior 3*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-02-05",
             "end": "2027-02-07",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-venue-palisades",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-truckee-chamber-pain-mcshlonkey",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The foundation page lists the 2027 date as TBA.",
             "id": "pain-mcshlonkey-classic",
             "name": "Pain McShlonkey Classic",
-            "discipline": "fun_race",
             "discipline_label": "Fun race",
-            "group": "community",
             "start": "2026-03-21",
             "end": "2026-03-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-truckee-chamber-pain-mcshlonkey",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-usss-mogul-championships",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Held at Palisades Tahoe. The event page lists arrival on March 23 and dual moguls finals on March 29; another listing gives March 27 to 29.",
             "id": "toyota-us-mogul-freestyle-championships",
             "name": "Toyota U.S. Mogul Freestyle Championships",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
             "start": "2026-03-26",
             "end": "2026-03-29",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-mogul-championships",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-snowbrains-cushing-crossing-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "cushing-crossing-pond-skim",
             "name": "Cushing Crossing Pond Skim",
-            "discipline": "pond_skim",
             "discipline_label": "Pond skim",
-            "group": "heritage",
             "start": "2026-05-02",
             "end": "2026-05-02",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-snowbrains-cushing-crossing-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -56903,21 +56160,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-nac-huntsman-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "huntsman-cup",
             "name": "Huntsman Cup",
-            "discipline": "adaptive_alpine",
             "discipline_label": "Adaptive alpine",
-            "group": "adaptive",
             "start": "2026-02-10",
             "end": "2026-02-13",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-nac-huntsman-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -57072,38 +56324,27 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-alpine-patspeak-league-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The listed start dates are January 4 to 7, 2027 (the opening week); races then run weekly, weather permitting. The season end date is not given.",
             "id": "pats-peak-adult-corporate-racing",
             "name": "Pats Peak Adult/Corporate Racing",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-01-04",
-            "end": null,
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-patspeak-league-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-patspeak-vertical-challenge",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "vertical-challenge-pats-peak",
             "name": "Vertical Challenge at Pats Peak",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-02-08",
             "end": "2026-02-08",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-patspeak-vertical-challenge",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -57584,21 +56825,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-perfectnorth-winter-welcome-rail-jam",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "perfect-north-winter-welcome-rail-jam",
             "name": "Winter Welcome Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-12-19",
             "end": "2026-12-19",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-perfectnorth-winter-welcome-rail-jam",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -57969,21 +57205,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-pico-vertical-challenge",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "vertical-challenge-pico",
             "name": "Vertical Challenge at Pico Mountain",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-03-28",
             "end": "2026-03-28",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-pico-vertical-challenge",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -58354,21 +57585,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-nordic-pine-mountain-2026-9and10",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Presale spectator admission was $30 for adults and $20 for ages 11 to 17, sold through the Kiwanis Ski Club website; the 2025 event ran February 21 to 23",
             "id": "pine-mountain-continental-cup",
             "name": "FIS Ski Jumping Continental Cup at Pine Mountain",
-            "discipline": "ski_jumping",
             "discipline_label": "Ski jumping",
-            "group": "nordic",
             "start": "2026-02-20",
             "end": "2026-02-22",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-nordic-pine-mountain-2026-9and10",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -59566,55 +58792,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-cwest-powdermountain-knucklehead-rail-jam",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Check in from 9am; the jam started at 11:15am.",
             "id": "powder-mountain-knucklehead-rail-jam",
             "name": "Knucklehead Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-03-07",
             "end": "2026-03-07",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-powdermountain-knucklehead-rail-jam",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-townlift-turn-n-burn-2026",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "10th annual edition.",
             "id": "powder-mountain-turn-n-burn",
             "name": "Turn N Burn",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-21",
             "end": "2026-03-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-townlift-turn-n-burn-2026",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-telemark-skiing-no-joke-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "no-joke-tele-race",
             "name": "No Joke Tele Race",
-            "discipline": "telemark",
             "discipline_label": "Telemark",
-            "group": "backcountry",
             "start": "2026-04-04",
             "end": "2026-04-04",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-telemark-skiing-no-joke-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -59759,21 +58970,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-powderridge-league-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "powder-ridge-adult-race-league",
             "name": "Powder Ridge Adult Race League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Wednesday evenings"
+            "timing": "Wednesday evenings",
+            "source_id": "events-alpine-powderridge-league-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -60984,55 +60189,39 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-cwest-redlodge-events-week-2026-02-21",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Started at noon.",
             "id": "red-lodge-mountain-rail-jam",
             "name": "Red Lodge Mountain Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-02-21",
             "end": "2026-02-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-redlodge-events-week-2026-02-21",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "big-sky-skimo-cup-red-lodge-mountain",
             "name": "Red Lodge Randonee",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-02-27",
             "end": "2026-02-28",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-big-sky-skimo-cup-2026-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-redlodge-town-series",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "red-lodge-town-series",
             "name": "Town Series",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Sign ups open in December"
+            "timing": "Sign ups open in December",
+            "source_id": "events-cwest-redlodge-town-series",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -61743,38 +60932,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-skiroundtop-home",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed on the Roundtop site, which was a few months old in the search result; confirm before planning.",
             "id": "roundtop-rail-jam-throwdown-january",
             "name": "Roundtop Rail Jam Throwdown (January)",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2027-01-22",
             "end": "2027-01-22",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-ceast-skiroundtop-home",
             "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed on the Roundtop site, which was a few months old in the search result; confirm before planning.",
+            "confidence": "estimated"
+          },
+          {
             "id": "roundtop-rail-jam-throwdown-february",
             "name": "Roundtop Rail Jam Throwdown (February)",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2027-02-19",
             "end": "2027-02-19",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-skiroundtop-home",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -62030,38 +61209,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-saddleback-back-to-the-banks",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Fourth annual edition.",
             "id": "saddleback-back-to-the-banks",
             "name": "Back to the Banks Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-14",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-ceast-saddleback-back-to-the-banks",
             "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
+            "confidence": "estimated"
+          },
+          {
             "id": "saddleback-planks-to-the-banks",
             "name": "Planks to the Banks",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-15",
             "end": "2026-03-15",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-saddleback-back-to-the-banks",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -63925,38 +63094,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-alpine-sopa-winter-games-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "special-olympics-pennsylvania-winter-games",
             "name": "Special Olympics Pennsylvania Winter Games",
-            "discipline": "adaptive_alpine",
             "discipline_label": "Adaptive alpine",
-            "group": "adaptive",
             "start": "2027-02-10",
             "end": "2027-02-12",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-sopa-winter-games-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-snowbrains-vail-mid-atlantic",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "From a season preview article.",
             "id": "seven-springs-toyota-rail-jam",
             "name": "Toyota Take-Over Weekend Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-01-30",
             "end": "2026-02-01",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-snowbrains-vail-mid-atlantic",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -64385,38 +63544,26 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-cwest-sierraattahoe-king-queen",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Started at 9am; registration opening was listed as TBD. The search result gave no format, so the discipline is the closest community id.",
             "id": "sierra-at-tahoe-king-queen-of-the-mountain",
             "name": "King/Queen of the Mountain",
-            "discipline": "fun_race",
             "discipline_label": "Fun race",
-            "group": "community",
             "start": "2026-03-15",
             "end": "2026-03-15",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-sierraattahoe-king-queen",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-sierraattahoe-pond-skim-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 2026 event date was not in the search result.",
             "id": "sierra-at-tahoe-pond-skim",
             "name": "Sierra-at-Tahoe Pond Skim",
-            "discipline": "pond_skim",
             "discipline_label": "Pond skim",
-            "group": "heritage",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-sierraattahoe-pond-skim-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -65272,21 +64419,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-skeetawk-skimo-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "skeetawk-skimo",
             "name": "Skeetawk Skimo",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-04-04",
             "end": "2026-04-04",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-skeetawk-skimo-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -65776,21 +64918,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-butternut-vertical-challenge-page",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": null,
             "id": "vertical-challenge-ski-butternut",
             "name": "Vertical Challenge at Ski Butternut",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Late January (the event page lists Saturday, January 24 without a year)"
+            "timing": "Late January (the event page lists Saturday, January 24 without a year)",
+            "source_id": "events-ceast-butternut-vertical-challenge-page",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -66941,21 +66077,15 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-cisc-race-league",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": null,
             "id": "cisc-race-league-ski-sundown",
             "name": "Connecticut Industrial Ski Council race league at Ski Sundown",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Tuesday nights in January and February, at Mount Southington and Ski Sundown"
+            "timing": "Tuesday nights in January and February, at Mount Southington and Ski Sundown",
+            "source_id": "events-ceast-cisc-race-league",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -67944,21 +67074,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-soks-winter-games-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "special-olympics-kansas-winter-games",
             "name": "Special Olympics Kansas Winter Games",
-            "discipline": "adaptive_alpine",
             "discipline_label": "Adaptive alpine",
-            "group": "adaptive",
             "start": "2026-02-04",
             "end": "2026-02-06",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-soks-winter-games-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -68156,21 +67281,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-sled-hillclimb-snowdevils",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Schedule is tentative and depends on snow. The 2026 event was cancelled for poor snow.",
             "id": "world-championship-snowmobile-hill-climb",
             "name": "World Championship Snowmobile Hill Climb",
-            "discipline": "hill_climb",
             "discipline_label": "Hill climb",
-            "group": "snowmobile",
             "start": "2027-03-18",
             "end": "2027-03-21",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-sled-hillclimb-snowdevils",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -68386,21 +67506,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-nyskiblog-flower-rail-jam-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Held in April 2026; the report was posted April 14, 2026. The exact day was not in the search result.",
             "id": "snow-ridge-flower-skate-shop-rail-jam",
             "name": "Flower Skate Shop Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-nyskiblog-flower-rail-jam-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -70063,21 +69176,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "ifsa-junior-snowbird",
             "name": "Snowbird IFSA Junior 2*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-01-23",
             "end": "2027-01-24",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-events-2027",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -70744,89 +69852,60 @@
         "count": 5,
         "items": [
           {
-            "source_id": "events-backcountry-aspensnowmass-power-of-four-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "A third party race listing on strambecco.com shows February 20, 2027 and marks it as not confirmed.",
             "id": "audi-power-of-four-skimo",
             "name": "Audi Power of Four Ski Mountaineering Race",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-02-21",
             "end": "2026-02-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-aspensnowmass-power-of-four-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-aspenchamber-nastar-2024-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Latest edition found. No 2025, 2026 or 2027 edition was found.",
             "id": "nastar-national-championships",
             "name": "NASTAR National Championships",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
             "start": "2024-04-08",
             "end": "2024-04-13",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-aspenchamber-nastar-2024-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Most recent edition found. The source names Aspen Snowmass without saying which of its mountains hosted; Snowmass is used for the map pin.",
             "id": "psia-c-spring-rally",
             "name": "Spring Rally (PSIA-AASI Central)",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2024-04-10",
             "end": "2024-04-11",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-aspensnowmass-town-race-series",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 45th season opened January 10, 2026; this venue's race dates were not seen.",
             "id": "aspen-snowmass-town-race-series-snowmass",
             "name": "Aspen Snowmass Town Race Series",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-aspensnowmass-town-race-series",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-gosnowmass-banked-slalom",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "The 12th edition, set for April 4, 2026, was cancelled for snow conditions. Entry rules were not seen.",
             "id": "snowmass-slash-the-mass-banked-slalom",
             "name": "Slash the Mass Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-gosnowmass-banked-slalom",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -71206,38 +70285,24 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-snowshoe-2526-schedule",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "On the 2025/26 winter event schedule; the date was not in the search result.",
             "id": "snowshoe-silver-creek-rail-jam",
             "name": "Silver Creek Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
-          },
-          {
             "source_id": "events-ceast-snowshoe-2526-schedule",
             "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 2025/26 winter schedule lists an open freestyle competition; its date was not in the search result.",
+            "confidence": "estimated"
+          },
+          {
             "id": "snowshoe-open-slopestyle",
             "name": "Snowshoe Open Slopestyle",
-            "discipline": "slopestyle",
             "discipline_label": "Slopestyle",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-snowshoe-2526-schedule",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -71718,21 +70783,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-sled-rmsha-soldier",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The 2027 RMSHA schedule was not found.",
             "id": "rmsha-hill-climb-soldier-mountain",
             "name": "RMSHA Charmac Uphill Battle at Soldier Mountain",
-            "discipline": "hill_climb",
             "discipline_label": "Hill climb",
-            "group": "snowmobile",
             "start": "2026-02-26",
             "end": "2026-02-28",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-sled-rmsha-soldier",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -72059,21 +71119,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-solitude-powderkeg-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "wasatch-powderkeg",
             "name": "Wasatch Powderkeg",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-03-04",
             "end": "2026-03-08",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-solitude-powderkeg-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -72325,21 +71380,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-sled-snocross-2025-26-release",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for 2024/25 and 2025/26.",
             "id": "amsoil-championship-snocross-duluth",
             "name": "Duluth Snocross National (season finale)",
-            "discipline": "snocross",
             "discipline_label": "Snocross",
-            "group": "snowmobile",
             "start": "2026-04-03",
             "end": "2026-04-04",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-sled-snocross-2025-26-release",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -72454,21 +71504,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-springmountain-we-ride-for-chris",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Page titled We Ride For Chris Rail Jam 2026; the date was not in the search result.",
             "id": "spring-mountain-we-ride-for-chris-rail-jam",
             "name": "We Ride For Chris Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-springmountain-we-ride-for-chris",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -73067,21 +72110,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-uncovercolorado-steamboat-pond-skim-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed as subject to change.",
             "id": "steamboat-pond-skim",
             "name": "Steamboat Closing Day Pond Skim",
-            "discipline": "pond_skim",
             "discipline_label": "Pond skim",
-            "group": "heritage",
             "start": "2027-04-11",
             "end": "2027-04-11",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-uncovercolorado-steamboat-pond-skim-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -74043,55 +73081,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-alpine-usss-2026-27-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The draft NorAm calendar on skiracing.com gives January 5 to 8 to Whiteface instead.",
             "id": "stifel-noram-cup-stowe",
             "name": "Stifel NorAm Cup, Stowe",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-01-05",
             "end": "2027-01-08",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-usss-2026-27-events-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-ncaa-skiing-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "ncaa-skiing-championships",
             "name": "NCAA Skiing Championships",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-03-10",
             "end": "2027-03-13",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-ncaa-skiing-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-vermontpublic-stowe-heritage-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "stowe-mountain-heritage-race",
             "name": "Stowe Mountain Heritage Race",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-03-01",
             "end": "2026-03-01",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-vermontpublic-stowe-heritage-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -74984,38 +74007,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "ifsa-junior-sugar-bowl",
             "name": "Sugar Bowl IFSA Junior 2*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-01-02",
             "end": "2027-01-03",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-events-2027",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-sugarbowl-silver-belt",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Competition day was April 4, 10am to 2pm, after the course build per Freeskier.",
             "id": "sugar-bowl-silver-belt",
             "name": "Silver Belt",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2026-04-02",
             "end": "2026-04-04",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-sugarbowl-silver-belt",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -75166,21 +74179,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-blowingrocknews-sugar-adult-race-league-2023",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Latest league details found (2023); the 2026/27 page gave no details in the search result.",
             "id": "sugar-mountain-adult-race-league",
             "name": "Sugar Mountain Adult Race League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2022/23",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-blowingrocknews-sugar-adult-race-league-2023",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -75557,21 +74563,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Most recent edition found: Spring Academy April 4 to 7 and Spring Rally April 6 to 7. The year comes from the search summaries, which place the article in spring 2024.",
             "id": "psia-e-spring-rally",
             "name": "Spring Academy and Spring Rally (PSIA-AASI Eastern)",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2024-04-04",
             "end": "2024-04-07",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -75997,21 +74998,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-runsignup-sugarloaf-banked-slalom",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "sugarloaf-banked-slalom",
             "name": "Sugarloaf Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-21",
             "end": "2026-03-21",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-runsignup-sugarloaf-banked-slalom",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -76464,21 +75460,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-summit-pacwest-banked-slalom",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Latest dates tied to a named page. A search summary also listed March 13 to 15, 2026 at Summit East, another area of The Summit at Snoqualmie, without naming its page.",
             "id": "pacwest-banked-slalom",
             "name": "PacWest Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2024-03-23",
             "end": "2024-03-24",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-summit-pacwest-banked-slalom",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -76899,72 +75890,52 @@
         "count": 4,
         "items": [
           {
-            "source_id": "events-instructor-psia-2027-national-dates-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "psia-aasi-womens-summit",
             "name": "PSIA-AASI Women's Summit",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2027-03-02",
             "end": "2027-03-04",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-2027-national-dates-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-wiki-wc-2026-27",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": null,
             "id": "fis-alpine-world-cup-sun-valley-finals",
             "name": "Stifel Sun Valley Finals (FIS Alpine Ski World Cup Finals)",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-03-20",
             "end": "2027-03-25",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-wiki-wc-2026-27",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           },
           {
-            "source_id": "events-cwest-eyeonsunvalley-dollar-baldy",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "14th annual edition.",
             "id": "sun-valley-baldy-banked-slalom",
             "name": "Baldy Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2026-03-07",
             "end": "2026-03-07",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-eyeonsunvalley-dollar-baldy",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-visitsunvalley-stampede",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Inaugural edition, presented by POWDER Magazine. Check in was Friday, March 13, at Warm Springs Lodge.",
             "id": "sun-valley-stampede",
             "name": "Sun Valley Stampede",
-            "discipline": "ski_cross",
             "discipline_label": "Ski cross",
-            "group": "alpine",
             "start": "2026-03-14",
             "end": "2026-03-15",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-visitsunvalley-stampede",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -77670,21 +76641,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-endurancegrid-bnb-2027",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Training April 2, singles April 3 and duals April 4 on Monday Mourning; a mixed Juniors bracket is added on Sunday. The Open class is for skiers 13 and older.",
             "id": "sunday-river-bust-n-burn",
             "name": "Bust 'N' Burn",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
             "start": "2027-04-03",
             "end": "2027-04-04",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-endurancegrid-bnb-2027",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -78005,21 +76971,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-runsignup-heathen-challenge-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "heathen-challenge",
             "name": "The Heathen Challenge",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-02-08",
             "end": "2026-02-08",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-runsignup-heathen-challenge-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -79342,21 +78303,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-runsignup-skidola-2027-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Seventh annual edition; 5:30 pm start.",
             "id": "skidola",
             "name": "Skidola",
-            "discipline": "uphill",
             "discipline_label": "Uphill",
-            "group": "backcountry",
             "start": "2027-03-12",
             "end": "2027-03-12",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-runsignup-skidola-2027-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -79494,38 +78450,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-ceast-lakesregion-tenney-grind-into-26",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "First rail jam of the 2025/26 season.",
             "id": "tenney-new-years-eve-rail-jam",
             "name": "Grind into '26 Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2025-12-31",
             "end": "2025-12-31",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-lakesregion-tenney-grind-into-26",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-ceast-lakesregion-vertical-challenge-tenney",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "vertical-challenge-tenney-mountain",
             "name": "Vertical Challenge at Tenney Mountain",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-01-19",
             "end": "2026-01-19",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-lakesregion-vertical-challenge-tenney",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -79780,21 +78726,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-backcountry-runsignup-jack-n-jill-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The series schedule in the same search gave March 13 to 15; the race page gives March 13 and 14.",
             "id": "big-sky-skimo-cup-teton-pass",
             "name": "Jack-n-Jill Skimo",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-03-13",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-runsignup-jack-n-jill-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -80133,21 +79074,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-wiki-nastar",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": null,
             "id": "nastar-the-highlands",
             "name": "NASTAR at The Highlands at Harbor Springs",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": null
+            "source_id": "events-alpine-wiki-nastar",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           }
         ]
       },
@@ -82503,21 +81437,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-fox9-trollhaugen-open-haugen-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "21st year; 11 am to 4 pm both days.",
             "id": "trollhaugen-open-haugen-rail-jam",
             "name": "Open Haugen Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-10-03",
             "end": "2026-10-04",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-fox9-trollhaugen-open-haugen-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -83492,38 +82421,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-freestyle-usss-freestyle-event-series",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Listed by U.S. Ski & Snowboard as January 5, 2027 at Utah Olympic Park.",
             "id": "toyota-us-aerial-freestyle-championships",
             "name": "Toyota U.S. Aerial Freestyle Championships",
-            "discipline": "aerials",
             "discipline_label": "Aerials",
-            "group": "freestyle",
             "start": "2027-01-05",
             "end": "2027-01-05",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-freestyle-event-series",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-freestyle-fis-2026-27-noram-sneak-peek",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-freestyle-noram-cup-utah-olympic-park",
             "name": "FIS Freestyle NorAm Cup aerials at Utah Olympic Park",
-            "discipline": "aerials",
             "discipline_label": "Aerials",
-            "group": "freestyle",
             "start": "2027-02-03",
             "end": "2027-02-04",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-fis-2026-27-noram-sneak-peek",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -83886,72 +82805,51 @@
         "count": 4,
         "items": [
           {
-            "source_id": "events-instructor-psia-interski-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Current PSIA-AASI event page. The December 2023 announcement and a 2024 TownLift report gave April 3 to 10, 2027; a CSIA release gave April 4 to 9, 2027. TownLift names Vail and Beaver Creek.",
             "id": "interski-congress",
             "name": "Interski Congress",
-            "discipline": "interski",
             "discipline_label": "Interski",
-            "group": "instructor",
             "start": "2027-04-04",
             "end": "2027-04-10",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-interski-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-vrd-vail-winter-uphill-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Date from the search result summary; the page address says February 9 and may belong to an earlier edition.",
             "id": "vrd-winter-races-vail-mountain",
             "name": "Vail Mountain Winter Uphill",
-            "discipline": "uphill",
             "discipline_label": "Uphill",
-            "group": "backcountry",
             "start": "2026-02-08",
             "end": "2026-02-08",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-vrd-vail-winter-uphill-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Most recent edition found. The year comes from the search summaries, which place the article in spring 2024.",
             "id": "psia-rm-vail-spring-fling",
             "name": "Vail Spring Fling (PSIA-AASI Rocky Mountain)",
-            "discipline": "psia_aasi_event",
             "discipline_label": "PSIA AASI event",
-            "group": "instructor",
             "start": "2024-04-13",
             "end": "2024-04-14",
             "season": "2023/24",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-instructor-psia-road-trip-spring-2024-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-skiclubvail-town-series",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "vail-helly-hansen-alpine-town-series",
             "name": "Helly Hansen Alpine Town Series",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": "Six race days in the season, ending with a Super G finale"
+            "timing": "Six race days in the season, ending with a Super G finale",
+            "source_id": "events-cwest-skiclubvail-town-series",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -84600,21 +83498,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-alpine-wiki-nastar",
-            "as_of": "2026-10-17",
-            "confidence": "reported",
-            "note": null,
             "id": "nastar-wachusett-mountain-ski-area",
             "name": "NASTAR at Wachusett Mountain Ski Area",
-            "discipline": "nastar",
             "discipline_label": "NASTAR",
-            "group": "alpine",
-            "start": null,
-            "end": null,
-            "season": null,
             "published": false,
             "season_long": true,
-            "timing": null
+            "source_id": "events-alpine-wiki-nastar",
+            "as_of": "2026-10-17",
+            "confidence": "reported"
           }
         ]
       },
@@ -85120,38 +84011,28 @@
         "count": 2,
         "items": [
           {
-            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-freestyle-world-cup-waterville-valley",
             "name": "Waterville Freestyle Cup presented by Stifel",
-            "discipline": "moguls",
             "discipline_label": "Moguls",
-            "group": "freestyle",
             "start": "2027-01-22",
             "end": "2027-01-23",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-usss-2026-27-domestic-wc-release",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-sonh-winter-games-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "special-olympics-new-hampshire-state-winter-games",
             "name": "Special Olympics New Hampshire State Winter Games",
-            "discipline": "adaptive_alpine",
             "discipline_label": "Adaptive alpine",
-            "group": "adaptive",
             "start": "2026-03-02",
             "end": "2026-03-04",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-sonh-winter-games-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -85288,21 +84169,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-welch-warp",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "2025/26 pricing was listed; league dates were not in the search result.",
             "id": "welch-village-sunday-adult-race-league",
             "name": "Welch Village Sunday Adult Race League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-welch-warp",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -86232,55 +85106,40 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-alpine-usss-2026-27-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The draft NorAm calendar on skiracing.com lists Whiteface on January 5 to 8 instead.",
             "id": "stifel-noram-cup-whiteface",
             "name": "Stifel NorAm Cup, Whiteface",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-02-02",
             "end": "2027-02-13",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-usss-2026-27-events-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-skiracing-junior-worlds-2027-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "fis-alpine-junior-world-championships-2027",
             "name": "Stifel 2027 FIS Alpine Junior World Ski Championships",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2027-03-02",
             "end": "2027-03-12",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-skiracing-junior-worlds-2027-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-alpine-uscsa-nationals-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Held at Whiteface Mountain and Mt. Van Hoevenberg in Lake Placid.",
             "id": "uscsa-national-championships",
             "name": "USCSA National Championships",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
             "start": "2026-03-09",
             "end": "2026-03-14",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-alpine-uscsa-nationals-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -86566,72 +85425,50 @@
         "count": 4,
         "items": [
           {
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "ifsa-fwt-qualifier-whitefish",
             "name": "Whitefish IFSA Qualifier 2*",
-            "discipline": "big_mountain",
             "discipline_label": "Big mountain",
-            "group": "freeride",
             "start": "2027-01-08",
             "end": "2027-01-10",
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-freestyle-ifsa-events-2027",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-skiwhitefish-whiteout-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "big-sky-skimo-cup-whitefish-mountain",
             "name": "Whitefish Whiteout",
-            "discipline": "skimo",
             "discipline_label": "Skimo",
-            "group": "backcountry",
             "start": "2026-01-31",
             "end": "2026-01-31",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-skiwhitefish-whiteout-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-flatheadbeacon-whitefish-pond-skim-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": null,
             "id": "whitefish-pond-skim",
             "name": "Whitefish Mountain Resort Pond Skim",
-            "discipline": "pond_skim",
             "discipline_label": "Pond skim",
-            "group": "heritage",
             "start": "2026-04-04",
             "end": "2026-04-04",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-flatheadbeacon-whitefish-pond-skim-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-localfreshies-nate-chute-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "27th annual edition, listed on Local Freshies for the week of March 15, 2026.",
             "id": "whitefish-nate-chute-banked-slalom",
             "name": "Nate Chute Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-localfreshies-nate-chute-2026",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -86970,21 +85807,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-snowbrains-vail-mid-atlantic",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "Winterfest dates from a season preview article.",
             "id": "whitetail-toyota-rail-jam",
             "name": "Whitetail Winterfest Toyota Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2026-01-31",
             "end": "2026-02-01",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-snowbrains-vail-mid-atlantic",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -87127,21 +85959,14 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-ceast-wildmountain-race-league",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "2025/26 pricing was listed; league dates were not in the search result.",
             "id": "wild-mountain-adult-race-league",
             "name": "Wild Mountain Race League",
-            "discipline": "alpine_racing",
             "discipline_label": "Alpine racing",
-            "group": "alpine",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-ceast-wildmountain-race-league",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           }
         ]
       },
@@ -88672,55 +87497,37 @@
         "count": 3,
         "items": [
           {
-            "source_id": "events-cwest-winterpark-bucket-banked-slalom",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "The April 11, 2026 edition and the Meltdown Rail Jam were cancelled for 2025/26.",
             "id": "winter-park-bucket-banked-slalom",
             "name": "Bucket Banked Slalom",
-            "discipline": "banked_slalom",
             "discipline_label": "Banked slalom",
-            "group": "snowboard",
             "start": "2027-04-10",
-            "end": null,
             "season": "2026/27",
             "published": true,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-winterpark-bucket-banked-slalom",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-backcountry-unofficialnetworks-winter-park-ballet-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated",
-            "note": "No 2026 edition was found as of the research date.",
             "id": "winter-park-amateur-ski-ballet",
             "name": "Winter Park Amateur Ski Ballet",
-            "discipline": "ski_ballet",
             "discipline_label": "Ski ballet",
-            "group": "heritage",
             "start": "2025-11-15",
             "end": "2025-11-15",
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-backcountry-unofficialnetworks-winter-park-ballet-search",
+            "as_of": "2026-10-17",
+            "confidence": "estimated"
           },
           {
-            "source_id": "events-cwest-winterpark-spring-bash-and-splash",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Listed in the 2026 Spring Bash and Splash lineup, which ran March 28 to April 12, 2026 per a third party listing; the Bucket Banked Slalom page says the Meltdown was cancelled for 2025/26.",
             "id": "winter-park-meltdown-rail-jam",
             "name": "Meltdown Rail Jam",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
-            "start": null,
-            "end": null,
             "season": "2025/26",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-winterpark-spring-bash-and-splash",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -89979,21 +88786,16 @@
         "count": 1,
         "items": [
           {
-            "source_id": "events-cwest-townlift-woodward-rail-jam-2025",
-            "as_of": "2026-10-20",
-            "confidence": "estimated",
-            "note": "Qualifier for finals scheduled for December 2025. A 2026 stop was not confirmed.",
             "id": "woodward-park-city-crusher-cup",
             "name": "Skullcandy Crusher Cup at Woodward Park City",
-            "discipline": "rail_jam",
             "discipline_label": "Rail jam",
-            "group": "freestyle",
             "start": "2025-03-01",
             "end": "2025-03-01",
             "season": "2024/25",
             "published": false,
-            "season_long": false,
-            "timing": null
+            "source_id": "events-cwest-townlift-woodward-rail-jam-2025",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },

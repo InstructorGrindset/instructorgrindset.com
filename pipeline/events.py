@@ -352,7 +352,6 @@ def resort_events(data: EventsData, defs: EventsDefs) -> dict[str, dict]:
     """Resort.events for every resort that hosts an event: {count, items} with every event at the resort in date
     order (the map season's dated editions first, then last editions by their place in the season)."""
     labels = {d.id: d.label for g in defs.groups for d in g.disciplines}
-    group_of = defs.discipline_group()
     out: dict[str, list] = {}
     for e in sorted(data.events, key=lambda e: (0 if e.edition_2026_27 else 1, sort_key(e, defs.season.start))):
         rid = e.venue.resort_id
@@ -360,14 +359,11 @@ def resort_events(data: EventsData, defs: EventsDefs) -> dict[str, dict]:
             continue
         span = e.edition_2026_27 or e.last_edition
         start, end, published, season = event_dates(e)
-        item = {"id": e.id, "name": e.name, "discipline": e.discipline, "discipline_label": labels[e.discipline],
-                "group": group_of[e.discipline], "start": start.isoformat() if start else None,
+        item = {"id": e.id, "name": e.name, "discipline_label": labels[e.discipline], "start": start.isoformat() if start else None,
                 "end": end.isoformat() if end else None,
                 "season": defs.season.label if published else season, "published": published}
         if span is not None:   # the dates' provenance; an event without a date has none to show
             item.update(source_id=span.source_id, as_of=span.as_of.isoformat(), confidence=span.confidence)
-            if span.note:
-                item["note"] = span.note
         if e.program:
             cite = e.usual_timing or e.season_long
             item.update(season_long=True, timing=e.usual_timing.value if e.usual_timing else None,

@@ -37,7 +37,8 @@
 .ev-group-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; }
 .ev-group-list li { display: flex; align-items: center; gap: .5rem; }
 .ev-group-name { font-weight: 700; color: var(--ink); }
-.ev-next-list .nav-name { gap: .45rem; }
+.ev-next-list .nav-name { display: block; }
+.ev-next-list .nav-name .ev-swatch, .ev-row .ev-swatch { margin-right: .45rem; vertical-align: .05em; }
 .ev-resort-link { margin: .5rem 0 0; }
 .ev-abroad { color: var(--wm-text); border: 1px dashed var(--wm-border-strong); }
 .ev-abroad-note { margin: 0 0 .6rem; font-size: .75rem; }
@@ -86,7 +87,7 @@
 .ev-month-title .tree-meta { letter-spacing: 0; text-transform: none; font-weight: 400; }
 .ev-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: .15rem; }
 .ev-row {
-  display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: .55rem; row-gap: .05rem;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: .1rem; row-gap: .05rem;
   min-height: 44px; padding: .3rem .5rem; border: 1px solid transparent; border-radius: 2px; color: var(--ink); text-decoration: none;
 }
 .ev-row:hover { background: var(--wm-surface); border-color: var(--wm-border); text-decoration: none; }

@@ -3113,7 +3113,7 @@ async function eventsChecks(browser, base, stubBase) {
     `a venue click opens its panel (${card.heading}, ${card.eyebrow})`);
   check(JSON.stringify(card.tags) === JSON.stringify(['Ski marathon', 'Cross country', 'Open to anyone', 'Elite', 'Sign up open']), `discipline and level badges (${card.tags})`);
   check(card.facts.Dates.startsWith('feb 20 to 21, 2027 published last verified oct 1, 2026 · synthetic fixture: loppet page')
-    && card.facts.Venue.includes('mapped at the town center of fixture lake town') && card.facts.Organizer.startsWith('fixture lake ski foundation published'),
+    && card.facts.Venue.includes('mapped at the town center of fixture lake town. town center from the synthetic town page') && card.facts.Organizer.startsWith('fixture lake ski foundation published'),
   `dates, venue with its precision and organizer, each with badge and source (${card.facts.Dates})`);
   check(card.method === 'Register online' && card.btn && card.btn.href === 'https://example.com/fixture/events/loppet/register' && card.btn.target === '_blank'
     && /noopener/.test(card.btn.rel) && card.btn.text === 'Sign up for Fixture Lake Loppet, opens in a new tab',
@@ -3280,6 +3280,59 @@ async function eventsChecks(browser, base, stubBase) {
   }
 }
 
+// EVENTS mode on the real data/build output, when it has events: the counts, a dot per mapped venue that fits the
+// national view, resort events on the resort's own point, the calendar list and the calendars on a phone.
+async function realEventsChecks(browser, base) {
+  let file = null;
+  try { file = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'events.json'), 'utf8')); } catch { file = null; }
+  if (!file || !file.events || !file.events.length) { log('\nReal events: none in data/build yet, skipped'); return; }
+  log('\nReal events (data/build)');
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const w = watch(page, 'real events');
+  await page.goto(`${base}/map/events/`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 30000 });
+  const real = await page.evaluate(() => {
+    const m = window.__careerMap.events.model;
+    const idx = window.__careerMap.index;
+    const off = [...m.venues.values()].filter((v) => v.resort_id).filter((v) => {
+      const r = idx.resorts.get(v.resort_id);
+      return !r || Math.abs(r.lat - v.location.lat) > 1e-6 || Math.abs(r.lon - v.location.lon) > 1e-6;
+    }).map((v) => v.id);
+    return { events: m.events.length, venues: m.venues.size, stat: document.querySelector('.panel .stat dd').textContent, off,
+      resortVenues: [...m.venues.values()].filter((v) => v.resort_id).length };
+  });
+  check(real.events === file.events.length && real.stat === String(file.counts.events.toLocaleString('en-US')),
+    `real: every event loads (${real.events} events at ${real.venues} venues, ${real.resortVenues} of them resorts)`);
+  check(real.off.length === 0, `real: events at resorts sit on the resort's own point (${real.off.slice(0, 5).join(', ') || 'all'})`);
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getLayer('event-venues'), null, { timeout: 20000 });
+  await mapIdle(page);
+  const drawn = await page.evaluate(() => new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['event-venues'] }).map((f) => f.properties.id)).size);
+  const lower48 = file.venues.filter((v) => v.mapped && v.location.lat < 50 && v.location.lon > -125).length;
+  check(drawn >= lower48 * 0.9, `real: the national view draws the venue dots (${drawn} drawn, ${lower48} venues in the lower 48)`);
+  await page.getByRole('button', { name: 'List view' }).click();
+  await page.waitForSelector('#events-list:not([hidden]) .ev-row');
+  const rows = await page.locator('#events-list .ev-row').count();
+  check(rows === file.events.length && await page.locator('#events-list .ev-cal').count() === file.calendars.length,
+    `real: the calendar list holds every event and calendar (${rows} rows)`);
+  w.assertClean();
+  await page.close();
+  const ph = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+  const wp = watch(ph, 'real events phone');
+  await ph.goto(`${base}/map/events/`);
+  await ready(ph, { start: false });
+  await ph.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 30000 });
+  await ph.locator('#list-toggle').tap();
+  await ph.waitForSelector('#events-list:not([hidden]) .ev-row');
+  const fit = await ph.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: innerWidth, list: document.getElementById('events-list').scrollWidth,
+    lw: document.getElementById('events-list').clientWidth }));
+  check(fit.sw <= fit.vw && fit.list <= fit.lw, `real: the phone calendar list never scrolls sideways (${JSON.stringify(fit)})`);
+  await shot(ph, 'events-real-phone-list.png');
+  wp.assertClean();
+  await ph.close();
+}
+
 // MAP_TEST_ONLY=eventsChecks,passChecks runs only the named suites (all of them by default).
 const ONLY = (process.env.MAP_TEST_ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
 const runs = (name) => !ONLY.length || ONLY.includes(name);
@@ -3323,6 +3376,7 @@ try {
   if (runs('passChecks')) await passChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('eventsChecks')) await eventsChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('realData')) await realData(browser, REPO_BASE);
+  if (runs('realEventsChecks')) await realEventsChecks(browser, REPO_BASE);
   await browser.close();
 } catch (err) {
   failures.push(`crashed: ${err.stack || err}`);

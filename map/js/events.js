@@ -7,7 +7,8 @@
 // Keep the date wording in step with pipeline/routes.py (event_when, date_span).
 import { loadOptional, schemas } from './data.js';
 import { hrefFor } from './router.js';
-import { dateSpan, isoDay, money } from './panel.js';
+import { isoDay, money } from './panel.js';
+import { dateSpan } from './eventshere.js';
 import { h, clear, safeUrl, formatIsoDate, plural, fmtInt, monthLong, monthShort, humanize, joinAnd } from './ui.js';
 
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
@@ -383,11 +384,26 @@ export function createEvents(opts) {
     if (v.resort_id) {
       return h('div', { class: 'fact' }, h('dt', null, 'Location'), h('dd', null, h('span', { class: 'sourced' },
         h('span', { class: 'sourced-main' }, h('span', { class: 'fact-value' }, `Base area of ${v.name}`)),
-        h('span', { class: 'fact-meta' }, 'The resort profile point · ', kit.sourceLink(loc.source_id)))));
+        h('span', { class: 'fact-meta' }, 'The resort profile\'s point · ', kit.sourceLink(loc.source_id)))));
     }
     const text = loc.precision === 'town' ? `Town center of ${v.town || v.name}` : loc.precision === 'region' ? 'The region around the venue' : 'The venue itself';
     return loc.confidence && loc.as_of ? kit.fact('Location', { ...loc, value: text }, (x) => x)
       : h('div', { class: 'fact' }, h('dt', null, 'Location'), h('dd', null, text, ' · ', kit.sourceLink(loc.source_id)));
+  }
+
+  /** The Venue fact of a card: the venue and its place, with the location's precision, badge and source. A resort
+   * venue sits on the resort profile's own point, which carries a source but no badge (as on the resort page). */
+  function venueFact(kit, v) {
+    const text = [v.name, place(v)].filter(Boolean).join(', ');
+    const loc = v.location;
+    if (!loc.confidence || !loc.as_of) {
+      return h('div', { class: 'fact' }, h('dt', null, 'Venue'), h('dd', null, h('span', { class: 'sourced' },
+        h('span', { class: 'sourced-main' }, h('span', { class: 'fact-value' }, text)),
+        h('span', { class: 'fact-meta' }, v.resort_id ? 'At the resort profile point · ' : '', kit.sourceLink(loc.source_id)))));
+    }
+    const note = loc.precision === 'town' ? `Mapped at the town center of ${v.town || 'the town'}`
+      : loc.precision === 'region' ? 'Mapped to the region' : null;
+    return kit.fact('Venue', { ...loc, value: text, note: [note, loc.note].filter(Boolean).join('. ') || null }, (x) => x);
   }
 
   function signupBlock(e, kit) {
@@ -435,7 +451,7 @@ export function createEvents(opts) {
         when ? kit.fact('Dates', { ...when, value: whenText(e, model.season.label) }, (x) => x)
           : h('div', { class: 'fact' }, h('dt', null, 'Dates'), h('dd', null, h('span', { class: 'not-verified' }, whenText(e, model.season.label)))),
         !e.program && e.usual_timing ? cited(kit, 'Usual timing', e.usual_timing) : null,
-        v ? kit.fact('Venue', { ...(v.location.confidence ? v.location : { source_id: v.location.source_id, as_of: null, confidence: null }), value: [v.name, place(v)].filter(Boolean).join(', '), note: v.location.precision === 'town' ? `Mapped at the town center of ${v.town || 'the town'}` : v.location.precision === 'region' ? 'Mapped to the region' : null }, (x) => x) : null,
+        v ? venueFact(kit, v) : null,
         cited(kit, 'Organizer', e.organizer && { ...e.organizer, value: e.organizer.name }, (x) => (e.organizer.url ? linkTo(e.organizer.url, x, 'src-link') : x)),
         cited(kit, 'Sanctioning', e.sanctioning && { ...e.sanctioning, value: e.sanctioning.name }, (x) => (e.sanctioning.url ? linkTo(e.sanctioning.url, x, 'src-link') : x)),
         cited(kit, 'Format', e.format)),
@@ -470,7 +486,7 @@ export function createEvents(opts) {
       const c = index.clusters.get(r.cluster_id);
       if (c) {
         const st = c.states.includes(r.state) ? r.state : c.states[0];
-        out.push(h('p', { class: 'ev-resort-link' }, navTo({ level: 'resort', stateCode: st, clusterId: c.id, resortId: r.id }, { class: 'src-link' }, `Open the ${r.name} resort profile`)));
+        out.push(h('p', { class: 'ev-resort-link' }, navTo({ level: 'resort', stateCode: st, clusterId: c.id, resortId: r.id }, { class: 'src-link' }, `Open the resort profile for ${r.name}`)));
       }
     }
     out.push(kit.section(evs.length === 1 ? 'The event here' : `${fmtInt(evs.length)} events here`,

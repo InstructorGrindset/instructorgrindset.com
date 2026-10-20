@@ -89,9 +89,10 @@ Resort {
                     tools: [{ name, kind, url, why, scope: resort|cluster, named_by, source_ids, as_of, confidence, note }] } | null,
                                                    // Furnished Finder link and ranked housing search tools, links only
                                                    // (see "Housing search"); null without a link and a tool
-  events: { count, items: [{ id, name, discipline, discipline_label, group, start, end, season, published,
-                             season_long, timing, source_id, as_of, confidence, note }] } | null,
-                                                   // every event the resort hosts, in date order (see "Events")
+  events: { count, items: [{ id, name, discipline_label, start?, end?, season?, published, season_long?, timing?,
+                             source_id?, as_of?, confidence? }] } | null,
+                                                   // every event the resort hosts, in date order, null and false
+                                                   // keys left out (see "Events and competitions")
   sources: string[]                                // every source_id referenced by this resort
 }
 ```
@@ -820,12 +821,13 @@ read as left out. Warnings: a venue no event uses (left out), a venue of kind re
   the season, programs and events without a date last. `months` are the months the dates touch (the start month
   alone when the end is not known), else the months `usual_timing` names ("Saturdays, January to March" gives 1, 2,
   3; capitalized names only), else none. Null keys are left out. No source text: the sources go into `sources.json`
-  with the rest of the build, so source links resolve as they do for resort facts. About 2 KB gzipped per 20 events.
+  with the rest of the build, so source links resolve as they do for resort facts. On 2026-10-20 (all nine lane
+  files): 320 events at 213 venues (127 of them resorts), 62 calendars, 479 KB, 78 KB gzipped.
 * `events-summary.json` (a few hundred bytes): `{ version, generated_at, season, events, calendars, dated_ends }`,
   the sorted end dates (else start dates) of the events with a 2026/27 edition, so the header pill counts the
   events still ahead with the viewer's own date.
 * `Resort.events`: every event a resort hosts in date order (dated editions first), with its date line's cited
-  block; its sources join `resort.sources`, so route stubs embed them. `definitions.json` gains
+  block and nothing the resort panel does not show; its sources join `resort.sources`, so route stubs embed them. `definitions.json` gains
   `events: { season, resort_panel_max }`.
 
 ### Route stub (`pipeline/routes.py`)
@@ -845,7 +847,8 @@ March", "Runs all season".
   a RESORTS / EVENTS radio pair (`#lp-mode`); RESORTS returns to the last resorts view. The header EVENTS pill
   (`#events-pill`, `aria-pressed`) shows the events still ahead and switches the mode; HIRING NOW from EVENTS goes
   to the resorts hiring now.
-* Loading: nothing of EVENTS mode is on the startup path. `events-summary.json` loads at idle after the first paint
+* Loading: nothing of EVENTS mode is on the startup path but the switch, the pill and the mode wiring in `app.js`.
+  "Events here" renders through `eventshere.js`, loaded the first time a resort with events shows. `events-summary.json` loads at idle after the first paint
   (the pill). `events.js`, `map/css/events.css` and `events.json` (validated per item by Zod `EventsFile`) load when
   the mode or an events link is used; `eventsmap.js` once the WebGL map runs in the mode. A resort page loads no
   events file: "Events here" reads its record.

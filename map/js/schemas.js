@@ -211,10 +211,10 @@ const Label = z.object({ id: z.string().min(1), label: z.string().min(1) });
 export const ResortEvents = z.object({
   count: z.number().int().positive(),
   items: keepValid(z.object({
-    id: Slug, name: z.string().min(1), discipline: z.string(), discipline_label: z.string().nullish(), group: z.string(),
+    id: Slug, name: z.string().min(1), discipline_label: z.string().nullish(),
     start: opt(IsoDate), end: opt(IsoDate), season: opt(z.string()), published: z.boolean(),
     season_long: z.boolean().nullish().transform((v) => Boolean(v)), timing: opt(z.string()),
-    source_id: opt(Slug), as_of: opt(IsoDate), confidence: opt(Confidence), note: z.string().nullish(),
+    source_id: opt(Slug), as_of: opt(IsoDate), confidence: opt(Confidence),
   })),
 }).nullish().catch(null).transform((v) => (v && v.items.length ? v : null));
 
