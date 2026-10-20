@@ -1,5 +1,3 @@
-# Alpine lane: alpine racing, collegiate, masters, NASTAR, adaptive alpine, race leagues.
-# Contract: docs/map/EVENTS.md. Confidence and page status are in each source note.
 batch: events-alpine
 researched_date: 2026-10-17
 sources:
@@ -47,11 +45,6 @@ sources:
 - id: events-alpine-usss-alpine-nationals-page-search
   url: https://usskiandsnowboard.org/events/us-alpine-national-championships
   title: us alpine national championships
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-alpine-skiracing-junior-worlds-2027-search
-  url: https://skiracing.com/tag/lake-placid/
-  title: Stifel 2027 Alpine Junior Worlds Return to Whiteface Mountain
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
 - id: events-alpine-ncaa-skiing-search
@@ -558,38 +551,6 @@ events:
   website:
     value: https://usskiandsnowboard.org/events/us-alpine-national-championships
     source_id: events-alpine-usss-alpine-nationals-page-search
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://www.usskiandsnowboard.org/2026-27-events
-    source_id: events-alpine-usss-2026-27-events-search
-    as_of: 2026-10-17
-    confidence: estimated
-- id: fis-alpine-junior-world-championships-2027
-  name: Stifel 2027 FIS Alpine Junior World Ski Championships
-  discipline: alpine_racing
-  levels:
-  - junior
-  - elite
-  venue:
-    resort_id: whiteface
-  organizer: null
-  format:
-    value: FIS junior world championships at Whiteface Mountain and Lake Placid
-    source_id: events-alpine-skiracing-junior-worlds-2027-search
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-03-02
-    end: 2027-03-12
-    source_id: events-alpine-skiracing-junior-worlds-2027-search
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: null
-  website:
-    value: https://skiracing.com/tag/lake-placid/
-    source_id: events-alpine-skiracing-junior-worlds-2027-search
     as_of: 2026-10-17
     confidence: estimated
   calendar_url:

@@ -84,7 +84,7 @@ events:
   - id: fixture-basin-fun-race
     name: Fixture Basin Fun Race
     discipline: fun_race
-    levels: [open_amateur, junior]
+    levels: [open_amateur, masters]
     venue: {resort_id: fixture-basin, venue_id: null}
     edition_2026_27: {start: 2027-04-03, end: null, source_id: ev-fixture-league-page, as_of: 2026-10-17, confidence: estimated, note: End date not seen.}
     signup: {method: at_venue}

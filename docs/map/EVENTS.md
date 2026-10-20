@@ -13,6 +13,9 @@ listed (organizations, clubs and venues only).
 * United States venues go on the map. One exception: international instructor events (Interski and its US team
   selection abroad) may use a venue outside the US with `country:` set; they show in the events list and calendar,
   not as a map dot.
+* Adults only (owner rule, 2026-10-20): every event must be one an adult 18 or over can enter as a competitor or
+  participant. Events limited to under 18 (junior championships, youth tours, kids' classes) are out. An event with
+  youth and adult classes stays, without a youth level. There is no `junior` level id.
 * Community competitions count as much as pro events: local rail jams, bump and mogul contests, lap and vertical
   challenges (for example Gunbarrel 25 at Heavenly), resort race leagues, fun races and any contest open to the
   public. Give them level `open_amateur`.
@@ -125,5 +128,5 @@ Use the closest id. If none fits, use the closest group's first id and say so in
 
 ## Level ids
 
-`elite` (World Cup, national team, pro tour), `collegiate`, `junior` (youth and junior development),
+`elite` (World Cup, national team, pro tour), `collegiate`,
 `masters`, `open_amateur` (anyone can enter), `adaptive`, `instructor`.

@@ -66,7 +66,7 @@ events:
   - id: alpha-peak-rail-jam
     name: Alpha Peak Night Rail Jam
     discipline: rail_jam
-    levels: [open_amateur, junior]
+    levels: [open_amateur, masters]
     venue: {resort_id: alpha-peak}
     edition_2026_27: {start: 2027-01-16, end: 2027-01-16, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
     signup:
@@ -117,7 +117,7 @@ events:
   - id: fixture-hill-jump
     name: Fixture Hollow Ski Jump
     discipline: ski_jumping
-    levels: [junior, elite]
+    levels: [masters, elite]
     venue: {venue_id: fixture-jump-hill}
     organizer: {name: Fixture Hollow Ski Club, source_id: fixture-ev-jump, as_of: 2026-10-01, confidence: published}
     edition_2026_27: {start: 2027-01-30, end: 2027-01-31, source_id: fixture-ev-jump, as_of: 2026-10-01, confidence: published}
