@@ -879,8 +879,15 @@ March", "Runs all season".
   by discipline group, each opening in a new tab with its badge and source. The same filters apply.
 * Resort panel: "Events here" lists the next events by the viewer's date (dated editions not yet over, then the
   others; up to `resort_panel_max`) and "See all N events at <resort> on the events map".
+* Cost (2026-10-20, 5 Lighthouse runs interleaved with the tree before the map layer, load average 1.2 to 2.7):
+  `/map/` 98 against 98 (LCP 2.11 s against 2.12 s), Vail 95 against 95 (2.61 s against 2.60 s), Jackson Hole 96
+  against 97 (2.29 s against 2.31 s), credits 100. On the startup path: app.js 1.5 KB, panel.js 0.6 KB, map.css
+  0.4 KB and the shell 0.2 KB more gzipped; a resort stub with four events about 1.4 KB more (its events and their
+  sources). The first measurement, with "Events here" inside panel.js and the research notes in the records, had put
+  Vail's LCP 125 ms later. Lazy: events.js 10.8 KB, eventsmap.js 2.2 KB, events.css 2.1 KB and events.json 78 KB
+  gzipped.
 * Tests: `tests/pipeline/test_events.py` (every validation rule, resort resolution, last edition fallback, month
-  counts, programs, the stub, config), `eventsChecks` in `tests/map/browser_test.mjs` (fixtures from
+  counts, programs, the stub, config), `eventsChecks` and `realEventsChecks` in `tests/map/browser_test.mjs` (fixtures from
   `tests/map/events_fixture.yaml`, synthetic, compiled by `make_fixtures.py` with the real pipeline) and the EVENTS
   axe cases and lazy loading checks in `tests/map/audit.mjs`.
 
