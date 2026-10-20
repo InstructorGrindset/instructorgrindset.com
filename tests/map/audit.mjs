@@ -12,7 +12,8 @@
 //    Times come from the page's own performance marks (navigation start = 0).
 // 2. The homepage makes zero requests to /map/ or /data/build/.
 // 3. axe-core on the national map, a resort page, the list view, the phone layout, two heat map modes, the open
-//    search results and the Sources and credits page.
+//    search results, EVENTS mode (national, an open event panel, the calendar list, phone) and the Sources and
+//    credits page. The /map/ budget runs also check that EVENTS mode loads nothing before it is used.
 // 4. Lighthouse (mobile defaults) on /map/, two resort pages and /map/credits/.
 //
 // Files are served by a small static server with gzip, like GitHub Pages; python's
@@ -94,6 +95,8 @@ async function throttled(browser, url, label, { phone = false } = {}) {
   await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
   let bytes = 0;
   cdp.on('Network.loadingFinished', (e) => { bytes += e.encodedDataLength; });
+  const urls = [];
+  page.on('request', (rq) => urls.push(rq.url()));
   await page.goto(url, { waitUntil: 'commit' });
   await page.waitForFunction(() => window.__careerMap && window.__careerMap.ready, null, { timeout: 60000 });
   await page.waitForFunction(() => performance.getEntriesByName('careermap:preview').length > 0
@@ -110,6 +113,8 @@ async function throttled(browser, url, label, { phone = false } = {}) {
   const panelMs = m.panelFull ?? m.panel;
   const frameMs = m.preview;
   const interactive = Math.max(panelMs, frameMs);
+  const lazy = urls.filter((u) => /\/events\.json|\/map\/js\/events(map)?\.js|\/map\/css\/events\.css/.test(u));
+  check(lazy.length === 0, `${label}: EVENTS mode loads nothing before it is used (${lazy.length} requests)`);
   const r = { label, url, panel_ms: panelMs, first_map_frame_ms: frameMs, interactive_ms: interactive,
     webgl_click_to_load_ms: m.load - m.click, fcp_ms: m.fcp, transferred_kb: Math.round(bytes / 1024) };
   results.budget.push(r);
@@ -129,8 +134,22 @@ async function homepage(browser, base) {
   await page.close();
 }
 
+/** The real venue with the most events (for the EVENTS axe cases), else a synthetic fixture venue. */
+function eventsVenue() {
+  try {
+    const ev = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'events.json'), 'utf8'));
+    const n = new Map();
+    for (const e of ev.events || []) n.set(e.venue_id, (n.get(e.venue_id) || 0) + 1);
+    const mapped = new Set((ev.venues || []).filter((v) => v.mapped).map((v) => v.id));
+    const best = [...n.entries()].filter(([id]) => mapped.has(id)).sort((a, b) => b[1] - a[1])[0];
+    if (best) return `/map/events/?venue=${best[0]}`;
+  } catch { /* no build */ }
+  return '/map/events/?data=/tests/map/fixtures/&venue=fixture-lake-trail';
+}
+
 async function axe(browser, base) {
   const axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [HERE] }), 'utf8');
+  const venue = eventsVenue();
   const cases = [
     { label: 'national map, before the map starts', url: '/map/', waiting: true },
     { label: 'national map', url: '/map/' },
@@ -149,6 +168,11 @@ async function axe(browser, base) {
     { label: 'search results open, before the map starts', url: '/map/', waiting: true, search: 'mount' },
     { label: 'search results open on a resort page, phone', url: '/map/co/i70-corridor/vail/', waiting: true, search: 'tahoe', phone: true },
     { label: 'search results in the list view', url: '/map/', list: true, search: 'big' },
+    { label: 'EVENTS mode, national', url: '/map/events/', events: true },
+    { label: `EVENTS mode, open event panel (${venue})`, url: venue, events: true },
+    { label: 'EVENTS mode, calendar list view', url: '/map/events/', events: true, list: true },
+    { label: 'EVENTS mode, open event panel, phone', url: venue, events: true, phone: true },
+    { label: 'EVENTS mode, layers sheet open, phone', url: '/map/events/', events: true, phone: true, layers: true },
     { label: 'sources and credits page', url: '/map/credits/', static: true },
     { label: 'sources and credits page, phone', url: '/map/credits/', static: true, phone: true },
   ];
@@ -163,6 +187,10 @@ async function axe(browser, base) {
       await page.locator('#map-start').click();
       await page.waitForFunction(() => performance.getEntriesByName('careermap:map').length > 0, null, { timeout: 30000 });
       await page.waitForTimeout(1500);
+    }
+    if (c.events) {
+      await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 30000 });
+      await page.waitForTimeout(800);
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
     if (c.layers) { await page.locator('#layers-toggle').click(); await page.waitForTimeout(300); }

@@ -1,5 +1,9 @@
-// History API routing: /map/{state}/{cluster}/{resort}/ plus ?compare=a,b,c on a cluster.
+// History API routing: /map/{state}/{cluster}/{resort}/ plus ?compare=a,b,c on a cluster, and EVENTS mode at
+// /map/events/ with ?venue=<id>&event=<id> (the venue and the event the panel shows; checked once events.json loads).
 import { config } from './config.js';
+
+/** The first path segment of EVENTS mode (pipeline/routes.py EVENTS_PATH). */
+export const EVENTS_SEGMENT = 'events';
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -19,9 +23,19 @@ export function parsePath(pathname) {
  */
 export function resolve(index, segments, search = '') {
   const [s, c, r] = segments;
-  const view = { level: 'national', stateCode: null, clusterId: null, resortId: null, compare: [], fellBack: false };
+  const view = { level: 'national', stateCode: null, clusterId: null, resortId: null, compare: [], venueId: null, eventId: null, fellBack: false };
   if (segments.length > 3) view.fellBack = true;
   if (!s) return view;
+  if (s === EVENTS_SEGMENT) {
+    // EVENTS mode. The ids are only shape checked here: events.json loads with the mode, then events.js checks them.
+    view.level = 'events';
+    if (segments.length > 1) view.fellBack = true;
+    const q = new URLSearchParams(search);
+    const slug = (k) => { const v = (q.get(k) || '').trim().toLowerCase(); return SLUG.test(v) ? v : null; };
+    view.venueId = slug('venue');
+    view.eventId = slug('event');
+    return view;
+  }
 
   const code = SLUG.test(s) ? s.toUpperCase() : null;
   if (!code || !index.states.has(code)) { view.fellBack = true; return view; }
@@ -61,6 +75,7 @@ export function resolve(index, segments, search = '') {
 }
 
 export function pathFor(view) {
+  if (view.level === 'events') return `${config.mapBase}${EVENTS_SEGMENT}/`;
   const parts = [];
   if (view.stateCode) parts.push(view.stateCode.toLowerCase());
   if (view.stateCode && view.clusterId) parts.push(view.clusterId);
@@ -72,13 +87,18 @@ export function pathFor(view) {
 export function hrefFor(view) {
   const q = new URLSearchParams(config.preservedParams);
   if (view.level === 'compare' && view.compare && view.compare.length) q.set('compare', view.compare.join(','));
+  if (view.level === 'events') {
+    if (view.venueId) q.set('venue', view.venueId);
+    if (view.eventId) q.set('event', view.eventId);
+  }
   const qs = q.toString().replace(/%2C/g, ',').replace(/%2F/g, '/');
   return pathFor(view) + (qs ? `?${qs}` : '');
 }
 
 export function sameView(a, b) {
   return a && b && a.level === b.level && a.stateCode === b.stateCode && a.clusterId === b.clusterId
-    && a.resortId === b.resortId && (a.compare || []).join() === (b.compare || []).join();
+    && a.resortId === b.resortId && (a.compare || []).join() === (b.compare || []).join()
+    && (a.venueId || null) === (b.venueId || null) && (a.eventId || null) === (b.eventId || null);
 }
 
 export function createRouter(index, onChange) {
@@ -92,7 +112,8 @@ export function createRouter(index, onChange) {
     if (initial || fromPop) {
       // Rewrite unknown or non canonical paths (and /map/index.html) to the resolved view.
       const href = hrefFor(view);
-      if (view.fellBack || window.location.pathname !== href.split('?')[0]) {
+      if (view.fellBack || window.location.pathname !== href.split('?')[0]
+        || (view.level === 'events' && window.location.search !== (href.includes('?') ? href.slice(href.indexOf('?')) : ''))) {
         window.history.replaceState({ href }, '', href);
       }
     }

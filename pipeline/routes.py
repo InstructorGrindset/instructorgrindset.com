@@ -478,7 +478,7 @@ def render_resort_events(ctx: Ctx, r: dict, season_label: str = "2026/27", limit
                 f"Last verified {_esc(_date(it.get('as_of')))}" if it.get("as_of") else ""]
         link = _source_link(ctx, it.get("source_id"))
         lis.append(f'<li><a class="ev-here-link" href="{_esc(event_href(r["id"], it["id"]))}">{_esc(it["name"])}</a> '
-                   f'<span class="nav-meta">{_esc(it.get("discipline_label", ""))}</span>'
+                   f'<span class="nav-meta">{_esc(it.get("discipline_label", ""))}</span> '
                    f'<span class="fact-meta">{_esc(resort_events_when(it, season_label))} {"".join(meta)}'
                    f'{" · " + link if link else ""}</span></li>')
     n = ev.get("count") or len(items)
@@ -490,8 +490,8 @@ def render_resort_events(ctx: Ctx, r: dict, season_label: str = "2026/27", limit
 
 def _event_place(venue: dict, state_names: dict[str, str]) -> str:
     """"Cable, WI", "Vail, CO" (a resort venue names the resort), "Lillehammer, NO" for a venue abroad."""
-    bits = [venue.get("town") if venue.get("kind") != "resort" or not venue.get("resort_id") else venue.get("name"),
-            venue.get("state") or venue.get("country")]
+    town = venue.get("town") if venue.get("town") != venue.get("name") else None
+    bits = [None if venue.get("resort_id") else town, venue.get("state") or venue.get("country")]
     return ", ".join(b for b in bits if b)
 
 

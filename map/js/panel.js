@@ -84,6 +84,34 @@ export function officialMapFile(r) {
   return null;
 }
 
+const pad2 = (n) => String(n).padStart(2, '0');
+/** The viewer's date as YYYY-MM-DD (local clock). */
+export function isoDay(d = new Date()) { return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`; }
+
+const SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/** "Feb 25 to 27, 2027", "Nov 28 to Dec 2, 2026", "Dec 30, 2026 to Jan 2, 2027", "Feb 25, 2027" (routes.py date_span). */
+export function dateSpan(start, end) {
+  const a = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(start || ''));
+  if (!a) return '';
+  const b = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(end || ''));
+  const [ya, ma, da] = [a[1], SHORT[Number(a[2]) - 1], Number(a[3])];
+  if (!b || b[0] === a[0]) return `${ma} ${da}, ${ya}`;
+  const [yb, mb, db] = [b[1], SHORT[Number(b[2]) - 1], Number(b[3])];
+  if (ya === yb && ma === mb) return `${ma} ${da} to ${db}, ${ya}`;
+  if (ya === yb) return `${ma} ${da} to ${mb} ${db}, ${ya}`;
+  return `${ma} ${da}, ${ya} to ${mb} ${db}, ${yb}`;
+}
+
+/** The date line of a Resort.events item (routes.py resort_events_when). */
+export function eventWhenText(it, season) {
+  if (it.published) return it.end ? dateSpan(it.start, it.end) : `Starts ${dateSpan(it.start)}`;
+  if (it.season_long) return it.timing ? `Runs ${it.timing}` : 'Runs all season';
+  const unpublished = `${season} date not yet published.`;
+  if (it.start) return `Last held ${dateSpan(it.start, it.end)}. ${unpublished}`;
+  if (it.season) return `Last held in the ${it.season} season. ${unpublished}`;
+  return unpublished;
+}
+
 export function badge(confidence) {
   return h('span', { class: `badge badge-${confidence}`, title: CONFIDENCE_HELP[confidence] }, CONFIDENCE_LABEL[confidence] || confidence);
 }
@@ -94,7 +122,7 @@ function navLink(view, attrs, ...children) {
 
 export function createPanel(root, index, {
   onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {}, onSourcesNeeded = () => {},
-  onShowHousing = null,
+  onShowHousing = null, renderEvents = null,
 }) {
   let token = 0;
   let siteButtons = new Map();
@@ -374,6 +402,7 @@ export function createPanel(root, index, {
     ], r.editorial.source_ids, r.editorial.reviewed_date));
     out.push(careerSection(r));
     out.push(jobsSection(r, linkCtx()));
+    out.push(eventsHere(r));
     out.push(section('Operation size', h('dl', { class: 'facts' },
       fact('Skiable acres', r.size.acres, fmt.int),
       fact('Vertical drop', r.size.vertical_ft, fmt.ft),
@@ -445,6 +474,32 @@ export function createPanel(root, index, {
         m.note ? h('span', { class: 'fact-note' }, m.note) : null,
         h('span', { class: 'fact-meta' }, `${meta.join(' · ')} · `, sourceLink(m.source_id))));
     }))));
+  }
+
+  /**
+   * "Events here" (ROADMAP item 22): the resort's next events by the viewer's date (Resort.events, every event at the
+   * resort in date order), each linked into EVENTS mode, then a link to the venue on the events map. Matches
+   * pipeline/routes.py render_resort_events.
+   */
+  function eventsHere(r, now = new Date()) {
+    const ev = r.events;
+    if (!ev || !Array.isArray(ev.items) || !ev.items.length) return null;
+    const today = isoDay(now);
+    const max = (index.definitions && index.definitions.events && index.definitions.events.resort_panel_max) || 3;
+    const season = (index.definitions && index.definitions.events && index.definitions.events.season && index.definitions.events.season.label) || '2026/27';
+    const ahead = ev.items.filter((it) => !it.published || (it.end || it.start || '') >= today);
+    const shown = (ahead.length ? ahead : ev.items).slice(0, max);
+    const venueHref = hrefFor({ level: 'events', venueId: r.id });
+    const box = section('Events here',
+      h('ul', { class: 'ev-here' }, shown.map((it) => h('li', null,
+        h('a', { class: 'ev-here-link', href: hrefFor({ level: 'events', venueId: r.id, eventId: it.id }), 'data-nav': '' }, it.name),
+        ' ', h('span', { class: 'nav-meta' }, it.discipline_label || ''), ' ',
+        h('span', { class: 'fact-meta' }, `${eventWhenText(it, season)} `, it.confidence ? [badge(it.confidence), ' '] : null,
+          it.as_of ? `Last verified ${formatIsoDate(it.as_of)}` : null, it.source_id ? [' · ', sourceLink(it.source_id)] : null)))),
+      h('p', { class: 'ev-here-all' }, h('a', { href: venueHref, 'data-nav': '' },
+        `${ev.count === 1 ? 'See the event' : `See all ${fmtInt(ev.count)} events`} at ${r.name} on the events map`)));
+    box.classList.add('events-here');
+    return box;
   }
 
   // ── Career (Phase 4) ──
@@ -976,6 +1031,12 @@ export function createPanel(root, index, {
     for (const el of root.querySelectorAll('.src-pending')) el.replaceWith(sourceLink(el.dataset.src));
   }
 
+  /** The panel's building blocks for events.js, so event facts render exactly as resort facts do. */
+  function kit() {
+    const my = token;
+    return { badge, sourceLink, sourcedValue, fact, section, heading, footer, current: () => my === token };
+  }
+
   let rendered = false;
   const api = {
     /** Render a view. Returns the heading element. */
@@ -997,6 +1058,20 @@ export function createPanel(root, index, {
       destroyCharts();
       clear(root);
       let body;
+      if (view.level === 'events') {
+        // EVENTS mode: events.js renders the panel. Until it has loaded, a route stub keeps its prerendered list.
+        const pre = first && root.querySelector('#panel-heading');
+        body = renderEvents ? renderEvents(view, kit()) : null;
+        if (!body && pre) {
+          root.setAttribute('aria-busy', 'true');
+          return pre;
+        }
+        destroyCharts();
+        clear(root);
+        root.append(...(body || [...heading('Events', 'Events and competitions'), h('p', { class: 'loading' }, 'Loading events')]).flat().filter(Boolean), footer());
+        if (!body) root.setAttribute('aria-busy', 'true');
+        return root.querySelector('#panel-heading');
+      }
       switch (view.level) {
         case 'state': body = state(view); break;
         case 'cluster': body = cluster(view); break;
@@ -1010,6 +1085,7 @@ export function createPanel(root, index, {
     /** Select a housing site from the map. */
     selectSite(id) { selectSite(id, { scroll: true }); },
     fillSources,
+    kit,
     renderError(message) {
       destroyCharts();
       clear(root);

@@ -337,6 +337,14 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   let focusIds = null; // resorts in the focused state or cluster (others dim), or null at the national view
   function applyView(view) {
     clearFS();
+    if (view.level === 'events') {
+      // EVENTS mode: no state, cluster or resort is selected; events.js marks the selected venue on its own layers.
+      map.setFilter('states-line-selected', ['==', ['get', 'code'], '']);
+      map.setFilter('resorts-halo', ['==', ['get', 'id'], '']);
+      focusIds = null;
+      syncPulses();
+      return;
+    }
     const state = view.stateCode ? index.states.get(view.stateCode) : null;
     const cluster = view.clusterId ? index.clusters.get(view.clusterId) : null;
     if (state) setFS('states', state.code, { selected: true });
@@ -388,6 +396,8 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   function pick(point) {
     const pad = 6;
     const box = [[point.x - pad, point.y - pad], [point.x + pad, point.y + pad]];
+    // EVENTS mode: only event venues answer (events map hooks); states, clusters and resorts stay quiet.
+    if (mode === 'events') return modeHooks && modeHooks.pick ? modeHooks.pick(point, box) : null;
     if (detail) {
       const hs = map.queryRenderedFeatures(box, { layers: layersIn(['detail-housing-point', 'detail-housing-area']) });
       if (hs.length) return { kind: 'housing', id: hs[0].properties.id, name: hs[0].properties.name };
@@ -451,7 +461,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     if (t) {
       tip.hidden = false;
       tip.textContent = t.kind === 'resort' ? resortTip(t)
-        : t.kind === 'cluster' ? `${t.name} cluster` : t.name;
+        : t.kind === 'cluster' ? `${t.name} cluster` : t.tip || t.name;
       const x = Math.min(e.point.x + 14, container.clientWidth - tip.offsetWidth - 8);
       tip.style.transform = `translate(${Math.max(4, x)}px, ${Math.max(4, e.point.y - 34)}px)`;
     } else tip.hidden = true;
@@ -510,7 +520,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     };
     // Credit for precomputed rasters (snowfall: NOAA normals). Image sources carry no attribution, so an empty
     // GeoJSON source with one invisible layer holds it; MapLibre lists it while the heat map is on.
-    if (recolor.attribution) {
+    if (recolor.attribution && !map.getSource('heat-credit')) {
       map.addSource('heat-credit', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, attribution: recolor.attribution });
       map.addLayer({ id: 'heat-credit', type: 'fill', source: 'heat-credit', paint: { 'fill-opacity': 0 } }, before);
       heatIds.push('heat-credit');
@@ -529,6 +539,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     map.setPaintProperty('resorts', 'circle-stroke-color', ['case', fs('hover'), C.ring, ['==', ['get', 'tier'], 'A'], HEAT_DOT.strokeA, isNull, C.background, HEAT_DOT.strokeB]);
     map.setPaintProperty('resorts', 'circle-stroke-width', ['case', fs('hover'), 2.5, IS_A, 1.8, 1]);
     if (map.getLayer('resorts-facility')) map.setPaintProperty('resorts-facility', 'icon-opacity', ['case', fs('dim'), 0.3, isNull, 0.6, 1]);
+    enforceMode();
   }
   /** Snowfall isolines over the heat surface, the lower 48 and Alaska alike. */
   function addIsolines(fc) {
@@ -588,6 +599,35 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     const type = facility === 'ski_area' ? [IS_SKI_AREA] : facility === 'facility' ? [['!', IS_SKI_AREA]] : [];
     if (map.getLayer('resorts-glow')) map.setFilter('resorts-glow', ['all', ...type, ...only]);
     if (map.getLayer('resorts-hiring')) map.setFilter('resorts-hiring', ['all', ['in', ['get', 'id'], ['literal', hiringIds]], ...type, ...only]);
+    enforceMode();
+    syncPulses();
+  }
+
+  // ── EVENTS mode (ROADMAP item 22): the map shows event venues (events.js, eventsmap.js) instead of resorts. Every
+  // resort, cluster and heat layer is hidden while it lasts and comes back as it was; picking goes to the hooks.
+  let mode = 'resorts';
+  let modeHooks = null; // { pick(point, box) -> { kind: 'venue', id, name, tip } | null }
+  const modeHidden = new Set();
+  const RESORT_LAYER = (id) => id.startsWith('resorts') || id.startsWith('clusters-') || id.startsWith('heat-');
+  function enforceMode() {
+    if (mode !== 'events') return;
+    const style = map.getStyle();
+    for (const l of style ? style.layers : []) {
+      if (!RESORT_LAYER(l.id) || map.getLayoutProperty(l.id, 'visibility') === 'none') continue;
+      modeHidden.add(l.id);
+      map.setLayoutProperty(l.id, 'visibility', 'none');
+    }
+  }
+  function applyMode() {
+    if (mode === 'events') enforceMode();
+    else {
+      for (const id of modeHidden) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'visible');
+      modeHidden.clear();
+      syncLayers(); // the Type filter decides the resort layers again
+      if (map.getLayer('resorts-glow')) map.setLayoutProperty('resorts-glow', 'visibility', recolor ? 'none' : 'visible');
+    }
+    setHover(null);
+    tip.hidden = true;
     syncPulses();
   }
 
@@ -599,7 +639,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   function syncPulses() {
     if (!loaded) return;
     const want = new Set();
-    if (!prefersReducedMotion()) {
+    if (!prefersReducedMotion() && mode !== 'events') {
       const only = onlyIds ? new Set(onlyIds) : null;
       for (const id of hiringIds) {
         const r = index.resorts.get(id);
@@ -675,6 +715,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     applyFilter();
     applyRecolor();
     loaded = true;
+    if (mode === 'events') applyMode();
     // Start the compact attribution collapsed; the (i) button opens it.
     const attrib = container.querySelector('.maplibregl-ctrl-attrib');
     if (attrib) attrib.classList.remove('maplibregl-compact-show');
@@ -778,11 +819,20 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
       if (loaded) applyFilter();
     },
     resize() { map.resize(); },
+    /** 'resorts' (the default) or 'events': EVENTS mode hides the resort layers and picks through hooks.pick. */
+    setMode(next, hooks = null) {
+      const m = next === 'events' ? 'events' : 'resorts';
+      modeHooks = m === 'events' ? hooks : null;
+      if (m === mode) return;
+      mode = m;
+      if (loaded) applyMode();
+    },
+    get mode() { return mode; },
   };
 }
 
 function hoverKey(t) {
-  const source = { resort: 'resorts', cluster: 'clusters', state: 'states', housing: 'detail-housing', lift: 'detail-lifts', base: 'detail-base', stop: 'detail-transit-stops' }[t.kind];
+  const source = { resort: 'resorts', cluster: 'clusters', state: 'states', housing: 'detail-housing', lift: 'detail-lifts', base: 'detail-base', stop: 'detail-transit-stops', venue: 'event-venues' }[t.kind];
   return { source, id: t.id };
 }
 

@@ -249,7 +249,7 @@ class EventIn(StrictModel):
     name: str = Field(min_length=1)
     discipline: str = VocabId
     disciplines_also: list[str] = Field(default_factory=list)
-    levels: list[str] = Field(min_length=1)
+    levels: list[str] = Field(default_factory=list)   # [] when no source says who can enter
     venue: VenueRef
     series: Optional[Series] = None
     organizer: Optional[Named] = None      # null when no source names it

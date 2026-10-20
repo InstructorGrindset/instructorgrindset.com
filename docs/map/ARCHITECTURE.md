@@ -89,6 +89,9 @@ Resort {
                     tools: [{ name, kind, url, why, scope: resort|cluster, named_by, source_ids, as_of, confidence, note }] } | null,
                                                    // Furnished Finder link and ranked housing search tools, links only
                                                    // (see "Housing search"); null without a link and a tool
+  events: { count, items: [{ id, name, discipline, discipline_label, group, start, end, season, published,
+                             season_long, timing, source_id, as_of, confidence, note }] } | null,
+                                                   // every event the resort hosts, in date order (see "Events")
   sources: string[]                                // every source_id referenced by this resort
 }
 ```
@@ -763,6 +766,121 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
   `passChecks` in `tests/map/browser_test.mjs` (fixtures: Epic at Alpha Peak, Bravo Bowl (a 2025/26 fallback) and
   Mike Snow Dome, Ikon at Charlie Hill, Foxtrot Basin and Kilo Notch, all synthetic).
 
+## Events and competitions (ROADMAP item 22; `pipeline/events.py`, `map/js/events.js`, `map/js/eventsmap.js`)
+
+Owner request 2026-10-17: every snowsports venue, competition and event in the United States, for every discipline,
+on its own map filter, with how to sign up. Raw contract: `docs/map/EVENTS.md` (one file per research lane in
+`data/raw/events/`). Every displayed value is a cited block (`source_id`, `as_of`, `confidence`); a value no source
+gives is left out or null, never guessed.
+
+### Config (`config/definitions.yaml` `events`, `pipeline/config.py` `EventsDefs`)
+`season` (label 2026/27, 2026-07-01 to 2027-06-30; validated to run July 1 to June 30), `groups` (16 discipline groups
+in display order, each with a label, a color and its discipline ids and labels), `levels` (Open to anyone first),
+`signup_methods` and `venue_kinds` (plain word labels), `abroad_groups` (instructor), `format_max_chars` (160),
+`resort_match_km` (1.5), `month_chips` (11, 12, 1, 2, 3, 4) and `resort_panel_max` (3). Validation: ids unique, a
+discipline in one group only, every group color at 4.5:1 or more on `#1e1e1e` (the lightest panel surface, so a
+color may carry badge text) and 8 or more OKLab (x 100) from every other group color. Sixteen colors cannot all stay
+apart under color blindness, so the tooltip, the panel and the legend always name the group in text.
+
+### Validation (`pipeline/schemas/events.py`, `pipeline/events.py` `load_events`)
+Build errors: an unknown key; a bad enum, date (ISO only) or url (http or https); an end before its start; an
+undefined source (sources of every events file are registered first, so a file may cite another's); an event,
+venue or calendar id used twice across files (a venue may repeat with identical fields, as a source id may repeat
+with the same url); a venue id equal to a resort id; an event that names both or neither of `resort_id` and
+`venue_id`, a resort that is not in the build or a venue no file defines; a discipline, extra discipline or level
+that is not a config id; a US venue whose state is not a US code or whose point lies outside a box around the 50
+states (a swapped sign); a venue with neither a US state nor a non US country (state null, `country` set; an
+unquoted `NO` that YAML reads as false is read as Norway); an `edition_2026_27` that starts outside the season; a
+`last_edition` that starts inside it or outside its own `season`; `format` over 160 characters; a deadline before
+`opens`; an event with no `edition_2026_27`, no `last_edition` and neither `usual_timing` nor `season_long`; a
+calendar region that is neither `national` nor a state code. Allowed by the contract (coordinator rules 2026-10-17):
+`organizer`, `signup`, `signup.method`, `website` and every sign up field null; `levels: []` (no source says who can
+enter); an edition end null (end date not seen); a last edition known by its `season` only; a season long program
+with `usual_timing` or `season_long: {value: true}` and both editions null; a cited block whose `value` is null,
+read as left out. Warnings: a venue no event uses (left out), a venue of kind resort within 1.5 km of a build resort
+(cite it by `resort_id`), an event abroad outside `abroad_groups`.
+
+### Build output
+* `events.json` (compact; loaded only in EVENTS mode):
+  ```
+  { version, generated_at, season: { label, start, end },
+    groups: [{ id, label, color, disciplines: [{ id, label }] }], levels, signup_methods, venue_kinds: [{ id, label }],
+    month_chips: int[],
+    venues: [{ id, name, kind, state?, country?, town?, resort_id?, mapped: bool,
+               location: { lat, lon, precision: venue|town|region, source_id, as_of?, confidence?, note? } }],
+    events: [{ id, name, discipline, disciplines_also?, group, levels, venue_id, series?, organizer?, sanctioning?,
+               format?, edition_2026_27?, last_edition?, usual_timing?, season_long?, signup?, website?, results_url?,
+               calendar_url?, months: int[], program? }],
+    calendars: [{ id, name, discipline, group, region, url }],
+    counts: { events, dated, programs, venues, venues_abroad, calendars, by_group: {}, by_month: { "1".."12" } } }
+  ```
+  A resort venue takes the resort's own name, state and base area point (`location_source_id`, precision venue);
+  its id is the resort id. Only venues some event uses are written; `mapped` is false for a venue abroad (list
+  only). Events are in season order: a dated edition by its start, a last edition by its month and day placed in
+  the season, programs and events without a date last. `months` are the months the dates touch (the start month
+  alone when the end is not known), else the months `usual_timing` names ("Saturdays, January to March" gives 1, 2,
+  3; capitalized names only), else none. Null keys are left out. No source text: the sources go into `sources.json`
+  with the rest of the build, so source links resolve as they do for resort facts. About 2 KB gzipped per 20 events.
+* `events-summary.json` (a few hundred bytes): `{ version, generated_at, season, events, calendars, dated_ends }`,
+  the sorted end dates (else start dates) of the events with a 2026/27 edition, so the header pill counts the
+  events still ahead with the viewer's own date.
+* `Resort.events`: every event a resort hosts in date order (dated editions first), with its date line's cited
+  block; its sources join `resort.sources`, so route stubs embed them. `definitions.json` gains
+  `events: { season, resort_panel_max }`.
+
+### Route stub (`pipeline/routes.py`)
+`/map/events/` is generated from `map/index.html` with the title "Snowsports Events and Competitions", a
+prerendered list of every event by month (then Season long, then the events whose 2026/27 date is not published),
+each with its date line, discipline, venue and town, a deep link and its sign up link, then the calendars; JSON-LD
+is a CollectionPage with an ItemList of SportsEvent for the dated events. It is in the sitemap. Resort stubs show
+"Events here" (`render_resort_events`, the first three events). Date wording is shared with `map/js/panel.js`
+`dateSpan` and `map/js/events.js` `whenText`: "Feb 25 to 27, 2027", "Starts Apr 3, 2027", "Last held Feb 19 to 21,
+2026. 2026/27 date not yet published.", "Last held in the 2025/26 season. ...", "Runs Thursday nights, January to
+March", "Runs all season".
+
+### UI
+* Mode: `/map/events/` is EVENTS mode; `?venue=<id>` selects a venue and `?event=<id>` an event (its venue is found
+  when the link names only the event). `router.js` resolves the level `events` and checks the ids' shape;
+  `events.js` checks them against the data and falls back to every event with a note. The Layers panel opens with
+  a RESORTS / EVENTS radio pair (`#lp-mode`); RESORTS returns to the last resorts view. The header EVENTS pill
+  (`#events-pill`, `aria-pressed`) shows the events still ahead and switches the mode; HIRING NOW from EVENTS goes
+  to the resorts hiring now.
+* Loading: nothing of EVENTS mode is on the startup path. `events-summary.json` loads at idle after the first paint
+  (the pill). `events.js`, `map/css/events.css` and `events.json` (validated per item by Zod `EventsFile`) load when
+  the mode or an events link is used; `eventsmap.js` once the WebGL map runs in the mode. A resort page loads no
+  events file: "Events here" reads its record.
+* Map: `map.js` `setMode('events', { pick })` hides every resort, cluster and heat layer and restores them as they
+  were; picking goes to the venue layer. `eventsmap.js` draws one glowing dot per mapped venue that has an event the
+  filters keep, in the color of its main group, sized by the square root of the count, with a count tag (canvas
+  drawn; from zoom 5) and a white ring on the selected venue; the tooltip reads "Alpha Peak: 3 events, mostly
+  Alpine". The 2D picture before the click draws the same dots (`drawPreview` points). Camera: a venue is framed like
+  a resort (wider for a region point). No pulse exists, so reduced motion needs nothing.
+* Filters (Layers panel, `#events-filter`): Show only (Sign up open; Open to anyone, which sets the level filter to
+  open_amateur), Discipline (a checkbox per group present in the data, all on), Month (chips NOV to APR, Other
+  months, Season long; none means every month), Level (all on; an event with no published levels shows only while
+  every level is on), each with its count, then "Show every event". Sign up open: `signup.opens` is today or
+  earlier (the viewer's date) and the deadline, else the 2026/27 start, is today or later. They filter the map, the
+  2D picture, the "Coming up" list and the calendar list, and are announced ("Showing 2 events of 12.").
+* Legend strip: the groups present and "Size: number of events" replace the resort items.
+* Panel: the events view (stats, Coming up with the next eight dated events, By discipline, a button to the
+  calendar list) or a venue (crumbs, kind and place, location with its precision, the resort profile link for a
+  resort venue, "Listed only" for a venue abroad, then every event as a card in date order). A card: name, discipline
+  and level badges ("Who can enter: not published" without levels), Sign up open, series, then Dates, Usual timing,
+  Venue (with "Mapped at the town center of ..." or "Mapped to the region"), Organizer, Sanctioning and Format, the
+  SIGN UP block (the method in plain words, a Sign up button to `signup.url` in a new tab with its badge and source,
+  Platform, Opens, Deadline, Entry fee with its note, Requirements, or "Sign up details not published yet." with the
+  website), then Website, Results and Calendar; without a website or sign up page, "Where this comes from" links the
+  event's first source. Every value renders through the panel's `sourcedValue`, as resort facts do.
+* List view: in EVENTS mode the List view button shows `#events-list`: the calendar by month (by edition start),
+  Season long, then the events whose 2026/27 date is not published, every row a link into the panel; then CALENDARS
+  by discipline group, each opening in a new tab with its badge and source. The same filters apply.
+* Resort panel: "Events here" lists the next events by the viewer's date (dated editions not yet over, then the
+  others; up to `resort_panel_max`) and "See all N events at <resort> on the events map".
+* Tests: `tests/pipeline/test_events.py` (every validation rule, resort resolution, last edition fallback, month
+  counts, programs, the stub, config), `eventsChecks` in `tests/map/browser_test.mjs` (fixtures from
+  `tests/map/events_fixture.yaml`, synthetic, compiled by `make_fixtures.py` with the real pipeline) and the EVENTS
+  axe cases and lazy loading checks in `tests/map/audit.mjs`.
+
 ## Housing search (links only; ROADMAP item 8c; `pipeline/housing_search.py`, `map/js/housinglinks.js`)
 
 Owner request 2026-10-14: a resort shows its Furnished Finder listings, the employee housing that is publicly listed,
@@ -1426,6 +1544,8 @@ checks the credits against `map/vendor/VERSIONS.json` and the report payload in 
 * `data/raw/facts/*.yaml`: season, snowfall and size facts for every resort (Resort facts overlay above).
 * `data/raw/webcams/*.yaml`, `data/raw/jobs/*.yaml`: live cams and jobs links (Webcams and jobs above).
 * `data/raw/passes/*.yaml`: Epic, Ikon, Mountain Collective and Indy pass membership per season (Pass membership above).
+* `data/raw/events/*.yaml`: events, venues and calendars, one file per research lane (Events and competitions above;
+  contract in `docs/map/EVENTS.md`).
 * `data/raw/housing_search/*.yaml`: Furnished Finder links and housing search tools (Housing search above).
 * `data/raw/editorial/*.yaml`: Phase 6 drafts and reviewed entries (format above).
 * `data/raw/reports/`: Phase 7 queue and moderated reports (gitignored) and `aggregates.json` (committed).
@@ -1533,6 +1653,7 @@ pipeline/
   jobs.py             # jobs links and employers -> Resort.jobs, jobs/employers.json, empty jobs/postings.json
   hiring.py           # hiring window text -> start and end month (the Hiring now filter)
   passes.py           # pass membership (data/raw/passes) -> Resort.passes (the Epic and Ikon chips)
+  events.py           # events and competitions (data/raw/events) -> events.json, events-summary.json, Resort.events
   jobs_feed.py        # daily open postings from public job board APIs -> jobs/postings.json (GitHub Actions)
   link_check.py       # monthly check of trail map, webcam and jobs links (GitHub Actions issue)
   heat.py             # Heat maps: snowfall rasters and isolines (NOAA and SNOTEL stations shaped by the terrain,

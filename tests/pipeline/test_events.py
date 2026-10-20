@@ -235,6 +235,11 @@ def test_null_values_read_as_left_out(tmp_path, defs):
     assert fun.signup.url is None and fun.signup.method == "at_venue"
     week = next(e for e in data.events if e.id == "fixture-peak-week-race")
     assert week.signup is None and week.organizer is None
+    # no source says who can enter: levels [] (coordinator rule 2026-10-17)
+    d = raw()
+    event(d, "fixture-peak-week-race")["levels"] = []
+    data, errors, _ = load(tmp_path, defs, d)
+    assert errors == [] and event(ev.compile_events(data, PLACES, defs, HEADER), "fixture-peak-week-race")["levels"] == []
     # no website any source gives: left out, never guessed (coordinator rule 2026-10-17)
     d = raw()
     event(d, "fixture-marathon").pop("website")
@@ -255,7 +260,6 @@ def test_unknown_discipline(tmp_path, defs):
 @pytest.mark.parametrize("mutate, expect", [
     (lambda d: event(d, "fixture-marathon").update(disciplines_also=["nordic"]), "disciplines_also 'nordic' is not a discipline id"),
     (lambda d: event(d, "fixture-marathon").update(levels=["pro"]), "level 'pro' is not a level id"),
-    (lambda d: event(d, "fixture-marathon").update(levels=[]), "levels: List should have at least 1 item"),
     (lambda d: event(d, "fixture-peak-week-race").update(venue={"resort_id": "nowhere-peak", "venue_id": None}),
      "venue resort_id 'nowhere-peak' matches no resort in this build"),
     (lambda d: event(d, "fixture-marathon").update(venue={"resort_id": None, "venue_id": "lost-trail"}),

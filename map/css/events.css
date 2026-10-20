@@ -1,0 +1,105 @@
+/* EVENTS mode (ROADMAP item 22; map/js/events.js): the event filters, legend items, venue panel, event cards with
+   their SIGN UP block, and the calendar list. Loaded with events.js only. Each group's color comes from config
+   (events.json groups) through --g; config validation keeps it at 4.5:1 or more on #1e1e1e, so it may carry text. */
+
+/* ── Filters in the Layers panel ── */
+.events-filter { padding: .35rem .7rem .6rem; }
+.events-filter[hidden] { display: none; }
+.events-filter .lp-opt { gap: .45rem; }
+.ev-opt-count { margin-left: auto; padding-left: .35rem; font-size: .66rem; font-weight: 600; color: var(--wm-dim); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.ev-grid { display: grid; grid-template-columns: 1fr; }
+.ev-swatch {
+  display: inline-block; flex-shrink: 0; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--g, #cccccc); box-shadow: 0 0 6px var(--g, #cccccc);
+}
+.ev-chips { display: flex; flex-wrap: wrap; gap: .3rem; padding: .1rem 0 .2rem; }
+.ev-chip {
+  position: relative; display: inline-flex; align-items: center; gap: .3rem; min-height: 28px; padding: 0 .5rem; cursor: pointer;
+  font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--wm-text-2);
+  background: var(--wm-bg); border: 1px solid var(--wm-border); border-radius: 2px;
+}
+.ev-chip:hover { border-color: var(--wm-border-strong); color: #ffffff; }
+.ev-chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.ev-chip:has(input:checked) { border-color: var(--wm-green); color: var(--wm-green); background: rgba(68,255,136,.08); }
+.ev-chip:has(input:focus-visible) { outline: 2px solid var(--wm-green); outline-offset: 2px; }
+.ev-chip .ev-opt-count { margin-left: 0; padding-left: 0; }
+.ev-chip:has(input:checked) .ev-opt-count { color: var(--wm-green); }
+
+/* ── Legend strip ── */
+.ml-items.ml-events[hidden] { display: none; }
+.ml-ev { background: var(--g); box-shadow: 0 0 7px var(--g); }
+.ml-ev-sizes { display: inline-flex; align-items: center; gap: 3px; }
+.ml-ev-sizes span { display: inline-block; border-radius: 50%; border: 1px solid var(--wm-text-2); }
+.ml-ev-sizes span:first-child { width: 5px; height: 5px; }
+.ml-ev-sizes span:last-child { width: 10px; height: 10px; }
+
+/* ── Panel: events view and venue ── */
+.ev-group-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; }
+.ev-group-list li { display: flex; align-items: center; gap: .5rem; }
+.ev-group-name { font-weight: 700; color: var(--ink); }
+.ev-next-list .nav-name { gap: .45rem; }
+.ev-resort-link { margin: .5rem 0 0; }
+.ev-abroad { color: var(--wm-text); border: 1px dashed var(--wm-border-strong); }
+.ev-abroad-note { margin: 0 0 .6rem; font-size: .75rem; }
+
+.ev-card {
+  margin: .8rem 0 0; padding: .75rem .8rem .8rem; background: var(--wm-bg-2);
+  border: 1px solid var(--wm-border); border-left: 3px solid var(--g, var(--wm-border-strong)); border-radius: 2px;
+}
+.ev-card.is-selected { border-color: var(--wm-green); border-left-color: var(--g, var(--wm-green)); box-shadow: 0 0 0 1px rgba(68,255,136,.35); }
+.panel .ev-title { font-size: .9rem; letter-spacing: .04em; text-transform: none; margin: 0 0 .45rem; line-height: 1.3; }
+.panel .ev-title::before { display: none; }
+.ev-title:focus { outline: none; }
+.ev-title:focus-visible { outline: 2px solid var(--wm-green); outline-offset: 3px; }
+.ev-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin: 0 0 .5rem; }
+.ev-disc { color: var(--g); border-color: var(--g); background: rgba(255,255,255,.03); }
+.ev-also { color: var(--wm-text-2); border-color: var(--wm-border-strong); }
+.ev-level { color: var(--wm-text); background: rgba(204,204,204,.06); border-color: rgba(204,204,204,.35); }
+.ev-level-none { text-transform: none; letter-spacing: 0; color: var(--wm-dim); border-style: dashed; }
+.ev-open { color: var(--wm-green); background: rgba(68,255,136,.08); border-color: rgba(68,255,136,.6); }
+.ev-series { margin: -.2rem 0 .45rem; }
+.ev-card .facts { gap: .45rem; }
+.ev-card .fact { grid-template-columns: 6.5rem 1fr; }
+.ev-card .fact-meta, .ev-card .fact-note, .ev-card .src-note { font-size: .75rem; }
+.ev-web-link { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+.ev-links { margin-top: .6rem; }
+.ev-origin { margin: .5rem 0 0; }
+
+/* SIGN UP: method in words, the button to the organizer's page, then platform, dates, fee and requirements. */
+.ev-signup { margin: .7rem 0 0; padding: .6rem .65rem .65rem; border: 1px solid rgba(68,255,136,.35); border-radius: 2px; background: rgba(68,255,136,.03); }
+.ev-signup-head { margin: 0 0 .4rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .6rem; }
+.ev-signup-label { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--wm-green); }
+.ev-method { font-weight: 700; color: var(--ink); }
+.ev-signup-cta { margin: 0 0 .5rem; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; }
+:is(.map-page) .ev-signup-btn { min-height: 40px; padding: .4rem 1.1rem; font-size: .8rem; text-decoration: none; display: inline-flex; align-items: center; }
+.ev-signup-cta .fact-meta { flex-basis: 100%; }
+.ev-signup-none { margin: 0; color: var(--wm-text-2); }
+
+/* ── Calendar list view ── */
+.events-list[hidden] { display: none; }
+.ev-list-count { margin: -.5rem 0 1rem; color: var(--wm-text-2); font-size: .8rem; }
+.ev-month { margin: 0 0 1.1rem; }
+.ev-month-title {
+  display: flex; align-items: center; gap: .5rem; margin: 0 0 .4rem; padding-bottom: .3rem; border-bottom: 1px solid var(--wm-border);
+  font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--wm-text);
+}
+.ev-month-title .tree-meta { letter-spacing: 0; text-transform: none; font-weight: 400; }
+.ev-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: .15rem; }
+.ev-row {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: .55rem; row-gap: .05rem;
+  min-height: 44px; padding: .3rem .5rem; border: 1px solid transparent; border-radius: 2px; color: var(--ink); text-decoration: none;
+}
+.ev-row:hover { background: var(--wm-surface); border-color: var(--wm-border); text-decoration: none; }
+.ev-row[aria-current] { border-color: var(--wm-green); background: rgba(68,255,136,.06); }
+.ev-row-name { font-weight: 700; }
+.ev-row .ev-open { grid-column: 3; }
+.ev-row-meta { grid-column: 2 / 4; }
+.ev-cals { margin-top: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--wm-border-strong); }
+.ev-cal { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .4rem; padding: .3rem .5rem; }
+.ev-cal .fact-meta { flex-basis: 100%; font-size: .75rem; }
+.ev-cal-link { font-weight: 700; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 759.98px) {
+  .ev-chip { min-height: 34px; font-size: .72rem; }
+  .ev-card .fact { grid-template-columns: 6rem 1fr; }
+}

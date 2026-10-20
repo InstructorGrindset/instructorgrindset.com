@@ -38,6 +38,11 @@ async function fetchJson(name, { optional = false } = {}) {
   }
 }
 
+/** A build file by name, or null when it is absent or unreadable (events.js, the EVENTS pill). */
+export function loadOptional(name) {
+  return fetchJson(name, { optional: true }).catch(() => null);
+}
+
 function parseOrThrow(schema, data, name) {
   const r = schema.safeParse(data);
   if (!r.success) {
