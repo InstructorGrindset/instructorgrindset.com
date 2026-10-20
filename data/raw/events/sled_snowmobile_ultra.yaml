@@ -1,0 +1,2418 @@
+# Sled dog, snowmobile and winter ultra events (United States).
+# Research lane: sled_snowmobile_ultra. Contract: docs/map/EVENTS.md.
+# Only en.wikipedia.org could be opened; every other fact comes from a web search result and
+# is marked confidence: estimated. Nothing here was invented; unknown values are left out or null.
+batch: events-sled_snowmobile_ultra
+researched_date: 2026-10-17
+sources:
+- id: events-sled-iditarod-info-mushers
+  url: https://iditarod.com/information-for-mushers/
+  title: information for mushers
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-iditarod-2027-opening-day
+  url: https://cloud.iditarod.com/wp-content/uploads/2026/06/6.27.26-Opening-Day-for-the-2027-Iditarod-Musher-Sign-Up-1.pdf
+  title: 6.27.26 Opening Day for the 2027 Iditarod Musher Sign Up 1
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-iditarod-race
+  url: https://en.wikipedia.org/wiki/Iditarod_Trail_Sled_Dog_Race
+  title: Iditarod Trail Sled Dog Race
+  accessed_date: 2026-10-17
+  note: Intro section opened through the Wikipedia API on October 17, 2026.
+- id: events-sled-wikipedia-anchorage-alaska
+  url: https://en.wikipedia.org/wiki/Anchorage,_Alaska
+  title: Anchorage, Alaska
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-furrondy-owc
+  url: https://furrondy.net/events/open-world-championship-sled-dog-races
+  title: “Open” World Championship Sled Dog Races
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-furrondy-planning
+  url: https://furrondy.net/?p=5456
+  title: Planning a visit to Fur Rendezvous
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-cb300-route
+  url: https://www.cb300.com/race-route-description
+  title: Copper Basin 300 Race Map
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-cb300-rules
+  url: https://cb300.com/race-rules
+  title: Race Rules
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-iditarod-cb300-qualifier
+  url: https://iditarod.com/musher/second-iditarod-qualifier-in-alaska-copper-basin-300/
+  title: Second Iditarod Qualifier in Alaska – Copper Basin 300
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-glennallen-alaska
+  url: https://en.wikipedia.org/wiki/Glennallen,_Alaska
+  title: Glennallen, Alaska
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-k300-home
+  url: https://www.k300.org/
+  title: 'Kuskokwim 300 home page (search title: top of page)'
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-kuskokwim-300
+  url: https://en.wikipedia.org/wiki/Kuskokwim_300
+  title: Kuskokwim 300
+  accessed_date: 2026-10-17
+  note: Intro section opened through the Wikipedia API on October 17, 2026.
+- id: events-sled-wikipedia-bethel-alaska
+  url: https://en.wikipedia.org/wiki/Bethel,_Alaska
+  title: Bethel, Alaska
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-lnac-adma
+  url: https://alaskadogmushers.com/annamaet-limited-north-american-championships/
+  title: 'Annamaet Limited North American Championships (search title: All dogs entered in Championship races must be microchipped)'
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-fairbanks-alaska
+  url: https://en.wikipedia.org/wiki/Fairbanks,_Alaska
+  title: Fairbanks, Alaska
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-beargrease-kaxe-2027
+  url: https://www.kaxe.org/local-news/2026-08-31/beargrease-sled-dog-race-returns-to-out-and-back-format-for-2027
+  title: beargrease sled dog race returns to out and back format for 2027
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-beargrease-nsj-kickoff
+  url: https://northshorejournal.co/?p=26148
+  title: Saturday, September 5, 2026 (North Shore Journal)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The search summary did not say which of the Beargrease pages
+    gave the kickoff details; this page and the KAXE article were the 2026 results.
+- id: events-sled-beargrease-dglobe
+  url: https://www.dglobe.com/events-attractions/john-beargrease-sled-dog-marathon
+  title: john beargrease sled dog marathon
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-beargrease
+  url: https://en.wikipedia.org/wiki/John_Beargrease_Dog_Sled_Race
+  title: John Beargrease Dog Sled Race
+  accessed_date: 2026-10-17
+  note: Intro section opened through the Wikipedia API on October 17, 2026.
+- id: events-sled-wikipedia-duluth-minnesota
+  url: https://en.wikipedia.org/wiki/Duluth,_Minnesota
+  title: Duluth, Minnesota
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-gunflint-wtip-february
+  url: https://wtip.org/?p=45037
+  title: Gunflint Mail Run moves to February after years of weather-related rescheduling
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-grand-marais-minnesota
+  url: https://en.wikipedia.org/wiki/Grand_Marais,_Minnesota
+  title: Grand Marais, Minnesota
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-canam-umfk-2026
+  url: https://www.umfk.edu/events/2026-02-28/?ical=1
+  title: University of Maine at Fort Kent event listing, February 28, 2026
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-canam-visitmaine
+  url: https://visitmaine.com/events/can-am-crown-international-sled-dog-races/3172/
+  title: Can-Am Crown International Sled Dog Races (visitmaine.com)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-canam
+  url: https://en.wikipedia.org/wiki/Can-Am_Crown_International_Sled_Dog_Race
+  title: Can-Am Crown International Sled Dog Race
+  accessed_date: 2026-10-17
+  note: Intro section opened through the Wikipedia API on October 17, 2026.
+- id: events-sled-wikipedia-fort-kent-maine
+  url: https://en.wikipedia.org/wiki/Fort_Kent,_Maine
+  title: Fort Kent, Maine
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-up200-home
+  url: https://up200.org/home
+  title: 'UP200 home (search title: Wildcat Willy Riding in Sled at UP200)'
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-up200-races
+  url: https://up200.org/races
+  title: The UP200 Powered by NMU
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-up200-registration
+  url: https://up200.org/up200-info-registration
+  title: UP200 info and registration
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The URL was given in the search summary.
+- id: events-sled-wikipedia-marquette-michigan
+  url: https://en.wikipedia.org/wiki/Marquette,_Michigan
+  title: Marquette, Michigan
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-tcsdr-2026-kickoff
+  url: https://uppermichiganssource.com/2026/01/09/tahquamenon-country-sled-dog-race-kicks-off-racing-season-up/
+  title: Tahquamenon Country Sled Dog Race kicks off racing season in the UP
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-newberry-michigan
+  url: https://en.wikipedia.org/wiki/Newberry,_Michigan
+  title: Newberry, Michigan
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-copperdog-michigan-org
+  url: https://www.michigan.org/event/copperdog-150
+  title: copperdog 150 (michigan.org)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-copperdog-home
+  url: https://copperdog.org
+  title: copperdog.org
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-calumet-michigan
+  url: https://en.wikipedia.org/wiki/Calumet,_Michigan
+  title: Calumet, Michigan
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-rtts-home
+  url: https://racetothesky.org
+  title: Cancellation Notice (racetothesky.org)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-rtts-sleddogtalk
+  url: https://sleddogtalk.com/event/race-to-the-sky-montana/
+  title: Race to the Sky Montana (Sled Dog Talk event listing)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-rtts-southwestmt
+  url: https://southwestmt.com/events/race-to-the-sky/
+  title: Race to the Sky (Southwest Montana)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-lincoln-montana
+  url: https://en.wikipedia.org/wiki/Lincoln,_Montana
+  title: Lincoln, Montana
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-wss-schedule
+  url: https://wyomingstagestop.org/race-schedule-purse/
+  title: '2026 Race Dates and Schedule: (All stages are 30 to 35 miles)'
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wss-stage-stop-8
+  url: https://wyomingstagestop.org/stage-stop-8/
+  title: stage stop 8
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wss-county10-2026
+  url: https://county10.com/pedigree-stage-stop-sled-dog-race-announces-2026-schedule-200k-purse/
+  title: Pedigree Stage Stop Sled Dog Race announces 2026 schedule, $200K purse
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-pinedale-wyoming
+  url: https://en.wikipedia.org/wiki/Pinedale,_Wyoming
+  title: Pinedale, Wyoming
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-eagle-cap-obbg
+  url: https://www.obbg.org/?p=500395
+  title: Oregon Association of Independent Inns (Eagle Cap Extreme post)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The search summary drew the 2026 schedule from the Bronze Antler
+    Bed and Breakfast post on this site.
+- id: events-sled-eagle-cap-sleddogtalk
+  url: https://sleddogtalk.com/event/eagle-cap-extreme-sled-dog-race/
+  title: Eagle Cap Extreme Sled Dog Race (Sled Dog Talk event listing)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-snocross-2025-26-release
+  url: https://snocross.com/?p=44189
+  title: AMSOIL Championship Snocross 2025/26 schedule release (snocross.com)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-snocross-schedule-tag
+  url: https://snocross.com/tag/snocross-schedule/
+  title: snocross schedule
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-isoc-ironwood-osmmag
+  url: https://osmmag.com/12071-2/
+  title: Ski-Doo Racers Set to Light the Wick at the ISOC Snocross Season Opener in Ironwood, MI
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-canterbury-park
+  url: https://en.wikipedia.org/wiki/Canterbury_Park
+  title: Canterbury Park
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-wikipedia-deadwood-south-dakota
+  url: https://en.wikipedia.org/wiki/Deadwood,_South_Dakota
+  title: Deadwood, South Dakota
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-wikipedia-salamanca-new-york
+  url: https://en.wikipedia.org/wiki/Salamanca,_New_York
+  title: Salamanca, New York
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-wikipedia-elk-river-minnesota
+  url: https://en.wikipedia.org/wiki/Elk_River,_Minnesota
+  title: Elk River, Minnesota
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-wikipedia-eagle-river-wisconsin
+  url: https://en.wikipedia.org/wiki/Eagle_River,_Wisconsin
+  title: Eagle River, Wisconsin
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-hillclimb-snowdevils
+  url: https://www.snowdevils.org/hillclimb/
+  title: Jackson Hole Snow Devils hill climb page
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-rmsha-2025-osmmag
+  url: https://osmmag.com/rmsha-releases-2025-race-schedule-and-onx-offroad-returns-as-official-navigation-sponsor/
+  title: rmsha releases 2025 race schedule and onx offroad returns as official navigation sponsor
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-rmsha-soldier
+  url: https://soldiermountain.com/RMSHA/
+  title: THE CHARMAC UPHILL BATTLE at Soldier Mountain
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-derby-regfox-2027
+  url: https://wcdc.regfox.com/64th-world-championship-derby-complex-landing-page
+  title: Choose Your Tickets (World Championship Derby Complex)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-derby
+  url: https://en.wikipedia.org/wiki/World_Championship_Snowmobile_Derby
+  title: World Championship Snowmobile Derby
+  accessed_date: 2026-10-17
+  note: Intro section opened through the Wikipedia API on October 17, 2026.
+- id: events-sled-vintage-derby-eagleriver
+  url: https://eagleriver.org/?p=16471
+  title: Vintage World Championship Snowmobile Derby (eagleriver.org event listing)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The search summary did not say which listed page gave the 2026
+    date; this was the matching Eagle River event listing.
+- id: events-sled-i500-schedule
+  url: https://i-500.com/schedule/
+  title: 58th Running of the GFL I-500 Snowmobile Race (Tenantive) Sault Ste. Marie, Michigan – January 31st - February 6th,
+    2027
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-i500
+  url: https://en.wikipedia.org/wiki/International_500
+  title: International 500
+  accessed_date: 2026-10-17
+  note: Intro section opened through the Wikipedia API on October 17, 2026.
+- id: events-sled-wikipedia-sault-ste-marie-michigan
+  url: https://en.wikipedia.org/wiki/Sault_Ste._Marie,_Michigan
+  title: Sault Ste. Marie, Michigan
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-irondog-2027-route
+  url: https://www.irondog.org/news/iron-dog-announces-2027-route-update
+  title: Iron Dog Announces 2027 Route Update
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-irondog-schedule
+  url: https://next.irondog.org/schedule-of-events
+  title: Iron Dog schedule of events
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-irondog-race-info
+  url: https://next.irondog.org/race/info
+  title: Iron Dog race info
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-irondog
+  url: https://en.wikipedia.org/wiki/Iron_Dog
+  title: Iron Dog
+  accessed_date: 2026-10-17
+  note: Intro section opened through the Wikipedia API on October 17, 2026.
+- id: events-sled-wikipedia-big-lake-alaska
+  url: https://en.wikipedia.org/wiki/Big_Lake,_Alaska
+  title: Big Lake, Alaska
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-cor-xc-2026-snowgoer
+  url: https://snowgoer.com/news-info/news/cor-powersports-announces-interesting-2026-xc-schedule/33656/
+  title: Cor Powersports Announces Interesting 2026 XC Schedule
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-walker-minnesota
+  url: https://en.wikipedia.org/wiki/Walker,_Minnesota
+  title: Walker, Minnesota
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-wikipedia-ontonagon-michigan
+  url: https://en.wikipedia.org/wiki/Ontonagon,_Michigan
+  title: Ontonagon, Michigan
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-arrowhead-ultrasignup
+  url: https://ultrasignup.com/register.aspx?eid=110
+  title: 'Arrowhead 135 on UltraSignup (search title: Monday, Jan 26, 2026)'
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-arrowhead-gotrail
+  url: https://gotrail.run/en/event/arrowhead-135
+  title: Arrowhead 135 (gotrail.run)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-international-falls-minnesota
+  url: https://en.wikipedia.org/wiki/International_Falls,_Minnesota
+  title: International Falls, Minnesota
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-iti-bikepacking
+  url: https://bikepacking.com/event/2027-iditarod-trail-invitational-iti/
+  title: 2027 Iditarod Trail Invitational (ITI) on bikepacking.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-knik-fairview-alaska
+  url: https://en.wikipedia.org/wiki/Knik-Fairview,_Alaska
+  title: Knik-Fairview, Alaska
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-tuscobia-ultrasignup-2027
+  url: https://ultrasignup.com/register.aspx?did=142444
+  title: 'Tuscobia Winter Ultra on UltraSignup (search title: Friday, Jan 1, 2027)'
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-couderay-wisconsin
+  url: https://en.wikipedia.org/wiki/Couderay,_Wisconsin
+  title: Couderay, Wisconsin
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-arktos-findtherun
+  url: https://www.findtherun.com/race/116623/arktos
+  title: ARKTOS (findtherun.com)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-dousman-wisconsin
+  url: https://en.wikipedia.org/wiki/Dousman,_Wisconsin
+  title: Dousman, Wisconsin
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-fatbike-birkie-page
+  url: https://www.birkie.com/bike/events/fat-bike-birkie/
+  title: Fat Bike Birkie
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-fatbike-birkie-bikesignup
+  url: https://bikesignup.com/Race/WI/Cable/FatBikeBirkie
+  title: Fat Bike Birkie on BikeSignup
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-fatbike-birkie-travelwi
+  url: https://www.travelwisconsin.com/events/absf-fat-bike-birkie
+  title: ABSF Fat Bike Birkie (Travel Wisconsin)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-cable-wisconsin
+  url: https://en.wikipedia.org/wiki/Cable,_Wisconsin
+  title: Cable, Wisconsin
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-polar-roll-travelmarquette
+  url: https://www.travelmarquette.com/blog/post/racing-the-906-polar-roll/
+  title: racing the 906 polar roll
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-polar-roll-wzmq-2025
+  url: https://wzmq19.com/news/344595/906-adventure-team-prepares-for-11th-annual-polar-roll/
+  title: 906 adventure team prepares for 11th annual polar roll
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-ishpeming-michigan
+  url: https://en.wikipedia.org/wiki/Ishpeming,_Michigan
+  title: Ishpeming, Michigan
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-usat-winter-2027-findarace
+  url: https://findarace.com/us/events/2027-usa-triathlon-winter-nationals-gaylord-all-outdoors-tri-45-winter-triathlon
+  title: '2027 USA Triathlon Winter Nationals: Gaylord All Outdoors Tri 45 Winter Triathlon'
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-usat-runsignup
+  url: https://runsignup.com/Race/MI/frederic/2024GaylordAllOutdoorsTri45WinterTriathlon
+  title: Gaylord All Outdoors Tri 45 Winter Triathlon on RunSignup
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-sled-wikipedia-frederic-township-michigan
+  url: https://en.wikipedia.org/wiki/Frederic_Township,_Michigan
+  title: Frederic Township, Michigan
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-sled-isdra-events
+  url: https://isdra.org/events
+  title: ISDRA events
+  accessed_date: 2026-10-17
+  note: Named in a web search summary as the ISDRA events page; page not opened.
+venues:
+- id: anchorage-ak-town
+  name: Anchorage
+  kind: town
+  state: AK
+  town: Anchorage
+  location:
+    lat: 61.2167
+    lon: -149.8936
+    precision: town
+    source_id: events-sled-wikipedia-anchorage-alaska
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Anchorage, Alaska from Wikipedia.
+- id: glennallen-ak-town
+  name: Downtown Glennallen
+  kind: town
+  state: AK
+  town: Glennallen
+  location:
+    lat: 62.1097
+    lon: -145.5572
+    precision: town
+    source_id: events-sled-wikipedia-glennallen-alaska
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Glennallen, Alaska from Wikipedia. The race starts at mile 188 of the Glenn Highway.
+- id: bethel-ak-town
+  name: Kuskokwim River at Bethel
+  kind: town
+  state: AK
+  town: Bethel
+  location:
+    lat: 60.7922
+    lon: -161.7558
+    precision: town
+    source_id: events-sled-wikipedia-bethel-alaska
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Bethel, Alaska from Wikipedia.
+- id: fairbanks-ak-jeff-studert-racegrounds
+  name: Jeff Studert Racegrounds
+  kind: other
+  state: AK
+  town: Fairbanks
+  location:
+    lat: 64.8436
+    lon: -147.7231
+    precision: town
+    source_id: events-sled-wikipedia-fairbanks-alaska
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Fairbanks, Alaska from Wikipedia. The racegrounds themselves have no Wikipedia coordinates.
+- id: duluth-mn-town
+  name: Duluth
+  kind: town
+  state: MN
+  town: Duluth
+  location:
+    lat: 46.7844
+    lon: -92.1053
+    precision: town
+    source_id: events-sled-wikipedia-duluth-minnesota
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Duluth, Minnesota from Wikipedia.
+- id: gunflint-trail-trail-center-mn
+  name: Trail Center on the Gunflint Trail
+  kind: other
+  state: MN
+  town: null
+  location:
+    lat: 47.7503
+    lon: -90.3344
+    precision: region
+    source_id: events-sled-wikipedia-grand-marais-minnesota
+    as_of: 2026-10-17
+    confidence: reported
+    note: Coordinates of Grand Marais, Minnesota from Wikipedia. Wikipedia's Gunflint Trail article (County State-Aid Highway
+      12) says the trail begins in Grand Marais and runs 57 miles to Saganaga Lake; Trail Center is on the trail.
+- id: fort-kent-me-town
+  name: Fort Kent
+  kind: town
+  state: ME
+  town: Fort Kent
+  location:
+    lat: 47.2419
+    lon: -68.5722
+    precision: town
+    source_id: events-sled-wikipedia-fort-kent-maine
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Fort Kent, Maine from Wikipedia.
+- id: marquette-mi-town
+  name: Marquette
+  kind: town
+  state: MI
+  town: Marquette
+  location:
+    lat: 46.5464
+    lon: -87.4067
+    precision: town
+    source_id: events-sled-wikipedia-marquette-michigan
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Marquette, Michigan from Wikipedia.
+- id: newberry-mi-headquarters-lake
+  name: Headquarters Lake State Forest Campground
+  kind: other
+  state: MI
+  town: Newberry
+  location:
+    lat: 46.3522
+    lon: -85.5106
+    precision: town
+    source_id: events-sled-wikipedia-newberry-michigan
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Newberry, Michigan from Wikipedia. The race runs from the campground in Luce County.
+- id: calumet-mi-town
+  name: Fifth Street, downtown Calumet
+  kind: town
+  state: MI
+  town: Calumet
+  location:
+    lat: 47.2472
+    lon: -88.4544
+    precision: town
+    source_id: events-sled-wikipedia-calumet-michigan
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Calumet, Michigan from Wikipedia.
+- id: lincoln-mt-town
+  name: Lincoln
+  kind: town
+  state: MT
+  town: Lincoln
+  location:
+    lat: 46.9556
+    lon: -112.6728
+    precision: town
+    source_id: events-sled-wikipedia-lincoln-montana
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Lincoln, Montana from Wikipedia. The 2026 start was listed at Hi-Country Trading Post.
+- id: pinedale-wy-town
+  name: Pinedale and Cora area
+  kind: town
+  state: WY
+  town: Pinedale
+  location:
+    lat: 42.8661
+    lon: -109.8647
+    precision: town
+    source_id: events-sled-wikipedia-pinedale-wyoming
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Pinedale, Wyoming from Wikipedia. Stage Stop 8 runs near Cora and Pinedale.
+- id: shakopee-mn-canterbury-park
+  name: Canterbury Park
+  kind: fairground
+  state: MN
+  town: Shakopee
+  location:
+    lat: 44.7896
+    lon: -93.4801
+    precision: venue
+    source_id: events-sled-wikipedia-canterbury-park
+    as_of: 2026-10-17
+    confidence: reported
+    note: Coordinates of the Canterbury Park article on Wikipedia.
+- id: deadwood-sd-days-of-76
+  name: Days of '76 complex
+  kind: fairground
+  state: SD
+  town: Deadwood
+  location:
+    lat: 44.3869
+    lon: -103.7208
+    precision: town
+    source_id: events-sled-wikipedia-deadwood-south-dakota
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Deadwood, South Dakota from Wikipedia.
+- id: salamanca-ny-town
+  name: Salamanca
+  kind: town
+  state: NY
+  town: Salamanca
+  location:
+    lat: 42.1586
+    lon: -78.7158
+    precision: town
+    source_id: events-sled-wikipedia-salamanca-new-york
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Salamanca, New York from Wikipedia.
+- id: elk-river-mn-erx-motor-park
+  name: ERX Motor Park
+  kind: other
+  state: MN
+  town: Elk River
+  location:
+    lat: 45.3322
+    lon: -93.5665
+    precision: town
+    source_id: events-sled-wikipedia-elk-river-minnesota
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Elk River, Minnesota from Wikipedia.
+- id: eagle-river-wi-town
+  name: Eagle River
+  kind: town
+  state: WI
+  town: Eagle River
+  location:
+    lat: 45.92
+    lon: -89.2503
+    precision: town
+    source_id: events-sled-wikipedia-eagle-river-wisconsin
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Eagle River, Wisconsin from Wikipedia.
+- id: eagle-river-wi-derby-complex
+  name: World Championship Derby Complex
+  kind: arena
+  state: WI
+  town: Eagle River
+  location:
+    lat: 45.92
+    lon: -89.2503
+    precision: town
+    source_id: events-sled-wikipedia-eagle-river-wisconsin
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Eagle River, Wisconsin from Wikipedia. World Championship Derby Complex has no Wikipedia coordinates.
+- id: sault-ste-marie-mi-town
+  name: Sault Ste. Marie
+  kind: town
+  state: MI
+  town: Sault Ste. Marie
+  location:
+    lat: 46.4969
+    lon: -84.3456
+    precision: town
+    source_id: events-sled-wikipedia-sault-ste-marie-michigan
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Sault Ste. Marie, Michigan from Wikipedia.
+- id: big-lake-ak-town
+  name: Big Lake
+  kind: town
+  state: AK
+  town: Big Lake
+  location:
+    lat: 61.5375
+    lon: -149.8911
+    precision: town
+    source_id: events-sled-wikipedia-big-lake-alaska
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Big Lake, Alaska from Wikipedia.
+- id: walker-mn-town
+  name: Walker
+  kind: town
+  state: MN
+  town: Walker
+  location:
+    lat: 47.0997
+    lon: -94.5978
+    precision: town
+    source_id: events-sled-wikipedia-walker-minnesota
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Walker, Minnesota from Wikipedia.
+- id: ontonagon-mi-town
+  name: Ontonagon
+  kind: town
+  state: MI
+  town: Ontonagon
+  location:
+    lat: 46.8708
+    lon: -89.3128
+    precision: town
+    source_id: events-sled-wikipedia-ontonagon-michigan
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Ontonagon, Michigan from Wikipedia.
+- id: international-falls-mn-town
+  name: International Falls
+  kind: town
+  state: MN
+  town: International Falls
+  location:
+    lat: 48.5917
+    lon: -93.4053
+    precision: town
+    source_id: events-sled-wikipedia-international-falls-minnesota
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of International Falls, Minnesota from Wikipedia.
+- id: knik-ak-town
+  name: Knik
+  kind: town
+  state: AK
+  town: Knik
+  location:
+    lat: 61.5275
+    lon: -149.5981
+    precision: region
+    source_id: events-sled-wikipedia-knik-fairview-alaska
+    as_of: 2026-10-17
+    confidence: reported
+    note: The Knik article on Wikipedia is a disambiguation page with no coordinates; these are the coordinates of the Knik-Fairview,
+      Alaska census designated place article.
+- id: tuscobia-state-trail-wi
+  name: Tuscobia State Trail
+  kind: trail
+  state: WI
+  town: null
+  location:
+    lat: 45.8228
+    lon: -91.3472
+    precision: region
+    source_id: events-sled-wikipedia-couderay-wisconsin
+    as_of: 2026-10-20
+    confidence: reported
+    note: The Tuscobia State Trail has no Wikipedia coordinates. Wikipedia's Couderay, Wisconsin article says the trail runs
+      through the town; these are its coordinates. The race start was not in the sources.
+- id: dousman-wi-town
+  name: Dousman
+  kind: town
+  state: WI
+  town: Dousman
+  location:
+    lat: 43.0147
+    lon: -88.4725
+    precision: town
+    source_id: events-sled-wikipedia-dousman-wisconsin
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Dousman, Wisconsin from Wikipedia.
+- id: cable-wi-birkie-trailhead
+  name: American Birkebeiner Trailhead
+  kind: trail
+  state: WI
+  town: Cable
+  location:
+    lat: 46.2081
+    lon: -91.2922
+    precision: town
+    source_id: events-sled-wikipedia-cable-wisconsin
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Cable, Wisconsin from Wikipedia.
+- id: ishpeming-mi-town
+  name: Ishpeming
+  kind: town
+  state: MI
+  town: Ishpeming
+  location:
+    lat: 46.4925
+    lon: -87.6675
+    precision: town
+    source_id: events-sled-wikipedia-ishpeming-michigan
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Ishpeming, Michigan from Wikipedia.
+- id: frederic-mi-forbush-corners
+  name: Forbush Corners
+  kind: nordic_center
+  state: MI
+  town: Frederic
+  location:
+    lat: 44.7661
+    lon: -84.7717
+    precision: town
+    source_id: events-sled-wikipedia-frederic-township-michigan
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Frederic Township, Michigan from Wikipedia.
+events:
+- id: iditarod-trail-sled-dog-race
+  name: Iditarod Trail Sled Dog Race
+  discipline: sled_dog
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: anchorage-ak-town
+  organizer:
+    name: Iditarod Trail Committee
+    url: https://iditarod.com/
+    source_id: events-sled-iditarod-info-mushers
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Ceremonial start in Anchorage, official restart in Willow, finish in Nome; teams of 12 to 16 dogs
+    source_id: events-sled-wikipedia-iditarod-race
+    as_of: 2026-10-17
+    confidence: reported
+  edition_2026_27:
+    start: 2027-03-06
+    source_id: events-sled-iditarod-2027-opening-day
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Saturday start in Anchorage per the Iditarod Trail Committee release. Travel Alaska lists the race as March 6 to
+      20, 2027.
+  usual_timing:
+    value: Early March
+    source_id: events-sled-wikipedia-iditarod-race
+    as_of: 2026-10-17
+    confidence: reported
+  signup:
+    method: qualification
+    url:
+      value: https://iditarod.com/information-for-mushers/
+      source_id: events-sled-iditarod-info-mushers
+      as_of: 2026-10-17
+      confidence: estimated
+    deadline:
+      value: 2026-11-30
+      source_id: events-sled-iditarod-info-mushers
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Last day to enter at the standard entry fee; the fee rises after this date.
+    requirements:
+      value: Qualified mushers only; each entry is reviewed by the Qualifying Review Board. For 2027 every rookie gets 80%
+        of the entry fee covered by a donor.
+      source_id: events-sled-iditarod-info-mushers
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://iditarod.com/
+    source_id: events-sled-iditarod-info-mushers
+    as_of: 2026-10-17
+    confidence: estimated
+- id: fur-rondy-open-world-championship
+  name: Fur Rendezvous Open World Championship Sled Dog Races
+  discipline: sled_dog
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: anchorage-ak-town
+  organizer:
+    name: Fur Rendezvous
+    url: https://furrondy.net/
+    source_id: events-sled-furrondy-owc
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Three day sprint race in downtown Anchorage, starting at noon each day at 4th Avenue and D Street
+    source_id: events-sled-furrondy-owc
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-02-27
+    end: 2026-03-01
+    season: 2025/26
+    source_id: events-sled-furrondy-owc
+    as_of: 2026-10-17
+    confidence: estimated
+  usual_timing:
+    value: First Friday, Saturday and Sunday of Fur Rendezvous
+    source_id: events-sled-furrondy-planning
+    as_of: 2026-10-17
+    confidence: estimated
+  signup:
+    method: null
+    url:
+      value: https://furrondy.net/events/open-world-championship-sled-dog-races
+      source_id: events-sled-furrondy-owc
+      as_of: 2026-10-17
+      confidence: estimated
+    requirements:
+      value: Race registration is handled by the Alaskan Sled Dog and Racing Association (ASDRA).
+      source_id: events-sled-furrondy-owc
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://furrondy.net/events/open-world-championship-sled-dog-races
+    source_id: events-sled-furrondy-owc
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: copper-basin-300
+  name: Copper Basin 300 Sled Dog Race
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: glennallen-ak-town
+  organizer:
+    name: Copper Basin 300
+    url: https://www.cb300.com/
+    source_id: events-sled-cb300-route
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 300 mile race from Glennallen and an Iditarod qualifier
+    source_id: events-sled-iditarod-cb300-qualifier
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-09
+    source_id: events-sled-cb300-route
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Saturday 10 am start in downtown Glennallen, at mile 188 of the Glenn Highway.
+  signup:
+    method: online_registration
+    url:
+      value: https://www.cb300.com/
+      source_id: events-sled-cb300-rules
+      as_of: 2026-10-17
+      confidence: estimated
+      note: The rules say entries are processed on the race website. The rules page seen in search is an older edition.
+  website:
+    value: https://www.cb300.com/
+    source_id: events-sled-cb300-route
+    as_of: 2026-10-17
+    confidence: estimated
+- id: kuskokwim-300
+  name: Kuskokwim 300
+  discipline: sled_dog
+  levels:
+  - elite
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: bethel-ak-town
+  organizer:
+    name: Kuskokwim 300
+    url: https://www.k300.org/
+    source_id: events-sled-k300-home
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Mid distance race that starts and ends on the Kuskokwim River in Bethel
+    source_id: events-sled-wikipedia-kuskokwim-300
+    as_of: 2026-10-17
+    confidence: reported
+  edition_2026_27:
+    start: 2027-01-22
+    source_id: events-sled-k300-home
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 48th running.
+  signup:
+    method: null
+    url:
+      value: https://www.k300.org/
+      source_id: events-sled-k300-home
+      as_of: 2026-10-17
+      confidence: estimated
+      note: The race page says registration opens October 5 without naming the year.
+  website:
+    value: https://www.k300.org/
+    source_id: events-sled-k300-home
+    as_of: 2026-10-17
+    confidence: estimated
+- id: limited-north-american-championships
+  name: Annamaet Limited North American Championships
+  discipline: sled_dog
+  disciplines_also:
+  - skijoring
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: fairbanks-ak-jeff-studert-racegrounds
+  organizer:
+    name: Alaska Dog Mushers Association
+    url: https://alaskadogmushers.com/
+    source_id: events-sled-lnac-adma
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: International Sled Dog Racing Association (ISDRA)
+    source_id: events-sled-lnac-adma
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Championship with 2 dog skijoring and 4, 6 and 8 dog sled classes under ISDRA rules
+    source_id: events-sled-lnac-adma
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-12
+    end: 2027-03-14
+    source_id: events-sled-lnac-adma
+    as_of: 2026-10-17
+    confidence: estimated
+  signup:
+    method: null
+    url:
+      value: https://alaskadogmushers.com/annamaet-limited-north-american-championships/
+      source_id: events-sled-lnac-adma
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Purse listed as TBD; dogs must be microchipped.
+  website:
+    value: https://alaskadogmushers.com/annamaet-limited-north-american-championships/
+    source_id: events-sled-lnac-adma
+    as_of: 2026-10-17
+    confidence: estimated
+- id: john-beargrease-sled-dog-marathon
+  name: John Beargrease Sled Dog Marathon
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: duluth-mn-town
+  organizer:
+    name: John Beargrease Sled Dog Marathon
+    url: https://beargrease.com/
+    source_id: events-sled-beargrease-dglobe
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 330 mile out and back course from Duluth up the North Shore to the Trail Center checkpoint, finishing in Two Harbors
+    source_id: events-sled-beargrease-kaxe-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-31
+    end: 2027-02-02
+    source_id: events-sled-beargrease-kaxe-2027
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Starts Sunday morning in Duluth; early finishers are expected in Two Harbors on the afternoon of Tuesday, February
+      2.
+  usual_timing:
+    value: January
+    source_id: events-sled-wikipedia-beargrease
+    as_of: 2026-10-17
+    confidence: reported
+    note: Held every January since 1980; an Iditarod qualifier.
+  signup:
+    method: at_venue
+    url:
+      value: https://beargrease.com/
+      source_id: events-sled-beargrease-dglobe
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Organizer site named in the event listing.
+    opens:
+      value: 2026-10-03
+      source_id: events-sled-beargrease-nsj-kickoff
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Mushers could register in person at the kickoff banquet at Northland Country Club in Duluth.
+  website:
+    value: https://beargrease.com/
+    source_id: events-sled-beargrease-dglobe
+    as_of: 2026-10-17
+    confidence: estimated
+- id: gunflint-mail-run
+  name: Gunflint Mail Run Sled Dog Race
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: gunflint-trail-trail-center-mn
+  last_edition:
+    start: 2026-02-07
+    season: 2025/26
+    source_id: events-sled-gunflint-wtip-february
+    as_of: 2026-10-17
+    confidence: estimated
+    note: First team set to leave Trail Center at 8 am. The race moved to February after years of snow related postponements.
+  usual_timing:
+    value: February
+    source_id: events-sled-gunflint-wtip-february
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: can-am-crown
+  name: Can-Am Crown International Sled Dog Races
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: fort-kent-me-town
+  organizer:
+    name: Can-Am Crown
+    url: https://can-am-crown.net/
+    source_id: events-sled-wikipedia-canam
+    as_of: 2026-10-17
+    confidence: reported
+  format:
+    value: 30, 100 and 250 mile races; the 250 is an Iditarod and Yukon Quest qualifier
+    source_id: events-sled-canam-visitmaine
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-02-28
+    season: 2025/26
+    source_id: events-sled-canam-umfk-2026
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 34th annual running.
+  website:
+    value: https://can-am-crown.net/
+    source_id: events-sled-canam-umfk-2026
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Site linked from the university listing.
+  edition_2026_27: null
+- id: up200
+  name: UP200, Midnight Run and Jack Pine 30
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: marquette-mi-town
+  organizer:
+    name: UP200
+    url: https://up200.org/
+    source_id: events-sled-up200-home
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 'Three races in 2026: the UP200 (February 12 to 16), the Midnight Run (February 12 to 14) and the Jack Pine 30
+      (February 14)'
+    source_id: events-sled-up200-races
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-02-12
+    end: 2026-02-16
+    season: 2025/26
+    source_id: events-sled-up200-home
+    as_of: 2026-10-17
+    confidence: estimated
+  signup:
+    method: null
+    url:
+      value: https://up200.org/up200-info-registration
+      source_id: events-sled-up200-registration
+      as_of: 2026-10-17
+      confidence: estimated
+      note: For 2026 the lower entry fee had to be paid by December 31; fees rose on January 1.
+  website:
+    value: https://up200.org/
+    source_id: events-sled-up200-home
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: tahquamenon-country-sled-dog-race
+  name: Tahquamenon Country Sled Dog Race
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: newberry-mi-headquarters-lake
+  organizer:
+    name: Tahquamenon Country Sled Dog Race
+    url: https://tcsdr.org/
+    source_id: events-sled-tcsdr-2026-kickoff
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Pro and sport classes; 44 mushers raced in 2026
+    source_id: events-sled-tcsdr-2026-kickoff
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: null
+    end: null
+    season: 2025/26
+    source_id: events-sled-tcsdr-2026-kickoff
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Raced in January 2026; the exact days were not in the search result.
+  usual_timing:
+    value: Early January, one of the first races of the mushing season
+    source_id: events-sled-tcsdr-2026-kickoff
+    as_of: 2026-10-17
+    confidence: estimated
+  website:
+    value: https://tcsdr.org/
+    source_id: events-sled-tcsdr-2026-kickoff
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Organizer site named in the search summary.
+  edition_2026_27: null
+- id: copperdog-150
+  name: CopperDog 150
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: calumet-mi-town
+  organizer:
+    name: CopperDog
+    url: https://copperdog.org/
+    source_id: events-sled-copperdog-home
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 10 dog teams cover 150 miles over three days, starting on Fifth Street in Calumet
+    source_id: events-sled-copperdog-michigan-org
+    as_of: 2026-10-17
+    confidence: estimated
+    note: A 2026 visitor guide named a CopperDog 120 of about 121 miles, so distance and name may change.
+  edition_2026_27:
+    start: 2027-02-26
+    end: 2027-02-28
+    source_id: events-sled-copperdog-michigan-org
+    as_of: 2026-10-17
+    confidence: estimated
+  signup:
+    method: null
+    url:
+      value: https://copperdog.org/
+      source_id: events-sled-copperdog-home
+      as_of: 2026-10-17
+      confidence: estimated
+      note: For 2025 registration opened on this site on November 2.
+  website:
+    value: https://copperdog.org/
+    source_id: events-sled-copperdog-home
+    as_of: 2026-10-17
+    confidence: estimated
+- id: race-to-the-sky
+  name: Montana Race to the Sky
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  - junior
+  venue:
+    resort_id: null
+    venue_id: lincoln-mt-town
+  organizer:
+    name: Montana Sled Dog, Inc.
+    url: https://racetothesky.org/
+    source_id: events-sled-rtts-southwestmt
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 350 mile and 100 mile races plus a Junior 100; the 350 is an Iditarod qualifier
+    source_id: events-sled-rtts-southwestmt
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-02-13
+    end: 2026-02-17
+    season: 2025/26
+    source_id: events-sled-rtts-sleddogtalk
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 2026 race was cancelled for poor trail conditions; organizers plan to return in 2027 (racetothesky.org).
+  usual_timing:
+    value: February
+    source_id: events-sled-rtts-southwestmt
+    as_of: 2026-10-17
+    confidence: estimated
+  website:
+    value: https://racetothesky.org/
+    source_id: events-sled-rtts-home
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://sleddogtalk.com/event/race-to-the-sky-montana/
+    source_id: events-sled-rtts-sleddogtalk
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: pedigree-stage-stop
+  name: Pedigree Stage Stop Sled Dog Race
+  discipline: sled_dog
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: pinedale-wy-town
+  organizer:
+    name: Wyoming Stage Stop
+    url: https://wyomingstagestop.org/
+    source_id: events-sled-wss-schedule
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Stage race in Wyoming with seven stages of 30 to 35 miles and a $200,000 purse in 2026
+    source_id: events-sled-wss-county10-2026
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Stage Stop 8 runs alongside the final two days of this race, near Cora and Pinedale (wyomingstagestop.org).
+  last_edition:
+    start: null
+    end: null
+    season: 2025/26
+    source_id: events-sled-wss-county10-2026
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 2026 schedule was announced with a $200,000 purse and 20 teams; its dates were not in the search results. No
+      2027 start date was found.
+  signup:
+    method: null
+    url:
+      value: https://wyomingstagestop.org/race-schedule-purse/
+      source_id: events-sled-wss-schedule
+      as_of: 2026-10-17
+      confidence: estimated
+      note: The page lists sign up on September 15 at noon MST without naming the year; 2027 rules are on the Musher Information
+        page.
+    fee_usd:
+      value: 1050
+      source_id: events-sled-wss-schedule
+      as_of: 2026-10-17
+      confidence: estimated
+      note: 2027 entry fee, paid by credit card.
+    requirements:
+      value: Field limited to 20 teams in 2027.
+      source_id: events-sled-wss-schedule
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://wyomingstagestop.org/
+    source_id: events-sled-wss-schedule
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: stage-stop-8
+  name: Stage Stop 8
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: pinedale-wy-town
+  organizer:
+    name: Wyoming Stage Stop
+    url: https://wyomingstagestop.org/
+    source_id: events-sled-wss-stage-stop-8
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Two day race of about 20 mile out and back stages, at most 8 dogs per stage, 10 teams and a $10,000 guaranteed
+      purse
+    source_id: events-sled-wss-stage-stop-8
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-05
+    end: 2027-02-06
+    source_id: events-sled-wss-stage-stop-8
+    as_of: 2026-10-17
+    confidence: estimated
+  signup:
+    method: null
+    url:
+      value: https://wyomingstagestop.org/stage-stop-8/
+      source_id: events-sled-wss-stage-stop-8
+      as_of: 2026-10-17
+      confidence: estimated
+    opens:
+      value: 2026-10-01
+      source_id: events-sled-wss-stage-stop-8
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Applications open at noon MDT.
+    deadline:
+      value: 2026-12-31
+      source_id: events-sled-wss-stage-stop-8
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Applications close at 11:59 pm MDT.
+    fee_usd:
+      value: 200
+      source_id: events-sled-wss-stage-stop-8
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Entry fee, non refundable.
+    requirements:
+      value: First come, first served; each application is reviewed by the Race Marshal.
+      source_id: events-sled-wss-stage-stop-8
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://wyomingstagestop.org/stage-stop-8/
+    source_id: events-sled-wss-stage-stop-8
+    as_of: 2026-10-17
+    confidence: estimated
+- id: eagle-cap-extreme
+  name: Eagle Cap Extreme Sled Dog Race
+  discipline: sled_dog
+  levels:
+  - open_amateur
+  - junior
+  venue:
+    resort_id: ferguson-ridge-ski-area
+    venue_id: null
+  format:
+    value: 200 mile 12 dog race (Iditarod and Yukon Quest qualifier), 100 mile 8 dog race, 31 mile 6 dog pot race and 22 mile
+      juniors race
+    source_id: events-sled-eagle-cap-obbg
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-01-22
+    end: 2026-01-24
+    season: 2025/26
+    source_id: events-sled-eagle-cap-obbg
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Vet checks January 21, noon start January 22 at Ferguson Ridge Ski Area near Joseph, awards January 24.
+  calendar_url:
+    value: https://sleddogtalk.com/event/eagle-cap-extreme-sled-dog-race/
+    source_id: events-sled-eagle-cap-sleddogtalk
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: amsoil-championship-snocross-ironwood
+  name: Mt. Zion Snocross National
+  series:
+    id: amsoil-championship-snocross
+    name: AMSOIL Championship Snocross national tour
+  discipline: snocross
+  levels:
+  - elite
+  venue:
+    resort_id: mount-zion-ski-area
+    venue_id: null
+  organizer:
+    name: AMSOIL Championship Snocross
+    url: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: ISOC
+    source_id: events-sled-isoc-ironwood-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Season opener of the national snocross tour at Mt. Zion in Ironwood
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2025-12-12
+    end: 2025-12-13
+    season: 2025/26
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for
+      2024/25 and 2025/26.
+  website:
+    value: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: amsoil-championship-snocross-shakopee
+  name: U.S. Air Force Snocross National, Shakopee
+  series:
+    id: amsoil-championship-snocross
+    name: AMSOIL Championship Snocross national tour
+  discipline: snocross
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: shakopee-mn-canterbury-park
+  organizer:
+    name: AMSOIL Championship Snocross
+    url: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: ISOC
+    source_id: events-sled-isoc-ironwood-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: National snocross tour stop at Canterbury Park
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-01-09
+    end: 2026-01-10
+    season: 2025/26
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for
+      2024/25 and 2025/26.
+  website:
+    value: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: amsoil-championship-snocross-deadwood
+  name: U.S. Air Force Snocross National, Deadwood
+  series:
+    id: amsoil-championship-snocross
+    name: AMSOIL Championship Snocross national tour
+  discipline: snocross
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: deadwood-sd-days-of-76
+  organizer:
+    name: AMSOIL Championship Snocross
+    url: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: ISOC
+    source_id: events-sled-isoc-ironwood-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: National snocross tour stop at the Days of '76 complex
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-01-23
+    end: 2026-01-24
+    season: 2025/26
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for
+      2024/25 and 2025/26.
+  website:
+    value: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: amsoil-championship-snocross-salamanca
+  name: Seneca Allegany Snocross National
+  series:
+    id: amsoil-championship-snocross
+    name: AMSOIL Championship Snocross national tour
+  discipline: snocross
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: salamanca-ny-town
+  organizer:
+    name: AMSOIL Championship Snocross
+    url: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: ISOC
+    source_id: events-sled-isoc-ironwood-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: National snocross tour stop in Salamanca
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-02-20
+    end: 2026-02-21
+    season: 2025/26
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for
+      2024/25 and 2025/26.
+  website:
+    value: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: amsoil-championship-snocross-elk-river
+  name: CFMOTO Snocross National
+  series:
+    id: amsoil-championship-snocross
+    name: AMSOIL Championship Snocross national tour
+  discipline: snocross
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: elk-river-mn-erx-motor-park
+  organizer:
+    name: AMSOIL Championship Snocross
+    url: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: ISOC
+    source_id: events-sled-isoc-ironwood-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: National snocross tour stop at ERX Motor Park
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-03-06
+    end: 2026-03-07
+    season: 2025/26
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for
+      2024/25 and 2025/26.
+  website:
+    value: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: amsoil-championship-snocross-eagle-river
+  name: Eagle River Snocross National
+  series:
+    id: amsoil-championship-snocross
+    name: AMSOIL Championship Snocross national tour
+  discipline: snocross
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: eagle-river-wi-town
+  organizer:
+    name: AMSOIL Championship Snocross
+    url: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: ISOC
+    source_id: events-sled-isoc-ironwood-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: National snocross tour stop in Eagle River
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-03-13
+    end: 2026-03-14
+    season: 2025/26
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for
+      2024/25 and 2025/26.
+  website:
+    value: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: amsoil-championship-snocross-duluth
+  name: Duluth Snocross National (season finale)
+  series:
+    id: amsoil-championship-snocross
+    name: AMSOIL Championship Snocross national tour
+  discipline: snocross
+  levels:
+  - elite
+  venue:
+    resort_id: spirit-mountain
+    venue_id: null
+  organizer:
+    name: AMSOIL Championship Snocross
+    url: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: ISOC
+    source_id: events-sled-isoc-ironwood-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Season finale of the national snocross tour at Spirit Mountain in Duluth, the birthplace of North American snocross
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-04-03
+    end: 2026-04-04
+    season: 2025/26
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2025/26 tour stop. The 2026/27 schedule was not found; the tour used the same eight venues in the same order for
+      2024/25 and 2025/26.
+  website:
+    value: https://snocross.com/
+    source_id: events-sled-snocross-2025-26-release
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: world-championship-snowmobile-hill-climb
+  name: World Championship Snowmobile Hill Climb
+  series:
+    id: rmsha-hill-climb
+    name: Rocky Mountain States Hill Climb Association series
+  discipline: hill_climb
+  levels:
+  - elite
+  - masters
+  - junior
+  venue:
+    resort_id: snow-king-mountain
+    venue_id: null
+  organizer:
+    name: Jackson Hole Snow Devils
+    url: https://www.snowdevils.org/
+    source_id: events-sled-hillclimb-snowdevils
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: Rocky Mountain States Hill Climb Association (RMSHA)
+    source_id: events-sled-rmsha-2025-osmmag
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Four days of hill climb racing on Snow King Mountain, with gates opening Thursday and championship finals on Sunday
+    source_id: events-sled-hillclimb-snowdevils
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-18
+    end: 2027-03-21
+    source_id: events-sled-hillclimb-snowdevils
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Schedule is tentative and depends on snow. The 2026 event was cancelled for poor snow.
+  signup:
+    method: qualification
+    url:
+      value: https://www.snowdevils.org/hillclimb/
+      source_id: events-sled-hillclimb-snowdevils
+      as_of: 2026-10-17
+      confidence: estimated
+    requirements:
+      value: Pro, women's, masters and junior classes are by invitation or qualification with entry limits; the Race Committee
+        issues pro entry codes, one class per code. Each class needs its own entry form, W-9 and proof of insurance where
+        required (2026 rules).
+      source_id: events-sled-hillclimb-snowdevils
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.snowdevils.org/hillclimb/
+    source_id: events-sled-hillclimb-snowdevils
+    as_of: 2026-10-17
+    confidence: estimated
+- id: rmsha-hill-climb-soldier-mountain
+  name: RMSHA Charmac Uphill Battle at Soldier Mountain
+  series:
+    id: rmsha-hill-climb
+    name: Rocky Mountain States Hill Climb Association series
+  discipline: hill_climb
+  levels:
+  - elite
+  - open_amateur
+  venue:
+    resort_id: soldier-mountain-ski-area
+    venue_id: null
+  organizer:
+    name: Rocky Mountain States Hill Climb Association (RMSHA)
+    source_id: events-sled-rmsha-soldier
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Opening round of the 2026 RMSHA snowmobile hill climb season
+    source_id: events-sled-rmsha-soldier
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-02-26
+    end: 2026-02-28
+    season: 2025/26
+    source_id: events-sled-rmsha-soldier
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 2027 RMSHA schedule was not found.
+  website:
+    value: https://soldiermountain.com/RMSHA/
+    source_id: events-sled-rmsha-soldier
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: world-championship-snowmobile-derby
+  name: World Championship Snowmobile Derby
+  discipline: snowmobile_race
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: eagle-river-wi-derby-complex
+  organizer:
+    name: World Championship Derby Complex
+    source_id: events-sled-derby-regfox-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: The 64th World Championship Snowmobile Derby, held with the 7th WC Pro Enduro at the World Championship Derby Complex
+    source_id: events-sled-derby-regfox-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-14
+    end: 2027-01-17
+    source_id: events-sled-derby-regfox-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  usual_timing:
+    value: Third weekend in January
+    source_id: events-sled-wikipedia-derby
+    as_of: 2026-10-17
+    confidence: reported
+  website:
+    value: https://wcdc.regfox.com/64th-world-championship-derby-complex-landing-page
+    source_id: events-sled-derby-regfox-2027
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Ticket page; no racer entry page was found.
+- id: vintage-world-championship-snowmobile-derby
+  name: Vintage World Championship Snowmobile Derby
+  discipline: snowmobile_race
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: eagle-river-wi-derby-complex
+  format:
+    value: Vintage snowmobile racing on the Eagle River Derby Track
+    source_id: events-sled-vintage-derby-eagleriver
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-01-08
+    end: 2026-01-11
+    season: 2025/26
+    source_id: events-sled-vintage-derby-eagleriver
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 2025 edition was listed for January 9 to 12, 2025.
+  edition_2026_27: null
+- id: i-500-snowmobile-race
+  name: I-500 Snowmobile Race
+  discipline: snowmobile_race
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: sault-ste-marie-mi-town
+  organizer:
+    name: I-500
+    url: https://i-500.com/
+    source_id: events-sled-i500-schedule
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 500 mile endurance race in Sault Ste. Marie, described as the largest and longest single day snowmobile race in
+      the world
+    source_id: events-sled-wikipedia-i500
+    as_of: 2026-10-17
+    confidence: reported
+  edition_2026_27:
+    start: 2027-01-31
+    end: 2027-02-06
+    source_id: events-sled-i500-schedule
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 58th running; dates marked tentative. Kids races open the week on January 31; the page did not clearly say which
+      day the 500 runs.
+  website:
+    value: https://i-500.com/
+    source_id: events-sled-i500-schedule
+    as_of: 2026-10-17
+    confidence: estimated
+- id: iron-dog
+  name: Iron Dog
+  discipline: snowmobile_race
+  levels:
+  - elite
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: big-lake-ak-town
+  organizer:
+    name: Iron Dog
+    url: https://www.irondog.org/
+    source_id: events-sled-irondog-2027-route
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Pro Class runs 2,283 miles from Big Lake via Galena, Nome and Kotzebue to Fairbanks; Expedition Class runs Big
+      Lake to Nome
+    source_id: events-sled-irondog-2027-route
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-13
+    end: 2027-02-21
+    source_id: events-sled-irondog-schedule
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Race week per the schedule page; the Expedition Class leaves Big Lake on February 11 (route update). The schedule
+      page gives 2,503 miles for the Pro Class.
+  usual_timing:
+    value: Mid February
+    source_id: events-sled-wikipedia-irondog
+    as_of: 2026-10-17
+    confidence: reported
+  signup:
+    method: null
+    url:
+      value: https://next.irondog.org/race/info
+      source_id: events-sled-irondog-race-info
+      as_of: 2026-10-17
+      confidence: estimated
+      note: A 2026 entry checklist is on the official site; no 2027 entry details were found.
+  website:
+    value: https://www.irondog.org/
+    source_id: events-sled-irondog-2027-route
+    as_of: 2026-10-17
+    confidence: estimated
+- id: cor-powersports-xc-leech-lake-200
+  name: Leech Lake 200
+  series:
+    id: cor-powersports-xc
+    name: Cor Powersports cross country snowmobile series
+  discipline: snowmobile_race
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: walker-mn-town
+  organizer:
+    name: Cor Powersports
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Cross country snowmobile race based out of Walker
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-02-28
+    end: 2026-03-01
+    season: 2025/26
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2026 season of the series (its 15th); the 2026/27 schedule was not found.
+  edition_2026_27: null
+- id: cor-powersports-xc-mt-zion-championship
+  name: Mt. Zion Championship
+  series:
+    id: cor-powersports-xc
+    name: Cor Powersports cross country snowmobile series
+  discipline: snowmobile_race
+  levels:
+  - open_amateur
+  venue:
+    resort_id: mount-zion-ski-area
+    venue_id: null
+  organizer:
+    name: Cor Powersports
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Cross country snowmobile race at Mt. Zion near Ironwood
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-03-21
+    end: 2026-03-22
+    season: 2025/26
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2026 season of the series (its 15th); the 2026/27 schedule was not found.
+  edition_2026_27: null
+- id: cor-powersports-xc-porcupine-mountain-100
+  name: Porcupine Mountain 100
+  series:
+    id: cor-powersports-xc
+    name: Cor Powersports cross country snowmobile series
+  discipline: snowmobile_race
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: ontonagon-mi-town
+  organizer:
+    name: Cor Powersports
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: New cross country snowmobile race in 2026, based out of Ontonagon
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-03-28
+    season: 2025/26
+    source_id: events-sled-cor-xc-2026-snowgoer
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 2026 season of the series (its 15th); the 2026/27 schedule was not found.
+  edition_2026_27: null
+- id: arrowhead-135
+  name: Arrowhead 135
+  discipline: winter_ultra
+  disciplines_also:
+  - fat_bike
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: international-falls-mn-town
+  format:
+    value: 135 mile winter ultra from International Falls on foot, by bike or on skis; racers carry a satellite tracker
+    source_id: events-sled-arrowhead-ultrasignup
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-25
+    end: 2027-01-27
+    source_id: events-sled-arrowhead-gotrail
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 23rd annual edition.
+  signup:
+    method: online_registration
+    url:
+      value: https://ultrasignup.com/register.aspx?eid=110
+      source_id: events-sled-arrowhead-ultrasignup
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: UltraSignup
+      source_id: events-sled-arrowhead-ultrasignup
+      as_of: 2026-10-17
+      confidence: estimated
+    opens:
+      value: 2026-09-01
+      source_id: events-sled-arrowhead-ultrasignup
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Opened at 8 am Central.
+    requirements:
+      value: 'A qualifying race: at least 100 miles on foot, 100 miles off road or 200 miles on road by bike, or 100 miles
+        on skis.'
+      source_id: events-sled-arrowhead-ultrasignup
+      as_of: 2026-10-17
+      confidence: estimated
+- id: iditarod-trail-invitational
+  name: Iditarod Trail Invitational
+  discipline: winter_ultra
+  disciplines_also:
+  - fat_bike
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: knik-ak-town
+  format:
+    value: Race on the Iditarod Trail from Knik to Nome, about 1,000 miles
+    source_id: events-sled-iti-bikepacking
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-28
+    source_id: events-sled-iti-bikepacking
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://bikepacking.com/event/2027-iditarod-trail-invitational-iti/
+    source_id: events-sled-iti-bikepacking
+    as_of: 2026-10-17
+    confidence: estimated
+- id: tuscobia-winter-ultra
+  name: Tuscobia Winter Ultra
+  discipline: winter_ultra
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: tuscobia-state-trail-wi
+  format:
+    value: 80 mile and 160 mile winter ultra races
+    source_id: events-sled-tuscobia-ultrasignup-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-01
+    source_id: events-sled-tuscobia-ultrasignup-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  signup:
+    method: lottery
+    url:
+      value: https://ultrasignup.com/register.aspx?did=142444
+      source_id: events-sled-tuscobia-ultrasignup-2027
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: UltraSignup
+      source_id: events-sled-tuscobia-ultrasignup-2027
+      as_of: 2026-10-17
+      confidence: estimated
+    opens:
+      value: 2026-08-07
+      source_id: events-sled-tuscobia-ultrasignup-2027
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Application window August 7 to 21; selected applicants are charged after notification.
+    deadline:
+      value: 2026-08-29
+      source_id: events-sled-tuscobia-ultrasignup-2027
+      as_of: 2026-10-17
+      confidence: estimated
+      note: Registration closed at 11:59 pm CT.
+    fee_usd:
+      value: 150
+      source_id: events-sled-tuscobia-ultrasignup-2027
+      as_of: 2026-10-17
+      confidence: estimated
+      note: 80 mile race; the 160 mile race is $200. Fees are non refundable.
+    requirements:
+      value: The 160 mile race needs a prior qualifying event such as a Tuscobia race, the Arrowhead 135 or the Iditarod Trail
+        Invitational.
+      source_id: events-sled-tuscobia-ultrasignup-2027
+      as_of: 2026-10-17
+      confidence: estimated
+- id: arktos-winter-ultra
+  name: ARKTOS
+  discipline: winter_ultra
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: dousman-wi-town
+  format:
+    value: Timed winter ultra capped at 160 runners
+    source_id: events-sled-arktos-findtherun
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-27
+    end: 2027-02-28
+    source_id: events-sled-arktos-findtherun
+    as_of: 2026-10-17
+    confidence: estimated
+- id: fat-bike-birkie
+  name: Fat Bike Birkie
+  discipline: fat_bike
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: cable-wi-birkie-trailhead
+  organizer:
+    name: American Birkebeiner Ski Foundation
+    url: https://www.birkie.com/
+    source_id: events-sled-fatbike-birkie-travelwi
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Big Fat 47K and Half Fat 21K races plus the Fun Fat 10K tour, starting and finishing at the American Birkebeiner
+      Trailhead
+    source_id: events-sled-fatbike-birkie-page
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-13
+    source_id: events-sled-fatbike-birkie-page
+    as_of: 2026-10-17
+    confidence: estimated
+  signup:
+    method: online_registration
+    url:
+      value: https://bikesignup.com/Race/WI/Cable/FatBikeBirkie
+      source_id: events-sled-fatbike-birkie-bikesignup
+      as_of: 2026-10-17
+      confidence: estimated
+      note: 2027 registration dates and fees were not yet posted; 2026 registration opened in June.
+    platform:
+      value: BikeSignup
+      source_id: events-sled-fatbike-birkie-bikesignup
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.birkie.com/bike/events/fat-bike-birkie/
+    source_id: events-sled-fatbike-birkie-page
+    as_of: 2026-10-17
+    confidence: estimated
+- id: 906-polar-roll
+  name: 906 Polar Roll
+  discipline: fat_bike
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: ishpeming-mi-town
+  organizer:
+    name: 906 Adventure Team
+    source_id: events-sled-polar-roll-travelmarquette
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 35 mile point to point fat bike race from Ishpeming to Mattson Lower Harbor Park in Marquette, with a shorter race
+      from Marquette
+    source_id: events-sled-polar-roll-travelmarquette
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: null
+    end: null
+    season: 2024/25
+    source_id: events-sled-polar-roll-wzmq-2025
+    as_of: 2026-10-17
+    confidence: estimated
+    note: 'Last edition found: the 11th annual race in 2025, with about 500 riders expected; its date was not in the search
+      result. No 2026 or 2027 date was found.'
+  usual_timing:
+    value: February, usually on a Saturday
+    source_id: events-sled-polar-roll-wzmq-2025
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27: null
+- id: usa-triathlon-winter-nationals
+  name: USA Triathlon Winter Nationals (Tri 45 Winter Triathlon)
+  discipline: fat_bike
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: frederic-mi-forbush-corners
+  organizer:
+    name: Tri 45
+    source_id: events-sled-usat-winter-2027-findarace
+    as_of: 2026-10-17
+    confidence: estimated
+  sanctioning:
+    name: USA Triathlon
+    source_id: events-sled-usat-winter-2027-findarace
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 'Winter triathlon filed under fat bike: 5k run, 10k bike and 10k ski, plus a run and ski duathlon'
+    source_id: events-sled-usat-winter-2027-findarace
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-06
+    source_id: events-sled-usat-winter-2027-findarace
+    as_of: 2026-10-17
+    confidence: estimated
+    note: Third party listings only; no USA Triathlon page confirming 2027 was found. The 2026 nationals were in Lake Placid.
+  signup:
+    method: online_registration
+    url:
+      value: https://runsignup.com/Race/MI/frederic/2024GaylordAllOutdoorsTri45WinterTriathlon
+      source_id: events-sled-usat-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+      note: RunSignup page of the Tri 45 winter triathlon; the address names 2024.
+    platform:
+      value: RunSignup
+      source_id: events-sled-usat-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    requirements:
+      value: USA Triathlon membership.
+      source_id: events-sled-usat-winter-2027-findarace
+      as_of: 2026-10-17
+      confidence: estimated
+calendars:
+- id: isdra-sled-dog-race-calendar
+  name: International Sled Dog Racing Association (ISDRA) events calendar
+  discipline: sled_dog
+  region: national
+  url:
+    value: https://isdra.org/events
+    source_id: events-sled-isdra-events
+    as_of: 2026-10-17
+    confidence: estimated
+- id: amsoil-championship-snocross-schedule
+  name: AMSOIL Championship Snocross schedule posts
+  discipline: snocross
+  region: national
+  url:
+    value: https://snocross.com/tag/snocross-schedule/
+    source_id: events-sled-snocross-schedule-tag
+    as_of: 2026-10-17
+    confidence: estimated
