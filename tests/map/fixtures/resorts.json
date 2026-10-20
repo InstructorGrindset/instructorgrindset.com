@@ -275,29 +275,9 @@
        "value": 4.33
       },
       {
-       "key": "tips_season_usd",
-       "label": "Tips are not included yet",
-       "value": null
-      },
-      {
-       "key": "rent_monthly_usd",
-       "label": "Median rent per month",
-       "value": 1150
-      },
-      {
        "key": "tax",
        "label": "Before tax and other living costs",
        "value": null
-      },
-      {
-       "key": "rent_basis",
-       "label": "Rent basis",
-       "value": "median_rent"
-      },
-      {
-       "key": "rent_source_id",
-       "label": "Rent source",
-       "value": "fixture-resort-site, fixture-survey"
       }
      ],
      "rent": {
@@ -581,6 +561,9 @@
    },
    "sources": [
     "fixture-careers",
+    "fixture-ev-cup",
+    "fixture-ev-jam",
+    "fixture-ev-league",
     "fixture-ff-page",
     "fixture-forum-one",
     "fixture-forum-two",
@@ -592,7 +575,47 @@
     "fixture-pass-site",
     "fixture-resort-site",
     "fixture-survey"
-   ]
+   ],
+   "events": {
+    "count": 3,
+    "items": [
+     {
+      "id": "alpha-peak-cup",
+      "name": "Alpha Peak Speed Cup",
+      "discipline_label": "Alpine racing",
+      "start": "2026-12-05",
+      "end": "2026-12-06",
+      "season": "2026/27",
+      "published": true,
+      "source_id": "fixture-ev-cup",
+      "as_of": "2026-10-01",
+      "confidence": "published"
+     },
+     {
+      "id": "alpha-peak-rail-jam",
+      "name": "Alpha Peak Night Rail Jam",
+      "discipline_label": "Rail jam",
+      "start": "2027-01-16",
+      "end": "2027-01-16",
+      "season": "2026/27",
+      "published": true,
+      "source_id": "fixture-ev-jam",
+      "as_of": "2026-10-01",
+      "confidence": "published"
+     },
+     {
+      "id": "alpha-peak-league",
+      "name": "Alpha Peak Thursday Race League",
+      "discipline_label": "Masters racing",
+      "published": false,
+      "season_long": true,
+      "timing": "Thursday nights, January to March",
+      "source_id": "fixture-ev-league",
+      "as_of": "2026-10-01",
+      "confidence": "published"
+     }
+    ]
+   }
   },
   {
    "id": "bravo-bowl",
@@ -800,16 +823,6 @@
        "value": 4.33
       },
       {
-       "key": "tips_season_usd",
-       "label": "Tips are not included yet",
-       "value": null
-      },
-      {
-       "key": "rent_monthly_usd",
-       "label": "Median rent per month",
-       "value": 1150
-      },
-      {
        "key": "tax",
        "label": "Before tax and other living costs",
        "value": null
@@ -892,6 +905,7 @@
    },
    "housing_summary": null,
    "sources": [
+    "fixture-ev-skimo",
     "fixture-forum-one",
     "fixture-forum-two",
     "fixture-housing-guide",
@@ -902,7 +916,24 @@
     "fixture-pass-site",
     "fixture-resort-site",
     "fixture-survey"
-   ]
+   ],
+   "events": {
+    "count": 1,
+    "items": [
+     {
+      "id": "bravo-bowl-skimo",
+      "name": "Bravo Bowl Skimo Sprint",
+      "discipline_label": "Skimo",
+      "start": "2026-03-07",
+      "end": "2026-03-07",
+      "season": "2025/26",
+      "published": false,
+      "source_id": "fixture-ev-skimo",
+      "as_of": "2026-10-01",
+      "confidence": "estimated"
+     }
+    ]
+   }
   },
   {
    "id": "charlie-hill",
@@ -1076,16 +1107,6 @@
        "value": 4.33
       },
       {
-       "key": "tips_season_usd",
-       "label": "Tips are not included yet",
-       "value": null
-      },
-      {
-       "key": "rent_monthly_usd",
-       "label": "Median rent per month",
-       "value": 1150
-      },
-      {
        "key": "tax",
        "label": "Before tax and other living costs",
        "value": null
@@ -1161,7 +1182,8 @@
     "fixture-model",
     "fixture-pass-site",
     "fixture-resort-site"
-   ]
+   ],
+   "events": null
   },
   {
    "id": "delta-ridge",
@@ -1220,7 +1242,8 @@
    "housing_summary": null,
    "sources": [
     "fixture-location"
-   ]
+   ],
+   "events": null
   },
   {
    "id": "echo-mesa",
@@ -1351,7 +1374,8 @@
     "fixture-location",
     "fixture-model",
     "fixture-resort-site"
-   ]
+   ],
+   "events": null
   },
   {
    "id": "foxtrot-basin",
@@ -1589,29 +1613,9 @@
        "value": 4.33
       },
       {
-       "key": "tips_season_usd",
-       "label": "Tips are not included yet",
-       "value": null
-      },
-      {
-       "key": "rent_monthly_usd",
-       "label": "Median rent per month",
-       "value": 1150
-      },
-      {
        "key": "tax",
        "label": "Before tax and other living costs",
        "value": null
-      },
-      {
-       "key": "rent_basis",
-       "label": "Rent basis",
-       "value": "zillow_zori"
-      },
-      {
-       "key": "rent_source_id",
-       "label": "Rent source",
-       "value": "fixture-model"
       }
      ],
      "rent": {
@@ -1664,12 +1668,30 @@
    "housing_search": null,
    "housing_summary": null,
    "sources": [
+    "fixture-ev-banked",
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
     "fixture-pass-site",
     "fixture-resort-site"
-   ]
+   ],
+   "events": {
+    "count": 1,
+    "items": [
+     {
+      "id": "foxtrot-basin-banked",
+      "name": "Foxtrot Basin Banked Slalom",
+      "discipline_label": "Banked slalom",
+      "start": "2027-04-10",
+      "end": "2027-04-11",
+      "season": "2026/27",
+      "published": true,
+      "source_id": "fixture-ev-banked",
+      "as_of": "2026-10-01",
+      "confidence": "published"
+     }
+    ]
+   }
   },
   {
    "id": "golf-canyon",
@@ -1797,10 +1819,28 @@
    "housing_search": null,
    "housing_summary": null,
    "sources": [
+    "fixture-ev-fun",
     "fixture-location",
     "fixture-model",
     "fixture-resort-site"
-   ]
+   ],
+   "events": {
+    "count": 1,
+    "items": [
+     {
+      "id": "golf-canyon-fun-race",
+      "name": "Golf Canyon Costume Fun Race",
+      "discipline_label": "Fun race",
+      "start": "2027-04-03",
+      "end": "2027-04-03",
+      "season": "2026/27",
+      "published": true,
+      "source_id": "fixture-ev-fun",
+      "as_of": "2026-10-01",
+      "confidence": "estimated"
+     }
+    ]
+   }
   },
   {
    "id": "hotel-lake",
@@ -2008,16 +2048,6 @@
        "value": 4.33
       },
       {
-       "key": "tips_season_usd",
-       "label": "Tips are not included yet",
-       "value": null
-      },
-      {
-       "key": "rent_monthly_usd",
-       "label": "Median rent per month",
-       "value": 1150
-      },
-      {
        "key": "tax",
        "label": "Before tax and other living costs",
        "value": null
@@ -2038,11 +2068,29 @@
    "housing_search": null,
    "housing_summary": null,
    "sources": [
+    "fixture-ev-clinic",
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
     "fixture-resort-site"
-   ]
+   ],
+   "events": {
+    "count": 1,
+    "items": [
+     {
+      "id": "hotel-lake-spring-clinic",
+      "name": "Hotel Lake Spring Clinic",
+      "discipline_label": "PSIA AASI clinic",
+      "start": "2027-05-15",
+      "end": "2027-05-16",
+      "season": "2026/27",
+      "published": true,
+      "source_id": "fixture-ev-clinic",
+      "as_of": "2026-10-01",
+      "confidence": "published"
+     }
+    ]
+   }
   },
   {
    "id": "india-crest",
@@ -2173,7 +2221,8 @@
     "fixture-location",
     "fixture-model",
     "fixture-resort-site"
-   ]
+   ],
+   "events": null
   },
   {
    "id": "juliet-summit",
@@ -2304,7 +2353,8 @@
     "fixture-location",
     "fixture-model",
     "fixture-resort-site"
-   ]
+   ],
+   "events": null
   },
   {
    "id": "kilo-notch",
@@ -2508,12 +2558,30 @@
    "housing_summary": null,
    "sources": [
     "fixture-careers",
+    "fixture-ev-exam",
     "fixture-location",
     "fixture-model",
     "fixture-ownership",
     "fixture-pass-site",
     "fixture-resort-site"
-   ]
+   ],
+   "events": {
+    "count": 1,
+    "items": [
+     {
+      "id": "kilo-notch-exam",
+      "name": "Kilo Notch Level 2 Exam",
+      "discipline_label": "PSIA AASI exam",
+      "start": "2026-12-12",
+      "end": "2026-12-13",
+      "season": "2026/27",
+      "published": true,
+      "source_id": "fixture-ev-exam",
+      "as_of": "2026-10-01",
+      "confidence": "published"
+     }
+    ]
+   }
   },
   {
    "id": "lima-hollow",
@@ -2643,7 +2711,8 @@
     "fixture-location",
     "fixture-model",
     "fixture-resort-site"
-   ]
+   ],
+   "events": null
   },
   {
    "id": "mike-dome",
@@ -2799,7 +2868,8 @@
     "fixture-ownership",
     "fixture-pass-site",
     "fixture-resort-site"
-   ]
+   ],
+   "events": null
   },
   {
    "id": "november-ramps",
@@ -2922,7 +2992,8 @@
     "fixture-location",
     "fixture-ownership",
     "fixture-resort-site"
-   ]
+   ],
+   "events": null
   }
  ]
 }

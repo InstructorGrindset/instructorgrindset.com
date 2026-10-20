@@ -130,8 +130,10 @@ export function addPreviewUnderlay(svg, underlay) {
  * keep (optional): the filter chips' predicate; resorts it rejects are left out, as on the WebGL map.
  * underlay (optional): the loaded underlay (underlay.js), drawn at once.
  * tone: 'map' (darkened, the default) or 'satellite' (config.basemap.tone).
+ * points (optional): EVENTS mode (events.js previewPoints), [{ lon, lat, color, r }] drawn in place of the clusters
+ * and resorts; an empty list draws the base only (events.json still loading).
  */
-export function drawPreview(container, index, view, padding, keep = null, underlay = null, tone = config.basemap.defaultTone) {
+export function drawPreview(container, index, view, padding, keep = null, underlay = null, tone = config.basemap.defaultTone, points = null) {
   const w = container.clientWidth; const hgt = container.clientHeight;
   if (!w || !hgt) return null;
   const { b, maxZoom } = viewFrame(index, view);
@@ -156,7 +158,7 @@ export function drawPreview(container, index, view, padding, keep = null, underl
   // Everything at its true place, Alaska included, as on the WebGL map. One path per cluster: fill then outline,
   // each at its own opacity, as the canvas drew them.
   const clusterGroup = el('g', { fill: C.cluster, stroke: C.cluster, 'fill-rule': 'evenodd', 'stroke-linejoin': 'miter' });
-  for (const c of index.clusters.values()) {
+  for (const c of points ? [] : index.clusters.values()) {
     if (c.fallback) continue;
     const g = c.geometry;
     if (!g) continue;
@@ -183,7 +185,12 @@ export function drawPreview(container, index, view, padding, keep = null, underl
   glow.append(merge);
   svg.append(glow);
   const dots = el('g', { filter: `url(#${glowId})` });
-  const list = [...index.resorts.values()].sort((a, b2) => (a.tier === 'A') - (b2.tier === 'A'));
+  const list = points ? [] : [...index.resorts.values()].sort((a, b2) => (a.tier === 'A') - (b2.tier === 'A'));
+  for (const p of points || []) {
+    const [x, y] = px(p.lon, p.lat);
+    if (x < -10 || y < -10 || x > w + 10 || y > hgt + 10) continue;
+    dots.append(el('circle', { cx: n1(x), cy: n1(y), r: n1(p.r), fill: p.color, stroke: bgColor, 'stroke-width': 1, 'fill-opacity': 0.95 }));
+  }
   for (const r of list) {
     if (keep && !keep(r)) continue;
     const [x, y] = px(r.lon, r.lat);

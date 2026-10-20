@@ -198,6 +198,66 @@ export const HousingSearch = z.object({
   })),
 }).nullish().catch(null).transform((v) => (v && (v.furnished_finder || v.tools.length) ? v : null));
 
+// ── Events (ROADMAP item 22; ARCHITECTURE "Events"). A bad item drops only that item; a bad block only the block. ──
+const WebUrl = z.string().regex(/^https?:\/\//, 'web link');
+const opt = (t) => t.nullish().catch(null).transform((v) => v ?? null);
+const SText = z.object({ value: z.string().min(1), ...Cited });
+const SUrl = z.object({ value: WebUrl, ...Cited });
+const SDate = z.object({ value: IsoDate, ...Cited });
+const OrgName = z.object({ name: z.string().min(1), url: opt(WebUrl), ...Cited });
+const Label = z.object({ id: z.string().min(1), label: z.string().min(1) });
+
+/** Resort.events: the events a resort hosts (the panel's "Events here"). */
+export const ResortEvents = z.object({
+  count: z.number().int().positive(),
+  items: keepValid(z.object({
+    id: Slug, name: z.string().min(1), discipline_label: z.string().nullish(),
+    start: opt(IsoDate), end: opt(IsoDate), season: opt(z.string()), published: z.boolean(),
+    season_long: z.boolean().nullish().transform((v) => Boolean(v)), timing: opt(z.string()),
+    source_id: opt(Slug), as_of: opt(IsoDate), confidence: opt(Confidence),
+  })),
+}).nullish().catch(null).transform((v) => (v && v.items.length ? v : null));
+
+export const EventVenue = z.object({
+  id: Slug, name: z.string().min(1), kind: z.string().min(1), state: opt(z.string().length(2)), country: opt(z.string().length(2)),
+  town: opt(z.string()), resort_id: opt(Slug), mapped: z.boolean(),
+  location: z.object({
+    lat: z.number().min(-90).max(90), lon: z.number().min(-180).max(180), precision: z.enum(['venue', 'town', 'region']),
+    source_id: Slug, as_of: opt(IsoDate), confidence: opt(Confidence), note: z.string().nullish(),
+  }),
+});
+
+export const EventRecord = z.object({
+  id: Slug, name: z.string().min(1), discipline: z.string().min(1), disciplines_also: strList, group: z.string().min(1),
+  levels: strList, venue_id: Slug,   // [] when no source says who can enter
+  series: opt(z.object({ id: Slug, name: z.string().min(1) })),
+  organizer: opt(OrgName), sanctioning: opt(OrgName), format: opt(SText),
+  edition_2026_27: opt(z.object({ start: IsoDate, end: opt(IsoDate), ...Cited })),
+  last_edition: opt(z.object({ season: z.string(), start: opt(IsoDate), end: opt(IsoDate), ...Cited })),
+  usual_timing: opt(SText), season_long: opt(z.object({ value: z.literal(true), ...Cited })),
+  signup: opt(z.object({
+    method: opt(z.string()), url: opt(SUrl), platform: opt(SText), opens: opt(SDate), deadline: opt(SDate),
+    fee_usd: opt(z.object({ value: z.number().nonnegative(), ...Cited })), requirements: opt(SText),
+  })),
+  website: opt(SUrl), results_url: opt(SUrl), calendar_url: opt(SUrl),
+  months: z.array(z.number().int().min(1).max(12)).nullish().transform((v) => v ?? []),
+  program: z.boolean().nullish().transform((v) => Boolean(v)),
+});
+
+/** data/build/events.json (pipeline/events.py), loaded only in EVENTS mode. */
+export const EventsFile = z.object({
+  ...Envelope,
+  season: z.object({ label: z.string(), start: IsoDate, end: IsoDate }),
+  groups: z.array(Label.extend({ color: z.string().regex(/^#[0-9a-fA-F]{6}$/), disciplines: z.array(Label) })).min(1),
+  levels: z.array(Label).min(1),
+  signup_methods: z.array(Label),
+  venue_kinds: z.array(Label),
+  month_chips: z.array(z.number().int().min(1).max(12)).min(1),
+  venues: keepValid(EventVenue),
+  events: keepValid(EventRecord),
+  calendars: keepValid(z.object({ id: Slug, name: z.string().min(1), discipline: z.string(), group: z.string(), region: z.string(), url: SUrl })),
+});
+
 export const Resort = z.object({
   id: Slug,
   name: z.string().min(1),
@@ -261,6 +321,7 @@ export const Resort = z.object({
   jobs: Jobs,
   passes: keepValid(PassMembership),
   housing_search: HousingSearch,
+  events: ResortEvents,
   housing_summary: z.object({
     site_count: z.number().int().nonnegative().nullish(),
     cheapest_rent_monthly_low: numOrNull,

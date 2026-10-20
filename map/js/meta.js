@@ -20,6 +20,7 @@ function titleName(index, resort) {
 }
 
 export function canonicalPath(index, view) {
+  if (view.level === 'events') return `${config.mapBase}events/`;
   const cluster = view.clusterId ? index.clusters.get(view.clusterId) : null;
   if (view.level === 'national' || !view.stateCode) return config.mapBase;
   if (view.level === 'state') return `${config.mapBase}${view.stateCode.toLowerCase()}/`;
@@ -34,6 +35,12 @@ export function metaFor(index, view) {
   const cluster = view.clusterId ? index.clusters.get(view.clusterId) : null;
   const resort = view.resortId ? index.resorts.get(view.resortId) : null;
   switch (view.level) {
+    case 'events':
+      // pipeline/routes.py events_meta
+      return {
+        title: `Snowsports Events and Competitions • ${BRAND}`,
+        description: 'Find snowsports races, competitions and instructor events across the United States, with dates, venues and how to sign up. Every detail links to its source.',
+      };
     case 'state': {
       const s = index.states.get(view.stateCode);
       return {

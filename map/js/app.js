@@ -8,9 +8,9 @@
 //    panel shows source links, and resorts.json is only prefetched (a resort or comparison view loads it at once).
 //    After the WebGL map loads: the full data, the recolor control and the state outlines.
 import { config, isPhone, savedTone } from './config.js';
-import { isFiltered, loadAll, loadStateOutlines, matchesFilter, NO_FILTER, postingsRaw, whenPainted } from './data.js';
+import { isFiltered, loadAll, loadOptional, loadStateOutlines, matchesFilter, NO_FILTER, postingsRaw, whenPainted } from './data.js';
 import { createRouter } from './router.js';
-import { createPanel, officialMapFile } from './panel.js';
+import { createPanel, isoDay, officialMapFile } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
 import { applyMeta } from './meta.js';
@@ -33,6 +33,10 @@ function todayText(d = new Date()) {
 /** [kind, name] for the sub bar: ['Resort', 'Vail'], ['National view', 'United States']. */
 function viewTitle(index, view) {
   switch (view.level) {
+    case 'events': {
+      const v = eventsApi && eventsApi.venueOf(view);
+      return ['Events', v ? v.name : 'United States'];
+    }
     case 'state': return ['State', index.states.get(view.stateCode).name];
     case 'cluster': return ['Cluster', index.clusters.get(view.clusterId).name];
     case 'resort': return ['Resort', index.resorts.get(view.resortId).name];
@@ -87,6 +91,9 @@ const els = {
   region: $('map-region'),
   link: $('map-link'),
   pill: $('hiring-pill'),
+  eventsPill: $('events-pill'),
+  mode: $('lp-mode'),
+  legend: $('map-legend'),
   live: $('feed-live'),
   viewTitle: $('view-title'),
   today: $('today-date'),
@@ -98,6 +105,7 @@ const els = {
 // controls, the hiring pulse, Color by, the heat legend, the detail layers) and the trail map dialog's.
 const LIVE_CSS = 'map-live.css?v=1';
 const TRAIL_CSS = 'trailmap.css?v=1';
+const EVENTS_CSS = 'events.css?v=1';   // EVENTS mode: the event panel, filters and calendar list
 const cssLoads = new Map();
 /** Add a stylesheet from map/css once; resolves when it has loaded (or failed). */
 function loadCss(name) {
@@ -149,12 +157,20 @@ function announce(text) {
 }
 
 let listView = null;
+let listOn = false;
+// EVENTS mode (ROADMAP item 22): events.js and events.json load only when the mode or an events link is used.
+let eventsMode = false;
+let eventsApi = null;
 function setListView(on) {
-  if (on && listView) listView.show();
+  listOn = on;
+  if (on && listView && !eventsMode) listView.show();
   document.body.classList.toggle('list-mode', on);
   els.listToggle.setAttribute('aria-pressed', String(on));
   els.listToggle.textContent = on ? 'Map view' : 'List view';
-  els.list.hidden = !on;
+  // In EVENTS mode the list view is the event calendar (events.js), once it has loaded.
+  els.listToggle.setAttribute('aria-controls', eventsMode && eventsApi && eventsApi.loaded ? 'events-list' : 'list-view');
+  els.list.hidden = !on || eventsMode;
+  if (eventsApi) eventsApi.showList(on && eventsMode);
   els.map.hidden = on;
   if (!on && mapCtl) requestAnimationFrame(() => { mapCtl.resize(); mapCtl.refit(); });
 }
@@ -180,6 +196,7 @@ function padding(view) {
 
 function summary(index, view) {
   switch (view.level) {
+    case 'events': return eventsApi && eventsApi.loaded ? eventsApi.summary(view) : 'Showing events.';
     case 'state': return `Showing ${index.states.get(view.stateCode).name}.`;
     case 'cluster': return `Showing the ${index.clusters.get(view.clusterId).name} cluster.`;
     case 'resort': return `Showing ${index.resorts.get(view.resortId).name}.`;
@@ -321,16 +338,75 @@ async function main() {
     onSiteSelect: (id) => mapCtl && mapCtl.selectSite(id),
     onShowHousing: (resortId, n) => showHousing(resortId, n),
     onSourcesNeeded: () => { if (idleReached) loadSources(); else sourcesWanted = true; },
+    renderEvents: (view, kit) => (eventsApi && eventsApi.loaded ? eventsApi.renderPanel(view, kit) : null),
   });
   const list = createListView(els.list, index);
   listView = list;
 
   // Source records for the panel's source links, and the full data (resort records too).
   const sourcesFailed = () => {
-    for (const el of els.content.querySelectorAll('.src-pending')) el.textContent = 'Source record pending';
+    for (const el of document.querySelectorAll('.src-pending')) el.textContent = 'Source record pending';
   };
-  const loadSources = () => index.loadSources().then(() => panel.fillSources()).catch(sourcesFailed);
-  const loadDetails = () => index.loadDetails().then(() => panel.fillSources()).catch(sourcesFailed);
+  const fillAll = () => { panel.fillSources(); if (eventsApi) eventsApi.fillSources(); };
+  const loadSources = () => index.loadSources().then(fillAll).catch(sourcesFailed);
+  const loadDetails = () => index.loadDetails().then(fillAll).catch(sourcesFailed);
+
+  // ── EVENTS mode ──
+  let lastResortsView = { level: 'national' };
+  let eventsPromise = null;
+  const ensureEvents = () => (eventsPromise ||= Promise.all([import('./events.js'), loadCss(EVENTS_CSS)]).then(([m]) => {
+    eventsApi = m.createEvents({
+      index, layersBox: els.layersBox, legend: els.legend, stage: els.stage, announce,
+      current: () => router.current, kit: () => panel.kit(),
+      onFilter: () => onViewChange(), onList: (on) => setListView(on),
+    });
+    return eventsApi.ready;
+  }).then((api) => {
+    if (mapCtl) api.attachMap(mapCtl);
+    return api;
+  }).catch((err) => { eventsPromise = null; throw err; }));
+  /** The Layers panel switch and the header pill follow the mode. */
+  const syncModeControls = () => {
+    for (const input of els.mode ? els.mode.querySelectorAll('input[name="map-mode"]') : []) input.checked = (input.value === 'events') === eventsMode;
+    if (els.eventsPill) els.eventsPill.setAttribute('aria-pressed', String(eventsMode));
+  };
+  function setEventsMode(on) {
+    if (on === eventsMode) return;
+    eventsMode = on;
+    document.body.classList.toggle('events-mode', on);
+    syncModeControls();
+    if (eventsApi) eventsApi.setActive(on);
+    else if (mapCtl) mapCtl.setMode(on ? 'events' : 'resorts');
+    if (listOn) setListView(true);
+  }
+  /** Render an events view once events.json is in (the panel shows "Loading events" or the stub's list until then). */
+  function showEventsView(view, { initial = false, focus = true } = {}) {
+    ensureEvents().then((api) => {
+      const cur = router.current;
+      if (!cur || cur.level !== 'events' || cur !== view) return;
+      api.setActive(true);
+      const headingEl = panel.render(cur);
+      api.select(cur);
+      if (listOn) setListView(true);
+      setViewTitle(cur);
+      announce(summary(index, cur));
+      if (mapCtl) mapCtl.show(cur, { animate: !initial });
+      else onViewChange();
+      setEventsCount(api.upcomingCount(), api.model.events.length);
+      if (cur.eventId && api.focusEvent(cur.eventId, { focus: focus && !initial })) return;
+      if (focus && !initial && headingEl) headingEl.focus({ preventScroll: true });
+    }).catch((err) => {
+      console.warn('[map] events', err.message);
+      announce('The events could not load. Try reloading the page.');
+    });
+  }
+  /** The header pill: events of the season still ahead by the viewer's date; shown once some event exists. */
+  function setEventsCount(n, total) {
+    if (!els.eventsPill || !total) return;
+    els.eventsPill.querySelector('.mh-count').textContent = String(n);
+    els.eventsPill.title = `${n} events with dates still ahead this season, ${total} events in all. Shows the events map.`;
+    els.eventsPill.hidden = false;
+  }
 
   // The rest of the header chrome (controls.js: region menu, Link, layers sheet, tone buttons, LIVE) loads after the
   // first paint, so the first paint needs no request for it. Until then these stand in; the controls are shown with
@@ -358,6 +434,9 @@ async function main() {
     return m;
   }).catch((err) => { console.warn('[map] controls', err.message); return null; });
   router = createRouter(index, (view, { initial, fellBack }) => {
+    const toEvents = view.level === 'events';
+    if (!toEvents) lastResortsView = view;
+    setEventsMode(toEvents);
     if (trailFor && (view.level !== 'resort' || view.resortId !== trailFor.id)) setTrailControl(null);
     if (trail) trail.close();
     if (detailFor && (view.level !== 'resort' || view.resortId !== detailFor)) {
@@ -372,10 +451,8 @@ async function main() {
     applyMeta(index, view);
     list.highlight(view);
     region.update(view);
-    if (els.viewTitle) {
-      const [kind, name] = viewTitle(index, view);
-      els.viewTitle.replaceChildren(h('span', { class: 'mh-kind' }, kind), h('span', { class: 'mh-name' }, name));
-    }
+    setViewTitle(view);
+    if (toEvents && eventsApi && eventsApi.loaded) eventsApi.select(view);
     if (mapCtl) {
       if (!isPhone()) mapCtl.resize();
       mapCtl.show(view, { animate: !initial });
@@ -390,9 +467,15 @@ async function main() {
       // A region picked in the phone layers sheet shows the map and the panel it opens.
       if (isPhone() && layersSheet.open) layersSheet.set(false, { focus: false });
       sheet.reveal();
-      if (headingEl) headingEl.focus({ preventScroll: true });
+      if (toEvents && view.eventId && eventsApi && eventsApi.loaded && eventsApi.focusEvent(view.eventId)) { /* the event card has focus */ } else if (headingEl) headingEl.focus({ preventScroll: true });
     }
+    if (toEvents && !(eventsApi && eventsApi.loaded)) showEventsView(view, { initial });
   });
+  function setViewTitle(view) {
+    if (!els.viewTitle) return;
+    const [kind, name] = viewTitle(index, view);
+    els.viewTitle.replaceChildren(h('span', { class: 'mh-kind' }, kind), h('span', { class: 'mh-name' }, name));
+  }
 
   // In-app links: History API navigation, real hrefs for new tabs and crawlers.
   document.addEventListener('click', (e) => {
@@ -511,9 +594,21 @@ async function main() {
   if (els.pill) {
     els.pill.addEventListener('click', () => {
       if (disabled(els.pill) && !filter.hiring) { announce(els.pill.title); return; }
+      // From EVENTS mode the pill goes back to the resorts, hiring now.
+      if (eventsMode) { router.go(lastResortsView); pickHiring(true); return; }
       pickHiring(!filter.hiring);
     });
   }
+  // RESORTS / EVENTS: the switch at the top of the Layers panel and the header EVENTS pill.
+  const goMode = (events) => router.go(events ? { level: 'events' } : lastResortsView);
+  if (els.mode) {
+    els.mode.addEventListener('change', (e) => {
+      const input = e.target.closest('input[name="map-mode"]');
+      if (input && input.checked) goMode(input.value === 'events');
+    });
+    els.mode.hidden = false;
+  }
+  if (els.eventsPill) els.eventsPill.addEventListener('click', () => goMode(!eventsMode));
   // Phones: the layers panel is a sheet behind the LAYERS button; narrow desktops fold the layers list.
   if (els.layersBox && !isPhone() && els.stage.clientWidth < config.layersPanel.besideFrom) els.layersBox.open = false;
   if (els.layers) els.layers.hidden = false;
@@ -565,8 +660,10 @@ async function main() {
   let mapPrefetched = false;
   const drawFrame = () => {
     if (mapCtl || els.map.hidden || !router.current) return;
-    const keep = isFiltered(filter) ? (r) => matchesFilter(r, filter) : null;
-    const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
+    const keep = !eventsMode && isFiltered(filter) ? (r) => matchesFilter(r, filter) : null;
+    // EVENTS mode draws the venue dots the event filters keep (none until events.json is in).
+    const points = eventsMode ? (eventsApi && eventsApi.loaded ? eventsApi.previewPoints() : []) : null;
+    const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone, points); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
     if (preview) preview.remove();
     preview = pic;
     if (preview) els.map.insertBefore(preview, startBtn);
@@ -580,7 +677,8 @@ async function main() {
   els.map.classList.add('map-waiting');
   drawFrame();
   const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false,
-    get layersSheet() { return layersSheet; }, get chromeReady() { return chromeReady; } };
+    get layersSheet() { return layersSheet; }, get chromeReady() { return chromeReady; },
+    get events() { return eventsApi; }, get eventsMode() { return eventsMode; } };
   window.__careerMap = state;
   onViewChange = () => { if (!mapCtl) drawFrame(); };
   let resizeTimer = null;
@@ -619,6 +717,12 @@ async function main() {
     if (filter.hiring && index.hiringIds.join() !== before) { applyFilter(); onViewChange(); }
   }).catch((err) => console.warn('[map] hiring', err.message)));
   afterLoad(() => postingsRaw().then((f) => chrome.then((m) => m && m.showFeedTime(els.live, f && f.fetched_at))).catch(() => {}));
+  // The EVENTS pill: a few hundred bytes (events-summary.json) at idle; events.json itself waits for the mode.
+  afterLoad(() => loadOptional('events-summary.json').then((s) => {
+    if (!s || !Array.isArray(s.dated_ends) || !Number.isInteger(s.events) || (eventsApi && eventsApi.loaded)) return;
+    const today = isoDay();
+    setEventsCount(s.dated_ends.filter((d) => typeof d === 'string' && d >= today).length, s.events);
+  }));
 
   let starting = null;
   function startMap() {
@@ -649,6 +753,7 @@ async function main() {
         onPick(target, current) {
           const cur = current || { level: 'national' };
           if (target.kind === 'housing') { panel.selectSite(target.id); return; }
+          if (target.kind === 'venue') { router.go({ level: 'events', venueId: target.id }); return; }
           if (target.kind === 'state') {
             if (cur.stateCode === target.id && cur.level === 'state') return;
             router.go({ level: 'state', stateCode: target.id });
@@ -678,6 +783,8 @@ async function main() {
     }
 
     state.mapCtl = mapCtl;
+    if (eventsMode) mapCtl.setMode('events');
+    if (eventsApi && eventsApi.loaded) eventsApi.attachMap(mapCtl);
     if (isFiltered(filter)) mapCtl.setFilter(filter, onlyIds(filter));
     if (index.hiringIds) mapCtl.setHiring(index.hiringIds);
     if (detailFor) applyDetail();

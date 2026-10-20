@@ -1,0 +1,194 @@
+# SYNTHETIC TEST FIXTURE for the map's EVENTS mode (tests only; never copied to data/). Fictional events, venues and
+# organizers at the fictional fixture resorts of make_fixtures.py; every source points at example.com.
+# make_fixtures.py compiles it with pipeline/events.py into tests/map/fixtures/events.json and events-summary.json.
+# The browser test runs at 2026-10-13: Sign up is open for the rail jam and the loppet, opens later for the exam.
+batch: events-map-fixture
+researched_date: 2026-10-01
+sources:
+  - {id: fixture-ev-cup, url: https://example.com/fixture/events/cup, title: "Synthetic fixture: race series page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-jam, url: https://example.com/fixture/events/rail-jam, title: "Synthetic fixture: rail jam page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-league, url: https://example.com/fixture/events/league, title: "Synthetic fixture: race league page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-skimo, url: https://example.com/fixture/events/skimo, title: "Synthetic fixture: skimo race page", accessed_date: 2026-10-01, note: From a search result for this page; page not opened.}
+  - {id: fixture-ev-loppet, url: https://example.com/fixture/events/loppet, title: "Synthetic fixture: loppet page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-loppet-reg, url: https://example.com/fixture/events/loppet/register, title: "Synthetic fixture: loppet registration", accessed_date: 2026-10-01}
+  - {id: fixture-ev-town, url: https://example.com/fixture/places/lake-town, title: "Synthetic fixture: town center", accessed_date: 2026-10-01}
+  - {id: fixture-ev-jump, url: https://example.com/fixture/events/jump, title: "Synthetic fixture: ski jump page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-exam, url: https://example.com/fixture/events/exam, title: "Synthetic fixture: instructor exam page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-interski, url: https://example.com/fixture/events/interski, title: "Synthetic fixture: Interski page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-sled, url: https://example.com/fixture/events/sled, title: "Synthetic fixture: sled dog race listing", accessed_date: 2026-10-01}
+  - {id: fixture-ev-banked, url: https://example.com/fixture/events/banked, title: "Synthetic fixture: banked slalom page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-fun, url: https://example.com/fixture/events/fun, title: "Synthetic fixture: fun race page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-clinic, url: https://example.com/fixture/events/clinic, title: "Synthetic fixture: spring clinic page", accessed_date: 2026-10-01}
+  - {id: fixture-ev-calendar, url: https://example.com/fixture/events/calendar, title: "Synthetic fixture: events calendar", accessed_date: 2026-10-01}
+venues:
+  - id: fixture-lake-trail
+    name: Fixture Lake Trail
+    kind: trail
+    state: MN
+    town: Fixture Lake Town
+    location: {lat: 47.25, lon: -91.40, precision: town, source_id: fixture-ev-town, as_of: 2026-10-01, confidence: reported, note: Town center from the synthetic town page.}
+  - id: fixture-jump-hill
+    name: Fixture Jump Hill
+    kind: jump_complex
+    state: WI
+    town: Fixture Hollow
+    location: {lat: 43.66, lon: -90.86, precision: venue, source_id: fixture-ev-jump, as_of: 2026-10-01, confidence: published}
+  - id: fixture-pass-town
+    name: Fixture Pass
+    kind: town
+    state: MT
+    town: Fixture Pass
+    location: {lat: 47.40, lon: -110.20, precision: region, source_id: fixture-ev-sled, as_of: 2026-10-01, confidence: estimated}
+  - id: fixture-abroad-hall
+    name: Fixture Congress Hall
+    kind: other
+    state: null
+    country: "NO"
+    town: Fixture Fjord
+    location: {lat: 61.10, lon: 10.45, precision: town, source_id: fixture-ev-interski, as_of: 2026-10-01, confidence: published}
+events:
+  - id: alpha-peak-cup
+    name: Alpha Peak Speed Cup
+    series: {id: fixture-speed-cup, name: Fixture Speed Cup}
+    discipline: alpine_racing
+    levels: [elite]
+    venue: {resort_id: alpha-peak}
+    organizer: {name: Fixture Ski Federation, url: https://example.com/fixture/federation, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+    sanctioning: {name: Fixture International Ski Body, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+    format: {value: Downhill and super G on the fixture race course, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+    edition_2026_27: {start: 2026-12-05, end: 2026-12-06, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: qualification
+      url: {value: https://example.com/fixture/events/cup, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+      requirements: {value: A place on a fixture national team quota, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+    website: {value: https://example.com/fixture/events/cup, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+    results_url: {value: https://example.com/fixture/events/cup/results, source_id: fixture-ev-cup, as_of: 2026-10-01, confidence: published}
+  - id: alpha-peak-rail-jam
+    name: Alpha Peak Night Rail Jam
+    discipline: rail_jam
+    levels: [open_amateur, junior]
+    venue: {resort_id: alpha-peak}
+    edition_2026_27: {start: 2027-01-16, end: 2027-01-16, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: online_registration
+      url: {value: https://example.com/fixture/events/rail-jam/register, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
+      platform: {value: Fixture Reg, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
+      opens: {value: 2026-10-01, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
+      deadline: {value: 2027-01-10, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
+      fee_usd: {value: 25, note: Adult entry, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
+    website: {value: https://example.com/fixture/events/rail-jam, source_id: fixture-ev-jam, as_of: 2026-10-01, confidence: published}
+  - id: alpha-peak-league
+    name: Alpha Peak Thursday Race League
+    discipline: masters_racing
+    levels: [masters, open_amateur]
+    venue: {resort_id: alpha-peak}
+    usual_timing: {value: "Thursday nights, January to March", source_id: fixture-ev-league, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: at_venue
+    website: {value: https://example.com/fixture/events/league, source_id: fixture-ev-league, as_of: 2026-10-01, confidence: published}
+  - id: bravo-bowl-skimo
+    name: Bravo Bowl Skimo Sprint
+    discipline: skimo
+    levels: [open_amateur]
+    venue: {resort_id: bravo-bowl}
+    last_edition: {start: 2026-03-07, end: 2026-03-07, season: 2025/26, source_id: fixture-ev-skimo, as_of: 2026-10-01, confidence: estimated, note: From a search result for this page; page not opened.}
+    usual_timing: {value: Early March, source_id: fixture-ev-skimo, as_of: 2026-10-01, confidence: estimated}
+    website: {value: https://example.com/fixture/events/skimo, source_id: fixture-ev-skimo, as_of: 2026-10-01, confidence: estimated}
+  - id: fixture-lake-loppet
+    name: Fixture Lake Loppet
+    discipline: ski_marathon
+    disciplines_also: [cross_country]
+    levels: [open_amateur, elite]
+    venue: {venue_id: fixture-lake-trail}
+    organizer: {name: Fixture Lake Ski Foundation, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+    format: {value: 42 km classic and skate races across the fixture lake, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+    edition_2026_27: {start: 2027-02-20, end: 2027-02-21, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: online_registration
+      url: {value: https://example.com/fixture/events/loppet/register, source_id: fixture-ev-loppet-reg, as_of: 2026-10-01, confidence: published}
+      platform: {value: Fixture Reg, source_id: fixture-ev-loppet-reg, as_of: 2026-10-01, confidence: published}
+      opens: {value: 2026-09-01, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+      deadline: {value: 2027-02-10, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+      fee_usd: {value: 95, note: "42 km skate, early rate", source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+      requirements: {value: Racers 18 or older for the 42 km, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+    website: {value: https://example.com/fixture/events/loppet, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+    results_url: {value: https://example.com/fixture/events/loppet/results, source_id: fixture-ev-loppet, as_of: 2026-10-01, confidence: published}
+    calendar_url: {value: https://example.com/fixture/events/calendar, source_id: fixture-ev-calendar, as_of: 2026-10-01, confidence: published}
+  - id: fixture-hill-jump
+    name: Fixture Hollow Ski Jump
+    discipline: ski_jumping
+    levels: [junior, elite]
+    venue: {venue_id: fixture-jump-hill}
+    organizer: {name: Fixture Hollow Ski Club, source_id: fixture-ev-jump, as_of: 2026-10-01, confidence: published}
+    edition_2026_27: {start: 2027-01-30, end: 2027-01-31, source_id: fixture-ev-jump, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: at_venue
+    website: {value: https://example.com/fixture/events/jump, source_id: fixture-ev-jump, as_of: 2026-10-01, confidence: published}
+  - id: kilo-notch-exam
+    name: Kilo Notch Level 2 Exam
+    discipline: psia_aasi_exam
+    levels: [instructor]
+    venue: {resort_id: kilo-notch}
+    organizer: {name: Fixture Snowsports Instructors Region, source_id: fixture-ev-exam, as_of: 2026-10-01, confidence: published}
+    edition_2026_27: {start: 2026-12-12, end: 2026-12-13, source_id: fixture-ev-exam, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: membership_then_online
+      url: {value: https://example.com/fixture/events/exam/register, source_id: fixture-ev-exam, as_of: 2026-10-01, confidence: published}
+      opens: {value: 2026-10-20, source_id: fixture-ev-exam, as_of: 2026-10-01, confidence: published}
+      deadline: {value: 2026-11-30, source_id: fixture-ev-exam, as_of: 2026-10-01, confidence: published}
+    website: {value: https://example.com/fixture/events/exam, source_id: fixture-ev-exam, as_of: 2026-10-01, confidence: published}
+  - id: fixture-interski
+    name: Fixture Interski Congress
+    discipline: interski
+    levels: [instructor]
+    venue: {venue_id: fixture-abroad-hall}
+    edition_2026_27: {start: 2027-03-15, end: 2027-03-20, source_id: fixture-ev-interski, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: qualification
+      requirements: {value: Selection to the fixture national demonstration team, source_id: fixture-ev-interski, as_of: 2026-10-01, confidence: published}
+    website: {value: https://example.com/fixture/events/interski, source_id: fixture-ev-interski, as_of: 2026-10-01, confidence: published}
+  - id: fixture-pass-sled-race
+    name: Fixture Pass Sled Dog Race
+    discipline: sled_dog
+    levels: [elite, open_amateur]
+    venue: {venue_id: fixture-pass-town}
+    edition_2026_27: {start: 2027-03-06, end: null, source_id: fixture-ev-sled, as_of: 2026-10-01, confidence: estimated, note: End date not seen.}
+  - id: foxtrot-basin-banked
+    name: Foxtrot Basin Banked Slalom
+    discipline: banked_slalom
+    levels: [open_amateur]
+    venue: {resort_id: foxtrot-basin}
+    edition_2026_27: {start: 2027-04-10, end: 2027-04-11, source_id: fixture-ev-banked, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: lottery
+      url: {value: https://example.com/fixture/events/banked/lottery, source_id: fixture-ev-banked, as_of: 2026-10-01, confidence: published}
+      opens: {value: 2027-01-05, source_id: fixture-ev-banked, as_of: 2026-10-01, confidence: published}
+    website: {value: https://example.com/fixture/events/banked, source_id: fixture-ev-banked, as_of: 2026-10-01, confidence: published}
+  - id: golf-canyon-fun-race
+    name: Golf Canyon Costume Fun Race
+    discipline: fun_race
+    levels: []
+    venue: {resort_id: golf-canyon}
+    edition_2026_27: {start: 2027-04-03, end: 2027-04-03, source_id: fixture-ev-fun, as_of: 2026-10-01, confidence: estimated}
+    website: {value: https://example.com/fixture/events/fun, source_id: fixture-ev-fun, as_of: 2026-10-01, confidence: estimated}
+  - id: hotel-lake-spring-clinic
+    name: Hotel Lake Spring Clinic
+    discipline: psia_aasi_clinic
+    levels: [instructor]
+    venue: {resort_id: hotel-lake}
+    edition_2026_27: {start: 2027-05-15, end: 2027-05-16, source_id: fixture-ev-clinic, as_of: 2026-10-01, confidence: published}
+    signup:
+      method: membership_then_online
+      url: {value: https://example.com/fixture/events/clinic, source_id: fixture-ev-clinic, as_of: 2026-10-01, confidence: published}
+    website: {value: https://example.com/fixture/events/clinic, source_id: fixture-ev-clinic, as_of: 2026-10-01, confidence: published}
+calendars:
+  - id: fixture-alpine-calendar
+    name: Fixture alpine events calendar
+    discipline: alpine_racing
+    region: national
+    url: {value: https://example.com/fixture/events/calendar, source_id: fixture-ev-calendar, as_of: 2026-10-01, confidence: published}
+  - id: fixture-co-nordic-calendar
+    name: Fixture Colorado nordic calendar
+    discipline: cross_country
+    region: CO
+    url: {value: https://example.com/fixture/events/calendar/nordic, source_id: fixture-ev-calendar, as_of: 2026-10-01, confidence: estimated}

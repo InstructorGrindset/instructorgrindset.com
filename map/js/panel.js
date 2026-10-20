@@ -20,6 +20,13 @@ function charts() {
 }
 function destroyCharts() { if (chartsMod) chartsMod.destroyCharts(); }
 
+// "Events here" (eventshere.js) loads the first time a resort with events renders.
+let eventsHerePromise = null;
+function eventsHereModule() {
+  if (!eventsHerePromise) eventsHerePromise = import('./eventshere.js').catch((err) => { eventsHerePromise = null; throw err; });
+  return eventsHerePromise;
+}
+
 // The Furnished Finder link and the housing search tools (housinglinks.js) load on the first resort view.
 let housingLinksPromise = null;
 function housingLinks() {
@@ -84,6 +91,10 @@ export function officialMapFile(r) {
   return null;
 }
 
+const pad2 = (n) => String(n).padStart(2, '0');
+/** The viewer's date as YYYY-MM-DD (local clock). */
+export function isoDay(d = new Date()) { return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`; }
+
 export function badge(confidence) {
   return h('span', { class: `badge badge-${confidence}`, title: CONFIDENCE_HELP[confidence] }, CONFIDENCE_LABEL[confidence] || confidence);
 }
@@ -94,7 +105,7 @@ function navLink(view, attrs, ...children) {
 
 export function createPanel(root, index, {
   onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {}, onSourcesNeeded = () => {},
-  onShowHousing = null,
+  onShowHousing = null, renderEvents = null,
 }) {
   let token = 0;
   let siteButtons = new Map();
@@ -374,6 +385,7 @@ export function createPanel(root, index, {
     ], r.editorial.source_ids, r.editorial.reviewed_date));
     out.push(careerSection(r));
     out.push(jobsSection(r, linkCtx()));
+    out.push(eventsHere(r, my));
     out.push(section('Operation size', h('dl', { class: 'facts' },
       fact('Skiable acres', r.size.acres, fmt.int),
       fact('Vertical drop', r.size.vertical_ft, fmt.ft),
@@ -445,6 +457,19 @@ export function createPanel(root, index, {
         m.note ? h('span', { class: 'fact-note' }, m.note) : null,
         h('span', { class: 'fact-meta' }, `${meta.join(' · ')} · `, sourceLink(m.source_id))));
     }))));
+  }
+
+  /** "Events here" (ROADMAP item 22; eventshere.js, loaded the first time a resort with events renders). */
+  function eventsHere(r, my) {
+    if (!r.events || !r.events.items || !r.events.items.length) return null;
+    const box = section('Events here', h('p', { class: 'loading' }, 'Loading events'));
+    box.classList.add('events-here');
+    eventsHereModule().then((m) => {
+      if (my !== token || !box.isConnected) return;
+      const el = m.eventsHere(r, kit(), index.definitions);
+      if (el) box.replaceWith(el); else box.remove();
+    }).catch(() => { if (box.isConnected) box.remove(); });
+    return box;
   }
 
   // ── Career (Phase 4) ──
@@ -976,6 +1001,12 @@ export function createPanel(root, index, {
     for (const el of root.querySelectorAll('.src-pending')) el.replaceWith(sourceLink(el.dataset.src));
   }
 
+  /** The panel's building blocks for events.js, so event facts render exactly as resort facts do. */
+  function kit() {
+    const my = token;
+    return { badge, sourceLink, sourcedValue, fact, section, heading, footer, current: () => my === token };
+  }
+
   let rendered = false;
   const api = {
     /** Render a view. Returns the heading element. */
@@ -997,6 +1028,20 @@ export function createPanel(root, index, {
       destroyCharts();
       clear(root);
       let body;
+      if (view.level === 'events') {
+        // EVENTS mode: events.js renders the panel. Until it has loaded, a route stub keeps its prerendered list.
+        const pre = first && root.querySelector('#panel-heading');
+        body = renderEvents ? renderEvents(view, kit()) : null;
+        if (!body && pre) {
+          root.setAttribute('aria-busy', 'true');
+          return pre;
+        }
+        destroyCharts();
+        clear(root);
+        root.append(...(body || [...heading('Events', 'Events and competitions'), h('p', { class: 'loading' }, 'Loading events')]).flat().filter(Boolean), footer());
+        if (!body) root.setAttribute('aria-busy', 'true');
+        return root.querySelector('#panel-heading');
+      }
       switch (view.level) {
         case 'state': body = state(view); break;
         case 'cluster': body = cluster(view); break;
@@ -1010,6 +1055,7 @@ export function createPanel(root, index, {
     /** Select a housing site from the map. */
     selectSite(id) { selectSite(id, { scroll: true }); },
     fillSources,
+    kit,
     renderError(message) {
       destroyCharts();
       clear(root);

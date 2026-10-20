@@ -672,6 +672,28 @@ def write_heat_fixture(cfg, resorts, outlines):
     heat_lucrativeness.write_lucrativeness(out_dir, resorts=resorts, outlines=outlines, heat=h, generated_at=GENERATED_AT)
 
 
+def events_fixture(resorts, cfg):
+    """events.json, events-summary.json and Resort.events from tests/map/events_fixture.yaml, compiled by the real
+    pipeline/events.py against the fixture resorts. Returns (compiled, by_resort, sources)."""
+    import shutil  # noqa: PLC0415
+    import tempfile  # noqa: PLC0415
+    from pipeline import events as ev  # noqa: PLC0415
+    from pipeline.sources import SourceRegistry  # noqa: PLC0415
+    tmp = Path(tempfile.mkdtemp())
+    try:
+        (tmp / "events").mkdir()
+        shutil.copy(Path(__file__).parent / "events_fixture.yaml", tmp / "events" / "fixture.yaml")
+        places = {r["id"]: ev.ResortPlace(r["name"], r["state"], r["lat"], r["lon"], r["location_source_id"]) for r in resorts}
+        registry = SourceRegistry()
+        data, errors, warnings = ev.load_events(tmp, registry, places, cfg.definitions.events)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    if errors or warnings:
+        raise SystemExit(f"events fixture: {errors + warnings}")
+    compiled = ev.compile_events(data, places, cfg.definitions.events, {"version": 1, "generated_at": GENERATED_AT})
+    return compiled, ev.resort_events(data, cfg.definitions.events), [s.model_dump(mode="json", exclude_none=True) for s in registry.sorted()]
+
+
 def write(name, data):
     path = OUT / name
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -691,6 +713,13 @@ def main():
                                 "source": "Subset of data/build/us-states.geojson for tests", "features": feats})
 
     resorts = [resort_record(r) for r in RESORTS]
+    sys.path.insert(0, str(REPO))
+    from pipeline.config import load_config  # noqa: PLC0415
+    events, by_resort, event_sources = events_fixture(resorts, load_config(REPO / "config"))
+    for r in resorts:
+        r["events"] = by_resort.get(r["id"])
+        if r["events"]:
+            r["sources"] = sorted(set(r["sources"]) | {i["source_id"] for i in r["events"]["items"] if i.get("source_id")})
     write("resorts.json", {"version": 1, "generated_at": GENERATED_AT, "resorts": resorts})
     write("resorts.geojson", {"type": "FeatureCollection", "version": 1, "generated_at": GENERATED_AT, "features": [
         {"type": "Feature", "geometry": {"type": "Point", "coordinates": [r["lon"], r["lat"]]},
@@ -722,9 +751,8 @@ def main():
                        "cluster_ids": [cid for cid, (_, s) in CLUSTERS.items() if code in s],
                        "resort_count": sum(r["state"] == code for r in resorts)})
     write("states.json", {"version": 1, "generated_at": GENERATED_AT, "states": states})
-    write("sources.json", {"version": 1, "generated_at": GENERATED_AT, "sources": SOURCES})
-    sys.path.insert(0, str(REPO))
-    from pipeline.config import load_config  # noqa: PLC0415
+    write("sources.json", {"version": 1, "generated_at": GENERATED_AT, "sources": SOURCES + event_sources})
+    from pipeline import events as events_mod  # noqa: PLC0415
     from pipeline.build import display_definitions  # noqa: PLC0415
     cfg = load_config(REPO / "config")
     write("definitions.json", {"version": 1, "generated_at": GENERATED_AT,
@@ -735,7 +763,11 @@ def main():
                                "display": {"priority": ["published", "reported", "estimated"]},
                                "reports": {"aggregation_min": 3}, "staleness": {"max_age_months": 18},
                                # Synthetic endpoint; the browser test intercepts it. Production keeps null until it exists.
-                               "submissions": {"endpoint": "https://reports.example.test/submit"}})
+                               "submissions": {"endpoint": "https://reports.example.test/submit"},
+                               "events": display_definitions(cfg)["events"]})
+    # EVENTS mode (ROADMAP item 22), compact like the real build.
+    (OUT / "events.json").write_text(json.dumps(events, ensure_ascii=False, separators=(",", ":")) + "\n")
+    (OUT / "events-summary.json").write_text(json.dumps(events_mod.summary(events), ensure_ascii=False, separators=(",", ":")) + "\n")
     for r in resorts:
         if r["detail_available"]:
             write(f"detail/{r['id']}.json", detail_record(r))

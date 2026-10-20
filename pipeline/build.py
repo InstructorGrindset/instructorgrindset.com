@@ -4,7 +4,7 @@
     python -m pipeline.build ...
 
 Outputs: resorts.json, resorts.geojson, clusters.geojson, states.json, definitions.json,
-sources.json, us-states.geojson (when missing, via scripts/build-states.mjs),
+sources.json, events.json and events-summary.json (pipeline/events.py), us-states.geojson (when missing, via scripts/build-states.mjs),
 and the Tier A review document docs/map/tier-a-draft.md.
 """
 from __future__ import annotations
@@ -43,6 +43,7 @@ from pipeline.trailmaps_official import as_output as official_trailmap_output, l
 from pipeline import jobs as jobs_mod  # noqa: E402
 from pipeline.webcams import as_output as webcams_output, load_webcams  # noqa: E402
 from pipeline import passes as passes_mod  # noqa: E402
+from pipeline import events as events_mod  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing  # noqa: E402
 from pipeline import housing_search as housing_search_mod  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
@@ -365,6 +366,16 @@ def build(
     # Median rent figures across sources (owner decision 2026-10-14), the first lucrativeness rent step.
     median_rents, median_errors = rent_median_mod.load_median_rent(raw_dir, registry, known_ids, rel)
     errors += median_errors
+    # Events and competitions (ROADMAP item 22): their sources join the registry, so source links work in the panel.
+    events_cfg = cfg.definitions.events
+    places = {d["id"]: events_mod.ResortPlace(d["name"], d["state"], d["lat"], d["lon"], d["location_source_id"])
+              for d in drafts}
+    events_data = events_mod.EventsData()
+    if events_cfg is not None:
+        events_data, events_errors, events_warnings = events_mod.load_events(raw_dir, registry, places, events_cfg, rel)
+        errors += events_errors
+        warnings += events_warnings
+    resort_events = events_mod.resort_events(events_data, events_cfg) if events_cfg is not None else {}
 
     if errors:
         raise BuildError(errors)
@@ -395,6 +406,7 @@ def build(
                                                                        hs_cfg.max_tools)
         _attach_career(d, career_data, cfg, today, warnings, rent_block)
         d["detail_available"], d["housing_summary"], d["trailmap_available"] = False, None, False
+        d["events"] = resort_events.get(d["id"])
         if d["tier"] == "A":
             lift_fc = lifts_mod.lifts_for(p5.lift_features, p5.area_ids.get(d["id"], []))
             tm = runs_mod.trailmap(d["id"], p5.run_features, p5.area_ids.get(d["id"], []), lift_fc, header)
@@ -512,6 +524,8 @@ def build(
     _write_json(out_dir / "states.json", {**header, "states": [s.model_dump(mode="json") for s in states]})
     _write_json(out_dir / "sources.json", {**header, "sources": [s.model_dump(mode="json") for s in registry.sorted()]})
     _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings, snotel_snow, dems)
+    if events_cfg is not None:
+        events_mod.write(out_dir, events_mod.compile_events(events_data, places, events_cfg, header), _write_json)
 
 
     result = BuildResult(out_dir, resorts, clusters, states, len(registry), warnings, inputs)
@@ -648,6 +662,9 @@ def display_definitions(cfg: Config) -> dict:
         "reports": {"aggregation_min": d.reports.aggregation_min},
         "staleness": {"max_age_months": d.staleness.max_age_months},
         "submissions": {"endpoint": d.submissions.endpoint},
+        **({"events": {"season": {"label": d.events.season.label, "start": d.events.season.start.isoformat(),
+                                  "end": d.events.season.end.isoformat()},
+                       "resort_panel_max": d.events.resort_panel_max}} if d.events is not None else {}),
     }
 
 
@@ -930,7 +947,7 @@ def _refs(d: dict) -> set[str]:
                 walk(v)
 
     for key in ("tier_a_criteria", "owner", "size", "elevation", "snow", "access", "official_trailmap", "webcams", "jobs",
-                "passes", "season", "terrain", "career", "editorial", "housing_search"):
+                "passes", "season", "terrain", "career", "editorial", "housing_search", "events"):
         walk(d.get(key))
     return found
 

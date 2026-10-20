@@ -1,0 +1,123 @@
+# SYNTHETIC TEST FIXTURE (tests only, never copied to data/). Fictional events, venues and organizers; every source
+# points at example.org. Resorts fixture-peak (CO) and fixture-basin (UT) come from tests/pipeline/fixtures/raw.
+batch: events-fixture
+researched_date: 2026-10-17
+sources:
+  - {id: ev-fixture-marathon-page, url: https://example.org/events/marathon, title: Fixture marathon page, accessed_date: 2026-10-17}
+  - {id: ev-fixture-marathon-search, url: https://example.org/events/marathon/register, title: Fixture marathon registration, accessed_date: 2026-10-17, note: From a search result for this page; page not opened.}
+  - {id: ev-fixture-town-wiki, url: https://example.org/wiki/Fixture_Town, title: Fixture Town (wiki), accessed_date: 2026-10-17}
+  - {id: ev-fixture-slalom-page, url: https://example.org/events/slalom, title: Fixture banked slalom page, accessed_date: 2026-10-17}
+  - {id: ev-fixture-interski-page, url: https://example.org/events/interski, title: Fixture Interski page, accessed_date: 2026-10-17}
+  - {id: ev-fixture-league-page, url: https://example.org/events/league, title: Fixture race league page, accessed_date: 2026-10-17}
+  - {id: ev-fixture-calendar, url: https://example.org/events/calendar, title: Fixture alpine calendar, accessed_date: 2026-10-17}
+venues:
+  - id: fixture-lake-trail
+    name: Fixture Lake Trail
+    kind: trail
+    state: MN
+    town: Fixture Town
+    location:
+      lat: 47.25
+      lon: -91.40
+      precision: town
+      source_id: ev-fixture-town-wiki
+      as_of: 2026-10-17
+      confidence: reported
+      note: Town center of Fixture Town, from the wiki.
+  - id: fixture-abroad-venue
+    name: Fixture Alpine Venue
+    kind: other
+    state: null
+    country: NO
+    town: Fixture Fjord
+    location:
+      lat: 61.10
+      lon: 10.45
+      precision: town
+      source_id: ev-fixture-interski-page
+      as_of: 2026-10-17
+      confidence: published
+events:
+  - id: fixture-marathon
+    name: Fixture Lake Marathon
+    discipline: ski_marathon
+    disciplines_also: [cross_country, ski_marathon]
+    levels: [elite, open_amateur]
+    venue: {resort_id: null, venue_id: fixture-lake-trail}
+    organizer: {name: Fixture Ski Foundation, url: https://example.org/foundation, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    sanctioning: {name: Fixture Loppet League, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    format: {value: "50 km classic and skate races between two fixture towns", source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    edition_2026_27: {start: 2027-02-25, end: 2027-02-27, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    last_edition: {start: 2026-02-19, end: 2026-02-21, season: 2025/26, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    usual_timing: {value: Late February, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    signup:
+      method: online_registration
+      url: {value: https://example.org/events/marathon/register, source_id: ev-fixture-marathon-search, as_of: 2026-10-17, confidence: estimated, note: From a search result for this page; page not opened.}
+      platform: {value: Fixture Reg, source_id: ev-fixture-marathon-search, as_of: 2026-10-17, confidence: estimated}
+      opens: {value: 2026-09-01, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+      deadline: {value: 2027-02-10, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+      fee_usd: {value: 150, note: "50 km skate, early rate", source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+      requirements: {value: A fixture federation license, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    website: {value: https://example.org/events/marathon, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    results_url: {value: https://example.org/events/marathon/results, source_id: ev-fixture-marathon-page, as_of: 2026-10-17, confidence: published}
+    calendar_url: {value: https://example.org/events/calendar, source_id: ev-fixture-calendar, as_of: 2026-10-17, confidence: published}
+  - id: fixture-peak-banked-slalom
+    name: Fixture Peak Banked Slalom
+    discipline: banked_slalom
+    levels: [open_amateur]
+    venue: {resort_id: fixture-peak, venue_id: null}
+    organizer: null
+    edition_2026_27: null
+    last_edition: {start: 2026-03-13, end: 2026-03-15, season: 2025/26, source_id: ev-fixture-slalom-page, as_of: 2026-10-17, confidence: estimated}
+    signup:
+      method: null
+      url: {value: https://example.org/events/slalom, source_id: ev-fixture-slalom-page, as_of: 2026-10-17, confidence: estimated}
+      deadline: {value: null, source_id: ev-fixture-slalom-page, as_of: 2026-10-17, confidence: estimated, note: Registration closes when full.}
+    website: {value: https://example.org/events/slalom, source_id: ev-fixture-slalom-page, as_of: 2026-10-17, confidence: estimated}
+  - id: fixture-peak-week-race
+    name: Fixture Peak Week Race
+    discipline: endurance
+    levels: [open_amateur]
+    venue: {resort_id: fixture-peak, venue_id: null}
+    edition_2026_27: {start: 2026-11-28, end: 2026-12-02, source_id: ev-fixture-slalom-page, as_of: 2026-10-17, confidence: published}
+    website: {value: https://example.org/events/slalom, source_id: ev-fixture-slalom-page, as_of: 2026-10-17, confidence: published}
+  - id: fixture-basin-fun-race
+    name: Fixture Basin Fun Race
+    discipline: fun_race
+    levels: [open_amateur, junior]
+    venue: {resort_id: fixture-basin, venue_id: null}
+    edition_2026_27: {start: 2027-04-03, end: null, source_id: ev-fixture-league-page, as_of: 2026-10-17, confidence: estimated, note: End date not seen.}
+    signup: {method: at_venue}
+    website: {value: https://example.org/events/league, source_id: ev-fixture-league-page, as_of: 2026-10-17, confidence: estimated}
+  - id: fixture-basin-league
+    name: Fixture Basin Race League
+    discipline: masters_racing
+    levels: [masters, open_amateur]
+    venue: {resort_id: fixture-basin, venue_id: null}
+    series: {id: fixture-league, name: Fixture Race League}
+    edition_2026_27: null
+    last_edition: null
+    usual_timing: {value: "Thursday nights, January to March", source_id: ev-fixture-league-page, as_of: 2026-10-17, confidence: published}
+    website: {value: https://example.org/events/league, source_id: ev-fixture-league-page, as_of: 2026-10-17, confidence: published}
+  - id: fixture-interski
+    name: Fixture Interski Congress
+    discipline: interski
+    levels: [instructor]
+    venue: {resort_id: null, venue_id: fixture-abroad-venue}
+    organizer: {name: Fixture Interski Body, source_id: ev-fixture-interski-page, as_of: 2026-10-17, confidence: published}
+    edition_2026_27: {start: 2027-03-15, end: 2027-03-20, source_id: ev-fixture-interski-page, as_of: 2026-10-17, confidence: published}
+    signup:
+      method: qualification
+      requirements: {value: Selected for the fixture national demo team, source_id: ev-fixture-interski-page, as_of: 2026-10-17, confidence: published}
+    website: {value: https://example.org/events/interski, source_id: ev-fixture-interski-page, as_of: 2026-10-17, confidence: published}
+calendars:
+  - id: fixture-alpine-calendar
+    name: Fixture alpine events calendar
+    discipline: alpine_racing
+    region: national
+    url: {value: https://example.org/events/calendar, source_id: ev-fixture-calendar, as_of: 2026-10-17, confidence: published}
+  - id: fixture-co-nordic-calendar
+    name: Fixture Colorado nordic calendar
+    discipline: cross_country
+    region: CO
+    url: {value: https://example.org/events/calendar, source_id: ev-fixture-calendar, as_of: 2026-10-17, confidence: estimated}

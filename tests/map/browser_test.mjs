@@ -2967,6 +2967,375 @@ async function searchChecks(browser, base, stubBase) {
   await ctx.close();
 }
 
+// EVENTS mode (ROADMAP item 22): the RESORTS / EVENTS switch, the EVENTS pill, the event filters (group, month,
+// level, sign up open), venue clicks and the event panel with its SIGN UP block, the calendar list and calendars, deep
+// links, "Events here" on resort panels, the phone sheet, and lazy loading (no events.json before the mode). Fixtures:
+// tests/map/events_fixture.yaml compiled by pipeline/events.py (synthetic), at a fixed clock of 2026-10-13.
+async function eventsChecks(browser, base, stubBase) {
+  log('\nEvents mode');
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await ctx.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+  const page = await ctx.newPage();
+  const w = watch(page, 'events mode');
+  const quiet = trackInflight(page);
+  const go = async (url) => { await quiet(); await page.goto(url); };
+  const eventsReq = () => w.requests.filter((u) => /\/events\.json(\?|$)/.test(u)).length;
+  const moduleReq = () => w.requests.filter((u) => /\/map\/js\/events(map)?\.js/.test(u)).length;
+  const summary = page.waitForResponse((r) => r.url().includes('/events-summary.json'), { timeout: 20000 });
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await summary;
+  await page.waitForTimeout(400);
+  check(eventsReq() === 0 && moduleReq() === 0, `lazy: no events.json and no events module before EVENTS mode (${eventsReq()}, ${moduleReq()})`);
+  const pill = page.locator('#events-pill');
+  check(await pill.isVisible() && (await pill.textContent()).replace(/\s+/g, ' ').trim() === 'Events 10' && await pill.getAttribute('aria-pressed') === 'false',
+    `the header EVENTS pill counts the events still ahead (${(await pill.textContent()).replace(/\s+/g, ' ').trim()})`);
+  const resortsRadio = page.getByRole('radio', { name: 'Resorts', exact: true });
+  const eventsRadio = page.getByRole('radio', { name: 'Events', exact: true });
+  check(await resortsRadio.isChecked() && !(await eventsRadio.isChecked()), 'the Layers panel opens on RESORTS, a radio pair');
+  await eventsRadio.check();
+  await page.waitForURL(/\/map\/events\/\?data=/);
+  await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 15000 });
+  await page.waitForFunction(() => document.querySelector('#panel-heading').textContent === 'Events and competitions'
+    && document.querySelectorAll('.ev-next-list li').length > 0, null, { timeout: 10000 });
+  check(eventsReq() === 1 && await page.evaluate(() => document.body.classList.contains('events-mode')) && await pill.getAttribute('aria-pressed') === 'true',
+    'EVENTS mode: events.json loads once, the body and the pill say so');
+  const nat = await page.evaluate(() => ({
+    stats: [...document.querySelectorAll('.panel .stat')].map((s) => `${s.querySelector('dt').textContent}=${s.querySelector('dd').textContent}`),
+    next: [...document.querySelectorAll('.ev-next-list .nav-name')].map((e) => e.textContent),
+    facility: Boolean(document.getElementById('facility-filter').offsetParent), recolor: Boolean(document.getElementById('recolor').offsetParent),
+    filter: Boolean(document.getElementById('events-filter') && document.getElementById('events-filter').offsetParent),
+    groups: [...document.querySelectorAll('#events-filter input[data-dim="groups"]')].map((i) => `${i.dataset.key}:${i.checked}`),
+    legend: [...document.querySelectorAll('.ml-events li')].filter((li) => li.offsetParent).map((li) => li.textContent),
+    resortLegend: [...document.querySelectorAll('.map-legend .ml-items:not(.ml-events) li')].some((li) => li.offsetParent),
+    sub: document.getElementById('view-title').textContent,
+  }));
+  check(JSON.stringify(nat.stats) === JSON.stringify(['Events=12', 'Venues=9', '2026/27 dates=10', 'Sign up open=2']), `events panel stats (${nat.stats})`);
+  check(nat.next[0] === 'Alpha Peak Speed Cup' && nat.next[1] === 'Kilo Notch Level 2 Exam' && nat.next.length === 8, `Coming up lists the next dated events in date order (${nat.next.slice(0, 3)})`);
+  check(!nat.facility && nat.filter && nat.groups.length === 8 && nat.groups.every((g) => g.endsWith(':true')),
+    `the Layers panel swaps the resort filters for the event filters, every group on (${nat.groups.length} groups)`);
+  check(nat.legend[0] === 'Alpine' && nat.legend.includes('Community') && nat.legend.at(-1) === 'Size: number of events' && !nat.resortLegend,
+    `the legend strip shows the event groups (${nat.legend.join(', ')})`);
+  check(nat.sub === 'EventsUnited States', `sub bar: Events · United States (${nat.sub})`);
+  await shot(page, 'events-00-picture.png');
+  await axeCheck(page, 'events mode, before the map starts');
+
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getLayer('event-venues'), null, { timeout: 15000 });
+  await mapIdle(page);
+  const venueIds = () => page.evaluate(() => [...new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['event-venues'] }).map((f) => f.properties.id))].sort());
+  const all = await venueIds();
+  const hidden = await page.evaluate(() => ['resorts', 'resorts-glow', 'resorts-facility', 'clusters-fill', 'clusters-line'].map((l) => window.__careerMap.mapCtl.map.getLayoutProperty(l, 'visibility')));
+  check(all.length === 9 && !all.includes('fixture-abroad-hall') && hidden.every((v) => v === 'none'),
+    `map: 9 venue dots replace the resorts and clusters; the venue abroad is list only (${all.join(', ')}; ${hidden})`);
+  const dot = await page.evaluate(() => {
+    const f = window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['event-venues'] }).find((x) => x.properties.id === 'alpha-peak');
+    return f && { count: f.properties.count, color: f.properties.color, tip: f.properties.tip };
+  });
+  check(dot && dot.count === 3 && dot.color === '#5aa9ff' && dot.tip === 'Alpha Peak: 3 events, mostly Alpine', `a dot is sized and colored by its events (${JSON.stringify(dot)})`);
+  await shot(page, 'events-01-national.png');
+  await axeCheck(page, 'events mode, national');
+
+  // Filters: discipline group, month, level, sign up open; reset.
+  const flt = (dim, key) => page.locator(`#events-filter input[data-dim="${dim}"][data-key="${key}"]`);
+  await flt('groups', 'instructor').uncheck();
+  await page.waitForTimeout(300);
+  let ids = await venueIds();
+  check(!ids.includes('kilo-notch') && !ids.includes('hotel-lake') && ids.length === 7, `group filter: Instructor off drops its venues (${ids.join(', ')})`);
+  await flt('groups', 'instructor').check();
+  await flt('months', '2').check();
+  await page.waitForTimeout(300);
+  ids = await venueIds();
+  check(JSON.stringify(ids) === JSON.stringify(['alpha-peak', 'fixture-lake-trail']), `month chip FEB keeps the loppet and the January to March league (${ids.join(', ')})`);
+  await flt('months', '2').uncheck();
+  await flt('months', 'season').check();
+  await page.waitForTimeout(300);
+  check(JSON.stringify(await venueIds()) === JSON.stringify(['alpha-peak']), 'the Season long chip keeps the season long program');
+  await flt('months', 'season').uncheck();
+  await flt('months', 'other').check();
+  await page.waitForTimeout(300);
+  check(JSON.stringify(await venueIds()) === JSON.stringify(['hotel-lake']), 'Other months keeps the May clinic');
+  await flt('months', 'other').uncheck();
+  await flt('quick', 'anyone').check();
+  await page.waitForTimeout(300);
+  const lv = await page.evaluate(() => [...document.querySelectorAll('#events-filter input[data-dim="levels"]')].filter((i) => i.checked).map((i) => i.dataset.key));
+  ids = await venueIds();
+  check(JSON.stringify(lv) === JSON.stringify(['open_amateur']) && !ids.includes('golf-canyon') && !ids.includes('kilo-notch') && ids.includes('fixture-pass-town'),
+    `Open to anyone sets the level filter to open_amateur; an event with no published levels drops out (${ids.join(', ')})`);
+  await flt('quick', 'anyone').uncheck();
+  await flt('quick', 'signup').check();
+  await page.waitForTimeout(300);
+  ids = await venueIds();
+  const label = (await page.locator('label[for="evf-quick-signup"]').textContent()).replace(/\s+/g, ' ').trim();
+  check(JSON.stringify(ids) === JSON.stringify(['alpha-peak', 'fixture-lake-trail']) && /Sign up open\s*2/i.test(label),
+    `Sign up open keeps the rail jam and the loppet at 2026-10-13 (${ids.join(', ')}; ${label})`);
+  check(await page.waitForFunction(() => document.getElementById('panel-status').textContent.startsWith('Showing 2 events of 12'), null, { timeout: 3000 }).then(() => true, () => false),
+    'a filter change is announced');
+  check(await page.locator('.ev-next-list li').count() === 2, 'Coming up follows the filters');
+  await page.locator('#events-filter .lp-reset').click();
+  await page.waitForTimeout(300);
+  check((await venueIds()).length === 9 && !(await flt('quick', 'signup').isChecked()), 'Show every event clears the event filters');
+  const rule = await page.evaluate(async () => {
+    const m = await import('/map/js/events.js');
+    const e = (o) => ({ months: [], levels: ['open_amateur'], group: 'alpine', ...o });
+    const open = e({ edition_2026_27: { start: '2026-12-01' }, signup: { opens: { value: '2026-10-01' } } });
+    const deadline = e({ edition_2026_27: { start: '2026-12-01' }, signup: { opens: { value: '2026-10-01' }, deadline: { value: '2026-10-12' } } });
+    const later = e({ edition_2026_27: { start: '2026-12-01' }, signup: { opens: { value: '2026-10-14' } } });
+    const past = e({ last_edition: { start: '2026-03-01' }, signup: { opens: { value: '2026-01-01' } } });
+    return { open: m.signupOpen(open, '2026-10-13'), deadline: m.signupOpen(deadline, '2026-10-13'), later: m.signupOpen(later, '2026-10-13'),
+      past: m.signupOpen(past, '2026-10-13'), today: m.signupOpen(later, '2026-10-14'),
+      keys: [...m.monthKeys(e({ months: [11, 5], program: true }), [11, 12, 1, 2, 3, 4])],
+      none: m.matchesEvent(e({ levels: [] }), { groups: new Set(['alpine']), levels: new Set(['open_amateur', 'elite']), months: new Set() }, '2026-10-13', [1], 2),
+      noneFiltered: m.matchesEvent(e({ levels: [] }), { groups: new Set(['alpine']), levels: new Set(['elite']), months: new Set() }, '2026-10-13', [1], 2),
+      when: [m.whenText({ program: true }, '2026/27'), m.whenText({ last_edition: { season: '2025/26' } }, '2026/27'), m.whenText({ edition_2026_27: { start: '2027-04-03' } }, '2026/27')] };
+  });
+  check(rule.open && !rule.deadline && !rule.later && !rule.past && rule.today && JSON.stringify(rule.keys) === JSON.stringify(['11', 'other', 'season'])
+    && rule.none && !rule.noneFiltered && JSON.stringify(rule.when) === JSON.stringify(['Runs all season', 'Last held in the 2025/26 season. 2026/27 date not yet published.', 'Starts Apr 3, 2027']),
+  `rules: sign up open by opens, deadline or start; month chip keys; no levels match only an unfiltered level; date lines (${JSON.stringify(rule)})`);
+
+  // A venue click opens the panel with its events and the SIGN UP block.
+  await clickMapAt(page, [-91.40, 47.25]);
+  await page.waitForURL(/\/map\/events\/\?data=.*venue=fixture-lake-trail/);
+  await page.waitForFunction(() => document.querySelector('.ev-card .src-link'), null, { timeout: 10000 });
+  await page.waitForFunction(() => !document.querySelector('.ev-card .src-pending'), null, { timeout: 10000 }).catch(() => {});
+  const card = await page.evaluate(() => {
+    const c = document.querySelector('#ev-fixture-lake-loppet');
+    const facts = Object.fromEntries([...c.querySelectorAll('.fact')].map((f) => [f.querySelector('dt').textContent, f.querySelector('dd').innerText.replace(/\s+/g, ' ').trim().toLowerCase()]));
+    const btn = c.querySelector('.ev-signup-btn');
+    return { heading: document.getElementById('panel-heading').textContent, eyebrow: document.querySelector('.panel .eyebrow').textContent,
+      title: c.querySelector('.ev-title').textContent, tags: [...c.querySelectorAll('.ev-tags .tier')].map((x) => x.textContent), facts,
+      method: c.querySelector('.ev-method') && c.querySelector('.ev-method').textContent,
+      btn: btn && { href: btn.getAttribute('href'), target: btn.target, rel: btn.rel, text: btn.textContent },
+      badges: c.querySelectorAll('.badge').length, factCount: c.querySelectorAll('.fact').length,
+      focus: document.activeElement && document.activeElement.id, sub: document.getElementById('view-title').textContent };
+  });
+  check(card.heading === 'Fixture Lake Trail' && card.eyebrow === 'Trail in Fixture Lake Town, MN' && card.title === 'Fixture Lake Loppet' && card.focus === 'panel-heading',
+    `a venue click opens its panel (${card.heading}, ${card.eyebrow})`);
+  check(JSON.stringify(card.tags) === JSON.stringify(['Ski marathon', 'Cross country', 'Open to anyone', 'Elite', 'Sign up open']), `discipline and level badges (${card.tags})`);
+  check(card.facts.Dates.startsWith('feb 20 to 21, 2027 published last verified oct 1, 2026 · synthetic fixture: loppet page')
+    && card.facts.Venue.includes('mapped at the town center of fixture lake town. town center from the synthetic town page') && card.facts.Organizer.startsWith('fixture lake ski foundation published'),
+  `dates, venue with its precision and organizer, each with badge and source (${card.facts.Dates})`);
+  check(card.method === 'Register online' && card.btn && card.btn.href === 'https://example.com/fixture/events/loppet/register' && card.btn.target === '_blank'
+    && /noopener/.test(card.btn.rel) && card.btn.text === 'Sign up for Fixture Lake Loppet, opens in a new tab',
+  `SIGN UP: the method in words and a sign up button in a new tab (${JSON.stringify(card.btn)})`);
+  check(card.facts.Platform.startsWith('fixture reg') && card.facts.Opens.startsWith('sep 1, 2026') && card.facts.Deadline.startsWith('feb 10, 2027')
+    && card.facts['Entry fee'].startsWith('$95 published 42 km skate, early rate') && card.facts.Requirements.startsWith('racers 18 or older'),
+  `SIGN UP: platform, opens, deadline, fee with its note, requirements (${card.facts['Entry fee']})`);
+  check(card.facts.Website.startsWith('example.com') && card.facts.Results && card.facts.Calendar && card.badges === card.factCount + 1,
+    `website, results and calendar links; every value carries its badge (${card.badges} badges, ${card.factCount} facts)`);
+  check(card.sub === 'EventsFixture Lake Trail', 'sub bar names the venue');
+  const halo = await page.evaluate(() => JSON.stringify(window.__careerMap.mapCtl.map.getFilter('event-venues-halo')));
+  check(halo.includes('fixture-lake-trail'), 'the selected venue gets a ring on the map');
+  await shot(page, 'events-02-venue.png');
+  await axeCheck(page, 'events mode, open event panel');
+
+  // Other venues: a resort with three events, a last edition, a program, no website, no levels.
+  await go(`${base}/map/events/${Q}&venue=alpha-peak`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.ev-card'), null, { timeout: 20000 });
+  const ap = await page.evaluate(() => ({
+    eyebrow: document.querySelector('.panel .eyebrow').textContent, cards: [...document.querySelectorAll('.ev-card .ev-title')].map((x) => x.textContent),
+    league: document.querySelector('#ev-alpha-peak-league .fact dd').textContent, series: document.querySelector('#ev-alpha-peak-cup .ev-series').textContent,
+    profile: document.querySelector('.ev-resort-link a').getAttribute('href') }));
+  check(ap.eyebrow === 'Ski area in Colorado' && JSON.stringify(ap.cards) === JSON.stringify(['Alpha Peak Speed Cup', 'Alpha Peak Night Rail Jam', 'Alpha Peak Thursday Race League'])
+    && ap.league.startsWith('Runs Thursday nights, January to March') && ap.series === 'Part of Fixture Speed Cup',
+  `a resort venue lists its events in date order, the program last (${ap.cards})`);
+  await page.locator('.ev-resort-link a').click();
+  await page.waitForURL(/\/map\/co\/fixture-front-range\/alpha-peak\//);
+  check(!(await page.evaluate(() => document.body.classList.contains('events-mode'))) && await resortsRadio.isChecked(), 'the resort profile link goes back to RESORTS mode');
+  await page.goBack();
+  await page.waitForURL(/venue=alpha-peak/);
+  check(await page.evaluate(() => document.body.classList.contains('events-mode')) && await heading(page) === 'Alpha Peak', 'Back returns to the venue in EVENTS mode');
+  await go(`${base}/map/events/${Q}&venue=bravo-bowl`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.ev-card'), null, { timeout: 20000 });
+  const bb = await page.locator('#ev-bravo-bowl-skimo .fact dd').first().textContent();
+  check(/^Last held Mar 7, 2026\. 2026\/27 date not yet published\.\s*Estimated/.test(bb.replace(/\s+/g, ' ').trim()), `last edition fallback, labelled (${bb.replace(/\s+/g, ' ').trim().slice(0, 70)})`);
+  await go(`${base}/map/events/${Q}&venue=fixture-pass-town`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.ev-card'), null, { timeout: 20000 });
+  const fp = await page.evaluate(() => ({ none: document.querySelector('.ev-signup-none').textContent, origin: document.querySelector('.ev-origin') && document.querySelector('.ev-origin').textContent,
+    when: document.querySelector('.ev-card .fact dd').textContent, venue: [...document.querySelectorAll('.ev-card .fact')].find((f) => f.querySelector('dt').textContent === 'Venue').textContent }));
+  check(fp.none === 'Sign up details not published yet.' && /^Where this comes from: (Loading source|Synthetic fixture: sled dog race listing)/.test(fp.origin)
+    && fp.when.startsWith('Starts Mar 6, 2027') && fp.venue.includes('Mapped to the region') && fp.venue.includes('Fixture Pass, MT'),
+  `no sign up details or website: the note and Where this comes from (${fp.origin})`);
+  await go(`${base}/map/events/${Q}&venue=golf-canyon`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.ev-card'), null, { timeout: 20000 });
+  check(await page.locator('.ev-level-none').textContent() === 'Who can enter: not published', 'an event with no published levels says so');
+
+  // Deep links: the event, a missing venue, and the URL kept.
+  await go(`${base}/map/events/${Q}&venue=fixture-jump-hill&event=fixture-hill-jump`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.ev-card.is-selected'), null, { timeout: 20000 });
+  check(/venue=fixture-jump-hill&event=fixture-hill-jump/.test(page.url()) && await page.locator('#ev-fixture-hill-jump').getAttribute('class') === 'ev-card is-selected',
+    'a shared event link opens the venue with that event selected');
+  await go(`${base}/map/events/${Q}&event=fixture-interski`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.ev-card.is-selected'), null, { timeout: 20000 });
+  const ab = await page.evaluate(() => ({ h: document.getElementById('panel-heading').textContent, tag: document.querySelector('.ev-abroad').textContent,
+    note: document.querySelector('.ev-abroad-note').textContent, eyebrow: document.querySelector('.panel .eyebrow').textContent }));
+  check(ab.h === 'Fixture Congress Hall' && ab.tag === 'Listed only' && ab.note.startsWith('In Norway, outside the United States') && ab.eyebrow === 'Venue in Fixture Fjord, Norway',
+    `an event link alone finds its venue; a venue abroad is listed only, its country named (${ab.eyebrow})`);
+  await go(`${base}/map/events/${Q}&venue=no-such-venue`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.notice'), null, { timeout: 20000 });
+  check((await page.locator('.notice').textContent()).startsWith('That link points to a venue we could not find'), 'a link to a missing venue falls back to every event, with a note');
+
+  // List view: the calendar by month, Season long, the undated, then the calendars.
+  await go(`${base}/map/events/${Q}`);
+  await page.waitForFunction(() => window.__careerMap && window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 20000 });
+  await page.getByRole('button', { name: 'List view' }).click();
+  await page.waitForSelector('#events-list:not([hidden]) .ev-row');
+  const lst = await page.evaluate(() => ({
+    months: [...document.querySelectorAll('#events-list .ev-list-body .ev-month-title')].map((x) => x.firstChild.textContent),
+    rows: document.querySelectorAll('#events-list .ev-row').length, resortList: !document.getElementById('list-view').hidden,
+    cals: [...document.querySelectorAll('#events-list .ev-cals .ev-month-title')].map((x) => x.textContent),
+    calLink: document.querySelector('.ev-cal-link') && [document.querySelector('.ev-cal-link').target, document.querySelector('.ev-cal-link').textContent],
+    controls: document.getElementById('list-toggle').getAttribute('aria-controls'), count: document.querySelector('#events-list > .ev-list-count').textContent }));
+  check(JSON.stringify(lst.months) === JSON.stringify(['December 2026', 'January 2027', 'February 2027', 'March 2027', 'April 2027', 'May 2027', 'Season long', '2026/27 date not yet published'])
+    && lst.rows === 12 && !lst.resortList && lst.controls === 'events-list', `list view: the calendar grouped by month (${lst.months.join(', ')}; ${lst.rows} rows)`);
+  check(JSON.stringify(lst.cals) === JSON.stringify(['Alpine', 'Nordic']) && lst.calLink && lst.calLink[0] === '_blank', `CALENDARS by discipline, opening in a new tab (${lst.cals})`);
+  await shot(page, 'events-03-list.png');
+  await axeCheck(page, 'events list view');
+  await flt('quick', 'signup').check();
+  await page.waitForTimeout(200);
+  check(await page.locator('#events-list .ev-row').count() === 2 && (await page.locator('#events-list > .ev-list-count').textContent()).startsWith('2 events match the filters'), 'the list follows the event filters');
+  await flt('quick', 'signup').uncheck();
+  await page.locator('#events-list .ev-row', { hasText: 'Kilo Notch Level 2 Exam' }).focus();
+  await page.keyboard.press('Enter');
+  await page.waitForURL(/venue=kilo-notch&event=kilo-notch-exam/);
+  check(await page.evaluate(() => document.activeElement && document.activeElement.id === 'ev-h-kilo-notch-exam'), 'keyboard: Enter on a list row opens the event and focuses its card');
+  await page.getByRole('button', { name: 'Map view' }).click();
+
+  // The pill switches back and forth; the HIRING NOW pill from EVENTS goes to the resorts hiring now.
+  await pill.click();
+  await page.waitForURL((u) => !u.pathname.includes('/events/'));
+  check(!(await page.evaluate(() => document.body.classList.contains('events-mode'))) && await pill.getAttribute('aria-pressed') === 'false', 'the EVENTS pill switches back to RESORTS');
+  await pill.click();
+  await page.waitForURL(/\/map\/events\//);
+  await page.locator('#hiring-pill').click();
+  await page.waitForFunction(() => !document.body.classList.contains('events-mode') && document.querySelector('#hiring-pill').getAttribute('aria-pressed') === 'true', null, { timeout: 5000 }).catch(() => {});
+  check(await page.locator('#hiring-pill').getAttribute('aria-pressed') === 'true' && !(await page.evaluate(() => document.body.classList.contains('events-mode'))),
+    'from EVENTS, HIRING NOW goes to the resorts hiring now');
+  w.assertClean();
+  await ctx.close();
+
+  // "Events here" on a resort page (the stub embeds the record); events.json waits for the link.
+  {
+    const c = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    await c.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+    const p = await c.newPage();
+    const wp = watch(p, 'events here');
+    await p.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+    await ready(p, { start: false });
+    await p.waitForSelector('.events-here .ev-here li');
+    const eh = await p.evaluate(() => ({ items: [...document.querySelectorAll('.events-here .ev-here li')].map((li) => li.textContent.replace(/\s+/g, ' ').trim()),
+      all: document.querySelector('.ev-here-all a').textContent, href: document.querySelector('.ev-here-all a').getAttribute('href') }));
+    check(eh.items.length === 3 && eh.items[0].startsWith('Alpha Peak Speed Cup Alpine racing Dec 5 to 6, 2026 Published') && eh.items[2].includes('Runs Thursday nights, January to March')
+      && eh.all === 'See all 3 events at Alpha Peak on the events map' && eh.href === '/map/events/?venue=alpha-peak',
+    `resort panel: Events here with the next events and a link to the venue (${eh.items[0].slice(0, 60)})`);
+    check(!wp.requests.some((u) => /\/events\.json/.test(u)), 'lazy: a resort page with events loads no events.json');
+    await shot(p, 'events-06-resort-events-here.png');
+    await p.locator('.ev-here-all a').click();
+    await p.waitForURL(/\/map\/events\/\?venue=alpha-peak/);
+    await p.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && document.querySelectorAll('.ev-card').length === 3, null, { timeout: 15000 });
+    check(await heading(p) === 'Alpha Peak' && wp.requests.some((u) => /\/events\.json/.test(u)), 'the Events here link opens EVENTS mode on the venue');
+    // The prerendered /map/events/ stub lists every event without JavaScript.
+    const js = await browser.newContext({ viewport: { width: 1280, height: 800 }, javaScriptEnabled: false });
+    const q = await js.newPage();
+    await q.goto(`${stubBase}/map/events/`);
+    const pre = await q.evaluate(() => ({ items: document.querySelectorAll('.ev-list li').length, h: document.getElementById('panel-heading').textContent,
+      months: [...document.querySelectorAll('.ev-month')].map((x) => x.textContent), signup: document.querySelectorAll('.ev-signup-link').length,
+      ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent)['@graph'][0]['@type']) }));
+    check(pre.h === 'Events and competitions' && pre.items === 14 && pre.months[0] === 'December 2026' && pre.months.includes('Season long') && pre.signup >= 5 && pre.ld[0] === 'CollectionPage',
+      `the /map/events/ stub lists the events and calendars for visitors without JavaScript (${pre.items} items, ${pre.months.length} groups)`);
+    await js.close();
+    wp.assertClean();
+    await c.close();
+  }
+
+  // Phone: the venue in the bottom sheet, the switch in the layers sheet, nothing wider than the screen.
+  {
+    const c = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+    await c.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+    const p = await c.newPage();
+    const wp = watch(p, 'events phone');
+    await p.goto(`${base}/map/events/${Q}&venue=alpha-peak`);
+    await ready(p, { start: false });
+    await p.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('.ev-card'), null, { timeout: 20000 });
+    await p.locator('#map-start').tap();
+    await p.waitForFunction(() => window.__careerMap.mapCtl && window.__careerMap.mapCtl.ready, null, { timeout: 20000 });
+    await p.waitForTimeout(1200);
+    const ph = await p.evaluate(() => ({ sheet: document.getElementById('panel').dataset.sheet, sw: document.documentElement.scrollWidth, vw: innerWidth,
+      heading: document.getElementById('panel-heading').textContent }));
+    check(ph.heading === 'Alpha Peak' && ph.sheet && ph.sw <= ph.vw, `phone: the venue opens in the bottom sheet (${ph.sheet}), no sideways scroll`);
+    await shot(p, 'events-04-phone.png');
+    await p.locator('#sheet-handle').tap();
+    await p.waitForTimeout(500);
+    await shot(p, 'events-04b-phone-sheet-full.png');
+    await p.locator('#layers-toggle').tap();
+    await p.waitForTimeout(300);
+    const lsheet = await p.evaluate(() => ({ mode: [...document.querySelectorAll('#lp-mode input')].map((i) => `${i.value}:${i.checked}`),
+      filter: Boolean(document.getElementById('events-filter').offsetParent), sw: document.documentElement.scrollWidth, vw: innerWidth }));
+    check(JSON.stringify(lsheet.mode) === JSON.stringify(['resorts:false', 'events:true']) && lsheet.filter && lsheet.sw <= lsheet.vw, 'phone: the layers sheet holds the switch and the event filters');
+    await shot(p, 'events-05-phone-layers.png');
+    await axeCheck(p, 'events mode, phone layers sheet');
+    await p.locator('#layers-close').tap();
+    wp.assertClean();
+    await c.close();
+  }
+}
+
+// EVENTS mode on the real data/build output, when it has events: the counts, a dot per mapped venue that fits the
+// national view, resort events on the resort's own point, the calendar list and the calendars on a phone.
+async function realEventsChecks(browser, base) {
+  let file = null;
+  try { file = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'events.json'), 'utf8')); } catch { file = null; }
+  if (!file || !file.events || !file.events.length) { log('\nReal events: none in data/build yet, skipped'); return; }
+  log('\nReal events (data/build)');
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const w = watch(page, 'real events');
+  await page.goto(`${base}/map/events/`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 30000 });
+  const real = await page.evaluate(() => {
+    const m = window.__careerMap.events.model;
+    const idx = window.__careerMap.index;
+    const off = [...m.venues.values()].filter((v) => v.resort_id).filter((v) => {
+      const r = idx.resorts.get(v.resort_id);
+      return !r || Math.abs(r.lat - v.location.lat) > 1e-6 || Math.abs(r.lon - v.location.lon) > 1e-6;
+    }).map((v) => v.id);
+    return { events: m.events.length, venues: m.venues.size, stat: document.querySelector('.panel .stat dd').textContent, off,
+      resortVenues: [...m.venues.values()].filter((v) => v.resort_id).length };
+  });
+  check(real.events === file.events.length && real.stat === String(file.counts.events.toLocaleString('en-US')),
+    `real: every event loads (${real.events} events at ${real.venues} venues, ${real.resortVenues} of them resorts)`);
+  check(real.off.length === 0, `real: events at resorts sit on the resort's own point (${real.off.slice(0, 5).join(', ') || 'all'})`);
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getLayer('event-venues'), null, { timeout: 20000 });
+  await mapIdle(page);
+  const drawn = await page.evaluate(() => new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['event-venues'] }).map((f) => f.properties.id)).size);
+  const lower48 = file.venues.filter((v) => v.mapped && v.location.lat < 50 && v.location.lon > -125).length;
+  check(drawn >= lower48 * 0.9, `real: the national view draws the venue dots (${drawn} drawn, ${lower48} venues in the lower 48)`);
+  await page.getByRole('button', { name: 'List view' }).click();
+  await page.waitForSelector('#events-list:not([hidden]) .ev-row');
+  const rows = await page.locator('#events-list .ev-row').count();
+  check(rows === file.events.length && await page.locator('#events-list .ev-cal').count() === file.calendars.length,
+    `real: the calendar list holds every event and calendar (${rows} rows)`);
+  w.assertClean();
+  await page.close();
+  const ph = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+  const wp = watch(ph, 'real events phone');
+  await ph.goto(`${base}/map/events/`);
+  await ready(ph, { start: false });
+  await ph.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 30000 });
+  await ph.locator('#list-toggle').tap();
+  await ph.waitForSelector('#events-list:not([hidden]) .ev-row');
+  const fit = await ph.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: innerWidth, list: document.getElementById('events-list').scrollWidth,
+    lw: document.getElementById('events-list').clientWidth }));
+  check(fit.sw <= fit.vw && fit.list <= fit.lw, `real: the phone calendar list never scrolls sideways (${JSON.stringify(fit)})`);
+  await shot(ph, 'events-real-phone-list.png');
+  wp.assertClean();
+  await ph.close();
+}
+
+// MAP_TEST_ONLY=eventsChecks,passChecks runs only the named suites (all of them by default).
+const ONLY = (process.env.MAP_TEST_ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
+const runs = (name) => !ONLY.length || ONLY.includes(name);
 // MAP_TEST_PORT moves both servers (repository, stub site) so parallel runs do not collide; default 8811 and 8812.
 const PORT = Number(process.env.MAP_TEST_PORT) || 8811;
 const REPO_BASE = `http://127.0.0.1:${PORT}`;
@@ -2993,19 +3362,21 @@ try {
   stubRoot = makeStubSite();
   servers.push(await serve(stubRoot, PORT + 1));
 
-  await imageryOutage(browser, REPO_BASE);
-  await underlayChecks(browser, REPO_BASE, STUB_BASE);
-  await desktop(browser, REPO_BASE);
-  await desktopStub(browser, STUB_BASE);
-  await phone(browser, STUB_BASE);
-  await searchChecks(browser, REPO_BASE, STUB_BASE);
-  await officialFallbackChecks(browser, STUB_BASE);
-  await liveLinksChecks(browser, STUB_BASE);
-  await housingChecks(browser, STUB_BASE);
-  await hiringChecks(browser, REPO_BASE);
-  await consoleChecks(browser, REPO_BASE, STUB_BASE);
-  await passChecks(browser, REPO_BASE, STUB_BASE);
-  await realData(browser, REPO_BASE);
+  if (runs('imageryOutage')) await imageryOutage(browser, REPO_BASE);
+  if (runs('underlayChecks')) await underlayChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('desktop')) await desktop(browser, REPO_BASE);
+  if (runs('desktopStub')) await desktopStub(browser, STUB_BASE);
+  if (runs('phone')) await phone(browser, STUB_BASE);
+  if (runs('searchChecks')) await searchChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('officialFallbackChecks')) await officialFallbackChecks(browser, STUB_BASE);
+  if (runs('liveLinksChecks')) await liveLinksChecks(browser, STUB_BASE);
+  if (runs('housingChecks')) await housingChecks(browser, STUB_BASE);
+  if (runs('hiringChecks')) await hiringChecks(browser, REPO_BASE);
+  if (runs('consoleChecks')) await consoleChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('passChecks')) await passChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('eventsChecks')) await eventsChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('realData')) await realData(browser, REPO_BASE);
+  if (runs('realEventsChecks')) await realEventsChecks(browser, REPO_BASE);
   await browser.close();
 } catch (err) {
   failures.push(`crashed: ${err.stack || err}`);

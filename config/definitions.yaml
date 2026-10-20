@@ -522,3 +522,170 @@ housing_search:
   max_tools: 8
   # The Furnished Finder link for a resort's nearest town must sit on one of these registered domains.
   furnished_finder_domains: [furnishedfinder.com]
+
+events:
+  # Events and competitions (data/raw/events, ROADMAP item 22; contract in docs/map/EVENTS.md). pipeline/events.py
+  # validates every file against these ids and compiles data/build/events.json, the EVENTS mode of the map.
+  # The season the map shows. An edition_2026_27 must start inside it; a last_edition must start before it.
+  # Venues are in the United States. A venue outside it (state null, country set) shows in the list, the calendar
+  # and its venue panel, never as a map dot. The contract allows that for the groups in abroad_groups (Interski and its
+  # US team selection); an event of another group abroad builds with a warning.
+  season:
+    label: "2026/27"
+    start: 2026-07-01
+    end: 2027-06-30
+  # Discipline groups in display order. Each color marks the group's venue dots, legend and badges on the near black
+  # map, so config validation checks 4.5:1 contrast against the lightest panel surface (#1e1e1e) and at least 8 OKLab
+  # (x 100) between any two groups. Fifteen groups cannot all stay apart under color blindness, so every dot and
+  # badge also names its group in text (the tooltip, the panel and the legend).
+  groups:
+    - id: alpine
+      label: Alpine
+      color: "#5aa9ff"
+      disciplines:
+        - {id: alpine_racing, label: Alpine racing}
+        - {id: masters_racing, label: Masters racing}
+        - {id: nastar, label: NASTAR}
+        - {id: ski_cross, label: Ski cross}
+    - id: nordic
+      label: Nordic
+      color: "#2ee6c9"
+      disciplines:
+        - {id: cross_country, label: Cross country}
+        - {id: ski_marathon, label: Ski marathon}
+        - {id: biathlon, label: Biathlon}
+        - {id: ski_jumping, label: Ski jumping}
+        - {id: nordic_combined, label: Nordic combined}
+    - id: freestyle
+      label: Freestyle
+      color: "#ff5ccd"
+      disciplines:
+        - {id: moguls, label: Moguls}
+        - {id: aerials, label: Aerials}
+        - {id: slopestyle, label: Slopestyle}
+        - {id: halfpipe, label: Halfpipe}
+        - {id: big_air, label: Big air}
+        - {id: rail_jam, label: Rail jam}
+    - id: snowboard
+      label: Snowboard
+      color: "#ff8a3d"
+      disciplines:
+        - {id: snowboard_cross, label: Snowboard cross}
+        - {id: banked_slalom, label: Banked slalom}
+        - {id: alpine_snowboard, label: Alpine snowboard}
+    - id: freeride
+      label: Freeride
+      color: "#ff5a5a"
+      disciplines:
+        - {id: big_mountain, label: Big mountain}
+    - id: backcountry
+      label: Skimo and uphill
+      color: "#a3e635"
+      disciplines:
+        - {id: skimo, label: Skimo}
+        - {id: uphill, label: Uphill}
+        - {id: telemark, label: Telemark}
+    - id: heritage
+      label: Heritage
+      color: "#d9b26f"
+      disciplines:
+        - {id: longboard, label: Longboard}
+        - {id: retro_race, label: Retro race}
+        - {id: ski_ballet, label: Ski ballet}
+        - {id: speed_skiing, label: Speed skiing}
+        - {id: pond_skim, label: Pond skim}
+    - id: adaptive
+      label: Adaptive
+      color: "#b18cff"
+      disciplines:
+        - {id: adaptive_alpine, label: Adaptive alpine}
+        - {id: adaptive_nordic, label: Adaptive nordic}
+    - id: snowshoe
+      label: Snowshoe
+      color: "#c8d3e0"
+      disciplines:
+        - {id: snowshoe_race, label: Snowshoe race}
+    - id: skijoring
+      label: Skijoring
+      color: "#c98b5b"
+      disciplines:
+        - {id: skijoring, label: Skijoring}
+    - id: snowkite
+      label: Snowkite
+      color: "#8ff0ff"
+      disciplines:
+        - {id: snowkiting, label: Snowkiting}
+    - id: sled_dog
+      label: Sled dog
+      color: "#ffd23f"
+      disciplines:
+        - {id: sled_dog, label: Sled dog racing}
+    - id: snowmobile
+      label: Snowmobile
+      color: "#ff9fb2"
+      disciplines:
+        - {id: snocross, label: Snocross}
+        - {id: hill_climb, label: Hill climb}
+        - {id: snowmobile_race, label: Snowmobile racing}
+    - id: winter_ultra
+      label: Winter ultra
+      color: "#64b464"
+      disciplines:
+        - {id: fat_bike, label: Fat bike}
+        - {id: winter_ultra, label: Winter ultra}
+    - id: instructor
+      label: Instructor
+      color: "#44ff88"
+      disciplines:
+        - {id: psia_aasi_exam, label: PSIA AASI exam}
+        - {id: psia_aasi_clinic, label: PSIA AASI clinic}
+        - {id: psia_aasi_event, label: PSIA AASI event}
+        - {id: interski, label: Interski}
+    - id: community
+      label: Community
+      color: "#ca729e"
+      disciplines:
+        - {id: endurance, label: Lap and vertical challenge}
+        - {id: fun_race, label: Fun race}
+  # Who can enter, in display order. open_amateur leads: community competitions and anything open to the public use
+  # it, and the Events filter offers it as the "Open to anyone" quick filter too.
+  levels:
+    - {id: open_amateur, label: Open to anyone}
+    - {id: elite, label: Elite}
+    - {id: collegiate, label: Collegiate}
+    - {id: junior, label: Junior}
+    - {id: masters, label: Masters}
+    - {id: adaptive, label: Adaptive}
+    - {id: instructor, label: Instructor}
+  # How to sign up, in plain words (the SIGN UP block).
+  signup_methods:
+    - {id: online_registration, label: Register online}
+    - {id: lottery, label: Enter the lottery}
+    - {id: qualification, label: Qualify to enter}
+    - {id: invitation, label: By invitation}
+    - {id: membership_then_online, label: "Join first, then register online"}
+    - {id: at_venue, label: Sign up at the venue}
+    - {id: none_spectator_only, label: Spectator event}
+  # Venue kinds as the panel names them.
+  venue_kinds:
+    - {id: resort, label: Ski area}
+    - {id: nordic_center, label: Nordic center}
+    - {id: trail, label: Trail}
+    - {id: town, label: Town}
+    - {id: lake, label: Lake}
+    - {id: park, label: Park}
+    - {id: fairground, label: Fairground}
+    - {id: arena, label: Arena}
+    - {id: jump_complex, label: Jump complex}
+    - {id: other, label: Venue}
+  abroad_groups: [instructor]
+  # The longest format text a record may carry (docs/map/EVENTS.md).
+  format_max_chars: 160
+  # A venue of kind resort this close to a resort of the build is probably that resort: the build warns, so the
+  # lane can cite it by resort_id instead.
+  resort_match_km: 1.5
+  # The month chips of the Events filter: these months of the season get a chip each (in this order); every other
+  # month shares the "Other months" chip.
+  month_chips: [11, 12, 1, 2, 3, 4]
+  # The resort panel's "Events here" shows at most this many events (the next ones by the viewer's date).
+  resort_panel_max: 3

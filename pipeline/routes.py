@@ -168,6 +168,8 @@ class Ctx:
     state_names: dict[str, str]
     clusters: dict[str, dict]
     resorts: dict[str, dict]
+    season_label: str = "2026/27"   # the events season (events.json season.label)
+    events_max: int = 3             # "Events here" on a resort page (config events.resort_panel_max)
 
 
 def _source_link(ctx: Ctx, source_id: Optional[str]) -> str:
@@ -398,6 +400,196 @@ def render_passes(ctx: Ctx, r: dict) -> str:
     return f'<div class="fact passes"><dt>Passes</dt><dd><ul class="pass-list">{"".join(lis)}</ul></dd></div>'
 
 
+# ── Events (ROADMAP item 22; keep in step with map/js/events.js) ──
+
+EVENTS_PATH = "/map/events/"
+MONTHS_LONG = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+               "November", "December"]
+
+
+def events_meta(events: Optional[dict]) -> tuple[str, str]:
+    """Title and description of /map/events/ (map/js/meta.js metaFor, level events)."""
+    return (f"Snowsports Events and Competitions • {BRAND}",
+            "Find snowsports races, competitions and instructor events across the United States, with dates, venues "
+            "and how to sign up. Every detail links to its source.")
+
+
+def event_href(venue_id: Optional[str], event_id: Optional[str] = None) -> str:
+    """Deep link into EVENTS mode: /map/events/?venue=<id>&event=<id> (map/js/router.js hrefFor)."""
+    q = [f"venue={venue_id}"] if venue_id else []
+    if event_id:
+        q.append(f"event={event_id}")
+    return EVENTS_PATH + (f"?{'&'.join(q)}" if q else "")
+
+
+def date_span(start: Optional[str], end: Optional[str]) -> str:
+    """"Feb 25 to 27, 2027", "Nov 28 to Dec 2, 2026", "Dec 30, 2026 to Jan 2, 2027" or "Feb 25, 2027"."""
+    a = re.match(r"^(\d{4})-(\d{2})-(\d{2})", str(start or ""))
+    b = re.match(r"^(\d{4})-(\d{2})-(\d{2})", str(end or ""))
+    if not a:
+        return ""
+    ya, ma, da = a.group(1), MONTHS[int(a.group(2)) - 1], int(a.group(3))
+    if not b or b.group(0) == a.group(0):
+        return f"{ma} {da}, {ya}"
+    yb, mb, db = b.group(1), MONTHS[int(b.group(2)) - 1], int(b.group(3))
+    if ya == yb and ma == mb:
+        return f"{ma} {da} to {db}, {ya}"
+    if ya == yb:
+        return f"{ma} {da} to {mb} {db}, {ya}"
+    return f"{ma} {da}, {ya} to {mb} {db}, {yb}"
+
+
+def event_when(e: dict, season_label: str) -> str:
+    """The date line of an event (map/js/events.js whenText)."""
+    if e.get("program"):   # a season long program
+        timing = (e.get("usual_timing") or {}).get("value")
+        return f"Runs {timing}" if timing else "Runs all season"
+    ed = e.get("edition_2026_27")
+    if ed:
+        return date_span(ed["start"], ed.get("end")) if ed.get("end") else f"Starts {date_span(ed['start'], None)}"
+    le = e.get("last_edition") or {}
+    unpublished = f"{season_label} date not yet published."
+    if le.get("start"):
+        return f"Last held {date_span(le['start'], le.get('end'))}. {unpublished}"
+    if le.get("season"):
+        return f"Last held in the {le['season']} season. {unpublished}"
+    return unpublished
+
+
+def resort_events_when(item: dict, season_label: str) -> str:
+    """The date line of a Resort.events item (map/js/panel.js eventsHere)."""
+    if item.get("published"):
+        return date_span(item["start"], item.get("end")) if item.get("end") else f"Starts {date_span(item.get('start'), None)}"
+    if item.get("season_long"):
+        return f"Runs {item['timing']}" if item.get("timing") else "Runs all season"
+    return event_when({"last_edition": {"start": item.get("start"), "end": item.get("end"), "season": item.get("season")}},
+                      season_label)
+
+
+def render_resort_events(ctx: Ctx, r: dict, season_label: str = "2026/27", limit: int = 3) -> str:
+    """"Events here" on a resort page: its first events in date order, each linked into EVENTS mode."""
+    ev = r.get("events") or {}
+    items = ev.get("items") or []
+    if not items:
+        return ""
+    lis = []
+    for it in items[:limit]:
+        meta = [_badge(it.get("confidence")) + " " if it.get("confidence") else "",
+                f"Last verified {_esc(_date(it.get('as_of')))}" if it.get("as_of") else ""]
+        link = _source_link(ctx, it.get("source_id"))
+        lis.append(f'<li><a class="ev-here-link" href="{_esc(event_href(r["id"], it["id"]))}">{_esc(it["name"])}</a> '
+                   f'<span class="nav-meta">{_esc(it.get("discipline_label", ""))}</span> '
+                   f'<span class="fact-meta">{_esc(resort_events_when(it, season_label))} {"".join(meta)}'
+                   f'{" · " + link if link else ""}</span></li>')
+    n = ev.get("count") or len(items)
+    more = (f'<p class="ev-here-all"><a href="{_esc(event_href(r["id"]))}">'
+            f'{_esc("See the event" if n == 1 else f"See all {n} events")} at {_esc(r["name"])} on the events map</a></p>')
+    return (f'<section class="panel-section events-here"><h3>Events here</h3><ul class="ev-here">{"".join(lis)}</ul>'
+            f"{more}</section>")
+
+
+def _event_place(venue: dict, state_names: dict[str, str]) -> str:
+    """"Cable, WI", "Vail, CO" (a resort venue names the resort), "Lillehammer, NO" for a venue abroad."""
+    town = venue.get("town") if venue.get("town") != venue.get("name") else None
+    bits = [None if venue.get("resort_id") else town, venue.get("state") or venue.get("country")]
+    return ", ".join(b for b in bits if b)
+
+
+def render_events(ctx: Ctx, events: dict) -> str:
+    """The prerendered /map/events/ list: every event by month, then the undated ones, then the calendars."""
+    season = (events.get("season") or {}).get("label", "2026/27")
+    evs = events.get("events") or []
+    venues = {v["id"]: v for v in events.get("venues") or []}
+    disc = {d["id"]: d["label"] for g in events.get("groups") or [] for d in g.get("disciplines") or []}
+    groups = {g["id"]: g["label"] for g in events.get("groups") or []}
+    counts = events.get("counts") or {}
+    out = [_heading("Events", "Events and competitions"),
+           f'<p class="intro">Races, competitions and instructor events across the United States for the {_esc(season)} '
+           "season, with dates, venues and how to sign up. Every detail shows its source, its confidence level and the "
+           "date it was last verified.</p>"]
+    if not evs:
+        out.append('<p class="empty">Events are being compiled. Check back soon.</p>')
+        out.append(_footer())
+        return "".join(out)
+    out.append('<dl class="stats">' + "".join(
+        f'<div class="stat"><dt>{_esc(k)}</dt><dd>{v:,}</dd></div>' for k, v in (
+            ("Events", counts.get("events", len(evs))), ("Venues", counts.get("venues", 0)),
+            (f"{season} dates", counts.get("dated", 0)))) + "</dl>")
+
+    def item(e: dict) -> str:
+        v = venues.get(e.get("venue_id")) or {}
+        meta = " · ".join(x for x in (event_when(e, season), disc.get(e.get("discipline"), ""),
+                                      ", ".join(b for b in (v.get("name"), _event_place(v, ctx.state_names)) if b)) if x)
+        url = ((e.get("signup") or {}).get("url") or {}).get("value", "")
+        sign = (f' <a class="ev-signup-link" href="{_esc(url)}" {NEW_TAB}>Sign up</a>'
+                if str(url).startswith(("https://", "http://")) else "")
+        return (f'<li><a class="ev-item-link" href="{_esc(event_href(e.get("venue_id"), e["id"]))}">{_esc(e["name"])}</a>'
+                f'{sign}<span class="nav-meta">{_esc(meta)}</span></li>')
+
+    by_month: dict[tuple[int, int], list[dict]] = {}
+    undated: list[dict] = []
+    programs: list[dict] = []
+    for e in evs:
+        ed = e.get("edition_2026_27")
+        if ed:
+            y, m = int(ed["start"][:4]), int(ed["start"][5:7])
+            by_month.setdefault((y, m), []).append(e)
+        else:
+            (programs if e.get("program") else undated).append(e)
+    parts = []
+    for (y, m) in sorted(by_month):
+        parts.append(f'<h4 class="sub ev-month">{MONTHS_LONG[m - 1]} {y}</h4>'
+                     f'<ul class="ev-list">{"".join(item(e) for e in by_month[(y, m)])}</ul>')
+    if programs:
+        parts.append('<h4 class="sub ev-month">Season long</h4>'
+                     f'<ul class="ev-list">{"".join(item(e) for e in programs)}</ul>')
+    if undated:
+        parts.append(f'<h4 class="sub ev-month">{_esc(season)} date not yet published</h4>'
+                     f'<ul class="ev-list">{"".join(item(e) for e in undated)}</ul>')
+    out.append(f'<section class="panel-section"><h3>Calendar {_esc(season)}</h3>{"".join(parts)}</section>')
+    cals = events.get("calendars") or []
+    if cals:
+        lis = "".join(
+            f'<li><a class="ev-cal-link" href="{_esc(c["url"]["value"])}" {NEW_TAB}>{_esc(c["name"])}</a> '
+            f'<span class="nav-meta">{_esc(groups.get(c.get("group"), ""))} · '
+            f'{_esc("National" if c.get("region") == "national" else ctx.state_names.get(c.get("region"), c.get("region")))}</span></li>'
+            for c in cals if str((c.get("url") or {}).get("value", "")).startswith(("https://", "http://")))
+        out.append(f'<section class="panel-section"><h3>Calendars</h3><ul class="ev-list">{lis}</ul></section>')
+    out.append(_footer())
+    return "".join(out)
+
+
+def events_jsonld(events: dict) -> dict:
+    """CollectionPage with an ItemList of SportsEvent for every event with a published date in the season."""
+    venues = {v["id"]: v for v in events.get("venues") or []}
+    disc = {d["id"]: d["label"] for g in events.get("groups") or [] for d in g.get("disciplines") or []}
+    items = []
+    for e in events.get("events") or []:
+        ed = e.get("edition_2026_27")
+        v = venues.get(e.get("venue_id"))
+        if not ed or not v:
+            continue
+        address = {"@type": "PostalAddress", "addressCountry": v.get("country") or "US"}
+        if v.get("state"):
+            address["addressRegion"] = v["state"]
+        if v.get("town"):
+            address["addressLocality"] = v["town"]
+        ev = {"@type": "SportsEvent", "name": e["name"], "startDate": ed["start"], "url": SITE + event_href(v["id"], e["id"]),
+              "sport": disc.get(e.get("discipline"), e.get("discipline")),
+              "location": {"@type": "Place", "name": v["name"], "address": address}}
+        if ed.get("end"):
+            ev["endDate"] = ed["end"]
+        if (e.get("organizer") or {}).get("name"):
+            ev["organizer"] = {"@type": "Organization", "name": e["organizer"]["name"]}
+        items.append(ev)
+    title = events_meta(events)[0]
+    return {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "name": title, "url": SITE + EVENTS_PATH, "mainEntity": {
+            "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "item": ev}
+                                                    for i, ev in enumerate(items)]}},
+        _breadcrumbs([("Snowsports Career Map", "/map/"), ("Events", EVENTS_PATH)])]}
+
+
 def render_resort(ctx: Ctx, r: dict, c: dict, st: str) -> str:
     st_name = ctx.state_names.get(st.upper(), st)
     crumbs = _crumbs([("United States", "/map/"), (st_name, f"/map/{st}/"), (c["name"], f"/map/{st}/{c['id']}/"), (r["name"], None)])
@@ -460,6 +652,7 @@ def render_resort(ctx: Ctx, r: dict, c: dict, st: str) -> str:
             pay = '<p class="not-verified">Not yet verified</p>'
         out.append(f'<section class="panel-section"><h3>Career</h3><p class="sub">Hourly pay by certification</p>{pay}</section>')
     out.append(render_jobs(ctx, r))
+    out.append(render_resort_events(ctx, r, ctx.season_label, ctx.events_max))
     out.append(render_housing(ctx, r))
     out.append(_footer())
     return "".join(x for x in out if x)
@@ -581,6 +774,11 @@ def plan_pages(build: Path) -> dict[str, Page]:
         if r.get("id") not in resort_by_id:
             warn(f"resort id {r.get('id')!r}")
     ctx = Ctx({s["id"]: s for s in sources_file.get("sources", [])}, state_names, cluster_by_id, resort_by_id)
+    events = _load(build, "events.json", optional=True)
+    if events:
+        ctx.season_label = (events.get("season") or {}).get("label") or ctx.season_label
+        defs = _load(build, "definitions.json", optional=True) or {}
+        ctx.events_max = int(((defs.get("events") or {}).get("resort_panel_max")) or ctx.events_max)
 
     names = [r["name"] for r in resort_by_id.values()]
     duplicate_names = {n for n in names if names.count(n) > 1}
@@ -626,6 +824,10 @@ def plan_pages(build: Path) -> dict[str, Page]:
             # The sitemap lists Tier A resorts only; Tier B pages exist and stay crawlable.
             pages[f"{st}/{c['id']}/{r['id']}/"] = Page(title, desc, canonical, render_resort(ctx, r, c, st), jsonld, record,
                                                       in_sitemap=r.get("tier") == "A")
+
+    if events is not None:   # /map/events/: EVENTS mode, prerendered with every event (pipeline/events.py)
+        title, desc = events_meta(events)
+        pages["events/"] = Page(title, desc, EVENTS_PATH, render_events(ctx, events), events_jsonld(events))
     return pages
 
 

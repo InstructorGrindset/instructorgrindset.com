@@ -55,6 +55,8 @@
           </div>
           <!-- Hiring now count (map/js/hiring.js); a toggle for the Hiring now filter. -->
           <button id="hiring-pill" class="mh-pill" type="button" aria-pressed="false" hidden><span class="mh-pill-dot" aria-hidden="true"></span>Hiring now <span class="mh-count"></span></button>
+          <!-- Events of the season still ahead (data/build/events-summary.json at idle); switches to EVENTS mode. -->
+          <button id="events-pill" class="mh-pill mh-pill-events" type="button" aria-pressed="false" hidden><span class="mh-pill-dot" aria-hidden="true"></span>Events <span class="mh-count"></span></button>
           <!-- Shown only when the jobs feed (data/build/jobs/postings.json) has a real fetch time. -->
           <p id="feed-live" class="feed-live" hidden><span class="live-dot" aria-hidden="true"></span><span class="live-label">Live</span> <span class="live-what">jobs<span class="visually-hidden"> feed, updated</span></span> <time></time></p>
           <!-- Resort search (map/js/search.js loads on first focus); shown once the map data has loaded. -->
@@ -90,6 +92,12 @@
         <section id="layers-panel" class="layers-panel" aria-label="Map layers" hidden>
           <div class="lp-sheet-head"><h2 class="lp-sheet-title" tabindex="-1">Layers</h2><button id="layers-close" class="mh-btn lp-close" type="button">Close</button></div>
           <div id="lp-view" class="lp-view"></div>
+          <!-- RESORTS (the resort map) or EVENTS (event venues, map/js/events.js, loaded on first use). -->
+          <fieldset id="lp-mode" class="lp-mode" hidden>
+            <legend class="visually-hidden">Map mode</legend>
+            <label class="lp-mode-opt" for="map-mode-resorts"><input type="radio" id="map-mode-resorts" name="map-mode" value="resorts" checked><span>Resorts</span></label>
+            <label class="lp-mode-opt" for="map-mode-events"><input type="radio" id="map-mode-events" name="map-mode" value="events"><span>Events</span></label>
+          </fieldset>
           <div id="recolor" class="recolor" hidden></div>
           <details id="layers-box" class="lp-box" open>
             <summary class="lp-summary">Layers</summary>

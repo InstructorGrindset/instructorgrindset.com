@@ -1,0 +1,743 @@
+# Instructor events (PSIA-AASI national and regional) and the national and division calendars a visitor would use
+# to find more events. Web access was limited to search results and Wikipedia, so almost every value is
+# `estimated`. The shared web search budget ran out before ISDRA, US Ski Mountaineering and Skijoring America
+# were searched; their calendar entries use sites that Wikipedia cites.
+batch: events-instructor
+researched_date: 2026-10-17
+
+sources:
+# PSIA-AASI national events
+- id: events-instructor-psia-2027-national-dates-search
+  url: https://thesnowpros.org/2026/08/2027-national-event-dates-and-locations-announced/
+  title: 2027 national event dates and locations announced
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Lists National Academy (Alpine, Snowboard, Telemark,
+    Adaptive) at Copper Mountain April 12 to 16, 2027, Cross Country at Mt. Bachelor, and Women's Summit at Sun
+    Valley March 2 to 4, 2027. Its registration opening date reads "Tuesday, October 6, 2027", which falls after
+    the events and looks like a typo, so it is not used.
+- id: events-instructor-psia-national-events-calendar-search
+  url: https://thesnowpros.org/calendar/national-academies/
+  title: PSIA-AASI National events
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. The snippet lists Rider Rally (Snowboard) April 12 to 16,
+    2027 at Copper Mountain, Cross Country Academy March 21 to 23, 2027 at Mt. Bachelor, Women's Summit March 2 to
+    4, 2027 at Sun Valley, Freestyle Academy with 2027 dates TBD, and Interski at Vail in April 2027.
+- id: events-instructor-psia-national-events-p8176-search
+  url: https://thesnowpros.org/?p=8176
+  title: PSIA-AASI National events
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. An earlier version of the national events page: lists
+    Freestyle Academy at Northstar, California, February 23 to 27, 2026, hosted by the Western Region, and marks
+    the 2026 Cross Country Academy as cancelled.
+- id: events-instructor-psia-national-academy-alpine-search
+  url: https://thesnowpros.org/events/national-academy/
+  title: National Academy (Alpine)
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. States the event is open only to current PSIA-AASI
+    members with at least Level I certification, a price of $1,750 that excludes lift tickets, lodging and
+    travel, and that registration ends Monday, March 22, 2027 or when the event reaches capacity.
+- id: events-instructor-psia-xc-academy-search
+  url: https://thesnowpros.org/?p=9161
+  title: cross country
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Cross Country Academy event page at Mt. Bachelor.
+- id: events-instructor-psia-freestyle-academy-2025-search
+  url: https://thesnowpros.org/2025/02/register-now-for-psia-aasi-freestyle-academy/
+  title: register now for psia aasi freestyle academy
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Freestyle Academy at Killington, March 3 to 7, 2025.
+- id: events-instructor-psia-freestyle-academy-search
+  url: https://thesnowpros.org/events/freestyle-academy
+  title: Freestyle Academy
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-psia-interski-search
+  url: https://thesnowpros.org/events/interski/
+  title: Interski Vail 2027
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Lists Interski April 4 to 10, 2027 at Vail Mountain,
+    Colorado, with registration opened April 6, 2026, and the full education schedule due July 2026.
+- id: events-instructor-psia-interski-2023-announcement-search
+  url: https://thesnowpros.org/2023/12/psia-aasi-partners-with-vail-mountain-town-of-vail-to-host-interski-2027/
+  title: PSIA-AASI Partners with Vail Mountain, Town of Vail to Host Interski 2027
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. December 2023 announcement: PSIA-AASI hosts Interski
+    2027 with Vail Mountain and the Town of Vail; announced dates April 3 to 10, 2027; Interski is held every four
+    years and was last in the US in 1968; instructor associations from more than 30 nations voted on the bid.
+- id: events-instructor-townlift-interski-2024-search
+  url: https://townlift.com/2024/04/ski-instructors-interski-gathering-returning-to-the-usa-after-59-years
+  title: ski instructors interski gathering returning to the usa after 59 years
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Reports Interski April 3 to 10, 2027 at Vail and Beaver
+    Creek with up to 2,000 people expected.
+- id: events-instructor-psia-team-selection-2024-search
+  url: https://thesnowpros.org/?p=23030
+  title: 2024 PSIA-AASI National Team Selection Opens Jan. 12
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. The 2024 selection process opened January 12, 2024,
+    with guidelines covering the application process, schedule and location.
+- id: events-instructor-psia-team-selection-2024-athletes-search
+  url: https://thesnowpros.org/?p=6679
+  title: Meet the Amazing Instructors Heading to 2024 PSIA-AASI Team Selection
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. The search summary gave the 2024 selection as Sunday,
+    April 21 to Friday, April 26, 2024 in Big Sky, Montana; it drew on this page and the related 2024 team
+    selection results, without saying which one held the dates.
+- id: events-instructor-psia-what-is-national-team-search
+  url: https://thesnowpros.org/2024/03/what-is-the-psia-aasi-national-team/
+  title: What Is the PSIA-AASI National Team?
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Tryouts are held every four years to choose a new team
+    to represent the association; the 2024 to 2028 team's term coincides with Interski.
+- id: events-instructor-wikipedia-psia
+  url: https://en.wikipedia.org/wiki/Professional_Ski_Instructors_of_America
+  title: Professional Ski Instructors of America & American Association of Snowboard Instructors (Wikipedia)
+  accessed_date: 2026-10-17
+  note: Read through the Wikipedia API (external links). Lists http://thesnowpros.org/ as the official site.
+
+# PSIA-AASI regions and regional events
+- id: events-instructor-psia-regions-search
+  url: https://thesnowpros.org/regions/
+  title: PSIA-AASI Regions
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Eight regions cover the US (Central, Eastern,
+    Intermountain, Northern Intermountain, Northern Rocky Mountain, Northwest, Rocky Mountain, Western); each
+    region runs its own events and certification clinics; members cannot sign up for a certification exam in
+    another region without prior authorization from their home region and that region's prerequisites.
+- id: events-instructor-psia-region-central-search
+  url: https://thesnowpros.org/regions/central/
+  title: thesnowpros.org (Central region page)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-psia-region-intermountain-search
+  url: https://thesnowpros.org/regions/intermountain/
+  title: thesnowpros.org (Intermountain region page)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Lists the region's states as ID, UT and WY.
+- id: events-instructor-psia-region-northwest-search
+  url: https://thesnowpros.org/regions/northwest/
+  title: thesnowpros.org (Northwest region page)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Lists the region's states as AK, ID, MT, OR and WA.
+- id: events-instructor-psia-region-rocky-mountain-search
+  url: https://thesnowpros.org/regions/rocky-mountain/
+  title: Rocky Mountain
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Rocky Mountain covers Arizona, Colorado, Kansas,
+    Nebraska, New Mexico, Oklahoma, Texas and part of Wyoming.
+- id: events-instructor-psia-rm-events-search
+  url: https://psia-rm.org/events
+  title: psia-rm.org (events)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-psia-region-nrm-search
+  url: https://thesnowpros.org/regions/northern-rocky-mountain/
+  title: Northern Rocky Mountain
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. States MT, ND, SD and WY; office in Big Sky, Montana.
+- id: events-instructor-psia-region-ni-search
+  url: https://thesnowpros.org/?p=3261
+  title: Northern Intermountain
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The snippet showed no events or state list.
+- id: events-instructor-psia-region-western-search
+  url: https://thesnowpros.org/western
+  title: thesnowpros.org (Western region page)
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-vermontadaptive-exams-search
+  url: https://www.vermontadaptive.org/vermont-adaptive-to-host-free-psia-aasi-in-house-exams-this-spring-for-volunteers-interns-and-staff/
+  title: Vermont Adaptive to Host Free PSIA/AASI In-House Exams This Spring for Volunteers, Interns and Staff
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Points instructors to psia-e.org for the full list of
+    Eastern events and certification information.
+- id: events-instructor-vermontadaptive-projam-2022-search
+  url: https://www.vermontadaptive.org/?p=3564
+  title: "Date : 12/12/2022 - 12/16/2022"
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Vermont Adaptive listing of the December 12 to 16, 2022
+    edition at Killington; links https://psia-e.org/ev/feature-events/masters-academy-snow-pro-jam/ and says
+    popular groups fill quickly.
+- id: events-instructor-mountaintimes-projam-2023-search
+  url: https://mountaintimes.info/2023/12/20/over-600-snowsports-professionals-gather-at-killington-for-the-psia-aasi-projam/
+  title: On December 20, 2023 (Mountain Times, PSIA-AASI ProJam at Killington)
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Reports the ProJam and Master's Academy at Killington in
+    mid December, December 11 to 15, 2023; running since 1986; held at Killington exclusively since 2016;
+    registration for that edition opened September 18.
+- id: events-instructor-psia-road-trip-spring-2024-search
+  url: https://thesnowpros.org/?p=40885
+  title: Road Trip! Spring Education Events Across the Country
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Roundup of spring 2024 regional events (the search
+    summaries place it in spring 2024, and its text names 2024 for the Intermountain Spring Clinic): Eastern
+    Spring Academy April 4 to 7 and Spring Rally April 6 to 7 at Sugarbush; Central Spring Rally April 10 to 11
+    at Aspen Snowmass; Intermountain Spring Clinic April 12 to 14 at Brian Head; Rocky Mountain Vail Spring Fling
+    April 13 to 14; Western Spring Convention April 19 to 21.
+- id: events-instructor-psia-2024-25-calendar-search
+  url: https://thesnowpros.org/2024/09/the-2024-25-event-calendar-is-live/
+  title: the 2024 25 event calendar is live
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. September 2024 post on regional events for 2024/25:
+    Intermountain Fall Rally October 19 at the National Ability Center in Park City; Central Fall Opener at Nub's
+    Nob December 7 to 8 with continuing education and Level I exams in a convention format; Northern Rocky
+    Mountain Fall Fest at Big Sky, Friday December 6 to Sunday December 8.
+- id: events-instructor-wikipedia-park-city
+  url: https://en.wikipedia.org/wiki/Park_City,_Utah
+  title: Park City, Utah (Wikipedia)
+  accessed_date: 2026-10-17
+  note: Coordinates of the Park City town center from Wikipedia.
+
+# National calendars beyond PSIA-AASI
+- id: events-instructor-usss-all-events-search
+  url: https://www.usskiandsnowboard.org/events/all
+  title: All Events
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Lists upcoming competitions by date.
+- id: events-instructor-usss-2026-27-events-search
+  url: https://www.usskiandsnowboard.org/2026-27-events
+  title: 2026-27 Events
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. The season's 13 domestic World Cup events grouped by
+    discipline.
+- id: events-instructor-usss-domestic-wc-search
+  url: https://www.usskiandsnowboard.org/domestic-world-cup-events
+  title: Domestic World Cup Events
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-usss-alpine-calendar-search
+  url: https://my.usskiandsnowboard.org/aip/alpine/calendar
+  title: Calendar
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. U.S. Ski & Snowboard alpine calendar.
+- id: events-instructor-usss-supertour-search
+  url: https://www.usskiandsnowboard.org/supertour
+  title: SuperTour presented by NNF
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Cross country SuperTour and National Ranking List race
+    dates; points members to the Event Lookup tool in the my.usskiandsnowboard dashboard for FIS and NRL events.
+- id: events-instructor-fis-calendar-search
+  url: https://www.fis-ski.com/DB/general/calendar-results.html
+  title: FIS
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. FIS calendar and results for all disciplines, with
+    filters for season, discipline, category, gender, date, place and nation.
+- id: events-instructor-fis-alpine-calendar-search
+  url: https://www.fis-ski.com/DB/alpine-skiing/calendar-results.html
+  title: FIS
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-fis-snowboard-calendar-search
+  url: https://www.fis-ski.com/DB/snowboard/calendar-results.html
+  title: FIS
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-fis-cross-country-calendar-search
+  url: https://www.fis-ski.com/DB/cross-country/calendar-results.html
+  title: FIS
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-fis-ski-jumping-calendar-search
+  url: https://www.fis-ski.com/DB/ski-jumping/calendar-results.html?noselection=true
+  title: FIS
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-fis-freeski-calendar-search
+  url: https://www.fis-ski.com/DB/freestyle-freeski/freeski/calendar-results.html?eventselection=
+  title: FIS
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-uscsa-home-search
+  url: https://www.uscsa.org/
+  title: USCSA - United States Collegiate Ski and Snowboard Association
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. The site menu has Schedules & Results and Competition
+    Calendar pages under In Season Events; the search did not return their addresses.
+- id: events-instructor-uscsa-conferences-search
+  url: https://www.uscsa.org/conferences.html
+  title: USCSA - United States Collegiate Ski and Snowboard Association
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Racing is organized by regional conference.
+- id: events-instructor-ncaa-skiing-search
+  url: https://www.ncaa.org/championship/national-collegiate/skiing/
+  title: www.ncaa.org (National Collegiate Skiing championship)
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Lists the 2027 championships March 10 to 13, 2027 at
+    Stowe Mountain Resort and Craftsbury Outdoor Center, Vermont.
+- id: events-instructor-usasa-about-search
+  url: https://usasa.org/about-us
+  title: The future of snowboarding & Freeskiing
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. USASA has 32 regional series across the US; National
+    Championships are held each year at Copper Mountain. The search returned no USASA calendar page address.
+- id: events-instructor-ifsa-handbook-search
+  url: https://ifsafreeride.org/wp-content/uploads/2025/10/2026-Fall-IFSA-Junior-Series-Handbook.pdf
+  title: 2026 Fall IFSA Junior Series Handbook
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. IFSA runs more than 185 events across ten regions; the
+    search summary pointed to the IFSA website at ifsafreeride.org for the calendar.
+- id: events-instructor-usbiathlon-national-events-search
+  url: https://usbiathlon.org/nationalevents
+  title: U.S. Biathlon Events Calendar
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-instructor-usbiathlon-2026-27-search
+  url: https://www.usbiathlon.org/news/2026/may/06/u-s-biathlon-announces-2026-27-domestic-events-calendar
+  title: U.S. Biathlon Announces 2026-27 Domestic Events Calendar
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. Youth and Junior Nationals at Ariens Nordic Center,
+    Brillion, Wisconsin, end of December 2026; Masters Nationals at Lake Placid, February 2027; Senior Nationals
+    at Kincaid Park, Anchorage, end of March 2027.
+- id: events-instructor-atra-snowshoe-search
+  url: https://trailrunner.com/snowshoe
+  title: Snowshoe Racing
+  accessed_date: 2026-10-17
+  note: >
+    From a search result for this page; page not opened. American Trail Running Association snowshoe page with
+    the Snowshoe National Championships, an event calendar and snowshoe news. A 2022 item in the same search
+    reported that the United States Snowshoe Association had ended and that the American Trail Running
+    Association took over national races; the 2023 and 2024 nationals were still billed under the USSSA name.
+- id: events-instructor-trailrunner-usssa-2022-search
+  url: https://trailrunner.com/trail-news/race-week-2022-usssa-snowshoe-national-championships/
+  title: Race Week! 2022 USSSA Snowshoe National Championships
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+
+- id: events-instructor-wikipedia-skijoring
+  url: https://en.wikipedia.org/wiki/Skijoring
+  title: Skijoring (Wikipedia)
+  accessed_date: 2026-10-17
+  note: >
+    Read through the Wikipedia API (wikitext and external links). Says ISDRA sanctions many races in the US and
+    Canada and links http://www.isdra.org/; says Skijor USA, founded in 2018, promotes a national circuit of nearly
+    30 races and cites https://www.skijorusa.com/.
+
+venues:
+- id: park-city-ut-national-ability-center
+  name: National Ability Center
+  kind: other
+  state: UT
+  town: Park City
+  location:
+    lat: 40.6503
+    lon: -111.5014
+    precision: town
+    source_id: events-instructor-wikipedia-park-city
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Park City, Utah, from Wikipedia; the National Ability Center itself has no coordinates here.
+
+events:
+# National events
+- id: psia-aasi-national-academy
+  name: PSIA-AASI National Academy
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: copper-mountain, venue_id: null}
+  organizer: {name: PSIA-AASI, url: https://thesnowpros.org/, source_id: events-instructor-wikipedia-psia, as_of: 2026-10-17, confidence: reported}
+  format: {value: "National education week with alpine, snowboard (Rider Rally), telemark and adaptive groups", source_id: events-instructor-psia-2027-national-dates-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: {start: 2027-04-12, end: 2027-04-16, source_id: events-instructor-psia-2027-national-dates-search, as_of: 2026-10-17, confidence: estimated, note: "The national events calendar lists Rider Rally (Snowboard) on the same dates at Copper Mountain."}
+  signup:
+    method: membership_then_online
+    url: {value: https://thesnowpros.org/events/national-academy/, source_id: events-instructor-psia-national-academy-alpine-search, as_of: 2026-10-17, confidence: estimated}
+    deadline: {value: 2027-03-22, note: "Or earlier if the event reaches capacity", source_id: events-instructor-psia-national-academy-alpine-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 1750, note: "Listed price for the Alpine academy; excludes lift tickets, lodging and travel", source_id: events-instructor-psia-national-academy-alpine-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Current PSIA-AASI membership and at least Level I certification", source_id: events-instructor-psia-national-academy-alpine-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://thesnowpros.org/events/national-academy/, source_id: events-instructor-psia-national-academy-alpine-search, as_of: 2026-10-17, confidence: estimated}
+  calendar_url: {value: https://thesnowpros.org/calendar/national-academies/, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: psia-aasi-cross-country-academy
+  name: PSIA-AASI Cross Country Academy
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: mt-bachelor, venue_id: null}
+  organizer: {name: PSIA-AASI, url: https://thesnowpros.org/, source_id: events-instructor-wikipedia-psia, as_of: 2026-10-17, confidence: reported}
+  format: {value: "National education event for cross country instructors", source_id: events-instructor-psia-2027-national-dates-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: {start: 2027-03-21, end: 2027-03-23, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "The 2026 edition was cancelled, per an earlier version of the national events page."}
+  signup:
+    method: null
+    url: {value: "https://thesnowpros.org/?p=9161", source_id: events-instructor-psia-xc-academy-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: "https://thesnowpros.org/?p=9161", source_id: events-instructor-psia-xc-academy-search, as_of: 2026-10-17, confidence: estimated}
+  calendar_url: {value: https://thesnowpros.org/calendar/national-academies/, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: psia-aasi-womens-summit
+  name: PSIA-AASI Women's Summit
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: sun-valley, venue_id: null}
+  organizer: {name: PSIA-AASI, url: https://thesnowpros.org/, source_id: events-instructor-wikipedia-psia, as_of: 2026-10-17, confidence: reported}
+  edition_2026_27: {start: 2027-03-02, end: 2027-03-04, source_id: events-instructor-psia-2027-national-dates-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+  website: {value: https://thesnowpros.org/calendar/national-academies/, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://thesnowpros.org/calendar/national-academies/, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: psia-aasi-freestyle-academy
+  name: PSIA-AASI Freestyle Academy
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: northstar, venue_id: null}
+  organizer: {name: PSIA-AASI, url: https://thesnowpros.org/, source_id: events-instructor-wikipedia-psia, as_of: 2026-10-17, confidence: reported}
+  format: {value: "National freestyle education event; the venue changes by year (Killington in 2025, Northstar in 2026)", source_id: events-instructor-psia-national-events-p8176-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-23, end: 2026-02-27, season: 2025/26, source_id: events-instructor-psia-national-events-p8176-search, as_of: 2026-10-17, confidence: estimated, note: "Last edition, hosted by the Western Region. The current national events calendar lists 2027 dates as TBD and names no 2027 venue."}
+  signup:
+    method: null
+    url: {value: https://thesnowpros.org/events/freestyle-academy, source_id: events-instructor-psia-freestyle-academy-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://thesnowpros.org/events/freestyle-academy, source_id: events-instructor-psia-freestyle-academy-search, as_of: 2026-10-17, confidence: estimated}
+  calendar_url: {value: https://thesnowpros.org/calendar/national-academies/, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: interski-congress
+  name: Interski Congress
+  discipline: interski
+  disciplines_also: [psia_aasi_event]
+  levels: [instructor]
+  venue: {resort_id: vail, venue_id: null}
+  organizer: {name: PSIA-AASI (host association), url: https://thesnowpros.org/, source_id: events-instructor-psia-interski-2023-announcement-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "International congress of instructor associations held every four years; hosted by PSIA-AASI with Vail Mountain and the Town of Vail", source_id: events-instructor-psia-interski-2023-announcement-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: {start: 2027-04-04, end: 2027-04-10, source_id: events-instructor-psia-interski-search, as_of: 2026-10-17, confidence: estimated, note: "Current PSIA-AASI event page. The December 2023 announcement and a 2024 TownLift report gave April 3 to 10, 2027; a CSIA release gave April 4 to 9, 2027. TownLift names Vail and Beaver Creek."}
+  usual_timing: {value: "Every four years", source_id: events-instructor-psia-interski-2023-announcement-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+    url: {value: https://thesnowpros.org/events/interski/, source_id: events-instructor-psia-interski-search, as_of: 2026-10-17, confidence: estimated}
+    opens: {value: 2026-04-06, source_id: events-instructor-psia-interski-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://thesnowpros.org/events/interski/, source_id: events-instructor-psia-interski-search, as_of: 2026-10-17, confidence: estimated}
+  calendar_url: {value: https://thesnowpros.org/calendar/national-academies/, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: psia-aasi-national-team-selection
+  name: PSIA-AASI National Team Selection
+  discipline: psia_aasi_event
+  disciplines_also: [interski]
+  levels: [instructor, elite]
+  venue: {resort_id: big-sky, venue_id: null}
+  organizer: {name: PSIA-AASI, url: https://thesnowpros.org/, source_id: events-instructor-wikipedia-psia, as_of: 2026-10-17, confidence: reported}
+  format: {value: "Tryouts held every four years to choose the PSIA-AASI National Team, whose term spans the next Interski", source_id: events-instructor-psia-what-is-national-team-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-04-21, end: 2024-04-26, season: 2023/24, source_id: events-instructor-psia-team-selection-2024-athletes-search, as_of: 2026-10-17, confidence: estimated, note: "Last selection, at Big Sky. No source found for the next selection's dates or venue."}
+  usual_timing: {value: "Every four years", source_id: events-instructor-psia-what-is-national-team-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+    url: {value: "https://thesnowpros.org/?p=23030", source_id: events-instructor-psia-team-selection-2024-search, as_of: 2026-10-17, confidence: estimated, note: "2024 selection notice; it says the guidelines covered the application process, schedule and location."}
+  website: {value: https://thesnowpros.org/2024/03/what-is-the-psia-aasi-national-team/, source_id: events-instructor-psia-what-is-national-team-search, as_of: 2026-10-17, confidence: estimated}
+
+# Eastern
+- id: psia-e-snow-pro-jam
+  name: Masters Academy and Snow Pro Jam (PSIA-AASI Eastern)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: killington, venue_id: null}
+  organizer: {name: PSIA-AASI Eastern Region, url: https://psia-e.org/, source_id: events-instructor-vermontadaptive-exams-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Week of clinics for Eastern instructors, running since 1986 and held at Killington exclusively since 2016", source_id: events-instructor-mountaintimes-projam-2023-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2023-12-11, end: 2023-12-15, season: 2023/24, source_id: events-instructor-mountaintimes-projam-2023-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found in search results; later editions were not found."}
+  usual_timing: {value: "Mid December", source_id: events-instructor-mountaintimes-projam-2023-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+    url: {value: https://psia-e.org/ev/feature-events/masters-academy-snow-pro-jam/, source_id: events-instructor-vermontadaptive-projam-2022-search, as_of: 2026-10-17, confidence: estimated, note: "Event page linked from a Vermont Adaptive listing of the 2022 edition; popular groups fill quickly."}
+  website: {value: https://psia-e.org/ev/feature-events/masters-academy-snow-pro-jam/, source_id: events-instructor-vermontadaptive-projam-2022-search, as_of: 2026-10-17, confidence: estimated}
+  calendar_url: {value: https://psia-e.org/, source_id: events-instructor-vermontadaptive-exams-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: psia-e-spring-rally
+  name: Spring Academy and Spring Rally (PSIA-AASI Eastern)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: sugarbush, venue_id: null}
+  organizer: {name: PSIA-AASI Eastern Region, url: https://psia-e.org/, source_id: events-instructor-vermontadaptive-exams-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "The Eastern Region's annual spring event at Sugarbush: Spring Academy, then Spring Rally on the closing weekend", source_id: events-instructor-psia-road-trip-spring-2024-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-04-04, end: 2024-04-07, season: 2023/24, source_id: events-instructor-psia-road-trip-spring-2024-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found: Spring Academy April 4 to 7 and Spring Rally April 6 to 7. The year comes from the search summaries, which place the article in spring 2024."}
+  signup:
+    method: null
+  website: {value: https://psia-e.org/, source_id: events-instructor-vermontadaptive-exams-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://psia-e.org/, source_id: events-instructor-vermontadaptive-exams-search, as_of: 2026-10-17, confidence: estimated}
+
+# Central
+- id: psia-c-fall-opener
+  name: Fall Opener (PSIA-AASI Central)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic, psia_aasi_exam]
+  levels: [instructor]
+  venue: {resort_id: nubs-nob, venue_id: null}
+  organizer: {name: PSIA-AASI Central Region, url: https://thesnowpros.org/regions/central/, source_id: events-instructor-psia-region-central-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Convention format event with continuing education and Level I exams", source_id: events-instructor-psia-2024-25-calendar-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-12-07, end: 2024-12-08, season: 2024/25, source_id: events-instructor-psia-2024-25-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found in search results."}
+  signup:
+    method: null
+  website: {value: https://thesnowpros.org/regions/central/, source_id: events-instructor-psia-region-central-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://thesnowpros.org/regions/central/, source_id: events-instructor-psia-region-central-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: psia-c-spring-rally
+  name: Spring Rally (PSIA-AASI Central)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: snowmass, venue_id: null}
+  organizer: {name: PSIA-AASI Central Region, url: https://thesnowpros.org/regions/central/, source_id: events-instructor-psia-region-central-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Central Region spring event held in Colorado, with alpine, snowboard, telemark and adaptive groups and CEU credit", source_id: events-instructor-psia-road-trip-spring-2024-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-04-10, end: 2024-04-11, season: 2023/24, source_id: events-instructor-psia-road-trip-spring-2024-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found. The source names Aspen Snowmass without saying which of its mountains hosted; Snowmass is used for the map pin."}
+  signup:
+    method: null
+  website: {value: https://thesnowpros.org/regions/central/, source_id: events-instructor-psia-region-central-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://thesnowpros.org/regions/central/, source_id: events-instructor-psia-region-central-search, as_of: 2026-10-17, confidence: estimated}
+
+# Rocky Mountain
+- id: psia-rm-vail-spring-fling
+  name: Vail Spring Fling (PSIA-AASI Rocky Mountain)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: vail, venue_id: null}
+  organizer: {name: PSIA-AASI Rocky Mountain Region, url: https://psia-rm.org/events, source_id: events-instructor-psia-rm-events-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-04-13, end: 2024-04-14, season: 2023/24, source_id: events-instructor-psia-road-trip-spring-2024-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found. The year comes from the search summaries, which place the article in spring 2024."}
+  signup:
+    method: null
+  website: {value: https://psia-rm.org/events, source_id: events-instructor-psia-rm-events-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://psia-rm.org/events, source_id: events-instructor-psia-rm-events-search, as_of: 2026-10-17, confidence: estimated}
+
+# Intermountain
+- id: psia-i-spring-clinic
+  name: Spring Clinic (PSIA-AASI Intermountain)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: brian-head-resort, venue_id: null}
+  organizer: {name: PSIA-AASI Intermountain Region, url: https://thesnowpros.org/regions/intermountain/, source_id: events-instructor-psia-region-intermountain-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Spring clinic with one day or three day sign up; the party is included with registration", source_id: events-instructor-psia-road-trip-spring-2024-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-04-12, end: 2024-04-14, season: 2023/24, source_id: events-instructor-psia-road-trip-spring-2024-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found; the article names 2024 for this event."}
+  signup:
+    method: null
+  website: {value: https://thesnowpros.org/regions/intermountain/, source_id: events-instructor-psia-region-intermountain-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://thesnowpros.org/regions/intermountain/, source_id: events-instructor-psia-region-intermountain-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: psia-i-fall-rally
+  name: Fall Rally (PSIA-AASI Intermountain)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: null, venue_id: park-city-ut-national-ability-center}
+  organizer: {name: PSIA-AASI Intermountain Region, url: https://thesnowpros.org/regions/intermountain/, source_id: events-instructor-psia-region-intermountain-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-10-19, end: 2024-10-19, season: 2024/25, source_id: events-instructor-psia-2024-25-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found in search results."}
+  signup:
+    method: null
+  website: {value: https://thesnowpros.org/regions/intermountain/, source_id: events-instructor-psia-region-intermountain-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://thesnowpros.org/regions/intermountain/, source_id: events-instructor-psia-region-intermountain-search, as_of: 2026-10-17, confidence: estimated}
+
+# Northern Rocky Mountain
+- id: psia-nrm-fall-fest
+  name: Fall Fest (PSIA-AASI Northern Rocky Mountain)
+  discipline: psia_aasi_event
+  disciplines_also: [psia_aasi_clinic]
+  levels: [instructor]
+  venue: {resort_id: big-sky, venue_id: null}
+  organizer: {name: PSIA-AASI Northern Rocky Mountain Region, url: https://thesnowpros.org/regions/northern-rocky-mountain/, source_id: events-instructor-psia-region-nrm-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Two and a half days of multi discipline clinics and après ski", source_id: events-instructor-psia-2024-25-calendar-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2024-12-06, end: 2024-12-08, season: 2024/25, source_id: events-instructor-psia-2024-25-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "Most recent edition found in search results."}
+  signup:
+    method: null
+  website: {value: https://thesnowpros.org/regions/northern-rocky-mountain/, source_id: events-instructor-psia-region-nrm-search, as_of: 2026-10-17, confidence: estimated, note: "Organizer page that lists its events; no page for this event was found."}
+  calendar_url: {value: https://thesnowpros.org/regions/northern-rocky-mountain/, source_id: events-instructor-psia-region-nrm-search, as_of: 2026-10-17, confidence: estimated}
+
+calendars:
+# Every entry has region national. PSIA-AASI region calendars span several states; the states, where a source
+# names them, are in the url note.
+# PSIA-AASI
+- id: psia-aasi-national-events-calendar
+  name: PSIA-AASI national events calendar
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://thesnowpros.org/calendar/national-academies/, source_id: events-instructor-psia-national-events-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "National academies, Rider Rally, Women's Summit and Interski."}
+- id: psia-aasi-regions
+  name: PSIA-AASI regions (each region runs its own events, clinics and exams)
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://thesnowpros.org/regions/, source_id: events-instructor-psia-regions-search, as_of: 2026-10-17, confidence: estimated, note: "Eight regions cover the US. Exams are taken in the home region; another region's exam needs prior authorization from the home region."}
+- id: psia-aasi-interski-vail-2027
+  name: PSIA-AASI Interski Vail 2027 page (host association)
+  discipline: interski
+  region: national
+  url: {value: https://thesnowpros.org/events/interski/, source_id: events-instructor-psia-interski-search, as_of: 2026-10-17, confidence: estimated, note: "Host page for the 2027 congress; no source gave the Interski organization's own site."}
+- id: psia-aasi-eastern-calendar
+  name: PSIA-AASI Eastern Region events
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://psia-e.org/, source_id: events-instructor-vermontadaptive-exams-search, as_of: 2026-10-17, confidence: estimated, note: "Eastern events and certification information."}
+- id: psia-aasi-central-calendar
+  name: PSIA-AASI Central Region page
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://thesnowpros.org/regions/central/, source_id: events-instructor-psia-region-central-search, as_of: 2026-10-17, confidence: estimated}
+- id: psia-aasi-rocky-mountain-calendar
+  name: PSIA-AASI Rocky Mountain Region events
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://psia-rm.org/events, source_id: events-instructor-psia-rm-events-search, as_of: 2026-10-17, confidence: estimated, note: "Region covers AZ, CO, KS, NE, NM, OK, TX and part of WY (source events-instructor-psia-region-rocky-mountain-search)."}
+- id: psia-aasi-intermountain-calendar
+  name: PSIA-AASI Intermountain Region page
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://thesnowpros.org/regions/intermountain/, source_id: events-instructor-psia-region-intermountain-search, as_of: 2026-10-17, confidence: estimated, note: "Region covers ID, UT and WY."}
+- id: psia-aasi-northern-intermountain-calendar
+  name: PSIA-AASI Northern Intermountain Region page
+  discipline: psia_aasi_event
+  region: national
+  url: {value: "https://thesnowpros.org/?p=3261", source_id: events-instructor-psia-region-ni-search, as_of: 2026-10-17, confidence: estimated}
+- id: psia-aasi-northern-rocky-mountain-calendar
+  name: PSIA-AASI Northern Rocky Mountain Region page
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://thesnowpros.org/regions/northern-rocky-mountain/, source_id: events-instructor-psia-region-nrm-search, as_of: 2026-10-17, confidence: estimated, note: "Region covers MT, ND, SD and WY."}
+- id: psia-aasi-northwest-calendar
+  name: PSIA-AASI Northwest Region page (includes Alaska)
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://thesnowpros.org/regions/northwest/, source_id: events-instructor-psia-region-northwest-search, as_of: 2026-10-17, confidence: estimated, note: "Region covers AK, ID, MT, OR and WA."}
+- id: psia-aasi-western-calendar
+  name: PSIA-AASI Western Region page
+  discipline: psia_aasi_event
+  region: national
+  url: {value: https://thesnowpros.org/western, source_id: events-instructor-psia-region-western-search, as_of: 2026-10-17, confidence: estimated}
+
+# U.S. Ski & Snowboard
+- id: usss-all-events-calendar
+  name: U.S. Ski & Snowboard events (all sports)
+  discipline: alpine_racing
+  region: national
+  url: {value: https://www.usskiandsnowboard.org/events/all, source_id: events-instructor-usss-all-events-search, as_of: 2026-10-17, confidence: estimated, note: "All sports, listed by date."}
+- id: usss-2026-27-events
+  name: U.S. Ski & Snowboard 2026/27 domestic World Cup events
+  discipline: alpine_racing
+  region: national
+  url: {value: https://www.usskiandsnowboard.org/2026-27-events, source_id: events-instructor-usss-2026-27-events-search, as_of: 2026-10-17, confidence: estimated, note: "13 domestic World Cup events grouped by discipline: alpine, freestyle, freeski and snowboard, cross country."}
+- id: usss-domestic-world-cup-events
+  name: U.S. Ski & Snowboard domestic World Cup events
+  discipline: alpine_racing
+  region: national
+  url: {value: https://www.usskiandsnowboard.org/domestic-world-cup-events, source_id: events-instructor-usss-domestic-wc-search, as_of: 2026-10-17, confidence: estimated}
+- id: usss-alpine-calendar
+  name: U.S. Ski & Snowboard alpine calendar
+  discipline: alpine_racing
+  region: national
+  url: {value: https://my.usskiandsnowboard.org/aip/alpine/calendar, source_id: events-instructor-usss-alpine-calendar-search, as_of: 2026-10-17, confidence: estimated}
+- id: usss-supertour-calendar
+  name: U.S. Ski & Snowboard cross country SuperTour
+  discipline: cross_country
+  region: national
+  url: {value: https://www.usskiandsnowboard.org/supertour, source_id: events-instructor-usss-supertour-search, as_of: 2026-10-17, confidence: estimated, note: "SuperTour and National Ranking List races; members find FIS and NRL events with the Event Lookup tool in the my.usskiandsnowboard dashboard."}
+
+# FIS (filter the calendar by nation USA)
+- id: fis-calendar-all
+  name: FIS calendar and results (all disciplines)
+  discipline: alpine_racing
+  region: national
+  url: {value: https://www.fis-ski.com/DB/general/calendar-results.html, source_id: events-instructor-fis-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "All FIS disciplines; filters for season, discipline, category, gender, date, place and nation."}
+- id: fis-calendar-alpine
+  name: FIS alpine skiing calendar
+  discipline: alpine_racing
+  region: national
+  url: {value: https://www.fis-ski.com/DB/alpine-skiing/calendar-results.html, source_id: events-instructor-fis-alpine-calendar-search, as_of: 2026-10-17, confidence: estimated}
+- id: fis-calendar-snowboard
+  name: FIS snowboard calendar
+  discipline: snowboard_cross
+  region: national
+  url: {value: https://www.fis-ski.com/DB/snowboard/calendar-results.html, source_id: events-instructor-fis-snowboard-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "All FIS snowboard disciplines."}
+- id: fis-calendar-cross-country
+  name: FIS cross country calendar
+  discipline: cross_country
+  region: national
+  url: {value: https://www.fis-ski.com/DB/cross-country/calendar-results.html, source_id: events-instructor-fis-cross-country-calendar-search, as_of: 2026-10-17, confidence: estimated}
+- id: fis-calendar-ski-jumping
+  name: FIS ski jumping calendar
+  discipline: ski_jumping
+  region: national
+  url: {value: "https://www.fis-ski.com/DB/ski-jumping/calendar-results.html?noselection=true", source_id: events-instructor-fis-ski-jumping-calendar-search, as_of: 2026-10-17, confidence: estimated}
+- id: fis-calendar-freeski
+  name: FIS freeski calendar
+  discipline: slopestyle
+  region: national
+  url: {value: "https://www.fis-ski.com/DB/freestyle-freeski/freeski/calendar-results.html?eventselection=", source_id: events-instructor-fis-freeski-calendar-search, as_of: 2026-10-17, confidence: estimated, note: "Freeski slopestyle, halfpipe and big air."}
+
+# Collegiate
+- id: uscsa-calendar
+  name: USCSA (collegiate ski and snowboard)
+  discipline: alpine_racing
+  region: national
+  url: {value: https://www.uscsa.org/, source_id: events-instructor-uscsa-home-search, as_of: 2026-10-17, confidence: estimated, note: "Schedules & Results and Competition Calendar are under In Season Events; racing runs by regional conference (https://www.uscsa.org/conferences.html)."}
+- id: ncaa-skiing-calendar
+  name: NCAA skiing championships
+  discipline: alpine_racing
+  region: national
+  url: {value: https://www.ncaa.org/championship/national-collegiate/skiing/, source_id: events-instructor-ncaa-skiing-search, as_of: 2026-10-17, confidence: estimated, note: "Alpine and cross country national championship."}
+
+# Snowboard, freeski and freeride youth
+- id: usasa-series
+  name: USASA (32 regional snowboard and freeski series)
+  discipline: slopestyle
+  region: national
+  url: {value: https://usasa.org/about-us, source_id: events-instructor-usasa-about-search, as_of: 2026-10-17, confidence: estimated, note: "Organization page; the search returned no calendar page address."}
+- id: ifsa-freeride-calendar
+  name: IFSA freeride events
+  discipline: big_mountain
+  region: national
+  url: {value: https://ifsafreeride.org/, source_id: events-instructor-ifsa-handbook-search, as_of: 2026-10-17, confidence: estimated, note: "Site named in the search summary; it hosts the 2026 Fall IFSA Junior Series Handbook."}
+
+# Nordic
+- id: us-biathlon-national-events
+  name: U.S. Biathlon national events calendar
+  discipline: biathlon
+  region: national
+  url: {value: https://usbiathlon.org/nationalevents, source_id: events-instructor-usbiathlon-national-events-search, as_of: 2026-10-17, confidence: estimated, note: "The 2026/27 domestic calendar announcement is source events-instructor-usbiathlon-2026-27-search."}
+
+# Snowshoe, skijoring, sled dog
+- id: atra-snowshoe-calendar
+  name: American Trail Running Association snowshoe racing (national championships and calendar)
+  discipline: snowshoe_race
+  region: national
+  url: {value: https://trailrunner.com/snowshoe, source_id: events-instructor-atra-snowshoe-search, as_of: 2026-10-17, confidence: estimated, note: "A 2022 report said the United States Snowshoe Association ended and ATRA took over national races; later nationals still used the USSSA name."}
+- id: skijor-usa-circuit
+  name: Skijor USA (national equine skijoring circuit)
+  discipline: skijoring
+  region: national
+  url: {value: https://www.skijorusa.com/, source_id: events-instructor-wikipedia-skijoring, as_of: 2026-10-17, confidence: reported, note: "Per Wikipedia, Skijor USA, founded in 2018 as an affiliate of Skijor International, promotes a national circuit of nearly 30 races."}
+- id: isdra-sanctioned-races
+  name: ISDRA (International Sled Dog Racing Association)
+  discipline: sled_dog
+  region: national
+  url: {value: http://www.isdra.org/, source_id: events-instructor-wikipedia-skijoring, as_of: 2026-10-17, confidence: reported, note: "Per Wikipedia, ISDRA sanctions many sled dog and dog skijoring races in the US and Canada. Site from the article's external links; its race calendar page was not confirmed."}

@@ -1,0 +1,689 @@
+batch: events-backcountry
+researched_date: 2026-10-17
+
+# Lane: backcountry and heritage (skimo, uphill, telemark, longboard, retro, ski ballet, speed skiing, pond skims).
+# Every value below comes from a source listed here. Search result facts are `estimated`; facts read on an
+# opened Wikipedia page are `reported`. Values no source gave are left out.
+
+sources:
+# Skimo calendars and championships
+- id: events-backcountry-usaskimo-calendar-search
+  url: https://www.usaskimo.org/usa-skimo-events-calendar/
+  title: USA Skimo Events Calendar
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The result describes the calendar as covering July 1, 2025 to May 30, 2026.
+- id: events-backcountry-usaskimo-national-championship-search
+  url: https://www.usaskimo.org/eventer-category/national-championship/
+  title: National Championship
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-cbnordic-grand-traverse-ski-search
+  url: https://www.cbnordic.org/thegrandtraverse/ski
+  title: www.cbnordic.org
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-cbnordic-grand-traverse-search
+  url: https://cbnordic.org/thegrandtraverse
+  title: cbnordic.org
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-bikesignup-grand-traverse-search
+  url: https://bikesignup.com/Race/CO/CrestedButte/TheGrandTraverse
+  title: bikesignup.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The result shows the price for the 2025 race.
+- id: events-backcountry-aspensnowmass-power-of-four-search
+  url: https://aspensnowmass.com/while-you-are-here/events/audi-power-of-four-ski-mountaineering
+  title: audi power of four ski mountaineering
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-strambecco-power-of-four-search
+  url: https://strambecco.com/event/power-of-four-skimo/
+  title: Loading Events
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Third party race listing.
+- id: events-backcountry-solitude-powderkeg-search
+  url: https://www.solitudemountain.com/things-to-do/events-and-activities/wasatch-powderkeg
+  title: wasatch powderkeg
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-runsignup-heathen-challenge-search
+  url: https://runscore.runsignup.com/Race/Info/CO/GlenwoodSprings/TheHeathenChallenge
+  title: runscore.runsignup.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-cbnews-heathen-challenge-search
+  url: https://crestedbuttenews.com/?p=2307
+  title: Local rando skiers battle in Heathen Challenge at Sunlight Ski Resort
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-vermontpublic-stowe-heritage-search
+  url: https://www.vermontpublic.org/vermont-events-calendar/event/stowe-mountain-heritage-race-04-02-2026-21-58-12
+  title: stowe mountain heritage race 04 02 2026 21 58 12
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Third party events calendar listing.
+- id: events-backcountry-northeastexplorer-stowe-skimo-search
+  url: https://northeastexplorer.com/stowe-vermont-skimo-race/
+  title: stowe vermont skimo race
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-catamount-green-mountain-skimo-search
+  url: https://catamounttrail.org/cta-events/green-mountain-skimo-series/
+  title: green mountain skimo series
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-skeetawk-skimo-search
+  url: https://skeetawk.com/skimo
+  title: skeetawk.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-big-sky-skimo-cup-2026-search
+  url: https://runsignup.com/Race/Info/MT/Marysville/GreatDivideSkimo
+  title: runsignup.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The 2026 Big Sky Skimo Cup schedule (six events) appeared in the same search result summary, which drew on this page and related RunSignup and resort pages, so the exact page carrying the schedule is uncertain.
+- id: events-backcountry-skiwhitefish-whiteout-search
+  url: https://skiwhitefish.com/event/2026-whitefish-whiteout
+  title: Loading Events
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-runsignup-red-lodge-randonee-search
+  url: https://runsignup.com/Race/Info/MT/RedLodge/RedLodgeRandonee
+  title: runsignup.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The result says the event was part of the 2026 Big Sky Skimo Cup.
+- id: events-backcountry-runsignup-jack-n-jill-search
+  url: https://runsignup.com/Race/MT/Choteau/JackNJill
+  title: runsignup.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+# Uphill races
+- id: events-backcountry-vrd-beaver-creek-uphill-search
+  url: https://vailrd.specialdistrict.org/january-11-bloch-ongert-beaver-creek-uphill-skimo
+  title: january 11 bloch ongert beaver creek uphill skimo
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-vrd-arrowhead-uphill-search
+  url: https://vailrd.specialdistrict.org/january-25-bloch-ongert-arrowhead-uphill-skimo
+  title: january 25 bloch ongert arrowhead uphill skimo
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The 2026 fees appeared in a result summary covering several Vail Recreation District Arrowhead pages, so the exact page is uncertain.
+- id: events-backcountry-vrd-vail-winter-uphill-search
+  url: https://vailrd.specialdistrict.org/february-9-bloch-chapleau-vail-mountain-winter-uphill
+  title: february 9 bloch chapleau vail mountain winter uphill
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. The result summary dates the 2026 race February 8, while this page address says February 9, which may belong to an earlier edition.
+- id: events-backcountry-aspen-gov-americas-uphill-search
+  url: https://aspen.gov/CivicAlerts.aspx?AID=925
+  title: aspen.gov
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. A related result on aspen.gov is titled "Ute Mountaineer Presents the 38th Annual America’s Uphill on Aspen Mountain".
+- id: events-backcountry-runsignup-skidola-2027-search
+  url: https://runsignup.com/Race/CO/Telluride/2027skidola
+  title: runsignup.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-telluride-foundation-skidola-search
+  url: https://telluridefoundation.org/skidola/
+  title: Skidola logo
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+# Telemark
+- id: events-backcountry-telemark-skiing-nationals-2026-search
+  url: https://telemark-skiing.info/?p=5287
+  title: telemark skiing
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Third party telemark event listing.
+- id: events-backcountry-ustsa-home-search
+  url: https://www.ustsa.org
+  title: 2025- 2026 Memberships Now Available Support USTSA
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-cbnews-al-johnson-2025-search
+  url: https://crestedbuttenews.com/2025/03/al-johnson-memorial-race-march-16/
+  title: Al Johnson Memorial Race March 16
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-telemark-skiing-no-joke-search
+  url: https://telemark-skiing.info/events/the-no-joke-tele-race/
+  title: the no joke tele race
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Third party telemark event listing.
+- id: events-backcountry-telemark-festivals-2025-26-search
+  url: https://telemark-skiing.info/telemark-festivals-2025-26/
+  title: telemark festivals 2025 26
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Third party North American telemark festival calendar.
+# Pond skims
+- id: events-backcountry-snowbrains-cushing-crossing-2026-search
+  url: https://snowbrains.com/34th-annual-cushing-crossing-palisades-tahoe/
+  title: 34th Annual Cushing Crossing Pond Skim Returns to Palisades Tahoe, CA, on May 2
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-uncovercolorado-steamboat-pond-skim-search
+  url: https://www.uncovercolorado.com/blog/steamboat-pond-skim-closing-day-celebration/
+  title: "• Skip to main content"
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened. Third party travel guide listing.
+- id: events-backcountry-flatheadbeacon-whitefish-pond-skim-search
+  url: https://flatheadbeacon.com/2026/04/06/sending-out-the-season/
+  title: Photo Essay
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-buckhill-pond-skim-2026-search
+  url: https://buckhill.com/2026-pond-skim-party/
+  title: 2026 BUCK HILL POND SKIM PARTY
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-sierraattahoe-pond-skim-search
+  url: https://sierraattahoe.com/?p=5122
+  title: sierraattahoe.com
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-skileavenworth-pond-skim-2026-search
+  url: https://skileavenworth.com/events/pond-skim-2026
+  title: 2026 Pond Skim
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+# Ski ballet
+- id: events-backcountry-winterpark-ski-ballet-search
+  url: https://www.winterparkresort.com/things-to-do/events/amateur-ski-ballet
+  title: Past Event
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-unofficialnetworks-winter-park-ballet-search
+  url: https://unofficialnetworks.com/2025/10/23/winter-park-ski-ballet/
+  title: winter park ski ballet
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+# Longboard
+- id: events-backcountry-plumassun-longboard-2026-search
+  url: https://plumassun.org/2026/01/17/historic-longboard-ski-races-begin-sunday/
+  title: historic longboard ski races begin sunday
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-plumassun-longboard-winners-2026-search
+  url: https://plumassun.org/2026/01/20/longboard-race-winners-announced/
+  title: longboard race winners announced
+  accessed_date: 2026-10-17
+  note: From a search result for this page; page not opened.
+- id: events-backcountry-wikipedia-plumas-eureka-state-park
+  url: https://en.wikipedia.org/wiki/Plumas-Eureka_State_Park
+  title: Plumas-Eureka State Park
+  accessed_date: 2026-10-17
+  note: Article text and coordinates read through the Wikipedia API (action=query, prop=extracts and prop=coordinates).
+# Town coordinates
+- id: events-backcountry-wikipedia-silverton-colorado
+  url: https://en.wikipedia.org/wiki/Silverton,_Colorado
+  title: Silverton, Colorado
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (action=query, prop=coordinates).
+
+venues:
+- id: plumas-eureka-state-park
+  name: Plumas-Eureka State Park (Eureka Ski Bowl)
+  kind: park
+  state: CA
+  town: Johnsville
+  location:
+    lat: 39.761111
+    lon: -120.706667
+    precision: venue
+    source_id: events-backcountry-wikipedia-plumas-eureka-state-park
+    as_of: 2026-10-17
+    confidence: reported
+    note: Coordinates of Plumas-Eureka State Park from its Wikipedia article. The Eureka Ski Bowl lies inside the park.
+- id: silverton-co-town
+  name: Silverton, Colorado
+  kind: town
+  state: CO
+  town: Silverton
+  location:
+    lat: 37.81166667
+    lon: -107.66444444
+    precision: town
+    source_id: events-backcountry-wikipedia-silverton-colorado
+    as_of: 2026-10-17
+    confidence: reported
+    note: Town center of Silverton, Colorado, from Wikipedia. The source names the town only, not the race venue.
+
+events:
+# ---------------------------------------------------------------- skimo
+- id: grand-traverse-ski
+  name: The Grand Traverse (ski)
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: crested-butte}
+  organizer: {name: Crested Butte Nordic, url: https://cbnordic.org/thegrandtraverse, source_id: events-backcountry-cbnordic-grand-traverse-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Two person team ski mountaineering race from Crested Butte to Aspen across the Elk Mountains: 40 miles with over 6,800 vertical feet of climbing", source_id: events-backcountry-cbnordic-grand-traverse-ski-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-29, end: 2026-03-29, season: 2025/26, source_id: events-backcountry-cbnordic-grand-traverse-ski-search, as_of: 2026-10-17, confidence: estimated, note: "The 2027 race date was not in the search result, though registration for the 2027 race is announced."}
+  signup:
+    method: online_registration
+    url: {value: https://www.cbnordic.org/thegrandtraverse/ski, source_id: events-backcountry-cbnordic-grand-traverse-ski-search, as_of: 2026-10-17, confidence: estimated}
+    platform: {value: BikeSignup, source_id: events-backcountry-bikesignup-grand-traverse-search, as_of: 2026-10-17, confidence: estimated}
+    opens: {value: 2026-12-01, note: "Registration for the 2027 race opens at midnight; Triple Crown contenders get priority registration from November 17, 2026.", source_id: events-backcountry-cbnordic-grand-traverse-ski-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 316, note: "Ski entry for the 2025 race as listed, including a 16 dollar signup fee; the result does not say whether the price is per racer or per team.", source_id: events-backcountry-bikesignup-grand-traverse-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Teams of two; the second partner completes registration by December 14. Field capped at 500 racers (250 teams) under Forest Service permits and historically sells out in under an hour; a waitlist is kept.", source_id: events-backcountry-cbnordic-grand-traverse-ski-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://cbnordic.org/thegrandtraverse, source_id: events-backcountry-cbnordic-grand-traverse-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: audi-power-of-four-skimo
+  name: Audi Power of Four Ski Mountaineering Race
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: snowmass}
+  organizer: {name: Aspen Snowmass, url: https://aspensnowmass.com/while-you-are-here/events/audi-power-of-four-ski-mountaineering, source_id: events-backcountry-aspensnowmass-power-of-four-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Ski mountaineering race across the Aspen Snowmass mountains from Snowmass Base Village, with a shorter Power of Two course", source_id: events-backcountry-aspensnowmass-power-of-four-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-21, end: 2026-02-21, season: 2025/26, source_id: events-backcountry-aspensnowmass-power-of-four-search, as_of: 2026-10-17, confidence: estimated, note: "A third party race listing on strambecco.com shows February 20, 2027 and marks it as not confirmed."}
+  signup:
+    method: null
+    url: {value: https://aspensnowmass.com/while-you-are-here/events/audi-power-of-four-ski-mountaineering, source_id: events-backcountry-aspensnowmass-power-of-four-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Registration for both the Power of Four and Power of Two was full for 2026, with a waitlist for open spots.", source_id: events-backcountry-aspensnowmass-power-of-four-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://aspensnowmass.com/while-you-are-here/events/audi-power-of-four-ski-mountaineering, source_id: events-backcountry-aspensnowmass-power-of-four-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: wasatch-powderkeg
+  name: Wasatch Powderkeg
+  discipline: skimo
+  levels: [elite, open_amateur, junior]
+  venue: {resort_id: solitude}
+  sanctioning: {name: USA Skimo, source_id: events-backcountry-usaskimo-national-championship-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Sprint, mixed relay, individual and vertical races including the USA Skimo National Championships, with recreational and youth divisions", source_id: events-backcountry-solitude-powderkeg-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-04, end: 2026-03-08, season: 2025/26, source_id: events-backcountry-solitude-powderkeg-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+    url: {value: https://www.solitudemountain.com/things-to-do/events-and-activities/wasatch-powderkeg, source_id: events-backcountry-solitude-powderkeg-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://www.solitudemountain.com/things-to-do/events-and-activities/wasatch-powderkeg, source_id: events-backcountry-solitude-powderkeg-search, as_of: 2026-10-17, confidence: estimated}
+  calendar_url: {value: https://www.usaskimo.org/eventer-category/national-championship/, source_id: events-backcountry-usaskimo-national-championship-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: silverton-skinny
+  name: Silverton Skinny
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {venue_id: silverton-co-town}
+  sanctioning: {name: USA Skimo, source_id: events-backcountry-usaskimo-national-championship-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-04-11, end: 2026-04-11, season: 2025/26, source_id: events-backcountry-usaskimo-national-championship-search, as_of: 2026-10-17, confidence: estimated, note: "Listed in USA Skimo's national championship event category with a sanctioned date of April 11, 2026."}
+  calendar_url: {value: https://www.usaskimo.org/eventer-category/national-championship/, source_id: events-backcountry-usaskimo-national-championship-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: heathen-challenge
+  name: The Heathen Challenge
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: sunlight-mountain-resort}
+  format: {value: "Ski mountaineering (rando) race at Sunlight Mountain Resort near Glenwood Springs", source_id: events-backcountry-cbnews-heathen-challenge-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-08, end: 2026-02-08, season: 2025/26, source_id: events-backcountry-runsignup-heathen-challenge-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: online_registration
+    url: {value: https://runscore.runsignup.com/Race/Info/CO/GlenwoodSprings/TheHeathenChallenge, source_id: events-backcountry-runsignup-heathen-challenge-search, as_of: 2026-10-17, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-backcountry-runsignup-heathen-challenge-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: stowe-mountain-heritage-race
+  name: Stowe Mountain Heritage Race
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: stowe}
+  organizer: {name: "National Guard Association of Vermont, Sunrise Mountain Guides and Stowe Mountain Rescue", source_id: events-backcountry-vermontpublic-stowe-heritage-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Ski mountaineering race of 11 miles with 4,000 feet of climbing at Stowe; formerly the Ascend to Victory Skimo Race", source_id: events-backcountry-northeastexplorer-stowe-skimo-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-01, end: 2026-03-01, season: 2025/26, source_id: events-backcountry-vermontpublic-stowe-heritage-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+    url: {value: https://www.vermontpublic.org/vermont-events-calendar/event/stowe-mountain-heritage-race-04-02-2026-21-58-12, source_id: events-backcountry-vermontpublic-stowe-heritage-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 125, note: "Entry for the 2026 race.", source_id: events-backcountry-vermontpublic-stowe-heritage-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Racers should be comfortable on groomed black diamond terrain; all skis need brakes or leashes (splitboards exempt); field capped at 100 in 2026.", source_id: events-backcountry-vermontpublic-stowe-heritage-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: green-mountain-skimo-series
+  name: Green Mountain Skimo Series
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: bolton-valley-resort}
+  organizer: {name: Catamount Trail Association, url: https://catamounttrail.org/cta-events/green-mountain-skimo-series/, source_id: events-backcountry-catamount-green-mountain-skimo-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Tuesday evening skimo race series at Bolton Valley with 6 pm starts; nine races in the 2026 season, the last held at Timberline", source_id: events-backcountry-catamount-green-mountain-skimo-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-06, end: 2026-03-10, season: 2025/26, source_id: events-backcountry-catamount-green-mountain-skimo-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+    url: {value: https://catamounttrail.org/cta-events/green-mountain-skimo-series/, source_id: events-backcountry-catamount-green-mountain-skimo-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 10, note: "Per race in 2026; a 50 dollar season pass covered all nine races.", source_id: events-backcountry-catamount-green-mountain-skimo-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Valid Bolton Valley NBU (nordic, backcountry, uphill) day ticket or season pass.", source_id: events-backcountry-catamount-green-mountain-skimo-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://catamounttrail.org/cta-events/green-mountain-skimo-series/, source_id: events-backcountry-catamount-green-mountain-skimo-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: skeetawk-skimo
+  name: Skeetawk Skimo
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: skeetawk}
+  edition_2026_27: null
+  last_edition: {start: 2026-04-04, end: 2026-04-04, season: 2025/26, source_id: events-backcountry-skeetawk-skimo-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://skeetawk.com/skimo, source_id: events-backcountry-skeetawk-skimo-search, as_of: 2026-10-17, confidence: estimated}
+
+# Big Sky Skimo Cup (Montana series), one record per stop
+- id: big-sky-skimo-cup-maverick-mountain
+  name: White Thunder Skimo
+  series: {id: big-sky-skimo-cup, name: Big Sky Skimo Cup}
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: maverick-mountain-ski-area}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-17, end: 2026-01-18, season: 2025/26, source_id: events-backcountry-big-sky-skimo-cup-2026-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: big-sky-skimo-cup-whitefish-mountain
+  name: Whitefish Whiteout
+  series: {id: big-sky-skimo-cup, name: Big Sky Skimo Cup}
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: whitefish-mountain}
+  sanctioning: {name: USSMA, source_id: events-backcountry-skiwhitefish-whiteout-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "USSMA sanctioned skimo race in the Big Sky Skimo Cup, Montana's skimo series", source_id: events-backcountry-skiwhitefish-whiteout-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-31, end: 2026-01-31, season: 2025/26, source_id: events-backcountry-skiwhitefish-whiteout-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://skiwhitefish.com/event/2026-whitefish-whiteout, source_id: events-backcountry-skiwhitefish-whiteout-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: big-sky-skimo-cup-bridger-bowl
+  name: Bridger Skin to Win
+  series: {id: big-sky-skimo-cup, name: Big Sky Skimo Cup}
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: bridger-bowl}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-31, end: 2026-01-31, season: 2025/26, source_id: events-backcountry-big-sky-skimo-cup-2026-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: big-sky-skimo-cup-great-divide
+  name: Great Divide Skimo
+  series: {id: big-sky-skimo-cup, name: Big Sky Skimo Cup}
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: great-divide-ski-area}
+  format: {value: "Friday night vertical race, then long and short courses on Saturday morning", source_id: events-backcountry-big-sky-skimo-cup-2026-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-20, end: 2026-02-21, season: 2025/26, source_id: events-backcountry-big-sky-skimo-cup-2026-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: online_registration
+    url: {value: https://runsignup.com/Race/Info/MT/Marysville/GreatDivideSkimo, source_id: events-backcountry-big-sky-skimo-cup-2026-search, as_of: 2026-10-17, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-backcountry-big-sky-skimo-cup-2026-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: big-sky-skimo-cup-red-lodge-mountain
+  name: Red Lodge Randonee
+  series: {id: big-sky-skimo-cup, name: Big Sky Skimo Cup}
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: red-lodge-mountain}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-27, end: 2026-02-28, season: 2025/26, source_id: events-backcountry-big-sky-skimo-cup-2026-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: online_registration
+    url: {value: https://runsignup.com/Race/Info/MT/RedLodge/RedLodgeRandonee, source_id: events-backcountry-runsignup-red-lodge-randonee-search, as_of: 2026-10-17, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-backcountry-runsignup-red-lodge-randonee-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: big-sky-skimo-cup-teton-pass
+  name: Jack-n-Jill Skimo
+  series: {id: big-sky-skimo-cup, name: Big Sky Skimo Cup}
+  discipline: skimo
+  levels: [open_amateur]
+  venue: {resort_id: teton-pass-ski-resort}
+  format: {value: "Big Sky Skimo Cup championship: vertical race on Friday and randonnee courses on Saturday", source_id: events-backcountry-runsignup-jack-n-jill-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-13, end: 2026-03-14, season: 2025/26, source_id: events-backcountry-runsignup-jack-n-jill-search, as_of: 2026-10-17, confidence: estimated, note: "The series schedule in the same search gave March 13 to 15; the race page gives March 13 and 14."}
+  signup:
+    method: online_registration
+    url: {value: https://runsignup.com/Race/MT/Choteau/JackNJill, source_id: events-backcountry-runsignup-jack-n-jill-search, as_of: 2026-10-17, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-backcountry-runsignup-jack-n-jill-search, as_of: 2026-10-17, confidence: estimated}
+
+# ---------------------------------------------------------------- uphill
+# Vail Recreation District winter uphill and skimo races, one record per stop
+- id: vrd-winter-races-beaver-creek
+  name: Beaver Creek Uphill & SkiMo
+  series: {id: vrd-winter-races, name: Vail Recreation District winter uphill and skimo races}
+  discipline: uphill
+  disciplines_also: [skimo]
+  levels: [open_amateur]
+  venue: {resort_id: beaver-creek}
+  organizer: {name: Vail Recreation District, url: https://vailrd.specialdistrict.org/, source_id: events-backcountry-vrd-beaver-creek-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Uphill and skimo race from the Centennial Lift to Spruce Saddle Lodge, climbing over 2,000 feet", source_id: events-backcountry-vrd-beaver-creek-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-11, end: 2026-01-11, season: 2025/26, source_id: events-backcountry-vrd-beaver-creek-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: online_registration
+    url: {value: https://vailrd.specialdistrict.org/january-11-bloch-ongert-beaver-creek-uphill-skimo, source_id: events-backcountry-vrd-beaver-creek-uphill-search, as_of: 2026-10-17, confidence: estimated}
+    deadline: {value: 2026-01-10, note: "Online registration closed at 3 pm the day before the 2026 race; race day registration opened at 6 am.", source_id: events-backcountry-vrd-beaver-creek-uphill-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: vrd-winter-races-arrowhead
+  name: Arrowhead Uphill & SkiMo
+  series: {id: vrd-winter-races, name: Vail Recreation District winter uphill and skimo races}
+  discipline: uphill
+  disciplines_also: [skimo]
+  levels: [open_amateur, junior]
+  venue: {resort_id: beaver-creek}
+  organizer: {name: Vail Recreation District, url: https://vailrd.specialdistrict.org/, source_id: events-backcountry-vrd-arrowhead-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Uphill and skimo race starting next to the Arrow Bahn Lift in Arrowhead Village, with adult and youth fees", source_id: events-backcountry-vrd-arrowhead-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-25, end: 2026-01-25, season: 2025/26, source_id: events-backcountry-vrd-arrowhead-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: null
+    url: {value: https://vailrd.specialdistrict.org/january-25-bloch-ongert-arrowhead-uphill-skimo, source_id: events-backcountry-vrd-arrowhead-uphill-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 36, note: "Adult early registration in 2026; 50 dollars on race day. Youth 17 and under paid 25 early and 37 on race day.", source_id: events-backcountry-vrd-arrowhead-uphill-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: vrd-winter-races-vail-mountain
+  name: Vail Mountain Winter Uphill
+  series: {id: vrd-winter-races, name: Vail Recreation District winter uphill and skimo races}
+  discipline: uphill
+  levels: [open_amateur]
+  venue: {resort_id: vail}
+  organizer: {name: Vail Recreation District, url: https://vailrd.specialdistrict.org/, source_id: events-backcountry-vrd-vail-winter-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Uphill race on a 2.1 mile point to point course with 2,200 vertical feet of gain", source_id: events-backcountry-vrd-vail-winter-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-08, end: 2026-02-08, season: 2025/26, source_id: events-backcountry-vrd-vail-winter-uphill-search, as_of: 2026-10-17, confidence: estimated, note: "Date from the search result summary; the page address says February 9 and may belong to an earlier edition."}
+  signup:
+    method: online_registration
+    url: {value: https://vailrd.specialdistrict.org/february-9-bloch-chapleau-vail-mountain-winter-uphill, source_id: events-backcountry-vrd-vail-winter-uphill-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Race day registration also available at the Lionshead Ticket Office.", source_id: events-backcountry-vrd-vail-winter-uphill-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: americas-uphill
+  name: America's Uphill
+  discipline: uphill
+  levels: [open_amateur]
+  venue: {resort_id: aspen-mountain}
+  organizer: {name: Ute Mountaineer and the City of Aspen, source_id: events-backcountry-aspen-gov-americas-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Uphill race from the base of Aspen Mountain to the Sundeck: 3,267 vertical feet over 2.5 miles, with Skis and Open categories", source_id: events-backcountry-aspen-gov-americas-uphill-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-14, end: 2026-03-14, season: 2025/26, source_id: events-backcountry-aspen-gov-americas-uphill-search, as_of: 2026-10-17, confidence: estimated, note: "The 38th annual race."}
+  signup:
+    method: null
+    url: {value: "https://aspen.gov/CivicAlerts.aspx?AID=925", source_id: events-backcountry-aspen-gov-americas-uphill-search, as_of: 2026-10-17, confidence: estimated}
+    deadline: {value: 2026-03-12, note: "Registration for the 2026 race closed at 2 pm.", source_id: events-backcountry-aspen-gov-americas-uphill-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 70, note: "Entry fee for the 2026 race.", source_id: events-backcountry-aspen-gov-americas-uphill-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Limited to 200 participants. Skis category allows telemark, alpine, track and backcountry skis; Open category allows traction devices, snowshoes and running shoes.", source_id: events-backcountry-aspen-gov-americas-uphill-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: skidola
+  name: Skidola
+  discipline: uphill
+  levels: [open_amateur]
+  venue: {resort_id: telluride}
+  organizer: {name: Telluride Foundation, url: https://telluridefoundation.org/skidola/, source_id: events-backcountry-telluride-foundation-skidola-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Uphill race from the Town of Telluride to San Sophia Ridge on microspikes, snowshoes, skis or splitboards", source_id: events-backcountry-runsignup-skidola-2027-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: {start: 2027-03-12, end: 2027-03-12, source_id: events-backcountry-runsignup-skidola-2027-search, as_of: 2026-10-17, confidence: estimated, note: "Seventh annual edition; 5:30 pm start."}
+  signup:
+    method: online_registration
+    url: {value: https://runsignup.com/Race/CO/Telluride/2027skidola, source_id: events-backcountry-runsignup-skidola-2027-search, as_of: 2026-10-17, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-backcountry-runsignup-skidola-2027-search, as_of: 2026-10-17, confidence: estimated}
+    opens: {value: 2027-02-08, note: "Registration opens at 9:00 am MST.", source_id: events-backcountry-runsignup-skidola-2027-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 43.40, note: "2027 entry including a 3.40 dollar signup fee.", source_id: events-backcountry-runsignup-skidola-2027-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Open to ages 13 to 80; men's and women's categories.", source_id: events-backcountry-runsignup-skidola-2027-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://telluridefoundation.org/skidola/, source_id: events-backcountry-telluride-foundation-skidola-search, as_of: 2026-10-17, confidence: estimated}
+
+# ---------------------------------------------------------------- telemark
+- id: us-telemark-nationals
+  name: US Telemark Nationals
+  discipline: telemark
+  levels: [elite]
+  venue: {resort_id: eldora}
+  organizer: {name: United States Telemark Ski Association (USTSA), url: https://www.ustsa.org, source_id: events-backcountry-ustsa-home-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "National telemark championships: a training day followed by three race days", source_id: events-backcountry-telemark-skiing-nationals-2026-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-11, end: 2026-03-14, season: 2025/26, source_id: events-backcountry-telemark-skiing-nationals-2026-search, as_of: 2026-10-17, confidence: estimated, note: "Training day March 11, races March 12 to 14."}
+  website: {value: https://www.ustsa.org, source_id: events-backcountry-ustsa-home-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: al-johnson-memorial-uphill-downhill
+  name: Al Johnson Memorial Uphill/Downhill Telemark Race
+  discipline: telemark
+  disciplines_also: [uphill]
+  levels: [open_amateur]
+  venue: {resort_id: crested-butte}
+  format: {value: "Telemark uphill and downhill race: a 600 foot climb from the North Face Lift, then a 1,200 foot descent finishing near the Last Steep", source_id: events-backcountry-cbnews-al-johnson-2025-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2025-03-16, end: 2025-03-16, season: 2024/25, source_id: events-backcountry-cbnews-al-johnson-2025-search, as_of: 2026-10-17, confidence: estimated, note: "The 51st race. No 2026 edition was found."}
+  website: {value: https://aljohnsonrace.net, source_id: events-backcountry-cbnews-al-johnson-2025-search, as_of: 2026-10-17, confidence: estimated, note: "Address given in the source as aljohnsonrace.net."}
+
+- id: no-joke-tele-race
+  name: No Joke Tele Race
+  discipline: telemark
+  levels: [open_amateur]
+  venue: {resort_id: powder-mountain}
+  edition_2026_27: null
+  last_edition: {start: 2026-04-04, end: 2026-04-04, season: 2025/26, source_id: events-backcountry-telemark-skiing-no-joke-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://telemark-skiing.info/events/the-no-joke-tele-race/, source_id: events-backcountry-telemark-skiing-no-joke-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: kare-andersen-telemark-festival
+  name: Kåre Andersen Telemark Festival
+  discipline: telemark
+  levels: [open_amateur]
+  venue: {resort_id: bromley-mountain-ski-resort-bromley-mountain}
+  format: {value: "Telemark festival listed on a North American telemark festival calendar", source_id: events-backcountry-telemark-festivals-2025-26-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-21, end: 2026-02-22, season: 2025/26, source_id: events-backcountry-telemark-festivals-2025-26-search, as_of: 2026-10-17, confidence: estimated}
+  calendar_url: {value: https://telemark-skiing.info/telemark-festivals-2025-26/, source_id: events-backcountry-telemark-festivals-2025-26-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: summit-telemark-festival
+  name: Summit Telemark Festival
+  discipline: telemark
+  levels: [open_amateur]
+  venue: {resort_id: arapahoe-basin}
+  format: {value: "Telemark festival listed on a North American telemark festival calendar", source_id: events-backcountry-telemark-festivals-2025-26-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-04-18, end: 2026-04-19, season: 2025/26, source_id: events-backcountry-telemark-festivals-2025-26-search, as_of: 2026-10-17, confidence: estimated, note: "The calendar marked these dates as tentative."}
+  calendar_url: {value: https://telemark-skiing.info/telemark-festivals-2025-26/, source_id: events-backcountry-telemark-festivals-2025-26-search, as_of: 2026-10-17, confidence: estimated}
+
+# ---------------------------------------------------------------- heritage: longboard
+- id: historic-longboard-revival-series
+  name: Historic Longboard Revival Series
+  discipline: longboard
+  disciplines_also: [retro_race]
+  levels: [open_amateur]
+  venue: {venue_id: plumas-eureka-state-park}
+  organizer: {name: Plumas Ski Club, url: https://plumasskiclub.org, source_id: events-backcountry-plumassun-longboard-2026-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Races on wooden longboard skis at the Eureka Ski Bowl, where the National Longboard Championship has been held since 1993", source_id: events-backcountry-wikipedia-plumas-eureka-state-park, as_of: 2026-10-17, confidence: reported}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-18, end: 2026-01-18, season: 2025/26, source_id: events-backcountry-plumassun-longboard-2026-search, as_of: 2026-10-17, confidence: estimated, note: "First of three 2026 race days; the second was set for February 15, 2026, conditions permitting. Races start at noon at the Intorf Lodge in Johnsville and are free for spectators."}
+  signup:
+    method: at_venue
+    url: {value: https://plumassun.org/2026/01/17/historic-longboard-ski-races-begin-sunday/, source_id: events-backcountry-plumassun-longboard-2026-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 20, note: "Race fee in 2026; a 20 dollar Plumas Ski Club membership is also required. Club longboards rent for 20 dollars, first come, first served.", source_id: events-backcountry-plumassun-longboard-2026-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Register in person at the lodge, 10 to 11:15 am on race day. Plumas Ski Club membership; historic attire with leather boots; wooden skis 9 to 16 feet long; authentic dope wax only.",source_id: events-backcountry-plumassun-longboard-2026-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://plumasskiclub.org, source_id: events-backcountry-plumassun-longboard-2026-search, as_of: 2026-10-17, confidence: estimated, note: "Address given in the source as plumasskiclub.org, where updates are posted."}
+  results_url: {value: https://plumassun.org/2026/01/20/longboard-race-winners-announced/, source_id: events-backcountry-plumassun-longboard-winners-2026-search, as_of: 2026-10-17, confidence: estimated}
+
+# ---------------------------------------------------------------- heritage: ski ballet
+- id: winter-park-amateur-ski-ballet
+  name: Winter Park Amateur Ski Ballet
+  discipline: ski_ballet
+  levels: [open_amateur, junior]
+  venue: {resort_id: winter-park}
+  organizer: {name: Winter Park Resort, url: https://www.winterparkresort.com/things-to-do/events/amateur-ski-ballet, source_id: events-backcountry-winterpark-ski-ballet-search, as_of: 2026-10-17, confidence: estimated}
+  format: {value: "Amateur ski ballet contest with kids and adult divisions", source_id: events-backcountry-unofficialnetworks-winter-park-ballet-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2025-11-15, end: 2025-11-15, season: 2025/26, source_id: events-backcountry-unofficialnetworks-winter-park-ballet-search, as_of: 2026-10-17, confidence: estimated, note: "No 2026 edition was found as of the research date."}
+  signup:
+    method: null
+    url: {value: https://www.winterparkresort.com/things-to-do/events/amateur-ski-ballet, source_id: events-backcountry-winterpark-ski-ballet-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 15, note: "Entry fee for the 2025 contest.", source_id: events-backcountry-winterpark-ski-ballet-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://www.winterparkresort.com/things-to-do/events/amateur-ski-ballet, source_id: events-backcountry-winterpark-ski-ballet-search, as_of: 2026-10-17, confidence: estimated}
+
+# ---------------------------------------------------------------- heritage: pond skims
+- id: cushing-crossing-pond-skim
+  name: Cushing Crossing Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: palisades-tahoe}
+  format: {value: "Pond skim across a natural pond at Palisades Tahoe, held for the 34th time in 2026", source_id: events-backcountry-snowbrains-cushing-crossing-2026-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-05-02, end: 2026-05-02, season: 2025/26, source_id: events-backcountry-snowbrains-cushing-crossing-2026-search, as_of: 2026-10-17, confidence: estimated}
+  signup:
+    method: at_venue
+    url: {value: https://snowbrains.com/34th-annual-cushing-crossing-palisades-tahoe/, source_id: events-backcountry-snowbrains-cushing-crossing-2026-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 20, note: "Cash; registration is first come, first served and space is limited. Spectating is free.", source_id: events-backcountry-snowbrains-cushing-crossing-2026-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: steamboat-pond-skim
+  name: Steamboat Closing Day Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: steamboat}
+  format: {value: "Closing day pond skim during Springalicious week near Gondola Square", source_id: events-backcountry-uncovercolorado-steamboat-pond-skim-search, as_of: 2026-10-17, confidence: estimated}
+  edition_2026_27: {start: 2027-04-11, end: 2027-04-11, source_id: events-backcountry-uncovercolorado-steamboat-pond-skim-search, as_of: 2026-10-17, confidence: estimated, note: "Listed as subject to change."}
+  signup:
+    method: null
+    url: {value: https://www.uncovercolorado.com/blog/steamboat-pond-skim-closing-day-celebration/, source_id: events-backcountry-uncovercolorado-steamboat-pond-skim-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 20, note: "Cash entry for the 2026 edition.", source_id: events-backcountry-uncovercolorado-steamboat-pond-skim-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Ages 9 and older; limited to 75 participants in 2026.", source_id: events-backcountry-uncovercolorado-steamboat-pond-skim-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: whitefish-pond-skim
+  name: Whitefish Mountain Resort Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: whitefish-mountain}
+  edition_2026_27: null
+  last_edition: {start: 2026-04-04, end: 2026-04-04, season: 2025/26, source_id: events-backcountry-flatheadbeacon-whitefish-pond-skim-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: buck-hill-pond-skim-party
+  name: Buck Hill Pond Skim Party
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: buck-hill}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, source_id: events-backcountry-buckhill-pond-skim-2026-search, as_of: 2026-10-17, confidence: estimated, note: "The 2026 event date was not in the search result."}
+  signup:
+    method: null
+    url: {value: https://buckhill.com/2026-pond-skim-party/, source_id: events-backcountry-buckhill-pond-skim-2026-search, as_of: 2026-10-17, confidence: estimated}
+    fee_usd: {value: 0, note: "Free in 2026; registration sold out before the event.", source_id: events-backcountry-buckhill-pond-skim-2026-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Capped at 150 riders in 2026.", source_id: events-backcountry-buckhill-pond-skim-2026-search, as_of: 2026-10-17, confidence: estimated}
+  website: {value: https://buckhill.com/2026-pond-skim-party/, source_id: events-backcountry-buckhill-pond-skim-2026-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: sierra-at-tahoe-pond-skim
+  name: Sierra-at-Tahoe Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: sierra-at-tahoe-ski-resort}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, source_id: events-backcountry-sierraattahoe-pond-skim-search, as_of: 2026-10-17, confidence: estimated, note: "The 2026 event date was not in the search result."}
+  signup:
+    method: null
+    url: {value: "https://sierraattahoe.com/?p=5122", source_id: events-backcountry-sierraattahoe-pond-skim-search, as_of: 2026-10-17, confidence: estimated}
+    requirements: {value: "Skimmers must be 18 or older; limited to the first 100 registrants in 2026. All ages may watch.", source_id: events-backcountry-sierraattahoe-pond-skim-search, as_of: 2026-10-17, confidence: estimated}
+
+- id: ski-leavenworth-pond-skim
+  name: Ski Leavenworth Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: leavenworth-ski-hill}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, source_id: events-backcountry-skileavenworth-pond-skim-2026-search, as_of: 2026-10-17, confidence: estimated, note: "A 2026 event page exists; its date was not in the search result."}
+  website: {value: https://skileavenworth.com/events/pond-skim-2026, source_id: events-backcountry-skileavenworth-pond-skim-2026-search, as_of: 2026-10-17, confidence: estimated}
+
+calendars:
+- id: usa-skimo-events-calendar
+  name: USA Skimo events calendar
+  discipline: skimo
+  region: national
+  url: {value: https://www.usaskimo.org/usa-skimo-events-calendar/, source_id: events-backcountry-usaskimo-calendar-search, as_of: 2026-10-17, confidence: estimated}
+- id: usa-skimo-national-championship-calendar
+  name: USA Skimo national championship events
+  discipline: skimo
+  region: national
+  url: {value: https://www.usaskimo.org/eventer-category/national-championship/, source_id: events-backcountry-usaskimo-national-championship-search, as_of: 2026-10-17, confidence: estimated}
+- id: telemark-festivals-2025-26-calendar
+  name: North American telemark festivals calendar 2025/26
+  discipline: telemark
+  region: national
+  url: {value: https://telemark-skiing.info/telemark-festivals-2025-26/, source_id: events-backcountry-telemark-festivals-2025-26-search, as_of: 2026-10-17, confidence: estimated}

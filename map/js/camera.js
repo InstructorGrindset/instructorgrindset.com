@@ -12,6 +12,13 @@ export function minSpan(b, spanX, spanY) {
 
 /** Bounds and zoom cap for a view, without the resort detail map. */
 export function viewFrame(index, view) {
+  if (view.level === 'events') {
+    // EVENTS mode: the national view, or the selected venue with its neighbours (index.events, set by events.js).
+    const v = view.venueId && index.events ? index.events.venuePoint(view.venueId) : null;
+    if (!v) return { b: config.nationalBounds, maxZoom: 5 };
+    const d = v.precision === 'region' ? 0.6 : 0.22;
+    return { b: [[v.lon - d * 1.3, v.lat - d], [v.lon + d * 1.3, v.lat + d]], maxZoom: v.precision === 'venue' ? 11 : 9 };
+  }
   if (view.level === 'resort') {
     const r = index.resorts.get(view.resortId);
     // Frame the resort with its neighbours around it.

@@ -183,5 +183,13 @@
  },
  "submissions": {
   "endpoint": "https://reports.example.test/submit"
+ },
+ "events": {
+  "season": {
+   "label": "2026/27",
+   "start": "2026-07-01",
+   "end": "2027-06-30"
+  },
+  "resort_panel_max": 3
  }
 }
