@@ -16,9 +16,12 @@
   <link rel="stylesheet" href="/assets/global.css?v=2">
   <link rel="stylesheet" href="/assets/sidebar.css?v=14">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%2344ff88'/%3E%3C/svg%3E">
-  <!-- This page is plain HTML and CSS: it loads none of the map JavaScript. The console tokens and the monospace
-       stack come from the map stylesheet (body.credits-page); no web font loads. -->
-  <link rel="stylesheet" href="/map/css/map.css?v=13">
+  <!-- This page is plain HTML and CSS: it loads none of the map JavaScript. The console tokens and the site font
+       come from the map stylesheet (body.credits-page); Inter loads after the window load event. -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>addEventListener("load",function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},{once:true})</script>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
+  <link rel="stylesheet" href="/map/css/map.css?v=14">
   <style>
     body { background: var(--bg); }
     .credits-page .eyebrow { color: var(--wm-dim); letter-spacing: .14em; }

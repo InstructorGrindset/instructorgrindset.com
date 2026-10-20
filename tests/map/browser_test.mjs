@@ -2532,7 +2532,7 @@ async function passChecks(browser, base, stubBase) {
 
 // World Monitor style chrome (ROADMAP item 21): the header bar and sub bar, the layers panel with its radio and
 // checkbox semantics, the MAP / SATELLITE toggle and its memory, the Link button, the region menu, the legend strip,
-// the zoom column with home, the hiring pulse and reduced motion, the phone header and layers sheet, and no web font.
+// the zoom column with home, the hiring pulse and reduced motion, the phone header and layers sheet, and the site font.
 async function consoleChecks(browser, base, stubBase) {
   log('\nConsole look: header, layers panel, basemap toggle, legend, controls');
   const fonts = [];
@@ -2549,11 +2549,11 @@ async function consoleChecks(browser, base, stubBase) {
   const hdr = await page.evaluate(() => {
     const vis = (id) => { const e = document.getElementById(id); return Boolean(e && e.offsetParent && !e.hidden); };
     const h1 = document.querySelector('.mh-title');
-    return { title: h1.textContent, upper: getComputedStyle(h1).textTransform, mono: /mono/i.test(getComputedStyle(document.body).fontFamily),
+    return { title: h1.textContent, upper: getComputedStyle(h1).textTransform, site: /^\s*Inter\b/i.test(getComputedStyle(document.body).fontFamily) && !/mono/i.test(getComputedStyle(document.body).fontFamily),
       shown: ['map-region', 'map-search', 'map-link', 'list-toggle'].map(vis), layers: vis('layers-toggle'),
       view: document.getElementById('view-title').textContent, tone: [...document.querySelectorAll('#tone-toggle button')].map((b) => [b.textContent, b.getAttribute('aria-pressed')]) };
   });
-  check(hdr.title === 'Snowsports Career Map' && hdr.upper === 'uppercase' && hdr.mono, `header: uppercase wordmark in the monospace stack (${hdr.title})`);
+  check(hdr.title === 'Snowsports Career Map' && hdr.upper === 'uppercase' && hdr.site, `header: uppercase wordmark in the site font, Inter (${hdr.title})`);
   check(hdr.shown.every(Boolean) && !hdr.layers, `header: region menu, search, Link and List view show; the LAYERS button is for phones (${hdr.shown})`);
   check(hdr.view === 'National viewUnited States' && JSON.stringify(hdr.tone) === JSON.stringify([['Map', 'true'], ['Satellite', 'false']]),
     `sub bar: the view title and MAP pressed by default (${hdr.view}, ${JSON.stringify(hdr.tone)})`);
@@ -2718,7 +2718,7 @@ async function consoleChecks(browser, base, stubBase) {
     && await page.waitForFunction(() => document.getElementById('panel-status').textContent === 'Link to this view copied.', null, { timeout: 3000 }).then(() => true, () => false),
     `Link copies the deep link (${copied.replace(base, '')}) and says so`);
   await axeCheck(page, 'console look, desktop with the map running');
-  check(fonts.length === 0, `map pages load no web font (${fonts.length} font requests)`);
+  check(fonts.some((u) => /fonts\.googleapis\.com\/css2\?family=Inter/.test(u)), `map pages load the site font, Inter, after the first paint (${fonts.length} font requests)`);
   w.assertClean();
   await ctx.close();
 

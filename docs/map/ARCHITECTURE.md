@@ -1129,8 +1129,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
 * Lazy modules: `hiring.js` (the Hiring now count, at idle), `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
   when the climate section nears the screen), `detailcontrols.js` (resort
-  detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`. Map pages load no web font:
-  they use the system monospace stack (see "Console look"). The snowfall
+  detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`. The site font, Inter, loads
+  after the window load event and the first contentful paint (see "Console look"). The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
   `jobs/postings.json` loads once, after the first paint at idle for the Hiring now count (when some resort has
@@ -1266,9 +1266,11 @@ and the site nav (`/assets/nav.js`) keeps working with a squared hamburger.
 * Tokens (`map.css`): background `#0a0a0a`, secondary `#111`, surface `#141414`, hover `#1e1e1e`, border `#2a2a2a`,
   strong border `#444`, text `#e8e8e8`, secondary text `#ccc`, dim `#959595` (5.2:1 or more on every surface, so it can
   carry small text), green `#44ff88` for active states and focus rings, amber `#ffaa00` (Tier A, Estimated), blue
-  `#3388ff` (Tier B; `#6aa6ff` for Reported text). One font for everything: 'SF Mono', Monaco, 'Cascadia Code', 'Fira
-  Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace. Uppercase letter spaced labels for headings, chips, badges
-  and buttons; square 1px bordered controls (radius 2 to 3 px). The Inter loader is gone from map pages.
+  `#3388ff` (Tier B; `#6aa6ff` for Reported text). Type is the site's own (owner choice 2026-10-20, replacing the
+  first monospace stack): `--ui-font` Inter, then system sans serif fonts, and `--heading-font` Rooftop then Inter for
+  headings, as in `assets/global.css`. Inter loads after the first paint. Canvas text in `map.js`, `eventsmap.js` and
+  `charts.js` uses the same stack. Uppercase letter spaced labels for headings, chips, badges and buttons; square 1px
+  bordered controls (radius 2 to 3 px).
 * Header bar (`.mh-bar`): the wordmark (the page `h1`, uppercase by CSS), the region jump menu, the HIRING NOW pill,
   the LIVE indicator, the search box, Link and List view. The region menu (`controls.js` `createRegionMenu`) is a disclosure button
   with real links to National and every state with resorts (built on first open; Down opens it on the current

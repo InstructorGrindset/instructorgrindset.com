@@ -17,7 +17,7 @@ const GLOW = ['interpolate', ['linear'], ['zoom'],
 const HALO = ['interpolate', ['linear'], ['zoom'],
   3, ['+', 6.4, ['*', 2.1, SQRT_N]], 7, ['+', 8, ['*', 2.8, SQRT_N]], 11, ['+', 10, ['*', 3.4, SQRT_N]]];
 
-const FONT = "'SF Mono', Monaco, 'Cascadia Code', 'Fira Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace";
+const FONT = "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 /** A count label: white digits on a near black tag with a thin border (canvas drawn; the style has no glyphs). */
 function countImage(n) {
   const ratio = 2;
