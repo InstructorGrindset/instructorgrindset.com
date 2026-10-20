@@ -1,9 +1,3 @@
-# Nordic lane of the events research (docs/map/EVENTS.md): cross country races and ski marathons, U.S. Ski & Snowboard
-# cross country, biathlon, ski jumping and nordic combined, adaptive nordic. NCAA and USCSA championships are in
-# alpine.yaml (with cross_country as an extra discipline); the SuperTour, U.S. Biathlon and FIS calendars are in
-# instructor.yaml. Search only facts are estimated; Wikipedia facts are reported. Some venues are shared with other lanes:
-# cable-wi-birkie-trailhead, anchorage-ak-town and marquette-mi-town (sled_snowmobile_ultra.yaml), minneapolis-mn-loppet
-# (snowshoe_skijor_kite.yaml).
 batch: events-nordic
 researched_date: 2026-10-20
 sources:
@@ -72,11 +66,6 @@ sources:
   title: February 5, 2026 @ 12:00 am - February 7, 2026 @ 11:59 pm
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
-- id: events-nordic-craftsbury-marathon-2025-listing
-  url: https://happyvermont.com/event/craftsbury-marathon-ski-festival/2025-01-25/
-  title: Vermont Events
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
 - id: events-nordic-craftsbury-marathon-page
   url: https://craftsbury.com/events/craftsbury-marathon-ski-festival
   title: Back to All Events
@@ -84,11 +73,6 @@ sources:
   note: From a search result for this page; page not opened.
 - id: events-nordic-tour-of-anchorage-2026-chamber
   url: https://business.anchoragechamber.org/events/details/tour-of-anchorage-03-08-2026-14744
-  title: Tour of Anchorage
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-nordic-tour-of-anchorage-chamber-alt
-  url: https://business.anchoragechamber.org/events/details/tour-of-anchorage-14505
   title: Tour of Anchorage
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
@@ -106,7 +90,8 @@ sources:
   url: https://gotrail.run/en/event/noquemanon-ski-marathon
   title: Noquemanon Ski Marathon
   accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened. The search summary gave the 2027 fee schedule from a third party 2027 listing among the results; this listing is the likely one.
+  note: From a search result for this page; page not opened. The search summary gave the 2027 fee schedule from a third party
+    2027 listing among the results; this listing is the likely one.
 - id: events-nordic-great-bear-chase-race-guide
   url: https://runsignup.com/Race/GreatBearChase/Page/RaceGuide
   title: runsignup.com
@@ -142,11 +127,6 @@ sources:
   title: runscore.runsignup.com
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
-- id: events-nordic-rendezvous-trails-listing
-  url: https://gotrail.run/en/event/yellowstone-trail-race/2027-07-31
-  title: Yellowstone Trail Race
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened. Used only for the name of the Rendezvous Ski Trails venue.
 - id: events-nordic-usbiathlon-2026-27-calendar
   url: https://www.usbiathlon.org/news/2026/may/06/u-s-biathlon-announces-2026-27-domestic-events-calendar
   title: U.S. Biathlon Announces 2026-27 Domestic Events Calendar
@@ -171,17 +151,8 @@ sources:
   url: https://ishskiclub.com/annual-suicide-hill-ski-jump/
   title: Annual Ski Jumping Tournament
   accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened. The search result showed this address with a stray closing parenthesis at the end, removed here.
-- id: events-nordic-ishpeming-collapse-2026
-  url: https://unofficialnetworks.com/2026/08/11/historic-michigan-ski-jump-in-jeopardy-after-building-collapse-crowd-funding-campaign-launched/
-  title: The Ishpeming Ski Club
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-nordic-ishpeming-2026-tournament
-  url: https://www.uppermichiganssource.com/2026/01/17/139th-annual-ishpeming-ski-jumping-tournament-kicks-off
-  title: 139th annual Ishpeming Ski Jumping Tournament kicks off
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
+  note: From a search result for this page; page not opened. The search result showed this address with a stray closing parenthesis
+    at the end, removed here.
 - id: events-nordic-worldloppet-calendar
   url: https://www.worldloppet.com/global-ski-marathon-calendar/?cpage=3
   title: Global Calendar
@@ -232,11 +203,6 @@ sources:
   title: Lake Placid, New York
   accessed_date: 2026-10-17
   note: Coordinates read through the Wikipedia API (prop=coordinates).
-- id: events-nordic-wikipedia-brillion-wisconsin
-  url: https://en.wikipedia.org/wiki/Brillion,_Wisconsin
-  title: Brillion, Wisconsin
-  accessed_date: 2026-10-17
-  note: Coordinates read through the Wikipedia API (prop=coordinates).
 - id: events-nordic-wikipedia-fairbanks-alaska
   url: https://en.wikipedia.org/wiki/Fairbanks,_Alaska
   title: Fairbanks, Alaska
@@ -280,11 +246,6 @@ sources:
 - id: events-nordic-ishpeming-2026-starts-friday
   url: https://www.uppermichiganssource.com/2026/01/14/ishpeming-ski-jumping-tournament-starts-friday/
   title: Ishpeming Ski Jumping Tournament starts Friday
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-nordic-ishpeming-city-calendar-2026-01-17
-  url: https://ishpemingcity.org/event-calendar/2026-01-17/?ical=1%2F
-  title: ishpemingcity.org
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
 - id: events-nordic-tour-of-anchorage-fasterskier-2024
@@ -377,11 +338,6 @@ sources:
   title: runsignup.com
   accessed_date: 2026-10-20
   note: From a search result for this page; page not opened.
-- id: events-nordic-steamboat-carnival-sswsc
-  url: https://www.sswsc.org/event/winter-carnival-2026/
-  title: Back to Events
-  accessed_date: 2026-10-20
-  note: From a search result for this page; page not opened.
 - id: events-nordic-lake-placid-loppet-2026-adktaste
   url: https://www.adktaste.com/adirondack-events/lake-placid-2026-loppet-cross-country-skiing
   title: Back to All Events
@@ -412,6 +368,273 @@ sources:
   title: Winthrop, Washington
   accessed_date: 2026-10-20
   note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-vasa-findtherun
+  url: https://www.findtherun.com/race/147946/51st-annual-north-american-vasa-festival-of-races
+  title: 51st Annual North American Vasa Festival of Races Logo
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-vasa-runsignup
+  url: https://runsignup.com/vasa
+  title: runsignup.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-batb-runsignup
+  url: https://runsignup.com/Race/WI/Ashland/BookAcrosstheBay
+  title: runsignup.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-batb-site
+  url: https://batb.org/
+  title: batb.org
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-seeley-hills-birkie
+  url: https://birkie.com/event/seeley-hills-classic
+  title: Seeley Hills Classic
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-seeley-hills-whsm-2026
+  url: https://whsm.com/news/2026/01/13/seeley-hills-classic-returns-to-traditional-course
+  title: Civic Media Logo
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-weston-skiboston
+  url: https://www.skiboston.com/racing-events
+  title: top of page
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-clouds-greatglen
+  url: https://greatglentrails.com/ski-shoe-fatbike-to-the-clouds/
+  title: ski shoe fatbike to the clouds
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-clouds-nensa
+  url: https://nensa.net/event/ski-shoe-fatbike-to-the-clouds
+  title: ski shoe fatbike to the clouds
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-prebirkie-strambecco
+  url: https://strambecco.com/event/hayward-lions-pre-birkie/
+  title: Loading Events
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-prebirkie-travelwi
+  url: https://travelwisconsin.com/events/cross-country-skiing-snowshoeing/hayward-lions-pre-birkie-40141
+  title: Hayward Lions Pre-Birkie
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-cote-dame-marie-runsignup
+  url: https://runscore.runsignup.com/Race/MI/Grayling/CoteDameMarieSkiLoppet
+  title: runscore.runsignup.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-wps-shantycreek
+  url: https://www.shantycreek.com/event/white-pine-stampede
+  title: white pine stampede
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-lapham-loppet-brochure
+  url: https://laphampeakfriends.org/wp-content/uploads/2025/11/2026-Loppet-Brochure.pdf
+  title: 2026 Loppet Brochure
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-skinnyski-calendar-january
+  url: https://www.skinnyski.com/racing/calendar.asp?monthSel=1
+  title: January 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-ski-de-she-calendar
+  url: https://cdn.birkie.com/calendar/
+  title: Birkie Events Calendar
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-ski-de-she-page
+  url: https://birkie.com/ski/events/ski-de-she
+  title: Ski de She Camp & Race
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-ski-de-she-guide-2025
+  url: https://www.birkie.com/wp-content/uploads/2025/01/Participant-Guide-Ski-de-She-Race-2025.pdf
+  title: Participant Guide Ski de She Race 2025
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-de-she-series-release
+  url: https://www.birkie.com/wp-content/uploads/2025/09/PRESS-RELEASE-American-Birkebeiner-Ski-Foundation-Expands-de-She-Series-with-Shred-de-She-1.pdf
+  title: PRESS RELEASE American Birkebeiner Ski Foundation Expands de She Series with Shred de She 1
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-stowe-derby-runsignup
+  url: https://runsignup.com/Race/Info/VT/Stowe/stowederby
+  title: runsignup.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-rangeley-loppet-2026
+  url: https://www.franklinsavings.bank/event/31st-annual-rangeley-lakes-loppet-day-1
+  title: Loading Events
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-adk-tour-de-ski
+  url: https://mtvanhoevenberg.com/event/adk-tour-de-ski/
+  title: adk tour de ski
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-geschmossel-brettonwoods
+  url: https://www.brettonwoods.com/events/geschmossel-classic-ski-race/
+  title: January 19, 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-geschmossel-chamber
+  url: https://business.littletonareachamber.com/events/details/49th-annual-geschmossel-classic-ski-race-20333
+  title: 49th Annual Geschmossel Classic Ski Race
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-mount-washington-cup-brettonwoods
+  url: https://www.brettonwoods.com/events/mount-washington-cup
+  title: Saturday, March 7th, 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-mount-washington-cup-results
+  url: https://www.brettonwoods.com/Winter_Sports/Nordic/race_results/cup
+  title: www.brettonwoods.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-bayley-hazen-biathlon-2026
+  url: https://www.craftsbury.com/events/2026-bayley-hazen-biathlon
+  title: Back to All Events
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-finlandia-release-2026
+  url: https://www.skinnyski.com/racing/PR/finlandia20260112.pdf
+  title: www.skinnyski.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-bogburn-rikert
+  url: https://www.rikertoutdoor.com/event/the-bogburn-classic-at-rikert
+  title: Loading Events
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-bogburn-nensa
+  url: https://nensa.net/event/bogburn-classic-2/
+  title: NENSA Calendar
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-forbush-time-trial
+  url: https://www.forbushcorner.com/timeTrial.html
+  title: www.forbushcorner.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-northern-express-2026-calendar
+  url: https://www.northernexpress.com/news/feature/2026-winter-race-calendar/
+  title: May 11, 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-michigan-cup-forbush
+  url: https://forbushcorner.com/MichiganXCRacing.html
+  title: Date | Michigan Cup Races | Location | Distance | Divsions |
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-eastern-cup-invitation-2025-26
+  url: https://nensa.net/wp-content/uploads/2025/12/2025-26-Eastern-Cup-Invitation.pdf
+  title: 2025 26 Eastern Cup Invitation
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-eastern-cup-page
+  url: https://nensa.net/eastern-cup/
+  title: • Skip to primary navigation
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-nensa-club-cup
+  url: https://nensa.net/events/category/club-cup/
+  title: NENSA Calendar
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-birkie-qualifier-races
+  url: https://www.birkie.com/ski/events/qualifier-races/
+  title: 2027 Wave Placement Qualifier Races
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-craftsbury-marathon-2026-nensa
+  url: https://nensa.net/event/craftsbury-marathon-ski-festival-saturday-classic-sunday-skate/
+  title: NENSA Calendar
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-nordic-loppet-supertour-2027
+  url: https://loppet.org/?p=37488
+  title: loppet.org
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The search summary gave the Loppet Junior Qualifier and SuperTour
+    details from one of four untitled loppet.org results without saying which; this is the first of them, so the address may
+    point to a different Loppet page.
+- id: events-nordic-wikipedia-ashland-wisconsin
+  url: https://en.wikipedia.org/wiki/Ashland,_Wisconsin
+  title: Ashland, Wisconsin
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-bellaire-michigan
+  url: https://en.wikipedia.org/wiki/Bellaire,_Michigan
+  title: Bellaire, Michigan
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-grayling-michigan
+  url: https://en.wikipedia.org/wiki/Grayling,_Michigan
+  title: Grayling, Michigan
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-mount-washington-auto-road
+  url: https://en.wikipedia.org/wiki/Mount_Washington_Auto_Road
+  title: Mount Washington Auto Road
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-rangeley-maine
+  url: https://en.wikipedia.org/wiki/Rangeley,_Maine
+  title: Rangeley, Maine
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-stowe-vermont
+  url: https://en.wikipedia.org/wiki/Stowe,_Vermont
+  title: Stowe, Vermont
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-traverse-city-michigan
+  url: https://en.wikipedia.org/wiki/Traverse_City,_Michigan
+  title: Traverse City, Michigan
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-weston-massachusetts
+  url: https://en.wikipedia.org/wiki/Weston,_Massachusetts
+  title: Weston, Massachusetts
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-hayward-wisconsin
+  url: https://en.wikipedia.org/wiki/Hayward,_Wisconsin
+  title: Hayward, Wisconsin
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-theodore-wirth-park
+  url: https://en.wikipedia.org/wiki/Theodore_Wirth_Park
+  title: Theodore Wirth Park
+  accessed_date: 2026-10-17
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-bemidji-minnesota
+  url: https://en.wikipedia.org/wiki/Bemidji,_Minnesota
+  title: Bemidji, Minnesota
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-ripton-vermont
+  url: https://en.wikipedia.org/wiki/Ripton,_Vermont
+  title: Ripton, Vermont
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-frederic-township-michigan
+  url: https://en.wikipedia.org/wiki/Frederic_Township,_Michigan
+  title: Frederic Township, Michigan
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
+- id: events-nordic-wikipedia-lapham-peak-unit
+  url: https://en.wikipedia.org/wiki/Lapham_Peak_Unit,_Kettle_Moraine_State_Forest
+  title: Lapham Peak Unit, Kettle Moraine State Forest
+  accessed_date: 2026-10-20
+  note: Coordinates read through the Wikipedia API (prop=coordinates).
 venues:
 - id: vasaloppet-nordic-ski-center-mora-mn
   name: Vasaloppet Nordic Ski Center
@@ -438,7 +661,8 @@ venues:
     source_id: events-nordic-wikipedia-sun-valley-idaho
     as_of: 2026-10-17
     confidence: reported
-    note: Point of Sun Valley, Idaho, from Wikipedia, standing for the Sun Valley area where the visitor bureau lists the race; the course itself is not mapped here.
+    note: Point of Sun Valley, Idaho, from Wikipedia, standing for the Sun Valley area where the visitor bureau lists the
+      race; the course itself is not mapped here.
 - id: craftsbury-outdoor-center-vt
   name: Craftsbury Outdoor Center
   kind: nordic_center
@@ -517,19 +741,6 @@ venues:
     as_of: 2026-10-17
     confidence: reported
     note: Village center of Lake Placid, New York, from Wikipedia; the Mt. Van Hoevenberg venue lies outside the village.
-- id: ariens-nordic-center-brillion-wi
-  name: Ariens Nordic Center
-  kind: nordic_center
-  state: WI
-  town: Brillion
-  location:
-    lat: 44.175
-    lon: -88.06611111
-    precision: town
-    source_id: events-nordic-wikipedia-brillion-wisconsin
-    as_of: 2026-10-17
-    confidence: reported
-    note: City center of Brillion, Wisconsin, from Wikipedia.
 - id: fairbanks-ak
   name: Fairbanks
   kind: town
@@ -555,7 +766,8 @@ venues:
     source_id: events-nordic-wikipedia-suicide-hill
     as_of: 2026-10-17
     confidence: reported
-    note: Suicide Hill Ski Jump coordinates from its Wikipedia article, which places the jump in Negaunee, Michigan; the Ishpeming Ski Club describes the U.P. Nordic Ski Complex as in Ishpeming.
+    note: Suicide Hill Ski Jump coordinates from its Wikipedia article, which places the jump in Negaunee, Michigan; the Ishpeming
+      Ski Club describes the U.P. Nordic Ski Complex as in Ishpeming.
 - id: snowflake-ski-jump-westby-wi
   name: Snowflake Ski Jump
   kind: jump_complex
@@ -594,7 +806,8 @@ venues:
     source_id: events-nordic-wikipedia-fox-river-grove-illinois
     as_of: 2026-10-17
     confidence: reported
-    note: Village center of Fox River Grove, Illinois, from Wikipedia, whose article describes the Norge Ski Club and its three ski jumps there.
+    note: Village center of Fox River Grove, Illinois, from Wikipedia, whose article describes the Norge Ski Club and its
+      three ski jumps there.
 - id: lake-placid-ny
   name: Lake Placid
   kind: town
@@ -660,447 +873,2477 @@ venues:
     as_of: 2026-10-20
     confidence: reported
     note: Town center of Winthrop, Washington, from Wikipedia; the course runs on Methow Trails and is not mapped here.
+- id: timber-ridge-resort-traverse-city-mi
+  name: Timber Ridge Resort
+  kind: other
+  state: MI
+  town: Traverse City
+  location:
+    lat: 44.76805556
+    lon: -85.62222222
+    precision: town
+    source_id: events-nordic-wikipedia-traverse-city-michigan
+    as_of: 2026-10-20
+    confidence: reported
+    note: City center of Traverse City, Michigan, from Wikipedia; the resort itself is not mapped here.
+- id: book-across-the-bay-ashland-wi
+  name: Book Across the Bay course (Washburn to Ashland)
+  kind: trail
+  state: WI
+  town: Ashland
+  location:
+    lat: 46.59
+    lon: -90.88
+    precision: town
+    source_id: events-nordic-wikipedia-ashland-wisconsin
+    as_of: 2026-10-20
+    confidence: reported
+    note: City center of Ashland, Wisconsin, from Wikipedia; the race crosses Chequamegon Bay from Washburn and checks in
+      at the Ashland marina.
+- id: weston-ski-track-ma
+  name: Weston Ski Track
+  kind: nordic_center
+  state: MA
+  town: Weston
+  location:
+    lat: 42.36666667
+    lon: -71.30305556
+    precision: town
+    source_id: events-nordic-wikipedia-weston-massachusetts
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Weston, Massachusetts, from Wikipedia.
+- id: mount-washington-auto-road-nh
+  name: Great Glen Trails and Mt. Washington Auto Road
+  kind: trail
+  state: NH
+  town: null
+  location:
+    lat: 44.288075
+    lon: -71.27926944
+    precision: venue
+    source_id: events-nordic-wikipedia-mount-washington-auto-road
+    as_of: 2026-10-20
+    confidence: reported
+    note: Mount Washington Auto Road coordinates from Wikipedia; the race starts on the Great Glen Trails at the foot of the
+      road.
+- id: hayward-wi
+  name: Hayward
+  kind: town
+  state: WI
+  town: Hayward
+  location:
+    lat: 46.01
+    lon: -91.48055556
+    precision: town
+    source_id: events-nordic-wikipedia-hayward-wisconsin
+    as_of: 2026-10-17
+    confidence: reported
+    note: City center of Hayward, Wisconsin, from Wikipedia.
+- id: hanson-hills-grayling-mi
+  name: Hanson Hills Recreation Area
+  kind: park
+  state: MI
+  town: Grayling
+  location:
+    lat: 44.66305556
+    lon: -84.71083333
+    precision: town
+    source_id: events-nordic-wikipedia-grayling-michigan
+    as_of: 2026-10-20
+    confidence: reported
+    note: City center of Grayling, Michigan, from Wikipedia; the recreation area lodge is at 7601 Old Lake Road.
+- id: white-pine-stampede-bellaire-mi
+  name: White Pine Stampede course (Mancelona to Bellaire)
+  kind: trail
+  state: MI
+  town: Bellaire
+  location:
+    lat: 44.97361111
+    lon: -85.20583333
+    precision: town
+    source_id: events-nordic-wikipedia-bellaire-michigan
+    as_of: 2026-10-20
+    confidence: reported
+    note: Village center of Bellaire, Michigan, where the race finishes, from Wikipedia.
+- id: theodore-wirth-park-mn
+  name: Theodore Wirth Park
+  kind: park
+  state: MN
+  town: Minneapolis
+  location:
+    lat: 44.99
+    lon: -93.323
+    precision: venue
+    source_id: events-nordic-wikipedia-theodore-wirth-park
+    as_of: 2026-10-17
+    confidence: reported
+    note: Theodore Wirth Park coordinates from its Wikipedia article.
+- id: stowe-vt
+  name: Stowe
+  kind: town
+  state: VT
+  town: Stowe
+  location:
+    lat: 44.50055556
+    lon: -72.71833333
+    precision: town
+    source_id: events-nordic-wikipedia-stowe-vermont
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Stowe, Vermont, from Wikipedia.
+- id: rangeley-lakes-trails-center-me
+  name: Rangeley Lakes Trails Center
+  kind: nordic_center
+  state: ME
+  town: Rangeley
+  location:
+    lat: 44.99166667
+    lon: -70.76444444
+    precision: town
+    source_id: events-nordic-wikipedia-rangeley-maine
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Rangeley, Maine, from Wikipedia.
+- id: bemidji-mn
+  name: Bemidji
+  kind: town
+  state: MN
+  town: Bemidji
+  location:
+    lat: 47.487034
+    lon: -94.88269
+    precision: town
+    source_id: events-nordic-wikipedia-bemidji-minnesota
+    as_of: 2026-10-20
+    confidence: reported
+    note: City center of Bemidji, Minnesota, from Wikipedia.
+- id: rikert-outdoor-center-vt
+  name: Rikert Outdoor Center
+  kind: nordic_center
+  state: VT
+  town: Ripton
+  location:
+    lat: 43.98194444
+    lon: -72.99111111
+    precision: town
+    source_id: events-nordic-wikipedia-ripton-vermont
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Ripton, Vermont, from Wikipedia; the center is at 106 College Cross Roads.
+- id: forbush-corner-frederic-mi
+  name: Forbush Corner
+  kind: nordic_center
+  state: MI
+  town: Frederic
+  location:
+    lat: 44.76611111
+    lon: -84.77166667
+    precision: town
+    source_id: events-nordic-wikipedia-frederic-township-michigan
+    as_of: 2026-10-20
+    confidence: reported
+    note: Point of Frederic Township, Michigan, from Wikipedia (the article for Frederic redirects there).
+- id: lapham-peak-delafield-wi
+  name: Lapham Peak
+  kind: park
+  state: WI
+  town: Delafield
+  location:
+    lat: 43.040558
+    lon: -88.400209
+    precision: venue
+    source_id: events-nordic-wikipedia-lapham-peak-unit
+    as_of: 2026-10-20
+    confidence: reported
+    note: Coordinates of the Lapham Peak Unit of Kettle Moraine State Forest from its Wikipedia article.
 events:
 - id: american-birkebeiner
   name: American Birkebeiner
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur, elite]
-  venue: {resort_id: null, venue_id: cable-wi-birkie-trailhead}
-  organizer: {name: American Birkebeiner Ski Foundation, source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  sanctioning: {name: Worldloppet, note: "Founding member of the Worldloppet federation of ski marathons", source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  format: {value: "50 km skate and 53 km classic races, the main races of a Birkie week that runs February 24 to 28, 2027", note: "Wikipedia describes the course from Cable to Hayward and a men's and women's elite skate race", source_id: events-nordic-birkie-event-page, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-02-27, end: 2027-02-27, source_id: events-nordic-birkie-event-page, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  - elite
+  venue:
+    resort_id: null
+    venue_id: cable-wi-birkie-trailhead
+  organizer:
+    name: American Birkebeiner Ski Foundation
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  sanctioning:
+    name: Worldloppet
+    note: Founding member of the Worldloppet federation of ski marathons
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  format:
+    value: 50 km skate and 53 km classic races, the main races of a Birkie week that runs February 24 to 28, 2027
+    note: Wikipedia describes the course from Cable to Hayward and a men's and women's elite skate race
+    source_id: events-nordic-birkie-event-page
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-27
+    end: 2027-02-27
+    source_id: events-nordic-birkie-event-page
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://birkie.com/ski/events/birkie", source_id: events-nordic-birkie-event-page, as_of: 2026-10-17, confidence: estimated}
-    opens: {value: 2026-05-01, note: "Opened at 8 AM Central for the 50 km skate, 53 km classic, Kortelopet, Prince Haakon and Wednesday Open Track", source_id: events-nordic-birkie-registration-opening, as_of: 2026-10-17, confidence: estimated}
-    fee_usd: {value: 225, note: "Lowest of four price windows listed on the event page ($225, $235, $245 and $250); the last window runs from October 23 or until full", source_id: events-nordic-birkie-event-page, as_of: 2026-10-17, confidence: estimated}
-    requirements: {value: "New skiers start in the last wave unless another ski marathon time qualifies them for a higher wave", note: "The 2027 event page adds that a skier whose qualified wave has closed goes in the highest wave still open", source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  website: {value: "https://www.birkie.com/birkieweek/", source_id: events-nordic-birkie-week, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://birkie.com/ski/events/birkie
+      source_id: events-nordic-birkie-event-page
+      as_of: 2026-10-17
+      confidence: estimated
+    opens:
+      value: 2026-05-01
+      note: Opened at 8 AM Central for the 50 km skate, 53 km classic, Kortelopet, Prince Haakon and Wednesday Open Track
+      source_id: events-nordic-birkie-registration-opening
+      as_of: 2026-10-17
+      confidence: estimated
+    fee_usd:
+      value: 225
+      note: Lowest of four price windows listed on the event page ($225, $235, $245 and $250); the last window runs from October
+        23 or until full
+      source_id: events-nordic-birkie-event-page
+      as_of: 2026-10-17
+      confidence: estimated
+    requirements:
+      value: New skiers start in the last wave unless another ski marathon time qualifies them for a higher wave
+      note: The 2027 event page adds that a skier whose qualified wave has closed goes in the highest wave still open
+      source_id: events-nordic-wikipedia-american-birkebeiner
+      as_of: 2026-10-17
+      confidence: reported
+  website:
+    value: https://www.birkie.com/birkieweek/
+    source_id: events-nordic-birkie-week
+    as_of: 2026-10-17
+    confidence: estimated
 - id: birkie-kortelopet
   name: Kortelopet
   discipline: cross_country
-  disciplines_also: [ski_marathon]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: cable-wi-birkie-trailhead}
-  organizer: {name: American Birkebeiner Ski Foundation, source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  format: {value: "29 km race from County Road OO to Main Street in Hayward, held the day before the 50 km Birkie", source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  edition_2026_27: {start: 2027-02-26, end: 2027-02-26, note: "Derived: Wikipedia places the Kortelopet the day before the 50 km race, and the Birkie event page dates that race February 27, 2027", source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - ski_marathon
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: cable-wi-birkie-trailhead
+  organizer:
+    name: American Birkebeiner Ski Foundation
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  format:
+    value: 29 km race from County Road OO to Main Street in Hayward, held the day before the 50 km Birkie
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  edition_2026_27:
+    start: 2027-02-26
+    end: 2027-02-26
+    note: 'Derived: Wikipedia places the Kortelopet the day before the 50 km race, and the Birkie event page dates that race
+      February 27, 2027'
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://www.birkie.com/birkieweek/", source_id: events-nordic-birkie-week, as_of: 2026-10-17, confidence: estimated}
-    opens: {value: 2026-05-01, source_id: events-nordic-birkie-registration-opening, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.birkie.com/birkieweek/", source_id: events-nordic-birkie-week, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://www.birkie.com/birkieweek/
+      source_id: events-nordic-birkie-week
+      as_of: 2026-10-17
+      confidence: estimated
+    opens:
+      value: 2026-05-01
+      source_id: events-nordic-birkie-registration-opening
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.birkie.com/birkieweek/
+    source_id: events-nordic-birkie-week
+    as_of: 2026-10-17
+    confidence: estimated
 - id: birkie-prince-haakon
   name: Prince Haakon
   discipline: cross_country
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: cable-wi-birkie-trailhead}
-  organizer: {name: American Birkebeiner Ski Foundation, source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  format: {value: "15 km race on the Birkie race weekend", source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  edition_2026_27: {start: 2027-02-24, end: 2027-02-28, note: "Birkie week dates; the sources do not give the Prince Haakon race day", source_id: events-nordic-birkie-event-page, as_of: 2026-10-17, confidence: estimated}
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: cable-wi-birkie-trailhead
+  organizer:
+    name: American Birkebeiner Ski Foundation
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  format:
+    value: 15 km race on the Birkie race weekend
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  edition_2026_27:
+    start: 2027-02-24
+    end: 2027-02-28
+    note: Birkie week dates; the sources do not give the Prince Haakon race day
+    source_id: events-nordic-birkie-event-page
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://www.birkie.com/birkieweek/", source_id: events-nordic-birkie-week, as_of: 2026-10-17, confidence: estimated}
-    opens: {value: 2026-05-01, source_id: events-nordic-birkie-registration-opening, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.birkie.com/birkieweek/", source_id: events-nordic-birkie-week, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://www.birkie.com/birkieweek/
+      source_id: events-nordic-birkie-week
+      as_of: 2026-10-17
+      confidence: estimated
+    opens:
+      value: 2026-05-01
+      source_id: events-nordic-birkie-registration-opening
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.birkie.com/birkieweek/
+    source_id: events-nordic-birkie-week
+    as_of: 2026-10-17
+    confidence: estimated
 - id: birkie-open-track
   name: Birkie Wednesday Open Track
   discipline: cross_country
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: cable-wi-birkie-trailhead}
-  organizer: {name: American Birkebeiner Ski Foundation, source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  format: {value: "Ski the Birkie course at a relaxed pace on the Wednesday before the main race, with fewer crowds and more open trail; held since 2022", source_id: events-nordic-wikipedia-american-birkebeiner, as_of: 2026-10-17, confidence: reported}
-  edition_2026_27: {start: 2027-02-24, end: 2027-02-24, source_id: events-nordic-birkie-event-page, as_of: 2026-10-17, confidence: estimated}
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: cable-wi-birkie-trailhead
+  organizer:
+    name: American Birkebeiner Ski Foundation
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  format:
+    value: Ski the Birkie course at a relaxed pace on the Wednesday before the main race, with fewer crowds and more open
+      trail; held since 2022
+    source_id: events-nordic-wikipedia-american-birkebeiner
+    as_of: 2026-10-17
+    confidence: reported
+  edition_2026_27:
+    start: 2027-02-24
+    end: 2027-02-24
+    source_id: events-nordic-birkie-event-page
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://www.birkie.com/birkieweek/", source_id: events-nordic-birkie-week, as_of: 2026-10-17, confidence: estimated}
-    opens: {value: 2026-05-01, source_id: events-nordic-birkie-registration-opening, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.birkie.com/birkieweek/", source_id: events-nordic-birkie-week, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://www.birkie.com/birkieweek/
+      source_id: events-nordic-birkie-week
+      as_of: 2026-10-17
+      confidence: estimated
+    opens:
+      value: 2026-05-01
+      source_id: events-nordic-birkie-registration-opening
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.birkie.com/birkieweek/
+    source_id: events-nordic-birkie-week
+    as_of: 2026-10-17
+    confidence: estimated
 - id: vasaloppet-usa
   name: Vasaloppet USA
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur, junior]
-  venue: {resort_id: null, venue_id: vasaloppet-nordic-ski-center-mora-mn}
-  format: {value: "Vasa 51 km (three laps), Dala 34 km, Classic 42 km, Half Classic 21 km, Bellringer and Team 12 km, and Miniloppet kids races of 0.5 to 4 km", source_id: events-nordic-vasaloppet-runsignup, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-02-13, end: 2027-02-14, source_id: events-nordic-vasaloppet-site, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: vasaloppet-nordic-ski-center-mora-mn
+  format:
+    value: Vasa 51 km (three laps), Dala 34 km, Classic 42 km, Half Classic 21 km, Bellringer and Team 12 km, and Miniloppet
+      kids races of 0.5 to 4 km
+    source_id: events-nordic-vasaloppet-runsignup
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-13
+    end: 2027-02-14
+    source_id: events-nordic-vasaloppet-site
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://runsignup.com/Race/MN/Mora/VasaloppetUSA2024", source_id: events-nordic-vasaloppet-runsignup, as_of: 2026-10-17, confidence: estimated}
-    platform: {value: RunSignup, source_id: events-nordic-vasaloppet-runsignup, as_of: 2026-10-17, confidence: estimated}
-    fee_usd: {value: 112.30, note: "Vasa, Dala, Classic and Half Classic rate before the price increase after August 30, 2026; the current rate is higher", source_id: events-nordic-vasaloppet-runsignup, as_of: 2026-10-17, confidence: estimated}
-    requirements: {value: "Fluorinated wax is banned at the Vasaloppet Nordic Ski Center and on the Vasaloppet trails", source_id: events-nordic-vasaloppet-site, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://vasaloppet.us/?p=107", source_id: events-nordic-vasaloppet-site, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://www.worldloppet.com/global-ski-marathon-calendar/?cpage=3", note: "The Worldloppet global calendar listed the 2026 edition (The Vasa 48 km, February 7, 2026)", source_id: events-nordic-worldloppet-calendar, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://runsignup.com/Race/MN/Mora/VasaloppetUSA2024
+      source_id: events-nordic-vasaloppet-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-vasaloppet-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    fee_usd:
+      value: 112.3
+      note: Vasa, Dala, Classic and Half Classic rate before the price increase after August 30, 2026; the current rate is
+        higher
+      source_id: events-nordic-vasaloppet-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    requirements:
+      value: Fluorinated wax is banned at the Vasaloppet Nordic Ski Center and on the Vasaloppet trails
+      source_id: events-nordic-vasaloppet-site
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://vasaloppet.us/?p=107
+    source_id: events-nordic-vasaloppet-site
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://www.worldloppet.com/global-ski-marathon-calendar/?cpage=3
+    note: The Worldloppet global calendar listed the 2026 edition (The Vasa 48 km, February 7, 2026)
+    source_id: events-nordic-worldloppet-calendar
+    as_of: 2026-10-17
+    confidence: estimated
 - id: pepsi-challenge-giants-ridge
   name: Pepsi Challenge Cup Race
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur]
-  venue: {resort_id: giants-ridge-resort, venue_id: null}
-  format: {value: "41st edition with 50 km, 25 km and 8 km races; part of the American Ski Marathon Series and a Birkie qualifier", source_id: events-nordic-pepsi-challenge-runsignup, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-03-06, end: 2027-03-06, source_id: events-nordic-pepsi-challenge-runsignup, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: giants-ridge-resort
+    venue_id: null
+  format:
+    value: 41st edition with 50 km, 25 km and 8 km races; part of the American Ski Marathon Series and a Birkie qualifier
+    source_id: events-nordic-pepsi-challenge-runsignup
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-06
+    end: 2027-03-06
+    source_id: events-nordic-pepsi-challenge-runsignup
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://runsignup.com/Race/MN/Biwabik/PepsiChallengeSki", source_id: events-nordic-pepsi-challenge-runsignup, as_of: 2026-10-17, confidence: estimated}
-    platform: {value: RunSignup, source_id: events-nordic-pepsi-challenge-runsignup, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://runsignup.com/Race/MN/Biwabik/PepsiChallengeSki", source_id: events-nordic-pepsi-challenge-runsignup, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://www.xcskiworld.com/asm-series", source_id: events-nordic-asm-series, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://runsignup.com/Race/MN/Biwabik/PepsiChallengeSki
+      source_id: events-nordic-pepsi-challenge-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-pepsi-challenge-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://runsignup.com/Race/MN/Biwabik/PepsiChallengeSki
+    source_id: events-nordic-pepsi-challenge-runsignup
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://www.xcskiworld.com/asm-series
+    source_id: events-nordic-asm-series
+    as_of: 2026-10-17
+    confidence: estimated
 - id: boulder-mountain-tour
   name: Boulder Mountain Tour
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: boulder-mountain-tour-course-id}
-  format: {value: "34 km Full Boulder in seven waves and 15 km Half Boulder; the field is capped", source_id: events-nordic-bmt-race-details, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: boulder-mountain-tour-course-id
+  format:
+    value: 34 km Full Boulder in seven waves and 15 km Half Boulder; the field is capped
+    source_id: events-nordic-bmt-race-details
+    as_of: 2026-10-17
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2026-02-05, end: 2026-02-07, season: 2025/26, note: "Event listing dates on the Sun Valley visitor calendar. A third party calendar lists February 6, 2027 as not yet confirmed.", source_id: events-nordic-bmt-visitsunvalley-2026, as_of: 2026-10-17, confidence: estimated}
+  last_edition:
+    start: 2026-02-05
+    end: 2026-02-07
+    season: 2025/26
+    note: Event listing dates on the Sun Valley visitor calendar. A third party calendar lists February 6, 2027 as not yet
+      confirmed.
+    source_id: events-nordic-bmt-visitsunvalley-2026
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://bouldermountaintour.com/race-details/", note: "General registration for 2026 sold out and the organizer ran a waitlist; 2026 registration opened July 1, 2025", source_id: events-nordic-bmt-race-details, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://bouldermountaintour.com/race-details/", source_id: events-nordic-bmt-race-details, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://bouldermountaintour.com/race-details/
+      note: General registration for 2026 sold out and the organizer ran a waitlist; 2026 registration opened July 1, 2025
+      source_id: events-nordic-bmt-race-details
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://bouldermountaintour.com/race-details/
+    source_id: events-nordic-bmt-race-details
+    as_of: 2026-10-17
+    confidence: estimated
 - id: craftsbury-marathon
   name: Craftsbury Marathon Ski Festival
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur, collegiate, junior]
-  venue: {resort_id: null, venue_id: craftsbury-outdoor-center-vt}
-  organizer: {name: Craftsbury Outdoor Center, url: "https://craftsbury.com/", source_id: events-nordic-craftsbury-marathon-page, as_of: 2026-10-17, confidence: estimated}
-  format: {value: "Marathon festival with open class, college and high school entries", source_id: events-nordic-craftsbury-marathon-page, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  - collegiate
+  venue:
+    resort_id: null
+    venue_id: craftsbury-outdoor-center-vt
+  organizer:
+    name: Craftsbury Outdoor Center
+    url: https://craftsbury.com/
+    source_id: events-nordic-craftsbury-marathon-page
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Saturday classic and Sunday skate races; the classic lists 50 km and 25 km distances plus youth races, with open
+      class and college entries
+    source_id: events-nordic-craftsbury-marathon-2026-nensa
+    as_of: 2026-10-20
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2025-01-25, end: 2025-01-25, season: 2024/25, note: "Latest edition found; no 2026 or 2027 date appeared in the search results", source_id: events-nordic-craftsbury-marathon-2025-listing, as_of: 2026-10-17, confidence: estimated}
+  last_edition:
+    start: 2026-01-31
+    end: 2026-02-01
+    season: 2025/26
+    note: A February 3, 2026 Hardwick Gazette report gives a 46 km long classic race that year; the 2025 edition was January
+      25, 2025. No 2027 date was found.
+    source_id: events-nordic-craftsbury-marathon-2026-nensa
+    as_of: 2026-10-20
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://craftsbury.com/events/craftsbury-marathon-ski-festival", note: "Entry fees rise in steps through the season; registration has opened in the fall in past years", source_id: events-nordic-craftsbury-marathon-page, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://craftsbury.com/events/craftsbury-marathon-ski-festival", source_id: events-nordic-craftsbury-marathon-page, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://craftsbury.com/events/craftsbury-marathon-ski-festival
+      note: Entry fees rise in steps through the season; registration has opened in the fall in past years
+      source_id: events-nordic-craftsbury-marathon-page
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://craftsbury.com/events/craftsbury-marathon-ski-festival
+    source_id: events-nordic-craftsbury-marathon-page
+    as_of: 2026-10-17
+    confidence: estimated
 - id: tour-of-anchorage
   name: Tour of Anchorage
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: anchorage-ak-town}
-  organizer: {name: Nordic Skiing Association of Anchorage, url: "https://anchoragenordicski.com/", source_id: events-nordic-tour-of-anchorage-2026-chamber, as_of: 2026-10-17, confidence: estimated}
-  format: {value: "Anchorage ski race; low snow years have used an alternative format on the Snow Making Loop at Kincaid Park", source_id: events-nordic-tour-of-anchorage-fasterskier-2024, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: anchorage-ak-town
+  organizer:
+    name: Nordic Skiing Association of Anchorage
+    url: https://anchoragenordicski.com/
+    source_id: events-nordic-tour-of-anchorage-2026-chamber
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Anchorage ski race; low snow years have used an alternative format on the Snow Making Loop at Kincaid Park
+    source_id: events-nordic-tour-of-anchorage-fasterskier-2024
+    as_of: 2026-10-17
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2026-03-08, end: 2026-03-08, season: 2025/26, note: "Anchorage Chamber listing. A second Chamber listing gives March 1, 2026, and a third party calendar lists March 7, 2027 as not yet confirmed.", source_id: events-nordic-tour-of-anchorage-2026-chamber, as_of: 2026-10-17, confidence: estimated}
+  last_edition:
+    start: 2026-03-08
+    end: 2026-03-08
+    season: 2025/26
+    note: Anchorage Chamber listing. A second Chamber listing gives March 1, 2026, and a third party calendar lists March
+      7, 2027 as not yet confirmed.
+    source_id: events-nordic-tour-of-anchorage-2026-chamber
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
-    url: {value: "https://anchoragenordicski.com/", source_id: events-nordic-tour-of-anchorage-2026-chamber, as_of: 2026-10-17, confidence: estimated}
-    fee_usd: {value: 67, note: "2026 edition; listed fees ran from $67 to $115", source_id: events-nordic-tour-of-anchorage-2026-chamber, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://anchoragenordicski.com/", source_id: events-nordic-tour-of-anchorage-2026-chamber, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://anchoragenordicski.com/
+      source_id: events-nordic-tour-of-anchorage-2026-chamber
+      as_of: 2026-10-17
+      confidence: estimated
+    fee_usd:
+      value: 67
+      note: 2026 edition; listed fees ran from $67 to $115
+      source_id: events-nordic-tour-of-anchorage-2026-chamber
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://anchoragenordicski.com/
+    source_id: events-nordic-tour-of-anchorage-2026-chamber
+    as_of: 2026-10-17
+    confidence: estimated
 - id: noquemanon-ski-marathon
   name: Noquemanon Ski Marathon
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: marquette-mi-town}
-  format: {value: "Full Noque, Half Noque and 12K races", source_id: events-nordic-noquemanon-gotrail, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-01-22, end: 2027-01-23, source_id: events-nordic-noquemanon-site, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: marquette-mi-town
+  format:
+    value: Full Noque, Half Noque and 12K races
+    source_id: events-nordic-noquemanon-gotrail
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-22
+    end: 2027-01-23
+    source_id: events-nordic-noquemanon-site
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://runsignup.com/Race/MI/Marquette/NoquemanonSkiMarathon", note: "The RunSignUp page seen in search covered the 2026 race", source_id: events-nordic-noquemanon-runsignup, as_of: 2026-10-17, confidence: estimated}
-    platform: {value: RunSignup, source_id: events-nordic-noquemanon-gotrail, as_of: 2026-10-17, confidence: estimated}
-    fee_usd: {value: 40, note: "12K rate through October 31, 2026, rising to $65 on race day; Full and Half Noque start at $80 and reach $125; $25 off for skiers 24 and under; non refundable", source_id: events-nordic-noquemanon-gotrail, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.noquemanon.com/", source_id: events-nordic-noquemanon-site, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://runsignup.com/Race/MI/Marquette/NoquemanonSkiMarathon
+      note: The RunSignUp page seen in search covered the 2026 race
+      source_id: events-nordic-noquemanon-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-noquemanon-gotrail
+      as_of: 2026-10-17
+      confidence: estimated
+    fee_usd:
+      value: 40
+      note: 12K rate through October 31, 2026, rising to $65 on race day; Full and Half Noque start at $80 and reach $125;
+        $25 off for skiers 24 and under; non refundable
+      source_id: events-nordic-noquemanon-gotrail
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.noquemanon.com/
+    source_id: events-nordic-noquemanon-site
+    as_of: 2026-10-17
+    confidence: estimated
 - id: great-bear-chase
   name: UP Health System Great Bear Chase
   discipline: ski_marathon
-  disciplines_also: [cross_country, adaptive_nordic]
-  levels: [open_amateur, junior, adaptive]
-  venue: {resort_id: null, venue_id: swedetown-trails-calumet-mi}
-  format: {value: "52 km skiathlon (120 skiers) and 20 km skiathlon (60), 52, 24 and 10 km classic and freestyle races, Para Nordic races and Junior Bear Chase", source_id: events-nordic-great-bear-chase-race-guide, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-03-13, end: 2027-03-13, source_id: events-nordic-great-bear-chase-race-guide, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  - adaptive_nordic
+  levels:
+  - open_amateur
+  - adaptive
+  venue:
+    resort_id: null
+    venue_id: swedetown-trails-calumet-mi
+  format:
+    value: 52 km skiathlon (120 skiers) and 20 km skiathlon (60), 52, 24 and 10 km classic and freestyle races, Para Nordic
+      races and Junior Bear Chase
+    source_id: events-nordic-great-bear-chase-race-guide
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-13
+    end: 2027-03-13
+    source_id: events-nordic-great-bear-chase-race-guide
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://runsignup.com/Race/GreatBearChase/Page/RaceGuide", source_id: events-nordic-great-bear-chase-race-guide, as_of: 2026-10-17, confidence: estimated}
-    platform: {value: RunSignup, source_id: events-nordic-great-bear-chase-race-guide, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://runsignup.com/Race/GreatBearChase/Page/RaceGuide", source_id: events-nordic-great-bear-chase-race-guide, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://runsignup.com/Race/GreatBearChase/Page/RaceGuide
+      source_id: events-nordic-great-bear-chase-race-guide
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-great-bear-chase-race-guide
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://runsignup.com/Race/GreatBearChase/Page/RaceGuide
+    source_id: events-nordic-great-bear-chase-race-guide
+    as_of: 2026-10-17
+    confidence: estimated
 - id: city-of-lakes-loppet
   name: City of Lakes Loppet Winter Festival
   discipline: cross_country
-  disciplines_also: [ski_marathon, skijoring, fat_bike, snowshoe_race]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: minneapolis-mn-loppet}
-  format: {value: "Two day winter festival with ski, fat bike, skijor, snowshoe and kubb events", source_id: events-nordic-loppet-2027, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-02-06, end: 2027-02-07, source_id: events-nordic-loppet-2027, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - ski_marathon
+  - skijoring
+  - fat_bike
+  - snowshoe_race
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: minneapolis-mn-loppet
+  format:
+    value: Two day winter festival with ski, fat bike, skijor, snowshoe and kubb events
+    source_id: events-nordic-loppet-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-06
+    end: 2027-02-07
+    source_id: events-nordic-loppet-2027
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://loppet.org/event/winter-festival-2/2027-02-06/", note: "Registration is on each event's own page", source_id: events-nordic-loppet-2027, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://loppet.org/event/winter-festival-2/2027-02-06/", source_id: events-nordic-loppet-2027, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://www.skinnyski.com/racing/calendar.asp?monthSel=2", source_id: events-nordic-skinnyski-calendar, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://loppet.org/event/winter-festival-2/2027-02-06/
+      note: Registration is on each event's own page
+      source_id: events-nordic-loppet-2027
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://loppet.org/event/winter-festival-2/2027-02-06/
+    source_id: events-nordic-loppet-2027
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://www.skinnyski.com/racing/calendar.asp?monthSel=2
+    source_id: events-nordic-skinnyski-calendar
+    as_of: 2026-10-17
+    confidence: estimated
 - id: sisu-ski-fest
   name: Sisu Ski Fest
   discipline: cross_country
-  disciplines_also: [ski_marathon]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: sisu-course-ironwood-mi}
-  format: {value: "Ski festival whose events include a 30K classic race", source_id: events-nordic-sisu-runscore-events, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - ski_marathon
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: sisu-course-ironwood-mi
+  format:
+    value: Ski festival whose events include a 30K classic race
+    source_id: events-nordic-sisu-runscore-events
+    as_of: 2026-10-17
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {season: 2025/26, note: "The race returned in January 2026 after two years cancelled for lack of snow; the exact 2026 race day is not in the sources. A third party calendar lists January 9, 2027 as not yet confirmed.", source_id: events-nordic-sisu-dailyglobe-2026, as_of: 2026-10-17, confidence: estimated}
+  last_edition:
+    season: 2025/26
+    note: The race returned in January 2026 after two years cancelled for lack of snow; the exact 2026 race day is not in
+      the sources. A third party calendar lists January 9, 2027 as not yet confirmed.
+    source_id: events-nordic-sisu-dailyglobe-2026
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://runsignup.com/Race/Info/MI/IRONWOOD/SisuSkiFest", note: "Registration for the 2026 race opened September 30, 2025", source_id: events-nordic-sisu-runsignup, as_of: 2026-10-17, confidence: estimated}
-    platform: {value: RunSignup, source_id: events-nordic-sisu-runsignup, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://sisuskifest.com/events", source_id: events-nordic-sisu-site, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://runsignup.com/Race/Info/MI/IRONWOOD/SisuSkiFest
+      note: Registration for the 2026 race opened September 30, 2025
+      source_id: events-nordic-sisu-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-sisu-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://sisuskifest.com/events
+    source_id: events-nordic-sisu-site
+    as_of: 2026-10-17
+    confidence: estimated
 - id: yellowstone-rendezvous
   name: Yellowstone Rendezvous Race
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: rendezvous-ski-trails-west-yellowstone-mt}
-  format: {value: "Six races: 2K, 5K, 10K, 25K classic, 25K and 50K", source_id: events-nordic-rendezvous-runsignup, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: rendezvous-ski-trails-west-yellowstone-mt
+  format:
+    value: 'Six races: 2K, 5K, 10K, 25K classic, 25K and 50K'
+    source_id: events-nordic-rendezvous-runsignup
+    as_of: 2026-10-17
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2025-03-08, end: 2025-03-08, season: 2024/25, note: "46th annual race; the latest edition found in search results", source_id: events-nordic-rendezvous-runsignup, as_of: 2026-10-17, confidence: estimated}
+  last_edition:
+    start: 2025-03-08
+    end: 2025-03-08
+    season: 2024/25
+    note: 46th annual race; the latest edition found in search results
+    source_id: events-nordic-rendezvous-runsignup
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://runscore.runsignup.com/Race/MT/WestYellowstone/YellowstoneRendezvousRace", note: "No refunds for any reason, including race cancellation; more race information is at skirunbikemt.com", source_id: events-nordic-rendezvous-runsignup, as_of: 2026-10-17, confidence: estimated}
-    platform: {value: RunSignup, source_id: events-nordic-rendezvous-runsignup, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://runscore.runsignup.com/Race/MT/WestYellowstone/YellowstoneRendezvousRace", source_id: events-nordic-rendezvous-runsignup, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://runscore.runsignup.com/Race/MT/WestYellowstone/YellowstoneRendezvousRace
+      note: No refunds for any reason, including race cancellation; more race information is at skirunbikemt.com
+      source_id: events-nordic-rendezvous-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-rendezvous-runsignup
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://runscore.runsignup.com/Race/MT/WestYellowstone/YellowstoneRendezvousRace
+    source_id: events-nordic-rendezvous-runsignup
+    as_of: 2026-10-17
+    confidence: estimated
 - id: us-cross-country-championships
   name: U.S. Cross Country Ski Championships
   discipline: cross_country
-  levels: [elite, collegiate]
-  venue: {resort_id: null, venue_id: mt-van-hoevenberg-lake-placid-ny}
-  sanctioning: {name: U.S. Ski & Snowboard, source_id: events-nordic-supertour-2025-26-nordicinsights, as_of: 2026-10-17, confidence: estimated, note: "The 2025/26 U.S. Ski & Snowboard SuperTour schedule ran the U.S. National Championships at Lake Placid as its second period"}
-  format: {value: "10 km individual start classic, 20 km mass start freestyle and individual freestyle sprint; more than 450 club and college athletes in 2026", source_id: events-nordic-nationals-2026-mtvanhoevenberg, as_of: 2026-10-17, confidence: estimated}
+  levels:
+  - elite
+  - collegiate
+  venue:
+    resort_id: null
+    venue_id: mt-van-hoevenberg-lake-placid-ny
+  sanctioning:
+    name: U.S. Ski & Snowboard
+    source_id: events-nordic-supertour-2025-26-nordicinsights
+    as_of: 2026-10-17
+    confidence: estimated
+    note: The 2025/26 U.S. Ski & Snowboard SuperTour schedule ran the U.S. National Championships at Lake Placid as its second
+      period
+  format:
+    value: 10 km individual start classic, 20 km mass start freestyle and individual freestyle sprint; more than 450 club
+      and college athletes in 2026
+    source_id: events-nordic-nationals-2026-mtvanhoevenberg
+    as_of: 2026-10-17
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2026-01-01, end: 2026-01-09, season: 2025/26, note: "Held at Mt. Van Hoevenberg, Lake Placid. The 2027 host and dates did not appear in search results; the venue shown is the 2026 host.", source_id: events-nordic-nationals-2026-mtvanhoevenberg, as_of: 2026-10-17, confidence: estimated}
+  last_edition:
+    start: 2026-01-01
+    end: 2026-01-09
+    season: 2025/26
+    note: Held at Mt. Van Hoevenberg, Lake Placid. The 2027 host and dates did not appear in search results; the venue shown
+      is the 2026 host.
+    source_id: events-nordic-nationals-2026-mtvanhoevenberg
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
-    url: {value: "https://www.usskiandsnowboard.org/supertour", note: "U.S. Ski & Snowboard SuperTour page, which carries the national schedule", source_id: events-nordic-usss-supertour, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://mtvanhoevenberg.com/event/us-cross-country-championships-jan-1/", source_id: events-nordic-nationals-2026-mtvanhoevenberg, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://nensa.net/event/2026-us-cross-country-national-championships/", source_id: events-nordic-nationals-2026-nensa, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://www.usskiandsnowboard.org/supertour
+      note: U.S. Ski & Snowboard SuperTour page, which carries the national schedule
+      source_id: events-nordic-usss-supertour
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://mtvanhoevenberg.com/event/us-cross-country-championships-jan-1/
+    source_id: events-nordic-nationals-2026-mtvanhoevenberg
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://nensa.net/event/2026-us-cross-country-national-championships/
+    source_id: events-nordic-nationals-2026-nensa
+    as_of: 2026-10-17
+    confidence: estimated
 - id: supertour-finals
   name: U.S. Ski & Snowboard SuperTour Finals
   discipline: cross_country
-  levels: [elite]
-  venue: {resort_id: null, venue_id: fairbanks-ak}
-  sanctioning: {name: U.S. Ski & Snowboard, source_id: events-nordic-usss-supertour, as_of: 2026-10-17, confidence: estimated}
-  format: {value: "Final period of the national SuperTour; in 2027 held in Fairbanks the week after U.S. Biathlon Senior Nationals in Anchorage (March 24 to 27)", source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: fairbanks-ak
+  sanctioning:
+    name: U.S. Ski & Snowboard
+    source_id: events-nordic-usss-supertour
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Final period of the national SuperTour; in 2027 held in Fairbanks the week after U.S. Biathlon Senior Nationals
+      in Anchorage (March 24 to 27)
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {season: 2025/26, note: "The 2026 SuperTour Finals were held at Craftsbury, Vermont; exact dates are not in the sources. The exact 2027 dates in Fairbanks are not in the sources either.", source_id: events-nordic-supertour-finals-2026-craftsbury, as_of: 2026-10-17, confidence: estimated}
+  last_edition:
+    season: 2025/26
+    note: The 2026 SuperTour Finals were held at Craftsbury, Vermont; exact dates are not in the sources. The exact 2027 dates
+      in Fairbanks are not in the sources either.
+    source_id: events-nordic-supertour-finals-2026-craftsbury
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
-    url: {value: "https://www.usskiandsnowboard.org/supertour", note: "The page lists a 2026/27 SuperTour schedule document", source_id: events-nordic-usss-supertour, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.usskiandsnowboard.org/supertour", source_id: events-nordic-usss-supertour, as_of: 2026-10-17, confidence: estimated}
-- id: us-biathlon-youth-junior-nationals
-  name: U.S. Biathlon Youth and Junior National Championships and International Team Trials
-  discipline: biathlon
-  levels: [junior]
-  venue: {resort_id: null, venue_id: ariens-nordic-center-brillion-wi}
-  sanctioning: {name: U.S. Biathlon, source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  format: {value: "National championship and international team trials for youth and junior biathletes; the first time Ariens Nordic Center hosts it", source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2026-12-26, end: 2026-12-31, note: "The U.S. Biathlon results page still listed Lake Placid for these trials; the May 2026 calendar announcement gives Brillion", source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  signup:
-    url: {value: "https://www.usbiathlon.org/nationalevents", source_id: events-nordic-usbiathlon-events-calendar, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.usbiathlon.org/news/2026/may/06/u-s-biathlon-announces-2026-27-domestic-events-calendar", source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://www.usbiathlon.org/nationalevents", source_id: events-nordic-usbiathlon-events-calendar, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://www.usskiandsnowboard.org/supertour
+      note: The page lists a 2026/27 SuperTour schedule document
+      source_id: events-nordic-usss-supertour
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.usskiandsnowboard.org/supertour
+    source_id: events-nordic-usss-supertour
+    as_of: 2026-10-17
+    confidence: estimated
 - id: us-biathlon-masters-nationals
   name: U.S. Biathlon Masters Nationals and NorAm Masters Championships
   discipline: biathlon
-  levels: [masters]
-  venue: {resort_id: null, venue_id: mt-van-hoevenberg-lake-placid-ny}
-  sanctioning: {name: U.S. Biathlon, source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-02-19, end: 2027-02-21, source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
+  levels:
+  - masters
+  venue:
+    resort_id: null
+    venue_id: mt-van-hoevenberg-lake-placid-ny
+  sanctioning:
+    name: U.S. Biathlon
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-19
+    end: 2027-02-21
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
-    url: {value: "https://www.usbiathlon.org/nationalevents", source_id: events-nordic-usbiathlon-events-calendar, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.usbiathlon.org/news/2026/may/06/u-s-biathlon-announces-2026-27-domestic-events-calendar", source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://www.usbiathlon.org/nationalevents", source_id: events-nordic-usbiathlon-events-calendar, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://www.usbiathlon.org/nationalevents
+      source_id: events-nordic-usbiathlon-events-calendar
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.usbiathlon.org/news/2026/may/06/u-s-biathlon-announces-2026-27-domestic-events-calendar
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://www.usbiathlon.org/nationalevents
+    source_id: events-nordic-usbiathlon-events-calendar
+    as_of: 2026-10-17
+    confidence: estimated
 - id: us-biathlon-senior-nationals
   name: U.S. Biathlon Senior Nationals and Spring Festival
   discipline: biathlon
-  disciplines_also: [adaptive_nordic]
-  levels: [elite, collegiate, adaptive, masters]
-  venue: {resort_id: null, venue_id: kincaid-park-anchorage-ak}
-  sanctioning: {name: U.S. Biathlon, source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  format: {value: "Senior national championships with collegiate, para and masters races", source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-03-24, end: 2027-03-27, source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - adaptive_nordic
+  levels:
+  - elite
+  - collegiate
+  - adaptive
+  - masters
+  venue:
+    resort_id: null
+    venue_id: kincaid-park-anchorage-ak
+  sanctioning:
+    name: U.S. Biathlon
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Senior national championships with collegiate, para and masters races
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-24
+    end: 2027-03-27
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
-    url: {value: "https://www.usbiathlon.org/nationalevents", source_id: events-nordic-usbiathlon-events-calendar, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://www.usbiathlon.org/news/2026/may/06/u-s-biathlon-announces-2026-27-domestic-events-calendar", source_id: events-nordic-usbiathlon-2026-27-calendar, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://www.usbiathlon.org/nationalevents", source_id: events-nordic-usbiathlon-events-calendar, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://www.usbiathlon.org/nationalevents
+      source_id: events-nordic-usbiathlon-events-calendar
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://www.usbiathlon.org/news/2026/may/06/u-s-biathlon-announces-2026-27-domestic-events-calendar
+    source_id: events-nordic-usbiathlon-2026-27-calendar
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://www.usbiathlon.org/nationalevents
+    source_id: events-nordic-usbiathlon-events-calendar
+    as_of: 2026-10-17
+    confidence: estimated
 - id: lake-placid-ski-jumping-world-cup
   name: Stifel Lake Placid Ski Jumping Cup (FIS Ski Jumping World Cup)
   discipline: ski_jumping
-  levels: [elite]
-  venue: {resort_id: lake-placid-olympic-jumping-complex, venue_id: null}
-  sanctioning: {name: FIS, source_id: events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup, as_of: 2026-10-20, confidence: reported}
-  format: {value: "Men's and women's individual large hill competitions on February 6 and a team event on February 7 on the HS128 MacKenzie International hill", source_id: events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup, as_of: 2026-10-20, confidence: reported}
-  edition_2026_27: {start: 2027-02-06, end: 2027-02-07, note: "The event name Stifel Lake Placid Ski Jumping Cup comes from a search result for an allsportdb listing", source_id: events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup, as_of: 2026-10-20, confidence: reported}
+  levels:
+  - elite
+  venue:
+    resort_id: lake-placid-olympic-jumping-complex
+    venue_id: null
+  sanctioning:
+    name: FIS
+    source_id: events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup
+    as_of: 2026-10-20
+    confidence: reported
+  format:
+    value: Men's and women's individual large hill competitions on February 6 and a team event on February 7 on the HS128
+      MacKenzie International hill
+    source_id: events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup
+    as_of: 2026-10-20
+    confidence: reported
+  edition_2026_27:
+    start: 2027-02-06
+    end: 2027-02-07
+    note: The event name Stifel Lake Placid Ski Jumping Cup comes from a search result for an allsportdb listing
+    source_id: events-nordic-wikipedia-2026-27-fis-ski-jumping-world-cup
+    as_of: 2026-10-20
+    confidence: reported
   signup:
-    url: {value: "https://allsportdb.com/Events/2027-Ski-Jumping-World-Cup-20522", source_id: events-nordic-lake-placid-jumping-wc-allsportdb, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://allsportdb.com/Events/2027-Ski-Jumping-World-Cup-20522", source_id: events-nordic-lake-placid-jumping-wc-allsportdb, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://allsportdb.com/Events/2027-Ski-Jumping-World-Cup-20522
+      source_id: events-nordic-lake-placid-jumping-wc-allsportdb
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://allsportdb.com/Events/2027-Ski-Jumping-World-Cup-20522
+    source_id: events-nordic-lake-placid-jumping-wc-allsportdb
+    as_of: 2026-10-17
+    confidence: estimated
 - id: lake-placid-nordic-combined-world-cup
   name: FIS Nordic Combined World Cup Lake Placid
   discipline: nordic_combined
-  disciplines_also: [ski_jumping, cross_country]
-  levels: [elite]
-  venue: {resort_id: lake-placid-olympic-jumping-complex, venue_id: null}
-  sanctioning: {name: FIS, source_id: events-nordic-lake-placid-nc-wc-unofficial, as_of: 2026-10-17, confidence: estimated}
-  format: {value: "Nordic combined World Cup returning to Lake Placid after 38 years", source_id: events-nordic-lake-placid-nc-wc-unofficial, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-02-04, end: 2027-02-06, note: "Sources differ: one gives February 4 to 6, 2027 and another February 5 to 6, 2027", source_id: events-nordic-lake-placid-nc-wc-unofficial, as_of: 2026-10-17, confidence: estimated}
+  disciplines_also:
+  - ski_jumping
+  - cross_country
+  levels:
+  - elite
+  venue:
+    resort_id: lake-placid-olympic-jumping-complex
+    venue_id: null
+  sanctioning:
+    name: FIS
+    source_id: events-nordic-lake-placid-nc-wc-unofficial
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: Nordic combined World Cup returning to Lake Placid after 38 years
+    source_id: events-nordic-lake-placid-nc-wc-unofficial
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-04
+    end: 2027-02-06
+    note: 'Sources differ: one gives February 4 to 6, 2027 and another February 5 to 6, 2027'
+    source_id: events-nordic-lake-placid-nc-wc-unofficial
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
-    url: {value: "https://unofficialnetworks.com/?p=15101347", source_id: events-nordic-lake-placid-nc-wc-unofficial, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://unofficialnetworks.com/?p=15101347", source_id: events-nordic-lake-placid-nc-wc-unofficial, as_of: 2026-10-17, confidence: estimated}
+    url:
+      value: https://unofficialnetworks.com/?p=15101347
+      source_id: events-nordic-lake-placid-nc-wc-unofficial
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://unofficialnetworks.com/?p=15101347
+    source_id: events-nordic-lake-placid-nc-wc-unofficial
+    as_of: 2026-10-17
+    confidence: estimated
 - id: ishpeming-ski-jumping-tournament
   name: Ishpeming Ski Club Annual Ski Jumping Tournament
   discipline: ski_jumping
-  levels: [junior]
-  venue: {resort_id: null, venue_id: suicide-hill-ishpeming-mi}
-  organizer: {name: Ishpeming Ski Club, url: "https://ishskiclub.com/annual-suicide-hill-ski-jump/", source_id: events-nordic-ishpeming-club-tournament, as_of: 2026-10-17, confidence: estimated}
-  format: {value: "140th annual tournament at the U.P. Nordic Ski Complex; the club calls it the longest consecutively run ski jumping tournament in the United States", source_id: events-nordic-ishpeming-club-tournament, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: {start: 2027-02-13, end: 2027-02-14, note: "Daily schedule to be announced. An August 2026 report says a snow load collapse of the club's equipment building damaged the WinchCat that grooms Suicide Hill, and the club launched a $195,000 fundraising campaign so it can host the tournament.", source_id: events-nordic-ishpeming-club-tournament, as_of: 2026-10-17, confidence: estimated}
-  last_edition: {start: 2026-01-16, end: 2026-01-17, season: 2025/26, note: "139th tournament. A January 14, 2026 report says it starts Friday (January 16), and the Ishpeming city event calendar has an entry on January 17.", source_id: events-nordic-ishpeming-2026-starts-friday, as_of: 2026-10-17, confidence: estimated}
+  levels: []
+  venue:
+    resort_id: null
+    venue_id: suicide-hill-ishpeming-mi
+  organizer:
+    name: Ishpeming Ski Club
+    url: https://ishskiclub.com/annual-suicide-hill-ski-jump/
+    source_id: events-nordic-ishpeming-club-tournament
+    as_of: 2026-10-17
+    confidence: estimated
+  format:
+    value: 140th annual tournament at the U.P. Nordic Ski Complex; the club calls it the longest consecutively run ski jumping
+      tournament in the United States
+    source_id: events-nordic-ishpeming-club-tournament
+    as_of: 2026-10-17
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-13
+    end: 2027-02-14
+    note: Daily schedule to be announced. An August 2026 report says a snow load collapse of the club's equipment building
+      damaged the WinchCat that grooms Suicide Hill, and the club launched a $195,000 fundraising campaign so it can host
+      the tournament.
+    source_id: events-nordic-ishpeming-club-tournament
+    as_of: 2026-10-17
+    confidence: estimated
+  last_edition:
+    start: 2026-01-16
+    end: 2026-01-17
+    season: 2025/26
+    note: 139th tournament. A January 14, 2026 report says it starts Friday (January 16), and the Ishpeming city event calendar
+      has an entry on January 17.
+    source_id: events-nordic-ishpeming-2026-starts-friday
+    as_of: 2026-10-17
+    confidence: estimated
   signup:
-    url: {value: "https://ishskiclub.com/annual-suicide-hill-ski-jump/", source_id: events-nordic-ishpeming-club-tournament, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://ishskiclub.com/annual-suicide-hill-ski-jump/", source_id: events-nordic-ishpeming-club-tournament, as_of: 2026-10-17, confidence: estimated}
-  calendar_url: {value: "https://usaskijumping.com/event/ishpeming-ski-club-u-s-cup-junior-national-qualifier-k13k25k40k60k90/", note: "USA Nordic listing of an Ishpeming Ski Club U.S. Cup and Junior National Qualifier on the K13 to K90 hills; the season of the listing is not shown", source_id: events-nordic-ishpeming-usanordic-listing, as_of: 2026-10-20, confidence: estimated}
+    url:
+      value: https://ishskiclub.com/annual-suicide-hill-ski-jump/
+      source_id: events-nordic-ishpeming-club-tournament
+      as_of: 2026-10-17
+      confidence: estimated
+  website:
+    value: https://ishskiclub.com/annual-suicide-hill-ski-jump/
+    source_id: events-nordic-ishpeming-club-tournament
+    as_of: 2026-10-17
+    confidence: estimated
+  calendar_url:
+    value: https://usaskijumping.com/event/ishpeming-ski-club-u-s-cup-junior-national-qualifier-k13k25k40k60k90/
+    note: USA Nordic listing of an Ishpeming Ski Club U.S. Cup and Junior National Qualifier on the K13 to K90 hills; the
+      season of the listing is not shown
+    source_id: events-nordic-ishpeming-usanordic-listing
+    as_of: 2026-10-20
+    confidence: estimated
 - id: pine-mountain-continental-cup
   name: FIS Ski Jumping Continental Cup at Pine Mountain
   discipline: ski_jumping
-  levels: [elite]
-  venue: {resort_id: pine-mountain-ski-hill, venue_id: null}
-  organizer: {name: Kiwanis Ski Club, source_id: events-nordic-wikipedia-pine-mountain-jump, as_of: 2026-10-20, confidence: reported}
-  sanctioning: {name: FIS, source_id: events-nordic-wikipedia-pine-mountain-jump, as_of: 2026-10-20, confidence: reported}
-  format: {value: "Annual FIS Continental Cup on the HS133 Pine Mountain Jump, the largest ski jump in the United States outside ski flying hills", source_id: events-nordic-wikipedia-pine-mountain-jump, as_of: 2026-10-20, confidence: reported}
+  levels:
+  - elite
+  venue:
+    resort_id: pine-mountain-ski-hill
+    venue_id: null
+  organizer:
+    name: Kiwanis Ski Club
+    source_id: events-nordic-wikipedia-pine-mountain-jump
+    as_of: 2026-10-20
+    confidence: reported
+  sanctioning:
+    name: FIS
+    source_id: events-nordic-wikipedia-pine-mountain-jump
+    as_of: 2026-10-20
+    confidence: reported
+  format:
+    value: Annual FIS Continental Cup on the HS133 Pine Mountain Jump, the largest ski jump in the United States outside ski
+      flying hills
+    source_id: events-nordic-wikipedia-pine-mountain-jump
+    as_of: 2026-10-20
+    confidence: reported
   edition_2026_27: null
-  last_edition: {start: 2026-02-20, end: 2026-02-22, season: 2025/26, note: "Presale spectator admission was $30 for adults and $20 for ages 11 to 17, sold through the Kiwanis Ski Club website; the 2025 event ran February 21 to 23", source_id: events-nordic-pine-mountain-2026-9and10, as_of: 2026-10-20, confidence: estimated}
+  last_edition:
+    start: 2026-02-20
+    end: 2026-02-22
+    season: 2025/26
+    note: Presale spectator admission was $30 for adults and $20 for ages 11 to 17, sold through the Kiwanis Ski Club website;
+      the 2025 event ran February 21 to 23
+    source_id: events-nordic-pine-mountain-2026-9and10
+    as_of: 2026-10-20
+    confidence: estimated
 - id: snowflake-ski-jumping-tournament
   name: Snowflake Ski Jumping Tournament
   discipline: ski_jumping
-  levels: [elite, junior]
-  venue: {resort_id: null, venue_id: snowflake-ski-jump-westby-wi}
-  organizer: {name: Snowflake Ski Club, url: "http://www.snowflakeskiclub.com", source_id: events-nordic-wikipedia-snowflake-ski-jump, as_of: 2026-10-20, confidence: reported}
-  format: {value: "Annual tournament since 1961 on the K106 large hill in Timber Coulee; it has hosted FIS Continental Cup events, with junior events on five smaller hills", source_id: events-nordic-wikipedia-snowflake-ski-jump, as_of: 2026-10-20, confidence: reported}
-  edition_2026_27: {start: 2027-01-22, end: 2027-01-23, note: "104th year; gates open at 4 pm Friday. A single tourism listing gives these dates; the club's own page was not seen.", source_id: events-nordic-snowflake-travelwisconsin, as_of: 2026-10-20, confidence: estimated}
-  last_edition: {start: 2026-02-06, end: 2026-02-07, season: 2025/26, source_id: events-nordic-snowflake-2026-driftless, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "http://www.snowflakeskiclub.com", source_id: events-nordic-wikipedia-snowflake-ski-jump, as_of: 2026-10-20, confidence: reported}
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: snowflake-ski-jump-westby-wi
+  organizer:
+    name: Snowflake Ski Club
+    url: http://www.snowflakeskiclub.com
+    source_id: events-nordic-wikipedia-snowflake-ski-jump
+    as_of: 2026-10-20
+    confidence: reported
+  format:
+    value: Annual tournament since 1961 on the K106 large hill in Timber Coulee; it has hosted FIS Continental Cup events,
+      with junior events on five smaller hills
+    source_id: events-nordic-wikipedia-snowflake-ski-jump
+    as_of: 2026-10-20
+    confidence: reported
+  edition_2026_27:
+    start: 2027-01-22
+    end: 2027-01-23
+    note: 104th year; gates open at 4 pm Friday. A single tourism listing gives these dates; the club's own page was not seen.
+    source_id: events-nordic-snowflake-travelwisconsin
+    as_of: 2026-10-20
+    confidence: estimated
+  last_edition:
+    start: 2026-02-06
+    end: 2026-02-07
+    season: 2025/26
+    source_id: events-nordic-snowflake-2026-driftless
+    as_of: 2026-10-20
+    confidence: estimated
+  website:
+    value: http://www.snowflakeskiclub.com
+    source_id: events-nordic-wikipedia-snowflake-ski-jump
+    as_of: 2026-10-20
+    confidence: reported
 - id: norge-winter-ski-jump-tournament
   name: Norge Annual Winter Ski Jump Tournament
   discipline: ski_jumping
-  levels: [junior, masters]
-  venue: {resort_id: null, venue_id: norge-ski-club-fox-river-grove-il}
-  organizer: {name: Norge Ski Club, note: "Founded in 1905; Wikipedia calls it the oldest continuously open ski club in the United States", source_id: events-nordic-wikipedia-fox-river-grove-illinois, as_of: 2026-10-20, confidence: reported}
-  format: {value: "Small hill junior events on Saturday and K70 events with masters, senior and junior classes; a Junior National Qualifier and US Cup event in 2026", source_id: events-nordic-norge-2026-invitation, as_of: 2026-10-20, confidence: estimated}
+  levels:
+  - masters
+  venue:
+    resort_id: null
+    venue_id: norge-ski-club-fox-river-grove-il
+  organizer:
+    name: Norge Ski Club
+    note: Founded in 1905; Wikipedia calls it the oldest continuously open ski club in the United States
+    source_id: events-nordic-wikipedia-fox-river-grove-illinois
+    as_of: 2026-10-20
+    confidence: reported
+  format:
+    value: Small hill junior events on Saturday and K70 events with masters, senior and junior classes; a Junior National
+      Qualifier and US Cup event in 2026
+    source_id: events-nordic-norge-2026-invitation
+    as_of: 2026-10-20
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2026-01-31, end: 2026-02-01, season: 2025/26, note: "121st tournament; the 120th ran January 25 and 26, 2025", source_id: events-nordic-norge-2026-invitation, as_of: 2026-10-20, confidence: estimated}
+  last_edition:
+    start: 2026-01-31
+    end: 2026-02-01
+    season: 2025/26
+    note: 121st tournament; the 120th ran January 25 and 26, 2025
+    source_id: events-nordic-norge-2026-invitation
+    as_of: 2026-10-20
+    confidence: estimated
   signup:
-    url: {value: "https://norgeskiclub.org/wp-content/uploads/2026/01/NORGE-2026-Winter-Comp-Invitation.pdf", note: "The 2026 competition invitation lists registration deadlines for jumpers", source_id: events-nordic-norge-2026-invitation, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "https://norgeskiclub.org/?p=2440", source_id: events-nordic-norge-tournament-page, as_of: 2026-10-20, confidence: estimated}
+    url:
+      value: https://norgeskiclub.org/wp-content/uploads/2026/01/NORGE-2026-Winter-Comp-Invitation.pdf
+      note: The 2026 competition invitation lists registration deadlines for jumpers
+      source_id: events-nordic-norge-2026-invitation
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://norgeskiclub.org/?p=2440
+    source_id: events-nordic-norge-tournament-page
+    as_of: 2026-10-20
+    confidence: estimated
 - id: harris-hill-ski-jump
   name: Harris Hill Ski Jump
   discipline: ski_jumping
-  levels: [junior]
-  venue: {resort_id: null, venue_id: harris-hill-ski-jump-brattleboro-vt}
-  format: {value: "Pepsi Challenge and Junior World Qualifier on Saturday and the Fred Harris Memorial Tournament on Sunday (2026)", source_id: events-nordic-harris-hill-2026-tickets, as_of: 2026-10-20, confidence: estimated}
+  levels: []
+  venue:
+    resort_id: null
+    venue_id: harris-hill-ski-jump-brattleboro-vt
+  format:
+    value: Pepsi Challenge and Junior World Qualifier on Saturday and the Fred Harris Memorial Tournament on Sunday (2026)
+    source_id: events-nordic-harris-hill-2026-tickets
+    as_of: 2026-10-20
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2026-02-14, end: 2026-02-15, season: 2025/26, note: "Spectator tickets were $25 for adults and $15 for ages 6 to 12. Wikipedia says the HS98 hill has hosted nine national championships.", source_id: events-nordic-harris-hill-2026-tickets, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "https://harrishillskijump.com/", source_id: events-nordic-wikipedia-harris-hill, as_of: 2026-10-20, confidence: reported}
+  last_edition:
+    start: 2026-02-14
+    end: 2026-02-15
+    season: 2025/26
+    note: Spectator tickets were $25 for adults and $15 for ages 6 to 12. Wikipedia says the HS98 hill has hosted nine national
+      championships.
+    source_id: events-nordic-harris-hill-2026-tickets
+    as_of: 2026-10-20
+    confidence: estimated
+  website:
+    value: https://harrishillskijump.com/
+    source_id: events-nordic-wikipedia-harris-hill
+    as_of: 2026-10-20
+    confidence: reported
 - id: usa-nordic-ski-jumping-nordic-combined-nationals
   name: U.S. National Championships for ski jumping and nordic combined
   discipline: ski_jumping
-  disciplines_also: [nordic_combined]
-  levels: [elite]
-  venue: {resort_id: null, venue_id: lake-placid-ny}
-  format: {value: "National championships for ski jumping and nordic combined, held in Lake Placid in October 2026 alongside the Flaming Leaves Festival", source_id: events-nordic-usa-nordic-nationals-2026-townlift, as_of: 2026-10-20, confidence: estimated}
+  disciplines_also:
+  - nordic_combined
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: lake-placid-ny
+  format:
+    value: National championships for ski jumping and nordic combined, held in Lake Placid in October 2026 alongside the Flaming
+      Leaves Festival
+    source_id: events-nordic-usa-nordic-nationals-2026-townlift
+    as_of: 2026-10-20
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {season: 2026/27, note: "Held in October 2026; the report gives podiums but no exact dates. The 2027/28 host and dates were not found.", source_id: events-nordic-usa-nordic-nationals-2026-townlift, as_of: 2026-10-20, confidence: estimated}
-  results_url: {value: "https://townlift.com/2026/10/park-citys-josie-johnson-podiums-at-ski-jumping-nationals/", source_id: events-nordic-usa-nordic-nationals-2026-townlift, as_of: 2026-10-20, confidence: estimated}
+  last_edition:
+    season: 2026/27
+    note: Held in October 2026; the report gives podiums but no exact dates. The 2027/28 host and dates were not found.
+    source_id: events-nordic-usa-nordic-nationals-2026-townlift
+    as_of: 2026-10-20
+    confidence: estimated
+  results_url:
+    value: https://townlift.com/2026/10/park-citys-josie-johnson-podiums-at-ski-jumping-nationals/
+    source_id: events-nordic-usa-nordic-nationals-2026-townlift
+    as_of: 2026-10-20
+    confidence: estimated
 - id: lake-placid-noram-supertour
   name: NorAm and SuperTour cross country races at Lake Placid
   discipline: cross_country
-  levels: [elite]
-  venue: {resort_id: null, venue_id: lake-placid-ny}
-  format: {value: "Joint NorAm and SuperTour cross country races; the joint series opens in Canmore, Alberta, December 4 to 6, 2026, then continues in Lake Placid", source_id: events-nordic-noram-supertour-nordiq-preview, as_of: 2026-10-20, confidence: estimated}
-  edition_2026_27: {start: 2027-01-28, end: 2027-01-30, note: "Nordiq Canada's May 2026 preview gives January 28 to 30, 2027; its calendar PDF gives January 29 to 31", source_id: events-nordic-noram-supertour-nordiq-preview, as_of: 2026-10-20, confidence: estimated}
-  calendar_url: {value: "https://nordiqcanada.ca/wp-content/uploads/Nordiq-Canada-2026-27-Domestic-FIS-Race-Calendar-2.pdf", source_id: events-nordic-noram-supertour-nordiq-calendar, as_of: 2026-10-20, confidence: estimated}
+  levels:
+  - elite
+  venue:
+    resort_id: null
+    venue_id: lake-placid-ny
+  format:
+    value: Joint NorAm and SuperTour cross country races; the joint series opens in Canmore, Alberta, December 4 to 6, 2026,
+      then continues in Lake Placid
+    source_id: events-nordic-noram-supertour-nordiq-preview
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-28
+    end: 2027-01-30
+    note: Nordiq Canada's May 2026 preview gives January 28 to 30, 2027; its calendar PDF gives January 29 to 31
+    source_id: events-nordic-noram-supertour-nordiq-preview
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://nordiqcanada.ca/wp-content/uploads/Nordiq-Canada-2026-27-Domestic-FIS-Race-Calendar-2.pdf
+    source_id: events-nordic-noram-supertour-nordiq-calendar
+    as_of: 2026-10-20
+    confidence: estimated
 - id: lake-placid-loppet
   name: Lake Placid Loppet
-  discipline: cross_country
-  levels: []
-  venue: {resort_id: null, venue_id: mt-van-hoevenberg-lake-placid-ny}
+  discipline: ski_marathon
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: mt-van-hoevenberg-lake-placid-ny
+  format:
+    value: 50 km and 25 km Loppet races and 2 km, 7.5 km and 13 km Ski Challenge courses, on a course adapted from the 1980
+      Olympic 50 km route
+    source_id: events-nordic-lake-placid-loppet-2026-adktaste
+    as_of: 2026-10-20
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2026-01-25, end: 2026-01-25, season: 2025/26, note: "Held at Mt. Van Hoevenberg; earlier editions ran February 24, 2024 and February 23, 2025. No 2027 listing was found.", source_id: events-nordic-lake-placid-loppet-2026-adktaste, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "https://orda.org/tag/lake-placid-loppet/", note: "ORDA news posts about the race", source_id: events-nordic-lake-placid-loppet-orda, as_of: 2026-10-20, confidence: estimated}
+  last_edition:
+    start: 2026-01-25
+    end: 2026-01-25
+    season: 2025/26
+    note: Held at Mt. Van Hoevenberg; earlier editions ran February 24, 2024 and February 23, 2025. No 2027 listing was found.
+    source_id: events-nordic-lake-placid-loppet-2026-adktaste
+    as_of: 2026-10-20
+    confidence: estimated
+  website:
+    value: https://orda.org/tag/lake-placid-loppet/
+    note: ORDA news posts about the race
+    source_id: events-nordic-lake-placid-loppet-orda
+    as_of: 2026-10-20
+    confidence: estimated
 - id: frisco-gold-rush
   name: Frisco Gold Rush
   discipline: cross_country
-  levels: [open_amateur, junior]
-  venue: {resort_id: null, venue_id: frisco-nordic-center-co}
-  organizer: {name: Town of Frisco, source_id: events-nordic-frisco-gold-rush-event, as_of: 2026-10-20, confidence: estimated}
-  format: {value: "23 km skate, 10 km skate or classic and 5 km skate races plus a 1 km kids fun ski; distances may change year to year", source_id: events-nordic-frisco-gold-rush-event, as_of: 2026-10-20, confidence: estimated}
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: frisco-nordic-center-co
+  organizer:
+    name: Town of Frisco
+    source_id: events-nordic-frisco-gold-rush-event
+    as_of: 2026-10-20
+    confidence: estimated
+  format:
+    value: 23 km skate, 10 km skate or classic and 5 km skate races plus a 1 km kids fun ski; distances may change year to
+      year
+    source_id: events-nordic-frisco-gold-rush-event
+    as_of: 2026-10-20
+    confidence: estimated
   edition_2026_27: null
-  last_edition: {start: 2025-02-08, end: 2025-02-08, season: 2024/25, note: "54th edition. The 2026 race was cancelled for lack of snow, and the town says it looks forward to hosting again in 2027.", source_id: events-nordic-frisco-gold-rush-2025, as_of: 2026-10-20, confidence: estimated}
+  last_edition:
+    start: 2025-02-08
+    end: 2025-02-08
+    season: 2024/25
+    note: 54th edition. The 2026 race was cancelled for lack of snow, and the town says it looks forward to hosting again
+      in 2027.
+    source_id: events-nordic-frisco-gold-rush-2025
+    as_of: 2026-10-20
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://www.townoffrisco.com/event/nordic-center-events/gold-rush-nordic-races/", note: "Registration is online at FriscoGoldRush.com; for 2024 it opened December 1, 2023 and closed about two days before the race", source_id: events-nordic-frisco-gold-rush-event, as_of: 2026-10-20, confidence: estimated}
-    fee_usd: {value: 35, note: "2025 adult 5K skate; the adult 10K was $55 and the 23K $65", source_id: events-nordic-frisco-gold-rush-2025, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "https://www.townoffrisco.com/event/nordic-center-events/gold-rush-nordic-races/", source_id: events-nordic-frisco-gold-rush-event, as_of: 2026-10-20, confidence: estimated}
+    url:
+      value: https://www.townoffrisco.com/event/nordic-center-events/gold-rush-nordic-races/
+      note: Registration is online at FriscoGoldRush.com; for 2024 it opened December 1, 2023 and closed about two days before
+        the race
+      source_id: events-nordic-frisco-gold-rush-event
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 35
+      note: 2025 adult 5K skate; the adult 10K was $55 and the 23K $65
+      source_id: events-nordic-frisco-gold-rush-2025
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.townoffrisco.com/event/nordic-center-events/gold-rush-nordic-races/
+    source_id: events-nordic-frisco-gold-rush-event
+    as_of: 2026-10-20
+    confidence: estimated
 - id: great-ski-race
   name: The Great Ski Race
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: tahoe-cross-country-center-ca}
-  format: {value: "26 km race at 9:00 am and 10 km race at 9:25 am, plus an untimed Tour Wave for the first 35 sign ups; a fundraiser for Tahoe Nordic Search & Rescue", source_id: events-nordic-great-ski-race-raceroster, as_of: 2026-10-20, confidence: estimated}
-  edition_2026_27: {start: 2027-03-07, end: 2027-03-07, note: "A lake.com listing describes the March 1, 2026 race from Tahoe City to Truckee, about 30 km", source_id: events-nordic-great-ski-race-raceroster, as_of: 2026-10-20, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: tahoe-cross-country-center-ca
+  format:
+    value: 26 km race at 9:00 am and 10 km race at 9:25 am, plus an untimed Tour Wave for the first 35 sign ups; a fundraiser
+      for Tahoe Nordic Search & Rescue
+    source_id: events-nordic-great-ski-race-raceroster
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-03-07
+    end: 2027-03-07
+    note: A lake.com listing describes the March 1, 2026 race from Tahoe City to Truckee, about 30 km
+    source_id: events-nordic-great-ski-race-raceroster
+    as_of: 2026-10-20
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://raceroster.com/events/2027/116672/the-great-ski-race-2027", note: "Fees rise up to race day; no refunds because the race is a fundraiser", source_id: events-nordic-great-ski-race-raceroster, as_of: 2026-10-20, confidence: estimated}
-    platform: {value: Race Roster, source_id: events-nordic-great-ski-race-raceroster, as_of: 2026-10-20, confidence: estimated}
-    fee_usd: {value: 87.58, note: "Adult 26 km, December 14 to January 17 window; the 10 km fee is not in the source", source_id: events-nordic-great-ski-race-raceroster, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "https://raceroster.com/events/2027/116672/the-great-ski-race-2027", source_id: events-nordic-great-ski-race-raceroster, as_of: 2026-10-20, confidence: estimated}
+    url:
+      value: https://raceroster.com/events/2027/116672/the-great-ski-race-2027
+      note: Fees rise up to race day; no refunds because the race is a fundraiser
+      source_id: events-nordic-great-ski-race-raceroster
+      as_of: 2026-10-20
+      confidence: estimated
+    platform:
+      value: Race Roster
+      source_id: events-nordic-great-ski-race-raceroster
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 87.58
+      note: Adult 26 km, December 14 to January 17 window; the 10 km fee is not in the source
+      source_id: events-nordic-great-ski-race-raceroster
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://raceroster.com/events/2027/116672/the-great-ski-race-2027
+    source_id: events-nordic-great-ski-race-raceroster
+    as_of: 2026-10-20
+    confidence: estimated
 - id: ski-to-the-sun
   name: Ski to the Sun
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur]
-  venue: {resort_id: null, venue_id: methow-trails-winthrop-wa}
-  format: {value: "Annual community ski event with marathon, half marathon and relay across Methow Trails to Sun Mountain Lodge", source_id: events-nordic-ski-to-the-sun-gotrail, as_of: 2026-10-20, confidence: estimated}
-  edition_2026_27: {start: 2027-02-06, end: 2027-02-06, source_id: events-nordic-ski-to-the-sun-gotrail, as_of: 2026-10-20, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: methow-trails-winthrop-wa
+  format:
+    value: Annual community ski event with marathon, half marathon and relay across Methow Trails to Sun Mountain Lodge
+    source_id: events-nordic-ski-to-the-sun-gotrail
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-06
+    end: 2027-02-06
+    source_id: events-nordic-ski-to-the-sun-gotrail
+    as_of: 2026-10-20
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://gotrail.run/en/event/ski-to-the-sun", note: "Third party listing; there is no day of registration and the event typically sells out", source_id: events-nordic-ski-to-the-sun-gotrail, as_of: 2026-10-20, confidence: estimated}
-    opens: {value: 2026-09-21, source_id: events-nordic-ski-to-the-sun-gotrail, as_of: 2026-10-20, confidence: estimated}
+    url:
+      value: https://gotrail.run/en/event/ski-to-the-sun
+      note: Third party listing; there is no day of registration and the event typically sells out
+      source_id: events-nordic-ski-to-the-sun-gotrail
+      as_of: 2026-10-20
+      confidence: estimated
+    opens:
+      value: 2026-09-21
+      source_id: events-nordic-ski-to-the-sun-gotrail
+      as_of: 2026-10-20
+      confidence: estimated
 - id: alley-loop
   name: Alley Loop Nordic Marathon
   discipline: ski_marathon
-  disciplines_also: [cross_country]
-  levels: [open_amateur, junior]
-  venue: {resort_id: null, venue_id: crested-butte-alley-loop-co}
-  format: {value: "42 km marathon, 21, 10 and 5 km races and 1.5 and 3 km youth races, starting on Elk Avenue; an American Birkebeiner qualifier", source_id: events-nordic-alley-loop-cbnordic, as_of: 2026-10-20, confidence: estimated}
-  edition_2026_27: {start: 2027-01-30, end: 2027-01-30, note: "Bib pick up Friday, January 29 at the Center for the Arts; a separate skiathlon follows on Sunday, January 31", source_id: events-nordic-alley-loop-cbnordic, as_of: 2026-10-20, confidence: estimated}
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: crested-butte-alley-loop-co
+  format:
+    value: 42 km marathon, 21, 10 and 5 km races and 1.5 and 3 km youth races, starting on Elk Avenue; an American Birkebeiner
+      qualifier
+    source_id: events-nordic-alley-loop-cbnordic
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-30
+    end: 2027-01-30
+    note: Bib pick up Friday, January 29 at the Center for the Arts; a separate skiathlon follows on Sunday, January 31
+    source_id: events-nordic-alley-loop-cbnordic
+    as_of: 2026-10-20
+    confidence: estimated
   signup:
     method: online_registration
-    url: {value: "https://runsignup.com/Race/Info/CO/CrestedButte/AlleyLoop", note: "Day of registration runs Saturday 7 to 11:30 am at the Nordic Center Outpost; no refunds", source_id: events-nordic-alley-loop-runsignup, as_of: 2026-10-20, confidence: estimated}
-    platform: {value: RunSignup, source_id: events-nordic-alley-loop-runsignup, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "https://www.cbnordic.org/alley-loop", source_id: events-nordic-alley-loop-cbnordic, as_of: 2026-10-20, confidence: estimated}
-- id: steamboat-winter-carnival
-  name: Steamboat Winter Carnival
-  discipline: ski_jumping
+    url:
+      value: https://runsignup.com/Race/Info/CO/CrestedButte/AlleyLoop
+      note: Day of registration runs Saturday 7 to 11:30 am at the Nordic Center Outpost; no refunds
+      source_id: events-nordic-alley-loop-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-alley-loop-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.cbnordic.org/alley-loop
+    source_id: events-nordic-alley-loop-cbnordic
+    as_of: 2026-10-20
+    confidence: estimated
+- id: north-american-vasa
+  name: North American Vasa Festival of Races
+  discipline: ski_marathon
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: timber-ridge-resort-traverse-city-mi
+  format:
+    value: '51st edition: 6 km tours and high school races, 15 km and 27 km freestyle and classic races, and a 50 km marathon'
+    source_id: events-nordic-vasa-findtherun
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-13
+    end: 2027-02-14
+    source_id: events-nordic-vasa-findtherun
+    as_of: 2026-10-20
+    confidence: estimated
+    note: At Timber Ridge Resort, 4050 E. Hammond Road. Another listing shows only Saturday, February 13, 2027.
+  signup:
+    method: online_registration
+    url:
+      value: https://runsignup.com/vasa
+      source_id: events-nordic-vasa-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: RunSignup page used for the 2026 race, whose prices rose after November 30, 2025; no 2027 registration details
+        were found; the race site is vasa.org
+    platform:
+      value: RunSignup
+      source_id: events-nordic-vasa-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://runsignup.com/vasa
+    source_id: events-nordic-vasa-runsignup
+    as_of: 2026-10-20
+    confidence: estimated
+- id: book-across-the-bay
+  name: Book Across the Bay XC Ski Race and Snowshoe Trek
+  discipline: cross_country
+  disciplines_also:
+  - snowshoe_race
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: book-across-the-bay-ashland-wi
+  format:
+    value: Night race across Chequamegon Bay from Thompson's West End Park in Washburn to Ashland, starting at 6 pm; over
+      2,300 took part in 2026
+    source_id: events-nordic-batb-site
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-02-14
+    end: 2026-02-14
+    source_id: events-nordic-batb-site
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Chapter 29. The organizers say they look forward to Chapter 30 in 2027; the 2025 race was February 15.
+  signup:
+    method: online_registration
+    url:
+      value: https://runsignup.com/Race/WI/Ashland/BookAcrosstheBay
+      source_id: events-nordic-batb-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Check in on race day at the Ashland marina
+    platform:
+      value: RunSignup
+      source_id: events-nordic-batb-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://batb.org/
+    source_id: events-nordic-batb-site
+    as_of: 2026-10-20
+    confidence: estimated
+- id: seeley-hills-classic
+  name: Seeley Hills Classic
+  discipline: ski_marathon
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: cable-wi-birkie-trailhead
+  organizer:
+    name: American Birkebeiner Ski Foundation
+    source_id: events-nordic-seeley-hills-birkie
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Registration has run on RunSignup under the foundation and the race page is on birkie.com
+  format:
+    value: 42K and 22K classic races on the traditional course (2026)
+    source_id: events-nordic-seeley-hills-whsm-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    source_id: events-nordic-seeley-hills-whsm-2026
+    as_of: 2026-10-20
+    confidence: estimated
+    note: A January 13, 2026 report says the race returned to its traditional course after two low snow winters; the exact
+      2026 race day is not in the sources. The 2025 race ran January 11 and 12 at the American Birkebeiner Trailhead in Cable.
+  signup:
+    method: online_registration
+    url:
+      value: https://birkie.com/event/seeley-hills-classic
+      source_id: events-nordic-seeley-hills-birkie
+      as_of: 2026-10-20
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-seeley-hills-birkie
+      as_of: 2026-10-20
+      confidence: estimated
+    fee_usd:
+      value: 110
+      source_id: events-nordic-seeley-hills-birkie
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 2025 Saturday full classic
+  website:
+    value: https://seeleyhillsclassic.com/
+    source_id: events-nordic-seeley-hills-birkie
+    as_of: 2026-10-20
+    confidence: estimated
+- id: weston-tuesday-night-races
+  name: Weston Ski Track Tuesday Night Races
+  discipline: cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: weston-ski-track-ma
+  format:
+    value: Freestyle races of 5 km to 10 km open to all, scored as a season series
+    source_id: events-nordic-weston-skiboston
+    as_of: 2026-10-20
+    confidence: estimated
+  usual_timing:
+    value: Tuesday nights in January and February, and into March when snow allows
+    source_id: events-nordic-weston-skiboston
+    as_of: 2026-10-20
+    confidence: estimated
+    note: A Boston Magazine essay describes nine races a season with cumulative age group standings, run since the early 1980s
+  signup:
+    method: online_registration
+    url:
+      value: https://www.skiboston.com/racing-events
+      source_id: events-nordic-weston-skiboston
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Racers without a season pass buy a pass on race night
+  website:
+    value: https://www.skiboston.com/racing-events
+    source_id: events-nordic-weston-skiboston
+    as_of: 2026-10-20
+    confidence: estimated
+- id: ski-shoe-fatbike-to-the-clouds
+  name: Ski, Shoe & Fatbike to the Clouds
+  discipline: cross_country
+  disciplines_also:
+  - uphill
+  - snowshoe_race
+  - fat_bike
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: mount-washington-auto-road-nh
+  format:
+    value: '10 km climb: 4 km on Great Glen Trails, then 6 km up the snow covered Mt. Washington Auto Road; 12% average grade
+      and about 2,200 feet of gain'
+    source_id: events-nordic-clouds-greatglen
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-28
+    end: 2027-02-28
+    source_id: events-nordic-clouds-greatglen
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 10:00 am start. The race began in 1996 as a nordic ski event; 240 took part on February 22, 2026.
+  signup:
+    method: online_registration
+    url:
+      value: https://greatglentrails.com/ski-shoe-fatbike-to-the-clouds/
+      source_id: events-nordic-clouds-greatglen
+      as_of: 2026-10-20
+      confidence: estimated
+    opens:
+      value: 2026-10-12
+      source_id: events-nordic-clouds-greatglen
+      as_of: 2026-10-20
+      confidence: estimated
+      note: The listing says registration opens Monday, October 12 without a year; October 12 is a Monday in 2026
+    deadline:
+      value: 2027-02-17
+      source_id: events-nordic-clouds-greatglen
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Online registration closes at 5 pm; no day of registration
+    fee_usd:
+      value: 55
+      source_id: events-nordic-clouds-greatglen
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Early rate; $60 from January 1 and $65 from February 1
+    requirements:
+      value: Finish the 10 km on one pair of skis, snowshoes or one fatbike, with no switching
+      source_id: events-nordic-clouds-greatglen
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://greatglentrails.com/ski-shoe-fatbike-to-the-clouds/
+    source_id: events-nordic-clouds-greatglen
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://nensa.net/event/ski-shoe-fatbike-to-the-clouds
+    source_id: events-nordic-clouds-nensa
+    as_of: 2026-10-20
+    confidence: estimated
+- id: hayward-lions-pre-birkie
+  name: Hayward Lions Pre-Birkie
+  discipline: ski_marathon
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: hayward-wi
+  format:
+    value: 26K and 42K races; part of the Birkebeiner Qualifier Series
+    source_id: events-nordic-prebirkie-strambecco
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-02-07
+    end: 2026-02-07
+    source_id: events-nordic-prebirkie-strambecco
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Third party calendar; it lists February 6, 2027 as not yet confirmed. Race information and registration are at prebirkie.com.
+  website:
+    value: https://travelwisconsin.com/events/cross-country-skiing-snowshoeing/hayward-lions-pre-birkie-40141
+    source_id: events-nordic-prebirkie-travelwi
+    as_of: 2026-10-20
+    confidence: estimated
+- id: cote-dame-marie-ski-loppet
+  name: Cote Dame Marie Ski Loppet
+  discipline: cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: hanson-hills-grayling-mi
+  format:
+    value: '22 km skate race at 10 am: one lap, a racer cut along the Guyton Trail to the Blue uphill, then a second lap;
+      chip timed'
+    source_id: events-nordic-cote-dame-marie-runsignup
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-16
+    end: 2027-01-16
+    source_id: events-nordic-cote-dame-marie-runsignup
+    as_of: 2026-10-20
+    confidence: estimated
+  signup:
+    method: online_registration
+    url:
+      value: https://runscore.runsignup.com/Race/MI/Grayling/CoteDameMarieSkiLoppet
+      source_id: events-nordic-cote-dame-marie-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Packet pickup and day of registration 7 to 9:30 am at the lodge
+    platform:
+      value: RunSignup
+      source_id: events-nordic-cote-dame-marie-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+    deadline:
+      value: 2027-01-14
+      source_id: events-nordic-cote-dame-marie-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Online registration close
+    fee_usd:
+      value: 40
+      source_id: events-nordic-cote-dame-marie-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 22 km skate; listed fees run from $15 to $40 and the source does not say which lower fees are adult
+  website:
+    value: https://runscore.runsignup.com/Race/MI/Grayling/CoteDameMarieSkiLoppet
+    source_id: events-nordic-cote-dame-marie-runsignup
+    as_of: 2026-10-20
+    confidence: estimated
+- id: white-pine-stampede
+  name: White Pine Stampede
+  discipline: ski_marathon
+  disciplines_also:
+  - cross_country
   levels: []
-  venue: {resort_id: howelsen-hill, venue_id: null}
-  organizer: {name: Steamboat Springs Winter Sports Club, url: "https://www.sswsc.org/event/winter-carnival-2026/", source_id: events-nordic-steamboat-carnival-sswsc, as_of: 2026-10-20, confidence: estimated}
-  format: {value: "Winter carnival with family events at Howelsen Hill from Tuesday to Sunday; past editions had skiers jumping through fiery hoops and a night show", source_id: events-nordic-steamboat-carnival-sswsc, as_of: 2026-10-20, confidence: estimated}
-  edition_2026_27: {start: 2027-02-02, end: 2027-02-07, note: "The club lists the 2027 dates on a page that otherwise shows 2026 details; the 2027 jump schedule was not found", source_id: events-nordic-steamboat-carnival-sswsc, as_of: 2026-10-20, confidence: estimated}
-  website: {value: "https://www.sswsc.org/event/winter-carnival-2026/", source_id: events-nordic-steamboat-carnival-sswsc, as_of: 2026-10-20, confidence: estimated}
+  venue:
+    resort_id: null
+    venue_id: white-pine-stampede-bellaire-mi
+  format:
+    value: Point to point race from Mancelona to Bellaire; 2026 listings give 40 km, 22 km and 12.5 km races
+    source_id: events-nordic-wps-shantycreek
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-02-07
+    end: 2026-02-07
+    source_id: events-nordic-wps-shantycreek
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Low snow in 2026 cancelled the long race and moved the shorter races to Shanty Creek Resorts. Registration is at
+      whitepinestampede.org.
+  website:
+    value: https://www.shantycreek.com/event/white-pine-stampede
+    source_id: events-nordic-wps-shantycreek
+    as_of: 2026-10-20
+    confidence: estimated
+- id: loppet-supertour-minneapolis
+  name: Loppet Junior Qualifier and SuperTour
+  discipline: cross_country
+  levels:
+  - elite
+  - collegiate
+  venue:
+    resort_id: null
+    venue_id: theodore-wirth-park-mn
+  organizer:
+    name: The Loppet
+    source_id: events-nordic-loppet-supertour-2027
+    as_of: 2026-10-20
+    confidence: estimated
+  sanctioning:
+    name: U.S. Ski & Snowboard
+    source_id: events-nordic-loppet-supertour-2027
+    as_of: 2026-10-20
+    confidence: estimated
+  format:
+    value: Sanctioned races with a Saturday 10 km classic mass start for U18 to U23, collegiate and SuperTour skiers, and
+      a U16 5 km
+    source_id: events-nordic-loppet-supertour-2027
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-20
+    end: 2027-02-21
+    source_id: events-nordic-loppet-supertour-2027
+    as_of: 2026-10-20
+    confidence: estimated
+- id: ski-de-she
+  name: Ski de She Camp & Race
+  discipline: cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: cable-wi-birkie-trailhead
+  organizer:
+    name: American Birkebeiner Ski Foundation
+    source_id: events-nordic-de-she-series-release
+    as_of: 2026-10-20
+    confidence: estimated
+  format:
+    value: Women's camp capped at 150 and a race of 30K, 20K, 10K or 5K; the 30K and 20K need racers aged 13 or older
+    source_id: events-nordic-ski-de-she-calendar
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-15
+    end: 2027-01-17
+    source_id: events-nordic-ski-de-she-calendar
+    as_of: 2026-10-20
+    confidence: estimated
+    note: A third party listing shows the same dates but calls them unconfirmed; past camps sold out quickly
+  signup:
+    method: online_registration
+    url:
+      value: https://birkie.com/ski/events/ski-de-she
+      source_id: events-nordic-ski-de-she-page
+      as_of: 2026-10-20
+      confidence: estimated
+      note: No 2027 registration page was found
+    platform:
+      value: RunSignup
+      source_id: events-nordic-ski-de-she-guide-2025
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Platform used in 2025
+    fee_usd:
+      value: 95
+      source_id: events-nordic-ski-de-she-guide-2025
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 2025 race entry; no on site registration
+  website:
+    value: https://birkie.com/ski/events/ski-de-she
+    source_id: events-nordic-ski-de-she-page
+    as_of: 2026-10-20
+    confidence: estimated
+- id: stowe-derby
+  name: Stowe Derby
+  discipline: cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: stowe-vt
+  format:
+    value: Downhill cross country ski race with a 6 km short course and 20 km classic, skate and fixed heel long courses;
+      500 spots per division
+    source_id: events-nordic-stowe-derby-runsignup
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-02-21
+    end: 2027-02-21
+    source_id: events-nordic-stowe-derby-runsignup
+    as_of: 2026-10-20
+    confidence: estimated
+  signup:
+    method: online_registration
+    url:
+      value: https://runsignup.com/Race/Info/VT/Stowe/stowederby
+      source_id: events-nordic-stowe-derby-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-nordic-stowe-derby-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+    opens:
+      value: 2026-12-07
+      source_id: events-nordic-stowe-derby-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 12:01 am Eastern
+    deadline:
+      value: 2027-02-19
+      source_id: events-nordic-stowe-derby-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Closing date for most divisions, from a third party aggregator
+    fee_usd:
+      value: 45
+      source_id: events-nordic-stowe-derby-runsignup
+      as_of: 2026-10-20
+      confidence: estimated
+      note: 6 km short course; 20 km classic and skate $90, 20 km fixed heel $75
+  website:
+    value: https://runsignup.com/Race/Info/VT/Stowe/stowederby
+    source_id: events-nordic-stowe-derby-runsignup
+    as_of: 2026-10-20
+    confidence: estimated
+- id: rangeley-lakes-loppet
+  name: Rangeley Lakes Loppet
+  discipline: ski_marathon
+  disciplines_also:
+  - cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: rangeley-lakes-trails-center-me
+  organizer:
+    name: Rangeley Lakes Trails Center
+    source_id: events-nordic-rangeley-loppet-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  format:
+    value: 50k, 25k and 10k races over a weekend
+    source_id: events-nordic-rangeley-loppet-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-02-28
+    end: 2026-03-01
+    source_id: events-nordic-rangeley-loppet-2026
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 31st annual. The listing names Saturday, February 28 and Sunday, March 1 without a year; those weekdays fall in
+      2026.
+  signup:
+    method: online_registration
+    url:
+      value: https://www.franklinsavings.bank/event/31st-annual-rangeley-lakes-loppet-day-1
+      source_id: events-nordic-rangeley-loppet-2026
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Event listing; registration runs through the Trails Center's own site
+- id: adk-tour-de-ski
+  name: ADK Tour de Ski
+  discipline: cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: mt-van-hoevenberg-lake-placid-ny
+  format:
+    value: 'Citizen race series at six Adirondack venues: Mt Van Hoevenberg, Scotts Cobble, Dewey Mountain, Frenette Trails,
+      Garnet Hill Lodge, Paul Smith''s VIC'
+    source_id: events-nordic-adk-tour-de-ski
+    as_of: 2026-10-20
+    confidence: estimated
+  usual_timing:
+    value: December through March
+    source_id: events-nordic-adk-tour-de-ski
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 2025/26 schedule; the Garnet Hill stop was February 21, 2026
+  signup:
+    url:
+      value: https://mtvanhoevenberg.com/event/adk-tour-de-ski/
+      source_id: events-nordic-adk-tour-de-ski
+      as_of: 2026-10-20
+      confidence: estimated
+      note: Series registration page at Mt. Van Hoevenberg
+  website:
+    value: https://mtvanhoevenberg.com/event/adk-tour-de-ski/
+    source_id: events-nordic-adk-tour-de-ski
+    as_of: 2026-10-20
+    confidence: estimated
+- id: geschmossel-classic
+  name: Geschmossel Classic
+  discipline: cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: bretton-woods-ski-area
+    venue_id: null
+  format:
+    value: 15 km classic race on the Ammonoosuc trails, part of the ZAK Cup Series; one of New England's oldest citizens'
+      races, first held in the winter of 1972 to 1973
+    source_id: events-nordic-geschmossel-chamber
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-01-19
+    end: 2026-01-19
+    source_id: events-nordic-geschmossel-brettonwoods
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 49th edition
+  website:
+    value: https://www.brettonwoods.com/events/geschmossel-classic-ski-race/
+    source_id: events-nordic-geschmossel-brettonwoods
+    as_of: 2026-10-20
+    confidence: estimated
+- id: mount-washington-cup
+  name: Mount Washington Cup
+  discipline: cross_country
+  levels: []
+  venue:
+    resort_id: bretton-woods-ski-area
+    venue_id: null
+  format:
+    value: 10 km freestyle mass start race at the Bretton Woods Nordic Center, part of the ZAK Cup Series
+    source_id: events-nordic-mount-washington-cup-brettonwoods
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-03-07
+    end: 2026-03-07
+    source_id: events-nordic-mount-washington-cup-brettonwoods
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 49th annual per Bretton Woods; a SkiNH listing calls it the 48th. Mass start at 9 am.
+  website:
+    value: https://www.brettonwoods.com/events/mount-washington-cup
+    source_id: events-nordic-mount-washington-cup-brettonwoods
+    as_of: 2026-10-20
+    confidence: estimated
+  results_url:
+    value: https://www.brettonwoods.com/Winter_Sports/Nordic/race_results/cup
+    source_id: events-nordic-mount-washington-cup-results
+    as_of: 2026-10-20
+    confidence: estimated
+- id: bayley-hazen-biathlon
+  name: Bayley-Hazen Biathlon
+  discipline: biathlon
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: craftsbury-outdoor-center-vt
+  format:
+    value: Citizen biathlon open to any experience level, with a novice clinic on rifle safety and shooting basics and club
+      rifles provided
+    source_id: events-nordic-bayley-hazen-biathlon-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-01-10
+    end: 2026-01-10
+    source_id: events-nordic-bayley-hazen-biathlon-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  signup:
+    url:
+      value: https://www.craftsbury.com/events/2026-bayley-hazen-biathlon
+      source_id: events-nordic-bayley-hazen-biathlon-2026
+      as_of: 2026-10-20
+      confidence: estimated
+    requirements:
+      value: Racers must be able to ski and bring their own skis; ski instruction and equipment are not included
+      source_id: events-nordic-bayley-hazen-biathlon-2026
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.craftsbury.com/events/2026-bayley-hazen-biathlon
+    source_id: events-nordic-bayley-hazen-biathlon-2026
+    as_of: 2026-10-20
+    confidence: estimated
+- id: minnesota-finlandia
+  name: Minnesota Finlandia
+  discipline: cross_country
+  disciplines_also:
+  - ski_marathon
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: bemidji-mn
+  format:
+    value: '2026 races: 21k classic, 21k free and a 10k tour; the 25k pursuit and 50k marathon were dropped that year'
+    source_id: events-nordic-finlandia-release-2026
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    source_id: events-nordic-finlandia-release-2026
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Held in reduced form because part of the private trail system was unavailable; the release does not give the race
+      day. Updates are at minnesotafinlandia.com.
+  signup:
+    method: online_registration
+    url:
+      value: https://www.skinnyski.com/racing/PR/finlandia20260112.pdf
+      source_id: events-nordic-finlandia-release-2026
+      as_of: 2026-10-20
+      confidence: estimated
+      note: January 2026 press release that explains registration
+    platform:
+      value: Skireg
+      source_id: events-nordic-finlandia-release-2026
+      as_of: 2026-10-20
+      confidence: estimated
+- id: bogburn-classic
+  name: Bogburn Classic
+  discipline: cross_country
+  levels:
+  - open_amateur
+  venue:
+    resort_id: null
+    venue_id: rikert-outdoor-center-vt
+  format:
+    value: Adult race of 13 km on a single winding track through Rikert's historic trails, plus junior races (2026); the 36th
+      edition
+    source_id: events-nordic-bogburn-rikert
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2027-01-03
+    end: 2027-01-03
+    source_id: events-nordic-bogburn-rikert
+    as_of: 2026-10-20
+    confidence: estimated
+    note: 9:30 am to 3 pm. The 2026 race was January 4, 2026.
+  website:
+    value: https://www.rikertoutdoor.com/event/the-bogburn-classic-at-rikert
+    source_id: events-nordic-bogburn-rikert
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://nensa.net/event/bogburn-classic-2/
+    source_id: events-nordic-bogburn-nensa
+    as_of: 2026-10-20
+    confidence: estimated
+- id: forbush-opener
+  name: Forbush Opener
+  discipline: cross_country
+  levels: []
+  venue:
+    resort_id: null
+    venue_id: forbush-corner-frederic-mi
+  format:
+    value: First race of the Michigan Cup series
+    source_id: events-nordic-forbush-time-trial
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27:
+    start: 2026-12-12
+    end: 2026-12-12
+    source_id: events-nordic-forbush-time-trial
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Tentative race day; early registration closes December 5
+  signup:
+    url:
+      value: https://www.forbushcorner.com/timeTrial.html
+      source_id: events-nordic-forbush-time-trial
+      as_of: 2026-10-20
+      confidence: estimated
+  website:
+    value: https://www.forbushcorner.com/timeTrial.html
+    source_id: events-nordic-forbush-time-trial
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://forbushcorner.com/MichiganXCRacing.html
+    source_id: events-nordic-michigan-cup-forbush
+    as_of: 2026-10-20
+    confidence: estimated
+- id: forbush-memorial-classic
+  name: Forbush Memorial Classic
+  discipline: cross_country
+  levels: []
+  venue:
+    resort_id: null
+    venue_id: forbush-corner-frederic-mi
+  format:
+    value: 6K and 12K classic races
+    source_id: events-nordic-northern-express-2026-calendar
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-02-08
+    end: 2026-02-08
+    source_id: events-nordic-northern-express-2026-calendar
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://forbushcorner.com/MichiganXCRacing.html
+    source_id: events-nordic-michigan-cup-forbush
+    as_of: 2026-10-20
+    confidence: estimated
+- id: meijer-state-games-forbush-freestyle
+  name: Meijer State Games Forbush Freestyle
+  discipline: cross_country
+  levels: []
+  venue:
+    resort_id: null
+    venue_id: forbush-corner-frederic-mi
+  format:
+    value: 16K and 5K freestyle races
+    source_id: events-nordic-northern-express-2026-calendar
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-01-17
+    end: 2026-01-17
+    source_id: events-nordic-northern-express-2026-calendar
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://forbushcorner.com/MichiganXCRacing.html
+    source_id: events-nordic-michigan-cup-forbush
+    as_of: 2026-10-20
+    confidence: estimated
+- id: eastern-cup-craftsbury
+  name: Henchey Memorial Eastern Cup and UVM Carnival
+  discipline: cross_country
+  levels:
+  - collegiate
+  venue:
+    resort_id: null
+    venue_id: craftsbury-outdoor-center-vt
+  series:
+    id: nensa-eastern-cup
+    name: NENSA Eastern Cup
+  format:
+    value: Freestyle 10 k interval start combined with the EISA college carnival, and a classic 10 k mass start (5 k for U16)
+    source_id: events-nordic-eastern-cup-invitation-2025-26
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-02-07
+    end: 2026-02-08
+    source_id: events-nordic-eastern-cup-invitation-2025-26
+    as_of: 2026-10-20
+    confidence: estimated
+  calendar_url:
+    value: https://nensa.net/eastern-cup/
+    source_id: events-nordic-eastern-cup-page
+    as_of: 2026-10-20
+    confidence: estimated
+- id: lapham-loppet
+  name: Lapham Loppet
+  discipline: cross_country
+  levels: []
+  venue:
+    resort_id: null
+    venue_id: lapham-peak-delafield-wi
+  format:
+    value: 11K course (2026)
+    source_id: events-nordic-lapham-loppet-brochure
+    as_of: 2026-10-20
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-01-17
+    end: 2026-01-17
+    source_id: events-nordic-lapham-loppet-brochure
+    as_of: 2026-10-20
+    confidence: estimated
+  website:
+    value: https://laphampeakfriends.org/wp-content/uploads/2025/11/2026-Loppet-Brochure.pdf
+    source_id: events-nordic-lapham-loppet-brochure
+    as_of: 2026-10-20
+    confidence: estimated
+- id: lapham-peak-wednesday-night-races
+  name: Lapham Peak Wednesday night races
+  discipline: cross_country
+  levels: []
+  venue:
+    resort_id: null
+    venue_id: lapham-peak-delafield-wi
+  format:
+    value: 4.9K freestyle and classic races on lighted trails
+    source_id: events-nordic-skinnyski-calendar-january
+    as_of: 2026-10-20
+    confidence: estimated
+  usual_timing:
+    value: Wednesday nights in January
+    source_id: events-nordic-skinnyski-calendar-january
+    as_of: 2026-10-20
+    confidence: estimated
+    note: From the January 2026 Skinnyski calendar
+  calendar_url:
+    value: https://www.skinnyski.com/racing/calendar.asp?monthSel=1
+    source_id: events-nordic-skinnyski-calendar-january
+    as_of: 2026-10-20
+    confidence: estimated
 calendars:
 - id: american-ski-marathon-series
   name: American Ski Marathon Series
   discipline: ski_marathon
   region: national
-  url: {value: "https://www.xcskiworld.com/asm-series", note: "Series of sixteen cross country ski events from Vermont to Alaska; the 2027 lineup was not listed in search results", source_id: events-nordic-asm-series, as_of: 2026-10-17, confidence: estimated}
+  url:
+    value: https://www.xcskiworld.com/asm-series
+    note: Series of sixteen cross country ski events from Vermont to Alaska; the 2027 lineup was not listed in search results
+    source_id: events-nordic-asm-series
+    as_of: 2026-10-17
+    confidence: estimated
 - id: skinnyski-race-calendar
   name: Skinnyski race calendar
   discipline: cross_country
   region: MN
-  url: {value: "https://www.skinnyski.com/racing/calendar.asp?monthSel=2", note: "February view of the calendar", source_id: events-nordic-skinnyski-calendar, as_of: 2026-10-17, confidence: estimated}
+  url:
+    value: https://www.skinnyski.com/racing/calendar.asp?monthSel=2
+    note: February view of the calendar
+    source_id: events-nordic-skinnyski-calendar
+    as_of: 2026-10-17
+    confidence: estimated
 - id: nensa-calendar
   name: NENSA (New England Nordic Ski Association) calendar
   discipline: cross_country
   region: national
-  url: {value: "https://nensa.net/event/2026-us-cross-country-national-championships/", note: "An event page inside the NENSA calendar, which listed the 2026 national championships at Lake Placid", source_id: events-nordic-nationals-2026-nensa, as_of: 2026-10-17, confidence: estimated}
+  url:
+    value: https://nensa.net/event/2026-us-cross-country-national-championships/
+    note: An event page inside the NENSA calendar, which listed the 2026 national championships at Lake Placid
+    source_id: events-nordic-nationals-2026-nensa
+    as_of: 2026-10-17
+    confidence: estimated
 - id: worldloppet-global-calendar
   name: Worldloppet global ski marathon calendar
   discipline: ski_marathon
   region: national
-  url: {value: "https://www.worldloppet.com/global-ski-marathon-calendar/?cpage=3", note: "International calendar of about 400 ski marathons that includes United States races such as Vasaloppet USA", source_id: events-nordic-worldloppet-calendar, as_of: 2026-10-17, confidence: estimated}
+  url:
+    value: https://www.worldloppet.com/global-ski-marathon-calendar/?cpage=3
+    note: International calendar of about 400 ski marathons that includes United States races such as Vasaloppet USA
+    source_id: events-nordic-worldloppet-calendar
+    as_of: 2026-10-17
+    confidence: estimated
+- id: michigan-cup-race-series
+  name: Michigan Cup cross country race series
+  discipline: cross_country
+  region: MI
+  url:
+    value: https://forbushcorner.com/MichiganXCRacing.html
+    source_id: events-nordic-michigan-cup-forbush
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Forbush Corner page listing Michigan Cup races; the season shown was 2024/25
+- id: nensa-eastern-cup-series
+  name: NENSA Eastern Cup
+  discipline: cross_country
+  region: national
+  url:
+    value: https://nensa.net/eastern-cup/
+    source_id: events-nordic-eastern-cup-page
+    as_of: 2026-10-20
+    confidence: estimated
+    note: New England series; NENSA posts the season primer and calendar in the fall
+- id: nensa-club-cup-calendar
+  name: NENSA Club Cup races
+  discipline: cross_country
+  region: national
+  url:
+    value: https://nensa.net/events/category/club-cup/
+    source_id: events-nordic-nensa-club-cup
+    as_of: 2026-10-20
+    confidence: estimated
+    note: NENSA calendar category for New England club and citizen races
+- id: birkie-wave-qualifier-races
+  name: Birkie wave placement qualifier races
+  discipline: ski_marathon
+  region: national
+  url:
+    value: https://www.birkie.com/ski/events/qualifier-races/
+    source_id: events-nordic-birkie-qualifier-races
+    as_of: 2026-10-20
+    confidence: estimated
+    note: Races whose results can move a skier to a higher Birkie start wave; upgrade requests for 2027 close January 19,
+      2027
