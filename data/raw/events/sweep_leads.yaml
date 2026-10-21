@@ -1,0 +1,622 @@
+batch: events-sweep_leads
+researched_date: 2026-10-21
+# Second look at leads the resort by resort sweep left out because the date, the season or who can enter was unclear.
+# One search per lead (some leads share a search). Leads that stayed out are listed with the reason in the report.
+sources:
+# Dollar Mountain, ID
+- id: events-swld-visitsunvalley-methodology-2026
+  url: https://visitsunvalley.com/events/methodology-snowboard-competition/
+  title: February 28, 2026 @ 8:00 am - February 28, 2026 @ 4:00 pm
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Visit Sun Valley listing for the Methodology Snowboard
+    Competition at Dollar Mountain.
+- id: events-swld-eyeonsunvalley-b4bc-dollar-2026
+  url: https://eyeonsunvalley.com/Story_Reader/13698/Boarding-for-Breast-Cancer-Coming-to-Dollar-Mountain
+  title: Boarding for Breast Cancer Coming to Dollar Mountain
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Eye on Sun Valley story dated February 23, 2026.
+# Grand Targhee Resort, WY
+- id: events-swld-grandtarghee-teton-surf-classic
+  url: https://www.grandtarghee.com/activities-events/events/event-calendar/teton-surf-classic
+  title: teton surf classic
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. The resort's event page; no 2026 date was shown in the
+    result.
+- id: events-swld-jhnewsandguide-surf-classic
+  url: https://www.jhnewsandguide.com/jackson_hole_daily/local/surf-classic-is-back-for-all-snowboarders/article_ad243e9e-201a-5652-bed6-eb2829007f0c.html
+  title: Surf Classic is back for all snowboarders
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Jackson Hole News&Guide story on an earlier edition.
+- id: events-swld-localfreshies-week-2026-04-05
+  url: https://localfreshies.com/events/week/2026-04-05/
+  title: Week of Events
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Local Freshies events listing for the week of April 5,
+    2026.
+- id: events-swld-grandtarghee-fwq
+  url: https://grandtarghee.com/activities-events/events/event-calendar/freeride-world-qualifier
+  title: freeride world qualifier
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. The search summary gave the 2025 schedule and registration
+    window from "the resort's event page"; this page and a second resort page (ifsa freeride world qualifiers) were
+    both returned.
+- id: events-swld-grandtarghee-ifsa-adult-guide-2025
+  url: https://grandtarghee.com/sites/default/files/2025-01/EVENT%20GUIDE_%202025%20TARGHEE%20%20IFSA%20ADULT%202_.pdf
+  title: EVENT GUIDE 2025 TARGHEE IFSA ADULT 2
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Event guide PDF for the 2025 IFSA Adult 2 star event at
+    Grand Targhee.
+- id: events-swld-buckrail-targhee-fwq
+  url: https://buckrail.com/targhee-hosts-freeride-world-qualifier/
+  title: targhee hosts freeride world qualifier
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Undated Buckrail story on the adult qualifier; competition
+    started Thursday, March 7, a date that fits 2024.
+# Utah Olympic Park, UT
+- id: events-swld-parkrecord-town-series-2026
+  url: https://www.parkrecord.com/?p=241567
+  title: www.parkrecord.com
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. The search summary gave the 2026 Town Series dates, the
+    age rule and the parkcityss.org/town-series link without naming the page that held them; this is the newest Park
+    Record page among the results and is cited for them.
+- id: events-swld-parkrecord-town-series-uop-2024
+  url: https://www.parkrecord.com/2024/01/26/pc-ski-and-snowboards-town-series-returning-friday-night-at-the-uop/
+  title: pc ski and snowboards town series returning friday night at the uop
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Park Record story dated January 26, 2024.
+# Howelsen Hill, CO
+- id: events-swld-steamboatpilot-turkey-jam-2024
+  url: https://steamboatpilot.com/news/steamboat-springs-winter-sports-club-to-host-turkey-jam-on-tuesday
+  title: Steamboat Springs Winter Sports Club to host Turkey Jam on Tuesday
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Steamboat Pilot preview of the November 26, 2024 edition.
+- id: events-swld-steamboatpilot-turkey-jam-friday
+  url: https://www.steamboatpilot.com/news/annual-winter-sports-club-turkey-jam-to-hit-the-terrain-park-friday
+  title: Annual Winter Sports Club Turkey Jam to hit the terrain park Friday
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Older Steamboat Pilot preview of an earlier edition.
+# Winter Park Resort, CO
+- id: events-swld-lake-spring-bash-splash-2026
+  url: https://www.lake.com/events/spring-bash-splash/
+  title: Spring Bash & Splash
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Third party listing of the 2026 Spring Bash and Splash at
+    Winter Park Resort.
+- id: events-swld-denvergazette-wp-pond-skim-2025
+  url: https://www.denvergazette.com/?p=373399
+  title: Finger pushing
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Denver Gazette photo story; a caption places the 2025
+    Winter Park pond skim on closing day, Sunday, April 27.
+- id: events-swld-wpblog-spring-bash-splash-2025
+  url: https://blog.winterparkresort.com/the-ultimate-guide-to-spring-bash-splash-2025/
+  title: The Ultimate Guide to Spring Bash + Splash 2025
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Winter Park Resort blog post on the 10th annual Spring Bash
+    + Splash.
+# Crystal Mountain, WA
+- id: events-swld-trip-crystal-over-the-top-2024
+  url: https://au.trip.com/events/369769-2024-04-enumclaw-collection
+  title: 369769 2024 04 enumclaw collection
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Trip.com event listing for the Over the Top Rail Jam at
+    Crystal Mountain on April 28, 2024.
+# Bear Mountain, CA
+- id: events-swld-bigbear-bear-break
+  url: https://www.bigbear.com/events/bear-break
+  title: bear break
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. The search summary gave the Saturday, April 4, 2026 date
+    at Bear Mountain from one of two Bear Break listings (this page and the lake.com listing) without saying which.
+- id: events-swld-lake-bear-break
+  url: https://www.lake.com/events/bear-break-at-big-bear-mountain-resort/
+  title: Bear Break at Big Bear Mountain Resort
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+- id: events-swld-grizzly-pond-skim-2025
+  url: https://www.bigbeargrizzly.net/news/another-season-in-the-books-almost/article_d29bf53a-e40e-4978-9e1d-e4232f4a48d8.html
+  title: Pond Skim 2025
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Big Bear Grizzly story on the Big Bear Mountain Resort pond
+    skim party of Saturday, April 5, 2025; the story names the resort company, not the mountain.
+# Wildcat Mountain, NH
+- id: events-swld-skinh-epic-nh-spring-2026
+  url: https://www.skinh.com/news/new-hampshires-epic-pass-resorts-unveil-full-slate-of-spring-events-pond-skims-rail-jams-and-retro-weekends
+  title: new hampshires epic pass resorts unveil full slate of spring events pond skims rail jams and retro weekends
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Ski NH news item from February 2026 on the spring events
+    of Wildcat, Attitash, Crotched and Mount Sunapee.
+# Sugarbush Resort, VT
+- id: events-swld-sevendays-castlerock
+  url: https://community.sevendaysvt.com/event/castlerock-extreme-skiing-competition-2534957
+  title: Castlerock Extreme Skiing Competition | Sugarbush Resort | Sports | Seven Days | Vermont's Independent Voice
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. The search summary gave the 2026 details (Lift Line, 80
+    registration spots, ten spots for top Junior Castlerock Extreme Challenge finishers, Ski the East Freeride Tour,
+    IFSA style judging) without naming the page that held them; this event listing is cited for them.
+- id: events-swld-valleyreporter-castlerock-16th
+  url: https://valleyreporter.com/index.php/news/sports/8735-16th-annual-castlerock-extreme-returns-to-sugarbush-resort
+  title: 16th annual castlerock extreme returns to sugarbush resort
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Undated Valley Reporter story.
+# Sugarloaf, ME
+- id: events-swld-runsignup-sugarloaf-parks-jam
+  url: https://runscore.runsignup.com/Race/Info/ME/CarrabassettValley/SugarloafParksJam
+  title: runscore.runsignup.com
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. RunSignup page for the Sugarloaf Parks Jam of April 20,
+    2025, with its division schedule.
+# Middlebury College Snow Bowl, VT
+- id: events-swld-minibury-iguana-cup
+  url: https://minibury.com/event/iguana-cup
+  title: Iguana Cup
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Middlebury events listing; the search summary gave the
+    race description from the minibury.com Iguana Cup listings without naming which one.
+- id: events-swld-minibury-iguana-cup-2022
+  url: https://minibury.com/event/iguana-cup-2022/
+  title: Iguana Cup 2022
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+venues: []
+events:
+# Dollar Mountain, ID
+- id: dollar-mountain-methodology
+  name: Methodology Snowboard Competition
+  discipline: banked_slalom
+  levels:
+  - open_amateur
+  - masters
+  venue:
+    resort_id: dollar-mountain
+  format:
+    value: Two banked slalom runs; after the finish a rider may show a method on a set feature to cut time off the best
+      run. Categories run up to masters men 50 plus
+    source_id: events-swld-eyeonsunvalley-b4bc-dollar-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Course built by the Sun Valley Terrain Parks team and Effective Edge Company. All proceeds of the 2026 edition
+      went to Boarding for Breast Cancer.
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-02-28
+    end: 2026-02-28
+    source_id: events-swld-visitsunvalley-methodology-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: 8 am to 4 pm. A Boarding for Breast Cancer schedule listed Sun Valley on February 21; the Visit Sun Valley and
+      Eye on Sun Valley pages both give February 28.
+  website:
+    value: https://visitsunvalley.com/events/methodology-snowboard-competition/
+    source_id: events-swld-visitsunvalley-methodology-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Visit Sun Valley listing; the resort's own page was not in the results.
+# Grand Targhee Resort, WY
+- id: grand-targhee-teton-surf-classic
+  name: Teton Surf Classic
+  discipline: banked_slalom
+  levels:
+  - open_amateur
+  venue:
+    resort_id: grand-targhee
+  format:
+    value: Snowboard contest on a surf inspired course in the North Pole Terrain Park, judged on turns, speed, flow,
+      creativity and style
+    source_id: events-swld-grandtarghee-teton-surf-classic
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Proceeds support the Grand Targhee Ski and Snowboard Foundation. A story in the results says the resort started
+      the event in 2018 as a snowboard contest welcoming every kind of rider. banked_slalom is the closest discipline id
+      for a judged surf style course.
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    source_id: events-swld-localfreshies-week-2026-04-05
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Listed for the week of April 5, 2026. One listing in the results gave April 11, 2026 as a tentative date and a
+      Buckrail roundup gave April 12; the exact day was not confirmed.
+  signup:
+    requirements:
+      value: Open to all snowboarders
+      source_id: events-swld-jhnewsandguide-surf-classic
+      as_of: 2026-10-21
+      confidence: estimated
+      note: Public resort contest with no stated age limit, kept as open_amateur. An earlier edition capped registration
+        at 150 riders.
+  website:
+    value: https://www.grandtarghee.com/activities-events/events/event-calendar/teton-surf-classic
+    source_id: events-swld-grandtarghee-teton-surf-classic
+    as_of: 2026-10-21
+    confidence: estimated
+- id: ifsa-fwt-qualifier-grand-targhee
+  name: Grand Targhee IFSA Freeride World Qualifier (Adult 2*)
+  series:
+    id: ifsa-fwt-qualifier
+    name: IFSA FWT Qualifier
+  discipline: big_mountain
+  levels:
+  - open_amateur
+  venue:
+    resort_id: grand-targhee
+  sanctioning:
+    name: IFSA
+    source_id: events-swld-grandtarghee-ifsa-adult-guide-2025
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The 2025 event guide is titled as an IFSA Adult 2 star event.
+  format:
+    value: Freeride World Qualifier on the Peaked summit and in the Reliable and Bobcat chutes
+    source_id: events-swld-buckrail-targhee-fwq
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The adult qualifier drew 168 competitors in the edition this story covers.
+  edition_2026_27: null
+  last_edition:
+    season: 2024/25
+    start: 2025-03-05
+    end: 2025-03-07
+    source_id: events-swld-grandtarghee-fwq
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Wednesday, March 5 to Friday, March 7, 2025. Registration for that edition ran from December 19, 2024 to
+      January 9, 2025. A 2026 edition was not found.
+  signup:
+    url:
+      value: https://grandtarghee.com/activities-events/events/event-calendar/freeride-world-qualifier
+      source_id: events-swld-grandtarghee-fwq
+      as_of: 2026-10-21
+      confidence: estimated
+  website:
+    value: https://grandtarghee.com/activities-events/events/event-calendar/freeride-world-qualifier
+    source_id: events-swld-grandtarghee-fwq
+    as_of: 2026-10-21
+    confidence: estimated
+# Utah Olympic Park, UT (Park City Ski & Snowboard)
+- id: park-city-ski-and-snowboard-town-series
+  name: Park City Ski & Snowboard Town Series
+  discipline: alpine_racing
+  disciplines_also:
+  - skimo
+  levels:
+  - open_amateur
+  venue:
+    resort_id: utah-olympic-park
+  organizer:
+    name: Park City Ski & Snowboard
+    source_id: events-swld-parkrecord-town-series-2026
+    as_of: 2026-10-21
+    confidence: estimated
+  format:
+    value: Community evening race series with an alpine race and an uphill SkiMo race; the finale adds a pond skim. A
+      fundraiser for the club's programs
+    source_id: events-swld-parkrecord-town-series-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The finale pond skim of April 4, 2026 is recorded on its own as utah-olympic-park-pond-skim.
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-01-23
+    end: 2026-04-04
+    source_id: events-swld-parkrecord-town-series-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Races on Friday, January 23, Friday, February 13, Friday, March 13 and Saturday, April 4, 2026.
+  usual_timing:
+    value: Friday nights at the Utah Olympic Park
+    source_id: events-swld-parkrecord-town-series-uop-2024
+    as_of: 2026-10-21
+    confidence: estimated
+    note: From the 2024 story's headline; the 2026 finale was on a Saturday.
+  signup:
+    method: online_registration
+    url:
+      value: https://parkcityss.org/town-series
+      source_id: events-swld-parkrecord-town-series-2026
+      as_of: 2026-10-21
+      confidence: estimated
+    requirements:
+      value: Open to ages 6 and up
+      source_id: events-swld-parkrecord-town-series-2026
+      as_of: 2026-10-21
+      confidence: estimated
+  website:
+    value: https://parkcityss.org/town-series
+    source_id: events-swld-parkrecord-town-series-2026
+    as_of: 2026-10-21
+    confidence: estimated
+# Howelsen Hill, CO
+- id: howelsen-hill-turkey-jam
+  name: Turkey Jam
+  discipline: rail_jam
+  levels:
+  - open_amateur
+  venue:
+    resort_id: howelsen-hill
+  organizer:
+    name: Steamboat Springs Winter Sports Club
+    url: https://www.sswsc.org/
+    source_id: events-swld-steamboatpilot-turkey-jam-2024
+    as_of: 2026-10-21
+    confidence: estimated
+  format:
+    value: Free community rail jam with music and prizes; in an earlier edition kids rode first and adults rode the
+      second hour
+    source_id: events-swld-steamboatpilot-turkey-jam-friday
+    as_of: 2026-10-21
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2024/25
+    start: 2024-11-26
+    end: 2024-11-26
+    source_id: events-swld-steamboatpilot-turkey-jam-2024
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Tuesday, 4 to 6 pm. A 2023 edition ran on Saturday, November 18. A 2025 edition was not found.
+  signup:
+    method: at_venue
+    fee_usd:
+      value: 0
+      note: Free in 2024.
+      source_id: events-swld-steamboatpilot-turkey-jam-2024
+      as_of: 2026-10-21
+      confidence: estimated
+    requirements:
+      value: Open to the public. Helmet and suitable gear; no pass needed; a waiver is signed on site on arrival
+      source_id: events-swld-steamboatpilot-turkey-jam-2024
+      as_of: 2026-10-21
+      confidence: estimated
+  website:
+    value: https://steamboatpilot.com/news/steamboat-springs-winter-sports-club-to-host-turkey-jam-on-tuesday
+    source_id: events-swld-steamboatpilot-turkey-jam-2024
+    as_of: 2026-10-21
+    confidence: estimated
+    note: News preview; the club's event page was not in the results.
+# Winter Park Resort, CO
+- id: winter-park-spring-bash-and-splash-pond-skim
+  name: Spring Bash and Splash Pond Skim
+  discipline: pond_skim
+  levels:
+  - open_amateur
+  venue:
+    resort_id: winter-park
+  format:
+    value: Pond skim at about 9,000 feet that closes Spring Bash and Splash, the resort's four weekend spring festival
+    source_id: events-swld-lake-spring-bash-splash-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The resort blog called the 2025 festival the 10th annual Spring Bash + Splash. The festival's Meltdown Rail Jam
+      is recorded on its own. No age limit was seen; kept as open_amateur as a public resort contest.
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-04-26
+    end: 2026-04-26
+    source_id: events-swld-lake-spring-bash-splash-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The 2026 festival ran on four weekends from April 4 to April 26. The 2025 pond skim was on closing day, Sunday,
+      April 27, 2025, per a Denver Gazette caption.
+  website:
+    value: https://blog.winterparkresort.com/the-ultimate-guide-to-spring-bash-splash-2025/
+    source_id: events-swld-wpblog-spring-bash-splash-2025
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Resort blog guide to the 2025 festival.
+# Crystal Mountain, WA
+- id: crystal-mountain-over-the-top-rail-jam
+  name: Over the Top Rail Jam
+  discipline: rail_jam
+  levels:
+  - open_amateur
+  venue:
+    resort_id: crystal-mountain
+  format:
+    value: Annual rail jam on the summit ridgeline facing Mt. Rainier; ski and snowboard categories by age group, judged
+      on difficulty, amplitude, execution, variety and style
+    source_id: events-swld-trip-crystal-over-the-top-2024
+    as_of: 2026-10-21
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2023/24
+    start: 2024-04-28
+    end: 2024-04-28
+    source_id: events-swld-trip-crystal-over-the-top-2024
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Latest edition found; 2025 and 2026 editions were not found.
+  signup:
+    method: at_venue
+    fee_usd:
+      value: 0
+      note: Free entry in 2024.
+      source_id: events-swld-trip-crystal-over-the-top-2024
+      as_of: 2026-10-21
+      confidence: estimated
+    requirements:
+      value: Valid season pass or day lift ticket and the resort's events waiver, signed by a parent or guardian for
+        riders under 18; registration on the day
+      source_id: events-swld-trip-crystal-over-the-top-2024
+      as_of: 2026-10-21
+      confidence: estimated
+  website:
+    value: https://au.trip.com/events/369769-2024-04-enumclaw-collection
+    source_id: events-swld-trip-crystal-over-the-top-2024
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Third party event listing; the resort's event page was not in the results.
+# Bear Mountain, CA
+- id: bear-mountain-bear-break-pond-skim
+  name: Bear Break Pond Skim
+  discipline: pond_skim
+  levels:
+  - open_amateur
+  venue:
+    resort_id: bear-mountain
+  format:
+    value: Spring pond skim party with a costume contest, a fashion show and live music
+    source_id: events-swld-grizzly-pond-skim-2025
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The 2025 story names Big Bear Mountain Resort, the company that runs Bear Mountain and Snow Summit; the Bear
+      Break listings place the event at Bear Mountain. No age limit was seen; kept as open_amateur as a public resort
+      contest.
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-04-04
+    end: 2026-04-04
+    source_id: events-swld-bigbear-bear-break
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The 2025 edition was on Saturday, April 5, 2025.
+  website:
+    value: https://www.bigbear.com/events/bear-break
+    source_id: events-swld-bigbear-bear-break
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Visit Big Bear listing; the resort's own page was not in the results.
+# Wildcat Mountain, NH
+- id: wildcat-spring-fling-pond-skim
+  name: Wildcat Spring Fling and Pond Skim
+  discipline: pond_skim
+  levels:
+  - open_amateur
+  venue:
+    resort_id: wildcat
+  format:
+    value: Tropical themed pond skim with prizes for Best Dressed, Best Wipeout, Biggest Splash, Best Run and Crowd
+      Favorite
+    source_id: events-swld-skinh-epic-nh-spring-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: No age limit was seen; kept as open_amateur as a public resort contest.
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    start: 2026-04-04
+    end: 2026-04-04
+    source_id: events-swld-skinh-epic-nh-spring-2026
+    as_of: 2026-10-21
+    confidence: estimated
+  website:
+    value: https://www.skinh.com/news/new-hampshires-epic-pass-resorts-unveil-full-slate-of-spring-events-pond-skims-rail-jams-and-retro-weekends
+    source_id: events-swld-skinh-epic-nh-spring-2026
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Ski NH news item; the resort's event page was not in the results.
+# Sugarbush Resort, VT
+- id: sugarbush-castlerock-extreme
+  name: Castlerock Extreme
+  discipline: big_mountain
+  levels:
+  - open_amateur
+  venue:
+    resort_id: sugarbush
+  format:
+    value: Freeride contest on Castlerock Peak, a Ski the East Freeride Tour stop, scored to IFSA style criteria for
+      line, control, fluidity, technique and style
+    source_id: events-swld-sevendays-castlerock
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Long running; a Valley Reporter story covers the 16th annual edition. A separate Junior Castlerock Extreme
+      Challenge is youth only and left out.
+  edition_2026_27: null
+  last_edition:
+    season: 2025/26
+    source_id: events-swld-sevendays-castlerock
+    as_of: 2026-10-21
+    confidence: estimated
+    note: The 2026 edition ran on Lift Line; its date was not seen.
+  signup:
+    requirements:
+      value: 80 registration spots, ten of them kept for the top finishers of the Junior Castlerock Extreme Challenge
+      source_id: events-swld-sevendays-castlerock
+      as_of: 2026-10-21
+      confidence: estimated
+      note: The minimum age was not seen in the results.
+  website:
+    value: https://community.sevendaysvt.com/event/castlerock-extreme-skiing-competition-2534957
+    source_id: events-swld-sevendays-castlerock
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Seven Days event listing; the resort's event page was not in the results.
+# Sugarloaf, ME
+- id: sugarloaf-parks-jam
+  name: Sugarloaf Parks Jam
+  discipline: rail_jam
+  levels:
+  - open_amateur
+  venue:
+    resort_id: sugarloaf
+  format:
+    value: Rail jam with a 16 and under division and women's open and men's open divisions; the men's open is for ages
+      17 and up
+    source_id: events-swld-runsignup-sugarloaf-parks-jam
+    as_of: 2026-10-21
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2024/25
+    start: 2025-04-20
+    end: 2025-04-20
+    source_id: events-swld-runsignup-sugarloaf-parks-jam
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Latest edition found; a 2026 edition was not found. The men's open ran from 12:45 to 1:15 pm.
+  signup:
+    url:
+      value: https://runscore.runsignup.com/Race/Info/ME/CarrabassettValley/SugarloafParksJam
+      source_id: events-swld-runsignup-sugarloaf-parks-jam
+      as_of: 2026-10-21
+      confidence: estimated
+    platform:
+      value: RunSignup
+      source_id: events-swld-runsignup-sugarloaf-parks-jam
+      as_of: 2026-10-21
+      confidence: estimated
+  website:
+    value: https://runscore.runsignup.com/Race/Info/ME/CarrabassettValley/SugarloafParksJam
+    source_id: events-swld-runsignup-sugarloaf-parks-jam
+    as_of: 2026-10-21
+    confidence: estimated
+# Middlebury College Snow Bowl, VT
+- id: middlebury-snow-bowl-iguana-cup
+  name: Iguana Cup
+  discipline: fun_race
+  disciplines_also:
+  - alpine_racing
+  levels:
+  - open_amateur
+  venue:
+    resort_id: middlebury-snow-bowl
+  format:
+    value: Family slalom race open to skiers of all ages and abilities, a fundraiser for Quarry Hill School
+    source_id: events-swld-minibury-iguana-cup
+    as_of: 2026-10-21
+    confidence: estimated
+  edition_2026_27: null
+  last_edition:
+    season: 2021/22
+    source_id: events-swld-minibury-iguana-cup-2022
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Listed as Iguana Cup 2022; the date was not seen. Later editions were not found.
+  signup:
+    requirements:
+      value: Participation by donation with no registration required (2022)
+      source_id: events-swld-minibury-iguana-cup-2022
+      as_of: 2026-10-21
+      confidence: estimated
+  website:
+    value: https://minibury.com/event/iguana-cup
+    source_id: events-swld-minibury-iguana-cup
+    as_of: 2026-10-21
+    confidence: estimated
+    note: Middlebury community events listing.
