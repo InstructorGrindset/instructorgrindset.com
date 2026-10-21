@@ -673,7 +673,7 @@ def write_heat_fixture(cfg, resorts, outlines):
 
 
 def events_fixture(resorts, cfg):
-    """events.json, events-summary.json and Resort.events from tests/map/events_fixture.yaml, compiled by the real
+    """events.json, events-summary.json, events-search.json and Resort.events from tests/map/events_fixture.yaml, compiled by the real
     pipeline/events.py against the fixture resorts. Returns (compiled, by_resort, sources)."""
     import shutil  # noqa: PLC0415
     import tempfile  # noqa: PLC0415
@@ -768,6 +768,7 @@ def main():
     # EVENTS mode (ROADMAP item 22), compact like the real build.
     (OUT / "events.json").write_text(json.dumps(events, ensure_ascii=False, separators=(",", ":")) + "\n")
     (OUT / "events-summary.json").write_text(json.dumps(events_mod.summary(events), ensure_ascii=False, separators=(",", ":")) + "\n")
+    (OUT / "events-search.json").write_text(json.dumps(events_mod.search_index(events), ensure_ascii=False, separators=(",", ":")) + "\n")
     for r in resorts:
         if r["detail_available"]:
             write(f"detail/{r['id']}.json", detail_record(r))

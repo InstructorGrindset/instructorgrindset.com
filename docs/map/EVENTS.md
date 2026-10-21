@@ -74,6 +74,8 @@ events:
   edition_2026_27: {start: 2027-02-25, end: 2027-02-27, source_id: ..., as_of: ..., confidence: ...}   # null when not published
   last_edition: {start: 2026-02-19, end: 2026-02-21, season: 2025/26, source_id: ..., as_of: ..., confidence: ...}   # give when edition_2026_27 is null; optional otherwise
   usual_timing: {value: "Late February", source_id: ..., as_of: ..., confidence: ...}   # optional, only when a source says it
+  # An event with no date gets its Month chips from the month names usual_timing gives, else from its season words
+  # (config events.season_words: "Spring" covers March to May). Write the source's own wording; never a guessed date.
   season_long: {value: true, source_id: ..., as_of: ..., confidence: ...}   # optional: a program that runs all season with no single date
   # Season long programs (a NASTAR program, a weekly race league, rail jam nights) may leave both edition_2026_27 and
   # last_edition null when usual_timing (for example "Thursday nights, January to March") or season_long is sourced.

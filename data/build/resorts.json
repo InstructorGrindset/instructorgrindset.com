@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T16:09:22Z",
+  "generated_at": "2026-10-21T05:52:23Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -1338,8 +1338,23 @@
       "trailmap_available": false,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "nastar-alpine-valley-ski-area",
+            "name": "NASTAR at Alpine Valley",
+            "discipline_label": "NASTAR",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swms-alpinevalley-mi-nastar",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
+        "events-swms-alpinevalley-mi-nastar",
         "facts-midwest-ots-alpine-valley-ski-area",
         "facts-midwest-wiki-comparison",
         "openskimap-ski-areas"
@@ -2158,7 +2173,7 @@
         ]
       },
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "ifsa-fwt-qualifier-alyeska",
@@ -2183,6 +2198,18 @@
             "source_id": "events-alpine-usss-masters-events-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "alyeska-slush-cup",
+            "name": "Alaska Airlines Slush Cup",
+            "discipline_label": "Pond skim",
+            "start": "2026-04-25",
+            "end": "2026-04-25",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-alyeska-spring-carnival",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -2192,6 +2219,7 @@
         "ed-west-wiki-girdwood-alaska",
         "events-alpine-usss-masters-events-search",
         "events-freestyle-ifsa-events-2027",
+        "events-swpa-alyeska-spring-carnival",
         "facts-gapfill-snowstash-alyeska",
         "facts-west2-adn-alyeska-2024-open",
         "hs-adn-alaska-housing-2022",
@@ -3285,8 +3313,20 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
+          {
+            "id": "arapahoe-basin-enduro",
+            "name": "Arapahoe Basin Enduro",
+            "discipline_label": "Lap and vertical challenge",
+            "start": "2026-04-08",
+            "end": "2026-04-08",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swra-abasin-37-enduro",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "summit-telemark-festival",
             "name": "Summit Telemark Festival",
@@ -3307,6 +3347,7 @@
         "ed-west-wiki-frisco-colorado",
         "ed-west-wiki-summit-county-colorado",
         "events-backcountry-telemark-festivals-2025-26-search",
+        "events-swra-abasin-37-enduro",
         "facts-training-abasin-alterra-instructor",
         "facts-west1-abasin-closing-2025",
         "facts-west1-wiki-arapahoe-basin",
@@ -7201,7 +7242,7 @@
         ]
       },
       "events": {
-        "count": 5,
+        "count": 6,
         "items": [
           {
             "id": "fis-alpine-world-cup-beaver-creek-men",
@@ -7262,6 +7303,18 @@
             "source_id": "events-alpine-usss-masters-events-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "beaver-creek-talons-challenge",
+            "name": "Talons Challenge",
+            "discipline_label": "Lap and vertical challenge",
+            "start": "2025-02-22",
+            "end": "2025-02-23",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swra-beavercreek-talons-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -7274,6 +7327,7 @@
         "events-alpine-wiki-wc-2026-27",
         "events-backcountry-vrd-arrowhead-uphill-search",
         "events-backcountry-vrd-beaver-creek-uphill-search",
+        "events-swra-beavercreek-talons-2025",
         "facts-west1-cpr-closings-2025",
         "facts-west1-vr-bc-cb-opening-2024",
         "hs-ff-co-avon",
@@ -9424,7 +9478,7 @@
         ]
       },
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "psia-nrm-fall-fest",
@@ -9449,6 +9503,16 @@
             "source_id": "events-instructor-psia-team-selection-2024-athletes-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "big-sky-pond-skim",
+            "name": "Big Sky Pond Skim",
+            "discipline_label": "Pond skim",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swra-explorebigsky-pond-skim-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -9460,6 +9524,7 @@
         "ed-west-wiki-yellowstone-club",
         "events-instructor-psia-2024-25-calendar-search",
         "events-instructor-psia-team-selection-2024-athletes-search",
+        "events-swra-explorebigsky-pond-skim-2025",
         "facts-gapfill-bigsky-pr-longest",
         "facts-training-bigsky-coolworks-profile",
         "hs-bigsky-press-75-beds",
@@ -9705,11 +9770,27 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "big-snow-park-after-dark",
+            "name": "Park After Dark",
+            "discipline_label": "Rail jam",
+            "published": false,
+            "season_long": true,
+            "timing": "Once a month",
+            "source_id": "events-swna-snowbrains-big-snow-park-after-dark",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-wikipedia-american-dream-mall",
         "ed-east-wikipedia-american-dream-mall",
         "ed-east-wikipedia-big-snow-american-dream",
+        "events-swna-snowbrains-big-snow-park-after-dark",
         "jobs-big-snow-employment",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
@@ -10461,8 +10542,20 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
+          {
+            "id": "black-mountain-maine-uphill-climb",
+            "name": "Black Mountain Uphill Climb",
+            "discipline_label": "Hill climb",
+            "start": "2026-01-16",
+            "end": "2026-01-16",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swna-runsignup-black-mountain-uphill-january",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "vertical-challenge-black-mountain-maine",
             "name": "Vertical Challenge at Black Mountain of Maine",
@@ -10481,6 +10574,7 @@
         "ed-east-wikipedia-black-mountain-of-maine",
         "ed-east-wikipedia-rumford-maine",
         "events-ceast-mainepublic-vertical-challenge-black-mountain",
+        "events-swna-runsignup-black-mountain-uphill-january",
         "facts-northeast1-ots-black-mountain-maine",
         "jobs-black-mountain-employment",
         "jobs-fasterskier-jobpostings",
@@ -11648,11 +11742,40 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 2,
+        "items": [
+          {
+            "id": "bogus-basin-pond-skim",
+            "name": "Bogus Basin Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-19",
+            "end": "2025-04-19",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swra-boisemom-bogus-pond-skim-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "bogus-basin-community-race-series",
+            "name": "Bogus Basin Community Race Series (winter)",
+            "discipline_label": "Alpine racing",
+            "published": false,
+            "season_long": true,
+            "timing": "Winter season",
+            "source_id": "events-swra-boisemom-bogus-winter-programs",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-ktvb-bogus-basin-bus",
         "ed-west-wiki-bogus-basin",
         "ed-west-wiki-boise-idaho",
+        "events-swra-boisemom-bogus-pond-skim-2025",
+        "events-swra-boisemom-bogus-winter-programs",
         "facts-west3-wp-bogus-basin",
         "tmo-bogus-basin",
         "webcams-bogus-basin-search",
@@ -12934,8 +13057,31 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 1,
+        "count": 3,
         "items": [
+          {
+            "id": "boyne-mountain-slush-cup",
+            "name": "Slush Cup",
+            "discipline_label": "Pond skim",
+            "start": "2026-03-22",
+            "end": "2026-03-22",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swms-boyne-carnival-weekend",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "boyne-mountain-adult-race-league",
+            "name": "Adult Race League at Boyne Mountain",
+            "discipline_label": "Alpine racing",
+            "published": false,
+            "season_long": true,
+            "timing": "Wednesday nights, January through March",
+            "source_id": "events-swms-boyne-adult-race-league",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "nastar-boyne-mountain",
             "name": "NASTAR at Boyne Mountain Resort",
@@ -12953,6 +13099,8 @@
         "ed-east-wikipedia-boyne-falls-michigan",
         "ed-east-wikipedia-boyne-mountain-resort",
         "events-alpine-boyne-nastar-search",
+        "events-swms-boyne-adult-race-league",
+        "events-swms-boyne-carnival-weekend",
         "facts-midwest-ots-boyne-mountain",
         "facts-midwest-wiki-comparison",
         "jobs-boyne-careers-home",
@@ -13924,7 +14072,7 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 4,
         "items": [
           {
             "id": "toyota-us-grand-prix-breckenridge",
@@ -13961,6 +14109,18 @@
             "source_id": "events-alpine-beaverrun-hartford-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "breckenridge-imperial-challenge",
+            "name": "Imperial Challenge",
+            "discipline_label": "Uphill",
+            "start": "2026-04-04",
+            "end": "2026-04-04",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swra-active-imperial-challenge-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -13973,6 +14133,7 @@
         "events-alpine-beaverrun-hartford-search",
         "events-freestyle-ifsa-venue-breckenridge",
         "events-freestyle-usss-2026-27-events-page",
+        "events-swra-active-imperial-challenge-2026",
         "facts-west1-denvergazette-breck-2024",
         "facts-west1-summitdaily-breck-keystone-2024",
         "hs-ff-co-breckenridge",
@@ -16020,7 +16181,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 4,
+        "count": 5,
         "items": [
           {
             "id": "rattlesnake-banked-slalom",
@@ -16055,6 +16216,17 @@
             "confidence": "estimated"
           },
           {
+            "id": "buck-hill-last-slash",
+            "name": "Last Slash Snowboard Contest",
+            "discipline_label": "Rail jam",
+            "published": false,
+            "season_long": true,
+            "timing": "End of the season; the latest listing gave Saturday, March 22",
+            "source_id": "events-swms-buckhill-last-slash",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
             "id": "buck-hill-ski-challenge-leagues",
             "name": "Ski Challenge Leagues at Buck Hill",
             "discipline_label": "Alpine racing",
@@ -16074,6 +16246,7 @@
         "events-ceast-buckhill-buck-bumps-2023",
         "events-ceast-skichallenge-leagues",
         "events-freestyle-buckhill-rattlesnake-2026",
+        "events-swms-buckhill-last-slash",
         "facts-midwest-ots-buck-hill",
         "facts-midwest-wiki-comparison",
         "jobs-buck-hill-hiring",
@@ -16592,7 +16765,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "stifel-noram-cup-burke",
@@ -16604,6 +16777,18 @@
             "published": true,
             "source_id": "events-alpine-skiracing-noram-2026-27-search",
             "as_of": "2026-10-17",
+            "confidence": "estimated"
+          },
+          {
+            "id": "burke-pond-skim",
+            "name": "Burke Mountain Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2024-04-07",
+            "end": "2024-04-07",
+            "season": "2023/24",
+            "published": false,
+            "source_id": "events-swna-happyvermont-pond-skimming-2024",
+            "as_of": "2026-10-21",
             "confidence": "estimated"
           },
           {
@@ -16625,6 +16810,7 @@
         "ed-east-wikipedia-burke-vermont",
         "events-alpine-skiracing-noram-2026-27-search",
         "events-ceast-happyvermont-vertical-challenge-burke",
+        "events-swna-happyvermont-pond-skimming-2024",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "jobs-burke-jobs-named",
@@ -18365,7 +18551,7 @@
         "tools": []
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "vertical-challenge-cannon",
@@ -18378,6 +18564,17 @@
             "source_id": "events-ceast-skinh-vertical-challenge-cannon",
             "as_of": "2026-10-20",
             "confidence": "estimated"
+          },
+          {
+            "id": "cannon-blizzard-splash-pond",
+            "name": "Blizzard Splash Pond",
+            "discipline_label": "Pond skim",
+            "published": false,
+            "season_long": true,
+            "timing": "Early April (the event page lists Saturday, April 4 without a year; costume contest 12:15 pm, pond start 12:30 pm)",
+            "source_id": "events-swna-cannon-blizzard-splash-pond",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -18385,6 +18582,7 @@
         "ed-east-wikipedia-cannon-mountain-ski-area",
         "ed-east-wikipedia-franconia-new-hampshire",
         "events-ceast-skinh-vertical-challenge-cannon",
+        "events-swna-cannon-blizzard-splash-pond",
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
         "hs-ff-nh-north-woodstock",
@@ -21392,7 +21590,7 @@
         ]
       },
       "events": {
-        "count": 5,
+        "count": 6,
         "items": [
           {
             "id": "fis-alpine-world-cup-copper-mountain",
@@ -21443,6 +21641,18 @@
             "confidence": "estimated"
           },
           {
+            "id": "copper-mountain-mammut-uphill-race-series",
+            "name": "Mammut Uphill Race Series",
+            "discipline_label": "Uphill",
+            "start": "2026-01-24",
+            "end": "2026-04-11",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swra-frisco-mammut-uphill",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
             "id": "copper-mountain-slush-rush",
             "name": "Slush Rush",
             "discipline_label": "Fun race",
@@ -21465,6 +21675,7 @@
         "events-freestyle-usasa-national-championships",
         "events-freestyle-usss-2026-27-domestic-wc-release",
         "events-instructor-psia-2027-national-dates-search",
+        "events-swra-frisco-mammut-uphill",
         "facts-training-copper-cert-snowboard-2627",
         "facts-west1-frisco-copper-opening-2025",
         "facts-west1-unofficial-copper-closing-2025",
@@ -22192,7 +22403,7 @@
         "tools": []
       },
       "events": {
-        "count": 1,
+        "count": 3,
         "items": [
           {
             "id": "cranmore-mountain-meisters",
@@ -22205,6 +22416,30 @@
             "source_id": "events-ceast-cranmore-mm-registration-2025",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "cranmore-hannes-schneider-meister-cup",
+            "name": "Hannes Schneider Meister Cup",
+            "discipline_label": "Alpine racing",
+            "start": "2026-03-13",
+            "end": "2026-03-14",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swna-cranmore-meister-cup-29th",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "cranmore-spring-splash",
+            "name": "Spring Splash",
+            "discipline_label": "Pond skim",
+            "start": "2026-03-28",
+            "end": "2026-03-28",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swna-wzid-cranmore-spring-splash",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -22213,6 +22448,8 @@
         "ed-east-wikipedia-cranmore-mountain-resort",
         "ed-east-wikipedia-north-conway-new-hampshire",
         "events-ceast-cranmore-mm-registration-2025",
+        "events-swna-cranmore-meister-cup-29th",
+        "events-swna-wzid-cranmore-spring-splash",
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
         "hs-ff-nh-north-conway",
@@ -22809,7 +23046,7 @@
         "tools": []
       },
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "al-johnson-memorial-uphill-downhill",
@@ -22834,6 +23071,16 @@
             "source_id": "events-backcountry-cbnordic-grand-traverse-ski-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "crested-butte-pond-skim",
+            "name": "Crested Butte Pond Skim",
+            "discipline_label": "Pond skim",
+            "season": "2022/23",
+            "published": false,
+            "source_id": "events-swra-snowstash-cb-closing-2023",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -22845,6 +23092,7 @@
         "ed-west-wiki-x-games",
         "events-backcountry-cbnews-al-johnson-2025-search",
         "events-backcountry-cbnordic-grand-traverse-ski-search",
+        "events-swra-snowstash-cb-closing-2023",
         "facts-west1-cpr-closings-2025",
         "facts-west1-vr-cb-opening-2025",
         "hs-ff-co-crested-butte",
@@ -23544,8 +23792,44 @@
         "tools": []
       },
       "events": {
-        "count": 3,
+        "count": 6,
         "items": [
+          {
+            "id": "crystal-mountain-uphill-weekend-nachtspektakel",
+            "name": "Uphill Weekend and Nachtspektakel",
+            "discipline_label": "Uphill",
+            "start": "2026-03-27",
+            "end": "2026-03-29",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-crystal-spring-events-blog",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "crystal-mountain-elysian-bikini-downhill",
+            "name": "Elysian Bikini Downhill",
+            "discipline_label": "Fun race",
+            "start": "2026-04-11",
+            "end": "2026-04-11",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-crystal-spring-events-blog",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "crystal-mountain-kona-big-wave-pond-skim",
+            "name": "Kona Big Wave Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2026-04-18",
+            "end": "2026-04-18",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-crystal-spring-events-blog",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "crystal-mountain-mt-rainier-berm-brawl",
             "name": "Mt. Rainier Berm Brawl Banked Slalom",
@@ -23586,6 +23870,7 @@
         "events-alpine-crystal-wa-league-search",
         "events-alpine-crystal-wa-nastar-search",
         "events-cwest-crystal-berm-brawl",
+        "events-swpa-crystal-spring-events-blog",
         "facts-training-crystal-ft-instructor-2627",
         "facts-west2-fox13-wa-openings",
         "facts-west2-ots-wa-closing",
@@ -23726,8 +24011,24 @@
       "trailmap_available": false,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "crystal-mountain-mi-slush-cup",
+            "name": "Slush Cup",
+            "discipline_label": "Pond skim",
+            "published": false,
+            "season_long": true,
+            "timing": "March, during the Spring Carnival",
+            "source_id": "events-swms-crystal-spring-carnival",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
+        "events-swms-crystal-spring-carnival",
         "facts-midwest-wiki-crystal-mountain-mi",
         "openskimap-ski-areas",
         "webcams-crystal-mountain-mi-search"
@@ -28947,7 +29248,7 @@
         ]
       },
       "events": {
-        "count": 4,
+        "count": 5,
         "items": [
           {
             "id": "teton-ridge-classic",
@@ -28986,6 +29287,18 @@
             "confidence": "estimated"
           },
           {
+            "id": "grand-targhee-pond-skim",
+            "name": "Grand Targhee Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-19",
+            "end": "2025-04-19",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swra-buckrail-targhee-closing-weekend",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
             "id": "grand-targhee-new-years-eve-rail-jam",
             "name": "New Year's Eve Targhee Rail Jam",
             "discipline_label": "Rail jam",
@@ -29007,6 +29320,7 @@
         "events-cwest-grandtarghee-nye-rail-jam",
         "events-freestyle-grandtarghee-ladies-waist",
         "events-nwest-teton-ridge-classic-targhee",
+        "events-swra-buckrail-targhee-closing-weekend",
         "facts-gapfill-gt-lift-tickets",
         "facts-training-targhee-coolworks-profile",
         "facts-west3-wp-grand-targhee",
@@ -30172,7 +30486,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "gunstock-moonlight-grind-rail-jam",
@@ -30184,6 +30498,16 @@
             "published": false,
             "source_id": "events-ceast-lakesregion-gunstock-moonlight-grind",
             "as_of": "2026-10-20",
+            "confidence": "estimated"
+          },
+          {
+            "id": "gunstock-pond-skim",
+            "name": "Gunstock Pond Skim",
+            "discipline_label": "Pond skim",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swna-lakesregion-gunstock-pond-skim",
+            "as_of": "2026-10-21",
             "confidence": "estimated"
           },
           {
@@ -30204,6 +30528,7 @@
         "ed-east-wikipedia-gunstock-mountain-resort",
         "events-alpine-gunstock-nastar-search",
         "events-ceast-lakesregion-gunstock-moonlight-grind",
+        "events-swna-lakesregion-gunstock-pond-skim",
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
         "tmo-gunstock",
@@ -31008,8 +31333,20 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
+          {
+            "id": "heavenly-pond-skimming-championship",
+            "name": "Pond Skimming Championship of Tahoe",
+            "discipline_label": "Pond skim",
+            "start": "2026-04-11",
+            "end": "2026-04-11",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-visitlaketahoe-heavenly-pond-skim",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "gunbarrel-25",
             "name": "Gunbarrel 25",
@@ -31029,6 +31366,7 @@
         "ed-west-wiki-south-lake-tahoe-california",
         "ed-west-wiki-stateline-nevada",
         "events-cwest-skiheavenly-gunbarrel-25",
+        "events-swpa-visitlaketahoe-heavenly-pond-skim",
         "facts-west2-wp-heavenly",
         "hs-ff-ca-south-lake-tahoe",
         "hs-kunr-slt-2022",
@@ -33744,11 +34082,26 @@
           }
         ]
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "howelsen-hill-winter-carnival-amateur-ski-jumping",
+            "name": "Winter Carnival Amateur Ski Jumping",
+            "discipline_label": "Ski jumping",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swra-sswsc-winter-carnival-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-west-wiki-howelsen-hill-ski-area",
         "ed-west-wiki-steamboat-springs-colorado",
         "ed-west-wiki-steamboat-springs-winter-sports-club",
+        "events-swra-sswsc-winter-carnival-2026",
         "facts-west1-dircom-howelsen",
         "hs-ff-co-steamboat-springs",
         "hs-steamboat-chamber-yvha",
@@ -34290,13 +34643,30 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "hunter-mountain-denim-dash-pond-skim",
+            "name": "Denim Dash Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2026-03-28",
+            "end": "2026-03-28",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swna-greatnortherncatskills-denim-dash",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-timeout-ourbus-ski-routes",
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-hunter-mountain-ski-area",
         "ed-east-wikipedia-hunter-new-york",
         "ed-east-wikipedia-hunter-village-new-york",
+        "events-swna-greatnortherncatskills-denim-dash",
         "facts-gapfill-snowstash-hunter",
         "facts-northeast2-ots-northeast-openings",
         "jobs-fasterskier-jobpostings",
@@ -35886,7 +36256,7 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "vertical-challenge-finals-jay-peak",
@@ -35899,6 +36269,18 @@
             "source_id": "events-ceast-patspeak-vertical-challenge",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "jay-peak-annual-pond-skimming",
+            "name": "Annual Pond Skimming at Jay Peak",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-20",
+            "end": "2025-04-20",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swna-jaypeak-annual-pond-skimming",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -35908,6 +36290,7 @@
         "ed-east-wikipedia-jay-peak-resort",
         "ed-east-wikipedia-jay-vermont",
         "events-ceast-patspeak-vertical-challenge",
+        "events-swna-jaypeak-annual-pond-skimming",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "hs-jaypeak-employee-housing",
@@ -37650,12 +38033,29 @@
           }
         ]
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "keystone-pond-skim",
+            "name": "Keystone Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-06",
+            "end": "2025-04-06",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swra-cbs-keystone-pond-skim-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-wikipedia-us-bus-transit-systems",
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-keystone-colorado",
         "ed-west-wiki-keystone-resort",
+        "events-swra-cbs-keystone-pond-skim-2025",
         "facts-west1-kunc-keystone-2026",
         "facts-west1-snowstash-keystone-2023",
         "hs-ff-co-dillon",
@@ -37965,7 +38365,7 @@
         "tools": []
       },
       "events": {
-        "count": 6,
+        "count": 9,
         "items": [
           {
             "id": "fis-alpine-world-cup-killington",
@@ -38028,6 +38428,30 @@
             "confidence": "estimated"
           },
           {
+            "id": "killington-ski-bum-race-series",
+            "name": "Ski Bum Race Series",
+            "discipline_label": "Alpine racing",
+            "start": "2026-01-07",
+            "end": "2026-03-18",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swna-mountaintimes-ski-bum-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "killington-slash-and-berm-banked-slalom",
+            "name": "Slash & Berm Banked Slalom",
+            "discipline_label": "Banked slalom",
+            "start": "2026-03-06",
+            "end": "2026-03-08",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swna-mountaintimes-killington-events-2025-26",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
             "id": "killington-bear-mountain-mogul-challenge",
             "name": "Bear Mountain Mogul Challenge",
             "discipline_label": "Moguls",
@@ -38037,6 +38461,18 @@
             "published": false,
             "source_id": "events-ceast-mountaintimes-bmmc-2026",
             "as_of": "2026-10-17",
+            "confidence": "estimated"
+          },
+          {
+            "id": "killington-pond-skim",
+            "name": "Killington Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2026-04-11",
+            "end": "2026-04-11",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swna-mountaintimes-killington-events-2025-26",
+            "as_of": "2026-10-21",
             "confidence": "estimated"
           }
         ]
@@ -38052,6 +38488,8 @@
         "events-ceast-mountaintimes-loaded-turkey-2025",
         "events-freestyle-fis-2026-27-noram-sneak-peek",
         "events-instructor-mountaintimes-projam-2023-search",
+        "events-swna-mountaintimes-killington-events-2025-26",
+        "events-swna-mountaintimes-ski-bum-2026",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "hs-ff-vt-killington",
@@ -38472,7 +38910,7 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "kirkwood-legendary-banked-slalom",
@@ -38485,6 +38923,18 @@
             "source_id": "events-cwest-visitlaketahoe-kirkwood-banked-slalom",
             "as_of": "2026-10-20",
             "confidence": "estimated"
+          },
+          {
+            "id": "kirkwood-slush-cup",
+            "name": "Kirkwood Slush Cup",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-19",
+            "end": "2025-04-19",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swpa-visitlaketahoe-kirkwood-slush-cup",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -38493,6 +38943,7 @@
         "ed-west-wiki-kirkwood-california",
         "ed-west-wiki-kirkwood-mountain-resort",
         "events-cwest-visitlaketahoe-kirkwood-banked-slalom",
+        "events-swpa-visitlaketahoe-kirkwood-slush-cup",
         "facts-west2-un-ca-openings-2026",
         "facts-west2-visitlaketahoe-kirkwood",
         "hs-ff-ca-south-lake-tahoe",
@@ -42045,8 +42496,20 @@
         "tools": []
       },
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
+          {
+            "id": "mad-river-glen-rockefeller-challenge",
+            "name": "Rockefeller Challenge",
+            "discipline_label": "Uphill",
+            "start": "2025-03-15",
+            "end": "2025-03-15",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swnb-mrg-rockefeller-challenge",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "mad-river-glen-mogul-challenge",
             "name": "Mad River Glen Mogul Challenge",
@@ -42076,6 +42539,7 @@
         "ed-east-wikipedia-waitsfield-vermont",
         "events-ceast-mrg-calendar-february-2026",
         "events-ceast-mrg-racing-triple-crown",
+        "events-swnb-mrg-rockefeller-challenge",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "hs-ff-vt-waitsfield",
@@ -42640,10 +43104,27 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "magic-mountain-freeride-open",
+            "name": "Magic Mountain Freeride Open on Black Line",
+            "discipline_label": "Big mountain",
+            "start": "2026-02-21",
+            "end": "2026-02-21",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-magicmtn-freeride-open-black-line",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-east-wikipedia-londonderry-vermont",
         "ed-east-wikipedia-magic-mountain-ski-area",
+        "events-swnb-magicmtn-freeride-open-black-line",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "jobs-fasterskier-jobpostings",
@@ -43265,7 +43746,7 @@
         ]
       },
       "events": {
-        "count": 2,
+        "count": 5,
         "items": [
           {
             "id": "us-alpine-championships",
@@ -43290,6 +43771,36 @@
             "source_id": "events-cwest-localfreshies-banked-slalom-showcase",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "mammoth-caldera-burn",
+            "name": "Mammoth Caldera Burn",
+            "discipline_label": "Skimo",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swpa-mammothsnowman-events",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "mammoth-mountain-pond-skim",
+            "name": "Mammoth Mountain Pond Skim",
+            "discipline_label": "Pond skim",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swpa-mammoth-pond-skim-blog",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "mammoth-mountain-unbound-series",
+            "name": "Unbound Series",
+            "discipline_label": "Rail jam",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-mammoth-unbound-rail-jam-1",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -43299,6 +43810,9 @@
         "ed-west-wiki-mammoth-mountain-resort",
         "events-alpine-townlift-2027-nationals-search",
         "events-cwest-localfreshies-banked-slalom-showcase",
+        "events-swpa-mammoth-pond-skim-blog",
+        "events-swpa-mammoth-unbound-rail-jam-1",
+        "events-swpa-mammothsnowman-events",
         "facts-west2-activenorcal-mammoth-close",
         "facts-west2-un-ca-openings-2026",
         "hs-ff-ca-mammoth-lakes",
@@ -44643,7 +45157,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 1,
+        "count": 3,
         "items": [
           {
             "id": "middlebury-snow-bowl-rail-jam",
@@ -44655,6 +45169,27 @@
             "source_id": "events-ceast-middlebury-rail-jam-listing",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "middlebury-winter-carnival-alpine",
+            "name": "Middlebury Winter Carnival (alpine races)",
+            "discipline_label": "Alpine racing",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-middleburycampus-carnival-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "middlebury-ski-bum-league",
+            "name": "Ski Bum League",
+            "discipline_label": "Alpine racing",
+            "published": false,
+            "season_long": true,
+            "timing": "Most Fridays, 1:30 to 3 p.m., January to March",
+            "source_id": "events-swnb-minibury-ski-bum-league",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -44663,6 +45198,8 @@
         "ed-east-wikipedia-hancock-vermont",
         "ed-east-wikipedia-middlebury-college-snow-bowl",
         "events-ceast-middlebury-rail-jam-listing",
+        "events-swnb-middleburycampus-carnival-2026",
+        "events-swnb-minibury-ski-bum-league",
         "facts-northeast1-skiresort-middlebury",
         "jobs-fasterskier-jobpostings",
         "jobs-middlebury-workable-posting",
@@ -45753,10 +46290,27 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "montana-snowbowl-gelande-jump-competition",
+            "name": "Montana Snowbowl Gelande Jump Competition",
+            "discipline_label": "Ski jumping",
+            "start": "2025-02-22",
+            "end": "2025-02-23",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swra-montanarightnow-gelande-50th",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-west-wiki-missoula-montana",
         "ed-west-wiki-montana-snowbowl",
+        "events-swra-montanarightnow-gelande-50th",
         "facts-gapfill-ots-snowbowl",
         "facts-west3-wp-montana-snowbowl",
         "jobs-fasterskier-jobpostings",
@@ -46266,11 +46820,28 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "mount-bohemia-spring-serenade",
+            "name": "Spring Serenade Music Festival",
+            "discipline_label": "Fun race",
+            "start": "2026-03-20",
+            "end": "2026-03-22",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swms-bohemia-spring-serenade",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-east-wikipedia-keweenaw-county-michigan",
         "ed-east-wikipedia-lac-la-belle-michigan",
         "ed-east-wikipedia-mount-bohemia",
+        "events-swms-bohemia-spring-serenade",
         "facts-gapfill-ots-bohemia",
         "facts-gapfill-snowstash-bohemia",
         "openskimap-lift-mount-bohemia-honey-pot-hoist",
@@ -46524,7 +47095,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "mount-brighton-dew-after-dark",
@@ -46537,6 +47108,16 @@
             "source_id": "events-ceast-expeditiondetroit-big-four-2026",
             "as_of": "2026-10-20",
             "confidence": "estimated"
+          },
+          {
+            "id": "nastar-mount-brighton",
+            "name": "NASTAR at Mt. Brighton",
+            "discipline_label": "NASTAR",
+            "published": false,
+            "season_long": true,
+            "source_id": "events-swms-mtbrighton-newcomers",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -46544,6 +47125,7 @@
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-mount-brighton",
         "events-ceast-expeditiondetroit-big-four-2026",
+        "events-swms-mtbrighton-newcomers",
         "facts-gapfill-wilx-brighton-2025",
         "facts-midwest-wiki-comparison",
         "jobs-fasterskier-jobpostings",
@@ -48263,7 +48845,7 @@
         "tools": []
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "mount-snow-carinthia-classic",
@@ -48276,6 +48858,18 @@
             "source_id": "events-ceast-vail-vermont-tip-sheet-2025-26",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "mount-snow-sink-or-skim",
+            "name": "Sink or Skim",
+            "discipline_label": "Pond skim",
+            "start": "2025-03-22",
+            "end": "2025-03-22",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swnb-happyvermont-mount-snow-pond-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -48286,6 +48880,7 @@
         "ed-east-wikipedia-mount-snow",
         "ed-east-wikipedia-west-dover-vermont",
         "events-ceast-vail-vermont-tip-sheet-2025-26",
+        "events-swnb-happyvermont-mount-snow-pond-2025",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "facts-training-mountsnow-cert-snowboard-2627",
@@ -48785,11 +49380,52 @@
         },
         "tools": []
       },
-      "events": null,
+      "events": {
+        "count": 3,
+        "items": [
+          {
+            "id": "mount-sunapee-community-rail-jam-early-march",
+            "name": "Mount Sunapee Community Rail Jam (early March)",
+            "discipline_label": "Rail jam",
+            "start": "2026-03-01",
+            "end": "2026-03-01",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-skinh-epic-nh-spring-events-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "mount-sunapee-slush-cup",
+            "name": "Mount Sunapee Slush Cup",
+            "discipline_label": "Pond skim",
+            "start": "2026-03-28",
+            "end": "2026-03-28",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-skinh-epic-nh-spring-events-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "mount-sunapee-community-rail-jam-late-march",
+            "name": "Mount Sunapee Community Rail Jam (late March)",
+            "discipline_label": "Rail jam",
+            "start": "2026-03-29",
+            "end": "2026-03-29",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-skinh-epic-nh-spring-events-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-mount-sunapee-resort",
         "ed-east-wikipedia-newbury-new-hampshire",
+        "events-swnb-skinh-epic-nh-spring-events-2026",
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
         "hs-ff-nh-new-london",
@@ -49852,7 +50488,7 @@
         "tools": []
       },
       "events": {
-        "count": 4,
+        "count": 6,
         "items": [
           {
             "id": "dirksen-derby",
@@ -49901,6 +50537,30 @@
             "source_id": "events-nwest-cascade-crest-visitcentraloregon",
             "as_of": "2026-10-20",
             "confidence": "estimated"
+          },
+          {
+            "id": "selco-pole-pedal-paddle",
+            "name": "SELCO Pole Pedal Paddle",
+            "discipline_label": "Alpine racing",
+            "start": "2026-05-16",
+            "end": "2026-05-16",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-mbsef-ppp",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "mt-bachelor-north-american-pond-skimming-championships",
+            "name": "North American Pond Skimming Championships",
+            "discipline_label": "Pond skim",
+            "start": "2025-05-25",
+            "end": "2025-05-25",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swpa-nwskiers-bachelor-pond-skim-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -49913,6 +50573,8 @@
         "events-instructor-psia-national-events-calendar-search",
         "events-nwest-cascade-crest-visitcentraloregon",
         "events-nwest-great-nordeen-mbsef",
+        "events-swpa-mbsef-ppp",
+        "events-swpa-nwskiers-bachelor-pond-skim-2025",
         "facts-west2-wp-mount-bachelor",
         "hs-ff-or-bend",
         "jobs-fasterskier-jobpostings",
@@ -50229,7 +50891,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "mt-baker-legendary-banked-slalom",
@@ -50254,6 +50916,16 @@
             "source_id": "events-cwest-thefront-mtbaker-season",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "ski-to-sea-race",
+            "name": "Ski to Sea Race",
+            "discipline_label": "Cross country",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-whatcomtalk-ski-to-sea",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -50262,6 +50934,7 @@
         "ed-west-wiki-mt-baker-ski-area",
         "events-cwest-thefront-mtbaker-season",
         "events-freestyle-lbs-2027-postponement",
+        "events-swpa-whatcomtalk-ski-to-sea",
         "facts-training-mtbaker-application-process",
         "facts-west2-fox13-wa-openings",
         "facts-west2-wp-mt-baker",
@@ -50987,11 +51660,39 @@
         },
         "tools": []
       },
-      "events": null,
+      "events": {
+        "count": 2,
+        "items": [
+          {
+            "id": "mt-hood-meadows-mazotfest",
+            "name": "Mazotfest",
+            "discipline_label": "Fun race",
+            "published": false,
+            "season_long": true,
+            "timing": "Usually April",
+            "source_id": "events-swpa-columbiagorgenews-meadows-spring",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "mt-hood-meadows-sno-kona-pond-skim",
+            "name": "Sno-Kona Pond Skim",
+            "discipline_label": "Pond skim",
+            "published": false,
+            "season_long": true,
+            "timing": "Spring, as part of the resort's spring events",
+            "source_id": "events-swpa-sin-meadows-spring-events",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-west-wiki-government-camp-oregon",
         "ed-west-wiki-hood-river-oregon",
         "ed-west-wiki-mount-hood-meadows",
+        "events-swpa-columbiagorgenews-meadows-spring",
+        "events-swpa-sin-meadows-spring-events",
         "facts-west2-koin-meadows-openings",
         "facts-west2-ots-pnw-closing",
         "hs-ff-or-welches",
@@ -53080,7 +53781,7 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "psia-aasi-freestyle-academy",
@@ -53093,6 +53794,16 @@
             "source_id": "events-instructor-psia-national-events-p8176-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "northstar-pond-skim",
+            "name": "Northstar Pond Skim",
+            "discipline_label": "Pond skim",
+            "season": "2023/24",
+            "published": false,
+            "source_id": "events-swpa-sierrarec-northstar-pond-skim-2024",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -53103,6 +53814,7 @@
         "ed-west-wiki-northstar-california",
         "ed-west-wiki-truckee-california",
         "events-instructor-psia-national-events-p8176-search",
+        "events-swpa-sierrarec-northstar-pond-skim-2024",
         "facts-west2-snowstash-northstar",
         "facts-west2-un-ca-openings-2026",
         "hs-ff-ca-truckee",
@@ -53362,7 +54074,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "psia-c-fall-opener",
@@ -53385,12 +54097,23 @@
             "source_id": "events-ceast-nubsnob-calendar",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "nubs-nob-speed-series",
+            "name": "Völkl/Marker/Dalbello Speed Series",
+            "discipline_label": "Alpine racing",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swms-nubsnob-speed-series-rules-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
       "sources": [
         "events-ceast-nubsnob-calendar",
         "events-instructor-psia-2024-25-calendar-search",
+        "events-swms-nubsnob-speed-series-rules-2026",
         "facts-gapfill-ots-nubs",
         "facts-midwest-wiki-nubs-nob",
         "openskimap-ski-areas"
@@ -54145,12 +54868,28 @@
         },
         "tools": []
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "okemo-innkeepers-race-series",
+            "name": "Innkeepers Race Series",
+            "discipline_label": "Alpine racing",
+            "start": "2026-01-05",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-mountaintimes-innkeepers-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-wikipedia-southeast-vermont-transit",
         "ed-east-vail-10k-fy2026",
         "ed-east-wikipedia-ludlow-town-vermont",
         "ed-east-wikipedia-okemo-mountain",
+        "events-swnb-mountaintimes-innkeepers-2025",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "hs-ff-vt-ludlow",
@@ -54936,7 +55675,7 @@
         ]
       },
       "events": {
-        "count": 4,
+        "count": 7,
         "items": [
           {
             "id": "ifsa-fwt-qualifier-palisades-tahoe",
@@ -54948,6 +55687,18 @@
             "published": true,
             "source_id": "events-freestyle-ifsa-venue-palisades",
             "as_of": "2026-10-17",
+            "confidence": "estimated"
+          },
+          {
+            "id": "palisades-tahoe-town-race-league",
+            "name": "Palisades Tahoe Town Race League",
+            "discipline_label": "Alpine racing",
+            "start": "2025-03-05",
+            "end": "2025-04-09",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swpa-activenorcal-palisades-town-race-league",
+            "as_of": "2026-10-21",
             "confidence": "estimated"
           },
           {
@@ -54975,6 +55726,30 @@
             "confidence": "estimated"
           },
           {
+            "id": "palisades-tahoe-rahlves-banzai-tour",
+            "name": "Rahlves' Banzai Tour",
+            "discipline_label": "Ski cross",
+            "start": "2026-04-10",
+            "end": "2026-04-12",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-southtahoenow-banzai-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "palisades-tahoe-kt22-rail-jam",
+            "name": "Rail Jam Competition at Palisades Tahoe",
+            "discipline_label": "Rail jam",
+            "start": "2024-04-19",
+            "end": "2024-04-19",
+            "season": "2023/24",
+            "published": false,
+            "source_id": "events-swpa-gotahoenorth-palisades-rail-jam",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
             "id": "cushing-crossing-pond-skim",
             "name": "Cushing Crossing Pond Skim",
             "discipline_label": "Pond skim",
@@ -54997,6 +55772,9 @@
         "events-cwest-truckee-chamber-pain-mcshlonkey",
         "events-freestyle-ifsa-venue-palisades",
         "events-freestyle-usss-mogul-championships",
+        "events-swpa-activenorcal-palisades-town-race-league",
+        "events-swpa-gotahoenorth-palisades-rail-jam",
+        "events-swpa-southtahoenow-banzai-2026",
         "facts-west2-un-ca-openings-2026",
         "facts-west2-un-palisades-close-2026",
         "hs-ff-ca-tahoe-city",
@@ -56121,7 +56899,7 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "huntsman-cup",
@@ -56134,6 +56912,18 @@
             "source_id": "events-alpine-nac-huntsman-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "park-city-pond-skim",
+            "name": "Park City Mountain Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-12",
+            "end": "2025-04-12",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swra-kpcw-park-city-pond-skim-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -56142,6 +56932,7 @@
         "ed-west-wiki-park-city-mountain-resort",
         "ed-west-wiki-park-city-utah",
         "events-alpine-nac-huntsman-search",
+        "events-swra-kpcw-park-city-pond-skim-2025",
         "facts-west1-kpcw-parkcity-close-2025",
         "facts-west1-townlift-parkcity-2024",
         "hs-alta-employee-housing",
@@ -56786,7 +57577,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 1,
+        "count": 5,
         "items": [
           {
             "id": "perfect-north-winter-welcome-rail-jam",
@@ -56799,11 +57590,60 @@
             "source_id": "events-ceast-perfectnorth-winter-welcome-rail-jam",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "perfect-north-annual-big-air",
+            "name": "Annual Big Air",
+            "discipline_label": "Big air",
+            "start": "2027-02-05",
+            "end": "2027-02-05",
+            "season": "2026/27",
+            "published": true,
+            "source_id": "events-swms-perfectnorth-big-air",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "perfect-north-blacklist-rail-jam",
+            "name": "Blacklist Rail Jam",
+            "discipline_label": "Rail jam",
+            "start": "2026-02-21",
+            "end": "2026-02-21",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swms-perfectnorth-blacklist",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "perfect-north-public-races",
+            "name": "Public Races at Perfect North Slopes",
+            "discipline_label": "Alpine racing",
+            "published": false,
+            "season_long": true,
+            "source_id": "events-swms-perfectnorth-racing",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "perfect-north-spring-carnival",
+            "name": "Spring Carnival",
+            "discipline_label": "Rail jam",
+            "published": false,
+            "season_long": true,
+            "timing": "End of the ski season",
+            "source_id": "events-swms-perfectnorth-spring-carnival",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
       "sources": [
         "events-ceast-perfectnorth-winter-welcome-rail-jam",
+        "events-swms-perfectnorth-big-air",
+        "events-swms-perfectnorth-blacklist",
+        "events-swms-perfectnorth-racing",
+        "events-swms-perfectnorth-spring-carnival",
         "facts-gapfill-ots-perfectnorth",
         "facts-midwest-wiki-perfect-north-slopes",
         "openskimap-ski-areas",
@@ -57166,8 +58006,20 @@
         "tools": []
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
+          {
+            "id": "pico-90-pound-rucksack-challenge",
+            "name": "90-Pound Rucksack Challenge",
+            "discipline_label": "Uphill",
+            "start": "2026-02-18",
+            "end": "2026-02-18",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-mountaintimes-pico-lineup-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "vertical-challenge-pico",
             "name": "Vertical Challenge at Pico Mountain",
@@ -57188,6 +58040,7 @@
         "ed-east-wikipedia-killington-vermont",
         "ed-east-wikipedia-pico-mountain",
         "events-ceast-pico-vertical-challenge",
+        "events-swnb-mountaintimes-pico-lineup-2025",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "hs-ff-vt-killington",
@@ -58753,7 +59606,7 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 4,
         "items": [
           {
             "id": "powder-mountain-knucklehead-rail-jam",
@@ -58790,6 +59643,16 @@
             "source_id": "events-backcountry-telemark-skiing-no-joke-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "powder-mountain-natural-selection-tour",
+            "name": "Natural Selection Tour at Powder Mountain",
+            "discipline_label": "Big mountain",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swrb-townlift-natural-selection-powmow",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -58800,6 +59663,7 @@
         "events-backcountry-telemark-skiing-no-joke-search",
         "events-cwest-powdermountain-knucklehead-rail-jam",
         "events-cwest-townlift-turn-n-burn-2026",
+        "events-swrb-townlift-natural-selection-powmow",
         "facts-west1-fox13-utah-closings-2025",
         "facts-west1-kpcw-utah-openings-2025",
         "hs-alta-employee-housing",
@@ -61805,10 +62669,27 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "fisk-trophy-race",
+            "name": "Fisk Trophy Race",
+            "discipline_label": "Alpine racing",
+            "start": "2026-02-08",
+            "end": "2026-02-08",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-wcax-saskadena-six-90-seasons",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-east-wikipedia-saskadena-six",
         "ed-east-wikipedia-woodstock-vermont",
+        "events-swnb-wcax-saskadena-six-90-seasons",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "jobs-fasterskier-jobpostings",
@@ -62498,11 +63379,28 @@
           }
         ]
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "schweitzer-snow-ghost-banked-slalom",
+            "name": "Snow Ghost Banked Slalom",
+            "discipline_label": "Banked slalom",
+            "start": "2025-03-29",
+            "end": "2025-03-30",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swrb-schweitzer-snow-ghost",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-schweitzer-directions",
         "ed-west-wiki-sandpoint-idaho",
         "ed-west-wiki-schweitzer-mountain",
+        "events-swrb-schweitzer-snow-ghost",
         "facts-gapfill-skiresortcom-schweitzer",
         "hs-bcdb-schweitzer-2021",
         "hs-ff-id-sandpoint",
@@ -63055,7 +63953,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "special-olympics-pennsylvania-winter-games",
@@ -63080,6 +63978,17 @@
             "source_id": "events-ceast-snowbrains-vail-mid-atlantic",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "seven-springs-pond-skim",
+            "name": "Seven Springs Pond Skim",
+            "discipline_label": "Pond skim",
+            "published": false,
+            "season_long": true,
+            "timing": "End of the ski season",
+            "source_id": "events-swnb-discovertheburgh-seven-springs-pond-skim",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -63089,6 +63998,7 @@
         "ed-east-wikipedia-seven-springs-pennsylvania",
         "events-alpine-sopa-winter-games-search",
         "events-ceast-snowbrains-vail-mid-atlantic",
+        "events-swnb-discovertheburgh-seven-springs-pond-skim",
         "facts-northeast2-seven-springs-wikipedia",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
@@ -63960,10 +64870,25 @@
       "trailmap_available": true,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "silverton-mountain-san-juan-showdown",
+            "name": "San Juan Showdown (IFSA FWT Challenger at Silverton Mountain)",
+            "discipline_label": "Big mountain",
+            "season": "2023/24",
+            "published": false,
+            "source_id": "events-swrb-fwt-challenger-silverton-2024",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-west-wiki-silverton-colorado",
         "ed-west-wiki-silverton-mountain",
+        "events-swrb-fwt-challenger-silverton-2024",
         "facts-gapfill-dirco-silverton",
         "jobs-fasterskier-jobpostings",
         "jobs-silverton-employment",
@@ -65266,11 +66191,28 @@
           }
         ]
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "ski-cooper-cooper-cups",
+            "name": "Cooper Cups",
+            "discipline_label": "Alpine racing",
+            "start": "2024-01-21",
+            "end": "2024-01-21",
+            "season": "2023/24",
+            "published": false,
+            "source_id": "events-swrb-raceentry-cooper-cup",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-summit-daily-ski-cooper-shuttle",
         "ed-west-wiki-leadville-colorado",
         "ed-west-wiki-ski-cooper",
+        "events-swrb-raceentry-cooper-cup",
         "facts-west1-skicooper-site",
         "hs-ff-co-leadville",
         "hs-frisco-renter-resources",
@@ -68714,11 +69656,28 @@
           }
         ]
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "snowbasin-pond-skim",
+            "name": "Snowbasin Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-12",
+            "end": "2025-04-12",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swrb-snowbasin-pond-skim",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-huntsville-utah",
         "ed-west-wiki-snowbasin",
+        "events-swrb-snowbasin-pond-skim",
         "facts-west1-wiki-snowbasin",
         "hs-alta-employee-housing",
         "hs-ff-ut-eden",
@@ -69796,7 +70755,7 @@
         ]
       },
       "events": {
-        "count": 5,
+        "count": 6,
         "items": [
           {
             "id": "audi-power-of-four-skimo",
@@ -69808,6 +70767,18 @@
             "published": false,
             "source_id": "events-backcountry-aspensnowmass-power-of-four-search",
             "as_of": "2026-10-17",
+            "confidence": "estimated"
+          },
+          {
+            "id": "snowmass-mountain-challenge",
+            "name": "Mountain Challenge",
+            "discipline_label": "Fun race",
+            "start": "2026-03-20",
+            "end": "2026-04-03",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swrb-aspensnowmass-mountain-challenge",
+            "as_of": "2026-10-21",
             "confidence": "estimated"
           },
           {
@@ -69867,6 +70838,7 @@
         "events-cwest-aspensnowmass-town-race-series",
         "events-cwest-gosnowmass-banked-slalom",
         "events-instructor-psia-road-trip-spring-2024-search",
+        "events-swrb-aspensnowmass-mountain-challenge",
         "facts-training-aspen-employment",
         "facts-west1-aspen-opening-2025",
         "facts-west1-aspensnowmass-snowmass",
@@ -70229,8 +71201,42 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 2,
+        "count": 5,
         "items": [
+          {
+            "id": "snowshoe-cupp-run-challenge",
+            "name": "Cupp Run Challenge",
+            "discipline_label": "Alpine racing",
+            "start": "2026-02-02",
+            "end": "2026-02-02",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swms-snowshoe-2526-schedule",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "snowshoe-creek-meets",
+            "name": "Creek Meets",
+            "discipline_label": "Alpine racing",
+            "start": "2026-02-12",
+            "end": "2026-02-12",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swms-snowshoe-creek-meets",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "snowshoe-spruce-run-banked-slalom",
+            "name": "Banked Slalom on Spruce Run",
+            "discipline_label": "Banked slalom",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swms-snowshoe-2526-schedule",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "snowshoe-silver-creek-rail-jam",
             "name": "Silver Creek Rail Jam",
@@ -70259,6 +71265,8 @@
         "ed-east-wikipedia-snowshoe-mountain",
         "ed-east-wikipedia-snowshoe-west-virginia",
         "events-ceast-snowshoe-2526-schedule",
+        "events-swms-snowshoe-2526-schedule",
+        "events-swms-snowshoe-creek-meets",
         "facts-northeast2-snowshoe-ots",
         "facts-training-snowshoe-instructor",
         "jobs-alterra-corporate-posting",
@@ -72054,7 +73062,7 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "steamboat-pond-skim",
@@ -72067,6 +73075,18 @@
             "source_id": "events-backcountry-uncovercolorado-steamboat-pond-skim-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "steamboat-cowboy-downhill",
+            "name": "Cowboy Downhill",
+            "discipline_label": "Fun race",
+            "start": "2026-01-19",
+            "end": "2026-01-19",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swrb-kidsintown-cowboy-downhill-51",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -72076,6 +73096,7 @@
         "ed-west-wiki-steamboat-springs-colorado",
         "ed-west-wiki-steamboat-springs-winter-sports-club",
         "events-backcountry-uncovercolorado-steamboat-pond-skim-search",
+        "events-swrb-kidsintown-cowboy-downhill-51",
         "facts-west1-denvergazette-steamboat-2026",
         "facts-west1-dircom-steamboat",
         "hs-ff-co-steamboat-springs",
@@ -72520,10 +73541,38 @@
         },
         "tools": []
       },
-      "events": null,
+      "events": {
+        "count": 2,
+        "items": [
+          {
+            "id": "stevens-pass-springfest-pond-skim",
+            "name": "Springfest Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2026-04-12",
+            "end": "2026-04-12",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-localfreshies-stevens-springfest-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "stevens-pass-slayride-banked-slalom",
+            "name": "Slayride Banked Slalom",
+            "discipline_label": "Banked slalom",
+            "season": "2017/18",
+            "published": false,
+            "source_id": "events-swpa-tsj-slayride-2018",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "ed-west-vail-10k-fy2026",
         "ed-west-wiki-stevens-pass-ski-area",
+        "events-swpa-localfreshies-stevens-springfest-2026",
+        "events-swpa-tsj-slayride-2018",
         "facts-west2-fox13-wa-openings",
         "facts-west2-ots-wa-closing",
         "hs-ff-wa-leavenworth",
@@ -73025,7 +74074,7 @@
         "tools": []
       },
       "events": {
-        "count": 3,
+        "count": 4,
         "items": [
           {
             "id": "stifel-noram-cup-stowe",
@@ -73062,6 +74111,18 @@
             "source_id": "events-backcountry-vermontpublic-stowe-heritage-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "stowe-sugar-slalom",
+            "name": "Stowe Sugar Slalom",
+            "discipline_label": "Alpine racing",
+            "start": "2026-04-04",
+            "end": "2026-04-05",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-adminskiracing-sugar-slalom-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -73073,6 +74134,7 @@
         "events-alpine-ncaa-skiing-search",
         "events-alpine-usss-2026-27-events-search",
         "events-backcountry-vermontpublic-stowe-heritage-search",
+        "events-swnb-adminskiracing-sugar-slalom-2026",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "facts-training-stowe-noncert-snowboard-2627",
@@ -73498,13 +74560,81 @@
           }
         ]
       },
-      "events": null,
+      "events": {
+        "count": 5,
+        "items": [
+          {
+            "id": "stratton-in-a-pickle-rail-jam",
+            "name": "In a Pickle Rail Jam",
+            "discipline_label": "Rail jam",
+            "start": "2025-12-13",
+            "end": "2025-12-13",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-stratton-rail-jam",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "shred4nate-memorial-alpine-race",
+            "name": "#Shred4Nate Memorial Alpine Race",
+            "discipline_label": "Alpine racing",
+            "start": "2026-03-14",
+            "end": "2026-03-14",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-stratton-blog-spring-events-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "24-hours-of-stratton",
+            "name": "24 Hours of Stratton",
+            "discipline_label": "Lap and vertical challenge",
+            "start": "2026-03-14",
+            "end": "2026-03-15",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-stratton-blog-spring-events-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "homesick-stratton",
+            "name": "HOMESICK",
+            "discipline_label": "Rail jam",
+            "start": "2026-03-20",
+            "end": "2026-03-22",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-stratton-sick-home",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "stratton-pond-skim",
+            "name": "Stratton Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-06",
+            "end": "2025-04-06",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swnb-stratton-pond-skim",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-stratton-public-transit",
         "ed-east-wikipedia-stratton-mountain-resort",
         "ed-east-wikipedia-stratton-mountain-school",
         "ed-east-wikipedia-stratton-vermont",
         "ed-east-wikipedia-winhall-vermont",
+        "events-swnb-stratton-blog-spring-events-2026",
+        "events-swnb-stratton-pond-skim",
+        "events-swnb-stratton-rail-jam",
+        "events-swnb-stratton-sick-home",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "hs-manchesterjournal-stratton-2024",
@@ -73951,8 +75081,32 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 4,
         "items": [
+          {
+            "id": "sugar-bowl-uphiller-evening-series",
+            "name": "Uphiller Evening Series",
+            "discipline_label": "Uphill",
+            "start": "2026-01-15",
+            "end": "2026-03-12",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-newsbreak-sugar-bowl-uphiller",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "sugar-bowl-uphiller",
+            "name": "Sugar Bowl Uphiller",
+            "discipline_label": "Uphill",
+            "start": "2026-03-14",
+            "end": "2026-03-14",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-newsbreak-sugar-bowl-uphiller",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
           {
             "id": "sugar-bowl-silver-belt",
             "name": "Silver Belt",
@@ -73964,6 +75118,16 @@
             "source_id": "events-cwest-sugarbowl-silver-belt",
             "as_of": "2026-10-20",
             "confidence": "estimated"
+          },
+          {
+            "id": "sugar-bowl-pond-skim",
+            "name": "Sugar Bowl Pond Skim",
+            "discipline_label": "Pond skim",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-newsbreak-sugar-bowl-uphiller",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -73972,6 +75136,7 @@
         "career-followups-sugarbowl-privates",
         "ed-west-wiki-sugar-bowl-ski-resort",
         "events-cwest-sugarbowl-silver-belt",
+        "events-swpa-newsbreak-sugar-bowl-uphiller",
         "facts-gapfill-ots-sugarbowl",
         "facts-west2-un-ca-openings-2026",
         "hs-ff-ca-truckee",
@@ -74494,7 +75659,7 @@
         "tools": []
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "psia-e-spring-rally",
@@ -74507,6 +75672,18 @@
             "source_id": "events-instructor-psia-road-trip-spring-2024-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "sugarbush-pond-skim",
+            "name": "Pond Skimming at Sugarbush Resort",
+            "discipline_label": "Pond skim",
+            "start": "2025-04-05",
+            "end": "2025-04-05",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swnb-happyvermont-sugarbush-pond-skim",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -74518,6 +75695,7 @@
         "ed-east-wikipedia-waitsfield-vermont",
         "ed-east-wikipedia-warren-vermont",
         "events-instructor-psia-road-trip-spring-2024-search",
+        "events-swnb-happyvermont-sugarbush-pond-skim",
         "facts-northeast1-ots-vt-close",
         "facts-northeast1-ots-vt-open",
         "hs-ff-vt-waitsfield",
@@ -76572,7 +77750,7 @@
         "tools": []
       },
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "sunday-river-bust-n-burn",
@@ -76585,6 +77763,18 @@
             "source_id": "events-ceast-endurancegrid-bnb-2027",
             "as_of": "2026-10-20",
             "confidence": "estimated"
+          },
+          {
+            "id": "sunday-river-pond-a-palooza",
+            "name": "Pond-A-Palooza",
+            "discipline_label": "Pond skim",
+            "start": "2026-03-29",
+            "end": "2026-03-29",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-lake-pond-a-palooza",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -76596,6 +77786,7 @@
         "ed-east-wikipedia-newry-maine",
         "ed-east-wikipedia-sunday-river-ski-resort",
         "events-ceast-endurancegrid-bnb-2027",
+        "events-swnb-lake-pond-a-palooza",
         "facts-northeast1-ots-sunday-river",
         "hs-ff-me-bethel",
         "jobs-boyne-careers-home",
@@ -77830,11 +79021,40 @@
         },
         "tools": []
       },
-      "events": null,
+      "events": {
+        "count": 2,
+        "items": [
+          {
+            "id": "taos-k2-bumps-challenge",
+            "name": "K2 Bumps Challenge",
+            "discipline_label": "Lap and vertical challenge",
+            "start": "2020-02-15",
+            "end": "2020-02-15",
+            "season": "2019/20",
+            "published": false,
+            "source_id": "events-swrb-b4bc-k2-bumps-2020",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "taos-freeride-competition",
+            "name": "Taos Freeride Competition",
+            "discipline_label": "Big mountain",
+            "start": "2026-03-05",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swrb-taos-org-freeride",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-wikipedia-taos-new-mexico",
         "ed-west-wiki-taos-new-mexico",
         "ed-west-wiki-taos-ski-valley",
+        "events-swrb-b4bc-k2-bumps-2020",
+        "events-swrb-taos-org-freeride",
         "facts-gapfill-kob-taos-close",
         "facts-gapfill-taos-pr-2026",
         "hs-ff-nm-taos",
@@ -78234,7 +79454,7 @@
         ]
       },
       "events": {
-        "count": 1,
+        "count": 3,
         "items": [
           {
             "id": "skidola",
@@ -78247,6 +79467,30 @@
             "source_id": "events-backcountry-runsignup-skidola-2027-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "telluride-bank-robbery-banked-slalom",
+            "name": "Telluride Bank Robbery Banked Slalom",
+            "discipline_label": "Banked slalom",
+            "start": "2025-03-30",
+            "end": "2025-03-30",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swrb-telluridenews-spring-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "telluride-hanorama-jamma",
+            "name": "Hanorama Jamma",
+            "discipline_label": "Rail jam",
+            "start": "2025-04-05",
+            "end": "2025-04-05",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swrb-telluridenews-spring-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -78257,6 +79501,7 @@
         "ed-west-wiki-telluride-colorado",
         "ed-west-wiki-telluride-ski-resort",
         "events-backcountry-runsignup-skidola-2027-search",
+        "events-swrb-telluridenews-spring-2025",
         "facts-training-telluride-coolworks-jobs",
         "facts-west1-telluride-dates-2024-25",
         "facts-west1-telluridenews-close-2026",
@@ -79005,7 +80250,7 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 1,
+        "count": 2,
         "items": [
           {
             "id": "nastar-the-highlands",
@@ -79016,6 +80261,17 @@
             "source_id": "events-alpine-wiki-nastar",
             "as_of": "2026-10-17",
             "confidence": "reported"
+          },
+          {
+            "id": "the-highlands-slush-cup",
+            "name": "Slush Cup",
+            "discipline_label": "Pond skim",
+            "published": false,
+            "season_long": true,
+            "timing": "End of the ski season; registration 9 am to 1:30 pm, competition at 2 pm",
+            "source_id": "events-swms-highlands-slush-cup",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -79024,6 +80280,7 @@
         "ed-east-wikipedia-harbor-springs-michigan",
         "ed-east-wikipedia-the-highlands-at-harbor-springs",
         "events-alpine-wiki-nastar",
+        "events-swms-highlands-slush-cup",
         "facts-gapfill-highlands-pr-2026",
         "facts-gapfill-ots-highlands",
         "facts-midwest-wiki-comparison",
@@ -80472,13 +81729,30 @@
           }
         ]
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "timberline-knucklehuck-rail-jam",
+            "name": "Knucklehuck Rail Jam",
+            "discipline_label": "Rail jam",
+            "start": "2026-03-07",
+            "end": "2026-03-07",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swpa-addcal-knucklehuck-rail-jam",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-wikipedia-mount-hood-express",
         "ed-west-wiki-government-camp-oregon",
         "ed-west-wiki-magic-mile",
         "ed-west-wiki-timberline-lodge",
         "ed-west-wiki-timberline-lodge-ski-area",
+        "events-swpa-addcal-knucklehuck-rail-jam",
         "facts-gapfill-katu-timberline",
         "facts-gapfill-tgr-timberline-287",
         "facts-gapfill2-un-timberline-2026",
@@ -80784,11 +82058,26 @@
         },
         "tools": []
       },
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "timberline-wyeast-cup",
+            "name": "Wy'East Cup",
+            "discipline_label": "Masters racing",
+            "season": "2024/25",
+            "published": false,
+            "source_id": "events-swpa-adminskiracing-wyeast-2025",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
         "access-wikipedia-mount-hood-express",
         "ed-west-wiki-palmer-glacier",
         "ed-west-wiki-timberline-lodge-ski-area",
+        "events-swpa-adminskiracing-wyeast-2025",
         "hs-ff-or-welches",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
@@ -82352,7 +83641,7 @@
         ]
       },
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "toyota-us-aerial-freestyle-championships",
@@ -82377,6 +83666,18 @@
             "source_id": "events-freestyle-fis-2026-27-noram-sneak-peek",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "utah-olympic-park-pond-skim",
+            "name": "Utah Olympic Park Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2026-04-04",
+            "end": "2026-04-04",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swrb-tgr-utah-spring-2026",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -82386,6 +83687,7 @@
         "ed-west-wiki-utah-olympic-park",
         "events-freestyle-fis-2026-27-noram-sneak-peek",
         "events-freestyle-usss-freestyle-event-series",
+        "events-swrb-tgr-utah-spring-2026",
         "hs-alta-employee-housing",
         "hs-ff-ut-park-city",
         "hs-kpcw-werip-2024",
@@ -83942,7 +85244,7 @@
       },
       "housing_search": null,
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "fis-freestyle-world-cup-waterville-valley",
@@ -83967,6 +85269,18 @@
             "source_id": "events-alpine-sonh-winter-games-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "waterville-valley-last-run-luau-pond-skim",
+            "name": "Last Run Luau and Pond Skim",
+            "discipline_label": "Pond skim",
+            "start": "2024-04-06",
+            "end": "2024-04-06",
+            "season": "2023/24",
+            "published": false,
+            "source_id": "events-swnb-skinh-waterville-luau-2024",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -83976,6 +85290,7 @@
         "ed-east-wikipedia-waterville-valley-resort",
         "events-alpine-sonh-winter-games-search",
         "events-freestyle-usss-2026-27-domestic-wc-release",
+        "events-swnb-skinh-waterville-luau-2024",
         "facts-northeast1-ots-waterville-valley",
         "jobs-fasterskier-jobpostings",
         "jobs-skiracing-job-board",
@@ -85037,7 +86352,7 @@
         "tools": []
       },
       "events": {
-        "count": 2,
+        "count": 3,
         "items": [
           {
             "id": "stifel-noram-cup-whiteface",
@@ -85049,6 +86364,18 @@
             "published": true,
             "source_id": "events-alpine-usss-2026-27-events-search",
             "as_of": "2026-10-17",
+            "confidence": "estimated"
+          },
+          {
+            "id": "tour-de-face",
+            "name": "Tour De Face",
+            "discipline_label": "Uphill",
+            "start": "2026-01-31",
+            "end": "2026-01-31",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-swnb-whitefaceregion-tour-de-face",
+            "as_of": "2026-10-21",
             "confidence": "estimated"
           },
           {
@@ -85072,6 +86399,7 @@
         "ed-east-wikipedia-wilmington-new-york",
         "events-alpine-uscsa-nationals-search",
         "events-alpine-usss-2026-27-events-search",
+        "events-swnb-whitefaceregion-tour-de-face",
         "facts-northeast2-ots-northeast-openings",
         "facts-northeast2-ots-triple-play-closing",
         "hs-ff-ny-lake-placid",
@@ -85343,7 +86671,7 @@
         "tools": []
       },
       "events": {
-        "count": 4,
+        "count": 7,
         "items": [
           {
             "id": "ifsa-fwt-qualifier-whitefish",
@@ -85355,6 +86683,17 @@
             "published": true,
             "source_id": "events-freestyle-ifsa-events-2027",
             "as_of": "2026-10-17",
+            "confidence": "estimated"
+          },
+          {
+            "id": "whitefish-january-jam",
+            "name": "January Jam",
+            "discipline_label": "Rail jam",
+            "start": "2024-01-20",
+            "season": "2023/24",
+            "published": false,
+            "source_id": "events-swrb-flatheadbeacon-wmr-events",
+            "as_of": "2026-10-21",
             "confidence": "estimated"
           },
           {
@@ -85390,6 +86729,28 @@
             "source_id": "events-cwest-localfreshies-nate-chute-2026",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "whitefish-new-years-eve-rail-jam",
+            "name": "New Year's Eve Rail Jam",
+            "discipline_label": "Rail jam",
+            "published": false,
+            "season_long": true,
+            "timing": "New Year's Eve",
+            "source_id": "events-swrb-flatheadbeacon-nye-rail-jam",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
+          },
+          {
+            "id": "whitefish-wednesday-night-skimo-league",
+            "name": "Wednesday Night Skimo Race League",
+            "discipline_label": "Skimo",
+            "published": false,
+            "season_long": true,
+            "timing": "Wednesday nights in January; every race starts at 6pm",
+            "source_id": "events-swrb-flatheadbeacon-wmr-events",
+            "as_of": "2026-10-21",
+            "confidence": "estimated"
           }
         ]
       },
@@ -85401,6 +86762,8 @@
         "events-backcountry-skiwhitefish-whiteout-search",
         "events-cwest-localfreshies-nate-chute-2026",
         "events-freestyle-ifsa-events-2027",
+        "events-swrb-flatheadbeacon-nye-rail-jam",
+        "events-swrb-flatheadbeacon-wmr-events",
         "facts-gapfill-ots-whitefish",
         "hs-ff-mt-whitefish",
         "jobs-fasterskier-jobpostings",

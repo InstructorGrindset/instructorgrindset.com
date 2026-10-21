@@ -1,6 +1,7 @@
 # SYNTHETIC TEST FIXTURE for the map's EVENTS mode (tests only; never copied to data/). Fictional events, venues and
 # organizers at the fictional fixture resorts of make_fixtures.py; every source points at example.com.
-# make_fixtures.py compiles it with pipeline/events.py into tests/map/fixtures/events.json and events-summary.json.
+# make_fixtures.py compiles it with pipeline/events.py into tests/map/fixtures/events.json, events-summary.json and
+# events-search.json.
 # The browser test runs at 2026-10-13: Sign up is open for the rail jam and the loppet, opens later for the exam.
 batch: events-map-fixture
 researched_date: 2026-10-01
@@ -20,6 +21,7 @@ sources:
   - {id: fixture-ev-fun, url: https://example.com/fixture/events/fun, title: "Synthetic fixture: fun race page", accessed_date: 2026-10-01}
   - {id: fixture-ev-clinic, url: https://example.com/fixture/events/clinic, title: "Synthetic fixture: spring clinic page", accessed_date: 2026-10-01}
   - {id: fixture-ev-calendar, url: https://example.com/fixture/events/calendar, title: "Synthetic fixture: events calendar", accessed_date: 2026-10-01}
+  - {id: fixture-ev-bumps, url: https://example.com/fixture/events/bumps, title: "Synthetic fixture: community events page", accessed_date: 2026-10-01}
 venues:
   - id: fixture-lake-trail
     name: Fixture Lake Trail
@@ -94,6 +96,23 @@ events:
     last_edition: {start: 2026-03-07, end: 2026-03-07, season: 2025/26, source_id: fixture-ev-skimo, as_of: 2026-10-01, confidence: estimated, note: From a search result for this page; page not opened.}
     usual_timing: {value: Early March, source_id: fixture-ev-skimo, as_of: 2026-10-01, confidence: estimated}
     website: {value: https://example.com/fixture/events/skimo, source_id: fixture-ev-skimo, as_of: 2026-10-01, confidence: estimated}
+  # Timing given only as a season word (like Gunbarrel 25 at Heavenly): config events.season_words puts it under
+  # March, April and May; the panel shows the sourced word, never a date.
+  - id: bravo-bowl-bumpathon
+    name: Bumpathon 25
+    discipline: endurance
+    levels: [open_amateur]
+    venue: {resort_id: bravo-bowl}
+    last_edition: {season: 2025/26, source_id: fixture-ev-bumps, as_of: 2026-10-01, confidence: estimated}
+    usual_timing: {value: Spring, source_id: fixture-ev-bumps, as_of: 2026-10-01, confidence: estimated}
+    website: {value: https://example.com/fixture/events/bumps, source_id: fixture-ev-bumps, as_of: 2026-10-01, confidence: estimated}
+  # No date and no timing: in no month, listed under "date not yet published", still found by the search box.
+  - id: bravo-bowl-skin-up
+    name: Summit Skin Up
+    discipline: uphill
+    levels: [open_amateur]
+    venue: {resort_id: bravo-bowl}
+    last_edition: {season: 2025/26, source_id: fixture-ev-bumps, as_of: 2026-10-01, confidence: estimated}
   - id: fixture-lake-loppet
     name: Fixture Lake Loppet
     discipline: ski_marathon

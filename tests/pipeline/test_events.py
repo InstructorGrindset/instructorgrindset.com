@@ -176,6 +176,81 @@ def test_month_helpers():
     assert t("dates may vary") == [] and t("All season") == [] and t(None) == []
 
 
+def test_season_word_months(defs):
+    """usual_timing season words give months when the text names no month (config events.season_words)."""
+    w = defs.season_words
+    t = lambda text: ev.timing_months(text, 7, w)   # noqa: E731
+    assert t("Spring") == [3, 4, 5] and t("SPRING") == [3, 4, 5]          # Gunbarrel 25 at Heavenly
+    assert t("Sundays in winter") == [12, 1, 2]
+    assert t("Early season") == [11, 12]
+    assert t("late season") == t("End of season") == t("end-of-season") == t("End of the season") == [3, 4]
+    assert t("Near the end of the ski season") == [3, 4]                  # the longest phrase wins
+    assert t("Closing weekend") == t("Closing day") == [3, 4]              # the end of season, as resorts say it
+    assert t("Saturdays and select holidays, 1 to 3 pm") == [12, 1]
+    assert t("New Year's Eve") == t("New Year\u2019s Eve") == [12]       # apostrophes either way
+    assert t("Spring and winter") == [12, 1, 2, 3, 4, 5]                  # in season order
+    # month names win over season words: they say more
+    assert t("Spring, usually late March") == [3] and t("Saturdays and holidays, January to March") == [1, 2, 3]
+    # whole words only, and a capitalized word before another capitalized word is a name
+    assert t("springtime") == [] and t("Saturdays at Winter Park") == [] and t("Spring Mountain Saturdays") == []
+    assert t("Six race days in the season") == [] and t("Thursday nights") == [] and t(None) == []
+    # without the config words, a season word places nothing (the transform is config driven)
+    assert ev.timing_months("Spring") == [] and ev.season_word_months("Spring", {}) == set()
+    assert ev.season_word_months("Late in the spring", {"spring": [3, 4, 5], "late spring": [5]}) == {3, 4, 5}
+    assert ev.season_word_months("Late spring", {"spring": [3, 4, 5], "late spring": [5]}) == {5}
+
+
+def test_season_word_event_falls_in_its_months(tmp_path, defs):
+    """A last edition known by its season with usual_timing "Spring" lands under March, April and May; an event with
+    no date and no timing falls in no month and still compiles (the list's "date not yet published" group)."""
+    d = raw()
+    sl = event(d, "fixture-peak-banked-slalom")
+    sl["last_edition"] = {"season": "2025/26", "source_id": "ev-fixture-slalom-page", "as_of": "2026-10-17",
+                          "confidence": "estimated"}
+    sl["usual_timing"] = {"value": "Spring", "source_id": "ev-fixture-slalom-page", "as_of": "2026-10-17",
+                          "confidence": "estimated"}
+    data, errors, _ = load(tmp_path, defs, d)
+    assert errors == []
+    out = ev.compile_events(data, PLACES, defs, HEADER)
+    e = event(out, "fixture-peak-banked-slalom")
+    assert e["months"] == [3, 4, 5] and e["usual_timing"]["value"] == "Spring"
+    assert "start" not in e["last_edition"] and "edition_2026_27" not in e     # no date is made up
+    by_month = out["counts"]["by_month"]
+    assert (by_month["3"], by_month["4"], by_month["5"]) == (3, 2, 1)     # the fixture's own March and April events too
+    # no timing at all: no months, still listed
+    sl.pop("usual_timing")
+    data, errors, _ = load(tmp_path, defs, d)
+    assert errors == []
+    out = ev.compile_events(data, PLACES, defs, HEADER)
+    assert event(out, "fixture-peak-banked-slalom")["months"] == []
+    assert "fixture-peak-banked-slalom" in [r[0] for r in ev.search_index(out)["events"]]
+
+
+def test_search_index(tmp_path, defs):
+    """events-search.json: every event's id, name, venue and group as rows, for the search box."""
+    data, _, _ = load(tmp_path, defs, raw())
+    out = ev.compile_events(data, PLACES, defs, HEADER)
+    idx = ev.search_index(out)
+    assert set(idx) == {"version", "generated_at", "groups", "states", "venues", "events"} and idx["version"] == 1
+    assert idx["states"] == {"CO": "Colorado", "MN": "Minnesota", "UT": "Utah"}   # the venues' states only
+    assert idx["groups"][0] == ["alpine", "Alpine"] and [g[0] for g in idx["groups"]] == defs.ids("groups")
+    assert [r[0] for r in idx["events"]] == [e["id"] for e in out["events"]]   # every event, in season order
+    rows = {r[0]: r for r in idx["events"]}
+    _, name, vi, gi = rows["fixture-marathon"]
+    assert name == "Fixture Lake Marathon" and idx["venues"][vi] == ["fixture-lake-trail", "Fixture Lake Trail", "MN"]
+    assert idx["groups"][gi] == ["nordic", "Nordic"]
+    _, _, vi, gi = rows["fixture-interski"]
+    assert idx["venues"][vi] == ["fixture-abroad-venue", "Fixture Alpine Venue", None, "NO"]   # abroad: the country
+    assert idx["groups"][gi][0] == "instructor"
+    assert idx["venues"][rows["fixture-basin-league"][2]] == ["fixture-basin", "Fixture Basin", "UT"]   # a resort venue
+    assert len(idx["venues"]) == len(out["venues"])
+    # names and places only: no dates, sources or sign up data
+    text = json.dumps(idx)
+    assert "source_id" not in text and "2027" not in text.replace(HEADER["generated_at"], "")
+    empty = ev.search_index(ev.compile_events(ev.EventsData(), PLACES, defs, HEADER))
+    assert empty["events"] == [] and empty["venues"] == [] and empty["states"] == {} and len(empty["groups"]) == len(defs.groups)
+
+
 def test_season_long_program(tmp_path, defs):
     """A program with no single date needs a sourced usual_timing or season_long (coordinator rule 2026-10-17)."""
     data, errors, _ = load(tmp_path, defs, raw())
@@ -400,6 +475,10 @@ def test_config_events_block(defs):
             assert groups.get(did) == group, (did, group)
     assert groups["interski"] == "instructor" and groups["fun_race"] == groups["endurance"] == "community"
     assert set(defs.ids("levels")) == {"elite", "collegiate", "masters", "open_amateur", "adaptive", "instructor"}
+    # season words (owner list 2026-10-21), stored as lower case words
+    sw = defs.season_words
+    assert sw["spring"] == [3, 4, 5] and sw["winter"] == [12, 1, 2] and sw["early season"] == [11, 12]
+    assert sw["late season"] == sw["end of season"] == [3, 4] and sw["holidays"] == [12, 1] and sw["new years eve"] == [12]
     from pipeline.schemas.events import SIGNUP_METHODS, VENUE_KINDS
     assert defs.ids("signup_methods") == list(SIGNUP_METHODS) and defs.ids("venue_kinds") == list(VENUE_KINDS)
     # labels follow the copy rules: no hyphens or dashes
@@ -412,6 +491,11 @@ def test_config_events_block(defs):
     ({"season": {"label": "2026/27", "start": "2026-07-01", "end": "2027-05-31"}}, "season 2026/27 runs from 2026-07-01"),
     ({"month_chips": [11, 11]}, "month_chips"),
     ({"abroad_groups": ["space"]}, "unknown groups"),
+    ({"season_words": {"spring": [3, 13]}}, "distinct month numbers 1 to 12"),
+    ({"season_words": {"spring": []}}, "distinct month numbers 1 to 12"),
+    ({"season_words": {"spring": [3, 3]}}, "distinct month numbers 1 to 12"),
+    ({"season_words": {"Late Season": [3], "late-season": [4]}}, "listed twice"),
+    ({"season_words": {"--": [3]}}, "has no words"),
 ])
 def test_config_rejects(changes, expect):
     with pytest.raises(ValueError, match=expect):
@@ -456,6 +540,8 @@ def test_build_end_to_end(repo_root, raw_dir, tmp_path):
     assert events["counts"]["events"] == 6 and (out / "events.json").read_text().count("\n") == 1   # compact
     summary = json.loads((out / "events-summary.json").read_text())
     assert summary["events"] == 6 and len(summary["dated_ends"]) == 4
+    search = (out / "events-search.json").read_text()
+    assert search.count("\n") == 1 and json.loads(search) == ev.search_index(events)   # compact, from events.json
     sources = {s["id"]: s for s in json.loads((out / "sources.json").read_text())["sources"]}
     assert ev.source_ids(events) <= set(sources) and sources["ev-fixture-calendar"]["title"] == "Fixture alpine calendar"
     resorts = {r["id"]: r for r in json.loads((out / "resorts.json").read_text())["resorts"]}
@@ -479,6 +565,7 @@ def test_build_without_events_writes_empty_files(repo_root, raw_dir, tmp_path):
     events = json.loads((out / "events.json").read_text())
     assert events["events"] == [] and events["venues"] == [] and events["counts"]["events"] == 0
     assert json.loads((out / "events-summary.json").read_text())["dated_ends"] == []
+    assert json.loads((out / "events-search.json").read_text())["events"] == []
 
 
 def test_build_fails_on_invalid_events(repo_root, raw_dir, tmp_path):

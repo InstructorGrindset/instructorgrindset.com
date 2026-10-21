@@ -688,3 +688,21 @@ events:
   month_chips: [11, 12, 1, 2, 3, 4]
   # The resort panel's "Events here" shows at most this many events (the next ones by the viewer's date).
   resort_panel_max: 3
+  # Season words in usual_timing and the months they cover. An event with no dates gets its months (the Month chips,
+  # counts.by_month) from the month names its usual_timing gives ("Saturdays, January to March"); when the text names
+  # no month, from these words ("Spring" for Gunbarrel 25 at Heavenly gives March, April and May). This reads a
+  # sourced phrase; the panel still shows the sourced wording and never a date. Whole words, case ignored, longest
+  # phrase first; a capitalized word right before another capitalized word is part of a name ("Winter Park",
+  # "Spring Mountain") and does not count.
+  season_words:
+    spring: [3, 4, 5]
+    winter: [12, 1, 2]
+    early season: [11, 12]
+    late season: [3, 4]
+    end of season: [3, 4]
+    end of the season: [3, 4]
+    end of the ski season: [3, 4]
+    closing weekend: [3, 4]
+    closing day: [3, 4]
+    holidays: [12, 1]
+    "new year's eve": [12]
