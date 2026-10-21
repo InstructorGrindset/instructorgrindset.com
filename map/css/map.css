@@ -2,7 +2,9 @@
    reference only). Scoped to body.map-page and body.credits-page; docs/map/ARCHITECTURE.md "Console look". */
 
 body.map-page, body.credits-page {
-  --mono: 'SF Mono', Monaco, 'Cascadia Code', 'Fira Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+  /* The site's own type (assets/global.css): Inter for text, Rooftop then Inter for headings (owner choice 2026-10-20). */
+  --ui-font: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --heading-font: 'Rooftop', Inter, Arial, sans-serif;
   /* Console palette */
   --wm-bg: #0a0a0a;
   --wm-bg-2: #111111;
@@ -45,14 +47,14 @@ body.map-page, body.credits-page {
   --panel-w-wide: 600px;
   --lp-w: 232px;          /* config.layersPanel.width */
   --lp-inset: 10px;       /* config.layersPanel.inset */
-  --label-spacing: .08em;
+  --label-spacing: .05em;   /* Inter capitals need less tracking than the first monospace stack */
   background: var(--wm-bg);
-  font-family: var(--mono);
+  font-family: var(--ui-font);
   font-size: 15px;
 }
 body.map-page { overflow: hidden; }
-:is(.map-page, .credits-page) :is(button, input, select, textarea) { font-family: var(--mono); }
-:is(.map-page, .credits-page) :is(h1, h2, h3, h4, .brand .name, .brand .name a, .nav h4) { font-family: var(--mono); }
+:is(.map-page, .credits-page) :is(button, input, select, textarea) { font-family: var(--ui-font); }
+:is(.map-page, .credits-page) :is(h1, h2, h3, h4, .brand .name, .brand .name a, .nav h4) { font-family: var(--heading-font); }
 :is(.map-page, .credits-page) :is(h1, h2) { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--wm-text); }
 :is(.map-page, .credits-page) *:focus-visible { outline: 2px solid var(--wm-green); outline-offset: 2px; }
 
@@ -82,7 +84,7 @@ body.map-page { overflow: hidden; }
 :is(.map-page, .credits-page) :is(.brand .name, .brand .name a) { letter-spacing: .12em; font-size: 1rem; }
 :is(.map-page, .credits-page) .nav h4 { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--wm-dim); }
 :is(.map-page, .credits-page) :is(.nav a, .nav a:link, .nav a:visited) { border-radius: 2px; font-size: .85rem; }
-:is(.map-page, .credits-page) .nav-close { font-family: var(--mono); }
+:is(.map-page, .credits-page) .nav-close { font-family: var(--ui-font); }
 
 /* ── Shared control shapes ── */
 .mh-btn, .seg button, .lp-reset, .lp-close {
@@ -112,7 +114,7 @@ body.map-page { overflow: hidden; }
   border-bottom: 1px solid var(--wm-border); min-width: 0;
 }
 .mh-title {
-  margin: 0 .25rem 0 0; font-size: .9rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-align: left; line-height: 1.1;
+  margin: 0 .25rem 0 0; font-size: .9rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: left; line-height: 1.1;
   color: var(--wm-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 0 auto; min-width: 0;
 }
 .dev-badge {
@@ -157,7 +159,7 @@ body.map-page { overflow: hidden; }
 }
 .mh-pill[aria-disabled="true"] .mh-count { background: var(--wm-border); color: var(--wm-text); }
 .feed-live {
-  margin: 0; display: inline-flex; align-items: center; gap: .4rem; flex-shrink: 1; min-width: 0; white-space: nowrap; overflow: hidden;
+  margin: 0; display: inline-flex; align-items: center; gap: .4rem; flex-shrink: 0; white-space: nowrap; /* the search box gives way first */
   font-size: .72rem; letter-spacing: var(--label-spacing); text-transform: uppercase; color: var(--wm-dim);
 }
 .feed-live[hidden] { display: none; }
@@ -230,7 +232,7 @@ body[data-tone="satellite"] .map { background: #0a0e14; }
 .panel h2:focus { outline: none; }
 .panel h2:focus-visible { outline: 2px solid var(--wm-green); outline-offset: 4px; }
 .panel h3 {
-  font-family: var(--mono); font-size: .72rem; font-weight: 700;
+  font-family: var(--ui-font); font-size: .72rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .14em; color: var(--wm-text); margin: 0 0 .55rem;
 }
 .panel h3::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 .5rem .1em 0; background: var(--wm-green); vertical-align: middle; }
@@ -298,7 +300,7 @@ body[data-tone="satellite"] .map { background: #0a0e14; }
 
 /* Buttons */
 :is(.map-page, .credits-page) .btn {
-  border-radius: 2px; font-family: var(--mono); font-weight: 700; font-size: .78rem; letter-spacing: var(--label-spacing); text-transform: uppercase;
+  border-radius: 2px; font-family: var(--ui-font); font-weight: 700; font-size: .78rem; letter-spacing: var(--label-spacing); text-transform: uppercase;
   background: var(--wm-green); color: var(--wm-green-ink); border: 1px solid var(--wm-green);
 }
 :is(.map-page, .credits-page) .btn:hover { filter: none; background: #6bffa1; }
@@ -310,7 +312,7 @@ body[data-tone="satellite"] .map { background: #0a0e14; }
 /* Tier tags and badges */
 .tier-row { display: flex; flex-wrap: wrap; gap: .3rem; margin: -.2rem 0 .6rem; }
 .tier, .badge, .src-tag {
-  display: inline-flex; align-items: center; font-family: var(--mono);
+  display: inline-flex; align-items: center; font-family: var(--ui-font);
   font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   border-radius: 2px; padding: .05rem .4rem; line-height: 1.55; white-space: nowrap; border: 1px solid transparent;
 }

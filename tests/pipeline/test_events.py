@@ -399,7 +399,7 @@ def test_config_events_block(defs):
         for did in [x.strip() for x in re.sub(r"\([^)]*\)", "", ids).split(",") if x.strip()]:
             assert groups.get(did) == group, (did, group)
     assert groups["interski"] == "instructor" and groups["fun_race"] == groups["endurance"] == "community"
-    assert set(defs.ids("levels")) == {"elite", "collegiate", "junior", "masters", "open_amateur", "adaptive", "instructor"}
+    assert set(defs.ids("levels")) == {"elite", "collegiate", "masters", "open_amateur", "adaptive", "instructor"}
     from pipeline.schemas.events import SIGNUP_METHODS, VENUE_KINDS
     assert defs.ids("signup_methods") == list(SIGNUP_METHODS) and defs.ids("venue_kinds") == list(VENUE_KINDS)
     # labels follow the copy rules: no hyphens or dashes

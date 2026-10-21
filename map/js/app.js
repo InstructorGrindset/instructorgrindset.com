@@ -104,7 +104,7 @@ const els = {
 // Stylesheets beside map.css that the first paint does not need: the running map's (map-live.css: MapLibre
 // controls, the hiring pulse, Color by, the heat legend, the detail layers) and the trail map dialog's.
 const LIVE_CSS = 'map-live.css?v=1';
-const TRAIL_CSS = 'trailmap.css?v=1';
+const TRAIL_CSS = 'trailmap.css?v=2';
 const EVENTS_CSS = 'events.css?v=1';   // EVENTS mode: the event panel, filters and calendar list
 const cssLoads = new Map();
 /** Add a stylesheet from map/css once; resolves when it has loaded (or failed). */

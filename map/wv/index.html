@@ -22,7 +22,7 @@
   <!-- Map control styles are needed only once MapLibre runs, so they never block the first paint. -->
   <link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/map/vendor/maplibre-gl/maplibre-gl.css"><style>.map-legend { display: none !important; }</style></noscript>
-  <link rel="stylesheet" href="/map/css/map.css?v=13">
+  <link rel="stylesheet" href="/map/css/map.css?v=14">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Cpath d='M5 25 L13 11 L18 19 L21 14 L27 25 Z' fill='%2344ff88'/%3E%3C/svg%3E">
   <link rel="modulepreload" href="/map/js/app.js">
   <link rel="modulepreload" href="/map/js/config.js">
@@ -36,7 +36,10 @@
   <link rel="modulepreload" href="/map/js/meta.js">
   <link rel="modulepreload" href="/map/js/preview.js">
   <link rel="modulepreload" href="/map/js/camera.js">
-  <!-- Map pages use the system monospace stack (map.css), so they load no web font. -->
+  <!-- The site font (Inter) loads after the window load event and the first contentful paint, so it never competes with the first paint; text uses the fallback font until then. -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>(function(){var n=0,p=0,f=function(){if(++n!==2)return;var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";document.head.appendChild(l)},g=function(){if(!p){p=1;f()}};addEventListener("load",f,{once:true});try{new PerformanceObserver(function(x,o){if(x.getEntriesByName("first-contentful-paint").length){o.disconnect();g()}}).observe({type:"paint",buffered:true})}catch(e){g()}setTimeout(g,8000)})()</script>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"West Virginia Resorts and Clusters for Snowsports Instructors • Instructor Grindset","url":"https://instructorgrindset.com/map/wv/","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Appalachia","url":"https://instructorgrindset.com/map/wv/appalachia/"},{"@type":"ListItem","position":2,"name":"Other West Virginia","url":"https://instructorgrindset.com/map/wv/other-wv/"}]}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Snowsports Career Map","item":"https://instructorgrindset.com/map/"},{"@type":"ListItem","position":2,"name":"West Virginia","item":"https://instructorgrindset.com/map/wv/"}]}]}</script>
 </head>
 <body class="map-page">

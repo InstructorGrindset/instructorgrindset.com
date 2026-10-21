@@ -53,7 +53,7 @@ const ISO_LAYERS = ['heat-iso-minor', 'heat-iso-major', 'heat-iso-label'];
 function isoLabelImage(value) {
   const text = `${value} in`;
   const ratio = 2;
-  const font = `600 ${10.5 * ratio}px 'SF Mono', Monaco, 'Cascadia Code', 'Fira Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace`;
+  const font = `600 ${10.5 * ratio}px Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif`;
   const c = document.createElement('canvas');
   const ctx = c.getContext('2d', { willReadFrequently: true });
   ctx.font = font;

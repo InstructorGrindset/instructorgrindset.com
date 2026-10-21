@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T01:00:40Z",
+  "generated_at": "2026-10-20T16:09:22Z",
   "resorts": [
     {
       "id": "49-north-mountain-resort",
@@ -111,8 +111,25 @@
       "trailmap_available": false,
       "housing_summary": null,
       "housing_search": null,
-      "events": null,
+      "events": {
+        "count": 1,
+        "items": [
+          {
+            "id": "forty-nine-north-skijoring",
+            "name": "49° North Skijoring",
+            "discipline_label": "Skijoring",
+            "start": "2026-01-24",
+            "end": "2026-01-25",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-ssk-ski49n-skijoring-search",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
+          }
+        ]
+      },
       "sources": [
+        "events-ssk-ski49n-skijoring-search",
         "facts-gapfill-kxly-49n-2024",
         "facts-west2-ots-wa-closing",
         "openskimap-ski-areas",
@@ -2141,7 +2158,7 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 2,
         "items": [
           {
             "id": "ifsa-fwt-qualifier-alyeska",
@@ -2149,18 +2166,6 @@
             "discipline_label": "Big mountain",
             "start": "2027-01-22",
             "end": "2027-01-22",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
-          {
-            "id": "ifsa-junior-alyeska",
-            "name": "Alyeska IFSA Junior 2*",
-            "discipline_label": "Big mountain",
-            "start": "2027-01-23",
-            "end": "2027-01-24",
             "season": "2026/27",
             "published": true,
             "source_id": "events-freestyle-ifsa-events-2027",
@@ -13919,7 +13924,7 @@
         ]
       },
       "events": {
-        "count": 4,
+        "count": 3,
         "items": [
           {
             "id": "toyota-us-grand-prix-breckenridge",
@@ -13939,18 +13944,6 @@
             "discipline_label": "Big mountain",
             "start": "2027-03-06",
             "end": "2027-03-07",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-freestyle-ifsa-venue-breckenridge",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
-          {
-            "id": "ifsa-junior-breckenridge",
-            "name": "Breckenridge IFSA Junior 2*",
-            "discipline_label": "Big mountain",
-            "start": "2027-03-14",
-            "end": "2027-03-14",
             "season": "2026/27",
             "published": true,
             "source_id": "events-freestyle-ifsa-venue-breckenridge",
@@ -14125,8 +14118,32 @@
       "housing_summary": null,
       "housing_search": null,
       "events": {
-        "count": 1,
+        "count": 3,
         "items": [
+          {
+            "id": "geschmossel-classic",
+            "name": "Geschmossel Classic",
+            "discipline_label": "Cross country",
+            "start": "2026-01-19",
+            "end": "2026-01-19",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nordic-geschmossel-brettonwoods",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
+          },
+          {
+            "id": "mount-washington-cup",
+            "name": "Mount Washington Cup",
+            "discipline_label": "Cross country",
+            "start": "2026-03-07",
+            "end": "2026-03-07",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nordic-mount-washington-cup-brettonwoods",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
+          },
           {
             "id": "bretton-woods-tgif-race-league",
             "name": "Bretton Woods TGIF Race League",
@@ -14141,6 +14158,8 @@
       },
       "sources": [
         "events-alpine-brettonwoods-tgif-search",
+        "events-nordic-geschmossel-brettonwoods",
+        "events-nordic-mount-washington-cup-brettonwoods",
         "facts-northeast1-ots-nh-close",
         "facts-northeast1-ots-nh-open",
         "facts-northeast1-wp-bretton-woods-ski-area",
@@ -17041,7 +17060,7 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 2,
         "items": [
           {
             "id": "toyota-us-grand-prix-aspen-snowmass",
@@ -17066,18 +17085,6 @@
             "source_id": "events-freestyle-wikipedia-x-games",
             "as_of": "2026-10-17",
             "confidence": "reported"
-          },
-          {
-            "id": "us-revolution-tour-aspen-snowmass-open",
-            "name": "iHeart U.S. Revolution Tour at Aspen Open",
-            "discipline_label": "Slopestyle",
-            "start": "2026-03-23",
-            "end": "2026-03-27",
-            "season": "2025/26",
-            "published": false,
-            "source_id": "events-freestyle-usss-rev-tour-aspen-open-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
           }
         ]
       },
@@ -17087,7 +17094,6 @@
         "ed-west-wiki-buttermilk-ski-area",
         "ed-west-wiki-x-games",
         "events-freestyle-usss-2026-27-domestic-wc-release",
-        "events-freestyle-usss-rev-tour-aspen-open-2026",
         "events-freestyle-wikipedia-x-games",
         "facts-training-aspen-employment",
         "facts-west1-aspen-dates-2026-27",
@@ -21386,7 +21392,7 @@
         ]
       },
       "events": {
-        "count": 6,
+        "count": 5,
         "items": [
           {
             "id": "fis-alpine-world-cup-copper-mountain",
@@ -21437,18 +21443,6 @@
             "confidence": "estimated"
           },
           {
-            "id": "us-revolution-tour-copper-mountain",
-            "name": "iHeart U.S. Revolution Tour at Copper Mountain",
-            "discipline_label": "Slopestyle",
-            "start": "2026-01-12",
-            "end": "2026-01-17",
-            "season": "2025/26",
-            "published": false,
-            "source_id": "events-freestyle-usss-rev-tour-copper-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
-          {
             "id": "copper-mountain-slush-rush",
             "name": "Slush Rush",
             "discipline_label": "Fun race",
@@ -21470,7 +21464,6 @@
         "events-cwest-unofficialnetworks-slush-rush-2025",
         "events-freestyle-usasa-national-championships",
         "events-freestyle-usss-2026-27-domestic-wc-release",
-        "events-freestyle-usss-rev-tour-copper-2026",
         "events-instructor-psia-2027-national-dates-search",
         "facts-training-copper-cert-snowboard-2627",
         "facts-west1-frisco-copper-opening-2025",
@@ -28954,8 +28947,20 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 4,
         "items": [
+          {
+            "id": "teton-ridge-classic",
+            "name": "Teton Ridge Classic",
+            "discipline_label": "Cross country",
+            "start": "2026-01-31",
+            "end": "2026-01-31",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nwest-teton-ridge-classic-targhee",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
+          },
           {
             "id": "ladies-waist-banked-slalom",
             "name": "Ladies Waist Banked Slalom",
@@ -29001,6 +29006,7 @@
         "events-cwest-grandtarghee-north-shore-banked-slalom",
         "events-cwest-grandtarghee-nye-rail-jam",
         "events-freestyle-grandtarghee-ladies-waist",
+        "events-nwest-teton-ridge-classic-targhee",
         "facts-gapfill-gt-lift-tickets",
         "facts-training-targhee-coolworks-profile",
         "facts-west3-wp-grand-targhee",
@@ -33738,28 +33744,11 @@
           }
         ]
       },
-      "events": {
-        "count": 1,
-        "items": [
-          {
-            "id": "steamboat-winter-carnival",
-            "name": "Steamboat Winter Carnival",
-            "discipline_label": "Ski jumping",
-            "start": "2027-02-02",
-            "end": "2027-02-07",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-nordic-steamboat-carnival-sswsc",
-            "as_of": "2026-10-20",
-            "confidence": "estimated"
-          }
-        ]
-      },
+      "events": null,
       "sources": [
         "ed-west-wiki-howelsen-hill-ski-area",
         "ed-west-wiki-steamboat-springs-colorado",
         "ed-west-wiki-steamboat-springs-winter-sports-club",
-        "events-nordic-steamboat-carnival-sswsc",
         "facts-west1-dircom-howelsen",
         "hs-ff-co-steamboat-springs",
         "hs-steamboat-chamber-yvha",
@@ -35528,20 +35517,8 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 2,
         "items": [
-          {
-            "id": "ifsa-junior-jackson-hole",
-            "name": "Jackson Hole IFSA Junior 2*",
-            "discipline_label": "Big mountain",
-            "start": "2027-01-08",
-            "end": "2027-01-10",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
           {
             "id": "kings-and-queens-of-corbets",
             "name": "Kings and Queens of Corbet's",
@@ -35575,7 +35552,6 @@
         "ed-west-wiki-jay-kemmerer",
         "ed-west-wiki-teton-county-wyoming",
         "events-cwest-jacksonhole-dicks-ditch-2026-results",
-        "events-freestyle-ifsa-events-2027",
         "events-freestyle-jacksonhole-kings-queens-2027",
         "facts-gapfill-tgr-jhmr-2425",
         "hs-buckrail-22rents",
@@ -38496,20 +38472,8 @@
         ]
       },
       "events": {
-        "count": 2,
+        "count": 1,
         "items": [
-          {
-            "id": "ifsa-junior-kirkwood",
-            "name": "Kirkwood IFSA Junior 2* (TJFS #3)",
-            "discipline_label": "Big mountain",
-            "start": "2027-01-23",
-            "end": "2027-01-24",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
           {
             "id": "kirkwood-legendary-banked-slalom",
             "name": "Kirkwood Legendary Banked Slalom",
@@ -38529,7 +38493,6 @@
         "ed-west-wiki-kirkwood-california",
         "ed-west-wiki-kirkwood-mountain-resort",
         "events-cwest-visitlaketahoe-kirkwood-banked-slalom",
-        "events-freestyle-ifsa-events-2027",
         "facts-west2-un-ca-openings-2026",
         "facts-west2-visitlaketahoe-kirkwood",
         "hs-ff-ca-south-lake-tahoe",
@@ -43302,7 +43265,7 @@
         ]
       },
       "events": {
-        "count": 3,
+        "count": 2,
         "items": [
           {
             "id": "us-alpine-championships",
@@ -43327,18 +43290,6 @@
             "source_id": "events-cwest-localfreshies-banked-slalom-showcase",
             "as_of": "2026-10-17",
             "confidence": "estimated"
-          },
-          {
-            "id": "us-revolution-tour-mammoth-mountain",
-            "name": "iHeart U.S. Revolution Tour at Mammoth",
-            "discipline_label": "Slopestyle",
-            "start": "2026-03-10",
-            "end": "2026-03-14",
-            "season": "2025/26",
-            "published": false,
-            "source_id": "events-freestyle-usss-rev-tour-mammoth-2026",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
           }
         ]
       },
@@ -43348,7 +43299,6 @@
         "ed-west-wiki-mammoth-mountain-resort",
         "events-alpine-townlift-2027-nationals-search",
         "events-cwest-localfreshies-banked-slalom-showcase",
-        "events-freestyle-usss-rev-tour-mammoth-2026",
         "facts-west2-activenorcal-mammoth-close",
         "facts-west2-un-ca-openings-2026",
         "hs-ff-ca-mammoth-lakes",
@@ -49902,7 +49852,7 @@
         "tools": []
       },
       "events": {
-        "count": 2,
+        "count": 4,
         "items": [
           {
             "id": "dirksen-derby",
@@ -49927,6 +49877,30 @@
             "source_id": "events-instructor-psia-national-events-calendar-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
+          },
+          {
+            "id": "great-nordeen",
+            "name": "Great Nordeen",
+            "discipline_label": "Cross country",
+            "start": "2026-03-14",
+            "end": "2026-03-14",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nwest-great-nordeen-mbsef",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
+          },
+          {
+            "id": "cascade-crest",
+            "name": "Cascade Crest Nordic Ski Race & Tour",
+            "discipline_label": "Ski marathon",
+            "start": "2026-04-04",
+            "end": "2026-04-04",
+            "season": "2025/26",
+            "published": false,
+            "source_id": "events-nwest-cascade-crest-visitcentraloregon",
+            "as_of": "2026-10-20",
+            "confidence": "estimated"
           }
         ]
       },
@@ -49937,6 +49911,8 @@
         "ed-west-wiki-powdr",
         "events-freestyle-findarace-dirksen-derby",
         "events-instructor-psia-national-events-calendar-search",
+        "events-nwest-cascade-crest-visitcentraloregon",
+        "events-nwest-great-nordeen-mbsef",
         "facts-west2-wp-mount-bachelor",
         "hs-ff-or-bend",
         "jobs-fasterskier-jobpostings",
@@ -54960,7 +54936,7 @@
         ]
       },
       "events": {
-        "count": 5,
+        "count": 4,
         "items": [
           {
             "id": "ifsa-fwt-qualifier-palisades-tahoe",
@@ -54968,18 +54944,6 @@
             "discipline_label": "Big mountain",
             "start": "2027-02-03",
             "end": "2027-02-03",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-freestyle-ifsa-venue-palisades",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
-          {
-            "id": "ifsa-junior-palisades-tahoe",
-            "name": "Palisades Tahoe IFSA Junior 3*",
-            "discipline_label": "Big mountain",
-            "start": "2027-02-05",
-            "end": "2027-02-07",
             "season": "2026/27",
             "published": true,
             "source_id": "events-freestyle-ifsa-venue-palisades",
@@ -69172,28 +69136,11 @@
           }
         ]
       },
-      "events": {
-        "count": 1,
-        "items": [
-          {
-            "id": "ifsa-junior-snowbird",
-            "name": "Snowbird IFSA Junior 2*",
-            "discipline_label": "Big mountain",
-            "start": "2027-01-23",
-            "end": "2027-01-24",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          }
-        ]
-      },
+      "events": null,
       "sources": [
         "access-wikipedia-utah-transit-authority",
         "ed-west-wiki-powdr",
         "ed-west-wiki-snowbird-utah",
-        "events-freestyle-ifsa-events-2027",
         "facts-west1-kpcw-utah-season-end-2025",
         "hs-alta-employee-housing",
         "hs-ff-ut-sandy",
@@ -74004,20 +73951,8 @@
         ]
       },
       "events": {
-        "count": 2,
+        "count": 1,
         "items": [
-          {
-            "id": "ifsa-junior-sugar-bowl",
-            "name": "Sugar Bowl IFSA Junior 2*",
-            "discipline_label": "Big mountain",
-            "start": "2027-01-02",
-            "end": "2027-01-03",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-freestyle-ifsa-events-2027",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
           {
             "id": "sugar-bowl-silver-belt",
             "name": "Silver Belt",
@@ -74037,7 +73972,6 @@
         "career-followups-sugarbowl-privates",
         "ed-west-wiki-sugar-bowl-ski-resort",
         "events-cwest-sugarbowl-silver-belt",
-        "events-freestyle-ifsa-events-2027",
         "facts-gapfill-ots-sugarbowl",
         "facts-west2-un-ca-openings-2026",
         "hs-ff-ca-truckee",
@@ -85103,7 +85037,7 @@
         "tools": []
       },
       "events": {
-        "count": 3,
+        "count": 2,
         "items": [
           {
             "id": "stifel-noram-cup-whiteface",
@@ -85114,18 +85048,6 @@
             "season": "2026/27",
             "published": true,
             "source_id": "events-alpine-usss-2026-27-events-search",
-            "as_of": "2026-10-17",
-            "confidence": "estimated"
-          },
-          {
-            "id": "fis-alpine-junior-world-championships-2027",
-            "name": "Stifel 2027 FIS Alpine Junior World Ski Championships",
-            "discipline_label": "Alpine racing",
-            "start": "2027-03-02",
-            "end": "2027-03-12",
-            "season": "2026/27",
-            "published": true,
-            "source_id": "events-alpine-skiracing-junior-worlds-2027-search",
             "as_of": "2026-10-17",
             "confidence": "estimated"
           },
@@ -85148,7 +85070,6 @@
         "ed-east-wikipedia-lake-placid-new-york",
         "ed-east-wikipedia-whiteface-mountain",
         "ed-east-wikipedia-wilmington-new-york",
-        "events-alpine-skiracing-junior-worlds-2027-search",
         "events-alpine-uscsa-nationals-search",
         "events-alpine-usss-2026-27-events-search",
         "facts-northeast2-ots-northeast-openings",

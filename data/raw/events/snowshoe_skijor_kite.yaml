@@ -1,5 +1,5 @@
 batch: events-snowshoe_skijor_kite
-researched_date: 2026-10-17
+researched_date: 2026-10-20
 
 # Lane: snowshoe racing, skijoring (horse and dog) and snowkiting.
 # Every value below comes from a source listed here. Search result facts are `estimated`; facts read on an
@@ -58,16 +58,6 @@ sources:
   title: Big Sky, Montana
   accessed_date: 2026-10-17
   note: Coordinates read from the Wikipedia API.
-- id: events-ssk-wikipedia-silverton-co
-  url: https://en.wikipedia.org/wiki/Silverton,_Colorado
-  title: Silverton, Colorado
-  accessed_date: 2026-10-17
-  note: Coordinates read from the Wikipedia API.
-- id: events-ssk-wikipedia-steamboat-springs-co
-  url: https://en.wikipedia.org/wiki/Steamboat_Springs,_Colorado
-  title: Steamboat Springs, Colorado
-  accessed_date: 2026-10-17
-  note: Coordinates read from the Wikipedia API.
 - id: events-ssk-wikipedia-ridgway-co
   url: https://en.wikipedia.org/wiki/Ridgway,_Colorado
   title: Ridgway, Colorado
@@ -101,11 +91,6 @@ sources:
 - id: events-ssk-wikipedia-sundance-wy
   url: https://en.wikipedia.org/wiki/Sundance,_Wyoming
   title: Sundance, Wyoming
-  accessed_date: 2026-10-17
-  note: Coordinates read from the Wikipedia API.
-- id: events-ssk-wikipedia-canterbury-park
-  url: https://en.wikipedia.org/wiki/Canterbury_Park
-  title: Canterbury Park
   accessed_date: 2026-10-17
   note: Coordinates read from the Wikipedia API.
 - id: events-ssk-wikipedia-heber-city-ut
@@ -267,21 +252,6 @@ sources:
   title: dh.durangoherald.com
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened. Durango Herald coverage of past Silverton Skijoring editions.
-- id: events-ssk-carnifest-steamboat-2027-search
-  url: https://www.carnifest.com/steamboat-springs-colorado-winter-carnival-2027/
-  title: Steamboat Springs, Colorado Winter Carnival 2027
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened. Third party festival listing that labels its 2027 dates as estimated.
-- id: events-ssk-localfreshies-steamboat-search
-  url: https://localfreshies.com/event/steamboat-springs-skijoring/
-  title: steamboat springs skijoring
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened. Third party event listing.
-- id: events-ssk-gazette-colorado-festivals-2026-search
-  url: https://gazette.com/2026/01/21/ice-snow-carving-skijoring-competitions-at-winter-festivals-around-colorado/
-  title: Ice, snow carving, skijoring, competitions at winter festivals around Colorado
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
 - id: events-ssk-cowboyplus-san-juan-search
   url: https://www.cowboyplus.com/show/286
   title: San Juan Skijoring
@@ -388,6 +358,294 @@ sources:
   title: "Minnesota to Host Snow Kite Crossing | Sports Destination Management"
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
+
+# ---------------------------------------------------------------- second pass (2026-10-20): Wikipedia
+- id: events-ssk-wikipedia-bellevue-id
+  url: https://en.wikipedia.org/wiki/Bellevue,_Idaho
+  title: Bellevue, Idaho
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-wisdom-mt
+  url: https://en.wikipedia.org/wiki/Wisdom,_Montana
+  title: Wisdom, Montana
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-lewistown-mt
+  url: https://en.wikipedia.org/wiki/Lewistown,_Montana
+  title: Lewistown, Montana
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-boulder-mt
+  url: https://en.wikipedia.org/wiki/Boulder,_Montana
+  title: Boulder, Montana
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-three-forks-mt
+  url: https://en.wikipedia.org/wiki/Three_Forks,_Montana
+  title: Three Forks, Montana
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-buffalo-wy
+  url: https://en.wikipedia.org/wiki/Buffalo,_Wyoming
+  title: Buffalo, Wyoming
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-garden-city-ut
+  url: https://en.wikipedia.org/wiki/Garden_City,_Utah
+  title: Garden City, Utah
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-bangor-me
+  url: https://en.wikipedia.org/wiki/Bangor,_Maine
+  title: Bangor, Maine
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-topsham-me
+  url: https://en.wikipedia.org/wiki/Topsham,_Maine
+  title: Topsham, Maine
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-skowhegan-me
+  url: https://en.wikipedia.org/wiki/Skowhegan,_Maine
+  title: Skowhegan, Maine
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-rice-lake-wi
+  url: https://en.wikipedia.org/wiki/Rice_Lake,_Wisconsin
+  title: Rice Lake, Wisconsin
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-minocqua-wi
+  url: https://en.wikipedia.org/wiki/Minocqua,_Wisconsin
+  title: Minocqua, Wisconsin
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-grand-marais-mn
+  url: https://en.wikipedia.org/wiki/Grand_Marais,_Minnesota
+  title: Grand Marais, Minnesota
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-tok-ak
+  url: https://en.wikipedia.org/wiki/Tok,_Alaska
+  title: Tok, Alaska
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-baldwin-mi
+  url: https://en.wikipedia.org/wiki/Baldwin,_Michigan
+  title: Baldwin, Michigan
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-saranac-ny
+  url: https://en.wikipedia.org/wiki/Saranac,_New_York
+  title: Saranac, New York
+  accessed_date: 2026-10-20
+  note: Coordinates read from the Wikipedia API.
+- id: events-ssk-wikipedia-ford-idaho-center
+  url: https://en.wikipedia.org/wiki/Ford_Idaho_Center
+  title: Ford Idaho Center
+  accessed_date: 2026-10-20
+  note: Opened on Wikipedia through the API (intro and coordinates). The article places the center in Nampa, Idaho, about 15 miles west of Boise.
+- id: events-ssk-wikipedia-winona-state-forest
+  url: https://en.wikipedia.org/wiki/Winona_State_Forest
+  title: Winona State Forest
+  accessed_date: 2026-10-20
+  note: Opened on Wikipedia through the API (intro and coordinates). The article says the Civilian Conservation Corps set up a work camp in the forest.
+
+# ---------------------------------------------------------------- second pass: equine skijoring
+- id: events-ssk-visitsunvalley-wood-river-2026-search
+  url: https://visitsunvalley.com/events/wood-river-extreme-ski-joring/
+  title: "February 14, 2026 @ 11:00 am - February 14, 2026 @ 3:00 pm"
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The page header lists February 14 and its save the date line says February 14 and 15.
+- id: events-ssk-localfreshies-rockies-list-search
+  url: https://localfreshies.com/events/category/rockies-events/list
+  title: localfreshies.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The result lists Sun Valley / Hailey Skijoring 2026 at the Bellevue site as a Skijoring America tour race.
+- id: events-ssk-tetonskijor-regfox-search
+  url: https://tetonskijor.regfox.com/tetonskijor
+  title: Location Information
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. Registration page for the 2026 Teton Valley Skijoring.
+- id: events-ssk-explorebigsky-teton-valley-2026-search
+  url: https://www.explorebigsky.com/teton-valley-skijoring-event-returns-to-driggs-feb-21-22/168907
+  title: Teton Valley skijoring event returns to Driggs Feb. 21-22
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The result names tetonskijor.org as the organization's site.
+- id: events-ssk-southwestmt-big-hole-search
+  url: https://southwestmt.com/events/big-hole-valley-skijoring
+  title: Big Hole Valley Skijoring
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-viamagazine-big-hole-search
+  url: https://www.viamagazine.com/destinations/big-hole-valley-winterfest
+  title: big hole valley winterfest
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-judithbasinpress-winter-fair-2026-search
+  url: https://www.judithbasinpress.net/news/the-cure-for-cabin-fever-montana-winter-fair-opens-mid-january/article_1d1ef7cf-8975-5078-ab79-b783fefd9f09.html
+  title: The cure for cabin fever, Montana Winter Fair opens mid January
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. Title shown as the URL slug reads.
+- id: events-ssk-nbcmontana-winter-fair-search
+  url: https://nbcmontana.com/news/local/montana-winter-fair-returns-with-skijoring
+  title: Montana Winter Fair returns with skijoring
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-southwestmt-big-rock-search
+  url: https://southwestmt.com/events/skijoring-the-big-rock/
+  title: Skijoring The Big Rock
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-ktvh-big-rock-search
+  url: https://ktvh.com/news/skijoring-the-big-rock-event-returns-to-boulder
+  title: skijoring the big rock event returns to boulder
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-explorebigsky-brewskis-2026-search
+  url: https://www.explorebigsky.com/three-forks-skijoring-debuts-bridger-brewskis-and-spurs-skijoring-competition/167974
+  title: Three Forks debuts Bridger Brewskis and Spurs Skijoring Competition
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-bearlake-skijoring-the-bear-search
+  url: https://bearlake.org/event/skijoring-the-bear-exhibition/
+  title: Bear Lake Valley Events
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The result says Skijoring the Bear 2026 was cancelled for lack of snow.
+- id: events-ssk-bearlake-skijoring-in-bear-lake-search
+  url: https://bearlake.org/skijoring-in-bear-lake/
+  title: Skijoring in Bear Lake
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-wabi-bangor-2026-search
+  url: https://www.wabi.tv/2026/01/31/skijor-circuit-kicks-off-bangor/
+  title: Skijor circuit kicks off in Bangor
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-bdn-bangor-2026-search
+  url: https://www.bangordailynews.com/2026/01/31/homestead/bangor-maine-skijoring-extreme-winter-sport/
+  title: bangor maine skijoring extreme winter sport
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-westernhorseman-maine-2025-search
+  url: https://westernhorseman.com/?p=46254
+  title: westernhorseman.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. A 2025 article listing the Topsham and Skowhegan dates for 2025.
+- id: events-ssk-spectrum-skowhegan-2026-search
+  url: https://spectrumlocalnews.com/me/maine/human-interest/2026/02/21/skijoring-returns-to-skowhegan---i-love-how-it-brings-out-the-community-
+  title: skijoring returns to skowhegan, i love how it brings out the community
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. Report dated February 21, 2026; it points to somersetsnowfest.org for results.
+- id: events-ssk-visitmaine-skijor-skowhegan-search
+  url: https://visitmaine.com/events/skijor-skowhegan/c13c5a30-6b27-492a-9136-7b2ae742b72d
+  title: Skijor Skowhegan
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. A 2024 listing gives the Skowhegan State Fairgrounds as the venue.
+- id: events-ssk-newscentermaine-topsham-search
+  url: https://newscentermaine.com/article/entertainment/events/skis-and-steeds-topshams-first-ever-skijoring-event-draws-big-crowd-to-fairgrounds-maine-skowhegan-skijor-what-is-skijoring-horses-skiers-sport/97-63ca4a26-a3b5-428c-8cc9-7ead8bd62625
+  title: "Skis and steeds, Topsham's first ever skijoring event draws big crowd to fairgrounds"
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. Title shown as the URL slug reads.
+- id: events-ssk-spectatornews-rice-lake-2020-search
+  url: https://www.spectatornews.com/arts-life/2020/03/second-annual-spurs-and-skis-skijoring-stampede-held-in-rice-lake/
+  title: "Second annual Spurs and Skis: Skijoring Stampede held in Rice Lake"
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-wpr-rice-lake-search
+  url: https://wpr.org/sports/skijoring-twist-rice-lake
+  title: Skijoring With A Twist In Rice Lake
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The article gives Saturday, March 7 without a year.
+- id: events-ssk-ski49n-skijoring-search
+  url: https://www.ski49n.com/upcoming-events/details/skijoring
+  title: www.ski49n.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-chewelah-skijoring-qualifiers-search
+  url: https://chewelah.org/event/skijoring-qualifiers-at-49-degree-north/
+  title: Loading Events
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-seattlemag-holding-the-line-search
+  url: https://seattlemag.com/outside/holding-the-line/
+  title: holding the line
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-outsidebozeman-gallatin-invitational-2026-search
+  url: https://outsidebozeman.com/events/2026/gallatin-skijor-invitational
+  title: Sat Jan 17th to Jan 18th 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-si-pro-skijor-search
+  url: https://www.si.com/fannation/rodeo/news/pro-skijor-unveils-america-first-ever-professional-skijoring-series
+  title: PRO Skijor Unveils America’s First-Ever Professional Skijoring Series
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The result names the Ford Idaho Center for the Boise stop and the Cache County Fairgrounds for the Logan stop.
+
+# ---------------------------------------------------------------- second pass: dog skijoring
+- id: events-ssk-explorefairbanks-onac-2026-search
+  url: https://www.explorefairbanks.com/event/open-north-american-championship%3A-skijoring-%26-dog-sledding-race/11324/
+  title: www.explorefairbanks.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-alaskadogmushers-prelims-search
+  url: https://alaskadogmushers.com/preliminary-races/
+  title: "Preliminary Race #1 - December 6, 2026"
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-ultrasignup-tanana-2026-search
+  url: https://ultrasignup.com/register.aspx?did=132773
+  title: Saturday, Mar 14, 2026
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-explorefairbanks-tanana-search
+  url: https://www.explorefairbanks.com/event/tanana-river-challenge/11270/
+  title: Tanana River Challenge
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-tokdogmushers-skijoring-search
+  url: https://www.tokdogmushers.org/race-of-champions/skijoring
+  title: www.tokdogmushers.org
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The page gives Saturday 16th March and Sunday 17th March with no year, and says the entry fee and time are to be determined.
+- id: events-ssk-tokdogmushers-home-search
+  url: https://www.tokdogmushers.org/
+  title: "Registration for the 2026 Tok Race of Champions:"
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-runsignup-winter-park-bark-search
+  url: https://runsignup.com/Race/Info/WI/Minocqua/WinterParkBark
+  title: runsignup.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-runscore-great-lakes-derby-search
+  url: https://runscore.runsignup.com/Race/MI/Baldwin/GreatLakesSledDogDerby
+  title: runscore.runsignup.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+- id: events-ssk-runscore-tug-hill-search
+  url: https://runscore.runsignup.com/Race/NY/Mannsville/TugHillChallenge
+  title: runscore.runsignup.com
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The 2026 listing.
+- id: events-ssk-exploreminnesota-dog-days-search
+  url: https://exploreminnesota.com/event/dog-days-winter/11062
+  title: Dog Days of Winter
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened.
+
+# ---------------------------------------------------------------- second pass: snowshoe racing
+- id: events-ssk-gotrail-stone-wall-search
+  url: https://gotrail.run/en/event/the-stone-wall-snowshoe-event
+  title: The Stone Wall Snowshoe Event
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. Third party race listing.
+- id: events-ssk-adktaste-cock-a-doodle-shoe-search
+  url: https://adktaste.com/adirondack-events/cock-a-doodle-shoe
+  title: Saranac’s Cock-A-Doodle Shoe 5K/10K Snowshoe Race and Kids Scramble
+  accessed_date: 2026-10-20
+  note: From a search result for this page; page not opened. The newest listing in the results was for 2024.
 
 venues:
 # ---------------------------------------------------------------- snowshoe venues
@@ -509,32 +767,6 @@ venues:
     as_of: 2026-10-17
     confidence: reported
     note: Center of Big Sky, Montana, from Wikipedia.
-- id: silverton-co-skijoring
-  name: Silverton
-  kind: town
-  state: CO
-  town: Silverton
-  location:
-    lat: 37.81166667
-    lon: -107.66444444
-    precision: town
-    source_id: events-ssk-wikipedia-silverton-co
-    as_of: 2026-10-17
-    confidence: reported
-    note: Town center of Silverton, Colorado, from Wikipedia.
-- id: steamboat-springs-co-lincoln-avenue
-  name: Lincoln Avenue, Steamboat Springs
-  kind: town
-  state: CO
-  town: Steamboat Springs
-  location:
-    lat: 40.47277778
-    lon: -106.81638889
-    precision: town
-    source_id: events-ssk-wikipedia-steamboat-springs-co
-    as_of: 2026-10-17
-    confidence: reported
-    note: Town center of Steamboat Springs, Colorado, from Wikipedia.
 - id: ouray-county-fairgrounds
   name: Ouray County Fairgrounds
   kind: fairground
@@ -626,19 +858,6 @@ venues:
     as_of: 2026-10-17
     confidence: reported
     note: Town center of Sundance, Wyoming, from Wikipedia.
-- id: canterbury-park-mn
-  name: Canterbury Park
-  kind: other
-  state: MN
-  town: Shakopee
-  location:
-    lat: 44.78963056
-    lon: -93.4801
-    precision: venue
-    source_id: events-ssk-wikipedia-canterbury-park
-    as_of: 2026-10-17
-    confidence: reported
-    note: Canterbury Park horse racetrack, from its Wikipedia article.
 # ---------------------------------------------------------------- PRO Skijor Frontier Tour venues
 - id: wasatch-events-center
   name: Wasatch Events Center
@@ -667,8 +886,8 @@ venues:
     confidence: reported
     note: Town center of Bozeman, Montana, from Wikipedia. The fairgrounds have no Wikipedia coordinates.
 - id: logan-ut-pro-skijor
-  name: Logan
-  kind: town
+  name: Cache County Fairgrounds
+  kind: fairground
   state: UT
   town: Logan
   location:
@@ -678,20 +897,20 @@ venues:
     source_id: events-ssk-wikipedia-logan-ut
     as_of: 2026-10-17
     confidence: reported
-    note: Town center of Logan, Utah, from Wikipedia. The sources name the city only.
+    note: Town center of Logan, Utah, from Wikipedia. A search result names the Cache County Fairgrounds, which have no Wikipedia coordinates.
 - id: boise-id-pro-skijor
-  name: Boise
-  kind: town
+  name: Ford Idaho Center
+  kind: arena
   state: ID
-  town: Boise
+  town: Nampa
   location:
-    lat: 43.61583333
-    lon: -116.20166667
-    precision: town
-    source_id: events-ssk-wikipedia-boise-id
-    as_of: 2026-10-17
+    lat: 43.608106
+    lon: -116.508175
+    precision: venue
+    source_id: events-ssk-wikipedia-ford-idaho-center
+    as_of: 2026-10-20
     confidence: reported
-    note: City center of Boise, Idaho, from Wikipedia. The sources name the city only.
+    note: Ford Idaho Center from its Wikipedia article, which places it in Nampa about 15 miles west of Boise. Tour sources call this the Boise stop.
 - id: driggs-id-pro-skijor
   name: Driggs
   kind: town
@@ -760,12 +979,247 @@ venues:
     confidence: reported
     note: Town center of Garrison, Minnesota, from Wikipedia. The sources place the event on Mille Lacs Lake near Garrison.
 
+# ---------------------------------------------------------------- second pass (2026-10-20)
+- id: bellevue-id-browning-lane
+  name: 81 Browning Lane
+  kind: other
+  state: ID
+  town: Bellevue
+  location:
+    lat: 43.47166667
+    lon: -114.24777778
+    precision: town
+    source_id: events-ssk-wikipedia-bellevue-id
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Bellevue, Idaho, from Wikipedia. The event page gives 81 Browning Lane, Bellevue.
+- id: teton-county-fairgrounds-id
+  name: Teton County Fairgrounds
+  kind: fairground
+  state: ID
+  town: Driggs
+  location:
+    lat: 43.74166667
+    lon: -111.10611111
+    precision: town
+    source_id: events-ssk-wikipedia-driggs-id
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Driggs, Idaho, from Wikipedia. The fairgrounds have no Wikipedia coordinates.
+- id: wisdom-mt-county-road
+  name: 216 County Road
+  kind: other
+  state: MT
+  town: Wisdom
+  location:
+    lat: 45.61138889
+    lon: -113.44694444
+    precision: town
+    source_id: events-ssk-wikipedia-wisdom-mt
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Wisdom, Montana, from Wikipedia. The event listing gives 216 County Road, Wisdom.
+- id: central-montana-fairgrounds
+  name: Central Montana Fairgrounds
+  kind: fairground
+  state: MT
+  town: Lewistown
+  location:
+    lat: 47.06666667
+    lon: -109.42361111
+    precision: town
+    source_id: events-ssk-wikipedia-lewistown-mt
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Lewistown, Montana, from Wikipedia. The fairgrounds have no Wikipedia coordinates.
+- id: jefferson-county-fairgrounds-mt
+  name: Jefferson County Fairgrounds
+  kind: fairground
+  state: MT
+  town: Boulder
+  location:
+    lat: 46.23583333
+    lon: -112.12333333
+    precision: town
+    source_id: events-ssk-wikipedia-boulder-mt
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Boulder, Montana, from Wikipedia. The fairgrounds have no Wikipedia coordinates.
+- id: bridger-brewing-three-forks
+  name: "Bridger Brewing, Three Forks"
+  kind: other
+  state: MT
+  town: Three Forks
+  location:
+    lat: 45.88055556
+    lon: -111.56277778
+    precision: town
+    source_id: events-ssk-wikipedia-three-forks-mt
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Three Forks, Montana, from Wikipedia.
+- id: buffalo-wy-skijor
+  name: Buffalo
+  kind: town
+  state: WY
+  town: Buffalo
+  location:
+    lat: 44.33833333
+    lon: -106.72777778
+    precision: town
+    source_id: events-ssk-wikipedia-buffalo-wy
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Buffalo, Wyoming, from Wikipedia. The source names the town only.
+- id: garden-city-ut-skijor
+  name: Garden City
+  kind: town
+  state: UT
+  town: Garden City
+  location:
+    lat: 41.92166667
+    lon: -111.39305556
+    precision: town
+    source_id: events-ssk-wikipedia-garden-city-ut
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Garden City, Utah, from Wikipedia, where the 2025 edition was held.
+- id: bangor-me-skijor
+  name: Bangor
+  kind: town
+  state: ME
+  town: Bangor
+  location:
+    lat: 44.85833333
+    lon: -68.76166667
+    precision: town
+    source_id: events-ssk-wikipedia-bangor-me
+    as_of: 2026-10-20
+    confidence: reported
+    note: City center of Bangor, Maine, from Wikipedia. A 2024 listing placed the race at Bangor Raceway; the 2026 venue was not confirmed.
+- id: topsham-fairgrounds-me
+  name: Topsham Fairgrounds
+  kind: fairground
+  state: ME
+  town: Topsham
+  location:
+    lat: 43.975
+    lon: -69.97638889
+    precision: town
+    source_id: events-ssk-wikipedia-topsham-me
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Topsham, Maine, from Wikipedia. The fairgrounds have no Wikipedia coordinates.
+- id: skowhegan-state-fairgrounds
+  name: Skowhegan State Fairgrounds
+  kind: fairground
+  state: ME
+  town: Skowhegan
+  location:
+    lat: 44.75555556
+    lon: -69.66666667
+    precision: town
+    source_id: events-ssk-wikipedia-skowhegan-me
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Skowhegan, Maine, from Wikipedia. The fairgrounds have no Wikipedia coordinates.
+- id: rice-lake-wi-skijor
+  name: Rice Lake
+  kind: town
+  state: WI
+  town: Rice Lake
+  location:
+    lat: 45.49833333
+    lon: -91.73888889
+    precision: town
+    source_id: events-ssk-wikipedia-rice-lake-wi
+    as_of: 2026-10-20
+    confidence: reported
+    note: City center of Rice Lake, Wisconsin, from Wikipedia.
+- id: minocqua-winter-park-wi
+  name: Minocqua Winter Park
+  kind: nordic_center
+  state: WI
+  town: Minocqua
+  location:
+    lat: 45.87063889
+    lon: -89.70916667
+    precision: town
+    source_id: events-ssk-wikipedia-minocqua-wi
+    as_of: 2026-10-20
+    confidence: reported
+    note: Town center of Minocqua, Wisconsin, from Wikipedia. The park has no Wikipedia coordinates.
+- id: grand-marais-mn-dog-days
+  name: Grand Marais
+  kind: town
+  state: MN
+  town: Grand Marais
+  location:
+    lat: 47.75027778
+    lon: -90.33444444
+    precision: town
+    source_id: events-ssk-wikipedia-grand-marais-mn
+    as_of: 2026-10-20
+    confidence: reported
+    note: City center of Grand Marais, Minnesota, from Wikipedia.
+- id: tok-ak-race-of-champions
+  name: Tok
+  kind: town
+  state: AK
+  town: Tok
+  location:
+    lat: 63.32416667
+    lon: -143.01805556
+    precision: town
+    source_id: events-ssk-wikipedia-tok-ak
+    as_of: 2026-10-20
+    confidence: reported
+    note: Center of Tok, Alaska, from Wikipedia.
+- id: baldwin-mi-stearns-siding
+  name: Sweetwater trails at Stearns Siding
+  kind: trail
+  state: MI
+  town: Baldwin
+  location:
+    lat: 43.89722222
+    lon: -85.85305556
+    precision: town
+    source_id: events-ssk-wikipedia-baldwin-mi
+    as_of: 2026-10-20
+    confidence: reported
+    note: Village center of Baldwin, Michigan, from Wikipedia. The race listing names the Sweetwater trail system at Stearns Siding.
+- id: winona-state-forest-ccc-camp
+  name: "CCC Camp, Winona State Forest"
+  kind: park
+  state: NY
+  town: Mannsville
+  location:
+    lat: 43.69722222
+    lon: -75.975
+    precision: region
+    source_id: events-ssk-wikipedia-winona-state-forest
+    as_of: 2026-10-20
+    confidence: reported
+    note: Point of the Winona State Forest article on Wikipedia; the CCC Camp lies in the forest. Race listings name Mannsville.
+- id: saranac-ny-snowshoe
+  name: Saranac
+  kind: town
+  state: NY
+  town: Saranac
+  location:
+    lat: 44.65138889
+    lon: -73.74361111
+    precision: town
+    source_id: events-ssk-wikipedia-saranac-ny
+    as_of: 2026-10-20
+    confidence: reported
+    note: Center of the town of Saranac, New York, from Wikipedia.
 events:
 # ---------------------------------------------------------------- snowshoe racing
 - id: us-snowshoe-national-championships
   name: US Snowshoe National Championships
   discipline: snowshoe_race
-  levels: [elite, open_amateur, junior]
+  levels: [elite, open_amateur]
   venue: {venue_id: concord-nh-one-delta-dental}
   format: {value: "Women's and men's 10 km championships on Saturday; open 5 km and under 20 national race on Sunday; flat course through open field, singletrack and around a pond", source_id: events-ssk-trailrunner-us-snowshoe-nationals-2027-search, as_of: 2026-10-17, confidence: estimated}
   edition_2026_27: {start: 2027-02-13, end: 2027-02-14, source_id: events-ssk-trailrunner-us-snowshoe-nationals-2027-search, as_of: 2026-10-17, confidence: estimated}
@@ -865,7 +1319,7 @@ events:
 - id: big-sky-best-in-the-west-showdown
   name: Big Sky Skijoring Best in the West Showdown
   discipline: skijoring
-  levels: [open_amateur, junior, elite]
+  levels: [open_amateur, elite]
   venue: {venue_id: big-sky-mt-town-center}
   organizer: {name: Big Sky Skijoring, source_id: events-ssk-explorebigsky-community-search, as_of: 2026-10-17, confidence: estimated}
   format: {value: "Equine skijoring on about 600 feet of snow covered street, with novice, junior, sport and open (pro) divisions", source_id: events-ssk-explorebigsky-three-days-search, as_of: 2026-10-17, confidence: estimated}
@@ -878,25 +1332,12 @@ events:
   name: Silverton Skijoring
   discipline: skijoring
   levels: [open_amateur]
-  venue: {venue_id: silverton-co-skijoring}
+  venue: {venue_id: silverton-co-town}
   format: {value: "Teams take on jumps and gates at speed and collect rings, racing from noon to 3 p.m. on Saturday and Sunday", source_id: events-ssk-durangoherald-silverton-search, as_of: 2026-10-17, confidence: estimated}
   edition_2026_27: null
   last_edition: {start: 2025-02-15, end: null, season: 2024/25, source_id: events-ssk-skabrewing-silverton-search, as_of: 2026-10-17, confidence: estimated, note: "The listing gives February 15, 2025 only. A Durango Herald headline from February 14, 2026 reports skijoring returning to Silverton, with no dates in the result."}
   signup: null
   website: {value: "https://skabrewing.com/event/silverton-skijoring", source_id: events-ssk-skabrewing-silverton-search, as_of: 2026-10-17, confidence: estimated}
-
-- id: steamboat-winter-carnival-skijoring
-  name: Steamboat Springs Winter Carnival Ski Joring
-  discipline: skijoring
-  levels: [junior]
-  venue: {venue_id: steamboat-springs-co-lincoln-avenue}
-  format: {value: "Horse events on Lincoln Avenue including street slalom, the donkey jump, the shovel race and ski joring, for children ages 6 to 14", source_id: events-ssk-localfreshies-steamboat-search, as_of: 2026-10-17, confidence: estimated}
-  edition_2026_27: null
-  last_edition: {start: 2026-02-03, end: 2026-02-08, season: 2025/26, source_id: events-ssk-gazette-colorado-festivals-2026-search, as_of: 2026-10-17, confidence: estimated, note: "Dates of the whole Winter Carnival. A third party festival site gives February 2 to 7, 2027 and labels those dates as estimated."}
-  signup:
-    method: null
-    requirements: {value: "Pre registration is required; the horse events are for children ages 6 to 14.", source_id: events-ssk-localfreshies-steamboat-search, as_of: 2026-10-17, confidence: estimated}
-  website: {value: "https://localfreshies.com/event/steamboat-springs-skijoring/", source_id: events-ssk-localfreshies-steamboat-search, as_of: 2026-10-17, confidence: estimated}
 
 - id: san-juan-skijoring
   name: San Juan Skijoring
@@ -984,7 +1425,7 @@ events:
   name: Extreme Horse Skijoring at Canterbury Park
   discipline: skijoring
   levels: [open_amateur]
-  venue: {venue_id: canterbury-park-mn}
+  venue: {venue_id: shakopee-mn-canterbury-park}
   format: {value: "Horse skijoring weekend with a 15 foot snow jump and a 20 foot gap", source_id: events-ssk-espnsiouxfalls-canterbury-search, as_of: 2026-10-17, confidence: estimated}
   edition_2026_27: null
   last_edition: {season: 2024/25, source_id: events-ssk-fox9-canterbury-2025-search, as_of: 2026-10-17, confidence: estimated, note: "A report covers the 2025 competition at Canterbury Park; the result gives no exact dates."}
@@ -1049,7 +1490,7 @@ events:
   venue: {venue_id: driggs-id-pro-skijor}
   organizer: {name: PRO Skijor, url: "https://proskijor.com/", source_id: events-ssk-utahbusiness-pro-skijor-launch-search, as_of: 2026-10-17, confidence: estimated}
   edition_2026_27: null
-  last_edition: {start: 2026-02-21, end: 2026-02-22, season: 2025/26, source_id: events-ssk-argusobserver-frontier-tour-search, as_of: 2026-10-17, confidence: estimated, note: "No 2027 tour schedule was found."}
+  last_edition: {start: 2026-02-21, end: 2026-02-22, season: 2025/26, source_id: events-ssk-argusobserver-frontier-tour-search, as_of: 2026-10-17, confidence: estimated, note: "No 2027 tour schedule was found. Teton Valley Skijoring listed its Grand Showdown at the Teton County Fairgrounds in Driggs on the same dates."}
   signup: null
   website: {value: "https://proskijor.com/", source_id: events-ssk-utahbusiness-pro-skijor-launch-search, as_of: 2026-10-17, confidence: estimated}
 
@@ -1087,7 +1528,7 @@ events:
   venue: {venue_id: lake-mitchell-mi}
   format: {value: "Rider welcome party and a Saturday freeride on Lake Mitchell or Lake Cadillac, weather permitting, plus an unofficial Sunday session", source_id: events-ssk-givebutter-midwest-snow-kite-jam-2026-search, as_of: 2026-10-17, confidence: estimated}
   edition_2026_27: null
-  last_edition: {start: 2026-02-06, end: 2026-02-08, season: 2025/26, source_id: events-ssk-givebutter-midwest-snow-kite-jam-2026-search, as_of: 2026-10-17, confidence: estimated, note: "The 2026 edition added a fundraiser for Project Koru. A MyNorth article (source events-ssk-mynorth-midwest-snowkite-jam-search) says the jam began in the Traverse City area around 2014 and moved to Cadillac in 2022."}
+  last_edition: {start: 2026-02-06, end: 2026-02-08, season: 2025/26, source_id: events-ssk-givebutter-midwest-snow-kite-jam-2026-search, as_of: 2026-10-17, confidence: estimated, note: "The 2026 edition added a fundraiser for Project Koru. A MyNorth article says the jam began in the Traverse City area around 2014 and moved to Cadillac in 2022."}
   signup: null
   website: {value: "https://midwestsnowkitejam.com/", source_id: events-ssk-northernexpress-midwest-snowkite-jam-2023-search, as_of: 2026-10-17, confidence: estimated}
 
@@ -1101,6 +1542,296 @@ events:
   last_edition: {start: 2019-03-01, end: 2019-03-03, season: 2018/19, source_id: events-ssk-brainerd-kite-crossing-2019-search, as_of: 2026-10-17, confidence: estimated, note: "Newest dated edition found in the search results, which ran from 2016 to 2020. Whether the event still runs was not confirmed."}
   signup: null
   website: {value: "https://www.brainerddispatch.com/sports/kite-crossing", source_id: events-ssk-brainerd-kite-crossing-search, as_of: 2026-10-17, confidence: estimated}
+
+# ---------------------------------------------------------------- second pass (2026-10-20): equine skijoring
+- id: wood-river-extreme-ski-joring
+  name: Wood River Extreme Ski Joring
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: bellevue-id-browning-lane}
+  sanctioning: {name: Skijoring America, source_id: events-ssk-localfreshies-rockies-list-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-14, end: null, season: 2025/26, source_id: events-ssk-visitsunvalley-wood-river-2026-search, as_of: 2026-10-20, confidence: estimated, note: "The page header gives February 14 and its save the date line gives February 14 and 15."}
+  signup:
+    method: online_registration
+    url: {value: "https://visitsunvalley.com/events/wood-river-extreme-ski-joring/", source_id: events-ssk-visitsunvalley-wood-river-2026-search, as_of: 2026-10-20, confidence: estimated}
+    requirements: {value: "Pre registration is required; in 2026 online registration closed at 9 p.m. on February 12.", source_id: events-ssk-visitsunvalley-wood-river-2026-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://visitsunvalley.com/events/wood-river-extreme-ski-joring/", source_id: events-ssk-visitsunvalley-wood-river-2026-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: teton-valley-skijoring
+  name: Teton Valley Skijoring Grand Showdown
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: teton-county-fairgrounds-id}
+  format: {value: "Equine skijoring with women's, beginner, sport, snowboard and open divisions, plus youth classes", source_id: events-ssk-tetonskijor-regfox-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-21, end: 2026-02-22, season: 2025/26, source_id: events-ssk-tetonskijor-regfox-search, as_of: 2026-10-20, confidence: estimated, note: "The PRO Skijor Frontier Tour also listed a Driggs stop on these dates; the sources do not say whether they are one event."}
+  signup:
+    method: online_registration
+    url: {value: "https://tetonskijor.regfox.com/tetonskijor", source_id: events-ssk-tetonskijor-regfox-search, as_of: 2026-10-20, confidence: estimated}
+    platform: {value: RegFox, source_id: events-ssk-tetonskijor-regfox-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://tetonskijor.org/", source_id: events-ssk-explorebigsky-teton-valley-2026-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: big-hole-valley-skijoring
+  name: Big Hole Valley Skijoring
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: wisdom-mt-county-road}
+  format: {value: "Skiers take eight gates and three 3 foot jumps over snow covered hay bales behind working ranch horses", source_id: events-ssk-viamagazine-big-hole-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-21, end: 2026-02-22, season: 2025/26, source_id: events-ssk-southwestmt-big-hole-search, as_of: 2026-10-20, confidence: estimated, note: "Saturday race from 12:30 p.m. and Sunday race from 11:30 a.m."}
+  signup: null
+  website: {value: "https://southwestmt.com/events/big-hole-valley-skijoring", source_id: events-ssk-southwestmt-big-hole-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: montana-winter-fair-skijoring
+  name: Montana Winter Fair Skijoring
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: central-montana-fairgrounds}
+  format: {value: "Skijoring during the Montana Winter Fair in Lewistown", source_id: events-ssk-nbcmontana-winter-fair-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-15, end: 2026-01-18, season: 2025/26, source_id: events-ssk-judithbasinpress-winter-fair-2026-search, as_of: 2026-10-20, confidence: estimated, note: "Dates of the whole fair, held two weeks earlier than in past years; the skijoring day was not in the result."}
+  signup: null
+  website: {value: "https://nbcmontana.com/news/local/montana-winter-fair-returns-with-skijoring", source_id: events-ssk-nbcmontana-winter-fair-search, as_of: 2026-10-20, confidence: estimated, note: "News report; no event page was found."}
+
+- id: skijoring-the-big-rock
+  name: Skijoring the Big Rock
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: jefferson-county-fairgrounds-mt}
+  organizer: {name: Boulder Valley Skijoring Association, source_id: events-ssk-ktvh-big-rock-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-31, end: 2026-02-01, season: 2025/26, source_id: events-ssk-southwestmt-big-rock-search, as_of: 2026-10-20, confidence: estimated, note: "Local coverage calls the 2026 race the fifth annual."}
+  signup: null
+  website: {value: "https://southwestmt.com/events/skijoring-the-big-rock/", source_id: events-ssk-southwestmt-big-rock-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: bridger-brewskis-and-spurs-skijoring
+  name: Bridger Brewskis and Spurs Skijoring Competition
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: bridger-brewing-three-forks}
+  organizer: {name: Bridger Brewing with KH Horse Consulting, source_id: events-ssk-explorebigsky-brewskis-2026-search, as_of: 2026-10-20, confidence: estimated}
+  format: {value: "Open 4D, youth, snowboarding and switcheroo divisions; 120 teams raced at the first edition", source_id: events-ssk-explorebigsky-brewskis-2026-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-28, end: 2026-03-01, season: 2025/26, source_id: events-ssk-explorebigsky-brewskis-2026-search, as_of: 2026-10-20, confidence: estimated, note: "First edition."}
+  signup: null
+  website: {value: "https://www.explorebigsky.com/three-forks-skijoring-debuts-bridger-brewskis-and-spurs-skijoring-competition/167974", source_id: events-ssk-explorebigsky-brewskis-2026-search, as_of: 2026-10-20, confidence: estimated, note: "News report; no event page was found."}
+
+- id: gallatin-skijor-invitational
+  name: Gallatin Skijor Invitational
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: gallatin-county-fairgrounds}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-17, end: 2026-01-18, season: 2025/26, source_id: events-ssk-outsidebozeman-gallatin-invitational-2026-search, as_of: 2026-10-20, confidence: estimated, note: "The PRO Skijor Frontier Tour listed its Bozeman stop at the same fairgrounds for January 24 to 25, 2026."}
+  signup: null
+  website: {value: "https://outsidebozeman.com/events/2026/gallatin-skijor-invitational", source_id: events-ssk-outsidebozeman-gallatin-invitational-2026-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: forty-nine-north-skijoring
+  name: 49° North Skijoring
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {resort_id: 49-north-mountain-resort}
+  organizer: {name: Melody Riders Saddle Club with 49° North Mountain Resort, source_id: events-ssk-chewelah-skijoring-qualifiers-search, as_of: 2026-10-20, confidence: estimated}
+  format: {value: "Qualifier and finals races for teams of a rider, a horse and a skier or snowboarder, starting at 11 a.m.", source_id: events-ssk-ski49n-skijoring-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-24, end: 2026-01-25, season: 2025/26, source_id: events-ssk-ski49n-skijoring-search, as_of: 2026-10-20, confidence: estimated, note: "The event began in 2024."}
+  signup:
+    method: null
+    requirements: {value: "Entries were capped at 40 teams in the previous season.", source_id: events-ssk-seattlemag-holding-the-line-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://www.ski49n.com/upcoming-events/details/skijoring", source_id: events-ssk-ski49n-skijoring-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: skijor-wars-buffalo
+  name: Skijor Wars
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: buffalo-wy-skijor}
+  edition_2026_27: null
+  last_edition: null
+  usual_timing: {value: "February", source_id: events-ssk-travelwyoming-skijoring-search, as_of: 2026-10-20, confidence: estimated, note: "The source says Wyoming's competitive skijoring is mostly held in February."}
+  signup: null
+  website: {value: "https://travelwyoming.com/article/skijoring-in-wyoming-what-is-it-where-can-you-watch", source_id: events-ssk-travelwyoming-skijoring-search, as_of: 2026-10-20, confidence: estimated, note: "Travel Wyoming article that lists Skijor Wars in Buffalo; no event page was found."}
+
+- id: skijoring-the-bear
+  name: Skijoring the Bear
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: garden-city-ut-skijor}
+  edition_2026_27: null
+  last_edition: {season: 2024/25, source_id: events-ssk-bearlake-skijoring-in-bear-lake-search, as_of: 2026-10-20, confidence: estimated, note: "Held in Garden City in 2025; exact dates not in the result. The 2026 edition, planned for February 13 to 14 at Historic Kearl Ranch in Laketown, was cancelled for lack of snow."}
+  signup:
+    method: null
+    fee_usd: {value: 100, note: "Per team, 2025 edition; spectators entered free.", source_id: events-ssk-bearlake-skijoring-in-bear-lake-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://bearlake.org/skijoring-in-bear-lake/", source_id: events-ssk-bearlake-skijoring-in-bear-lake-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: skijor-bangor
+  name: Skijor Bangor
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: bangor-me-skijor}
+  format: {value: "First of three Maine skijoring races in 2026, with 44 professional and novice teams", source_id: events-ssk-bdn-bangor-2026-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-31, end: 2026-01-31, season: 2025/26, source_id: events-ssk-wabi-bangor-2026-search, as_of: 2026-10-20, confidence: estimated}
+  signup: null
+  website: {value: "https://www.bangordailynews.com/2026/01/31/homestead/bangor-maine-skijoring-extreme-winter-sport/", source_id: events-ssk-bdn-bangor-2026-search, as_of: 2026-10-20, confidence: estimated, note: "News report; no event page was found."}
+
+- id: topsham-fair-skijoring
+  name: Topsham Fair Skijoring
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: topsham-fairgrounds-me}
+  format: {value: "Equine skijoring at the Topsham Fairgrounds, first held in 2022", source_id: events-ssk-bdn-bangor-2026-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2025-01-25, end: 2025-01-25, season: 2024/25, source_id: events-ssk-westernhorseman-maine-2025-search, as_of: 2026-10-20, confidence: estimated, note: "Newest dated edition found; no 2026 date appeared in the results."}
+  signup: null
+  website: {value: "https://newscentermaine.com/article/entertainment/events/skis-and-steeds-topshams-first-ever-skijoring-event-draws-big-crowd-to-fairgrounds-maine-skowhegan-skijor-what-is-skijoring-horses-skiers-sport/97-63ca4a26-a3b5-428c-8cc9-7ead8bd62625", source_id: events-ssk-newscentermaine-topsham-search, as_of: 2026-10-20, confidence: estimated, note: "News report on the first edition; no event page was found."}
+
+- id: skijor-skowhegan
+  name: Skijor Skowhegan
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: skowhegan-state-fairgrounds}
+  format: {value: "Equine skijoring race that closes the week long Somerset Snowfest winter festival", source_id: events-ssk-spectrum-skowhegan-2026-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-21, end: 2026-02-21, season: 2025/26, source_id: events-ssk-spectrum-skowhegan-2026-search, as_of: 2026-10-20, confidence: estimated, note: "Maine's first formal skijoring race was held here in 2019; the 2025 race ran February 22."}
+  signup: null
+  website: {value: "https://visitmaine.com/events/skijor-skowhegan/c13c5a30-6b27-492a-9136-7b2ae742b72d", source_id: events-ssk-visitmaine-skijor-skowhegan-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: spurs-and-skis-skijoring-stampede
+  name: Spurs and Skis Skijoring Stampede
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: rice-lake-wi-skijor}
+  format: {value: "Sport, open, snowboarder and youth classes", source_id: events-ssk-wpr-rice-lake-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2019/20, source_id: events-ssk-spectatornews-rice-lake-2020-search, as_of: 2026-10-20, confidence: estimated, note: "Second annual edition, reported in March 2020; newest edition confirmed in the results. Whether it still runs was not confirmed."}
+  signup: null
+  website: {value: "https://wpr.org/sports/skijoring-twist-rice-lake", source_id: events-ssk-wpr-rice-lake-search, as_of: 2026-10-20, confidence: estimated, note: "News report; no event page was found."}
+
+# ---------------------------------------------------------------- second pass: dog skijoring
+- id: open-north-american-championship-skijor
+  name: Open North American Championship skijoring races
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: fairbanks-ak}
+  organizer: {name: Alaska Dog Mushers Association, source_id: events-ssk-explorefairbanks-onac-2026-search, as_of: 2026-10-20, confidence: estimated}
+  format: {value: "Skijoring races held with the sled dog sprint championship in Fairbanks", source_id: events-ssk-explorefairbanks-onac-2026-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-20, end: 2026-03-22, season: 2025/26, source_id: events-ssk-explorefairbanks-onac-2026-search, as_of: 2026-10-20, confidence: estimated}
+  signup: null
+  website: {value: "https://www.explorefairbanks.com/event/open-north-american-championship%3A-skijoring-%26-dog-sledding-race/11324/", source_id: events-ssk-explorefairbanks-onac-2026-search, as_of: 2026-10-20, confidence: estimated}
+  calendar_url: {value: "https://alaskadogmushers.com/preliminary-races/", source_id: events-ssk-alaskadogmushers-prelims-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: tanana-river-challenge-skijor
+  name: Tanana River Challenge skijor divisions
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: fairbanks-ak}
+  format: {value: "Endurance race with 45 mile and 25 mile skijor divisions; the long course needs at least two dogs", source_id: events-ssk-ultrasignup-tanana-2026-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-03-14, end: 2026-03-14, season: 2025/26, source_id: events-ssk-ultrasignup-tanana-2026-search, as_of: 2026-10-20, confidence: estimated}
+  signup:
+    method: online_registration
+    url: {value: "https://ultrasignup.com/register.aspx?did=132773", source_id: events-ssk-ultrasignup-tanana-2026-search, as_of: 2026-10-20, confidence: estimated}
+    platform: {value: UltraSignup, source_id: events-ssk-ultrasignup-tanana-2026-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://www.explorefairbanks.com/event/tanana-river-challenge/11270/", source_id: events-ssk-explorefairbanks-tanana-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: tok-race-of-champions-skijor
+  name: Tok Race of Champions skijoring
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: tok-ak-race-of-champions}
+  format: {value: "Adult skijoring race on Saturday and Sunday for teams of up to two dogs", source_id: events-ssk-tokdogmushers-skijoring-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, source_id: events-ssk-tokdogmushers-home-search, as_of: 2026-10-20, confidence: estimated, note: "The organizer's site carried a registration heading for the 2026 race; no dates were in the result."}
+  signup:
+    method: null
+    requirements: {value: "Teams of up to two dogs; ISDRA fees do not apply to this race.", source_id: events-ssk-tokdogmushers-skijoring-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://www.tokdogmushers.org/race-of-champions/skijoring", source_id: events-ssk-tokdogmushers-skijoring-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: winter-park-bark-skijor
+  name: Winter Park Bark Skijor Race
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: minocqua-winter-park-wi}
+  format: {value: "Dog skijor race with one dog classes; it returned in 2025 after a five year break", source_id: events-ssk-runsignup-winter-park-bark-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2025-03-02, end: 2025-03-02, season: 2024/25, source_id: events-ssk-runsignup-winter-park-bark-search, as_of: 2026-10-20, confidence: estimated, note: "Travel Wisconsin listed March 1, 2025. No 2026 or 2027 date was found."}
+  signup:
+    method: online_registration
+    url: {value: "https://runsignup.com/Race/Info/WI/Minocqua/WinterParkBark", source_id: events-ssk-runsignup-winter-park-bark-search, as_of: 2026-10-20, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-ssk-runsignup-winter-park-bark-search, as_of: 2026-10-20, confidence: estimated}
+    requirements: {value: "Mandatory pre race meeting at 9 a.m. before the 10 a.m. start (2025).", source_id: events-ssk-runsignup-winter-park-bark-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://runsignup.com/Race/Info/WI/Minocqua/WinterParkBark", source_id: events-ssk-runsignup-winter-park-bark-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: great-lakes-sled-dog-derby-skijor
+  name: Great Lakes Sled Dog Derby skijor class
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: baldwin-mi-stearns-siding}
+  organizer: {name: Great Lakes Sled Dog Association, source_id: events-ssk-runscore-great-lakes-derby-search, as_of: 2026-10-20, confidence: estimated}
+  format: {value: "2 dog adult skijor over 4.2 miles within the Great Lakes Sled Dog Derby", source_id: events-ssk-runscore-great-lakes-derby-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-01-31, end: 2026-02-01, season: 2025/26, source_id: events-ssk-runscore-great-lakes-derby-search, as_of: 2026-10-20, confidence: estimated}
+  signup:
+    method: online_registration
+    url: {value: "https://runscore.runsignup.com/Race/MI/Baldwin/GreatLakesSledDogDerby", source_id: events-ssk-runscore-great-lakes-derby-search, as_of: 2026-10-20, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-ssk-runscore-great-lakes-derby-search, as_of: 2026-10-20, confidence: estimated}
+    requirements: {value: "Entry fees are per class; 2026 registration closed January 27.", source_id: events-ssk-runscore-great-lakes-derby-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://runscore.runsignup.com/Race/MI/Baldwin/GreatLakesSledDogDerby", source_id: events-ssk-runscore-great-lakes-derby-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: tug-hill-challenge-skijor
+  name: Tug Hill Challenge skijor classes
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: winona-state-forest-ccc-camp}
+  organizer: {name: Pennsylvania Sled Dog Club, source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+  sanctioning: {name: ISDRA, source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+  format: {value: "1 dog and 2 dog skijor classes alongside sled classes, racing from 8 a.m. Saturday and Sunday", source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-02-14, end: null, season: 2025/26, source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+  signup:
+    method: online_registration
+    url: {value: "https://runscore.runsignup.com/Race/NY/Mannsville/TugHillChallenge", source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+    requirements: {value: "A team must run day one to run day two; 2026 registration closed February 9.", source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://runscore.runsignup.com/Race/NY/Mannsville/TugHillChallenge", source_id: events-ssk-runscore-tug-hill-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: dog-days-of-winter-skijoring
+  name: Dog Days of Winter skijoring races
+  discipline: skijoring
+  levels: [open_amateur]
+  venue: {venue_id: grand-marais-mn-dog-days}
+  format: {value: "Skijoring races of 2 miles and 5 miles alongside sled dog derbies on the North Shore", source_id: events-ssk-exploreminnesota-dog-days-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, source_id: events-ssk-exploreminnesota-dog-days-search, as_of: 2026-10-20, confidence: estimated, note: "Newest edition found in the results (2023); exact dates and later editions were not found."}
+  signup: null
+  website: {value: "https://exploreminnesota.com/event/dog-days-winter/11062", source_id: events-ssk-exploreminnesota-dog-days-search, as_of: 2026-10-20, confidence: estimated}
+
+# ---------------------------------------------------------------- second pass: snowshoe racing
+- id: stone-wall-snowshoe-event
+  name: The Stone Wall Snowshoe Event
+  discipline: snowshoe_race
+  levels: [open_amateur]
+  venue: {venue_id: winona-state-forest-ccc-camp}
+  organizer: {name: Winona Forest Recreation Association, source_id: events-ssk-gotrail-stone-wall-search, as_of: 2026-10-20, confidence: estimated}
+  format: {value: "5 km and 10 km snowshoe races from the CCC Camp on County Route 90", source_id: events-ssk-gotrail-stone-wall-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: {start: 2027-01-24, end: 2027-01-24, source_id: events-ssk-gotrail-stone-wall-search, as_of: 2026-10-20, confidence: estimated}
+  signup:
+    method: null
+    fee_usd: {value: 37, note: "Pre registration rate for both the 5 km and the 10 km.", source_id: events-ssk-gotrail-stone-wall-search, as_of: 2026-10-20, confidence: estimated}
+  website: {value: "https://gotrail.run/en/event/the-stone-wall-snowshoe-event", source_id: events-ssk-gotrail-stone-wall-search, as_of: 2026-10-20, confidence: estimated}
+
+- id: cock-a-doodle-shoe
+  name: Cock-A-Doodle Shoe 5K/10K Snowshoe Race
+  discipline: snowshoe_race
+  levels: [open_amateur]
+  venue: {venue_id: saranac-ny-snowshoe}
+  format: {value: "5 km and 10 km snowshoe races", source_id: events-ssk-adktaste-cock-a-doodle-shoe-search, as_of: 2026-10-20, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2023/24, source_id: events-ssk-adktaste-cock-a-doodle-shoe-search, as_of: 2026-10-20, confidence: estimated, note: "The newest listing found was for 2024; exact dates were not in the result."}
+  signup: null
+  website: {value: "https://adktaste.com/adirondack-events/cock-a-doodle-shoe", source_id: events-ssk-adktaste-cock-a-doodle-shoe-search, as_of: 2026-10-20, confidence: estimated}
 
 calendars:
 - id: skijor-usa-race-circuit
@@ -1133,3 +1864,8 @@ calendars:
   discipline: snowshoe_race
   region: WI
   url: {value: "https://runsignup.com/Race/Info/WI/VariesbyRace/SnowshoeScurry", source_id: events-ssk-runsignup-snowshoe-scurry-search, as_of: 2026-10-17, confidence: estimated}
+- id: alaska-dog-mushers-races
+  name: Alaska Dog Mushers Association races (sled dog and skijoring)
+  discipline: skijoring
+  region: AK
+  url: {value: "https://alaskadogmushers.com/preliminary-races/", source_id: events-ssk-alaskadogmushers-prelims-search, as_of: 2026-10-20, confidence: estimated, note: "Preliminary race schedule; the first race of the season is December 6, 2026."}

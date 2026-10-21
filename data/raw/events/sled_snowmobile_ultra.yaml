@@ -1,7 +1,3 @@
-# Sled dog, snowmobile and winter ultra events (United States).
-# Research lane: sled_snowmobile_ultra. Contract: docs/map/EVENTS.md.
-# Only en.wikipedia.org could be opened; every other fact comes from a web search result and
-# is marked confidence: estimated. Nothing here was invented; unknown values are left out or null.
 batch: events-sled_snowmobile_ultra
 researched_date: 2026-10-17
 sources:
@@ -1297,7 +1293,6 @@ events:
   discipline: sled_dog
   levels:
   - open_amateur
-  - junior
   venue:
     resort_id: null
     venue_id: lincoln-mt-town
@@ -1457,7 +1452,6 @@ events:
   discipline: sled_dog
   levels:
   - open_amateur
-  - junior
   venue:
     resort_id: ferguson-ridge-ski-area
     venue_id: null
@@ -1819,7 +1813,6 @@ events:
   levels:
   - elite
   - masters
-  - junior
   venue:
     resort_id: snow-king-mountain
     venue_id: null

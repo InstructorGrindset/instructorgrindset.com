@@ -136,21 +136,6 @@ sources:
   title: iHeart U.S. Revolution Tour
   accessed_date: 2026-10-17
   note: From a search result for this page; page not opened.
-- id: events-freestyle-usss-rev-tour-copper-2026
-  url: https://www.usskiandsnowboard.org/events/us-revolution-tour-copper-mountain-1
-  title: iHeart U.S. Revolution Tour at Copper Mountain
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-freestyle-usss-rev-tour-mammoth-2026
-  url: https://www.usskiandsnowboard.org/events/iheart-us-revolution-tour-mammoth
-  title: iHeart U.S. Revolution Tour at Mammoth
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
-- id: events-freestyle-usss-rev-tour-aspen-open-2026
-  url: http://usskiandsnowboard.org/events/us-revolution-tour-aspen-snowmass-open
-  title: iHeart U.S. Revolution Tour at Aspen Open
-  accessed_date: 2026-10-17
-  note: From a search result for this page; page not opened.
 - id: events-freestyle-usss-mogul-championships
   url: https://www.usskiandsnowboard.org/events/toyota-us-mogul-freestyle-championships
   title: Toyota U.S. Mogul Freestyle Championships
@@ -398,7 +383,6 @@ events:
   discipline: aerials
   levels:
   - elite
-  - junior
   venue:
     resort_id: utah-olympic-park
     venue_id: null
@@ -444,7 +428,6 @@ events:
   discipline: moguls
   levels:
   - elite
-  - junior
   venue:
     resort_id: deer-valley
     venue_id: null
@@ -490,7 +473,6 @@ events:
   discipline: moguls
   levels:
   - elite
-  - junior
   venue:
     resort_id: killington
     venue_id: null
@@ -783,169 +765,6 @@ events:
     source_id: events-freestyle-usss-freeski-events
     as_of: 2026-10-17
     confidence: estimated
-- id: us-revolution-tour-copper-mountain
-  name: iHeart U.S. Revolution Tour at Copper Mountain
-  series:
-    id: us-revolution-tour
-    name: U.S. Revolution Tour (Rev Tour)
-  discipline: slopestyle
-  disciplines_also:
-  - halfpipe
-  levels:
-  - junior
-  venue:
-    resort_id: copper-mountain
-    venue_id: null
-  organizer:
-    name: U.S. Ski & Snowboard
-    url: https://www.usskiandsnowboard.org/
-    source_id: events-freestyle-usss-rev-tour-copper-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  format:
-    value: Freeski and snowboard halfpipe and slopestyle after a training day; one listing adds snowboard big air
-    source_id: events-freestyle-usss-rev-tour-copper-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27: null
-  last_edition:
-    start: 2026-01-12
-    end: 2026-01-17
-    season: 2025/26
-    source_id: events-freestyle-usss-rev-tour-copper-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: online_registration
-    url:
-      value: https://www.usskiandsnowboard.org/revolutiontour
-      source_id: events-freestyle-usss-revolution-tour
-      as_of: 2026-10-17
-      confidence: estimated
-    requirements:
-      value: Registration with an alternate list; the 2026 alternate list deadline was December 12, 2025
-      source_id: events-freestyle-usss-rev-tour-copper-2026
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://www.usskiandsnowboard.org/events/us-revolution-tour-copper-mountain-1
-    source_id: events-freestyle-usss-rev-tour-copper-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://www.usskiandsnowboard.org/revolutiontour
-    source_id: events-freestyle-usss-revolution-tour
-    as_of: 2026-10-17
-    confidence: estimated
-- id: us-revolution-tour-mammoth-mountain
-  name: iHeart U.S. Revolution Tour at Mammoth
-  series:
-    id: us-revolution-tour
-    name: U.S. Revolution Tour (Rev Tour)
-  discipline: slopestyle
-  disciplines_also:
-  - halfpipe
-  levels:
-  - junior
-  venue:
-    resort_id: mammoth-mountain
-    venue_id: null
-  organizer:
-    name: U.S. Ski & Snowboard
-    url: https://www.usskiandsnowboard.org/
-    source_id: events-freestyle-usss-rev-tour-mammoth-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  format:
-    value: Snowboard and freeski halfpipe and slopestyle after a training day
-    source_id: events-freestyle-usss-rev-tour-mammoth-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27: null
-  last_edition:
-    start: 2026-03-10
-    end: 2026-03-14
-    season: 2025/26
-    source_id: events-freestyle-usss-rev-tour-mammoth-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: online_registration
-    url:
-      value: https://www.usskiandsnowboard.org/revolutiontour
-      source_id: events-freestyle-usss-revolution-tour
-      as_of: 2026-10-17
-      confidence: estimated
-    requirements:
-      value: Registration with an alternate list; the 2026 alternate list deadline was February 27, 2026
-      source_id: events-freestyle-usss-rev-tour-mammoth-2026
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://www.usskiandsnowboard.org/events/iheart-us-revolution-tour-mammoth
-    source_id: events-freestyle-usss-rev-tour-mammoth-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://www.usskiandsnowboard.org/revolutiontour
-    source_id: events-freestyle-usss-revolution-tour
-    as_of: 2026-10-17
-    confidence: estimated
-- id: us-revolution-tour-aspen-snowmass-open
-  name: iHeart U.S. Revolution Tour at Aspen Open
-  series:
-    id: us-revolution-tour
-    name: U.S. Revolution Tour (Rev Tour)
-  discipline: slopestyle
-  disciplines_also:
-  - halfpipe
-  - rail_jam
-  levels:
-  - junior
-  venue:
-    resort_id: buttermilk
-    venue_id: null
-  organizer:
-    name: U.S. Ski & Snowboard
-    url: https://www.usskiandsnowboard.org/
-    source_id: events-freestyle-usss-rev-tour-aspen-open-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  format:
-    value: Snowboard and freeski halfpipe and slopestyle at Buttermilk, with training and rail jams
-    source_id: events-freestyle-usss-rev-tour-aspen-open-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27: null
-  last_edition:
-    start: 2026-03-23
-    end: 2026-03-27
-    season: 2025/26
-    source_id: events-freestyle-usss-rev-tour-aspen-open-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: qualification
-    url:
-      value: https://www.usskiandsnowboard.org/revolutiontour
-      source_id: events-freestyle-usss-revolution-tour
-      as_of: 2026-10-17
-      confidence: estimated
-    requirements:
-      value: U.S. athletes must qualify in advance; the 2026 alternate list deadline was March 12, 2026
-      source_id: events-freestyle-usss-rev-tour-aspen-open-2026
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: http://usskiandsnowboard.org/events/us-revolution-tour-aspen-snowmass-open
-    source_id: events-freestyle-usss-rev-tour-aspen-open-2026
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://www.usskiandsnowboard.org/revolutiontour
-    source_id: events-freestyle-usss-revolution-tour
-    as_of: 2026-10-17
-    confidence: estimated
 - id: x-games-aspen
   name: X Games Aspen
   discipline: slopestyle
@@ -993,7 +812,6 @@ events:
   discipline: slopestyle
   levels:
   - open_amateur
-  - junior
   venue:
     resort_id: copper-mountain
     venue_id: null
@@ -1291,52 +1109,6 @@ events:
     source_id: events-freestyle-jacksonhole-kings-queens-2027
     as_of: 2026-10-17
     confidence: estimated
-- id: ifsa-junior-sugar-bowl
-  name: Sugar Bowl IFSA Junior 2*
-  series:
-    id: ifsa-junior
-    name: IFSA Junior freeride series
-  discipline: big_mountain
-  levels:
-  - junior
-  venue:
-    resort_id: sugar-bowl
-    venue_id: null
-  organizer:
-    name: International Freeskiers & Snowboarders Association (IFSA)
-    url: https://ifsafreeride.org/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-    note: IFSA lists the event; its calendar says the dates come from each event organizer.
-  format:
-    value: IFSA Junior 2 star freeride competition
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-01-02
-    end: 2027-01-03
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: null
-    url:
-      value: https://ifsafreeride.org/events/
-      source_id: events-freestyle-ifsa-events-2027
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
 - id: ifsa-fwt-qualifier-whitefish
   name: Whitefish IFSA Qualifier 2*
   series:
@@ -1357,52 +1129,6 @@ events:
     note: IFSA lists the event; its calendar says the dates come from each event organizer.
   format:
     value: FWT Qualifier 2 star freeride competition
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-01-08
-    end: 2027-01-10
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: null
-    url:
-      value: https://ifsafreeride.org/events/
-      source_id: events-freestyle-ifsa-events-2027
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-- id: ifsa-junior-jackson-hole
-  name: Jackson Hole IFSA Junior 2*
-  series:
-    id: ifsa-junior
-    name: IFSA Junior freeride series
-  discipline: big_mountain
-  levels:
-  - junior
-  venue:
-    resort_id: jackson-hole
-    venue_id: null
-  organizer:
-    name: International Freeskiers & Snowboarders Association (IFSA)
-    url: https://ifsafreeride.org/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-    note: IFSA lists the event; its calendar says the dates come from each event organizer.
-  format:
-    value: IFSA Junior 2 star freeride competition
     source_id: events-freestyle-ifsa-events-2027
     as_of: 2026-10-17
     confidence: estimated
@@ -1475,144 +1201,6 @@ events:
     source_id: events-freestyle-ifsa-events-2027
     as_of: 2026-10-17
     confidence: estimated
-- id: ifsa-junior-alyeska
-  name: Alyeska IFSA Junior 2*
-  series:
-    id: ifsa-junior
-    name: IFSA Junior freeride series
-  discipline: big_mountain
-  levels:
-  - junior
-  venue:
-    resort_id: alyeska
-    venue_id: null
-  organizer:
-    name: International Freeskiers & Snowboarders Association (IFSA)
-    url: https://ifsafreeride.org/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-    note: IFSA lists the event; its calendar says the dates come from each event organizer.
-  format:
-    value: 'Two IFSA Junior 2 star events: Volume 1 on January 23 and Volume 2 on January 24'
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-01-23
-    end: 2027-01-24
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: null
-    url:
-      value: https://ifsafreeride.org/events/
-      source_id: events-freestyle-ifsa-events-2027
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-- id: ifsa-junior-kirkwood
-  name: 'Kirkwood IFSA Junior 2* (TJFS #3)'
-  series:
-    id: ifsa-junior
-    name: IFSA Junior freeride series
-  discipline: big_mountain
-  levels:
-  - junior
-  venue:
-    resort_id: kirkwood
-    venue_id: null
-  organizer:
-    name: International Freeskiers & Snowboarders Association (IFSA)
-    url: https://ifsafreeride.org/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-    note: IFSA lists the event; its calendar says the dates come from each event organizer.
-  format:
-    value: 'IFSA Junior 2 star freeride competition listed as TJFS #3'
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-01-23
-    end: 2027-01-24
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: null
-    url:
-      value: https://ifsafreeride.org/events/
-      source_id: events-freestyle-ifsa-events-2027
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-- id: ifsa-junior-snowbird
-  name: Snowbird IFSA Junior 2*
-  series:
-    id: ifsa-junior
-    name: IFSA Junior freeride series
-  discipline: big_mountain
-  levels:
-  - junior
-  venue:
-    resort_id: snowbird
-    venue_id: null
-  organizer:
-    name: International Freeskiers & Snowboarders Association (IFSA)
-    url: https://ifsafreeride.org/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-    note: IFSA lists the event; its calendar says the dates come from each event organizer.
-  format:
-    value: 'Two IFSA Junior 2 star events: Volume 1 (ski only) on January 23 and Volume 2 on January 24'
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-01-23
-    end: 2027-01-24
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: null
-    url:
-      value: https://ifsafreeride.org/events/
-      source_id: events-freestyle-ifsa-events-2027
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
 - id: ifsa-fwt-qualifier-palisades-tahoe
   name: Palisades Tahoe IFSA Qualifier 3*
   series:
@@ -1660,52 +1248,6 @@ events:
     source_id: events-freestyle-ifsa-events-2027
     as_of: 2026-10-17
     confidence: estimated
-- id: ifsa-junior-palisades-tahoe
-  name: Palisades Tahoe IFSA Junior 3*
-  series:
-    id: ifsa-junior
-    name: IFSA Junior freeride series
-  discipline: big_mountain
-  levels:
-  - junior
-  venue:
-    resort_id: palisades-tahoe
-    venue_id: null
-  organizer:
-    name: International Freeskiers & Snowboarders Association (IFSA)
-    url: https://ifsafreeride.org/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-    note: IFSA lists the event; its calendar says the dates come from each event organizer.
-  format:
-    value: IFSA Junior 3 star freeride competition
-    source_id: events-freestyle-ifsa-venue-palisades
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-02-05
-    end: 2027-02-07
-    source_id: events-freestyle-ifsa-venue-palisades
-    as_of: 2026-10-17
-    confidence: estimated
-  signup:
-    method: null
-    url:
-      value: https://ifsafreeride.org/events/
-      source_id: events-freestyle-ifsa-events-2027
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://ifsafreeride.org/venue/palisades-tahoe/
-    source_id: events-freestyle-ifsa-venue-palisades
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
 - id: ifsa-fwt-qualifier-breckenridge
   name: Breckenridge IFSA Qualifier 3*
   series:
@@ -1732,53 +1274,6 @@ events:
   edition_2026_27:
     start: 2027-03-06
     end: 2027-03-07
-    source_id: events-freestyle-ifsa-venue-breckenridge
-    as_of: 2026-10-17
-    confidence: estimated
-    note: Year taken from the IFSA listing of events from January 2, 2027.
-  signup:
-    method: null
-    url:
-      value: https://ifsafreeride.org/events/
-      source_id: events-freestyle-ifsa-events-2027
-      as_of: 2026-10-17
-      confidence: estimated
-  website:
-    value: https://ifsafreeride.org/venue/breckenridge/
-    source_id: events-freestyle-ifsa-venue-breckenridge
-    as_of: 2026-10-17
-    confidence: estimated
-  calendar_url:
-    value: https://ifsafreeride.org/events/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-- id: ifsa-junior-breckenridge
-  name: Breckenridge IFSA Junior 2*
-  series:
-    id: ifsa-junior
-    name: IFSA Junior freeride series
-  discipline: big_mountain
-  levels:
-  - junior
-  venue:
-    resort_id: breckenridge
-    venue_id: null
-  organizer:
-    name: International Freeskiers & Snowboarders Association (IFSA)
-    url: https://ifsafreeride.org/
-    source_id: events-freestyle-ifsa-events-2027
-    as_of: 2026-10-17
-    confidence: estimated
-    note: IFSA lists the event; its calendar says the dates come from each event organizer.
-  format:
-    value: IFSA Junior 2 star freeride competition
-    source_id: events-freestyle-ifsa-venue-breckenridge
-    as_of: 2026-10-17
-    confidence: estimated
-  edition_2026_27:
-    start: 2027-03-14
-    end: 2027-03-14
     source_id: events-freestyle-ifsa-venue-breckenridge
     as_of: 2026-10-17
     confidence: estimated
