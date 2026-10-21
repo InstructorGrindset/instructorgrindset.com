@@ -3062,6 +3062,34 @@ async function eventSearchChecks(browser, base, stubBase) {
   check(await page.evaluate(() => !window.__careerMap.mapStarted && document.querySelectorAll('.map-preview').length === 1),
     'an event chosen before the map starts leaves the WebGL map waiting and redraws the picture');
   await shot(page, 'evsearch-02-desktop-event.png');
+  // The index arriving after the typing: the text is searched again, and a list closed with Escape stays closed.
+  const late = await page.evaluate(async (fix) => {
+    const m = await import('/map/js/search.js');
+    const file = await (await fetch(`${fix}events-search.json`)).json();
+    const run = async (q, escape) => {
+      const root = document.createElement('div');
+      root.innerHTML = '<input role="combobox" aria-expanded="false"><ul role="listbox" id="late-list" hidden></ul><p class="map-search-empty" hidden>None</p><div role="status"></div>';
+      document.body.append(root);
+      let release;
+      const gate = new Promise((r) => { release = r; });
+      const s = m.createSearch(root, window.__careerMap.index, { onSelect() {}, events: () => gate });
+      s.input.focus();
+      s.input.value = q;
+      s.update();
+      const before = [...root.querySelectorAll('[role="option"]')].length;
+      if (escape) s.input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      release(file);
+      await s.eventsReady;
+      const out = { before, after: [...root.querySelectorAll('[role="option"]')].map((li) => li.querySelector('.map-search-name').textContent),
+        open: !root.querySelector('[role="listbox"]').hidden, empty: !root.querySelector('.map-search-empty').hidden };
+      root.remove();
+      return out;
+    };
+    return { typed: await run('bumpa', false), closed: await run('bravo', true) };
+  }, FIX);
+  check(late.typed.before === 0 && JSON.stringify(late.typed.after) === JSON.stringify(['Bumpathon 25']) && late.typed.open && !late.typed.empty,
+    `text typed before the events index lands is searched again when it does (${JSON.stringify(late.typed)})`);
+  check(late.closed.before === 1 && !late.closed.open, `a list closed with Escape stays closed when the index lands (${JSON.stringify(late.closed)})`);
 
   // In EVENTS mode events rank first; the list view marks the chosen event in the calendar.
   await input.focus();

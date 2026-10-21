@@ -271,11 +271,12 @@ export function createSearch(root, index, { onSelect, current = () => null, list
     if (li) choose(Number(li.dataset.index));
   });
 
-  // Events join once their index is in; text typed meanwhile is searched again, keeping the active option.
+  // Events join once their index is in; text typed meanwhile is searched again, keeping the active option (a list
+  // closed with Escape stays closed).
   const eventsReady = (events ? Promise.resolve().then(events) : Promise.resolve(null)).then((file) => {
     const found = eventItems(file);
     items.push(...found);
-    if (found.length && input.value && document.activeElement === input) update({ keep: true });
+    if (found.length && input.value && document.activeElement === input && (isOpen() || !empty.hidden)) update({ keep: true });
     return found.length;
   }).catch((err) => { console.warn('[map] search events', err.message); return 0; });
 
