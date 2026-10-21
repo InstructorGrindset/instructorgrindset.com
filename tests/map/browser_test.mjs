@@ -2824,7 +2824,7 @@ async function searchChecks(browser, base, stubBase) {
   const w = watch(page, 'search');
   await page.goto(`${base}/map/${Q}`);
   await ready(page, { start: false });
-  const input = page.getByRole('combobox', { name: 'Search resorts, clusters and states' });
+  const input = page.getByRole('combobox', { name: 'Search resorts, clusters, states and events' });
   const list = page.locator('#map-search-list');
   const opts = list.getByRole('option');
   const loaded = () => page.evaluate(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/map/js/search.js')));
@@ -2844,9 +2844,11 @@ async function searchChecks(browser, base, stubBase) {
   await input.focus();
   await page.keyboard.type('bravo');
   await list.waitFor({ state: 'visible' });
+  // The events index joins on first use (eventSearchChecks); Bravo Bowl's skimo sprint is listed after the resort.
+  await list.getByRole('option', { name: /Bravo Bowl Skimo Sprint/ }).waitFor({ timeout: 5000 });
   const first = (await opts.first().innerText()).replace(/\s+/g, ' ');
-  check(await input.getAttribute('aria-expanded') === 'true' && await opts.count() === 1 && first === 'Bravo Bowl Tier A resort in Colorado',
-    `typing lists matches with tier and state ("${first}")`);
+  check(await input.getAttribute('aria-expanded') === 'true' && await opts.count() === 2 && first === 'Bravo Bowl Tier A resort in Colorado',
+    `typing lists matches with tier and state, the resort before its event ("${first}")`);
   await page.keyboard.press('ArrowDown');
   const active = await input.getAttribute('aria-activedescendant');
   const ring = active && await page.locator(`#${active}`).evaluate((el) => `${el.getAttribute('aria-selected')} ${getComputedStyle(el).outlineStyle} ${getComputedStyle(el).outlineWidth}`);
@@ -2866,7 +2868,7 @@ async function searchChecks(browser, base, stubBase) {
   await list.waitFor({ state: 'visible' });
   const n = await opts.count();
   await page.keyboard.press('ArrowUp');
-  check(n === 5 && await input.getAttribute('aria-activedescendant') === `map-search-list-opt-${n - 1}`, `ArrowUp wraps to the last of ${n} results`);
+  check(n === 8 && await input.getAttribute('aria-activedescendant') === `map-search-list-opt-${n - 1}`, `ArrowUp wraps to the last of ${n} results (at most 8)`);
   await page.keyboard.press('Escape');
   check(await list.isHidden() && await input.inputValue() === 'fixture', 'Escape closes the list and keeps the text');
   await page.keyboard.press('Escape');
@@ -2913,7 +2915,7 @@ async function searchChecks(browser, base, stubBase) {
   track(sp);
   await sp.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
   await ready(sp, { start: false });
-  const sInput = sp.getByRole('combobox', { name: 'Search resorts, clusters and states' });
+  const sInput = sp.getByRole('combobox', { name: 'Search resorts, clusters, states and events' });
   await sInput.focus();
   await sp.keyboard.type('Hotel');
   await sp.locator('#map-search-list').waitFor({ state: 'visible' });
@@ -2948,7 +2950,7 @@ async function searchChecks(browser, base, stubBase) {
   check(sbox.y >= hdr.y && sbox.y + sbox.height <= hdr.y + hdr.height && sbox.x + sbox.width <= tog.x, 'phone: the search box fits the top bar beside LAYERS');
   await pp.locator('#sheet-handle').click();
   await pp.waitForTimeout(400);
-  const pInput = pp.getByRole('combobox', { name: 'Search resorts, clusters and states' });
+  const pInput = pp.getByRole('combobox', { name: 'Search resorts, clusters, states and events' });
   await pInput.tap();
   await pp.keyboard.type('ra');
   await pp.locator('#map-search-list').waitFor({ state: 'visible' });
@@ -2965,6 +2967,249 @@ async function searchChecks(browser, base, stubBase) {
   check(await heading(pp) === 'November Ramps', 'phone: a tapped result opens the resort');
   wp.assertClean();
   await ctx.close();
+}
+
+// Event search (map/js/search.js with data/build/events-search.json): an event name, or part of it, lists the event
+// with its group and venue; choosing it opens EVENTS mode on the event in map view, list view, with the WebGL map
+// running, on a generated stub and on a phone. The index loads on the first use of the box; events.json waits for
+// the choice. Season words: "Bumpathon 25" (tests/map/events_fixture.yaml) has usual_timing Spring and no date;
+// "Summit Skin Up" has neither date nor timing.
+async function eventSearchChecks(browser, base, stubBase) {
+  log('\nEvent search');
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await ctx.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+  const page = await ctx.newPage();
+  const w = watch(page, 'event search');
+  const quiet = trackInflight(page);
+  const req = (re) => w.requests.filter((u) => re.test(u)).length;
+  const INDEX = /\/events-search\.json(\?|$)/;
+  const EVENTS = /\/events\.json(\?|$)/;
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await page.waitForTimeout(400);
+  const input = page.getByRole('combobox', { name: 'Search resorts, clusters, states and events' });
+  const list = page.locator('#map-search-list');
+  const opts = list.getByRole('option');
+  const status = page.locator('#map-search [role="status"]');
+  check(req(INDEX) === 0 && req(EVENTS) === 0, `lazy: no events index and no events.json before the search box is used (${req(INDEX)}, ${req(EVENTS)})`);
+  check(await input.getAttribute('placeholder') === 'Resorts and events', 'the desktop placeholder names events');
+  const indexLoad = page.waitForResponse((r) => INDEX.test(r.url()), { timeout: 10000 });
+  await input.focus();
+  const size = (await (await indexLoad).body()).length;
+  log(`    note events-search.json fixture: ${size} bytes`);
+  await page.keyboard.type('bumpa');
+  await list.getByRole('option', { name: /Bumpathon 25/ }).waitFor({ timeout: 5000 });
+  const row = (await opts.first().innerText()).replace(/\s+/g, ' ');
+  check(await opts.count() === 1 && row === 'Bumpathon 25 Community event at Bravo Bowl, Colorado' && await input.getAttribute('aria-expanded') === 'true',
+    `part of an event name lists the event with its group and venue ("${row}")`);
+  check(req(INDEX) === 1 && req(EVENTS) === 0, 'lazy: the box loads only the events index, once; events.json waits for a choice');
+  check(await page.waitForFunction(() => document.querySelector('#map-search [role="status"]').textContent === '1 result. Use the up and down arrow keys to choose one.',
+    null, { timeout: 3000 }).then(() => true, () => false), `the result count is announced (${await status.textContent()})`);
+
+  const unit = await page.evaluate(async (fix) => {
+    const m = await import('/map/js/search.js');
+    const file = await (await fetch(`${fix}events-search.json`)).json();
+    const ev = m.eventItems(file);
+    const items = [...m.buildItems(window.__careerMap.index), ...ev];
+    const names = (q, o) => m.search(items, q, 8, o).map((x) => `${x.kind}:${x.name}`);
+    return { n: ev.length, total: file.events.length, skin: names('skin'), lop: names('LOP'), hotel: names('hotel'), hotelEv: names('hotel', { eventsFirst: true }),
+      abroad: ev.find((x) => x.id === 'fixture-interski').meta, one: names('b').filter((x) => x.startsWith('event:')),
+      bad: m.eventItems({ groups: [['a', 'Alpha'], 7], states: { CO: 'Colorado', AK: 'Alaska' }, venues: [['v-1', 'Vee', 'CO'], ['Bad Id', 'X', 'CO'], ['haines', 'Haines, Alaska', 'AK']],
+        events: [['ok', 'Ok', 0, 0], ['Bad Id', 'X', 0, 0], ['no-venue', 'X', 9, 0], ['bad-venue', 'X', 1, 0], ['no-group', 'X', 0, 1], ['no-name', '', 0, 0], ['ak', 'Ak', 2, 0], 'x'] })
+        .map((x) => `${x.id}|${x.meta}`),
+      none: [m.eventItems(null), m.eventItems({}), m.eventItems({ groups: [], venues: [], events: {} })].map((x) => x.length).join(),
+      view: m.viewFor(window.__careerMap.index, ev.find((x) => x.id === 'bravo-bowl-skin-up'), { level: 'state', stateCode: 'CO' }) };
+  }, FIX);
+  check(unit.n === unit.total && unit.n === 14, `every event of the index is searchable (${unit.n} of ${unit.total})`);
+  check(JSON.stringify(unit.skin) === JSON.stringify(['event:Summit Skin Up']), `an event with no date and no timing is found (skin: ${unit.skin})`);
+  check(JSON.stringify(unit.lop) === JSON.stringify(['event:Fixture Lake Loppet']), `matching ignores case for event names (LOP: ${unit.lop})`);
+  check(JSON.stringify(unit.hotel) === JSON.stringify(['resort:Hotel Lake', 'event:Hotel Lake Spring Clinic'])
+    && JSON.stringify(unit.hotelEv) === JSON.stringify(['event:Hotel Lake Spring Clinic', 'resort:Hotel Lake']),
+  `ties rank the resort first, the event first in EVENTS mode (${unit.hotel}; ${unit.hotelEv})`);
+  check(unit.abroad === 'Instructor event at Fixture Congress Hall, Norway', `a venue abroad names its country (${unit.abroad})`);
+  check(unit.one.length > 0 && unit.one.every((x) => /(^event:b|\sb)/i.test(x)), `one letter matches event names at word starts only (${unit.one.slice(0, 3)})`);
+  check(JSON.stringify(unit.bad) === JSON.stringify(['ok|Alpha event at Vee, Colorado', 'ak|Alpha event at Haines, Alaska']) && unit.none === '0,0,0',
+    `the index is checked by hand: bad rows are skipped, a venue named with its state does not repeat it (${unit.bad})`);
+  check(JSON.stringify(unit.view) === JSON.stringify({ level: 'events', venueId: 'bravo-bowl', eventId: 'bravo-bowl-skin-up' }), 'an event result opens its venue with the event');
+
+  await page.keyboard.press('ArrowDown');
+  check(await input.getAttribute('aria-activedescendant') === 'map-search-list-opt-0'
+    && await page.locator('#map-search-list-opt-0').getAttribute('aria-selected') === 'true', 'ArrowDown makes the event result active');
+  await shot(page, 'evsearch-01-desktop-results.png');
+  await axeCheck(page, 'event search results open');
+  await page.keyboard.press('Enter');
+  await page.waitForURL(/\/map\/events\/\?data=.*venue=bravo-bowl&event=bravo-bowl-bumpathon$/);
+  await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('#ev-bravo-bowl-bumpathon.is-selected')
+    && document.activeElement && document.activeElement.id === 'ev-h-bravo-bowl-bumpathon', null, { timeout: 15000 }).catch(() => {});
+  const sel = await page.evaluate(() => {
+    const card = document.querySelector('#ev-bravo-bowl-bumpathon');
+    const facts = card ? Object.fromEntries([...card.querySelectorAll('.fact')].map((f) => [f.querySelector('dt').textContent, f.querySelector('dd').innerText.replace(/\s+/g, ' ').trim()])) : {};
+    const m = window.__careerMap.events.model;
+    return { mode: document.body.classList.contains('events-mode'), heading: document.getElementById('panel-heading').textContent,
+      selected: Boolean(card && card.classList.contains('is-selected')), focus: document.activeElement && document.activeElement.id, facts,
+      months: m.eventById.get('bravo-bowl-bumpathon').months, none: m.eventById.get('bravo-bowl-skin-up').months,
+      expanded: document.getElementById('map-search-input').getAttribute('aria-expanded'), value: document.getElementById('map-search-input').value,
+      sub: document.getElementById('view-title').textContent };
+  });
+  check(sel.mode && sel.heading === 'Bravo Bowl' && sel.selected && sel.focus === 'ev-h-bravo-bowl-bumpathon' && sel.sub === 'EventsBravo Bowl',
+    `Enter opens EVENTS mode on the event: its venue panel, the card selected and focused (${sel.heading}, ${sel.focus})`);
+  check(sel.expanded === 'false' && sel.value === '' && req(EVENTS) === 1, 'the list closes, the box clears and events.json loads once, with the choice');
+  check(JSON.stringify(sel.months) === JSON.stringify([3, 4, 5]) && JSON.stringify(sel.none) === '[]',
+    `season words: "Spring" falls in March, April and May; no timing falls in no month (${JSON.stringify(sel.months)}, ${JSON.stringify(sel.none)})`);
+  check(sel.facts.Dates && sel.facts.Dates.startsWith('Last held in the 2025/26 season. 2026/27 date not yet published.') && !/\b(Mar|Apr|May) \d/.test(sel.facts.Dates)
+    && sel.facts['Usual timing'] && sel.facts['Usual timing'].startsWith('Spring'),
+  `the card keeps the sourced wording and shows no made up date (${sel.facts.Dates}; ${sel.facts['Usual timing']})`);
+  check(await page.evaluate(() => !window.__careerMap.mapStarted && document.querySelectorAll('.map-preview').length === 1),
+    'an event chosen before the map starts leaves the WebGL map waiting and redraws the picture');
+  await shot(page, 'evsearch-02-desktop-event.png');
+  // The index arriving after the typing: the text is searched again, and a list closed with Escape stays closed.
+  const late = await page.evaluate(async (fix) => {
+    const m = await import('/map/js/search.js');
+    const file = await (await fetch(`${fix}events-search.json`)).json();
+    const run = async (q, escape) => {
+      const root = document.createElement('div');
+      root.innerHTML = '<input role="combobox" aria-expanded="false"><ul role="listbox" id="late-list" hidden></ul><p class="map-search-empty" hidden>None</p><div role="status"></div>';
+      document.body.append(root);
+      let release;
+      const gate = new Promise((r) => { release = r; });
+      const s = m.createSearch(root, window.__careerMap.index, { onSelect() {}, events: () => gate });
+      s.input.focus();
+      s.input.value = q;
+      s.update();
+      const before = [...root.querySelectorAll('[role="option"]')].length;
+      if (escape) s.input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      release(file);
+      await s.eventsReady;
+      const out = { before, after: [...root.querySelectorAll('[role="option"]')].map((li) => li.querySelector('.map-search-name').textContent),
+        open: !root.querySelector('[role="listbox"]').hidden, empty: !root.querySelector('.map-search-empty').hidden };
+      root.remove();
+      return out;
+    };
+    return { typed: await run('bumpa', false), closed: await run('bravo', true) };
+  }, FIX);
+  check(late.typed.before === 0 && JSON.stringify(late.typed.after) === JSON.stringify(['Bumpathon 25']) && late.typed.open && !late.typed.empty,
+    `text typed before the events index lands is searched again when it does (${JSON.stringify(late.typed)})`);
+  check(late.closed.before === 1 && !late.closed.open, `a list closed with Escape stays closed when the index lands (${JSON.stringify(late.closed)})`);
+
+  // In EVENTS mode events rank first; the list view marks the chosen event in the calendar.
+  await input.focus();
+  await page.keyboard.type('kilo');
+  await list.waitFor({ state: 'visible' });
+  const kilo = (await opts.first().innerText()).replace(/\s+/g, ' ');
+  check(kilo === 'Kilo Notch Level 2 Exam Instructor event at Kilo Notch, Vermont', `in EVENTS mode an event ranks before the resort of the same name (${kilo})`);
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'List view' }).click();
+  await page.waitForSelector('#events-list:not([hidden]) .ev-row');
+  await input.focus();
+  await page.keyboard.type('summit skin');
+  await list.getByRole('option', { name: /Summit Skin Up/ }).waitFor({ timeout: 5000 });
+  await page.keyboard.press('Enter');
+  await page.waitForURL(/venue=bravo-bowl&event=bravo-bowl-skin-up$/);
+  await page.waitForFunction(() => {
+    const a = document.querySelector('#events-list [aria-current="page"]');
+    const l = document.getElementById('events-list').getBoundingClientRect();
+    const r = a && a.getBoundingClientRect();
+    return r && r.top >= l.top && r.bottom <= l.bottom;
+  }, null, { timeout: 10000 }).catch(() => {});
+  const lv = await page.evaluate(() => {
+    const a = document.querySelector('#events-list [aria-current="page"]');
+    const l = document.getElementById('events-list').getBoundingClientRect();
+    const r = a && a.getBoundingClientRect();
+    return { name: a && a.querySelector('.ev-row-name').textContent, group: a && a.closest('.ev-month').querySelector('.ev-month-title').firstChild.textContent,
+      shown: Boolean(r && r.top >= l.top && r.bottom <= l.bottom), heading: document.getElementById('panel-heading').textContent,
+      selected: Boolean(document.querySelector('#ev-bravo-bowl-skin-up.is-selected')) };
+  });
+  check(lv.name === 'Summit Skin Up' && lv.group === '2026/27 date not yet published' && lv.shown && lv.heading === 'Bravo Bowl' && lv.selected,
+    `list view: an event result opens the event and the calendar marks it, under "${lv.group}" (${JSON.stringify(lv)})`);
+  await shot(page, 'evsearch-03-desktop-list.png');
+  await page.getByRole('button', { name: 'Map view' }).click();
+  check(await page.evaluate(() => !document.body.classList.contains('list-mode') && !document.getElementById('map').hidden && document.getElementById('events-list').hidden
+    && document.getElementById('list-toggle').textContent === 'List view'), 'in EVENTS mode, Map view leaves the calendar list for the map');
+
+  // With the WebGL map running, an event result flies the map to its venue.
+  await page.locator('#map-start').click();
+  await page.waitForFunction(() => window.__careerMap.mapCtl && window.__careerMap.mapCtl.map.getLayer('event-venues'), null, { timeout: 20000 });
+  await mapIdle(page);
+  await input.click();
+  await page.keyboard.type('loppet');
+  await list.getByRole('option', { name: /Fixture Lake Loppet/ }).click();
+  await page.waitForURL(/venue=fixture-lake-trail&event=fixture-lake-loppet$/);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.isMoving(), null, { timeout: 3000 }).catch(() => {});
+  await mapIdle(page);
+  const flew = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    return { inView: m.getBounds().contains([-91.40, 47.25]), halo: JSON.stringify(m.getFilter('event-venues-halo')), heading: document.getElementById('panel-heading').textContent,
+      selected: Boolean(document.querySelector('#ev-fixture-lake-loppet.is-selected')) };
+  });
+  check(flew.inView && flew.halo.includes('fixture-lake-trail') && flew.heading === 'Fixture Lake Trail' && flew.selected,
+    'with the map running, a clicked event result flies to its venue and rings it');
+  await quiet();
+  w.assertClean();
+  await ctx.close();
+
+  // A generated resort stub: the event result lands on a working /map/events/ deep link.
+  {
+    const c = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    await c.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+    const p = await c.newPage();
+    const ws = watch(p, 'event search on stubs');
+    const q = trackInflight(p);
+    await p.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/`);
+    await ready(p, { start: false });
+    const sInput = p.getByRole('combobox', { name: 'Search resorts, clusters, states and events' });
+    await sInput.focus();
+    await p.keyboard.type('bumpathon');
+    await p.locator('#map-search-list').getByRole('option', { name: /Bumpathon 25/ }).waitFor({ timeout: 5000 });
+    await p.keyboard.press('Enter');
+    await p.waitForURL(/\/map\/events\/\?venue=bravo-bowl&event=bravo-bowl-bumpathon$/);
+    await q();
+    await p.reload();
+    await ready(p, { start: false });
+    await p.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('#ev-bravo-bowl-bumpathon.is-selected'), null, { timeout: 15000 }).catch(() => {});
+    check(await heading(p) === 'Bravo Bowl' && await p.locator('#ev-bravo-bowl-bumpathon.is-selected').count() === 1, 'on a stub, the URL an event result lands on is a working deep link');
+    await q();
+    ws.assertClean();
+    await c.close();
+  }
+
+  // Phone: the results fit above the sheet; a tapped event opens in the bottom sheet.
+  const pc = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+  await pc.clock.setFixedTime(new Date('2026-10-13T12:00:00'));
+  const pp = await pc.newPage();
+  const wp = watch(pp, 'event search phone');
+  const pq = trackInflight(pp);
+  await pp.goto(`${base}/map/${Q}`);
+  await ready(pp, { start: false });
+  const pInput = pp.getByRole('combobox', { name: 'Search resorts, clusters, states and events' });
+  await pInput.tap();
+  await pp.keyboard.type('bump');
+  await pp.locator('#map-search-list').getByRole('option', { name: /Bumpathon 25/ }).waitFor({ timeout: 5000 });
+  await pp.waitForTimeout(400);
+  const fit = await pp.evaluate(() => ({ list: document.getElementById('map-search-list').getBoundingClientRect(),
+    sheet: document.getElementById('panel').getBoundingClientRect().top, sw: document.documentElement.scrollWidth, vw: innerWidth,
+    meta: document.querySelector('#map-search-list .map-search-meta').getBoundingClientRect(), text: document.querySelector('#map-search-list [role="option"]').innerText.replace(/\s+/g, ' ') }));
+  check(fit.list.bottom <= fit.sheet && fit.list.left >= 0 && fit.list.right <= fit.vw && fit.meta.right <= fit.list.right && fit.sw <= fit.vw,
+    `phone: event results fit the screen above the sheet, no sideways scroll ("${fit.text}")`);
+  await shot(pp, 'evsearch-04-phone-results.png');
+  await axeCheck(pp, 'event search results open, phone');
+  await pp.locator('#map-search-list [role="option"]', { hasText: 'Bumpathon 25' }).tap();
+  await pp.waitForURL(/\/map\/events\/\?data=.*venue=bravo-bowl&event=bravo-bowl-bumpathon$/);
+  await pp.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('#ev-bravo-bowl-bumpathon.is-selected'), null, { timeout: 15000 }).catch(() => {});
+  await pp.waitForTimeout(500);
+  const ph = await pp.evaluate(() => {
+    const card = document.getElementById('ev-bravo-bowl-bumpathon');
+    const sheet = document.getElementById('panel');
+    const r = card && card.getBoundingClientRect();
+    return { heading: document.getElementById('panel-heading').textContent, state: sheet.dataset.sheet, sw: document.documentElement.scrollWidth, vw: innerWidth,
+      selected: Boolean(card && card.classList.contains('is-selected')), visible: Boolean(r && r.top < innerHeight && r.bottom > sheet.getBoundingClientRect().top) };
+  });
+  check(ph.heading === 'Bravo Bowl' && ph.selected && ph.visible && ph.state && ph.state !== 'peek' && ph.sw <= ph.vw,
+    `phone: a tapped event result opens its card in the bottom sheet (${ph.state})`);
+  await shot(pp, 'evsearch-05-phone-event.png');
+  await pq();
+  wp.assertClean();
+  await pc.close();
 }
 
 // EVENTS mode (ROADMAP item 22): the RESORTS / EVENTS switch, the EVENTS pill, the event filters (group, month,
@@ -3010,7 +3255,7 @@ async function eventsChecks(browser, base, stubBase) {
     resortLegend: [...document.querySelectorAll('.map-legend .ml-items:not(.ml-events) li')].some((li) => li.offsetParent),
     sub: document.getElementById('view-title').textContent,
   }));
-  check(JSON.stringify(nat.stats) === JSON.stringify(['Events=12', 'Venues=9', '2026/27 dates=10', 'Sign up open=2']), `events panel stats (${nat.stats})`);
+  check(JSON.stringify(nat.stats) === JSON.stringify(['Events=14', 'Venues=9', '2026/27 dates=10', 'Sign up open=2']), `events panel stats (${nat.stats})`);
   check(nat.next[0] === 'Alpha Peak Speed Cup' && nat.next[1] === 'Kilo Notch Level 2 Exam' && nat.next.length === 8, `Coming up lists the next dated events in date order (${nat.next.slice(0, 3)})`);
   check(!nat.facility && nat.filter && nat.groups.length === 8 && nat.groups.every((g) => g.endsWith(':true')),
     `the Layers panel swaps the resort filters for the event filters, every group on (${nat.groups.length} groups)`);
@@ -3054,8 +3299,14 @@ async function eventsChecks(browser, base, stubBase) {
   await flt('months', 'season').uncheck();
   await flt('months', 'other').check();
   await page.waitForTimeout(300);
-  check(JSON.stringify(await venueIds()) === JSON.stringify(['hotel-lake']), 'Other months keeps the May clinic');
+  check(JSON.stringify(await venueIds()) === JSON.stringify(['bravo-bowl', 'hotel-lake']), 'Other months keeps the May clinic and the spring bump marathon (May)');
   await flt('months', 'other').uncheck();
+  // A timing given only as a season word ("Spring") counts in March, April and May (config events.season_words).
+  await flt('months', '4').check();
+  await page.waitForTimeout(300);
+  ids = await venueIds();
+  check(JSON.stringify(ids) === JSON.stringify(['bravo-bowl', 'foxtrot-basin', 'golf-canyon']), `month chip APR keeps the spring bump marathon with the April races (${ids.join(', ')})`);
+  await flt('months', '4').uncheck();
   await flt('quick', 'anyone').check();
   await page.waitForTimeout(300);
   const lv = await page.evaluate(() => [...document.querySelectorAll('#events-filter input[data-dim="levels"]')].filter((i) => i.checked).map((i) => i.dataset.key));
@@ -3069,7 +3320,7 @@ async function eventsChecks(browser, base, stubBase) {
   const label = (await page.locator('label[for="evf-quick-signup"]').textContent()).replace(/\s+/g, ' ').trim();
   check(JSON.stringify(ids) === JSON.stringify(['alpha-peak', 'fixture-lake-trail']) && /Sign up open\s*2/i.test(label),
     `Sign up open keeps the rail jam and the loppet at 2026-10-13 (${ids.join(', ')}; ${label})`);
-  check(await page.waitForFunction(() => document.getElementById('panel-status').textContent.startsWith('Showing 2 events of 12'), null, { timeout: 3000 }).then(() => true, () => false),
+  check(await page.waitForFunction(() => document.getElementById('panel-status').textContent.startsWith('Showing 2 events of 14'), null, { timeout: 3000 }).then(() => true, () => false),
     'a filter change is announced');
   check(await page.locator('.ev-next-list li').count() === 2, 'Coming up follows the filters');
   await page.locator('#events-filter .lp-reset').click();
@@ -3187,7 +3438,7 @@ async function eventsChecks(browser, base, stubBase) {
     calLink: document.querySelector('.ev-cal-link') && [document.querySelector('.ev-cal-link').target, document.querySelector('.ev-cal-link').textContent],
     controls: document.getElementById('list-toggle').getAttribute('aria-controls'), count: document.querySelector('#events-list > .ev-list-count').textContent }));
   check(JSON.stringify(lst.months) === JSON.stringify(['December 2026', 'January 2027', 'February 2027', 'March 2027', 'April 2027', 'May 2027', 'Season long', '2026/27 date not yet published'])
-    && lst.rows === 12 && !lst.resortList && lst.controls === 'events-list', `list view: the calendar grouped by month (${lst.months.join(', ')}; ${lst.rows} rows)`);
+    && lst.rows === 14 && !lst.resortList && lst.controls === 'events-list', `list view: the calendar grouped by month (${lst.months.join(', ')}; ${lst.rows} rows)`);
   check(JSON.stringify(lst.cals) === JSON.stringify(['Alpine', 'Nordic']) && lst.calLink && lst.calLink[0] === '_blank', `CALENDARS by discipline, opening in a new tab (${lst.cals})`);
   await shot(page, 'events-03-list.png');
   await axeCheck(page, 'events list view');
@@ -3241,7 +3492,7 @@ async function eventsChecks(browser, base, stubBase) {
     const pre = await q.evaluate(() => ({ items: document.querySelectorAll('.ev-list li').length, h: document.getElementById('panel-heading').textContent,
       months: [...document.querySelectorAll('.ev-month')].map((x) => x.textContent), signup: document.querySelectorAll('.ev-signup-link').length,
       ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent)['@graph'][0]['@type']) }));
-    check(pre.h === 'Events and competitions' && pre.items === 14 && pre.months[0] === 'December 2026' && pre.months.includes('Season long') && pre.signup >= 5 && pre.ld[0] === 'CollectionPage',
+    check(pre.h === 'Events and competitions' && pre.items === 16 && pre.months[0] === 'December 2026' && pre.months.includes('Season long') && pre.signup >= 5 && pre.ld[0] === 'CollectionPage',
       `the /map/events/ stub lists the events and calendars for visitors without JavaScript (${pre.items} items, ${pre.months.length} groups)`);
     await js.close();
     wp.assertClean();
@@ -3331,6 +3582,65 @@ async function realEventsChecks(browser, base) {
   await shot(ph, 'events-real-phone-list.png');
   wp.assertClean();
   await ph.close();
+  await realEventSearch(browser, base, file);
+}
+
+// The owner's report (2026-10-21): "Gunbarrel 25" at Heavenly was in the data but the search box found only resorts,
+// and its timing ("Spring") put it in no month. On the real build: event names and parts of them find events from
+// /map/ before EVENTS mode, the choice opens the event, and season words give it months.
+async function realEventSearch(browser, base, file) {
+  let idx = null;
+  try { idx = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'events-search.json'), 'utf8')); } catch { idx = null; }
+  check(idx && idx.events.length === file.events.length && idx.events.every((r) => idx.venues[r[2]] && idx.groups[r[3]]),
+    `real: events-search.json lists every event with its venue and group (${idx ? idx.events.length : 0} of ${file.events.length})`);
+  const gb = file.events.find((e) => e.id === 'gunbarrel-25');
+  if (gb) {
+    check(JSON.stringify(gb.months) === JSON.stringify([3, 4, 5]) && gb.usual_timing && gb.usual_timing.value === 'Spring' && !gb.edition_2026_27,
+      `real: Gunbarrel 25 ("Spring", no date) falls in March, April and May (${JSON.stringify(gb.months)})`);
+  }
+  for (const vp of [{ width: 1280, height: 800, name: 'desktop' }, { width: 390, height: 844, name: 'phone' }]) {
+    const phone = vp.name === 'phone';
+    const ctx = await browser.newContext(phone ? { viewport: vp, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } : { viewport: vp });
+    const page = await ctx.newPage();
+    const w = watch(page, `real event search ${vp.name}`);
+    const quiet = trackInflight(page);
+    await page.goto(`${base}/map/`);
+    await ready(page, { start: false });
+    const input = page.getByRole('combobox', { name: 'Search resorts, clusters, states and events' });
+    const list = page.locator('#map-search-list');
+    if (phone) await input.tap(); else await input.focus();
+    const names = async (q) => {
+      await input.fill('');
+      await page.keyboard.type(q);
+      await list.locator('.kind-event').first().waitFor({ timeout: 8000 }).catch(() => {});
+      return list.locator('[role="option"]').evaluateAll((els) => els.map((el) => `${el.querySelector('.map-search-name').textContent} | ${el.querySelector('.map-search-meta').textContent}`));
+    };
+    if (!phone) {
+      const birkie = await names('birkie');
+      const skijor = await names('skijor');
+      check(birkie.length > 0 && birkie.every((x) => /birkie/i.test(x.split(' | ')[0]) && / event at /.test(x)), `real: "birkie" lists Birkie events with venue and group (${birkie.slice(0, 3).join('; ')})`);
+      check(skijor.length === 8 && skijor.every((x) => /skijor/i.test(x) && x.includes('Skijoring event at ')), `real: "skijor" lists skijoring events (${skijor.slice(0, 2).join('; ')})`);
+    }
+    if (gb) {
+      const found = await names('gunbarrel');
+      check(found[0] === 'Gunbarrel 25 | Community event at Heavenly, California', `real ${vp.name}: "gunbarrel" finds Gunbarrel 25 at Heavenly (${found[0]})`);
+      await page.waitForTimeout(300);
+      await shot(page, `evsearch-real-${vp.name}-gunbarrel.png`);
+      check(!w.requests.some((u) => /\/events\.json(\?|$)/.test(u)), `real ${vp.name}: the search finds events with the small index only, no events.json`);
+      const opt = list.locator('[role="option"]').first();
+      if (phone) await opt.tap(); else { await page.keyboard.press('ArrowDown'); await page.keyboard.press('Enter'); }
+      await page.waitForURL(/\/map\/events\/\?venue=heavenly&event=gunbarrel-25$/);
+      await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && document.querySelector('#ev-gunbarrel-25.is-selected'), null, { timeout: 30000 }).catch(() => {});
+      await page.waitForTimeout(600);
+      const got = await page.evaluate(() => ({ heading: document.getElementById('panel-heading').textContent, selected: Boolean(document.querySelector('#ev-gunbarrel-25.is-selected')),
+        timing: [...document.querySelectorAll('#ev-gunbarrel-25 .fact')].filter((f) => f.querySelector('dt').textContent === 'Usual timing').map((f) => f.querySelector('dd').innerText.split('\n')[0])[0] }));
+      check(got.heading === 'Heavenly' && got.selected && /^Spring/.test(got.timing || ''), `real ${vp.name}: choosing it opens EVENTS mode on Gunbarrel 25 (${JSON.stringify(got)})`);
+      await shot(page, `evsearch-real-${vp.name}-gunbarrel-open.png`);
+    }
+    await quiet();
+    w.assertClean();
+    await ctx.close();
+  }
 }
 
 // MAP_TEST_ONLY=eventsChecks,passChecks runs only the named suites (all of them by default).
@@ -3368,6 +3678,7 @@ try {
   if (runs('desktopStub')) await desktopStub(browser, STUB_BASE);
   if (runs('phone')) await phone(browser, STUB_BASE);
   if (runs('searchChecks')) await searchChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('eventSearchChecks')) await eventSearchChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('officialFallbackChecks')) await officialFallbackChecks(browser, STUB_BASE);
   if (runs('liveLinksChecks')) await liveLinksChecks(browser, STUB_BASE);
   if (runs('housingChecks')) await housingChecks(browser, STUB_BASE);

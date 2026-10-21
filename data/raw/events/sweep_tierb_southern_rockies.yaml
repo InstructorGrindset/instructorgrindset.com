@@ -1,0 +1,589 @@
+batch: events-sweep_tierb_southern_rockies
+researched_date: 2026-10-21
+# Smaller hills of Colorado, Utah, New Mexico, Arizona and Nevada, swept one by one (30 web searches).
+# Facts seen only in a search result are estimated; Wikipedia pages were opened.
+sources:
+# Loveland, CO
+- id: events-swbsr-wikipedia-loveland-derby
+  url: https://en.wikipedia.org/wiki/Loveland_Derby
+  title: Loveland Derby
+  accessed_date: 2026-10-21
+- id: events-swbsr-skiloveland-derby-2026
+  url: https://skiloveland.com/?p=27342
+  title: Loveland Derby 2026 (VIDEO)
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Resort post that calls the race the 64th Annual Loveland
+    Derby.
+- id: events-swbsr-ticketsignup-loveland-rail-jam
+  url: https://www.ticketsignup.io/TicketEvent/TheLovelandSkiAreaRailJamAndGala
+  title: www.ticketsignup.io
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. TicketSignup page for the Loveland Ski Area Rail Jam and
+    Gala, a fundraiser held April 19, 2025.
+# Arizona Snowbowl, AZ
+- id: events-swbsr-flagstaff-usasa-rail-jam-2026
+  url: https://www.flagstaffarizona.org/events/usasa-grand-canyon-series-rail-jam-weekend-at-arizona-snowbowl
+  title: usasa grand canyon series rail jam weekend at arizona snowbowl
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Flagstaff tourism listing for January 10 to 11, 2026.
+- id: events-swbsr-snowbowl-february-2026
+  url: https://www.snowbowl.ski/whats-happening-at-arizona-snowbowl-in-february/
+  title: whats happening at arizona snowbowl in february
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Resort post on its February 2026 events.
+- id: events-swbsr-snowbowl-march-2026
+  url: https://www.snowbowl.ski/march-events-at-arizona-snowbowl-worlds-best-spring-break-snow-jamz-more/
+  title: march events at arizona snowbowl worlds best spring break snow jamz more
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Resort post on its March 2026 events.
+- id: events-swbsr-kahtoola-uphill-about
+  url: https://kahtoola.com/about-us/kahtoola-uphill/
+  title: Kahtoola Uphill
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+- id: events-swbsr-runsignup-kahtoola-uphill
+  url: https://runscore.runsignup.com/Race/Info/AZ/Flagstaff/GORETEXKahtoolaUphill
+  title: runscore.runsignup.com
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. RunSignup page of the GORE-TEX Kahtoola Uphill, 2025
+    edition.
+- id: events-swbsr-trailrunner-kahtoola-agassiz
+  url: https://trailrunner.com/event/kahtoola-agassiz-uphill/
+  title: Kahtoola Agassiz Uphill
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Trail Runner event listing for the 2024 Agassiz Climb.
+# Mt. Rose and Diamond Peak, NV
+- id: events-swbsr-skirose-pond-skim
+  url: https://skirose.com/pondskim/
+  title: skirose.com
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Resort page for the 2026 pond skim.
+- id: events-swbsr-gotahoenorth-dummy-downhill
+  url: https://www.gotahoenorth.com/?p=82107
+  title: Dummy Downhill at Diamond Peak
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. North Lake Tahoe listing for the 2024 edition.
+# Purgatory, CO
+- id: events-swbsr-ksut-purgatory-pond-skim-2026
+  url: https://www.ksut.org/community-calendar/event/pond-skim-spring-beach-party-at-purgatory-resort-25-02-2026-08-11-40
+  title: "© 2026 KSUT Public Radio"
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. KSUT community calendar listing for the Pond Skim and
+    Spring Beach Party at Purgatory Resort, Sunday, April 5, 2026.
+# Eldora, CO
+- id: events-swbsr-level1-railer-park-news
+  url: https://level1productions.com/blogs/news/railer-park-girls-rail-jam
+  title: Railer Park Girls RAIL JAM
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+- id: events-swbsr-level1-railer-park-product
+  url: https://level1productions.com/products/railer-park-girls-rail-jam
+  title: Railer Park Girls RAIL JAM
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Level 1 store page for the event.
+- id: events-swbsr-level1-rail-jam-tour-eldora
+  url: https://level1productions.com/blogs/news/rail-jam-tour-eldora
+  title: Rail Jam Tour – Eldora
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+# Sunlight, CO
+- id: events-swbsr-runsignup-moonlight-race-series
+  url: https://runscore.runsignup.com/Race/Info/CO/GlenwoodSprings/MoonlightRaceSeries
+  title: runscore.runsignup.com
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. RunSignup page of the Moonlight Race Series in Glenwood
+    Springs.
+- id: events-swbsr-soprissun-moonlight-race-series
+  url: https://soprissun.com/?p=135829
+  title: "Scenes from the Moonlight Race Series’ January 2023 event. Photo courtesy of Cripple Creek Bike and Backcountry"
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Sopris Sun article.
+# New Mexico
+- id: events-swbsr-angelfirechamber-2026-03-22
+  url: https://angelfirechamber.org/events/2026-03-22
+  title: angelfirechamber.org
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Angel Fire Chamber of Commerce events for March 22, 2026.
+- id: events-swbsr-abqjournal-nm-pond-skims-2025
+  url: https://www.abqjournal.com/lifestyle/new-mexico-ski-resorts-wrap-up-winter-with-pond-skim-events/700047
+  title: New Mexico ski resorts wrap up winter with pond skim events
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Albuquerque Journal article from March 2025.
+- id: events-swbsr-skinm-blog-2020-02
+  url: https://skinewmexico.com/blog/2020/02/
+  title: skinewmexico.com
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Ski New Mexico blog posts of February 2020.
+- id: events-swbsr-skinm-one-last-run
+  url: https://skinewmexico.com/blog/one-last-run-closing-day-celebrations
+  title: "One Last Run: Closing Day Celebrations Across New Mexico"
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Ski New Mexico guide to the 2026 closing days.
+- id: events-swbsr-ladailypost-sipapu-cardboard-pond
+  url: https://ladailypost.com/cardboard-derby-and-pond-skimming-events-at-sipapu/
+  title: cardboard derby and pond skimming events at sipapu
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Los Alamos Daily Post item from 2023.
+- id: events-swbsr-ladailypost-sipapu-events
+  url: https://ladailypost.com/sipapu-offers-events-and-extra-hour-of-skiing/
+  title: Sipapu Offers Events And Extra Hour Of Skiing
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+- id: events-swbsr-skinm-make-the-most-of-spring
+  url: https://skinewmexico.com/blog/make-the-most-of-feb-and-march-in-new-mexico
+  title: Make the Most of Spring on the Slopes in New Mexico
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+- id: events-swbsr-sfnm-special-events-2020
+  url: https://www.pressreader.com/usa/santa-fe-new-mexican/20200131/281827170747348
+  title: Plenty of special events this season
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Santa Fe New Mexican roundup of January 31, 2020.
+# Wolf Creek, CO
+- id: events-swbsr-wolfcreek-races
+  url: https://wolfcreekski.com/wolfcreek-races/
+  title: "CORONAVIRUS UPDATE: For the latest information"
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Wolf Creek Ski Area races page; the title shown is the
+    site banner.
+- id: events-swbsr-ladailypost-wolf-creek-fun-race
+  url: https://ladailypost.com/?p=800374
+  title: Wolf Creek Ski Area Hosts Second Fun Race
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+# Monarch, CO
+- id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel
+  url: https://arkvalleyvoice.com/monarchs-kayaks-on-snow-gunbarrel-challenge-coming-in-april/
+  title: monarchs kayaks on snow gunbarrel challenge coming in april
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Ark Valley Voice article on the April 16, 2022 events.
+- id: events-swbsr-coloradopolitics-spring-2023
+  url: https://www.coloradopolitics.com/2023/03/16/mountain-kayaks-cardboard-races-pond-splashes-spring-around-colorado-ski-resorts-472b1a9b-275e-55ee-aeb2-6566767abbea/
+  title: Colorado Politics
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Roundup of Colorado spring ski events dated March 16, 2023.
+# Powderhorn, CO
+- id: events-swbsr-powderhorn-pond-skim
+  url: https://powderhorn.com/component/rseventspro/event/435-pond-skim.html
+  title: 435 pond skim
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Resort event page for the April 6, 2025 pond skim.
+# Sunrise Park, AZ
+- id: events-swbsr-sunrise-pond-skimming-2025
+  url: https://sunrise.ski/events/pond-skimming-2025/
+  title: Pond Skimming Challenge at Sunrise Park Resort
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened.
+# Brian Head, UT
+- id: events-swbsr-lake-brian-head-pond-skim
+  url: https://www.lake.com/events/brian-head-resort-pond-skim/
+  title: Brian Head Resort Pond Skim
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Third party listing for April 25, 2026.
+- id: events-swbsr-brianhead-pond-skim
+  url: https://www.brianhead.com/event/brian-head-pond-skim/
+  title: Loading Events
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Resort event page; the result showed the April 26, 2025
+    edition.
+# Nordic Valley, UT
+- id: events-swbsr-nordicvalley-2022-recap
+  url: https://www.nordicvalley.ski/why-2022-was-the-best-year/
+  title: why 2022 was the best year
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Resort recap of 2022.
+# Cuchara, CO
+- id: events-swbsr-unofficial-colorado-june-skiing
+  url: https://unofficialnetworks.com/2026/06/01/colorado-ski-area-june-skiing/
+  title: colorado ski area june skiing
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Unofficial Networks article of June 1, 2026 on a June hike
+    to skiing weekend at Cuchara.
+# Echo Mountain, CO
+- id: events-swbsr-skiracing-wpst-echo
+  url: https://skiracing.com/world-pro-ski-tour-announces-next-races-at-echo-mountain/
+  title: world pro ski tour announces next races at echo mountain
+  accessed_date: 2026-10-21
+  note: From a search result for this page; page not opened. Ski Racing article on the 2021 races.
+venues: []
+events:
+# Loveland, CO
+- id: loveland-derby
+  name: Loveland Derby
+  discipline: alpine_racing
+  levels: [open_amateur]
+  venue: {resort_id: loveland-valley-ski-area}
+  organizer: {name: Loveland Ski Club, source_id: events-swbsr-wikipedia-loveland-derby, as_of: 2026-10-21, confidence: reported}
+  format: {value: "Two day slalom on Loveland Valley's Twist and Switchback runs for about 500 to 600 racers, from U8 classes to senior; many race in costume", source_id: events-swbsr-wikipedia-loveland-derby, as_of: 2026-10-21, confidence: reported, note: "Loveland Valley closes to the public for the race. Children race on Switchback; the scored U14 to senior classes race on Twist."}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, source_id: events-swbsr-skiloveland-derby-2026, as_of: 2026-10-21, confidence: estimated, note: "A resort post titled Loveland Derby 2026 calls it the 64th Annual Loveland Derby; its dates were not seen."}
+  usual_timing: {value: "The last race of the season, Saturday morning to Sunday afternoon; the 2015 edition ran April 11 to 12", source_id: events-swbsr-wikipedia-loveland-derby, as_of: 2026-10-21, confidence: reported}
+  signup:
+    requirements: {value: "USSA ski racing license; racers must be at least 5 years old, with no upper age limit", source_id: events-swbsr-wikipedia-loveland-derby, as_of: 2026-10-21, confidence: reported, note: "Adults race in the senior class. USSA is now U.S. Ski & Snowboard."}
+  website: {value: "https://skiloveland.com/?p=27342", source_id: events-swbsr-skiloveland-derby-2026, as_of: 2026-10-21, confidence: estimated, note: "The resort's post on the 2026 race."}
+- id: loveland-ski-area-rail-jam-and-gala
+  name: The Loveland Ski Area Rail Jam and Gala
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: loveland-basin-ski-area}
+  format: {value: "Fundraiser rail jam in the Basin Terrain Park with prizes for the top three finishers", source_id: events-swbsr-ticketsignup-loveland-rail-jam, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2024/25, start: 2025-04-19, end: 2025-04-19, source_id: events-swbsr-ticketsignup-loveland-rail-jam, as_of: 2026-10-21, confidence: estimated, note: "Latest edition found; a 2026 edition was not found."}
+  signup:
+    url: {value: "https://www.ticketsignup.io/TicketEvent/TheLovelandSkiAreaRailJamAndGala", source_id: events-swbsr-ticketsignup-loveland-rail-jam, as_of: 2026-10-21, confidence: estimated}
+    platform: {value: TicketSignup, source_id: events-swbsr-ticketsignup-loveland-rail-jam, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://www.ticketsignup.io/TicketEvent/TheLovelandSkiAreaRailJamAndGala", source_id: events-swbsr-ticketsignup-loveland-rail-jam, as_of: 2026-10-21, confidence: estimated}
+# Arizona Snowbowl, AZ
+- id: usasa-grand-canyon-series-rail-jam-arizona-snowbowl
+  name: USASA Grand Canyon Series Rail Jam Weekend
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: arizona-snowbowl}
+  series: {id: usasa-grand-canyon-series, name: USASA Grand Canyon Series}
+  organizer: {name: USASA Grand Canyon Series, source_id: events-swbsr-flagstaff-usasa-rail-jam-2026, as_of: 2026-10-21, confidence: estimated}
+  format: {value: "Rail jam weekend in the Round Up Rail Garden, reached by the Grand Canyon Express chairlift", source_id: events-swbsr-flagstaff-usasa-rail-jam-2026, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-01-10, end: 2026-01-11, source_id: events-swbsr-flagstaff-usasa-rail-jam-2026, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://www.flagstaffarizona.org/events/usasa-grand-canyon-series-rail-jam-weekend-at-arizona-snowbowl", source_id: events-swbsr-flagstaff-usasa-rail-jam-2026, as_of: 2026-10-21, confidence: estimated}
+- id: arizona-snowbowl-friday-night-rail-jam
+  name: Friday Night Rail Jam
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: arizona-snowbowl}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-02-27, end: 2026-02-27, source_id: events-swbsr-snowbowl-february-2026, as_of: 2026-10-21, confidence: estimated, note: "Listed among the resort's February 2026 events; the listing gives no age limit."}
+  website: {value: "https://www.snowbowl.ski/whats-happening-at-arizona-snowbowl-in-february/", source_id: events-swbsr-snowbowl-february-2026, as_of: 2026-10-21, confidence: estimated}
+- id: arizona-snowbowl-slopestyle-weekend
+  name: Slopestyle Weekend
+  discipline: slopestyle
+  levels: [open_amateur]
+  venue: {resort_id: arizona-snowbowl}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-02-28, end: 2026-03-01, source_id: events-swbsr-snowbowl-february-2026, as_of: 2026-10-21, confidence: estimated, note: "Listed among the resort's February 2026 events; the listing gives no age limit or organizer."}
+  website: {value: "https://www.snowbowl.ski/whats-happening-at-arizona-snowbowl-in-february/", source_id: events-swbsr-snowbowl-february-2026, as_of: 2026-10-21, confidence: estimated}
+- id: arizona-snowbowl-southern-belle-showdown
+  name: Southern Belle Showdown
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: arizona-snowbowl}
+  format: {value: "Rail jam for riders 18 and older", source_id: events-swbsr-snowbowl-march-2026, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-03-07, end: 2026-03-07, source_id: events-swbsr-snowbowl-march-2026, as_of: 2026-10-21, confidence: estimated}
+  signup:
+    requirements: {value: "18 or older", source_id: events-swbsr-snowbowl-march-2026, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://www.snowbowl.ski/march-events-at-arizona-snowbowl-worlds-best-spring-break-snow-jamz-more/", source_id: events-swbsr-snowbowl-march-2026, as_of: 2026-10-21, confidence: estimated}
+- id: gore-tex-kahtoola-uphill
+  name: GORE-TEX Kahtoola Uphill
+  discipline: uphill
+  levels: [open_amateur]
+  venue: {resort_id: arizona-snowbowl}
+  organizer: {name: Kahtoola, source_id: events-swbsr-kahtoola-uphill-about, as_of: 2026-10-21, confidence: estimated}
+  format: {value: "Uphill race at Arizona Snowbowl with three courses of rising difficulty: the Fun Climb, the Midway Climb and the Agassiz Climb", source_id: events-swbsr-kahtoola-uphill-about, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page."}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-02-21, end: 2026-02-21, source_id: events-swbsr-snowbowl-february-2026, as_of: 2026-10-21, confidence: estimated, note: "Listed among the resort's February 2026 events as the Kahtoola Uphill Race."}
+  signup:
+    method: online_registration
+    url: {value: "https://runscore.runsignup.com/Race/Info/AZ/Flagstaff/GORETEXKahtoolaUphill", source_id: events-swbsr-runsignup-kahtoola-uphill, as_of: 2026-10-21, confidence: estimated, note: "RunSignup page of the 2025 race."}
+    platform: {value: RunSignup, source_id: events-swbsr-runsignup-kahtoola-uphill, as_of: 2026-10-21, confidence: estimated}
+    fee_usd: {value: 25, note: "Agassiz Climb, lowest or early tier, on a 2024 listing; the late tier was $75", source_id: events-swbsr-trailrunner-kahtoola-agassiz, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://kahtoola.com/about-us/kahtoola-uphill/", source_id: events-swbsr-kahtoola-uphill-about, as_of: 2026-10-21, confidence: estimated}
+# Mt. Rose, NV
+- id: mount-rose-pond-skim
+  name: Mt. Rose Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: mount-rose-ski-tahoe}
+  format: {value: "Pond skim on Ponderosa Run next to the Main Lodge; costumes encouraged and helmets recommended", source_id: events-swbsr-skirose-pond-skim, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-04-18, end: 2026-04-18, source_id: events-swbsr-skirose-pond-skim, as_of: 2026-10-21, confidence: estimated, note: "1 p.m., with check in at the Main Lodge info desk from 9 to 10:30 a.m. Registration showed as closed."}
+  signup:
+    url: {value: "https://skirose.com/pondskim/", source_id: events-swbsr-skirose-pond-skim, as_of: 2026-10-21, confidence: estimated}
+    requirements: {value: "18 or older, with a lift ticket or season pass and a signed liability waiver", source_id: events-swbsr-skirose-pond-skim, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://skirose.com/pondskim/", source_id: events-swbsr-skirose-pond-skim, as_of: 2026-10-21, confidence: estimated}
+# Diamond Peak, NV
+- id: diamond-peak-dummy-downhill
+  name: Dummy Downhill
+  discipline: fun_race
+  levels: [open_amateur]
+  venue: {resort_id: diamond-peak}
+  format: {value: "Spring contest where competitors build a dummy on skis, a sled or a snowboard and launch it off a big jump", source_id: events-swbsr-gotahoenorth-dummy-downhill, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2023/24, source_id: events-swbsr-gotahoenorth-dummy-downhill, as_of: 2026-10-21, confidence: estimated, note: "The latest listing found is for 2024; its date was not seen."}
+  website: {value: "https://www.gotahoenorth.com/?p=82107", source_id: events-swbsr-gotahoenorth-dummy-downhill, as_of: 2026-10-21, confidence: estimated}
+# Purgatory, CO
+- id: purgatory-pond-skim
+  name: Purgatory Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: purgatory-resort}
+  format: {value: "Skiers and riders in costume try to cross the pond at the Ski Beach for style points, bragging rights and prizes, on a spring beach party day", source_id: events-swbsr-ksut-purgatory-pond-skim-2026, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-04-05, end: 2026-04-05, source_id: events-swbsr-ksut-purgatory-pond-skim-2026, as_of: 2026-10-21, confidence: estimated, note: "Sunday, 12:30 to 3 p.m."}
+  signup:
+    method: at_venue
+    fee_usd: {value: 20, note: "Entry fee, 2026", source_id: events-swbsr-ksut-purgatory-pond-skim-2026, as_of: 2026-10-21, confidence: estimated}
+    requirements: {value: "Sign up at the Ticket Office will call desk from 9:30 a.m. on the day; at least 12 years old; signed waiver; first 100 participants", source_id: events-swbsr-ksut-purgatory-pond-skim-2026, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://www.ksut.org/community-calendar/event/pond-skim-spring-beach-party-at-purgatory-resort-25-02-2026-08-11-40", source_id: events-swbsr-ksut-purgatory-pond-skim-2026, as_of: 2026-10-21, confidence: estimated, note: "Third party calendar listing; the resort's own page was not found."}
+# Eldora, CO
+- id: eldora-railer-park-girls-rail-jam
+  name: Railer Park Girls Rail Jam
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: eldora}
+  organizer: {name: Level 1 Productions, url: "https://level1productions.com/", source_id: events-swbsr-level1-railer-park-news, as_of: 2026-10-21, confidence: estimated}
+  format: {value: "Women's rail jam at the base of Eldora with a prize purse of $2,000 plus; 2025 was its third year", source_id: events-swbsr-level1-railer-park-news, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2024/25, start: 2025-03-01, end: 2025-03-01, source_id: events-swbsr-level1-railer-park-news, as_of: 2026-10-21, confidence: estimated, note: "Latest edition found; a 2026 edition was not confirmed."}
+  signup:
+    url: {value: "https://level1productions.com/products/railer-park-girls-rail-jam", source_id: events-swbsr-level1-railer-park-product, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://level1productions.com/blogs/news/railer-park-girls-rail-jam", source_id: events-swbsr-level1-railer-park-news, as_of: 2026-10-21, confidence: estimated}
+- id: level-1-rail-jam-tour-eldora
+  name: Level 1 Rail Jam Tour at Eldora
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: eldora}
+  series: {id: level-1-rail-jam-tour, name: Level 1 Rail Jam Tour}
+  organizer: {name: Level 1 Productions, url: "https://level1productions.com/", source_id: events-swbsr-level1-rail-jam-tour-eldora, as_of: 2026-10-21, confidence: estimated}
+  format: {value: "Open rail jam stop of the Level 1 Rail Jam Tour, with check in at the base area by the Timbers lodge", source_id: events-swbsr-level1-rail-jam-tour-eldora, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, start: 2023-03-04, end: 2023-03-04, source_id: events-swbsr-level1-rail-jam-tour-eldora, as_of: 2026-10-21, confidence: estimated, note: "Latest edition found."}
+  website: {value: "https://level1productions.com/blogs/news/rail-jam-tour-eldora", source_id: events-swbsr-level1-rail-jam-tour-eldora, as_of: 2026-10-21, confidence: estimated}
+# Sunlight, CO
+- id: sunlight-moonlight-race-series
+  name: Moonlight Race Series
+  discipline: skimo
+  disciplines_also: [uphill]
+  levels: [open_amateur]
+  venue: {resort_id: sunlight-mountain-resort}
+  organizer: {name: Cripple Creek Bike and Backcountry, source_id: events-swbsr-soprissun-moonlight-race-series, as_of: 2026-10-21, confidence: estimated}
+  format: {value: "Evening ski mountaineering series of four races at Sunlight that regularly draws about 60 skiers", source_id: events-swbsr-soprissun-moonlight-race-series, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page."}
+  edition_2026_27: null
+  last_edition: {season: 2023/24, source_id: events-swbsr-runsignup-moonlight-race-series, as_of: 2026-10-21, confidence: estimated, note: "Latest season found; its dates were not seen."}
+  signup:
+    method: online_registration
+    url: {value: "https://runscore.runsignup.com/Race/Info/CO/GlenwoodSprings/MoonlightRaceSeries", source_id: events-swbsr-runsignup-moonlight-race-series, as_of: 2026-10-21, confidence: estimated}
+    platform: {value: RunSignup, source_id: events-swbsr-runsignup-moonlight-race-series, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://runscore.runsignup.com/Race/Info/CO/GlenwoodSprings/MoonlightRaceSeries", source_id: events-swbsr-runsignup-moonlight-race-series, as_of: 2026-10-21, confidence: estimated}
+# Angel Fire, NM
+- id: angel-fire-pond-skim
+  name: Angel Fire Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: angel-fire-resort}
+  format: {value: "End of season pond skim; in 2025 it ran Sunday, March 23, noon to 4 p.m., under Lift 2 off Exhibition", source_id: events-swbsr-abqjournal-nm-pond-skims-2025, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-03-22, end: 2026-03-22, source_id: events-swbsr-angelfirechamber-2026-03-22, as_of: 2026-10-21, confidence: estimated, note: "Chamber of Commerce listing; its start time was cut off."}
+  signup:
+    fee_usd: {value: 0, note: "Free with a lift ticket, season pass or membership (2025)", source_id: events-swbsr-abqjournal-nm-pond-skims-2025, as_of: 2026-10-21, confidence: estimated}
+    requirements: {value: "Lift ticket, season pass or membership", source_id: events-swbsr-abqjournal-nm-pond-skims-2025, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://angelfirechamber.org/events/2026-03-22", source_id: events-swbsr-angelfirechamber-2026-03-22, as_of: 2026-10-21, confidence: estimated}
+- id: angel-fire-chilly-challenge
+  name: Chilly Challenge
+  discipline: fun_race
+  levels: [open_amateur]
+  venue: {resort_id: angel-fire-resort}
+  format: {value: "End of season race from the summit; racers gather at the Chile Express base at 3:30 p.m. and the race starts at 4:30 p.m.", source_id: events-swbsr-angelfirechamber-2026-03-22, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit and no race format beyond this."}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-03-22, end: 2026-03-22, source_id: events-swbsr-angelfirechamber-2026-03-22, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://angelfirechamber.org/events/2026-03-22", source_id: events-swbsr-angelfirechamber-2026-03-22, as_of: 2026-10-21, confidence: estimated}
+- id: angel-fire-friday-night-rail-jam
+  name: Friday Night Rail Jam
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: angel-fire-resort}
+  format: {value: "Friday night rail jams in February and March", source_id: events-swbsr-skinm-blog-2020-02, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2019/20, source_id: events-swbsr-skinm-blog-2020-02, as_of: 2026-10-21, confidence: estimated, note: "The 2020 listings are the latest found; their dates were not seen."}
+# Red River, NM
+- id: red-river-pond-skim
+  name: Red River Closing Day Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: red-river-ski-area}
+  format: {value: "Pond skim at the closing day celebration; costumes encouraged", source_id: events-swbsr-skinm-one-last-run, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, source_id: events-swbsr-skinm-one-last-run, as_of: 2026-10-21, confidence: estimated, note: "Ski New Mexico listed closing day and the pond skim as confirmed, with a projected closing day of March 22, 2026; the final date was not seen."}
+  usual_timing: {value: "Closing day; Ski New Mexico projected it for March 22 in 2026", source_id: events-swbsr-skinm-one-last-run, as_of: 2026-10-21, confidence: estimated}
+# Sipapu, NM
+- id: sipapu-cardboard-derby
+  name: Sipapu Cardboard Derby
+  discipline: fun_race
+  levels: [open_amateur]
+  venue: {resort_id: sipapu-ski-and-summer-resort}
+  format: {value: "Racers build vessels from cardboard, duct tape, string and paint only and ride them down the mountain for prizes", source_id: events-swbsr-ladailypost-sipapu-cardboard-pond, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, source_id: events-swbsr-ladailypost-sipapu-cardboard-pond, as_of: 2026-10-21, confidence: estimated, note: "Latest listing found, from 2023; its date was not seen."}
+- id: sipapu-pond-skim
+  name: Sipapu Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: sipapu-ski-and-summer-resort}
+  format: {value: "Pond skim across Lake Sipapu, a man made pond 75 feet long and 3 feet deep, for prizes and bragging rights", source_id: events-swbsr-ladailypost-sipapu-events, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page."}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, source_id: events-swbsr-ladailypost-sipapu-cardboard-pond, as_of: 2026-10-21, confidence: estimated, note: "A 2023 item on the Cardboard Derby and pond skimming at Sipapu; its date was not seen."}
+  usual_timing: {value: "Late March; one listing gives March 29, noon to 4 p.m., without a confirmed year", source_id: events-swbsr-ladailypost-sipapu-events, as_of: 2026-10-21, confidence: estimated, note: "A search summary dated this listing to 2024; the year was not confirmed."}
+  signup:
+    requirements: {value: "Helmet and early registration required", source_id: events-swbsr-ladailypost-sipapu-events, as_of: 2026-10-21, confidence: estimated}
+# Pajarito, NM
+- id: pajarito-skiesta
+  name: Skiesta
+  discipline: fun_race
+  levels: [open_amateur]
+  venue: {resort_id: pajarito-mountain}
+  format: {value: "Spring day of costumes and snow races for all ages, with live music and New Mexico craft beer", source_id: events-swbsr-skinm-make-the-most-of-spring, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page."}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, start: 2023-03-18, end: 2023-03-18, source_id: events-swbsr-skinm-make-the-most-of-spring, as_of: 2026-10-21, confidence: estimated, note: "Latest edition found; an earlier one ran March 14, 2020."}
+- id: pajarito-rail-and-refreshments
+  name: Rail & Refreshments
+  discipline: slopestyle
+  disciplines_also: [rail_jam]
+  levels: [open_amateur]
+  venue: {resort_id: pajarito-mountain}
+  format: {value: "Rail and slopestyle contest billed as Pajarito's first slopestyle competition", source_id: events-swbsr-skinm-blog-2020-02, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2019/20, start: 2020-02-29, end: 2020-02-29, source_id: events-swbsr-skinm-blog-2020-02, as_of: 2026-10-21, confidence: estimated, note: "Latest edition found."}
+# Ski Santa Fe, NM
+- id: ski-santa-fe-jeff-gladfelter-memorial-bump-run
+  name: Jeff Gladfelter Memorial Bump Run
+  discipline: moguls
+  levels: [open_amateur]
+  venue: {resort_id: ski-santa-fe-santa-fe-q38555}
+  edition_2026_27: null
+  usual_timing: {value: "Late March; a January 2020 roundup listed it for March 28, 2020", source_id: events-swbsr-sfnm-special-events-2020, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page. Whether the 2020 edition ran was not seen. The listing gives no age limit."}
+- id: ski-santa-fe-rail-jam
+  name: Ski Santa Fe Rail Jam
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: ski-santa-fe-santa-fe-q38555}
+  edition_2026_27: null
+  usual_timing: {value: "Late March; a January 2020 roundup listed the fifth annual rail jam for March 29, 2020", source_id: events-swbsr-sfnm-special-events-2020, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page. Whether the 2020 edition ran was not seen. The listing gives no age limit."}
+# Wolf Creek, CO
+- id: wolf-creek-fun-series
+  name: Wolf Creek Fun Series
+  discipline: fun_race
+  disciplines_also: [alpine_racing]
+  levels: [open_amateur]
+  venue: {resort_id: wolf-creek-ski-area}
+  organizer: {name: Wolf Creek Ski Area, url: "https://wolfcreekski.com/", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+  format: {value: "Free dual races for skiers and snowboarders of all ages and abilities on a modified giant slalom with a red and a blue course", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, source_id: events-swbsr-ladailypost-wolf-creek-fun-race, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page. A 2023 report counted 77 racers at the January MLK race; later seasons were not found."}
+  signup:
+    method: at_venue
+    url: {value: "https://wolfcreekski.com/wolfcreek-races/", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+    fee_usd: {value: 0, note: "Free; the race is included with a lift ticket", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+    requirements: {value: "Lift ticket; register at the Raven's Nest", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://wolfcreekski.com/wolfcreek-races/", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+- id: wolf-creek-challenge-series
+  name: Wolf Creek Challenge Series
+  discipline: alpine_racing
+  levels: [open_amateur]
+  venue: {resort_id: wolf-creek-ski-area}
+  format: {value: "Giant slalom of more than 40 gates on Middle and Lower Charisma for teams and individuals; all proceeds go to the Wolf Creek Ski Team", source_id: events-swbsr-sfnm-special-events-2020, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated, note: "From a search result summary that drew on several pages and did not name the page for this fact; this is the likeliest page. A 2023 listing gave the fees; its dates were not seen."}
+  signup:
+    fee_usd: {value: 25, note: "Adult entry on a 2023 listing, with a $50 lift ticket; racers 18 and under paid $15 with a $27 lift ticket", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://wolfcreekski.com/wolfcreek-races/", source_id: events-swbsr-wolfcreek-races, as_of: 2026-10-21, confidence: estimated}
+# Monarch, CO
+- id: monarch-kayaks-on-snow
+  name: Kayaks on Snow
+  discipline: fun_race
+  levels: [open_amateur]
+  venue: {resort_id: monarch-mountain}
+  format: {value: "Head to head kayak race down a course of berms, banks and bumps that ends in an icy pond; a snowcat tows competitors back up", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, source_id: events-swbsr-coloradopolitics-spring-2023, as_of: 2026-10-21, confidence: estimated, note: "A March 2023 roundup of Colorado spring events covers it; its date was not seen."}
+  usual_timing: {value: "Closing weekend in April; the 2022 edition was April 16", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated}
+  signup:
+    fee_usd: {value: 40, note: "Most recent listing found; its year was not shown", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated}
+    requirements: {value: "18 or older", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://arkvalleyvoice.com/monarchs-kayaks-on-snow-gunbarrel-challenge-coming-in-april/", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated}
+- id: monarch-gunbarrel-challenge
+  name: Gunbarrel Challenge
+  discipline: uphill
+  levels: [open_amateur]
+  venue: {resort_id: monarch-mountain}
+  format: {value: "Skiers and snowboarders run or skin to the top of Gunbarrel, then race back down on skis or a snowboard", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2022/23, source_id: events-swbsr-coloradopolitics-spring-2023, as_of: 2026-10-21, confidence: estimated, note: "A March 2023 roundup describes it as an uphill and downhill race on Gunbarrel Trail; its date was not seen."}
+  usual_timing: {value: "Around closing day", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://arkvalleyvoice.com/monarchs-kayaks-on-snow-gunbarrel-challenge-coming-in-april/", source_id: events-swbsr-arkvalleyvoice-kayaks-gunbarrel, as_of: 2026-10-21, confidence: estimated}
+# Powderhorn, CO
+- id: powderhorn-pond-skim
+  name: Powderhorn Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: powderhorn}
+  format: {value: "Closing day pond skim in Lower Peace Park", source_id: events-swbsr-powderhorn-pond-skim, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2024/25, start: 2025-04-06, end: 2025-04-06, source_id: events-swbsr-powderhorn-pond-skim, as_of: 2026-10-21, confidence: estimated, note: "Latest edition found; a 2026 edition was not found."}
+  signup:
+    requirements: {value: "Ages 8 and up; limited to 75 participants", source_id: events-swbsr-powderhorn-pond-skim, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://powderhorn.com/component/rseventspro/event/435-pond-skim.html", source_id: events-swbsr-powderhorn-pond-skim, as_of: 2026-10-21, confidence: estimated}
+# Sunrise Park, AZ
+- id: sunrise-park-pond-skimming-challenge
+  name: Pond Skimming Challenge
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: sunrise-park-resort}
+  format: {value: "Costumed skiers and snowboarders skim a pond of about 70 to 90 feet at the base of the Bunny Hill, judged on air, distance, style, costume and crowd", source_id: events-swbsr-sunrise-pond-skimming-2025, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2024/25, start: 2025-03-30, end: 2025-03-30, source_id: events-swbsr-sunrise-pond-skimming-2025, as_of: 2026-10-21, confidence: estimated, note: "Latest edition found; a 2026 edition was not found."}
+  signup:
+    fee_usd: {value: 0, note: "Free with a valid lift ticket (2025)", source_id: events-swbsr-sunrise-pond-skimming-2025, as_of: 2026-10-21, confidence: estimated}
+    requirements: {value: "Age 16 or older, a valid lift ticket and a costume", source_id: events-swbsr-sunrise-pond-skimming-2025, as_of: 2026-10-21, confidence: estimated}
+  website: {value: "https://sunrise.ski/events/pond-skimming-2025/", source_id: events-swbsr-sunrise-pond-skimming-2025, as_of: 2026-10-21, confidence: estimated}
+# Brian Head, UT
+- id: brian-head-pond-skim
+  name: Brian Head Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: brian-head-resort}
+  format: {value: "Spring pond skim with a costume contest and awards; about 130 people registered in 2025", source_id: events-swbsr-brianhead-pond-skim, as_of: 2026-10-21, confidence: estimated, note: "The listing gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-04-25, end: 2026-04-25, source_id: events-swbsr-lake-brian-head-pond-skim, as_of: 2026-10-21, confidence: estimated, note: "11 a.m. to 1 p.m., per a third party listing."}
+  signup:
+    url: {value: "https://www.brianhead.com/event/brian-head-pond-skim/", source_id: events-swbsr-brianhead-pond-skim, as_of: 2026-10-21, confidence: estimated, note: "The 2025 page had an advance registration window."}
+  website: {value: "https://www.brianhead.com/event/brian-head-pond-skim/", source_id: events-swbsr-brianhead-pond-skim, as_of: 2026-10-21, confidence: estimated}
+# Nordic Valley, UT
+- id: nordic-valley-rail-jam
+  name: Nordic Valley Rail Jam
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: nordic-valley-resort-wolf-mountain}
+  format: {value: "Rail jam run with Crossroads Skate Shop", source_id: events-swbsr-nordicvalley-2022-recap, as_of: 2026-10-21, confidence: estimated, note: "The recap gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2021/22, source_id: events-swbsr-nordicvalley-2022-recap, as_of: 2026-10-21, confidence: estimated, note: "From the resort's recap of 2022; the season is read from that year and the date was not seen."}
+  website: {value: "https://www.nordicvalley.ski/why-2022-was-the-best-year/", source_id: events-swbsr-nordicvalley-2022-recap, as_of: 2026-10-21, confidence: estimated}
+- id: nordic-valley-pond-skim
+  name: Nordic Valley Pond Skim
+  discipline: pond_skim
+  levels: [open_amateur]
+  venue: {resort_id: nordic-valley-resort-wolf-mountain}
+  format: {value: "Spring pond skim; the 2022 edition drew a record turnout", source_id: events-swbsr-nordicvalley-2022-recap, as_of: 2026-10-21, confidence: estimated, note: "The recap gives no age limit."}
+  edition_2026_27: null
+  last_edition: {season: 2021/22, source_id: events-swbsr-nordicvalley-2022-recap, as_of: 2026-10-21, confidence: estimated, note: "From the resort's recap of 2022; the date was not seen."}
+  website: {value: "https://www.nordicvalley.ski/why-2022-was-the-best-year/", source_id: events-swbsr-nordicvalley-2022-recap, as_of: 2026-10-21, confidence: estimated}
+# Cuchara, CO
+- id: cuchara-hike-to-ski-weekend-rail-jam
+  name: Cuchara Hike to Ski Weekend Rail Jam
+  discipline: rail_jam
+  levels: [open_amateur]
+  venue: {resort_id: cuchara-mountain-resort}
+  format: {value: "Rail jam on the Saturday of a June weekend of hike to skiing at Cuchara", source_id: events-swbsr-unofficial-colorado-june-skiing, as_of: 2026-10-21, confidence: estimated, note: "The article gives no age limit and no event name; the name here describes it."}
+  edition_2026_27: null
+  last_edition: {season: 2025/26, start: 2026-06-13, end: 2026-06-13, source_id: events-swbsr-unofficial-colorado-june-skiing, as_of: 2026-10-21, confidence: estimated, note: "The hike to ski weekend ran June 12 to 13, 2026, with the rail jam on Saturday."}
+  website: {value: "https://unofficialnetworks.com/2026/06/01/colorado-ski-area-june-skiing/", source_id: events-swbsr-unofficial-colorado-june-skiing, as_of: 2026-10-21, confidence: estimated}
+# Echo Mountain, CO
+- id: world-pro-ski-tour-echo-mountain
+  name: World Pro Ski Tour at Echo Mountain (Reven Cup and Colorado Pro Open)
+  discipline: alpine_racing
+  levels: [elite]
+  venue: {resort_id: echo-mountain}
+  series: {id: world-pro-ski-tour, name: World Pro Ski Tour}
+  organizer: {name: World Pro Ski Tour, source_id: events-swbsr-skiracing-wpst-echo, as_of: 2026-10-21, confidence: estimated}
+  format: {value: "Two pro tour races at Echo Mountain: the Reven Cup and the Colorado Pro Open", source_id: events-swbsr-skiracing-wpst-echo, as_of: 2026-10-21, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {season: 2020/21, start: 2021-03-28, end: 2021-03-29, source_id: events-swbsr-skiracing-wpst-echo, as_of: 2026-10-21, confidence: estimated, note: "Latest races found at Echo Mountain."}
+  website: {value: "https://skiracing.com/world-pro-ski-tour-announces-next-races-at-echo-mountain/", source_id: events-swbsr-skiracing-wpst-echo, as_of: 2026-10-21, confidence: estimated}

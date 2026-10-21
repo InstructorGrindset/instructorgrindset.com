@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import re
 from pathlib import Path
 from typing import Annotated, Any, Literal, Optional
 
@@ -590,6 +591,14 @@ class EventsGroup(EventsLabel):
 EVENTS_SURFACE = "#1e1e1e"
 EVENTS_MIN_CONTRAST = 4.5
 EVENTS_MIN_DELTA_E = 8.0
+# A word of a timing text: letters and digits, with an apostrophe inside ("Year's", "Year’s").
+TIMING_WORD_RE = re.compile(r"[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)*")
+
+
+def timing_words(text: str) -> list[str]:
+    """The words of a timing text in lower case, apostrophes dropped: "New Year's Eve" -> ["new", "years", "eve"],
+    "end-of-season" -> ["end", "of", "season"]."""
+    return [re.sub(r"['’]", "", w).lower() for w in TIMING_WORD_RE.findall(text or "")]
 
 
 class EventsDefs(StrictModel):
@@ -605,6 +614,24 @@ class EventsDefs(StrictModel):
     resort_match_km: float = Field(default=1.5, ge=0)
     month_chips: list[int] = Field(min_length=1)
     resort_panel_max: int = Field(default=3, ge=1, le=10)
+    # Season words of a usual_timing text and the months they cover ("spring": [3, 4, 5]), for an event whose timing
+    # names no month (pipeline/events.py timing_months). Keys are stored as their words in lower case.
+    season_words: dict[str, list[int]] = Field(default_factory=dict)
+
+    @field_validator("season_words")
+    @classmethod
+    def _season_words(cls, v: dict[str, list[int]]) -> dict[str, list[int]]:
+        out: dict[str, list[int]] = {}
+        for phrase, months in v.items():
+            key = " ".join(timing_words(phrase))
+            if not key:
+                raise ValueError(f"events.season_words: '{phrase}' has no words")
+            if key in out:
+                raise ValueError(f"events.season_words: '{phrase}' is listed twice")
+            if not months or len(set(months)) != len(months) or any(not 1 <= m <= 12 for m in months):
+                raise ValueError(f"events.season_words '{phrase}': give distinct month numbers 1 to 12")
+            out[key] = list(months)
+        return out
 
     @model_validator(mode="after")
     def _check(self) -> "EventsDefs":

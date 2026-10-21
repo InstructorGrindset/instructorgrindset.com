@@ -616,21 +616,29 @@ async function main() {
   syncTone();
   for (const el of [els.tone, els.link, els.layersToggle]) if (el) el.hidden = false;
 
-  els.listToggle.addEventListener('click', () => setListView(els.list.hidden));
+  // listOn: in EVENTS mode the resort list stays hidden behind the event calendar.
+  els.listToggle.addEventListener('click', () => setListView(!listOn));
   els.listToggle.hidden = false;
 
-  // Resort search: search.js loads on first focus and navigates through the router, as a click does. On phones
-  // its list stays above the bottom sheet (a fully open sheet drops to half first).
+  // Search: search.js and its events index (events-search.json) load on first focus; a result goes through the
+  // router, as a click does (an event opens EVENTS mode like an events link). On phones its list stays above the
+  // bottom sheet (a fully open sheet drops to half first).
   const searchEl = $('map-search');
   if (searchEl) {
     let searchMod = null;
+    const showListRow = () => {
+      const cur = listOn && document.querySelector(`${eventsMode ? '#events-list' : '#list-view'}:not([hidden]) [aria-current="page"]`);
+      if (cur) cur.scrollIntoView({ block: 'center' });
+    };
     const loadSearch = () => {
       searchMod ||= import('./search.js').then(({ createSearch }) => createSearch(searchEl, index, {
         current: () => router.current,
+        events: () => loadOptional('events-search.json'),
         onSelect: (view) => {
           router.go(view);
-          const cur = !els.list.hidden && els.list.querySelector('[aria-current="page"]');
-          if (cur) cur.scrollIntoView({ block: 'center' });
+          if (view.level !== 'events') { showListRow(); return; }
+          if (eventsApi && eventsApi.loaded) eventsApi.focusEvent(view.eventId); // also when it was shown already
+          ensureEvents().then(() => requestAnimationFrame(showListRow)).catch(() => {});
         },
         listBottom: () => {
           if (!isPhone()) return window.innerHeight - 16;
@@ -641,7 +649,7 @@ async function main() {
       return searchMod;
     };
     const input = $('map-search-input');
-    if (!isPhone()) input.placeholder = 'Search resorts';
+    if (!isPhone()) input.placeholder = 'Resorts and events';
     input.addEventListener('focus', loadSearch);
     input.addEventListener('pointerdown', loadSearch, { passive: true });
     searchEl.hidden = false;

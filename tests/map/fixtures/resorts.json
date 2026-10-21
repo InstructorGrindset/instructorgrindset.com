@@ -905,6 +905,7 @@
    },
    "housing_summary": null,
    "sources": [
+    "fixture-ev-bumps",
     "fixture-ev-skimo",
     "fixture-forum-one",
     "fixture-forum-two",
@@ -918,7 +919,7 @@
     "fixture-survey"
    ],
    "events": {
-    "count": 1,
+    "count": 3,
     "items": [
      {
       "id": "bravo-bowl-skimo",
@@ -929,6 +930,26 @@
       "season": "2025/26",
       "published": false,
       "source_id": "fixture-ev-skimo",
+      "as_of": "2026-10-01",
+      "confidence": "estimated"
+     },
+     {
+      "id": "bravo-bowl-bumpathon",
+      "name": "Bumpathon 25",
+      "discipline_label": "Lap and vertical challenge",
+      "season": "2025/26",
+      "published": false,
+      "source_id": "fixture-ev-bumps",
+      "as_of": "2026-10-01",
+      "confidence": "estimated"
+     },
+     {
+      "id": "bravo-bowl-skin-up",
+      "name": "Summit Skin Up",
+      "discipline_label": "Uphill",
+      "season": "2025/26",
+      "published": false,
+      "source_id": "fixture-ev-bumps",
       "as_of": "2026-10-01",
       "confidence": "estimated"
      }

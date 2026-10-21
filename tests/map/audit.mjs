@@ -12,8 +12,9 @@
 //    Times come from the page's own performance marks (navigation start = 0).
 // 2. The homepage makes zero requests to /map/ or /data/build/.
 // 3. axe-core on the national map, a resort page, the list view, the phone layout, two heat map modes, the open
-//    search results, EVENTS mode (national, an open event panel, the calendar list, phone) and the Sources and
-//    credits page. The /map/ budget runs also check that EVENTS mode loads nothing before it is used.
+//    search results (resorts and events), EVENTS mode (national, an open event panel, the calendar list, phone) and
+//    the Sources and credits page. The /map/ budget runs also check that EVENTS mode and the events search index
+//    load nothing before they are used.
 // 4. Lighthouse (mobile defaults) on /map/, two resort pages and /map/credits/.
 //
 // Files are served by a small static server with gzip, like GitHub Pages; python's
@@ -113,8 +114,8 @@ async function throttled(browser, url, label, { phone = false } = {}) {
   const panelMs = m.panelFull ?? m.panel;
   const frameMs = m.preview;
   const interactive = Math.max(panelMs, frameMs);
-  const lazy = urls.filter((u) => /\/events\.json|\/map\/js\/events(map)?\.js|\/map\/css\/events\.css/.test(u));
-  check(lazy.length === 0, `${label}: EVENTS mode loads nothing before it is used (${lazy.length} requests)`);
+  const lazy = urls.filter((u) => /\/events(-search)?\.json|\/map\/js\/(events(map)?|search)\.js|\/map\/css\/events\.css/.test(u));
+  check(lazy.length === 0, `${label}: EVENTS mode and search load nothing before they are used (${lazy.length} requests)`);
   const r = { label, url, panel_ms: panelMs, first_map_frame_ms: frameMs, interactive_ms: interactive,
     webgl_click_to_load_ms: m.load - m.click, fcp_ms: m.fcp, transferred_kb: Math.round(bytes / 1024) };
   results.budget.push(r);
@@ -168,6 +169,8 @@ async function axe(browser, base) {
     { label: 'search results open, before the map starts', url: '/map/', waiting: true, search: 'mount' },
     { label: 'search results open on a resort page, phone', url: '/map/co/i70-corridor/vail/', waiting: true, search: 'tahoe', phone: true },
     { label: 'search results in the list view', url: '/map/', list: true, search: 'big' },
+    { label: 'event search results open, before the map starts', url: '/map/', waiting: true, search: 'skijor' },
+    { label: 'event search results open in EVENTS mode, phone', url: '/map/events/', waiting: true, search: 'race', phone: true },
     { label: 'EVENTS mode, national', url: '/map/events/', events: true },
     { label: `EVENTS mode, open event panel (${venue})`, url: venue, events: true },
     { label: 'EVENTS mode, calendar list view', url: '/map/events/', events: true, list: true },

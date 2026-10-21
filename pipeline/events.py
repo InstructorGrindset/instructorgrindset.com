@@ -2,8 +2,9 @@
 
 Contract: docs/map/EVENTS.md (raw files, one per research lane) and docs/map/ARCHITECTURE.md "Events" (the build
 output). The map's EVENTS mode loads events.json only when a visitor turns the mode on; events-summary.json (a few
-hundred bytes) gives the header's EVENTS pill its count at idle, and Resort.events lists the events a resort hosts
-for its panel and its route stub.
+hundred bytes) gives the header's EVENTS pill its count at idle, events-search.json (every event's name, venue and
+group) lets the search box find events from its first use, and Resort.events lists the events a resort hosts for
+its panel and its route stub.
 
 Every file is validated (pipeline/schemas/events.py), then checked across files and against the build:
 
@@ -28,7 +29,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
 
-from .config import EventsDefs
+from .config import TIMING_WORD_RE, EventsDefs, timing_words
 from .links import load_batches
 from .schemas.events import CalendarIn, EventIn, EventsBatch, VenueIn
 from .sources import SourceRegistry
@@ -37,6 +38,7 @@ from .states import STATE_NAMES
 RAW_SUBDIR = "events"
 OUT_NAME = "events.json"
 SUMMARY_NAME = "events-summary.json"
+SEARCH_NAME = "events-search.json"
 # A loose box around the 50 states (Alaska's Aleutians to Maine, the Florida Keys to the Arctic coast): a point
 # outside it is a typo (a swapped sign or swapped coordinates).
 US_BOX = {"south": 18.0, "north": 72.0, "west": -180.0, "east": -64.0}
@@ -209,10 +211,38 @@ MONTH_RE = re.compile(rf"\b{_MONTH}\b")
 RANGE_RE = re.compile(rf"\b{_MONTH}\s*(?:to|through|until|into|-|\u2013)\s*(?:early |mid |late )?{_MONTH}\b")
 
 
-def timing_months(text: Optional[str], season_start_month: int = 7) -> list[int]:
+def season_word_months(text: Optional[str], season_words: dict[str, list[int]]) -> set[int]:
+    """Months the season words of a timing text cover (config events.season_words, keys as lower case words):
+    "Spring" -> {3, 4, 5}, "Sundays in winter" -> {12, 1, 2}. Whole words, case ignored, the longest phrase first,
+    each word counted once. A capitalized word right before another capitalized word is part of a name ("Saturdays
+    at Winter Park", "Spring Mountain") and does not count."""
+    if not text or not season_words:
+        return set()
+    toks = list(TIMING_WORD_RE.finditer(text))
+    words = [timing_words(m.group(0))[0] for m in toks]
+    used = [False] * len(toks)
+    found: set[int] = set()
+    for phrase, months in sorted(season_words.items(), key=lambda kv: -len(kv[0].split())):
+        want = phrase.split()
+        k = len(want)
+        for i in range(len(toks) - k + 1):
+            if words[i:i + k] != want or any(used[i:i + k]):
+                continue
+            j = i + k
+            if toks[i].group(0)[0].isupper() and j < len(toks) and toks[j].group(0)[0].isupper() \
+                    and text[toks[j - 1].end():toks[j].start()].isspace():
+                continue
+            found.update(months)
+            used[i:j] = [True] * k
+    return found
+
+
+def timing_months(text: Optional[str], season_start_month: int = 7,
+                  season_words: Optional[dict[str, list[int]]] = None) -> list[int]:
     """Months a usual_timing text names, in season order: "Saturdays, January to March" -> [1, 2, 3], "Late
     February" -> [2], "December through February" -> [12, 1, 2]. Month names count only capitalized (as in
-    pipeline/hiring.py: "may" is never a month). [] when the text names none."""
+    pipeline/hiring.py: "may" is never a month). A text that names no month takes the months of its season words
+    (season_word_months; "Spring" -> [3, 4, 5] with config events.season_words). [] when the text names neither."""
     if not text:
         return []
     found: set[int] = set()
@@ -227,16 +257,20 @@ def timing_months(text: Optional[str], season_start_month: int = 7) -> list[int]
             k = k % 12 + 1
         rest = rest.replace(m.group(0), " ")
     found.update(MONTH_NAMES[m.group(1)] for m in MONTH_RE.finditer(rest))
+    if not found:
+        found = season_word_months(text, season_words or {})
     return sorted(found, key=lambda x: (x - season_start_month) % 12)
 
 
-def event_months(e: EventIn, season_start_month: int = 7) -> list[int]:
+def event_months(e: EventIn, season_start_month: int = 7,
+                 season_words: Optional[dict[str, list[int]]] = None) -> list[int]:
     """The months an event touches: its dates (the start month alone when the end is not known), else the months its
-    usual_timing names (a season long program, a last edition known by its season); [] when nothing says."""
+    usual_timing names or its season words cover (a season long program, a last edition known by its season); []
+    when nothing says."""
     start, end, _, _ = event_dates(e)
     if start:
         return months_between(start, end or start)
-    return timing_months(e.usual_timing.value if e.usual_timing else None, season_start_month)
+    return timing_months(e.usual_timing.value if e.usual_timing else None, season_start_month, season_words)
 
 
 def months_between(start: dt.date, end: dt.date) -> list[int]:
@@ -297,7 +331,7 @@ def compile_events(data: EventsData, resorts: dict[str, ResortPlace], defs: Even
     dated = 0
     for e in events:
         _, _, published, _ = event_dates(e)
-        months = event_months(e, defs.season.start.month)
+        months = event_months(e, defs.season.start.month, defs.season_words)
         d = e.model_dump(mode="json", exclude_none=True, exclude={"venue", "disciplines_also"})
         also = [x for x in dict.fromkeys(e.disciplines_also) if x != e.discipline]
         d.update({"group": group_of[e.discipline], "venue_id": e.venue.resort_id or e.venue.venue_id,
@@ -348,6 +382,24 @@ def summary(compiled: dict) -> dict:
             "events": compiled["counts"]["events"], "calendars": compiled["counts"]["calendars"], "dated_ends": ends}
 
 
+def search_index(compiled: dict) -> dict:
+    """events-search.json: what the map's search box needs to find an event by name (map/js/search.js loads it on
+    the first use of the box, so events.json still waits for EVENTS mode). Rows instead of objects keep it small:
+    groups [id, label] in config order, the names of the venues' states (states.json has only the states with
+    resorts), venues [id, name, state] ([id, name, null, country] abroad) and events [id, name, venue row, group row]
+    in season order. Every event is in it, with or without a date."""
+    groups = [[g["id"], g["label"]] for g in compiled["groups"]]
+    group_row = {g[0]: i for i, g in enumerate(groups)}
+    venues, venue_row = [], {}
+    for v in compiled["venues"]:
+        venue_row[v["id"]] = len(venues)
+        venues.append([v["id"], v["name"], v.get("state")] + ([v["country"]] if v.get("country") else []))
+    states = {c: STATE_NAMES[c] for c in sorted({v[2] for v in venues if v[2]}) if c in STATE_NAMES}
+    keep = ("version", "generated_at")
+    return {**{k: compiled[k] for k in keep if k in compiled}, "groups": groups, "states": states, "venues": venues,
+            "events": [[e["id"], e["name"], venue_row[e["venue_id"]], group_row[e["group"]]] for e in compiled["events"]]}
+
+
 def resort_events(data: EventsData, defs: EventsDefs) -> dict[str, dict]:
     """Resort.events for every resort that hosts an event: {count, items} with every event at the resort in date
     order (the map season's dated editions first, then last editions by their place in the season)."""
@@ -374,9 +426,10 @@ def resort_events(data: EventsData, defs: EventsDefs) -> dict[str, dict]:
 
 
 def write(out_dir: Path, compiled: dict, write_json) -> None:
-    """events.json (compact) and events-summary.json."""
+    """events.json (compact), events-summary.json and events-search.json."""
     write_json(out_dir / OUT_NAME, compiled, compact=True)
     write_json(out_dir / SUMMARY_NAME, summary(compiled), compact=True)
+    write_json(out_dir / SEARCH_NAME, search_index(compiled), compact=True)
 
 
 def source_ids(compiled: dict) -> set[str]:

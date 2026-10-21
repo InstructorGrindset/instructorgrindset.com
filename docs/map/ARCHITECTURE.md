@@ -778,7 +778,10 @@ gives is left out or null, never guessed.
 `season` (label 2026/27, 2026-07-01 to 2027-06-30; validated to run July 1 to June 30), `groups` (16 discipline groups
 in display order, each with a label, a color and its discipline ids and labels), `levels` (Open to anyone first),
 `signup_methods` and `venue_kinds` (plain word labels), `abroad_groups` (instructor), `format_max_chars` (160),
-`resort_match_km` (1.5), `month_chips` (11, 12, 1, 2, 3, 4) and `resort_panel_max` (3). Validation: ids unique, a
+`resort_match_km` (1.5), `month_chips` (11, 12, 1, 2, 3, 4), `resort_panel_max` (3) and `season_words` (season words
+of `usual_timing` and the months they cover: spring 3 to 5, winter 12 to 2, early season 11 and 12, late season, end
+of season, closing weekend and their variants 3 and 4, holidays 12 and 1, New Year's Eve 12; owner list 2026-10-21;
+keys stored as lower case words, months distinct 1 to 12). Validation: ids unique, a
 discipline in one group only, every group color at 4.5:1 or more on `#1e1e1e` (the lightest panel surface, so a
 color may carry badge text) and 8 or more OKLab (x 100) from every other group color. Sixteen colors cannot all stay
 apart under color blindness, so the tooltip, the panel and the legend always name the group in text.
@@ -820,12 +823,23 @@ read as left out. Warnings: a venue no event uses (left out), a venue of kind re
   only). Events are in season order: a dated edition by its start, a last edition by its month and day placed in
   the season, programs and events without a date last. `months` are the months the dates touch (the start month
   alone when the end is not known), else the months `usual_timing` names ("Saturdays, January to March" gives 1, 2,
-  3; capitalized names only), else none. Null keys are left out. No source text: the sources go into `sources.json`
+  3; capitalized names only), else, when the text names no month, the months of its season words
+  (`season_word_months`: "Spring" gives 3, 4, 5 for Gunbarrel 25 at Heavenly; whole words, case ignored, the longest
+  phrase first; a capitalized word right before another capitalized word is part of a name, so "Saturdays at Winter
+  Park" gives none), else none. That reads a sourced phrase and invents no date: the panel and the list still show
+  the sourced wording, and an event without a date stays in "date not yet published". Null keys are left out. No source text: the sources go into `sources.json`
   with the rest of the build, so source links resolve as they do for resort facts. On 2026-10-20 (all nine lane
-  files): 320 events at 213 venues (127 of them resorts), 62 calendars, 479 KB, 78 KB gzipped.
+  files): 320 events at 213 venues (127 of them resorts), 62 calendars, 479 KB, 78 KB gzipped. On 2026-10-21 (ten
+  lane files and six resort sweeps): 489 events at 283 venues, 687 KB, 119 KB gzipped; 72 events fall in no month
+  (weekday only timing such as "Thursday nights", or no timing at all).
 * `events-summary.json` (a few hundred bytes): `{ version, generated_at, season, events, calendars, dated_ends }`,
   the sorted end dates (else start dates) of the events with a 2026/27 edition, so the header pill counts the
   events still ahead with the viewer's own date.
+* `events-search.json` (`search_index`, compact; loaded by the search box on its first use): every event, dated or
+  not, as rows: `{ version, generated_at, groups: [[id, label]], states: { code: name }, venues: [[id, name, state]
+  or [id, name, null, country]], events: [[id, name, venue row, group row]] }` (`states` names the venues' states,
+  since `states.json` has only the states with resorts). No dates, sources or sign up data. On 2026-10-21: 489
+  events at 283 venues, 49 KB, 16 KB gzipped.
 * `Resort.events`: every event a resort hosts in date order (dated editions first), with its date line's cited
   block and nothing the resort panel does not show; its sources join `resort.sources`, so route stubs embed them. `definitions.json` gains
   `events: { season, resort_panel_max }`.
@@ -849,7 +863,8 @@ March", "Runs all season".
   to the resorts hiring now.
 * Loading: nothing of EVENTS mode is on the startup path but the switch, the pill and the mode wiring in `app.js`.
   "Events here" renders through `eventshere.js`, loaded the first time a resort with events shows. `events-summary.json` loads at idle after the first paint
-  (the pill). `events.js`, `map/css/events.css` and `events.json` (validated per item by Zod `EventsFile`) load when
+  (the pill). `events-search.json` loads with `search.js` on the first focus of the search box; an event result then
+  brings EVENTS mode like an events link. `events.js`, `map/css/events.css` and `events.json` (validated per item by Zod `EventsFile`) load when
   the mode or an events link is used; `eventsmap.js` once the WebGL map runs in the mode. A resort page loads no
   events file: "Events here" reads its record.
 * Map: `map.js` `setMode('events', { pick })` hides every resort, cluster and heat layer and restores them as they
@@ -887,7 +902,9 @@ March", "Runs all season".
   Vail's LCP 125 ms later. Lazy: events.js 10.8 KB, eventsmap.js 2.2 KB, events.css 2.1 KB and events.json 78 KB
   gzipped.
 * Tests: `tests/pipeline/test_events.py` (every validation rule, resort resolution, last edition fallback, month
-  counts, programs, the stub, config), `eventsChecks` and `realEventsChecks` in `tests/map/browser_test.mjs` (fixtures from
+  counts, season words, the search index, programs, the stub, config), `eventsChecks`, `eventSearchChecks` and
+  `realEventsChecks` (with `realEventSearch`: "gunbarrel", "birkie", "skijor" on the real build) in
+  `tests/map/browser_test.mjs` (fixtures from
   `tests/map/events_fixture.yaml`, synthetic, compiled by `make_fixtures.py` with the real pipeline) and the EVENTS
   axe cases and lazy loading checks in `tests/map/audit.mjs`.
 
@@ -1135,8 +1152,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
   `jobs/postings.json` loads once, after the first paint at idle for the Hiring now count (when some resort has
   `job_employers`), and Zod validates it only for a resort whose `jobs.feed` is true or a cluster with `jobs_available`
-  resorts; `livelinks.js` (about 3 KB gzipped, no Zod) loads with `panel.js`. `search.js` loads on the first focus of
-  the search box.
+  resorts; `livelinks.js` (about 3 KB gzipped, no Zod) loads with `panel.js`. `search.js` and `events-search.json`
+  load on the first focus of the search box.
 * **Budget method** (`tests/map/audit.mjs`): Playwright with Chromium under SwiftShader, CDP network throttling
   (150 ms RTT, 1.6 Mbps down, 750 Kbps up), 4x CPU slowdown, cache off, files gzipped. Times are the page's own
   performance marks from navigation start. *Interactive* is the later of two marks: the panel usable
@@ -1516,23 +1533,32 @@ first frame alike: its outline, clusters, resorts, heat rasters, snowfall isolin
   sign. Legend with the four signs plus terrain park, lift and base area; attribution to OpenSkiMap and
   OpenStreetMap contributors (ODbL), plus the `openskimap-runs` source link.
 
-### Resort search (`map/js/search.js`)
-* A combobox in the header (`#map-search`, WAI-ARIA APG list autocomplete: `role="combobox"` input with
-  `aria-expanded`, `aria-controls` and `aria-activedescendant`, a `role="listbox"` of `role="option"` results, a polite
-  status with the result count). Shown once the slim index has loaded; the module (about 3 KB gzipped, no Zod) loads on
-  the first focus or tap of the box and searches only data already in memory: state, cluster and resort names from
-  `map-index.json`, `clusters.geojson` and `states.json`.
+### Search (`map/js/search.js`)
+* A combobox in the header (`#map-search`, labelled "Search resorts, clusters, states and events", placeholder
+  "Resorts and events" on wider screens, "Search" on phones; WAI-ARIA APG list autocomplete: `role="combobox"` input
+  with `aria-expanded`, `aria-controls` and `aria-activedescendant`, a `role="listbox"` of `role="option"` results, a
+  polite status with the result count). Shown once the slim index has loaded; the module (about 3.5 KB gzipped, no
+  Zod) loads on the first focus or tap of the box and searches state, cluster and resort names from `map-index.json`,
+  `clusters.geojson` and `states.json`, and event names from `events-search.json`, fetched with the module (owner
+  report 2026-10-21: "Gunbarrel 25" was in the data but the box found only resorts). The events index is checked by
+  hand (`eventItems`, a bad row is skipped); results typed before it arrives are searched again when it lands,
+  keeping the active option. `events.json` still loads only with EVENTS mode or an events link.
 * Matching: names and queries lose accents, case and punctuation ("Smugglers" finds "Smugglers' Notch Resort"); "Mount"
   and "Mt", "Saint" and "St", "Fort" and "Ft" match each other; a two letter state code finds its state. Rank: exact,
   then prefix (spaces ignored, so "i70" finds "I 70 Corridor"), then word prefix, then every query word starting a
-  word, then anywhere; ties go states, clusters, resorts (catch all "Other" clusters last), Tier A first, shorter names
-  first. At most 8 results, each with its kind, tier and state ("Tier A resort in Colorado").
+  word, then anywhere; ties go states, clusters, resorts, events (in EVENTS mode events first; catch all "Other"
+  clusters last), Tier A first, shorter names first. At most 8 results, each with its kind, tier and state ("Tier A
+  resort in Colorado"), an event with its group and venue ("Community event at Heavenly, California"; a venue abroad
+  names its country, a venue named with its state does not repeat it).
 * Keys: Down and Up move through the results (wrapping), Enter opens the active result (or the first), Escape closes
   the list and a second Escape clears the box, Tab closes it. A click or tap opens a result.
 * A result goes through `router.go` with the map click's state rule (keep the current state when the cluster spans
-  it), so the panel, URL and list view update and focus moves to the panel heading. Before the WebGL map starts this
-  only redraws the 2D picture; the map starts on that view later. With the map running, it flies there. In the list
-  view the current entry scrolls into view.
+  it), so the panel, URL and list view update and focus moves to the panel heading. An event result opens EVENTS mode
+  on its venue with the event selected (`/map/events/?venue=heavenly&event=gunbarrel-25`, the events deep link), and
+  focus moves to the event card. Before the WebGL map starts this only redraws the 2D picture; the map starts on that
+  view later. With the map running, it flies there. In the list view the current entry scrolls into view (the event
+  calendar's row once `events.js` has loaded). The List view button follows the list state itself, so in EVENTS mode
+  Map view leaves the calendar (it read the resort list's hidden flag before, which EVENTS mode always sets).
 * Phones: the title wraps to two lines (it gives way while the box has focus) and the results span the screen below
   the top bar, ending above the bottom sheet; a fully open sheet drops to half when the results open.
 
