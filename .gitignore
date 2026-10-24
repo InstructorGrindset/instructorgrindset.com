@@ -24,3 +24,6 @@ data/raw/rent/zillow/*_zori_*
 data/raw/rent/zillow/*Gaz_zcta*
 # Basemap underlay: the Natural Earth zip and TIFF that pipeline/tools/make_underlay.py reads; images/basemap/ is committed.
 data/raw/basemap/download/
+# BeamNG real world levels: built mod zips and the terrain tile cache (tools/beamng/README.md).
+tools/beamng/out/
+tools/beamng/cache/
