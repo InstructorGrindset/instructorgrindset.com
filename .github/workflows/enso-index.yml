@@ -1,0 +1,47 @@
+# Monthly NOAA CPC El Niño and La Niña index for the jet stream layer (pipeline/climate/enso.py, docs/map/JETSTREAM.md).
+# CPC's site is not reachable from every network, so this workflow downloads RONI.ascii.txt and oni.ascii.txt and
+# commits data/raw/climate/enso/ only when the files changed. It runs on a schedule once it is on the default branch,
+# from the Actions tab (workflow_dispatch), and on a push that changes this file or the fetcher. It uses the default
+# GITHUB_TOKEN; no secret is needed.
+name: ENSO index
+
+on:
+  schedule:
+    - cron: "17 15 12 * *"   # monthly, the 12th at 15:17 UTC (CPC updates early in the month)
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/enso-index.yml
+      - pipeline/climate/enso.py
+
+permissions:
+  contents: write   # commit the index files
+
+concurrency:
+  group: enso-index-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download the RONI and ONI files from NOAA CPC
+        run: python -m pipeline.climate.enso fetch
+      - name: Commit the index files when they changed
+        run: |
+          set -euo pipefail
+          git add -N data/raw/climate/enso
+          if git diff --quiet -- data/raw/climate/enso/RONI.ascii.txt data/raw/climate/enso/oni.ascii.txt; then
+            echo "The index files are unchanged; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/climate/enso
+          git commit -m "ENSO index: update RONI and ONI from NOAA CPC"
+          git push
