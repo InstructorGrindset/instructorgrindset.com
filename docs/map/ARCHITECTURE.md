@@ -767,6 +767,10 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
   `passChecks` in `tests/map/browser_test.mjs` (fixtures: Epic at Alpha Peak, Bravo Bowl (a 2025/26 fallback) and
   Mike Snow Dome, Ikon at Charlie Hill, Foxtrot Basin and Kilo Notch, all synthetic).
 
+## Jet stream layer (ROADMAP item 23; `pipeline/jetstream.py`, contract in `docs/map/JETSTREAM.md`)
+
+Raw inputs: `data/raw/climate/era5_jet/` (ERA5 250 hPa season mean winds, `python -m pipeline.climate.era5_jet fetch`, numpy and h5py at fetch time only) and `data/raw/climate/enso/` (NOAA CPC RONI and ONI, committed monthly by `.github/workflows/enso-index.yml`). Config: `config/definitions.yaml` `jetstream` (`pipeline/config.py` `JetstreamDefs`). Output: `data/build/jetstream.json`, lazy loaded by the map on the first jet stream toggle. The build skips it with a warning when the raw inputs are missing.
+
 ## Events and competitions (ROADMAP item 22; `pipeline/events.py`, `map/js/events.js`, `map/js/eventsmap.js`)
 
 Owner request 2026-10-17: every snowsports venue, competition and event in the United States, for every discipline,

@@ -34,9 +34,10 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
 3. **Find the jet axis** per longitude: local maxima of speed between `axis.lat_min` and `axis.lat_max` with at
    least `axis.min_speed_ms` and a prominence of `axis.min_prominence_ms`, refined to a fraction of a degree with a
    parabola through the three points around the peak. Peaks link across neighboring longitudes when they move less
-   than `axis.max_step_deg`; chains shorter than `axis.min_length_deg` drop. Where two chains run side by side they
-   are the northern and southern branches; one chain is the jet stream. Each chain is smoothed with a running mean
-   over `axis.smooth_deg` of longitude.
+   than `axis.max_step_deg`; chains shorter than `axis.min_length_deg` drop. The chain with the most integrated
+   speed is the main jet (`main`); the others are the northern or southern branch (`north`, `south`, then
+   `north_2` and so on) by their mean latitude against the main jet where they overlap. Each chain is smoothed with
+   a running mean over `axis.smooth_deg` of longitude.
 4. **Band**: north and south of the axis, the latitude where speed falls to `band.fraction` of the axis speed,
    capped at `band.max_half_width_deg`.
 5. **Overflies**: a state is listed when a band covers any of its area, sampled on a `overflies.sample_deg` grid; a
@@ -109,3 +110,15 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
   a ring, and a card lists its states and resorts by state, west to east. A selector in the card switches the active
   layer when several are visible.
 * Nothing of this loads before the first toggle; `jetstream.json` is lazy.
+
+## First build (2026-11-01)
+
+* 47 seasons, 1979/80 to 2025/26. RONI classes: El Niño 13 (weak 3, moderate 5, strong 5), La Niña 19 (weak 5,
+  moderate 9, strong 5), neutral 15. Under the RONI, 2023/24 is a moderate El Niño (peak 1.42).
+* El Niño splits: weak and strong main axes differ by 3.8 degrees on average over the lower 48 (weak and moderate
+  2.0). La Niña stays one toggle (largest difference 0.9 degrees).
+* In every group the seasonal mean jet over the West has two branches: a southern (subtropical) branch over Baja,
+  northern Mexico and the Gulf Coast, and a northern branch off the Pacific. Strong El Niño puts its main jet along
+  the Gulf Coast (8 states, no ski area under the core band); La Niña brings its northern branch ashore over
+  Washington, Oregon, Idaho and Montana.
+* The latest RONI values (July to September 2026, 1.69) point to a strong El Niño in 2026/27.
