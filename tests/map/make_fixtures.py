@@ -59,6 +59,11 @@ SOURCES = [
     # Trail map files always cite this id (contract); the fixture points it at example.com.
     {"id": "openskimap-runs", "url": "https://example.com/fixture/runs",
      "title": "Synthetic fixture: runs", "accessed_date": AS_OF},
+    # Jet stream layer (docs/map/JETSTREAM.md): stand ins for the ERA5 winds and the NOAA CPC RONI.
+    {"id": "fixture-jet-winds", "url": "https://example.com/fixture/jet-winds",
+     "title": "Synthetic fixture: 250 hPa winds", "accessed_date": AS_OF},
+    {"id": "fixture-jet-enso", "url": "https://example.com/fixture/jet-enso",
+     "title": "Synthetic fixture: ENSO index", "accessed_date": AS_OF},
 ]
 
 # (id, name, cluster, state, tier, tier_a_status, lat, lon, acres, vertical, lifts, climate, density_source)
@@ -694,6 +699,82 @@ def events_fixture(resorts, cfg):
     return compiled, ev.resort_events(data, cfg.definitions.events), [s.model_dump(mode="json", exclude_none=True) for s in registry.sorted()]
 
 
+# Jet stream fixture (docs/map/JETSTREAM.md): invented, obviously fake paths. Every axis is a straight line of
+# latitude with a band of fixed half width, one point per degree of longitude, so tests can tell exactly which
+# fixture states and resorts lie under each band. La Niña has two branches, the southern one over part of the
+# longitude range only. Colors are the ones config/definitions.yaml `jetstream.colors` uses (display settings).
+# (id, label, color, seasons, [(branch id, branch label, lat, half width, lon west, lon east)])
+JET_LAYERS = [
+    ("last10", "Last 10 winters", "#e8e8e8", [f"{y}/{(y + 1) % 100:02d}" for y in range(2016, 2026)],
+     [("main", "Main jet", 40.0, 2.5, -170, -50)]),
+    ("el_nino", "El Niño", "#ff8a3d", ["1982/83", "1997/98", "2015/16"],
+     [("main", "Main jet", 36.2, 3.1, -170, -60)]),
+    ("la_nina", "La Niña", "#4fb3ff", ["1988/89", "1999/00", "2010/11", "2020/21"],
+     [("north", "Northern branch", 46.0, 2.5, -170, -55), ("south", "Southern branch", 37.0, 2.0, -125, -95)]),
+    ("neutral", "Neutral", "#b5e86b", ["1990/91", "1993/94", "2001/02", "2012/13", "2013/14"],
+     [("main", "Main jet", 41.2, 1.8, -170, -50)]),
+]
+
+
+def _in_ring(lon, lat, ring):
+    inside = False
+    for (x1, y1), (x2, y2) in zip(ring, ring[1:] + ring[:1]):
+        if (y1 > lat) != (y2 > lat) and lon < x1 + (lat - y1) * (x2 - x1) / (y2 - y1):
+            inside = not inside
+    return inside
+
+
+def _in_geometry(lon, lat, geometry):
+    polys = [geometry["coordinates"]] if geometry["type"] == "Polygon" else geometry["coordinates"]
+    return any(_in_ring(lon, lat, poly[0]) and not any(_in_ring(lon, lat, hole) for hole in poly[1:]) for poly in polys)
+
+
+def jetstream_fixture(outline_feats, resorts):
+    """data/build/jetstream.json shape with straight synthetic paths. The overflies lists come from the fixture
+    outlines (a 0.5 degree sample of each band) and the fixture resort points, west to east."""
+    layers = []
+    for lid, label, color, seasons, branches in JET_LAYERS:
+        out_branches, first_lon, hits = [], {}, {}
+        for bid, blabel, lat, half, west, east in branches:
+            lons = range(west, east + 1)
+            out_branches.append({"id": bid, "label": blabel,
+                                 "axis": [[lon, lat, 40.0] for lon in lons],
+                                 "band": [[lon, round(lat - half, 2), round(lat + half, 2)] for lon in lons]})
+            for f in outline_feats:
+                code = f["properties"]["code"]
+                covered = [west + i * 0.5 for i in range(int((east - west) / 0.5) + 1)
+                           if any(_in_geometry(west + i * 0.5, lat - half + j * 0.5, f["geometry"])
+                                  for j in range(int(2 * half / 0.5) + 1))]
+                if covered:
+                    first_lon[code] = min(first_lon.get(code, covered[0]), covered[0])
+                    hits.setdefault(code, []).append(bid)
+        names = {f["properties"]["code"]: f["properties"]["name"] for f in outline_feats}
+        states = [{"code": c, "name": names[c], "branches": hits[c]} for c in sorted(first_lon, key=lambda c: (first_lon[c], c))]
+        under = []
+        for r in resorts:
+            for bid, _blabel, lat, half, west, east in branches:
+                if west <= r["lon"] <= east and lat - half <= r["lat"] <= lat + half:
+                    under.append((r["lon"], {"id": r["id"], "state": r["state"], "branch": bid}))
+                    break
+        layers.append({"id": lid, "label": label, "kind": "baseline" if lid == "last10" else "enso",
+                       "phase": None if lid == "last10" else lid, "strength": None, "color": color, "seasons": seasons,
+                       "branches": out_branches,
+                       "overflies": {"states": states, "resorts": [x for _, x in sorted(under, key=lambda t: t[0])]},
+                       "source_id": "fixture-jet-winds", "as_of": AS_OF, "confidence": "estimated"})
+    classes = [(s, lid) for lid, _label, _color, seasons, _branches in JET_LAYERS[1:] for s in seasons]
+    return {
+        "version": 1, "generated_at": GENERATED_AT, "season_label": "November to April", "level_hpa": 250,
+        "sources": {"winds": {"source_id": "fixture-jet-winds", "as_of": AS_OF, "confidence": "published"},
+                    "enso": {"source_id": "fixture-jet-enso", "as_of": AS_OF, "confidence": "published"}},
+        "layers": layers,
+        "seasons": [{"season": s, "phase": phase, "strength": None, "value": None, "peak": None,
+                     "source_id": "fixture-jet-enso", "as_of": AS_OF, "confidence": "published"}
+                    for s, phase in sorted(classes)],
+        "split": {"el_nino": {"split": False, "shift_deg": 0.4}, "la_nina": {"split": False, "shift_deg": 0.3}},
+        "method": "Synthetic fixture: straight test paths with fixed bands. Real paths come from pipeline/jetstream.py.",
+    }
+
+
 def write(name, data):
     path = OUT / name
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -781,6 +862,8 @@ def main():
     write("jobs/employers.json", {"version": 1, "generated_at": GENERATED_AT, "employers": EMPLOYERS})
     write("jobs/postings.json", POSTINGS)
     write_heat_fixture(cfg, resorts, {"type": "FeatureCollection", "features": feats})
+    # Jet stream layer (docs/map/JETSTREAM.md), compact like the real build.
+    (OUT / "jetstream.json").write_text(json.dumps(jetstream_fixture(feats, resorts), ensure_ascii=False, separators=(",", ":")) + "\n")
     # The slim national index the map loads first, built the same way as the real one.
     from pipeline.routes import write_map_index  # noqa: PLC0415
     write_map_index(OUT)
