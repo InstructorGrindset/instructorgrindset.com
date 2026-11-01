@@ -1,0 +1,25 @@
+{
+  "source": {
+    "id": "noaa-cpc-roni",
+    "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+    "title": "NOAA Climate Prediction Center, Relative Oceanic Ni\u00f1o Index (RONI), historical El Ni\u00f1o and La Ni\u00f1a episodes",
+    "accessed_date": "2026-11-01",
+    "note": "RONI.ascii.txt (official ENSO index since February 2026, NWS Public Information Statement 26-05) and the legacy oni.ascii.txt. The most recent values are preliminary. Public domain (US government work)."
+  },
+  "confidence": "published",
+  "license": "public domain",
+  "files": {
+    "RONI.ascii.txt": {
+      "url": "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt",
+      "rows": 920,
+      "first": "DJF 1950",
+      "last": "JAS 2026"
+    },
+    "oni.ascii.txt": {
+      "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+      "rows": 920,
+      "first": "DJF 1950",
+      "last": "JAS 2026"
+    }
+  }
+}
