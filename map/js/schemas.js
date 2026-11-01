@@ -258,6 +258,43 @@ export const EventsFile = z.object({
   calendars: keepValid(z.object({ id: Slug, name: z.string().min(1), discipline: z.string(), group: z.string(), region: z.string(), url: SUrl })),
 });
 
+// ── Jet stream layer (docs/map/JETSTREAM.md; pipeline/jetstream.py), loaded on the first use of its Layers box ──
+const Cite3 = { source_id: Slug, as_of: IsoDate, confidence: Confidence };
+const Lon = z.number().min(-200).max(200);
+const Lat = z.number().min(-90).max(90);
+/** One branch of a path: axis points [lon, lat, speed_ms] and band points [lon, lat_south, lat_north], west to east. */
+export const JetBranch = z.object({
+  id: Slug,
+  label: z.string().min(1),
+  axis: z.array(z.tuple([Lon, Lat, z.number().nullable()]).nullable().catch(null)).transform((a) => a.filter(Boolean)),
+  band: z.array(z.tuple([Lon, Lat.nullable(), Lat.nullable()]).nullable().catch(null)).nullish()
+    .transform((a) => (a ?? []).filter(Boolean)),
+}).refine((b) => b.axis.length >= 2, 'an axis needs two points');
+export const JetLayer = z.object({
+  // Layer ids join the address bar (?jet=), so they keep to lowercase words joined by underscores.
+  id: z.string().regex(/^[a-z0-9]+(?:_[a-z0-9]+)*$/),
+  label: z.string().min(1),
+  kind: z.string().nullish(),
+  phase: z.string().nullish(),
+  strength: z.string().nullish(),
+  color: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+  seasons: z.array(z.string()),
+  branches: keepValid(JetBranch),
+  overflies: z.object({
+    states: keepValid(z.object({ code: z.string().min(2), name: z.string().min(1), branches: strList })),
+    resorts: keepValid(z.object({ id: Slug, state: z.string().nullish(), branch: z.string().nullish() })),
+  }),
+  ...Cite3,
+}).refine((l) => l.branches.length > 0, 'a layer needs a branch');
+export const JetStreamFile = z.object({
+  ...Envelope,
+  season_label: z.string().min(1),
+  level_hpa: z.number().positive(),
+  sources: z.object({ winds: z.object(Cite3), enso: z.object(Cite3) }),
+  layers: keepValid(JetLayer),
+  method: z.string().nullish().transform((v) => v ?? null),
+});
+
 export const Resort = z.object({
   id: Slug,
   name: z.string().min(1),

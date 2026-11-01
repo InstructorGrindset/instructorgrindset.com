@@ -421,8 +421,8 @@ body[data-tone="satellite"] .map { background: #0a0e14; }
 .lp-box:not([open]) > summary::after, .detail-box:not([open]) > summary::after { transform: rotate(-90deg); }
 .lp-box[open] > summary, .detail-box[open] > summary { border-bottom-color: var(--wm-border); }
 .lp-box > summary:hover, .detail-box > summary:hover { background: var(--wm-surface); }
-.lp-box + .detail-layers, .recolor + .lp-box { border-top: 1px solid var(--wm-border); }
-body.list-mode .recolor, body.detail-mode .recolor, body.list-mode .detail-layers { display: none; }
+.lp-box + .detail-layers, .recolor + .lp-box, .lp-box + .lp-box { border-top: 1px solid var(--wm-border); }
+body.list-mode .recolor, body.detail-mode .recolor, body.list-mode .detail-layers, body.list-mode .jet-box { display: none; }
 body.list-mode .recolor + .lp-box { border-top: 0; }
 
 /* Filters */

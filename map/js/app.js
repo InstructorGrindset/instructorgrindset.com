@@ -9,7 +9,7 @@
 //    After the WebGL map loads: the full data, the recolor control and the state outlines.
 import { config, isPhone, savedTone } from './config.js';
 import { isFiltered, loadAll, loadOptional, loadStateOutlines, matchesFilter, NO_FILTER, postingsRaw, whenPainted } from './data.js';
-import { createRouter } from './router.js';
+import { createRouter, jetLayers, setJetLayers } from './router.js';
 import { createPanel, isoDay, officialMapFile } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
@@ -106,6 +106,7 @@ const els = {
 const LIVE_CSS = 'map-live.css?v=1';
 const TRAIL_CSS = 'trailmap.css?v=2';
 const EVENTS_CSS = 'events.css?v=1';   // EVENTS mode: the event panel, filters and calendar list
+const JET_CSS = 'jetstream.css?v=1';   // the Jet stream box, its card and legend items
 const cssLoads = new Map();
 /** Add a stylesheet from map/css once; resolves when it has loaded (or failed). */
 function loadCss(name) {
@@ -421,6 +422,7 @@ async function main() {
   const setTone = (t) => {
     tone = t;
     syncTone();
+    if (jetApi) jetApi.setTone(t);
     if (mapCtl) mapCtl.setTone(t); else onViewChange();
   };
   let chromeReady = false;
@@ -475,6 +477,37 @@ async function main() {
     if (!els.viewTitle) return;
     const [kind, name] = viewTitle(index, view);
     els.viewTitle.replaceChildren(h('span', { class: 'mh-kind' }, kind), h('span', { class: 'mh-name' }, name));
+  }
+
+  // ── Jet stream overlay (docs/map/JETSTREAM.md) ── A closed box in the Layers panel. jetstream.js, its stylesheet and
+  // jetstream.json load the first time it opens, or with a ?jet= link (the box opens at once and loads after the
+  // first paint). The layers on stay in the address bar (router.js) across views.
+  let jetApi = null;
+  let jetPromise = null;
+  const jetBox = els.layersBox ? h('details', { id: 'jet-box', class: 'lp-box jet-box' },
+    h('summary', { class: 'lp-summary' }, h('span', null, 'Jet stream')), h('div', { class: 'jet-body', id: 'jet-body' })) : null;
+  const ensureJet = () => (jetPromise ||= Promise.all([import('./jetstream.js'), loadCss(JET_CSS)]).then(([m]) => {
+    jetApi = m.createJetStream({
+      index, box: jetBox, legend: els.legend, announce, initial: jetLayers(), tone,
+      setLayers: setJetLayers, onChange: () => { router.syncUrl(); onViewChange(); },
+    });
+    return jetApi.ready;
+  }).then((api) => {
+    if (mapCtl) api.attachMap(mapCtl);
+    return api;
+  }).catch((err) => {
+    jetPromise = null;
+    console.warn('[map] jet stream', err.message);
+    if (!jetApi) $('jet-body').replaceChildren(h('p', { class: 'jet-note' }, 'The jet stream paths could not load. Try reloading the page.'));
+  }));
+  if (jetBox) {
+    els.layersBox.after(jetBox);
+    jetBox.addEventListener('toggle', () => {
+      if (!jetBox.open || jetApi) return;
+      $('jet-body').replaceChildren(h('p', { class: 'jet-note' }, 'Loading the jet stream paths.'));
+      afterFirstPaint(ensureJet);
+    });
+    if (jetLayers().length) jetBox.open = true;
   }
 
   // In-app links: History API navigation, real hrefs for new tabs and crawlers.
@@ -672,6 +705,7 @@ async function main() {
     // EVENTS mode draws the venue dots the event filters keep (none until events.json is in).
     const points = eventsMode ? (eventsApi && eventsApi.loaded ? eventsApi.previewPoints() : []) : null;
     const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone, points); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
+    if (pic && jetApi) jetApi.drawPreview(pic, keep);
     if (preview) preview.remove();
     preview = pic;
     if (preview) els.map.insertBefore(preview, startBtn);
@@ -686,7 +720,7 @@ async function main() {
   drawFrame();
   const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false,
     get layersSheet() { return layersSheet; }, get chromeReady() { return chromeReady; },
-    get events() { return eventsApi; }, get eventsMode() { return eventsMode; } };
+    get events() { return eventsApi; }, get eventsMode() { return eventsMode; }, get jet() { return jetApi; } };
   window.__careerMap = state;
   onViewChange = () => { if (!mapCtl) drawFrame(); };
   let resizeTimer = null;
@@ -793,6 +827,7 @@ async function main() {
     state.mapCtl = mapCtl;
     if (eventsMode) mapCtl.setMode('events');
     if (eventsApi && eventsApi.loaded) eventsApi.attachMap(mapCtl);
+    if (jetApi && jetApi.loaded) jetApi.attachMap(mapCtl);
     if (isFiltered(filter)) mapCtl.setFilter(filter, onlyIds(filter));
     if (index.hiringIds) mapCtl.setHiring(index.hiringIds);
     if (detailFor) applyDetail();

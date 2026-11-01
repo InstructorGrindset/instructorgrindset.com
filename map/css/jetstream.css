@@ -1,0 +1,113 @@
+/* Jet stream overlay (docs/map/JETSTREAM.md; map/js/jetstream.js): the Jet stream box in the Layers panel, the card
+   that lists the active band's states and resorts, and the legend strip items. Loaded with jetstream.js only. Each
+   layer's color comes from the file (config jetstream.colors) through --c. */
+
+/* ── The box ── */
+.jet-box > summary .jet-on {
+  margin-left: auto; padding: 0 .35rem; border: 1px solid rgba(68,255,136,.45); border-radius: 2px;
+  font-size: .62rem; letter-spacing: .08em; color: var(--wm-green);
+}
+.jet-box > summary .jet-on[hidden] { display: none; }
+.jet-body { padding: .2rem .7rem .65rem; }
+.jet-body > .jet-note:first-child { margin-top: .45rem; }
+.jet-layers .lp-legend { padding-top: .45rem; }
+.jet-opt { align-items: flex-start; padding: .2rem 0; }
+.jet-opt input { margin-top: .1rem; }
+.jet-opt-text { display: flex; flex-direction: column; gap: .05rem; min-width: 0; }
+.jet-count { font-size: .7rem; font-weight: 400; letter-spacing: .02em; text-transform: none; color: var(--wm-dim); }
+
+/* A short band with its axis, as the map draws it. */
+.jet-swatch { position: relative; display: inline-block; flex-shrink: 0; width: 18px; height: 11px; margin-top: .12rem; }
+.jet-swatch::before { content: ""; position: absolute; inset: 0; background: var(--c); opacity: .28; border-radius: 1px; }
+.jet-swatch::after { content: ""; position: absolute; left: 0; right: 0; top: 4.5px; height: 2px; background: var(--c); }
+
+.jet-note, .jet-src { margin: .45rem 0 0; font-size: .72rem; line-height: 1.45; color: var(--wm-text-2); }
+.jet-src { color: var(--wm-dim); overflow-wrap: anywhere; }
+.jet-how, .jet-winters { margin: .4rem 0 0; font-size: .72rem; color: var(--wm-dim); }
+.jet-how summary, .jet-winters summary { cursor: pointer; min-height: 24px; display: flex; align-items: center; color: var(--wm-text-2); }
+.jet-how p, .jet-winters p { margin: .2rem 0 0; line-height: 1.45; }
+
+/* ── The card ── */
+.jet-card {
+  margin: .65rem 0 0; padding: .55rem .6rem .6rem; background: var(--wm-bg-2);
+  border: 1px solid var(--wm-border); border-left: 3px solid var(--c, var(--wm-border-strong)); border-radius: 2px;
+}
+.jet-card[hidden] { display: none; }
+.jet-card .jet-card-title {
+  margin: 0 0 .45rem; font-family: var(--ui-font); font-size: .7rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--wm-text);
+}
+.jet-pick-row { display: grid; gap: .2rem; }
+.jet-pick-label { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--wm-dim); }
+.jet-pick {
+  width: 100%; min-height: 30px; padding: 0 .4rem; font: inherit; font-size: .75rem; font-weight: 600;
+  color: var(--wm-text); background: var(--wm-bg); border: 1px solid var(--wm-border-strong); border-radius: 2px;
+}
+.jet-pick:focus-visible { outline: 2px solid var(--wm-green); outline-offset: 2px; }
+.jet-one { display: flex; align-items: flex-start; gap: .45rem; margin: 0; font-size: .75rem; font-weight: 600; color: var(--wm-text); }
+.jet-sum { margin: .45rem 0 .2rem; font-size: .72rem; color: var(--wm-text-2); }
+.jet-states { list-style: none; margin: 0; padding: 0; }
+.jet-state { border-top: 1px solid var(--wm-border); }
+.jet-state-name {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .4rem; margin: 0; padding: .35rem 0; min-height: 28px;
+  box-sizing: border-box; font-size: .78rem; font-weight: 700; color: var(--wm-text);
+}
+.jet-state-box > summary { cursor: pointer; list-style: none; }
+.jet-state-box > summary::-webkit-details-marker { display: none; }
+.jet-state-box > summary::before {
+  content: ""; align-self: center; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+  border-left: 5px solid var(--wm-dim);
+}
+.jet-state-box[open] > summary::before { transform: rotate(90deg); }
+.jet-state-box > summary:hover .jet-state-label { color: #ffffff; }
+.jet-n { margin-left: auto; font-size: .7rem; font-weight: 400; color: var(--wm-dim); font-variant-numeric: tabular-nums; }
+.jet-state-box[open] > .jet-resorts { padding-bottom: .4rem; }
+.jet-all {
+  margin: 0 0 .35rem; min-height: 26px; padding: .1rem .5rem; font: inherit; font-size: .66rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--wm-text-2); background: transparent;
+  border: 1px solid var(--wm-border-strong); border-radius: 2px; cursor: pointer;
+}
+.jet-all:hover { color: #ffffff; border-color: var(--wm-text-2); }
+.jet-branch {
+  display: inline-block; padding: 0 .3rem; border: 1px solid var(--wm-border-strong); border-radius: 2px;
+  font-size: .64rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--wm-text-2);
+}
+/* In a state row the branch takes the line under the name and the count. */
+.jet-state-name .jet-branch { order: 3; flex-basis: 100%; padding: 0; border: 0; font-size: .62rem; color: var(--wm-dim); }
+.jet-state-box > summary .jet-branch { padding-left: .8rem; }
+.jet-resorts { list-style: none; margin: 0 0 0 .75rem; padding: 0; display: flex; flex-wrap: wrap; gap: .15rem .6rem; }
+.jet-resorts li { display: inline-flex; align-items: baseline; gap: .3rem; font-size: .75rem; }
+.jet-resorts a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.jet-resorts a:hover { color: #ffffff; }
+.jet-meta { margin: .4rem 0 0; }
+
+/* ── Legend strip ── */
+.map-legend .ml-items.ml-jet {
+  margin-left: 6px; padding-left: .65rem; border-left: 1px solid var(--wm-border); border-radius: 3px;
+}
+.ml-items.ml-jet[hidden] { display: none; }
+.ml-jet-title { color: var(--wm-dim); font-weight: 700; letter-spacing: .14em; }
+.ml-jet-line { position: relative; display: inline-block; width: 16px; height: 9px; }
+.ml-jet-line::before { content: ""; position: absolute; inset: 0; background: var(--c); opacity: .3; }
+.ml-jet-line::after { content: ""; position: absolute; left: 0; right: 0; top: 3.5px; height: 2px; background: var(--c); }
+.ml-jet-ring { width: 11px; height: 11px; border-radius: 50%; border: 1.6px solid var(--c); }
+/* Desktop: the jet stream items take a row of their own above the resort legend (the title stays with its items). */
+.map-legend.has-jet { display: grid; grid-template-columns: auto minmax(0, auto); justify-content: safe center; row-gap: 6px; }
+.map-legend.has-jet .ml-items.ml-jet { grid-column: 1 / -1; grid-row: 1; justify-self: center; margin-left: 0; }
+
+@media (min-width: 760px) and (max-width: 1199.98px) {
+  .map-stage.jet-legend .layers-panel { max-height: calc(100% - var(--lp-inset) - 96px); }
+}
+@media (max-width: 759.98px) {
+  .jet-count { font-size: .74rem; }
+  .jet-pick { min-height: 38px; font-size: .82rem; }
+  .jet-resorts li { font-size: .82rem; }
+  .jet-resorts { gap: .35rem .75rem; }
+  .jet-how summary, .jet-winters summary { min-height: 32px; }
+  /* The phone strip scrolls sideways in one row. */
+  .map-legend.has-jet { display: flex; }
+  .map-legend.has-jet > * { flex-shrink: 0; }
+  .map-legend.has-jet .ml-items.ml-jet { margin-left: 6px; }
+  .jet-state-name { min-height: 36px; font-size: .84rem; }
+  .jet-all { min-height: 34px; }
+}
