@@ -771,6 +771,10 @@ validated by `pipeline/schemas/passes.py` and loaded by `pipeline/passes.py` (th
 
 Raw inputs: `data/raw/climate/era5_jet/` (ERA5 250 hPa season mean winds, `python -m pipeline.climate.era5_jet fetch`, numpy and h5py at fetch time only) and `data/raw/climate/enso/` (NOAA CPC RONI and ONI, committed monthly by `.github/workflows/enso-index.yml`). Config: `config/definitions.yaml` `jetstream` (`pipeline/config.py` `JetstreamDefs`). Output: `data/build/jetstream.json`, lazy loaded by the map on the first jet stream toggle. The build skips it with a warning when the raw inputs are missing.
 
+UI: `map/js/jetstream.js` and `map/css/jetstream.css`, loaded with `jetstream.json` the first time the Jet stream box in
+the Layers panel opens or with a `?jet=` link (`router.js` keeps `?jet=` across views); see `docs/map/JETSTREAM.md`
+"As built".
+
 ## Events and competitions (ROADMAP item 22; `pipeline/events.py`, `map/js/events.js`, `map/js/eventsmap.js`)
 
 Owner request 2026-10-17: every snowsports venue, competition and event in the United States, for every discipline,
@@ -1150,7 +1154,8 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
   While that loads, the stub's prerendered summary stays on screen (`aria-busy` on the panel).
 * Lazy modules: `hiring.js` (the Hiring now count, at idle), `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
   when the climate section nears the screen), `detailcontrols.js` (resort
-  detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`. The site font, Inter, loads
+  detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`, and `jetstream.js` with `jetstream.css` and
+  `jetstream.json` (the first time the Jet stream box opens, or a `?jet=` link). The site font, Inter, loads
   after the window load event and the first contentful paint (see "Console look"). The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.
