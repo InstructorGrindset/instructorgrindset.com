@@ -2,7 +2,7 @@
 # CPC's site is not reachable from every network, so this workflow downloads RONI.ascii.txt and oni.ascii.txt and
 # commits data/raw/climate/enso/ only when the files changed. It runs on a schedule once it is on the default branch,
 # from the Actions tab (workflow_dispatch), and on a push that changes this file or the fetcher. It uses the default
-# GITHUB_TOKEN; no secret is needed.
+# GITHUB_TOKEN; no secret is needed. data/raw/climate/enso/ is kept out of the .gitignore rule for data/raw/climate/.
 name: ENSO index
 
 on:
