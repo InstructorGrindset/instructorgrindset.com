@@ -134,6 +134,16 @@ def test_overflies_states_and_resorts():
     assert out["resorts"] == [{"id": "in", "state": "AA", "branch": "main"}]
 
 
+def test_overflies_lists_the_state_of_every_resort_under_a_band():
+    # A sliver of state CC lies under the band between sample points; its resort still lists the state.
+    sliver = {"type": "Polygon", "coordinates": [[[-104.2, 39.6], [-104.1, 39.6], [-104.1, 39.9], [-104.2, 39.9], [-104.2, 39.6]]]}
+    branches = [{"id": "main", "band": [[lon, 39.0, 41.0] for lon in range(-120, -94)]}]
+    states = {"CC": {"name": "Gamma", "geometry": sliver}}
+    out = js.overflies(branches, states, [{"id": "tiny", "state": "CC", "lat": 39.7, "lon": -104.15}], 0.5)
+    assert out["states"] == [{"code": "CC", "name": "Gamma", "branches": ["main"]}]
+    assert out["resorts"] == [{"id": "tiny", "state": "CC", "branch": "main"}]
+
+
 def test_mean_shift_over_the_lower_48():
     a = [{"id": "main", "axis": [[lon, 40.0, 30] for lon in range(-130, -60)]}]
     b = [{"id": "main", "axis": [[lon, 43.0, 30] for lon in range(-130, -60)]}]

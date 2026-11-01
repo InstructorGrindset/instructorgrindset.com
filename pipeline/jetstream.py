@@ -300,15 +300,20 @@ def overflies(branches: Sequence[dict], states: dict[str, dict], resorts: Sequen
                                 by_state_branch[code].append(br["id"])
                     lat += sample_deg
             lon += sample_deg
-    out_states = [{"code": c, "name": states[c]["name"], "branches": by_state_branch[c]}
-                  for c in sorted(first_lon, key=lambda c: (first_lon[c], c))]
     out_resorts = []
     for r in sorted(resorts, key=lambda r: (r["lon"], r["id"])):
         for br in branches:
             edges = _edges_at(br["band"], r["lon"])
             if edges and edges[0] <= r["lat"] <= edges[1]:
                 out_resorts.append({"id": r["id"], "state": r["state"], "branch": br["id"]})
+                # A resort under the band puts its state under it too, even where the sample grid missed a sliver.
+                if r["state"] in states:
+                    first_lon[r["state"]] = min(first_lon.get(r["state"], r["lon"]), r["lon"])
+                    if br["id"] not in by_state_branch.setdefault(r["state"], []):
+                        by_state_branch[r["state"]].append(br["id"])
                 break
+    out_states = [{"code": c, "name": states[c]["name"], "branches": by_state_branch[c]}
+                  for c in sorted(first_lon, key=lambda c: (first_lon[c], c))]
     return {"states": out_states, "resorts": out_resorts}
 
 
