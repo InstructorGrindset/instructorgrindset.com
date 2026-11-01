@@ -3643,6 +3643,429 @@ async function realEventSearch(browser, base, file) {
   }
 }
 
+// Jet stream overlay (docs/map/JETSTREAM.md): nothing loads before the Jet stream box opens; each path draws and goes
+// on its own; the active layer's card lists the fixture's states and resorts west to east; the card's selector
+// switches the active layer; turning the active one off falls back; the address bar keeps the paths across views, a
+// link opens with them on (the 2D picture too); layer ids and branch counts come from the file; the phone sheet.
+// Fixture: tests/map/fixtures/jetstream.json (make_fixtures.py, straight synthetic paths).
+async function jetStreamChecks(browser, base, stubBase) {
+  log('\nJet stream');
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await ctx.newPage();
+  const w = watch(page, 'jet stream');
+  const quiet = trackInflight(page);
+  const jetReq = () => w.requests.filter((u) => /\/jetstream\.(json|js|css)(\?|$)/.test(u));
+  const jetFile = () => w.requests.filter((u) => /\/jetstream\.json(\?|$)/.test(u)).length;
+  const status = (prefix) => page.waitForFunction((p) => document.getElementById('panel-status').textContent.startsWith(p), prefix, { timeout: 5000 }).then(() => true, () => false);
+  const search = () => new URL(page.url()).searchParams.get('jet');
+  const mapState = () => page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const feats = window.__careerMap.jet.features ? window.__careerMap.jet.features.features : [];
+    const ring = m.getFilter('resorts-jet-ring');
+    const states = m.getFilter('jet-states');
+    const rendered = (layer) => [...new Set(m.queryRenderedFeatures({ layers: [layer] }).map((f) => f.properties.layer))].sort();
+    return {
+      vis: ['jet-band', 'jet-axis', 'jet-label', 'jet-states'].map((l) => m.getLayoutProperty(l, 'visibility')),
+      axis: feats.filter((f) => f.properties.kind === 'axis').map((f) => `${f.properties.layer}:${f.properties.branch}:${f.geometry.coordinates[0][0]}..${f.geometry.coordinates.at(-1)[0]}`),
+      bands: feats.filter((f) => f.properties.kind === 'band').length,
+      active: [...new Set(feats.filter((f) => f.properties.active).map((f) => f.properties.layer))],
+      drawnAxis: rendered('jet-axis'), drawnBand: rendered('jet-band'),
+      ring: JSON.stringify(ring), ringColor: m.getPaintProperty('resorts-jet-ring', 'circle-stroke-color'),
+      states: JSON.stringify(states), tint: m.getPaintProperty('jet-states', 'fill-color'),
+      order: m.getStyle().layers.map((l) => l.id),
+    };
+  });
+  const card = () => page.evaluate(() => {
+    const c = document.getElementById('jet-card');
+    if (!c || c.hidden) return null;
+    const sel = c.querySelector('#jet-active');
+    return {
+      title: c.querySelector('.jet-card-title').textContent,
+      select: sel ? { value: sel.value, options: [...sel.options].map((o) => o.textContent), label: sel.labels[0] && sel.labels[0].textContent } : null,
+      one: c.querySelector('.jet-one') ? c.querySelector('.jet-one').textContent : null,
+      sum: c.querySelector('.jet-sum').textContent,
+      states: [...c.querySelectorAll('.jet-state')].map((li) => ({
+        name: li.querySelector('.jet-state-label').textContent,
+        branch: li.querySelector('.jet-state-name .jet-branch') ? li.querySelector('.jet-state-name .jet-branch').textContent : null,
+        n: li.querySelector('.jet-n').textContent,
+        resorts: [...li.querySelectorAll('.jet-resorts a')].map((a) => a.textContent),
+        open: li.querySelector('details') ? li.querySelector('details').open : null,
+      })),
+      meta: [...c.querySelectorAll('.jet-meta')].map((p) => p.textContent.replace(/\s+/g, ' ').trim()),
+    };
+  });
+  const legend = () => page.evaluate(() => {
+    const ul = document.querySelector('.map-legend .ml-jet');
+    return ul && !ul.hidden ? [...ul.querySelectorAll('li')].map((li) => li.textContent) : [];
+  });
+
+  // 1. Nothing of the jet stream loads with the page, the map or the other layers.
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await page.waitForTimeout(1200);
+  check(jetReq().length === 0, `lazy: nothing of the jet stream loads with the page (${jetReq().length} requests)`);
+  const box = page.locator('#jet-box');
+  check(await box.isVisible() && (await box.locator('summary').textContent()).trim() === 'Jet stream' && !(await box.evaluate((d) => d.open))
+    && await page.locator('#jet-box input').count() === 0,
+  'the Layers panel holds a closed Jet stream box, with no checkbox before its data loads');
+  await ready(page);
+  await mapIdle(page);
+  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 15000 });
+  await quiet();
+  check(jetReq().length === 0, `lazy: no jetstream.json, module or stylesheet before the box opens (${jetReq().length} requests)`);
+  check(!(await page.evaluate(() => Boolean(window.__careerMap.mapCtl.map.getSource('jet')))), 'no jet stream source on the map before the box opens');
+
+  // 2. Opening the box loads the file once and lists every layer in file order, all off.
+  await box.locator('summary').click();
+  await page.waitForSelector('#jet-box input[data-jet]', { timeout: 15000 });
+  const opts = await page.evaluate(() => [...document.querySelectorAll('#jet-box input[data-jet]')].map((i) => ({
+    id: i.dataset.jet, checked: i.checked, name: i.getAttribute('aria-label'),
+    text: [...i.labels[0].querySelectorAll('.lp-text, .jet-count')].map((e) => e.textContent).join('|'),
+    swatch: getComputedStyle(i.labels[0].querySelector('.jet-swatch')).getPropertyValue('--c').trim(),
+  })));
+  check(jetFile() === 1, `opening the box loads jetstream.json once (${jetFile()})`);
+  check(JSON.stringify(opts.map((o) => o.id)) === JSON.stringify(['last10', 'el_nino', 'la_nina', 'neutral']) && opts.every((o) => !o.checked),
+    `one checkbox per layer in file order, all off (${opts.map((o) => o.id)})`);
+  check(opts[1].text === 'El Niño|3 winters' && opts[0].text === 'Last 10 winters|10 winters' && opts[1].swatch === '#ff8a3d',
+    `each checkbox shows its label and season count, with a swatch in the layer color (${opts[1].text}; ${opts[1].swatch})`);
+  check(await page.getByRole('checkbox', { name: 'La Niña, 4 winters' }).count() === 1, 'the checkbox name works for assistive technology ("La Niña, 4 winters")');
+  const note = await page.evaluate(() => ({
+    note: document.querySelector('#jet-box .jet-note').textContent,
+    src: [...document.querySelectorAll('#jet-box .jet-src a')].map((a) => `${a.textContent}|${a.getAttribute('href')}|${a.target}`),
+  }));
+  check(note.note === 'Average 250 hPa jet, November to April.', `the one line note (${note.note})`);
+  check(JSON.stringify(note.src) === JSON.stringify(['Synthetic fixture: 250 hPa winds|https://example.com/fixture/jet-winds|_blank',
+    'Synthetic fixture: ENSO index|https://example.com/fixture/jet-enso|_blank']), `links to both sources from sources.json (${note.src})`);
+  check(!(await page.evaluate(() => window.__careerMap.mapCtl.map.getSource('jet') && window.__careerMap.mapCtl.map.getLayoutProperty('jet-band', 'visibility') === 'visible')),
+    'with every path off, the jet layers stay hidden');
+
+  // 3. One path on: band and line under the dots, the states tinted, its resorts ringed, the card and the legend.
+  await page.getByRole('checkbox', { name: 'El Niño, 3 winters' }).check();
+  check(await status('El Niño path on. Its band covers 4 states and 3 resorts.'), 'turning a path on is announced with what its band covers');
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).length > 0, null, { timeout: 10000 });
+  await mapIdle(page);
+  let ms = await mapState();
+  check(ms.vis.every((v) => v === 'visible') && JSON.stringify(ms.axis) === JSON.stringify(['el_nino:main:-170..-60']) && ms.bands === 1
+    && JSON.stringify(ms.drawnAxis) === JSON.stringify(['el_nino']) && JSON.stringify(ms.drawnBand) === JSON.stringify(['el_nino']),
+  `El Niño draws its band and axis (${ms.axis}; ${ms.bands} band)`);
+  const idx = (id) => ms.order.indexOf(id);
+  check(idx('jet-band') < idx('jet-axis') && idx('jet-axis') < idx('jet-label') && idx('jet-label') < idx('resorts-glow') && idx('jet-label') < idx('resorts')
+    && idx('jet-states') < idx('clusters-fill') && idx('states-fill') < idx('jet-states'),
+  'the band, line and labels draw under the resort dots; the tint over the state fills');
+  check(ms.states === JSON.stringify(['in', ['get', 'code'], ['literal', ['CA', 'NV', 'UT', 'CO']]]) && ms.tint === '#ff8a3d',
+    `the states under the band get a tint in the layer color (${ms.states})`);
+  const ringIds = await page.evaluate(() => [...new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['resorts-jet-ring'] }).map((f) => f.properties.id))].sort());
+  check(JSON.stringify(ringIds) === JSON.stringify(['echo-mesa', 'hotel-lake', 'india-crest']) && ms.ringColor === '#ff8a3d',
+    `the resorts under the band get a ring (${ringIds})`);
+  const labels = await page.evaluate(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-label'] }).length);
+  check(labels > 0, `the line carries its name on the map (${labels} labels)`);
+  let c = await card();
+  check(c && c.title === 'Under the band' && c.select === null && c.one === 'El Niño, 3 winters' && c.sum === '4 states and 3 resorts, west to east.',
+    `the card names the active layer and counts its band (${c && c.one}; ${c && c.sum})`);
+  check(c && JSON.stringify(c.states.map((x) => `${x.name}:${x.resorts.join('+')}:${x.n}`))
+    === JSON.stringify(['California:Hotel Lake+India Crest:2 resorts', 'Nevada::0 resorts', 'Utah::0 resorts', 'Colorado:Echo Mesa:1 resort']),
+  `the card lists its states west to east with their resorts (${c && c.states.map((x) => `${x.name}:${x.resorts.join('+')}`)})`);
+  check(c && c.states.every((x) => x.branch === null) && c.states.filter((x) => x.open !== null).every((x) => x.open),
+    'one branch: no branch names; a short list opens every state');
+  check(c && c.meta[0].startsWith('Estimated Path last verified Oct 1, 2026') && c.meta[0].endsWith('Synthetic fixture: 250 hPa winds')
+    && c.meta[1].startsWith('Published Winter classes last verified Oct 1, 2026'), `the card carries the confidence, date and source (${c && c.meta.join(' / ')})`);
+  check(JSON.stringify(await legend()) === JSON.stringify(['Jet stream', 'El Niño', 'Under the El Niño band']), `the legend strip names the line and the ring (${await legend()})`);
+  check(search() === 'el_nino' && (await box.locator('.jet-on').textContent()) === '1 on', `the address bar keeps the path (?jet=${search()}); the box title counts it`);
+  await shot(page, 'jet-01-el-nino.png');
+
+  // 4. A second path: it becomes active; La Niña has two branches, the southern one over part of the range.
+  await page.getByRole('checkbox', { name: 'La Niña, 4 winters' }).check();
+  await page.waitForFunction(() => window.__careerMap.jet.active === 'la_nina', null, { timeout: 5000 });
+  await mapIdle(page);
+  ms = await mapState();
+  check(JSON.stringify(ms.axis) === JSON.stringify(['el_nino:main:-170..-60', 'la_nina:north:-170..-55', 'la_nina:south:-125..-95'])
+    && JSON.stringify(ms.active) === JSON.stringify(['la_nina']) && JSON.stringify(ms.drawnAxis) === JSON.stringify(['el_nino', 'la_nina']),
+  `both paths draw, La Niña with its two branches, and the last one on is active (${ms.axis})`);
+  c = await card();
+  check(c && c.select && c.select.value === 'la_nina' && JSON.stringify(c.select.options) === JSON.stringify(['El Niño, 3 winters', 'La Niña, 4 winters']) && c.select.label === 'List for',
+    `with two paths on, the card has a selector in file order (${c && c.select && c.select.options})`);
+  check(c && JSON.stringify(c.states.map((x) => x.name)) === JSON.stringify(['California', 'Nevada', 'Idaho', 'Utah', 'Wyoming', 'Colorado', 'Vermont', 'New Hampshire'])
+    && c.states[0].branch === 'Southern branch' && c.states[2].branch === 'Northern branch'
+    && JSON.stringify(c.states.flatMap((x) => x.resorts)) === JSON.stringify(['Echo Mesa', 'Lima Hollow', 'Kilo Notch']),
+  `two branches: each state names its branch (${c && c.states.map((x) => `${x.name}/${x.branch}`)})`);
+  check(ms.states.includes('"VT"') && ms.ringColor === '#4fb3ff', 'the tint and rings follow the active layer');
+  check(search() === 'el_nino,la_nina', `?jet= lists the paths in the order they came on (${search()})`);
+  check(JSON.stringify(await legend()) === JSON.stringify(['Jet stream', 'El Niño', 'La Niña', 'Under the La Niña band']), `the legend strip names both lines (${await legend()})`);
+  await shot(page, 'jet-02-two-paths.png');
+  await axeCheck(page, 'jet stream card open, desktop');
+
+  // 5. The selector switches the active layer, and the keyboard reaches it.
+  await page.locator('#jet-active').selectOption('el_nino');
+  await page.waitForFunction(() => window.__careerMap.jet.active === 'el_nino', null, { timeout: 5000 });
+  check(await status('The list shows El Niño: 4 states and 3 resorts.'), 'switching the list is announced');
+  c = await card();
+  ms = await mapState();
+  check(c && c.select.value === 'el_nino' && c.states.length === 4 && ms.ringColor === '#ff8a3d' && JSON.stringify(ms.active) === JSON.stringify(['el_nino'])
+    && search() === 'la_nina,el_nino' && await page.evaluate(() => document.activeElement.id) === 'jet-active',
+  `the selector makes El Niño active: list, rings, tint and address bar follow; focus stays on it (${search()})`);
+  const tabOrder = await page.evaluate(() => {
+    const all = [...document.querySelectorAll('a[href], button, input, select, summary, [tabindex]:not([tabindex="-1"])')].filter((e) => e.offsetParent && !e.disabled);
+    return { box: all.indexOf(document.querySelector('#jet-layer-neutral')), select: all.indexOf(document.querySelector('#jet-active')),
+      link: all.indexOf(document.querySelector('#jet-card .jet-resorts a')) };
+  });
+  check(tabOrder.box >= 0 && tabOrder.select > tabOrder.box && tabOrder.link > tabOrder.select, `the card follows the checkboxes in keyboard order (${JSON.stringify(tabOrder)})`);
+
+  // 6. Turning the active one off falls back to the other; the last one off hides the card.
+  await page.getByRole('checkbox', { name: 'El Niño, 3 winters' }).uncheck();
+  check(await status('El Niño path off. The list shows La Niña.'), 'turning the active path off says which list shows');
+  await mapIdle(page);
+  c = await card();
+  ms = await mapState();
+  check(c && c.select === null && c.one === 'La Niña, 4 winters' && JSON.stringify(ms.drawnAxis) === JSON.stringify(['la_nina']) && search() === 'la_nina',
+    `the active path off: La Niña takes over and El Niño leaves the map (${ms.drawnAxis})`);
+  await page.getByRole('checkbox', { name: 'La Niña, 4 winters' }).uncheck();
+  await mapIdle(page);
+  ms = await mapState();
+  check(await card() === null && (await legend()).length === 0 && ms.vis.every((v) => v === 'none') && ms.ring.includes('[]') && search() === null
+    && await box.locator('.jet-on').isHidden(), 'every path off: no card, no legend items, the layers and rings go, ?jet= leaves the address bar');
+  w.assertClean();
+
+  // 7. MAP and SATELLITE: the band and its casing get stronger over the imagery.
+  await page.getByRole('checkbox', { name: 'Last 10 winters, 10 winters' }).check();
+  const paint = () => page.evaluate(() => JSON.stringify(window.__careerMap.mapCtl.map.getPaintProperty('jet-band', 'fill-opacity')) + window.__careerMap.mapCtl.map.getPaintProperty('jet-axis-casing', 'line-opacity'));
+  const before = await paint();
+  await page.locator('#tone-toggle button[data-tone="satellite"]').click();
+  await page.waitForTimeout(300);
+  const after = await paint();
+  check(before !== after && after.endsWith('0.75'), `SATELLITE strengthens the band and the dark casing (${before} to ${after})`);
+  await mapIdle(page);
+  await shot(page, 'jet-03-satellite.png');
+  await page.locator('#tone-toggle button[data-tone="map"]').click();
+
+  // 8. Views keep the paths: a resort link in the card, back, and EVENTS mode (the rings go with the dots).
+  await page.locator('#jet-card .jet-resorts a', { hasText: 'Alpha Peak' }).click();
+  await page.waitForFunction(() => document.getElementById('panel-heading') && document.getElementById('panel-heading').textContent === 'Alpha Peak', null, { timeout: 10000 });
+  check(new URL(page.url()).pathname === '/map/co/fixture-front-range/alpha-peak/' && search() === 'last10' && new URL(page.url()).searchParams.get('data') === FIX,
+    `a resort in the card opens its page and the path stays on (${page.url().replace(base, '')})`);
+  await page.goBack();
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'United States', null, { timeout: 10000 });
+  check(search() === 'last10' && await page.evaluate(() => window.__careerMap.jet.visible.join()) === 'last10', `back keeps the paths on (${search()})`);
+  await page.getByRole('radio', { name: 'Events', exact: true }).check();
+  await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && window.__careerMap.mapCtl.map.getLayer('event-venues'), null, { timeout: 15000 });
+  await mapIdle(page);
+  const ev = await page.evaluate(() => ({ url: location.search, ring: window.__careerMap.mapCtl.map.getLayoutProperty('resorts-jet-ring', 'visibility'),
+    band: window.__careerMap.mapCtl.map.getLayoutProperty('jet-band', 'visibility'), box: Boolean(document.getElementById('jet-box').offsetParent) }));
+  check(ev.url.includes('jet=last10') && ev.ring === 'none' && ev.band === 'visible' && ev.box, `EVENTS mode keeps the paths and hides the rings with the dots (${JSON.stringify(ev)})`);
+  await page.getByRole('radio', { name: 'Resorts', exact: true }).check();
+  await page.locator('#list-toggle').click();
+  check(await box.isHidden(), 'the list view hides the Jet stream box');
+  await page.locator('#list-toggle').click();
+  await quiet();
+  w.assertClean();
+
+  // 9. A link opens with the paths on, the 2D picture included; ids this build lacks drop out of the address bar.
+  await page.goto(`${base}/map/${Q}&jet=neutral,last10`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded && document.querySelector('.map-preview .map-preview-overlay'), null, { timeout: 15000 });
+  const pic = await page.evaluate(() => ({
+    open: document.getElementById('jet-box').open,
+    checked: [...document.querySelectorAll('#jet-box input[data-jet]')].filter((i) => i.checked).map((i) => i.dataset.jet),
+    paths: document.querySelectorAll('.map-preview .map-preview-overlay path').length,
+    rings: document.querySelectorAll('.map-preview g.map-preview-overlay circle').length,
+    active: window.__careerMap.jet.active, sel: document.getElementById('jet-active') && document.getElementById('jet-active').value,
+  }));
+  check(pic.open && JSON.stringify(pic.checked) === JSON.stringify(['last10', 'neutral']) && pic.active === 'last10' && pic.sel === 'last10',
+    `?jet=neutral,last10 opens the box with both on and the last one active (${JSON.stringify(pic)})`);
+  check(pic.paths >= 8 && pic.rings === 11, `the 2D picture draws both paths and rings the active band's resorts (${pic.paths} paths, ${pic.rings} rings)`);
+  await shot(page, 'jet-04-picture.png');
+  await axeCheck(page, 'jet stream link, before the map starts');
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getSource('jet') && window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).length > 0, null, { timeout: 15000 });
+  ms = await mapState();
+  check(JSON.stringify(ms.drawnAxis) === JSON.stringify(['last10', 'neutral']) && JSON.stringify(ms.active) === JSON.stringify(['last10']),
+    `the WebGL map starts with the linked paths (${ms.drawnAxis})`);
+  await quiet();
+  await page.goto(`${base}/map/${Q}&jet=bogus,EL_NINO,el-nino`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 15000 });
+  await page.waitForTimeout(200);
+  check(search() === 'el_nino' && await page.evaluate(() => window.__careerMap.jet.visible.join()) === 'el_nino',
+    `unknown or malformed ids drop out of the address bar (${search()})`);
+  await quiet();
+  w.assertClean();
+
+  // 10. A route stub keeps the paths in its address bar.
+  await page.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/?jet=la_nina`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 15000 });
+  check(search() === 'la_nina' && (await card()) && (await card()).one === 'La Niña, 4 winters', 'a resort stub opens with the linked path and its card');
+  await quiet();
+  w.assertClean();
+  await ctx.close();
+
+  // 11. Layer ids, their number and the branch count come from the file: a strength split with three branches.
+  const variant = JSON.parse(fs.readFileSync(path.join(REPO, 'tests', 'map', 'fixtures', 'jetstream.json'), 'utf8'));
+  const laNina = variant.layers.find((l) => l.id === 'la_nina');
+  const elNino = variant.layers.find((l) => l.id === 'el_nino');
+  variant.layers = [
+    { ...elNino, id: 'el_nino_weak', label: 'Weak El Niño', color: '#ffc08a' },
+    { ...laNina, id: 'el_nino_strong', label: 'Strong El Niño', color: '#e8502a',
+      branches: [...laNina.branches, { ...laNina.branches[1], id: 'north_2', label: 'Northern branch' }],
+      overflies: { states: [{ code: 'TX', name: 'Texas', branches: ['south'] }], resorts: [] } },
+    { ...elNino, id: 'bad layer id' },
+  ];
+  const vctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await vctx.route(/\/tests\/map\/fixtures\/jetstream\.json$/, (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(variant) }));
+  const vpage = await vctx.newPage();
+  const vw = watch(vpage, 'jet stream, other layer ids');
+  await vpage.goto(`${base}/map/${Q}&jet=el_nino_strong`);
+  await ready(vpage, { start: false });
+  await vpage.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 15000 });
+  const v = await vpage.evaluate(() => ({
+    ids: [...document.querySelectorAll('#jet-box input[data-jet]')].map((i) => `${i.dataset.jet}:${i.checked}`),
+    sum: document.querySelector('#jet-card .jet-sum').textContent,
+    states: [...document.querySelectorAll('#jet-card .jet-state')].map((li) => li.textContent),
+  }));
+  check(JSON.stringify(v.ids) === JSON.stringify(['el_nino_weak:false', 'el_nino_strong:true']),
+    `strength layers come from the file; a bad layer is skipped (${v.ids})`);
+  check(v.sum === '1 state, west to east. This band crosses no ski areas.' && v.states[0].startsWith('Texas'),
+    `a band over no ski area says so (${v.sum})`);
+  await ready(vpage);
+  await vpage.waitForFunction(() => window.__careerMap.mapCtl.map.getSource('jet') && window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).length > 0, null, { timeout: 15000 });
+  const vb = await vpage.evaluate(() => [...new Set(window.__careerMap.mapCtl.map.querySourceFeatures('jet').filter((f) => f.properties.kind === 'axis').map((f) => f.properties.branch))].sort());
+  check(JSON.stringify(vb) === JSON.stringify(['north', 'north_2', 'south']), `three branches draw (${vb})`);
+  vw.assertClean();
+  await vctx.close();
+
+  // 12. Without the file the box says the paths are on their way.
+  const mctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await mctx.route(/\/tests\/map\/fixtures\/jetstream\.json$/, (route) => route.fulfill({ status: 404, contentType: 'text/plain', body: 'Not found' }));
+  const mpage = await mctx.newPage();
+  await mpage.goto(`${base}/map/${Q}&jet=el_nino`);
+  await ready(mpage, { start: false });
+  await mpage.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 15000 });
+  check((await mpage.locator('#jet-box .jet-note').textContent()) === 'The jet stream paths arrive with the next data build.'
+    && new URL(mpage.url()).searchParams.get('jet') === null, 'without jetstream.json the box says so and ?jet= leaves the address bar');
+  await mctx.close();
+
+  // 13. The transforms (map/js/jetstream.js): runs split at gaps and nulls, bands close south then north, the
+  // toggle order keeps the last one on active, the card groups resorts by state west to east.
+  const tctx = await browser.newContext();
+  const tpage = await tctx.newPage();
+  await tpage.goto(`${base}/map/${Q}`);
+  const rules = await tpage.evaluate(async () => {
+    const m = await import('/map/js/jetstream.js');
+    const band = [[-120, 30, 40], [-119, 31, 41], [-118, null, 42], [-117, 32, 42], [-116, 33, 43], [-112, 34, 44], [-111, 35, 45]];
+    const axis = [[-120, 35, 40], [-119, 36, 41], [-115, 37, 42], [-114, null, 30], [-113, 38, 43]];
+    const layer = { id: 'x', label: 'X', branches: [{ id: 'north', label: 'Northern branch' }, { id: 'south', label: 'Southern branch' }],
+      overflies: { states: [{ code: 'CA', name: 'California', branches: ['south'] }, { code: 'CO', name: 'Colorado', branches: ['north', 'south'] }],
+        resorts: [{ id: 'b', state: 'CO', branch: 'north' }, { id: 'gone', state: 'CO', branch: 'north' }, { id: 'a', state: 'CA', branch: 'south' }, { id: 'c', state: 'ME', branch: 'north' }] } };
+    const rec = { a: { id: 'a', name: 'A', state: 'CA' }, b: { id: 'b', name: 'B', state: 'CO' }, c: { id: 'c', name: 'C', state: 'ME' } };
+    const groups = m.stateGroups(layer, (id) => rec[id] || null, (code) => ({ ME: 'Maine' }[code] || code));
+    const fc = m.jetFeatures([{ ...layer, color: '#ffffff', branches: [{ id: 'main', label: 'Main jet', axis, band }] }, { ...layer, id: 'y', color: '#000000', branches: [{ id: 'main', label: 'Main jet', axis, band }] }], ['y', 'x']);
+    return {
+      runs: m.runs(axis, (p) => p[1] != null).map((r) => r.map((p) => p[0]).join(',')),
+      polys: m.bandPolygons(band),
+      edges: m.bandEdges(band).length,
+      axis: m.axisLines(axis).map((l) => l.length),
+      toggled: [m.toggled(['a', 'b'], 'a', true).join(), m.toggled(['a', 'b'], 'b', false).join(), m.toggled([], 'c', true).join()],
+      groups: groups.map((g) => `${g.name}:${g.branches.join('+')}:${g.resorts.map((r) => `${r.name}/${r.branch}`).join('+')}`),
+      label: [m.lineLabel(layer, layer.branches[0]), m.lineLabel({ label: 'Y', branches: [{}] }, { label: 'Main jet' })],
+      fc: { n: fc.features.length, active: [...new Set(fc.features.filter((f) => f.properties.active).map((f) => f.properties.layer))], order: fc.features[0].properties.order },
+    };
+  });
+  check(JSON.stringify(rules.runs) === JSON.stringify(['-120,-119', '-115', '-113']), `runs split at a gap over 1.5 degrees and at a null (${rules.runs})`);
+  check(JSON.stringify(rules.polys) === JSON.stringify([[[-120, 30], [-119, 31], [-119, 41], [-120, 40], [-120, 30]], [[-117, 32], [-116, 33], [-116, 43], [-117, 42], [-117, 32]], [[-112, 34], [-111, 35], [-111, 45], [-112, 44], [-112, 34]]])
+    && rules.edges === 6, 'band polygons run the south edge west to east and the north edge back, closed; edges stay open');
+  check(JSON.stringify(rules.axis) === JSON.stringify([2]), `axis lines keep runs of two points or more (${rules.axis})`);
+  check(JSON.stringify(rules.toggled) === JSON.stringify(['b,a', 'a', 'c']), `turning a layer on makes it the last (active); off removes it (${rules.toggled})`);
+  check(JSON.stringify(rules.groups) === JSON.stringify(['California:Southern branch:A/Southern branch', 'Colorado:Northern branch+Southern branch:B/Northern branch', 'Maine:Northern branch:C/Northern branch']),
+    `the card groups resorts by state in file order, skips a resort off the map, and keeps one from an unlisted state (${rules.groups})`);
+  check(JSON.stringify(rules.label) === JSON.stringify(['X, Northern branch', 'Y']) && rules.fc.n === 20 && JSON.stringify(rules.fc.active) === JSON.stringify(['x']) && rules.fc.order === 0,
+    `map labels name the branch only with two; the features mark the last layer on active (${JSON.stringify(rules.fc)})`);
+  await tctx.close();
+
+  // 14. Phone: the box and its card live in the layers sheet; the map shows the paths once it closes.
+  const pctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  const ppage = await pctx.newPage();
+  const pw = watch(ppage, 'jet stream, phone');
+  const pquiet = trackInflight(ppage);
+  await ppage.goto(`${stubBase}/map/`);
+  await ready(ppage);
+  await mapIdle(ppage);
+  await ppage.locator('#layers-toggle').click();
+  check(await ppage.locator('#jet-box').isVisible(), 'phone: the Jet stream box is in the layers sheet');
+  await ppage.locator('#jet-box summary').click();
+  await ppage.waitForSelector('#jet-box input[data-jet]', { timeout: 15000 });
+  await ppage.locator('label[for="jet-layer-last10"]').click();
+  await ppage.locator('label[for="jet-layer-la_nina"]').click();
+  await ppage.waitForFunction(() => window.__careerMap.jet.active === 'la_nina', null, { timeout: 5000 });
+  await ppage.waitForTimeout(600);
+  const pc = await ppage.evaluate(() => {
+    const c = document.getElementById('jet-card');
+    const r = c.getBoundingClientRect();
+    const sheet = document.getElementById('layers-panel').getBoundingClientRect();
+    const sel = document.getElementById('jet-active').getBoundingClientRect();
+    return { inSheet: Boolean(c.closest('#layers-panel')), top: Math.round(r.top), sheetTop: Math.round(sheet.top), sheetBottom: Math.round(sheet.bottom),
+      selH: Math.round(sel.height), overflow: document.documentElement.scrollWidth > window.innerWidth };
+  });
+  check(pc.inSheet && pc.top >= pc.sheetTop && pc.top < pc.sheetBottom - 60 && pc.selH >= 36 && !pc.overflow,
+    `phone: turning a path on brings its card into the sheet; the selector is a large target (${JSON.stringify(pc)})`);
+  await shot(ppage, 'jet-05-phone-sheet.png');
+  await axeCheck(ppage, 'jet stream card open, phone');
+  await ppage.locator('#layers-close').click();
+  await mapIdle(ppage);
+  const pm = await ppage.evaluate(() => ({
+    drawn: [...new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).map((f) => f.properties.layer))].sort(),
+    legend: [...document.querySelectorAll('.map-legend .ml-jet li')].map((li) => li.textContent),
+    url: new URL(location.href).searchParams.get('jet'),
+  }));
+  check(JSON.stringify(pm.drawn) === JSON.stringify(['la_nina', 'last10']) && pm.legend.includes('La Niña') && pm.url === 'last10,la_nina',
+    `phone: the map draws both paths and the legend strip names them (${JSON.stringify(pm)})`);
+  await shot(ppage, 'jet-06-phone-map.png');
+  await pquiet();
+  pw.assertClean();
+  await pctx.close();
+}
+
+// The real build's jetstream.json, when present: every layer gets a checkbox, each card matches its overflies lists.
+async function realJetStreamChecks(browser, base) {
+  const file = path.join(REPO, 'data', 'build', 'jetstream.json');
+  if (!fs.existsSync(file)) { log('\nReal jet stream: skipped (no data/build/jetstream.json)'); return; }
+  log('\nReal jet stream');
+  const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await ctx.newPage();
+  const w = watch(page, 'real jet stream');
+  const quiet = trackInflight(page);
+  await page.goto(`${base}/map/?jet=${data.layers[0].id}`);
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 20000 });
+  const ids = await page.evaluate(() => [...document.querySelectorAll('#jet-box input[data-jet]')].map((i) => i.dataset.jet));
+  check(JSON.stringify(ids) === JSON.stringify(data.layers.map((l) => l.id)), `a checkbox per layer of the real file, in its order (${ids})`);
+  const index = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'map-index.json'), 'utf8'));
+  const known = new Set((index.resorts || []).map((r) => r[index.fields.indexOf('id')]));
+  for (const l of data.layers) {
+    await page.evaluate((id) => { const j = window.__careerMap.jet; for (const x of j.visible) j.set(x, false); j.set(id, true); }, l.id);
+    const got = await page.evaluate(() => ({
+      states: [...document.querySelectorAll('#jet-card .jet-state-label')].map((e) => e.textContent),
+      resorts: document.querySelectorAll('#jet-card .jet-resorts a').length,
+      sum: document.querySelector('#jet-card .jet-sum').textContent,
+    }));
+    const want = l.overflies.resorts.filter((r) => known.has(r.id)).length;
+    // A resort whose state the file leaves out of its states list shows under its own state, after the others.
+    const listed = new Set(l.overflies.states.map((s) => s.code));
+    const extra = [...new Set(l.overflies.resorts.filter((r) => known.has(r.id) && !listed.has(r.state)).map((r) => r.state))];
+    if (extra.length) log(`    note ${l.id}: resorts in ${extra.join(', ')}, a state missing from its states list`);
+    const names = new Map(Object.entries(JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'states.json'), 'utf8')).states.reduce((o, s) => ({ ...o, [s.code]: s.name }), {})));
+    const wantStates = [...l.overflies.states.map((s) => s.name), ...extra.map((c) => names.get(c) || c)];
+    check(JSON.stringify(got.states) === JSON.stringify(wantStates) && got.resorts === want,
+      `${l.label}: the card lists ${got.states.length} states and ${got.resorts} resorts, west to east (${got.sum})`);
+  }
+  await page.evaluate(() => { const j = window.__careerMap.jet; for (const x of j.visible) j.set(x, false); j.set('la_nina', true); });
+  await mapIdle(page);
+  await shot(page, 'jet-real-01-la-nina.png');
+  await axeCheck(page, 'real jet stream card');
+  await quiet();
+  w.assertClean();
+  await ctx.close();
+}
+
 // MAP_TEST_ONLY=eventsChecks,passChecks runs only the named suites (all of them by default).
 const ONLY = (process.env.MAP_TEST_ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
 const runs = (name) => !ONLY.length || ONLY.includes(name);
@@ -3686,8 +4109,10 @@ try {
   if (runs('consoleChecks')) await consoleChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('passChecks')) await passChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('eventsChecks')) await eventsChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('jetStreamChecks')) await jetStreamChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('realData')) await realData(browser, REPO_BASE);
   if (runs('realEventsChecks')) await realEventsChecks(browser, REPO_BASE);
+  if (runs('realJetStreamChecks')) await realJetStreamChecks(browser, REPO_BASE);
   await browser.close();
 } catch (err) {
   failures.push(`crashed: ${err.stack || err}`);

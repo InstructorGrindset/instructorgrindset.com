@@ -13,8 +13,8 @@
 // 2. The homepage makes zero requests to /map/ or /data/build/.
 // 3. axe-core on the national map, a resort page, the list view, the phone layout, two heat map modes, the open
 //    search results (resorts and events), EVENTS mode (national, an open event panel, the calendar list, phone) and
-//    the Sources and credits page. The /map/ budget runs also check that EVENTS mode and the events search index
-//    load nothing before they are used.
+//    the Sources and credits page, and the jet stream card (desktop, before the map starts, phone). The budget runs
+//    also check that EVENTS mode, the events search index and the jet stream load nothing before they are used.
 // 4. Lighthouse (mobile defaults) on /map/, two resort pages and /map/credits/.
 //
 // Files are served by a small static server with gzip, like GitHub Pages; python's
@@ -114,8 +114,8 @@ async function throttled(browser, url, label, { phone = false } = {}) {
   const panelMs = m.panelFull ?? m.panel;
   const frameMs = m.preview;
   const interactive = Math.max(panelMs, frameMs);
-  const lazy = urls.filter((u) => /\/events(-search)?\.json|\/map\/js\/(events(map)?|search)\.js|\/map\/css\/events\.css/.test(u));
-  check(lazy.length === 0, `${label}: EVENTS mode and search load nothing before they are used (${lazy.length} requests)`);
+  const lazy = urls.filter((u) => /\/(events(-search)?|jetstream)\.json|\/map\/js\/(events(map)?|search|jetstream)\.js|\/map\/css\/(events|jetstream)\.css/.test(u));
+  check(lazy.length === 0, `${label}: EVENTS mode, search and the jet stream load nothing before they are used (${lazy.length} requests)`);
   const r = { label, url, panel_ms: panelMs, first_map_frame_ms: frameMs, interactive_ms: interactive,
     webgl_click_to_load_ms: m.load - m.click, fcp_ms: m.fcp, transferred_kb: Math.round(bytes / 1024) };
   results.budget.push(r);
@@ -148,9 +148,20 @@ function eventsVenue() {
   return '/map/events/?data=/tests/map/fixtures/&venue=fixture-lake-trail';
 }
 
+/** A jet stream link with two paths on (the second one active): the real build's, else the synthetic fixture's. */
+function jetLink() {
+  try {
+    const jet = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'jetstream.json'), 'utf8'));
+    const ids = (jet.layers || []).map((l) => l.id);
+    if (ids.length >= 2) return `/map/?jet=${ids[0]},${ids.includes('la_nina') ? 'la_nina' : ids[ids.length - 1]}`;
+  } catch { /* no build */ }
+  return '/map/?data=/tests/map/fixtures/&jet=el_nino,la_nina';
+}
+
 async function axe(browser, base) {
   const axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [HERE] }), 'utf8');
   const venue = eventsVenue();
+  const jet = jetLink();
   const cases = [
     { label: 'national map, before the map starts', url: '/map/', waiting: true },
     { label: 'national map', url: '/map/' },
@@ -176,6 +187,9 @@ async function axe(browser, base) {
     { label: 'EVENTS mode, calendar list view', url: '/map/events/', events: true, list: true },
     { label: 'EVENTS mode, open event panel, phone', url: venue, events: true, phone: true },
     { label: 'EVENTS mode, layers sheet open, phone', url: '/map/events/', events: true, phone: true, layers: true },
+    { label: `jet stream card open, two paths (${jet})`, url: jet, jet: true },
+    { label: 'jet stream card open, before the map starts', url: jet, jet: true, waiting: true },
+    { label: 'jet stream card open in the layers sheet, phone', url: jet, jet: true, phone: true, layers: true },
     { label: 'sources and credits page', url: '/map/credits/', static: true },
     { label: 'sources and credits page, phone', url: '/map/credits/', static: true, phone: true },
   ];
@@ -194,6 +208,11 @@ async function axe(browser, base) {
     if (c.events) {
       await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded, null, { timeout: 30000 });
       await page.waitForTimeout(800);
+    }
+    if (c.jet) {
+      await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded
+        && document.getElementById('jet-card') && !document.getElementById('jet-card').hidden, null, { timeout: 30000 });
+      await page.waitForTimeout(500);
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
     if (c.layers) { await page.locator('#layers-toggle').click(); await page.waitForTimeout(300); }
