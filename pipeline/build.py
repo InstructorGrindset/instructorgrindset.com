@@ -44,6 +44,7 @@ from pipeline import jobs as jobs_mod  # noqa: E402
 from pipeline.webcams import as_output as webcams_output, load_webcams  # noqa: E402
 from pipeline import passes as passes_mod  # noqa: E402
 from pipeline import events as events_mod  # noqa: E402
+from pipeline import jetstream as jet_mod  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing  # noqa: E402
 from pipeline import housing_search as housing_search_mod  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
@@ -376,6 +377,14 @@ def build(
         errors += events_errors
         warnings += events_warnings
     resort_events = events_mod.resort_events(events_data, events_cfg) if events_cfg is not None else {}
+    # Jet stream layer (docs/map/JETSTREAM.md): ERA5 season winds and the NOAA CPC RONI join the registry.
+    jet_cfg = cfg.definitions.jetstream
+    jet_inputs = jet_mod.load_inputs(raw_dir) if jet_cfg is not None else None
+    if jet_cfg is not None and jet_inputs is None:
+        warnings.append("jet stream inputs missing (data/raw/climate/era5_jet, data/raw/climate/enso); jetstream.json not rebuilt")
+    if jet_inputs is not None:
+        _add_source(registry, jet_inputs.era5_source["source"], rel(raw_dir / jet_mod.ERA5_DIR / "source.json"), errors)
+        _add_source(registry, jet_inputs.enso_source["source"], rel(raw_dir / jet_mod.ENSO_DIR / "source.json"), errors)
 
     if errors:
         raise BuildError(errors)
@@ -526,6 +535,16 @@ def build(
     _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings, snotel_snow, dems)
     if events_cfg is not None:
         events_mod.write(out_dir, events_mod.compile_events(events_data, places, events_cfg, header), _write_json)
+    if jet_inputs is not None:
+        shapes_path = out_dir / "us-states.geojson"
+        if not shapes_path.is_file():
+            shapes_path = repo_root / "data" / "build" / "us-states.geojson"
+        shapes = json.loads(shapes_path.read_text(encoding="utf-8"))
+        jet_states = {f["properties"]["code"]: {"name": f["properties"]["name"], "geometry": f["geometry"]}
+                      for f in shapes.get("features", [])}
+        jet_resorts = [{"id": d["id"], "state": d["state"], "lat": d["lat"], "lon": d["lon"]} for d in resort_dicts
+                       if not _placeholder_location(d.get("location_source_id") or "", registry)]
+        jet_mod.write(out_dir, jet_mod.compile_jetstream(jet_inputs, jet_cfg, jet_states, jet_resorts, header), _write_json)
 
 
     result = BuildResult(out_dir, resorts, clusters, states, len(registry), warnings, inputs)

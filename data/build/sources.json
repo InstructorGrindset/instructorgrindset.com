@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T15:45:00Z",
+  "generated_at": "2026-11-01T01:18:55Z",
   "sources": [
     {
       "id": "access-coolworks-snowshoe",
@@ -3480,6 +3480,13 @@
       "title": "Yellowstone Club (Wikipedia)",
       "accessed_date": "2026-10-12",
       "note": null
+    },
+    {
+      "id": "era5-arco-250hpa-winds",
+      "url": "https://cloud.google.com/storage/docs/public-datasets/era5",
+      "title": "ERA5 hourly data on pressure levels (ECMWF, Copernicus Climate Change Service), ARCO ERA5 raw files on Google Cloud",
+      "accessed_date": "2026-11-01",
+      "note": "u_component_of_wind and v_component_of_wind at 250 hPa, read with HTTP range requests from https://storage.googleapis.com/gcp-public-data-arco-era5/raw/date-variable-pressure_level/YYYY/MM/DD/<variable>/250.nc. Hersbach et al. (2020), ERA5, doi:10.24381/cds.bd0915c6. Contains modified Copernicus Climate Change Service information."
     },
     {
       "id": "events-alpine-adminskiracing-masters-national-search",
@@ -19475,6 +19482,13 @@
       "title": "Natural Earth I with Shaded Relief, Water and Drainages (1:10m, large size, version 2.0.0)",
       "accessed_date": "2026-10-14",
       "note": "Public domain (Natural Earth terms of use, https://www.naturalearthdata.com/about/terms-of-use/; \"Natural Earth is a public domain map dataset\", https://github.com/nvkelso/natural-earth-vector). Downloaded from the AWS mirror https://naturalearth.s3.amazonaws.com/10m_raster/NE1_HR_LC_SR_W.zip (21,600 x 10,800 pixels, 1 arc minute). Cropped to the lower 48 and Alaska, resampled to Web Mercator rows and muted for the map underlay."
+    },
+    {
+      "id": "noaa-cpc-roni",
+      "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+      "title": "NOAA Climate Prediction Center, Relative Oceanic Niño Index (RONI), historical El Niño and La Niña episodes",
+      "accessed_date": "2026-11-01",
+      "note": "RONI.ascii.txt (official ENSO index since February 2026, NWS Public Information Statement 26-05) and the legacy oni.ascii.txt. The most recent values are preliminary. Public domain (US government work)."
     },
     {
       "id": "noaa-ncei-normals-1991-2020",

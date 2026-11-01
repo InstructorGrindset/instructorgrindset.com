@@ -672,6 +672,76 @@ class EventsDefs(StrictModel):
         return [x.id for x in getattr(self, name)]
 
 
+
+class JetstreamEnso(StrictModel):
+    index: Literal["RONI"] = "RONI"
+    threshold: float = Field(gt=0)
+    episode_min_seasons: int = Field(ge=1)
+    season_value: Literal["DJF", "JFM", "FMA", "MAM", "NDJ", "OND"] = "DJF"
+    strength: "JetstreamStrength"
+
+
+class JetstreamStrength(StrictModel):
+    weak: float = Field(gt=0)
+    moderate: float = Field(gt=0)
+    strong: float = Field(gt=0)
+
+    @model_validator(mode="after")
+    def _ordered(self) -> "JetstreamStrength":
+        if not self.weak < self.moderate < self.strong:
+            raise ValueError("jetstream.enso.strength: weak < moderate < strong")
+        return self
+
+
+class JetstreamAxis(StrictModel):
+    lat_min: float
+    lat_max: float
+    min_speed_ms: float = Field(ge=0)
+    min_prominence_ms: float = Field(ge=0)
+    max_step_deg: float = Field(gt=0)
+    min_length_deg: float = Field(ge=0)
+    smooth_deg: float = Field(ge=0)
+
+
+class JetstreamBand(StrictModel):
+    fraction: float = Field(gt=0, lt=1)
+    max_half_width_deg: float = Field(gt=0)
+
+
+class JetstreamOverflies(StrictModel):
+    sample_deg: float = Field(gt=0, le=2)
+
+
+class JetstreamSplit(StrictModel):
+    min_seasons: int = Field(ge=1)
+    min_mean_shift_deg: float = Field(gt=0)
+    lon_west: float
+    lon_east: float
+
+
+class JetstreamDefs(StrictModel):
+    """Jet stream layer (docs/map/JETSTREAM.md, pipeline/jetstream.py)."""
+
+    season_label: str
+    baseline_seasons: int = Field(ge=1)
+    first_season: str = Field(pattern=r"^\d{4}/\d{2}$")
+    enso: JetstreamEnso
+    axis: JetstreamAxis
+    band: JetstreamBand
+    overflies: JetstreamOverflies
+    split: JetstreamSplit
+    colors: dict[str, str]
+    method: str
+
+    @field_validator("colors")
+    @classmethod
+    def _colors(cls, v: dict[str, str]) -> dict[str, str]:
+        for k, c in v.items():
+            if not re.fullmatch(r"#[0-9a-fA-F]{6}", c):
+                raise ValueError(f"jetstream.colors.{k}: give a #rrggbb color")
+        return v
+
+
 class Definitions(StrictModel):
     version: int
     snow: SnowDefs
@@ -699,6 +769,7 @@ class Definitions(StrictModel):
     passes: PassesDefs = Field(default_factory=PassesDefs)
     housing_search: HousingSearchDefs = Field(default_factory=HousingSearchDefs)
     events: Optional[EventsDefs] = None   # Events and competitions (ROADMAP item 22)
+    jetstream: Optional[JetstreamDefs] = None   # Jet stream layer (docs/map/JETSTREAM.md)
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 

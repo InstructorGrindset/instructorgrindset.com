@@ -6,7 +6,7 @@ no account) keeps the original ERA5 netCDF files, one per day, variable and pres
 
     https://storage.googleapis.com/gcp-public-data-arco-era5/raw/date-variable-pressure_level/YYYY/MM/DD/<variable>/250.nc
 
-Each file is netCDF 3 (64 bit offset): 24 hourly fields of 721 x 1440 packed int16 values on the 0.25 degree grid,
+Each file through February 2026 is netCDF 3 (64 bit offset): 24 hourly fields of 721 x 1440 packed int16 values on the 0.25 degree grid,
 latitude 90 to -90, longitude 0 to 359.75. The fetcher reads the header (scale and offset differ per file) and then
 only the rows between ``LAT_MAX`` and ``LAT_MIN`` for one hour, with HTTP range requests, so a season costs about
 250 MB instead of 18 GB.
@@ -21,7 +21,8 @@ Commands::
     python -m pipeline.climate.era5_jet fetch [--first 1979] [--last 2025] [--workers 16]
     python -m pipeline.climate.era5_jet summary
 
-``fetch`` needs numpy (``pip install numpy``); the build does not. Per season partial results go to
+``fetch`` needs numpy and, for the netCDF 4 files ERA5 writes from about March 2026 on, h5py
+(``pip install numpy h5py``); the build needs neither. Per season partial results go to
 ``data/raw/climate/era5_jet/download/`` (gitignored) so an interrupted fetch resumes. The committed extract is
 ``data/raw/climate/era5_jet/season_means_250hpa.json`` plus its source record ``source.json``.
 """
@@ -31,9 +32,11 @@ from __future__ import annotations
 import argparse
 import concurrent.futures as cf
 import datetime as dt
+import io
 import json
 import struct
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -200,6 +203,8 @@ def _read_day(day: dt.date, var: str, rows: tuple[int, int]) -> tuple[Any, dict[
 
     url = f"{BASE}/{day:%Y/%m/%d}/{VARIABLES[var]}/{LEVEL_HPA}.nc"
     head = _get(url, 0, HEADER_BYTES - 1)
+    if head[:4] == b"\x89HDF":  # files from about March 2026 on are netCDF 4
+        return _read_day_hdf5(url, day, var, rows)
     header = parse_header(head)
     name = var
     if name not in header["vars"]:
@@ -224,6 +229,69 @@ def _read_day(day: dt.date, var: str, rows: tuple[int, int]) -> tuple[Any, dict[
             vals[raw == int(atts[key])] = np.nan
     meta = {"nlat": nlat, "nlon": nlon, "nt": header["numrecs"] if v["dims"][0][1] == 0 else nt, "hour": hour}
     return vals, meta
+
+
+class _HttpFile(io.RawIOBase):
+    """A read only file over HTTP range requests, in cached blocks, for h5py."""
+
+    def __init__(self, url: str, block: int = 1 << 20):
+        self.url, self.block, self.pos, self.cache = url, block, 0, {}
+        req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            self.size = int(resp.headers["Content-Length"])
+
+    def readable(self) -> bool:
+        return True
+
+    def seekable(self) -> bool:
+        return True
+
+    def tell(self) -> int:
+        return self.pos
+
+    def seek(self, offset: int, whence: int = 0) -> int:
+        self.pos = offset if whence == 0 else self.pos + offset if whence == 1 else self.size + offset
+        return self.pos
+
+    def readinto(self, buf: Any) -> int:
+        want, out = len(buf), bytearray()
+        while len(out) < want and self.pos < self.size:
+            i = self.pos // self.block
+            if i not in self.cache:
+                start = i * self.block
+                self.cache[i] = _get(self.url, start, min(self.size, start + self.block) - 1)
+            o = self.pos - i * self.block
+            piece = self.cache[i][o : o + want - len(out)]
+            out += piece
+            self.pos += len(piece)
+        buf[: len(out)] = out
+        return len(out)
+
+
+_H5_LOCK = threading.Lock()
+
+
+def _read_day_hdf5(url: str, day: dt.date, var: str, rows: tuple[int, int]) -> tuple[Any, dict[str, Any]]:
+    """netCDF 4 day file: (valid_time 24, pressure_level 1, latitude 721, longitude 1440) float32, gzip chunks of
+    12 x 1 x 361 x 720. Reads only the longitudes of the output box (one chunk); the rest stays NaN."""
+    import h5py
+    import numpy as np
+
+    hour = sample_hour(day)
+    lon_lo = int(((LON_MIN - 0.5) % 360) / 0.25)
+    lon_hi = int(((LON_MAX + 0.5) % 360) / 0.25)
+    with _H5_LOCK:  # h5py reads through Python callbacks; one file at a time
+        fh = _HttpFile(url)
+        with h5py.File(fh, "r") as h:
+            stamp = dt.datetime(1970, 1, 1) + dt.timedelta(seconds=int(h["valid_time"][hour]))
+            if (stamp.date(), stamp.hour) != (day, hour):
+                raise ValueError(f"{url}: time index {hour} is {stamp}, expected {day} {hour:02d}:00")
+            ds = h[var]
+            nlat, nlon = ds.shape[2], ds.shape[3]
+            part = ds[hour, 0, rows[0] : rows[1] + 1, lon_lo : lon_hi + 1].astype(np.float64)
+    vals = np.full((rows[1] - rows[0] + 1, nlon), np.nan)
+    vals[:, lon_lo : lon_hi + 1] = part
+    return vals, {"nlat": nlat, "nlon": nlon, "nt": 24, "hour": hour}
 
 
 def _box_average(field: Any, lat_axis: Any, lon_axis: Any) -> Any:

@@ -706,3 +706,66 @@ events:
     closing day: [3, 4]
     holidays: [12, 1]
     "new year's eve": [12]
+jetstream:
+  # Jet stream layer (docs/map/JETSTREAM.md; pipeline/jetstream.py, pipeline/config.py JetstreamDefs). Average 250 hPa
+  # jet paths over the ski season from ERA5 (data/raw/climate/era5_jet) for the last seasons and for El Niño, La Niña
+  # and neutral seasons from NOAA CPC's RONI (data/raw/climate/enso). Display paths only: no resort number uses them.
+  season_label: November to April
+  # The baseline layer averages this many most recent seasons of the extract; the ENSO layers use every season from
+  # first_season on (owner choice 2026-11-01).
+  baseline_seasons: 10
+  first_season: 1979/80
+  enso:
+    # NOAA's ENSO definitions applied to the RONI: an episode is at least episode_min_seasons consecutive three
+    # month values at or beyond +-threshold; a season takes the phase of the episode holding its season_value row.
+    # Strength is the episode's peak absolute value: the largest class whose floor it reaches (NOAA's very strong,
+    # 2.0 and above, counts as strong).
+    index: RONI
+    threshold: 0.5
+    episode_min_seasons: 5
+    season_value: DJF
+    strength: {weak: 0.5, moderate: 1.0, strong: 1.5}
+  axis:
+    # Jet axis per longitude: local maxima of the mean wind speed between lat_min and lat_max with at least
+    # min_speed_ms and a topographic prominence of min_prominence_ms. Peaks link across neighboring longitudes when
+    # they move less than max_step_deg; chains shorter than min_length_deg drop; a running mean over smooth_deg of
+    # longitude smooths each chain.
+    lat_min: 20
+    lat_max: 70
+    min_speed_ms: 18
+    min_prominence_ms: 1.5
+    max_step_deg: 3
+    min_length_deg: 10
+    smooth_deg: 5
+  band:
+    # The band runs north and south of the axis to where the speed falls to fraction of the axis speed, at most
+    # max_half_width_deg away.
+    fraction: 0.9
+    max_half_width_deg: 4
+  overflies:
+    # States: any point of this grid under a band. Resorts: the resort point under a band.
+    sample_deg: 0.5
+  split:
+    # A phase gets one toggle per strength class only when two classes with at least min_seasons seasons each have
+    # main axes at least min_mean_shift_deg of latitude apart on average over lon_west..lon_east (the lower 48);
+    # otherwise it is one toggle (owner rule 2026-11-01).
+    min_seasons: 3
+    min_mean_shift_deg: 2.0
+    lon_west: -125
+    lon_east: -67
+  colors:
+    # Line and band colors on the dark map; strength layers fall back to their phase color.
+    last10: "#e8e8e8"
+    el_nino: "#ff8a3d"
+    el_nino_weak: "#ffc08a"
+    el_nino_moderate: "#ff8a3d"
+    el_nino_strong: "#e8502a"
+    la_nina: "#4fb3ff"
+    la_nina_weak: "#9fd6ff"
+    la_nina_moderate: "#4fb3ff"
+    la_nina_strong: "#2f7fe0"
+    neutral: "#b5e86b"
+  method: >-
+    Average 250 hPa wind of each group of ski seasons (November to April) from ERA5, sampled once a day. The line is
+    where the average wind is fastest; the band is where it stays within 10 percent of that. El Niño and La Niña
+    winters follow NOAA's Relative Oceanic Niño Index since 1979/80.
