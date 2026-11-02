@@ -27,8 +27,9 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
 1. **Classify each season** from the RONI. An episode is a run of at least `enso.episode_min_seasons` consecutive
    overlapping three month values at or above `+enso.threshold` (El Niño) or at or below `-enso.threshold` (La Niña).
    A season takes the phase of the episode that holds its `enso.season_value` (DJF) value; otherwise it is neutral.
-   Strength is the episode's peak absolute value against `enso.strength` (weak, moderate, strong; NOAA's very
-   strong counts as strong).
+   Strength is the largest class of `enso.strength` (weak, moderate, strong; NOAA's very strong counts as strong)
+   whose floor the episode holds for at least `enso.strength_min_seasons` (3) consecutive values, the usual
+   convention for ENSO strength.
 2. **Average** the season mean u and v over the seasons of each layer (vector mean), and take the wind speed of
    that mean wind.
 3. **Find the jet axis** per longitude: local maxima of speed between `axis.lat_min` and `axis.lat_max` with at
@@ -39,12 +40,15 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
    `north_2` and so on) by their mean latitude against the main jet where they overlap. Each chain is smoothed with
    a running mean over `axis.smooth_deg` of longitude.
 4. **Band**: north and south of the axis, the latitude where speed falls to `band.fraction` of the axis speed,
-   capped at `band.max_half_width_deg`.
+   capped at `band.max_half_width_deg`. Within `band.taper_deg` of a branch end the band narrows linearly to
+   `band.taper_min_fraction` of its width, so a branch fades out instead of stopping square.
 5. **Overflies**: a state is listed when a band covers any of its area, sampled on a `overflies.sample_deg` grid; a
    resort is listed when its point lies inside a band. Lists run west to east.
-6. **Strength split**: a phase splits into strength toggles only when two strength classes with at least
-   `split.min_seasons` seasons each have main axes that differ by at least `split.min_mean_shift_deg` of latitude on
-   average over `split.lon_west` to `split.lon_east` (the lower 48). Otherwise the phase is one toggle.
+6. **Strength groups**: a class with fewer than `split.min_seasons` seasons joins its weaker neighbor. Then, from
+   weak to strong, each class joins the group before it unless their main axes differ by at least
+   `split.min_mean_shift_deg` of latitude on average over `split.lon_west` to `split.lon_east` (the lower 48). One
+   group is one toggle for the phase; several groups are one toggle each (`el_nino_weak`,
+   `el_nino_moderate_strong`).
 
 ## Build output: `data/build/jetstream.json` (loaded only when a jet stream toggle is first turned on)
 
@@ -94,7 +98,8 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
 ```
 
 * `layers` order is the toggle order: `last10`, then each phase (`el_nino`, `la_nina`, `neutral`), or its strength
-  layers (`el_nino_weak`, `el_nino_moderate`, `el_nino_strong`) when `split` says so.
+  group layers (for example `el_nino_weak`, `el_nino_moderate_strong`, labelled "Moderate and strong El Niño", with
+  `strengths: ["moderate", "strong"]`) when `split.<phase>.groups` holds more than one group.
 * `axis` points are `[lon, lat, speed_ms]`, one per degree of longitude, west to east; `band` points are
   `[lon, lat_south, lat_north]` at the same longitudes. A branch may cover only part of the longitude range.
 * Paths are derived from ERA5 by this method, so they carry `confidence: "estimated"`; the season classes copy the
@@ -154,14 +159,25 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
   every real layer's card against its lists. `tests/map/audit.mjs` runs axe on the card (desktop, before the map
   starts, phone) and checks that the budget runs load nothing of the jet stream.
 
+## Refresh
+
+* **ENSO index:** `.github/workflows/enso-index.yml` commits CPC's RONI and ONI on the 12th of each month. The map
+  changes only when a season is added, so a new RONI file alone needs no rebuild.
+* **A new season:** once ERA5 covers April (final ERA5 data arrive about two to three months later, so July), run
+  `python -m pipeline.climate.era5_jet fetch --last <start year>` (it reuses the cached seasons under `download/`),
+  then `python pipeline/build.py`. The baseline moves to the newest 10 seasons, and the new season joins its RONI
+  phase. 2026/27 can join in July 2027.
+
 ## First build (2026-11-01)
 
-* 47 seasons, 1979/80 to 2025/26. RONI classes: El Niño 13 (weak 3, moderate 5, strong 5), La Niña 19 (weak 5,
-  moderate 9, strong 5), neutral 15. Under the RONI, 2023/24 is a moderate El Niño (peak 1.42).
-* El Niño splits: weak and strong main axes differ by 3.8 degrees on average over the lower 48 (weak and moderate
-  2.0). La Niña stays one toggle (largest difference 0.9 degrees).
+* 47 seasons, 1979/80 to 2025/26. RONI classes (3 consecutive values for a strength): El Niño 13 (weak 4,
+  moderate 5, strong 4), La Niña 19 (weak 10, moderate 4, strong 5), neutral 15. Under the RONI, 2023/24 is a
+  moderate El Niño (peak 1.42).
+* El Niño gives two toggles: weak (4 winters) differs from moderate by 2.7 degrees on average over the lower 48,
+  and moderate and strong differ by 1.0, so they share one toggle (9 winters). La Niña stays one toggle (largest
+  difference 0.8 degrees).
 * In every group the seasonal mean jet over the West has two branches: a southern (subtropical) branch over Baja,
   northern Mexico and the Gulf Coast, and a northern branch off the Pacific. Strong El Niño puts its main jet along
-  the Gulf Coast (8 states, no ski area under the core band); La Niña brings its northern branch ashore over
+  the Gulf Coast (8 states, no ski area under the core band) in moderate and strong El Niño winters; La Niña brings its northern branch ashore over
   Washington, Oregon, Idaho and Montana.
 * The latest RONI values (July to September 2026, 1.69) point to a strong El Niño in 2026/27.

@@ -718,13 +718,15 @@ jetstream:
   enso:
     # NOAA's ENSO definitions applied to the RONI: an episode is at least episode_min_seasons consecutive three
     # month values at or beyond +-threshold; a season takes the phase of the episode holding its season_value row.
-    # Strength is the episode's peak absolute value: the largest class whose floor it reaches (NOAA's very strong,
-    # 2.0 and above, counts as strong).
+    # Strength is the largest class whose floor the episode holds for at least strength_min_seasons consecutive
+    # values, the usual convention for ENSO strength (ggweather.com's RONI table uses 3); NOAA's very strong, 2.0
+    # and above, counts as strong.
     index: RONI
     threshold: 0.5
     episode_min_seasons: 5
     season_value: DJF
     strength: {weak: 0.5, moderate: 1.0, strong: 1.5}
+    strength_min_seasons: 3
   axis:
     # Jet axis per longitude: local maxima of the mean wind speed between lat_min and lat_max with at least
     # min_speed_ms and a topographic prominence of min_prominence_ms. Peaks link across neighboring longitudes when
@@ -739,9 +741,12 @@ jetstream:
     smooth_deg: 5
   band:
     # The band runs north and south of the axis to where the speed falls to fraction of the axis speed, at most
-    # max_half_width_deg away.
+    # max_half_width_deg away. Within taper_deg of longitude of a branch end the band narrows linearly to
+    # taper_min_fraction of its width, so a branch fades out instead of stopping square.
     fraction: 0.9
     max_half_width_deg: 4
+    taper_deg: 4
+    taper_min_fraction: 0.3
   overflies:
     # States: any point of this grid under a band. Resorts: the resort point under a band.
     sample_deg: 0.5

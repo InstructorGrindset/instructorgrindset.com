@@ -48,10 +48,11 @@ def classify_seasons(rows: Sequence[tuple[str, int, float]], seasons: Iterable[s
 
     An episode is a run of at least ``enso.episode_min_seasons`` consecutive three month values at or above
     ``+enso.threshold`` (El Niño) or at or below ``-enso.threshold`` (La Niña). A season takes the phase of the
-    episode holding its ``enso.season_value`` row (DJF of the second year); strength is the episode's peak absolute
-    value against ``enso.strength`` (the largest class whose floor it reaches).
+    episode holding its ``enso.season_value`` row (DJF of the second year). Strength is the largest class of
+    ``enso.strength`` whose floor the episode holds for at least ``enso.strength_min_seasons`` consecutive values
+    (1 means its peak value alone decides). ``peak`` is the episode's largest absolute value either way.
     """
-    phase_at: dict[int, tuple[str, float]] = {}
+    phase_at: dict[int, tuple[str, float, Optional[str]]] = {}
     for sign, phase in ((1, "el_nino"), (-1, "la_nina")):
         run: list[int] = []
         for i, (_, _, value) in enumerate(list(rows) + [("", 0, 0.0)]):
@@ -60,8 +61,9 @@ def classify_seasons(rows: Sequence[tuple[str, int, float]], seasons: Iterable[s
                 continue
             if len(run) >= enso.episode_min_seasons:
                 peak = max((rows[j][2] for j in run), key=abs)
+                strength = episode_strength([sign * rows[j][2] for j in run], enso)
                 for j in run:
-                    phase_at[j] = (phase, peak)
+                    phase_at[j] = (phase, peak, strength)
             run = []
     where = {(code, year): i for i, (code, year, _) in enumerate(rows)}
     out = []
@@ -73,14 +75,21 @@ def classify_seasons(rows: Sequence[tuple[str, int, float]], seasons: Iterable[s
         if i is None:
             out.append({"season": label, "phase": None, "strength": None, "value": None, "peak": None})
             continue
-        phase, peak = phase_at.get(i, ("neutral", None))
-        strength = None
-        if peak is not None:
-            for name in STRENGTHS:
-                if abs(peak) >= getattr(enso.strength, name):
-                    strength = name
+        phase, peak, strength = phase_at.get(i, ("neutral", None, None))
         out.append({"season": label, "phase": phase, "strength": strength, "value": rows[i][2], "peak": peak})
     return out
+
+
+def episode_strength(values: Sequence[float], enso: Any) -> str:
+    """The largest strength class whose floor ``values`` (signed toward the phase, so positive) hold for at least
+    ``enso.strength_min_seasons`` consecutive entries; the weakest class otherwise."""
+    for name in reversed(STRENGTHS):
+        floor, run = getattr(enso.strength, name), 0
+        for v in values:
+            run = run + 1 if v >= floor else 0
+            if run >= enso.strength_min_seasons:
+                return name
+    return STRENGTHS[0]
 
 
 # ----------------------------------------------------------------------------------------------- winds
@@ -249,9 +258,23 @@ def jet_branches(grid: Grid, cfg: Any) -> list[dict]:
             "id": bid,
             "label": BRANCH_LABELS[base],
             "axis": [[lon, round(lat, 2), round(sp, 1)] for lon, lat, sp in chain],
-            "band": [[lon, round(s, 2), round(n, 2)] for lon, s, n in band_edges(grid, chain, cfg.band)],
+            "band": [[lon, round(s, 2), round(n, 2)] for lon, s, n in taper(chain, band_edges(grid, chain, cfg.band), cfg.band)],
         })
     return branches
+
+
+def taper(chain: Sequence[tuple[float, float, float]], edges: Sequence[tuple[float, float, float]], band: Any) -> list[tuple[float, float, float]]:
+    """Narrow the band toward each end of its chain: within band.taper_deg of longitude of an end, the half widths
+    shrink linearly to band.taper_min_fraction at the end point, so a branch fades out instead of stopping square."""
+    if band.taper_deg <= 0 or not chain:
+        return list(edges)
+    first, last = chain[0][0], chain[-1][0]
+    out = []
+    for (lon, lat, _), (_, south, north) in zip(chain, edges):
+        to_end = min(lon - first, last - lon)
+        f = 1.0 if to_end >= band.taper_deg else band.taper_min_fraction + (1 - band.taper_min_fraction) * to_end / band.taper_deg
+        out.append((lon, lat - (lat - south) * f, lat + (north - lat) * f))
+    return out
 
 
 # ----------------------------------------------------------------------------------------------- overflies
@@ -334,6 +357,39 @@ def mean_shift(a: Sequence[dict], b: Sequence[dict], lon_west: float, lon_east: 
     return sum(abs(ma[x] - mb[x]) for x in common) / len(common)
 
 
+def strength_groups(by_strength: dict[str, list[str]], branches_for, split: Any) -> tuple[list[list[str]], list[dict]]:
+    """Group a phase's strength classes (weak, moderate, strong) into toggles.
+
+    A class with fewer than ``split.min_seasons`` seasons first joins its weaker neighbor (or the stronger one when
+    it is the weakest). Then, from weak to strong, each class joins the group before it unless their main axes differ
+    by at least ``split.min_mean_shift_deg`` on average over ``split.lon_west..split.lon_east`` (owner rule: strength
+    classes get their own toggles only when their paths differ enough). ``branches_for(seasons)`` gives the jet
+    branches of a list of seasons. Returns the groups and the compared pairs.
+    """
+    units = [[s] for s in STRENGTHS if by_strength.get(s)]
+    size = lambda u: sum(len(by_strength[s]) for s in u)  # noqa: E731
+    while len(units) > 1:
+        small = next((i for i, u in enumerate(units) if size(u) < split.min_seasons), None)
+        if small is None:
+            break
+        into = small - 1 if small > 0 else 1
+        lo, hi = sorted((small, into))
+        units[lo:hi + 1] = [units[lo] + units[hi]]
+    if not units:
+        return [], []
+    groups, pairs = [units[0]], []
+    for unit in units[1:]:
+        before = [x for s in groups[-1] for x in by_strength[s]]
+        here = [x for s in unit for x in by_strength[s]]
+        d = mean_shift(branches_for(before), branches_for(here), split.lon_west, split.lon_east)
+        pairs.append({"a": "_".join(groups[-1]), "b": "_".join(unit), "shift_deg": None if d is None else round(d, 2)})
+        if d is not None and d >= split.min_mean_shift_deg:
+            groups.append(unit)
+        else:
+            groups[-1] = groups[-1] + unit
+    return groups, pairs
+
+
 # ----------------------------------------------------------------------------------------------- compile
 
 
@@ -385,32 +441,40 @@ def compile_jetstream(inputs: JetInputs, cfg: Any, states: dict[str, dict], reso
 
     layers = [layer("last10", f"Last {cfg.baseline_seasons} winters", "baseline", None, None, labels[-cfg.baseline_seasons:])]
     split_info: dict[str, dict] = {}
+    cache: dict[tuple[str, ...], list[dict]] = {}
+
+    def branches_for(seasons: Sequence[str]) -> list[dict]:
+        key = tuple(sorted(seasons))
+        if key not in cache:
+            cache[key] = jet_branches(composite(by_label, list(key), lats, lons), cfg)
+        return cache[key]
+
     for phase in PHASES:
         members = [c["season"] for c in classes if c["phase"] == phase]
         if not members:
             continue
-        by_strength = {s: [c["season"] for c in classes if c["phase"] == phase and c["strength"] == s] for s in STRENGTHS}
-        eligible = {s: v for s, v in by_strength.items() if len(v) >= cfg.split.min_seasons}
-        shifts = []
-        branch_sets = {s: jet_branches(composite(by_label, v, lats, lons), cfg) for s, v in eligible.items()} if phase != "neutral" else {}
-        names = list(branch_sets)
-        for i in range(len(names)):
-            for k in range(i + 1, len(names)):
-                d = mean_shift(branch_sets[names[i]], branch_sets[names[k]], cfg.split.lon_west, cfg.split.lon_east)
-                if d is not None:
-                    shifts.append((round(d, 2), names[i], names[k]))
-        biggest = max(shifts, default=None)
-        do_split = bool(biggest and biggest[0] >= cfg.split.min_mean_shift_deg)
-        if phase != "neutral":
-            split_info[phase] = {"split": do_split, "shift_deg": biggest[0] if biggest else None,
-                                 "pairs": [{"a": a, "b": b, "shift_deg": d} for d, a, b in shifts]}
-        if do_split:
-            for s in STRENGTHS:
-                if s in branch_sets:
-                    layers.append(layer(f"{phase}_{s}", f"{s.capitalize()} {PHASE_LABELS[phase]}", "enso", phase, s,
-                                        eligible[s], branch_sets[s]))
-        else:
+        if phase == "neutral":
             layers.append(layer(phase, PHASE_LABELS[phase], "enso", phase, None, members))
+            continue
+        by_strength = {s: [c["season"] for c in classes if c["phase"] == phase and c["strength"] == s] for s in STRENGTHS}
+        groups, pairs = strength_groups(by_strength, branches_for, cfg.split)
+        split_info[phase] = {
+            "split": len(groups) > 1,
+            "groups": groups,
+            "shift_deg": max((p["shift_deg"] for p in pairs if p["shift_deg"] is not None), default=None),
+            "pairs": pairs,
+        }
+        if len(groups) == 1:
+            layers.append(layer(phase, PHASE_LABELS[phase], "enso", phase, None, members, branches_for(members)))
+            continue
+        for group in groups:
+            seasons = [x for s in group for x in by_strength[s]]
+            lid = f"{phase}_{'_'.join(group)}"
+            label = f"{' and '.join(group).capitalize()} {PHASE_LABELS[phase]}"
+            lay = layer(lid, label, "enso", phase, "_".join(group), sorted(seasons, key=season_start), branches_for(seasons))
+            lay["color"] = cfg.colors.get(lid) or cfg.colors.get(f"{phase}_{group[-1]}") or cfg.colors.get(phase, "#ffffff")
+            lay["strengths"] = group
+            layers.append(lay)
     return {
         **header,
         "season_label": cfg.season_label,

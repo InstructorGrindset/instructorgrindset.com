@@ -41,7 +41,11 @@ def test_classify_seasons_episodes_and_strength():
         1993: [0.6, 0.6, 0.6, 0.6] + [0.0] * 8,   # 4 warm values: no episode
     })
     out = {c["season"]: c for c in js.classify_seasons(rows, ["1990/91", "1991/92", "1992/93", "1993/94"], CFG.enso)}
-    assert out["1990/91"]["phase"] == "el_nino" and out["1990/91"]["strength"] == "strong"
+    assert out["1990/91"]["phase"] == "el_nino" and out["1990/91"]["strength"] == "strong"   # peak rule (1 value)
+    three = CFG.enso.model_copy(update={"strength_min_seasons": 3})
+    held = {c["season"]: c for c in js.classify_seasons(rows, ["1990/91"], three)}
+    # Only 1.6 and 1.7 reach the strong floor; 1.0 to 1.7 hold the moderate floor for 6 values.
+    assert held["1990/91"]["strength"] == "moderate" and held["1990/91"]["peak"] == 1.7
     assert out["1990/91"]["value"] == 1.7 and out["1990/91"]["peak"] == 1.7
     assert out["1991/92"]["phase"] == "la_nina" and out["1991/92"]["strength"] == "weak"
     assert out["1991/92"]["peak"] == -0.9
@@ -185,3 +189,49 @@ def test_compile_jetstream_layers_and_split():
     assert by_id["el_nino"]["confidence"] == "estimated" and out["seasons"][0]["confidence"] == "published"
     assert out["split"]["el_nino"]["split"] is False   # one strength class only: nothing to compare
     assert by_id["el_nino"]["color"] == "#ff8800"
+
+
+def test_taper_narrows_the_band_at_both_ends():
+    band = CFG.band.model_copy(update={"taper_deg": 4, "taper_min_fraction": 0.25})
+    chain = [(lon, 40.0, 30.0) for lon in range(-130, -109)]
+    edges = [(lon, 37.0, 43.0) for lon in range(-130, -109)]
+    out = js.taper(chain, edges, band)
+    assert out[0] == (-130, 40.0 - 0.75, 40.0 + 0.75)       # a quarter of the 3 degree half width at the end
+    assert out[2][2] == pytest.approx(40 + 3 * (0.25 + 0.75 * 2 / 4))   # halfway into the taper
+    assert out[10] == (-120, 37.0, 43.0)                     # untouched in the middle
+    assert out[-1][1] == pytest.approx(39.25)
+    assert js.taper(chain, edges, CFG.band) == edges         # taper_deg 0 keeps the band
+
+
+def test_episode_strength_needs_consecutive_values():
+    three = CFG.enso.model_copy(update={"strength_min_seasons": 3})
+    assert js.episode_strength([0.6, 1.6, 1.7, 1.5, 0.9], three) == "strong"
+    assert js.episode_strength([0.6, 1.6, 1.4, 1.7, 0.9], three) == "moderate"
+    assert js.episode_strength([0.6, 0.8, 1.2, 0.7, 0.6], three) == "weak"
+
+
+def _axis(lat: float) -> list[dict]:
+    return [{"id": "main", "axis": [[lon, lat, 30] for lon in range(-125, -66)]}]
+
+
+def test_strength_groups_merge_classes_that_look_alike():
+    split = CFG.split.model_copy(update={"min_seasons": 2, "min_mean_shift_deg": 2.0})
+    lat_of = {"w1": 40.0, "w2": 40.0, "m1": 36.5, "m2": 36.5, "s1": 36.0, "s2": 36.0}
+    branches_for = lambda seasons: _axis(sum(lat_of[x] for x in seasons) / len(seasons))  # noqa: E731
+    groups, pairs = js.strength_groups({"weak": ["w1", "w2"], "moderate": ["m1", "m2"], "strong": ["s1", "s2"]},
+                                       branches_for, split)
+    assert groups == [["weak"], ["moderate", "strong"]]   # weak differs by 3.5; moderate and strong by 0.5
+    assert [(p["a"], p["b"], p["shift_deg"]) for p in pairs] == [("weak", "moderate", 3.5), ("moderate", "strong", 0.5)]
+    alike = {"w1": 40.0, "w2": 40.0, "m1": 39.0, "m2": 39.0, "s1": 38.5, "s2": 38.5}
+    groups, _ = js.strength_groups({"weak": ["w1", "w2"], "moderate": ["m1", "m2"], "strong": ["s1", "s2"]},
+                                   lambda seasons: _axis(sum(alike[x] for x in seasons) / len(seasons)), split)
+    assert groups == [["weak", "moderate", "strong"]]   # one toggle for the phase
+
+
+def test_strength_groups_fold_small_classes_into_a_neighbor():
+    split = CFG.split.model_copy(update={"min_seasons": 2, "min_mean_shift_deg": 2.0})
+    lat_of = {"w1": 40.0, "m1": 40.0, "m2": 40.0, "s1": 34.0, "s2": 34.0}
+    groups, _ = js.strength_groups({"weak": ["w1"], "moderate": ["m1", "m2"], "strong": ["s1", "s2"]},
+                                   lambda seasons: _axis(sum(lat_of[x] for x in seasons) / len(seasons)), split)
+    assert groups == [["weak", "moderate"], ["strong"]]   # one weak season joins moderate; every season stays in
+

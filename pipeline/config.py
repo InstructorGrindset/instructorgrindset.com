@@ -679,6 +679,7 @@ class JetstreamEnso(StrictModel):
     episode_min_seasons: int = Field(ge=1)
     season_value: Literal["DJF", "JFM", "FMA", "MAM", "NDJ", "OND"] = "DJF"
     strength: "JetstreamStrength"
+    strength_min_seasons: int = Field(default=1, ge=1)
 
 
 class JetstreamStrength(StrictModel):
@@ -706,6 +707,8 @@ class JetstreamAxis(StrictModel):
 class JetstreamBand(StrictModel):
     fraction: float = Field(gt=0, lt=1)
     max_half_width_deg: float = Field(gt=0)
+    taper_deg: float = Field(default=0, ge=0)
+    taper_min_fraction: float = Field(default=0.3, ge=0, le=1)
 
 
 class JetstreamOverflies(StrictModel):
