@@ -383,6 +383,7 @@ def build(
     if jet_cfg is not None and jet_inputs is None:
         warnings.append("jet stream inputs missing (data/raw/climate/era5_jet, data/raw/climate/enso); jetstream.json not rebuilt")
     if jet_inputs is not None:
+        warnings += jet_mod.check_extract(jet_inputs.extract, jet_cfg)
         _add_source(registry, jet_inputs.era5_source["source"], rel(raw_dir / jet_mod.ERA5_DIR / "source.json"), errors)
         _add_source(registry, jet_inputs.enso_source["source"], rel(raw_dir / jet_mod.ENSO_DIR / "source.json"), errors)
 
@@ -544,7 +545,9 @@ def build(
                       for f in shapes.get("features", [])}
         jet_resorts = [{"id": d["id"], "state": d["state"], "lat": d["lat"], "lon": d["lon"]} for d in resort_dicts
                        if not _placeholder_location(d.get("location_source_id") or "", registry)]
-        jet_mod.write(out_dir, jet_mod.compile_jetstream(jet_inputs, jet_cfg, jet_states, jet_resorts, header), _write_json)
+        jet_data = jet_mod.compile_jetstream(jet_inputs, jet_cfg, jet_states, jet_resorts, header)
+        warnings += jet_mod.band_warnings(jet_data, jet_cfg)
+        jet_mod.write(out_dir, jet_data, _write_json)
 
 
     result = BuildResult(out_dir, resorts, clusters, states, len(registry), warnings, inputs)

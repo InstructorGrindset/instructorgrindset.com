@@ -235,3 +235,66 @@ def test_strength_groups_fold_small_classes_into_a_neighbor():
                                    lambda seasons: _axis(sum(lat_of[x] for x in seasons) / len(seasons)), split)
     assert groups == [["weak", "moderate"], ["strong"]]   # one weak season joins moderate; every season stays in
 
+
+
+def test_a_run_still_open_at_the_end_of_the_record_is_pending():
+    rows = rows_from({1990: [0.0] * 9 + [0.7, 0.8, 0.9], 1991: [1.1, 1.2]})   # SON 1990 to JFM 1991: 5 values?
+    rows = rows[:-1]   # ... the record stops at DJF 1991: 4 values, still short of an episode
+    out = js.classify_seasons(rows, ["1990/91"], CFG.enso)[0]
+    assert out["phase"] is None and out["value"] == 1.1
+
+
+def test_each_winter_of_a_long_episode_gets_its_own_strength():
+    three = CFG.enso.model_copy(update={"strength_min_seasons": 3})
+    rows = rows_from({
+        1998: [0.0] * 6 + [-0.8, -1.0, -1.2, -1.5, -1.6, -1.7],   # JJA 1998 on: strong in 1998/99
+        1999: [-1.6, -1.2, -0.9, -0.8, -0.8, -0.9, -1.0, -1.1, -1.2, -1.3, -1.5, -1.6],
+        2000: [-1.4, -1.0, -0.7, -0.5] + [0.0] * 8,
+    })
+    out = {c["season"]: c for c in js.classify_seasons(rows, ["1998/99", "1999/00"], three)}
+    assert out["1998/99"]["phase"] == "la_nina" and out["1998/99"]["strength"] == "strong"
+    assert out["1999/00"]["phase"] == "la_nina" and out["1999/00"]["strength"] == "moderate"   # 1.5 held for 2 values only
+    assert out["1999/00"]["peak"] == -1.6
+
+
+def test_link_chains_keep_crossing_jets_apart():
+    lons = list(range(-130, -109))
+    rising = [(30 + 1.0 * k, 40.0) for k in range(len(lons))]
+    falling = [(50 - 1.0 * k, 30.0) for k in range(len(lons))]
+    chains = js.link_chains([[a, b] for a, b in zip(rising, falling)], lons, CFG.axis)
+    speeds = sorted({round(p[2]) for p in c} == {40} or {round(p[2]) for p in c} == {30} for c in chains)
+    assert len(chains) == 2 and all(speeds)
+
+
+def test_taper_leaves_ends_at_the_grid_edge_full_width():
+    band = CFG.band.model_copy(update={"taper_deg": 4, "taper_min_fraction": 0.25})
+    chain = [(lon, 40.0, 30.0) for lon in range(-170, -150)]
+    edges = [(lon, 37.0, 43.0) for lon in range(-170, -150)]
+    out = js.taper(chain, edges, band, (-170, -50))
+    assert out[0] == (-170, 37.0, 43.0)          # the data stop here: no taper
+    assert out[-1][1] == pytest.approx(39.25)    # the jet fades here
+
+
+def test_strength_groups_compare_with_every_member():
+    split = CFG.split.model_copy(update={"min_seasons": 1, "min_mean_shift_deg": 2.0})
+    lat_of = {"w": 40.0, "m": 38.2, "s": 36.4}   # 1.8 apart step by step, 3.6 end to end
+    groups, _ = js.strength_groups({"weak": ["w"], "moderate": ["m"], "strong": ["s"]},
+                                   lambda seasons: _axis(sum(lat_of[x] for x in seasons) / len(seasons)), split)
+    assert groups == [["weak", "moderate"], ["strong"]]
+
+
+def test_check_extract_warns_on_short_or_gappy_extracts():
+    full = {"seasons": [{"season": js.season_label(y)} for y in (1990, 1991, 1992)]}
+    assert js.check_extract(full, CFG) == []
+    short = {"seasons": [{"season": "1991/92"}]}
+    assert any("fewer than baseline_seasons" in w for w in js.check_extract(short, CFG))
+    gap = {"seasons": [{"season": js.season_label(y)} for y in (1990, 1992)]}
+    assert js.check_extract(gap, CFG) == ["jet stream: the ERA5 extract misses seasons 1991/92"]
+
+
+def test_band_warnings_flag_a_band_drawn_by_the_cap():
+    capped = {"layers": [{"id": "x", "branches": [{"axis": [[-100, 40.0, 30]] * 4, "band": [[-100, 34.0, 46.0]] * 4}]}]}
+    assert js.band_warnings(capped, CFG) == ["jet stream: the x band sits at max_half_width_deg (6.0) for most points"]
+    free = {"layers": [{"id": "x", "branches": [{"axis": [[-100, 40.0, 30]] * 4, "band": [[-100, 37.0, 43.5]] * 4}]}]}
+    assert js.band_warnings(free, CFG) == []
+

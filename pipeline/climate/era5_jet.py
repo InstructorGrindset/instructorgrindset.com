@@ -227,6 +227,8 @@ def _read_day(day: dt.date, var: str, rows: tuple[int, int]) -> tuple[Any, dict[
     for key in ("_FillValue", "missing_value"):
         if key in atts:
             vals[raw == int(atts[key])] = np.nan
+    if v["type"] != 3 or [d for d, _ in v["dims"]] != ["time", "latitude", "longitude"]:
+        raise ValueError(f"{url}: expected packed int16 (time, latitude, longitude), got type {v['type']} {v['dims']}")
     meta = {"nlat": nlat, "nlon": nlon, "nt": header["numrecs"] if v["dims"][0][1] == 0 else nt, "hour": hour}
     return vals, meta
 
@@ -288,6 +290,11 @@ def _read_day_hdf5(url: str, day: dt.date, var: str, rows: tuple[int, int]) -> t
                 raise ValueError(f"{url}: time index {hour} is {stamp}, expected {day} {hour:02d}:00")
             ds = h[var]
             nlat, nlon = ds.shape[2], ds.shape[3]
+            lat = h["latitude"]
+            if (nlat, nlon) != (721, 1440) or float(lat[0]) != 90.0 or float(lat[1]) != 89.75 or float(h["longitude"][0]) != 0.0:
+                raise ValueError(f"{url}: unexpected grid {ds.shape}")
+            if "scale_factor" in ds.attrs or "add_offset" in ds.attrs or ds.dtype.kind != "f":
+                raise ValueError(f"{url}: expected plain float values, got {ds.dtype} {dict(ds.attrs)}")
             part = ds[hour, 0, rows[0] : rows[1] + 1, lon_lo : lon_hi + 1].astype(np.float64)
     vals = np.full((rows[1] - rows[0] + 1, nlon), np.nan)
     vals[:, lon_lo : lon_hi + 1] = part
@@ -359,11 +366,16 @@ def fetch_season(start_year: int, workers: int) -> dict[str, Any]:
 
 
 def fetch(first: int, last: int, workers: int) -> None:
-    seasons = []
+    """Fetch seasons first..last and merge them into the committed extract (seasons outside the range stay)."""
+    kept: dict[str, dict] = {}
+    if EXTRACT.exists():
+        kept = {s["season"]: s for s in json.loads(EXTRACT.read_text())["seasons"]}
     for year in range(first, last + 1):
         t0 = time.time()
-        seasons.append(fetch_season(year, workers))
-        print(f"{year}/{str(year + 1)[2:]}: {seasons[-1]['days']} days, {time.time() - t0:.0f} s", flush=True)
+        season = fetch_season(year, workers)
+        kept[season["season"]] = season
+        print(f"{year}/{str(year + 1)[2:]}: {season['days']} days, {time.time() - t0:.0f} s", flush=True)
+    seasons = [kept[k] for k in sorted(kept)]
     accessed = dt.date.today().isoformat()
     EXTRACT.write_text(
         json.dumps(

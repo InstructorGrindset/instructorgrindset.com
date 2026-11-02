@@ -48,35 +48,49 @@ def classify_seasons(rows: Sequence[tuple[str, int, float]], seasons: Iterable[s
 
     An episode is a run of at least ``enso.episode_min_seasons`` consecutive three month values at or above
     ``+enso.threshold`` (El Niño) or at or below ``-enso.threshold`` (La Niña). A season takes the phase of the
-    episode holding its ``enso.season_value`` row (DJF of the second year). Strength is the largest class of
-    ``enso.strength`` whose floor the episode holds for at least ``enso.strength_min_seasons`` consecutive values
-    (1 means its peak value alone decides). ``peak`` is the episode's largest absolute value either way.
+    episode holding its ``enso.season_value`` row (DJF of the second year). A shorter run that reaches the last row
+    may still grow into an episode, so the seasons it holds are pending (phase None), not neutral.
+
+    Strength is the largest class of ``enso.strength`` whose floor the episode holds for at least
+    ``enso.strength_min_seasons`` consecutive values (1 means the peak alone decides), counting only the episode's
+    values in the season's own window, JJA of its first year to MAM of its second, so each winter of a long episode
+    gets its own strength. ``peak`` is the largest absolute value in that window.
     """
-    phase_at: dict[int, tuple[str, float, Optional[str]]] = {}
+    where = {(code, year): i for i, (code, year, _) in enumerate(rows)}
+    run_of: dict[int, tuple[str, list[int]]] = {}
+    pending: set[int] = set()
     for sign, phase in ((1, "el_nino"), (-1, "la_nina")):
         run: list[int] = []
         for i, (_, _, value) in enumerate(list(rows) + [("", 0, 0.0)]):
-            if sign * value >= enso.threshold and i < len(rows):
+            if i < len(rows) and sign * value >= enso.threshold:
                 run.append(i)
                 continue
             if len(run) >= enso.episode_min_seasons:
-                peak = max((rows[j][2] for j in run), key=abs)
-                strength = episode_strength([sign * rows[j][2] for j in run], enso)
                 for j in run:
-                    phase_at[j] = (phase, peak, strength)
+                    run_of[j] = (phase, run)
+            elif run and run[-1] == len(rows) - 1:
+                pending.update(run)
             run = []
-    where = {(code, year): i for i, (code, year, _) in enumerate(rows)}
     out = []
     for label in seasons:
         start = season_start(label)
         # DJF belongs to the year of its January; the other three month codes follow the same rule except NDJ and OND.
         year = start + 1 if enso.season_value in ("DJF", "JFM", "FMA", "MAM") else start
         i = where.get((enso.season_value, year))
-        if i is None:
-            out.append({"season": label, "phase": None, "strength": None, "value": None, "peak": None})
+        if i is None or i in pending:
+            out.append({"season": label, "phase": None, "strength": None, "value": None if i is None else rows[i][2],
+                        "peak": None})
             continue
-        phase, peak, strength = phase_at.get(i, ("neutral", None, None))
-        out.append({"season": label, "phase": phase, "strength": strength, "value": rows[i][2], "peak": peak})
+        if i not in run_of:
+            out.append({"season": label, "phase": "neutral", "strength": None, "value": rows[i][2], "peak": None})
+            continue
+        phase, run = run_of[i]
+        lo, hi = where.get(("JJA", start), 0), where.get(("MAM", start + 1), len(rows) - 1)
+        window = [j for j in run if lo <= j <= hi]
+        sign = 1 if phase == "el_nino" else -1
+        out.append({"season": label, "phase": phase,
+                    "strength": episode_strength([sign * rows[j][2] for j in window], enso),
+                    "value": rows[i][2], "peak": max((rows[j][2] for j in window), key=abs)})
     return out
 
 
@@ -164,15 +178,21 @@ def find_peaks(values: Sequence[float], lats: Sequence[float], axis: Any) -> lis
 
 
 def link_chains(peaks: Sequence[Sequence[tuple[float, float]]], lons: Sequence[float], axis: Any) -> list[list[tuple[float, float, float]]]:
-    """Chains of (lon, lat, speed) linking peaks at neighboring longitudes that move less than axis.max_step_deg."""
+    """Chains of (lon, lat, speed) linking peaks at neighboring longitudes that move less than axis.max_step_deg.
+
+    A chain expects its next latitude along its current slope, and a peak of a different speed costs a little more,
+    so two jets that cross keep their own peaks instead of swapping at the crossing."""
     done: list[list[tuple[float, float, float]]] = []
     active: list[list[tuple[float, float, float]]] = []
     for j, column in enumerate(peaks):
         lon = lons[j]
-        pairs = sorted(
-            ((abs(chain[-1][1] - lat), ci, pi) for ci, chain in enumerate(active) for pi, (lat, _) in enumerate(column)
-             if abs(chain[-1][1] - lat) <= axis.max_step_deg),
-        )
+        pairs = []
+        for ci, chain in enumerate(active):
+            expect = chain[-1][1] + ((chain[-1][1] - chain[-2][1]) if len(chain) > 1 else 0.0)
+            for pi, (lat, speed) in enumerate(column):
+                if abs(chain[-1][1] - lat) <= axis.max_step_deg:
+                    pairs.append((abs(expect - lat) + 0.1 * abs(chain[-1][2] - speed), ci, pi))
+        pairs.sort()
         used_c, used_p, nxt = set(), set(), []
         for _, ci, pi in pairs:
             if ci in used_c or pi in used_p:
@@ -258,20 +278,26 @@ def jet_branches(grid: Grid, cfg: Any) -> list[dict]:
             "id": bid,
             "label": BRANCH_LABELS[base],
             "axis": [[lon, round(lat, 2), round(sp, 1)] for lon, lat, sp in chain],
-            "band": [[lon, round(s, 2), round(n, 2)] for lon, s, n in taper(chain, band_edges(grid, chain, cfg.band), cfg.band)],
+            "band": [[lon, round(s, 2), round(n, 2)]
+                     for lon, s, n in taper(chain, band_edges(grid, chain, cfg.band), cfg.band, (grid.lons[0], grid.lons[-1]))],
         })
     return branches
 
 
-def taper(chain: Sequence[tuple[float, float, float]], edges: Sequence[tuple[float, float, float]], band: Any) -> list[tuple[float, float, float]]:
+def taper(chain: Sequence[tuple[float, float, float]], edges: Sequence[tuple[float, float, float]], band: Any,
+          grid_lons: Optional[tuple[float, float]] = None) -> list[tuple[float, float, float]]:
     """Narrow the band toward each end of its chain: within band.taper_deg of longitude of an end, the half widths
-    shrink linearly to band.taper_min_fraction at the end point, so a branch fades out instead of stopping square."""
+    shrink linearly to band.taper_min_fraction at the end point, so a branch fades out instead of stopping square.
+    An end at the edge of the data grid (grid_lons, west and east) is where the data stop, not the jet, so it stays
+    full width."""
     if band.taper_deg <= 0 or not chain:
         return list(edges)
     first, last = chain[0][0], chain[-1][0]
+    west_open = grid_lons is not None and first <= grid_lons[0]
+    east_open = grid_lons is not None and last >= grid_lons[1]
     out = []
     for (lon, lat, _), (_, south, north) in zip(chain, edges):
-        to_end = min(lon - first, last - lon)
+        to_end = min(float("inf") if west_open else lon - first, float("inf") if east_open else last - lon)
         f = 1.0 if to_end >= band.taper_deg else band.taper_min_fraction + (1 - band.taper_min_fraction) * to_end / band.taper_deg
         out.append((lon, lat - (lat - south) * f, lat + (north - lat) * f))
     return out
@@ -377,13 +403,19 @@ def strength_groups(by_strength: dict[str, list[str]], branches_for, split: Any)
         units[lo:hi + 1] = [units[lo] + units[hi]]
     if not units:
         return [], []
+    def seasons_of(classes: Sequence[str]) -> list[str]:
+        return [x for s in classes for x in by_strength[s]]
+
     groups, pairs = [units[0]], []
     for unit in units[1:]:
-        before = [x for s in groups[-1] for x in by_strength[s]]
-        here = [x for s in unit for x in by_strength[s]]
-        d = mean_shift(branches_for(before), branches_for(here), split.lon_west, split.lon_east)
+        here = branches_for(seasons_of(unit))
+        d = mean_shift(branches_for(seasons_of(groups[-1])), here, split.lon_west, split.lon_east)
         pairs.append({"a": "_".join(groups[-1]), "b": "_".join(unit), "shift_deg": None if d is None else round(d, 2)})
-        if d is not None and d >= split.min_mean_shift_deg:
+        # Join only when the unit looks like the group and like each unit already in it (complete linkage), so a
+        # chain of small steps cannot merge classes that differ a lot end to end.
+        members = [m for m in units if all(c in groups[-1] for c in m)]
+        far = [mean_shift(branches_for(seasons_of(m)), here, split.lon_west, split.lon_east) for m in members]
+        if d is not None and (d >= split.min_mean_shift_deg or any(x is not None and x >= split.min_mean_shift_deg for x in far)):
             groups.append(unit)
         else:
             groups[-1] = groups[-1] + unit
@@ -417,6 +449,20 @@ def load_inputs(raw_dir: Path) -> Optional[JetInputs]:
     )
 
 
+def check_extract(extract: dict, cfg: Any) -> list[str]:
+    """Build warnings for an ERA5 extract that cannot carry the layers as configured."""
+    have = sorted(season_start(s["season"]) for s in extract.get("seasons", []))
+    out = []
+    if len(have) < cfg.baseline_seasons:
+        out.append(f"jet stream: the ERA5 extract has {len(have)} seasons, fewer than baseline_seasons {cfg.baseline_seasons}")
+    first = season_start(cfg.first_season)
+    span = [y for y in have if y >= first]
+    if span and (span[0] != first or span[-1] - span[0] + 1 != len(span)):
+        missing = sorted(set(range(first, span[-1] + 1)) - set(span))
+        out.append(f"jet stream: the ERA5 extract misses seasons {', '.join(season_label(y) for y in missing)}")
+    return out
+
+
 def compile_jetstream(inputs: JetInputs, cfg: Any, states: dict[str, dict], resorts: Sequence[dict], header: dict) -> dict:
     ex = inputs.extract
     g = ex["grid"]
@@ -439,7 +485,8 @@ def compile_jetstream(inputs: JetInputs, cfg: Any, states: dict[str, dict], reso
                 "branches": branches, "overflies": overflies(branches, states, resorts, cfg.overflies.sample_deg),
                 **path_ref}
 
-    layers = [layer("last10", f"Last {cfg.baseline_seasons} winters", "baseline", None, None, labels[-cfg.baseline_seasons:])]
+    recent = labels[-cfg.baseline_seasons:]
+    layers = [layer("last10", f"Last {len(recent)} winters", "baseline", None, None, recent)]
     split_info: dict[str, dict] = {}
     cache: dict[tuple[str, ...], list[dict]] = {}
 
@@ -486,6 +533,18 @@ def compile_jetstream(inputs: JetInputs, cfg: Any, states: dict[str, dict], reso
         "split": split_info,
         "method": cfg.method,
     }
+
+
+def band_warnings(compiled: dict, cfg: Any, share: float = 0.5) -> list[str]:
+    """A warning per layer whose band half widths sit at band.max_half_width_deg for more than `share` of its
+    points: then the cap, not band.fraction, draws the band, and the method text would be wrong."""
+    out = []
+    cap = cfg.band.max_half_width_deg
+    for layer in compiled["layers"]:
+        widths = [min(lat - b[1], b[2] - lat) for br in layer["branches"] for (_, lat, _), b in zip(br["axis"], br["band"])]
+        if widths and sum(1 for w in widths if w >= cap - 0.01) / len(widths) > share:
+            out.append(f"jet stream: the {layer['id']} band sits at max_half_width_deg ({cap}) for most points")
+    return out
 
 
 def write(out_dir: Path, data: dict, write_json) -> None:

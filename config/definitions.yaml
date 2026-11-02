@@ -741,10 +741,11 @@ jetstream:
     smooth_deg: 5
   band:
     # The band runs north and south of the axis to where the speed falls to fraction of the axis speed, at most
-    # max_half_width_deg away. Within taper_deg of longitude of a branch end the band narrows linearly to
+    # max_half_width_deg away. With 0.95 the half width follows the data (2.6 to 5.4 degrees for the last 10 winters
+    # over the lower 48, median 3.5), so the cap rarely binds; the build warns when it binds for most points. Within taper_deg of longitude of a branch end the band narrows linearly to
     # taper_min_fraction of its width, so a branch fades out instead of stopping square.
-    fraction: 0.9
-    max_half_width_deg: 4
+    fraction: 0.95
+    max_half_width_deg: 5
     taper_deg: 4
     taper_min_fraction: 0.3
   overflies:
@@ -772,5 +773,6 @@ jetstream:
     neutral: "#b5e86b"
   method: >-
     Average 250 hPa wind of each group of ski seasons (November to April) from ERA5, sampled once a day. The line is
-    where the average wind is fastest; the band is where it stays within 10 percent of that. El Niño and La Niña
+    where the average wind is fastest; the band is where it stays within 5 percent of that, at most 5 degrees of
+    latitude either side. El Niño and La Niña
     winters follow NOAA's Relative Oceanic Niño Index since 1979/80.
