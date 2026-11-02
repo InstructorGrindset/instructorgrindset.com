@@ -268,6 +268,35 @@ def label_branches(chains: list[list[tuple[float, float, float]]]) -> list[tuple
     return out
 
 
+def name_branches(branches: list[dict]) -> list[dict]:
+    """Labels by where each branch runs: a lone branch is the "Jet stream"; otherwise each is the northern or
+    southern branch by its mean latitude where it overlaps the main (fastest) one, and a second branch on the same
+    side is the far northern or far southern branch. The main branch also carries "fastest": true."""
+    main = next((b for b in branches if b["id"] == "main"), None)
+    if main is None or len(branches) == 1:
+        for b in branches:
+            b["label"] = "Jet stream"
+            b["fastest"] = b is main
+        return branches
+    main_lat = {p[0]: p[1] for p in main["axis"]}
+    main_mean = sum(main_lat.values()) / len(main_lat)
+
+    def offset(b: dict) -> float:
+        common = [p[1] - main_lat[p[0]] for p in b["axis"] if p[0] in main_lat]
+        return sum(common) / len(common) if common else sum(p[1] for p in b["axis"]) / len(b["axis"]) - main_mean
+
+    others = sorted((b for b in branches if b is not main), key=offset)
+    north = [b for b in others if offset(b) >= 0]
+    south = [b for b in others if offset(b) < 0][::-1]   # nearest the main branch first
+    main["label"] = "Southern branch" if north and not south else "Northern branch" if south and not north else "Middle branch"
+    main["fastest"] = True
+    for side, word in ((north, "northern"), (south, "southern")):
+        for k, b in enumerate(side):
+            b["label"] = f"{'Far ' + word if k else word.capitalize()} branch"
+            b["fastest"] = False
+    return branches
+
+
 def jet_branches(grid: Grid, cfg: Any) -> list[dict]:
     peaks = [find_peaks(grid.column(j), grid.lats, cfg.axis) for j in range(len(grid.lons))]
     branches = []
@@ -449,6 +478,37 @@ def load_inputs(raw_dir: Path) -> Optional[JetInputs]:
     )
 
 
+SEASON_CODES = ("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
+MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+          "November", "December")
+
+
+def current_reading(rows: Sequence[tuple[str, int, float]], enso: Any, layers: Sequence[dict], ref: dict) -> Optional[dict]:
+    """The latest RONI value as "this winter so far": its months, value, phase and strength class by that value
+    alone (the episode is still running), and the ENSO layer that holds that phase and class. CPC marks the latest
+    values as preliminary."""
+    if not rows:
+        return None
+    code, year, value = rows[-1]
+    # CPC labels a three month value by the year of its middle month: DJF 2026 runs December 2025 to February 2026.
+    m0 = (SEASON_CODES.index(code) + 11) % 12   # first month, 0 = January
+    m2 = (m0 + 2) % 12
+    start_year = year - 1 if code == "DJF" else year
+    end_year = start_year + (1 if m2 < m0 else 0)
+    months = (f"{MONTHS[m0]} {start_year} to {MONTHS[m2]} {end_year}" if start_year != end_year
+              else f"{MONTHS[m0]} to {MONTHS[m2]} {end_year}")
+    phase = "el_nino" if value >= enso.threshold else "la_nina" if value <= -enso.threshold else "neutral"
+    strength = None
+    if phase != "neutral":
+        for name in STRENGTHS:
+            if abs(value) >= getattr(enso.strength, name):
+                strength = name
+    match = next((layer["id"] for layer in layers
+                  if layer["phase"] == phase and (layer.get("strengths") is None or strength in layer["strengths"])), None)
+    return {"season_code": code, "year": year, "months": months, "value": value, "phase": phase, "strength": strength,
+            "layer": match, "preliminary": True, **ref}
+
+
 def check_extract(extract: dict, cfg: Any) -> list[str]:
     """Build warnings for an ERA5 extract that cannot carry the layers as configured."""
     have = sorted(season_start(s["season"]) for s in extract.get("seasons", []))
@@ -480,10 +540,19 @@ def compile_jetstream(inputs: JetInputs, cfg: Any, states: dict[str, dict], reso
               branches: Optional[list[dict]] = None) -> dict:
         if branches is None:
             branches = jet_branches(composite(by_label, seasons, lats, lons), cfg)
+        over = overflies(branches, states, resorts, cfg.overflies.sample_deg)
+        if cfg.drop_branches_without_states:
+            crossing = {b for st in over["states"] for b in st["branches"]}
+            kept = [br for br in branches if br["id"] in crossing or br["id"] == "main"]
+            if len(kept) != len(branches):
+                branches = kept
+                over = overflies(branches, states, resorts, cfg.overflies.sample_deg)
+        branches = name_branches([dict(br) for br in branches])
+        ordered = sorted(seasons, key=season_start)
         return {"id": lid, "label": label, "kind": kind, "phase": phase, "strength": strength,
                 "color": cfg.colors.get(lid) or cfg.colors.get(phase or "", "#ffffff"), "seasons": seasons,
-                "branches": branches, "overflies": overflies(branches, states, resorts, cfg.overflies.sample_deg),
-                **path_ref}
+                "season_range": f"{ordered[0]} to {ordered[-1]}" if len(ordered) > 1 else ordered[0],
+                "branches": branches, "overflies": over, **path_ref}
 
     recent = labels[-cfg.baseline_seasons:]
     layers = [layer("last10", f"Last {len(recent)} winters", "baseline", None, None, recent)]
@@ -524,6 +593,7 @@ def compile_jetstream(inputs: JetInputs, cfg: Any, states: dict[str, dict], reso
             layers.append(lay)
     return {
         **header,
+        "current": current_reading(inputs.roni_rows, cfg.enso, layers, enso_ref),
         "season_label": cfg.season_label,
         "level_hpa": 250,
         "sources": {"winds": winds, "enso": enso_ref},

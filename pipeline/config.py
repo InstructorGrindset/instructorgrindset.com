@@ -735,6 +735,9 @@ class JetstreamDefs(StrictModel):
     split: JetstreamSplit
     colors: dict[str, str]
     method: str
+    # Drop a branch whose band crosses no US state (the main branch always stays): a branch over the open Pacific or
+    # Canada adds lines but no answer to "which states and mountains".
+    drop_branches_without_states: bool = True
 
     @field_validator("colors")
     @classmethod

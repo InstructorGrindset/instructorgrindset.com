@@ -742,12 +742,13 @@ jetstream:
   band:
     # The band runs north and south of the axis to where the speed falls to fraction of the axis speed, at most
     # max_half_width_deg away. With 0.95 the half width follows the data (2.6 to 5.4 degrees for the last 10 winters
-    # over the lower 48, median 3.5), so the cap rarely binds; the build warns when it binds for most points. Within taper_deg of longitude of a branch end the band narrows linearly to
-    # taper_min_fraction of its width, so a branch fades out instead of stopping square.
+    # over the lower 48, median 3.5), so the cap rarely binds; the build warns when it binds for most points.
+    # Within taper_deg of longitude of a branch end (not at the edge of the data grid) the band narrows linearly to
+    # taper_min_fraction of its width, so a branch fades to a point instead of stopping square.
     fraction: 0.95
     max_half_width_deg: 5
-    taper_deg: 4
-    taper_min_fraction: 0.3
+    taper_deg: 5
+    taper_min_fraction: 0
   overflies:
     # States: any point of this grid under a band. Resorts: the resort point under a band.
     sample_deg: 0.5
@@ -760,19 +761,24 @@ jetstream:
     lon_west: -125
     lon_east: -67
   colors:
-    # Line and band colors on the dark map; strength layers fall back to their phase color.
-    last10: "#e8e8e8"
-    el_nino: "#ff8a3d"
-    el_nino_weak: "#ffc08a"
-    el_nino_moderate: "#ff8a3d"
-    el_nino_strong: "#e8502a"
-    la_nina: "#4fb3ff"
-    la_nina_weak: "#9fd6ff"
-    la_nina_moderate: "#4fb3ff"
-    la_nina_strong: "#2f7fe0"
-    neutral: "#b5e86b"
+    # Line and band colors on the dark map, picked apart from the hues the map already uses (amber Tier A, blue
+    # Tier B, cyan clusters, green Hiring now, white indoor and training markers). Strength group layers take their
+    # own key, else the color of their strongest class, else their phase color.
+    last10: "#c4b5fd"
+    el_nino: "#ff4d5e"
+    el_nino_weak: "#ff9bb3"
+    el_nino_moderate: "#ff6b6b"
+    el_nino_strong: "#ff4d5e"
+    el_nino_moderate_strong: "#ff4d5e"
+    la_nina: "#6f7bff"
+    la_nina_weak: "#a7b0ff"
+    la_nina_moderate: "#6f7bff"
+    la_nina_strong: "#4a55e8"
+    neutral: "#a3a8b0"
+  # Branches whose band crosses no US state are dropped (the main branch always stays).
+  drop_branches_without_states: true
   method: >-
-    Average 250 hPa wind of each group of ski seasons (November to April) from ERA5, sampled once a day. The line is
-    where the average wind is fastest; the band is where it stays within 5 percent of that, at most 5 degrees of
-    latitude either side. El Niño and La Niña
-    winters follow NOAA's Relative Oceanic Niño Index since 1979/80.
+    Each path is the average jet stream wind about 10 km up (the 250 hPa level) over a group of ski seasons,
+    November to April, from ERA5, sampled once a day. The line follows the fastest average wind; the band is where
+    the wind stays within 5 percent of that, at most 5 degrees of latitude either side. El Niño and La Niña winters
+    follow NOAA's Relative Oceanic Niño Index since 1979/80.

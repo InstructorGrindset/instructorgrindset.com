@@ -543,8 +543,10 @@ def build(
         shapes = json.loads(shapes_path.read_text(encoding="utf-8"))
         jet_states = {f["properties"]["code"]: {"name": f["properties"]["name"], "geometry": f["geometry"]}
                       for f in shapes.get("features", [])}
+        # Mountains only: indoor slopes and training centers do not count as places a storm track serves.
         jet_resorts = [{"id": d["id"], "state": d["state"], "lat": d["lat"], "lon": d["lon"]} for d in resort_dicts
-                       if not _placeholder_location(d.get("location_source_id") or "", registry)]
+                       if d.get("facility_type") == "ski_area"
+                       and not _placeholder_location(d.get("location_source_id") or "", registry)]
         jet_data = jet_mod.compile_jetstream(jet_inputs, jet_cfg, jet_states, jet_resorts, header)
         warnings += jet_mod.band_warnings(jet_data, jet_cfg)
         jet_mod.write(out_dir, jet_data, _write_json)

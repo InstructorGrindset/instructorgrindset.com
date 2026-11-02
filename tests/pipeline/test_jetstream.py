@@ -298,3 +298,27 @@ def test_band_warnings_flag_a_band_drawn_by_the_cap():
     free = {"layers": [{"id": "x", "branches": [{"axis": [[-100, 40.0, 30]] * 4, "band": [[-100, 37.0, 43.5]] * 4}]}]}
     assert js.band_warnings(free, CFG) == []
 
+
+
+def test_name_branches_by_where_they_run():
+    def br(bid, lat):
+        return {"id": bid, "axis": [[lon, lat, 30] for lon in range(-130, -100)]}
+    named = {b["id"]: b for b in js.name_branches([br("main", 30.0), br("north", 45.0), br("north_2", 55.0)])}
+    assert named["main"]["label"] == "Southern branch" and named["main"]["fastest"] is True
+    assert named["north"]["label"] == "Northern branch" and named["north_2"]["label"] == "Far northern branch"
+    alone = js.name_branches([br("main", 40.0)])
+    assert alone[0]["label"] == "Jet stream"
+    both = {b["id"]: b["label"] for b in js.name_branches([br("main", 38.0), br("north", 48.0), br("south", 26.0)])}
+    assert both == {"main": "Middle branch", "north": "Northern branch", "south": "Southern branch"}
+
+
+def test_current_reading_names_its_months_and_layer():
+    layers = [{"id": "el_nino_weak", "phase": "el_nino", "strengths": ["weak"]},
+              {"id": "el_nino_moderate_strong", "phase": "el_nino", "strengths": ["moderate", "strong"]},
+              {"id": "la_nina", "phase": "la_nina"}, {"id": "neutral", "phase": "neutral"}]
+    now = js.current_reading([("JAS", 2026, 1.69)], CFG.enso, layers, {"source_id": "roni"})
+    assert now["months"] == "July to September 2026" and now["phase"] == "el_nino" and now["strength"] == "strong"
+    assert now["layer"] == "el_nino_moderate_strong" and now["preliminary"] is True and now["source_id"] == "roni"
+    djf = js.current_reading([("DJF", 2026, -0.91)], CFG.enso, layers, {})
+    assert djf["months"] == "December 2025 to February 2026" and djf["layer"] == "la_nina"
+    assert js.current_reading([("OND", 2025, 0.2)], CFG.enso, layers, {})["layer"] == "neutral"
