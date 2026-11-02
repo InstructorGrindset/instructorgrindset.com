@@ -36,14 +36,20 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
    least `axis.min_speed_ms` and a prominence of `axis.min_prominence_ms`, refined to a fraction of a degree with a
    parabola through the three points around the peak. Peaks link across neighboring longitudes when they move less
    than `axis.max_step_deg`; chains shorter than `axis.min_length_deg` drop. The chain with the most integrated
-   speed is the main jet (`main`); the others are the northern or southern branch (`north`, `south`, then
-   `north_2` and so on) by their mean latitude against the main jet where they overlap. Each chain is smoothed with
-   a running mean over `axis.smooth_deg` of longitude.
+   speed is the main (fastest) branch, id `main`; the others get ids `north`, `south`, then `north_2` and so on, by
+   their mean latitude against the main branch where they overlap. A chain expects its next latitude along its slope
+   and prefers a peak of similar speed, so jets that cross keep their own peaks. Each chain is smoothed with a
+   running mean over `axis.smooth_deg` of longitude. With `drop_branches_without_states` a branch whose band crosses
+   no US state drops (the main one stays). Labels say where a branch runs: "Jet stream" when a layer has one,
+   otherwise "Northern branch", "Southern branch", "Middle branch", "Far northern branch"; `fastest` marks the main
+   one.
 4. **Band**: north and south of the axis, the latitude where speed falls to `band.fraction` of the axis speed,
-   capped at `band.max_half_width_deg`. Within `band.taper_deg` of a branch end the band narrows linearly to
-   `band.taper_min_fraction` of its width, so a branch fades out instead of stopping square.
+   capped at `band.max_half_width_deg`. Within `band.taper_deg` of a branch end that is not the edge of the data
+   grid, the band narrows linearly to `band.taper_min_fraction` of its width (0: a point). The build warns when the
+   cap, not the fraction, draws most of a band.
 5. **Overflies**: a state is listed when a band covers any of its area, sampled on a `overflies.sample_deg` grid; a
-   resort is listed when its point lies inside a band. Lists run west to east.
+   ski area (facility type `ski_area`; indoor slopes and training centers stay out) is listed when its point lies
+   inside a band, and its state joins the state list even where the sample grid missed it. Lists run west to east.
 6. **Strength groups**: a class with fewer than `split.min_seasons` seasons joins its weaker neighbor. Then, from
    weak to strong, each class joins the group before it unless their main axes differ by at least
    `split.min_mean_shift_deg` of latitude on average over `split.lon_west` to `split.lon_east` (the lower 48). One
@@ -69,12 +75,14 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
       "kind": "baseline",
       "phase": null,
       "strength": null,
-      "color": "#e8e8e8",
+      "color": "#c4b5fd",
       "seasons": ["2016/17", "2017/18"],
+      "season_range": "2016/17 to 2025/26",
       "branches": [
         {
           "id": "main",
           "label": "Jet stream",
+          "fastest": true,
           "axis": [[-170, 38.4, 31.2], [-169, 38.5, 31.6]],
           "band": [[-170, 33.1, 43.9], [-169, 33.2, 44.0]]
         }
@@ -89,10 +97,14 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
     }
   ],
   "seasons": [
-    {"season": "1979/80", "phase": "neutral", "strength": null, "djf": 0.65, "peak": null,
+    {"season": "1979/80", "phase": "neutral", "strength": null, "value": 0.65, "peak": null,
      "source_id": "noaa-cpc-roni", "as_of": "2026-11-01", "confidence": "published"}
   ],
-  "split": {"el_nino": {"split": false, "shift_deg": 1.1}, "la_nina": {"split": false, "shift_deg": 0.8}},
+  "current": {"season_code": "JAS", "year": 2026, "months": "July to September 2026", "value": 1.69,
+              "phase": "el_nino", "strength": "strong", "layer": "el_nino_moderate_strong", "preliminary": true,
+              "source_id": "noaa-cpc-roni", "as_of": "2026-11-01", "confidence": "published"},
+  "split": {"el_nino": {"split": true, "groups": [["weak"], ["moderate", "strong"]], "shift_deg": 2.74,
+                        "pairs": [{"a": "weak", "b": "moderate", "shift_deg": 2.74}]}},
   "method": "Plain text summary of the method above, shown under the toggles."
 }
 ```
@@ -176,8 +188,10 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
 * El Niño gives two toggles: weak (4 winters) differs from moderate by 2.7 degrees on average over the lower 48,
   and moderate and strong differ by 1.0, so they share one toggle (9 winters). La Niña stays one toggle (largest
   difference 0.8 degrees).
-* In every group the seasonal mean jet over the West has two branches: a southern (subtropical) branch over Baja,
-  northern Mexico and the Gulf Coast, and a northern branch off the Pacific. Strong El Niño puts its main jet along
-  the Gulf Coast (8 states, no ski area under the core band) in moderate and strong El Niño winters; La Niña brings its northern branch ashore over
-  Washington, Oregon, Idaho and Montana.
-* The latest RONI values (July to September 2026, 1.69) point to a strong El Niño in 2026/27.
+* Over the West the seasonal mean jet runs in two branches in the last 10, La Niña and neutral winters: a southern
+  (subtropical) branch over Baja, northern Mexico and the Gulf Coast, and a northern branch off the Pacific. In El
+  Niño winters one jet runs along the southern tier; in moderate and strong El Niño winters it follows the Gulf
+  Coast (8 states, no ski area under the band). La Niña brings its northern branch ashore over Washington, Oregon,
+  Idaho and Montana (34 states and 110 ski areas under its bands).
+* The latest RONI value (July to September 2026, 1.69, preliminary) points to a strong El Niño in 2026/27;
+  `current` names the Moderate and strong El Niño layer for it.
