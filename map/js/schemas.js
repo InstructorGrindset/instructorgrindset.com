@@ -266,6 +266,7 @@ const Lat = z.number().min(-90).max(90);
 export const JetBranch = z.object({
   id: Slug,
   label: z.string().min(1),
+  fastest: z.boolean().nullish().transform((v) => Boolean(v)),
   axis: z.array(z.tuple([Lon, Lat, z.number().nullable()]).nullable().catch(null)).transform((a) => a.filter(Boolean)),
   band: z.array(z.tuple([Lon, Lat.nullable(), Lat.nullable()]).nullable().catch(null)).nullish()
     .transform((a) => (a ?? []).filter(Boolean)),
@@ -277,8 +278,11 @@ export const JetLayer = z.object({
   kind: z.string().nullish(),
   phase: z.string().nullish(),
   strength: z.string().nullish(),
+  strengths: z.array(z.string()).nullish().transform((v) => v ?? []),
   color: z.string().regex(/^#[0-9a-fA-F]{6}$/),
   seasons: z.array(z.string()),
+  // The baseline's winters run in a row ("2016/17 to 2025/26"); the ENSO layers list theirs.
+  season_range: z.string().nullish().transform((v) => v ?? null),
   branches: keepValid(JetBranch),
   overflies: z.object({
     states: keepValid(z.object({ code: z.string().min(2), name: z.string().min(1), branches: strList })),
@@ -292,6 +296,16 @@ export const JetStreamFile = z.object({
   level_hpa: z.number().positive(),
   sources: z.object({ winds: z.object(Cite3), enso: z.object(Cite3) }),
   layers: keepValid(JetLayer),
+  // The latest RONI reading and the layer that matches it; a bad block drops the line, never the file.
+  current: z.object({
+    months: z.string().min(1),
+    value: z.number(),
+    phase: z.string().min(1),
+    strength: z.string().nullish().transform((v) => v ?? null),
+    layer: z.string().nullish().transform((v) => v ?? null),
+    preliminary: z.boolean().nullish().transform((v) => Boolean(v)),
+    ...Cite3,
+  }).nullish().catch(null).transform((v) => v ?? null),
   method: z.string().nullish().transform((v) => v ?? null),
 });
 

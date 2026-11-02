@@ -191,7 +191,9 @@ function padding(view) {
   const stageW = els.stage.clientWidth;
   const w = Math.min(panelWidth(view), stageW * 0.6);
   const lp = config.layersPanel;
-  const beside = stageW >= lp.besideFrom;
+  // An open Jet stream box is tall: narrow desktops then keep the map beside the panel too, so the West stays clear.
+  const jet = document.getElementById('jet-box');
+  const beside = stageW >= lp.besideFrom || Boolean(jet && jet.open);
   return { top: beside ? 48 : lp.foldedHeight + 24, left: beside ? lp.inset + lp.width + 12 : 56, right: w + 36, bottom: 60 };
 }
 
@@ -340,6 +342,8 @@ async function main() {
     onShowHousing: (resortId, n) => showHousing(resortId, n),
     onSourcesNeeded: () => { if (idleReached) loadSources(); else sourcesWanted = true; },
     renderEvents: (view, kit) => (eventsApi && eventsApi.loaded ? eventsApi.renderPanel(view, kit) : null),
+    // The jet stream line under the heading of a state, cluster or resort while a path is on.
+    onRendered: (view) => { if (jetApi && jetApi.loaded) jetApi.panelNote(view); },
   });
   const list = createListView(els.list, index);
   listView = list;
@@ -480,15 +484,17 @@ async function main() {
   }
 
   // ── Jet stream overlay (docs/map/JETSTREAM.md) ── A closed box in the Layers panel. jetstream.js, its stylesheet and
-  // jetstream.json load the first time it opens, or with a ?jet= link (the box opens at once and loads after the
-  // first paint). The layers on stay in the address bar (router.js) across views.
+  // jetstream.json load the first time it opens, or after the first paint with a ?jet= link (which opens the box only
+  // where the panel sits beside the map; phones and narrow desktops show the paths and keep the box closed). The
+  // layers on stay in the address bar (router.js) across views.
   let jetApi = null;
   let jetPromise = null;
   const jetBox = els.layersBox ? h('details', { id: 'jet-box', class: 'lp-box jet-box' },
     h('summary', { class: 'lp-summary' }, h('span', null, 'Jet stream')), h('div', { class: 'jet-body', id: 'jet-body' })) : null;
   const ensureJet = () => (jetPromise ||= Promise.all([import('./jetstream.js'), loadCss(JET_CSS)]).then(([m]) => {
     jetApi = m.createJetStream({
-      index, box: jetBox, legend: els.legend, announce, initial: jetLayers(), tone,
+      index, box: jetBox, legend: els.legend, announce, initial: jetLayers(), tone, panelRoot: els.content,
+      filter: () => filter, current: () => router.current,
       setLayers: setJetLayers, onChange: () => { router.syncUrl(); onViewChange(); },
     });
     return jetApi.ready;
@@ -500,14 +506,27 @@ async function main() {
     console.warn('[map] jet stream', err.message);
     if (!jetApi) $('jet-body').replaceChildren(h('p', { class: 'jet-note' }, 'The jet stream paths could not load. Try reloading the page.'));
   }));
+  const narrowStage = () => isPhone() || els.stage.clientWidth < config.layersPanel.besideFrom;
   if (jetBox) {
     els.layersBox.after(jetBox);
     jetBox.addEventListener('toggle', () => {
-      if (!jetBox.open || jetApi) return;
+      if (jetBox.open) {
+        // Narrow desktops: fold LAYERS so the open box stays short. Phones: the sheet scrolls to the box.
+        if (!isPhone() && narrowStage() && els.layersBox.open) els.layersBox.open = false;
+        if (isPhone() && els.layers.scrollHeight > els.layers.clientHeight) {
+          const head = els.layers.querySelector('.lp-sheet-head');
+          els.layers.scrollTop = jetBox.offsetTop - (head ? head.offsetHeight : 0);
+        }
+      }
+      if (!isPhone() && narrowStage()) { if (mapCtl) mapCtl.refit(); else onViewChange(); }
+      if (!jetBox.open) return;
+      if (jetApi) { if (jetApi.failed) jetApi.retry(); return; }
       $('jet-body').replaceChildren(h('p', { class: 'jet-note' }, 'Loading the jet stream paths.'));
       afterFirstPaint(ensureJet);
     });
-    if (jetLayers().length) jetBox.open = true;
+    if (jetLayers().length) {
+      if (narrowStage()) afterFirstPaint(ensureJet); else jetBox.open = true;
+    }
   }
 
   // In-app links: History API navigation, real hrefs for new tabs and crawlers.
@@ -528,6 +547,7 @@ async function main() {
     filter = next;
     if (mapCtl) mapCtl.setFilter(filter, onlyIds(filter));
     list.setFilter(filter);
+    if (jetApi) jetApi.refilter();
   };
   let hiringMod = null;
   const hiring = () => (hiringMod ||= import('./hiring.js').then((m) => { m.markHiring(index, null, hiringCount); return m; },
@@ -705,7 +725,7 @@ async function main() {
     // EVENTS mode draws the venue dots the event filters keep (none until events.json is in).
     const points = eventsMode ? (eventsApi && eventsApi.loaded ? eventsApi.previewPoints() : []) : null;
     const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone, points); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
-    if (pic && jetApi) jetApi.drawPreview(pic, keep);
+    if (pic && jetApi) jetApi.drawPreview(pic, keep, { rings: !eventsMode });
     if (preview) preview.remove();
     preview = pic;
     if (preview) els.map.insertBefore(preview, startBtn);
@@ -846,6 +866,7 @@ async function main() {
       loadDetails();
       if (els.recolor) {
         import('./recolor.js').then(({ createRecolor }) => createRecolor(els.recolor, index, { onChange: (r) => mapCtl.setRecolor(r), announce, legendRoot: els.heatLegend }))
+          .then(() => { if (jetApi) jetApi.reveal(); }) // Color by pushes the Jet stream box down
           .catch((err) => console.warn('[map] recolor', err.message));
       }
       idle(() => loadStateOutlines(index).then((fc) => {

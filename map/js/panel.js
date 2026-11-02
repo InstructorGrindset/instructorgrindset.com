@@ -105,7 +105,7 @@ function navLink(view, attrs, ...children) {
 
 export function createPanel(root, index, {
   onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {}, onSourcesNeeded = () => {},
-  onShowHousing = null, renderEvents = null,
+  onShowHousing = null, renderEvents = null, onRendered = () => {},
 }) {
   let token = 0;
   let siteButtons = new Map();
@@ -1009,48 +1009,11 @@ export function createPanel(root, index, {
 
   let rendered = false;
   const api = {
-    /** Render a view. Returns the heading element. */
-    render(view, { keepToken = false } = {}) {
-      if (!keepToken) token += 1;
-      const my = token;
-      const first = !rendered;
-      rendered = true;
-      root.removeAttribute('aria-busy');
-      // A route stub carries a prerendered summary of its resort. Keep it on screen while the full record loads.
-      if (first && (view.level === 'resort' ? !index.fullReady(view.resortId) : (view.level === 'compare' && !index.detailsReady))) {
-        const pre = root.querySelector('#panel-heading');
-        if (pre && pre.textContent.trim() === (view.level === 'resort' ? index.resorts.get(view.resortId).name : pre.textContent.trim())) {
-          root.setAttribute('aria-busy', 'true');
-          waitForDetails(view, my, '', '');
-          return pre;
-        }
-      }
-      destroyCharts();
-      clear(root);
-      let body;
-      if (view.level === 'events') {
-        // EVENTS mode: events.js renders the panel. Until it has loaded, a route stub keeps its prerendered list.
-        const pre = first && root.querySelector('#panel-heading');
-        body = renderEvents ? renderEvents(view, kit()) : null;
-        if (!body && pre) {
-          root.setAttribute('aria-busy', 'true');
-          return pre;
-        }
-        destroyCharts();
-        clear(root);
-        root.append(...(body || [...heading('Events', 'Events and competitions'), h('p', { class: 'loading' }, 'Loading events')]).flat().filter(Boolean), footer());
-        if (!body) root.setAttribute('aria-busy', 'true');
-        return root.querySelector('#panel-heading');
-      }
-      switch (view.level) {
-        case 'state': body = state(view); break;
-        case 'cluster': body = cluster(view); break;
-        case 'compare': body = compare(view, my); break;
-        case 'resort': body = resort(view, my); break;
-        default: body = national();
-      }
-      root.append(...body.flat().filter(Boolean), footer());
-      return root.querySelector('#panel-heading');
+    /** Render a view. Returns the heading element. onRendered (the jet stream line) runs after every render. */
+    render(view, opts) {
+      const el = renderView(view, opts);
+      onRendered(view);
+      return el;
     },
     /** Select a housing site from the map. */
     selectSite(id) { selectSite(id, { scroll: true }); },
@@ -1064,5 +1027,47 @@ export function createPanel(root, index, {
         h('p', { class: 'fact-meta' }, message), footer());
     },
   };
+  function renderView(view, { keepToken = false } = {}) {
+    if (!keepToken) token += 1;
+    const my = token;
+    const first = !rendered;
+    rendered = true;
+    root.removeAttribute('aria-busy');
+    // A route stub carries a prerendered summary of its resort. Keep it on screen while the full record loads.
+    if (first && (view.level === 'resort' ? !index.fullReady(view.resortId) : (view.level === 'compare' && !index.detailsReady))) {
+      const pre = root.querySelector('#panel-heading');
+      if (pre && pre.textContent.trim() === (view.level === 'resort' ? index.resorts.get(view.resortId).name : pre.textContent.trim())) {
+        root.setAttribute('aria-busy', 'true');
+        waitForDetails(view, my, '', '');
+        return pre;
+      }
+    }
+    destroyCharts();
+    clear(root);
+    let body;
+    if (view.level === 'events') {
+      // EVENTS mode: events.js renders the panel. Until it has loaded, a route stub keeps its prerendered list.
+      const pre = first && root.querySelector('#panel-heading');
+      body = renderEvents ? renderEvents(view, kit()) : null;
+      if (!body && pre) {
+        root.setAttribute('aria-busy', 'true');
+        return pre;
+      }
+      destroyCharts();
+      clear(root);
+      root.append(...(body || [...heading('Events', 'Events and competitions'), h('p', { class: 'loading' }, 'Loading events')]).flat().filter(Boolean), footer());
+      if (!body) root.setAttribute('aria-busy', 'true');
+      return root.querySelector('#panel-heading');
+    }
+    switch (view.level) {
+      case 'state': body = state(view); break;
+      case 'cluster': body = cluster(view); break;
+      case 'compare': body = compare(view, my); break;
+      case 'resort': body = resort(view, my); break;
+      default: body = national();
+    }
+    root.append(...body.flat().filter(Boolean), footer());
+    return root.querySelector('#panel-heading');
+  }
   return api;
 }

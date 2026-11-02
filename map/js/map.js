@@ -129,12 +129,23 @@ const HIRING_LAYER = {
     'circle-stroke-opacity': ['case', fs('dim'), 0.25, 0.95],
   },
 };
-// Resorts under the active jet stream band (jetstream.js, setResortRing): a ring in the layer's color, between the
-// dot and the hiring ring. Its id starts with "resorts", so EVENTS mode hides it with the dots.
+// Resorts under the active jet stream band (jetstream.js, setResortRing): a dark gap around the dot, then a ring in
+// the layer's color, a shape of its own that reads in any path color. Their ids start with "resorts", so EVENTS mode
+// hides them with the dots. (Strokes sit outside the circle radius.)
+const RING_GAP_LAYER = {
+  id: 'resorts-jet-gap', type: 'circle', source: 'resorts', filter: ['in', ['get', 'id'], ['literal', []]],
+  paint: {
+    'circle-radius': radius(1.1),
+    'circle-color': 'rgba(0,0,0,0)',
+    'circle-stroke-color': '#000000',
+    'circle-stroke-width': 1.4,
+    'circle-stroke-opacity': ['case', fs('dim'), 0.25, 0.9],
+  },
+};
 const RING_LAYER = {
   id: 'resorts-jet-ring', type: 'circle', source: 'resorts', filter: ['in', ['get', 'id'], ['literal', []]],
   paint: {
-    'circle-radius': radius(1.7),
+    'circle-radius': radius(2.5),
     'circle-color': 'rgba(0,0,0,0)',
     'circle-stroke-color': '#ffffff',
     'circle-stroke-width': 1.6,
@@ -612,10 +623,10 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     const type = facility === 'ski_area' ? [IS_SKI_AREA] : facility === 'facility' ? [['!', IS_SKI_AREA]] : [];
     if (map.getLayer('resorts-glow')) map.setFilter('resorts-glow', ['all', ...type, ...only]);
     if (map.getLayer('resorts-hiring')) map.setFilter('resorts-hiring', ['all', ['in', ['get', 'id'], ['literal', hiringIds]], ...type, ...only]);
-    if (map.getLayer(RING_LAYER.id)) {
-      map.setFilter(RING_LAYER.id, ['all', ['in', ['get', 'id'], ['literal', ring.ids]], ...type, ...only]);
-      map.setPaintProperty(RING_LAYER.id, 'circle-stroke-color', ring.color);
+    for (const id of [RING_GAP_LAYER.id, RING_LAYER.id]) {
+      if (map.getLayer(id)) map.setFilter(id, ['all', ['in', ['get', 'id'], ['literal', ring.ids]], ...type, ...only]);
     }
+    if (map.getLayer(RING_LAYER.id)) map.setPaintProperty(RING_LAYER.id, 'circle-stroke-color', ring.color);
     enforceMode();
     syncPulses();
   }
@@ -726,6 +737,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   async function setup() {
     for (const { id, img } of await facilityImages()) if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 });
     map.addLayer(FACILITY_LAYER);
+    map.addLayer(RING_GAP_LAYER);
     map.addLayer(RING_LAYER);
     map.addLayer(HIRING_LAYER);
     addDetailLayers(map);

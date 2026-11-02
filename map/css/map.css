@@ -753,7 +753,7 @@ body.list-mode .map-legend, body.list-mode .heat-legend, body.detail-mode .heat-
 .mh-pill-events .mh-pill-dot { background: #5aa9ff; box-shadow: 0 0 6px #5aa9ff; }
 .mh-pill-events .mh-count { background: #5aa9ff; color: #03101f; }
 .mh-pill-events[aria-pressed="true"] .mh-count { background: var(--wm-green); color: var(--wm-green-ink); }
-body.events-mode :is(#recolor, #facility-filter, #detail-layers, #heat-legend), body.events-mode .map-legend .ml-items:not(.ml-events) { display: none !important; }
+body.events-mode :is(#recolor, #facility-filter, #detail-layers, #heat-legend), body.events-mode .map-legend .ml-items:not(.ml-events):not(.ml-jet) { display: none !important; }
 body.events-mode .recolor + .lp-box { border-top: 0; }
 /* "Events here" on resort panels (panel.js eventsHere, routes.py render_resort_events) */
 .ev-here { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
