@@ -133,43 +133,67 @@ year, 12 UTC on odd days) averaged on the native 0.25 degree grid and then into 
 * **Loading.** On the startup path there is only a closed "Jet stream" box (`#jet-box`, a `details` after the LAYERS
   box) and the `?jet=` reading in `router.js`. The file cannot list its layers before it loads, so opening the box is
   the first toggle: it brings `jetstream.js`, `jetstream.css`, `jetstream.json` (validated per layer and per branch by
-  Zod `JetStreamFile` in `schemas.js`) and `sources.json` (the source titles). A `?jet=` link opens the box at once and
-  loads after the first paint. The box shows the paths in file order, any ids, any number of branches.
-* **Box.** One checkbox per layer: a swatch (band and line in the layer color), the label over the season count, named
-  "El Niño, 13 winters". Then "Average 250 hPa jet, November to April." (`level_hpa`, `season_label`), the card, the
-  two sources linked by their `sources.json` titles, and "How the paths are made" (the file's `method`, folded). The
-  box title counts the paths on ("2 on").
-* **Map.** One GeoJSON source `jet` (credited "Jet stream: <both source titles>" in the attribution while a path
-  shows) with, per visible layer and branch, the band polygon (south edge west to east, north edge back), its two edges
-  (dashed) and the axis. Layers `jet-band`, `jet-edge`, `jet-axis-casing` (a dark blurred casing so the line reads on
-  SATELLITE), `jet-axis` and `jet-label` (canvas drawn tags along the line: "La Niña, Northern branch" when a layer has
-  more than one branch) sit just under `resorts-glow`; `jet-states` (the tint, on the `states` source) sits under the
-  cluster fills. The active layer draws on top, a little wider and stronger. SATELLITE raises the band, edge and casing
-  opacity. `map.js` `setResortRing` rings the active layer's `overflies.resorts` (`resorts-jet-ring`, following the
-  Type and Show only filters; EVENTS mode hides it with the dots). Gaps and null points split a branch into runs.
-* **2D picture.** Before the WebGL map starts, `preview.js` `addPreviewOverlay` draws the same bands, lines and rings.
+  Zod `JetStreamFile` in `schemas.js`) and `sources.json` (the source titles). A `?jet=` link loads after the first
+  paint; it opens the box only where the Layers panel sits beside the map (1200 px of stage or more), so phones and
+  narrow desktops show the paths and the legend with the box closed. A 404 says "The jet stream paths arrive with the
+  next data build." and drops `?jet=`; any other failure says "The jet stream paths could not load. Try again." with a
+  Try again button, keeps `?jet=`, and loads again on the next open of the box.
+* **Box.** One checkbox per layer in file order: a swatch (band and line in the layer color), the label over its
+  winters ("4 winters"; the baseline shows its `season_range`, "2016/17 to 2025/26"), named "La Niña, 19 winters".
+  "El Niño" and "La Niña" keep a no break space. Then "Average jet stream about 10 km up (250 hPa), November to
+  April.", NOAA's latest reading from `current` ("NOAA's latest reading, July to September 2026: +1.69, strong El
+  Niño (preliminary).", its badge, date and source, and "Show the Moderate and strong El Niño path" when `current.layer`
+  names a layer; nothing when `current` is null), the card, the two sources and "How the paths are made". The box
+  title counts the paths on ("2 on"). Opening the box below 1200 px folds LAYERS and keeps the map beside the panel
+  (`padding` in `app.js`); on phones it scrolls the sheet to the box.
+* **Map.** One GeoJSON source `jet` (credited "Jet stream: <both source titles>" while a path shows) with, per visible
+  layer and branch, the band polygon, its two edges (thin and solid) and the axis (with a dark casing for SATELLITE),
+  under `resorts-glow`. The band fill fades out between zoom 5 and 7, so cluster and resort views keep only the edges
+  and the line. `jet-states` outlines the active band's states in its color, under the selected state's line.
+  `jet-label` (source `jet-labels`) sits above the dots: one label per branch, at a point of its axis inside the open
+  map area (the map minus the panels and the legend), turned along the line, placed after every move so labels of
+  several paths clear each other. With one path on a label names the branch ("Northern branch", "Jet stream"); with
+  several it names the layer ("La Niña, Northern branch"). `map.js` `setResortRing` rings the active band's ski areas
+  with a dark gap and a ring in the path color (`resorts-jet-gap`, `resorts-jet-ring`; they follow the Type and Show
+  only filters, and EVENTS mode hides them with the dots). Gaps and null points split a branch into runs.
+* **2D picture.** Before the WebGL map starts, `preview.js` `addPreviewOverlay` draws the same bands (with the same
+  fade), edges, lines and rings; in EVENTS mode it draws no rings.
 * **Active layer and card.** The last path turned on is active; turning it off hands over to the most recent other one.
-  The card (`#jet-card`, inside the box, so the phone gets it in the layers sheet) shows "Under the band", a "List
-  for" selector when several paths are on (or the layer's name), "33 states and 145 resorts, west to east." (or "8
-  states, west to east. This band crosses no ski areas."), then each state with its resort count and, for layers with
-  more than one branch, its branch. A list of up to 12 resorts opens every state; a longer one opens state by state,
-  with "Open every state". Each resort links to its page. Then the confidence badges, dates and sources of the path and
-  of the winter classes, and the winters averaged (folded). A resort whose state is missing from the file's states list
-  shows under its own state at the end. Turning a path on scrolls the panel so the card's top shows.
-* **Legend strip.** While a path shows: "Jet stream", a line per visible layer and "Under the <layer> band" for the
-  ring, on a row above the resort legend (phones: in the scrolling strip).
+  The card (`#jet-card`, inside the box, so the phone gets it in the layers sheet) is titled "Under the La Niña band".
+  With several paths on, "List for" radios switch the active layer. With two or more, a comparison: "Under La Niña
+  only: Washington, Oregon, ... (46 ski areas)." and, with exactly two, the same for the other path ("Every state under
+  the Weak El Niño band also sits under the La Niña band." when there is none). Then "34 states and 110 ski areas, west
+  to east." ("8 states, west to east. This band crosses no ski areas."), with "12 of 110 shown by your filters." when
+  the Type and Show only filters hide some. The states with ski areas follow, west to east, each with its count; when
+  they lie under different branches they group under a heading per branch. Up to 12 ski areas open every state; more
+  open state by state, with an "Open every state" button (its label changes; no pressed state). The other states
+  follow in one line ("Also under the band: Texas, Louisiana."). Then "Computed from data read on <date>" with the
+  path's badge and source, "El Niño and La Niña years read on <date>" with the RONI's, and the winters averaged. A
+  resort whose state is missing from the file's states list shows under its own state. Turning a path on, a link's
+  first load, the WebGL map's start and Color by's arrival scroll the panel so the card's top shows.
+* **Panel line.** While a path is on, the state, cluster and resort panels get one line per visible path (the active
+  one first) under the heading: "Stevens Pass sits under the La Niña band, northern branch.", "The La Niña band
+  crosses Washington: 19 ski areas.", "All 13 ski areas in the Cascades cluster sit under the La Niña band.", or,
+  from the band geometry at the place's middle longitude against its latitude span, "The La Niña band passes south of
+  Colorado.", "Alpha Peak sits between the La Niña bands." (`bandRelation`). `panel.js` calls `onRendered` after every
+  render, so the line survives the resort record's late load.
+* **Legend strip.** While a path shows: "Jet stream", a line per visible layer (the active one bold) and "Ringed: under
+  the band" (left out in EVENTS mode), in a row of its own above the resort legend that wraps on desktop; on phones the
+  items come first in the sideways strip, which fades at its right end to show it scrolls.
 * **Address bar.** `?jet=<id>,<id>` in the order the paths came on (the active one last). `router.js` adds it to every
-  history entry (`locationFor`), rewrites it on back and forward to the current paths, and drops ids the file lacks.
-  Links in the page leave it out; the Link button copies it. The list view hides the box.
-* **Copy.** "Loading the jet stream paths.", "The jet stream paths arrive with the next data build." (no file) and
-  "The jet stream paths could not load. Try reloading the page." Announcements: "El Niño path on. Its band covers 4
-  states and 3 resorts.", "El Niño path off. The list shows La Niña.", "The list shows El Niño: 4 states and 3 resorts."
+  history entry (`locationFor`), rewrites it on back and forward to the current paths, and drops ids the file lacks,
+  saying "A path in this link is no longer available." once. An old strength id maps to the layer whose `strength` or
+  `strengths` holds it (`el_nino_strong` to `el_nino_moderate_strong`). Links in the page leave it out; the Link button
+  copies it. The list view hides the box.
+* **Left for later.** Faded line ends: a `line-gradient` with `lineMetrics` would need a layer per path color.
 * **Tests.** `jetStreamChecks` in `tests/map/browser_test.mjs` (fixture `tests/map/fixtures/jetstream.json` from
-  `make_fixtures.py`: straight synthetic paths, La Niña with two branches, the southern one over part of the range)
-  covers the lazy load, drawing and removing, the card, the selector, the fallback, the address bar, the 2D picture,
-  tones, EVENTS mode, other layer ids, a missing file, the transforms and the phone sheet; `realJetStreamChecks` checks
-  every real layer's card against its lists. `tests/map/audit.mjs` runs axe on the card (desktop, before the map
-  starts, phone) and checks that the budget runs load nothing of the jet stream.
+  `make_fixtures.py`: straight synthetic paths with tapered ends, La Niña with two branches, the southern one over part
+  of the range, a synthetic `current`) covers the lazy load, drawing and removing, the outline, fade, rings and labels,
+  the card, List for, the comparison, the filters, the fallback, the panel lines, the address bar and old ids, the 2D
+  picture, tones, EVENTS mode, the 1024 px layout, other layer ids, a missing file, a failed load with Try again, the
+  transforms and the phone sheet; `realJetStreamChecks` checks every real layer's card against its lists and the latest
+  reading's button. `tests/map/audit.mjs` runs axe on the card (desktop, before the map starts, phone) and checks that
+  the budget runs load nothing of the jet stream.
 
 ## Refresh
 
