@@ -216,6 +216,11 @@ async function axe(browser, base) {
     }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
     if (c.layers) { await page.locator('#layers-toggle').click(); await page.waitForTimeout(300); }
+    // Phones and narrow desktops keep the Jet stream box closed on a link; the case audits it open.
+    if (c.jet && !(await page.evaluate(() => document.getElementById('jet-box').open))) {
+      await page.locator('#jet-box > summary').click();
+      await page.waitForTimeout(400);
+    }
     if (c.region) { await page.locator('#map-region-btn').click(); await page.waitForTimeout(300); }
     if (c.search) {
       await page.locator('#map-search-input').focus();
