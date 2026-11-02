@@ -119,7 +119,7 @@ function watch(page, label, { allowFail = null } = {}) {
     // The Inter web font loads after the first paint, so a test that moves on quickly can cancel its download.
     if (/^https:\/\/fonts\.gstatic\.com\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     // So can the underlay images, which load after the first paint at idle.
-    if (/\/images\/basemap\/underlay-[a-z0-9]+\.webp$/.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
+    if (/\/images\/basemap\/underlay-[a-z0-9-]+\.webp$/.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     // ... and reload while the PDF viewer still reads a file.
     if (allowFail && allowFail.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`);
