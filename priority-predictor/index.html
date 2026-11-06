@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instructor Grindset • Priority List Predictor</title>
-  <meta name="description" content="Estimate your position on a typical ski school priority list based on employment status, certification level, credentials, and experience." />
+  <meta name="description" content="Estimate your position on a typical ski school priority list based on certification level, credentials, and experience." />
   <link rel="canonical" href="https://instructorgrindset.com/priority-predictor" />
   <meta property="og:type" content="website">
   <meta property="og:title" content="Instructor Grindset • Priority List Predictor">
-  <meta property="og:description" content="Estimate your position on a typical ski school priority list based on employment status, certification level, credentials, and experience.">
+  <meta property="og:description" content="Estimate your position on a typical ski school priority list based on certification level, credentials, and experience.">
   <meta property="og:url" content="https://instructorgrindset.com/priority-predictor">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -124,7 +124,7 @@
       <div class="content">
         <header>
           <h1>Priority List Predictor</h1>
-          <p class="lede">Most ski schools assign lessons based on a priority list. Your position on that list determines whether you get the advanced private lesson or get sent home. This tool estimates where you would land based on the factors that actually drive priority: employment status, certification level, additional credentials, and years of experience. It uses 2022 PSIA-AASI national membership data for certification scoring.</p>
+          <p class="lede">Most ski schools assign lessons based on a priority list. Your position on that list determines whether you get the advanced private lesson or get sent home. This tool estimates where you would land based on the factors that actually drive priority: certification level, additional credentials, and years of experience. It uses 2022 PSIA-AASI national membership data for certification scoring.</p>
         </header>
 
         <div class="pp-layout">
@@ -209,7 +209,7 @@
 
         </div>
 
-        <p class="pp-disclaimer">Priority list culture varies significantly between resorts. This tool is a model based on industry patterns and PSIA-AASI demographic data — not an official PSIA tool. Employment status and certification distribution data sourced from the PSIA-AASI 2021-22 Annual Report.</p>
+        <p class="pp-disclaimer">Priority list culture varies significantly between resorts. This tool is a model based on industry patterns and PSIA-AASI demographic data — not an official PSIA tool. Certification distribution data sourced from the PSIA-AASI 2021-22 Annual Report.</p>
 
       </div>
     </main>
@@ -306,13 +306,13 @@
         blurb = 'You are well-positioned on most priority lists and will regularly receive desirable lesson assignments.';
       } else if (below >= 50) {
         tier = 'Above average'; tierClass = 'tier-above';
-        blurb = 'You are getting lessons but competing for better assignments. A higher certification or full-time commitment would move you up significantly.';
+        blurb = 'You are getting lessons but competing for better assignments. A higher certification would move you up significantly.';
       } else if (below >= 25) {
         tier = 'Average'; tierClass = 'tier-avg';
-        blurb = 'You are getting lessons but competing for the better assignments. If you are part-time, committing to full-time is the single biggest move you can make.';
+        blurb = 'You are getting lessons but competing for the better assignments. Moving up a certification level is the single biggest move you can make.';
       } else {
         tier = 'Low priority'; tierClass = 'tier-low';
-        blurb = 'You are near the bottom of most priority lists. Employment status and certification are the two fastest ways to improve your position.';
+        blurb = 'You are near the bottom of most priority lists. Certification is the fastest way to improve your position, followed by adding credentials.';
       }
 
       document.getElementById('pp-percentile-big').textContent = below + '%';
