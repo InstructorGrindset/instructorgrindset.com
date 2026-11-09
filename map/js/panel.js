@@ -987,7 +987,7 @@ export function createPanel(root, index, {
   function footer() {
     return h('footer', { class: 'panel-footer' },
       h('p', null, 'Choosing your next mountain? Talk it through with Alexandre.'),
-      h('a', { class: 'btn btn-sm', href: config.consultUrl }, 'Book a Free Consultation'),
+      h('a', { class: 'btn btn-sm', href: config.consultUrl }, 'Book a Discovery Call'),
       h('nav', { class: 'related', 'aria-label': 'Related tools and reading' },
         h('p', { class: 'sub' }, 'Keep planning'),
         h('ul', null, RELATED.map(([href, label]) => h('li', null, h('a', { href }, label))))),

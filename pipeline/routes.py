@@ -209,7 +209,7 @@ def _heading(eyebrow: str, text: str) -> str:
 def _footer() -> str:
     related = "".join(f'<li><a href="{href}">{_esc(label)}</a></li>' for href, label in RELATED)
     return ('<footer class="panel-footer"><p>Choosing your next mountain? Talk it through with Alexandre.</p>'
-            f'<a class="btn btn-sm" href="{CONSULT_URL}">Book a Free Consultation</a>'
+            f'<a class="btn btn-sm" href="{CONSULT_URL}">Book a Discovery Call</a>'
             f'<nav class="related" aria-label="Related tools and reading"><p class="sub">Keep planning</p><ul>{related}</ul></nav>'
             f'<p class="fact-meta credits-link"><a href="{CREDITS_URL}">Sources and credits</a></p></footer>')
 

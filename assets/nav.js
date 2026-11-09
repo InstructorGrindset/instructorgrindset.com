@@ -3,7 +3,7 @@
   var t = document.getElementById('sidebar-placeholder');
   if (!t) return;
 
-  fetch('/partials/sidebar.html?v=14')
+  fetch('/partials/sidebar.html?v=15')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
     .then(function (html) {
       // data-defer-images on the placeholder holds drawer images until the drawer first opens.
@@ -46,7 +46,9 @@
 
     var here = norm(location.pathname);
     root.querySelectorAll('.nav a[href]').forEach(function (a) {
-      if (norm(a.getAttribute('href')) === here) a.setAttribute('aria-current', 'page');
+      var href = norm(a.getAttribute('href'));
+      // A section link is current on its pages too (the map link on /map/co/, a blog post under /blog/).
+      if (href === here || (href !== '/' && here.indexOf(href + '/') === 0)) a.setAttribute('aria-current', 'page');
     });
   }
 })();

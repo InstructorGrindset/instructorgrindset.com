@@ -934,7 +934,7 @@ async function desktop(browser, base) {
   check(await page.locator('.climate canvas').count() === 5, 'five climate charts');
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 0; });
   check(w.requests.some((u) => u.includes('/climate/alpha-peak.json')), 'climate lazy loaded for resort');
-  check(await page.locator('.panel-footer a[href="/contact"]').count() === 1, 'Free Consultation link in footer');
+  check(await page.locator('.panel-footer a[href="/contact"]').count() === 1, 'Discovery call link in footer');
   await shot(page, 'desktop-04-resort.png');
 
   // Career section.
