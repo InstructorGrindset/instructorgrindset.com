@@ -104,9 +104,9 @@ ZERO_C_K = 273.15
 # reaches KEEP_ICE_M on KEEP_SHARE of the days in a cell with at least KEEP_LAKE_COVER_PCT of lake. Inside a kept
 # cell, a month keeps its wind counts when the same test passes on that month's days at KEEP_MONTH_SHARE; a month
 # with neither snow nor ice stores null wind. Snow, ice and temperature stay for every month.
-# KEEP_SHARE started at 0.10 (9,729 cells, 8.8 MB); 0.30 brings the file under 6 MB.
+# KEEP_SHARE 0.10 keeps the thin snow plains of Montana and the Dakotas (9,729 cells, 7.0 MB); prairie kiting needs them.
 KEEP_MONTHS = (12, 1, 2)
-KEEP_SHARE = 0.30
+KEEP_SHARE = 0.10
 KEEP_MONTH_SHARE = 0.10
 KEEP_SNOW_M_WE = 0.02
 KEEP_ICE_M = 0.1
