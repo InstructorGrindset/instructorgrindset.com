@@ -1,5 +1,8 @@
 // History API routing: /map/{state}/{cluster}/{resort}/ plus ?compare=a,b,c on a cluster, and EVENTS mode at
 // /map/events/ with ?venue=<id>&event=<id> (the venue and the event the panel shows; checked once events.json loads).
+// Overlay state that holds across views rides along in the address bar: ?jet=<layer>,<layer> (the jet stream paths
+// on, the active one last; docs/map/JETSTREAM.md). Links in the page leave it out; the router adds it to every
+// history entry, so the Link button and the address bar carry it.
 import { config } from './config.js';
 
 /** The first path segment of EVENTS mode (pipeline/routes.py EVENTS_PATH). */
@@ -95,6 +98,24 @@ export function hrefFor(view) {
   return pathFor(view) + (qs ? `?${qs}` : '');
 }
 
+const LAYER_ID = /^[a-z0-9]+(?:_[a-z0-9]+)*$/;
+/** The jet stream layer ids of a query string (?jet=el_nino,la_nina), shape checked only; jetstream.js checks them against the data. */
+export function parseJet(search) {
+  let raw = '';
+  try { raw = new URLSearchParams(search).get('jet') || ''; } catch { raw = ''; }
+  return [...new Set(raw.split(',').map((x) => x.trim().toLowerCase()).filter((x) => LAYER_ID.test(x)))].slice(0, 12);
+}
+let jetParam = '';
+/** The jet stream layers on, in the order they were turned on (the active one last). */
+export function jetLayers() { return jetParam ? jetParam.split(',') : []; }
+export function setJetLayers(ids) { jetParam = (ids || []).filter((x) => LAYER_ID.test(x)).join(','); }
+
+/** The address bar URL of a view: hrefFor plus the overlay state. */
+export function locationFor(view) {
+  const href = hrefFor(view);
+  return jetParam ? `${href}${href.includes('?') ? '&' : '?'}jet=${jetParam}` : href;
+}
+
 export function sameView(a, b) {
   return a && b && a.level === b.level && a.stateCode === b.stateCode && a.clusterId === b.clusterId
     && a.resortId === b.resortId && (a.compare || []).join() === (b.compare || []).join()
@@ -103,6 +124,7 @@ export function sameView(a, b) {
 
 export function createRouter(index, onChange) {
   let current = null;
+  setJetLayers(parseJet(window.location.search));
 
   function fromLocation() {
     return resolve(index, parsePath(window.location.pathname), window.location.search);
@@ -110,10 +132,12 @@ export function createRouter(index, onChange) {
 
   function apply(view, { initial = false, fromPop = false } = {}) {
     if (initial || fromPop) {
-      // Rewrite unknown or non canonical paths (and /map/index.html) to the resolved view.
-      const href = hrefFor(view);
+      // Rewrite unknown or non canonical paths (and /map/index.html) to the resolved view. Back and forward keep
+      // the overlays as they are, so an older entry's ?jet= is rewritten to the current one.
+      const href = locationFor(view);
       if (view.fellBack || window.location.pathname !== href.split('?')[0]
-        || (view.level === 'events' && window.location.search !== (href.includes('?') ? href.slice(href.indexOf('?')) : ''))) {
+        || (view.level === 'events' && window.location.search !== (href.includes('?') ? href.slice(href.indexOf('?')) : ''))
+        || parseJet(window.location.search).join(',') !== jetParam) {
         window.history.replaceState({ href }, '', href);
       }
     }
@@ -131,10 +155,16 @@ export function createRouter(index, onChange) {
     go(view, { replace = false } = {}) {
       const next = { ...view, fellBack: false };
       if (sameView(next, current)) return;
-      const href = hrefFor(next);
+      const href = locationFor(next);
       if (replace) window.history.replaceState({ href }, '', href);
       else window.history.pushState({ href }, '', href);
       apply(next);
+    },
+    /** Rewrite the address bar for the current view after an overlay change (no new history entry). */
+    syncUrl() {
+      if (!current) return;
+      const href = locationFor(current);
+      if (window.location.pathname + window.location.search !== href) window.history.replaceState({ href }, '', href);
     },
     /** Navigate to an in-app href (from a link). */
     goHref(href) {

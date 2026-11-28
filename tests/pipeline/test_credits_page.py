@@ -133,7 +133,7 @@ def test_page_credits_every_source(page):
     for href in ("https://opendatacommons.org/licenses/odbl/", "https://www.openstreetmap.org/copyright",
                  "https://creativecommons.org/licenses/by/4.0/", "https://creativecommons.org/licenses/by-sa/4.0/", "/contact", "/map/"):
         assert href in p.hrefs, href
-    assert "Book a Free Consultation" in text
+    assert "Book a Discovery Call" in text
 
 
 def test_page_credits_zillow_and_the_rent_sources(page):

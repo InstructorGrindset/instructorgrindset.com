@@ -129,6 +129,29 @@ const HIRING_LAYER = {
     'circle-stroke-opacity': ['case', fs('dim'), 0.25, 0.95],
   },
 };
+// Resorts under the active jet stream band (jetstream.js, setResortRing): a dark gap around the dot, then a ring in
+// the layer's color, a shape of its own that reads in any path color. Their ids start with "resorts", so EVENTS mode
+// hides them with the dots. (Strokes sit outside the circle radius.)
+const RING_GAP_LAYER = {
+  id: 'resorts-jet-gap', type: 'circle', source: 'resorts', filter: ['in', ['get', 'id'], ['literal', []]],
+  paint: {
+    'circle-radius': radius(1.1),
+    'circle-color': 'rgba(0,0,0,0)',
+    'circle-stroke-color': '#000000',
+    'circle-stroke-width': 1.4,
+    'circle-stroke-opacity': ['case', fs('dim'), 0.25, 0.9],
+  },
+};
+const RING_LAYER = {
+  id: 'resorts-jet-ring', type: 'circle', source: 'resorts', filter: ['in', ['get', 'id'], ['literal', []]],
+  paint: {
+    'circle-radius': radius(2.5),
+    'circle-color': 'rgba(0,0,0,0)',
+    'circle-stroke-color': '#ffffff',
+    'circle-stroke-width': 1.6,
+    'circle-stroke-opacity': ['case', fs('dim'), 0.3, 1],
+  },
+};
 const DEFAULT_ICON = ['concat', 'fac-', ['get', 'facility_type'], '-', ['get', 'tier']];
 
 const FACILITY_LAYER = {
@@ -476,6 +499,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   let facility = 'all'; // the Type filter: all | ski_area | facility
   let onlyIds = null;    // resort ids Hiring now and the pass filters keep (null: no such filter)
   let hiringIds = [];    // resorts hiring now (hiring.js), ringed on the map
+  let ring = { ids: [], color: '#ffffff' }; // resorts under the active jet stream band (jetstream.js)
   let detail = null;
   let selectedSite = null;
   let trailCtl = null;
@@ -599,6 +623,10 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     const type = facility === 'ski_area' ? [IS_SKI_AREA] : facility === 'facility' ? [['!', IS_SKI_AREA]] : [];
     if (map.getLayer('resorts-glow')) map.setFilter('resorts-glow', ['all', ...type, ...only]);
     if (map.getLayer('resorts-hiring')) map.setFilter('resorts-hiring', ['all', ['in', ['get', 'id'], ['literal', hiringIds]], ...type, ...only]);
+    for (const id of [RING_GAP_LAYER.id, RING_LAYER.id]) {
+      if (map.getLayer(id)) map.setFilter(id, ['all', ['in', ['get', 'id'], ['literal', ring.ids]], ...type, ...only]);
+    }
+    if (map.getLayer(RING_LAYER.id)) map.setPaintProperty(RING_LAYER.id, 'circle-stroke-color', ring.color);
     enforceMode();
     syncPulses();
   }
@@ -709,6 +737,8 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   async function setup() {
     for (const { id, img } of await facilityImages()) if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 });
     map.addLayer(FACILITY_LAYER);
+    map.addLayer(RING_GAP_LAYER);
+    map.addLayer(RING_LAYER);
     map.addLayer(HIRING_LAYER);
     addDetailLayers(map);
     if (detail) setDetailData(map, detail);
@@ -806,6 +836,11 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
     /** Resorts hiring now (index.hiringIds): a green ring, and a pulse unless the viewer prefers reduced motion. */
     setHiring(ids) {
       hiringIds = Array.isArray(ids) ? [...ids] : [];
+      if (loaded) syncLayers();
+    },
+    /** Ring these resorts in this color (the active jet stream band); an empty list removes the rings. */
+    setResortRing(ids, color) {
+      ring = { ids: Array.isArray(ids) ? [...ids] : [], color: color || '#ffffff' };
       if (loaded) syncLayers();
     },
     /** The padding of the last fit: the open map area is the container minus it (the pan limit centers on it). */

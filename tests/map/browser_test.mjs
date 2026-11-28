@@ -119,7 +119,7 @@ function watch(page, label, { allowFail = null } = {}) {
     // The Inter web font loads after the first paint, so a test that moves on quickly can cancel its download.
     if (/^https:\/\/fonts\.gstatic\.com\//.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     // So can the underlay images, which load after the first paint at idle.
-    if (/\/images\/basemap\/underlay-[a-z0-9]+\.webp$/.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
+    if (/\/images\/basemap\/underlay-[a-z0-9-]+\.webp$/.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     // ... and reload while the PDF viewer still reads a file.
     if (allowFail && allowFail.test(r.url()) && r.failure() && r.failure().errorText === 'net::ERR_ABORTED') return;
     problems.push(`request failed ${r.url()} ${r.failure() && r.failure().errorText}`);
@@ -934,7 +934,7 @@ async function desktop(browser, base) {
   check(await page.locator('.climate canvas').count() === 5, 'five climate charts');
   await page.locator('#panel-scroll').evaluate((el) => { el.scrollTop = 0; });
   check(w.requests.some((u) => u.includes('/climate/alpha-peak.json')), 'climate lazy loaded for resort');
-  check(await page.locator('.panel-footer a[href="/contact"]').count() === 1, 'Free Consultation link in footer');
+  check(await page.locator('.panel-footer a[href="/contact"]').count() === 1, 'Discovery call link in footer');
   await shot(page, 'desktop-04-resort.png');
 
   // Career section.
@@ -3643,6 +3643,594 @@ async function realEventSearch(browser, base, file) {
   }
 }
 
+// Jet stream overlay (docs/map/JETSTREAM.md): nothing loads before the Jet stream box opens; each path draws and goes
+// on its own; the active layer's card lists the fixture's states and ski areas west to east and follows the filters;
+// the List for choice switches the active layer; turning the active one off falls back; two paths are compared; the
+// address bar keeps the paths across views, a link opens with them on (the 2D picture too, the box closed on narrow
+// screens), old ids map or are announced; the state, cluster and resort panels get a line; layer ids and branch
+// counts come from the file; a missing file and a failed load (with Try again); the phone sheet.
+// Fixture: tests/map/fixtures/jetstream.json (make_fixtures.py, straight synthetic paths with tapered ends).
+const nbsp = (s) => String(s == null ? '' : s).replace(/ /g, ' ');
+async function jetStreamChecks(browser, base, stubBase) {
+  log('\nJet stream');
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await ctx.newPage();
+  const w = watch(page, 'jet stream');
+  const quiet = trackInflight(page);
+  const jetReq = () => w.requests.filter((u) => /\/jetstream\.(json|js|css)(\?|$)/.test(u));
+  const jetFile = () => w.requests.filter((u) => /\/jetstream\.json(\?|$)/.test(u)).length;
+  const status = (prefix, p = page) => p.waitForFunction((x) => document.getElementById('panel-status').textContent.startsWith(x), prefix, { timeout: 5000 }).then(() => true, () => false);
+  const search = (p = page) => new URL(p.url()).searchParams.get('jet');
+  const mapState = (p = page) => p.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const feats = window.__careerMap.jet.features ? window.__careerMap.jet.features.features : [];
+    const rendered = (layer, key = 'layer') => [...new Set(m.queryRenderedFeatures({ layers: [layer] }).map((f) => f.properties[key]))].sort();
+    return {
+      vis: ['jet-band', 'jet-axis', 'jet-label', 'jet-states'].map((l) => m.getLayoutProperty(l, 'visibility')),
+      axis: feats.filter((f) => f.properties.kind === 'axis').map((f) => `${f.properties.layer}:${f.properties.branch}:${f.geometry.coordinates[0][0]}..${f.geometry.coordinates.at(-1)[0]}`),
+      bands: feats.filter((f) => f.properties.kind === 'band').length,
+      active: [...new Set(feats.filter((f) => f.properties.active).map((f) => f.properties.layer))],
+      drawnAxis: rendered('jet-axis'), drawnBand: rendered('jet-band'),
+      labels: m.queryRenderedFeatures({ layers: ['jet-label'] }).map((f) => `${f.properties.layer}:${f.properties.branch}:${f.properties.image.endsWith('-s') ? 'short' : 'long'}`).sort(),
+      ring: JSON.stringify(m.getFilter('resorts-jet-ring')), gap: JSON.stringify(m.getFilter('resorts-jet-gap')),
+      ringColor: m.getPaintProperty('resorts-jet-ring', 'circle-stroke-color'),
+      states: JSON.stringify(m.getFilter('jet-states')), outline: m.getPaintProperty('jet-states', 'line-color'), statesType: m.getLayer('jet-states').type,
+      bandOpacity: JSON.stringify(m.getPaintProperty('jet-band', 'fill-opacity')), edgeDash: m.getPaintProperty('jet-edge', 'line-dasharray') || null,
+      order: m.getStyle().layers.map((l) => l.id),
+    };
+  });
+  const card = (p = page) => p.evaluate(() => {
+    const c = document.getElementById('jet-card');
+    if (!c || c.hidden) return null;
+    const radios = [...c.querySelectorAll('input[name="jet-active"]')];
+    return {
+      title: c.querySelector('.jet-card-title').textContent,
+      radios: radios.length ? { checked: (radios.find((r) => r.checked) || {}).value, options: radios.map((r) => r.labels[0].textContent), legend: c.querySelector('.jet-pick legend').textContent } : null,
+      one: c.querySelector('.jet-one') ? c.querySelector('.jet-one').textContent : null,
+      diff: [...c.querySelectorAll('.jet-diff')].map((p) => p.textContent),
+      sum: c.querySelector('.jet-sum').textContent,
+      states: [...c.querySelectorAll('.jet-state')].map((li) => ({
+        name: li.querySelector('.jet-state-label').textContent,
+        branch: li.closest('.jet-branch-group') ? li.closest('.jet-branch-group').querySelector('.jet-branch-head').textContent : null,
+        n: li.querySelector('.jet-n').textContent,
+        resorts: [...li.querySelectorAll('.jet-resorts a')].map((a) => a.textContent),
+        open: li.querySelector('details') ? li.querySelector('details').open : null,
+      })),
+      also: c.querySelector('.jet-also') ? c.querySelector('.jet-also').textContent : null,
+      meta: [...c.querySelectorAll('.jet-list .jet-meta')].map((p) => p.textContent.replace(/\s+/g, ' ').trim()),
+    };
+  }).then((x) => (x ? JSON.parse(nbsp(JSON.stringify(x))) : x));
+  const legend = (p = page) => p.evaluate(() => {
+    const row = document.querySelector('.map-legend .ml-jet-row');
+    return row && !row.hidden ? [...row.querySelectorAll('li')].filter((li) => li.offsetParent).map((li) => li.textContent) : [];
+  }).then((a) => a.map(nbsp));
+  const panelNote = (p = page) => p.evaluate(() => [...document.querySelectorAll('#panel-content .jet-panel-note p')].map((x) => x.textContent)).then((a) => a.map(nbsp));
+
+  // 1. Nothing of the jet stream loads with the page, the map or the other layers.
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await page.waitForTimeout(1200);
+  check(jetReq().length === 0, `lazy: nothing of the jet stream loads with the page (${jetReq().length} requests)`);
+  const box = page.locator('#jet-box');
+  check(await box.isVisible() && (await box.locator('summary').textContent()).trim() === 'Jet stream' && !(await box.evaluate((d) => d.open))
+    && await page.locator('#jet-box input').count() === 0,
+  'the Layers panel holds a closed Jet stream box, with no checkbox before its data loads');
+  await ready(page);
+  await mapIdle(page);
+  await page.waitForFunction(() => document.querySelectorAll('.recolor-modes .filter-btn').length === 4, null, { timeout: 15000 });
+  await quiet();
+  check(jetReq().length === 0, `lazy: no jetstream.json, module or stylesheet before the box opens (${jetReq().length} requests)`);
+  check(!(await page.evaluate(() => Boolean(window.__careerMap.mapCtl.map.getSource('jet')))), 'no jet stream source on the map before the box opens');
+
+  // 2. Opening the box loads the file once and lists every layer in file order, all off.
+  await box.locator('summary').click();
+  await page.waitForSelector('#jet-box input[data-jet]', { timeout: 15000 });
+  const opts = await page.evaluate(() => [...document.querySelectorAll('#jet-box input[data-jet]')].map((i) => ({
+    id: i.dataset.jet, checked: i.checked, name: i.getAttribute('aria-label'),
+    text: [...i.labels[0].querySelectorAll('.lp-text, .jet-count')].map((e) => e.textContent).join('|'),
+    swatch: getComputedStyle(i.labels[0].querySelector('.jet-swatch')).getPropertyValue('--c').trim(),
+  })));
+  check(jetFile() === 1, `opening the box loads jetstream.json once (${jetFile()})`);
+  check(JSON.stringify(opts.map((o) => o.id)) === JSON.stringify(['last10', 'el_nino', 'la_nina', 'neutral']) && opts.every((o) => !o.checked),
+    `one checkbox per layer in file order, all off (${opts.map((o) => o.id)})`);
+  check(nbsp(opts[1].text) === 'El Niño|3 winters' && opts[0].text === 'Last 10 winters|2016/17 to 2025/26' && opts[1].swatch === '#ff4d5e'
+    && opts[1].text.includes('El Niño'),
+  `each checkbox shows its label (El Niño kept on one line) over its winters, the baseline its span, with a swatch in the layer color (${nbsp(opts[1].text)}; ${opts[0].text})`);
+  check(await page.getByRole('checkbox', { name: 'La Niña, 4 winters' }).count() === 1 && opts[0].name === 'Last 10 winters, 2016/17 to 2025/26',
+    'the checkbox names read as one phrase ("La Niña, 4 winters")');
+  const note = await page.evaluate(() => ({
+    note: document.querySelector('#jet-box .jet-layers + .jet-note').textContent,
+    now: document.querySelector('#jet-box .jet-now .jet-note').textContent,
+    nowMeta: document.querySelector('#jet-box .jet-now .jet-meta').textContent.replace(/\s+/g, ' ').trim(),
+    nowBtn: document.querySelector('#jet-box .jet-now-btn').textContent,
+    src: [...document.querySelectorAll('#jet-box .jet-src a')].map((a) => `${a.textContent}|${a.getAttribute('href')}|${a.target}`),
+  }));
+  check(note.note === 'Average jet stream about 10 km up (250 hPa), November to April.', `the one line note in plain words (${note.note})`);
+  check(nbsp(note.now) === "NOAA's latest reading, July to September 2026: +1.21, moderate El Niño (preliminary)." && note.nowMeta === 'Published Read on Oct 1, 2026 · Source'
+    && nbsp(note.nowBtn) === 'Show the El Niño path', `the latest reading with its source and a button to its path (${nbsp(note.now)}; ${nbsp(note.nowBtn)})`);
+  check(JSON.stringify(note.src) === JSON.stringify(['Synthetic fixture: 250 hPa winds|https://example.com/fixture/jet-winds|_blank',
+    'Synthetic fixture: ENSO index|https://example.com/fixture/jet-enso|_blank']), `links to both sources from sources.json (${note.src})`);
+  check(!(await page.evaluate(() => window.__careerMap.mapCtl.map.getSource('jet') && window.__careerMap.mapCtl.map.getLayoutProperty('jet-band', 'visibility') === 'visible')),
+    'with every path off, the jet layers stay hidden');
+
+  // 3. One path on (from the latest reading's button): band, solid edges and line under the dots, the states
+  // outlined, its ski areas ringed, one label above the dots, the card and the legend.
+  await page.locator('#jet-box .jet-now-btn').click();
+  check(await status('El Niño path on. Its band covers 4 states and 3 ski areas.'), 'the latest reading turns its path on, announced with what its band covers');
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).length > 0, null, { timeout: 10000 });
+  await mapIdle(page);
+  let ms = await mapState();
+  check(ms.vis.every((v) => v === 'visible') && JSON.stringify(ms.axis) === JSON.stringify(['el_nino:main:-170..-60']) && ms.bands === 1
+    && JSON.stringify(ms.drawnAxis) === JSON.stringify(['el_nino']) && JSON.stringify(ms.drawnBand) === JSON.stringify(['el_nino']),
+  `El Niño draws its band and axis (${ms.axis}; ${ms.bands} band)`);
+  check(await page.locator('#jet-box .jet-now-btn').isHidden() && await page.locator('#jet-layer-el_nino').isChecked(), 'with its path active the reading\'s button goes');
+  const idx = (id) => ms.order.indexOf(id);
+  check(idx('jet-band') < idx('jet-axis') && idx('jet-axis') < idx('resorts-glow') && idx('jet-axis') < idx('resorts')
+    && idx('jet-label') > idx('resorts') && idx('jet-label') > idx('resorts-hiring')
+    && ms.statesType === 'line' && idx('jet-states') < idx('states-line-selected') && idx('states-line') < idx('jet-states'),
+  'the band and line draw under the resort dots, the labels above them; the states get an outline under the selected state');
+  check(ms.states === JSON.stringify(['in', ['get', 'code'], ['literal', ['CA', 'NV', 'UT', 'CO']]]) && ms.outline === '#ff4d5e',
+    `the states under the band get a thin outline in the layer color (${ms.states})`);
+  check(ms.bandOpacity.startsWith('["interpolate",["linear"],["zoom"],5,') && ms.bandOpacity.endsWith(',7,0]') && ms.edgeDash === null,
+    `the band fill fades out by zoom 7; the edges are solid (${ms.bandOpacity})`);
+  const ringIds = await page.evaluate(() => ['resorts-jet-ring', 'resorts-jet-gap'].map((l) => [...new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: [l] }).map((f) => f.properties.id))].sort().join()));
+  check(ringIds[0] === 'echo-mesa,hotel-lake,india-crest' && ringIds[1] === ringIds[0] && ms.ringColor === '#ff4d5e',
+    `the ski areas under the band get a dark gap and a ring (${ringIds[0]})`);
+  check(JSON.stringify(ms.labels) === JSON.stringify(['el_nino:main:short']), `one label per branch, the branch name only with one path on (${ms.labels})`);
+  const lab = await page.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const f = m.queryRenderedFeatures({ layers: ['jet-label'] })[0];
+    const q = m.project(f.geometry.coordinates);
+    const pad = window.__careerMap.mapCtl.openPadding;
+    return { x: q.x, y: q.y, x0: pad.left, x1: m.getCanvas().clientWidth - pad.right };
+  });
+  check(lab.x > lab.x0 + 40 && lab.x < lab.x1 - 40, `the label sits inside the open map area (${Math.round(lab.x)} in ${lab.x0}..${lab.x1})`);
+  let c = await card();
+  check(c && c.title === 'Under the El Niño band' && c.radios === null && c.one === '3 winters' && c.sum === '4 states and 3 ski areas, west to east.' && !c.diff.length,
+    `the card names the band and counts it (${c && c.title}; ${c && c.sum})`);
+  check(c && JSON.stringify(c.states.map((x) => `${x.name}:${x.resorts.join('+')}:${x.n}`))
+    === JSON.stringify(['California:Hotel Lake+India Crest:2 ski areas', 'Colorado:Echo Mesa:1 ski area']) && c.also === 'Also under the band: Nevada, Utah.',
+  `states with ski areas first, west to east; the rest in one line (${c && c.states.map((x) => x.name)}; ${c && c.also})`);
+  check(c && c.states.every((x) => x.branch === null && x.open), 'one branch: no branch names; a short list opens every state');
+  check(c && c.meta[0] === 'Estimated Computed from data read on Oct 1, 2026 · Synthetic fixture: 250 hPa winds'
+    && c.meta[1] === 'Published El Niño and La Niña years read on Oct 1, 2026 · Synthetic fixture: ENSO index', `the card carries the confidence, date and source in plain words (${c && c.meta.join(' / ')})`);
+  check(JSON.stringify(await legend()) === JSON.stringify(['Jet stream', 'El Niño', 'Ringed: under the band']), `the legend strip names the line and the ring (${await legend()})`);
+  const strip = await page.evaluate(() => {
+    const lg = document.getElementById('map-legend').getBoundingClientRect();
+    const row = document.querySelector('.ml-jet').getBoundingClientRect();
+    const title = document.querySelector('.ml-title').getBoundingClientRect();
+    const items = document.querySelector('.map-legend > .ml-items').getBoundingClientRect();
+    return { rowAbove: row.bottom <= title.top + 1, together: Math.abs(title.top - items.top) < 2, inside: row.left >= lg.left - 1 && row.right <= lg.right + 1 };
+  });
+  check(strip.rowAbove && strip.together && strip.inside, `the jet row sits above the legend, inside the strip; LEGEND stays with its items (${JSON.stringify(strip)})`);
+  check(search() === 'el_nino' && (await box.locator('.jet-on').textContent()) === '1 on', `the address bar keeps the path (?jet=${search()}); the box title counts it`);
+  await shot(page, 'jet-01-el-nino.png');
+
+  // 4. The panels say what the path means for the view: a state crossed, a state passed by, a resort under the band.
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'state', stateCode: 'CO' }));
+  await page.waitForFunction(() => document.querySelector('#panel-content .jet-panel-note'), null, { timeout: 10000 });
+  check(JSON.stringify(await panelNote()) === JSON.stringify(['The El Niño band crosses Colorado: 1 ski area.']), `state panel: a state the band crosses (${await panelNote()})`);
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'state', stateCode: 'VT' }));
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'Vermont', null, { timeout: 10000 });
+  check(JSON.stringify(await panelNote()) === JSON.stringify(['The El Niño band passes south of Vermont.']), `state panel: a band south of the state (${await panelNote()})`);
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'CA', clusterId: 'fixture-lake-crest', resortId: 'hotel-lake' }));
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'Hotel Lake' && document.querySelector('#panel-content .tier-row'), null, { timeout: 10000 });
+  await page.waitForTimeout(300);
+  check(JSON.stringify(await panelNote()) === JSON.stringify(['Hotel Lake sits under the El Niño band.']), `resort panel: a resort under the band (${await panelNote()})`);
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'cluster', stateCode: 'CO', clusterId: 'fixture-front-range' }));
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'Fixture Front Range', null, { timeout: 10000 });
+  check(JSON.stringify(await panelNote()) === JSON.stringify(['The El Niño band passes south of the Fixture Front Range cluster.']), `cluster panel (${await panelNote()})`);
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'national' }));
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'United States', null, { timeout: 10000 });
+  await mapIdle(page);
+  check((await panelNote()).length === 0, 'the national panel keeps its own text');
+
+  // 5. A second path: it becomes active; La Niña has two branches, the southern one over part of the range; the card
+  // compares the two.
+  await page.getByRole('checkbox', { name: 'La Niña, 4 winters' }).check();
+  await page.waitForFunction(() => window.__careerMap.jet.active === 'la_nina', null, { timeout: 5000 });
+  await mapIdle(page);
+  ms = await mapState();
+  check(JSON.stringify(ms.axis) === JSON.stringify(['el_nino:main:-170..-60', 'la_nina:north:-170..-55', 'la_nina:south:-125..-95'])
+    && JSON.stringify(ms.active) === JSON.stringify(['la_nina']) && JSON.stringify(ms.drawnAxis) === JSON.stringify(['el_nino', 'la_nina']),
+  `both paths draw, La Niña with its two branches, and the last one on is active (${ms.axis})`);
+  check(JSON.stringify(ms.labels) === JSON.stringify(['el_nino:main:long', 'la_nina:north:long', 'la_nina:south:long']), `with two paths on each label names its layer (${ms.labels})`);
+  c = await card();
+  check(c && c.title === 'Under the La Niña band' && c.radios && c.radios.checked === 'la_nina' && c.radios.legend === 'List for'
+    && JSON.stringify(c.radios.options) === JSON.stringify(['El Niño', 'La Niña']),
+  `with two paths on, List for offers both in file order, without a winter count (${c && c.radios && c.radios.options})`);
+  check(c && JSON.stringify(c.states.map((x) => `${x.name}/${x.branch}`)) === JSON.stringify(['Colorado/Southern branch', 'Vermont/Northern branch'])
+    && c.also === 'Also under the band: California, Nevada, Idaho, Utah, Wyoming, New Hampshire.',
+  `the list mixes branches, so its states group under a heading per branch (${c && c.states.map((x) => `${x.name}/${x.branch}`)})`);
+  check(c && JSON.stringify(c.diff) === JSON.stringify(['Under La Niña only: Idaho, Wyoming, Vermont, New Hampshire (2 ski areas).', 'Every state under the El Niño band also sits under the La Niña band.']),
+    `the card compares the two paths (${c && c.diff.join(' / ')})`);
+  check(ms.states.includes('"VT"') && ms.ringColor === '#6f7bff', 'the outline and rings follow the active layer');
+  check(search() === 'el_nino,la_nina', `?jet= lists the paths in the order they came on (${search()})`);
+  check(JSON.stringify(await legend()) === JSON.stringify(['Jet stream', 'El Niño', 'La Niña', 'Ringed: under the band'])
+    && await page.evaluate(() => document.querySelector('.ml-jet li.is-active').textContent.includes('La')), `the legend strip names both lines and marks the active one (${await legend()})`);
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'resort', stateCode: 'VT', clusterId: 'fixture-green-ridge', resortId: 'kilo-notch' }));
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'Kilo Notch' && document.querySelector('#panel-content .tier-row'), null, { timeout: 10000 });
+  await page.waitForTimeout(300);
+  check(JSON.stringify(await panelNote()) === JSON.stringify(['Kilo Notch sits under the La Niña band, northern branch.', 'The El Niño band passes south of Kilo Notch.']),
+    `resort panel: one line per path, the active one first, the branch named (${await panelNote()})`);
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'national' }));
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'United States', null, { timeout: 10000 });
+  await mapIdle(page);
+  await shot(page, 'jet-02-two-paths.png');
+  await axeCheck(page, 'jet stream card open, desktop');
+
+  // 6. List for switches the active layer, and the keyboard reaches it.
+  await page.locator('#jet-active-el_nino').check();
+  await page.waitForFunction(() => window.__careerMap.jet.active === 'el_nino', null, { timeout: 5000 });
+  check(await status('The list shows El Niño: 4 states and 3 ski areas.'), 'switching the list is announced');
+  c = await card();
+  ms = await mapState();
+  check(c && c.radios.checked === 'el_nino' && c.states.length === 2 && ms.ringColor === '#ff4d5e' && JSON.stringify(ms.active) === JSON.stringify(['el_nino'])
+    && search() === 'la_nina,el_nino' && await page.evaluate(() => document.activeElement.id) === 'jet-active-el_nino',
+  `List for makes El Niño active: list, rings, outline and address bar follow; focus stays on it (${search()})`);
+  const tabOrder = await page.evaluate(() => {
+    const all = [...document.querySelectorAll('a[href], button, input, select, summary, [tabindex]:not([tabindex="-1"])')].filter((e) => e.offsetParent && !e.disabled);
+    return { box: all.indexOf(document.querySelector('#jet-layer-neutral')), pick: all.indexOf(document.querySelector('#jet-active-el_nino')),
+      link: all.indexOf(document.querySelector('#jet-card .jet-resorts a')) };
+  });
+  check(tabOrder.box >= 0 && tabOrder.pick > tabOrder.box && tabOrder.link > tabOrder.pick, `the card follows the checkboxes in keyboard order (${JSON.stringify(tabOrder)})`);
+
+  // 7. The card follows the Type and Show only filters, as the rings do.
+  await page.locator('#filter-facility').check();
+  await page.waitForTimeout(300);
+  c = await card();
+  check(c && c.sum === '4 states and 3 ski areas, west to east. 0 of 3 shown by your filters.' && c.states.length === 0 && c.also === 'Under the band: California, Nevada, Utah, Colorado.',
+    `the Indoor and training filter hides the ski areas from the card and says so (${c && c.sum})`);
+  await page.locator('#facility-filter .lp-reset').click();
+  await page.waitForTimeout(300);
+  check((await card()).sum === '4 states and 3 ski areas, west to east.', 'Show every resort brings them back');
+
+  // 8. Turning the active one off falls back to the other; the last one off hides the card.
+  await page.getByRole('checkbox', { name: 'El Niño, 3 winters' }).uncheck();
+  check(await status('El Niño path off. The list shows La Niña.'), 'turning the active path off says which list shows');
+  await mapIdle(page);
+  c = await card();
+  ms = await mapState();
+  check(c && c.radios === null && c.one === '4 winters' && c.title === 'Under the La Niña band' && JSON.stringify(ms.drawnAxis) === JSON.stringify(['la_nina']) && search() === 'la_nina',
+    `the active path off: La Niña takes over and El Niño leaves the map (${ms.drawnAxis})`);
+  await page.getByRole('checkbox', { name: 'La Niña, 4 winters' }).uncheck();
+  await mapIdle(page);
+  ms = await mapState();
+  check(await card() === null && (await legend()).length === 0 && ms.vis.every((v) => v === 'none') && ms.ring.includes('[]') && ms.gap.includes('[]') && search() === null
+    && await box.locator('.jet-on').isHidden(), 'every path off: no card, no legend items, the layers and rings go, ?jet= leaves the address bar');
+  w.assertClean();
+
+  // 9. MAP and SATELLITE: the band and its casing get stronger over the imagery.
+  await page.getByRole('checkbox', { name: 'Last 10 winters, 2016/17 to 2025/26' }).check();
+  const paint = () => page.evaluate(() => JSON.stringify(window.__careerMap.mapCtl.map.getPaintProperty('jet-band', 'fill-opacity')) + window.__careerMap.mapCtl.map.getPaintProperty('jet-axis-casing', 'line-opacity'));
+  const before = await paint();
+  await page.locator('#tone-toggle button[data-tone="satellite"]').click();
+  await page.waitForTimeout(300);
+  const after = await paint();
+  check(before !== after && after.endsWith('0.75'), `SATELLITE strengthens the band and the dark casing (${before} to ${after})`);
+  await mapIdle(page);
+  await shot(page, 'jet-03-satellite.png');
+  await page.locator('#tone-toggle button[data-tone="map"]').click();
+  c = await card();
+  check(c && c.one === '2016/17 to 2025/26' && c.meta.length === 1, `the baseline shows its span once and no ENSO line (${c && c.one})`);
+
+  // 10. Views keep the paths: a resort link in the card, back, and EVENTS mode (the rings and their legend item go
+  // with the dots; the jet row stays).
+  await page.locator('#jet-card .jet-resorts a', { hasText: 'Alpha Peak' }).click();
+  await page.waitForFunction(() => document.getElementById('panel-heading') && document.getElementById('panel-heading').textContent === 'Alpha Peak', null, { timeout: 10000 });
+  check(new URL(page.url()).pathname === '/map/co/fixture-front-range/alpha-peak/' && search() === 'last10' && new URL(page.url()).searchParams.get('data') === FIX,
+    `a resort in the card opens its page and the path stays on (${page.url().replace(base, '')})`);
+  await page.goBack();
+  await page.waitForFunction(() => document.getElementById('panel-heading').textContent === 'United States', null, { timeout: 10000 });
+  check(search() === 'last10' && await page.evaluate(() => window.__careerMap.jet.visible.join()) === 'last10', `back keeps the paths on (${search()})`);
+  await page.getByRole('radio', { name: 'Events', exact: true }).check();
+  await page.waitForFunction(() => window.__careerMap.events && window.__careerMap.events.loaded && window.__careerMap.mapCtl.map.getLayer('event-venues'), null, { timeout: 15000 });
+  await mapIdle(page);
+  const ev = await page.evaluate(() => ({ url: location.search, ring: ['resorts-jet-ring', 'resorts-jet-gap'].map((l) => window.__careerMap.mapCtl.map.getLayoutProperty(l, 'visibility')).join(),
+    band: window.__careerMap.mapCtl.map.getLayoutProperty('jet-band', 'visibility'), box: Boolean(document.getElementById('jet-box').offsetParent) }));
+  check(ev.url.includes('jet=last10') && ev.ring === 'none,none' && ev.band === 'visible' && ev.box, `EVENTS mode keeps the paths and hides the rings with the dots (${JSON.stringify(ev)})`);
+  check(JSON.stringify(await legend()) === JSON.stringify(['Jet stream', 'Last 10 winters']), `EVENTS mode keeps the jet legend row without the ring item (${await legend()})`);
+  await page.getByRole('radio', { name: 'Resorts', exact: true }).check();
+  await page.locator('#list-toggle').click();
+  check(await box.isHidden(), 'the list view hides the Jet stream box');
+  await page.locator('#list-toggle').click();
+  await quiet();
+  w.assertClean();
+
+  // 11. A link opens with the paths on, the 2D picture included; in EVENTS mode the picture draws no rings.
+  await page.goto(`${base}/map/${Q}&jet=neutral,last10`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded && document.querySelector('.map-preview .map-preview-overlay'), null, { timeout: 15000 });
+  const pic = await page.evaluate(() => ({
+    open: document.getElementById('jet-box').open,
+    checked: [...document.querySelectorAll('#jet-box input[data-jet]')].filter((i) => i.checked).map((i) => i.dataset.jet),
+    paths: document.querySelectorAll('.map-preview .map-preview-overlay path').length,
+    rings: document.querySelectorAll('.map-preview g.map-preview-overlay circle').length,
+    active: window.__careerMap.jet.active, sel: (document.querySelector('#jet-card input[name="jet-active"]:checked') || {}).value,
+  }));
+  check(pic.open && JSON.stringify(pic.checked) === JSON.stringify(['last10', 'neutral']) && pic.active === 'last10' && pic.sel === 'last10',
+    `?jet=neutral,last10 opens the box with both on and the last one active (${JSON.stringify(pic)})`);
+  check(pic.paths >= 8 && pic.rings === 18, `the 2D picture draws both paths and a gap and ring on each of the active band's 9 ski areas (${pic.paths} paths, ${pic.rings} circles)`);
+  await shot(page, 'jet-04-picture.png');
+  await axeCheck(page, 'jet stream link, before the map starts');
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getSource('jet') && window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).length > 0, null, { timeout: 15000 });
+  ms = await mapState();
+  check(JSON.stringify(ms.drawnAxis) === JSON.stringify(['last10', 'neutral']) && JSON.stringify(ms.active) === JSON.stringify(['last10']),
+    `the WebGL map starts with the linked paths (${ms.drawnAxis})`);
+  await quiet();
+  await page.goto(`${base}/map/events/${Q}&jet=el_nino`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded && window.__careerMap.events && window.__careerMap.events.loaded
+    && document.querySelector('.map-preview .map-preview-overlay'), null, { timeout: 15000 });
+  await page.waitForTimeout(300);
+  const evPic = await page.evaluate(() => ({ paths: document.querySelectorAll('.map-preview .map-preview-overlay path').length, rings: document.querySelectorAll('.map-preview g.map-preview-overlay circle').length }));
+  check(evPic.paths > 0 && evPic.rings === 0, `EVENTS mode: the 2D picture draws the path and no rings (${JSON.stringify(evPic)})`);
+  await quiet();
+
+  // 12. Old ids: a strength the file groups maps to its group; an id the file lacks drops out, said once.
+  await page.goto(`${base}/map/${Q}&jet=bogus,EL_NINO,el-nino`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 15000 });
+  check(await status('A path in this link is no longer available.') && search() === 'el_nino' && await page.evaluate(() => window.__careerMap.jet.visible.join()) === 'el_nino',
+    `an unknown id drops out of the address bar and is announced (${search()})`);
+  await quiet();
+  w.assertClean();
+
+  // 13. A route stub keeps the paths in its address bar and gets the panel line.
+  await page.goto(`${stubBase}/map/co/fixture-front-range/alpha-peak/?jet=la_nina`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded && document.querySelector('#panel-content .tier-row'), null, { timeout: 15000 });
+  await page.waitForTimeout(300);
+  check(search() === 'la_nina' && (await card()) && (await card()).one === '4 winters' && (await panelNote())[0] === 'Alpha Peak sits between the La Niña bands.',
+    `a resort stub opens with the linked path, its card and the panel line (${await panelNote()})`);
+  await quiet();
+  w.assertClean();
+  await ctx.close();
+
+  // 14. Narrow desktops: a link shows the paths with the box closed; opening the box folds LAYERS and moves the map
+  // beside the panel.
+  const nctx = await browser.newContext({ viewport: { width: 1024, height: 768 } });
+  const npage = await nctx.newPage();
+  const nw = watch(npage, 'jet stream, narrow desktop');
+  await npage.goto(`${base}/map/${Q}&jet=la_nina`);
+  await ready(npage);
+  await npage.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded && window.__careerMap.jet.features, null, { timeout: 15000 });
+  await mapIdle(npage);
+  const nb1 = await npage.evaluate(() => ({ open: document.getElementById('jet-box').open, on: document.querySelector('#jet-box .jet-on').textContent,
+    drawn: [...new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).map((f) => f.properties.layer))].join(),
+    left: window.__careerMap.mapCtl.openPadding.left }));
+  check(!nb1.open && nb1.on === '1 on' && nb1.drawn === 'la_nina' && (await legend(npage)).includes('La Niña'),
+    `1024 px: a link draws its path and legend with the box closed (${JSON.stringify(nb1)})`);
+  await npage.locator('#layers-box > summary').click();
+  await npage.locator('#jet-box > summary').click();
+  await npage.waitForTimeout(400);
+  await mapIdle(npage);
+  const nb2 = await npage.evaluate(() => ({ layers: document.getElementById('layers-box').open, left: window.__careerMap.mapCtl.openPadding.left }));
+  check(!nb2.layers && nb2.left > nb1.left + 150, `opening the box folds LAYERS and keeps the map beside the panel (${JSON.stringify(nb2)}, before ${nb1.left})`);
+  await shot(npage, 'jet-07-1024.png');
+  nw.assertClean();
+  await nctx.close();
+
+  // 15. The transforms (map/js/jetstream.js).
+  const tctx = await browser.newContext();
+  const tpage = await tctx.newPage();
+  await tpage.goto(`${base}/map/${Q}`);
+  const rules = await tpage.evaluate(async () => {
+    const m = await import('/map/js/jetstream.js');
+    const band = [[-120, 30, 40], [-119, 31, 41], [-118, null, 42], [-117, 32, 42], [-116, 33, 43], [-112, 34, 44], [-111, 35, 45]];
+    const axis = [[-120, 35, 40], [-119, 36, 41], [-115, 37, 42], [-114, null, 30], [-113, 38, 43]];
+    const layer = { id: 'x', label: 'X', branches: [{ id: 'north', label: 'Northern branch' }, { id: 'south', label: 'Southern branch' }],
+      overflies: { states: [{ code: 'CA', name: 'California', branches: ['south'] }, { code: 'CO', name: 'Colorado', branches: ['north', 'south'] }],
+        resorts: [{ id: 'b', state: 'CO', branch: 'north' }, { id: 'gone', state: 'CO', branch: 'north' }, { id: 'a', state: 'CA', branch: 'south' }, { id: 'c', state: 'ME', branch: 'north' }] } };
+    const rec = { a: { id: 'a', name: 'A', state: 'CA' }, b: { id: 'b', name: 'B', state: 'CO', hidden: true }, c: { id: 'c', name: 'C', state: 'ME' } };
+    const groups = m.stateGroups(layer, (id) => rec[id] || null, (code) => ({ ME: 'Maine' }[code] || code), (r) => !r.hidden);
+    const fc = m.jetFeatures([{ ...layer, color: '#ffffff', branches: [{ id: 'main', label: 'Jet stream', axis, band }] }, { ...layer, id: 'y', color: '#000000', branches: [{ id: 'main', label: 'Jet stream', axis, band }] }], ['y', 'x']);
+    const strip = (lo, hi) => Array.from({ length: 11 }, (_, i) => [-110 + i, lo, hi]);
+    const two = { label: 'La Niña', branches: [{ id: 'n', label: 'Northern branch', band: strip(44, 48) }, { id: 's', label: 'Southern branch', band: strip(30, 34) }] };
+    const files = [{ id: 'el_nino_weak', phase: 'el_nino', strength: 'weak', strengths: [] }, { id: 'el_nino_moderate_strong', phase: 'el_nino', strength: 'moderate_strong', strengths: ['moderate', 'strong'] }];
+    return {
+      runs: m.runs(axis, (p) => p[1] != null).map((r) => r.map((p) => p[0]).join(',')),
+      polys: m.bandPolygons(band),
+      edges: m.bandEdges(band).length,
+      axis: m.axisLines(axis).map((l) => l.length),
+      at: [m.bandAt(band, -119.5), m.bandAt(band, -118), m.bandAt(band, -130)],
+      rel: [m.bandRelation(two, -105, 38, 41), m.bandRelation(two, -105, 33, 36), m.bandRelation(two, -105, 49, 50), m.bandRelation(two, -105, 45, 46), m.bandRelation(two, -90, 38, 41)].map((r) => `${r.side}/${r.count}`),
+      toggled: [m.toggled(['a', 'b'], 'a', true).join(), m.toggled(['a', 'b'], 'b', false).join(), m.toggled([], 'c', true).join()],
+      groups: groups.map((g) => `${g.name}:${g.branches.join('+')}:${g.resorts.map((r) => `${r.name}/${r.branch}`).join('+')}:${g.total}`),
+      only: m.onlyUnder(layer, [{ overflies: { states: [{ code: 'CA' }] } }], groups),
+      label: [m.lineLabel(layer, layer.branches[0], true), m.lineLabel(layer, layer.branches[0], false), m.lineLabel({ label: 'Y', branches: [{}] }, { label: 'Jet stream' }, true)],
+      resolve: [m.resolveIds(['el_nino_strong', 'el_nino_moderate', 'el_nino_weak', 'gone', 'el_nino'], files)].map((r) => `${r.ids.join()}|${r.lost}`)[0],
+      nb: m.nb('Weak El Niño and La Niña'),
+      fc: { n: fc.features.length, active: [...new Set(fc.features.filter((f) => f.properties.active).map((f) => f.properties.layer))], order: fc.features[0].properties.order },
+    };
+  });
+  check(JSON.stringify(rules.runs) === JSON.stringify(['-120,-119', '-115', '-113']), `runs split at a gap over 1.5 degrees and at a null (${rules.runs})`);
+  check(JSON.stringify(rules.polys) === JSON.stringify([[[-120, 30], [-119, 31], [-119, 41], [-120, 40], [-120, 30]], [[-117, 32], [-116, 33], [-116, 43], [-117, 42], [-117, 32]], [[-112, 34], [-111, 35], [-111, 45], [-112, 44], [-112, 34]]])
+    && rules.edges === 6, 'band polygons run the south edge west to east and the north edge back, closed; edges stay open');
+  check(JSON.stringify(rules.axis) === JSON.stringify([2]), `axis lines keep runs of two points or more (${rules.axis})`);
+  check(JSON.stringify(rules.at) === JSON.stringify([[30.5, 40.5], null, null]), `bandAt interpolates inside a run and stops at gaps (${JSON.stringify(rules.at)})`);
+  check(JSON.stringify(rules.rel) === JSON.stringify(['between/2', 'over/2', 'south/2', 'over/2', 'null/0']), `bandRelation: between, over, south, outside (${rules.rel})`);
+  check(JSON.stringify(rules.toggled) === JSON.stringify(['b,a', 'a', 'c']), `turning a layer on makes it the last (active); off removes it (${rules.toggled})`);
+  check(JSON.stringify(rules.groups) === JSON.stringify(['California:Southern branch:A/Southern branch:1', 'Colorado:Northern branch+Southern branch::1', 'Maine:Northern branch:C/Northern branch:1']),
+    `the card groups ski areas by state in file order, filters them, skips one off the map, keeps one from an unlisted state (${rules.groups})`);
+  check(JSON.stringify(rules.only) === JSON.stringify({ names: ['Colorado', 'Maine'], skiAreas: 1 }), `onlyUnder: the states under one band only (${JSON.stringify(rules.only)})`);
+  check(JSON.stringify(rules.label) === JSON.stringify(['X, Northern branch', 'Northern branch', 'Y']) && rules.fc.n === 20 && JSON.stringify(rules.fc.active) === JSON.stringify(['x']) && rules.fc.order === 0,
+    `map labels: the layer only with several paths on, the branch only with two or more; the last layer on is active (${rules.label})`);
+  check(rules.resolve === 'el_nino_moderate_strong,el_nino_weak|2', `old strength ids map to the group that holds them; others drop (${rules.resolve})`);
+  check(rules.nb === 'Weak El Niño and La Niña', 'El Niño and La Niña keep a no break space');
+  await tctx.close();
+
+  // 16. Layer ids, their number and the branch count come from the file: a strength group with three branches.
+  const variant = JSON.parse(fs.readFileSync(path.join(REPO, 'tests', 'map', 'fixtures', 'jetstream.json'), 'utf8'));
+  const laNina = variant.layers.find((l) => l.id === 'la_nina');
+  const elNino = variant.layers.find((l) => l.id === 'el_nino');
+  variant.layers = [
+    { ...elNino, id: 'el_nino_weak', label: 'Weak El Niño', color: '#ff9bb3', phase: 'el_nino', strength: 'weak' },
+    { ...laNina, id: 'el_nino_moderate_strong', label: 'Moderate and strong El Niño', color: '#ff4d5e', phase: 'el_nino', strength: 'moderate_strong', strengths: ['moderate', 'strong'],
+      branches: [...laNina.branches, { ...laNina.branches[1], id: 'north_2', label: 'Far northern branch', fastest: false }],
+      overflies: { states: [{ code: 'TX', name: 'Texas', branches: ['south'] }], resorts: [] } },
+    { ...elNino, id: 'bad layer id' },
+  ];
+  variant.current = null;
+  const vctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await vctx.route(/\/tests\/map\/fixtures\/jetstream\.json$/, (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(variant) }));
+  const vpage = await vctx.newPage();
+  const vw = watch(vpage, 'jet stream, other layer ids');
+  await vpage.goto(`${base}/map/${Q}&jet=el_nino_strong`);
+  await ready(vpage, { start: false });
+  await vpage.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 15000 });
+  const v = await vpage.evaluate(() => ({
+    ids: [...document.querySelectorAll('#jet-box input[data-jet]')].map((i) => `${i.dataset.jet}:${i.checked}`),
+    sum: document.querySelector('#jet-card .jet-sum').textContent,
+    also: document.querySelector('#jet-card .jet-also').textContent,
+    now: document.querySelectorAll('#jet-box .jet-now').length,
+    url: new URL(location.href).searchParams.get('jet'),
+  }));
+  check(JSON.stringify(v.ids) === JSON.stringify(['el_nino_weak:false', 'el_nino_moderate_strong:true']) && v.url === 'el_nino_moderate_strong',
+    `strength groups come from the file; an old strength id maps to its group; a bad layer is skipped (${v.ids}; ?jet=${v.url})`);
+  check(v.sum === '1 state, west to east. This band crosses no ski areas.' && v.also === 'Under the band: Texas.' && v.now === 0,
+    `a band over no ski area says so; a file without a current reading shows none (${v.sum})`);
+  await ready(vpage);
+  await vpage.waitForFunction(() => window.__careerMap.mapCtl.map.getSource('jet') && window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).length > 0, null, { timeout: 15000 });
+  const vb = await vpage.evaluate(() => [...new Set(window.__careerMap.mapCtl.map.querySourceFeatures('jet').filter((f) => f.properties.kind === 'axis').map((f) => f.properties.branch))].sort());
+  check(JSON.stringify(vb) === JSON.stringify(['north', 'north_2', 'south']), `three branches draw (${vb})`);
+  vw.assertClean();
+  await vctx.close();
+
+  // 17. Without the file the box says the paths are on their way; a failed load keeps ?jet= and tries again.
+  const mctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await mctx.route(/\/tests\/map\/fixtures\/jetstream\.json$/, (route) => route.fulfill({ status: 404, contentType: 'text/plain', body: 'Not found' }));
+  const mpage = await mctx.newPage();
+  await mpage.goto(`${base}/map/${Q}&jet=el_nino`);
+  await ready(mpage, { start: false });
+  await mpage.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 15000 });
+  check((await mpage.locator('#jet-box .jet-note').textContent()) === 'The jet stream paths arrive with the next data build.'
+    && new URL(mpage.url()).searchParams.get('jet') === null, 'without jetstream.json the box says so and ?jet= leaves the address bar');
+  await mctx.close();
+  const fctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  let fail = true;
+  await fctx.route(/\/tests\/map\/fixtures\/jetstream\.json$/, (route) => (fail ? route.abort('connectionreset') : route.continue()));
+  const fpage = await fctx.newPage();
+  await fpage.goto(`${base}/map/${Q}&jet=el_nino`);
+  await ready(fpage, { start: false });
+  await fpage.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.failed, null, { timeout: 15000 });
+  check((await fpage.locator('#jet-box .jet-note').textContent()) === 'The jet stream paths could not load. Try again.' && await fpage.locator('#jet-box .jet-retry').isVisible()
+    && new URL(fpage.url()).searchParams.get('jet') === 'el_nino', 'a failed load says so with Try again and keeps ?jet=');
+  fail = false;
+  await fpage.locator('#jet-box .jet-retry').click();
+  await fpage.waitForFunction(() => window.__careerMap.jet && !window.__careerMap.jet.failed && window.__careerMap.jet.visible.join() === 'el_nino', null, { timeout: 15000 });
+  check(await fpage.locator('#jet-layer-el_nino').isChecked() && new URL(fpage.url()).searchParams.get('jet') === 'el_nino', 'Try again loads the file and turns the linked path on');
+  await fctx.close();
+
+  // 18. Phone: a link keeps the box closed in the sheet; opening it scrolls the sheet to it; the card lives there.
+  const pctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  const ppage = await pctx.newPage();
+  const pw = watch(ppage, 'jet stream, phone');
+  const pquiet = trackInflight(ppage);
+  await ppage.goto(`${stubBase}/map/?jet=last10`);
+  await ready(ppage);
+  await ppage.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded && window.__careerMap.jet.features, null, { timeout: 15000 });
+  await mapIdle(ppage);
+  const pfirst = await ppage.evaluate(() => {
+    const items = [...document.getElementById('map-legend').children].filter((e) => e.offsetParent !== null || getComputedStyle(e).display === 'contents');
+    const jet = document.querySelector('.ml-jet').getBoundingClientRect();
+    const title = document.querySelector('.ml-title').getBoundingClientRect();
+    return { open: document.getElementById('jet-box').open, jetFirst: jet.left < title.left, n: items.length };
+  });
+  check(!pfirst.open && pfirst.jetFirst, `phone: a link keeps the box closed; the legend strip shows the jet items first (${JSON.stringify(pfirst)})`);
+  await ppage.locator('#layers-toggle').click();
+  await ppage.locator('#jet-box > summary').click();
+  await ppage.waitForTimeout(400);
+  const pbox = await ppage.evaluate(() => {
+    const sheet = document.getElementById('layers-panel');
+    const head = sheet.querySelector('.lp-sheet-head').getBoundingClientRect();
+    return { top: Math.round(document.getElementById('jet-box').getBoundingClientRect().top - head.bottom), scrolled: sheet.scrollTop };
+  });
+  check(Math.abs(pbox.top) <= 4 && pbox.scrolled > 0, `phone: opening the box scrolls the sheet to it (${JSON.stringify(pbox)})`);
+  await ppage.locator('label[for="jet-layer-la_nina"]').click();
+  await ppage.waitForFunction(() => window.__careerMap.jet.active === 'la_nina', null, { timeout: 5000 });
+  await ppage.waitForTimeout(600);
+  const pc = await ppage.evaluate(() => {
+    const c = document.getElementById('jet-card');
+    const r = c.getBoundingClientRect();
+    const sheet = document.getElementById('layers-panel').getBoundingClientRect();
+    const radio = document.querySelector('label[for="jet-active-la_nina"]').getBoundingClientRect();
+    return { inSheet: Boolean(c.closest('#layers-panel')), top: Math.round(r.top), sheetTop: Math.round(sheet.top), sheetBottom: Math.round(sheet.bottom),
+      radioH: Math.round(radio.height), overflow: document.documentElement.scrollWidth > window.innerWidth };
+  });
+  check(pc.inSheet && pc.top >= pc.sheetTop && pc.top < pc.sheetBottom - 60 && pc.radioH >= 36 && !pc.overflow,
+    `phone: turning a path on brings its card into the sheet; List for has large targets (${JSON.stringify(pc)})`);
+  await shot(ppage, 'jet-05-phone-sheet.png');
+  await axeCheck(ppage, 'jet stream card open, phone');
+  await ppage.locator('#layers-close').click();
+  await mapIdle(ppage);
+  const pm = await ppage.evaluate(() => ({
+    drawn: [...new Set(window.__careerMap.mapCtl.map.queryRenderedFeatures({ layers: ['jet-axis'] }).map((f) => f.properties.layer))].sort(),
+    url: new URL(location.href).searchParams.get('jet'),
+  }));
+  check(JSON.stringify(pm.drawn) === JSON.stringify(['la_nina', 'last10']) && (await legend(ppage)).includes('La Niña') && pm.url === 'last10,la_nina',
+    `phone: the map draws both paths and the legend strip names them (${JSON.stringify(pm)})`);
+  await shot(ppage, 'jet-06-phone-map.png');
+  await pquiet();
+  pw.assertClean();
+  await pctx.close();
+}
+
+// The real build's jetstream.json, when present: every layer gets a checkbox, each card matches its overflies lists.
+async function realJetStreamChecks(browser, base) {
+  const file = path.join(REPO, 'data', 'build', 'jetstream.json');
+  if (!fs.existsSync(file)) { log('\nReal jet stream: skipped (no data/build/jetstream.json)'); return; }
+  log('\nReal jet stream');
+  const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await ctx.newPage();
+  const w = watch(page, 'real jet stream');
+  const quiet = trackInflight(page);
+  await page.goto(`${base}/map/?jet=${data.layers[0].id}`);
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.jet && window.__careerMap.jet.loaded, null, { timeout: 20000 });
+  const ids = await page.evaluate(() => [...document.querySelectorAll('#jet-box input[data-jet]')].map((i) => i.dataset.jet));
+  check(JSON.stringify(ids) === JSON.stringify(data.layers.map((l) => l.id)), `a checkbox per layer of the real file, in its order (${ids})`);
+  const index = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'map-index.json'), 'utf8'));
+  const known = new Set((index.resorts || []).map((r) => r[index.fields.indexOf('id')]));
+  const names = new Map(JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'states.json'), 'utf8')).states.map((s) => [s.code, s.name]));
+  for (const l of data.layers) {
+    await page.evaluate((id) => { const j = window.__careerMap.jet; for (const x of j.visible) j.set(x, false); j.set(id, true); }, l.id);
+    const got = await page.evaluate(() => ({
+      states: [...document.querySelectorAll('#jet-card .jet-state-label')].map((e) => e.textContent),
+      also: (document.querySelector('#jet-card .jet-also') || { textContent: '' }).textContent,
+      resorts: document.querySelectorAll('#jet-card .jet-resorts a').length,
+      sum: document.querySelector('#jet-card .jet-sum').textContent,
+      all: document.querySelector('#jet-card .jet-all') ? { text: document.querySelector('#jet-card .jet-all').textContent, pressed: document.querySelector('#jet-card .jet-all').getAttribute('aria-pressed') } : null,
+    }));
+    const listed = new Set(l.overflies.states.map((s) => s.code));
+    const under = l.overflies.resorts.filter((r) => known.has(r.id));
+    const extra = [...new Set(under.filter((r) => !listed.has(r.state)).map((r) => r.state))];
+    if (extra.length) log(`    note ${l.id}: resorts in ${extra.join(', ')}, a state missing from its states list`);
+    const order = [...l.overflies.states.map((s) => s.code), ...extra];
+    const nameOf = (code) => (l.overflies.states.find((s) => s.code === code) || {}).name || names.get(code) || code;
+    const withSki = order.filter((code) => under.some((r) => r.state === code)).map(nameOf);
+    const rest = order.filter((code) => !under.some((r) => r.state === code)).map(nameOf);
+    // States with ski areas come west to east, grouped by branch when the list mixes branches: compare as sets.
+    check(JSON.stringify([...got.states].sort()) === JSON.stringify([...withSki].sort()) && got.resorts === under.length
+      && (rest.length ? nbsp(got.also).endsWith(`${rest.join(', ')}.`) : !got.also) && (!got.all || (got.all.text === 'Open every state' && got.all.pressed === null)),
+    `${l.label}: the card lists ${got.states.length} states with ${got.resorts} ski areas, then ${rest.length} more in one line (${got.sum})`);
+  }
+  await page.evaluate(() => { const j = window.__careerMap.jet; for (const x of j.visible) j.set(x, false); j.set('la_nina', true); });
+  await mapIdle(page);
+  await shot(page, 'jet-real-01-la-nina.png');
+  await axeCheck(page, 'real jet stream card');
+  if (data.current && data.current.layer) {
+    await page.evaluate(() => { const j = window.__careerMap.jet; for (const x of j.visible) j.set(x, false); });
+    await page.locator('#jet-box .jet-now-btn').click();
+    check(await page.evaluate(() => window.__careerMap.jet.active) === data.current.layer, `the latest reading's button shows ${data.current.layer}`);
+  }
+  await quiet();
+  w.assertClean();
+  await ctx.close();
+}
+
 // MAP_TEST_ONLY=eventsChecks,passChecks runs only the named suites (all of them by default).
 const ONLY = (process.env.MAP_TEST_ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
 const runs = (name) => !ONLY.length || ONLY.includes(name);
@@ -3686,8 +4274,10 @@ try {
   if (runs('consoleChecks')) await consoleChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('passChecks')) await passChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('eventsChecks')) await eventsChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('jetStreamChecks')) await jetStreamChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('realData')) await realData(browser, REPO_BASE);
   if (runs('realEventsChecks')) await realEventsChecks(browser, REPO_BASE);
+  if (runs('realJetStreamChecks')) await realJetStreamChecks(browser, REPO_BASE);
   await browser.close();
 } catch (err) {
   failures.push(`crashed: ${err.stack || err}`);
