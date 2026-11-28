@@ -1,0 +1,23 @@
+{
+  "source": {
+    "id": "era5-arco-surface",
+    "url": "https://cloud.google.com/storage/docs/public-datasets/era5",
+    "title": "ERA5 hourly data on single levels (ECMWF, Copernicus Climate Change Service), ARCO ERA5 raw files on Google Cloud",
+    "accessed_date": "2026-11-28",
+    "note": "10 m wind, 10 m gust, snow depth and lake ice depth, December to March, read with HTTP range requests from https://storage.googleapis.com/gcp-public-data-arco-era5/raw/date-variable-single_level/YYYY/MM/DD/<variable>/surface.nc. Hersbach et al. (2020), ERA5, doi:10.24381/cds.adbb2d47. A model on a grid of about 31 km; values describe a grid cell. Contains modified Copernicus Climate Change Service information."
+  },
+  "confidence": "published",
+  "license": "Copernicus licence (CC BY 4.0 compatible); attribution required",
+  "seasons": [
+    "2015/16",
+    "2016/17",
+    "2017/18",
+    "2018/19",
+    "2019/20",
+    "2020/21",
+    "2021/22",
+    "2022/23",
+    "2023/24",
+    "2024/25"
+  ]
+}
