@@ -775,6 +775,66 @@ UI: `map/js/jetstream.js` and `map/css/jetstream.css`, loaded with `jetstream.js
 the Layers panel opens or with a `?jet=` link (`router.js` keeps `?jet=` across views); see `docs/map/JETSTREAM.md`
 "As built".
 
+## Snowkite layer (ROADMAP item 24; `pipeline/snowkite.py`, `map/js/kite.js`, contract in `docs/map/SNOWKITE.md`)
+
+Raw inputs: `data/raw/snowkite/zones_<lane>.yaml` (only `zones_*.yaml`; the candidate and expedition files of phases 25
+and 26 have their own contracts) and the snowkite events of `data/raw/events`. Config: `config/definitions.yaml`
+`snowkite` (`pipeline/config.py` `SnowkiteDefs`): kind and surface labels, surface colors (4.5:1 on `#1e1e1e`, 8 or
+more OKLab apart), `month_order`, text `limits`, the lower 48 and Alaska boxes, `source_words`, `event_discipline` and
+`event_zone_km`. Output: `data/build/snowkite.json`, lazy loaded by the map; a missing or empty `data/raw/snowkite`
+writes an empty file and a warning.
+
+### Validation (`pipeline/schemas/snowkite.py`, `pipeline/snowkite.py` `load_snowkite`)
+Build errors: an unknown key; a bad kind, surface, status, precision or state code; a cited block without `source_id`,
+`as_of` or `confidence`, or with an undefined source; a zone id used twice across files; a source a file declares that
+no zone cites; a point outside the lower 48 box (any state but Alaska) or the Alaska box (a swapped sign or a swapped
+latitude and longitude); text over `limits` (name, wind, snow and ice, terrain, each hazard, each access field, the
+months note, the report summary); an established zone with no word of `source_words` in the title, address or note of
+a source it cites or in one of its cited texts (a Wikipedia lake page may say only that kiters use it); months not
+1 to 12 or repeated; an `access` block with no field; an `events` id that is no event. Allowed: `location`, `surface`,
+`months` and every cited block null or left out (a zone with no point lists, searches and reports, and draws no marker).
+An event joins a zone when the zone lists its id or the event's venue id equals the zone id or starts with it. Warnings:
+no zone file, zones with no location, candidates left out, a listed event abroad or farther than `event_zone_km`
+from its zone, a snowkite event near a zone that does not list it, report summaries in draft.
+
+### Build output
+```
+{ version, generated_at, kinds: [{id,label}], surfaces: [{id,label,color}], month_order: int[12], season,
+  states: {code: name}, zones: [{ id, name, kind, state, surface[], location?, elevation_ft?, months?, wind?, snow_ice?,
+    terrain?, hazards?[], access?, website?, events?[ids], report?: { summary, source_ids } }],
+  events: [{ id, name, discipline, venue: { id, name, state?, town?, location }, edition_2026_27?, last_edition?,
+    usual_timing?, season_long?, signup?, website?, organizer?, format?, series?, months[], program? }],
+  summaries_waiting, counts }
+```
+Zones sort by state name, then name. `report` is written only when its status is `reviewed`; `summaries_waiting` counts
+the drafts, which never reach the file. `events` holds every snowkite event at a mapped venue plus any event a zone
+lists. Sources join `sources.json`.
+
+### UI (`map/js/kite.js`, `map/css/kite.css`, `map/js/app.js`)
+* Layers panel: a closed Snowkite box (`#kite-box`, also in the phone sheet) with one checkbox, off by default. Turning
+  it on opens the box: Find a zone (name or state), Surface checkboxes, Months you can kite chips, Show every zone, a
+  count line, the zones by state (links, a note "No map point yet." for a zone with none) and the events.
+* URL: `?kite=1` is the layer on, kept across views by `router.js`; `?zone=<id>` and `?kevent=<id>` open a zone report
+  or an event card at `/map/` (level `kite`) and imply the layer. A deep link `/map/kite/<id>/` needs a route stub per
+  zone and is left for later.
+* Loading: only the checkbox, the box markup and the router parts are on the startup path. `kite.js`, `kite.css` and
+  `snowkite.json` (validated by Zod `SnowkiteFile`, per zone) load the first time the layer is turned on, or after the
+  first paint with a kite link. The homepage loads none of it.
+* Map: a kite glyph per zone in its first surface's color (`kite-zones`, a symbol layer; a `region` point gets a wide
+  soft disc under a dimmer mark), a white pennant per event at its venue (`kite-events`), both above the basemap and
+  below `resorts-glow` and the resort dots. `map.js` `setExtraPick` lets zones and events answer clicks first. The 2D
+  picture draws the same marks under their own overlay tag (`preview.js` `addPreviewOverlay(..., 'kite')`). EVENTS
+  mode hides the layer.
+* Panel: the zone report (`level: 'kite'`, `panel.js` `renderKite`): breadcrumbs, kind, surface and state tags, a note
+  for a zone with no point or an approximate one, Zone facts (months, wind, snow and ice, terrain, elevation, map
+  point, hazards, access road, parking, fees and permit, website) each with its value, confidence badge, verified date
+  and source link, `Not yet verified` for a missing wind, snow and ice, terrain, months, hazards or access, the Zone
+  report only when reviewed (with its sources), and Events here with dates and a Sign up link. A zone with no map point
+  opens at the national view.
+* Tests: `tests/pipeline/test_snowkite.py`, `kiteChecks` and `realKiteChecks` in `tests/map/browser_test.mjs`
+  (fixtures `tests/map/snowkite_fixture.yaml` and `snowkite_events_fixture.yaml`, synthetic, compiled by
+  `make_fixtures.py` into `tests/map/fixtures/snowkite.json`) and the snowkite cases of `tests/map/audit.mjs`.
+
 ## Events and competitions (ROADMAP item 22; `pipeline/events.py`, `map/js/events.js`, `map/js/eventsmap.js`)
 
 Owner request 2026-10-17: every snowsports venue, competition and event in the United States, for every discipline,
@@ -1155,7 +1215,7 @@ import` reads Formspree's CSV export (see `data/raw/reports/README.md`).
 * Lazy modules: `hiring.js` (the Hiring now count, at idle), `schemas.js` and Zod, `charts.js` and Chart.js (climate charts only; on a resort page Chart.js loads
   when the climate section nears the screen), `detailcontrols.js` (resort
   detail map only), `housinglinks.js` (the first resort view), `recolor.js` and `heat.js`, and `jetstream.js` with `jetstream.css` and
-  `jetstream.json` (the first time the Jet stream box opens, or a `?jet=` link). The site font, Inter, loads
+  `jetstream.json` (the first time the Jet stream box opens, or a `?jet=` link), `kite.js` with `kite.css` and `snowkite.json` (the first time the Snowkite layer is turned on, or a `?kite=`, `?zone=` or `?kevent=` link). The site font, Inter, loads
   after the window load event and the first contentful paint (see "Console look"). The snowfall
   rasters and isolines (`heat/snowfall.json`, its PNGs and GeoJSON, about 400 KB, 300 KB gzipped) load only when the
   Snowfall mode is selected, and the season rasters (`heat/season.json` and its PNGs, about 165 KB) only with Season length.

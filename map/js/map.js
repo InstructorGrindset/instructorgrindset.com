@@ -419,6 +419,8 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   function pick(point) {
     const pad = 6;
     const box = [[point.x - pad, point.y - pad], [point.x + pad, point.y + pad]];
+    // The Snowkite layer's zones and events (kite.js) answer first: they sit under the resort dots but are small marks.
+    if (extraPick && mode !== 'events') { const k = extraPick(point, box); if (k) return k; }
     // EVENTS mode: only event venues answer (events map hooks); states, clusters and resorts stay quiet.
     if (mode === 'events') return modeHooks && modeHooks.pick ? modeHooks.pick(point, box) : null;
     if (detail) {
@@ -634,6 +636,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
   // ── EVENTS mode (ROADMAP item 22): the map shows event venues (events.js, eventsmap.js) instead of resorts. Every
   // resort, cluster and heat layer is hidden while it lasts and comes back as it was; picking goes to the hooks.
   let mode = 'resorts';
+  let extraPick = null; // kite.js: (point, box) -> { kind: 'zone' | 'kevent', id, name, tip } | null
   let modeHooks = null; // { pick(point, box) -> { kind: 'venue', id, name, tip } | null }
   const modeHidden = new Set();
   const RESORT_LAYER = (id) => id.startsWith('resorts') || id.startsWith('clusters-') || id.startsWith('heat-');
@@ -854,6 +857,8 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
       if (loaded) applyFilter();
     },
     resize() { map.resize(); },
+    /** The Snowkite layer's picking (kite.js): fn(point, box) returns a { kind: 'zone' | 'kevent', id, name, tip } or null. */
+    setExtraPick(fn) { extraPick = typeof fn === 'function' ? fn : null; },
     /** 'resorts' (the default) or 'events': EVENTS mode hides the resort layers and picks through hooks.pick. */
     setMode(next, hooks = null) {
       const m = next === 'events' ? 'events' : 'resorts';
@@ -867,7 +872,7 @@ export function createMap(container, index, maplibregl, { onPick, getPadding, on
 }
 
 function hoverKey(t) {
-  const source = { resort: 'resorts', cluster: 'clusters', state: 'states', housing: 'detail-housing', lift: 'detail-lifts', base: 'detail-base', stop: 'detail-transit-stops', venue: 'event-venues' }[t.kind];
+  const source = { resort: 'resorts', cluster: 'clusters', state: 'states', housing: 'detail-housing', lift: 'detail-lifts', base: 'detail-base', stop: 'detail-transit-stops', venue: 'event-venues', zone: 'kite-zones', kevent: 'kite-events' }[t.kind];
   return { source, id: t.id };
 }
 

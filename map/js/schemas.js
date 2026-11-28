@@ -258,6 +258,48 @@ export const EventsFile = z.object({
   calendars: keepValid(z.object({ id: Slug, name: z.string().min(1), discipline: z.string(), group: z.string(), region: z.string(), url: SUrl })),
 });
 
+// ── Snowkite layer (docs/map/SNOWKITE.md; pipeline/snowkite.py), loaded on the first use of its Layers box ──
+// A bad zone or event drops only itself; a bad block only the block. A zone with no location lists but draws no marker.
+const SkLat = z.number().min(-90).max(90);
+const SKZone = z.object({
+  id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/), name: z.string().min(1), kind: z.string().min(1), state: z.string().length(2),
+  surface: strList,
+  location: opt(z.object({ lat: SkLat, lon: z.number().min(-180).max(180), precision: z.enum(['spot', 'area', 'region']), ...Cited })),
+  elevation_ft: opt(z.object({ value: z.number(), ...Cited })),
+  months: opt(z.object({ value: z.array(z.number().int().min(1).max(12)).min(1), ...Cited })),
+  wind: opt(SText), snow_ice: opt(SText), terrain: opt(SText),
+  hazards: keepValid(SText),
+  access: opt(z.object({ road: opt(z.string()), parking: opt(z.string()), fees: opt(z.string()), permit: opt(z.string()), ...Cited })),
+  website: opt(SUrl),
+  events: strList,
+  report: opt(z.object({ summary: z.string().min(1), source_ids: z.array(Slug).min(1) })),
+});
+const SKEvent = z.object({
+  id: Slug, name: z.string().min(1), discipline: z.string(),
+  venue: z.object({
+    id: Slug, name: z.string().min(1), state: opt(z.string()), town: opt(z.string()),
+    location: z.object({ lat: SkLat, lon: z.number().min(-180).max(180), precision: z.enum(['venue', 'town', 'region']), source_id: Slug, as_of: opt(IsoDate), confidence: opt(Confidence) }),
+  }),
+  series: opt(z.object({ id: Slug, name: z.string().min(1) })), organizer: opt(OrgName), format: opt(SText),
+  edition_2026_27: opt(z.object({ start: IsoDate, end: opt(IsoDate), ...Cited })),
+  last_edition: opt(z.object({ season: z.string(), start: opt(IsoDate), end: opt(IsoDate), ...Cited })),
+  usual_timing: opt(SText), season_long: opt(z.object({ value: z.literal(true), ...Cited })),
+  signup: opt(z.object({ method: opt(z.string()), url: opt(SUrl), opens: opt(SDate), deadline: opt(SDate) })),
+  website: opt(SUrl),
+  months: z.array(z.number().int().min(1).max(12)).nullish().transform((v) => v ?? []),
+  program: z.boolean().nullish().transform((v) => Boolean(v)),
+});
+export const SnowkiteFile = z.object({
+  ...Envelope,
+  kinds: z.array(Label), surfaces: z.array(Label.extend({ color: z.string().regex(/^#[0-9a-fA-F]{6}$/) })),
+  month_order: z.array(z.number().int().min(1).max(12)).length(12),
+  season: opt(z.string()),
+  states: z.record(z.string(), z.string()).nullish().transform((v) => v ?? {}),
+  zones: keepValid(SKZone),
+  events: keepValid(SKEvent),
+  summaries_waiting: z.number().int().nullish().transform((v) => v ?? 0),
+});
+
 // ── Jet stream layer (docs/map/JETSTREAM.md; pipeline/jetstream.py), loaded on the first use of its Layers box ──
 const Cite3 = { source_id: Slug, as_of: IsoDate, confidence: Confidence };
 const Lon = z.number().min(-200).max(200);

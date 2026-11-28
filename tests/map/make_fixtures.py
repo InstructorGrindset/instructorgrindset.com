@@ -699,6 +699,34 @@ def events_fixture(resorts, cfg):
     return compiled, ev.resort_events(data, cfg.definitions.events), [s.model_dump(mode="json", exclude_none=True) for s in registry.sorted()]
 
 
+def snowkite_fixture(resorts, cfg):
+    """snowkite.json from tests/map/snowkite_fixture.yaml and snowkite_events_fixture.yaml, compiled by the real
+    pipeline/snowkite.py against the fixture resorts. Returns (compiled, sources)."""
+    import shutil  # noqa: PLC0415
+    import tempfile  # noqa: PLC0415
+    from pipeline import events as ev  # noqa: PLC0415
+    from pipeline import snowkite as sk  # noqa: PLC0415
+    from pipeline.sources import SourceRegistry  # noqa: PLC0415
+    here = Path(__file__).parent
+    tmp = Path(tempfile.mkdtemp())
+    try:
+        (tmp / "events").mkdir()
+        (tmp / "snowkite").mkdir()
+        shutil.copy(here / "snowkite_events_fixture.yaml", tmp / "events" / "snowkite.yaml")
+        shutil.copy(here / "snowkite_fixture.yaml", tmp / "snowkite" / "zones_fixture.yaml")
+        places = {r["id"]: ev.ResortPlace(r["name"], r["state"], r["lat"], r["lon"], r["location_source_id"]) for r in resorts}
+        registry = SourceRegistry()
+        edata, e1, _ = ev.load_events(tmp, registry, places, cfg.definitions.events)
+        data, e2, w2 = sk.load_snowkite(tmp, registry, edata, places, cfg.definitions.snowkite)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    if e1 or e2:
+        raise SystemExit(f"snowkite fixture: {e1 + e2}")
+    header = {"version": 1, "generated_at": GENERATED_AT}
+    compiled = sk.compile_snowkite(data, cfg.definitions.snowkite, ev.compile_events(edata, places, cfg.definitions.events, header), header)
+    return compiled, [s.model_dump(mode="json", exclude_none=True) for s in registry.sorted()]
+
+
 # Jet stream fixture (docs/map/JETSTREAM.md): invented, obviously fake paths. Every axis is a straight line of
 # latitude, one point per degree of longitude, with a band of fixed half width that tapers to a point over the last
 # 5 degrees at each end (as the build does), so tests can tell exactly which fixture states and resorts lie under each
@@ -853,7 +881,9 @@ def main():
                        "cluster_ids": [cid for cid, (_, s) in CLUSTERS.items() if code in s],
                        "resort_count": sum(r["state"] == code for r in resorts)})
     write("states.json", {"version": 1, "generated_at": GENERATED_AT, "states": states})
-    write("sources.json", {"version": 1, "generated_at": GENERATED_AT, "sources": SOURCES + event_sources})
+    kite, kite_sources = snowkite_fixture(resorts, load_config(REPO / "config"))
+    have = {x["id"] for x in SOURCES + event_sources}
+    write("sources.json", {"version": 1, "generated_at": GENERATED_AT, "sources": SOURCES + event_sources + [x for x in kite_sources if x["id"] not in have]})
     from pipeline import events as events_mod  # noqa: PLC0415
     from pipeline.build import display_definitions  # noqa: PLC0415
     cfg = load_config(REPO / "config")
@@ -867,6 +897,8 @@ def main():
                                # Synthetic endpoint; the browser test intercepts it. Production keeps null until it exists.
                                "submissions": {"endpoint": "https://reports.example.test/submit"},
                                "events": display_definitions(cfg)["events"]})
+    # Snowkite layer (ROADMAP item 24), compact like the real build.
+    (OUT / "snowkite.json").write_text(json.dumps(kite, ensure_ascii=False, separators=(",", ":")) + "\n")
     # EVENTS mode (ROADMAP item 22), compact like the real build.
     (OUT / "events.json").write_text(json.dumps(events, ensure_ascii=False, separators=(",", ":")) + "\n")
     (OUT / "events-summary.json").write_text(json.dumps(events_mod.summary(events), ensure_ascii=False, separators=(",", ":")) + "\n")

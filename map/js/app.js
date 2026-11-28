@@ -9,7 +9,7 @@
 //    After the WebGL map loads: the full data, the recolor control and the state outlines.
 import { config, isPhone, savedTone } from './config.js';
 import { isFiltered, loadAll, loadOptional, loadStateOutlines, matchesFilter, NO_FILTER, postingsRaw, whenPainted } from './data.js';
-import { createRouter, jetLayers, setJetLayers } from './router.js';
+import { createRouter, jetLayers, setJetLayers, kiteOn, setKiteOn } from './router.js';
 import { createPanel, isoDay, officialMapFile } from './panel.js';
 import { createSheet } from './sheet.js';
 import { createListView } from './listview.js';
@@ -36,6 +36,10 @@ function viewTitle(index, view) {
     case 'events': {
       const v = eventsApi && eventsApi.venueOf(view);
       return ['Events', v ? v.name : 'United States'];
+    }
+    case 'kite': {
+      const z = kiteApi && kiteApi.loaded ? kiteApi.titleOf(view) : null;
+      return ['Snowkite', z || 'Zones and events'];
     }
     case 'state': return ['State', index.states.get(view.stateCode).name];
     case 'cluster': return ['Cluster', index.clusters.get(view.clusterId).name];
@@ -107,6 +111,7 @@ const LIVE_CSS = 'map-live.css?v=1';
 const TRAIL_CSS = 'trailmap.css?v=2';
 const EVENTS_CSS = 'events.css?v=1';   // EVENTS mode: the event panel, filters and calendar list
 const JET_CSS = 'jetstream.css?v=1';   // the Jet stream box, its card and legend items
+const KITE_CSS = 'kite.css?v=1';       // the Snowkite box, its list, the zone report and legend items
 const cssLoads = new Map();
 /** Add a stylesheet from map/css once; resolves when it has loaded (or failed). */
 function loadCss(name) {
@@ -161,6 +166,7 @@ let listView = null;
 let listOn = false;
 // EVENTS mode (ROADMAP item 22): events.js and events.json load only when the mode or an events link is used.
 let eventsMode = false;
+let kiteApi = null;   // the Snowkite layer (kite.js), once loaded
 let eventsApi = null;
 function setListView(on) {
   listOn = on;
@@ -200,6 +206,7 @@ function padding(view) {
 function summary(index, view) {
   switch (view.level) {
     case 'events': return eventsApi && eventsApi.loaded ? eventsApi.summary(view) : 'Showing events.';
+    case 'kite': return kiteApi && kiteApi.loaded ? kiteApi.summary(view) : 'Showing the snowkite layer.';
     case 'state': return `Showing ${index.states.get(view.stateCode).name}.`;
     case 'cluster': return `Showing the ${index.clusters.get(view.clusterId).name} cluster.`;
     case 'resort': return `Showing ${index.resorts.get(view.resortId).name}.`;
@@ -342,6 +349,7 @@ async function main() {
     onShowHousing: (resortId, n) => showHousing(resortId, n),
     onSourcesNeeded: () => { if (idleReached) loadSources(); else sourcesWanted = true; },
     renderEvents: (view, kit) => (eventsApi && eventsApi.loaded ? eventsApi.renderPanel(view, kit) : null),
+    renderKite: (view, kit) => (kiteApi && kiteApi.loaded ? kiteApi.renderPanel(view, kit) : null),
     // The jet stream line under the heading of a state, cluster or resort while a path is on.
     onRendered: (view) => { if (jetApi && jetApi.loaded) jetApi.panelNote(view); },
   });
@@ -382,6 +390,7 @@ async function main() {
     syncModeControls();
     if (eventsApi) eventsApi.setActive(on);
     else if (mapCtl) mapCtl.setMode(on ? 'events' : 'resorts');
+    if (kiteApi && kiteApi.loaded) kiteApi.syncMode();
     if (listOn) setListView(true);
   }
   /** Render an events view once events.json is in (the panel shows "Loading events" or the stub's list until then). */
@@ -441,7 +450,7 @@ async function main() {
   }).catch((err) => { console.warn('[map] controls', err.message); return null; });
   router = createRouter(index, (view, { initial, fellBack }) => {
     const toEvents = view.level === 'events';
-    if (!toEvents) lastResortsView = view;
+    if (!toEvents && view.level !== 'kite') lastResortsView = view;
     setEventsMode(toEvents);
     if (trailFor && (view.level !== 'resort' || view.resortId !== trailFor.id)) setTrailControl(null);
     if (trail) trail.close();
@@ -476,11 +485,90 @@ async function main() {
       if (toEvents && view.eventId && eventsApi && eventsApi.loaded && eventsApi.focusEvent(view.eventId)) { /* the event card has focus */ } else if (headingEl) headingEl.focus({ preventScroll: true });
     }
     if (toEvents && !(eventsApi && eventsApi.loaded)) showEventsView(view, { initial });
+    if (view.level === 'kite') {
+      if (kiteApi && kiteApi.loaded) kiteApi.select(view); else showKiteView(view, { initial });
+    } else if (kiteApi && kiteApi.loaded) kiteApi.select(view);
   });
   function setViewTitle(view) {
     if (!els.viewTitle) return;
     const [kind, name] = viewTitle(index, view);
     els.viewTitle.replaceChildren(h('span', { class: 'mh-kind' }, kind), h('span', { class: 'mh-name' }, name));
+  }
+
+  // ── Snowkite layer (docs/map/SNOWKITE.md) ── A closed box with one checkbox, off by default. kite.js, its stylesheet
+  // and snowkite.json load the first time the checkbox is turned on, or after the first paint with a ?kite=1, ?zone=
+  // or ?kevent= link. The layer on stays in the address bar (router.js) across views.
+  const narrowStage = () => isPhone() || els.stage.clientWidth < config.layersPanel.besideFrom;
+  let kitePromise = null;
+  const kiteBox = els.layersBox ? h('details', { id: 'kite-box', class: 'lp-box kite-box' },
+    h('summary', { class: 'lp-summary' }, h('span', null, 'Snowkite')),
+    h('div', { class: 'kite-switch' }, h('label', { class: 'lp-opt lp-checkbox', for: 'kite-toggle' },
+      h('input', { type: 'checkbox', id: 'kite-toggle', dataset: { kiteToggle: '' } }), h('span', { class: 'lp-text' }, 'Zones and events'))),
+    h('div', { class: 'kite-body', id: 'kite-body' })) : null;
+  const ensureKite = () => (kitePromise ||= Promise.all([import('./kite.js'), loadCss(KITE_CSS)]).then(([m]) => {
+    kiteApi = m.createKite({
+      index, box: kiteBox, legend: els.legend, announce, initialOn: true, tone,
+      current: () => router.current, setOn: setKiteOn,
+      onChange: () => { router.syncUrl(); onViewChange(); },
+    });
+    return kiteApi.ready;
+  }).then((api) => {
+    if (mapCtl) api.attachMap(mapCtl);
+    if (mapCtl) mapCtl.setExtraPick(null);
+    if (api.model && api.model.error) throw new Error(`snowkite ${api.model.error}`);
+    fillAll();
+    return api;
+  }).catch((err) => {
+    kitePromise = null;
+    console.warn('[map] snowkite', err.message);
+    const t = kiteBox && kiteBox.querySelector('#kite-toggle');
+    if (t && !kiteApi) { t.checked = false; setKiteOn(false); }
+    if (kiteBox && !kiteApi) $('kite-body').replaceChildren(h('p', { class: 'kite-note', role: 'status' }, 'The snowkite zones could not load. Try again.'));
+    return null;
+  }));
+  /** Render a zone or event view once snowkite.json is in (the panel shows "Loading the zone report" until then). */
+  function showKiteView(view, { initial = false } = {}) {
+    ensureKite().then((api) => {
+      if (!api || router.current !== view) return;
+      const headingEl = panel.render(view);
+      api.select(view);
+      setViewTitle(view);
+      announce(summary(index, view));
+      if (mapCtl) mapCtl.show(view, { animate: !initial }); else onViewChange();
+      if (!initial && headingEl) headingEl.focus({ preventScroll: true });
+    });
+  }
+  if (kiteBox) {
+    (els.layersBox).after(kiteBox);
+    const kiteToggle = kiteBox.querySelector('#kite-toggle');
+    kiteToggle.addEventListener('change', () => {
+      if (kiteToggle.checked) {
+        if (kiteApi && kiteApi.loaded) { kiteApi.set(true, { say: true }); return; }
+        kiteBox.open = true;
+        kiteBox.setAttribute('aria-busy', 'true');
+        ensureKite().then((api) => { if (api) { api.set(true, { say: true }); reveal(); } });
+      } else {
+        if (kiteApi) kiteApi.set(false, { say: true });
+        setKiteOn(false);
+        router.syncUrl();
+        if (router.current && router.current.level === 'kite') router.go({ level: 'national' });
+      }
+    });
+    const reveal = () => {
+      if (isPhone() && els.layers.scrollHeight > els.layers.clientHeight) {
+        const head = els.layers.querySelector('.lp-sheet-head');
+        els.layers.scrollTop = kiteBox.offsetTop - (head ? head.offsetHeight : 0);
+      }
+    };
+    kiteBox.addEventListener('toggle', () => {
+      if (kiteBox.open && !isPhone() && narrowStage() && els.layersBox.open) els.layersBox.open = false;
+      if (!isPhone() && narrowStage()) { if (mapCtl) mapCtl.refit(); else onViewChange(); }
+    });
+    if (kiteOn()) {
+      kiteToggle.checked = true;
+      if (!narrowStage()) kiteBox.open = true;
+      afterFirstPaint(ensureKite);
+    }
   }
 
   // ── Jet stream overlay (docs/map/JETSTREAM.md) ── A closed box in the Layers panel. jetstream.js, its stylesheet and
@@ -506,9 +594,8 @@ async function main() {
     console.warn('[map] jet stream', err.message);
     if (!jetApi) $('jet-body').replaceChildren(h('p', { class: 'jet-note' }, 'The jet stream paths could not load. Try reloading the page.'));
   }));
-  const narrowStage = () => isPhone() || els.stage.clientWidth < config.layersPanel.besideFrom;
   if (jetBox) {
-    els.layersBox.after(jetBox);
+    (kiteBox || els.layersBox).after(jetBox);
     jetBox.addEventListener('toggle', () => {
       if (jetBox.open) {
         // Narrow desktops: fold LAYERS so the open box stays short. Phones: the sheet scrolls to the box.
@@ -726,6 +813,7 @@ async function main() {
     const points = eventsMode ? (eventsApi && eventsApi.loaded ? eventsApi.previewPoints() : []) : null;
     const pic = (() => { try { return drawPreview(els.map, index, router.current, padding(router.current), keep, underlay, tone, points); } catch (err) { console.warn('[map] preview', err.message); return null; } })();
     if (pic && jetApi) jetApi.drawPreview(pic, keep, { rings: !eventsMode });
+    if (pic && kiteApi && kiteApi.loaded && !eventsMode) kiteApi.drawPreview(pic);
     if (preview) preview.remove();
     preview = pic;
     if (preview) els.map.insertBefore(preview, startBtn);
@@ -740,7 +828,7 @@ async function main() {
   drawFrame();
   const state = { index, router, mapCtl: null, panelReady: true, ready: true, mapStarted: false,
     get layersSheet() { return layersSheet; }, get chromeReady() { return chromeReady; },
-    get events() { return eventsApi; }, get eventsMode() { return eventsMode; }, get jet() { return jetApi; } };
+    get events() { return eventsApi; }, get eventsMode() { return eventsMode; }, get jet() { return jetApi; }, get kite() { return kiteApi; } };
   window.__careerMap = state;
   onViewChange = () => { if (!mapCtl) drawFrame(); };
   let resizeTimer = null;
@@ -816,6 +904,8 @@ async function main() {
           const cur = current || { level: 'national' };
           if (target.kind === 'housing') { panel.selectSite(target.id); return; }
           if (target.kind === 'venue') { router.go({ level: 'events', venueId: target.id }); return; }
+          if (target.kind === 'zone') { router.go({ level: 'kite', zoneId: target.id }); return; }
+          if (target.kind === 'kevent') { router.go({ level: 'kite', kiteEventId: target.id }); return; }
           if (target.kind === 'state') {
             if (cur.stateCode === target.id && cur.level === 'state') return;
             router.go({ level: 'state', stateCode: target.id });
@@ -848,6 +938,7 @@ async function main() {
     if (eventsMode) mapCtl.setMode('events');
     if (eventsApi && eventsApi.loaded) eventsApi.attachMap(mapCtl);
     if (jetApi && jetApi.loaded) jetApi.attachMap(mapCtl);
+    if (kiteApi && kiteApi.loaded) kiteApi.attachMap(mapCtl);
     if (isFiltered(filter)) mapCtl.setFilter(filter, onlyIds(filter));
     if (index.hiringIds) mapCtl.setHiring(index.hiringIds);
     if (detailFor) applyDetail();

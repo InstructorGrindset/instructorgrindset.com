@@ -19,6 +19,13 @@ export function viewFrame(index, view) {
     const d = v.precision === 'region' ? 0.6 : 0.22;
     return { b: [[v.lon - d * 1.3, v.lat - d], [v.lon + d * 1.3, v.lat + d]], maxZoom: v.precision === 'venue' ? 11 : 9 };
   }
+  if (view.level === 'kite') {
+    // A snowkite zone or event (index.kite, set by kite.js): its point with room around it, else the national view.
+    const k = index.kite ? index.kite.pointOf(view) : null;
+    if (!k) return { b: config.nationalBounds, maxZoom: 5 };
+    const d = k.precision === 'region' ? 0.5 : 0.25;
+    return { b: [[k.lon - d * 1.3, k.lat - d], [k.lon + d * 1.3, k.lat + d]], maxZoom: k.precision === 'region' ? 8.5 : 10.5 };
+  }
   if (view.level === 'resort') {
     const r = index.resorts.get(view.resortId);
     // Frame the resort with its neighbours around it.

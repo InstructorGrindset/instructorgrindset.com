@@ -13,8 +13,9 @@
 // 2. The homepage makes zero requests to /map/ or /data/build/.
 // 3. axe-core on the national map, a resort page, the list view, the phone layout, two heat map modes, the open
 //    search results (resorts and events), EVENTS mode (national, an open event panel, the calendar list, phone) and
-//    the Sources and credits page, and the jet stream card (desktop, before the map starts, phone). The budget runs
-//    also check that EVENTS mode, the events search index and the jet stream load nothing before they are used.
+//    the Sources and credits page, the jet stream card (desktop, before the map starts, phone) and the snowkite zone
+//    report and box (desktop, before the map starts, phone, layers sheet). The budget runs also check that EVENTS
+//    mode, the events search index, the jet stream and the snowkite layer load nothing before they are used.
 // 4. Lighthouse (mobile defaults) on /map/, two resort pages and /map/credits/.
 //
 // Files are served by a small static server with gzip, like GitHub Pages; python's
@@ -114,8 +115,8 @@ async function throttled(browser, url, label, { phone = false } = {}) {
   const panelMs = m.panelFull ?? m.panel;
   const frameMs = m.preview;
   const interactive = Math.max(panelMs, frameMs);
-  const lazy = urls.filter((u) => /\/(events(-search)?|jetstream)\.json|\/map\/js\/(events(map)?|search|jetstream)\.js|\/map\/css\/(events|jetstream)\.css/.test(u));
-  check(lazy.length === 0, `${label}: EVENTS mode, search and the jet stream load nothing before they are used (${lazy.length} requests)`);
+  const lazy = urls.filter((u) => /\/(events(-search)?|jetstream|snowkite)\.json|\/map\/js\/(events(map)?|search|jetstream|kite)\.js|\/map\/css\/(events|jetstream|kite)\.css/.test(u));
+  check(lazy.length === 0, `${label}: EVENTS mode, search, the jet stream and the snowkite layer load nothing before they are used (${lazy.length} requests)`);
   const r = { label, url, panel_ms: panelMs, first_map_frame_ms: frameMs, interactive_ms: interactive,
     webgl_click_to_load_ms: m.load - m.click, fcp_ms: m.fcp, transferred_kb: Math.round(bytes / 1024) };
   results.budget.push(r);
@@ -158,10 +159,21 @@ function jetLink() {
   return '/map/?data=/tests/map/fixtures/&jet=el_nino,la_nina';
 }
 
+/** A snowkite zone link: the real build's first zone, else the synthetic fixture's. */
+function kiteLink() {
+  try {
+    const k = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'snowkite.json'), 'utf8'));
+    const z = (k.zones || []).find((x) => x.location && x.events) || (k.zones || []).find((x) => x.location);
+    if (z) return `/map/?zone=${z.id}`;
+  } catch { /* no build */ }
+  return '/map/?data=/tests/map/fixtures/&zone=fixture-flat-lake-mn';
+}
+
 async function axe(browser, base) {
   const axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js', { paths: [HERE] }), 'utf8');
   const venue = eventsVenue();
   const jet = jetLink();
+  const kite = kiteLink();
   const cases = [
     { label: 'national map, before the map starts', url: '/map/', waiting: true },
     { label: 'national map', url: '/map/' },
@@ -190,6 +202,10 @@ async function axe(browser, base) {
     { label: `jet stream card open, two paths (${jet})`, url: jet, jet: true },
     { label: 'jet stream card open, before the map starts', url: jet, jet: true, waiting: true },
     { label: 'jet stream card open in the layers sheet, phone', url: jet, jet: true, phone: true, layers: true },
+    { label: `snowkite zone report and box open (${kite})`, url: kite, kite: true },
+    { label: 'snowkite zone report, before the map starts', url: kite, kite: true, waiting: true },
+    { label: 'snowkite zone report in the layers sheet, phone', url: kite, kite: true, phone: true, layers: true },
+    { label: 'snowkite zone report, phone', url: kite, kite: true, phone: true },
     { label: 'sources and credits page', url: '/map/credits/', static: true },
     { label: 'sources and credits page, phone', url: '/map/credits/', static: true, phone: true },
   ];
@@ -214,11 +230,22 @@ async function axe(browser, base) {
         && document.getElementById('jet-card') && !document.getElementById('jet-card').hidden, null, { timeout: 30000 });
       await page.waitForTimeout(500);
     }
+    if (c.kite) {
+      await page.waitForFunction(() => window.__careerMap.kite && window.__careerMap.kite.loaded && document.querySelector('#panel-content .kite-facts'), null, { timeout: 30000 });
+      await page.waitForTimeout(500);
+      if (!(await page.evaluate(() => document.getElementById('kite-box').open))) {
+        if (c.layers) { /* the sheet opens below */ } else if (await page.locator('#kite-box > summary').isVisible()) await page.locator('#kite-box > summary').click();
+      }
+    }
     if (c.list) { await page.locator('#list-toggle').click(); await page.waitForTimeout(300); }
     if (c.layers) { await page.locator('#layers-toggle').click(); await page.waitForTimeout(300); }
     // Phones and narrow desktops keep the Jet stream box closed on a link; the case audits it open.
     if (c.jet && !(await page.evaluate(() => document.getElementById('jet-box').open))) {
       await page.locator('#jet-box > summary').click();
+      await page.waitForTimeout(400);
+    }
+    if (c.kite && c.layers && !(await page.evaluate(() => document.getElementById('kite-box').open))) {
+      await page.locator('#kite-box > summary').click();
       await page.waitForTimeout(400);
     }
     if (c.region) { await page.locator('#map-region-btn').click(); await page.waitForTimeout(300); }

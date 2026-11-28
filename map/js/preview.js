@@ -129,15 +129,16 @@ export function addPreviewUnderlay(svg, underlay) {
 /**
  * Draw an overlay into a picture (jetstream.js: the jet stream bands, lines and rings). build(px, cam) returns
  * { under, over }, SVG elements made with cam.el: `under` goes over the clusters and under the dots, `over` above the
- * dots. A new call replaces the last overlay. Returns false for a picture without a projection.
+ * dots. A new call with the same `tag` replaces that tag's last overlay (the Snowkite layer draws under its own tag). Returns false for a picture without a projection.
  */
-export function addPreviewOverlay(svg, build) {
+export function addPreviewOverlay(svg, build, tag = 'jet') {
   const cam = svg && cams.get(svg);
   if (!cam) return false;
-  for (const old of svg.querySelectorAll('.map-preview-overlay')) old.remove();
+  for (const old of svg.querySelectorAll(`.map-preview-overlay[data-overlay="${tag}"]`)) old.remove();
   const out = build(cam.px, { w: cam.w, hgt: cam.hgt, zoom: cam.zoom, el }) || {};
-  if (out.under) { out.under.classList.add('map-preview-overlay'); cam.dots.before(out.under); }
-  if (out.over) { out.over.classList.add('map-preview-overlay'); cam.dots.after(out.over); }
+  for (const g of [out.under, out.over]) if (g) { g.classList.add('map-preview-overlay'); g.setAttribute('data-overlay', tag); }
+  if (out.under) cam.dots.before(out.under);
+  if (out.over) cam.dots.after(out.over);
   return true;
 }
 

@@ -4231,6 +4231,240 @@ async function realJetStreamChecks(browser, base) {
   await ctx.close();
 }
 
+
+// Snowkite layer (ROADMAP item 24; docs/map/SNOWKITE.md): lazy loading, the box, marks on the map, filters, the zone
+// report and event card, deep links, the draft rule, EVENTS mode, phones and axe. Fixtures: tests/map/snowkite_fixture.yaml.
+async function kiteChecks(browser, base, stubBase) {
+  log('\nSnowkite layer');
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await ctx.newPage();
+  const w = watch(page, 'snowkite');
+  const quiet = trackInflight(page);
+  const kiteReq = (re = /\/(kite\.(js|css)|snowkite\.json)(\?|$)/) => w.requests.filter((u) => re.test(u));
+  const status = (text, p = page) => p.waitForFunction((x) => document.getElementById('panel-status').textContent.startsWith(x), text, { timeout: 5000 }).then(() => true, () => false);
+  const FLAT = [-93.6, 46.2]; const PLATEAU = [-106.2, 39.9]; const GLACIER = [-149.0, 61.2]; const FIELD = [-99.2, 47.9];
+  const list = (p = page) => p.evaluate(() => [...document.querySelectorAll('#kite-body .kite-state')].map((li) => ({
+    state: li.querySelector('.kite-state-name span').textContent, zones: [...li.querySelectorAll('.kite-zone-link')].map((a) => a.textContent) })));
+  const mapZones = (p = page) => p.evaluate(() => {
+    const m = window.__careerMap.mapCtl.map;
+    const d = window.__careerMap.kite.drawn;
+    return { zones: d.zones, events: d.events,
+      vis: ['kite-zones', 'kite-events'].map((l) => m.getLayoutProperty(l, 'visibility')),
+      order: m.getStyle().layers.map((l) => l.id) };
+  });
+
+  // 1. Nothing loads with the page, the map or the other layers; a closed box with an unchecked box inside.
+  await page.goto(`${base}/map/${Q}`);
+  await ready(page, { start: false });
+  await page.waitForTimeout(1200);
+  check(kiteReq().length === 0, `lazy: nothing of the snowkite layer loads with the page (${kiteReq().length} requests)`);
+  const box = page.locator('#kite-box');
+  check(await box.isVisible() && (await box.locator('summary').textContent()).trim() === 'Snowkite' && !(await box.evaluate((d) => d.open))
+    && !(await page.locator('#kite-toggle').isChecked()), 'the Layers panel holds a closed Snowkite box with the layer off');
+  await ready(page);
+  await mapIdle(page);
+  await quiet();
+  check(kiteReq().length === 0, `lazy: no snowkite.json, module or stylesheet before the layer is turned on (${kiteReq().length})`);
+  check(!(await page.evaluate(() => Boolean(window.__careerMap.mapCtl.map.getSource('kite-zones')))), 'no snowkite source on the map while the layer is off');
+  check(!new URL(page.url()).searchParams.has('kite'), 'the address bar has no kite parameter while off');
+
+  // 2. Turning it on loads the file once and draws zones and events.
+  await box.locator('summary').click();
+  await page.locator('label[for="kite-toggle"]').click();
+  await page.waitForFunction(() => window.__careerMap.kite && window.__careerMap.kite.on, null, { timeout: 15000 });
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getLayer('kite-events'), null, { timeout: 15000 });
+  await mapIdle(page);
+  check(kiteReq(/snowkite\.json(\?|$)/).length === 1 && kiteReq(/kite\.js(\?|$)/).length === 1 && kiteReq(/kite\.css(\?|$)/).length === 1,
+    `turning it on loads the file, module and stylesheet once (${kiteReq().length} requests)`);
+  check(new URL(page.url()).searchParams.get('kite') === '1', 'the address bar carries ?kite=1');
+  const ms = await mapZones();
+  check(ms.zones.length === 7 && ms.events.length === 3 && ms.vis.join() === 'visible,visible', `7 zones and 3 events on the map (${ms.zones.length}, ${ms.events.length})`);
+  check(ms.order.indexOf('kite-zones') > ms.order.indexOf('states-fill') && ms.order.indexOf('kite-events') < ms.order.indexOf('resorts-glow')
+    && ms.order.indexOf('kite-zones') < ms.order.indexOf('resorts'), 'marks sit above the basemap and below the resort dots');
+  const st = await page.evaluate(() => ({ status: document.querySelector('#kite-body .kite-status').textContent, badge: document.querySelector('#kite-box .kite-on').hidden,
+    legend: [...document.querySelectorAll('.map-legend .ml-kite li')].map((li) => li.textContent) }));
+  check(st.status === '7 zones in 7 states, 3 events.' && !st.badge, `the box counts what it holds (${st.status})`);
+  check(st.legend[0] === 'Snowkite' && st.legend.includes('Frozen lake') && st.legend.includes('Event'), `the legend strip names the surfaces and the event mark (${st.legend.join(', ')})`);
+  const lst = await list();
+  check(lst.map((x) => x.state).join() === 'Alaska,Colorado,Minnesota,Montana,South Dakota,Utah,Wyoming', `the list groups zones by state (${lst.map((x) => x.state)})`);
+  await shot(page, 'kite-desktop-on.png');
+  await w.assertClean();
+
+  // 3. Filters and search narrow the map, the list and the count, and are announced.
+  await page.locator('#kite-search').fill('lake');
+  check(await status('Showing 1 of 7 zones.'), 'search announces the count');
+  check(JSON.stringify((await list()).flatMap((x) => x.zones)) === JSON.stringify(['Fixture Flat Lake']), 'search finds a zone by name');
+  check(JSON.stringify((await mapZones()).zones) === JSON.stringify(['fixture-flat-lake-mn']), 'the map follows the search');
+  await page.locator('#kite-search').fill('utah');
+  check(JSON.stringify((await list()).flatMap((x) => x.zones)) === JSON.stringify(['Fixture Alpine Bowl']), 'search finds a zone by its state name');
+  await page.locator('#kite-search').fill('');
+  await page.locator('label[for="kite-surface-glacier"]').click();
+  check(await status('Showing 6 of 7 zones.') && (await mapZones()).zones.length === 6, 'a surface filter drops the zones of that surface');
+  await page.locator('.kite-reset').click();
+  check((await mapZones()).zones.length === 7 && await page.locator('.kite-reset').isHidden(), 'Show every zone clears the filters');
+  await page.locator('.kite-chip[data-month="5"]').click();
+  check(JSON.stringify((await list()).flatMap((x) => x.zones)) === JSON.stringify(['Fixture Alpine Bowl'])
+    && await page.locator('.kite-chip[data-month="5"]').getAttribute('aria-pressed') === 'true', 'a month chip keeps the zones usable that month (May: one zone)');
+  await page.locator('.kite-chip[data-month="5"]').click();
+  await page.locator('.kite-chip[data-month="1"]').click();
+  check((await mapZones()).zones.length === 6, `January keeps 6 zones with months listed (${(await mapZones()).zones.length})`);
+  await page.locator('.kite-reset').click();
+
+  // 4. A click on a zone mark opens its report in the side panel.
+  await clickMapAt(page, FLAT);
+  await page.waitForFunction(() => new URL(location.href).searchParams.get('zone') === 'fixture-flat-lake-mn', null, { timeout: 8000 }).catch(() => {});
+  check(new URL(page.url()).searchParams.get('zone') === 'fixture-flat-lake-mn' && new URL(page.url()).searchParams.get('kite') === '1', 'clicking a mark opens the zone (?zone=)');
+  check(await heading(page) === 'Fixture Flat Lake', 'the panel heading is the zone name');
+  const rep = await page.evaluate(() => {
+    const root = document.getElementById('panel-content');
+    const facts = {};
+    for (const f of root.querySelectorAll('.kite-facts .fact')) {
+      facts[f.querySelector('dt').textContent] = { v: f.querySelector('.fact-value').textContent, badge: Boolean(f.querySelector('.badge')),
+        meta: (f.querySelector('.fact-meta') || {}).textContent || '', link: f.querySelector('.fact-meta a') ? f.querySelector('.fact-meta a').getAttribute('href') : null };
+    }
+    return { facts, text: root.textContent, tags: [...root.querySelectorAll('.kite-tags .tier')].map((t) => t.textContent),
+      events: [...root.querySelectorAll('.kite-event')].map((e) => ({ title: e.querySelector('h4').textContent, dates: e.querySelector('.fact-value').textContent,
+        signup: e.querySelector('.kite-signup a') ? e.querySelector('.kite-signup a').getAttribute('href') : null })),
+      report: root.querySelector('.kite-summary') ? root.querySelector('.kite-summary').textContent : null,
+      crumbs: [...root.querySelectorAll('.crumbs li')].map((l) => l.textContent) };
+  });
+  check(rep.tags.join() === 'Lake,Frozen lake,Minnesota', `kind, surface and state tags (${rep.tags})`);
+  check(rep.facts.Months.v === 'Dec to Mar' && rep.facts.Months.badge && /Last verified Nov 28, 2026/.test(rep.facts.Months.meta) && rep.facts.Months.link === 'https://example.com/fixture/snowkite/club',
+    `a fact shows its value, confidence badge, verified date and source link (${JSON.stringify(rep.facts.Months)})`);
+  check(['Wind', 'Snow and ice', 'Terrain', 'Elevation', 'Map point', 'Hazard', 'Access: road', 'Access: parking', 'Access: fees', 'Website'].every((k) => rep.facts[k] && rep.facts[k].badge && rep.facts[k].link),
+    `months, wind, snow and ice, terrain, hazards, access fields and website each carry a badge and a source link (${Object.keys(rep.facts)})`);
+  check(!rep.facts['Access: permit'] && rep.facts['Access: road'].v === 'Public landing off Fixture Highway', 'access shows only the fields the source gives');
+  check(rep.report && rep.report.startsWith('Fixture Flat Lake is a wide frozen lake') && /Written from/.test(rep.text), 'a reviewed summary renders with its sources');
+  check(rep.events.length === 1 && rep.events[0].title === 'Fixture Snowkite Festival' && rep.events[0].dates === 'Feb 12 to 14, 2027'
+    && rep.events[0].signup === 'https://example.com/fixture/snowkite/fest/register', `the zone's event shows its dates and a sign up link (${JSON.stringify(rep.events)})`);
+  check(rep.crumbs.join('|') === 'United States|Snowkite zones|Fixture Flat Lake', 'breadcrumbs lead back to the layer');
+  check(await page.evaluate(() => document.querySelector('.kite-zone-link[aria-current="page"]').textContent) === 'Fixture Flat Lake', 'the list marks the open zone');
+  check((await page.evaluate(() => document.querySelector('.mh-name').textContent)) === 'Fixture Flat Lake', 'the sub bar names the zone');
+  check(await page.evaluate(() => document.activeElement && document.activeElement.id) === 'panel-heading', 'focus moves to the panel heading');
+  await shot(page, 'kite-desktop-zone.png');
+  check(await page.waitForFunction(() => window.__careerMap.mapCtl.map.getZoom() > 7, null, { timeout: 8000 }).then(() => true, () => false), 'the map zooms to the zone');
+  await axeCheck(page, 'snowkite zone report');
+  await w.assertClean();
+
+  // 5. A draft summary never renders; missing facts say so; no map point means no marker.
+  await page.goto(`${base}/map/${Q}&zone=fixture-high-plateau-co`);
+  await ready(page, { start: false });
+  await page.waitForFunction(() => window.__careerMap.kite && window.__careerMap.kite.loaded, null, { timeout: 20000 });
+  await page.waitForFunction(() => document.querySelector('#panel-content .kite-facts'), null, { timeout: 10000 });
+  const draft = await page.evaluate(() => ({ text: document.getElementById('panel-content').textContent, h: document.getElementById('panel-heading').textContent,
+    checked: document.getElementById('kite-toggle').checked, report: Boolean(document.querySelector('.kite-summary')), box: document.getElementById('kite-box').open }));
+  check(draft.h === 'Fixture High Plateau' && draft.checked, 'a ?zone= link turns the layer on and opens the zone');
+  check(!/MUST NEVER RENDER/.test(draft.text) && !draft.report && !/Zone report/.test(draft.text), 'a draft report summary never renders');
+  check(/Wind\s*Not yet verified/.test(draft.text) && /Snow and ice\s*Not yet verified/.test(draft.text), 'a fact with no source reads Not yet verified');
+  check(/permit/i.test(draft.text) && /Fixture Plateau Clinic/.test(draft.text), 'the plateau shows its permit and its event');
+  check(!(await page.evaluate(() => window.__careerMap.mapCtl)), 'a deep link keeps the map picture until the first click');
+  await w.assertClean();
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getLayer('kite-zones'), null, { timeout: 15000 });
+  await mapIdle(page);
+  check(await page.evaluate(() => window.__careerMap.mapCtl.map.getFilter('kite-zones-halo')[2]) === 'fixture-high-plateau-co', 'the selected zone is ringed on the map');
+
+  // 6. An event with no zone opens its own card; Back returns to the layer.
+  await page.goto(`${base}/map/${Q}&kite=1`);
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getLayer('kite-events'), null, { timeout: 15000 });
+  await mapIdle(page);
+  await clickMapAt(page, FIELD);
+  await page.waitForFunction(() => new URL(location.href).searchParams.get('kevent') === 'fixture-snowkite-field-day', null, { timeout: 8000 }).catch(() => {});
+  check(await heading(page) === 'Fixture Field Day', 'clicking an event mark opens the event card');
+  const evt = await page.evaluate(() => document.getElementById('panel-content').textContent);
+  check(/Last held Feb 21 to 22, 2026\. 2026\/27 date not yet published\./.test(evt) && /Sign up details are not published yet/.test(evt),
+    'an event with no 2026/27 date says what is known and that sign up is not published');
+  await page.locator('.kite-back a').click();
+  await page.waitForFunction(() => !new URL(location.href).searchParams.has('kevent'), null, { timeout: 5000 });
+  check(new URL(page.url()).searchParams.get('kite') === '1' && await heading(page) === 'United States', 'Back to the snowkite layer returns to the national view with the layer on');
+
+  // 7. EVENTS mode hides the layer with the resorts.
+  await page.goto(`${base}/map/events/${Q}&kite=1`);
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.kite && window.__careerMap.kite.loaded && window.__careerMap.mapCtl.map.getLayer('kite-zones'), null, { timeout: 20000 });
+  await mapIdle(page);
+  check((await mapZones()).vis.join() === 'none,none', 'EVENTS mode hides the snowkite marks');
+  await page.evaluate(() => window.__careerMap.router.go({ level: 'national' }));
+  await page.waitForTimeout(600);
+  check((await mapZones()).vis.join() === 'visible,visible', 'returning to the resorts shows them again');
+
+  // 8. Keyboard: a zone link in the list opens the report; Escape clears the search; off removes the marks.
+  const link = page.locator('.kite-zone-link', { hasText: 'Fixture Dune Field' });
+  await page.locator('#kite-search').fill('dune');
+  await page.locator('.kite-zone-link').first().focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => new URL(location.href).searchParams.get('zone') === 'fixture-dune-field-wy', null, { timeout: 8000 });
+  check(await heading(page) === 'Fixture Dune Field', 'a zone link opens from the keyboard');
+  const hz = await page.evaluate(() => document.getElementById('panel-content').textContent);
+  check(/Hazard\s*Hidden rocks/.test(hz) && /Access\s*Not yet verified/.test(hz), 'hazards list and missing access reads Not yet verified');
+  await page.locator('label[for="kite-toggle"]').click();
+  await page.waitForFunction(() => !new URL(location.href).searchParams.has('kite') && !new URL(location.href).searchParams.has('zone'), null, { timeout: 5000 });
+  check((await mapZones()).vis.join() === 'none,none' && await heading(page) === 'United States', 'turning the layer off hides the marks, clears the address and leaves the zone view');
+  await w.assertClean();
+
+  // 9. Transforms.
+  const tr = await page.evaluate(async () => {
+    const m = await import('/map/js/kite.js');
+    const order = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    return [m.formatMonths([12, 1, 2, 3], order), m.formatMonths([11, 12, 1, 2, 3, 4], order), m.formatMonths([1, 3], order), m.formatMonths([2], order),
+      m.formatMonths([10, 11], order), m.formatMonths([12, 1], order), m.whenText({ program: true }, '2026/27'),
+      m.matchesZone({ name: 'A Lake', state: 'MN', surface: [], months: null }, { surfaces: new Set(['none']), months: new Set(), query: 'minn' }, () => 'Minnesota')];
+  });
+  check(JSON.stringify(tr) === JSON.stringify(['Dec to Mar', 'Nov to Apr', 'Jan, Mar', 'Feb', 'Nov, Oct', 'Dec and Jan', 'Runs all season', true]), `transforms (${JSON.stringify(tr)})`);
+  await ctx.close();
+
+  // 10. Phones: the box is in the layers sheet; a zone opens in the sheet.
+  const pctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+  const ph = await pctx.newPage();
+  const pw = watch(ph, 'snowkite phone');
+  await ph.goto(`${base}/map/${Q}`);
+  await ready(ph, { start: false });
+  await ph.locator('#layers-toggle').click();
+  await ph.locator('#kite-box summary').click();
+  await ph.locator('label[for="kite-toggle"]').click();
+  await ph.waitForFunction(() => window.__careerMap.kite && window.__careerMap.kite.on, null, { timeout: 15000 });
+  await ph.waitForTimeout(600);
+  check(await ph.locator('#kite-search').isVisible() && await ph.locator('.kite-chip').first().isVisible(), 'phones: the sheet shows the filters');
+  await shot(ph, 'kite-phone-box.png');
+  await ph.locator('.kite-zone-link').first().click();
+  await ph.waitForFunction(() => new URL(location.href).searchParams.has('zone'), null, { timeout: 8000 });
+  await ph.waitForTimeout(800);
+  check(await ph.evaluate(() => document.getElementById('panel-heading').textContent.length > 3 && !document.getElementById('layers-panel').classList.contains('is-open')), 'phones: choosing a zone closes the sheet and shows the report');
+  await shot(ph, 'kite-phone-zone.png');
+  check(await ph.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'phones: no horizontal page scroll');
+  await axeCheck(ph, 'snowkite phone');
+  await pw.assertClean();
+  await pctx.close();
+}
+
+// The real build's snowkite.json (zones may be partial while research runs): every zone loads and the layer draws.
+async function realKiteChecks(browser, base) {
+  let file = null;
+  try { file = JSON.parse(fs.readFileSync(path.join(REPO, 'data', 'build', 'snowkite.json'), 'utf8')); } catch { file = null; }
+  if (!file || !file.zones || !file.zones.length) { log('\nReal snowkite: none in data/build yet, skipped'); return; }
+  log('\nReal snowkite (data/build)');
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const w = watch(page, 'real snowkite');
+  await page.goto(`${base}/map/?kite=1`);
+  await ready(page);
+  await page.waitForFunction(() => window.__careerMap.kite && window.__careerMap.kite.loaded, null, { timeout: 30000 });
+  await page.waitForFunction(() => window.__careerMap.mapCtl.map.getLayer('kite-zones'), null, { timeout: 20000 });
+  const mapped = file.zones.filter((z) => z.location).length;
+  const real = await page.evaluate(() => ({ n: window.__careerMap.kite.model.zones.length,
+    drawn: window.__careerMap.kite.drawn.zones.length, events: window.__careerMap.kite.drawn.events.length }));
+  check(real.n === file.zones.length && real.drawn === mapped, `real: every zone loads (${real.n}) and every zone with a point is drawn (${real.drawn} of ${mapped})`);
+  check(real.events === file.events.length, `real: every snowkite event is drawn (${real.events})`);
+  check(!(await page.evaluate(() => /MUST NEVER|DRAFT/.test(document.body.textContent))), 'real: no draft text on the page');
+  await page.locator('.kite-state-box summary').first().click();   // states open on their own only for a short list
+  await page.locator('.kite-zone-link').first().click();
+  await page.waitForFunction(() => new URL(location.href).searchParams.has('zone'), null, { timeout: 8000 });
+  check(await page.locator('.kite-facts .fact').count() >= 5, 'real: a zone report lists its facts');
+  await axeCheck(page, 'real snowkite zone');
+  await w.assertClean();
+  await page.close();
+}
+
 // MAP_TEST_ONLY=eventsChecks,passChecks runs only the named suites (all of them by default).
 const ONLY = (process.env.MAP_TEST_ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
 const runs = (name) => !ONLY.length || ONLY.includes(name);
@@ -4275,9 +4509,11 @@ try {
   if (runs('passChecks')) await passChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('eventsChecks')) await eventsChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('jetStreamChecks')) await jetStreamChecks(browser, REPO_BASE, STUB_BASE);
+  if (runs('kiteChecks')) await kiteChecks(browser, REPO_BASE, STUB_BASE);
   if (runs('realData')) await realData(browser, REPO_BASE);
   if (runs('realEventsChecks')) await realEventsChecks(browser, REPO_BASE);
   if (runs('realJetStreamChecks')) await realJetStreamChecks(browser, REPO_BASE);
+  if (runs('realKiteChecks')) await realKiteChecks(browser, REPO_BASE);
   await browser.close();
 } catch (err) {
   failures.push(`crashed: ${err.stack || err}`);

@@ -2,7 +2,9 @@
 // /map/events/ with ?venue=<id>&event=<id> (the venue and the event the panel shows; checked once events.json loads).
 // Overlay state that holds across views rides along in the address bar: ?jet=<layer>,<layer> (the jet stream paths
 // on, the active one last; docs/map/JETSTREAM.md). Links in the page leave it out; the router adds it to every
-// history entry, so the Link button and the address bar carry it.
+// history entry, so the Link button and the address bar carry it. ?kite=1 turns the Snowkite layer on (docs/map/
+// SNOWKITE.md); ?zone=<id> shows one zone's report and ?kevent=<id> one snowkite event (level 'kite' at /map/), and
+// both imply the layer.
 import { config } from './config.js';
 
 /** The first path segment of EVENTS mode (pipeline/routes.py EVENTS_PATH). */
@@ -26,9 +28,18 @@ export function parsePath(pathname) {
  */
 export function resolve(index, segments, search = '') {
   const [s, c, r] = segments;
-  const view = { level: 'national', stateCode: null, clusterId: null, resortId: null, compare: [], venueId: null, eventId: null, fellBack: false };
+  const view = { level: 'national', stateCode: null, clusterId: null, resortId: null, compare: [], venueId: null, eventId: null, zoneId: null, kiteEventId: null, fellBack: false };
   if (segments.length > 3) view.fellBack = true;
-  if (!s) return view;
+  if (!s) {
+    // The Snowkite layer's zone report or event card: the national path with ?zone= or ?kevent=. The ids are shape
+    // checked here; kite.js checks them against snowkite.json and falls back to the layer with a note.
+    const q = new URLSearchParams(search);
+    const slug = (k) => { const v = (q.get(k) || '').trim().toLowerCase(); return SLUG.test(v) ? v : null; };
+    const zoneId = slug('zone');
+    const kiteEventId = zoneId ? null : slug('kevent');
+    if (zoneId || kiteEventId) { view.level = 'kite'; view.zoneId = zoneId; view.kiteEventId = kiteEventId; }
+    return view;
+  }
   if (s === EVENTS_SEGMENT) {
     // EVENTS mode. The ids are only shape checked here: events.json loads with the mode, then events.js checks them.
     view.level = 'events';
@@ -94,6 +105,10 @@ export function hrefFor(view) {
     if (view.venueId) q.set('venue', view.venueId);
     if (view.eventId) q.set('event', view.eventId);
   }
+  if (view.level === 'kite') {
+    if (view.zoneId) q.set('zone', view.zoneId);
+    else if (view.kiteEventId) q.set('kevent', view.kiteEventId);
+  }
   const qs = q.toString().replace(/%2C/g, ',').replace(/%2F/g, '/');
   return pathFor(view) + (qs ? `?${qs}` : '');
 }
@@ -110,21 +125,38 @@ let jetParam = '';
 export function jetLayers() { return jetParam ? jetParam.split(',') : []; }
 export function setJetLayers(ids) { jetParam = (ids || []).filter((x) => LAYER_ID.test(x)).join(','); }
 
+let kiteParam = false;
+/** True when the Snowkite layer is on (?kite=1, or a zone or event link). */
+export function kiteOn() { return kiteParam; }
+export function setKiteOn(on) { kiteParam = Boolean(on); }
+/** The Snowkite layer state of a query string: ?kite=1, or a ?zone= or ?kevent= link. */
+export function parseKite(search) {
+  try {
+    const q = new URLSearchParams(search);
+    return q.get('kite') === '1' || q.has('zone') || q.has('kevent');
+  } catch { return false; }
+}
+
 /** The address bar URL of a view: hrefFor plus the overlay state. */
 export function locationFor(view) {
-  const href = hrefFor(view);
-  return jetParam ? `${href}${href.includes('?') ? '&' : '?'}jet=${jetParam}` : href;
+  let href = hrefFor(view);
+  const add = (kv) => { href += `${href.includes('?') ? '&' : '?'}${kv}`; };
+  if (kiteParam || view.level === 'kite') add('kite=1');
+  if (jetParam) add(`jet=${jetParam}`);
+  return href;
 }
 
 export function sameView(a, b) {
   return a && b && a.level === b.level && a.stateCode === b.stateCode && a.clusterId === b.clusterId
     && a.resortId === b.resortId && (a.compare || []).join() === (b.compare || []).join()
-    && (a.venueId || null) === (b.venueId || null) && (a.eventId || null) === (b.eventId || null);
+    && (a.venueId || null) === (b.venueId || null) && (a.eventId || null) === (b.eventId || null)
+    && (a.zoneId || null) === (b.zoneId || null) && (a.kiteEventId || null) === (b.kiteEventId || null);
 }
 
 export function createRouter(index, onChange) {
   let current = null;
   setJetLayers(parseJet(window.location.search));
+  setKiteOn(parseKite(window.location.search));
 
   function fromLocation() {
     return resolve(index, parsePath(window.location.pathname), window.location.search);
@@ -134,9 +166,12 @@ export function createRouter(index, onChange) {
     if (initial || fromPop) {
       // Rewrite unknown or non canonical paths (and /map/index.html) to the resolved view. Back and forward keep
       // the overlays as they are, so an older entry's ?jet= is rewritten to the current one.
+      if (view.level === 'kite') setKiteOn(true);
       const href = locationFor(view);
       if (view.fellBack || window.location.pathname !== href.split('?')[0]
         || (view.level === 'events' && window.location.search !== (href.includes('?') ? href.slice(href.indexOf('?')) : ''))
+        || (view.level === 'kite' && window.location.search !== (href.includes('?') ? href.slice(href.indexOf('?')) : ''))
+        || parseKite(window.location.search) !== kiteParam
         || parseJet(window.location.search).join(',') !== jetParam) {
         window.history.replaceState({ href }, '', href);
       }
@@ -154,6 +189,7 @@ export function createRouter(index, onChange) {
     /** Navigate to a view object. */
     go(view, { replace = false } = {}) {
       const next = { ...view, fellBack: false };
+      if (next.level === 'kite') setKiteOn(true);
       if (sameView(next, current)) return;
       const href = locationFor(next);
       if (replace) window.history.replaceState({ href }, '', href);

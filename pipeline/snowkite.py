@@ -292,6 +292,7 @@ def compile_snowkite(data: SnowkiteData, defs: SnowkiteDefs, events_compiled: Op
         "kinds": [{"id": k.id, "label": k.label} for k in defs.kinds],
         "surfaces": [{"id": s.id, "label": s.label, "color": s.color} for s in defs.surfaces],
         "month_order": list(defs.month_order),
+        "season": (events_compiled or {}).get("season", {}).get("label"),   # the events season, for date wording
         "states": {c: state_name[c] for c in sorted({z.state for z in zones}) if c in state_name},
         "zones": zone_dicts,
         "events": out_events,
