@@ -1,0 +1,863 @@
+batch: snowkite-zones-midwest
+researched_date: &id001 2026-11-28
+sources:
+- id: snowkite-mw-wp-mille-lacs
+  url: https://en.wikipedia.org/wiki/Mille_Lacs_Lake
+  title: Mille Lacs Lake (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-minnetonka
+  url: https://en.wikipedia.org/wiki/Lake_Minnetonka
+  title: Lake Minnetonka (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-white-bear
+  url: https://en.wikipedia.org/wiki/White_Bear_Lake,_Minnesota
+  title: White Bear Lake, Minnesota (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-medicine
+  url: https://en.wikipedia.org/wiki/Medicine_Lake_(Minnesota)
+  title: Medicine Lake (Minnesota) (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-waconia
+  url: https://en.wikipedia.org/wiki/Lake_Waconia
+  title: Lake Waconia (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-bde-maka-ska
+  url: https://en.wikipedia.org/wiki/Bde_Maka_Ska
+  title: Bde Maka Ska (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-duluth
+  url: https://en.wikipedia.org/wiki/Duluth,_Minnesota
+  title: Duluth, Minnesota (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-mendota
+  url: https://en.wikipedia.org/wiki/Lake_Mendota
+  title: Lake Mendota (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-winnebago
+  url: https://en.wikipedia.org/wiki/Lake_Winnebago
+  title: Lake Winnebago (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-door-county
+  url: https://en.wikipedia.org/wiki/Door_County,_Wisconsin
+  title: Door County, Wisconsin (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-leelanau
+  url: https://en.wikipedia.org/wiki/Lake_Leelanau
+  title: Lake Leelanau (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-cadillac
+  url: https://en.wikipedia.org/wiki/Cadillac,_Michigan
+  title: Cadillac, Michigan (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-lake-mitchell
+  url: https://en.wikipedia.org/wiki/Lake_Mitchell_(Michigan)
+  title: Lake Mitchell (Michigan) (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-reeds
+  url: https://en.wikipedia.org/wiki/Reeds_Lake
+  title: Reeds Lake (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-marquette
+  url: https://en.wikipedia.org/wiki/Marquette,_Michigan
+  title: Marquette, Michigan (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-bay-de-noc
+  url: https://en.wikipedia.org/wiki/Little_Bay_de_Noc
+  title: Little Bay de Noc (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-chicago
+  url: https://en.wikipedia.org/wiki/Chicago
+  title: Chicago (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-wp-clear-lake
+  url: https://en.wikipedia.org/wiki/Clear_Lake,_Iowa
+  title: Clear Lake, Iowa (Wikipedia)
+  accessed_date: *id001
+- id: snowkite-mw-mn-mille-lacs-tourism
+  url: https://millelacs.com/kiteboarding/
+  title: All-Season Fun
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-mille-lacs-mpr-2020
+  url: https://www.mprnews.org/story/2020/02/29/on-skis-and-snowboards-powered-by-wind-racers-cross-frozen-mille-lacs-lake
+  title: On skis and snowboards, powered by wind, racers cross frozen Mille Lacs Lake
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-mille-lacs-startribune
+  url: https://www.startribune.com/go-fly-a-kite-on-ice-lake-mille-lacs-hosts-annual-snowkiting-races-drawing-athletes-worldwide/475053283
+  title: 'Go fly a kite on ice: Lake Mille Lacs hosts annual snowkiting races, drawing athletes worldwide'
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-startribune-winter-kiters
+  url: https://www.startribune.com/winter-extends-the-action-for-minnesota-s-high-flying-kitesurfers/474855113
+  title: Winter extends the action for Minnesota's high-flying kitesurfers
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-minnetonka-mag
+  url: https://archive.lakeminnetonkamag.com/gone-wind
+  title: Gone with the Wind
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-mpr-minnetonka-2015
+  url: https://www.mprnews.org/story/2015/02/18/snowkiting
+  title: 'Photos: Kiteboarding takes over Lake Minnetonka'
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-mpr-white-bear-2023
+  url: https://www.mprnews.org/episode/2023/02/07/winter-play-snowkiting-on-white-bear-lake
+  title: 'Minnesota Now with Cathy Wurzer: Winter play, snowkiting on White Bear Lake'
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-cbs-medicine-lake
+  url: https://www.cbsnews.com/minnesota/news/finding-minnesota-kiteboarding-on-medicine-lake
+  title: 'Finding Minnesota: Kiteboarding On Medicine Lake'
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-tpt-outside-chance
+  url: https://www.tptoriginals.org/outside-chance-snowkiting/
+  title: 'Outside Chance: Snowkiting'
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-umd-harness-wind
+  url: https://d.umn.edu/news/learning-harness-wind
+  title: Learning to harness the wind
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-fox21-umd
+  url: https://old.fox21online.com/?p=237577
+  title: UMD Students Learn Unique Sport of Snowkiting
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-dnr-thickness
+  url: https://files.dnr.state.mn.us/education_safety/safety/ice/ice-tickness-guidelines-poster.pdf
+  title: ICE IS NEVER 100% SAFE Recommended Minimum Ice Thickness
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-dnr-thin-ice
+  url: https://files.dnr.state.mn.us/education_safety/safety/ice/dangerthinice.pdf
+  title: Danger! Thin Ice
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mn-dnr-ice-formations
+  url: https://www.dnr.state.mn.us/safety/ice/ice-formations-conditions.html
+  title: Ice formations and conditions
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-wi-dnr-ice-safety
+  url: https://dnr.wisconsin.gov/Education/OutdoorSkills/IceSafety
+  title: Ice safety
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-wi-hoofers-news
+  url: https://news.wisc.edu/?p=20980
+  title: 'Recent sightings: Snow kiting on Mendota'
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-wi-hoofers-union
+  url: https://union.wisc.edu/events-and-activities/event-calendar/event/winter-kiting-with-hoofer-sailing-club
+  title: Winter kiting with Hoofer Sailing Club
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-wi-winnebago-fox6
+  url: https://www.fox6now.com/sports/we-all-love-strong-winds-lake-winnebago-chosen-to-host-world-ice-snow-sailing-championship-for-unique-reason
+  title: We all love strong winds! Lake Winnebago chosen to host World Ice and Snow Sailing Championship
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-wi-winnebago-wpr
+  url: https://wpr.org/news/ice-snow-sailing-championships-2025-meet-newcomers-wisconsin-lakes
+  title: Ice and snow sailing championships 2025 meet newcomers Wisconsin lakes
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-wi-door-curb
+  url: https://curb2013.sjmc.wisc.edu/2013/11/16/no-die-in-door-county/index.html
+  title: No die in Door County
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-wi-door-tourism-ice
+  url: https://www.doorcounty.com/newsletter/the-ice-experience-in-door-county
+  title: The Ice Experience in Door County
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-leelanau-ticker
+  url: https://www.leelanauticker.com/news/see-people-fly-on-lake-leelanau-the-best-spot-in-the-region-for-snow-kiting/
+  title: See People Fly On Lake Leelanau, The Best Spot In The Region For Snow Kiting
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-cadillac-mwskj
+  url: https://cadillacmichigan.com/mwskj/
+  title: Midwest Snow Kite Jam (Cadillac)
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-mwskj-givebutter
+  url: https://givebutter.com/MWSKJ25
+  title: The Midwest Snow Kite Jam 2026
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-mac-where
+  url: https://www.mackiteboarding.com/where-to-kiteboard-and-snowkite.htm
+  title: Where to kiteboard and snowkite
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-mac-reeds
+  url: https://www.mackiteboarding.com/snowreedslake.htm
+  title: Reeds Lake
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-mac-austin
+  url: https://www.mackiteboarding.com/snowaustinlake.htm
+  title: Austin Lake
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-marquette-mag
+  url: https://marquettemagazine.com/kite-skiing-on-lake-superior
+  title: Kite skiing on Lake Superior
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-mi-uptravel-winter
+  url: https://www.uptravel.com/outdoors-recreation/winter-activities-sports/
+  title: Upper Peninsula Winter Activities and Sports
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-il-windycity-iko
+  url: https://www.ikointl.com/school/united-states/chicago/windycity-kite-sports
+  title: WindyCity Kite Sports
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+- id: snowkite-mw-ia-clear-lake-kites
+  url: https://clearlakeiowa.com/?p=47665
+  title: Iowa's Premier Kite Festival on Ice
+  accessed_date: *id001
+  note: From a search result for this page; page not opened.
+zones:
+- id: mille-lacs-lake-mn
+  name: Mille Lacs Lake
+  status: established
+  kind: lake
+  state: MN
+  location:
+    lat: 46.23813
+    lon: -93.64341
+    precision: area
+    source_id: snowkite-mw-wp-mille-lacs
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  months:
+    value:
+    - 1
+    - 2
+    - 3
+    note: Best snow and ice for kiteboarding is usually late January until early March, per the local tourism site
+    source_id: snowkite-mw-mn-mille-lacs-tourism
+    as_of: *id001
+    confidence: estimated
+  wind:
+    value: Steady winds over a large open lake. The tourism site notes multiple public access points on each side of the lake.
+    source_id: snowkite-mw-mn-mille-lacs-tourism
+    as_of: *id001
+    confidence: estimated
+  snow_ice:
+    value: An AP report names 5 to 6 inches of fresh snow and 12 to 15 knots of wind as ideal for the Kite Crossing race.
+    source_id: snowkite-mw-mn-mille-lacs-mpr-2020
+    as_of: *id001
+    confidence: estimated
+  terrain:
+    value: A race course of about 28 miles across the lake and back is used by the Kite Crossing, with shorter races, freestyle and lessons.
+    source_id: snowkite-mw-mn-mille-lacs-startribune
+    as_of: *id001
+    confidence: estimated
+  hazards:
+  - value: Clear ice makes falls harder. Racers meet ice heaves and other kiters. Racers carry long ice screws to anchor a kite if they stop.
+    source_id: snowkite-mw-mn-mille-lacs-mpr-2020
+    as_of: *id001
+    confidence: estimated
+  - value: 'Minnesota DNR minimum for new clear ice: about 4 inches on foot and 5 to 7 inches for snowmobiles. Double the figures for white ice. The DNR does not measure lake ice.'
+    source_id: snowkite-mw-mn-dnr-thickness
+    as_of: *id001
+    confidence: estimated
+  - value: Ice over flowing water is often dangerous near streams, springs, channels between lakes, bridges and culverts. Pressure ridges can reach over 10 feet; follow them at a distance to find a crossing.
+    source_id: snowkite-mw-mn-dnr-thin-ice
+    as_of: *id001
+    confidence: estimated
+  access:
+    road: Multiple public access points on each side of the lake
+    source_id: snowkite-mw-mn-mille-lacs-tourism
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://millelacs.com/kiteboarding/
+    source_id: snowkite-mw-mn-mille-lacs-tourism
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Mille Lacs is the best known snowkite lake in Minnesota. It hosts the Kite Crossing, a race of about 28 miles across the lake and back. The local tourism site gives late January to early March as the usual window.
+    source_ids:
+    - snowkite-mw-mn-mille-lacs-tourism
+    - snowkite-mw-mn-mille-lacs-startribune
+    - snowkite-mw-mn-mille-lacs-mpr-2020
+- id: lake-minnetonka-mn
+  name: Lake Minnetonka
+  status: established
+  kind: lake
+  state: MN
+  location:
+    lat: 44.93333
+    lon: -93.56667
+    precision: area
+    source_id: snowkite-mw-wp-minnetonka
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: A spot near Wayzata called Kite Island has served as a snowkite hub for years, about 1.3 miles out along the winter road.
+    source_id: snowkite-mw-mn-minnetonka-mag
+    as_of: *id001
+    confidence: estimated
+  hazards:
+  - value: 'Minnesota DNR minimum for new clear ice: about 4 inches on foot and 5 to 7 inches for snowmobiles. Double the figures for white ice. The DNR does not measure lake ice.'
+    source_id: snowkite-mw-mn-dnr-thickness
+    as_of: *id001
+    confidence: estimated
+  - value: Ice over flowing water is often dangerous near streams, springs, channels between lakes, bridges and culverts. Pressure ridges can reach over 10 feet; follow them at a distance to find a crossing.
+    source_id: snowkite-mw-mn-dnr-thin-ice
+    as_of: *id001
+    confidence: estimated
+  access:
+    road: Winter road access near Wayzata leads to the Kite Island spot
+    source_id: snowkite-mw-mn-minnetonka-mag
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Lake Minnetonka is a long established winter kiting lake west of Minneapolis. A spot near Wayzata known as Kite Island has been a snowkite hub for years. The lake has also hosted the Excelsior Brewing Snow Kite Open.
+    source_ids:
+    - snowkite-mw-mn-minnetonka-mag
+    - snowkite-mw-mn-mpr-minnetonka-2015
+    - snowkite-mw-mn-startribune-winter-kiters
+- id: white-bear-lake-mn
+  name: White Bear Lake
+  status: established
+  kind: lake
+  state: MN
+  location:
+    lat: 45.06389
+    lon: -93.00833
+    precision: area
+    source_id: snowkite-mw-wp-white-bear
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  hazards:
+  - value: 'Minnesota DNR minimum for new clear ice: about 4 inches on foot and 5 to 7 inches for snowmobiles. Double the figures for white ice. The DNR does not measure lake ice.'
+    source_id: snowkite-mw-mn-dnr-thickness
+    as_of: *id001
+    confidence: estimated
+  - value: Ice over flowing water is often dangerous near streams, springs, channels between lakes, bridges and culverts. Pressure ridges can reach over 10 feet; follow them at a distance to find a crossing.
+    source_id: snowkite-mw-mn-dnr-thin-ice
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: White Bear Lake in the Twin Cities area is a regular snowkite lake, and kiteboarding schools teach there. Sources describe the lake as much quieter in winter than in boating season.
+    source_ids:
+    - snowkite-mw-mn-mpr-white-bear-2023
+    - snowkite-mw-mn-startribune-winter-kiters
+- id: medicine-lake-mn
+  name: Medicine Lake
+  status: established
+  kind: lake
+  state: MN
+  location:
+    lat: 45.00833
+    lon: -93.42083
+    precision: area
+    source_id: snowkite-mw-wp-medicine
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  hazards:
+  - value: 'Minnesota DNR minimum for new clear ice: about 4 inches on foot and 5 to 7 inches for snowmobiles. Double the figures for white ice. The DNR does not measure lake ice.'
+    source_id: snowkite-mw-mn-dnr-thickness
+    as_of: *id001
+    confidence: estimated
+  - value: Ice over flowing water is often dangerous near streams, springs, channels between lakes, bridges and culverts. Pressure ridges can reach over 10 feet; follow them at a distance to find a crossing.
+    source_id: snowkite-mw-mn-dnr-thin-ice
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: A WCCO segment shows kites and skiers out on frozen Medicine Lake in the Minneapolis area. The lake is named among the large Minnesota lakes that kiters use.
+    source_ids:
+    - snowkite-mw-mn-cbs-medicine-lake
+    - snowkite-mw-mn-tpt-outside-chance
+- id: lake-waconia-mn
+  name: Lake Waconia
+  status: established
+  kind: lake
+  state: MN
+  location:
+    lat: 44.86861
+    lon: -93.78389
+    precision: area
+    source_id: snowkite-mw-wp-waconia
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  hazards:
+  - value: 'Minnesota DNR minimum for new clear ice: about 4 inches on foot and 5 to 7 inches for snowmobiles. Double the figures for white ice. The DNR does not measure lake ice.'
+    source_id: snowkite-mw-mn-dnr-thickness
+    as_of: *id001
+    confidence: estimated
+  - value: Ice over flowing water is often dangerous near streams, springs, channels between lakes, bridges and culverts. Pressure ridges can reach over 10 feet; follow them at a distance to find a crossing.
+    source_id: snowkite-mw-mn-dnr-thin-ice
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Twin Cities PBS lists Lake Waconia among the popular Minnesota snowkite spots, with Bde Maka Ska and Lake Minnetonka.
+    source_ids:
+    - snowkite-mw-mn-tpt-outside-chance
+- id: bde-maka-ska-mn
+  name: Bde Maka Ska
+  status: established
+  kind: lake
+  state: MN
+  location:
+    lat: 44.94167
+    lon: -93.3125
+    precision: area
+    source_id: snowkite-mw-wp-bde-maka-ska
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: A wide lake inside Minneapolis. One rider described going out at dusk, often with the lake nearly to himself.
+    source_id: snowkite-mw-mn-startribune-winter-kiters
+    as_of: *id001
+    confidence: estimated
+  hazards:
+  - value: 'Minnesota DNR minimum for new clear ice: about 4 inches on foot and 5 to 7 inches for snowmobiles. Double the figures for white ice. The DNR does not measure lake ice.'
+    source_id: snowkite-mw-mn-dnr-thickness
+    as_of: *id001
+    confidence: estimated
+  - value: Ice over flowing water is often dangerous near streams, springs, channels between lakes, bridges and culverts. Pressure ridges can reach over 10 feet; follow them at a distance to find a crossing.
+    source_id: snowkite-mw-mn-dnr-thin-ice
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Bde Maka Ska, formerly Lake Calhoun, is a wide open lake in Minneapolis that winter kiters use. Twin Cities PBS lists it among the popular Minnesota snowkite spots.
+    source_ids:
+    - snowkite-mw-mn-startribune-winter-kiters
+    - snowkite-mw-mn-tpt-outside-chance
+- id: island-lake-duluth-mn
+  name: Island Lake (Duluth area)
+  status: established
+  kind: lake
+  state: MN
+  location:
+    lat: 46.78444
+    lon: -92.10528
+    precision: region
+    source_id: snowkite-mw-wp-duluth
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: UMD Recreational Sports Outdoor Program teaches snowkite basics on Island Lake before students go out on the ice.
+    source_id: snowkite-mw-mn-fox21-umd
+    as_of: *id001
+    confidence: estimated
+  hazards:
+  - value: 'Minnesota DNR minimum for new clear ice: about 4 inches on foot and 5 to 7 inches for snowmobiles. Double the figures for white ice. The DNR does not measure lake ice.'
+    source_id: snowkite-mw-mn-dnr-thickness
+    as_of: *id001
+    confidence: estimated
+  - value: Ice over flowing water is often dangerous near streams, springs, channels between lakes, bridges and culverts. Pressure ridges can reach over 10 feet; follow them at a distance to find a crossing.
+    source_id: snowkite-mw-mn-dnr-thin-ice
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: The University of Minnesota Duluth Recreational Sports Outdoor Program teaches snowkiting on Island Lake. Students learn the basics before going out on the ice. The pin marks Duluth as a region; the lake sits near the city.
+    source_ids:
+    - snowkite-mw-mn-fox21-umd
+    - snowkite-mw-mn-umd-harness-wind
+- id: lake-mendota-wi
+  name: Lake Mendota
+  status: established
+  kind: lake
+  state: WI
+  location:
+    lat: 43.10667
+    lon: -89.42472
+    precision: area
+    source_id: snowkite-mw-wp-mendota
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: The Wisconsin Hoofers kiting fleet rides downhill skis around the lake with a wind kite and has run snowkiting classes on the snow covered ice.
+    source_id: snowkite-mw-wi-hoofers-news
+    as_of: *id001
+    confidence: estimated
+  hazards:
+  - value: 'Wisconsin DNR: no ice is 100 percent safe. Check for inlets, outlets, narrows and currents that thin the ice. Pressure ridges and heaves can hide thin ice and open water.'
+    source_id: snowkite-mw-wi-dnr-ice-safety
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://union.wisc.edu/events-and-activities/event-calendar/event/winter-kiting-with-hoofer-sailing-club
+    source_id: snowkite-mw-wi-hoofers-union
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Lake Mendota in Madison is the home of the Wisconsin Hoofers kiting fleet, a UW Madison outdoor club. The club has run snowkiting classes on the frozen lake and lists winter kiting sessions with the Hoofer Sailing Club.
+    source_ids:
+    - snowkite-mw-wi-hoofers-news
+    - snowkite-mw-wi-hoofers-union
+- id: lake-winnebago-wi
+  name: Lake Winnebago
+  status: established
+  kind: lake
+  state: WI
+  location:
+    lat: 44.0125
+    lon: -88.4175
+    precision: area
+    source_id: snowkite-mw-wp-winnebago
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  wind:
+    value: The Niagara Escarpment creates a nearly constant flow of wind, which is why the lake was chosen to host the World Ice and Snow Sailing Championship.
+    source_id: snowkite-mw-wi-winnebago-fox6
+    as_of: *id001
+    confidence: estimated
+  hazards:
+  - value: 'Wisconsin DNR: no ice is 100 percent safe. Check for inlets, outlets, narrows and currents that thin the ice. Pressure ridges and heaves can hide thin ice and open water.'
+    source_id: snowkite-mw-wi-dnr-ice-safety
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Lake Winnebago hosted the 2025 World Ice and Snow Sailing Championship, which drew kiteboarding, windsurfing and wing athletes. Organizers chose the lake for its strong, steady wind.
+    source_ids:
+    - snowkite-mw-wi-winnebago-fox6
+    - snowkite-mw-wi-winnebago-wpr
+- id: green-bay-door-county-wi
+  name: Green Bay shore, Door County
+  status: established
+  kind: other
+  state: WI
+  location:
+    lat: 45.02
+    lon: -87.01
+    precision: area
+    source_id: snowkite-mw-wp-door-county
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  wind:
+    value: A local snowkiter rides the frozen Green Bay shoreline after work and says the area has fairly high average wind speeds.
+    source_id: snowkite-mw-wi-door-curb
+    as_of: *id001
+    confidence: estimated
+  snow_ice:
+    value: Door County tourism says Green Bay freezes over with ice 2 to 3 feet thick, which pushes ice shoves onto the western shore.
+    source_id: snowkite-mw-wi-door-tourism-ice
+    as_of: *id001
+    confidence: estimated
+  hazards:
+  - value: Ice shoves pile up along shorelines when wind pushes the ice. Wisconsin DNR lists pressure ridges, heaves and currents as causes of uneven ice.
+    source_id: snowkite-mw-wi-door-tourism-ice
+    as_of: *id001
+    confidence: estimated
+  - value: 'Wisconsin DNR: no ice is 100 percent safe. Check for inlets, outlets, narrows and currents that thin the ice. Pressure ridges and heaves can hide thin ice and open water.'
+    source_id: snowkite-mw-wi-dnr-ice-safety
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: A Door County snowkiter has ridden the frozen Green Bay shoreline since 2011. Door County tourism describes ice 2 to 3 feet thick and ice shoves on the shore.
+    source_ids:
+    - snowkite-mw-wi-door-curb
+    - snowkite-mw-wi-door-tourism-ice
+- id: lake-leelanau-mi
+  name: Lake Leelanau
+  status: established
+  kind: lake
+  state: MI
+  location:
+    lat: 45.0
+    lon: -85.73333
+    precision: area
+    source_id: snowkite-mw-wp-leelanau
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: Organizers of the Midwest Snow Kite Jam picked the lake for some of the most snow kite friendly geography in the Midwest.
+    source_id: snowkite-mw-mi-leelanau-ticker
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Lake Leelanau hosted the Midwest Snow Kite Jam for years, and a local news site calls it the best spot in the region for snow kiting. The event later moved to Cadillac.
+    source_ids:
+    - snowkite-mw-mi-leelanau-ticker
+- id: lake-cadillac-mi
+  name: Lake Cadillac
+  status: established
+  kind: lake
+  state: MI
+  location:
+    lat: 44.25
+    lon: -85.4
+    precision: area
+    source_id: snowkite-mw-wp-cadillac
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: The Saturday free ride of the Midwest Snow Kite Jam takes place on Lake Cadillac, Lake Mitchell or Caberfae, weather permitting.
+    source_id: snowkite-mw-mi-cadillac-mwskj
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://cadillacmichigan.com/mwskj/
+    source_id: snowkite-mw-mi-cadillac-mwskj
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Cadillac hosts the Midwest Snow Kite Jam, with free riding on Lake Cadillac or Lake Mitchell. One report counts roughly 60 kiters from across Michigan and beyond at a recent edition.
+    source_ids:
+    - snowkite-mw-mi-cadillac-mwskj
+    - snowkite-mw-mi-mwskj-givebutter
+- id: lake-mitchell-mi
+  name: Lake Mitchell
+  status: established
+  kind: lake
+  state: MI
+  location:
+    lat: 44.24778
+    lon: -85.49333
+    precision: area
+    source_id: snowkite-mw-wp-lake-mitchell
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: Lake Mitchell is one of the free ride venues of the Midwest Snow Kite Jam, with Caberfae Peaks as the backup site.
+    source_id: snowkite-mw-mi-cadillac-mwskj
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://cadillacmichigan.com/mwskj/
+    source_id: snowkite-mw-mi-cadillac-mwskj
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Lake Mitchell near Cadillac is a Saturday free ride venue for the Midwest Snow Kite Jam. Organizers list Caberfae Peaks as the backup if the lake is not right.
+    source_ids:
+    - snowkite-mw-mi-cadillac-mwskj
+- id: silver-lake-mi
+  name: Silver Lake (Oceana County)
+  status: established
+  kind: lake
+  state: MI
+  surface:
+  - frozen_lake
+  wind:
+    value: A kite shop says the lake gets more wind than many inland areas, thanks to the nearby dunes and its position on the point.
+    source_id: snowkite-mw-mi-mac-where
+    as_of: *id001
+    confidence: estimated
+  access:
+    road: Access is on the east side of the lake in the state park
+    parking: Few services open in winter; the gas station in the town of Silver Lake is about the only business open
+    source_id: snowkite-mw-mi-mac-where
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://www.mackiteboarding.com/where-to-kiteboard-and-snowkite.htm
+    source_id: snowkite-mw-mi-mac-where
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: A West Michigan kite shop lists Silver Lake as a snowkite spot with more wind than many inland lakes. Access is from the state park on the east side.
+    source_ids:
+    - snowkite-mw-mi-mac-where
+- id: reeds-lake-mi
+  name: Reeds Lake
+  status: established
+  kind: lake
+  state: MI
+  location:
+    lat: 42.95
+    lon: -85.6
+    precision: area
+    source_id: snowkite-mw-wp-reeds
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  access:
+    road: Described as an easily accessible snowkite spot in the Grand Rapids area, in East Grand Rapids
+    source_id: snowkite-mw-mi-mac-reeds
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://www.mackiteboarding.com/snowreedslake.htm
+    source_id: snowkite-mw-mi-mac-reeds
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Reeds Lake in East Grand Rapids is an easily accessible snowkite spot for the Grand Rapids area. It hosts an annual Ice Fly event.
+    source_ids:
+    - snowkite-mw-mi-mac-reeds
+- id: austin-lake-mi
+  name: Austin Lake
+  status: established
+  kind: lake
+  state: MI
+  surface:
+  - frozen_lake
+  access:
+    road: Public boat launch on Woodbine; about 1.25 hours from Holland
+    source_id: snowkite-mw-mi-mac-austin
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://www.mackiteboarding.com/snowaustinlake.htm
+    source_id: snowkite-mw-mi-mac-austin
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: A West Michigan kite shop calls Austin Lake a great snowkite spot in southern Michigan. Directions point to the public boat launch on Woodbine.
+    source_ids:
+    - snowkite-mw-mi-mac-austin
+- id: marquette-lake-superior-mi
+  name: Lake Superior shore at Marquette
+  status: established
+  kind: other
+  state: MI
+  location:
+    lat: 46.54639
+    lon: -87.40667
+    precision: area
+    source_id: snowkite-mw-wp-marquette
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: A Marquette Magazine photo shows a resident kite skiing on the frozen shore of Lake Superior at Marquette in March 2014.
+    source_id: snowkite-mw-mi-marquette-mag
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Marquette Magazine shows a local resident kite skiing on the frozen shore of Lake Superior at Marquette. The page explains that kite skiing combines sailing, skiing and kite flying.
+    source_ids:
+    - snowkite-mw-mi-marquette-mag
+- id: bays-de-noc-mi
+  name: Big and Little Bays de Noc and Lake Michigan near Escanaba
+  status: established
+  kind: other
+  state: MI
+  location:
+    lat: 45.76667
+    lon: -87.0125
+    precision: area
+    source_id: snowkite-mw-wp-bay-de-noc
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  terrain:
+    value: An Upper Peninsula winter guide says ice sailing and snowkiting on skis or snowboards happen across the frozen expanses of the bays and Lake Michigan near Escanaba.
+    source_id: snowkite-mw-mi-uptravel-winter
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: The Upper Peninsula travel guide names the frozen Big and Little Bays de Noc and nearby Lake Michigan as places for snowkiting on skis or snowboards.
+    source_ids:
+    - snowkite-mw-mi-uptravel-winter
+- id: chicagoland-lake-michigan-il
+  name: Chicagoland and Northwest Indiana Lake Michigan coast
+  status: established
+  kind: other
+  state: IL
+  location:
+    lat: 41.88194
+    lon: -87.62778
+    precision: region
+    source_id: snowkite-mw-wp-chicago
+    as_of: *id001
+    confidence: reported
+  terrain:
+    value: WindyCity Kite Sports describes windy and snowy winters in Chicagoland for land and snowkiting along the Lake Michigan coast of Illinois and Northwest Indiana.
+    source_id: snowkite-mw-il-windycity-iko
+    as_of: *id001
+    confidence: estimated
+  website:
+    value: https://www.ikointl.com/school/united-states/chicago/windycity-kite-sports
+    source_id: snowkite-mw-il-windycity-iko
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: WindyCity Kite Sports, a Chicago area kiting school, promotes land and snowkiting along the Chicagoland and Northwest Indiana Lake Michigan coast. The source names no single launch point.
+    source_ids:
+    - snowkite-mw-il-windycity-iko
+- id: clear-lake-ia
+  name: Clear Lake
+  status: established
+  kind: lake
+  state: IA
+  location:
+    lat: 43.12806
+    lon: -93.38611
+    precision: area
+    source_id: snowkite-mw-wp-clear-lake
+    as_of: *id001
+    confidence: reported
+  surface:
+  - frozen_lake
+  wind:
+    value: Event staff call the ice the biggest wide open flying field you could find, with winds that are usually very steady.
+    source_id: snowkite-mw-ia-clear-lake-kites
+    as_of: *id001
+    confidence: estimated
+  access:
+    parking: 'For the Color the Wind festival: free parking at Clear Lake High School with free shuttles; only kiters may park on the ice'
+    source_id: snowkite-mw-ia-clear-lake-kites
+    as_of: *id001
+    confidence: estimated
+  report:
+    status: draft
+    summary: Clear Lake hosts Color the Wind, billed as Iowa's premier kite festival on ice. A Clear Lake source also names snow kiting among the sports on the frozen lake.
+    source_ids:
+    - snowkite-mw-ia-clear-lake-kites
