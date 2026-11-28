@@ -105,7 +105,7 @@ function navLink(view, attrs, ...children) {
 
 export function createPanel(root, index, {
   onCompare, onDetail = () => {}, onSiteSelect = () => {}, onTrailMap = null, onResort = () => {}, onSourcesNeeded = () => {},
-  onShowHousing = null, renderEvents = null, onRendered = () => {},
+  onShowHousing = null, renderEvents = null, renderKite = null, onRendered = () => {},
 }) {
   let token = 0;
   let siteButtons = new Map();
@@ -1056,6 +1056,13 @@ export function createPanel(root, index, {
       destroyCharts();
       clear(root);
       root.append(...(body || [...heading('Events', 'Events and competitions'), h('p', { class: 'loading' }, 'Loading events')]).flat().filter(Boolean), footer());
+      if (!body) root.setAttribute('aria-busy', 'true');
+      return root.querySelector('#panel-heading');
+    }
+    if (view.level === 'kite') {
+      // The Snowkite layer's zone report or event card: kite.js renders it once its file has loaded.
+      body = renderKite ? renderKite(view, kit()) : null;
+      root.append(...(body || [...heading('Snowkite', 'Snowkite zone'), h('p', { class: 'loading' }, 'Loading the zone report')]).flat().filter(Boolean), footer());
       if (!body) root.setAttribute('aria-busy', 'true');
       return root.querySelector('#panel-heading');
     }

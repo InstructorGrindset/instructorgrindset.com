@@ -4,7 +4,7 @@
     python -m pipeline.build ...
 
 Outputs: resorts.json, resorts.geojson, clusters.geojson, states.json, definitions.json,
-sources.json, events.json and events-summary.json (pipeline/events.py), us-states.geojson (when missing, via scripts/build-states.mjs),
+sources.json, events.json and events-summary.json (pipeline/events.py), snowkite.json (pipeline/snowkite.py), us-states.geojson (when missing, via scripts/build-states.mjs),
 and the Tier A review document docs/map/tier-a-draft.md.
 """
 from __future__ import annotations
@@ -45,6 +45,7 @@ from pipeline.webcams import as_output as webcams_output, load_webcams  # noqa: 
 from pipeline import passes as passes_mod  # noqa: E402
 from pipeline import events as events_mod  # noqa: E402
 from pipeline import jetstream as jet_mod  # noqa: E402
+from pipeline import snowkite as snowkite_mod  # noqa: E402
 from pipeline.housing import assemble_detail, housing_summary, load_housing  # noqa: E402
 from pipeline import housing_search as housing_search_mod  # noqa: E402
 from pipeline import reports as reports_mod  # noqa: E402
@@ -377,6 +378,13 @@ def build(
         errors += events_errors
         warnings += events_warnings
     resort_events = events_mod.resort_events(events_data, events_cfg) if events_cfg is not None else {}
+    # Snowkite layer (docs/map/SNOWKITE.md): zones and their sources; its events come from the events above.
+    kite_cfg = cfg.definitions.snowkite
+    kite_data = snowkite_mod.SnowkiteData()
+    if kite_cfg is not None:
+        kite_data, kite_errors, kite_warnings = snowkite_mod.load_snowkite(raw_dir, registry, events_data, places, kite_cfg, rel)
+        errors += kite_errors
+        warnings += kite_warnings
     # Jet stream layer (docs/map/JETSTREAM.md): ERA5 season winds and the NOAA CPC RONI join the registry.
     jet_cfg = cfg.definitions.jetstream
     jet_inputs = jet_mod.load_inputs(raw_dir) if jet_cfg is not None else None
@@ -536,6 +544,9 @@ def build(
     _write_heat(out_dir, repo_root, noaa, resort_dicts, cfg, header, warnings, snotel_snow, dems)
     if events_cfg is not None:
         events_mod.write(out_dir, events_mod.compile_events(events_data, places, events_cfg, header), _write_json)
+    if kite_cfg is not None:
+        kite_events = events_mod.compile_events(events_data, places, events_cfg, header) if events_cfg is not None else None
+        snowkite_mod.write(out_dir, snowkite_mod.compile_snowkite(kite_data, kite_cfg, kite_events, header), _write_json)
     if jet_inputs is not None:
         shapes_path = out_dir / "us-states.geojson"
         if not shapes_path.is_file():

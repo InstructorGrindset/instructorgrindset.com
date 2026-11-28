@@ -782,3 +782,51 @@ jetstream:
     November to April, from ERA5, sampled once a day. The line follows the fastest average wind; the band is where
     the wind stays within 5 percent of that, at most 5 degrees of latitude either side. El Niño and La Niña winters
     follow NOAA's Relative Oceanic Niño Index since 1979/80.
+
+# Snowkite layer (ROADMAP item 24; contract in docs/map/SNOWKITE.md; pipeline/snowkite.py, map/js/kite.js).
+snowkite:
+  # What a zone is: ids come from the raw files, labels and colors are the map's. Surface colors mark the zone on the
+  # dark map (4.5:1 or more on the panel surface, 8 or more OKLab apart); the tooltip and the panel name the surface.
+  kinds:
+    - {id: lake, label: Lake}
+    - {id: reservoir, label: Reservoir}
+    - {id: plateau, label: Plateau}
+    - {id: valley, label: Valley}
+    - {id: glacier, label: Glacier}
+    - {id: prairie, label: Prairie}
+    - {id: dunes, label: Dunes}
+    - {id: alpine_basin, label: Alpine basin}
+    - {id: river, label: River}
+    - {id: other, label: Other}
+  surfaces:
+    - {id: frozen_lake, label: Frozen lake, color: "#5ee1ff"}
+    - {id: open_snowfield, label: Open snowfield, color: "#f2f5ff"}
+    - {id: glacier, label: Glacier, color: "#7aa2ff"}
+    - {id: alpine_basin, label: Alpine basin, color: "#c79bff"}
+    - {id: prairie, label: Prairie, color: "#e6d76a"}
+    - {id: frozen_river, label: Frozen river, color: "#4de0b0"}
+    - {id: dunes_snow, label: Snowy dunes, color: "#ff9a62"}
+  # The facts' months run from November so a winter reads left to right in the month chips.
+  month_order: [11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  # Text limits (characters), checked at build time.
+  limits:
+    name_max_chars: 80
+    text_max_chars: 240         # wind, snow and ice, terrain
+    hazard_max_chars: 200       # each hazard
+    hazards_max: 8
+    access_field_max_chars: 160 # road, parking, fees, permit
+    months_note_max_chars: 160
+    summary_max_chars: 600      # the report summary: two or three plain sentences
+  # Where a zone may lie. A zone in Alaska sits in the Alaska box; every other state in the lower 48 box. A swapped
+  # sign or a swapped latitude and longitude falls outside both.
+  regions:
+    lower48: {south: 24.0, north: 49.6, west: -125.0, east: -66.5}
+    alaska: {south: 51.0, north: 71.6, west: -180.0, east: -129.0}
+  # An established zone needs a source that names snowkiting there: a word below is in the title, address or note of a
+  # source it cites, or in one of its cited texts (a source about a lake may say only that kiters use it).
+  source_words: [snowkit, snow kit, kiteski, kite ski, kiteboard, kite, kiting]
+  # The one events discipline (config events.groups) that counts as a snowkite event.
+  event_discipline: snowkiting
+  # A snowkite event whose venue lies this far from a zone that does not list it earns a warning; a listed event this
+  # far from its zone earns one too. A zone's events are only those it lists.
+  event_zone_km: 60

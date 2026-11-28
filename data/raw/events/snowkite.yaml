@@ -1,0 +1,170 @@
+batch: events-snowkite
+researched_date: 2026-11-28
+
+# Lane: snowkite events (phase 24). Search result facts are `estimated`; coordinates come from the Wikipedia API.
+# Events with no published 2026/27 date carry their last edition or the usual timing a source gave.
+# Midwest Snow Kite Jam and the Mille Lacs Kite Crossing are in snowshoe_skijor_kite.yaml and are not repeated.
+
+sources:
+- id: events-skite-valdez-alaska-snow-kite-festival-search
+  url: https://www.valdezalaska.org/event/alaska-snow-kite-festival/124/
+  title: Alaska Snow Kite Festival
+  accessed_date: 2026-11-28
+  note: From a search result for this page; page not opened.
+- id: events-skite-valdez-alaska-kite-festival-list-search
+  url: https://www.valdezalaska.org/events/alaska-kite-festival/
+  title: Alaska Kite Festival
+  accessed_date: 2026-11-28
+  note: From a search result for this page; page not opened.
+- id: events-skite-wyoming-public-media-bighorn-summit-search
+  url: https://www.wyomingpublicmedia.org/post/bighorn-snowkite-summit
+  title: Bighorn Snowkite Summit
+  accessed_date: 2026-11-28
+  note: From a search result for this page; page not opened.
+- id: events-skite-iksurf-bighorn-summit-search
+  url: https://www.iksurfmag.com/?p=6417
+  title: The Bighorn Snowkite Summit Collaboration Project
+  accessed_date: 2026-11-28
+  note: From a search result for this page; page not opened.
+- id: events-skite-explorebigsky-flying-high-search
+  url: https://explorebigsky.com/flying-high-in-big-sky/17980
+  title: Flying High in Big Sky
+  accessed_date: 2026-11-28
+  note: From a search result for this page; page not opened.
+- id: events-skite-wikipedia-thompson-pass
+  url: https://en.wikipedia.org/wiki/Thompson_Pass
+  title: Thompson Pass
+  accessed_date: 2026-11-28
+  note: Coordinates read from the Wikipedia API.
+- id: events-skite-wikipedia-bighorn-mountains
+  url: https://en.wikipedia.org/wiki/Bighorn_Mountains
+  title: Bighorn Mountains
+  accessed_date: 2026-11-28
+  note: Coordinates read from the Wikipedia API.
+- id: events-skite-wikipedia-big-hole-pass
+  url: https://en.wikipedia.org/wiki/Big_Hole_Pass
+  title: Big Hole Pass
+  accessed_date: 2026-11-28
+  note: Coordinates read from the Wikipedia API.
+- id: events-skite-wayzata-chilly-open-snowkite-search
+  url: https://chillyopen.wayzatachamber.com/?p=1074
+  title: Snowkite Races
+  accessed_date: 2026-11-28
+  note: From a search result for this page; page not opened.
+- id: events-skite-lmcd-wayzata-yacht-club-snow-kite-search
+  url: https://lmcd.org/event/wayzata-yacht-club-snow-kite-races/
+  title: Wayzata Yacht Club Snow Kite Races
+  accessed_date: 2026-11-28
+  note: From a search result for this page; page not opened.
+- id: events-skite-wikipedia-lake-minnetonka
+  url: https://en.wikipedia.org/wiki/Lake_Minnetonka
+  title: Lake Minnetonka
+  accessed_date: 2026-11-28
+  note: Coordinates read from the Wikipedia API.
+
+venues:
+- id: thompson-pass-ak
+  name: Thompson Pass
+  kind: other
+  state: AK
+  town: Valdez
+  location:
+    lat: 61.12861111
+    lon: -145.72972222
+    precision: venue
+    source_id: events-skite-wikipedia-thompson-pass
+    as_of: 2026-11-28
+    confidence: reported
+    note: Thompson Pass, from its Wikipedia article. The festival listing names Odyssey Lake at Mile 26.5 of the Richardson Highway.
+- id: lake-minnetonka-mn
+  name: Lake Minnetonka (Wayzata Bay)
+  kind: lake
+  state: MN
+  town: Wayzata
+  location:
+    lat: 44.93333333
+    lon: -93.56666667
+    precision: venue
+    source_id: events-skite-wikipedia-lake-minnetonka
+    as_of: 2026-11-28
+    confidence: reported
+    note: Lake Minnetonka, from its Wikipedia article. The races run on Wayzata Bay.
+- id: bighorn-mountains-wy
+  name: Bighorn Mountains
+  kind: other
+  state: WY
+  town: Shell
+  location:
+    lat: 44.38222222
+    lon: -107.17555556
+    precision: region
+    source_id: events-skite-wikipedia-bighorn-mountains
+    as_of: 2026-11-28
+    confidence: reported
+    note: Bighorn Mountains, from their Wikipedia article. The summit is based at the Wyoming High Country Lodge in the Bighorn National Forest.
+- id: big-hole-pass-mt
+  name: Big Hole Pass
+  kind: other
+  state: MT
+  town: Jackson
+  location:
+    lat: 45.5496426
+    lon: -113.8203501
+    precision: venue
+    source_id: events-skite-wikipedia-big-hole-pass
+    as_of: 2026-11-28
+    confidence: reported
+    note: Big Hole Pass, from its Wikipedia article.
+
+events:
+- id: alaska-snow-kite-festival
+  name: Alaska Snow Kite Festival
+  discipline: snowkiting
+  levels: [open_amateur]
+  venue: {venue_id: thompson-pass-ak}
+  organizer: {name: Alaska Kite Adventures, source_id: events-skite-valdez-alaska-snow-kite-festival-search, as_of: 2026-11-28, confidence: estimated}
+  format: {value: "Snowkite festival at Odyssey Lake, Thompson Pass, with beginner clinics, competition and a Saturday party and bonfire", source_id: events-skite-valdez-alaska-snow-kite-festival-search, as_of: 2026-11-28, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2026-04-03, end: 2026-04-12, season: 2025/26, source_id: events-skite-valdez-alaska-snow-kite-festival-search, as_of: 2026-11-28, confidence: estimated, note: "Earlier editions ran April 5 to 13, 2025 and April 1 to 9, 2023. The 2027 dates were not found."}
+  usual_timing: {value: "Early April", source_id: events-skite-valdez-alaska-snow-kite-festival-search, as_of: 2026-11-28, confidence: estimated}
+  signup: null
+  website: {value: "https://www.valdezalaska.org/event/alaska-snow-kite-festival/124/", source_id: events-skite-valdez-alaska-snow-kite-festival-search, as_of: 2026-11-28, confidence: estimated}
+
+- id: bighorn-snowkite-summit
+  name: Bighorn Snowkite Summit
+  discipline: snowkiting
+  levels: [open_amateur]
+  venue: {venue_id: bighorn-mountains-wy}
+  organizer: {name: Jackson Hole Kiters, source_id: events-skite-wyoming-public-media-bighorn-summit-search, as_of: 2026-11-28, confidence: estimated}
+  format: {value: "Week of snowkiting in the Bighorn Mountains based at the Wyoming High Country Lodge, with Ozone demo kites in past years", source_id: events-skite-iksurf-bighorn-summit-search, as_of: 2026-11-28, confidence: estimated}
+  edition_2026_27: null
+  last_edition: null
+  usual_timing: {value: "First week of December", source_id: events-skite-wyoming-public-media-bighorn-summit-search, as_of: 2026-11-28, confidence: estimated}
+  signup: null
+  website: {value: "https://www.wyomingpublicmedia.org/post/bighorn-snowkite-summit", source_id: events-skite-wyoming-public-media-bighorn-summit-search, as_of: 2026-11-28, confidence: estimated}
+
+- id: montana-snowkite-rodeo
+  name: Montana Snowkite Rodeo
+  discipline: snowkiting
+  disciplines_also: [big_air]
+  levels: [open_amateur]
+  venue: {venue_id: big-hole-pass-mt}
+  format: {value: "Race plus rider judged big air and freestyle contests", source_id: events-skite-explorebigsky-flying-high-search, as_of: 2026-11-28, confidence: estimated}
+  edition_2026_27: null
+  last_edition: null
+  usual_timing: {value: "Mid February (2016 edition)", source_id: events-skite-explorebigsky-flying-high-search, as_of: 2026-11-28, confidence: estimated}
+  signup: null
+  website: {value: "https://explorebigsky.com/flying-high-in-big-sky/17980", source_id: events-skite-explorebigsky-flying-high-search, as_of: 2026-11-28, confidence: estimated}
+
+- id: wayzata-snowkite-races
+  name: Wayzata Snowkite Races
+  discipline: snowkiting
+  levels: [open_amateur]
+  venue: {venue_id: lake-minnetonka-mn}
+  organizer: {name: Wayzata Chamber of Commerce (Chilly Open) and Wayzata Yacht Club, source_id: events-skite-wayzata-chilly-open-snowkite-search, as_of: 2026-11-28, confidence: estimated}
+  format: {value: "Snowkite races on Wayzata Bay, every Sunday through the winter per the Chilly Open page; wind dependent, with about 7 mph needed in a 2022 schedule", source_id: events-skite-lmcd-wayzata-yacht-club-snow-kite-search, as_of: 2026-11-28, confidence: estimated}
+  edition_2026_27: null
+  last_edition: {start: 2025-02-08, end: null, season: 2024/25, source_id: events-skite-wayzata-chilly-open-snowkite-search, as_of: 2026-11-28, confidence: estimated, note: "Date shown on the Chilly Open snowkite page. A 2022 Wayzata Yacht Club series ran Sundays from January 2 to February 27, 2022. The 2027 schedule was not found."}
+  usual_timing: {value: "Sundays through the winter; Chilly Open weekend in early February", source_id: events-skite-wayzata-chilly-open-snowkite-search, as_of: 2026-11-28, confidence: estimated}
+  signup: null
+  website: {value: "https://chillyopen.wayzatachamber.com/?p=1074", source_id: events-skite-wayzata-chilly-open-snowkite-search, as_of: 2026-11-28, confidence: estimated}

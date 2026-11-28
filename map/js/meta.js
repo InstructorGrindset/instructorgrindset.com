@@ -21,6 +21,7 @@ function titleName(index, resort) {
 
 export function canonicalPath(index, view) {
   if (view.level === 'events') return `${config.mapBase}events/`;
+  if (view.level === 'kite') return config.mapBase;
   const cluster = view.clusterId ? index.clusters.get(view.clusterId) : null;
   if (view.level === 'national' || !view.stateCode) return config.mapBase;
   if (view.level === 'state') return `${config.mapBase}${view.stateCode.toLowerCase()}/`;
@@ -41,6 +42,13 @@ export function metaFor(index, view) {
         title: `Snowsports Events and Competitions • ${BRAND}`,
         description: 'Find snowsports races, competitions and instructor events across the United States, with dates, venues and how to sign up. Every detail links to its source.',
       };
+    case 'kite': {
+      // The zone's own name comes from kite.js (document.title); until then the layer's title.
+      return {
+        title: `Snowkite Zones and Events • ${BRAND}`,
+        description: 'Snowkite zones and events across the United States and Alaska, with wind, snow and ice, terrain, hazards and access, and a source on every fact.',
+      };
+    }
     case 'state': {
       const s = index.states.get(view.stateCode);
       return {

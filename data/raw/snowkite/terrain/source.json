@@ -1,0 +1,148 @@
+{
+  "sources": [
+    {
+      "id": "aws-terrain-tiles",
+      "url": "https://registry.opendata.aws/terrain-tiles/",
+      "title": "Terrain Tiles on AWS (Mapzen terrarium elevation tiles)",
+      "accessed_date": "2026-11-28",
+      "license": "public domain (US sources), attribution in the note",
+      "note": "Heights from the terrarium tiles at zoom 10 (zoom 9 north of 56 N), https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png. In the United States the tiles are built from USGS 3DEP (formerly NED), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and NOAA ETOPO1, all public domain; ArcticDEM data were created from DigitalGlobe, Inc., imagery and funded under National Science Foundation awards 1043681, 1559691 and 1542736."
+    },
+    {
+      "id": "esa-worldcover-2021",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "title": "ESA WorldCover 10 m 2021 v200",
+      "accessed_date": "2026-11-28",
+      "license": "CC BY 4.0",
+      "note": "Zanaga, D., Van De Kerchove, R., Daems, D., et al. (2022). ESA WorldCover 10 m 2021 v200. doi:10.5281/zenodo.7254221. Contains modified Copernicus Sentinel data (2021) processed by the ESA WorldCover consortium. Read as overview 3 (80 m pixels) of the cloud optimized files at https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/<tile>."
+    },
+    {
+      "id": "era5-arco-surface",
+      "url": "https://cloud.google.com/storage/docs/public-datasets/era5",
+      "title": "ERA5 surface extract (data/raw/climate/era5_surface)",
+      "accessed_date": "2026-11-28",
+      "license": "Copernicus licence (CC BY 4.0 compatible); attribution required",
+      "note": "Wind, snow and lake ice per 0.25 degree cell; picks the cells and gives each patch its wind."
+    }
+  ],
+  "not_used": "Hansen Global Forest Change tree cover 2000 (CC BY 4.0, Hansen et al. 2013, Science 342:850) was considered for canopy percent. WorldCover was chosen because its overviews give 80 m land cover in one small request per 3 degree file, it is from 2021, and it also maps water, built and permanent ice.",
+  "confidence": "estimated",
+  "as_of": "2026-11-28",
+  "model": {
+    "usable_wind_ms": [
+      3.0,
+      11.0
+    ],
+    "min_usable_wind_share": 0.55,
+    "min_snow_we_m": 0.02,
+    "min_snow_day_share": 0.6,
+    "min_lake_ice_m": 0.2,
+    "min_ice_day_share": 0.6,
+    "default_cells": 400,
+    "zoom_low_lat": 10,
+    "zoom_high_lat": 9,
+    "zoom_split_lat": 56.0,
+    "worldcover_level": 3,
+    "max_tree_share": 0.2,
+    "max_built_share": 0.2,
+    "water_pixel_share": 0.5,
+    "ice_pixel_share": 0.5,
+    "open_water": {
+      "box": [
+        -92.5,
+        41.0,
+        -75.5,
+        49.5
+      ],
+      "tolerance_m": 0.6,
+      "levels_m": {
+        "Superior": 179.0,
+        "Michigan, Huron and St. Clair": 175.0,
+        "Erie": 174.0,
+        "Ontario": 75.0
+      }
+    },
+    "max_kite_slope_deg": 25.0,
+    "slope_classes_deg": [
+      3.0,
+      10.0,
+      25.0
+    ],
+    "min_patch_acres": 40.0,
+    "tree_obstacle_share": 0.5,
+    "tree_shadow_m": 300.0,
+    "steep_deg": 30.0,
+    "runout_reach_m": 1000.0,
+    "runout_alpha_deg": 20.0,
+    "upslope_tolerance_deg": 60.0,
+    "size_acres": {
+      "minimum": 40,
+      "enough": 160,
+      "good": 640,
+      "excellent": 2500,
+      "expedition": 25000
+    },
+    "beginner": {
+      "min_flat_share": 0.6,
+      "min_acres": 160,
+      "max_tree_shadow_share": 0.15
+    },
+    "advanced": {
+      "min_rolling_share": 0.4,
+      "min_low_angle_share": 0.6
+    },
+    "freeride": {
+      "min_relief_m": 150,
+      "min_steep_share": 0.15,
+      "min_upslope_share": 0.4
+    },
+    "kite": {
+      "rider_kg": 80.0,
+      "calibration_wind_ms": 6.0350399999999995,
+      "calibration_area_m2": 10.5,
+      "range": 0.15,
+      "lift_coefficient": 1.0,
+      "traverse_factor": 0.5
+    },
+    "max_patches_per_cell": 3,
+    "max_patches_per_region": 1000,
+    "max_outline_points": 40
+  },
+  "regions": {
+    "alaska": {
+      "file": "patches_alaska.json",
+      "patches_found": 11173,
+      "after_cell_cap": 2172,
+      "patches_kept": 1000,
+      "bytes": 1218123
+    },
+    "midwest": {
+      "file": "patches_midwest.json",
+      "patches_found": 18700,
+      "after_cell_cap": 3136,
+      "patches_kept": 1000,
+      "bytes": 1409526
+    },
+    "northeast": {
+      "file": "patches_northeast.json",
+      "patches_found": 2841,
+      "after_cell_cap": 531,
+      "patches_kept": 531,
+      "bytes": 679256
+    },
+    "pacific": {
+      "file": "patches_pacific.json",
+      "patches_found": 8,
+      "after_cell_cap": 6,
+      "patches_kept": 6,
+      "bytes": 6346
+    },
+    "rockies": {
+      "file": "patches_rockies.json",
+      "patches_found": 2540,
+      "after_cell_cap": 803,
+      "patches_kept": 803,
+      "bytes": 993458
+    }
+  }
+}

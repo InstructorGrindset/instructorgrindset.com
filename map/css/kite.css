@@ -1,0 +1,115 @@
+/* Snowkite layer (docs/map/SNOWKITE.md; map/js/kite.js): the Snowkite box in the Layers panel, its zone list, the zone
+   report in the side panel and the legend items. Loaded with kite.js only. Each surface color comes from the file
+   (config snowkite.surfaces) through --c. */
+
+/* ── The box ── */
+.kite-box > summary .kite-on {
+  margin-left: auto; padding: 0 .35rem; border: 1px solid rgba(68,255,136,.45); border-radius: 2px;
+  font-size: .62rem; letter-spacing: .08em; color: var(--wm-green);
+}
+.kite-box > summary .kite-on[hidden] { display: none; }
+.kite-switch { padding: .3rem .7rem 0; }
+.kite-body { padding: .1rem .7rem .65rem; }
+.kite-note { margin: .45rem 0 0; font-size: .72rem; line-height: 1.45; color: var(--wm-text-2); }
+.kite-note p { margin: 0; }
+.kite-controls[hidden] { display: none; }
+.kite-status { margin: .5rem 0 0; font-size: .72rem; line-height: 1.45; color: var(--wm-text-2); }
+.kite-none { margin: .4rem 0 0; font-size: .74rem; color: var(--wm-text-2); }
+
+.kite-search-box { margin-top: .2rem; }
+.kite-search-label { display: block; }
+.kite-search {
+  box-sizing: border-box; width: 100%; min-height: 30px; padding: .2rem .5rem; font: inherit; font-size: .78rem;
+  color: var(--wm-text); background: var(--wm-bg-2); border: 1px solid var(--wm-border-strong); border-radius: 2px;
+}
+.kite-search:focus-visible { outline: 2px solid var(--wm-green); outline-offset: 1px; }
+.kite-opt { align-items: center; }
+.kite-n { margin-left: auto; padding-left: .5rem; font-size: .7rem; font-weight: 400; color: var(--wm-dim); font-variant-numeric: tabular-nums; }
+.kite-opt .lp-text { flex: 1; }
+
+/* The kite glyph in a surface color, as the map draws it. */
+.kite-swatch {
+  display: inline-block; flex-shrink: 0; width: 11px; height: 12px; background: var(--c);
+  clip-path: polygon(50% 0, 100% 42%, 50% 100%, 0 42%);
+}
+.kite-flag {
+  display: inline-block; flex-shrink: 0; width: 11px; height: 12px; background: #ffffff;
+  clip-path: polygon(0 0, 100% 38%, 18% 70%, 18% 100%, 0 100%);
+}
+.kite-chips { display: flex; flex-wrap: wrap; gap: .25rem; padding-bottom: .1rem; }
+.kite-chip {
+  min-height: 26px; min-width: 38px; padding: .1rem .4rem; font: inherit; font-size: .64rem; font-weight: 600; letter-spacing: .06em;
+  color: var(--wm-text-2); background: transparent; border: 1px solid var(--wm-border-strong); border-radius: 2px; cursor: pointer;
+}
+.kite-chip:hover { color: #ffffff; }
+.kite-chip[aria-pressed="true"] { color: var(--wm-green); border-color: rgba(68,255,136,.6); background: rgba(68,255,136,.08); }
+.kite-chip:focus-visible, .kite-reset:focus-visible { outline: 2px solid var(--wm-green); outline-offset: 2px; }
+.kite-reset {
+  display: block; margin: .5rem 0 0; min-height: 28px; padding: .15rem .55rem; text-align: left; font: inherit; font-size: .68rem;
+  font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--wm-green); background: transparent;
+  border: 1px solid rgba(68,255,136,.45); border-radius: 2px; cursor: pointer;
+}
+.kite-reset[hidden] { display: none; }
+.kite-reset:hover { color: #ffffff; border-color: var(--wm-text-2); }
+
+/* ── The list by state ── */
+.kite-states { list-style: none; margin: .5rem 0 0; padding: 0; }
+.kite-state { border-top: 1px solid var(--wm-border); }
+.kite-state-box > summary { cursor: pointer; list-style: none; }
+.kite-state-box > summary::-webkit-details-marker { display: none; }
+.kite-state-name {
+  display: flex; align-items: baseline; gap: .4rem; margin: 0; padding: .35rem 0; min-height: 28px; box-sizing: border-box;
+  font-size: .78rem; font-weight: 700; color: var(--wm-text);
+}
+.kite-state-box > summary::before {
+  content: ""; align-self: center; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+  border-left: 5px solid var(--wm-dim);
+}
+.kite-state-box[open] > summary::before { transform: rotate(90deg); }
+.kite-events-box { margin-top: .5rem; border-top: 1px solid var(--wm-border); }
+.kite-zones { list-style: none; margin: 0 0 .3rem .75rem; padding: 0; }
+.kite-zone { display: grid; grid-template-columns: auto 1fr; column-gap: .45rem; align-items: baseline; padding: .12rem 0; font-size: .76rem; }
+.kite-zone .kite-meta { grid-column: 2; font-size: .68rem; color: var(--wm-dim); }
+.kite-zone-link { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.kite-zone-link:hover { color: #ffffff; }
+.kite-zone-link[aria-current="page"] { color: #ffffff; font-weight: 700; }
+
+/* ── The zone report (side panel) ── */
+.kite-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin: .4rem 0 .6rem; }
+.kite-surface-tag { border-color: var(--c); color: var(--c); background: transparent; }
+.kite-facts { margin-top: .3rem; }
+.kite-section .event-card { margin-top: .6rem; }
+.kite-event-title { display: flex; align-items: center; gap: .45rem; margin: 0 0 .35rem; font-size: .95rem; }
+.kite-signup { margin: .5rem 0 0; }
+.kite-summary { margin: 0 0 .4rem; line-height: 1.5; }
+.kite-back, .kite-eventzone { margin: .8rem 0 0; font-size: .85rem; }
+.kite-nopoint, .kite-approx { margin: .5rem 0; }
+
+/* ── Legend strip: the surfaces in use and the event mark take a row of their own, as the jet stream's do ── */
+.ml-kite-row[hidden] { display: none; }
+.map-legend.has-kite { display: grid; grid-template-columns: auto auto; justify-content: safe center; align-content: end; row-gap: 6px; }
+.map-legend .ml-kite-row { grid-column: 1 / -1; width: 0; min-width: 100%; display: flex; justify-content: center; pointer-events: none; }
+.map-legend.has-kite:not(.has-jet) .ml-kite-row { grid-row: 1; }
+.map-legend .ml-kite-row > .ml-kite { pointer-events: auto; }
+.map-legend .ml-items.ml-kite { flex-wrap: wrap; max-width: 100%; white-space: normal; margin: 0; padding-left: .65rem; border-left: 1px solid var(--wm-border); border-radius: 3px; }
+.ml-kite li { white-space: nowrap; display: inline-flex; align-items: center; gap: .3rem; }
+.ml-kite-title { color: var(--wm-dim); font-weight: 700; letter-spacing: .14em; }
+body.events-mode .map-legend .ml-kite-row { display: none; }
+
+@media (min-width: 760px) and (max-width: 1199.98px) {
+  .map-stage.kite-legend .layers-panel { max-height: calc(100% - var(--lp-inset) - 96px); }
+}
+@media (max-width: 759.98px) {
+  .kite-chip { min-height: 36px; min-width: 44px; }
+  .kite-state-name { min-height: 36px; font-size: .84rem; }
+  .kite-zone { font-size: .84rem; padding: .25rem 0; }
+  .kite-reset { min-height: 36px; }
+  .kite-search { min-height: 38px; font-size: 16px; }
+  .map-legend.has-kite {
+    display: flex; flex-wrap: nowrap; padding-right: 28px;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  }
+  .map-legend.has-kite > * { flex-shrink: 0; }
+  .map-legend .ml-kite-row { display: contents; }
+  .map-legend .ml-items.ml-kite { order: -1; flex-wrap: nowrap; flex-shrink: 0; max-width: none; margin-right: 6px; }
+}

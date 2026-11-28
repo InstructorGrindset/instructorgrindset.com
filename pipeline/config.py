@@ -748,6 +748,92 @@ class JetstreamDefs(StrictModel):
         return v
 
 
+class SnowkiteLabel(StrictModel):
+    id: Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]
+    label: str = Field(min_length=1)
+
+
+class SnowkiteSurface(SnowkiteLabel):
+    color: str = Field(pattern=HEX_COLOR)
+
+
+class SnowkiteLimits(StrictModel):
+    name_max_chars: int = Field(default=80, ge=20)
+    text_max_chars: int = Field(default=240, ge=40)
+    hazard_max_chars: int = Field(default=200, ge=40)
+    hazards_max: int = Field(default=8, ge=1)
+    access_field_max_chars: int = Field(default=160, ge=40)
+    months_note_max_chars: int = Field(default=160, ge=20)
+    summary_max_chars: int = Field(default=600, ge=80)
+
+
+class SnowkiteBox(StrictModel):
+    south: float = Field(ge=-90, le=90)
+    north: float = Field(ge=-90, le=90)
+    west: float = Field(ge=-180, le=180)
+    east: float = Field(ge=-180, le=180)
+
+    @model_validator(mode="after")
+    def _order(self) -> "SnowkiteBox":
+        if self.south >= self.north or self.west >= self.east:
+            raise ValueError("a box runs south to north and west to east")
+        return self
+
+    def contains(self, lat: float, lon: float) -> bool:
+        return self.south <= lat <= self.north and self.west <= lon <= self.east
+
+
+class SnowkiteRegions(StrictModel):
+    lower48: SnowkiteBox
+    alaska: SnowkiteBox
+
+
+class SnowkiteDefs(StrictModel):
+    """Snowkite layer (data/raw/snowkite, ROADMAP item 24; docs/map/SNOWKITE.md)."""
+
+    kinds: list[SnowkiteLabel] = Field(min_length=1)
+    surfaces: list[SnowkiteSurface] = Field(min_length=1)
+    month_order: list[int] = Field(min_length=12, max_length=12)
+    limits: SnowkiteLimits = Field(default_factory=SnowkiteLimits)
+    regions: SnowkiteRegions
+    source_words: list[str] = Field(min_length=1)
+    event_discipline: str = "snowkiting"
+    event_zone_km: float = Field(default=60, gt=0)
+
+    @field_validator("source_words")
+    @classmethod
+    def _words(cls, v: list[str]) -> list[str]:
+        return [w.strip().lower() for w in v if w.strip()]
+
+    @model_validator(mode="after")
+    def _check(self) -> "SnowkiteDefs":
+        from .color import contrast
+        from .schemas.snowkite import SURFACES, ZONE_KINDS
+        for name, items in (("kinds", self.kinds), ("surfaces", self.surfaces)):
+            ids = [x.id for x in items]
+            dup = sorted({i for i in ids if ids.count(i) > 1})
+            if dup:
+                raise ValueError(f"snowkite.{name}: ids listed twice: {dup}")
+        if sorted(x.id for x in self.kinds) != sorted(ZONE_KINDS):
+            raise ValueError(f"snowkite.kinds: give exactly the zone kinds {list(ZONE_KINDS)}")
+        if sorted(x.id for x in self.surfaces) != sorted(SURFACES):
+            raise ValueError(f"snowkite.surfaces: give exactly the surfaces {list(SURFACES)}")
+        if sorted(self.month_order) != list(range(1, 13)):
+            raise ValueError("snowkite.month_order: every month 1 to 12 once")
+        for s in self.surfaces:
+            c = contrast(s.color, EVENTS_SURFACE)
+            if c < EVENTS_MIN_CONTRAST:
+                raise ValueError(f"snowkite surface {s.id}: color {s.color} has {c:.2f}:1 contrast on {EVENTS_SURFACE}; "
+                                 f"needs {EVENTS_MIN_CONTRAST}:1")
+        for i, a in enumerate(self.surfaces):
+            for b in self.surfaces[i + 1:]:
+                d = delta_e(a.color, b.color)
+                if d < EVENTS_MIN_DELTA_E:
+                    raise ValueError(f"snowkite surfaces {a.id} and {b.id}: colors are {d:.1f} apart (OKLab x 100); "
+                                     f"keep them {EVENTS_MIN_DELTA_E} or more apart")
+        return self
+
+
 class Definitions(StrictModel):
     version: int
     snow: SnowDefs
@@ -776,6 +862,7 @@ class Definitions(StrictModel):
     housing_search: HousingSearchDefs = Field(default_factory=HousingSearchDefs)
     events: Optional[EventsDefs] = None   # Events and competitions (ROADMAP item 22)
     jetstream: Optional[JetstreamDefs] = None   # Jet stream layer (docs/map/JETSTREAM.md)
+    snowkite: Optional[SnowkiteDefs] = None   # Snowkite layer (docs/map/SNOWKITE.md)
     # Phase 3 climate ETL block; validated by pipeline/climate/definitions.py.
     climate: Optional[dict[str, Any]] = None
 

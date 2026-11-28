@@ -1,0 +1,1695 @@
+batch: snowkite-land-rules
+researched_date: '2026-11-28'
+notes:
+- 'Statuses: allowed | allowed_with_permit | restricted | banned | unclear.'
+- names_kites is true only when the source itself names kites, kite skiing or snowkiting.
+- A general recreation rule with names_kites false covers travel on foot or ski. Confirm with the land manager before a zone
+  is marked legal.
+- Dates use month and day (MM-DD).
+- 'Web searches used: 30 of 30. Only Wikipedia pages were opened.'
+sources:
+- id: snowkite-land-wp-wilderness-act
+  url: https://en.wikipedia.org/wiki/Wilderness_Act
+  title: Wilderness Act
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-nwps
+  url: https://en.wikipedia.org/wiki/National_Wilderness_Preservation_System
+  title: National Wilderness Preservation System
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-wsa
+  url: https://en.wikipedia.org/wiki/Wilderness_study_area
+  title: Wilderness study area
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-wind-river
+  url: https://en.wikipedia.org/wiki/Wind_River_Indian_Reservation
+  title: Wind River Indian Reservation
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-red-lake
+  url: https://en.wikipedia.org/wiki/Red_Lake_Indian_Reservation
+  title: Red Lake Indian Reservation
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-mille-lacs
+  url: https://en.wikipedia.org/wiki/Mille_Lacs_Indian_Reservation
+  title: Mille Lacs Indian Reservation
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-fort-peck
+  url: https://en.wikipedia.org/wiki/Fort_Peck_Indian_Reservation
+  title: Fort Peck Indian Reservation
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-blackfeet
+  url: https://en.wikipedia.org/wiki/Blackfeet_Nation
+  title: Blackfeet Nation
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-uintah-ouray
+  url: https://en.wikipedia.org/wiki/Uintah_and_Ouray_Indian_Reservation
+  title: Uintah and Ouray Indian Reservation
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-red-rock-lakes
+  url: https://en.wikipedia.org/wiki/Red_Rock_Lakes_National_Wildlife_Refuge
+  title: Red Rock Lakes National Wildlife Refuge
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-arapaho-nwr
+  url: https://en.wikipedia.org/wiki/Arapaho_National_Wildlife_Refuge
+  title: Arapaho National Wildlife Refuge
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-national-elk-refuge
+  url: https://en.wikipedia.org/wiki/National_Elk_Refuge
+  title: National Elk Refuge
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-far
+  url: https://en.wikipedia.org/wiki/Federal_Aviation_Regulations
+  title: Federal Aviation Regulations
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-ancsa
+  url: https://en.wikipedia.org/wiki/Alaska_Native_Claims_Settlement_Act
+  title: Alaska Native Claims Settlement Act
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-sage-grouse
+  url: https://en.wikipedia.org/wiki/Greater_sage-grouse
+  title: Greater sage-grouse
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wp-snowkiting
+  url: https://en.wikipedia.org/wiki/Snowkiting
+  title: Snowkiting
+  accessed_date: '2026-11-28'
+- id: snowkite-land-wilderness-watch
+  url: https://wildernesswatch.org/snow-kiting-in-wilderness/
+  title: Snow Kiting in Wilderness (Wilderness Watch)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wilderness-net-recreation
+  url: https://wilderness.net/learn-about-wilderness/stewardship/recreation.php
+  title: Wilderness.net recreation stewardship page
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-36cfr-293-6
+  url: https://www.law.cornell.edu/cfr/text/36/293.6
+  title: 36 CFR 293.6
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-mechanical-transport-paper
+  url: https://wilderness.net/toolboxes/documents/vehicle-intrusions/Mechanical%20transport%20paper%20031325%20final%20draft.pdf
+  title: Mechanical transport paper, 2025 draft (Wilderness.net toolbox)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-fsm-2320
+  url: https://www.usda.gov/sites/default/files/guidance-documents/ForestService.Manual%202300%202320%20Wilderness%20Management.pdf
+  title: Forest Service Manual 2320 Wilderness Management
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-36cfr-261
+  url: https://www.govinfo.gov/content/pkg/CFR-2019-title36-vol2/pdf/CFR-2019-title36-vol2-part261.pdf
+  title: 36 CFR Part 261
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-1996-proposed-rule
+  url: https://www.govinfo.gov/content/pkg/FR-1996-12-19/html/96-31957.htm
+  title: Federal Register Volume 61, Number 245 (December 19, 1996)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-ms-6330
+  url: https://www.blm.gov/national-office/public-room/manual/ms-6330-management-blm-wilderness-study-areas
+  title: MS 6330 Management of BLM Wilderness Study Areas
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-ms-6340
+  url: https://www.blm.gov/sites/blm.gov/files/uploads/mediacenter_blmpolicymanual6340.pdf
+  title: BLM Manual 6340 Management of Designated Wilderness Areas
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-noca-compendium
+  url: https://home.nps.gov/noca/learn/management/superintendent-compendium.htm
+  title: North Cascades Superintendent's Compendium
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-grte-compendium
+  url: https://www.nps.gov/grte/learn/management/compendium.htm
+  title: Grand Teton Superintendent's Compendium
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-yell-compendium
+  url: https://www.nps.gov/yell/learn/management/upload/20260917_Superintendent-s-Compendium-Yellowstone-National-Park.pdf
+  title: Superintendent's Compendium, Yellowstone National Park (17 September 2026)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-yell-ski-cua
+  url: https://www.nps.gov/yell/getinvolved/cua-for-guided-skiing-and-snowshoeing.htm
+  title: Yellowstone Guided Skiing and Snowshoeing CUA
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-glac-compendium
+  url: https://www.nps.gov/glac/learn/management/compendium.htm
+  title: Glacier National Park Superintendent's Compendium
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-36cfr-2-19
+  url: https://www.law.cornell.edu/cfr/text/36/2.19
+  title: 36 CFR 2.19
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-caco-kite-surfing
+  url: https://www.nps.gov/caco/learn/news/park-compendium-rules-related-to-kite-surfing.htm
+  title: Cape Cod National Seashore compendium rules related to kite surfing
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-43cfr-36-11
+  url: https://www.law.cornell.edu/cfr/text/43/36.11
+  title: 43 CFR 36.11
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-dena-compendium
+  url: https://www.nps.gov/locations/alaska/upload/Denali-Superintendents-Compendium.pdf
+  title: Denali Superintendent's Compendium
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wrst-compendium
+  url: https://home.nps.gov/locations/alaska/upload/WRST-Compendium_with_maps_1-22-2026_508.pdf
+  title: Wrangell-St. Elias Compendium (22 January 2026)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-gaar-compendium
+  url: https://www.nps.gov/locations/alaska/upload/Updated-October-2025-GAAR-Superintendent-s-Compendium-508.pdf
+  title: Gates of the Arctic Superintendent's Compendium (October 2025)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-kefj-compendium
+  url: https://www.nps.gov/locations/alaska/upload/KEFJ-Compendium-2025_508.pdf
+  title: Kenai Fjords Compendium 2025
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-slbe-compendium
+  url: https://www.nps.gov/slbe/learn/management/superintendent-compendium.htm
+  title: Sleeping Bear Dunes Superintendent's Compendium
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-slbe-compendium-2008
+  url: https://webarchive.library.unt.edu/eot2008/20080923190104/http://www.nps.gov/slbe/parkmgmt/lawsandpolicies.htm
+  title: Sleeping Bear Dunes laws and policies (2008 archive)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-piro-snowmobile
+  url: https://www.nps.gov/piro/learn/news/snowmobileregs.htm
+  title: Pictured Rocks snowmobile regulations
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-romo-compendium
+  url: https://home.nps.gov/romo/learn/management/upload/2026-Rocky-Mountain-National-Park-Superintendent-Compendium-updated-06082026-2.pdf
+  title: Rocky Mountain National Park Superintendent's Compendium 2026
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-mora-compendium
+  url: https://www.nps.gov/mora/learn/management/upload/MORA-2025-Superintendent-s-Compendium_Nov2025_508_signed-pdf.pdf
+  title: Mount Rainier Superintendent's Compendium (November 2025)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-olym-compendium
+  url: https://www.nps.gov/olym/learn/management/superintendent-s-compendium.htm
+  title: Olympic National Park Superintendent's Compendium
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-crla-compendium
+  url: https://www.nps.gov/crla/learn/management/superintendent-s-compendium.htm
+  title: Crater Lake Superintendent's Compendium
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-36cfr-251-50
+  url: https://www.ecfr.gov/current/title-36/chapter-II/part-251/subpart-B/section-251.50
+  title: 36 CFR 251.50
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-fs-noncommercial-group
+  url: https://www.fs.usda.gov/r05/stanislaus/permits/noncommercial-group-use
+  title: Forest Service Noncommercial Group Use
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-fs-osv-rule
+  url: https://www.govinfo.gov/content/pkg/FR-2015-01-28/pdf/2015-01573.pdf
+  title: Federal Register, 28 January 2015, over snow vehicle rule
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-selkirk-caribou-2021
+  url: https://spokesman.com/stories/2021/dec/24/snowmobiling-ban-in-north-idaho-caribou-habitat-up
+  title: Snowmobiling ban in North Idaho caribou habitat (Spokesman-Review, 2021)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-selkirk-caribou-2024
+  url: https://spokesman.com/stories/2024/oct/04/north-idaho-snowmobile-plan-on-hold
+  title: North Idaho snowmobile plan on hold (Spokesman-Review, 2024)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-srp
+  url: https://www.blm.gov/programs/recreation/permits-and-passes/special-recreation-permits
+  title: BLM Special Recreation Permits
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-43cfr-2932-11
+  url: https://www.law.cornell.edu/cfr/text/43/2932.11
+  title: 43 CFR 2932.11
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-co-closures
+  url: https://www.blm.gov/programs/recreation/recreation-activities/colorado/closures
+  title: BLM Colorado Seasonal Closures
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-tres-rios
+  url: https://www.blm.gov/press-release/seasonal-closure-key-winter-wildlife-habitat-tres-rios-field-office-begin-december-1
+  title: Seasonal closure of key winter wildlife habitat in the Tres Rios Field Office begin December 1
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-rrl-skiing
+  url: https://www.fws.gov/refuge/red-rock-lakes/visit-us/activities/cross-country-skiing
+  title: Red Rock Lakes cross country skiing
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-rrl-visit
+  url: https://www.fws.gov/refuge/red-rock-lakes/visit-us
+  title: Red Rock Lakes visit us
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wy-oslit-faq
+  url: https://lands.wyo.gov/resources/frequently-asked-questions
+  title: Wyoming Office of State Lands and Investments Frequently Asked Questions
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wgfd-state-land
+  url: https://wgfd.wyo.gov/News/Know-the-rules-on-state-land-use
+  title: Know the rules on state land use (Wyoming Game and Fish)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wy-leg-brief-2018
+  url: https://www.wyoleg.gov/InterimCommittee/2018/05-20180613StateOverviewofRecreationAccesstoStateLands.pdf
+  title: Wyoming Legislature Issue Brief No. 19, state overview of recreation access to state lands (2018)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-mt-dnrc-public-use
+  url: https://dnrc.mt.gov/TrustLand/public-use/
+  title: Montana DNRC trust land public use
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-co-slb-public-access
+  url: https://slb.colorado.gov/public-access
+  title: Public access on trust land (Colorado State Land Board)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-onx-trust-land
+  url: https://onxmaps.com/blog/state-trust-land-history-regulations-activities-and-more
+  title: Demystifying State Trust Lands (onX)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-cpw-closures-2025
+  url: https://cpw.state.co.us/news/11262025/southwest-region-seasonal-closures-used-protect-vulnerable-wildlife
+  title: Southwest Region seasonal closures used to protect vulnerable wildlife (CPW, 2025)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-cpw-closures-2024
+  url: https://cpw.state.co.us/news/12042024/protect-wintering-wildlife-respecting-seasonal-closures
+  title: Protect wintering wildlife by respecting seasonal closures (CPW, 2024)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-cpw-slv-closures
+  url: https://cpw.state.co.us/news/02232023/seasonal-closures-place-state-wildlife-areas-across-san-luis-valley
+  title: Seasonal closures in place at State Wildlife Areas across San Luis Valley (CPW, 2023)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wgfd-whma-closures
+  url: https://wgfd.wyo.gov/news-events/many-game-and-fish-wildlife-habitat-management-areas-close-winter
+  title: Many Game and Fish wildlife habitat management areas to close for winter
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-mt-wma-2014
+  url: https://www.montanaoutdoor.com/2014/12/most-region-3-wmas-closed-for-season-on-dec-1/
+  title: Most Region 3 WMAs closed for season on Dec 1 (2014)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-mt-bad-rock
+  url: https://fwp.mt.gov/aboutfwp/regions/region1/bad-rock-canyon-wma-youth-hunt
+  title: Bad Rock Canyon WMA (Montana FWP)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-mt-wma-kpax
+  url: https://www.kpax.com/news/montana-news/elk-find-winter-refuge-as-montana-closes-wildlife-areas-to-human-activity
+  title: Elk find winter refuge as Montana closes wildlife areas to human activity (KPAX)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-co-parks-reg
+  url: https://law.cornell.edu/regulations/colorado/2-CCR-405-1-100
+  title: 2 CCR 405-1-100 Parks and Outdoor Recreation Lands
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-cpw-eleven-mile-winter
+  url: https://cpw.state.co.us/placestogo/parks/ElevenMile/Pages/Winter.aspx
+  title: Eleven Mile State Park winter page (CPW)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-43cfr-423
+  url: https://www.ecfr.gov/current/title-43/subtitle-B/chapter-I/part-423
+  title: 43 CFR Part 423
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-reclamation-2023-rule
+  url: https://www.govinfo.gov/content/pkg/FR-2023-11-21/html/2023-25466.htm
+  title: Federal Register Volume 88, Number 223 (21 November 2023)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wind-river-fishing-regs
+  url: https://www.windriverfishandgame.com/wp-content/uploads/2026/07/F16881-Fishing-Regulations-Singles-2026.pdf
+  title: Wind River Fishing Regulations 2026
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wind-river-guide
+  url: https://issuu.com/1properties/docs/2022_wyo_fishing_guide/s/16222494
+  title: 2022 Wyoming fishing guide, Wind River section
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-cskt-fish-game
+  url: https://cskt.org/natural-resources/tribal-fish-game/
+  title: CSKT Tribal Fish and Game
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-visitmt-tribal-permits
+  url: https://visitmt.com/stories/tribal-recreation-permits
+  title: Tribal Recreation Permits (Visit Montana)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blackfeet-rec-regs
+  url: https://indianlaw.mt.gov/_docs/blackfeet/fishandwildlife/rec_activity_09-10.pdf
+  title: Blackfeet recreation activity regulations 2009 to 2010
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-jber-recreation
+  url: https://www.jber.jb.mil/News/Articles/Display/Article/1042744/what-you-need-to-know-before-recreating-on-jber/
+  title: What you need to know before recreating on JBER
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-fort-wainwright-trails
+  url: https://fire.ak.blm.gov/content/maps/aicc/geopdf/Military Zone/Fort_Wainwright_North_Post_Trails.pdf
+  title: Fort Wainwright North Post Trails map
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-doyon-trespass
+  url: https://www.doyon.com/lands/trespass
+  title: Doyon lands trespass page
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-asrc-lands-access
+  url: https://www.asrc.com/?p=183
+  title: ASRC Lands Access
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-ciri-trespass
+  url: https://www.ciri.com/?p=37878
+  title: CIRI Addresses Trespass Issues
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-17b-easements
+  url: https://www.blm.gov/programs/lands-and-realty/regional-information/alaska/17b_easements
+  title: BLM Alaska 17(b) easements
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-ak-dnr-17b
+  url: https://dnr.alaska.gov/mlw/paad/17b-easements/
+  title: Alaska DNR 17(b) easements
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-11aac-96-020
+  url: https://regulations.justia.com/states/alaska/title-11/part-6/chapter-96/article-1/section-11-aac-96-020
+  title: 11 AAC 96.020
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-ak-dnr-special-use
+  url: https://dnr.alaska.gov/mlw/lands/special-use-areas/
+  title: Alaska DNR special use areas
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-14cfr-101-13
+  url: https://www.law.cornell.edu/cfr/text/14/101.13
+  title: 14 CFR 101.13
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-pilot-institute-part-101
+  url: https://pilotinstitute.com/part-101/
+  title: Part 101 summary (Pilot Institute)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-fs-sage-grouse-table
+  url: https://www.fs.usda.gov/media/115690
+  title: Forest Service sage grouse desired conditions table
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-blm-co-im-2022-028
+  url: https://blm.gov/policy/instruction-memorandum-no-co-2022-028
+  title: BLM Instruction Memorandum CO-2022-028 (inactive)
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-mn-dnr-ice
+  url: https://dnr.state.mn.us/safety/ice/thickness.html
+  title: Minnesota DNR general ice thickness guidelines
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+- id: snowkite-land-wcco-snowkiting
+  url: https://www.cbsnews.com/minnesota/news/finding-minnesota-snowkiting-on-frozen-lakes
+  title: 'Finding Minnesota: Snowkiting on frozen lakes (WCCO)'
+  accessed_date: '2026-11-28'
+  note: From a search result for this page; page not opened.
+rules:
+- id: wilderness-act-mechanical-transport
+  area: Designated Wilderness
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Section 4 of the Wilderness Act prohibits motor vehicles, motorized equipment, motorboats and any other mechanical
+      transport. The managing agencies read this as a ban on bicycles. The page is silent on kites and sails.
+    source_id: snowkite-land-wp-wilderness-act
+    as_of: '2026-11-28'
+    confidence: published
+  states: &id001
+  - US
+  source_ids:
+  - snowkite-land-wp-nwps
+  searched: Wikipedia Wilderness Act page; one web search for agency policy on snowkiting, kite skiing and mechanical transport.
+    No agency page naming snowkites was found.
+- id: wilderness-fs-definition
+  area: National forest Wilderness
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Forest Service rule 36 CFR 293.6 defines mechanical transport as a contrivance that travels over ground, snow or
+      water on wheels, tracks, skids or by floatation, propelled by a nonliving power source contained or carried on or within
+      the device.
+    source_id: snowkite-land-36cfr-293-6
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  source_ids:
+  - snowkite-land-fsm-2320
+  - snowkite-land-36cfr-261
+  - snowkite-land-mechanical-transport-paper
+  searched: Searched Forest Service Manual 2320.5 and 36 CFR 261.18 for sailboats, hang gliders, parachutes and kites. The
+    manual text returned was cut short and showed no kite wording.
+- id: wilderness-advocacy-position
+  area: Designated Wilderness
+  scope: class
+  status: unclear
+  names_kites: true
+  rule:
+    value: Wilderness Watch, an advocacy group, states that snowkiting violates the Wilderness Act ban on mechanical transport
+      and that the Forest Service manual bans hang gliders and parachutes in Wilderness.
+    source_id: snowkite-land-wilderness-watch
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  source_ids:
+  - snowkite-land-wilderness-net-recreation
+  searched: No agency source confirming or rejecting this position was found.
+- id: wilderness-nps-practice
+  area: National park Wilderness
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Park Service wilderness guidance lists hang gliders and bicycles as mechanical transport. The North Cascades compendium
+      bars devices powered by a living or nonliving source in Wilderness and cites the Wilderness Act. Kites are unnamed in
+      both.
+    source_id: snowkite-land-wilderness-net-recreation
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  source_ids:
+  - snowkite-land-noca-compendium
+- id: wilderness-blm-sails
+  area: BLM Wilderness
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: A 1996 BLM proposed rule stated that sailboats, sailboards, parachutes, game carriers, carts and wagons are mechanical
+      transport under Section 4(c) of the Wilderness Act. The final rule wording was not seen.
+    source_id: snowkite-land-blm-1996-proposed-rule
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: &id002
+  - AK
+  - AZ
+  - CA
+  - CO
+  - ID
+  - MT
+  - NV
+  - NM
+  - OR
+  - UT
+  - WA
+  - WY
+  source_ids:
+  - snowkite-land-blm-ms-6340
+  searched: Searched BLM Manual 6340 and 43 CFR 6301.5 for the mechanical transport definition and for kites. No kite wording
+    was returned.
+- id: wilderness-study-areas
+  area: BLM Wilderness Study Areas
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: BLM manages Wilderness Study Areas to protect wilderness value until Congress decides on designation. Some areas
+      permit activities generally excluded from Wilderness, such as mountain biking. There were 487 areas covering 11,118,496
+      acres as of 2023.
+    source_id: snowkite-land-wp-wsa
+    as_of: '2026-11-28'
+    confidence: published
+  states: *id002
+  source_ids:
+  - snowkite-land-blm-ms-6330
+  searched: Searched BLM Manual 6330 for mechanical transport, sails and kites. The manual text was not returned. A 2026 review
+    of the manual is under way per the search summary.
+- id: wilderness-alaska-exemption
+  area: Wilderness in Alaska
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Wilderness areas in Alaska carry a special exemption that permits limited use of motorized vehicles. The page is
+      silent on kites.
+    source_id: snowkite-land-wp-nwps
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - AK
+- id: nps-skiing-rule
+  area: National Park System
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Rule 36 CFR 2.19 prohibits skiing on park roads and in parking areas open to motor vehicle traffic, except where
+      designated. The rule text returned is silent on kites.
+    source_id: snowkite-land-36cfr-2-19
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  searched: One web search across nps.gov compendiums for kite skiing, snow kiting, kiteboarding and powered kites. No snow
+    rule naming kites was found.
+- id: nps-cape-cod-kite-surfing
+  area: Cape Cod National Seashore
+  scope: named_area
+  status: restricted
+  names_kites: true
+  rule:
+    value: The compendium prohibits kite surfing from March 15 through October 15 on all open waters of the Seashore except
+      at listed locations. A 2017 change opened about 1 3/4 miles of beach to it. This shows a park regulating kites through
+      its compendium.
+    source_id: snowkite-land-caco-kite-surfing
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 03-15
+    end: 10-15
+    source_id: snowkite-land-caco-kite-surfing
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MA
+- id: grand-teton-np
+  area: Grand Teton National Park
+  scope: named_area
+  status: unclear
+  names_kites: true
+  rule:
+    value: The compendium defines kite skiing as a skier or boarder propelled by a kite on snow or ice. The rule attached
+      to that definition was not shown.
+    source_id: snowkite-land-grte-compendium
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+  searched: Two web searches for the Grand Teton compendium and kite skiing. Only the definition appeared. Open the compendium
+    to read the rule.
+- id: yellowstone-np
+  area: Yellowstone National Park
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: Skiing and snowshoeing are prohibited on groomed roads used by oversnow vehicles, such as the Grand Loop Road,
+      except on designated routes or crossings. Compendium excerpts returned showed no kite wording.
+    source_id: snowkite-land-yell-ski-cua
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+  - MT
+  - ID
+  source_ids:
+  - snowkite-land-yell-compendium
+  searched: One web search of the Yellowstone compendium for kite, kite skiing, snow kiting and wind powered travel.
+- id: glacier-np
+  area: Glacier National Park
+  scope: named_area
+  status: unclear
+  names_kites: true
+  rule:
+    value: Wilderness Watch states that the Park Service prohibited snowkiting in the Recommended Wilderness of Glacier National
+      Park. The search of the park compendium returned no kite wording to confirm it.
+    source_id: snowkite-land-wilderness-watch
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MT
+  source_ids:
+  - snowkite-land-glac-compendium
+  searched: One web search of the Glacier compendium for snow kiting, kite skiing and recommended wilderness.
+- id: alaska-parks-compendiums
+  area: Denali, Wrangell-St. Elias, Gates of the Arctic and Kenai Fjords
+  scope: named_area
+  areas:
+  - Denali National Park and Preserve
+  - Wrangell-St. Elias National Park and Preserve
+  - Gates of the Arctic National Park and Preserve
+  - Kenai Fjords National Park
+  status: unclear
+  names_kites: false
+  rule:
+    value: Compendium excerpts returned for these four parks showed no kite wording. Denali lists helicopter and off road
+      vehicle use under 43 CFR 36.11 as restricted activities.
+    source_id: snowkite-land-dena-compendium
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AK
+  source_ids:
+  - snowkite-land-wrst-compendium
+  - snowkite-land-gaar-compendium
+  - snowkite-land-kefj-compendium
+  searched: One web search of the four compendiums for kite, skiing and nonmotorized surface transportation.
+- id: alaska-conservation-units-nonmotorized
+  area: Alaska parks, refuges and other conservation system units
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Rule 43 CFR 36.11 implements ANILCA section 1110(a) on snowmachines, motorboats, nonmotorized surface transportation
+      and aircraft. An agency may close an area to these uses only upon a finding that the use would be detrimental. Kites
+      are unnamed.
+    source_id: snowkite-land-43cfr-36-11
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AK
+  searched: No source was found that says whether kite skiing counts as nonmotorized surface transportation.
+- id: sleeping-bear-dunes
+  area: Sleeping Bear Dunes National Lakeshore
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: An archived 2008 compendium prohibits skis, sleds and similar equipment on sand dunes except at the Dune Climb
+      when snow covered, and allows powerless flight devices only at designated times and places under a permit. The current
+      compendium was approved 19 February 2026.
+    source_id: snowkite-land-slbe-compendium-2008
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MI
+  source_ids:
+  - snowkite-land-slbe-compendium
+  searched: The current compendium text was not returned. Kite wording was not seen in either version.
+- id: pictured-rocks
+  area: Pictured Rocks National Lakeshore
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: Snowmobiles are permitted on the frozen waters of Lake Superior and Grand Sable Lake and on designated roads. The
+      results were silent on kites.
+    source_id: snowkite-land-piro-snowmobile
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MI
+  searched: One web search for Pictured Rocks compendium kiteboarding, kite skiing and snowkiting.
+- id: apostle-islands-voyageurs
+  area: Apostle Islands National Lakeshore and Voyageurs National Park
+  scope: named_area
+  areas:
+  - Apostle Islands National Lakeshore
+  - Voyageurs National Park
+  status: unclear
+  names_kites: false
+  rule:
+    value: The search returned nothing on kites for either park.
+    source_id: snowkite-land-slbe-compendium
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WI
+  - MN
+  searched: One web search for both compendiums with kiteboarding, kite skiing and snowkiting. The cited page is only the
+    search that covered them.
+- id: other-parks-compendiums
+  area: Rocky Mountain, Mount Rainier, Olympic, Crater Lake, Lassen Volcanic and Acadia
+  scope: named_area
+  areas:
+  - Rocky Mountain National Park
+  - Mount Rainier National Park
+  - Olympic National Park
+  - Crater Lake National Park
+  - Lassen Volcanic National Park
+  - Acadia National Park
+  status: unclear
+  names_kites: false
+  rule:
+    value: Compendiums for Rocky Mountain, Mount Rainier, Olympic and Crater Lake appeared in results with no kite wording
+      in the excerpts. Olympic restricts unmanned aircraft. Lassen Volcanic and Acadia compendiums did not appear.
+    source_id: snowkite-land-romo-compendium
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+  - WA
+  - OR
+  - CA
+  - ME
+  source_ids:
+  - snowkite-land-mora-compendium
+  - snowkite-land-olym-compendium
+  - snowkite-land-crla-compendium
+  searched: One web search of the six compendiums for kite, kite skiing, wind powered travel and paraski.
+- id: national-forest-general
+  area: National forest land outside Wilderness
+  scope: class
+  status: allowed
+  names_kites: false
+  rule:
+    value: Rule 36 CFR 251.50(c) requires no special use authorization for noncommercial recreational activities such as camping,
+      picnicking, hiking, fishing, boating, hunting and horseback riding. Kites are unnamed.
+    source_id: snowkite-land-36cfr-251-50
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  searched: One web search for Forest Service snowkiting rules and special use permits. No forest page naming snowkites was
+    found.
+- id: national-forest-groups-commercial
+  area: National forest land, commercial and large group use
+  scope: class
+  status: allowed_with_permit
+  names_kites: false
+  rule:
+    value: Commercial activity on national forest land needs a special use permit. A noncommercial group of more than 75 participants
+      and spectators needs a Noncommercial Group Use Permit.
+    source_id: snowkite-land-fs-noncommercial-group
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  source_ids:
+  - snowkite-land-36cfr-251-50
+- id: national-forest-oversnow-vehicles
+  area: National forest winter travel plans
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Under the Travel Management Rule, each forest or ranger district designates the roads, trails and areas open to
+      over snow vehicles. The rule governs motor vehicles. Kites are unnamed.
+    source_id: snowkite-land-fs-osv-rule
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  searched: No winter travel plan naming kites was found. The Bridger-Teton winter wildlife closures were searched and nothing
+    was returned.
+- id: selkirk-caribou-closure
+  area: Selkirk caribou recovery zone, Idaho Panhandle National Forests
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: A federal court order from 2007 closes about 250,000 acres of woodland caribou winter habitat in North Idaho to
+      snowmobiling. The court kept the injunction in 2021 and a 2024 report says the closure remains in place.
+    source_id: snowkite-land-selkirk-caribou-2024
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - ID
+  - WA
+  source_ids:
+  - snowkite-land-selkirk-caribou-2021
+  searched: Sources describe a snowmobile closure. Whether it covers nonmotorized travel was not shown. Alaska caribou closures
+    were searched and nothing was returned.
+- id: blm-permitted-uses
+  area: BLM land, commercial, competitive and organized group use
+  scope: class
+  status: allowed_with_permit
+  names_kites: false
+  rule:
+    value: BLM requires a Special Recreation Permit under 43 CFR 2932.11 for commercial use, competitive events, organized
+      group activities and recreation events.
+    source_id: snowkite-land-blm-srp
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id002
+  source_ids:
+  - snowkite-land-43cfr-2932-11
+- id: blm-casual-use
+  area: BLM land, individual recreation
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: No source stating a general BLM rule for individual winter recreation or kites was found. The permit rule lists
+      commercial, competitive, group and event uses.
+    source_id: snowkite-land-43cfr-2932-11
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id002
+  searched: One web search for BLM casual recreation, 43 CFR 2932 and kites. The exceptions in 43 CFR 2932.12 were not returned.
+- id: blm-colorado-winter-closures
+  area: BLM Colorado seasonal wildlife closures
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: BLM Colorado publishes seasonal closures. The Tres Rios Field Office closes key winter wildlife habitat starting
+      December 1. Closure dates and boundaries change, per the BLM page.
+    source_id: snowkite-land-blm-tres-rios
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 12-01
+    end: null
+    source_id: snowkite-land-blm-tres-rios
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+  source_ids:
+  - snowkite-land-blm-co-closures
+  searched: End date not shown. BLM Wyoming winter range closures were searched and nothing was returned.
+- id: national-wildlife-refuges-general
+  area: National Wildlife Refuges
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: The general refuge public use rule was not returned by the search. Each refuge page lists its own permitted activities.
+    source_id: snowkite-land-rrl-visit
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  searched: One web search for 50 CFR 25.21 and Part 26 public use rules. No rule text was returned.
+- id: red-rock-lakes-nwr
+  area: Red Rock Lakes National Wildlife Refuge
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: Cross country skiing and snowshoeing are permitted on the refuge, with no trails. Visitors are asked to stay a
+      quarter mile from wintering wildlife. Some small areas have seasonal wildlife closures. Kites are unnamed.
+    source_id: snowkite-land-rrl-skiing
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MT
+  source_ids:
+  - snowkite-land-rrl-visit
+  - snowkite-land-wp-red-rock-lakes
+  searched: The refuge public use regulations document was not opened. Closed areas and dates were not shown.
+- id: red-rock-lakes-wilderness
+  area: Red Rock Lakes Wilderness
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: The 32,350 acre Red Rock Lakes Wilderness, created in 1976, covers the bulk of the refuge. Access to some areas
+      is prohibited during certain times of the year.
+    source_id: snowkite-land-wp-red-rock-lakes
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - MT
+- id: arapaho-nwr-north-park
+  area: Arapaho National Wildlife Refuge, North Park
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: The refuge lies in North Park south of Walden. Sage grouse live on its upland hills all year, with more than 200
+      birds in winter. As many as 400 mule deer and up to 200 elk have wintered there. The page gives no public use rule.
+    source_id: snowkite-land-wp-arapaho-nwr
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - CO
+  searched: Wikipedia page only. Refuge winter use rules were not searched.
+- id: national-elk-refuge
+  area: National Elk Refuge
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: The 24,700 acre refuge borders Jackson, Wyoming and holds an average of 7,500 elk each winter. The page gives no
+      public use rule.
+    source_id: snowkite-land-wp-national-elk-refuge
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - WY
+  searched: Wikipedia page only. Refuge winter use rules were not searched.
+- id: wyoming-state-trust-land
+  area: Wyoming state trust land
+  scope: class
+  status: allowed
+  names_kites: false
+  rule:
+    value: Chapter 13 rules of the Board of Land Commissioners allow hunting, fishing and general recreational use on legally
+      accessible state trust land. Off road vehicle use, overnight camping and open fires are prohibited. Cultivated cropland
+      is closed. Kites are unnamed.
+    source_id: snowkite-land-wy-oslit-faq
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+  source_ids:
+  - snowkite-land-wgfd-state-land
+- id: wyoming-state-trust-land-organized
+  area: Wyoming state trust land, organized or commercial use
+  scope: class
+  status: allowed_with_permit
+  names_kites: false
+  rule:
+    value: Organized, developed or commercial recreation on Wyoming state trust land needs a temporary use permit or a special
+      use lease.
+    source_id: snowkite-land-wy-oslit-faq
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+- id: montana-state-trust-land
+  area: Montana state trust land
+  scope: class
+  status: allowed_with_permit
+  names_kites: false
+  rule:
+    value: Recreation is allowed on Montana trust land with legal access, subject to closures and restrictions. A 2018 Wyoming
+      Legislature brief lists Montana among states that allow general recreation with a fee. Kites are unnamed.
+    source_id: snowkite-land-mt-dnrc-public-use
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MT
+  source_ids:
+  - snowkite-land-wy-leg-brief-2018
+  searched: The name and price of the required license were not confirmed by the search.
+- id: colorado-state-trust-land
+  area: Colorado state trust land
+  scope: class
+  status: restricted
+  names_kites: false
+  rule:
+    value: Colorado trust land is closed to the public. Access exists only on parcels leased for public recreation. Colorado
+      Parks and Wildlife leases about 770,000 acres for sportsmen access.
+    source_id: snowkite-land-co-slb-public-access
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+  source_ids:
+  - snowkite-land-onx-trust-land
+- id: idaho-endowment-land
+  area: Idaho state endowment land
+  scope: class
+  status: allowed
+  names_kites: false
+  rule:
+    value: Idaho allows free public access to endowment land where it leaves revenue uses such as grazing and logging undisturbed.
+      About 70 percent of the 2.4 million acres have legal public access. Kites are unnamed.
+    source_id: snowkite-land-wy-leg-brief-2018
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - ID
+  source_ids:
+  - snowkite-land-onx-trust-land
+- id: utah-trust-land
+  area: Utah trust land
+  scope: class
+  status: allowed
+  names_kites: false
+  rule:
+    value: A 2018 Wyoming Legislature brief lists Utah among states that allow general public recreation on trust land without
+      a fee. Utah also permits exclusive recreation leases. Kites are unnamed.
+    source_id: snowkite-land-wy-leg-brief-2018
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - UT
+- id: colorado-swa-gunnison-winter
+  area: Almont Triangle and Gunnison State Wildlife Area
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Public access is prohibited from December 1 through April 30 to protect wintering wildlife.
+    source_id: snowkite-land-cpw-closures-2025
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 12-01
+    end: 04-30
+    source_id: snowkite-land-cpw-closures-2025
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+  source_ids:
+  - snowkite-land-cpw-closures-2024
+- id: colorado-swa-durango-winter
+  area: Bodo and Perins Peak State Wildlife Areas
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Seasonal closures run from December 1 through April 30. The end date was extended from April 15.
+    source_id: snowkite-land-cpw-closures-2025
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 12-01
+    end: 04-30
+    source_id: snowkite-land-cpw-closures-2025
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+- id: colorado-swa-cimarron-winter
+  area: Cimarron State Wildlife Area
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Public access is prohibited from January 1 through June 30.
+    source_id: snowkite-land-cpw-closures-2024
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 01-01
+    end: 06-30
+    source_id: snowkite-land-cpw-closures-2024
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+- id: colorado-swa-san-luis-valley
+  area: Higel, Playa Blanca, Rio Grande, Russell Lakes and Sego Springs State Wildlife Areas
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: These San Luis Valley areas are closed to all public access from February 15 through July 15 for nesting water
+      birds.
+    source_id: snowkite-land-cpw-slv-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 02-15
+    end: 07-15
+    source_id: snowkite-land-cpw-slv-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+- id: colorado-swa-access-pass
+  area: Colorado State Wildlife Areas, access requirement
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: The search returned no text on whether entry to a State Wildlife Area needs a hunting or fishing license or a pass.
+    source_id: snowkite-land-cpw-closures-2024
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+  searched: One web search for the license or pass requirement. Check Colorado Parks and Wildlife Chapter W-9. No North Park
+    or South Park closure was returned.
+- id: wyoming-whma-winter-closures
+  area: Wyoming wildlife habitat management areas on big game winter range
+  scope: class
+  status: restricted
+  names_kites: false
+  rule:
+    value: Greys River, Horse Creek, Camp Creek, Patrol Cabin, Half Moon, Soda Lake, Fall Creek, Luke Lynch and Black Butte
+      areas are closed to human presence from December 1 through April 30. Dates vary by area and year.
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 12-01
+    end: 04-30
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+- id: wyoming-whma-bud-love
+  area: Bud Love Wildlife Habitat Management Area
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Closed to human presence from January 1 through May 14. It opens May 15 at 8 a.m.
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 01-01
+    end: 05-14
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+- id: wyoming-whma-laramie-peak
+  area: Laramie Peak Wildlife Habitat Management Area
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Open all year except the Hay Canyon, Tony Ridge and Duck Creek Canyon areas, which are closed to human presence
+      from February 1 through April 30.
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 02-01
+    end: 04-30
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+- id: wyoming-whma-morgan-creek
+  area: Morgan Creek Wildlife Habitat Management Area
+  scope: named_area
+  status: allowed
+  names_kites: false
+  rule:
+    value: Closed to vehicles only from November 1 through April 30. Open to foot and horse traffic.
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 11-01
+    end: 04-30
+    source_id: snowkite-land-wgfd-whma-closures
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+- id: montana-wma-winter-closures
+  area: Montana wildlife management areas on big game winter range
+  scope: class
+  status: restricted
+  names_kites: false
+  rule:
+    value: A 2014 notice says most Region 3 wildlife management areas managed as big game winter range close at 11:59 p.m.
+      on December 1 and reopen at noon on May 15. Entering during a winter closure is against the law.
+    source_id: snowkite-land-mt-wma-2014
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 12-01
+    end: 05-15
+    source_id: snowkite-land-mt-wma-2014
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MT
+  source_ids:
+  - snowkite-land-mt-wma-kpax
+  - snowkite-land-mt-bad-rock
+  searched: The main dated source is from 2014. Bad Rock Canyon closes after the general hunting season through noon on May
+    15.
+- id: colorado-state-parks
+  area: Colorado state parks
+  scope: class
+  status: unclear
+  names_kites: true
+  rule:
+    value: Colorado regulation 2 CCR 405-1-100 lists kite boards and kite tubes in a group with gliders, hang gliders, parachutes
+      and parasails. The heading of that provision was not shown, so the effect on kites is unknown.
+    source_id: snowkite-land-co-parks-reg
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+  searched: One web search for Colorado state park rules on snowkiting and kiteboarding on ice, with Eleven Mile, Spinney,
+    Antero, Lake Dillon and Lake John. No park rule was returned.
+- id: eleven-mile-state-park
+  area: Eleven Mile State Park, South Park
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: The park winter page describes ice fishing, ice skating, ice boating and cross country skiing. Kites are unnamed.
+    source_id: snowkite-land-cpw-eleven-mile-winter
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+- id: midwest-frozen-lakes
+  area: Frozen public lakes in Minnesota, Wisconsin and Michigan
+  scope: class
+  status: unclear
+  names_kites: true
+  rule:
+    value: No state rule on kites on lake ice was found. A WCCO report shows snowkiters on White Bear Lake, Lake Waconia and
+      Lake Calhoun. Minnesota DNR advises at least 4 inches of clear ice for foot travel and leaves ice safety to the user.
+    source_id: snowkite-land-wcco-snowkiting
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MN
+  - WI
+  - MI
+  source_ids:
+  - snowkite-land-mn-dnr-ice
+  searched: One web search for state rules on snowkiting on frozen public waters and in state parks. Nothing was returned
+    for Wisconsin or Michigan. City and county ordinances may apply.
+- id: reclamation-reservoirs
+  area: Bureau of Reclamation lands and reservoirs
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Rule 43 CFR Part 423 governs public conduct on Reclamation facilities, lands and waterbodies. Subpart E lets officials
+      set special use areas that prohibit certain activities. A 2023 rule revised the part. Kites are unnamed in the text
+      returned.
+    source_id: snowkite-land-43cfr-423
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AZ
+  - CA
+  - CO
+  - ID
+  - KS
+  - MT
+  - NE
+  - NV
+  - NM
+  - ND
+  - OK
+  - OR
+  - SD
+  - TX
+  - UT
+  - WA
+  - WY
+  source_ids:
+  - snowkite-land-reclamation-2023-rule
+  searched: One web search of Part 423 for winter activities, kites and sailing. Rules of the partner agency that manages
+    each reservoir were not searched.
+- id: wind-river-reservation
+  area: Wind River Indian Reservation
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: A tribal fishing permit plus a Recreation Stamp lets a visitor fish, camp, hike, boat and picnic in open or designated
+      areas. A Wyoming guide says anyone traveling on the reservation must carry the permit. Skiing and kites are unnamed.
+    source_id: snowkite-land-wind-river-fishing-regs
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - WY
+  source_ids:
+  - snowkite-land-wind-river-guide
+  - snowkite-land-wp-wind-river
+  searched: One web search for nontribal recreation permits, closed areas, snowmobiling and skiing. Winter travel rules were
+    not returned.
+- id: wind-river-reservation-extent
+  area: Wind River Indian Reservation, extent
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: The reservation covers about 2.2 million acres in the Wind River Basin. A tribal fishing license gives nontribal
+      visitors access for fishing and hiking on the southern half, including the 180,000 acre tribal roadless area.
+    source_id: snowkite-land-wp-wind-river
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - WY
+- id: flathead-reservation
+  area: Flathead Indian Reservation
+  scope: named_area
+  status: allowed_with_permit
+  names_kites: false
+  rule:
+    value: Visitors who are outside the Confederated Salish and Kootenai Tribes must buy a Tribal Conservation permit and
+      any activity license to recreate on tribal land. Most areas are open to them. Kites are unnamed.
+    source_id: snowkite-land-cskt-fish-game
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MT
+  source_ids:
+  - snowkite-land-visitmt-tribal-permits
+- id: blackfeet-reservation
+  area: Blackfeet Indian Reservation
+  scope: named_area
+  status: allowed_with_permit
+  names_kites: false
+  rule:
+    value: Regulations from 2009 to 2010 require a tribal recreation or conservation permit for outside visitors who recreate
+      on tribal land. The reservation totals 1,462,640 acres. Kites are unnamed.
+    source_id: snowkite-land-blackfeet-rec-regs
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - MT
+  source_ids:
+  - snowkite-land-visitmt-tribal-permits
+  - snowkite-land-wp-blackfeet
+  searched: The current Blackfeet regulations were not returned.
+- id: red-lake-reservation
+  area: Red Lake Indian Reservation
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Red Lake is a closed reservation. The tribe holds all land in common and can control the movement of nonresidents
+      within the reservation or expel them.
+    source_id: snowkite-land-wp-red-lake
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - MN
+- id: mille-lacs-reservation
+  area: Mille Lacs Lake Indian Reservation
+  scope: named_area
+  status: unclear
+  names_kites: false
+  rule:
+    value: The main reservation sits at the southern end of Mille Lacs Lake and covers about 61,000 acres, including islands
+      in the southern part of the lake. The page gives no access rule.
+    source_id: snowkite-land-wp-mille-lacs
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - MN
+  searched: Wikipedia page only. Tribal access rules for the lake shore were not searched.
+- id: other-large-reservations
+  area: Fort Peck, Uintah and Ouray and other large reservations
+  scope: named_area
+  areas:
+  - Fort Peck Indian Reservation
+  - Uintah and Ouray Indian Reservation
+  - Crow Indian Reservation
+  - Fort Hall Indian Reservation
+  - Pine Ridge Indian Reservation
+  - Standing Rock Indian Reservation
+  - Leech Lake Indian Reservation
+  - Duck Valley Indian Reservation
+  status: unclear
+  names_kites: false
+  rule:
+    value: Fort Peck covers 2,094,000 acres in northeast Montana. The Ute Indian Tribe owns about 1.2 million surface acres
+      within the 4 million acre Uintah and Ouray reservation area. Access rules for these lands were not searched.
+    source_id: snowkite-land-wp-fort-peck
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - MT
+  - UT
+  source_ids:
+  - snowkite-land-wp-uintah-ouray
+  searched: Wikipedia pages only. Treat tribal land as permission required until each tribe is contacted.
+- id: military-jber
+  area: Joint Base Elmendorf-Richardson training lands
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Anyone aged 16 or older needs a JBER recreation permit and must sign in before recreating. A person in a training
+      area without a valid permit or sign in is trespassing. The permit gives no base access. Closed areas are withheld from
+      sign in.
+    source_id: snowkite-land-jber-recreation
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AK
+  searched: A JBER notice says a system named RecAccess replaces iSportsman. Kites are unnamed.
+- id: military-fort-wainwright
+  area: Fort Wainwright Army training land
+  scope: named_area
+  status: restricted
+  names_kites: false
+  rule:
+    value: Any person recreating on Army training land must check in on the garrison iSportsman system. Entering a restricted
+      area is a criminal offense.
+    source_id: snowkite-land-fort-wainwright-trails
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AK
+- id: military-land-general
+  area: Military land in other states
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: No general rule was returned. Results for Alaska and Washington bases show access by permit and daily sign in,
+      with the military mission taking precedence.
+    source_id: snowkite-land-jber-recreation
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  searched: One web search for installation recreation permits, Camp Guernsey and 18 U.S.C. 1382. Nothing was returned for
+    Camp Guernsey or the statute.
+- id: alaska-native-corporation-land
+  area: Alaska Native corporation land
+  scope: class
+  status: restricted
+  names_kites: false
+  rule:
+    value: Land conveyed to an Alaska Native corporation is private. Doyon limits recreation on its land to shareholders and
+      treats use without permission as trespass. CIRI allows limited access with written permission.
+    source_id: snowkite-land-doyon-trespass
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AK
+  source_ids:
+  - snowkite-land-ciri-trespass
+  - snowkite-land-asrc-lands-access
+  - snowkite-land-blm-17b-easements
+- id: alaska-native-corporation-extent
+  area: Alaska Native corporation land, extent
+  scope: class
+  status: restricted
+  names_kites: false
+  rule:
+    value: Under the Alaska Native Claims Settlement Act, surface rights to 44 million acres were patented to Native village
+      and regional corporations.
+    source_id: snowkite-land-wp-ancsa
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - AK
+- id: alaska-17b-easements
+  area: Section 17(b) easements across Alaska Native corporation land
+  scope: class
+  status: allowed
+  names_kites: false
+  rule:
+    value: Public access across Native corporation land is preserved on easements reserved at conveyance. Leaving an easement
+      onto Native land without express permission from the owner is trespass.
+    source_id: snowkite-land-blm-17b-easements
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AK
+  source_ids:
+  - snowkite-land-ak-dnr-17b
+  - snowkite-land-asrc-lands-access
+- id: alaska-state-land
+  area: Alaska state owned public domain land
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Rule 11 AAC 96.020 lists uses allowed on state land with no permit, under the conditions in 11 AAC 96.025. It excludes
+      state parks and some special use lands. Commercial recreation must register. The list itself was not shown, so skiing
+      and kites are unconfirmed.
+    source_id: snowkite-land-11aac-96-020
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - AK
+  source_ids:
+  - snowkite-land-ak-dnr-special-use
+  searched: One web search for the generally allowed uses list. Read 11 AAC 96.020(a) to confirm recreational travel on foot
+    or ski.
+- id: faa-part-101-scope
+  area: FAA kite rule, scope
+  scope: class
+  status: unclear
+  names_kites: true
+  rule:
+    value: Title 14 CFR Part 101 covers moored balloons, kites, amateur rockets and unmanned free balloons. The weight threshold
+      that brings a kite under the part was not confirmed.
+    source_id: snowkite-land-wp-far
+    as_of: '2026-11-28'
+    confidence: published
+  states: *id001
+  source_ids:
+  - snowkite-land-14cfr-101-13
+  searched: One web search for 14 CFR 101.1 and 101.13. The applicability text and any weight threshold were not returned.
+    No source ties the rule to traction kites.
+- id: faa-part-101-limits
+  area: FAA kite rule, operating limits
+  scope: class
+  status: restricted
+  names_kites: true
+  rule:
+    value: Rule 14 CFR 101.13 bars operating a kite covered by Part 101 within five miles of an airport boundary, above 500
+      feet over the surface, or less than 500 feet from the base of a cloud. A shielded operation exception exists.
+    source_id: snowkite-land-14cfr-101-13
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states: *id001
+  source_ids:
+  - snowkite-land-pilot-institute-part-101
+- id: sage-grouse-lek-season
+  area: Greater sage grouse leks
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: Males gather on leks to court usually from late February to April and display for several hours in the early morning
+      and evening. The page states no recreation rule.
+    source_id: snowkite-land-wp-sage-grouse
+    as_of: '2026-11-28'
+    confidence: published
+  states:
+  - CO
+  - ID
+  - MT
+  - NV
+  - OR
+  - UT
+  - WY
+  - CA
+  - ND
+  - SD
+  - WA
+  searched: One web search for BLM lek seasonal restrictions on human activity. No rule closing dispersed recreation at leks
+    was found.
+- id: sage-grouse-agency-timing
+  area: Sage grouse seasonal restrictions on federal land
+  scope: class
+  status: unclear
+  names_kites: false
+  rule:
+    value: A Forest Service table gives a lekking period of March 1 to May 15 and a 4 mile buffer from active leks. An inactive
+      BLM Colorado memo barred disruptive activities in Gunnison sage grouse habitat from March 1 to July 15 and added conditions
+      to recreation permits.
+    source_id: snowkite-land-fs-sage-grouse-table
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  dates:
+    start: 03-01
+    end: 05-15
+    source_id: snowkite-land-fs-sage-grouse-table
+    as_of: '2026-11-28'
+    confidence: estimated
+    note: From a search result for this page; page not opened.
+  states:
+  - CO
+  - ID
+  - MT
+  - UT
+  - WY
+  source_ids:
+  - snowkite-land-blm-co-im-2022-028
+  searched: These govern permitted and surface disturbing activities. Check each field office plan for recreation closures.
+- id: snowkiting-wikipedia-silent
+  area: Snowkiting, general
+  scope: class
+  status: unclear
+  names_kites: true
+  rule:
+    value: The Wikipedia page on snowkiting carries no statement on land rules or legality in the United States.
+    source_id: snowkite-land-wp-snowkiting
+    as_of: '2026-11-28'
+    confidence: published
+  states: *id001
+  searched: Searched the page text for prohibited, banned, legal, wilderness and park.
