@@ -32,3 +32,5 @@ data/raw/climate/era5_jet/download/
 # The ERA5 surface extract for the snowkite scores is committed; its per season partial downloads are not.
 !data/raw/climate/era5_surface/
 data/raw/climate/era5_surface/download/
+# Snowkite terrain patches are committed; the terrain tile and land cover downloads are not.
+data/raw/snowkite/terrain/download/
