@@ -201,11 +201,12 @@ def load_snowkite(raw_dir: Path, registry: SourceRegistry, events: EventsData, p
                 continue
             if not errs:
                 data.zones.append(z)
-    # An event whose venue id equals a zone id or starts with it belongs to that zone (owner rule 2026-11-28).
+    # A snowkite event whose venue id equals a zone id or starts with it belongs to that zone. Events of other
+    # disciplines at the same venue (a snowmobile race on the same lake) join only when the zone lists them.
     for z in data.zones:
         for e in events.events:
             vid = e.venue.venue_id or e.venue.resort_id or ""
-            if e.id not in z.events and (vid == z.id or vid.startswith(z.id)):
+            if e.discipline == defs.event_discipline and e.id not in z.events and (vid == z.id or vid.startswith(z.id)):
                 z.events.append(e.id)
                 listed.add(e.id)
     for path, batch in batches:

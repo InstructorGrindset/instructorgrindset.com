@@ -138,11 +138,6 @@ sources:
   title: Danger! Thin Ice
   accessed_date: *id001
   note: From a search result for this page; page not opened.
-- id: snowkite-mw-mn-dnr-ice-formations
-  url: https://www.dnr.state.mn.us/safety/ice/ice-formations-conditions.html
-  title: Ice formations and conditions
-  accessed_date: *id001
-  note: From a search result for this page; page not opened.
 - id: snowkite-mw-wi-dnr-ice-safety
   url: https://dnr.wisconsin.gov/Education/OutdoorSkills/IceSafety
   title: Ice safety
@@ -230,6 +225,7 @@ sources:
   note: From a search result for this page; page not opened.
 zones:
 - id: mille-lacs-lake-mn
+  events: [mille-lacs-kite-crossing]
   name: Mille Lacs Lake
   status: established
   kind: lake
