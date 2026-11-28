@@ -1,0 +1,49 @@
+# SYNTHETIC TEST FIXTURE for the map's Snowkite layer (tests only; never copied to data/). Fictional snowkite events
+# and venues next to the fictional zones of snowkite_fixture.yaml; every source points at example.com.
+# make_fixtures.py and tests/pipeline/test_snowkite.py compile it with the real pipeline.
+batch: events-snowkite-map-fixture
+researched_date: 2026-11-28
+sources:
+  - {id: fixture-kev-fest, url: https://example.com/fixture/snowkite/fest, title: "Synthetic fixture: snowkite festival page", accessed_date: 2026-11-28}
+  - {id: fixture-kev-register, url: https://example.com/fixture/snowkite/fest/register, title: "Synthetic fixture: snowkite festival registration", accessed_date: 2026-11-28}
+  - {id: fixture-kev-clinic, url: https://example.com/fixture/snowkite/clinic, title: "Synthetic fixture: snowkite clinic page", accessed_date: 2026-11-28}
+  - {id: fixture-kev-lake, url: https://example.com/fixture/snowkite/lake-launch, title: "Synthetic fixture: lake launch point", accessed_date: 2026-11-28}
+  - {id: fixture-kev-field, url: https://example.com/fixture/snowkite/field, title: "Synthetic fixture: field day page", accessed_date: 2026-11-28}
+venues:
+  - id: fixture-kite-lake-launch
+    name: Fixture Flat Lake launch
+    kind: lake
+    state: MN
+    town: Fixture Lake Town
+    location: {lat: 46.21, lon: -93.58, precision: venue, source_id: fixture-kev-lake, as_of: 2026-11-28, confidence: published}
+  - id: fixture-kite-field-day
+    name: Fixture Open Field
+    kind: other
+    state: ND
+    town: Fixture Field Town
+    location: {lat: 47.9, lon: -99.2, precision: town, source_id: fixture-kev-field, as_of: 2026-11-28, confidence: reported}
+events:
+  - id: fixture-snowkite-fest
+    name: Fixture Snowkite Festival
+    discipline: snowkiting
+    levels: [open_amateur]
+    venue: {venue_id: fixture-kite-lake-launch}
+    format: {value: "Three days of lake racing and demo kites", source_id: fixture-kev-fest, as_of: 2026-11-28, confidence: published}
+    edition_2026_27: {start: 2027-02-12, end: 2027-02-14, source_id: fixture-kev-fest, as_of: 2026-11-28, confidence: published}
+    signup:
+      method: online_registration
+      url: {value: "https://example.com/fixture/snowkite/fest/register", source_id: fixture-kev-register, as_of: 2026-11-28, confidence: published}
+    website: {value: "https://example.com/fixture/snowkite/fest", source_id: fixture-kev-fest, as_of: 2026-11-28, confidence: published}
+  - id: fixture-snowkite-clinic
+    name: Fixture Plateau Clinic
+    discipline: snowkiting
+    levels: [open_amateur]
+    venue: {resort_id: alpha-peak}
+    edition_2026_27: {start: 2027-01-09, end: 2027-01-10, source_id: fixture-kev-clinic, as_of: 2026-11-28, confidence: reported}
+    website: {value: "https://example.com/fixture/snowkite/clinic", source_id: fixture-kev-clinic, as_of: 2026-11-28, confidence: reported}
+  - id: fixture-snowkite-field-day
+    name: Fixture Field Day
+    discipline: snowkiting
+    levels: []
+    venue: {venue_id: fixture-kite-field-day}
+    last_edition: {season: "2025/26", start: 2026-02-21, end: 2026-02-22, source_id: fixture-kev-field, as_of: 2026-11-28, confidence: reported}

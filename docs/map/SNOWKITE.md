@@ -56,6 +56,11 @@ zones:
   waits for review. A zone with no `report` still shows its facts.
 * A zone needs at least one source that names snowkiting there. A road or a lake that merely looks windy is a
   candidate, not an established zone.
+* Changes 2026-11-28 (coordinator, from the first research files): `location` is optional. A zone without one still
+  validates, lists and searches with a "no map point yet" note and draws no marker; the build warns with the count.
+  `surface` and `months` are optional too. A `region` point (a town center standing in for a lake) draws a larger,
+  softer marker and the panel says "approximate location". An event joins a zone when the zone lists its id in
+  `events` or when the event's venue id equals the zone id or starts with it.
 * Coordinates: `spot` when a source names the launch or parking point, `area` for the lake or plateau center from
   Wikipedia or an official page, `region` for a broad range.
 
